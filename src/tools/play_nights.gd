@@ -1,8 +1,13 @@
 extends SceneTree
 
-## Play all ten nights with a scripted build and report which ones fell.
+## Play the first nights of the calendar with a scripted build and report
+## which ones fell.
 ##
 ##     python tools/play_nights.py
+##     godot --headless --path . --script res://src/tools/play_nights.gd -- 14
+##
+## How many is an explicit argument (task 0151), `DEFAULT_NIGHTS` - the first
+## ten - when none is given.
 ##
 ## This is the **instrument task 0060 authors against**. `tools/nights.py`
 ## reads the table; this one runs it, so a curve that looks smooth on paper
@@ -34,6 +39,12 @@ extends SceneTree
 ## is settled against it at 0068. This is the instrument, not the verdict.
 const INCOMES: Array = [0, 150, 300]
 
+## The calendar nights played when no count is given: the first ten, the
+## curve task 0060 authored against.
+const DEFAULT_NIGHTS := 10
+
+var _nights := DEFAULT_NIGHTS
+
 ## What the scripted player buys, in the order it buys it, going round again
 ## until the money runs out. A generator goes in whenever the next tower would
 ## draw more than the farm supplies, so power is bought rather than given.
@@ -52,7 +63,11 @@ func _init() -> void:
 		quit(1)
 		return
 
-	print("HARVEST THE NIGHT - ten nights, scripted build, no player")
+	var args := OS.get_cmdline_user_args()
+	if args.size() > 0 and str(args[0]).is_valid_int():
+		_nights = maxi(int(str(args[0])), 1)
+	print("HARVEST THE NIGHT - the first %d nights, scripted build, no player"
+		% _nights)
 
 	for income in INCOMES:
 		print("")
@@ -60,7 +75,7 @@ func _init() -> void:
 		print("  night  sent  $reward  $purse  towers  power  result")
 		var fell: Array = []
 		var purse := 0
-		for night in range(1, GameData.MVP_NIGHTS + 1):
+		for night in range(1, _nights + 1):
 			var played := _play(night, purse)
 			# What the night paid, for the next one's budget. A night that
 			# fell still pays for what was killed before it fell.
@@ -79,7 +94,7 @@ func _init() -> void:
 							% [int(played["ticks"]) / GameData.TICK_HZ,
 								int(played["left"])]])
 		if fell.is_empty():
-			print("  all ten held")
+			print("  all %d held" % _nights)
 		else:
 			print("  fell: %s" % str(fell))
 
@@ -95,7 +110,7 @@ func _curves() -> void:
 	var last_money := 0
 	var last_meat := 0
 	var bumps: Array = []
-	for night in range(1, GameData.MVP_NIGHTS + 1):
+	for night in range(1, _nights + 1):
 		var sent := Waves.size_of(night)
 		var money := Waves.reward_of(night)
 		var meat := _hit_points_of(night)
@@ -161,8 +176,8 @@ func _made() -> int:
 ## One night, on a farm built out of a budget.
 func _play(night: int, budget: int) -> Dictionary:
 	var state := State.create(5000 + night)
-	# `night` follows `nights_won` since task 0065, so a fixture that picks a
-	# night has to say which nights are behind it.
+	# `night` is the calendar day's since task 0151, so a fixture that picks
+	# a night picks its day; the nights behind it are said for the record.
 	state["night"] = night
 	state["day"] = night
 	state["nights_won"] = night - 1

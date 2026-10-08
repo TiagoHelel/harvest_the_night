@@ -1,7 +1,7 @@
 # 0151 - The night is the calendar day
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0150
 - **Likely files:** src/core/phases.gd, src/core/run.gd, src/core/state.gd, src/core/tech.gd, src/core/endless.gd, src/app/save.gd, src/core/game_data.gd, src/app/playtest.gd, src/tools/nights.gd, tools/nights.py, tools/verify.py, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/autoplay.gd, src/tools/play_nights.gd, src/tools/perf_check.gd, tools/goldens/
 

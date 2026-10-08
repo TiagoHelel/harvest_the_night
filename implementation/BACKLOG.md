@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **141 / 296 done**
+`############............`  **142 / 296 done**
 
-0 doing / 155 todo / 0 blocked across 18 phases.
+0 doing / 154 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-155 task(s) left, the ready ones first, then what they
+154 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -173,24 +173,65 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0151 - The night is the calendar day
+### 0152 - Full Moon nights
 
-Ready to pick up.  Likely files: `src/core/phases.gd, src/core/run.gd, src/core/state.gd, src/core/tech.gd, src/core/endless.gd, src/app/save.gd, src/core/game_data.gd, src/app/playtest.gd, src/tools/nights.gd, tools/nights.py, tools/verify.py, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/autoplay.gd, src/tools/play_nights.gd, src/tools/perf_check.gd, tools/goldens/`.
+Ready to pick up.  Likely files: `src/core/calendar.gd, src/core/waves.gd, src/core/rewards.gd, src/core/game_data.gd, tools/palette.py, src/ui/palette_data.gd (generated), src/ui/world_view.gd, src/ui/day_hud.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-The meaning change. The night fought at the end of a day is that day's night in the calendar, so difficulty follows the calendar, a lost night is never fought again, and the year has fifty-six of them.
+Days 7 and 14 of every season are Full Moon nights: a bigger horde, double the pay, and a night you can see further into. The player sees one coming days ahead.
 
-- `Phases.begin_night` sets `night = Calendar.date(state)` instead of `nights_won + 1`; `enter_result` still moves `day` every time and `nights_won` only on a win - a count now, not an index. Fix every reader that means 'the next night is nights_won + 1': `src/app/playtest.gd` (~l.221), the `perf_check.gd` and `play_nights.gd` fixtures, and test fixtures that set `nights_won` to pick a night (`_a_run_at_night`, `_task_0070_endless`'s 'night 25 is playable'), which now set `day`
-- `Run.final_night()` becomes `Calendar.year_days()` (update `_task_0150_lookup`'s line that pins it to `Waves.authored_count()`). `Run.is_over` is 'the year's last night has been won', read from a stable fact (`Tech.already_paid(state, Run.final_night())` or equivalent), never from a count of wins, and `go_endless` opens on that same fact (0160 reworks the door). `Tech.total_available()` now counts a year (56 x 4 = 224 at best) and the whole tree costs 45, so `_task_0063_tech_tree`'s 'the tree costs more than the best run earns' fails: give `total_available`/`least_available` an optional night count and keep that assert on the first `Waves.authored_count()` nights, commented that 0220 re-prices the tree against the year
-- `State.VERSION` 5 with `Save.migrations()[4]`: `day` is kept and becomes the date (no v4 save ever held a day back); a night in progress keeps its `night` until it ends and the calendar takes over at the next `begin_night`; `nights_paid` keeps its entries unchanged (an old night number is below the date, a date the calendar has left behind, so none can pay twice) and gains nothing - padding it with lost dates would make `already_paid(56)` lie to `Run.is_over`; `endless` becomes false (the year carries the run on; 0160 offers it again) except on an endless save already past `year_days()`, which stays endless so it is not 'over' on load (0291 settles those shapes). Saves can be written in any phase (the pause menu's save and quit): handle all four
-- Test the step on a real v4 save: if `tools/goldens/run-v4.sav` does not exist, make it from the MVP commit `bea89a88` in a `git worktree` outside the repository (`--import`, `src/tools/make_goldens.gd` with `GODOT` set, copy back only the v4 goldens, remove the worktree); after the bump write `run-v5*.sav` from this build. Never name a key `moon_phase` (the newer golden's dropped key)
-- Delete `MVP_NIGHTS` everywhere (code, tools, tests, `digest()`): after 0150 it is left in `_task_0066`, input_check's `_case_0070_endless`, `autoplay.gd`, `nights.gd`, `play_nights.gd` and `perf_check.gd`. The autoplayer's and `play_nights`' night counts become explicit arguments (default: the first ten calendar nights, so `implementation/BALANCE.md` keeps its meaning)
-- Rewrite `_task_0065` (a lost night is not fought again: losing day 3's night leads to night 4 on day 4, and `nights_won` holds), `_task_0066` (not over mid-year, not ended by a loss, over once the year's last night is won - by a fixture on that date, not by playing 56 nights - then carrying on and the profile) and `_case_0070_endless` (the ending offers PLAY ON after a fixture wins date 56, and the next night is 57). The in-suite played run is at most three nights
-- The whole-year assertion moves to a tool: `python tools/nights.py --check` resolves every date 1..`year_days()` for seeds 0 and 424242 and exits 1 on an empty record or any `check_nights` error; `tools/verify.py` runs it as a gate (through `check_script()` on `src/tools/nights.gd` with `verify.GODOT` - `tools/nights.py` has its own hard-coded `GODOT` default). If a generated night breaks 0137's night-length rule, fix the generator's pacing (an `ENDLESS` lever, DATA moving on purpose), not the check
-- Hashes: SIM moves (the version is in the state) and DATA moves (`MVP_NIGHTS` leaves the digest), both on purpose - both numbers in the journal. The night HUD keeps printing `NIGHT %d`, now the date's number; naming the date there (`SPRING 3`) moved to 0158, whose captures show it
+- `FULL_MOON_DAYS: Array = [7, 14]  # LEVER: days of the season`, `FULL_MOON_HORDE_PERCENT := 150  # LEVER: percent of the night's count, 120-200` and `FULL_MOON_REWARD_PERCENT := 200  # LEVER: percent of the night's pay, 150-300`; `check_calendar` refuses a Full Moon day outside the season and a percent under 100; all go into `digest()`
+- `Calendar.is_full_moon(date)` and `days_to_full_moon(date)` (0 on the night itself), pure
+- In `Waves.night_of`, over `plain_night`: a Full Moon date's record has each non-boss wave's count scaled by `FULL_MOON_HORDE_PERCENT` (integer arithmetic, never below the plain count), boss rows untouched, and carries `"full_moon": true` - the flag 0158's forecast reads. Authored and generated nights alike, and no RNG. A scaled record must still fit 0137's night length (`python tools/nights.py --check` resolves Full Moons too): if one does not, the Full Moon record tightens its own pacing (its gaps first), never the check
+- `Waves.tonight()` is asked every frame by the night HUD: cache a record a rule changed the way generated ones are cached (`wave.tonight`), and only then, so night 1 stays the authored row and nothing new enters its state
+- `Rewards`: a won Full Moon night pays `FULL_MOON_REWARD_PERCENT` of its money and materials, itemised as its own line for the morning report. Essence is not doubled here (0219 reads this helper for that) and moon stones are 0221's
+- View only, a brighter night ramp: a `full_moon` entry in `tools/palette.py` `RAMPS` with the five fields `night` has (tint, lift, saturation, warm_keep, warm_edge), which `python tools/gen_sprites.py` writes into `PaletteData` as `FULL_MOON_TINT`, `_LIFT`, `_SATURATION`, ... (never edit `palette_data.gd`); `WorldView._night_ramp()` (static today) picks them when tonight is a Full Moon, and it still reads as night
+- The day HUD's date line gains `FULL MOON IN 4 DAYS` / `FULL MOON TONIGHT` (plan section 9) through `I18n.plural`: `DHUD_FULL_MOON_IN.one`/`.other` (FULL MOON IN %d DAY(S) / LUA CHEIA EM %d DIA(S)), `DHUD_FULL_MOON_TONIGHT` (FULL MOON TONIGHT / LUA CHEIA HOJE), and the morning report's `RES_FULL_MOON` (FULL MOON BONUS / BÔNUS DE LUA CHEIA - no 'double', since the percent is a lever)
+- `_task_0060`'s 'every curve climbs' and `_task_0070`'s 'it grows' keep reading `plain_night` (0150); if anything else in the suites assumed day 7 or 14 is a plain night, point it at the plain record
+- Hashes: DATA moves (new levers). SIM should not, because the determinism night is day 1 - if it moves, explain it
 
-  - done when: `_task_0065`, `_task_0066`, `_task_0063_tech_tree` and `_case_0070_endless` rewritten as above and passing; `grep -rn MVP_NIGHTS src` and `grep -n MVP_NIGHTS tools/*.py` find nothing (the prompts in `tools/backlog/` may still name it)
-  - done when: `python tools/nights.py --check` passes and prints 56 nights; a deliberately broken record makes it exit 1 (tried, reverted, said so in the journal)
-  - done when: `_task_0151_migration` in `src/tools/headless_v1.gd` steps a v4 state in DAY, PREPARATION, NIGHT and RESULT up to v5, brings each to its next night through 0118's road and the sleep intent (never by playing a day out) and asserts the night number, the paid list and that no date pays twice; an endless v4 state past day 56 stays endless and a non-endless one there is not over either; every golden (v1, v4, v5) loads and plays
+  - done when: `_task_0152_full_moon` in `src/tools/headless_v1.gd`: days 7, 14, 21 and 56 are Full Moons and 6, 8 and 15 are not; a Full Moon record sends the lever's percent of its plain record per wave with the boss count unchanged; a won Full Moon night's money and materials are the lever's percent of what the same state would be paid with the flag off (same kills), with the difference on its own line; `Waves.tonight` hands back the same record over 100 ticks; `python tools/nights.py --check` still passes
+  - done when: `_case_0152_moon_line` in `src/tools/input_v1.gd` reads the line on day 3 (`FULL MOON IN 4 DAYS`), day 6 (`... IN 1 DAY`) and day 7 (`FULL MOON TONIGHT`), in both languages
+  - done when: A new shot scenario `full_moon` (the `wave` scene on day 7): `python tools/shot.py 0152 wave full_moon --fhd`, opened side by side - brighter, and still night
+
+### 0153 - Boss nights repeat until the boss falls
+
+Ready to pick up.  Likely files: `src/core/waves.gd, src/core/phases.gd, src/core/calendar.gd, src/core/rewards.gd, src/core/sim.gd, src/core/game_data.gd, src/ui/result_screen.gd, src/ui/night_hud.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/shot.gd`.
+
+Day 14 of every season is the season's boss night, and the season does not end until that boss is down. A boss alive at dawn walks off with the rest and is back the next night - without the loss penalty, and without the farm losing a day of crops and animals.
+
+- `SEASON_BOSSES: Array = [&"giant", &"giant", &"giant", &"giant"]` (one per season; 0253-0255 put in the Harvester, the Scarecrow King and the Winter Lord); `check_calendar` requires each to be an `is_boss` enemy; in `digest()`
+- `Calendar.is_boss_night(date)` is the season's last day. In `Waves.night_of`: a boss date's record gets one row of the season's boss, third from last like `Endless._put_the_giants_in`, from spawn 0 (the east, open in every season - 0157); every other date loses its `is_boss` rows (today's night 10 loses its Giant; Endless's every-fifth-night Giants stop reaching the calendar, and the `giant_every` levers stay for 0279 to decide)
+- `Waves.boss_fell(state)`: every `is_boss` body in tonight's record was killed (from `killed_by_kind`). `Waves.tick` raises `boss_arrived` from `is_boss`, not from `&"giant"`
+- 0137's interim goes (dawn waiting while `Combat.boss_here`, the night HUD's dawn countdown holding at 0:00, and the `_task_0137_dawn` assert of it, rewritten in place in `headless_v1` as the escape below). At dawn (`dawn_at`) on a boss night, boss alive and house standing: a third outcome, escaped, through `Rewards.settle` and `Phases.enter_result` - the boss and the survivors walk off as on any dawn, no `_loss`, no night pay or technology, `nights_won` unchanged. The house falling is a loss as on any night. The season holds whenever the boss did not fall, however the night ended
+- The hold is a counter, not a frozen `day`: `day` still moves every night (the stall restocks on it, the report and stats count it, every day system runs) and a new Phases key `days_held` grows by one; `Calendar.date(state)` becomes `day - days_held`, so the date stays on 14 and tonight is the boss again. A new top-level int only: reconcile fills 0 for old saves, no version bump
+- `nights_paid` is keyed by the date, so a repeated boss night pays its technology once, when the boss falls
+- The morning report says it: `RES_BOSS_ESCAPED` (%s GOT AWAY - IT COMES BACK TONIGHT / %s FUGIU - VOLTA HOJE À NOITE), the boss named through `Names.of`
+- Whatever assumed the Giant on night 10 looks for the boss on Spring 14: `_task_0058_giant` (`Waves.table(...)` of the last night), the 'one new thing a night' asserts of `_task_0059`/`_task_0060` and `_task_0070_endless`'s Giant counts if any still read `night_of` rather than `plain_night`, and `perf_check.gd`'s worst case (0275 later makes it the winter boss night)
+- Hashes: SIM moves on purpose (a new key, the boss rows); DATA moves (a new table) - both in the journal
+
+  - done when: `_task_0153_boss_nights` in `src/tools/headless_v1.gd`: for dates 1-112 and two seeds, `is_boss` rows appear only on dates 14, 28, 42, 56, 70, 84, 98 and 112, once each, with the season's boss; `python tools/nights.py --check` still passes with the boss rows in
+  - done when: The same group, from Spring 14 fixtures started through 0118's `NightRoad` (its park, with dawn brought close rather than played out): boss alive at dawn -> no stock taken, `nights_won` unchanged, `day` +1, the date still 14, the stall restocked, tonight's record the boss night again; boss killed -> the next date is 15; house down with the boss alive -> the loss and the hold; house down after the boss fell -> the loss and no hold
+  - done when: `boss_arrived` is raised for the Giant through `is_boss`, and `src/core/waves.gd` no longer names `&"giant"`
+  - done when: A `boss_escaped` shot scenario: `python tools/shot.py 0153 boss_escaped --fhd`, opened - the morning report names the boss and says it comes back
+
+### 0156 - The 1.0 farm map
+
+Ready to pick up.  Likely files: `src/core/game_data.gd (FARM_MAP, MAP_LEGEND, checks), src/core/farm.gd, src/core/interact.gd, src/core/pathing.gd, src/app/save.gd, src/core/state.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, tools/goldens/, src/tools/shot.gd, src/tools/headless_v1.gd`.
+
+Every change the 1.0 farm needs on its map, made once so a save migrates once: ground for the new attack sides, the new ore, the big hardwood stumps, ponds with names, and room kept for the coop, the barn and the shipping bin.
+
+- Spawn ground for the sides 0157 opens: a clear band of walkable cells near the north, west and south edges, away from the farmstead and about as far from the house by path as the east band (measure with `Pathing.distance`; the numbers go in the journal), with nothing on it that regrows
+- Nodes under their final ids, so 0176 and 0177 change data only: copper, coal and gold nodes (e.g. `copper_ore`, `coal_seam`, `gold_ore`; gold deeper in the rock face) and 2x2 hardwood stumps (`hardwood_stump`, one thing over four cells with an `anchor`, as a building's footprint is kept); new `MAP_LEGEND` characters. Until those tasks give them `GATHERING` rows they are inert, impassable obstacles with no verb: check that `Interact`, `Pathing._through`, `Farm` and `Save._widen` accept an occupant with no table row
+- Ponds by name: one anchor cell per water body in a `PONDS` table (the north-west pond, the forest pond, the south-east lake) and `Farm.pond_of(state, cell)` by flood fill over the state's own terrain, cheap enough to ask once per cast, so 0179 keys species by pond; no occupants
+- Room kept clear in a `MAP_SITES` table: the coop and the barn near the workshop and the animals (room for footprints up to 7x4; 0183 decides the real ones) and the shipping bin by the porch (0189)
+- `check_map`, `check_livestock` and `validate()` stay clean; `check_reachable` (which walks only `GATHERING` ids today) also covers the new node ids that have no row yet, so each can be stood beside; a new check that every spawn band cell is walkable map ground. `PONDS` and `MAP_SITES` go into `digest()`
+- `State.VERSION` + 1 (6 after 0151's 5) with a step in `Save.migrations()` in the style of `_expand_farm_v1..3`: the new nodes, stumps and cleared bands laid onto a save only where its cell is empty map ground - never over a plot, a building, the house or anything the player placed; map trees and rocks leave the bands and sites only if they are untouched map props; path caches reset and `grid_version` bumped. Write `run-v6*.sav` after the bump (0151's `run-v5*.sav` is this step's input)
+- The new nodes and the stump are drawn through 0120's placeholder road (tinted `ore`, `seam` and `stump` frames, the stump scaled over its 2x2) until A021 is integrated by 0204
+- Hashes: SIM and DATA both move (the map is in `digest()` and in the state) - both numbers in the journal
+
+  - done when: `_task_0156_map_v1` in `src/tools/headless_v1.gd`: `GameData.validate()` is clean; every spawn band cell is walkable and `Pathing.reachable` on a new farm; each new node id is on the map; `Farm.pond_of` names three ponds and nothing on land
+  - done when: The v5 golden steps up to v6 with every plot and every player-placed occupant where it was, the new nodes only on cells that were empty, and plays 600 ticks; every golden loads
+  - done when: New shot scenarios standing at the north band, the new ore and a stump: `python tools/shot.py 0156 <them> --fhd`, opened
 
 ### 0159 - Seasons on screen
 
@@ -267,116 +308,6 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
 
-### 0152 - Full Moon nights
-
-Waits on 0151.  Likely files: `src/core/calendar.gd, src/core/waves.gd, src/core/rewards.gd, src/core/game_data.gd, tools/palette.py, src/ui/palette_data.gd (generated), src/ui/world_view.gd, src/ui/day_hud.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Days 7 and 14 of every season are Full Moon nights: a bigger horde, double the pay, and a night you can see further into. The player sees one coming days ahead.
-
-- `FULL_MOON_DAYS: Array = [7, 14]  # LEVER: days of the season`, `FULL_MOON_HORDE_PERCENT := 150  # LEVER: percent of the night's count, 120-200` and `FULL_MOON_REWARD_PERCENT := 200  # LEVER: percent of the night's pay, 150-300`; `check_calendar` refuses a Full Moon day outside the season and a percent under 100; all go into `digest()`
-- `Calendar.is_full_moon(date)` and `days_to_full_moon(date)` (0 on the night itself), pure
-- In `Waves.night_of`, over `plain_night`: a Full Moon date's record has each non-boss wave's count scaled by `FULL_MOON_HORDE_PERCENT` (integer arithmetic, never below the plain count), boss rows untouched, and carries `"full_moon": true` - the flag 0158's forecast reads. Authored and generated nights alike, and no RNG. A scaled record must still fit 0137's night length (`python tools/nights.py --check` resolves Full Moons too): if one does not, the Full Moon record tightens its own pacing (its gaps first), never the check
-- `Waves.tonight()` is asked every frame by the night HUD: cache a record a rule changed the way generated ones are cached (`wave.tonight`), and only then, so night 1 stays the authored row and nothing new enters its state
-- `Rewards`: a won Full Moon night pays `FULL_MOON_REWARD_PERCENT` of its money and materials, itemised as its own line for the morning report. Essence is not doubled here (0219 reads this helper for that) and moon stones are 0221's
-- View only, a brighter night ramp: a `full_moon` entry in `tools/palette.py` `RAMPS` with the five fields `night` has (tint, lift, saturation, warm_keep, warm_edge), which `python tools/gen_sprites.py` writes into `PaletteData` as `FULL_MOON_TINT`, `_LIFT`, `_SATURATION`, ... (never edit `palette_data.gd`); `WorldView._night_ramp()` (static today) picks them when tonight is a Full Moon, and it still reads as night
-- The day HUD's date line gains `FULL MOON IN 4 DAYS` / `FULL MOON TONIGHT` (plan section 9) through `I18n.plural`: `DHUD_FULL_MOON_IN.one`/`.other` (FULL MOON IN %d DAY(S) / LUA CHEIA EM %d DIA(S)), `DHUD_FULL_MOON_TONIGHT` (FULL MOON TONIGHT / LUA CHEIA HOJE), and the morning report's `RES_FULL_MOON` (FULL MOON BONUS / BÔNUS DE LUA CHEIA - no 'double', since the percent is a lever)
-- `_task_0060`'s 'every curve climbs' and `_task_0070`'s 'it grows' keep reading `plain_night` (0150); if anything else in the suites assumed day 7 or 14 is a plain night, point it at the plain record
-- Hashes: DATA moves (new levers). SIM should not, because the determinism night is day 1 - if it moves, explain it
-
-  - done when: `_task_0152_full_moon` in `src/tools/headless_v1.gd`: days 7, 14, 21 and 56 are Full Moons and 6, 8 and 15 are not; a Full Moon record sends the lever's percent of its plain record per wave with the boss count unchanged; a won Full Moon night's money and materials are the lever's percent of what the same state would be paid with the flag off (same kills), with the difference on its own line; `Waves.tonight` hands back the same record over 100 ticks; `python tools/nights.py --check` still passes
-  - done when: `_case_0152_moon_line` in `src/tools/input_v1.gd` reads the line on day 3 (`FULL MOON IN 4 DAYS`), day 6 (`... IN 1 DAY`) and day 7 (`FULL MOON TONIGHT`), in both languages
-  - done when: A new shot scenario `full_moon` (the `wave` scene on day 7): `python tools/shot.py 0152 wave full_moon --fhd`, opened side by side - brighter, and still night
-
-### 0153 - Boss nights repeat until the boss falls
-
-Waits on 0151.  Likely files: `src/core/waves.gd, src/core/phases.gd, src/core/calendar.gd, src/core/rewards.gd, src/core/sim.gd, src/core/game_data.gd, src/ui/result_screen.gd, src/ui/night_hud.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/shot.gd`.
-
-Day 14 of every season is the season's boss night, and the season does not end until that boss is down. A boss alive at dawn walks off with the rest and is back the next night - without the loss penalty, and without the farm losing a day of crops and animals.
-
-- `SEASON_BOSSES: Array = [&"giant", &"giant", &"giant", &"giant"]` (one per season; 0253-0255 put in the Harvester, the Scarecrow King and the Winter Lord); `check_calendar` requires each to be an `is_boss` enemy; in `digest()`
-- `Calendar.is_boss_night(date)` is the season's last day. In `Waves.night_of`: a boss date's record gets one row of the season's boss, third from last like `Endless._put_the_giants_in`, from spawn 0 (the east, open in every season - 0157); every other date loses its `is_boss` rows (today's night 10 loses its Giant; Endless's every-fifth-night Giants stop reaching the calendar, and the `giant_every` levers stay for 0279 to decide)
-- `Waves.boss_fell(state)`: every `is_boss` body in tonight's record was killed (from `killed_by_kind`). `Waves.tick` raises `boss_arrived` from `is_boss`, not from `&"giant"`
-- 0137's interim goes (dawn waiting while `Combat.boss_here`, the night HUD's dawn countdown holding at 0:00, and the `_task_0137_dawn` assert of it, rewritten in place in `headless_v1` as the escape below). At dawn (`dawn_at`) on a boss night, boss alive and house standing: a third outcome, escaped, through `Rewards.settle` and `Phases.enter_result` - the boss and the survivors walk off as on any dawn, no `_loss`, no night pay or technology, `nights_won` unchanged. The house falling is a loss as on any night. The season holds whenever the boss did not fall, however the night ended
-- The hold is a counter, not a frozen `day`: `day` still moves every night (the stall restocks on it, the report and stats count it, every day system runs) and a new Phases key `days_held` grows by one; `Calendar.date(state)` becomes `day - days_held`, so the date stays on 14 and tonight is the boss again. A new top-level int only: reconcile fills 0 for old saves, no version bump
-- `nights_paid` is keyed by the date, so a repeated boss night pays its technology once, when the boss falls
-- The morning report says it: `RES_BOSS_ESCAPED` (%s GOT AWAY - IT COMES BACK TONIGHT / %s FUGIU - VOLTA HOJE À NOITE), the boss named through `Names.of`
-- Whatever assumed the Giant on night 10 looks for the boss on Spring 14: `_task_0058_giant` (`Waves.table(...)` of the last night), the 'one new thing a night' asserts of `_task_0059`/`_task_0060` and `_task_0070_endless`'s Giant counts if any still read `night_of` rather than `plain_night`, and `perf_check.gd`'s worst case (0275 later makes it the winter boss night)
-- Hashes: SIM moves on purpose (a new key, the boss rows); DATA moves (a new table) - both in the journal
-
-  - done when: `_task_0153_boss_nights` in `src/tools/headless_v1.gd`: for dates 1-112 and two seeds, `is_boss` rows appear only on dates 14, 28, 42, 56, 70, 84, 98 and 112, once each, with the season's boss; `python tools/nights.py --check` still passes with the boss rows in
-  - done when: The same group, from Spring 14 fixtures started through 0118's `NightRoad` (its park, with dawn brought close rather than played out): boss alive at dawn -> no stock taken, `nights_won` unchanged, `day` +1, the date still 14, the stall restocked, tonight's record the boss night again; boss killed -> the next date is 15; house down with the boss alive -> the loss and the hold; house down after the boss fell -> the loss and no hold
-  - done when: `boss_arrived` is raised for the Giant through `is_boss`, and `src/core/waves.gd` no longer names `&"giant"`
-  - done when: A `boss_escaped` shot scenario: `python tools/shot.py 0153 boss_escaped --fhd`, opened - the morning report names the boss and says it comes back
-
-### 0156 - The 1.0 farm map
-
-Waits on 0151.  Likely files: `src/core/game_data.gd (FARM_MAP, MAP_LEGEND, checks), src/core/farm.gd, src/core/interact.gd, src/core/pathing.gd, src/app/save.gd, src/core/state.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, tools/goldens/, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-Every change the 1.0 farm needs on its map, made once so a save migrates once: ground for the new attack sides, the new ore, the big hardwood stumps, ponds with names, and room kept for the coop, the barn and the shipping bin.
-
-- Spawn ground for the sides 0157 opens: a clear band of walkable cells near the north, west and south edges, away from the farmstead and about as far from the house by path as the east band (measure with `Pathing.distance`; the numbers go in the journal), with nothing on it that regrows
-- Nodes under their final ids, so 0176 and 0177 change data only: copper, coal and gold nodes (e.g. `copper_ore`, `coal_seam`, `gold_ore`; gold deeper in the rock face) and 2x2 hardwood stumps (`hardwood_stump`, one thing over four cells with an `anchor`, as a building's footprint is kept); new `MAP_LEGEND` characters. Until those tasks give them `GATHERING` rows they are inert, impassable obstacles with no verb: check that `Interact`, `Pathing._through`, `Farm` and `Save._widen` accept an occupant with no table row
-- Ponds by name: one anchor cell per water body in a `PONDS` table (the north-west pond, the forest pond, the south-east lake) and `Farm.pond_of(state, cell)` by flood fill over the state's own terrain, cheap enough to ask once per cast, so 0179 keys species by pond; no occupants
-- Room kept clear in a `MAP_SITES` table: the coop and the barn near the workshop and the animals (room for footprints up to 7x4; 0183 decides the real ones) and the shipping bin by the porch (0189)
-- `check_map`, `check_livestock` and `validate()` stay clean; `check_reachable` (which walks only `GATHERING` ids today) also covers the new node ids that have no row yet, so each can be stood beside; a new check that every spawn band cell is walkable map ground. `PONDS` and `MAP_SITES` go into `digest()`
-- `State.VERSION` + 1 (6 after 0151's 5) with a step in `Save.migrations()` in the style of `_expand_farm_v1..3`: the new nodes, stumps and cleared bands laid onto a save only where its cell is empty map ground - never over a plot, a building, the house or anything the player placed; map trees and rocks leave the bands and sites only if they are untouched map props; path caches reset and `grid_version` bumped. Write `run-v6*.sav` after the bump (0151's `run-v5*.sav` is this step's input)
-- The new nodes and the stump are drawn through 0120's placeholder road (tinted `ore`, `seam` and `stump` frames, the stump scaled over its 2x2) until A021 is integrated by 0204
-- Hashes: SIM and DATA both move (the map is in `digest()` and in the state) - both numbers in the journal
-
-  - done when: `_task_0156_map_v1` in `src/tools/headless_v1.gd`: `GameData.validate()` is clean; every spawn band cell is walkable and `Pathing.reachable` on a new farm; each new node id is on the map; `Farm.pond_of` names three ponds and nothing on land
-  - done when: The v5 golden steps up to v6 with every plot and every player-placed occupant where it was, the new nodes only on cells that were empty, and plays 600 ticks; every golden loads
-  - done when: New shot scenarios standing at the north band, the new ore and a stump: `python tools/shot.py 0156 <them> --fhd`, opened
-
-### 0163 - Art: winter ground
-
-Waits on 0159.  Likely files: `assets/art_source/terrain/, assets/art_source/crops/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_terrain_art.py, tools/check_crop_art.py, tools/gen_sprites.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
-
-Winter gets real snow on the ground: the approved snowy grass, path, soil, tilled ground, edges and shores replace the remapped stand-in of 0159.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A012` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A012-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/terrain/` (and `crops/` for the tilled tiles), manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_terrain_art.py`, `tools/check_crop_art.py`, `ArtPlacement` if needed).
-- Runtime names: `terrain/<name>_winter` for `grass`, `grass_b`-`grass_d`, `path` and `soil`, the winter `edge_*`/`shore_*` sides and corners, and `crops/tilled_winter` / `tilled_wet_winter` - 16x16, opaque, seamless, the same set as today's (the wet tile still at least 20 RGB darker, `check_crop_art.py`). The 256x80 atlas is ASCII-owned and built by `tools/gen_sprites.py` from the raster recipes (and asserted against it): build the winter atlas there the way the handoff says (new rows or a second atlas) and let 0159's hook swap it in
-- Winter's ground stops going through 0159's remap (the remap stays for anything this pack does not cover); delete the stand-in entries from `src/ui/placeholder_art.gd`, so `python tools/placeholders.py` no longer lists A012
-- Set the pack to integrated: `python implementation/backlog/assets.py set A012 integrated`.
-
-  - done when: `python tools/check_terrain_art.py`, `python tools/check_crop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0163 season_winter season_winter_night --fhd` - in `implementation/shots/0163/`, opened and looked at: no seam, edge or shore breaks the snow
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0175 - The axe and the pickaxe by tier
-
-Waits on 0173.  Likely files: `src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, src/ui/main.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
-
-The axe and the pickaxe save time by tier, and the hardest things on the farm - hardwood stumps and gold - want the iron ones.
-
-- Fewer swings by tier: the tool's tier scales the swing in `Interact.ticks_for` or the `hits` `Gathering.strike` counts - pick one, keep it integer, and make it compose with 'sharp tools' (`gather_percent`) rather than replace it
-- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing - through the `Interact` reason road 0171 opened (a `Building.why_not`-shaped array that `Names.refusal` words), or open it here if 0171 has not landed
-- The real gates arrive with their nodes - hardwood stumps (0177) want an iron axe, gold (0176) an iron pickaxe - so test the rule here with a rigged entry
-- `validate()` checks `min_tier` against the `TOOLS` ladder; `check_iron` and `check_reachable` still pass
-- DATA moves; SIM only if the scenario gathers with an upgraded tool
-
-  - done when: `_task_0175_swings` in `src/tools/headless_v1.gd`: an iron axe fells a tree in fewer ticks than a basic one, by the percent the lever claims; a rigged `min_tier` node refuses a basic pickaxe and yields to an iron one
-  - done when: The refusal fits its control in both languages (`tools/i18n_check.py`)
-
-### 0217 - Art: the house in three tiers
-
-Waits on 0191.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd`.
-
-House tiers I, II and III get their approved exteriors, whole and hurt; tier III reads as a small fortified farmhouse.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A035` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A035-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_house_art.py`, which hard-codes `house`/`house_hurt` and their window points today - extend it per tier).
-- Runtime names: `house`, `house_hurt`, `house_2`, `house_2_hurt`, `house_3`, `house_3_hurt` with their slices (`house_<c>_<r>`, `house_2_<c>_<r>`...), `windows_xy`, `window_rects_xywh`, `light_xy` and `smoke_xy` on the same 6x4 footprint as today's house. The pack draws them at full density (128x128, pivot (64,120): today's 64x64 at 2.0), so take `house` out of `ArtPlacement.visual_scale`'s 2.0 list - it matches every file whose name starts `house_`, the tiers too - unless 0191 wrote a different density into the pack
-- Replace 0191's code-marked stand-ins and flip A035's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A035 integrated`.
-
-  - done when: `python tools/check_house_art.py` and `python tools/show_art.py --house --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
 ### 0154 - The calm night after a boss
 
 Waits on 0153.  Likely files: `src/core/calendar.gd, src/core/waves.gd, src/core/rewards.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/result_screen.gd, src/tools/nights.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -397,7 +328,7 @@ After a boss falls the horde regroups: the first night of the next season sends 
 
 ### 0155 - Losing a night when the calendar moves on
 
-Waits on 0151, 0153.  Likely files: `src/core/rewards.gd, src/core/farming.gd, src/core/pathing.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0153.  Likely files: `src/core/rewards.gd, src/core/farming.gd, src/core/pathing.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 Losing costs what the plan says and nothing more: the calendar moves on, the horde takes a quarter of the stock, tramples the crops it walked through, and what it broke stays broken. Only a boss night comes back.
 
@@ -434,6 +365,23 @@ The farm is surrounded one side at a time: spring comes from the east, summer ad
   - done when: 0115's guarantee holds for regions 2-4, whichever fix 0115 chose: each region built over as far as the rules allow, a small hand-made record of a few walkers from it accounts for every member (killed, alive or waiting) and ends in bounded ticks - a few seconds for the three
   - done when: A `winter_build` shot scenario: `python tools/shot.py 0157 winter_build --fhd`, opened - a route from each of the five sides
 
+### 0163 - Art: winter ground
+
+Waits on 0159.  Likely files: `assets/art_source/terrain/, assets/art_source/crops/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_terrain_art.py, tools/check_crop_art.py, tools/gen_sprites.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
+
+Winter gets real snow on the ground: the approved snowy grass, path, soil, tilled ground, edges and shores replace the remapped stand-in of 0159.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A012` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A012-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/terrain/` (and `crops/` for the tilled tiles), manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_terrain_art.py`, `tools/check_crop_art.py`, `ArtPlacement` if needed).
+- Runtime names: `terrain/<name>_winter` for `grass`, `grass_b`-`grass_d`, `path` and `soil`, the winter `edge_*`/`shore_*` sides and corners, and `crops/tilled_winter` / `tilled_wet_winter` - 16x16, opaque, seamless, the same set as today's (the wet tile still at least 20 RGB darker, `check_crop_art.py`). The 256x80 atlas is ASCII-owned and built by `tools/gen_sprites.py` from the raster recipes (and asserted against it): build the winter atlas there the way the handoff says (new rows or a second atlas) and let 0159's hook swap it in
+- Winter's ground stops going through 0159's remap (the remap stays for anything this pack does not cover); delete the stand-in entries from `src/ui/placeholder_art.gd`, so `python tools/placeholders.py` no longer lists A012
+- Set the pack to integrated: `python implementation/backlog/assets.py set A012 integrated`.
+
+  - done when: `python tools/check_terrain_art.py`, `python tools/check_crop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0163 season_winter season_winter_night --fhd` - in `implementation/shots/0163/`, opened and looked at: no seam, edge or shore breaks the snow
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
 ### 0164 - Art: trees through the seasons
 
 Waits on 0159, 0156.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
@@ -454,7 +402,7 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
 
 ### 0165 - Crops grow by days
 
-Waits on 0151, 0156.  Likely files: `src/core/farming.gd, src/core/phases.gd, src/core/sim.gd, src/core/game_data.gd, src/app/save.gd, src/core/state.gd, src/ui/day_hud.gd, src/ui/describe.gd, src/ui/shop_panel.gd, assets/locale/strings.csv, src/tools/perf_names.gd, src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/make_goldens.gd, tools/goldens/, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/effect_showcase.gd, src/tools/house_check.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
+Waits on 0156.  Likely files: `src/core/farming.gd, src/core/phases.gd, src/core/sim.gd, src/core/game_data.gd, src/app/save.gd, src/core/state.gd, src/ui/day_hud.gd, src/ui/describe.gd, src/ui/shop_panel.gd, assets/locale/strings.csv, src/tools/perf_names.gd, src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/make_goldens.gd, tools/goldens/, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/effect_showcase.gd, src/tools/house_check.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
 
 Crops grow by days, the way the plan and Stardew have it: each morning a plot that was watered the day before moves one day along. A field becomes something you plan a week around, not a minute.
 
@@ -471,39 +419,20 @@ Crops grow by days, the way the plan and Stardew have it: each morning a plot th
   - done when: The migration turns a golden's half-grown plot into the matching whole days, asserted
   - done when: `python tools/shot.py 0165 noon --fhd` shows the field at several stages (the `noon` scenario gives its plots growth days directly - a first morning is all stage 0); opened and looked at
 
-### 0176 - Copper, coal and gold
+### 0175 - The axe and the pickaxe by tier
 
-Waits on 0175, 0156.  Likely files: `src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0173.  Likely files: `src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, src/ui/main.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
 
-The quarry gets copper and coal - for sprinklers, tools and the generator - and gold from autumn for the top tier (plan section 3.3).
+The axe and the pickaxe save time by tier, and the hardest things on the farm - hardwood stumps and gold - want the iron ones.
 
-- The copper, coal and gold nodes 0156 put on `FARM_MAP` under their final ids (e.g. `copper_ore`, `coal_seam`, `gold_ore`; its journal names them and the legend characters) become `GATHERING` entries with swings, yield and `regrow_ticks` (`# LEVER`), dearer than stone on the dials the way `check_iron` holds iron, and `Interact.OCCUPANT_VERBS` entries (`mine`, so `Sfx.VERB_SOUNDS` already covers them); gold has `min_tier` 1 (an iron pickaxe, 0175)
-- Gold from autumn: a gold node offers no verb before the first autumn, through 0149's calendar helpers; say whether it stays open in winter
-- `COPPER`, `COAL` and `GOLD` in `RESOURCES`, `SELL_PRICE`, the materials group, `Names.KEYS` and `ITEM_*` rows in both languages (0169's check wants all four)
-- Coal is fuel (plan section 3.3): the generator may burn it instead of oil - decide and say so; 0193 uses coal for spring gunpowder
-- The gold tier's costs for the hoe, can, axe and pickaxe (money + gold, `# LEVER`), so 0173's refused tier opens
-- Nodes keep 0156's stand-ins on the placeholder road (tinted `ore` for copper and gold, `seam` for coal; 16x16, pivot (8,14)) and icons are tinted stand-ins until A021 (0204) and A020 (0203) are integrated
-- DATA moves. SIM moves on purpose: three new resources are new keys in `held`/`gained`, which the state hash folds - record both
+- Fewer swings by tier: the tool's tier scales the swing in `Interact.ticks_for` or the `hits` `Gathering.strike` counts - pick one, keep it integer, and make it compose with 'sharp tools' (`gather_percent`) rather than replace it
+- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing - through the `Interact` reason road 0171 opened (a `Building.why_not`-shaped array that `Names.refusal` words), or open it here if 0171 has not landed
+- The real gates arrive with their nodes - hardwood stumps (0177) want an iron axe, gold (0176) an iron pickaxe - so test the rule here with a rigged entry
+- `validate()` checks `min_tier` against the `TOOLS` ladder; `check_iron` and `check_reachable` still pass
+- DATA moves; SIM only if the scenario gathers with an upgraded tool
 
-  - done when: `_task_0176_ores` in `src/tools/headless_v1.gd`: each new node yields its resource and regrows; gold refuses before autumn and with a basic pickaxe and yields after; a gold hoe can be ordered and arrives the next morning
-  - done when: A new `quarry` scenario: `python tools/shot.py 0176 quarry --fhd` shows the quarry with the new nodes by day and by night; opened and looked at
-
-### 0177 - Hardwood
-
-Waits on 0175, 0156.  Likely files: `src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/core/farm.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-Big stumps give hardwood to an iron axe: a reason to upgrade early, and the stuff of the strong wall (0231).
-
-- The 2x2 stumps 0156 put on the map (`hardwood_stump`, or the id its journal names) become a `GATHERING` node with `min_tier` 1 (iron axe), more swings than a tree, a `HARDWOOD` yield and a `regrow_ticks` (`# LEVER`) - nothing on the farm is exhausted for good - and an `Interact.OCCUPANT_VERBS` entry (`chop`). One occupant over four cells with an anchor, like the stations: a swing at any of its cells strikes it. `Gathering.strike`, `Farm.remove`/`restore` and the regrowth in `Gathering.tick` all work one cell at a time today: the stump leaves all four cells when it falls and comes back only when all four are clear (the anchor's entry in `regrowing`), asserted
-- A chipped look after the first swing, until it falls (view, from `Gathering.swings_left`)
-- `HARDWOOD` in `RESOURCES`, `SELL_PRICE`, the materials group, names and strings in both languages; its icon is a tinted stand-in until A020 is integrated by 0203
-- Its use is 0231's strong wall; here it only sells, and the journal says so. DATA moves; SIM moves on purpose (a new resource in `held`/`gained`) - record both
-- `check_reachable`: every stump has a cell to stand on beside it; the flow field treats it like a tree
-- A scaled stand-in of today's `stump` at 32x32 through the placeholder road until A021 is integrated by 0204
-
-  - done when: `_task_0177_hardwood` in `src/tools/headless_v1.gd`: a basic axe is refused at a big stump; an iron axe fells it in the swings, for the hardwood, the levers say, from any of its four cells; it is back on all four after `regrow_ticks`, and not while one of them is built on
-  - done when: A new `hardwood` scenario: `python tools/shot.py 0177 hardwood --fhd` shows a whole and a chipped stump beside a tree; opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A021-ore-hardwood.md` states the final geometry this task settled (the node canvas and variants, the stump's canvas, pivot and states)
+  - done when: `_task_0175_swings` in `src/tools/headless_v1.gd`: an iron axe fells a tree in fewer ticks than a basic one, by the percent the lever claims; a rigged `min_tier` node refuses a basic pickaxe and yields to an iron one
+  - done when: The refusal fits its control in both languages (`tools/i18n_check.py`)
 
 ### 0183 - The coop and the barn
 
@@ -544,9 +473,27 @@ A shipping bin like Stardew's: drop things in at any hour of the day and be paid
   - done when: A new `shipping_bin` scenario: `python tools/shot.py 0189 shipping_bin --fhd` shows the bin and the morning line; opened and looked at
   - done when: the Deliverables table of `implementation/backlog/packs/A033-shipping-bin.md` states the final geometry this task settled
 
+### 0217 - Art: the house in three tiers
+
+Waits on 0191.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd`.
+
+House tiers I, II and III get their approved exteriors, whole and hurt; tier III reads as a small fortified farmhouse.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A035` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A035-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_house_art.py`, which hard-codes `house`/`house_hurt` and their window points today - extend it per tier).
+- Runtime names: `house`, `house_hurt`, `house_2`, `house_2_hurt`, `house_3`, `house_3_hurt` with their slices (`house_<c>_<r>`, `house_2_<c>_<r>`...), `windows_xy`, `window_rects_xywh`, `light_xy` and `smoke_xy` on the same 6x4 footprint as today's house. The pack draws them at full density (128x128, pivot (64,120): today's 64x64 at 2.0), so take `house` out of `ArtPlacement.visual_scale`'s 2.0 list - it matches every file whose name starts `house_`, the tiers too - unless 0191 wrote a different density into the pack
+- Replace 0191's code-marked stand-ins and flip A035's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A035 integrated`.
+
+  - done when: `python tools/check_house_art.py` and `python tools/show_art.py --house --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
 ### 0158 - The forecast
 
-Waits on 0151, 0152, 0153, 0154, 0157.  Likely files: `src/core/forecast.gd (new), src/ui/forecast_panel.gd (new), src/ui/day_hud.gd, src/ui/night_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0152, 0153, 0154, 0157.  Likely files: `src/core/forecast.gd (new), src/ui/forecast_panel.gd (new), src/ui/day_hud.gd, src/ui/night_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 At dusk the farmer learns what is coming: from which sides, how many and of what kind, and whether it is a Full Moon, a boss or a calm night. The forecast is never wrong, because it is the night.
 
@@ -566,7 +513,7 @@ At dusk the farmer learns what is coming: from which sides, how many and of what
 
 ### 0160 - The end of the year
 
-Waits on 0153, 0151, 0154.  Likely files: `src/core/run.gd, src/ui/result_screen.gd, src/ui/credits_roll.gd (new), src/ui/main.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0153, 0154.  Likely files: `src/core/run.gd, src/ui/result_screen.gd, src/ui/credits_roll.gd (new), src/ui/main.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 When the winter boss - for now the Giant - falls on Winter 14, the year is over: an ending, the credits, and the choice to carry on into a Year 2 that does not end.
 
@@ -639,23 +586,39 @@ The plan's twelve crops exist as data: potato, garlic, strawberry, pepper, sunfl
   - done when: A new `twelve_crops` scenario: `python tools/shot.py 0168 twelve_crops --fhd` shows every crop at its four stages; opened and looked at
   - done when: the Deliverables tables of `implementation/backlog/packs/A015-spring-crops.md`, `A016-summer-crops.md` and `A017-autumn-crops.md` state the final geometry this task settled (canvas, pivot, stages, which crops are tall)
 
-### 0178 - Sprinklers
+### 0176 - Copper, coal and gold
 
-Waits on 0176, 0165.  Likely files: `src/core/game_data.gd, src/core/farming.gd, src/core/phases.gd, src/core/pathing.gd, src/core/building.gd, src/ui/names.gd, src/ui/particles.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0175, 0156.  Likely files: `src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
-Sprinklers automate the chore: copper, iron and gold ones water the plots around them every morning, so a big field stops costing the whole morning.
+The quarry gets copper and coal - for sprinklers, tools and the generator - and gold from autumn for the top tier (plan section 3.3).
 
-- Three tiers (copper, iron, gold) as `BUILDINGS` entries or one id with levels - decide - with costs in their metal plus money, hp and a 1x1 size, built by day like every production building; recipes or a direct cost, with `check_recipes` and `check_buildings` still honest
-- Each morning, after 0165's growth credit, every sprinkler marks the plots of its pattern watered for the new day (four neighbours, 3x3, 5x5 - `# LEVER`), in sorted cell order; they dry at night like any other plot
-- **Never a wall.** `Pathing._through` makes anything without a `path_cost` impassable, so a row of sprinklers would fence the farm. Make them walkable for the flow field like a trap (a declared flag `_through` reads) and not prey - `is_prey` counts any `BUILDINGS` entry with no `path_cost` today, so it reads the same flag - and say whether the farmer walks over them
-- A cell with a sprinkler is not a plot: tilling and planting skip it, and a sprinkler cannot go on a planted plot
-- The spray is code particles (view only); the body draws through the placeholder road until A018 is integrated by 0201
-- `BLD_*`/`REC_*` names and strings in both languages. DATA moves; SIM moves if the state's shape changes (a new station in `selected_recipe`) or the scenario places one - say which
+- The copper, coal and gold nodes 0156 put on `FARM_MAP` under their final ids (e.g. `copper_ore`, `coal_seam`, `gold_ore`; its journal names them and the legend characters) become `GATHERING` entries with swings, yield and `regrow_ticks` (`# LEVER`), dearer than stone on the dials the way `check_iron` holds iron, and `Interact.OCCUPANT_VERBS` entries (`mine`, so `Sfx.VERB_SOUNDS` already covers them); gold has `min_tier` 1 (an iron pickaxe, 0175)
+- Gold from autumn: a gold node offers no verb before the first autumn, through 0149's calendar helpers; say whether it stays open in winter
+- `COPPER`, `COAL` and `GOLD` in `RESOURCES`, `SELL_PRICE`, the materials group, `Names.KEYS` and `ITEM_*` rows in both languages (0169's check wants all four)
+- Coal is fuel (plan section 3.3): the generator may burn it instead of oil - decide and say so; 0193 uses coal for spring gunpowder
+- The gold tier's costs for the hoe, can, axe and pickaxe (money + gold, `# LEVER`), so 0173's refused tier opens
+- Nodes keep 0156's stand-ins on the placeholder road (tinted `ore` for copper and gold, `seam` for coal; 16x16, pivot (8,14)) and icons are tinted stand-ins until A021 (0204) and A020 (0203) are integrated
+- DATA moves. SIM moves on purpose: three new resources are new keys in `held`/`gained`, which the state hash folds - record both
 
-  - done when: `_task_0178_sprinklers` in `src/tools/headless_v1.gd`: a copper sprinkler waters its four neighbours on a morning and they grow the next; the flow field crosses its cell at ground cost; a breaker does not hunt it
-  - done when: `_case_0178_sprinkler` in `src/tools/input_v1.gd`: place one by day from the build list
-  - done when: A new `sprinklers` scenario: `python tools/shot.py 0178 sprinklers --fhd` shows the three tiers spraying; opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A018-sprinklers.md` states the final geometry this task settled
+  - done when: `_task_0176_ores` in `src/tools/headless_v1.gd`: each new node yields its resource and regrows; gold refuses before autumn and with a basic pickaxe and yields after; a gold hoe can be ordered and arrives the next morning
+  - done when: A new `quarry` scenario: `python tools/shot.py 0176 quarry --fhd` shows the quarry with the new nodes by day and by night; opened and looked at
+
+### 0177 - Hardwood
+
+Waits on 0175, 0156.  Likely files: `src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/core/farm.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+
+Big stumps give hardwood to an iron axe: a reason to upgrade early, and the stuff of the strong wall (0231).
+
+- The 2x2 stumps 0156 put on the map (`hardwood_stump`, or the id its journal names) become a `GATHERING` node with `min_tier` 1 (iron axe), more swings than a tree, a `HARDWOOD` yield and a `regrow_ticks` (`# LEVER`) - nothing on the farm is exhausted for good - and an `Interact.OCCUPANT_VERBS` entry (`chop`). One occupant over four cells with an anchor, like the stations: a swing at any of its cells strikes it. `Gathering.strike`, `Farm.remove`/`restore` and the regrowth in `Gathering.tick` all work one cell at a time today: the stump leaves all four cells when it falls and comes back only when all four are clear (the anchor's entry in `regrowing`), asserted
+- A chipped look after the first swing, until it falls (view, from `Gathering.swings_left`)
+- `HARDWOOD` in `RESOURCES`, `SELL_PRICE`, the materials group, names and strings in both languages; its icon is a tinted stand-in until A020 is integrated by 0203
+- Its use is 0231's strong wall; here it only sells, and the journal says so. DATA moves; SIM moves on purpose (a new resource in `held`/`gained`) - record both
+- `check_reachable`: every stump has a cell to stand on beside it; the flow field treats it like a tree
+- A scaled stand-in of today's `stump` at 32x32 through the placeholder road until A021 is integrated by 0204
+
+  - done when: `_task_0177_hardwood` in `src/tools/headless_v1.gd`: a basic axe is refused at a big stump; an iron axe fells it in the swings, for the hardwood, the levers say, from any of its four cells; it is back on all four after `regrow_ticks`, and not while one of them is built on
+  - done when: A new `hardwood` scenario: `python tools/shot.py 0177 hardwood --fhd` shows a whole and a chipped stump beside a tree; opened and looked at
+  - done when: the Deliverables table of `implementation/backlog/packs/A021-ore-hardwood.md` states the final geometry this task settled (the node canvas and variants, the stump's canvas, pivot and states)
 
 ### 0179 - Fish by pond, season and hour
 
@@ -692,24 +655,6 @@ At night the animals sleep inside and the barn becomes something to defend: brea
 
   - done when: `_task_0186_barns_night` in `src/tools/headless_v1.gd` (a short night with breakers set down beside the barn, mornings by `Phases.begin_day`): breakers reach a barn and wreck it, then leave it for other prey; it stands, produces nothing the next day, keeps every animal, and works again after a day repair
   - done when: A new `barn_night` scenario: `python tools/shot.py 0186 barn_night --fhd` shows a hurt and a wrecked barn at night and the next morning; opened and looked at
-
-### 0204 - Art: copper, coal, gold and hardwood
-
-Waits on 0176, 0177.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/art_placement.gd`.
-
-The new quarry nodes and the big hardwood stumps get their approved art in the world.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A021` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A021-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`; `ArtPlacement` if the 2x2 stump needs it).
-- Runtime names: copper, coal and gold nodes at 16x16, pivot (8,14), each with a `_b` variant through `WorldView.PROP_VARIANTS`/`_prop_variant` like `ore`/`ore_b`; the 2x2 stump whole and chipped at the 32x32 canvas and pivot 0177 settled, placed at the bottom centre of its footprint
-- Replace the stand-ins of 0176 and 0177 and flip A021's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A021 integrated`.
-
-  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --props --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0204/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0215 - Art: the shipping bin
 
@@ -814,6 +759,24 @@ The can and the hoe earn their tiers: one tile, then three, then five at a strok
   - done when: `_case_0174_area` in `src/tools/input_v1.gd`: holding interact along a row with an iron can waters it in a third of the steps
   - done when: A new `can_area` scenario: `python tools/shot.py 0174 can_area --fhd` shows the area highlight; opened and looked at
 
+### 0178 - Sprinklers
+
+Waits on 0176, 0165.  Likely files: `src/core/game_data.gd, src/core/farming.gd, src/core/phases.gd, src/core/pathing.gd, src/core/building.gd, src/ui/names.gd, src/ui/particles.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+Sprinklers automate the chore: copper, iron and gold ones water the plots around them every morning, so a big field stops costing the whole morning.
+
+- Three tiers (copper, iron, gold) as `BUILDINGS` entries or one id with levels - decide - with costs in their metal plus money, hp and a 1x1 size, built by day like every production building; recipes or a direct cost, with `check_recipes` and `check_buildings` still honest
+- Each morning, after 0165's growth credit, every sprinkler marks the plots of its pattern watered for the new day (four neighbours, 3x3, 5x5 - `# LEVER`), in sorted cell order; they dry at night like any other plot
+- **Never a wall.** `Pathing._through` makes anything without a `path_cost` impassable, so a row of sprinklers would fence the farm. Make them walkable for the flow field like a trap (a declared flag `_through` reads) and not prey - `is_prey` counts any `BUILDINGS` entry with no `path_cost` today, so it reads the same flag - and say whether the farmer walks over them
+- A cell with a sprinkler is not a plot: tilling and planting skip it, and a sprinkler cannot go on a planted plot
+- The spray is code particles (view only); the body draws through the placeholder road until A018 is integrated by 0201
+- `BLD_*`/`REC_*` names and strings in both languages. DATA moves; SIM moves if the state's shape changes (a new station in `selected_recipe`) or the scenario places one - say which
+
+  - done when: `_task_0178_sprinklers` in `src/tools/headless_v1.gd`: a copper sprinkler waters its four neighbours on a morning and they grow the next; the flow field crosses its cell at ground cost; a breaker does not hunt it
+  - done when: `_case_0178_sprinkler` in `src/tools/input_v1.gd`: place one by day from the build list
+  - done when: A new `sprinklers` scenario: `python tools/shot.py 0178 sprinklers --fhd` shows the three tiers spraying; opened and looked at
+  - done when: the Deliverables table of `implementation/backlog/packs/A018-sprinklers.md` states the final geometry this task settled
+
 ### 0180 - The fishing minigame
 
 Waits on 0179, 0173.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/sim.gd, src/ui/fishing_bar.gd (new), src/ui/main.gd, src/app/input_actions.gd, src/app/settings.gd, project.godot, src/ui/player_work.gd, src/ui/sfx.gd, src/tools/perf_names.gd, src/tools/perf_check.gd, src/tools/determinism.gd, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -867,22 +830,22 @@ Animals are fed and give what they are kept for: chickens lay eggs, cows give mi
   - done when: `_task_0184_feed` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`, produce by advancing `every_ticks`, never a whole day of ticks): a fed coop gives eggs the next day, an unfed one gives none and every chicken is still there; a wheat harvest gives the straw the lever says
   - done when: The journal states the meat decision and `check_livestock` enforces it (a rigged table without a meat source fails)
 
-### 0201 - Art: sprinklers
+### 0204 - Art: copper, coal, gold and hardwood
 
-Waits on 0178.  Likely files: `assets/art_source/props/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_ui_art.py`.
+Waits on 0176, 0177.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/art_placement.gd`.
 
-The copper, iron and gold sprinklers of 0178 get their approved bodies and icons; the spray stays code particles.
+The new quarry nodes and the big hardwood stumps get their approved art in the world.
 
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A018` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A018-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`, `tools/check_ui_art.py`).
-- Runtime names for each tier's idle and spray-body frames at the 16x16 canvas and pivot 0178 settled, and an icon (16x16 + 10x10) per tier for the build list
-- Replace 0178's stand-ins and flip A018's placeholder-registry entries to raster; the particle spray is unchanged
-- Set the pack to integrated: `python implementation/backlog/assets.py set A018 integrated`.
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A021` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A021-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`; `ArtPlacement` if the 2x2 stump needs it).
+- Runtime names: copper, coal and gold nodes at 16x16, pivot (8,14), each with a `_b` variant through `WorldView.PROP_VARIANTS`/`_prop_variant` like `ore`/`ore_b`; the 2x2 stump whole and chipped at the 32x32 canvas and pivot 0177 settled, placed at the bottom centre of its footprint
+- Replace the stand-ins of 0176 and 0177 and flip A021's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A021 integrated`.
 
-  - done when: `python tools/check_prop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --props --check` and `--ui --check` pass
+  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --props --check` pass
   - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0201/`
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0204/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0212 - Art: the coop and the barn
@@ -973,6 +936,24 @@ The first artisan machines: a keg and a preserves jar that turn fruit into wine,
 
   - done when: `_task_0187_keg` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`): grapes in a keg are wine after the recipe's mornings and not one before; a day spent elsewhere still counts; every new recipe has a positive chain margin
   - done when: `_case_0187_keg` in `src/tools/input_v1.gd`: queue wine at a keg from its panel
+
+### 0201 - Art: sprinklers
+
+Waits on 0178.  Likely files: `assets/art_source/props/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_ui_art.py`.
+
+The copper, iron and gold sprinklers of 0178 get their approved bodies and icons; the spray stays code particles.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A018` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A018-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/props` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`, `tools/check_ui_art.py`).
+- Runtime names for each tier's idle and spray-body frames at the 16x16 canvas and pivot 0178 settled, and an icon (16x16 + 10x10) per tier for the build list
+- Replace 0178's stand-ins and flip A018's placeholder-registry entries to raster; the particle spray is unchanged
+- Set the pack to integrated: `python implementation/backlog/assets.py set A018 integrated`.
+
+  - done when: `python tools/check_prop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --props --check` and `--ui --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0201/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0203 - Art: material icons
 
@@ -2398,7 +2379,7 @@ The three night events as Codex drew them, in the forecast slot where 0256 and 0
 
 ### 0270 - Fifty-six nights as data
 
-Waits on 0151, 0152, 0153, 0154, 0256, 0257, 0234.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0152, 0153, 0154, 0256, 0257, 0234.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 The year stops being ten written nights plus a curve and becomes tables a designer can read: a template per season, hand-written key nights (every introduction, every Full Moon) and a seeded generator for the nights in between. Nothing downstream of `Waves.night_of` can tell which is which, so the season tasks after this one edit data (0271 also gives `play_nights` a day range).
 
@@ -2773,7 +2754,7 @@ The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpo
 
 ### 0291 - Saves into 1.0
 
-Waits on 0151, 0156, 0165, 0279, 0287.  Likely files: `src/app/save.gd, src/tools/make_goldens.gd, src/tools/play_goldens.gd (new), tools/verify.py, tools/goldens/, src/ui/title_screen.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd, assets/locale/strings.csv`.
+Waits on 0156, 0165, 0279, 0287.  Likely files: `src/app/save.gd, src/tools/make_goldens.gd, src/tools/play_goldens.gd (new), tools/verify.py, tools/goldens/, src/ui/title_screen.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd, assets/locale/strings.csv`.
 
 Somebody who played the 0.1 prototype opens 1.0 and finds their farm in the calendar, or is told plainly where it went - never a crash and never an empty title. This is the last look at every save shape before a stranger's save depends on it.
 
@@ -3051,20 +3032,20 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
-## 11 - Calendar and seasons  (2/16)
+## 11 - Calendar and seasons  (3/16)
 
 - [x] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
 - [x] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
-- [ ] **0151** [The night is the calendar day](prompts/0151-night-is-calendar.md)
-- [ ] **0152** [Full Moon nights](prompts/0152-full-moon.md) - needs 0151
-- [ ] **0153** [Boss nights repeat until the boss falls](prompts/0153-boss-nights.md) - needs 0151
+- [x] **0151** [The night is the calendar day](prompts/0151-night-is-calendar.md)
+- [ ] **0152** [Full Moon nights](prompts/0152-full-moon.md)
+- [ ] **0153** [Boss nights repeat until the boss falls](prompts/0153-boss-nights.md)
 - [ ] **0154** [The calm night after a boss](prompts/0154-calm-night.md) - needs 0153
-- [ ] **0155** [Losing a night when the calendar moves on](prompts/0155-losing-calendar.md) - needs 0151, 0153
-- [ ] **0156** [The 1.0 farm map](prompts/0156-farm-map-v1.md) - needs 0151
+- [ ] **0155** [Losing a night when the calendar moves on](prompts/0155-losing-calendar.md) - needs 0153
+- [ ] **0156** [The 1.0 farm map](prompts/0156-farm-map-v1.md)
 - [ ] **0157** [A new side every season](prompts/0157-attack-sides.md) - needs 0156
-- [ ] **0158** [The forecast](prompts/0158-forecast.md) - needs 0151, 0152, 0153, 0154, 0157
+- [ ] **0158** [The forecast](prompts/0158-forecast.md) - needs 0152, 0153, 0154, 0157
 - [ ] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md)
-- [ ] **0160** [The end of the year](prompts/0160-year-end.md) - needs 0153, 0151, 0154
+- [ ] **0160** [The end of the year](prompts/0160-year-end.md) - needs 0153, 0154
 - [ ] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md) - needs 0158 - waits for art A010
 - [ ] **0162** [Art: forecast heads](prompts/0162-art-forecast-heads.md) - needs 0158 - waits for art A011
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - needs 0159 - waits for art A012
@@ -3072,7 +3053,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 12 - The day that pays  (0/53)
 
-- [ ] **0165** [Crops grow by days](prompts/0165-crops-by-days.md) - needs 0151, 0156
+- [ ] **0165** [Crops grow by days](prompts/0165-crops-by-days.md) - needs 0156
 - [ ] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md) - needs 0165
 - [ ] **0167** [Any grass can be tilled](prompts/0167-till-grass.md) - needs 0165
 - [ ] **0168** [Nine new crops](prompts/0168-crop-data.md) - needs 0165
@@ -3186,7 +3167,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 15 - Fifty-six nights and balance  (0/11)
 
-- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0151, 0152, 0153, 0154, 0256, 0257, 0234
+- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0152, 0153, 0154, 0256, 0257, 0234
 - [ ] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md) - needs 0270, 0157
 - [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0247, 0248, 0253, 0259, 0271
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0249, 0250, 0254, 0259, 0272
@@ -3213,7 +3194,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 17 - Ship 1.0  (0/7)
 
-- [ ] **0291** [Saves into 1.0](prompts/0291-saves-v1.md) - needs 0151, 0156, 0165, 0279, 0287
+- [ ] **0291** [Saves into 1.0](prompts/0291-saves-v1.md) - needs 0156, 0165, 0279, 0287
 - [ ] **0292** [Options for the new controls](prompts/0292-options-v1.md) - needs 0180, 0158
 - [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md) - needs 0195, 0158, 0180
 - [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0287, 0293, 0291, 0292

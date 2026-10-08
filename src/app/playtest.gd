@@ -217,8 +217,9 @@ static func run_ended(state: Dictionary, how: String) -> void:
 	if _path == "":
 		return
 	_write("the run ended: %s" % how)
+	# The night fought last: the calendar day's since task 0151.
 	_write("  reached night %d, day %d, tick %d"
-		% [int(state.get("nights_won", 0)) + 1, int(state.get("day", 0)),
+		% [int(state.get("night", 0)), int(state.get("day", 0)),
 			int(state.get("tick", 0))])
 	_write("  built %s" % _built_so_far(state))
 	end_session(how)

@@ -11760,10 +11760,13 @@ func _task_0063_tech_tree() -> void:
 			keys[key] = one["id"]
 
 	# **Every node is reachable inside ten nights, but not all of them.** The
-	# done-when, and the whole reason for the prices.
-	var best := Tech.total_available()
+	# done-when, and the whole reason for the prices. **Asked of the authored
+	# nights** since task 0151: a year pays 224 at best against this tree's
+	# 45, and 0220 re-prices the tree against the year.
+	var authored := Waves.authored_count()
+	var best := Tech.total_available(authored)
 	print("  the whole tree costs %d; ten nights pay %d at best and %d at "
-		% [whole, best, Tech.least_available()] + "worst")
+		% [whole, best, Tech.least_available(authored)] + "worst")
 	expect(whole > best,
 		"the tree costs more than the best run earns - a player cannot have "
 		+ "all of it", "%d against %d" % [whole, best])
@@ -12107,10 +12110,12 @@ func _fight_night(state: Dictionary, night: int) -> void:
 
 ## 0065 - losing a night costs a day, not the run.
 func _task_0065_defeat() -> void:
-	# **A lost night is fought again.** The requirement, and the bug task
-	# 0065 found: the night used to be the day counter, so losing night three
-	# moved the run on to night four and a player could lose their way to the
-	# Giant without beating anything.
+	# **A lost night is not fought again** (task 0151). Task 0065 made a lost
+	# night come back, because the night was one past the nights won; since
+	# 0151 the night fought at the end of a day is that day's in the
+	# calendar, so losing day 3's night leads to night 4 on day 4. What the
+	# loss costs is that night's pay and technology, and its share of the
+	# stock below - never the run.
 	var run := _a_run_at_night(6500, 3)
 	expect(int(run["night"]) == 3, "it is night three", str(run["night"]))
 	var day_before := int(run["day"])
@@ -12118,20 +12123,23 @@ func _task_0065_defeat() -> void:
 	expect(int(run["day"]) == day_before + 1,
 		"losing costs a day", str(run["day"]))
 	expect(Phases.nights_won(run) == 2,
-		"and no night is won by it", str(Phases.nights_won(run)))
+		"and no night is won by it - nights_won holds", str(Phases.nights_won(run)))
 	_to_the_next_night(run)
-	expect(int(run["night"]) == 3,
-		"so night three comes again - the night is retried",
-		str(run["night"]))
+	expect(int(run["night"]) == 4 and int(run["day"]) == 4,
+		"so day 4 brings night 4 - the lost one is not fought again",
+		"night %d on day %d" % [int(run["night"]), int(run["day"])])
+	expect(not Tech.already_paid(run, 3),
+		"and night 3 never paid its technology", str(run["nights_paid"]))
 
-	# ...and surviving it moves on.
+	# ...and surviving one counts it.
+	Rewards.settle(run, true)
 	Phases.enter_result(run, true)
 	expect(Phases.nights_won(run) == 3, "surviving wins the night",
 		str(Phases.nights_won(run)))
 	(run["intent"] as Dictionary)["confirm_result"] = true
 	Sim.advance(run, 2)
 	NightRoad.to_night(run)
-	expect(int(run["night"]) == 4, "and the next one is four",
+	expect(int(run["night"]) == 5, "and the next one is five, on day five",
 		str(run["night"]))
 
 	# **The day in between is not skipped.**
@@ -12189,11 +12197,11 @@ func _task_0065_defeat() -> void:
 	# **Losing twice in a row leaves a farm that can still recover.** The
 	# other done-when.
 	var twice := _lose_twice(6504)
-	print("  after losing twice: %s left, night %d again, %d technology"
-		% [str(twice["left"]), twice["night"], twice["tech"]])
-	expect(int(twice["night"]) == int(twice["was_night"]),
-		"the same night is still there to fight",
-		"%d against %d" % [twice["night"], twice["was_night"]])
+	print("  after losing three in a row: %s left, night %d ahead, %d technology"
+		% [str(twice["left"]), twice["ahead"], twice["tech"]])
+	expect(int(twice["ahead"]) == int(twice["was_night"]) + 3,
+		"the calendar's next night is there to fight - three lost, three on",
+		"%d against %d" % [twice["ahead"], twice["was_night"]])
 	expect(int(twice["phase"]) == Phases.DAY,
 		"on a morning, with a farm", str(twice["phase"]))
 	expect(twice["can_build"],
@@ -12249,8 +12257,9 @@ func _task_0065_defeat() -> void:
 	expect(Entities.count(yard) == 0, "nobody comes back while the sun is up",
 		str(Entities.count(yard)))
 	NightRoad.to_night(yard)
-	expect(int(yard["phase"]) == Phases.NIGHT and int(yard["night"]) == 1,
-		"the same night comes back", "%s night %d"
+	# The next date's night since task 0151, not the lost one again.
+	expect(int(yard["phase"]) == Phases.NIGHT and int(yard["night"]) == 2,
+		"the next night comes - day 2's", "%s night %d"
 			% [Phases.name_of(int(yard["phase"])), int(yard["night"])])
 	expect(Entities.count(yard) == Entities.count(fresh),
 		"and starts as a night never lost does, with nobody already at the door",
@@ -12278,6 +12287,8 @@ func _task_0065_defeat() -> void:
 ## A run standing on the day before a given night, with a stocked farm.
 func _a_run_at_night(seed_value: int, night: int) -> Dictionary:
 	var state := State.create(seed_value)
+	# **The day picks the night**: it is the calendar day's since task 0151.
+	# The nights before it go down as won, for the record and the profile.
 	state["nights_won"] = night - 1
 	state["day"] = night
 	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
@@ -12366,7 +12377,7 @@ func _lose_twice(seed_value: int) -> Dictionary:
 		left[id] = Resources.amount(state, id)
 	return {
 		"was_night": was_night,
-		"night": int(state["night"]),
+		"ahead": Phases.night_ahead(state),
 		"phase": int(state["phase"]),
 		"days": int(state["day"]) - started - 1,
 		"left": left,
@@ -12377,55 +12388,86 @@ func _lose_twice(seed_value: int) -> Dictionary:
 	}
 
 
-## 0066 - ten nights and the Giant: the end of the MVP.
+## 0066 - the end of the run: the year's last night won (task 0151; it was
+## the MVP's ten nights and the Giant).
 func _task_0066_run_end() -> void:
-	# **A run ends one way.** Losing costs a day and never the run.
+	# **A run ends one way.** Not mid-year, and not by losing.
 	var going := _a_run_at_night(6600, 4)
 	expect(not Run.is_over(going), "four nights in, the run is not over")
 	_lose_the_night(going)
 	expect(not Run.is_over(going),
-		"and losing does not end it - a loss costs a day",
+		"and losing does not end it - a loss costs a night",
 		str(Phases.nights_won(going)))
+	var midyear := _a_run_at_night(6600, Run.final_night() / 2)
+	Rewards.settle(midyear, true)
+	Phases.enter_result(midyear, true)
+	expect(not Run.is_over(midyear),
+		"winning the night halfway through the year does not end it either",
+		str(midyear["nights_paid"]))
 
-	var nearly := _a_run_at_night(6601, GameData.MVP_NIGHTS)
+	# **Over once the year's last night is won** - a fixture on that date,
+	# not 56 nights played.
+	var nearly := _a_run_at_night(6601, Run.final_night())
 	expect(Run.is_final_night(nearly),
-		"night %d is the last authored one" % GameData.MVP_NIGHTS,
+		"night %d, Winter 14, is the year's last" % Run.final_night(),
 		str(nearly["night"]))
 	expect(not Run.is_over(nearly), "and it has not been beaten yet")
+	Rewards.settle(nearly, true)
 	Phases.enter_result(nearly, true)
 	expect(Run.is_over(nearly),
-		"beating it ends the run", str(Phases.nights_won(nearly)))
+		"beating it ends the run", str(nearly["nights_paid"]))
 	expect(bool((nearly["last_result"] as Dictionary).get("run_over", false)),
 		"and the result says so, for the screen to read",
 		str(nearly["last_result"]))
+
+	# **Read from the night won, never from a count of wins.** A year with
+	# losses in it still ends on Winter 14 won; losing Winter 14 does not.
+	var scarred := _a_run_at_night(6607, Run.final_night())
+	scarred["nights_won"] = 40
+	Rewards.settle(scarred, true)
+	Phases.enter_result(scarred, true)
+	expect(Run.is_over(scarred),
+		"a year with sixteen nights lost is still beaten on its last night",
+		str(Phases.nights_won(scarred)))
+	var fell := _a_run_at_night(6608, Run.final_night())
+	_lose_the_night(fell)
+	expect(not Run.is_over(fell) and not bool((fell["last_result"]
+		as Dictionary).get("run_over", false)),
+		"while losing the last night is not an ending")
 
 	# **Carrying on.**
 	expect(Run.go_endless(nearly), "a beaten run may carry on")
 	expect(Run.is_endless(nearly), "into the endless nights of task 0070")
 	expect(not Run.is_over(nearly),
 		"and then it is a run again rather than an ending")
+	_to_the_next_night(nearly)
+	expect(int(nearly["night"]) == Run.final_night() + 1,
+		"and the next night is the next date, past the year",
+		str(nearly["night"]))
 	var early := _a_run_at_night(6602, 3)
 	expect(not Run.go_endless(early),
 		"but a run that has not been beaten cannot skip to the end")
 
-	# **A whole run, day one to the Giant.** The done-when, played rather
-	# than argued.
-	var whole := _play_a_whole_run(6603)
-	print("  a whole run: %d days, %d nights won, %d killed, %d structures "
+	# **The first nights of a run, played.** Three, which is what the suite
+	# can afford (task 0151: the year's end is the fixture above, not 56
+	# nights fought).
+	var whole := _play_a_whole_run(6603, 3)
+	print("  three nights: %d days, %d nights won, %d killed, %d structures "
 		% [whole["days"], whole["nights_won"], whole["killed"],
 			whole["structures_lost"]] + "lost, house at %d"
 		% whole["house_hp"])
-	print("    the build that won: %s" % str(whole["build"]))
+	print("    the build that held: %s" % str(whole["build"]))
 	print("    gathered: %s" % str(whole["gathered"]))
-	expect(int(whole["nights_won"]) == GameData.MVP_NIGHTS,
-		"all ten nights are won", str(whole["nights_won"]))
-	expect(int(whole["bosses"]) == 1,
-		"and the Giant went down", str(whole["bosses"]))
-	expect(int(whole["days"]) > GameData.MVP_NIGHTS,
+	expect(int(whole["nights_won"]) == 3,
+		"all three are won", str(whole["nights_won"]))
+	expect(int(whole["days"]) > 3,
 		"over more days than there were nights - every night has a day in "
 		+ "front of it", str(whole["days"]))
-	expect(int(whole["killed"]) > 400,
-		"with a few hundred zombies killed", str(whole["killed"]))
+	var sent := Waves.size_of(1) + Waves.size_of(2) + Waves.size_of(3)
+	expect(int(whole["killed"]) == sent,
+		"killing every one the three nights sent", "%d of %d"
+			% [int(whole["killed"]), sent])
+	expect(not bool(whole["over"]), "and three nights are not a year")
 	expect(not (whole["build"] as Dictionary).is_empty(),
 		"and something left standing to have done it with",
 		str(whole["build"]))
@@ -12458,13 +12500,14 @@ func _task_0066_run_end() -> void:
 		str(Run.structures_lost(losing)))
 
 	# **The run is written to the profile.**
-	var won := _a_run_at_night(6605, GameData.MVP_NIGHTS)
+	var won := _a_run_at_night(6605, Run.final_night())
+	Rewards.settle(won, true)
 	Phases.enter_result(won, true)
 	var profile := Save.default_profile()
 	var after := Run.record(won, profile)
 	expect(int(after["runs_won"]) == 1,
 		"a beaten run is a won run on the profile", str(after["runs_won"]))
-	expect(int(after["best_night"]) == GameData.MVP_NIGHTS,
+	expect(int(after["best_night"]) == Run.final_night(),
 		"and the best night reached is the last one",
 		str(after["best_night"]))
 	expect((after["stats"] as Dictionary).has("last_run"),
@@ -12482,19 +12525,20 @@ func _task_0066_run_end() -> void:
 	_completed += 1     # last line: an abandoned group never gets here
 
 
-## Play all ten nights with a build that grows, and hand back the summary.
+## Play the first `nights` nights with a build that grows, and hand back the
+## summary.
 ##
 ## **The nights are fought for real** - the waves, the towers, the flow field -
-## but the days are not lived through: a day is a hundred and eighty seconds
-## of a farmer walking about, and what this is testing is whether ten nights
-## and an ending hold together, not whether the crops grow.
-func _play_a_whole_run(seed_value: int) -> Dictionary:
+## but the days are not lived through: a day is four minutes of a farmer
+## walking about, and what this is testing is whether the nights hold
+## together, not whether the crops grow.
+func _play_a_whole_run(seed_value: int, nights: int) -> Dictionary:
 	var state := State.create(seed_value)
 	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
 		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000,
 		GameData.FOOD: 9000, GameData.TECH: 40})
 
-	for night in range(1, GameData.MVP_NIGHTS + 1):
+	for night in range(1, nights + 1):
 		# A day: buy what the tree allows and put another tower up.
 		for id in [&"true sights", &"long barrels", &"oiled works",
 				&"stout timbers"]:
@@ -12623,7 +12667,7 @@ func _task_0067_autoplay() -> void:
 
 	# **A lost night does not end the run** (task 0142). The robot's own day
 	# and build step, then a house one bite from falling: lost - and the next
-	# morning it plays on, and the same night comes back.
+	# morning it plays on, into the next date's night (task 0151).
 	var policy: Dictionary = Autoplay.POLICIES[&"towers"]
 	var lost := State.create(6702)
 	Autoplay._a_day(lost, policy)
@@ -12640,9 +12684,9 @@ func _task_0067_autoplay() -> void:
 	(lost["intent"] as Dictionary)["confirm_result"] = true
 	Sim.advance(lost, 1)
 	var again := Autoplay._one_night(lost, policy)
-	expect(int(again["night"]) == 1 and int(lost["day"]) == 3
+	expect(int(again["night"]) == 2 and int(lost["day"]) == 3
 		and StringName(again["ended"]) != &"cap",
-		"the robot plays the next day, and the lost night comes back",
+		"the robot plays the next day, and day 2's night - not the lost one",
 		"%s on day %d" % [again, int(lost["day"])])
 
 	_completed += 1     # last line: an abandoned group never gets here
@@ -13028,10 +13072,12 @@ func _task_0070_endless() -> void:
 	# it ends.
 	var state := State.create(777)
 	state["endless"] = true
+	# The day picks the night since task 0151.
+	state["day"] = 25
 	state["nights_won"] = 24
-	state["night"] = 25
 	NightRoad.to_night(state)
-	expect(int(state["phase"]) == Phases.NIGHT, "night 25 starts")
+	expect(int(state["phase"]) == Phases.NIGHT and int(state["night"]) == 25,
+		"night 25 starts", str(state["night"]))
 	var ever_out := 0
 	var ticks := 0
 	for _t in 200000:
@@ -13092,11 +13138,11 @@ func _task_0070_endless() -> void:
 		"and the records screen reads it", str(Stats.lifetime(profile)))
 
 	# **Off the critical path.** `go_endless` refuses a run that has not been
-	# beaten, so night eleven cannot be reached by losing your way to it.
+	# beaten: since task 0151, one whose year's last night was never won.
 	var early_run := State.create(779)
 	early_run["nights_won"] = 3
 	expect(not Run.go_endless(early_run),
-		"a run that has not been beaten cannot carry on past ten")
+		"a run that has not been beaten cannot carry on past the year")
 
 	_completed += 1     # last line: an abandoned group never gets here
 

@@ -15276,3 +15276,136 @@ src/tools/{headless_check,headless_v1}.gd
 
 Verify: **PASS**, 59 passed in 549 s (OVER BUDGET as before). headless_check
 16239 (+5), headless_v1 307 (+7), input_check 1064, input_v1 169.
+
+## 0151 - The night is the calendar day - done 2026-10-08
+
+What changed: the night fought at the end of a day is that day's night in the
+calendar. Difficulty follows the calendar, a lost night is never fought
+again, and the year has 56 nights.
+
+**The rule:**
+- `Phases.night_ahead` is `Calendar.date(state)`, so `begin_night` numbers
+  the night with the date. It used to be `nights_won + 1`.
+- `enter_result` still moves `day` every time and `nights_won` only on a
+  win. That is a count now, not an index.
+- Losing day 3's night leads to night 4 on day 4. The loss costs that
+  night's pay and technology, and a share of the stock.
+- `Run.final_night()` is `Calendar.year_days()` (56, Winter 14).
+- `Run.is_over` is "the year's last night has been won", read from a fact
+  that does not move. The new `Run.beat_the_year` asks
+  `Tech.already_paid(state, final_night())`. It never counts wins: a year
+  with losses in it still ends on Winter 14 won, and losing Winter 14 is
+  not an ending.
+- `go_endless` opens on the same fact.
+- `Tech.total_available` and `least_available` take an optional night count,
+  the run's by default: a year pays 224 at best. `_task_0063_tech_tree`
+  keeps "the tree costs more than the best run earns" on the authored ten
+  nights, commented that 0220 re-prices the tree against the year.
+- `src/app/playtest.gd` says "reached night" from `state.night`.
+
+**The save, version 5** (`State.VERSION`, `Save.migrations()[4]`,
+`_night_is_the_date_v4`):
+- `day` is kept and is the date.
+- `night` is left alone. A night in progress keeps its number until it ends,
+  and the calendar takes over at the next `begin_night`.
+- `nights_paid` keeps its entries and gains none. A v4 night number is at
+  most the nights won, so it is below the day, and no date still ahead can
+  already be paid.
+- `endless` goes back to false, except on a save already past day 56, which
+  stays endless so it is not over the moment it loads.
+- No key is named `moon_phase`.
+
+**The goldens:**
+- `tools/goldens/run-v4.sav`, `-older` and `-newer` were written by the MVP
+  commit `bea89a88`:
+  - a git worktree in the scratchpad (`core.longpaths`, because the first
+    try hit Windows' path limit);
+  - `--import` (261 s), then `make_goldens.gd`;
+  - only the three v4 files copied back, and the worktree removed.
+- That farm is on day 2 with no night won. The old meaning (night 1 again)
+  and the new one (night 2) part there.
+- `run-v5*.sav` were then written by this build.
+
+**`MVP_NIGHTS` is gone**: from the rules, `digest()`, the tools and the tests.
+`grep -rn MVP_NIGHTS src` and `grep -n MVP_NIGHTS tools/*.py` find nothing.
+- `Autoplay.play` and `play_nights.gd` take their night count explicitly.
+  The default, `DEFAULT_NIGHTS`, is the first ten calendar nights, so
+  `implementation/BALANCE.md` keeps its meaning. `play_nights.gd` reads it
+  from its first argument, and 0271 makes `tools/play_nights.py` forward
+  it.
+- The autoplayer no longer fights a lost night twice. Its ten nights are
+  dates 1-10, one each.
+- `perf_check.gd`'s worst case picks the Giant's night by the day.
+
+**The year as a gate: `python tools/nights.py --check`.**
+- It resolves every date 1-56 for seeds 0 and 424242 and runs each year
+  through `check_nights`.
+- It prints the year for seed 0 and ends "56 nights a year, seeds [0,
+  424242]: every one checks".
+- `tools/verify.py` runs it (`check_script` on `src/tools/nights.gd` with
+  `--check`).
+- Every generated night up to 56 fits 0137's night length, so the
+  generator's pacing needed no lever.
+- **Tried broken, then reverted:**
+  - I set the endless curve's `gap_ticks` from 4 s to 40 s, which only
+    generated nights read.
+  - The check exited 1 with 84 faults ("night 11 takes 6095 ticks to send,
+    which leaves less than DAWN_MARGIN_TICKS before dawn at 7200").
+  - With the file restored it passed again; the diff shows only this
+    task's lines.
+
+**Tests:**
+- `_task_0065` (headless_check):
+  - losing day 3's night leads to night 4 on day 4; `nights_won` holds and
+    night 3 never paid its technology;
+  - a won night counts, and the next is five;
+  - `_lose_twice` (three losses) expects the night ahead three dates on.
+- `_task_0066`:
+  - not over four nights in, nor after a loss, nor after a mid-year win;
+  - over once the year's last night is won, by a fixture on day 56 (settle,
+    then the result);
+  - still over with sixteen nights lost, and not over when Winter 14 is
+    lost;
+  - carrying on goes to night 57;
+  - the profile has a best night of 56;
+  - the played run is three nights: all won, every enemy sent killed, and
+    not a year.
+- `_task_0063_tech_tree` reads the authored nights' budget.
+- `_task_0070_endless`'s "night 25 is playable" picks the night by `day`.
+- `_case_0070_endless` (input_check):
+  - a fixture on day 56 with dawn brought close wins the year;
+  - PLAY ON appears and the run goes endless;
+  - the next night is 57.
+- Two asserts that expected a lost night back now expect the next date: the
+  yard emptied at dawn (0065) and the autoplayer's lost night (0067).
+- `_task_0150_lookup`: `Run.final_night() == Calendar.year_days()`.
+- `_task_0151_migration` (headless_v1):
+  - a v4 run (day 6, three nights paid) in DAY, PREPARATION, NIGHT and
+    RESULT goes through the real writer and reader and comes back v5 with
+    its day, night and paid list;
+  - each reaches its next night by the sleep intent and 0118's road. In
+    NIGHT, the v4 night 4 is finished first. The night is the date's - 6,
+    or 7 after a night ends - and winning it pays that date, never twice;
+  - an endless v4 run past day 56 stays endless and is not over;
+  - one that went endless earlier goes back to the year;
+  - a non-endless run past 56 is not over;
+  - every golden (v1, v4, v5) loads as v5, plays 300 ticks and has the
+    date's night ahead.
+
+The night HUD still prints `NIGHT %d`, now the date's number.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3911863006` | `21427183` | `State.VERSION` 5 is in the state |
+| data hash | `32942786` | `3650685779` | `MVP_NIGHTS` left `digest()` |
+
+Files: src/core/{phases,run,tech,state,game_data}.gd, src/app/{save,playtest}.gd,
+src/tools/{nights,autoplay,play_nights,perf_check,headless_check,headless_v1,input_check}.gd,
+tools/{nights,verify}.py, tools/goldens/run-v4*.sav, tools/goldens/run-v5*.sav,
+tools/determinism_{sim,data}_hash.txt
+
+Verify: **PASS**, 60 passed in 573 s (OVER BUDGET as before; the year gate is
+the new row). headless_check 16280, headless_v1 343 (+36), input_check 1066,
+input_v1 169.

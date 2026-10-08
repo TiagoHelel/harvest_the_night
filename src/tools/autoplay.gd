@@ -89,26 +89,32 @@ static func names() -> Array:
 	return GameData.sorted_names(POLICIES.keys())
 
 
-## Play one seeded run of one policy, `nights_wanted` nights of it, and
-## report every one.
+## How many calendar nights a run plays unless told otherwise: the first
+## ten, which is what `implementation/BALANCE.md`'s tables were read from.
+const DEFAULT_NIGHTS := 10
+
+
+## Play one seeded run of one policy, the first `nights_wanted` calendar
+## nights of it, and report every one.
 ##
-## **A lost night does not end it** (task 0142). The morning comes, the same
-## night comes back, and the robot plays on, the way a player does - so a run
-## is `nights_wanted` nights played, not the nights until the first loss.
-## `died_on` is still the first night lost, which is what the win rate per
-## night is read from; `nights_won` is how far it got anyway.
+## **A lost night does not end it** (task 0142). The morning comes and the
+## robot plays on, the way a player does - so a run is `nights_wanted`
+## nights played, not the nights until the first loss. Since task 0151 the
+## next night is the next day's: a lost night is not fought again. `died_on`
+## is still the first night lost, which is what the win rate per night is
+## read from; `nights_won` is how many it won.
 ##
-## `nights_wanted` stops it early. The balance sweep wants all ten; the check
-## suite wants one day and one night per policy, which is what fits inside
-## its two-minute budget.
+## `nights_wanted` is the explicit count. The balance sweep wants the first
+## ten; the check suite wants one day and one night per policy, which is what
+## fits inside its two-minute budget.
 static func play(seed_value: int, policy_name: StringName,
-		nights_wanted: int = GameData.MVP_NIGHTS) -> Dictionary:
+		nights_wanted: int = DEFAULT_NIGHTS) -> Dictionary:
 	var policy: Dictionary = POLICIES[policy_name]
 	var state := State.create(seed_value)
 	var nights: Array = []
 	var died_on := 0
 
-	for _attempt in mini(nights_wanted, GameData.MVP_NIGHTS * 2):
+	for _night in nights_wanted:
 		if Run.is_over(state):
 			break
 		var row := _one_night(state, policy)
@@ -126,7 +132,7 @@ static func play(seed_value: int, policy_name: StringName,
 		"nights": nights,
 		"died_on": died_on,
 		"nights_won": Phases.nights_won(state),
-		"won": died_on == 0 and nights.size() >= mini(nights_wanted, GameData.MVP_NIGHTS)
+		"won": died_on == 0 and nights.size() >= nights_wanted
 			and StringName((nights.back() as Dictionary)["ended"]) != &"cap",
 		"killed": int(state["killed_all_run"]),
 		"gathered": _worth_of_gathered(state),

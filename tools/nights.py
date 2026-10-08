@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Print the ten nights without running one.
+"""Print the nights without running one, or check the whole year.
 
-    python tools/nights.py
+    python tools/nights.py [how many nights] [seed]
+    python tools/nights.py --check
 
-A reader, not a check: `verify.py` is what fails. This is for looking at the
-curve while tuning it, which task 0060 does a great deal of.
+Without `--check`, a reader: this is for looking at the curve while tuning
+it, which task 0060 does a great deal of. With it, every date of the year
+for seeds 0 and 424242 must resolve and pass `check_nights`, or it exits 1;
+`tools/verify.py` runs that as a gate (task 0151).
 """
 import os
 import subprocess

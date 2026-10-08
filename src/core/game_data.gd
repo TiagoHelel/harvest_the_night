@@ -1418,12 +1418,6 @@ const REACTION_TICKS := 45              # LEVER: ticks, 20-120
 ## standing at the pond can see.
 const REACTION_NEAR := 6                # LEVER: tiles, 3-12
 
-## How many nights the MVP had. **Nothing in the rules reads it** since task
-## 0150 - they ask `Waves.authored_count()` and `Run.final_night()` - and it
-## is left for the run's-end tests, the tools and `digest()`, which task 0151
-## moves off it and then deletes it.
-const MVP_NIGHTS := 10
-
 ## The curve that writes night eleven and everything after it.
 ##
 ## **The authored ten are the shape; this is the extrapolation.** A generated
@@ -2753,7 +2747,7 @@ static func digest() -> int:
 		"night_hud": [HOUSE_DANGER_PERCENT, WAVE_WARNING_TICKS],
 		"enemies": ENEMIES,
 		"nights": NIGHTS,
-		"wave_gap": [WAVE_GAP_TICKS, SPAWN_INTERVAL_TICKS, MVP_NIGHTS],
+		"wave_gap": [WAVE_GAP_TICKS, SPAWN_INTERVAL_TICKS],
 		# **The generated nights are balance too.** They are not in `NIGHTS`,
 		# so without this line every lever of the endless curve could be
 		# turned without the data guard noticing - which is the one thing the

@@ -156,12 +156,11 @@ func _the_worst_case() -> Dictionary:
 	for y in range(1, Grid.HEIGHT - 1):
 		Building.place(state, &"wall", Vector2i(19 + moved.x, y))
 
-	# **The night is the one after the last one won**, not the day number -
-	# `Phases.begin_night` says so. Setting the day alone gave night one, a
-	# handful of walkers and forty towers, which is the easiest night in the
-	# game dressed up as the hardest.
-	state["day"] = GameData.MVP_NIGHTS
-	state["nights_won"] = GameData.MVP_NIGHTS - 1
+	# **The night is the calendar day's** since task 0151 - `Phases.begin_night`
+	# numbers it with `Calendar.date` - so the day picks the last authored
+	# night, the Giant's, which 0153 moves to Spring 14 and 0275 to Winter 14.
+	state["day"] = Waves.authored_count()
+	state["nights_won"] = Waves.authored_count() - 1
 	NightRoad.to_night(state)
 
 	# **Stopped at the busiest moment, not at a fixed tick.** Advance until

@@ -312,8 +312,12 @@ static func _migrate(payload: Dictionary, from_version: int) -> Dictionary:
 ## Stardew Valley's Standard Farm, 80x65. A cell keeps its coordinates through
 ## all of them - only its index changes - so crops, buildings, jobs and live
 ## entities stay exactly where they were, and the new ground is today's map.
+##
+## Version 5 (task 0151) changed what a number means instead:
+## `_night_is_the_date_v4`.
 static func migrations() -> Dictionary:
-	return {1: _expand_farm_v1, 2: _expand_farm_v2, 3: _expand_farm_v3}
+	return {1: _expand_farm_v1, 2: _expand_farm_v2, 3: _expand_farm_v3,
+		4: _night_is_the_date_v4}
 
 
 ## The farm each version was written with.
@@ -478,6 +482,30 @@ static func _expand_farm_v3(previous: Dictionary) -> Dictionary:
 	if state.is_empty():
 		return {}
 	state["version"] = 4
+	return state
+
+
+## **4 to 5: the night is the calendar day's** (task 0151).
+##
+## - `day` is kept, and becomes the date: no version 4 build ever held a
+##   day back, so the day a save is on is the date it is on.
+## - `night` is left alone. A night in progress - saved in NIGHT, or in
+##   RESULT with its report - keeps its number until it ends, and the
+##   calendar takes over at the next `begin_night`; in DAY or PREPARATION
+##   the next night is simply today's.
+## - `nights_paid` keeps its entries and gains none. An old night number is
+##   at most the nights won, which is below the day, so no date still ahead
+##   can be one already paid; padding the list with the dates a loss skipped
+##   would make `already_paid(56)` say a year was beaten that was not.
+## - `endless` meant "past the ten" and now means "past the year", so it
+##   goes back to false - the year carries the run on, and 0160 offers it
+##   again - except on a save already past `Calendar.year_days()`, which
+##   keeps it so it is not counted over the moment it loads.
+static func _night_is_the_date_v4(previous: Dictionary) -> Dictionary:
+	var state := previous.duplicate(true)
+	if bool(state.get("endless", false)):
+		state["endless"] = int(state.get("day", 1)) > Calendar.year_days()
+	state["version"] = 5
 	return state
 
 

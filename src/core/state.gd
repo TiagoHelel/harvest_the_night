@@ -24,7 +24,10 @@ extends RefCounted
 ## filling in can express - a key that means something different than it used
 ## to, a number that changed units, two keys that became one. Then there is a
 ## migration under it, and `Save` runs them in order.
-const VERSION := 4
+##
+## **5 since task 0151**: `night` is the calendar day's, not one past the
+## nights won, and `endless` means "past the year" rather than "past the ten".
+const VERSION := 5
 
 ## The nested dictionaries whose keys come from the code.
 ##

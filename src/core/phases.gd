@@ -143,11 +143,16 @@ static func begin_preparation(state: Dictionary) -> bool:
 	return true
 
 
-## The night the build step is getting ready for (task 0139): one past the
-## nights won, since a lost night comes back. `begin_night` numbers the
-## night with it, and the night HUD shows it before the waves.
+## The night the build step is getting ready for (task 0139): **the
+## calendar day's** (task 0151). `begin_night` numbers the night with it, and
+## the night HUD shows it before the waves.
+##
+## It was one past the nights won, so a lost night came back. Since 0151 the
+## night fought at the end of a day is that day's, so difficulty follows the
+## calendar and a lost night is never fought again: losing day 3's night
+## leads to day 4's.
 static func night_ahead(state: Dictionary) -> int:
-	return int(state["nights_won"]) + 1
+	return Calendar.date(state)
 
 
 ## Ticks left until dawn ends the night (task 0137), or 0. A parked night
@@ -189,8 +194,7 @@ static func begin_night(state: Dictionary) -> bool:
 	Building.start_lifetimes(state)
 	Ability.recharge(state)
 
-	# The night to be fought is the one after the last one won, not the
-	# number of days that have gone by. See `enter_result()`.
+	# The night to be fought is today's in the calendar (task 0151).
 	state["night"] = night_ahead(state)
 	state["night_tick"] = 0
 	Events.add(state, &"night_began", {"night": int(state["night"])})
@@ -225,18 +229,14 @@ static func enter_result(state: Dictionary, survived: bool) -> bool:
 	}
 	Events.add(state, &"night_won" if survived else &"night_lost",
 		{"night": int(state["night"])})
-	# **A day passes either way; a night is only got past by surviving it.**
-	#
-	# These used to be the same number - `begin_night()` set the night from
-	# the day - so losing night three moved the run on to night four, and a
-	# player could lose their way to the Giant without ever beating anything.
-	# `design.md` and task 0065 both say a loss costs **a day**, so the day
-	# advances and the night does not: you get another morning to prepare and
-	# the same night comes back.
+	# **A day passes either way; `nights_won` only on a win**, and it is a
+	# count now, not an index (task 0151). The next night is the next day's
+	# in the calendar, so a lost night is not fought again - the loss costs
+	# that night's pay and technology, and a day's worth of what it took.
 	state["day"] = int(state["day"]) + 1
 	if survived:
 		state["nights_won"] = int(state["nights_won"]) + 1
-		# **The run can end here.** Ten nights and the Giant is the MVP, and
+		# **The run can end here**: the year's last night won.
 		# `Run.is_over()` is what the result screen asks to know whether it
 		# is showing a night or an ending.
 		if Run.is_over(state):

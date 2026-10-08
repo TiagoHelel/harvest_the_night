@@ -3637,16 +3637,24 @@ func _case_0070_endless() -> void:
 	await frames(2)
 	expect(not play_on.visible, "and is not offered before the run is over")
 
-	# Beat the tenth night. The result screen reads the state, so putting the
-	# state at the end of a beaten run is putting the screen at the ending.
-	state["nights_won"] = GameData.MVP_NIGHTS
-	state["night"] = GameData.MVP_NIGHTS
-	expect(Run.is_over(state), "the run is over")
+	# **Win the year's last night**, Winter 14 (task 0151): a fixture on that
+	# date - the day picks the night - and a dawn brought close, because the
+	# night that ends the year is not what this case is about. The result
+	# screen reads the state, so a state at the end of a beaten year is the
+	# screen at the ending.
+	state["day"] = Run.final_night()
+	state["nights_won"] = Run.final_night() - 1
+	expect(not Run.is_over(state), "the run is not over before that night")
 	NightRoad.to_night(state)
+	expect(int(state["night"]) == Run.final_night(), "it is the year's last night",
+		str(state["night"]))
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 10
 	for _t in 40000:
 		if int(state["phase"]) != Phases.NIGHT:
 			break
 		Sim.advance(state, 1)
+	expect(Run.is_over(state), "won at dawn, the run is over",
+		str(state["nights_paid"]))
 	await until(func() -> bool: return play_on != null and play_on.visible,
 		"the ending to offer the second door")
 	expect(play_on.visible, "a beaten run offers to play on")
@@ -3661,10 +3669,11 @@ func _case_0070_endless() -> void:
 	expect(not Run.is_over(driver.state),
 		"and the run stops being over", str(was))
 
-	# And the night it walks into is generated rather than empty.
-	var next_night := Phases.nights_won(driver.state) + 1
-	expect(next_night > GameData.MVP_NIGHTS,
-		"the next night is past the authored ten", str(next_night))
+	# And the night it walks into is the next date, generated rather than
+	# empty.
+	var next_night := Phases.night_ahead(driver.state)
+	expect(next_night == Run.final_night() + 1,
+		"the next night is the year's last plus one", str(next_night))
 	expect(Waves.size_of(next_night, int(driver.state["seed"])) > 0,
 		"and it has something to send",
 		str(Waves.summary_of(next_night, int(driver.state["seed"]))))

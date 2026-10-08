@@ -9,9 +9,9 @@ extends RefCounted
 ##
 ## ## Over, rather than lost
 ##
-## A run ends one way in the MVP: the tenth night survived. Losing costs a day
-## and never the run (task 0065), so there is no losing end - `is_over()` asks
-## whether the last night has been beaten and nothing else.
+## A run ends one way: the year's last night survived (task 0151). Losing
+## costs a night and never the run, so there is no losing end - `is_over()`
+## asks whether the last night has been beaten and nothing else.
 ##
 ## ## Carrying on
 ##
@@ -44,17 +44,28 @@ static func initial() -> Dictionary:
 
 # ------------------------------------------------------------------- asking
 
-## The night that ends the run (task 0150): the last authored one. 0151
-## makes it the year's last day and 0160 the winter boss; everything that
-## asks which night is the last asks here.
+## The night that ends the run: **the year's last day** (task 0151), Winter
+## 14. 0160 makes it the winter boss; everything that asks which night is
+## the last asks here.
 static func final_night() -> int:
-	return Waves.authored_count()
+	return Calendar.year_days()
 
 
-## Whether the run has been beaten. The final night survived, and no other way.
+## Whether the run has been beaten: the final night survived, and no other
+## way.
+##
+## **Read from a fact that does not move, never from a count of wins**
+## (task 0151): `nights_won` is a count now, and a year with three losses in
+## it is still beaten by winning Winter 14. A night won is a night paid for
+## (`Tech.award`), so the paid list says it.
 static func is_over(state: Dictionary) -> bool:
-	return Phases.nights_won(state) >= final_night() \
-		and not bool(state["endless"])
+	return beat_the_year(state) and not bool(state["endless"])
+
+
+## Whether the year's last night has been won: what `is_over` and
+## `go_endless` both open on.
+static func beat_the_year(state: Dictionary) -> bool:
+	return Tech.already_paid(state, final_night())
 
 
 ## Whether this is the last authored night about to be fought.
@@ -141,10 +152,11 @@ static func _worth_gathering(state: Dictionary) -> Dictionary:
 
 # -------------------------------------------------------------------- doing
 
-## Carry on past the authored nights. Task 0070 makes night eleven worth
-## playing; this is the switch that lets a player ask for it.
+## Carry on past the year. Task 0070 made the nights after it worth
+## playing; this is the switch that lets a player ask for it, once the
+## year's last night is won.
 static func go_endless(state: Dictionary) -> bool:
-	if Phases.nights_won(state) < final_night():
+	if not beat_the_year(state):
 		return false
 	state["endless"] = true
 	return true

@@ -1,8 +1,14 @@
 extends SceneTree
 
-## Print the ten nights, without running one of them.
+## Print the nights, without running one of them.
 ##
 ##     python tools/nights.py [how many nights] [seed]
+##     python tools/nights.py --check
+##
+## **`--check` is a gate** (task 0151), run by `tools/verify.py`: every date of
+## the year, 1 to `Calendar.year_days()`, for seeds 0 and 424242, resolves to
+## a record and passes `GameData.check_nights` - the night length of 0137
+## included - or it exits 1. It prints the year for seed 0 as it goes.
 ##
 ## Past the tenth it prints what `Endless` generates, which is how task 0070's
 ## curve was looked at while it was being written - `python tools/nights.py 40`
@@ -15,10 +21,13 @@ extends SceneTree
 ## is the only source: a designer who edits a wave sees it here on the next
 ## run without touching a line of code, which is the whole of task 0059.
 ##
-## It is a **reader, not a check**. `GameData.validate()` is what fails loudly
-## on a bad table and `headless_check` is what asserts the shape; this is for
-## looking at the curve while you tune it, and task 0060 will be looking at it
-## a great deal.
+## Without `--check` it is a **reader, not a check**. `GameData.validate()` is
+## what fails loudly on a bad table and `headless_check` is what asserts the
+## shape; this is for looking at the curve while you tune it, and task 0060
+## will be looking at it a great deal.
+
+## The seeds the year is checked for.
+const CHECK_SEEDS: Array = [0, 424242]
 
 
 func _init() -> void:
@@ -30,18 +39,23 @@ func _init() -> void:
 		quit(1)
 		return
 
-	var last := GameData.MVP_NIGHTS
-	var seed_value := 0
 	var args := OS.get_cmdline_user_args()
+	if args.has("--check"):
+		quit(_check_the_year())
+		return
+
+	var authored := Waves.authored_count()
+	var last := authored
+	var seed_value := 0
 	if args.size() > 0 and str(args[0]).is_valid_int():
 		last = maxi(int(str(args[0])), 1)
 	if args.size() > 1 and str(args[1]).is_valid_int():
 		seed_value = int(str(args[1]))
 
 	print("HARVEST THE NIGHT - the %d nights%s" % [last,
-		"" if last <= GameData.MVP_NIGHTS
+		"" if last <= authored
 		else " (%d authored, the rest generated from seed %d)"
-			% [GameData.MVP_NIGHTS, seed_value]])
+			% [authored, seed_value]])
 	print("")
 
 	var enemies := 0
@@ -99,3 +113,30 @@ func _init() -> void:
 			if Endless.giants_on(night) > 0 else ""])
 
 	quit()
+
+
+## **The year, as a gate.** Every date resolves to a record and the year's
+## records pass `check_nights`, for each of `CHECK_SEEDS`. Returns the exit
+## code: 0 clean, 1 with a line for every fault.
+func _check_the_year() -> int:
+	var days := Calendar.year_days()
+	var faults: Array = []
+	for seed_value in CHECK_SEEDS:
+		var year: Array = []
+		for date in range(1, days + 1):
+			var one := Waves.night_of(date, int(seed_value))
+			if one.is_empty():
+				faults.append("seed %d: date %d has no night" % [seed_value, date])
+			year.append(one)
+			if int(seed_value) == 0:
+				var sent := Waves.schedule_ticks(one)
+				print("  %s   sent by %ds" % [Waves.summary_of(date, 0),
+					sent / GameData.SECONDS])
+		for line in GameData.check_nights(year):
+			faults.append("seed %d: %s" % [seed_value, line])
+	print("")
+	for line in faults:
+		print("  FAIL %s" % line)
+	print("%d nights a year, seeds %s: %s" % [days, str(CHECK_SEEDS),
+		"every one checks" if faults.is_empty() else "%d faults" % faults.size()])
+	return 0 if faults.is_empty() else 1

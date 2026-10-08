@@ -27,21 +27,30 @@ extends RefCounted
 ## the ten are the run. Technology is permanent, so it is the one that has to
 ## be defended.
 
-## What the run's nights pay in total, if every bonus is taken every time:
-## `Run.final_night()` of them. The number `tools/nights.py` prints and task
-## 0063 budgets the tree against.
-static func total_available() -> int:
+## What `nights` nights pay in total, if every bonus is taken every time -
+## by default the run's, `Run.final_night()` of them. The number
+## `tools/nights.py` prints and task 0063 budgets the tree against.
+##
+## **A year is 56 nights since task 0151**, 224 points at best against a
+## tree that costs 45. Until 0220 re-prices the tree against the year, its
+## budget is asked of the authored nights by passing their count.
+static func total_available(nights: int = -1) -> int:
+	if nights < 0:
+		nights = Run.final_night()
 	var most := 0
-	for _night in range(1, Run.final_night() + 1):
+	for _night in range(1, nights + 1):
 		most += int(GameData.REWARDS["tech_points"])
 		for row in GameData.TECH_BONUSES:
 			most += int((row as Dictionary)["points"])
 	return most
 
 
-## The least the run's nights pay: one a night, no bonuses at all.
-static func least_available() -> int:
-	return int(GameData.REWARDS["tech_points"]) * Run.final_night()
+## The least `nights` nights pay - the run's by default: one a night, no
+## bonuses at all.
+static func least_available(nights: int = -1) -> int:
+	if nights < 0:
+		nights = Run.final_night()
+	return int(GameData.REWARDS["tech_points"]) * nights
 
 
 static func initial() -> Dictionary:

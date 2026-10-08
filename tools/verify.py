@@ -799,6 +799,11 @@ def main():
         check_script("headless_v1", "src/tools/headless_v1.gd",
                      "not written yet - task 0112",
                      pattern=r"\d+ asserts?, \d+ failed")
+        # **The whole year, every date, two seeds** (task 0151): a night
+        # that will not resolve or breaks `check_nights` fails here.
+        check_script("nights", "src/tools/nights.gd",
+                     "not written yet - task 0059", args=("--check",),
+                     pattern=r"\d+ nights a year[^\n]*")
     check_determinism(accept)
     if not hashes_only:
         check_script("input_check", "src/tools/input_check.gd",

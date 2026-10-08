@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 23
+const GROUPS := 24
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -92,6 +92,7 @@ func _run() -> void:
 	_task_0141_tutorial()
 	_task_0149_calendar()
 	_task_0150_lookup()
+	_task_0151_migration()
 
 
 func _finish() -> void:
@@ -2002,10 +2003,10 @@ func _task_0150_lookup() -> void:
 		and not Endless.is_generated(Waves.authored_count()),
 		"the curve takes over the night after the last authored one")
 
-	# **The run's last night, asked in one place.** 0151 changes this line to
-	# `Calendar.year_days()`.
-	expect(Run.final_night() == Waves.authored_count(),
-		"Run.final_night() is the last authored night", str(Run.final_night()))
+	# **The run's last night, asked in one place**: the year's last day since
+	# task 0151.
+	expect(Run.final_night() == Calendar.year_days(),
+		"Run.final_night() is the year's last night", str(Run.final_night()))
 	expect(Tech.least_available() == int(GameData.REWARDS["tech_points"]) * Run.final_night(),
 		"and the least technology a run pays is a point for each of its nights",
 		str(Tech.least_available()))
@@ -2014,3 +2015,144 @@ func _task_0150_lookup() -> void:
 	expect(Rewards.night_step(state) == 7, "Rewards.night_step reads the night",
 		str(Rewards.night_step(state)))
 	_completed += 1
+
+
+## 0151 - the night is the calendar day. A version 4 run saved in each of
+## the four phases comes up to version 5 and fights the date's night next;
+## no date pays twice; `endless` keeps its meaning past the year; and every
+## golden loads and plays.
+func _task_0151_migration() -> void:
+	expect(State.VERSION == 5 and Save.migrations().has(4),
+		"state version 5, with a step up from 4", str(State.VERSION))
+	var names := {Phases.DAY: "DAY", Phases.PREPARATION: "PREPARATION",
+		Phases.NIGHT: "NIGHT", Phases.RESULT: "RESULT"}
+	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT, Phases.RESULT]:
+		var what: String = names[phase]
+		var old := _a_v4_run(1510 + int(phase), int(phase))
+		var was := {"day": int(old["day"]), "night": int(old["night"]),
+			"paid": (old["nights_paid"] as Array).duplicate()}
+		var run := _through_a_save(old, "v4_%s" % what)
+		expect(int(run.get("version", 0)) == 5 and int(run["phase"]) == int(phase)
+			and int(run["day"]) == int(was["day"]) and int(run["night"]) == int(was["night"])
+			and run["nights_paid"] == was["paid"],
+			"a v4 run saved in %s loads as v5 with its day, night and paid list" % what,
+			"v%d, %s, day %d, night %d, paid %s" % [int(run.get("version", 0)),
+				Phases.name_of(int(run["phase"])), int(run["day"]), int(run["night"]),
+				str(run["nights_paid"])])
+
+		# **To its next night**, by the road and the bed, never a day played.
+		if int(run["phase"]) == Phases.NIGHT:
+			# A night in progress keeps its number until it ends.
+			expect(int(run["night"]) == 4,
+				"the night in progress is still the v4 night 4", str(run["night"]))
+			_win_at_dawn(run)
+		if int(run["phase"]) == Phases.RESULT:
+			(run["intent"] as Dictionary)["confirm_result"] = true
+			Sim.advance(run, 2)
+		if int(run["phase"]) == Phases.DAY:
+			(run["intent"] as Dictionary)["sleep"] = true
+			Sim.advance(run, 1)
+		NightRoad.through_build(run)
+		var date := Calendar.date(run)
+		expect(int(run["phase"]) == Phases.NIGHT and int(run["night"]) == date,
+			"from %s the next night is the date's, %d - not v4's night 4" % [what, date],
+			"%s, night %d on day %d" % [Phases.name_of(int(run["phase"])),
+				int(run["night"]), date])
+		_win_at_dawn(run)
+		var paid: Array = run["nights_paid"]
+		var once: Dictionary = {}
+		for night in paid:
+			once[int(night)] = true
+		expect(once.size() == paid.size() and paid.back() == date,
+			"and winning it pays date %d, with no date paid twice" % date, str(paid))
+
+	# **Endless means past the year now.** A v4 run that was endless and is
+	# already past Winter 14 stays so; one that was endless before it goes
+	# back to the year; and a run past day 56 that never beat it is not over.
+	var long_gone := _a_v4_run(1520, Phases.DAY)
+	long_gone["day"] = Calendar.year_days() + 4
+	long_gone["endless"] = true
+	var kept := _through_a_save(long_gone, "v4_endless")
+	expect(Run.is_endless(kept) and not Run.is_over(kept),
+		"an endless v4 run past day 56 stays endless, and is not over")
+	var early := _a_v4_run(1521, Phases.DAY)
+	early["endless"] = true
+	expect(not Run.is_endless(_through_a_save(early, "v4_early_endless")),
+		"one that went endless after the MVP's ten goes back to the year")
+	var not_endless := _a_v4_run(1522, Phases.DAY)
+	not_endless["day"] = Calendar.year_days() + 4
+	expect(not Run.is_over(_through_a_save(not_endless, "v4_past_the_year")),
+		"and a v4 run past day 56 that is not endless is not over either")
+
+	# **Every golden loads and plays**: v1, v4 and v5.
+	var versions: Dictionary = {}
+	for name in DirAccess.get_files_at("res://tools/goldens"):
+		if not String(name).ends_with(".sav"):
+			continue
+		var loaded := Save.read_run_at("res://tools/goldens/" + String(name))
+		expect(not loaded.is_empty() and int(loaded.get("version", 0)) == State.VERSION,
+			"%s loads as version %d" % [name, State.VERSION], String(Save.trouble()))
+		if loaded.is_empty():
+			continue
+		versions[String(name).get_slice("-", 1).get_basename()] = true
+		var at := int(loaded["tick"])
+		Sim.advance(loaded, 300)
+		expect(int(loaded["tick"]) == at + 300
+			and Phases.night_ahead(loaded) == Calendar.date(loaded),
+			"%s plays on, its next night the date's" % name,
+			"night ahead %d, date %d" % [Phases.night_ahead(loaded), Calendar.date(loaded)])
+	expect(versions.has("v1") and versions.has("v4") and versions.has("v5"),
+		"there are goldens of v1, v4 and v5", str(versions.keys()))
+	_completed += 1
+
+
+## A run as a version 4 build left it, in `phase`: day 6, three nights won
+## and paid - so v4's next night was 4, two having been lost - and, in NIGHT
+## or RESULT, v4's night 4 under way or just lost.
+func _a_v4_run(seed_value: int, phase: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["nights_won"] = 3
+	(state["nights_paid"] as Array).assign([1, 2, 3])
+	Resources.gain(state, {GameData.WOOD: 300, GameData.STONE: 300,
+		GameData.IRON: 300, GameData.FOOD: 100})
+	if phase == Phases.DAY:
+		state["day"] = 6
+	elif phase == Phases.PREPARATION:
+		state["day"] = 6
+		NightRoad.into_build(state)
+	else:
+		# Night 4 begun the way v4 numbered it - on a day 4 - and the day then
+		# put where v4 had it, two lost nights on.
+		state["day"] = 4
+		NightRoad.to_night(state)
+		state["day"] = 6
+		if phase == Phases.RESULT:
+			state["house_hp"] = 0
+			Rewards.settle(state, false)
+			Phases.enter_result(state, false)
+	state["version"] = 4
+	return state
+
+
+## Write a state with the real writer and read it back with the real reader:
+## the migrations and the reconcile a player's save goes through.
+func _through_a_save(state: Dictionary, name: String) -> Dictionary:
+	var path := "user://%s.sav" % name
+	Save.write_run_at(path, state)
+	var back := Save.read_run_at(path)
+	DirAccess.remove_absolute(path)
+	DirAccess.remove_absolute(path + ".bak")
+	return back
+
+
+## Bring dawn close and let the night end there: a night won with the house
+## standing, the way the rules pay one.
+func _win_at_dawn(state: Dictionary) -> void:
+	if int(state["phase"]) != Phases.NIGHT:
+		return
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	state["house_hp"] = Phases.house_full(state)
+	for _t in 60:
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(state, 1)
