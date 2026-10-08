@@ -218,6 +218,16 @@ static func under_cursor(state: Dictionary, cell: Vector2i) -> String:
 		int(on.get("hp", full)), full, Building.level_at(state, anchor)])
 
 
+## **What mending this costs** (task 0134), for the cursor's tooltip: the
+## whole repair at today's price (`Repair.cost_at`, the house at its own
+## percent) and how many of its missing hit points the ledger covers now
+## (`Repair.max_affordable`). Read-only, like `under_cursor`.
+static func repair_line(state: Dictionary, cell: Vector2i) -> String:
+	var missing := Repair.damage_at(state, cell)
+	return I18n.f(&"CURSOR_REPAIR", [_amounts(Repair.cost_at(state, cell, missing)),
+		Repair.max_affordable(state, cell), missing])
+
+
 static func crop(id: StringName) -> String:
 	var entry: Variant = GameData.CROPS.get(id, null)
 	if entry == null:

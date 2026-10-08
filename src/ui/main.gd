@@ -374,6 +374,7 @@ func _drive_cursor(delta: float) -> void:
 	var cell := cursor.cell()
 	(_driver.state["intent"] as Dictionary)["build_cell"] = [cell.x, cell.y]
 	cursor.set_look(_cursor_look(cell))
+	var mending := cursor.look() == &"repair"
 	var said := Describe.under_cursor(_driver.state, cell)
 	# **And why not, when the cursor says blocked** (task 0133): the night's
 	# palette is the hotbar, which has no reason line of its own.
@@ -382,19 +383,28 @@ func _drive_cursor(delta: float) -> void:
 		var refused := Names.refusal(Building.why_not(_driver.state, id, cell))
 		if not refused.is_empty():
 			said = refused if said.is_empty() else said + "\n" + refused
+	# **What mending it costs** (task 0134): the whole of it, and how much
+	# the ledger covers tonight.
+	if mending:
+		said += "\n" + Describe.repair_line(_driver.state,
+			GuardianCursor.mend_target(_driver.state, cell))
 	_tooltip.show_world(said,
 		_world.cell_to_screen(cell) + Vector2(0.0, float(GameData.TILE_SIZE) * 0.5))
 
 
 ## What confirming would do at the cursor: place, refused, or nothing to do.
-## **Over something of the player's** (task 0132) it says what the upgrade and
-## remove buttons would do there instead: up a level if it can go, back to the
-## ledger if not. Repair and aim are 0134-0135's to switch on.
+## **Something to mend comes first** (task 0134), with or without anything
+## in hand: a confirm on it mends it. **Over something of the player's**
+## (task 0132) it says what the upgrade and remove buttons would do there
+## instead: up a level if it can go, back to the ledger if not. Aim is
+## 0135's to switch on.
 func _cursor_look(cell: Vector2i) -> StringName:
 	var state := _driver.state
+	var on := Farm.occupant(state, cell)
+	if GuardianCursor.mend_target(state, cell).x >= 0:
+		return &"repair"
 	if not Building.is_active(state):
 		return &"neutral"
-	var on := Farm.occupant(state, cell)
 	if not on.is_empty() and Building.is_placeable(StringName(on["id"])):
 		if Building.can_upgrade(state, cell):
 			return &"upgrade"
@@ -533,6 +543,11 @@ func _input(event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# **The cursor's confirm mends** (task 0134) when build mode is not up to
+	# take it: a click or A on whatever the cursor reads as repair.
+	if _world.cursor().confirm_repair(_driver.state, event):
+		get_viewport().set_input_as_handled()
+		return
 	if not event.is_action_pressed(&"cancel") or not escape_is_free():
 		return
 	_router.goto(_router.PAUSE)

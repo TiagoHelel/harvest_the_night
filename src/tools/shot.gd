@@ -79,6 +79,7 @@ const SCENARIOS: Array = [
 	["react", "a crop came ready nearby", ""],
 	["refused", "build mode, over something built", ""],
 	["build_day", "build mode by day: the buildings", ""],
+	["repair", "the cursor over a hurt tower at night", ""],
 	["house_interior", "the furnished farmhouse", ""],
 	["farm_extension", "planting on the new southern land", ""],
 	["larger_stations", "the larger farm buildings", ""],
@@ -631,6 +632,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"farm_extension": _set_farm_extension(state)
 		"larger_stations": _set_larger_stations(state)
 		"passed_out": _set_passed_out(state)
+		"repair": _set_repair(state)
 		"options_controls_pad": _set_options_controls_pad(state)
 
 	if int(state["phase"]) == Phases.DAY:
@@ -798,6 +800,10 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 			# At night the guardian's cursor is what build mode follows.
 			view.cursor().place_at(taken)
 			mode.call("_follow_cursor")
+		"repair":
+			var repair_view: Node = main.get_node_or_null("%WorldView")
+			if repair_view != null:
+				repair_view.cursor().place_at(_repair_at)
 		"build_day":
 			var day_mode: Node = main.get_node_or_null("%BuildMode")
 			var day_view: Node = main.get_node_or_null("%WorldView")
@@ -996,6 +1002,23 @@ func _set_noon(state: Dictionary) -> void:
 	# task 0126 gave the day an hour this was half way, and half way is 16:00.
 	Sim.advance(state, maxi(Phases.tick_at_minute(WorldView.NOON_MINUTE)
 		- int(state["tick"]), 1))
+
+
+## The guardian's cursor over a hurt tower at night, task 0134: the repair
+## look and the tooltip that says what mending it costs.
+func _set_repair(state: Dictionary) -> void:
+	_a_defended_farm(state, true)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Sim.advance(state, 1)
+	var towers: Array = Farm.cells_with(state, &"gun_tower")
+	_repair_at = towers[0] if not towers.is_empty() else Farm.house_centre(state)
+	Farm.damage(state, _repair_at, 25)
+	_look_at(_repair_at)
+
+
+## Where `repair` puts the cursor, for `_just_before_the_shutter`.
+var _repair_at := Vector2i(-1, -1)
 
 
 ## Still out on the field at 02:00, task 0129: he passes out where he

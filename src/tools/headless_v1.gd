@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 14
+const GROUPS := 15
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -83,6 +83,7 @@ func _run() -> void:
 	_task_0129_asleep()
 	_task_0131_guardian()
 	_task_0132_night_build()
+	_task_0134_cursor_repair()
 
 
 func _finish() -> void:
@@ -1395,3 +1396,72 @@ func _clear_for(state: Dictionary, id: StringName) -> Vector2i:
 			if clear:
 				return cell
 	return Vector2i(-1, -1)
+
+
+## 0134 - repairs at night by the cursor, and the farmer's verb off defences.
+func _task_0134_cursor_repair() -> void:
+	var plenty := {GameData.WOOD: 900, GameData.STONE: 900, GameData.IRON: 900,
+		GameData.GUNPOWDER: 900, GameData.FOOD: 900}
+	# **A damaged gun tower, mended through `repair_cell` at night, costs
+	# exactly `Repair.cost_at`.**
+	var night := State.create(1340)
+	Resources.gain(night, plenty)
+	NightRoad.into_build(night)
+	var tower := _clear_for(night, &"gun_tower")
+	expect(Building.place(night, &"gun_tower", tower), "a gun tower goes down")
+	NightRoad.through_build(night)
+	NightRoad.park(night)
+	Farm.damage(night, tower, 30)
+	var hurt := int(Farm.occupant(night, tower)["hp"])
+	var will := Repair.max_affordable(night, tower)
+	var bill := Repair.cost_at(night, tower, will)
+	var held: Dictionary = (night["held"] as Dictionary).duplicate()
+	(night["intent"] as Dictionary)["repair_cell"] = [tower.x, tower.y]
+	Sim.advance(night, 1)
+	expect(will == 30 and int(Farm.occupant(night, tower)["hp"]) == hurt + will,
+		"repair_cell mends the tower all the way", "%d + %d" % [hurt, will])
+	var charged := {}
+	for id in GameData.sorted_names(held.keys()):
+		var spent := int(held[id]) - Resources.amount(night, id)
+		if spent != 0:
+			charged[id] = spent
+	var billed := {}
+	for id in GameData.sorted_names(bill.keys()):
+		if int(bill[id]) != 0:
+			billed[id] = int(bill[id])
+	expect(charged == billed, "and costs exactly Repair.cost_at",
+		"%s against %s" % [charged, billed])
+
+	# **Refused, changing nothing, when the ledger cannot pay.**
+	Farm.damage(night, tower, 30)
+	for id in GameData.sorted_names((night["held"] as Dictionary).keys()):
+		(night["held"] as Dictionary)[id] = 0
+	var before := State.hash_of(night)
+	var hp := int(Farm.occupant(night, tower)["hp"])
+	var slate: Dictionary = (Repair.banked(night) as Dictionary).duplicate()
+	(night["intent"] as Dictionary)["repair_cell"] = [tower.x, tower.y]
+	Building.tick(night)
+	expect(int(Farm.occupant(night, tower)["hp"]) == hp and Repair.banked(night) == slate
+		and not Repair.can_mend(night, tower),
+		"broke, it is refused and nothing changes")
+	expect(before != 0, "the state was read")
+
+	# **By day a damaged wall offers the farmer nothing; the house still does.**
+	var day := State.create(1341)
+	Resources.gain(day, plenty)
+	var wall := _clear_for(day, &"wall")
+	SuiteKit.built_last_night(day, func() -> bool:
+		return Building.place(day, &"wall", wall))
+	Farm.damage(day, wall, 50)
+	expect(Repair.can_mend(day, wall) and Interact.verb_at(day, wall) == &"",
+		"a damaged wall by day offers no verb - it waits for the night",
+		str(Interact.verb_at(day, wall)))
+	day["house_hp"] = Phases.house_full(day) - 20
+	var house := Farm.house_centre(day)
+	expect(Interact.verb_at(day, house) == &"repair",
+		"the house by day still does", str(Interact.verb_at(day, house)))
+	var bench := Building.anchor_of(day, Farm.cells_with(day, &"workshop")[0])
+	Farm.damage(day, bench, 20)
+	expect(Interact.verb_at(day, bench) == &"repair",
+		"and so does a hurt workshop", str(Interact.verb_at(day, bench)))
+	_completed += 1

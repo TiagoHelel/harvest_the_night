@@ -1,7 +1,7 @@
 # 0134 - Repairing by cursor
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0131, 0113, 0133
 - **Likely files:** src/core/interact.gd, src/core/building.gd, src/core/repair.gd, src/ui/guardian_cursor.gd, src/ui/night_hud.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-130 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
+131 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -174,6 +174,7 @@ is the sort of thing this list exists to say out loud.
 | 0131 | The guardian's cursor | 2026-10-08 |
 | 0132 | Defences go down only at night | 2026-10-08 |
 | 0133 | The hotbar of defences | 2026-10-08 |
+| 0134 | Repairing by cursor | 2026-10-08 |
 
 ## Every time the game changed underneath itself
 

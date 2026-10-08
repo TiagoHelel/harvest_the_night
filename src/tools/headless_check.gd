@@ -9651,8 +9651,10 @@ func _task_0053_repair() -> void:
 	expect(Interact.verb_at(night, spot) == &"",
 		"a whole wall offers nothing", str(Interact.verb_at(night, spot)))
 	Farm.damage(night, spot, 50)
-	expect(Interact.verb_at(night, spot) == &"repair",
-		"a chewed one offers to be mended",
+	# **A chewed one is the cursor's to mend** (task 0134): it offers the
+	# farmer nothing, and `Repair` says the night can put it right.
+	expect(Interact.verb_at(night, spot) == &"" and Repair.can_mend(night, spot),
+		"a chewed one offers the farmer nothing and waits for the cursor",
 		str(Interact.verb_at(night, spot)))
 
 	# **A destroyed one cannot be repaired, only rebuilt.** The requirement.
@@ -9729,12 +9731,14 @@ func _task_0053_repair() -> void:
 	# always worked - one press fells a tree - and repairing is not a special
 	# case. The first version of this test released the key and measured no
 	# difference at all, which is the rule working rather than failing.
-	var mend := _mend_a_wall(3503, 400, false)
-	var quit_early := _mend_a_wall(3503, 400, true)
+	# **On the workshop since task 0134**: the farmer's verb mends the house,
+	# the production buildings and the stations, by day.
+	var mend := _mend_a_building(3503, 400, false)
+	var quit_early := _mend_a_building(3503, 400, true)
 	print("  left to it for %d ticks it put %d hit points back; walking away "
 		% [mend["ticks"], mend["mended"]] + "after %d put back %d"
 		% [quit_early["ticks"], quit_early["mended"]])
-	expect(mend["mended"] > 0, "it mends the wall", str(mend))
+	expect(mend["mended"] > 0, "it mends the workshop", str(mend))
 	expect(mend["mended"] <= mend["ticks"] / GameData.REPAIR_TICKS_PER_HP,
 		"no faster than the lever allows - it is work, not a button",
 		"%d in %d ticks" % [mend["mended"], mend["ticks"]])
@@ -9749,12 +9753,12 @@ func _task_0053_repair() -> void:
 		+ "the slate", "%d hundredths for %d hp"
 			% [mend["spent"], mend["mended"]])
 	print("    which came to %d hundredths of %s for %d hit points"
-		% [mend["spent"], _mended_with(&"wall"), mend["mended"]])
+		% [mend["spent"], _mended_with(&"workshop"), mend["mended"]])
 
 	# **Out of reach is out of the question.**
-	var far := _mend_a_wall(3504, 400, false, true)
+	var far := _mend_a_building(3504, 400, false, true)
 	expect(far["mended"] == 0,
-		"standing across the farm from a broken wall mends nothing",
+		"standing across the farm from a broken workshop mends nothing",
 		str(far))
 
 	# **Repairing mid-wave measurably changes whether it holds.** The
@@ -9791,27 +9795,30 @@ func _task_0053_repair() -> void:
 	_completed += 1     # last line: an abandoned group never gets here
 
 
-## Put the player next to a damaged wall and set them mending.
+## Put the player next to the damaged workshop and set them mending.
 ##
 ## `walk_off` has them step away half way through, which is how a job is
 ## interrupted here; `stand_off` parks them across the farm from the start,
 ## which is the reach test.
-func _mend_a_wall(seed_value: int, ticks: int, walk_off: bool,
+func _mend_a_building(seed_value: int, ticks: int, walk_off: bool,
 		stand_off: bool = false) -> Dictionary:
-	# **By day since task 0129**: at night he is in bed and the night HUD
-	# mends through `repair_cell` (`_wall_under_attack`). The farmer's verb on
-	# a defence is a day verb until 0134 takes it away; it is still work.
+	# **The farm's own workshop, by day** (task 0134: the farmer's verb mends
+	# buildings, the house and stations; a defence is the cursor's at night).
 	var state := State.create(seed_value)
 	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
 		GameData.IRON: 400, GameData.GUNPOWDER: 400, GameData.FOOD: 400})
-	var spot := _room_for(state, Vector2i(1, 1))
-	SuiteKit.built_last_night(state, func() -> bool:
-		return Building.place(state, &"wall", spot))
-	Farm.damage(state, spot, 90)
+	var spot := Vector2i(-1, -1)
+	for found in Farm.cells_with(state, &"workshop"):
+		var cell: Vector2i = found
+		if spot.x < 0 and Farm.walkable(state, cell + Vector2i(0, 1)):
+			spot = cell
+	# Most of its 80: at three ticks a hit point, more mending than the half
+	# way the walk-off comes at, as the wall's 90 of 120 was.
+	Farm.damage(state, spot, 75)
 	var hurt := int(Farm.occupant(state, spot).get("hp", 0))
 
 	_stand_beside(state, spot if not stand_off else Farm.house_centre(state))
-	var paid_in := _mended_with(&"wall")
+	var paid_in := _mended_with(&"workshop")
 	var before_units := Resources.amount(state, paid_in)
 	var before_owed := int(Repair.banked(state).get(paid_in, 0))
 	var intent: Dictionary = state["intent"]
@@ -9825,9 +9832,9 @@ func _mend_a_wall(seed_value: int, ticks: int, walk_off: bool,
 	return {
 		"ticks": ticks if not walk_off else ticks / 2,
 		"mended": int(Farm.occupant(state, spot).get("hp", 0)) - hurt,
-		# **In hundredths, and counting the slate.** A wall is four
-		# hundredths of a stone a hit point, so what was paid and what is
-		# owed are the same question asked twice.
+		# **In hundredths, and counting the slate.** A hit point is a few
+		# hundredths of a stone, so what was paid and what is owed are the
+		# same question asked twice.
 		"spent": (before_units - Resources.amount(state, paid_in)) * 100
 			+ int(Repair.banked(state).get(paid_in, 0)) - before_owed,
 	}
@@ -14342,13 +14349,14 @@ func _task_0082_shots() -> void:
 	# because the pad's names are what has to fit there. Seventeen since task
 	# 0129: the farmer passed out at 02:00, the one place that pose is seen.
 	# Eighteen since task 0132: build mode by day, the buildings' palette.
-	expect(names.size() == 18,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out and the day's build mode",
+	# Nineteen since 0134: the repair cursor and its tooltip.
+	expect(names.size() == 19,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode and the repair cursor",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
-			"passed_out", "build_day", "options_controls_pad"]:
+			"passed_out", "build_day", "repair", "options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

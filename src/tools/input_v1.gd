@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 8
+const V1_CASES := 9
 
 
 func _process(delta: float) -> bool:
@@ -58,6 +58,7 @@ func _run() -> void:
 	await _case_0130_night_camera()
 	await _case_0131_cursor()
 	await _case_0133_hotbar()
+	await _case_0134_repair()
 	_finish()
 
 
@@ -407,16 +408,20 @@ func _case_0129_asleep() -> void:
 	expect(farmer != null and not farmer.is_drawn(), "nobody on the porch at night")
 	expect(world != null and world.zzz_showing(), "and a Zzz over the house")
 
-	# **REPAIR mends a damaged house.**
+	# **A damaged house is mended without him** - by the guardian's cursor
+	# since task 0134, where 0129 had a REPAIR button.
 	state["house_hp"] = Phases.house_full(state) - 30
 	Resources.gain(state, {GameData.FOOD: 200, GameData.WOOD: 200})
 	await frames(2)
 	var hurt := int(state["house_hp"])
-	await click_control("RepairButton")
+	# Holding D above panned the night camera off the house (0130).
+	world.look_at_cell(Farm.house_centre(state))
+	await frames(2)
+	await click_cell(Farm.house_centre(state))
 	await until(func() -> bool: return int(state["house_hp"]) > hurt,
 		"the house to be mended")
 	expect(int(state["house_hp"]) > hurt,
-		"clicking RepairButton mends a damaged house",
+		"clicking the damaged house mends it",
 		"%d to %d" % [hurt, int(state["house_hp"])])
 	await close_scene()
 	_completed += 1
@@ -746,5 +751,74 @@ func _case_0133_hotbar() -> void:
 		and price.text.contains("%d%s" % [missing[first], str(first).substr(0, 1)]),
 		"an unaffordable slot is greyed and shows its shortfall",
 		price.text if price != null else "")
+	await close_scene()
+	_completed += 1
+
+
+## 0134 - mending by pointing: the mouse and a pad confirm on a damaged wall
+## at night, and there is no REPAIR button any more.
+func _case_0134_repair() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"GO TO BED to start the night")
+	var house_view: HouseView = require_control("HouseView")
+	await until(func() -> bool: return not house_view.is_showing_bedtime(),
+		"the bed beat to end", 100000)
+	expect(locate_control("RepairButton") == null, "there is no RepairButton any more")
+	Resources.gain(state, {GameData.STONE: 400, GameData.WOOD: 400})
+	var spot := Vector2i(-1, -1)
+	var middle := world.screen_to_cell(Vector2(240.0, 120.0))
+	for radius in 6:
+		for candidate in Grid.within(middle, radius):
+			if spot.x < 0 and Building.why_not(state, &"wall", candidate).is_empty():
+				spot = candidate
+	expect(Building.place(state, &"wall", spot), "a wall goes down in the build step")
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT, "the night")
+	var cursor := world.cursor()
+
+	# **The mouse**: point at the hurt wall, click it.
+	Farm.damage(state, spot, 60)
+	var hurt := int(Farm.occupant(state, spot)["hp"])
+	var motion := InputEventMouseMotion.new()
+	motion.position = world.cell_to_screen(spot)
+	motion.global_position = motion.position
+	root.push_input(motion)
+	await frames(3)
+	expect(cursor.cell() == spot and cursor.look() == &"repair",
+		"over a hurt wall the cursor reads repair", String(cursor.look()))
+	var tooltip: Tooltip = require_control("Tooltip")
+	var line := Describe.repair_line(state, spot)
+	await until(func() -> bool: return tooltip.text_showing().contains(line),
+		"the tooltip's repair line", 100000)
+	expect(tooltip.text_showing().contains(line),
+		"and the tooltip says what mending it costs", tooltip.text_showing())
+	await click_cell(spot)
+	await until(func() -> bool: return int(Farm.occupant(state, spot)["hp"]) > hurt,
+		"the wall to be mended")
+	expect(int(Farm.occupant(state, spot)["hp"]) > hurt,
+		"clicking a hurt wall at night mends it",
+		"%d to %d" % [hurt, int(Farm.occupant(state, spot)["hp"])])
+
+	# **A pad**: A on the same wall, hurt again.
+	Farm.damage(state, spot, 60)
+	hurt = int(Farm.occupant(state, spot)["hp"])
+	await _pad_button(JOY_BUTTON_A, true)
+	await _pad_button(JOY_BUTTON_A, false)
+	await until(func() -> bool: return int(Farm.occupant(state, spot)["hp"]) > hurt,
+		"A to mend the wall")
+	expect(cursor.by_pad() and int(Farm.occupant(state, spot)["hp"]) > hurt,
+		"and a pad's A mends it too",
+		"%d to %d" % [hurt, int(Farm.occupant(state, spot)["hp"])])
 	await close_scene()
 	_completed += 1

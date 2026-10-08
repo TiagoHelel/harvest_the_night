@@ -31,7 +31,7 @@ extends Control
 
 ## Colours, matched to the reference sheet's night.
 
-## The three controls, bottom right, in the order `design.md` draws them.
+## The controls, bottom right: the flare and the speed (REPAIR left at 0134).
 const BUTTON_SIZE := Vector2(46, 16)
 
 var _state: Dictionary = {}
@@ -52,7 +52,6 @@ var _boss_back: ColorRect
 var _boss_fill: ColorRect
 var _boss_name: Label
 var _bar: Control
-var _repair: Button
 var _flare: Button
 var _speed: Button
 
@@ -131,7 +130,7 @@ func _ready() -> void:
 	_build_controls()
 
 
-## The three controls, in a frame that stops the mouse.
+## The controls, in a frame that stops the mouse.
 func _build_controls() -> void:
 	_bar = Control.new()
 	_bar.name = "NightBar"
@@ -140,9 +139,9 @@ func _build_controls() -> void:
 	_bar.size = Vector2(146, 18)
 	add_child(_bar)
 
-	_repair = _button("RepairButton", I18n.t(&"NHUD_REPAIR"),
-		Vector2(0, 1))
-	_repair.pressed.connect(_do_repair)
+	# **No REPAIR here since task 0134**: the guardian's cursor mends whatever
+	# it confirms on. The flare and the speed keep their places until 0139
+	# lays the bar out again.
 	_flare = _button("FlareButton", I18n.t(&"NHUD_FLARE"),
 		Vector2(50, 1))
 	_flare.pressed.connect(_do_flare)
@@ -277,16 +276,8 @@ func _refresh_boss() -> void:
 
 
 func _refresh_controls() -> void:
-	# **Repair**, lit while the house can actually be mended. The farmer is
-	# in bed at night (task 0129), so the button mends the house itself,
-	# through `intent.repair_cell`, until 0134's cursor mends anything.
-	var can_mend := Repair.can_mend(_state, Farm.house_centre(_state))
-	# **Disabled is enough.** The theme draws a disabled button in ink_soft
-	# with faint letters, so the grey the old `modulate` added was the same
-	# thing said twice.
-	_repair.disabled = not can_mend
-
-	# **The flare**, with its wait on it rather than a bare "no".
+	# **The flare**, with its wait on it rather than a bare "no". Disabled is
+	# enough: the theme draws a disabled button in ink_soft with faint letters.
 	var charge := Ability.charge_percent(_state)
 	_flare.disabled = not Ability.ready(_state)
 	_flare.text = I18n.t(&"NHUD_FLARE") if not _flare.disabled \
@@ -301,12 +292,6 @@ func _refresh_controls() -> void:
 ## **Every one of these writes an intent or asks the driver.** None of them
 ## changes the state itself, so the button, the key and the autoplayer of task
 ## 0067 all take the same road into the rules.
-func _do_repair() -> void:
-	if not _state.is_empty():
-		var house := Farm.house_centre(_state)
-		(_state["intent"] as Dictionary)["repair_cell"] = [house.x, house.y]
-
-
 func _do_flare() -> void:
 	if not _state.is_empty():
 		(_state["intent"] as Dictionary)["ability"] = true

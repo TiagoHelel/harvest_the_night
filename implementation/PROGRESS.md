@@ -13846,3 +13846,103 @@ to "20i 1": a label grows to its text, and at about 5 px a character 36 px was
 too narrow. It is now 40 px with tighter lines. The prices are legible in both
 languages, the bar ends at x 324 left of "[K] SKIP" / "[K] PULAR" and the
 buttons, and nothing overlaps the night HUD.
+
+## 0134 - Repairing by cursor - done 2026-10-08
+
+What changed: repairs at night are made by pointing.
+
+**The confirm:**
+- From the build step to the morning, confirming the guardian's cursor (a
+  click, or A on a pad - 0133's confirm) on anything `Repair.can_mend` allows
+  writes 0129's `repair_cell`. It does so whatever is in the hotbar.
+- Any part of a multi-cell building mends its anchor.
+- `Building.tick` spends the cell through `Repair.apply_all`, as far as the
+  ledger covers, at `Repair.cost_at`'s price (the house at its own percent),
+  up to 0113's real maximum.
+- One rule, `GuardianCursor.mend_target(state, cell)`, decides both the repair
+  look and the confirm. `BuildMode` takes the confirm while build mode is up,
+  and `Main._unhandled_input` takes it otherwise.
+- **Found by a failing test:** the confirm read the look the previous frame
+  had drawn, so a click that moved the cursor onto the house was judged
+  against wherever it had been. The cursor now takes a mouse press's cell in
+  `_input`, before anything handles the press, and the confirm works out the
+  target from that cell.
+
+**The cursor and its tooltip:**
+- The cursor shows its repair look (A004's flame brackets and hammer) over
+  anything mendable; something to mend comes first.
+- The tooltip adds `Describe.repair_line`: what a full repair costs and how
+  many of the missing hit points the ledger covers (`CURSOR_REPAIR`, "mend
+  all: %s - %d of %d HP paid for" / "consertar tudo: %s - %d de %d de vida
+  pagos"). Like `under_cursor`, it only reads.
+- The five `CURSOR_` rows (0131's four and this one) were moved into key order
+  in strings.csv; 0131 had put them after the `DEF_` rows.
+
+**The farmer's verb:** `Interact._offered` no longer offers `repair` on a
+`DEFENCES` id. It stays on the house, the production buildings and the
+stations; a damaged wall by day offers nothing and waits for the night. This
+was gated in `_offered`, as the prompt asked, and not added to `DAY_ONLY`.
+
+**The interim REPAIR button of 0129 is gone** from the night HUD, along with
+its `NHUD_REPAIR` row. The flare and the speed keep their places until 0139.
+
+**Tests:**
+- `_task_0053_repair`: a chewed wall "offers the farmer nothing and waits for
+  the cursor". Its work-time checks (it mends, no faster than the lever,
+  walking away stops it, every hit point paid for, out of reach mends
+  nothing) moved from a wall to the farm's own workshop by day, through
+  `_mend_a_building`. The workshop takes 75 of its 80 HP, so the walk-off
+  comes mid-job: at 3 ticks a hit point, 40 had finished first.
+- `_case_0053_repair` mends the workshop with the held key.
+- `_case_0056_night_hud` mends the house by clicking it ("there is no REPAIR
+  control any more").
+- `_case_0081_theme`'s size loop and 0056's on-screen loop drop the button.
+- `_case_0129_asleep` mends the house with the cursor, after putting the
+  camera back on it: holding D there had panned it away.
+- `art_showcase`'s repair fixture is a hurt workshop where it was a fence.
+- A new shot scenario, `repair`, puts the cursor over a hurt gun tower; there
+  are 19 scenarios.
+
+**SIM is unchanged**: the determinism scenario never repairs a defence by day.
+
+**The siege, measured** with a scratch probe (`siege_probe.gd`, deleted). Seed
+3505 has a wall column across the walkers' road; 6000 ticks is the cap, and
+"held" means the wall stood all 200 s.
+
+| Walkers | Alone | Old held key (1 HP per 3 ticks, about 10 HP/s) | Cursor, once a second |
+|---|---|---|---|
+| 1 | falls at 303 | falls at 849, 10 stone | held, 112 stone |
+| 5 | falls at 114 | falls at 114 (it cannot keep up) | held, 562 stone (about 2.8 a second) |
+
+With no hands there is no work time, so a wall mended once a second never
+falls while the stone lasts. A siege stops being a race of hands and becomes
+a race of money - one the player wins as long as the stockpile holds, at
+these prices. **A lever will be needed** in the balance pass: a cap on what
+one confirm puts back, or a per-cell cooldown. Not added here.
+
+Files: src/core/interact.gd, src/ui/{guardian_cursor,main,build_mode,describe,
+night_hud}.gd, assets/locale/strings.csv, src/tools/{headless_check,input_check,
+headless_v1,input_v1,art_showcase,shot}.gd, implementation/shots/0134/
+
+Verify: **59 passed, 0 failed in 539s** (OVER BUDGET 300, as before). Suite
+times: headless_check 86.7 s, headless_v1 3.0 s, input_check 90.6 s, input_v1
+14.6 s. Counts:
+- headless_check 16212 (+2: the new scenario and the cursor's check in 0053);
+- headless_v1 215 (+8). The gun tower mended through `repair_cell` at night
+  goes all the way back and costs exactly `Repair.cost_at`. Broke, it is
+  refused and nothing changes. By day a damaged wall offers no verb, while the
+  house and a hurt workshop do.
+- input_check 1056 (-6: the button's disabled/live asserts and its two loop
+  rows went with it);
+- input_v1 81 (+6). There is no RepairButton. Over a hurt wall the cursor reads
+  repair and the tooltip gives the repair line; a click mends it, and so does
+  a pad's A.
+
+`tools/i18n_check.py` passes, with 445 keys.
+**sim 2823820161 and data 2599455698 unchanged.**
+
+Shots 0134 `repair` and `repair-pt_BR` opened: the flame brackets and hammer
+are on the hurt tower, and the tooltip reads "GUN TOWER - 35/60 HP - level 1"
+over "mend all: 2 iron, 2 wood - 25 of 25 HP paid for" ("TORRE DE TIRO - 35/60
+de vida - nível 1" / "consertar tudo: 2 ferro, 2 madeira - 25 de 25 de vida
+pagos"). The night HUD has FLARE and the speed, and no REPAIR.

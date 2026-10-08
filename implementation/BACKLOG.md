@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **128 / 296 done**
+`##########..............`  **129 / 296 done**
 
-0 doing / 168 todo / 0 blocked across 18 phases.
+0 doing / 167 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-168 task(s) left, the ready ones first, then what they
+167 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -106,24 +106,6 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: `python tools/placeholders.py` no longer lists A009
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0134 - Repairing by cursor
-
-Ready to pick up.  Likely files: `src/core/interact.gd, src/core/building.gd, src/core/repair.gd, src/ui/guardian_cursor.gd, src/ui/night_hud.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Repairs at night are made by pointing, not by walking. A damaged defence or the house is mended by selecting it with the cursor, paid as today, and defences are mended no other way.
-
-- At night, confirming the cursor on a damaged structure or the house (an occupied cell, or nothing selected in the hotbar) writes 0129's `repair_cell` at the cursor; any part of a multi-cell structure mends its anchor (`Building.anchor_of`). Mending is `Repair.apply_all`: as far as the ledger covers, at today's price (`Repair.cost_at`, the house at `HOUSE_REPAIR_PERCENT`), up to 0113's real maximum
-- The cursor shows its repair state over anything `Repair.can_mend` allows, and the tooltip adds what a full repair costs and how much can be afforded (`Repair.max_affordable`)
-- Defences lose the farmer's repair verb: `Interact._offered` offers `repair` only for the house, production buildings and stations, by day. A damaged defence by day offers nothing and waits for the night. Gate it in `_offered`, not by adding `repair` to `Interact.DAY_ONLY`: every verb there needs a `Sfx.VERB_SOUNDS` entry (`_task_0084_day_sounds`) and there is no repair sound; if it must go there, map it to the nearest existing sound until 0281
-- There is no farmer, so there is no per-HP work time any more: write in the journal what that does to a siege (a scripted wall under attack, mended every second, against today's held key) and whether a lever will be needed
-- The interim REPAIR button of 0129 leaves the night HUD (0139 lays out what is there instead), and with it its string: delete the `NHUD_REPAIR` row, or `tools/i18n_check.py` fails on an unused key. Update what names `RepairButton`: `_case_0056_night_hud` (~3355, ~3407), `_case_0081_theme`'s size loop (~4403) and the RepairButton half of 0129's `_case_0129_asleep`, which now mends through the cursor
-- Rewrite `_task_0053_repair` and `_case_0053_repair` where they mend a defence with the farmer's verb by day; the house by day keeps the verb
-- A rule change: SIM moves if the determinism scenario repairs a defence by day - say which
-
-  - done when: `_task_0134_cursor_repair` in `headless_v1.gd`: a damaged gun tower mended through `repair_cell` at night costs exactly `Repair.cost_at`; it is refused, changing nothing, when the ledger cannot pay; a damaged wall by day offers the farmer no verb; the house by day still does
-  - done when: `_case_0134_repair` in `input_v1.gd`: confirming the cursor on a damaged wall at night mends it, with the mouse and with a synthetic pad press; no `RepairButton` exists any more and `python tools/i18n_check.py` passes
-  - done when: A capture of the repair cursor and its tooltip, opened
 
 ### 0135 - The flare goes where you aim it
 
@@ -280,7 +262,7 @@ Every night, won or lost, closes on a morning report, and confirming it starts t
 
 ### 0139 - The night HUD for the guardian
 
-Waits on 0134, 0135, 0136, 0137.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
+Waits on 0135, 0136, 0137.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
 
 One night HUD built for the guardian rather than for a farmer in the yard: the time to dawn, the house, the wave, START, speed, skip, the flare and the hotbar, all reachable by mouse and by pad.
 
@@ -3253,7 +3235,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (8/23)
+## 10 - Sleep is the night  (9/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3263,12 +3245,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md)
 - [x] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md)
 - [x] **0133** [The hotbar of defences](prompts/0133-hotbar.md)
-- [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md)
+- [x] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md)
 - [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md)
 - [ ] **0136** [The build step waits for START](prompts/0136-start-button.md)
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
-- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0134, 0135, 0136, 0137
+- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0135, 0136, 0137
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0138

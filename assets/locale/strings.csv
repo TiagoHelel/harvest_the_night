@@ -117,6 +117,11 @@ CTL_RESET_ALL,72,RESET ALL,TUDO PADRÃO
 CTL_RESET_HINT,0,LEFT OR RIGHT PUTS IT BACK,ESQUERDA OU DIREITA VOLTA AO PADRÃO
 CTL_UNBINDABLE,232,THAT KEY CANNOT BE BOUND,ESSA TECLA NÃO PODE SER USADA
 CTL_WAITING,104,PRESS A KEY,APERTE UMA TECLA
+CURSOR_ENEMY,0,%s - %d HP,%s - %d de vida
+CURSOR_GROUND,0,open ground,terreno livre
+CURSOR_HOUSE,0,FARMHOUSE,CASA
+CURSOR_REPAIR,0,"mend all: %s - %d of %d HP paid for","consertar tudo: %s - %d de %d de vida pagos"
+CURSOR_STRUCTURE,0,%s - %d/%d HP - level %d,%s - %d/%d de vida - nível %d
 DEF_AUTO_CROSSBOW,0,auto crossbow,besta automática
 DEF_BARRICADE,0,barricade,barricada
 DEF_FENCE,0,fence,cerca
@@ -125,10 +130,6 @@ DEF_GUN_TOWER,0,gun tower,torre de tiro
 DEF_MINE,0,mine,mina
 DEF_MORTAR,0,mortar,morteiro
 DEF_WALL,0,wall,muro
-CURSOR_ENEMY,0,%s - %d HP,%s - %d de vida
-CURSOR_GROUND,0,open ground,terreno livre
-CURSOR_HOUSE,0,FARMHOUSE,CASA
-CURSOR_STRUCTURE,0,%s - %d/%d HP - level %d,%s - %d/%d de vida - nível %d
 DESC_AFTER,0,after %s,depois de %s
 DESC_AMMO,0,loaded into towers,carregada nas torres
 DESC_AMOUNT,0,%d %s,%d %s
@@ -231,7 +232,6 @@ NHUD_HOUSE,120,HOUSE %d/%d,CASA %d/%d
 NHUD_INCOMING,0,WAVE %d INCOMING  %ds,ONDA %d CHEGANDO  %ds
 NHUD_LEFT,110,%d LEFT,FALTAM %d
 NHUD_NIGHT,110,NIGHT %d,NOITE %d
-NHUD_REPAIR,46,REPAIR,REPARAR
 NHUD_SPEED,40,%dx,%dx
 NHUD_WAVE,110,WAVE %d/%d,ONDA %d/%d
 OPT_BACK,0,BACK,VOLTAR

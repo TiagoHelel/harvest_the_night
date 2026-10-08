@@ -112,7 +112,12 @@ static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 		# in the ground. It stops offering the moment it is whole again or
 		# the larder is empty, so the highlight never promises a key that
 		# would do nothing - and crafting comes back by itself.
-		if Repair.can_mend(state, cell):
+		# **Not a defence's** (task 0134): the farmer mends the house, the
+		# production buildings and the stations. A damaged wall or tower offers
+		# nothing by day and waits for the night, where the guardian's cursor
+		# mends it through `repair_cell`.
+		if Repair.can_mend(state, cell) \
+				and not GameData.DEFENCES.has(StringName(on["id"])):
 			return &"repair"
 		# **Any station with a recipe offers to make it.** This was a table
 		# entry naming the workshop, which is why the press and the kitchen

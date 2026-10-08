@@ -3014,35 +3014,26 @@ func _case_0053_repair() -> void:
 	Resources.gain(state, {GameData.STONE: 200, GameData.WOOD: 200,
 		GameData.FOOD: 200})
 
-	# A wall the player can stand next to, and a night to mend it in.
+	# **The workshop, by day** (task 0134): the farmer's verb mends the house,
+	# the production buildings and the stations. A defence is the cursor's,
+	# at night (`_case_0134_repair`).
 	var spot := Vector2i(-1, -1)
 	var stand := Vector2i(-1, -1)
-	for y in range(2, Grid.HEIGHT - 2):
-		for x in range(20, Grid.WIDTH - 2):
-			var cell := Vector2i(x, y)
-			var beside := cell + Vector2i(-1, 0)
-			if Farm.buildable(state, cell) and Farm.walkable(state, beside):
-				spot = cell
-				stand = beside
-				break
-		if spot.x >= 0:
-			break
-	expect(spot.x >= 0, "there is somewhere to put a wall")
+	for found in Farm.cells_with(state, &"workshop"):
+		var cell: Vector2i = found
+		if spot.x < 0 and Farm.walkable(state, cell + Vector2i(-1, 0)):
+			spot = cell
+			stand = cell + Vector2i(-1, 0)
+	expect(spot.x >= 0, "there is a workshop to stand beside")
 	if spot.x < 0:
 		await close_scene()
 		_completed += 1
 		return
-
-	Farm.place(state, spot, {"id": &"wall",
-		"hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])})
-	# **By day since task 0129**: at night he is in bed and the night HUD's
-	# REPAIR mends (`_case_0056_night_hud`). The verb on a defence is a day
-	# verb until 0134 takes it away.
 	expect(int(state["phase"]) == Phases.DAY, "it is the day")
 
-	Farm.damage(state, spot, 60)
+	Farm.damage(state, spot, 40)
 	var hurt := int(Farm.occupant(state, spot).get("hp", 0))
-	expect(Repair.needs_repair(state, spot), "the wall wants mending")
+	expect(Repair.needs_repair(state, spot), "the workshop wants mending")
 
 	_stand_at(state, stand, Player.EAST)
 	expect(Player.target(state) == spot,
@@ -3051,10 +3042,10 @@ func _case_0053_repair() -> void:
 		"and the cell offers to be mended",
 		str(Interact.verb_at(state, spot)))
 
-	# A wall is mended with stone since task 0057 - its own material, at a
+	# A building is mended in its own material since task 0057, at a
 	# share of what building it cost.
 	var paid_in: StringName = GameData.sorted_names(
-		Building.cost_of(&"wall").keys())[0]
+		Building.cost_of(&"workshop").keys())[0]
 	var food_before := Resources.amount(state, paid_in)
 
 	# **The key that does everything else does this too.** No repair button,
@@ -3064,10 +3055,10 @@ func _case_0053_repair() -> void:
 
 	var mended := int(Farm.occupant(state, spot).get("hp", 0))
 	expect(mended > hurt,
-		"holding the interact key puts hit points back into the wall",
+		"holding the interact key puts hit points back into the workshop",
 		"%d against %d" % [mended, hurt])
-	# **What it cost, counting what is still on the slate.** A wall is four
-	# hundredths of a stone a hit point since task 0057, so a short mend is
+	# **What it cost, counting what is still on the slate.** A hit point is
+	# a few hundredths of a stone since task 0057, so a short mend is
 	# genuinely a debt rather than a payment, and asking the ledger alone
 	# would be asking the wrong question.
 	var owed := int(Repair.banked(state).get(paid_in, 0))
@@ -3091,7 +3082,7 @@ func _case_0053_repair() -> void:
 	expect(not Player.is_busy(state),
 		"stepping away gives up on the job")
 	expect(int(Farm.occupant(state, spot).get("hp", 0)) == at_release,
-		"and nothing more goes into the wall after that",
+		"and nothing more goes into the workshop after that",
 		str(Farm.occupant(state, spot).get("hp", 0)))
 
 	await close_scene()
@@ -3354,7 +3345,7 @@ func _case_0056_night_hud() -> void:
 
 	# **Readable at 480x270**: everything on it is inside the screen.
 	for named in ["NightNumber", "WaveCounter", "ZombiesLeft",
-			"HouseNumbers", "HouseBar", "NightBar", "RepairButton",
+			"HouseNumbers", "HouseBar", "NightBar",
 			"FlareButton", "SpeedButton"]:
 		var ctl: Control = locate_control(named) as Control
 		expect(ctl != null, "the HUD has a %s" % named)
@@ -3383,27 +3374,22 @@ func _case_0056_night_hud() -> void:
 		"and a house in danger is red", str(alarmed))
 	state["house_hp"] = GameData.HOUSE_HP
 
-	# **All three controls, pressed.** The done-when.
+	# **The controls, pressed.** The done-when.
 	#
-	# Repair first. **The house, since task 0129**: the farmer is in bed, so
-	# the control mends the farmhouse through `repair_cell` - it used to need
-	# him standing in front of a broken wall. Live while the house is hurt and
-	# the ledger can pay; click it and watch hit points go back.
-	var repair: Button = locate_control("RepairButton") as Button
-	await frames(2)
-	expect(repair.disabled, "with the house whole there is nothing to mend")
+	# Repair first, **with the guardian's cursor since task 0134**: there is no
+	# REPAIR control. The house, clicked while it is hurt and the ledger can
+	# pay, puts hit points back through `repair_cell`.
+	expect(locate_control("RepairButton") == null, "there is no REPAIR control any more")
 	state["house_hp"] = Phases.house_full(state) - 30
 	Resources.gain(state, {GameData.FOOD: 200, GameData.WOOD: 200})
 	await frames(2)
-	expect(not repair.disabled,
-		"with the house damaged, the repair control is live")
 	var hurt := int(state["house_hp"])
-	await click_control("RepairButton")
+	await click_cell(Farm.house_centre(state))
 	await until(func() -> bool:
 		return int(state["house_hp"]) > hurt,
 		"the house to be mended")
 	expect(int(state["house_hp"]) > hurt,
-		"clicking it puts hit points back", str(state["house_hp"]))
+		"clicking the hurt house puts hit points back", str(state["house_hp"]))
 
 	# The flare, and it reports its own wait afterwards.
 	var flare: Button = locate_control("FlareButton") as Button
@@ -4384,7 +4370,7 @@ func _case_0081_theme() -> void:
 	# built before the theme landed keeps Godot's thirty-one pixels for the
 	# rest of the run. Three night controls did exactly that until `Main`
 	# moved the dressing into `_enter_tree`.
-	for named in ["RepairButton", "FlareButton", "SpeedButton"]:
+	for named in ["FlareButton", "SpeedButton"]:
 		var control: Control = require_control(named)
 		if control == null:
 			continue

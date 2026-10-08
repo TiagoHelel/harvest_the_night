@@ -89,6 +89,35 @@ func look() -> StringName:
 	return _look
 
 
+## **What a confirm on this cell mends** (task 0134): the anchor of whatever
+## stands there - a multi-cell building mends from any part of it - when
+## `Repair` says it can be mended now, or (-1, -1). The one rule both the
+## repair look and the confirm read.
+static func mend_target(state: Dictionary, cell_at: Vector2i) -> Vector2i:
+	if state.is_empty() or not Grid.in_bounds(cell_at) \
+			or Farm.occupant(state, cell_at).is_empty():
+		return Vector2i(-1, -1)
+	var anchor := Building.anchor_of(state, cell_at)
+	return anchor if Repair.can_mend(state, anchor) else Vector2i(-1, -1)
+
+
+## A confirm on something to mend: write `repair_cell` there and say so, or
+## say no and leave it to whoever else wants the press. `BuildMode` asks first
+## while it is up, `Main` otherwise. **The cell as it is at the press**, not
+## as the look last drew it: a click that moves the cursor onto the house is a
+## click on the house (`_input` puts the cell there first).
+func confirm_repair(state: Dictionary, event: InputEvent) -> bool:
+	if not _active:
+		return false
+	if not (event.is_action_pressed(&"place") or event.is_action_pressed(&"interact")):
+		return false
+	var at := mend_target(state, _cell)
+	if at.x < 0:
+		return false
+	(state["intent"] as Dictionary)["repair_cell"] = [at.x, at.y]
+	return true
+
+
 func set_look(value: StringName) -> void:
 	if value != _look and LOOKS.has(value):
 		_look = value
@@ -147,6 +176,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
 		_pointer = (event as InputEventMouse).position
 		_by_pad = false
+		# A press lands on the cell under it now, before anything that
+		# handles the press asks where the cursor is (task 0134).
+		if event is InputEventMouseButton and _active and _world != null:
+			_put(_world.screen_to_cell(_pointer))
 	elif event is InputEventKey:
 		_by_pad = false
 	elif event is InputEventJoypadButton:

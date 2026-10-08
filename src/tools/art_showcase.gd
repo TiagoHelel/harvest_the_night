@@ -1459,7 +1459,9 @@ func _work_fixture(verb: StringName, facing: int) -> Vector2i:
 		&"trade":
 			on[idx] = {"id": &"shop"}
 		&"repair":
-			on[idx] = {"id": &"fence", "hp": int(GameData.DEFENCES[&"fence"]["hp"]) - 10}
+			# A building since task 0134: the farmer's verb no longer mends a
+			# defence - the cursor does, at night.
+			on[idx] = {"id": &"workshop", "hp": int(GameData.BUILDINGS[&"workshop"]["hp"]) - 10}
 	_state["terrain"] = terrain
 	var here: Vector2i = at - Player.FACING_STEPS[facing]
 	_state["player"]["pos"] = [here.x * Player.SUBTILE + Player.SUBTILE / 2,
@@ -1620,7 +1622,7 @@ func _work_cycles() -> void:
 		if view.playing() == &"repair":
 			seen[body.texture.resource_path] = true
 	expect(seen.size() == 4, "Fast repeated repair visibly uses all four frames at 60FPS")
-	expect(int(Farm.occupant(_state, repair_at)["hp"]) == int(GameData.DEFENCES[&"fence"]["hp"]),
+	expect(int(Farm.occupant(_state, repair_at)["hp"]) == int(GameData.BUILDINGS[&"workshop"]["hp"]),
 		"Animated repeated repair still restores exactly the unchanged core HP")
 	# Repair remains available at night; other work does not persist through dusk.
 	_work_fixture(&"repair", Player.WEST)
