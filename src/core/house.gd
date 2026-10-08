@@ -112,6 +112,44 @@ static func leave(state: Dictionary) -> void:
 	state["intent"]["cancel"] = false
 
 
+## **The morning** (task 0138): up at 06:00 in his own bed, whether he went to
+## it or fell asleep in a field - inside, on the floor beside the bed, awake,
+## with the porch as the way out, so the day starts by walking out of the
+## door. `Phases.begin_day` is the one caller.
+static func wake(state: Dictionary) -> void:
+	var visit: Dictionary = state["house_visit"]
+	var door := porch(state)
+	visit["outside_pos"] = [door.x * Player.SUBTILE + Player.SUBTILE / 2,
+		door.y * Player.SUBTILE + Player.SUBTILE / 2] if door.x >= 0 \
+		else (state["player"]["pos"] as Array).duplicate()
+	visit["outside_facing"] = Player.SOUTH
+	visit["inside"] = true
+	visit["asleep"] = false
+	visit["passed_out"] = false
+	var cell := wake_cell()
+	state["player"]["pos"] = [cell.x * Player.SUBTILE + Player.SUBTILE / 2,
+		cell.y * Player.SUBTILE + Player.SUBTILE / 2]
+	state["player"]["facing"] = Player.SOUTH
+	state["player"]["action"] = {}
+	Fishing.give_up(state)
+	state["intent"]["interact"] = false
+	state["intent"]["cancel"] = false
+
+
+## Where he gets out of bed: the floor cell at its foot, or the first bedside
+## cell when a furniture revision has put something there.
+static func wake_cell() -> Vector2i:
+	var rect := bed()
+	var foot := Vector2i(rect.position.x + rect.size.x / 2, rect.end.y)
+	if bedside(foot):
+		return foot
+	for y in range(3, ROOM.y - 1):
+		for x in range(1, ROOM.x - 1):
+			if bedside(Vector2i(x, y)):
+				return Vector2i(x, y)
+	return SPAWN
+
+
 static func walkable(cell: Vector2i) -> bool:
 	if cell == DOOR:
 		return true

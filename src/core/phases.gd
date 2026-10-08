@@ -244,10 +244,10 @@ static func begin_day(state: Dictionary) -> bool:
 		push_error("begin_day from %s" % name_of(int(state["phase"])))
 		return false
 	state["day_tick"] = 0
-	# Up at 06:00 - wherever he is until 0138 wakes him in his bed - and a
-	# bedtime asked for after dark is not carried into the morning.
-	(state["house_visit"] as Dictionary)["asleep"] = false
-	(state["house_visit"] as Dictionary)["passed_out"] = false
+	# **Up at 06:00 in his own bed** (task 0138), wherever the night found
+	# him - and a bedtime asked for after dark is not carried into the
+	# morning.
+	House.wake(state)
 	(state["intent"] as Dictionary)["sleep"] = false
 	# **The yard is swept first.** The night's wreckage belongs to the
 	# night, and a farm that never cleared would silt up over ten of them.

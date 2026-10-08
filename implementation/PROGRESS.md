@@ -14239,3 +14239,152 @@ fights its night to its own end instead of ending it at tick 3000. **data
 
 Shot 0137 `wave` (and `-pt_BR`) opened: "DAWN 3:54" / "AMANHECER 3:54" on the
 night strip's right, clear of the other labels.
+
+## 0138 - Waking up: the morning report - done 2026-10-08
+
+What changed: every night, won or lost, closes on a morning report.
+Confirming it starts the day with the farmer on his feet beside his own bed
+at 06:00.
+
+**Waking:**
+- `House.wake(state)` is new, and `Phases.begin_day` is its one caller. It
+  leaves him:
+  - inside, awake, with `passed_out` false;
+  - on the floor beside the bed, facing south. `House.wake_cell()` is the
+    bed's foot, (17,6), or else the first bedside cell, from the bed's real
+    footprint;
+  - with the porch's subtile centre as `outside_pos`;
+  - with his action and any line in the water dropped, and `interact` and
+    `cancel` cleared.
+- `day_tick` 0 is 06:00, as before.
+- **Clearing `interact` matters.** The SPACE that confirms the report would
+  otherwise be read beside the bed as "go to bed". `_case_0138_morning`
+  confirms with the key and checks that he stays up.
+- **No getting-up beat.** The owner changed this mid-task: "quando ele
+  acordar ele já vai estar de pé ao lado da cama, mais simples".
+  - I had built A001's `bed_wake` over the bed as the prompt asked, and it
+    came out again. Confirming brings the room up with him already standing
+    (the south idle), his to move at once.
+  - `bed_wake` left the placeholder registry; Codex retired its frames
+    (`deliveries/A001-farmer-bed/WAKE-SIMPLIFICATION.txt`).
+  - `HouseView` gains only `is_showing_room()`.
+
+**Tools and tests that walked him outside after a night**, now stepped out
+with `House.leave`:
+- `determinism.gd`: the second day, after `begin_day`.
+- `Autoplay._a_day`: out of the door first, every morning. Stations by day are
+  refused indoors (`WHY_ON_THE_HOUSE`).
+- `headless_check._play_a_whole_run`: after each confirm. Its generator on
+  nights 4 and 8 goes up by day, and without it "and the Giant went down"
+  failed.
+- `input_check._case_0027_the_loop`: after the confirm. The day HUD is the
+  farm's - hidden indoors since the farmhouse - so it now expects "waking in
+  the farmhouse" and steps out before waiting for the HUD. Its 10 s timeout
+  had also left a crash breadcrumb that made `_case_0091_title` fail
+  ("any key at all opens the menu"); fixing the one fixed both.
+- `capture_dawn.gd`: leaves once it is day, so the yard is what it
+  photographs.
+- `NightRoad` needed nothing, because `begin_preparation` already leaves the
+  house. The autoplayer keeps working: `_task_0067_autoplay` and the whole
+  run pass.
+
+**The morning report** (`result_screen.gd`), top to bottom:
+- A sunrise band: A057's `report_header`, 206x40, registered in
+  `PlaceholderArt.ART` as code-drawn. `_draw_sunrise` draws it in palette
+  colours only: stepped sky bands, a half sun left of the house, the
+  farmhouse, crop rows and the path.
+- `RES_MORNING`: "MORNING OF DAY 2" / "MANHÃ DO DIA 2".
+- The night line, as before: "NIGHT 1 SURVIVED", which `_case_0027` reads.
+- The killed and house rows, as before.
+- `RES_WALKED` (plural rows): "2 walked off at dawn" / "2 foram embora ao
+  amanhecer". Only when the payout's `walked` is above 0.
+- `RES_CAME_DOWN`: "1 structure came down" / "1 estrutura caiu". Only when
+  `structures_lost` is above 0.
+- PAID and LOST, as before. The purse is now named through `Names.of`: it
+  printed the bare ids, so the Portuguese report said "+70 money".
+- `RES_PASSED_OUT`: "you passed out at 02:00", from `DAY_END_MINUTE`, when
+  `House.passed_out`.
+- `RES_LEFTOVERS`: "left on the farm: nothing yet". Phase 13's bones and moon
+  stones fill it.
+- The button is `RES_GET_UP`, "GET UP" / "LEVANTAR". `RES_BACK_TO_FARM` left
+  strings.csv.
+- The ending and its play-on door are as they were: no band and no morning
+  heading. The report is rebuilt when the night, the day or the language
+  changes.
+
+**The payout** (`Rewards.settle`) gains two fields:
+- `walked`: the enemies still on the farm when the night ends. At dawn that is
+  the `dawn` event's number; it is 0 when everything was killed.
+- `structures_lost`: the rubble of defences and buildings. The morning sweeps
+  it, so what is there is tonight's.
+
+**Banking:**
+- `main._bank_if_a_night_ended` now keys on `day` (`_banked_day`).
+  `enter_result` turns the day over at every night's end, so a lost night is
+  saved too.
+- `Stats.fold` banks deltas, so a lost night's fold adds nothing and no night
+  is counted twice. `_case_0138_morning` holds the profile to +1 night over a
+  won night and a lost one.
+
+**The log's collapsed lines step aside while the report is up.** In
+Portuguese, "amanheceu - 2 foram embora" ran under the panel's left edge.
+Their clock keeps running, and the history (L) still opens over the report.
+
+**Shots:** `shot.gd` gains two scenarios, for 22 in all (`headless_check`'s
+count is updated):
+- `morning`: every line - a pass-out night ended at dawn, with a wall lost and
+  two left on the farm;
+- `woken`: beside the bed at 06:00.
+
+Shot 0138 `result`, `morning` and `woken` (and `-pt_BR`) are opened:
+- every line fits inside the panel in both languages, and the panel ends by
+  y 234;
+- the band reads as dawn over the farmhouse;
+- `woken` has him standing at the bed's foot.
+- The first pass caught three things, all fixed: a sky step 4 px past the
+  band's right edge, the log line under the panel, and "+70 money" in
+  Portuguese.
+
+**A057's Deliverables** are settled: 206x40, pivot (103,40), static, opaque,
+drawn 1:1 at the top of the panel (screen y 35-75, x 137-343 in the usual
+224 px panel). The same picture after a won night and a lost one, and not on
+the ending.
+
+Files:
+- src/core/{house,phases,rewards}.gd
+- src/ui/{result_screen,house_view,main,log_panel,placeholder_art}.gd
+- src/tools/{autoplay,determinism,capture_dawn,shot,headless_check,input_check,headless_v1,input_v1}.gd
+- assets/locale/strings.csv
+- implementation/backlog/packs/A057-morning-report.md
+- tools/determinism_sim_hash.txt
+- implementation/shots/0138/
+
+Verify: **PASS**, 59 passed in 577 s, OVER BUDGET as before. Suite times:
+headless_check 81.6 s, headless_v1 3.6 s, input_check 91.3 s, input_v1
+17.0 s. Counts:
+- headless_check 16230 (+5, the two new shot scenarios among them);
+- headless_v1 273 (+29):
+  - after a won night, a night ended at dawn, a lost night and a pass-out
+    night, confirming leaves him inside, awake, beside the bed at
+    `day_tick` 0 and 06:00, and the door lets him out onto the porch;
+  - the payout counts the wall that came down and who walked off;
+  - a report saved and loaded confirms into the same morning, hash for hash.
+- input_check 1058 (+1);
+- input_v1 115 (+22):
+  - the report's six lines appear and fit in both languages under a 206x40
+    sunrise;
+  - confirming brings up the room with him on his feet, and he walks off at
+    once;
+  - a lost night writes the run save with the day it is now, and the profile
+    counts one night;
+  - SPACE confirms without putting him back to bed.
+- One perf failure, day_tick at 124 µs against 86, was noise: the perf row
+  passed on its own (99 µs) and in the final run.
+
+**sim 40581503 -> 1222657941**:
+- `begin_day` wakes him beside his bed: inside, with the porch as his way out
+  and his line in the water given up.
+- The payout records `walked` and `structures_lost`.
+- The scenario steps out of the door for its second day.
+
+**data 898358060 unchanged.**

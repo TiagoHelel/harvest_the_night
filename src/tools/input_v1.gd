@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 11
+const V1_CASES := 12
 
 
 func _process(delta: float) -> bool:
@@ -61,6 +61,7 @@ func _run() -> void:
 	await _case_0134_repair()
 	await _case_0135_flare_aim()
 	await _case_0136_start()
+	await _case_0138_morning()
 	_finish()
 
 
@@ -915,3 +916,145 @@ func _case_0136_start() -> void:
 		expect(not start.is_visible_in_tree(), "and START goes with the build step")
 		await close_scene()
 	_completed += 1
+
+
+## 0138 - the morning report: its lines on screen in both languages,
+## confirming brings up the house with him getting out of bed, and a lost
+## night is saved with the day it is now.
+func _case_0138_morning() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var result: ResultScreen = require_control("ResultScreen")
+	var house_view: HouseView = require_control("HouseView")
+	if driver == null or result == null or house_view == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	var nights_before := int(Stats.lifetime(Save.read_profile())["nights"])
+
+	# **Every line the report has**: a night that began with a pass-out and
+	# ended at dawn, with a wall lost in it and two still on the farm.
+	Phases.pass_out(state)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	var doomed := SuiteKit.any_buildable(state)
+	Farm.place(state, doomed, {"id": &"wall", "hp": 30})
+	Farm.damage(state, doomed, 999)
+	var far: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	for _i in 2:
+		Entities.set_hp(state, Entities.spawn(state, &"walker", far), 9999)
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 10
+	await until(func() -> bool: return result.visible, "the morning report")
+	await frames(2)
+	var at := GameData.DAY_END_MINUTE
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		await frames(3)
+		var said := _report_lines(result)
+		for line in [I18n.f(&"RES_MORNING", [int(state["day"])]),
+				I18n.f(&"RES_NIGHT", [1, I18n.t(&"RES_SURVIVED")]),
+				I18n.plural(&"RES_WALKED", 2, [2]),
+				I18n.plural(&"RES_CAME_DOWN", 1, [1]),
+				I18n.f(&"RES_PASSED_OUT", [(at / 60) % 24, at % 60]),
+				I18n.t(&"RES_LEFTOVERS")]:
+			expect(said.has(line), "the report says '%s'" % line, str(said))
+		var outside := _outside_the_frame(result)
+		expect(outside.is_empty(), "and all of it fits inside its frame, on screen (%s)" % locale,
+			str(outside))
+	I18n.use("en")
+	var header: Control = locate_control("ReportHeader") as Control
+	expect(header != null and header.is_visible_in_tree()
+		and header.size == Vector2(206, 40), "under a 206x40 sunrise",
+		str(header.size) if header != null else "none")
+
+	# **Confirming brings up the house**, him already standing beside the
+	# bed - no getting-up beat (the owner's call) - and his to move at once.
+	await click_control("ContinueButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.DAY,
+		"the morning")
+	await frames(2)
+	expect(House.inside(state) and House.bedside(Player.cell(state)),
+		"confirming wakes him inside, beside the bed", str(Player.cell(state)))
+	expect(house_view.is_showing_room() and not house_view.is_showing_bedtime(),
+		"and the house view is up, him on his feet")
+	var stood := Player.position(state)
+	await hold_key(KEY_A, 10)
+	expect(Player.position(state) != stood, "and he walks off straight away",
+		"%s to %s" % [stood, Player.position(state)])
+
+	# **A lost night is saved** - since 0138 every night's end is, keyed on
+	# the day rather than the nights won.
+	Save.delete_run()
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	state["house_hp"] = 1
+	Entities.spawn(state, &"walker", House.porch(state))
+	await until(func() -> bool: return int(state["phase"]) == Phases.RESULT,
+		"the house to fall")
+	expect(not bool((state["last_result"] as Dictionary).get("survived", true)),
+		"the night is lost")
+	await until(func() -> bool: return Save.has_run(), "the lost night to be saved")
+	var saved := Save.read_run()
+	expect(int(saved.get("day", -1)) == int(state["day"])
+		and int(saved.get("phase", -1)) == Phases.RESULT,
+		"a lost night writes the run save, on the morning it is now",
+		"day %d against %d" % [int(saved.get("day", -1)), int(state["day"])])
+	expect(int(Stats.lifetime(Save.read_profile())["nights"]) == nights_before + 1,
+		"and the profile counts the one night won once, the lost one not at all",
+		"%d from %d" % [int(Stats.lifetime(Save.read_profile())["nights"]), nights_before])
+
+	# **Confirmed with the interact key** beside the bed, the same press is
+	# not taken for going back to it.
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return int(state["phase"]) == Phases.DAY,
+		"the key to confirm the report")
+	await frames(10)
+	expect(int(state["phase"]) == Phases.DAY and House.inside(state)
+		and not House.asleep(state),
+		"the interact key confirms the report and leaves him up, not back in bed",
+		Phases.name_of(int(state["phase"])))
+	Save.delete_run()
+	await close_scene()
+	_completed += 1
+
+
+## The text of every label showing under a node.
+func _report_lines(root: Control) -> Array:
+	var out: Array = []
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		for child in node.get_children():
+			stack.append(child)
+		var label := node as Label
+		if label != null and label.is_visible_in_tree() and not label.text.is_empty():
+			out.append(label.text)
+	return out
+
+
+## Every showing label, button and picture of the report that pokes out of
+## its frame or the 480x270 screen, as "name rect".
+func _outside_the_frame(result: Control) -> Array:
+	var frame: Control = locate_control("ResultFrame") as Control
+	var out: Array = []
+	if frame == null:
+		return ["no ResultFrame"]
+	var box := frame.get_global_rect()
+	if not Rect2(0, 0, 480, 270).encloses(box):
+		out.append("ResultFrame %s" % box)
+	var stack: Array = [result]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		for child in node.get_children():
+			stack.append(child)
+		var shown := node as Control
+		if shown == null or not shown.is_visible_in_tree() or shown == frame \
+				or not frame.is_ancestor_of(shown):
+			continue
+		if not (shown is Label or shown is Button or shown.name == "ReportHeader"):
+			continue
+		if not box.encloses(shown.get_global_rect()):
+			out.append("%s %s" % [shown.name, shown.get_global_rect()])
+	return out

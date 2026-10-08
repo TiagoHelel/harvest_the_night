@@ -118,7 +118,6 @@ const POSES := {
 	# about the feet, per frame) belong to the stand-in, so they go with it.
 	&"bed_in": {"pack": "A001", "frames": 4, "seconds": 0.2, "loop": false, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME},
 	&"bed_sleep": {"pack": "A001", "frames": 2, "seconds": 0.8, "loop": true, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME, "tint": Color(0.72, 0.78, 1.0)},
-	&"bed_wake": {"pack": "A001", "frames": 4, "seconds": 0.25, "loop": false, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME},
 	&"pass_out_south": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
 	&"pass_out_north": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_north", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
 	&"pass_out_west": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_west", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
@@ -133,6 +132,10 @@ const SCARECROW := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw
 ## A005's hotbar icon is the same box (task 0133).
 const CELL_CURSOR := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 const HOTBAR_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
+
+## A057's morning report header: a 206x40 band, the width of the report's
+## rows, pivot at its bottom centre, drawn at 1.0 (task 0138).
+const REPORT_HEADER := {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40), "draw_scale": 1.0}
 
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
@@ -168,6 +171,7 @@ const ART := {
 	&"icon_mine": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mine", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
 	&"icon_mortar": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mortar", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
 	&"icon_wall": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/wall", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 }
 
 

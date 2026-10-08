@@ -32,9 +32,11 @@ var _was_down: Dictionary = {}
 ## What survives a run. Read on boot, banked at the end of every night.
 var _profile: Dictionary = {}
 
-## How many nights had been won the last time the profile was written. The
-## night that changes it is the night that triggers a save.
-var _banked_nights := -1
+## The day the profile and the run were last written on. **Every night's
+## end turns it over** (task 0138) - `enter_result` moves the day on, won
+## or lost - so a lost night is saved as surely as a won one. Keyed on
+## `nights_won` until then, which a lost night never moves.
+var _banked_day := -1
 
 ## The one `Theme` every screen in the game wears. Built in `_enter_tree` and
 ## put on again in `_ready`; see both for why it is twice.
@@ -503,7 +505,7 @@ func resume_run(saved: Dictionary) -> void:
 	_stats.show_profile(_profile)
 	# Already banked up to here, so the night that has not finished yet is
 	# the next one to trigger a save rather than the first one counted twice.
-	_banked_nights = Phases.nights_won(_driver.state)
+	_banked_day = int(_driver.state["day"])
 
 
 ## What the pause menu asked for. **The screen says what it wants and this
@@ -532,7 +534,7 @@ func _pause_chose(which: StringName) -> void:
 			Save.delete_run()
 			_left_on_purpose()
 			begin_run(BOOT_SEED)
-			_banked_nights = -1
+			_banked_day = -1
 			if _router != null:
 				_router.goto(_router.RUN)
 		&"quit":
@@ -600,12 +602,13 @@ func escape_is_free() -> bool:
 ## A player who crashes on night nine should lose the night, not the run, and
 ## a run's statistics only exist on a state that a crash takes with it.
 ## `Stats.fold()` banks what it has already counted, so a night that has been
-## folded in is not counted again when `Run.record()` closes the run out.
+## folded in is not counted again when `Run.record()` closes the run out -
+## nor when the next night's end folds the same run again.
 func _bank_if_a_night_ended() -> void:
-	var won := Phases.nights_won(_driver.state)
-	if won == _banked_nights:
+	var day := int(_driver.state["day"])
+	if day == _banked_day:
 		return
-	_banked_nights = won
+	_banked_day = day
 	_profile = Stats.fold(_profile, _driver.state)
 	Save.write_profile(_profile)
 	Save.write_run(_driver.state)

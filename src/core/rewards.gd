@@ -45,6 +45,11 @@ static func settle(state: Dictionary, survived: bool) -> Dictionary:
 		"money_from": {} if not survived else _money_from(state),
 		"gained": {},
 		"lost": {},
+		# For the morning report (task 0138): whoever is still on the farm
+		# as the night ends - they walk off at dawn (`Enemies.withdraw`) -
+		# and what came down tonight.
+		"walked": Entities.count(state),
+		"structures_lost": _lost_tonight(state),
 	}
 
 	if survived:
@@ -71,6 +76,18 @@ static func settle(state: Dictionary, survived: bool) -> Dictionary:
 ## What the last night paid or cost. Empty before the first one ends.
 static func last(state: Dictionary) -> Dictionary:
 	return state.get("payout", {})
+
+
+## The structures that came down tonight: the rubble the morning will sweep,
+## counted the way `Run.lost_a_structure` counts. The yard is swept at every
+## dawn (`Phases.begin_day`), so what lies in it now is tonight's.
+static func _lost_tonight(state: Dictionary) -> int:
+	var out := 0
+	for cell in Farm.rubble_cells(state):
+		var id := Farm.rubble_at(state, cell)
+		if GameData.DEFENCES.has(id) or GameData.BUILDINGS.has(id):
+			out += 1
+	return out
 
 
 static func initial() -> Dictionary:

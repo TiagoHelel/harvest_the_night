@@ -193,7 +193,13 @@ func _push(event: Dictionary) -> void:
 
 
 func _fade(delta: float) -> void:
+	# **Out of the way of the morning report** (task 0138), which says what
+	# the night's last lines said: the panel sits in the middle of the screen
+	# and a long line ran under its left edge in Portuguese. They keep their
+	# time meanwhile, and the history (`log`) is still there on a key.
+	var reporting := int(_state["phase"]) == Phases.RESULT
 	for i in LINES:
+		(_labels[i] as Label).visible = not reporting
 		var left := float(_left[i])
 		if left <= 0.0:
 			(_labels[i] as Label).modulate.a = 0.0

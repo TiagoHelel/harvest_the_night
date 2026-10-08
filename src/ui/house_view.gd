@@ -233,6 +233,13 @@ func is_showing_bedtime() -> bool:
 	return _beat_left > 0.0
 
 
+## Whether the room is up on screen - for `input_v1`. **The morning has no
+## beat of its own** (task 0138, the owner's call): confirming the report
+## brings the room up with him already standing beside the bed.
+func is_showing_room() -> bool:
+	return _clip != null and _clip.visible
+
+
 ## Cut the bed beat short - what a still wants, as `WorldView.skip_transition`
 ## does for the light.
 func skip_bedtime() -> void:

@@ -95,6 +95,8 @@ func _run() -> void:
 		fought += SAMPLE_EVERY
 	rolling = _advance_sampling(state, 200, rolling)    # the payout on screen
 	Phases.begin_day(state)
+	# Up beside his bed (task 0138) and out of the door into the second day.
+	House.leave(state)
 
 	var spent: int = int(state["tick"])
 	rolling = _advance_sampling(state, SCENARIO_TICKS - spent, rolling)

@@ -1,7 +1,7 @@
 # 0138 - Waking up: the morning report
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0137
 - **Likely files:** src/core/phases.gd, src/core/house.gd, src/ui/result_screen.gd, src/ui/house_view.gd, src/ui/main.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/A057-morning-report.md
 

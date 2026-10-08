@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 18
+const GROUPS := 19
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -87,6 +87,7 @@ func _run() -> void:
 	_task_0135_aimed_flare()
 	_task_0136_start()
 	_task_0137_dawn()
+	_task_0138_morning()
 
 
 func _finish() -> void:
@@ -1675,3 +1676,108 @@ func _a_night_near_dawn(seed_value: int, ticks: int) -> Dictionary:
 	NightRoad.park(state)
 	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + ticks
 	return state
+
+
+## 0138 - waking up: every night, won or lost, ends with him getting out of
+## his own bed at 06:00 - and the morning report has the night's numbers.
+func _task_0138_morning() -> void:
+	# **A won night**, with a wall lost in it: cleared, it is won, and the
+	# payout knows what came down and that nobody was left to walk off.
+	var won := _a_night_near_dawn(1380, 600)
+	var doomed := SuiteKit.any_buildable(won)
+	Farm.place(won, doomed, {"id": &"wall", "hp": 30})
+	Farm.damage(won, doomed, 999)
+	(won["wave"] as Dictionary)["done"] = true
+	Sim.advance(won, 1)
+	var paid := Rewards.last(won)
+	expect(int(won["phase"]) == Phases.RESULT
+		and bool((won["last_result"] as Dictionary).get("survived", false)),
+		"a cleared night is won", Phases.name_of(int(won["phase"])))
+	expect(int(paid.get("structures_lost", -1)) == 1 and int(paid.get("walked", -1)) == 0,
+		"and the payout counts the wall that came down, with nobody left to walk off",
+		str(paid))
+	_wakes_in_bed(won, "after a won night")
+
+	# **Dawn**: whoever is still on the farm is in the payout.
+	var held := _a_night_near_dawn(1381, 20)
+	var far: Vector2i = Enemies.spawn_cells(held, 0)[0]
+	for _i in 2:
+		Entities.set_hp(held, Entities.spawn(held, &"walker", far), 9999)
+	var guard := 0
+	while int(held["phase"]) == Phases.NIGHT and guard < 100:
+		Sim.advance(held, 1)
+		guard += 1
+	expect(int(Rewards.last(held).get("walked", -1)) == 2,
+		"a night that ends at dawn says two walked off", str(Rewards.last(held)))
+	_wakes_in_bed(held, "after dawn")
+
+	# **A lost night** wakes him in the same bed.
+	var lost := _a_night_near_dawn(1382, 600)
+	lost["house_hp"] = 1
+	Entities.spawn(lost, &"walker", House.porch(lost))
+	guard = 0
+	while int(lost["phase"]) == Phases.NIGHT and guard < 600:
+		Sim.advance(lost, 1)
+		guard += 1
+	expect(int(lost["phase"]) == Phases.RESULT
+		and not bool((lost["last_result"] as Dictionary)["survived"]),
+		"a house at 0 is a lost night", str(lost["last_result"]))
+	expect(int(Rewards.last(lost).get("walked", -1)) == Entities.count(lost),
+		"and the payout counts who was still there", str(Rewards.last(lost)))
+	_wakes_in_bed(lost, "after a lost night")
+
+	# **Passed out in a field at 02:00**: the report can say so, and he still
+	# wakes in his bed.
+	var fell := State.create(1383)
+	Phases.pass_out(fell)
+	NightRoad.through_build(fell)
+	NightRoad.park(fell)
+	(fell["wave"] as Dictionary)["done"] = true
+	Sim.advance(fell, 1)
+	expect(int(fell["phase"]) == Phases.RESULT and House.passed_out(fell),
+		"a night that began with a pass-out still says so on the report",
+		Phases.name_of(int(fell["phase"])))
+	_wakes_in_bed(fell, "after passing out")
+
+	# **Saved and loaded on the report**, it confirms into the same morning.
+	var kept := _a_night_near_dawn(1384, 600)
+	(kept["wave"] as Dictionary)["done"] = true
+	Sim.advance(kept, 1)
+	var path := "user://task_0138_morning.sav"
+	expect(Save.write_run_at(path, kept), "the morning report saves")
+	var loaded := Save.read_run_at(path)
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	expect(not loaded.is_empty() and int(loaded["phase"]) == Phases.RESULT,
+		"and loads on the report", str(loaded.get("phase", "nothing")))
+	if not loaded.is_empty():
+		var twin := State.copy(loaded)
+		for one in [kept, twin]:
+			((one as Dictionary)["intent"] as Dictionary)["confirm_result"] = true
+			Sim.tick(one)
+		expect(State.hash_of(twin) == State.hash_of(kept),
+			"into the same morning as the run that never left",
+			"%d against %d" % [State.hash_of(twin), State.hash_of(kept)])
+		_wakes_in_bed(loaded, "after a load")
+	_completed += 1
+
+
+## Confirm the morning report and check where it leaves him: inside, awake,
+## on the floor beside the bed at 06:00 - and out of the door onto the porch.
+func _wakes_in_bed(state: Dictionary, after: String) -> void:
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.tick(state)
+	var cell := Player.cell(state)
+	expect(int(state["phase"]) == Phases.DAY and House.inside(state)
+		and not House.asleep(state) and not House.passed_out(state),
+		"confirming the report %s has him inside and awake" % after,
+		"%s, inside %s, asleep %s" % [Phases.name_of(int(state["phase"])),
+			House.inside(state), House.asleep(state)])
+	expect(House.bedside(cell) and cell == House.wake_cell(),
+		"on the floor beside his bed %s" % after, str(cell))
+	expect(int(state["day_tick"]) == 0
+		and Phases.clock_minute(state) == GameData.DAY_START_MINUTE,
+		"at day_tick 0, 06:00, %s" % after,
+		"tick %d, minute %d" % [int(state["day_tick"]), Phases.clock_minute(state)])
+	House.leave(state)
+	expect(not House.inside(state) and Player.cell(state) == House.porch(state),
+		"and the door lets him out onto the porch %s" % after, str(Player.cell(state)))

@@ -1376,6 +1376,10 @@ func _case_0027_the_loop() -> void:
 		"the farm to come back")
 	expect(int(state["phase"]) == Phases.DAY, "and it goes back to the farm")
 	expect(int(state["day"]) == 2, "on day two", str(state["day"]))
+	# He wakes beside his bed (task 0138), and the day HUD is the farm's: it
+	# comes back with him out of the door.
+	expect(House.inside(state), "waking in the farmhouse")
+	House.leave(state)
 	await until(func() -> bool: return hud.shows_day(),
 		"the day HUD to return")
 	expect(hud.shows_day(), "with the HUD back")

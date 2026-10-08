@@ -26,11 +26,11 @@ and stop; nothing is generated and game task 0289 closes on its decline path.
 
 ## Deliverables
 
-The table is provisional: game task 0138 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Settled by game task 0138: the report draws this band 1:1 as the first thing in its panel, centred above the rows - screen y 35-75 on the 480x270 screen, x 137-343 in the usual 224 px panel - above the "MORNING OF DAY n" heading and the night's lines. Until this pack is integrated a code-drawn band of the same canvas and composition stands in (`report_header` in `PlaceholderArt.ART`, drawn by `src/ui/result_screen.gd`), and that band ships if the owner declines. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
-| `report_header` | 206x40 | (103,40) | 1 / 1.0 / static | Fully opaque rectangle, edge to edge (the report rows are 206 px wide today). Direction `none`, `mirror: "none"`. Runtime file `sprites/ui/report_header.png`. The same picture after a won and after a lost night. |
+| `report_header` | 206x40 | (103,40) | 1 / 1.0 / static | Fully opaque rectangle, edge to edge, drawn at 1.0 on the UI layer (never relit). Direction `none`, `mirror: "none"`. Runtime file `sprites/ui/report_header.png` (one bare file, no frame number). The same picture after a won and after a lost night; not shown on the run's ending screen, which task 0160 reworks. |
 
 **Composition (native pixels):**
 

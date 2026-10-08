@@ -1,7 +1,13 @@
 class_name ResultScreen
 extends Control
 
-## What the night cost and what it paid.
+## The morning report (task 0138): what the night cost and what it paid, read
+## at 06:00 before he gets out of bed.
+##
+## Every night ends here, won or lost: a sunrise, the day it is now, the night
+## that brought it, what came in, what was lost, how many walked off at dawn
+## and what the night left lying on the farm. Confirming is the same
+## `confirm_result` it always was, and the morning begins beside his bed.
 ##
 ## The moment `design.md` section 17 is actually about: the player finds out
 ## whether the thing they built worked, and decides to go back and make it
@@ -15,6 +21,8 @@ extends Control
 
 
 var _state: Dictionary = {}
+var _header: Control
+var _day: Label
 var _title: Label
 var _lines: VBoxContainer
 var _continue: Button
@@ -23,7 +31,12 @@ var _play_on: Button
 ## Set by `main.gd`, so the ending can start a new run. The screen asks; the
 ## app does.
 var driver: SimDriver
-var _built_for := -1
+var _built_for := ""
+
+## **The sunrise is A057's** (`sprites/ui/report_header.png`), registered on
+## the placeholder road: until the pack is integrated - and for good if the
+## owner declines it - the band below is drawn in code at its canvas.
+const HEADER := &"report_header"
 
 
 func _ready() -> void:
@@ -53,6 +66,14 @@ func _ready() -> void:
 	column.name = "ResultColumn"
 	frame.add_child(column)
 
+	_header = _make_header()
+	column.add_child(_header)
+
+	_day = Label.new()
+	_day.name = "ReportDay"
+	_day.theme_type_variation = UiKit.WARM
+	column.add_child(_day)
+
 	_title = Label.new()
 	_title.name = "ResultTitle"
 	column.add_child(_title)
@@ -63,7 +84,7 @@ func _ready() -> void:
 
 	_continue = Button.new()
 	_continue.name = "ContinueButton"
-	_continue.text = I18n.t(&"RES_BACK_TO_FARM")
+	_continue.text = I18n.t(&"RES_GET_UP")
 	_continue.clip_text = true
 	_continue.custom_minimum_size = Vector2(206, 20)
 	_continue.focus_mode = Control.FOCUS_ALL
@@ -84,6 +105,25 @@ func _ready() -> void:
 	column.add_child(_play_on)
 
 
+## A057's picture once it is on disk, the code-drawn band until then.
+func _make_header() -> Control:
+	var path := PlaceholderArt.art_path(HEADER, 0)
+	var made: Control
+	if PlaceholderArt.is_drawn(path):
+		made = Control.new()
+		made.draw.connect(_draw_sunrise)
+	else:
+		var picture := TextureRect.new()
+		picture.texture = load(PlaceholderArt.texture_path(path))
+		picture.stretch_mode = TextureRect.STRETCH_KEEP
+		made = picture
+	made.name = "ReportHeader"
+	made.custom_minimum_size = Vector2(PlaceholderArt.frame(path).get("canvas", Vector2i(206, 40)))
+	made.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	made.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return made
+
+
 func show_state(state: Dictionary) -> void:
 	_state = state
 
@@ -95,14 +135,15 @@ func _process(_delta: float) -> void:
 	if up != visible:
 		visible = up
 		if up:
-			_built_for = -1
+			_built_for = ""
 			_continue.grab_focus()
 	if not visible:
 		return
 
 	var payout := Rewards.last(_state)
-	var signature := int(payout.get("night", 0)) * 1000 \
-		+ int(payout.get("killed", 0))
+	# Rebuilt when the night, the morning or the language changes.
+	var signature := "%d/%d/%d/%d" % [int(payout.get("night", 0)),
+		int(payout.get("killed", 0)), int(_state["day"]), I18n.revision()]
 	if signature != _built_for:
 		_built_for = signature
 		_build(payout)
@@ -154,6 +195,10 @@ func _record(state: Dictionary) -> void:
 func _build(payout: Dictionary) -> void:
 	for child in _lines.get_children():
 		child.queue_free()
+	_header.visible = true
+	_day.visible = true
+	_day.text = I18n.f(&"RES_MORNING", [int(_state["day"])])
+	_continue.text = I18n.t(&"RES_GET_UP")
 	if payout.is_empty():
 		_title.text = I18n.t(&"RES_NIGHT_OVER")
 		return
@@ -162,8 +207,11 @@ func _build(payout: Dictionary) -> void:
 
 	# **The end of the run gets its own screen.** Ten nights and the Giant is
 	# the whole MVP, and a player who has just done it should not be handed
-	# the same four lines they have read nine times.
+	# the same four lines they have read nine times. It stays as it was
+	# until task 0160 reworks it: no sunrise, no morning heading.
 	if _state != null and not _state.is_empty() and Run.is_over(_state):
+		_header.visible = false
+		_day.visible = false
 		_build_the_ending()
 		_continue.text = I18n.t(&"RES_NEW_FARM")
 		_play_on.visible = true
@@ -195,19 +243,30 @@ func _build(payout: Dictionary) -> void:
 			int(payout.get("structures", 0))]),
 		I18n.f(&"RES_UNTOUCHED", [int(payout.get("intact", 0))]),
 		UiKit.DIM)
+	# Whoever was still on the farm when it ended goes with the morning; a
+	# night won by killing everything has nobody left to say so about.
+	var walked := int(payout.get("walked", 0))
+	if walked > 0:
+		_row(I18n.plural(&"RES_WALKED", walked, [walked]), "", UiKit.DIM)
+	var fell := int(payout.get("structures_lost", 0))
+	if fell > 0:
+		_row(I18n.plural(&"RES_CAME_DOWN", fell, [fell]), "", UiKit.BAD)
 
 	_gap()
 	if survived:
 		_row(I18n.t(&"RES_PAID"), "", UiKit.GOOD)
-		# Materials on one line and money on the next, for the same reason.
+		# Materials on one line and money on the next, for the same reason -
+		# named like the rest since 0138: the bare ids printed "+70 money" on
+		# the Portuguese report.
 		var goods: Array = []
 		var purse: Array = []
 		for id in _sorted(payout["gained"] as Dictionary):
 			var n := int((payout["gained"] as Dictionary)[id])
+			var said := I18n.f(&"RES_GAINED", [n, Names.of(id)])
 			if id == GameData.MONEY or id == GameData.TECH:
-				purse.append("+%d %s" % [n, id])
+				purse.append(said)
 			else:
-				goods.append(I18n.f(&"RES_GAINED", [n, Names.of(id)]))
+				goods.append(said)
 		if not goods.is_empty():
 			_row(I18n.f(&"RES_INDENT", ["  ".join(goods)]), "", UiKit.GOOD)
 		if not purse.is_empty():
@@ -218,7 +277,9 @@ func _build(payout: Dictionary) -> void:
 		# tells a player they were paid, "for defending well + $32" tells
 		# them what they were paid *for*.
 		var from: Dictionary = payout.get("money_from", {})
-		var well := int(from.get("nothing touched", 0)) 			+ int(from.get("still standing", 0)) 			+ int(from.get("the house untouched", 0))
+		var well := int(from.get("nothing touched", 0)) \
+			+ int(from.get("still standing", 0)) \
+			+ int(from.get("the house untouched", 0))
 		if well > 0:
 			_row(I18n.t(&"RES_DEFENDING_WELL"),
 				I18n.f(&"RES_PLUS", [well]), UiKit.GOOD)
@@ -233,8 +294,19 @@ func _build(payout: Dictionary) -> void:
 				taken.append(I18n.f(&"RES_TAKEN",
 					[int(lost[id]), Names.of(id)]))
 			_row(I18n.f(&"RES_INDENT", ["  ".join(taken)]), "", UiKit.BAD)
-		_gap()
 		_row(I18n.t(&"RES_UNTOUCHED_ALL"), "", UiKit.DIM)
+
+	_gap()
+	# **A night that began with him face down at 02:00** (task 0128) had the
+	# short build step, and the morning says why.
+	if House.passed_out(_state):
+		var at := GameData.DAY_END_MINUTE
+		_row(I18n.f(&"RES_PASSED_OUT", [(at / 60) % 24, at % 60]), "",
+			UiKit.WARN)
+	# **What the night left lying on the farm**: nothing yet - phase 13's
+	# bones and moon stones are what fill this line.
+	_row(I18n.t(&"RES_LEFTOVERS"), "", UiKit.DIM)
+
 
 ## The run summary: what the whole thing was.
 ##
@@ -306,6 +378,69 @@ func _gap() -> void:
 	var spacer := Control.new()
 	spacer.custom_minimum_size = Vector2(0, 5)
 	_lines.add_child(spacer)
+
+
+## **The code-drawn sunrise** over the farmhouse, at A057's 206x40 canvas and
+## in its composition: the sky in flat stepped bands down to the horizon at
+## row 26, a half sun rising left of a small distant house - lit from the
+## upper left as in the game - and the fields in front with the path to the
+## door. Palette colours only, opaque edge to edge; no text, no frame.
+func _draw_sunrise() -> void:
+	var w := int(_header.size.x)
+	var c: Dictionary = PaletteData.COLOURS
+	# The sky, top to bottom, each band stepping into the next in clusters
+	# rather than a straight edge.
+	var bands := [[0, &"night_light"], [6, &"cloth_light"], [12, &"water_light"],
+		[17, &"roof_light"], [22, &"flame"]]
+	for i in bands.size():
+		var top: int = bands[i][0]
+		var bottom: int = bands[i + 1][0] if i + 1 < bands.size() else 26
+		_header.draw_rect(Rect2(0, top, w, bottom - top), c[bands[i][1]])
+		if i + 1 < bands.size():
+			for x in range(4 + i * 3, w, 11):
+				_header.draw_rect(Rect2(x, bottom - 1, mini(5, w - x), 1),
+					c[bands[i + 1][1]])
+	# The sun, half over the horizon: a gold rim round a hot core.
+	var sun := Vector2(70, 26)
+	for dy in range(-7, 0):
+		var half := int(sqrt(49.0 - dy * dy))
+		_header.draw_rect(Rect2(sun.x - half, sun.y + dy, half * 2, 1), c[&"gold_light"])
+		if dy >= -5:
+			var core := int(sqrt(25.0 - dy * dy))
+			_header.draw_rect(Rect2(sun.x - core, sun.y + dy, core * 2, 1), c[&"flame_hot"])
+	# The fields: grass to the bottom edge, quieter at the sides.
+	_header.draw_rect(Rect2(0, 26, w, 14), c[&"grass"])
+	_header.draw_rect(Rect2(0, 26, w, 2), c[&"grass_dark"])
+	for row in [31, 35]:
+		_header.draw_rect(Rect2(14, row, 104, 2), c[&"soil_dark"])
+		_header.draw_rect(Rect2(178, row, w - 192, 2), c[&"soil_dark"])
+		for x in range(16, 116, 4):
+			_header.draw_rect(Rect2(x, row - 1, 2, 1), c[&"grass_light"])
+		for x in range(180, w - 16, 4):
+			_header.draw_rect(Rect2(x, row - 1, 2, 1), c[&"grass_light"])
+	# The path from the door down to the bottom edge, widening as it comes.
+	for y in range(29, 40):
+		var spread := (y - 29) / 3
+		_header.draw_rect(Rect2(147 - spread, y, 7 + spread * 2, 1), c[&"soil_light"])
+	# The farmhouse, small and distant, centre-right: stone foundation,
+	# timber walls lit on the left, dark panes and door, the chimney, and a
+	# terracotta roof in tile courses.
+	_header.draw_rect(Rect2(131, 27, 40, 2), c[&"stone"])
+	_header.draw_rect(Rect2(132, 16, 38, 11), c[&"wood"])
+	_header.draw_rect(Rect2(132, 16, 3, 11), c[&"wood_light"])
+	_header.draw_rect(Rect2(166, 16, 4, 11), c[&"wood_dark"])
+	for x in [137, 159]:
+		_header.draw_rect(Rect2(x, 19, 5, 4), c[&"ink"])
+	_header.draw_rect(Rect2(148, 20, 6, 7), c[&"wood_dark"])
+	_header.draw_rect(Rect2(160, 4, 4, 8), c[&"stone_dark"])
+	for y in range(6, 17):
+		var reach := (y - 5) * 2
+		var left := 151 - reach
+		var right := 151 + reach
+		var tone: StringName = &"roof" if y % 2 == 0 else &"roof_dark"
+		_header.draw_rect(Rect2(left, y, right - left, 1), c[tone])
+		# The lit slope on the left, as the house in the world is lit.
+		_header.draw_rect(Rect2(left, y, maxi(reach / 2, 1), 1), c[&"roof_light"])
 
 
 ## The keys of a dictionary, in an order that is the same on every machine.

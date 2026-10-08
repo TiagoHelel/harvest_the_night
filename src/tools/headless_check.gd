@@ -12463,6 +12463,8 @@ func _play_a_whole_run(seed_value: int) -> Dictionary:
 			break       # a night that would not end is a failure worth seeing
 		(state["intent"] as Dictionary)["confirm_result"] = true
 		Sim.advance(state, 2)
+		# He wakes in his bed (task 0138), and nothing is built from in there.
+		House.leave(state)
 
 	var out := Run.summary(state)
 	out["money_on_the_ledger"] = Resources.amount(state, GameData.MONEY)
@@ -14367,14 +14369,16 @@ func _task_0082_shots() -> void:
 	# 0129: the farmer passed out at 02:00, the one place that pose is seen.
 	# Eighteen since task 0132: build mode by day, the buildings' palette.
 	# Nineteen since 0134: the repair cursor and its tooltip. Twenty since
-	# 0135: the flare's aiming preview.
-	expect(names.size() == 20,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor and the aim",
+	# 0135: the flare's aiming preview. Twenty-two since 0138: the morning
+	# report with every line it has, and him out of bed beside it.
+	expect(names.size() == 22,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim and the morning",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
-			"passed_out", "build_day", "repair", "aim", "options_controls_pad"]:
+			"passed_out", "build_day", "repair", "aim", "morning", "woken",
+			"options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-134 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+135 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -177,10 +177,11 @@ voz alta.
 | 0135 | The flare goes where you aim it | 2026-10-08 |
 | 0136 | The build step waits for START | 2026-10-08 |
 | 0137 | The night ends at 06:00 | 2026-10-08 |
+| 0138 | Waking up: the morning report | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 37 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 38 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -219,6 +220,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **The flare goes where you aim it** (0135) - `sim` 2823820161 -> 204996281
 - **The build step waits for START** (0136) - `sim` 204996281 -> 2903453887
 - **The night ends at 06:00** (0137) - `sim` 2903453887 -> 40581503
+- **Waking up: the morning report** (0138) - `sim` 40581503 -> 1222657941
 
 ## O que deu errado
 

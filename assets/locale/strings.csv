@@ -285,24 +285,29 @@ REC_MINE_KIT,0,mine kit,kit de mina
 REC_PRESS_FISH_OIL,0,press fish oil,prensar óleo de peixe
 REC_PRESS_OIL,0,press oil,prensar óleo
 REC_WALL_KIT,0,wall kit,kit de muro
-RES_BACK_TO_FARM,0,BACK TO THE FARM,VOLTAR PARA A FAZENDA
 RES_BUILD_WON,0,THE BUILD THAT WON,O QUE SEGUROU A NOITE
+RES_CAME_DOWN,200,%d structure came down,%d estrutura caiu
+RES_CAME_DOWN.other,200,%d structures came down,%d estruturas caíram
 RES_COUNTED,0,%d %s,%d %s
 RES_DEFENDING_WELL,0,  for defending well,  por defender bem
 RES_FARM_HELD,0,THE FARM HELD,A FAZENDA AGUENTOU
 RES_GAINED,0,+%d %s,+%d %s
 RES_GATHERED,0,  gathered %s,  colhido %s
+RES_GET_UP,190,GET UP,LEVANTAR
 RES_GOT_THROUGH,0,got through,passaram
 RES_HOUSE,0,"house %d/%d, %d still up","casa %d/%d, %d de pé"
 RES_INDENT,0,  %s,  %s
 RES_KILLED,0,"killed %d, %d got through","mortos %d, passaram %d"
+RES_LEFTOVERS,200,left on the farm: nothing yet,deixado na fazenda: nada ainda
 RES_LOST,0,LOST,PERDIDO
+RES_MORNING,200,MORNING OF DAY %d,MANHÃ DO DIA %d
 RES_NEW_FARM,0,"A NEW FARM, A NEW TEN NIGHTS","UMA FAZENDA NOVA, DEZ NOITES NOVAS"
 RES_NIGHT,0,NIGHT %d %s,NOITE %d %s
 RES_NIGHT_OVER,0,NIGHT OVER,FIM DA NOITE
 RES_NOTHING_STANDING,0,nothing left standing,nada de pé
 RES_NOTHING_TO_TAKE,0,  nothing - there was nothing to take,  nada - não havia o que levar
 RES_PAID,0,PAID,PAGO
+RES_PASSED_OUT,200,you passed out at %02d:%02d,você desmaiou às %02d:%02d
 RES_PLAY_ON,0,PLAY ON - THE NIGHTS KEEP COMING,SEGUIR - AS NOITES NÃO PARAM
 RES_PLUS,0,+%d,+%d
 RES_RUN_LINE,0,"%d days, %d nights, the Giant down","%d dias, %d noites, o Gigante no chão"
@@ -311,6 +316,8 @@ RES_SURVIVED,0,SURVIVED,VENCIDA
 RES_TAKEN,0,-%d %s,-%d %s
 RES_UNTOUCHED,0,%d untouched,%d intactos
 RES_UNTOUCHED_ALL,0,money and the farm are untouched,o dinheiro e a fazenda estão intactos
+RES_WALKED,200,%d walked off at dawn,%d foi embora ao amanhecer
+RES_WALKED.other,200,%d walked off at dawn,%d foram embora ao amanhecer
 RES_WAS_LOST,0,LOST,PERDIDA
 RES_ZOMBIES,0,zombies killed,zumbis mortos
 SAVE_DAMAGED,0,the file is damaged,o arquivo está danificado

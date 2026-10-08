@@ -128,6 +128,9 @@ static func play(seed_value: int, policy_name: StringName,
 
 ## Spend a day's worth of work on the policy's wants, then let the day run.
 static func _a_day(state: Dictionary, policy: Dictionary) -> void:
+	# **Out of the door first** (task 0138): every morning after the first
+	# starts with him beside his bed, and nothing is built from in there.
+	House.leave(state)
 	# **One tick short of 02:00** (task 0128): a whole `DAY_TICKS` would pass
 	# him out into a night; the robot goes to bed instead. 0142 rewrites this.
 	# Counted from where the day is, which after a confirmed result is a tick

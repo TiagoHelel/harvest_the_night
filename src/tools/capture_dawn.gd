@@ -86,6 +86,10 @@ func _run() -> void:
 	var frames := int(DAWN_SECONDS * 30.0)
 	for i in frames:
 		await process_frame
+		# He wakes in his bed (task 0138): out of the door, so the yard is
+		# what is photographed.
+		if int(state["phase"]) == Phases.DAY and House.inside(state):
+			House.leave(state)
 		if i % STRIDE == 0:
 			await _shoot(folder, "dawn_%02d" % (i / STRIDE))
 	print("DAWN CAPTURE: %d pictures into %s, %d zombies left by day"

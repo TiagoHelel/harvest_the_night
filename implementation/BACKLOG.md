@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **132 / 296 done**
+`###########.............`  **133 / 296 done**
 
-0 doing / 164 todo / 0 blocked across 18 phases.
+0 doing / 163 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-164 task(s) left, the ready ones first, then what they
+163 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,24 +107,6 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0138 - Waking up: the morning report
-
-Ready to pick up.  Likely files: `src/core/phases.gd, src/core/house.gd, src/ui/result_screen.gd, src/ui/house_view.gd, src/ui/main.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/A057-morning-report.md`.
-
-Every night, won or lost, closes on a morning report, and confirming it starts the day with the farmer getting out of bed at 06:00.
-
-- `begin_day` wakes him in bed: `House.wake(state)` puts him inside on the floor cell beside the bed - `inside` true, `asleep` and `passed_out` false, `outside_pos` the porch - so he walks out of the door into the day, and the clock reads 06:00. The wake animation 0129 registered plays (A001 stand-in until 0143)
-- Tests and tools that walk the farmer outside after a night step him out with `House.leave` or a helper (the determinism scenario's second day, `Autoplay._a_day`, the suites' `_to_the_next_night`-style helpers); list the ones touched in the journal. The autoplayer keeps working
-- `result_screen.gd` becomes the morning report: a heading with the day, what came in (the `Rewards` lines), what was lost (stock taken on a loss, structures lost), how many walked off at dawn, a line when the night began with a pass-out, and a leftovers line that says nothing is on the farm yet (phase 13's bones and moon stones fill it). Confirming is the same `confirm_result` intent. The ending and endless branches stay as they are (0160 reworks them)
-- An optional header, a sunrise over the farmhouse, through the placeholder road (a code-drawn band is enough) until A057 is integrated by 0289; if the owner declines A057 the band stays
-- `main._bank_if_a_night_ended` banks every night's end, won or lost (key it on `day` or `last_result`, not `nights_won`), without `Stats.fold` counting a night twice
-- Strings in both languages, and the report fits 480x270 in both; a row nothing prints any more leaves strings.csv. The input cases that read `ResultScreen` keep passing: `_case_0027_the_loop` (~1303), `_case_0070_endless` (~3616) and `_case_0082_shots`' crowding check (~4466). SIM moves on purpose (where `begin_day` leaves the farmer): record both numbers
-
-  - done when: `_task_0138_morning` in `headless_v1.gd`: after a won and after a lost night, `confirm_result` leaves him inside beside the bed, awake, at `day_tick` 0 and 06:00; a state saved and loaded in RESULT confirms into the same
-  - done when: `_case_0138_morning` in `input_v1.gd`: the report shows its lines; confirming brings up the house view; a lost night writes the run save (the saved `day` matches)
-  - done when: The Deliverables table of `implementation/backlog/packs/A057-morning-report.md` states the final geometry this task settled
-  - done when: `python tools/shot.py 0138 result` opened, also with `--pt_BR`: nothing clipped or overlapping
-
 ### 0139 - The night HUD for the guardian
 
 Ready to pick up.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
@@ -156,6 +138,24 @@ The day HUD tells the time and says when it is time for bed: an HH:MM clock, a G
 
   - done when: `_case_0140_bedtime` in `input_v1.gd`: no reminder at 21:59, the reminder at 22:00, the warning at 01:30; clicking GO TO BED at 23:00 starts the night
   - done when: `python tools/shot.py 0140 noon dusk bedtime` opened, also with `--pt_BR`
+
+### 0142 - The autoplayer sleeps too
+
+Ready to pick up.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, src/tools/nights.gd, src/tools/play_nights.gd, tools/autoplay.py, tools/nights.py, tools/balance.py, tools/play_nights.py, implementation/BALANCE.md, src/tools/headless_check.gd`.
+
+The autoplayer plays the game as it now is - a day, bed, building by cursor, START, the night to dawn - and keeps playing after a loss, so the balance tools measure the real loop again.
+
+- `Autoplay.play`, per night: `_a_day` (gathering, crafting and production buildings by day only, starting from 0138's wake in bed); the `sleep` intent at a policy hour or when the day's plan is done, never passing out by accident (0128 only made it stop short of 02:00); the policy's defences in PREPARATION through the intent road (`build_cell` with `build_place`, `build_upgrade`, `repair_cell`); `start_waves`; ticks until RESULT, capped at `NIGHT_TICKS` plus a margin; then `confirm_result`
+- It carries on after a loss instead of stopping; the per-night report adds how the night ended (dawn, everything dead, house down), the house left and how many walked off
+- Policies keep their lists; nothing is placed by day (it would be refused)
+- `tools/autoplay.py`, `tools/nights.py`, `tools/balance.py` and `tools/play_nights.py` still run; `balance.py` still restores `game_data.gd` and still refuses a dirty tree
+- `_task_0067_autoplay` and `_task_0068_balance` are rewritten to the new loop and kept inside the suite's time (one day and one night per policy); report the group times
+- A note in `implementation/BALANCE.md`: survival per night for the four policies over the same seeds before and after the new loop, and what changed
+- Tools only: neither hash moves
+
+  - done when: `_task_0067_autoplay` and `_task_0068_balance` pass, with their times in the journal
+  - done when: `python tools/autoplay.py` plays ten nights for every policy and prints the table; the numbers are in the journal and in BALANCE.md
+  - done when: `python tools/balance.py` with a short sweep finishes and leaves the git tree clean
 
 ### 0143 - Art: going to bed, sleeping, waking, passing out
 
@@ -225,6 +225,25 @@ The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131'
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the cursor in each state over dark ground - opened and looked at, in `implementation/shots/0146/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
+### 0289 - Art: the morning report
+
+Waits for Codex art A057.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
+
+A small sunrise over the farmhouse heads 0138's morning report. Optional: if the owner declines the pack, the header 0138 drew becomes the shipped look and this task closes with a note.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A057` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- The one exception, because A057 is optional: if its status is `blocked` with the owner's decline in the note, do not wait. Delete A057's entries from 0120's placeholder registry (`src/ui/placeholder_art.gd`) and draw 0138's code-drawn band directly in `result_screen.gd`, so it is the final look and no longer a stand-in (or drop the header if it only made sense as art), quote the decline in the journal and close with `python tools/task.py done 0289`. `task.py next` never offers a task whose pack is not approved, so this path is run by hand or by 0290
+- Use only the folder named in the pack's `CLAUDE-A057-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/<family>/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_<family>_art.py`, `ArtPlacement` if needed).
+- Family `ui`: one header at the canvas and pivot 0138 settled in A057's Deliverables table, drawn by `result_screen.gd` above the report through the lookup it already uses, replacing 0138's stand-in (delete A057's registry entries in `src/ui/placeholder_art.gd` once the raster lands at the same path); no text in it (the report's words stay strings), checked in its own section of `tools/check_ui_art.py` and shown in `ui_art_showcase.gd`
+- Set the pack to integrated: `python implementation/backlog/assets.py set A057 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass with the header counted
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures of the morning report after a won and after a lost night, and of the farm around it by day and by night, opened and looked at, in `implementation/shots/0289/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+  - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
+
 ### 0141 - Teaching the new night
 
 Waits on 0139, 0140.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/tutorial_prompt.gd, src/tools/perf_names.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -241,24 +260,6 @@ Day one teaches the new night - go to bed, build with the cursor, press START, h
   - done when: `_task_0141_tutorial` in `headless_v1.gd` (jump `day_tick` and `dawn_at` rather than playing whole spans): a scripted first day and night completes every step in order; ignoring the prompts reaches the same night with the same state apart from `tutorial`
   - done when: `_case_0141_tutorial` in `input_v1.gd`: the bed line shows on day one after the day steps, the START line in the build step
   - done when: Captures of the bed, START and dawn prompts, opened
-
-### 0142 - The autoplayer sleeps too
-
-Waits on 0138.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, src/tools/nights.gd, src/tools/play_nights.gd, tools/autoplay.py, tools/nights.py, tools/balance.py, tools/play_nights.py, implementation/BALANCE.md, src/tools/headless_check.gd`.
-
-The autoplayer plays the game as it now is - a day, bed, building by cursor, START, the night to dawn - and keeps playing after a loss, so the balance tools measure the real loop again.
-
-- `Autoplay.play`, per night: `_a_day` (gathering, crafting and production buildings by day only, starting from 0138's wake in bed); the `sleep` intent at a policy hour or when the day's plan is done, never passing out by accident (0128 only made it stop short of 02:00); the policy's defences in PREPARATION through the intent road (`build_cell` with `build_place`, `build_upgrade`, `repair_cell`); `start_waves`; ticks until RESULT, capped at `NIGHT_TICKS` plus a margin; then `confirm_result`
-- It carries on after a loss instead of stopping; the per-night report adds how the night ended (dawn, everything dead, house down), the house left and how many walked off
-- Policies keep their lists; nothing is placed by day (it would be refused)
-- `tools/autoplay.py`, `tools/nights.py`, `tools/balance.py` and `tools/play_nights.py` still run; `balance.py` still restores `game_data.gd` and still refuses a dirty tree
-- `_task_0067_autoplay` and `_task_0068_balance` are rewritten to the new loop and kept inside the suite's time (one day and one night per policy); report the group times
-- A note in `implementation/BALANCE.md`: survival per night for the four policies over the same seeds before and after the new loop, and what changed
-- Tools only: neither hash moves
-
-  - done when: `_task_0067_autoplay` and `_task_0068_balance` pass, with their times in the journal
-  - done when: `python tools/autoplay.py` plays ten nights for every policy and prints the table; the numbers are in the journal and in BALANCE.md
-  - done when: `python tools/balance.py` with a short sweep finishes and leaves the git tree clean
 
 ### 0147 - Art: the night hotbar and HUD icons
 
@@ -277,28 +278,9 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0289 - Art: the morning report
-
-Waits on 0138.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
-
-A small sunrise over the farmhouse heads 0138's morning report. Optional: if the owner declines the pack, the header 0138 drew becomes the shipped look and this task closes with a note.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A057` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- The one exception, because A057 is optional: if its status is `blocked` with the owner's decline in the note, do not wait. Delete A057's entries from 0120's placeholder registry (`src/ui/placeholder_art.gd`) and draw 0138's code-drawn band directly in `result_screen.gd`, so it is the final look and no longer a stand-in (or drop the header if it only made sense as art), quote the decline in the journal and close with `python tools/task.py done 0289`. `task.py next` never offers a task whose pack is not approved, so this path is run by hand or by 0290
-- Use only the folder named in the pack's `CLAUDE-A057-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/<family>/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_<family>_art.py`, `ArtPlacement` if needed).
-- Family `ui`: one header at the canvas and pivot 0138 settled in A057's Deliverables table, drawn by `result_screen.gd` above the report through the lookup it already uses, replacing 0138's stand-in (delete A057's registry entries in `src/ui/placeholder_art.gd` once the raster lands at the same path); no text in it (the report's words stay strings), checked in its own section of `tools/check_ui_art.py` and shown in `ui_art_showcase.gd`
-- Set the pack to integrated: `python implementation/backlog/assets.py set A057 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass with the header counted
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures of the morning report after a won and after a lost night, and of the farm around it by day and by night, opened and looked at, in `implementation/shots/0289/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-  - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
-
 ### 0148 - Checkpoint: is the night better with him asleep?
 
-Waits on 0138, 0139, 0140, 0141, 0142.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
+Waits on 0139, 0140, 0141, 0142.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
 
 **The plan's Phase 1 test.** Play the new night - the farmer asleep, the cursor, START, dawn - with a mouse and with a pad, and answer honestly whether it is better than the MVP's night. Every later phase waits on the answer.
 
@@ -685,7 +667,7 @@ Animals get homes: a coop and a barn, built by day, that hold them, shelter them
 
 ### 0189 - The shipping bin
 
-Waits on 0148, 0138, 0156.  Likely files: `src/core/shipping.gd (new), src/core/interact.gd, src/core/phases.gd, src/core/state.gd, src/core/farm.gd, src/core/game_data.gd, src/app/save.gd, src/ui/shop_panel.gd, src/ui/result_screen.gd, src/ui/sfx.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0148, 0156.  Likely files: `src/core/shipping.gd (new), src/core/interact.gd, src/core/phases.gd, src/core/state.gd, src/core/farm.gd, src/core/game_data.gd, src/app/save.gd, src/ui/shop_panel.gd, src/ui/result_screen.gd, src/ui/sfx.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 A shipping bin like Stardew's: drop things in at any hour of the day and be paid the next morning, so selling no longer waits on the stall's hours (plan section 3.6).
 
@@ -3183,7 +3165,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (12/23)
+## 10 - Sleep is the night  (13/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3197,17 +3179,17 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md)
 - [x] **0136** [The build step waits for START](prompts/0136-start-button.md)
 - [x] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md)
-- [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md)
+- [x] **0138** [Waking up: the morning report](prompts/0138-morning-report.md)
 - [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md)
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
-- [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0138
+- [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md)
 - [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - needs 0139 - waits for art A005
-- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0138, 0139, 0140, 0141, 0142
+- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0139, 0140, 0141, 0142
 
 ## 11 - Calendar and seasons  (0/16)
 
@@ -3254,7 +3236,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0186** [Barns at night](prompts/0186-barns-at-night.md) - needs 0183
 - [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md) - needs 0184, 0168, 0149, 0186
 - [ ] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md) - needs 0187, 0185
-- [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md) - needs 0148, 0138, 0156
+- [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md) - needs 0148, 0156
 - [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0170, 0183, 0185, 0173
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md) - needs 0148
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188, 0184
@@ -3366,7 +3348,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0186, 0256, 0257, 0285
 - [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0152, 0155, 0160, 0170, 0182, 0253, 0254, 0255
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
-- [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - needs 0138 - waits for art A057
+- [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
 - [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0122, 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (0/7)

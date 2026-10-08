@@ -85,6 +85,8 @@ const SCENARIOS: Array = [
 	["farm_extension", "planting on the new southern land", ""],
 	["larger_stations", "the larger farm buildings", ""],
 	["passed_out", "fallen asleep on the farm at 02:00", ""],
+	["morning", "the morning report, every line it has", "ResultScreen"],
+	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
 	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
 ]
@@ -632,6 +634,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"farm_extension": _set_farm_extension(state)
 		"larger_stations": _set_larger_stations(state)
 		"passed_out": _set_passed_out(state)
+		"morning": _set_morning(state)
+		"woken": _set_woken(state)
 		"repair": _set_repair(state)
 		"aim": _set_aim(state)
 		"options_controls_pad": _set_options_controls_pad(state)
@@ -1052,6 +1056,36 @@ func _set_passed_out(state: Dictionary) -> void:
 	state["day_tick"] = GameData.DAY_TICKS - 1
 	Sim.advance(state, 1)
 	_look_at(Player.cell(state))
+
+
+## **The morning report with every line it has** (task 0138): a night that
+## began with a pass-out and ended at dawn, a wall lost in it and two still
+## on the farm to walk off.
+func _set_morning(state: Dictionary) -> void:
+	Phases.pass_out(state)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	var doomed := SuiteKit.any_buildable(state)
+	Farm.place(state, doomed, {"id": &"wall", "hp": 30})
+	Farm.damage(state, doomed, 999)
+	var far: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	for _i in 2:
+		Entities.set_hp(state, Entities.spawn(state, &"walker", far), 9999)
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+
+
+## **Out of bed at 06:00** (task 0138): the report confirmed, he stands on
+## the floor beside his bed - the wake beat cut short, as stills cut the
+## bed beat.
+func _set_woken(state: Dictionary) -> void:
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	(state["wave"] as Dictionary)["done"] = true
+	Sim.advance(state, 1)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	_standing_at = Player.cell(state)
 
 
 func _set_dusk(state: Dictionary) -> void:
