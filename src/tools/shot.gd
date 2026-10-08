@@ -97,6 +97,7 @@ const SCENARIOS: Array = [
 	["north_band", "standing on the north spawn ground", ""],
 	["new_ore", "beside the copper, the coal and the gold", ""],
 	["stump", "in the woods, by a hardwood stump", ""],
+	["winter_build", "the build step on Winter 2: a route from every side", ""],
 	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
 	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
@@ -669,6 +670,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
+		"winter_build": _set_winter_build(state)
 		"woken": _set_woken(state)
 		"repair": _set_repair(state)
 		"aim": _set_aim(state)
@@ -849,6 +851,20 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				aim_view.cursor().place_at(_repair_at)
 				aim_view.cursor().arm()
 				main.call("_drive_cursor", 0.0)
+		"winter_build":
+			# The wall held over open ground by the house, so the preview
+			# runs from every side open tonight (task 0157).
+			var winter_mode: Node = main.get_node_or_null("%BuildMode")
+			var winter_view: Node = main.get_node_or_null("%WorldView")
+			if winter_mode == null or winter_view == null:
+				return
+			var spot := _open_ground_near(state, Farm.house_centre(state) + Vector2i(5, 1))
+			winter_mode.set("_pointer", winter_view.cell_to_screen(spot))
+			winter_view.cursor().place_at(spot)
+			winter_mode.call("_follow_cursor")
+			print("winter_build: %d route cells from %d sides"
+				% [winter_view.previewed_route().size(),
+					Calendar.open_sides(Phases.night_ahead(state)).size()])
 		"build_day":
 			var day_mode: Node = main.get_node_or_null("%BuildMode")
 			var day_view: Node = main.get_node_or_null("%WorldView")
@@ -1194,6 +1210,25 @@ func _set_new_ore(state: Dictionary) -> void:
 func _set_stump(state: Dictionary) -> void:
 	_standing_at = Vector2i(10, 46)
 	_stand(state, _standing_at)
+
+
+## **The build step in winter** (task 0157): Winter 2, every side open, a
+## wall in hand by the house - and the preview drawing the route from each of
+## the five.
+func _set_winter_build(state: Dictionary) -> void:
+	state["day"] = 3 * GameData.SEASON_DAYS + 2
+	state["nights_won"] = state["day"] - 1
+	# Forty-three nights in, the lessons are long behind him.
+	var lessons: Array = []
+	for step in Tutorial.steps():
+		lessons.append(StringName((step as Dictionary)["id"]))
+	((state["tutorial"] as Dictionary)["done"] as Array).assign(lessons)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400})
+	NightRoad.into_build(state)
+	var build: Dictionary = state["build"]
+	build["active"] = true
+	build["selected"] = &"wall"
+	_camera_at = Farm.house_centre(state)
 
 
 ## **Out of bed at 06:00** (task 0138): the report confirmed, he stands on

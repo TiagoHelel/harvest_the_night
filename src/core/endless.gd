@@ -84,7 +84,8 @@ static func night(seed_value: int, night_number: int) -> Dictionary:
 
 	var waves := _waves(curve, step)
 	var bodies := _share_out(_size(curve, night_number), _weights(curve, step))
-	var rows := _lay_out(rng, bodies, waves)
+	# **Only from the sides the date has open** (task 0157).
+	var rows := _lay_out(rng, bodies, waves, Calendar.open_sides(night_number))
 	_put_the_giants_in(rows, curve, night_number)
 
 	var one := {
@@ -209,7 +210,10 @@ static func _share_out(total: int, weights: Dictionary) -> Dictionary:
 ## which is a night you can answer with half a farm. Every authored night from
 ## the second onward comes from both sides, and this is not the place to
 ## quietly take that back on a one-in-a-hundred roll.
-static func _lay_out(rng: Array, bodies: Dictionary, waves: int) -> Array:
+static func _lay_out(rng: Array, bodies: Dictionary, waves: int,
+		sides: Array = [0]) -> Array:
+	if sides.is_empty():
+		sides = [0]
 	var queue: Array = []
 	for kind in GameData.sorted_names(bodies.keys()):
 		if int(bodies[kind]) > 0:
@@ -244,7 +248,8 @@ static func _lay_out(rng: Array, bodies: Dictionary, waves: int) -> Array:
 	var placed: Array = []
 	for _i in queue.size():
 		placed.append(0)
-	var spawns: int = maxi((GameData.SPAWNS as Array).size(), 1)
+	# The sides it alternates through: the date's open ones (task 0157).
+	var spawns: int = sides.size()
 	var side := Rng.int_between(rng, 0, spawns - 1)
 	var guard := 0
 	while guard < 200:
@@ -256,7 +261,7 @@ static func _lay_out(rng: Array, bodies: Dictionary, waves: int) -> Array:
 			var slots_left: int = int(share[i]) - int(placed[i])
 			var count: int = maxi(int(left[i]) / maxi(slots_left, 1), 1)
 			count = mini(count, int(left[i]))
-			rows.append([(queue[i] as Array)[0], count, side % spawns])
+			rows.append([(queue[i] as Array)[0], count, int(sides[side % spawns])])
 			side += 1
 			left[i] = int(left[i]) - count
 			placed[i] = int(placed[i]) + 1
@@ -277,7 +282,7 @@ static func _lay_out(rng: Array, bodies: Dictionary, waves: int) -> Array:
 				found = true
 				break
 		if not found:
-			rows.append([kind, int(left[i]), side % spawns])
+			rows.append([kind, int(left[i]), int(sides[side % spawns])])
 			side += 1
 		left[i] = 0
 	return rows

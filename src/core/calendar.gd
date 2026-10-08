@@ -85,6 +85,15 @@ static func is_calm(day: int, season_days: int = GameData.SEASON_DAYS) -> bool:
 	return day > 1 and day_of_season(day, season_days) == 1
 
 
+## **The sides the horde comes from on a date** (task 0157): its season's
+## `SIDES_BY_SEASON` row, as `SPAWNS` indices.
+static func open_sides(day: int, season_days: int = GameData.SEASON_DAYS) -> Array:
+	var by_season: Array = GameData.SIDES_BY_SEASON
+	if by_season.is_empty():
+		return [0]
+	return (by_season[season_of(day, season_days) % by_season.size()] as Array).duplicate()
+
+
 ## The boss of the season a date falls in.
 static func boss_of(day: int, season_days: int = GameData.SEASON_DAYS) -> StringName:
 	var bosses: Array = GameData.SEASON_BOSSES

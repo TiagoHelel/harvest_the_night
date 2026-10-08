@@ -279,6 +279,15 @@ static func breaks_through(state: Dictionary, cell: Vector2i) -> bool:
 ## against the cell being considered.
 static func route_if_blocked(state: Dictionary, blocked: Vector2i,
 		from: Vector2i, most: int = 200) -> Array:
+	return routes_if_blocked(state, blocked, [from], most)
+
+
+## **The same, from several places at once** (task 0157): the build step
+## shows a route from every side open tonight. One field is built and every
+## start walks it, so five sides cost one sweep; the routes come back one
+## after another in a single list of cells, the way the dotted line draws.
+static func routes_if_blocked(state: Dictionary, blocked: Vector2i,
+		froms: Array, most: int = 200) -> Array:
 	var occupants: Dictionary = state["occupants"]
 	var idx := Grid.index(blocked)
 	if idx < 0:
@@ -299,13 +308,14 @@ static func route_if_blocked(state: Dictionary, blocked: Vector2i,
 	var field: PackedInt32Array = built["field"]
 	var cost: PackedInt32Array = built["cost"]
 	var out: Array = []
-	var at := from
-	for _step in most:
-		var next := _step_in(field, cost, at)
-		if next == at:
-			break
-		out.append(next)
-		at = next
+	for start in froms:
+		var at: Vector2i = start
+		for _step in most:
+			var next := _step_in(field, cost, at)
+			if next == at:
+				break
+			out.append(next)
+			at = next
 	return out
 
 

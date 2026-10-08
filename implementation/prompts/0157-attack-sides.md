@@ -1,7 +1,7 @@
 # 0157 - A new side every season
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0156, 0115
 - **Likely files:** src/core/game_data.gd (SPAWNS, SPAWN_SIDES, SIDES_BY_SEASON, check_nights), src/core/calendar.gd, src/core/endless.gd, src/core/enemies.gd, src/ui/build_mode.gd, src/ui/world_view.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/shot.gd
 

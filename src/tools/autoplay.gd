@@ -635,7 +635,7 @@ static func _room_for(state: Dictionary, id: StringName) -> Vector2i:
 	# player puts them and why farms look the way they do.
 	var size := Building.size_of(id)
 	var guns := GameData.DEFENCES.has(id)
-	var approaches := _approaches()
+	var approaches := _approaches(state)
 	var side: Vector2i = approaches[int(state.get("autoplay_side", 0))
 		% approaches.size()]
 	var best := Vector2i(-1, -1)
@@ -663,11 +663,21 @@ static func _room_for(state: Dictionary, id: StringName) -> Vector2i:
 	return best
 
 
-## The middle of each spawn region, read off the rules' own table so that
-## moving a spawn moves the robot with it.
-static func _approaches() -> Array:
+## The middle of each spawn region tonight's night comes from, read off the
+## rules' own table so that moving a spawn moves the robot with it.
+##
+## **Tonight's sides, not every side** (task 0157): with five regions and
+## spring opening one, a robot taking all five in turn would put four towers
+## of five where nobody walks. A calm night sends nobody, so it falls back to
+## the sides the season has open.
+static func _approaches(state: Dictionary) -> Array:
+	var date := Phases.night_ahead(state)
+	var sides := Waves.spawns_in(Waves.night_of(date, int(state["seed"])))
+	if sides.is_empty():
+		sides = Calendar.open_sides(date)
 	var out: Array = []
-	for region in GameData.SPAWNS:
+	for side in sides:
+		var region: Array = GameData.SPAWNS[int(side)]
 		var sum := Vector2i.ZERO
 		for entry in (region as Array):
 			sum += Vector2i(int(entry[0]), int(entry[1]))

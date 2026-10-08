@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 18
+const V1_CASES := 19
 
 
 func _process(delta: float) -> bool:
@@ -68,6 +68,7 @@ func _run() -> void:
 	await _case_0149_date()
 	await _case_0152_moon_line()
 	await _case_0154_calm()
+	await _case_0157_routes()
 	_finish()
 
 
@@ -1672,5 +1673,58 @@ func _case_0154_calm() -> void:
 			str(said))
 		expect(_outside_the_frame(result).is_empty(), "and all of it fits its frame (%s)" % device,
 			str(_outside_the_frame(result)))
+		await close_scene()
+	_completed += 1
+
+
+## 0157 - the build step's route preview, by mouse: a wall held over open
+## ground on Winter 2 draws a route from each of the five sides, and on Spring
+## 2 from the east alone.
+func _case_0157_routes() -> void:
+	for season in [3, 0]:
+		await open_scene(MAIN_SCENE)
+		var driver: SimDriver = require_control("SimDriver")
+		var world: WorldView = require_control("WorldView")
+		if driver == null or world == null:
+			await close_scene()
+			_completed += 1
+			return
+		var state := driver.state
+		await frames(4)
+		state["day"] = season * GameData.SEASON_DAYS + 2
+		state["nights_won"] = int(state["day"]) - 1
+		await click_control("NightButton")
+		await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+			"GO TO BED (%s)" % GameData.SEASONS[season])
+		var house_view: HouseView = require_control("HouseView")
+		await until(func() -> bool: return not house_view.is_showing_bedtime(),
+			"the bed beat to end", 100000)
+		Resources.gain(state, {GameData.WOOD: 900, GameData.STONE: 900})
+		await frames(3)
+		await click_control("Hotbar_wall")
+		await frames(2)
+		var spot := Vector2i(-1, -1)
+		var middle := world.screen_to_cell(Vector2(240.0, 120.0))
+		for radius in 6:
+			for candidate in Grid.within(middle, radius):
+				if spot.x < 0 and Building.why_not(state, &"wall", candidate).is_empty():
+					spot = candidate
+		await move_mouse_to_cell(spot)
+		await frames(3)
+		# A route starts beside the spawn cell it came from.
+		var route := world.previewed_route()
+		var from: Array = []
+		for side in GameData.SPAWNS.size():
+			var start: Vector2i = Enemies.spawn_cells(state, side)[0]
+			for cell in route:
+				var apart: Vector2i = (cell as Vector2i) - start
+				if absi(apart.x) <= 1 and absi(apart.y) <= 1:
+					from.append(side)
+					break
+		var open := Calendar.open_sides(Phases.night_ahead(state))
+		expect(Building.selected(state) == &"wall" and spot.x >= 0 and from == open,
+			"a wall held on %s 2 draws a route from each side open tonight"
+				% GameData.SEASONS[season],
+			"%d cells, from %s, open %s" % [route.size(), from, open])
 		await close_scene()
 	_completed += 1

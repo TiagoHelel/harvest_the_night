@@ -130,6 +130,10 @@ var _station_due := 0.0
 ## under everything standing on it. Task 0023 reuses it for the build ghost.
 var _highlight: Node2D
 var _highlight_cell := Vector2i(-1, -1)
+## **The route a wall would leave** (task 0157), on the night cues' layer: out
+## of the night's tint, and over the trees and the roofs a route from the
+## north runs under.
+var _route_dots: Node2D
 
 ## The field: turned earth and whatever is growing in it. Flat on the ground
 ## rather than standing on it, because a crop is not something you walk around
@@ -291,6 +295,11 @@ func _ready() -> void:
 	cue_layer.layer = 2
 	cue_layer.follow_viewport_enabled = true
 	add_child(cue_layer)
+	# The route preview first, so the Zzz and the cursor sit over it.
+	_route_dots = Node2D.new()
+	_route_dots.name = "RoutePreview"
+	_route_dots.draw.connect(_draw_route)
+	cue_layer.add_child(_route_dots)
 	_zzz = Sprite2D.new()
 	_zzz.name = "Zzz"
 	_zzz.centered = false
@@ -703,8 +712,8 @@ func show_route(cells: Array) -> void:
 	if cells == _preview:
 		return
 	_preview = cells
-	if _highlight != null:
-		_highlight.queue_redraw()
+	if _route_dots != null:
+		_route_dots.queue_redraw()
 
 
 func clear_route() -> void:
@@ -777,25 +786,27 @@ func _draw_enemy_warning() -> void:
 
 
 
+## **The route a wall would leave**, dotted so it reads as a prediction
+## rather than as something on the farm.
+func _draw_route() -> void:
+	if _preview.is_empty():
+		return
+	var size := float(GameData.TILE_SIZE)
+	var step := 0
+	for found in _preview:
+		step += 1
+		if step % 2 == 0:
+			continue
+		var cell: Vector2i = found
+		_route_dots.draw_rect(Rect2(Vector2(cell) * size
+			+ Vector2(size, size) * 0.4, Vector2(size, size) * 0.2),
+			Color(1.0, 0.85, 0.45, 0.75))
+
+
 func _draw_highlight() -> void:
 	if _state.is_empty():
 		return
-	# **The route a wall would leave**, dotted so it reads as a prediction
-	# rather than as something on the farm.
-	if not _preview.is_empty():
-		var size := float(GameData.TILE_SIZE)
-		var step := 0
-		for found in _preview:
-			step += 1
-			if step % 2 == 0:
-				continue
-			var cell: Vector2i = found
-			_highlight.draw_rect(Rect2(Vector2(cell) * size
-				+ Vector2(size, size) * 0.4, Vector2(size, size) * 0.2),
-				Color(1.0, 0.85, 0.45, 0.75))
-
 	var size := float(GameData.TILE_SIZE)
-
 
 	# **The flare.** An expanding ring at the player's feet, fading as it goes,
 	# so the one button reads as something that happened *there* rather than a

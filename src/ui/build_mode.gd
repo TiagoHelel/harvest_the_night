@@ -174,8 +174,8 @@ func _follow_cursor() -> void:
 	# blocks the way, and only where it could go: previewing a route around a
 	# tower the player cannot afford is answering a question nobody asked.
 	if reason.is_empty() and _blocks_the_way(id):
-		_view.show_route(Pathing.route_if_blocked(_state, cell,
-			_a_way_in(), ROUTE_STEPS))
+		_view.show_route(Pathing.routes_if_blocked(_state, cell,
+			_ways_in(), ROUTE_STEPS))
 	else:
 		_view.clear_route()
 
@@ -192,10 +192,16 @@ func _blocks_the_way(id: StringName) -> bool:
 	return (GameData.DEFENCES.get(id, {}) as Dictionary).has("path_cost")
 
 
-## Where to draw the route from: the spawn the next wave uses.
-func _a_way_in() -> Vector2i:
-	var cells := Enemies.spawn_cells(_state, 0)
-	return Vector2i(-1, -1) if cells.is_empty() else cells[0]
+## Where to draw the routes from (task 0157): the first spawn cell of every
+## side open tonight, in `SPAWNS` order - so in spring the east alone, and in
+## winter all five.
+func _ways_in() -> Array:
+	var out: Array = []
+	for side in Calendar.open_sides(Phases.night_ahead(_state)):
+		var cells := Enemies.spawn_cells(_state, int(side))
+		if not cells.is_empty():
+			out.append(cells[0])
+	return out
 
 
 ## Long enough to cross the farm, short enough that a preview is cheap.

@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 29
+const GROUPS := 30
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -98,6 +98,7 @@ func _run() -> void:
 	_task_0154_calm()
 	_task_0155_losing()
 	_task_0156_map_v1()
+	_task_0157_sides()
 
 
 func _finish() -> void:
@@ -2232,13 +2233,13 @@ func _task_0152_full_moon() -> void:
 		"an ordinary night is still the authored row, and a Full Moon leaves it untouched")
 
 	# **Every Full Moon of the year fits the night** (0137), for both seeds
-	# `tools/nights.py --check` reads.
+	# `tools/nights.py --check` reads - asked of the whole year, since 0157's
+	# side rule reads each record's date off its place in the table.
 	var faults: Array = []
 	for seed_value in [0, 424242]:
 		var year: Array = []
 		for day in range(1, Calendar.year_days() + 1):
-			if Calendar.is_full_moon(day):
-				year.append(Waves.night_of(day, seed_value))
+			year.append(Waves.night_of(day, seed_value))
 		faults.append_array(GameData.check_nights(year))
 	expect(faults.is_empty(), "and every Full Moon of the year still checks", str(faults))
 
@@ -2781,4 +2782,103 @@ func _task_0156_map_v1() -> void:
 				and Save.read_run_at("res://tools/goldens/" + String(name)).is_empty():
 			golden_trouble.append(name)
 	expect(golden_trouble.is_empty(), "every golden loads", str(golden_trouble))
+	_completed += 1
+
+
+## 0157 - a new side every season: the table, the generated nights dealt
+## from open sides only, a spawn for every region, and 0115's guarantee on
+## the three new ones.
+func _task_0157_sides() -> void:
+	# **The open sides are the table's.**
+	var firsts := [Calendar.open_sides(1), Calendar.open_sides(15),
+		Calendar.open_sides(29), Calendar.open_sides(43)]
+	expect(firsts == GameData.SIDES_BY_SEASON and firsts == [[0], [0, 1], [0, 1, 2],
+		[0, 1, 2, 3, 4]],
+		"Spring 1, Summer 1, Autumn 1 and Winter 1 open the table's sides", str(firsts))
+	expect(GameData.SPAWNS.size() == 5 and GameData.SPAWN_SIDES.size() == 5
+		and GameData.SPAWN_SIDES[2] == &"north" and GameData.SPAWN_SIDES[4] == &"south",
+		"five regions, named east, south east, north, west and south")
+	expect(GameData.check_sides(GameData.SPAWNS, GameData.SPAWN_SIDES,
+		[[0], [1], [0, 1, 2], [0, 1, 2, 3, 4]]).size() > 0
+		and GameData.check_sides(GameData.SPAWNS, GameData.SPAWN_SIDES,
+			[[0], [0, 1], [0, 9], [0, 1, 2, 3, 4]]).size() > 0,
+		"a season that closes a side, or opens one that is not there, is refused")
+
+	# **Every generated wave from an open side**, dates 11-56, two seeds.
+	var stray: Array = []
+	for seed_value in [5, 424242]:
+		for day in range(11, Calendar.year_days() + 1):
+			if not Endless.is_generated(day):
+				continue
+			var open := Calendar.open_sides(day)
+			for row in (Waves.plain_night(day, seed_value).get("waves", []) as Array):
+				if not open.has(int((row as Array)[2])):
+					stray.append([seed_value, day, row])
+	expect(stray.is_empty(), "every generated wave of dates 11-56 comes from a side open that day",
+		str(stray.slice(0, 3)))
+	var a_side_rule := [{"note": "x", "opening_ticks": 0, "waves": [[&"walker", 3, 4]]}]
+	expect(not GameData.check_nights(a_side_rule).is_empty(),
+		"and check_nights refuses a spring night from the south")
+
+	# **Every region has somewhere to stand** on a fresh farm.
+	var farm := State.create(1570)
+	var empty: Array = []
+	for region in GameData.SPAWNS.size():
+		if Enemies.spawn_cells(farm, region).is_empty():
+			empty.append(region)
+	expect(empty.is_empty(), "every region has spawn cells on a fresh farm", str(empty))
+
+	# **0115's guarantee, for regions 2-4**: each built over as far as the
+	# rules allow, a few walkers from it all accounted for, and the night
+	# over in bounded ticks.
+	for region in [2, 3, 4]:
+		var state := State.create(1571 + region)
+		state["day"] = 30
+		state["nights_won"] = 29
+		Resources.gain(state, {GameData.WOOD: 5000, GameData.STONE: 5000})
+		Phases.begin_preparation(state)
+		var fenced := 0
+		for pair in (GameData.SPAWNS[region] as Array):
+			if Building.place(state, &"fence", Vector2i(int(pair[0]), int(pair[1]))):
+				fenced += 1
+		var record := {"note": "four walkers from one side", "opening_ticks": 0,
+			"waves": [[&"walker", 4, region]], "for_night": 30}
+		(state["wave"] as Dictionary)["tonight"] = record
+		NightRoad.through_build(state)
+		state["house_hp"] = 100000
+		var ticks := 0
+		while int(state["phase"]) == Phases.NIGHT and ticks < 6000:
+			Sim.tick(state)
+			ticks += 1
+		var to_come := Waves.remaining(state) - Entities.count(state)
+		var counted := int(state["killed"]) + int(state["breaches"]) \
+			+ Entities.count(state) + to_come
+		expect(fenced > 0 and int(state["phase"]) != Phases.NIGHT and counted == 4,
+			"region %d fenced over (%d cells): four walkers accounted for, the night over in %d ticks"
+				% [region, fenced, ticks],
+			"%d counted, %s" % [counted, Phases.name_of(int(state["phase"]))])
+
+	# **The preview's routes** (`Pathing.routes_if_blocked`): one field, every
+	# start walked on it - the same cells, in order, as asking of each start
+	# alone. On Winter 2 that is five starts, each a route of its own.
+	var winter := State.create(1577)
+	winter["day"] = 3 * GameData.SEASON_DAYS + 2
+	var starts: Array = []
+	for side in Calendar.open_sides(int(winter["day"])):
+		starts.append(Enemies.spawn_cells(winter, int(side))[0])
+	var blocked := Vector2i(-1, -1)
+	for radius in 6:
+		for candidate in Grid.within(Farm.house_centre(winter) + Vector2i(0, 4), radius):
+			if blocked.x < 0 and Farm.buildable(winter, candidate):
+				blocked = candidate
+	var together := Pathing.routes_if_blocked(winter, blocked, starts, 120)
+	var one_by_one: Array = []
+	var each_moves := true
+	for start in starts:
+		var alone := Pathing.route_if_blocked(winter, blocked, start, 120)
+		each_moves = each_moves and not alone.is_empty()
+		one_by_one.append_array(alone)
+	expect(starts.size() == 5 and blocked.x >= 0 and each_moves and together == one_by_one,
+		"on Winter 2 the preview walks one field from five starts, each a route of its own",
+		"%d starts, %d cells against %d" % [starts.size(), together.size(), one_by_one.size()])
 	_completed += 1

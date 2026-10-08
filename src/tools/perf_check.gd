@@ -44,6 +44,9 @@ const TICKS := 600
 ## and few enough that night ten is still being fought while it is timed.
 const TOWERS := 40
 
+## Their hit points: more than any night takes off them (task 0157).
+const TOWER_HP := 1000000
+
 ## And how many times a one-off - a path rebuild - is repeated.
 const REPEATS := 40
 
@@ -153,6 +156,14 @@ func _the_worst_case() -> Dictionary:
 				break
 			if Building.place(state, &"gun_tower", Vector2i(x, y)):
 				guns += 1
+	# **Guns that stay up** (task 0157). Spring opens the east alone now, so
+	# Spring 14's forty-two breakers and thirty-one tanks walk into this band
+	# instead of coming from the south east, and by the busiest moment every
+	# tower was rubble: a night tick of 433 us against 2265, `night_towers` at
+	# 2. This measures what a night costs, not whether the farm holds it, so
+	# the guns here take no lasting harm.
+	for cell in Farm.cells_with(state, &"gun_tower"):
+		Farm.occupant(state, cell)["hp"] = TOWER_HP
 	for y in range(1, Grid.HEIGHT - 1):
 		Building.place(state, &"wall", Vector2i(19 + moved.x, y))
 

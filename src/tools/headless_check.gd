@@ -12761,7 +12761,7 @@ func _task_0068_balance() -> void:
 	var state := State.create(4200)
 	Autoplay._a_day(state, Autoplay.POLICIES[&"towers"])
 	Autoplay._a_build_step(state, Autoplay.POLICIES[&"towers"])   # task 0119
-	var approach: Vector2i = (Autoplay._approaches() as Array)[0]
+	var approach: Vector2i = (Autoplay._approaches(state) as Array)[0]
 	var nearest := 1 << 30
 	for idx in (state["occupants"] as Dictionary):
 		var on: Dictionary = (state["occupants"] as Dictionary)[idx]
@@ -13076,14 +13076,15 @@ func _task_0070_endless() -> void:
 			"and %s has not been squeezed out of night 60" % kind,
 			str(late))
 
-	# **Both sides, always.** Rolling each wave's side on its own gave night
-	# 20 seven waves all on the east edge, which is a night half a farm
-	# answers.
+	# **Every side open on that date** (task 0157; it was both sides,
+	# always). Rolling each wave's side on its own gave night 20 seven waves
+	# all on the east edge, which is a night half a farm answers - so the
+	# deal alternates through the sides the season has open.
 	for step in [1, 3, 10, 15, 23]:
 		var night: int = past + step
 		var sides := Waves.spawns_in(Waves.plain_night(night, 777))
-		expect(sides.size() == (GameData.SPAWNS as Array).size(),
-			"night %d comes from every side" % night, str(sides))
+		expect(sides == Calendar.open_sides(night),
+			"night %d comes from every side open on its date" % night, str(sides))
 
 	# **Night 25 is playable.** The other done-when: it begins, it sends, and
 	# it ends.
@@ -14526,8 +14527,9 @@ func _task_0082_shots() -> void:
 	# Twenty-seven since 0152: the wave under a Full Moon. Twenty-eight since
 	# 0153: the morning a boss got away. Twenty-nine since 0154: the morning
 	# after a calm night. Thirty since 0155: the trampled field. Thirty-three
-	# since 0156: the north band, the new ore and a stump.
-	expect(names.size() == 33,
+	# since 0156: the north band, the new ore and a stump. Thirty-four since
+	# 0157: the winter build step's routes.
+	expect(names.size() == 34,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
@@ -14536,7 +14538,7 @@ func _task_0082_shots() -> void:
 			"passed_out", "build_day", "repair", "aim", "morning", "woken", "bedtime",
 			"tutorial_bed", "tutorial_start", "tutorial_dawn", "full_moon",
 			"boss_escaped", "calm_morning", "trampled", "north_band", "new_ore", "stump",
-			"options_controls_pad"]:
+			"winter_build", "options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

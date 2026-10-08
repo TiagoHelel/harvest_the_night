@@ -1509,9 +1509,14 @@ const ENDLESS: Dictionary = {
 ## cannot reach the house is skipped at spawn time rather than being kept in
 ## step by hand here.
 ##
-## **Two sides, not four.** A farm attacked from every direction at once cannot
-## be defended with the handful of towers a first night affords, and the reason
-## to choose where a wall goes disappears with it.
+## **Not every side at once.** A farm attacked from every direction on its
+## first night cannot be defended with the handful of towers it affords, and
+## the reason to choose where a wall goes disappears with it. So a side opens
+## with each season (task 0157, `SIDES_BY_SEASON`): spring comes from the
+## east, and winter from all five.
+##
+## Regions 2-4 are 0156's spawn ground (`SPAWN_BANDS`), the same cells -
+## `check_sides` keeps the two in step.
 const SPAWNS: Array = [
 	# 0 - the east, a line across the east road out in the open field.
 	[[68, 22], [68, 23], [68, 24], [68, 25], [68, 26], [68, 27],
@@ -1519,7 +1524,31 @@ const SPAWNS: Array = [
 	# 1 - the south east, along the open ground below the stall.
 	[[50, 32], [52, 32], [54, 32], [56, 32], [58, 32],
 	 [48, 31], [60, 31]],
+	# 2 - the north, along the top edge under the tree line.
+	[[35, 1], [36, 1], [37, 1], [38, 1], [39, 1], [40, 1], [41, 1],
+	 [42, 1], [43, 1], [44, 1]],
+	# 3 - the west, down the open ground west of the farmstead.
+	[[8, 20], [8, 21], [8, 22], [8, 23], [8, 24], [8, 25], [8, 26],
+	 [8, 27], [8, 28], [8, 29]],
+	# 4 - the south, across the south road near the bottom edge.
+	[[35, 55], [36, 55], [37, 55], [38, 55], [39, 55], [40, 55],
+	 [41, 55], [42, 55], [43, 55], [44, 55]],
 ]
+
+## What each `SPAWNS` region is called (task 0157) - the forecast's words,
+## and the order of `SPAWNS`.
+const SPAWN_SIDES: Array = [&"east", &"south_east", &"north", &"west", &"south"]
+
+## **Which sides each season attacks from** (task 0157), as `SPAWNS`
+## indices, in `SEASONS` order. Each season keeps the sides of the one before
+## and opens a new one; `Calendar.open_sides` reads it.
+const SIDES_BY_SEASON: Array = [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3, 4]]  # LEVER: sides per season
+
+## **Today's ten nights, allowed the south east in spring** (task 0157). They
+## were balanced on two sides and a ten-night run, and nights 2 to 10 come
+## from the south east, which spring does not open. `check_nights` lets
+## these dates use region 1 until 0271 rewrites spring and deletes this.
+const SPRING_DRAFT_SIDES: Dictionary = {1: [2, 3, 4, 5, 6, 7, 8, 9, 10]}
 
 
 # ===================================================================== rewards
@@ -1923,6 +1952,7 @@ static func validate() -> Array:
 	errors.append_array(check_iron(GATHERING, FARM_MAP))
 	errors.append_array(check_reachable(GATHERING, FARM_MAP))
 	errors.append_array(check_spawn_bands(SPAWN_BANDS, FARM_MAP))
+	errors.append_array(check_sides(SPAWNS, SPAWN_SIDES, SIDES_BY_SEASON))
 	errors.append_array(check_ponds(PONDS, FARM_MAP))
 	errors.append_array(check_sites(MAP_SITES, FARM_MAP))
 	errors.append_array(check_chain(RECIPES, SELL_PRICE))
@@ -2254,6 +2284,37 @@ static func check_reachable(nodes: Dictionary, rows: Array) -> Array:
 			if not _has_room_beside(rows, cell):
 				errors.append(("'%s' at %s is walled in - there is nowhere to "
 					+ "stand and mine it") % [id, cell])
+	return errors
+
+
+## **The sides** (task 0157): a name for every region; a season's sides
+## real regions, each season keeping the last one's; and regions 2-4 laid
+## on 0156's cleared ground.
+static func check_sides(spawns: Array, names: Array, by_season: Array) -> Array:
+	var errors: Array = []
+	if names.size() != spawns.size():
+		errors.append("%d side names for %d spawn regions" % [names.size(), spawns.size()])
+	if by_season.size() != SEASONS.size():
+		errors.append("sides for %d seasons, and there are %d" % [by_season.size(), SEASONS.size()])
+	var before: Array = []
+	for season in by_season.size():
+		var open: Array = by_season[season]
+		if open.is_empty():
+			errors.append("season %d opens no side at all" % season)
+		for side in open:
+			if int(side) < 0 or int(side) >= spawns.size():
+				errors.append("season %d opens side %d, and there are %d"
+					% [season, int(side), spawns.size()])
+		for side in before:
+			if not open.has(side):
+				errors.append("season %d closes side %d, which the season before opened"
+					% [season, int(side)])
+		before = open
+	var bands := {2: &"north", 3: &"west", 4: &"south"}
+	for region in bands:
+		if region < spawns.size() and SPAWN_BANDS.has(bands[region]) \
+				and str(spawns[region]) != str(SPAWN_BANDS[bands[region]]):
+			errors.append("spawn region %d is not 0156's %s band" % [region, bands[region]])
 	return errors
 
 
@@ -2839,6 +2900,23 @@ static func check_nights(nights: Array) -> Array:
 				errors.append("night %d wave %d waits less than no time"
 					% [n + 1, w + 1])
 
+	# **Every night comes only from the sides its season has open** (task
+	# 0157), read off the record's index: the table is a year's, date n + 1.
+	# Today's ten are allowed the south east in spring (`SPRING_DRAFT_SIDES`).
+	for n in nights.size():
+		if typeof(nights[n]) != TYPE_DICTIONARY or not (nights[n] as Dictionary).has("waves"):
+			continue
+		var date := n + 1
+		var open := Calendar.open_sides(date)
+		for wave in ((nights[n] as Dictionary)["waves"] as Array):
+			if (wave as Array).size() < 3:
+				continue
+			var side := int((wave as Array)[2])
+			var allowed: Array = SPRING_DRAFT_SIDES.get(side, [])
+			if not open.has(side) and not allowed.has(date):
+				errors.append("night %d comes from side %d, which its season has not opened"
+					% [date, side])
+
 	# **Every night is sent inside the night** (task 0137): its schedule ends
 	# `DAWN_MARGIN_TICKS` before dawn, so the last wave has time to arrive.
 	for n in nights.size():
@@ -2957,6 +3035,8 @@ static func digest() -> int:
 		# guard exists to stop.
 		"endless": ENDLESS,
 		"spawns": SPAWNS,
+		# **The sides, by season** (task 0157).
+		"sides": [SPAWN_SIDES, SIDES_BY_SEASON, SPRING_DRAFT_SIDES],
 		"rewards": REWARDS,
 		"defeat": [DEFEAT_LOSS_PERCENT, DEFEAT_KEEPS_MONEY,
 			DEFEAT_KEEPS_TECH, TRAMPLE_REACH],

@@ -16040,3 +16040,164 @@ Verify: **PASS** on the second run, 60 passed in 572 s (OVER BUDGET as
 before). headless_check 16314 (+24, the three new goldens), headless_v1 402
 (+18), input_check 1066, input_v1 184, placeholders 61 stand-ins over 11
 packs.
+
+## 0157 - A new side every season - done 2026-10-08
+
+What changed: the horde opens a new side each season. Spring comes from the
+east; summer adds the south east; autumn the north; winter comes from all
+five.
+
+**The tables** (`game_data.gd`, both in `digest()`'s new `sides` row):
+- `SPAWNS` gains regions 2 north `(35-44, 1)`, 3 west `(8, 20-29)` and 4
+  south `(35-44, 55)`. They are 0156's `SPAWN_BANDS`, cell for cell, ten each.
+  Indices 0 and 1 did not move.
+- `SPAWN_SIDES`: `east`, `south_east`, `north`, `west`, `south`, the
+  forecast's words, in `SPAWNS` order.
+- `SIDES_BY_SEASON  # LEVER`: `[[0], [0, 1], [0, 1, 2], [0, 1, 2, 3, 4]]`.
+- `check_sides` (in `validate()`) refuses:
+  - a names list that does not match `SPAWNS`;
+  - a season with no side, or with an index that is not a region;
+  - a season that closes a side the one before opened;
+  - regions 2-4 that drift off 0156's bands.
+- `Calendar.open_sides(date)` reads the table.
+
+**The nights:**
+- `Endless._lay_out` alternates through the date's open sides instead of
+  every region. 0153's boss row still comes from the east.
+- `_task_0070_endless`'s "both sides, always" now reads "every side open on
+  that date": nights 11, 13, 20, 25 and 33 come from exactly
+  `Calendar.open_sides(night)`.
+- `check_nights` gains the side rule. A record's date is its index + 1, so
+  `validate()` asks it of `NIGHTS` and `nights.py --check` of the resolved
+  year. 0152's year check in headless_v1 now passes the whole year rather
+  than only the Full Moons, so the rule is asked of every date.
+
+**A deviation, recorded as the prompt asks:**
+- Today's ten nights break the side rule in spring: nights 2-10 come from
+  the south east, which spring does not open.
+- `SPRING_DRAFT_SIDES = {1: [2..10]}` is the explicit, commented allowance.
+  0271 deletes it when it remaps those nights.
+- Until then, the build step's preview draws the sides the season has open,
+  so on nights 2-10 it shows the east route while the waves come from the
+  south east. Before this task it always drew the east alone, so that is no
+  worse than it was.
+
+**0115's guarantee, for regions 2-4:**
+- Each region was fenced over as far as the rules allow: all ten cells of
+  each.
+- A hand-made record of four walkers from it, through the build step, with
+  the house at 100000 hp.
+- Every member was accounted for (killed, breached, alive or waiting) and
+  the night ended. The four came out beside the sealed line
+  (`Enemies._beside_the_line`, 0115's fix) and all four reached the house:
+  north in 543 ticks, west in 682, south in 726.
+
+**The build step's preview:**
+- New `Pathing.routes_if_blocked(state, blocked, froms, most)` builds the
+  field once and walks it from every start. `route_if_blocked` is now that
+  with one start. headless_v1 asserts the five-start answer is the
+  one-start answers end to end.
+- `BuildMode._ways_in()` (was `_a_way_in()`) takes the first spawn cell of
+  every side open tonight.
+- **The dots moved to the night cues' layer** (`WorldView._route_dots`, on
+  `NightCues`, under the Zzz and the cursor). Two reasons, both found in the
+  first `winter_build` shot:
+  - On the terrain layer the night's tint turned the yellow dots into grey
+    ones that barely read.
+  - The north's route runs under the tree line and into the house, and
+    occupants drew over it, so one route of the five was not on screen at
+    all.
+  - Now the dots draw over the trees and the roof, and out of the tint, as
+    the cursor does.
+
+**The robot** (`autoplay.gd`):
+- `_approaches(state)` reads the sides tonight's night comes from.
+- A calm night sends nobody, so then it reads the sides the season has open.
+- It used to take every region in turn. With five, that is four towers of
+  five on ground nobody walks in spring - the very mistake its comment
+  records from task 0068.
+
+**Not changed:**
+- The title backdrop's walkers and the old suites' spawn loops still take
+  `i % SPAWNS.size()`, so they now arrive from all five regions.
+- The tutorial's build point still reads the nearest spawn cell. That is
+  still the south east's (48,31), 17 from the house; the north is 22.
+
+**Tests:**
+- `_task_0157_sides` (headless_v1):
+  - the open sides of Spring 1, Summer 1, Autumn 1 and Winter 1 are the
+    table's;
+  - five regions with their names;
+  - `check_sides` refuses a closed side and a missing region;
+  - dates 11-56, seeds 5 and 424242: every generated wave comes from an
+    open side;
+  - `check_nights` refuses a spring night from the south;
+  - every region has spawn cells on a fresh farm;
+  - the 0115 guarantee for regions 2-4;
+  - the preview's five-start routes.
+- `_case_0157_routes` (input_v1): by mouse in the build step, a wall held on
+  Winter 2 draws a route from each of the five sides, and on Spring 2 from
+  the east alone.
+- The shot scenario count is 34.
+
+**Perf** (`python tools/perf.py`):
+- **The flow field adds no sweep.** `path_refresh` measured 8947, 8821,
+  9204 and 9109 us against 0156's 9398. It is inside `PATH_BUDGET_US`
+  (33333) at 27%, and inside the 40% tolerance.
+- **The worst case had gone empty**, and that is what failed the first
+  verify (`night_traps` 71 -> 114 us):
+  - perf's night is Spring 14 (0153), with the same record as before but
+    from the east alone;
+  - before, its 42 breakers and 31 tanks came from the south east;
+  - now they walk into the band of 40 gun towers east of the house, and by
+    the busiest moment every tower was rubble: "0 towers, 39 zombies", a
+    night tick of 433 us, `night_towers` 2 us. A worktree of HEAD ran the
+    same farm with all 40 towers standing all night.
+- `perf_check` now gives its towers `TOWER_HP` (1000000), with the reason in
+  the comment. It measures what a night costs, not whether the farm holds
+  it.
+- The night now peaks at 55 zombies with 40 guns firing, which is a heavier
+  worst case than 0156's.
+- `python tools/perf.py --accept`:
+
+  | | from | to |
+  |---|---|---|
+  | night tick | 2265 | 3500 us (42% of the 8333 budget) |
+  | enemies | 251 | 506 |
+  | towers | 1655 | 2650 |
+  | traps | 71 | 161 |
+  | combat | 17 | 37 |
+  | path rebuild | 9398 | 9109 |
+
+- **A balance finding for 0271**: from one side, Spring 14 beats the perf
+  farm. Its 40 towers fell by tick ~1170 and the house before dawn. Summer
+  14 did the same in a trial. Spring's balance is 0271's, which rewrites
+  the season.
+
+**Shot** (`implementation/shots/0157/winter_build.png`, FHD, opened): Winter
+2's build step, a wall held east of the house, and the tutorial marked done
+(the first take had day one's build line printed over the hotbar). Five
+dotted routes come in:
+- the west along rows 20 and 23;
+- the north down column 40, through the tree line and over the roof;
+- the east along row 22;
+- the south east up column 50, then along row 26;
+- the south up column 38.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `50760118` | `50760118` | unchanged: day 1 comes from the east as before, and the scenario fights an authored night |
+| data hash | `2383855438` | `721761836` | `SPAWNS`' three new regions, and `SPAWN_SIDES`, `SIDES_BY_SEASON` and `SPRING_DRAFT_SIDES` in `digest()`'s `sides` row |
+
+Files: src/core/{game_data,calendar,endless,pathing}.gd,
+src/ui/{build_mode,world_view}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot,autoplay,perf_check}.gd,
+tools/determinism_data_hash.txt, tools/perf_baseline.txt, implementation/shots/0157/
+
+Verify: **PASS** on the second run (`--accept`), 60 passed in 594 s (OVER
+BUDGET as before). headless_check 16349, headless_v1 412 (+10), input_check
+1066, input_v1 186 (+2), nights 56 a year for both seeds, perf 3576 us of
+8333 (43%) and a path rebuild 9157 us of 33333. The first run failed only
+`perf` (above) and the data hash.
