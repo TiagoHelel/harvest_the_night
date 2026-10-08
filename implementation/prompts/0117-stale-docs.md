@@ -1,7 +1,7 @@
 # 0117 - Three stale documents
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** nothing
 - **Likely files:** CHANGELOG.md, docs/PLAYTEST.md, assets/locale/strings.csv
 

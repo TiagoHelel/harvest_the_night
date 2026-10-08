@@ -12980,3 +12980,31 @@ requests` - OSError 22 writing BACKLOG.md / INDEX.md while Codex and VS Code
 were re-reading them (16 of 20 back-to-back writes failed). Fixed in its own
 commit, ea8a1f4d: tools/textfile.py retries a write for up to 5 s, used by
 gen_backlog, task.py and assets.py; 0 of 40 after.
+
+## 0117 - Three stale documents - done 2026-10-07
+
+What changed: words only. CHANGELOG 0.1.0 said "Sixteen crops" - there are three
+(wheat, corn, carrot); read against the game while there, the section also
+said the stall "sells what you have not built yet" (it sells wood, stone, iron
+and produce from `DAILY_STOCK`, and seeds are paid at sowing) and "Ten nights"
+with nothing after (`Run.go_endless` and the result screen's PLAY ON carry the
+run into generated nights): all three said true now; the rest checked and
+holds (seven tutorial lines, twelve tech nodes, cows and chickens, workshop,
+press and kitchen, the night only on request, the a11y options).
+docs/PLAYTEST.md: "Anything after night ten. It stops." now says the game
+offers to play on and the nights keep coming; the "Ten nights is the whole of
+it" intro says the same. **A fourth stale line in the same file, fixed too**:
+"The tech tree past the first two rows. Some of it is not wired up." - all 12
+`gives` keys are read by `src/core` today (checked with a scan), so it now asks
+testers to ignore the tree's prices instead. Headings and the note-key line
+`_task_0105_playtest` reads are untouched. `TUT_SELL` no longer says the stall
+sells seeds: "The stall buys what you gathered, and sells wood, stone and iron."
+/ "A banca compra o que você colheu, e vende madeira, pedra e ferro." (67 and
+66 characters against 50; TUT_BUILD is 76). The line moves again with 0170.
+Files: CHANGELOG.md, docs/PLAYTEST.md, assets/locale/strings.csv
+Verify: **58 passed, 0 failed in 531s** (OVER BUDGET 300, as before); i18n OK, 405
+keys; headless_check 16173 (run again after the last PLAYTEST edit, which landed
+while verify was running: 16173, 0 failed), headless_v1 87, input_check 1074,
+input_v1 11; sim 2728872771 and data 1968527100 unchanged - `TUTORIAL` holds
+the key, not the text. A grep of both documents finds no "Sixteen" and no
+"It stops".

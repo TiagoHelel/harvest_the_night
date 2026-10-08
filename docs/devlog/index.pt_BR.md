@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-117 tarefas em 5 dias, de  a 2026-10-07. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+118 tarefas em 5 dias, de  a 2026-10-07. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -160,6 +160,7 @@ voz alta.
 | 0114 | Untouched means the house the night started with | 2026-10-07 |
 | 0115 | Spawn ground that cannot be built shut | 2026-10-07 |
 | 0116 | The mortar and the flamethrower, empty and upgraded | 2026-10-07 |
+| 0117 | Three stale documents | 2026-10-07 |
 
 ## Toda vez que o jogo mudou por baixo
 

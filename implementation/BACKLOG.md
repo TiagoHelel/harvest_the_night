@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **115 / 296 done**
+`#########...............`  **116 / 296 done**
 
-0 doing / 181 todo / 0 blocked across 18 phases.
+0 doing / 180 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0117 - Three stale documents**. The whole of what is left is
+First up: **0118 - One road into the waves**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-181 task(s) left, the ready ones first, then what they
+180 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0117 - Three stale documents
-
-Ready to pick up.  Likely files: `CHANGELOG.md, docs/PLAYTEST.md, assets/locale/strings.csv`.
-
-Three places tell a player something the game does not do. Fix the words and nothing else.
-
-- `CHANGELOG.md` 0.1.0 says 'Sixteen crops'; there are three (`GameData.CROPS`: wheat, corn, carrot). Say three, and read the rest of that section against the game while there
-- `docs/PLAYTEST.md` 'What to ignore' says 'Anything after night ten. It stops.' - it does not: the run carries on into generated endless nights (`Endless`, `Run.go_endless`). Say what really happens. Keep the headings `_task_0105_playtest` looks for ('What to try', 'What to ignore', 'What to report') and the line that names the note key
-- `TUT_SELL` says the stall 'sells seeds'; it does not - seeds are paid for at planting (`CROPS[...]["seed_cost"]`) and `DAILY_STOCK` has none. Rewrite the line in English and Brazilian Portuguese, about as long as today's: its `width` column is 0, so `tools/i18n_check.py` checks that both languages are there and agree on `%` specifiers, and `MAX_TUTORIAL_LINE_LENGTH` measures the key, not the words
-- Words only, no rule changes: the day-barricade allowance is 0132's, the can's '/8' is 0174's, and seeds sold by season arrive with 0170 (the line moves again then). `TUTORIAL` holds the key, not the text, so neither hash moves
-
-  - done when: A grep of `CHANGELOG.md` and `docs/PLAYTEST.md` finds no 'Sixteen' and no 'It stops'
-  - done when: `python tools/i18n_check.py` passes with the new `TUT_SELL` in both languages
 
 ### 0118 - One road into the waves
 
@@ -3469,14 +3455,14 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (5/14)
+## 9 - v1.0 groundwork  (6/14)
 
 - [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
 - [x] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
 - [x] **0114** [Untouched means the house the night started with](prompts/0114-untouched-house.md)
 - [x] **0115** [Spawn ground that cannot be built shut](prompts/0115-spawn-room.md)
 - [x] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md)
-- [ ] **0117** [Three stale documents](prompts/0117-stale-docs.md)
+- [x] **0117** [Three stale documents](prompts/0117-stale-docs.md)
 - [ ] **0118** [One road into the waves](prompts/0118-one-road-into-night.md)
 - [ ] **0119** [Tests and tools build in the build step](prompts/0119-build-in-preparation.md) - needs 0118
 - [ ] **0120** [One road for art that has not arrived](prompts/0120-placeholder-road.md)

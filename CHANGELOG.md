@@ -12,13 +12,17 @@ The first build that is worth putting in front of anybody.
 
 ### The game
 
-- **Ten nights.** Farm by day, defend the same tiles by night, and the night
-  starts when you send for it rather than on a timer.
-- Sixteen crops, animals, fishing, a workshop, a press and a kitchen.
+- **Ten nights, and then as many as you can hold.** Farm by day, defend the
+  same tiles by night, and the night starts when you send for it rather than
+  on a timer. Win the tenth and you can play on: the nights keep coming,
+  generated and harder each time.
+- Three crops (wheat, corn and carrots), cows and chickens, fishing, a
+  workshop, a press and a kitchen.
 - Towers, walls, traps and a flare, powered by a generator that browns out
   when you ask too much of it.
 - A tech tree of twelve upgrades across three branches.
-- A stall that buys what you grow and sells what you have not built yet.
+- A stall that buys what you grow and gather, and sells wood, stone, iron and
+  produce from a stock that refills every day. Seeds are paid for as you sow.
 - Losing a night costs you a day and a share of the stock, never the run.
 
 ### Around it

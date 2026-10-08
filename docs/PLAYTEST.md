@@ -9,7 +9,8 @@ You farm by day. At night the same tiles are a tower defence and something
 walks in from the dark to eat what you grew. You decide when the night starts
 by pressing for it, so a day is as long as you want it to be.
 
-Ten nights is the whole of it. If you get to the end, you have seen it.
+Ten nights is the story. If you get to the end of the tenth, you have seen it -
+the game then offers to play on, and the nights keep coming.
 
 ## Play it once, without being told anything
 
@@ -41,8 +42,11 @@ whole feedback format. Three sentences is plenty.
   animations; report unreadable silhouettes, misplaced contacts or missing poses
   at the game's 480x270 size. See `implementation/sprites/DELIVERY.md` for coverage.
 - **Sound balance.** The mix is not done.
-- **The tech tree past the first two rows.** Some of it is not wired up.
-- **Anything after night ten.** It stops.
+- **The tech tree's prices.** Every node does what it says; whether each is
+  worth what it costs is still being tuned.
+- **Anything after night ten.** Win the tenth and the game offers to play
+  on: the nights keep coming, generated and harder each time, until the house
+  falls. Play them if you like, but the ten are what this build is about.
 - **The orange box at the start of each run.** That is this build, not
   the game. It goes away after a few seconds.
 
