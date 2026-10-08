@@ -89,16 +89,21 @@ const SCENARIOS: Array = [
 var _written := 0
 var _failed := 0
 
-## Where the farmer is walked to before the shutter.
+## Where the farmer is walked to before the shutter, by day.
 ##
-## **The camera is not something a scenario can set.** `Main._process` calls
-## `look_at_cell(Player.cell(state))` every frame, because the camera follows
-## the farmer - so a scenario that moved the camera had it moved back before
-## the first settle frame, and the field stayed just off the left edge
-## through three attempts at this. Walking the farmer is not a workaround for
-## that, it is the same thing a player does when they want to look at
-## something.
+## **By day the camera is not something a scenario can set.** `Main` follows
+## the farmer every frame, so a scenario that moved the camera had it moved
+## back before the first settle frame, and the field stayed just off the left
+## edge through three attempts at this. Walking the farmer is not a
+## workaround for that, it is the same thing a player does when they want to
+## look at something.
 var _standing_at := Vector2i.ZERO
+
+## **And from the build step to the morning it is** (task 0130): the camera
+## is the player's, so a night scenario puts it where the picture is with
+## `Main.aim_night_camera`. Nowhere is the house, where the night opens.
+## Both are set through `_look_at`.
+var _camera_at := Vector2i(-1, -1)
 
 ## Put on the end of a picture's name when it is not in English.
 var _tongue := ""
@@ -299,6 +304,7 @@ func _take_the_trailer(folder: String) -> void:
 	await process_frame
 
 	main.begin_run(SEED)
+	main.edge_pan = false
 	var driver = main.get_node("%SimDriver")
 	var state: Dictionary = driver.state
 	_a_defended_farm(state)
@@ -428,6 +434,7 @@ func _take_the_switch(folder: String) -> void:
 	await process_frame
 
 	main.begin_run(SEED)
+	main.edge_pan = false
 	var driver = main.get_node("%SimDriver")
 	var state: Dictionary = driver.state
 	_a_defended_farm(state)
@@ -601,6 +608,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	var driver = main.get_node("%SimDriver")
 	var state: Dictionary = driver.state
 	_standing_at = Player.cell(state)
+	_camera_at = Vector2i(-1, -1)
+	# The real pointer is wherever the desk left it: no edge panning.
+	main.edge_pan = false
 
 	match name:
 		"noon": _set_noon(state)
@@ -621,8 +631,12 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"passed_out": _set_passed_out(state)
 		"options_controls_pad": _set_options_controls_pad(state)
 
-	_walk_to(state, _standing_at)
-	main.get_node("%WorldView").look_at_cell(Player.cell(state))
+	if int(state["phase"]) == Phases.DAY:
+		_walk_to(state, _standing_at)
+		main.get_node("%WorldView").look_at_cell(Player.cell(state))
+	else:
+		var at := _camera_at if _camera_at.x >= 0 else Farm.house_centre(state)
+		main.aim_night_camera((Vector2(at) + Vector2.ONE * 0.5) * float(GameData.TILE_SIZE))
 	_only_showing(main, str(entry[2]))
 
 	for i in SETTLE:
@@ -881,7 +895,7 @@ func _a_sown_field(state: Dictionary) -> void:
 		# crops, the farmer and the house. A farm shot with no farmer in it
 		# is a picture of scenery.
 		middle = Vector2i(middle.x / sown, middle.y / sown)
-		_standing_at = Vector2i(middle.x + 3, middle.y)
+		_look_at(Vector2i(middle.x + 3, middle.y))
 	# The crops need time on them or the field is six rows of bare soil.
 	Sim.advance(state, 40 * GameData.SECONDS)
 
@@ -958,6 +972,7 @@ func _set_passed_out(state: Dictionary) -> void:
 	_a_sown_field(state)
 	state["day_tick"] = GameData.DAY_TICKS - 1
 	Sim.advance(state, 1)
+	_look_at(Player.cell(state))
 
 
 func _set_dusk(state: Dictionary) -> void:
@@ -986,7 +1001,7 @@ func _set_wave(state: Dictionary) -> void:
 		Enemies.spawn(state, &"walker" if i % 3 else &"runner",
 			i % GameData.SPAWNS.size())
 	Sim.advance(state, 4 * GameData.SECONDS)
-	_standing_at = _the_defence_line(state)
+	_look_at(_the_defence_line(state))
 
 
 func _set_result(state: Dictionary) -> void:
@@ -999,6 +1014,8 @@ func _set_result(state: Dictionary) -> void:
 	# fast-forward, and task 0078 proved it lands where watching lands.
 	Sim.skip_night(state)
 	Sim.advance(state, 2)
+	# The result leaves the night camera where it was: over the fight.
+	_look_at(_the_defence_line(state))
 
 
 func _set_tech(state: Dictionary) -> void:
@@ -1057,6 +1074,14 @@ func _put_up_the_defence(state: Dictionary) -> void:
 ## depend on one. Bounded, because a farmer walked at a rock would otherwise
 ## push against it until the heat death of the universe - and a shot tool
 ## that hangs is worse than one that takes a slightly wrong picture.
+## **The camera hook** (task 0130): what a scenario wants in the picture. By
+## day the farmer is walked there and the camera follows him; from the
+## build step to the morning the night camera is put on it.
+func _look_at(cell: Vector2i) -> void:
+	_standing_at = cell
+	_camera_at = cell
+
+
 func _walk_to(state: Dictionary, target: Vector2i) -> void:
 	var intent: Dictionary = state["intent"]
 	var move: Array = intent["move"]

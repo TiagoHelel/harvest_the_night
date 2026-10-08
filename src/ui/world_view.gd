@@ -859,6 +859,29 @@ func follow_player(subtile: Vector2i, delta: float) -> void:
 	_camera.force_update_scroll()
 
 
+## **The night camera** (task 0130): moved by the player rather than by the
+## farmer. `direction` is up to 1 a side, and a diagonal is no faster than a
+## straight line. `seconds` is real time, so 2x and 4x do not speed it up.
+## Clamped like every other camera move, with no zoom.
+func pan_camera(direction: Vector2, seconds: float) -> void:
+	if direction == Vector2.ZERO:
+		return
+	_camera.position = _camera_bounds(_camera.position
+		+ direction.limit_length(1.0) * GameData.CAMERA_PAN_SPEED * maxf(seconds, 0.0))
+	_camera.force_update_scroll()
+
+
+## Where the camera is looking, in world pixels - for the tests and the shots.
+func camera_centre() -> Vector2:
+	return _camera.position
+
+
+## Put the camera's centre on a world point, clamped - the shots' hook.
+func look_at_point(point: Vector2) -> void:
+	_camera.position = _camera_bounds(point)
+	_camera.force_update_scroll()
+
+
 func _camera_bounds(point: Vector2) -> Vector2:
 	var half := get_viewport_rect().size * 0.5
 	var world := Vector2(WORLD_SIZE)

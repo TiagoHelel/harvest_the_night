@@ -59,6 +59,12 @@ const ACTIONS: Array = [
 	[&"ability", &"ACT_ABILITY", &"ACT_GROUP_NIGHT"],
 	[&"speed", &"ACT_SPEED", &"ACT_GROUP_NIGHT"],
 	[&"skip_night", &"ACT_SKIP_NIGHT", &"ACT_GROUP_NIGHT"],
+	# The night camera (task 0130): the right stick's own, beside the move
+	# keys that also pan once he is in bed.
+	[&"pan_left", &"ACT_PAN_LEFT", &"ACT_GROUP_NIGHT"],
+	[&"pan_right", &"ACT_PAN_RIGHT", &"ACT_GROUP_NIGHT"],
+	[&"pan_up", &"ACT_PAN_UP", &"ACT_GROUP_NIGHT"],
+	[&"pan_down", &"ACT_PAN_DOWN", &"ACT_GROUP_NIGHT"],
 
 	[&"pause", &"ACT_PAUSE", &"ACT_GROUP_SCREENS"],
 	[&"cancel", &"ACT_CANCEL", &"ACT_GROUP_SCREENS"],

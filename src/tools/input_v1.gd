@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 5
+const V1_CASES := 6
 
 
 func _process(delta: float) -> bool:
@@ -55,6 +55,7 @@ func _run() -> void:
 	await _case_0121_pad()
 	await _case_0127_bed()
 	await _case_0129_asleep()
+	await _case_0130_night_camera()
 	_finish()
 
 
@@ -263,6 +264,18 @@ func _case_0121_pad() -> void:
 	var up := InputEventJoypadMotion.new()
 	up.axis = JOY_AXIS_RIGHT_Y
 	up.axis_value = -1.0
+	# **The right stick is the night camera's since task 0130**, and no pad
+	# input is left over: the move is refused, naming it.
+	var taken: Dictionary = actions.bind(&"interact", up)
+	expect(not bool(taken.get("ok", true))
+		and StringName(taken.get("clash", &"")) == &"pan_up",
+		"the right stick is the camera's: interact onto it is refused", str(taken))
+	# So it is freed by hand for the rest of this. `apply()` - which the bind
+	# below and the reset both run - builds from the photograph, so LOOK UP
+	# gets it back.
+	for held in InputMap.action_get_events("pan_up"):
+		if actions.same_event(held, up):
+			InputMap.action_erase_event("pan_up", held)
 	var padded: Dictionary = actions.bind(&"interact", up)
 	expect(bool(padded.get("ok", false))
 		and InputMap.action_has_event("interact", g)
@@ -276,6 +289,8 @@ func _case_0121_pad() -> void:
 		and InputMap.action_has_event("interact", space)
 		and InputMap.action_has_event("interact", a),
 		"and reset puts back both, SPACE and A")
+	expect(InputMap.action_has_event("pan_up", up),
+		"and LOOK UP has the right stick back")
 	await close_scene()
 	_completed += 1
 
@@ -398,5 +413,117 @@ func _case_0129_asleep() -> void:
 	expect(int(state["house_hp"]) > hurt,
 		"clicking RepairButton mends a damaged house",
 		"%d to %d" % [hurt, int(state["house_hp"])])
+	await close_scene()
+	_completed += 1
+
+
+## 0130 - at night the camera is the player's.
+func _case_0130_night_camera() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var main := _scene
+	var state := driver.state
+	await frames(4)
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"GO TO BED to start the night")
+	await frames(3)
+	var house := (Vector2(Farm.house_centre(state)) + Vector2.ONE * 0.5) \
+		* float(GameData.TILE_SIZE)
+	expect(world.camera_centre().distance_to(world._camera_bounds(house)) < 1.0,
+		"the night opens with the camera on the house",
+		"%s against %s" % [world.camera_centre(), house])
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT, "the night")
+
+	# **Holding D pans right at CAMERA_PAN_SPEED, in real seconds**, from the
+	# middle of the farm so no bound is near; the farmer stays in bed.
+	var middle := Vector2(WorldView.WORLD_SIZE) * 0.5
+	main.aim_night_camera(middle)
+	await frames(2)
+	var from := world.camera_centre()
+	var farmer := Player.position(state)
+	await press_key(KEY_D, true)
+	var started := Time.get_ticks_usec()
+	await frames(20)
+	var seconds := float(Time.get_ticks_usec() - started) / 1000000.0
+	var moved := world.camera_centre() - from
+	await press_key(KEY_D, false)
+	await frames(2)
+	var expected := GameData.CAMERA_PAN_SPEED * seconds
+	expect(moved.x > expected * 0.6 and moved.x < expected * 1.5 and absf(moved.y) < 0.01,
+		"holding D at night pans the camera right by about speed x time",
+		"%.1f px in %.3f s, expected about %.1f" % [moved.x, seconds, expected])
+	expect(Player.position(state) == farmer, "and leaves the farmer where he is")
+
+	# **The bound.** Far past the right edge, D holds it there.
+	var edge: Vector2 = world._camera_bounds(Vector2(1.0e6, middle.y))
+	main.aim_night_camera(Vector2(1.0e6, middle.y))
+	await hold_key(KEY_D, 20)
+	expect(is_equal_approx(world.camera_centre().x, edge.x),
+		"panning past the farm's edge stops at the bound",
+		"%s against %s" % [world.camera_centre(), edge])
+
+	# **The right stick**, through `pan_left`.
+	main.aim_night_camera(middle)
+	await frames(2)
+	from = world.camera_centre()
+	await _pad_axis(JOY_AXIS_RIGHT_X, -1.0)
+	await frames(15)
+	await _pad_axis(JOY_AXIS_RIGHT_X, 0.0)
+	await frames(2)
+	expect(world.camera_centre().x < from.x - 4.0,
+		"a right-stick push pans the camera",
+		"%s from %s" % [world.camera_centre(), from])
+
+	# **The edge band**, only with the window focused and the pointer in it.
+	var size := main.get_viewport().get_visible_rect().size
+	var motion := InputEventMouseMotion.new()
+	motion.position = Vector2(size.x - 1.0, size.y * 0.5)
+	motion.global_position = motion.position
+	root.push_input(motion)
+	main.get_window().mouse_exited.emit()
+	main.aim_night_camera(middle)
+	await frames(10)
+	expect(world.camera_centre() == world._camera_bounds(middle),
+		"the pointer at the edge pans nothing while it is outside the window")
+	main.get_window().focus_entered.emit()
+	main.get_window().mouse_entered.emit()
+	await frames(15)
+	expect(world.camera_centre().x > middle.x + 4.0,
+		"and pans right at the right edge once it is in a focused window",
+		str(world.camera_centre()))
+	main.get_window().mouse_exited.emit()
+
+	# **Nothing pans while the pause menu is up.**
+	var router: Node = root.get_node_or_null(^"App")
+	main.aim_night_camera(middle)
+	await tap_key(KEY_P)
+	await until(func() -> bool: return router.here() == router.PAUSE, "the pause menu")
+	from = world.camera_centre()
+	await hold_key(KEY_D, 15)
+	expect(world.camera_centre() == from, "nothing pans while the pause menu is up")
+	await tap_key(KEY_ESCAPE)
+	await until(func() -> bool: return router.here() == router.RUN, "the run again")
+
+	# **The morning gives it back to the farmer.**
+	main.aim_night_camera(Vector2(1.0e6, 0.0))
+	Phases.enter_result(state, true)
+	await frames(3)
+	var held := world.camera_centre()
+	expect(held == world._camera_bounds(Vector2(1.0e6, 0.0)),
+		"the result leaves the camera where it is", str(held))
+	Phases.begin_day(state)
+	await frames(30)
+	var on := Vector2(Player.position(state)) * float(GameData.TILE_SIZE) / Player.SUBTILE
+	expect(world.camera_centre().distance_to(world._camera_bounds(on)) < float(GameData.TILE_SIZE),
+		"after the morning the camera is back on the farmer",
+		"%s against %s" % [world.camera_centre(), world._camera_bounds(on)])
 	await close_scene()
 	_completed += 1

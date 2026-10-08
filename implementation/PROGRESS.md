@@ -13441,3 +13441,75 @@ bed, then the dark farm; at night nobody on the porch, the windows lit and the
 Zzz (the note stand-in, gold) on the roof clear of the night bar; passed out, he
 lies on the path. The `wave` camera now stays on the porch (he no longer walks
 to the defence line) - 0130's camera is what frees it.
+
+## 0130 - The night camera - done 2026-10-08
+
+What changed: from the build step until the morning the camera is the
+player's. `main.gd`'s new `_steer_camera` follows the farmer by day as before.
+The first frame outside DAY hands the camera over (`aim_night_camera`) and
+opens it on the house. Then `WorldView.pan_camera` moves it with
+`pan_direction()`, which reads three inputs:
+- the move keys (WASD, the arrows, and the left stick and d-pad bound to them);
+- the right stick through four new actions;
+- the pointer inside a `CAMERA_EDGE_PIXELS` band at the window's edge, only
+  while the window has the focus and the pointer is in it. Both are tracked
+  from the window's own `focus_*` / `mouse_*` signals, and the pointer from
+  `main._input`, read and never consumed.
+
+A diagonal is no faster than a straight line, and everything is clamped by
+`_camera_bounds`, with no zoom. Nothing pans while the pause menu is up or on
+the result, which leaves the camera where it was; the morning snaps it back to
+the farmer, and he is followed from there.
+
+`CAMERA_PAN_SPEED` (240 world px/s, `# LEVER` 120-480) and `CAMERA_EDGE_PIXELS`
+(8, 4-16) are scalars beside `TRANSITION_SECONDS`, out of `digest()` like it
+(view feel, not balance). The speed is in real seconds: 2x/4x do not use
+`time_scale`, so `delta` is real.
+
+**The right stick's actions**: `pan_left` / `pan_right` / `pan_up` / `pan_down`
+are in `project.godot` (right stick axes 2 and 3, no keyboard default - the
+move keys pan at night) and in `InputActions.ACTIONS` under `ACT_GROUP_NIGHT`.
+Their strings are `ACT_PAN_*`: LOOK LEFT/RIGHT/UP/DOWN, OLHAR À ESQUERDA/À
+DIREITA/PARA CIMA/PARA BAIXO. The sync, the clash and 0121's "no two actions
+on one pad input" checks pass. **No pad input is left over now** (0136's prompt
+already says so): `_case_0121_pad`'s rebind of interact onto the right stick is
+now first refused, naming LOOK UP. The test then frees the stick by hand
+(`apply()` builds from the photograph and gives it back, which is asserted).
+The owner's unstaged `run` re-serialisation in `project.godot` stays out of the
+commit: the committed copy is HEAD plus the four actions.
+
+**The shots' camera hook**: `shot.gd`'s `_look_at(cell)`. By day it walks the
+farmer there as before; from the build step on, `Main.aim_night_camera` puts the
+camera on it (nowhere = the house). The comment that said the camera cannot be
+set is rewritten for the day only. `dusk` (through `_a_sown_field`), `wave` and
+`result` (the defence line) and `passed_out` (where he fell) use the hook. The
+night no longer tries to walk him (0129 made the wave shot spend 61 stuck
+ticks). The shots turn `edge_pan` off, since their real pointer is anywhere.
+
+Files: src/ui/{main,world_view}.gd, src/core/game_data.gd, src/app/input_actions.gd,
+project.godot, assets/locale/strings.csv, src/tools/{shot,input_v1}.gd,
+implementation/shots/0130/
+
+Verify: **59 passed, 0 failed in 514s** (OVER BUDGET 300, as before). Suite
+times: headless_check 78.3 s, headless_v1 2.0 s, input_check 88.9 s, input_v1
+6.8 s. Counts:
+- headless_check 16197 (+12: the action-list sync over the four new actions);
+- headless_v1 166;
+- input_check 1074;
+- input_v1 47 (+12). The new checks: the night opens on the house; D pans right
+  at about speed x real time and the farmer stays; the bound holds; the right
+  stick pans; the edge band pans nothing outside the window and pans right in
+  a focused one; nothing pans while paused; the result holds the camera; the
+  morning is back on the farmer. 0121 adds two: the right stick refused naming
+  LOOK UP, and LOOK UP gets it back.
+
+**sim 1212869859 and data 954093946 unchanged** (view only).
+
+Shots 0130 `wave dusk result passed_out options_controls` opened:
+- `wave` is on the defence line with the horde, not the porch, and the Zzz is
+  on the roof at the edge of the frame;
+- `dusk` is unchanged, the farmer at the field's edge;
+- `result` is over the fight under the panel;
+- `passed_out` is on him lying where he fell;
+- the controls tab still opens on MOVING (the four LOOK rows are under NIGHT,
+  and the strings check says they fit).

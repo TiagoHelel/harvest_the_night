@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **124 / 296 done**
+`##########..............`  **125 / 296 done**
 
-0 doing / 172 todo / 0 blocked across 18 phases.
+0 doing / 171 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-172 task(s) left, the ready ones first, then what they
+171 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,21 +107,25 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0130 - The night camera
+### 0131 - The guardian's cursor
 
-Ready to pick up.  Likely files: `src/ui/main.gd, src/ui/world_view.gd, src/core/game_data.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/ui/guardian_cursor.gd (new), src/ui/guardian_view.gd (new), src/ui/main.gd, src/ui/world_view.gd, src/ui/build_mode.gd, src/ui/tooltip.gd, src/ui/describe.gd, src/ui/lighting.gd, src/ui/placeholder_art.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/`.
 
-At night the camera belongs to the player, not to the farmer: it pans over the whole farm with the keys, the screen edge or the right stick, so the guardian can look wherever the horde is.
+The player's hand at night: a cell cursor that the mouse or the pad drives, that says what is under it, and that every night action points at - held by the porch scarecrow, who wakes up to be the guardian.
 
-- From PREPARATION until the day begins, `main.gd` stops calling `follow_player` and the world camera pans: with the move axes (WASD, the arrows, and the left stick 0121 bound to them), with the mouse inside an edge band of the window (only while the window has focus and the pointer is in it), and with the right stick
-- The right stick gets actions of its own: `pan_left`, `pan_right`, `pan_up`, `pan_down` in `project.godot` and `InputActions.ACTIONS` (`ACT_GROUP_NIGHT`, `ACT_PAN_*` strings in both languages), rebindable, with the sync and clash checks passing
-- Pan speed and edge width are `# LEVER`s in `game_data.gd` - view feel, not balance, so they stay out of `digest()`. Speed is in real seconds whatever 1x/2x/4x is set, and nothing pans while the pause menu is up
-- Clamped by `WorldView._camera_bounds`, no zoom. The night opens with the camera on the house; RESULT leaves it where it is; when the day begins it goes back to the farmer
-- `shot.gd` gains a camera hook that a night scenario can set (rewrite the comment that says the camera cannot be set); `dusk`, `wave` and `result` use it
+- A cell cursor in PREPARATION and NIGHT only. With the mouse it is the cell under the pointer (`WorldView.screen_to_cell`); with a pad the dpad and the left stick step it one cell per press with a hold-repeat (delay and rate are view levers) and the camera follows it near the edge. The last device used decides, as 0121's glyphs do, so the keyboard keeps panning (0130) while a pad steps
+- It writes the levels the rules read - `build_cell` now, `ability_cell` from 0135 - and BuildMode's ghost and its `Pathing.route_if_blocked` preview follow the cursor instead of the raw pointer
+- A tooltip of what is under it through `tooltip.gd` and `Describe`: a structure (name, HP against its levelled maximum, level), an enemy (kind, HP) or empty ground, with strings in both languages
+- Seven highlight states, all registered now in 0120's placeholder registry so later tasks only switch them on: neutral, can place, blocked, upgrade, sell, repair, aim - a code-drawn outline with a 2-frame pulse until A004 is integrated by 0146. This task uses neutral, can place and blocked
+- Any new pad action (a confirm or back for the cursor, if 0121 left `place` and `remove` without a pad button) goes into `project.godot` and `InputActions.ACTIONS` with `ACT_*` strings and is rebindable on the controls page; the clash check passes
+- The porch guardian: a view-only prop at a fixed offset from `House.porch`, on a cell nothing can ever be built on (the house's own footprint beside the door is one) - not an occupant and not in the state, so the hash cannot see it. States: day (still), wake (plays at the reality switch), night (idle, the eyes lit as emission points `lighting.gd` reads) and point; placeholder until A003 is integrated by 0145. This task registers all four and plays the first three; 0133 makes it point when a defence goes down
+- Settle A003's and A004's geometry from what this task drew: canvas, pivot, frames per state, seconds per frame, emission points
 - View only: neither hash moves
 
-  - done when: `_case_0130_night_camera` in `input_v1.gd`: holding D at night moves the camera right by about speed x time and leaves the farmer where he is; panning past the farm edge stops at the bound; a synthetic right-stick motion pans; after the morning the camera is back on the farmer
-  - done when: `python tools/shot.py 0130 wave` opened: the camera is where the scenario put it, not on the porch
+  - done when: `_case_0131_cursor` in `input_v1.gd`: a synthetic mouse move puts the cursor on that cell; synthetic dpad presses step it one cell each and repeat when held; a placement at the cursor in PREPARATION lands on that cell; there is no cursor by day
+  - done when: `_task_0131_guardian` in `headless_v1.gd`: the guardian's cell is never buildable (`Farm.buildable` false) on a new farm
+  - done when: The Deliverables tables of `implementation/backlog/packs/A003-guardian.md` and `implementation/backlog/packs/A004-cursor.md` state the final geometry this task settled
+  - done when: `python tools/shot.py 0131 dusk wave` and `--fhd` captures opened: the cursor reads over dark ground, the tooltip does not cover the HUD, the guardian stands by the porch with its eyes lit at night
 
 ### 0140 - The day HUD: the hour and bedtime
 
@@ -171,26 +175,6 @@ The farmer's reactions at the 32px detail of his new body, and the Zzz that rise
   - done when: `python tools/show_art.py --reactions --check` passes and shows the Zzz; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A002
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - a reaction by day, the Zzz at night - opened and looked at, in `implementation/shots/0144/`
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0131 - The guardian's cursor
-
-Waits on 0130.  Likely files: `src/ui/guardian_cursor.gd (new), src/ui/guardian_view.gd (new), src/ui/main.gd, src/ui/world_view.gd, src/ui/build_mode.gd, src/ui/tooltip.gd, src/ui/describe.gd, src/ui/lighting.gd, src/ui/placeholder_art.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/`.
-
-The player's hand at night: a cell cursor that the mouse or the pad drives, that says what is under it, and that every night action points at - held by the porch scarecrow, who wakes up to be the guardian.
-
-- A cell cursor in PREPARATION and NIGHT only. With the mouse it is the cell under the pointer (`WorldView.screen_to_cell`); with a pad the dpad and the left stick step it one cell per press with a hold-repeat (delay and rate are view levers) and the camera follows it near the edge. The last device used decides, as 0121's glyphs do, so the keyboard keeps panning (0130) while a pad steps
-- It writes the levels the rules read - `build_cell` now, `ability_cell` from 0135 - and BuildMode's ghost and its `Pathing.route_if_blocked` preview follow the cursor instead of the raw pointer
-- A tooltip of what is under it through `tooltip.gd` and `Describe`: a structure (name, HP against its levelled maximum, level), an enemy (kind, HP) or empty ground, with strings in both languages
-- Seven highlight states, all registered now in 0120's placeholder registry so later tasks only switch them on: neutral, can place, blocked, upgrade, sell, repair, aim - a code-drawn outline with a 2-frame pulse until A004 is integrated by 0146. This task uses neutral, can place and blocked
-- Any new pad action (a confirm or back for the cursor, if 0121 left `place` and `remove` without a pad button) goes into `project.godot` and `InputActions.ACTIONS` with `ACT_*` strings and is rebindable on the controls page; the clash check passes
-- The porch guardian: a view-only prop at a fixed offset from `House.porch`, on a cell nothing can ever be built on (the house's own footprint beside the door is one) - not an occupant and not in the state, so the hash cannot see it. States: day (still), wake (plays at the reality switch), night (idle, the eyes lit as emission points `lighting.gd` reads) and point; placeholder until A003 is integrated by 0145. This task registers all four and plays the first three; 0133 makes it point when a defence goes down
-- Settle A003's and A004's geometry from what this task drew: canvas, pivot, frames per state, seconds per frame, emission points
-- View only: neither hash moves
-
-  - done when: `_case_0131_cursor` in `input_v1.gd`: a synthetic mouse move puts the cursor on that cell; synthetic dpad presses step it one cell each and repeat when held; a placement at the cursor in PREPARATION lands on that cell; there is no cursor by day
-  - done when: `_task_0131_guardian` in `headless_v1.gd`: the guardian's cell is never buildable (`Farm.buildable` false) on a new farm
-  - done when: The Deliverables tables of `implementation/backlog/packs/A003-guardian.md` and `implementation/backlog/packs/A004-cursor.md` state the final geometry this task settled
-  - done when: `python tools/shot.py 0131 dusk wave` and `--fhd` captures opened: the cursor reads over dark ground, the tooltip does not cover the HUD, the guardian stands by the porch with its eyes lit at night
 
 ### 0132 - Defences go down only at night
 
@@ -3323,14 +3307,14 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (4/23)
+## 10 - Sleep is the night  (5/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
 - [x] **0128** [Passing out at 02:00](prompts/0128-pass-out.md)
 - [x] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md)
-- [ ] **0130** [The night camera](prompts/0130-night-camera.md)
-- [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md) - needs 0130
+- [x] **0130** [The night camera](prompts/0130-night-camera.md)
+- [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md)
 - [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md) - needs 0131
 - [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md) - needs 0132
 - [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0131, 0133

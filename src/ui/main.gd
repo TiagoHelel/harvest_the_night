@@ -58,6 +58,20 @@ var _was_paused := false
 var _house_view: HouseView
 var _inside_house := false
 
+## **The night camera** (task 0130). From the build step until the morning the
+## camera is the player's: whether it has been handed over this night.
+var _night_camera := false
+## The pointer at the window's edge pans only while the window has the focus
+## and the pointer is inside it - both the window's own signals, so a pointer
+## resting on the next monitor over pans nothing.
+var _window_focused := true
+var _pointer_in_window := false
+## Off for the shots: their real pointer is wherever the desk left it.
+var edge_pan := true
+## The pointer's last place, in the viewport's own pixels, from `_input`: every
+## motion passes there before any control can take it.
+var _pointer_at := Vector2(-1, -1)
+
 @onready var _world: WorldView = %WorldView
 @onready var _shop: ShopPanel = %ShopPanel
 @onready var _hud: DayHud = %DayHud
@@ -106,6 +120,12 @@ func _ready() -> void:
 	_house_view = HouseView.new()
 	_house_view.name = "HouseView"
 	add_child(_house_view)
+	var window := get_window()
+	_window_focused = window.has_focus()
+	window.focus_entered.connect(func() -> void: _window_focused = true)
+	window.focus_exited.connect(func() -> void: _window_focused = false)
+	window.mouse_entered.connect(func() -> void: _pointer_in_window = true)
+	window.mouse_exited.connect(func() -> void: _pointer_in_window = false)
 	_driver.stepping.connect(_player_view.before_tick)
 	_driver.stepped.connect(_player_view.after_tick)
 	_driver.stepping.connect(_world.before_tick)
@@ -280,7 +300,7 @@ func _process(_delta: float) -> void:
 	move[0] = int(signf(Input.get_axis(&"move_left", &"move_right")))
 	move[1] = int(signf(Input.get_axis(&"move_up", &"move_down")))
 	# **Nobody walks at night** (task 0129): outside the day the move axes
-	# write nothing, which frees them for 0130's camera.
+	# write nothing - they pan the night camera instead (`_steer_camera`).
 	if int(_driver.state["phase"]) != Phases.DAY:
 		move[0] = 0
 		move[1] = 0
@@ -321,8 +341,54 @@ func _process(_delta: float) -> void:
 		if Shop.is_open(_driver.state) or Building.is_active(_driver.state)
 			or int(_driver.state["phase"]) != Phases.DAY
 		else _target_cell())
-	if not indoors:
-		_world.follow_player(Player.position(_driver.state), _delta)
+	_steer_camera(_delta, indoors)
+
+
+## **Whose camera it is** (task 0130). By day it follows the farmer. From the
+## build step until the morning it is the player's: it opens on the house,
+## pans with the move keys, the right stick and the pointer at the window's
+## edge, and holds still while the pause menu is up and on the result. The
+## morning gives it back to the farmer.
+func _steer_camera(delta: float, indoors: bool) -> void:
+	var phase := int(_driver.state["phase"])
+	if phase == Phases.DAY:
+		if _night_camera:
+			_night_camera = false
+			_world.look_at_cell(Player.cell(_driver.state))
+		if not indoors:
+			_world.follow_player(Player.position(_driver.state), delta)
+		return
+	if not _night_camera:
+		aim_night_camera((Vector2(Farm.house_centre(_driver.state)) + Vector2.ONE * 0.5)
+			* float(GameData.TILE_SIZE))
+	if phase == Phases.RESULT or _was_paused:
+		return
+	_world.pan_camera(pan_direction(), delta)
+
+
+## Hand the camera to the player and put it on a world point. The night
+## opens here on the house; `shot.gd` calls it to frame a night scenario.
+func aim_night_camera(point: Vector2) -> void:
+	_night_camera = true
+	_world.look_at_point(point)
+
+
+## Which way the night camera is being asked to go: the move keys (and the
+## left stick bound to them), the right stick's `pan_*`, and the pointer in
+## the edge band of a focused window. Up to 1 a side.
+func pan_direction() -> Vector2:
+	var direction := Vector2(Input.get_axis(&"move_left", &"move_right"),
+		Input.get_axis(&"move_up", &"move_down"))
+	direction += Vector2(Input.get_axis(&"pan_left", &"pan_right"),
+		Input.get_axis(&"pan_up", &"pan_down"))
+	if edge_pan and _window_focused and _pointer_in_window:
+		var size := get_viewport().get_visible_rect().size
+		var at := _pointer_at
+		var band := float(GameData.CAMERA_EDGE_PIXELS)
+		if Rect2(Vector2.ZERO, size).has_point(at):
+			direction.x += -1.0 if at.x < band else (1.0 if at.x >= size.x - band else 0.0)
+			direction.y += -1.0 if at.y < band else (1.0 if at.y >= size.y - band else 0.0)
+	return direction.clamp(-Vector2.ONE, Vector2.ONE)
 
 
 ## Fold this run's numbers into the profile and write both files, once per
@@ -391,6 +457,14 @@ func _pause_chose(which: StringName) -> void:
 ## line in the water - come first, because they are what a player pressing
 ## escape there means. WELCOME BACK, HERO's run screen asks the same questions
 ## in the same order.
+## Where the pointer is, for the night camera's edge band. Read, never
+## consumed.
+func _input(event: InputEvent) -> void:
+	var motion := event as InputEventMouseMotion
+	if motion != null:
+		_pointer_at = motion.position
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed(&"cancel") or not escape_is_free():
 		return

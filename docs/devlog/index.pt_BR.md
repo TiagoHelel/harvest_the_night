@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-126 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+127 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -169,6 +169,7 @@ voz alta.
 | 0127 | Going to bed starts the night | 2026-10-08 |
 | 0128 | Passing out at 02:00 | 2026-10-08 |
 | 0129 | He stays in bed all night | 2026-10-08 |
+| 0130 | The night camera | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 

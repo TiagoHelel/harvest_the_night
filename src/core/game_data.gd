@@ -1350,6 +1350,14 @@ const NIGHTS: Array = [
 ## `video/transition_seconds` lets a player move it as well.
 const TRANSITION_SECONDS := 1.6         # LEVER: seconds, 0.4-4.0
 
+## **The night camera** (task 0130): from the build step to the morning the
+## camera is the player's, panned with the move keys, the right stick or the
+## pointer at the window's edge. View feel, not balance, so like the fade
+## above these stay out of `digest()`. The speed is in **real** seconds: 2x and
+## 4x make the night faster, not the camera.
+const CAMERA_PAN_SPEED := 240.0         # LEVER: world pixels a second at full tilt, 120-480
+const CAMERA_EDGE_PIXELS := 8           # LEVER: world pixels from the window's edge that pan, 4-16
+
 ## Task 0109: the little bubble over the farmer's head.
 ##
 ## **Off is a supported state.** The done-when is that turning every reaction
