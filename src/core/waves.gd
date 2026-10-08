@@ -67,16 +67,95 @@ static func plain_night(night: int, seed_value: int = 0) -> Dictionary:
 ## the calendar's rules on top. Every pure question below asks this one.
 ##
 ## The rules, each added here and nowhere else:
-## - **the Full Moon** (task 0152): a bigger horde on `FULL_MOON_DAYS`;
-## - 0153's boss and 0154's calm night, to come.
+## - **the boss** (task 0153): the season's boss on its last night, and no
+##   boss on any other - today's night ten loses its Giant, and `Endless`'s
+##   every-fifth-night Giants stop reaching the calendar;
+## - **the Full Moon** (task 0152): a bigger horde on `FULL_MOON_DAYS`, over
+##   the boss rule, leaving the boss row as it is;
+## - 0154's calm night, to come.
 ##
 ## A night no rule touches comes back as written - the authored row itself,
 ## not a copy.
 static func night_of(night: int, seed_value: int = 0) -> Dictionary:
 	var plain := plain_night(night, seed_value)
-	if plain.is_empty() or not Calendar.is_full_moon(night):
+	if plain.is_empty():
 		return plain
-	return _under_a_full_moon(plain)
+	var one := plain
+	if Calendar.is_boss_night(night):
+		one = _with_the_season_boss(plain, Calendar.boss_of(night))
+	elif _has_a_boss(plain):
+		one = _without_bosses(plain)
+	if Calendar.is_full_moon(night):
+		one = _under_a_full_moon(one)
+	return one
+
+
+## Whether a night is anything but its record as written: what
+## `tonight()` keeps rather than asks again every frame.
+static func _ruled(night: int, seed_value: int) -> bool:
+	return Calendar.is_full_moon(night) or Calendar.is_boss_night(night) \
+		or _has_a_boss(plain_night(night, seed_value))
+
+
+static func _has_a_boss(one: Dictionary) -> bool:
+	for row in _rows_in(one):
+		if _is_boss(StringName((row as Array)[0])):
+			return true
+	return false
+
+
+static func _is_boss(kind: StringName) -> bool:
+	return bool((GameData.ENEMIES.get(kind, {}) as Dictionary).get("is_boss", false))
+
+
+## **The season's boss night** (task 0153): the night as written with any
+## boss of its own taken out and one row of the season's boss put in, third
+## from last - where `Endless` put its Giants - from spawn 0, the east,
+## which every season keeps open (0157). It carries `"boss"`, which the
+## forecast (0158) reads.
+static func _with_the_season_boss(plain: Dictionary, boss: StringName) -> Dictionary:
+	var one := _without_bosses(plain)
+	if boss == &"":
+		return one
+	var rows: Array = one["waves"]
+	rows.insert(maxi(rows.size() - 2, 0), [boss, 1, 0])
+	one["boss"] = boss
+	one["note"] = "%s - and %s, the season's boss" % [str(plain.get("note", "")), boss]
+	return one
+
+
+## A night with its boss rows taken out, for every date that is not a boss
+## night: the boss comes on the season's last night and on no other.
+static func _without_bosses(plain: Dictionary) -> Dictionary:
+	var one := plain.duplicate(true)
+	var kept: Array = []
+	var dropped := false
+	for row in (one["waves"] as Array):
+		if _is_boss(StringName((row as Array)[0])):
+			dropped = true
+		else:
+			kept.append(row)
+	one["waves"] = kept
+	if dropped:
+		one["note"] = "%s (its boss kept for the season's last night)" \
+			% str(plain.get("note", ""))
+	return one
+
+
+## **Whether tonight's boss went down** (task 0153): every `is_boss` body
+## tonight's record sends has been killed, read off `killed_by_kind`. True
+## on a night with no boss in it.
+static func boss_fell(state: Dictionary) -> bool:
+	var killed: Dictionary = state.get("killed_by_kind", {})
+	var sent := {}
+	for row in table_tonight(state):
+		var kind := StringName((row as Array)[0])
+		if _is_boss(kind):
+			sent[kind] = int(sent.get(kind, 0)) + int((row as Array)[1])
+	for kind in GameData.sorted_names(sent.keys()):
+		if int(killed.get(kind, 0)) < int(sent[kind]):
+			return false
+	return true
 
 
 ## **A Full Moon's record** (task 0152): every ordinary wave sends
@@ -88,8 +167,7 @@ static func _under_a_full_moon(plain: Dictionary) -> Dictionary:
 	var one := plain.duplicate(true)
 	for row in (one["waves"] as Array):
 		var wave: Array = row
-		var kind: Dictionary = GameData.ENEMIES.get(StringName(wave[0]), {})
-		if bool(kind.get("is_boss", false)):
+		if _is_boss(StringName(wave[0])):
 			continue
 		wave[1] = maxi(int(wave[1]) * GameData.FULL_MOON_HORDE_PERCENT / 100,
 			int(wave[1]))
@@ -128,7 +206,7 @@ static func _fit_inside_the_night(one: Dictionary) -> void:
 ## so night 1 puts nothing new in its state.
 static func tonight(state: Dictionary) -> Dictionary:
 	var night := int(state["night"])
-	if night <= authored_count() and not Calendar.is_full_moon(night):
+	if night <= authored_count() and not _ruled(night, int(state["seed"])):
 		return night_of(night, int(state["seed"]))
 	var wave: Dictionary = state["wave"]
 	var kept: Dictionary = wave.get("tonight", {})
@@ -256,7 +334,8 @@ static func tick(state: Dictionary) -> void:
 			"enemy": StringName(row[0]),
 			"count": int(row[1]),
 		})
-		if StringName(row[0]) == &"giant":
+		# Any boss, by what it is rather than by name (task 0153).
+		if _is_boss(StringName(row[0])):
 			Events.add(state, &"boss_arrived", {"enemy": StringName(row[0])})
 
 	Enemies.spawn(state, StringName(row[0]), int(row[2]))

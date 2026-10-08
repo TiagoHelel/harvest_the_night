@@ -16,11 +16,12 @@ extends RefCounted
 
 ## Today's date: the calendar day the farm is on.
 ##
-## **The one place that knows it.** It is `state["day"]` until task 0153
-## holds the calendar still on a boss night; every reader asks here, so that
-## change is made once.
+## **The one place that knows it.** The days lived less the days a boss has
+## held the calendar on its night (task 0153, `days_held`): `day` moves every
+## morning - the stall restocks on it, the report and the stats count it -
+## while the date stays on the boss's night until the boss falls.
 static func date(state: Dictionary) -> int:
-	return maxi(int(state["day"]), 1)
+	return maxi(int(state["day"]) - int(state.get("days_held", 0)), 1)
 
 
 ## How many days a year has.
@@ -65,6 +66,20 @@ static func days_to_full_moon(day: int, season_days: int = GameData.SEASON_DAYS)
 		return ahead
 	# None left this season: the next season's first.
 	return maxi(season_days, 1) - today + first
+
+
+## Whether a date is its season's boss night (task 0153): the season's last
+## day.
+static func is_boss_night(day: int, season_days: int = GameData.SEASON_DAYS) -> bool:
+	return day_of_season(day, season_days) == maxi(season_days, 1)
+
+
+## The boss of the season a date falls in.
+static func boss_of(day: int, season_days: int = GameData.SEASON_DAYS) -> StringName:
+	var bosses: Array = GameData.SEASON_BOSSES
+	if bosses.is_empty():
+		return &""
+	return StringName(bosses[season_of(day, season_days) % bosses.size()])
 
 
 ## The season's id (`&"spring"` ...), for `Names.of` and every table keyed by

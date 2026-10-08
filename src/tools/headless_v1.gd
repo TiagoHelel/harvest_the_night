@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 25
+const GROUPS := 26
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -94,6 +94,7 @@ func _run() -> void:
 	_task_0150_lookup()
 	_task_0151_migration()
 	_task_0152_full_moon()
+	_task_0153_boss_nights()
 
 
 func _finish() -> void:
@@ -1645,13 +1646,16 @@ func _task_0137_dawn() -> void:
 		and not bool((lost["last_result"] as Dictionary)["survived"]),
 		"a house at 0 before dawn loses", str(lost["last_result"]))
 
-	# **A boss holds the night past dawn** (until 0153).
-	var giant := _a_night_near_dawn(1373, 5)
-	Entities.spawn(giant, &"giant", Enemies.spawn_cells(giant, 0)[0])
+	# **A boss alive at dawn escapes** (task 0153; until then the night waited
+	# for it). Spring 14, the boss on the farm, dawn brought close: the night
+	# ends at dawn, neither won nor lost.
+	var giant := _a_boss_night_near_dawn(1373, 5)
+	Entities.spawn(giant, Calendar.boss_of(14), Enemies.spawn_cells(giant, 0)[0])
 	Sim.advance(giant, 30)
-	expect(int(giant["phase"]) == Phases.NIGHT and Phases.ticks_to_dawn(giant) == 0,
-		"dawn does not end a night while a boss is on the farm",
-		Phases.name_of(int(giant["phase"])))
+	expect(int(giant["phase"]) == Phases.RESULT
+		and bool((giant["last_result"] as Dictionary).get("escaped", false)),
+		"dawn ends a boss night too, the boss escaping",
+		"%s %s" % [Phases.name_of(int(giant["phase"])), str(giant["last_result"])])
 
 	# **Skip runs to dawn at the latest**, from the middle of a real night.
 	var skipping := State.create(1374)
@@ -1986,9 +1990,10 @@ func _task_0150_lookup() -> void:
 			var fought := Waves.night_of(day, seed_value)
 			if fought.is_empty() or (fought.get("waves", []) as Array).is_empty():
 				empty.append([seed_value, day])
-			# Where no calendar rule applies - since 0152, every date but a
-			# Full Moon - what is fought is what is written.
-			var ruled := Calendar.is_full_moon(day)
+			# Where no calendar rule applies - since 0152 not on a Full Moon,
+			# and since 0153 not where a boss is put in or taken out - what is
+			# fought is what is written.
+			var ruled := Waves._ruled(day, seed_value)
 			if not ruled and str(fought) != str(Waves.plain_night(day, seed_value)):
 				differ.append([seed_value, day])
 	expect(empty.is_empty(), "every day 1-112 has a night for seeds 0 and 424242",
@@ -2186,7 +2191,13 @@ func _task_0152_full_moon() -> void:
 			if Waves.night_of(day, 7).has("full_moon"):
 				wrong.append("%d flagged" % day)
 			continue
+		# The Full Moon goes over the boss rule (0153): the night as that
+		# rule leaves it is what the moon scales.
 		var plain := Waves.plain_night(day, 7)
+		if Calendar.is_boss_night(day):
+			plain = Waves._with_the_season_boss(plain, Calendar.boss_of(day))
+		elif Waves._has_a_boss(plain):
+			plain = Waves._without_bosses(plain)
 		var moon := Waves.night_of(day, 7)
 		if not bool(moon.get("full_moon", false)):
 			wrong.append("%d not flagged" % day)
@@ -2281,4 +2292,149 @@ func _task_0152_full_moon() -> void:
 		and not GameData.check_calendar(GameData.SEASONS, 14, [7], 90).is_empty()
 		and not GameData.check_calendar(GameData.SEASONS, 14, [7], 150, 50).is_empty(),
 		"a Full Moon outside the season, or a horde or pay under 100%, is refused")
+	_completed += 1
+
+
+## A boss night - Spring 14 - begun through `NightRoad`, parked, and its dawn
+## brought `ticks` close.
+func _a_boss_night_near_dawn(seed_value: int, ticks: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = GameData.SEASON_DAYS
+	state["nights_won"] = GameData.SEASON_DAYS - 1
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200,
+		GameData.MONEY: 100})
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + ticks
+	return state
+
+
+## 0153 - boss nights: the season's boss on its last night and on no other,
+## and the season held until it falls.
+func _task_0153_boss_nights() -> void:
+	# **Only on 14, 28, 42, 56, ... once each, the season's boss.**
+	var bossy: Array = []
+	var wrong: Array = []
+	for seed_value in [0, 424242]:
+		for day in range(1, 2 * Calendar.year_days() + 1):
+			var rows: Array = []
+			for row in Waves.table(day, seed_value):
+				if Waves._is_boss(StringName((row as Array)[0])):
+					rows.append(row)
+			if rows.is_empty():
+				continue
+			if seed_value == 0:
+				bossy.append(day)
+			if rows.size() != 1 or int((rows[0] as Array)[1]) != 1 \
+					or StringName((rows[0] as Array)[0]) != Calendar.boss_of(day):
+				wrong.append([seed_value, day, rows])
+	expect(bossy == [14, 28, 42, 56, 70, 84, 98, 112] and wrong.is_empty(),
+		"bosses come on dates 14, 28, ... 112 only, one row each, the season's",
+		"%s %s" % [str(bossy), str(wrong.slice(0, 3))])
+	expect(not Waves.kinds_of(10).has(&"giant") and Waves.kinds_of(14).has(&"giant")
+		and StringName(Waves.night_of(14).get("boss", &"")) == &"giant",
+		"night 10 has lost its Giant to Spring 14, which carries the boss flag")
+	var year: Array = []
+	for day in range(1, Calendar.year_days() + 1):
+		year.append(Waves.night_of(day, 0))
+	expect(GameData.check_nights(year).is_empty(),
+		"and the year still checks with the boss rows in", str(GameData.check_nights(year)))
+	expect(GameData.check_calendar(GameData.SEASONS, 14, [7, 14], 150, 200,
+		[&"giant", &"walker", &"giant", &"giant"]).size() == 1,
+		"a season boss that is not a boss is refused")
+
+	# **Alive at dawn: it escapes.** Nothing taken, nothing paid, the day
+	# moves, the date holds, the stall restocks, and tonight is the boss again.
+	var escaped := _a_boss_night_near_dawn(1530, 3)
+	Entities.spawn(escaped, Calendar.boss_of(14), Enemies.spawn_cells(escaped, 0)[0])
+	var held: Dictionary = (escaped["held"] as Dictionary).duplicate()
+	var won_before := Phases.nights_won(escaped)
+	for _t in 30:
+		if int(escaped["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(escaped, 1)
+	var paid := Rewards.last(escaped)
+	expect(int(escaped["phase"]) == Phases.RESULT
+		and bool((escaped["last_result"] as Dictionary).get("escaped", false))
+		and bool(paid.get("escaped", false)) and StringName(paid.get("boss", &"")) == &"giant",
+		"a boss alive at dawn escapes, and the payout says which", str(paid))
+	expect(escaped["held"] == held and (paid["gained"] as Dictionary).is_empty()
+		and (paid["lost"] as Dictionary).is_empty() and not Tech.already_paid(escaped, 14),
+		"nothing is taken and nothing paid - no technology either")
+	expect(Phases.nights_won(escaped) == won_before and int(escaped["day"]) == 15
+		and Calendar.date(escaped) == 14 and int(escaped["days_held"]) == 1,
+		"nights_won stays, day moves to 15, and the date holds on 14",
+		"won %d, day %d, date %d" % [Phases.nights_won(escaped), int(escaped["day"]),
+			Calendar.date(escaped)])
+	(escaped["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(escaped, 2)
+	var stall: Dictionary = escaped["stall"]
+	expect(int(escaped["phase"]) == Phases.DAY and Entities.count(escaped) == 0
+		and int(stall["day"]) == 15,
+		"the boss walks off with the rest, and the stall restocks on day 15",
+		"%d on the farm, stall stocked on day %d" % [Entities.count(escaped), int(stall["day"])])
+	NightRoad.to_night(escaped)
+	expect(int(escaped["night"]) == 14 and Waves.table_tonight(escaped).size() > 0
+		and StringName(Waves.tonight(escaped).get("boss", &"")) == &"giant",
+		"and tonight is the boss night again", str(escaped["night"]))
+
+	# **Killed: the season moves on.**
+	var killed := _a_boss_night_near_dawn(1531, 3)
+	(killed["killed_by_kind"] as Dictionary)[Calendar.boss_of(14)] = 1
+	for _t in 30:
+		if int(killed["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(killed, 1)
+	expect(bool((killed["last_result"] as Dictionary).get("survived", false))
+		and Calendar.date(killed) == 15 and Tech.already_paid(killed, 14),
+		"a boss put down: the night is won, paid once, and the next date is 15",
+		"date %d, %s" % [Calendar.date(killed), str(killed["last_result"])])
+
+	# **The house down**: the loss either way, and the hold only with the boss
+	# alive.
+	var fell_alive := _a_boss_night_near_dawn(1532, 600)
+	fell_alive["house_hp"] = 1
+	Entities.spawn(fell_alive, &"walker", House.porch(fell_alive))
+	for _t in 600:
+		if int(fell_alive["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(fell_alive, 1)
+	expect(not bool((fell_alive["last_result"] as Dictionary).get("survived", true))
+		and not bool((fell_alive["last_result"] as Dictionary).get("escaped", true))
+		and not (Rewards.last(fell_alive)["lost"] as Dictionary).is_empty()
+		and Calendar.date(fell_alive) == 14,
+		"the house down with the boss alive: lost, and the season holds",
+		"date %d, %s" % [Calendar.date(fell_alive), str(fell_alive["last_result"])])
+	var fell_after := _a_boss_night_near_dawn(1533, 600)
+	(fell_after["killed_by_kind"] as Dictionary)[Calendar.boss_of(14)] = 1
+	fell_after["house_hp"] = 1
+	Entities.spawn(fell_after, &"walker", House.porch(fell_after))
+	for _t in 600:
+		if int(fell_after["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(fell_after, 1)
+	expect(not bool((fell_after["last_result"] as Dictionary).get("survived", true))
+		and Calendar.date(fell_after) == 15,
+		"the house down after the boss fell: lost, and no hold",
+		"date %d" % Calendar.date(fell_after))
+
+	# **`boss_arrived` by what it is**, and `waves.gd` names no enemy.
+	var arrives := State.create(1534)
+	arrives["day"] = GameData.SEASON_DAYS
+	NightRoad.to_night(arrives)
+	arrives["house_hp"] = 1 << 20
+	var announced := false
+	for _t in 6000:
+		if int(arrives["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(arrives, 1)
+		for event in (arrives["events"] as Array):
+			if StringName((event as Dictionary).get("kind", &"")) == &"boss_arrived" \
+					and StringName((event as Dictionary).get("enemy", &"")) == &"giant":
+				announced = true
+		if announced:
+			break
+	var code := SuiteKit.code_lines_of("res://src/core/waves.gd")
+	expect(announced and not code.contains("&\"giant\""),
+		"boss_arrived is raised for the Giant through is_boss, and waves.gd names no enemy")
 	_completed += 1

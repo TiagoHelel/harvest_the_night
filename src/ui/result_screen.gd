@@ -204,6 +204,7 @@ func _build(payout: Dictionary) -> void:
 		return
 
 	var survived := bool(payout["survived"])
+	var escaped := bool(payout.get("escaped", false))
 
 	# **The end of the run gets its own screen.** Ten nights and the Giant is
 	# the whole MVP, and a player who has just done it should not be handed
@@ -221,6 +222,11 @@ func _build(payout: Dictionary) -> void:
 	_title.text = I18n.f(&"RES_NIGHT", [int(payout["night"]),
 		I18n.t(&"RES_SURVIVED" if survived else &"RES_WAS_LOST")])
 	_title.theme_type_variation = UiKit.GOOD if survived else UiKit.BAD
+	# **A boss that lived to dawn** (task 0153) neither won nor lost the
+	# night: the night is over, and it is coming back.
+	if escaped:
+		_title.text = I18n.t(&"RES_NIGHT_OVER")
+		_title.theme_type_variation = UiKit.WARN
 
 	# **Four numbers on two rows, not four.** A `Label` reserves its font's
 	# line height whatever `custom_minimum_size` claims, so a row here is
@@ -253,7 +259,11 @@ func _build(payout: Dictionary) -> void:
 		_row(I18n.plural(&"RES_CAME_DOWN", fell, [fell]), "", UiKit.BAD)
 
 	_gap()
-	if survived:
+	if escaped:
+		_wrapped(I18n.f(&"RES_BOSS_ESCAPED",
+			[Names.of(StringName(payout.get("boss", &""))).to_upper()]), UiKit.WARN)
+		_row(I18n.t(&"RES_UNTOUCHED_ALL"), "", UiKit.DIM)
+	elif survived:
 		_row(I18n.t(&"RES_PAID"), "", UiKit.GOOD)
 		# Materials on one line and money on the next, for the same reason -
 		# named like the rest since 0138: the bare ids printed "+70 money" on
@@ -370,6 +380,18 @@ func _row(left: String, right: String, role: StringName = &"") -> void:
 	b.text = right
 	b.theme_type_variation = role
 	row.add_child(b)
+
+
+## A line that may be longer than a row, wrapped onto as many as it needs
+## inside the row's width: a boss's escape (task 0153), whose name the
+## line cannot know the length of.
+func _wrapped(text: String, role: StringName = &"") -> void:
+	var line := Label.new()
+	line.text = text
+	line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	line.custom_minimum_size = Vector2(206, 0)
+	line.theme_type_variation = role
+	_lines.add_child(line)
 
 
 ## A list of ids as a list of names.

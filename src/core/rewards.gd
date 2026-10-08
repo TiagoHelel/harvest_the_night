@@ -31,8 +31,12 @@ extends RefCounted
 
 ## Work out the payout, hand it over, and leave the itemised list in the state
 ## for the result screen to read.
-static func settle(state: Dictionary, survived: bool) -> Dictionary:
-	var lines := _lines(state, survived)
+##
+## **`escaped`** (task 0153): a boss that lived to dawn. Nothing is paid -
+## no money, materials or technology - and nothing is taken; the summary
+## says which boss, for the morning report.
+static func settle(state: Dictionary, survived: bool, escaped: bool = false) -> Dictionary:
+	var lines := {} if escaped else _lines(state, survived)
 	var summary := {
 		"night": int(state["night"]),
 		"survived": survived,
@@ -50,9 +54,14 @@ static func settle(state: Dictionary, survived: bool) -> Dictionary:
 		# and what came down tonight.
 		"walked": Entities.count(state),
 		"structures_lost": _lost_tonight(state),
+		"escaped": escaped,
+		"boss": StringName(Waves.tonight(state).get("boss", &"")),
 	}
 
-	if survived:
+	if escaped:
+		# Nothing either way: the night's pay waits for the boss to fall.
+		summary["tech"] = 0
+	elif survived:
 		# **Technology first**, so that the points are in the ledger before
 		# the itemised list is built from it - and so a night that has
 		# already paid its technology says so in the same breath as paying

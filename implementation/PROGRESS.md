@@ -15539,3 +15539,148 @@ tools/determinism_data_hash.txt, implementation/shots/0152/
 Verify: **PASS**, 60 passed in 551 s (OVER BUDGET as before). headless_check
 16282, headless_v1 354 (+11), input_check 1066, input_v1 178 (+9), strings
 475 keys.
+
+## 0153 - Boss nights repeat until the boss falls - done 2026-10-08
+
+What changed: day 14 of every season is the season's boss night, and the
+season does not end until that boss is down. A boss still alive at dawn
+walks off with the rest and comes back the next night. There is no loss
+penalty, and the farm loses no day of crops or animals.
+
+**The data:**
+- `SEASON_BOSSES := [giant, giant, giant, giant]`, one per season, in
+  `digest()`'s `calendar` row. 0253-0255 put in their own.
+- `check_calendar` requires one boss per season, each an `is_boss` enemy.
+
+**The calendar:**
+- `Calendar.is_boss_night(date)` is the season's last day, and
+  `Calendar.boss_of(date)` is that season's boss.
+- **The hold is a counter, not a frozen day.** A new top-level Phases key,
+  `days_held`, grows by one every night a boss night ends without its boss
+  down, however it ended. `Calendar.date` is `day - days_held`.
+  - `day` still moves every night, so the stall restocks, the report and
+    stats count it, and every day system runs.
+  - The date stays on 14, so tonight is the boss again.
+  - Old saves get 0 from the reconcile; no version bump.
+
+**The night** (`Waves.night_of`, the rule under the Full Moon's):
+- A boss date's record has its own bosses taken out and one row of the
+  season's boss put in, third from last like `Endless`' Giants, from spawn
+  0. It carries `"boss"` for 0158's forecast.
+- Every other date loses its `is_boss` rows. Night 10 loses its Giant, and
+  `Endless`' every-fifth-night Giants no longer reach the calendar; the
+  `giant_every` levers stay for 0279.
+- The note says so: "... - and giant, the season's boss" on the boss date,
+  "(its boss kept for the season's last night)" where one was removed.
+- The Full Moon scales over this and leaves the boss row alone. Spring 14
+  is both: 187 ordinary bodies and one Giant.
+- `Waves.tonight` keeps any record a rule changed, and `Waves._ruled` says
+  which. Night 10 is now one of them.
+- `Waves.boss_fell(state)`: every `is_boss` body tonight's record sends has
+  been killed, per `killed_by_kind`. True on a night with no boss.
+- `Waves.tick` raises `boss_arrived` from `is_boss`. `waves.gd` names no
+  enemy any more.
+
+**The third outcome, escaped** (`Sim._test_for_dawn`):
+- 0137's interim is gone: dawn no longer waits while `Combat.boss_here`.
+- At dawn on a boss night with the boss alive and the house standing,
+  `Rewards.settle(state, false, true)` and `Phases.enter_result(state,
+  false, true)` record `escaped`:
+  - nothing is paid (no money, materials or technology) and nothing taken;
+  - `nights_won` stays;
+  - no won or lost event (the `dawn` event is there);
+  - the payout names the boss;
+  - the boss and the survivors walk off in `begin_day` like any morning.
+- The house falling is a loss as on any night, and holds the season if the
+  boss is alive.
+- `nights_paid` is keyed by the date, so a boss night pays its technology
+  once, on the night the boss falls.
+- The night HUD's countdown comment no longer promises to hold at 0:00.
+
+**The morning report:**
+- An escape is headed NIGHT OVER / FIM DA NOITE in the warn colour.
+- Its line is `RES_BOSS_ESCAPED` ("GIANT GOT AWAY - IT COMES BACK TONIGHT"
+  / "GIGANTE FUGIU - VOLTA HOJE À NOITE", the name through `Names.of`,
+  upper-cased), followed by "money and the farm are untouched".
+- The line wraps if a boss's name is long: the Scarecrow King will not fit
+  one row. Its width column is 0 for that reason.
+
+**What assumed the Giant on night 10:**
+- `_task_0003` reads the table as written ("the Giant is written on night
+  10").
+- `_task_0058_giant` finds it on Spring 14, once in the season's fourteen
+  nights.
+- 0059/0060 already read `plain_night`.
+- 0066's and input_check's 0070 fixtures that win day 56 by fiat put its
+  boss down first (`_beat_the_boss`): a boss night is won only once the boss
+  fell.
+- `perf_check`'s worst case is Spring 14.
+
+**The benchmark: a fix, and a new baseline.**
+- On Spring 14, `night_tick` came out at 36 us against the towers' own
+  1435. `_per_tick` timed 600 ticks from the busiest moment, and this night
+  is over, everything dead, inside them, so the average ran on into the
+  morning.
+- **The old baseline had the same fault:** night 10's 594 us was already
+  below the towers' 1028.
+- It now times only the ticks still in the phase it started in.
+  `python tools/perf.py --accept`:
+  - night tick 594 -> 1840 us (22% of the 8333 budget);
+  - towers 1028 -> 1439, enemies 125 -> 167, traps 45 -> 61, path
+    rebuild 7918 -> 8581;
+  - the day: 86 -> 89.
+- The farm at the measured moment: 40 towers, 21 zombies and the Giant.
+  This is a heavier night than night ten, as the move intended, and an
+  honest night tick for the first time.
+
+**Tests:**
+- `_task_0153_boss_nights` (headless_v1):
+  - for dates 1-112 and seeds 0 and 424242, `is_boss` rows appear on 14,
+    28, 42, 56, 70, 84, 98 and 112 only, once each, the season's boss;
+  - night 10 has no Giant, and 14 has it and the flag;
+  - the year checks with the boss rows in;
+  - a non-boss season boss is refused.
+  - From Spring 14 fixtures through `NightRoad` (parked, dawn brought
+    close):
+    - **boss alive at dawn**: escaped; nothing taken; nothing paid, no
+      technology; `nights_won` unchanged; day 15 on date 14 with
+      `days_held` 1; the boss and the rest gone by the morning; the stall
+      restocked on day 15; tonight the boss night again;
+    - **boss killed**: won, paid once, next date 15;
+    - **house down with the boss alive**: lost, with stock taken, and the
+      season holds;
+    - **house down after the boss fell**: lost, with no hold.
+  - `boss_arrived` is raised for the Giant on Spring 14, and `waves.gd`'s
+    code names no `&"giant"`.
+- `_task_0137_dawn`'s "dawn waits for a boss" was rewritten in place as the
+  escape.
+- `_task_0150_lookup`'s "night as written" and `_task_0152_full_moon`'s
+  comparison take the boss rule into account.
+- The shot scenario count is 28.
+
+**Shot:**
+- `implementation/shots/0153/boss_escaped.png` and `-pt_BR.png`, FHD,
+  opened:
+  - MORNING OF DAY 15, NIGHT OVER, 4 walked off at dawn;
+  - GIANT GOT AWAY - IT COMES BACK TONIGHT in the warn colour, and money
+    and the farm untouched;
+  - inside the frame in both languages.
+- The morning says DAY 15 while the date stays Spring 14: the day counts
+  days lived, as the prompt has it.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `21427183` | `737715291` | a new state key, `days_held` (night 1's record is untouched) |
+| data hash | `1862107551` | `3913015035` | `SEASON_BOSSES` entered `digest()` |
+
+Files: src/core/{game_data,calendar,phases,waves,sim,rewards}.gd,
+src/ui/{result_screen,night_hud}.gd, assets/locale/strings.csv,
+src/tools/{perf_check,shot,headless_check,headless_v1,input_check}.gd,
+tools/perf_baseline.txt, tools/determinism_{sim,data}_hash.txt,
+implementation/shots/0153/
+
+Verify: **PASS**, 60 passed in 601 s (OVER BUDGET as before). headless_check
+16285, headless_v1 367 (+13), input_check 1066, input_v1 178, strings 476
+keys; perf "a night tick is 2089us of the 8333 it may have (25%)".

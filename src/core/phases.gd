@@ -42,15 +42,16 @@ static func initial() -> Dictionary:
 		"day": 1,
 		# The night about to be fought, or 0 before the first one.
 		#
-		# **It is not the day counter.** It was, until task 0065: `night 3 is
-		# the night at the end of day 3` read well and meant that losing
-		# night three sent the run on to night four, so a player could lose
-		# their way to the Giant without beating anything. The night to fight
-		# is the one after the last one won.
+		# **The calendar date's** since task 0151 (`Calendar.date`), which a
+		# boss holds still on its night until it falls (task 0153).
 		"night": 0,
-		# How many nights the run has got past. A lost night does not move
-		# it, which is the whole of "the night can be retried".
+		# How many nights the run has won. A count, not an index: a lost night
+		# does not move it.
 		"nights_won": 0,
+		# **Days a boss has held the calendar** (task 0153): one more every
+		# night the season's boss was not put down. `Calendar.date` is `day`
+		# less this, so `day` keeps moving and the date does not.
+		"days_held": 0,
 		# Ticks since the current phase began. Every phase uses it, which is
 		# why it is here and not in three places.
 		"phase_tick": 0,
@@ -218,22 +219,34 @@ static func begin_night(state: Dictionary) -> bool:
 ## what is recorded here is the outcome it will be computed from, so that the
 ## result screen reads one dictionary rather than interrogating the world after
 ## the fact.
-static func enter_result(state: Dictionary, survived: bool) -> bool:
+##
+## **Three outcomes since task 0153**: won, lost, and `escaped` - dawn on a
+## boss night with the house standing and the boss still alive. An escape
+## is neither: nothing is paid and nothing is taken, `nights_won` stays, and
+## the boss and the rest walk off at dawn as on any morning.
+static func enter_result(state: Dictionary, survived: bool, escaped: bool = false) -> bool:
 	if int(state["phase"]) != NIGHT:
 		push_error("enter_result from %s" % name_of(int(state["phase"])))
 		return false
 	state["last_result"] = {
 		"night": int(state["night"]),
 		"survived": survived,
+		"escaped": escaped,
 		"ticks": int(state["night_tick"]),
 	}
-	Events.add(state, &"night_won" if survived else &"night_lost",
-		{"night": int(state["night"])})
+	if not escaped:
+		Events.add(state, &"night_won" if survived else &"night_lost",
+			{"night": int(state["night"])})
 	# **A day passes either way; `nights_won` only on a win**, and it is a
 	# count now, not an index (task 0151). The next night is the next day's
 	# in the calendar, so a lost night is not fought again - the loss costs
 	# that night's pay and technology, and a day's worth of what it took.
 	state["day"] = int(state["day"]) + 1
+	# **The season holds until its boss falls** (task 0153), however the
+	# night ended - escaped at dawn or the house down - so tomorrow's date is
+	# this boss night again.
+	if Calendar.is_boss_night(int(state["night"])) and not Waves.boss_fell(state):
+		state["days_held"] = int(state.get("days_held", 0)) + 1
 	if survived:
 		state["nights_won"] = int(state["nights_won"]) + 1
 		# **The run can end here**: the year's last night won.

@@ -157,10 +157,11 @@ func _the_worst_case() -> Dictionary:
 		Building.place(state, &"wall", Vector2i(19 + moved.x, y))
 
 	# **The night is the calendar day's** since task 0151 - `Phases.begin_night`
-	# numbers it with `Calendar.date` - so the day picks the last authored
-	# night, the Giant's, which 0153 moves to Spring 14 and 0275 to Winter 14.
-	state["day"] = Waves.authored_count()
-	state["nights_won"] = Waves.authored_count() - 1
+	# numbers it with `Calendar.date` - so the day picks the boss's night:
+	# Spring 14 since task 0153, a Full Moon with the Giant in company. 0275
+	# moves it to Winter 14.
+	state["day"] = GameData.SEASON_DAYS
+	state["nights_won"] = GameData.SEASON_DAYS - 1
 	NightRoad.to_night(state)
 
 	# **Stopped at the busiest moment, not at a fixed tick.** Advance until
@@ -199,12 +200,20 @@ func _a_busy_day() -> Dictionary:
 	return state
 
 
-## Microseconds per whole tick, averaged.
+## Microseconds per whole tick, averaged - **over the ticks still in the phase
+## it started in**. Spring 14's night (task 0153) is over, everything dead,
+## inside the 600 ticks after its busiest moment, and an average that ran on
+## into the morning reported a night tick of 36 us against the towers' 1435:
+## a number about the result screen, under the night's name.
 func _per_tick(state: Dictionary) -> int:
 	var mine: Dictionary = state.duplicate(true)
+	var phase := int(mine["phase"])
+	var ticks := 0
 	var started := Time.get_ticks_usec()
-	Sim.advance(mine, TICKS)
-	return int(round(float(Time.get_ticks_usec() - started) / float(TICKS)))
+	while ticks < TICKS and int(mine["phase"]) == phase:
+		Sim.advance(mine, 1)
+		ticks += 1
+	return int(round(float(Time.get_ticks_usec() - started) / float(maxi(ticks, 1))))
 
 
 ## Microseconds per call of one system's `tick`, on its own copy.

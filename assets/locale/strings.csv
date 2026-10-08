@@ -296,6 +296,7 @@ REC_MINE_KIT,0,mine kit,kit de mina
 REC_PRESS_FISH_OIL,0,press fish oil,prensar óleo de peixe
 REC_PRESS_OIL,0,press oil,prensar óleo
 REC_WALL_KIT,0,wall kit,kit de muro
+RES_BOSS_ESCAPED,0,%s GOT AWAY - IT COMES BACK TONIGHT,%s FUGIU - VOLTA HOJE À NOITE
 RES_BUILD_WON,0,THE BUILD THAT WON,O QUE SEGUROU A NOITE
 RES_CAME_DOWN,200,%d structure came down,%d estrutura caiu
 RES_CAME_DOWN.other,200,%d structures came down,%d estruturas caíram

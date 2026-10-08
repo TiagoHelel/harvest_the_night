@@ -302,8 +302,8 @@ func _refresh() -> void:
 	var at: Array = Waves.progress(_state)
 	_wave.text = I18n.f(&"NHUD_WAVE", [int(at[0]), int(at[1])])
 	_left.text = I18n.f(&"NHUD_LEFT", [Waves.remaining(_state)])
-	# Holding at 0:00 while a boss keeps the night going, and never more than
-	# a whole night (a parked one has its dawn out of reach).
+	# Never more than a whole night (a parked one has its dawn out of reach).
+	# Since task 0153 dawn ends a boss night too, so nothing holds it at 0:00.
 	var to_dawn := mini(Phases.ticks_to_dawn(_state), GameData.NIGHT_TICKS)
 	var dawn_seconds := ceili(float(to_dawn) / float(GameData.SECONDS))
 	_dawn.text = I18n.f(&"NHUD_DAWN", [dawn_seconds / 60, dawn_seconds % 60])

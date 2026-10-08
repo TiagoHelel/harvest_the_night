@@ -183,17 +183,22 @@ static func _tick_night(state: Dictionary) -> void:
 ## **Dawn** (task 0137): a house still standing at 06:00 has won the night,
 ## and whatever is still on the farm walks off into the light when the day
 ## begins (`Enemies.withdraw`). Last in the night's order, so a house that
-## fell this tick has already lost. **Not while a boss is here** - until
-## 0153 the Giant's night ends with the Giant or the house.
+## fell this tick has already lost.
+##
+## **On a boss night with the boss alive, the boss escapes** (task 0153): it
+## walks off with the rest, nothing is paid and nothing taken, and the
+## calendar holds - it is back tonight. 0137 used to keep the night going
+## until the boss or the house fell; dawn is dawn now.
 static func _test_for_dawn(state: Dictionary) -> void:
 	if int(state["phase"]) != Phases.NIGHT:
 		return
 	var dawn := int((state["wave"] as Dictionary).get("dawn_at", GameData.NIGHT_TICKS))
-	if int(state["night_tick"]) < dawn or Combat.boss_here(state) != 0:
+	if int(state["night_tick"]) < dawn:
 		return
 	Events.add(state, &"dawn", {"walked": Entities.count(state)})
-	Rewards.settle(state, true)
-	Phases.enter_result(state, true)
+	var escaped := not Waves.boss_fell(state)
+	Rewards.settle(state, not escaped, escaped)
+	Phases.enter_result(state, not escaped, escaped)
 
 
 # ------------------------------------------------------------- skipping ahead

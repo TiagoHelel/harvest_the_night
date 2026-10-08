@@ -89,6 +89,12 @@ const FULL_MOON_HORDE_PERCENT := 150    # LEVER: percent of the night's count, 1
 ## materials. Technology is a point a night whatever the moon.
 const FULL_MOON_REWARD_PERCENT := 200   # LEVER: percent of the night's pay, 150-300
 
+## **Each season's boss** (task 0153), in `SEASONS` order: the one that comes
+## on the season's last night, and back every night after until it falls.
+## The Giant for all four until 0253-0255 bring the Harvester, the Scarecrow
+## King and the Winter Lord.
+const SEASON_BOSSES: Array = [&"giant", &"giant", &"giant", &"giant"]
+
 ## **The short build step after passing out** (task 0128). A farmer still up
 ## at 02:00 collapses where he stands and the night begins anyway, with this
 ## much time to build: staying up late is allowed, and it costs preparation,
@@ -1867,7 +1873,7 @@ static func validate() -> Array:
 	errors.append_array(check_bedtime(DUSK_MINUTE, BEDTIME_REMINDER_MINUTE,
 		PASS_OUT_WARNING_MINUTE, DAY_END_MINUTE))
 	errors.append_array(check_calendar(SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
-		FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT))
+		FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES))
 	if PASS_OUT_PREPARATION_TICKS <= 0 \
 			or PASS_OUT_PREPARATION_TICKS >= Sim.MOST_TICKS_IN_A_NIGHT:
 		errors.append("the build step after passing out is %d ticks, outside 1..%d"
@@ -1915,8 +1921,15 @@ static func check_bedtime(dusk: int, reminder: int, warning: int, end: int) -> A
 ## never smaller.
 static func check_calendar(seasons: Array, season_days: int,
 		full_moon_days: Array = [], horde_percent: int = 100,
-		reward_percent: int = 100) -> Array:
+		reward_percent: int = 100, bosses: Array = []) -> Array:
 	var errors: Array = []
+	# **A boss for every season, and a boss it is** (task 0153).
+	if not bosses.is_empty() and bosses.size() != seasons.size():
+		errors.append("%d season bosses for %d seasons" % [bosses.size(), seasons.size()])
+	for boss in bosses:
+		var kind: Dictionary = ENEMIES.get(StringName(boss), {})
+		if not bool(kind.get("is_boss", false)):
+			errors.append("the season boss '%s' is not an is_boss enemy" % boss)
 	for day in full_moon_days:
 		if int(day) < 1 or int(day) > season_days:
 			errors.append("a Full Moon on day %d is outside a %d-day season"
@@ -2736,7 +2749,7 @@ static func digest() -> int:
 			PASS_OUT_PREPARATION_TICKS,
 			MAX_CATCH_UP_TICKS],
 		"calendar": [SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
-			FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT],
+			FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
 			PLAYER_SPEED],
 		"house": [HOUSE_SIZE, SHOP_SIZE, HOUSE_ROOM, HOUSE_DOOR,

@@ -1,7 +1,7 @@
 # 0153 - Boss nights repeat until the boss falls
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0151, 0137
 - **Likely files:** src/core/waves.gd, src/core/phases.gd, src/core/calendar.gd, src/core/rewards.gd, src/core/sim.gd, src/core/game_data.gd, src/ui/result_screen.gd, src/ui/night_hud.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/shot.gd
 

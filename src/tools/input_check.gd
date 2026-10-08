@@ -3649,6 +3649,8 @@ func _case_0070_endless() -> void:
 	expect(int(state["night"]) == Run.final_night(), "it is the year's last night",
 		str(state["night"]))
 	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 10
+	# Winter 14 is a boss night (task 0153): won only with the boss down.
+	(state["killed_by_kind"] as Dictionary)[Calendar.boss_of(Run.final_night())] = 1
 	for _t in 40000:
 		if int(state["phase"]) != Phases.NIGHT:
 			break

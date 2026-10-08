@@ -1954,12 +1954,13 @@ func _task_0003_game_data() -> void:
 		expect(Waves.table(n + 1).size() > 0, "night %d has waves" % (n + 1))
 
 	# The Giant only shows up on the last one: it is the test of the build, not
-	# a thing that wanders in on night 4.
+	# a thing that wanders in on night 4. **As written** (task 0153): since
+	# then the calendar takes it to Spring 14, so the table is read plain.
 	var giant_nights: Array = []
 	for n in GameData.NIGHTS.size():
-		if Waves.kinds_of(n + 1).has(&"giant"):
+		if Waves.kinds_in(Waves.plain_night(n + 1)).has(&"giant"):
 			giant_nights.append(n + 1)
-	expect(giant_nights == [10], "the Giant is night 10 and nowhere else",
+	expect(giant_nights == [10], "the Giant is written on night 10 and nowhere else",
 		str(giant_nights))
 
 	# Buying a material is always worse than going and getting it, at every
@@ -10731,7 +10732,8 @@ func _task_0058_giant() -> void:
 	# **It arrives with company**, so the player cannot aim everything at it.
 	# Through `Waves`, not into the table: task 0059 made a night a record
 	# and the shape of it is that module's business, not this test's.
-	var last: Array = Waves.table(Waves.authored_count())
+	# The boss's night since task 0153: Spring 14, the season's last.
+	var last: Array = Waves.table(GameData.SEASON_DAYS)
 	var with_it := 0
 	var boss_waves := 0
 	for row in last:
@@ -10744,9 +10746,9 @@ func _task_0058_giant() -> void:
 	expect(with_it >= 20,
 		"and a crowd of ordinary zombies around it", str(with_it))
 	var seen := 0
-	for night in range(1, Waves.authored_count() + 1):
+	for night in range(1, GameData.SEASON_DAYS + 1):
 		seen += int(Waves.kinds_of(night).get(&"giant", 0))
-	expect(seen == 1, "and it appears once in the authored nights", str(seen))
+	expect(seen == 1, "and it appears once in the season's nights", str(seen))
 
 	# **One readable telegraph before the heavy blow.** The requirement.
 	var wind := _giant_winds_up(4300)
@@ -12297,6 +12299,14 @@ func _a_run_at_night(seed_value: int, night: int) -> Dictionary:
 	return state
 
 
+## Put tonight's boss down, for a fixture that wins a boss night by fiat
+## (task 0153): a boss night is won only once its boss has fallen.
+func _beat_the_boss(state: Dictionary) -> void:
+	var boss := StringName(Waves.tonight(state).get("boss", &""))
+	if boss != &"":
+		(state["killed_by_kind"] as Dictionary)[boss] = 1
+
+
 ## Knock the house down and let the rules do the rest.
 func _lose_the_night(state: Dictionary) -> void:
 	state["house_hp"] = 0
@@ -12408,6 +12418,7 @@ func _task_0066_run_end() -> void:
 	# **Over once the year's last night is won** - a fixture on that date,
 	# not 56 nights played.
 	var nearly := _a_run_at_night(6601, Run.final_night())
+	_beat_the_boss(nearly)
 	expect(Run.is_final_night(nearly),
 		"night %d, Winter 14, is the year's last" % Run.final_night(),
 		str(nearly["night"]))
@@ -12423,6 +12434,7 @@ func _task_0066_run_end() -> void:
 	# **Read from the night won, never from a count of wins.** A year with
 	# losses in it still ends on Winter 14 won; losing Winter 14 does not.
 	var scarred := _a_run_at_night(6607, Run.final_night())
+	_beat_the_boss(scarred)
 	scarred["nights_won"] = 40
 	Rewards.settle(scarred, true)
 	Phases.enter_result(scarred, true)
@@ -12501,6 +12513,7 @@ func _task_0066_run_end() -> void:
 
 	# **The run is written to the profile.**
 	var won := _a_run_at_night(6605, Run.final_night())
+	_beat_the_boss(won)
 	Rewards.settle(won, true)
 	Phases.enter_result(won, true)
 	var profile := Save.default_profile()
@@ -14506,16 +14519,17 @@ func _task_0082_shots() -> void:
 	# report with every line it has, and him out of bed beside it.
 	# Twenty-three since 0140: the farm at 22:30, time for bed. Twenty-six
 	# since 0141: day one teaching the night - the bed, START, dawn.
-	# Twenty-seven since 0152: the wave under a Full Moon.
-	expect(names.size() == 27,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons and the Full Moon",
+	# Twenty-seven since 0152: the wave under a Full Moon. Twenty-eight since
+	# 0153: the morning a boss got away.
+	expect(names.size() == 28,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon and the boss's escape",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
 			"passed_out", "build_day", "repair", "aim", "morning", "woken", "bedtime",
 			"tutorial_bed", "tutorial_start", "tutorial_dawn", "full_moon",
-			"options_controls_pad"]:
+			"boss_escaped", "options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not
