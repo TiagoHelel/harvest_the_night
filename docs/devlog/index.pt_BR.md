@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-124 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+125 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -167,10 +167,11 @@ voz alta.
 | 0121 | A controller for every action | 2026-10-08 |
 | 0126 | The clock: 06:00 to 02:00 | 2026-10-08 |
 | 0127 | Going to bed starts the night | 2026-10-08 |
+| 0128 | Passing out at 02:00 | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 29 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 31 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -201,6 +202,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Refusals in two languages** (0110) - `sim` 1961000123 -> 3960053733
 - **Room in the test suites** (0112) - `data` 2015186086 -> 1968527100
 - **The clock: 06:00 to 02:00** (0126) - `data` 1968527100 -> 1739027987
+- **Passing out at 02:00** (0128) - `sim` 10253699 -> 734279793
+- **Passing out at 02:00** (0128) - `data` 1739027987 -> 954093946
 
 ## O que deu errado
 

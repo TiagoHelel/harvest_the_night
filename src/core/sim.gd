@@ -85,6 +85,13 @@ static func _tick_day(state: Dictionary) -> void:
 		Phases.go_to_bed(state)
 		return
 
+	# **02:00, and he is still up** (task 0128): he passes out where he stands
+	# and the night begins anyway, after a short build step. A bedtime asked
+	# for on the same tick wins - that is an ordinary night.
+	if int(state["day_tick"]) >= GameData.DAY_TICKS:
+		Phases.pass_out(state)
+		return
+
 	# **First**, so that everything below it runs at the speed the farm can
 	# actually manage this tick rather than last tick's.
 	Power.tick(state)
@@ -118,7 +125,7 @@ static func _tick_day(state: Dictionary) -> void:
 static func _tick_preparation(state: Dictionary) -> void:
 	Building.tick(state)
 	Player.tick(state)
-	if int(state["phase_tick"]) >= GameData.PREPARATION_TICKS:
+	if int(state["phase_tick"]) >= Phases.build_step_ticks(state):
 		Phases.start_waves(state)
 
 

@@ -13312,3 +13312,54 @@ hashed; the determinism scenario's build step now has him asleep), data
 shot.gd edit. Shots 0127 opened in en and pt_BR: the bed line reads
 "SPACE / ENTER: ir dormir" beside the bed, and the button "IR DORMIR - NOITE 1"
 fits at dusk.
+
+## 0128 - Passing out at 02:00 - done 2026-10-08
+
+What changed: the day finally ends. On the tick `day_tick` reaches `DAY_TICKS`
+(02:00), `Sim._tick_day` calls `Phases.pass_out`: his action and any cast
+stop, `begin_preparation` runs (indoors or out - it leaves the room), and
+`house_visit.passed_out` is set beside `asleep`. A bedtime asked for on that
+same tick wins and is an ordinary night; a stall that stops the clock still
+stops 02:00 from arriving. The build step after a pass-out ends itself after
+`PASS_OUT_PREPARATION_TICKS` (30 s, `# LEVER` 15-60 s, checked in `validate()`
+against `Sim.MOST_TICKS_IN_A_NIGHT`, in the `time` row of `digest()`) through
+`Phases.start_waves`; the length is asked of `Phases.build_step_ticks(state)`,
+which `NightRoad.build_ticks_left` now asks too. `clock_minute` clamps at 02:00
+and `overtime_percent` runs 0-100 from dusk to 02:00. A `passed_out` event
+(Events.KINDS, warn severity, `LOG_PASSED_OUT` "passed out at 02:00 - a short
+night to build" / "desmaiou às 02:00 - pouco tempo para construir"), sampled in
+`_task_0090_log`. `begin_preparation` resets `passed_out`, `begin_day` clears it.
+The title backdrop starts 10 s before 02:00 and lets the pass-out bring the
+night (checked by running it: DAY -> PREPARATION -> NIGHT -> RESULT);
+`_case_0091_title` now says it starts late in the evening.
+**Long day advances**: `_task_0039_clock`'s stubborn player rewritten - at 01:59
+still the day with the overtime nearly full, at 02:00 he passes out into the
+short build step, and the house, money, wood and the crop's growth are what
+they were at 02:00. Kept inside the day with a new `SuiteKit.advance_in_daylight`
+(a day that starts again at dawn instead of reaching 02:00): the regrowth waits
+of `_task_0016_gathering` and `_task_0017_stone` and the four-day cliff in
+`_task_0031_iron`; `_task_0030_fishing`'s idle day is `DAY_TICKS - 1`. Accepting
+the night on purpose: `_task_0002_tick_and_rng`'s 10000 ticks and
+`_task_0005_guards`' 20000-tick replay still compare two runs, which now both
+pass out the same way. `_mine_for_a_day` and `_task_0038_idle` needed nothing.
+The 0118 road scan now matches the lever as a whole word
+(`PASS_OUT_PREPARATION_TICKS` is not it) and allows 0128's comparison of the two
+lengths. `Autoplay._a_day` counts from the day's tick to one short of 02:00 and
+never lets an action carry over it; the robot then goes to bed as before.
+Files: src/core/{game_data,sim,phases,house,events}.gd, src/ui/{title_screen,
+log_panel}.gd, src/tools/{night_road,autoplay,suite_kit,headless_v1,headless_check,
+input_check}.gd, assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/shots/0128/
+Verify: **59 passed, 0 failed in 513s** (OVER BUDGET 300, as before); suite times
+headless_check 77.9 s, headless_v1 2.1 s, input_check 88.8 s, input_v1 4.5 s;
+headless_check 16183 (+6), headless_v1 155 (+11: still the day at DAY_TICKS - 1,
+asleep and passed out at DAY_TICKS with the action stopped and the event
+logged and the clock at 02:00, NIGHT after exactly PASS_OUT_PREPARATION_TICKS,
+indoors too, bed at 01:59 an ordinary night, clock and overtime clamped, the
+morning clears it); **sim 10253699 -> 734279793** (`house_visit.passed_out` is
+hashed, and the determinism scenario's second day now runs past 02:00 into a
+pass-out night), **data 1739027987 -> 954093946** (the new lever in `digest()`).
+Autoplay still plays its nights - won 0 / night 8 (21x) 6.9 balanced, night 3
+(19x) 2.6 economy, night 8 (17x) 6.7 towers, night 8 (21x) 8.2 walls, the same
+nights as 0119; gathered 5671/799/5633/7373. Shots 0128 `--title` opened: the
+backdrop is the late evening light.

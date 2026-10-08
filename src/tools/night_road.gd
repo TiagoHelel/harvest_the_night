@@ -40,7 +40,8 @@ static func to_build(state: Dictionary) -> bool:
 static func build_ticks_left(state: Dictionary) -> int:
 	if int(state["phase"]) != Phases.PREPARATION:
 		return 0
-	return maxi(GameData.PREPARATION_TICKS - int(state["phase_tick"]), 0)
+	# The build step's own length - the short one after a pass-out (0128).
+	return maxi(Phases.build_step_ticks(state) - int(state["phase_tick"]), 0)
 
 
 ## Through the rest of the build step, to the tick the waves start on.

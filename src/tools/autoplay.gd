@@ -128,7 +128,11 @@ static func play(seed_value: int, policy_name: StringName,
 
 ## Spend a day's worth of work on the policy's wants, then let the day run.
 static func _a_day(state: Dictionary, policy: Dictionary) -> void:
-	var left := GameData.DAY_TICKS
+	# **One tick short of 02:00** (task 0128): a whole `DAY_TICKS` would pass
+	# him out into a night; the robot goes to bed instead. 0142 rewrites this.
+	# Counted from where the day is, which after a confirmed result is a tick
+	# or two past dawn.
+	var left := GameData.DAY_TICKS - 1 - int(state["day_tick"])
 	var guard := 0
 	while left > 0 and guard < 900:
 		guard += 1
@@ -140,10 +144,14 @@ static func _a_day(state: Dictionary, policy: Dictionary) -> void:
 		# at the end - so every action happened at tick zero, the ore never
 		# regrew, the crops never grew, and the robot spent four hundred and
 		# sixty-eight actions waiting for a cliff that could not come back.
-		Sim.advance(state, maxi(spent, 1))
-		left -= spent
+		# Never past the end of the day: the last thing started is cut short
+		# rather than carried over 02:00 into a pass-out (task 0128).
+		var step := mini(maxi(spent, 1), left)
+		Sim.advance(state, step)
+		left -= step
 	# The rest of the day: crops finish, the press runs, the animals fill up.
-	Sim.advance(state, maxi(left, 1))
+	if left > 0:
+		Sim.advance(state, left)
 
 
 ## Do the next thing the policy wants, and say what it cost in ticks.

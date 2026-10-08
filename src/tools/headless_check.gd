@@ -2589,7 +2589,7 @@ func _task_0016_gathering() -> void:
 		"%d expected, %d held"
 		% [expected_wood, Resources.amount(state, GameData.WOOD)])
 
-	Sim.advance(state, wait)
+	SuiteKit.advance_in_daylight(state, wait)  # in daylight: task 0128's 02:00 would pass him out
 	expect(Farm.cells_with(state, &"tree").size() == all_trees.size(),
 		"and after the regrowth delay every one of them is back",
 		str(Farm.cells_with(state, &"tree").size()))
@@ -2720,7 +2720,7 @@ func _task_0017_stone() -> void:
 	# the reward for tidying the lawn.
 	expect(Farm.occupant(state, boulder).is_empty(), "the cell is empty")
 	expect(Farm.buildable(state, boulder), "and buildable now")
-	Sim.advance(state, int(GameData.GATHERING[&"seam"]["regrow_ticks"]) * 3)
+	SuiteKit.advance_in_daylight(state, int(GameData.GATHERING[&"seam"]["regrow_ticks"]) * 3)  # in daylight: task 0128's 02:00 would pass him out
 	expect(Farm.occupant(state, boulder).is_empty(),
 		"and three regrowth delays later it is still empty",
 		str(Farm.occupant(state, boulder)))
@@ -2736,7 +2736,7 @@ func _task_0017_stone() -> void:
 		"a seam pays %d stone" % per_seam,
 		str(Resources.amount(state, GameData.STONE) - before))
 	expect(Farm.occupant(state, seam).is_empty(), "and is worked out")
-	Sim.advance(state, int(seam_data["regrow_ticks"]))
+	SuiteKit.advance_in_daylight(state, int(seam_data["regrow_ticks"]))  # in daylight: task 0128's 02:00 would pass him out
 	expect(Farm.occupant(state, seam).get("id", &"") == &"seam",
 		"until the rock face puts it back", str(Farm.occupant(state, seam)))
 
@@ -2753,7 +2753,7 @@ func _task_0017_stone() -> void:
 		for cell in Farm.cells_with(stripped, &"seam"):
 			for _i in int(seam_data["hits"]):
 				Gathering.strike(stripped, cell)
-		Sim.advance(stripped, int(seam_data["regrow_ticks"]))
+		SuiteKit.advance_in_daylight(stripped, int(seam_data["regrow_ticks"]))
 	expect(Resources.amount(stripped, GameData.STONE)
 		== stone_before + 3 * seams.size() * per_seam,
 		"and three cycles of the rock face paid %d more"
@@ -2771,7 +2771,7 @@ func _task_0017_stone() -> void:
 	expect(Resources.amount(state, GameData.IRON) > iron_before,
 		"a vein pays iron")
 	expect(Farm.occupant(state, vein).is_empty(), "and is worked out")
-	Sim.advance(state, int(ore_data["regrow_ticks"]))
+	SuiteKit.advance_in_daylight(state, int(ore_data["regrow_ticks"]))
 	expect(Farm.occupant(state, vein).get("id", &"") == &"ore",
 		"and the rock face puts it back", str(Farm.occupant(state, vein)))
 
@@ -4700,7 +4700,8 @@ func _task_0030_fishing() -> void:
 	who["pos"] = [idle_shore.x * Player.SUBTILE + Player.SUBTILE / 2,
 		idle_shore.y * Player.SUBTILE + Player.SUBTILE / 2]
 	expect(Fishing.begin(idle, idle_pond), "cast, and then look away")
-	Sim.advance(idle, GameData.DAY_TICKS)
+	# The whole day, short of the 02:00 that passes him out (task 0128).
+	Sim.advance(idle, GameData.DAY_TICKS - 1)
 	expect(Resources.amount(idle, GameData.FISH) == 0,
 		"a whole day of not reacting catches nothing",
 		str(Resources.amount(idle, GameData.FISH)))
@@ -4927,7 +4928,7 @@ func _task_0031_iron() -> void:
 	expect(Gathering.regrowing(stripped) == cliff.size(),
 		"and all of it is coming back", str(Gathering.regrowing(stripped)))
 
-	Sim.advance(stripped, int(ore["regrow_ticks"]) + 2)
+	SuiteKit.advance_in_daylight(stripped, int(ore["regrow_ticks"]) + 2)
 	expect(Farm.cells_with(stripped, &"ore").size() == 8,
 		"every ore node is back",
 		str(Farm.cells_with(stripped, &"ore").size()))
@@ -4944,7 +4945,7 @@ func _task_0031_iron() -> void:
 				if Farm.is_empty(stripped, node):
 					break
 				Gathering.strike(stripped, node)
-		Sim.advance(stripped, int(ore["regrow_ticks"]) + 2)
+		SuiteKit.advance_in_daylight(stripped, int(ore["regrow_ticks"]) + 2)
 	expect(Farm.cells_with(stripped, &"ore").size() == 8,
 		"and it is still all there after four days of stripping it",
 		str(Farm.cells_with(stripped, &"ore").size()))
@@ -6519,51 +6520,54 @@ func _task_0039_clock() -> void:
 		"and the day carries on through it",
 		Phases.name_of(int(state["phase"])))
 
-	# **A player who ignores the clock is not punished for it.** The done-when,
-	# and the whole of `design.md`'s promise that the player switches reality
-	# when they want to.
+	# **A player who ignores the clock is not punished beyond the night.**
+	# Task 0128 rewrote this: it used to be "the night never starts itself".
+	# Now at 02:00 he passes out where he stands and the night starts itself,
+	# with the short build step - and that is all it costs. The house, the
+	# money, the wood and the planted crop are what they were at 02:00.
 	var stubborn := State.create(2101)
 	Resources.gain(stubborn, {GameData.WOOD: 100, GameData.MONEY: 100})
 	var plot: Vector2i = Farm.cells_of(stubborn, Farm.Terrain.SOIL)[0]
 	Farming.act(stubborn, plot)
 	Farming.act(stubborn, plot)
+
+	# All day without ever going to bed, to the last tick before 02:00.
+	Sim.advance(stubborn, GameData.DAY_TICKS - 1)
+	expect(int(stubborn["phase"]) == Phases.DAY,
+		"at 01:59 it is still the day, however late",
+		Phases.name_of(int(stubborn["phase"])))
+	expect(Phases.overtime_percent(stubborn) >= 99
+		and Phases.overtime_percent(stubborn) <= 100,
+		"the overtime is plainly visible, and nearly full",
+		str(Phases.overtime_percent(stubborn)))
+	expect(Phases.is_dusk(stubborn), "and it is still saying so")
 	var house_before := int(stubborn["house_hp"])
 	var purse := Resources.amount(stubborn, GameData.MONEY)
 	var wood := Resources.amount(stubborn, GameData.WOOD)
+	var crop: Dictionary = Farming.plot(stubborn, plot).duplicate(true)
 
-	# Three whole days' worth of ticks without ever pressing the night button.
-	Sim.advance(stubborn, GameData.DAY_TICKS * 3)
-	expect(int(stubborn["phase"]) == Phases.DAY,
-		"the night never starts itself, however long you leave it",
+	Sim.advance(stubborn, 1)
+	expect(int(stubborn["phase"]) == Phases.PREPARATION
+		and bool((stubborn["house_visit"] as Dictionary)["passed_out"]),
+		"at 02:00 he passes out and the night starts itself",
 		Phases.name_of(int(stubborn["phase"])))
+	expect(Phases.build_step_ticks(stubborn) == GameData.PASS_OUT_PREPARATION_TICKS,
+		"with the short build step", str(Phases.build_step_ticks(stubborn)))
 	expect(int(stubborn["day"]) == 1, "and the day counter does not creep",
 		str(stubborn["day"]))
 	expect(int(stubborn["house_hp"]) == house_before,
 		"the house is untouched", str(stubborn["house_hp"]))
 	expect(Resources.amount(stubborn, GameData.MONEY) == purse,
 		"nothing is taken", str(Resources.amount(stubborn, GameData.MONEY)))
-	expect(Resources.amount(stubborn, GameData.WOOD) >= wood,
+	expect(Resources.amount(stubborn, GameData.WOOD) == wood,
 		"nothing spoils", str(Resources.amount(stubborn, GameData.WOOD)))
-	expect(Farming.is_ready(stubborn, plot),
-		"and the crop that was planted is simply ready")
-	expect(Farming.crop_on(stubborn, plot) != &"",
-		"rather than having withered for being left")
-	print("  three days past dusk: %d%% through, %d%% overtime, house %d/%d"
-		% [Phases.day_percent(stubborn), Phases.overtime_percent(stubborn),
-			int(stubborn["house_hp"]), GameData.HOUSE_HP])
-
-	# The nudge is a nudge: a number that grows, nothing that bites.
-	expect(Phases.overtime_percent(stubborn) > 100,
-		"the overtime is plainly visible",
-		str(Phases.overtime_percent(stubborn)))
-	expect(Phases.is_dusk(stubborn), "and it is still saying so")
-
-	# **The night starts when the player says so, at any hour.**
-	(stubborn["intent"] as Dictionary)["sleep"] = true
-	Sim.advance(stubborn, 1)
-	expect(int(stubborn["phase"]) == Phases.PREPARATION,
-		"pressing the button three days late still works",
-		Phases.name_of(int(stubborn["phase"])))
+	# Growth and crop, not the whole plot: the water goes off with the sun
+	# whenever the day ends, which is not the clock's doing.
+	expect(int(Farming.plot(stubborn, plot).get("growth", -1)) == int(crop.get("growth", -2))
+		and Farming.crop_on(stubborn, plot) != &"",
+		"and the planted crop is what it was at 02:00, not withered for being left")
+	print("  a whole day without bed: %d%% through, passed out into a %d-tick build step"
+		% [Phases.day_percent(stubborn), Phases.build_step_ticks(stubborn)])
 
 	var early := State.create(2102)
 	(early["intent"] as Dictionary)["sleep"] = true
@@ -15307,6 +15311,7 @@ func _task_0090_log() -> void:
 		&"boss_arrived": {"enemy": &"giant"},
 		&"night_won": {"night": 3},
 		&"night_lost": {"night": 4},
+		&"passed_out": {"day": 3},       # task 0128
 	}
 	for kind in Events.KINDS:
 		expect(samples.has(kind),

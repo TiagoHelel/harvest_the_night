@@ -72,6 +72,12 @@ const DUSK_AT_TICK := (DUSK_MINUTE - DAY_START_MINUTE) * DAY_TICKS \
 ## The build window between pressing the night button and the first spawn.
 const PREPARATION_TICKS := 20 * SECONDS # LEVER: ticks, 10-45 seconds worth
 
+## **The short build step after passing out** (task 0128). A farmer still up
+## at 02:00 collapses where he stands and the night begins anyway, with this
+## much time to build: staying up late is allowed, and it costs preparation,
+## not the run.
+const PASS_OUT_PREPARATION_TICKS := 30 * SECONDS  # LEVER: ticks, 15-60 seconds worth
+
 
 # ===================================================================== the farm
 
@@ -1800,6 +1806,10 @@ static func validate() -> Array:
 
 	errors.append_array(check_clock(DAY_START_MINUTE, DUSK_MINUTE,
 		DAY_END_MINUTE, DAY_TICKS))
+	if PASS_OUT_PREPARATION_TICKS <= 0 \
+			or PASS_OUT_PREPARATION_TICKS >= Sim.MOST_TICKS_IN_A_NIGHT:
+		errors.append("the build step after passing out is %d ticks, outside 1..%d"
+			% [PASS_OUT_PREPARATION_TICKS, Sim.MOST_TICKS_IN_A_NIGHT - 1])
 
 	return errors
 
@@ -2615,6 +2625,7 @@ static func digest() -> int:
 	return State.hash_of({
 		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK, PREPARATION_TICKS,
 			DAY_START_MINUTE, DAY_END_MINUTE, DUSK_MINUTE,
+			PASS_OUT_PREPARATION_TICKS,
 			MAX_CATCH_UP_TICKS],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
 			PLAYER_SPEED],

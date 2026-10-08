@@ -14,7 +14,10 @@ static func initial() -> Dictionary:
 		"outside_facing": Player.SOUTH,
 		# Gone to bed (task 0127): set by `Phases.begin_preparation`, so every
 		# road into the build step leaves him asleep; cleared at dawn.
-		"asleep": false}}
+		"asleep": false,
+		# Fell asleep where he stood at 02:00 (task 0128): the build step is
+		# the short one. Cleared by a bedtime and by the morning.
+		"passed_out": false}}
 
 
 static func inside(state: Dictionary) -> bool:

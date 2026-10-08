@@ -49,6 +49,8 @@ const KINDS: Array = [
 	&"boss_arrived",
 	&"night_won",
 	&"night_lost",
+	# Still up at 02:00 (task 0128), and why the build step is short.
+	&"passed_out",
 ]
 
 

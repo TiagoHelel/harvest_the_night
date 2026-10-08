@@ -1,7 +1,7 @@
 # 0128 - Passing out at 02:00
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0127
 - **Likely files:** src/core/sim.gd, src/core/phases.gd, src/core/house.gd, src/core/game_data.gd, src/core/events.gd, src/ui/title_screen.gd, src/ui/log_panel.gd, src/tools/autoplay.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd
 

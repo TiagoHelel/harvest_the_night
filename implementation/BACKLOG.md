@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **122 / 296 done**
+`##########..............`  **123 / 296 done**
 
-0 doing / 174 todo / 0 blocked across 18 phases.
+0 doing / 173 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-174 task(s) left, the ready ones first, then what they
+173 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,28 +107,9 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0128 - Passing out at 02:00
-
-Ready to pick up.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/house.gd, src/core/game_data.gd, src/core/events.gd, src/ui/title_screen.gd, src/ui/log_panel.gd, src/tools/autoplay.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
-
-The day finally ends. A farmer still awake at 02:00 collapses where he stands and the night begins anyway, with only a thirty-second build step: staying up late is allowed, and it costs preparation, not the run.
-
-- In `Sim._tick_day`, on the tick `day_tick` reaches `DAY_TICKS` (02:00), `Phases.pass_out(state)`: whatever he was doing stops (his action, a fishing cast), `house_visit.asleep` and a new `house_visit.passed_out` are set, and `begin_preparation` runs - indoors or out. A panel that stops the clock also stops 02:00 from arriving, as today
-- `PASS_OUT_PREPARATION_TICKS := 30 * SECONDS` (`# LEVER`, 15-60 seconds worth): after a pass-out the build step ends itself after this many ticks, through 0118's `Phases.start_waves`; an ordinary bedtime keeps today's `PREPARATION_TICKS` until 0136 removes it (the build step's `phase_tick` is the counter; no new key). `validate()` checks it is positive and below `Sim.MOST_TICKS_IN_A_NIGHT`, and it joins the `time` row of `digest()`
-- The clock clamps at 02:00, and `overtime_percent` now runs 0-100 from dusk to 02:00 and never past it
-- A `passed_out` event: a new `Events.KINDS` entry, a severity in `log_panel.gd` and a `LOG_PASSED_OUT` line in both languages, so the log says why the build step is short; add its sample to `_task_0090_log` (headless_check), which fails on a kind without one. The fade from where he fell is the transition's; the collapse itself is A001's (0129 registers it, 0143 integrates it)
-- Anything that spends a whole `DAY_TICKS` by day now passes out into a night. `Autoplay._a_day` spends exactly that and then calls the road into the build step, which would find it already there: make it stop short of 02:00 and go to bed (0142 rewrites the loop properly). Check the long day advances in the suites too - `_task_0002_tick_and_rng`'s 10000 ticks, `_task_0005_guards`' 20000-tick replay, `_task_0030_fishing`'s idle `DAY_TICKS`, `_task_0038_idle`, `_mine_for_a_day` - and either keep them inside the day or accept the night on purpose; report the suite times
-- Rewrite `_task_0039_clock`: 'the night never starts itself' becomes 'at 02:00 he passes out and the night starts itself'. The stubborn-player block keeps its point - ignoring the clock costs nothing beyond the short build step (house, money, wood and the planted crop are what they were at 02:00)
-- The title backdrop (`title_screen.gd`) stops writing the sleep intent at dusk: it starts its clock shortly before 02:00 and lets the pass-out bring the night. Update `_case_0091_title`, which compares `backdrop_tick()` with `DUSK_AT_TICK` (~5439)
-- SIM moves on purpose: `house_visit` gains `passed_out` (hashed like every state key), and the determinism scenario's second day (about 12700 ticks after `begin_day`) now runs past 02:00 into a pass-out night. Record both numbers. DATA moves (a new lever in `digest()`)
-
-  - done when: `_task_0128_pass_out` in `headless_v1.gd` (write `day_tick` near the end rather than playing the day): still DAY at `DAY_TICKS - 1`; PREPARATION with `asleep` and `passed_out` at `DAY_TICKS`; NIGHT after exactly `PASS_OUT_PREPARATION_TICKS`; a farmer indoors passes out too; going to bed at 01:59 is an ordinary night
-  - done when: The rewritten `_task_0039_clock`, `_task_0090_log` and `_case_0091_title` pass, and `python tools/autoplay.py` still plays its nights
-  - done when: `python tools/shot.py 0128 --title` opened: the backdrop farm still reaches the night
-
 ### 0129 - He stays in bed all night
 
-Waits on 0128.  Likely files: `src/core/player.gd, src/core/ability.gd, src/core/building.gd, src/ui/main.gd, src/ui/night_hud.gd, src/ui/player_view.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/player.gd, src/core/ability.gd, src/core/building.gd, src/ui/main.gd, src/ui/night_hud.gd, src/ui/player_view.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Nobody walks at night. The farmer is in bed from the moment he sleeps until the morning, and the two things the night used him for - the flare and the repair - keep working without him until the cursor takes them over.
 
@@ -147,7 +128,7 @@ Nobody walks at night. The farmer is in bed from the moment he sleeps until the 
 
 ### 0140 - The day HUD: the hour and bedtime
 
-Waits on 0128.  Likely files: `src/ui/day_hud.gd, src/core/game_data.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/ui/day_hud.gd, src/core/game_data.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
 
 The day HUD tells the time and says when it is time for bed: an HH:MM clock, a GO TO BED button that looks like the way into the night, a reminder from 22:00 and a warning before the 02:00 pass-out.
 
@@ -178,7 +159,7 @@ At night the camera belongs to the player, not to the farmer: it pans over the w
 
 ### 0143 - Art: going to bed, sleeping, waking, passing out
 
-Waits on 0129, 0128.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/player_frames.gd, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/house_view.gd, src/ui/player_view.gd, tools/verify.py`.
+Waits on 0129.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/player_frames.gd, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/house_view.gd, src/ui/player_view.gd, tools/verify.py`.
 
 The farmer's night in his own art - getting into bed, the sleep loop, waking and stretching, passing out on the farm - from Codex pack A001, replacing 0129's stand-ins.
 
@@ -299,7 +280,7 @@ The night's shop window: a hotbar of every defence with its price, picked with a
 
 ### 0136 - The build step waits for START
 
-Waits on 0132, 0128.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/game_data.gd, src/core/player.gd, src/ui/night_hud.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/night_road.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0132.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/game_data.gd, src/core/player.gd, src/ui/night_hud.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/night_road.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The build step has no clock. The night waits while the player builds and starts when they press START - except after a pass-out, when the horde is already at the gate and gives thirty seconds.
 
@@ -3361,26 +3342,26 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (2/23)
+## 10 - Sleep is the night  (3/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
-- [ ] **0128** [Passing out at 02:00](prompts/0128-pass-out.md)
-- [ ] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md) - needs 0128
+- [x] **0128** [Passing out at 02:00](prompts/0128-pass-out.md)
+- [ ] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md)
 - [ ] **0130** [The night camera](prompts/0130-night-camera.md) - needs 0129
 - [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md) - needs 0130
 - [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md) - needs 0131
 - [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md) - needs 0132
 - [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0131, 0133
 - [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md) - needs 0131
-- [ ] **0136** [The build step waits for START](prompts/0136-start-button.md) - needs 0132, 0128
+- [ ] **0136** [The build step waits for START](prompts/0136-start-button.md) - needs 0132
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
 - [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0133, 0134, 0135, 0136, 0137
-- [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md) - needs 0128
+- [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0132, 0138
-- [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - needs 0129, 0128 - waits for art A001
+- [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - needs 0129 - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - needs 0129 - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - needs 0131, 0133 - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - needs 0131 - waits for art A004

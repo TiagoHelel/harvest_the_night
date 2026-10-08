@@ -207,7 +207,10 @@ func _begin_backdrop() -> void:
 			Interact.complete(_state, cell, &"water")
 			sown += 1
 	Sim.advance(_state, 60 * GameData.SECONDS)
-	_from = GameData.DUSK_AT_TICK
+	# **Shortly before 02:00** (task 0128): the backdrop does not send for the
+	# night - the farmer passes out, as anyone up that late does, and the
+	# short build step and the night follow by themselves.
+	_from = GameData.DAY_TICKS - DUSK_FOR
 	Sim.advance(_state, maxi(_from - int(_state["tick"]), 1))
 	if _world != null:
 		_world.show_state(_state)
@@ -227,10 +230,7 @@ func _process(_delta: float) -> void:
 		return
 	Sim.advance(_state, CREEP_TICKS)
 
-	# Dusk for a moment, then the night is asked for the way the player would
-	# ask for it - by writing the intent, not by setting the phase.
-	if int(_state["phase"]) == Phases.DAY and since > DUSK_FOR:
-		(_state["intent"] as Dictionary)["sleep"] = true
+	# The late evening for a moment, then 02:00 brings the night itself.
 	var dark := int(_state["phase"]) == Phases.NIGHT
 	if dark and Entities.count(_state) < VISITORS:
 		Enemies.spawn(_state, &"walker",

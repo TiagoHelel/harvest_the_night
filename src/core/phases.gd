@@ -82,6 +82,33 @@ static func go_to_bed(state: Dictionary) -> bool:
 	return begin_preparation(state)
 
 
+## **Passing out at 02:00** (task 0128). Whatever he was doing stops - his
+## action, a line in the water - he is asleep and `passed_out`, and the build
+## step begins wherever he fell, indoors or out, with only
+## `PASS_OUT_PREPARATION_TICKS` to it. Staying up late is allowed; it costs
+## preparation, not the run. DAY only, like going to bed.
+static func pass_out(state: Dictionary) -> bool:
+	if int(state["phase"]) != DAY:
+		push_error("pass_out from %s" % name_of(int(state["phase"])))
+		return false
+	(state["player"] as Dictionary)["action"] = {}
+	Fishing.give_up(state)
+	if not begin_preparation(state):
+		return false
+	(state["house_visit"] as Dictionary)["passed_out"] = true
+	Events.add(state, &"passed_out", {"day": int(state["day"])})
+	return true
+
+
+## How long the build step runs before the waves start: the short one after a
+## pass-out, the ordinary one after going to bed - which 0136's START button
+## replaces. `phase_tick` is the counter.
+static func build_step_ticks(state: Dictionary) -> int:
+	if bool((state.get("house_visit", {}) as Dictionary).get("passed_out", false)):
+		return GameData.PASS_OUT_PREPARATION_TICKS
+	return GameData.PREPARATION_TICKS
+
+
 ## DAY -> PREPARATION. The farmer went to bed.
 ##
 ## **Every road into the build step leaves him asleep** - the bed, the button,
@@ -97,6 +124,8 @@ static func begin_preparation(state: Dictionary) -> bool:
 	state["open_panel"] = &""
 	House.leave(state)
 	(state["house_visit"] as Dictionary)["asleep"] = true
+	# An ordinary bedtime; `pass_out()` marks its own after this.
+	(state["house_visit"] as Dictionary)["passed_out"] = false
 	# The water goes off with the sun: watering is a daily chore, not a job you
 	# do once on day one and never again.
 	Farming.dry_out(state)
@@ -203,6 +232,7 @@ static func begin_day(state: Dictionary) -> bool:
 	# Up at 06:00 - wherever he is until 0138 wakes him in his bed - and a
 	# bedtime asked for after dark is not carried into the morning.
 	(state["house_visit"] as Dictionary)["asleep"] = false
+	(state["house_visit"] as Dictionary)["passed_out"] = false
 	(state["intent"] as Dictionary)["sleep"] = false
 	# **The yard is swept first.** The night's wreckage belongs to the
 	# night, and a farm that never cleared would silt up over ten of them.
@@ -239,7 +269,8 @@ static func overtime_percent(state: Dictionary) -> int:
 	var over := int(state["day_tick"]) - GameData.DUSK_AT_TICK
 	if over <= 0:
 		return 0
-	return over * 100 / maxi(GameData.DAY_TICKS - GameData.DUSK_AT_TICK, 1)
+	# 0 at dusk, 100 at 02:00, and never past it: that is when he passes out.
+	return mini(over * 100 / maxi(GameData.DAY_TICKS - GameData.DUSK_AT_TICK, 1), 100)
 
 
 ## Whether the clock has passed dusk (18:00 by default). Outside the day it
@@ -259,12 +290,12 @@ static func is_dusk(state: Dictionary) -> bool:
 ## per minute (`GameData.check_clock`), so every minute is shown exactly once.
 ##
 ## `day_tick` stops when the day does and starts again at dawn, so outside the
-## day this answers for the moment the day ended. Until task 0128 sends the
-## farmer to bed at 02:00, a day that runs over keeps counting past it.
+## day this answers for the moment the day ended. **It stops at 02:00**: that is
+## when he passes out (task 0128), so no day runs past it.
 static func clock_minute(state: Dictionary) -> int:
-	return GameData.DAY_START_MINUTE + int(state["day_tick"]) \
-		* (GameData.DAY_END_MINUTE - GameData.DAY_START_MINUTE) \
-		/ maxi(GameData.DAY_TICKS, 1)
+	return mini(GameData.DAY_START_MINUTE + int(state["day_tick"])
+		* (GameData.DAY_END_MINUTE - GameData.DAY_START_MINUTE)
+		/ maxi(GameData.DAY_TICKS, 1), GameData.DAY_END_MINUTE)
 
 
 ## The `day_tick` a given minute of the clock falls on - the inverse of

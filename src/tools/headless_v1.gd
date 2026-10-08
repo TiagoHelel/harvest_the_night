@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 10
+const GROUPS := 11
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -79,6 +79,7 @@ func _run() -> void:
 	_task_0121_pad()
 	_task_0126_clock()
 	_task_0127_bed()
+	_task_0128_pass_out()
 
 
 func _finish() -> void:
@@ -604,11 +605,14 @@ func _task_0118_road() -> void:
 	# find. The needles are built in pieces so this file is not one of them.
 	var timer := "PREPARATION" + "_TICKS"
 	var door := "Phases.begin" + "_night("
+	var lever := RegEx.create_from_string("\\b" + timer + "\\b")
 	# Where the build step's lever may still be named, and why.
 	var allowed := {
 		"res://src/tools/night_road.gd": "the road itself",
 		"res://src/tools/headless_check.gd:_task_0006_phases":
 			"the timer is the subject of the assert; 0136 rewrites it",
+		"res://src/tools/headless_v1.gd:_task_0128_pass_out":
+			"the ordinary length is compared with the pass-out one",
 	}
 	var timers: Array = []
 	var doors: Array = []
@@ -626,16 +630,18 @@ func _task_0118_road() -> void:
 				var comment := code.find("#")
 				if comment >= 0:
 					code = code.substr(0, comment)
-				if code.contains(timer):
+				# A whole word: PASS_OUT_PREPARATION_TICKS (0128) is not the lever.
+				if lever.search(code) != null:
 					if allowed.has(path) or allowed.has(path + ":" + where):
 						seen[path] = true
 					else:
 						timers.append("%s:%s" % [path, where])
 				if code.contains(door):
 					doors.append("%s:%s" % [path, where])
-	expect(seen.has("res://src/tools/night_road.gd")
-		and seen.has("res://src/tools/headless_check.gd"),
-		"the scan sees the road and the 0006 timer assert", str(seen.keys()))
+	# Since 0128 the road asks `Phases.build_step_ticks()`, so only the 0006
+	# timer assert names the lever - and the scan has to see it.
+	expect(seen.has("res://src/tools/headless_check.gd"),
+		"the scan sees the 0006 timer assert", str(seen.keys()))
 	expect(timers.is_empty(),
 		"nothing in src/tools or src/ui names the build step's length but the road",
 		str(timers))
@@ -979,4 +985,76 @@ func _task_0127_bed() -> void:
 			% [int(Crafting.progress_at(early, bench)[0]), left])
 	expect(Crafting.kits(early, &"fence") == kits,
 		"and nothing was made overnight", str(Crafting.kits(early, &"fence")))
+	_completed += 1
+
+
+## 0128 - passing out at 02:00.
+func _task_0128_pass_out() -> void:
+	# **Written near the end rather than played.** Still the day one tick
+	# before 02:00; asleep and passed out on it.
+	var late := State.create(1281)
+	late["day_tick"] = GameData.DAY_TICKS - 2
+	var tree: Vector2i = Farm.cells_with(late, &"tree")[0]
+	(late["player"] as Dictionary)["action"] = {"verb": &"chop",
+		"cell": [tree.x, tree.y], "left": 30, "total": 60}
+	Sim.advance(late, 1)
+	expect(int(late["phase"]) == Phases.DAY and int(late["day_tick"]) == GameData.DAY_TICKS - 1,
+		"still the day at DAY_TICKS - 1", Phases.name_of(int(late["phase"])))
+	Sim.advance(late, 1)
+	var visit: Dictionary = late["house_visit"]
+	expect(int(late["phase"]) == Phases.PREPARATION and bool(visit["asleep"])
+		and bool(visit["passed_out"]),
+		"at 02:00 he passes out into the build step", str(visit))
+	expect(not Player.is_busy(late), "whatever he was doing stops")
+	var logged := false
+	for event in (late["events"] as Array):
+		if StringName((event as Dictionary).get("kind", &"")) == &"passed_out":
+			logged = true
+	expect(logged, "and the log says why the build step is short")
+	expect(Phases.clock_minute(late) == GameData.DAY_END_MINUTE,
+		"the clock stopped at 02:00", str(Phases.clock_minute(late)))
+
+	# **The short build step**, then the waves through the one door.
+	Sim.advance(late, GameData.PASS_OUT_PREPARATION_TICKS - 1)
+	expect(int(late["phase"]) == Phases.PREPARATION,
+		"one tick short of the pass-out build step it is still building")
+	Sim.advance(late, 1)
+	expect(int(late["phase"]) == Phases.NIGHT,
+		"and after exactly PASS_OUT_PREPARATION_TICKS it is night",
+		Phases.name_of(int(late["phase"])))
+
+	# **Indoors too.**
+	var indoors := State.create(1282)
+	SuiteKit.stand_the_farmer(indoors, House.porch(indoors))
+	House.enter(indoors)
+	indoors["day_tick"] = GameData.DAY_TICKS - 1
+	Sim.advance(indoors, 1)
+	expect(int(indoors["phase"]) == Phases.PREPARATION and not House.inside(indoors)
+		and bool((indoors["house_visit"] as Dictionary)["passed_out"]),
+		"a farmer indoors at 02:00 passes out too")
+
+	# **Going to bed at 01:59 is an ordinary night.**
+	var bedtime := State.create(1283)
+	bedtime["day_tick"] = GameData.DAY_TICKS - 1
+	(bedtime["intent"] as Dictionary)["sleep"] = true
+	Sim.advance(bedtime, 1)
+	expect(int(bedtime["phase"]) == Phases.PREPARATION
+		and not bool((bedtime["house_visit"] as Dictionary)["passed_out"])
+		and Phases.build_step_ticks(bedtime) == GameData.PREPARATION_TICKS,
+		"going to bed at 01:59 is an ordinary night with the ordinary build step")
+
+	# **The clock and the overtime stop at 02:00.**
+	var clamp := State.create(1284)
+	clamp["day_tick"] = GameData.DAY_TICKS + 900
+	expect(Phases.clock_minute(clamp) == GameData.DAY_END_MINUTE
+		and Phases.overtime_percent(clamp) == 100,
+		"no day runs past 02:00, on the clock or in the overtime",
+		"%d, %d%%" % [Phases.clock_minute(clamp), Phases.overtime_percent(clamp)])
+
+	# The morning clears it.
+	NightRoad.park(late)
+	Phases.enter_result(late, true)
+	Phases.begin_day(late)
+	expect(not bool((late["house_visit"] as Dictionary)["passed_out"])
+		and not House.asleep(late), "and the morning clears both")
 	_completed += 1

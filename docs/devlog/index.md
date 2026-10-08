@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-124 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
+125 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -168,10 +168,11 @@ is the sort of thing this list exists to say out loud.
 | 0121 | A controller for every action | 2026-10-08 |
 | 0126 | The clock: 06:00 to 02:00 | 2026-10-08 |
 | 0127 | Going to bed starts the night | 2026-10-08 |
+| 0128 | Passing out at 02:00 | 2026-10-08 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 29 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 31 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -202,6 +203,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Refusals in two languages** (0110) - `sim` 1961000123 -> 3960053733
 - **Room in the test suites** (0112) - `data` 2015186086 -> 1968527100
 - **The clock: 06:00 to 02:00** (0126) - `data` 1968527100 -> 1739027987
+- **Passing out at 02:00** (0128) - `sim` 10253699 -> 734279793
+- **Passing out at 02:00** (0128) - `data` 1739027987 -> 954093946
 
 ## What went wrong
 

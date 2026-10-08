@@ -67,3 +67,20 @@ static func built_last_night(state: Dictionary, build: Callable) -> Variant:
 	var out: Variant = build.call()
 	state["phase"] = phase
 	return out
+
+
+## Advance farm time **without ever reaching 02:00**: whenever the day is about
+## to end it starts again at dawn - a day that never ends, for checks about how
+## long something takes (regrowth, a cliff mined for four days), not about
+## nights. Task 0128 made 02:00 pass the farmer out into a night, and that
+## would have stopped every daytime system these checks are timing. Day only.
+static func advance_in_daylight(state: Dictionary, ticks: int) -> void:
+	var left := ticks
+	while left > 0:
+		var room := GameData.DAY_TICKS - 1 - int(state["day_tick"])
+		if room <= 0:
+			state["day_tick"] = 0
+			room = GameData.DAY_TICKS - 1
+		var step := mini(left, room)
+		Sim.advance(state, step)
+		left -= step

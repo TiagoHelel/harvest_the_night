@@ -206,6 +206,7 @@ LOG_HOUSE_HIT,0,the house is hit - %d left,a casa foi atingida - %d de vida
 LOG_NIGHT_BEGAN,0,night %d begins,a noite %d começa
 LOG_NIGHT_LOST,0,night %d lost,noite %d perdida
 LOG_NIGHT_WON,0,night %d survived,noite %d vencida
+LOG_PASSED_OUT,0,passed out at 02:00 - a short night to build,desmaiou às 02:00 - pouco tempo para construir
 LOG_STRUCTURE_LOST,0,%s destroyed,%s destruído
 LOG_TITLE,0,WHAT HAPPENED,O QUE ACONTECEU
 LOG_WAVE_BEGAN,0,wave %d of %d: %s,onda %d de %d: %s

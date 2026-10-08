@@ -5441,10 +5441,12 @@ func _case_0091_title() -> void:
 	# **The farm is behind it, and it is the real farm.**
 	var view: WorldView = require_control("WorldView")
 	expect(view != null, "there is a world behind the title")
-	expect(title.backdrop_tick() >= GameData.DUSK_AT_TICK,
-		"and it starts at dusk rather than at breakfast",
-		"tick %d against dusk at %d"
-		% [title.backdrop_tick(), GameData.DUSK_AT_TICK])
+	# Since task 0128 it starts shortly before 02:00 and lets the pass-out
+	# bring the night, rather than starting at dusk and asking for it.
+	expect(title.backdrop_tick() >= GameData.DAY_TICKS - TitleScreen.DUSK_FOR,
+		"and it starts late in the evening rather than at breakfast",
+		"tick %d against 02:00 at %d"
+		% [title.backdrop_tick(), GameData.DAY_TICKS])
 
 	# **Any key moves past the ident.** Not a named action - a player who has
 	# just started the game has not learned any of them.
