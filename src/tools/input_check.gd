@@ -1176,6 +1176,11 @@ func _case_0023_build_mode() -> void:
 	var state := driver.state
 	Resources.gain(state, {GameData.WOOD: 100, GameData.STONE: 100,
 		GameData.IRON: 100})
+	# **Defences go up in the build step** (task 0119): the night button
+	# first, and build mode opens there - B is not tied to the day.
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"the build step to open")
 	expect(not build.visible, "build mode starts off")
 
 	await hold_key(KEY_B, 4)
@@ -1303,9 +1308,12 @@ func _case_0027_the_loop() -> void:
 	var state := driver.state
 	expect(not result.visible, "the payout is not up during the day")
 
-	# Arm the farm the way a player who spent their day would, then press the
-	# button a player would press.
+	# Press the button a player would press, then arm the farm in the build
+	# step - where defences go up since task 0119.
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
+		"the night to begin")
 	var placed := 0
 	for x in range(22, 34):
 		for y in [7, 9, 11, 5]:
@@ -1314,10 +1322,6 @@ func _case_0027_the_loop() -> void:
 				if Building.place(state, &"gun_tower", cell):
 					placed += 1
 	expect(placed == 4, "four towers go up", str(placed))
-
-	await click_control("NightButton")
-	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
-		"the night to begin")
 
 	# **The build step runs in real time at any speed** - it is the stretch
 	# the player is promised no hurry in - so its twenty seconds are run off
@@ -2150,15 +2154,18 @@ func _case_0033_power() -> void:
 
 	# **Build past the farm's means and the line says so.**
 	Resources.gain(state, {GameData.WOOD: 600, GameData.IRON: 600})
-	var built := 0
-	for y in range(3, 12):
-		for x in range(22, 34):
-			if built >= 4:
+	# By day the towers are the ones that went up last night (task 0119).
+	var built: int = SuiteKit.built_last_night(state, func() -> int:
+		var up := 0
+		for y in range(3, 12):
+			for x in range(22, 34):
+				if up >= 4:
+					break
+				if Building.place(state, &"auto_crossbow", Vector2i(x, y)):
+					up += 1
+			if up >= 4:
 				break
-			if Building.place(state, &"auto_crossbow", Vector2i(x, y)):
-				built += 1
-		if built >= 4:
-			break
+		return up)
 	expect(built == 4, "four hungry towers go up", str(built))
 	await until(func() -> bool: return Power.is_short(state),
 		"the farm to run short")
@@ -2842,6 +2849,8 @@ func _case_0041_tutorial() -> void:
 
 	# **Out of order is fine.** Skip straight to the last thing the game has
 	# not asked for yet and watch the lines behind it disappear.
+	# **By day on purpose**: the tutorial's build step is a day step until
+	# task 0132 moves it to the night and rewrites this.
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200,
 		GameData.STONE: 200})
 	var spot := Vector2i(-1, -1)
@@ -2884,6 +2893,10 @@ func _case_0046_walls() -> void:
 	var state := driver.state
 	Resources.gain(state, {GameData.STONE: 200, GameData.WOOD: 200,
 		GameData.IRON: 200})
+	# **In the build step**, where walls go up since task 0119.
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"the build step to open")
 
 	await hold_key(KEY_B, 4)
 	await until(func() -> bool: return Building.is_active(state),
@@ -4141,6 +4154,7 @@ func _night_with_lights(driver: SimDriver, lights: Lighting,
 	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400,
 		GameData.STONE: 400})
 	var at := Player.cell(state)
+	NightRoad.to_build(state)
 	for i in 4:
 		Building.place(state, &"gun_tower", Vector2i(at.x + 2 + i * 2, at.y + 1))
 	NightRoad.to_night(state)
@@ -4216,6 +4230,7 @@ func _night_with_particles(driver: SimDriver, bits: Particles,
 	bits.set_density(density)
 	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400})
 	var at := Player.cell(state)
+	NightRoad.to_build(state)
 	for i in 4:
 		Building.place(state, &"gun_tower", Vector2i(at.x + 2 + i * 2, at.y + 1))
 	NightRoad.to_night(state)
@@ -4289,9 +4304,9 @@ func _night_through_changes(driver: SimDriver, view: WorldView,
 	var state := driver.state
 	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400})
 	var at := Player.cell(state)
+	Phases.begin_preparation(state)
 	for i in 4:
 		Building.place(state, &"gun_tower", Vector2i(at.x + 2 + i * 2, at.y + 1))
-	Phases.begin_preparation(state)
 	for chunk in 24:
 		Sim.advance(state, 30)
 		if skip:
@@ -4424,6 +4439,7 @@ func _case_0082_shots() -> void:
 		GameData.STONE: 900, GameData.OIL: 200, GameData.GUNPOWDER: 120,
 		GameData.INCENDIARY: 60})
 	var here := Player.cell(state)
+	NightRoad.to_build(state)     # where defences go up, since task 0119
 	var put := 0
 	for y in range(here.y - 2, here.y + 6):
 		for x in range(here.x + 3, here.x + 13):
@@ -4783,6 +4799,7 @@ func _case_0085_night_sounds() -> void:
 	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
 		GameData.STONE: 900, GameData.GUNPOWDER: 200})
 	var here := Player.cell(state)
+	NightRoad.to_build(state)     # where defences go up, since task 0119
 	var put := 0
 	for y in range(here.y - 2, here.y + 5):
 		for x in range(here.x + 2, here.x + 9):
@@ -5303,6 +5320,7 @@ func _case_0090_log() -> void:
 	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
 		GameData.STONE: 900, GameData.GUNPOWDER: 200})
 	var here := Player.cell(state)
+	NightRoad.to_build(state)     # where defences go up, since task 0119
 	var put := 0
 	for y in range(here.y - 2, here.y + 6):
 		for x in range(here.x + 3, here.x + 12):

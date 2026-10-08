@@ -86,15 +86,18 @@ func _a_played_farm() -> Dictionary:
 		Farming.act(state, found)
 		sown += 1
 
-	var built := 0
-	for y in range(4, Grid.HEIGHT - 2):
-		for x in range(22, Grid.WIDTH - 2):
-			if built >= 6:
-				break
-			if Building.place(state, &"gun_tower", Vector2i(x, y)):
-				built += 1
-	for y in range(3, 12):
-		Building.place(state, &"wall", Vector2i(20, y))
+	# **A day farm with its defence standing**, which went up in last night's
+	# build step: 0132 forbids defences by day (task 0119).
+	SuiteKit.built_last_night(state, func() -> void:
+		var built := 0
+		for y in range(4, Grid.HEIGHT - 2):
+			for x in range(22, Grid.WIDTH - 2):
+				if built >= 6:
+					break
+				if Building.place(state, &"gun_tower", Vector2i(x, y)):
+					built += 1
+		for y in range(3, 12):
+			Building.place(state, &"wall", Vector2i(20, y)))
 
 	Sim.advance(state, TICKS)
 

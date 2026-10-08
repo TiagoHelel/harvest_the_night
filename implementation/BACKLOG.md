@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **117 / 296 done**
+`##########..............`  **118 / 296 done**
 
-0 doing / 179 todo / 0 blocked across 18 phases.
+0 doing / 178 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0119 - Tests and tools build in the build step**. The whole of what is left is
+First up: **0120 - One road for art that has not arrived**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,28 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-179 task(s) left, the ready ones first, then what they
+178 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0119 - Tests and tools build in the build step
-
-Ready to pick up.  Likely files: `src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/play_nights.gd, src/tools/tower_showcase.gd, src/tools/barrier_showcase.gd, src/tools/effect_showcase.gd, src/tools/enemy_showcase.gd, src/tools/giant_showcase.gd`.
-
-0132 will forbid defences by day. Before it does, move every defence the tests and tools put down into the build step, where they are allowed today, so that rule change is a rule change and not a hundred broken set-ups.
-
-- Every set-up `Building.place` of a defence (an id in `GameData.DEFENCES`) happens in PREPARATION, after the road's 'into the build step' and before the waves: `_arm_the_farm`/`_defended_night` and the rest of `headless_check`'s ~62 place sites, `input_check`'s ~10, the v1 suites' groups from 0113-0118, `shot.gd`'s scenarios, `determinism.gd` `_set_the_farm_going`, `make_goldens.gd`, `perf_check.gd`, `play_nights.gd`. The same for every set-up `Building.upgrade` and `Building.sell` of a defence (~11 in `headless_check`): 0132 makes them follow the same rule
-- The art gates verify runs place real defences after setting `phase` to DAY: `tower_showcase.gd`, `barrier_showcase.gd`, `effect_showcase.gd`, `enemy_showcase.gd`, `giant_showcase.gd`. They set PREPARATION around the placement, upgrade and sale instead, and their `show_art.py ... --check` rows still pass (`art_showcase.gd`'s stations are buildings and stay by day)
-- Production buildings (`GameData.BUILDINGS`: press, generator, kitchen...) stay by day: decision #4 keeps them a day job
-- `Autoplay`: `_a_day` still gathers, crafts, buys tech and puts up production buildings; a new build step between `begin_preparation` and the waves places, upgrades and repairs defences off the same plan cursor (`_wants`, `_room_for`, `_next_step`)
-- `_task_0068_balance` asserts 'builds what its plan names first' straight after `_a_day`: rewrite it to look after the build step
-- Leave the asserts whose subject is the day-placement rule itself - e.g. `_task_0022`'s 'built by day', `_task_0047`'s night barricade, the tutorial's day `build` step in `_task_0041` - with a comment at each pointing at 0132
-- In `input_check`, a defence placed through the real build mode goes down after the night button; if build mode cannot open in PREPARATION, that is a bug to fix here and say so
-- Only SIM may move, because the determinism scenario's towers and walls now go down in PREPARATION: accept it and write both numbers and why in the journal. DATA does not move
-
-  - done when: With a scratch edit to `Building.allowed_in_phase` and `why_not_upgrade` refusing every `DEFENCES` id by day (reverted before the end), a full `python tools/verify.py` fails only on the day-rule asserts this task leaves for 0132, in `headless_check` and `input_check` - listed in the journal; the v1 suites, the art showcases, autoplay and the tools pass
-  - done when: `python tools/autoplay.py` runs, and the journal has the nights held per policy before and after
-  - done when: `python tools/shot.py 0119` taken and opened: `wave` and `refused` still show their towers and walls
 
 ### 0120 - One road for art that has not arrived
 
@@ -324,7 +305,7 @@ The player's hand at night: a cell cursor that the mouse or the pad drives, that
 
 ### 0132 - Defences go down only at night
 
-Waits on 0131, 0119.  Likely files: `src/core/building.gd, src/core/game_data.gd, src/core/phases.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
+Waits on 0131.  Likely files: `src/core/building.gd, src/core/game_data.gd, src/core/phases.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
 
 The plan's decision 4: defences are placed, upgraded and sold only at night, by cursor, and production buildings only by day. The day earns and the night spends.
 
@@ -3436,7 +3417,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (7/14)
+## 9 - v1.0 groundwork  (8/14)
 
 - [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
 - [x] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
@@ -3445,7 +3426,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md)
 - [x] **0117** [Three stale documents](prompts/0117-stale-docs.md)
 - [x] **0118** [One road into the waves](prompts/0118-one-road-into-night.md)
-- [ ] **0119** [Tests and tools build in the build step](prompts/0119-build-in-preparation.md)
+- [x] **0119** [Tests and tools build in the build step](prompts/0119-build-in-preparation.md)
 - [ ] **0120** [One road for art that has not arrived](prompts/0120-placeholder-road.md)
 - [ ] **0121** [A controller for every action](prompts/0121-gamepad-bindings.md)
 - [ ] **0122** [Art: the farmer's run](prompts/0122-art-farmer-run.md) - needs 0120 - waits for art A006
@@ -3461,7 +3442,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md) - needs 0127, 0120, 0128
 - [ ] **0130** [The night camera](prompts/0130-night-camera.md) - needs 0129, 0121
 - [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md) - needs 0130, 0121, 0120
-- [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md) - needs 0131, 0119
+- [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md) - needs 0131
 - [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md) - needs 0132
 - [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0131, 0133
 - [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md) - needs 0131

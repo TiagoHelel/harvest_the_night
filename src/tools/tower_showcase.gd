@@ -120,7 +120,7 @@ func _blank(material_light: int = 0) -> Dictionary:
 
 func _place(family: StringName, level: int, cell: Vector2i) -> void:
 	var phase := int(_state["phase"])
-	_state["phase"] = Phases.DAY
+	_state["phase"] = Phases.PREPARATION  # where defences go up since task 0119
 	expect(Building.place(_state, family, cell), "Real one-cell tower placement: " + str(family))
 	for step in level - 1:
 		expect(Building.upgrade(_state, cell), "Real authored level upgrade: %s L%d" % [family, step + 2])

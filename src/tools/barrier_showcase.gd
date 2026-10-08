@@ -137,7 +137,7 @@ func _contact(at: Vector2i) -> void:
 
 func _place(family: StringName, cell: Vector2i) -> void:
 	var phase := int(_state["phase"])
-	_state["phase"] = Phases.DAY
+	_state["phase"] = Phases.PREPARATION  # where defences go up since task 0119
 	expect(Building.place(_state, family, cell), "Actual paid placement: %s at %s" % [family, cell])
 	_state["phase"] = phase
 	expect(Building.size_of(family) == Vector2i.ONE, "One-cell gameplay footprint")
@@ -216,7 +216,12 @@ func _ghosts_and_route() -> void:
 	await _settle()
 	for family in [&"wall", &"fence", &"barricade", &"mine"]:
 		var before := var_to_bytes(_state)
-		_world.show_ghost(cell, family, Building.can_place(_state, family, cell))
+		# A defence is previewed where it can go up: the build step (task 0119).
+		var phase := int(_state["phase"])
+		_state["phase"] = Phases.PREPARATION
+		var legal := Building.can_place(_state, family, cell)
+		_state["phase"] = phase
+		_world.show_ghost(cell, family, legal)
 		expect(_world.ghost_footprint() == Vector2i.ONE and _world.ghost_cell() == cell and _world.ghost_is_ok(), "Actual one-cell legal preview")
 		var name := str(family) + ("_join_9" if family in [&"wall", &"fence"] else "")
 		expect(_world._ghost.texture.resource_path == WorldView.BUILDING_DIR + name + ".png", "Ghost uses real adjacent materials and matching source canvas")

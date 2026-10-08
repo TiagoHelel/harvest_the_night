@@ -17,6 +17,7 @@ The plan's decision 4: defences are placed, upgraded and sold only at night, by 
 - By day `B` lists only production buildings; at night the palette lists only defences (0133 turns it into the hotbar)
 - The tutorial's `build` step moves to the night: it follows `night` in `TUTORIAL`, `Tutorial.tick` also runs on its beat in `_tick_preparation`, and `TUT_BUILD` says it happens at night, in both languages. 0141 writes the rest of the night's steps
 - Rewrite `_task_0047_barricades` ('only the barricade goes down at night' becomes 'every defence goes down at night and none by day; buildings only by day'), `_task_0022_reality`'s 'built by day' wording and `_task_0041_tutorial`'s build step; any input_check case still placing a defence by day moves to the build step (0119 should already have moved them)
+- Production buildings the other way round (found by 0119): `play_nights.gd` buys generators inside its build step, interleaved with its towers as their draw climbs. It must put them up by day once a `BUILDINGS` id is refused in PREPARATION - plan the generators from the shopping list before `begin_preparation`. `SuiteKit.built_last_night()` (0119) is how a fixture gets defences standing on a day farm without playing a night
 - A rule change: if SIM moves, record both numbers and why (0119 moved the determinism scenario's placements into PREPARATION, so it may not). DATA moves (the barricade and the tutorial)
 
 ## Done when

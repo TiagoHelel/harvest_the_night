@@ -139,6 +139,12 @@ func _the_worst_case() -> Dictionary:
 	# 2026-10-06). A row-by-row fill of the whole farm puts guns where nothing
 	# walks, and forty towers with nothing to shoot is a quieter night, not a
 	# worse one. The wall line stands on the house's east side, as it did.
+	# The generator is a day job and goes up first; the towers and the wall
+	# go up in the build step (task 0119).
+	var gen := _room_for(state, Building.size_of(&"generator"))
+	if gen != Vector2i(-1, -1):
+		Building.place(state, &"generator", gen)
+	NightRoad.to_build(state)
 	var moved := GameData.PLAYER_START - Vector2i(16, 8)
 	var guns := 0
 	for y in range(1 + moved.y, Grid.HEIGHT - 1):
@@ -149,9 +155,6 @@ func _the_worst_case() -> Dictionary:
 				guns += 1
 	for y in range(1, Grid.HEIGHT - 1):
 		Building.place(state, &"wall", Vector2i(19 + moved.x, y))
-	var gen := _room_for(state, Building.size_of(&"generator"))
-	if gen != Vector2i(-1, -1):
-		Building.place(state, &"generator", gen)
 
 	# **The night is the one after the last one won**, not the day number -
 	# `Phases.begin_night` says so. Setting the day alone gave night one, a

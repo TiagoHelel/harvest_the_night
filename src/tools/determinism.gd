@@ -82,6 +82,7 @@ func _run() -> void:
 
 	rolling = _advance_sampling(state, 1500, rolling)   # and the afternoon
 	NightRoad.into_build(state)
+	_arm_the_farm(state)        # the defences go up in the build step
 	rolling = _advance_sampling(state, NightRoad.build_ticks_left(state),
 		rolling)
 	rolling = _advance_sampling(state, 3000, rolling)   # a night being fought
@@ -169,6 +170,20 @@ func _set_the_farm_going(state: Dictionary) -> void:
 		for recipe in [&"barricade_kit", &"fence_kit", &"barricade_kit"]:
 			Crafting.enqueue(state, bench, recipe)
 
+	# **A line in the water**, so the fishing RNG is drawn from inside the
+	# scenario rather than never at all.
+	for found in Farm.cells_of(state, Farm.Terrain.WATER):
+		var wet: Vector2i = found
+		if Fishing.begin(state, wet):
+			var who: Dictionary = state["player"]
+			who["pos"] = [wet.x * Player.SUBTILE + Player.SUBTILE / 2,
+				(wet.y - 1) * Player.SUBTILE + Player.SUBTILE / 2]
+			break
+
+
+## The towers and the wall, **in the build step** (task 0119): 0132 forbids
+## defences by day, so the scenario puts them up where a player will.
+func _arm_the_farm(state: Dictionary) -> void:
 	# **Two towers**, so that the night is fought rather than merely survived,
 	# and one of them draws ammunition from the pool.
 	var guns := 0
@@ -192,16 +207,6 @@ func _set_the_farm_going(state: Dictionary) -> void:
 			break
 		if Building.place(state, &"wall", Vector2i(28, y)):
 			walled += 1
-
-	# **A line in the water**, so the fishing RNG is drawn from inside the
-	# scenario rather than never at all.
-	for found in Farm.cells_of(state, Farm.Terrain.WATER):
-		var wet: Vector2i = found
-		if Fishing.begin(state, wet):
-			var who: Dictionary = state["player"]
-			who["pos"] = [wet.x * Player.SUBTILE + Player.SUBTILE / 2,
-				(wet.y - 1) * Player.SUBTILE + Player.SUBTILE / 2]
-			break
 
 
 func _finish() -> void:

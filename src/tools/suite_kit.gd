@@ -50,3 +50,20 @@ static func code_lines_of(path: String) -> String:
 			continue
 		out.append(line)
 	return "\n".join(out)
+
+
+## Put defences up on a farm that stays where it is - usually the day - as if
+## they had gone up in last night's build step. Returns what `build` returns.
+##
+## Task 0119: 0132 forbids defences by day, and a tower standing on a day farm
+## is one that was built the night before. A fixture that needs that farm
+## builds it this way rather than playing a whole night first: the phase reads
+## PREPARATION for exactly the length of `build`, then goes back. A check that
+## goes on into the night takes `NightRoad.to_build()` instead, which is the
+## real road.
+static func built_last_night(state: Dictionary, build: Callable) -> Variant:
+	var phase := int(state["phase"])
+	state["phase"] = Phases.PREPARATION
+	var out: Variant = build.call()
+	state["phase"] = phase
+	return out

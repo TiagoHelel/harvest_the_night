@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-119 tarefas em 5 dias, de  a 2026-10-07. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+120 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -162,6 +162,7 @@ voz alta.
 | 0116 | The mortar and the flamethrower, empty and upgraded | 2026-10-07 |
 | 0117 | Three stale documents | 2026-10-07 |
 | 0118 | One road into the waves | 2026-10-07 |
+| 0119 | Tests and tools build in the build step | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 

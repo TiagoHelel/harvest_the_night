@@ -61,6 +61,7 @@ func _boss_attack(right: bool) -> void:
 	for step in [Vector2i.UP,Vector2i.DOWN,-toward]:
 		terrain[Grid.index(cell+step)] = Farm.Terrain.WATER
 	_state["terrain"] = terrain
+	_state["phase"] = Phases.PREPARATION  # where defences go up since task 0119
 	expect(Building.place(_state,&"wall",cell+toward),"Actual paid wall is the Giant's only route")
 	_state["phase"] = Phases.NIGHT
 	var id := Entities.spawn(_state,&"giant",cell)

@@ -96,8 +96,7 @@ static func play(seed_value: int, policy_name: StringName,
 	for night in range(1, mini(nights_wanted, GameData.MVP_NIGHTS) + 1):
 		var spent_before := _worth_of_stock(state)
 		_a_day(state, policy)
-
-		NightRoad.to_night(state)
+		_a_build_step(state, policy)
 		NightRoad.run_night(state, 40000)
 
 		var held := int(state["house_hp"]) > 0
@@ -165,9 +164,12 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# that ignored the counter the game already has would have been tuning
 	# the game to the instrument, which is the one thing an instrument must
 	# not do.
+	#
+	# **By day only the house and the stations** (task 0119): the defence is
+	# mended in the build step, with the rest of the defence.
 	for idx in _sorted_occupants(state):
 		var cell := Grid.cell(int(idx))
-		if Repair.max_affordable(state, cell) <= 0:
+		if _is_defence(state, cell) or Repair.max_affordable(state, cell) <= 0:
 			continue
 		var put_back := Repair.apply_all(state, cell)
 		if put_back > 0:
@@ -186,9 +188,17 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# day - so doing it on the days the thing could not be paid for anyway
 	# put the whole check suite over its two-minute budget. The price is a
 	# dictionary lookup; the ground is a search.
-	var want := _wants(state, policy)
-	var short := Resources.missing(state, Building.cost_of(want))
-	if short.is_empty():
+	# **A defence the day can pay for waits for the build step** (task 0119),
+	# where `_a_build_step()` puts it up off the same cursor - so the day sets
+	# its price aside and saves for the next thing on the plan, the way it
+	# used to once the tower was up. Without that the robot paid for its
+	# tower by noon, farmed the afternoon, and met night one with the tower
+	# and none of the walls its plan named next.
+	var ahead := _the_plan_ahead(state, policy)
+	var want: StringName = ahead["want"]
+	var short := Resources.missing(state, ahead["saving_for"])
+	if short.is_empty() and not GameData.DEFENCES.has(want) \
+			and int(ahead["ahead"]) == 0:
 		var where := _room_for(state, want)
 		if where.x < 0:
 			_next_step(state)           # nowhere to put it: plan around it
@@ -201,15 +211,6 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 		# than standing in front of it for the rest of the run.
 		_next_step(state)
 		return GameData.SECONDS
-
-	# **Improve what is already there.** Task 0064 made a tower a thing that
-	# grows and the robot was ignoring it entirely - buying the tree node
-	# that gates an upgrade and then never upgrading anything.
-	for idx in _sorted_occupants(state):
-		var cell := Grid.cell(int(idx))
-		if Building.can_upgrade(state, cell):
-			Building.upgrade(state, cell)
-			return 2 * GameData.SECONDS
 
 	# **Keep the stations running.** The press and the workshop are where the
 	# farm turns into the defence, and the robot ignored them completely - so
@@ -233,7 +234,7 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# starting wood into three fence kits - while the plan's first line was a
 	# gun tower wanting ten of that wood. The tower was never built, on any
 	# day, and every policy lost night one with nothing standing.
-	var saving_for: Dictionary = Building.cost_of(want)
+	var saving_for: Dictionary = ahead["saving_for"]
 	for idx in _sorted_occupants(state):
 		var cell := Grid.cell(int(idx))
 		var on := Farm.occupant(state, cell)
@@ -270,8 +271,14 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# bought back nights seven and eight and still threw away four days.
 	for res in GameData.sorted_names(short.keys()):
 		if not _can_be_gathered(StringName(res)):
-			_next_step(state)
-			return GameData.SECONDS
+			# Only the entry at the cursor is planned around. One further on,
+			# behind defences already paid for, waits until the build step
+			# has put those up and it is at the front.
+			if int(ahead["ahead"]) == 0:
+				_next_step(state)
+				return GameData.SECONDS
+			short = {}
+			break
 	for res in GameData.sorted_names(short.keys()):
 		var needed := _go_and_get(state, StringName(res))
 		if needed > 0:
@@ -300,6 +307,87 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 		if cost > 0:
 			return cost
 	return 0
+
+
+## The build step: the night button, then the defence - placed, upgraded and
+## mended off the same plan cursor the day saved for - then the rest of the
+## build step, to the first tick of the night.
+##
+## **Task 0119 split the robot's day in two.** 0132 forbids defences by day,
+## so the day gathers, crafts, buys technology and puts up the stations, and
+## this is where the towers and walls go up. The work here costs no ticks of
+## its own: placing is instant in the rules, and the build step runs its
+## whole length after it either way.
+static func _a_build_step(state: Dictionary, policy: Dictionary) -> void:
+	NightRoad.into_build(state)
+	for _guard in 200:
+		if not _one_defence_thing(state, policy):
+			break
+	NightRoad.through_build(state)
+
+
+## One thing for the defence, in the order the day used to do them: mend,
+## then the plan's next defence if it is paid for, then an upgrade. False
+## when there is nothing left to do tonight.
+static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
+	for idx in _sorted_occupants(state):
+		var cell := Grid.cell(int(idx))
+		if not _is_defence(state, cell) or Repair.max_affordable(state, cell) <= 0:
+			continue
+		if Repair.apply_all(state, cell) > 0:
+			return true
+
+	var want := _wants(state, policy)
+	if GameData.DEFENCES.has(want) \
+			and Resources.missing(state, Building.cost_of(want)).is_empty():
+		var where := _room_for(state, want)
+		if where.x >= 0:
+			Building.place(state, want, where)
+		# Placed, or nowhere to put it, or a rule says no: plan around it,
+		# exactly as the day did.
+		_next_step(state)
+		return true
+
+	# **Improve what is already there.** Task 0064 made a tower a thing that
+	# grows and the robot was ignoring it entirely - buying the tree node
+	# that gates an upgrade and then never upgrading anything.
+	for idx in _sorted_occupants(state):
+		var cell := Grid.cell(int(idx))
+		if Building.can_upgrade(state, cell):
+			Building.upgrade(state, cell)
+			return true
+	return false
+
+
+## Whether the thing standing on this cell is part of the defence.
+static func _is_defence(state: Dictionary, cell: Vector2i) -> bool:
+	return GameData.DEFENCES.has(StringName(Farm.occupant(state, cell).get("id", &"")))
+
+
+## What the day is saving for: the plan's next entry once every defence the
+## stock already covers is set aside for the build step, and the whole bill -
+## `{want, ahead, saving_for}`, `ahead` being how many entries were set aside.
+static func _the_plan_ahead(state: Dictionary, policy: Dictionary) -> Dictionary:
+	var plan: Array = policy["build"]
+	var step := int(state.get("autoplay_step", 0))
+	var bill := {}
+	for ahead in plan.size():
+		var want := StringName(plan[(step + ahead) % plan.size()])
+		var with_it := _plus(bill, Building.cost_of(want))
+		if GameData.DEFENCES.has(want) and Resources.missing(state, with_it).is_empty():
+			bill = with_it
+			continue
+		return {"want": want, "ahead": ahead, "saving_for": with_it}
+	# The whole plan is paid for: nothing left to save for today.
+	return {"want": _wants(state, policy), "ahead": plan.size(), "saving_for": bill}
+
+
+## Two bills added together.
+static func _plus(a: Dictionary, b: Dictionary) -> Dictionary:
+	var out := a.duplicate()
+	for res in GameData.sorted_names(b.keys()):
+		out[res] = int(out.get(res, 0)) + int(b[res])
+	return out
 
 
 ## The thing the plan is up to. Once the list runs out it starts again, so a

@@ -954,6 +954,8 @@ func _task_0105_playtest() -> void:
 	# **Somewhere a wall actually fits.** The first version named one cell
 	# and the log came back with nothing built in it - which was the check
 	# proving nothing rather than the game failing to count.
+	# In the build step, where a wall goes up since task 0119.
+	NightRoad.into_build(state)
 	var put_down := 0
 	for y in range(3, Grid.HEIGHT - 3):
 		if put_down >= 2:
@@ -961,7 +963,6 @@ func _task_0105_playtest() -> void:
 		if Building.place(state, &"wall", Vector2i(20, y)):
 			put_down += 1
 	expect(put_down > 0, "a wall goes down, so there is something to count")
-	Phases.begin_preparation(state)
 	for _i in 20:
 		Sim.advance(state, 30)
 		Playtest.watch(state)
@@ -1545,9 +1546,9 @@ func _task_0109_reactions() -> void:
 	# The night arriving, and something coming down during it.
 	var night := State.create(109105)
 	Resources.gain(night, {GameData.WOOD: 900, GameData.STONE: 900})
+	Phases.begin_preparation(night)
 	for y in range(3, 14):
 		Building.place(night, &"fence", SuiteKit.moved(Vector2i(29, y)))
-	Phases.begin_preparation(night)
 	var announced := false
 	for _i in 2000:
 		Sim.advance(night, 1)
@@ -1669,6 +1670,8 @@ func _task_0110_refusals() -> void:
 	# **The key, not the words.** Which is the whole point: a check that
 	# compares English breaks when somebody edits the English.
 	var state := State.create(110001)
+	# Asked where a defence can go up: the build step (task 0119).
+	NightRoad.into_build(state)
 	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
 	expect(_refused(Farm.why_not_buildable(state, pond))
 		== &"WHY_IN_THE_WATER", "the pond refuses by key")
@@ -1693,6 +1696,7 @@ func _task_0110_refusals() -> void:
 
 	# A short purse names the resources, sorted, as a pile and not a sentence.
 	var broke := State.create(110002)
+	NightRoad.into_build(broke)
 	var short := Building.why_not(broke, &"gun_tower",
 		SuiteKit.any_buildable(broke))
 	expect(_refused(short) == &"WHY_SHORT",
@@ -3296,6 +3300,8 @@ func _task_0023_building() -> void:
 	var state := State.create(121)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200,
 		GameData.IRON: 200, GameData.GUNPOWDER: 50, GameData.OIL: 50})
+	# Defences go up and come down in the build step (task 0119).
+	NightRoad.into_build(state)
 
 	# **A structure cannot go on water, on the rock face, or on something.**
 	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
@@ -3372,6 +3378,7 @@ func _task_0023_building() -> void:
 	Sim.advance(banker, int((GameData.RECIPES[&"wall_kit"] as Dictionary)["ticks"]))
 	expect(Crafting.kits(banker, &"wall") == 1, "a wall is banked")
 	var stone_banked := Resources.amount(banker, GameData.STONE)
+	NightRoad.into_build(banker)    # the kit was made by day; it goes up now
 	var kit_cell := SuiteKit.any_buildable(banker)
 	expect(Building.place(banker, &"wall", kit_cell), "and goes down")
 	expect(Crafting.kits(banker, &"wall") == 0, "spending the kit")
@@ -3410,6 +3417,7 @@ func _task_0023_building() -> void:
 	# Through the intent, which is the road the autoplayer takes.
 	var driven := State.create(124)
 	Resources.gain(driven, {GameData.WOOD: 100, GameData.IRON: 100})
+	NightRoad.into_build(driven)
 	var target := SuiteKit.any_buildable(driven)
 	Building.select(driven, &"gun_tower")
 	var intent: Dictionary = driven["intent"]
@@ -3532,10 +3540,15 @@ func _night_with_tower(at_night: bool) -> Dictionary:
 	var cell := SuiteKit.moved(Vector2i(24, 9))
 	while not Farm.buildable(state, cell) and cell.x < SuiteKit.moved(Vector2i(34, 9)).x:
 		cell.x += 1
-	Building.place(state, &"gun_tower", cell)
 	if at_night:
+		NightRoad.to_build(state)
+		Building.place(state, &"gun_tower", cell)
 		NightRoad.to_night(state)
 		NightRoad.park(state)
+	else:
+		# A tower standing by day went up last night (task 0119).
+		SuiteKit.built_last_night(state, func() -> bool:
+			return Building.place(state, &"gun_tower", cell))
 	return {"state": state, "tower": cell}
 
 
@@ -3546,6 +3559,7 @@ func _shooting_log(seed_value: int) -> Array:
 	var cell := SuiteKit.moved(Vector2i(24, 9))
 	while not Farm.buildable(state, cell) and cell.x < SuiteKit.moved(Vector2i(34, 9)).x:
 		cell.x += 1
+	NightRoad.to_build(state)
 	Building.place(state, &"gun_tower", cell)
 	NightRoad.to_night(state)
 	NightRoad.park(state)
@@ -3569,6 +3583,7 @@ func _shots_in(ticks: int, reload: int) -> int:
 	var cell := SuiteKit.moved(Vector2i(24, 9))
 	while not Farm.buildable(state, cell) and cell.x < SuiteKit.moved(Vector2i(34, 9)).x:
 		cell.x += 1
+	NightRoad.to_build(state)
 	Building.place(state, &"gun_tower", cell)
 	NightRoad.to_night(state)
 	NightRoad.park(state)
@@ -4104,10 +4119,10 @@ func _task_0027_the_loop() -> void:
 	var run := State.create(805)
 	expect(int(run["day"]) == 1 and int(run["phase"]) == Phases.DAY, "day one")
 	Resources.gain(run, {GameData.WOOD: 60, GameData.IRON: 60})
-	_arm_the_farm(run, 4)
 	(run["intent"] as Dictionary)["begin_night"] = true
 	Sim.advance(run, 1)
 	expect(int(run["phase"]) == Phases.PREPARATION, "the night is asked for")
+	_arm_the_farm(run, 4)     # in the build step, since task 0119
 	var ticks := 0
 	for _i in 12000:
 		Sim.advance(run, 1)
@@ -4133,6 +4148,7 @@ func _defended_night(seed_value: int) -> Dictionary:
 	var state := State.create(seed_value)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200,
 		GameData.STONE: 200})
+	NightRoad.to_build(state)
 	_arm_the_farm(state, 4)
 	NightRoad.to_night(state)
 	return state
@@ -5239,7 +5255,7 @@ func _task_0033_power() -> void:
 	# **Draw is what is standing on the farm.**
 	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400,
 		GameData.STONE: 400, GameData.OIL: 400, GameData.GUNPOWDER: 200})
-	var towers := _line_of_towers(state, &"gun_tower", GameData.BASE_ENERGY)
+	var towers := _towers_built_last_night(state, &"gun_tower", GameData.BASE_ENERGY)
 	expect(towers.size() == GameData.BASE_ENERGY, "a tower per unit of supply",
 		str(towers.size()))
 	Sim.advance(state, 1)
@@ -5257,7 +5273,7 @@ func _task_0033_power() -> void:
 	expect(Power.scaled_ticks(state, reload) == reload,
 		"a full farm reloads in the time the table says", str(reload))
 
-	var extra := _line_of_towers(state, &"gun_tower", 1, towers)
+	var extra := _towers_built_last_night(state, &"gun_tower", 1, towers)
 	expect(extra.size() == 1, "one more tower goes up")
 	Sim.advance(state, 1)
 	expect(Power.is_short(state), "and now the farm is short",
@@ -5279,7 +5295,7 @@ func _task_0033_power() -> void:
 	# dead - `design.md` does not do punishment mechanics.
 	var swamped := State.create(1501)
 	Resources.gain(swamped, {GameData.WOOD: 900, GameData.IRON: 900})
-	_line_of_towers(swamped, &"auto_crossbow", 12)
+	_towers_built_last_night(swamped, &"auto_crossbow", 12)
 	Sim.advance(swamped, 1)
 	expect(Power.draw(swamped) > GameData.BASE_ENERGY * 4,
 		"a farm built well past its means", str(Power.draw(swamped)))
@@ -5292,7 +5308,7 @@ func _task_0033_power() -> void:
 	# **A generator supplies, burns fuel, and stops when the oil runs out.**
 	var plant := State.create(1502)
 	Resources.gain(plant, {GameData.WOOD: 400, GameData.IRON: 400})
-	_line_of_towers(plant, &"auto_crossbow", 4)
+	_towers_built_last_night(plant, &"auto_crossbow", 4)
 	Sim.advance(plant, 1)
 	var unpowered := Power.percent(plant)
 	expect(unpowered < 100, "four hungry towers outrun the farm",
@@ -5362,12 +5378,13 @@ func _task_0033_power() -> void:
 	# The other done-when, driven all the way to the payout.
 	var night := State.create(1504)
 	Resources.gain(night, {GameData.WOOD: 600, GameData.IRON: 600})
-	_line_of_towers(night, &"auto_crossbow", 5)
 	Resources.gain(night, Building.cost_of(&"generator"))
 	var gen := _room_for(night, Building.size_of(&"generator"))
 	expect(Building.place(night, &"generator", gen), "a generator for the night")
 	Resources.spend(night, GameData.OIL, Resources.amount(night, GameData.OIL))
 	Resources.gain(night, {GameData.OIL: 1})    # one drop: a minute of power
+	NightRoad.to_build(night)     # the towers go up in the build step
+	_line_of_towers(night, &"auto_crossbow", 5)
 
 	# **A late night**, because night one is over in forty seconds and a drop
 	# of oil lasts a minute - the generator would outlive the wave and there
@@ -5407,7 +5424,6 @@ func _task_0033_power() -> void:
 	# **The build phase does not burn fuel**, because the clock does not run.
 	var waiting := State.create(1505)
 	Resources.gain(waiting, {GameData.WOOD: 400, GameData.IRON: 400})
-	_line_of_towers(waiting, &"auto_crossbow", 4)
 	Resources.gain(waiting, Building.cost_of(&"generator"))
 	var idle_gen := _room_for(waiting, Building.size_of(&"generator"))
 	Building.place(waiting, &"generator", idle_gen)
@@ -5415,6 +5431,7 @@ func _task_0033_power() -> void:
 		Resources.amount(waiting, GameData.OIL))
 	Resources.gain(waiting, {GameData.OIL: 10})
 	Phases.begin_preparation(waiting)
+	_line_of_towers(waiting, &"auto_crossbow", 4)    # since task 0119
 	var oil_at_dusk := Resources.amount(waiting, GameData.OIL)
 	Sim.advance(waiting, NightRoad.build_ticks_left(waiting) - 1)
 	expect(Resources.amount(waiting, GameData.OIL) == oil_at_dusk,
@@ -5422,6 +5439,14 @@ func _task_0033_power() -> void:
 		str(Resources.amount(waiting, GameData.OIL)))
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## `_line_of_towers()` on a farm that stays in its phase - towers that went
+## up last night (task 0119), for the checks that need them standing by day.
+func _towers_built_last_night(state: Dictionary, id: StringName, count: int,
+		avoid: Array = []) -> Array:
+	return SuiteKit.built_last_night(state, func() -> Array:
+		return _line_of_towers(state, id, count, avoid))
 
 
 ## `count` towers in a row somewhere they will fit. Returns where they went.
@@ -5863,6 +5888,11 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
 		GameData.STONE: 900, GameData.OIL: 400, GameData.GUNPOWDER: 200})
 
+	# The generator is a day job; the towers go up in the build step
+	# (task 0119).
+	var gen := _room_for(state, Building.size_of(&"generator"))
+	Building.place(state, &"generator", gen)
+	NightRoad.to_build(state)
 	var guns := 0
 	for y in [7, 9, 6, 10]:
 		for x in range(22, 30):
@@ -5882,8 +5912,6 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 		if mortars >= 4:
 			break
 
-	var gen := _room_for(state, Building.size_of(&"generator"))
-	Building.place(state, &"generator", gen)
 
 	# The pool, set exactly, after everything is paid for.
 	Resources.spend(state, GameData.GUNPOWDER,
@@ -6447,13 +6475,16 @@ func _a_full_farm(seed_value: int) -> Dictionary:
 
 	# As many towers as will fit on the east half of the old yard, moved
 	# with the farmstead - the fight this was measured on, not 2,000 guns.
+	# The generator is a day job; the towers go up in the build step
+	# (task 0119).
+	var gen := _room_for(state, Building.size_of(&"generator"))
+	Building.place(state, &"generator", gen)
+	NightRoad.to_build(state)
 	var built := 0
 	for y in range(1, Save.V3_FARM.y - 1):
 		for x in range(19, Save.V3_FARM.x - 1):
 			if Building.place(state, &"gun_tower", SuiteKit.moved(Vector2i(x, y))):
 				built += 1
-	var gen := _room_for(state, Building.size_of(&"generator"))
-	Building.place(state, &"generator", gen)
 
 	# A night, with everything the table sends.
 	state["day"] = GameData.MVP_NIGHTS
@@ -6913,6 +6944,8 @@ func _task_0041_tutorial() -> void:
 	expect(Tutorial.current(rebel)["id"] == &"chop",
 		"the first line is up and being ignored")
 
+	# **By day on purpose**: the tutorial's build step is a day step until
+	# task 0132 moves it to the night and rewrites this.
 	var spot := _room_for(rebel, Vector2i(1, 1))
 	expect(Building.place(rebel, &"gun_tower", spot),
 		"a tower goes down while the game is still saying 'chop a tree'")
@@ -6932,6 +6965,7 @@ func _task_0041_tutorial() -> void:
 
 	# **And night one is still winnable for the player who read nothing.** The
 	# other done-when, driven to the payout.
+	# By day on purpose, like the line above: 0132 rewrites it.
 	var armed := State.create(2302)
 	Resources.gain(armed, {GameData.WOOD: 200, GameData.IRON: 200})
 	var placed := 0
@@ -7126,6 +7160,7 @@ func _three_in_a_row(seed_value: int) -> Dictionary:
 	var tower := SuiteKit.moved(Vector2i(3, 0))
 	while not Farm.buildable(state, tower) and tower.x < Grid.WIDTH - 1:
 		tower.x += 1
+	NightRoad.to_build(state)
 	Building.place(state, &"gun_tower", tower)
 	NightRoad.to_night(state)
 
@@ -7351,6 +7386,7 @@ func _a_crowd(seed_value: int) -> Dictionary:
 	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400,
 		GameData.OIL: 400, GameData.INCENDIARY: 400})
 	var tower := _room_for(state, Vector2i(1, 1))
+	NightRoad.to_build(state)
 	Building.place(state, &"flame_tower", tower)
 	NightRoad.to_night(state)
 
@@ -7530,6 +7566,7 @@ func _mortar_field(seed_value: int) -> Dictionary:
 	Resources.gain(state, {GameData.STONE: 400, GameData.IRON: 400,
 		GameData.GUNPOWDER: 400})
 	var tower := _room_for(state, Vector2i(1, 1))
+	NightRoad.to_build(state)
 	Building.place(state, &"mortar", tower)
 	NightRoad.to_night(state)
 	NightRoad.park(state)
@@ -12326,12 +12363,14 @@ func _play_a_whole_run(seed_value: int) -> Dictionary:
 		for id in [&"true sights", &"long barrels", &"oiled works",
 				&"stout timbers"]:
 			Tech.buy(state, StringName(id))
-		_line_of_towers(state, &"auto_crossbow", 1)
-		if night % 3 == 0:
-			_line_of_towers(state, &"mortar", 1)
 		if night % 4 == 0:
 			Building.place(state, &"generator",
 				_room_for(state, Building.size_of(&"generator")))
+		# Then the build step, where the towers go up (task 0119).
+		NightRoad.to_build(state)
+		_line_of_towers(state, &"auto_crossbow", 1)
+		if night % 3 == 0:
+			_line_of_towers(state, &"mortar", 1)
 
 		NightRoad.to_night(state)
 		# The house is mended between nights, which is what a day is for.
@@ -12470,6 +12509,10 @@ func _task_0068_balance() -> void:
 		var policy: Dictionary = Autoplay.POLICIES[name]
 		var state := State.create(4200)
 		Autoplay._a_day(state, policy)
+		# **Looked for after the build step** (task 0119): the day saves for
+		# the plan's first defence and the build step puts it up, so the farm
+		# is asked at the first tick of the night.
+		Autoplay._a_build_step(state, policy)
 		var first: StringName = StringName((policy["build"] as Array)[0])
 		var up := 0
 		for idx in (state["occupants"] as Dictionary):
@@ -12479,11 +12522,7 @@ func _task_0068_balance() -> void:
 		expect(up >= 1, "%s builds what its plan names first: %s"
 			% [name, first], "%d of them" % up)
 
-		NightRoad.to_night(state)
-		for _t in 40000:
-			if int(state["phase"]) != Phases.NIGHT:
-				break
-			Sim.advance(state, 1)
+		NightRoad.run_night(state, 40000)
 		print("  %-9s ends the tutorial night on %d house"
 			% [name, int(state["house_hp"])])
 		expect(int(state["house_hp"]) > 0,
@@ -12499,6 +12538,7 @@ func _task_0068_balance() -> void:
 	# job.
 	var state := State.create(4200)
 	Autoplay._a_day(state, Autoplay.POLICIES[&"towers"])
+	Autoplay._a_build_step(state, Autoplay.POLICIES[&"towers"])   # task 0119
 	var approach: Vector2i = (Autoplay._approaches() as Array)[0]
 	var nearest := 1 << 30
 	for idx in (state["occupants"] as Dictionary):
@@ -12573,6 +12613,7 @@ func _task_0069_stats() -> void:
 	# clears `placed_tonight` every morning because it is there to cap
 	# barricades.
 	var yard := State.create(6901)
+	NightRoad.into_build(yard)     # where walls go up, since task 0119
 	var was := int(Stats.of_run(yard)["built"])
 	Resources.gain(yard, {GameData.STONE: 100, GameData.WOOD: 100,
 		GameData.IRON: 100})
@@ -12617,6 +12658,7 @@ func _task_0069_stats() -> void:
 
 	# **A second run adds to the first.** Lifetime is lifetime.
 	var second := State.create(6902)
+	NightRoad.into_build(second)
 	Resources.gain(second, {GameData.STONE: 100})
 	expect(Building.place(second, &"wall", _somewhere_for_a_wall(second)),
 		"the second run builds a wall")

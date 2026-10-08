@@ -13054,3 +13054,73 @@ data 1968527100 unchanged; parse 157 scripts (re-run after the last autoplay.gd
 edit). perf: night tick 667us before, 615us after (7% of 8333), path rebuild
 7907 -> 7964us - within tolerance. Autoplay after: **identical** to the table
 before (0116's after-run; 0117 changed only words).
+
+## 0119 - Tests and tools build in the build step - done 2026-10-08
+
+What changed: every defence the suites and tools put down, upgrade or sell now
+goes up in PREPARATION, so 0132's day ban is a rule change and not a hundred
+broken set-ups. **How the sites were found**: a temporary probe in
+`Building.place/upgrade/sell` (removed) logged the caller of every DEFENCES id
+touched by day across a full verify and the shots - 1775 calls from 58 sites
+before, 9 after (all of them the tutorial's day build step, left on purpose).
+`NightRoad.to_build()` is new (into the build step unless already there) and
+`to_night()` carries on from an open build step, so a fixture arms the farm
+between the two; `SuiteKit.built_last_night(state, build)` sets PREPARATION for
+the length of `build` and puts the phase back - **the way a check gets
+defences standing on a day farm** (they went up last night) without playing a
+night: 0024's daytime tower, 0033's power checks, 0110's occupied cell, the
+day shots' defended farm, make_goldens' save. Everything that goes on into the
+night uses the real road. Routed: headless_check (0023 building incl. its sells
+and the intent-driven ones, 0027's loop - button first, then `_arm_the_farm`,
+`_defended_night`, `_shooting_log`, `_shots_in`, `_mixed_night`,
+`_a_full_farm`, `_three_in_a_row`, `_a_crowd`, `_mortar_field`,
+`_play_a_whole_run`, 0069 stats, 0105 playtest, 0109 reactions, 0110
+refusals), input_check (0023 and 0046 open build mode **after the night
+button** - B is not tied to the day, so no bug to fix -, 0027, 0082, 0085, 0090,
+the lights/particles/transition fixtures), shot.gd (`_a_defended_farm(state,
+for_the_night)`), determinism.gd (`_arm_the_farm` after `into_build`),
+perf_check, make_goldens, and the five art showcases (PREPARATION around
+place/upgrade, and the barrier ghost's `can_place`). Production buildings stay
+by day: where a generator used to follow the towers (`_mixed_night`,
+`_a_full_farm`, perf_check, the power night), it now goes up first.
+**Autoplay**: `_a_day` gathers, crafts, buys tech, mends the house and stations
+and puts up production buildings; the new `_a_build_step` places, upgrades and
+mends defences off the same cursor. First version met night one with only its
+tower (walls: gathered 278, died night 2): the day stopped saving once the
+first defence was paid for and farmed instead. `_the_plan_ahead()` now sets the
+price of every paid-for defence aside and saves for the next entry, which is
+what the old day did once its tower was up. `_task_0068_balance` looks after
+the build step. Left for 0132, each with a comment: `_task_0041_tutorial`'s two
+day build blocks (headless and input). 0132's prompt gained a line:
+play_nights.gd buys generators inside its build step.
+**The scratch rule** (`allowed_in_phase` and `why_not_upgrade` refusing every
+DEFENCES id by day, reverted): first full verify failed on 0110's refusals,
+the barrier ghost and walls autoplay too - all fixed - and then only on
+headless_check's 3 asserts in `_task_0041_tutorial` ("a tower goes down while
+the game is still saying 'chop a tree'", "four towers, which is a day's iron",
+"night one is survived by somebody who read nothing") and input_check's 3 in
+`_case_0041_tutorial` ("a tower goes down out of order", the build line, "the
+line about building is simply gone"); v1 suites, showcases, shots and
+autoplay passed under it.
+Autoplay before (0118) -> after, nights held:
+
+    policy     before: won killed by      avg     after: won killed by      avg
+    balanced           0  night 8 (21x)   6.9            0  night 8 (21x)   6.9
+    economy            0  night 2 (21x)   1.8            0  night 3 (19x)   2.6
+    towers             0  night 8 (20x)   6.8            0  night 8 (17x)   6.7
+    walls              0  night 8 (21x)   8.2            0  night 8 (21x)   8.2
+
+(gathered: balanced 5281 -> 5667, economy 556 -> 799, towers 5627 -> 5641,
+walls 5426 -> 7373: placing no longer costs day time.) The table under the
+scratch rule is identical to the final one. The ALARM is the old one.
+Files: src/tools/{night_road,suite_kit,autoplay,headless_check,input_check,
+determinism,shot,perf_check,make_goldens,tower_showcase,barrier_showcase,
+effect_showcase,enemy_showcase,giant_showcase}.gd, tools/determinism_sim_hash.txt,
+implementation/prompts/0132-defences-at-night.md, implementation/shots/0119/
+Verify: **58 passed, 0 failed in 571s** (OVER BUDGET 300, as before); headless_check
+16173, headless_v1 96, input_check 1074, input_v1 11; **sim 2728872771 ->
+4130513273** (the determinism scenario's two towers and three walls now go up
+in its build step instead of before the morning: a day without them, then the
+same night), data 1968527100 unchanged. Shots 0119 opened: `wave` has its
+eight towers firing behind the fence line; `refused` is the same build-mode
+refusal over the workshop as 0110's (it never had towers).

@@ -26,6 +26,16 @@ static func into_build(state: Dictionary) -> bool:
 	return Phases.begin_preparation(state)
 
 
+## Into the build step if it is still day; a no-op if the build step is
+## already open. **Where a defence goes down** (task 0119): 0132 forbids them
+## by day, so a fixture that arms the farm calls this first and the
+## `to_night()` after it carries on from wherever it is.
+static func to_build(state: Dictionary) -> bool:
+	if int(state["phase"]) == Phases.DAY:
+		return into_build(state)
+	return int(state["phase"]) == Phases.PREPARATION
+
+
 ## How many ticks of the build step are still to run. Zero outside it.
 static func build_ticks_left(state: Dictionary) -> int:
 	if int(state["phase"]) != Phases.PREPARATION:
@@ -40,9 +50,10 @@ static func through_build(state: Dictionary) -> void:
 		Sim.advance(state, left)
 
 
-## Both: from the day to the first tick of the night.
+## Both: from the day - or from a build step already open, where the farm was
+## armed - to the first tick of the night.
 static func to_night(state: Dictionary) -> bool:
-	if not into_build(state):
+	if not to_build(state):
 		return false
 	through_build(state)
 	return true

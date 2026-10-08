@@ -237,7 +237,9 @@ func _attacks() -> void:
 		for step in [Vector2i.UP,Vector2i.DOWN,Vector2i.RIGHT]:
 			terrain[Grid.index(cell+step)] = Farm.Terrain.WATER
 		_state["terrain"] = terrain
-		expect(Building.place(_state, &"wall", cell+Vector2i.LEFT), "Actual paid barrier blocks the only route")
+		expect(SuiteKit.built_last_night(_state, func() -> bool:
+			return Building.place(_state, &"wall", cell+Vector2i.LEFT)),
+			"Actual paid barrier blocks the only route")  # where defences go up since task 0119
 		ids.append(Entities.spawn(_state, EnemyMotion.FAMILIES[i],cell))
 		seen[ids[i]] = {}
 	await _settle()
@@ -295,7 +297,7 @@ func _mixed() -> void:
 	_state = _blank(true)
 	_house(Vector2i(13,9))
 	var phase := int(_state["phase"])
-	_state["phase"] = Phases.DAY
+	_state["phase"] = Phases.PREPARATION  # where defences go up since task 0119
 	expect(Farm.cells_with(_state,&"house").size()==9, "Existing three-by-three house fixture establishes shared character scale")
 	for cell in [Vector2i(10,9),Vector2i(16,9)]:
 		expect(Building.place(_state,&"gun_tower",cell), "Mixed-wave defence uses unchanged rules")

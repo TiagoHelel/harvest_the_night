@@ -202,7 +202,7 @@ func _rendered_forms(night: bool) -> void:
 
 func _firing() -> void:
 	_state = _blank(true)
-	_state["phase"] = Phases.DAY
+	_state["phase"] = Phases.PREPARATION  # where defences go up since task 0119
 	_state["tech_owned"] = [&"true sights",&"long barrels",&"oiled works"]
 	for row in 3:
 		for col in 3:
@@ -438,7 +438,7 @@ func _density_controls() -> void:
 	var hashes: Array[int] = []
 	for density in [1.0,0.5,0.0]:
 		_state = _blank(true)
-		_state["phase"] = Phases.DAY
+		_state["phase"] = Phases.PREPARATION  # where defences go up since task 0119
 		expect(Building.place(_state,&"gun_tower",Vector2i(14,9)),"Density control builds a real firing tower")
 		_state["phase"] = Phases.NIGHT
 		for i in 12:

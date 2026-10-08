@@ -938,7 +938,7 @@ func _set_dusk(state: Dictionary) -> void:
 # ---------------------------------------------------------------- the night
 
 func _set_wave(state: Dictionary) -> void:
-	_a_defended_farm(state)
+	_a_defended_farm(state, true)
 	NightRoad.to_night(state)
 	Sim.advance(state, 1)
 	# **Spawned by hand rather than waited for.** A wave arriving on its own
@@ -957,7 +957,7 @@ func _set_wave(state: Dictionary) -> void:
 
 
 func _set_result(state: Dictionary) -> void:
-	_a_defended_farm(state)
+	_a_defended_farm(state, true)
 	NightRoad.to_night(state)
 	Sim.advance(state, 1)
 	# **The night is played, not declared.** Calling `enter_result` straight
@@ -984,11 +984,25 @@ func _set_tech(state: Dictionary) -> void:
 
 
 ## A farm with something on it worth defending and something defending it.
-func _a_defended_farm(state: Dictionary) -> void:
+##
+## **The defence goes up in the build step** (task 0119): a night scene opens
+## it and builds there (`for_the_night`), a day scene shows a farm whose
+## defence went up last night.
+func _a_defended_farm(state: Dictionary, for_the_night: bool = false) -> void:
 	_a_sown_field(state)
 	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
 		GameData.STONE: 900, GameData.OIL: 200, GameData.GUNPOWDER: 120,
 		GameData.INCENDIARY: 60})
+	if for_the_night:
+		NightRoad.to_build(state)
+		_put_up_the_defence(state)
+	else:
+		SuiteKit.built_last_night(state, func() -> void:
+			_put_up_the_defence(state))
+
+
+## Eight towers in a block beside the farmer and a fence line past them.
+func _put_up_the_defence(state: Dictionary) -> void:
 	var here := Player.cell(state)
 	var put := 0
 	for y in range(here.y - 2, here.y + 6):

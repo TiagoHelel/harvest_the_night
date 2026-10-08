@@ -1,7 +1,7 @@
 # 0119 - Tests and tools build in the build step
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0118
 - **Likely files:** src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/play_nights.gd, src/tools/tower_showcase.gd, src/tools/barrier_showcase.gd, src/tools/effect_showcase.gd, src/tools/enemy_showcase.gd, src/tools/giant_showcase.gd
 
