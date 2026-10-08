@@ -402,8 +402,9 @@ func _light_for_phase(delta: float) -> void:
 	_wear(_blend(_fade_ramp, _ramp_now(), _fade))
 
 
-## The colour of the daylight right now: cool at dawn, plain at noon, warm at
-## dusk and a little warmer past it.
+## The colour of the daylight right now, read off the clock: cool at dawn
+## (06:00), plain at noon, warm at dusk (18:00), and deepening after it until
+## the day ends at 02:00.
 ##
 ## **A day lit identically from the first tick to the last is a day where time
 ## is a number in a corner.** `design.md` asks for light that warms and then
@@ -416,16 +417,37 @@ func _light_for_phase(delta: float) -> void:
 func _daylight_now() -> Color:
 	if _state.is_empty():
 		return PaletteData.DAY_TINT
-	var through := float(Phases.day_percent(_state)) / 100.0
+	var leg := _light_leg()
+	var ends := [PaletteData.DAWN_TINT, PaletteData.DAY_TINT,
+		PaletteData.DUSK_TINT, PaletteData.NIGHT_TINT]
+	return (ends[int(leg[0])] as Color).lerp(ends[int(leg[0]) + 1], float(leg[1]))
 
-	# Dawn to noon over the first half, noon to dusk over the second. Past
-	# dusk it keeps going towards the evening colour rather than stopping, so
-	# a day that runs over looks like one.
-	if through <= 0.5:
-		return PaletteData.DAWN_TINT.lerp(PaletteData.DAY_TINT,
-			clampf(through / 0.5, 0.0, 1.0))
-	return PaletteData.DAY_TINT.lerp(PaletteData.DUSK_TINT,
-		clampf((through - 0.5) / 0.5, 0.0, 1.0))
+
+## Noon on the clock: the middle of the light's first two legs.
+const NOON_MINUTE := 12 * 60
+
+## How far towards the night the evening has gone by the end of the day. The
+## light keeps deepening after dusk instead of stopping at it, but not all the
+## way: the night proper is still a change the player sees happen.
+const EVENING_DEPTH := 0.5
+
+
+## Where the light is on its way through the day, **read off the hour**
+## (task 0126): `[leg, weight]`, leg 0 dawn to noon (06:00-12:00), leg 1 noon
+## to dusk (12:00-18:00), leg 2 dusk deepening towards the night until the day
+## ends at 02:00, at most `EVENING_DEPTH` of the way.
+func _light_leg() -> Array:
+	var minute := float(Phases.clock_minute(_state))
+	var start := float(GameData.DAY_START_MINUTE)
+	var dusk := float(GameData.DUSK_MINUTE)
+	var end := float(GameData.DAY_END_MINUTE)
+	var noon := clampf(float(NOON_MINUTE), start + 1.0, dusk - 1.0)
+	if minute <= noon:
+		return [0, clampf((minute - start) / (noon - start), 0.0, 1.0)]
+	if minute <= dusk:
+		return [1, clampf((minute - noon) / (dusk - noon), 0.0, 1.0)]
+	return [2, clampf((minute - dusk) / maxf(end - dusk, 1.0), 0.0, 1.0)
+		* EVENING_DEPTH]
 
 
 ## What the light is made of right now: the tint, and the three things a
@@ -444,12 +466,9 @@ func _daylight_now() -> Color:
 func _ramp_now() -> Dictionary:
 	if _state.is_empty() or int(_state.get("phase", Phases.DAY)) != Phases.DAY:
 		return _night_ramp()
-	var through := float(Phases.day_percent(_state)) / 100.0
-	if through <= 0.5:
-		return _blend(_dawn_ramp(), _day_ramp(),
-			clampf(through / 0.5, 0.0, 1.0))
-	return _blend(_day_ramp(), _dusk_ramp(),
-		clampf((through - 0.5) / 0.5, 0.0, 1.0))
+	var leg := _light_leg()
+	var ends := [_dawn_ramp(), _day_ramp(), _dusk_ramp(), _night_ramp()]
+	return _blend(ends[int(leg[0])], ends[int(leg[0]) + 1], float(leg[1]))
 
 
 ## The ramp a given tint belongs to, for the far end of a fade. Only ever

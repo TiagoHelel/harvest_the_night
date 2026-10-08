@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **120 / 296 done**
+`##########..............`  **121 / 296 done**
 
-0 doing / 176 todo / 0 blocked across 18 phases.
+0 doing / 175 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-176 task(s) left, the ready ones first, then what they
+175 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,26 +107,9 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0126 - The clock: 06:00 to 02:00
-
-Ready to pick up.  Likely files: `src/core/phases.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
-
-The day gets an hour. Today's `DAY_TICKS` is mapped onto a clock that runs from 06:00 to 02:00, dusk falls at 18:00, and the light and the HUD read the hour, so every later task can speak in times of day.
-
-- Clock levers in `game_data.gd`: `DAY_START_MINUTE := 6 * 60` (`# LEVER`, 05:00-08:00), `DAY_END_MINUTE := 26 * 60` (02:00 the next morning, `# LEVER`, 24:00-27:00) and `DUSK_MINUTE := 18 * 60` (`# LEVER`, 16:00-20:00). `DUSK_AT_TICK` becomes a constant derived from them, so none of its callers change
-- Integer helpers in `Phases`: `clock_minute(state)` (minutes since midnight of the day that began: 360 at `day_tick` 0, 1560 at `DAY_TICKS`), `tick_at_minute(minute)` (the inverse, for tests and tools), and `is_dusk` reading the dusk minute. Outside DAY they answer for the moment the day ended. Until 0128 the clock keeps counting past 02:00 rather than clamping
-- `GameData.validate()` (through a `check_clock(start, dusk, end, day_ticks)` that takes its numbers as arguments, like `check_tutorial(steps)`, so a test can feed it a bad clock; it replaces today's `DUSK_AT_TICK > DAY_TICKS` line): start < dusk < end, and `DAY_TICKS` is a whole number of ticks per game minute (6 today, 12-15 after 0166), so the clock never shows a minute twice or skips one
-- `DHUD_DAY` (today `DAY %d   %d:%02d%s`, elapsed m:ss) shows the hour as 24-hour HH:MM in both languages (`assets/locale/strings.csv`), wrapping after midnight (01:30, never 25:30); keep `DHUD_DUSK` read or delete its row, so `tools/i18n_check.py` finds no unused key. 0140 gives the clock its final look
-- `WorldView._daylight_now` and `_ramp_now` read the hour: dawn to noon, noon to dusk at 18:00, the dusk light deepening until 02:00. The night ramp does not change
-- No rule changes: `day_percent` and `overtime_percent` keep their meaning (overtime now starts at 18:00), and the real length of the day is 0166's
-- SIM must not move. DATA moves on purpose - dusk goes from 192 s to 144 s of the 240 s day (22:00 to 18:00 on the new clock) and the clock levers join the `time` row of `digest()`; write both numbers in PROGRESS
-
-  - done when: `_task_0126_clock` in `src/tools/headless_v1.gd` asserts 06:00 at tick 0, 16:00 at `DAY_TICKS / 2`, 18:00 at `DUSK_AT_TICK`, 02:00 at `DAY_TICKS`, `tick_at_minute(clock_minute(t)) == t` on minute boundaries, and that `check_clock` refuses a dusk after the end of the day and a day that is not a whole number of ticks per minute
-  - done when: `python tools/shot.py 0126 noon dusk` opened: the HUD reads HH:MM and the evening light starts at 18:00, not later
-
 ### 0127 - Going to bed starts the night
 
-Waits on 0126.  Likely files: `src/core/phases.gd, src/core/house.gd, src/core/sim.gd, src/core/player.gd, src/ui/day_hud.gd, src/ui/house_view.gd, src/ui/title_screen.gd, src/ui/player_work.gd, src/tools/shot.gd, src/tools/art_showcase.gd, src/tools/house_check.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/phases.gd, src/core/house.gd, src/core/sim.gd, src/core/player.gd, src/ui/day_hud.gd, src/ui/house_view.gd, src/ui/title_screen.gd, src/ui/player_work.gd, src/tools/shot.gd, src/tools/art_showcase.gd, src/tools/house_check.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Going to bed is the reality switch. The bed in the farmhouse and the night button both put the farmer to sleep, and sleeping is what starts the build step - the plan's section 12, 'when he sleeps, the farm switches reality'.
 
@@ -182,7 +165,7 @@ Nobody walks at night. The farmer is in bed from the moment he sleeps until the 
 
 ### 0140 - The day HUD: the hour and bedtime
 
-Waits on 0126, 0127, 0128.  Likely files: `src/ui/day_hud.gd, src/core/game_data.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
+Waits on 0127, 0128.  Likely files: `src/ui/day_hud.gd, src/core/game_data.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
 
 The day HUD tells the time and says when it is time for bed: an HH:MM clock, a GO TO BED button that looks like the way into the night, a reminder from 22:00 and a warning before the 02:00 pass-out.
 
@@ -546,7 +529,7 @@ The farm learns what day of the year it is. Every rule of this phase hangs off o
 
 ### 0173 - Five tools, three tiers
 
-Waits on 0148, 0126.  Likely files: `src/core/tool_tiers.gd (new), src/core/state.gd, src/core/game_data.gd, src/core/crafting.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/player_work.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0148.  Likely files: `src/core/tool_tiers.gd (new), src/core/state.gd, src/core/game_data.gd, src/core/crafting.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/player_work.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Hoe, watering can, axe, pickaxe and rod, each in three tiers bought at the workshop with money and ore: the first thing day money buys that makes every later day better (plan section 3.7).
 
@@ -879,7 +862,7 @@ Big stumps give hardwood to an iron axe: a reason to upgrade early, and the stuf
 
 ### 0183 - The coop and the barn
 
-Waits on 0126, 0156.  Likely files: `src/core/game_data.gd, src/core/livestock.gd, src/core/building.gd, src/core/interact.gd, src/core/state.gd, src/ui/world_view.gd, src/ui/transition.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0156.  Likely files: `src/core/game_data.gd, src/core/livestock.gd, src/core/building.gd, src/core/interact.gd, src/core/state.gd, src/ui/world_view.gd, src/ui/transition.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Animals get homes: a coop and a barn, built by day, that hold them, shelter them at night and - from 0184 - make them worth feeding (plan section 3.4).
 
@@ -1031,7 +1014,7 @@ Sprinklers automate the chore: copper, iron and gold ones water the plots around
 
 ### 0179 - Fish by pond, season and hour
 
-Waits on 0126, 0149, 0156, 0165.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/crafting.gd, src/app/save.gd, src/core/state.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
+Waits on 0149, 0156, 0165.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/crafting.gd, src/app/save.gd, src/core/state.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
 
 The one pond becomes three with about twelve species, each with its place, season, hours and rarity, so fishing asks where and when as well as whether (plan section 3.2).
 
@@ -1439,7 +1422,7 @@ The dairy, the loom and the mill: milk into cheese and butter, wool into cloth a
 
 ### 0190 - The peddler and his hours
 
-Waits on 0126, 0170, 0183, 0185, 0173.  Likely files: `src/core/shop.gd, src/core/interact.gd, src/core/game_data.gd, src/core/livestock.gd, src/ui/shop_panel.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0170, 0183, 0185, 0173.  Likely files: `src/core/shop.gd, src/core/interact.gd, src/core/game_data.gd, src/core/livestock.gd, src/ui/shop_panel.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The stall gets a peddler who keeps hours, 08:00 to 17:00, whose seed packets change with the season (plan section 3.6), and who sells what the farm cannot make for itself: animals and tool upgrades.
 
@@ -3396,10 +3379,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (0/23)
+## 10 - Sleep is the night  (1/23)
 
-- [ ] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
-- [ ] **0127** [Going to bed starts the night](prompts/0127-bed.md) - needs 0126
+- [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
+- [ ] **0127** [Going to bed starts the night](prompts/0127-bed.md)
 - [ ] **0128** [Passing out at 02:00](prompts/0128-pass-out.md) - needs 0127
 - [ ] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md) - needs 0127, 0128
 - [ ] **0130** [The night camera](prompts/0130-night-camera.md) - needs 0129
@@ -3412,7 +3395,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
 - [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0133, 0134, 0135, 0136, 0137
-- [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md) - needs 0126, 0127, 0128
+- [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md) - needs 0127, 0128
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0132, 0138
 - [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - needs 0129, 0128 - waits for art A001
@@ -3451,24 +3434,24 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md) - needs 0168, 0149, 0169
 - [ ] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md) - needs 0170, 0159
 - [ ] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md) - needs 0168
-- [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md) - needs 0148, 0126
+- [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md) - needs 0148
 - [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md) - needs 0173, 0167
 - [ ] **0175** [The axe and the pickaxe by tier](prompts/0175-axe-pickaxe.md) - needs 0173
 - [ ] **0176** [Copper, coal and gold](prompts/0176-copper-coal-gold.md) - needs 0175, 0156
 - [ ] **0177** [Hardwood](prompts/0177-hardwood.md) - needs 0175, 0156
 - [ ] **0178** [Sprinklers](prompts/0178-sprinklers.md) - needs 0176, 0165
-- [ ] **0179** [Fish by pond, season and hour](prompts/0179-fish-species.md) - needs 0126, 0149, 0156, 0165
+- [ ] **0179** [Fish by pond, season and hour](prompts/0179-fish-species.md) - needs 0149, 0156, 0165
 - [ ] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md) - needs 0179, 0173
 - [ ] **0181** [Rods and bait](prompts/0181-rods-bait.md) - needs 0179, 0173, 0167
 - [ ] **0182** [Legendary fish and the fish book](prompts/0182-legendary-book.md) - needs 0181
-- [ ] **0183** [The coop and the barn](prompts/0183-coop-barn.md) - needs 0126, 0156
+- [ ] **0183** [The coop and the barn](prompts/0183-coop-barn.md) - needs 0156
 - [ ] **0184** [Feeding, eggs and milk](prompts/0184-feeding-products.md) - needs 0183, 0168
 - [ ] **0185** [Sheep, pigs and the dog](prompts/0185-sheep-pigs-dog.md) - needs 0184
 - [ ] **0186** [Barns at night](prompts/0186-barns-at-night.md) - needs 0183, 0137
 - [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md) - needs 0184, 0168, 0149, 0186
 - [ ] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md) - needs 0187, 0185
 - [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md) - needs 0148, 0138, 0156
-- [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0126, 0170, 0183, 0185, 0173
+- [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0170, 0183, 0185, 0173
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md) - needs 0148
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188, 0184
 - [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0170, 0176, 0188, 0190, 0192

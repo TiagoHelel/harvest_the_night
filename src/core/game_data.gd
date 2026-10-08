@@ -53,7 +53,21 @@ const MAX_CATCH_UP_TICKS := 8           # LEVER: ticks, 4-16
 ## reality when they want to. Past dusk the night button starts asking, and that
 ## is all it does.
 const DAY_TICKS := 240 * SECONDS        # LEVER: ticks, 120-480 seconds worth
-const DUSK_AT_TICK := 192 * SECONDS     # LEVER: ticks, 0.7-0.9 of DAY_TICKS
+
+## **The clock** (task 0126): `DAY_TICKS` is mapped onto the hours from
+## `DAY_START_MINUTE` to `DAY_END_MINUTE`, in minutes since the midnight the
+## day began - 02:00 the next morning is 26 * 60. 1.0's day runs from waking
+## at 06:00 to passing out at 02:00 (`docs/PLANO-DO-JOGO.md`), and every later
+## task speaks in times of day through `Phases.clock_minute()`.
+## `check_clock()` holds `DAY_TICKS` to a whole number of ticks per minute.
+const DAY_START_MINUTE := 6 * 60        # LEVER: minutes, 05:00-08:00
+const DAY_END_MINUTE := 26 * 60         # LEVER: minutes, 24:00-27:00
+const DUSK_MINUTE := 18 * 60            # LEVER: minutes, 16:00-20:00
+
+## The tick dusk falls on, **derived from the clock** rather than set beside
+## it, so the hour and the tick can never disagree.
+const DUSK_AT_TICK := (DUSK_MINUTE - DAY_START_MINUTE) * DAY_TICKS \
+	/ (DAY_END_MINUTE - DAY_START_MINUTE)
 
 ## The build window between pressing the night button and the first spawn.
 const PREPARATION_TICKS := 20 * SECONDS # LEVER: ticks, 10-45 seconds worth
@@ -1784,9 +1798,25 @@ static func validate() -> Array:
 			if not RESOURCES.has(res):
 				errors.append("rewards %s gives unknown '%s'" % [key, res])
 
-	if DUSK_AT_TICK > DAY_TICKS:
-		errors.append("dusk falls after the day is over")
+	errors.append_array(check_clock(DAY_START_MINUTE, DUSK_MINUTE,
+		DAY_END_MINUTE, DAY_TICKS))
 
+	return errors
+
+
+## The clock is a clock: the day starts, darkens and ends in that order, and
+## every game minute is the same whole number of ticks - so the HUD never shows
+## a minute twice or skips one. Takes its numbers as arguments, like
+## `check_tutorial()`, so a check can hand it a bad clock.
+static func check_clock(start: int, dusk: int, end: int, day_ticks: int) -> Array:
+	var errors: Array = []
+	if not (start < dusk and dusk < end):
+		errors.append("the clock runs %d, dusk %d, end %d - not in that order"
+			% [start, dusk, end])
+	var span := end - start
+	if span <= 0 or day_ticks <= 0 or day_ticks % span != 0:
+		errors.append("%d ticks are not a whole number of ticks per minute over %d minutes"
+			% [day_ticks, span])
 	return errors
 
 
@@ -2584,6 +2614,7 @@ static func check_nights(nights: Array) -> Array:
 static func digest() -> int:
 	return State.hash_of({
 		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK, PREPARATION_TICKS,
+			DAY_START_MINUTE, DAY_END_MINUTE, DUSK_MINUTE,
 			MAX_CATCH_UP_TICKS],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
 			PLAYER_SPEED],

@@ -341,11 +341,15 @@ func _refresh(force: bool) -> void:
 	# three this read 12:00 and kept climbing - a clock measuring how long the
 	# session had been running rather than how much of today is left, which is
 	# the one thing it is for.
-	var tick := int(_state["day_tick"])
+	#
+	# **The hour, since task 0126**: 24-hour HH:MM off `Phases.clock_minute`,
+	# wrapping after midnight - 01:30, never 25:30. Task 0140 gives the clock
+	# its final look.
+	var minute := Phases.clock_minute(_state)
 	_day.text = I18n.f(&"DHUD_DAY", [
 		int(_state["day"]),
-		tick / (GameData.TICK_HZ * 60),
-		(tick / GameData.TICK_HZ) % 60,
+		(minute / 60) % 24,
+		minute % 60,
 		I18n.t(&"DHUD_DUSK") if Phases.is_dusk(_state) else "",
 	])
 	_day.modulate = LIT_TINT if Phases.is_dusk(_state) else Color.WHITE

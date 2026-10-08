@@ -1,7 +1,7 @@
 # 0126 - The clock: 06:00 to 02:00
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0118
 - **Likely files:** src/core/phases.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd
 

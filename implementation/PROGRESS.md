@@ -13223,3 +13223,38 @@ mode, Start pauses and resumes, Back sends for the night, rebinding interact's
 key keeps A and moving its pad input keeps the key, reset puts back both);
 sim 4130513273 and data 1968527100 unchanged. Shots 0121 `options_controls` and
 `options_controls_pad` opened.
+
+## 0126 - The clock: 06:00 to 02:00 - done 2026-10-08
+
+What changed: the day has an hour. Levers `DAY_START_MINUTE` 6*60,
+`DAY_END_MINUTE` 26*60 (02:00 next morning) and `DUSK_MINUTE` 18*60, each
+`# LEVER`; `DUSK_AT_TICK` is now derived from them - 4320 ticks, 144 s of the
+240 s day (was 192 s, which on the new clock is 22:00). `Phases.clock_minute`
+(360 at day_tick 0, 1560 at DAY_TICKS, integer; outside the day it answers for
+the moment the day ended, and until 0128 it counts past 02:00) and
+`tick_at_minute` (its inverse); `is_dusk` reads the minute. `check_clock(start,
+dusk, end, day_ticks)` replaces the old `DUSK_AT_TICK > DAY_TICKS` line in
+`validate()`: in order, and a whole number of ticks per minute (6 today). The
+HUD line is 24-hour HH:MM (`DHUD_DAY` `%02d:%02d` in both languages, wrapping
+after midnight; `DHUD_DUSK` still read). `WorldView` reads the hour: dawn ->
+noon (06:00-12:00), noon -> dusk (12:00-18:00), then the dusk light deepening
+towards the night ramp until 02:00, at most half way (`EVENING_DEPTH`, view
+only); the night ramp is unchanged. No rule reads dusk, so SIM does not move.
+Old checks rewritten in place, each with a comment pointing here:
+`_case_0039_clock`'s "starting near the top of it" now looks for 06:0, and its
+"evening is redder than morning" samples at dusk (18:00) - it sampled 30 ticks
+before the end of the day, which now is deep evening. shot.gd's `noon` is
+12:00 on the clock (it was half the day, which is 16:00), so its field is
+younger than in earlier noon shots.
+Files: src/core/{game_data,phases}.gd, src/ui/{day_hud,world_view}.gd,
+assets/locale/strings.csv, src/tools/{headless_v1,input_check,shot}.gd,
+tools/determinism_data_hash.txt, implementation/shots/0126/
+Verify: **59 passed, 0 failed in 508s** (OVER BUDGET 300, as before); headless_check
+16177, headless_v1 128 (+12: 06:00 / 16:00 / 18:00 / 02:00, the inverse on
+every minute boundary, dusk on the minute and DUSK_AT_TICK derived from it,
+check_clock refusing a dusk after the end and a non-whole ticks-per-minute day,
+HH:MM wrapping to 01:30), input_check 1074, input_v1 27; sim 4130513273
+unchanged; **data 1968527100 -> 1739027987** (dusk 192 s -> 144 s and the three
+clock levers joining the `time` row of `digest()`, on purpose). Shots 0126
+opened: noon reads "DAY 1 12:15" in plain light; dusk reads "18:25 DUSK" in the
+warm light with "NIGHT 1 IS WAITING" - the evening starts at 18:00.

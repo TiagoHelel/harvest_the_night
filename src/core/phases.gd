@@ -193,8 +193,6 @@ static func begin_day(state: Dictionary) -> bool:
 	return true
 
 
-## Past dusk the night button starts asking to be pressed. It never presses
-## itself: `design.md` promises the player switches reality when they want to.
 ## How far through the day it is, as a percentage. Past a hundred once the day
 ## has run over, which it is allowed to do.
 ##
@@ -217,9 +215,36 @@ static func overtime_percent(state: Dictionary) -> int:
 	return over * 100 / maxi(GameData.DAY_TICKS - GameData.DUSK_AT_TICK, 1)
 
 
+## Whether the clock has passed dusk (18:00 by default). Outside the day it
+## answers for the moment the day ended.
+##
+## Past dusk the night button starts asking to be pressed. It never presses
+## itself: `design.md` promises the player switches reality when they want to.
 static func is_dusk(state: Dictionary) -> bool:
-	return (int(state["phase"]) == DAY
-		and int(state["day_tick"]) >= GameData.DUSK_AT_TICK)
+	return clock_minute(state) >= GameData.DUSK_MINUTE
+
+
+# ------------------------------------------------------------------- the clock
+
+## The time of day, in minutes since the midnight the day began (task 0126):
+## `DAY_START_MINUTE` (360, 06:00) at `day_tick` 0 and `DAY_END_MINUTE` (1560,
+## 02:00 the next morning) at `DAY_TICKS`. Integer, and a whole number of ticks
+## per minute (`GameData.check_clock`), so every minute is shown exactly once.
+##
+## `day_tick` stops when the day does and starts again at dawn, so outside the
+## day this answers for the moment the day ended. Until task 0128 sends the
+## farmer to bed at 02:00, a day that runs over keeps counting past it.
+static func clock_minute(state: Dictionary) -> int:
+	return GameData.DAY_START_MINUTE + int(state["day_tick"]) \
+		* (GameData.DAY_END_MINUTE - GameData.DAY_START_MINUTE) \
+		/ maxi(GameData.DAY_TICKS, 1)
+
+
+## The `day_tick` a given minute of the clock falls on - the inverse of
+## `clock_minute()` on minute boundaries. For tests and tools.
+static func tick_at_minute(minute: int) -> int:
+	return (minute - GameData.DAY_START_MINUTE) * GameData.DAY_TICKS \
+		/ maxi(GameData.DAY_END_MINUTE - GameData.DAY_START_MINUTE, 1)
 
 
 static func _enter(state: Dictionary, phase: int) -> void:

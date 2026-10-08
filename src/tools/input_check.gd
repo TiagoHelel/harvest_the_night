@@ -2622,7 +2622,8 @@ func _case_0039_clock() -> void:
 	await frames(2)
 	expect(clock != null and clock.text.begins_with("DAY 1"),
 		"saying which day", clock.text if clock else "")
-	expect(clock != null and clock.text.contains("0:0"),
+	# The hour since task 0126: the day starts at 06:00 on a 24-hour clock.
+	expect(clock != null and clock.text.contains("06:0"),
 		"and starting near the top of it", clock.text if clock else "")
 
 	# **The light is not the same at dawn as at dusk.**
@@ -2630,7 +2631,9 @@ func _case_0039_clock() -> void:
 	Sim.advance(state, GameData.DAY_TICKS / 2)
 	await frames(4)
 	var noon := world.light_target()
-	Sim.advance(state, GameData.DAY_TICKS / 2 - 30)
+	# **At dusk, 18:00.** Task 0126 lets the evening deepen towards the night
+	# after dusk, so the warmest light is the dusk light, not the last tick.
+	Sim.advance(state, GameData.DUSK_AT_TICK - int(state["day_tick"]))
 	await frames(4)
 	var evening := world.light_target()
 	expect(not dawn.is_equal_approx(noon),

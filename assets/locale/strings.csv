@@ -150,7 +150,7 @@ DHUD_AMMO,0,AMMO  %s,MUNIÇÃO  %s
 DHUD_AMMO_NONE,0,AMMO  none needed,MUNIÇÃO  nenhuma precisa
 DHUD_AMMO_ONE,0,%s %d,%s %d
 DHUD_BITE,0,A BITE - PRESS SPACE,FISGOU - APERTE ESPAÇO
-DHUD_DAY,0,DAY %d   %d:%02d%s,DIA %d   %d:%02d%s
+DHUD_DAY,0,DAY %d   %02d:%02d%s,DIA %d   %02d:%02d%s
 DHUD_DAY_FIRST,0,DAY 1,DIA 1
 DHUD_DUSK,0,  DUSK,  ANOITECER
 DHUD_HELD,0,%s %d,%s %d

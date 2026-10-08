@@ -936,8 +936,10 @@ func _stand(state: Dictionary, cell: Vector2i) -> void:
 
 func _set_noon(state: Dictionary) -> void:
 	_a_sown_field(state)
-	# Half way through the day, which is what "noon" means to the light ramp.
-	Sim.advance(state, maxi(GameData.DAY_TICKS / 2 - int(state["tick"]), 1))
+	# **Noon on the clock**, 12:00, where the light ramp is plain day. Until
+	# task 0126 gave the day an hour this was half way, and half way is 16:00.
+	Sim.advance(state, maxi(Phases.tick_at_minute(WorldView.NOON_MINUTE)
+		- int(state["tick"]), 1))
 
 
 func _set_dusk(state: Dictionary) -> void:

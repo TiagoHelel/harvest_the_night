@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 8
+const GROUPS := 9
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -77,6 +77,7 @@ func _run() -> void:
 	_task_0118_road()
 	_task_0120_placeholders()
 	_task_0121_pad()
+	_task_0126_clock()
 
 
 func _finish() -> void:
@@ -842,4 +843,57 @@ func _task_0121_pad() -> void:
 		if code.contains("JOY_"):
 			raw.append(file)
 	expect(raw.is_empty(), "no code line in src/ui names a JOY_ constant", str(raw))
+	_completed += 1
+
+
+## 0126 - the clock: 06:00 to 02:00.
+func _task_0126_clock() -> void:
+	var state := State.create(1261)
+	var at := func(day_tick: int) -> int:
+		state["day_tick"] = day_tick
+		return Phases.clock_minute(state)
+	expect(at.call(0) == 6 * 60, "06:00 at tick 0", str(at.call(0)))
+	expect(at.call(GameData.DAY_TICKS / 2) == 16 * 60, "16:00 half way",
+		str(at.call(GameData.DAY_TICKS / 2)))
+	expect(at.call(GameData.DUSK_AT_TICK) == 18 * 60, "18:00 at dusk",
+		str(at.call(GameData.DUSK_AT_TICK)))
+	expect(at.call(GameData.DAY_TICKS) == 26 * 60, "02:00 at the end of the day",
+		str(at.call(GameData.DAY_TICKS)))
+
+	# The inverse holds on every minute boundary, and each minute is the same
+	# whole number of ticks.
+	var span := GameData.DAY_END_MINUTE - GameData.DAY_START_MINUTE
+	var per := GameData.DAY_TICKS / span
+	var drift: Array = []
+	for t in range(0, GameData.DAY_TICKS + 1, per):
+		if Phases.tick_at_minute(at.call(t)) != t:
+			drift.append(t)
+	expect(per * span == GameData.DAY_TICKS and drift.is_empty(),
+		"tick_at_minute undoes clock_minute on every minute",
+		"%d per minute, off at %s" % [per, str(drift.slice(0, 4))])
+
+	# Dusk reads the hour, and the old tick still agrees with it.
+	state["phase"] = Phases.DAY
+	state["day_tick"] = GameData.DUSK_AT_TICK - 1
+	var before := Phases.is_dusk(state)
+	state["day_tick"] = GameData.DUSK_AT_TICK
+	expect(not before and Phases.is_dusk(state), "dusk falls on the dusk minute")
+	expect(GameData.DUSK_AT_TICK == Phases.tick_at_minute(GameData.DUSK_MINUTE),
+		"and DUSK_AT_TICK is derived from it", str(GameData.DUSK_AT_TICK))
+
+	# **The check refuses a clock that is not a clock.**
+	expect(GameData.check_clock(GameData.DAY_START_MINUTE, GameData.DUSK_MINUTE,
+		GameData.DAY_END_MINUTE, GameData.DAY_TICKS).is_empty(), "today's clock passes")
+	expect(not GameData.check_clock(6 * 60, 27 * 60, 26 * 60, GameData.DAY_TICKS).is_empty(),
+		"a dusk after the end of the day is refused")
+	expect(not GameData.check_clock(6 * 60, 18 * 60, 26 * 60, GameData.DAY_TICKS + 1).is_empty(),
+		"and so is a day that is not a whole number of ticks per minute")
+
+	# **The HUD line is 24-hour HH:MM, wrapping after midnight.**
+	var late := 25 * 60 + 30
+	var line := I18n.f(&"DHUD_DAY", [3, (late / 60) % 24, late % 60, ""])
+	expect(line.contains("01:30") and not line.contains("25:30"),
+		"01:30, never 25:30", line)
+	var morning := I18n.f(&"DHUD_DAY", [1, 6, 0, ""])
+	expect(morning.contains("06:00"), "and 06:00 with its zero", morning)
 	_completed += 1
