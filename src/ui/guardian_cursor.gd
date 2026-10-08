@@ -65,6 +65,7 @@ func set_active(on: bool) -> void:
 	_active = on
 	visible = on
 	_held = Vector2i.ZERO
+	_armed = false
 	if on and _world != null:
 		var at := _pointer if _pointer.x >= 0.0 and not _by_pad \
 			else _world.get_viewport_rect().size * 0.5
@@ -87,6 +88,61 @@ func by_pad() -> bool:
 
 func look() -> StringName:
 	return _look
+
+
+## **The flare's aim** (task 0135). The night HUD's FLARE button arms it; the
+## next confirm fires at the cursor and `cancel` disarms. While it is armed,
+## or the ability key is held, with the flare ready, the cursor draws the
+## flare's reach: `ABILITY.radius_tiles` round the cell, a Chebyshev square,
+## measured the way `Ability.use` measures it.
+var _armed := false
+var _aiming := false
+
+
+func arm() -> void:
+	if _active:
+		_armed = true
+
+
+func disarm() -> void:
+	_armed = false
+
+
+func is_armed() -> bool:
+	return _armed
+
+
+## Whether the reach is drawn - `Main` says, from the button and the key.
+func set_aiming(on: bool) -> void:
+	if on != _aiming:
+		_aiming = on
+		queue_redraw()
+
+
+func is_aiming() -> bool:
+	return _aiming
+
+
+## An armed flare's confirm: aim it at the cursor and let it go. The cell as
+## it is at the press, like `confirm_repair`.
+func confirm_flare(state: Dictionary, event: InputEvent) -> bool:
+	if not _active or not _armed or state.is_empty():
+		return false
+	if not (event.is_action_pressed(&"place") or event.is_action_pressed(&"interact")):
+		return false
+	var intent: Dictionary = state["intent"]
+	intent["ability_cell"] = [_cell.x, _cell.y]
+	intent["ability"] = true
+	_armed = false
+	return true
+
+
+## `cancel` while armed puts the flare away rather than doing anything else.
+func cancel_aim(event: InputEvent) -> bool:
+	if _armed and event.is_action_pressed(&"cancel"):
+		_armed = false
+		return true
+	return false
 
 
 ## **What a confirm on this cell mends** (task 0134): the anchor of whatever
@@ -201,6 +257,8 @@ func frame() -> int:
 func _draw() -> void:
 	if not _active or _cell.x < 0:
 		return
+	if _aiming:
+		_draw_reach()
 	var name := StringName("cursor_%s" % _look)
 	var path := PlaceholderArt.art_path(name, frame())
 	var shape := PlaceholderArt.frame(path)
@@ -211,6 +269,30 @@ func _draw() -> void:
 			draw_texture(texture, -pivot)
 		return
 	_draw_stand_in(-pivot, frame())
+
+
+## **The flare's reach** (task 0135): every cell within `radius_tiles` of the
+## cursor's, Chebyshev, so the square is exactly what `Ability.use` hits.
+## Code, like the range ring and the route preview - A004 draws the cursor,
+## not this. Cells off the farm are left out, as the flare leaves them.
+func reach_cells() -> Array:
+	var radius := int(GameData.ABILITY["radius_tiles"])
+	var out: Array = []
+	for dy in range(-radius, radius + 1):
+		for dx in range(-radius, radius + 1):
+			var at := _cell + Vector2i(dx, dy)
+			if Grid.in_bounds(at):
+				out.append(at)
+	return out
+
+
+func _draw_reach() -> void:
+	var tile := float(GameData.TILE_SIZE)
+	var radius := float(int(GameData.ABILITY["radius_tiles"]))
+	var moon: Color = PaletteData.COLOURS[&"moon"]
+	var box := Rect2(Vector2.ONE * -(radius + 0.5) * tile, Vector2.ONE * (radius * 2.0 + 1.0) * tile)
+	draw_rect(box, Color(moon, 0.10), true)
+	draw_rect(box, Color(moon, 0.75), false, 1.0)
 
 
 ## A004's brackets, in code until the pack lands.

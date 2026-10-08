@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **129 / 296 done**
+`###########.............`  **130 / 296 done**
 
-0 doing / 167 todo / 0 blocked across 18 phases.
+0 doing / 166 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-167 task(s) left, the ready ones first, then what they
+166 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -106,22 +106,6 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: `python tools/placeholders.py` no longer lists A009
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0135 - The flare goes where you aim it
-
-Ready to pick up.  Likely files: `src/core/ability.gd, src/core/player.gd, src/ui/main.gd, src/ui/guardian_cursor.gd, src/ui/world_view.gd, src/ui/night_hud.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The flare goes off where the player aims it, not where somebody is standing. It is the night's one power today and the first of the plan's aimed powers.
-
-- A level intent `ability_cell` (`[-1, -1]` is nowhere), written every frame from the cursor like `build_cell`; a new field of `intent`, filled in old saves by reconcile
-- `Ability.use` centres on `ability_cell`. Nowhere or off the farm is refused and spends nothing - no cooldown, no `flares` count. 0129's interim house centre goes
-- Aiming: while the flare is ready, holding the ability key or arming the FLARE button shows the radius around the cursor (`ABILITY.radius_tiles`, a Chebyshev square, the way `Ability.use` measures it) and the cursor's aim state. The key fires on press at the cursor; the armed button fires on the next confirm; `cancel` disarms. The pad uses the same actions through 0121's bindings
-- Final `_task_0054_ability` and `_case_0054_ability`: the flare lands on the aimed cell; rewrite the flare half of 0129's `_task_0129_asleep` (it asserted the interim house centre)
-- SIM moves on purpose: `intent` gains `ability_cell`, and every state key is hashed (more if the determinism scenario fires a flare - say which). Record both numbers. DATA does not move
-
-  - done when: `_task_0135_aimed_flare` in `headless_v1.gd`: with one zombie by the aimed cell and one by the house, only the first is hit and slowed; a flare at nowhere is refused and keeps its charge
-  - done when: `_case_0135_flare_aim` in `input_v1.gd`: moving the cursor and pressing the ability key flares that cell; arming the button and clicking flares the clicked cell
-  - done when: A capture of the aiming preview, opened: the square matches what the flare hits
 
 ### 0136 - The build step waits for START
 
@@ -262,7 +246,7 @@ Every night, won or lost, closes on a morning report, and confirming it starts t
 
 ### 0139 - The night HUD for the guardian
 
-Waits on 0135, 0136, 0137.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
+Waits on 0136, 0137.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
 
 One night HUD built for the guardian rather than for a farmer in the yard: the time to dawn, the house, the wave, START, speed, skip, the flare and the hotbar, all reachable by mouse and by pad.
 
@@ -1736,7 +1720,7 @@ A barrier like the wooden fence, except whatever bites it is thrown back stunned
 
 ### 0232 - Powers as a list
 
-Waits on 0196, 0135.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/pixel_effects.gd, src/tools/effect_showcase.gd, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0196.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/pixel_effects.gd, src/tools/effect_showcase.gd, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Nothing changes for the player. The one flare becomes the first entry of a list of powers, each with its own cooldown and aim cell, so 0233 can add three without a second copy of the cooldown and aiming code.
 
@@ -3235,7 +3219,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (9/23)
+## 10 - Sleep is the night  (10/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3246,11 +3230,11 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md)
 - [x] **0133** [The hotbar of defences](prompts/0133-hotbar.md)
 - [x] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md)
-- [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md)
+- [x] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md)
 - [ ] **0136** [The build step waits for START](prompts/0136-start-button.md)
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
-- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0135, 0136, 0137
+- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0136, 0137
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0138
@@ -3352,7 +3336,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0229** [The searchlight](prompts/0229-searchlight.md) - needs 0196, 0226
 - [ ] **0230** [The electric fence](prompts/0230-electric-fence.md) - needs 0196, 0176
 - [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md) - needs 0196, 0177, 0188, 0226
-- [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md) - needs 0196, 0135
+- [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md) - needs 0196
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0185, 0220, 0230
 - [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0149, 0220, 0223
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - needs 0221, 0222, 0219 - waits for art A036

@@ -3112,11 +3112,17 @@ func _case_0054_ability() -> void:
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
 	expect(Ability.ready(state), "and the flare is charged")
 
-	# Something standing near the house to be flared: the flare goes up from
-	# the house since task 0129, with the farmer in bed. At the rim of its
-	# reach and off the walls, so it is not biting the house already.
-	var beside := Farm.house_centre(state) \
-		+ Vector2i(0, int(GameData.ABILITY["radius_tiles"]))
+	# **Aimed with the cursor** (task 0135): the mouse puts it on a cell, and
+	# something stands right beside that cell to be flared.
+	await frames(3)
+	var view: WorldView = require_control("WorldView")
+	var aim := view.screen_to_cell(Vector2(320.0, 150.0))
+	var motion := InputEventMouseMotion.new()
+	motion.position = view.cell_to_screen(aim)
+	motion.global_position = motion.position
+	root.push_input(motion)
+	await frames(2)
+	var beside := aim + Vector2i(1, 0)
 	var victim := Entities.spawn(state, &"walker", beside)
 	Entities.set_hp(state, victim, 500)
 	var hp_before := int(Entities.get_one(state, victim).get("hp", 0))
@@ -3127,15 +3133,14 @@ func _case_0054_ability() -> void:
 	expect(Ability.flares_used(state) == 1, "one press, one flare",
 		str(Ability.flares_used(state)))
 	expect(int(Entities.get_one(state, victim).get("hp", 0)) < hp_before,
-		"and the thing beside the player is hurt by it",
+		"and the thing beside the aimed cell is hurt by it",
 		str(Entities.get_one(state, victim).get("hp", 0)))
 	expect(Ability.is_slowed(state, victim), "and slowed")
 
 	# **The player can see it.** The rules record where it went off, which is
 	# all the view needs and all it is allowed to know.
-	expect(Ability.flare_at(state) == [Farm.house_centre(state).x,
-		Farm.house_centre(state).y],
-		"the burst is recorded over the house",
+	expect(Ability.flare_at(state) == [aim.x, aim.y],
+		"the burst is recorded where the cursor was",
 		str(Ability.flare_at(state)))
 
 	# **Two in the same second are impossible**, through the key as well as
@@ -3391,15 +3396,22 @@ func _case_0056_night_hud() -> void:
 	expect(int(state["house_hp"]) > hurt,
 		"clicking the hurt house puts hit points back", str(state["house_hp"]))
 
-	# The flare, and it reports its own wait afterwards.
+	# The flare, and it reports its own wait afterwards. **The control arms
+	# it** since task 0135, and the next click on the farm lets it go there.
 	var flare: Button = locate_control("FlareButton") as Button
 	expect(Ability.ready(state), "the flare is charged")
 	expect(not flare.disabled, "so the control is live")
 	await click_control("FlareButton")
+	await frames(2)
+	expect(Ability.flares_used(state) == 0, "clicking it arms the flare and fires nothing yet",
+		str(Ability.flares_used(state)))
+	var target := Farm.house_centre(state) + Vector2i(3, 3)
+	await click_cell(target)
 	await until(func() -> bool: return Ability.flares_used(state) > 0,
 		"the flare to go off")
-	expect(Ability.flares_used(state) == 1, "clicking it sets one off",
-		str(Ability.flares_used(state)))
+	expect(Ability.flares_used(state) == 1 and Ability.flare_at(state) == [target.x, target.y],
+		"and the next click on the farm sets it off there",
+		str(Ability.flare_at(state)))
 	await frames(2)
 	expect(flare.disabled, "and then the control goes dead")
 	expect(flare.text.contains("%"),

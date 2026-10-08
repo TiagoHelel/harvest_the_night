@@ -9946,6 +9946,8 @@ func _task_0054_ability() -> void:
 	# **One press, then a long wait.** The done-when: two uses in the same
 	# second are impossible.
 	var night := _fresh_night(3601)
+	# Aimed, since task 0135: a flare at nowhere is refused.
+	_aim(night, Farm.house_centre(night))
 	expect(Ability.ready(night), "at night it is ready")
 	expect(Ability.charge_percent(night) == 100, "and fully charged",
 		str(Ability.charge_percent(night)))
@@ -9974,6 +9976,7 @@ func _task_0054_ability() -> void:
 
 	# **The wait runs only at night, and every night starts charged.**
 	var carried := _fresh_night(3602)
+	_aim(carried, Farm.house_centre(carried))
 	Ability.use(carried)
 	var mid := Ability.cooldown_left(carried)
 	expect(mid > 0, "the flare is spent")
@@ -10021,6 +10024,7 @@ func _task_0054_ability() -> void:
 	var wears := _fresh_night(3604)
 	var one := Entities.spawn(wears, &"walker", Farm.house_centre(wears))
 	Entities.set_hp(wears, one, 500)
+	_aim(wears, Farm.house_centre(wears))
 	Ability.use(wears)
 	expect(Ability.is_slowed(wears, one), "it is slowed")
 	Sim.advance(wears, int(table["slow_ticks"]) + 2)
@@ -10030,11 +10034,12 @@ func _task_0054_ability() -> void:
 	# **The view is told where it happened, and then forgets.**
 	var seen := _fresh_night(3605)
 	expect(Ability.flare_at(seen).is_empty(), "nothing to draw yet")
+	# **Where it was aimed** (task 0135; 0129 had it on the house).
+	var aimed := Farm.house_centre(seen) + Vector2i(5, 4)
+	_aim(seen, aimed)
 	Ability.use(seen)
-	# On the house since task 0129: the farmer is in bed (0135 aims it).
-	expect(Ability.flare_at(seen) == [Farm.house_centre(seen).x,
-		Farm.house_centre(seen).y],
-		"it went off over the house",
+	expect(Ability.flare_at(seen) == [aimed.x, aimed.y],
+		"it went off where it was aimed",
 		str(Ability.flare_at(seen)))
 	Sim.advance(seen, int(table["flare_ticks"]) + 2)
 	expect(Ability.flare_at(seen).is_empty(),
@@ -10067,21 +10072,16 @@ func _task_0054_ability() -> void:
 		% turned["house_lost"])
 	expect(lost["house_lost"] > 0, "without it the house is bitten",
 		str(lost))
-	# **Interim, task 0129**: with the farmer in bed the flare goes up from
-	# the house centre, and at `radius_tiles` from there it reaches little
-	# more than the walls - a walker bites on arriving. Turning a wave is
-	# 0135's to give back when the cursor aims it; until then it must at
-	# least never make the night worse.
-	expect(turned["house_lost"] <= lost["house_lost"],
-		"and one press never makes it worse",
+	expect(turned["house_lost"] < lost["house_lost"],
+		"and one press measurably changes that",
 		"%d against %d" % [turned["house_lost"], lost["house_lost"]])
 	expect(turned["flares"] == 1, "off one flare", str(turned["flares"]))
 
 	_completed += 1     # last line: an abandoned group never gets here
 
 
-## A line of walkers running out from the house - where the flare goes off
-## since task 0129 - and what a flare did to each.
+## A line of walkers running out from the house, a flare aimed at the house,
+## and what it did to each.
 func _flare_a_line(seed_value: int) -> Dictionary:
 	var state := _fresh_night(seed_value)
 	var centre := Farm.house_centre(state)
@@ -10096,6 +10096,7 @@ func _flare_a_line(seed_value: int) -> Dictionary:
 		Entities.set_hp(state, id, 500)
 		who.append(id)
 
+	_aim(state, centre)
 	Ability.use(state)
 
 	var took: Array = []
@@ -10114,14 +10115,15 @@ func _count_the_flares(seed_value: int) -> Dictionary:
 	# short night rather than of a night.
 	state["house_hp"] = 1 << 20
 	var waves := Waves.table(1).size()
+	# Aimed somewhere, or none goes off (task 0135).
+	_aim(state, Farm.house_centre(state))
 
 	var flares := 0
 	var ticks := 0
 	for _tick in 20000:
 		if int(state["phase"]) != Phases.NIGHT:
 			break
-		if Ability.ready(state):
-			Ability.use(state)
+		if Ability.ready(state) and Ability.use(state):
 			flares += 1
 		Sim.advance(state, 1)
 		ticks += 1
@@ -10140,12 +10142,10 @@ func _flare_a_wave(seed_value: int, press: bool) -> Dictionary:
 	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
 	var route := _route_from(state, spawn)
 
-	# The player waits four tiles out from the house, on the way in - which is
-	# the decision the flare really asks for, made with their feet.
+	# **Aimed four tiles out from the house, on the way in** (task 0135):
+	# the decision the flare really asks for, made with the cursor.
 	var stand: Vector2i = route[route.size() - 5]
-	var who: Dictionary = state["player"]
-	who["pos"] = [stand.x * Player.SUBTILE + Player.SUBTILE / 2,
-		stand.y * Player.SUBTILE + Player.SUBTILE / 2]
+	_aim(state, stand)
 
 	var sent := 8
 	for i in sent:
@@ -10155,12 +10155,8 @@ func _flare_a_wave(seed_value: int, press: bool) -> Dictionary:
 
 	var before := int(state["house_hp"])
 	for _tick in 4000:
-		# Fire when the crowd is on top of them, which is what a player does.
-		# Since task 0129 the flare goes up from the house, so it is fired
-		# when the first of the crowd is at the walls (two tiles past the
-		# flare's own reach from the centre: a walker bites on arriving).
-		if press and Ability.ready(state) \
-				and _crowd_near(state, Farm.house_centre(state), 2) >= 1:
+		# Fire when the crowd is under the aim, which is what a player does.
+		if press and Ability.ready(state) and _crowd_near(state, stand) >= 3:
 			(state["intent"] as Dictionary)["ability"] = true
 		Sim.advance(state, 1)
 		if Entities.count(state) == 0:
@@ -10172,9 +10168,15 @@ func _flare_a_wave(seed_value: int, press: bool) -> Dictionary:
 	}
 
 
+## Where the next flare goes (task 0135): `intent.ability_cell`, the level
+## the guardian's cursor writes.
+func _aim(state: Dictionary, cell: Vector2i) -> void:
+	(state["intent"] as Dictionary)["ability_cell"] = [cell.x, cell.y]
+
+
 ## How many enemies are inside a flare's reach of this cell.
-func _crowd_near(state: Dictionary, cell: Vector2i, beyond: int = 0) -> int:
-	var radius := int(GameData.ABILITY["radius_tiles"]) + beyond
+func _crowd_near(state: Dictionary, cell: Vector2i) -> int:
+	var radius := int(GameData.ABILITY["radius_tiles"])
 	var near := 0
 	for id in Entities.ids(state):
 		var at := Entities.cell_of(state, id)
@@ -14349,14 +14351,15 @@ func _task_0082_shots() -> void:
 	# because the pad's names are what has to fit there. Seventeen since task
 	# 0129: the farmer passed out at 02:00, the one place that pose is seen.
 	# Eighteen since task 0132: build mode by day, the buildings' palette.
-	# Nineteen since 0134: the repair cursor and its tooltip.
-	expect(names.size() == 19,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode and the repair cursor",
+	# Nineteen since 0134: the repair cursor and its tooltip. Twenty since
+	# 0135: the flare's aiming preview.
+	expect(names.size() == 20,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor and the aim",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
-			"passed_out", "build_day", "repair", "options_controls_pad"]:
+			"passed_out", "build_day", "repair", "aim", "options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

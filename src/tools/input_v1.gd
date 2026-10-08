@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 9
+const V1_CASES := 10
 
 
 func _process(delta: float) -> bool:
@@ -59,6 +59,7 @@ func _run() -> void:
 	await _case_0131_cursor()
 	await _case_0133_hotbar()
 	await _case_0134_repair()
+	await _case_0135_flare_aim()
 	_finish()
 
 
@@ -820,5 +821,63 @@ func _case_0134_repair() -> void:
 	expect(cursor.by_pad() and int(Farm.occupant(state, spot)["hp"]) > hurt,
 		"and a pad's A mends it too",
 		"%d to %d" % [hurt, int(Farm.occupant(state, spot)["hp"])])
+	await close_scene()
+	_completed += 1
+
+
+## 0135 - aiming the flare: the key fires at the cursor, the button arms it
+## and the next click fires where it lands, with the reach drawn meanwhile.
+func _case_0135_flare_aim() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	await frames(4)
+	var cursor := world.cursor()
+
+	# **The key**: move the cursor, press F, the flare goes off there.
+	var aim := world.screen_to_cell(Vector2(300.0, 130.0))
+	var motion := InputEventMouseMotion.new()
+	motion.position = world.cell_to_screen(aim)
+	motion.global_position = motion.position
+	root.push_input(motion)
+	await frames(2)
+	expect(cursor.cell() == aim, "the cursor is on the cell to aim at", str(cursor.cell()))
+	await press_key(KEY_F, true)
+	await until(func() -> bool: return Ability.flares_used(state) > 0, "the flare to go off")
+	await press_key(KEY_F, false)
+	expect(Ability.flare_at(state) == [aim.x, aim.y],
+		"pressing the ability key flares the cursor's cell", str(Ability.flare_at(state)))
+
+	# **The button**: armed, the reach shows round the cursor and the look is
+	# aim; the next click flares the clicked cell; cancel disarms.
+	(state["ability"] as Dictionary)["cooldown"] = 0
+	await frames(2)
+	await click_control("FlareButton")
+	await frames(2)
+	expect(cursor.is_armed() and cursor.is_aiming() and cursor.look() == &"aim",
+		"the FLARE button arms it: the reach is drawn and the cursor reads aim")
+	var reach := cursor.reach_cells()
+	var side := int(GameData.ABILITY["radius_tiles"]) * 2 + 1
+	expect(reach.size() == side * side and reach.has(cursor.cell()),
+		"the square is radius_tiles round the cursor, the cells the flare hits", str(reach.size()))
+	await tap_key(KEY_ESCAPE)
+	await frames(2)
+	expect(not cursor.is_armed() and Ability.flares_used(state) == 1,
+		"cancel disarms it and fires nothing")
+	await click_control("FlareButton")
+	await frames(2)
+	var target := world.screen_to_cell(Vector2(180.0, 110.0))
+	await click_cell(target)
+	await until(func() -> bool: return Ability.flares_used(state) > 1, "the armed flare to go off")
+	expect(Ability.flare_at(state) == [target.x, target.y] and not cursor.is_armed(),
+		"and the next click flares the clicked cell", str(Ability.flare_at(state)))
 	await close_scene()
 	_completed += 1

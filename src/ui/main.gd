@@ -258,6 +258,7 @@ func _hand_out() -> void:
 	_hud.driver = _driver
 	_hud.show_state(_driver.state)
 	_night_hud.driver = _driver
+	_night_hud.cursor = _world.cursor()
 	_night_hud.show_state(_driver.state)
 	_tech.show_state(_driver.state)
 	_build.show_state(_driver.state, _world)
@@ -328,7 +329,10 @@ func _process(_delta: float) -> void:
 		_quiet = holding or Input.is_action_pressed(&"ability") \
 			or Input.is_action_pressed(&"cancel")
 	var live := not _was_paused and not _quiet
-	if live and ability:
+	# **Only a press that can fire is written** (task 0135): `Ability.tick` runs
+	# at night alone, so a press by day stayed in the intent and went off on
+	# the night's first tick, wherever the cursor happened to be.
+	if live and ability and Ability.ready(_driver.state):
 		intent["ability"] = true
 	if live and interact:
 		intent["interact"] = true
@@ -360,7 +364,10 @@ func _drive_cursor(delta: float) -> void:
 	var phase := int(_driver.state["phase"])
 	var on := phase == Phases.PREPARATION or phase == Phases.NIGHT
 	cursor.set_active(on)
+	var intent: Dictionary = _driver.state["intent"]
 	if not on:
+		# No cursor, no aim: a flare asked for now goes nowhere and is refused.
+		intent["ability_cell"] = [-1, -1]
 		_tooltip.show_world("", Vector2.ZERO)
 		return
 	var step := Vector2i.ZERO
@@ -372,8 +379,17 @@ func _drive_cursor(delta: float) -> void:
 		# The camera follows a stepped cursor near the edge of the view.
 		_world.keep_in_view(cursor.centre(), 2.0 * float(GameData.TILE_SIZE))
 	var cell := cursor.cell()
-	(_driver.state["intent"] as Dictionary)["build_cell"] = [cell.x, cell.y]
-	cursor.set_look(_cursor_look(cell))
+	intent["build_cell"] = [cell.x, cell.y]
+	# **The flare goes where the cursor is** (task 0135): a level, every frame.
+	intent["ability_cell"] = [cell.x, cell.y]
+	# Its reach is shown while the flare is ready and the FLARE button is armed
+	# or the ability key held - and then the cursor reads aim.
+	var ready := Ability.ready(_driver.state)
+	if not ready:
+		cursor.disarm()
+	var aiming := ready and (cursor.is_armed() or Input.is_action_pressed(&"ability"))
+	cursor.set_aiming(aiming)
+	cursor.set_look(&"aim" if aiming else _cursor_look(cell))
 	var mending := cursor.look() == &"repair"
 	var said := Describe.under_cursor(_driver.state, cell)
 	# **And why not, when the cursor says blocked** (task 0133): the night's
@@ -543,9 +559,12 @@ func _input(event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# **The cursor's confirm mends** (task 0134) when build mode is not up to
-	# take it: a click or A on whatever the cursor reads as repair.
-	if _world.cursor().confirm_repair(_driver.state, event):
+	# **The cursor's confirm** when build mode is not up to take it: an armed
+	# flare goes off there (task 0135), or what it reads as repair is mended
+	# (task 0134). `cancel` puts an armed flare away before it opens a menu.
+	var cursor := _world.cursor()
+	if cursor.cancel_aim(event) or cursor.confirm_flare(_driver.state, event) \
+			or cursor.confirm_repair(_driver.state, event):
 		get_viewport().set_input_as_handled()
 		return
 	if not event.is_action_pressed(&"cancel") or not escape_is_free():

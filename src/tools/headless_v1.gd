@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 15
+const GROUPS := 16
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -84,6 +84,7 @@ func _run() -> void:
 	_task_0131_guardian()
 	_task_0132_night_build()
 	_task_0134_cursor_repair()
+	_task_0135_aimed_flare()
 
 
 func _finish() -> void:
@@ -1102,13 +1103,15 @@ func _task_0129_asleep() -> void:
 	expect(not bool(intent["interact"]) and not bool(intent["cancel"]),
 		"the edges are consumed, not left for the morning")
 
-	# **The flare goes up from the house** until 0135's cursor aims it.
+	# **The flare goes off without him, where it is aimed** (task 0135; 0129
+	# put it on the house centre until the cursor could aim it).
 	expect(Ability.ready(state), "the flare is charged at night")
+	var house := Farm.house_centre(state) + Vector2i(2, 3)
+	intent["ability_cell"] = [house.x, house.y]
 	intent["ability"] = true
 	Sim.advance(state, 1)
-	var house := Farm.house_centre(state)
 	expect(Ability.flare_at(state) == [house.x, house.y],
-		"a flare lands on the house centre", str(Ability.flare_at(state)))
+		"a flare lands on the aimed cell", str(Ability.flare_at(state)))
 
 	# **REPAIR without him**: `repair_cell` on the house, in the build step.
 	var mend := State.create(1292)
@@ -1464,4 +1467,57 @@ func _task_0134_cursor_repair() -> void:
 	Farm.damage(day, bench, 20)
 	expect(Interact.verb_at(day, bench) == &"repair",
 		"and so does a hurt workshop", str(Interact.verb_at(day, bench)))
+	_completed += 1
+
+
+## 0135 - the flare goes where it is aimed.
+func _task_0135_aimed_flare() -> void:
+	# **One zombie by the aimed cell and one by the house**: only the first
+	# is hit and slowed.
+	var state := State.create(1350)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	var house := Farm.house_centre(state)
+	var radius := int(GameData.ABILITY["radius_tiles"])
+	var aim := house + Vector2i(radius * 3, radius * 2)
+	if not Grid.in_bounds(aim):
+		aim = house - Vector2i(radius * 3, radius * 2)
+	var near := Entities.spawn(state, &"walker", aim + Vector2i(1, 0))
+	# Off the walls - a walker that reaches the house bites and is gone.
+	var home := Entities.spawn(state, &"walker", house + Vector2i(0, 4))
+	Entities.set_hp(state, near, 500)
+	Entities.set_hp(state, home, 500)
+	var intent: Dictionary = state["intent"]
+	intent["ability_cell"] = [aim.x, aim.y]
+	intent["ability"] = true
+	Sim.advance(state, 1)
+	expect(Ability.flare_at(state) == [aim.x, aim.y], "the flare goes off on the aimed cell",
+		str(Ability.flare_at(state)))
+	expect(int(Entities.get_one(state, near).get("hp", -1)) in range(1, 500) and Ability.is_slowed(state, near),
+		"the zombie by the aimed cell is hit and slowed")
+	expect(int(Entities.get_one(state, home).get("hp", -1)) == 500 and not Ability.is_slowed(state, home),
+		"and the one by the house is not touched")
+
+	# **Nowhere is refused, and keeps its charge**: `[-1, -1]` and off the farm.
+	for nowhere in [[-1, -1], [GameData.GRID_WIDTH + 3, 2]]:
+		var dark := State.create(1351)
+		NightRoad.to_night(dark)
+		NightRoad.park(dark)
+		var dark_intent: Dictionary = dark["intent"]
+		dark_intent["ability_cell"] = nowhere
+		dark_intent["ability"] = true
+		Sim.advance(dark, 1)
+		expect(Ability.flares_used(dark) == 0 and Ability.ready(dark)
+			and Ability.charge_percent(dark) == 100 and Ability.flare_at(dark).is_empty(),
+			"a flare at %s is refused and keeps its charge" % str(nowhere),
+			"used %d, ready %s" % [Ability.flares_used(dark), Ability.ready(dark)])
+		expect(not bool(dark_intent["ability"]), "and the press is consumed all the same")
+
+	# **An old save is filled in**: `ability_cell` is nowhere until a cursor
+	# says otherwise.
+	var old := State.create(1352)
+	(old["intent"] as Dictionary).erase("ability_cell")
+	State.reconcile(old)
+	expect((old["intent"] as Dictionary).get("ability_cell", null) == [-1, -1],
+		"reconcile fills in ability_cell as nowhere", str((old["intent"] as Dictionary).get("ability_cell")))
 	_completed += 1

@@ -40,6 +40,10 @@ var _state: Dictionary = {}
 ## do things and never reaches into the state to do them.
 var driver: SimDriver
 
+## The guardian's cursor, which the FLARE button arms (task 0135). Set by
+## `main.gd`, like the driver.
+var cursor: GuardianCursor
+
 var _strip: ColorRect
 var _night: Label
 var _wave: Label
@@ -293,8 +297,13 @@ func _refresh_controls() -> void:
 ## changes the state itself, so the button, the key and the autoplayer of task
 ## 0067 all take the same road into the rules.
 func _do_flare() -> void:
-	if not _state.is_empty():
-		(_state["intent"] as Dictionary)["ability"] = true
+	# **Armed, not fired** (task 0135): the flare goes where it is aimed, so
+	# the button hands the aim to the cursor and the next confirm lets it go.
+	if not _state.is_empty() and cursor != null and Ability.ready(_state):
+		cursor.arm()
+	# Let go of the focus, so a pad's next A confirms at the cursor rather
+	# than pressing the button again.
+	_flare.release_focus()
 
 
 func _do_speed() -> void:

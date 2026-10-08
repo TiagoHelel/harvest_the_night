@@ -133,9 +133,16 @@ static func slowed_ticks(per_tile: int) -> int:
 
 # -------------------------------------------------------------------- doing
 
-## Set one off. False when it was not ready, and then nothing at all happened.
+## Set one off **where it is aimed** (task 0135): `intent.ability_cell`, which
+## the guardian's cursor writes. False when it was not ready or is aimed at
+## nowhere - off the farm, or `[-1, -1]` - and then nothing at all happened:
+## no cooldown, no count.
 static func use(state: Dictionary) -> bool:
 	if not ready(state):
+		return false
+	var aimed: Array = (state["intent"] as Dictionary).get("ability_cell", [-1, -1])
+	var centre := Vector2i(int(aimed[0]), int(aimed[1]))
+	if not Grid.in_bounds(centre):
 		return false
 
 	var one: Dictionary = state["ability"]
@@ -143,9 +150,6 @@ static func use(state: Dictionary) -> bool:
 		* Tech.bonus(state, "flare_percent", 100) / 100
 	one["flares"] = int(one["flares"]) + 1
 
-	# **On the house** until 0135 aims it with the cursor: the farmer is in
-	# bed at night (task 0129), so the flare goes up from the farmhouse.
-	var centre := Farm.house_centre(state)
 	one["flare"] = [centre.x, centre.y]
 	one["flare_ticks"] = int(GameData.ABILITY["flare_ticks"])
 

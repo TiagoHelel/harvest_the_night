@@ -362,6 +362,8 @@ func _crowd() -> void:
 	await _shoot("busy_burning","75 real burning enemies / bounded warm flames and tiny embers")
 	# Use the actual ability and its real damage/slow, with an unobserved twin.
 	_state["player"]["pos"] = [12*Player.SUBTILE+Player.SUBTILE/2,10*Player.SUBTILE+Player.SUBTILE/2]
+	# Aimed there since task 0135: a flare at nowhere is refused.
+	_state["intent"]["ability_cell"] = [12, 10]
 	var control := _state.duplicate(true)
 	_observers_before()
 	_state["tick"] = int(_state["tick"])+1

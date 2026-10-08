@@ -1,7 +1,7 @@
 # 0135 - The flare goes where you aim it
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0131
 - **Likely files:** src/core/ability.gd, src/core/player.gd, src/ui/main.gd, src/ui/guardian_cursor.gd, src/ui/world_view.gd, src/ui/night_hud.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

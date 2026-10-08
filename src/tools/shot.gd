@@ -80,6 +80,7 @@ const SCENARIOS: Array = [
 	["refused", "build mode, over something built", ""],
 	["build_day", "build mode by day: the buildings", ""],
 	["repair", "the cursor over a hurt tower at night", ""],
+	["aim", "the flare armed: its reach round the cursor", ""],
 	["house_interior", "the furnished farmhouse", ""],
 	["farm_extension", "planting on the new southern land", ""],
 	["larger_stations", "the larger farm buildings", ""],
@@ -633,6 +634,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"larger_stations": _set_larger_stations(state)
 		"passed_out": _set_passed_out(state)
 		"repair": _set_repair(state)
+		"aim": _set_aim(state)
 		"options_controls_pad": _set_options_controls_pad(state)
 
 	if int(state["phase"]) == Phases.DAY:
@@ -804,6 +806,12 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 			var repair_view: Node = main.get_node_or_null("%WorldView")
 			if repair_view != null:
 				repair_view.cursor().place_at(_repair_at)
+		"aim":
+			var aim_view: Node = main.get_node_or_null("%WorldView")
+			if aim_view != null:
+				aim_view.cursor().place_at(_repair_at)
+				aim_view.cursor().arm()
+				main.call("_drive_cursor", 0.0)
 		"build_day":
 			var day_mode: Node = main.get_node_or_null("%BuildMode")
 			var day_view: Node = main.get_node_or_null("%WorldView")
@@ -1014,6 +1022,23 @@ func _set_repair(state: Dictionary) -> void:
 	var towers: Array = Farm.cells_with(state, &"gun_tower")
 	_repair_at = towers[0] if not towers.is_empty() else Farm.house_centre(state)
 	Farm.damage(state, _repair_at, 25)
+	_look_at(_repair_at)
+
+
+## The flare armed at night, task 0135: its reach drawn round the cursor,
+## with walkers just inside the rim and just outside it, so the picture
+## says whether the square is what the flare hits.
+func _set_aim(state: Dictionary) -> void:
+	_a_sown_field(state)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	var radius := int(GameData.ABILITY["radius_tiles"])
+	_repair_at = _open_ground_near(state, Farm.house_centre(state) + Vector2i(9, 5))
+	for step in [Vector2i(radius, 0), Vector2i(-radius, radius), Vector2i(radius + 1, 1),
+			Vector2i(0, -radius - 1)]:
+		var at: Vector2i = _repair_at + step
+		if Farm.walkable(state, at):
+			Entities.set_hp(state, Entities.spawn(state, &"walker", at), 999)
 	_look_at(_repair_at)
 
 

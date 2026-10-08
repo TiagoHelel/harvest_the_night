@@ -80,9 +80,13 @@ static func initial() -> Dictionary:
 			# want done with it. `[-1, -1]` is "nowhere".
 			"build_cell": [-1, -1],
 			# **Mend this cell, from the night** (task 0129): an edge, `[-1, -1]`
-			# when idle. The night HUD's REPAIR writes the house's cell until
-			# 0134's cursor points it anywhere; `Building.tick` spends it.
+			# when idle. The guardian's cursor writes it on a confirm (0134);
+			# `Building.tick` spends it.
 			"repair_cell": [-1, -1],
+			# **Where the flare goes** (task 0135): a level, written every frame
+			# from the guardian's cursor like `build_cell`. `[-1, -1]` is
+			# nowhere, and a flare at nowhere is refused.
+			"ability_cell": [-1, -1],
 			"build_place": false,
 			"build_sell": false,
 			# **Upgrading a tower in place**, task 0064. A third verb on the

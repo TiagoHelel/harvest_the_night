@@ -216,6 +216,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 
+	# **An armed flare is put away before anything else** (task 0135).
+	if _by_cursor() and _view.cursor().cancel_aim(event):
+		get_viewport().set_input_as_handled()
+		return
+
 	# **Escape leaves build mode first.** Escape opens the pause menu when it
 	# has nothing else to stop (`Main.escape_is_free`), and a player holding a
 	# wall over the farm who presses it means "put that down", not "pause".
@@ -232,9 +237,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	# but since task 0095 a player can move them, and a mouse button is a
 	# binding like any other rather than a special case.
 	var intent: Dictionary = _state["intent"]
-	# **Over something to mend, the confirm mends** (task 0134), whatever is in
-	# hand: the cursor says so with its repair look.
-	if _by_cursor() and _view.cursor().confirm_repair(_state, event):
+	# **An armed flare, then something to mend, take the confirm first**
+	# (tasks 0135, 0134), whatever is in hand: the cursor's look says which.
+	if _by_cursor() and (_view.cursor().confirm_flare(_state, event)
+			or _view.cursor().confirm_repair(_state, event)):
 		get_viewport().set_input_as_handled()
 		return
 	# **At night `interact` confirms at the cursor too** (task 0133): A on a

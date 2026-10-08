@@ -13946,3 +13946,92 @@ are on the hurt tower, and the tooltip reads "GUN TOWER - 35/60 HP - level 1"
 over "mend all: 2 iron, 2 wood - 25 of 25 HP paid for" ("TORRE DE TIRO - 35/60
 de vida - nível 1" / "consertar tudo: 2 ferro, 2 madeira - 25 de 25 de vida
 pagos"). The night HUD has FLARE and the speed, and no REPAIR.
+
+## 0135 - The flare goes where you aim it - done 2026-10-08
+
+What changed: the flare goes off where the player aims it.
+
+**The rule** (`src/core`):
+- `intent` gains a level, `ability_cell` (`[-1, -1]` is nowhere), which
+  reconcile fills in old saves.
+- `Ability.use` centres on it. Nowhere or off the farm is refused before
+  anything is spent: no cooldown, no `flares`, and the press is consumed all
+  the same.
+- 0129's interim house centre is gone.
+
+**The aim** (`src/ui`):
+- `Main._drive_cursor` writes `ability_cell` every frame from the guardian's
+  cursor, like `build_cell`, and nowhere when there is no cursor.
+- The ability key (F, RT on a pad) fires on the press at the cursor.
+- The night HUD's FLARE button now **arms** it (`GuardianCursor.arm`) and
+  lets go of its focus, so a pad's next A confirms. The next confirm, a
+  click or A, fires at the cursor (`confirm_flare`, which comes before
+  repair and placement in both `BuildMode` and `Main`), and `cancel`
+  disarms (`cancel_aim`, before build mode's or the pause menu's escape).
+- While the flare is ready and the button is armed or the key held, the
+  cursor reads `aim` (A004's moon look) and draws the reach. That is
+  `ABILITY.radius_tiles` round its cell, a Chebyshev square, the cells
+  `Ability.use` hits (`reach_cells`): code, like the route preview.
+- **Note:** with the key firing on its press, as the prompt asks, the
+  key-held preview lasts only as long as the key is down before the flare
+  goes off. The armed button is where the preview lives. 0139's hint line
+  is the place to revisit it.
+
+**Found by the aim test: a day press queued a flare.**
+- `Ability.tick` runs only at night, so F pressed by day stayed in `intent`
+  and went off on the night's first tick, wherever the cursor happened to be.
+- `_case_0054_ability` presses F by day on purpose. Before this task the
+  stale flare went off on the house, and the victim happened to stand beside
+  it.
+- `Main` now writes the press only when `Ability.ready` says it can fire.
+
+**What 0129 weakened is given back** (`headless_check`'s `_task_0054_ability`):
+- `_flare_a_wave` aims at the crowd four tiles out on the walkers' road, and
+  fires when three are inside its reach, as before 0129.
+- "and one press measurably changes that" is strict `<` again: 8 walkers do
+  80 damage to the house without the flare and **50 with it**. The interim
+  comment is gone.
+- The other checks aim through a new `_aim(state, cell)`:
+  - "it went off over the house" became "where it was aimed", at a cell off
+    the house;
+  - the line and the slow aim at the house;
+  - `_count_the_flares` aims at the house and counts only flares that went
+    off: unaimed, it had counted every ready tick, 1674.
+- `_case_0054_ability` aims with the mouse and stands its victim beside the
+  aimed cell. `_case_0056_night_hud` arms FLARE, then clicks a cell and
+  expects the flare there.
+- 0129's `_task_0129_asleep` expects the flare on its aimed cell.
+- `effect_showcase` aims at the cell it used to stand the farmer on.
+
+A new shot scenario, `aim`, arms the flare over open ground with walkers at
+the rim; `headless_check` counts 20 scenarios.
+
+Files: src/core/{player,ability}.gd, src/ui/{guardian_cursor,main,build_mode,
+night_hud}.gd, src/tools/{headless_check,input_check,headless_v1,input_v1,
+effect_showcase,shot}.gd, tools/determinism_sim_hash.txt,
+implementation/shots/0135/
+
+Verify: the full run gave **58 passed and the sim hash moved as intended**.
+`verify.py --hashes --accept` then recorded it and printed **PASS (54 checks,
+0 failed)**. OVER BUDGET 300, as before. Suite times: headless_check 85.3 s, headless_v1 3.1 s,
+input_check 90.7 s, input_v1 14.9 s. Counts:
+- headless_check 16214 (+2: the scenario, and the armed-then-fired check in
+  0056);
+- headless_v1 223 (+8). With one walker by the aimed cell and one by the
+  house, the flare goes off on the aim; the first is hit and slowed and the
+  second untouched. `[-1, -1]` and a cell off the farm are each refused with
+  the charge kept and the press consumed. Reconcile fills `ability_cell` in
+  as nowhere.
+- input_check 1057 (+1);
+- input_v1 87 (+6). F flares the cursor's cell. FLARE arms it: the reach is
+  drawn, the look is aim, and the square is radius_tiles round the cursor.
+  Escape disarms with nothing fired, and after arming again the next click
+  flares the clicked cell.
+
+**sim 2823820161 -> 204996281**: `intent` gains `ability_cell`, which is hashed.
+The determinism scenario fires no flare, so that is all of it. **data
+2599455698 unchanged.**
+
+Shot 0135 `aim` opened: the 7x7 reach square sits round the cursor's aim
+look, the walkers inside it are the ones a flare there would hit, and nothing
+covers the hotbar or the night HUD.
