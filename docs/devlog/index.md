@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-120 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
+121 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -164,6 +164,7 @@ is the sort of thing this list exists to say out loud.
 | 0117 | Three stale documents | 2026-10-07 |
 | 0118 | One road into the waves | 2026-10-07 |
 | 0119 | Tests and tools build in the build step | 2026-10-08 |
+| 0120 | One road for art that has not arrived | 2026-10-08 |
 
 ## Every time the game changed underneath itself
 

@@ -133,6 +133,16 @@ def check_art_requests():
     return check("art requests", code == 0, tail(out, 3))
 
 
+def check_placeholders():
+    """The stand-in registry (task 0120): every entry names a pack that has a
+    request and is not integrated yet, no stand-in shadows a raster-owned
+    path, and every stand-in has a frame on disk."""
+    if not os.path.exists(rel("tools", "placeholders.py")):
+        return skip("placeholders", "no stand-in registry yet - task 0120")
+    code, out = run([sys.executable, "tools/placeholders.py", "--check"])
+    return check("placeholders", code == 0, tail(out, 3))
+
+
 def check_godot_present():
     if not os.path.exists(rel("project.godot")):
         return skip("godot project", "no project.godot yet - task 0001")
@@ -732,6 +742,7 @@ def main():
     check_python()
     check_backlog()
     check_art_requests()
+    check_placeholders()
     check_godot_present()
     check_scripts_parse()
     check_core_is_pure()

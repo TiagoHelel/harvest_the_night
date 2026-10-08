@@ -99,7 +99,7 @@ func _build_room() -> void:
 		var sprite := _sprite(str(piece["id"]), furniture, at)
 		sprite.position += Vector2(FURNITURE_OFFSETS.get(piece["id"], Vector2.ZERO))
 		sprite.name = str(piece["id"])
-		sprite.offset = -Vector2(RasterArt.FRAMES[sprite.texture.resource_path]["pivot"])
+		sprite.offset = -Vector2(PlaceholderArt.frame(sprite.texture.resource_path)["pivot"])
 		if piece["id"] == &"fireplace":
 			_flame = ShaderMaterial.new()
 			_flame.shader = HEARTH_FLAME

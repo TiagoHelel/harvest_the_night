@@ -988,7 +988,7 @@ func _refresh() -> void:
 			anchor = _fixture_corner[id]
 		var footprint := Building.bounds_at(_state, cell).size if Building.size_of(id) != Vector2i.ONE else Vector2i.ONE
 		var whole := _texture_for(_station_art(id, on, anchor))
-		var grouped := footprint != Vector2i.ONE and (RasterArt.FRAMES.has(whole.resource_path)
+		var grouped := footprint != Vector2i.ONE and (PlaceholderArt.has_frame(whole.resource_path)
 			or (whole.get_width() >= footprint.x * GameData.TILE_SIZE
 			and whole.get_height() >= footprint.y * GameData.TILE_SIZE))
 		if grouped and cell != anchor:
@@ -1086,7 +1086,7 @@ func _refresh_actors() -> void:
 		# they occupy is the same rule the player uses, and it is what makes
 		# a zombie stand on the tile the rules say it is on.
 		sprite.position = ArtPlacement.contact(one["pos"])
-		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
+		var metadata: Dictionary = PlaceholderArt.frame(sprite.texture.resource_path)
 		sprite.offset = -Vector2(metadata.get("pivot",
 			Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
 
@@ -1112,7 +1112,7 @@ func _refresh_deaths(delta: float) -> void:
 		sprite.texture = _texture_for(EnemyDeaths.pose(cue))
 		sprite.position = ArtPlacement.contact([cue["pos"].x, cue["pos"].y])
 		sprite.flip_h = bool(cue["right"])
-		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
+		var metadata: Dictionary = PlaceholderArt.frame(sprite.texture.resource_path)
 		sprite.offset = -Vector2(metadata.get("pivot", Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
 
 
@@ -1151,7 +1151,7 @@ func _refresh_retreats(delta: float) -> void:
 		sprite.position = ArtPlacement.contact(EnemyRetreats.position(cue))
 		sprite.flip_h = bool(cue["right"])
 		sprite.modulate = Color(1, 1, 1, EnemyRetreats.alpha(cue))
-		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
+		var metadata: Dictionary = PlaceholderArt.frame(sprite.texture.resource_path)
 		sprite.offset = -Vector2(metadata.get("pivot", Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
 
 
@@ -1167,7 +1167,7 @@ func _draw_shots() -> void:
 
 
 static func authored_tower(id: StringName) -> bool:
-	return bool((RasterArt.FRAMES.get(BUILDING_DIR + str(id) + ".png", {}) as Dictionary).get("tower", false))
+	return bool((PlaceholderArt.frame(BUILDING_DIR + str(id) + ".png") as Dictionary).get("tower", false))
 
 
 static func tower_name(on: Dictionary, suffix: String = "") -> StringName:
@@ -1574,7 +1574,7 @@ func _art_for(on: Dictionary, cell: Vector2i) -> StringName:
 
 
 static func connected_barrier(id: StringName) -> bool:
-	return bool((RasterArt.FRAMES.get(BUILDING_DIR + str(id) + ".png", {}) as Dictionary).get("connected", false))
+	return bool((PlaceholderArt.frame(BUILDING_DIR + str(id) + ".png") as Dictionary).get("connected", false))
 
 
 ## The same N1/E2/S4/W8 order as terrain. No empty-cell decorative posts;

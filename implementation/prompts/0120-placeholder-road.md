@@ -1,7 +1,7 @@
 # 0120 - One road for art that has not arrived
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0112
 - **Likely files:** src/ui/placeholder_art.gd (new), src/ui/art_placement.gd, src/ui/house_view.gd, src/ui/pixel_effects.gd, src/ui/player_view.gd, src/ui/player_art.gd, src/ui/world_view.gd, src/ui/README.md, tools/placeholders.py (new), tools/verify.py, src/tools/headless_v1.gd
 

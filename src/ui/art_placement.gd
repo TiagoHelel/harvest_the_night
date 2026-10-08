@@ -5,7 +5,7 @@ extends RefCounted
 static func place(sprite: Sprite2D, cell: Vector2i, footprint := Vector2i.ONE) -> void:
 	var tile := float(GameData.TILE_SIZE)
 	var texture := sprite.texture
-	var metadata: Dictionary = RasterArt.FRAMES.get(texture.resource_path, {})
+	var metadata: Dictionary = PlaceholderArt.frame(texture.resource_path)
 	var pivot: Vector2 = Vector2(metadata.get("pivot",
 		Vector2i(texture.get_width() / 2, texture.get_height())))
 	sprite.centered = false
@@ -35,7 +35,7 @@ static func contact(subtile: Array) -> Vector2:
 static func emission(id: StringName, corner: Vector2, field: StringName,
 		fallback: Vector2, footprint := Vector2i.ZERO) -> Vector2:
 	for folder in [WorldView.BUILDING_DIR, WorldView.PROP_DIR]:
-		var metadata: Dictionary = RasterArt.FRAMES.get(str(folder) + str(id) + ".png", {})
+		var metadata: Dictionary = PlaceholderArt.frame(str(folder) + str(id) + ".png")
 		if metadata.has(field):
 			var scale := visual_scale(str(folder) + str(id) + ".png")
 			if scale == 1.0:
@@ -49,7 +49,7 @@ static func emission(id: StringName, corner: Vector2, field: StringName,
 ## Several measured glass panes belong to one drawing, never its nine cells.
 static func emissions(id: StringName, corner: Vector2, field: StringName,
 		fallback: Vector2, single_field: StringName = &"light", footprint := Vector2i.ZERO) -> Array[Vector2]:
-	var metadata: Dictionary = RasterArt.FRAMES.get(WorldView.BUILDING_DIR + str(id) + ".png", {})
+	var metadata: Dictionary = PlaceholderArt.frame(WorldView.BUILDING_DIR + str(id) + ".png")
 	var points: Array[Vector2] = []
 	for point in metadata.get(field, []):
 		var scale := visual_scale(WorldView.BUILDING_DIR + str(id) + ".png")

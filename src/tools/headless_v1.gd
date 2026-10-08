@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 6
+const GROUPS := 7
 
 var passed := 0
 var failed := 0
@@ -73,6 +73,7 @@ func _run() -> void:
 	_task_0115_spawn_room()
 	_task_0116_ammo()
 	_task_0118_road()
+	_task_0120_placeholders()
 
 
 func _finish() -> void:
@@ -676,4 +677,74 @@ func _task_0118_road() -> void:
 	expect(NightRoad.run_night(parked, 300) == 300
 		and int(parked["phase"]) == Phases.NIGHT,
 		"a parked night is still a night when the runner's cap comes")
+	_completed += 1
+
+
+## 0120 - one road for art that has not arrived.
+func _task_0120_placeholders() -> void:
+	# **Every entry resolves through the lookup** to a texture whose size and
+	# pivot are the entry's: the stand-in sits in the box the real art will.
+	var wrong: Array = []
+	var resolved := 0
+	for name in GameData.sorted_names(PlaceholderArt.POSES.keys()):
+		var entry: Dictionary = PlaceholderArt.POSES[name]
+		var shape: Dictionary = entry["geometry"]
+		for i in int(entry["frames"]):
+			var path := "%s%s_%d.png" % [PlaceholderArt.DIR, name, i]
+			var answer := PlaceholderArt.frame(path)
+			var file := PlaceholderArt.texture_path(path)
+			var texture: Texture2D = load(file) if ResourceLoader.exists(file) else null
+			var real: Dictionary = RasterArt.FRAMES.get(file, {})
+			if answer.is_empty() or texture == null \
+					or Vector2i(texture.get_size()) != shape["canvas"] \
+					or answer["pivot"] != shape["pivot"] \
+					or real.get("pivot", Vector2i(-1, -1)) != shape["pivot"] \
+					or not is_equal_approx(float(real.get("draw_scale", 1.0)),
+						float(shape["draw_scale"])):
+				wrong.append(path)
+			else:
+				resolved += 1
+	expect(resolved > 0 and wrong.is_empty(),
+		"every stand-in frame loads at its entry's canvas, pivot and scale",
+		"%d resolved, wrong: %s" % [resolved, str(wrong.slice(0, 4))])
+	expect(PlaceholderArt.frame("res://sprites/actors/walk_south_0.png")
+		== RasterArt.FRAMES["res://sprites/actors/walk_south_0.png"],
+		"real art answers from RasterArt first")
+	expect(PlaceholderArt.frame("res://sprites/actors/nobody_0.png").is_empty()
+		and not PlaceholderArt.has_frame("res://sprites/actors/run_south_8.png"),
+		"and a path nobody knows answers nothing")
+
+	# **The farmer's road** answers a registered name the way PlayerFrames
+	# answers a real one.
+	var run := PlayerArt.animation(&"run_south")
+	expect(int(run.get("frames", 0)) == 8
+		and is_equal_approx(float(run.get("seconds", 0.0)), 0.07),
+		"run_south: eight frames at 0.07 s, from the registry", str(run))
+	expect(PlayerArt.texture_path(&"run_south", 0)
+		== PlayerArt.texture_path(&"walk_south", 0),
+		"and its frame 0 is the walk's texture", PlayerArt.texture_path(&"run_south", 0))
+	var walk := PlayerArt.animation(&"walk_south")
+	expect(int(walk.get("frames", 0)) == int(PlayerFrames.COUNT[&"walk_south"]),
+		"a real animation still answers from PlayerFrames", str(walk))
+	expect(PlayerArt.animation(&"nobody").is_empty(), "and an unknown one, nothing")
+	# Nothing asks for the stand-ins yet: the run is still the walk, faster.
+	var running := PlayerArt.pose(Player.SOUTH, true, &"", true)
+	expect(running["name"] == &"walk_south"
+		and is_equal_approx(float(running["seconds"]), PlayerArt.RUN_FRAME_SECONDS),
+		"PlayerArt.pose still names walk_<dir> for the run", str(running))
+	var chopping := PlayerArt.pose(Player.WEST, false, &"chop")
+	expect(chopping["name"] == &"chop" and int(chopping["frames"]) == 4,
+		"and the legacy <verb> strips for work", str(chopping))
+
+	# **One lookup.** No file in src/ui/ but the registry reads the generated
+	# table directly.
+	var readers: Array = []
+	for file in DirAccess.get_files_at("res://src/ui"):
+		if not String(file).ends_with(".gd") or file == "placeholder_art.gd":
+			continue
+		var code := SuiteKit.code_lines_of("res://src/ui".path_join(file))
+		if code.contains("RasterArt.FRAMES"):
+			readers.append(file)
+	expect(readers.is_empty(), "only the lookup reads RasterArt.FRAMES in src/ui",
+		str(readers))
 	_completed += 1

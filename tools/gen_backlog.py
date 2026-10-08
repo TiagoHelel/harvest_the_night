@@ -96,7 +96,8 @@ DRESSES = """
 
 What this task puts on screen will be dressed by Codex art pack(s) {packs}
 (`implementation/backlog/packs/`). Draw it through the placeholder road of
-task 0120 until each pack is integrated - or with the pack's art if
+task 0120 (`PlaceholderArt` in `src/ui/placeholder_art.gd`, explained in
+`src/ui/README.md`) until each pack is integrated - or with the pack's art if
 `python implementation/backlog/assets.py status <pack>` already says
 `integrated`. Never wait for art and never draw or generate PNGs here.
 """

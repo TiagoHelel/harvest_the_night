@@ -166,7 +166,7 @@ func _animate(delta: float) -> void:
 	_sprite.flip_h = bool(pose["flip"])
 	# Flipping a sprite mirrors it about its offset, so the offset has to be
 	# mirrored too or the farmer steps a canvas-width sideways when they turn.
-	var metadata: Dictionary = RasterArt.FRAMES.get(path, {})
+	var metadata: Dictionary = PlaceholderArt.frame(path)
 	var feet: Vector2i = metadata.get("pivot", PlayerFrames.FEET)
 	var canvas: Vector2i = metadata.get("canvas", PlayerFrames.CANVAS)
 	_sprite.scale = Vector2.ONE * float(metadata.get("draw_scale", 1.0))
@@ -175,7 +175,7 @@ func _animate(delta: float) -> void:
 	if reacting != &"" and texture != null:
 		var reaction_path := PlayerArt.texture_path(reacting, 0)
 		# The rod pose is the older 30px farmer the glyph was drawn beside.
-		_show_bubble(_texture(reaction_path), RasterArt.FRAMES[reaction_path],
+		_show_bubble(_texture(reaction_path), PlaceholderArt.frame(reaction_path),
 			Vector2.ZERO if holding_rod else BUBBLE_LIFT)
 
 

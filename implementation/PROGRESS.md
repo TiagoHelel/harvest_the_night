@@ -13124,3 +13124,50 @@ in its build step instead of before the morning: a day without them, then the
 same night), data 1968527100 unchanged. Shots 0119 opened: `wave` has its
 eight towers firing behind the fence line; `refused` is the same build-mode
 refusal over the workshop as 0110's (it never had towers).
+
+## 0120 - One road for art that has not arrived - done 2026-10-08
+
+What changed: view only. `src/ui/placeholder_art.gd` (`PlaceholderArt`) is the
+road for things drawn before their Codex pack is integrated: `POSES`, one line
+per runtime animation - pack id, frames, seconds, loop (from the pack's
+Deliverables table), the stand-in it plays, the stand-in's own geometry and the
+pack's final one, and `spec_after` where a pack waits on a task. **The lookup**:
+`PlaceholderArt.frame(path)` answers from `RasterArt.FRAMES` first and the
+registry second (`has_frame`, `texture_path` beside it); all 14 direct reads in
+art_placement, house_view, pixel_effects, player_view and world_view moved onto
+it. **The farmer's door**: `PlayerArt.animation(name)` answers frames and
+seconds from `PlayerFrames` first and the registry second (`pose()` uses it, so
+a stand-in pose no longer errors), and `PlayerArt.texture_path(name, frame)`
+returns the stand-in's frame for a registered name. Recorded from the start,
+asked for by nothing yet: A006's `run_<dir>` x8 (stand-in: the walk frames,
+80x80/(40,72)/0.5 = the final runtime box, at `RUN_FRAME_SECONDS`) and the
+per-direction work strips `<verb>_<south|north|west>` of A007 (till, plant,
+water, harvest), A008 (chop, mine, collect, carry) and A009 (craft, trade,
+repair) - stand-in: the legacy `<verb>` strip, 48x48/(24,44) at draw 1.0, the
+same screen box as the final 96x96/(48,88) at 0.5; east stays the runtime
+mirror. `PlayerArt.pose` still names `walk_<dir>` and `<verb>`; 0122-0125
+rename the poses and delete the lines. `tools/placeholders.py` lists the packs
+on stand-ins (A006, A007, A008, A009 - all four in Codex `review`, 41
+animations); `--check`, wired into verify as "placeholders", fails on a
+missing pack, an integrated one, a raster-owned path or a stand-in with no
+frame on disk - a scratch `A999` line made it fail ("scratch_test names A999,
+which has no request in packs/"), removed. The road is documented at the top of
+the registry and in src/ui/README.md, and gen_backlog's `## Art` paragraph now
+names `PlaceholderArt` (new prompts only; existing ones say "task 0120's road",
+which the README answers).
+`_task_0120_placeholders` in headless_v1: every one of the 41 animations' frames
+loads through the lookup at its entry's canvas, pivot and draw scale (checked
+against the stand-in file's real RasterArt entry too); real art answers first;
+`run_south` is 8 frames at 0.07 s and its frame 0 is `walk_south_0`; a real
+name still answers from PlayerFrames; `pose()` unchanged for the run and work;
+no file in src/ui but the registry reads `RasterArt.FRAMES`.
+Files: src/ui/{placeholder_art (new),player_art,art_placement,house_view,
+pixel_effects,player_view,world_view}.gd, src/ui/README.md,
+tools/placeholders.py (new), tools/verify.py, tools/gen_backlog.py,
+src/tools/headless_v1.gd, implementation/shots/0120/
+Verify: **59 passed, 0 failed in 512s** (the new "placeholders" row; OVER
+BUDGET 300, as before); headless_check 16174 (+1: 0110 checks every src/ui
+file and there is one more), headless_v1 106 (+10), input_check 1074,
+input_v1 11; sim 4130513273 and data 1968527100 unchanged. Shots 0120: all 15
+pixel-identical to 0119's (compared with PIL), noon opened - the farmer where
+he was.

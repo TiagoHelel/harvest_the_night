@@ -76,7 +76,7 @@ static func path_for(family: StringName, frame: int) -> String:
 
 
 static func seconds(family: StringName) -> float:
-	return float(RasterArt.FRAMES[path_for(family, 0)]["seconds"])
+	return float(PlaceholderArt.frame(path_for(family, 0))["seconds"])
 
 
 func advance(delta: float, parent: Node2D) -> void:
@@ -118,7 +118,7 @@ func advance(delta: float, parent: Node2D) -> void:
 		if not _textures.has(path):
 			_textures[path] = load(path)
 		sprite.texture = _textures[path]
-		sprite.offset = -Vector2(RasterArt.FRAMES[path]["pivot"])
+		sprite.offset = -Vector2(PlaceholderArt.frame(path)["pivot"])
 		sprite.position = (record["at"] as Vector2).round()
 		# Steady accessibility mode holds the first silhouette with a gentle
 		# fade, instead of enlarging/flashing it or moving fragments.
