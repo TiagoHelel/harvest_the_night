@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 2
+const V1_CASES := 3
 
 
 func _process(delta: float) -> bool:
@@ -52,6 +52,7 @@ func _process(delta: float) -> bool:
 func _run() -> void:
 	await _case_0112_harness()
 	await _case_0114_house_bar()
+	await _case_0121_pad()
 	_finish()
 
 
@@ -146,3 +147,156 @@ func _case_0114_house_bar() -> void:
 		"%f against %f" % [house_bar.size.x, whole])
 	await close_scene()
 	_completed += 1
+
+
+## 0121 - a controller for every action, through synthetic pad events.
+func _case_0121_pad() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var router: Node = root.get_node_or_null(^"App")
+	var actions: Node = root.get_node_or_null(^"Actions")
+	if driver == null or router == null or actions == null:
+		expect(actions != null, "the Actions autoload is up")
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+
+	# **The stick, half tilted, walks exactly like a key.** 0.6 is past the
+	# deadzone and was truncated to standing still by `int()`.
+	var east := Player.facing(state) != Player.EAST
+	var axis_value := 0.6 if east else -0.6
+	await _pad_axis(JOY_AXIS_LEFT_X, axis_value)
+	await frames(6)
+	var pushed := int((state["intent"]["move"] as Array)[0])
+	await frames(10)
+	await _pad_axis(JOY_AXIS_LEFT_X, 0.0)
+	await frames(3)
+	expect(pushed == (1 if east else -1),
+		"a half-tilted stick writes a whole step, like a key", str(pushed))
+	expect(Player.facing(state) == (Player.EAST if east else Player.WEST),
+		"and the farmer turns to it", str(Player.facing(state)))
+
+	# **The d-pad walks too.**
+	var south := Player.facing(state) != Player.SOUTH
+	var dpad := JOY_BUTTON_DPAD_DOWN if south else JOY_BUTTON_DPAD_UP
+	await _pad_button(dpad, true)
+	await frames(15)
+	await _pad_button(dpad, false)
+	await frames(3)
+	expect(Player.facing(state) == (Player.SOUTH if south else Player.NORTH),
+		"the d-pad walks the farmer", str(Player.facing(state)))
+
+	# **A chops the tree in front of him.**
+	var tree := Vector2i(-1, -1)
+	var beside := Vector2i(-1, -1)
+	for candidate in Farm.cells_with(state, &"tree"):
+		var spot := _walkable_neighbour(state, candidate)
+		if spot != Vector2i(-1, -1):
+			tree = candidate
+			beside = spot
+			break
+	expect(beside != Vector2i(-1, -1), "there is a tree to stand beside")
+	if beside != Vector2i(-1, -1):
+		driver.running = false
+		await frames(2)
+		_stand_at(state, beside, _facing_from(beside, tree))
+		driver.running = true
+		await frames(3)
+		await _pad_button(JOY_BUTTON_A, true)
+		await frames(4)
+		var action: Dictionary = (state["player"] as Dictionary)["action"]
+		expect(Player.is_busy(state) and action.get("verb", &"") == &"chop",
+			"A starts the chopping", str(action))
+		await _pad_button(JOY_BUTTON_A, false)
+		await frames(2)
+
+	# **The labels follow the hand that is on the controls.**
+	expect(bool(actions.using_pad), "a pad press puts the names on the pad")
+	expect(actions.text_of(&"interact") == I18n.t(&"ACT_PAD_A"),
+		"interact reads as the A button", actions.text_of(&"interact"))
+	await tap_key(KEY_F20)
+	var keyboard := String(actions.text_of(&"interact"))
+	expect(not bool(actions.using_pad) and keyboard.begins_with("SPACE")
+		and keyboard == actions.shipped_text(&"interact"),
+		"and a key puts them back on the keyboard", keyboard)
+
+	# **Y opens build mode and closes it again.**
+	await _pad_tap(JOY_BUTTON_Y)
+	await frames(2)
+	expect(Building.is_active(state), "Y opens build mode")
+	await _pad_tap(JOY_BUTTON_Y)
+	await frames(2)
+	expect(not Building.is_active(state), "and Y closes it")
+
+	# **Start pauses and resumes.**
+	await _pad_tap(JOY_BUTTON_START)
+	await frames(4)
+	expect(router.here() == router.PAUSE, "Start opens the pause menu",
+		router.name_of(router.here()))
+	await _pad_tap(JOY_BUTTON_START)
+	await frames(4)
+	expect(router.here() == router.RUN, "and Start closes it",
+		router.name_of(router.here()))
+
+	# **Back sends for the night.**
+	await _pad_tap(JOY_BUTTON_BACK)
+	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
+		"the night to be sent for")
+	expect(int(state["phase"]) == Phases.PREPARATION,
+		"Back is the night button", Phases.name_of(int(state["phase"])))
+
+	# **Rebinding keeps the devices apart.** A new key keeps the pad button;
+	# a new pad input keeps the key.
+	var g := InputEventKey.new()
+	g.keycode = KEY_G
+	var a := InputEventJoypadButton.new()
+	a.button_index = JOY_BUTTON_A
+	var keyed: Dictionary = actions.bind(&"interact", g)
+	expect(bool(keyed.get("ok", false))
+		and InputMap.action_has_event("interact", g)
+		and InputMap.action_has_event("interact", a),
+		"interact on G keeps its A", str(keyed))
+	var up := InputEventJoypadMotion.new()
+	up.axis = JOY_AXIS_RIGHT_Y
+	up.axis_value = -1.0
+	var padded: Dictionary = actions.bind(&"interact", up)
+	expect(bool(padded.get("ok", false))
+		and InputMap.action_has_event("interact", g)
+		and InputMap.action_has_event("interact", up)
+		and not InputMap.action_has_event("interact", a),
+		"and its pad moved to the right stick keeps the G", str(padded))
+	actions.reset(&"interact")
+	var space := InputEventKey.new()
+	space.keycode = KEY_SPACE
+	expect(not bool(actions.rebound(&"interact"))
+		and InputMap.action_has_event("interact", space)
+		and InputMap.action_has_event("interact", a),
+		"and reset puts back both, SPACE and A")
+	await close_scene()
+	_completed += 1
+
+
+## A pad button going down or up, through the door a real pad uses.
+func _pad_button(button: JoyButton, pressed: bool) -> void:
+	var event := InputEventJoypadButton.new()
+	event.button_index = button
+	event.pressed = pressed
+	event.pressure = 1.0 if pressed else 0.0
+	Input.parse_input_event(event)
+	await process_frame
+
+
+func _pad_tap(button: JoyButton) -> void:
+	await _pad_button(button, true)
+	await _pad_button(button, false)
+
+
+## A stick or trigger at a value, the same way.
+func _pad_axis(axis: JoyAxis, value: float) -> void:
+	var event := InputEventJoypadMotion.new()
+	event.axis = axis
+	event.axis_value = value
+	Input.parse_input_event(event)
+	await process_frame

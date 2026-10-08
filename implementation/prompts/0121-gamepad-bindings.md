@@ -1,7 +1,7 @@
 # 0121 - A controller for every action
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0112
 - **Likely files:** project.godot, src/app/input_actions.gd, src/ui/main.gd, src/ui/options_controls.gd, src/ui/pause_menu.gd, src/ui/title_screen.gd, src/ui/studio_intro.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd
 

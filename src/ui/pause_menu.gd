@@ -300,17 +300,15 @@ func _resume() -> void:
 
 ## Open, close and the keys that do both.
 ##
-## `pause` - or a pad's Start - opens it from a run and closes it again;
-## BACK closes it, or takes a question away first. Both go through the
-## router, so the way out of the pause menu is the way out of every other
-## overlay. Escape *opening* it is `Main`'s, because only Main knows whether
-## escape had something else to stop first.
+## `pause` - P, or a pad's Start since task 0121 bound it - opens it from a
+## run and closes it again; BACK closes it, or takes a question away first.
+## Both go through the router, so the way out of the pause menu is the way out
+## of every other overlay. Escape *opening* it is `Main`'s, because only Main
+## knows whether escape had something else to stop first.
 func _unhandled_input(event: InputEvent) -> void:
 	if _router == null:
 		return
-	var start := event is InputEventJoypadButton and event.is_pressed() \
-		and (event as InputEventJoypadButton).button_index == JOY_BUTTON_START
-	if event.is_action_pressed(&"pause") or start:
+	if event.is_action_pressed(&"pause"):
 		if visible:
 			if _asking != &"":
 				_take_back_question()

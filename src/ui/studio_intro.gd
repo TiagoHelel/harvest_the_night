@@ -49,6 +49,8 @@ extends Control
 ##  * **`rise_from_black` lives on the `App` autoload**, runtime only, where
 ##    "which screen comes next" already lives.
 
+const ActionsScript := preload("res://src/app/input_actions.gd")
+
 ## Where the ident hands over to. Read by the checks; the router is what loads
 ## it (`App.SCENES[TITLE]`).
 const NEXT_SCENE := "res://scenes/Title.tscn"
@@ -274,11 +276,7 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if _leaving:
 		return
-	# Typed explicitly: GDScript will not infer through a multi-line `or` chain.
-	var pressed: bool = (event is InputEventKey and event.pressed and not event.echo) \
-		or (event is InputEventMouseButton and event.pressed) \
-		or (event is InputEventJoypadButton and event.pressed)
-	if not pressed:
+	if not ActionsScript.is_any_press(event):
 		return
 	get_viewport().set_input_as_handled()
 	if _t < 0.0:

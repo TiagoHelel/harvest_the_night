@@ -14283,12 +14283,15 @@ func _task_0082_shots() -> void:
 	# same reason the audio group counts its settings: a scenario arriving
 	# without anybody deciding to add one should be a failing row rather
 	# than an extra picture nobody looks at.
-	expect(names.size() == 15,
-		"the original scenarios, options tabs and three farmhouse scenarios",
+	# Sixteen since task 0121: the controls tab again with a pad in hand,
+	# because the pad's names are what has to fit there.
+	expect(names.size() == 16,
+		"the original scenarios, options tabs, three farmhouse scenarios and the pad's controls",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
-			"options_controls", "house_interior", "farm_extension", "larger_stations"]:
+			"options_controls", "house_interior", "farm_extension", "larger_stations",
+			"options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

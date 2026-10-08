@@ -37,7 +37,9 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 7
+const GROUPS := 8
+
+const ActionsScript := preload("res://src/app/input_actions.gd")
 
 var passed := 0
 var failed := 0
@@ -74,6 +76,7 @@ func _run() -> void:
 	_task_0116_ammo()
 	_task_0118_road()
 	_task_0120_placeholders()
+	_task_0121_pad()
 
 
 func _finish() -> void:
@@ -747,4 +750,96 @@ func _task_0120_placeholders() -> void:
 			readers.append(file)
 	expect(readers.is_empty(), "only the lookup reads RasterArt.FRAMES in src/ui",
 		str(readers))
+	_completed += 1
+
+
+## 0121 - a controller for every action.
+func _task_0121_pad() -> void:
+	# **Every action has a pad event in project.godot**, but the ones named
+	# here, each with why.
+	var no_pad := {
+		&"slot_1": "six seed slots outnumber the free buttons; 0133's hotbar picks slots on a pad",
+		&"slot_2": "the seed slots: see slot_1",
+		&"slot_3": "the seed slots: see slot_1",
+		&"slot_4": "the seed slots: see slot_1",
+		&"slot_5": "the seed slots: see slot_1",
+		&"slot_6": "the seed slots: see slot_1",
+		&"speed": "a focusable night HUD button; 0139 gives every HUD control focus or an action",
+		&"skip_night": "a focusable night HUD button, like speed",
+		&"stats": "a read-only screen no play depends on, and no button left over",
+		&"log": "a read-only screen, like stats",
+	}
+	var project := FileAccess.get_file_as_string("res://project.godot")
+	var section := project.substr(project.find("\n[input]\n"))
+	section = section.substr(0, section.find("\n[", 2))
+	var shared := {}
+	var missing: Array = []
+	var stale: Array = []
+	for action in ActionsScript.names():
+		var at := section.find("\n%s={" % action)
+		var block := section.substr(at, section.find("\n}", at) - at) if at >= 0 else ""
+		var has_pad := block.contains("InputEventJoypad")
+		if not has_pad and not no_pad.has(action):
+			missing.append(action)
+		if has_pad and no_pad.has(action):
+			stale.append(action)
+		# What each pad event is, so two actions cannot ship on one button.
+		for piece in block.split("Object(InputEventJoypad").slice(1):
+			var head := String(piece).get_slice(",\"script\"", 0)
+			var mark := head.get_slice("\"device\":-1,", 1)
+			shared[mark] = (shared.get(mark, []) as Array) + [action]
+	expect(missing.is_empty(), "every action has a pad event, or is named with why",
+		str(missing))
+	expect(stale.is_empty(), "and no named exception has one after all", str(stale))
+	var doubled: Array = []
+	for mark in shared:
+		if (shared[mark] as Array).size() > 1:
+			doubled.append(shared[mark])
+	expect(not shared.is_empty() and doubled.is_empty(),
+		"no two actions ship on one pad input", str(doubled))
+
+	# **Every pad name label_of can say is in the table**, in both languages.
+	var table := FileAccess.get_file_as_string("res://assets/locale/strings.csv")
+	var keys: Array = ActionsScript.PAD_NAMES.values() + ActionsScript.AXIS_NAMES.values()
+	keys.append(&"ACT_PAD_OTHER")
+	var absent: Array = []
+	for key in keys:
+		if not table.contains("\n%s," % key):
+			absent.append(key)
+	expect(absent.is_empty(), "every ACT_PAD_* name is in the strings table", str(absent))
+	var a := InputEventJoypadButton.new()
+	a.button_index = JOY_BUTTON_A
+	var trigger := InputEventJoypadMotion.new()
+	trigger.axis = JOY_AXIS_TRIGGER_LEFT
+	trigger.axis_value = 1.0
+	expect(ActionsScript.label_of(a) == I18n.t(&"ACT_PAD_A")
+		and ActionsScript.label_of(trigger) == I18n.t(&"ACT_PAD_LT"),
+		"and label_of reads them", "%s, %s" % [ActionsScript.label_of(a),
+			ActionsScript.label_of(trigger)])
+
+	# **A pad binding is written and read back like a key.**
+	expect(ActionsScript.as_text(a) == "joy:0" and ActionsScript.as_text(trigger) == "axis:4:1",
+		"pad events are written joy: and axis:",
+		"%s, %s" % [ActionsScript.as_text(a), ActionsScript.as_text(trigger)])
+	expect(ActionsScript.same_event(ActionsScript.from_text("joy:0"), a)
+		and ActionsScript.same_event(ActionsScript.from_text("axis:4:1"), trigger),
+		"and read back the same")
+	expect(ActionsScript.from_text("axis:4:3") == null and ActionsScript.from_text("joy:x") == null,
+		"a malformed pad binding reads as nothing")
+	var drift := InputEventJoypadMotion.new()
+	drift.axis = JOY_AXIS_LEFT_X
+	drift.axis_value = 0.2
+	expect(ActionsScript.is_bindable(a) and ActionsScript.is_bindable(trigger)
+		and not ActionsScript.is_bindable(drift),
+		"pad buttons and pushed sticks can be bound, a drifting stick cannot")
+
+	# **No screen names a pad button by its constant**: they read actions.
+	var raw: Array = []
+	for file in DirAccess.get_files_at("res://src/ui"):
+		if not String(file).ends_with(".gd"):
+			continue
+		var code := SuiteKit.code_lines_of("res://src/ui".path_join(file))
+		if code.contains("JOY_"):
+			raw.append(file)
+	expect(raw.is_empty(), "no code line in src/ui names a JOY_ constant", str(raw))
 	_completed += 1

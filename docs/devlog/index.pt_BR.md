@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-121 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+122 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -164,6 +164,7 @@ voz alta.
 | 0118 | One road into the waves | 2026-10-07 |
 | 0119 | Tests and tools build in the build step | 2026-10-08 |
 | 0120 | One road for art that has not arrived | 2026-10-08 |
+| 0121 | A controller for every action | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 

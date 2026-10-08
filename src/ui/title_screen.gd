@@ -33,6 +33,8 @@ extends Node
 ## top of either - so Back from the options screen comes here without the
 ## options screen having heard of this one.
 
+const ActionsScript := preload("res://src/app/input_actions.gd")
+
 ## The seed the backdrop farm grows from. Written down, like every other seed
 ## in this project, so the title screen looks the same every boot.
 const BACKDROP_SEED := 91091
@@ -296,11 +298,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# **Any key or click.** Not a named action: a player who has just started
 	# the game has not learned any of them, and "press any key" has to be
 	# true.
-	var pressed := event is InputEventKey and event.is_pressed() \
-		and not event.is_echo()
-	var clicked := event is InputEventMouseButton and event.is_pressed()
-	var padded := event is InputEventJoypadButton and event.is_pressed()
-	if pressed or clicked or padded:
+	if ActionsScript.is_any_press(event):
 		_router.goto(_router.MENU)
 		get_viewport().set_input_as_handled()
 

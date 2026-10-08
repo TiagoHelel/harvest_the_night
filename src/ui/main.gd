@@ -274,8 +274,11 @@ func _process(_delta: float) -> void:
 	_inside_house = indoors
 	var intent: Dictionary = _driver.state["intent"]
 	var move: Array = intent["move"]
-	move[0] = int(Input.get_axis(&"move_left", &"move_right"))
-	move[1] = int(Input.get_axis(&"move_up", &"move_down"))
+	# **A stick walks exactly like a key** (task 0121): the axis is past the
+	# action's deadzone or it is not, so -1, 0 or 1. `int()` on its own
+	# truncated a half-tilted stick, which reports 0.4, to standing still.
+	move[0] = int(signf(Input.get_axis(&"move_left", &"move_right")))
+	move[1] = int(signf(Input.get_axis(&"move_up", &"move_down")))
 	var running_art := _driver.running and not _driver.holding() \
 		and Input.is_action_pressed(&"run")
 	_player_view.set_running(running_art)

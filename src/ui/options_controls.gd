@@ -4,9 +4,11 @@ extends OptionsPage
 ## The controls page: every action, the key it is on, and a way to move it.
 ##
 ## **Enter listens, the next key is the answer.** The row says PRESS A KEY and
-## the line under the page says how to give up; the next key or mouse button
-## pressed is the new binding, and escape - or `LISTEN_SECONDS` with nothing
-## pressed - leaves it as it was. A key another action already has is refused
+## the line under the page says how to give up; the next key, mouse button or
+## pad button, stick or trigger (task 0121) is the new binding - a pad's on
+## the pad side, so it never knocks the key off - and escape - or
+## `LISTEN_SECONDS` with nothing pressed - leaves it as it was. A key another
+## action already has is refused
 ## and named, and the row keeps listening, so the player can try another
 ## without starting over.
 ##
@@ -18,6 +20,8 @@ extends OptionsPage
 ## to reset.
 ##
 ## What a binding is and which keys clash is `Actions`'; this only asks it.
+
+const ActionsScript := preload("res://src/app/input_actions.gd")
 
 ## How long a row listens before it gives up.
 const LISTEN_SECONDS := 5.0
@@ -43,6 +47,11 @@ func _build() -> void:
 	_binds.clear()
 	if _actions == null:
 		return
+	# The page names the device in hand (task 0121): the pad's buttons after a
+	# pad was touched, the keys after a key.
+	if _actions.has_signal(&"device_changed") \
+			and not _actions.device_changed.is_connected(_on_device):
+		_actions.device_changed.connect(_on_device)
 	var group := &""
 	for action in _actions.names():
 		var belongs: StringName = _actions.group_for(action)
@@ -152,11 +161,22 @@ func _input(event: InputEvent) -> void:
 		return
 	var key := event as InputEventKey
 	var click := event as InputEventMouseButton
+	var pad := event as InputEventJoypadButton
+	var stick := event as InputEventJoypadMotion
 	var taking: InputEvent = null
 	if key != null and key.pressed and not key.echo:
 		taking = key
 	elif click != null and click.pressed:
 		taking = click
+	elif pad != null and pad.pressed:
+		taking = pad
+	elif stick != null and absf(stick.axis_value) >= ActionsScript.PAD_TAKE:
+		# A stick or trigger is taken as its direction, not its tilt: the
+		# binding is "left stick up", whatever angle it was pushed at.
+		var direction := InputEventJoypadMotion.new()
+		direction.axis = stick.axis
+		direction.axis_value = 1.0 if stick.axis_value > 0.0 else -1.0
+		taking = direction
 	if taking == null:
 		return
 	get_viewport().set_input_as_handled()
@@ -204,6 +224,11 @@ func cancel() -> bool:
 
 func _on_setting(key: StringName) -> void:
 	if String(key).begins_with("controls/"):
+		refresh()
+
+
+func _on_device(_using_pad: bool) -> void:
+	if is_inside_tree():
 		refresh()
 
 

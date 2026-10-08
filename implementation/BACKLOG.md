@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **119 / 296 done**
+`##########..............`  **120 / 296 done**
 
-0 doing / 177 todo / 0 blocked across 18 phases.
+0 doing / 176 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0121 - A controller for every action**. The whole of what is left is
+First up: **0122 - Art: the farmer's run**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,28 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-177 task(s) left, the ready ones first, then what they
+176 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0121 - A controller for every action
-
-Ready to pick up.  Likely files: `project.godot, src/app/input_actions.gd, src/ui/main.gd, src/ui/options_controls.gd, src/ui/pause_menu.gd, src/ui/title_screen.gd, src/ui/studio_intro.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
-
-The plan promises a night played on a controller, and `project.godot` has not one joypad binding: only the pause menu, the title and the ident read raw pad buttons. Bind every action now, before phase 10's cursor and hotbar are built on top of them.
-
-- A pad event for every action in `InputActions.ACTIONS`, in `project.godot`: `move_*` on the left stick and the d-pad; face, shoulder, trigger and Start/Back buttons for run, interact, cancel, build, place/remove/upgrade, inventory, night (0127's GO TO BED), ability, speed, skip_night, pause, tech, stats, log. Where there are more actions than buttons (the six seed slots), decide, write the layout in the journal and name any action left without a pad event on purpose in the assert below, with its reason
-- Analog walking: `main.gd` writes `intent.move` as `int(Input.get_axis(...))`, which truncates a half-tilted stick to 0. Turn the stick into -1/0/1 through the action's deadzone, so a stick walks exactly like a key
-- `InputActions.label_of` names pad buttons and axes from the strings table: new `ACT_PAD_*` rows (A, B, X, Y, LB, RB, LT, RT, Start, Back, d-pad and stick directions) in en and pt_BR. Hints and the controls screen show the pad's name when the last input came from a pad - a view-only flag in `InputActions`
-- Rebinding keeps the devices apart: today `apply()` replaces all of an action's events with the one saved, so a rebound key would drop the pad button. Save one binding per device kind (`as_text`/`from_text` learn `joy:<button>` and `axis:<axis>:<sign>`, `is_bindable` accepts pad events), read old single `key:`/`mouse:` values as keyboard ones, and apply the clash rule within a device kind
-- `pause_menu.gd`, `title_screen.gd` and `studio_intro.gd` read actions rather than raw `JOY_BUTTON_*`; menus and panels move focus on the d-pad/stick and accept/cancel on the face buttons through the `ui_*` actions
-- Keep `_task_0095_controls`' sync check (project.godot `[input]` against `ACTIONS`) passing. Tutorial lines that name a key in their text (`TUT_CHOP`, `TUT_BUILD`, `TUT_NIGHT`) are 0141's and 0195's; a deadzone option is 0292's
-- Cases go in `input_v1` with synthetic events (`Input.parse_input_event` with `InputEventJoypadButton` and `InputEventJoypadMotion`). Input and view only: neither hash moves (a stick walks exactly like a key, so the intents a keyboard writes are unchanged)
-
-  - done when: `_case_0121_pad` in `input_v1`: synthetic pad events walk the farmer on the stick and on the d-pad, chop a tree, open and leave build mode, press the night button and open and close the pause menu - each asserted through the state or the scene
-  - done when: Rebinding interact to another key keeps its pad button, and rebinding its pad button keeps the key - asserted, then reset
-  - done when: `_task_0121_pad` in `headless_v1`: every action in `ACTIONS` has a joypad event in `project.godot` except the ones the assert names with a reason, every `ACT_PAD_*` key `label_of` can return is in the strings table, and no code line in `src/ui/` names a `JOY_` constant
-  - done when: `python tools/i18n_check.py` passes; `python tools/shot.py 0121 options_controls` opened: the pad labels fit
 
 ### 0122 - Art: the farmer's run
 
@@ -216,7 +197,7 @@ The day HUD tells the time and says when it is time for bed: an HH:MM clock, a G
 
 ### 0130 - The night camera
 
-Waits on 0129, 0121.  Likely files: `src/ui/main.gd, src/ui/world_view.gd, src/core/game_data.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
+Waits on 0129.  Likely files: `src/ui/main.gd, src/ui/world_view.gd, src/core/game_data.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
 
 At night the camera belongs to the player, not to the farmer: it pans over the whole farm with the keys, the screen edge or the right stick, so the guardian can look wherever the horde is.
 
@@ -266,7 +247,7 @@ The farmer's reactions at the 32px detail of his new body, and the Zzz that rise
 
 ### 0131 - The guardian's cursor
 
-Waits on 0130, 0121.  Likely files: `src/ui/guardian_cursor.gd (new), src/ui/guardian_view.gd (new), src/ui/main.gd, src/ui/world_view.gd, src/ui/build_mode.gd, src/ui/tooltip.gd, src/ui/describe.gd, src/ui/lighting.gd, src/ui/placeholder_art.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/`.
+Waits on 0130.  Likely files: `src/ui/guardian_cursor.gd (new), src/ui/guardian_view.gd (new), src/ui/main.gd, src/ui/world_view.gd, src/ui/build_mode.gd, src/ui/tooltip.gd, src/ui/describe.gd, src/ui/lighting.gd, src/ui/placeholder_art.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/`.
 
 The player's hand at night: a cell cursor that the mouse or the pad drives, that says what is under it, and that every night action points at - held by the porch scarecrow, who wakes up to be the guardian.
 
@@ -1207,7 +1188,7 @@ The can and the hoe earn their tiers: one tile, then three, then five at a strok
 
 ### 0180 - The fishing minigame
 
-Waits on 0179, 0121, 0173.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/sim.gd, src/ui/fishing_bar.gd (new), src/ui/main.gd, src/app/input_actions.gd, src/app/settings.gd, project.godot, src/ui/player_work.gd, src/ui/sfx.gd, src/tools/perf_names.gd, src/tools/perf_check.gd, src/tools/determinism.gd, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0179, 0173.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/sim.gd, src/ui/fishing_bar.gd (new), src/ui/main.gd, src/app/input_actions.gd, src/app/settings.gd, project.godot, src/ui/player_work.gd, src/ui/sfx.gd, src/tools/perf_names.gd, src/tools/perf_check.gd, src/tools/determinism.gd, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 A bite opens a simple timing bar: a marker runs, and you press as it crosses the green - simpler than Stardew's bar and as good on a pad as on a mouse.
 
@@ -3398,7 +3379,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (9/14)
+## 9 - v1.0 groundwork  (10/14)
 
 - [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
 - [x] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
@@ -3409,7 +3390,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0118** [One road into the waves](prompts/0118-one-road-into-night.md)
 - [x] **0119** [Tests and tools build in the build step](prompts/0119-build-in-preparation.md)
 - [x] **0120** [One road for art that has not arrived](prompts/0120-placeholder-road.md)
-- [ ] **0121** [A controller for every action](prompts/0121-gamepad-bindings.md)
+- [x] **0121** [A controller for every action](prompts/0121-gamepad-bindings.md)
 - [ ] **0122** [Art: the farmer's run](prompts/0122-art-farmer-run.md) - waits for art A006
 - [ ] **0123** [Art: the farmer tilling, planting, watering and harvesting](prompts/0123-art-farmer-field-work.md) - waits for art A007
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
@@ -3421,8 +3402,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0127** [Going to bed starts the night](prompts/0127-bed.md) - needs 0126
 - [ ] **0128** [Passing out at 02:00](prompts/0128-pass-out.md) - needs 0127
 - [ ] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md) - needs 0127, 0128
-- [ ] **0130** [The night camera](prompts/0130-night-camera.md) - needs 0129, 0121
-- [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md) - needs 0130, 0121
+- [ ] **0130** [The night camera](prompts/0130-night-camera.md) - needs 0129
+- [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md) - needs 0130
 - [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md) - needs 0131
 - [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md) - needs 0132
 - [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0131, 0133
@@ -3477,7 +3458,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0177** [Hardwood](prompts/0177-hardwood.md) - needs 0175, 0156
 - [ ] **0178** [Sprinklers](prompts/0178-sprinklers.md) - needs 0176, 0165
 - [ ] **0179** [Fish by pond, season and hour](prompts/0179-fish-species.md) - needs 0126, 0149, 0156, 0165
-- [ ] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md) - needs 0179, 0121, 0173
+- [ ] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md) - needs 0179, 0173
 - [ ] **0181** [Rods and bait](prompts/0181-rods-bait.md) - needs 0179, 0173, 0167
 - [ ] **0182** [Legendary fish and the fish book](prompts/0182-legendary-book.md) - needs 0181
 - [ ] **0183** [The coop and the barn](prompts/0183-coop-barn.md) - needs 0126, 0156

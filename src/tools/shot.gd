@@ -81,6 +81,8 @@ const SCENARIOS: Array = [
 	["house_interior", "the furnished farmhouse", ""],
 	["farm_extension", "planting on the new southern land", ""],
 	["larger_stations", "the larger farm buildings", ""],
+	# Last, so the pad's names do not follow the shutter into another picture.
+	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
 ]
 
 var _written := 0
@@ -615,6 +617,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"house_interior": _set_house_interior(state)
 		"farm_extension": _set_farm_extension(state)
 		"larger_stations": _set_larger_stations(state)
+		"options_controls_pad": _set_options_controls_pad(state)
 
 	_walk_to(state, _standing_at)
 	main.get_node("%WorldView").look_at_cell(Player.cell(state))
@@ -835,6 +838,16 @@ func _set_options_audio(state: Dictionary) -> void:
 
 func _set_options_controls(state: Dictionary) -> void:
 	_set_noon(state)
+
+
+## The same tab with the last input from a pad (task 0121): every row names
+## the pad's button, which is what has to fit.
+func _set_options_controls_pad(state: Dictionary) -> void:
+	_set_noon(state)
+	var actions: Node = root.get_node_or_null(^"Actions")
+	if actions != null:
+		actions.using_pad = true
+		actions.device_changed.emit(true)
 
 
 func _a_sown_field(state: Dictionary) -> void:

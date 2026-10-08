@@ -13171,3 +13171,55 @@ file and there is one more), headless_v1 106 (+10), input_check 1074,
 input_v1 11; sim 4130513273 and data 1968527100 unchanged. Shots 0120: all 15
 pixel-identical to 0119's (compared with PIL), noon opened - the farmer where
 he was.
+
+## 0121 - A controller for every action - done 2026-10-08
+
+What changed: input and view only. **The pad layout** (Xbox names), one input
+per action, no two actions on one: move on the left stick and the d-pad; A
+interact, B cancel, X inventory, Y build; LB ability (the flare), RB remove,
+LT run (held), RT place; L3 tech, R3 upgrade; Start pause, Back night (0127's
+GO TO BED). The right stick is left free for 0130's camera. **Left without a
+pad event on purpose**, named in `_task_0121_pad` with why: slot_1..6 (six
+seed slots outnumber the free buttons; 0133's hotbar picks slots on a pad),
+speed and skip_night (focusable night HUD buttons; 0139 gives every control
+focus or an action), stats and log (read-only screens, no button left over).
+0136's START has no free button left: its prompt now says so and suggests
+taking one from the focus-only actions or moving tech off L3 - not Back, the
+bed key. `main.gd` turns the move axes into -1/0/1 with `signf` past the
+action's deadzone (a half-tilted stick reported 0.4 and `int()` stood still).
+`InputActions`: `label_of` names pad buttons and stick/trigger directions from
+25 new `ACT_PAD_*` rows (en and pt_BR); `as_text`/`from_text` learn `joy:<n>`
+and `axis:<axis>:<sign>`; `is_bindable` takes named pad buttons and sticks
+pushed past half way; **one binding per device kind**, saved as `<action>@pad`
+beside the bare keyboard entry in the same `controls/bindings` dict - so old
+saves read as keyboard ones, `_task_0095_controls`' `"key:71"` still reads, and
+reset/reset-all clear both; the clash rule stays within a kind by
+construction. A view-only `using_pad` flag (with `device_changed`) makes
+`text_of`/`shipped_text` name the device in hand, falling back to the keys for
+an action the pad has no button for; the controls page refreshes on it and
+listens for pad buttons and stick directions. pause_menu reads `pause` (Start
+is bound) instead of `JOY_BUTTON_START`; title and ident ask
+`InputActions.is_any_press` (keys, clicks and pad buttons). Menus already move
+focus and accept/cancel through Godot's `ui_*` defaults, which include the pad.
+**project.godot**: the owner's unstaged re-serialisation of `run` stays
+unstaged - the commit is HEAD's file plus the 20 pad event lines (staged with
+`git update-index` from a copy built off HEAD); the working copy has both.
+First controls shot with a pad in hand clipped "L STICK DOWN / D-PAD DOWN" at
+the column edge although each name fits alone: shortened to LS/RS/DPAD (en)
+and LS/RS/SETA (pt_BR); reshot, fits. `shot.gd` gained the
+`options_controls_pad` scenario, and `_task_0082_shots`' pinned count went 15
+-> 16 on purpose.
+Files: project.godot (pad events only), src/app/input_actions.gd,
+src/ui/{main,pause_menu,title_screen,studio_intro,options_controls}.gd,
+assets/locale/strings.csv, src/tools/{headless_v1,input_v1,shot,headless_check}.gd,
+implementation/prompts/0136-start-button.md, implementation/shots/0121/
+Verify: **59 passed, 0 failed in 512s** (OVER BUDGET 300, as before); i18n 430
+keys fit; headless_check 16177, headless_v1 116 (+10: every action has a pad
+event or a named reason, none shared, every pad name in the table, joy:/axis:
+round trip, no `JOY_` in src/ui), input_check 1074, input_v1 27 (+16:
+`_case_0121_pad` - a 0.6 stick tilt writes a whole step and turns the farmer,
+the d-pad walks, A chops, the labels follow the hand, Y opens and closes build
+mode, Start pauses and resumes, Back sends for the night, rebinding interact's
+key keeps A and moving its pad input keeps the key, reset puts back both);
+sim 4130513273 and data 1968527100 unchanged. Shots 0121 `options_controls` and
+`options_controls_pad` opened.
