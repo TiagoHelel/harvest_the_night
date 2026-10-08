@@ -232,6 +232,9 @@ static func size_of(id: StringName) -> Vector2i:
 		return GameData.HOUSE_SIZE
 	if id == &"shop":
 		return GameData.SHOP_SIZE
+	# Map props over more than one cell (task 0156): the hardwood stump.
+	if GameData.MAP_PROP_SIZES.has(id):
+		return GameData.MAP_PROP_SIZES[id]
 	var entry: Variant = entry_of(id)
 	if entry == null:
 		return Vector2i.ONE

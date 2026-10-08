@@ -15898,3 +15898,145 @@ tools/determinism_data_hash.txt, implementation/shots/0155/
 Verify: **PASS**, 60 passed in 585 s (OVER BUDGET as before). headless_check
 16290, headless_v1 384 (+9), input_check 1066, input_v1 184, strings 481
 keys, placeholders 57 stand-ins; the night tick 2002 us (24%).
+
+## 0156 - The 1.0 farm map - done 2026-10-08
+
+What changed: every change the 1.0 farm needs on its map, made at once so a
+save migrates once. There is ground for the new attack sides, the new ore,
+the big hardwood stumps, ponds with names, and room kept for the coop, the
+barn and the shipping bin.
+
+**On `FARM_MAP`:**
+- Three trees are gone: (36,1), (44,1) and (8,28).
+- On the north-east outcrop's rock face:
+  - copper `u` on its west face, (67,3) and (67,5);
+  - coal `k` on its south face, (69,6) and (70,6);
+  - gold `g` on its north face, (71,3) and (72,3), the side farthest from
+    the farmstead.
+- Four hardwood stumps `h`, each 2x2, in the south-west woods, anchored at
+  (5,37), (8,45), (24,47) and (6,58).
+- No terrain changed: the ore sits on rock face and the stumps on grass,
+  which keeps the save step to occupants.
+- **The ids**, which 0176 and 0177 read: `copper_ore` (`u`), `coal_seam`
+  (`k`), `gold_ore` (`g`), `hardwood_stump` (`h`).
+
+**The new tables** (all in `digest()`'s new `map_v1` row):
+- `UNGATHERED_NODES`: the four ids with no `GATHERING` row yet. Each later
+  task takes its own off the list.
+- `MAP_PROP_SIZES`: `hardwood_stump` is 2x2. `Building.size_of` reads it.
+- `SPAWN_BANDS`: north `(35-44, 1)`, west `(8, 20-29)`, south `(35-44, 55)`,
+  ten cells each, for 0157 to turn into `SPAWNS` regions. They are left out
+  of `SPAWNS` on purpose: an extra region today would deal generated nights
+  across them.
+  - **Path distance to the house** (`Pathing.distance`, a new farm): the
+    east band is 26-32; north 22-27, west 29-34, south 30-33.
+  - The south lies far from this farmstead, so its band sits nine rows in
+    from the edge, where it measures like the east (35-41 at the edge).
+- `PONDS`: `north_west_pond` (10,16), `forest_pond` (11,42),
+  `south_east_lake` (66,48).
+- `MAP_SITES`: the coop at (21,21), 7x4, and the barn at (23,33), 7x4, both
+  by the workshop and the animals; the shipping bin at (43,26), 2x1, by the
+  porch. All were already clear grass.
+
+**The checks:**
+- `check_reachable` walks the `UNGATHERED_NODES` too, so each has
+  somewhere to stand.
+- New: `check_spawn_bands` (every band cell is walkable, empty map ground),
+  `check_ponds` (every anchor is water) and `check_sites` (every site cell
+  is clear).
+- `check_map`, `check_livestock` and the rest stay clean.
+
+**The rules:**
+- **One anchor per piece** (`Farm._anchor_pieces`). `Farm.initial` used to
+  work out one corner per id, which was right while every multi-cell thing
+  on the map was single (house, workshop, stall) and would have put four
+  stumps under one anchor. A piece is the joined cells of an id; the house,
+  the workshop and the stall come out exactly as before.
+- `Farm.pond_of(state, cell)` floods the state's own water from the cell
+  until it meets a `PONDS` anchor. It answers empty on land and on unnamed
+  water.
+- The new occupants have no table row. Checked against the prompt's list:
+  `Interact` offers no verb (`OCCUPANT_VERBS` has none), `Pathing._through`
+  makes them impassable, `Farm` gives them no hit points, and the save step
+  copies them.
+
+**The save, version 6** (`Save.migrations()[5]`, `_farm_v1_0_from_v5`):
+- On the bands and the sites, a map tree or rock leaves only if nobody has
+  swung at it (no `hp`). Any regrowth queued there is dropped. A plot, a
+  building or a chopped tree's stump stays.
+- The new nodes and stumps go down only where the save's cell has no
+  occupant, no plot and the map's terrain. A stump goes down on all four
+  cells or not at all.
+- Path, tower and livestock caches reset, and `grid_version` is bumped, as
+  the widenings do.
+- `run-v6.sav`, `-older` and `-newer` were written by this build. 0151's
+  `run-v5.sav` is the step's input in the test.
+
+**The view** (0120's road, until A021 is integrated by 0204):
+- `PlaceholderArt.ART` gains the four ids, at A021's geometry (16x16 at
+  (8,14); the stump 32x32 at (16,30)), with a `tint` and a
+  `stand_in_scale` read by the new `art_tint` and `art_scale`:
+  - copper is the iron `ore` reddened, gold the `ore` gilded, coal the
+    `seam` blackened;
+  - the stump is the chopped tree's `stump` at twice the size.
+- `WorldView._stand_in_prop` draws one per piece at its anchor and steps
+  aside the day the raster lands.
+
+**Tests:**
+- `_task_0156_map_v1` (headless_v1):
+  - `validate()` is clean;
+  - every band cell is walkable, empty and reachable;
+  - each new id is on the map, with no verb and impassable;
+  - four stumps, each one piece of four cells;
+  - `pond_of` names the three ponds from their anchors and from other
+    water, and nothing on land;
+  - the sites are clear.
+  - The v5 golden reads as v6:
+    - every occupant and plot it had is unchanged, but for untouched map
+      trees on cleared ground;
+    - the only new occupants are the new ids, on cells with no plot;
+    - it plays 600 ticks.
+  - A fixture saves have the untouched band tree leave, the chopped-at one
+    stay, and the band's regrowth dropped.
+  - Every golden loads.
+- `_task_0151_migration` now expects today's version rather than 5.
+- The shot scenario count is 33.
+
+**Shots** (`implementation/shots/0156/`, FHD, opened):
+- `new_ore`: the outcrop with copper (red-brown), gold (yellow) and coal
+  (black) on its faces.
+- `stump`: two stumps in the woods, each a big stump over its 2x2, beside
+  the forest pond.
+- `north_band`: the farmer at the north edge. The band's own row sits under
+  the HUD strip, because the camera stops at the map's edge.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3462710760` | `50760118` | the map is in the state: the cleared trees and the new nodes, and the version |
+| data hash | `1337047335` | `2383855438` | `FARM_MAP`, `MAP_LEGEND` and the five new tables in `digest()` |
+
+**The perf baseline moved, and not because of this task.**
+- The first verify failed `perf`: `night_enemies` was 236 us against 0153's
+  baseline of 167.
+- Three measurements of this tree gave 233-249. With HEAD's map put back
+  (the rest of this task's code kept) it was 257.
+- A worktree of HEAD itself, before any of this task, gave 238-243.
+- So the machine measures slower today, across the board: the day systems
+  this task does not touch rose too (day tick 89 -> 107).
+- `python tools/perf.py --accept`:
+  - night tick 1840 -> 2265 us, still 27% of the 8333 budget;
+  - enemies 167 -> 251, towers 1439 -> 1655;
+  - path rebuild 8581 -> 9398 us.
+- The second verify passed with the night tick at 1987 us.
+
+Files: src/core/{game_data,farm,building,state}.gd, src/app/save.gd,
+src/ui/{placeholder_art,world_view}.gd, src/tools/{shot,headless_check,headless_v1}.gd,
+tools/goldens/run-v6*.sav, tools/determinism_{sim,data}_hash.txt,
+implementation/shots/0156/
+
+Verify: **PASS** on the second run, 60 passed in 572 s (OVER BUDGET as
+before). headless_check 16314 (+24, the three new goldens), headless_v1 402
+(+18), input_check 1066, input_v1 184, placeholders 61 stand-ins over 11
+packs.

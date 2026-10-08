@@ -94,6 +94,9 @@ const SCENARIOS: Array = [
 	["boss_escaped", "the morning after Spring 14's boss got away", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
+	["north_band", "standing on the north spawn ground", ""],
+	["new_ore", "beside the copper, the coal and the gold", ""],
+	["stump", "in the woods, by a hardwood stump", ""],
 	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
 	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
@@ -663,6 +666,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"boss_escaped": _set_boss_escaped(state)
 		"calm_morning": _set_calm_morning(state)
 		"trampled": _set_trampled(state)
+		"north_band": _set_north_band(state)
+		"new_ore": _set_new_ore(state)
+		"stump": _set_stump(state)
 		"woken": _set_woken(state)
 		"repair": _set_repair(state)
 		"aim": _set_aim(state)
@@ -1171,6 +1177,23 @@ func _set_trampled(state: Dictionary) -> void:
 	House.leave(state)
 	Sim.advance(state, 2)
 	_look_at(near + Vector2i(6, 0))
+
+
+## **The 1.0 farm** (task 0156): the north spawn ground, the new ore on the
+## north-east outcrop, and a hardwood stump in the south-west woods.
+func _set_north_band(state: Dictionary) -> void:
+	_standing_at = Vector2i(40, 3)
+	_stand(state, _standing_at)
+
+
+func _set_new_ore(state: Dictionary) -> void:
+	_standing_at = Vector2i(66, 3)
+	_stand(state, _standing_at)
+
+
+func _set_stump(state: Dictionary) -> void:
+	_standing_at = Vector2i(10, 46)
+	_stand(state, _standing_at)
 
 
 ## **Out of bed at 06:00** (task 0138): the report confirmed, he stands on

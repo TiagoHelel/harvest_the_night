@@ -122,6 +122,13 @@ const SCARECROW := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw
 const CELL_CURSOR := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 const HOTBAR_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 
+## A021's nodes: one 16x16 tile, pivot at its foot (task 0156).
+const NODE_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
+
+## A021's hardwood stump: one thing over 2x2 cells, 32x32 at (16,30). Its
+## stand-in is the chopped tree's `stump`, drawn twice the size.
+const STUMP_2X2 := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 30), "draw_scale": 1.0}
+
 ## A014's crop states: one 16x16 tile, pivot at its foot (task 0155).
 const CROP_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
 
@@ -163,6 +170,10 @@ const ART := {
 	&"icon_mine": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mine", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
 	&"icon_mortar": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mortar", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
 	&"icon_wall": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/wall", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"copper_ore": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "tint": Color(1.25, 0.78, 0.62)},
+	&"coal_seam": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/seam", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "tint": Color(0.45, 0.45, 0.52)},
+	&"gold_ore": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "tint": Color(1.35, 1.2, 0.55)},
+	&"hardwood_stump": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": STUMP_2X2, "final": STUMP_2X2, "bare": true, "stand_in_scale": 2.0, "tint": Color(0.85, 0.72, 0.62)},
 	&"trampled": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 }
@@ -240,6 +251,18 @@ static func art_path(name: StringName, frame_index: int) -> String:
 ## The `ART` entry for a name, or empty.
 static func art(name: StringName) -> Dictionary:
 	return ART.get(name, {})
+
+
+## An `ART` stand-in's colour and size (task 0156): an existing texture,
+## tinted and scaled to stand for something else - A021's nodes are the iron
+## ore and the seam recoloured, its stump the chopped tree's at twice the
+## size. White and 1 for anything else, real art included.
+static func art_tint(name: StringName) -> Color:
+	return (ART.get(name, {}) as Dictionary).get("tint", Color.WHITE)
+
+
+static func art_scale(name: StringName) -> float:
+	return float((ART.get(name, {}) as Dictionary).get("stand_in_scale", 1.0))
 
 
 ## Whether a farmer animation is drawn by a stand-in.

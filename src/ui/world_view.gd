@@ -1119,6 +1119,8 @@ func _refresh() -> void:
 			anchor = Vector2i(int(anchored[0]), int(anchored[1]))
 		elif _fixture_corner.has(id):
 			anchor = _fixture_corner[id]
+		if _stand_in_prop(id, int(idx), cell, anchor):
+			continue
 		var footprint := Building.bounds_at(_state, cell).size if Building.size_of(id) != Vector2i.ONE else Vector2i.ONE
 		var whole := _texture_for(_station_art(id, on, anchor))
 		var grouped := footprint != Vector2i.ONE and (PlaceholderArt.has_frame(whole.resource_path)
@@ -1178,6 +1180,38 @@ func _refresh() -> void:
 			mark.size = Vector2(3.0, 3.0)
 			_occupants.add_child(mark)
 			_sprites.append(mark)
+
+
+## **A map prop whose pack has not landed** (task 0156: A021's copper, coal
+## and gold nodes and the hardwood stump), drawn through 0120's road: the
+## stand-in's texture, tinted and scaled as its `ART` entry says, once over
+## the thing's whole footprint at its anchor. False for anything with real
+## art or no entry, which the loop draws as it always has.
+func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) -> bool:
+	var entry := PlaceholderArt.art(id)
+	if entry.is_empty() or str(entry.get("dir", "")) != PROP_DIR:
+		return false
+	var path := PlaceholderArt.art_path(id, 0)
+	var file := PlaceholderArt.texture_path(path)
+	if file == path or file.is_empty():
+		return false            # the real art is here, or it is drawn by code
+	if cell != anchor:
+		return true             # one drawing over the whole footprint
+	var sprite := Sprite2D.new()
+	sprite.name = "Prop_%d" % idx
+	sprite.texture = load(file)
+	ArtPlacement.place(sprite, anchor, Building.size_of(id))
+	sprite.scale *= PlaceholderArt.art_scale(id)
+	sprite.modulate = PlaceholderArt.art_tint(id)
+	var logical_cells: Array = []
+	var size := Building.size_of(id)
+	for y in size.y:
+		for x in size.x:
+			logical_cells.append(Grid.index(anchor + Vector2i(x, y)))
+	sprite.set_meta("logical_cells", logical_cells)
+	_occupants.add_child(sprite)
+	_sprites.append(sprite)
+	return true
 
 
 ## World-owned cosmetic time freezes with pause; no clocks enter saved state.

@@ -27,7 +27,9 @@ extends RefCounted
 ##
 ## **5 since task 0151**: `night` is the calendar day's, not one past the
 ## nights won, and `endless` means "past the year" rather than "past the ten".
-const VERSION := 5
+## **6 since task 0156**: the 1.0 farm - new nodes, stumps and cleared spawn
+## ground laid onto an older farm where it has room for them.
+const VERSION := 6
 
 ## The nested dictionaries whose keys come from the code.
 ##

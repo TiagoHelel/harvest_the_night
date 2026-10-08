@@ -62,18 +62,10 @@ static func initial() -> Dictionary:
 						.get("hp", 1))
 
 	# Map-authored cells share the same owner as player-placed structures.
-	var corners := {}
-	for idx in occupants:
-		var id: StringName = occupants[idx]["id"]
-		if Building.size_of(id) != Vector2i.ONE:
-			var cell := Grid.cell(int(idx))
-			var corner: Vector2i = corners.get(id, cell)
-			corners[id] = Vector2i(mini(cell.x, corner.x), mini(cell.y, corner.y))
-	for idx in occupants:
-		var id: StringName = occupants[idx]["id"]
-		if corners.has(id):
-			var corner: Vector2i = corners[id]
-			occupants[idx]["anchor"] = [corner.x, corner.y]
+	# **One anchor per piece, not per id** (task 0156): a farm has one house
+	# but four hardwood stumps, and a corner worked out per id put all four
+	# under the first one's.
+	_anchor_pieces(occupants)
 	return {
 		"terrain": terrain,
 		"occupants": occupants,
@@ -95,6 +87,65 @@ static func initial() -> Dictionary:
 		# what targeting cost.
 		"house_cell": _centre_of(occupants),
 	}
+
+
+## Give every cell of a map-authored thing bigger than one cell the anchor
+## of its piece: the top-left of the cells of that id joined to it.
+static func _anchor_pieces(occupants: Dictionary) -> void:
+	var keys: Array = occupants.keys()
+	keys.sort()
+	var done := {}
+	for idx in keys:
+		var id: StringName = occupants[idx]["id"]
+		if done.has(idx) or Building.size_of(id) == Vector2i.ONE:
+			continue
+		var piece: Array = [int(idx)]
+		var corner := Grid.cell(int(idx))
+		done[idx] = true
+		var at := 0
+		while at < piece.size():
+			var here := Grid.cell(int(piece[at]))
+			at += 1
+			corner = Vector2i(mini(corner.x, here.x), mini(corner.y, here.y))
+			for step in Grid.STEPS:
+				var next: Vector2i = here + step
+				var n := Grid.index(next)
+				if n < 0 or done.has(n) or not occupants.has(n) \
+						or StringName(occupants[n]["id"]) != id:
+					continue
+				done[n] = true
+				piece.append(n)
+		for part in piece:
+			occupants[part]["anchor"] = [corner.x, corner.y]
+
+
+## **Which pond a cell is in** (task 0156), by name from `GameData.PONDS`:
+## a flood fill over the state's own water from the cell, until it meets a
+## pond's anchor. Empty on land, and on water that is no named pond. Cheap
+## enough to ask once per cast - the biggest body is a few hundred cells -
+## and it reads the save's terrain, so a save's pond is still its pond.
+static func pond_of(state: Dictionary, cell: Vector2i) -> StringName:
+	if not Grid.in_bounds(cell) or terrain_at(state, cell) != Terrain.WATER:
+		return &""
+	var anchors := {}
+	for id in GameData.sorted_names(GameData.PONDS.keys()):
+		var pair: Array = GameData.PONDS[id]
+		anchors[Grid.index(Vector2i(int(pair[0]), int(pair[1])))] = id
+	var seen := {Grid.index(cell): true}
+	var frontier: Array = [cell]
+	while not frontier.is_empty():
+		var here: Vector2i = frontier.pop_back()
+		var idx := Grid.index(here)
+		if anchors.has(idx):
+			return anchors[idx]
+		for step in Grid.STEPS:
+			var next: Vector2i = here + step
+			var n := Grid.index(next)
+			if n < 0 or seen.has(n) or terrain_at(state, next) != Terrain.WATER:
+				continue
+			seen[n] = true
+			frontier.append(next)
+	return &""
 
 
 ## The middle of the farmhouse, from the occupant table it was built from.

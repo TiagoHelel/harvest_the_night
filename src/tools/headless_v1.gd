@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 28
+const GROUPS := 29
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -97,6 +97,7 @@ func _run() -> void:
 	_task_0153_boss_nights()
 	_task_0154_calm()
 	_task_0155_losing()
+	_task_0156_map_v1()
 
 
 func _finish() -> void:
@@ -2034,8 +2035,9 @@ func _task_0150_lookup() -> void:
 ## no date pays twice; `endless` keeps its meaning past the year; and every
 ## golden loads and plays.
 func _task_0151_migration() -> void:
-	expect(State.VERSION == 5 and Save.migrations().has(4),
-		"state version 5, with a step up from 4", str(State.VERSION))
+	# Version 5 brought this step; later versions step on from it (0156: 6).
+	expect(State.VERSION >= 5 and Save.migrations().has(4),
+		"state version 5 or later, with a step up from 4", str(State.VERSION))
 	var names := {Phases.DAY: "DAY", Phases.PREPARATION: "PREPARATION",
 		Phases.NIGHT: "NIGHT", Phases.RESULT: "RESULT"}
 	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT, Phases.RESULT]:
@@ -2044,10 +2046,10 @@ func _task_0151_migration() -> void:
 		var was := {"day": int(old["day"]), "night": int(old["night"]),
 			"paid": (old["nights_paid"] as Array).duplicate()}
 		var run := _through_a_save(old, "v4_%s" % what)
-		expect(int(run.get("version", 0)) == 5 and int(run["phase"]) == int(phase)
+		expect(int(run.get("version", 0)) == State.VERSION and int(run["phase"]) == int(phase)
 			and int(run["day"]) == int(was["day"]) and int(run["night"]) == int(was["night"])
 			and run["nights_paid"] == was["paid"],
-			"a v4 run saved in %s loads as v5 with its day, night and paid list" % what,
+			"a v4 run saved in %s loads as today's version with its day, night and paid list" % what,
 			"v%d, %s, day %d, night %d, paid %s" % [int(run.get("version", 0)),
 				Phases.name_of(int(run["phase"])), int(run["day"]), int(run["night"]),
 				str(run["nights_paid"])])
@@ -2650,3 +2652,133 @@ func _lose_now(state: Dictionary) -> void:
 	state["house_hp"] = 0
 	Rewards.settle(state, false)
 	Phases.enter_result(state, false)
+
+
+## 0156 - the 1.0 farm map: spawn ground, the new nodes and stumps, named
+## ponds, kept sites, and a version 5 save brought onto it without moving
+## anything on it.
+func _task_0156_map_v1() -> void:
+	expect(GameData.validate().is_empty(), "the tables validate on the 1.0 map",
+		str(GameData.validate()))
+	var farm := State.create(1560)
+	Pathing.refresh(farm)
+
+	# **Spawn ground**: every band cell walkable, empty and reachable.
+	var bad: Array = []
+	for side in GameData.sorted_names(GameData.SPAWN_BANDS.keys()):
+		for pair in (GameData.SPAWN_BANDS[side] as Array):
+			var cell := Vector2i(int(pair[0]), int(pair[1]))
+			if not Farm.walkable(farm, cell) or not Farm.is_empty(farm, cell) \
+					or not Pathing.reachable(farm, cell):
+				bad.append([side, cell])
+	expect(bad.is_empty() and GameData.SPAWN_BANDS.size() == 3,
+		"the north, west and south bands are clear, walkable and reach the house", str(bad))
+
+	# **The new nodes, under their final ids**, inert and stood beside.
+	var missing: Array = []
+	for id in GameData.UNGATHERED_NODES:
+		var cells := Farm.cells_with(farm, id)
+		if cells.is_empty():
+			missing.append(id)
+		for found in cells:
+			var cell: Vector2i = found
+			if Interact.verb_at(farm, cell) != &"" or Farm.walkable(farm, cell):
+				missing.append("%s at %s is not inert" % [id, cell])
+	expect(missing.is_empty(), "copper, coal, gold and the hardwood stump are on the map, inert",
+		str(missing))
+	var pieces := {}
+	for found in Farm.cells_with(farm, &"hardwood_stump"):
+		var at: Array = Farm.occupant(farm, found as Vector2i)["anchor"]
+		pieces[str(at)] = int(pieces.get(str(at), 0)) + 1
+	var whole := true
+	for key in pieces:
+		if int(pieces[key]) != 4:
+			whole = false
+	expect(pieces.size() == 4 and whole and Building.size_of(&"hardwood_stump") == Vector2i(2, 2),
+		"four stumps, each one thing over its 2x2 with its own anchor", str(pieces))
+
+	# **The ponds by name**, and nothing on land.
+	var named: Array = []
+	for id in GameData.sorted_names(GameData.PONDS.keys()):
+		var pair: Array = GameData.PONDS[id]
+		named.append(Farm.pond_of(farm, Vector2i(int(pair[0]), int(pair[1]))))
+	expect(named == GameData.sorted_names(GameData.PONDS.keys()) and named.size() == 3
+		and Farm.pond_of(farm, Vector2i(5, 14)) == &"north_west_pond"
+		and Farm.pond_of(farm, Farm.house_centre(farm)) == &""
+		and Farm.pond_of(farm, Vector2i(39, 40)) == &"",
+		"Farm.pond_of names three ponds from any of their water, and nothing on land",
+		str(named))
+
+	# **The sites are clear.**
+	var taken: Array = []
+	for id in GameData.sorted_names(GameData.MAP_SITES.keys()):
+		var box: Array = GameData.MAP_SITES[id]
+		for y in range(int(box[1]), int(box[1]) + int(box[3])):
+			for x in range(int(box[0]), int(box[0]) + int(box[2])):
+				if not Farm.is_empty(farm, Vector2i(x, y)):
+					taken.append([id, Vector2i(x, y)])
+	expect(taken.is_empty(), "the coop's, the barn's and the bin's room is clear", str(taken))
+
+	# **The v5 golden comes up to v6 without moving anything on it.**
+	var raw: Dictionary = Save._read("res://tools/goldens/run-v5.sav")
+	var old: Dictionary = raw.get("state", {})
+	var now := Save.read_run_at("res://tools/goldens/run-v5.sav")
+	expect(int(old.get("version", 0)) == 5 and int(now.get("version", 0)) == 6,
+		"the v5 golden reads as version 6", "%s to %s" % [old.get("version"), now.get("version")])
+	var moved: Array = []
+	var cleared := {}
+	for idx in Save._ground_the_1_0_farm_clears():
+		cleared[int(idx)] = true
+	var was: Dictionary = old.get("occupants", {})
+	var is_now: Dictionary = now.get("occupants", {})
+	for idx in was.keys():
+		var before: Dictionary = was[idx]
+		var gone_on_purpose := cleared.has(int(idx)) and not before.has("hp") \
+			and StringName(before["id"]) in [&"tree", &"rock"]
+		if gone_on_purpose:
+			continue
+		if not is_now.has(idx) or str(is_now[idx]) != str(before):
+			moved.append(["occupant", Grid.cell(int(idx))])
+	var old_plots: Dictionary = old.get("plots", {})
+	for idx in old_plots.keys():
+		if str((now.get("plots", {}) as Dictionary).get(idx, {})) != str(old_plots[idx]):
+			moved.append(["plot", Grid.cell(int(idx))])
+	var landed: Array = []
+	for idx in is_now.keys():
+		if was.has(idx):
+			continue
+		var id := StringName((is_now[idx] as Dictionary)["id"])
+		if not id in GameData.UNGATHERED_NODES or old_plots.has(idx):
+			landed.append([id, Grid.cell(int(idx))])
+	expect(moved.is_empty(), "every plot and every occupant the save had is where it was",
+		str(moved.slice(0, 4)))
+	expect(landed.is_empty(), "and only the new nodes were laid, on cells that were empty",
+		str(landed.slice(0, 4)))
+	var at := int(now["tick"])
+	Sim.advance(now, 600)
+	expect(int(now["tick"]) == at + 600, "and it plays 600 ticks")
+
+	# **A save's touched tree stays; an untouched one leaves the band.**
+	var v5 := State.create(1561)
+	var band: Array = GameData.SPAWN_BANDS[&"north"][1]
+	var band_cell := Vector2i(int(band[0]), int(band[1]))
+	(v5["occupants"] as Dictionary)[Grid.index(band_cell)] = {"id": &"tree"}
+	var west_band: Array = GameData.SPAWN_BANDS[&"west"][8]
+	var hurt_cell := Vector2i(int(west_band[0]), int(west_band[1]))
+	(v5["occupants"] as Dictionary)[Grid.index(hurt_cell)] = {"id": &"tree", "hp": 2}
+	(v5["regrowing"] as Array).append([Grid.index(band_cell + Vector2i(1, 0)), 50, "tree"])
+	v5["version"] = 5
+	var stepped := Save._farm_v1_0_from_v5(v5)
+	expect(Farm.is_empty(stepped, band_cell)
+		and StringName(Farm.occupant(stepped, hurt_cell).get("id", &"")) == &"tree"
+		and (stepped["regrowing"] as Array).is_empty(),
+		"an untouched map tree leaves a band, a chopped-at one stays, and nothing regrows there")
+
+	# **Every golden loads.**
+	var golden_trouble: Array = []
+	for name in DirAccess.get_files_at("res://tools/goldens"):
+		if String(name).ends_with(".sav") \
+				and Save.read_run_at("res://tools/goldens/" + String(name)).is_empty():
+			golden_trouble.append(name)
+	expect(golden_trouble.is_empty(), "every golden loads", str(golden_trouble))
+	_completed += 1

@@ -317,7 +317,7 @@ static func _migrate(payload: Dictionary, from_version: int) -> Dictionary:
 ## `_night_is_the_date_v4`.
 static func migrations() -> Dictionary:
 	return {1: _expand_farm_v1, 2: _expand_farm_v2, 3: _expand_farm_v3,
-		4: _night_is_the_date_v4}
+		4: _night_is_the_date_v4, 5: _farm_v1_0_from_v5}
 
 
 ## The farm each version was written with.
@@ -507,6 +507,90 @@ static func _night_is_the_date_v4(previous: Dictionary) -> Dictionary:
 		state["endless"] = int(state.get("day", 1)) > Calendar.year_days()
 	state["version"] = 5
 	return state
+
+
+## **5 to 6: the 1.0 farm** (task 0156), laid onto a save without moving
+## anything on it:
+##
+## - **The cleared ground** - the spawn bands and the kept sites: a map tree
+##   or rock leaves them only if it is untouched (no `hp` - nobody has swung
+##   at it), and nothing there is left to regrow. Anything the player put
+##   there, a plot or a chopped tree's stump stays.
+## - **The new nodes and stumps**, where the save's cell is empty map ground:
+##   no occupant, no plot, the terrain the map has there. A stump goes down
+##   whole, on all four of its cells, or not at all.
+## - Path caches reset and `grid_version` bumped, as the widenings do.
+static func _farm_v1_0_from_v5(previous: Dictionary) -> Dictionary:
+	var state := previous.duplicate(true)
+	var occupants: Dictionary = state.get("occupants", {})
+	var plots: Dictionary = state.get("plots", {})
+	var terrain: PackedByteArray = state.get("terrain", PackedByteArray())
+	if terrain.size() != Grid.CELLS:
+		return {}
+	var cleared := _ground_the_1_0_farm_clears()
+	var regrowing: Array = state.get("regrowing", [])
+	for idx in cleared:
+		var on: Dictionary = occupants.get(idx, {})
+		if not on.is_empty() and StringName(on["id"]) in [&"tree", &"rock"] \
+				and not on.has("hp"):
+			occupants.erase(idx)
+		for entry in regrowing.duplicate():
+			if int(entry[0]) == int(idx):
+				regrowing.erase(entry)
+
+	var fresh := Farm.initial()
+	var fresh_occupants: Dictionary = fresh["occupants"]
+	var fresh_terrain: PackedByteArray = fresh["terrain"]
+	var keys: Array = fresh_occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var on: Dictionary = fresh_occupants[idx]
+		if not StringName(on["id"]) in GameData.UNGATHERED_NODES:
+			continue
+		var anchor: Variant = on.get("anchor", null)
+		var parts: Array = [int(idx)]
+		if anchor != null:
+			if Grid.index(Vector2i(int(anchor[0]), int(anchor[1]))) != int(idx):
+				continue        # a stump goes down from its anchor, whole
+			parts = []
+			var size := Building.size_of(StringName(on["id"]))
+			for y in size.y:
+				for x in size.x:
+					parts.append(Grid.index(Vector2i(int(anchor[0]) + x, int(anchor[1]) + y)))
+		var room := true
+		for part in parts:
+			if occupants.has(part) or plots.has(part) \
+					or terrain[int(part)] != fresh_terrain[int(part)]:
+				room = false
+		if not room:
+			continue
+		for part in parts:
+			occupants[part] = (fresh_occupants[part] as Dictionary).duplicate(true)
+
+	for key in Pathing.initial():
+		state[key] = Pathing.initial()[key]
+	for key in ["tower", "livestock"]:
+		state[key + "_cells"] = []
+		state[key + "_version"] = -1
+	state["grid_version"] = int(state.get("grid_version", 0)) + 1
+	state["version"] = 6
+	return state
+
+
+## Every cell the 1.0 farm keeps clear: the spawn bands and the sites.
+static func _ground_the_1_0_farm_clears() -> Array:
+	var out := {}
+	for side in GameData.sorted_names(GameData.SPAWN_BANDS.keys()):
+		for pair in (GameData.SPAWN_BANDS[side] as Array):
+			out[Grid.index(Vector2i(int(pair[0]), int(pair[1])))] = true
+	for id in GameData.sorted_names(GameData.MAP_SITES.keys()):
+		var box: Array = GameData.MAP_SITES[id]
+		for y in range(int(box[1]), int(box[1]) + int(box[3])):
+			for x in range(int(box[0]), int(box[0]) + int(box[2])):
+				out[Grid.index(Vector2i(x, y))] = true
+	var cells: Array = out.keys()
+	cells.sort()
+	return cells
 
 
 static func _room_to_expand(state: Dictionary, origin: Vector2i, size: Vector2i, old_parts: Array) -> bool:

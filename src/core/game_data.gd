@@ -1745,17 +1745,26 @@ const TRAMPLE_REACH := 0                # LEVER: tiles either side of a route, 0
 ##     T  tree           r  loose rock            o  iron ore
 ##     S  stone seam     W  the workshop
 ##     H  the farmhouse  $  the shop stall
+##     u  copper ore     k  coal seam             g  gold ore
+##     h  a hardwood stump, one thing over 2x2 cells
+##
+## **The 1.0 farm** (task 0156): spawn ground cleared for the sides 0157
+## opens (`SPAWN_BANDS`), copper, coal and gold on the north-east outcrop and
+## four hardwood stumps in the south-west woods under their final ids - inert
+## obstacles until 0176 and 0177 give them `GATHERING` rows - the ponds named
+## in `PONDS`, and the coop's, the barn's and the shipping bin's room kept
+## clear in `MAP_SITES`.
 ##
 ## `validate()` checks the shape, so a row typed one character short is a red
 ## line rather than a farm that is subtly wrong down one edge.
 const FARM_MAP: Array = [
 	"TTT.TTTT....TTT..TT.....TT....TT..TTT.TTT.TT...TTTTT..TTTTT..TTTTT..TTTTT..TTT.T",
-	"....................S######o........T.......T.......................r..........T",
+	"....................S######o........................................r..........T",
 	"T......T............S######o...........T.......T.T...r.........................T",
-	"....................S######o...........T...........r...............#######r....T",
+	"....................S######o...........T...........r...............u###gg#r....T",
 	".....T...r..........S######o....r.............T.T.T...............r#######.....T",
-	"T..........r........S######o...........T..............T........T...#######r....T",
-	"......T.............#####ooo...................T.T................r#######.....T",
+	"T..........r........S######o...........T..............T........T...u######r....T",
+	"......T.............#####ooo...................T.T................r##kk###.....T",
 	"T.........T.....T......................T.........................r..r..r.r.....T",
 	"...............pp...r.....r............T......T.T.T............................T",
 	"...T........T..pp................T.T...T...............................r.......T",
@@ -1777,7 +1786,7 @@ const FARM_MAP: Array = [
 	"T.............................WWWW...HHHHHH.$$$$...............................T",
 	"T.............................WWWW..w..pp.................T....................T",
 	"T......................T...C....pppppppppppppppppppppppppppppppppppppppppppppppp",
-	"T.T.T.T.T.T.T.T.T.T.T.Tr...............pp.......pppppppppppppppppppppppppppppppp",
+	"T.T.T.T...T.T.T.T.T.T.Tr...............pp.......pppppppppppppppppppppppppppppppp",
 	"T.........................c.....ssssss.pp.ssssss...............................T",
 	"T..T.T.T.T.T...T.T.T........c...ssssss.pp.ssssss.....T.........................T",
 	"T...............................ssssss.pp.ssssss...T.....r.....................T",
@@ -1786,18 +1795,18 @@ const FARM_MAP: Array = [
 	"T..T.T.T...T...T.T.T.T.................pp............r.........................T",
 	"T......................................pp......................................T",
 	"T.T.T.T.T.T.T.T.T.T.T.T...........r....pp......................................T",
-	"T......................................pp......................................T",
-	"T..T.............T.T.T.......T.........pp......................................T",
+	"T....hh................................pp......................................T",
+	"T..T.hh..........T.T.T.......T.........pp......................................T",
 	"T......................................pp.......T...r...T............T.........T",
 	"T.T...T...~~~~......T.T..............T.pp.............................TT.......T",
 	"T........~~~~~~........................pp......................==.r............T",
 	"T..T.T...~~~~~~..T.T.T.................pp......................==..............T",
 	"T........~~~~~~..pppppppp..............pp....................~~==~~............T",
 	"T.T.T.T...~~~~....T.T..................pp..................~~~~==~~~~~.r.......T",
-	"T...........................T......T...pp.................~~~~~==~~~~~~...r....T",
-	"T..T.T...........T.T.T.....T...T.......pp...........TT...~~~~~~~~~~~~~~~.r.....T",
-	"T...........................r..........pp...T............~~~~~~~~~~~~~~~~......T",
-	"T.T.T.T.............T.............r....pp................~~~~~~~~~~~~~~~~......T",
+	"T.......hh..................T......T...pp.................~~~~~==~~~~~~...r....T",
+	"T..T.T..hh.......T.T.T.....T...T.......pp...........TT...~~~~~~~~~~~~~~~.r.....T",
+	"T.......................hh..r..........pp...T............~~~~~~~~~~~~~~~~......T",
+	"T.T.T.T.............T...hh........r....pp................~~~~~~~~~~~~~~~~......T",
 	"T......................................pp..T....T..T......~~~~~~~~~~~~~~.......T",
 	"T..T.T.T.T.T.T.T.T.T.T...............r.pp.................~~~~~~~~~~~~~........T",
 	"T..............................r.......pp..............r....~~~~~~~~~..........T",
@@ -1807,8 +1816,8 @@ const FARM_MAP: Array = [
 	"T......................................pp................................r.....T",
 	"T.T.T.T...T.T.T.T.T...T................pp................................T.....T",
 	"T......................T..............Tpp...T...........T.......T..............T",
-	"T..T.T...T.T.T.T...T.T.................pp......................................T",
-	"T......................................pp....................T.......T.........T",
+	"T..T.Thh.T.T.T.T...T.T.................pp......................................T",
+	"T.....hh...............................pp....................T.......T.........T",
 	"T.T...T.T.T.T...T.T.T.T......r.........pp......................................T",
 	"T....................................rTpp...................T..............r...T",
 	"T......................................pp......................................T",
@@ -1835,6 +1844,56 @@ const MAP_LEGEND: Dictionary = {
 	"w": [0, &"well"],
 	"C": [0, &"cow"],
 	"c": [0, &"chicken"],
+	"u": [3, &"copper_ore"],
+	"k": [3, &"coal_seam"],
+	"g": [3, &"gold_ore"],
+	"h": [0, &"hardwood_stump"],
+}
+
+## **Nodes on the map with no `GATHERING` row yet** (task 0156): under their
+## final ids, so 0176 (copper, coal, gold) and 0177 (hardwood) change data
+## only. Until then they are inert, impassable obstacles with no verb - and
+## `check_reachable` still sees that each can be stood beside. Each task
+## takes its own off this list when it gives them a row.
+const UNGATHERED_NODES: Array = [&"copper_ore", &"coal_seam", &"gold_ore", &"hardwood_stump"]
+
+## Map props bigger than one cell, by id: one thing over its footprint, with
+## an `anchor` on every cell as a building's footprint is kept.
+const MAP_PROP_SIZES: Dictionary = {&"hardwood_stump": Vector2i(2, 2)}
+
+## **Spawn ground for the sides 0157 opens** (task 0156): lines of cleared,
+## walkable cells near the north, west and south edges, away from the
+## farmstead and about as far from the house by path as the east band of
+## `SPAWNS` (26-32 steps): the north 22-27, the west 29-34, the south
+## 30-33, measured with `Pathing.distance` on a new farm. Nothing on them
+## regrows. 0157 turns them into `SPAWNS` regions; until then nothing spawns
+## here.
+const SPAWN_BANDS: Dictionary = {
+	&"north": [[35, 1], [36, 1], [37, 1], [38, 1], [39, 1], [40, 1], [41, 1],
+		[42, 1], [43, 1], [44, 1]],
+	&"west": [[8, 20], [8, 21], [8, 22], [8, 23], [8, 24], [8, 25], [8, 26],
+		[8, 27], [8, 28], [8, 29]],
+	&"south": [[35, 55], [36, 55], [37, 55], [38, 55], [39, 55], [40, 55],
+		[41, 55], [42, 55], [43, 55], [44, 55]],
+}
+
+## **The farm's waters, by name** (task 0156): one cell of each body, which
+## `Farm.pond_of` finds by flood fill over the state's own terrain - so 0179
+## can key a fish to a pond, and a save's pond is still that pond.
+const PONDS: Dictionary = {
+	&"north_west_pond": [10, 16],
+	&"forest_pond": [11, 42],
+	&"south_east_lake": [66, 48],
+}
+
+## **Room kept clear** (task 0156), as `[x, y, width, height]`: the coop and
+## the barn by the workshop and the animals, each room for a footprint up to
+## 7x4 (0183 decides the real ones), and the shipping bin by the porch
+## (0189). Nothing on the map stands in them, and `check_sites` keeps it so.
+const MAP_SITES: Dictionary = {
+	&"coop": [21, 21, 7, 4],
+	&"barn": [23, 33, 7, 4],
+	&"shipping_bin": [43, 26, 2, 1],
 }
 
 
@@ -1863,6 +1922,9 @@ static func validate() -> Array:
 	errors.append_array(check_fishing(FISHING))
 	errors.append_array(check_iron(GATHERING, FARM_MAP))
 	errors.append_array(check_reachable(GATHERING, FARM_MAP))
+	errors.append_array(check_spawn_bands(SPAWN_BANDS, FARM_MAP))
+	errors.append_array(check_ponds(PONDS, FARM_MAP))
+	errors.append_array(check_sites(MAP_SITES, FARM_MAP))
 	errors.append_array(check_chain(RECIPES, SELL_PRICE))
 	errors.append_array(check_livestock(LIVESTOCK, FARM_MAP))
 	errors.append_array(check_ammo(DEFENCES, RECIPES))
@@ -2174,7 +2236,13 @@ static func _in_a_cliff(rows: Array, cell: Vector2i) -> bool:
 ## finds, so the walk is now a check.
 static func check_reachable(nodes: Dictionary, rows: Array) -> Array:
 	var errors: Array = []
-	for id in sorted_names(nodes.keys()):
+	# **And the nodes with no row yet** (task 0156): each must be ready to
+	# be stood beside the day its row arrives.
+	var ids := sorted_names(nodes.keys())
+	for waiting in UNGATHERED_NODES:
+		if not ids.has(waiting):
+			ids.append(waiting)
+	for id in ids:
 		var ch := _char_for(id)
 		if ch == "":
 			continue        # not something the map places
@@ -2187,6 +2255,66 @@ static func check_reachable(nodes: Dictionary, rows: Array) -> Array:
 				errors.append(("'%s' at %s is walled in - there is nowhere to "
 					+ "stand and mine it") % [id, cell])
 	return errors
+
+
+## **Spawn ground** (task 0156): every band cell is on the map and is ground
+## that can be walked and holds nothing - grass, soil, path or floor.
+static func check_spawn_bands(bands: Dictionary, rows: Array) -> Array:
+	var errors: Array = []
+	for side in sorted_names(bands.keys()):
+		for pair in (bands[side] as Array):
+			var cell := Vector2i(int(pair[0]), int(pair[1]))
+			if not _clear_ground(rows, cell):
+				errors.append("the %s spawn band's %s is not clear walkable ground"
+					% [side, cell])
+	return errors
+
+
+## **The ponds** (task 0156): every anchor is water, and no two name the
+## same body - checked by the anchors being apart, `Farm.pond_of` decides.
+static func check_ponds(ponds: Dictionary, rows: Array) -> Array:
+	var errors: Array = []
+	for id in sorted_names(ponds.keys()):
+		var pair: Array = ponds[id]
+		var cell := Vector2i(int(pair[0]), int(pair[1]))
+		var entry: Variant = _legend_at(rows, cell)
+		if entry == null or int((entry as Array)[0]) != 2:
+			errors.append("the pond '%s' is anchored at %s, which is not water" % [id, cell])
+	return errors
+
+
+## **The sites** (task 0156): every cell of every site is clear walkable
+## ground, so the coop, the barn and the bin have their room.
+static func check_sites(sites: Dictionary, rows: Array) -> Array:
+	var errors: Array = []
+	for id in sorted_names(sites.keys()):
+		var box: Array = sites[id]
+		for y in range(int(box[1]), int(box[1]) + int(box[3])):
+			for x in range(int(box[0]), int(box[0]) + int(box[2])):
+				if not _clear_ground(rows, Vector2i(x, y)):
+					errors.append("the %s site's %s is not clear ground"
+						% [id, Vector2i(x, y)])
+	return errors
+
+
+## A map cell's legend entry, or null off the map.
+static func _legend_at(rows: Array, cell: Vector2i) -> Variant:
+	if cell.y < 0 or cell.y >= rows.size():
+		return null
+	var row: String = rows[cell.y]
+	if cell.x < 0 or cell.x >= row.length():
+		return null
+	return MAP_LEGEND.get(row[cell.x], null)
+
+
+## Ground that can be walked and holds nothing: not water, not rock face,
+## and no occupant.
+static func _clear_ground(rows: Array, cell: Vector2i) -> bool:
+	var entry: Variant = _legend_at(rows, cell)
+	if entry == null:
+		return false
+	var pair: Array = entry
+	return int(pair[0]) != 2 and int(pair[0]) != 3 and StringName(pair[1]) == &""
 
 
 ## Whether any orthogonal neighbour of a cell is ground a person can stand on.
@@ -2788,6 +2916,8 @@ static func digest() -> int:
 		"house": [HOUSE_SIZE, SHOP_SIZE, HOUSE_ROOM, HOUSE_DOOR,
 			HOUSE_SPAWN, HOUSE_FURNITURE],
 		"map": FARM_MAP,
+		# **The 1.0 farm's tables** (task 0156).
+		"map_v1": [UNGATHERED_NODES, MAP_PROP_SIZES, SPAWN_BANDS, PONDS, MAP_SITES],
 		# **The legend is half the map.** Which character is soil, water, a
 		# rock or a vein of ore decides the farm as much as the characters
 		# do; until task 0112 it could be redrawn with the guard quiet.

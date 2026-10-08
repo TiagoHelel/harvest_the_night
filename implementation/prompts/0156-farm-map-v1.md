@@ -1,7 +1,7 @@
 # 0156 - The 1.0 farm map
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0151
 - **Likely files:** src/core/game_data.gd (FARM_MAP, MAP_LEGEND, checks), src/core/farm.gd, src/core/interact.gd, src/core/pathing.gd, src/app/save.gd, src/core/state.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, tools/goldens/, src/tools/shot.gd, src/tools/headless_v1.gd
 
