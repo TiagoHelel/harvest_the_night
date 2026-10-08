@@ -76,13 +76,13 @@ static func _tick_day(state: Dictionary) -> void:
 
 	state["day_tick"] = int(state["day_tick"]) + 1
 
-	# **Asked for last frame, decided here.** The button writes an intent and
-	# the rules act on it, so the keyboard, the mouse and the autoplayer all
-	# take the same road into the night.
+	# **Asked for last frame, decided here.** The button and the bed write an
+	# intent and the rules act on it, so the keyboard, the mouse, the bed and
+	# the autoplayer all take the same road into the night: going to bed.
 	var intent: Dictionary = state["intent"]
-	if bool(intent.get("begin_night", false)):
-		intent["begin_night"] = false
-		Phases.begin_preparation(state)
+	if bool(intent.get("sleep", false)):
+		intent["sleep"] = false
+		Phases.go_to_bed(state)
 		return
 
 	# **First**, so that everything below it runs at the speed the farm can

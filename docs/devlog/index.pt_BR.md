@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-123 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+124 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -166,6 +166,7 @@ voz alta.
 | 0120 | One road for art that has not arrived | 2026-10-08 |
 | 0121 | A controller for every action | 2026-10-08 |
 | 0126 | The clock: 06:00 to 02:00 | 2026-10-08 |
+| 0127 | Going to bed starts the night | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 

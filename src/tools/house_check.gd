@@ -165,7 +165,7 @@ func _run() -> void:
 	expect(not House.inside(_state) and Player.position(_state) == outside, "Walking to the interior door returns to the exact farm position")
 	_state["intent"]["move"] = [0, 0]
 	House.enter(_state)
-	_state["intent"]["begin_night"] = true
+	_state["intent"]["sleep"] = true
 	Sim.tick(_state)
 	expect(not House.inside(_state) and int(_state["phase"]) == Phases.PREPARATION,
 		"Starting defence returns outside before the phase changes")

@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 3
+const V1_CASES := 4
 
 
 func _process(delta: float) -> bool:
@@ -53,6 +53,7 @@ func _run() -> void:
 	await _case_0112_harness()
 	await _case_0114_house_bar()
 	await _case_0121_pad()
+	await _case_0127_bed()
 	_finish()
 
 
@@ -300,3 +301,53 @@ func _pad_axis(axis: JoyAxis, value: float) -> void:
 	event.axis_value = value
 	Input.parse_input_event(event)
 	await process_frame
+
+
+## 0127 - the bed and the GO TO BED button start the night.
+func _case_0127_bed() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+
+	# **Into the house, beside the bed, interact.**
+	_stand_at(state, House.porch(state))
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return House.inside(state), "the house visit")
+	var side := Vector2i(-1, -1)
+	for y in range(3, House.ROOM.y - 1):
+		for x in range(1, House.ROOM.x - 1):
+			if side.x < 0 and House.bedside(Vector2i(x, y)):
+				side = Vector2i(x, y)
+	_stand_at(state, side, Player.NORTH)
+	await frames(3)
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"the bed to start the night")
+	expect(int(state["phase"]) == Phases.PREPARATION and House.asleep(state)
+		and not House.inside(state), "the bed starts the build step, asleep")
+	await close_scene()
+
+	# **GO TO BED from the far field** does the same, with no walking home.
+	await open_scene(MAIN_SCENE)
+	driver = require_control("SimDriver")
+	state = driver.state
+	await frames(4)
+	var field: Vector2i = Farm.cells_of(state, Farm.Terrain.SOIL)[0]
+	var stand := _walkable_neighbour(state, field)
+	_stand_at(state, stand)
+	await frames(3)
+	var button: Button = require_control("NightButton")
+	expect(button != null and button.text == I18n.t(&"DHUD_TO_NIGHT"),
+		"the night button reads GO TO BED", button.text if button else "")
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"GO TO BED to start the night")
+	expect(int(state["phase"]) == Phases.PREPARATION and House.asleep(state),
+		"GO TO BED from the field starts the build step, asleep")
+	await close_scene()
+	_completed += 1

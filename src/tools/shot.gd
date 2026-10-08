@@ -316,7 +316,7 @@ func _take_the_trailer(folder: String) -> void:
 		shot = await _reel_frame(state, shot, folder)
 
 	# ------------------------------------------------- send for the night
-	(state["intent"] as Dictionary)["begin_night"] = true
+	(state["intent"] as Dictionary)["sleep"] = true
 	for _i in BEAT_SWITCH:
 		shot = await _reel_frame(state, shot, folder)
 
@@ -442,7 +442,7 @@ func _take_the_switch(folder: String) -> void:
 
 	# **Asked for the way a player asks**, by writing the intent, so the
 	# phase machine and the light and the theatre all start together.
-	(state["intent"] as Dictionary)["begin_night"] = true
+	(state["intent"] as Dictionary)["sleep"] = true
 
 	# **The whole fade, spread over the pictures there are.** A tenth past
 	# the end, so the strip settles on the night rather than stopping while
@@ -881,7 +881,9 @@ func _a_sown_field(state: Dictionary) -> void:
 func _set_house_interior(state: Dictionary) -> void:
 	_walk_to(state, House.porch(state))
 	House.enter(state)
-	_standing_at = Vector2i(9, 8)
+	# **Beside the bed** since task 0127, so the picture shows what the line
+	# at the bottom says there: the way to bed, which is the way to the night.
+	_standing_at = House.bed().position + Vector2i(1, House.bed().size.y)
 
 
 ## The north-west beds of the farmstead, planted and grown.

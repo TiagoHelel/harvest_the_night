@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-123 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
+124 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -167,6 +167,7 @@ is the sort of thing this list exists to say out loud.
 | 0120 | One road for art that has not arrived | 2026-10-08 |
 | 0121 | A controller for every action | 2026-10-08 |
 | 0126 | The clock: 06:00 to 02:00 | 2026-10-08 |
+| 0127 | Going to bed starts the night | 2026-10-08 |
 
 ## Every time the game changed underneath itself
 

@@ -71,9 +71,11 @@ static func initial() -> Dictionary:
 			"move": [0, 0],
 			"interact": false,
 			"cancel": false,
-			# The night button, the N key and the autoplayer all write this.
-			# **The HUD does not change the phase**; the tick does.
-			"begin_night": false,
+			# **Going to bed** (task 0127): the GO TO BED button, the `night`
+			# key, the bed in the farmhouse and the autoplayer all write this,
+			# and `Phases.go_to_bed()` is what the tick does with it. The HUD
+			# does not change the phase; the tick does.
+			"sleep": false,
 			# Build mode: the cell the player is pointing at, and what they
 			# want done with it. `[-1, -1]` is "nowhere".
 			"build_cell": [-1, -1],

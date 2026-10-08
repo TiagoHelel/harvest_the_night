@@ -13258,3 +13258,57 @@ unchanged; **data 1968527100 -> 1739027987** (dusk 192 s -> 144 s and the three
 clock levers joining the `time` row of `digest()`, on purpose). Shots 0126
 opened: noon reads "DAY 1 12:15" in plain light; dusk reads "18:25 DUSK" in the
 warm light with "NIGHT 1 IS WAITING" - the evening starts at 18:00.
+
+## 0127 - Going to bed starts the night - done 2026-10-08
+
+What changed: going to bed is the reality switch (plan section 12). The
+`begin_night` intent is now `sleep`, written by the GO TO BED button, the
+`night` key (id kept, so saved bindings survive; `ACT_NIGHT` reads GO TO BED /
+IR DORMIR), the bed, the title backdrop and every tool and test.
+`Phases.go_to_bed(state)` - DAY only, refused with an error otherwise - runs
+`begin_preparation`, and **`begin_preparation` sets `house_visit.asleep`**, so
+every road into the build step (bed, button, 0128's pass-out, `NightRoad`)
+leaves him asleep; asleep is not `House.inside` (`begin_preparation` still
+calls `House.leave`, so building and the world view carry on outdoors).
+`House.asleep`, `House.bed()`, `House.bedside(cell)` (floor one step from the
+bed's `HOUSE_FURNITURE` rectangle, side by side) and `House.can_sleep`;
+`House.tick` turns interact beside the bed into the same `sleep` intent - kept
+off `Interact.DAY_ONLY`, so no new sound is needed. The house view's bottom
+line reads `HOUSE_BED_HINT` ('%s: go to bed' / '%s: ir dormir') beside the bed.
+The day HUD's `NightButton` keeps its name and reads GO TO BED / IR DORMIR, and
+past dusk "GO TO BED - NIGHT %d" / "IR DORMIR - NOITE %d"; it only asks by day.
+`begin_day` clears `asleep` and forgets a sleep intent asked for after dark.
+`intent` and `house_visit` are TABLES structures, so reconcile drops the old
+field and fills the new ones - no `State.VERSION` bump, goldens still load.
+**Decision - sleeping early: the skipped hours are neither lived nor
+credited.** Crafting queues, regrowth, the animals and the generator keep the
+progress they had and carry on from 06:00 (no work lost), and nothing is
+produced for hours nobody lived (no exploit). It is what the night button
+already did, so it needed no new code - only this line, a comment on
+`Phases.go_to_bed` and the assert.
+Old checks rewritten in place, each pointing here: `_task_0021_night_intent`
+(the sleep intent gets the build step asleep, is consumed, changes nothing
+twice, dusk never presses it; its "deliberate ERROR" note was stale),
+`_task_0111_house` ("the night starts asleep, not inside"),
+`_case_0111_farm_house` (going to bed from a visit sleeps, outdoors), and the
+NightButton text checks in `_case_0039_clock` and `_case_0097_language`. shot.gd's
+`house_interior` now stands the farmer beside the bed, so the picture shows the
+new line.
+Files: src/core/{player,sim,phases,house}.gd, src/ui/{day_hud,house_view,
+player_work,title_screen}.gd, assets/locale/strings.csv,
+src/tools/{headless_v1,input_v1,headless_check,input_check,shot,art_showcase,
+house_check}.gd, tools/determinism_sim_hash.txt, implementation/shots/0127/
+Verify: **59 passed, 0 failed in 511s** (OVER BUDGET 300, as before); headless_check
+16177, headless_v1 144 (+16: `_task_0127_bed` - intent and bed both land in the
+build step asleep and not inside, the bed only from beside it, both refused in
+PREPARATION, NIGHT and RESULT with the state unchanged, the morning wakes him
+and forgets the bedtime, a fence kit started at 09:00 and slept on keeps its 90
+ticks left and is not made overnight), input_check 1074, input_v1 30 (+3:
+`_case_0127_bed` - into the house, beside the bed, SPACE starts the build
+step; GO TO BED clicked from the far field does the same); **sim 4130513273 ->
+10253699** (the intent field renamed and `house_visit.asleep` added, both
+hashed; the determinism scenario's build step now has him asleep), data
+1739027987 unchanged; parse 158 and headless_check re-run after the last
+shot.gd edit. Shots 0127 opened in en and pt_BR: the bed line reads
+"SPACE / ENTER: ir dormir" beside the bed, and the button "IR DORMIR - NOITE 1"
+fits at dusk.

@@ -188,7 +188,9 @@ func _process(delta: float) -> void:
 		return
 	_refresh_ambient(delta)
 	_title.text = I18n.t(&"HOUSE_TITLE")
-	_hint.text = I18n.f(&"HOUSE_EXIT_HINT", [interact_key])
+	# Beside the bed, the line says what interact does there (task 0127).
+	_hint.text = I18n.f(&"HOUSE_BED_HINT", [interact_key]) if House.can_sleep(state) \
+		else I18n.f(&"HOUSE_EXIT_HINT", [interact_key])
 	var blend := 1.0 - exp(-WorldView.CAMERA_RESPONSE * delta)
 	var target := Vector2(Player.position(state)) * GameData.TILE_SIZE / Player.SUBTILE
 	_focus = _focus.lerp(target, blend)

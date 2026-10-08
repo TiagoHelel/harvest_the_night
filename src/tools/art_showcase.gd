@@ -1689,7 +1689,7 @@ func _fishing_hold() -> void:
 				"miss":
 					_state["fishing"]["left"] = 1
 				"dusk":
-					_state["intent"]["begin_night"] = true
+					_state["intent"]["sleep"] = true
 			_work_tick(view, true)
 			view._process(0.4)
 			if exit_kind == "dusk":

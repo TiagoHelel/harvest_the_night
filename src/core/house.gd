@@ -10,11 +10,48 @@ const FURNITURE := GameData.HOUSE_FURNITURE
 
 
 static func initial() -> Dictionary:
-	return {"house_visit": {"inside": false, "outside_pos": [], "outside_facing": Player.SOUTH}}
+	return {"house_visit": {"inside": false, "outside_pos": [],
+		"outside_facing": Player.SOUTH,
+		# Gone to bed (task 0127): set by `Phases.begin_preparation`, so every
+		# road into the build step leaves him asleep; cleared at dawn.
+		"asleep": false}}
 
 
 static func inside(state: Dictionary) -> bool:
 	return bool((state.get("house_visit", {}) as Dictionary).get("inside", false))
+
+
+## Whether the farmer is asleep: from going to bed until the morning. **Not
+## the same as `inside()`** - the room is left behind when he sleeps, so the
+## farm, its building and its view carry on outdoors through the night.
+static func asleep(state: Dictionary) -> bool:
+	return bool((state.get("house_visit", {}) as Dictionary).get("asleep", false))
+
+
+## The bed, as the rectangle `HOUSE_FURNITURE` gives it.
+static func bed() -> Rect2i:
+	for piece in FURNITURE:
+		if StringName(piece["id"]) == &"bed":
+			return Rect2i(piece["cell"], piece["size"])
+	return Rect2i()
+
+
+## Whether a floor cell is beside the bed - one step from it, side by side
+## rather than corner to corner - which is where going to bed is offered.
+static func bedside(cell: Vector2i) -> bool:
+	var rect := bed()
+	if rect.size == Vector2i.ZERO or not walkable(cell):
+		return false
+	for step in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		if rect.has_point(cell + step):
+			return true
+	return false
+
+
+## Whether the farmer could go to bed right now: indoors, by day, beside it.
+static func can_sleep(state: Dictionary) -> bool:
+	return inside(state) and int(state["phase"]) == Phases.DAY \
+		and bedside(Player.cell(state))
 
 
 static func porch(state: Dictionary) -> Vector2i:
@@ -112,5 +149,9 @@ static func tick(state: Dictionary) -> void:
 	var here := Player.cell(state)
 	if here == DOOR or (here == SPAWN and bool(intent["interact"])):
 		leave(state)
+	elif bool(intent["interact"]) and can_sleep(state):
+		# **The bed's verb** (task 0127): the same `sleep` intent the GO TO
+		# BED button writes, decided by the next tick like every intent.
+		intent["sleep"] = true
 	intent["interact"] = false
 	intent["cancel"] = false

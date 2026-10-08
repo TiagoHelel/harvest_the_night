@@ -229,7 +229,9 @@ func _task_0111_house() -> void:
 	expect(not House.inside(state) and Player.position(state) == outside, "the indoor exit restores the farm position")
 	House.enter(state)
 	Phases.begin_preparation(state)
-	expect(not House.inside(state) and Player.position(state) == outside, "defence starts outside")
+	# Task 0127: the night starts asleep, and asleep is not inside.
+	expect(not House.inside(state) and House.asleep(state)
+		and Player.position(state) == outside, "the night starts asleep, not inside")
 	expect(not House.enter(state), "house visits cannot bypass the night")
 	_completed += 1
 
@@ -3190,16 +3192,17 @@ func _task_0021_night_intent() -> void:
 	var state := State.create(101)
 	expect(int(state["phase"]) == Phases.DAY, "it is the day")
 
-	(state["intent"] as Dictionary)["begin_night"] = true
+	(state["intent"] as Dictionary)["sleep"] = true
 	Sim.advance(state, 1)
-	expect(int(state["phase"]) == Phases.PREPARATION,
-		"asking for the night gets it", Phases.name_of(int(state["phase"])))
-	expect(not bool((state["intent"] as Dictionary)["begin_night"]),
+	# Task 0127: the intent is `sleep` - going to bed is what starts the night.
+	expect(int(state["phase"]) == Phases.PREPARATION and House.asleep(state),
+		"going to bed gets the build step, asleep", Phases.name_of(int(state["phase"])))
+	expect(not bool((state["intent"] as Dictionary)["sleep"]),
 		"and the asking is consumed, not remembered")
 
-	# Asking again from the wrong phase is refused, the way every transition is.
-	print("  (the ERROR line below is deliberate - a refused transition)")
-	(state["intent"] as Dictionary)["begin_night"] = true
+	# Asking again from the wrong phase changes nothing: only the day's tick
+	# reads the intent, and the morning forgets it (task 0127).
+	(state["intent"] as Dictionary)["sleep"] = true
 	Sim.advance(state, 1)
 	expect(int(state["phase"]) == Phases.PREPARATION,
 		"asking twice changes nothing")
@@ -4119,7 +4122,7 @@ func _task_0027_the_loop() -> void:
 	var run := State.create(805)
 	expect(int(run["day"]) == 1 and int(run["phase"]) == Phases.DAY, "day one")
 	Resources.gain(run, {GameData.WOOD: 60, GameData.IRON: 60})
-	(run["intent"] as Dictionary)["begin_night"] = true
+	(run["intent"] as Dictionary)["sleep"] = true
 	Sim.advance(run, 1)
 	expect(int(run["phase"]) == Phases.PREPARATION, "the night is asked for")
 	_arm_the_farm(run, 4)     # in the build step, since task 0119
@@ -6556,14 +6559,14 @@ func _task_0039_clock() -> void:
 	expect(Phases.is_dusk(stubborn), "and it is still saying so")
 
 	# **The night starts when the player says so, at any hour.**
-	(stubborn["intent"] as Dictionary)["begin_night"] = true
+	(stubborn["intent"] as Dictionary)["sleep"] = true
 	Sim.advance(stubborn, 1)
 	expect(int(stubborn["phase"]) == Phases.PREPARATION,
 		"pressing the button three days late still works",
 		Phases.name_of(int(stubborn["phase"])))
 
 	var early := State.create(2102)
-	(early["intent"] as Dictionary)["begin_night"] = true
+	(early["intent"] as Dictionary)["sleep"] = true
 	Sim.advance(early, 1)
 	expect(int(early["phase"]) == Phases.PREPARATION,
 		"and pressing it at dawn works too - it is the player's choice",
@@ -6980,7 +6983,7 @@ func _task_0041_tutorial() -> void:
 		"and not a single prompt has been finished on purpose",
 		str(Tutorial.progress(armed)))
 
-	(armed["intent"] as Dictionary)["begin_night"] = true
+	(armed["intent"] as Dictionary)["sleep"] = true
 	Sim.advance(armed, 1)
 	NightRoad.through_build(armed)
 	for _t in 12000:

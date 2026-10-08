@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **121 / 296 done**
+`##########..............`  **122 / 296 done**
 
-0 doing / 175 todo / 0 blocked across 18 phases.
+0 doing / 174 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-175 task(s) left, the ready ones first, then what they
+174 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,27 +107,9 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0127 - Going to bed starts the night
-
-Ready to pick up.  Likely files: `src/core/phases.gd, src/core/house.gd, src/core/sim.gd, src/core/player.gd, src/ui/day_hud.gd, src/ui/house_view.gd, src/ui/title_screen.gd, src/ui/player_work.gd, src/tools/shot.gd, src/tools/art_showcase.gd, src/tools/house_check.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Going to bed is the reality switch. The bed in the farmhouse and the night button both put the farmer to sleep, and sleeping is what starts the build step - the plan's section 12, 'when he sleeps, the farm switches reality'.
-
-- One road: the `begin_night` intent edge becomes `sleep` in `Player.initial()`, `Sim._tick_day`, the day HUD (`day_hud.gd` ~285), the `night` action, the title backdrop (`title_screen.gd` ~231), `player_work.gd` (~40, which reads it), `shot.gd` (~317, ~443), `art_showcase.gd` (~1692), `house_check.gd` (~168) and every test (grep `"begin_night"`; `Phases.begin_night` the transition keeps its name). `intent` is in `State.TABLES`, so reconcile drops the old field and fills the new one: no `State.VERSION` bump, and the goldens still load
-- `Phases.go_to_bed(state)` (DAY only; refuses and says so otherwise) is what the intent and the bed call; it runs `begin_preparation`, and **`begin_preparation` is what sets** a new `asleep` field of `house_visit` (a TABLES structure), so every road into the build step - the bed, the button, 0128's pass-out and 0118's `NightRoad` used by the tests and tools - leaves him asleep, and 0129's rule holds everywhere. **Asleep is not `House.inside`**: `begin_preparation` still calls `House.leave`, so `Building.why_not`, `Building.set_active` and the world view keep working. Add `House.asleep(state)`; `begin_day` clears the flag until 0138 wakes him in bed
-- The bed gets a verb: indoors, interact on a floor cell next to the bed's `HOUSE_FURNITURE` rectangle writes the same `sleep` intent (in `House.tick`), with a `HOUSE_BED_HINT` line ('%s: go to bed', en and pt_BR, beside `HOUSE_ENTER_HINT`) in the house view. Keep it out of `Interact.DAY_ONLY`: a verb on that list needs a `Sfx.VERB_SOUNDS` entry (`_task_0084_day_sounds`); if it goes there anyway, map it to the nearest existing sound until 0281 gives it its own
-- The day HUD's `NightButton` keeps its node name and becomes GO TO BED / IR DORMIR (`DHUD_TO_NIGHT`, `DHUD_NIGHT_WAITING` reworded); pressed anywhere on the farm, the farmer goes home and sleeps behind a fade, with no walking. The `night` action keeps its id (saved bindings are keyed by it) and `ACT_NIGHT` reads 'Go to bed'. 0140 owns the button's look and reminders
-- Sleeping early skips the rest of the day. Decide what the skipped hours do and write why in the journal. This prompt recommends that they are neither lived nor credited: crafting queues, regrowth, livestock and the generator keep their progress and resume at 06:00 (no lost work), and nothing is produced for hours nobody lived (no exploit). That is what the night button does today, so the recommended choice needs no new code - only the decision, the journal line and the assert
-- Rewrite the tests this task owns: `_task_0021_night_intent` (the sleep intent gets the build step, is consumed, is refused twice, and dusk never presses it), `_task_0111_house` ('defence starts outside' becomes 'the night starts asleep, not inside'; a house visit still cannot bypass the night), `_case_0111_farm_house` (~1956, 'starting night inside returns outside for defence'), every `NightButton` site in input_check (clicks ~1066-4993, requires ~1060-6355), the text case ~6355 ('GO TO BED' / 'IR DORMIR') and the intent at ~6452
-- SIM moves on purpose (an intent field is renamed and `house_visit` gains a field, and both are hashed): record the old and new numbers. DATA does not move
-
-  - done when: `_task_0127_bed` in `headless_v1.gd`: the bed and the intent both land in PREPARATION with `asleep` true and `inside` false; both are refused in PREPARATION, NIGHT and RESULT; the early-sleep rule the journal chose holds (e.g. a queue started at 09:00 and slept on keeps its progress and is not finished overnight)
-  - done when: `_case_0127_bed` in `input_v1.gd`: walk into the house, stand by the bed, press interact - the build step begins; clicking GO TO BED from the far field does the same
-  - done when: `python tools/shot.py 0127 house_interior dusk` opened, also with `--pt_BR`: the bed hint and the GO TO BED button read right and fit
-
 ### 0128 - Passing out at 02:00
 
-Waits on 0127.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/house.gd, src/core/game_data.gd, src/core/events.gd, src/ui/title_screen.gd, src/ui/log_panel.gd, src/tools/autoplay.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/house.gd, src/core/game_data.gd, src/core/events.gd, src/ui/title_screen.gd, src/ui/log_panel.gd, src/tools/autoplay.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
 
 The day finally ends. A farmer still awake at 02:00 collapses where he stands and the night begins anyway, with only a thirty-second build step: staying up late is allowed, and it costs preparation, not the run.
 
@@ -146,7 +128,7 @@ The day finally ends. A farmer still awake at 02:00 collapses where he stands an
 
 ### 0129 - He stays in bed all night
 
-Waits on 0127, 0128.  Likely files: `src/core/player.gd, src/core/ability.gd, src/core/building.gd, src/ui/main.gd, src/ui/night_hud.gd, src/ui/player_view.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0128.  Likely files: `src/core/player.gd, src/core/ability.gd, src/core/building.gd, src/ui/main.gd, src/ui/night_hud.gd, src/ui/player_view.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Nobody walks at night. The farmer is in bed from the moment he sleeps until the morning, and the two things the night used him for - the flare and the repair - keep working without him until the cursor takes them over.
 
@@ -165,7 +147,7 @@ Nobody walks at night. The farmer is in bed from the moment he sleeps until the 
 
 ### 0140 - The day HUD: the hour and bedtime
 
-Waits on 0127, 0128.  Likely files: `src/ui/day_hud.gd, src/core/game_data.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
+Waits on 0128.  Likely files: `src/ui/day_hud.gd, src/core/game_data.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
 
 The day HUD tells the time and says when it is time for bed: an HH:MM clock, a GO TO BED button that looks like the way into the night, a reminder from 22:00 and a warning before the 02:00 pass-out.
 
@@ -3379,12 +3361,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (1/23)
+## 10 - Sleep is the night  (2/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
-- [ ] **0127** [Going to bed starts the night](prompts/0127-bed.md)
-- [ ] **0128** [Passing out at 02:00](prompts/0128-pass-out.md) - needs 0127
-- [ ] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md) - needs 0127, 0128
+- [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
+- [ ] **0128** [Passing out at 02:00](prompts/0128-pass-out.md)
+- [ ] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md) - needs 0128
 - [ ] **0130** [The night camera](prompts/0130-night-camera.md) - needs 0129
 - [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md) - needs 0130
 - [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md) - needs 0131
@@ -3395,7 +3377,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
 - [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0133, 0134, 0135, 0136, 0137
-- [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md) - needs 0127, 0128
+- [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md) - needs 0128
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0132, 0138
 - [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - needs 0129, 0128 - waits for art A001

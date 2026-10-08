@@ -276,13 +276,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 
-## Ask the rules to start the night. **The HUD does not change the phase**: it
-## writes what the player wants into the intent and the tick decides, which is
-## the same road the keyboard and the autoplayer take.
+## Ask the rules to put the farmer to bed, which starts the night (task 0127).
+## **The HUD does not change the phase**: it writes what the player wants into
+## the intent and the tick decides, which is the same road the keyboard, the
+## bed and the autoplayer take. Only by day - there is no bed to go to twice.
 func _ask_for_night() -> void:
-	if _state.is_empty():
+	if _state.is_empty() or int(_state["phase"]) != Phases.DAY:
 		return
-	(_state["intent"] as Dictionary)["begin_night"] = true
+	(_state["intent"] as Dictionary)["sleep"] = true
 
 
 func _refresh(force: bool) -> void:

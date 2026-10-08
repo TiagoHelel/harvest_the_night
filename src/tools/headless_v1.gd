@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 9
+const GROUPS := 10
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -78,6 +78,7 @@ func _run() -> void:
 	_task_0120_placeholders()
 	_task_0121_pad()
 	_task_0126_clock()
+	_task_0127_bed()
 
 
 func _finish() -> void:
@@ -896,4 +897,86 @@ func _task_0126_clock() -> void:
 		"01:30, never 25:30", line)
 	var morning := I18n.f(&"DHUD_DAY", [1, 6, 0, ""])
 	expect(morning.contains("06:00"), "and 06:00 with its zero", morning)
+	_completed += 1
+
+
+## 0127 - going to bed starts the night.
+func _task_0127_bed() -> void:
+	# **The intent**: the GO TO BED button's road.
+	var by_button := State.create(1271)
+	(by_button["intent"] as Dictionary)["sleep"] = true
+	Sim.advance(by_button, 1)
+	expect(int(by_button["phase"]) == Phases.PREPARATION
+		and House.asleep(by_button) and not House.inside(by_button),
+		"the sleep intent lands in the build step, asleep and not inside",
+		Phases.name_of(int(by_button["phase"])))
+
+	# **The bed**: indoors, beside it, interact.
+	var by_bed := State.create(1272)
+	SuiteKit.stand_the_farmer(by_bed, House.porch(by_bed))
+	expect(House.enter(by_bed), "the farmer walks into the house")
+	var side := Vector2i(-1, -1)
+	for y in range(3, House.ROOM.y - 1):
+		for x in range(1, House.ROOM.x - 1):
+			if side.x < 0 and House.bedside(Vector2i(x, y)):
+				side = Vector2i(x, y)
+	expect(side.x >= 0, "there is floor beside the bed", str(side))
+	SuiteKit.stand_the_farmer(by_bed, side)
+	expect(House.can_sleep(by_bed), "and standing there offers bed")
+	(by_bed["intent"] as Dictionary)["interact"] = true
+	Sim.advance(by_bed, 2)
+	expect(int(by_bed["phase"]) == Phases.PREPARATION
+		and House.asleep(by_bed) and not House.inside(by_bed),
+		"interact by the bed lands in the build step, asleep and not inside",
+		Phases.name_of(int(by_bed["phase"])))
+	var far := State.create(1273)
+	SuiteKit.stand_the_farmer(far, House.porch(far))
+	House.enter(far)
+	SuiteKit.stand_the_farmer(far, House.SPAWN + Vector2i(-3, -1))
+	expect(not House.can_sleep(far), "but not from across the room")
+
+	# **Refused in PREPARATION, NIGHT and RESULT**, both roads, nothing changed.
+	print("  (the ERROR lines below are deliberate - refused bedtimes)")
+	var late := State.create(1274)
+	NightRoad.into_build(late)
+	for phase in [Phases.PREPARATION, Phases.NIGHT, Phases.RESULT]:
+		if phase == Phases.NIGHT:
+			NightRoad.through_build(late)
+			NightRoad.park(late)
+		elif phase == Phases.RESULT:
+			Phases.enter_result(late, true)
+		var hash_before := State.hash_of(late)
+		var refused := not Phases.go_to_bed(late)
+		expect(refused and State.hash_of(late) == hash_before
+			and int(late["phase"]) == phase,
+			"going to bed is refused in %s and changes nothing" % Phases.name_of(phase))
+		(late["intent"] as Dictionary)["sleep"] = true
+		expect(not House.can_sleep(late), "and the bed offers nothing in %s"
+			% Phases.name_of(phase))
+	Phases.begin_day(late)
+	expect(int(late["phase"]) == Phases.DAY and not House.asleep(late)
+		and not bool((late["intent"] as Dictionary)["sleep"]),
+		"the morning wakes him and forgets a bedtime asked for after dark")
+
+	# **The early-sleep rule**: the skipped hours are neither lived nor
+	# credited. A queue started at 09:00 and slept on keeps its progress and
+	# is not finished overnight.
+	var early := State.create(1275)
+	Sim.advance(early, Phases.tick_at_minute(9 * 60))
+	Resources.gain(early, {GameData.WOOD: 20})
+	var bench := Building.anchor_of(early, Farm.cells_with(early, &"workshop")[0])
+	expect(Crafting.start(early, bench, &"fence_kit"), "a fence kit goes on at 09:00")
+	Sim.advance(early, 60)
+	var kits := Crafting.kits(early, &"fence")
+	var left := int(Crafting.progress_at(early, bench)[0])
+	(early["intent"] as Dictionary)["sleep"] = true
+	Sim.advance(early, 1)
+	NightRoad.through_build(early)
+	Phases.enter_result(early, true)
+	Phases.begin_day(early)
+	expect(int(Crafting.progress_at(early, bench)[0]) == left and left > 0,
+		"slept on, the job keeps the progress it had", "%d against %d"
+			% [int(Crafting.progress_at(early, bench)[0]), left])
+	expect(Crafting.kits(early, &"fence") == kits,
+		"and nothing was made overnight", str(Crafting.kits(early, &"fence")))
 	_completed += 1

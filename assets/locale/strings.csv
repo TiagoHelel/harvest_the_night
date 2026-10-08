@@ -64,7 +64,7 @@ ACT_PAD_X,104,X,X
 ACT_PAD_Y,104,Y,Y
 ACT_RUN,112,RUN,CORRER
 ACT_MOVE_UP,112,MOVE UP,PARA CIMA
-ACT_NIGHT,112,START THE NIGHT,COMEÇAR A NOITE
+ACT_NIGHT,112,GO TO BED,IR DORMIR
 ACT_PAUSE,112,PAUSE,PAUSA
 ACT_PLACE,112,PLACE,COLOCAR
 ACT_REMOVE,112,SELL,VENDER
@@ -156,14 +156,14 @@ DHUD_DUSK,0,  DUSK,  ANOITECER
 DHUD_HELD,0,%s %d,%s %d
 DHUD_MONEY,0,$ %d,$ %d
 DHUD_MONEY_FIRST,0,$ 0,$ 0
-DHUD_NIGHT_WAITING,0,NIGHT %d IS WAITING,A NOITE %d ESPERA
+DHUD_NIGHT_WAITING,0,GO TO BED - NIGHT %d,IR DORMIR - NOITE %d
 DHUD_POWER,0,POWER %d/%d,ENERGIA %d/%d
 DHUD_POWER_SHORT,0,POWER %d/%d  everything at %d%%,ENERGIA %d/%d  tudo a %d%%
 DHUD_SEED_HEADING,168,# CROP    $  TIME  /DAY,# PLANTA  $  TEMPO /DIA
 DHUD_SEED_ROW,168,%d %-7s $%-2d %3ds  %2d,%d %-7s $%-2d %3ds  %2d
 DHUD_SKIP,0,[K] SKIP,[K] PULAR
 DHUD_SKIP_NO,0,[K] %s,[K] %s
-DHUD_TO_NIGHT,0,SWITCH TO NIGHT,VIRAR A NOITE
+DHUD_TO_NIGHT,0,GO TO BED,IR DORMIR
 DHUD_WAITING,0,waiting for a bite,esperando fisgar
 DHUD_WATER,0,WATER %d/%d,ÁGUA %d/%d
 DHUD_WATER_EMPTY,0,WATER  fill at the well,ÁGUA  encha no poço
@@ -428,4 +428,5 @@ WORK_ROOM.other,0,  %d slots free,  %d lugares livres
 WORK_STALLED,0,waiting on materials,faltam materiais
 HOUSE_TITLE,456,FARMHOUSE,CASA DA FAZENDA
 HOUSE_EXIT_HINT,456,Walk to the door or %s near it to leave.,Caminhe ate a porta ou use %s perto dela para sair.
+HOUSE_BED_HINT,456,%s: go to bed,%s: ir dormir
 HOUSE_ENTER_HINT,240,%s: enter the farmhouse,%s: entrar na casa

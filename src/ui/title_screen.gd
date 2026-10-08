@@ -230,7 +230,7 @@ func _process(_delta: float) -> void:
 	# Dusk for a moment, then the night is asked for the way the player would
 	# ask for it - by writing the intent, not by setting the phase.
 	if int(_state["phase"]) == Phases.DAY and since > DUSK_FOR:
-		(_state["intent"] as Dictionary)["begin_night"] = true
+		(_state["intent"] as Dictionary)["sleep"] = true
 	var dark := int(_state["phase"]) == Phases.NIGHT
 	if dark and Entities.count(_state) < VISITORS:
 		Enemies.spawn(_state, &"walker",

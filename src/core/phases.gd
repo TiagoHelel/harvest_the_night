@@ -65,7 +65,29 @@ static func initial() -> Dictionary:
 	}
 
 
-## DAY -> PREPARATION. The player pressed the night button.
+## **Going to bed is the reality switch** (task 0127, `docs/PLANO-DO-JOGO.md`
+## section 12: when he sleeps, the farm switches reality). The bed in the
+## farmhouse and the GO TO BED button both arrive here, through the `sleep`
+## intent. DAY only; anything else is refused and says so.
+##
+## **Sleeping early skips the rest of the day, and the skipped hours are
+## neither lived nor credited**: a crafting queue, regrowth, the animals and the
+## generator keep the progress they had and carry on from 06:00 - no work is
+## lost, and nothing is produced for hours nobody lived. It is what the night
+## button always did; `_task_0127_bed` holds it.
+static func go_to_bed(state: Dictionary) -> bool:
+	if int(state["phase"]) != DAY:
+		push_error("go_to_bed from %s" % name_of(int(state["phase"])))
+		return false
+	return begin_preparation(state)
+
+
+## DAY -> PREPARATION. The farmer went to bed.
+##
+## **Every road into the build step leaves him asleep** - the bed, the button,
+## 0128's pass-out and the tests' `NightRoad` - because this is the one that
+## sets it. Asleep is not inside: the farmhouse room is left as it always was,
+## so building and the world view carry on outdoors.
 static func begin_preparation(state: Dictionary) -> bool:
 	if int(state["phase"]) != DAY:
 		push_error("begin_preparation from %s" % name_of(int(state["phase"])))
@@ -74,6 +96,7 @@ static func begin_preparation(state: Dictionary) -> bool:
 	# first zombie walks in would be a panel that outlived its reason.
 	state["open_panel"] = &""
 	House.leave(state)
+	(state["house_visit"] as Dictionary)["asleep"] = true
 	# The water goes off with the sun: watering is a daily chore, not a job you
 	# do once on day one and never again.
 	Farming.dry_out(state)
@@ -177,6 +200,10 @@ static func begin_day(state: Dictionary) -> bool:
 		push_error("begin_day from %s" % name_of(int(state["phase"])))
 		return false
 	state["day_tick"] = 0
+	# Up at 06:00 - wherever he is until 0138 wakes him in his bed - and a
+	# bedtime asked for after dark is not carried into the morning.
+	(state["house_visit"] as Dictionary)["asleep"] = false
+	(state["intent"] as Dictionary)["sleep"] = false
 	# **The yard is swept first.** The night's wreckage belongs to the
 	# night, and a farm that never cleared would silt up over ten of them.
 	Farm.clear_rubble(state)

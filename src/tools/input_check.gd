@@ -1949,7 +1949,9 @@ func _case_0111_farm_house() -> void:
 	await until(func(): return House.inside(state), "another visit to the house")
 	await tap_key(KEY_N)
 	await until(func(): return int(state["phase"]) == Phases.PREPARATION, "night input during a house visit")
-	expect(not House.inside(state), "Starting night inside returns outside for defence")
+	# Task 0127: going to bed from inside is sleeping, and asleep is not inside.
+	expect(not House.inside(state) and House.asleep(state),
+		"Going to bed from a house visit sleeps, and the farm goes on outdoors")
 	await close_scene()
 	_completed += 1
 
@@ -2651,7 +2653,9 @@ func _case_0039_clock() -> void:
 	await until(func() -> bool: return Phases.is_dusk(state), "dusk", 300)
 	await frames(4)
 	expect(Phases.is_dusk(state), "it is dusk")
-	expect(night != null and night.text.to_lower().contains("waiting"),
+	# Task 0127: the button is GO TO BED, and past dusk it names the night.
+	expect(night != null and night.text.to_lower().contains("night")
+		and night.text != I18n.t(&"DHUD_TO_NIGHT"),
 		"and the button asks", night.text if night else "")
 	expect(int(state["phase"]) == Phases.DAY,
 		"but the night has not started itself",
@@ -6354,13 +6358,14 @@ func _case_0097_language() -> void:
 	await open_scene(MAIN_SCENE)
 	await frames(6)
 	var night_button: Button = require_control("NightButton")
-	expect(night_button != null and night_button.text == "VIRAR A NOITE",
+	# GO TO BED since task 0127.
+	expect(night_button != null and night_button.text == "IR DORMIR",
 		"a run built in Portuguese is in Portuguese",
 		night_button.text if night_button else "")
 
 	settings.set_value(&"gameplay/language", "en")
 	await frames(4)
-	expect(night_button != null and night_button.text == "SWITCH TO NIGHT",
+	expect(night_button != null and night_button.text == "GO TO BED",
 		"and back again without reloading anything",
 		night_button.text if night_button else "")
 
@@ -6450,7 +6455,7 @@ func _case_0098_access() -> void:
 	await open_scene(MAIN_SCENE)
 	await frames(6)
 	var driver: SimDriver = _scene.get_node("%SimDriver")
-	(driver.state["intent"] as Dictionary)["begin_night"] = true
+	(driver.state["intent"] as Dictionary)["sleep"] = true
 	await until(func() -> bool:
 		return int(driver.state["phase"]) != Phases.DAY,
 		"the farm leaves the day")

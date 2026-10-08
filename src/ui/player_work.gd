@@ -37,7 +37,7 @@ func before_tick(state: Dictionary) -> void:
 	var intent: Dictionary = state["intent"]
 	var move: Array = intent["move"]
 	_cancelled = bool(intent.get("cancel", false)) or int(move[0]) != 0 \
-		or int(move[1]) != 0 or bool(intent.get("begin_night", false))
+		or int(move[1]) != 0 or bool(intent.get("sleep", false))
 	if _cancelled:
 		reset()
 	var action: Dictionary = state["player"]["action"]
