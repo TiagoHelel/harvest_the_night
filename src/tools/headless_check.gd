@@ -14529,8 +14529,9 @@ func _task_0082_shots() -> void:
 	# after a calm night. Thirty since 0155: the trampled field. Thirty-three
 	# since 0156: the north band, the new ore and a stump. Thirty-four since
 	# 0157: the winter build step's routes. Thirty-seven since 0158: the
-	# forecast at dusk, in the build step and on a calm night.
-	expect(names.size() == 37,
+	# forecast at dusk, in the build step and on a calm night. Forty-one since
+	# 0159: three seasons at noon and a winter night.
+	expect(names.size() == 41,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
@@ -14540,6 +14541,7 @@ func _task_0082_shots() -> void:
 			"tutorial_bed", "tutorial_start", "tutorial_dawn", "full_moon",
 			"boss_escaped", "calm_morning", "trampled", "north_band", "new_ore", "stump",
 			"winter_build", "forecast_dusk", "forecast_build", "forecast_calm",
+			"season_summer", "season_autumn", "season_winter", "season_winter_night",
 			"options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 

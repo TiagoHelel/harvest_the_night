@@ -148,6 +148,15 @@ const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_sc
 ## was a yellow blob beside the tank's, and this one has the stone plates.
 const HEAD_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 
+## A012's winter ground (task 0159): a 16x16 tile at (8,16), and the
+## composed atlas its integration builds, 256x80 from the corner. Stand in as
+## today's tiles, which the season remap turns to snow.
+const GROUND_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "draw_scale": 1.0}
+const GROUND_ATLAS := {"canvas": Vector2i(256, 80), "pivot": Vector2i(0, 0), "draw_scale": 1.0}
+
+## A013's seasonal trees (task 0159): 40x48 at (20,44), today's tree's box.
+const TREE_FRAME := {"canvas": Vector2i(40, 48), "pivot": Vector2i(20, 44), "draw_scale": 1.0}
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -209,6 +218,36 @@ const ART := {
 	&"head_tank": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/tank_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(25, 15, 16, 16)},
 	&"head_breaker": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/breaker_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(24, 15, 16, 16)},
 	&"head_giant": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/giant_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 19, 32, 32)},
+	# **Task 0159: the seasons.** A012's winter ground and A013's seasonal trees
+	# and snow caps, each standing in as the base frame it replaces - the remap
+	# turns it to its season - and a cap as its host, through the snow mask.
+	&"atlas_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/atlas", "geometry": GROUND_ATLAS, "final": GROUND_ATLAS, "bare": true},
+	&"grass_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/grass", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"grass_b_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/grass_b", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"grass_c_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/grass_c", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"grass_d_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/grass_d", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"path_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/path", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"soil_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/soil", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"edge_n_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/edge_n", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"shore_n_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/shore_n", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"shore_corner_nw_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/shore_corner_nw", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"tilled_winter": {"pack": "A012", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"tilled_wet_winter": {"pack": "A012", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled_wet", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"tree_spring": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
+	&"tree_autumn": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
+	&"tree_winter": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
+	&"tree_b_spring": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree_b", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
+	&"tree_b_autumn": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree_b", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
+	&"tree_b_winter": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree_b", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
+	&"stump_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	&"rock_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/rock", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	&"rock_b_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/rock_b", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	&"ore_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	&"ore_b_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore_b", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	&"seam_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/seam", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	&"seam_b_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/seam_b", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	&"snow_cap": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	&"snow_cap_2x2": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": STUMP_2X2, "final": STUMP_2X2, "bare": true, "stand_in_scale": 2.0},
 }
 
 

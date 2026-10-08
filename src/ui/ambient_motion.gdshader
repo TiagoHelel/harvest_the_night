@@ -1,6 +1,11 @@
 shader_type canvas_item;
 
 // Deform the existing art gently; source pixels and ground contacts are kept.
+// **And wear the season** (task 0159): a CanvasItem has one material, and the
+// trees' is this one, so the remap the ground wears is included here. Every
+// texel is remapped before it is blended, so a leaf mid-sway is a remapped
+// leaf and not a blend no table names. `remap` stays off for the animals.
+#include "res://src/ui/season.gdshaderinc"
 uniform float motion_time = 0.0;
 uniform float phase = 0.0;
 uniform int species = 0; // 0 canopy, 1 chicken, 2 cow
@@ -16,6 +21,7 @@ void fragment() {
 	vec2 sample_uv = UV;
 	float t = motion_time + phase;
 	vec4 source = texture(TEXTURE, UV);
+	source.rgb = seasonal(source.rgb);
 	if (species == 0) {
 		// Both 40x48 tree variants expose wood below row 22. Stop the effect
 		// above it, including the visible branches, rather than at the roots.
@@ -30,6 +36,8 @@ void fragment() {
 			vec2 left = vec2((floor(px) + 0.5) * TEXTURE_PIXEL_SIZE.x, sample_uv.y);
 			vec4 a = texture(TEXTURE, left);
 			vec4 b = texture(TEXTURE, left + vec2(TEXTURE_PIXEL_SIZE.x, 0.0));
+			a.rgb = seasonal(a.rgb);
+			b.rgb = seasonal(b.rgb);
 			float weight = fract(px);
 			float alpha = mix(a.a, b.a, weight);
 			vec3 rgb = mix(a.rgb * a.a, b.rgb * b.a, weight);

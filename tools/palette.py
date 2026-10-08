@@ -188,6 +188,50 @@ RAMPS = {
 }
 
 
+# ---------------------------------------------------------------- the seasons
+
+# **The same farm through the year** (task 0159): what the grass and the
+# foliage become in each season, applied by `src/ui/season_remap.gdshader`
+# over the terrain, its edges and the trees, with the night ramp still over
+# the top. **Onto entries already here, never a new one**: the raster importer
+# reduces every source to this palette, so a new colour could change imported
+# art.
+#
+# `rot` is in the family because the terrain draws its darkest grass tufts in
+# it; nothing on the layers the remap touches is a zombie.
+FOLIAGE = ["grass_dark", "grass", "grass_light", "leaf_dark", "leaf",
+           "leaf_light", "rot_dark", "rot"]
+
+# In `GameData.SEASONS` order, which is the order the shader's uniform counts.
+SEASON_ORDER = ["spring", "summer", "autumn", "winter"]
+
+SEASONS = {
+    # Today's art: the green the reference sheet was drawn in.
+    "spring": {name: name for name in FOLIAGE},
+    # Warmer: every green a step towards the sun, the brightest bleached gold.
+    "summer": {
+        "grass_dark": "grass", "grass": "grass_light",
+        "grass_light": "gold_light",
+        "leaf_dark": "leaf", "leaf": "leaf_light", "leaf_light": "grass_light",
+        "rot_dark": "grass_dark", "rot": "grass",
+    },
+    # Ochre and rust: the field gone to straw, the crowns to rust and gold.
+    "autumn": {
+        "grass_dark": "wood", "grass": "gold_dark", "grass_light": "gold",
+        "leaf_dark": "roof_dark", "leaf": "roof", "leaf_light": "gold",
+        "rot_dark": "wood_dark", "rot": "wood",
+    },
+    # Snow, until A012 and A013 bring the real winter: the palette's pale
+    # colours - `bone` the body, `moon` the cool light, `bone_dark` and
+    # `stone_light` the shadow.
+    "winter": {
+        "grass_dark": "bone_dark", "grass": "bone", "grass_light": "moon",
+        "leaf_dark": "stone_light", "leaf": "bone_dark", "leaf_light": "bone",
+        "rot_dark": "stone_light", "rot": "bone_dark",
+    },
+}
+
+
 def rgb(name):
     """A colour by name. An unknown name is a mistake, not a default."""
     if name not in COLOURS:

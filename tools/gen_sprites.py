@@ -525,6 +525,24 @@ def palette_gd():
         lines.append("const %s_WARM_EDGE := %.3f"
                      % (ramp_name.upper(), ramp.get("warm_edge", 0.06)))
         lines.append("")
+    # **The seasons** (task 0159): the grass and foliage entries, and what
+    # each becomes in each season. A season missing an entry is written
+    # without it, so the view's check sees the gap rather than this hiding it.
+    lines.append("## **The grass and the foliage** (task 0159): the entries the season")
+    lines.append("## remap touches, in the order its shader counts them.")
+    lines.append("const FOLIAGE := [%s]" % ", ".join(
+        '&"%s"' % name for name in palette.FOLIAGE))
+    lines.append("")
+    lines.append("## **What each becomes in each season** (task 0159), in")
+    lines.append("## `GameData.SEASONS` order. Spring is today's art.")
+    lines.append("const SEASON_REMAP := {")
+    for season in palette.SEASON_ORDER:
+        table = palette.SEASONS.get(season, {})
+        pairs = ", ".join('&"%s": &"%s"' % (name, table[name])
+                          for name in palette.FOLIAGE if name in table)
+        lines.append('\t&"%s": {%s},' % (season, pairs))
+    lines.append("}")
+    lines.append("")
     return "\n".join(lines).encode("utf-8")
 
 

@@ -101,6 +101,10 @@ const SCENARIOS: Array = [
 	["forecast_dusk", "Autumn 7 at 18:30: the forecast of a Full Moon from three sides", ""],
 	["forecast_build", "the build step on Winter 14: a boss under a Full Moon, from every side", ""],
 	["forecast_calm", "Summer 1 at 18:30: the forecast of a calm night", ""],
+	["season_summer", "the farm at noon on Summer 3", ""],
+	["season_autumn", "the farm at noon on Autumn 3", ""],
+	["season_winter", "the farm at noon on Winter 3, snowing", ""],
+	["season_winter_night", "the same farm on Winter 3's night", ""],
 	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
 	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
@@ -677,6 +681,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
 		"forecast_calm": _set_forecast_calm(state)
+		"season_summer": _set_season_summer(state)
+		"season_autumn": _set_season_autumn(state)
+		"season_winter": _set_season_winter(state)
+		"season_winter_night": _set_season_winter_night(state)
 		"woken": _set_woken(state)
 		"repair": _set_repair(state)
 		"aim": _set_aim(state)
@@ -1252,6 +1260,40 @@ func _on_date(state: Dictionary, day: int) -> void:
 	for step in Tutorial.steps():
 		lessons.append(StringName((step as Dictionary)["id"]))
 	((state["tutorial"] as Dictionary)["done"] as Array).assign(lessons)
+
+
+func _set_season_summer(state: Dictionary) -> void:
+	_set_season(state, 1)
+
+
+func _set_season_autumn(state: Dictionary) -> void:
+	_set_season(state, 2)
+
+
+func _set_season_winter(state: Dictionary) -> void:
+	_set_season(state, 3)
+
+
+func _set_season_winter_night(state: Dictionary) -> void:
+	_set_season_night(state, 3)
+
+
+## **The seasons on screen** (task 0159): the noon farm, framed as `noon`
+## is, on the third day of a season - no Full Moon, no boss, no calm.
+func _set_season(state: Dictionary, season: int) -> void:
+	_on_date(state, season * GameData.SEASON_DAYS + 3)
+	_set_noon(state)
+
+
+## The same field on that date's night, the waves held off: the night ramp
+## over the season.
+func _set_season_night(state: Dictionary, season: int) -> void:
+	_on_date(state, season * GameData.SEASON_DAYS + 3)
+	_a_sown_field(state)
+	_camera_at = _standing_at
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Sim.advance(state, 1)
 
 
 ## **The forecast at dusk** (task 0158): Autumn 7 at 18:30, a Full Moon from

@@ -1,7 +1,7 @@
 # 0159 - Seasons on screen
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0149
 - **Likely files:** src/ui/season_view.gd (new), src/ui/season_remap.gdshader (new), src/ui/ambient_motion.gdshader, tools/palette.py, tools/gen_sprites.py, src/ui/palette_data.gd (generated), src/ui/world_view.gd, src/ui/particles.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/input_v1.gd, src/tools/headless_v1.gd
 

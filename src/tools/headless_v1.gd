@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 31
+const GROUPS := 32
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -100,6 +100,7 @@ func _run() -> void:
 	_task_0156_map_v1()
 	_task_0157_sides()
 	_task_0158_forecast()
+	_task_0159_palette()
 
 
 func _finish() -> void:
@@ -2981,3 +2982,105 @@ func _task_0158_forecast() -> void:
 	expect(asked["rng"] == rng_before and State.hash_of(asked) == hash_before and same,
 		"a thousand forecasts leave the run's stream and the state hash as they were")
 	_completed += 1
+
+
+## 0159 - the seasons' tables: every grass or foliage colour the terrain and
+## the trees use has a mapping in every season, onto the palette's own
+## entries - and a table missing one is caught; the season on screen follows
+## the date and holds the night's under the morning report; the seasonal
+## lookups the art packs will fill.
+func _task_0159_palette() -> void:
+	var used := _foliage_in(["res://sprites/terrain/", "res://sprites/props/tree.png",
+		"res://sprites/props/tree_b.png"])
+	expect(used.has(&"grass") and used.has(&"leaf") and used.has(&"grass_dark"),
+		"the terrain and the trees are drawn in grass and foliage", str(used))
+	expect(SeasonView.unmapped(PaletteData.SEASON_REMAP, used).is_empty(),
+		"every one of them has a mapping in every season",
+		str(SeasonView.unmapped(PaletteData.SEASON_REMAP, used)))
+	var scratch: Dictionary = PaletteData.SEASON_REMAP.duplicate(true)
+	(scratch[&"autumn"] as Dictionary).erase(&"grass")
+	expect(SeasonView.unmapped(scratch, used) == ["autumn: grass"],
+		"and a scratch autumn without its grass is caught",
+		str(SeasonView.unmapped(scratch, used)))
+	var stray: Array = []
+	var pale := [&"bone", &"bone_dark", &"moon", &"stone_light"]
+	for season_id in GameData.SEASONS:
+		var table: Dictionary = PaletteData.SEASON_REMAP[season_id]
+		for colour in PaletteData.FOLIAGE:
+			var to: StringName = table.get(colour, colour)
+			if not PaletteData.COLOURS.has(to) \
+					or (season_id == &"spring" and to != colour) \
+					or (season_id == &"winter" and not pale.has(to)):
+				stray.append("%s: %s -> %s" % [season_id, colour, to])
+	expect(stray.is_empty(),
+		"onto palette entries only: spring is today's art and winter the pale colours",
+		str(stray))
+
+	# **The season on screen**, and the morning report keeps the night's.
+	var state := State.create(1590)
+	var seen: Array = []
+	for day in [3, 17, 31, 45, Calendar.year_days() + 1]:
+		state["day"] = day
+		seen.append(SeasonView.season_on_screen(state))
+	expect(seen == [0, 1, 2, 3, 0], "the date's season: spring, summer, autumn, winter, spring",
+		str(seen))
+	state["day"] = GameData.SEASON_DAYS + 1
+	state["night"] = GameData.SEASON_DAYS
+	state["phase"] = Phases.RESULT
+	var under_report := SeasonView.season_on_screen(state)
+	state["phase"] = Phases.DAY
+	expect(under_report == 0 and SeasonView.season_on_screen(state) == 1,
+		"under Spring 14's morning report it is still spring; summer comes with the day",
+		"%d, then %d" % [under_report, SeasonView.season_on_screen(state)])
+
+	# **The lookups the packs fill in**: stand-ins today, the base frame
+	# where a season has none, and the caps by host.
+	expect(SeasonView.frame_for("props/tree", 0) == "props/tree_spring"
+		and SeasonView.frame_for("props/tree_b", 3) == "props/tree_b_winter"
+		and SeasonView.frame_for("props/tree", 1) == "props/tree"
+		and SeasonView.stand_in("props/tree_b_winter")
+		and not SeasonView.carries_season("props/tree", 3)
+		and SeasonView.texture_file("props/tree_winter") == "res://sprites/props/tree.png",
+		"a tree's season is A013's stand-in, drawn as today's tree; summer is today's")
+	expect(SeasonView.frame_for("terrain/atlas", 3) == "terrain/atlas_winter"
+		and SeasonView.stand_in("terrain/atlas_winter")
+		and SeasonView.frame_for("terrain/atlas", 2) == "terrain/atlas"
+		and SeasonView.frame_for("crops/tilled", 3) == "crops/tilled_winter",
+		"the winter ground is A012's stand-in, and autumn has none")
+	expect(SeasonView.cap_for(&"rock_b", false) == "props/rock_b_snow"
+		and SeasonView.cap_for(&"copper_ore", false) == "props/snow_cap"
+		and SeasonView.cap_for(&"hardwood_stump", true) == "props/snow_cap_2x2",
+		"a node's snow cap is its own, or the generic one")
+	_completed += 1
+
+
+## The grass and foliage colours (`PaletteData.FOLIAGE`) drawn in these files
+## - a folder's every PNG, or one file.
+func _foliage_in(paths: Array) -> Array:
+	var names := {}
+	for name in PaletteData.COLOURS:
+		names[(PaletteData.COLOURS[name] as Color).to_rgba32()] = StringName(name)
+	var files: Array = []
+	for path in paths:
+		if str(path).ends_with(".png"):
+			files.append(path)
+			continue
+		for file in DirAccess.get_files_at(path):
+			if file.ends_with(".png"):
+				files.append(str(path) + file)
+	var found: Array = []
+	for file in files:
+		var image := Image.load_from_file(ProjectSettings.globalize_path(file))
+		if image == null:
+			continue
+		for y in image.get_height():
+			for x in image.get_width():
+				var colour := image.get_pixel(x, y)
+				if colour.a < 0.5:
+					continue
+				colour.a = 1.0
+				var name: StringName = names.get(colour.to_rgba32(), &"")
+				if PaletteData.FOLIAGE.has(name) and not found.has(name):
+					found.append(name)
+	found.sort()
+	return found

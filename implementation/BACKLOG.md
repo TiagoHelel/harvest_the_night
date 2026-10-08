@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **149 / 296 done**
+`############............`  **150 / 296 done**
 
-0 doing / 147 todo / 0 blocked across 18 phases.
+0 doing / 146 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-147 task(s) left, the ready ones first, then what they
+146 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -173,25 +173,6 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0159 - Seasons on screen
-
-Ready to pick up.  Likely files: `src/ui/season_view.gd (new), src/ui/season_remap.gdshader (new), src/ui/ambient_motion.gdshader, tools/palette.py, tools/gen_sprites.py, src/ui/palette_data.gd (generated), src/ui/world_view.gd, src/ui/particles.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
-
-The same farm through the year: today's green in spring, warmer in summer, ochre and rust in autumn, snow in winter - all of it in the view, with not one rule touched.
-
-- A palette remap shader (`src/ui/season_remap.gdshader`) on the terrain, edge and prop layers: each season maps the grass and foliage palette entries onto other palette entries (spring is today's art, summer warmer, autumn ochre and rust). The tables live in `tools/palette.py` and reach `PaletteData` through `python tools/gen_sprites.py` (its `palette_gd()` writes only `COLOURS` and `RAMPS` today: extend it); a uniform switches the season, and the terrain - drawn once - is never redrawn for it. A CanvasItem has one material and the trees already carry `ambient_motion.gdshader` for the wind: put the remap inside that shader (or a shared include) for them
-- Winter stand-in until A012 and A013 are integrated by 0163 and 0164: the remap turns grass and foliage to the palette's pale colours (`bone`, `bone_dark`, `moon`, `stone_light`). No new `COLOURS` entry: the raster importer maps sources onto that palette, so a new colour could change imported art. Register the winter paths the seasonal lookup asks for (`terrain/<name>_winter`, `props/tree_<season>`, the caps) in 0120's registry under A012 and A013, resolving to the base frame, so `python tools/placeholders.py` lists both packs until 0163 and 0164 delete the entries
-- Hooks so those leaves only add frames: a seasonal lookup (e.g. `SeasonView.frame_for(name, season)`) returns `<name>_<season>` when the art lookup of 0120 has it and the base name otherwise; a seasonal terrain atlas, when one exists, is swapped onto the terrain `TileMapLayer`'s tile set; the remap leaves alone a raster frame that already carries its season, and still remaps a registered stand-in
-- Snowfall in winter in `src/ui/particles.gd`, honouring `a11y/particle_density` and the `video/max_particles` cap
-- Snow on roofs by a code mask: in winter the top rows of the house's, the stations' and the stall's opaque roof pixels draw in `bone`/`moon` (the occupant sprites in `world_view.gd`; `house_view.gd` is the interior and has no roof). No new art: if the shots fail, say so in the journal and propose a pack rather than drawing one
-- The season comes from `Calendar.season_of(Calendar.date(state))` and changes on the morning of a season's first day, behind 0138's wake-up, never mid-frame
-- New shot scenarios `season_summer`, `season_autumn`, `season_winter` and `season_winter_night`: a date in each season, framed like `noon`
-- View only: nothing in `src/core/` changes, and SIM and DATA must not move
-
-  - done when: `_case_0159_seasons` in `src/tools/input_v1.gd`: the remap's season and the snowfall follow the date (off in spring, on in winter), and the terrain layer is not redrawn when the season changes
-  - done when: `python tools/gen_sprites.py --check` (or a `_task_0159_palette` group in `src/tools/headless_v1.gd`) checks that every grass or foliage colour used by `terrain/` and the trees has a mapping in every season: it passes, and a scratch table missing one mapping makes it fail (tried, reverted, said so in the journal)
-  - done when: `python tools/shot.py 0159 noon season_summer season_autumn season_winter season_winter_night --fhd`, opened against `docs/reference-sheet.png`: each season reads at a glance and the night ramp still works over it
-
 ### 0160 - The end of the year
 
 Ready to pick up.  Likely files: `src/core/run.gd, src/ui/result_screen.gd, src/ui/credits_roll.gd (new), src/ui/main.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -243,6 +224,41 @@ The forecast names what is coming with the enemies' own faces: the approved head
 
   - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass, and `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the heads in the real game - `python tools/shot.py 0162 forecast_dusk forecast_build --fhd`, with the scenarios moved to a date whose forecast lists all five kinds (Spring 14 does while it is Endless-generated with the Giant's row; check it on the day) - in `implementation/shots/0162/`, opened and looked at
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0163 - Art: winter ground
+
+Waits for Codex art A012.  Likely files: `assets/art_source/terrain/, assets/art_source/crops/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_terrain_art.py, tools/check_crop_art.py, tools/gen_sprites.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
+
+Winter gets real snow on the ground: the approved snowy grass, path, soil, tilled ground, edges and shores replace the remapped stand-in of 0159.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A012` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A012-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/terrain/` (and `crops/` for the tilled tiles), manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_terrain_art.py`, `tools/check_crop_art.py`, `ArtPlacement` if needed).
+- Runtime names: `terrain/<name>_winter` for `grass`, `grass_b`-`grass_d`, `path` and `soil`, the winter `edge_*`/`shore_*` sides and corners, and `crops/tilled_winter` / `tilled_wet_winter` - 16x16, opaque, seamless, the same set as today's (the wet tile still at least 20 RGB darker, `check_crop_art.py`). The 256x80 atlas is ASCII-owned and built by `tools/gen_sprites.py` from the raster recipes (and asserted against it): build the winter atlas there the way the handoff says (new rows or a second atlas) and let 0159's hook swap it in
+- Winter's ground stops going through 0159's remap (the remap stays for anything this pack does not cover); delete the stand-in entries from `src/ui/placeholder_art.gd`, so `python tools/placeholders.py` no longer lists A012
+- Set the pack to integrated: `python implementation/backlog/assets.py set A012 integrated`.
+
+  - done when: `python tools/check_terrain_art.py`, `python tools/check_crop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0163 season_winter season_winter_night --fhd` - in `implementation/shots/0163/`, opened and looked at: no seam, edge or shore breaks the snow
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0164 - Art: trees through the seasons
+
+Waits for Codex art A013.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
+
+Blossom in spring, colour in autumn, bare branches under snow in winter: the approved seasonal trees and snow caps replace the remapped stand-ins of 0159.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A013` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A013-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_prop_art.py`, `ArtPlacement` if needed).
+- Runtime names: `props/tree_spring`, `tree_autumn` and `tree_winter`, and the same for `tree_b` - 40x48, pivot (20,44), sharing canvas, pivot, scale and palette with the base tree (`variant_of` rules); summer is today's tree. The tree wind motion (`tree_wind_showcase.gd`) still applies
+- Generic 16x16 snow caps drawn over each stump, rock, seam and ore node in winter, and over 0156's new nodes and stumps (one per 2x2 cell); the caps are an overlay in the view, never a change to the occupant. 0159's lookup finds the seasonal frames, and the remap leaves them alone
+- Delete the stand-in entries from `src/ui/placeholder_art.gd`; `python tools/placeholders.py` no longer lists A013
+- Set the pack to integrated: `python implementation/backlog/assets.py set A013 integrated`.
+
+  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0165 - Crops grow by days
@@ -358,41 +374,6 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: FHD (1920x1080) captures of the morning report after a won and after a lost night, and of the farm around it by day and by night, opened and looked at, in `implementation/shots/0289/`
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
-
-### 0163 - Art: winter ground
-
-Waits on 0159.  Likely files: `assets/art_source/terrain/, assets/art_source/crops/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_terrain_art.py, tools/check_crop_art.py, tools/gen_sprites.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
-
-Winter gets real snow on the ground: the approved snowy grass, path, soil, tilled ground, edges and shores replace the remapped stand-in of 0159.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A012` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A012-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/terrain/` (and `crops/` for the tilled tiles), manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_terrain_art.py`, `tools/check_crop_art.py`, `ArtPlacement` if needed).
-- Runtime names: `terrain/<name>_winter` for `grass`, `grass_b`-`grass_d`, `path` and `soil`, the winter `edge_*`/`shore_*` sides and corners, and `crops/tilled_winter` / `tilled_wet_winter` - 16x16, opaque, seamless, the same set as today's (the wet tile still at least 20 RGB darker, `check_crop_art.py`). The 256x80 atlas is ASCII-owned and built by `tools/gen_sprites.py` from the raster recipes (and asserted against it): build the winter atlas there the way the handoff says (new rows or a second atlas) and let 0159's hook swap it in
-- Winter's ground stops going through 0159's remap (the remap stays for anything this pack does not cover); delete the stand-in entries from `src/ui/placeholder_art.gd`, so `python tools/placeholders.py` no longer lists A012
-- Set the pack to integrated: `python implementation/backlog/assets.py set A012 integrated`.
-
-  - done when: `python tools/check_terrain_art.py`, `python tools/check_crop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0163 season_winter season_winter_night --fhd` - in `implementation/shots/0163/`, opened and looked at: no seam, edge or shore breaks the snow
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0164 - Art: trees through the seasons
-
-Waits on 0159.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
-
-Blossom in spring, colour in autumn, bare branches under snow in winter: the approved seasonal trees and snow caps replace the remapped stand-ins of 0159.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A013` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A013-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_prop_art.py`, `ArtPlacement` if needed).
-- Runtime names: `props/tree_spring`, `tree_autumn` and `tree_winter`, and the same for `tree_b` - 40x48, pivot (20,44), sharing canvas, pivot, scale and palette with the base tree (`variant_of` rules); summer is today's tree. The tree wind motion (`tree_wind_showcase.gd`) still applies
-- Generic 16x16 snow caps drawn over each stump, rock, seam and ore node in winter, and over 0156's new nodes and stumps (one per 2x2 cell); the caps are an overlay in the view, never a change to the occupant. 0159's lookup finds the seasonal frames, and the remap leaves them alone
-- Delete the stand-in entries from `src/ui/placeholder_art.gd`; `python tools/placeholders.py` no longer lists A013
-- Set the pack to integrated: `python implementation/backlog/assets.py set A013 integrated`.
-
-  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
-  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0166 - A day of eight to ten minutes
 
@@ -858,7 +839,7 @@ The guardian's cursor, the night camera and the fishing bar each get the knob a 
 
 ### 0171 - Winter: nothing grows outside
 
-Waits on 0170, 0159.  Likely files: `src/core/farming.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0170.  Likely files: `src/core/farming.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 When a season ends its crops wither, and in winter nothing grows outside - yet the day still matters: the pond, the quarry, the workshop and the barn carry it while the farm lives on autumn's stock.
 
@@ -2599,7 +2580,7 @@ After the Winter Lord the farm carries on, and today that means the MVP's endles
 
 ### 0280 - Checkpoint: do fifty-six nights tire?
 
-Waits on 0277, 0278, 0279, 0159, 0258.  Likely files: `implementation/PROGRESS.md, implementation/shots/0280/, src/tools/shot.gd, src/tools/nights.gd, implementation/prompts/ (later prompts, if the answer needs it), tools/backlog/ (new tasks, if any)`.
+Waits on 0277, 0278, 0279, 0258.  Likely files: `implementation/PROGRESS.md, implementation/shots/0280/, src/tools/shot.gd, src/tools/nights.gd, implementation/prompts/ (later prompts, if the answer needs it), tools/backlog/ (new tasks, if any)`.
 
 The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpoint like 0027, 0066 and 0148, not a feature - a 'yes' found here is worth more than every polish task after it.
 
@@ -2895,7 +2876,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
-## 11 - Calendar and seasons  (10/16)
+## 11 - Calendar and seasons  (11/16)
 
 - [x] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
 - [x] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
@@ -2907,12 +2888,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0156** [The 1.0 farm map](prompts/0156-farm-map-v1.md)
 - [x] **0157** [A new side every season](prompts/0157-attack-sides.md)
 - [x] **0158** [The forecast](prompts/0158-forecast.md)
-- [ ] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md)
+- [x] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md)
 - [ ] **0160** [The end of the year](prompts/0160-year-end.md)
 - [ ] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md) - waits for art A010
 - [ ] **0162** [Art: forecast heads](prompts/0162-art-forecast-heads.md) - waits for art A011
-- [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - needs 0159 - waits for art A012
-- [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - needs 0159 - waits for art A013
+- [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
+- [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
 ## 12 - The day that pays  (0/53)
 
@@ -2922,7 +2903,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0168** [Nine new crops](prompts/0168-crop-data.md) - needs 0165
 - [ ] **0169** [An inventory for many things](prompts/0169-inventory.md) - needs 0168
 - [ ] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md) - needs 0168, 0169
-- [ ] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md) - needs 0170, 0159
+- [ ] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md) - needs 0170
 - [ ] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md) - needs 0168
 - [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md)
 - [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md) - needs 0173, 0167
@@ -3040,7 +3021,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0271, 0272, 0273, 0274, 0276, 0259
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0160, 0277
-- [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0277, 0278, 0279, 0159, 0258
+- [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0277, 0278, 0279, 0258
 
 ## 16 - Sound, collections and polish  (0/10)
 

@@ -122,6 +122,13 @@ var _sprites: Array[Node] = []
 var _stations: Array[Sprite2D] = []
 const AMBIENT_MOTION := preload("res://src/ui/ambient_motion.gdshader")
 var _ambient_materials: Array[ShaderMaterial] = []
+## **The season on screen** (task 0159): the remap the ground and the trees
+## wear, the roofs' snow and the caps'. Its own node; see `SeasonView`.
+var _season: SeasonView = SeasonView.new()
+## How many times the terrain's cells have been laid - which a season must
+## never add to - and the atlas they are drawn from now.
+var _terrain_draws := 0
+var _ground_file := ""
 var _ambient_time := 0.0
 var ambient_running := true
 var _station_due := 0.0
@@ -233,6 +240,14 @@ func _ready() -> void:
 		add_child(layer)
 		move_child(layer, 2 + corner)
 		_corners.append(layer)
+	# **The season on the ground** (task 0159): one material on the terrain,
+	# its edges and its corners, switched by a uniform.
+	add_child(_season)
+	_terrain.material = _season.ground
+	_edges.material = _season.ground
+	for layer in _corners:
+		layer.material = _season.ground
+	_ground_file = TERRAIN_ATLAS
 
 	# Camera limits are the farm's edges, so panning can never show a gap or a
 	# repeated column - the engine does the clamping and no arithmetic here can
@@ -365,6 +380,9 @@ func show_state(state: Dictionary) -> void:
 		_guardian.show_state(state)
 	_remember_towers(state)
 	_dirty = true
+	if _season != null:
+		_season.show_state(state)
+		_apply_ground_art()
 	_draw_terrain()
 	_refresh()
 	_refresh_plots()
@@ -383,6 +401,13 @@ func _process(delta: float) -> void:
 		return
 	_shake_camera(delta)
 	_light_for_phase(delta)
+	# **The season moves at the wake-up** (task 0159), every material in the
+	# same frame; the occupants and the plots are redrawn for their seasonal
+	# frames and caps, the terrain's cells never.
+	if _season != null and _season.update():
+		_apply_ground_art()
+		_dirty = true
+		_plots_signature = -1
 	# **Not rebuilt every frame.** Godot's Dictionary hash is cheap and exact
 	# enough to notice a placement or a removal; the determinism hash is a
 	# different thing for a different job and is not used here.
@@ -995,6 +1020,7 @@ func screen_to_cell(position: Vector2) -> Vector2i:
 func _draw_terrain() -> void:
 	if _state.is_empty():
 		return
+	_terrain_draws += 1
 	_terrain.clear()
 	if _edges != null:
 		_edges.clear()
@@ -1110,6 +1136,8 @@ func _refresh() -> void:
 	_sprites.clear()
 	_stations.clear()
 	_ambient_materials.clear()
+	if _season != null:
+		_season.forget_sprites()
 	_find_fixture_corners()
 	if _state.is_empty():
 		return
@@ -1153,9 +1181,19 @@ func _refresh() -> void:
 		else:
 			logical_cells.append(idx)
 		sprite.set_meta("logical_cells", logical_cells)
+		# **A tree in its season** (task 0159): A013's frame for it when there
+		# is one, remapped unless it is the real thing.
+		var remapped := true
+		if id == &"tree":
+			var art := "props/" + str(_art_for(on, cell))
+			var seasonal := SeasonView.frame_for(art, _season.season())
+			if seasonal != art:
+				sprite.texture = _texture_at(SeasonView.texture_file(seasonal))
+			remapped = not SeasonView.carries_season(art, _season.season())
 		if id in [&"tree", &"chicken", &"cow"]:
 			var motion := ShaderMaterial.new()
 			motion.shader = AMBIENT_MOTION
+			_season.dress(motion, id == &"tree" and remapped)
 			motion.set_shader_parameter("species", 0 if id == &"tree" else (1 if id == &"chicken" else 2))
 			motion.set_shader_parameter("phase", float((cell.x * 37 + cell.y * 19) % 101) * 0.13)
 			if id == &"tree":
@@ -1165,6 +1203,12 @@ func _refresh() -> void:
 			motion.set_shader_parameter("motion_time", _ambient_time)
 			sprite.material = motion
 			_ambient_materials.append(motion)
+		# **Snow on the roofs** (task 0159): the top edge of the farmhouse,
+		# the stall and the stations - the whole drawing, or its top quarters.
+		if id in SeasonView.ROOFED and (grouped or cell.y == anchor.y):
+			sprite.material = _season.roof_material()
+		if _season.season() == SeasonView.WINTER and id in SeasonView.CAPPED:
+			_cap(sprite, _art_for(on, cell), footprint != Vector2i.ONE)
 		if id in [&"workshop", &"kitchen", &"press", &"generator"]:
 			sprite.set_meta("station_id", id)
 			sprite.set_meta("station_anchor", anchor)
@@ -1214,6 +1258,8 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 	ArtPlacement.place(sprite, anchor, Building.size_of(id))
 	sprite.scale *= PlaceholderArt.art_scale(id)
 	sprite.modulate = PlaceholderArt.art_tint(id)
+	if _season != null and _season.season() == SeasonView.WINTER and id in SeasonView.CAPPED:
+		_cap(sprite, id, Building.size_of(id) != Vector2i.ONE)
 	var logical_cells: Array = []
 	var size := Building.size_of(id)
 	for y in size.y:
@@ -1223,6 +1269,67 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 	_occupants.add_child(sprite)
 	_sprites.append(sprite)
 	return true
+
+
+## **A snow cap** (task 0159) over a node in winter: A013's own, or its
+## generic one - and until 0164 the stand-in, which is the host's own frame
+## through the snow mask, the snow alone, so it sits exactly on the host.
+func _cap(host: Sprite2D, art: StringName, two_by_two: bool) -> void:
+	var cap := SeasonView.cap_for(art, two_by_two)
+	var sprite := Sprite2D.new()
+	sprite.name = "SnowCap"
+	if SeasonView.stand_in(cap):
+		sprite.texture = host.texture
+		sprite.material = _season.cap_material()
+		sprite.centered = host.centered
+		sprite.offset = host.offset
+		sprite.region_enabled = host.region_enabled
+		sprite.region_rect = host.region_rect
+	else:
+		# The real cap, at its own size and pivot, over the host's foot.
+		sprite.texture = _texture_at(SeasonView.file_of(cap))
+		sprite.centered = false
+		sprite.offset = -Vector2(PlaceholderArt.frame(SeasonView.file_of(cap)).get("pivot",
+			Vector2i(8, 14)))
+		sprite.scale = Vector2.ONE / host.scale
+	host.add_child(sprite)
+
+
+## **The ground in its season** (task 0159): the remap on the terrain's
+## material - or, once A012 brings a winter atlas, that atlas on the tile set
+## and the remap off it. The cells are never laid again for it.
+func _apply_ground_art() -> void:
+	if _season == null or _terrain.tile_set == null:
+		return
+	var season := _season.season()
+	var art := SeasonView.frame_for("terrain/atlas", season)
+	_season.ground.set_shader_parameter("remap",
+		not SeasonView.carries_season("terrain/atlas", season))
+	var file := SeasonView.texture_file(art)
+	if file == _ground_file or not ResourceLoader.exists(file):
+		return
+	var source := _terrain.tile_set.get_source(0) as TileSetAtlasSource
+	if source != null:
+		source.texture = load(file)
+		_ground_file = file
+
+
+## How many times the terrain's cells have been laid - for `input_v1`.
+func terrain_draws() -> int:
+	return _terrain_draws
+
+
+## The season the farm is drawn in, and its view - for `input_v1`.
+func season_view() -> SeasonView:
+	return _season
+
+
+## A texture by file, cached with the rest.
+func _texture_at(file: String) -> Texture2D:
+	var key := StringName("file:" + file)
+	if not _textures.has(key):
+		_textures[key] = load(file) if ResourceLoader.exists(file) else null
+	return _textures[key]
 
 
 ## World-owned cosmetic time freezes with pause; no clocks enter saved state.
@@ -1661,8 +1768,12 @@ func _refresh_plots() -> void:
 		# visible under a crop that is already up - a wet row you cannot see
 		# once it has sprouted is a chore with no feedback, and the player would
 		# be back to counting which tiles they had done.
-		_plot_sprite("tilled_wet" if bool(here["watered"]) else "tilled",
-			cell)
+		# The earth in its season (task 0159): A012's winter plot when it
+		# has landed, today's until then.
+		var earth := "tilled_wet" if bool(here["watered"]) else "tilled"
+		var seasonal := SeasonView.frame_for("crops/" + earth,
+			_season.season() if _season != null else 0)
+		_plot_sprite(earth if SeasonView.stand_in(seasonal) else seasonal.get_file(), cell)
 
 		var crop: StringName = here["crop"]
 		if crop != &"":

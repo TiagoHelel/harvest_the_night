@@ -108,3 +108,16 @@ const NIGHT_WARM_KEEP := 1.000
 ## How wide that threshold is, so a flame has no hard
 ## outline where the exemption stops.
 const NIGHT_WARM_EDGE := 0.060
+
+## **The grass and the foliage** (task 0159): the entries the season
+## remap touches, in the order its shader counts them.
+const FOLIAGE := [&"grass_dark", &"grass", &"grass_light", &"leaf_dark", &"leaf", &"leaf_light", &"rot_dark", &"rot"]
+
+## **What each becomes in each season** (task 0159), in
+## `GameData.SEASONS` order. Spring is today's art.
+const SEASON_REMAP := {
+	&"spring": {&"grass_dark": &"grass_dark", &"grass": &"grass", &"grass_light": &"grass_light", &"leaf_dark": &"leaf_dark", &"leaf": &"leaf", &"leaf_light": &"leaf_light", &"rot_dark": &"rot_dark", &"rot": &"rot"},
+	&"summer": {&"grass_dark": &"grass", &"grass": &"grass_light", &"grass_light": &"gold_light", &"leaf_dark": &"leaf", &"leaf": &"leaf_light", &"leaf_light": &"grass_light", &"rot_dark": &"grass_dark", &"rot": &"grass"},
+	&"autumn": {&"grass_dark": &"wood", &"grass": &"gold_dark", &"grass_light": &"gold", &"leaf_dark": &"roof_dark", &"leaf": &"roof", &"leaf_light": &"gold", &"rot_dark": &"wood_dark", &"rot": &"wood"},
+	&"winter": {&"grass_dark": &"bone_dark", &"grass": &"bone", &"grass_light": &"moon", &"leaf_dark": &"stone_light", &"leaf": &"bone_dark", &"leaf_light": &"bone", &"rot_dark": &"stone_light", &"rot": &"bone_dark"},
+}

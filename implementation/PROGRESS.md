@@ -16343,3 +16343,164 @@ before). headless_check 16357 (+8, the scenario names), headless_v1 422
   this task does not touch.
 - Three `perf.py` runs after it gave 36-37, and the second verify passed
   with the night tick at 3859 us. No baseline was accepted.
+
+## 0159 - Seasons on screen - done 2026-10-08
+
+What changed: the same farm through the year, all of it in the view:
+- spring is today's art;
+- summer is warmer;
+- autumn is ochre and rust;
+- winter is snow, with snowfall and snow on the roofs.
+
+Not one rule changed, and the night ramp still lies over every season.
+
+**The tables** (`tools/palette.py`, written into `PaletteData` by
+`tools/gen_sprites.py`, whose `palette_gd()` now also writes `FOLIAGE` and
+`SEASON_REMAP`):
+- `FOLIAGE`: the grass and leaf ramps, plus `rot_dark` and `rot`, because
+  the terrain draws its darkest grass tufts in them.
+- Each season maps those entries onto other palette entries:
+  - summer moves each green a step towards the sun, and the brightest goes
+    to `gold_light`;
+  - autumn sends the grass to the wood and gold ramps and the leaves to roof
+    rust;
+  - winter sends both to `bone`, `bone_dark`, `moon` and `stone_light`.
+- No new `COLOURS` entry.
+
+**The remap:**
+- `src/ui/season.gdshaderinc` is shared by the new
+  `src/ui/season_remap.gdshader` and by `ambient_motion.gdshader`. A tree
+  can wear only one material, and its own is the wind.
+- `season_remap` goes on the terrain, edge and corner layers (one material,
+  `SeasonView.ground`), the roofs and the cap stand-ins.
+- Every texel is remapped by exact palette match. In the tree's crown that
+  happens before the wind's subpixel blend, so a leaf mid-sway is still a
+  remapped leaf.
+- **The terrain is never redrawn for a season.** Switching is the `season`
+  uniform. `WorldView.terrain_draws()` counts the cell lays, and the input
+  case asserts it does not move.
+- The art is imported lossless (`compress/mode=0`), so an exact match is
+  exact.
+
+**`SeasonView`** (`src/ui/season_view.gd`, a node under `WorldView`):
+- **When the season changes:** `season_on_screen(state)` is the date's
+  season, except under the morning report, where it stays the season of the
+  night just fought. The date moves at dawn (`enter_result`), so the farm
+  turns on the season's first morning, behind 0138's wake-up, and every
+  material switches in the same frame.
+- **The hooks for 0163 and 0164:**
+  - `frame_for(name, season)` gives `<name>_<season>` when 0120's lookup
+    has it, and the base name otherwise.
+  - `carries_season` and `stand_in` tell real seasonal art from a stand-in.
+    Real art gets no remap; a registered stand-in still does.
+  - `_apply_ground_art` puts a seasonal terrain atlas on the tile set when
+    one exists.
+  - Plots ask for `crops/tilled_<season>`.
+  - Trees ask for `props/tree_<season>`.
+  - Nodes ask for `cap_for`: `props/<art>_snow`, `snow_cap` or
+    `snow_cap_2x2`.
+- **The registry:** 27 new `ART` entries.
+  - A012 (12): `atlas_winter`, the nine winter tiles and the two winter
+    plots.
+  - A013 (15): the six seasonal trees, seven own caps and the two generic
+    caps.
+  - Each resolves to its base frame. `tools/placeholders.py` lists both
+    packs (107 stand-ins over 15 packs) until 0163 and 0164 delete them.
+
+**Winter's extras:**
+- **Snowfall** (`Particles`):
+  - 40 flakes a second over the camera's view, in `bone` and `moon`, from
+    the same ring as every particle, so `video/max_particles` still caps it;
+  - scaled by `a11y/particle_density` (none at 0), and off when particles
+    do not move;
+  - the first snowy frame fills the whole view, so winter does not open on
+    an empty sky.
+- **Snow on the roofs, by a code mask:** the top rows of the house's, the
+  stall's and the stations' opaque pixels (the whole drawing, or its top
+  quarters).
+  - Three tries, by the shots:
+    1. Snow in place of the outline melted into the snowy field.
+    2. Snow under the art's own line left the line's gappy pixels floating
+       over it as dots - a dotted halo round the house and the workshop.
+    3. What shipped: each column's top pixel is an unbroken line (the art's
+       when it drew one, `ink` where it left a gap) and the two rows under
+       it are snow.
+  - It reads as snow on the stall's awning. On the house and the workshop
+    it reads as a snowy rim rather than a roof under snow.
+  - **Proposed pack:** winter roofs for the house, the workshop, the stall
+    and the stations, drawn rather than masked.
+- **Snow caps' stand-in:** the host's own frame through the same mask,
+  snow only, so it sits exactly on the host. At a rock's 16 px it is a
+  line and two rows; A013's caps are the real thing.
+
+**A finding for whoever writes the next shader:** the first verify passed
+every check in the art showcases, but each still printed
+`Condition "!actions.custom_samplers.has(...)" is true` and so failed.
+- The cause: Godot 4.7's canvas shader compiler logs that error when a
+  built-in `TEXTURE` is handed to a function as a `sampler2D` argument.
+- The include's helpers now take no sampler. The snow's sampling loop
+  lives in `season_remap.gdshader`'s own `fragment()`.
+
+**Deviations and notes:**
+- **Trees: A013 and this prompt disagree.** A013 asks for spring blossom
+  and today's green in summer. This prompt makes spring today's art and
+  summer warmer. I followed the prompt, so summer's trees are warmed too.
+  0164 decides; turning the summer remap off for trees is one line in
+  `_refresh`.
+- Crops on the plots keep their green all year. Seasonal crops are a later
+  task's.
+- Against `docs/reference-sheet.png`: the sheet's day ground is a golden
+  green, closer to this summer than to today's spring. Spring stays today's
+  art, as the prompt says.
+
+**The check that a table maps everything** (`_task_0159_palette`,
+headless_v1):
+- It reads every PNG in `sprites/terrain/` and both trees, and collects the
+  `FOLIAGE` colours they use.
+- `SeasonView.unmapped` must find nothing in any season.
+- A scratch autumn without `grass` must be caught (`["autumn: grass"]`).
+- Every target is a palette entry, spring is the identity, and winter's
+  targets are the pale four.
+- **Tried, reverted:** I took `rot` out of autumn in `tools/palette.py` and
+  regenerated. The group failed with `["autumn: rot"]`. Restored, then
+  `gen_sprites.py --check` was OK.
+- It also asserts the season on screen (under Spring 14's report it is
+  still spring) and the lookups.
+
+**Tests:**
+- `_case_0159_seasons` (input_v1): the remap reads 0, 1, 2, 3 for Spring,
+  Summer, Autumn and Winter 3. It snows on Winter 3 and not in spring.
+  Zero density stops it. The terrain was laid no more times. Spring of
+  Year 2 is spring again.
+- The shot scenario count is 41.
+
+**Shots** (`implementation/shots/0159/`, FHD, opened):
+- `noon`: unchanged, spring.
+- `season_summer`: brighter yellow-green grass, gold in the crowns.
+- `season_autumn`: an ochre field, rust and gold trees. The path still reads,
+  darker and browner than the field.
+- `season_winter`: a snow field, snowy trees, falling snow, snow under a
+  line on the stall's awning and the roof rims. The paths and the beds
+  read brown through it.
+- `season_winter_night`: the same under the night ramp: blue-violet snow,
+  the windows the warm things.
+- `winter_build`: 0157's scenario, now in winter at night.
+
+### Hashes
+
+Both unchanged: sim `50760118`, data `721761836`. Everything is view, and the
+tables live in `PaletteData`, outside `digest()`.
+
+Files: tools/{palette,gen_sprites}.py, src/ui/palette_data.gd (generated),
+src/ui/{season_view.gd,season_remap.gdshader,season.gdshaderinc} (new),
+src/ui/{ambient_motion.gdshader,world_view,particles,placeholder_art}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+implementation/shots/0159/
+
+Verify: **PASS** on the second run, 60 passed in 659 s (OVER BUDGET as
+before). headless_check 16366 (+9), headless_v1 431 (+9), input_check
+1066, input_v1 200 (+6), placeholders 107 stand-ins over 15 packs.
+- The first run failed:
+  - the showcases, on the shader error above;
+  - headless_check, because the scenario-builder check wants a
+    `_set_<name>` for each scenario. The four now have one each.

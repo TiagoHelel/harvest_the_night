@@ -49,6 +49,14 @@ const LIFE := {
 	&"blood": 0.45,
 }
 
+## **Snowfall** (task 0159): flakes a second over whatever the camera sees,
+## at full density, in `bone` and `moon`, falling this fast in world pixels a
+## second. From the same pool as everything else, so the cap is still a cap
+## and the density setting turns the snow down with the rest.
+const SNOW_PER_SECOND := 40.0
+const SNOW_FALL := Vector2(3.0, 13.0)
+const SNOW_COLOURS := [&"bone", &"moon"]
+
 ## The cap when nothing says otherwise. `video/max_particles` moves it and
 ## `a11y/particle_density` scales what is asked for - one turns the ceiling
 ## down and the other turns the tap down, which are different things.
@@ -73,7 +81,11 @@ var _left: PackedFloat32Array = PackedFloat32Array()
 var _span: PackedFloat32Array = PackedFloat32Array()
 var _size: PackedByteArray = PackedByteArray()
 var _tint: PackedColorArray = PackedColorArray()
+## 1 for a snowflake, which falls at its own pace rather than slowing.
+var _falling: PackedByteArray = PackedByteArray()
 var _next := 0
+var _snow_due := 0.0
+var _snow_was := false
 
 # What the farm looked like last frame, so this frame can see what changed.
 var _seen_entities: Dictionary = {}
@@ -218,14 +230,17 @@ func _resize(size: int) -> void:
 	_span.resize(size)
 	_size.resize(size)
 	_tint.resize(size)
+	_falling.resize(size)
 	for i in size:
 		_left[i] = 0.0
+		_falling[i] = 0
 	_next = 0
 
 
 func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
+	_snow(delta)
 	_advance(delta)
 	_forms.advance(delta, self)
 	_watch(delta)
@@ -246,6 +261,11 @@ func _advance(delta: float) -> void:
 		if _left[i] <= 0.0:
 			continue
 		_left[i] -= delta
+		if _falling[i] == 1:
+			# A flake keeps its pace and sways a little on the way down.
+			_x[i] += (_vx[i] + sin(_left[i] * 2.3 + float(i)) * 2.0) * delta
+			_y[i] += _vy[i] * delta
+			continue
 		if _motion:
 			_x[i] += _vx[i] * delta
 			_y[i] += _vy[i] * delta
@@ -460,6 +480,62 @@ func _burst(at: Vector2, how_many: int, kind: StringName, colour: String,
 		_span[i] = _left[i]
 		_size[i] = 2 if kind == &"dust" or kind == &"smoke" else 1
 		_tint[i] = tint
+		_falling[i] = 0
+
+
+# ------------------------------------------------------------------ the snow
+
+## Whether it is snowing on screen (task 0159): winter on the farm
+## (`SeasonView.season_on_screen`), with particles allowed and moving.
+func snowing() -> bool:
+	return not _state.is_empty() and _density > 0.0 and _motion and _cap > 0 		and SeasonView.season_on_screen(_state) == SeasonView.WINTER
+
+
+## How many flakes are in the air - for `input_v1`.
+func flakes() -> int:
+	var n := 0
+	for i in _left.size():
+		if _left[i] > 0.0 and _falling[i] == 1:
+			n += 1
+	return n
+
+
+## Let flakes into the camera's view from its top edge - and, the first
+## frame it snows, all the way down it, so winter does not open on an empty
+## sky. On the wall clock, like every particle.
+func _snow(delta: float) -> void:
+	var now := snowing()
+	if not now:
+		_snow_was = false
+		_snow_due = 0.0
+		return
+	var to_world := get_global_transform_with_canvas().affine_inverse()
+	var corner := to_world * Vector2.ZERO
+	var view := to_world.basis_xform(get_viewport_rect().size)
+	var crossing := view.y / SNOW_FALL.y
+	if not _snow_was:
+		_snow_was = true
+		for _i in int(SNOW_PER_SECOND * _density * crossing):
+			_flake(corner, view, randf() * view.y)
+	_snow_due += SNOW_PER_SECOND * _density * delta
+	while _snow_due >= 1.0:
+		_snow_due -= 1.0
+		_flake(corner, view, -2.0)
+
+
+func _flake(corner: Vector2, view: Vector2, down: float) -> void:
+	var i := _slot()
+	if i < 0:
+		return
+	_x[i] = corner.x + randf() * view.x
+	_y[i] = corner.y + down
+	_vx[i] = (randf() * 2.0 - 1.0) * SNOW_FALL.x
+	_vy[i] = SNOW_FALL.y * (0.75 + randf() * 0.5)
+	_left[i] = maxf((view.y + 4.0 - down) / _vy[i], 0.1)
+	_span[i] = 0.6
+	_size[i] = 1
+	_tint[i] = PaletteData.COLOURS[SNOW_COLOURS[randi() % SNOW_COLOURS.size()]]
+	_falling[i] = 1
 
 
 ## The next slot in the ring.

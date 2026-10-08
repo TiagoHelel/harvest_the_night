@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 20
+const V1_CASES := 21
 
 
 func _process(delta: float) -> bool:
@@ -70,6 +70,7 @@ func _run() -> void:
 	await _case_0154_calm()
 	await _case_0157_routes()
 	await _case_0158_panel()
+	await _case_0159_seasons()
 	_finish()
 
 
@@ -1823,5 +1824,58 @@ func _case_0158_panel() -> void:
 	expect(not panel.visible, "once START is pressed the forecast goes")
 	expect(hud.date_text() == I18n.f(&"DHUD_DATE", [Names.of(&"winter"), 14]),
 		"and through the waves the strip still names the date", hud.date_text())
+	await close_scene()
+	_completed += 1
+
+
+## 0159 - the seasons on screen: the remap's season and the snowfall follow
+## the date - off in spring, on in winter, off again with the density - and
+## the terrain is never laid again for a season.
+func _case_0159_seasons() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView") as WorldView
+	var particles: Particles = require_control("Particles") as Particles
+	if driver == null or world == null or particles == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	state["day_tick"] = Phases.tick_at_minute(12 * 60)
+	state["day"] = 3
+	await frames(3)
+	var seasons := world.season_view()
+	var laid := world.terrain_draws()
+	expect(seasons.shader_season() == 0 and not particles.snowing() and particles.flakes() == 0,
+		"Spring 3: today's art and no snow",
+		"season %d, %d flakes" % [seasons.shader_season(), particles.flakes()])
+	var read: Array = []
+	for day in [GameData.SEASON_DAYS + 3, 2 * GameData.SEASON_DAYS + 3,
+			3 * GameData.SEASON_DAYS + 3]:
+		state["day"] = day
+		state["nights_won"] = day - 1
+		await frames(3)
+		read.append(seasons.shader_season())
+	expect(read == [1, 2, 3], "the remap follows the date: summer, autumn, winter", str(read))
+	expect(particles.snowing() and particles.flakes() > 0, "and on Winter 3 it snows",
+		"%d flakes" % particles.flakes())
+	expect(world.terrain_draws() == laid,
+		"and the terrain was not laid again for any of it",
+		"%d against %d" % [world.terrain_draws(), laid])
+
+	# **The density setting turns the snow off**, as it does every particle.
+	particles.set_density(0.0)
+	await frames(2)
+	expect(not particles.snowing() and particles.flakes() == 0,
+		"at zero particle density there is no snow", str(particles.flakes()))
+	particles.set_density(1.0)
+
+	# **Spring again** in Year 2: the snow stops and the art is today's.
+	state["day"] = Calendar.year_days() + 3
+	await frames(3)
+	expect(seasons.shader_season() == 0 and not particles.snowing(),
+		"and Spring 3 of Year 2 is spring again, with no snow")
+	state["day"] = 1
 	await close_scene()
 	_completed += 1
