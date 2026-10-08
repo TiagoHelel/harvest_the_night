@@ -492,6 +492,7 @@ static func tick(state: Dictionary) -> void:
 	intent["build_place"] = false
 	intent["build_sell"] = false
 	intent["build_upgrade"] = false
+	_mend_from_the_night(state)
 	if House.inside(state):
 		return
 	if not (place_asked or sell_asked or upgrade_asked):
@@ -510,6 +511,23 @@ static func tick(state: Dictionary) -> void:
 		return
 	if is_active(state):
 		place(state, selected(state), cell)
+
+
+## **Mending at night without the farmer** (task 0129): he is in bed, so the
+## night HUD's REPAIR writes `intent.repair_cell` and this spends it - in
+## the build step and the night only, all the ledger will pay for, through
+## the same `Repair` road his verb used. An edge: read once, then cleared.
+## Interim until 0134's cursor repairs anything it points at.
+static func _mend_from_the_night(state: Dictionary) -> void:
+	var intent: Dictionary = state["intent"]
+	var asked: Array = intent.get("repair_cell", [-1, -1])
+	intent["repair_cell"] = [-1, -1]
+	var phase := int(state["phase"])
+	if phase != Phases.PREPARATION and phase != Phases.NIGHT:
+		return
+	var cell := Vector2i(int(asked[0]), int(asked[1]))
+	if Grid.in_bounds(cell) and Repair.can_mend(state, cell):
+		Repair.apply_all(state, cell)
 
 
 ## Anything with a lifetime takes itself away when it runs out.

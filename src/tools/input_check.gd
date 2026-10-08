@@ -3042,8 +3042,10 @@ func _case_0053_repair() -> void:
 
 	Farm.place(state, spot, {"id": &"wall",
 		"hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])})
-	NightRoad.to_night(state)
-	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
+	# **By day since task 0129**: at night he is in bed and the night HUD's
+	# REPAIR mends (`_case_0056_night_hud`). The verb on a defence is a day
+	# verb until 0134 takes it away.
+	expect(int(state["phase"]) == Phases.DAY, "it is the day")
 
 	Farm.damage(state, spot, 60)
 	var hurt := int(Farm.occupant(state, spot).get("hp", 0))
@@ -3126,10 +3128,11 @@ func _case_0054_ability() -> void:
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
 	expect(Ability.ready(state), "and the flare is charged")
 
-	# Something standing next to the player to be flared.
-	var beside := Player.cell(state) + Vector2i(1, 0)
-	if not Farm.walkable(state, beside):
-		beside = Player.cell(state)
+	# Something standing near the house to be flared: the flare goes up from
+	# the house since task 0129, with the farmer in bed. At the rim of its
+	# reach and off the walls, so it is not biting the house already.
+	var beside := Farm.house_centre(state) \
+		+ Vector2i(0, int(GameData.ABILITY["radius_tiles"]))
 	var victim := Entities.spawn(state, &"walker", beside)
 	Entities.set_hp(state, victim, 500)
 	var hp_before := int(Entities.get_one(state, victim).get("hp", 0))
@@ -3146,9 +3149,9 @@ func _case_0054_ability() -> void:
 
 	# **The player can see it.** The rules record where it went off, which is
 	# all the view needs and all it is allowed to know.
-	expect(Ability.flare_at(state) == [Player.cell(state).x,
-		Player.cell(state).y],
-		"the burst is recorded where the player is standing",
+	expect(Ability.flare_at(state) == [Farm.house_centre(state).x,
+		Farm.house_centre(state).y],
+		"the burst is recorded over the house",
 		str(Ability.flare_at(state)))
 
 	# **Two in the same second are impossible**, through the key as well as
@@ -3389,38 +3392,25 @@ func _case_0056_night_hud() -> void:
 
 	# **All three controls, pressed.** The done-when.
 	#
-	# Repair first: park the player next to something broken so the control
-	# is live, then click it and watch hit points go back.
-	var spot := Vector2i(-1, -1)
-	var stand := Vector2i(-1, -1)
-	for y in range(3, Grid.HEIGHT - 3):
-		for x in range(20, Grid.WIDTH - 3):
-			var cell := Vector2i(x, y)
-			if Farm.buildable(state, cell) 					and Farm.walkable(state, cell + Vector2i(-1, 0)):
-				spot = cell
-				stand = cell + Vector2i(-1, 0)
-				break
-		if spot.x >= 0:
-			break
-	expect(spot.x >= 0, "there is somewhere to put a wall")
-	Farm.place(state, spot, {"id": &"wall",
-		"hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])})
-	Farm.damage(state, spot, 60)
-	Resources.gain(state, {GameData.FOOD: 200, GameData.WOOD: 200})
-	_stand_at(state, stand, Player.EAST)
-	await frames(2)
-
+	# Repair first. **The house, since task 0129**: the farmer is in bed, so
+	# the control mends the farmhouse through `repair_cell` - it used to need
+	# him standing in front of a broken wall. Live while the house is hurt and
+	# the ledger can pay; click it and watch hit points go back.
 	var repair: Button = locate_control("RepairButton") as Button
+	await frames(2)
+	expect(repair.disabled, "with the house whole there is nothing to mend")
+	state["house_hp"] = Phases.house_full(state) - 30
+	Resources.gain(state, {GameData.FOOD: 200, GameData.WOOD: 200})
+	await frames(2)
 	expect(not repair.disabled,
-		"facing a broken wall, the repair control is live")
-	var hurt := int(Farm.occupant(state, spot).get("hp", 0))
+		"with the house damaged, the repair control is live")
+	var hurt := int(state["house_hp"])
 	await click_control("RepairButton")
 	await until(func() -> bool:
-		return int(Farm.occupant(state, spot).get("hp", 0)) > hurt,
-		"the wall to be mended")
-	expect(int(Farm.occupant(state, spot).get("hp", 0)) > hurt,
-		"clicking it puts hit points back",
-		str(Farm.occupant(state, spot).get("hp", 0)))
+		return int(state["house_hp"]) > hurt,
+		"the house to be mended")
+	expect(int(state["house_hp"]) > hurt,
+		"clicking it puts hit points back", str(state["house_hp"]))
 
 	# The flare, and it reports its own wait afterwards.
 	var flare: Button = locate_control("FlareButton") as Button

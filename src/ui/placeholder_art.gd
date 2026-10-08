@@ -108,6 +108,18 @@ const POSES := {
 	&"repair_south": {"pack": "A009", "frames": 4, "seconds": 0.09, "loop": false, "stand_in": &"repair", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 	&"repair_north": {"pack": "A009", "frames": 4, "seconds": 0.09, "loop": false, "stand_in": &"repair", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 	&"repair_west": {"pack": "A009", "frames": 4, "seconds": 0.09, "loop": false, "stand_in": &"repair", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
+	# **Task 0129: his night**, A001 and A002. Asked for by `PlayerView` (the
+	# pass-out), `HouseView` (the bed beat) and `WorldView` (the Zzz over the
+	# house). The idle turned or tinted stands in: `tint` and `turn` (degrees
+	# about the feet, per frame) belong to the stand-in, so they go with it.
+	&"bed_in": {"pack": "A001", "frames": 4, "seconds": 0.2, "loop": false, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME},
+	&"bed_sleep": {"pack": "A001", "frames": 2, "seconds": 0.8, "loop": true, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME, "tint": Color(0.72, 0.78, 1.0)},
+	&"bed_wake": {"pack": "A001", "frames": 4, "seconds": 0.25, "loop": false, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME},
+	&"pass_out_south": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
+	&"pass_out_north": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_north", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
+	&"pass_out_west": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_west", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
+	&"pass_out_east": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_east", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
+	&"react_zzz": {"pack": "A002", "frames": 3, "seconds": 0.4, "loop": true, "stand_in": &"react_note", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 }
 
 
@@ -166,6 +178,21 @@ static func stand_in_path(name: StringName, frame_index: int) -> String:
 	var stand_in := StringName(POSES[name]["stand_in"])
 	var frames := maxi(int(PlayerFrames.COUNT.get(stand_in, 1)), 1)
 	return "%s%s_%d.png" % [DIR, stand_in, frame_index % frames]
+
+
+## The stand-in's colour for a registered animation - white for anything
+## else, real art included, so the view sets it without asking which it is.
+static func stand_in_tint(name: StringName) -> Color:
+	return (POSES.get(name, {}) as Dictionary).get("tint", Color.WHITE)
+
+
+## The stand-in's turn about the feet for one frame, in degrees - 0 for
+## anything else. How the idle is laid down until A001's pass-out arrives.
+static func stand_in_turn(name: StringName, frame_index: int) -> float:
+	var turns: Array = (POSES.get(name, {}) as Dictionary).get("turn", [])
+	if turns.is_empty():
+		return 0.0
+	return float(turns[clampi(frame_index, 0, turns.size() - 1)])
 
 
 ## `[name, frame]` for a registered runtime path, or empty.

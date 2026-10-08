@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 4
+const V1_CASES := 5
 
 
 func _process(delta: float) -> bool:
@@ -54,6 +54,7 @@ func _run() -> void:
 	await _case_0114_house_bar()
 	await _case_0121_pad()
 	await _case_0127_bed()
+	await _case_0129_asleep()
 	_finish()
 
 
@@ -349,5 +350,53 @@ func _case_0127_bed() -> void:
 		"GO TO BED to start the night")
 	expect(int(state["phase"]) == Phases.PREPARATION and House.asleep(state),
 		"GO TO BED from the field starts the build step, asleep")
+	await close_scene()
+	_completed += 1
+
+
+## 0129 - he stays in bed all night: held keys move nobody, and the night
+## HUD's REPAIR mends the house without him.
+func _case_0129_asleep() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"GO TO BED to start the night")
+	await frames(2)
+	var house_view: HouseView = require_control("HouseView")
+	expect(house_view != null and house_view.is_showing_bedtime(),
+		"the switch opens on him getting into bed")
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT, "the night")
+
+	# **Holding D at night moves nobody.**
+	var before := Player.position(state)
+	await hold_key(KEY_D, 45)
+	expect(Player.position(state) == before,
+		"holding D at night does not move him",
+		"%s to %s" % [before, Player.position(state)])
+	var farmer: PlayerView = require_control("PlayerView") as PlayerView
+	var world: WorldView = require_control("WorldView")
+	expect(farmer != null and not farmer.is_drawn(), "nobody on the porch at night")
+	expect(world != null and world.zzz_showing(), "and a Zzz over the house")
+
+	# **REPAIR mends a damaged house.**
+	state["house_hp"] = Phases.house_full(state) - 30
+	Resources.gain(state, {GameData.FOOD: 200, GameData.WOOD: 200})
+	await frames(2)
+	var hurt := int(state["house_hp"])
+	await click_control("RepairButton")
+	await until(func() -> bool: return int(state["house_hp"]) > hurt,
+		"the house to be mended")
+	expect(int(state["house_hp"]) > hurt,
+		"clicking RepairButton mends a damaged house",
+		"%d to %d" % [hurt, int(state["house_hp"])])
 	await close_scene()
 	_completed += 1

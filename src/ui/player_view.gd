@@ -127,10 +127,20 @@ func _process(delta: float) -> void:
 ## Pick the drawing, advance the clock, and show the frame.
 func _animate(delta: float) -> void:
 	_bubble.visible = false
-	var move := _move()
+	# **In bed from the switch to the morning** (task 0129): nobody on the
+	# porch at night. After a collapse at 02:00 he lies where he fell through
+	# the short build step instead, and is gone with the night.
+	var lying := _lying()
+	var away := House.asleep(_state) and int(_state["phase"]) != Phases.DAY and not lying
+	_sprite.visible = not away
+	_shadow.visible = not away
+	if away:
+		return
+	var move := Vector2i.ZERO if lying else _move()
 	if move != Vector2i.ZERO:
 		_heading = move
-	var pose := _work.pose(_state, delta)
+	var pose := PlayerArt.pass_out_pose(Player.facing(_state)) if lying \
+		else _work.pose(_state, delta)
 	if pose.is_empty():
 		pose = PlayerArt.pose(Player.facing(_state), move != Vector2i.ZERO, _verb(), _running, _heading)
 	var name: StringName = pose["name"]
@@ -160,10 +170,17 @@ func _animate(delta: float) -> void:
 	_seconds = seconds
 
 	var frame := int(pose["frame"]) if pose.has("frame") else PlayerArt.frame_at(pose, _elapsed)
+	if bool(pose.get("hold", false)):
+		# Played once, then held on its last frame.
+		frame = mini(int(_elapsed / maxf(seconds, 0.01)), int(pose["frames"]) - 1)
 	var path := PlayerArt.texture_path(name, frame)
 	var texture := _texture(path)
 	_sprite.texture = texture
 	_sprite.flip_h = bool(pose["flip"])
+	# A stand-in's own tint and turn (task 0129); white and upright for art
+	# that has arrived.
+	_sprite.modulate = PlaceholderArt.stand_in_tint(name)
+	_sprite.rotation_degrees = PlaceholderArt.stand_in_turn(name, frame)
 	# Flipping a sprite mirrors it about its offset, so the offset has to be
 	# mirrored too or the farmer steps a canvas-width sideways when they turn.
 	var metadata: Dictionary = PlaceholderArt.frame(path)
@@ -203,6 +220,17 @@ func _show_bubble(texture: Texture2D, metadata: Dictionary, lift: Vector2) -> vo
 	_bubble.position += transform.affine_inverse() * (top_left + shift) \
 		- transform.affine_inverse() * top_left
 	_bubble.visible = true
+
+
+## Lying where he fell: passed out at 02:00 and still in the build step.
+func _lying() -> bool:
+	return House.passed_out(_state) and House.asleep(_state) \
+		and int(_state["phase"]) == Phases.PREPARATION
+
+
+## Whether he is on screen at all: not while he is in bed (task 0129).
+func is_drawn() -> bool:
+	return _sprite != null and _sprite.visible
 
 
 ## What the rules say the player is doing, or nothing.

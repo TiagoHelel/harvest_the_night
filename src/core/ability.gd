@@ -143,7 +143,9 @@ static func use(state: Dictionary) -> bool:
 		* Tech.bonus(state, "flare_percent", 100) / 100
 	one["flares"] = int(one["flares"]) + 1
 
-	var centre := Player.cell(state)
+	# **On the house** until 0135 aims it with the cursor: the farmer is in
+	# bed at night (task 0129), so the flare goes up from the farmhouse.
+	var centre := Farm.house_centre(state)
 	one["flare"] = [centre.x, centre.y]
 	one["flare_ticks"] = int(GameData.ABILITY["flare_ticks"])
 

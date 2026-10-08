@@ -277,10 +277,10 @@ func _refresh_boss() -> void:
 
 
 func _refresh_controls() -> void:
-	# **Repair**, lit when the cell the player is facing can actually be
-	# mended. The button is the key: it writes the same intent.
-	var target := Player.target(_state)
-	var can_mend := Interact.verb_at(_state, target) == &"repair"
+	# **Repair**, lit while the house can actually be mended. The farmer is
+	# in bed at night (task 0129), so the button mends the house itself,
+	# through `intent.repair_cell`, until 0134's cursor mends anything.
+	var can_mend := Repair.can_mend(_state, Farm.house_centre(_state))
 	# **Disabled is enough.** The theme draws a disabled button in ink_soft
 	# with faint letters, so the grey the old `modulate` added was the same
 	# thing said twice.
@@ -303,7 +303,8 @@ func _refresh_controls() -> void:
 ## 0067 all take the same road into the rules.
 func _do_repair() -> void:
 	if not _state.is_empty():
-		(_state["intent"] as Dictionary)["interact"] = true
+		var house := Farm.house_centre(_state)
+		(_state["intent"] as Dictionary)["repair_cell"] = [house.x, house.y]
 
 
 func _do_flare() -> void:

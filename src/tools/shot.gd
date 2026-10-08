@@ -81,6 +81,7 @@ const SCENARIOS: Array = [
 	["house_interior", "the furnished farmhouse", ""],
 	["farm_extension", "planting on the new southern land", ""],
 	["larger_stations", "the larger farm buildings", ""],
+	["passed_out", "fallen asleep on the farm at 02:00", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
 	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
 ]
@@ -617,6 +618,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"house_interior": _set_house_interior(state)
 		"farm_extension": _set_farm_extension(state)
 		"larger_stations": _set_larger_stations(state)
+		"passed_out": _set_passed_out(state)
 		"options_controls_pad": _set_options_controls_pad(state)
 
 	_walk_to(state, _standing_at)
@@ -772,6 +774,12 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 			var taken: Vector2i = Farm.cells_with(state, &"workshop")[0]
 			mode.set("_pointer", view.cell_to_screen(taken))
 			mode.call("_follow_cursor")
+		"passed_out":
+			# **Lying, not falling.** The settle is half a second and the
+			# collapse is longer; the picture is of the frame the view holds.
+			var farmer: Node = main.get_node_or_null("%WorldView/Occupants/PlayerView")
+			if farmer != null:
+				farmer.set("_elapsed", 5.0)
 
 
 ## Build mode with the ghost somewhere it will not go, task 0110.
@@ -942,6 +950,14 @@ func _set_noon(state: Dictionary) -> void:
 	# task 0126 gave the day an hour this was half way, and half way is 16:00.
 	Sim.advance(state, maxi(Phases.tick_at_minute(WorldView.NOON_MINUTE)
 		- int(state["tick"]), 1))
+
+
+## Still out on the field at 02:00, task 0129: he passes out where he
+## stands and lies there through the short build step.
+func _set_passed_out(state: Dictionary) -> void:
+	_a_sown_field(state)
+	state["day_tick"] = GameData.DAY_TICKS - 1
+	Sim.advance(state, 1)
 
 
 func _set_dusk(state: Dictionary) -> void:

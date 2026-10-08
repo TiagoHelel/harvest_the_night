@@ -154,6 +154,16 @@ static func animation(name: StringName) -> Dictionary:
 	return {}
 
 
+## **The collapse at 02:00** (task 0129): A001's `pass_out_<dir>` for the
+## facing he fell in, played once and then held on its last frame (`hold`) -
+## he lies where he fell through the short build step.
+static func pass_out_pose(facing: int) -> Dictionary:
+	var name := StringName("pass_out_%s" % FACINGS[clampi(facing, 0, FACINGS.size() - 1)][0])
+	var strip := animation(name)
+	return {"name": name, "frames": int(strip.get("frames", 0)),
+		"seconds": float(strip.get("seconds", 0.2)), "flip": false, "hold": true}
+
+
 ## Which of the eight drawings `heading` is - but only while it agrees with
 ## the facing the rules hold. A chop that turned the farmer to face its tree
 ## outranks the diagonal they walked in on.

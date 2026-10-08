@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 11
+const GROUPS := 12
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -80,6 +80,7 @@ func _run() -> void:
 	_task_0126_clock()
 	_task_0127_bed()
 	_task_0128_pass_out()
+	_task_0129_asleep()
 
 
 func _finish() -> void:
@@ -1057,4 +1058,107 @@ func _task_0128_pass_out() -> void:
 	Phases.begin_day(late)
 	expect(not bool((late["house_visit"] as Dictionary)["passed_out"])
 		and not House.asleep(late), "and the morning clears both")
+	_completed += 1
+
+
+## 0129 - he stays in bed all night.
+func _task_0129_asleep() -> void:
+	# **Move and interact held for the whole build step**, then 600 ticks of
+	# the night (parked, so nothing bites): nothing about him changes. The
+	# build step is `PREPARATION_TICKS` long, so its 600 end in the night.
+	var state := State.create(1291)
+	NightRoad.into_build(state)
+	var before: Array = (state["player"]["pos"] as Array).duplicate()
+	var facing := Player.facing(state)
+	var intent: Dictionary = state["intent"]
+	var phases_seen := {}
+	for leg in 2:
+		if leg == 1:
+			NightRoad.park(state)
+		for _tick in 600:
+			phases_seen[int(state["phase"])] = true
+			(intent["move"] as Array)[0] = 1
+			(intent["move"] as Array)[1] = -1
+			intent["interact"] = true
+			intent["interact_held"] = true
+			intent["cancel"] = true
+			Sim.advance(state, 1)
+		var after: Array = state["player"]["pos"]
+		expect(after == before and Player.facing(state) == facing
+			and not Player.is_busy(state),
+			"%s: 600 ticks of move and interact leave him where he lay"
+				% ["the build step", "the night"][leg],
+			"%s to %s, facing %d to %d" % [before, after, facing, Player.facing(state)])
+	expect(phases_seen.has(Phases.PREPARATION) and phases_seen.has(Phases.NIGHT)
+		and int(state["phase"]) == Phases.NIGHT,
+		"and that was the build step and the night", str(phases_seen.keys()))
+	expect(not bool(intent["interact"]) and not bool(intent["cancel"]),
+		"the edges are consumed, not left for the morning")
+
+	# **The flare goes up from the house** until 0135's cursor aims it.
+	expect(Ability.ready(state), "the flare is charged at night")
+	intent["ability"] = true
+	Sim.advance(state, 1)
+	var house := Farm.house_centre(state)
+	expect(Ability.flare_at(state) == [house.x, house.y],
+		"a flare lands on the house centre", str(Ability.flare_at(state)))
+
+	# **REPAIR without him**: `repair_cell` on the house, in the build step.
+	var mend := State.create(1292)
+	NightRoad.into_build(mend)
+	house = Farm.house_centre(mend)
+	mend["house_hp"] = Phases.house_full(mend) - 40
+	Resources.gain(mend, {GameData.FOOD: 400, GameData.WOOD: 400,
+		GameData.STONE: 400, GameData.IRON: 400})
+	var hurt := int(mend["house_hp"])
+	var will := Repair.max_affordable(mend, house)
+	var bill := Repair.cost_at(mend, house, will)
+	var held: Dictionary = (mend["held"] as Dictionary).duplicate()
+	(mend["intent"] as Dictionary)["repair_cell"] = [house.x, house.y]
+	Sim.advance(mend, 1)
+	expect(will > 0 and int(mend["house_hp"]) == hurt + will,
+		"repair_cell on a damaged house mends it",
+		"%d + %d, now %d" % [hurt, will, int(mend["house_hp"])])
+	var charged := {}
+	for id in GameData.sorted_names(held.keys()):
+		var spent := int(held[id]) - Resources.amount(mend, id)
+		if spent != 0:
+			charged[id] = spent
+	var billed := {}
+	for id in GameData.sorted_names(bill.keys()):
+		if int(bill[id]) != 0:
+			billed[id] = int(bill[id])
+	expect(charged == billed and not billed.is_empty(),
+		"and charges what Repair.cost_at says", "%s against %s" % [charged, billed])
+	expect((mend["intent"] as Dictionary)["repair_cell"] == [-1, -1],
+		"the edge is consumed")
+
+	# **Broke**: nothing at all changes.
+	var broke := State.create(1293)
+	NightRoad.into_build(broke)
+	NightRoad.through_build(broke)
+	NightRoad.park(broke)
+	house = Farm.house_centre(broke)
+	broke["house_hp"] = Phases.house_full(broke) - 40
+	for id in GameData.sorted_names((broke["held"] as Dictionary).keys()):
+		(broke["held"] as Dictionary)[id] = 0
+	var hp_broke := int(broke["house_hp"])
+	var debt: Dictionary = (Repair.banked(broke) as Dictionary).duplicate()
+	(broke["intent"] as Dictionary)["repair_cell"] = [house.x, house.y]
+	Sim.advance(broke, 1)
+	expect(int(broke["house_hp"]) == hp_broke and Repair.banked(broke) == debt,
+		"and changes nothing when the ledger cannot pay",
+		"%d to %d" % [hp_broke, int(broke["house_hp"])])
+
+	# **By day it is not his to use**: the edge is a night control.
+	var day := State.create(1294)
+	house = Farm.house_centre(day)
+	day["house_hp"] = Phases.house_full(day) - 40
+	Resources.gain(day, {GameData.FOOD: 400, GameData.WOOD: 400})
+	var hp_day := int(day["house_hp"])
+	(day["intent"] as Dictionary)["repair_cell"] = [house.x, house.y]
+	Sim.advance(day, 1)
+	expect(int(day["house_hp"]) == hp_day
+		and (day["intent"] as Dictionary)["repair_cell"] == [-1, -1],
+		"by day repair_cell is dropped unread")
 	_completed += 1

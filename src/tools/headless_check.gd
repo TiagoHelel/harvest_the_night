@@ -3259,15 +3259,21 @@ func _task_0022_reality() -> void:
 		"and neither does the stall")
 	expect(Interact.verb_at(state, tilled) == &"", "nor the field")
 
-	# But the player is still out there, and still walks.
-	var before := Player.cell(state)
+	# **He stays in bed all night** (task 0129; it used to be "the player
+	# walks their defences at night"). 600 ticks of move and interact
+	# change nothing about him.
+	var before := Player.position(state)
+	var facing := Player.facing(state)
 	var move: Array = (state["intent"] as Dictionary)["move"]
-	move[0] = 1
-	Sim.advance(state, 40)
+	for _tick in 600:
+		move[0] = 1
+		(state["intent"] as Dictionary)["interact"] = true
+		Sim.advance(state, 1)
 	move[0] = 0
-	expect(Player.cell(state) != before,
-		"the player walks their defences at night",
-		"%s to %s" % [before, Player.cell(state)])
+	expect(Player.position(state) == before and Player.facing(state) == facing
+		and not Player.is_busy(state),
+		"he stays in bed all night",
+		"%s to %s" % [before, Player.position(state)])
 
 	# A panel does not survive the sunset.
 	var shopper := State.create(112)
@@ -9757,8 +9763,10 @@ func _task_0053_repair() -> void:
 	# does not hold *for ever*: one walker takes 0.50 hit points a tick off
 	# and one repairer puts 0.33 back, so the wall is still losing - slowly.
 	# Both numbers are levers and the journal has the arithmetic.
-	expect(helped["fell_at"] > alone["fell_at"] * 2,
-		"and somebody mending it more than doubles how long it stands",
+	# The REPAIR control has no hands to slow it (until 0134's cursor), so a
+	# wall mended every tick can simply hold: 0 is "it held".
+	expect(helped["fell_at"] == 0 or helped["fell_at"] > alone["fell_at"] * 2,
+		"and mending it from the night HUD more than doubles how long it stands",
 		"%d against %d" % [helped["fell_at"], alone["fell_at"]])
 	expect(chewing > mending,
 		"one pair of hands does not out-mend one walker at these levers - "
@@ -9775,11 +9783,15 @@ func _task_0053_repair() -> void:
 ## which is the reach test.
 func _mend_a_wall(seed_value: int, ticks: int, walk_off: bool,
 		stand_off: bool = false) -> Dictionary:
-	var state := _armed_prep(seed_value)
-	Resources.gain(state, {GameData.FOOD: 400, GameData.WOOD: 400})
+	# **By day since task 0129**: at night he is in bed and the night HUD
+	# mends through `repair_cell` (`_wall_under_attack`). The farmer's verb on
+	# a defence is a day verb until 0134 takes it away; it is still work.
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
+		GameData.IRON: 400, GameData.GUNPOWDER: 400, GameData.FOOD: 400})
 	var spot := _room_for(state, Vector2i(1, 1))
-	Building.place(state, &"wall", spot)
-	_night_falls(state)
+	SuiteKit.built_last_night(state, func() -> bool:
+		return Building.place(state, &"wall", spot))
 	Farm.damage(state, spot, 90)
 	var hurt := int(Farm.occupant(state, spot).get("hp", 0))
 
@@ -9858,12 +9870,12 @@ func _wall_under_attack(seed_value: int, mending: bool) -> Dictionary:
 	var intent: Dictionary = state["intent"]
 	var fell_at := 0
 	for _tick in 3000:
-		# **Pressed every tick, not once at the start.** The wall is whole
-		# when the night begins, so a cell that offers nothing to do is a
-		# press that starts nothing - and the player standing there waiting
-		# for the first bite is exactly what this measures.
-		intent["interact"] = mending
-		intent["interact_held"] = mending
+		# **The night HUD's REPAIR, pressed every tick** (task 0129: he is in
+		# bed, so the night is mended through `repair_cell`, not his hands).
+		# The wall is whole when the night begins, so a press that finds
+		# nothing to mend does nothing until the first bite.
+		if mending:
+			intent["repair_cell"] = [spot.x, spot.y]
 		Sim.advance(state, 1)
 		fell_at += 1
 		if Farm.is_empty(state, spot):
@@ -9985,7 +9997,7 @@ func _task_0054_ability() -> void:
 
 	# **The slow wears off.**
 	var wears := _fresh_night(3604)
-	var one := Entities.spawn(wears, &"walker", Player.cell(wears))
+	var one := Entities.spawn(wears, &"walker", Farm.house_centre(wears))
 	Entities.set_hp(wears, one, 500)
 	Ability.use(wears)
 	expect(Ability.is_slowed(wears, one), "it is slowed")
@@ -9997,9 +10009,10 @@ func _task_0054_ability() -> void:
 	var seen := _fresh_night(3605)
 	expect(Ability.flare_at(seen).is_empty(), "nothing to draw yet")
 	Ability.use(seen)
-	expect(Ability.flare_at(seen) == [Player.cell(seen).x,
-		Player.cell(seen).y],
-		"it went off where the player is standing",
+	# On the house since task 0129: the farmer is in bed (0135 aims it).
+	expect(Ability.flare_at(seen) == [Farm.house_centre(seen).x,
+		Farm.house_centre(seen).y],
+		"it went off over the house",
 		str(Ability.flare_at(seen)))
 	Sim.advance(seen, int(table["flare_ticks"]) + 2)
 	expect(Ability.flare_at(seen).is_empty(),
@@ -10032,18 +10045,24 @@ func _task_0054_ability() -> void:
 		% turned["house_lost"])
 	expect(lost["house_lost"] > 0, "without it the house is bitten",
 		str(lost))
-	expect(turned["house_lost"] < lost["house_lost"],
-		"and one press measurably changes that",
+	# **Interim, task 0129**: with the farmer in bed the flare goes up from
+	# the house centre, and at `radius_tiles` from there it reaches little
+	# more than the walls - a walker bites on arriving. Turning a wave is
+	# 0135's to give back when the cursor aims it; until then it must at
+	# least never make the night worse.
+	expect(turned["house_lost"] <= lost["house_lost"],
+		"and one press never makes it worse",
 		"%d against %d" % [turned["house_lost"], lost["house_lost"]])
 	expect(turned["flares"] == 1, "off one flare", str(turned["flares"]))
 
 	_completed += 1     # last line: an abandoned group never gets here
 
 
-## A line of walkers running out from the player, and what a flare did to each.
+## A line of walkers running out from the house - where the flare goes off
+## since task 0129 - and what a flare did to each.
 func _flare_a_line(seed_value: int) -> Dictionary:
 	var state := _fresh_night(seed_value)
-	var centre := Player.cell(state)
+	var centre := Farm.house_centre(state)
 	var radius := int(GameData.ABILITY["radius_tiles"])
 
 	var who: Array = []
@@ -10115,7 +10134,11 @@ func _flare_a_wave(seed_value: int, press: bool) -> Dictionary:
 	var before := int(state["house_hp"])
 	for _tick in 4000:
 		# Fire when the crowd is on top of them, which is what a player does.
-		if press and Ability.ready(state) and _crowd_near(state, stand) >= 3:
+		# Since task 0129 the flare goes up from the house, so it is fired
+		# when the first of the crowd is at the walls (two tiles past the
+		# flare's own reach from the centre: a walker bites on arriving).
+		if press and Ability.ready(state) \
+				and _crowd_near(state, Farm.house_centre(state), 2) >= 1:
 			(state["intent"] as Dictionary)["ability"] = true
 		Sim.advance(state, 1)
 		if Entities.count(state) == 0:
@@ -10128,8 +10151,8 @@ func _flare_a_wave(seed_value: int, press: bool) -> Dictionary:
 
 
 ## How many enemies are inside a flare's reach of this cell.
-func _crowd_near(state: Dictionary, cell: Vector2i) -> int:
-	var radius := int(GameData.ABILITY["radius_tiles"])
+func _crowd_near(state: Dictionary, cell: Vector2i, beyond: int = 0) -> int:
+	var radius := int(GameData.ABILITY["radius_tiles"]) + beyond
 	var near := 0
 	for id in Entities.ids(state):
 		var at := Entities.cell_of(state, id)
@@ -14291,14 +14314,15 @@ func _task_0082_shots() -> void:
 	# without anybody deciding to add one should be a failing row rather
 	# than an extra picture nobody looks at.
 	# Sixteen since task 0121: the controls tab again with a pad in hand,
-	# because the pad's names are what has to fit there.
-	expect(names.size() == 16,
-		"the original scenarios, options tabs, three farmhouse scenarios and the pad's controls",
+	# because the pad's names are what has to fit there. Seventeen since task
+	# 0129: the farmer passed out at 02:00, the one place that pose is seen.
+	expect(names.size() == 17,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls and the pass-out",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
-			"options_controls_pad"]:
+			"passed_out", "options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

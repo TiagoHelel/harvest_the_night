@@ -1,7 +1,7 @@
 # 0129 - He stays in bed all night
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0127, 0120, 0128
 - **Likely files:** src/core/player.gd, src/core/ability.gd, src/core/building.gd, src/ui/main.gd, src/ui/night_hud.gd, src/ui/player_view.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

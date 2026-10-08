@@ -13363,3 +13363,81 @@ Autoplay still plays its nights - won 0 / night 8 (21x) 6.9 balanced, night 3
 (19x) 2.6 economy, night 8 (17x) 6.7 towers, night 8 (21x) 8.2 walls, the same
 nights as 0119; gathered 5671/799/5633/7373. Shots 0128 `--title` opened: the
 backdrop is the late evening light.
+
+## 0129 - He stays in bed all night - done 2026-10-08
+
+What changed: nobody walks at night. `Player.tick` returns at once while
+`House.asleep` (from the switch to the morning), consuming the `interact` and
+`cancel` edges, so a press in the night is not left for the morning; `main.gd`
+writes `move = [0, 0]` and draws no highlight outside DAY, which frees the move
+axes for 0130's camera. The two things the night used him for keep working
+without him, both interim. **The flare** (`Ability.use`) centres on
+`Farm.house_centre` until 0135 aims it. **The repair** is a new edge intent
+`repair_cell` (`[-1, -1]` idle; in `intent`, so reconcile fills old saves),
+consumed in `Building.tick` in PREPARATION and NIGHT through `Repair.can_mend` /
+`Repair.apply_all` (dropped unread by day). The night HUD's REPAIR writes the
+house's cell and is live while `Repair.can_mend` allows it. No new `X.tick`, so
+`PerfNames` is untouched. New `House.passed_out(state)` for the views.
+**View**: `PlayerView` draws nobody while he is asleep outside DAY; after a
+02:00 collapse he lies where he fell through the short build step
+(`PlayerArt.pass_out_pose`: A001's `pass_out_<dir>` played once, then held) and
+is gone with the night. `HouseView` opens the switch on an ordinary bedtime with
+**the bed beat**: the room over the farm, the farmer on the bed through A001's
+mapping (the bed sprite's pivot + (0,-25), drawn above the bed) playing `bed_in`
+and a breath of `bed_sleep` (1.6 s, none when the player turned the switch's
+fade off), then the cut back through the door's dark. `WorldView` draws A002's
+Zzz over the roof in PREPARATION and NIGHT (not over a passed-out farmer, who is
+not in there): its own layer following the camera, like the particles' warm
+effects, so the night tint does not drown it, and created before `HouseView`
+so the room covers it. It is a view cue on the view's clock, never a
+`Reactions` kind. The windows were lit already (`lighting.gd`).
+**Placeholders** (0120's road): `bed_in`, `bed_sleep`, `bed_wake`,
+`pass_out_<south|north|west|east>` (A001, WALK_FRAME geometry, the idle as
+stand-in) and `react_zzz` (A002, the note's glyph at LEGACY_STRIP, final
+WORK_FRAME). Stand-ins may carry `tint` and `turn` (degrees about the feet, per
+frame), read through `PlaceholderArt.stand_in_tint` / `stand_in_turn`: they go
+with the entry, so integrating A001 changes no view code. `bed_sleep` is the
+idle tinted blue; the pass-out is the idle toppling 0/-20/-55/-90 degrees.
+`bed_wake` is registered for 0138.
+**Tests moved off the night farmer** (a scratch run listed them):
+`_task_0022_reality` now "he stays in bed all night" (600 ticks of move and
+interact). `_task_0053_repair` / `_case_0053_repair` mend the wall by day with his
+verb (0134 takes that away). `_wall_under_attack` mends from the night HUD,
+`repair_cell` every tick; nothing slows that mend any more, so a wall can simply
+hold, and the assert accepts `fell_at == 0`. `_case_0056_night_hud`'s REPAIR
+block mends a damaged house. 0054's walkers, burst and line are on the house
+centre. **Finding - the flare at the house turns no wave.** At `radius_tiles`
+from the centre it reaches little more than the walls, and a walker bites on
+arriving: one flare at the first walker within reach + 2 hurt it but left the
+house losing exactly as much (80 against 80). `_task_0054_ability`'s "and one press
+measurably changes that" is relaxed to "never makes it worse" until 0135 aims it,
+and `_case_0054_ability`'s victim stands at the rim of the reach, off the walls.
+Both are written into 0135's prompt to give back; 0134's prompt says what 0129
+already moved. Showcase (`tools/show_art.py`): the night-began and
+structure-lost reactions now check that nobody and no glyph is drawn, and
+bedtime during a cast checks the farmer is gone, not just the rod. A new shot
+scenario `passed_out` (the one place that pose is seen); `headless_check`'s
+scenario count is 17.
+Files: src/core/{player,ability,building,house}.gd, src/ui/{main,night_hud,
+player_view,player_art,house_view,world_view,placeholder_art}.gd, src/tools/
+{headless_check,input_check,headless_v1,input_v1,art_showcase,shot}.gd,
+implementation/prompts/{0134,0135}-*.md, tools/determinism_sim_hash.txt,
+implementation/shots/0129/
+Verify: **59 passed, 0 failed in 512s** (OVER BUDGET 300, as before); suite times
+headless_check 78.3 s, headless_v1 2.1 s, input_check 88.4 s, input_v1 5.1 s;
+headless_check 16185 (+2, the new scenario), headless_v1 166 (+11: the build step
+and the night leave him where he lay, both phases seen, the edges consumed, the
+flare charged and on the house centre, `repair_cell` mends, charges exactly
+`Repair.cost_at` and is consumed, changes nothing broke, dropped by day),
+input_check 1074, input_v1 35 (+5: the bed beat opens the switch, D at night moves
+nobody, nobody on the porch, the Zzz, REPAIR mends the house), player work 12129 and
+reactions 694 unchanged in count; **sim 734279793 -> 1212869859**, moved only by
+`intent.repair_cell` being hashed (checked: the same number with `Player.tick`'s
+in-bed return switched off - the determinism scenario neither walks nor flares
+at night); data 954093946 unchanged. Autoplay never acts at night
+(`NightRoad.run_night`), so its nights are untouched. Shots 0129 `dusk wave`,
+`--switch` and `passed_out` opened: the switch opens on the room and him on the
+bed, then the dark farm; at night nobody on the porch, the windows lit and the
+Zzz (the note stand-in, gold) on the roof clear of the night bar; passed out, he
+lies on the path. The `wave` camera now stays on the porch (he no longer walks
+to the defence line) - 0130's camera is what frees it.

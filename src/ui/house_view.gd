@@ -21,6 +21,20 @@ const HEARTH_FLAME := preload("res://src/ui/hearth_flame.gdshader")
 const FURNITURE_OFFSETS := {&"bed": Vector2(0, -4),
 	&"nightstand": Vector2(0, -9), &"storage": Vector2(9, 0)}
 
+## **The bed beat** (task 0129). The switch opens on him getting into bed -
+## A001's `bed_in`, then a breath of `bed_sleep` - before the room cuts away
+## and the farm is dark. View only: the rules are already in PREPARATION.
+const BED_BEAT_SLEEP_SECONDS := 0.8
+## A001's bed mapping: the frame's pivot sits on the bed sprite's pivot
+## moved by (0,-25), drawn above the bed.
+const SLEEPER_ON_BED := Vector2(0, -25)
+var _bed: Sprite2D
+var _sleeper: Sprite2D
+var _sleeper_textures: Dictionary = {}
+var _was_asleep := false
+var _beat_left := 0.0
+var _beat_elapsed := 0.0
+
 
 ## Match the outdoor farmer's held run animation without changing house rules.
 func set_running(running: bool) -> void:
@@ -106,6 +120,16 @@ func _build_room() -> void:
 			sprite.material = _flame
 		elif piece["id"] == &"nightstand":
 			_add_lamp_glow(sprite)
+		elif piece["id"] == &"bed":
+			_bed = sprite
+	# A child of the bed, so it is drawn over it and moves with it.
+	_sleeper = Sprite2D.new()
+	_sleeper.name = "Sleeper"
+	_sleeper.centered = false
+	_sleeper.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_sleeper.position = SLEEPER_ON_BED
+	_sleeper.visible = false
+	_bed.add_child(_sleeper)
 	_farmer = PlayerView.new()
 	_farmer.name = "IndoorFarmer"
 	furniture.add_child(_farmer)
@@ -161,6 +185,11 @@ func _set_room_visible(on: bool) -> void:
 
 
 func show_state(value: Dictionary) -> void:
+	if not is_same(value, state):
+		# A run loaded asleep has no bedtime to show.
+		_was_asleep = House.asleep(value)
+		if _beat_left > 0.0 and _sleeper != null:
+			_end_bed_beat(House.inside(value))
 	state = value
 	if _farmer != null:
 		_farmer.show_state(state)
@@ -183,7 +212,11 @@ func _process(delta: float) -> void:
 		_set_room_visible(indoors)
 		_fade.color.a = 1.0
 		_focus = Vector2(Player.position(state)) * GameData.TILE_SIZE / Player.SUBTILE
+	_watch_bedtime()
 	_fade.color.a = maxf(0.0, _fade.color.a - delta * 5.0)
+	if _beat_left > 0.0:
+		_play_bed_beat(delta)
+		return
 	if not indoors:
 		return
 	_refresh_ambient(delta)
@@ -192,7 +225,88 @@ func _process(delta: float) -> void:
 	_hint.text = I18n.f(&"HOUSE_BED_HINT", [interact_key]) if House.can_sleep(state) \
 		else I18n.f(&"HOUSE_EXIT_HINT", [interact_key])
 	var blend := 1.0 - exp(-WorldView.CAMERA_RESPONSE * delta)
-	var target := Vector2(Player.position(state)) * GameData.TILE_SIZE / Player.SUBTILE
+	_aim(Vector2(Player.position(state)) * GameData.TILE_SIZE / Player.SUBTILE, blend)
+
+
+## Whether the bed beat is playing - for `input_v1` and the shots.
+func is_showing_bedtime() -> bool:
+	return _beat_left > 0.0
+
+
+## Start the bed beat on an ordinary bedtime: asleep this frame and not the
+## last, and not a collapse at 02:00 (that one plays where he fell).
+func _watch_bedtime() -> void:
+	var asleep := House.asleep(state)
+	if asleep and not _was_asleep and not House.passed_out(state) \
+			and int(state["phase"]) == Phases.PREPARATION:
+		var seconds := _bed_beat_seconds()
+		if seconds > 0.0:
+			_beat_left = seconds
+			_beat_elapsed = 0.0
+			_set_room_visible(true)
+			_hint.visible = false
+			_farmer.visible = false
+			_sleeper.visible = true
+			_fade.color.a = 1.0
+			_focus = _bed.position + SLEEPER_ON_BED
+	_was_asleep = asleep
+
+
+## `bed_in` once, then a breath of `bed_sleep`. None at all for a player who
+## turned the switch's fade off: the beat is part of that moment.
+func _bed_beat_seconds() -> float:
+	var settings := get_node_or_null("/root/Settings")
+	if settings != null and settings.has_method("get_value"):
+		var skip: Variant = settings.get_value(&"gameplay/skip_transition")
+		if skip != null and bool(skip):
+			return 0.0
+	var into := PlayerArt.animation(&"bed_in")
+	return float(into.get("frames", 0)) * float(into.get("seconds", 0.0)) \
+		+ BED_BEAT_SLEEP_SECONDS
+
+
+func _play_bed_beat(delta: float) -> void:
+	_beat_elapsed += delta
+	_beat_left -= delta
+	_refresh_ambient(delta)
+	_title.text = I18n.t(&"HOUSE_TITLE")
+	var into := PlayerArt.animation(&"bed_in")
+	var each := maxf(float(into.get("seconds", 0.2)), 0.01)
+	var lying_down := float(into.get("frames", 0)) * each
+	if _beat_elapsed < lying_down:
+		_show_sleeper(&"bed_in", mini(int(_beat_elapsed / each), int(into["frames"]) - 1))
+	else:
+		_show_sleeper(&"bed_sleep", PlayerArt.frame_at(PlayerArt.animation(&"bed_sleep"),
+			_beat_elapsed - lying_down))
+	_aim(_bed.position + SLEEPER_ON_BED, 1.0)
+	if _beat_left <= 0.0:
+		_end_bed_beat(House.inside(state))
+
+
+## The cut away from the room, through the same dark the door uses.
+func _end_bed_beat(indoors: bool) -> void:
+	_beat_left = 0.0
+	_sleeper.visible = false
+	_farmer.visible = true
+	_set_room_visible(indoors)
+	_fade.color.a = 1.0
+
+
+## One frame of A001's bed strips over the bed - or its stand-in, tinted.
+func _show_sleeper(name: StringName, frame: int) -> void:
+	var path := PlayerArt.texture_path(name, frame)
+	if not _sleeper_textures.has(path):
+		_sleeper_textures[path] = load(path) if ResourceLoader.exists(path) else null
+	var metadata := PlaceholderArt.frame(path)
+	_sleeper.texture = _sleeper_textures[path]
+	_sleeper.offset = -Vector2(metadata.get("pivot", Vector2i.ZERO))
+	_sleeper.scale = Vector2.ONE * float(metadata.get("draw_scale", 1.0))
+	_sleeper.modulate = PlaceholderArt.stand_in_tint(name)
+	_sleeper.rotation_degrees = PlaceholderArt.stand_in_turn(name, frame)
+
+
+## Point the room's fixed-scale camera at `target`, room pixels.
+func _aim(target: Vector2, blend: float) -> void:
 	_focus = _focus.lerp(target, blend)
 	var extent := Vector2(House.ROOM) * GameData.TILE_SIZE
 	# Fixed scale, like the farm outside: no zoom.

@@ -1693,8 +1693,9 @@ func _fishing_hold() -> void:
 			_work_tick(view, true)
 			view._process(0.4)
 			if exit_kind == "dusk":
-				expect(int(_state["phase"]) == Phases.PREPARATION and view.playing() != &"reel",
-					"Ending daylight removes the rod pose")
+				# Since task 0129 bedtime takes him off the farm altogether.
+				expect(int(_state["phase"]) == Phases.PREPARATION and not view.is_drawn(),
+					"Ending daylight removes the rod pose, and the farmer with it")
 			else:
 				expect(not Fishing.is_casting(_state) and view.playing() != &"reel",
 					"%s ends the line and held rod together" % exit_kind)
@@ -1766,6 +1767,17 @@ func _reaction_check(view: PlayerView, kind: StringName, holding_rod := false) -
 		"Reaction never adds a second shadow")
 
 
+## **In bed from the switch to the morning** (task 0129). The night's own
+## reactions are still chosen by the rules, but nobody is on the porch to
+## wear them: no farmer, no shadow and no glyph.
+func _asleep_check(view: PlayerView) -> void:
+	view._process(0.2)
+	var bubble: Sprite2D = view.get_node("ReactionBubble")
+	var shadow: Sprite2D = view.get_node("Shadow")
+	expect(House.asleep(_state) and not view.is_drawn() and not bubble.visible
+		and not shadow.visible, "Asleep at night: nobody on the porch, and no glyph")
+
+
 func _reactions() -> void:
 	var view: PlayerView = _world.get_node("Occupants/PlayerView")
 	view.set_process(false)
@@ -1819,8 +1831,8 @@ func _reactions() -> void:
 	Reactions.tick(_state)
 	expect(Reactions.now(_state) == &"bang", "Night boundary selects the existing bang")
 	await _reaction_settle(view)
-	_reaction_check(view, &"bang")
-	await _shoot("event_night_began", "Actual night_began -> bang under night lighting")
+	_asleep_check(view)
+	await _shoot("event_night_began", "Actual night_began -> bang, with nobody up to wear it")
 	var fence := Vector2i(17, 9)
 	_state["occupants"][Grid.index(fence)] = {"id": &"fence", "hp": 1}
 	_state["tick"] = int(_state["tick"]) + 1
@@ -1829,7 +1841,7 @@ func _reactions() -> void:
 	Reactions.tick(_state)
 	expect(Reactions.now(_state) == &"question", "Destruction reaction outranks the night bang")
 	await _reaction_settle(view)
-	_reaction_check(view, &"question")
+	_asleep_check(view)
 	await _shoot("event_structure_lost", "Actual fence destruction -> question; no new reaction rule")
 	# Walking and every core verb suppress bubbles, including view return cues.
 	for verb in PlayerArt.known_verbs():

@@ -197,6 +197,14 @@ var _fade_nightness := 0.0
 ## and under the whole HUD; null when the view is opened on its own.
 var _relight: Relight
 
+## The Zzz over the sleeping house (task 0129), and how far it drifts up
+## through one loop of its frames, in world pixels.
+const ZZZ_RISE := 6.0
+const ZZZ_ON_ROOF := 14.0
+var _zzz: Sprite2D
+var _zzz_time := 0.0
+var _zzz_textures: Dictionary = {}
+
 
 func _ready() -> void:
 	_terrain.tile_set = _build_terrain_tileset()
@@ -264,6 +272,22 @@ func _ready() -> void:
 	_shots.z_index = 8              # over everything on the ground
 	_shots.draw.connect(_draw_shots)
 	add_child(_shots)
+
+	# **Out of the night's tint**, the way the particles' warm effects are:
+	# its own layer following the camera, so world pixels still place it and
+	# it stays the lightest thing over the dark house. Created here, before
+	# `HouseView`, so the bed beat's room still covers it.
+	var cue_layer := CanvasLayer.new()
+	cue_layer.name = "SleepCue"
+	cue_layer.layer = 2
+	cue_layer.follow_viewport_enabled = true
+	add_child(cue_layer)
+	_zzz = Sprite2D.new()
+	_zzz.name = "Zzz"
+	_zzz.centered = false
+	_zzz.region_enabled = true
+	_zzz.visible = false
+	cue_layer.add_child(_zzz)
 
 	_ghost = Sprite2D.new()
 	_ghost.name = "Ghost"
@@ -347,6 +371,7 @@ func _process(delta: float) -> void:
 
 	_refresh_actors()
 	_refresh_ambient(delta)
+	_refresh_zzz(delta)
 	_refresh_deaths(delta)
 	_refresh_retreats(delta)
 	_enemy_warning.queue_redraw()
@@ -1073,6 +1098,60 @@ func _refresh_ambient(delta: float) -> void:
 	_ambient_time += maxf(delta, 0.0)
 	for material in _ambient_materials:
 		material.set_shader_parameter("motion_time", _ambient_time)
+
+
+## **Task 0129.** He is in bed from the switch to the morning, so the
+## farmhouse says so: A002's Zzz rises from the roof. A view cue on the view's
+## own clock - not a `Reactions` kind - so no tick and no hash ever sees it.
+## Not while he lies where he fell at 02:00: he is not in there yet.
+func _refresh_zzz(delta: float) -> void:
+	var phase := int(_state["phase"])
+	var bounds := Farm.house_bounds(_state)
+	var on := House.asleep(_state) and bounds.size != Vector2i.ZERO \
+		and (phase == Phases.NIGHT
+			or (phase == Phases.PREPARATION and not House.passed_out(_state)))
+	_zzz.visible = false
+	if not on:
+		_zzz_time = 0.0
+		return
+	if ambient_running:
+		_zzz_time += maxf(delta, 0.0)
+	var strip := PlayerArt.animation(&"react_zzz")
+	var frames := maxi(int(strip.get("frames", 1)), 1)
+	var each := maxf(float(strip.get("seconds", 0.4)), 0.01)
+	var frame := int(_zzz_time / each) % frames
+	# The glyph's own crop, as the farmer's reactions are drawn: the stand-in's
+	# until A002 lands, then each frame's own.
+	var file := PlaceholderArt.texture_path("%sreact_zzz_%d.png" % [PlaceholderArt.DIR, frame])
+	var metadata := PlaceholderArt.frame(file)
+	if not metadata.has("bubble"):
+		return
+	if not _zzz_textures.has(file):
+		_zzz_textures[file] = load(file) if ResourceLoader.exists(file) else null
+	var box: Rect2i = metadata["bubble"]
+	var draw_scale := float(metadata.get("draw_scale", 1.0))
+	var tile := float(GameData.TILE_SIZE)
+	var corner := Vector2(bounds.position) * tile
+	var middle := corner.x + float(bounds.size.x) * tile * 0.5
+	var chimney := ArtPlacement.emission(&"house", corner, &"smoke",
+		Vector2(middle, corner.y), bounds.size)
+	# On the middle of the roof, its lowest letter `ZZZ_ON_ROOF` below the
+	# chimney's top - over the roof rather than the sky above it, where the
+	# night bar sits when the house is at the top of the screen - drifting up
+	# a little through each loop.
+	var cycle := each * float(frames)
+	var rise := ZZZ_RISE * fposmod(_zzz_time, cycle) / cycle
+	_zzz.texture = _zzz_textures[file]
+	_zzz.region_rect = Rect2(box)
+	_zzz.scale = Vector2.ONE * draw_scale
+	_zzz.position = Vector2(floorf(middle), floorf(chimney.y + ZZZ_ON_ROOF - rise
+		- float(box.size.y) * draw_scale))
+	_zzz.visible = _zzz.texture != null
+
+
+## Whether the Zzz is up over the house - for `input_v1` and the shots.
+func zzz_showing() -> bool:
+	return _zzz != null and _zzz.visible
 
 
 ## Enemy sprites share the y-sorted layer with the player and trees.

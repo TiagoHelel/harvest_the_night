@@ -31,6 +31,12 @@ static func asleep(state: Dictionary) -> bool:
 	return bool((state.get("house_visit", {}) as Dictionary).get("asleep", false))
 
 
+## Whether tonight's sleep began with him collapsing at 02:00 (task 0128)
+## rather than in his bed - which is where the view draws him.
+static func passed_out(state: Dictionary) -> bool:
+	return bool((state.get("house_visit", {}) as Dictionary).get("passed_out", false))
+
+
 ## The bed, as the rectangle `HOUSE_FURNITURE` gives it.
 static func bed() -> Rect2i:
 	for piece in FURNITURE:

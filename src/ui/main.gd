@@ -279,6 +279,11 @@ func _process(_delta: float) -> void:
 	# truncated a half-tilted stick, which reports 0.4, to standing still.
 	move[0] = int(signf(Input.get_axis(&"move_left", &"move_right")))
 	move[1] = int(signf(Input.get_axis(&"move_up", &"move_down")))
+	# **Nobody walks at night** (task 0129): outside the day the move axes
+	# write nothing, which frees them for 0130's camera.
+	if int(_driver.state["phase"]) != Phases.DAY:
+		move[0] = 0
+		move[1] = 0
 	var running_art := _driver.running and not _driver.holding() \
 		and Input.is_action_pressed(&"run")
 	_player_view.set_running(running_art)
@@ -311,8 +316,10 @@ func _process(_delta: float) -> void:
 
 	# Build mode owns the cursor while it is up: two frames pointing at two
 	# different cells is two different games.
+	# Nor is there anything to point at while he sleeps (task 0129).
 	_world.highlight(Vector2i(-1, -1)
 		if Shop.is_open(_driver.state) or Building.is_active(_driver.state)
+			or int(_driver.state["phase"]) != Phases.DAY
 		else _target_cell())
 	if not indoors:
 		_world.follow_player(Player.position(_driver.state), _delta)

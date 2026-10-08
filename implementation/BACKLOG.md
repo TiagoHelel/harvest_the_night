@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **123 / 296 done**
+`##########..............`  **124 / 296 done**
 
-0 doing / 173 todo / 0 blocked across 18 phases.
+0 doing / 172 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-173 task(s) left, the ready ones first, then what they
+172 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,24 +107,21 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0129 - He stays in bed all night
+### 0130 - The night camera
 
-Ready to pick up.  Likely files: `src/core/player.gd, src/core/ability.gd, src/core/building.gd, src/ui/main.gd, src/ui/night_hud.gd, src/ui/player_view.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/ui/main.gd, src/ui/world_view.gd, src/core/game_data.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
 
-Nobody walks at night. The farmer is in bed from the moment he sleeps until the morning, and the two things the night used him for - the flare and the repair - keep working without him until the cursor takes them over.
+At night the camera belongs to the player, not to the farmer: it pans over the whole farm with the keys, the screen edge or the right stick, so the guardian can look wherever the horde is.
 
-- `Player.tick` returns at once while `House.asleep` (consuming the `interact` and `cancel` edges): no movement, no verbs, no turn in PREPARATION or NIGHT. `main.gd` writes `intent.move = [0, 0]` and no highlight outside DAY, which frees the move axes for 0130's camera
-- Interim flare until 0135: `Ability.use` centres on `Farm.house_centre(state)` instead of `Player.cell`; `_task_0054_ability`'s and `_case_0054_ability`'s (~3140, 'recorded where the player is standing') 'goes off at the player' becomes the house, for now
-- Interim repair until 0134: a new edge intent `repair_cell` (`[-1, -1]` when idle; a new field of `intent`, which is in TABLES, so reconcile fills it) is consumed in `Building.tick` in PREPARATION and NIGHT and calls `Repair.apply_all` on that cell; the night HUD's REPAIR button writes the house's cell and is enabled while `Repair.can_mend` allows it. No new `X.tick` in `sim.gd`, so `PerfNames` is untouched
-- Rewrite `_task_0022_reality`'s 'the player walks his defences at night' as 'he stays in bed all night' (600 ticks of move and interact change nothing about him)
-- Every test that has the farmer walk or use a verb in PREPARATION or NIGHT now fails - a scratch run of both suites lists them. Known ones: `_task_0053_repair` and `_case_0053_repair` mend a wall at night with the held key (move those night mends onto `repair_cell`; 0134 then takes the defences' day verb away), and `_case_0056_night_hud`'s REPAIR block (~3395-3420, 'facing a broken wall') now mends a damaged house
-- View: at night the farm shows nobody on the porch; the farmhouse windows stay lit (`lighting.gd` lights them already) and a Zzz drifts up from the house - a view cue, not a `Reactions` kind, so the hash never sees it
-- Register the four A001 animations in 0120's placeholder registry under the names the pack will deliver - get into bed, the sleep loop, wake and stretch, pass out on the farm - with stand-ins (the idle frame turned or tinted is enough), and the Zzz for A002. The switch opens with a short interior beat of him getting into bed and asleep (view only: the rules are already in PREPARATION), the pass-out plays where he fell, and 0138 plays the wake
-- SIM moves on purpose: `intent` gains `repair_cell`, and every state key is hashed (and more if the determinism scenario walks or flares at night - say which). Record both numbers. DATA does not move
+- From PREPARATION until the day begins, `main.gd` stops calling `follow_player` and the world camera pans: with the move axes (WASD, the arrows, and the left stick 0121 bound to them), with the mouse inside an edge band of the window (only while the window has focus and the pointer is in it), and with the right stick
+- The right stick gets actions of its own: `pan_left`, `pan_right`, `pan_up`, `pan_down` in `project.godot` and `InputActions.ACTIONS` (`ACT_GROUP_NIGHT`, `ACT_PAN_*` strings in both languages), rebindable, with the sync and clash checks passing
+- Pan speed and edge width are `# LEVER`s in `game_data.gd` - view feel, not balance, so they stay out of `digest()`. Speed is in real seconds whatever 1x/2x/4x is set, and nothing pans while the pause menu is up
+- Clamped by `WorldView._camera_bounds`, no zoom. The night opens with the camera on the house; RESULT leaves it where it is; when the day begins it goes back to the farmer
+- `shot.gd` gains a camera hook that a night scenario can set (rewrite the comment that says the camera cannot be set); `dusk`, `wave` and `result` use it
+- View only: neither hash moves
 
-  - done when: `_task_0129_asleep` in `headless_v1.gd`: in PREPARATION and in NIGHT, 600 ticks of move and interact leave his position, facing and action unchanged; a flare lands on the house centre; `repair_cell` on a damaged house mends it, charges what `Repair.cost_at` says, and changes nothing when the ledger cannot pay
-  - done when: `_case_0129_asleep` in `input_v1.gd`: holding D at night does not move `Player.position`; clicking `RepairButton` mends a damaged house
-  - done when: `python tools/shot.py 0129 dusk wave` and `python tools/shot.py 0129 --switch` opened: the bed beat, nobody on the porch at night, the windows lit, the Zzz visible
+  - done when: `_case_0130_night_camera` in `input_v1.gd`: holding D at night moves the camera right by about speed x time and leaves the farmer where he is; panning past the farm edge stops at the bound; a synthetic right-stick motion pans; after the morning the camera is back on the farmer
+  - done when: `python tools/shot.py 0130 wave` opened: the camera is where the scenario put it, not on the porch
 
 ### 0140 - The day HUD: the hour and bedtime
 
@@ -141,25 +138,9 @@ The day HUD tells the time and says when it is time for bed: an HH:MM clock, a G
   - done when: `_case_0140_bedtime` in `input_v1.gd`: no reminder at 21:59, the reminder at 22:00, the warning at 01:30; clicking GO TO BED at 23:00 starts the night
   - done when: `python tools/shot.py 0140 noon dusk bedtime` opened, also with `--pt_BR`
 
-### 0130 - The night camera
-
-Waits on 0129.  Likely files: `src/ui/main.gd, src/ui/world_view.gd, src/core/game_data.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
-
-At night the camera belongs to the player, not to the farmer: it pans over the whole farm with the keys, the screen edge or the right stick, so the guardian can look wherever the horde is.
-
-- From PREPARATION until the day begins, `main.gd` stops calling `follow_player` and the world camera pans: with the move axes (WASD, the arrows, and the left stick 0121 bound to them), with the mouse inside an edge band of the window (only while the window has focus and the pointer is in it), and with the right stick
-- The right stick gets actions of its own: `pan_left`, `pan_right`, `pan_up`, `pan_down` in `project.godot` and `InputActions.ACTIONS` (`ACT_GROUP_NIGHT`, `ACT_PAN_*` strings in both languages), rebindable, with the sync and clash checks passing
-- Pan speed and edge width are `# LEVER`s in `game_data.gd` - view feel, not balance, so they stay out of `digest()`. Speed is in real seconds whatever 1x/2x/4x is set, and nothing pans while the pause menu is up
-- Clamped by `WorldView._camera_bounds`, no zoom. The night opens with the camera on the house; RESULT leaves it where it is; when the day begins it goes back to the farmer
-- `shot.gd` gains a camera hook that a night scenario can set (rewrite the comment that says the camera cannot be set); `dusk`, `wave` and `result` use it
-- View only: neither hash moves
-
-  - done when: `_case_0130_night_camera` in `input_v1.gd`: holding D at night moves the camera right by about speed x time and leaves the farmer where he is; panning past the farm edge stops at the bound; a synthetic right-stick motion pans; after the morning the camera is back on the farmer
-  - done when: `python tools/shot.py 0130 wave` opened: the camera is where the scenario put it, not on the porch
-
 ### 0143 - Art: going to bed, sleeping, waking, passing out
 
-Waits on 0129.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/player_frames.gd, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/house_view.gd, src/ui/player_view.gd, tools/verify.py`.
+Waits for Codex art A001.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/player_frames.gd, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/house_view.gd, src/ui/player_view.gd, tools/verify.py`.
 
 The farmer's night in his own art - getting into bed, the sleep loop, waking and stretching, passing out on the farm - from Codex pack A001, replacing 0129's stand-ins.
 
@@ -176,7 +157,7 @@ The farmer's night in his own art - getting into bed, the sleep loop, waking and
 
 ### 0144 - Art: the farmer's reactions and Zzz
 
-Waits on 0129.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/player_view.gd, src/ui/world_view.gd, src/ui/house_view.gd`.
+Waits for Codex art A002.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/player_view.gd, src/ui/world_view.gd, src/ui/house_view.gd`.
 
 The farmer's reactions at the 32px detail of his new body, and the Zzz that rises from the farmhouse at night, from Codex pack A002.
 
@@ -3342,13 +3323,13 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (3/23)
+## 10 - Sleep is the night  (4/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
 - [x] **0128** [Passing out at 02:00](prompts/0128-pass-out.md)
-- [ ] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md)
-- [ ] **0130** [The night camera](prompts/0130-night-camera.md) - needs 0129
+- [x] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md)
+- [ ] **0130** [The night camera](prompts/0130-night-camera.md)
 - [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md) - needs 0130
 - [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md) - needs 0131
 - [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md) - needs 0132
@@ -3361,8 +3342,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0132, 0138
-- [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - needs 0129 - waits for art A001
-- [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - needs 0129 - waits for art A002
+- [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - waits for art A001
+- [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - needs 0131, 0133 - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - needs 0131 - waits for art A004
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - needs 0133, 0139 - waits for art A005

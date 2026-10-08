@@ -79,6 +79,10 @@ static func initial() -> Dictionary:
 			# Build mode: the cell the player is pointing at, and what they
 			# want done with it. `[-1, -1]` is "nowhere".
 			"build_cell": [-1, -1],
+			# **Mend this cell, from the night** (task 0129): an edge, `[-1, -1]`
+			# when idle. The night HUD's REPAIR writes the house's cell until
+			# 0134's cursor points it anywhere; `Building.tick` spends it.
+			"repair_cell": [-1, -1],
 			"build_place": false,
 			"build_sell": false,
 			# **Upgrading a tower in place**, task 0064. A third verb on the
@@ -146,6 +150,14 @@ static func is_busy(state: Dictionary) -> bool:
 
 ## One tick of being a person on a farm. Called from `Sim._tick_day()`.
 static func tick(state: Dictionary) -> void:
+	# **In bed all night** (task 0129): from going to bed until the morning
+	# he does not walk, turn or work. The edges are spent so none of them is
+	# left over for the morning.
+	if House.asleep(state):
+		var edges: Dictionary = state["intent"]
+		edges["interact"] = false
+		edges["cancel"] = false
+		return
 	if House.inside(state):
 		House.tick(state)
 		return
