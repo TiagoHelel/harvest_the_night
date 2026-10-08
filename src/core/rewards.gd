@@ -102,9 +102,14 @@ static func preview(state: Dictionary, survived: bool) -> Dictionary:
 	return _lines(state, survived)
 
 
-static func _lines(state: Dictionary, survived: bool) -> Dictionary:
+## `percent` is what the night pays of its ordinary sum: `moon_percent()`
+## unless a caller asks for another - a test, comparing a Full Moon with the
+## same night under an ordinary sky.
+static func _lines(state: Dictionary, survived: bool, percent: int = -1) -> Dictionary:
 	if not survived:
 		return _loss(state)
+	if percent < 0:
+		percent = moon_percent(state)
 
 	var step := night_step(state)
 	var table: Dictionary = GameData.REWARDS
@@ -113,18 +118,28 @@ static func _lines(state: Dictionary, survived: bool) -> Dictionary:
 	# Money, itemised in `_money_from()` and added up here, so that the total
 	# and the breakdown cannot drift apart: there is one place that knows.
 	var money := 0
-	var from := _money_from(state)
+	var from := _money_from(state, percent)
 	for line in _sorted(from):
 		money += int(from[line])
 	out[GameData.MONEY] = money
 
 	# Materials, so that a night pays towards the next one's defences and not
-	# only towards the shop.
+	# only towards the shop - and under a Full Moon, its percent of them.
 	for id in _sorted(table["resources"] as Dictionary):
 		var base := int((table["resources"] as Dictionary)[id])
 		var extra := int((table["resources_per_night"] as Dictionary).get(id, 0))
-		out[id] = base + extra * (step - 1)
+		out[id] = (base + extra * (step - 1)) * percent / 100
 	return out
+
+
+## **What tonight pays of an ordinary night's sum, in percent** (task 0152):
+## `FULL_MOON_REWARD_PERCENT` on a Full Moon, 100 otherwise. Money and
+## materials read it here; 0219 reads it for essence, and moon stones are
+## 0221's.
+static func moon_percent(state: Dictionary) -> int:
+	if Calendar.is_full_moon(int(state["night"])):
+		return GameData.FULL_MOON_REWARD_PERCENT
+	return 100
 
 
 ## **How far into the run tonight's pay has climbed** (task 0150): the
@@ -137,7 +152,13 @@ static func night_step(state: Dictionary) -> int:
 
 ## Where the money came from. **The one place that knows**, so the total on
 ## the ledger and the lines on the screen are the same arithmetic.
-static func _money_from(state: Dictionary) -> Dictionary:
+##
+## **A Full Moon is its own line** (task 0152), `"full moon"`: what the
+## other lines add up to, times the percent over a hundred. The morning
+## report prints it as the Full Moon bonus.
+static func _money_from(state: Dictionary, percent: int = -1) -> Dictionary:
+	if percent < 0:
+		percent = moon_percent(state)
 	var table: Dictionary = GameData.REWARDS
 	var out := {
 		"for the night": int(table["base_money"])
@@ -162,6 +183,11 @@ static func _money_from(state: Dictionary) -> Dictionary:
 	# that lost forty of its 140 is not untouched (task 0114).
 	if int(state["house_hp"]) >= Phases.house_full(state):
 		out["the house untouched"] = int(table["house_untouched_bonus"])
+	if percent != 100:
+		var ordinary := 0
+		for line in _sorted(out):
+			ordinary += int(out[line])
+		out["full moon"] = ordinary * (percent - 100) / 100
 	return out
 
 

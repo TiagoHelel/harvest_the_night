@@ -70,6 +70,7 @@ const SCENARIOS: Array = [
 	["dusk", "the same farm at dusk", ""],
 	["bedtime", "the same farm at 22:30, time for bed", ""],
 	["wave", "a wave mid-fight", ""],
+	["full_moon", "the same wave on day 7, under a Full Moon", ""],
 	["result", "the night's result", "ResultScreen"],
 	["tech", "the tech tree", "TechPanel"],
 	["pause", "the pause menu", "PauseMenu"],
@@ -637,6 +638,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"dusk": _set_dusk(state)
 		"bedtime": _set_bedtime(state)
 		"wave": _set_wave(state)
+		"full_moon": _set_full_moon(state)
 		"result": _set_result(state)
 		"tech": _set_tech(state)
 		"pause": _set_pause(state)
@@ -1176,6 +1178,14 @@ func _set_wave(state: Dictionary) -> void:
 			i % GameData.SPAWNS.size())
 	Sim.advance(state, 4 * GameData.SECONDS)
 	_look_at(_the_defence_line(state))
+
+
+## **The wave under a Full Moon** (task 0152): the same fight on day 7, so
+## the two pictures differ only in the light - brighter, and still night.
+func _set_full_moon(state: Dictionary) -> void:
+	state["day"] = 7
+	state["nights_won"] = 6
+	_set_wave(state)
 
 
 func _set_result(state: Dictionary) -> void:

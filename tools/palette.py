@@ -172,6 +172,19 @@ RAMPS = {
         # Retained for the shared ramp/transition interface; inactive at 1.
         "warm_edge":  0.06,
     },
+    # **A Full Moon night** (task 0152): the same night, seen further into.
+    # The tint keeps the night's shape - green held down, blue on top - and
+    # comes up about a third, the lift goes a little more silver than purple,
+    # and the colour drains a touch more, because moonlight is bright and
+    # grey rather than bright and coloured. Still dark enough that the
+    # windows, the braziers and the muzzle flashes are the bright things.
+    "full_moon": {
+        "tint":       (0.48, 0.54, 0.92),
+        "lift":       (0.06, 0.06, 0.12),
+        "saturation": 0.70,
+        "warm_keep":  1.00,
+        "warm_edge":  0.06,
+    },
 }
 
 

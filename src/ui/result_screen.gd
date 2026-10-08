@@ -283,6 +283,12 @@ func _build(payout: Dictionary) -> void:
 		if well > 0:
 			_row(I18n.t(&"RES_DEFENDING_WELL"),
 				I18n.f(&"RES_PLUS", [well]), UiKit.GOOD)
+		# **The Full Moon's share** (task 0152), its own line: the materials
+		# above are already its percent of an ordinary night's.
+		var moon := int(from.get("full moon", 0))
+		if moon > 0:
+			_row(I18n.f(&"RES_INDENT", [I18n.t(&"RES_FULL_MOON")]),
+				I18n.f(&"RES_PLUS", [moon]), UiKit.GOOD)
 	else:
 		_row(I18n.t(&"RES_LOST"), "", UiKit.BAD)
 		var lost: Dictionary = payout["lost"]

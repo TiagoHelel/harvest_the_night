@@ -66,11 +66,52 @@ static func plain_night(night: int, seed_value: int = 0) -> Dictionary:
 ## **The record a night actually fights** (task 0150): `plain_night` with
 ## the calendar's rules on top. Every pure question below asks this one.
 ##
-## **There are no rules yet.** 0152 (the Full Moon), 0153 (the boss) and
-## 0154 (the calm night) add theirs here and nowhere else; until then the
-## authored row comes back itself, not a copy.
+## The rules, each added here and nowhere else:
+## - **the Full Moon** (task 0152): a bigger horde on `FULL_MOON_DAYS`;
+## - 0153's boss and 0154's calm night, to come.
+##
+## A night no rule touches comes back as written - the authored row itself,
+## not a copy.
 static func night_of(night: int, seed_value: int = 0) -> Dictionary:
-	return plain_night(night, seed_value)
+	var plain := plain_night(night, seed_value)
+	if plain.is_empty() or not Calendar.is_full_moon(night):
+		return plain
+	return _under_a_full_moon(plain)
+
+
+## **A Full Moon's record** (task 0152): every ordinary wave sends
+## `FULL_MOON_HORDE_PERCENT` of its count - integer arithmetic, never fewer
+## than written - and a boss row is left alone. It carries `"full_moon"`,
+## which the forecast (0158) reads. No RNG: the same night is the same Full
+## Moon on every seed it was written for.
+static func _under_a_full_moon(plain: Dictionary) -> Dictionary:
+	var one := plain.duplicate(true)
+	for row in (one["waves"] as Array):
+		var wave: Array = row
+		var kind: Dictionary = GameData.ENEMIES.get(StringName(wave[0]), {})
+		if bool(kind.get("is_boss", false)):
+			continue
+		wave[1] = maxi(int(wave[1]) * GameData.FULL_MOON_HORDE_PERCENT / 100,
+			int(wave[1]))
+	one["full_moon"] = true
+	_fit_inside_the_night(one)
+	return one
+
+
+## **A bigger horde still fits the night** (0137): when the scaled record
+## would be sending within `DAWN_MARGIN_TICKS` of dawn, it tightens its own
+## pace - the gaps between its waves first, a quarter at a time, then the
+## spacing of their members as `Endless` does. Never the check.
+static func _fit_inside_the_night(one: Dictionary) -> void:
+	var budget := GameData.NIGHT_TICKS - GameData.DAWN_MARGIN_TICKS
+	for _step in 32:
+		if schedule_ticks(one) <= budget:
+			return
+		one["gap_ticks"] = int(one.get("gap_ticks", GameData.WAVE_GAP_TICKS)) * 3 / 4
+		for row in (one["waves"] as Array):
+			if (row as Array).size() > 3:
+				(row as Array)[3] = int((row as Array)[3]) * 3 / 4
+	Endless._fit_before_dawn(one)
 
 
 ## The record for the night being fought, generated once and kept.
@@ -81,9 +122,13 @@ static func night_of(night: int, seed_value: int = 0) -> Dictionary:
 ## answer - the mistake task 0067 found in `Tutorial` and task 0025 in the
 ## flow field. So tonight's is built when the night it belongs to arrives and
 ## put on the state, where it saves, loads and hashes with everything else.
+##
+## **A record a calendar rule changed is kept the same way** (task 0152), and
+## only that one: an authored night no rule touches is still the row itself,
+## so night 1 puts nothing new in its state.
 static func tonight(state: Dictionary) -> Dictionary:
 	var night := int(state["night"])
-	if night <= authored_count():
+	if night <= authored_count() and not Calendar.is_full_moon(night):
 		return night_of(night, int(state["seed"]))
 	var wave: Dictionary = state["wave"]
 	var kept: Dictionary = wave.get("tonight", {})

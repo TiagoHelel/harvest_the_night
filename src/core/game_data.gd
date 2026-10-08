@@ -78,6 +78,17 @@ const SEASON_DAYS := 14                 # LEVER: days a season, 7-28
 ## them in the player's language.
 const SEASONS: Array = [&"spring", &"summer", &"autumn", &"winter"]
 
+## **Full Moon nights** (task 0152): these days of every season send a bigger
+## horde and pay more. `Waves.night_of` scales the night's record and
+## `Rewards` the night's pay; `Calendar.is_full_moon` says which dates.
+const FULL_MOON_DAYS: Array = [7, 14]   # LEVER: days of the season
+## How big a Full Moon's horde is: this percent of every ordinary wave's
+## count. Boss rows are left as written.
+const FULL_MOON_HORDE_PERCENT := 150    # LEVER: percent of the night's count, 120-200
+## What a won Full Moon pays: this percent of the night's money and
+## materials. Technology is a point a night whatever the moon.
+const FULL_MOON_REWARD_PERCENT := 200   # LEVER: percent of the night's pay, 150-300
+
 ## **The short build step after passing out** (task 0128). A farmer still up
 ## at 02:00 collapses where he stands and the night begins anyway, with this
 ## much time to build: staying up late is allowed, and it costs preparation,
@@ -1855,7 +1866,8 @@ static func validate() -> Array:
 		DAY_END_MINUTE, DAY_TICKS))
 	errors.append_array(check_bedtime(DUSK_MINUTE, BEDTIME_REMINDER_MINUTE,
 		PASS_OUT_WARNING_MINUTE, DAY_END_MINUTE))
-	errors.append_array(check_calendar(SEASONS, SEASON_DAYS))
+	errors.append_array(check_calendar(SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
+		FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT))
 	if PASS_OUT_PREPARATION_TICKS <= 0 \
 			or PASS_OUT_PREPARATION_TICKS >= Sim.MOST_TICKS_IN_A_NIGHT:
 		errors.append("the build step after passing out is %d ticks, outside 1..%d"
@@ -1898,9 +1910,23 @@ static func check_bedtime(dusk: int, reminder: int, warning: int, end: int) -> A
 
 
 ## The calendar's shape (task 0149): four seasons, each named once, and a
-## season long enough to have a first day and a last.
-static func check_calendar(seasons: Array, season_days: int) -> Array:
+## season long enough to have a first day and a last. Since task 0152, its
+## Full Moons fall inside the season and make a night bigger and better paid,
+## never smaller.
+static func check_calendar(seasons: Array, season_days: int,
+		full_moon_days: Array = [], horde_percent: int = 100,
+		reward_percent: int = 100) -> Array:
 	var errors: Array = []
+	for day in full_moon_days:
+		if int(day) < 1 or int(day) > season_days:
+			errors.append("a Full Moon on day %d is outside a %d-day season"
+				% [int(day), season_days])
+	if horde_percent < 100:
+		errors.append("a Full Moon horde of %d%% is smaller than the night"
+			% horde_percent)
+	if reward_percent < 100:
+		errors.append("a Full Moon paying %d%% pays less than the night"
+			% reward_percent)
 	if seasons.size() != 4:
 		errors.append("a year has %d seasons, not four" % seasons.size())
 	for i in seasons.size():
@@ -2709,7 +2735,8 @@ static func digest() -> int:
 			DAY_START_MINUTE, DAY_END_MINUTE, DUSK_MINUTE,
 			PASS_OUT_PREPARATION_TICKS,
 			MAX_CATCH_UP_TICKS],
-		"calendar": [SEASONS, SEASON_DAYS],
+		"calendar": [SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
+			FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
 			PLAYER_SPEED],
 		"house": [HOUSE_SIZE, SHOP_SIZE, HOUSE_ROOM, HOUSE_DOOR,

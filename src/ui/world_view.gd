@@ -424,7 +424,8 @@ func _process(delta: float) -> void:
 func _light_for_phase(delta: float) -> void:
 	var phase := int(_state["phase"])
 	var wants_day := phase == Phases.DAY
-	var target: Color = _daylight_now() if wants_day 		else PaletteData.NIGHT_TINT
+	var target: Color = _daylight_now() if wants_day \
+		else _night_ramp()["tint"]
 
 	if phase != _lit_for:
 		_fade_nightness = visual_nightness()
@@ -468,7 +469,7 @@ func _daylight_now() -> Color:
 		return PaletteData.DAY_TINT
 	var leg := _light_leg()
 	var ends := [PaletteData.DAWN_TINT, PaletteData.DAY_TINT,
-		PaletteData.DUSK_TINT, PaletteData.NIGHT_TINT]
+		PaletteData.DUSK_TINT, _night_ramp()["tint"]]
 	return (ends[int(leg[0])] as Color).lerp(ends[int(leg[0]) + 1], float(leg[1]))
 
 
@@ -554,11 +555,30 @@ static func _dusk_ramp() -> Dictionary:
 		"warm_edge": PaletteData.DUSK_WARM_EDGE}
 
 
-static func _night_ramp() -> Dictionary:
+## The night's ramp - **a Full Moon's when tonight is one** (task 0152):
+## brighter, and still night. The evening deepens towards it too, so a Full
+## Moon's dusk already looks like one.
+func _night_ramp() -> Dictionary:
+	if _tonight_is_full_moon():
+		return {"tint": PaletteData.FULL_MOON_TINT, "lift": PaletteData.FULL_MOON_LIFT,
+			"saturation": PaletteData.FULL_MOON_SATURATION,
+			"warm_keep": PaletteData.FULL_MOON_WARM_KEEP,
+			"warm_edge": PaletteData.FULL_MOON_WARM_EDGE}
 	return {"tint": PaletteData.NIGHT_TINT, "lift": PaletteData.NIGHT_LIFT,
 		"saturation": PaletteData.NIGHT_SATURATION,
 		"warm_keep": PaletteData.NIGHT_WARM_KEEP,
 		"warm_edge": PaletteData.NIGHT_WARM_EDGE}
+
+
+## Whether the night this farm is in, or heading for, is a Full Moon: the
+## night being fought once it has begun, today's date before.
+func _tonight_is_full_moon() -> bool:
+	if _state.is_empty():
+		return false
+	var phase := int(_state.get("phase", Phases.DAY))
+	var night := int(_state["night"]) if phase == Phases.NIGHT or phase == Phases.RESULT \
+		else Phases.night_ahead(_state)
+	return Calendar.is_full_moon(night)
 
 
 ## One ramp on the way to another. Every field travels together, so a light
@@ -647,7 +667,7 @@ func transition_seconds() -> float:
 ## assert that fails for reasons nobody can act on.
 func light_target() -> Color:
 	if int(_state.get("phase", Phases.DAY)) != Phases.DAY:
-		return PaletteData.NIGHT_TINT
+		return _night_ramp()["tint"]
 	# **The day's light, at the hour it is.** This returned the noon
 	# constant, which was right until task 0039 gave the sun somewhere to
 	# travel - after which it was a function that reported where the light

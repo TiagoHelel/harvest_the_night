@@ -14506,14 +14506,15 @@ func _task_0082_shots() -> void:
 	# report with every line it has, and him out of bed beside it.
 	# Twenty-three since 0140: the farm at 22:30, time for bed. Twenty-six
 	# since 0141: day one teaching the night - the bed, START, dawn.
-	expect(names.size() == 26,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime and the night's lessons",
+	# Twenty-seven since 0152: the wave under a Full Moon.
+	expect(names.size() == 27,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons and the Full Moon",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
 			"passed_out", "build_day", "repair", "aim", "morning", "woken", "bedtime",
-			"tutorial_bed", "tutorial_start", "tutorial_dawn",
+			"tutorial_bed", "tutorial_start", "tutorial_dawn", "full_moon",
 			"options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 

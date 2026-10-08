@@ -95,6 +95,10 @@ const LIT_TINT := Color(1.55, 1.45, 1.10)
 const CLOCK_AT := Vector2(4, 2)
 const DAY_AT := Vector2(68, 3)
 const STATUS_AT := Vector2(68, 14)
+## **The year, under the clock** (task 0152), from Year 2 on: the line under
+## the date became the Full Moon's, and the free corner under the hour is the
+## one place in the bar a year fits beside everything else.
+const YEAR_AT := Vector2(4, 16)
 
 ## The actions that pick a seed, in `Farming.seeds()` order.
 ##
@@ -111,6 +115,7 @@ var _state: Dictionary = {}
 var _clock: Label
 var _day: Label
 var _status: Label
+var _year: Label
 var _money: Label
 var _night: Button
 
@@ -151,6 +156,7 @@ func _ready() -> void:
 	_day = _label("Day", DAY_AT, UiKit.WARM)
 	_day.text = I18n.f(&"DHUD_DATE", [Names.of(GameData.SEASONS[0]), 1])
 	_status = _label("DayStatus", STATUS_AT, UiKit.DIM)
+	_year = _label("Year", YEAR_AT, UiKit.DIM)
 
 	# **The date ends before the money group**: its widest, PRIMAVERA 14, is
 	# 69 of the 74 pixels up to the purse (`DHUD_DATE`'s width, measured by
@@ -368,7 +374,9 @@ func _refresh(force: bool) -> void:
 	var today := Calendar.date(_state)
 	_day.text = I18n.f(&"DHUD_DATE",
 		[Names.of(Calendar.season_id(today)), Calendar.day_of_season(today)])
-	_refresh_evening(minute, Calendar.year_of(today))
+	var year := Calendar.year_of(today)
+	_year.text = I18n.f(&"DHUD_YEAR", [year]) if year > 1 else ""
+	_refresh_evening(minute, today)
 	var money := Resources.amount(_state, GameData.MONEY)
 	if force or money != int(_last.get(GameData.MONEY, -1)):
 		if not force and _last.has(GameData.MONEY):
@@ -423,18 +431,22 @@ func _refresh(force: bool) -> void:
 		if minute >= GameData.BEDTIME_REMINDER_MINUTE else UiKit.BED
 
 
-## **The evening's line**, under the date (task 0140): dusk; then, from the
-## reminder hour, a quiet time for bed naming the GO TO BED key (0121's
-## names, for the device in hand); then, from the warning minute, the minutes
-## left before he passes out, in the warn colour.
+## **The line under the date**: the calendar's by day, the evening's after.
 ##
-## **Before dusk it is the year's**, from Year 2 on (task 0149). SPRING 3
-## YEAR 2 on one row is 93 pixels in English and 105 in Portuguese, and the
-## date has 74 before the purse, so the year takes the free line under it
-## and gives it up to the evening.
-func _refresh_evening(minute: int, year: int) -> void:
+## - By day, **the Full Moon** (task 0152, the plan's "Primavera 3 - Lua Cheia
+##   em 4 dias"): FULL MOON IN 4 DAYS, and FULL MOON TONIGHT on the day.
+##   It is up to 111 pixels and the date has 74 before the purse, so it has
+##   this line rather than the date's.
+## - From dusk (task 0140): dusk; then, from the reminder hour, a quiet time
+##   for bed naming the GO TO BED key (0121's names, for the device in hand);
+##   then, from the warning minute, the minutes left before he passes out, in
+##   the warn colour.
+## - A Full Moon tonight outranks dusk, and gives way to bedtime: by then the
+##   only thing left to say about the night is to go to it.
+func _refresh_evening(minute: int, today: int) -> void:
 	var text := ""
 	var role := UiKit.DIM
+	var moon := Calendar.days_to_full_moon(today)
 	if minute >= GameData.PASS_OUT_WARNING_MINUTE:
 		text = I18n.f(&"DHUD_PASS_OUT_SOON",
 			[maxi(GameData.DAY_END_MINUTE - minute, 0)])
@@ -443,10 +455,13 @@ func _refresh_evening(minute: int, year: int) -> void:
 		var actions := get_node_or_null(^"/root/Actions")
 		text = I18n.f(&"DHUD_BEDTIME",
 			[actions.text_of(&"night") if actions != null else ""])
+	elif moon == 0:
+		text = I18n.t(&"DHUD_FULL_MOON_TONIGHT")
+		role = UiKit.WARM
 	elif Phases.is_dusk(_state):
 		text = I18n.t(&"DHUD_DUSK")
-	elif year > 1:
-		text = I18n.f(&"DHUD_YEAR", [year])
+	elif moon > 0:
+		text = I18n.plural(&"DHUD_FULL_MOON_IN", moon, [moon])
 	_status.text = text
 	_status.theme_type_variation = role
 

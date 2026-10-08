@@ -87,6 +87,17 @@ const DUSK_WARM_KEEP := 1.000
 ## outline where the exemption stops.
 const DUSK_WARM_EDGE := 0.060
 
+## The full_moon ramp: what the same pixels look like after dark.
+const FULL_MOON_TINT := Color(0.480, 0.540, 0.920)
+const FULL_MOON_LIFT := Color(0.060, 0.060, 0.120)
+const FULL_MOON_SATURATION := 0.700
+## Legacy brightness threshold; 1 disables all material exemptions.
+## Actual fire/window cores use semantic emission layers.
+const FULL_MOON_WARM_KEEP := 1.000
+## How wide that threshold is, so a flame has no hard
+## outline where the exemption stops.
+const FULL_MOON_WARM_EDGE := 0.060
+
 ## The night ramp: what the same pixels look like after dark.
 const NIGHT_TINT := Color(0.360, 0.400, 0.820)
 const NIGHT_LIFT := Color(0.040, 0.035, 0.105)

@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 16
+const V1_CASES := 17
 
 
 func _process(delta: float) -> bool:
@@ -66,6 +66,7 @@ func _run() -> void:
 	await _case_0140_bedtime()
 	await _case_0141_tutorial()
 	await _case_0149_date()
+	await _case_0152_moon_line()
 	_finish()
 
 
@@ -1506,8 +1507,9 @@ func _case_0149_date() -> void:
 			var want: String = row[1] if locale == "en" else row[2]
 			expect(day.text == want, "day %d reads %s (%s)" % [row[0], want, locale], day.text)
 		I18n.use("en")
-	expect(evening.text.is_empty(), "and in Year 1 the line under it is empty by day",
-		evening.text)
+	var year_label: Label = require_control("Year") as Label
+	expect(year_label != null and year_label.text.is_empty(),
+		"and in Year 1 no year is shown", year_label.text if year_label else "")
 
 	# **The widest date ends before the purse**: every season's last day,
 	# both languages.
@@ -1530,25 +1532,89 @@ func _case_0149_date() -> void:
 		"%s: %.0f from %.0f, the purse at %.0f" % [widest_text, widest,
 			day.global_position.x, purse.global_position.x])
 
-	# **Year 2**: SPRING 1 beside the clock, YEAR 2 under it - and at dusk
-	# the evening's line takes the row back.
+	# **Year 2**: SPRING 1 beside the clock and YEAR 2 under the clock (task
+	# 0152 moved it there: the line under the date became the Full Moon's),
+	# left of the date, at dusk as by day.
+	var clock: Label = require_control("Clock") as Label
 	state["day"] = Calendar.year_days() + 1
 	for locale in ["en", "pt_BR"]:
 		I18n.use(locale)
 		await frames(3)
 		var year := I18n.f(&"DHUD_YEAR", [2])
 		var date := I18n.f(&"DHUD_DATE", [Names.of(&"spring"), 1])
-		expect(day.text == date and evening.text == year,
-			"on day 57 the HUD reads %s and %s under it (%s)" % [date, year, locale],
-			"%s / %s" % [day.text, evening.text])
-		expect(evening.global_position.x + font.get_string_size(year,
-			HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x < 206.0,
-			"and the year ends before the resource grid (%s)" % locale)
+		var wide := font.get_string_size(year, HORIZONTAL_ALIGNMENT_LEFT, -1,
+			font_size).x
+		expect(day.text == date and year_label.text == year,
+			"on day 57 the HUD reads %s, and %s under the clock (%s)" % [date, year, locale],
+			"%s / %s" % [day.text, year_label.text])
+		expect(year_label.global_position.x + wide < day.global_position.x
+			and year_label.global_position.y > clock.global_position.y,
+			"and the year sits under the clock, left of the date (%s)" % locale,
+			"%s at %s" % [year, year_label.global_position])
 	I18n.use("en")
 	state["day_tick"] = GameData.DUSK_AT_TICK
 	await frames(3)
-	expect(evening.text == I18n.t(&"DHUD_DUSK"), "at dusk the line is the evening's",
-		evening.text)
+	expect(evening.text == I18n.t(&"DHUD_DUSK") and year_label.text == I18n.f(&"DHUD_YEAR", [2]),
+		"at dusk the line is the evening's, and the year stays", evening.text)
+	state["day"] = 1
+	await close_scene()
+	_completed += 1
+
+
+## 0152 - the Full Moon on the day HUD: FULL MOON IN 4 DAYS on day 3, IN 1 DAY
+## on day 6 and TONIGHT on day 7, in both languages, under the date.
+func _case_0152_moon_line() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var line: Label = require_control("DayStatus") as Label
+	if driver == null or line == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	driver.running = false
+	state["day_tick"] = Phases.tick_at_minute(12 * 60)
+	var says := {
+		3: ["FULL MOON IN 4 DAYS", "LUA CHEIA EM 4 DIAS"],
+		6: ["FULL MOON IN 1 DAY", "LUA CHEIA EM 1 DIA"],
+		7: ["FULL MOON TONIGHT", "LUA CHEIA HOJE"],
+	}
+	var font := line.get_theme_font(&"font")
+	var font_size := line.get_theme_font_size(&"font_size")
+	var widest := 0.0
+	for day in [3, 6, 7]:
+		state["day"] = day
+		for locale in ["en", "pt_BR"]:
+			I18n.use(locale)
+			await frames(3)
+			var want: String = (says[day] as Array)[0 if locale == "en" else 1]
+			expect(line.text == want, "day %d at noon reads %s (%s)" % [day, want, locale],
+				line.text)
+			widest = maxf(widest, font.get_string_size(line.text,
+				HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x)
+	I18n.use("en")
+	# The widest the line can be: a Full Moon six days off, in both languages.
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		widest = maxf(widest, font.get_string_size(
+			I18n.plural(&"DHUD_FULL_MOON_IN", 6, [6]), HORIZONTAL_ALIGNMENT_LEFT, -1,
+			font_size).x)
+	I18n.use("en")
+	expect(line.global_position.x + widest < 206.0,
+		"and the widest moon line ends before the resource grid",
+		"%.0f from %.0f" % [widest, line.global_position.x])
+
+	# **Tonight's Full Moon outranks dusk**, and gives way to bedtime.
+	state["day"] = 7
+	state["day_tick"] = GameData.DUSK_AT_TICK
+	await frames(3)
+	expect(line.text == I18n.t(&"DHUD_FULL_MOON_TONIGHT"),
+		"on day 7 at dusk the line is still the Full Moon's", line.text)
+	state["day"] = 8
+	await frames(3)
+	expect(line.text == I18n.t(&"DHUD_DUSK"),
+		"and on an ordinary day at dusk it is the evening's", line.text)
 	state["day"] = 1
 	await close_scene()
 	_completed += 1

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **142 / 296 done**
+`############............`  **143 / 296 done**
 
-0 doing / 154 todo / 0 blocked across 18 phases.
+0 doing / 153 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-154 task(s) left, the ready ones first, then what they
+153 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -172,26 +172,6 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A005
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0152 - Full Moon nights
-
-Ready to pick up.  Likely files: `src/core/calendar.gd, src/core/waves.gd, src/core/rewards.gd, src/core/game_data.gd, tools/palette.py, src/ui/palette_data.gd (generated), src/ui/world_view.gd, src/ui/day_hud.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Days 7 and 14 of every season are Full Moon nights: a bigger horde, double the pay, and a night you can see further into. The player sees one coming days ahead.
-
-- `FULL_MOON_DAYS: Array = [7, 14]  # LEVER: days of the season`, `FULL_MOON_HORDE_PERCENT := 150  # LEVER: percent of the night's count, 120-200` and `FULL_MOON_REWARD_PERCENT := 200  # LEVER: percent of the night's pay, 150-300`; `check_calendar` refuses a Full Moon day outside the season and a percent under 100; all go into `digest()`
-- `Calendar.is_full_moon(date)` and `days_to_full_moon(date)` (0 on the night itself), pure
-- In `Waves.night_of`, over `plain_night`: a Full Moon date's record has each non-boss wave's count scaled by `FULL_MOON_HORDE_PERCENT` (integer arithmetic, never below the plain count), boss rows untouched, and carries `"full_moon": true` - the flag 0158's forecast reads. Authored and generated nights alike, and no RNG. A scaled record must still fit 0137's night length (`python tools/nights.py --check` resolves Full Moons too): if one does not, the Full Moon record tightens its own pacing (its gaps first), never the check
-- `Waves.tonight()` is asked every frame by the night HUD: cache a record a rule changed the way generated ones are cached (`wave.tonight`), and only then, so night 1 stays the authored row and nothing new enters its state
-- `Rewards`: a won Full Moon night pays `FULL_MOON_REWARD_PERCENT` of its money and materials, itemised as its own line for the morning report. Essence is not doubled here (0219 reads this helper for that) and moon stones are 0221's
-- View only, a brighter night ramp: a `full_moon` entry in `tools/palette.py` `RAMPS` with the five fields `night` has (tint, lift, saturation, warm_keep, warm_edge), which `python tools/gen_sprites.py` writes into `PaletteData` as `FULL_MOON_TINT`, `_LIFT`, `_SATURATION`, ... (never edit `palette_data.gd`); `WorldView._night_ramp()` (static today) picks them when tonight is a Full Moon, and it still reads as night
-- The day HUD's date line gains `FULL MOON IN 4 DAYS` / `FULL MOON TONIGHT` (plan section 9) through `I18n.plural`: `DHUD_FULL_MOON_IN.one`/`.other` (FULL MOON IN %d DAY(S) / LUA CHEIA EM %d DIA(S)), `DHUD_FULL_MOON_TONIGHT` (FULL MOON TONIGHT / LUA CHEIA HOJE), and the morning report's `RES_FULL_MOON` (FULL MOON BONUS / BÔNUS DE LUA CHEIA - no 'double', since the percent is a lever)
-- `_task_0060`'s 'every curve climbs' and `_task_0070`'s 'it grows' keep reading `plain_night` (0150); if anything else in the suites assumed day 7 or 14 is a plain night, point it at the plain record
-- Hashes: DATA moves (new levers). SIM should not, because the determinism night is day 1 - if it moves, explain it
-
-  - done when: `_task_0152_full_moon` in `src/tools/headless_v1.gd`: days 7, 14, 21 and 56 are Full Moons and 6, 8 and 15 are not; a Full Moon record sends the lever's percent of its plain record per wave with the boss count unchanged; a won Full Moon night's money and materials are the lever's percent of what the same state would be paid with the flag off (same kills), with the difference on its own line; `Waves.tonight` hands back the same record over 100 ticks; `python tools/nights.py --check` still passes
-  - done when: `_case_0152_moon_line` in `src/tools/input_v1.gd` reads the line on day 3 (`FULL MOON IN 4 DAYS`), day 6 (`... IN 1 DAY`) and day 7 (`FULL MOON TONIGHT`), in both languages
-  - done when: A new shot scenario `full_moon` (the `wave` scene on day 7): `python tools/shot.py 0152 wave full_moon --fhd`, opened side by side - brighter, and still night
 
 ### 0153 - Boss nights repeat until the boss falls
 
@@ -493,7 +473,7 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
 
 ### 0158 - The forecast
 
-Waits on 0152, 0153, 0154, 0157.  Likely files: `src/core/forecast.gd (new), src/ui/forecast_panel.gd (new), src/ui/day_hud.gd, src/ui/night_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0153, 0154, 0157.  Likely files: `src/core/forecast.gd (new), src/ui/forecast_panel.gd (new), src/ui/day_hud.gd, src/ui/night_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 At dusk the farmer learns what is coming: from which sides, how many and of what kind, and whether it is a Full Moon, a boss or a calm night. The forecast is never wrong, because it is the night.
 
@@ -1437,7 +1417,7 @@ Nothing changes for the player. The decoy, the bait, the digger and the rat swar
 
 ### 0219 - Essence
 
-Waits on 0196, 0152.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/game_data.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/ui/tech_panel.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0196.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/game_data.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/ui/tech_panel.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 The night stops paying like a day. It hands over essence - today's technology points under a new name - for holding the farm, and a smaller purse, so money is what the day earns and the night spends (plan section 4.6).
 
@@ -1595,7 +1575,7 @@ Each season opens a new floor of the tree, so summer's essence buys something sp
 
 ### 0221 - What the night leaves behind
 
-Waits on 0219, 0152.  Likely files: `src/core/combat.gd, src/core/loot.gd (new), src/core/phases.gd, src/core/player.gd, src/core/state.gd, src/core/game_data.gd, src/core/tech.gd, src/ui/names.gd, src/ui/world_view.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0219.  Likely files: `src/core/combat.gd, src/core/loot.gd (new), src/core/phases.gd, src/core/player.gd, src/core/state.gd, src/core/game_data.gd, src/core/tech.gd, src/ui/names.gd, src/ui/world_view.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The night leaves something for the morning: bones where zombies fell and, after a Full Moon, moon stones along the road the horde came by - picked up on the morning round and worth money, essence or fertiliser (plan sections 3.3 and 4.6).
 
@@ -2379,7 +2359,7 @@ The three night events as Codex drew them, in the forecast slot where 0256 and 0
 
 ### 0270 - Fifty-six nights as data
 
-Waits on 0152, 0153, 0154, 0256, 0257, 0234.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0153, 0154, 0256, 0257, 0234.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 The year stops being ten written nights plus a curve and becomes tables a designer can read: a template per season, hand-written key nights (every introduction, every Full Moon) and a seeded generator for the nights in between. Nothing downstream of `Waves.night_of` can tell which is which, so the season tasks after this one edit data (0271 also gives `play_nights` a day range).
 
@@ -2528,7 +2508,7 @@ Six new enemies and three new bosses each get a voice of their own, so a night h
 
 ### 0287 - Collections and achievements
 
-Waits on 0152, 0155, 0160, 0170, 0182, 0253, 0254, 0255.  Likely files: `src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md`.
+Waits on 0155, 0160, 0170, 0182, 0253, 0254, 0255.  Likely files: `src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md`.
 
 The plan's reason to start Year 2: four collections - fish, crops, the bosses' trophies and a year without losing the house - and a short list of achievements, kept in the profile across runs and shown on one screen.
 
@@ -3032,18 +3012,18 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
-## 11 - Calendar and seasons  (3/16)
+## 11 - Calendar and seasons  (4/16)
 
 - [x] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
 - [x] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
 - [x] **0151** [The night is the calendar day](prompts/0151-night-is-calendar.md)
-- [ ] **0152** [Full Moon nights](prompts/0152-full-moon.md)
+- [x] **0152** [Full Moon nights](prompts/0152-full-moon.md)
 - [ ] **0153** [Boss nights repeat until the boss falls](prompts/0153-boss-nights.md)
 - [ ] **0154** [The calm night after a boss](prompts/0154-calm-night.md) - needs 0153
 - [ ] **0155** [Losing a night when the calendar moves on](prompts/0155-losing-calendar.md) - needs 0153
 - [ ] **0156** [The 1.0 farm map](prompts/0156-farm-map-v1.md)
 - [ ] **0157** [A new side every season](prompts/0157-attack-sides.md) - needs 0156
-- [ ] **0158** [The forecast](prompts/0158-forecast.md) - needs 0152, 0153, 0154, 0157
+- [ ] **0158** [The forecast](prompts/0158-forecast.md) - needs 0153, 0154, 0157
 - [ ] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md)
 - [ ] **0160** [The end of the year](prompts/0160-year-end.md) - needs 0153, 0154
 - [ ] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md) - needs 0158 - waits for art A010
@@ -3110,9 +3090,9 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 ## 13 - Weapons of the night  (0/28)
 
 - [ ] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md) - needs 0196
-- [ ] **0219** [Essence](prompts/0219-essence.md) - needs 0196, 0152
+- [ ] **0219** [Essence](prompts/0219-essence.md) - needs 0196
 - [ ] **0220** [The technology tree by season](prompts/0220-tech-by-season.md) - needs 0219
-- [ ] **0221** [What the night leaves behind](prompts/0221-night-loot.md) - needs 0219, 0152
+- [ ] **0221** [What the night leaves behind](prompts/0221-night-loot.md) - needs 0219
 - [ ] **0222** [Bone meal](prompts/0222-bone-meal.md) - needs 0221, 0165
 - [ ] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md) - needs 0196
 - [ ] **0224** [The scarecrow decoy](prompts/0224-decoy.md) - needs 0218
@@ -3167,7 +3147,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 15 - Fifty-six nights and balance  (0/11)
 
-- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0152, 0153, 0154, 0256, 0257, 0234
+- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0153, 0154, 0256, 0257, 0234
 - [ ] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md) - needs 0270, 0157
 - [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0247, 0248, 0253, 0259, 0271
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0249, 0250, 0254, 0259, 0272
@@ -3187,7 +3167,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0247, 0248, 0250, 0252, 0253, 0254, 0255, 0257
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0160, 0282
 - [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0186, 0256, 0257, 0285
-- [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0152, 0155, 0160, 0170, 0182, 0253, 0254, 0255
+- [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0155, 0160, 0170, 0182, 0253, 0254, 0255
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
 - [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288

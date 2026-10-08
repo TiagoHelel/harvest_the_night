@@ -15409,3 +15409,133 @@ tools/determinism_{sim,data}_hash.txt
 Verify: **PASS**, 60 passed in 573 s (OVER BUDGET as before; the year gate is
 the new row). headless_check 16280, headless_v1 343 (+36), input_check 1066,
 input_v1 169.
+
+## 0152 - Full Moon nights - done 2026-10-08
+
+What changed: days 7 and 14 of every season are Full Moon nights. They bring
+a bigger horde, pay double, and are lit so you see further into them. The
+day HUD counts down to one.
+
+**The rule:**
+- `GameData`:
+  - `FULL_MOON_DAYS := [7, 14]`, `FULL_MOON_HORDE_PERCENT := 150` and
+    `FULL_MOON_REWARD_PERCENT := 200`, each a `# LEVER`, all three in
+    `digest()`'s `calendar` row;
+  - `check_calendar` refuses a Full Moon outside the season, and a horde or
+    a pay under 100%.
+- `Calendar.is_full_moon(date)` and `days_to_full_moon(date)`, which is 0 on
+  the night itself, 6 on day 8 and 6 on day 15. Both pure.
+- `Waves.night_of` puts the first calendar rule over `plain_night`:
+  - every ordinary wave of a Full Moon sends 150% of its count, in integer
+    arithmetic and never fewer than written;
+  - boss rows are left as written;
+  - the record carries `"full_moon": true`, for 0158's forecast;
+  - no RNG, so authored and generated nights alike.
+  - An ordinary night is still the authored row itself, and the authored
+    row is never touched: the Full Moon is a deep copy.
+- **A bigger horde still fits the night** (0137). `_fit_inside_the_night`
+  shrinks the record's gaps a quarter at a time, then the members' spacing
+  through `Endless._fit_before_dawn`; the check is never relaxed. For seed 0:
+
+| Day | Sent | Gap (ticks) | Interval | Sent by |
+|---|---|---|---|---|
+| 7 | 54 -> 81 | 270, kept | - | 78 s -> 97 s |
+| 14 | 125 -> 187 | 120, kept | - | 103 s -> 146 s |
+| 21 | 197 -> 293 | 120 -> 0 | - -> 17 | 153 s -> 172 s |
+| 28 | 268 -> 399 | 120 -> 0 | 16 -> 12 | 172 s -> 170 s |
+| 56 | 554 -> 828 | 120 -> 0 | 6 -> 5 | 163 s -> 163 s |
+
+  The generated Full Moons from day 21 on come as one stream, with no gaps
+  between their waves. They are the curve's drafts, and 0270-0274 rewrite
+  them; the gaps went first because the prompt orders it. `python
+  tools/nights.py --check` still passes on every date of the year, Full
+  Moons included.
+- **`Waves.tonight` keeps a Full Moon's record** on `wave.tonight` the way it
+  keeps a generated night's, and only a record a rule changed. Night 1 is
+  still the authored row and puts nothing new in its state.
+
+**The pay** (`Rewards`):
+- `moon_percent(state)` is the one place that says what tonight pays of an
+  ordinary sum: 200 on a Full Moon, 100 otherwise. 0219 reads it for
+  essence.
+- `_lines` and `_money_from` take an optional percent, so the same state
+  can be asked under an ordinary sky.
+- Money gets a `"full moon"` line: the other lines' total times
+  (percent - 100) / 100. Materials are each the percent of their ordinary
+  share. Technology stays a point a night.
+- The morning report prints `RES_FULL_MOON` (FULL MOON BONUS / BÔNUS DE LUA
+  CHEIA) with the `+$` under "for defending well".
+
+**The light:**
+- `tools/palette.py` has a `full_moon` ramp with the night's five fields:
+  tint (0.48, 0.54, 0.92) against the night's (0.36, 0.40, 0.82), a
+  silver-er lift, and saturation 0.70 against 0.76.
+- `python tools/gen_sprites.py` wrote `FULL_MOON_*` into `PaletteData`;
+  only `palette_data.gd` changed.
+- `WorldView._night_ramp()` is no longer static. It picks the Full Moon's
+  ramp when the night being fought (or, before it begins, today's date) is
+  one. The light's target and the evening's far end read it too, so a Full
+  Moon's dusk already deepens towards it.
+- While in there, `_light_for_phase`'s target is back on two lines; an old
+  edit had squashed it onto one with tabs.
+
+**The day HUD:**
+- The line under the date is the calendar's by day: FULL MOON IN 4 DAYS /
+  LUA CHEIA EM 4 DIAS through `I18n.plural` (`DHUD_FULL_MOON_IN`, `.other`),
+  and FULL MOON TONIGHT / LUA CHEIA HOJE (`DHUD_FULL_MOON_TONIGHT`) in the
+  warm face on the day.
+  - From dusk it is the evening's line. A Full Moon tonight outranks dusk
+    and gives way to bedtime and the pass-out warning.
+  - It is up to 105 px, and the date has 74 px before the purse, which is
+    why it has that line and not the date's (as the year did in 0149).
+- **The year moved under the clock** (`Year`, `YEAR_AT` (4, 16)), from Year
+  2 on. Its old place became the Full Moon's, and the corner under the hour
+  is the only free spot in the bar.
+
+**Tests:**
+- `_task_0152_full_moon` (headless_v1):
+  - days 7, 14, 21 and 56 are Full Moons, and 6, 8 and 15 are not;
+  - the countdowns from days 3, 6, 7, 8 and 15;
+  - every Full Moon of two years against its plain record, wave by wave,
+    for seed 7: 150% of each ordinary count, the same kinds and sides, boss
+    rows unchanged (and some met);
+  - nothing else flagged;
+  - night 6 is still `NIGHTS[5]`, and `NIGHTS[6]` is untouched;
+  - the year's Full Moons pass `check_nights` for seeds 0 and 424242;
+  - a won Full Moon's money is the ordinary sum plus the moon line, and its
+    materials are 200% each; night 8 pays with no moon line;
+  - `tonight` is the same object over 100 ticks of night 7, while night 1
+    is the row and keeps nothing;
+  - `check_calendar` refuses day 15, a 90% horde and a 50% pay.
+- `_case_0152_moon_line` (input_v1):
+  - day 3, 6 and 7 at noon read the three lines in English and Portuguese;
+  - the widest ends before the resource grid;
+  - day 7 at dusk keeps the moon, and day 8 at dusk shows DUSK.
+- `_case_0149_date` now reads the year under the clock: empty in Year 1,
+  YEAR 2 / ANO 2 on day 57, left of the date, kept at dusk.
+- `_task_0150_lookup`'s "the night as written" asks only the dates no rule
+  touches.
+- The shot scenario count is 27.
+
+**Shots** (`implementation/shots/0152/`, FHD, opened):
+- `wave` and `full_moon` side by side: the same fight; on day 7 the grass,
+  the paths and the trees read further out. Still night: blue, the windows
+  and muzzle flashes the bright things, and 97 still coming against 24.
+- `noon` and `noon-pt_BR`: "LUA CHEIA EM 6 DIAS" under "PRIMAVERA 1", clear
+  of the purse and the grid.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `21427183` | `21427183` | **unchanged**: the determinism night is day 1 |
+| data hash | `3650685779` | `1862107551` | the three Full Moon levers entered `digest()` |
+
+Files: src/core/{calendar,waves,rewards,game_data}.gd, tools/palette.py,
+src/ui/{palette_data,world_view,day_hud,result_screen}.gd,
+assets/locale/strings.csv, src/tools/{shot,headless_check,headless_v1,input_v1}.gd,
+tools/determinism_data_hash.txt, implementation/shots/0152/
+
+Verify: **PASS**, 60 passed in 551 s (OVER BUDGET as before). headless_check
+16282, headless_v1 354 (+11), input_check 1066, input_v1 178 (+9), strings
+475 keys.

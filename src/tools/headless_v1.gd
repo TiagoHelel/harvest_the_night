@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 24
+const GROUPS := 25
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -93,6 +93,7 @@ func _run() -> void:
 	_task_0149_calendar()
 	_task_0150_lookup()
 	_task_0151_migration()
+	_task_0152_full_moon()
 
 
 func _finish() -> void:
@@ -1985,12 +1986,14 @@ func _task_0150_lookup() -> void:
 			var fought := Waves.night_of(day, seed_value)
 			if fought.is_empty() or (fought.get("waves", []) as Array).is_empty():
 				empty.append([seed_value, day])
-			# No calendar rule yet: what is fought is what is written.
-			if str(fought) != str(Waves.plain_night(day, seed_value)):
+			# Where no calendar rule applies - since 0152, every date but a
+			# Full Moon - what is fought is what is written.
+			var ruled := Calendar.is_full_moon(day)
+			if not ruled and str(fought) != str(Waves.plain_night(day, seed_value)):
 				differ.append([seed_value, day])
 	expect(empty.is_empty(), "every day 1-112 has a night for seeds 0 and 424242",
 		str(empty))
-	expect(differ.is_empty(), "and with no calendar rule yet it is the night as written",
+	expect(differ.is_empty(), "and where no calendar rule applies it is the night as written",
 		str(differ))
 
 	# **The authored row itself, not a copy**: 0152-0154 add their rules on
@@ -2156,3 +2159,126 @@ func _win_at_dawn(state: Dictionary) -> void:
 		if int(state["phase"]) != Phases.NIGHT:
 			break
 		Sim.advance(state, 1)
+
+
+## 0152 - Full Moon nights: the dates, the bigger horde over the night as
+## written, the pay, the kept record, and the year still fitting its nights.
+func _task_0152_full_moon() -> void:
+	# **Which dates.**
+	var moons: Array = []
+	for day in [6, 7, 8, 14, 15, 21, 56]:
+		if Calendar.is_full_moon(day):
+			moons.append(day)
+	expect(moons == [7, 14, 21, 56], "days 7, 14, 21 and 56 are Full Moons and 6, 8, 15 not",
+		str(moons))
+	var counts := [Calendar.days_to_full_moon(3), Calendar.days_to_full_moon(6),
+		Calendar.days_to_full_moon(7), Calendar.days_to_full_moon(8),
+		Calendar.days_to_full_moon(15)]
+	expect(counts == [4, 1, 0, 6, 6], "the Full Moon is 4 days off on day 3, 1 on day 6, "
+		+ "tonight on day 7, 6 on days 8 and 15", str(counts))
+
+	# **A bigger horde, the boss as written**: every Full Moon of two years,
+	# authored and generated, against its plain record.
+	var wrong: Array = []
+	var bosses := 0
+	for day in range(1, 2 * Calendar.year_days() + 1):
+		if not Calendar.is_full_moon(day):
+			if Waves.night_of(day, 7).has("full_moon"):
+				wrong.append("%d flagged" % day)
+			continue
+		var plain := Waves.plain_night(day, 7)
+		var moon := Waves.night_of(day, 7)
+		if not bool(moon.get("full_moon", false)):
+			wrong.append("%d not flagged" % day)
+		var was: Array = plain["waves"]
+		var now: Array = moon["waves"]
+		if was.size() != now.size():
+			wrong.append("%d has %d waves, not %d" % [day, now.size(), was.size()])
+			continue
+		for i in was.size():
+			var a: Array = was[i]
+			var b: Array = now[i]
+			var boss := bool((GameData.ENEMIES[StringName(a[0])] as Dictionary).get("is_boss", false))
+			var want := int(a[1]) if boss else maxi(int(a[1])
+				* GameData.FULL_MOON_HORDE_PERCENT / 100, int(a[1]))
+			if boss:
+				bosses += 1
+			if b[0] != a[0] or int(b[2]) != int(a[2]) or int(b[1]) != want:
+				wrong.append("%d wave %d: %s against %s" % [day, i, str(b), str(a)])
+	expect(wrong.is_empty() and bosses > 0,
+		"a Full Moon sends %d%% of every ordinary wave and its bosses as written"
+			% GameData.FULL_MOON_HORDE_PERCENT,
+		"%s; %d boss rows met" % [str(wrong.slice(0, 4)), bosses])
+	expect(is_same(Waves.night_of(6), GameData.NIGHTS[5])
+		and not is_same(Waves.night_of(7), GameData.NIGHTS[6])
+		and not (GameData.NIGHTS[6] as Dictionary).has("full_moon"),
+		"an ordinary night is still the authored row, and a Full Moon leaves it untouched")
+
+	# **Every Full Moon of the year fits the night** (0137), for both seeds
+	# `tools/nights.py --check` reads.
+	var faults: Array = []
+	for seed_value in [0, 424242]:
+		var year: Array = []
+		for day in range(1, Calendar.year_days() + 1):
+			if Calendar.is_full_moon(day):
+				year.append(Waves.night_of(day, seed_value))
+		faults.append_array(GameData.check_nights(year))
+	expect(faults.is_empty(), "and every Full Moon of the year still checks", str(faults))
+
+	# **Paid the lever's percent**: the same state and kills, under the moon
+	# and under an ordinary sky.
+	var state := State.create(1520)
+	state["night"] = 7
+	state["day"] = 7
+	(state["killed_by_kind"] as Dictionary)[&"walker"] = 6
+	(state["killed_by_kind"] as Dictionary)[&"runner"] = 2
+	var lit := Rewards._lines(state, true)
+	var dark := Rewards._lines(state, true, 100)
+	var from := Rewards._money_from(state)
+	var plain_money := int(dark[GameData.MONEY])
+	var bonus := int(from.get("full moon", 0))
+	expect(Rewards.moon_percent(state) == GameData.FULL_MOON_REWARD_PERCENT
+		and bonus == plain_money * (GameData.FULL_MOON_REWARD_PERCENT - 100) / 100
+		and int(lit[GameData.MONEY]) == plain_money + bonus,
+		"a won Full Moon pays %d%% of its money, the difference on its own line"
+			% GameData.FULL_MOON_REWARD_PERCENT,
+		"%d = %d + %d" % [int(lit[GameData.MONEY]), plain_money, bonus])
+	var materials_off: Array = []
+	for id in GameData.sorted_names(dark.keys()):
+		if id == GameData.MONEY:
+			continue
+		if int(lit[id]) != int(dark[id]) * GameData.FULL_MOON_REWARD_PERCENT / 100:
+			materials_off.append(id)
+	expect(materials_off.is_empty() and dark.size() > 1,
+		"and the same percent of its materials", str(materials_off))
+	state["night"] = 8
+	expect(Rewards.moon_percent(state) == 100
+		and not Rewards._money_from(state).has("full moon"),
+		"an ordinary night pays as it always did, with no moon line")
+
+	# **Kept while it is fought**: the night HUD asks every frame.
+	var fought := State.create(1521)
+	fought["day"] = 7
+	NightRoad.to_night(fought)
+	var first := Waves.tonight(fought)
+	var same := true
+	for _t in 100:
+		Sim.tick(fought)
+		if int(fought["phase"]) != Phases.NIGHT:
+			break
+		if not is_same(Waves.tonight(fought), first):
+			same = false
+	expect(bool(first.get("full_moon", false)) and same,
+		"Waves.tonight hands back the same Full Moon record over 100 ticks")
+	var one := State.create(1522)
+	NightRoad.to_night(one)
+	expect(is_same(Waves.tonight(one), GameData.NIGHTS[0])
+		and not (one["wave"] as Dictionary).has("tonight"),
+		"while night 1 is still the authored row, with nothing kept for it")
+
+	# **The calendar's check.**
+	expect(not GameData.check_calendar(GameData.SEASONS, 14, [7, 15]).is_empty()
+		and not GameData.check_calendar(GameData.SEASONS, 14, [7], 90).is_empty()
+		and not GameData.check_calendar(GameData.SEASONS, 14, [7], 150, 50).is_empty(),
+		"a Full Moon outside the season, or a horde or pay under 100%, is refused")
+	_completed += 1

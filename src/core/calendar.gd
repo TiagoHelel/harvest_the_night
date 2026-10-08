@@ -43,6 +43,30 @@ static func day_of_season(day: int, season_days: int = GameData.SEASON_DAYS) -> 
 	return (maxi(day, 1) - 1) % maxi(season_days, 1) + 1
 
 
+## Whether a date is a Full Moon night (task 0152): one of
+## `GameData.FULL_MOON_DAYS` of its season.
+static func is_full_moon(day: int, season_days: int = GameData.SEASON_DAYS) -> bool:
+	return GameData.FULL_MOON_DAYS.has(day_of_season(day, season_days))
+
+
+## Days from a date to the next Full Moon: 0 on the night itself. -1 when the
+## calendar has no Full Moons at all.
+static func days_to_full_moon(day: int, season_days: int = GameData.SEASON_DAYS) -> int:
+	var today := day_of_season(day, season_days)
+	var ahead := -1
+	var first := -1
+	for moon in GameData.FULL_MOON_DAYS:
+		var on := int(moon)
+		if first < 0 or on < first:
+			first = on
+		if on >= today and (ahead < 0 or on - today < ahead):
+			ahead = on - today
+	if ahead >= 0 or first < 0:
+		return ahead
+	# None left this season: the next season's first.
+	return maxi(season_days, 1) - today + first
+
+
 ## The season's id (`&"spring"` ...), for `Names.of` and every table keyed by
 ## season.
 static func season_id(day: int, season_days: int = GameData.SEASON_DAYS) -> StringName:
