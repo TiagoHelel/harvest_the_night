@@ -49,6 +49,9 @@ const ACTIONS: Array = [
 	[&"slot_4", &"ACT_SLOT_4", &"ACT_GROUP_FARM"],
 	[&"slot_5", &"ACT_SLOT_5", &"ACT_GROUP_FARM"],
 	[&"slot_6", &"ACT_SLOT_6", &"ACT_GROUP_FARM"],
+	# Seeds by day, the hotbar's slots at night (task 0133): two more for it.
+	[&"slot_7", &"ACT_SLOT_7", &"ACT_GROUP_FARM"],
+	[&"slot_8", &"ACT_SLOT_8", &"ACT_GROUP_FARM"],
 
 	[&"build", &"ACT_BUILD", &"ACT_GROUP_BUILD"],
 	[&"place", &"ACT_PLACE", &"ACT_GROUP_BUILD"],
@@ -65,6 +68,9 @@ const ACTIONS: Array = [
 	[&"pan_right", &"ACT_PAN_RIGHT", &"ACT_GROUP_NIGHT"],
 	[&"pan_up", &"ACT_PAN_UP", &"ACT_GROUP_NIGHT"],
 	[&"pan_down", &"ACT_PAN_DOWN", &"ACT_GROUP_NIGHT"],
+	# The hotbar of defences (task 0133): the bumpers on a pad.
+	[&"hotbar_prev", &"ACT_HOTBAR_PREV", &"ACT_GROUP_NIGHT"],
+	[&"hotbar_next", &"ACT_HOTBAR_NEXT", &"ACT_GROUP_NIGHT"],
 
 	[&"pause", &"ACT_PAUSE", &"ACT_GROUP_SCREENS"],
 	[&"cancel", &"ACT_CANCEL", &"ACT_GROUP_SCREENS"],

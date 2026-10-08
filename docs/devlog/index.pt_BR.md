@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-129 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+130 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -172,6 +172,7 @@ voz alta.
 | 0130 | The night camera | 2026-10-08 |
 | 0131 | The guardian's cursor | 2026-10-08 |
 | 0132 | Defences go down only at night | 2026-10-08 |
+| 0133 | The hotbar of defences | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 

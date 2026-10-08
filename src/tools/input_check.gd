@@ -1189,14 +1189,15 @@ func _case_0023_build_mode() -> void:
 	expect(Building.selected(state) != &"", "with something selected",
 		str(Building.selected(state)))
 
-	# The palette lists everything the phase allows.
+	# The palette lists everything the phase allows - **the hotbar's slots**
+	# in the build step since task 0133.
 	for id in Building.catalogue(state):
-		expect(locate_control("build_%s" % id) != null,
+		expect(locate_control("Hotbar_%s" % id) != null,
 			"the palette offers %s" % id)
 
-	await click_control("build_wall")
+	await click_control("Hotbar_wall")
 	await frames(3)
-	expect(Building.selected(state) == &"wall", "clicking a row selects it",
+	expect(Building.selected(state) == &"wall", "clicking a slot selects it",
 		str(Building.selected(state)))
 
 	# **The ghost.** Point at grass and it is green; point at the pond and it
@@ -2902,8 +2903,8 @@ func _case_0046_walls() -> void:
 		"build mode to open")
 
 	# **A wall shows the route; a tower does not.** The line is for the things
-	# whose whole job is traffic.
-	await click_control("build_wall")
+	# whose whole job is traffic. Picked on the hotbar (task 0133).
+	await click_control("Hotbar_wall")
 	await until(func() -> bool: return Building.selected(state) == &"wall",
 		"the wall to be selected")
 
@@ -2961,7 +2962,7 @@ func _case_0046_walls() -> void:
 	# the rows are rebuilt on the next frame and a click aimed at a row that
 	# is about to be replaced lands on whatever takes its place.
 	await frames(4)
-	await click_control("build_gun_tower")
+	await click_control("Hotbar_gun_tower")
 	await until(func() -> bool: return Building.selected(state) == &"gun_tower",
 		"the tower to be selected")
 	await move_mouse_to_cell(lane + Vector2i(1, 1))
@@ -2970,7 +2971,7 @@ func _case_0046_walls() -> void:
 		"holding a tower draws no route", str(world.previewed_route().size()))
 
 	# **And closing build mode takes it away.**
-	await click_control("build_wall")
+	await click_control("Hotbar_wall")
 	await move_mouse_to_cell(lane + Vector2i(2, 0))
 	await frames(3)
 	await hold_key(KEY_B, 4)

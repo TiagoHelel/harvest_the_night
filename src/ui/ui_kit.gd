@@ -223,6 +223,13 @@ const STACKED := &"Stacked"
 ## The air between two entries of a menu column, in pixels.
 const MENU_GAP := 2
 
+## **A hotbar slot's price** (task 0133): two lines packed tighter than the
+## theme's own spacing - a slot is 32 pixels tall with a 16 pixel icon in it -
+## warm when it can be paid and red with what is short.
+const SLOT_PRICE := &"SlotPrice"
+const SLOT_SHORT := &"SlotShort"
+const SLOT_LINE_SPACING := -2
+
 ## A button that does something that cannot be undone - abandon, quit - in
 ## the same key with red letters, so it never looks like the one beside it
 ## that keeps things as they are.
@@ -354,6 +361,10 @@ static func _dress_text(out: Theme) -> void:
 	out.set_color(&"font_color", &"TooltipLabel", colour())
 	out.set_type_variation(PORCH_HINT, &"Label")
 	out.set_color(&"font_color", PORCH_HINT, colour(WARM))
+	for price in [[SLOT_PRICE, WARM], [SLOT_SHORT, BAD]]:
+		out.set_type_variation(price[0], &"Label")
+		out.set_color(&"font_color", price[0], colour(price[1]))
+		out.set_constant(&"line_spacing", price[0], SLOT_LINE_SPACING)
 	out.set_stylebox(&"normal", PORCH_HINT, _flat(_wash(&"ink", 0.90)))
 
 

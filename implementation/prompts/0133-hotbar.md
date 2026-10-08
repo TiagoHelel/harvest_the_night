@@ -1,7 +1,7 @@
 # 0133 - The hotbar of defences
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0132
 - **Likely files:** src/ui/hotbar.gd (new), src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/tooltip.gd, src/ui/guardian_view.gd, src/ui/placeholder_art.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/input_v1.gd
 

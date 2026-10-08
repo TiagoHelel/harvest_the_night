@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **127 / 296 done**
+`##########..............`  **128 / 296 done**
 
-0 doing / 169 todo / 0 blocked across 18 phases.
+0 doing / 168 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-169 task(s) left, the ready ones first, then what they
+168 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,22 +107,23 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0133 - The hotbar of defences
+### 0134 - Repairing by cursor
 
-Ready to pick up.  Likely files: `src/ui/hotbar.gd (new), src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/tooltip.gd, src/ui/guardian_view.gd, src/ui/placeholder_art.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/interact.gd, src/core/building.gd, src/core/repair.gd, src/ui/guardian_cursor.gd, src/ui/night_hud.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-The night's shop window: a hotbar of every defence with its price, picked with a number key, a click or a bumper instead of a text list, so what the day earned is visible as walls and towers.
+Repairs at night are made by pointing, not by walking. A damaged defence or the house is mended by selecting it with the cursor, paid as today, and defences are mended no other way.
 
-- In PREPARATION and NIGHT a hotbar along the bottom replaces BuildMode's text palette: one slot per id of `Building.catalogue(state)`, in that order, with its icon and price - the kit count when a kit is held, else `Building.cost_of`, greyed with what is short when `Building.affordable` says no, and the barricade's `left_tonight`. By day `B` keeps the text list of buildings
-- Built from the catalogue, not a list: phase 13's six new defences appear with no edit here, and more slots than fit page or scroll
-- Selection goes through `Building.select`, the road the palette rows use today: a click on a slot; `slot_1`..`slot_8` (add `slot_7` and `slot_8` - slots 1-6 are the seed keys by day (`DayHud.SEED_ACTIONS`) and mean hotbar slots at night, when the seed strip ignores them; `ACT_SLOT_*` stop saying 'SEED' in both languages); and `hotbar_prev`/`hotbar_next` on two pad buttons 0121's layout left free (the bumpers if they are) and a key pair, wrapping. New actions go into `project.godot` and `InputActions.ACTIONS` with `ACT_*` strings, rebindable, with the clash check passing. `cancel` clears the selection and the cursor goes back to inspecting
-- Each slot's tooltip shows name, cost, HP, range and damage read from `GameData` (never copied) through `tooltip.gd`
-- Icons through the placeholder road - the structure's own sprite scaled down is enough - until A005 is integrated by 0147
-- The porch guardian (0131) plays its point state when a defence goes down, spotted by the view the way `sfx.gd` and `particles.gd` compare this frame's occupants with the last - no new `Events` kind, which would move SIM
-- View only: neither hash moves. The night HUD's bottom-right controls stay clickable (0139 settles the final layout)
+- At night, confirming the cursor on a damaged structure or the house (an occupied cell, or nothing selected in the hotbar) writes 0129's `repair_cell` at the cursor; any part of a multi-cell structure mends its anchor (`Building.anchor_of`). Mending is `Repair.apply_all`: as far as the ledger covers, at today's price (`Repair.cost_at`, the house at `HOUSE_REPAIR_PERCENT`), up to 0113's real maximum
+- The cursor shows its repair state over anything `Repair.can_mend` allows, and the tooltip adds what a full repair costs and how much can be afforded (`Repair.max_affordable`)
+- Defences lose the farmer's repair verb: `Interact._offered` offers `repair` only for the house, production buildings and stations, by day. A damaged defence by day offers nothing and waits for the night. Gate it in `_offered`, not by adding `repair` to `Interact.DAY_ONLY`: every verb there needs a `Sfx.VERB_SOUNDS` entry (`_task_0084_day_sounds`) and there is no repair sound; if it must go there, map it to the nearest existing sound until 0281
+- There is no farmer, so there is no per-HP work time any more: write in the journal what that does to a siege (a scripted wall under attack, mended every second, against today's held key) and whether a lever will be needed
+- The interim REPAIR button of 0129 leaves the night HUD (0139 lays out what is there instead), and with it its string: delete the `NHUD_REPAIR` row, or `tools/i18n_check.py` fails on an unused key. Update what names `RepairButton`: `_case_0056_night_hud` (~3355, ~3407), `_case_0081_theme`'s size loop (~4403) and the RepairButton half of 0129's `_case_0129_asleep`, which now mends through the cursor
+- Rewrite `_task_0053_repair` and `_case_0053_repair` where they mend a defence with the farmer's verb by day; the house by day keeps the verb
+- A rule change: SIM moves if the determinism scenario repairs a defence by day - say which
 
-  - done when: `_case_0133_hotbar` in `input_v1.gd`: `slot_2` selects the second defence, clicking a slot selects it, a bumper cycles and wraps, a placement at the cursor uses the selection, an unaffordable slot shows its shortfall, `slot_2` at night leaves the selected seed alone, and the guardian is in its point state after the placement
-  - done when: `python tools/shot.py 0133 wave refused` and `--fhd` captures opened, also with `--pt_BR`: prices legible, nothing overlapping the night HUD
+  - done when: `_task_0134_cursor_repair` in `headless_v1.gd`: a damaged gun tower mended through `repair_cell` at night costs exactly `Repair.cost_at`; it is refused, changing nothing, when the ledger cannot pay; a damaged wall by day offers the farmer no verb; the house by day still does
+  - done when: `_case_0134_repair` in `input_v1.gd`: confirming the cursor on a damaged wall at night mends it, with the mouse and with a synthetic pad press; no `RepairButton` exists any more and `python tools/i18n_check.py` passes
+  - done when: A capture of the repair cursor and its tooltip, opened
 
 ### 0135 - The flare goes where you aim it
 
@@ -206,6 +207,23 @@ The farmer's reactions at the 32px detail of his new body, and the Zzz that rise
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - a reaction by day, the Zzz at night - opened and looked at, in `implementation/shots/0144/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
+### 0145 - Art: the porch guardian
+
+Waits for Codex art A003.  Likely files: `assets/art_source/guardian/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_view.gd, src/ui/lighting.gd, tools/check_prop_art.py, tools/show_art.py, tools/verify.py`.
+
+The porch scarecrow that becomes the guardian at night, from Codex pack A003, replacing 0131's placeholder.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A003` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A003-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/guardian/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`. It is a new family: extend `tools/check_prop_art.py`'s `NAMES` or add a `tools/check_guardian_art.py` wired into `tools/verify.py`, with a showcase
+- Runtime: the day, wake, night and point states with the canvas, pivot and timings 0131 wrote into the pack's Deliverables table, at draw scale 1.0 (`ArtPlacement`'s 2x list is not extended); the eyes' light points become emission metadata, like `light_xy`, that `lighting.gd` reads - nothing else on the scarecrow emits
+- Replace 0131's placeholder by deleting A003's entries from 0120's placeholder registry (runtime names `guardian_<anim>_<i>`, as 0131 registered them); the wake still plays at the reality switch and the point (0133) when something is placed
+- Set the pack to integrated: `python implementation/backlog/assets.py set A003 integrated`.
+
+  - done when: The guardian's checker and showcase pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A003
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game - still by day, awake with its eyes lit at night, pointing at a placement - opened and looked at, in `implementation/shots/0145/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
 ### 0146 - Art: the guardian's cursor
 
 Waits for Codex art A004.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_cursor.gd, tools/check_ui_art.py, tools/show_art.py`.
@@ -222,24 +240,6 @@ The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131'
   - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A004
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the cursor in each state over dark ground - opened and looked at, in `implementation/shots/0146/`
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0134 - Repairing by cursor
-
-Waits on 0133.  Likely files: `src/core/interact.gd, src/core/building.gd, src/core/repair.gd, src/ui/guardian_cursor.gd, src/ui/night_hud.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Repairs at night are made by pointing, not by walking. A damaged defence or the house is mended by selecting it with the cursor, paid as today, and defences are mended no other way.
-
-- At night, confirming the cursor on a damaged structure or the house (an occupied cell, or nothing selected in the hotbar) writes 0129's `repair_cell` at the cursor; any part of a multi-cell structure mends its anchor (`Building.anchor_of`). Mending is `Repair.apply_all`: as far as the ledger covers, at today's price (`Repair.cost_at`, the house at `HOUSE_REPAIR_PERCENT`), up to 0113's real maximum
-- The cursor shows its repair state over anything `Repair.can_mend` allows, and the tooltip adds what a full repair costs and how much can be afforded (`Repair.max_affordable`)
-- Defences lose the farmer's repair verb: `Interact._offered` offers `repair` only for the house, production buildings and stations, by day. A damaged defence by day offers nothing and waits for the night. Gate it in `_offered`, not by adding `repair` to `Interact.DAY_ONLY`: every verb there needs a `Sfx.VERB_SOUNDS` entry (`_task_0084_day_sounds`) and there is no repair sound; if it must go there, map it to the nearest existing sound until 0281
-- There is no farmer, so there is no per-HP work time any more: write in the journal what that does to a siege (a scripted wall under attack, mended every second, against today's held key) and whether a lever will be needed
-- The interim REPAIR button of 0129 leaves the night HUD (0139 lays out what is there instead), and with it its string: delete the `NHUD_REPAIR` row, or `tools/i18n_check.py` fails on an unused key. Update what names `RepairButton`: `_case_0056_night_hud` (~3355, ~3407), `_case_0081_theme`'s size loop (~4403) and the RepairButton half of 0129's `_case_0129_asleep`, which now mends through the cursor
-- Rewrite `_task_0053_repair` and `_case_0053_repair` where they mend a defence with the farmer's verb by day; the house by day keeps the verb
-- A rule change: SIM moves if the determinism scenario repairs a defence by day - say which
-
-  - done when: `_task_0134_cursor_repair` in `headless_v1.gd`: a damaged gun tower mended through `repair_cell` at night costs exactly `Repair.cost_at`; it is refused, changing nothing, when the ledger cannot pay; a damaged wall by day offers the farmer no verb; the house by day still does
-  - done when: `_case_0134_repair` in `input_v1.gd`: confirming the cursor on a damaged wall at night mends it, with the mouse and with a synthetic pad press; no `RepairButton` exists any more and `python tools/i18n_check.py` passes
-  - done when: A capture of the repair cursor and its tooltip, opened
 
 ### 0137 - The night ends at 06:00
 
@@ -259,23 +259,6 @@ The night has an end you know in advance: 06:00. A house still standing at dawn 
   - done when: `Sim.skip_night` from mid-night takes at most the ticks left to dawn and lands in RESULT
   - done when: `python tools/nights.py` shows all ten nights inside the night with their margins; the numbers are in the journal
   - done when: `python tools/shot.py 0137 wave` opened: the dawn countdown is on screen
-
-### 0145 - Art: the porch guardian
-
-Waits on 0133.  Likely files: `assets/art_source/guardian/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_view.gd, src/ui/lighting.gd, tools/check_prop_art.py, tools/show_art.py, tools/verify.py`.
-
-The porch scarecrow that becomes the guardian at night, from Codex pack A003, replacing 0131's placeholder.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A003` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A003-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/guardian/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`. It is a new family: extend `tools/check_prop_art.py`'s `NAMES` or add a `tools/check_guardian_art.py` wired into `tools/verify.py`, with a showcase
-- Runtime: the day, wake, night and point states with the canvas, pivot and timings 0131 wrote into the pack's Deliverables table, at draw scale 1.0 (`ArtPlacement`'s 2x list is not extended); the eyes' light points become emission metadata, like `light_xy`, that `lighting.gd` reads - nothing else on the scarecrow emits
-- Replace 0131's placeholder by deleting A003's entries from 0120's placeholder registry (runtime names `guardian_<anim>_<i>`, as 0131 registered them); the wake still plays at the reality switch and the point (0133) when something is placed
-- Set the pack to integrated: `python implementation/backlog/assets.py set A003 integrated`.
-
-  - done when: The guardian's checker and showcase pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A003
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game - still by day, awake with its eyes lit at night, pointing at a placement - opened and looked at, in `implementation/shots/0145/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0138 - Waking up: the morning report
 
@@ -297,7 +280,7 @@ Every night, won or lost, closes on a morning report, and confirming it starts t
 
 ### 0139 - The night HUD for the guardian
 
-Waits on 0133, 0134, 0135, 0136, 0137.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
+Waits on 0134, 0135, 0136, 0137.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
 
 One night HUD built for the guardian rather than for a farmer in the yard: the time to dawn, the house, the wave, START, speed, skip, the flare and the hotbar, all reachable by mouse and by pad.
 
@@ -349,7 +332,7 @@ The autoplayer plays the game as it now is - a day, bed, building by cursor, STA
 
 ### 0147 - Art: the night hotbar and HUD icons
 
-Waits on 0133, 0139.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/hotbar.gd, src/ui/night_hud.gd, tools/check_ui_art.py, tools/show_art.py`.
+Waits on 0139.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/hotbar.gd, src/ui/night_hud.gd, tools/check_ui_art.py, tools/show_art.py`.
 
 The icons of the night - the eight defences, the flare, START, speed and the moon of the dawn countdown - from Codex pack A005, replacing the hotbar's and the night HUD's placeholders.
 
@@ -3270,7 +3253,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (7/23)
+## 10 - Sleep is the night  (8/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3279,21 +3262,21 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0130** [The night camera](prompts/0130-night-camera.md)
 - [x] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md)
 - [x] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md)
-- [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md)
-- [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0133
+- [x] **0133** [The hotbar of defences](prompts/0133-hotbar.md)
+- [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md)
 - [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md)
 - [ ] **0136** [The build step waits for START](prompts/0136-start-button.md)
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
-- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0133, 0134, 0135, 0136, 0137
+- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0134, 0135, 0136, 0137
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0138
 - [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
-- [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - needs 0133 - waits for art A003
+- [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
-- [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - needs 0133, 0139 - waits for art A005
+- [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - needs 0139 - waits for art A005
 - [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0137, 0138, 0139, 0140, 0141, 0142
 
 ## 11 - Calendar and seasons  (0/16)

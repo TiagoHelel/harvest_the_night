@@ -13740,3 +13740,109 @@ things moved it, and nothing else did:
 
 Shots 0132 `refused build_day` opened: at night defences only, by day buildings
 only.
+
+## 0133 - The hotbar of defences - done 2026-10-08
+
+What changed: the night's shop window. `src/ui/hotbar.gd` (new, `Hotbar`) runs
+along the bottom from the build step to the morning.
+- **Its slots.** One slot per id of `Building.catalogue(state)`, in its order
+  and never from a list here, so phase 13's defences get slots with no edit.
+- **Where it sits.** 40x32 slots from (4,215): under the log's four lines,
+  over the ammo line at 248, and stopping before x 330 where the night HUD's
+  bottom-right controls start. That makes 8 to a page; more go on pages, and
+  the page shown is the one holding the selection.
+- **What a slot shows.** A005's 16x16 icon over two short lines of price:
+  - the kit count (`HOTBAR_KITS` "x%d") when a kit is banked;
+  - else the cost, as "25i 10o" over "20w";
+  - or, greyed and red, what is short;
+  - for a thing with a nightly limit, the allowance (`HOTBAR_LEFT` "%d/night"
+    / "%d/noite").
+- **Its tooltip** is `Describe.defence` (name, cost, HP, damage, range out of
+  `GameData`).
+- **Picking a slot.** A click, `slot_1`..`slot_8` on the current page, or
+  `hotbar_prev` / `hotbar_next`, wrapping. All go through `Building.select`.
+  `cancel` clears through `BuildMode` as before. The text palette is by day
+  only now (buildings); at night the refusal it used to print rides on the
+  cursor's tooltip whenever the cursor reads blocked.
+- **The price line's spacing** is two new `UiKit` label variations,
+  `SlotPrice` (warm) and `SlotShort` (red). A theme override in the screen
+  failed `headless_check`'s "no screen overrides the theme".
+
+**The icons** go through 0120's road. `PlaceholderArt.ART` now also takes
+texture stand-ins:
+- `"stand_in": &"buildings/gun_tower"` means `res://sprites/buildings/gun_tower.png`;
+- `bare` marks a static file with no frame number (`icon_wall.png`, as A005
+  delivers);
+- each stand-in is drawn shrunk into the 16x16 box.
+
+There are eight `icon_<id>` entries for A005. `tools/placeholders.py` reads
+`bare` and checks a stand-in's file: 68 stand-ins over 9 packs. 0131's
+registry assert counts its own A003/A004 entries.
+
+**The pad had no free button** (0121's layout plus 0130's right stick), so it
+was reshuffled; the reasons are written into `_task_0121_pad`'s exceptions:
+- LB/RB go to `hotbar_prev`/`hotbar_next`, the genre's bumpers, as the prompt
+  hoped.
+- The flare (`ability`) moved to RT: a trigger fires.
+- `upgrade` went to LT.
+- `remove` went to R3, because a deliberate click is the safest home for a
+  sale mid-wave.
+- `place` gave its trigger up: at night **A confirms at the cursor**.
+  `BuildMode` reads `interact` as the confirm while the cursor is up (the
+  farmer is in bed, so the key has nothing else to do), and holding it
+  drag-places like the mouse. This is the direction 0134, 0135 and 0139
+  already take ("what a confirm does now").
+- `run` gave LT up: it is presentation only.
+- The keys are Q / E for the bumpers, and 7 / 8 for `slot_7` / `slot_8`.
+
+New `ACT_*` rows: `ACT_SLOT_7`, `ACT_SLOT_8`, `ACT_HOTBAR_PREV` ("PREVIOUS DEFENCE"
+/ "DEFESA ANTERIOR") and `ACT_HOTBAR_NEXT` ("NEXT DEFENCE" / "PRÓXIMA DEFESA").
+`ACT_SLOT_*` stop saying SEED: "SLOT n" / "ATALHO n" (pt_BR avoids "ESPAÇO",
+which reads as the space bar). `DayHud` already ignored the slot keys outside
+the day. `project.godot`'s commit copy is HEAD plus these changes, and the
+owner's unstaged `run` re-serialisation stays in the working copy only.
+0136's prompt now lists the new layout.
+
+**The guardian points** (0131's `point()`) when a defence goes down.
+`WorldView._watch_defences` compares the defence cells each time the occupants
+change, the way `sfx.gd` and `particles.gd` spot things; the first look at a
+state only learns. There is no `Events` kind.
+
+**Tests**:
+- input_check's build-step cases click `Hotbar_wall` / `Hotbar_gun_tower`
+  where they clicked the hidden text rows, and "the palette offers" walks the
+  hotbar's slots.
+- `_case_0131_cursor` places with A instead of RT.
+- `_case_0121_pad`'s "A starts the chopping" counted four frames for a tick
+  and failed one run in three under verify. It now waits with `until`, and
+  was clean in four runs after.
+
+Files: src/ui/hotbar.gd (+ .uid, new), src/ui/{build_mode,main,world_view,
+placeholder_art,ui_kit}.gd, src/app/input_actions.gd, project.godot,
+assets/locale/strings.csv, tools/placeholders.py, src/tools/{input_check,
+input_v1,headless_v1}.gd, implementation/prompts/0136-start-button.md,
+implementation/shots/0133/
+
+Verify: **59 passed, 0 failed in 533s** (OVER BUDGET 300, as before). Suite
+times: headless_check 84.4 s, headless_v1 2.7 s, input_check 89.8 s, input_v1
+12.3 s. Counts:
+- headless_check 16210 (+13: the action-list sync over the four new actions,
+  and its strings);
+- headless_v1 207;
+- input_check 1062;
+- input_v1 75 (+12). No hotbar by day; in the build step it holds the
+  catalogue. `slot_2` picks the second defence and leaves the seed alone. A
+  click picks a slot; RB moves on, wraps from last to first, and LB wraps
+  back. The wall's slot then a click on a free cell puts the wall where the
+  cursor is, and the guardian points. With an empty purse the slot is greyed
+  and shows what is short.
+
+**sim 2823820161 and data 2599455698 unchanged** (view only;
+the levers are scalars outside `digest()`, and no new state).
+
+Shots 0133 `wave refused`, at 1x, `-fhd` and `-pt_BR`, opened. The first
+version printed prices one line too low, onto the ammo line, and cut "20i 15w"
+to "20i 1": a label grows to its text, and at about 5 px a character 36 px was
+too narrow. It is now 40 px with tighter lines. The prices are legible in both
+languages, the bar ends at x 324 left of "[K] SKIP" / "[K] PULAR" and the
+buttons, and nothing overlaps the night HUD.

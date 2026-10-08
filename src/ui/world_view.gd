@@ -208,6 +208,10 @@ var _zzz_textures: Dictionary = {}
 ## The guardian's cursor and the porch guardian (task 0131).
 var _cursor: GuardianCursor
 var _guardian: GuardianView
+## The cells with a defence on them last time the occupants changed, so a new
+## one can be spotted (task 0133) - empty until the first look at a state.
+var _defences_seen: Dictionary = {}
+var _defences_known := false
 
 
 func _ready() -> void:
@@ -345,6 +349,8 @@ func show_state(state: Dictionary) -> void:
 		_mine_grid_version = -1
 		_mine_cells.clear()
 		_clear_mine_cues()
+	if not is_same(_state, state):
+		_defences_known = false
 	_state = state
 	if _guardian != null:
 		_guardian.show_state(state)
@@ -377,6 +383,7 @@ func _process(delta: float) -> void:
 	if signature != _last_signature:
 		_last_signature = signature
 		_dirty = true
+		_watch_defences()
 	if _dirty:
 		_dirty = false
 		_refresh()
@@ -1209,6 +1216,28 @@ func _refresh_zzz(delta: float) -> void:
 	_zzz.position = Vector2(floorf(middle), floorf(chimney.y + ZZZ_ON_ROOF - rise
 		- float(box.size.y) * draw_scale))
 	_zzz.visible = _zzz.texture != null
+
+
+## **The guardian points when a defence goes down** (task 0133), spotted the
+## way `sfx.gd` and `particles.gd` spot things: this frame's occupants against
+## the last. No `Events` kind, so the hash never hears of it. The first look at
+## a state only learns what is there.
+func _watch_defences() -> void:
+	var now := {}
+	var occupants: Dictionary = _state["occupants"]
+	for idx in occupants:
+		if GameData.DEFENCES.has(StringName((occupants[idx] as Dictionary).get("id", &""))):
+			now[idx] = true
+	var fresh := false
+	if _defences_known:
+		for idx in now:
+			if not _defences_seen.has(idx):
+				fresh = true
+				break
+	_defences_seen = now
+	_defences_known = true
+	if fresh and _guardian != null:
+		_guardian.point()
 
 
 ## Whether the Zzz is up over the house - for `input_v1` and the shots.

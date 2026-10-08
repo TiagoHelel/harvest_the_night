@@ -30,7 +30,7 @@ import assets  # noqa: E402  - the art queue's own loader
 
 ENTRY = re.compile(r'^\t&"([a-z0-9_]+)": \{"pack": "(A\d{3})", '
                    r'(?:"dir": "res://([a-z0-9_/]+)", )?"frames": (\d+),'
-                   r'.*"stand_in": &"([a-z0-9_]*)"')
+                   r'.*"stand_in": &"([a-z0-9_/]*)"')
 
 
 def entries():
@@ -40,6 +40,7 @@ def entries():
         if m:
             out.append({"name": m.group(1), "pack": m.group(2),
                         "dir": m.group(3) or ACTORS,
+                        "bare": '"bare": true' in line,
                         "frames": int(m.group(4)), "stand_in": m.group(5)})
     return out
 
@@ -63,11 +64,19 @@ def check(rows, packs):
                             "the entry" % (row["name"], row["pack"]))
         for i in range(row["frames"]):
             path = "%s%s_%d.png" % (row["dir"], row["name"], i)
+            if row["bare"]:
+                path = "%s%s.png" % (row["dir"], row["name"])
             if path in owned:
                 problems.append("%s is raster-owned and still has a stand-in"
                                 % path)
         if not row["stand_in"]:
             continue        # drawn by code until the pack lands
+        if row["dir"] != ACTORS:
+            # An ART stand-in is a path under sprites/ (task 0133).
+            if not os.path.exists(os.path.join(ROOT, "sprites", row["stand_in"] + ".png")):
+                problems.append("%s's stand-in sprites/%s.png is not on disk"
+                                % (row["name"], row["stand_in"]))
+            continue
         first = os.path.join(ROOT, ACTORS, "%s_0.png" % row["stand_in"])
         if not os.path.exists(first):
             problems.append("%s's stand-in %s has no frame on disk"

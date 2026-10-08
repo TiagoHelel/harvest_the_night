@@ -769,12 +769,16 @@ func _task_0121_pad() -> void:
 	# **Every action has a pad event in project.godot**, but the ones named
 	# here, each with why.
 	var no_pad := {
-		&"slot_1": "six seed slots outnumber the free buttons; 0133's hotbar picks slots on a pad",
+		&"slot_1": "seeds by day, the hotbar's slots at night: the bumpers cycle the hotbar on a pad (task 0133)",
 		&"slot_2": "the seed slots: see slot_1",
 		&"slot_3": "the seed slots: see slot_1",
 		&"slot_4": "the seed slots: see slot_1",
 		&"slot_5": "the seed slots: see slot_1",
 		&"slot_6": "the seed slots: see slot_1",
+		&"slot_7": "the hotbar's slots: see slot_1",
+		&"slot_8": "the hotbar's slots: see slot_1",
+		&"place": "A confirms at the cursor at night (task 0133): RT went to the flare",
+		&"run": "presentation only - the farmer walks the same - and LT went to upgrade (task 0133)",
 		&"speed": "a focusable night HUD button; 0139 gives every HUD control focus or an action",
 		&"skip_night": "a focusable night HUD button, like speed",
 		&"stats": "a read-only screen no play depends on, and no button left over",
@@ -1204,8 +1208,12 @@ func _task_0131_guardian() -> void:
 	# cursor looks, drawn by code in their packs' boxes; lit frames carry the
 	# emission points and the unlit ones do not.
 	var wrong: Array = []
+	var mine := 0
 	for name in GameData.sorted_names(PlaceholderArt.ART.keys()):
 		var entry: Dictionary = PlaceholderArt.ART[name]
+		if not ["A003", "A004"].has(entry["pack"]):
+			continue       # A005's icons are 0133's to check
+		mine += 1
 		var shape: Dictionary = entry["geometry"]
 		for i in int(entry["frames"]):
 			var path := PlaceholderArt.art_path(name, i)
@@ -1216,9 +1224,9 @@ func _task_0131_guardian() -> void:
 					or answer.get("pivot") != shape["pivot"] \
 					or answer.has("lights") != lit:
 				wrong.append(path)
-	expect(PlaceholderArt.ART.size() == 11 and wrong.is_empty(),
+	expect(mine == 11 and wrong.is_empty(),
 		"the guardian's four states and the cursor's seven looks are registered",
-		"%d entries, wrong: %s" % [PlaceholderArt.ART.size(), str(wrong.slice(0, 4))])
+		"%d entries, wrong: %s" % [mine, str(wrong.slice(0, 4))])
 	for look in GuardianCursor.LOOKS:
 		expect(PlaceholderArt.ART.has(StringName("cursor_%s" % look)),
 			"the cursor's '%s' look is registered" % look)

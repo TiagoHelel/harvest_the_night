@@ -98,6 +98,8 @@ var _pointer_at := Vector2(-1, -1)
 @onready var _playtest: PlaytestBadge = %PlaytestBadge
 @onready var _debug: CanvasLayer = %DebugOverlay
 @onready var _tooltip: Tooltip = %Tooltip
+## The night's shop window (task 0133), built here and put under the tooltip.
+var _hotbar: Hotbar
 
 
 ## **The theme goes on before anything is built against it**, which is why
@@ -121,6 +123,9 @@ func _ready() -> void:
 	_house_view = HouseView.new()
 	_house_view.name = "HouseView"
 	add_child(_house_view)
+	_hotbar = Hotbar.new()
+	_tooltip.get_parent().add_child(_hotbar)
+	_tooltip.get_parent().move_child(_hotbar, _tooltip.get_index())
 	var window := get_window()
 	_window_focused = window.has_focus()
 	window.focus_entered.connect(func() -> void: _window_focused = true)
@@ -256,6 +261,7 @@ func _hand_out() -> void:
 	_night_hud.show_state(_driver.state)
 	_tech.show_state(_driver.state)
 	_build.show_state(_driver.state, _world)
+	_hotbar.show_state(_driver.state)
 	_result.driver = _driver
 	_result.show_state(_driver.state)
 	_inventory.show_state(_driver.state)
@@ -368,7 +374,15 @@ func _drive_cursor(delta: float) -> void:
 	var cell := cursor.cell()
 	(_driver.state["intent"] as Dictionary)["build_cell"] = [cell.x, cell.y]
 	cursor.set_look(_cursor_look(cell))
-	_tooltip.show_world(Describe.under_cursor(_driver.state, cell),
+	var said := Describe.under_cursor(_driver.state, cell)
+	# **And why not, when the cursor says blocked** (task 0133): the night's
+	# palette is the hotbar, which has no reason line of its own.
+	var id := Building.selected(_driver.state)
+	if cursor.look() == &"blocked" and id != &"":
+		var refused := Names.refusal(Building.why_not(_driver.state, id, cell))
+		if not refused.is_empty():
+			said = refused if said.is_empty() else said + "\n" + refused
+	_tooltip.show_world(said,
 		_world.cell_to_screen(cell) + Vector2(0.0, float(GameData.TILE_SIZE) * 0.5))
 
 

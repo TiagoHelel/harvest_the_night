@@ -46,6 +46,11 @@ var _pointer := Vector2(-1, -1)
 ## twice on the same one.
 var _held_cell := Vector2i(-1, -1)
 
+## The text palette. **By day only** since task 0133: at night the hotbar is
+## the palette, and the reason a placement is refused rides on the cursor's
+## tooltip.
+var _frame: PanelContainer
+
 
 func _ready() -> void:
 	visible = false
@@ -53,6 +58,7 @@ func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 
 	var frame := PanelContainer.new()
+	_frame = frame
 	frame.name = "Frame"
 	frame.position = Vector2(4, 30)
 	frame.custom_minimum_size = Vector2(124, 0)
@@ -101,6 +107,7 @@ func _process(_delta: float) -> void:
 			_view.clear_route()
 		return
 
+	_frame.visible = not _by_cursor()
 	var key := "%s|%d|%d" % [Building.selected(_state), int(_state["phase"]),
 		Resources.amount(_state, GameData.WOOD)
 			+ Resources.amount(_state, GameData.STONE) * 1000
@@ -120,7 +127,8 @@ func _process(_delta: float) -> void:
 ## Off when `a11y/hold_to_act` is off, for a player who would rather one press
 ## meant one thing.
 func _keep_placing() -> void:
-	if not Input.is_action_pressed(&"place"):
+	if not Input.is_action_pressed(&"place") \
+			and not (_by_cursor() and Input.is_action_pressed(&"interact")):
 		_held_cell = Vector2i(-1, -1)
 		return
 	if _hovered == _held_cell or not Grid.in_bounds(_hovered):
@@ -165,6 +173,11 @@ func _follow_cursor() -> void:
 			_a_way_in(), ROUTE_STEPS))
 	else:
 		_view.clear_route()
+
+
+## Whether the guardian's cursor is up - from the build step to the morning.
+func _by_cursor() -> bool:
+	return _view != null and _view.cursor() != null and _view.cursor().is_active()
 
 
 ## Whether this is a thing zombies have to go round. A tower blocks too, but
@@ -219,7 +232,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	# but since task 0095 a player can move them, and a mouse button is a
 	# binding like any other rather than a special case.
 	var intent: Dictionary = _state["intent"]
-	if event.is_action_pressed(&"place"):
+	# **At night `interact` confirms at the cursor too** (task 0133): A on a
+	# pad, where `place` gave its trigger up to the flare and the hotbar took
+	# the bumpers. The farmer is in bed, so the key has nothing else to do.
+	if event.is_action_pressed(&"place") \
+			or (_by_cursor() and event.is_action_pressed(&"interact")):
 		_held_cell = _hovered
 		intent["build_place"] = true
 		get_viewport().set_input_as_handled()

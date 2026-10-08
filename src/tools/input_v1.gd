@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 7
+const V1_CASES := 8
 
 
 func _process(delta: float) -> bool:
@@ -57,6 +57,7 @@ func _run() -> void:
 	await _case_0129_asleep()
 	await _case_0130_night_camera()
 	await _case_0131_cursor()
+	await _case_0133_hotbar()
 	_finish()
 
 
@@ -209,7 +210,10 @@ func _case_0121_pad() -> void:
 		driver.running = true
 		await frames(3)
 		await _pad_button(JOY_BUTTON_A, true)
-		await frames(4)
+		# **Waited for, not counted** (`until`'s own note): four headless
+		# frames can pass inside one tick, and counting them failed one run in
+		# three during task 0133.
+		await until(func() -> bool: return Player.is_busy(state), "A to start the chopping")
 		var action: Dictionary = (state["player"] as Dictionary)["action"]
 		expect(Player.is_busy(state) and action.get("verb", &"") == &"chop",
 			"A starts the chopping", str(action))
@@ -601,8 +605,9 @@ func _case_0131_cursor() -> void:
 	await frames(3)
 	expect(cursor.look() == &"place", "over a free cell with a wall in hand it reads place",
 		String(cursor.look()))
-	await _pad_axis(JOY_AXIS_TRIGGER_RIGHT, 1.0)
-	await _pad_axis(JOY_AXIS_TRIGGER_RIGHT, 0.0)
+	# A confirms at the cursor at night (task 0133; it was RT's `place`).
+	await _pad_button(JOY_BUTTON_A, true)
+	await _pad_button(JOY_BUTTON_A, false)
 	await until(func() -> bool: return StringName(Farm.occupant(state, spot).get("id", &"")) == &"wall",
 		"the wall to go down")
 	expect(StringName(Farm.occupant(state, spot).get("id", &"")) == &"wall",
@@ -642,5 +647,104 @@ func _case_0131_cursor() -> void:
 		"by day there is no cursor and nothing it describes")
 	expect(guardian.playing() == &"guardian_day", "and the guardian is still again",
 		String(guardian.playing()))
+	await close_scene()
+	_completed += 1
+
+
+## 0133 - the hotbar of defences: number keys, clicks and bumpers pick a slot,
+## the cursor places it, a slot short of money says so, and the guardian
+## points at what went down.
+func _case_0133_hotbar() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	var hotbar: Hotbar = require_control("Hotbar")
+	expect(hotbar != null and not hotbar.visible, "no hotbar by day")
+	var seed_before := Farming.selected_seed(state)
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"GO TO BED to start the night")
+	var house_view: HouseView = require_control("HouseView")
+	await until(func() -> bool: return not house_view.is_showing_bedtime(),
+		"the bed beat to end", 100000)
+	Resources.gain(state, {GameData.WOOD: 900, GameData.STONE: 900,
+		GameData.IRON: 900, GameData.OIL: 900, GameData.GUNPOWDER: 900})
+	await frames(3)
+	var ids := Building.catalogue(state)
+	expect(hotbar.visible and ids.size() >= 5 and locate_control("Hotbar_%s" % ids[0]) != null,
+		"in the build step the hotbar holds the catalogue", str(ids))
+
+	# **The number keys**: slot_2 is the second defence, and not a seed.
+	await tap_key(KEY_2)
+	await frames(2)
+	expect(Building.is_active(state) and Building.selected(state) == ids[1],
+		"slot_2 selects the second defence", String(Building.selected(state)))
+	expect(Farming.selected_seed(state) == seed_before,
+		"and leaves the selected seed alone", String(Farming.selected_seed(state)))
+
+	# **A click.**
+	await click_control("Hotbar_%s" % ids[3])
+	await frames(2)
+	expect(Building.selected(state) == ids[3], "clicking a slot selects it",
+		String(Building.selected(state)))
+
+	# **The bumpers**, cycling and wrapping both ways.
+	await _pad_button(JOY_BUTTON_RIGHT_SHOULDER, true)
+	await _pad_button(JOY_BUTTON_RIGHT_SHOULDER, false)
+	await frames(2)
+	expect(Building.selected(state) == ids[4], "RB moves to the next slot",
+		String(Building.selected(state)))
+	Building.select(state, ids[ids.size() - 1])
+	await frames(2)
+	await _pad_button(JOY_BUTTON_RIGHT_SHOULDER, true)
+	await _pad_button(JOY_BUTTON_RIGHT_SHOULDER, false)
+	await frames(2)
+	expect(Building.selected(state) == ids[0], "and wraps from the last to the first",
+		String(Building.selected(state)))
+	await _pad_button(JOY_BUTTON_LEFT_SHOULDER, true)
+	await _pad_button(JOY_BUTTON_LEFT_SHOULDER, false)
+	await frames(2)
+	expect(Building.selected(state) == ids[ids.size() - 1], "and LB wraps back",
+		String(Building.selected(state)))
+
+	# **A placement at the cursor uses the selection**: the wall's slot, then a
+	# click on a free cell.
+	await click_control("Hotbar_wall")
+	await frames(2)
+	expect(Building.selected(state) == &"wall", "the wall's slot picks the wall")
+	var cursor := world.cursor()
+	var spot := Vector2i(-1, -1)
+	var middle := world.screen_to_cell(Vector2(240.0, 120.0))
+	for radius in 6:
+		for candidate in Grid.within(middle, radius):
+			if spot.x < 0 and Building.why_not(state, &"wall", candidate).is_empty():
+				spot = candidate
+	await click_cell(spot)
+	await until(func() -> bool: return StringName(Farm.occupant(state, spot).get("id", &"")) == &"wall",
+		"the wall to go down")
+	expect(cursor.cell() == spot and StringName(Farm.occupant(state, spot).get("id", &"")) == &"wall",
+		"a placement at the cursor uses the selection", str(spot))
+	await frames(2)
+	expect(world.guardian().playing() == &"guardian_point",
+		"and the guardian points at it", String(world.guardian().playing()))
+
+	# **Short of money**: greyed, and the slot says what is short.
+	for id in (state["held"] as Dictionary).keys():
+		(state["held"] as Dictionary)[id] = 0
+	await frames(3)
+	var tower: Control = locate_control("Hotbar_gun_tower")
+	var missing := Resources.missing(state, Building.cost_of(&"gun_tower"))
+	var first: StringName = GameData.sorted_names(missing.keys())[0]
+	var price: Label = tower.get_node_or_null("Price") if tower != null else null
+	expect(tower != null and tower.modulate.a < 1.0 and price != null
+		and price.text.contains("%d%s" % [missing[first], str(first).substr(0, 1)]),
+		"an unaffordable slot is greyed and shows its shortfall",
+		price.text if price != null else "")
 	await close_scene()
 	_completed += 1

@@ -130,7 +130,9 @@ const POSES := {
 const SCARECROW := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
 
 ## A004's cell cursor: one 16x16 cell at its centre, drawn at 1.0 (task 0131).
+## A005's hotbar icon is the same box (task 0133).
 const CELL_CURSOR := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
+const HOTBAR_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
@@ -141,8 +143,11 @@ const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
 ## code** in the entry's box until the pack lands - `is_drawn(path)` - so the
 ## view keeps a drawn branch and a texture branch, and the leaf that
 ## integrates the pack deletes these lines and then the drawn branch. `lights`
-## are emission points on every frame from `lit_from` on. One line each, like
-## `POSES`.
+## are emission points on every frame from `lit_from` on. A non-empty
+## `stand_in` here is a path under `res://sprites/` - the hotbar's icons
+## (task 0133) stand in as the structure's own sprite, scaled into the box -
+## and `bare` is a static file with no frame number (`icon_wall.png`). One
+## line each, like `POSES`.
 const ART := {
 	&"guardian_day": {"pack": "A003", "dir": "res://sprites/props/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW},
 	&"guardian_wake": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 1},
@@ -155,6 +160,14 @@ const ART := {
 	&"cursor_sell": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
 	&"cursor_repair": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
 	&"cursor_aim": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
+	&"icon_auto_crossbow": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/auto_crossbow", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"icon_barricade": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/barricade", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"icon_fence": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/fence", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"icon_flame_tower": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/flame_tower", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"icon_gun_tower": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/gun_tower", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"icon_mine": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mine", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"icon_mortar": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mortar", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"icon_wall": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/wall", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
 }
 
 
@@ -203,8 +216,9 @@ static func texture_path(path: String) -> String:
 	if at.is_empty():
 		return path
 	if ART.has(at[0]):
+		var stand_in := String(ART[at[0]]["stand_in"])
 		# Drawn by code: there is no file to load (`is_drawn`).
-		return ""
+		return "" if stand_in.is_empty() else "res://sprites/%s.png" % stand_in
 	return stand_in_path(at[0], int(at[1]))
 
 
@@ -221,6 +235,8 @@ static func is_drawn(path: String) -> bool:
 ## The runtime path of one frame of an `ART` animation - where its pack will
 ## deliver it - for the lookups above.
 static func art_path(name: StringName, frame_index: int) -> String:
+	if bool(ART[name].get("bare", false)):
+		return "%s%s.png" % [str(ART[name]["dir"]), name]
 	return "%s%s_%d.png" % [str(ART[name]["dir"]), name, frame_index]
 
 
@@ -266,6 +282,9 @@ static func _registered(path: String) -> Array:
 	if not path.ends_with(".png"):
 		return []
 	var stem := path.get_file().get_basename()
+	var bare: Dictionary = ART.get(StringName(stem), {})
+	if bool(bare.get("bare", false)) and path.get_base_dir() + "/" == str(bare["dir"]):
+		return [StringName(stem), 0]
 	var cut := stem.rfind("_")
 	if cut <= 0 or not stem.substr(cut + 1).is_valid_int():
 		return []
