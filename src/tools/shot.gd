@@ -98,6 +98,9 @@ const SCENARIOS: Array = [
 	["new_ore", "beside the copper, the coal and the gold", ""],
 	["stump", "in the woods, by a hardwood stump", ""],
 	["winter_build", "the build step on Winter 2: a route from every side", ""],
+	["forecast_dusk", "Autumn 7 at 18:30: the forecast of a Full Moon from three sides", ""],
+	["forecast_build", "the build step on Winter 14: a boss under a Full Moon, from every side", ""],
+	["forecast_calm", "Summer 1 at 18:30: the forecast of a calm night", ""],
 	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
 	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
@@ -671,10 +674,25 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
 		"winter_build": _set_winter_build(state)
+		"forecast_dusk": _set_forecast_dusk(state)
+		"forecast_build": _set_forecast_build(state)
+		"forecast_calm": _set_forecast_calm(state)
 		"woken": _set_woken(state)
 		"repair": _set_repair(state)
 		"aim": _set_aim(state)
 		"options_controls_pad": _set_options_controls_pad(state)
+
+	# **A picture never writes the player's settings.** A run set late in
+	# the year has the lessons behind it (`_on_date`), and the prompt that
+	# sees a finished tutorial records `gameplay/tutorial_seen` in the real
+	# `user://settings.cfg` - which mutes day one's lines on this machine, and
+	# `input_v1`'s tutorial case with them. Told it has been seen, it stays
+	# down and writes nothing.
+	if Tutorial.is_finished(state):
+		var prompt: Node = main.get_node_or_null("%TutorialPrompt")
+		if prompt != null:
+			prompt.set("_asked", true)
+			prompt.set("_muted", true)
 
 	if int(state["phase"]) == Phases.DAY:
 		_walk_to(state, _standing_at)
@@ -1216,19 +1234,50 @@ func _set_stump(state: Dictionary) -> void:
 ## wall in hand by the house - and the preview drawing the route from each of
 ## the five.
 func _set_winter_build(state: Dictionary) -> void:
-	state["day"] = 3 * GameData.SEASON_DAYS + 2
-	state["nights_won"] = state["day"] - 1
-	# Forty-three nights in, the lessons are long behind him.
-	var lessons: Array = []
-	for step in Tutorial.steps():
-		lessons.append(StringName((step as Dictionary)["id"]))
-	((state["tutorial"] as Dictionary)["done"] as Array).assign(lessons)
+	_on_date(state, 3 * GameData.SEASON_DAYS + 2)
 	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400})
 	NightRoad.into_build(state)
 	var build: Dictionary = state["build"]
 	build["active"] = true
 	build["selected"] = &"wall"
 	_camera_at = Farm.house_centre(state)
+
+
+## **A run this far into the year**: on `day`, every night before it won, and
+## the lessons long behind him.
+func _on_date(state: Dictionary, day: int) -> void:
+	state["day"] = day
+	state["nights_won"] = day - 1
+	var lessons: Array = []
+	for step in Tutorial.steps():
+		lessons.append(StringName((step as Dictionary)["id"]))
+	((state["tutorial"] as Dictionary)["done"] as Array).assign(lessons)
+
+
+## **The forecast at dusk** (task 0158): Autumn 7 at 18:30, a Full Moon from
+## the three sides autumn has open - the line of sides long enough to wrap.
+func _set_forecast_dusk(state: Dictionary) -> void:
+	_on_date(state, 2 * GameData.SEASON_DAYS + 7)
+	_a_sown_field(state)
+	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
+		- int(state["day_tick"]), 1))
+
+
+## **The forecast in the build step** (task 0158): Winter 14, the year's last
+## night - its boss, a Full Moon and every side - with the date on the strip.
+func _set_forecast_build(state: Dictionary) -> void:
+	_on_date(state, 4 * GameData.SEASON_DAYS)
+	NightRoad.into_build(state)
+	_camera_at = Farm.house_centre(state)
+
+
+## **A calm night's forecast** (task 0158): Summer 1 at 18:30 says so and
+## nothing else.
+func _set_forecast_calm(state: Dictionary) -> void:
+	_on_date(state, GameData.SEASON_DAYS + 1)
+	_a_sown_field(state)
+	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
+		- int(state["day_tick"]), 1))
 
 
 ## **Out of bed at 06:00** (task 0138): the report confirmed, he stands on

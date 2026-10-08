@@ -106,6 +106,14 @@ const KEYS: Dictionary = {
 	&"summer": &"SEASON_SUMMER",
 	&"autumn": &"SEASON_AUTUMN",
 	&"winter": &"SEASON_WINTER",
+
+	# ---- the sides the horde comes from (task 0157's `SPAWN_SIDES`), for the
+	# forecast (task 0158)
+	&"east": &"SIDE_EAST",
+	&"south_east": &"SIDE_SOUTH_EAST",
+	&"north": &"SIDE_NORTH",
+	&"west": &"SIDE_WEST",
+	&"south": &"SIDE_SOUTH",
 }
 
 ## And what each tech node promises, which is a sentence rather than a name.

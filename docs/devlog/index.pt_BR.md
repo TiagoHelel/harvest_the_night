@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-150 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+151 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -193,6 +193,7 @@ voz alta.
 | 0155 | Losing a night when the calendar moves on | 2026-10-08 |
 | 0156 | The 1.0 farm map | 2026-10-08 |
 | 0157 | A new side every season | 2026-10-08 |
+| 0158 | The forecast | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 

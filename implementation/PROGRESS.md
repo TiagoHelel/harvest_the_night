@@ -16201,3 +16201,145 @@ BUDGET as before). headless_check 16349, headless_v1 412 (+10), input_check
 1066, input_v1 186 (+2), nights 56 a year for both seeds, perf 3576 us of
 8333 (43%) and a path rebuild 9157 us of 33333. The first run failed only
 `perf` (above) and the data hash.
+
+## 0158 - The forecast - done 2026-10-08
+
+What changed: from 18:00, and in the build step, a panel at the top right
+says what tonight sends:
+- the sides in words;
+- the waves;
+- a Full Moon, a boss or a calm night;
+- one head and count per kind.
+
+It is built from the record the night will fight, so it cannot be wrong.
+The night HUD's strip now names the date beside the night, through the
+waves too.
+
+**The rules** (`src/core/forecast.gd`, `class_name Forecast`):
+- `Forecast.of(seed, date)` returns `{date, season, day_of_season,
+  full_moon, boss, calm, sides, waves, kinds, count, event}`.
+  - It reads only `Waves.night_of(date, seed)`, with its flags, and
+    `Calendar`.
+  - `sides` are `SPAWN_SIDES` ids in `SPAWNS` order.
+  - `kinds` are `[kind, count]` pairs in the order each kind first arrives,
+    an Array rather than a Dictionary, so nothing iterates an unordered one.
+  - `event` is `&""`, for 0256.
+- `Forecast.tonight(state)` asks for `Calendar.date(state)`, the night the
+  build step opens on.
+- It reads `state["seed"]` and never `state["rng"]`. Nothing in it is random
+  yet, so it opens no stream; 0256's events will open a `(seed, date)` one
+  as `Endless._stream_for` does.
+
+**The panel** (`src/ui/forecast_panel.gd`, built by `Main` after the night
+HUD, under every panel):
+- Up by day from `Phases.is_dusk` and in the build step. Down at noon, once
+  the waves start, inside the house (where the day HUD is down too) and
+  while a panel is open.
+- From the top:
+  - the season's 16x16 mark, TONIGHT and the date, with the night's 16x16
+    marks at the right edge;
+  - the sides: `FCAST_FROM` with the names joined, or `FCAST_EVERY_SIDE`
+    when the night uses all five regions. Wrapped inside the panel: autumn's
+    three sides take two lines in English;
+  - the waves (`FCAST_WAVES`, plural);
+  - `FCAST_FULL_MOON` and `FCAST_BOSS`;
+  - the heads with their counts, three to a row.
+- A calm night shows its marks, the date and `FCAST_CALM`, and nothing else.
+- The date has no year. The day HUD has it under the clock and the strip
+  beside the date, and in Year 2 a boss night would put it under the marks.
+- It asks `Forecast.tonight` again only when the seed, the date or the
+  language changes. Building a generated night every frame is the cost
+  `Waves.tonight`'s comment warns about.
+
+**The strip** (`night_hud.gd`):
+- After NIGHT 44 come the season's 10x10 mark and WINTER 2 (`DHUD_DATE`),
+  then from Year 2 `DHUD_YEAR`, then the night's 10x10 marks. The marks
+  come from `Calendar`, whose rules made the record.
+- To make room, the wave counter moved from x 120 to 206 and the count from
+  240 to 268.
+- `_case_0158_panel` measures the widest strips in both languages, a Year 2
+  boss night and a three-digit night: the night ends before the season's
+  mark, and the date and marks end before the wave counter.
+
+**Art, through 0120's road** (`PlaceholderArt.ART`):
+- A010's 14 marks (`icon_*` 16x16 at (8,8) and `hud_*` 10x10 at (5,5)) are
+  drawn by code in `CalendarMark` until 0161:
+  - the seasons as a sprout, a sun, a leaf and a snowflake, told apart by
+    shape;
+  - the nights as a whole moon, a horned skull, and a crescent with a star.
+- A011's five heads are each enemy's `walk_0` cut to its head box (new
+  `stand_in_region`, read by `art_region`), until 0162.
+  - **The Giant's box is 32x32 shrunk into the 16**: its 16x16 cut was a
+    yellow blob beside the tank's. The bigger cut has its stone plates.
+- `tools/placeholders.py`: 80 stand-ins over 13 packs.
+
+**Strings:**
+- New: the `FCAST_*` keys and the five `SIDE_*` keys. `Names.KEYS` maps the
+  0157 side ids to the `SIDE_*` keys.
+- The plural is `FCAST_WAVES` / `FCAST_WAVES.other`. The table's own form
+  for the prompt's `.one`/`.other` is the bare key as the singular.
+- `i18n_check`: 494 keys, all fit.
+
+**A side effect of the shots, found and stopped:**
+- `settings.cfg`'s `gameplay/tutorial_seen` turned `true`, and
+  `_case_0141_tutorial` failed when `input_v1` ran on its own.
+- The cause was `TutorialPrompt`, which writes that key when it sees a
+  finished tutorial. A shot scenario set late in the year finishes it: the
+  new `_on_date`, and 0157's `winter_build`.
+- `shot.gd` now mutes the prompt without the write whenever the scenario
+  finished the tutorial.
+- I set the key back to `false` on this machine.
+
+**Tests:**
+- `_task_0158_forecast` (headless_v1):
+  - **Plain, Full Moon and calm:** authored night 3 from the south east,
+    Summer 7 under a Full Moon, and Summer 1 calm. Each goes through
+    `Waves.tick` and `Enemies.spawn`, with the gaps skipped and each arrival
+    counted where it lands. The forecast's kinds (in order), count and sides
+    equal what came, and no arrival landed off a spawn line.
+  - **The boss:** every season's day 14 names `Calendar.boss_of`, among its
+    kinds, under a Full Moon. Winter 14 comes from every side.
+  - **Asking moves nothing:** 1000 calls to `Forecast.tonight` leave
+    `state["rng"]` and `State.hash_of` unchanged and give the same answer.
+- `_case_0158_panel` (input_v1):
+  - down at noon, up at 18:00 for today's date;
+  - nothing outside the panel or under a mark, for twelve dates across the
+    year, in both languages;
+  - up in the build step on Winter 14 with the Giant and the Full Moon, the
+    strip naming the date;
+  - the widest strips;
+  - down once START is pressed, with the strip still naming the date.
+- The shot scenario count is 37.
+
+**Shots** (`implementation/shots/0158/`, FHD, en and pt_BR, opened):
+- `forecast_dusk`: Autumn 7 at 18:45. The leaf, the moon, "from the EAST,
+  SOUTH-EAST," wrapping onto "NORTH" in English and on one line in
+  Portuguese, 7 WAVES, FULL MOON, and four heads with their counts, 507 in
+  all.
+- `forecast_build`: Winter 14's build step.
+  - The strip: NIGHT 56, the snowflake, WINTER 14, the moon and the skull.
+  - The panel: from every side, 11 WAVES, FULL MOON, GIANT IS COMING
+    (GIGANTE ESTÁ VINDO), and five heads with the Giant's 1.
+- `forecast_calm`: Summer 1. The sun, the crescent and A CALM NIGHT, and
+  nothing more.
+- The heads read as their enemies, with the stand-ins' limits: the tank and
+  the breaker are their walk frames' top boxes.
+
+### Hashes
+
+Both unchanged: sim `50760118`, data `721761836`. The forecast is pure and
+the rest is view.
+
+Files: src/core/forecast.gd (new), src/ui/{forecast_panel,calendar_mark}.gd
+(new), src/ui/{main,night_hud,names,placeholder_art}.gd,
+assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+implementation/shots/0158/
+
+Verify: **PASS** on the second run, 60 passed in 658 s (OVER BUDGET as
+before). headless_check 16357 (+8, the scenario names), headless_v1 422
+(+10), input_check 1066, input_v1 194 (+8), strings 494 keys.
+- The first run failed only `perf`: `day_tutorial` 34 -> 51 us, in a tick
+  this task does not touch.
+- Three `perf.py` runs after it gave 36-37, and the second verify passed
+  with the night tick at 3859 us. No baseline was accepted.

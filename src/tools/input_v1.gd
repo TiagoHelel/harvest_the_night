@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 19
+const V1_CASES := 20
 
 
 func _process(delta: float) -> bool:
@@ -69,6 +69,7 @@ func _run() -> void:
 	await _case_0152_moon_line()
 	await _case_0154_calm()
 	await _case_0157_routes()
+	await _case_0158_panel()
 	_finish()
 
 
@@ -1727,4 +1728,100 @@ func _case_0157_routes() -> void:
 				% GameData.SEASONS[season],
 			"%d cells, from %s, open %s" % [route.size(), from, open])
 		await close_scene()
+	_completed += 1
+
+
+## 0158 - the forecast panel: hidden at noon, up at 18:00 and in the build
+## step, gone once START is pressed; every line inside it, in both languages,
+## for the kinds of night a year has; and the night strip naming the date
+## beside the night, its widest clear of the wave counter.
+func _case_0158_panel() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel: ForecastPanel = require_control("ForecastPanel") as ForecastPanel
+	var hud: NightHud = require_control("NightHud") as NightHud
+	if driver == null or panel == null or hud == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	# Autumn 7: a Full Moon from three sides.
+	state["day"] = 2 * GameData.SEASON_DAYS + 7
+	state["nights_won"] = int(state["day"]) - 1
+	state["day_tick"] = Phases.tick_at_minute(12 * 60)
+	await frames(3)
+	expect(not panel.visible, "no forecast at noon")
+	state["day_tick"] = Phases.tick_at_minute(18 * 60)
+	await frames(3)
+	expect(panel.visible and int(panel.shown().get("date", 0)) == Calendar.date(state)
+		and bool(panel.shown().get("full_moon", false)),
+		"at 18:00 the forecast is up, for today's Full Moon", str(panel.shown()))
+
+	# **Every line inside the panel**, in both languages: plain, Full Moon,
+	# boss and calm nights from all four seasons.
+	var bad: Array = []
+	for date in [3, 7, 14, 15, 21, 28, 35, 42, 43, 49, 52, 56]:
+		state["day"] = date
+		state["nights_won"] = date - 1
+		for locale in ["en", "pt_BR"]:
+			I18n.use(locale)
+			await frames(2)
+			for fault in panel.outside():
+				bad.append("%d %s: %s" % [date, locale, fault])
+	I18n.use("en")
+	expect(bad.is_empty(), "every line of every forecast fits its panel, in both languages",
+		str(bad.slice(0, 4)))
+
+	# **In the build step**: Winter 14, to bed at 18:00.
+	state["day"] = 4 * GameData.SEASON_DAYS
+	state["nights_won"] = int(state["day"]) - 1
+	await frames(2)
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"GO TO BED")
+	var house_view: HouseView = require_control("HouseView")
+	await until(func() -> bool: return not house_view.is_showing_bedtime(),
+		"the bed beat to end", 100000)
+	await frames(3)
+	expect(panel.visible and StringName(panel.shown().get("boss", &"")) == &"giant"
+		and bool(panel.shown().get("full_moon", false)),
+		"in the build step the forecast is up: the Giant under a Full Moon",
+		str(panel.shown()))
+	expect(hud.date_text() == I18n.f(&"DHUD_DATE", [Names.of(&"winter"), 14]),
+		"and the night strip names the date beside the night", hud.date_text())
+
+	# **The widest strip**: a boss night in Year 2 and one with a three-digit
+	# night, both languages - the night clear of the season's mark, and the
+	# date with its marks clear of the wave counter.
+	var night_label: Label = require_control("NightNumber") as Label
+	var wave_label: Label = require_control("WaveCounter") as Label
+	var font := night_label.get_theme_font(&"font")
+	var font_size := night_label.get_theme_font_size(&"font_size")
+	var tight: Array = []
+	for date in [Calendar.year_days() + GameData.SEASON_DAYS,
+			2 * Calendar.year_days() + GameData.SEASON_DAYS]:
+		state["day"] = date
+		for locale in ["en", "pt_BR"]:
+			I18n.use(locale)
+			await frames(2)
+			var night_end := night_label.position.x + font.get_string_size(night_label.text,
+				HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
+			if night_end >= NightHud.SEASON_MARK_AT.x or hud.date_end() >= wave_label.position.x - 2.0:
+				tight.append("%s | %s %.0f-%.0f" % [night_label.text, hud.date_text(),
+					night_end, hud.date_end()])
+	I18n.use("en")
+	expect(tight.is_empty(), "the widest night and date fit the strip, in both languages",
+		str(tight))
+
+	# **START, and it goes.**
+	state["day"] = 4 * GameData.SEASON_DAYS
+	await frames(2)
+	await click_control("StartButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT, "START")
+	await frames(3)
+	expect(not panel.visible, "once START is pressed the forecast goes")
+	expect(hud.date_text() == I18n.f(&"DHUD_DATE", [Names.of(&"winter"), 14]),
+		"and through the waves the strip still names the date", hud.date_text())
+	await close_scene()
 	_completed += 1

@@ -12,11 +12,14 @@ extends Control
 ##
 ## ## The layout
 ##
-## - **The strip, top:** the night, the wave, how many are left and the dawn
-##   countdown on the first row; the house bar and its numbers on the second,
-##   with the mode hint at its right end. In the build step the night ahead,
-##   the house and the hint are up; the wave, the count and the countdown wait
-##   for the waves. The boss bar stays under the strip, where it was.
+## - **The strip, top:** the night, its date (task 0158: the season's mark,
+##   SPRING 3, the year from Year 2 and the night's own marks), the wave, how
+##   many are left and the dawn countdown on the first row; the house bar and
+##   its numbers on the second, with the mode hint at its right end. In the
+##   build step the night ahead, its date, the house and the hint are up; the
+##   wave, the count and the countdown wait for the waves. The boss bar stays
+##   under the strip, where it was. The forecast (`ForecastPanel`) stands
+##   under the strip's right end in the build step.
 ## - **The hotbar, bottom** (task 0133, its own node).
 ## - **The bar, bottom right:** START across it in the build step; the flare
 ##   with its charge, the speed and SKIP during the waves.
@@ -51,6 +54,14 @@ extends Control
 ## have given two panels an opinion about the same number, which is the thing
 ## "sharing no state" is actually guarding against. The speed and skip keys
 ## are read there too, beside the night key.
+
+## **The strip's first row**: the night, then the season's mark and the date
+## (task 0158 made room for them, the wave and the count moving right), then
+## the wave, the count and dawn. The night's own marks follow the date.
+const SEASON_MARK_AT := Vector2(58, 3)
+const DATE_AT := Vector2(70, 2)
+const WAVE_AT := Vector2(206, 2)
+const LEFT_AT := Vector2(268, 2)
 
 ## The bar of controls, bottom right: right of the hotbar, which stops at 326.
 const BAR_AT := Vector2(330, 248)
@@ -87,6 +98,9 @@ var cursor: GuardianCursor
 
 var _strip: ColorRect
 var _night: Label
+var _season_mark: CalendarMark
+var _date: Label
+var _night_marks: Array[CalendarMark] = []
 var _wave: Label
 var _left: Label
 var _house_back: ColorRect
@@ -123,8 +137,26 @@ func _ready() -> void:
 	add_child(_strip)
 
 	_night = _label("NightNumber", Vector2(4, 2), UiKit.WARM)
-	_wave = _label("WaveCounter", Vector2(120, 2), UiKit.WARM)
-	_left = _label("ZombiesLeft", Vector2(240, 2), UiKit.DIM)
+	# **The date beside the night** (task 0158, moved here from 0151): the
+	# season's mark and SPRING 3 - from Year 2 the year after it - in the
+	# build step and through the waves, so the plan's 'season, night and
+	# wave' is all on the strip. A Full Moon, a boss or a calm night puts its
+	# mark after the date.
+	_season_mark = CalendarMark.new()
+	_season_mark.name = "NightSeasonMark"
+	add_child(_season_mark)
+	_season_mark.setup(&"spring", true)
+	_season_mark.position = SEASON_MARK_AT
+	_date = _label("NightDate", DATE_AT, UiKit.DIM)
+	for which in [&"full_moon", &"boss_night", &"calm_night"]:
+		var mark := CalendarMark.new()
+		mark.name = "NightMark_%s" % which
+		add_child(mark)
+		mark.setup(which, true)
+		mark.visible = false
+		_night_marks.append(mark)
+	_wave = _label("WaveCounter", WAVE_AT, UiKit.WARM)
+	_left = _label("ZombiesLeft", LEFT_AT, UiKit.DIM)
 	# **The time left to dawn** (task 0137): a countdown and never a wall clock
 	# - after a pass-out a 22:00-06:00 mapping would lie.
 	_dawn = _label("DawnCountdown", Vector2(360, 2), UiKit.WARM)
@@ -286,6 +318,7 @@ func _process(delta: float) -> void:
 	_pulse += delta
 	_refresh_house()
 	_refresh_hint()
+	_refresh_date(Phases.night_ahead(_state) if building else int(_state["night"]))
 	if building:
 		_night.text = I18n.f(&"NHUD_NIGHT", [Phases.night_ahead(_state)])
 		_announce.visible = false
@@ -325,6 +358,43 @@ func _refresh() -> void:
 
 	_refresh_boss()
 	_refresh_controls()
+
+
+## **The date of the night on the strip** (task 0158): its season's mark,
+## SPRING 3 and from Year 2 the year, then the night's own marks - read off
+## the calendar, whose rules made the record (`Calendar.is_full_moon`...).
+func _refresh_date(night: int) -> void:
+	var season := Calendar.season_id(night)
+	if _season_mark.mark != season:
+		_season_mark.setup(season, true)
+	var text := I18n.f(&"DHUD_DATE", [Names.of(season), Calendar.day_of_season(night)])
+	var year := Calendar.year_of(night)
+	if year > 1:
+		text += "  " + I18n.f(&"DHUD_YEAR", [year])
+	_date.text = text
+	var x := DATE_AT.x + _date.get_minimum_size().x + 3.0
+	var flags := [Calendar.is_full_moon(night), Calendar.is_boss_night(night),
+		Calendar.is_calm(night)]
+	for i in _night_marks.size():
+		var mark: CalendarMark = _night_marks[i]
+		mark.visible = bool(flags[i])
+		if mark.visible:
+			mark.position = Vector2(x, SEASON_MARK_AT.y)
+			x += CalendarMark.HUD + 2.0
+
+
+## The date as the strip says it - for `input_v1` and the shots.
+func date_text() -> String:
+	return _date.text
+
+
+## Where the strip's date and marks end, in its own pixels.
+func date_end() -> float:
+	var end := DATE_AT.x + _date.get_minimum_size().x
+	for mark in _night_marks:
+		if mark.visible:
+			end = maxf(end, mark.position.x + mark.size.x)
+	return end
 
 
 ## **The house bar.** Width is the fraction, colour is the warning, and the

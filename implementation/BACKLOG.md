@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **148 / 296 done**
+`############............`  **149 / 296 done**
 
-0 doing / 148 todo / 0 blocked across 18 phases.
+0 doing / 147 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-148 task(s) left, the ready ones first, then what they
+147 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -173,26 +173,6 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0158 - The forecast
-
-Ready to pick up.  Likely files: `src/core/forecast.gd (new), src/ui/forecast_panel.gd (new), src/ui/day_hud.gd, src/ui/night_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-At dusk the farmer learns what is coming: from which sides, how many and of what kind, and whether it is a Full Moon, a boss or a calm night. The forecast is never wrong, because it is the night.
-
-- `src/core/forecast.gd` (`class_name Forecast`): `Forecast.of(seed, date)` returns `{date, season, day_of_season, full_moon, boss, calm, sides, waves, kinds, count, event}`, pure, built only from `Waves.night_of(date, seed)` - the record the night will fight, flags included - and `Calendar`; `Forecast.tonight(state)` asks it for `Calendar.date(state)`
-- Never the run's stream: it reads `state["seed"]`, never `state["rng"]`, and anything random in it comes from a fresh `(seed, date)` stream like `Endless._stream_for`
-- `event` is an empty slot (`&""`) that 0256 fills from `(seed, date)`; the panel draws nothing for it until then
-- `src/ui/forecast_panel.gd`: shown in the day HUD from 18:00 (0126's dusk, `Phases.is_dusk`) and on the night HUD in the build step, hidden at noon and once the waves start. It shows the date, the season and moon marks, the sides in words, the waves, and one head and count per kind; a calm night says so and nothing else
-- Strings in both languages, widths measured: `FCAST_TITLE` (TONIGHT / ESTA NOITE), `FCAST_FROM` (from the %s / pelo %s), `SIDE_EAST`, `SIDE_SOUTH_EAST`, `SIDE_NORTH`, `SIDE_WEST`, `SIDE_SOUTH` (EAST / LESTE, SOUTH-EAST / SUDESTE, NORTH / NORTE, WEST / OESTE, SOUTH / SUL), `FCAST_EVERY_SIDE` (from every side / por todos os lados), `FCAST_WAVES.one`/`.other` (%d WAVE / %d WAVES; %d ONDA / %d ONDAS), `FCAST_FULL_MOON` (FULL MOON / LUA CHEIA), `FCAST_BOSS` (%s IS COMING / %s ESTÁ VINDO), `FCAST_CALM` (A CALM NIGHT / NOITE CALMA). 0157's side ids get literal `Names.KEYS` entries (`east` -> `SIDE_EAST`, ...) so the panel names a side with `Names.of` and `tools/i18n_check.py` sees the keys; kinds through `Names.of` and the plural enemy keys
-- Stand-ins through 0120's placeholder road until A010 is integrated by 0161 and A011 by 0162: each enemy's first walk frame cropped into a 16x16 head box, and code-drawn moon, boss and season marks at 16x16 and 10x10
-- No new input path: the panel is information, and showing it all day is an option of 0292's
-- Moved here from 0151: the night HUD's top strip (0139) names the date beside its night label with 0149's helper and `DHUD_DATE` (`SPRING 3`) - and from Year 2 the year, `DHUD_YEAR`, wherever the strip has room for it (0149 measured `SPRING 3  YEAR 2` at 93 px in English and 105 in Portuguese, too wide for the day HUD's row) - through the waves too, so the plan's 'season, night and wave' is on screen
-- Pure functions and view only: SIM and DATA must not move
-
-  - done when: `_task_0158_forecast` in `src/tools/headless_v1.gd`: for a plain, a Full Moon and a calm date, the forecast's kinds, count and sides equal what the night sends (count `Enemies.spawn` through a parked run that only steps until every wave is out, keeping the group to a few seconds), and a boss date names the season's boss; 1000 calls to `Forecast.tonight` leave `state["rng"]` and the state hash unchanged
-  - done when: `_case_0158_panel` in `src/tools/input_v1.gd`: hidden at noon, shown at 18:00 and in the build step, hidden once START is pressed
-  - done when: `forecast_dusk` and `forecast_build` shot scenarios: `python tools/shot.py 0158 forecast_dusk forecast_build --fhd` and with `--pt_BR`, opened - every line fits, the night HUD names the date, and the heads read as the enemies
-
 ### 0159 - Seasons on screen
 
 Ready to pick up.  Likely files: `src/ui/season_view.gd (new), src/ui/season_remap.gdshader (new), src/ui/ambient_motion.gdshader, tools/palette.py, tools/gen_sprites.py, src/ui/palette_data.gd (generated), src/ui/world_view.gd, src/ui/particles.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
@@ -230,6 +210,40 @@ When the winter boss - for now the Giant - falls on Winter 14, the year is over:
   - done when: `_task_0160_year_end` in `src/tools/headless_v1.gd`, from a Winter 14 fixture (date 56, started through 0118's road, never by playing the year): boss down -> `Run.is_over` and the result says so; boss escaped -> not over, the date still 56; carried on -> not over, and the next night is date 57, Year 2 Spring 1, calm; `Run.record` counts the year in `runs_won`
   - done when: `_case_0160_ending` in `src/tools/input_v1.gd`: the ending shows, the credits skip by keyboard and by pad, CARRY ON returns to the farm on Year 2 Spring 1, and A NEW FARM starts day 1 of a new run
   - done when: A `year_end` shot scenario: `python tools/shot.py 0160 year_end --fhd` and with `--pt_BR`, opened - nothing overflows
+
+### 0161 - Art: seasons and moons
+
+Waits for Codex art A010.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/raster_art.gd (generated), src/ui/placeholder_art.gd, src/ui/forecast_panel.gd`.
+
+The approved season, moon, boss-night and calm-night icons take the place of the forecast's code-drawn marks.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A010` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A010-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, `ArtPlacement` if needed).
+- Runtime names: `ui/icon_<id>` 16x16 pivot (8,8) and `ui/hud_<id>` 10x10 pivot (5,5) for `spring`, `summer`, `autumn`, `winter`, `full_moon`, `boss_night` and `calm_night`, both cut from one source crop like the resource icons, binary alpha, no text. `tools/check_ui_art.py` is hard-coded to the fifteen resource icons of task 0018: give it a calendar family with the same clipping and size rules
+- Replace 0158's code-drawn marks in the forecast panel by deleting their entries from `src/ui/placeholder_art.gd`; `python tools/placeholders.py` no longer lists A010
+- Set the pack to integrated: `python implementation/backlog/assets.py set A010 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass, and `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the icons in the real game - `python tools/shot.py 0161 forecast_dusk forecast_build --fhd` - in `implementation/shots/0161/`, opened and looked at
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0162 - Art: forecast heads
+
+Waits for Codex art A011.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/raster_art.gd (generated), src/ui/placeholder_art.gd, src/ui/forecast_panel.gd`.
+
+The forecast names what is coming with the enemies' own faces: the approved heads of the walker, runner, tank, breaker and Giant replace the cropped walk frames.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A011` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A011-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, `ArtPlacement` if needed).
+- Runtime names: `ui/head_<kind>` 16x16, pivot (8,8), for `walker`, `runner`, `tank`, `breaker` and `giant`, binary alpha, matching each enemy's sprite. `tools/check_ui_art.py` gains a heads family that requires a head for each of these five; later enemies bring theirs in their own packs and add themselves to the list
+- Replace 0158's cropped walk-frame heads by deleting their entries from `src/ui/placeholder_art.gd`; the panel asks for `ui/head_<kind>` and nothing else changes; `python tools/placeholders.py` no longer lists A011
+- Set the pack to integrated: `python implementation/backlog/assets.py set A011 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass, and `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the heads in the real game - `python tools/shot.py 0162 forecast_dusk forecast_build --fhd`, with the scenarios moved to a date whose forecast lists all five kinds (Spring 14 does while it is Endless-generated with the Giant's row; check it on the day) - in `implementation/shots/0162/`, opened and looked at
+  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0165 - Crops grow by days
 
@@ -344,40 +358,6 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: FHD (1920x1080) captures of the morning report after a won and after a lost night, and of the farm around it by day and by night, opened and looked at, in `implementation/shots/0289/`
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
-
-### 0161 - Art: seasons and moons
-
-Waits on 0158.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/raster_art.gd (generated), src/ui/placeholder_art.gd, src/ui/forecast_panel.gd`.
-
-The approved season, moon, boss-night and calm-night icons take the place of the forecast's code-drawn marks.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A010` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A010-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, `ArtPlacement` if needed).
-- Runtime names: `ui/icon_<id>` 16x16 pivot (8,8) and `ui/hud_<id>` 10x10 pivot (5,5) for `spring`, `summer`, `autumn`, `winter`, `full_moon`, `boss_night` and `calm_night`, both cut from one source crop like the resource icons, binary alpha, no text. `tools/check_ui_art.py` is hard-coded to the fifteen resource icons of task 0018: give it a calendar family with the same clipping and size rules
-- Replace 0158's code-drawn marks in the forecast panel by deleting their entries from `src/ui/placeholder_art.gd`; `python tools/placeholders.py` no longer lists A010
-- Set the pack to integrated: `python implementation/backlog/assets.py set A010 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the icons in the real game - `python tools/shot.py 0161 forecast_dusk forecast_build --fhd` - in `implementation/shots/0161/`, opened and looked at
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0162 - Art: forecast heads
-
-Waits on 0158.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/raster_art.gd (generated), src/ui/placeholder_art.gd, src/ui/forecast_panel.gd`.
-
-The forecast names what is coming with the enemies' own faces: the approved heads of the walker, runner, tank, breaker and Giant replace the cropped walk frames.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A011` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A011-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, `ArtPlacement` if needed).
-- Runtime names: `ui/head_<kind>` 16x16, pivot (8,8), for `walker`, `runner`, `tank`, `breaker` and `giant`, binary alpha, matching each enemy's sprite. `tools/check_ui_art.py` gains a heads family that requires a head for each of these five; later enemies bring theirs in their own packs and add themselves to the list
-- Replace 0158's cropped walk-frame heads by deleting their entries from `src/ui/placeholder_art.gd`; the panel asks for `ui/head_<kind>` and nothing else changes; `python tools/placeholders.py` no longer lists A011
-- Set the pack to integrated: `python implementation/backlog/assets.py set A011 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the heads in the real game - `python tools/shot.py 0162 forecast_dusk forecast_build --fhd`, with the scenarios moved to a date whose forecast lists all five kinds (Spring 14 does while it is Endless-generated with the Giant's row; check it on the day) - in `implementation/shots/0162/`, opened and looked at
-  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0163 - Art: winter ground
 
@@ -858,7 +838,7 @@ The farmer casts, waits, strikes, reels and shows the catch at the 32px detail, 
 
 ### 0292 - Options for the new controls
 
-Waits on 0180, 0158.  Likely files: `src/app/settings.gd, src/app/input_actions.gd, src/ui/options_controls.gd, src/ui/options_game.gd, src/ui/guardian_cursor.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/forecast_panel.gd, src/ui/day_hud.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
+Waits on 0180.  Likely files: `src/app/settings.gd, src/app/input_actions.gd, src/ui/options_controls.gd, src/ui/options_game.gd, src/ui/guardian_cursor.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/forecast_panel.gd, src/ui/day_hud.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
 
 The guardian's cursor, the night camera and the fishing bar each get the knob a player reaches for: how fast the cursor moves, whether the screen edge pans, how far a stick must tilt, a kinder fishing bar, and a forecast that stays up all day.
 
@@ -1281,7 +1261,7 @@ Waits on 0194, 0195.  Likely files: `implementation/PROGRESS.md, implementation/
 
 ### 0293 - The first week, taught
 
-Waits on 0195, 0158, 0180.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/ui/tutorial_prompt.gd, src/app/settings.gd, tools/goldens/, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0195, 0180.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/ui/tutorial_prompt.gd, src/app/settings.gd, tools/goldens/, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 A stranger learns 1.0 the way they learned the MVP's first day - one short line, on the thing it is about, gone when it is done - but spread over Spring 1 to 7, so the first morning is not a lecture and the forecast, the bin and the rod arrive when they first matter.
 
@@ -2004,7 +1984,7 @@ Summer's boss: a possessed machine that winds up and charges in a straight line,
 
 ### 0256 - Fog and rain
 
-Waits on 0158, 0229.  Likely files: `src/core/weather.gd (new), src/core/forecast.gd, src/core/game_data.gd, src/core/towers.gd, src/core/combat.gd, src/core/enemies.gd, src/ui/forecast_panel.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0229.  Likely files: `src/core/weather.gd (new), src/core/forecast.gd, src/core/game_data.gd, src/core/towers.gd, src/core/combat.gd, src/core/enemies.gd, src/ui/forecast_panel.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 Nights that are not all alike: some are foggy, some rain. Both are known at dusk, so they change what you build rather than punish you for not guessing.
 
@@ -2915,7 +2895,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
-## 11 - Calendar and seasons  (9/16)
+## 11 - Calendar and seasons  (10/16)
 
 - [x] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
 - [x] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
@@ -2926,11 +2906,11 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0155** [Losing a night when the calendar moves on](prompts/0155-losing-calendar.md)
 - [x] **0156** [The 1.0 farm map](prompts/0156-farm-map-v1.md)
 - [x] **0157** [A new side every season](prompts/0157-attack-sides.md)
-- [ ] **0158** [The forecast](prompts/0158-forecast.md)
+- [x] **0158** [The forecast](prompts/0158-forecast.md)
 - [ ] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md)
 - [ ] **0160** [The end of the year](prompts/0160-year-end.md)
-- [ ] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md) - needs 0158 - waits for art A010
-- [ ] **0162** [Art: forecast heads](prompts/0162-art-forecast-heads.md) - needs 0158 - waits for art A011
+- [ ] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md) - waits for art A010
+- [ ] **0162** [Art: forecast heads](prompts/0162-art-forecast-heads.md) - waits for art A011
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - needs 0159 - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - needs 0159 - waits for art A013
 
@@ -3033,7 +3013,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0253** [The Harvester](prompts/0253-harvester.md) - needs 0246, 0231
 - [ ] **0254** [The Scarecrow King](prompts/0254-scarecrow-king.md) - needs 0246, 0249
 - [ ] **0255** [The Winter Lord](prompts/0255-winter-lord.md) - needs 0246, 0251, 0160, 0253, 0254
-- [ ] **0256** [Fog and rain](prompts/0256-fog-and-rain.md) - needs 0158, 0229
+- [ ] **0256** [Fog and rain](prompts/0256-fog-and-rain.md) - needs 0229
 - [ ] **0257** [The Blood Moon](prompts/0257-blood-moon.md) - needs 0256, 0219, 0246
 - [ ] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md) - needs 0256, 0257
 - [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md) - needs 0234, 0247, 0248, 0249, 0250, 0251, 0252, 0253, 0254, 0255, 0256, 0257
@@ -3078,8 +3058,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 ## 17 - Ship 1.0  (0/7)
 
 - [ ] **0291** [Saves into 1.0](prompts/0291-saves-v1.md) - needs 0165, 0279, 0287
-- [ ] **0292** [Options for the new controls](prompts/0292-options-v1.md) - needs 0180, 0158
-- [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md) - needs 0195, 0158, 0180
+- [ ] **0292** [Options for the new controls](prompts/0292-options-v1.md) - needs 0180
+- [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md) - needs 0195, 0180
 - [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0287, 0293, 0291, 0292
 - [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0280, 0291, 0292, 0293, 0294
 - [ ] **0296** [The store page and trailer for 1.0](prompts/0296-store-v1.md) - needs 0290, 0294

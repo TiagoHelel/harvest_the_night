@@ -136,6 +136,18 @@ const CROP_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_
 ## rows, pivot at its bottom centre, drawn at 1.0 (task 0138).
 const REPORT_HEADER := {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40), "draw_scale": 1.0}
 
+## A010's calendar marks (task 0158): `icon_<id>` 16x16 at (8,8) and `hud_<id>`
+## 10x10 at (5,5), drawn at 1.0. Drawn by code (`CalendarMark`) until 0161.
+const MARK_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
+const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_scale": 1.0}
+
+## A011's forecast heads (task 0158): 16x16 at (8,8), drawn at 1.0. Until 0162
+## the stand-in is the enemy's first walk frame, the 16x16 box over its head
+## (`stand_in_region`, measured off each frame's opaque rows) - and for the
+## Giant, twice the man's size, a 32x32 box shrunk into the 16: its own 16x16
+## was a yellow blob beside the tank's, and this one has the stone plates.
+const HEAD_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -176,6 +188,27 @@ const ART := {
 	&"hardwood_stump": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": STUMP_2X2, "final": STUMP_2X2, "bare": true, "stand_in_scale": 2.0, "tint": Color(0.85, 0.72, 0.62)},
 	&"trampled": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
+	# **Task 0158: the forecast.** A010's marks drawn by code; A011's heads cut
+	# from each enemy's first walk frame.
+	&"icon_spring": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_spring": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_summer": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_summer": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_autumn": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_autumn": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_winter": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_winter": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_full_moon": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_full_moon": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_boss_night": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_boss_night": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_calm_night": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_calm_night": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"head_walker": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(21, 15, 16, 16)},
+	&"head_runner": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/runner_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(24, 15, 16, 16)},
+	&"head_tank": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/tank_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(25, 15, 16, 16)},
+	&"head_breaker": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/breaker_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(24, 15, 16, 16)},
+	&"head_giant": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/giant_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 19, 32, 32)},
 }
 
 
@@ -263,6 +296,13 @@ static func art_tint(name: StringName) -> Color:
 
 static func art_scale(name: StringName) -> float:
 	return float((ART.get(name, {}) as Dictionary).get("stand_in_scale", 1.0))
+
+
+## The part of an `ART` stand-in's file that stands in (task 0158): A011's heads
+## are a 16x16 box of a walk frame. An empty rect - the whole file - for
+## anything else, real art included.
+static func art_region(name: StringName) -> Rect2i:
+	return (ART.get(name, {}) as Dictionary).get("stand_in_region", Rect2i())
 
 
 ## Whether a farmer animation is drawn by a stand-in.

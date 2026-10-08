@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 30
+const GROUPS := 31
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -99,6 +99,7 @@ func _run() -> void:
 	_task_0155_losing()
 	_task_0156_map_v1()
 	_task_0157_sides()
+	_task_0158_forecast()
 
 
 func _finish() -> void:
@@ -2881,4 +2882,102 @@ func _task_0157_sides() -> void:
 	expect(starts.size() == 5 and blocked.x >= 0 and each_moves and together == one_by_one,
 		"on Winter 2 the preview walks one field from five starts, each a route of its own",
 		"%d starts, %d cells against %d" % [starts.size(), together.size(), one_by_one.size()])
+	_completed += 1
+
+
+## 0158 - the forecast: what it says is what the night sends, a boss date
+## names the season's boss, and asking it a thousand times moves nothing.
+func _task_0158_forecast() -> void:
+	# **What it says is what comes.** A plain authored night from the south
+	# east, a generated Full Moon from two sides and a calm night, each sent
+	# through the real road - `Waves.tick` and `Enemies.spawn` - with the gaps
+	# skipped and every arrival counted and taken off where it lands, until
+	# the last wave is out.
+	var where := {}
+	for region in GameData.SPAWNS.size():
+		for pair in (GameData.SPAWNS[region] as Array):
+			where[Vector2i(int(pair[0]), int(pair[1]))] = region
+	for date in [3, GameData.SEASON_DAYS + 7, GameData.SEASON_DAYS + 1]:
+		var state := State.create(1580)
+		state["day"] = date
+		state["nights_won"] = date - 1
+		var said := Forecast.tonight(state)
+		NightRoad.to_night(state)
+		var sent := {}
+		var order: Array = []
+		var sides: Array = []
+		var lost := 0
+		var ticks := 0
+		var wave: Dictionary = state["wave"]
+		while int(state["phase"]) == Phases.NIGHT and not bool(wave["done"]) 				and ticks < 4000:
+			wave["wait"] = 0
+			Sim.tick(state)
+			ticks += 1
+			for id in Entities.ids(state):
+				var one := Entities.get_one(state, id)
+				var kind := StringName(one.get("kind", &""))
+				if not sent.has(kind):
+					sent[kind] = 0
+					order.append(kind)
+				sent[kind] = int(sent[kind]) + 1
+				var side := int(where.get(Entities.cell_of(state, id), -1))
+				if side < 0:
+					lost += 1
+				elif not sides.has(Forecast.side_id(side)):
+					sides.append(Forecast.side_id(side))
+				Entities.remove(state, id)
+		var came: Array = []
+		var total := 0
+		for kind in order:
+			came.append([kind, int(sent[kind])])
+			total += int(sent[kind])
+		var named: Array = []
+		for side in GameData.SPAWN_SIDES:
+			if sides.has(side):
+				named.append(side)
+		expect(said["kinds"] == came and int(said["count"]) == total
+			and said["sides"] == named and lost == 0 and bool(wave["done"]),
+			"date %d: the forecast's kinds, count and sides are what the night sent (%d ticks)"
+				% [date, ticks],
+			"said %s %d %s, sent %s %d %s" % [said["kinds"], said["count"], said["sides"],
+				came, total, named])
+		expect(int(said["date"]) == date and said["season"] == Calendar.season_id(date)
+			and int(said["day_of_season"]) == Calendar.day_of_season(date)
+			and said["event"] == &"",
+			"date %d: its date, season and day, and no event yet" % date, str(said))
+	var moon := Forecast.of(1580, GameData.SEASON_DAYS + 7)
+	var calm := Forecast.of(1580, GameData.SEASON_DAYS + 1)
+	expect(bool(moon["full_moon"]) and not bool(moon["calm"]) and int(moon["waves"]) > 0
+		and bool(calm["calm"]) and int(calm["count"]) == 0 and int(calm["waves"]) == 0
+		and (calm["sides"] as Array).is_empty(),
+		"Summer 7 forecasts a Full Moon, Summer 1 a calm night with nothing in it")
+
+	# **A boss date names the season's boss**, every season of the year.
+	var bosses: Array = []
+	for season in GameData.SEASONS.size():
+		var date := (season + 1) * GameData.SEASON_DAYS
+		var one := Forecast.of(77, date)
+		var has := false
+		for pair in (one["kinds"] as Array):
+			if StringName((pair as Array)[0]) == StringName(one["boss"]):
+				has = true
+		if StringName(one["boss"]) == &"" or StringName(one["boss"]) != Calendar.boss_of(date) 				or not has or not bool(one["full_moon"]):
+			bosses.append([date, one["boss"]])
+	expect(bosses.is_empty(),
+		"each season's last night forecasts its boss, among its kinds, under a Full Moon",
+		str(bosses))
+	expect((Forecast.of(77, 4 * GameData.SEASON_DAYS)["sides"] as Array).size()
+		== GameData.SPAWN_SIDES.size(), "and Winter 14 comes from every side")
+
+	# **Asking moves nothing**: the run's stream and the whole state.
+	var asked := State.create(1581)
+	asked["day"] = GameData.SEASON_DAYS + 3
+	var rng_before: Array = (asked["rng"] as Array).duplicate()
+	var hash_before := State.hash_of(asked)
+	var first := Forecast.tonight(asked)
+	var same := true
+	for _i in 1000:
+		same = same and Forecast.tonight(asked) == first
+	expect(asked["rng"] == rng_before and State.hash_of(asked) == hash_before and same,
+		"a thousand forecasts leave the run's stream and the state hash as they were")
 	_completed += 1

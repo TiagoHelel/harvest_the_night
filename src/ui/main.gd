@@ -102,6 +102,8 @@ var _pointer_at := Vector2(-1, -1)
 @onready var _tooltip: Tooltip = %Tooltip
 ## The night's shop window (task 0133), built here and put under the tooltip.
 var _hotbar: Hotbar
+## The night's forecast (task 0158), built here and put over both HUDs.
+var _forecast: ForecastPanel
 
 
 ## **The theme goes on before anything is built against it**, which is why
@@ -128,6 +130,11 @@ func _ready() -> void:
 	_hotbar = Hotbar.new()
 	_tooltip.get_parent().add_child(_hotbar)
 	_tooltip.get_parent().move_child(_hotbar, _tooltip.get_index())
+	# **Over both HUDs and under every panel**: the market opened at 19:00
+	# covers it, and the forecast steps aside while it is open anyway.
+	_forecast = ForecastPanel.new()
+	_night_hud.get_parent().add_child(_forecast)
+	_night_hud.get_parent().move_child(_forecast, _night_hud.get_index() + 1)
 	var window := get_window()
 	_window_focused = window.has_focus()
 	window.focus_entered.connect(func() -> void: _window_focused = true)
@@ -265,6 +272,7 @@ func _hand_out() -> void:
 	_tech.show_state(_driver.state)
 	_build.show_state(_driver.state, _world)
 	_hotbar.show_state(_driver.state)
+	_forecast.show_state(_driver.state)
 	_result.driver = _driver
 	_result.show_state(_driver.state)
 	_inventory.show_state(_driver.state)

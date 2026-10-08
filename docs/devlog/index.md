@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-150 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
+151 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -194,6 +194,7 @@ is the sort of thing this list exists to say out loud.
 | 0155 | Losing a night when the calendar moves on | 2026-10-08 |
 | 0156 | The 1.0 farm map | 2026-10-08 |
 | 0157 | A new side every season | 2026-10-08 |
+| 0158 | The forecast | 2026-10-08 |
 
 ## Every time the game changed underneath itself
 
