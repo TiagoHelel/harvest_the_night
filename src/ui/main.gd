@@ -269,6 +269,8 @@ func _hand_out() -> void:
 	_result.show_state(_driver.state)
 	_inventory.show_state(_driver.state)
 	_workshop.show_state(_driver.state)
+	_tutorial.house = _house_view
+	_tutorial.night_hud = _night_hud
 	_tutorial.show_state(_driver.state, _world)
 	_lighting.show_state(_driver.state)
 	_particles.show_state(_driver.state)

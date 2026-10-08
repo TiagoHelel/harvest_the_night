@@ -2881,12 +2881,15 @@ func _case_0041_tutorial() -> void:
 	expect(Tutorial.is_done(state, &"craft"),
 		"and the line about the bench is simply gone, unread")
 
-	# **It goes away with the day.**
+	# **It follows him into the build step** (task 0141): the day's lines go
+	# with the day, and the build step's own line takes over.
 	await hold_key(KEY_N, 4)
 	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
 		"the night")
-	await frames(3)
-	expect(not prompt.visible, "and nothing is being taught at night")
+	await until(func() -> bool: return prompt.showing() == &"build",
+		"the build step's line", 100000)
+	expect(prompt.visible and prompt.showing() == &"build",
+		"and the build step has its own line", str(prompt.showing()))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

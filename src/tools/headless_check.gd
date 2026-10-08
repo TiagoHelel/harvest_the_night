@@ -6815,30 +6815,39 @@ func _task_0040_shop() -> void:
 
 ## 0041 - day one teaches itself, and teaches nothing by force.
 func _task_0041_tutorial() -> void:
-	# **Five lines, and seven allowed.** Short enough to read walking.
+	# **Nine lines since task 0141**: the day's five, going to bed, and the
+	# first night's three. Short enough to read walking.
 	var steps := Tutorial.steps()
-	expect(steps.size() == 7,
-		"day one is seven lines, which is what the task allows",
+	expect(steps.size() == 9,
+		"day one is nine lines, the day's and the first night's",
 		"%d lines" % steps.size())
 	expect(steps.size() <= GameData.MAX_TUTORIAL_LINES,
 		"and no more than the table allows either",
 		"%d of %d" % [steps.size(), GameData.MAX_TUTORIAL_LINES])
 
-	# **Each appears on the thing it describes.** A line with nowhere to
-	# point is a line in a corner, which is a manual.
+	# **Each appears on the thing it describes**, in the part of the day it
+	# is taught in (task 0141). A line with nowhere to point is a line in a
+	# corner, which is a manual; the night's sit on START and on the dawn
+	# countdown, which the view finds by name.
 	var homeless: Array = []
 	for entry in steps:
 		var one: Dictionary = entry
 		var pointing := State.create(4101)
+		pointing["phase"] = int(Tutorial.TAUGHT_IN.get(StringName(one["id"]),
+			Phases.DAY))
 		for other in steps:
 			var id := StringName((other as Dictionary)["id"])
 			if id == StringName(one["id"]):
 				break
 			((pointing["tutorial"] as Dictionary)["done"] as Array).append(id)
-		if Tutorial.points_at(pointing) == Tutorial.NOWHERE:
+		var anchor := Tutorial.anchor_of(pointing)
+		var sits := anchor == &"start" or anchor == &"dawn" \
+			or Tutorial.points_at(pointing) != Tutorial.NOWHERE
+		if not sits or Tutorial.current_here(pointing).get("id", &"") \
+				!= StringName(one["id"]):
 			homeless.append(String(one["id"]))
 	expect(homeless.is_empty(),
-		"every line has something on the farm to sit on",
+		"every line has something to sit on - a cell, the bed, START or the countdown",
 		", ".join(homeless))
 
 	# **The switch is shown, not described.** The transition is two seconds
@@ -6916,7 +6925,7 @@ func _task_0041_tutorial() -> void:
 	for entry in steps:
 		ids.append(StringName((entry as Dictionary)["id"]))
 	for wanted in [&"chop", &"plant", &"water", &"sell", &"craft",
-			&"build", &"night"]:
+			&"bed", &"build", &"start", &"dawn"]:
 		expect(ids.has(wanted), "day one covers %s" % wanted, str(ids))
 
 	# **It starts at the beginning and points at something.**
@@ -6989,7 +6998,7 @@ func _task_0041_tutorial() -> void:
 		"and a tower goes down in the first build step, every line unread")
 	Sim.advance(rebel, GameData.TUTORIAL_CHECK_TICKS + 1)
 	expect(Tutorial.progress(rebel) >= 4,
-		"four of the five lines are simply gone, unread",
+		"four of the nine lines are simply gone, unread",
 		str(Tutorial.progress(rebel)))
 
 	# **And night one is still winnable for the player who read nothing.** The
@@ -7033,19 +7042,20 @@ func _task_0041_tutorial() -> void:
 		expect(StringName((row as Array)[0]) == &"walker",
 			"and all of them the basic kind", str(row))
 
-	# **The last line finishes when the night is sent for**, which is the one
-	# step the player cannot do by accident.
+	# **The last line finishes when the first night is held** (task 0141),
+	# which is the one step nobody does by accident.
 	var sender := State.create(2303)
 	for entry in Tutorial.steps():
 		var id := StringName((entry as Dictionary)["id"])
-		if id != &"night":
+		if id != &"dawn":
 			((sender["tutorial"] as Dictionary)["done"] as Array).append(id)
-	expect(Tutorial.current(sender)["id"] == &"night",
-		"the last line is about the button", str(Tutorial.current(sender)))
+	expect(Tutorial.current(sender)["id"] == &"dawn",
+		"the last line is about dawn", str(Tutorial.current(sender)))
 	expect(not Tutorial.is_finished(sender), "and it is not finished yet")
-	Phases.begin_preparation(sender)
-	expect(Tutorial.is_done(sender, &"night"),
-		"sending for the night finishes that line")
+	sender["nights_won"] = 1
+	Sim.advance(sender, GameData.TUTORIAL_CHECK_TICKS + 1)
+	expect(Tutorial.is_done(sender, &"dawn"),
+		"a night held finishes that line")
 	expect(Tutorial.is_finished(sender),
 		"and it was the last one, so day one is taught")
 
@@ -14371,14 +14381,16 @@ func _task_0082_shots() -> void:
 	# Nineteen since 0134: the repair cursor and its tooltip. Twenty since
 	# 0135: the flare's aiming preview. Twenty-two since 0138: the morning
 	# report with every line it has, and him out of bed beside it.
-	# Twenty-three since 0140: the farm at 22:30, time for bed.
-	expect(names.size() == 23,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning and bedtime",
+	# Twenty-three since 0140: the farm at 22:30, time for bed. Twenty-six
+	# since 0141: day one teaching the night - the bed, START, dawn.
+	expect(names.size() == 26,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime and the night's lessons",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
 			"passed_out", "build_day", "repair", "aim", "morning", "woken", "bedtime",
+			"tutorial_bed", "tutorial_start", "tutorial_dawn",
 			"options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 

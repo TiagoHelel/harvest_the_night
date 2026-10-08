@@ -86,6 +86,9 @@ const SCENARIOS: Array = [
 	["farm_extension", "planting on the new southern land", ""],
 	["larger_stations", "the larger farm buildings", ""],
 	["passed_out", "passed out at 02:00: the night, and nobody on the farm", ""],
+	["tutorial_bed", "day one, after the day's lines: the bed's, over the bed", ""],
+	["tutorial_start", "day one's build step: START's line", ""],
+	["tutorial_dawn", "day one's night: dawn's line", ""],
 	["morning", "the morning report, every line it has", "ResultScreen"],
 	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
@@ -648,6 +651,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"farm_extension": _set_farm_extension(state)
 		"larger_stations": _set_larger_stations(state)
 		"passed_out": _set_passed_out(state)
+		"tutorial_bed": _set_tutorial_bed(state)
+		"tutorial_start": _set_tutorial_start(state)
+		"tutorial_dawn": _set_tutorial_dawn(state)
 		"morning": _set_morning(state)
 		"woken": _set_woken(state)
 		"repair": _set_repair(state)
@@ -1108,6 +1114,39 @@ func _set_bedtime(state: Dictionary) -> void:
 	_a_sown_field(state)
 	Sim.advance(state, maxi(Phases.tick_at_minute(22 * 60 + 30)
 		- int(state["day_tick"]), 1))
+
+
+func _set_tutorial_bed(state: Dictionary) -> void:
+	_set_tutorial_night(state, 0)
+
+
+func _set_tutorial_start(state: Dictionary) -> void:
+	_set_tutorial_night(state, 1)
+
+
+func _set_tutorial_dawn(state: Dictionary) -> void:
+	_set_tutorial_night(state, 2)
+
+
+## **Day one teaching the night** (task 0141): the day's five lines done, and
+## then the bed's line in the house (`stage` 0), START's in the build step
+## with a wall down (1), or dawn's in the night (2).
+func _set_tutorial_night(state: Dictionary, stage: int) -> void:
+	((state["tutorial"] as Dictionary)["done"] as Array).assign(
+		[&"chop", &"plant", &"water", &"sell", &"craft"])
+	if stage == 0:
+		_set_house_interior(state)
+		return
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	NightRoad.into_build(state)
+	var spot := Tutorial.points_at(state)
+	Building.place(state, &"wall", spot)
+	Sim.advance(state, GameData.TUTORIAL_CHECK_TICKS)
+	if stage == 2:
+		NightRoad.through_build(state)
+		NightRoad.park(state)
+		Sim.advance(state, GameData.TUTORIAL_CHECK_TICKS)
+	_look_at(spot)
 
 
 func _set_dusk(state: Dictionary) -> void:

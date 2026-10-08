@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 20
+const GROUPS := 21
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -89,6 +89,7 @@ func _run() -> void:
 	_task_0137_dawn()
 	_task_0138_morning()
 	_task_0140_bedtime()
+	_task_0141_tutorial()
 
 
 func _finish() -> void:
@@ -1805,3 +1806,116 @@ func _task_0140_bedtime() -> void:
 	expect(not GameData.check_bedtime(18 * 60, 22 * 60, 26 * 60, 26 * 60).is_empty(),
 		"and a warning no earlier than the pass-out itself")
 	_completed += 1
+
+
+## 0141 - day one teaches the new night: to bed, the build step, START,
+## dawn - by watching the state, never by gating it. Spans are jumped (a
+## near `dawn_at`), not played.
+func _task_0141_tutorial() -> void:
+	var every: Array = []
+	for entry in Tutorial.steps():
+		every.append(StringName((entry as Dictionary)["id"]))
+	expect(every.size() == GameData.MAX_TUTORIAL_LINES
+		and GameData.check_tutorial(Tutorial.steps()).is_empty(),
+		"nine steps, which the lever now allows, passing their own check",
+		str(every))
+
+	# **A scripted first day and night completes every step, in order.** The
+	# same script runs a second farm whose player read nothing: every line
+	# already out of the way before the day starts.
+	var taught := State.create(1410)
+	var ignored := State.create(1410)
+	((ignored["tutorial"] as Dictionary)["done"] as Array).assign(every.duplicate())
+	for farm in [taught, ignored]:
+		_first_day_and_night(farm as Dictionary, 0)
+	expect(((taught["tutorial"] as Dictionary)["done"] as Array)
+		== every.slice(0, every.size() - 1),
+		"every step up to START completes, in the order the lines come",
+		str((taught["tutorial"] as Dictionary)["done"]))
+	expect(int(taught["phase"]) == Phases.NIGHT and _same_but_the_lesson(taught, ignored),
+		"and the night it reaches is the same night, but for the tutorial",
+		Phases.name_of(int(taught["phase"])))
+	for farm in [taught, ignored]:
+		_first_day_and_night(farm as Dictionary, 1)
+	expect(((taught["tutorial"] as Dictionary)["done"] as Array) == every
+		and Tutorial.is_finished(taught) and int(taught["day"]) == 2
+		and _same_but_the_lesson(taught, ignored),
+		"held till dawn, the last line goes, and the morning is the same morning",
+		str((taught["tutorial"] as Dictionary)["done"]))
+
+	# **Each night line is taught in its own part of the day.**
+	var here := State.create(1411)
+	((here["tutorial"] as Dictionary)["done"] as Array).assign(
+		[&"chop", &"plant", &"water", &"sell", &"craft"])
+	expect(Tutorial.current_here(here).get("id", &"") == &"bed"
+		and Tutorial.anchor_of(here) == &"cell"
+		and Tutorial.points_at(here) == House.porch(here),
+		"by day, after the day's five, the bed's line sits on the farmhouse door",
+		str(Tutorial.points_at(here)))
+	House.enter(here)
+	var bed := House.bed()
+	expect(Tutorial.anchor_of(here) == &"room"
+		and Tutorial.points_at(here) == Vector2i(bed.position.x + bed.size.x / 2,
+			bed.position.y),
+		"and in the house, on the bed", str(Tutorial.points_at(here)))
+	House.leave(here)
+	NightRoad.into_build(here)
+	((here["tutorial"] as Dictionary)["done"] as Array).append(&"bed")
+	var aim := Tutorial.points_at(here)
+	var house := Farm.house_centre(here)
+	expect(Tutorial.current_here(here).get("id", &"") == &"build"
+		and Farm.buildable(here, aim) and aim != house,
+		"in the build step the build line sits on open ground off the house",
+		str(aim))
+	((here["tutorial"] as Dictionary)["done"] as Array).append(&"build")
+	expect(Tutorial.anchor_of(here) == &"start", "then START's line sits on START")
+	NightRoad.through_build(here)
+	((here["tutorial"] as Dictionary)["done"] as Array).append(&"start")
+	expect(Tutorial.anchor_of(here) == &"dawn",
+		"and in the night dawn's sits on the countdown")
+	_completed += 1
+
+
+## The scripted first day (`part` 0) - the day's five, to bed, a wall in the
+## build step, START - or the rest of it (`part` 1): the night held to a near
+## dawn, the morning confirmed, and out of the door.
+func _first_day_and_night(farm: Dictionary, part: int) -> void:
+	var beat := GameData.TUTORIAL_CHECK_TICKS
+	if part == 0:
+		Resources.gain(farm, {GameData.WOOD: 5})
+		Sim.advance(farm, beat)
+		var plot: Vector2i = Farm.cells_of(farm, Farm.Terrain.SOIL)[0]
+		Farming.act(farm, plot)
+		Farming.act(farm, plot)
+		Sim.advance(farm, beat)
+		farm["water_can"] = 2
+		Sim.advance(farm, beat)
+		Resources.gain(farm, {GameData.MONEY: 100})
+		Sim.advance(farm, beat)
+		Resources.gain(farm, {GameData.WOOD: 100, GameData.STONE: 100, GameData.IRON: 100})
+		var bench := Building.anchor_of(farm, Farm.cells_with(farm, &"workshop")[0])
+		Crafting.enqueue(farm, bench, &"wall_kit")
+		Sim.advance(farm, beat)
+		(farm["intent"] as Dictionary)["sleep"] = true
+		Sim.advance(farm, beat)
+		Building.place(farm, &"wall", SuiteKit.any_buildable(farm))
+		Sim.advance(farm, beat)
+		NightRoad.press_start(farm)
+		Sim.advance(farm, beat)
+		return
+	NightRoad.park(farm)
+	(farm["wave"] as Dictionary)["dawn_at"] = int(farm["night_tick"]) + 3
+	Sim.advance(farm, 10)
+	(farm["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(farm, 1)
+	House.leave(farm)
+	Sim.advance(farm, beat)
+
+
+## Whether two farms are the same farm but for what the tutorial has seen.
+func _same_but_the_lesson(a: Dictionary, b: Dictionary) -> bool:
+	var left := State.copy(a)
+	var right := State.copy(b)
+	left["tutorial"] = {}
+	right["tutorial"] = {}
+	return State.hash_of(left) == State.hash_of(right)

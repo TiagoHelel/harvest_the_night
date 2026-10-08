@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-138 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
+139 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -182,10 +182,11 @@ is the sort of thing this list exists to say out loud.
 | 0122 | Art: the farmer's run - done 2026-10-08 (cancelled by the owner) |  |
 | 0139 | The night HUD for the guardian | 2026-10-08 |
 | 0140 | The day HUD: the hour and bedtime | 2026-10-08 |
+| 0141 | Teaching the new night | 2026-10-08 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 38 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 40 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -225,6 +226,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **The build step waits for START** (0136) - `sim` 204996281 -> 2903453887
 - **The night ends at 06:00** (0137) - `sim` 2903453887 -> 40581503
 - **Waking up: the morning report** (0138) - `sim` 40581503 -> 1222657941
+- **Teaching the new night** (0141) - `sim` 1222657941 -> 3911863006
+- **Teaching the new night** (0141) - `data` 898358060 -> 3047858822
 
 ## What went wrong
 

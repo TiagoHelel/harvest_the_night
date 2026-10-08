@@ -173,6 +173,10 @@ static func _tick_night(state: Dictionary) -> void:
 	Traps.tick(state)
 	Towers.tick(state)
 	Combat.tick(state)
+	# **The first night is taught as it is played** (task 0141): on the
+	# tutorial's own beat, watching, never gating, and never indoors.
+	if not House.inside(state):
+		Tutorial.tick(state)
 	_test_for_dawn(state)
 
 

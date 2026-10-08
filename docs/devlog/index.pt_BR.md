@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-138 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+139 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -181,10 +181,11 @@ voz alta.
 | 0122 | Art: the farmer's run - done 2026-10-08 (cancelled by the owner) |  |
 | 0139 | The night HUD for the guardian | 2026-10-08 |
 | 0140 | The day HUD: the hour and bedtime | 2026-10-08 |
+| 0141 | Teaching the new night | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 38 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 40 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -224,6 +225,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **The build step waits for START** (0136) - `sim` 204996281 -> 2903453887
 - **The night ends at 06:00** (0137) - `sim` 2903453887 -> 40581503
 - **Waking up: the morning report** (0138) - `sim` 40581503 -> 1222657941
+- **Teaching the new night** (0141) - `sim` 1222657941 -> 3911863006
+- **Teaching the new night** (0141) - `data` 898358060 -> 3047858822
 
 ## O que deu errado
 

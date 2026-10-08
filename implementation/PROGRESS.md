@@ -14680,3 +14680,121 @@ Counts: headless_check 16232 (+2: the bedtime scenario's name and count),
 headless_v1 278 (+4: `_task_0140_bedtime`), input_check 1064,
 input_v1 151 (+7: `_case_0140_bedtime`). Sim 1222657941 and data 898358060
 are unchanged: the two levers are view thresholds outside `digest()`.
+
+## 0141 - Teaching the new night - done 2026-10-08
+
+What changed: day one now teaches the new night - go to bed, set something
+down in the build step, press START, hold till dawn. It does it by watching
+the state, and it never gates anything.
+
+**The steps** (`GameData.TUTORIAL`) are now nine: chop, plant, water, sell,
+craft, then `bed`, `build`, `start` and `dawn`.
+- The old `night` step ("N, or the button") became the bed step, and
+  `TUT_NIGHT` left strings.csv.
+- **`MAX_TUTORIAL_LINES` went from 7 to 9**, the top of its range. No two day
+  steps were merged: each of them still teaches one thing. `check_tutorial`
+  passes.
+
+**What finishes each step** (`Tutorial._happened`, reading the state only):
+- `bed`: asleep seen (the bed, the button, or 02:00);
+- `build`: a defence standing, which since 0132 means one placed in a build
+  step;
+- `start`: NIGHT reached;
+- `dawn`: a night won, at dawn or with nothing left alive (0137 made those the
+  same).
+
+**`Tutorial.tick` runs on its beat in the night too**, and never indoors.
+`PerfNames.NIGHT` gains `Tutorial`, so the benchmark now times
+`night_tutorial`. The new row has no baseline, which `perf.py` does not
+compare.
+
+**Taught where it belongs** (`Tutorial.current_here`, `TAUGHT_IN`): the first
+unfinished step of this part of the day.
+- The day's five and the bed's are taught by day, build and START in the
+  build step, and dawn in the night.
+- So a stall never visited no longer keeps the build line off the build step.
+- `current()` still orders `is_finished` and `progress`.
+
+**Where each line points** (`Tutorial.anchor_of` and `points_at`):
+- **bed**: the farmhouse door while he is out on the farm, and the bed
+  itself in the house view (`HouseView.room_to_screen`).
+- **build**: open ground a third of the way from the house to the nearest
+  spawn cell. That is read off `GameData.SPAWNS`, not
+  `Enemies.spawn_cells`, which rebuilds the path field and so would write
+  from a view.
+- **START**: the line sits above the button, clear of the hotbar, with the
+  pointer down at START.
+- **dawn**: the line sits under the strip, with a "^" up at the countdown.
+- `tutorial_prompt.gd` resolves the two controls by name through
+  `NightHud`. In the house it shows only the bed's line. It hides while the
+  bed beat plays, and is now up in the build step and the night (it was day
+  only before, so 0132's build line never showed).
+
+**Lines** (both languages; every `TUT_*` row is now measured by
+`tools/i18n_check.py` at 462 px, the prompt's width):
+- `TUT_BED`: "Done for the day? Sleep in the bed in the house, or press GO TO
+  BED."
+- `TUT_BUILD`, rewritten: "Pick from the bar below and set it between the
+  house and the dark."
+- `TUT_START`: "When it is all set, press START. Nothing comes until you do."
+- `TUT_DAWN`: "Keep the house standing until dawn - the countdown is up top."
+
+They are practical lines, and none of them uses the words 0041 keeps out
+(wave, defence, zombie...).
+
+**Tests:**
+- `_task_0141_tutorial` (headless_v1) jumps `dawn_at` rather than playing the
+  night.
+  - A scripted first day completes every step up to START, in the order of the
+    lines. The night held to dawn then completes the last one, and the
+    tutorial is finished on day 2.
+  - The same script on a farm whose player read nothing - every line done
+    before the day starts - reaches the same night and the same morning, hash
+    for hash, apart from `tutorial`.
+  - Each night line's anchor and place are checked: the door, the bed, open
+    ground off the house, START, and the countdown.
+- `_case_0141_tutorial` (input_v1):
+  - the bed's line after the day's five, with its pointer over the bed in the
+    house;
+  - the build line in the build step, then START's, its pointer down at
+    START and the line clear of the hotbar;
+  - after START, dawn's line, its pointer up at the countdown.
+- `_task_0041_tutorial` (headless_check) now covers nine lines.
+  - Each line sits on a cell, the bed, START or the countdown, in its own part
+    of the day, and the covered ids include bed, start and dawn.
+  - The last line now ends with a night held rather than with the night sent
+    for.
+- `_case_0041_tutorial` (input_check) now follows the prompt into the build
+  step instead of expecting nothing at night.
+- Shots: `tutorial_bed`, `tutorial_start` and `tutorial_dawn` are new, for 26
+  scenarios (`headless_check`'s count and list are updated).
+  - `implementation/shots/0141/` was opened in both languages.
+  - The bed's line runs along the top of the room with its "v" on the
+    pillow. START's sits above the hotbar with its "v" at COMEÇAR. Dawn's sits
+    under the strip with its "^" under DAWN 4:00.
+
+Files:
+- src/core/{game_data,tutorial,sim}.gd
+- src/ui/{tutorial_prompt,house_view,main}.gd
+- src/tools/{perf_names,shot,headless_check,input_check,headless_v1,input_v1}.gd
+- assets/locale/strings.csv
+- tools/determinism_{sim,data}_hash.txt
+- implementation/shots/0141/
+
+Perf: `night_tutorial` (17 us) was added to `tools/perf_baseline.txt` by hand.
+Every row `PerfNames` times must have a number there
+(`_task_0102_budget`). `--accept` would have re-recorded every other row
+with this run's noise.
+
+Verify: **PASS**, 59 passed in 565 s (OVER BUDGET as before). Suite times:
+headless_check 87.6 s, headless_v1 3.9 s, input_check 90.5 s, input_v1 22.7 s.
+Counts: headless_check 16240 (+8), headless_v1 287 (+9: `_task_0141_tutorial`),
+input_check 1064, input_v1 158 (+7: `_case_0141_tutorial`). The first full
+run also caught two things, both fixed: shot.gd needs a `_set_<name>` per
+scenario, so each tutorial scenario has a thin one; and the missing perf row.
+
+**sim 1222657941 -> 3911863006**: the determinism scenario's tutorial state
+differs. Its farm goes to bed, builds and fights, so `done` now ends
+bed, build, start where it ended night, build. `start` is seen by the
+night's own beat, which is new. Its night is lost, so `dawn` stays open.
+**data 898358060 -> 3047858822**: `TUTORIAL` (nine steps) is in `digest()`.

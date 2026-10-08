@@ -879,9 +879,11 @@ const EMPTY_DAMAGE_PERCENT := 30        # LEVER: percent of normal, 10-60
 
 ## How much day one is allowed to say.
 ##
-## The task allows seven lines; five is what it takes. The length is here too
-## because a line that wraps is two lines wearing a hat.
-const MAX_TUTORIAL_LINES := 7           # LEVER: lines, 3-9
+## Nine since task 0141: the five day lines and the four of the new night -
+## to bed, the build step, START, dawn - the top of the range rather than
+## two day lines merged into one that says two things. The length is here
+## too because a line that wraps is two lines wearing a hat.
+const MAX_TUTORIAL_LINES := 9           # LEVER: lines, 3-9
 const MAX_TUTORIAL_LINE_LENGTH := 76    # LEVER: characters, 40-90
 
 
@@ -928,16 +930,24 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 ## a line that said "your farm becomes the map you defend" would be a line
 ## spending a stranger's attention on something the game is about to do to
 ## them anyway. There is a check for that.
+##
+## **Nine since task 0141**, the night's four after the day's five: go to bed,
+## set something down in the build step, press START, hold till dawn. They
+## are practical lines too - what to press and where - and the first night
+## is taught as it is played, in the build step and the waves, where the
+## prompt now follows.
 const TUTORIAL: Array = [
 	{"id": &"chop", "line": &"TUT_CHOP"},
 	{"id": &"plant", "line": &"TUT_PLANT"},
 	{"id": &"water", "line": &"TUT_WATER"},
 	{"id": &"sell", "line": &"TUT_SELL"},
 	{"id": &"craft", "line": &"TUT_CRAFT"},
-	{"id": &"night", "line": &"TUT_NIGHT"},
-	# **After the night is sent for** (task 0132): defences go down in the
-	# build step and the night now. 0141 writes the rest of the night's.
+	# **The new night** (task 0141): to bed, which is the switch; the build
+	# step, where defences go down since 0132; START; and holding till dawn.
+	{"id": &"bed", "line": &"TUT_BED"},
 	{"id": &"build", "line": &"TUT_BUILD"},
+	{"id": &"start", "line": &"TUT_START"},
+	{"id": &"dawn", "line": &"TUT_DAWN"},
 ]
 
 

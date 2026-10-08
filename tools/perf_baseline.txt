@@ -20,6 +20,7 @@ night_reactions 3
 night_tick 594
 night_towers 1028
 night_traps 45
+night_tutorial 17
 night_waves 1
 path_refresh 7918
 view_lighting 0

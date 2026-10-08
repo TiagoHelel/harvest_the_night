@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 14
+const V1_CASES := 15
 
 
 func _process(delta: float) -> bool:
@@ -64,6 +64,7 @@ func _run() -> void:
 	await _case_0138_morning()
 	await _case_0139_night_hud()
 	await _case_0140_bedtime()
+	await _case_0141_tutorial()
 	_finish()
 
 
@@ -1389,5 +1390,89 @@ func _case_0140_bedtime() -> void:
 	expect(int(state["phase"]) == Phases.PREPARATION,
 		"clicking GO TO BED at 23:00 starts the night",
 		Phases.name_of(int(state["phase"])))
+	await close_scene()
+	_completed += 1
+
+
+## 0141 - the first night is taught: the bed's line after the day's, the
+## build step's and START's in the build step, dawn's in the night.
+func _case_0141_tutorial() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var prompt: TutorialPrompt = require_control("TutorialPrompt")
+	var house_view: HouseView = require_control("HouseView")
+	if driver == null or prompt == null or house_view == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(3)
+	var line: Label = require_control("TutorialLine") as Label
+	var arrow: Label = require_control("TutorialArrow") as Label
+
+	# **After the day's five, the bed's line**, over the farmhouse door.
+	((state["tutorial"] as Dictionary)["done"] as Array).assign(
+		[&"chop", &"plant", &"water", &"sell", &"craft"])
+	await until(func() -> bool: return prompt.showing() == &"bed", "the bed's line")
+	expect(prompt.visible and prompt.showing() == &"bed"
+		and line.text == I18n.t(&"TUT_BED"),
+		"after the day's lines comes the bed's", line.text)
+
+	# **In the house it sits over the bed.**
+	_stand_at(state, House.porch(state))
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return House.inside(state), "the house")
+	await frames(3)
+	var bed := House.bed()
+	var over := house_view.room_to_screen(Vector2i(bed.position.x + bed.size.x / 2,
+		bed.position.y))
+	expect(prompt.visible and prompt.showing() == &"bed"
+		and absf(arrow.position.x + 2.0 - over.x) < 4.0,
+		"in the house the line stays, its pointer over the bed",
+		"%s against %s" % [arrow.position, over])
+
+	# **To bed, and the build step's line.**
+	var side := Vector2i(-1, -1)
+	for y in range(3, House.ROOM.y - 1):
+		for x in range(1, House.ROOM.x - 1):
+			if side.x < 0 and House.bedside(Vector2i(x, y)):
+				side = Vector2i(x, y)
+	_stand_at(state, side, Player.NORTH)
+	await frames(3)
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"the bed to start the night")
+	await until(func() -> bool: return prompt.showing() == &"build",
+		"the build step's line", 100000)
+	expect(prompt.visible and line.text == I18n.t(&"TUT_BUILD"),
+		"in the build step the build line is up", line.text)
+
+	# **A wall down, and START's line, pointing at START.**
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	expect(Building.place(state, &"wall", SuiteKit.any_buildable(state)),
+		"a wall goes down")
+	await until(func() -> bool: return prompt.showing() == &"start", "START's line")
+	await frames(2)
+	var start: Button = require_control("StartButton") as Button
+	expect(prompt.visible and line.text == I18n.t(&"TUT_START")
+		and start != null and absf(arrow.position.x + 2.0
+			- start.get_global_rect().get_center().x) < 4.0
+		and arrow.position.y < start.get_global_rect().position.y,
+		"then START's line, its pointer down at the button",
+		"%s against %s" % [arrow.position, start.get_global_rect() if start else Rect2()])
+	var box := line.get_global_rect()
+	expect(box.end.y <= Hotbar.AT.y, "and clear of the hotbar", str(box))
+
+	# **START, and dawn's line under the countdown.**
+	await click_control("StartButton")
+	await until(func() -> bool: return prompt.showing() == &"dawn", "dawn's line")
+	await frames(2)
+	var countdown: Label = require_control("DawnCountdown") as Label
+	expect(prompt.visible and line.text == I18n.t(&"TUT_DAWN")
+		and countdown != null and absf(arrow.position.x + 2.0
+			- countdown.get_global_rect().get_center().x) < 4.0
+		and arrow.position.y >= countdown.get_global_rect().end.y,
+		"in the night, dawn's line, its pointer up at the countdown",
+		"%s against %s" % [arrow.position, countdown.get_global_rect() if countdown else Rect2()])
 	await close_scene()
 	_completed += 1

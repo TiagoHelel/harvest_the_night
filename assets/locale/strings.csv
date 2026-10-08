@@ -408,13 +408,15 @@ TITLE_OPTIONS,140,OPTIONS,OPÇÕES
 TITLE_PRESS_ANY,0,PRESS ANY KEY,APERTE QUALQUER TECLA
 TITLE_QUIT,140,QUIT,SAIR
 TITLE_STATS,140,STATISTICS,ESTATÍSTICAS
-TUT_BUILD,0,"At night, B shows what can go on the farm. Put it between the house and the dark.","À noite, B mostra o que cabe na fazenda. Ponha entre a casa e o escuro."
-TUT_CHOP,0,Wood is in the trees. Stand at one and hold SPACE.,A madeira está nas árvores. Fique numa e segure ESPAÇO.
-TUT_CRAFT,0,The workshop turns what you gathered into walls.,A oficina vira o que você colheu em muros.
-TUT_NIGHT,0,"The night comes when you send for it, and not before. N, or the button.","A noite vem quando você chamar, e não antes. N, ou o botão."
-TUT_PLANT,0,"Soil takes a seed. SPACE turns it, SPACE sows it.","A terra aceita semente. ESPAÇO revolve, ESPAÇO planta."
-TUT_SELL,0,"The stall buys what you gathered, and sells wood, stone and iron.","A banca compra o que você colheu, e vende madeira, pedra e ferro."
-TUT_WATER,0,"Crops come up sooner watered. Walk to the water to fill the can.","Regada, a planta cresce antes. Chegue na água para encher o regador."
+TUT_BED,462,"Done for the day? Sleep in the bed in the house, or press GO TO BED.","Acabou o dia? Durma na cama da casa, ou aperte IR DORMIR."
+TUT_BUILD,462,Pick from the bar below and set it between the house and the dark.,Escolha na barra de baixo e ponha entre a casa e o escuro.
+TUT_CHOP,462,Wood is in the trees. Stand at one and hold SPACE.,A madeira está nas árvores. Fique numa e segure ESPAÇO.
+TUT_CRAFT,462,The workshop turns what you gathered into walls.,A oficina vira o que você colheu em muros.
+TUT_DAWN,462,Keep the house standing until dawn - the countdown is up top.,Mantenha a casa de pé até o amanhecer - a contagem está lá em cima.
+TUT_PLANT,462,"Soil takes a seed. SPACE turns it, SPACE sows it.","A terra aceita semente. ESPAÇO revolve, ESPAÇO planta."
+TUT_SELL,462,"The stall buys what you gathered, and sells wood, stone and iron.","A banca compra o que você colheu, e vende madeira, pedra e ferro."
+TUT_START,462,"When it is all set, press START. Nothing comes until you do.","Quando estiver tudo pronto, aperte COMEÇAR. Nada vem antes disso."
+TUT_WATER,462,Crops come up sooner watered. Walk to the water to fill the can.,"Regada, a planta cresce antes. Chegue na água para encher o regador."
 VID_CAP,86,FPS CAP,LIMITE FPS
 VID_CAP_OFF,42,OFF,SEM
 VID_COUNTDOWN,230,KEEP THIS? BACK IN %ds,MANTER ASSIM? VOLTA EM %ds

@@ -4,9 +4,10 @@ extends RefCounted
 ## Day one teaches itself.
 ##
 ## `design.md` does not have a tutorial level and is not getting one. What it
-## has is a first day on the same farm as every other day, with **seven short
+## has is a first day on the same farm as every other day, with **nine short
 ## lines** that appear on the thing they are about and go away the moment you
-## do it.
+## do it - five for the day, and since task 0141 four for the first night: to
+## bed, the build step, START, dawn.
 ##
 ## ## It watches; it never gates
 ##
@@ -14,7 +15,7 @@ extends RefCounted
 ## must chop a tree before you may plant", no greyed button, no cage. A step is
 ## finished when the state says it happened, whether the player read the line
 ## or found it on their own - and a player who already knows the game will walk
-## past all seven in about forty seconds without ever reading one.
+## past all nine without ever reading one.
 ##
 ## That is the difference between teaching and locking, and it is also why this
 ## is safe: **removing every prompt changes nothing about what is possible.**
@@ -25,7 +26,9 @@ extends RefCounted
 ## A step names a cell, worked out from the farm - the nearest tree, the first
 ## bare plot, the workshop. `src/ui/` draws the line over that cell. A tutorial
 ## that put its text in a corner would be a manual; one that puts it on the
-## tree is a label.
+## tree is a label. The night's steps sit on what they are about too
+## (`anchor_of`): the bed in the house view, the ground between the house and
+## the spawn, the START button, the dawn countdown.
 ##
 ## ## The flag lives outside
 ##
@@ -36,6 +39,12 @@ extends RefCounted
 
 ## Nothing to show.
 const NOWHERE := Vector2i(-1, -1)
+
+## **When each night step is taught** (task 0141), by phase: the build
+## step's two in the build step, dawn in the night. Every other step - the
+## day's five, and going to bed - is taught by day.
+const TAUGHT_IN := {&"build": Phases.PREPARATION, &"start": Phases.PREPARATION,
+	&"dawn": Phases.NIGHT}
 
 
 static func initial() -> Dictionary:
@@ -69,6 +78,20 @@ static func current(state: Dictionary) -> Dictionary:
 	return {}
 
 
+## **The step taught now** (task 0141): the first unfinished one that belongs
+## to this part of the day (`TAUGHT_IN`), or an empty Dictionary. The order is
+## a suggestion, so a stall never visited by day does not keep the build
+## step's line off the build step.
+static func current_here(state: Dictionary) -> Dictionary:
+	var phase := int(state["phase"])
+	for entry in steps():
+		var step: Dictionary = entry
+		var id := StringName(step["id"])
+		if not is_done(state, id) and int(TAUGHT_IN.get(id, Phases.DAY)) == phase:
+			return step
+	return {}
+
+
 static func is_finished(state: Dictionary) -> bool:
 	return current(state).is_empty()
 
@@ -78,13 +101,33 @@ static func progress(state: Dictionary) -> int:
 	return ((state["tutorial"] as Dictionary)["done"] as Array).size()
 
 
-## The cell the current line should be drawn over, or `NOWHERE`.
+## Where the current line sits (task 0141): `&"cell"` over the farm cell
+## `points_at` names; `&"room"` over a cell of the farmhouse's room - the bed,
+## while he is inside; `&"start"`, the START button of the build step; and
+## `&"dawn"`, the night's countdown. `&""` when there is nothing to show. The
+## view finds the two controls by name; the rules only name them.
+static func anchor_of(state: Dictionary) -> StringName:
+	var step := current_here(state)
+	if step.is_empty():
+		return &""
+	match StringName(step["id"]):
+		&"bed":
+			return &"room" if House.inside(state) else &"cell"
+		&"start":
+			return &"start"
+		&"dawn":
+			return &"dawn"
+	return &"cell"
+
+
+## The cell the current line should be drawn over, or `NOWHERE` - a farm
+## cell, or a room cell when `anchor_of` says `&"room"`.
 ##
 ## Worked out from the farm rather than written in the table, because the
 ## nearest tree is not a fact about the tutorial, it is a fact about where the
 ## player is standing.
 static func points_at(state: Dictionary) -> Vector2i:
-	var step := current(state)
+	var step := current_here(state)
 	if step.is_empty():
 		return NOWHERE
 	return _target_for(state, StringName(step["id"]))
@@ -115,12 +158,43 @@ static func _target_for(state: Dictionary, id: StringName) -> Vector2i:
 			return _nearest(state, Farm.cells_with(state, &"shop"))
 		&"craft":
 			return _nearest(state, Farm.cells_with(state, &"workshop"))
+		&"bed":
+			# **The bed** (task 0141): in the room while he is in the house,
+			# and the farmhouse's door while he is out on the farm.
+			if House.inside(state):
+				var bed := House.bed()
+				return Vector2i(bed.position.x + bed.size.x / 2, bed.position.y)
+			return House.porch(state)
 		&"build":
-			# The ground between the farm and where they come from.
-			return _nearest(state, Farm.cells_with(state, &"house"))
-		&"night":
-			return _nearest(state, Farm.cells_with(state, &"house"))
+			# The ground between the house and where they come from.
+			return _between_house_and_spawn(state)
 	return NOWHERE
+
+
+## **Between the house and where they come from** (task 0141): a third of
+## the way from the house to the nearest spawn cell, on the nearest ground a
+## defence could take. Read off `GameData.SPAWNS`, never through
+## `Enemies.spawn_cells`, which rebuilds the path field to answer - and the
+## view asks this every frame.
+static func _between_house_and_spawn(state: Dictionary) -> Vector2i:
+	var house := Farm.house_centre(state)
+	var nearest := NOWHERE
+	var best := 1 << 30
+	for region in GameData.SPAWNS:
+		for entry in (region as Array):
+			var cell := Vector2i(int(entry[0]), int(entry[1]))
+			var apart := absi(cell.x - house.x) + absi(cell.y - house.y)
+			if apart < best:
+				best = apart
+				nearest = cell
+	if nearest == NOWHERE:
+		return house
+	var aim := house + (nearest - house) / 3
+	for radius in 6:
+		for candidate in Grid.within(aim, radius):
+			if Grid.in_bounds(candidate) and Farm.buildable(state, candidate):
+				return candidate
+	return aim
 
 
 ## Whichever of these the player is closest to. Ties go to the lowest cell
@@ -142,8 +216,9 @@ static func _nearest(state: Dictionary, cells: Array) -> Vector2i:
 
 # ------------------------------------------------------------------ the tick
 
-## One tick of watching. Called from `Sim._tick_day()` and from the moment the
-## night begins, because the last step is starting one.
+## One tick of watching. Called from the day, the build step and - since
+## task 0141, whose last steps are START and dawn - the night, and never
+## while he is in the house.
 ##
 ## **It only ever adds to `done`.** A step cannot un-finish: chopping a tree
 ## and then selling the wood does not put the first line back on screen.
@@ -221,12 +296,23 @@ static func _happened(state: Dictionary, id: StringName) -> bool:
 				return true
 			# Or anything at all on a bench, so queuing counts as learning it.
 			return not (state["crafting"] as Dictionary).is_empty()
+		&"bed":
+			# **Asleep seen** (task 0141), however he got there: the bed, the
+			# button, or 02:00.
+			return House.asleep(state)
 		&"build":
+			# A defence standing - and since task 0132 one only goes down in a
+			# build step, so one standing is one placed there.
 			for found in (state["occupants"] as Dictionary).keys():
 				var on: Dictionary = (state["occupants"] as Dictionary)[found]
 				if GameData.DEFENCES.has(StringName(on["id"])):
 					return true
 			return false
-		&"night":
-			return int(state["phase"]) != Phases.DAY
+		&"start":
+			# **NIGHT reached**: START, or a pass-out's own timer.
+			return int(state["phase"]) == Phases.NIGHT
+		&"dawn":
+			# **A night held**, at dawn or with nothing left alive: both are a
+			# night won since task 0137.
+			return Phases.nights_won(state) > 0
 	return false

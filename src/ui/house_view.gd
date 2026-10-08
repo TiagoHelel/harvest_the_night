@@ -250,6 +250,13 @@ func is_showing_blackout() -> bool:
 	return _black_left > 0.0
 
 
+## Where a cell of the room is on screen, its middle (task 0141): what the
+## tutorial's line about the bed sits over.
+func room_to_screen(cell: Vector2i) -> Vector2:
+	return _clip.position + _room.position \
+		+ (Vector2(cell) + Vector2.ONE * 0.5) * float(GameData.TILE_SIZE)
+
+
 ## Whether the room is up on screen - for `input_v1`. **The morning has no
 ## beat of its own** (task 0138, the owner's call): confirming the report
 ## brings the room up with him already standing beside the bed.
