@@ -662,7 +662,11 @@ const DEFENCES: Dictionary = {
 		"ammo": {INCENDIARY: 1},
 		# One thing at a time until a level says otherwise.
 		"targets": 1,
-		"ammo_every_ticks": 2 * SECONDS,
+		# **One round per this many ticks of firing**, not one a cone: a
+		# round is two seconds of flame. Read by `Towers._load()` since task
+		# 0116 - before that nothing did, and the cone burnt a round twice a
+		# second.
+		"ammo_every_ticks": 2 * SECONDS,  # LEVER: ticks, 1-4 seconds worth
 		"energy_draw": 2,
 	},
 	&"mortar": {
@@ -2178,6 +2182,19 @@ static func check_defences(defences: Dictionary) -> Array:
 				if not RESOURCES.has(res):
 					errors.append("defence '%s' fires unknown '%s'"
 						% [defence_id, res])
+		# **A round per so many ticks of firing needs rounds, and at least a
+		# shot's worth of ticks** (task 0116): fewer than `reload_ticks`
+		# would light a fresh round for every single shot, which is the
+		# one-a-shot rule wearing a different number.
+		if defence.has("ammo_every_ticks"):
+			var every := int(defence["ammo_every_ticks"])
+			if not defence.has("ammo"):
+				errors.append(("defence '%s' spends a round every %d ticks and "
+					+ "fires no rounds") % [defence_id, every])
+			elif every < int(defence.get("reload_ticks", 0)):
+				errors.append(("defence '%s' spends a round every %d ticks, "
+					+ "sooner than it fires (every %d)")
+					% [defence_id, every, int(defence["reload_ticks"])])
 		if defence.has("min_range") and defence.has("range"):
 			if int(defence["min_range"]) >= int(defence["range"]):
 				errors.append(("defence '%s' has a minimum range at or past "

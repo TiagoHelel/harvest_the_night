@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **114 / 296 done**
+`#########...............`  **115 / 296 done**
 
-0 doing / 182 todo / 0 blocked across 18 phases.
+0 doing / 181 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0116 - The mortar and the flamethrower, empty and upgraded**. The whole of what is left is
+First up: **0117 - Three stale documents**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,28 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-182 task(s) left, the ready ones first, then what they
+181 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0116 - The mortar and the flamethrower, empty and upgraded
-
-Ready to pick up.  Likely files: `src/core/towers.gd, src/core/ammo.gd, src/core/game_data.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
-
-Two towers may not do what their tables say. An empty mortar may lob a rock that hits nobody, and the flamethrower may ignore the tree's damage and range bonuses while burning two incendiary rounds a second. Reproduce each and fix only what is real.
-
-- Mortar: `Towers._fire` makes an unarmed shot `SHAPE_SINGLE` but leaves it ballistic, and `_advance_projectiles` lands a ballistic shot with `_land_at(state, shot, cell)` and no target, so a single-shape landing hits nobody. Reproduce through `Towers.tick`: a mortar placed in PREPARATION, a walker standing in range beyond `min_range`, the gunpowder pool empty, ticks until the shell lands. The seams `land_for_test`/`land_at_for_test` always build an armed shot with the entry's shape, so they cannot show it; give one an `armed` argument if a seam helps
-- If real, the empty shell deals `Ammo.weak_damage` to what it lands on - the walker on the aimed cell or the target it was fired at, decide - and never 0: out of ammunition is a worse shot, never a silent tower (0035)
-- Flamethrower: `_burn_cone` reads `entry["damage"]` and `entry["range"]` raw while `_acquire` uses `reach_of`; with 'long barrels' it can pick a target one tile past its cone, spend a round and hit nothing. Use `Towers.damage_of(state, entry, armed)` and `reach_of(state, entry)`, and decide whether `tower_damage_percent` scales `burn_damage` too
-- `ammo_every_ticks` (2 s on the flame tower) is read by nothing: `Ammo.spend` runs on every cone, twice a second (`reload_ticks` is `SECONDS / 2`). Charge one round per `ammo_every_ticks` of firing, the countdown on the occupant dictionary without `Farm.touch`, defaulting when an old save has no such key
-- Mark `ammo_every_ticks` `# LEVER: ticks, 1-4 seconds worth`; `check_defences` refuses one on an entry without `ammo` or shorter than its `reload_ticks`
-- New asserts go in `headless_v1`. An old assert that encoded a bug (`_task_0035_ammunition`, `_task_0043_flame`, `_task_0044_mortar` are where to look) is rewritten in place with a comment pointing at 0116
-- Run `python tools/autoplay.py` before and after (its policies build mortars); SIM moves only if the determinism scenario touches these towers (it builds gun towers, which use no ammunition, and walls) - say which. DATA moves only if a table value changes; a `# LEVER` comment moves nothing
-
-  - done when: `_task_0116_ammo` in `headless_v1`: an unarmed mortar shell landing on a walker takes `Ammo.weak_damage` of the mortar's damage off it (40 -> 12 at `EMPTY_DAMAGE_PERCENT` 30)
-  - done when: With 'long barrels' a flame tower's cone hits a walker at range + 1; with 'true sights' (`tower_damage_percent` 120) the cone deals `Towers.damage_of` - assert it on the level-3 flame row (damage 5 -> 6), because level one's 3 rounds back to 3 in integer arithmetic
-  - done when: A flame tower firing for 10 s on a full pool spends 5 rounds (10 s / `ammo_every_ticks`), not 20
-  - done when: The journal says which of the three suspicions were real, with the autoplay table before and after
 
 ### 0117 - Three stale documents
 
@@ -3488,13 +3469,13 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (4/14)
+## 9 - v1.0 groundwork  (5/14)
 
 - [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
 - [x] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
 - [x] **0114** [Untouched means the house the night started with](prompts/0114-untouched-house.md)
 - [x] **0115** [Spawn ground that cannot be built shut](prompts/0115-spawn-room.md)
-- [ ] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md)
+- [x] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md)
 - [ ] **0117** [Three stale documents](prompts/0117-stale-docs.md)
 - [ ] **0118** [One road into the waves](prompts/0118-one-road-into-night.md)
 - [ ] **0119** [Tests and tools build in the build step](prompts/0119-build-in-preparation.md) - needs 0118

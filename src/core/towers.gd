@@ -101,7 +101,7 @@ static func tick(state: Dictionary) -> void:
 		# **A round comes out of the pool, or the shot is a bad one.** Not a
 		# silent tower: `design.md` does not do punishment mechanics, and a
 		# tower that stopped is a tower the player stops looking at.
-		var armed := Ammo.spend(state, tower["id"])
+		var armed := _load(state, tower, entry)
 		# **Every shot, whatever shape it is.** Three of the four shapes fire
 		# nothing that flies - a cone and a line land at once - so counting
 		# projectiles stopped meaning "did it shoot" the moment the
@@ -140,6 +140,34 @@ static func tick(state: Dictionary) -> void:
 		if not armed:
 			reload_ticks = Ammo.weak_reload(reload_ticks)
 		tower["reload"] = Power.scaled_ticks(state, reload_ticks)
+		# The round burns for the whole wait until the next shot: this one
+		# covers `reload + 1` ticks of firing, the tick it fired on included.
+		if armed and tower.has("ammo_lit"):
+			tower["ammo_lit"] = maxi(int(tower["ammo_lit"])
+				- int(tower["reload"]) - 1, 0)
+
+
+## A round out of the pool for one shot, or false for a bad one.
+##
+## **Most towers pay a round a shot. A flamethrower pays a round per
+## `ammo_every_ticks` of firing** (task 0116): its table said two seconds of
+## flame to a round from the day it was written, nothing read it, and a cone
+## twice a second went through twenty rounds where it should have burnt five.
+## What is left of the lit round is a countdown on the occupant itself -
+## per-tower bookkeeping that changes no shape on the farm, so no
+## `Farm.touch()` - and a save from before it has no such key and simply
+## lights its next round.
+static func _load(state: Dictionary, tower: Dictionary,
+		entry: Dictionary) -> bool:
+	var every := int(entry.get("ammo_every_ticks", 0))
+	if every <= 0:
+		return Ammo.spend(state, tower["id"])
+	if int(tower.get("ammo_lit", 0)) > 0:
+		return true
+	if not Ammo.spend(state, tower["id"]):
+		return false
+	tower["ammo_lit"] = every
+	return true
 
 
 ## Reload everything, without looking for targets. What a quiet tick costs.
@@ -354,8 +382,13 @@ static func _advance_projectiles(state: Dictionary) -> void:
 		if StringName(shot.get("aim", GameData.AIM_GUIDED)) 				== GameData.AIM_BALLISTIC:
 			shot["left"] = int(shot["left"]) - 1
 			if int(shot["left"]) <= 0:
+				# **The target goes along**, for the one ballistic shot that
+				# is not a splash: an empty mortar's rock (task 0116). It
+				# used to land on its cell with nobody to hit, so a mortar
+				# out of powder was a silent tower - which 0035 says out of
+				# ammunition must never be. A splash ignores it.
 				_land_at(state, shot, Vector2i(int(shot["to"][0]),
-					int(shot["to"][1])))
+					int(shot["to"][1])), int(shot.get("target", 0)))
 				landed.append(shot)
 			else:
 				_carry_towards(shot, Vector2i(int(shot["to"][0]),
@@ -473,16 +506,23 @@ static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
 	var aim := Entities.cell_of(state, target) - from
 	if aim == Vector2i.ZERO:
 		aim = Vector2i(1, 0)
-	var reach := int(entry.get("range", 0))
+	# **The tree's reach and damage, like every other shape** (task 0116).
+	# The raw table numbers were read here while `_acquire` used `reach_of`,
+	# so with 'long barrels' the tower picked a target a tile past its own
+	# cone, spent a round and burnt nobody - and 'true sights' never reached
+	# the flame at all.
+	var reach := reach_of(state, entry)
 	var spread := int(entry.get("cone_spread_permille", 0))
-	var damage := int(entry.get("damage", 1))
+	# A pilot light when unarmed: the weak shot of task 0035.
+	var damage := damage_of(state, entry, armed)
+	# **The burn is not scaled by the tree.** 'true sights' makes every tower
+	# *hit* a fifth harder; the burning afterwards is the fire's own number,
+	# and at 2, 3 and 4 a fifth more rounds back to the same integer anyway.
 	var burn := int(entry.get("burn_damage", 0))
 	var burn_ticks := int(entry.get("burn_ticks", 0))
 	if not armed:
-		# A pilot light. The weak shot of task 0035, and no fire at all: what
-		# makes a flamethrower a flamethrower is the thing it cannot do
-		# without rounds.
-		damage = Ammo.weak_damage(damage)
+		# No fire at all: what makes a flamethrower a flamethrower is the
+		# thing it cannot do without rounds.
 		burn = 0
 
 	for id in Entities.ids(state):
@@ -540,12 +580,20 @@ static func _carry_towards(shot: Dictionary, to: Vector2i) -> void:
 ## `target` is who it was chasing, and is only used by `single`: a guided shot
 ## hits what it followed. A splash does not need one, which is why a shell can
 ## land on an empty patch of dirt and still be a mortar shell.
+##
+## **An empty mortar's rock hits the one it was thrown at**, if that one is
+## still alive, wherever it has walked to - not whoever is on the aimed cell.
+## Task 0116 decided it on the numbers: a shell flies 45 ticks and a walker
+## crosses a tile in 20, so the aimed cell is two tiles behind it on landing
+## and a rock that only hit the cell would almost never hit anything. The
+## view already reads a landed shot as landing on its `target` (`Juice`).
 static func _land_at(state: Dictionary, shot: Dictionary, middle: Vector2i,
 		target: int = 0) -> void:
 	var damage := int(shot["damage"])
 	var kind := StringName(shot["type"])
-	if StringName(shot.get("shape", GameData.SHAPE_SINGLE)) 			!= GameData.SHAPE_SPLASH:
-		if target != 0:
+	if StringName(shot.get("shape", GameData.SHAPE_SINGLE)) \
+			!= GameData.SHAPE_SPLASH:
+		if target != 0 and Entities.alive(state, target):
 			Combat.hit(state, target, damage, kind)
 		return
 

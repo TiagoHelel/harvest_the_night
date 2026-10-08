@@ -1,7 +1,7 @@
 # 0116 - The mortar and the flamethrower, empty and upgraded
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0112
 - **Likely files:** src/core/towers.gd, src/core/ammo.gd, src/core/game_data.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd
 

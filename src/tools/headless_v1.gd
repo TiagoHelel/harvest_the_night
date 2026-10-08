@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 4
+const GROUPS := 5
 
 var passed := 0
 var failed := 0
@@ -71,6 +71,7 @@ func _run() -> void:
 	_task_0113_repairs()
 	_task_0114_untouched()
 	_task_0115_spawn_room()
+	_task_0116_ammo()
 
 
 func _finish() -> void:
@@ -446,3 +447,143 @@ func _spawn_line(where: int) -> Array:
 	for entry in (GameData.SPAWNS[where] as Array):
 		out.append(Vector2i(int(entry[0]), int(entry[1])))
 	return out
+
+
+## 0116 - the mortar and the flamethrower, empty and upgraded.
+func _task_0116_ammo() -> void:
+	# **An empty mortar throws a rock at somebody.** Through `Towers.tick`,
+	# the real path: placed in PREPARATION, the powder gone, a walker standing
+	# beyond `min_range`. It used to land on its cell with nobody to hit.
+	var empty := _tower_night(1161, &"mortar", [])
+	var mortar: Dictionary = GameData.DEFENCES[&"mortar"]
+	Resources.spend(empty["state"], GameData.GUNPOWDER,
+		Resources.amount(empty["state"], GameData.GUNPOWDER))
+	var at: Vector2i = empty["tower"]
+	var one := Entities.spawn(empty["state"], &"walker", at + Vector2i(6, 0))
+	var two := Entities.spawn(empty["state"], &"walker", at + Vector2i(6, 1))
+	# Which one it throws at is the tower's own rule (nearest the house);
+	# the other stands one tile off the aimed cell.
+	var walker := Towers.target_of(empty["state"], at)
+	var beside := two if walker == one else one
+	expect(walker == one or walker == two, "the mortar picks one of them",
+		str(walker))
+	var hp := int(Entities.get_one(empty["state"], walker)["hp"])
+	var fired := false
+	for _i in 300:
+		Towers.tick(empty["state"])
+		if Towers.shots_fired(empty["state"]) > 0:
+			fired = true
+		if fired and Towers.in_flight(empty["state"]) == 0:
+			break
+	var weak := Ammo.weak_damage(int(mortar["damage"]))
+	expect(weak == 12, "an empty mortar's rock is 40 -> 12 at 30 percent",
+		str(weak))
+	var took := hp - int(Entities.get_one(empty["state"], walker).get("hp", 0))
+	expect(fired and took == weak, "and it takes 12 off the walker it was thrown at",
+		"took %d, fired %s" % [took, fired])
+	expect(int(Entities.get_one(empty["state"], beside)["hp"]) == hp,
+		"and nothing off the one beside it - a rock does not splash")
+
+	# **The cone reaches what 'long barrels' lets it aim at.** With the tree
+	# the tower picks a target at range + 1; the cone used to stop at range,
+	# spend the round and burn nobody.
+	var far := _tower_night(1162, &"flame_tower", [&"true sights", &"long barrels"])
+	var flame: Dictionary = GameData.DEFENCES[&"flame_tower"]
+	var reach := Towers.reach_of(far["state"], flame)
+	expect(reach == int(flame["range"]) + 1, "long barrels: one tile further",
+		str(reach))
+	var out_there := Entities.spawn(far["state"], &"walker",
+		(far["tower"] as Vector2i) + Vector2i(reach, 0))
+	Towers.tick(far["state"])
+	expect(int(Entities.get_one(far["state"], out_there)["hp"]) == hp
+		- Towers.damage_of(far["state"], flame),
+		"the cone burns a walker at range + 1",
+		str(Entities.get_one(far["state"], out_there)["hp"]))
+
+	# **And hits as hard as 'true sights' says**: on the level-3 row, 5 -> 6.
+	# Level one's 3 is 3.6, which integer arithmetic rounds back to 3.
+	var hot := _tower_night(1163, &"flame_tower", [&"true sights"])
+	var cell: Vector2i = hot["tower"]
+	Farm.occupant(hot["state"], cell)["level"] = 3
+	var top := Building.entry_at(hot["state"], cell)
+	var tough := Entities.spawn(hot["state"], &"walker", cell + Vector2i(1, 0))
+	Entities.get_one(hot["state"], tough)["hp"] = 1000
+	Towers.tick(hot["state"])
+	expect(int(top["damage"]) == 5 and Towers.damage_of(hot["state"], top) == 6,
+		"level three's 5 is 6 with true sights", str(top["damage"]))
+	expect(1000 - int(Entities.get_one(hot["state"], tough)["hp"]) == 6,
+		"and the cone deals the 6",
+		str(1000 - int(Entities.get_one(hot["state"], tough)["hp"])))
+	var alight: Dictionary = (hot["state"]["burning"] as Dictionary).get(tough, {})
+	expect(int(alight.get("damage", -1)) == int(top["burn_damage"]),
+		"the burn is the fire's own number, not scaled by the tree",
+		"%s against %d" % [str(alight), int(top["burn_damage"])])
+	expect(Towers.damage_of(hot["state"], flame) == 3,
+		"level one's 3 rounds back to 3")
+
+	# **A round per two seconds of flame, not per cone.** Ten seconds of
+	# firing on a full pool: five rounds, where it used to be one a shot.
+	var long := _tower_night(1164, &"flame_tower", [])
+	var pool := Resources.amount(long["state"], GameData.INCENDIARY)
+	var held := Entities.spawn(long["state"], &"walker",
+		(long["tower"] as Vector2i) + Vector2i(1, 0))
+	Entities.get_one(long["state"], held)["hp"] = 1000000
+	var version := int(long["state"]["grid_version"])
+	var lit_key := false
+	for i in 10 * GameData.TICK_HZ:
+		Towers.tick(long["state"])
+		if i == 0:
+			lit_key = Farm.occupant(long["state"], long["tower"]).has("ammo_lit")
+	var spent := pool - Resources.amount(long["state"], GameData.INCENDIARY)
+	var every := int(flame["ammo_every_ticks"])
+	expect(spent == 10 * GameData.TICK_HZ / every,
+		"ten seconds of flame burn five rounds, not twenty",
+		"%d rounds for %d shots" % [spent, Towers.shots_fired(long["state"])])
+	expect(Towers.shots_fired(long["state"]) > spent * 3,
+		"while the cone still goes off twice a second",
+		str(Towers.shots_fired(long["state"])))
+	expect(lit_key and int(long["state"]["grid_version"]) == version,
+		"the countdown is on the occupant and never touches the farm")
+
+	# **An old save has no countdown** and simply lights its next round.
+	var old := _tower_night(1165, &"flame_tower", [])
+	var target := Entities.spawn(old["state"], &"walker",
+		(old["tower"] as Vector2i) + Vector2i(1, 0))
+	Entities.get_one(old["state"], target)["hp"] = 1000000
+	var before := Resources.amount(old["state"], GameData.INCENDIARY)
+	Towers.tick(old["state"])
+	Farm.occupant(old["state"], old["tower"]).erase("ammo_lit")
+	Farm.occupant(old["state"], old["tower"])["reload"] = 0
+	Towers.tick(old["state"])
+	expect(before - Resources.amount(old["state"], GameData.INCENDIARY) == 2,
+		"a tower loaded without the key pays for a fresh round",
+		str(before - Resources.amount(old["state"], GameData.INCENDIARY)))
+
+	# **The table is checked at boot.** A cadence with no rounds, or shorter
+	# than a reload, is refused; the real table passes.
+	var no_rounds := GameData.check_defences({&"test_tower": {"cost": {},
+		"damage": 1, "range": 2, "reload_ticks": 15, "ammo_every_ticks": 60}})
+	var too_quick := GameData.check_defences({&"test_tower": {"cost": {},
+		"damage": 1, "range": 2, "reload_ticks": 15, "ammo_every_ticks": 10,
+		"ammo": {GameData.INCENDIARY: 1}}})
+	expect(str(no_rounds).contains("fires no rounds"),
+		"a round-cadence on a tower without rounds is refused", str(no_rounds))
+	expect(str(too_quick).contains("sooner than it fires"),
+		"and one quicker than its reload", str(too_quick))
+	expect(GameData.check_defences(GameData.DEFENCES).is_empty(),
+		"while the real table passes", str(GameData.check_defences(GameData.DEFENCES)))
+	_completed += 1
+
+
+## A tower of `id` put down in PREPARATION with the given tree, its pools full.
+## Returns the state and the tower's cell.
+func _tower_night(seed_value: int, id: StringName, techs: Array) -> Dictionary:
+	var state := State.create(seed_value)
+	(state["tech_owned"] as Array).append_array(techs)
+	Resources.gain(state, {GameData.WOOD: 900, GameData.STONE: 900,
+		GameData.IRON: 900, GameData.OIL: 900, GameData.GUNPOWDER: 900,
+		GameData.INCENDIARY: 100})
+	Phases.begin_preparation(state)
+	var cell := SuiteKit.any_buildable(state)
+	expect(Building.place(state, id, cell), "a %s goes down" % id, str(cell))
+	return {"state": state, "tower": cell}

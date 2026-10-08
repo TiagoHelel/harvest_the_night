@@ -12929,3 +12929,54 @@ Notes: a sealed line is still worth something to the player - the twelve arrive
 behind the fence and have to chew or walk round it - which is the "blocks and
 delays" design.md wants rather than a win button. 0157's extra regions inherit
 this through `spawn_cells`.
+
+## 0116 - The mortar and the flamethrower, empty and upgraded - done 2026-10-07
+
+**All of the suspicions were real**, each reproduced through `Towers.tick` with
+a scratch script before any fix (deleted after):
+- **Empty mortar**: placed in PREPARATION, powder gone, a walker 6 tiles out -
+  one shell fired and landed, walker 20 -> 20. The unarmed shot is
+  `SHAPE_SINGLE` but stays ballistic, and a ballistic landing passed no target.
+  Fix: a ballistic landing carries its `target`, and a single shape hits it if
+  it is still alive. **Decision: the rock hits the one it was thrown at, not
+  whoever is on the aimed cell** - a shell flies 45 ticks and a walker crosses a
+  tile in 20, so the aimed cell is two tiles behind it on landing and the
+  cell-only rule would leave the empty mortar nearly silent, which 0035 forbids;
+  `Juice` already reads a landed shot as landing on its target. Now 20 -> 8
+  (`Ammo.weak_damage(40)` = 12) and the walker beside it untouched.
+- **Flame reach**: with 'long barrels' the tower aimed at a walker at 4 tiles,
+  spent a round and burnt nobody (cone used the raw range 3). Now `reach_of`.
+- **Flame damage**: level 3 with 'true sights' dealt 5, `damage_of` says 6. Now
+  `damage_of(state, entry, armed)`. **Decision: `burn_damage` is not scaled** -
+  the node says every tower *hits* a fifth harder, and 2, 3, 4 x 1.2 round back
+  to themselves anyway, so scaling would be a rule with no effect today.
+- **Flame rounds**: 10 s on a full pool, 19 shots, 19 rounds. `ammo_every_ticks`
+  (60) is now read by `Towers._load()`: one round lights 60 ticks of firing, a
+  countdown `ammo_lit` on the occupant, charged `reload + 1` ticks per shot, no
+  `Farm.touch`, absent in old saves = light the next round. Now 19 shots, 5
+  rounds. `ammo_every_ticks` carries `# LEVER: ticks, 1-4 seconds worth`;
+  `check_defences` refuses it without `ammo` or under `reload_ticks`.
+No old assert encoded a bug: `_task_0035_ammunition` counts mortar rounds per
+armed shot, `_0043_flame` and `_0044_mortar` test without the tree or with
+powder - all unchanged and passing.
+Files: src/core/towers.gd, src/core/game_data.gd (comment and check only),
+src/tools/headless_v1.gd
+Verify: **58 passed, 0 failed in 530s** (OVER BUDGET 300, as before); headless_check
+16173, headless_v1 87 (+22: `_task_0116_ammo`), input_check 1074, input_v1 11;
+sim 2728872771 and data 1968527100 unchanged (the scenario builds gun towers and
+walls; a `# LEVER` comment and a boot check move nothing).
+Autoplay before and after - **identical**, 100 runs each:
+
+    policy     won  killed by      avg night  avg house  gathered
+    balanced     0  night 8 (21x)       6.9        0.0      5281
+    economy      0  night 2 (21x)       1.8        0.0       556
+    towers       0  night 8 (20x)       6.8        0.0      5627
+    walls        0  night 8 (21x)       8.2        0.0      5426
+
+The robot's mortars never run dry and it builds no flame tower with the tree,
+so none of the four fixes reaches its runs; the ALARM is the one from before.
+Notes: the first two verify runs went red on `backlog index` and then `art
+requests` - OSError 22 writing BACKLOG.md / INDEX.md while Codex and VS Code
+were re-reading them (16 of 20 back-to-back writes failed). Fixed in its own
+commit, ea8a1f4d: tools/textfile.py retries a write for up to 5 s, used by
+gen_backlog, task.py and assets.py; 0 of 40 after.
