@@ -233,6 +233,14 @@ func is_showing_bedtime() -> bool:
 	return _beat_left > 0.0
 
 
+## Cut the bed beat short - what a still wants, as `WorldView.skip_transition`
+## does for the light.
+func skip_bedtime() -> void:
+	if _beat_left > 0.0:
+		_end_bed_beat(House.inside(state))
+		_fade.color.a = 0.0
+
+
 ## Start the bed beat on an ordinary bedtime: asleep this frame and not the
 ## last, and not a collapse at 02:00 (that one plays where he fell).
 func _watch_bedtime() -> void:

@@ -258,6 +258,9 @@ func _barricades() -> void:
 		var cells: Array[Vector2i] = [Vector2i(9, 8), Vector2i(13, 8), Vector2i(17, 8)]
 		for at in cells:
 			_place(&"barricade", at)
+		# Put down in the build step, a barricade's clock starts with the
+		# waves (task 0132): wound here as `Phases.begin_night` winds it.
+		Building.start_lifetimes(_state)
 		Farm.damage(_state, cells[1], 12)
 		Farm.damage(_state, cells[2], 9999)
 		await _settle()

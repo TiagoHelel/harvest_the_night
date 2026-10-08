@@ -124,6 +124,9 @@ static func _tick_day(state: Dictionary) -> void:
 ## stretch of the game where the player is not being asked to hurry.
 static func _tick_preparation(state: Dictionary) -> void:
 	Building.tick(state)
+	# The tutorial's `build` step happens here now (task 0132): defences go
+	# down at night. On its own beat, watching, never gating.
+	Tutorial.tick(state)
 	Player.tick(state)
 	if int(state["phase_tick"]) >= Phases.build_step_ticks(state):
 		Phases.start_waves(state)

@@ -124,6 +124,40 @@ func _hit_points_of(night: int) -> int:
 	return total
 
 
+## How many generators the shopping list will want out of this purse: the
+## buying loop below run on numbers alone, buying a plant whenever the next
+## thing's draw would outrun the supply - which is what the loop itself did
+## in the build step before task 0132 put production buildings on the day.
+func _plants_needed(budget: int) -> int:
+	var left := budget
+	var supply := GameData.BASE_ENERGY
+	var draw := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)
+		.get("energy_draw", 0))
+	var plants := 0
+	var plant_price := _price(&"generator")
+	var at := 0
+	while at < SHOPPING.size() * 12:
+		var id: StringName = SHOPPING[at % SHOPPING.size()]
+		at += 1
+		var price := _price(id)
+		var wants := int((Building.entry_of(id) as Dictionary)
+			.get("energy_draw", 0))
+		while draw + wants > supply and left >= plant_price + price:
+			left -= plant_price
+			supply += _made()
+			plants += 1
+		if draw + wants > supply or left < price:
+			continue
+		left -= price
+		draw += wants
+	return plants
+
+
+## What one generator makes.
+func _made() -> int:
+	return int((GameData.BUILDINGS[&"generator"] as Dictionary)["energy_output"])
+
+
 ## One night, on a farm built out of a budget.
 func _play(night: int, budget: int) -> Dictionary:
 	var state := State.create(5000 + night)
@@ -136,6 +170,16 @@ func _play(night: int, budget: int) -> Dictionary:
 	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
 		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000,
 		GameData.FOOD: 9000})
+
+	# **Power by day, towers by night** (task 0132): a generator goes up by day
+	# only, so the ones the shopping list will need are counted first, off the
+	# same purse and in the same order, and put up before the build step.
+	var plants := _plants_needed(budget)
+	var plant_price := _price(&"generator")
+	for _i in plants:
+		var plant := _room(state, Building.size_of(&"generator"))
+		if plant.x < 0 or not Building.place(state, &"generator", plant):
+			break
 	Phases.begin_preparation(state)
 
 	# **The tutorial's tower.** Night one is meant to be beatable with the one
@@ -152,12 +196,10 @@ func _play(night: int, budget: int) -> Dictionary:
 	# only recomputes on a tick: an earlier version asked it mid-shop, never
 	# saw the draw it had just added, and bought a crossbow line that ran at
 	# the twenty-five percent floor all ten nights.
-	var left := budget
-	var supply := GameData.BASE_ENERGY
+	var left := budget - plants * plant_price
+	var supply := GameData.BASE_ENERGY + plants * _made()
 	var draw := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)
 		.get("energy_draw", 0))
-	var made := int((GameData.BUILDINGS[&"generator"] as Dictionary)
-		["energy_output"])
 	var at := 0
 	while at < SHOPPING.size() * 12:
 		var id: StringName = SHOPPING[at % SHOPPING.size()]
@@ -165,15 +207,6 @@ func _play(night: int, budget: int) -> Dictionary:
 		var price := _price(id)
 		var wants := int((Building.entry_of(id) as Dictionary)
 			.get("energy_draw", 0))
-		while draw + wants > supply:
-			var plant_price := _price(&"generator")
-			if left < plant_price + price:
-				break
-			var plant := _room(state, Building.size_of(&"generator"))
-			if plant.x < 0 or not Building.place(state, &"generator", plant):
-				break
-			left -= plant_price
-			supply += made
 		if draw + wants > supply or left < price:
 			continue
 		var where := _room(state, Building.size_of(id))

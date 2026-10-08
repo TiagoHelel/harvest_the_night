@@ -3394,23 +3394,26 @@ func _task_0023_building() -> void:
 	expect(Resources.amount(banker, GameData.STONE) == stone_banked,
 		"and not the ledger", str(Resources.amount(banker, GameData.STONE)))
 
-	# **Night takes only what says it may.** That is what makes the barricade
-	# the emergency answer rather than a cheaper wall.
+	# **The night takes every defence and the day none** (task 0132, the
+	# plan's decision 4; it used to be "night takes only the barricade").
+	# The day takes the buildings, and the night none of them.
 	var nightly := State.create(123)
 	Resources.gain(nightly, {GameData.WOOD: 100, GameData.STONE: 100})
+	expect(not Building.allowed_in_phase(nightly, &"wall")
+		and Building.allowed_in_phase(nightly, &"workshop"),
+		"the day takes a workshop and no wall")
 	Phases.begin_preparation(nightly)
 	expect(Building.allowed_in_phase(nightly, &"wall"),
-		"preparation takes anything")
+		"the build step takes a wall")
 	NightRoad.through_build(nightly)
 	expect(int(nightly["phase"]) == Phases.NIGHT, "and then it is night")
 	NightRoad.park(nightly)
-	expect(not Building.allowed_in_phase(nightly, &"wall"),
-		"a wall cannot go up mid-wave")
-	expect(Building.allowed_in_phase(nightly, &"barricade"),
-		"but a barricade can")
-	expect(_refused(Building.why_not(nightly, &"wall",
+	expect(Building.allowed_in_phase(nightly, &"wall")
+		and Building.allowed_in_phase(nightly, &"barricade"),
+		"a wall goes up mid-wave, and so does a barricade")
+	expect(_refused(Building.why_not(nightly, &"workshop",
 		SuiteKit.any_buildable(nightly))) == &"WHY_NOT_AT_NIGHT",
-		"and it says why")
+		"but a workshop does not, and it says why")
 
 	# A barricade expires rather than quietly becoming a wall.
 	var quick := SuiteKit.any_buildable(nightly)
@@ -6957,30 +6960,36 @@ func _task_0041_tutorial() -> void:
 	expect(Tutorial.current(rebel)["id"] == &"chop",
 		"the first line is up and being ignored")
 
-	# **By day on purpose**: the tutorial's build step is a day step until
-	# task 0132 moves it to the night and rewrites this.
-	var spot := _room_for(rebel, Vector2i(1, 1))
-	expect(Building.place(rebel, &"gun_tower", spot),
-		"a tower goes down while the game is still saying 'chop a tree'")
 	var bench := Building.anchor_of(rebel,
 		Farm.cells_with(rebel, &"workshop")[0])
 	expect(Crafting.enqueue(rebel, bench, &"wall_kit"),
-		"and the bench takes a job out of order")
+		"the bench takes a job while the game is still saying 'chop a tree'")
 	var plot := _a_plot(rebel)
 	Farming.act(rebel, plot)
 	Farming.act(rebel, plot)
 	expect(Farming.crop_on(rebel, plot) != &"",
 		"and a seed goes in the ground")
+	# **The build step is the night's since task 0132**: sent for at once,
+	# and the tower goes down there.
+	NightRoad.into_build(rebel)
+	var spot := _room_for(rebel, Vector2i(1, 1))
+	expect(Building.place(rebel, &"gun_tower", spot),
+		"and a tower goes down in the first build step, every line unread")
 	Sim.advance(rebel, GameData.TUTORIAL_CHECK_TICKS + 1)
 	expect(Tutorial.progress(rebel) >= 4,
 		"four of the five lines are simply gone, unread",
 		str(Tutorial.progress(rebel)))
 
 	# **And night one is still winnable for the player who read nothing.** The
-	# other done-when, driven to the payout.
-	# By day on purpose, like the line above: 0132 rewrites it.
+	# other done-when, driven to the payout: the night sent for at once and
+	# four towers put down in its build step (task 0132).
 	var armed := State.create(2302)
 	Resources.gain(armed, {GameData.WOOD: 200, GameData.IRON: 200})
+	expect(Tutorial.progress(armed) == 0,
+		"and not a single prompt has been finished on purpose",
+		str(Tutorial.progress(armed)))
+	(armed["intent"] as Dictionary)["sleep"] = true
+	Sim.advance(armed, 1)
 	var placed := 0
 	for y in [7, 9, 11]:
 		for x in range(22, 32):
@@ -6989,12 +6998,6 @@ func _task_0041_tutorial() -> void:
 			if Building.place(armed, &"gun_tower", SuiteKit.moved(Vector2i(x, y))):
 				placed += 1
 	expect(placed == 4, "four towers, which is a day's iron", str(placed))
-	expect(Tutorial.progress(armed) == 0,
-		"and not a single prompt has been finished on purpose",
-		str(Tutorial.progress(armed)))
-
-	(armed["intent"] as Dictionary)["sleep"] = true
-	Sim.advance(armed, 1)
 	NightRoad.through_build(armed)
 	for _t in 12000:
 		Sim.advance(armed, 1)
@@ -8069,25 +8072,30 @@ func _task_0047_barricades() -> void:
 		"the workshop's first recipe is the barricade",
 		str(Crafting.recipes_at(&"workshop")))
 
-	# **It is the only thing that may go down at night.**
+	# **Every defence goes down at night and none by day; buildings only by
+	# day** (task 0132, the plan's decision 4 - this used to be "only the
+	# barricade goes down at night"). Nothing carries `placeable_at_night`.
+	var by_day := State.create(2899)
+	var after_dark := State.create(2899)
+	NightRoad.into_build(after_dark)
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
-		var allowed := bool((GameData.DEFENCES[id]
-			as Dictionary).get("placeable_at_night", false))
-		expect(allowed == (id == &"barricade"),
-			"only the barricade goes down at night, not the %s" % id)
+		expect(not Building.allowed_in_phase(by_day, id)
+			and Building.allowed_in_phase(after_dark, id)
+			and not (GameData.DEFENCES[id] as Dictionary).has("placeable_at_night"),
+			"a %s goes down at night and not by day" % id)
+	for id in GameData.sorted_names(GameData.BUILDINGS.keys()):
+		expect(Building.allowed_in_phase(by_day, id)
+			and not Building.allowed_in_phase(after_dark, id),
+			"a %s goes up by day and not at night" % id)
 
 	expect(GameData.check_defences(GameData.DEFENCES).is_empty(),
 		"the shipped defences pass their own check",
 		str(GameData.check_defences(GameData.DEFENCES)))
-	var forever: Dictionary = GameData.DEFENCES.duplicate(true)
-	(forever[&"barricade"] as Dictionary).erase("lifetime_ticks")
-	expect(not GameData.check_defences(forever).is_empty(),
-		"a night-placeable thing that never expires is refused - that is a "
-		+ "wall you can build mid-wave")
-	var endless: Dictionary = GameData.DEFENCES.duplicate(true)
-	(endless[&"barricade"] as Dictionary).erase("per_night_limit")
-	expect(not GameData.check_defences(endless).is_empty(),
-		"and so is one with no limit on how many")
+	# Its lifetime and its limit are its identity now, not the price of a
+	# licence the others lack (task 0132): the barricade keeps both.
+	expect(int(bar.get("lifetime_ticks", 0)) > 0
+		and int(bar.get("per_night_limit", 0)) > 0,
+		"the barricade still expires and still has its nightly limit")
 
 	# **The allowance is real, and it is per night.**
 	var night := _armed_night(2900)
@@ -8352,20 +8360,21 @@ func _task_0048_traps() -> void:
 	expect((recipe["inputs"] as Dictionary).has(GameData.GUNPOWDER),
 		"and gunpowder is what makes it go bang")
 
-	# **They are laid by day.** Only the barricade goes down once it is dark,
-	# so a minefield is something you decide on before they come.
+	# **They are laid at night** (task 0132): in the build step, or once
+	# they are coming - a minefield can be decided on as the wave shows its
+	# road.
 	var prepared := _armed_prep(3000)
 	var spot := _room_for(prepared, Vector2i(1, 1))
-	expect(Building.place(prepared, &"mine", spot), "a mine goes down by day")
+	expect(Building.place(prepared, &"mine", spot), "a mine goes down in the build step")
 	expect(not Towers.cells(prepared).has(spot),
 		"and the list of things that shoot does not contain it",
 		str(Towers.cells(prepared)))
 	expect(Towers.target_of(prepared, spot) == 0,
 		"and it is aiming at nothing, because it does not aim")
 	_night_falls(prepared)
-	expect(not Building.can_place(prepared, &"mine",
+	expect(Building.can_place(prepared, &"mine",
 		_room_for(prepared, Vector2i(1, 1))),
-		"and once it is dark no more go down")
+		"and once it is dark more still go down")
 
 	# **A mine is not a wall.** An occupant that blocks is an occupant the flow
 	# field routes around, so this asks the route where it goes after one is
@@ -9158,9 +9167,11 @@ func _rush_against(seed_value: int, id: StringName, count: int) -> Dictionary:
 	var state := _armed_prep(seed_value)
 	Resources.gain(state, {GameData.OIL: 400, GameData.GUNPOWDER: 400,
 		GameData.STONE: 400, GameData.IRON: 400, GameData.WOOD: 400})
+	# The generators are a day job (task 0132): put up as if by day.
 	for _i in 2:
 		var plant := _room_for(state, Building.size_of(&"generator"))
-		Building.place(state, &"generator", plant)
+		SuiteKit.built_by_day(state, func() -> bool:
+			return Building.place(state, &"generator", plant))
 	var built := _line_of_towers(state, id, count)
 	_night_falls(state)
 	Sim.advance(state, 1)
@@ -9334,9 +9345,11 @@ func _tank_against(seed_value: int, id: StringName, count: int) -> Dictionary:
 	var state := _armed_prep(seed_value)
 	Resources.gain(state, {GameData.OIL: 900, GameData.GUNPOWDER: 900,
 		GameData.STONE: 900, GameData.IRON: 900, GameData.WOOD: 900})
+	# The generators are a day job (task 0132): put up as if by day.
 	for _i in 2:
-		Building.place(state, &"generator",
-			_room_for(state, Building.size_of(&"generator")))
+		var plant := _room_for(state, Building.size_of(&"generator"))
+		SuiteKit.built_by_day(state, func() -> bool:
+			return Building.place(state, &"generator", plant))
 	var built := _line_of_towers(state, id, count)
 	_night_falls(state)
 	Sim.advance(state, 1)
@@ -9565,9 +9578,11 @@ func _breakers_against(seed_value: int, line: int, guards: int,
 	var state := _armed_prep(seed_value)
 	Resources.gain(state, {GameData.OIL: 900, GameData.GUNPOWDER: 900,
 		GameData.STONE: 900, GameData.IRON: 900, GameData.WOOD: 900})
+	# The generators are a day job (task 0132): put up as if by day.
 	for _i in 3:
-		Building.place(state, &"generator",
-			_room_for(state, Building.size_of(&"generator")))
+		var plant := _room_for(state, Building.size_of(&"generator"))
+		SuiteKit.built_by_day(state, func() -> bool:
+			return Building.place(state, &"generator", plant))
 	var built := _line_of_towers(state, &"gun_tower", line)
 	if guards > 0:
 		_line_of_towers(state, &"auto_crossbow", guards, built)
@@ -10424,8 +10439,9 @@ func _task_0057_structures() -> void:
 	var hurt := _armed_prep(3902)
 	Resources.gain(hurt, {GameData.OIL: 400, GameData.IRON: 400,
 		GameData.WOOD: 400, GameData.STONE: 400})
-	Building.place(hurt, &"generator",
-		_room_for(hurt, Building.size_of(&"generator")))
+	var plant := _room_for(hurt, Building.size_of(&"generator"))
+	SuiteKit.built_by_day(hurt, func() -> bool:
+		return Building.place(hurt, &"generator", plant))
 	var tower: Vector2i = _line_of_towers(hurt, &"gun_tower", 1)[0]
 	_night_falls(hurt)
 	Sim.advance(hurt, 1)
@@ -10883,7 +10899,8 @@ func _giant_against(seed_value: int, mix: Array) -> Dictionary:
 		# the first room from the top left, the old yard, is far behind it.
 		var plant := _room_for(state, Building.size_of(&"generator"))
 		if plant != Vector2i(-1, -1):
-			Building.place(state, &"generator", plant)
+			SuiteKit.built_by_day(state, func() -> bool:
+				return Building.place(state, &"generator", plant))
 
 	var spend := 0
 	var towers := 0
@@ -11920,14 +11937,21 @@ func _task_0064_tower_levels() -> void:
 	expect(left > now_full / 3 and left <= now_full * 6 / 10,
 		"at about the share it was on", "%d of %d" % [left, now_full])
 
-	# **Not while they are coming.**
+	# **While they are coming, too** (task 0132: the plan, 4.3, lets the
+	# upgrades go on during the waves - this used to say the forge shut
+	# once they walked in). And never by day.
 	var night := _a_prep_with_tech(6403, [&"true sights"])
 	var after_dark: Vector2i = _line_of_towers(night, &"gun_tower", 1)[0]
 	_night_falls(night)
-	expect(_refused(Building.why_not_upgrade(night, after_dark)) == &"WHY_MID_NIGHT",
-		"the forge is shut once they are walking in",
+	expect(Building.why_not_upgrade(night, after_dark).is_empty(),
+		"the forge is open once they are walking in",
 		str(Building.why_not_upgrade(night, after_dark)))
-	expect(not Building.upgrade(night, after_dark), "and nothing is upgraded")
+	expect(Building.upgrade(night, after_dark), "and a tower goes up a level mid-wave")
+	NightRoad.park(night)
+	Phases.enter_result(night, true)
+	Phases.begin_day(night)
+	expect(_refused(Building.why_not_upgrade(night, after_dark)) == &"WHY_ONLY_AT_NIGHT",
+		"but by day it is shut", str(Building.why_not_upgrade(night, after_dark)))
 
 	# **The tree's discount is read at last.**
 	var dear := _a_prep_with_tech(6404, [&"true sights"])
@@ -11949,8 +11973,9 @@ func _task_0064_tower_levels() -> void:
 func _tower_over_a_night(seed_value: int, level: int) -> Dictionary:
 	var state := _a_prep_with_tech(seed_value, [&"true sights",
 		&"long barrels", &"oiled works"])
-	Building.place(state, &"generator",
-		_room_for(state, Building.size_of(&"generator")))
+	var plant := _room_for(state, Building.size_of(&"generator"))
+	SuiteKit.built_by_day(state, func() -> bool:
+		return Building.place(state, &"generator", plant))
 	var cell: Vector2i = _line_of_towers(state, &"gun_tower", 1)[0]
 
 	var spent := 0
@@ -14316,13 +14341,14 @@ func _task_0082_shots() -> void:
 	# Sixteen since task 0121: the controls tab again with a pad in hand,
 	# because the pad's names are what has to fit there. Seventeen since task
 	# 0129: the farmer passed out at 02:00, the one place that pose is seen.
-	expect(names.size() == 17,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls and the pass-out",
+	# Eighteen since task 0132: build mode by day, the buildings' palette.
+	expect(names.size() == 18,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out and the day's build mode",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
-			"passed_out", "options_controls_pad"]:
+			"passed_out", "build_day", "options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

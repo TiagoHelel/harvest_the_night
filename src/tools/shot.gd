@@ -78,6 +78,7 @@ const SCENARIOS: Array = [
 	["options_controls", "the controls tab", "OptionsScreen:controls"],
 	["react", "a crop came ready nearby", ""],
 	["refused", "build mode, over something built", ""],
+	["build_day", "build mode by day: the buildings", ""],
 	["house_interior", "the furnished farmhouse", ""],
 	["farm_extension", "planting on the new southern land", ""],
 	["larger_stations", "the larger farm buildings", ""],
@@ -625,6 +626,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"options_controls": _set_options_controls(state)
 		"react": _set_react(state)
 		"refused": _set_refused(state)
+		"build_day": _set_build_day(state)
 		"house_interior": _set_house_interior(state)
 		"farm_extension": _set_farm_extension(state)
 		"larger_stations": _set_larger_stations(state)
@@ -660,6 +662,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	var view := main.get_node("%WorldView") as WorldView
 	view.skip_transition()
 	view._light_for_phase(0.0)
+	# And the bed beat (task 0129), which a build-step scenario would catch.
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
 	_just_before_the_shutter(main, state, name)
 	await process_frame
 	await RenderingServer.frame_post_draw
@@ -791,7 +795,17 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 			# is the one that finds out whether the panel wraps.
 			var taken: Vector2i = Farm.cells_with(state, &"workshop")[0]
 			mode.set("_pointer", view.cell_to_screen(taken))
+			# At night the guardian's cursor is what build mode follows.
+			view.cursor().place_at(taken)
 			mode.call("_follow_cursor")
+		"build_day":
+			var day_mode: Node = main.get_node_or_null("%BuildMode")
+			var day_view: Node = main.get_node_or_null("%WorldView")
+			if day_mode == null or day_view == null:
+				return
+			var open := _room_for_selected(state, Player.cell(state) + Vector2i(4, -3))
+			day_mode.set("_pointer", day_view.cell_to_screen(open))
+			day_mode.call("_follow_cursor")
 		"passed_out":
 			# **Lying, not falling.** The settle is half a second and the
 			# collapse is longer; the picture is of the frame the view holds.
@@ -809,12 +823,26 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 func _set_refused(state: Dictionary) -> void:
 	_a_sown_field(state)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	# **In the build step since task 0132**: a wall goes down at night only,
+	# so the palette is the defences and the guardian's cursor points.
+	NightRoad.into_build(state)
 	var build: Dictionary = state["build"]
 	build["active"] = true
 	build["selected"] = &"wall"
 	var taken: Vector2i = Farm.cells_with(state, &"workshop")[0]
 	(state["intent"] as Dictionary)["build_cell"] = [taken.x, taken.y]
-	_standing_at = taken
+	_look_at(taken)
+
+
+## Build mode by day, task 0132: the palette holds the production buildings
+## and nothing that defends, with the ghost on open ground near the farmer.
+func _set_build_day(state: Dictionary) -> void:
+	_a_sown_field(state)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
+		GameData.IRON: 400, GameData.OIL: 100})
+	var build: Dictionary = state["build"]
+	build["active"] = true
+	build["selected"] = Building.catalogue(state)[0]
 
 
 ## The farmer noticing something, task 0109.
@@ -1078,6 +1106,16 @@ func _put_up_the_defence(state: Dictionary) -> void:
 ## depend on one. Bounded, because a farmer walked at a rock would otherwise
 ## push against it until the heat death of the universe - and a shot tool
 ## that hangs is worse than one that takes a slightly wrong picture.
+## The nearest cell to `cell` where build mode's selection would go down.
+func _room_for_selected(state: Dictionary, cell: Vector2i) -> Vector2i:
+	var id := Building.selected(state)
+	for radius in 10:
+		for candidate in Grid.within(cell, radius):
+			if Building.why_not(state, id, candidate).is_empty():
+				return candidate
+	return cell
+
+
 ## The nearest cell to `cell` with nothing on it and nobody in it.
 func _open_ground_near(state: Dictionary, cell: Vector2i) -> Vector2i:
 	for radius in 8:

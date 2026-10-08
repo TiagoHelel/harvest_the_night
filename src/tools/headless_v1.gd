@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 13
+const GROUPS := 14
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -82,6 +82,7 @@ func _run() -> void:
 	_task_0128_pass_out()
 	_task_0129_asleep()
 	_task_0131_guardian()
+	_task_0132_night_build()
 
 
 func _finish() -> void:
@@ -1259,3 +1260,130 @@ func _task_0131_guardian() -> void:
 	expect(State.hash_of(said) == again and before != 0,
 		"asking what is under the cursor changes nothing")
 	_completed += 1
+
+
+## 0132 - defences go down only at night, buildings only by day.
+func _task_0132_night_build() -> void:
+	# **Every defence: refused by day with the night's reason, taken in the
+	# build step and the night. Every building the other way round.** A
+	# fresh, rich farm per phase, and a clear spot sized to the thing.
+	var plenty := {GameData.WOOD: 9000, GameData.STONE: 9000, GameData.IRON: 9000,
+		GameData.OIL: 9000, GameData.GUNPOWDER: 9000, GameData.MONEY: 9000,
+		GameData.FOOD: 9000}
+	var phases := {}
+	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT]:
+		var state := State.create(1320)
+		Resources.gain(state, plenty)
+		if phase != Phases.DAY:
+			NightRoad.into_build(state)
+		if phase == Phases.NIGHT:
+			NightRoad.through_build(state)
+			NightRoad.park(state)
+		phases[phase] = state
+	var wrong: Array = []
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		for phase in phases:
+			var state: Dictionary = phases[phase]
+			var reason := Building.why_not(state, id, _clear_for(state, id))
+			var ok: bool = reason.is_empty() if phase != Phases.DAY \
+				else (not reason.is_empty() and reason[0] == &"WHY_ONLY_AT_NIGHT")
+			if not ok:
+				wrong.append("%s in %s: %s" % [id, Phases.name_of(phase), str(reason)])
+	for id in GameData.sorted_names(GameData.BUILDINGS.keys()):
+		for phase in phases:
+			var state: Dictionary = phases[phase]
+			var reason := Building.why_not(state, id, _clear_for(state, id))
+			var ok: bool = reason.is_empty() if phase == Phases.DAY \
+				else (not reason.is_empty() and reason[0] == &"WHY_NOT_AT_NIGHT")
+			if not ok:
+				wrong.append("%s in %s: %s" % [id, Phases.name_of(phase), str(reason)])
+	expect(wrong.is_empty(),
+		"every defence only at night and every building only by day, with the reason",
+		str(wrong.slice(0, 4)))
+	expect(Building.catalogue(phases[Phases.DAY]) == GameData.sorted_names(GameData.BUILDINGS.keys())
+		and Building.catalogue(phases[Phases.NIGHT]) == GameData.sorted_names(GameData.DEFENCES.keys()),
+		"by day the palette holds the buildings, at night the defences",
+		"%s / %s" % [Building.catalogue(phases[Phases.DAY]), Building.catalogue(phases[Phases.NIGHT])])
+
+	# **Upgrade and sell follow**, and a tower goes up a level mid-wave -
+	# through the intent the guardian's cursor writes.
+	var fight := State.create(1321)
+	Resources.gain(fight, plenty)
+	Resources.gain(fight, {GameData.TECH: 40})
+	Tech.buy(fight, &"true sights")
+	NightRoad.into_build(fight)
+	var tower := _clear_for(fight, &"gun_tower")
+	expect(Building.place(fight, &"gun_tower", tower), "a gun tower goes down in the build step")
+	NightRoad.through_build(fight)
+	NightRoad.park(fight)
+	var intent: Dictionary = fight["intent"]
+	intent["build_cell"] = [tower.x, tower.y]
+	intent["build_upgrade"] = true
+	Sim.advance(fight, 1)
+	expect(int(fight["phase"]) == Phases.NIGHT and Building.level_at(fight, tower) == 2,
+		"and goes up a level mid-wave, through build_upgrade at the cursor",
+		str(Building.level_at(fight, tower)))
+	var bench := Building.anchor_of(fight, Farm.cells_with(fight, &"workshop")[0])
+	expect(Building.why_not_sell(fight, bench) == [&"WHY_NOT_AT_NIGHT"]
+		and Building.sell(fight, bench).is_empty(),
+		"a workshop is not sold after dark", str(Building.why_not_sell(fight, bench)))
+	Phases.enter_result(fight, true)
+	Phases.begin_day(fight)
+	expect(Building.why_not_upgrade(fight, tower) == [&"WHY_ONLY_AT_NIGHT"],
+		"by day the tower goes up no level", str(Building.why_not_upgrade(fight, tower)))
+	intent["build_cell"] = [tower.x, tower.y]
+	intent["build_sell"] = true
+	Sim.advance(fight, 1)
+	expect(StringName(Farm.occupant(fight, tower).get("id", &"")) == &"gun_tower"
+		and Building.why_not_sell(fight, tower) == [&"WHY_ONLY_AT_NIGHT"],
+		"and is not sold by day", str(Building.why_not_sell(fight, tower)))
+	expect(Building.why_not_sell(fight, bench).is_empty(), "while the workshop could be")
+
+	# **The barricade**: still limited per night, and a build-step one counts
+	# against tonight's limit; its lifetime starts with the waves.
+	var bar: Dictionary = GameData.DEFENCES[&"barricade"]
+	var limit := int(bar["per_night_limit"])
+	var life := int(bar["lifetime_ticks"])
+	var cheap := State.create(1322)
+	Resources.gain(cheap, plenty)
+	NightRoad.into_build(cheap)
+	var first := _clear_for(cheap, &"barricade")
+	expect(Building.place(cheap, &"barricade", first), "a barricade goes down in the build step")
+	expect(Building.left_tonight(cheap, &"barricade") == limit - 1,
+		"and counts against tonight's limit", str(Building.left_tonight(cheap, &"barricade")))
+	Sim.advance(cheap, mini(NightRoad.build_ticks_left(cheap) - 1, life + 30))
+	expect(int(cheap["phase"]) == Phases.PREPARATION
+		and StringName(Farm.occupant(cheap, first).get("id", &"")) == &"barricade",
+		"it does not rot while the build step lasts")
+	NightRoad.through_build(cheap)
+	NightRoad.park(cheap)
+	expect(Building.left_tonight(cheap, &"barricade") == limit - 1,
+		"the waves do not hand the allowance back", str(Building.left_tonight(cheap, &"barricade")))
+	var placed := 1
+	for _i in limit + 2:
+		if Building.place(cheap, &"barricade", _clear_for(cheap, &"barricade")):
+			placed += 1
+	expect(placed == limit, "exactly the limit, build step and night together", str(placed))
+	Sim.advance(cheap, life - 2)
+	expect(StringName(Farm.occupant(cheap, first).get("id", &"")) == &"barricade",
+		"the build-step barricade stands for its lifetime after the waves begin")
+	Sim.advance(cheap, 4)
+	expect(Farm.occupant(cheap, first).is_empty(), "and then takes itself away",
+		str(Farm.occupant(cheap, first)))
+	_completed += 1
+
+
+## The first spot on the farm where `id`'s whole footprint is clear ground,
+## counting from the middle out so it is near the action.
+func _clear_for(state: Dictionary, id: StringName) -> Vector2i:
+	var middle := Vector2i(GameData.GRID_WIDTH / 2, GameData.GRID_HEIGHT / 2)
+	for radius in maxi(GameData.GRID_WIDTH, GameData.GRID_HEIGHT):
+		for cell in Grid.within(middle, radius):
+			var clear := true
+			for at in Building.footprint(id, cell):
+				if not Farm.why_not_buildable(state, at).is_empty():
+					clear = false
+					break
+			if clear:
+				return cell
+	return Vector2i(-1, -1)

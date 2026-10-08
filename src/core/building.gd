@@ -19,10 +19,12 @@ extends RefCounted
 ##
 ## ## The phase decides what may go down
 ##
-## Day and preparation: anything. Night: only what its own entry says may go
-## down at night, which is the barricade and nothing else. That is what makes
-## the barricade the emergency answer `design.md` section 8 asks for rather
-## than a cheaper wall.
+## **The plan's decision 4** (task 0132): the day earns and the night spends.
+## A defence goes down, up a level or back to the ledger only in the build
+## step and the night, by the guardian's cursor; a production building only
+## by day. The barricade is still the cheap, temporary, limited one - its
+## `lifetime_ticks` and `per_night_limit` are its identity, not a licence to
+## go down at night that the others lack.
 ##
 ## ## Build mode is a state
 ##
@@ -171,11 +173,12 @@ static func why_not_upgrade(state: Dictionary, cell: Vector2i) -> Array:
 		return [&"WHY_NO_UPGRADE", StringName(on["id"])]
 	if level_at(state, cell) >= GameData.TOP_TOWER_LEVEL:
 		return [&"WHY_TOP_LEVEL"]
-	# **Not while they are coming.** The same rule the tech tree follows: an
-	# upgrade is a decision made before the night, not a button pressed
-	# during it.
-	if int(state["phase"]) == Phases.NIGHT:
-		return [&"WHY_MID_NIGHT"]
+	# **The phase's rule, and nothing more** (task 0132): a defence goes up a
+	# level in the build step or mid-wave - the plan (4.3) lets upgrades go
+	# on while they are coming - and never by day.
+	var wrong := why_not_now(state, StringName(on["id"]))
+	if not wrong.is_empty():
+		return wrong
 	var needs := upgrade_needs(state, cell)
 	if needs != &"" and not Tech.owns(state, needs):
 		return [&"WHY_NEEDS_TECH", needs]
@@ -314,18 +317,38 @@ static func forget_tonight(state: Dictionary) -> void:
 	(state["build"] as Dictionary)["placed_tonight"] = {}
 
 
-## Whether the phase lets this go down at all.
+## **The waves wind the barricades' clocks** (task 0132): everything put down
+## in the build step with a `lifetime` starts to expire now. Called by
+## `Phases.begin_night`; cells in index order, as everything here is.
+static func start_lifetimes(state: Dictionary) -> void:
+	var occupants: Dictionary = state["occupants"]
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var on: Dictionary = occupants[idx]
+		if on.has("lifetime") and not on.has("expires"):
+			on["expires"] = int(state["tick"]) + int(on["lifetime"])
+			on.erase("lifetime")
+			_will_expire(state, Grid.cell(int(idx)))
+
+
+## Whether the phase lets this go down, up or back at all (task 0132): a
+## defence in the build step and the night, a production building by day.
 static func allowed_in_phase(state: Dictionary, id: StringName) -> bool:
 	var phase := int(state["phase"])
-	if phase == Phases.DAY or phase == Phases.PREPARATION:
-		return true
-	if phase != Phases.NIGHT:
-		return false
-	# A production building is a day job. Nothing in `BUILDINGS` carries
-	# `placeable_at_night`, so this falls out rather than being spelled out.
-	var entry: Variant = entry_of(id)
-	return entry != null \
-		and bool((entry as Dictionary).get("placeable_at_night", false))
+	if GameData.DEFENCES.has(id):
+		return phase == Phases.PREPARATION or phase == Phases.NIGHT
+	if GameData.BUILDINGS.has(id):
+		return phase == Phases.DAY
+	return false
+
+
+## The refusal for the wrong half of the day, or empty: a defence by day is
+## "only at night", a building after dark is "not after dark".
+static func why_not_now(state: Dictionary, id: StringName) -> Array:
+	if allowed_in_phase(state, id):
+		return []
+	return [&"WHY_ONLY_AT_NIGHT"] if GameData.DEFENCES.has(id) else [&"WHY_NOT_AT_NIGHT"]
 
 
 ## Whether it can be paid for, by kit or by ledger.
@@ -346,8 +369,9 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> Array:
 		return [&"WHY_ON_THE_HOUSE"]
 	if not is_placeable(id):
 		return [&"WHY_NOTHING_SELECTED"]
-	if not allowed_in_phase(state, id):
-		return [&"WHY_NOT_AT_NIGHT"]
+	var wrong := why_not_now(state, id)
+	if not wrong.is_empty():
+		return wrong
 	# **The allowance, before the money.** Being told "you have used your five"
 	# is a different sentence from "you are short two wood", and the first one
 	# is the one that is true.
@@ -408,8 +432,15 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 	var entry: Dictionary = entry_of(id)
 	var occupant := {"id": id, "hp": int(entry.get("hp", 1))}
 	if entry.has("lifetime_ticks"):
-		occupant["expires"] = int(state["tick"]) + int(entry["lifetime_ticks"])
-		_will_expire(state, cell)
+		if int(state["phase"]) == Phases.NIGHT:
+			occupant["expires"] = int(state["tick"]) + int(entry["lifetime_ticks"])
+			_will_expire(state, cell)
+		else:
+			# **Put down before the waves, it lasts from the waves** (task
+			# 0132): the build step has no clock to spend it on after 0136,
+			# and a barricade that rotted while the player was still deciding
+			# would be section 13's bug back. `start_lifetimes` winds it.
+			occupant["lifetime"] = int(entry["lifetime_ticks"])
 
 	# Counted the moment it goes down, not when it comes up: a barricade that
 	# was chewed through still used one of tonight's five.
@@ -436,10 +467,19 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 	return true
 
 
+## Why the thing on this cell cannot be sold now, or empty: nothing that is
+## the player's, or the wrong half of the day for it (task 0132).
+static func why_not_sell(state: Dictionary, cell: Vector2i) -> Array:
+	var id: StringName = Farm.occupant(state, cell).get("id", &"")
+	if not is_placeable(id):
+		return [&"WHY_NOTHING_THERE"]
+	return why_not_now(state, id)
+
+
 ## Take it back up for a fraction of what it cost. Returns what came back.
 static func sell(state: Dictionary, cell: Vector2i) -> Dictionary:
 	var id: StringName = Farm.occupant(state, cell).get("id", &"")
-	if not is_placeable(id):
+	if not why_not_sell(state, cell).is_empty():
 		return {}
 	var back := refund_for(state, cell)
 	# Selling any tile of a building sells the building, and takes every tile

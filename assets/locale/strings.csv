@@ -382,7 +382,7 @@ TITLE_OPTIONS,140,OPTIONS,OPÇÕES
 TITLE_PRESS_ANY,0,PRESS ANY KEY,APERTE QUALQUER TECLA
 TITLE_QUIT,140,QUIT,SAIR
 TITLE_STATS,140,STATISTICS,ESTATÍSTICAS
-TUT_BUILD,0,B shows what can go on the farm. Put it between the house and the dark.,B mostra o que cabe na fazenda. Ponha entre a casa e o escuro.
+TUT_BUILD,0,"At night, B shows what can go on the farm. Put it between the house and the dark.","À noite, B mostra o que cabe na fazenda. Ponha entre a casa e o escuro."
 TUT_CHOP,0,Wood is in the trees. Stand at one and hold SPACE.,A madeira está nas árvores. Fique numa e segure ESPAÇO.
 TUT_CRAFT,0,The workshop turns what you gathered into walls.,A oficina vira o que você colheu em muros.
 TUT_NIGHT,0,"The night comes when you send for it, and not before. N, or the button.","A noite vem quando você chamar, e não antes. N, ou o botão."
@@ -408,7 +408,6 @@ WHY_ALREADY_YOURS,228,already yours,já é seu
 WHY_COSTS,228,"costs %d, and you have %d","custa %d, e você tem %d"
 WHY_HOUSE_LOW,228,the house is at %d%% - watch this one,a casa está em %d%% - assista essa
 WHY_IN_THE_WATER,228,in the water,na água
-WHY_MID_NIGHT,228,not while they are coming,não enquanto eles vem
 WHY_NEEDS_NODE,228,needs %s first,precisa de %s antes
 WHY_NEEDS_TECH,228,needs %s from the tree,precisa de %s na árvore
 WHY_NIGHT_LIMIT,228,"%d a night, and that was the last","%d por noite, e essa foi a última"

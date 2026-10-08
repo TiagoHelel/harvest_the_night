@@ -13616,3 +13616,127 @@ over the same names, so they were renamed and the 1x pair retaken. Opened:
 - at night its two eyes are warm points;
 - the cursor's bone brackets read over the dark grass east of the stall;
 - "open ground" sits under it, clear of the night strip and the buttons.
+
+## 0132 - Defences go down only at night - done 2026-10-08
+
+What changed: the plan's decision 4. The day earns and the night spends.
+
+**The phase rule** (`Building.allowed_in_phase`):
+- A `DEFENCES` id is allowed only in PREPARATION and NIGHT, a `BUILDINGS` id
+  only in DAY.
+- The new `Building.why_not_now(state, id)` gives the reason. A defence by
+  day answers `WHY_ONLY_AT_NIGHT` (the row existed); a building after dark
+  answers `WHY_NOT_AT_NIGHT`. `why_not` uses it.
+- `why_not_upgrade` follows the same rule. Its `WHY_MID_NIGHT` refusal is gone,
+  because the plan (4.3) lets upgrades go on during the waves; the row left
+  strings.csv once nothing read it.
+- Selling follows too: the new `Building.why_not_sell(state, cell)`, which
+  `sell` checks first.
+- `catalogue()` still follows `allowed_in_phase`, so by day B lists the four
+  production buildings and at night the eight defences.
+
+**The barricade** lost `placeable_at_night`, and `check_defences` lost the rule
+that tied that flag to a lifetime and a nightly limit. The barricade keeps both
+as its own identity (cheap, temporary, limited). Section 13's bug stays out of
+the build step, which has no clock after 0136, in two ways:
+- `Building.forget_tonight` moved from `begin_night` to `begin_preparation`, so
+  a barricade put down in the build step counts against tonight's limit.
+- One put down before the waves gets a pending `lifetime` instead of
+  `expires`. The new `Building.start_lifetimes` (called by `begin_night`, cells
+  in index order) winds it, so it stands for `lifetime_ticks` after the waves
+  begin.
+
+**The cursor at night**:
+- `BuildMode`'s `upgrade` and `remove` already write `build_upgrade` and
+  `build_sell` at `build_cell`, which is the cursor's cell from the build step
+  on (0131).
+- `main._cursor_look` now shows the upgrade look over something of the
+  player's that can go up a level, and the sell look over one that can only go
+  back to the ledger.
+- `_case_0131_cursor`'s "the cell it filled reads blocked" became "reads sell":
+  a wall has no levels.
+
+**The tutorial**:
+- `build` follows `night` in `TUTORIAL`, and `Sim._tick_preparation` runs
+  `Tutorial.tick` on its beat.
+- `TUT_BUILD` is "At night, B shows what can go on the farm. Put it between the
+  house and the dark." / "À noite, B mostra o que cabe na fazenda. Ponha entre a
+  casa e o escuro.". A first draft said "defences" and was caught by
+  `_task_0041_tutorial`'s rule that no line explains the switch.
+- The prompt still shows lines by day only. A first night that built nothing
+  shows the build line on day two, and it says "At night". Showing the
+  night's lines in the build step is 0141's (its prompt already asks for the
+  START line there).
+
+**Tests moved to the rule**:
+- `_task_0022_reality`'s "night takes only the barricade" became "the night
+  takes every defence and the day none; the day takes the buildings".
+- `_task_0041_tutorial`: the out-of-order tower goes down in the first build
+  step, and the reader-of-nothing sends for the night and puts its four towers
+  down there.
+- `_task_0047_barricades`: every defence at night and none by day, buildings
+  only by day; the lifetime and limit are identity; mines are laid in the
+  build step "and once it is dark more still go down".
+- `_task_0064_tower_levels`: "the forge is open once they are walking in", a
+  tower goes up a level mid-wave, "but by day it is shut".
+- `_case_0041_tutorial`'s out-of-order step is the bench's job now.
+- **The generators the other way round**: six build-step fixtures put a
+  generator up through the new `SuiteKit.built_by_day` (the mirror of 0119's
+  `built_last_night`). They are the rush, tank, breaker and giant fights,
+  `_task_0057_structures`' hurt tower and `_tower_over_a_night`; they had been
+  failing silently as "both farms had the power on".
+- `barrier_showcase` winds its build-step barricades with `start_lifetimes`
+  before reading `expires`.
+
+**`play_nights.gd`** counts the generators the shopping list will need
+(`_plants_needed`, the same loop on numbers alone), puts them up by day, then
+buys the towers in the build step on that supply.
+**Finding:** it falls on all ten nights, at the same seconds (53 s, 29 s, 52 s,
+27 s...), and so did HEAD before this task: measured by swapping HEAD's
+building, phases, sim, game_data and play_nights in for one run. A scripted
+build whose tower count changes nothing about when it falls is measuring
+something else. Out of scope, flagged as its own task.
+
+**The shots**:
+- `refused` is in the build step now: the palette lists the defences only, and
+  the cursor is blocked over the workshop with "there is a workshop there
+  already".
+- A new `build_day` scenario shows the day's palette, the four buildings only,
+  with a green ghost where the selected one fits (`_room_for_selected`).
+  `headless_check` counts 18 scenarios.
+- Stills cut the bed beat short through the new `HouseView.skip_bedtime()`. The
+  first `refused` came back with the bedroom over the farm.
+
+Files: src/core/{building,phases,sim,game_data}.gd, src/ui/{main,house_view}.gd,
+src/tools/{headless_check,input_check,headless_v1,input_v1,suite_kit,
+play_nights,barrier_showcase,shot}.gd, assets/locale/strings.csv,
+tools/determinism_{sim,data}_hash.txt, implementation/shots/0132/
+
+Verify: **59 passed, 0 failed in 527s** (OVER BUDGET 300, as before). Suite
+times: headless_check 84.1 s, headless_v1 2.7 s, input_check 89.8 s, input_v1
+10.1 s. Counts:
+- headless_check 16197 (+2: the per-id loops in 0047 and the new scenario);
+- headless_v1 207 (+15). Every defence is refused by day with
+  `WHY_ONLY_AT_NIGHT` and taken in PREPARATION and NIGHT, and every building
+  the reverse. The palettes by phase. A tower goes up a level mid-wave through
+  `build_upgrade`; a workshop is not sold after dark; by day the tower neither
+  upgrades nor sells, while the workshop could. A build-step barricade counts
+  against the limit, does not rot in the build step, and the waves do not hand
+  the allowance back. Exactly the limit across the build step and the night.
+  It stands `lifetime_ticks` after the waves and then goes.
+- input_check 1062 (-12: its two palette loops walk 8 defences in the build
+  step and 4 buildings by day, where both used to walk 12);
+- input_v1 63.
+
+**sim 1212869859 -> 2823820161** - measured, not guessed. Putting
+`forget_tonight` back in `begin_night` gives 2163900313; also taking
+`Tutorial.tick` out of the build step gives back exactly 1212869859. So two
+things moved it, and nothing else did:
+- the determinism scenario's build-step towers and walls are now counted in
+  `placed_tonight` through the night;
+- its tutorial ticks in the build step.
+
+**data 954093946 -> 2599455698**: the barricade's entry and `TUTORIAL`'s order.
+
+Shots 0132 `refused build_day` opened: at night defences only, by day buildings
+only.

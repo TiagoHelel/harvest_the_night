@@ -373,12 +373,24 @@ func _drive_cursor(delta: float) -> void:
 
 
 ## What confirming would do at the cursor: place, refused, or nothing to do.
-## Upgrade, sell, repair and aim are 0133-0135's to switch on.
+## **Over something of the player's** (task 0132) it says what the upgrade and
+## remove buttons would do there instead: up a level if it can go, back to the
+## ledger if not. Repair and aim are 0134-0135's to switch on.
 func _cursor_look(cell: Vector2i) -> StringName:
-	var id := Building.selected(_driver.state)
-	if not Building.is_active(_driver.state) or id == &"":
+	var state := _driver.state
+	if not Building.is_active(state):
 		return &"neutral"
-	return &"place" if Building.why_not(_driver.state, id, cell).is_empty() else &"blocked"
+	var on := Farm.occupant(state, cell)
+	if not on.is_empty() and Building.is_placeable(StringName(on["id"])):
+		if Building.can_upgrade(state, cell):
+			return &"upgrade"
+		if Building.why_not_sell(state, cell).is_empty():
+			return &"sell"
+		return &"blocked"
+	var id := Building.selected(state)
+	if id == &"":
+		return &"neutral"
+	return &"place" if Building.why_not(state, id, cell).is_empty() else &"blocked"
 
 
 ## **Whose camera it is** (task 0130). By day it follows the farmer. From the

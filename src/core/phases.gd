@@ -122,6 +122,9 @@ static func begin_preparation(state: Dictionary) -> bool:
 	# Whatever was open closes with the day. Standing at the market while the
 	# first zombie walks in would be a panel that outlived its reason.
 	state["open_panel"] = &""
+	# **A new night's allowance starts with its build step** (task 0132): a
+	# barricade put down before the waves counts against tonight's limit.
+	Building.forget_tonight(state)
 	House.leave(state)
 	(state["house_visit"] as Dictionary)["asleep"] = true
 	# An ordinary bedtime; `pass_out()` marks its own after this.
@@ -163,8 +166,9 @@ static func begin_night(state: Dictionary) -> bool:
 	if int(state["phase"]) != PREPARATION:
 		push_error("begin_night from %s" % name_of(int(state["phase"])))
 		return false
-	# A new night, a fresh allowance of whatever is limited per night.
-	Building.forget_tonight(state)
+	# Whatever went down in the build step with a lifetime starts to spend
+	# it now, with the waves (task 0132).
+	Building.start_lifetimes(state)
 	Ability.recharge(state)
 
 	# The night to be fought is the one after the last one won, not the

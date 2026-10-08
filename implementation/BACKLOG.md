@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **126 / 296 done**
+`##########..............`  **127 / 296 done**
 
-0 doing / 170 todo / 0 blocked across 18 phases.
+0 doing / 169 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-170 task(s) left, the ready ones first, then what they
+169 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,22 +107,22 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0132 - Defences go down only at night
+### 0133 - The hotbar of defences
 
-Ready to pick up.  Likely files: `src/core/building.gd, src/core/game_data.gd, src/core/phases.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/ui/hotbar.gd (new), src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/tooltip.gd, src/ui/guardian_view.gd, src/ui/placeholder_art.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/input_v1.gd`.
 
-The plan's decision 4: defences are placed, upgraded and sold only at night, by cursor, and production buildings only by day. The day earns and the night spends.
+The night's shop window: a hotbar of every defence with its price, picked with a number key, a click or a bumper instead of a text list, so what the day earned is visible as walls and towers.
 
-- `Building.allowed_in_phase`: a `DEFENCES` id only in PREPARATION and NIGHT, a `BUILDINGS` id only in DAY. `why_not` answers `WHY_ONLY_AT_NIGHT` for a defence by day (the string exists) and `WHY_NOT_AT_NIGHT` for a building after dark; `why_not_upgrade` and `sell` follow the same rule; `catalogue()` keeps following `allowed_in_phase`. The plan (4.3) lets upgrades go on during the waves, so `why_not_upgrade`'s `WHY_MID_NIGHT` refusal goes: rewrite `_task_0064_tower_levels` (~11931), and delete the `WHY_MID_NIGHT` row if nothing reads it any more (`tools/i18n_check.py` fails on an unused key)
-- `placeable_at_night` goes: drop it from the barricade and drop the `check_defences` rule that tied it to a lifetime and a nightly limit. The barricade keeps `lifetime_ticks` and `per_night_limit` as its own identity (cheap, temporary, limited). Section 13's bug must not come back in the build step, which has no clock after 0136: a barricade placed in PREPARATION counts against tonight's limit (`Building.forget_tonight` moves from `begin_night` to `begin_preparation`) and its lifetime starts with the waves, not when it went down
-- At night upgrade and sell go through the cursor: BuildMode's `upgrade` and `remove` write `build_upgrade` and `build_sell` at the cursor cell, and the cursor shows its upgrade and sell states (0131's registry)
-- By day `B` lists only production buildings; at night the palette lists only defences (0133 turns it into the hotbar)
-- The tutorial's `build` step moves to the night: it follows `night` in `TUTORIAL`, `Tutorial.tick` also runs on its beat in `_tick_preparation`, and `TUT_BUILD` says it happens at night, in both languages. 0141 writes the rest of the night's steps
-- Rewrite `_task_0047_barricades` ('only the barricade goes down at night' becomes 'every defence goes down at night and none by day; buildings only by day'), `_task_0022_reality`'s 'built by day' wording and `_task_0041_tutorial`'s build step; any input_check case still placing a defence by day moves to the build step (0119 should already have moved them)
-- A rule change: if SIM moves, record both numbers and why (0119 moved the determinism scenario's placements into PREPARATION, so it may not). DATA moves (the barricade and the tutorial)
+- In PREPARATION and NIGHT a hotbar along the bottom replaces BuildMode's text palette: one slot per id of `Building.catalogue(state)`, in that order, with its icon and price - the kit count when a kit is held, else `Building.cost_of`, greyed with what is short when `Building.affordable` says no, and the barricade's `left_tonight`. By day `B` keeps the text list of buildings
+- Built from the catalogue, not a list: phase 13's six new defences appear with no edit here, and more slots than fit page or scroll
+- Selection goes through `Building.select`, the road the palette rows use today: a click on a slot; `slot_1`..`slot_8` (add `slot_7` and `slot_8` - slots 1-6 are the seed keys by day (`DayHud.SEED_ACTIONS`) and mean hotbar slots at night, when the seed strip ignores them; `ACT_SLOT_*` stop saying 'SEED' in both languages); and `hotbar_prev`/`hotbar_next` on two pad buttons 0121's layout left free (the bumpers if they are) and a key pair, wrapping. New actions go into `project.godot` and `InputActions.ACTIONS` with `ACT_*` strings, rebindable, with the clash check passing. `cancel` clears the selection and the cursor goes back to inspecting
+- Each slot's tooltip shows name, cost, HP, range and damage read from `GameData` (never copied) through `tooltip.gd`
+- Icons through the placeholder road - the structure's own sprite scaled down is enough - until A005 is integrated by 0147
+- The porch guardian (0131) plays its point state when a defence goes down, spotted by the view the way `sfx.gd` and `particles.gd` compare this frame's occupants with the last - no new `Events` kind, which would move SIM
+- View only: neither hash moves. The night HUD's bottom-right controls stay clickable (0139 settles the final layout)
 
-  - done when: `_task_0132_night_build` in `headless_v1.gd`: for every `DEFENCES` id, `can_place` is false by day with the night refusal and true in PREPARATION and NIGHT on a clear cell; the reverse for every `BUILDINGS` id; upgrade and sell follow, and a tower upgrades mid-wave; the barricade still expires and still has its nightly limit, and one placed in PREPARATION counts against that limit and still stands for `lifetime_ticks` after the waves begin
-  - done when: `python tools/shot.py 0132 refused` and a day build-mode capture opened: by day the list holds buildings only, at night defences only
+  - done when: `_case_0133_hotbar` in `input_v1.gd`: `slot_2` selects the second defence, clicking a slot selects it, a bumper cycles and wraps, a placement at the cursor uses the selection, an unaffordable slot shows its shortfall, `slot_2` at night leaves the selected seed alone, and the guardian is in its point state after the placement
+  - done when: `python tools/shot.py 0133 wave refused` and `--fhd` captures opened, also with `--pt_BR`: prices legible, nothing overlapping the night HUD
 
 ### 0135 - The flare goes where you aim it
 
@@ -139,6 +139,23 @@ The flare goes off where the player aims it, not where somebody is standing. It 
   - done when: `_task_0135_aimed_flare` in `headless_v1.gd`: with one zombie by the aimed cell and one by the house, only the first is hit and slowed; a flare at nowhere is refused and keeps its charge
   - done when: `_case_0135_flare_aim` in `input_v1.gd`: moving the cursor and pressing the ability key flares that cell; arming the button and clicking flares the clicked cell
   - done when: A capture of the aiming preview, opened: the square matches what the flare hits
+
+### 0136 - The build step waits for START
+
+Ready to pick up.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/game_data.gd, src/core/player.gd, src/ui/night_hud.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/night_road.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+The build step has no clock. The night waits while the player builds and starts when they press START - except after a pass-out, when the horde is already at the gate and gives thirty seconds.
+
+- `Sim._tick_preparation` no longer starts the night by itself: a new edge intent `start_waves` (consumed by the tick, ignored outside PREPARATION) calls 0118's `Phases.start_waves`; after a pass-out the night also starts by itself at `PASS_OUT_PREPARATION_TICKS` (0128), and that timer is the only one left
+- `PREPARATION_TICKS` leaves `game_data.gd` and `digest()`; the day clock stays stopped through the build step
+- A START button on the night HUD (`StartButton`, `NHUD_START` 'START' / 'COMEÇAR') and a `start_waves` action in `project.godot` and `InputActions.ACTIONS`, with a pad button (0121) and a default key that is not the GO TO BED key, so a double press cannot skip the build step; `ACT_START` in both languages. After a pass-out the button counts down (`NHUD_START_IN`)
+- 0118's road (the `NightRoad` helper, or whatever 0118 named it) now writes `start_waves` instead of advancing `PREPARATION_TICKS`, so autoplay, determinism, shot, perf_check, play_nights and make_goldens change nowhere else. A loop that waits the build step out without naming the constant would now spin for ever - `shot.gd`'s trailer (~322, `while ... == Phases.PREPARATION`) is one: route it through the road too
+- Rewrite `_task_0006_phases` ('preparation ends itself' becomes 'preparation waits for START') and every assert 0118 left on the timer with a comment pointing here; input cases that waited out the build step use the road. 0118's `_task_0118_road` text scan allowed `PREPARATION_TICKS` in the road: it now allows it nowhere. Check 0128's `_task_0128_pass_out` ordinary-bedtime half still holds
+- SIM moves on purpose (`intent` gains `start_waves`, and the determinism scenario's build step is one tick instead of 600): record both numbers. DATA moves (`PREPARATION_TICKS` leaves `digest()`)
+
+  - done when: `_task_0136_start` in `headless_v1.gd`: two minutes of ticks in PREPARATION (past the old 20 s and the 30 s pass-out timer) stay in PREPARATION; `start_waves` begins the night on the next tick; `start_waves` by day or at night changes nothing; after a pass-out the night begins at exactly `PASS_OUT_PREPARATION_TICKS`, or sooner on START
+  - done when: `_case_0136_start` in `input_v1.gd`: clicking `StartButton` and pressing the START key each begin the waves
+  - done when: A capture of the build step with START on screen, opened
 
 ### 0140 - The day HUD: the hour and bedtime
 
@@ -205,40 +222,6 @@ The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131'
   - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A004
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the cursor in each state over dark ground - opened and looked at, in `implementation/shots/0146/`
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0133 - The hotbar of defences
-
-Waits on 0132.  Likely files: `src/ui/hotbar.gd (new), src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/tooltip.gd, src/ui/guardian_view.gd, src/ui/placeholder_art.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/input_v1.gd`.
-
-The night's shop window: a hotbar of every defence with its price, picked with a number key, a click or a bumper instead of a text list, so what the day earned is visible as walls and towers.
-
-- In PREPARATION and NIGHT a hotbar along the bottom replaces BuildMode's text palette: one slot per id of `Building.catalogue(state)`, in that order, with its icon and price - the kit count when a kit is held, else `Building.cost_of`, greyed with what is short when `Building.affordable` says no, and the barricade's `left_tonight`. By day `B` keeps the text list of buildings
-- Built from the catalogue, not a list: phase 13's six new defences appear with no edit here, and more slots than fit page or scroll
-- Selection goes through `Building.select`, the road the palette rows use today: a click on a slot; `slot_1`..`slot_8` (add `slot_7` and `slot_8` - slots 1-6 are the seed keys by day (`DayHud.SEED_ACTIONS`) and mean hotbar slots at night, when the seed strip ignores them; `ACT_SLOT_*` stop saying 'SEED' in both languages); and `hotbar_prev`/`hotbar_next` on two pad buttons 0121's layout left free (the bumpers if they are) and a key pair, wrapping. New actions go into `project.godot` and `InputActions.ACTIONS` with `ACT_*` strings, rebindable, with the clash check passing. `cancel` clears the selection and the cursor goes back to inspecting
-- Each slot's tooltip shows name, cost, HP, range and damage read from `GameData` (never copied) through `tooltip.gd`
-- Icons through the placeholder road - the structure's own sprite scaled down is enough - until A005 is integrated by 0147
-- The porch guardian (0131) plays its point state when a defence goes down, spotted by the view the way `sfx.gd` and `particles.gd` compare this frame's occupants with the last - no new `Events` kind, which would move SIM
-- View only: neither hash moves. The night HUD's bottom-right controls stay clickable (0139 settles the final layout)
-
-  - done when: `_case_0133_hotbar` in `input_v1.gd`: `slot_2` selects the second defence, clicking a slot selects it, a bumper cycles and wraps, a placement at the cursor uses the selection, an unaffordable slot shows its shortfall, `slot_2` at night leaves the selected seed alone, and the guardian is in its point state after the placement
-  - done when: `python tools/shot.py 0133 wave refused` and `--fhd` captures opened, also with `--pt_BR`: prices legible, nothing overlapping the night HUD
-
-### 0136 - The build step waits for START
-
-Waits on 0132.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/game_data.gd, src/core/player.gd, src/ui/night_hud.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/night_road.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The build step has no clock. The night waits while the player builds and starts when they press START - except after a pass-out, when the horde is already at the gate and gives thirty seconds.
-
-- `Sim._tick_preparation` no longer starts the night by itself: a new edge intent `start_waves` (consumed by the tick, ignored outside PREPARATION) calls 0118's `Phases.start_waves`; after a pass-out the night also starts by itself at `PASS_OUT_PREPARATION_TICKS` (0128), and that timer is the only one left
-- `PREPARATION_TICKS` leaves `game_data.gd` and `digest()`; the day clock stays stopped through the build step
-- A START button on the night HUD (`StartButton`, `NHUD_START` 'START' / 'COMEÇAR') and a `start_waves` action in `project.godot` and `InputActions.ACTIONS`, with a pad button (0121) and a default key that is not the GO TO BED key, so a double press cannot skip the build step; `ACT_START` in both languages. After a pass-out the button counts down (`NHUD_START_IN`)
-- 0118's road (the `NightRoad` helper, or whatever 0118 named it) now writes `start_waves` instead of advancing `PREPARATION_TICKS`, so autoplay, determinism, shot, perf_check, play_nights and make_goldens change nowhere else. A loop that waits the build step out without naming the constant would now spin for ever - `shot.gd`'s trailer (~322, `while ... == Phases.PREPARATION`) is one: route it through the road too
-- Rewrite `_task_0006_phases` ('preparation ends itself' becomes 'preparation waits for START') and every assert 0118 left on the timer with a comment pointing here; input cases that waited out the build step use the road. 0118's `_task_0118_road` text scan allowed `PREPARATION_TICKS` in the road: it now allows it nowhere. Check 0128's `_task_0128_pass_out` ordinary-bedtime half still holds
-- SIM moves on purpose (`intent` gains `start_waves`, and the determinism scenario's build step is one tick instead of 600): record both numbers. DATA moves (`PREPARATION_TICKS` leaves `digest()`)
-
-  - done when: `_task_0136_start` in `headless_v1.gd`: two minutes of ticks in PREPARATION (past the old 20 s and the 30 s pass-out timer) stay in PREPARATION; `start_waves` begins the night on the next tick; `start_waves` by day or at night changes nothing; after a pass-out the night begins at exactly `PASS_OUT_PREPARATION_TICKS`, or sooner on START
-  - done when: `_case_0136_start` in `input_v1.gd`: clicking `StartButton` and pressing the START key each begin the waves
-  - done when: A capture of the build step with START on screen, opened
 
 ### 0134 - Repairing by cursor
 
@@ -348,7 +331,7 @@ Day one teaches the new night - go to bed, build with the cursor, press START, h
 
 ### 0142 - The autoplayer sleeps too
 
-Waits on 0137, 0132, 0138.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, src/tools/nights.gd, src/tools/play_nights.gd, tools/autoplay.py, tools/nights.py, tools/balance.py, tools/play_nights.py, implementation/BALANCE.md, src/tools/headless_check.gd`.
+Waits on 0137, 0138.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, src/tools/nights.gd, src/tools/play_nights.gd, tools/autoplay.py, tools/nights.py, tools/balance.py, tools/play_nights.py, implementation/BALANCE.md, src/tools/headless_check.gd`.
 
 The autoplayer plays the game as it now is - a day, bed, building by cursor, START, the night to dawn - and keeps playing after a loss, so the balance tools measure the real loop again.
 
@@ -1737,7 +1720,7 @@ The night stops paying like a day. It hands over essence - today's technology po
 
 ### 0223 - Defences sleep under tarps
 
-Waits on 0196, 0132.  Likely files: `src/ui/world_view.gd, src/ui/transition.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd, implementation/backlog/packs/A044-tarps.md`.
+Waits on 0196.  Likely files: `src/ui/world_view.gd, src/ui/transition.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd, implementation/backlog/packs/A044-tarps.md`.
 
 By day the defences sleep under tarps and the farm looks like a farm; when the night comes the covers come off with the wake the transition already plays (plan section 5).
 
@@ -1753,7 +1736,7 @@ By day the defences sleep under tarps and the farm looks like a farm; when the n
 
 ### 0227 - The pumpkin catapult
 
-Waits on 0196, 0132, 0168.  Likely files: `src/core/game_data.gd, src/core/towers.gd, src/core/ammo.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0196, 0168.  Likely files: `src/core/game_data.gd, src/core/towers.gd, src/core/ammo.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 A lobbed splash that burns pumpkins instead of gunpowder, so an autumn harvest becomes an autumn defence (plan section 5).
 
@@ -1771,7 +1754,7 @@ A lobbed splash that burns pumpkins instead of gunpowder, so an autumn harvest b
 
 ### 0230 - The electric fence
 
-Waits on 0196, 0132, 0176.  Likely files: `src/core/game_data.gd, src/core/enemies.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+Waits on 0196, 0176.  Likely files: `src/core/game_data.gd, src/core/enemies.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
 
 A barrier like the wooden fence, except whatever bites it is thrown back stunned for a moment - a winter answer that needs the generator running (plan section 5).
 
@@ -1896,7 +1879,7 @@ The night leaves something for the morning: bones where zombies fell and, after 
 
 ### 0224 - The scarecrow decoy
 
-Waits on 0218, 0132.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0218.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 A straw figure that pulls nearby zombies off their road and takes their blows while the towers work - the first defence that changes where the horde goes without walling it in.
 
@@ -1915,7 +1898,7 @@ A straw figure that pulls nearby zombies off their road and takes their blows wh
 
 ### 0226 - The beehive
 
-Waits on 0218, 0132, 0168.  Likely files: `src/core/game_data.gd, src/core/towers.gd, src/core/combat.gd, src/core/phases.gd, src/core/building.gd, src/core/state.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+Waits on 0218, 0168.  Likely files: `src/core/game_data.gd, src/core/towers.gd, src/core/combat.gd, src/core/phases.gd, src/core/building.gd, src/core/state.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
 
 Bees sting what comes near and keep stinging, and the hive is as strong as the sunflowers around it - a defence that asks for a field to be planted beside it (plan section 5).
 
@@ -1933,7 +1916,7 @@ Bees sting what comes near and keep stinging, and the hive is as strong as the s
 
 ### 0228 - The garlic braid
 
-Waits on 0218, 0132, 0168.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/core/phases.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/headless_v1.gd`.
+Waits on 0218, 0168.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/core/phases.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/headless_v1.gd`.
 
 Hung on a post, it makes the ground around it somewhere zombies would rather walk round, and slows the ones that come through anyway (plan sections 3.1 and 5).
 
@@ -1989,7 +1972,7 @@ The approved electric fence, joined on all sixteen masks, and its zap replace th
 
 ### 0247 - The spitter
 
-Waits on 0218, 0132.  Likely files: `src/core/enemies.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/describe.gd, src/ui/names.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
+Waits on 0218.  Likely files: `src/core/enemies.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/describe.gd, src/ui/names.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
 
 The first enemy that hurts what you built without touching it: it stops at range and spits at a tower. A tower line in the open becomes something to cover, not only something to build.
 
@@ -2010,7 +1993,7 @@ The first enemy that hurts what you built without touching it: it stops at range
 
 ### 0248 - The rat swarm
 
-Waits on 0218, 0132.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/enemies.gd, src/tools/perf_check.gd, tools/perf_baseline.txt, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0218.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/enemies.gd, src/tools/perf_check.gd, tools/perf_baseline.txt, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 A crowd of small fast bodies that a single-target tower wastes shots on and a mine or a flame cone eats. It is also the perf case the groundwork of 0218 was built for.
 
@@ -2103,7 +2086,7 @@ Rotten fish made by day and thrown down at night: for a few seconds the whole cr
 
 ### 0229 - The searchlight
 
-Waits on 0196, 0132, 0226.  Likely files: `src/core/light.gd (new), src/core/game_data.gd, src/core/towers.gd, src/core/ability.gd, src/core/combat.gd, src/ui/lighting.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0196, 0226.  Likely files: `src/core/light.gd (new), src/core/game_data.gd, src/core/towers.gd, src/core/ability.gd, src/core/combat.gd, src/ui/lighting.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 A powered lamp that lights the ground around it and lets the towers in its light see a tile further - and the moment light becomes a rule that the wraith and the fog will read (plan section 5).
 
@@ -2122,7 +2105,7 @@ A powered lamp that lights the ground around it and lets the towers in its light
 
 ### 0231 - Hardwood walls and sandbags
 
-Waits on 0196, 0177, 0188, 0132, 0226.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/core/pathing.gd, src/core/repair.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+Waits on 0196, 0177, 0188, 0226.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/core/pathing.gd, src/core/repair.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
 
 Two more ways to hold a line: the stone wall upgraded with hardwood into something a breaker has to work at, and sandbags from the loom as a cheap barrier that soaks more than a fence (plan sections 3.3 and 3.5).
 
@@ -3287,7 +3270,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (6/23)
+## 10 - Sleep is the night  (7/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3295,17 +3278,17 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md)
 - [x] **0130** [The night camera](prompts/0130-night-camera.md)
 - [x] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md)
-- [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md)
-- [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md) - needs 0132
+- [x] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md)
+- [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md)
 - [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0133
 - [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md)
-- [ ] **0136** [The build step waits for START](prompts/0136-start-button.md) - needs 0132
+- [ ] **0136** [The build step waits for START](prompts/0136-start-button.md)
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
 - [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0133, 0134, 0135, 0136, 0137
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
-- [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0132, 0138
+- [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0138
 - [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - needs 0133 - waits for art A003
@@ -3395,15 +3378,15 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0220** [The technology tree by season](prompts/0220-tech-by-season.md) - needs 0219, 0149
 - [ ] **0221** [What the night leaves behind](prompts/0221-night-loot.md) - needs 0219, 0152
 - [ ] **0222** [Bone meal](prompts/0222-bone-meal.md) - needs 0221, 0165
-- [ ] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md) - needs 0196, 0132
-- [ ] **0224** [The scarecrow decoy](prompts/0224-decoy.md) - needs 0218, 0132
+- [ ] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md) - needs 0196
+- [ ] **0224** [The scarecrow decoy](prompts/0224-decoy.md) - needs 0218
 - [ ] **0225** [Zombie bait](prompts/0225-zombie-bait.md) - needs 0224, 0179
-- [ ] **0226** [The beehive](prompts/0226-beehive.md) - needs 0218, 0132, 0168
-- [ ] **0227** [The pumpkin catapult](prompts/0227-catapult.md) - needs 0196, 0132, 0168
-- [ ] **0228** [The garlic braid](prompts/0228-garlic-braid.md) - needs 0218, 0132, 0168
-- [ ] **0229** [The searchlight](prompts/0229-searchlight.md) - needs 0196, 0132, 0226
-- [ ] **0230** [The electric fence](prompts/0230-electric-fence.md) - needs 0196, 0132, 0176
-- [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md) - needs 0196, 0177, 0188, 0132, 0226
+- [ ] **0226** [The beehive](prompts/0226-beehive.md) - needs 0218, 0168
+- [ ] **0227** [The pumpkin catapult](prompts/0227-catapult.md) - needs 0196, 0168
+- [ ] **0228** [The garlic braid](prompts/0228-garlic-braid.md) - needs 0218, 0168
+- [ ] **0229** [The searchlight](prompts/0229-searchlight.md) - needs 0196, 0226
+- [ ] **0230** [The electric fence](prompts/0230-electric-fence.md) - needs 0196, 0176
+- [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md) - needs 0196, 0177, 0188, 0226
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md) - needs 0196, 0135
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0185, 0220, 0230
 - [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0149, 0220, 0223
@@ -3422,8 +3405,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 ## 14 - Enemies and bosses  (0/24)
 
 - [ ] **0246** [Bosses in general](prompts/0246-bosses-general.md) - needs 0153, 0196
-- [ ] **0247** [The spitter](prompts/0247-spitter.md) - needs 0218, 0132
-- [ ] **0248** [The rat swarm](prompts/0248-rat-swarm.md) - needs 0218, 0132
+- [ ] **0247** [The spitter](prompts/0247-spitter.md) - needs 0218
+- [ ] **0248** [The rat swarm](prompts/0248-rat-swarm.md) - needs 0218
 - [ ] **0249** [The crow](prompts/0249-crow.md) - needs 0218, 0168, 0233, 0234
 - [ ] **0250** [The digger](prompts/0250-digger.md) - needs 0218, 0234
 - [ ] **0251** [The frost zombie](prompts/0251-frost-zombie.md) - needs 0218

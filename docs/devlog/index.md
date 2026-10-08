@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-128 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
+129 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -172,10 +172,11 @@ is the sort of thing this list exists to say out loud.
 | 0129 | He stays in bed all night | 2026-10-08 |
 | 0130 | The night camera | 2026-10-08 |
 | 0131 | The guardian's cursor | 2026-10-08 |
+| 0132 | Defences go down only at night | 2026-10-08 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 32 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 34 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -209,6 +210,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Passing out at 02:00** (0128) - `sim` 10253699 -> 734279793
 - **Passing out at 02:00** (0128) - `data` 1739027987 -> 954093946
 - **He stays in bed all night** (0129) - `sim` 734279793 -> 1212869859
+- **Defences go down only at night** (0132) - `sim` 1212869859 -> 2823820161
+- **Defences go down only at night** (0132) - `data` 954093946 -> 2599455698
 
 ## What went wrong
 

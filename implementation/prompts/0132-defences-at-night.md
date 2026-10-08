@@ -1,7 +1,7 @@
 # 0132 - Defences go down only at night
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0131, 0119
 - **Likely files:** src/core/building.gd, src/core/game_data.gd, src/core/phases.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd
 

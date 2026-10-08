@@ -793,9 +793,10 @@ const DEFENCES: Dictionary = {
 		"cost": {WOOD: 4},
 		"hp": 20,                       # LEVER: hit points, 10-40
 		"path_cost": 4,                 # LEVER: tiles-equivalent detour, 2-8
-		# It may go down mid-wave, which nothing else may - and it expires, so
-		# it cannot quietly become a cheaper wall.
-		"placeable_at_night": true,
+		# **Cheap, temporary and limited** - its identity since every defence
+		# goes down at night (task 0132). It expires, so it cannot quietly
+		# become a cheaper wall: the clock starts with the waves, wherever in
+		# the night it went down.
 		"lifetime_ticks": 60 * SECONDS, # LEVER: ticks, 30-120 seconds worth
 		"per_night_limit": 5,           # LEVER: how many, 2-10
 		"energy_draw": 0,
@@ -919,8 +920,10 @@ const TUTORIAL: Array = [
 	{"id": &"water", "line": &"TUT_WATER"},
 	{"id": &"sell", "line": &"TUT_SELL"},
 	{"id": &"craft", "line": &"TUT_CRAFT"},
-	{"id": &"build", "line": &"TUT_BUILD"},
 	{"id": &"night", "line": &"TUT_NIGHT"},
+	# **After the night is sent for** (task 0132): defences go down in the
+	# build step and the night now. 0141 writes the rest of the night's.
+	{"id": &"build", "line": &"TUT_BUILD"},
 ]
 
 
@@ -2217,19 +2220,6 @@ static func check_defences(defences: Dictionary) -> Array:
 					+ "range or a reload - a trap does not aim") % defence_id)
 			if int(defence.get("damage", 0)) <= 0:
 				errors.append("defence '%s' goes off and does nothing" % defence_id)
-
-		# **A thing that may go down at night has to be temporary.** A
-		# barricade that outlived the night would be a cheaper wall, and the
-		# whole point of letting one go down mid-wave is that it buys seconds
-		# rather than ground.
-		if bool(defence.get("placeable_at_night", false)):
-			if int(defence.get("lifetime_ticks", 0)) <= 0:
-				errors.append(("defence '%s' may be placed at night and never "
-					+ "expires - that is a wall you can build mid-wave")
-					% defence_id)
-			if int(defence.get("per_night_limit", 0)) <= 0:
-				errors.append(("defence '%s' may be placed at night with no limit "
-					+ "on how many") % defence_id)
 
 		if defence.has("ammo"):
 			for res in (defence["ammo"] as Dictionary):

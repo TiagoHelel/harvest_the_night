@@ -69,6 +69,18 @@ static func built_last_night(state: Dictionary, build: Callable) -> Variant:
 	return out
 
 
+## **The other way round** (task 0132): a production building goes up by day
+## only, so a build-step fixture that needs one standing - the generator
+## behind a measured tower line - builds it this way: the phase reads DAY for
+## exactly the length of `build`, then goes back.
+static func built_by_day(state: Dictionary, build: Callable) -> Variant:
+	var phase := int(state["phase"])
+	state["phase"] = Phases.DAY
+	var out: Variant = build.call()
+	state["phase"] = phase
+	return out
+
+
 ## Advance farm time **without ever reaching 02:00**: whenever the day is about
 ## to end it starts again at dawn - a day that never ends, for checks about how
 ## long something takes (regrowth, a cliff mined for four days), not about

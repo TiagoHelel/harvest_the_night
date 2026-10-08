@@ -608,7 +608,9 @@ func _case_0131_cursor() -> void:
 	expect(StringName(Farm.occupant(state, spot).get("id", &"")) == &"wall",
 		"a placement at the cursor lands on that cell", str(spot))
 	await frames(3)
-	expect(cursor.look() == &"blocked", "and the cell it filled now reads blocked",
+	# Over the wall it put down, it says what remove would do there (task
+	# 0132: a wall has no levels, so not upgrade).
+	expect(cursor.look() == &"sell", "and over the wall it filled it reads sell",
 		String(cursor.look()))
 
 	# **What is under it**, through the tooltip, inside the night's free band.

@@ -2854,26 +2854,18 @@ func _case_0041_tutorial() -> void:
 	expect(int(state["day_tick"]) > before,
 		"and the day ran the whole time", str(int(state["day_tick"]) - before))
 
-	# **Out of order is fine.** Skip straight to the last thing the game has
-	# not asked for yet and watch the lines behind it disappear.
-	# **By day on purpose**: the tutorial's build step is a day step until
-	# task 0132 moves it to the night and rewrites this.
+	# **Out of order is fine.** Skip ahead to a line the game has not asked
+	# for yet and watch it disappear. The bench's job, since task 0132: the
+	# build line follows the night now, and towers go down in its build step.
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200,
 		GameData.STONE: 200})
-	var spot := Vector2i(-1, -1)
-	for y in range(4, 12):
-		for x in range(20, 32):
-			if Farm.buildable(state, Vector2i(x, y)):
-				spot = Vector2i(x, y)
-				break
-		if spot != Vector2i(-1, -1):
-			break
-	expect(Building.place(state, &"gun_tower", spot),
-		"a tower goes down out of order")
-	await until(func() -> bool: return Tutorial.is_done(state, &"build"),
-		"the build line to tick itself off")
-	expect(Tutorial.is_done(state, &"build"),
-		"and the line about building is simply gone, unread")
+	var bench := Building.anchor_of(state, Farm.cells_with(state, &"workshop")[0])
+	expect(Crafting.enqueue(state, bench, &"wall_kit"),
+		"a bench takes a job out of order")
+	await until(func() -> bool: return Tutorial.is_done(state, &"craft"),
+		"the craft line to tick itself off")
+	expect(Tutorial.is_done(state, &"craft"),
+		"and the line about the bench is simply gone, unread")
 
 	# **It goes away with the day.**
 	await hold_key(KEY_N, 4)
