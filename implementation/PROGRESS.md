@@ -14388,3 +14388,97 @@ headless_check 81.6 s, headless_v1 3.6 s, input_check 91.3 s, input_v1
 - The scenario steps out of the door for its second day.
 
 **data 898358060 unchanged.**
+
+## 0122 - Art: the farmer's run - done 2026-10-08 (cancelled by the owner)
+
+What changed: nothing was put in. Reviewing Codex's A006 frames, the owner
+cancelled the run: "The farmer's run, eight directions - ele não corre!!!!
+pode tirar".
+
+Codex retired the pack: its status is blocked, "Cancelled by owner: remove all
+eight run directions; reuse existing walk", with
+`deliveries/A006-farmer-run/RUN-REMOVAL.txt`. This task closed on its decline
+path, the one 0289's prompt spells out for an optional pack the owner
+declines.
+
+What the decline path did:
+- A006's eight `run_<dir>` stand-ins left the 0120 registry
+  (`PlaceholderArt.POSES`), and the table's header says why.
+  `tools/placeholders.py` now lists 56 stand-ins over 9 packs, with no A006.
+- **The run key is unchanged.** While it is held, `PlayerArt.pose` already
+  named `walk_<dir>` at `RUN_FRAME_SECONDS`; 0120 never switched it to
+  `run_<dir>`. Holding it plays the same walk, faster, which is what "reuse
+  existing walk" means.
+- The run was presentation only and the farmer moves at one speed, so no rule
+  moved. Removing the RUN binding from the controls was not asked for, and is
+  left to the owner.
+- `_task_0120_placeholders` used `run_south` as its example of a registered
+  name; it reads `bed_sleep` now. A new assert keeps the retired names out of
+  both tables: the run, `bed_wake` and `pass_out_*`.
+- The 0122 prompt and `tools/backlog/part5.py` now open with the
+  cancellation. Closing the task keeps 0290's visual gate reachable, since it
+  depends on 0122.
+
+Files: src/ui/placeholder_art.gd, src/tools/headless_v1.gd,
+implementation/prompts/0122-art-farmer-run.md, tools/backlog/part5.py
+
+No captures: nothing new is drawn. Holding the run key shows the walk it
+always showed.
+
+## 2026-10-08 — No collapse at 02:00: a black screen
+
+The owner, reviewing Codex's A001 frames: "o tamanho do último frame tá
+pequeno demais, pode tirar essa animação também, a tela só fica preta e ele
+aparece acordado depois no dia seguinte". Codex retired A001's pass-out in
+every direction (`deliveries/A001-farmer-bed/BLACKOUT-SIMPLIFICATION.txt`).
+This follows the wake, which 0138 already took out.
+
+**The rules are untouched.** Only the picture changed:
+- 02:00 still passes him out (0128) into the short build step;
+- the report still says so (0138);
+- he still wakes beside his bed at 06:00.
+
+What changed in the view:
+- **`PlayerView` no longer lays him down where he fell.** Asleep and not day
+  means not drawn, after a bedtime and after a pass-out alike. `_lying()`,
+  `PlayerArt.pass_out_pose` and the `hold` flag that only it used are gone.
+- **`HouseView` holds the screen black** for `PASS_OUT_BLACK_SECONDS`.
+  - That is 0.8 s, a view timing kept beside the bed beat's.
+  - The black is on the `fades` layer, above the HUD. Then the night comes up
+    with nobody on the farm.
+  - There is no black with the switch's fades turned off, and
+    `skip_bedtime()` cuts it for stills.
+  - `is_showing_blackout()` is there for the cases.
+- `pass_out_<dir>` (all four) left the registry, and `stand_in_turn`'s doc no
+  longer promises a pass-out.
+
+Backlog:
+- 0143, A001's integration, is now "Art: going to bed and sleeping", in its
+  prompt and in `tools/backlog/part6.py`. It still waits for the owner's
+  review of those two strips.
+- A001's own request, `packs/A001-farmer-bed.md`, still lists the retired
+  rows. Codex's two notes supersede them, and the file - which Codex has
+  edited in the working tree - was left to Codex.
+- `docs/PLANO-DO-JOGO.md`'s phase-0 row still lists "correndo" among the
+  farmer's missing art; that is left for the owner.
+
+Tests and shots:
+- `_case_0138_morning` checks the black right after `Phases.pass_out`, and
+  that nobody is drawn on the farm.
+- Shot `passed_out` is re-described: "passed out at 02:00: the night, and
+  nobody on the farm".
+- `implementation/shots/blackout/passed_out.png` (and `-pt_BR`) were opened.
+  They show the build step's dark farm with the cursor, the START countdown
+  and the log's line, and no farmer on the ground where 0136's picture had
+  him.
+- The first still came out 60% darker than 0136's. `skip_bedtime()` cut the
+  hold but not the black already on screen; that is fixed.
+
+Files: src/ui/{player_view,player_art,house_view,placeholder_art}.gd,
+src/tools/{input_v1,shot}.gd, implementation/prompts/0143-art-farmer-bed.md,
+tools/backlog/part6.py, implementation/shots/blackout/
+
+Verify, for this and for 0122 above: **PASS**, 59 passed in 550 s (OVER BUDGET as before).
+Counts: headless_check 16230, headless_v1 274 (+1: the retired names),
+input_check 1058, input_v1 116 (+1: the black screen). Sim 1222657941 and data
+898358060 are unchanged: it is view only.

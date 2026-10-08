@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **133 / 296 done**
+`###########.............`  **134 / 296 done**
 
-0 doing / 163 todo / 0 blocked across 18 phases.
+0 doing / 162 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0122 - Art: the farmer's run**. The whole of what is left is
+First up: **0123 - Art: the farmer tilling, planting, watering and harvesting**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,28 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-163 task(s) left, the ready ones first, then what they
+162 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0122 - Art: the farmer's run
-
-Waits for Codex art A006.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/player_art.gd, src/ui/placeholder_art.gd, src/tools/art_showcase.gd, src/tools/headless_check.gd, implementation/fhd-player/pilots/2026-10-04/palette-variants/promote_blue_walk.py, tools/verify.py, src/tools/shot.gd`.
-
-Running is the walk played faster. Put in the eight-direction run Codex drew for A006 at the approved 32px detail, so holding run looks like running.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A006` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A006-PROMPT.txt` handoff (under `implementation/backlog/deliveries/`); check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/player-fhd/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`. The farmer's checks are `art_showcase.gd --locomotion` and the FHD player sources check (`promote_blue_walk.py --check`), which knows only walk and idle: extend it, or give the run its own promoter with a `--check` wired into `tools/verify.py`
-- Runtime names `run_<dir>_0..7` for the eight directions of `PlayerArt.HEADINGS`: 80x80, pivot (40,72), `draw_scale` 0.5, `exact-source` inside the 12-colour blue garment ramp; `01.png` is frame 0, seconds and loop from the pack's contract, mirrors exactly as the handoff says (never flip a baked mirror again)
-- `PlayerArt.pose` plays `run_<direction>` while running instead of `walk_<direction>` at `RUN_FRAME_SECONDS` (0120 left it naming the walk), its seconds from `PlayerFrames.SECONDS`; retire `RUN_FRAME_SECONDS` if nothing else reads it. Rewrite what pinned the stand-in: `_task_0073_player_art`'s running pose (~l.13300, 'runs its eight walking poses at a faster pace') and `art_showcase.gd`'s `_locomotion` (~l.1245-1290: the expected name and the seconds check)
-- Delete A006's entry from the 0120 placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A006 integrated`.
-
-  - done when: `python tools/show_art.py --locomotion --check` and the FHD player sources check pass with the run in them; `python tools/import_art.py --check` passes
-  - done when: `python tools/placeholders.py` no longer lists A006
-  - done when: FHD captures (`python tools/shot.py 0122 --fhd`, with the farmer running; add a scenario if none shows it) by day and in the dark, in `implementation/shots/0122/`, opened: feet on the ground line, body as tall as the walk, no blue drift
-  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0123 - Art: the farmer tilling, planting, watering and harvesting
 
@@ -157,21 +138,21 @@ The autoplayer plays the game as it now is - a day, bed, building by cursor, STA
   - done when: `python tools/autoplay.py` plays ten nights for every policy and prints the table; the numbers are in the journal and in BALANCE.md
   - done when: `python tools/balance.py` with a short sweep finishes and leaves the git tree clean
 
-### 0143 - Art: going to bed, sleeping, waking, passing out
+### 0143 - Art: going to bed and sleeping
 
-Waits for Codex art A001.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/player_frames.gd, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/house_view.gd, src/ui/player_view.gd, tools/verify.py`.
+Waits for Codex art A001.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/player_frames.gd, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/house_view.gd, tools/verify.py`.
 
-The farmer's night in his own art - getting into bed, the sleep loop, waking and stretching, passing out on the farm - from Codex pack A001, replacing 0129's stand-ins.
+The farmer's night in his own art - getting into bed and the sleep loop - from Codex pack A001, replacing 0129's stand-ins. The owner retired A001's waking and pass-out on 2026-10-08 (`deliveries/A001-farmer-bed/WAKE-SIMPLIFICATION.txt`, `BLACKOUT-SIMPLIFICATION.txt`): he wakes on his feet beside the bed (0138) and a pass-out is a black screen, so neither is art any more.
 
 - `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A001` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
 - Use only the folder named in the pack's `CLAUDE-A001-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
 - Promote through the raster pipeline: versioned sources under `assets/art_source/player-fhd/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`. The farmer has no `check_*_art.py`: its gates are a hash-checking promoter with a `--check` mode wired into `tools/verify.py` (like `implementation/fhd-player/pilots/2026-10-04/palette-variants/promote_blue_walk.py`) and the `show_art.py` showcases
-- Runtime: the canvas, pivot and `draw_scale` the pack's contract states, one per animation; the get-in, sleep and wake strips play in `house_view.gd` sitting exactly on the bed (`FURNITURE_OFFSETS` for the bed), the pass-out in `player_view.gd` where he fell, over the shared shadow; the one-shots stay one-shots and the sleep loop loops
-- Delete A001's entries from 0120's placeholder registry: the raster outputs land under the names 0129 registered, so no view code changes (`python tools/placeholders.py --check` fails on an entry left for an integrated pack). Extend the `--house-visit` and `--work` showcases with the four animations
+- Runtime: the canvas, pivot and `draw_scale` the pack's contract states, one per animation; the get-in and sleep strips play in `house_view.gd` sitting exactly on the bed (`FURNITURE_OFFSETS` for the bed); the get-in stays a one-shot and the sleep loop loops. The retired `bed_wake` and `pass_out_*` frames are never imported or played
+- Delete A001's entries from 0120's placeholder registry: the raster outputs land under the names 0129 registered, so no view code changes (`python tools/placeholders.py --check` fails on an entry left for an integrated pack). Extend the `--house-visit` showcase with both animations
 - Set the pack to integrated: `python implementation/backlog/assets.py set A001 integrated`.
 
-  - done when: `python tools/show_art.py --house-visit --check`, `python tools/show_art.py --work --check` and the farmer's promoter check pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A001
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game - going to bed, asleep, waking, a pass-out - opened and looked at, in `implementation/shots/0143/`
+  - done when: `python tools/show_art.py --house-visit --check` and the farmer's promoter check pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A001
+  - done when: FHD (1920x1080) captures of the art in the real game - going to bed and asleep - opened and looked at, in `implementation/shots/0143/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0144 - Art: the farmer's reactions and Zzz
@@ -2760,7 +2741,7 @@ Autumn opens the north and brings the two enemies that ignore the shape of a maz
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0122, 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -3148,7 +3129,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (10/14)
+## 9 - v1.0 groundwork  (11/14)
 
 - [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
 - [x] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
@@ -3160,7 +3141,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0119** [Tests and tools build in the build step](prompts/0119-build-in-preparation.md)
 - [x] **0120** [One road for art that has not arrived](prompts/0120-placeholder-road.md)
 - [x] **0121** [A controller for every action](prompts/0121-gamepad-bindings.md)
-- [ ] **0122** [Art: the farmer's run](prompts/0122-art-farmer-run.md) - waits for art A006
+- [x] **0122** [Art: the farmer's run](prompts/0122-art-farmer-run.md)
 - [ ] **0123** [Art: the farmer tilling, planting, watering and harvesting](prompts/0123-art-farmer-field-work.md) - waits for art A007
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
@@ -3184,7 +3165,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md)
-- [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - waits for art A001
+- [ ] **0143** [Art: going to bed and sleeping](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
@@ -3349,7 +3330,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0152, 0155, 0160, 0170, 0182, 0253, 0254, 0255
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0122, 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (0/7)
 

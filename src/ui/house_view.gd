@@ -35,6 +35,13 @@ var _was_asleep := false
 var _beat_left := 0.0
 var _beat_elapsed := 0.0
 
+## **Passing out is a black screen** (the owner, 2026-10-08): no collapse on
+## the farm. At 02:00 the screen holds black this long, then the night comes
+## up without him in it; the morning finds him beside his bed (task 0138).
+## View only, like the bed beat - the rules are already in PREPARATION.
+const PASS_OUT_BLACK_SECONDS := 0.8
+var _black_left := 0.0
+
 
 ## Match the outdoor farmer's held run animation without changing house rules.
 func set_running(running: bool) -> void:
@@ -188,6 +195,7 @@ func show_state(value: Dictionary) -> void:
 	if not is_same(value, state):
 		# A run loaded asleep has no bedtime to show.
 		_was_asleep = House.asleep(value)
+		_black_left = 0.0
 		if _beat_left > 0.0 and _sleeper != null:
 			_end_bed_beat(House.inside(value))
 	state = value
@@ -213,7 +221,11 @@ func _process(delta: float) -> void:
 		_fade.color.a = 1.0
 		_focus = Vector2(Player.position(state)) * GameData.TILE_SIZE / Player.SUBTILE
 	_watch_bedtime()
-	_fade.color.a = maxf(0.0, _fade.color.a - delta * 5.0)
+	if _black_left > 0.0:
+		_black_left -= delta
+		_fade.color.a = 1.0
+	else:
+		_fade.color.a = maxf(0.0, _fade.color.a - delta * 5.0)
 	if _beat_left > 0.0:
 		_play_bed_beat(delta)
 		return
@@ -233,6 +245,11 @@ func is_showing_bedtime() -> bool:
 	return _beat_left > 0.0
 
 
+## Whether a pass-out's black is holding the screen - for `input_v1`.
+func is_showing_blackout() -> bool:
+	return _black_left > 0.0
+
+
 ## Whether the room is up on screen - for `input_v1`. **The morning has no
 ## beat of its own** (task 0138, the owner's call): confirming the report
 ## brings the room up with him already standing beside the bed.
@@ -243,15 +260,24 @@ func is_showing_room() -> bool:
 ## Cut the bed beat short - what a still wants, as `WorldView.skip_transition`
 ## does for the light.
 func skip_bedtime() -> void:
+	if _black_left > 0.0:
+		_black_left = 0.0
+		_fade.color.a = 0.0
 	if _beat_left > 0.0:
 		_end_bed_beat(House.inside(state))
 		_fade.color.a = 0.0
 
 
 ## Start the bed beat on an ordinary bedtime: asleep this frame and not the
-## last, and not a collapse at 02:00 (that one plays where he fell).
+## last. A collapse at 02:00 is the black screen instead - none for a player
+## who turned the switch's fade off.
 func _watch_bedtime() -> void:
 	var asleep := House.asleep(state)
+	if asleep and not _was_asleep and House.passed_out(state) \
+			and int(state["phase"]) == Phases.PREPARATION \
+			and _bed_beat_seconds() > 0.0:
+		_black_left = PASS_OUT_BLACK_SECONDS
+		_fade.color.a = 1.0
 	if asleep and not _was_asleep and not House.passed_out(state) \
 			and int(state["phase"]) == Phases.PREPARATION:
 		var seconds := _bed_beat_seconds()

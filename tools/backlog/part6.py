@@ -972,17 +972,21 @@ TASKS = [
 
     # ================================================ phase 10 - the art
     dict(id=143, phase=P10,
-         title="Art: going to bed, sleeping, waking, passing out",
+         title="Art: going to bed and sleeping",
          slug="art-farmer-bed", deps=[129, 128],
          art=["A001"],
          files="assets/art_source/player-fhd/, "
                "assets/art_source/manifest.json, "
                "assets/art_source/ownership.json, src/ui/player_frames.gd, "
                "src/ui/raster_art.gd, src/ui/placeholder_art.gd, "
-               "src/ui/house_view.gd, src/ui/player_view.gd, tools/verify.py",
-         goal="The farmer's night in his own art - getting into bed, the "
-              "sleep loop, waking and stretching, passing out on the farm - "
-              "from Codex pack A001, replacing 0129's stand-ins.",
+               "src/ui/house_view.gd, tools/verify.py",
+         goal="The farmer's night in his own art - getting into bed and the "
+              "sleep loop - from Codex pack A001, replacing 0129's "
+              "stand-ins. The owner retired A001's waking and pass-out on "
+              "2026-10-08 (`deliveries/A001-farmer-bed/"
+              "WAKE-SIMPLIFICATION.txt`, `BLACKOUT-SIMPLIFICATION.txt`): he "
+              "wakes on his feet beside the bed (0138) and a pass-out is a "
+              "black screen, so neither is art any more.",
          req=["`python tools/task.py next` only offers this task once "
               "`python implementation/backlog/assets.py status A001` says "
               "`approved`. Check it again first; if it does not, stop and "
@@ -1001,26 +1005,25 @@ TASKS = [
               "`implementation/fhd-player/pilots/2026-10-04/palette-variants/"
               "promote_blue_walk.py`) and the `show_art.py` showcases",
               "Runtime: the canvas, pivot and `draw_scale` the pack's "
-              "contract states, one per animation; the get-in, sleep and "
-              "wake strips play in `house_view.gd` sitting exactly on the "
-              "bed (`FURNITURE_OFFSETS` for the bed), the pass-out in "
-              "`player_view.gd` where he fell, over the shared shadow; the "
-              "one-shots stay one-shots and the sleep loop loops",
+              "contract states, one per animation; the get-in and sleep "
+              "strips play in `house_view.gd` sitting exactly on the bed "
+              "(`FURNITURE_OFFSETS` for the bed); the get-in stays a "
+              "one-shot and the sleep loop loops. The retired `bed_wake` "
+              "and `pass_out_*` frames are never imported or played",
               "Delete A001's entries from 0120's placeholder registry: the "
               "raster outputs land under the names 0129 registered, so no "
               "view code changes (`python tools/placeholders.py --check` "
               "fails on an entry left for an integrated pack). Extend the "
-              "`--house-visit` and `--work` showcases with the four "
-              "animations",
+              "`--house-visit` showcase with both animations",
               "Set the pack to integrated: "
               "`python implementation/backlog/assets.py set A001 integrated`."],
-         dod=["`python tools/show_art.py --house-visit --check`, "
-              "`python tools/show_art.py --work --check` and the farmer's "
-              "promoter check pass; `python tools/import_art.py --check` "
-              "passes; `python tools/placeholders.py` no longer lists A001",
-              "FHD (1920x1080) captures by day and by night of the art in "
-              "the real game - going to bed, asleep, waking, a pass-out - "
-              "opened and looked at, in `implementation/shots/0143/`",
+         dod=["`python tools/show_art.py --house-visit --check` and the "
+              "farmer's promoter check pass; `python tools/import_art.py "
+              "--check` passes; `python tools/placeholders.py` no longer "
+              "lists A001",
+              "FHD (1920x1080) captures of the art in the real game - "
+              "going to bed and asleep - opened and looked at, in "
+              "`implementation/shots/0143/`",
               "The sim and data hashes are unchanged (art never moves them)"]),
 
     dict(id=144, phase=P10, title="Art: the farmer's reactions and Zzz",

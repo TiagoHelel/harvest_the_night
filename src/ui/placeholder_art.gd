@@ -51,8 +51,7 @@ extends RefCounted
 
 const DIR := "res://sprites/actors/"
 
-## The geometry of the walk, which is also A006's runtime run: 80x80 at
-## (40,72), drawn at half size.
+## The geometry of the walk: 80x80 at (40,72), drawn at half size.
 const WALK_FRAME := {"canvas": Vector2i(80, 80), "pivot": Vector2i(40, 72), "draw_scale": 0.5}
 
 ## The legacy work strips the farmer plays today: 48x48 at (24,44), full size.
@@ -64,21 +63,14 @@ const WORK_FRAME := {"canvas": Vector2i(96, 96), "pivot": Vector2i(48, 88), "dra
 
 ## Every runtime animation drawn before its pack is integrated.
 ##
-## **Recorded at task 0120, asked for by nothing yet.** A006's run and the
-## per-direction work strips of A007-A009 replace art already in the game under
-## other names (`walk_<dir>` played faster, and the single west-facing
-## `<verb>` strips mirrored east). Their leaves, 0122-0125, rename the poses in
-## `PlayerArt` and delete these lines; until then `PlayerArt.pose` names
-## `walk_<dir>` and `<verb>` exactly as before.
+## **Recorded at task 0120, asked for by nothing yet.** The per-direction
+## work strips of A007-A009 replace art already in the game under other
+## names (the single west-facing `<verb>` strips mirrored east). Their
+## leaves, 0123-0125, rename the poses in `PlayerArt` and delete these lines;
+## until then `PlayerArt.pose` names `<verb>` exactly as before. **A006's
+## run is gone** (the owner, 2026-10-08: the farmer does not run): holding
+## the run key plays the walk, faster, as it always did.
 const POSES := {
-	&"run_south": {"pack": "A006", "frames": 8, "seconds": 0.07, "loop": true, "stand_in": &"walk_south", "geometry": WALK_FRAME, "final": WALK_FRAME},
-	&"run_north": {"pack": "A006", "frames": 8, "seconds": 0.07, "loop": true, "stand_in": &"walk_north", "geometry": WALK_FRAME, "final": WALK_FRAME},
-	&"run_east": {"pack": "A006", "frames": 8, "seconds": 0.07, "loop": true, "stand_in": &"walk_east", "geometry": WALK_FRAME, "final": WALK_FRAME},
-	&"run_west": {"pack": "A006", "frames": 8, "seconds": 0.07, "loop": true, "stand_in": &"walk_west", "geometry": WALK_FRAME, "final": WALK_FRAME},
-	&"run_south_east": {"pack": "A006", "frames": 8, "seconds": 0.07, "loop": true, "stand_in": &"walk_south_east", "geometry": WALK_FRAME, "final": WALK_FRAME},
-	&"run_south_west": {"pack": "A006", "frames": 8, "seconds": 0.07, "loop": true, "stand_in": &"walk_south_west", "geometry": WALK_FRAME, "final": WALK_FRAME},
-	&"run_north_east": {"pack": "A006", "frames": 8, "seconds": 0.07, "loop": true, "stand_in": &"walk_north_east", "geometry": WALK_FRAME, "final": WALK_FRAME},
-	&"run_north_west": {"pack": "A006", "frames": 8, "seconds": 0.07, "loop": true, "stand_in": &"walk_north_west", "geometry": WALK_FRAME, "final": WALK_FRAME},
 	&"till_south": {"pack": "A007", "frames": 4, "seconds": 0.09, "loop": false, "stand_in": &"till", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 	&"till_north": {"pack": "A007", "frames": 4, "seconds": 0.09, "loop": false, "stand_in": &"till", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 	&"till_west": {"pack": "A007", "frames": 4, "seconds": 0.09, "loop": false, "stand_in": &"till", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
@@ -112,16 +104,13 @@ const POSES := {
 	&"repair_south": {"pack": "A009", "frames": 4, "seconds": 0.09, "loop": false, "stand_in": &"repair", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 	&"repair_north": {"pack": "A009", "frames": 4, "seconds": 0.09, "loop": false, "stand_in": &"repair", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 	&"repair_west": {"pack": "A009", "frames": 4, "seconds": 0.09, "loop": false, "stand_in": &"repair", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
-	# **Task 0129: his night**, A001 and A002. Asked for by `PlayerView` (the
-	# pass-out), `HouseView` (the bed beat) and `WorldView` (the Zzz over the
-	# house). The idle turned or tinted stands in: `tint` and `turn` (degrees
-	# about the feet, per frame) belong to the stand-in, so they go with it.
+	# **Task 0129: his night**, A001 and A002. Asked for by `HouseView` (the
+	# bed beat) and `WorldView` (the Zzz over the house). The idle tinted
+	# stands in: `tint` belongs to the stand-in, so it goes with it. A001's
+	# waking and collapse were retired by the owner on 2026-10-08 - he wakes
+	# on his feet (0138) and a pass-out is a black screen.
 	&"bed_in": {"pack": "A001", "frames": 4, "seconds": 0.2, "loop": false, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME},
 	&"bed_sleep": {"pack": "A001", "frames": 2, "seconds": 0.8, "loop": true, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME, "tint": Color(0.72, 0.78, 1.0)},
-	&"pass_out_south": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
-	&"pass_out_north": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_north", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
-	&"pass_out_west": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_west", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
-	&"pass_out_east": {"pack": "A001", "frames": 4, "seconds": 0.18, "loop": false, "stand_in": &"idle_east", "geometry": WALK_FRAME, "final": WALK_FRAME, "turn": [0, -20, -55, -90]},
 	&"react_zzz": {"pack": "A002", "frames": 3, "seconds": 0.4, "loop": true, "stand_in": &"react_note", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 }
 
@@ -272,8 +261,8 @@ static func stand_in_tint(name: StringName) -> Color:
 	return (POSES.get(name, {}) as Dictionary).get("tint", Color.WHITE)
 
 
-## The stand-in's turn about the feet for one frame, in degrees - 0 for
-## anything else. How the idle is laid down until A001's pass-out arrives.
+## The stand-in's turn about the feet for one frame, in degrees - 0 for an
+## entry without a `turn`, and for anything that is not a stand-in.
 static func stand_in_turn(name: StringName, frame_index: int) -> float:
 	var turns: Array = (POSES.get(name, {}) as Dictionary).get("turn", [])
 	if turns.is_empty():

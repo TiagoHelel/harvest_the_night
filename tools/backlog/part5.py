@@ -630,7 +630,13 @@ TASKS = [
                "src/tools/headless_check.gd, implementation/fhd-player/"
                "pilots/2026-10-04/palette-variants/promote_blue_walk.py, "
                "tools/verify.py, src/tools/shot.gd",
-         goal="Running is the walk played faster. Put in the eight-direction "
+         goal="**Cancelled by the owner on 2026-10-08: the farmer does not "
+              "run.** A006 is retired (`implementation/backlog/deliveries/"
+              "A006-farmer-run/RUN-REMOVAL.txt`), so this closes on its "
+              "decline path: A006's stand-ins leave the 0120 registry and "
+              "the run key keeps playing the walk, faster, as it always did. "
+              "What follows was the plan before the cancellation. Running is "
+              "the walk played faster. Put in the eight-direction "
               "run Codex drew for A006 at the approved 32px detail, so holding "
               "run looks like running.",
          req=[_LEAF_GATE.format(p="A006"),

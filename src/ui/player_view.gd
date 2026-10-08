@@ -127,20 +127,18 @@ func _process(delta: float) -> void:
 ## Pick the drawing, advance the clock, and show the frame.
 func _animate(delta: float) -> void:
 	_bubble.visible = false
-	# **In bed from the switch to the morning** (task 0129): nobody on the
-	# porch at night. After a collapse at 02:00 he lies where he fell through
-	# the short build step instead, and is gone with the night.
-	var lying := _lying()
-	var away := House.asleep(_state) and int(_state["phase"]) != Phases.DAY and not lying
+	# **Asleep from the switch to the morning** (task 0129): nobody on the
+	# farm at night - nor after a collapse at 02:00, which is a black screen
+	# rather than a fall since the owner's call of 2026-10-08 (`HouseView`).
+	var away := House.asleep(_state) and int(_state["phase"]) != Phases.DAY
 	_sprite.visible = not away
 	_shadow.visible = not away
 	if away:
 		return
-	var move := Vector2i.ZERO if lying else _move()
+	var move := _move()
 	if move != Vector2i.ZERO:
 		_heading = move
-	var pose := PlayerArt.pass_out_pose(Player.facing(_state)) if lying \
-		else _work.pose(_state, delta)
+	var pose := _work.pose(_state, delta)
 	if pose.is_empty():
 		pose = PlayerArt.pose(Player.facing(_state), move != Vector2i.ZERO, _verb(), _running, _heading)
 	var name: StringName = pose["name"]
@@ -170,9 +168,6 @@ func _animate(delta: float) -> void:
 	_seconds = seconds
 
 	var frame := int(pose["frame"]) if pose.has("frame") else PlayerArt.frame_at(pose, _elapsed)
-	if bool(pose.get("hold", false)):
-		# Played once, then held on its last frame.
-		frame = mini(int(_elapsed / maxf(seconds, 0.01)), int(pose["frames"]) - 1)
 	var path := PlayerArt.texture_path(name, frame)
 	var texture := _texture(path)
 	_sprite.texture = texture
@@ -220,12 +215,6 @@ func _show_bubble(texture: Texture2D, metadata: Dictionary, lift: Vector2) -> vo
 	_bubble.position += transform.affine_inverse() * (top_left + shift) \
 		- transform.affine_inverse() * top_left
 	_bubble.visible = true
-
-
-## Lying where he fell: passed out at 02:00 and still in the build step.
-func _lying() -> bool:
-	return House.passed_out(_state) and House.asleep(_state) \
-		and int(_state["phase"]) == Phases.PREPARATION
 
 
 ## Whether he is on screen at all: not while he is in bed (task 0129).

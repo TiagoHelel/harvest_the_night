@@ -1,12 +1,18 @@
 # 0122 - Art: the farmer's run
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0120
 - **Likely files:** assets/art_source/player-fhd/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/player_art.gd, src/ui/placeholder_art.gd, src/tools/art_showcase.gd, src/tools/headless_check.gd, implementation/fhd-player/pilots/2026-10-04/palette-variants/promote_blue_walk.py, tools/verify.py, src/tools/shot.gd
 - **Art packs:** A006
 
 ## Goal
+
+**Cancelled by the owner on 2026-10-08: the farmer does not run.** A006 is retired
+(`implementation/backlog/deliveries/A006-farmer-run/RUN-REMOVAL.txt`), so this
+closes on its decline path: A006's stand-ins leave the 0120 registry and the
+run key keeps playing the walk, faster, as it always did. What follows was the
+plan before the cancellation.
 
 Running is the walk played faster. Put in the eight-direction run Codex drew for A006 at the approved 32px detail, so holding run looks like running.
 

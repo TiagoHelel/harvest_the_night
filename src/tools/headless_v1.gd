@@ -730,13 +730,22 @@ func _task_0120_placeholders() -> void:
 
 	# **The farmer's road** answers a registered name the way PlayerFrames
 	# answers a real one.
-	var run := PlayerArt.animation(&"run_south")
-	expect(int(run.get("frames", 0)) == 8
-		and is_equal_approx(float(run.get("seconds", 0.0)), 0.07),
-		"run_south: eight frames at 0.07 s, from the registry", str(run))
-	expect(PlayerArt.texture_path(&"run_south", 0)
-		== PlayerArt.texture_path(&"walk_south", 0),
-		"and its frame 0 is the walk's texture", PlayerArt.texture_path(&"run_south", 0))
+	var sleep := PlayerArt.animation(&"bed_sleep")
+	expect(int(sleep.get("frames", 0)) == 2
+		and is_equal_approx(float(sleep.get("seconds", 0.0)), 0.8),
+		"bed_sleep: two frames at 0.8 s, from the registry", str(sleep))
+	expect(PlayerArt.texture_path(&"bed_sleep", 0)
+		== PlayerArt.texture_path(&"idle_south", 0),
+		"and its frame 0 is the idle's texture", PlayerArt.texture_path(&"bed_sleep", 0))
+	# **Retired by the owner on 2026-10-08**: A006's run (the farmer does not
+	# run) and A001's waking and collapse. Nothing registers them now.
+	var retired: Array = []
+	for name in [&"run_south", &"run_north_east", &"bed_wake", &"pass_out_south",
+			&"pass_out_east"]:
+		if not PlayerArt.animation(name).is_empty() or PlaceholderArt.has_pose(name):
+			retired.append(name)
+	expect(retired.is_empty(), "the run, the waking and the collapse are retired",
+		str(retired))
 	var walk := PlayerArt.animation(&"walk_south")
 	expect(int(walk.get("frames", 0)) == int(PlayerFrames.COUNT[&"walk_south"]),
 		"a real animation still answers from PlayerFrames", str(walk))
@@ -745,7 +754,7 @@ func _task_0120_placeholders() -> void:
 	var running := PlayerArt.pose(Player.SOUTH, true, &"", true)
 	expect(running["name"] == &"walk_south"
 		and is_equal_approx(float(running["seconds"]), PlayerArt.RUN_FRAME_SECONDS),
-		"PlayerArt.pose still names walk_<dir> for the run", str(running))
+		"the run key plays walk_<dir>, faster - there is no run art", str(running))
 	var chopping := PlayerArt.pose(Player.WEST, false, &"chop")
 	expect(chopping["name"] == &"chop" and int(chopping["frames"]) == 4,
 		"and the legacy <verb> strips for work", str(chopping))

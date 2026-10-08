@@ -84,7 +84,7 @@ const SCENARIOS: Array = [
 	["house_interior", "the furnished farmhouse", ""],
 	["farm_extension", "planting on the new southern land", ""],
 	["larger_stations", "the larger farm buildings", ""],
-	["passed_out", "fallen asleep on the farm at 02:00", ""],
+	["passed_out", "passed out at 02:00: the night, and nobody on the farm", ""],
 	["morning", "the morning report, every line it has", "ResultScreen"],
 	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.

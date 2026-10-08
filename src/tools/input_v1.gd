@@ -937,6 +937,12 @@ func _case_0138_morning() -> void:
 	# **Every line the report has**: a night that began with a pass-out and
 	# ended at dawn, with a wall lost in it and two still on the farm.
 	Phases.pass_out(state)
+	# **Passing out is a black screen** (the owner, 2026-10-08): no collapse,
+	# and nobody lying on the farm.
+	await frames(2)
+	var farmer: PlayerView = require_control("PlayerView") as PlayerView
+	expect(house_view.is_showing_blackout() and farmer != null
+		and not farmer.is_drawn(), "passing out is a black screen, with nobody on the farm")
 	NightRoad.through_build(state)
 	NightRoad.park(state)
 	var doomed := SuiteKit.any_buildable(state)
