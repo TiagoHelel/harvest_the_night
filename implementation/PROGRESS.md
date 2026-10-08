@@ -15684,3 +15684,108 @@ implementation/shots/0153/
 Verify: **PASS**, 60 passed in 601 s (OVER BUDGET as before). headless_check
 16285, headless_v1 367 (+13), input_check 1066, input_v1 178, strings 476
 keys; perf "a night tick is 2089us of the 8333 it may have (25%)".
+
+## 0154 - The calm night after a boss - done 2026-10-08
+
+What changed: after a boss falls the horde regroups. The first night of the
+next season sends nothing, the farmer sleeps through it, and something is
+waiting on the porch in the morning. Spring 1 of Year 1 is still the
+tutorial's night 1.
+
+**The rule:**
+- `Calendar.is_calm(date)` is the first day of a season, except the
+  game's first.
+  - It is a pure function of the date. That is safe because of 0153's hold:
+    the calendar reaches a new season only once its boss is down. So the
+    forecast cannot be wrong about it, Spring 1 of Year 2 included.
+- `Waves.night_of` returns the calm record before any other rule:
+  `{note, opening_ticks: 0, waves: [], calm: true}`.
+- `Waves._ruled` includes calm dates, so `tonight()` keeps the record.
+- `check_nights` refuses an empty wave list unless the record says calm.
+- `Waves.summary_of` prints "night 15  calm  - ...". That line joined
+  `headless_check`'s `ALLOWED_IN_RULES` by name, as a developer-facing
+  string `tools/nights.py` reads.
+- **The night still happens and takes no special road.**
+  - The build step opens as on any night.
+  - START, or 0128's 30 s after a pass-out, begins it.
+  - `Waves.begin` marks an empty table done, and its first tick is
+    `_test_for_the_end` with nobody on the farm: won.
+
+**The pay:**
+- `CALM_NIGHT_GIFT := {wood: 20, stone: 20, food: 10}`, a `# LEVER`, in
+  `digest()` as `calm`.
+- `GameData.check_gift` in `validate()` allows known resources only, never
+  money or `tech`, never negative.
+- `Rewards._lines` returns the gift on a calm night: no night money, no
+  materials. `money_from` is empty.
+- No technology: `Tech.mark_paid` (new) writes the date into `nights_paid`
+  without paying it, so a reload never pays it later either.
+- The payout carries `"calm"`.
+
+**On screen:**
+- The day HUD's line under the date says CALM NIGHT / NOITE CALMA
+  (`DHUD_CALM_TONIGHT`, good face) on a calm date. It outranks dusk and
+  the Full Moon's countdown, and gives way to bedtime and the pass-out
+  warning.
+- The morning report, instead of PAID, has:
+  - `RES_CALM_NIGHT`: A CALM NIGHT - THE HORDE REGROUPED / NOITE CALMA - A
+    HORDA SE REAGRUPOU, wrapped like 0153's escape line;
+  - `RES_GIFT`: A GIFT ON THE PORCH / UM PRESENTE NA VARANDA;
+  - the gift itself: +10 food +20 stone +20 wood.
+
+**Readers of 15, 29, 43 or 57 that expected a fight:**
+- `_task_0059`'s "one past the authored nights is generated" read night
+  99, which is Winter 1 of Year 2; it reads 97 now.
+- input_check's `_case_0070_endless` walks into night 57 after winning the
+  year. It now asserts the calm night over a plain record with plenty to
+  send.
+- `_task_0150_lookup` accepts a calm record as a night.
+- `_case_0149_date` checks the year at dusk on day 58, because day 57's
+  calm line outranks dusk.
+- 0137's night-length sample and `tools/nights.py --check` accept the calm
+  records, which send nothing by 0 s.
+
+**Tests:**
+- `_task_0154_calm` (headless_v1):
+  - 15, 29, 43 and 57 are calm; 1, 14 and 16 are not;
+  - the calm record checks, and an unmarked empty one does not;
+  - the summary says calm;
+  - the gift's check refuses money, technology and unknowns;
+  - Summer 1 from a fixture opens the build step, START begins night 15,
+    and its first tick wins it with nobody spawned and nobody killed;
+  - the ledger moved by exactly `CALM_NIGHT_GIFT`, no technology, and the
+    date is written down as paid.
+- `_case_0154_calm` (input_v1), once by keyboard and once by pad:
+  - CALM NIGHT under the date on Summer 1;
+  - to bed by N, or by Back;
+  - START by G, or by L3;
+  - the report has the calm line, the gift line and the gift, and no PAID,
+    all inside its frame.
+
+**Shot** (`implementation/shots/0154/calm_morning.png` and `-pt_BR.png`,
+FHD, opened): MORNING OF DAY 16, NIGHT 15 SURVIVED, killed 0, then the calm
+line, the gift line and +10 food +20 stone +20 wood (comida, pedra,
+madeira). Inside the frame in both languages. The scenario count is 29.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `737715291` | `737715291` | **unchanged**: day 1 is not calm |
+| data hash | `3913015035` | `2511241117` | `CALM_NIGHT_GIFT` entered `digest()` |
+
+**SIM moved once on the way, and it was a mistake.** The payout lives in the
+state, and settle first wrote `calm: false` on every night. The
+determinism night recorded an extra field and the hash went to 1152484923.
+`calm` is now written only on a calm night, and `verify --hashes --accept`
+put the recorded hash back on 737715291.
+
+Files: src/core/{calendar,waves,rewards,tech,game_data}.gd,
+src/ui/{day_hud,result_screen}.gd, assets/locale/strings.csv,
+src/tools/{shot,headless_check,headless_v1,input_v1,input_check}.gd,
+tools/determinism_data_hash.txt, implementation/shots/0154/
+
+Verify: **PASS**, 60 passed in 596 s (OVER BUDGET as before), then
+`--hashes` after the payout fix. headless_check 16288, headless_v1 375
+(+8), input_check 1066, input_v1 184 (+6), strings 479 keys; the night
+tick 1853 us (22%).

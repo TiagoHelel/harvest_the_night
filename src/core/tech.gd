@@ -244,6 +244,14 @@ static func award(state: Dictionary, night: int) -> int:
 	return points
 
 
+## Write a night down as paid without paying it (task 0154): the calm night,
+## which earns no technology - nothing was defended - and must still never
+## be paid later.
+static func mark_paid(state: Dictionary, night: int) -> void:
+	if not already_paid(state, night):
+		(state["nights_paid"] as Array).append(night)
+
+
 ## Spend them. False and nothing taken when there are not enough: the tech
 ## tree of task 0063 is the only caller.
 static func spend(state: Dictionary, points: int) -> bool:

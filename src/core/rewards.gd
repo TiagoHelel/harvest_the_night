@@ -45,8 +45,9 @@ static func settle(state: Dictionary, survived: bool, escaped: bool = false) -> 
 		"house_hp": int(state["house_hp"]),
 		"structures": _standing(state),
 		"intact": _intact(state),
-		# Where the money came from, for the screen. Empty on a loss.
-		"money_from": {} if not survived else _money_from(state),
+		# Where the money came from, for the screen. Empty on a loss, and on
+		# a calm night, which pays no money (task 0154).
+		"money_from": {} if not survived or is_calm(state) else _money_from(state),
 		"gained": {},
 		"lost": {},
 		# For the morning report (task 0138): whoever is still on the farm
@@ -57,6 +58,11 @@ static func settle(state: Dictionary, survived: bool, escaped: bool = false) -> 
 		"escaped": escaped,
 		"boss": StringName(Waves.tonight(state).get("boss", &"")),
 	}
+	# **Only when it is one** (task 0154): the payout lives in the state, and
+	# a `calm: false` on every other night moved the determinism hash for a
+	# night that is not calm.
+	if is_calm(state):
+		summary["calm"] = true
 
 	if escaped:
 		# Nothing either way: the night's pay waits for the boss to fall.
@@ -66,7 +72,13 @@ static func settle(state: Dictionary, survived: bool, escaped: bool = false) -> 
 		# the itemised list is built from it - and so a night that has
 		# already paid its technology says so in the same breath as paying
 		# the money for the one being replayed.
-		var points := Tech.award(state, int(state["night"]))
+		# A calm night is paid its gift and no technology, and is still
+		# written down as paid (task 0154).
+		var points := 0
+		if is_calm(state):
+			Tech.mark_paid(state, int(state["night"]))
+		else:
+			points = Tech.award(state, int(state["night"]))
 		for id in _sorted(lines):
 			Resources.add(state, id, int(lines[id]))
 		if points > 0:
@@ -117,6 +129,9 @@ static func preview(state: Dictionary, survived: bool) -> Dictionary:
 static func _lines(state: Dictionary, survived: bool, percent: int = -1) -> Dictionary:
 	if not survived:
 		return _loss(state)
+	# **A calm night pays only its gift** (task 0154): nothing was defended.
+	if is_calm(state):
+		return (GameData.CALM_NIGHT_GIFT as Dictionary).duplicate()
 	if percent < 0:
 		percent = moon_percent(state)
 
@@ -139,6 +154,11 @@ static func _lines(state: Dictionary, survived: bool, percent: int = -1) -> Dict
 		var extra := int((table["resources_per_night"] as Dictionary).get(id, 0))
 		out[id] = (base + extra * (step - 1)) * percent / 100
 	return out
+
+
+## Whether the night being paid is a calm one (task 0154).
+static func is_calm(state: Dictionary) -> bool:
+	return Calendar.is_calm(int(state["night"]))
 
 
 ## **What tonight pays of an ordinary night's sum, in percent** (task 0152):

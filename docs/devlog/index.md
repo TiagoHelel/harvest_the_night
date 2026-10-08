@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-146 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
+147 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -190,6 +190,7 @@ is the sort of thing this list exists to say out loud.
 | 0151 | The night is the calendar day | 2026-10-08 |
 | 0152 | Full Moon nights | 2026-10-08 |
 | 0153 | Boss nights repeat until the boss falls | 2026-10-08 |
+| 0154 | The calm night after a boss | 2026-10-08 |
 
 ## Every time the game changed underneath itself
 

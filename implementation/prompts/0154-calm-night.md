@@ -1,7 +1,7 @@
 # 0154 - The calm night after a boss
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0153
 - **Likely files:** src/core/calendar.gd, src/core/waves.gd, src/core/rewards.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/result_screen.gd, src/tools/nights.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

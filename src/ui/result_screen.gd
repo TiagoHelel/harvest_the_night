@@ -263,6 +263,16 @@ func _build(payout: Dictionary) -> void:
 		_wrapped(I18n.f(&"RES_BOSS_ESCAPED",
 			[Names.of(StringName(payout.get("boss", &""))).to_upper()]), UiKit.WARN)
 		_row(I18n.t(&"RES_UNTOUCHED_ALL"), "", UiKit.DIM)
+	elif bool(payout.get("calm", false)):
+		# **The calm night** (task 0154): the horde regrouped, and what is
+		# on the porch is all it pays.
+		_wrapped(I18n.t(&"RES_CALM_NIGHT"), UiKit.GOOD)
+		_row(I18n.t(&"RES_GIFT"), "", UiKit.GOOD)
+		var gift: Array = []
+		for id in _sorted(payout["gained"] as Dictionary):
+			gift.append(I18n.f(&"RES_GAINED", [int((payout["gained"] as Dictionary)[id]),
+				Names.of(id)]))
+		_row(I18n.f(&"RES_INDENT", ["  ".join(gift)]), "", UiKit.GOOD)
 	elif survived:
 		_row(I18n.t(&"RES_PAID"), "", UiKit.GOOD)
 		# Materials on one line and money on the next, for the same reason -

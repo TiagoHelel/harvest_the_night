@@ -92,6 +92,7 @@ const SCENARIOS: Array = [
 	["tutorial_dawn", "day one's night: dawn's line", ""],
 	["morning", "the morning report, every line it has", "ResultScreen"],
 	["boss_escaped", "the morning after Spring 14's boss got away", "ResultScreen"],
+	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
 	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
@@ -659,6 +660,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"tutorial_dawn": _set_tutorial_dawn(state)
 		"morning": _set_morning(state)
 		"boss_escaped": _set_boss_escaped(state)
+		"calm_morning": _set_calm_morning(state)
 		"woken": _set_woken(state)
 		"repair": _set_repair(state)
 		"aim": _set_aim(state)
@@ -1112,6 +1114,15 @@ func _set_boss_escaped(state: Dictionary) -> void:
 		Entities.set_hp(state, Entities.spawn(state, &"walker", far), 9999)
 	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
 	Sim.advance(state, 4)
+
+
+## **The calm night** (task 0154): Summer 1, the first night after Spring's
+## boss fell. Nothing came; the report says so, and what is on the porch.
+func _set_calm_morning(state: Dictionary) -> void:
+	state["day"] = GameData.SEASON_DAYS + 1
+	state["nights_won"] = GameData.SEASON_DAYS
+	NightRoad.to_night(state)
+	Sim.advance(state, 2)
 
 
 ## **Out of bed at 06:00** (task 0138): the report confirmed, he stands on

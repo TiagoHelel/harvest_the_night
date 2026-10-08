@@ -74,6 +74,17 @@ static func is_boss_night(day: int, season_days: int = GameData.SEASON_DAYS) -> 
 	return day_of_season(day, season_days) == maxi(season_days, 1)
 
 
+## Whether a date is a calm night (task 0154): the first night of a season,
+## when the horde regroups after the boss that ended the last one. Not the
+## first day of the game, which is the tutorial's night 1.
+##
+## **A pure function of the date**, and that is safe because of 0153's hold:
+## the calendar reaches a new season only once its boss has fallen, so the
+## forecast cannot be wrong about it - Spring 1 of Year 2 included.
+static func is_calm(day: int, season_days: int = GameData.SEASON_DAYS) -> bool:
+	return day > 1 and day_of_season(day, season_days) == 1
+
+
 ## The boss of the season a date falls in.
 static func boss_of(day: int, season_days: int = GameData.SEASON_DAYS) -> StringName:
 	var bosses: Array = GameData.SEASON_BOSSES

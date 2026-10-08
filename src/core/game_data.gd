@@ -95,6 +95,12 @@ const FULL_MOON_REWARD_PERCENT := 200   # LEVER: percent of the night's pay, 150
 ## King and the Winter Lord.
 const SEASON_BOSSES: Array = [&"giant", &"giant", &"giant", &"giant"]
 
+## **The calm night's gift** (task 0154): what is waiting on the porch the
+## morning after the first night of a season, when the horde regroups after
+## its boss and sends nothing. The only thing that night pays - nothing was
+## defended, so no night money, materials or technology.
+const CALM_NIGHT_GIFT: Dictionary = {WOOD: 20, STONE: 20, FOOD: 10}  # LEVER: units each, 0-60
+
 ## **The short build step after passing out** (task 0128). A farmer still up
 ## at 02:00 collapses where he stands and the night begins anyway, with this
 ## much time to build: staying up late is allowed, and it costs preparation,
@@ -1874,6 +1880,7 @@ static func validate() -> Array:
 		PASS_OUT_WARNING_MINUTE, DAY_END_MINUTE))
 	errors.append_array(check_calendar(SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
 		FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES))
+	errors.append_array(check_gift(CALM_NIGHT_GIFT))
 	if PASS_OUT_PREPARATION_TICKS <= 0 \
 			or PASS_OUT_PREPARATION_TICKS >= Sim.MOST_TICKS_IN_A_NIGHT:
 		errors.append("the build step after passing out is %d ticks, outside 1..%d"
@@ -1913,6 +1920,21 @@ static func check_bedtime(dusk: int, reminder: int, warning: int, end: int) -> A
 		return []
 	return ["bedtime runs dusk %d, reminder %d, warning %d, end %d - not in that order"
 		% [dusk, reminder, warning, end]]
+
+
+## The calm night's gift (task 0154): things the ledger knows, in whole
+## numbers, and never money or technology - a night nobody defended earns
+## neither.
+static func check_gift(gift: Dictionary) -> Array:
+	var errors: Array = []
+	for id in sorted_names(gift.keys()):
+		if not RESOURCES.has(id):
+			errors.append("the calm night's gift names unknown '%s'" % id)
+		elif id == MONEY or id == TECH:
+			errors.append("the calm night's gift may not be %s" % id)
+		if int(gift[id]) < 0:
+			errors.append("the calm night's gift takes %s away" % id)
+	return errors
 
 
 ## The calendar's shape (task 0149): four seasons, each named once, and a
@@ -2658,7 +2680,9 @@ static func check_nights(nights: Array) -> Array:
 			errors.append("night %d waits less than no time" % [n + 1])
 
 		var waves: Array = one["waves"]
-		if waves.is_empty():
+		# **Nothing at all, only when it says so** (task 0154): the calm
+		# night after a boss is the one record allowed an empty list.
+		if waves.is_empty() and not bool(one.get("calm", false)):
 			errors.append("night %d sends nothing at all" % [n + 1])
 		for w in waves.size():
 			var wave: Array = waves[w]
@@ -2750,6 +2774,7 @@ static func digest() -> int:
 			MAX_CATCH_UP_TICKS],
 		"calendar": [SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
 			FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES],
+		"calm": CALM_NIGHT_GIFT,
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
 			PLAYER_SPEED],
 		"house": [HOUSE_SIZE, SHOP_SIZE, HOUSE_ROOM, HOUSE_DOOR,

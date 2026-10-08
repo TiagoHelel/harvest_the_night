@@ -72,7 +72,8 @@ static func plain_night(night: int, seed_value: int = 0) -> Dictionary:
 ##   every-fifth-night Giants stop reaching the calendar;
 ## - **the Full Moon** (task 0152): a bigger horde on `FULL_MOON_DAYS`, over
 ##   the boss rule, leaving the boss row as it is;
-## - 0154's calm night, to come.
+## - **the calm night** (task 0154): the first night of every season but the
+##   game's first sends nothing at all, whatever was written for it.
 ##
 ## A night no rule touches comes back as written - the authored row itself,
 ## not a copy.
@@ -80,6 +81,8 @@ static func night_of(night: int, seed_value: int = 0) -> Dictionary:
 	var plain := plain_night(night, seed_value)
 	if plain.is_empty():
 		return plain
+	if Calendar.is_calm(night):
+		return _calm()
 	var one := plain
 	if Calendar.is_boss_night(night):
 		one = _with_the_season_boss(plain, Calendar.boss_of(night))
@@ -94,7 +97,20 @@ static func night_of(night: int, seed_value: int = 0) -> Dictionary:
 ## `tonight()` keeps rather than asks again every frame.
 static func _ruled(night: int, seed_value: int) -> bool:
 	return Calendar.is_full_moon(night) or Calendar.is_boss_night(night) \
-		or _has_a_boss(plain_night(night, seed_value))
+		or Calendar.is_calm(night) or _has_a_boss(plain_night(night, seed_value))
+
+
+## **The calm night's record** (task 0154): no waves, and the flag that says
+## it means it - `check_nights` refuses an empty list anywhere else, and the
+## forecast (0158) reads it. The night still happens: the build step opens,
+## START starts it, and `begin()`'s empty table wins it on its first tick.
+static func _calm() -> Dictionary:
+	return {
+		"note": "a calm night: the horde regroups after its boss",
+		"opening_ticks": 0,
+		"waves": [],
+		"calm": true,
+	}
 
 
 static func _has_a_boss(one: Dictionary) -> bool:
@@ -469,6 +485,8 @@ static func summary_of(night: int, seed_value: int = 0) -> String:
 	var one := night_of(night, seed_value)
 	if one.is_empty():
 		return "night %d: nothing authored" % night
+	if bool(one.get("calm", false)):
+		return "night %2d  calm  - %s" % [night, str(one.get("note", ""))]
 	var parts: Array = []
 	var counts := kinds_of(night, seed_value)
 	for id in GameData.sorted_names(counts.keys()):

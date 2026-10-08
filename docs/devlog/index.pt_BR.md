@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-146 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+147 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -189,6 +189,7 @@ voz alta.
 | 0151 | The night is the calendar day | 2026-10-08 |
 | 0152 | Full Moon nights | 2026-10-08 |
 | 0153 | Boss nights repeat until the boss falls | 2026-10-08 |
+| 0154 | The calm night after a boss | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **144 / 296 done**
+`############............`  **145 / 296 done**
 
-0 doing / 152 todo / 0 blocked across 18 phases.
+0 doing / 151 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-152 task(s) left, the ready ones first, then what they
+151 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -173,24 +173,6 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0154 - The calm night after a boss
-
-Ready to pick up.  Likely files: `src/core/calendar.gd, src/core/waves.gd, src/core/rewards.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/result_screen.gd, src/tools/nights.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-After a boss falls the horde regroups: the first night of the next season sends nothing, the farmer sleeps through it, and something is waiting on the porch in the morning. Spring 1 of Year 1 is still the tutorial's night 1.
-
-- `Calendar.is_calm(date)`: the first day of a season, except the first day of the game. With 0153's hold the calendar reaches a new season only once its boss has fallen, so this is a pure function of the date and the forecast cannot be wrong about it - in every year, Spring 1 of Year 2 included
-- `Waves.night_of` returns a calm record for those dates: `{note, opening_ticks: 0, waves: [], calm: true}`. `check_nights` refuses an empty wave list unless the record says calm; `Waves.summary_of` and `tools/nights.py --check` print and accept it as calm
-- The night still happens and takes no special road: the build step opens as on any night (decision #4: the only time defences go down), START - or 0128's 30 s after passing out - starts a night with nothing in it, and `Waves.begin`'s empty table wins it on the first tick
-- A calm night pays only the gift: `CALM_NIGHT_GIFT: Dictionary = {WOOD: 20, STONE: 20, FOOD: 10}  # LEVER: units each, 0-60` - no night money, materials or technology, since nothing was defended; `nights_paid` still records the date; `validate()` allows only known resources and never money or `tech`; in `digest()`
-- The day HUD's date line says `CALM NIGHT` on a calm date (`DHUD_CALM_TONIGHT`: CALM NIGHT / NOITE CALMA); the morning report says `RES_CALM_NIGHT` (A CALM NIGHT - THE HORDE REGROUPED / NOITE CALMA - A HORDA SE REAGRUPOU) and `RES_GIFT` (A GIFT ON THE PORCH / UM PRESENTE NA VARANDA); 0158's forecast reads the record's flag
-- Anything in the suites or tools that reads dates 15, 29, 43 or 57 through `night_of` and expects a fight (a size, a kind, a side) reads `plain_night` instead, or skips calm dates; 0137's night-length sample and `tools/nights.py` accept a calm record
-- Hashes: SIM should not move (day 1 is not calm); DATA moves (the gift lever)
-
-  - done when: `_task_0154_calm` in `src/tools/headless_v1.gd`: dates 15, 29, 43 and 57 are calm and 1, 14 and 16 are not; a calm night ends won on its first tick after START with no entity spawned; it pays exactly `CALM_NIGHT_GIFT` and no technology
-  - done when: `_case_0154_calm` in `src/tools/input_v1.gd`: to bed on Summer 1, START, and the morning report shows the calm and the gift - once by keyboard, once by pad
-  - done when: A `calm_morning` shot scenario: `python tools/shot.py 0154 calm_morning --fhd` and `--pt_BR`, opened
-
 ### 0155 - Losing a night when the calendar moves on
 
 Ready to pick up.  Likely files: `src/core/rewards.gd, src/core/farming.gd, src/core/pathing.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
@@ -248,6 +230,25 @@ The same farm through the year: today's green in spring, warmer in summer, ochre
   - done when: `_case_0159_seasons` in `src/tools/input_v1.gd`: the remap's season and the snowfall follow the date (off in spring, on in winter), and the terrain layer is not redrawn when the season changes
   - done when: `python tools/gen_sprites.py --check` (or a `_task_0159_palette` group in `src/tools/headless_v1.gd`) checks that every grass or foliage colour used by `terrain/` and the trees has a mapping in every season: it passes, and a scratch table missing one mapping makes it fail (tried, reverted, said so in the journal)
   - done when: `python tools/shot.py 0159 noon season_summer season_autumn season_winter season_winter_night --fhd`, opened against `docs/reference-sheet.png`: each season reads at a glance and the night ramp still works over it
+
+### 0160 - The end of the year
+
+Ready to pick up.  Likely files: `src/core/run.gd, src/ui/result_screen.gd, src/ui/credits_roll.gd (new), src/ui/main.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+When the winter boss - for now the Giant - falls on Winter 14, the year is over: an ending, the credits, and the choice to carry on into a Year 2 that does not end.
+
+- `Run.is_over` is 'the year's last boss has fallen and the run is not endless': with 0153's hold the date passes `Calendar.year_days()` only then. A lost or escaped Winter 14 is not an ending; a Winter 14 lost after its boss fell is
+- The morning report's ending branch (0138's screen, today's `_build_the_ending`): `YOU SURVIVED A YEAR` with what `Run.summary` already holds (days lived, nights won, bosses down, killed, structures lost, the build that won), then two choices
+- Carry on: `Run.go_endless` (only once the year is beaten); the farmer wakes on Year 2 Spring 1 - 0154's calm night - and the nights keep coming through the lookup from today's Endless until 0279 makes later years heavier
+- A new farm: the run is recorded (`Run.record`: `runs_won` counts the year; `best_night` keeps its meaning, any change to it is 0291's) and a new run starts, as `_record_and_restart` does today
+- A credits roll before the choices (`src/ui/credits_roll.gd`): lines from `CRED_*` strings, skippable with confirm or cancel on keyboard, mouse and pad
+- Strings in both languages replace the MVP's: `RES_NEW_FARM` (A NEW FARM / UMA FAZENDA NOVA), `RES_PLAY_ON` (CARRY ON INTO YEAR %d / SEGUIR PARA O ANO %d), `RES_RUN_LINE` without 'the Giant', `END_TITLE` (YOU SURVIVED A YEAR / VOCÊ SOBREVIVEU UM ANO); remove the rows nothing reads any more
+- Keep the node names `ContinueButton` and `PlayOnButton`, and rewrite in place what reads the old ending as 0151 left it: input_check's `_case_0070_endless` (the credits now come first), `_task_0066_run_end`'s over/carry-on asserts and `_task_0070_endless`'s `go_endless` refusals, against the new `Run.is_over`
+- Hashes: SIM must not move (the determinism run never reaches Winter 14) and DATA does not
+
+  - done when: `_task_0160_year_end` in `src/tools/headless_v1.gd`, from a Winter 14 fixture (date 56, started through 0118's road, never by playing the year): boss down -> `Run.is_over` and the result says so; boss escaped -> not over, the date still 56; carried on -> not over, and the next night is date 57, Year 2 Spring 1, calm; `Run.record` counts the year in `runs_won`
+  - done when: `_case_0160_ending` in `src/tools/input_v1.gd`: the ending shows, the credits skip by keyboard and by pad, CARRY ON returns to the farm on Year 2 Spring 1, and A NEW FARM starts day 1 of a new run
+  - done when: A `year_end` shot scenario: `python tools/shot.py 0160 year_end --fhd` and with `--pt_BR`, opened - nothing overflows
 
 ### 0173 - Five tools, three tiers
 
@@ -323,25 +324,6 @@ The farm is surrounded one side at a time: spring comes from the east, summer ad
   - done when: `_task_0157_sides` in `src/tools/headless_v1.gd`: the open sides of Spring 1, Summer 1, Autumn 1 and Winter 1 are the table's; for dates 11-56 and two seeds every generated wave comes from an open side; every region has spawn cells on a fresh farm
   - done when: 0115's guarantee holds for regions 2-4, whichever fix 0115 chose: each region built over as far as the rules allow, a small hand-made record of a few walkers from it accounts for every member (killed, alive or waiting) and ends in bounded ticks - a few seconds for the three
   - done when: A `winter_build` shot scenario: `python tools/shot.py 0157 winter_build --fhd`, opened - a route from each of the five sides
-
-### 0160 - The end of the year
-
-Waits on 0154.  Likely files: `src/core/run.gd, src/ui/result_screen.gd, src/ui/credits_roll.gd (new), src/ui/main.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-When the winter boss - for now the Giant - falls on Winter 14, the year is over: an ending, the credits, and the choice to carry on into a Year 2 that does not end.
-
-- `Run.is_over` is 'the year's last boss has fallen and the run is not endless': with 0153's hold the date passes `Calendar.year_days()` only then. A lost or escaped Winter 14 is not an ending; a Winter 14 lost after its boss fell is
-- The morning report's ending branch (0138's screen, today's `_build_the_ending`): `YOU SURVIVED A YEAR` with what `Run.summary` already holds (days lived, nights won, bosses down, killed, structures lost, the build that won), then two choices
-- Carry on: `Run.go_endless` (only once the year is beaten); the farmer wakes on Year 2 Spring 1 - 0154's calm night - and the nights keep coming through the lookup from today's Endless until 0279 makes later years heavier
-- A new farm: the run is recorded (`Run.record`: `runs_won` counts the year; `best_night` keeps its meaning, any change to it is 0291's) and a new run starts, as `_record_and_restart` does today
-- A credits roll before the choices (`src/ui/credits_roll.gd`): lines from `CRED_*` strings, skippable with confirm or cancel on keyboard, mouse and pad
-- Strings in both languages replace the MVP's: `RES_NEW_FARM` (A NEW FARM / UMA FAZENDA NOVA), `RES_PLAY_ON` (CARRY ON INTO YEAR %d / SEGUIR PARA O ANO %d), `RES_RUN_LINE` without 'the Giant', `END_TITLE` (YOU SURVIVED A YEAR / VOCÊ SOBREVIVEU UM ANO); remove the rows nothing reads any more
-- Keep the node names `ContinueButton` and `PlayOnButton`, and rewrite in place what reads the old ending as 0151 left it: input_check's `_case_0070_endless` (the credits now come first), `_task_0066_run_end`'s over/carry-on asserts and `_task_0070_endless`'s `go_endless` refusals, against the new `Run.is_over`
-- Hashes: SIM must not move (the determinism run never reaches Winter 14) and DATA does not
-
-  - done when: `_task_0160_year_end` in `src/tools/headless_v1.gd`, from a Winter 14 fixture (date 56, started through 0118's road, never by playing the year): boss down -> `Run.is_over` and the result says so; boss escaped -> not over, the date still 56; carried on -> not over, and the next night is date 57, Year 2 Spring 1, calm; `Run.record` counts the year in `runs_won`
-  - done when: `_case_0160_ending` in `src/tools/input_v1.gd`: the ending shows, the credits skip by keyboard and by pad, CARRY ON returns to the farm on Year 2 Spring 1, and A NEW FARM starts day 1 of a new run
-  - done when: A `year_end` shot scenario: `python tools/shot.py 0160 year_end --fhd` and with `--pt_BR`, opened - nothing overflows
 
 ### 0163 - Art: winter ground
 
@@ -471,7 +453,7 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
 
 ### 0158 - The forecast
 
-Waits on 0154, 0157.  Likely files: `src/core/forecast.gd (new), src/ui/forecast_panel.gd (new), src/ui/day_hud.gd, src/ui/night_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0157.  Likely files: `src/core/forecast.gd (new), src/ui/forecast_panel.gd (new), src/ui/day_hud.gd, src/ui/night_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 At dusk the farmer learns what is coming: from which sides, how many and of what kind, and whether it is a Full Moon, a boss or a calm night. The forecast is never wrong, because it is the night.
 
@@ -2338,7 +2320,7 @@ The three night events as Codex drew them, in the forecast slot where 0256 and 0
 
 ### 0270 - Fifty-six nights as data
 
-Waits on 0154, 0256, 0257, 0234.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0256, 0257, 0234.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 The year stops being ten written nights plus a curve and becomes tables a designer can read: a template per season, hand-written key nights (every introduction, every Full Moon) and a seeded generator for the nights in between. Nothing downstream of `Waves.night_of` can tell which is which, so the season tasks after this one edit data (0271 also gives `play_nights` a day range).
 
@@ -2991,20 +2973,20 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
-## 11 - Calendar and seasons  (5/16)
+## 11 - Calendar and seasons  (6/16)
 
 - [x] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
 - [x] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
 - [x] **0151** [The night is the calendar day](prompts/0151-night-is-calendar.md)
 - [x] **0152** [Full Moon nights](prompts/0152-full-moon.md)
 - [x] **0153** [Boss nights repeat until the boss falls](prompts/0153-boss-nights.md)
-- [ ] **0154** [The calm night after a boss](prompts/0154-calm-night.md)
+- [x] **0154** [The calm night after a boss](prompts/0154-calm-night.md)
 - [ ] **0155** [Losing a night when the calendar moves on](prompts/0155-losing-calendar.md)
 - [ ] **0156** [The 1.0 farm map](prompts/0156-farm-map-v1.md)
 - [ ] **0157** [A new side every season](prompts/0157-attack-sides.md) - needs 0156
-- [ ] **0158** [The forecast](prompts/0158-forecast.md) - needs 0154, 0157
+- [ ] **0158** [The forecast](prompts/0158-forecast.md) - needs 0157
 - [ ] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md)
-- [ ] **0160** [The end of the year](prompts/0160-year-end.md) - needs 0154
+- [ ] **0160** [The end of the year](prompts/0160-year-end.md)
 - [ ] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md) - needs 0158 - waits for art A010
 - [ ] **0162** [Art: forecast heads](prompts/0162-art-forecast-heads.md) - needs 0158 - waits for art A011
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - needs 0159 - waits for art A012
@@ -3126,7 +3108,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 15 - Fifty-six nights and balance  (0/11)
 
-- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0154, 0256, 0257, 0234
+- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0256, 0257, 0234
 - [ ] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md) - needs 0270, 0157
 - [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0247, 0248, 0253, 0259, 0271
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0249, 0250, 0254, 0259, 0272

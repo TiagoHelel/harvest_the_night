@@ -165,6 +165,7 @@ DHUD_AMMO_NONE,0,AMMO  none needed,MUNIÇÃO  nenhuma precisa
 DHUD_AMMO_ONE,0,%s %d,%s %d
 DHUD_BEDTIME,140,time for bed - %s,hora de dormir - %s
 DHUD_BITE,0,A BITE - PRESS SPACE,FISGOU - APERTE ESPAÇO
+DHUD_CALM_TONIGHT,138,CALM NIGHT,NOITE CALMA
 DHUD_CLOCK,0,%02d:%02d,%02d:%02d
 DHUD_DATE,74,%s %d,%s %d
 DHUD_DUSK,140,DUSK,ANOITECER
@@ -298,6 +299,7 @@ REC_PRESS_OIL,0,press oil,prensar óleo
 REC_WALL_KIT,0,wall kit,kit de muro
 RES_BOSS_ESCAPED,0,%s GOT AWAY - IT COMES BACK TONIGHT,%s FUGIU - VOLTA HOJE À NOITE
 RES_BUILD_WON,0,THE BUILD THAT WON,O QUE SEGUROU A NOITE
+RES_CALM_NIGHT,0,A CALM NIGHT - THE HORDE REGROUPED,NOITE CALMA - A HORDA SE REAGRUPOU
 RES_CAME_DOWN,200,%d structure came down,%d estrutura caiu
 RES_CAME_DOWN.other,200,%d structures came down,%d estruturas caíram
 RES_COUNTED,0,%d %s,%d %s
@@ -307,6 +309,7 @@ RES_FULL_MOON,0,FULL MOON BONUS,BÔNUS DE LUA CHEIA
 RES_GAINED,0,+%d %s,+%d %s
 RES_GATHERED,0,  gathered %s,  colhido %s
 RES_GET_UP,190,GET UP,LEVANTAR
+RES_GIFT,200,A GIFT ON THE PORCH,UM PRESENTE NA VARANDA
 RES_GOT_THROUGH,0,got through,passaram
 RES_HOUSE,0,"house %d/%d, %d still up","casa %d/%d, %d de pé"
 RES_INDENT,0,  %s,  %s

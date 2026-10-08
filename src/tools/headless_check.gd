@@ -1735,13 +1735,15 @@ func _task_0110_refusals() -> void:
 	_completed += 1
 
 
-## The three sentences `src/core/` is allowed to keep, and why.
+## The sentences `src/core/` is allowed to keep, and why.
 ##
-## All three are developer-facing: `tools/nights.py` and this project's
-## journal read them and no screen does. Named one by one rather than
-## excused by a folder, so that a fourth cannot join them quietly.
+## All are developer-facing: `tools/nights.py` and this project's journal
+## read them and no screen does. Named one by one rather than excused by a
+## folder, so that another cannot join them quietly - the calm night's
+## summary line (task 0154) joined loudly, here.
 const ALLOWED_IN_RULES: Array = [
 	"night %d: nothing authored",
+	"night %2d  calm  - %s",
 	"past the ten: the Giant is back, and it brought the night",
 	"past the ten: %d Giants, which is the question answered",
 	"past the ten: night %d, and more of everything that hurt",
@@ -11147,9 +11149,11 @@ func _task_0059_wave_data() -> void:
 	# Task 0070 gave the nights past the tenth a curve to come from, so this
 	# used to read "nothing authored" and now reads like a night, which is the
 	# whole of that task's integration.
-	expect(Waves.summary_of(99).contains("past the ten"),
+	# Night 97 rather than 99: 99 is Winter 1 of Year 2, a calm night since
+	# task 0154.
+	expect(Waves.summary_of(97).contains("past the ten"),
 		"and one past the authored nights is generated rather than empty",
-		Waves.summary_of(99))
+		Waves.summary_of(97))
 
 	_completed += 1     # last line: an abandoned group never gets here
 
@@ -14520,16 +14524,17 @@ func _task_0082_shots() -> void:
 	# Twenty-three since 0140: the farm at 22:30, time for bed. Twenty-six
 	# since 0141: day one teaching the night - the bed, START, dawn.
 	# Twenty-seven since 0152: the wave under a Full Moon. Twenty-eight since
-	# 0153: the morning a boss got away.
-	expect(names.size() == 28,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon and the boss's escape",
+	# 0153: the morning a boss got away. Twenty-nine since 0154: the morning
+	# after a calm night.
+	expect(names.size() == 29,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape and the calm night",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
 			"passed_out", "build_day", "repair", "aim", "morning", "woken", "bedtime",
 			"tutorial_bed", "tutorial_start", "tutorial_dawn", "full_moon",
-			"boss_escaped", "options_controls_pad"]:
+			"boss_escaped", "calm_morning", "options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

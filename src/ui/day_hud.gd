@@ -442,7 +442,8 @@ func _refresh(force: bool) -> void:
 ##   then, from the warning minute, the minutes left before he passes out, in
 ##   the warn colour.
 ## - A Full Moon tonight outranks dusk, and gives way to bedtime: by then the
-##   only thing left to say about the night is to go to it.
+##   only thing left to say about the night is to go to it. So does a calm
+##   night (task 0154), CALM NIGHT on the first day of a season.
 func _refresh_evening(minute: int, today: int) -> void:
 	var text := ""
 	var role := UiKit.DIM
@@ -455,6 +456,9 @@ func _refresh_evening(minute: int, today: int) -> void:
 		var actions := get_node_or_null(^"/root/Actions")
 		text = I18n.f(&"DHUD_BEDTIME",
 			[actions.text_of(&"night") if actions != null else ""])
+	elif Calendar.is_calm(today):
+		text = I18n.t(&"DHUD_CALM_TONIGHT")
+		role = UiKit.GOOD
 	elif moon == 0:
 		text = I18n.t(&"DHUD_FULL_MOON_TONIGHT")
 		role = UiKit.WARM

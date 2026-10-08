@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 17
+const V1_CASES := 18
 
 
 func _process(delta: float) -> bool:
@@ -67,6 +67,7 @@ func _run() -> void:
 	await _case_0141_tutorial()
 	await _case_0149_date()
 	await _case_0152_moon_line()
+	await _case_0154_calm()
 	_finish()
 
 
@@ -1552,6 +1553,9 @@ func _case_0149_date() -> void:
 			"and the year sits under the clock, left of the date (%s)" % locale,
 			"%s at %s" % [year, year_label.global_position])
 	I18n.use("en")
+	# Day 58: day 57 is Spring 1 of Year 2, a calm night (task 0154), whose
+	# line outranks dusk.
+	state["day"] = Calendar.year_days() + 2
 	state["day_tick"] = GameData.DUSK_AT_TICK
 	await frames(3)
 	expect(evening.text == I18n.t(&"DHUD_DUSK") and year_label.text == I18n.f(&"DHUD_YEAR", [2]),
@@ -1617,4 +1621,56 @@ func _case_0152_moon_line() -> void:
 		"and on an ordinary day at dusk it is the evening's", line.text)
 	state["day"] = 1
 	await close_scene()
+	_completed += 1
+
+
+## 0154 - the calm night: to bed on Summer 1, START, and the morning report
+## shows the calm and the gift - once by keyboard, once by pad.
+func _case_0154_calm() -> void:
+	for device in ["keyboard", "pad"]:
+		await open_scene(MAIN_SCENE)
+		var driver: SimDriver = require_control("SimDriver")
+		var result: ResultScreen = require_control("ResultScreen") as ResultScreen
+		var line: Label = require_control("DayStatus") as Label
+		if driver == null or result == null or line == null:
+			await close_scene()
+			_completed += 1
+			return
+		var state := driver.state
+		await frames(4)
+		state["day"] = GameData.SEASON_DAYS + 1
+		state["nights_won"] = GameData.SEASON_DAYS
+		await frames(3)
+		expect(line.text == I18n.t(&"DHUD_CALM_TONIGHT"),
+			"on Summer 1 the line under the date says CALM NIGHT (%s)" % device, line.text)
+		House.leave(state)
+		await frames(2)
+		if device == "keyboard":
+			await tap_key(KEY_N)
+		else:
+			await _pad_tap(JOY_BUTTON_BACK)
+		await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+			"to bed (%s)" % device)
+		var house_view: HouseView = require_control("HouseView")
+		await until(func() -> bool: return not house_view.is_showing_bedtime(),
+			"the bed beat", 100000)
+		await frames(3)
+		if device == "keyboard":
+			await tap_key(KEY_G)
+		else:
+			await _pad_tap(JOY_BUTTON_LEFT_STICK)
+		await until(func() -> bool: return result.visible, "the morning report (%s)" % device)
+		await frames(3)
+		var said := _report_lines(result)
+		var gift: Array = []
+		for id in GameData.sorted_names(GameData.CALM_NIGHT_GIFT.keys()):
+			gift.append(I18n.f(&"RES_GAINED", [int(GameData.CALM_NIGHT_GIFT[id]), Names.of(id)]))
+		var gift_line := I18n.f(&"RES_INDENT", ["  ".join(gift)])
+		expect(said.has(I18n.t(&"RES_CALM_NIGHT")) and said.has(I18n.t(&"RES_GIFT"))
+			and said.has(gift_line) and not said.has(I18n.t(&"RES_PAID")),
+			"the report says the night was calm and what is on the porch (%s)" % device,
+			str(said))
+		expect(_outside_the_frame(result).is_empty(), "and all of it fits its frame (%s)" % device,
+			str(_outside_the_frame(result)))
+		await close_scene()
 	_completed += 1

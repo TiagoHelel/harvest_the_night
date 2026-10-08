@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 26
+const GROUPS := 27
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -95,6 +95,7 @@ func _run() -> void:
 	_task_0151_migration()
 	_task_0152_full_moon()
 	_task_0153_boss_nights()
+	_task_0154_calm()
 
 
 func _finish() -> void:
@@ -1988,7 +1989,9 @@ func _task_0150_lookup() -> void:
 	for seed_value in [0, 424242]:
 		for day in range(1, 2 * Calendar.year_days() + 1):
 			var fought := Waves.night_of(day, seed_value)
-			if fought.is_empty() or (fought.get("waves", []) as Array).is_empty():
+			# A calm night (task 0154) sends nothing and says so.
+			if fought.is_empty() or (fought.get("waves", []) as Array).is_empty() \
+					and not bool(fought.get("calm", false)):
 				empty.append([seed_value, day])
 			# Where no calendar rule applies - since 0152 not on a Full Moon,
 			# and since 0153 not where a boss is put in or taken out - what is
@@ -2437,4 +2440,60 @@ func _task_0153_boss_nights() -> void:
 	var code := SuiteKit.code_lines_of("res://src/core/waves.gd")
 	expect(announced and not code.contains("&\"giant\""),
 		"boss_arrived is raised for the Giant through is_boss, and waves.gd names no enemy")
+	_completed += 1
+
+
+## 0154 - the calm night after a boss: the first night of a season, but not
+## the game's first, sends nothing, is won on its first tick, and pays only
+## the gift on the porch.
+func _task_0154_calm() -> void:
+	var calm: Array = []
+	for day in [1, 14, 15, 16, 29, 43, 57]:
+		if Calendar.is_calm(day):
+			calm.append(day)
+	expect(calm == [15, 29, 43, 57], "dates 15, 29, 43 and 57 are calm, and 1, 14, 16 not",
+		str(calm))
+	var record := Waves.night_of(29, 3)
+	expect(bool(record.get("calm", false)) and (record["waves"] as Array).is_empty()
+		and int(record["opening_ticks"]) == 0 and GameData.check_nights([record]).is_empty()
+		and not GameData.check_nights([{"note": "x", "opening_ticks": 0, "waves": []}]).is_empty(),
+		"a calm record sends nothing, says so, and is the only empty record the check allows")
+	expect(Waves.summary_of(15).contains("calm"), "and the summary prints it as calm",
+		Waves.summary_of(15))
+	expect(GameData.check_gift({GameData.MONEY: 5}).size() == 1
+		and GameData.check_gift({GameData.TECH: 1}).size() == 1
+		and GameData.check_gift({&"unobtainium": 1}).size() == 1
+		and GameData.check_gift(GameData.CALM_NIGHT_GIFT).is_empty(),
+		"the gift may not be money, technology or something unknown")
+
+	# **The night still happens**: the build step, START, and a night with
+	# nothing in it - won on its first tick, nobody spawned.
+	var state := State.create(1540)
+	state["day"] = 15
+	state["nights_won"] = 14
+	(state["nights_paid"] as Array).assign([14])
+	var held: Dictionary = (state["held"] as Dictionary).duplicate()
+	NightRoad.into_build(state)
+	expect(int(state["phase"]) == Phases.PREPARATION, "the build step opens as on any night")
+	NightRoad.through_build(state)
+	expect(int(state["phase"]) == Phases.NIGHT and int(state["night"]) == 15,
+		"START begins night 15", str(state["night"]))
+	Sim.tick(state)
+	expect(int(state["phase"]) == Phases.RESULT
+		and bool((state["last_result"] as Dictionary).get("survived", false))
+		and int(state["killed"]) == 0 and Entities.count(state) == 0,
+		"and it is won on its first tick, with nobody spawned",
+		Phases.name_of(int(state["phase"])))
+
+	# **It pays exactly the gift**, no technology, and the date is paid.
+	var moved: Dictionary = {}
+	for id in GameData.sorted_names(GameData.RESOURCES):
+		var by := int((state["held"] as Dictionary).get(id, 0)) - int(held.get(id, 0))
+		if by != 0:
+			moved[id] = by
+	expect(moved == GameData.CALM_NIGHT_GIFT and Tech.already_paid(state, 15)
+		and int(Rewards.last(state).get("tech", -1)) == 0
+		and bool(Rewards.last(state).get("calm", false)),
+		"it pays exactly the gift, no technology, and the date is written down as paid",
+		"%s against %s" % [str(moved), str(GameData.CALM_NIGHT_GIFT)])
 	_completed += 1
