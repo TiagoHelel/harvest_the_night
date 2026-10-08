@@ -143,6 +143,13 @@ static func begin_preparation(state: Dictionary) -> bool:
 	return true
 
 
+## The night the build step is getting ready for (task 0139): one past the
+## nights won, since a lost night comes back. `begin_night` numbers the
+## night with it, and the night HUD shows it before the waves.
+static func night_ahead(state: Dictionary) -> int:
+	return int(state["nights_won"]) + 1
+
+
 ## Ticks left until dawn ends the night (task 0137), or 0. A parked night
 ## (`NightRoad.park`) has its dawn out of reach.
 static func ticks_to_dawn(state: Dictionary) -> int:
@@ -184,7 +191,7 @@ static func begin_night(state: Dictionary) -> bool:
 
 	# The night to be fought is the one after the last one won, not the
 	# number of days that have gone by. See `enter_result()`.
-	state["night"] = int(state["nights_won"]) + 1
+	state["night"] = night_ahead(state)
 	state["night_tick"] = 0
 	Events.add(state, &"night_began", {"night": int(state["night"])})
 	# Everything about what is coming is reset here rather than by whoever

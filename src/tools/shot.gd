@@ -309,6 +309,10 @@ func _take_the_trailer(folder: String) -> void:
 
 	main.begin_run(SEED)
 	main.edge_pan = false
+	# Nor does the guardian's cursor follow it (task 0139): the window can
+	# land under the desk's own mouse, and then every night still had the
+	# cursor wherever that mouse happened to be.
+	main.get_node("%WorldView").cursor().follows_pointer = false
 	var driver = main.get_node("%SimDriver")
 	var state: Dictionary = driver.state
 	_a_defended_farm(state)
@@ -439,6 +443,10 @@ func _take_the_switch(folder: String) -> void:
 
 	main.begin_run(SEED)
 	main.edge_pan = false
+	# Nor does the guardian's cursor follow it (task 0139): the window can
+	# land under the desk's own mouse, and then every night still had the
+	# cursor wherever that mouse happened to be.
+	main.get_node("%WorldView").cursor().follows_pointer = false
 	var driver = main.get_node("%SimDriver")
 	var state: Dictionary = driver.state
 	_a_defended_farm(state)
@@ -615,6 +623,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	_camera_at = Vector2i(-1, -1)
 	# The real pointer is wherever the desk left it: no edge panning.
 	main.edge_pan = false
+	# Nor does the guardian's cursor follow it (task 0139): the window can
+	# land under the desk's own mouse, and then every night still had the
+	# cursor wherever that mouse happened to be.
+	main.get_node("%WorldView").cursor().follows_pointer = false
 
 	match name:
 		"noon": _set_noon(state)

@@ -50,6 +50,10 @@ var _pointer := Vector2(-1, -1)
 var _held := Vector2i.ZERO
 var _repeat_left := 0.0
 var _pulse := 0.0
+## Whether the pointer moves it. Always, but for `shot.gd` (task 0139): its
+## window lands wherever the desk has room, under whatever the desk's own
+## mouse is doing, so a still puts the cursor by hand and keeps it there.
+var follows_pointer := true
 
 
 func setup(world: WorldView) -> void:
@@ -67,7 +71,7 @@ func set_active(on: bool) -> void:
 	_held = Vector2i.ZERO
 	_armed = false
 	if on and _world != null:
-		var at := _pointer if _pointer.x >= 0.0 and not _by_pad \
+		var at := _pointer if follows_pointer and _pointer.x >= 0.0 and not _by_pad \
 			else _world.get_viewport_rect().size * 0.5
 		_put(_world.screen_to_cell(at))
 
@@ -201,7 +205,7 @@ func advance(seconds: float, step: Vector2i) -> void:
 		queue_redraw()
 	if not _by_pad:
 		_held = Vector2i.ZERO
-		if _pointer.x >= 0.0 and _world != null:
+		if follows_pointer and _pointer.x >= 0.0 and _world != null:
 			_put(_world.screen_to_cell(_pointer))
 		return
 	if step == Vector2i.ZERO:
@@ -234,7 +238,8 @@ func _input(event: InputEvent) -> void:
 		_by_pad = false
 		# A press lands on the cell under it now, before anything that
 		# handles the press asks where the cursor is (task 0134).
-		if event is InputEventMouseButton and _active and _world != null:
+		if event is InputEventMouseButton and _active and _world != null \
+				and follows_pointer:
 			_put(_world.screen_to_cell(_pointer))
 	elif event is InputEventKey:
 		_by_pad = false

@@ -3178,13 +3178,13 @@ func _case_0055_speed() -> void:
 		return
 
 	var state := driver.state
-	# The speed read-out is the night HUD's own button since task 0056; the
-	# skip line stays here, because skipping is not one of the three
-	# controls `design.md` draws.
+	# The speed read-out is the night HUD's own button since task 0056, and
+	# SKIP one beside it since 0139 - the day HUD's skip line is gone.
 	var speed_line: Button = locate_control("SpeedButton") as Button
-	var skip_line: Label = locate_control("SkipLine") as Label
-	expect(speed_line != null and skip_line != null,
-		"the speed control and the skip line both exist")
+	var skip_button: Button = locate_control("SkipButton") as Button
+	expect(speed_line != null and skip_button != null
+		and locate_control("SkipLine") == null,
+		"the speed control and the skip button both exist, and no skip line")
 	expect(hud.driver != null,
 		"and the HUD was handed the driver to work them with")
 
@@ -3192,7 +3192,7 @@ func _case_0055_speed() -> void:
 	await frames(2)
 	expect(not speed_line.is_visible_in_tree(),
 		"the speed control is down by day")
-	expect(not skip_line.visible, "and so is the skip line")
+	expect(not skip_button.is_visible_in_tree(), "and so is the skip button")
 	driver.set_speed(1)
 	await tap_key(KEY_V)
 	await frames(2)
@@ -3222,7 +3222,7 @@ func _case_0055_speed() -> void:
 	NightRoad.to_night(state)
 	await frames(2)
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
-	expect(speed_line.is_visible_in_tree() and skip_line.visible,
+	expect(speed_line.is_visible_in_tree() and skip_button.is_visible_in_tree(),
 		"and after dark both are up")
 	expect(speed_line.text.contains("1x"),
 		"the speed control says what speed it is", speed_line.text)
@@ -3256,8 +3256,8 @@ func _case_0055_speed() -> void:
 	state["house_hp"] = GameData.HOUSE_HP
 	await frames(2)
 	expect(Sim.can_skip(state), "the house is healthy, so it may be skipped")
-	expect(skip_line.text.contains("SKIP"),
-		"and the line offers it", skip_line.text)
+	expect(not skip_button.disabled,
+		"and the button offers it", skip_button.text)
 	await tap_key(KEY_K)
 	await frames(3)
 	expect(int(state["phase"]) != Phases.NIGHT,
@@ -3277,9 +3277,10 @@ func _case_0055_speed() -> void:
 	# 0110 shortened out of the sentence while moving it into the string
 	# table - a check that breaks when somebody edits copy is a check about
 	# the copy, and this one is about the button refusing.
-	expect(skip_line.text.contains(I18n.t(&"WHY_HOUSE_LOW") % 1),
-		"with the house nearly gone the line says why rather than offering",
-		skip_line.text)
+	var why := Describe.of(StringName(skip_button.get_meta(&"describes", &"")))
+	expect(skip_button.disabled and why.contains(I18n.t(&"WHY_HOUSE_LOW") % 1),
+		"with the house nearly gone the button is dead and its tooltip says why",
+		why)
 	var night_tick := int(state["night_tick"])
 	await tap_key(KEY_K)
 	await frames(3)
@@ -3313,7 +3314,7 @@ func _case_0055_speed() -> void:
 	_completed += 1     # last line: an abandoned case never gets here
 
 
-## 0056 - the night HUD, and all three of its controls pressed.
+## 0056 - the night HUD, and its controls pressed (laid out again at 0139).
 func _case_0056_night_hud() -> void:
 	await open_scene(MAIN_SCENE)
 	var driver: SimDriver = require_control("SimDriver")
@@ -3356,8 +3357,8 @@ func _case_0056_night_hud() -> void:
 
 	# **Readable at 480x270**: everything on it is inside the screen.
 	for named in ["NightNumber", "WaveCounter", "ZombiesLeft",
-			"HouseNumbers", "HouseBar", "NightBar",
-			"FlareButton", "SpeedButton"]:
+			"DawnCountdown", "HouseNumbers", "HouseBar", "NightBar",
+			"FlareButton", "SpeedButton", "SkipButton"]:
 		var ctl: Control = locate_control(named) as Control
 		expect(ctl != null, "the HUD has a %s" % named)
 		if ctl == null:

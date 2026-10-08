@@ -788,11 +788,11 @@ func _task_0121_pad() -> void:
 		&"slot_8": "the hotbar's slots: see slot_1",
 		&"place": "A confirms at the cursor at night (task 0133): RT went to the flare",
 		&"run": "presentation only - the farmer walks the same - and LT went to upgrade (task 0133)",
-		&"speed": "a focusable night HUD button; 0139 gives every HUD control focus or an action",
-		&"skip_night": "a focusable night HUD button, like speed",
+		&"speed": "a night bar button: Back puts the pad on the bar and A presses it (task 0139)",
+		&"skip_night": "a night bar button, like speed",
 		&"stats": "a read-only screen no play depends on, and no button left over",
 		&"log": "a read-only screen, like stats",
-		&"tech": "L3 went to START (task 0136); a screen, reached by its key or 0139's HUD focus",
+		&"tech": "L3 went to START (task 0136); a screen reached by its key - the night bar has no TECH, the tree only changes by day",
 	}
 	var project := FileAccess.get_file_as_string("res://project.godot")
 	var section := project.substr(project.find("\n[input]\n"))

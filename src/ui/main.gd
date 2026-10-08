@@ -377,7 +377,9 @@ func _drive_cursor(delta: float) -> void:
 		_tooltip.show_world("", Vector2.ZERO)
 		return
 	var step := Vector2i.ZERO
-	if not _was_paused:
+	# **Not while the night bar has a pad on it** (task 0139): the D-pad and
+	# the stick are moving along its buttons then.
+	if not _was_paused and not _night_hud.holds_focus():
 		step = Vector2i(int(signf(Input.get_axis(&"move_left", &"move_right"))),
 			int(signf(Input.get_axis(&"move_up", &"move_down"))))
 	cursor.advance(delta, step)
@@ -475,7 +477,8 @@ func pan_direction() -> Vector2:
 	var direction := Vector2.ZERO
 	# **A pad's move axes step the cursor instead** (task 0131); the keyboard
 	# keeps panning, because the last device touched decides.
-	if not _world.cursor().by_pad():
+	# Nor while the night bar has the focus (task 0139).
+	if not _world.cursor().by_pad() and not _night_hud.holds_focus():
 		direction = Vector2(Input.get_axis(&"move_left", &"move_right"),
 			Input.get_axis(&"move_up", &"move_down"))
 	direction += Vector2(Input.get_axis(&"pan_left", &"pan_right"),

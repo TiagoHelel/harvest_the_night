@@ -127,8 +127,13 @@ func _process(_delta: float) -> void:
 ## Off when `a11y/hold_to_act` is off, for a player who would rather one press
 ## meant one thing.
 func _keep_placing() -> void:
+	# **A held A on the night bar is the bar's** (task 0139): it pressed a
+	# button there, and places nothing at the cursor.
+	var bar_focused := get_viewport().gui_get_focus_owner() != null \
+		and get_viewport().gui_get_focus_owner().is_in_group(NightHud.BAR_GROUP)
 	if not Input.is_action_pressed(&"place") \
-			and not (_by_cursor() and Input.is_action_pressed(&"interact")):
+			and not (_by_cursor() and Input.is_action_pressed(&"interact")
+				and not bar_focused):
 		_held_cell = Vector2i(-1, -1)
 		return
 	if _hovered == _held_cell or not Grid.in_bounds(_hovered):

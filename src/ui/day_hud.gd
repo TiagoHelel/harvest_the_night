@@ -95,10 +95,10 @@ var _state: Dictionary = {}
 var _day: Label
 var _money: Label
 var _night: Button
-var _skip: Label
 
-## The driver, for the speed and skip buttons. Set by `main.gd`; the HUD asks
-## it to do things and never touches `state` to do them.
+## The driver, for the speed and skip keys (their buttons are the night
+## HUD's). Set by `main.gd`; the HUD asks it to do things and never touches
+## `state` to do them.
 var driver: SimDriver
 var _labels: Dictionary = {}        # resource id -> Label
 var _last: Dictionary = {}          # resource id -> the number it last showed
@@ -177,13 +177,9 @@ func _ready() -> void:
 	_night.pressed.connect(_ask_for_night)
 	add_child(_night)
 
-	# **The night's own two controls**, bottom right where the day keeps its
-	# one. `design.md`'s night mock has `[VELOCIDADE x2]` there and this is it;
-	# task 0056 builds the rest of that bar around them.
-	# **One read-out, for the key that has nowhere else to live.** Speed and
-	# the flare are buttons on the night HUD (task 0056); skipping is not one
-	# of `design.md`'s three controls, so it stays a key and this says so.
-	_skip = _label("SkipLine", Vector2(352, 238), UiKit.DIM)
+	# **The night's controls are the night HUD's**: the flare and the speed
+	# since task 0056, and SKIP since 0139, a button with its refusal as its
+	# tooltip. Their keys are still read here, beside the night key.
 
 
 ## Cycle 1x, 2x, 4x. The label follows on the next frame, off the driver.
@@ -320,17 +316,6 @@ func _refresh(force: bool) -> void:
 	for node in _day_only:
 		node.visible = daylight
 	visible = not House.inside(_state)
-
-	# **The night's controls are the inverse of the day's.** They are not in
-	# `_day_only`, so they are shown here and hidden by the same test.
-	var after_dark := int(_state["phase"]) == Phases.NIGHT
-	_skip.visible = after_dark
-	if after_dark:
-		var refused := Sim.why_not_skip(_state)
-		_skip.text = I18n.t(&"DHUD_SKIP") if refused.is_empty() \
-			else I18n.f(&"DHUD_SKIP_NO", [Names.refusal(refused)])
-		_skip.theme_type_variation = UiKit.WARN \
-			if not refused.is_empty() else UiKit.WARM
 
 	if not daylight:
 		return

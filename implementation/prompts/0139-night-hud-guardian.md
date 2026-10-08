@@ -1,7 +1,7 @@
 # 0139 - The night HUD for the guardian
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0133, 0134, 0135, 0136, 0137
 - **Likely files:** src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd
 

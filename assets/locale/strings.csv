@@ -175,8 +175,6 @@ DHUD_POWER,0,POWER %d/%d,ENERGIA %d/%d
 DHUD_POWER_SHORT,0,POWER %d/%d  everything at %d%%,ENERGIA %d/%d  tudo a %d%%
 DHUD_SEED_HEADING,168,# CROP    $  TIME  /DAY,# PLANTA  $  TEMPO /DIA
 DHUD_SEED_ROW,168,%d %-7s $%-2d %3ds  %2d,%d %-7s $%-2d %3ds  %2d
-DHUD_SKIP,0,[K] SKIP,[K] PULAR
-DHUD_SKIP_NO,0,[K] %s,[K] %s
 DHUD_TO_NIGHT,0,GO TO BED,IR DORMIR
 DHUD_WAITING,0,waiting for a bite,esperando fisgar
 DHUD_WATER,0,WATER %d/%d,ÁGUA %d/%d
@@ -231,13 +229,20 @@ NHUD_BOSS,0,%s  %d/%d,%s  %d/%d
 NHUD_DAWN,110,DAWN %d:%02d,AMANHECER %d:%02d
 NHUD_FLARE,46,FLARE,SINAL
 NHUD_FLARE_CHARGE,46,%d%%,%d%%
+NHUD_HINT_AIM,0,%s: fire the flare,%s: soltar o sinal
+NHUD_HINT_PLACE,0,%s: place %s,%s: colocar %s
+NHUD_HINT_REPAIR,0,%s: mend %s,%s: consertar %s
+NHUD_HINT_SELL,0,%s: sell %s,%s: vender %s
+NHUD_HINT_UPGRADE,0,%s: upgrade %s,%s: melhorar %s
 NHUD_HOUSE,120,HOUSE %d/%d,CASA %d/%d
 NHUD_INCOMING,0,WAVE %d INCOMING  %ds,ONDA %d CHEGANDO  %ds
 NHUD_LEFT,110,%d LEFT,FALTAM %d
 NHUD_NIGHT,110,NIGHT %d,NOITE %d
+NHUD_SKIP,46,SKIP,PULAR
+NHUD_SKIP_TIP,0,run the rest of the night now,rodar o resto da noite agora
 NHUD_SPEED,40,%dx,%dx
-NHUD_START,46,START,COMEÇAR
-NHUD_START_IN,46,START %d,AGORA %d
+NHUD_START,146,START,COMEÇAR
+NHUD_START_IN,146,START %d,AGORA %d
 NHUD_WAVE,110,WAVE %d/%d,ONDA %d/%d
 OPT_BACK,0,BACK,VOLTAR
 OPT_EMPTY,0,nothing to set yet,nada para ajustar ainda

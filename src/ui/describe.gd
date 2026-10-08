@@ -51,6 +51,10 @@ static func of(key: StringName) -> String:
 		&"tech": return tech(id)
 		&"enemy": return enemy(id)
 		&"crop": return crop(id)
+		# **Words already said** (task 0139): a control whose explanation
+		# changes with the state - the night HUD's SKIP and its refusal -
+		# carries them whole, and they are shown as they are.
+		&"text": return String(parts[1])
 	return ""
 
 

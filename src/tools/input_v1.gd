@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 12
+const V1_CASES := 13
 
 
 func _process(delta: float) -> bool:
@@ -62,6 +62,7 @@ func _run() -> void:
 	await _case_0135_flare_aim()
 	await _case_0136_start()
 	await _case_0138_morning()
+	await _case_0139_night_hud()
 	_finish()
 
 
@@ -1064,3 +1065,232 @@ func _outside_the_frame(result: Control) -> Array:
 		if not box.encloses(shown.get_global_rect()):
 			out.append("%s %s" % [shown.name, shown.get_global_rect()])
 	return out
+
+
+## 0139 - the night HUD for the guardian: START, the flare, the speed and SKIP
+## on one bar a pad reaches by focus, and a hint that says what a confirm does.
+func _case_0139_night_hud() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	var night_hud: NightHud = require_control("NightHud")
+	var actions := root.get_node_or_null(^"Actions")
+	if driver == null or world == null or night_hud == null or actions == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.set_speed(1)
+	await frames(4)
+	Resources.gain(state, {GameData.WOOD: 900, GameData.STONE: 900,
+		GameData.IRON: 900, GameData.FOOD: 900})
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"GO TO BED to start the night")
+	var house_view: HouseView = require_control("HouseView")
+	await until(func() -> bool: return not house_view.is_showing_bedtime(),
+		"the bed beat to end", 100000)
+	await frames(2)
+
+	# **The build step: START across the bar, the strip, nothing else yet.**
+	var start: Button = locate_control("StartButton") as Button
+	expect(start != null and start.is_visible_in_tree()
+		and start.size.x >= NightHud.START_SIZE.x,
+		"START is up across the bar in the build step",
+		str(start.size) if start != null else "none")
+	var waiting: Array = []
+	for named in ["FlareButton", "SpeedButton", "SkipButton", "WaveCounter",
+			"DawnCountdown"]:
+		var it: Control = locate_control(named) as Control
+		if it == null or it.is_visible_in_tree():
+			waiting.append(named)
+	expect(waiting.is_empty(),
+		"the flare, the speed, SKIP, the wave and the countdown wait for the waves",
+		str(waiting))
+	var night_number: Label = locate_control("NightNumber") as Label
+	expect(night_number != null and night_number.is_visible_in_tree()
+		and night_number.text == I18n.f(&"NHUD_NIGHT", [Phases.night_ahead(state)]),
+		"the strip names the night ahead",
+		night_number.text if night_number != null else "none")
+	expect(locate_control("RepairButton") == null, "there is no RepairButton")
+
+	# **The hint follows the cursor.** A wall in hand over open ground: what a
+	# click there does.
+	Building.select(state, &"wall")
+	var spot := Vector2i(-1, -1)
+	var middle := world.screen_to_cell(Vector2(240.0, 140.0))
+	for radius in 8:
+		for candidate in Grid.within(middle, radius):
+			if spot.x < 0 and Building.why_not(state, &"wall", candidate).is_empty():
+				spot = candidate
+	await _point_at(world, spot)
+	expect(world.cursor().look() == &"place"
+		and night_hud.hint_text() == I18n.f(&"NHUD_HINT_PLACE",
+			[actions.text_of(&"place"), Names.of(&"wall")]),
+		"over open ground with a wall in hand, the hint says what a click does",
+		night_hud.hint_text())
+	expect(Building.place(state, &"wall", spot), "a wall goes down")
+	await frames(3)
+	var own := world.cursor().look()
+	var said_own := I18n.f(&"NHUD_HINT_UPGRADE",
+		[actions.text_of(&"upgrade"), Names.of(&"wall")]) if own == &"upgrade" \
+		else I18n.f(&"NHUD_HINT_SELL", [actions.text_of(&"remove"), Names.of(&"wall")])
+	expect((own == &"upgrade" or own == &"sell") and night_hud.hint_text() == said_own,
+		"over a wall of his, it says what the upgrade or remove button does",
+		"%s: %s" % [own, night_hud.hint_text()])
+	Farm.damage(state, spot, 40)
+	await frames(3)
+	expect(world.cursor().look() == &"repair"
+		and night_hud.hint_text() == I18n.f(&"NHUD_HINT_REPAIR",
+			[actions.text_of(&"place"), Names.of(&"wall")]),
+		"and hurt, that a click mends it", night_hud.hint_text())
+
+	# **Every hint fits its line**, in both languages and on both devices,
+	# right of the house numbers.
+	var hint: Label = locate_control("ModeHint") as Label
+	var font := hint.get_theme_font(&"font")
+	var font_size := hint.get_theme_font_size(&"font_size")
+	var widest := 0.0
+	var widest_text := ""
+	var says := [[&"NHUD_HINT_PLACE", [&"ACT_MOUSE_LEFT", &"ACT_PAD_A"]],
+		[&"NHUD_HINT_UPGRADE", [&"ACT_MOUSE_MIDDLE", &"ACT_PAD_LT"]],
+		[&"NHUD_HINT_SELL", [&"ACT_MOUSE_RIGHT", &"ACT_PAD_R3"]],
+		[&"NHUD_HINT_REPAIR", [&"ACT_MOUSE_LEFT", &"ACT_PAD_A"]]]
+	var named: Array = GameData.sorted_names(GameData.DEFENCES.keys()) \
+		+ GameData.sorted_names(GameData.BUILDINGS.keys()) + [&"house"]
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		for id in named:
+			for row in says:
+				for key in (row[1] as Array):
+					var text := I18n.f(row[0], [I18n.t(key), Names.of(id)])
+					var wide := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1,
+						font_size).x
+					if wide > widest:
+						widest = wide
+						widest_text = text
+	I18n.use("en")
+	expect(widest <= hint.size.x, "every hint fits its line",
+		"%s: %.0f of %.0f" % [widest_text, widest, hint.size.x])
+	var house_numbers: Label = locate_control("HouseNumbers") as Label
+	expect(house_numbers != null
+		and hint.get_global_rect().position.x >= house_numbers.get_global_rect().end.x,
+		"and starts right of the house numbers",
+		"%s against %s" % [hint.get_global_rect(), house_numbers.get_global_rect()])
+
+	# **A pad reaches START by focus**: Back puts it on the bar, the D-pad
+	# steps nothing while it is there, B takes it off, and A presses.
+	await _pad_tap(JOY_BUTTON_BACK)
+	await frames(2)
+	expect(night_hud.holds_focus() and start.has_focus(), "Back puts the pad on START")
+	var before := world.cursor().cell()
+	await _pad_tap(JOY_BUTTON_DPAD_RIGHT)
+	await frames(2)
+	expect(world.cursor().cell() == before and start.has_focus(),
+		"the D-pad moves neither the cursor nor the focus off the bar",
+		"%s to %s" % [before, world.cursor().cell()])
+	await _pad_tap(JOY_BUTTON_B)
+	await frames(2)
+	expect(not night_hud.holds_focus(), "B hands the pad back to the cursor")
+	await _pad_tap(JOY_BUTTON_BACK)
+	await frames(2)
+	await _pad_tap(JOY_BUTTON_A)
+	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT,
+		"START to begin the waves")
+	expect(int(state["phase"]) == Phases.NIGHT, "and A on START begins the waves")
+	await frames(3)
+
+	# **The waves: the flare, the speed and SKIP share the bar.**
+	var flare: Button = locate_control("FlareButton") as Button
+	var speed: Button = locate_control("SpeedButton") as Button
+	var skip: Button = locate_control("SkipButton") as Button
+	expect(flare.is_visible_in_tree() and speed.is_visible_in_tree()
+		and skip.is_visible_in_tree() and not start.is_visible_in_tree(),
+		"during the waves the bar is the flare, the speed and SKIP")
+	var boxes: Array = [flare.get_global_rect(), speed.get_global_rect(),
+		skip.get_global_rect()]
+	var crossed := false
+	for i in boxes.size():
+		var box: Rect2 = boxes[i]
+		if box.position.x < Hotbar.RIGHT or not Rect2(0, 0, 480, 270).encloses(box):
+			crossed = true
+		for j in range(i + 1, boxes.size()):
+			if box.intersects(boxes[j]):
+				crossed = true
+	expect(not crossed, "side by side, on screen, right of the hotbar", str(boxes))
+
+	# **On a pad**: Back lands on the flare, the D-pad moves along, A presses.
+	await _pad_tap(JOY_BUTTON_BACK)
+	await frames(2)
+	expect(flare.has_focus(), "at night Back puts the pad on the flare first")
+	await _pad_tap(JOY_BUTTON_DPAD_RIGHT)
+	await frames(2)
+	expect(speed.has_focus(), "the D-pad moves along the bar to the speed")
+	var was := driver.speed
+	await _pad_tap(JOY_BUTTON_A)
+	await frames(2)
+	expect(driver.speed != was, "and A cycles it", str(driver.speed))
+	await _pad_tap(JOY_BUTTON_B)
+	await frames(2)
+	expect(not night_hud.holds_focus(), "B gives the pad back")
+	driver.set_speed(GameData.SPEEDS[0])
+	await frames(2)
+
+	# **The speed cycles 1, 2, 4** on a click.
+	var seen: Array = []
+	for _i in GameData.SPEEDS.size():
+		await click_control("SpeedButton")
+		await frames(2)
+		seen.append(driver.speed)
+	var cycle: Array = (GameData.SPEEDS as Array).slice(1) + [GameData.SPEEDS[0]]
+	expect(seen == cycle and speed.text == I18n.f(&"NHUD_SPEED", [driver.speed]),
+		"SPEED cycles through the table and says where it is", str(seen))
+
+	# **The flare**: armed, the hint says a click lets it go; gone, its
+	# charge is on the button.
+	await click_control("FlareButton")
+	await frames(2)
+	await _point_at(world, spot)
+	expect(world.cursor().look() == &"aim"
+		and night_hud.hint_text() == I18n.f(&"NHUD_HINT_AIM", [actions.text_of(&"place")]),
+		"an armed flare's hint says a click lets it go", night_hud.hint_text())
+	await click_cell(spot)
+	await until(func() -> bool: return Ability.flares_used(state) > 0, "the flare")
+	await frames(2)
+	expect(flare.disabled and flare.text == I18n.f(&"NHUD_FLARE_CHARGE",
+		[Ability.charge_percent(state)]), "and then the flare shows its charge", flare.text)
+
+	# **SKIP is refused under SKIP_MIN_HOUSE_PERCENT, and says why.**
+	state["house_hp"] = maxi(Phases.house_full(state)
+		* GameData.SKIP_MIN_HOUSE_PERCENT / 100 - 1, 1)
+	await frames(3)
+	var refused := Sim.why_not_skip(state)
+	var why := Describe.of(StringName(skip.get_meta(&"describes", &"")))
+	expect(not refused.is_empty() and skip.disabled and why == Names.refusal(refused),
+		"under SKIP_MIN_HOUSE_PERCENT SKIP is dead, with the refusal as its tooltip", why)
+	var tooltip: Tooltip = require_control("Tooltip") as Tooltip
+	var over := InputEventMouseMotion.new()
+	over.position = skip.get_global_rect().get_center()
+	over.global_position = over.position
+	root.push_input(over)
+	await until(func() -> bool: return tooltip.text_showing() == why,
+		"the refusal on the tooltip", 20000)
+	expect(tooltip.text_showing() == why, "and pointing at it shows the reason",
+		tooltip.text_showing())
+	await click_control("SkipButton")
+	await frames(3)
+	expect(int(state["phase"]) == Phases.NIGHT, "a click on it then skips nothing")
+
+	# **Above it, SKIP runs the night out.**
+	state["house_hp"] = Phases.house_full(state)
+	await frames(3)
+	expect(not skip.disabled and Describe.of(StringName(skip.get_meta(&"describes", &"")))
+		== I18n.t(&"NHUD_SKIP_TIP"), "with the house whole SKIP is live, and says what it does")
+	await click_control("SkipButton")
+	await until(func() -> bool: return int(state["phase"]) != Phases.NIGHT,
+		"SKIP to run the night out")
+	expect(int(state["phase"]) == Phases.RESULT, "and a click runs the night to its end",
+		Phases.name_of(int(state["phase"])))
+	driver.set_speed(1)
+	await close_scene()
+	_completed += 1

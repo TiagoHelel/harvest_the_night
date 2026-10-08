@@ -43,10 +43,11 @@ const EDGE := 3.0
 const META := &"describes"
 
 ## **The night's free band** (task 0131), where the cursor's tooltip may go:
-## below the night HUD's 24 pixel strip and above the lines and buttons along
-## the bottom, which start at 240. A tooltip over the house bar or the
-## REPAIR button would hide the thing the player is about to read or press.
-const WORLD_AREA := Rect2(3.0, 26.0, 474.0, 212.0)
+## below the night HUD's 24 pixel strip and above the hotbar, whose slots
+## start at 215 (task 0139; it was 240, the bottom lines, before the hotbar
+## came). A tooltip over the house bar or a slot would hide the thing the
+## player is about to read or press.
+const WORLD_AREA := Rect2(3.0, 26.0, 474.0, 187.0)
 
 var _key := &""
 var _showing := &""

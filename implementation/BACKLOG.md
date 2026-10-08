@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **134 / 296 done**
+`###########.............`  **135 / 296 done**
 
-0 doing / 162 todo / 0 blocked across 18 phases.
+0 doing / 161 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-162 task(s) left, the ready ones first, then what they
+161 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -87,23 +87,6 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: `python tools/placeholders.py` no longer lists A009
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0139 - The night HUD for the guardian
-
-Ready to pick up.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
-
-One night HUD built for the guardian rather than for a farmer in the yard: the time to dawn, the house, the wave, START, speed, skip, the flare and the hotbar, all reachable by mouse and by pad.
-
-- Top strip: the night, wave x/y, the dawn countdown (0137) and the house bar against `Phases.house_full` (the boss bar stays where it is). Bottom: the hotbar (0133). Bottom right: START in the build step; speed, skip and the flare with its charge during the waves
-- A mode hint line says what a confirm does now - place, upgrade, sell, repair or aim - with the key or the pad glyph from 0121, following the cursor's state
-- Skip becomes a button whose tooltip is its refusal (`Sim.why_not_skip`), and the day HUD's `SkipLine` read-out goes. The farmer-centric REPAIR button is gone (0134). The day HUD's `NightButton` belongs to 0127 and 0140 and is not touched here
-- Every control writes an intent or asks the driver, as today; on a pad each one is reachable by focus or by its own action
-- Icons through the placeholder road until A005 is integrated by 0147
-- Rewrite `_case_0056_night_hud` (and `_task_0056_night_hud` where it reads the old layout) and the `SkipLine` read in `_case_0055_speed` (~3178); remove strings nothing reads any more (`DHUD_SKIP` and `DHUD_SKIP_NO`; 0134 already took `NHUD_REPAIR`) so `tools/i18n_check.py` stays clean
-- View only: neither hash moves
-
-  - done when: `_case_0139_night_hud` in `input_v1.gd`: START is up in the build step and starts the waves; speed cycles 1/2/4; skip is refused under `SKIP_MIN_HOUSE_PERCENT` with its reason and allowed above it; the flare shows its charge; no `RepairButton` exists; the hint changes with what is under the cursor
-  - done when: `python tools/shot.py 0139 dusk wave` and `--fhd` captures opened, also with `--pt_BR`: no two labels on top of each other and nothing over the hotbar
 
 ### 0140 - The day HUD: the hour and bedtime
 
@@ -206,6 +189,23 @@ The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131'
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the cursor in each state over dark ground - opened and looked at, in `implementation/shots/0146/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
+### 0147 - Art: the night hotbar and HUD icons
+
+Waits for Codex art A005.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/hotbar.gd, src/ui/night_hud.gd, tools/check_ui_art.py, tools/show_art.py`.
+
+The icons of the night - the eight defences, the flare, START, speed and the moon of the dawn countdown - from Codex pack A005, replacing the hotbar's and the night HUD's placeholders.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A005` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A005-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded lists of `tools/check_ui_art.py` and the `--ui` showcase
+- Runtime: one raw source each, cut into a 16x16 `icon_<id>` and a 10x10 `hud_<id>` (visible at most 14 and 8 px) for `gun_tower`, `auto_crossbow`, `flame_tower`, `mortar`, `mine`, `fence`, `wall`, `barricade`, the flare, START, speed and the dawn moon
+- The hotbar (0133) takes the 16x16 cuts and the night HUD (0139) the 10x10 ones, replacing their placeholders by deleting A005's entries from 0120's placeholder registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A005 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A005
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
 ### 0289 - Art: the morning report
 
 Waits for Codex art A057.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
@@ -227,7 +227,7 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
 
 ### 0141 - Teaching the new night
 
-Waits on 0139, 0140.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/tutorial_prompt.gd, src/tools/perf_names.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0140.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/tutorial_prompt.gd, src/tools/perf_names.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Day one teaches the new night - go to bed, build with the cursor, press START, hold until dawn - by watching the state and never gating anything.
 
@@ -242,26 +242,9 @@ Day one teaches the new night - go to bed, build with the cursor, press START, h
   - done when: `_case_0141_tutorial` in `input_v1.gd`: the bed line shows on day one after the day steps, the START line in the build step
   - done when: Captures of the bed, START and dawn prompts, opened
 
-### 0147 - Art: the night hotbar and HUD icons
-
-Waits on 0139.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/hotbar.gd, src/ui/night_hud.gd, tools/check_ui_art.py, tools/show_art.py`.
-
-The icons of the night - the eight defences, the flare, START, speed and the moon of the dawn countdown - from Codex pack A005, replacing the hotbar's and the night HUD's placeholders.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A005` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A005-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded lists of `tools/check_ui_art.py` and the `--ui` showcase
-- Runtime: one raw source each, cut into a 16x16 `icon_<id>` and a 10x10 `hud_<id>` (visible at most 14 and 8 px) for `gun_tower`, `auto_crossbow`, `flame_tower`, `mortar`, `mine`, `fence`, `wall`, `barricade`, the flare, START, speed and the dawn moon
-- The hotbar (0133) takes the 16x16 cuts and the night HUD (0139) the 10x10 ones, replacing their placeholders by deleting A005's entries from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A005 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A005
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
 ### 0148 - Checkpoint: is the night better with him asleep?
 
-Waits on 0139, 0140, 0141, 0142.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
+Waits on 0140, 0141, 0142.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
 
 **The plan's Phase 1 test.** Play the new night - the farmer asleep, the cursor, START, dawn - with a mouse and with a pad, and answer honestly whether it is better than the MVP's night. Every later phase waits on the answer.
 
@@ -3146,7 +3129,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (13/23)
+## 10 - Sleep is the night  (14/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3161,16 +3144,16 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0136** [The build step waits for START](prompts/0136-start-button.md)
 - [x] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md)
 - [x] **0138** [Waking up: the morning report](prompts/0138-morning-report.md)
-- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md)
+- [x] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md)
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
-- [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
+- [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md)
 - [ ] **0143** [Art: going to bed and sleeping](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
-- [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - needs 0139 - waits for art A005
-- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0139, 0140, 0141, 0142
+- [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
+- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0140, 0141, 0142
 
 ## 11 - Calendar and seasons  (0/16)
 

@@ -14482,3 +14482,114 @@ Verify, for this and for 0122 above: **PASS**, 59 passed in 550 s (OVER BUDGET a
 Counts: headless_check 16230, headless_v1 274 (+1: the retired names),
 input_check 1058, input_v1 116 (+1: the black screen). Sim 1222657941 and data
 898358060 are unchanged: it is view only.
+
+## 0139 - The night HUD for the guardian - done 2026-10-08
+
+What changed: one night HUD, built for the guardian. It has the time to dawn,
+the house, the wave, START, the speed, SKIP, the flare and the hotbar, and the
+mouse and a pad reach all of them.
+
+**The layout** (`night_hud.gd`):
+- **The top strip.** The first row is the night, the wave, how many are left
+  and the dawn countdown. The second row is the house bar against
+  `Phases.house_full`, its numbers, and the mode hint at its right end. The
+  boss bar stays under the strip.
+  - The strip is now up in the build step too, with the night ahead
+    (`Phases.night_ahead`, new, which `begin_night` numbers the night with
+    too), the house and the hint. The wave, the count and the countdown wait
+    for the waves.
+  - The house bar is 128 px wide, down from 160, to make room for the hint.
+- **Bottom:** the hotbar (0133), untouched.
+- **Bottom right:** START across the whole bar (146 px) in the build step.
+  During the waves the bar holds the flare with its charge, the speed (1/2/4)
+  and SKIP, 46 px each, all right of the hotbar's 326.
+
+**The mode hint** says what a confirm does now, from the cursor's look:
+- place, upgrade, sell, repair or aim, with the key or pad glyph that does it,
+  through `Actions.text_of`;
+- LEFT CLICK on a mouse and A on a pad confirm; upgrade and sell name their own
+  buttons (middle and right click, LT and R3);
+- nothing over open ground or a refusal - the cursor's tooltip already says
+  what and why.
+
+The widest hint is the Portuguese mend hint for the auto crossbow on a mouse,
+at 231 px in the game's font. It fits a 256 px line that starts right of the
+house numbers. `NHUD_HINT_REPAIR` says "mend" in English, as the cursor's
+"mend all" does.
+
+**SKIP is a button.**
+- It is disabled while `Sim.why_not_skip` refuses. Its tooltip is the refusal
+  in words, or "run the rest of the night now" when it is live.
+- The words go through a new `text:` kind in `Describe.of`, which shows them
+  as they are, so the hover and the pad's focus both show them.
+- The day HUD's `SkipLine` is gone, and with it `DHUD_SKIP` and
+  `DHUD_SKIP_NO`. The V and K keys are still read there.
+
+**A pad reaches the bar by focus:**
+- The night key - Back, or N, idle after dark - puts the focus on the bar's
+  first live button. The D-pad or the stick moves along it, wrapping, and never
+  off it. A presses, and B or the night key again hands the pad back.
+- **Godot's own `ui_accept` is Enter and Space, with no pad button**, so A
+  never pressed a focused button. The bar reads `interact` itself while it has
+  the focus, once for every device.
+- While the bar holds the focus, `Main` steps no cursor and pans with no move
+  key. `BuildMode` places nothing on a held A: its buttons are in the
+  `night_bar` group, and the hotbar's focus is left as it was.
+- START keeps L3, the flare RT and the hotbar the bumpers.
+- `_task_0121_pad`'s reasons for speed and skip_night now say so. For tech
+  they now say the night bar has no TECH: the tree only changes by day. Its
+  pad road is still its key, and nothing asked 0139 for more.
+
+**Two fixes the shots asked for:**
+- **The cursor's tooltip stops above the hotbar.** `Tooltip.WORLD_AREA` now
+  ends at 213, where it ended at 238 before the hotbar existed.
+- **The stills put the cursor by hand.** The shot window lands on the desk,
+  which has one 2048x1152 monitor, so -4000,-4000 is out of reach. With the
+  desk's mouse over it, every night picture had the cursor wherever that
+  mouse was, (61,22) in all of them.
+  - `GuardianCursor.follows_pointer`, set false by `shot.gd`, keeps the
+    pointer out of `advance`, the press and `set_active`. `set_active` was
+    the one that moved it, on the first frame of every night scenario.
+- SKIP's word is set every frame, like the flare's. Built in English, it said
+  SKIP in the Portuguese pictures.
+
+**Tests:**
+- `_case_0139_night_hud` (input_v1):
+  - In the build step: START across the bar, the waves' controls hidden, the
+    night ahead on the strip, and no RepairButton.
+  - The hint gives place, then upgrade or sell, then mend, as a wall goes
+    down under the cursor and is hurt. Every hint fits in both languages on
+    both devices.
+  - Back puts the pad on START, the D-pad moves nothing off the bar, B hands
+    it back, and A on START begins the waves.
+  - At night the three buttons sit side by side, right of the hotbar. Back
+    lands on the flare, the D-pad reaches the speed, and A cycles it.
+  - SPEED cycles 1/2/4 by click. An armed flare's hint says a click lets it
+    go, and once fired the button shows its charge.
+  - SKIP is dead under `SKIP_MIN_HOUSE_PERCENT`, with the refusal as its
+    tooltip, also on hover. Live above it, a click runs the night to RESULT.
+- `_case_0055_speed` now reads `SkipButton`, and `SkipLine` must be gone.
+  `_case_0056_night_hud` checks the countdown and SKIP are on screen.
+  `_task_0056_night_hud` reads no layout and was left alone.
+
+Shot 0139 `dusk`, `wave`, `repair`, `aim` and `passed_out`, the `-fhd`
+captures of dusk and wave, and all of them in `-pt_BR` were opened:
+- the strip's two rows are clear of each other;
+- "BOTÃO ESQUERDO: consertar torre de tiro" sits right of "CASA 100/100";
+- "SINAL / 1x / PULAR" sits right of the hotbar;
+- the build step shows "AGORA 28" across the bar;
+- the cursor is where each scenario puts it, and nothing is over the hotbar.
+
+Files:
+- src/ui/{night_hud,day_hud,main,build_mode,describe,tooltip,guardian_cursor}.gd
+- src/core/phases.gd (`night_ahead`, same number)
+- src/tools/{input_v1,input_check,headless_v1,shot}.gd
+- assets/locale/strings.csv
+- implementation/shots/0139/
+
+Verify: **PASS**, 59 passed in 555 s (OVER BUDGET as before). Suite times:
+headless_check 80.4 s, headless_v1 3.6 s, input_check 88.0 s, input_v1 20.1 s.
+Counts: headless_check 16230, headless_v1 274, input_check 1064 (+6: the
+skip button and the countdown in the old cases), input_v1 144 (+28:
+`_case_0139_night_hud`). Sim 1222657941 and data 898358060 are unchanged:
+it is view only, and `night_ahead` numbers the night exactly as before.
