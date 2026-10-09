@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["fishing_bar", "a trout on the line: one hit of two, the marker on its way", ""],
 	["sprinklers", "a copper, an iron and a gold sprinkler at 06:20, spraying", ""],
 	["hardwood", "a chipped big stump and a whole one among the trees", ""],
 	["quarry", "copper, coal and iron-gated gold on Autumn 1", ""],
@@ -723,6 +724,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"stump": _set_stump(state)
 		"hardwood": _set_hardwood(state)
 		"sprinklers": _set_sprinklers(state)
+		"fishing_bar": _set_fishing_bar(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -1383,6 +1385,45 @@ func _set_stump(state: Dictionary) -> void:
 ## **The big stumps** (task 0177): the one in the south-west woods chipped
 ## by an iron axe's first swing, the farmer beside it with the axe, and the
 ## whole one east of him in the same frame, among the trees.
+## **The bar mid-catch** (task 0180): on the north-west pond's shore at 08:00
+## of Spring 3, a trout on the line - one of its two hits scored, the marker
+## on its way across, the green ahead of it.
+func _set_fishing_bar(state: Dictionary) -> void:
+	_on_date(state, 3)
+	state["day_tick"] = Phases.tick_at_minute(8 * 60)
+	var anchor: Array = GameData.PONDS[&"north_west_pond"]
+	var centre := Vector2i(int(anchor[0]), int(anchor[1]))
+	var water := Vector2i(-1, -1)
+	var shore := Vector2i(-1, -1)
+	var facing := Player.SOUTH
+	for radius in range(0, 12):
+		for found in Grid.within(centre, radius):
+			if water != Vector2i(-1, -1) or Farm.terrain_at(state, found) != Farm.Terrain.WATER:
+				continue
+			for side in Player.FACING_STEPS.size():
+				var dry: Vector2i = found - Player.FACING_STEPS[side]
+				if water == Vector2i(-1, -1) and Farm.walkable(state, dry):
+					water = found
+					shore = dry
+					facing = side
+	_standing_at = shore
+	_stand(state, shore)
+	state["player"]["facing"] = facing
+	Fishing.begin(state, water)
+	var line: Dictionary = state["fishing"]
+	line["species"] = GameData.TROUT
+	line["zone"] = Fishing.zone_for(state, GameData.TROUT)
+	line["zone_at"] = 58
+	line["speed"] = Fishing.speed_for(state, GameData.TROUT)
+	line["needs"] = 2
+	line["stage"] = Fishing.BITING
+	line["since"] = 2
+	line["hits"] = 1
+	line["misses"] = 0
+	line["struck"] = 0
+	line["left"] = int(GameData.FISHING["bar_ticks"])
+
+
 ## **Sprinklers at dawn** (task 0178): a copper, an iron and a gold one in
 ## the south beds at 06:20. The plots of their patterns are wet and the rest
 ## dry, and the morning's water is still in the air.

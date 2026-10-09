@@ -4495,9 +4495,9 @@ func _task_0030_fishing() -> void:
 	# The check has teeth. A window of no ticks is a pond nobody can fish, and
 	# since task 0179 a pond with nothing biting at some hour is a quiet pond.
 	var broken: Dictionary = table.duplicate(true)
-	broken["window_ticks"] = 0
+	broken["bar_ticks"] = 0
 	expect(not GameData.check_fishing(broken).is_empty(),
-		"a pond with no window to react in is refused")
+		"a pond whose bar gives no time to land anything is refused")
 	var quiet: Dictionary = GameData.FISH_SPECIES.duplicate(true)
 	quiet.erase(GameData.CARP)
 	expect(not GameData.check_fishing(table, quiet).is_empty(),
@@ -4541,23 +4541,25 @@ func _task_0030_fishing() -> void:
 		"and waiting is waiting - there is nothing to press",
 		str(Interact.verb_at(state, pond)))
 
-	# **The float goes under on the tick the draw said**, and the window opens.
+	# **The float goes under on the tick the draw said**, and the bar opens.
 	for _i in wait - 1:
 		Fishing.tick(state, shore)
 	expect(not Fishing.is_biting(state), "still nothing a tick early",
 		str(Fishing.ticks_left(state)))
 	Fishing.tick(state, shore)
 	expect(Fishing.is_biting(state), "and then it bites")
-	expect(Fishing.ticks_left(state) == int(table["window_ticks"]),
-		"with the whole window to react in", str(Fishing.ticks_left(state)))
+	expect(Fishing.ticks_left(state) == int(table["bar_ticks"]),
+		"with the whole bar to land it in", str(Fishing.ticks_left(state)))
 	expect(Interact.verb_at(state, pond) == &"reel",
 		"now the water says reel rather than cast",
 		str(Interact.verb_at(state, pond)))
 
-	# **Reeling in the window pays.**
+	# **Striking on the green lands it** (task 0180): a press while the
+	# marker is over the green, one a sweep, as many as the species needs.
 	var before := Resources.amount(state, GameData.FISH)
-	var caught := Fishing.reel(state)
-	expect(not caught.is_empty(), "reeling in the window lands it", str(caught))
+	var hooked := StringName(Fishing.cast_of(state)["species"])
+	expect(_land_by_bar(state, shore) and Fishing.last_catch(state)["species"] == hooked,
+		"striking on the green lands the fish on the hook", str(Fishing.last_catch(state)))
 	expect(Resources.amount(state, GameData.FISH) > before,
 		"and the fish is in the basket",
 		str(Resources.amount(state, GameData.FISH)))
@@ -4600,16 +4602,16 @@ func _task_0030_fishing() -> void:
 	expect(int(seen.get(heaviest, 0)) > int(seen.get(lightest, 0)),
 		"and the commonest more often than the rarest", str(seen))
 
-	# **Missing the window loses nothing but the time.**
+	# **A bar nobody strikes at loses the fish, and nothing else** (0180).
 	var patient := State.create(1204)
 	var shore2 := _a_shore(patient)
 	var pond2 := _water_beside(patient, shore2)
 	var purse := Resources.amount(patient, GameData.MONEY)
 	expect(Fishing.begin(patient, pond2), "a line goes in")
-	for _i in int(table["bite_max_ticks"]) + int(table["window_ticks"]) + 2:
+	for _i in int(table["bite_max_ticks"]) + int(table["bar_ticks"]) + 2:
 		Fishing.tick(patient, shore2)
 	expect(not Fishing.is_casting(patient),
-		"a window nobody reacted to closes on its own")
+		"a bar nobody struck at runs out on its own")
 	expect(Resources.amount(patient, GameData.FISH) == 0,
 		"with no fish", str(Resources.amount(patient, GameData.FISH)))
 	expect(Resources.amount(patient, GameData.MONEY) == purse,
@@ -4627,11 +4629,11 @@ func _task_0030_fishing() -> void:
 	who["pos"] = [idle_shore.x * Player.SUBTILE + Player.SUBTILE / 2,
 		idle_shore.y * Player.SUBTILE + Player.SUBTILE / 2]
 	expect(Fishing.begin(idle, idle_pond), "cast, and then look away")
-	# Wait through the longest bite and reaction window, then it is idle.
+	# Wait through the longest bite and the whole bar, then it is idle.
 	Sim.advance(idle, int(GameData.FISHING["bite_max_ticks"])
-		+ int(GameData.FISHING["window_ticks"]) + 1)
+		+ int(GameData.FISHING["bar_ticks"]) + 1)
 	expect(Resources.amount(idle, GameData.FISH) == 0,
-		"letting the bite and reaction window expire catches nothing",
+		"letting the bite and the bar run out catches nothing",
 		str(Resources.amount(idle, GameData.FISH)))
 	expect(not Fishing.is_casting(idle), "and leaves no line in the water")
 	expect(int(idle["phase"]) == Phases.DAY, "and the day is still standing")
@@ -4669,6 +4671,20 @@ func _task_0030_fishing() -> void:
 		str(Interact.all_verbs()))
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Strike at the bar the way a careful player does: a press each tick the
+## marker is over the green on a sweep that has not scored. True once the
+## fish is out of the water (task 0180).
+func _land_by_bar(state: Dictionary, here: Vector2i) -> bool:
+	for _i in int(GameData.FISHING["bar_ticks"]) + 1:
+		if not Fishing.is_biting(state):
+			break
+		var line := Fishing.cast_of(state)
+		if Fishing.in_zone(line) and int(line.get("struck", -1)) != Fishing.pass_of(line):
+			state["intent"]["interact"] = true
+		Fishing.tick(state, here)
+	return not Fishing.is_casting(state) and not Fishing.last_catch(state).is_empty()
 
 
 ## Land you can stand on with open water orthogonally beside it.
@@ -14482,8 +14498,9 @@ func _task_0082_shots() -> void:
 	# turned grass beside the starter beds in daylight and at night. Fifty-one
 	# since 0168: twelve crops, both seed pages in the HUD/stall and the ledger.
 	# Sixty-one since 0177: a chipped big stump beside a whole one.
-	# Sixty-two since 0178: the three sprinklers spraying at dawn.
-	expect(names.size() == 62,
+	# Sixty-two since 0178: the three sprinklers spraying at dawn. Sixty-three
+	# since 0180: the fishing bar mid-catch.
+	expect(names.size() == 63,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

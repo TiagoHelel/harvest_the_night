@@ -43,7 +43,8 @@ Rules for every row:
   delivered: `mirror: "runtime"`, `mirror_pairs: {}`; `fish_catch` is `mirror:
   "none"`. Files `native/<anim>/<dir>/01..NN.png` and `runtime/<anim>/<dir>/01..NN.png`,
   `01.png` = frame 0. Claude writes `sprites/actors/<anim>_<dir>_<i>.png`.
-- **How the game plays it** (0180 confirms): the cast plays with the `fish` verb -
+- **How the game plays it** (confirmed by 0180: a 1 s cast, a wait of 4.7-23 s, a bar of up
+  to 10 s, then the catch shown or straight back to idle): the cast plays with the `fish` verb -
   frame 0 held through the work timer, then 1, 2, 3 at 0.09 s; `fish_wait` loops
   while the line is in the water; `fish_strike` plays once at the bite, as the bar
   opens; `fish_reel` loops while the bar runs; a landed fish plays `fish_catch` 0, 1

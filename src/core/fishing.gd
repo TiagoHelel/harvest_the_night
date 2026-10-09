@@ -17,23 +17,28 @@ extends RefCounted
 ##
 ## ## Three moments
 ##
-## - **Cast.** `Interact` hands over a water cell. The delay before the bite is
-##   drawn here, once, from the run's RNG - so the same seed gives the same
-##   wait and a replay lands the same fish on the same tick.
-## - **Bite.** The float goes under and there are `window_ticks` to react. The
-##   water offers `reel` instead of `fish`, so the highlight and the tooltip say
-##   what the key will do rather than the player having to know.
-## - **Reel, or not.** Reeling in the window pays. Letting it go pays nothing
-##   and costs nothing - `design.md` is a cozy game, and a punishment for
+## - **Cast.** `Interact` hands over a water cell. Everything chance decides is
+##   drawn here, once, from the run's RNG: the delay before the bite, the
+##   species (task 0179) and where the green sits on the bar (task 0180) - so
+##   the same seed and the same presses land the same fish on the same tick.
+## - **Bite.** The float goes under and **the bar** opens: a marker sweeping
+##   `bar_units` steps back and forth at the species' speed, a green the
+##   species and the rod make wide. The water offers `reel`, so the highlight
+##   says what the key is for.
+## - **Strike, or not.** Each press is judged against the marker on the tick
+##   it is spent: over the green it counts, and the species' one to three of
+##   them land it. Too many outside, or the bar running out, loses the fish -
+##   and nothing else: `design.md` is a cozy game, and a punishment for
 ##   looking away would make the pond a thing you avoid.
 ##
-## ## Why reeling is not instant
+## ## A press is an edge, judged here
 ##
 ## `water` (task 0029) is on `Interact.INSTANT` and fires off `interact_held`,
-## the level - which is right for a chore you do while walking. Reeling takes
-## the `interact` **edge** instead, through the ordinary action path, because a
-## player holding the key down while they wait would land every fish without
-## ever reacting to one, and the window is the entire mechanic.
+## the level - right for a chore done walking. A strike is the `interact`
+## **edge**, which `tick()` spends while the bar runs, before `Player` sees it:
+## a held key strikes once, and the keyboard, the pad's A and a click (`Main`
+## writes the same edge) are one press. Nothing after the cast is chance: the
+## marker is a pure function of the ticks since the bite.
 
 ## What one cast looks like before anything has happened to it.
 const NOTHING: Dictionary = {}
@@ -42,7 +47,14 @@ enum { WAITING, BITING }
 
 
 static func initial() -> Dictionary:
-	return {"fishing": {}}
+	return {
+		"fishing": {},
+		# **The assist** (task 0180): a wider green and a slower marker, a
+		# rule and so the run's, written from the `gameplay/fishing_assist`
+		# setting through `intent.fishing_assist` - core never reads the
+		# setting. A top-level key; it shapes the next cast, not this one.
+		"fishing_assist": false,
+	}
 
 
 # ------------------------------------------------------------------- asking
@@ -56,10 +68,60 @@ static func is_casting(state: Dictionary) -> bool:
 	return not (state["fishing"] as Dictionary).is_empty()
 
 
-## True while the float is under and the window is open.
+## True while the float is under and the bar is running (task 0180).
 static func is_biting(state: Dictionary) -> bool:
 	var line: Dictionary = state["fishing"]
 	return not line.is_empty() and int(line["stage"]) == BITING
+
+
+## **Where the marker is** on a line's bar: a triangle sweep across
+## `bar_units` steps and back at `speed` steps a second, a pure function of
+## the ticks since the bite - nothing about it is drawn after the cast.
+static func marker(line: Dictionary) -> int:
+	return marker_at(int(line.get("since", 0)), int(line.get("speed", 1)),
+		int(GameData.FISHING["bar_units"]))
+
+
+static func marker_at(since: int, speed: int, units: int) -> int:
+	var travelled := since * speed / GameData.TICK_HZ
+	var lap := travelled % maxi(2 * units, 1)
+	return lap if lap < units else 2 * units - lap
+
+
+## Which sweep across the bar the marker is on: 0 going right, 1 coming back,
+## and so on. **One hit a sweep** - each crosses the green once, and mashing
+## through one crossing is still one crossing.
+static func pass_of(line: Dictionary) -> int:
+	var travelled := int(line.get("since", 0)) * int(line.get("speed", 1)) / GameData.TICK_HZ
+	return travelled / maxi(int(GameData.FISHING["bar_units"]), 1)
+
+
+## Whether a line's marker is over its green right now.
+static func in_zone(line: Dictionary) -> bool:
+	var at := marker(line)
+	return at >= int(line.get("zone_at", 0)) \
+		and at < int(line.get("zone_at", 0)) + int(line.get("zone", 0))
+
+
+## How wide a species' green is, in bar steps, with this farm's rod and its
+## assist: the species' own, times the rod tier's `zone_percent`, plus the
+## assist's steps - never past the bar.
+static func zone_for(state: Dictionary, species: StringName) -> int:
+	var table: Dictionary = GameData.FISHING
+	var rod := int(ToolTiers.effects(state, &"rod").get("zone_percent", 100))
+	var wide := int((GameData.FISH_SPECIES[species] as Dictionary)["zone"]) * rod / 100
+	if bool(state.get("fishing_assist", false)):
+		wide += int(table["assist_zone"])
+	return clampi(wide, 1, int(table["bar_units"]))
+
+
+## How fast a species' marker runs, in steps a second, under the assist's
+## pace when it is on.
+static func speed_for(state: Dictionary, species: StringName) -> int:
+	var speed := int((GameData.FISH_SPECIES[species] as Dictionary)["speed"])
+	if bool(state.get("fishing_assist", false)):
+		speed = speed * int(GameData.FISHING["assist_speed_percent"]) / 100
+	return maxi(speed, 1)
 
 
 ## Where the line is, or off the farm when there is not one.
@@ -105,16 +167,24 @@ static func begin(state: Dictionary, cell: Vector2i) -> bool:
 	var table: Dictionary = GameData.FISHING
 	var left := Rng.int_between(state["rng"], int(table["bite_min_ticks"]),
 		int(table["bite_max_ticks"]))
+	# **Decided at the cast, not at the reel.** Drawing it when the player
+	# reels would mean a fast hand changed what was on the hook, and the rare
+	# one would be a reflex prize rather than a lever. Since task 0179 it is
+	# the species: this pond, this season, this hour.
+	var species := draw(state, catchable(Farm.pond_of(state, cell),
+		Calendar.season_id(Calendar.date(state)), Phases.clock_minute(state)))
+	# **And the bar** (task 0180): how wide its green is, how fast its marker,
+	# how many hits - and where the green sits, the last draw a cast makes.
+	var zone := zone_for(state, species)
 	state["fishing"] = {
 		"cell": [cell.x, cell.y],
 		"stage": WAITING,
 		"left": left,
-		# **Decided at the cast, not at the reel.** Drawing it when the player
-		# reels would mean a fast hand changed what was on the hook, and the
-		# rare one would be a reflex prize rather than a lever. Since task
-		# 0179 it is the species: this pond, this season, this hour.
-		"species": draw(state, catchable(Farm.pond_of(state, cell),
-			Calendar.season_id(Calendar.date(state)), Phases.clock_minute(state))),
+		"species": species,
+		"zone": zone,
+		"zone_at": Rng.int_between(state["rng"], 0, int(table["bar_units"]) - zone),
+		"speed": speed_for(state, species),
+		"needs": int((GameData.FISH_SPECIES[species] as Dictionary)["hits"]),
 	}
 	return true
 
@@ -151,8 +221,9 @@ static func draw(state: Dictionary, ids: Array,
 	return StringName(ids.back())
 
 
-## Pull it in. Pays only inside the window; outside it there is nothing on the
-## hook to pay for. The species drawn at the cast, one of it.
+## **Land it.** One of the species drawn at the cast. Only while the bar runs;
+## outside it there is nothing on the hook. `strike` calls it on the hit that
+## completes the species' count.
 static func reel(state: Dictionary) -> Dictionary:
 	if not is_biting(state):
 		return {}
@@ -170,6 +241,33 @@ static func give_up(state: Dictionary) -> void:
 	state["fishing"] = {}
 
 
+## **One press while the bar runs** (task 0180), judged against where the
+## marker is on this tick. Over the green it is a hit, and the species'
+## `needs` of them land it; outside it is a miss, and one more than
+## `misses_allowed` loses the fish. True for a hit. The line keeps
+## `[tick since the bite, hit]` of the last press, for the view's flash.
+static func strike(state: Dictionary) -> bool:
+	if not is_biting(state):
+		return false
+	var line: Dictionary = state["fishing"]
+	var hit := in_zone(line)
+	# A second press on the sweep that already scored is spent and counts
+	# for nothing: it waits for the next crossing.
+	if hit and int(line.get("struck", -1)) == pass_of(line):
+		return false
+	line["last"] = [int(line.get("since", 0)), hit]
+	if hit:
+		line["struck"] = pass_of(line)
+		line["hits"] = int(line.get("hits", 0)) + 1
+		if int(line["hits"]) >= int(line.get("needs", 1)):
+			reel(state)
+		return true
+	line["misses"] = int(line.get("misses", 0)) + 1
+	if int(line["misses"]) > int(GameData.FISHING["misses_allowed"]):
+		give_up(state)
+	return false
+
+
 ## What came out of the water last, for the HUD. Empty before the first one.
 static func last_catch(state: Dictionary) -> Dictionary:
 	return state.get("last_catch", {})
@@ -185,6 +283,11 @@ static func last_catch(state: Dictionary) -> Dictionary:
 ## cast, go mining, and come back to a fish that had been waiting all day,
 ## which is the opposite of what the pond is charging for.
 static func tick(state: Dictionary, here: Vector2i) -> void:
+	# **The assist follows its intent** (task 0180), the setting's level as
+	# the UI writes it every frame; it shapes the next cast.
+	var asked: Variant = (state["intent"] as Dictionary).get("fishing_assist", null)
+	if asked != null:
+		state["fishing_assist"] = bool(asked)
 	var line: Dictionary = state["fishing"]
 	if line.is_empty():
 		return
@@ -194,19 +297,33 @@ static func tick(state: Dictionary, here: Vector2i) -> void:
 		give_up(state)
 		return
 
-	line["left"] = int(line["left"]) - 1
-	if int(line["left"]) > 0:
-		return
-
 	if int(line["stage"]) == WAITING:
-		# The float goes under. From here the player has the window and no
-		# more, and missing it is free.
+		line["left"] = int(line["left"]) - 1
+		if int(line["left"]) > 0:
+			return
+		# The float goes under and the bar opens (task 0180), its marker at
+		# the left end, `bar_ticks` to land the fish in.
 		line["stage"] = BITING
-		line["left"] = int((GameData.FISHING as Dictionary)["window_ticks"])
+		line["since"] = 0
+		line["hits"] = 0
+		line["misses"] = 0
+		line["left"] = int((GameData.FISHING as Dictionary)["bar_ticks"])
 		return
 
-	# The window closed. Nothing lost but the time, which is the point.
-	give_up(state)
+	# **A press on this tick is judged where the marker is now**, before it
+	# moves on - which is where the view drew it - and spent here, so
+	# `Player` never sees it: a strike starts no other job.
+	var intent: Dictionary = state["intent"]
+	if bool(intent.get("interact", false)):
+		intent["interact"] = false
+		strike(state)
+		if not is_biting(state):
+			return
+	line["since"] = int(line.get("since", 0)) + 1
+	line["left"] = int(line["left"]) - 1
+	# The bar ran out. The fish is gone, and nothing else.
+	if int(line["left"]) <= 0:
+		give_up(state)
 
 
 ## Whether the farmer has left the water they were fishing. Orthogonal

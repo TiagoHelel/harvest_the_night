@@ -48,8 +48,8 @@ const DEFAULT_TICKS: Dictionary = {
 	&"water": 1,                    # instant; see INSTANT below
 	&"fish": 1 * GameData.SECONDS,
 	# The cast is the moment; the wait afterwards is `Fishing`, not the
-	# player's action. Reeling is a single tick because the window is what
-	# makes it hard, not the pulling.
+	# player's action. A strike is a single tick because the bar is what
+	# makes it hard (task 0180), not the pulling.
 	&"reel": 1,
 	# Picking something up off a cow is not work.
 	&"collect": GameData.SECONDS / 3,       # LEVER: ticks, 5-30
@@ -219,8 +219,11 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 			Farming.act(state, cell)
 		&"fish":
 			Fishing.begin(state, cell)
+		# A strike at the bar (task 0180). `Fishing.tick` spends the press
+		# itself while the bar runs; this arm is the same judgement for
+		# anything that completes the verb directly.
 		&"reel":
-			Fishing.reel(state)
+			Fishing.strike(state)
 		&"collect":
 			Livestock.collect(state, cell)
 		&"craft":

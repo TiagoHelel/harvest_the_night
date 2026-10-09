@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#############...........`  **166 / 296 done**
+`##############..........`  **167 / 296 done**
 
-0 doing / 130 todo / 0 blocked across 18 phases.
+0 doing / 129 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-130 task(s) left, the ready ones first, then what they
+129 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,26 +242,6 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0180 - The fishing minigame
-
-Ready to pick up.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/sim.gd, src/ui/fishing_bar.gd (new), src/ui/main.gd, src/app/input_actions.gd, src/app/settings.gd, project.godot, src/ui/player_work.gd, src/ui/sfx.gd, src/tools/perf_names.gd, src/tools/perf_check.gd, src/tools/determinism.gd, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-A bite opens a simple timing bar: a marker runs, and you press as it crosses the green - simpler than Stardew's bar and as good on a pad as on a mouse.
-
-- In core, after the bite the line enters a bar stage: the marker is a pure function of the ticks since the bite (a triangle sweep, speed per species); the zone's place comes from the cast's draw and its width from the species and the rod tier (`# LEVER`s in `FISH_SPECIES` and `TOOLS`, which `check_fishing` bounds). No RNG after the cast
-- Presses are intents (the `interact` edge or a dedicated one), judged against the marker on the tick they are consumed; 1-3 hits by species land the fish; misses allowed and how long the bar runs are `# LEVER`s, and running out loses the fish and nothing else
-- If the bar adds or retires a verb, `_task_0084_day_sounds` still passes: every `Interact.DAY_ONLY` verb keeps an `Sfx.VERB_SOUNDS` entry (borrow `sfx/reel` until 0282 gives the bar its sounds) and `water` stays the only instant verb. A new `X.tick(state)` call in `sim.gd` joins `PerfNames.DAY` and `perf_check.gd`
-- Keyboard, mouse and pad write the same intent: a new action in `InputActions.ACTIONS` and `project.godot` with a pad binding, kept in sync by the existing check
-- An assist (wider zone, slower marker) is a rule, so it lives in the state: a run flag written through an intent from a Settings key, never read by core from `Settings` (a top-level key, or a field of a dictionary listed in `State.TABLES` - say which). The Options row is 0292's
-- The view draws the bar, marker, zone and hit/miss flash through the placeholder road until A023 is integrated by 0206, and the farmer on today's `fish`/`reel` strips until A024 is integrated by 0207
-- Settle the art: the bar's piece sizes into A023, and the farmer's poses and timings (cast, wait, strike, reel loop, show the catch) into A024
-- SIM moves on purpose and DATA moves (the bar levers): record both. Rewrite whatever still reels in one press: what is left of `_task_0030_fishing`/`_case_0030_fishing`, the determinism scenario's cast, the autoplayer's fishing and the showcases that cast and reel (`art_showcase.gd`, `effect_showcase.gd` - `show_art.py --check` runs in verify)
-
-  - done when: `_task_0180_minigame` in `src/tools/headless_v1.gd`: a press on a tick inside the zone counts and one tick outside does not; a three-hit species needs three; the assist widens the zone; a replay with the same presses lands the same fish
-  - done when: `_case_0180_minigame` in `src/tools/input_v1.gd`: land a fish with the keyboard, with the mouse and with a synthetic pad button
-  - done when: A new `fishing_bar` scenario: `python tools/shot.py 0180 fishing_bar --fhd` shows the bar mid-catch; opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A023-fishing-gear.md` states the final geometry this task settled, and so does `A024-farmer-fishing.md` for the poses and timings - that pack file does not exist yet: if it is still missing, write the settled poses into the journal under an `A024` heading for its author, create no pack, and say so
-
 ### 0181 - Rods and bait
 
 Ready to pick up.  Likely files: `src/core/fishing.gd, src/core/farming.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -443,6 +423,24 @@ The new quarry nodes and the big hardwood stumps get their approved art in the w
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0204/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
+### 0207 - Art: the farmer fishing
+
+Waits for Codex art A024.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, src/ui/player_work.gd, src/ui/player_frames.gd`.
+
+The farmer casts, waits, strikes, reels and shows the catch at the 32px detail, replacing the legacy fish and reel strips (0180's poses).
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A024` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A024-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/player-fhd/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (the work-verb list `player_work.gd` and the showcase read).
+- Runtime names and timings: cast, wait, strike, reel (loop) and show the catch (2) for S, N and W, with E mirrored at runtime (not baked), on the art contract's work canvas (48x48, pivot (24,44), draw scale 0.5); if a farmer work leaf (0123-0125) has landed, reuse its `PlayerArt.pose` work-strip path; the poses follow 0180's bar stages
+- Retire the legacy 48x48 `fish`/`reel` strips from the manifest and `ownership.json` once nothing reads them, and flip A024's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A024 integrated`.
+
+  - done when: `python tools/show_art.py --work --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0207/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
 ### 0289 - Art: the morning report
 
 Waits for Codex art A057.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
@@ -461,6 +459,26 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: FHD (1920x1080) captures of the morning report after a won and after a lost night, and of the farm around it by day and by night, opened and looked at, in `implementation/shots/0289/`
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
+
+### 0292 - Options for the new controls
+
+Ready to pick up.  Likely files: `src/app/settings.gd, src/app/input_actions.gd, src/ui/options_controls.gd, src/ui/options_game.gd, src/ui/guardian_cursor.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/forecast_panel.gd, src/ui/day_hud.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
+
+The guardian's cursor, the night camera and the fishing bar each get the knob a player reaches for: how fast the cursor moves, whether the screen edge pans, how far a stick must tilt, a kinder fishing bar, and a forecast that stays up all day.
+
+- Five keys in `Settings.DEFAULTS` (`src/app/settings.gd`), each in its page's `resets` and with a row: `controls/cursor_speed` (percent of the repeat rate 0131 shipped, steps 50/75/100/150/200), `controls/edge_pan` (on), `controls/pad_deadzone` (0.10-0.50 in 0.05 steps, default what 0121 shipped - `project.godot` has 0.2 on the move actions today), `gameplay/fishing_assist` and `gameplay/forecast_all_day` (both off). A key 0130, 0131 or 0180 already made is reused, never doubled
+- Cursor speed, edge pan and deadzone are input preferences, not rules: 0131's hold-repeat in `guardian_cursor.gd` scales its rate by cursor speed, 0130's edge-band pan in `main.gd`/`world_view.gd` runs only with edge pan on, and `InputActions` applies the deadzone with `InputMap.action_set_deadzone` to the move, pan and cursor actions (0121, 0130, 0131). Their step lists sit with their rows on the options pages, the way `OptionsA11y.ROWS` and `Video.FPS_CAPS` keep theirs - preferences, not balance, so not in `game_data.gd`, and neither hash moves for them
+- Fishing assist: 0180 shipped it as a rule - a run flag written through an intent from its Settings key, the zone wider and the marker slower, never read by core from `Settings` - and left only the row. Reuse 0180's key (rename nothing) and its levers. If 0180 left a gap (core reading `Settings`, a strength with no `# LEVER` in `GameData.FISHING`, a view-side widening that changes catches), fix it here and say so: a new lever moves DATA and a rule fix moves SIM, on purpose, both numbers in the journal; otherwise neither hash moves
+- Forecast all day is view only: 0158's panel (`src/ui/forecast_panel.gd`, shown by `day_hud.gd`) shows from 06:00 instead of 18:00 and still hides once START is pressed. The forecast is a pure function of (seed, date), so seeing it at breakfast can never change the night
+- Rows where a player looks for them: cursor speed, edge pan and deadzone under a heading on the controls page (`OptionsControls`), fishing assist and the forecast on the game page (`OptionsGame`). Both pages still work by keyboard, mouse and pad, and RESET puts the new keys back
+- Applied live and kept: a change made with a night up behind the options moves the cursor and the camera at once, the way `SimDriver` hears `gameplay/night_speed` through `Settings.changed`, and every value survives a restart through `settings.cfg`. New keys alone need no `Settings.VERSION` bump
+- Strings in `assets/locale/strings.csv` with real widths, under each page's prefix (`CTL_CURSOR_SPEED`, `CTL_EDGE_PAN`, `CTL_DEADZONE`, a `CTL_*` heading, `GAME_FISHING_ASSIST`, `GAME_FORECAST_ALL_DAY`), toggles reusing `OPT_ON`/`OPT_OFF`: e.g. CURSOR SPEED / VELOCIDADE DO CURSOR, EDGE PAN / ROLAR PELA BORDA, STICK DEADZONE / ZONA MORTA DO ANALÓGICO, FISHING ASSIST / PESCA ASSISTIDA, FORECAST ALL DAY / PREVISÃO O DIA TODO
+
+  - done when: `_case_0292_options` in `src/tools/input_v1.gd` steps each new row by keyboard and by pad, finds the value in `Settings` and in a reloaded `settings.cfg`, and RESET puts it back
+  - done when: the same case at night: with edge pan on, a pointer held in 0130's edge band for a second moves the camera, and with it off it does not (a synthetic mouse motion into the band, or the edge-pan helper 0130's pan reads if the headless window cannot hold focus); a stick tilt under the deadzone moves no cursor and one over it does; a held d-pad at 200 crosses about twice the cells it crosses at 100
+  - done when: the same case by day: with forecast all day on, the panel is up at 08:00, and with it off it is hidden at noon as `_case_0158_panel` expects; with fishing assist on, the next cast carries 0180's assist flag, and with it off it does not
+  - done when: `_task_0292_options` in `src/tools/headless_v1.gd`: no file in `src/core/` names `Settings`; `Forecast.tonight` gives the same record at 08:00 as at 18:00
+  - done when: the controls and game pages captured at 1920x1080 in both languages (`$GODOT --path . --position -4000,-4000 --script res://src/tools/capture_menus.gd -- --out=res://implementation/shots/0292/`, then again with `--pt_BR`) and opened: no label runs off its row and no two rows overlap
 
 ### 0182 - Legendary fish and the fish book
 
@@ -513,24 +531,6 @@ At night the animals sleep inside and the barn becomes something to defend: brea
   - done when: `_task_0186_barns_night` in `src/tools/headless_v1.gd` (a short night with breakers set down beside the barn, mornings by `Phases.begin_day`): breakers reach a barn and wreck it, then leave it for other prey; it stands, produces nothing the next day, keeps every animal, and works again after a day repair
   - done when: A new `barn_night` scenario: `python tools/shot.py 0186 barn_night --fhd` shows a hurt and a wrecked barn at night and the next morning; opened and looked at
 
-### 0207 - Art: the farmer fishing
-
-Waits on 0180.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, src/ui/player_work.gd, src/ui/player_frames.gd`.
-
-The farmer casts, waits, strikes, reels and shows the catch at the 32px detail, replacing the legacy fish and reel strips (0180's poses).
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A024` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A024-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/player-fhd/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (the work-verb list `player_work.gd` and the showcase read).
-- Runtime names and timings: cast, wait, strike, reel (loop) and show the catch (2) for S, N and W, with E mirrored at runtime (not baked), on the art contract's work canvas (48x48, pivot (24,44), draw scale 0.5); if a farmer work leaf (0123-0125) has landed, reuse its `PlayerArt.pose` work-strip path; the poses follow 0180's bar stages
-- Retire the legacy 48x48 `fish`/`reel` strips from the manifest and `ownership.json` once nothing reads them, and flip A024's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A024 integrated`.
-
-  - done when: `python tools/show_art.py --work --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0207/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
 ### 0215 - Art: the shipping bin
 
 Waits on 0189.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py`.
@@ -566,26 +566,6 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0292 - Options for the new controls
-
-Waits on 0180.  Likely files: `src/app/settings.gd, src/app/input_actions.gd, src/ui/options_controls.gd, src/ui/options_game.gd, src/ui/guardian_cursor.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/forecast_panel.gd, src/ui/day_hud.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
-
-The guardian's cursor, the night camera and the fishing bar each get the knob a player reaches for: how fast the cursor moves, whether the screen edge pans, how far a stick must tilt, a kinder fishing bar, and a forecast that stays up all day.
-
-- Five keys in `Settings.DEFAULTS` (`src/app/settings.gd`), each in its page's `resets` and with a row: `controls/cursor_speed` (percent of the repeat rate 0131 shipped, steps 50/75/100/150/200), `controls/edge_pan` (on), `controls/pad_deadzone` (0.10-0.50 in 0.05 steps, default what 0121 shipped - `project.godot` has 0.2 on the move actions today), `gameplay/fishing_assist` and `gameplay/forecast_all_day` (both off). A key 0130, 0131 or 0180 already made is reused, never doubled
-- Cursor speed, edge pan and deadzone are input preferences, not rules: 0131's hold-repeat in `guardian_cursor.gd` scales its rate by cursor speed, 0130's edge-band pan in `main.gd`/`world_view.gd` runs only with edge pan on, and `InputActions` applies the deadzone with `InputMap.action_set_deadzone` to the move, pan and cursor actions (0121, 0130, 0131). Their step lists sit with their rows on the options pages, the way `OptionsA11y.ROWS` and `Video.FPS_CAPS` keep theirs - preferences, not balance, so not in `game_data.gd`, and neither hash moves for them
-- Fishing assist: 0180 shipped it as a rule - a run flag written through an intent from its Settings key, the zone wider and the marker slower, never read by core from `Settings` - and left only the row. Reuse 0180's key (rename nothing) and its levers. If 0180 left a gap (core reading `Settings`, a strength with no `# LEVER` in `GameData.FISHING`, a view-side widening that changes catches), fix it here and say so: a new lever moves DATA and a rule fix moves SIM, on purpose, both numbers in the journal; otherwise neither hash moves
-- Forecast all day is view only: 0158's panel (`src/ui/forecast_panel.gd`, shown by `day_hud.gd`) shows from 06:00 instead of 18:00 and still hides once START is pressed. The forecast is a pure function of (seed, date), so seeing it at breakfast can never change the night
-- Rows where a player looks for them: cursor speed, edge pan and deadzone under a heading on the controls page (`OptionsControls`), fishing assist and the forecast on the game page (`OptionsGame`). Both pages still work by keyboard, mouse and pad, and RESET puts the new keys back
-- Applied live and kept: a change made with a night up behind the options moves the cursor and the camera at once, the way `SimDriver` hears `gameplay/night_speed` through `Settings.changed`, and every value survives a restart through `settings.cfg`. New keys alone need no `Settings.VERSION` bump
-- Strings in `assets/locale/strings.csv` with real widths, under each page's prefix (`CTL_CURSOR_SPEED`, `CTL_EDGE_PAN`, `CTL_DEADZONE`, a `CTL_*` heading, `GAME_FISHING_ASSIST`, `GAME_FORECAST_ALL_DAY`), toggles reusing `OPT_ON`/`OPT_OFF`: e.g. CURSOR SPEED / VELOCIDADE DO CURSOR, EDGE PAN / ROLAR PELA BORDA, STICK DEADZONE / ZONA MORTA DO ANALÓGICO, FISHING ASSIST / PESCA ASSISTIDA, FORECAST ALL DAY / PREVISÃO O DIA TODO
-
-  - done when: `_case_0292_options` in `src/tools/input_v1.gd` steps each new row by keyboard and by pad, finds the value in `Settings` and in a reloaded `settings.cfg`, and RESET puts it back
-  - done when: the same case at night: with edge pan on, a pointer held in 0130's edge band for a second moves the camera, and with it off it does not (a synthetic mouse motion into the band, or the edge-pan helper 0130's pan reads if the headless window cannot hold focus); a stick tilt under the deadzone moves no cursor and one over it does; a held d-pad at 200 crosses about twice the cells it crosses at 100
-  - done when: the same case by day: with forecast all day on, the panel is up at 08:00, and with it off it is hidden at noon as `_case_0158_panel` expects; with fishing assist on, the next cast carries 0180's assist flag, and with it off it does not
-  - done when: `_task_0292_options` in `src/tools/headless_v1.gd`: no file in `src/core/` names `Settings`; `Forecast.tonight` gives the same record at 08:00 as at 18:00
-  - done when: the controls and game pages captured at 1920x1080 in both languages (`$GODOT --path . --position -4000,-4000 --script res://src/tools/capture_menus.gd -- --out=res://implementation/shots/0292/`, then again with `--pt_BR`) and opened: no label runs off its row and no two rows overlap
 
 ### 0185 - Sheep, pigs and the dog
 
@@ -660,7 +640,7 @@ Every species and the four legendaries get their icons and fish-book portraits.
 
 ### 0206 - Art: fishing gear and the minigame
 
-Waits on 0180, 0181, 0182.  Likely files: `assets/art_source/ui/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/fishing_bar.gd`.
+Waits on 0181, 0182.  Likely files: `assets/art_source/ui/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/fishing_bar.gd`.
 
 The bobber, the bait icons, the pieces of the fishing bar and the fish-book tab get their approved art.
 
@@ -906,7 +886,7 @@ Wine, juice, jelly, pickles, cheese, butter, cloth, sandbags, flour, bread and s
 
 ### 0194 - The day's economy
 
-Waits on 0193, 0189, 0180, 0182, 0186, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
+Waits on 0193, 0189, 0182, 0186, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
 
 The day's money is tuned on purpose: a price for every item, and targets per season so that a good day buys about one new defence (plan section 5's rule of thumb).
 
@@ -955,7 +935,7 @@ Waits on 0194, 0195.  Likely files: `implementation/PROGRESS.md, implementation/
 
 ### 0293 - The first week, taught
 
-Waits on 0195, 0180.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/ui/tutorial_prompt.gd, src/app/settings.gd, tools/goldens/, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0195.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/ui/tutorial_prompt.gd, src/app/settings.gd, tools/goldens/, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 A stranger learns 1.0 the way they learned the MVP's first day - one short line, on the thing it is about, gone when it is done - but spread over Spring 1 to 7, so the first morning is not a lecture and the forecast, the bin and the rod arrive when they first matter.
 
@@ -1117,7 +1097,7 @@ Going to bed, waking up, the shipping bin, the peddler, the machines and the new
 
 ### 0282 - The sounds of the fishing minigame
 
-Waits on 0180, 0182, 0196.  Likely files: `tools/gen_sfx.py, tools/gen_music.py, assets/sfx/, assets/music/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0182, 0196.  Likely files: `tools/gen_sfx.py, tools/gen_music.py, assets/sfx/, assets/music/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The minigame of 0180 can be played by ear as well as by eye: a tick from the bar, a hit, a miss, the catch, and a fanfare when one of 0182's legendaries comes out of the water. View only: neither hash moves, and no state key is added to be heard.
 
@@ -2214,7 +2194,7 @@ The benchmark's worst case is still Spring 14, where 0153 moved the MVP's night 
 
 ### 0276 - The autoplayer plays a whole year
 
-Waits on 0194, 0233, 0234, 0275, 0180, 0186, 0191, 0221.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0194, 0233, 0234, 0275, 0186, 0191, 0221.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 0142 taught the robot to sleep; this teaches it the rest of 1.0, so balance can be measured over a whole year: crops by days and season, the fishing minigame, animals and machines, the bin and the peddler, cursor building and repairs, the powers, and carrying on through losses and boss repeats.
 
@@ -2608,7 +2588,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (15/53)
+## 12 - The day that pays  (16/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2625,7 +2605,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0177** [Hardwood](prompts/0177-hardwood.md)
 - [x] **0178** [Sprinklers](prompts/0178-sprinklers.md)
 - [x] **0179** [Fish by pond, season and hour](prompts/0179-fish-species.md)
-- [ ] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md)
+- [x] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md)
 - [ ] **0181** [Rods and bait](prompts/0181-rods-bait.md)
 - [ ] **0182** [Legendary fish and the fish book](prompts/0182-legendary-book.md) - needs 0181
 - [ ] **0183** [The coop and the barn](prompts/0183-coop-barn.md)
@@ -2639,7 +2619,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188, 0184
 - [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0188, 0190, 0192
-- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0180, 0182, 0186, 0191
+- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0182, 0186, 0191
 - [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md) - needs 0194
 - [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0194, 0195
 - [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - waits for art A014
@@ -2651,8 +2631,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0203** [Art: material icons](prompts/0203-art-material-icons.md) - needs 0184 - waits for art A020
 - [ ] **0204** [Art: copper, coal, gold and hardwood](prompts/0204-art-ore-hardwood.md) - waits for art A021
 - [ ] **0205** [Art: fish](prompts/0205-art-fish-icons.md) - needs 0182 - waits for art A022
-- [ ] **0206** [Art: fishing gear and the minigame](prompts/0206-art-fishing-gear.md) - needs 0180, 0181, 0182 - waits for art A023
-- [ ] **0207** [Art: the farmer fishing](prompts/0207-art-farmer-fishing.md) - needs 0180 - waits for art A024
+- [ ] **0206** [Art: fishing gear and the minigame](prompts/0206-art-fishing-gear.md) - needs 0181, 0182 - waits for art A023
+- [ ] **0207** [Art: the farmer fishing](prompts/0207-art-farmer-fishing.md) - waits for art A024
 - [ ] **0208** [Art: the farmer tending animals](prompts/0208-art-farmer-care.md) - needs 0184, 0185 - waits for art A025
 - [ ] **0209** [Art: sheep and pigs](prompts/0209-art-farm-animals.md) - needs 0185 - waits for art A026
 - [ ] **0210** [Art: the cow and the chicken redrawn](prompts/0210-art-cow-chicken.md) - needs 0185 - waits for art A027
@@ -2730,7 +2710,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0249, 0250, 0254, 0259, 0272
 - [ ] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md) - needs 0270, 0251, 0252, 0255, 0259, 0273
 - [ ] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md) - needs 0274, 0234, 0248, 0233
-- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0194, 0233, 0234, 0275, 0180, 0186, 0191, 0221
+- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0194, 0233, 0234, 0275, 0186, 0191, 0221
 - [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0271, 0272, 0273, 0274, 0276, 0259
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
@@ -2739,7 +2719,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 ## 16 - Sound, collections and polish  (0/10)
 
 - [ ] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md) - needs 0196
-- [ ] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md) - needs 0180, 0182, 0196
+- [ ] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md) - needs 0182, 0196
 - [ ] **0283** [The guardian's sounds](prompts/0283-sfx-night-v2.md) - needs 0233, 0234
 - [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0247, 0248, 0250, 0252, 0253, 0254, 0255, 0257
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0282
@@ -2752,8 +2732,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 ## 17 - Ship 1.0  (0/7)
 
 - [ ] **0291** [Saves into 1.0](prompts/0291-saves-v1.md) - needs 0279, 0287
-- [ ] **0292** [Options for the new controls](prompts/0292-options-v1.md) - needs 0180
-- [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md) - needs 0195, 0180
+- [ ] **0292** [Options for the new controls](prompts/0292-options-v1.md)
+- [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md) - needs 0195
 - [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0287, 0293, 0291, 0292
 - [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0280, 0291, 0292, 0293, 0294
 - [ ] **0296** [The store page and trailer for 1.0](prompts/0296-store-v1.md) - needs 0290, 0294

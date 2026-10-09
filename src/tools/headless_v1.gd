@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 49
+const GROUPS := 50
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -118,6 +118,7 @@ func _run() -> void:
 	_task_0177_hardwood()
 	_task_0178_sprinklers()
 	_task_0179_species()
+	_task_0180_minigame()
 
 
 func _finish() -> void:
@@ -3288,8 +3289,10 @@ func _task_0166_long_day() -> void:
 		+ int(GameData.FISHING["bite_max_ticks"])) / 2
 	expect(GameData.DAY_TICKS / bite_mean == 40,
 		"fishing retains forty mean waits per day before reaction and travel")
-	expect(int(GameData.FISHING["window_ticks"]) == 45,
-		"the player's reaction window remains 1.5 seconds")
+	# The 1.5-second window became the bar at task 0180: its run is seconds
+	# of the wall clock, not a fraction of the longer day.
+	expect(int(GameData.FISHING["bar_ticks"]) == 10 * GameData.SECONDS,
+		"the bar a bite opens runs ten seconds")
 	var fuel := int(GameData.BUILDINGS[&"generator"]["fuel_every_ticks"])
 	expect((GameData.DAY_TICKS - 2) / fuel + 1 == 4,
 		"a continuously loaded generator consumes four oil before pass-out")
@@ -4505,3 +4508,148 @@ func _casts(seed_value: int, water: Vector2i, day: int, minute: int, casts: int)
 		out.append(StringName(Fishing.cast_of(state)["species"]))
 		Fishing.give_up(state)
 	return out
+
+
+## 0180 - the fishing bar. A press on a tick inside the green counts and one
+## a tick outside does not; one hit a sweep; a three-hit species needs three;
+## the assist widens the green and slows the marker, through its intent; the
+## bar running out or too many misses loses the fish and nothing else; and a
+## replay with the same presses lands the same fish - nothing after the cast
+## is chance.
+func _task_0180_minigame() -> void:
+	expect(GameData.check_fishing(GameData.FISHING).is_empty(), "the bar's levers pass their check",
+		str(GameData.check_fishing(GameData.FISHING)))
+	var rigged: Dictionary = GameData.FISH_SPECIES.duplicate(true)
+	rigged[GameData.STURGEON]["hits"] = 4
+	rigged[GameData.CARP]["zone"] = 99
+	var short: Dictionary = GameData.FISHING.duplicate(true)
+	short["bar_ticks"] = GameData.SECONDS
+	expect(GameData.check_fishing(GameData.FISHING, rigged).size() >= 2
+		and not GameData.check_fishing(short).is_empty(),
+		"four hits, a green wider than the bar and a bar too short to land a rare fish are refused")
+
+	# **Inside counts; a tick outside does not.**
+	var anchors := {}
+	for pond in GameData.PONDS:
+		anchors[pond] = Vector2i(int(GameData.PONDS[pond][0]), int(GameData.PONDS[pond][1]))
+	var state := _bar_line(1800, anchors[&"north_west_pond"], GameData.CARP)
+	var line: Dictionary = state["fishing"]
+	line["zone_at"] = maxi(int(line["zone_at"]), 10)
+	var first_in := -1
+	for t in 400:
+		var m := Fishing.marker_at(t, int(line["speed"]), int(GameData.FISHING["bar_units"]))
+		if m >= int(line["zone_at"]) and m < int(line["zone_at"]) + int(line["zone"]):
+			first_in = t
+			break
+	expect(first_in > 0, "fixture: the green is not where the marker starts", str(line))
+	line["since"] = first_in - 1
+	state["intent"]["interact"] = true
+	Fishing.tick(state, _beside_line(state))
+	expect(int(line["misses"]) == 1 and int(line["hits"]) == 0 and not bool(state["intent"]["interact"])
+		and not Player.is_busy(state),
+		"a press a tick before the green is a miss, spent by the bar and nobody else", str(line))
+	state["intent"]["interact"] = true
+	Fishing.tick(state, _beside_line(state))
+	expect(not Fishing.is_casting(state) and Fishing.last_catch(state)["species"] == GameData.CARP,
+		"and the next tick, over the green, the carp's one hit lands it")
+
+	# **One hit a sweep; a three-hit species needs three.**
+	var rare := _bar_line(1801, anchors[&"south_east_lake"], GameData.STURGEON)
+	var hits_seen: Array = []
+	var landed_at := -1
+	for t in int(GameData.FISHING["bar_ticks"]):
+		var now: Dictionary = rare["fishing"]
+		if now.is_empty():
+			landed_at = t
+			break
+		if Fishing.in_zone(now):
+			rare["intent"]["interact"] = true
+		Fishing.tick(rare, _beside_line(rare))
+		if not rare["fishing"].is_empty():
+			hits_seen.append(int(rare["fishing"]["hits"]))
+	expect(int(GameData.FISH_SPECIES[GameData.STURGEON]["hits"]) == 3 and hits_seen.has(1) and hits_seen.has(2)
+		and not hits_seen.has(3) and landed_at > 0 and Fishing.last_catch(rare)["species"] == GameData.STURGEON,
+		"pressing every tick over the green scores once a sweep, and the sturgeon's third lands it",
+		"landed at %d" % landed_at)
+
+	# **The assist**, through its intent, widens the next cast's green and
+	# slows its marker.
+	var plain := State.create(1802)
+	var helped := State.create(1802)
+	helped["intent"]["fishing_assist"] = true
+	Fishing.tick(helped, Vector2i.ZERO)
+	expect(bool(helped["fishing_assist"]) and not bool(plain["fishing_assist"])
+		and Fishing.zone_for(helped, GameData.TROUT) > Fishing.zone_for(plain, GameData.TROUT)
+		and Fishing.speed_for(helped, GameData.TROUT) < Fishing.speed_for(plain, GameData.TROUT),
+		"the assist's intent sets the run's flag, and the green widens and the marker slows")
+	helped["tools"]["rod"] = 2
+	expect(Fishing.zone_for(helped, GameData.TROUT) > Fishing.zone_for(plain, GameData.TROUT) + int(GameData.FISHING["assist_zone"]),
+		"and the iron rod widens it again")
+
+	# **Running out, or missing too often, loses the fish and nothing else.**
+	var idle := _bar_line(1803, anchors[&"forest_pond"], GameData.CARP)
+	var held_before: Dictionary = idle["held"].duplicate()
+	for _i in int(GameData.FISHING["bar_ticks"]):
+		Fishing.tick(idle, _beside_line(idle))
+	expect(not Fishing.is_casting(idle) and idle["held"] == held_before and Fishing.last_catch(idle).is_empty(),
+		"a bar nobody strikes at runs out, and nothing is taken")
+	var clumsy := _bar_line(1804, anchors[&"forest_pond"], GameData.CARP)
+	var cline: Dictionary = clumsy["fishing"]
+	cline["zone_at"] = 50
+	cline["zone"] = 10
+	for _i in int(GameData.FISHING["misses_allowed"]) + 1:
+		clumsy["intent"]["interact"] = true
+		Fishing.tick(clumsy, _beside_line(clumsy))
+	expect(not Fishing.is_casting(clumsy) and Fishing.last_catch(clumsy).is_empty(),
+		"one miss more than allowed loses it")
+
+	# **The same presses, the same fish**; and nothing after the cast is chance.
+	var one := _bar_replay(1805, anchors[&"north_west_pond"])
+	var two := _bar_replay(1805, anchors[&"north_west_pond"])
+	expect(one == two and not (one["catch"] as Dictionary).is_empty(),
+		"a replay with the same presses lands the same fish on the same tick", str(one))
+	expect(bool(one["rng_still"]), "and the RNG is not touched between the bite and the catch")
+	_completed += 1
+
+
+## A line on `water`, already biting, of `species` - the cast's own draws
+## made, then the species set and the bar's green and pace worked out for it.
+func _bar_line(seed_value: int, water: Vector2i, species: StringName) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = 3
+	state["day_tick"] = Phases.tick_at_minute(8 * 60)
+	SuiteKit.stand_the_farmer(state, water + Vector2i.DOWN)
+	Fishing.begin(state, water)
+	var line: Dictionary = state["fishing"]
+	line["species"] = species
+	line["zone"] = Fishing.zone_for(state, species)
+	line["zone_at"] = mini(int(line["zone_at"]), int(GameData.FISHING["bar_units"]) - int(line["zone"]))
+	line["speed"] = Fishing.speed_for(state, species)
+	line["needs"] = int(GameData.FISH_SPECIES[species]["hits"])
+	line["left"] = 1
+	Fishing.tick(state, _beside_line(state))
+	return state
+
+
+func _beside_line(state: Dictionary) -> Vector2i:
+	return Fishing.line_cell(state) + Vector2i.DOWN
+
+
+## Cast, wait out the bite, and press on the green every tick: what lands, on
+## which tick, and whether the RNG moved between the bite and the catch.
+func _bar_replay(seed_value: int, water: Vector2i) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = 3
+	state["day_tick"] = Phases.tick_at_minute(8 * 60)
+	SuiteKit.stand_the_farmer(state, water + Vector2i.DOWN)
+	Fishing.begin(state, water)
+	while not Fishing.is_biting(state):
+		Fishing.tick(state, water + Vector2i.DOWN)
+	var rng_at_bite := str(state["rng"])
+	var tick := 0
+	while Fishing.is_casting(state) and tick < 1000:
+		if Fishing.in_zone(Fishing.cast_of(state)):
+			state["intent"]["interact"] = true
+		Fishing.tick(state, water + Vector2i.DOWN)
+		tick += 1
+	return {"catch": Fishing.last_catch(state), "tick": tick, "rng_still": str(state["rng"]) == rng_at_bite}

@@ -1,7 +1,7 @@
 # 0180 - The fishing minigame
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0179, 0121, 0173
 - **Likely files:** src/core/fishing.gd, src/core/game_data.gd, src/core/sim.gd, src/ui/fishing_bar.gd (new), src/ui/main.gd, src/app/input_actions.gd, src/app/settings.gd, project.godot, src/ui/player_work.gd, src/ui/sfx.gd, src/tools/perf_names.gd, src/tools/perf_check.gd, src/tools/determinism.gd, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

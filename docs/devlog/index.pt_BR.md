@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-168 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+169 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -211,10 +211,11 @@ voz alta.
 | 0177 | Hardwood | 2026-10-09 |
 | 0178 | Sprinklers | 2026-10-09 |
 | 0179 | Fish by pond, season and hour | 2026-10-09 |
+| 0180 | The fishing minigame | 2026-10-09 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 53 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 55 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -269,6 +270,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Sprinklers** (0178) - `data` 2340660337 -> 1873325290
 - **Fish by pond, season and hour** (0179) - `sim` 3052463561 -> 3492418464
 - **Fish by pond, season and hour** (0179) - `data` 1873325290 -> 4172682401
+- **The fishing minigame** (0180) - `sim` 3492418464 -> 1648872965
+- **The fishing minigame** (0180) - `data` 4172682401 -> 1985581423
 
 ## O que deu errado
 

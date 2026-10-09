@@ -1896,14 +1896,20 @@ func _case_0030_fishing() -> void:
 	expect(farmer.playing() == &"reel" and rod_body.texture.resource_path == PlayerArt.texture_path(&"reel", 0),
 		"The rod remains in hand when the fish bites")
 
-	# **Land it.** A press inside the window, and the fish is in the basket.
+	# **Land it.** A press on the green, and the fish is in the basket. The
+	# bar (task 0180) judges where its marker is, so the case puts the whole
+	# bar under the green and asks for one hit: where the green sits is the
+	# headless suite's question, the key reaching the bar is this one's.
+	state["fishing"]["zone_at"] = 0
+	state["fishing"]["zone"] = int(GameData.FISHING["bar_units"])
+	state["fishing"]["needs"] = 1
 	var before := Resources.amount(state, GameData.FISH)
 	await tap_key(KEY_SPACE)
 	await until(func() -> bool:
 		return Resources.amount(state, GameData.FISH) > before,
 		"the fish to come in")
 	expect(Resources.amount(state, GameData.FISH) > before,
-		"reeling inside the window lands a fish",
+		"a press on the green lands a fish",
 		"%d then %d" % [before, Resources.amount(state, GameData.FISH)])
 	# **One of a species, named** (task 0179): the triple fish is gone; what
 	# lands is the species the cast drew, and the last catch says which.

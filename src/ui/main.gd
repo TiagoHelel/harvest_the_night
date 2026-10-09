@@ -104,6 +104,8 @@ var _pointer_at := Vector2(-1, -1)
 var _hotbar: Hotbar
 ## The night's forecast (task 0158), built here and put over both HUDs.
 var _forecast: ForecastPanel
+## The bar a bite opens (task 0180).
+var _fishing_bar: FishingBar
 
 
 ## **The theme goes on before anything is built against it**, which is why
@@ -137,6 +139,8 @@ func _ready() -> void:
 	_forecast = ForecastPanel.new()
 	_night_hud.get_parent().add_child(_forecast)
 	_night_hud.get_parent().move_child(_forecast, _night_hud.get_index() + 1)
+	_fishing_bar = FishingBar.new()
+	_night_hud.get_parent().add_child(_fishing_bar)
 	var window := get_window()
 	_window_focused = window.has_focus()
 	window.focus_entered.connect(func() -> void: _window_focused = true)
@@ -282,6 +286,7 @@ func _hand_out() -> void:
 	_build.show_state(_driver.state, _world)
 	_hotbar.show_state(_driver.state)
 	_forecast.show_state(_driver.state)
+	_fishing_bar.show_state(_driver.state)
 	_result.show_state(_driver.state)
 	_inventory.show_state(_driver.state)
 	_workshop.show_state(_driver.state)
@@ -360,6 +365,10 @@ func _process(_delta: float) -> void:
 		intent["start_waves"] = true
 	if live and interact:
 		intent["interact"] = true
+	# **The fishing assist, as a level** (task 0180): the setting read here,
+	# every frame, and written into the run through its intent - the rule
+	# never reads `Settings` itself.
+	intent["fishing_assist"] = _fishing_assist()
 	# **The level as well as the edge.** Holding the key is how a row gets
 	# watered in one walk; the edge is what starts a job that then repeats
 	# itself. See `Player.initial()` for why they are two fields.
@@ -590,7 +599,23 @@ func _input(event: InputEvent) -> void:
 		_pointer_at = motion.position
 
 
+## The `gameplay/fishing_assist` setting, false with no settings service.
+func _fishing_assist() -> bool:
+	var service := get_node_or_null(^"/root/Settings")
+	return service != null and bool(service.get_value(&"gameplay/fishing_assist"))
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	# **A click strikes at the bar** (task 0180): the mouse writes the same
+	# `interact` edge the keyboard and the pad's A do, so the three are one
+	# press to `Fishing`. Only while the bar is up, and only a click no
+	# panel took.
+	if event.is_action_pressed(&"place") and _router.here() == _router.RUN and not _quiet \
+			and int(_driver.state["phase"]) == Phases.DAY and Fishing.is_biting(_driver.state) \
+			and not Building.is_active(_driver.state):
+		_driver.state["intent"]["interact"] = true
+		get_viewport().set_input_as_handled()
+		return
 	# Only an unhandled REMOVE reaches the hoe: clicks on a menu stay there.
 	if event.is_action_pressed(&"remove") and _router.here() == _router.RUN and not _quiet \
 			and not Building.is_active(_driver.state) and not House.inside(_driver.state) \

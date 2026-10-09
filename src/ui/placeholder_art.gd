@@ -123,6 +123,12 @@ const CELL_CURSOR := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw
 const HOTBAR_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 
 ## A021's nodes: one 16x16 tile, pivot at its foot (task 0156).
+## A023's fishing bar (task 0180): the frame around its track, the green's
+## 3-patch, the marker and the two flashes, at the canvases A023 states.
+const FISHBAR_FRAME := {"canvas": Vector2i(100, 16), "pivot": Vector2i(50, 8), "draw_scale": 1.0}
+const FISHBAR_ZONE := {"canvas": Vector2i(8, 6), "pivot": Vector2i(4, 3), "draw_scale": 1.0}
+const FISHBAR_MARKER := {"canvas": Vector2i(5, 12), "pivot": Vector2i(2, 6), "draw_scale": 1.0}
+const FISHBAR_FLASH := {"canvas": Vector2i(12, 12), "pivot": Vector2i(6, 6), "draw_scale": 1.0}
 const NODE_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
 
 ## A021's hardwood stump: one thing over 2x2 cells, 32x32 at (16,30). Its
@@ -233,6 +239,12 @@ const ART := {
 	&"hud_rod_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color.WHITE, "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"tilled_edge_n": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/edge_n", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
 	&"tilled_edge_corner_nw": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/edge_corner_nw", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	# A023's bar (task 0180), drawn by code until 0206 integrates the pack.
+	&"fishbar_frame": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": FISHBAR_FRAME, "final": FISHBAR_FRAME, "bare": true},
+	&"fishbar_zone": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": FISHBAR_ZONE, "final": FISHBAR_ZONE, "bare": true},
+	&"fishbar_marker": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": FISHBAR_MARKER, "final": FISHBAR_MARKER, "bare": true},
+	&"fishbar_hit": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 3, "seconds": 0.065, "loop": false, "stand_in": &"", "geometry": FISHBAR_FLASH, "final": FISHBAR_FLASH},
+	&"fishbar_miss": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 3, "seconds": 0.065, "loop": false, "stand_in": &"", "geometry": FISHBAR_FLASH, "final": FISHBAR_FLASH},
 	&"guardian_day": {"pack": "A003", "dir": "res://sprites/props/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW},
 	&"guardian_wake": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 1},
 	&"guardian_night": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.25, "loop": true, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 0},

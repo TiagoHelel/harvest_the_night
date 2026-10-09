@@ -592,7 +592,18 @@ const GATHERING: Dictionary = {
 const FISHING: Dictionary = {
 	"bite_min_ticks": DAY_TICKS / 120,  # LEVER: ticks, 1/120 day (4.67 seconds)
 	"bite_max_ticks": DAY_TICKS / 24,   # LEVER: ticks, 1/24 day (23.33 seconds)
-	"window_ticks": 45,                 # LEVER: ticks to react, 20-60
+	# **The bar** (task 0180). When the float goes under, a marker sweeps a
+	# bar of `bar_units` steps back and forth at the species' `speed`, and a
+	# press while it is over the green counts. The species' `hits` of them
+	# land it; more than `misses_allowed` presses outside lose it, and so
+	# does the bar running out - which costs the fish and nothing else.
+	"bar_units": 100,                   # LEVER: steps across the bar, 60-160
+	"bar_ticks": 10 * SECONDS,          # LEVER: ticks the bar runs, 6-20 seconds
+	"misses_allowed": 2,                # LEVER: presses outside the green that are forgiven, 0-4
+	# The assist (a run flag, `state["fishing_assist"]`, written from the
+	# `gameplay/fishing_assist` setting): a wider green, a slower marker.
+	"assist_zone": 12,                  # LEVER: steps added to every green, 0-30
+	"assist_speed_percent": 60,         # LEVER: the marker's speed under the assist, 40-100
 }
 
 ## **The fish, by pond, season and hour** (task 0179; plan section 3.2). A
@@ -608,42 +619,54 @@ const FISH_SPECIES: Dictionary = {
 	# catfish after dark everywhere.
 	CARP: {"ponds": [&"north_west_pond", &"forest_pond"], # LEVER: where
 		"seasons": [&"spring", &"summer", &"autumn", &"winter"], # LEVER: when
-		"hours": [6 * 60, 26 * 60], "weight": 30},  # LEVER: clock minutes; draw weight
+		"hours": [6 * 60, 26 * 60], "weight": 30,  # LEVER: clock minutes; draw weight
+		"speed": 60, "zone": 26, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
 	PERCH: {"ponds": [&"north_west_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"spring", &"autumn", &"winter"], # LEVER: when
-		"hours": [6 * 60, 26 * 60], "weight": 25},  # LEVER: clock minutes; draw weight
+		"hours": [6 * 60, 26 * 60], "weight": 25,  # LEVER: clock minutes; draw weight
+		"speed": 60, "zone": 26, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
 	TILAPIA: {"ponds": [&"forest_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"summer"],      # LEVER: when
-		"hours": [6 * 60, 26 * 60], "weight": 25},  # LEVER: clock minutes; draw weight
+		"hours": [6 * 60, 26 * 60], "weight": 25,  # LEVER: clock minutes; draw weight
+		"speed": 60, "zone": 26, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
 	CATFISH: {"ponds": [&"north_west_pond", &"forest_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"spring", &"summer", &"autumn", &"winter"], # LEVER: when
-		"hours": [18 * 60, 26 * 60], "weight": 18}, # LEVER: clock minutes; draw weight
+		"hours": [18 * 60, 26 * 60], "weight": 18,  # LEVER: clock minutes; draw weight
+		"speed": 66, "zone": 24, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
 	SUNFISH: {"ponds": [&"forest_pond"], # LEVER: where
 		"seasons": [&"summer"],      # LEVER: when
-		"hours": [6 * 60, 18 * 60], "weight": 15},  # LEVER: clock minutes; draw weight
+		"hours": [6 * 60, 18 * 60], "weight": 15,  # LEVER: clock minutes; draw weight
+		"speed": 60, "zone": 26, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
 	BREAM: {"ponds": [&"north_west_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"spring", &"summer"], # LEVER: when
-		"hours": [6 * 60, 26 * 60], "weight": 12},  # LEVER: clock minutes; draw weight
+		"hours": [6 * 60, 26 * 60], "weight": 12,  # LEVER: clock minutes; draw weight
+		"speed": 66, "zone": 24, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
 	# The middling three: each one water, one or two seasons, part of the day.
 	TROUT: {"ponds": [&"north_west_pond"], # LEVER: where
 		"seasons": [&"spring", &"autumn"], # LEVER: when
-		"hours": [6 * 60, 12 * 60], "weight": 10},  # LEVER: clock minutes; draw weight
+		"hours": [6 * 60, 12 * 60], "weight": 10,  # LEVER: clock minutes; draw weight
+		"speed": 84, "zone": 22, "hits": 2}, # LEVER: bar steps a second, green steps, presses to land
 	PIKE: {"ponds": [&"north_west_pond", &"forest_pond"], # LEVER: where
 		"seasons": [&"autumn", &"winter"], # LEVER: when
-		"hours": [6 * 60, 26 * 60], "weight": 10},  # LEVER: clock minutes; draw weight
+		"hours": [6 * 60, 26 * 60], "weight": 10,  # LEVER: clock minutes; draw weight
+		"speed": 84, "zone": 22, "hits": 2}, # LEVER: bar steps a second, green steps, presses to land
 	EEL: {"ponds": [&"forest_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"spring", &"summer"], # LEVER: when
-		"hours": [20 * 60, 26 * 60], "weight": 8},   # LEVER: clock minutes; draw weight
+		"hours": [20 * 60, 26 * 60], "weight": 8,  # LEVER: clock minutes; draw weight
+		"speed": 90, "zone": 20, "hits": 2}, # LEVER: bar steps a second, green steps, presses to land
 	# The rare three: one water, one season, a few hours.
 	DORADO: {"ponds": [&"south_east_lake"], # LEVER: where
 		"seasons": [&"summer"],      # LEVER: when
-		"hours": [10 * 60, 16 * 60], "weight": 4},   # LEVER: clock minutes; draw weight
+		"hours": [10 * 60, 16 * 60], "weight": 4,  # LEVER: clock minutes; draw weight
+		"speed": 96, "zone": 18, "hits": 3}, # LEVER: bar steps a second, green steps, presses to land
 	SALMON: {"ponds": [&"north_west_pond"], # LEVER: where
 		"seasons": [&"autumn"],      # LEVER: when
-		"hours": [6 * 60, 18 * 60], "weight": 3},   # LEVER: clock minutes; draw weight
+		"hours": [6 * 60, 18 * 60], "weight": 3,  # LEVER: clock minutes; draw weight
+		"speed": 96, "zone": 18, "hits": 3}, # LEVER: bar steps a second, green steps, presses to land
 	STURGEON: {"ponds": [&"south_east_lake"], # LEVER: where
 		"seasons": [&"winter"],      # LEVER: when
-		"hours": [18 * 60, 26 * 60], "weight": 2},  # LEVER: clock minutes; draw weight
+		"hours": [18 * 60, 26 * 60], "weight": 2,  # LEVER: clock minutes; draw weight
+		"speed": 90, "zone": 18, "hits": 3}, # LEVER: bar steps a second, green steps, presses to land
 }
 
 
@@ -3105,8 +3128,24 @@ static func check_fishing(table: Dictionary, species: Dictionary = FISH_SPECIES,
 	if int(table["bite_min_ticks"]) > int(table["bite_max_ticks"]):
 		errors.append("fishing bites sooner than it can - min %d, max %d"
 			% [table["bite_min_ticks"], table["bite_max_ticks"]])
-	if int(table["window_ticks"]) <= 0:
-		errors.append("fishing gives no window to react in")
+	# **The bar** (task 0180): something to sweep, time to sweep it, and a
+	# green no rod or assist widens past the bar.
+	var units := int(table["bar_units"])
+	if units < 10:
+		errors.append("the fishing bar is only %d steps across" % units)
+	if int(table["bar_ticks"]) <= 0:
+		errors.append("the fishing bar gives no time to land anything")
+	if int(table["misses_allowed"]) < 0 or int(table["assist_zone"]) < 0:
+		errors.append("fishing forgives a negative number of misses or narrows the green")
+	var assisted := int(table["assist_speed_percent"])
+	if assisted < 1 or assisted > 100:
+		errors.append("the assist runs the marker at %d%%" % assisted)
+	var widest := 100
+	for tier in TOOLS[&"rod"]:
+		var percent := int((tier as Dictionary).get("zone_percent", 100))
+		if percent < 50 or percent > 200:
+			errors.append("a rod widens the green to %d%%" % percent)
+		widest = maxi(widest, percent)
 	var fish := group_members(FISH)
 	for id in sorted_names(species.keys()):
 		var one: Dictionary = species[id]
@@ -3124,6 +3163,18 @@ static func check_fishing(table: Dictionary, species: Dictionary = FISH_SPECIES,
 			errors.append("fish '%s' bites at %s, outside the day's clock" % [id, str(hours)])
 		if int(one["weight"]) < 1:
 			errors.append("fish '%s' has no weight in the draw" % id)
+		var hits := int(one.get("hits", 0))
+		if hits < 1 or hits > 3 or int(one.get("speed", 0)) < 1 or int(one.get("zone", 0)) < 1:
+			errors.append("fish '%s' needs 1-3 hits, a speed and a green" % id)
+			continue
+		if int(one["zone"]) * widest / 100 + int(table["assist_zone"]) > units:
+			errors.append("fish '%s' has a green wider than the bar" % id)
+		# **Enough passes to land it**, at the assist's pace too: each sweep
+		# across the bar crosses the green once.
+		var slowest := int(one["speed"]) * mini(assisted, 100) / 100
+		var passes := slowest * int(table["bar_ticks"]) / TICK_HZ / maxi(units, 1)
+		if passes < hits:
+			errors.append("fish '%s' needs %d hits and the bar crosses the green %d times" % [id, hits, passes])
 	for pond in sorted_names(ponds.keys()):
 		for season in SEASONS:
 			var spans: Array = []

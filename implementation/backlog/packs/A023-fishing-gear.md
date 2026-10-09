@@ -21,7 +21,7 @@ Everything except the bobber is HUD art, not relit.
 
 ## Deliverables
 
-The table is provisional: game task 0180 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final bar geometry settled by game task 0180. The rows stand as written. The bar sits centred under the farmer on the 480x270 screen, at (240,184). The code maps its 100 bar steps onto the `fishbar_frame` track, measured on the stand-in as `track_xywh` (5,5,90,6). `fishbar_zone` is stretched over the green's steps (its 3-patch caps 2 px each), and `fishbar_marker`'s centre column sits on the marker's step. `fishbar_hit` and `fishbar_miss` flash at the marker's x on the press that lands, 3 frames of 0.065 s. The hits a species needs (1-3) show as 4x4 pips under the bar, drawn by code. The bobber and the three icons are for 0181 and 0182 to use; their rows stand. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 Direction `none` and `mirror: "none"` for every file; draw 1.0.
 

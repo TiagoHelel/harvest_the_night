@@ -79,6 +79,10 @@ const DEFAULTS := {
 	# overrides it, for a player who has seen the moment enough times.
 	&"video/transition_seconds": 0.0,
 	&"gameplay/tutorial_seen": false,
+	# Task 0180: the fishing assist - a wider green, a slower marker. A rule,
+	# so the run reads it through an intent, never from here. Its Options row
+	# is 0292's.
+	&"gameplay/fishing_assist": false,
 
 	&"a11y/screen_shake": 1.0,
 	# Task 0088. A few frames of stopped world on a big hit. Its own key

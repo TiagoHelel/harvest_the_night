@@ -17920,3 +17920,166 @@ tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/A022-fish-icons.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0179-fish-species.md,
 implementation/shots/0179/, docs/devlog/{index,index.pt_BR}.md
+
+## 0180 - The fishing minigame - done 2026-10-09
+
+What changed: a bite now opens a bar. A marker sweeps it back and forth, and
+a press while the marker is over the green counts. One to three hits, by
+species, land the fish. Too many misses, or the bar running out, lose it
+and nothing else. It plays the same on the keyboard, the mouse and a pad.
+
+**The rule** (`Fishing`, all in core, nothing drawn after the cast):
+- **The cast makes every draw:**
+  - the bite delay;
+  - the species (0179);
+  - now where the green sits: `zone_at`, the last draw.
+- **The green's width** is fixed at the cast as well: the species' `zone`,
+  times the rod tier's `zone_percent` (100/125/150, the field 0173
+  reserved), plus `assist_zone` under the assist.
+- **The marker's pace** is the species' `speed` in steps a second, times
+  `assist_speed_percent` under the assist.
+- **The marker** is `marker_at(since, speed, bar_units)`: a triangle sweep, a
+  pure function of the ticks since the bite.
+- **The bite opens the bar:** `since` 0, `bar_ticks` to run.
+- **A press** is the `interact` edge. `Fishing.tick` spends it while the bar
+  runs, before `Player` sees it, so a strike starts no other job. It is
+  judged against the marker on the tick it is spent, before the marker moves
+  on, which is where the view drew it.
+  - Over the green, it is a hit. Off it, it is a miss.
+- **One hit a sweep** (`pass_of`). A second press on the sweep that already
+  scored is spent and counts for nothing. Without this, pressing every tick
+  through one crossing of the green landed a three-hit fish at once.
+- **The end:** the species' `hits` land it through `reel`. More than
+  `misses_allowed` misses, or `bar_ticks` running out, call `give_up`.
+- **Levers:**
+  - `FISHING`: `bar_units` 100, `bar_ticks` 10 s, `misses_allowed` 2,
+    `assist_zone` 12, `assist_speed_percent` 60;
+  - per species in `FISH_SPECIES`: `speed`, `zone`, `hits`:
+    - commons: 60-66 steps a second, a green of 24-26, one hit;
+    - trout, pike and eel: 84-90, 20-22, two hits;
+    - the rare three: 90-96, 18, three hits.
+- **`check_fishing` bounds all of them.** It refuses each of these:
+  - hits outside 1-3, or a missing speed or green;
+  - a green that the widest rod plus the assist would push past the bar;
+  - a rod outside 50-200%;
+  - a bar that would not cross the green as many times as a species needs
+    hits, at the assist's slower pace too.
+- `window_ticks` is gone, and `Interact`'s `reel` arm is `Fishing.strike`.
+
+**The assist** is the run's top-level `fishing_assist` key:
+- `Fishing.initial()` declares it, so `State.reconcile` fills it in for an
+  old save.
+- `Main` writes the `gameplay/fishing_assist` setting into
+  `intent.fishing_assist` every frame, as a level. `Fishing.tick` copies it
+  in. Core never reads `Settings`.
+- It shapes the next cast, not the one in the water.
+- The Options row is 0292's.
+
+**Keyboard, mouse and pad - a deviation.** The prompt asked for a new action
+with its own pad binding. There is no pad button free: every standard
+button and both triggers already carry an action, and 0121's check refuses
+two actions on one pad input. So the three devices write the existing
+`interact` edge:
+- SPACE or Enter, and the pad's A, through `interact` as ever;
+- a click (the `place` action, mouse left) that no panel took, which
+  `Main._unhandled_input` turns into the same edge while the bar is up.
+
+No action was added, `project.godot` is untouched, and the strike is the
+key that cast the line.
+
+**The view** (`FishingBar`, a new HUD control over the night HUD):
+- It is drawn at (240,184) on the 480x270 screen, under the farmer, while the
+  bar runs.
+- It has a timber frame with brass caps, the dark track, the green (light
+  top row, dark bottom row, ink ends), the needle and the species' hits as
+  pips.
+- The last press flashes: a gold star for a hit, droplets for a miss.
+- A023's five pieces (`fishbar_frame`, `_zone`, `_marker`, `_hit`, `_miss`)
+  are registered as drawn by code until 0206.
+- The farmer keeps today's `fish`/`reel` strips until A024 is integrated by
+  0207.
+- The HUD line reads "A BITE - PRESS ON THE GREEN" ("FISGOU - APERTE NO
+  VERDE").
+- `Sfx`: the bite sound stays, and `reel` keeps its verb sound.
+
+**A024** (the pack exists, blocked by the owner's deferral of the farmer's
+sprites). Its "how the game plays it" line now records what 0180
+confirmed:
+- a 1 s cast;
+- a wait of 4.7-23 s;
+- `fish_strike` once as the bar opens;
+- `fish_reel` looping through a bar of up to 10 s;
+- `fish_catch` held about a second on a landing, or straight back to idle.
+
+**A023** states the bar's settled geometry:
+- the frame is 100x16, with `track_xywh` (5,5,90,6) carrying the 100
+  steps;
+- the zone is a stretched 3-patch;
+- the marker's centre column sits on its step;
+- the hit and miss flashes play at the marker's x;
+- the pips are drawn by code.
+
+**What still reeled in one press, rewritten:**
+- `_task_0030_fishing` lands its fish through the bar (`_land_by_bar`), and
+  the window wording became the bar's.
+- `_case_0030_fishing`, the art showcase's catch and its `reel` work
+  fixture put the whole bar under the green and ask for one hit. Where the
+  green sits is the headless suite's question; whether the press reaches the
+  bar is theirs.
+  - The fixture was found by the first verify. "player work" (13) and
+    "player reactions" (4) failed, because a press on an unrigged bar missed
+    and no catch follow-through played.
+- 0166's "reaction window remains 1.5 s" now asserts the bar's 10 s.
+- The determinism scenario only casts. Its line now draws the green too and
+  runs its bar out unstruck.
+- The autoplayer never fished.
+
+**Tests:**
+- `_task_0180_minigame` (headless_v1):
+  - the levers pass, and their teeth refuse four hits, a green wider than
+    the bar and a bar too short;
+  - a press a tick before the green is a miss, spent by the bar and not by
+    `Player`, and the next tick's lands a carp;
+  - pressing every tick over the green scores once a sweep, and the
+    sturgeon's third hit lands it;
+  - the assist's intent sets the run's flag, widens the green and slows the
+    marker, and the iron rod widens it again;
+  - a bar nobody strikes at runs out with nothing taken, and one miss over
+    the allowance loses the fish;
+  - a replay with the same presses lands the same fish on the same tick;
+  - the RNG does not move between the bite and the catch.
+- `_case_0180_minigame` (input_v1): a fish landed with SPACE, with a click on
+  the farm and with a synthetic pad A. Each time the bar is up while it runs
+  and gone with the fish.
+- `headless_check` asks for one shot per scenario: 63 now.
+
+### Hashes
+
+Both moved on purpose, accepted with `verify.py --accept`.
+- **SIM 3492418464 -> 1648872965**: the cast's new draw (where the green
+  sits), the line's new fields, and the run's `fishing_assist` key and
+  intent field. The scenario's line now runs its bar out unstruck.
+- **DATA 4172682401 -> 1985581423**: the bar's levers in `FISHING` (the
+  window gone) and `speed`, `zone` and `hits` on every species.
+
+Verify: 60 passed, 0 failed in 649s (the known OVER BUDGET), on the second full run.
+headless_check 17085, headless_v1 1704 (+12), input_check 1167, input_v1
+507 (+13), player work 25761 checks, player reactions 676, placeholders
+236 stand-ins over 23 packs, perf 3412us a night tick.
+
+Looked at: `implementation/shots/0180/fishing_bar.png` at full size. A trout
+on the line by the north-west pond:
+- the bar sits under the farmer, its green to the right and the needle on
+  its way;
+- one of two pips is lit;
+- the "!" bite reaction is over his head;
+- the HUD line under the bar says to press on the green.
+
+Files: src/core/{fishing,game_data,interact,player}.gd, src/app/settings.gd,
+src/ui/{fishing_bar (new),main,placeholder_art}.gd,
+src/tools/{art_showcase,headless_check,headless_v1,input_check,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/{A023-fishing-gear,A024-farmer-fishing}.md
+(A024: the confirmation line only),
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0180-fishing-minigame.md,
+implementation/shots/0180/, docs/devlog/{index,index.pt_BR}.md

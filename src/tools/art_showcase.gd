@@ -1497,6 +1497,12 @@ func _work_fixture(verb: StringName, facing: int) -> Vector2i:
 		Fishing.begin(_state, at)
 		_state["fishing"]["stage"] = Fishing.BITING
 		_state["fishing"]["left"] = 100
+		# **The whole bar green and one hit** (task 0180): the pose checks
+		# press once and watch the catch's follow-through; where the green
+		# sits is the suites' question.
+		_state["fishing"]["zone_at"] = 0
+		_state["fishing"]["zone"] = int(GameData.FISHING["bar_units"])
+		_state["fishing"]["needs"] = 1
 	var view: PlayerView = _world.get_node("Occupants/PlayerView")
 	_world.show_state(_state)
 	view.show_state(_state)
@@ -1697,10 +1703,16 @@ func _fishing_hold() -> void:
 		_reaction_check(view, &"bang", true)
 		await _settle()
 		await _shoot("fishing_bite_facing%d" % facing, "Bite / rod and warning together / facing %d" % facing)
+		# **The bar** (task 0180): a press is judged against its marker, so
+		# the fixture puts the whole bar under the green and asks for one hit
+		# - the strike's judgement is the suites'; this watches the poses.
+		_state["fishing"]["zone_at"] = 0
+		_state["fishing"]["zone"] = int(GameData.FISHING["bar_units"])
+		_state["fishing"]["needs"] = 1
 		_state["intent"]["interact"] = true
 		_work_tick(view, true)
 		expect(not Fishing.is_casting(_state) and not Fishing.last_catch(_state).is_empty(),
-			"Reeling still pays the actual catch")
+			"A strike on the green still pays the actual catch")
 		_work_frame(view, &"reel", 1, facing, 0.0)
 		await _settle()
 		await _shoot("fishing_catch_facing%d" % facing, "Catch / existing reel animation / facing %d" % facing)

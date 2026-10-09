@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 35
+const V1_CASES := 36
 
 
 func _process(delta: float) -> bool:
@@ -85,6 +85,7 @@ func _run() -> void:
 	await _case_followup_0176_review()
 	await _case_0177_hardwood()
 	await _case_0178_sprinkler()
+	await _case_0180_minigame()
 	_finish()
 
 
@@ -2608,5 +2609,60 @@ func _case_0178_sprinkler() -> void:
 	expect(Describe.building(&"copper_sprinkler").contains(I18n.f(&"DESC_SPRINKLES", [4])),
 		"its description says it waters four plots each morning")
 	await hold_key(KEY_B, 4)
+	await close_scene()
+	_completed += 1
+
+
+## 0180 - the bar through real input: a fish landed with SPACE, with a click
+## on the farm and with the pad's A - the same press to the bar - which is on
+## screen while it runs and gone when the fish is in.
+func _case_0180_minigame() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var bar := require_control("FishingBar") as FishingBar
+	if driver == null or bar == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.set_speed(1)
+	var water := Vector2i(-1, -1)
+	var shore := Vector2i(-1, -1)
+	var facing := Player.SOUTH
+	for found in Farm.cells_of(state, Farm.Terrain.WATER):
+		for side in Player.FACING_STEPS.size():
+			var dry: Vector2i = found - Player.FACING_STEPS[side]
+			if water == Vector2i(-1, -1) and Farm.walkable(state, dry):
+				water = found
+				shore = dry
+				facing = side
+	expect(water != Vector2i(-1, -1), "fixture: a shore to fish from")
+	for device in ["keyboard", "mouse", "pad"]:
+		_stand_at(state, shore, facing)
+		await frames(2)
+		expect(Fishing.begin(state, water), "a line goes in (%s)" % device)
+		state["fishing"]["left"] = 1
+		await until(func() -> bool: return Fishing.is_biting(state), "the bite (%s)" % device)
+		# The whole bar green and one hit to land it: the judgement is the
+		# headless suite's; this is the three ways of pressing.
+		state["fishing"]["zone_at"] = 0
+		state["fishing"]["zone"] = int(GameData.FISHING["bar_units"])
+		state["fishing"]["needs"] = 1
+		await frames(2)
+		expect(bar.shown() and bar.zone_rect().size.x > 0, "the bar is on screen while it runs (%s)" % device)
+		var before := Resources.amount(state, GameData.FISH)
+		match device:
+			"keyboard":
+				await tap_key(KEY_SPACE)
+			"mouse":
+				await click_cell(shore + Player.FACING_STEPS[(facing + 2) % 4] * 2)
+			"pad":
+				await _pad_tap(JOY_BUTTON_A)
+		await until(func() -> bool: return Resources.amount(state, GameData.FISH) > before,
+			"a %s press to land the fish" % device)
+		expect(Resources.amount(state, GameData.FISH) == before + 1 and not Fishing.is_casting(state),
+			"a %s press on the green lands one fish" % device)
+		await frames(2)
+		expect(not bar.shown(), "and the bar goes with it (%s)" % device)
 	await close_scene()
 	_completed += 1
