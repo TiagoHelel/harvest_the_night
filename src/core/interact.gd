@@ -103,6 +103,15 @@ static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 	return verb
 
 
+## Refusal shape shared with Building: a key followed by its arguments.
+## Keep the offered verb so a blocked plot still has a target and highlight.
+static func why_not(state: Dictionary, cell: Vector2i) -> Array:
+	if verb_at(state, cell) == &"plant" \
+			and Calendar.season_id(Calendar.date(state)) in GameData.NO_GROWTH_SEASONS:
+		return [&"WHY_NO_OUTDOOR_GROWTH"]
+	return []
+
+
 static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 	var on := Farm.occupant(state, cell)
 	if not on.is_empty():
@@ -189,6 +198,8 @@ const ONE_SHOT: Array = [&"trade", &"craft", &"reel"]
 ## before the payload exists, and so adding the payload is one arm rather than
 ## a hunt through the player.
 static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> void:
+	if not why_not(state, cell).is_empty():
+		return
 	match verb:
 		&"chop", &"mine":
 			Gathering.strike(state, cell)

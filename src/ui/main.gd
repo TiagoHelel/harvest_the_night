@@ -392,7 +392,9 @@ func _drive_cursor(delta: float) -> void:
 	if not on:
 		# No cursor, no aim: a flare asked for now goes nowhere and is refused.
 		intent["ability_cell"] = [-1, -1]
-		_tooltip.show_world("", Vector2.ZERO)
+		var target := _target_cell()
+		var refusal := Names.refusal(Interact.why_not(_driver.state, target)) if phase == Phases.DAY else ""
+		_tooltip.show_world(refusal, _world.cell_to_screen(target))
 		return
 	var step := Vector2i.ZERO
 	# **Not while the night bar has a pad on it** (task 0139): the D-pad and

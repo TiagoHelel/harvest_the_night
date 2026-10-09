@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 26
+const V1_CASES := 27
 
 
 func _process(delta: float) -> bool:
@@ -76,6 +76,7 @@ func _run() -> void:
 	await _case_0168_seed_pages()
 	await _case_0169_inventory()
 	await _case_0170_seeds()
+	await _case_0171_winter()
 	_finish()
 
 
@@ -2148,5 +2149,42 @@ func _case_0170_seeds() -> void:
 	await until(func() -> bool: return Farming.crop_on(state, cell) == GameData.POTATO, "SPACE sows the bought packet")
 	await press_key(KEY_SPACE, false)
 	expect(Resources.amount(state, GameData.POTATO_SEED) == 0 and Resources.amount(state, GameData.MONEY) == money - 4, "planting consumes only the bought packet")
+	await close_scene()
+	_completed += 1
+
+
+## 0171 - SPACE can till in winter, but sowing has a visible refusal.
+func _case_0171_winter() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	state["day"] = GameData.SEASON_DAYS * 3 + 2
+	Farming.morning(state)
+	var cell: Vector2i = Farming.field_cells(state)[0]
+	_stand_at(state, cell + Vector2i.UP, Player.SOUTH)
+	await frames(3)
+	await press_key(KEY_SPACE, true)
+	await until(func() -> bool: return Farming.is_tilled(state, cell), "SPACE tills a winter bed")
+	await press_key(KEY_SPACE, false)
+	await frames(3)
+	var packets := Resources.amount(state, GameData.CARROT_SEED)
+	await press_key(KEY_SPACE, true)
+	await frames(20)
+	await press_key(KEY_SPACE, false)
+	expect(Farming.crop_on(state, cell) == &"" and not Player.is_busy(state), "winter SPACE cannot start a sowing action")
+	expect(Resources.amount(state, GameData.CARROT_SEED) == packets, "winter refusal consumes no packets")
+	var main := _scene
+	var world := require_control("WorldView")
+	var tooltip := require_control("Tooltip")
+	expect(main._target_cell() == cell and world._highlight_cell == cell, "the refused bed keeps its highlight")
+	expect(tooltip._world_text == I18n.t(&"WHY_NO_OUTDOOR_GROWTH"), "the highlight's tooltip explains winter")
+	var badge := require_control("SeedPage") as Label
+	if badge != null:
+		expect(badge.text == I18n.t(&"DHUD_NO_SEEDS"), "the winter seed strip explains outdoor dormancy")
+		expect(badge.autowrap_mode == TextServer.AUTOWRAP_WORD_SMART and badge.position.y == 46 and badge.size.x <= 158, "the winter explanation fits the seed rows instead of overflowing the pager")
 	await close_scene()
 	_completed += 1

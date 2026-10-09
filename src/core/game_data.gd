@@ -74,6 +74,8 @@ const SEASON_DAYS := 14                 # LEVER: days a season, 7-28
 ## The seasons of a year, in order. Names, not a lever: `Names.KEYS` says
 ## them in the player's language.
 const SEASONS: Array = [&"spring", &"summer", &"autumn", &"winter"]
+## Outdoor crops cannot earn a watered morning in these seasons (0171).
+const NO_GROWTH_SEASONS: Array = [&"winter"]  # LEVER: season ids
 
 ## **Full Moon nights** (task 0152): these days of every season send a bigger
 ## horde and pay more. `Waves.night_of` scales the night's record and
@@ -2071,6 +2073,7 @@ static func validate() -> Array:
 		PASS_OUT_WARNING_MINUTE, DAY_END_MINUTE))
 	errors.append_array(check_calendar(SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
 		FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES))
+	errors.append_array(check_no_growth_seasons(NO_GROWTH_SEASONS))
 	errors.append_array(check_gift(CALM_NIGHT_GIFT))
 	if TILLED_GRASS_FADES_DAYS < 1 or TILLED_GRASS_FADES_DAYS > 7:
 		errors.append("TILLED_GRASS_FADES_DAYS must be within 1-7 mornings")
@@ -2129,6 +2132,15 @@ static func check_gift(gift: Dictionary) -> Array:
 			errors.append("the calm night's gift may not be %s" % id)
 		if int(gift[id]) < 0:
 			errors.append("the calm night's gift takes %s away" % id)
+	return errors
+
+
+## Every outdoor growth pause must name an existing season (0171).
+static func check_no_growth_seasons(seasons: Array) -> Array:
+	var errors: Array = []
+	for season in seasons:
+		if season not in SEASONS:
+			errors.append("NO_GROWTH_SEASONS names unknown season '%s'" % season)
 	return errors
 
 
@@ -3134,6 +3146,7 @@ static func digest() -> int:
 		"stock": DAILY_STOCK,
 		"tutorial": TUTORIAL,
 		"crops": CROPS,
+		"no_growth_seasons": NO_GROWTH_SEASONS,
 		"water": [WATER_CAN_CAPACITY],
 		"tilled_grass_fades_days": TILLED_GRASS_FADES_DAYS,
 		"power": [BASE_ENERGY, UNPOWERED_PERCENT],

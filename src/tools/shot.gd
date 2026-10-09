@@ -66,6 +66,8 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["withered", "summer crops wither on Autumn 1", ""],
+	["winter_day", "outdoor fields rest in winter", ""],
 	["spring_field", "spring crops and held seed packets", ""],
 	["summer_field", "summer crops and held seed packets", ""],
 	["inventory_crops", "the crop category in the ledger", "InventoryPanel"],
@@ -670,6 +672,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"twelve_crops": _set_twelve_crops(state)
 		"spring_field": _set_spring_field(state)
 		"summer_field": _set_summer_field(state)
+		"withered": _set_withered(state)
+		"winter_day": _set_winter_day(state)
 		"seed_page_one": _set_seed_page_one(state)
 		"seed_page_two": _set_seed_page_two(state)
 		"shop_seeds_one": _set_shop_seeds_one(state)
@@ -1759,3 +1763,17 @@ func _set_spring_field(state: Dictionary) -> void:
 
 func _set_summer_field(state: Dictionary) -> void:
 	_set_season_field(state, 1)
+
+
+func _set_withered(state: Dictionary) -> void:
+	_set_summer_field(state)
+	Farming.dry_out(state)
+	_on_date(state, 2 * GameData.SEASON_DAYS + 1)
+	Farming.morning(state)
+
+
+func _set_winter_day(state: Dictionary) -> void:
+	_set_season_field(state, 2)
+	Farming.dry_out(state)
+	_on_date(state, 3 * GameData.SEASON_DAYS + 1)
+	Farming.morning(state)

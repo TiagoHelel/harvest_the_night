@@ -286,7 +286,7 @@ static func _do_instant(state: Dictionary, cell_target: Vector2i) -> void:
 
 static func _begin(state: Dictionary, cell_target: Vector2i) -> void:
 	var verb := Interact.verb_at(state, cell_target)
-	if verb == &"":
+	if verb == &"" or not Interact.why_not(state, cell_target).is_empty():
 		return
 	if Interact.is_instant(verb):
 		return          # already done above, and it owns no action state

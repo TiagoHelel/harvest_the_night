@@ -17037,3 +17037,49 @@ ui_art_showcase}.gd, assets/locale/strings.csv,
 tools/determinism_{sim,data}_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/0170-crop-seasons.md, implementation/shots/0170/,
 docs/devlog/{index,index.pt_BR}.md (devlog.py --check).
+
+## 0171 - Winter: nothing grows outside - done 2026-10-09
+
+What changed: the first morning of a new season withers crops that do not
+belong to it. Winter 1 withers everything autumn left in the ground: plots
+stay tilled, lose growth and watering credit, and retain a withered marker
+until replanted. A crop sown for the new season that morning survives.
+NO_GROWTH_SEASONS pauses outdoor growth even for an old or rigged winter crop.
+Interact now returns localized refusal reasons; winter SPACE can till but
+cannot begin sowing, and the highlighted bed explains why. The winter seed
+strip says nothing grows outside, wrapped into the empty rows.
+Fishing, mining and seam regrowth, a two-job press queue and cow production
+are covered by direct winter checks; their existing rules are unchanged.
+
+Verify: 60 PASS, 0 FAIL, 0 SKIP in 586s. Headless 16840 / v1 1299 asserts,
+input 1127 / v1 401 cases, all with zero failures; 56 nights checked for two
+seeds, 168 scripts parsed, 539 bilingual keys fit, 5488 UI checks passed,
+Windows and Web exports passed. The first full run (637s) had only a perf
+failure: view_particles 548us against its 358us reference. Repeated verify
+once as instructed, with no code changes; perf passed at a 3420us night tick
+of 8333us (41%) and an 8819us path rebuild of 33333us. Total OVER BUDGET is
+the known machine timing notice, not a failed check.
+SIM 1129539259 unchanged: the fixed scenario does not cross a season boundary.
+DATA deliberately moved 1139704927 -> 4196406930 for NO_GROWTH_SEASONS;
+accepted the new baseline and confirmed it unchanged on the final run.
+
+Looked at: seven final captures opened individually at full 1920x1080 against
+the reference sheet and approved blue farmer. The withered stand-in uses the
+crop's stage-2 texture desaturated in a shader through A014's placeholder
+road; no PNG art was generated, drawn or edited. Fixed the initial shader's
+colour multiplication and the winter HUD line overflowing its pager, then
+recaptured and opened both seasonal shots. A014 integration remains 0197's.
+Kept: implementation/shots/0171/withered-pt_BR.png, winter_day-pt_BR.png,
+noon-pt_BR.png, dusk-pt_BR.png, wave-pt_BR.png, result-pt_BR.png, tech-pt_BR.png.
+
+Notes: the 1716 paths dirty at claim belong to the owner/art pipeline and stay
+outside this commit. Protected paths remain unstaged, including project.godot
+and implementation/backlog/. The RUN-key question remains open. Never pushed.
+Backlog: 296 tasks, 158 done, 138 todo, 0 doing, 0 blocked; 56 todo wait for Codex art.
+
+Files: src/core/{farming,game_data,interact,player}.gd,
+src/ui/{day_hud,main,placeholder_art,world_view}.gd, src/ui/withered.gdshader,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0171-winter-rules.md,
+implementation/shots/0171/, docs/devlog/{index,index.pt_BR}.md (devlog.py --check).

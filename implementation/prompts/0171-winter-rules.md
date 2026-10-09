@@ -1,7 +1,7 @@
 # 0171 - Winter: nothing grows outside
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0170, 0159
 - **Likely files:** src/core/farming.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd
 
@@ -22,10 +22,10 @@ When a season ends its crops wither, and in winter nothing grows outside - yet t
 
 ## Done when
 
-- [ ] `_task_0171_winter` in `src/tools/headless_v1.gd`: a corn plot withers on the first morning of autumn and a wheat plot sown that morning does not; every planted crop withers on Winter 1; a watered plot gains no day on a winter morning; a seam, a press queue and a cow still produce on a winter day (direct calls or a short run)
-- [ ] New `withered` (the first morning of autumn by a summer field) and `winter_day` scenarios: `python tools/shot.py 0171 withered winter_day --fhd` shows the withered stand-ins and the HUD line; opened and looked at
-- [ ] `python tools/verify.py` prints PASS
-- [ ] the determinism hash is unchanged, or the change is deliberate and both
+- [x] `_task_0171_winter` in `src/tools/headless_v1.gd`: a corn plot withers on the first morning of autumn and a wheat plot sown that morning does not; every planted crop withers on Winter 1; a watered plot gains no day on a winter morning; a seam, a press queue and a cow still produce on a winter day (direct calls or a short run)
+- [x] New `withered` (the first morning of autumn by a summer field) and `winter_day` scenarios: `python tools/shot.py 0171 withered winter_day --fhd` shows the withered stand-ins and the HUD line; opened and looked at
+- [x] `python tools/verify.py` prints PASS
+- [x] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal
 
 ## House rules

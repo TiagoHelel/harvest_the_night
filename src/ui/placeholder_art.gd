@@ -226,6 +226,7 @@ const ART := {
 	&"beet": {"pack": "A017", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(0.84, 0.45, 0.78), "geometry": CROP_TILE, "final": CROP_TILE},
 	&"icon_beet": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.84, 0.45, 0.78), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_beet": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.84, 0.45, 0.78), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"withered": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"trampled": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 	# **Task 0158: the forecast.** A010's marks drawn by code; A011's heads cut

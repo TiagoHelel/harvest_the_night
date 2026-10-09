@@ -451,7 +451,9 @@ func _refresh(force: bool) -> void:
 	_seed_next.size = Vector2(50, 14)
 	_seed_badge.text = I18n.t(&"DHUD_NO_SEEDS") if seeds.is_empty() else I18n.f(&"SEED_PAGE", [_seed_page + 1,
 		ceili(float(seeds.size()) / SEED_ACTIONS.size())])
-	_seed_badge.position.x = 7 if seeds.is_empty() else 77
+	_seed_badge.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if seeds.is_empty() else TextServer.AUTOWRAP_OFF
+	_seed_badge.position = Vector2(7, 46) if seeds.is_empty() else Vector2(77, 125)
+	_seed_badge.size = Vector2(158, 30) if seeds.is_empty() else Vector2(32, 10)
 	_seed_previous.visible = daylight and not seeds.is_empty()
 	_seed_next.visible = daylight and not seeds.is_empty()
 	_seed_previous.disabled = _seed_page == 0

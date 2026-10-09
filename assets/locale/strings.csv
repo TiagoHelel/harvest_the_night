@@ -536,4 +536,5 @@ ITEM_WHEAT_SEED,0,wheat seed,semente de trigo
 ITEM_PUMPKIN_SEED,0,pumpkin seed,semente de abóbora
 ITEM_GRAPE_SEED,0,grape seed,semente de uva
 ITEM_BEET_SEED,0,beet seed,semente de beterraba
-DHUD_NO_SEEDS,168,No sowing in winter,Sem plantio no inverno
+DHUD_NO_SEEDS,224,Nothing grows outdoors in winter,Nada cresce ao ar livre no inverno
+WHY_NO_OUTDOOR_GROWTH,224,Nothing grows outdoors in winter,Nada cresce ao ar livre no inverno

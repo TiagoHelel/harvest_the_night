@@ -1788,6 +1788,8 @@ func _refresh_plots() -> void:
 		if crop != &"":
 			_plot_sprite("%s_%d" % [crop, Farming.stage(_state, cell)],
 				cell)
+		elif here.has("withered"):
+			_withered_sprite(StringName(here["withered"]), cell)
 		elif here.has("trampled"):
 			_trampled_sprite(StringName(here["trampled"]), cell)
 
@@ -1833,6 +1835,22 @@ func _plot_edge_sprite(art: String, cell: Vector2i, quarter_turns: int) -> void:
 	sprite.set_meta("plot_art", art)
 	_plots.add_child(sprite)
 	_plot_sprites.append(sprite)
+
+
+## **A crop left behind by the season** (0171): stage 2 greyed through A014.
+func _withered_sprite(crop: StringName, cell: Vector2i) -> void:
+	if not PlaceholderArt.is_drawn(CROP_DIR + "withered.png"):
+		_plot_sprite("withered", cell)
+		return
+	# A014's stand-in: the crop's stage 2, desaturated without editing art.
+	var frame := "%s_2" % crop
+	_plot_sprite(frame, cell)
+	var sprite: Sprite2D = _plot_sprites.back()
+	var material := ShaderMaterial.new()
+	material.shader = WITHERED_SHADER
+	sprite.material = material
+	sprite.modulate = Color.WHITE
+	sprite.set_meta("plot_art", "withered")
 
 
 ## **A crop the horde walked through** (task 0155). A014 draws it; until the
@@ -1975,6 +1993,7 @@ const CROP_DIR := "res://sprites/crops/"
 ## The trampled stand-in's darkening (task 0155): brown and dim, the colour of
 ## leaves pressed into mud.
 const TRAMPLED_TINT := Color(0.55, 0.42, 0.32)
+const WITHERED_SHADER: Shader = preload("res://src/ui/withered.gdshader")
 
 
 func _build_terrain_tileset() -> TileSet:

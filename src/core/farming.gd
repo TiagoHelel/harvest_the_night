@@ -303,6 +303,8 @@ static func _worked(state: Dictionary, cell: Vector2i) -> void:
 
 ## Put one held packet in the ground. Money changes only at the stall.
 static func _plant(state: Dictionary, cell: Vector2i) -> void:
+	if Calendar.season_id(Calendar.date(state)) in GameData.NO_GROWTH_SEASONS:
+		return
 	var seed_id := selected_seed(state)
 	if seed_id == &"" or not Resources.spend(state, packet(seed_id), 1):
 		return
@@ -312,6 +314,7 @@ static func _plant(state: Dictionary, cell: Vector2i) -> void:
 	here["growth"] = 0
 	# Something planted where a crop was trampled (task 0155): the mark goes.
 	here.erase("trampled")
+	here.erase("withered")
 	_worked(state, cell)
 
 
@@ -381,15 +384,29 @@ static func _harvest(state: Dictionary, cell: Vector2i) -> void:
 	_worked(state, cell)
 
 
-## Credit yesterday's watering once, even when a boss holds the calendar.
+## At a season boundary, wither crops that do not belong to the new season.
+## Credit yesterday's watering once outside dormant seasons, even on a held date.
 ## Consuming the flag also makes an extra call or a save/reload harmless.
 static func morning(state: Dictionary) -> void:
 	refresh_seed(state)
+	var date := Calendar.date(state)
+	var season := Calendar.season_id(date)
+	var boundary := date > 1 and Calendar.day_of_season(date) == 1
+	var dormant := season in GameData.NO_GROWTH_SEASONS
 	var plots: Dictionary = state["plots"]
 	var keys: Array = plots.keys()
 	keys.sort()
 	for idx in keys:
 		var here: Dictionary = plots[idx]
+		var planted := StringName(here["crop"])
+		if boundary and planted != &"" and season not in GameData.CROPS[planted]["seasons"]:
+			here["withered"] = planted
+			here["crop"] = &""
+			here["growth"] = 0
+			here["watered"] = false
+			here.erase("morning_credit")
+			here.erase("trampled")
+			_worked(state, Grid.cell(int(idx)))
 		if Farm.terrain_at(state, Grid.cell(int(idx))) == Farm.Terrain.GRASS:
 			var last := int(here.get("last_worked_morning", state["day"]))
 			here["last_worked_morning"] = last
@@ -399,7 +416,7 @@ static func morning(state: Dictionary) -> void:
 		var credit := bool(here.get("morning_credit", false))
 		here.erase("morning_credit")
 		var crop: StringName = here["crop"]
-		if not credit or crop == &"":
+		if dormant or not credit or crop == &"":
 			continue
 		var needed := days_to_grow(crop)
 		if int(here["growth"]) >= needed:

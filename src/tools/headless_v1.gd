@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 39
+const GROUPS := 40
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -108,6 +108,7 @@ func _run() -> void:
 	_task_0168_crops()
 	_task_0169_inventory()
 	_task_0170_seasons()
+	_task_0171_winter()
 
 
 func _finish() -> void:
@@ -3574,4 +3575,82 @@ func _task_0170_seasons() -> void:
 	expect(Shop.buy(old, GameData.CARROT_SEED, 1) and Shop.stock_of(old, GameData.WOOD) == 0, "old saves can buy a new packet without refilling old shelves")
 	Resources.spend(old, GameData.CARROT_SEED, 1)
 	expect(int(old["version"]) == 7 and Resources.amount(old, GameData.CARROT_SEED) == 0, "old saves receive zero packets without a version bump")
+	_completed += 1
+
+
+## 0171 - the boundary clears old crops; winter leaves other work running.
+func _task_0171_winter() -> void:
+	var state := State.create(1710)
+	var beds := Farming.field_cells(state)
+	var corn: Vector2i = beds[0]
+	var wheat: Vector2i = beds[1]
+	SuiteKit.crop_supplies(state, GameData.CORN)
+	Farming.select_seed(state, GameData.CORN)
+	Farming.act(state, corn)
+	Farming.act(state, corn)
+	Farming.plot(state, corn)["watered"] = true
+	Farming.dry_out(state)
+	state["day"] = GameData.SEASON_DAYS * 2 + 1
+	SuiteKit.crop_supplies(state, GameData.WHEAT)
+	Farming.select_seed(state, GameData.WHEAT)
+	Farming.act(state, wheat)
+	Farming.act(state, wheat)
+	Farming.morning(state)
+	expect(Farming.crop_on(state, corn) == &"" and Farming.is_tilled(state, corn), "Autumn 1 leaves the corn bed tilled and empty")
+	expect(Farming.plot(state, corn).get("withered") == GameData.CORN and Farming.plot(state, corn)["growth"] == 0 and not Farming.plot(state, corn).has("morning_credit"), "withering names the old crop and discards growth and watering credit")
+	expect(Farming.crop_on(state, wheat) == GameData.WHEAT, "wheat planted on Autumn 1 survives that morning")
+	Farming.act(state, corn)
+	expect(Farming.crop_on(state, corn) == GameData.WHEAT and not Farming.plot(state, corn).has("withered"), "replanting clears the withered mark")
+	# Fixtures may contain any old crop on winter's first morning.
+	state["plots"].clear()
+	var ids := Farming.seeds()
+	for i in ids.size():
+		state["plots"][Grid.index(beds[i])] = {"crop": ids[i], "growth": 2, "watered": true, "morning_credit": true}
+	state["day"] = GameData.SEASON_DAYS * 3 + 1
+	Farming.morning(state)
+	for i in ids.size():
+		expect(Farming.crop_on(state, beds[i]) == &"" and Farming.plot(state, beds[i]).get("withered") == ids[i], "Winter 1 withers %s" % ids[i])
+	state["day"] += 1
+	var here := Farming.plot(state, corn)
+	here["crop"] = GameData.CORN
+	here["growth"] = 2
+	here["watered"] = true
+	Farming.dry_out(state)
+	Farming.morning(state)
+	expect(here["growth"] == 2 and not here.has("morning_credit"), "a rigged winter crop consumes watering credit without growing")
+	state["day"] = GameData.SEASON_DAYS * 4 + 2
+	Farming.morning(state)
+	expect(here["growth"] == 2, "winter watering cannot be banked for spring")
+	state["day"] = GameData.SEASON_DAYS * 3 + 2
+	expect(Interact.why_not(state, wheat) == [&"WHY_NO_OUTDOOR_GROWTH"], "winter sowing offers a localized refusal")
+	var before := State.hash_of(state)
+	Interact.complete(state, wheat, &"plant")
+	expect(State.hash_of(state) == before, "refused winter sowing spends nothing")
+	expect(GameData.check_no_growth_seasons([&"winter"]).is_empty() and not GameData.check_no_growth_seasons([&"missing"]).is_empty(), "the growth lever refuses unknown seasons")
+	var wet: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
+	expect(Fishing.begin(state, wet), "winter accepts a cast")
+	while not Fishing.is_biting(state):
+		Fishing.tick(state, wet + Vector2i.RIGHT)
+	expect(not Fishing.reel(state).is_empty(), "winter fishing pays a catch")
+	var seam: Vector2i = Farm.cells_with(state, &"seam")[0]
+	var stone := Resources.amount(state, GameData.STONE)
+	for hit in int(GameData.GATHERING[&"seam"]["hits"]):
+		Gathering.strike(state, seam)
+	expect(Resources.amount(state, GameData.STONE) > stone, "winter mining produces stone")
+	for tick in int(GameData.GATHERING[&"seam"]["regrow_ticks"]):
+		Gathering.tick(state)
+	expect(Farm.occupant(state, seam).get("id") == &"seam", "winter seams regrow")
+	var press := Vector2i(26, 25)
+	Farm.remove(state, press)
+	Farm.restore(state, press, {"id": &"press"})
+	Resources.add(state, GameData.CORN, 8)
+	var oil := Resources.amount(state, GameData.OIL)
+	expect(Crafting.enqueue(state, press, &"press_oil") and Crafting.enqueue(state, press, &"press_oil"), "winter accepts a press queue")
+	while Crafting.busy(state, press):
+		Crafting.tick(state)
+	expect(Resources.amount(state, GameData.OIL) == oil + 2, "both press jobs finish in winter")
+	var cow: Vector2i = Farm.cells_with(state, &"cow")[0]
+	for tick in int(GameData.LIVESTOCK[&"cow"]["every_ticks"]):
+		Livestock.tick(state)
+	expect(Livestock.ready_at(state, cow) > 0 and not Livestock.collect(state, cow).is_empty(), "a winter cow produces and can be collected")
 	_completed += 1
