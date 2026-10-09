@@ -276,12 +276,14 @@ static func _facing_for(dx: int, dy: int, current: int) -> int:
 
 # ------------------------------------------------------------------- doing
 
-## An instant verb, done where the player is standing. Nothing is remembered:
+## An instant stroke, resolved once by Farming for the can's whole area.
+## Nothing is remembered:
 ## there is no action to interrupt and nothing to walk away from.
 static func _do_instant(state: Dictionary, cell_target: Vector2i) -> void:
 	var verb := Interact.verb_at(state, cell_target)
-	if verb != &"" and Interact.is_instant(verb):
-		Interact.complete(state, cell_target, verb)
+	if verb == &"" or not Interact.is_instant(verb):
+		return
+	Interact.complete(state, cell_target, verb)
 
 
 static func _begin(state: Dictionary, cell_target: Vector2i) -> void:

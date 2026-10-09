@@ -17224,3 +17224,68 @@ headless_v1,input_check,input_v1,art_showcase,shot}.gd, assets/locale/strings.cs
 tools/determinism_{sim,data}_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/0173-tool-tiers.md, implementation/shots/0173/,
 docs/devlog/{index,index.pt_BR}.md (devlog.py --check).
+
+## 0174 - The can and the hoe by tier - done 2026-10-09
+
+What changed: basic, iron and gold cans/hoes now affect one, three and five
+cells across the farmer's facing. Farming.action_cells is the shared, read-only
+footprint: it visits the centre, the farmer's left, right, then the outer left
+and right. The can skips wet, ripe, unplanted or occupied cells and spends one
+unit per eligible plot, stopping when empty. One timed hoe action turns its
+whole eligible strip, skipping paths, water, rock, buildings and existing plots.
+The deliberate REMOVE action from 0172 still clears only the selected crop.
+
+Shape, facing north (numbers are spending/working order):
+
+```text
+Gold:  [4] [2] [1] [3] [5]
+Iron:      [2] [1] [3]
+Basic:         [1]
+                ^
+              farmer
+```
+
+The strip rotates with the four facings and clips at the map boundary. There
+is no charge-up or extra hoe time. TOOL_AREA_OFFSETS carries the geometry/order
+in GameData with LEVER comments, validation and digest coverage; duplicate or
+out-of-width offsets are rejected. The tier areas and capacity bonuses were
+already declared by 0173. Activating bonuses 0/4/8 makes capacity 8/12/16, or
+10/14/18 with full cans (+2). Refilling uses that capacity; the HUD finally
+prints Farming.can_capacity rather than the fixed base 8.
+
+The view asks the same footprint, including a short can, and redraws when the
+eligible cells change even if the centre does not. Visual review found the
+selection frames beneath the soil/crop layer; they now draw above it and below
+occupants. A layer-order input assertion guards that correction. The can_area
+fixture shows a cleared garden so trees do not obscure the three frames or the
+farmer. No PNG art was generated, drawn or edited.
+
+Verify: 60 PASS, 0 FAIL, 0 SKIP in 625s; 18,290 headless asserts (16,844 + 1,446),
+1,560 input checks (1,133 + 427), 5,752 UI checks, 581 bilingual keys, 169 parsed
+scripts, 56 nights with two seeds, both exports. SIM 3813670633 unchanged:
+the guard scenario retains basic tools. DATA 2771032843 -> 1161145246 deliberately
+moves for the new footprint table, accepted with verify.py --accept. The known
+total OVER BUDGET notice is not a failure. Tests cover three/five-cell watering,
+partial cans, skipped cells, every facing, boundaries, one full hoe timer,
+path refusal, adjacent crop preservation, all tier refill capacities, the HUD
+and view-only state hashing. Holding real SPACE and walking south through the
+same three rows waters 3 plots with the basic can and 9 with iron, once each.
+
+Looked at: six final pt_BR captures opened individually at full 1920x1080
+against the reference sheet and approved blue farmer. can_area exposes all
+three frames and shows 14/14 with iron/full cans. Farmer/tile scale remains the
+same; noon, dusk, wave, result and tech retain their existing layout. Kept:
+implementation/shots/0174/can_area-pt_BR.png, noon-pt_BR.png, dusk-pt_BR.png,
+wave-pt_BR.png, result-pt_BR.png, tech-pt_BR.png.
+
+Notes: all 1716 paths dirty at claim belong to the owner/art pipeline and
+stay outside this commit. No protected file was edited; project.godot,
+.claude/ and implementation/backlog/ remain unstaged. The RUN-key question
+remains open. Never pushed. Backlog: 296 tasks, 161 done, 135 todo, 0 doing,
+0 blocked; 56 todo wait for Codex art.
+
+Files: src/core/{farming,game_data,player}.gd, src/ui/{day_hud,world_view}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+tools/determinism_data_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/0174-can-and-hoe.md, implementation/shots/0174/,
+docs/devlog/{index,index.pt_BR}.md (devlog.py --check).

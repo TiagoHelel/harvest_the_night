@@ -14472,7 +14472,7 @@ func _task_0082_shots() -> void:
 	# 0160: the year ending and its credits. Forty-five since 0167:
 	# turned grass beside the starter beds in daylight and at night. Fifty-one
 	# since 0168: twelve crops, both seed pages in the HUD/stall and the ledger.
-	expect(names.size() == 58,
+	expect(names.size() == 59,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

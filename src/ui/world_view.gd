@@ -137,6 +137,7 @@ var _station_due := 0.0
 ## under everything standing on it. Task 0023 reuses it for the build ghost.
 var _highlight: Node2D
 var _highlight_cell := Vector2i(-1, -1)
+var _highlight_cells: Array = []
 ## **The route a wall would leave** (task 0157), on the night cues' layer: out
 ## of the night's tint, and over the trees and the roofs a route from the
 ## north runs under.
@@ -343,7 +344,7 @@ func _ready() -> void:
 	_highlight.name = "Highlight"
 	_highlight.draw.connect(_draw_highlight)
 	add_child(_highlight)
-	move_child(_highlight, 1)       # after Terrain, before Occupants
+	move_child(_highlight, _plots.get_index() + 1) # above soil/crops, below occupants
 	_wrecks = Node2D.new()
 	_wrecks.name = "TowerWrecks"
 	add_child(_wrecks)
@@ -713,13 +714,24 @@ func light_target() -> Color:
 # ------------------------------------------------------------------- camera
 
 ## Frame the cell the player would act on, or nothing when there is nothing to
-## act on. Called by the screen each frame; redraws only when it moves.
+## act on. Called each frame; redraws when its cell or eligible area changes.
 func highlight(cell: Vector2i) -> void:
-	if cell == _highlight_cell:
+	var cells: Array = [cell] if Grid.in_bounds(cell) else []
+	if not _state.is_empty():
+		var verb := Interact.verb_at(_state, cell)
+		if verb in [&"water", &"till"]:
+			cells = Farming.action_cells(_state, cell, verb)
+	if cell == _highlight_cell and cells == _highlight_cells:
 		return
 	_highlight_cell = cell
+	_highlight_cells = cells
 	if _highlight != null:
 		_highlight.queue_redraw()
+
+
+## What the next stroke will actually affect, without exposing the view's cache.
+func highlighted_cells() -> Array:
+	return _highlight_cells.duplicate()
 
 
 ## Put a ghost of `id` on `cell`, framed green when it will go there and red
@@ -862,13 +874,12 @@ func _draw_highlight() -> void:
 			else Color(0.95, 0.35, 0.35, 0.95)
 		_highlight.draw_rect(ghost_rect, colour, false, 1.0)
 
-	if not Grid.in_bounds(_highlight_cell):
-		return
-	var rect := Rect2(Vector2(_highlight_cell) * size, Vector2(size, size))
 	# A frame rather than a fill: the player needs to see what is on the tile
 	# as well as that it is selected.
-	_highlight.draw_rect(rect, Color(1.0, 0.98, 0.85, 0.85), false, 1.0)
-	_highlight.draw_rect(rect.grow(-1.0), Color(0.0, 0.0, 0.0, 0.25), false, 1.0)
+	for at in _highlight_cells:
+		var rect := Rect2(Vector2(at) * size, Vector2(size, size))
+		_highlight.draw_rect(rect, Color(1.0, 0.98, 0.85, 0.85), false, 1.0)
+		_highlight.draw_rect(rect.grow(-1.0), Color(0.0, 0.0, 0.0, 0.25), false, 1.0)
 
 
 ## Keep the camera on a cell, clamped to the farm and locked vertically.

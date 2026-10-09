@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 42
+const GROUPS := 43
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -111,6 +111,7 @@ func _run() -> void:
 	_task_0171_winter()
 	_task_0172_regrow()
 	_task_0173_tools()
+	_task_0174_area()
 
 
 func _finish() -> void:
@@ -3791,4 +3792,122 @@ func _task_0173_tools() -> void:
 	bad[&"axe"].pop_back()
 	expect(not GameData.check_tools(bad).is_empty(), "an incomplete ladder is refused")
 	expect(GameData.check_tools(GameData.TOOLS).is_empty(), "all five ladders validate")
+	_completed += 1
+
+
+## 0174 - one timed hoe stroke; one unit of water per eligible transverse plot.
+func _task_0174_area() -> void:
+	var state := State.create(1740)
+	var centre := Vector2i(32, 20)
+	for y in range(18, 23):
+		for x in range(29, 36):
+			var at := Vector2i(x, y)
+			state["terrain"][Grid.index(at)] = Farm.Terrain.GRASS
+			state["occupants"].erase(Grid.index(at))
+			state["plots"].erase(Grid.index(at))
+	for dx in range(-2, 3):
+		var at := centre + Vector2i(dx, 0)
+		Farming.act(state, at)
+		Farming.plot(state, at)["crop"] = GameData.CARROT
+	state["tools"]["can"] = 1
+	state["water_can"] = 8
+	SuiteKit.stand_the_farmer(state, centre + Vector2i.UP)
+	state["player"]["facing"] = Player.SOUTH
+	var expected: Array = [centre, centre + Vector2i.RIGHT, centre + Vector2i.LEFT]
+	expect(Farming.action_cells(state, centre, &"water") == expected, "an iron stroke visits centre, farmer's left, then right")
+	state["intent"]["interact"] = true
+	Sim.advance(state, 1)
+	for at in expected:
+		expect(Farming.is_watered(state, at), "one press waters all three iron plots")
+	expect(Farming.water_carried(state) == 5 and not Farming.is_watered(state, centre + Vector2i(2, 0)), "one iron press spends three and stops at its width")
+	for dx in range(-2, 3):
+		Farming.plot(state, centre + Vector2i(dx, 0))["watered"] = false
+	state["tools"]["can"] = 2
+	state["water_can"] = 2
+	expect(Farming.action_cells(state, centre, &"water") == expected.slice(0, 2), "a short gold can previews only its two affordable plots")
+	Farming.act(state, centre)
+	expect(Farming.water_carried(state) == 0 and Farming.is_watered(state, centre) and Farming.is_watered(state, centre + Vector2i.RIGHT) and not Farming.is_watered(state, centre + Vector2i.LEFT), "a short can follows fixed spending order and never underflows")
+	state["water_can"] = 5
+	Farming.plot(state, centre)["watered"] = false
+	Farming.plot(state, centre + Vector2i.RIGHT)["growth"] = Farming.days_to_grow(GameData.CARROT)
+	state["occupants"][Grid.index(centre + Vector2i.LEFT)] = {"id": &"tree", "hp": 1}
+	expect(Farming.action_cells(state, centre, &"water") == [centre, centre + Vector2i(2, 0), centre + Vector2i(-2, 0)], "water skips ripe crops and occupied plots without wasting a unit")
+	state["occupants"].erase(Grid.index(centre + Vector2i.LEFT))
+	for dx in range(-2, 3):
+		var plot := Farming.plot(state, centre + Vector2i(dx, 0))
+		plot["watered"] = false
+		plot["growth"] = 0
+	Farming.act(state, centre)
+	expect(Farming.water_carried(state) == 0, "a full gold stroke spends five units")
+	for dx in range(-2, 3):
+		expect(Farming.is_watered(state, centre + Vector2i(dx, 0)), "a gold can waters all five plots")
+	state["tools"]["hoe"] = 2
+	var hoed := centre + Vector2i(0, 2)
+	SuiteKit.stand_the_farmer(state, hoed + Vector2i.UP)
+	state["player"]["facing"] = Player.SOUTH
+	var bytes: PackedByteArray = state["terrain"].duplicate()
+	state["intent"]["interact"] = true
+	var ticks := Interact.ticks_for(state, hoed, &"till")
+	Sim.advance(state, ticks - 1)
+	expect(not Farming.is_tilled(state, hoed), "a gold hoe still takes one full hoe work cycle")
+	Sim.advance(state, 1)
+	for dx in range(-2, 3):
+		expect(Farming.is_tilled(state, hoed + Vector2i(dx, 0)), "one gold hoe cycle tills all five grass cells")
+	expect(state["terrain"] == bytes, "area hoeing preserves terrain bytes")
+	for dx in range(-2, 3):
+		state["plots"].erase(Grid.index(hoed + Vector2i(dx, 0)))
+	var path := hoed + Vector2i.RIGHT
+	state["terrain"][Grid.index(path)] = Farm.Terrain.PATH
+	Farming.act(state, hoed)
+	expect(not Farming.is_tilled(state, path) and Farming.is_tilled(state, hoed + Vector2i(2, 0)), "a gold hoe skips a path and reaches the grass beyond it")
+	Farming.plot(state, hoed)["crop"] = GameData.CARROT
+	Farming.plot(state, hoed + Vector2i.LEFT)["crop"] = GameData.WHEAT
+	Farming.clear_crop(state, hoed)
+	expect(Farming.crop_on(state, hoed + Vector2i.LEFT) == GameData.WHEAT, "REMOVE remains single-cell and preserves the neighbouring crop")
+	for facing in range(4):
+		state["player"]["facing"] = facing
+		var forward: Vector2i = Farming.NEIGHBOURS[facing]
+		var across := Vector2i(-forward.y, forward.x)
+		for offset in GameData.TOOL_AREA_OFFSETS[5]:
+			state["plots"].erase(Grid.index(centre + across * int(offset)))
+		var cells: Array = Farming.action_cells(state, centre, &"till")
+		expect(cells == [centre, centre - across, centre + across, centre - across * 2, centre + across * 2], "every facing rotates the same centre-first five-cell footprint")
+		var edge := Vector2i.ZERO
+		state["terrain"][Grid.index(edge)] = Farm.Terrain.GRASS
+		state["occupants"].erase(Grid.index(edge))
+		state["plots"].erase(Grid.index(edge))
+		for at in Farming.action_cells(state, edge, &"till"):
+			expect(Grid.in_bounds(at), "every facing clips its stroke at the map boundary")
+	state["tools"]["can"] = 1
+	state["tech_owned"].append(&"full cans")
+	state["water_can"] = 4
+	expect(Farming.can_capacity(state) == 14, "iron capacity and full cans stack to fourteen")
+	var well: Vector2i = Farm.cells_with(state, &"well")[0]
+	for level in range(3):
+		state["tools"]["can"] = level
+		state["water_can"] = 0
+		expect(Farming.refill_beside(state, well + Vector2i.UP) and Farming.water_carried(state) == 10 + level * 4, "each tier refills to its capacity plus full cans")
+	state["tools"]["can"] = 1
+	state["water_can"] = 4
+	var hud := DayHud.new()
+	hud._ready()
+	hud.show_state(state)
+	expect(hud._water.text == I18n.f(&"DHUD_WATER", [4, Farming.can_capacity(state)]), "the HUD uses the actual capacity with full cans bought")
+	hud.free()
+	state["player"]["facing"] = Player.SOUTH
+	for dx in range(-1, 2):
+		state["plots"][Grid.index(centre + Vector2i(dx, 0))] = {"crop": GameData.CARROT, "growth": 0, "watered": false}
+	var view := WorldView.new()
+	view._state = state
+	var before := State.hash_of(state)
+	view.highlight(centre)
+	expect(view.highlighted_cells() == Farming.action_cells(state, centre, &"water") and State.hash_of(state) == before, "the area highlight reads the core footprint without changing state")
+	state["water_can"] = 1
+	view.highlight(centre)
+	expect(view.highlighted_cells() == [centre], "the highlight updates a short can even when its centre did not move")
+	view.free()
+	var bad := GameData.TOOL_AREA_OFFSETS.duplicate(true)
+	bad[3] = [0, 1, 1]
+	expect(not GameData.check_tool_areas(bad).is_empty(), "duplicate footprint offsets are rejected")
+	expect(GameData.check_tool_areas(GameData.TOOL_AREA_OFFSETS).is_empty(), "all transverse footprints validate")
 	_completed += 1

@@ -1,7 +1,7 @@
 # 0174 - The can and the hoe by tier
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0173, 0167
 - **Likely files:** src/core/farming.gd, src/core/player.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 
@@ -20,11 +20,11 @@ The can and the hoe earn their tiers: one tile, then three, then five at a strok
 
 ## Done when
 
-- [ ] `_task_0174_area` in `src/tools/headless_v1.gd`: an iron can waters three dry plots in one press and spends three; a gold hoe (its tier written into the state - gold cannot be ordered before 0176) tills five grass cells and skips a path cell among them; the HUD's capacity equals `Farming.can_capacity` with 'full cans' bought
-- [ ] `_case_0174_area` in `src/tools/input_v1.gd`: holding interact along a row with an iron can waters it in a third of the steps
-- [ ] A new `can_area` scenario: `python tools/shot.py 0174 can_area --fhd` shows the area highlight; opened and looked at
-- [ ] `python tools/verify.py` prints PASS
-- [ ] the determinism hash is unchanged, or the change is deliberate and both
+- [x] `_task_0174_area` in `src/tools/headless_v1.gd`: an iron can waters three dry plots in one press and spends three; a gold hoe (its tier written into the state - gold cannot be ordered before 0176) tills five grass cells and skips a path cell among them; the HUD's capacity equals `Farming.can_capacity` with 'full cans' bought
+- [x] `_case_0174_area` in `src/tools/input_v1.gd`: holding interact along a row with an iron can waters it in a third of the steps
+- [x] A new `can_area` scenario: `python tools/shot.py 0174 can_area --fhd` shows the area highlight; opened and looked at
+- [x] `python tools/verify.py` prints PASS
+- [x] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal
 
 ## House rules

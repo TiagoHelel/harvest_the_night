@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["can_area", "three dry plots in the iron can's next stroke", ""],
 	["tool_upgrades", "upgrades ready tomorrow and an iron axe in hand", "WorkshopPanel"],
 	["regrowing", "regrowing strawberries beside ripe fruit", ""],
 	["withered", "summer crops wither on Autumn 1", ""],
@@ -669,6 +670,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	main.get_node("%WorldView").cursor().follows_pointer = false
 
 	match name:
+		"can_area": _set_can_area(state)
 		"tool_upgrades": _set_tool_upgrades(state)
 		"inventory_crops": _set_inventory_crops(state)
 		"inventory_full": _set_inventory_full(state)
@@ -924,6 +926,13 @@ func _only_showing(main: Node, wanted: String) -> void:
 func _just_before_the_shutter(main: Node, state: Dictionary,
 		name: String) -> void:
 	match name:
+		"can_area":
+			SuiteKit.stand_the_farmer(state, _standing_at)
+			state["player"]["facing"] = Player.SOUTH
+			var view := main.get_node("%WorldView") as WorldView
+			view.look_at_cell(_standing_at)
+			view.highlight(Player.target(state))
+			print("  can_area: %d highlighted plots, capacity %d" % [view.highlighted_cells().size(), Farming.can_capacity(state)])
 		"tool_upgrades":
 			SuiteKit.stand_the_farmer(state, _standing_at)
 			main.get_node("%WorldView").look_at_cell(_standing_at)
@@ -1180,6 +1189,36 @@ func _set_noon(state: Dictionary) -> void:
 	# task 0126 gave the day an hour this was half way, and half way is 16:00.
 	Sim.advance(state, maxi(Phases.tick_at_minute(WorldView.NOON_MINUTE)
 		- int(state["tick"]), 1))
+
+
+## 0174 - a dry row ahead and a watered row behind it, at native farm scale.
+func _set_can_area(state: Dictionary) -> void:
+	_set_noon(state)
+	state["tools"]["can"] = 1
+	state["tech_owned"].append(&"full cans")
+	state["water_can"] = Farming.can_capacity(state)
+	# A cleared garden: foliage must not hide the farmer or the stroke frames.
+	for y in range(18, 24):
+		for x in range(29, 36):
+			var at := Vector2i(x, y)
+			if Farm.occupant(state, at).get("id", &"") in [&"tree", &"rock"]:
+				Farm.remove(state, at)
+	for y in range(20, 23):
+		for x in range(30, 35):
+			var at := Vector2i(x, y)
+			if not Farm.is_empty(state, at):
+				continue
+			if Farming.verb_at(state, at) == &"till":
+				Farming.act(state, at)
+			if not Farming.is_tilled(state, at):
+				continue
+			var plot := Farming.plot(state, at)
+			plot["crop"] = GameData.CARROT
+			plot["growth"] = 1
+			plot["watered"] = y != 20
+	_standing_at = Vector2i(32, 19)
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.SOUTH
 
 
 ## The guardian's cursor over a hurt tower at night, task 0134: the repair

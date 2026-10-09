@@ -516,6 +516,13 @@ const FISHING: Dictionary = {
 }
 
 
+## Transverse offsets, visited centre, left, right, then the outer pair.
+const TOOL_AREA_OFFSETS := {
+	1: [0], # LEVER: basic tool footprint, one cell
+	3: [0, -1, 1], # LEVER: iron tool footprint, three cells
+	5: [0, -1, 1, -2, 2], # LEVER: gold tool footprint, five cells
+}
+
 ## Five permanent tools, each on one three-step ladder (0173).
 ## Effect fields are consumed by 0174/0175/0180/0181; gold costs arrive in 0176.
 const TOOLS: Dictionary = {
@@ -2093,6 +2100,7 @@ static func validate() -> Array:
 	errors.append_array(check_gathering(GATHERING))
 	errors.append_array(check_recipes(RECIPES))
 	errors.append_array(check_tools(TOOLS))
+	errors.append_array(check_tool_areas(TOOL_AREA_OFFSETS))
 	errors.append_array(check_buildings(BUILDINGS))
 	errors.append_array(check_defences(DEFENCES))
 	errors.append_array(check_enemies(ENEMIES))
@@ -2629,9 +2637,26 @@ static func check_tools(tools: Dictionary) -> Array:
 				errors.append("tool '%s' needs money and ore" % tool)
 			if tier.has("area") and int(tier["area"]) not in [1, 3, 5]:
 				errors.append("tool '%s' has an invalid area" % tool)
+			if tier.has("capacity_bonus") and int(tier["capacity_bonus"]) < 0:
+				errors.append("tool '%s' has a negative can capacity bonus" % tool)
 			for field in ["gather_percent", "bite_percent", "rare_percent", "zone_percent"]:
 				if tier.has(field) and int(tier[field]) <= 0:
 					errors.append("tool '%s' has an invalid effect '%s'" % [tool, field])
+	return errors
+
+
+## Each tier keeps its full width and a unique, centre-first stroke.
+static func check_tool_areas(areas: Dictionary) -> Array:
+	var errors: Array = []
+	for count in [1, 3, 5]:
+		var offsets: Array = areas.get(count, [])
+		if offsets.size() != count or offsets.is_empty() or offsets[0] != 0:
+			errors.append("tool area %d needs its width and centre first" % count)
+		var seen: Array = []
+		for offset in offsets:
+			if offset in seen or absi(int(offset)) > count / 2:
+				errors.append("tool area %d has an invalid offset" % count)
+			seen.append(offset)
 	return errors
 
 
@@ -3262,6 +3287,7 @@ static func digest() -> int:
 		"fishing": FISHING,
 		"recipes": RECIPES,
 		"tools": TOOLS,
+		"tool_area_offsets": TOOL_AREA_OFFSETS,
 		"queue": [QUEUE_LENGTH],
 		"buildings": BUILDINGS,
 		"defences": DEFENCES,

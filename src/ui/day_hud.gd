@@ -423,7 +423,7 @@ func _refresh(force: bool) -> void:
 	# with no idea why.
 	var carried := Farming.water_carried(_state)
 	_water.text = I18n.f(&"DHUD_WATER",
-		[carried, GameData.WATER_CAN_CAPACITY]) \
+		[carried, Farming.can_capacity(_state)]) \
 		if carried > 0 else I18n.t(&"DHUD_WATER_EMPTY")
 	_water.theme_type_variation = UiKit.WARM if carried > 0 \
 		else UiKit.DIM

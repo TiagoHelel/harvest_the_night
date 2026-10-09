@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 29
+const V1_CASES := 30
 
 
 func _process(delta: float) -> bool:
@@ -79,6 +79,7 @@ func _run() -> void:
 	await _case_0171_winter()
 	await _case_0172_regrow()
 	await _case_0173_upgrade()
+	await _case_0174_area()
 	_finish()
 
 
@@ -2278,4 +2279,56 @@ func _case_0173_upgrade() -> void:
 	await frames(2)
 	expect(inventory.page_rows().size() == 5 and (require_control("inv_tool_pending_axe") as Label).visible, "inventory shows the five held tools and pending delivery")
 	await close_scene()
+	_completed += 1
+
+
+## 0174 - the same held SPACE and southward walk cover three times the field.
+func _case_0174_area() -> void:
+	var wet_counts: Array = []
+	for level in [0, 1]:
+		await open_scene(MAIN_SCENE)
+		var driver: SimDriver = require_control("SimDriver")
+		if driver == null:
+			await close_scene()
+			_completed += 1
+			return
+		var state := driver.state
+		driver.set_speed(1)
+		var row: Array = []
+		for y in range(20, 23):
+			for x in range(30, 33):
+				var at := Vector2i(x, y)
+				state["terrain"][Grid.index(at)] = Farm.Terrain.GRASS
+				state["occupants"].erase(Grid.index(at))
+				state["plots"][Grid.index(at)] = {"crop": GameData.CARROT, "growth": 0, "watered": false}
+				row.append(at)
+		state["grid_version"] += 1
+		state["tools"]["can"] = level
+		state["tech_owned"].append(&"full cans")
+		state["water_can"] = Farming.can_capacity(state)
+		state["terrain"][Grid.index(Vector2i(31, 19))] = Farm.Terrain.GRASS
+		state["occupants"].erase(Grid.index(Vector2i(31, 19)))
+		_stand_at(state, Vector2i(31, 19), Player.SOUTH)
+		await frames(3)
+		var view := require_control("WorldView") as WorldView
+		expect(view.highlighted_cells().size() == 1 + level * 2, "the next held-key stroke highlights its tier's area")
+		expect(view._highlight.get_index() > view._plots.get_index(), "soil and crop sprites cannot cover the area frames")
+		var carried := Farming.water_carried(state)
+		await press_key(KEY_SPACE, true)
+		await press_key(KEY_S, true)
+		await until(func() -> bool: return Farming.is_watered(state, Vector2i(31, 22)), "held SPACE reaches the third row", 900)
+		await press_key(KEY_S, false)
+		await press_key(KEY_SPACE, false)
+		await frames(3)
+		var wet := 0
+		for at in row:
+			if Farming.is_watered(state, at):
+				wet += 1
+		wet_counts.append(wet)
+		expect(wet == 3 * (1 + level * 2), "three row steps cover the whole iron strip or one basic column", str(wet))
+		expect(Farming.water_carried(state) == carried - wet, "holding interact spends exactly one per plot, once")
+		var water := require_control("WaterCan") as Label
+		expect(water.text == I18n.f(&"DHUD_WATER", [Farming.water_carried(state), Farming.can_capacity(state)]), "the live HUD includes both the tier and full cans")
+		await close_scene()
+	expect(wet_counts == [3, 9], "an iron can covers nine plots in the steps a basic can needs for three")
 	_completed += 1

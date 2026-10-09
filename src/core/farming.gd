@@ -220,7 +220,29 @@ static func water_carried(state: Dictionary) -> int:
 ## pond and the well" is one question with one answer.
 ## How much the watering can holds, the tree included.
 static func can_capacity(state: Dictionary) -> int:
-	return GameData.WATER_CAN_CAPACITY 		+ Tech.bonus(state, "water_can_bonus", 0)
+	return GameData.WATER_CAN_CAPACITY + Tech.bonus(state, "water_can_bonus", 0) \
+		+ int(ToolTiers.effects(state, &"can")["capacity_bonus"])
+
+
+## The eligible cells of one transverse stroke, in spending order. The view
+## asks this same rule, including short cans, rather than promising extra work.
+## No state is changed: centre, left, right, outer left, outer right.
+static func action_cells(state: Dictionary, cell: Vector2i, verb: StringName) -> Array:
+	var out: Array = []
+	if verb not in [&"water", &"till"] or verb_at(state, cell) != verb:
+		return out
+	var tool: StringName = &"can" if verb == &"water" else &"hoe"
+	var width := int(ToolTiers.effects(state, tool)["area"])
+	var forward: Vector2i = NEIGHBOURS[int(state["player"]["facing"])]
+	var across := Vector2i(-forward.y, forward.x)
+	var limit := water_carried(state) if verb == &"water" else width
+	for offset in GameData.TOOL_AREA_OFFSETS[width]:
+		var at := cell + across * int(offset)
+		if out.size() >= limit:
+			break
+		if verb_at(state, at) == verb:
+			out.append(at)
+	return out
 
 
 static func is_water_source(state: Dictionary, cell: Vector2i) -> bool:
@@ -310,11 +332,17 @@ static func can_clear(state: Dictionary, cell: Vector2i) -> bool:
 static func clear_crop(state: Dictionary, cell: Vector2i) -> bool:
 	if not can_clear(state, cell):
 		return false
-	_till(state, cell)
+	_till_one(state, cell)
 	return true
 
 
 static func _till(state: Dictionary, cell: Vector2i) -> void:
+	for at in action_cells(state, cell, &"till"):
+		_till_one(state, at)
+
+
+## Clearing an existing crop stays a deliberate single-cell action (0172).
+static func _till_one(state: Dictionary, cell: Vector2i) -> void:
 	(state["plots"] as Dictionary)[Grid.index(cell)] = EMPTY_PLOT.duplicate()
 	_worked(state, cell)
 
@@ -370,18 +398,12 @@ static func trample(state: Dictionary, cells: Array) -> int:
 	return lost
 
 
-## One tile off the can. **Never fatal and never wasted**: a tile that is
-## already wet does not offer the verb, so holding the key down the row spends
-## exactly one per tile.
+## One unit per eligible plot, including a partial stroke from a short can.
 static func _water(state: Dictionary, cell: Vector2i) -> void:
-	if int(state["water_can"]) <= 0:
-		return
-	var here: Dictionary = (state["plots"] as Dictionary)[Grid.index(cell)]
-	if bool(here["watered"]):
-		return
-	here["watered"] = true
-	state["water_can"] = int(state["water_can"]) - 1
-	_worked(state, cell)
+	for at in action_cells(state, cell, &"water"):
+		plot(state, at)["watered"] = true
+		state["water_can"] = int(state["water_can"]) - 1
+		_worked(state, at)
 
 
 ## Record planted, watered plots for tomorrow before drying the field.

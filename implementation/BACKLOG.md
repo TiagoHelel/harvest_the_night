@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#############...........`  **160 / 296 done**
+`#############...........`  **161 / 296 done**
 
-0 doing / 136 todo / 0 blocked across 18 phases.
+0 doing / 135 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-136 task(s) left, the ready ones first, then what they
+135 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -241,23 +241,6 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0174 - The can and the hoe by tier
-
-Ready to pick up.  Likely files: `src/core/farming.gd, src/core/player.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The can and the hoe earn their tiers: one tile, then three, then five at a stroke, which turns watering a big field from a chore into a walk.
-
-- The can's and the hoe's tiers carry an area (`# LEVER`: 1, 3 and 5 tiles, plan section 3.7): the faced tile and the ones beside it across the facing. Pick the shape, draw it, write it down
-- `Farming._water` and `Player._do_instant` water every tile of the area that offers `water`, one unit of the can per tile, in a fixed order; a can short of water waters what it holds
-- A better hoe tills the area through `Farming._till` in one action of the hoe's time, skipping cells 0167 refuses
-- Decide whether the can's tier also raises its capacity (a per-tier `# LEVER` added in `Farming.can_capacity`), and fix the known bug: `day_hud.gd` prints the can against `GameData.WATER_CAN_CAPACITY` instead of `Farming.can_capacity(state)`, so 'full cans' never showed
-- The highlight shows every cell the next press will touch (view only, `world_view.gd`)
-- DATA moves; SIM moves only if the scenario uses an upgraded tool (it should not)
-
-  - done when: `_task_0174_area` in `src/tools/headless_v1.gd`: an iron can waters three dry plots in one press and spends three; a gold hoe (its tier written into the state - gold cannot be ordered before 0176) tills five grass cells and skips a path cell among them; the HUD's capacity equals `Farming.can_capacity` with 'full cans' bought
-  - done when: `_case_0174_area` in `src/tools/input_v1.gd`: holding interact along a row with an iron can waters it in a third of the steps
-  - done when: A new `can_area` scenario: `python tools/shot.py 0174 can_area --fhd` shows the area highlight; opened and looked at
 
 ### 0175 - The axe and the pickaxe by tier
 
@@ -1009,7 +992,7 @@ Wine, juice, jelly, pickles, cheese, butter, cloth, sandbags, flour, bread and s
 
 ### 0194 - The day's economy
 
-Waits on 0193, 0189, 0174, 0177, 0178, 0180, 0182, 0186, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
+Waits on 0193, 0189, 0177, 0178, 0180, 0182, 0186, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
 
 The day's money is tuned on purpose: a price for every item, and targets per season so that a good day buys about one new defence (plan section 5's rule of thumb).
 
@@ -2711,7 +2694,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (9/53)
+## 12 - The day that pays  (10/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2722,7 +2705,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md)
 - [x] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md)
 - [x] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md)
-- [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md)
+- [x] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md)
 - [ ] **0175** [The axe and the pickaxe by tier](prompts/0175-axe-pickaxe.md)
 - [ ] **0176** [Copper, coal and gold](prompts/0176-copper-coal-gold.md) - needs 0175
 - [ ] **0177** [Hardwood](prompts/0177-hardwood.md) - needs 0175
@@ -2742,7 +2725,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188, 0184
 - [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0176, 0188, 0190, 0192
-- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0174, 0177, 0178, 0180, 0182, 0186, 0191
+- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0177, 0178, 0180, 0182, 0186, 0191
 - [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md) - needs 0194
 - [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0194, 0195
 - [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - waits for art A014
