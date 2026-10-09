@@ -125,6 +125,26 @@ const KEYS: Dictionary = {
 	&"south": &"SIDE_SOUTH",
 }
 
+## Literal category keys: the translation checker can see every tab.
+const GROUP_KEYS: Dictionary = {
+	&"materials": &"INV_GROUP_MATERIALS",
+	&"crops": &"INV_GROUP_CROPS",
+	&"seeds": &"INV_GROUP_SEEDS",
+	&"fish": &"INV_GROUP_FISH",
+	&"animal_goods": &"INV_GROUP_ANIMAL_GOODS",
+	&"artisan_goods": &"INV_GROUP_ARTISAN_GOODS",
+	&"ammunition": &"INV_GROUP_AMMUNITION",
+	&"night_leftovers": &"INV_GROUP_NIGHT_LEFTOVERS",
+	&"farm": &"INV_GROUP_FARM",
+	&"other": &"INV_GROUP_OTHER",
+}
+
+
+## What an inventory category is called.
+static func group_of(id: StringName) -> String:
+	return I18n.t(GROUP_KEYS[id]) if GROUP_KEYS.has(id) else of(id)
+
+
 ## And what each tech node promises, which is a sentence rather than a name.
 const NOTES: Dictionary = {
 	&"sharp tools": &"TECHNOTE_SHARP_TOOLS",

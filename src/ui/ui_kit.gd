@@ -76,9 +76,11 @@ const BUTTON_STATES := ["normal", "hover", "pressed", "disabled"]
 static var _cache: Dictionary = {}
 
 
-## The icon for a resource, or null when nobody has drawn one.
+## Resource icons use the placeholder road, including a generic stand-in
+## for an item whose own icon has not arrived yet.
 static func icon(id: StringName, compact: bool = false) -> Texture2D:
-	return _texture(("hud_%s" if compact else "icon_%s") % id)
+	var texture := _texture(("hud_%s" if compact else "icon_%s") % id)
+	return texture if texture != null else _texture("hud_wood" if compact else "icon_wood")
 
 
 ## Whether every resource has one and no icon is orphaned. The done-when of
@@ -86,7 +88,7 @@ static func icon(id: StringName, compact: bool = false) -> Texture2D:
 static func missing_icons() -> Array:
 	var out: Array = []
 	for id in GameData.RESOURCES:
-		if icon(StringName(id)) == null:
+		if _texture("icon_%s" % id) == null:
 			out.append(str(id))
 	return out
 

@@ -70,12 +70,12 @@ extends Control
 ## without having to find it. It wears the moon's letters (`UiKit.BED`) and
 ## lights up from the reminder hour (`UiKit.BED_LIT`).
 
-## What the top bar shows, in two rows. Not all thirteen: the bar has 480
+## What the top bar shows, in two rows. The bar has 480
 ## pixels and the inventory panel of task 0036 is where everything lives.
 ## These are the six a player is deciding with.
 const SHOWN: Array = [
 	[GameData.WOOD, GameData.STONE, GameData.IRON],
-	[GameData.WHEAT, GameData.FOOD, GameData.OIL],
+	[GameData.FOOD, GameData.MONEY, GameData.TECH],
 ]
 
 ## How long a changed number stays lit.
@@ -138,6 +138,7 @@ var _power: Label
 var _power_icon: TextureRect
 var _ammo: Label
 var _day_only: Array[Control] = []
+var _last_purse := -1
 
 
 func _ready() -> void:
@@ -401,10 +402,10 @@ func _refresh(force: bool) -> void:
 	_year.text = I18n.f(&"DHUD_YEAR", [year]) if year > 1 else ""
 	_refresh_evening(minute, today)
 	var money := Resources.amount(_state, GameData.MONEY)
-	if force or money != int(_last.get(GameData.MONEY, -1)):
-		if not force and _last.has(GameData.MONEY):
+	if force or money != _last_purse:
+		if not force and _last_purse >= 0:
 			_flash[GameData.MONEY] = FLASH_SECONDS
-		_last[GameData.MONEY] = money
+		_last_purse = money
 		_money.text = I18n.f(&"DHUD_MONEY", [money])
 
 	for id in _labels:

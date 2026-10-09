@@ -279,14 +279,19 @@ func _menus(speaking: String, high: bool) -> void:
 	inventory._process(0.0)
 	await process_frame
 	await process_frame
-	for id in GameData.RESOURCES:
-		var icon := inventory.find_child("inv_icon_%s" % id,true,false) as TextureRect
-		expect(icon!=null and icon.texture==UiKit.icon(StringName(id),true),"Every resource is actually integrated in the inventory")
-		var label := inventory.find_child("inv_name_%s" % id,true,false) as Label
-		expect(label!=null and label.text.contains(Names.of(StringName(id))),"Inventory uses existing localized resource names")
-	_check_bounds(inventory)
-	expect(var_to_bytes(state)==before,"Actual inventory layout is read-only")
-	await _shoot("inventory_"+speaking+("_contrast" if high else ""))
+	for page in inventory.page_count():
+		for line in inventory.page_rows():
+			var id := StringName(line["id"])
+			var icon := inventory.find_child("inv_icon_%s" % id,true,false) as TextureRect
+			expect(icon!=null and icon.texture==UiKit.icon(id,true),"Every page row integrates its resource icon")
+			var label := inventory.find_child("inv_name_%s" % id,true,false) as Label
+			expect(label!=null and label.text.contains(Names.of(id)),"Inventory uses localized resource names")
+		_check_bounds(inventory)
+		expect(var_to_bytes(state)==before,"Actual inventory pages are read-only")
+		await _shoot("inventory_%d_" % page+speaking+("_contrast" if high else ""))
+		inventory.turn_page(1)
+		await process_frame
+		await process_frame
 	for which in [Shop.BUY,Shop.SELL]:
 		_new_room()
 		Shop.open(state)

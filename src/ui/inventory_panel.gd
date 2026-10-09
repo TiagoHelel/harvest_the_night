@@ -1,82 +1,77 @@
 class_name InventoryPanel
 extends Control
 
-## Everything you own, on one key.
-##
-## The top bar shows six numbers because that is what fits across 480 pixels.
-## There are twenty-four resources after 0168. This is where the rest live.
-##
-## ## It is a view, and it behaves like one
-##
-## **The day does not stop.** `design.md` calls the farm the cozy half, and a
-## panel that paused the clock would make checking your stores a free action
-## and reading the HUD a chore you do instead. Crops grow, the press runs and
-## the animals go on standing there while this is up - it is a window, not a
-## menu.
-##
-## It also takes no keys away. The shop panel of task 0020 sets
-## `state["open_panel"]`, which stops the farmer walking, because standing at a
-## stall and running are two different things. This does not: you can open it
-## mid-walk and close it without stopping. Nothing in here can be clicked, so
-## there is nothing to steal.
-##
-## ## Nothing here decides anything
-##
-## Every row comes from `Inventory.groups()`, which is in `src/core/` and reads
-## the ledger on the spot. This file knows the colour of a heading and nothing
-## else - which is what makes "add a resource and it appears with no UI edit"
-## true: the panel is rebuilt from the list every time it is opened, and a list
-## one longer is a panel one row taller.
+## A read-only ledger: one category at a time, split into bounded pages.
+## The day keeps running. Q/E and pad bumpers reuse InputActions' hotbar
+## actions while this view is open; mouse tabs and arrows use the same pages.
+## Page and selection state live only here, never in the simulation.
 
-
-const ROW_HEIGHT := 11
+const ROW_HEIGHT := 16
+const ROW_SPACE := 160
+const ROWS_PER_PAGE := ROW_SPACE / ROW_HEIGHT
 
 var _state: Dictionary = {}
-var _rows: HBoxContainer
+var _rows: VBoxContainer
+var _tabs: VBoxContainer
+var _heading: Label
+var _previous: Button
+var _next: Button
 var _total: Label
 var _built_for := ""
+var _page := 0
+var _pages: Array = []
 
 
 func _ready() -> void:
 	visible = false
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_anchors_preset(Control.PRESET_FULL_RECT)
-
 	var dim := ColorRect.new()
 	dim.name = "InventoryDim"
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	dim.color = Color(0.02, 0.02, 0.05, 0.55)
 	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(dim)
-
 	var frame := PanelContainer.new()
 	frame.name = "InventoryFrame"
-	# 0168 keeps the 24-item ledger readable until group pages arrive in 0169.
-	frame.position = Vector2(36, 9)
-	frame.custom_minimum_size = Vector2(408, 0)
+	frame.position = Vector2(20, 18)
+	frame.custom_minimum_size = Vector2(440, 0)
 	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(frame)
-
 	var column := VBoxContainer.new()
 	column.name = "InventoryColumn"
 	frame.add_child(column)
-
-	var title := _line("InventoryTitle", I18n.t(&"INV_TITLE"), UiKit.WARM)
-	column.add_child(title)
-
-	_rows = HBoxContainer.new()
+	column.add_child(_line("InventoryTitle", I18n.t(&"INV_TITLE"), UiKit.WARM))
+	var body := HBoxContainer.new()
+	column.add_child(body)
+	_tabs = VBoxContainer.new()
+	_tabs.name = "InventoryTabs"
+	_tabs.custom_minimum_size.x = 112
+	body.add_child(_tabs)
+	var content := VBoxContainer.new()
+	body.add_child(content)
+	_heading = _line("InventoryPage", "", UiKit.WARM)
+	content.add_child(_heading)
+	_rows = VBoxContainer.new()
 	_rows.name = "InventoryRows"
-	column.add_child(_rows)
-
+	_rows.custom_minimum_size = Vector2(300, ROW_SPACE)
+	content.add_child(_rows)
+	var pager := HBoxContainer.new()
+	content.add_child(pager)
+	_previous = _button("InventoryPrevious", "", func() -> void: turn_page(-1))
+	_next = _button("InventoryNext", "", func() -> void: turn_page(1))
+	pager.add_child(_previous)
+	pager.add_child(_next)
 	_total = _line("InventoryTotal", "", UiKit.MONEY)
 	column.add_child(_total)
 
 
 func show_state(state: Dictionary) -> void:
 	_state = state
+	_built_for = ""
 
 
-## Whether the panel is up. The key toggles it and nothing else does.
+## Whether the ledger is up.
 func is_open() -> bool:
 	return visible
 
@@ -84,11 +79,71 @@ func is_open() -> bool:
 func toggle() -> void:
 	visible = not visible
 	if visible:
-		_built_for = ""         # rebuild from the ledger, never from memory
+		_built_for = ""
+		_process(0.0)
 
 
 func close() -> void:
 	visible = false
+
+
+## Bounded slices: even seventy resources in one category fit the same frame.
+static func pages_for(groups: Array) -> Array:
+	var pages: Array = []
+	for entry in groups:
+		var rows: Array = entry["rows"]
+		var count := int(ceil(float(rows.size()) / ROWS_PER_PAGE))
+		for part in count:
+			pages.append({"name": entry["name"], "part": part, "count": count,
+				"rows": rows.slice(part * ROWS_PER_PAGE, (part + 1) * ROWS_PER_PAGE)})
+	return pages
+
+
+## Public view queries also let the input and screenshot harness visit every page.
+func page_count() -> int:
+	return _pages.size()
+
+
+func current_page() -> int:
+	return _page
+
+
+func page_rows() -> Array:
+	return _pages[_page]["rows"] if not _pages.is_empty() else []
+
+
+func turn_page(step: int) -> void:
+	if _pages.is_empty():
+		return
+	_page = posmod(_page + step, _pages.size())
+	_build()
+
+
+func select_group(id: StringName) -> void:
+	for i in _pages.size():
+		if _pages[i]["name"] == id:
+			_page = i
+			_build()
+			return
+
+
+# Consume page actions before the night hotbar sees them; the same binding
+# still selects defences when the ledger is closed.
+func _input(event: InputEvent) -> void:
+	if not visible or _state.is_empty():
+		return
+	if event.is_action_pressed(&"hotbar_prev") or event.is_action_pressed(&"hotbar_next"):
+		# This early handler consumes the event before the autoload's tracker.
+		# Let the shared tracker see it so the arrows show the device in hand.
+		var actions := get_tree().root.get_node_or_null("Actions")
+		if actions != null:
+			actions._input(event)
+	if event.is_action_pressed(&"hotbar_prev"):
+		turn_page(-1)
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed(&"hotbar_next"):
+		turn_page(1)
+		get_viewport().set_input_as_handled()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -105,55 +160,68 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	if _state.is_empty() or not visible:
 		return
-	# **Rebuilt when the numbers move, not every frame.** A signature of what
-	# is actually on screen, so picking up wood while this is open updates it
-	# and standing still costs nothing.
 	var signature := _signature()
 	if signature != _built_for:
 		_built_for = signature
+		_pages = pages_for(Inventory.groups(_state))
+		_page = clampi(_page, 0, maxi(0, _pages.size() - 1))
 		_build()
 
 
 func _signature() -> String:
-	var parts: Array = [str(I18n.revision())]
+	var parts: Array = [str(I18n.revision()), _binding(&"hotbar_prev"),
+		_binding(&"hotbar_next")]
 	for entry in Inventory.rows(_state):
-		var r: Dictionary = entry
-		parts.append("%s=%d" % [r["id"], r["held"]])
+		parts.append("%s=%d" % [entry["id"], entry["held"]])
 	return ",".join(parts)
 
 
-func _build() -> void:
-	(find_child("InventoryTitle",true,false) as Label).text = I18n.t(&"INV_TITLE")
-	for child in _rows.get_children():
-		# Out of the tree before it is freed: `queue_free()` is deferred, and
-		# a container that lays out the old rows and the new ones for a frame
-		# puts every row somewhere it is not drawn. Found in build mode in
-		# task 0032.
-		_rows.remove_child(child)
+func _clear(container: Container) -> void:
+	for child in container.get_children():
+		container.remove_child(child)
 		child.queue_free()
 
-	var columns: Array[VBoxContainer] = []
-	var lengths: Array[int] = [0, 0]
-	for i in 2:
-		var list := VBoxContainer.new()
-		list.custom_minimum_size.x = 194
-		_rows.add_child(list)
-		columns.append(list)
-	for entry in Inventory.groups(_state):
-		var group: Dictionary = entry
-		var rows: Array = group["rows"]
-		if rows.is_empty():
-			continue
-		var slot := 0 if lengths[0] <= lengths[1] else 1
-		var list: VBoxContainer = columns[slot]
-		lengths[slot] += rows.size() + 1
-		list.add_child(_line("group_%s" % group["name"],
-			"- %s" % str(group["name"]).to_upper(), UiKit.WARM))
-		for line in rows:
-			list.add_child(_row(line as Dictionary))
 
-	var worth := Inventory.worth(_state)
-	_total.text = I18n.f(&"INV_WORTH", [worth])
+func _build() -> void:
+	(find_child("InventoryTitle", true, false) as Label).text = I18n.t(&"INV_TITLE")
+	_clear(_rows)
+	_clear(_tabs)
+	var seen: Array = []
+	for page in _pages:
+		var id := StringName(page["name"])
+		if id in seen:
+			continue
+		seen.append(id)
+		var tab := _button("inv_tab_%s" % id, Names.group_of(id),
+			func() -> void: select_group(id))
+		tab.theme_type_variation = UiKit.TAB
+		tab.toggle_mode = true
+		tab.button_pressed = not _pages.is_empty() and _pages[_page]["name"] == id
+		tab.custom_minimum_size = Vector2(112, 18)
+		_tabs.add_child(tab)
+	if not _pages.is_empty():
+		var page: Dictionary = _pages[_page]
+		_heading.text = I18n.f(&"INV_PAGE", [Names.group_of(page["name"]),
+			page["part"] + 1, page["count"]])
+		for row in page["rows"]:
+			_rows.add_child(_row(row))
+	_previous.text = I18n.f(&"INV_PREVIOUS", [_binding(&"hotbar_prev")])
+	_next.text = I18n.f(&"INV_NEXT", [_binding(&"hotbar_next")])
+	_previous.custom_minimum_size = Vector2(150, 16)
+	_next.custom_minimum_size = Vector2(150, 16)
+	_previous.disabled = _pages.size() < 2
+	_next.disabled = _pages.size() < 2
+	_total.text = I18n.f(&"INV_WORTH", [Inventory.worth(_state)])
+
+
+func _button(node_name: String, text: String, action: Callable) -> Button:
+	var button := Button.new()
+	button.name = node_name
+	button.text = text
+	button.theme_type_variation = UiKit.ROW
+	button.focus_mode = Control.FOCUS_NONE
+	button.pressed.connect(action)
+	return button
 
 
 ## One resource: what it is, how much, and what it fetches each.
@@ -162,7 +230,7 @@ func _row(line: Dictionary) -> Control:
 	var row := HBoxContainer.new()
 	row.name = "inv_%s" % line["id"]
 	Tooltip.describes(row, StringName("resource:%s" % line["id"]))
-	row.custom_minimum_size = Vector2(190, ROW_HEIGHT)
+	row.custom_minimum_size = Vector2(300, ROW_HEIGHT)
 	var icon := TextureRect.new()
 	icon.name = "inv_icon_%s" % line["id"]
 	icon.texture = UiKit.icon(StringName(line["id"]),true)
@@ -177,7 +245,7 @@ func _row(line: Dictionary) -> Control:
 	var name_label := Label.new()
 	name_label.name = "inv_name_%s" % line["id"]
 	name_label.text = "  " + Names.of(StringName(line["id"]))
-	name_label.custom_minimum_size = Vector2(104, 0)
+	name_label.custom_minimum_size = Vector2(164, 0)
 	name_label.theme_type_variation = UiKit.DIM if held > 0 \
 		else UiKit.FAINT
 	row.add_child(name_label)
@@ -196,7 +264,7 @@ func _row(line: Dictionary) -> Control:
 	# **Blank rather than zero** for the things that cannot be sold. Money has
 	# no price and energy is a rate; "$0" would read as worthless, which is a
 	# different thing from "not for sale".
-	price_label.text = "  $%d ea" % int(line["price"]) \
+	price_label.text = "  " + I18n.f(&"INV_PRICE", [int(line["price"])]) \
 		if bool(line["sellable"]) else "   -"
 	price_label.theme_type_variation = UiKit.DIM if held > 0 \
 		else UiKit.FAINT
@@ -210,6 +278,11 @@ func _line(node_name: String, text: String,
 	var label := Label.new()
 	label.name = node_name
 	label.text = text
-	label.custom_minimum_size = Vector2(190, ROW_HEIGHT)
+	label.custom_minimum_size = Vector2(300, 12)
 	label.theme_type_variation = role
 	return label
+
+
+func _binding(action: StringName) -> String:
+	var actions := get_tree().root.get_node_or_null("Actions")
+	return str(actions.text_of(action)) if actions != null else ""

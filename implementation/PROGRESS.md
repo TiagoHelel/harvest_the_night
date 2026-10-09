@@ -16888,3 +16888,72 @@ determinism_sim_hash.txt,determinism_data_hash.txt},
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/{0168-crop-data,0170-crop-seasons}.md,
 implementation/shots/0168/, docs/devlog/{index,index.pt_BR}.md
 (refreshed by devlog.py --check).
+
+
+## 0169 - An inventory for many things - done 2026-10-09
+
+What changed: the ledger now shows one category at a time, with translated
+vertical tabs and bounded pages. Materials, crops, seeds, fish, animal goods,
+artisan goods, ammunition, night leftovers and the farm follow the 1.0 plan;
+empty categories have no tab. The twelve crops take two pages, and all 24
+current resources appear once across eight pages. ROW_HEIGHT is 16 pixels and
+ROW_SPACE is 160, giving ten rows per page; a seventy-row fixture retains all
+items in seven slices without increasing the frame.
+
+Navigation reuses InputActions' hotbar_prev / hotbar_next: Q/E on the keyboard,
+LB/RB on a pad, with the saved bindings shown on the arrows. These actions turn
+inventory pages while the ledger is open and select defences when it is closed.
+Mouse arrows visit every page; a category tab opens its first page. Paging is
+view state only, wraps at either end, and leaves the simulation untouched. The
+early page handler also forwards the event to Actions' device tracker so the
+arrow labels follow the device in hand. The clock continues behind the ledger.
+
+The HUD keeps two rows of three: wood, stone, iron; food, money, tech (the plan's
+essence). Materials pay for defences, food repairs them, money buys seeds and
+defences, and essence funds lasting upgrades. Oil and wheat remain in their
+inventory categories. The existing purse stays in place; its refresh cache is
+separate from the resource-grid cache so both money displays update together.
+
+GameData.validate now rejects an ungrouped resource by name, including an entry
+in GROUP_OTHER, and rejects a resource without SELL_PRICE, except money, energy
+and tech. Headless checks require every resource's literal Names.KEYS / ITEM_*
+entry in English and Portuguese. Category names have a separate literal key
+table. UiKit's resource icon lookup falls back through the placeholder road to
+existing approved wood art if the item's own icon has not arrived; the missing
+art diagnostic still reports missing dedicated icons. No art PNG was generated,
+drawn or edited. The later fish-species prompt now names the fish group rather
+than the retired larder group.
+
+Verify: python tools/verify.py --accept: 60 PASS, 0 SKIP, 0 FAIL in 592 seconds
+(the known total OVER BUDGET is informational). 168 scripts parsed;
+16633 headless / 1125 headless_v1 asserts; 1167 input / 371 input_v1 checks;
+3572 UI showcase checks; Windows and Web exports PASS. Performance: night tick
+3396us / 8333us, path rebuild 8632us / 33333us. 525 translation keys fit both
+languages. The final adjusted UI/input scripts also passed check-only.
+SIM hash 2176208283 unchanged. DATA hash 887578929 -> 3933123229 deliberately:
+the inventory category names, membership and order changed in RESOURCE_GROUPS.
+No balance lever, save version or run rule changed.
+
+Looked at: all thirteen final FHD captures were opened individually at full
+1920x1080, after the draft review caught quantity/price touching and missing
+page-key labels. The final Portuguese pages have separated amounts and prices,
+a highlighted category and Q/E arrows; the ten-crop page, both crop pages and
+all other categories fit the frame. Farmer and world scale remain unchanged.
+Kept: implementation/shots/0169/inventory_full_{materials,crops,fish,
+animal_goods,artisan_goods,ammunition,farm}_*-pt_BR.png (eight pages),
+noon-pt_BR.png, dusk-pt_BR.png, wave-pt_BR.png, result-pt_BR.png, tech-pt_BR.png.
+
+Notes: all 1716 paths dirty at claim belong to the owner or art pipeline and
+stay outside this commit, including the already edited A015-A017 requests.
+No protected path was edited by this task. The open owner question about the
+RUN key remains open. Never pushed. Backlog: 296 tasks, 156 done, 140 todo,
+0 doing, 0 blocked; 56 todo wait for Codex art.
+
+Files: src/core/{game_data,inventory}.gd,
+src/ui/{day_hud,inventory_panel,names,ui_kit}.gd,
+src/tools/{headless_check,headless_v1,input_check,input_v1,shot,ui_art_showcase}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/{0169-inventory,0179-fish-species}.md,
+implementation/shots/0169/, docs/devlog/{index,index.pt_BR}.md
+(refreshed by devlog.py --check).

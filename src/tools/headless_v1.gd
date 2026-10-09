@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 37
+const GROUPS := 38
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -106,6 +106,7 @@ func _run() -> void:
 	_task_0166_long_day()
 	_task_0167_till_grass()
 	_task_0168_crops()
+	_task_0169_inventory()
 
 
 func _finish() -> void:
@@ -3458,4 +3459,63 @@ func _task_0168_crops() -> void:
 				"%s stage %d resolves to approved existing art" % [id, stage])
 	view.free()
 	I18n.use(language)
+	_completed += 1
+
+
+## 0169 - every tangible resource is priced, grouped, named and translated.
+func _task_0169_inventory() -> void:
+	var resources: Array = GameData.RESOURCES.duplicate()
+	resources.append(&"unpriced_probe")
+	var errors := GameData.check_resource_prices(resources, GameData.SELL_PRICE)
+	expect(str(errors).contains("unpriced_probe") and str(errors).contains("sale price"),
+		"an unpriced resource is rejected by name")
+	resources = GameData.RESOURCES.duplicate()
+	resources.append(&"ungrouped_probe")
+	errors = GameData.check_groups(GameData.RESOURCE_GROUPS, resources)
+	expect(str(errors).contains("ungrouped_probe") and str(errors).contains("inventory group"),
+		"an ungrouped resource is rejected by name")
+	var language := I18n.locale()
+	var state := State.create(1690)
+	for id in GameData.RESOURCES:
+		expect(id in [GameData.MONEY, GameData.ENERGY, GameData.TECH] or GameData.SELL_PRICE.has(id),
+			"%s declares a sale price or the explicit currency exception" % id)
+		var matches := 0
+		for group in GameData.RESOURCE_GROUPS:
+			if id in group["members"] and group["name"] != GameData.GROUP_OTHER:
+				matches += 1
+		expect(matches == 1, "%s belongs to one real category" % id)
+		expect(Names.KEYS.has(id) and str(Names.KEYS.get(id, &"")).begins_with("ITEM_"),
+			"%s declares an ITEM translation key" % id)
+		for locale in ["en", "pt_BR"]:
+			I18n.use(locale)
+			expect(Names.of(id) != str(Names.KEYS.get(id, &"")) and not Names.of(id).is_empty(),
+				"%s has its ITEM row in %s" % [id, locale])
+		expect(UiKit.icon(id, true) != null, "%s has a nonblank compact icon" % id)
+	for group in GameData.RESOURCE_GROUPS:
+		expect(Names.GROUP_KEYS.has(group["name"]), "every declared category has a literal name key")
+		for locale in ["en", "pt_BR"]:
+			I18n.use(locale)
+			expect(Names.group_of(group["name"]) != str(Names.GROUP_KEYS.get(group["name"], &"")),
+				"every category is translated in %s" % locale)
+	I18n.use(language)
+	expect(UiKit.icon(&"not_drawn_yet", true) == UiKit.icon(GameData.WOOD, true),
+		"an undrawn item's icon resolves to the existing art stand-in")
+	var before := State.hash_of(state)
+	var groups := Inventory.groups(state)
+	for group in groups:
+		expect(not group["rows"].is_empty() and group["name"] != GameData.GROUP_OTHER,
+			"only populated, declared categories appear")
+	var many: Array = []
+	for i in 70:
+		many.append({"id": StringName("probe_%d" % i), "held": 999, "price": 1, "sellable": true})
+	var pages := InventoryPanel.pages_for([{"name": &"materials", "rows": many}])
+	var count := 0
+	for page in pages:
+		count += page["rows"].size()
+		expect(page["rows"].size() <= InventoryPanel.ROWS_PER_PAGE,
+			"seventy items never exceed the height-derived row limit")
+	expect(count == 70, "bounded pages retain all seventy rows")
+	expect(State.hash_of(state) == before, "grouping and paging do not write state")
+	expect(DayHud.SHOWN == [[GameData.WOOD, GameData.STONE, GameData.IRON],
+		[GameData.FOOD, GameData.MONEY, GameData.TECH]], "six HUD numbers prioritize food, money and essence")
 	_completed += 1

@@ -1,7 +1,7 @@
 class_name Inventory
 extends RefCounted
 
-## Everything you own, grouped the way the reference sheet groups it.
+## Everything you own, in the inventory categories of the 1.0 plan.
 ##
 ## **This file holds nothing.** Every function here is a question about
 ## `state["resources"]` answered on the spot - there is no inventory in the
@@ -30,11 +30,8 @@ static func row(state: Dictionary, id: StringName) -> Dictionary:
 
 ## Every group, in order, each with its rows.
 ##
-## **Nothing is listed twice and nothing is left out.** The groups in
-## `GameData.RESOURCE_GROUPS` name what they want; whatever is left over falls
-## into the last group rather than off the end, so a resource added to
-## `RESOURCES` and to no group still appears - which is the done-when of task
-## 0036 and the reason this is built rather than written down.
+## Nothing is listed twice; empty categories are omitted. GROUP_OTHER only
+## exposes invalid tables during development: GameData.validate refuses them.
 static func groups(state: Dictionary) -> Array:
 	var out: Array = []
 	var placed: Dictionary = {}
@@ -49,7 +46,8 @@ static func groups(state: Dictionary) -> Array:
 				continue        # named in two groups; the first one wins
 			placed[id] = true
 			rows.append(row(state, id))
-		out.append({"name": StringName(group["name"]), "rows": rows})
+		if not rows.is_empty():
+			out.append({"name": StringName(group["name"]), "rows": rows})
 
 	# The strays, in the order `RESOURCES` lists them.
 	var rest: Array = []

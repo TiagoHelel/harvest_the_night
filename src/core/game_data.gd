@@ -920,28 +920,21 @@ const LIVESTOCK: Dictionary = {
 	},
 }
 
-## How the inventory panel groups things, in the order it draws them.
-##
-## **Off the reference sheet.** `docs/reference-sheet.png` lays its resource
-## panel out in two rows of six - wood, stone, iron, food, fish, oil on the
-## top and wheat, corn, meat, gunpowder, money, energy underneath - which is
-## not alphabetical and not arbitrary: it is what you gather, then what you
-## grow and what you make of it. These groups are that, named, with the two
-## resources the sheet does not show (carrot, incendiary) sitting with their
-## own kind.
-##
-## **A resource in no group still appears.** `Inventory.groups()` sweeps
-## whatever is left into `GROUP_OTHER` rather than dropping it, so adding one
-## to `RESOURCES` and forgetting this table is a cosmetic mistake and not an
-## invisible resource. That is the done-when of task 0036.
+## The plan's inventory categories, including categories filled by later tasks.
+## Empty categories have no tab. Every shipped resource belongs to one category;
+## GROUP_OTHER remains a diagnostic fallback for an invalid table, never content.
 const GROUP_OTHER := &"other"
 
 const RESOURCE_GROUPS: Array = [
 	{"name": &"materials", "members": [WOOD, STONE, IRON]},
-	{"name": &"larder", "members": [FOOD, FISH, MEAT]},
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
-	{"name": &"workshop", "members": [OIL, GUNPOWDER, INCENDIARY]},
-	{"name": &"the farm", "members": [MONEY, ENERGY, TECH]},
+	{"name": &"seeds", "members": []},
+	{"name": &"fish", "members": [FISH]},
+	{"name": &"animal_goods", "members": [MEAT]},
+	{"name": &"artisan_goods", "members": [FOOD, OIL]},
+	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
+	{"name": &"night_leftovers", "members": []},
+	{"name": &"farm", "members": [MONEY, ENERGY, TECH]},
 ]
 
 
@@ -2006,6 +1999,7 @@ static func validate() -> Array:
 	errors.append_array(check_livestock(LIVESTOCK, FARM_MAP))
 	errors.append_array(check_ammo(DEFENCES, RECIPES))
 	errors.append_array(check_groups(RESOURCE_GROUPS, RESOURCES))
+	errors.append_array(check_resource_prices(RESOURCES, SELL_PRICE))
 	errors.append_array(check_stall(DAILY_STOCK, SELL_PRICE, BUY_MARKUP))
 	errors.append_array(check_tutorial(TUTORIAL))
 	errors.append_array(check_pathing(TERRAIN_COST, DEFENCES, BUILDINGS))
@@ -2783,7 +2777,7 @@ static func check_ammo(defences: Dictionary, recipes: Dictionary) -> Array:
 
 
 ## The inventory grouping. Nothing named twice, nothing named that is not a
-## resource - a stray in no group is fine and lands in "other".
+## resource. Missing membership is a named error, including the old catch-all.
 static func check_groups(grouped: Array, resources: Array) -> Array:
 	var errors: Array = []
 	var seen: Dictionary = {}
@@ -2797,6 +2791,18 @@ static func check_groups(grouped: Array, resources: Array) -> Array:
 				errors.append("'%s' is in two groups: '%s' and '%s'"
 					% [id, seen[id], group["name"]])
 			seen[id] = group["name"]
+	for id in resources:
+		if not seen.has(id) or seen[id] == GROUP_OTHER:
+			errors.append("resource '%s' has no inventory group" % id)
+	return errors
+
+
+## Every tangible resource must declare what it sells for.
+static func check_resource_prices(resources: Array, prices: Dictionary) -> Array:
+	var errors: Array = []
+	for id in resources:
+		if id not in [MONEY, ENERGY, TECH] and not prices.has(id):
+			errors.append("resource '%s' has no sale price" % id)
 	return errors
 
 

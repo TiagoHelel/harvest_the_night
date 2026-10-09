@@ -66,7 +66,8 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
-	["inventory_crops", "the 24 resources in the temporary two-column ledger", "InventoryPanel"],
+	["inventory_crops", "the crop category in the ledger", "InventoryPanel"],
+	["inventory_full", "every item held, every inventory page", "InventoryPanel"],
 	["twelve_crops", "twelve crops at all four stages", ""],
 	["seed_page_one", "first six seeds in the HUD", ""],
 	["seed_page_two", "last six seeds in the HUD", ""],
@@ -663,6 +664,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 
 	match name:
 		"inventory_crops": _set_inventory_crops(state)
+		"inventory_full": _set_inventory_full(state)
 		"twelve_crops": _set_twelve_crops(state)
 		"seed_page_one": _set_seed_page_one(state)
 		"seed_page_two": _set_seed_page_two(state)
@@ -780,6 +782,21 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		view.look_at_cell(Vector2i(51, 22))
 	await RenderingServer.frame_post_draw
 
+	if name == "inventory_full":
+		var inventory := main.get_node("%InventoryPanel") as InventoryPanel
+		inventory.select_group(&"materials")
+		for page in inventory.page_count():
+			await process_frame
+			await process_frame
+			var group: Dictionary = inventory._pages[inventory.current_page()]
+			await _shoot("inventory_full_%s_%d" % [group["name"], group["part"] + 1], folder)
+			inventory.turn_page(1)
+		print("  inventory_full photographed %d pages" % inventory.page_count())
+		return
+	if name == "inventory_crops":
+		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
+		await process_frame
+		await RenderingServer.frame_post_draw
 	var image := root.get_texture().get_image()
 	if image == null:
 		print("  %-8s no image came back - is this running headless?" % name)
@@ -1700,3 +1717,10 @@ func _set_shop_seeds_two(state: Dictionary) -> void:
 
 func _set_inventory_crops(state: Dictionary) -> void:
 	_set_seed_page_one(state)
+
+
+## 0169 - the entire ledger is held; the shutter visits every bounded page.
+func _set_inventory_full(state: Dictionary) -> void:
+	_set_noon(state)
+	for id in GameData.RESOURCES:
+		Resources.add(state, StringName(id), 999)

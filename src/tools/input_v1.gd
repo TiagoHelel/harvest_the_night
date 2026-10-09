@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 24
+const V1_CASES := 25
 
 
 func _process(delta: float) -> bool:
@@ -74,6 +74,7 @@ func _run() -> void:
 	await _case_0160_ending()
 	await _case_0167_till_grass()
 	await _case_0168_seed_pages()
+	await _case_0169_inventory()
 	_finish()
 
 
@@ -2046,6 +2047,75 @@ func _case_0168_seed_pages() -> void:
 	expect((require_control("seed_%s" % ids[11]) as Label).visible,
 		"the HUD follows a seed chosen at the stall")
 	driver.set_process(true)
+	I18n.use(language)
+	await close_scene()
+	_completed += 1
+
+
+## 0169 - real keys, clicks and synthetic bumpers visit the same ledger pages.
+func _case_0169_inventory() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver := require_control("SimDriver") as SimDriver
+	var panel := require_control("InventoryPanel") as InventoryPanel
+	if driver == null or panel == null:
+		await close_scene()
+		_completed += 1
+		return
+	var language := I18n.locale()
+	I18n.use("pt_BR")
+	driver.set_process(false)
+	var before := State.hash_of(driver.state)
+	await tap_key(KEY_I)
+	await frames(2)
+	expect(panel.is_open(), "the ledger opens through its bound key")
+	expect((require_control("InventoryNext") as Button).text.contains("E"),
+		"the page arrow names its current keyboard binding")
+	var count := panel.page_count()
+	var seen: Array = []
+	for page in count:
+		expect(panel.current_page() == page, "keyboard visits page %d" % page)
+		var frame := require_control("InventoryFrame") as Control
+		expect(Rect2(Vector2.ZERO, Vector2(480,270)).encloses(frame.get_global_rect()),
+			"the inventory frame fits the native viewport")
+		for line in panel.page_rows():
+			var id := StringName(line["id"])
+			seen.append(id)
+			var row := require_control("inv_%s" % id) as Control
+			var label := require_control("inv_name_%s" % id) as Label
+			expect(row != null and frame.get_global_rect().encloses(row.get_global_rect()),
+				"the whole %s row fits its frame" % id)
+			expect(label != null and label.text.contains(Names.of(id)), "the page names %s in Portuguese" % id)
+		await tap_key(KEY_E)
+		await frames(2)
+	expect(seen.size() == GameData.RESOURCES.size(), "the keyboard visits every resource exactly once")
+	for page in count:
+		expect(panel.current_page() == page, "mouse visits page %d" % page)
+		await click_control("InventoryNext")
+		await frames(2)
+	for group in Inventory.groups(driver.state):
+		await click_control("inv_tab_%s" % group["name"])
+		await frames(2)
+		expect(panel._pages[panel.current_page()]["name"] == group["name"], "a category tab opens its first page")
+	panel.select_group(&"materials")
+	for page in count:
+		expect(panel.current_page() == page, "pad visits page %d" % page)
+		await _pad_tap(JOY_BUTTON_RIGHT_SHOULDER)
+		await frames(2)
+	expect((require_control("InventoryNext") as Button).text.contains("RB"),
+		"the page arrow follows the pad binding after a bumper event")
+	await _pad_tap(JOY_BUTTON_LEFT_SHOULDER)
+	expect(panel.current_page() == count - 1, "the previous bumper wraps to the last page")
+	await tap_key(KEY_Q)
+	expect(panel.current_page() == count - 2, "the previous key moves back one page")
+	expect(State.hash_of(driver.state) == before, "all navigation leaves the simulation unchanged")
+	await tap_key(KEY_I)
+	expect(not panel.is_open(), "the inventory closes through its bound key")
+	Resources.add(driver.state, GameData.MONEY, 123)
+	await frames(2)
+	var held := Resources.amount(driver.state, GameData.MONEY)
+	expect((require_control("res_money") as Label).text.contains(str(held))
+		and (require_control("Money") as Label).text.contains(str(held)),
+		"both HUD money displays follow the ledger after a gain")
 	I18n.use(language)
 	await close_scene()
 	_completed += 1

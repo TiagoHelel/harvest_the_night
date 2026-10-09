@@ -2398,14 +2398,24 @@ func _case_0036_inventory() -> void:
 	expect(panel.is_open(), "I opens the inventory")
 	await frames(2)
 
-	# **Every resource is on it, once**, with a row built from the table.
-	for id in GameData.RESOURCES:
-		var row: Control = require_control("inv_%s" % id)
-		expect(row != null, "%s has a row" % id)
-		var held: Label = require_control("inv_held_%s" % id)
-		if held != null:
-			expect(held.text == str(Resources.amount(state, id)),
-				"saying how much %s there is" % id, held.text)
+	# Every resource appears once across bounded pages, never all at once.
+	var seen: Array = []
+	for page in panel.page_count():
+		for line in panel.page_rows():
+			var id := StringName(line["id"])
+			var row: Control = require_control("inv_%s" % id)
+			expect(row != null and row.is_visible_in_tree() and id not in seen,
+				"%s has exactly one visible page row" % id)
+			seen.append(id)
+			var held := require_control("inv_held_%s" % id) as Label
+			if held != null:
+				expect(held.text == str(Resources.amount(state, id)),
+					"saying how much %s there is" % id, held.text)
+		await tap_key(KEY_E)
+		await frames(2)
+	expect(seen.size() == GameData.RESOURCES.size(), "every resource has a page")
+	panel.select_group(&"materials")
+	await frames(2)
 
 	# **The numbers follow the ledger while it is open.**
 	var wood: Label = require_control("inv_held_%s" % GameData.WOOD)
