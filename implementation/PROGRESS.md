@@ -17401,3 +17401,118 @@ assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
 implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/0176-copper-coal-gold.md, implementation/shots/0176/,
 docs/devlog/{index,index.pt_BR}.md (devlog.py --check).
+
+## 2026-10-09 — Follow-up: review of Codex's 0160-0176
+
+Codex ran the loop for 0160 and 0165-0176: thirteen tasks. 0161-0164 wait
+for art. The review covered three things:
+- every commit, read against its prompt's "Done when" and the house rules;
+- the full verify on Codex's head: 59 passed, and perf failed alone, then
+  passed run by itself on a quiet machine;
+- the shots, opened.
+
+All thirteen are done, and both hash chains are continuous and journaled.
+These were wrong, and are fixed here.
+
+**0172 - SPACE lost the bed underfoot.** This was the serious one.
+- To let REMOVE reach a faced crop, `Player.target` pointed at any faced crop.
+- So a farmer standing on an empty bed, facing a watered crop, pressed SPACE
+  and nothing happened.
+- Fix: `Player.target` is reverted, and REMOVE asks its own
+  `Player.clear_target`, which reaches the same cells it reached before.
+
+**0172 - REMOVE could sell a building.**
+- A REMOVE outside build mode that cleared nothing stayed in the intent.
+- It then fell through to `Building.tick`, which by day sells whatever stands
+  on the last cell the build cursor pointed at.
+- Fix: it is now spent either way.
+
+**0172 with 0171 - the season's harvest estimate counted 14 mornings.**
+- A crop sown on a season's first day is credited on the mornings of days 2
+  to 14. The next season's first morning withers it before its credit.
+- `crop_harvests` now counts those 13 mornings. In the seed list's
+  "/season" column:
+  - pepper goes from 4 harvests to 3;
+  - grape from 3 to 2 ($123 to $79);
+  - sunflower from 2 to 1.
+- A new check plays a watered season for every crop and compares the
+  harvests with the estimate. `check_crops` still finds no dominant crop.
+
+**0173 - the workshop's upgrade rows chose the bench's recipe.**
+- Focusing or clicking one wrote `selected_recipe`, so SPACE at the bench then
+  ordered that upgrade. Once ordered it was refused, so SPACE did nothing at
+  the bench.
+- The rows now only queue. Like the inventory's buttons, they take no
+  keyboard focus: a clicked row kept the focus and took the next SPACE or
+  Enter as its own press too, which queued twice.
+
+**0173 - its keyboard path was not real.**
+- `_case_0173_upgrade` focused the row from code before pressing Enter.
+  Nothing a player can press reaches that list.
+- Both orders in the case are now the mouse's. The keyboard and pad path is a
+  question for the owner (below).
+
+**0167 - a green seam between the starter beds and hoed lawn.**
+- The beds' terrain edges are laid once, and they drew grass toward a lawn
+  the hoe had turned.
+- `_edge_tile` and `_corner_mask` now take the turned cells.
+- `_relay_edges_for_turned` lays the edges again around a plot that comes or
+  goes.
+- The terrain itself is still never laid again: `terrain_draws` is unchanged,
+  and that is asserted.
+
+**0160 - the year's ending** read "57 days lived, 56 nights won", because the
+date had moved at dawn. It also listed defences without plurals ("4 besta
+automática, 13 cerca").
+- It now reads 56 days.
+- `RES_COUNTED` is "%s x%d", like the shop's rows.
+
+**Shots:**
+- Every winter scenario since 0170 divided by zero in `_a_sown_field`,
+  because winter has no seeds. Winter beds are now turned and left bare.
+- `till_grass` sowed wheat, an autumn crop since 0170, and its packets moved
+  the fixture to Autumn 1. It now sows carrot and potato and is back on
+  Spring 2.
+
+**Strings:** `WHY_GATHER_SEASON` in pt_BR now reads "Disponível a partir de
+%s" ("available from"). It used to say "desde" ("since").
+
+**Not changed - questions for the owner:**
+- **Generator fuel at night (0166).** The fuel period is now `DAY_TICKS / 4`,
+  which is 140 s at night too, where it used to be 60 s. Night power costs
+  half the oil.
+  - The journal calls this intentional, without saying why.
+  - `_task_0033_power` sets the countdown back to 60 s, so the test never sees
+    the change.
+- **REMOVE on crops (0172).** A right click clears any crop, ripe ones
+  included, with no payout and no confirmation.
+- **Keyboard and pad at the stations (0173).** They cannot choose a station's
+  recipe or order an upgrade. The station panels are mouse-only, and SPACE
+  crafts the station's default recipe.
+- **Credits (0160).** They say "Art from approved Codex packs".
+- **Money in the HUD (0169).** It shows twice, as "$ 674" and "money 674".
+
+**Smaller things, noted and left:**
+- the seed-packet stand-ins share one tint;
+- `REACTION_NEAR` is a dead lever since 0165;
+- the winter seed strip keeps its column header above the message;
+- `UNGATHERED_NODES`' comment still calls those nodes inert;
+- 0166 cut the 0002 and 0005 replay checks from 10,000 and 20,000 ticks to
+  600;
+- `title_screen.gd` writes ticks into its backdrop's throwaway state.
+
+Verify: 60 passed, 0 failed in 639s (the known OVER BUDGET); headless_check
+16887, headless_v1 1570 (+10), input_check 1139, input_v1 458 (+11). Hashes
+unchanged: sim 265134837, data 1698799174 - nothing here touches a rule the
+scenario reaches.
+
+Looked at, at full size:
+- `implementation/shots/review-0176/till_grass.png`, zoomed on the beds:
+  there is no seam, and the grass edge still stands where lawn is lawn;
+- `year_end.png`: "56 days lived, 56 nights won" and "fence x13";
+- `tool_upgrades.png`.
+
+Files: src/core/{player,sim,game_data}.gd,
+src/ui/{main,result_screen,workshop_panel,world_view}.gd,
+src/tools/{headless_v1,input_v1,shot}.gd, assets/locale/strings.csv,
+implementation/shots/review-0176/, implementation/PROGRESS.md

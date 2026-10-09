@@ -595,7 +595,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"remove") and _router.here() == _router.RUN and not _quiet \
 			and not Building.is_active(_driver.state) and not House.inside(_driver.state) \
 			and StringName(_driver.state["open_panel"]) == &"" \
-			and Farming.can_clear(_driver.state, Player.target(_driver.state)):
+			and Player.clear_target(_driver.state) != Vector2i(-1, -1):
 		_driver.state["intent"]["build_sell"] = true
 		get_viewport().set_input_as_handled()
 		return

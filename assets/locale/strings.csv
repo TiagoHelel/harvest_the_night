@@ -310,7 +310,7 @@ RES_BUILD_WON,0,THE BUILD THAT WON,O QUE SEGUROU A NOITE
 RES_CALM_NIGHT,0,A CALM NIGHT - THE HORDE REGROUPED,NOITE CALMA - A HORDA SE REAGRUPOU
 RES_CAME_DOWN,200,%d structure came down,%d estrutura caiu
 RES_CAME_DOWN.other,200,%d structures came down,%d estruturas caíram
-RES_COUNTED,0,%d %s,%d %s
+RES_COUNTED,0,%s x%d,%s x%d
 RES_DEFENDING_WELL,0,  for defending well,  por defender bem
 RES_FULL_MOON,0,FULL MOON BONUS,BÔNUS DE LUA CHEIA
 RES_GAINED,0,+%d %s,+%d %s
@@ -584,5 +584,5 @@ DESC_TOOL_NEXT_MORNING,224,Keep your tool; ready next morning,Use sua ferramenta
 ITEM_COPPER,96,Copper,Cobre
 ITEM_COAL,96,Coal,Carvão
 ITEM_GOLD,96,Gold,Ouro
-WHY_GATHER_SEASON,224,Available from %s,Disponível desde %s
+WHY_GATHER_SEASON,224,Available from %s,Disponível a partir de %s
 DESC_FUEL_FALLBACK,224,Oil first; coal when empty,Óleo primeiro; carvão se acabar

@@ -382,7 +382,10 @@ func _build_the_ending() -> void:
 	var run := Run.summary(_state)
 	_title.text = I18n.t(&"END_TITLE")
 	_title.theme_type_variation = UiKit.GOOD
-	_row(I18n.f(&"RES_RUN_LINE", [int(run["days"]), int(run["nights_won"])]), "", UiKit.GOOD)
+	# **The days behind him, not the day ahead.** The calendar moved on at
+	# dawn, under this screen, so the day count is already tomorrow's: a whole
+	# year read "57 days lived, 56 nights won".
+	_row(I18n.f(&"RES_RUN_LINE", [maxi(int(run["days"]) - 1, 1), int(run["nights_won"])]), "", UiKit.GOOD)
 	_row(I18n.t(&"END_BOSSES"), str(int(run["bosses"])), UiKit.DIM)
 	_row(I18n.t(&"RES_ZOMBIES"), str(int(run["killed"])), UiKit.DIM)
 	_row(I18n.t(&"RES_STRUCTURES_LOST"), str(int(run["structures_lost"])), UiKit.DIM)
@@ -390,7 +393,7 @@ func _build_the_ending() -> void:
 	_row(I18n.t(&"RES_BUILD_WON"), "", UiKit.GOOD)
 	var built: Array = []
 	for id in _sorted(run["build"] as Dictionary):
-		built.append(I18n.f(&"RES_COUNTED", [int((run["build"] as Dictionary)[id]), Names.of(id)]))
+		built.append(I18n.f(&"RES_COUNTED", [Names.of(id), int((run["build"] as Dictionary)[id])]))
 	# The final farm may contain every defence: keep the choices on screen.
 	var scroll := ScrollContainer.new()
 	scroll.name = "EndingBuildScroll"

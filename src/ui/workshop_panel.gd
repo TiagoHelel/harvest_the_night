@@ -79,6 +79,7 @@ func _ready() -> void:
 		button.text = I18n.t(&"WORK_TOOL_TAB" if tool_tab else &"WORK_RECIPE_TAB")
 		button.theme_type_variation = UiKit.ROW
 		button.custom_minimum_size = Vector2(64, 14)
+		button.focus_mode = Control.FOCUS_NONE
 		button.pressed.connect(func() -> void:
 			_tool_tab = tool_tab
 			_built_for = "")
@@ -274,15 +275,15 @@ func _build(cell: Vector2i) -> void:
 			row.disabled = not Crafting.can_queue(_state, cell, id)
 			if _state["tools"]["pending"].get(String(upgrade["tool"]), {}).get("tier", -1) == upgrade["tier"]:
 				row.text += " *"
-			row.focus_entered.connect(func() -> void: Crafting.select_recipe(_state, recipe_id))
 		_style(row)
 		if tools:
 			row.custom_minimum_size.y = 16
 		row.modulate = Color(1, 1, 1) if Crafting.can_queue(_state, cell,
 			recipe_id) else Color(0.5, 0.48, 0.55)
+		# **Queued, not selected.** An upgrade row that also chose the
+		# bench's recipe left SPACE at the bench ordering that upgrade -
+		# which, once ordered, it refused, so SPACE did nothing at all.
 		row.pressed.connect(func() -> void:
-			if tools:
-				Crafting.select_recipe(_state, recipe_id)
 			Crafting.enqueue(_state, cell, recipe_id))
 		_recipes.add_child(row)
 
@@ -290,9 +291,15 @@ func _build(cell: Vector2i) -> void:
 ## The compact row the build palette settled on in task 0032, which is now
 ## the theme's `ROW`: a default `Button` reserves twenty pixels of height and
 ## this screen is 270 tall.
+##
+## **Clicked, never focused** (review of 0173), as the inventory's buttons
+## are. The panel is the mouse's: a row the click left focused took the next
+## SPACE or Enter as its own press as well as the bench's craft, so one key
+## queued twice.
 func _style(row: Button) -> void:
 	row.custom_minimum_size = Vector2(130, ROW_HEIGHT)
 	row.theme_type_variation = UiKit.ROW
+	row.focus_mode = Control.FOCUS_NONE
 
 
 func _line(node_name: String, text: String,

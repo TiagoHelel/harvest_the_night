@@ -2390,12 +2390,18 @@ static func check_crops(crops: Dictionary) -> Array:
 
 
 ## Whole watered harvests in the season estimate shared by the HUD and balance.
+##
+## **Thirteen mornings, not fourteen.** A crop sown on the season's first day
+## is credited on the mornings of days 2 to 14; the next season's first
+## morning withers it before its credit (task 0171), so a seven-day crop
+## ripens once, not twice.
 static func crop_harvests(data: Dictionary) -> int:
+	var mornings := SEASON_DAYS - 1
 	var grown := maxi(int(data["growth_days"]), 1)
 	var regrow := int(data.get("regrow_days", 0))
 	if regrow <= 0:
-		return SEASON_DAYS / grown
-	return 0 if grown > SEASON_DAYS else 1 + (SEASON_DAYS - grown) / regrow
+		return mornings / grown
+	return 0 if grown > mornings else 1 + (mornings - grown) / regrow
 
 
 ## What one plot of a crop offers over a season: money, trips, and the money it

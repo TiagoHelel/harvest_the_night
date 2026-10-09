@@ -149,6 +149,9 @@ var _route_dots: Node2D
 var _plots: Node2D
 var _plot_sprites: Array[Node] = []
 var _plots_signature := 0
+## The lawn cells the hoe had turned when the edges were last laid, by cell
+## index: a bed's grass edge stops at a turned lawn (`_relay_edges_for_turned`).
+var _turned_seen: Dictionary = {}
 
 ## The build ghost: a half-transparent sprite of what would go down, under a
 ## frame that is green when it fits and red when it does not.
@@ -1043,12 +1046,14 @@ func _draw_terrain() -> void:
 		_terrain.set_cell(cell, 0, _base_tile(int(bytes[idx]), cell))
 	if _edges == null:
 		return
+	var turned := _turned_grass()
+	_turned_seen = turned
 	for idx in Grid.CELLS:
 		var cell := Grid.cell(idx)
-		var at := _edge_tile(bytes, cell, int(bytes[idx]))
+		var at := _edge_tile(bytes, cell, int(bytes[idx]), turned)
 		if at.x >= 0:
 			_edges.set_cell(cell, 0, at)
-		var corners := _corner_mask(bytes, cell, int(bytes[idx]))
+		var corners := _corner_mask(bytes, cell, int(bytes[idx]), turned)
 		var start := CORNER_SHORE_START if int(bytes[idx]) == Farm.Terrain.WATER else CORNER_EDGE_START
 		for corner in 4:
 			if corners & (1 << corner):
@@ -1101,8 +1106,12 @@ static func _grass_variant(cell: Vector2i) -> int:
 ## next door. Grass itself draws nothing: it is the background the rest is cut
 ## out of, so softening the patch is the same job as softening the meadow and
 ## half the tiles.
+##
+## `turned` holds the lawn cells the hoe has turned (task 0167), by index:
+## the terrain byte under them is still grass, but no grass creeps in from
+## them, so a starter bed meets the plot beside it without a green seam.
 static func _edge_tile(bytes: PackedByteArray, cell: Vector2i,
-		terrain: int) -> Vector2i:
+		terrain: int, turned: Dictionary = {}) -> Vector2i:
 	if terrain == Farm.Terrain.GRASS:
 		return Vector2i(-1, -1)
 	var row := ROW_SHORE if terrain == Farm.Terrain.WATER else ROW_EDGE
@@ -1114,7 +1123,7 @@ static func _edge_tile(bytes: PackedByteArray, cell: Vector2i,
 		var theirs := int(bytes[Grid.index(at)])
 		var edged := theirs != Farm.Terrain.WATER \
 			if terrain == Farm.Terrain.WATER \
-			else theirs == Farm.Terrain.GRASS
+			else theirs == Farm.Terrain.GRASS and not turned.has(Grid.index(at))
 		if edged:
 			mask |= 1 << bit
 	return Vector2i(-1, -1) if mask == 0 else Vector2i(mask, row)
@@ -1122,10 +1131,11 @@ static func _edge_tile(bytes: PackedByteArray, cell: Vector2i,
 
 ## A diagonal cap fills only an exposed elbow: neither adjoining cardinal
 ## side can already draw an edge. It reads terrain without changing any state.
-static func _corner_mask(bytes: PackedByteArray, cell: Vector2i, terrain: int) -> int:
+static func _corner_mask(bytes: PackedByteArray, cell: Vector2i, terrain: int,
+		turned: Dictionary = {}) -> int:
 	if terrain == Farm.Terrain.GRASS:
 		return 0
-	var at := _edge_tile(bytes, cell, terrain)
+	var at := _edge_tile(bytes, cell, terrain, turned)
 	var cardinal := maxi(0, at.x)
 	var mask := 0
 	for corner in 4:
@@ -1135,7 +1145,8 @@ static func _corner_mask(bytes: PackedByteArray, cell: Vector2i, terrain: int) -
 		if not Grid.in_bounds(diagonal):
 			continue
 		var theirs := int(bytes[Grid.index(diagonal)])
-		var touches := theirs != Farm.Terrain.WATER if terrain == Farm.Terrain.WATER else theirs == Farm.Terrain.GRASS
+		var touches := theirs != Farm.Terrain.WATER if terrain == Farm.Terrain.WATER \
+			else theirs == Farm.Terrain.GRASS and not turned.has(Grid.index(diagonal))
 		if touches:
 			mask |= 1 << corner
 	return mask
@@ -1767,6 +1778,7 @@ func _refresh_plots() -> void:
 	if _state.is_empty() or _plots == null:
 		return
 
+	_relay_edges_for_turned()
 	var plots: Dictionary = _state["plots"]
 	# Cell indices, so these are integers and sort as integers.
 	var keys: Array = plots.keys()
@@ -1803,6 +1815,63 @@ func _refresh_plots() -> void:
 			_withered_sprite(StringName(here["withered"]), cell)
 		elif here.has("trampled"):
 			_trampled_sprite(StringName(here["trampled"]), cell)
+
+
+## The lawn cells the hoe has turned: plots on grass, by cell index.
+func _turned_grass() -> Dictionary:
+	var out := {}
+	if _state.is_empty():
+		return out
+	var bytes: PackedByteArray = _state["terrain"]
+	for idx in (_state["plots"] as Dictionary):
+		if int(bytes[int(idx)]) == Farm.Terrain.GRASS:
+			out[int(idx)] = true
+	return out
+
+
+## **A bed's grass edge follows the hoe** (review of 0167). A starter bed
+## draws grass creeping in from every side that is lawn, and lawn the hoe has
+## turned is lawn no longer: the cells around a plot that came or went get
+## their edge and corners laid again. The terrain's own cells never are, and
+## `terrain_draws()` does not count this.
+func _relay_edges_for_turned() -> void:
+	if _edges == null or _state.is_empty():
+		return
+	var turned := _turned_grass()
+	if turned == _turned_seen:
+		return
+	var changed: Array = []
+	for idx in turned:
+		if not _turned_seen.has(idx):
+			changed.append(idx)
+	for idx in _turned_seen:
+		if not turned.has(idx):
+			changed.append(idx)
+	_turned_seen = turned
+	var bytes: PackedByteArray = _state["terrain"]
+	var done := {}
+	for idx in changed:
+		var middle := Grid.cell(int(idx))
+		for dy in range(-1, 2):
+			for dx in range(-1, 2):
+				var cell := middle + Vector2i(dx, dy)
+				var at := Grid.index(cell)
+				if at < 0 or done.has(at):
+					continue
+				done[at] = true
+				var terrain := int(bytes[at])
+				var edge := _edge_tile(bytes, cell, terrain, turned)
+				if edge.x >= 0:
+					_edges.set_cell(cell, 0, edge)
+				else:
+					_edges.erase_cell(cell)
+				var corners := _corner_mask(bytes, cell, terrain, turned)
+				var start := CORNER_SHORE_START if terrain == Farm.Terrain.WATER else CORNER_EDGE_START
+				for corner in 4:
+					if corners & (1 << corner):
+						_corners[corner].set_cell(cell, 0, Vector2i(start + corner, ROW_BASE))
+					else:
+						_corners[corner].erase_cell(cell)
 
 
 ## Turf overlays use N1/E2/S4/W8 and the terrain's concave corner scheme.

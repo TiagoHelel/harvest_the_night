@@ -133,16 +133,20 @@ static func facing(state: Dictionary) -> int:
 	return int((state["player"] as Dictionary)["facing"])
 
 
-## The cell the player would act on: the one they are facing, or the one they
-## are standing on when what they face is off the farm or nothing to do.
+## The cell SPACE acts on: the one they are facing when it offers a verb, or
+## else the one they are standing on.
 ##
 ## The fallback matters more than it looks: standing on a soil tile and
 ## pressing interact should plant, without having to shuffle until the facing
-## points at the right square.
+## points at the right square. Grass takes the hoe since task 0167, so a faced
+## lawn offers a verb and at the field's edge, facing out, the hoe wins. A
+## faced crop with nothing in it for SPACE - watered already, or dry with an
+## empty can - does not take the press from the bed underfoot: clearing a
+## crop is REMOVE's, and REMOVE asks `clear_target`.
 static func target(state: Dictionary) -> Vector2i:
 	var here := cell(state)
 	var ahead: Vector2i = here + FACING_STEPS[facing(state)]
-	if Grid.in_bounds(ahead) and (Interact.verb_at(state, ahead) != &"" or Farming.can_clear(state, ahead)):
+	if Grid.in_bounds(ahead) and Interact.verb_at(state, ahead) != &"":
 		return ahead
 	var underfoot := Interact.verb_at(state, here)
 	# Bare lawn takes the hoe only in front. Existing plots keep the useful
@@ -151,6 +155,23 @@ static func target(state: Dictionary) -> Vector2i:
 			and Farm.terrain_at(state, here) == Farm.Terrain.GRASS):
 		return here
 	return ahead
+
+
+## The crop REMOVE clears outside build mode (task 0172): the faced one, or
+## else the one SPACE would act on. `(-1, -1)` when neither holds a crop the
+## hoe may take.
+##
+## **Its own question, not `target`'s.** Pointing SPACE's target at any faced
+## crop so that REMOVE could reach it took the press away from the bed
+## underfoot whenever that crop had nothing for SPACE to do.
+static func clear_target(state: Dictionary) -> Vector2i:
+	var ahead: Vector2i = cell(state) + FACING_STEPS[facing(state)]
+	if Farming.can_clear(state, ahead):
+		return ahead
+	var at := target(state)
+	if Farming.can_clear(state, at):
+		return at
+	return Vector2i(-1, -1)
 
 
 static func is_busy(state: Dictionary) -> bool:

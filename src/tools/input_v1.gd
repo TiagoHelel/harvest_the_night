@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 32
+const V1_CASES := 33
 
 
 func _process(delta: float) -> bool:
@@ -82,6 +82,7 @@ func _run() -> void:
 	await _case_0174_area()
 	await _case_0175_swings()
 	await _case_0176_gold()
+	await _case_followup_0176_review()
 	_finish()
 
 
@@ -1933,6 +1934,14 @@ func _case_0160_ending() -> void:
 			"ending names the year and the next year (%s)" % device)
 		expect(_outside_the_frame(result).is_empty(), "the ending fits (%s)" % device,
 			str(_outside_the_frame(result)))
+		# **The days behind him** (review of 0160): a whole year is the
+		# final night's date, not the date dawn has already moved to.
+		var lines: Array = []
+		for node in result.find_children("*", "Label", true, false):
+			lines.append((node as Label).text)
+		var lived := I18n.f(&"RES_RUN_LINE", [Run.final_night(), Phases.nights_won(driver.state)])
+		expect(lines.has(lived), "a whole year reads %d days lived (%s)" % [Run.final_night(), device],
+			str(lines))
 		var wins := int(Save.read_profile()["runs_won"])
 		if device == "pad":
 			fresh.grab_focus()
@@ -2259,11 +2268,12 @@ func _case_0173_upgrade() -> void:
 	await frames(3)
 	await click_control("WorkshopToolsTab")
 	await frames(3)
-	var axe := require_control("make_upgrade_axe_iron") as Button
-	if axe != null:
-		axe.grab_focus()
-		await tap_key(KEY_ENTER)
-	await until(func() -> bool: return state["tools"]["pending"].has("axe"), "a keyboard axe order finishes pending tomorrow")
+	# **The mouse's, both orders** (review of 0173, 2026-10-09). The keyboard
+	# half used to focus the row from code and press Enter on it, but nothing
+	# a player can press reaches this list: the station panels are mouse-only,
+	# and how the keyboard and the pad get in is the owner's call.
+	await click_control("make_upgrade_axe_iron")
+	await until(func() -> bool: return state["tools"]["pending"].has("axe"), "a mouse axe order finishes pending tomorrow")
 	await frames(3)
 	expect(ToolTiers.tier(state, &"axe") == 0 and (require_control("WorkshopToolPending") as Label).visible, "the workshop shows pending while the old axe remains usable")
 	await click_control("make_upgrade_can_iron")
@@ -2417,5 +2427,81 @@ func _case_0176_gold() -> void:
 	await press_key(KEY_SPACE, false)
 	expect(Resources.amount(state, GameData.GOLD) == before + 1, "real gold mining gives its yield exactly once")
 	I18n.use("en")
+	await close_scene()
+	_completed += 1
+
+
+## Follow-up to the review of 0160-0176 (2026-10-09). Ordering an upgrade
+## with the mouse queues it and chooses nothing: SPACE at the bench still
+## makes the bench's own recipe, and a row taking the focus leaves the choice
+## alone. And a starter bed's grass edge stops at the lawn the hoe turns
+## beside it, and comes back when that plot fades - the terrain laid once.
+func _case_followup_0176_review() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView") as WorldView
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	state["held"][GameData.MONEY] = 1000
+	state["held"][GameData.IRON] = 100
+	state["held"][GameData.WOOD] = 100
+	var bench: Vector2i = Building.anchor_of(state, Farm.cells_with(state, &"workshop")[0])
+	var own := Crafting.selected_at(state, &"workshop")
+	_stand_at(state, Farm.cells_with(state, &"workshop")[0] + Vector2i.UP, Player.SOUTH)
+	await frames(3)
+	await click_control("WorkshopToolsTab")
+	await frames(3)
+	await click_control("make_upgrade_axe_iron")
+	await until(func() -> bool: return state["tools"]["pending"].has("axe"),
+		"a mouse order of the iron axe")
+	await frames(2)
+	var clicked := require_control("make_upgrade_can_iron") as Button
+	var frame := require_control("WorkshopFrame") as Control
+	var focused := world.get_viewport().gui_get_focus_owner()
+	expect(Crafting.selected_at(state, &"workshop") == own
+		and clicked != null and clicked.focus_mode == Control.FOCUS_NONE
+		and frame != null and (focused == null or not frame.is_ancestor_of(focused)),
+		"the order changes nothing the bench makes, and leaves no row focused for SPACE to press",
+		"%s, focus on %s" % [Crafting.selected_at(state, &"workshop"), focused])
+	var queued := Crafting.queue_at(state, bench).size()
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return Crafting.queue_at(state, bench).size() == queued + 1,
+		"SPACE at the bench after an upgrade order")
+	var queue := Crafting.queue_at(state, bench)
+	expect(not queue.is_empty() and StringName(queue.back()) == own,
+		"and SPACE queues the bench's own recipe", str(queue))
+
+	# **The bed's edge and the hoe.**
+	var edges := world.get_node("TerrainEdges") as TileMapLayer
+	var bed := Vector2i(-1, -1)
+	var lawn := Vector2i(-1, -1)
+	var bit := -1
+	for at in Farm.cells_of(state, Farm.Terrain.SOIL):
+		for side in WorldView.EDGE_NEIGHBOURS.size():
+			var next: Vector2i = at + WorldView.EDGE_NEIGHBOURS[side]
+			if Grid.in_bounds(next) and Farm.terrain_at(state, next) == Farm.Terrain.GRASS \
+					and Farm.is_empty(state, next) and not Farming.is_tilled(state, next):
+				bed = at
+				lawn = next
+				bit = side
+				break
+		if bit >= 0:
+			break
+	var laid := world.terrain_draws()
+	expect(bit >= 0 and maxi(edges.get_cell_atlas_coords(bed).x, 0) & (1 << bit),
+		"fixture: a starter bed draws grass toward the lawn beside it", "%s %s" % [bed, lawn])
+	Farming.act(state, lawn)
+	await frames(3)
+	expect(Farming.is_tilled(state, lawn) and not (maxi(edges.get_cell_atlas_coords(bed).x, 0) & (1 << bit)),
+		"hoed, that lawn takes the bed's grass edge with it",
+		str(edges.get_cell_atlas_coords(bed)))
+	state["plots"].erase(Grid.index(lawn))
+	await frames(3)
+	expect(maxi(edges.get_cell_atlas_coords(bed).x, 0) & (1 << bit) and world.terrain_draws() == laid,
+		"and faded back to lawn it gets it back, the terrain never laid again",
+		"%s, %d against %d" % [edges.get_cell_atlas_coords(bed), world.terrain_draws(), laid])
 	await close_scene()
 	_completed += 1

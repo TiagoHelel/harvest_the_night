@@ -1104,11 +1104,15 @@ func _a_sown_field(state: Dictionary) -> void:
 	for cell in Farming.field_cells(state):
 		if Interact.verb_at(state, cell) != &"till":
 			continue
-		SuiteKit.crop_supplies(state, StringName(seeds[sown % seeds.size()]))
-		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
+		# **Winter sows nothing** (task 0170): its beds are turned and bare.
+		# The packet arithmetic below divided by an empty season.
+		if not seeds.is_empty():
+			SuiteKit.crop_supplies(state, StringName(seeds[sown % seeds.size()]))
+			Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
 		Interact.complete(state, cell, &"till")
-		Interact.complete(state, cell, &"plant")
-		Interact.complete(state, cell, &"water")
+		if not seeds.is_empty():
+			Interact.complete(state, cell, &"plant")
+			Interact.complete(state, cell, &"water")
 		middle += cell
 		sown += 1
 	if sown > 0:
@@ -1719,9 +1723,12 @@ func _till_grass_fixture(state: Dictionary, night: bool) -> void:
 			if Farming.verb_at(state, cell) != &"till":
 				continue
 			Farming.act(state, cell)
+			# **Spring's two**, so the fixture stays on Spring 2: wheat
+			# became an autumn crop at task 0170, and its packets moved the
+			# date there.
 			if (x + y) % 3 == 0:
-				SuiteKit.crop_supplies(state, &"carrot" if x % 2 else &"wheat")
-				Farming.select_seed(state, &"carrot" if x % 2 else &"wheat")
+				SuiteKit.crop_supplies(state, GameData.CARROT if x % 2 else GameData.POTATO)
+				Farming.select_seed(state, GameData.CARROT if x % 2 else GameData.POTATO)
 				Farming.act(state, cell)
 				Farming.act(state, cell)
 				Farming.plot(state, cell)["growth"] = (x + y) % (Farming.days_to_grow(Farming.crop_on(state, cell)) + 1)

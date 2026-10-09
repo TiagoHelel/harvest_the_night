@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 45
+const GROUPS := 46
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -114,6 +114,7 @@ func _run() -> void:
 	_task_0174_area()
 	_task_0175_swings()
 	_task_0176_ores()
+	_followup_0176_review()
 
 
 func _finish() -> void:
@@ -4059,3 +4060,118 @@ func _task_0176_ores() -> void:
 	expect(not GameData.check_gathering(bad).is_empty(), "an unknown opening season is rejected")
 	expect(GameData.validate().is_empty(), "all quarry metadata, prices, costs, fuel and reachability validate")
 	_completed += 1
+
+
+## Follow-up to the review of 0160-0176 (2026-10-09). SPACE keeps the bed
+## underfoot when the faced crop has nothing for it - 0172 had pointed it at
+## any faced crop, for REMOVE's sake; REMOVE asks its own target, and is spent
+## outside build mode even when it cleared nothing, so it never falls through
+## to selling the building under a stale build cursor; and a season's harvest
+## estimate counts the thirteen mornings a crop sown on its first day gets.
+func _followup_0176_review() -> void:
+	var state := State.create(1769)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
+	Farming.select_seed(state, GameData.CARROT)
+	var field := Farming.field_cells(state)
+	var bed := Vector2i(-1, -1)
+	for at in field:
+		if field.has(at + Vector2i.RIGHT):
+			bed = at
+			break
+	var ahead := bed + Vector2i.RIGHT
+	for at in [bed, ahead]:
+		for _step in 3:
+			if Farming.verb_at(state, at) == &"plant":
+				break
+			Farming.act(state, at)
+	Farming.act(state, ahead)
+	Farming.plot(state, ahead)["watered"] = true
+	SuiteKit.stand_the_farmer(state, bed)
+	state["player"]["facing"] = Player.EAST
+	expect(Farming.verb_at(state, ahead) == &"" and Farming.verb_at(state, bed) == &"plant",
+		"fixture: a watered carrot ahead, an empty bed underfoot",
+		"%s / %s" % [Farming.verb_at(state, ahead), Farming.verb_at(state, bed)])
+	expect(Player.target(state) == bed and Player.clear_target(state) == ahead,
+		"SPACE keeps the bed underfoot, REMOVE reaches the faced carrot",
+		"%s, %s" % [Player.target(state), Player.clear_target(state)])
+	state["intent"]["interact"] = true
+	Sim.advance(state, Interact.ticks_for(state, bed, &"plant") + 1)
+	expect(Farming.crop_on(state, bed) == GameData.CARROT
+		and Farming.crop_on(state, ahead) == GameData.CARROT,
+		"a press plants the bed and leaves the carrot ahead alone")
+	state["intent"]["build_sell"] = true
+	Sim.advance(state, 1)
+	expect(Farming.crop_on(state, ahead) == &"" and Farming.crop_on(state, bed) == GameData.CARROT,
+		"REMOVE clears the faced carrot, not the one underfoot")
+
+	# **A REMOVE that clears nothing is spent**, not left for `Building.tick`
+	# to sell whatever the build cursor last pointed at.
+	var bench := Building.anchor_of(state, Farm.cells_with(state, &"workshop")[0])
+	expect(not Building.is_active(state) and Building.why_not_sell(state, bench).is_empty()
+		and Player.clear_target(state) == Vector2i(-1, -1),
+		"fixture: by day, out of build mode, a sellable workshop, nothing to clear")
+	state["intent"]["build_cell"] = [bench.x, bench.y]
+	state["intent"]["build_sell"] = true
+	Sim.advance(state, 1)
+	expect(StringName(Farm.occupant(state, bench).get("id", &"")) == &"workshop"
+		and not bool(state["intent"]["build_sell"]) and Farming.crop_on(state, bed) == GameData.CARROT,
+		"and a REMOVE with no crop to clear sells nothing", str(Farm.occupant(state, bench)))
+
+	# **A bed's grass edge stops at turned lawn** (review of 0167): the rule
+	# the view lays its edges by, asked directly.
+	var bytes: PackedByteArray = state["terrain"]
+	var edged := 0
+	var cleared := 0
+	for at in Farm.cells_of(state, Farm.Terrain.SOIL):
+		for side in WorldView.EDGE_NEIGHBOURS.size():
+			var next: Vector2i = at + WorldView.EDGE_NEIGHBOURS[side]
+			if not Grid.in_bounds(next) or Farm.terrain_at(state, next) != Farm.Terrain.GRASS:
+				continue
+			edged += 1
+			var turned := {Grid.index(next): true}
+			var before := maxi(WorldView._edge_tile(bytes, at, Farm.Terrain.SOIL).x, 0)
+			var after := maxi(WorldView._edge_tile(bytes, at, Farm.Terrain.SOIL, turned).x, 0)
+			if before & (1 << side) and not (after & (1 << side)):
+				cleared += 1
+	expect(edged > 0 and cleared == edged,
+		"every bed side on lawn draws grass, and none once that lawn is turned",
+		"%d of %d" % [cleared, edged])
+
+	# **Thirteen growing mornings in a season.**
+	expect(GameData.crop_harvests({"growth_days": 13}) == 1
+		and GameData.crop_harvests({"growth_days": 14}) == 0
+		and GameData.crop_harvests({"growth_days": 7}) == 1
+		and GameData.crop_harvests({"growth_days": 4, "regrow_days": 3}) == 4,
+		"a season holds thirteen growing mornings")
+	var wrong: Array = []
+	for id in Farming.seeds():
+		var got := _followup_season_of(id)
+		if got != Farming.harvests_per_season(id):
+			wrong.append("%s: %d picked, %d estimated" % [id, got, Farming.harvests_per_season(id)])
+	expect(wrong.is_empty(), "every crop's estimate is what a watered season really picks", str(wrong))
+	expect(GameData.check_crops(GameData.CROPS).is_empty(), "and no crop dominates on the true counts",
+		str(GameData.check_crops(GameData.CROPS)))
+	_completed += 1
+
+
+## Sow on the first day of a crop's season, water it every day, pick it the
+## morning it is ready and sow again: the harvests that season really gives.
+func _followup_season_of(id: StringName) -> int:
+	var state := State.create(1768)
+	SuiteKit.crop_supplies(state, id)
+	Farming.select_seed(state, id)
+	var cell: Vector2i = Farming.field_cells(state)[0]
+	var picked := 0
+	for _day in GameData.SEASON_DAYS:
+		if Farming.is_ready(state, cell):
+			Farming.act(state, cell)
+			picked += 1
+		for _step in 3:
+			if Farming.crop_on(state, cell) != &"":
+				break
+			Farming.act(state, cell)
+		Farming.plot(state, cell)["watered"] = true
+		Farming.dry_out(state)
+		state["day"] = int(state["day"]) + 1
+		Farming.morning(state)
+	return picked
