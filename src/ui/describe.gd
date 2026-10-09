@@ -138,6 +138,11 @@ static func building(id: StringName) -> String:
 		lines.append(I18n.f(&"DESC_DRAWS", [int(one["energy_draw"])]))
 	if one.has("fuel_fallback"):
 		lines.append(I18n.t(&"DESC_FUEL_FALLBACK"))
+	# A sprinkler's reach in plots, and that it is no wall (task 0178).
+	if one.has("spray"):
+		lines.append(I18n.f(&"DESC_SPRINKLES", [Farming.sprayed_by(id, Vector2i(Grid.WIDTH / 2, Grid.HEIGHT / 2)).size()]))
+	if bool(one.get("walked_over", false)):
+		lines.append(I18n.t(&"DESC_WALKED_OVER"))
 	var makes := _recipes_at(id)
 	if not makes.is_empty():
 		lines.append(I18n.f(&"DESC_MAKES", [", ".join(makes)]))

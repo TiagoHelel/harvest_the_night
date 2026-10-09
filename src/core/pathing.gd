@@ -207,7 +207,8 @@ static func distance_hunt(state: Dictionary, cell: Vector2i) -> int:
 ## with no way through them are exactly the things worth coming for. One rule,
 ## read two ways.
 static func is_prey(id: StringName) -> bool:
-	if id == &"house" or Farm.FIXTURES.has(id) or Traps.is_trap(id):
+	if id == &"house" or Farm.FIXTURES.has(id) or Traps.is_trap(id) \
+			or Building.walked_over(id):
 		return false
 	var entry: Variant = Building.entry_of(id)
 	if entry == null:
@@ -261,7 +262,7 @@ static func breaks_through(state: Dictionary, cell: Vector2i) -> bool:
 	if on.is_empty():
 		return false
 	var id := StringName(on["id"])
-	if id == &"house" or Traps.is_trap(id):
+	if id == &"house" or Traps.is_trap(id) or Building.walked_over(id):
 		return false
 	return true
 
@@ -599,6 +600,10 @@ static func _through(id: StringName, ground: int) -> int:
 	# step past is no mine at all. Task 0048 found that by asking the route
 	# where it went after one was laid on it.
 	if Traps.is_trap(id):
+		return ground
+	# **Nor is a sprinkler a wall** (task 0178): a row of them across the
+	# field would otherwise fence the farm in, so one is walked over too.
+	if Building.walked_over(id):
 		return ground
 
 	# **A barrier is priced; everything else is a hole in the map.** A wall

@@ -57,6 +57,16 @@ const SNOW_PER_SECOND := 40.0
 const SNOW_FALL := Vector2(3.0, 13.0)
 const SNOW_COLOURS := [&"bone", &"moon"]
 
+## **The sprinklers' morning** (task 0178): through the first hour of the
+## day every sprinkler in view throws this many drops a second at full
+## density, out over the cells it waters - the rule watered them at dawn,
+## this is only the picture of it. Water's palette, and the same pool.
+const SPRAY_PER_SECOND := 40.0
+const SPRAY_UNTIL_MINUTE := 7 * 60
+const SPRAY_COLOURS := [&"water_light", &"water", &"moon"]
+## How long a drop flies, in seconds.
+const SPRAY_LIFE := 0.6
+
 ## The cap when nothing says otherwise. `video/max_particles` moves it and
 ## `a11y/particle_density` scales what is asked for - one turns the ceiling
 ## down and the other turns the tap down, which are different things.
@@ -81,11 +91,14 @@ var _left: PackedFloat32Array = PackedFloat32Array()
 var _span: PackedFloat32Array = PackedFloat32Array()
 var _size: PackedByteArray = PackedByteArray()
 var _tint: PackedColorArray = PackedColorArray()
-## 1 for a snowflake, which falls at its own pace rather than slowing.
+## 1 for a snowflake, which falls at its own pace rather than slowing; 2 for
+## a sprinkler's drop, which flies at its own pace the same way.
 var _falling: PackedByteArray = PackedByteArray()
 var _next := 0
 var _snow_due := 0.0
 var _snow_was := false
+## Drops owed to each sprinkler cell, by index.
+var _spray_due: Dictionary = {}
 
 # What the farm looked like last frame, so this frame can see what changed.
 var _seen_entities: Dictionary = {}
@@ -241,6 +254,7 @@ func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
 	_snow(delta)
+	_spray(delta)
 	_advance(delta)
 	_forms.advance(delta, self)
 	_watch(delta)
@@ -261,8 +275,9 @@ func _advance(delta: float) -> void:
 		if _left[i] <= 0.0:
 			continue
 		_left[i] -= delta
-		if _falling[i] == 1:
-			# A flake keeps its pace and sways a little on the way down.
+		if _falling[i] >= 1:
+			# A flake keeps its pace and sways a little on the way down; a
+			# drop keeps its pace out to where it lands.
 			_x[i] += (_vx[i] + sin(_left[i] * 2.3 + float(i)) * 2.0) * delta
 			_y[i] += _vy[i] * delta
 			continue
@@ -286,6 +301,9 @@ func _draw() -> void:
 		# right to the end.
 		var lit: Color = _tint[i]
 		lit.a = clampf(_left[i] / maxf(_span[i], 0.01), 0.0, 1.0)
+		# A drop is water until it lands: whole for most of its flight.
+		if _falling[i] == 2:
+			lit.a = minf(lit.a * 3.0, 1.0)
 		var wide := float(_size[i])
 		draw_rect(Rect2(floorf(_x[i]), floorf(_y[i]), wide, wide), lit, true)
 
@@ -536,6 +554,81 @@ func _flake(corner: Vector2, view: Vector2, down: float) -> void:
 	_size[i] = 1
 	_tint[i] = PaletteData.COLOURS[SNOW_COLOURS[randi() % SNOW_COLOURS.size()]]
 	_falling[i] = 1
+
+
+# ----------------------------------------------------------------- the spray
+
+## Whether the sprinklers are running on screen (task 0178): the first hour
+## of the day, with particles allowed and moving.
+func spraying() -> bool:
+	return not _state.is_empty() and _density > 0.0 and _motion and _cap > 0 \
+		and int(_state["phase"]) == Phases.DAY \
+		and int(_state["day_tick"]) < Phases.tick_at_minute(SPRAY_UNTIL_MINUTE)
+
+
+## How many drops are in the air - for `input_v1`.
+func drops() -> int:
+	var n := 0
+	for i in _left.size():
+		if _left[i] > 0.0 and _falling[i] == 2:
+			n += 1
+	return n
+
+
+## Water from every sprinkler the camera can see, thrown out over the cells it
+## waters: along the four ways for a cross, all round for a square, and further
+## the further it reaches. On the wall clock, like every particle.
+func _spray(delta: float) -> void:
+	if not spraying():
+		_spray_due.clear()
+		return
+	var to_world := get_global_transform_with_canvas().affine_inverse()
+	var view := Rect2(to_world * Vector2.ZERO, to_world.basis_xform(get_viewport_rect().size)).grow(32.0)
+	var tile := float(GameData.TILE_SIZE)
+	var occupants: Dictionary = _state["occupants"]
+	# Cell indices, so these are integers and sort as integers.
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var id := StringName((occupants[idx] as Dictionary)["id"])
+		if not Building.sprays(id):
+			continue
+		var head := (Vector2(Grid.cell(int(idx))) + Vector2(0.5, 0.5)) * tile
+		if not view.has_point(head):
+			continue
+		var entry: Dictionary = GameData.BUILDINGS[id]
+		var reach := float(int(entry["spray_reach"]))
+		var cross := StringName(entry["spray"]) == &"cross"
+		# **Already in the air** the first frame a sprinkler is seen running,
+		# as the snow is: a morning does not open on a dry nozzle.
+		if not _spray_due.has(int(idx)):
+			for _i in int(SPRAY_PER_SECOND * _density * reach * SPRAY_LIFE):
+				_drop(head, reach * tile, cross, randf())
+		var due := float(_spray_due.get(int(idx), 0.0)) + SPRAY_PER_SECOND * _density * delta * reach
+		while due >= 1.0:
+			due -= 1.0
+			_drop(head, reach * tile, cross)
+		_spray_due[int(idx)] = due
+
+
+## One drop from `head` toward a point up to `out` away, `progress` of the way
+## through its flight already.
+func _drop(head: Vector2, out: float, cross: bool, progress: float = 0.0) -> void:
+	var i := _slot()
+	if i < 0:
+		return
+	var angle := float(randi() % 4) * PI / 2.0 + (randf() - 0.5) * 0.4 if cross else randf() * TAU
+	var landing := out * (0.35 + randf() * 0.75)
+	var flight := SPRAY_LIFE * (0.8 + randf() * 0.4)
+	_vx[i] = cos(angle) * landing / SPRAY_LIFE
+	_vy[i] = sin(angle) * landing / SPRAY_LIFE
+	_x[i] = head.x + _vx[i] * flight * progress
+	_y[i] = head.y - 3.0 + _vy[i] * flight * progress
+	_left[i] = flight * (1.0 - progress)
+	_span[i] = flight
+	_size[i] = 1
+	_tint[i] = PaletteData.COLOURS[SPRAY_COLOURS[randi() % SPRAY_COLOURS.size()]]
+	_falling[i] = 2
 
 
 ## The next slot in the ring.

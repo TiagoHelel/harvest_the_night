@@ -239,6 +239,12 @@ const ART := {
 	&"gold_ore": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "tint": Color(1.35, 1.2, 0.55)},
 	&"hardwood_stump": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": STUMP_2X2, "final": STUMP_2X2, "bare": true, "stand_in_scale": 2.0, "tint": Color(0.85, 0.72, 0.62)},
 	&"hardwood_stump_chipped": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": STUMP_2X2, "final": STUMP_2X2, "bare": true, "stand_in_scale": 2.0, "tint": Color(1.08, 0.86, 0.66)},
+	# A018's sprinklers (task 0178): the spent mine's low metal disc, in each
+	# tier's metal and at the width A018 gives it (8, 10 and 12 pixels), so the
+	# three read apart by size as well as colour until 0201.
+	&"copper_sprinkler": {"pack": "A018", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mine_spent", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "stand_in_scale": 0.67, "tint": Color(1.6, 0.95, 0.7)},
+	&"iron_sprinkler": {"pack": "A018", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mine_spent", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "stand_in_scale": 0.84, "tint": Color(1.45, 1.5, 1.6)},
+	&"gold_sprinkler": {"pack": "A018", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mine_spent", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "stand_in_scale": 1.0, "tint": Color(1.9, 1.6, 0.7)},
 	&"potato": {"pack": "A015", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/wheat", "stand_in_frames": 4, "tint": Color(0.73, 0.89, 0.54), "geometry": CROP_TILE, "final": CROP_TILE},
 	&"icon_potato": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.73, 0.89, 0.54), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_potato": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.73, 0.89, 0.54), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},

@@ -21,7 +21,7 @@ over them at night, so they stay low and never read as a wall.
 
 ## Deliverables
 
-The table is provisional: game task 0178 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0178. There are three ids, one per tier (`copper_sprinkler`, `iron_sprinkler`, `gold_sprinkler`), not one id with levels, so the rows below keep their names. Each body is one cell: 16x16 at pivot (8,14), draw scale 1.0. It is idle all day and runs its four-frame spray loop through the first hour of the morning (06:00-07:00), while the game throws the water from `spray_xy` out over the cells it waters: the four beside it for copper, the 3x3 for iron and the 5x5 for gold. Zombies walk over all three at night. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

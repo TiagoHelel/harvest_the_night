@@ -17634,3 +17634,136 @@ assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/A021-ore-hardwood.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0177-hardwood.md,
 implementation/shots/0177/, docs/devlog/{index,index.pt_BR}.md
+
+## 0178 - Sprinklers - done 2026-10-09
+
+What changed: copper, iron and gold sprinklers. They are built by day from
+the build list on one cell. Every morning, after the growth credit, each one
+waters the plots of its pattern for the new day, so a big field stops costing
+the whole morning. At night zombies walk over them; they are never a wall.
+
+**Decided: three ids, not one with levels.** `copper_sprinkler`,
+`iron_sprinkler` and `gold_sprinkler` are `BUILDINGS` entries:
+- **Costs:** $50 + 3 copper, $120 + 6 iron, $250 + 4 gold. Each is paid
+  directly, in its own metal and money, so there is no recipe, no new
+  station in `selected_recipe`, and no change to the state's shape.
+- hp 30/40/50, 1x1, no energy.
+- These are A018's own row names, so the pack needs no rename.
+- Each entry declares its pattern as levers: `spray` (`cross` or `square`)
+  and `spray_reach`.
+  - copper is a cross of reach 1: the four beside it;
+  - iron is a square of 1: the 3x3;
+  - gold is a square of 2: the 5x5.
+
+**The morning** (`Farming.sprinkle`, called from `Phases.begin_day` right after
+`Farming.morning`):
+- Every sprinkler, in sorted cell order, marks its pattern's plots
+  (`Farming.sprayed_by`, in index order, never off the farm) watered for the
+  new day.
+- Tonight's dry-out turns that into tomorrow's growth, like any watering.
+- Turned earth with nothing in it is wetted too, so a seed sown there later
+  that day grows. The spray is not the farmer working the bed, so turned lawn
+  still fades by 0167's rule.
+
+**Never a wall.** `Building.walked_over(id)` reads the entries' declared
+`walked_over` flag:
+- `Pathing._through` prices the cell at its ground, the way it prices a trap;
+- `is_prey` does not count it, so no breaker hunts it;
+- `breaks_through` does not count it, so a zombie walks over it rather than
+  biting.
+
+The farmer walks round one, as round anything built (`Farm.walkable`).
+
+**A cell with a sprinkler is not a plot:**
+- `Building.why_not` refuses one on a crop, with `WHY_ON_A_CROP`;
+- put down on turned earth, it erases that plot;
+- tilling and planting already skip an occupied cell.
+
+`check_buildings` refuses each of these, and `SPRAY_SHAPES` is in `digest()`:
+- an unknown spray shape;
+- a reach outside 1-3;
+- a sprinkler that is not one walked-over cell.
+
+**The view:**
+- **The body:** through the placeholder road until A018 is integrated by
+  0201. The stand-in is the spent mine's low metal disc, tinted copper, iron
+  or gold and scaled to A018's widths (8, 10 and 12 px), so the tiers differ
+  in size as well as colour.
+- **The spray** is code particles (`Particles._spray`), from 06:00 to 07:00
+  for every sprinkler in view:
+  - drops fly out along the four ways for a cross and all round for a square,
+    further with reach, and stay opaque until they land;
+  - like the snow, they are already in the air the first frame;
+  - they use the same pool and cap, and density and motion turn them down or
+    off.
+  - First version: 16 drops a second, fading from the start. In the shot the
+    drops hung by the nozzles and could hardly be seen, so it is now 40 a
+    second, opaque for the first two thirds of the flight.
+- **The tooltip** (`Describe.building`) adds "Waters 4 plots each morning"
+  and "Zombies walk over it".
+- **A018's Deliverables** now state the settled geometry: the three ids, each
+  16x16 at (8,14), idle all day and the spray loop through the first hour,
+  watering the four, the 3x3 and the 5x5.
+
+**Tests:**
+- `_task_0178_sprinklers` (headless_v1):
+  - the three patterns, in order, and none off the farm;
+  - refused on a carrot;
+  - put down on turned earth, it leaves no plot and offers no verb;
+  - the morning after, its four neighbours are watered and the plot out of
+    reach is not;
+  - the next morning those four have grown a day, and the dry one has not;
+  - its cell costs the flow field what bare soil does;
+  - it is not prey, not bitten, and not walkable for the farmer;
+  - a rigged spray shape and a solid sprinkler are both refused.
+- `_task_0132_night_build`'s rich farm now holds copper and gold, so every
+  building can be afforded by day.
+- `_case_0178_sprinkler` (input_v1):
+  - B by day, the `build_copper_sprinkler` row on screen, a click selects it;
+  - a click on the farm puts it down, paid in copper;
+  - its description says four plots.
+- `input_check`'s palette check covers the three new rows, and all fit.
+- The shot count is 62.
+- **Two older checks were wrong for a walked-over building, and say so now.**
+  Both failed on the first verify:
+  - **0060's breaker check** asserted that every building is prey. Now it
+    asserts that every one except the walked-over ones is.
+  - **0075's "everything that can be built has a drawing"** looked only for a
+    real file. `_building_art` now follows the placeholder road
+    (`PlaceholderArt.texture_path`) as the view does. The purple fallback is
+    still what it catches.
+  - The same run flagged the spray's sorted occupant keys, which lacked the
+    "integers" comment the screen check asks for.
+
+**Notes:**
+- The day build list still shows raw ids and first-letter prices, as since
+  0032: "copper_sprinkler 3c 50m", where `c` is copper as well as coal.
+  Localized rows with icons would be a UI task of their own.
+
+### Hashes
+
+- **DATA 2340660337 -> 1873325290**, deliberately: the three `BUILDINGS`
+  entries and `SPRAY_SHAPES`, accepted with `verify.py --accept`.
+- **SIM 3052463561 unchanged**: the state's shape is the same, since there is
+  no recipe and no new station, and the fixed scenario never builds a
+  sprinkler.
+
+Verify: 60 passed, 0 failed in 640s (the known OVER BUDGET), on the second full run.
+headless_check 16912 (+10), headless_v1 1602 (+11), input_check 1144 (+3),
+input_v1 468 (+4), 594 keys in two languages, placeholders 207 stand-ins
+over 21 packs, perf 3422us a night tick.
+
+Looked at: `implementation/shots/0178/sprinklers.png` at full size and the
+beds zoomed. Copper, iron and gold read apart, and the drops fly out. The
+watered plots are dark furrows and the rest pale:
+- the cross round the copper;
+- the 3x3 round the iron;
+- the 5x5 round the gold, short of the bed's last column.
+
+Files: src/core/{game_data,building,pathing,farming,phases}.gd,
+src/ui/{names,describe,particles,placeholder_art}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/backlog/packs/A018-sprinklers.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0178-sprinklers.md,
+implementation/shots/0178/, docs/devlog/{index,index.pt_BR}.md

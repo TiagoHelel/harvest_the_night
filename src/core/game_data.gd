@@ -773,7 +773,45 @@ const BUILDINGS: Dictionary = {
 		"fuel_every_ticks": DAY_TICKS / 4,  # LEVER: ticks, four oil per full day
 		"size": Vector2i(4, 3),
 	},
+	# **Sprinklers** (task 0178): the chore, automated. Every morning, after
+	# the growth credit, each one waters the plots of its pattern for the new
+	# day - copper the four beside it, iron the 3x3 round it, gold the 5x5 -
+	# and they dry at night like any plot. Built by day on one cell, out of
+	# their own metal and money. **Walked over, never a wall** (`walked_over`):
+	# a row of them must not fence the farm, so the flow field crosses one at
+	# its ground's cost and nothing hunts it. The farmer walks round one, as
+	# round anything built.
+	&"copper_sprinkler": {
+		"hp": 30,                       # LEVER: hit points, 15-60
+		"cost": {MONEY: 50, COPPER: 3}, # LEVER: money and copper
+		"energy_draw": 0,
+		"size": Vector2i(1, 1),
+		"walked_over": true,
+		"spray": &"cross",              # LEVER: cross (the four beside) or square
+		"spray_reach": 1,               # LEVER: cells out from it, 1-3
+	},
+	&"iron_sprinkler": {
+		"hp": 40,                       # LEVER: hit points, 15-60
+		"cost": {MONEY: 120, IRON: 6},  # LEVER: money and iron
+		"energy_draw": 0,
+		"size": Vector2i(1, 1),
+		"walked_over": true,
+		"spray": &"square",             # LEVER: cross or square (the 3x3)
+		"spray_reach": 1,               # LEVER: cells out from it, 1-3
+	},
+	&"gold_sprinkler": {
+		"hp": 50,                       # LEVER: hit points, 15-60
+		"cost": {MONEY: 250, GOLD: 4},  # LEVER: money and gold
+		"energy_draw": 0,
+		"size": Vector2i(1, 1),
+		"walked_over": true,
+		"spray": &"square",             # LEVER: cross or square (the 5x5)
+		"spray_reach": 2,               # LEVER: cells out from it, 1-3
+	},
 }
+
+## The shapes a sprinkler's spray can take (task 0178).
+const SPRAY_SHAPES: Array = [&"cross", &"square"]
 
 ## How well things run on no power at all.
 ##
@@ -2783,6 +2821,16 @@ static func check_buildings(buildings: Dictionary) -> Array:
 			for res in sorted_names((building.get(field, {}) as Dictionary).keys()):
 				if not RESOURCES.has(res):
 					errors.append("building '%s' burns unknown '%s'" % [building_id, res])
+		# **A sprinkler says how it sprays** (task 0178), in words this file
+		# knows, and is one cell that is walked over: a shape typo would be a
+		# sprinkler that waters nothing, and a solid one a wall.
+		if building.has("spray"):
+			if not SPRAY_SHAPES.has(building["spray"]):
+				errors.append("sprinkler '%s' sprays an unknown '%s'" % [building_id, building["spray"]])
+			if int(building.get("spray_reach", 0)) < 1 or int(building.get("spray_reach", 0)) > 3:
+				errors.append("sprinkler '%s' reaches outside 1-3" % building_id)
+			if building.get("size", Vector2i.ONE) != Vector2i.ONE or not bool(building.get("walked_over", false)):
+				errors.append("sprinkler '%s' must be one cell that is walked over" % building_id)
 	return errors
 
 
@@ -3366,6 +3414,7 @@ static func digest() -> int:
 		"tool_area_offsets": TOOL_AREA_OFFSETS,
 		"queue": [QUEUE_LENGTH],
 		"buildings": BUILDINGS,
+		"spray_shapes": SPRAY_SHAPES,
 		"defences": DEFENCES,
 		"pathing": [TERRAIN_COST, WIDEST_STEP],
 		"repair": [REPAIR_COST_PER_HP, REPAIR_TICKS_PER_HP,

@@ -482,6 +482,44 @@ static func morning(state: Dictionary) -> void:
 			Events.add(state, &"crop_ready", {"crop": crop, "cell": _as_pair(Grid.cell(int(idx)))})
 
 
+## **The sprinklers' morning** (task 0178). After the growth credit, every
+## sprinkler marks the plots of its pattern watered for the new day - in
+## sorted cell order, sprinklers and cells alike - and they dry at night like
+## any plot. Turned earth with nothing in it is wetted too, so a seed sown
+## there later that day grows; the farmer working the bed is what keeps
+## turned lawn from fading (0167), and the spray is not him.
+static func sprinkle(state: Dictionary) -> void:
+	var occupants: Dictionary = state["occupants"]
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var id := StringName((occupants[idx] as Dictionary)["id"])
+		if not Building.sprays(id):
+			continue
+		for cell in sprayed_by(id, Grid.cell(int(idx))):
+			var here := plot(state, cell)
+			if not here.is_empty() and Farm.is_empty(state, cell):
+				here["watered"] = true
+
+
+## The cells a sprinkler of this id standing on `at` waters, in index order:
+## its four neighbours for a cross, every cell within `spray_reach` of it for a
+## square - never its own, and never off the farm.
+static func sprayed_by(id: StringName, at: Vector2i) -> Array:
+	var entry: Dictionary = GameData.BUILDINGS.get(id, {})
+	var reach := int(entry.get("spray_reach", 0))
+	var square := StringName(entry.get("spray", &"")) == &"square"
+	var out: Array = []
+	for dy in range(-reach, reach + 1):
+		for dx in range(-reach, reach + 1):
+			if (dx == 0 and dy == 0) or (not square and absi(dx) + absi(dy) > reach):
+				continue
+			var cell := at + Vector2i(dx, dy)
+			if Grid.in_bounds(cell):
+				out.append(cell)
+	return out
+
+
 ## A cell as the two numbers the state stores everywhere else. Events carry
 ## plain data, so a `Vector2i` would be the one thing in the record that a
 ## save file could not round-trip.

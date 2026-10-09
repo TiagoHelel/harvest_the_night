@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 34
+const V1_CASES := 35
 
 
 func _process(delta: float) -> bool:
@@ -84,6 +84,7 @@ func _run() -> void:
 	await _case_0176_gold()
 	await _case_followup_0176_review()
 	await _case_0177_hardwood()
+	await _case_0178_sprinkler()
 	_finish()
 
 
@@ -2565,5 +2566,47 @@ func _case_0177_hardwood() -> void:
 	expect(empty and Resources.amount(state, GameData.HARDWOOD)
 		== before + int(GameData.GATHERING[&"hardwood_stump"]["yield"][GameData.HARDWOOD]),
 		"all four cells go and the hardwood arrives once")
+	await close_scene()
+	_completed += 1
+
+
+## 0178 - a copper sprinkler put down by day from the build list: B, its row,
+## a click on the farm; paid for, and its tooltip says what it waters.
+func _case_0178_sprinkler() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	Resources.gain(state, Building.cost_of(&"copper_sprinkler"))
+	var spot := Vector2i(-1, -1)
+	var here := Player.cell(state)
+	# Below and to the right of him: clear of the seed list and of the
+	# lines and buttons along the bottom.
+	for dy in range(1, 5):
+		for dx in range(1, 6):
+			var cell := here + Vector2i(dx, dy)
+			if spot == Vector2i(-1, -1) and Building.can_place(state, &"copper_sprinkler", cell):
+				spot = cell
+	expect(spot != Vector2i(-1, -1), "fixture: room for a sprinkler near the farmer")
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return Building.is_active(state), "build mode to open by day")
+	var row := require_control("build_copper_sprinkler") as Button
+	expect(row != null and row.get_global_rect().end.y <= 270.0,
+		"the day's build list has the copper sprinkler, on the screen")
+	await click_control("build_copper_sprinkler")
+	await until(func() -> bool: return Building.selected(state) == &"copper_sprinkler",
+		"the sprinkler to be selected")
+	var copper := Resources.amount(state, GameData.COPPER)
+	await click_cell(spot)
+	await until(func() -> bool:
+		return StringName(Farm.occupant(state, spot).get("id", &"")) == &"copper_sprinkler",
+		"a click on the farm to put it down")
+	expect(Resources.amount(state, GameData.COPPER) < copper, "and it was paid for in copper")
+	expect(Describe.building(&"copper_sprinkler").contains(I18n.f(&"DESC_SPRINKLES", [4])),
+		"its description says it waters four plots each morning")
+	await hold_key(KEY_B, 4)
 	await close_scene()
 	_completed += 1

@@ -82,6 +82,21 @@ static func placeable_ids() -> Array:
 		+ GameData.sorted_names(GameData.BUILDINGS.keys())
 
 
+## **Walked over, never a wall** (task 0178): a structure that declares it -
+## the sprinklers - is crossed by the flow field at its ground's cost, the
+## way a trap is, and is nothing a breaker comes for. The farmer still walks
+## round it, as round anything built.
+static func walked_over(id: StringName) -> bool:
+	var entry: Variant = entry_of(id)
+	return entry != null and bool((entry as Dictionary).get("walked_over", false))
+
+
+## Whether this waters the plots round it each morning (task 0178).
+static func sprays(id: StringName) -> bool:
+	var entry: Variant = entry_of(id)
+	return entry != null and (entry as Dictionary).has("spray")
+
+
 ## The entry for anything placeable, from whichever table holds it.
 static func entry_of(id: StringName) -> Variant:
 	if GameData.DEFENCES.has(id):
@@ -390,6 +405,10 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> Array:
 		var terrain_reason := Farm.why_not_buildable(state, at)
 		if not terrain_reason.is_empty():
 			return terrain_reason
+	# **A sprinkler is not planted over** (task 0178): it goes on bare
+	# ground or turned earth, never on a crop it would have to uproot.
+	if sprays(id) and Farming.crop_on(state, cell) != &"":
+		return [&"WHY_ON_A_CROP"]
 	if not affordable(state, id):
 		return [&"WHY_SHORT", Resources.missing(state, cost_of(id))]
 	return []
@@ -458,6 +477,10 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 	var cells := footprint(id, cell)
 	if cells.size() > 1:
 		occupant["anchor"] = [cell.x, cell.y]
+	# **A cell with a sprinkler is not a plot** (task 0178): turned earth
+	# under one is given back to the ground, so nothing counts it a bed.
+	if sprays(id):
+		(state["plots"] as Dictionary).erase(Grid.index(cell))
 	for at in cells:
 		if not Farm.place(state, at, occupant):
 			# Half a press is worse than none. Take back whatever went down.

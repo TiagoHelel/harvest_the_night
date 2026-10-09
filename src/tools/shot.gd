@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["sprinklers", "a copper, an iron and a gold sprinkler at 06:20, spraying", ""],
 	["hardwood", "a chipped big stump and a whole one among the trees", ""],
 	["quarry", "copper, coal and iron-gated gold on Autumn 1", ""],
 	["can_area", "three dry plots in the iron can's next stroke", ""],
@@ -721,6 +722,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
 		"hardwood": _set_hardwood(state)
+		"sprinklers": _set_sprinklers(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -1381,6 +1383,24 @@ func _set_stump(state: Dictionary) -> void:
 ## **The big stumps** (task 0177): the one in the south-west woods chipped
 ## by an iron axe's first swing, the farmer beside it with the axe, and the
 ## whole one east of him in the same frame, among the trees.
+## **Sprinklers at dawn** (task 0178): a copper, an iron and a gold one in
+## the south beds at 06:20. The plots of their patterns are wet and the rest
+## dry, and the morning's water is still in the air.
+func _set_sprinklers(state: Dictionary) -> void:
+	Resources.gain(state, {GameData.MONEY: 999, GameData.COPPER: 9,
+		GameData.IRON: 9, GameData.GOLD: 9})
+	for pair in [[&"copper_sprinkler", Vector2i(33, 30)],
+			[&"iron_sprinkler", Vector2i(36, 30)], [&"gold_sprinkler", Vector2i(44, 31)]]:
+		Building.place(state, pair[0], pair[1])
+	_a_sown_field(state)
+	for idx in state["plots"]:
+		state["plots"][idx]["watered"] = false
+	Farming.sprinkle(state)
+	state["day_tick"] = Phases.tick_at_minute(6 * 60 + 20)
+	_standing_at = Vector2i(39, 28)
+	_stand(state, _standing_at)
+
+
 func _set_hardwood(state: Dictionary) -> void:
 	state["tools"]["axe"] = 1
 	var chipped := Building.anchor_of(state, Vector2i(8, 45))

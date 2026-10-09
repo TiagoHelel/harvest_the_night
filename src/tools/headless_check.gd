@@ -9375,8 +9375,11 @@ func _task_0052_breaker() -> void:
 		var wanted := not entry.has("path_cost") and not Traps.is_trap(id)
 		expect(Pathing.is_prey(id) == wanted,
 			"a breaker %s a %s" % ["comes for" if wanted else "ignores", id])
+	# Every building but the ones it walks over (task 0178's sprinklers).
 	for id in GameData.sorted_names(GameData.BUILDINGS.keys()):
-		expect(Pathing.is_prey(id), "and it comes for a %s" % id)
+		var hunted := not Building.walked_over(id)
+		expect(Pathing.is_prey(id) == hunted,
+			"and it %s a %s" % ["comes for" if hunted else "walks over", id])
 	for id in [&"house", &"well", &"shop", &"tree"]:
 		expect(not Pathing.is_prey(id),
 			"but a %s is the farm, not a thing you built" % id)
@@ -13855,8 +13858,11 @@ func _task_0075_building_art() -> void:
 ## generator was undrawn while it was on screen.
 func _building_art(name: StringName) -> Image:
 	for folder in ["res://sprites/buildings/", "res://sprites/props/"]:
-		var path := "%s%s.png" % [folder, name]
-		if ResourceLoader.exists(path):
+		# **Or its stand-in** (task 0120's road): a thing whose pack has not
+		# landed is still drawn, by the file `PlaceholderArt` names for it -
+		# the purple block is what this check is for, and that is not it.
+		var path := PlaceholderArt.texture_path("%s%s.png" % [folder, name])
+		if not path.is_empty() and ResourceLoader.exists(path):
 			return Image.load_from_file(ProjectSettings.globalize_path(path))
 	return null
 
@@ -14473,7 +14479,8 @@ func _task_0082_shots() -> void:
 	# turned grass beside the starter beds in daylight and at night. Fifty-one
 	# since 0168: twelve crops, both seed pages in the HUD/stall and the ledger.
 	# Sixty-one since 0177: a chipped big stump beside a whole one.
-	expect(names.size() == 61,
+	# Sixty-two since 0178: the three sprinklers spraying at dawn.
+	expect(names.size() == 62,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

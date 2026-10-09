@@ -281,6 +281,9 @@ static func begin_day(state: Dictionary) -> bool:
 	Shop.restock(state)
 	_enter(state, DAY)
 	Farming.morning(state)
+	# **The sprinklers after the growth credit** (task 0178), so their
+	# water is today's: it is tonight's dry-out that turns it into growth.
+	Farming.sprinkle(state)
 	ToolTiers.morning(state)
 	return true
 

@@ -96,6 +96,9 @@ AUD_NOTE_MUTED,0,muted - the levels below are kept,mudo - os níveis abaixo fica
 AUD_NOTE_TRY,0,change a level to hear it,mude um nível para ouvir
 AUD_SFX,76,EFFECTS,EFEITOS
 BLD_GENERATOR,0,generator,gerador
+BLD_COPPER_SPRINKLER,0,copper sprinkler,aspersor de cobre
+BLD_IRON_SPRINKLER,0,iron sprinkler,aspersor de ferro
+BLD_GOLD_SPRINKLER,0,gold sprinkler,aspersor de ouro
 BLD_KITCHEN,0,kitchen,cozinha
 BLD_PRESS,0,press,prensa
 BLD_WORKSHOP,0,workshop,oficina
@@ -585,5 +588,8 @@ ITEM_COPPER,96,Copper,Cobre
 ITEM_COAL,96,Coal,Carvão
 ITEM_GOLD,96,Gold,Ouro
 ITEM_HARDWOOD,96,hardwood,madeira de lei
+WHY_ON_A_CROP,224,Not on a crop,Não em cima de uma planta
+DESC_SPRINKLES,224,Waters %d plots each morning,Rega %d canteiros toda manhã
+DESC_WALKED_OVER,224,Zombies walk over it,Zumbis passam por cima
 WHY_GATHER_SEASON,224,Available from %s,Disponível a partir de %s
 DESC_FUEL_FALLBACK,224,Oil first; coal when empty,Óleo primeiro; carvão se acabar

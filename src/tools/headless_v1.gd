@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 47
+const GROUPS := 48
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -116,6 +116,7 @@ func _run() -> void:
 	_task_0176_ores()
 	_followup_0176_review()
 	_task_0177_hardwood()
+	_task_0178_sprinklers()
 
 
 func _finish() -> void:
@@ -1318,7 +1319,7 @@ func _task_0132_night_build() -> void:
 	# fresh, rich farm per phase, and a clear spot sized to the thing.
 	var plenty := {GameData.WOOD: 9000, GameData.STONE: 9000, GameData.IRON: 9000,
 		GameData.OIL: 9000, GameData.GUNPOWDER: 9000, GameData.MONEY: 9000,
-		GameData.FOOD: 9000}
+		GameData.FOOD: 9000, GameData.COPPER: 9000, GameData.GOLD: 9000}
 	var phases := {}
 	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT]:
 		var state := State.create(1320)
@@ -4287,3 +4288,85 @@ func _task_0177_hardwood() -> void:
 		and not Pathing.is_prey(&"hardwood_stump"),
 		"the flow field treats it like a tree: no way through, nothing to come for")
 	_completed += 1
+
+
+## 0178 - sprinklers. A copper one waters its four neighbours on a morning
+## and they grow the next; iron the 3x3 and gold the 5x5; the flow field
+## crosses one at its ground's cost and no breaker hunts it; it is no plot,
+## goes on no crop, and the tables say how it sprays.
+func _task_0178_sprinklers() -> void:
+	var state := State.create(1780)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
+	Farming.select_seed(state, GameData.CARROT)
+	Resources.gain(state, {GameData.MONEY: 1000, GameData.COPPER: 10, GameData.IRON: 20, GameData.GOLD: 10})
+	var at := Vector2i(34, 30)
+	var around: Array = Farming.sprayed_by(&"copper_sprinkler", at)
+	expect(around == [at + Vector2i.UP, at + Vector2i.LEFT, at + Vector2i.RIGHT, at + Vector2i.DOWN],
+		"a copper sprinkler's pattern is its four neighbours, in cell order", str(around))
+	expect(Farming.sprayed_by(&"iron_sprinkler", at).size() == 8
+		and Farming.sprayed_by(&"gold_sprinkler", at).size() == 24
+		and Farming.sprayed_by(&"gold_sprinkler", Vector2i.ZERO).size() == 8,
+		"iron waters the 3x3 round it, gold the 5x5, and none off the farm")
+	for cell in around + [at, Vector2i(37, 30)]:
+		for _step in 3:
+			if Farming.verb_at(state, cell) == &"plant":
+				break
+			Farming.act(state, cell)
+	for cell in around + [Vector2i(37, 30)]:
+		Farming.act(state, cell)
+		Farming.plot(state, cell)["watered"] = false
+	expect(Farming.crop_on(state, at) == &"" and Farming.is_tilled(state, at),
+		"fixture: four carrots round turned earth, and one more out of reach")
+
+	# **It goes on no crop, and the cell it takes is no plot.**
+	expect(Building.why_not(state, &"copper_sprinkler", around[0]) == [&"WHY_ON_A_CROP"],
+		"a sprinkler is not put down on a carrot", str(Building.why_not(state, &"copper_sprinkler", around[0])))
+	expect(Building.place(state, &"copper_sprinkler", at)
+		and StringName(Farm.occupant(state, at).get("id", &"")) == &"copper_sprinkler",
+		"by day it goes down on the turned earth", str(Building.why_not(state, &"copper_sprinkler", at)))
+	expect(Farming.plot(state, at).is_empty() and Farming.verb_at(state, at) == &"",
+		"and its cell is no plot: nothing tills or plants it")
+
+	# **A morning waters the four; the next, they have grown.**
+	var growth: Array = []
+	for cell in around:
+		growth.append(int(Farming.plot(state, cell)["growth"]))
+	_followup_night(state)
+	var wet := true
+	for cell in around:
+		wet = wet and Farming.is_watered(state, cell)
+	expect(wet and not Farming.is_watered(state, Vector2i(37, 30)),
+		"the morning after, its four neighbours are watered and the plot out of reach is not")
+	_followup_night(state)
+	var grew := true
+	for i in around.size():
+		grew = grew and int(Farming.plot(state, around[i])["growth"]) == int(growth[i]) + 1
+	expect(grew and int(Farming.plot(state, Vector2i(37, 30))["growth"]) == 0,
+		"and the next morning they have grown a day, the dry one not")
+
+	# **Walked over, never a wall.**
+	Pathing.refresh(state)
+	var bare := Vector2i(32, 32)
+	expect(Farm.is_empty(state, bare) and Pathing.entry_cost(state, at) == Pathing.entry_cost(state, bare)
+		and Farm.terrain_at(state, bare) == Farm.Terrain.SOIL and Pathing._through(&"copper_sprinkler", 7) == 7,
+		"the flow field crosses its cell at the ground's cost",
+		"%d against %d" % [Pathing.entry_cost(state, at), Pathing.entry_cost(state, bare)])
+	expect(not Pathing.is_prey(&"gold_sprinkler") and not Pathing.prey_cells(state).has(at)
+		and not Pathing.breaks_through(state, at) and not Farm.walkable(state, at),
+		"no breaker hunts it or bites it; the farmer walks round it")
+
+	# **The tables say how it sprays**, and a wrong word is caught.
+	var rigged := GameData.BUILDINGS.duplicate(true)
+	rigged[&"iron_sprinkler"]["spray"] = &"circle"
+	rigged[&"gold_sprinkler"]["walked_over"] = false
+	expect(GameData.check_buildings(rigged).size() == 2 and GameData.check_buildings(GameData.BUILDINGS).is_empty(),
+		"an unknown spray and a solid sprinkler are refused", str(GameData.check_buildings(rigged)))
+	_completed += 1
+
+
+## Bed, a night held, and the next morning - for a check about mornings.
+func _followup_night(state: Dictionary) -> void:
+	Phases.go_to_bed(state)
+	Phases.start_waves(state)
+	Phases.enter_result(state, true)
+	Phases.begin_day(state)
