@@ -579,4 +579,5 @@ WHY_TOOL_GOLD_LOCKED,224,Gold ore is not available yet,Minério de ouro ainda in
 WHY_TOOL_OWNED,224,You already own this tier,Você já tem este nível
 WHY_TOOL_PREVIOUS,224,Upgrade the previous tier first,Melhore o nível anterior primeiro
 WHY_TOOL_PENDING,224,This tool already has an order,Esta ferramenta já tem um pedido
+WHY_GATHER_TOOL,224,Needs %s,Precisa de %s
 DESC_TOOL_NEXT_MORNING,224,Keep your tool; ready next morning,Use sua ferramenta; pronta amanhã

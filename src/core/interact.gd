@@ -106,6 +106,8 @@ static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 ## Refusal shape shared with Building: a key followed by its arguments.
 ## Keep the offered verb so a blocked plot still has a target and highlight.
 static func why_not(state: Dictionary, cell: Vector2i) -> Array:
+	if verb_at(state, cell) in [&"chop", &"mine"]:
+		return Gathering.why_not(state, cell)
 	if verb_at(state, cell) == &"plant" \
 			and Calendar.season_id(Calendar.date(state)) in GameData.NO_GROWTH_SEASONS:
 		return [&"WHY_NO_OUTDOOR_GROWTH"]
@@ -164,9 +166,13 @@ static func ticks_for(state: Dictionary, cell: Vector2i, verb: StringName) -> in
 	if not on.is_empty():
 		var node: Variant = GameData.GATHERING.get(on["id"], null)
 		if node != null and (node as Dictionary).has("work_ticks"):
-			# Sharp tools, if the tree has been up that branch.
-			return int((node as Dictionary)["work_ticks"]) * 100 \
-				/ maxi(Tech.bonus(state, "gather_percent", 100), 1)
+			# One integer division composes the held tool and sharp tools.
+			# At tier zero this preserves the previous timing exactly.
+			var tool := StringName((node as Dictionary).get("tool", &""))
+			var tool_percent := int(ToolTiers.effects(state, tool)["gather_percent"]) if tool != &"" else 100
+			var tech_percent := Tech.bonus(state, "gather_percent", 100)
+			return maxi(int(node["work_ticks"]) * 100 * 100 \
+				/ (maxi(tool_percent, 1) * maxi(tech_percent, 1)), 1)
 	return int(DEFAULT_TICKS.get(verb, GameData.SECONDS))
 
 

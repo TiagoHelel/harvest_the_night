@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 43
+const GROUPS := 44
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -112,6 +112,7 @@ func _run() -> void:
 	_task_0172_regrow()
 	_task_0173_tools()
 	_task_0174_area()
+	_task_0175_swings()
 
 
 func _finish() -> void:
@@ -3910,4 +3911,70 @@ func _task_0174_area() -> void:
 	bad[3] = [0, 1, 1]
 	expect(not GameData.check_tool_areas(bad).is_empty(), "duplicate footprint offsets are rejected")
 	expect(GameData.check_tool_areas(GameData.TOOL_AREA_OFFSETS).is_empty(), "all transverse footprints validate")
+	_completed += 1
+
+
+## 0175 - tool speed composes with tech; a future tier gate refuses before work.
+func _task_0175_swings() -> void:
+	var fell_ticks: Array = []
+	for sharp in [false, true]:
+		for level in range(3):
+			var state := State.create(1750)
+			state["tools"]["axe"] = level
+			if sharp:
+				state["tech_owned"].append(&"sharp tools")
+			var tree: Vector2i = Farm.cells_with(state, &"tree")[0]
+			SuiteKit.stand_the_farmer(state, tree + Vector2i.DOWN)
+			state["player"]["facing"] = Player.NORTH
+			var before := Resources.amount(state, GameData.WOOD)
+			var percent := int(GameData.TOOLS[&"axe"][level]["gather_percent"])
+			var tech := Tech.bonus(state, "gather_percent", 100)
+			var swing := int(GameData.GATHERING[&"tree"]["work_ticks"]) * 10000 / (percent * tech)
+			var total := swing * int(GameData.GATHERING[&"tree"]["hits"])
+			expect(Interact.ticks_for(state, tree, &"chop") == swing, "axe tier %d and sharp %s compose with one integer rounding" % [level, sharp])
+			state["intent"]["interact"] = true
+			Sim.advance(state, total - 1)
+			expect(Farm.occupant(state, tree).get("id", &"") == &"tree" and Resources.amount(state, GameData.WOOD) == before, "the tree and its yield stay until the exact last tick")
+			Sim.advance(state, 1)
+			expect(Farm.occupant(state, tree).get("id", &"") == &"stump" and Resources.amount(state, GameData.WOOD) == before + 3, "the last tick fells it once without changing the yield")
+			fell_ticks.append(total)
+	expect(fell_ticks == [90, 60, 45, 81, 54, 39], "basic/iron/gold take 90/60/45 ticks, or 81/54/39 with sharp tools", str(fell_ticks))
+	var state := State.create(1751)
+	for id in [&"rock", &"seam", &"ore"]:
+		var cell: Vector2i = Farm.cells_with(state, id)[0]
+		state["tools"]["pickaxe"] = 1
+		var base := int(GameData.GATHERING[id]["work_ticks"])
+		expect(Interact.ticks_for(state, cell, &"mine") == base * 100 / 150, "iron pickaxe scales %s mining too" % id)
+		state["tools"]["axe"] = 2
+		expect(Interact.ticks_for(state, cell, &"mine") == base * 100 / 150, "a gold axe cannot accelerate mining")
+	var ore: Vector2i = Farm.cells_with(state, &"ore")[0]
+	var rigged := GameData.GATHERING.duplicate(true)
+	rigged[&"ore"]["min_tier"] = 1
+	state["tools"]["pickaxe"] = 0
+	var reason := Gathering.why_not(state, ore, rigged)
+	expect(reason == [&"WHY_GATHER_TOOL", &"pickaxe_iron"] and Interact.verb_at(state, ore) == &"mine", "a rigged tier gate keeps its offered verb and names the required iron pickaxe")
+	var before := State.hash_of(state)
+	expect(Gathering.strike(state, ore, rigged).is_empty() and State.hash_of(state) == before, "a refused direct strike changes neither hp nor resources nor regrowth")
+	state["tools"]["pickaxe"] = 1
+	expect(Gathering.why_not(state, ore, rigged).is_empty(), "an iron pickaxe clears the same gate")
+	var iron := Resources.amount(state, GameData.IRON)
+	for hit in int(rigged[&"ore"]["hits"]):
+		Gathering.strike(state, ore, rigged)
+	expect(Farm.occupant(state, ore).is_empty() and Resources.amount(state, GameData.IRON) == iron + 1, "the allowed rigged ore yields exactly once")
+	for minimum in [-1, 3, 1.5]:
+		rigged[&"ore"]["min_tier"] = minimum
+		expect(not GameData.check_gathering(rigged).is_empty(), "the validator refuses an out-of-ladder or noninteger minimum tier")
+	rigged[&"ore"]["min_tier"] = 1
+	rigged[&"ore"]["tool"] = &"rod"
+	expect(not GameData.check_gathering(rigged).is_empty(), "a gathering node cannot demand a rod")
+	expect(GameData.check_gathering(GameData.GATHERING).is_empty(), "all actual gathering tools and minimum tiers validate")
+	expect(GameData.check_iron(GameData.GATHERING, GameData.FARM_MAP).is_empty(), "tool metadata preserves iron's economy")
+	expect(GameData.check_reachable(GameData.GATHERING, GameData.FARM_MAP).is_empty(), "all resource nodes remain reachable")
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		for tool in [&"axe", &"pickaxe"]:
+			for level in [1, 2]:
+				var text := Names.refusal([&"WHY_GATHER_TOOL", ToolTiers.item(tool, level)])
+				expect(text.contains(Names.of(ToolTiers.item(tool, level))) and UiKit.font().get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x <= 224, "the fully expanded %s tier refusal fits in %s" % [tool, locale])
+	I18n.use("en")
 	_completed += 1

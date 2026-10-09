@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 30
+const V1_CASES := 31
 
 
 func _process(delta: float) -> bool:
@@ -80,6 +80,7 @@ func _run() -> void:
 	await _case_0172_regrow()
 	await _case_0173_upgrade()
 	await _case_0174_area()
+	await _case_0175_swings()
 	_finish()
 
 
@@ -2331,4 +2332,45 @@ func _case_0174_area() -> void:
 		expect(water.text == I18n.f(&"DHUD_WATER", [Farming.water_carried(state), Farming.can_capacity(state)]), "the live HUD includes both the tier and full cans")
 		await close_scene()
 	expect(wet_counts == [3, 9], "an iron can covers nine plots in the steps a basic can needs for three")
+	_completed += 1
+
+
+## 0175 - a real SPACE starts the delivered axe's faster work timer.
+func _case_0175_swings() -> void:
+	var timers: Array = []
+	for level in [0, 1]:
+		await open_scene(MAIN_SCENE)
+		var driver: SimDriver = require_control("SimDriver")
+		if driver == null:
+			await close_scene()
+			_completed += 1
+			return
+		var state := driver.state
+		driver.set_speed(1)
+		state["tools"]["axe"] = level
+		state["tech_owned"].append(&"sharp tools")
+		var tree := Vector2i(-1, -1)
+		for candidate in Farm.cells_with(state, &"tree"):
+			var cell: Vector2i = candidate
+			if Farm.walkable(state, cell + Vector2i.DOWN):
+				tree = cell
+				break
+		expect(tree.x >= 0, "a tree has a walkable southern neighbour")
+		if tree.x < 0:
+			await close_scene()
+			_completed += 1
+			return
+		_stand_at(state, tree + Vector2i.DOWN, Player.NORTH)
+		await frames(3)
+		var wood := Resources.amount(state, GameData.WOOD)
+		await press_key(KEY_SPACE, true)
+		await until(func() -> bool: return Player.is_busy(state), "SPACE starts chopping")
+		var action: Dictionary = state["player"]["action"]
+		timers.append(int(action.get("total", -1)))
+		expect(action.get("verb", &"") == &"chop" and int(action.get("total", -1)) == (27 if level == 0 else 18), "real input reads both the held axe and sharp tools", str(action))
+		await until(func() -> bool: return Farm.occupant(state, tree).get("id", &"") == &"stump", "the held SPACE fells this tree")
+		await press_key(KEY_SPACE, false)
+		expect(Resources.amount(state, GameData.WOOD) == wood + 3, "faster real-input work pays the same yield once")
+		await close_scene()
+	expect(timers == [27, 18], "the iron axe starts a third shorter timer with the same sharp-tools tech")
 	_completed += 1

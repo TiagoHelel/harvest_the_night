@@ -17289,3 +17289,53 @@ src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
 tools/determinism_data_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/0174-can-and-hoe.md, implementation/shots/0174/,
 docs/devlog/{index,index.pt_BR}.md (devlog.py --check).
+
+## 0175 - The axe and the pickaxe by tier - done 2026-10-09
+
+Axe and pickaxe tiers now shorten each swing rather than change the hit count.
+Their 100/150/200 percent speed composes with sharp tools using one integer
+rounding, preserving basic-tool timing and all existing yields and regrowth.
+A tree takes 90/60/45 ticks with basic/iron/gold, or 81/54/39 with sharp tools.
+Each gathering row names its tool and a minimum tier, validated against TOOLS.
+Below that tier the verb remains visible and work is refused before the timer
+or a direct strike can change anything; the shared reason names the required
+tool in English and pt_BR. Existing Player and Main refusal handling already
+cover this road, so neither needed editing.
+
+The gate is tested with a supplied gathering table: basic pickaxe leaves the
+rigged ore and the state hash unchanged, iron permits the normal three hits
+and one iron yield. Actual gold and hardwood nodes remain for 0176/0177; their
+entries must name tool pickaxe/axe respectively alongside min_tier 1. No new
+resources or map occupants were introduced here. No PNG art was generated,
+drawn or edited.
+
+Verify: 60 PASS, 0 FAIL, 0 SKIP in 617s; 18,334 headless asserts (16,844 + 1,490),
+1,567 input checks (1,133 + 434), 5,752 UI checks, 582 bilingual keys, 169 parsed
+scripts, 56 nights with two seeds, both exports. Perf passed at 3,379us per
+night tick and 8,872us per path rebuild. SIM 3813670633 unchanged: the guard
+scenario uses basic tools. DATA 1161145246 -> 3572289693 deliberately moves
+for gathering tool/minimum-tier metadata, accepted with verify.py --accept.
+The known total OVER BUDGET notice is not a failure. The new headless group
+adds 44 assertions; the real SPACE case adds seven checks and confirms
+27/18-tick basic/iron timers with sharp tools and the same three-wood yield.
+Expanded iron/gold refusals for both tools fit the control in both languages.
+
+Looked at: all seven final pt_BR captures opened individually at original
+1920x1080. The iron-axe chopping pose, workshop, noon, dusk, combat, result
+and tech retain the existing farmer/tile scale and layout against the
+reference sheet and approved blue farmer. Kept:
+implementation/shots/0175/tool_upgrades-pt_BR.png,
+tool_upgrades_chop-pt_BR.png, noon-pt_BR.png, dusk-pt_BR.png,
+wave-pt_BR.png, result-pt_BR.png, tech-pt_BR.png.
+
+Notes: all 1716 paths dirty at claim belong to the owner/art pipeline and
+stay outside this commit. No protected file was edited; project.godot,
+.claude/ and implementation/backlog/ remain unstaged. The RUN-key question
+remains open. Never pushed. Backlog: 296 tasks, 162 done, 134 todo, 0 doing,
+0 blocked (55%); 56 todo wait for Codex art.
+
+Files: src/core/{game_data,gathering,interact}.gd,
+src/tools/{headless_v1,input_v1}.gd, assets/locale/strings.csv,
+tools/determinism_data_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/0175-axe-pickaxe.md, implementation/shots/0175/,
+docs/devlog/{index,index.pt_BR}.md (devlog.py --check).

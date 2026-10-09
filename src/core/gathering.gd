@@ -52,6 +52,21 @@ static func is_node(id: StringName) -> bool:
 	return GameData.GATHERING.has(id)
 
 
+## The offered verb stays visible; both the input road and direct strikes
+## ask the same tier gate. A supplied table lets fixtures exercise future nodes.
+static func why_not(state: Dictionary, cell: Vector2i,
+		nodes: Dictionary = GameData.GATHERING) -> Array:
+	var on := Farm.occupant(state, cell)
+	if on.is_empty() or not nodes.has(StringName(on["id"])):
+		return []
+	var node: Dictionary = nodes[StringName(on["id"])]
+	var tool := StringName(node.get("tool", &""))
+	var minimum := int(node.get("min_tier", 0))
+	if tool != &"" and ToolTiers.tier(state, tool) < minimum:
+		return [&"WHY_GATHER_TOOL", ToolTiers.item(tool, minimum)]
+	return []
+
+
 ## How many swings are left in it. Full when nobody has touched it.
 static func swings_left(state: Dictionary, cell: Vector2i) -> int:
 	var on := Farm.occupant(state, cell)
@@ -66,13 +81,15 @@ static func swings_left(state: Dictionary, cell: Vector2i) -> int:
 ##
 ## Called by `Interact.complete()`, so the player never has to know that a tree
 ## has hit points.
-static func strike(state: Dictionary, cell: Vector2i) -> Dictionary:
+static func strike(state: Dictionary, cell: Vector2i,
+		nodes: Dictionary = GameData.GATHERING) -> Dictionary:
 	var on := Farm.occupant(state, cell)
-	if on.is_empty() or not is_node(on["id"]):
+	if on.is_empty() or not nodes.has(StringName(on["id"])) \
+			or not why_not(state, cell, nodes).is_empty():
 		return {}
 
 	var id: StringName = on["id"]
-	var node: Dictionary = GameData.GATHERING[id]
+	var node: Dictionary = nodes[id]
 
 	var left := int(on.get("hp", int(node["hits"]))) - 1
 	if left > 0:

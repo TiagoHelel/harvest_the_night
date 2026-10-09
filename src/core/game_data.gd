@@ -457,6 +457,7 @@ const TILLED_GRASS_FADES_DAYS := 3       # LEVER: idle empty grass plots, 1-7 mo
 ## comes back. Nothing on the farm can be exhausted permanently.
 const GATHERING: Dictionary = {
 	&"tree": {
+		"tool": &"axe", "min_tier": 0, # LEVER: required axe tier, 0-2
 		"work_ticks": 1 * SECONDS,      # LEVER: ticks per swing, 15-90
 		"hits": 3,                      # LEVER: swings to fell it, 1-6
 		"yield": {WOOD: 3},             # LEVER: units, all on the last swing
@@ -468,6 +469,7 @@ const GATHERING: Dictionary = {
 	# good. The farm still cannot be stripped, because stone comes out of the
 	# rock face for ever - see `seam` below.
 	&"rock": {
+		"tool": &"pickaxe", "min_tier": 0, # LEVER: required pickaxe tier, 0-2
 		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 20-120
 		"hits": 2,                      # LEVER: swings, 1-4
 		"yield": {STONE: 2},            # LEVER: units, 1-4
@@ -478,6 +480,7 @@ const GATHERING: Dictionary = {
 	# back every 210 seconds, retains three harvests per node across a
 	# 560-second day; travel and swings reduce the cliff-wide total.
 	&"seam": {
+		"tool": &"pickaxe", "min_tier": 0, # LEVER: required pickaxe tier, 0-2
 		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 20-120
 		"hits": 3,                      # LEVER: swings, 2-5
 		"yield": {STONE: 3},            # LEVER: units, 2-5
@@ -496,6 +499,7 @@ const GATHERING: Dictionary = {
 	# a tight route. The longer day leaves more time for walking the farm;
 	# production has not doubled, and the thirteen-iron tower is still work.
 	&"ore": {
+		"tool": &"pickaxe", "min_tier": 0, # LEVER: required pickaxe tier, 0-2
 		"work_ticks": 3 * SECONDS,      # LEVER: ticks per swing, 20-150
 		"hits": 3,                      # LEVER: swings, 2-5
 		"yield": {IRON: 1},             # LEVER: units, 1-2
@@ -2604,8 +2608,16 @@ static func _has_room_beside(rows: Array, cell: Vector2i) -> bool:
 
 static func check_gathering(nodes: Dictionary) -> Array:
 	var errors: Array = []
-	for node_id in nodes:
-		for res in ((nodes[node_id] as Dictionary)["yield"] as Dictionary):
+	for node_id in sorted_names(nodes.keys()):
+		var entry: Dictionary = nodes[node_id]
+		if entry.has("min_tier") or entry.has("tool"):
+			var tool := StringName(entry.get("tool", &""))
+			var minimum: Variant = entry.get("min_tier", 0)
+			if tool not in [&"axe", &"pickaxe"] or not TOOLS.has(tool):
+				errors.append("gathering '%s' needs an axe or pickaxe ladder" % node_id)
+			elif typeof(minimum) != TYPE_INT or int(minimum) < 0 or int(minimum) >= TOOLS[tool].size():
+				errors.append("gathering '%s' has an invalid minimum tool tier" % node_id)
+		for res in sorted_names(entry["yield"].keys()):
 			if not RESOURCES.has(res):
 				errors.append("gathering '%s' yields unknown '%s'"
 					% [node_id, res])
