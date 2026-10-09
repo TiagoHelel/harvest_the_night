@@ -132,6 +132,7 @@ const STUMP_2X2 := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 30), "draw
 ## A014's crop states: one 16x16 tile, pivot at its foot (task 0155).
 const CROP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 30), "draw_scale": 1.0}
 
+const CROP_CORN := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 22), "draw_scale": 1.0}
 const CROP_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
 
 ## A057's morning report header: a 206x40 band, the width of the report's
@@ -226,6 +227,10 @@ const ART := {
 	&"beet": {"pack": "A017", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(0.84, 0.45, 0.78), "geometry": CROP_TILE, "final": CROP_TILE},
 	&"icon_beet": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.84, 0.45, 0.78), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_beet": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.84, 0.45, 0.78), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"strawberry_regrow": {"pack": "A015", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot_2", "tint": Color(0.65, 0.78, 0.85), "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
+	&"corn_regrow": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/corn_2", "tint": Color(0.62, 0.76, 0.86), "geometry": CROP_CORN, "final": CROP_CORN, "bare": true},
+	&"pepper_regrow": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot_2", "tint": Color(0.8, 0.65, 0.55), "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
+	&"grape_regrow": {"pack": "A017", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/corn_2", "tint": Color(0.58, 0.62, 0.9), "geometry": CROP_TALL, "final": CROP_TALL, "bare": true},
 	&"withered": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"trampled": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},

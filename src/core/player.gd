@@ -142,7 +142,7 @@ static func facing(state: Dictionary) -> int:
 static func target(state: Dictionary) -> Vector2i:
 	var here := cell(state)
 	var ahead: Vector2i = here + FACING_STEPS[facing(state)]
-	if Grid.in_bounds(ahead) and Interact.verb_at(state, ahead) != &"":
+	if Grid.in_bounds(ahead) and (Interact.verb_at(state, ahead) != &"" or Farming.can_clear(state, ahead)):
 		return ahead
 	var underfoot := Interact.verb_at(state, here)
 	# Bare lawn takes the hoe only in front. Existing plots keep the useful

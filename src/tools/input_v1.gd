@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 27
+const V1_CASES := 28
 
 
 func _process(delta: float) -> bool:
@@ -77,6 +77,7 @@ func _run() -> void:
 	await _case_0169_inventory()
 	await _case_0170_seeds()
 	await _case_0171_winter()
+	await _case_0172_regrow()
 	_finish()
 
 
@@ -2186,5 +2187,51 @@ func _case_0171_winter() -> void:
 	if badge != null:
 		expect(badge.text == I18n.t(&"DHUD_NO_SEEDS"), "the winter seed strip explains outdoor dormancy")
 		expect(badge.autowrap_mode == TextServer.AUTOWRAP_WORD_SMART and badge.position.y == 46 and badge.size.x <= 158, "the winter explanation fits the seed rows instead of overflowing the pager")
+	await close_scene()
+	_completed += 1
+
+
+## 0172 - SPACE picks once; the existing REMOVE action hoes the standing plant.
+func _case_0172_regrow() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	SuiteKit.crop_supplies(state, GameData.STRAWBERRY)
+	Farming.select_seed(state, GameData.STRAWBERRY)
+	var cell: Vector2i = Farming.field_cells(state)[0]
+	Farming.act(state, cell)
+	Farming.act(state, cell)
+	Farming.plot(state, cell)["growth"] = Farming.days_to_grow(GameData.STRAWBERRY)
+	state["water_can"] = 0
+	_stand_at(state, cell + Vector2i.UP, Player.SOUTH)
+	await frames(2)
+	var before := Resources.amount(state, GameData.STRAWBERRY)
+	await press_key(KEY_SPACE, true)
+	await until(func() -> bool: return bool(Farming.plot(state, cell).get("regrowing", false)), "SPACE picks strawberries and leaves their plant")
+	await press_key(KEY_SPACE, false)
+	await frames(3)
+	expect(Resources.amount(state, GameData.STRAWBERRY) == before + 2, "one SPACE harvest pays once")
+	var world := require_control("WorldView")
+	var regrow := false
+	for sprite in world._plot_sprites:
+		if sprite.get_meta("plot_cell", -1) == Grid.index(cell) and sprite.get_meta("plot_art", "") == "strawberry_regrow":
+			regrow = true
+	expect(regrow, "the picked crop draws its regrowth frame")
+	var tooltip := require_control("Tooltip")
+	expect(tooltip._world_text.contains(I18n.f(&"DHUD_HOE_CLEAR", [root.get_node("Actions").text_of(&"remove")])), "the highlighted plant explains how to clear with the hoe")
+	await click_cell(cell, MOUSE_BUTTON_RIGHT)
+	await frames(4)
+	expect(Farming.plot(state, cell) == Farming.EMPTY_PLOT, "REMOVE clears the standing plant with the hoe")
+	expect(Resources.amount(state, GameData.STRAWBERRY) == before + 2, "the hoe gives no second harvest")
+	Farming.act(state, cell)
+	Farming.plot(state, cell)["growth"] = Farming.days_to_grow(GameData.STRAWBERRY)
+	Farming.act(state, cell)
+	await _pad_tap(JOY_BUTTON_RIGHT_STICK)
+	await frames(4)
+	expect(Farming.plot(state, cell) == Farming.EMPTY_PLOT, "the pad REMOVE button also clears a regrowing plant")
 	await close_scene()
 	_completed += 1

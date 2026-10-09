@@ -538,3 +538,5 @@ ITEM_GRAPE_SEED,0,grape seed,semente de uva
 ITEM_BEET_SEED,0,beet seed,semente de beterraba
 DHUD_NO_SEEDS,224,Nothing grows outdoors in winter,Nada cresce ao ar livre no inverno
 WHY_NO_OUTDOOR_GROWTH,224,Nothing grows outdoors in winter,Nada cresce ao ar livre no inverno
+DHUD_HOE_CLEAR,224,%s: clear with hoe,%s: limpar com enxada
+DESC_REGROWS_IN,224,Regrows in %d watered days,Rebrota em %d dias regados

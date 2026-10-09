@@ -101,6 +101,11 @@ static func _tick_day(state: Dictionary) -> void:
 	# actually manage this tick rather than last tick's.
 	Power.tick(state)
 
+	# REMOVE outside build mode uses the hoe on the faced crop (0172).
+	if bool(intent.get("build_sell", false)) and not Building.is_active(state) \
+			and StringName(state["open_panel"]) == &"" and not House.inside(state):
+		if Farming.clear_crop(state, Player.target(state)):
+			intent["build_sell"] = false
 	Building.tick(state)
 	# **Filling the can is a fact about where the player is standing**, so it
 	# is asked here where both are in scope rather than from inside `Farming`,

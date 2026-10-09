@@ -242,6 +242,8 @@ static func crop(id: StringName) -> String:
 		[Shop.buy_price(Farming.packet(id))]))
 	lines.append(I18n.f(&"DESC_GROWS_IN",
 		[int(one.get("growth_days", 0))]))
+	if Farming.regrow_days(id) > 0:
+		lines.append(I18n.f(&"DESC_REGROWS_IN", [Farming.regrow_days(id)]))
 	lines.append(I18n.f(&"DESC_SELLS_FOR",
 		[int(GameData.SELL_PRICE.get(id, 0))]))
 	return "\n".join(lines)

@@ -1,7 +1,7 @@
 # 0172 - Crops that grow back
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0168
 - **Likely files:** src/core/farming.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd
 
@@ -21,10 +21,10 @@ Strawberry, corn, pepper and grape grow back after picking, so planting them ear
 
 ## Done when
 
-- [ ] `_task_0172_regrow` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`): a strawberry harvested when ready is ready again `regrow_days` watered mornings later without replanting; a carrot leaves an empty plot
-- [ ] A new `regrowing` scenario: `python tools/shot.py 0172 regrowing --fhd` shows a regrowing strawberry beside a ripe one; opened and looked at
-- [ ] `python tools/verify.py` prints PASS
-- [ ] the determinism hash is unchanged, or the change is deliberate and both
+- [x] `_task_0172_regrow` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`): a strawberry harvested when ready is ready again `regrow_days` watered mornings later without replanting; a carrot leaves an empty plot
+- [x] A new `regrowing` scenario: `python tools/shot.py 0172 regrowing --fhd` shows a regrowing strawberry beside a ripe one; opened and looked at
+- [x] `python tools/verify.py` prints PASS
+- [x] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal
 
 ## House rules

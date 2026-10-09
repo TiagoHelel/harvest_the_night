@@ -394,6 +394,9 @@ func _drive_cursor(delta: float) -> void:
 		intent["ability_cell"] = [-1, -1]
 		var target := _target_cell()
 		var refusal := Names.refusal(Interact.why_not(_driver.state, target)) if phase == Phases.DAY else ""
+		if phase == Phases.DAY and Farming.can_clear(_driver.state, target):
+			var actions := get_node_or_null(^"/root/Actions")
+			refusal = I18n.f(&"DHUD_HOE_CLEAR", [actions.text_of(&"remove") if actions != null else ""])
 		_tooltip.show_world(refusal, _world.cell_to_screen(target))
 		return
 	var step := Vector2i.ZERO
@@ -588,6 +591,14 @@ func _input(event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Only an unhandled REMOVE reaches the hoe: clicks on a menu stay there.
+	if event.is_action_pressed(&"remove") and _router.here() == _router.RUN and not _quiet \
+			and not Building.is_active(_driver.state) and not House.inside(_driver.state) \
+			and StringName(_driver.state["open_panel"]) == &"" \
+			and Farming.can_clear(_driver.state, Player.target(_driver.state)):
+		_driver.state["intent"]["build_sell"] = true
+		get_viewport().set_input_as_handled()
+		return
 	# **The cursor's confirm** when build mode is not up to take it: an armed
 	# flare goes off there (task 0135), or what it reads as repair is mended
 	# (task 0134). `cancel` puts an armed flare away before it opens a menu.
@@ -650,7 +661,7 @@ func _just_pressed(action: StringName) -> bool:
 func _target_cell() -> Vector2i:
 	var state := _driver.state
 	var cell := Player.target(state)
-	return cell if Interact.verb_at(state, cell) != &"" else Vector2i(-1, -1)
+	return cell if Interact.verb_at(state, cell) != &"" or Farming.can_clear(state, cell) else Vector2i(-1, -1)
 
 
 ## Nothing listens for a tick any more: every panel reads the state each frame

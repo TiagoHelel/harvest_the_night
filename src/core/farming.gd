@@ -118,7 +118,10 @@ static func select_seed_at(state: Dictionary, index: int) -> bool:
 ##
 ## Whole harvests in one season, net of their seeds.
 static func value_per_season(id: StringName) -> int:
-	return value_per_harvest(id) * harvests_per_season(id)
+	var data: Dictionary = GameData.CROPS[id]
+	var harvests := harvests_per_season(id)
+	var seeds := 1 if regrow_days(id) > 0 else harvests
+	return int(data["yield"]) * int(GameData.SELL_PRICE[id]) * harvests - int(data["seed_cost"]) * seeds
 
 
 ## Sale value of one harvest less what the seed cost.
@@ -130,10 +133,16 @@ static func value_per_harvest(id: StringName) -> int:
 ## How many times a watered plot comes round in a season. Also how many times the
 ## player has to walk back to it, which is the real cost of the fast crops.
 static func harvests_per_season(id: StringName) -> int:
-	return GameData.SEASON_DAYS / maxi(days_to_grow(id), 1)
+	return GameData.crop_harvests(GameData.CROPS[id])
 
 
-## Growing time in watered days, for the menu.
+## Watered days between picks; zero means the plant is harvested only once.
+## Old plots read their absent regrowth marker as false.
+static func regrow_days(id: StringName) -> int:
+	return int(GameData.CROPS[id].get("regrow_days", 0))
+
+
+## Initial growing time in watered days, for the menu.
 static func days_to_grow(id: StringName) -> int:
 	return int((GameData.CROPS[id] as Dictionary)["growth_days"])
 
@@ -175,8 +184,8 @@ static func crop_on(state: Dictionary, cell: Vector2i) -> StringName:
 	return plot(state, cell).get("crop", &"")
 
 
-## How far along, from 0 at planting to `stages - 1` when it is ready. What the
-## sprite of task 0029 follows.
+## Initial stages run from 0 to `stages - 1` when ready.
+## `stages` is the separate regrowth frame until the plant is ready again.
 static func stage(state: Dictionary, cell: Vector2i) -> int:
 	var here := plot(state, cell)
 	var crop: StringName = here.get("crop", &"")
@@ -188,6 +197,8 @@ static func stage(state: Dictionary, cell: Vector2i) -> int:
 	var grown := int(here["growth"])
 	if grown >= needed:
 		return stages - 1
+	if bool(here.get("regrowing", false)):
+		return stages
 	# Integer arithmetic throughout: a stage boundary that landed differently
 	# on two machines would be a visible desync in something nobody would think
 	# to look at.
@@ -289,6 +300,20 @@ static func act(state: Dictionary, cell: Vector2i) -> void:
 			_water(state, cell)
 
 
+## The explicit hoe road, separate from SPACE's water/harvest verb.
+static func can_clear(state: Dictionary, cell: Vector2i) -> bool:
+	return int(state["phase"]) == Phases.DAY and Grid.in_bounds(cell) \
+		and Farm.is_empty(state, cell) and crop_on(state, cell) != &""
+
+
+## Clearing spends the plant and leaves tilled earth; it never pays a harvest.
+static func clear_crop(state: Dictionary, cell: Vector2i) -> bool:
+	if not can_clear(state, cell):
+		return false
+	_till(state, cell)
+	return true
+
+
 static func _till(state: Dictionary, cell: Vector2i) -> void:
 	(state["plots"] as Dictionary)[Grid.index(cell)] = EMPTY_PLOT.duplicate()
 	_worked(state, cell)
@@ -315,6 +340,7 @@ static func _plant(state: Dictionary, cell: Vector2i) -> void:
 	# Something planted where a crop was trampled (task 0155): the mark goes.
 	here.erase("trampled")
 	here.erase("withered")
+	here.erase("regrowing")
 	_worked(state, cell)
 
 
@@ -337,6 +363,7 @@ static func trample(state: Dictionary, cells: Array) -> int:
 		here["crop"] = &""
 		here["growth"] = 0
 		here.erase("morning_credit")
+		here.erase("regrowing")
 		here["trampled"] = crop
 		_worked(state, Grid.cell(idx))
 		lost += 1
@@ -371,15 +398,21 @@ static func dry_out(state: Dictionary) -> void:
 		here["watered"] = false
 
 
-## Take the crop and leave the ground turned over, ready for the next one.
+## Pick once, keeping repeat-bearing plants short of readiness for regrowth.
 static func _harvest(state: Dictionary, cell: Vector2i) -> void:
 	var here: Dictionary = (state["plots"] as Dictionary)[Grid.index(cell)]
 	var crop: StringName = here["crop"]
 	var data: Dictionary = GameData.CROPS[crop]
 	Resources.add(state, crop, int(data["yield"]))
-	here["crop"] = &""
-	here["growth"] = 0
-	here["watered"] = false
+	var regrow := regrow_days(crop)
+	if regrow > 0:
+		here["regrowing"] = true
+		here["growth"] = days_to_grow(crop) - regrow
+	else:
+		here["crop"] = &""
+		here["growth"] = 0
+		here["watered"] = false
+		here.erase("regrowing")
 	here.erase("morning_credit")
 	_worked(state, cell)
 
@@ -406,6 +439,7 @@ static func morning(state: Dictionary) -> void:
 			here["watered"] = false
 			here.erase("morning_credit")
 			here.erase("trampled")
+			here.erase("regrowing")
 			_worked(state, Grid.cell(int(idx)))
 		if Farm.terrain_at(state, Grid.cell(int(idx))) == Farm.Terrain.GRASS:
 			var last := int(here.get("last_worked_morning", state["day"]))

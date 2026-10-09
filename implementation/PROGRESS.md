@@ -17083,3 +17083,79 @@ src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
 assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0171-winter-rules.md,
 implementation/shots/0171/, docs/devlog/{index,index.pt_BR}.md (devlog.py --check).
+
+## 0172 - Crops that grow back - done 2026-10-09
+
+What changed: strawberry and corn regrow after four watered mornings; pepper
+and grape after three. Picking leaves the plant in its own regrowth stage,
+short of the existing growth threshold, and consumes no new packet. Watered
+mornings still go through Phases.begin_day; dry mornings wait, and the first
+morning of the next season withers regrowing plants as well. The existing
+REMOVE action clears the faced plant with the hoe (right mouse / right-stick
+press), without another payout; its localized highlight explains the action.
+Only unhandled input reaches the hoe, so menu clicks stay in their menus.
+
+The optional plot marker defaults to false. Growth still counts watered
+mornings toward the original threshold; State.VERSION remains 7, and both
+old plots and new regrowth saves are covered. A015/A016/A017 placeholders use
+existing stage-2 crop textures with a separate regrowth tint and the packs'
+final geometry; no PNG art was generated, drawn or edited.
+
+Balance: value_per_day had already become value_per_season in 0170. That
+current helper and check_crops now share the whole-harvest calculation:
+1 + floor((14 - initial_growth) / regrow_days) for regrowing crops, with one
+seed cost for the plant; single-harvest crops retain floor(14 / growth) and
+a seed cost per harvest. This keeps the existing 14-watered-morning season
+estimate. The table shows why no crop dominates another in its season on all
+three axes: net value, harvesting visits, and initial packet capital.
+
+| Season | Crop | Initial days | Regrow days | Packet cost | Harvests / visits | Net season value |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Spring | carrot | 3 | 0 | 2 | 4 | 16 |
+| Spring | garlic | 4 | 0 | 3 | 3 | 21 |
+| Spring | potato | 5 | 0 | 4 | 2 | 24 |
+| Spring | strawberry | 8 | 4 | 8 | 2 | 72 |
+| Summer | corn | 8 | 4 | 4 | 2 | 26 |
+| Summer | pepper | 5 | 3 | 5 | 4 | 67 |
+| Summer | sunflower | 7 | 0 | 6 | 2 | 28 |
+| Summer | melon | 10 | 0 | 10 | 1 | 40 |
+| Autumn | wheat | 4 | 0 | 2 | 3 | 18 |
+| Autumn | beet | 6 | 0 | 7 | 2 | 30 |
+| Autumn | grape | 8 | 3 | 9 | 3 | 123 |
+| Autumn | pumpkin | 10 | 0 | 11 | 1 | 41 |
+
+Verify: 60 PASS, 0 FAIL, 0 SKIP in 591s. Headless 16841 / v1 1371 asserts,
+input 1127 / v1 407 cases, all with zero failures; 56 nights for two seeds,
+168 scripts parsed, 541 bilingual keys fit, 5488 UI checks passed, and Windows
+and Web exports passed. Final perf: a night tick 3427us of 8333us (41%) and
+a path rebuild 9185us of 33333us.
+SIM 1129539259 unchanged: the fixed scenario never harvests a regrowing crop.
+DATA deliberately moved 4196406930 -> 3367436400 for the four regrow_days;
+accepted the new baseline and confirmed it unchanged on the final run.
+The first full run (621s) had one failing row: crop placement/growth expected
+corn's normal placeholder tint after harvesting it in each of four light
+ramps. Updated the showcase to require the registered regrowth tint; its
+10056 checks then passed. A windowed invocation of the normally headless input
+suite stalled in an earlier bed case; the prescribed headless suite passed
+after the hoe was routed through unhandled events, including real mouse and
+pad REMOVE events. Total OVER BUDGET is the known machine timing notice.
+
+Looked at: six final captures opened individually at full 1920x1080 against
+the reference sheet and approved blue farmer. Regrowing strawberries sit
+beside ripe fruit in each row: the smaller cool plant and warm mature frame
+are distinguishable. The farmer, soil contacts and five habitual screens keep
+the existing scale. Final pack art remains the later integration tasks'.
+Kept: implementation/shots/0172/regrowing-pt_BR.png, noon-pt_BR.png,
+dusk-pt_BR.png, wave-pt_BR.png, result-pt_BR.png, tech-pt_BR.png.
+
+Notes: the 1716 paths dirty at claim belong to the owner/art pipeline and stay
+outside this commit. Protected paths remain unstaged, including project.godot
+and implementation/backlog/. The RUN-key question remains open. Never pushed.
+Backlog: 296 tasks, 159 done, 137 todo, 0 doing, 0 blocked; 56 todo wait for Codex art.
+
+Files: src/core/{farming,game_data,player,sim}.gd,
+src/ui/{describe,main,placeholder_art,world_view}.gd,
+src/tools/{art_showcase,headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0172-regrowing-crops.md,
+implementation/shots/0172/, docs/devlog/{index,index.pt_BR}.md (devlog.py --check).

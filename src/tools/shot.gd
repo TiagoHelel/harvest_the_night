@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["regrowing", "regrowing strawberries beside ripe fruit", ""],
 	["withered", "summer crops wither on Autumn 1", ""],
 	["winter_day", "outdoor fields rest in winter", ""],
 	["spring_field", "spring crops and held seed packets", ""],
@@ -673,6 +674,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"spring_field": _set_spring_field(state)
 		"summer_field": _set_summer_field(state)
 		"withered": _set_withered(state)
+		"regrowing": _set_regrowing(state)
 		"winter_day": _set_winter_day(state)
 		"seed_page_one": _set_seed_page_one(state)
 		"seed_page_two": _set_seed_page_two(state)
@@ -1777,3 +1779,15 @@ func _set_winter_day(state: Dictionary) -> void:
 	Farming.dry_out(state)
 	_on_date(state, 3 * GameData.SEASON_DAYS + 1)
 	Farming.morning(state)
+
+
+func _set_regrowing(state: Dictionary) -> void:
+	_set_spring_field(state)
+	var cells := Farming.field_cells(state)
+	for i in cells.size():
+		var here := Farming.plot(state, cells[i])
+		here["crop"] = GameData.STRAWBERRY
+		here["growth"] = Farming.days_to_grow(GameData.STRAWBERRY)
+		if i % 6 < 3:
+			Farming.act(state, cells[i])
+	Farming.select_seed(state, GameData.STRAWBERRY)

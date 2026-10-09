@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-160 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+161 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -203,6 +203,7 @@ voz alta.
 | 0169 | An inventory for many things | 2026-10-09 |
 | 0170 | Crops keep to their seasons | 2026-10-09 |
 | 0171 | Winter: nothing grows outside | 2026-10-09 |
+| 0172 | Crops that grow back | 2026-10-09 |
 
 ## Toda vez que o jogo mudou por baixo
 

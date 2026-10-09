@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#############...........`  **158 / 296 done**
+`#############...........`  **159 / 296 done**
 
-0 doing / 138 todo / 0 blocked across 18 phases.
+0 doing / 137 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-138 task(s) left, the ready ones first, then what they
+137 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,23 +242,6 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0172 - Crops that grow back
-
-Ready to pick up.  Likely files: `src/core/farming.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-Strawberry, corn, pepper and grape grow back after picking, so planting them early in their season is a choice that pays all season long.
-
-- `CROPS` gains `regrow_days` (`# LEVER`) for strawberry 4, corn 4, pepper 3 and grape 3 (plan section 3.1)
-- `Farming._harvest` on a regrowing crop leaves the plant in a regrowing state, `regrow_days` short of ready, instead of an empty plot; watering and the morning credit work as for any crop, and the hoe clears it
-- `Farming.stage()` reports a distinct regrowing stage the view draws as `<crop>_regrow`; until A015/A016/A017 are integrated by 0198/0199/0200 it is the stage-2 sprite tinted, through the placeholder road
-- `value_per_day` and `check_crops` count regrowth: harvests in a season are one plus the whole regrowths left in it. Put the table in the journal so the four do not dominate the rest
-- The season-change withering of 0171 takes regrowing plants too; if 0171 has landed, assert it
-- The new plot field is read with a default (plots are `RUN_DATA`); if it changes what a saved `growth` means, bump `State.VERSION` and migrate
-- DATA moves; SIM only if the scenario harvests a regrowing crop
-
-  - done when: `_task_0172_regrow` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`): a strawberry harvested when ready is ready again `regrow_days` watered mornings later without replanting; a carrot leaves an empty plot
-  - done when: A new `regrowing` scenario: `python tools/shot.py 0172 regrowing --fhd` shows a regrowing strawberry beside a ripe one; opened and looked at
-
 ### 0173 - Five tools, three tiers
 
 Ready to pick up.  Likely files: `src/core/tool_tiers.gd (new), src/core/state.gd, src/core/game_data.gd, src/core/crafting.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/player_work.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -370,6 +353,60 @@ The trampled crop of 0155, the withered crop of 0171 and the tilled-grass edges 
   - done when: `python tools/check_crop_art.py` and `python tools/show_art.py --crops --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0197/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
+### 0198 - Art: spring crops
+
+Waits for Codex art A015.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
+
+Potato, garlic and strawberry, and the spring seed packets, get their approved art in place of 0168's tinted stand-ins.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A015` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A015-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/crops` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_crop_art.KINDS`; `tools/check_ui_art.py`, which counts only task 0018's icons today - give it the new family rather than breaking that count).
+- Runtime names: `<crop>_0..3` for potato, garlic and strawberry (16x16, pivot (8,14)), strawberry's regrowing stage under the name 0172 draws, and `ui/icon_<id>` (16x16) with `ui/hud_<id>` (10x10) cut from one source for the produce and the carrot, potato, garlic and strawberry seed packets (ids from 0170)
+- Replace the stand-ins of 0168, 0170 and 0172 and flip A015's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A015 integrated`.
+
+  - done when: `python tools/check_crop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --crops --check` and `--ui --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0198/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
+### 0199 - Art: summer crops
+
+Waits for Codex art A016.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
+
+Pepper, sunflower and melon, corn's regrowing stage and the summer seed packets get their approved art.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A016` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A016-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/crops` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_crop_art.KINDS`, `tools/check_ui_art.py`).
+- Runtime names: `<crop>_0..3` for pepper and melon (16x16, pivot (8,14)) and the tall sunflower at the canvas and pivot 0168 settled, pepper's and corn's regrowing stages, icons (16x16 + 10x10 from one source) for the produce and the corn, pepper, sunflower and melon seed packets
+- Replace the stand-ins of 0168, 0170 and 0172 and flip A016's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A016 integrated`.
+
+  - done when: `python tools/check_crop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --crops --check` and `--ui --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0199/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
+### 0200 - Art: autumn crops
+
+Waits for Codex art A017.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
+
+Pumpkin, the grape on its trellis and beet, and the autumn seed packets, get their approved art.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A017` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A017-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/crops` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_crop_art.KINDS`, `tools/check_ui_art.py`).
+- Runtime names: `<crop>_0..3` for pumpkin and beet (16x16, pivot (8,14)) and the tall grape trellis at the canvas and pivot 0168 settled with its regrowing stage, icons (16x16 + 10x10 from one source) for the produce and the wheat, pumpkin, grape and beet seed packets
+- Replace the stand-ins of 0168, 0170 and 0172 and flip A017's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A017 integrated`.
+
+  - done when: `python tools/check_crop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --crops --check` and `--ui --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0200/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0289 - Art: the morning report
@@ -492,60 +529,6 @@ At night the animals sleep inside and the barn becomes something to defend: brea
 
   - done when: `_task_0186_barns_night` in `src/tools/headless_v1.gd` (a short night with breakers set down beside the barn, mornings by `Phases.begin_day`): breakers reach a barn and wreck it, then leave it for other prey; it stands, produces nothing the next day, keeps every animal, and works again after a day repair
   - done when: A new `barn_night` scenario: `python tools/shot.py 0186 barn_night --fhd` shows a hurt and a wrecked barn at night and the next morning; opened and looked at
-
-### 0198 - Art: spring crops
-
-Waits on 0172.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
-
-Potato, garlic and strawberry, and the spring seed packets, get their approved art in place of 0168's tinted stand-ins.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A015` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A015-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/crops` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_crop_art.KINDS`; `tools/check_ui_art.py`, which counts only task 0018's icons today - give it the new family rather than breaking that count).
-- Runtime names: `<crop>_0..3` for potato, garlic and strawberry (16x16, pivot (8,14)), strawberry's regrowing stage under the name 0172 draws, and `ui/icon_<id>` (16x16) with `ui/hud_<id>` (10x10) cut from one source for the produce and the carrot, potato, garlic and strawberry seed packets (ids from 0170)
-- Replace the stand-ins of 0168, 0170 and 0172 and flip A015's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A015 integrated`.
-
-  - done when: `python tools/check_crop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --crops --check` and `--ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0198/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0199 - Art: summer crops
-
-Waits on 0172.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
-
-Pepper, sunflower and melon, corn's regrowing stage and the summer seed packets get their approved art.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A016` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A016-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/crops` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_crop_art.KINDS`, `tools/check_ui_art.py`).
-- Runtime names: `<crop>_0..3` for pepper and melon (16x16, pivot (8,14)) and the tall sunflower at the canvas and pivot 0168 settled, pepper's and corn's regrowing stages, icons (16x16 + 10x10 from one source) for the produce and the corn, pepper, sunflower and melon seed packets
-- Replace the stand-ins of 0168, 0170 and 0172 and flip A016's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A016 integrated`.
-
-  - done when: `python tools/check_crop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --crops --check` and `--ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0199/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0200 - Art: autumn crops
-
-Waits on 0172.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
-
-Pumpkin, the grape on its trellis and beet, and the autumn seed packets, get their approved art.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A017` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A017-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/crops` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_crop_art.KINDS`, `tools/check_ui_art.py`).
-- Runtime names: `<crop>_0..3` for pumpkin and beet (16x16, pivot (8,14)) and the tall grape trellis at the canvas and pivot 0168 settled with its regrowing stage, icons (16x16 + 10x10 from one source) for the produce and the wheat, pumpkin, grape and beet seed packets
-- Replace the stand-ins of 0168, 0170 and 0172 and flip A017's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A017 integrated`.
-
-  - done when: `python tools/check_crop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --crops --check` and `--ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0200/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0215 - Art: the shipping bin
 
@@ -1045,7 +1028,7 @@ Wine, juice, jelly, pickles, cheese, butter, cloth, sandbags, flour, bread and s
 
 ### 0194 - The day's economy
 
-Waits on 0193, 0189, 0172, 0174, 0177, 0178, 0180, 0182, 0186, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
+Waits on 0193, 0189, 0174, 0177, 0178, 0180, 0182, 0186, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
 
 The day's money is tuned on purpose: a price for every item, and targets per season so that a good day buys about one new defence (plan section 5's rule of thumb).
 
@@ -2747,7 +2730,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (7/53)
+## 12 - The day that pays  (8/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2756,7 +2739,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0169** [An inventory for many things](prompts/0169-inventory.md)
 - [x] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md)
 - [x] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md)
-- [ ] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md)
+- [x] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md)
 - [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md)
 - [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md) - needs 0173
 - [ ] **0175** [The axe and the pickaxe by tier](prompts/0175-axe-pickaxe.md) - needs 0173
@@ -2778,13 +2761,13 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188, 0184
 - [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0176, 0188, 0190, 0192
-- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0172, 0174, 0177, 0178, 0180, 0182, 0186, 0191
+- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0174, 0177, 0178, 0180, 0182, 0186, 0191
 - [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md) - needs 0194
 - [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0194, 0195
 - [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - waits for art A014
-- [ ] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md) - needs 0172 - waits for art A015
-- [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - needs 0172 - waits for art A016
-- [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md) - needs 0172 - waits for art A017
+- [ ] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md) - waits for art A015
+- [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - waits for art A016
+- [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md) - waits for art A017
 - [ ] **0201** [Art: sprinklers](prompts/0201-art-sprinklers.md) - needs 0178 - waits for art A018
 - [ ] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md) - needs 0173, 0176, 0190 - waits for art A019
 - [ ] **0203** [Art: material icons](prompts/0203-art-material-icons.md) - needs 0176, 0177, 0184 - waits for art A020

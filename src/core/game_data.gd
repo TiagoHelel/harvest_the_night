@@ -326,7 +326,7 @@ const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
 # ===================================================================== crops
 
 ## The twelve crops of the 1.0 plan, each with a different reason to plant it.
-## Sowing seasons are rules; regrowth belongs to 0172.
+## Sowing seasons and watered regrowth mornings are rules (0170, 0172).
 ##
 ## ## Money, attention, capital - pick two
 ##
@@ -362,6 +362,7 @@ const CROPS: Dictionary = {
 		"seed_cost": 4,                 # LEVER: money, 1-10
 		"growth_days": 8,              # LEVER: watered mornings, 1-14
 		"yield": 3,                     # LEVER: units per harvest, 2-5
+		"regrow_days": 4,              # LEVER: watered mornings, 1-growth_days
 		"stages": 4,
 	},
 	CARROT: {
@@ -390,6 +391,7 @@ const CROPS: Dictionary = {
 		"seed_cost": 8,                 # LEVER: money, 1-16
 		"growth_days": 8,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"regrow_days": 4,              # LEVER: watered mornings, 1-growth_days
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	PEPPER: {
@@ -397,6 +399,7 @@ const CROPS: Dictionary = {
 		"seed_cost": 5,                 # LEVER: money, 1-16
 		"growth_days": 5,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"regrow_days": 3,              # LEVER: watered mornings, 1-growth_days
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	SUNFLOWER: {
@@ -425,6 +428,7 @@ const CROPS: Dictionary = {
 		"seed_cost": 9,                 # LEVER: money, 1-16
 		"growth_days": 8,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"regrow_days": 3,              # LEVER: watered mornings, 1-growth_days
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	BEET: {
@@ -2250,6 +2254,9 @@ static func check_crops(crops: Dictionary) -> Array:
 		if int((crops[crop_id] as Dictionary)["growth_days"]) <= 0:
 			errors.append("crop '%s' grows in no time at all" % crop_id)
 
+		var regrow := int(crops[crop_id].get("regrow_days", 0))
+		if regrow < 0 or regrow > int(crops[crop_id]["growth_days"]):
+			errors.append("crop '%s' regrows outside 0-growth_days" % crop_id)
 		var seasons: Array = crops[crop_id].get("seasons", [])
 		if seasons.is_empty():
 			errors.append("crop '%s' has no sowing season" % crop_id)
@@ -2287,14 +2294,24 @@ static func check_crops(crops: Dictionary) -> Array:
 	return errors
 
 
+## Whole watered harvests in the season estimate shared by the HUD and balance.
+static func crop_harvests(data: Dictionary) -> int:
+	var grown := maxi(int(data["growth_days"]), 1)
+	var regrow := int(data.get("regrow_days", 0))
+	if regrow <= 0:
+		return SEASON_DAYS / grown
+	return 0 if grown > SEASON_DAYS else 1 + (SEASON_DAYS - grown) / regrow
+
+
 ## What one plot of a crop offers over a season: money, trips, and the money it
 ## takes to start. The three axes `check_crops()` refuses to let one crop win
 ## outright.
 static func _crop_offer(crops: Dictionary, id: StringName) -> Dictionary:
 	var data: Dictionary = crops[id]
-	var visits := SEASON_DAYS / maxi(int(data["growth_days"]), 1)
-	var net := int(data["yield"]) * int(SELL_PRICE.get(id, 0)) 		- int(data["seed_cost"])
-	return {"value": net * visits, "visits": visits,
+	var visits := crop_harvests(data)
+	var revenue := int(data["yield"]) * int(SELL_PRICE.get(id, 0)) * visits
+	var seeds := 1 if int(data.get("regrow_days", 0)) > 0 else visits
+	return {"value": revenue - int(data["seed_cost"]) * seeds, "visits": visits,
 		"seed": int(data["seed_cost"])}
 
 

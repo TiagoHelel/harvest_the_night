@@ -1786,8 +1786,8 @@ func _refresh_plots() -> void:
 
 		var crop: StringName = here["crop"]
 		if crop != &"":
-			_plot_sprite("%s_%d" % [crop, Farming.stage(_state, cell)],
-				cell)
+			var stage := Farming.stage(_state, cell)
+			_plot_sprite("%s_regrow" % crop if stage == int(GameData.CROPS[crop]["stages"]) else "%s_%d" % [crop, stage], cell)
 		elif here.has("withered"):
 			_withered_sprite(StringName(here["withered"]), cell)
 		elif here.has("trampled"):
@@ -1903,7 +1903,7 @@ func _plot_sprite(art: String, cell: Vector2i) -> void:
 		# resized or generated. The tall crops have eight transparent rows
 		# above the 16x24 corn stand-in in their 16x32 logical canvas.
 		sprite.offset = -Vector2(shape["pivot"])
-		sprite.modulate = PlaceholderArt.art_tint(StringName(art.get_slice("_", 0)))
+		sprite.modulate = PlaceholderArt.art_tint(StringName(art if art.ends_with("_regrow") else art.get_slice("_", 0)))
 	sprite.set_meta("plot_canvas", shape.get("canvas", Vector2i.ZERO))
 	sprite.set_meta("plot_cell", Grid.index(cell))
 	sprite.set_meta("plot_art", art)

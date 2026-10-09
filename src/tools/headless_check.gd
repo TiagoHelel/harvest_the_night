@@ -4238,8 +4238,8 @@ func _task_0028_crops() -> void:
 			"%s yields what the table says" % id,
 			str(Resources.amount(state, id) - before))
 		expect(Farming.is_tilled(state, cell)
-			and Farming.crop_on(state, cell) == &"",
-			"and leaves the ground turned over for the next one")
+			and Farming.crop_on(state, cell) == (id if Farming.regrow_days(id) > 0 else &""),
+			"harvest keeps regrowing plants and clears single-harvest crops")
 
 	# Price balance is now compared within each season; the original three
 	# belong to different seasons and are no longer simultaneous choices.
@@ -14472,7 +14472,7 @@ func _task_0082_shots() -> void:
 	# 0160: the year ending and its credits. Forty-five since 0167:
 	# turned grass beside the starter beds in daylight and at night. Fifty-one
 	# since 0168: twelve crops, both seed pages in the HUD/stall and the ledger.
-	expect(names.size() == 56,
+	expect(names.size() == 57,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

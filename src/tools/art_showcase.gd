@@ -661,8 +661,8 @@ func _crops_check() -> void:
 		expect(sprite.offset == -Vector2(shape["pivot"]), "Tall crops and soil use their exact separate pivots")
 		var crop := StringName(art.get_slice("_", 0))
 		if shape.has("stand_in") and GameData.CROPS.has(crop):
-			expect(sprite.modulate == PlaceholderArt.art_tint(crop),
-				"A temporary crop draws its registered tint")
+			expect(sprite.modulate == PlaceholderArt.art_tint(StringName(art) if art.ends_with("_regrow") else crop),
+				"A temporary crop draws its stage or regrowth registered tint")
 		expect(sprite.get_parent() == _world._plots, "Walkable crop art stays on the ground layer below actors")
 		counts[idx] = int(counts.get(idx, 0)) + 1
 	for idx in _state["plots"]:
@@ -742,7 +742,7 @@ func _crops_family() -> void:
 			expect(Resources.amount(_state,kind) == before + int(GameData.CROPS[kind]["yield"]), "Actual harvest preserves the exact production yield")
 		await _reaction_settle(view)
 		_crops_check()
-		await _shoot("harvested_light%d" % lighting, "Actual harvest clears the plant, resets water and leaves aligned dry furrows")
+		await _shoot("harvested_light%d" % lighting, "Actual harvest clears single-harvest crops and keeps corn regrowing in aligned furrows")
 		# Actual growth from planted through every stage, without changing rates.
 		_crops_fixture(lighting)
 		for row in kinds.size():

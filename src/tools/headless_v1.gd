@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 40
+const GROUPS := 41
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -109,6 +109,7 @@ func _run() -> void:
 	_task_0169_inventory()
 	_task_0170_seasons()
 	_task_0171_winter()
+	_task_0172_regrow()
 
 
 func _finish() -> void:
@@ -3654,3 +3655,74 @@ func _task_0171_winter() -> void:
 		Livestock.tick(state)
 	expect(Livestock.ready_at(state, cow) > 0 and not Livestock.collect(state, cow).is_empty(), "a winter cow produces and can be collected")
 	_completed += 1
+
+
+## 0172 - a picked plant keeps the seed, needs water, and withers at the seam.
+func _task_0172_regrow() -> void:
+	for id in [&"strawberry", &"corn", &"pepper", &"grape"]:
+		var state := State.create(1720)
+		SuiteKit.crop_supplies(state, id)
+		Farming.select_seed(state, id)
+		var cell: Vector2i = Farming.field_cells(state)[0]
+		Farming.act(state, cell)
+		Farming.act(state, cell)
+		Farming.plot(state, cell)["growth"] = Farming.days_to_grow(id)
+		var packets := Resources.amount(state, Farming.packet(id))
+		var before := Resources.amount(state, id)
+		Farming.act(state, cell)
+		expect(Farming.crop_on(state, cell) == id and not Farming.is_ready(state, cell), "%s remains planted after picking" % id)
+		expect(Farming.stage(state, cell) == int(GameData.CROPS[id]["stages"]), "%s has a distinct regrowing stage" % id)
+		var growth := int(Farming.plot(state, cell)["growth"])
+		_0172_morning(state, cell, false)
+		expect(int(Farming.plot(state, cell)["growth"]) == growth, "%s waits through a dry morning" % id)
+		for day in range(1, Farming.regrow_days(id) + 1):
+			_0172_morning(state, cell, true)
+			expect(Farming.is_ready(state, cell) == (day == Farming.regrow_days(id)), "%s is ready at exactly regrowth morning %d" % [id, day])
+		Farming.act(state, cell)
+		expect(Resources.amount(state, id) - before == 2 * int(GameData.CROPS[id]["yield"]) and Resources.amount(state, Farming.packet(id)) == packets, "%s pays twice without another packet" % id)
+		var path := "user://task0172-regrow.sav"
+		expect(Save.write_run_at(path, state), "a regrowing %s save writes" % id)
+		var loaded := Save.read_run_at(path)
+		expect(bool(Farming.plot(loaded, cell).get("regrowing", false)) and int(loaded["version"]) == State.VERSION and State.VERSION == 7, "%s round-trips without changing growth units or version" % id)
+		Save._remove(path)
+		Save._remove(path + ".bak")
+		# The existing hoe resets all plot fields, with no harvest payout.
+		var held := Resources.amount(state, id)
+		expect(Farming.clear_crop(loaded, cell) and Farming.plot(loaded, cell) == Farming.EMPTY_PLOT, "the hoe clears %s and its regrowth marker" % id)
+		expect(Resources.amount(loaded, id) == held, "clearing pays no %s" % id)
+		# A planted regrowing crop is subject to the same season seam as a new one.
+		state["day"] = (GameData.SEASONS.find(GameData.CROPS[id]["seasons"][0]) + 1) * GameData.SEASON_DAYS + 1
+		state["days_held"] = 0
+		state["phase"] = Phases.RESULT
+		expect(Phases.begin_day(state), "the next season begins after %s" % id)
+		expect(Farming.crop_on(state, cell) == &"" and Farming.plot(state, cell).get("withered") == id and not Farming.plot(state, cell).has("regrowing"), "%s also withers while regrowing" % id)
+	var carrot := State.create(1721)
+	var cell: Vector2i = Farming.field_cells(carrot)[0]
+	Farming.act(carrot, cell)
+	Farming.act(carrot, cell)
+	Farming.plot(carrot, cell)["growth"] = Farming.days_to_grow(GameData.CARROT)
+	expect(not Farming.plot(carrot, cell).has("regrowing") and Farming.is_ready(carrot, cell), "an old plot without regrowth retains its original growth meaning")
+	Farming.act(carrot, cell)
+	expect(Farming.crop_on(carrot, cell) == &"" and Farming.plot(carrot, cell)["growth"] == 0, "a picked carrot leaves an empty plot")
+	for id in Farming.seeds():
+		var offer := GameData._crop_offer(GameData.CROPS, id)
+		expect(offer["visits"] == Farming.harvests_per_season(id) and offer["value"] == Farming.value_per_season(id), "%s balance and HUD agree on regrowth" % id)
+	for days in [-1, 99]:
+		var rigged := GameData.CROPS.duplicate(true)
+		rigged[&"corn"]["regrow_days"] = days
+		expect(not GameData.check_crops(rigged).is_empty(), "bad regrowth duration is refused")
+	var dominant := GameData.CROPS.duplicate(true)
+	dominant[&"strawberry"]["seed_cost"] = 3
+	dominant[&"strawberry"]["regrow_days"] = 8
+	expect(not GameData.check_crops(dominant).is_empty(), "the balance guard counts regrowth before refusing dominance")
+	expect(GameData.check_crops(GameData.CROPS).is_empty(), "the four repeating crops do not dominate their season")
+	_completed += 1
+
+
+## Cross the actual bedtime, result and morning road, with or without water.
+func _0172_morning(state: Dictionary, cell: Vector2i, watered: bool) -> void:
+	Farming.plot(state, cell)["watered"] = watered
+	Phases.go_to_bed(state)
+	Phases.start_waves(state)
+	Phases.enter_result(state, false)
+	Phases.begin_day(state)
