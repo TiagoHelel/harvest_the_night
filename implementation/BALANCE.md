@@ -326,3 +326,54 @@ loss, which is what `tools/balance.py` reads); night 10 is the `won` column.
 
 The time: 100 runs in 2,366 s, against 1,411 s before - every run now plays
 ten nights.
+
+
+## 0166 - a 560-second day (2026-10-09)
+
+The clock now has 14 ticks per game minute: 16,800 ticks from 06:00 to
+02:00, with dusk at tick 10,080 (18:00). Producer periods scale by
+16,800 / 7,200 = 7/3; physical swings and the fishing reaction window do not.
+This preserves production capacity while leaving more time to cross the farm.
+
+| Producer | New period | Capacity in one nominal day |
+|---|---|---|
+| Barricade / fence / mine / wall kit | 420 / 350 / 560 / 700 ticks | 40 / 48 / 30 / 24 kits |
+| Corn / fish oil | 1,400 / 1,750 ticks | 12 / 9 oil |
+| Incendiary / gunpowder | 700 / 1,050 ticks | 96 / 32 rounds |
+| Meal / fish meal / roast | 840 / 1,050 / 1,260 ticks | 40 / 48 / 52 food |
+| Cow / chicken | 5,600 / 3,500 ticks | 2 / 4 meat before pass-out, if collected promptly |
+| Tree / ore | 8,400 ticks to regrow | Two harvests, including the initial node |
+| Stone seam | 6,300 ticks to regrow | Three harvests, including the initial node |
+| Fishing | 140-700 ticks to bite | 40 mean waits; reaction and travel lower the catch count |
+| Loaded generator | 4,200 ticks per oil | Four oil before pass-out |
+
+Recipe capacities assume continuous queues, enough inputs and full power,
+without tech bonuses. Pass-out handles the final tick before production, so
+a fresh morning can deliver one batch fewer for exact divisors. Waiting
+until the next day retains the unfinished batch. Animals retain their caps
+(two cow products, one chicken product); neglecting collection reduces yield.
+A tight route over the eight ore nodes produces 16 iron; a deliberately slow
+route taking 1/18 day between nodes produces 13. Both still buy one
+thirteen-iron gun tower. Loose boulders still do not regrow.
+
+The shop still restocks wood 15, stone 12, iron 8, wheat 10, corn 8 and
+carrot 12 once per day. These are daily quantities, so scaling them would
+increase supply accidentally. Crops still grow by watered mornings (0165).
+Generator fuel also lasts 140 seconds at night, up from 60: the longer
+fuel period is global, while the night duration remains unchanged.
+
+`tools/autoplay.py 4 --nights=1` provides a short full-day measurement;
+the default remains ten nights for the balance sweep. Each short-run row
+reports actual day ticks and net money before the night reward. It does not
+count the sale value of unsold materials as cash income. Suite policies use
+20:00 bedtime; the standalone policies retain 01:30.
+
+Measured with seed 9000: all four policies worked 16,381 day ticks (01:30
+plus the sleep-intent tick), earned $0 cash and spent $24, then cleared the
+first night with 10 house HP remaining. They gather and consume materials;
+they do not sell those materials, so this is not a claim that daytime work
+has zero sale value. Four runs took 17.6 seconds. The old 900-action guard
+would have cut these longer days short; it now scales with the tick budget.
+The balance reader parsed all four results, and each of its seven lever
+patterns matched exactly once. Its stale brownout pattern now accepts the
+current value of 50 rather than silently skipping the lever.

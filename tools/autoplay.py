@@ -2,6 +2,7 @@
 """Play the ten nights many times over and report.
 
     python tools/autoplay.py
+    python tools/autoplay.py 4 --nights=1  # one full day and night per policy
 
 A reader, not a check: `verify.py` is what fails. This is for looking at the
 curve while tuning it, which task 0060 does a great deal of.

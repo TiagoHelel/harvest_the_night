@@ -108,8 +108,10 @@ const DEFAULT_NIGHTS := 10
 ## ten; the check suite wants one day and one night per policy, which is what
 ## fits inside its two-minute budget.
 static func play(seed_value: int, policy_name: StringName,
-		nights_wanted: int = DEFAULT_NIGHTS) -> Dictionary:
-	var policy: Dictionary = POLICIES[policy_name]
+		nights_wanted: int = DEFAULT_NIGHTS, bed_minute: int = -1) -> Dictionary:
+	var policy: Dictionary = POLICIES[policy_name].duplicate(true)
+	if bed_minute >= 0:
+		policy["bed_minute"] = bed_minute
 	var state := State.create(seed_value)
 	var nights: Array = []
 	var died_on := 0
@@ -148,7 +150,12 @@ static func play(seed_value: int, policy_name: StringName,
 ## `&"cap"` (still running at `NIGHT_TICKS` and a margin).
 static func _one_night(state: Dictionary, policy: Dictionary) -> Dictionary:
 	var spent_before := _worth_of_stock(state)
+	var money_before := Resources.amount(state, GameData.MONEY)
+	var earned_before := int(state["gained"][GameData.MONEY])
 	_a_day(state, policy)
+	var day_money := Resources.amount(state, GameData.MONEY) - money_before
+	var day_ticks := int(state["day_tick"])
+	var day_earned := int(state["gained"][GameData.MONEY]) - earned_before
 	_a_build_step(state, policy)
 	_a_night(state)
 	var ended := _how_it_ended(state)
@@ -160,6 +167,9 @@ static func _one_night(state: Dictionary, policy: Dictionary) -> Dictionary:
 		"walked": int(Rewards.last(state).get("walked", 0)) if ended != &"cap" else 0,
 		"spent": maxi(spent_before - _worth_of_stock(state), 0),
 		"towers": _towers_standing(state),
+		"day_money": day_money,
+		"day_earned": day_earned,
+		"day_ticks": day_ticks,
 	}
 	if int(state["phase"]) == Phases.RESULT:
 		(state["intent"] as Dictionary)["confirm_result"] = true
@@ -205,8 +215,10 @@ static func _a_day(state: Dictionary, policy: Dictionary) -> void:
 	House.leave(state)
 	var bed := mini(Phases.tick_at_minute(int(policy.get("bed_minute",
 		DEFAULT_BED_MINUTE))), GameData.DAY_TICKS - 1)
+	# Each action advances at least one tick. Bound stalled fixtures without
+	# truncating a longer day after the old fixed 900-action limit.
 	var guard := 0
-	while int(state["day_tick"]) < bed and guard < 900:
+	while int(state["day_tick"]) < bed and guard <= bed:
 		guard += 1
 		var spent := _one_thing(state, policy)
 		if spent <= 0:

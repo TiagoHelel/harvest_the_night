@@ -47,12 +47,9 @@ const SECONDS := TICK_HZ
 ## game time instead of a frozen window.
 const MAX_CATCH_UP_TICKS := 8           # LEVER: ticks, 4-16
 
-## How long a day runs before dusk.
-##
-## The day does not end on its own: `design.md` promises the player switches
-## reality when they want to. Past dusk the night button starts asking, and that
-## is all it does.
-const DAY_TICKS := 240 * SECONDS        # LEVER: ticks, 120-480 seconds worth
+## Ticks from waking at 06:00 until passing out at 02:00.
+## Bedtime can end the day earlier; dusk is derived below at 18:00.
+const DAY_TICKS := 16800               # LEVER: ticks, 14400-18000; whole ticks/game minute
 
 ## **The clock** (task 0126): `DAY_TICKS` is mapped onto the hours from
 ## `DAY_START_MINUTE` to `DAY_END_MINUTE`, in minutes since the midnight the
@@ -340,7 +337,7 @@ const GATHERING: Dictionary = {
 		"work_ticks": 1 * SECONDS,      # LEVER: ticks per swing, 15-90
 		"hits": 3,                      # LEVER: swings to fell it, 1-6
 		"yield": {WOOD: 3},             # LEVER: units, all on the last swing
-		"regrow_ticks": 120 * SECONDS,  # LEVER: ticks, 60-240 seconds worth
+		"regrow_ticks": DAY_TICKS / 2,  # LEVER: ticks, half a day between harvests
 		"leaves": &"stump",
 	},
 	# A boulder sitting on the lawn. **It does not come back**, and that is
@@ -355,13 +352,13 @@ const GATHERING: Dictionary = {
 	},
 	# Stone, out of the same cliff as the iron and much easier to get: the
 	# short swing, the big yield and the quick regrowth. Five seams at 3 stone,
-	# back every 90 seconds, is about 39 stone across a 240 second day of
-	# nothing but mining, against 10 for a wall.
+	# back every 210 seconds, retains three harvests per node across a
+	# 560-second day; travel and swings reduce the cliff-wide total.
 	&"seam": {
 		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 20-120
 		"hits": 3,                      # LEVER: swings, 2-5
 		"yield": {STONE: 3},            # LEVER: units, 2-5
-		"regrow_ticks": 90 * SECONDS,   # LEVER: ticks, 45-180 seconds worth
+		"regrow_ticks": DAY_TICKS * 3 / 8,  # LEVER: ticks, three eighths of a day
 	},
 	# Iron, and the thing you are always slightly short of - which is
 	# deliberate, because it gates every tower.
@@ -370,20 +367,16 @@ const GATHERING: Dictionary = {
 	# choice about what you came for rather than a place you leave with
 	# everything:
 	#
-	#     seam   2s a swing, 3 swings, 3 stone, back in 90s
-	#     ore    3s a swing, 3 swings, 1 iron,  back in 120s
-	#
-	# The day that buys one tower: eight nodes, nine seconds of swinging each,
-	# and a hundred and twenty to come back. A node gives twice in a 240 second
-	# day - mine it at 0, again at 129 - so the cliff is worth **16 iron**, for
-	# 144 seconds of the day spent standing at it. A gun tower is 15. That is
-	# the whole design of this resource: a day at the rock face is a tower, and
-	# it is most of the day.
+	#     seam   2s a swing, 3 swings, 3 stone, back in 210s
+	#     ore    3s a swing, 3 swings, 1 iron,  back in 280s
+	# Eight ore nodes still give two harvests each: sixteen iron per day on
+	# a tight route. The longer day leaves more time for walking the farm;
+	# production has not doubled, and the thirteen-iron tower is still work.
 	&"ore": {
 		"work_ticks": 3 * SECONDS,      # LEVER: ticks per swing, 20-150
 		"hits": 3,                      # LEVER: swings, 2-5
 		"yield": {IRON: 1},             # LEVER: units, 1-2
-		"regrow_ticks": 120 * SECONDS,  # LEVER: ticks, 60-240 seconds worth
+		"regrow_ticks": DAY_TICKS / 2,  # LEVER: ticks, half a day between harvests
 	},
 }
 
@@ -391,8 +384,8 @@ const GATHERING: Dictionary = {
 ## the good one. The pond pays the most per action and costs attention rather
 ## than resources.
 const FISHING: Dictionary = {
-	"bite_min_ticks": 2 * SECONDS,      # LEVER: ticks, 1-4 seconds worth
-	"bite_max_ticks": 10 * SECONDS,     # LEVER: ticks, 5-20 seconds worth
+	"bite_min_ticks": DAY_TICKS / 120,  # LEVER: ticks, 1/120 day (4.67 seconds)
+	"bite_max_ticks": DAY_TICKS / 24,   # LEVER: ticks, 1/24 day (23.33 seconds)
 	"window_ticks": 45,                 # LEVER: ticks to react, 20-60
 	"rare_in": 6,                       # LEVER: 1 in N is the rare one, 4-12
 	"common_yield": {FISH: 1},
@@ -415,13 +408,13 @@ const RECIPES: Dictionary = {
 		"station": &"workshop",
 		"inputs": {WOOD: 4},
 		"output": {&"barricade": 1},
-		"ticks": 6 * SECONDS,           # LEVER: ticks, 3-15 seconds worth
+		"ticks": DAY_TICKS * 6 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	&"fence_kit": {
 		"station": &"workshop",
 		"inputs": {WOOD: 5},
 		"output": {&"fence": 1},
-		"ticks": 5 * SECONDS,           # LEVER: ticks, 3-12 seconds worth
+		"ticks": DAY_TICKS * 5 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	# **The mine is made, not bought.** A mine spent is a mine to craft again,
 	# which is what "replenished by crafting" means and what keeps gunpowder
@@ -431,20 +424,20 @@ const RECIPES: Dictionary = {
 		"station": &"workshop",
 		"inputs": {IRON: 5, GUNPOWDER: 8},
 		"output": {&"mine": 1},
-		"ticks": 8 * SECONDS,           # LEVER: ticks, 4-20 seconds worth
+		"ticks": DAY_TICKS * 8 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	&"wall_kit": {
 		"station": &"workshop",
 		"inputs": {STONE: 10},
 		"output": {&"wall": 1},
-		"ticks": 10 * SECONDS,          # LEVER: ticks, 5-20 seconds worth
+		"ticks": DAY_TICKS * 10 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	# Corn is the oil crop, and this is where it stops being food.
 	&"press_oil": {
 		"station": &"press",
 		"inputs": {CORN: 4},
 		"output": {OIL: 1},
-		"ticks": 20 * SECONDS,          # LEVER: ticks, 10-40 seconds worth
+		"ticks": DAY_TICKS * 20 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	# **The other way in**, for the day you have a good pond and a bad field.
 	# Deliberately the worse deal - three fish is $24 against corn's $20, and
@@ -454,38 +447,38 @@ const RECIPES: Dictionary = {
 		"station": &"press",
 		"inputs": {FISH: 3},
 		"output": {OIL: 1},
-		"ticks": 25 * SECONDS,          # LEVER: ticks, 10-45 seconds worth
+		"ticks": DAY_TICKS * 25 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	# The flamethrower's rounds. `design.md` section 5 names this one exactly.
 	&"make_incendiary": {
 		"station": &"workshop",
 		"inputs": {OIL: 1, WOOD: 2},
 		"output": {INCENDIARY: 4},
-		"ticks": 10 * SECONDS,          # LEVER: ticks, 5-25 seconds worth
+		"ticks": DAY_TICKS * 10 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	&"make_gunpowder": {
 		"station": &"workshop",
 		"inputs": {CORN: 2, OIL: 1},
 		"output": {GUNPOWDER: 2},
-		"ticks": 15 * SECONDS,          # LEVER: ticks, 8-30 seconds worth
+		"ticks": DAY_TICKS * 15 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	&"cook_meal": {
 		"station": &"kitchen",
 		"inputs": {CARROT: 2, WHEAT: 1},
 		"output": {FOOD: 2},
-		"ticks": 12 * SECONDS,          # LEVER: ticks, 6-25 seconds worth
+		"ticks": DAY_TICKS * 12 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	&"cook_fish": {
 		"station": &"kitchen",
 		"inputs": {FISH: 1, CARROT: 1},
 		"output": {FOOD: 3},
-		"ticks": 15 * SECONDS,          # LEVER: ticks, 8-30 seconds worth
+		"ticks": DAY_TICKS * 15 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	&"cook_roast": {
 		"station": &"kitchen",
 		"inputs": {MEAT: 1, CORN: 1},
 		"output": {FOOD: 4},
-		"ticks": 18 * SECONDS,          # LEVER: ticks, 10-35 seconds worth
+		"ticks": DAY_TICKS * 18 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 }
 
@@ -544,7 +537,7 @@ const BUILDINGS: Dictionary = {
 		# A drop a minute, so a full day and night of running is five or six oil
 		# against the twelve a press can make in a day. Expensive enough to be a
 		# decision, cheap enough that the answer is sometimes yes.
-		"fuel_every_ticks": 60 * SECONDS,   # LEVER: ticks, 20-120 seconds worth
+		"fuel_every_ticks": DAY_TICKS / 4,  # LEVER: ticks, four oil per full day
 		"size": Vector2i(4, 3),
 	},
 }
@@ -840,12 +833,12 @@ const DEFENCES: Dictionary = {
 const LIVESTOCK: Dictionary = {
 	&"cow": {
 		"produces": {MEAT: 1},
-		"every_ticks": 80 * SECONDS,    # LEVER: ticks, 40-180 seconds worth
+		"every_ticks": DAY_TICKS / 3,   # LEVER: ticks, three production intervals/day
 		"holds": 2,                     # LEVER: units before it stops, 1-5
 	},
 	&"chicken": {
 		"produces": {MEAT: 1},
-		"every_ticks": 50 * SECONDS,    # LEVER: ticks, 25-120 seconds worth
+		"every_ticks": DAY_TICKS * 5 / 24,  # LEVER: ticks, 4.8 production intervals/day
 		"holds": 1,                     # LEVER: units before it stops, 1-4
 	},
 }

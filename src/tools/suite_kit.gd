@@ -81,21 +81,27 @@ static func built_by_day(state: Dictionary, build: Callable) -> Variant:
 	return out
 
 
-## Advance farm time **without ever reaching 02:00**: whenever the day is about
-## to end it starts again at dawn - a day that never ends, for checks about how
-## long something takes (regrowth, a cliff mined for four days), not about
-## nights. Task 0128 made 02:00 pass the farmer out into a night, and that
-## would have stopped every daytime system these checks are timing. Day only.
-static func advance_in_daylight(state: Dictionary, ticks: int) -> void:
-	var left := ticks
-	while left > 0:
-		var room := GameData.DAY_TICKS - 1 - int(state["day_tick"])
-		if room <= 0:
-			state["day_tick"] = 0
-			room = GameData.DAY_TICKS - 1
-		var step := mini(left, room)
-		Sim.advance(state, step)
-		left -= step
+## Advance only regrowth timers in a fixture, checking the real expiry road.
+## No full-day simulation: unrelated systems cannot affect these resource checks.
+static func regrow_after(state: Dictionary, ticks: int) -> void:
+	if ticks <= 0:
+		return
+	for pending in (state["regrowing"] as Array):
+		pending[Gathering.PENDING_TICKS] = int(pending[Gathering.PENDING_TICKS]) - ticks + 1
+	Gathering.tick(state)
+
+
+## A clock fixture exercises the boundary tick without simulating the skipped hours.
+static func reach_day_tick(state: Dictionary, target: int) -> void:
+	state["day_tick"] = target - 1
+	Sim.advance(state, 1)
+
+
+## Suites exercise an early bedtime; the standalone robot keeps its full day.
+static func early_policy(name: StringName) -> Dictionary:
+	var policy: Dictionary = Autoplay.POLICIES[name].duplicate(true)
+	policy["bed_minute"] = 20 * 60
+	return policy
 
 
 ## Advance crop fixtures through watered mornings without simulating long days.

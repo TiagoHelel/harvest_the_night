@@ -1869,9 +1869,14 @@ func _case_0030_fishing() -> void:
 	expect(rod_body.texture.resource_path == PlayerArt.texture_path(&"reel", 0),
 		"Waiting for a fish keeps the rod-ready drawing")
 
-	# **Wait for the bite**, which is the part the player cannot hurry.
+	# The real cast drew a delay from the new range. Rig its final tick so
+	# this input case tests the bite/reel road without waiting 23 seconds.
+	var wait_left := int(state["fishing"]["left"])
+	expect(wait_left > 0 and wait_left <= int(GameData.FISHING["bite_max_ticks"]),
+		"the real cast uses the current bite range", str(wait_left))
+	state["fishing"]["left"] = 1
 	var bit := await until(func() -> bool: return Fishing.is_biting(state),
-		"a fish to bite", 1200)
+		"a fish to bite")
 	expect(bit, "something bites inside the lever range")
 	await frames(1)
 	expect(line != null and line.text.to_lower().contains("bite"),
@@ -2289,9 +2294,9 @@ func _case_0034_livestock() -> void:
 		str(Resources.amount(state, GameData.MEAT)))
 
 	# Wait for it to have something. Driven at speed rather than in real time.
-	var every := int((GameData.LIVESTOCK[&"chicken"]
-		as Dictionary)["every_ticks"])
-	Sim.advance(state, every + 2)
+	Livestock.tick(state)
+	state["livestock"][Grid.index(hen)]["left"] = 1
+	Sim.advance(state, 1)
 	await frames(2)
 	expect(Livestock.ready_at(state, hen) > 0, "it has something now",
 		str(Livestock.ready_at(state, hen)))
@@ -2651,12 +2656,12 @@ func _case_0039_clock() -> void:
 
 	# **The light is not the same at dawn as at dusk.**
 	var dawn := world.light_target()
-	Sim.advance(state, GameData.DAY_TICKS / 2)
+	SuiteKit.reach_day_tick(state, GameData.DAY_TICKS / 2)
 	await frames(4)
 	var noon := world.light_target()
 	# **At dusk, 18:00.** Task 0126 lets the evening deepen towards the night
 	# after dusk, so the warmest light is the dusk light, not the last tick.
-	Sim.advance(state, GameData.DUSK_AT_TICK - int(state["day_tick"]))
+	SuiteKit.reach_day_tick(state, GameData.DUSK_AT_TICK)
 	await frames(4)
 	var evening := world.light_target()
 	expect(not dawn.is_equal_approx(noon),
@@ -5443,6 +5448,9 @@ func _case_0090_log() -> void:
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
 func _case_0091_title() -> void:
+	# Earlier router cases can leave a real current_scene beside the harness
+	# scene. Only this title may receive the key being tested.
+	_forget_any_loaded_scene()
 	# **The whole point of this one is that it is not `MAIN_SCENE`.** Every
 	# other case opens the game; this opens what the game opens.
 	await open_scene("res://scenes/Title.tscn")
@@ -5481,7 +5489,8 @@ func _case_0091_title() -> void:
 	await tap_key(KEY_X)
 	await frames(3)
 	expect(title.phase() == router.MENU,
-		"any key at all opens the menu", str(title.phase()))
+		"any key at all opens the menu", "phase %d, crash %s, pending %s"
+			% [title.phase(), title._crash_is_up(), title.announcing()])
 	expect(menu != null and menu.visible, "and the menu is up")
 
 	# **Continue is absent, not greyed.** Whether it is there at all depends

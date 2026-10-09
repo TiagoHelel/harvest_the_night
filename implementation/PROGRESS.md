@@ -16615,3 +16615,105 @@ tools/goldens/run-v7*.sav, implementation/prompts/0165-crops-by-days.md,
 implementation/BACKLOG.md, implementation/PROGRESS.md,
 implementation/shots/0165/, docs/devlog/{index,index.pt_BR}.md
 (refreshed by devlog.py --check).
+
+
+## 0166 - A day of eight to ten minutes - done 2026-10-09
+
+The day now lasts 16,800 ticks: 560 seconds, or 9 minutes 20 seconds.
+The 06:00-02:00 clock gets 14 ticks per minute, and derived dusk remains
+18:00 at tick 10,080. Core/UI searches found no SECONDS-based day_tick hour
+thresholds; bedtime reminders and pass-out continue through the clock helpers.
+
+Production arithmetic: 16,800 / 7,200 = 7/3. Recipe periods are the old
+seconds times DAY_TICKS/240: barricade/fence/mine/wall 420/350/560/700 ticks,
+corn/fish oil 1400/1750, incendiary/gunpowder 700/1050, and meal/fish/roast
+840/1050/1260. Nominal full-power daily output stays 40/48/30/24 kits,
+12/9 oil, 96/32 ammunition and 40/48/52 food. Continuous queues need inputs;
+a fresh day loses the final production tick to pass-out and can deliver one
+batch fewer where the interval divides the day exactly. Tech and brownouts
+still modify actual crafting time.
+
+Trees and ore regrow in DAY_TICKS/2 = 8400 ticks (280 seconds), retaining two
+harvests per initial node including swing time. Seams use 3*DAY_TICKS/8 =
+6300 (210 seconds), retaining three. Boulders remain permanent clearances.
+The event-based cliff fixture measures 16 iron on a tight route, 16 with
+45-tick walks and 13 with deliberately poor DAY_TICKS/18 walks. A ten-second
+walk no longer consumes enough of the larger day to be the bad-route case.
+Cows use DAY_TICKS/3 = 5600, chickens 5*DAY_TICKS/24 = 3500; before pass-out,
+prompt collection permits 2/4 meat respectively, with the unchanged 2/1 caps.
+Fishing waits 140-700 ticks, averaging 420: forty mean waits per nominal day,
+before reaction/travel. Its 45-tick human reaction window stays unchanged.
+A loaded generator spends four oil per day at DAY_TICKS/4 = 4200 ticks each;
+the global period also lasts 140 seconds at night, intentionally up from 60.
+Shop quantities stay wood 15, stone 12, iron 8, wheat 10, corn 8, carrot 12:
+they already restock once per day and must not scale with real-time length.
+BALANCE.md records these capacities and their assumptions.
+
+Clock suites now rig the tick just before each boundary, then use Sim.advance
+for the actual transition. Regrowth and mining fixtures jump between real
+expiry/strike events; livestock, power and idle queues rig their countdowns
+and exercise actual completion ticks. Short seeded replays use 600 ticks;
+the standalone determinism scenario retains its full length. The defeat
+fixture's existing 900 daytime ticks were already bounded. The title starts
+its disposable backdrop at the opening clock instead of simulating a day
+on each visit; its input case and both v1 suites retain their coverage.
+Autoplay suite policies sleep at 20:00, early enough to fit the budget but
+late enough to mine the second ore harvest needed for the first tower.
+The initial 10:00 fixture correctly failed to fund a tower and was corrected.
+
+The standalone robot still works until 01:30. Its old fixed 900-action guard
+truncated the new day; the guard now follows the tick budget. A short
+`python tools/autoplay.py 4 --nights=1` took 17.6 seconds: all four seed-9000
+policies played 16,381 day ticks, then cleared the first night with 10 house HP.
+Each earned $0 cash and spent $24 before the night reward (net -$24).
+They do not sell their gathered materials, so unsold value is not counted
+as cash income. The short-run report now exposes both cash figures and ticks.
+The balance reader parsed the actual report into four winning policies;
+all seven lever patterns matched once. Its stale brownout regex, fixed to
+25 despite today's 50, now accepts the current number. A full multi-lever,
+ten-night balance sweep was not rerun for this duration change.
+
+Saved day_tick values remain ticks since 06:00; for example 4200 now reads
+11:00 instead of 17:40. Existing producer countdowns retain their remaining
+ticks and use the new period on the next cycle. State.VERSION stays 7 and
+no migration or new golden is required.
+
+The first full verify was 59 passed / 0 skipped / 1 failed: input_check had
+seven cascading fishing failures because its old frame budget could not wait
+for the new bite range, plus two title-menu failures caused by a stale router
+scene intercepting input. The fishing input fixture now verifies the drawn
+range and rigs its final countdown tick before reeling with the real key.
+The title case removes a previously router-created scene before opening its
+own title. The focused rerun passed 1076 cases in 83.0 seconds.
+
+Verify: PASS, 60 passed / 0 skipped / 0 failed in 598 seconds (the known
+aggregate OVER BUDGET). headless_check 16390 / headless_v1 531 asserts;
+input_check 1076 / input_v1 241 cases; all zero failed. All 56 dates check
+for seeds 0 and 424242; both exports passed in 40.2 seconds.
+Before -> after suite times, using task 0165's preceding full PASS as baseline:
+headless_check 70.8 -> 74.0 s, headless_v1 7.5 -> 7.6 s,
+input_check 98.4 -> 83.0 s, input_v1 42.7 -> 42.6 s. Each finishes more than
+20 seconds below SCRIPT_TIMEOUT_S=120. The longer autoplay days are included.
+SIM deliberately moved 1739556245 -> 2338199505; DATA deliberately moved
+2720076483 -> 375753753. The producer timers and the longer clock change the
+fixed determinism scenario as expected. The final verification reproduced
+both new hashes without --accept. The performance guard passed and its
+baseline was not changed.
+
+Shots: implementation/shots/0166/{noon,dusk,wave,result,tech,ident,title,
+crash,save_trouble}.png, all 1920x1080 and opened individually at original
+size. Noon reads 12:02 after fixture work; dusk reads 18:10 with the evening
+light and forecast. The title and its diagnostic fixture dialogs fit their
+panels. Existing scale/framing is retained. No art PNG was generated or edited;
+these are game captures, with their Godot import metadata.
+
+Notes: pre-existing owner/art edits, including project.godot, .claude and
+implementation/backlog/, remain unstaged. The RUN-key decision remains with
+the owner. No push. Exactly one backlog task was completed this invocation.
+
+Files: src/core/game_data.gd, src/tools/{autoplay,autoplay_run,headless_check,
+headless_v1,input_check,suite_kit}.gd, src/ui/title_screen.gd,
+tools/{autoplay,balance}.py, tools/determinism_{sim,data}_hash.txt,
+implementation/{BACKLOG,BALANCE,PROGRESS}.md,
+implementation/prompts/0166-longer-day.md, implementation/shots/0166/,
+docs/devlog/{index,index.pt_BR}.md (refreshed by devlog.py --check).

@@ -1,7 +1,7 @@
 # 0166 - A day of eight to ten minutes
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0165
 - **Likely files:** src/core/game_data.gd, src/core/phases.gd, src/tools/autoplay.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, tools/balance.py, implementation/BALANCE.md
 

@@ -62,7 +62,7 @@ LEVERS = [
      r'(const BASE_ENERGY := )4(\s+# LEVER)',
      [4, 6, 8]),
     ("brownout floor",
-     r'(const UNPOWERED_PERCENT := )25(\s+# LEVER)',
+     r'(const UNPOWERED_PERCENT := )\d+(\s+# LEVER)',
      [25, 50]),
     # Night one is the other outlier, and it is arithmetic rather than taste:
     # a walker crosses the gun tower's five tiles in 5 * 20 = 100 ticks, the

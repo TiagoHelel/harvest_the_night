@@ -206,12 +206,15 @@ func _begin_backdrop() -> void:
 			Interact.complete(_state, cell, &"plant")
 			Interact.complete(_state, cell, &"water")
 			sown += 1
-	Sim.advance(_state, 60 * GameData.SECONDS)
 	# **Shortly before 02:00** (task 0128): the backdrop does not send for the
 	# night - the farmer passes out, as anyone up that late does, and the
 	# short build step and the night follow by themselves.
 	_from = GameData.DAY_TICKS - DUSK_FOR
-	Sim.advance(_state, maxi(_from - int(_state["tick"]), 1))
+	# This is a disposable display fixture, not a player save. Start at its
+	# opening clock instead of simulating nine minutes on every title visit.
+	_state["tick"] = _from
+	_state["phase_tick"] = _from
+	_state["day_tick"] = _from
 	if _world != null:
 		_world.show_state(_state)
 		_world.look_at_cell(Player.cell(_state))

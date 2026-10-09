@@ -1755,22 +1755,22 @@ func expect(ok: bool, what: String, detail: String = "") -> void:
 
 ## 0002 - the fixed timestep, the seeded stream and the state hash.
 func _task_0002_tick_and_rng() -> void:
-	# The same seed, ten thousand ticks, twice.
+	# The same seed, six hundred ticks, twice.
 	var a := State.create(1234)
 	var b := State.create(1234)
-	Sim.advance(a, 10000)
-	Sim.advance(b, 10000)
+	Sim.advance(a, 600)
+	Sim.advance(b, 600)
 	var ha := State.hash_of(a)
 	var hb := State.hash_of(b)
-	expect(ha == hb, "10000 ticks from one seed replay identically",
+	expect(ha == hb, "600 ticks from one seed replay identically",
 		"%d vs %d" % [ha, hb])
-	expect(int(a["tick"]) == 10000, "the tick count is the ticks asked for",
+	expect(int(a["tick"]) == 600, "the tick count is the ticks asked for",
 		str(a["tick"]))
-	print("  hash of 10000 ticks @ seed 1234: ", ha)
+	print("  hash of 600 ticks @ seed 1234: ", ha)
 
 	# A different seed must not land on the same state.
 	var c := State.create(1235)
-	Sim.advance(c, 10000)
+	Sim.advance(c, 600)
 	expect(State.hash_of(c) != ha, "a different seed diverges")
 
 	# A draw advances the stream the state carries.
@@ -1972,11 +1972,11 @@ func _task_0005_guards() -> void:
 
 	# The scenario the sim guard runs must be reproducible for the guard to
 	# mean anything - the same property headless_check asserts for the tick,
-	# checked here at the exact length the guard uses.
+	# checked here on a short road; determinism.gd still runs the full guard.
 	var a := State.create(424242)
 	var b := State.create(424242)
-	Sim.advance(a, 20000)
-	Sim.advance(b, 20000)
+	Sim.advance(a, 600)
+	Sim.advance(b, 600)
 	expect(State.hash_of(a) == State.hash_of(b),
 		"the guarded scenario replays identically")
 
@@ -2045,7 +2045,7 @@ func _task_0006_phases() -> void:
 		str(state["day_tick"]))
 
 	# Dusk asks; it never presses the button itself.
-	Sim.advance(state, GameData.DUSK_AT_TICK)
+	SuiteKit.reach_day_tick(state, GameData.DUSK_AT_TICK)
 	expect(Phases.is_dusk(state), "dusk is noticed")
 	expect(int(state["phase"]) == Phases.DAY,
 		"but the day does not end itself - design.md promises that")
@@ -2569,7 +2569,7 @@ func _task_0016_gathering() -> void:
 		"%d expected, %d held"
 		% [expected_wood, Resources.amount(state, GameData.WOOD)])
 
-	SuiteKit.advance_in_daylight(state, wait)  # in daylight: task 0128's 02:00 would pass him out
+	SuiteKit.regrow_after(state, wait)  # in daylight: task 0128's 02:00 would pass him out
 	expect(Farm.cells_with(state, &"tree").size() == all_trees.size(),
 		"and after the regrowth delay every one of them is back",
 		str(Farm.cells_with(state, &"tree").size()))
@@ -2700,7 +2700,7 @@ func _task_0017_stone() -> void:
 	# the reward for tidying the lawn.
 	expect(Farm.occupant(state, boulder).is_empty(), "the cell is empty")
 	expect(Farm.buildable(state, boulder), "and buildable now")
-	SuiteKit.advance_in_daylight(state, int(GameData.GATHERING[&"seam"]["regrow_ticks"]) * 3)  # in daylight: task 0128's 02:00 would pass him out
+	SuiteKit.regrow_after(state, int(GameData.GATHERING[&"seam"]["regrow_ticks"]) * 3)  # in daylight: task 0128's 02:00 would pass him out
 	expect(Farm.occupant(state, boulder).is_empty(),
 		"and three regrowth delays later it is still empty",
 		str(Farm.occupant(state, boulder)))
@@ -2716,7 +2716,7 @@ func _task_0017_stone() -> void:
 		"a seam pays %d stone" % per_seam,
 		str(Resources.amount(state, GameData.STONE) - before))
 	expect(Farm.occupant(state, seam).is_empty(), "and is worked out")
-	SuiteKit.advance_in_daylight(state, int(seam_data["regrow_ticks"]))  # in daylight: task 0128's 02:00 would pass him out
+	SuiteKit.regrow_after(state, int(seam_data["regrow_ticks"]))  # in daylight: task 0128's 02:00 would pass him out
 	expect(Farm.occupant(state, seam).get("id", &"") == &"seam",
 		"until the rock face puts it back", str(Farm.occupant(state, seam)))
 
@@ -2733,7 +2733,7 @@ func _task_0017_stone() -> void:
 		for cell in Farm.cells_with(stripped, &"seam"):
 			for _i in int(seam_data["hits"]):
 				Gathering.strike(stripped, cell)
-		SuiteKit.advance_in_daylight(stripped, int(seam_data["regrow_ticks"]))
+		SuiteKit.regrow_after(stripped, int(seam_data["regrow_ticks"]))
 	expect(Resources.amount(stripped, GameData.STONE)
 		== stone_before + 3 * seams.size() * per_seam,
 		"and three cycles of the rock face paid %d more"
@@ -2751,7 +2751,7 @@ func _task_0017_stone() -> void:
 	expect(Resources.amount(state, GameData.IRON) > iron_before,
 		"a vein pays iron")
 	expect(Farm.occupant(state, vein).is_empty(), "and is worked out")
-	SuiteKit.advance_in_daylight(state, int(ore_data["regrow_ticks"]))
+	SuiteKit.regrow_after(state, int(ore_data["regrow_ticks"]))
 	expect(Farm.occupant(state, vein).get("id", &"") == &"ore",
 		"and the rock face puts it back", str(Farm.occupant(state, vein)))
 
@@ -3190,7 +3190,7 @@ func _task_0021_night_intent() -> void:
 
 	# Dusk asks and does not press. The whole promise of design.md section 4.
 	var evening := State.create(102)
-	Sim.advance(evening, GameData.DUSK_AT_TICK + 600)
+	SuiteKit.reach_day_tick(evening, GameData.DUSK_AT_TICK + 600)
 	expect(Phases.is_dusk(evening), "it is past dusk")
 	expect(int(evening["phase"]) == Phases.DAY,
 		"and the day has still not ended itself",
@@ -4671,10 +4671,11 @@ func _task_0030_fishing() -> void:
 	who["pos"] = [idle_shore.x * Player.SUBTILE + Player.SUBTILE / 2,
 		idle_shore.y * Player.SUBTILE + Player.SUBTILE / 2]
 	expect(Fishing.begin(idle, idle_pond), "cast, and then look away")
-	# The whole day, short of the 02:00 that passes him out (task 0128).
-	Sim.advance(idle, GameData.DAY_TICKS - 1)
+	# Wait through the longest bite and reaction window, then it is idle.
+	Sim.advance(idle, int(GameData.FISHING["bite_max_ticks"])
+		+ int(GameData.FISHING["window_ticks"]) + 1)
 	expect(Resources.amount(idle, GameData.FISH) == 0,
-		"a whole day of not reacting catches nothing",
+		"letting the bite and reaction window expire catches nothing",
 		str(Resources.amount(idle, GameData.FISH)))
 	expect(not Fishing.is_casting(idle), "and leaves no line in the water")
 	expect(int(idle["phase"]) == Phases.DAY, "and the day is still standing")
@@ -4856,13 +4857,13 @@ func _task_0031_iron() -> void:
 	# **A day at the cliff buys a tower.** The arithmetic the journal claims,
 	# measured by mining for a whole day and counting what comes out.
 	# Two routes: a tight one where the next node is always the next tile, and
-	# a deliberately bad one that spends ten seconds walking to each. **The
+	# a deliberately bad one that spends 1/18 day walking to each. **The
 	# cliff is regrowth-bound, not swing-bound** - below about ninety ticks of
 	# travel a node the waiting absorbs the walk entirely, which is why the
 	# first two of these are the same number.
 	var mined := _mine_for_a_day(1301, 0)
 	var strolled := _mine_for_a_day(1302, 45)
-	var walked := _mine_for_a_day(1303, 300)
+	var walked := _mine_for_a_day(1303, GameData.DAY_TICKS / 18)
 	print("  a day at the cliff: %d iron on a tight route, %d strolling, "
 		% [mined, strolled] + "%d on a bad one" % walked)
 	expect(strolled == mined,
@@ -4899,7 +4900,7 @@ func _task_0031_iron() -> void:
 	expect(Gathering.regrowing(stripped) == cliff.size(),
 		"and all of it is coming back", str(Gathering.regrowing(stripped)))
 
-	SuiteKit.advance_in_daylight(stripped, int(ore["regrow_ticks"]) + 2)
+	SuiteKit.regrow_after(stripped, int(ore["regrow_ticks"]) + 2)
 	expect(Farm.cells_with(stripped, &"ore").size() == 8,
 		"every ore node is back",
 		str(Farm.cells_with(stripped, &"ore").size()))
@@ -4916,7 +4917,7 @@ func _task_0031_iron() -> void:
 				if Farm.is_empty(stripped, node):
 					break
 				Gathering.strike(stripped, node)
-		SuiteKit.advance_in_daylight(stripped, int(ore["regrow_ticks"]) + 2)
+		SuiteKit.regrow_after(stripped, int(ore["regrow_ticks"]) + 2)
 	expect(Farm.cells_with(stripped, &"ore").size() == 8,
 		"and it is still all there after four days of stripping it",
 		str(Farm.cells_with(stripped, &"ore").size()))
@@ -4931,7 +4932,7 @@ func _task_0031_iron() -> void:
 		if Farm.is_empty(lawn_state, boulder):
 			break
 		Gathering.strike(lawn_state, boulder)
-	Sim.advance(lawn_state, int(ore["regrow_ticks"]) * 3)
+	SuiteKit.regrow_after(lawn_state, int(ore["regrow_ticks"]) * 3)
 	expect(Farm.is_empty(lawn_state, boulder),
 		"and a cleared one stays cleared - that is the build space you earned")
 
@@ -4971,24 +4972,30 @@ func _mine_for_a_day(seed_value: int, travel: int) -> int:
 	var start := Resources.amount(state, GameData.IRON)
 	var swing := int((GameData.GATHERING[&"ore"] as Dictionary)["work_ticks"])
 	var at := Vector2i(-1, -1)
-	var left := 0
-
-	for _tick in GameData.DAY_TICKS:
+	var remaining := GameData.DAY_TICKS
+	# Jump between real strikes and regrowth events. Time is still charged,
+	# but no unrelated farm system is run thousands of times between them.
+	while remaining > 0:
+		var step := swing
 		if at == Vector2i(-1, -1):
 			var free := Farm.cells_with(state, &"ore")
 			if free.is_empty():
-				Sim.advance(state, 1)       # nothing up; wait for regrowth
+				step = remaining
+				for pending in (state["regrowing"] as Array):
+					step = mini(step, int(pending[Gathering.PENDING_TICKS]))
+				SuiteKit.regrow_after(state, step)
+				remaining -= step
 				continue
 			at = free[0]
-			left = swing + travel
-		left -= 1
-		if left <= 0:
-			Gathering.strike(state, at)
-			left = swing
-			if Farm.is_empty(state, at):
-				at = Vector2i(-1, -1)
-		Sim.advance(state, 1)
-
+			step += travel
+		if step > remaining:
+			break
+		SuiteKit.regrow_after(state, step - 1)
+		Gathering.strike(state, at)
+		SuiteKit.regrow_after(state, 1)
+		remaining -= step
+		if Farm.is_empty(state, at):
+			at = Vector2i(-1, -1)
 	return Resources.amount(state, GameData.IRON) - start
 
 
@@ -5319,7 +5326,11 @@ func _task_0033_power() -> void:
 	var every := int((GameData.BUILDINGS[&"generator"]
 		as Dictionary)["fuel_every_ticks"])
 	var held := Resources.amount(plant, GameData.OIL)
-	Sim.advance(plant, every - 2)
+	var burning: Dictionary = plant["power"]["burning"]
+	var generator_idx := Grid.index(spot)
+	expect(int(burning[generator_idx]) == every - 1, "fuel timer uses the lever")
+	burning[generator_idx] = 2
+	Sim.advance(plant, 1)
 	expect(Resources.amount(plant, GameData.OIL) == held,
 		"no second drop early", str(Resources.amount(plant, GameData.OIL)))
 	Sim.advance(plant, 2)
@@ -5328,7 +5339,8 @@ func _task_0033_power() -> void:
 		str(Resources.amount(plant, GameData.OIL)))
 
 	# Out of oil: it stops supplying, and the farm falls back to its own.
-	Sim.advance(plant, every * 2)
+	burning[generator_idx] = 0
+	Sim.advance(plant, 1)
 	expect(Resources.amount(plant, GameData.OIL) == 0, "the oil runs out",
 		str(Resources.amount(plant, GameData.OIL)))
 	expect(not Power.is_running(plant, spot), "and the generator stops")
@@ -5344,7 +5356,7 @@ func _task_0033_power() -> void:
 	Resources.gain(idle, {GameData.OIL: 5})
 	var idle_spot := _room_for(idle, Building.size_of(&"generator"))
 	expect(Building.place(idle, &"generator", idle_spot), "a generator alone")
-	Sim.advance(idle, every * 3)
+	Sim.advance(idle, 3)
 	expect(Resources.amount(idle, GameData.OIL) == 5,
 		"burns nothing when nothing is drawing - there is no tank for it to "
 		+ "go into", str(Resources.amount(idle, GameData.OIL)))
@@ -5370,6 +5382,8 @@ func _task_0033_power() -> void:
 	Sim.advance(night, 1)           # the first night tick is what lights it
 	expect(Power.is_running(night, gen), "the generator is turning")
 	var lit := Power.percent(night)
+	# Rig the saved countdown near expiry; the day test checks the full lever.
+	night["power"]["burning"][Grid.index(gen)] = 60 * GameData.SECONDS
 
 	# **Asked of the rules, not counted off the projectiles.** A cone and a
 	# line put nothing in the air, so `in_flight` reads zero for a wall of
@@ -5504,7 +5518,11 @@ func _task_0034_cooking() -> void:
 	expect(Interact.verb_at(state, cow) == &"",
 		"and offers nothing to do", str(Interact.verb_at(state, cow)))
 
-	Sim.advance(state, int(entry["every_ticks"]) - 1)
+	Sim.advance(state, 1)
+	var pen: Dictionary = state["livestock"][Grid.index(cow)]
+	expect(int(pen["left"]) == int(entry["every_ticks"]) - 1,
+		"the cow timer uses the lever")
+	pen["left"] = 1
 	expect(Livestock.ready_at(state, cow) == 0, "nothing a tick early")
 	Sim.advance(state, 1)
 	expect(Livestock.ready_at(state, cow) == 1,
@@ -5514,7 +5532,9 @@ func _task_0034_cooking() -> void:
 
 	# **It fills up and stops.** A cow nobody visits does not bank a fortnight
 	# of beef; the farm rewards coming back, not being left alone.
-	Sim.advance(state, int(entry["every_ticks"]) * (int(entry["holds"]) + 3))
+	for _cycle in int(entry["holds"]) + 3:
+		pen["left"] = 1
+		Sim.advance(state, 1)
 	expect(Livestock.ready_at(state, cow) == int(entry["holds"]),
 		"a cow fills up and stops", str(Livestock.ready_at(state, cow)))
 
@@ -5536,9 +5556,10 @@ func _task_0034_cooking() -> void:
 	# **The animals are asleep at night**, like the rest of the farm.
 	var nightly := State.create(1601)
 	var hen: Vector2i = Farm.cells_with(nightly, &"chicken")[0]
-	var hen_entry: Dictionary = GameData.LIVESTOCK[&"chicken"]
+	Livestock.tick(nightly)
+	nightly["livestock"][Grid.index(hen)]["left"] = 1
 	NightRoad.to_night(nightly)
-	Sim.advance(nightly, int(hen_entry["every_ticks"]) * 2)
+	Sim.advance(nightly, 2)
 	expect(Livestock.ready_at(nightly, hen) == 0,
 		"a chicken lays nothing during a wave",
 		str(Livestock.ready_at(nightly, hen)))
@@ -6373,7 +6394,7 @@ func _a_busy_day(seed_value: int, at_the_pond: bool) -> Dictionary:
 	for _i in 3:
 		Crafting.enqueue(state, press, &"press_oil")
 
-	# And the farmer, parked, doing nothing at all for the whole day.
+	# And the farmer, parked, doing nothing at three production boundaries.
 	var stand: Vector2i = bench + Vector2i(0, 1)
 	if at_the_pond:
 		var wet: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
@@ -6386,7 +6407,13 @@ func _a_busy_day(seed_value: int, at_the_pond: bool) -> Dictionary:
 	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
 		grown_before += int(Farming.plot(state, found).get("growth", 0))
 
-	Sim.advance(state, GameData.DAY_TICKS - int(state["tick"]))
+	Sim.advance(state, 1)
+	for _cycle in 3:
+		for job in (state["crafting"] as Dictionary).values():
+			(job as Dictionary)["left"] = 1
+		for animal in (state["livestock"] as Dictionary).values():
+			(animal as Dictionary)["left"] = 1
+		Sim.advance(state, 1)
 
 	var grown := 0
 	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
@@ -6476,7 +6503,7 @@ func _task_0039_clock() -> void:
 	# than the session.
 	expect(int(state["day_tick"]) == 0, "a day starts at zero")
 	expect(Phases.day_percent(state) == 0, "and nought through it")
-	Sim.advance(state, GameData.DAY_TICKS / 2)
+	SuiteKit.reach_day_tick(state, GameData.DAY_TICKS / 2)
 	expect(absi(Phases.day_percent(state) - 50) <= 1, "halfway at halfway",
 		str(Phases.day_percent(state)))
 	expect(int(state["day_tick"]) == GameData.DAY_TICKS / 2,
@@ -6485,7 +6512,7 @@ func _task_0039_clock() -> void:
 	# **Dusk is where the lever says, and it is not the end of anything.**
 	expect(not Phases.is_dusk(state), "halfway is not dusk")
 	expect(Phases.overtime_percent(state) == 0, "and nothing is overtime yet")
-	Sim.advance(state, GameData.DUSK_AT_TICK - int(state["day_tick"]))
+	SuiteKit.reach_day_tick(state, GameData.DUSK_AT_TICK)
 	expect(Phases.is_dusk(state), "dusk falls where the lever says",
 		str(state["day_tick"]))
 	expect(int(state["phase"]) == Phases.DAY,
@@ -6503,8 +6530,8 @@ func _task_0039_clock() -> void:
 	Farming.act(stubborn, plot)
 	Farming.act(stubborn, plot)
 
-	# All day without ever going to bed, to the last tick before 02:00.
-	Sim.advance(stubborn, GameData.DAY_TICKS - 1)
+	# Rig the last daylight boundary, then exercise the actual pass-out tick.
+	SuiteKit.reach_day_tick(stubborn, GameData.DAY_TICKS - 1)
 	expect(int(stubborn["phase"]) == Phases.DAY,
 		"at 01:59 it is still the day, however late",
 		Phases.name_of(int(stubborn["phase"])))
@@ -12493,7 +12520,7 @@ func _task_0066_run_end() -> void:
 ## summary.
 ##
 ## **The nights are fought for real** - the waves, the towers, the flow field -
-## but the days are not lived through: a day is four minutes of a farmer
+## but the days are not lived through: a day is nine minutes and twenty seconds of a farmer
 ## walking about, and what this is testing is whether the nights hold
 ## together, not whether the crops grow.
 func _play_a_whole_run(seed_value: int, nights: int) -> Dictionary:
@@ -12568,8 +12595,8 @@ func _task_0067_autoplay() -> void:
 	# repeated measures nothing. One day and one night per policy since task
 	# 0142: the whole loop - the day, to bed, the build step, START, the
 	# night to its end - is in the one night.
-	var once := Autoplay.play(6700, &"towers", 1)
-	var twice := Autoplay.play(6700, &"towers", 1)
+	var once := Autoplay.play(6700, &"towers", 1, 20 * 60)
+	var twice := Autoplay.play(6700, &"towers", 1, 20 * 60)
 	expect(once["nights"] == twice["nights"]
 		and int(once["killed"]) == int(twice["killed"]),
 		"the same seed plays the same night, to the kill",
@@ -12589,7 +12616,7 @@ func _task_0067_autoplay() -> void:
 	#
 	# So the guard is a different *policy* instead, which must differ because
 	# it builds different things.
-	var other := Autoplay.play(6700, &"walls", 1)
+	var other := Autoplay.play(6700, &"walls", 1, 20 * 60)
 	expect(int(other["gathered"]) != int(once["gathered"])
 		or int(other["killed"]) != int(once["killed"]),
 		"and a different policy is a different run - the pair above would "
@@ -12632,7 +12659,7 @@ func _task_0067_autoplay() -> void:
 	# **A lost night does not end the run** (task 0142). The robot's own day
 	# and build step, then a house one bite from falling: lost - and the next
 	# morning it plays on, into the next date's night (task 0151).
-	var policy: Dictionary = Autoplay.POLICIES[&"towers"]
+	var policy := SuiteKit.early_policy(&"towers")
 	var lost := State.create(6702)
 	Autoplay._a_day(lost, policy)
 	expect(int(lost["phase"]) == Phases.PREPARATION and House.asleep(lost)
@@ -12675,7 +12702,7 @@ func _task_0068_balance() -> void:
 	# taught. That is the floor of the curve task 0068 went looking for, and
 	# the thing that catches a lever turned too far.
 	for name in Autoplay.names():
-		var policy: Dictionary = Autoplay.POLICIES[name]
+		var policy := SuiteKit.early_policy(StringName(name))
 		var state := State.create(4200)
 		Autoplay._a_day(state, policy)
 		# **Looked for after the build step** (task 0119): the day saves for

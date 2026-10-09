@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-154 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
+155 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -198,6 +198,7 @@ is the sort of thing this list exists to say out loud.
 | 0159 | Seasons on screen | 2026-10-08 |
 | 0160 | The end of the year | 2026-10-09 |
 | 0165 | Crops grow by days | 2026-10-09 |
+| 0166 | A day of eight to ten minutes | 2026-10-09 |
 
 ## Every time the game changed underneath itself
 

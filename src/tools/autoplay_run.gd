@@ -2,7 +2,7 @@ extends SceneTree
 
 ## Run the autoplayer over many seeds and report.
 ##
-##     python tools/autoplay.py [runs]
+##     python tools/autoplay.py [runs] [--nights=1]
 ##
 ## Four policies, `runs / 4` seeds each, ten nights a run. It prints which
 ## night kills each one first, how far they get, and **whether one of them
@@ -18,6 +18,8 @@ extends SceneTree
 ## twenty-five seeds each.
 const RUNS := 100
 
+var _nights_wanted := Autoplay.DEFAULT_NIGHTS
+
 
 func _init() -> void:
 	var problems := GameData.validate()
@@ -30,6 +32,8 @@ func _init() -> void:
 
 	var wanted := RUNS
 	for arg in OS.get_cmdline_user_args():
+		if str(arg).begins_with("--nights="):
+			_nights_wanted = maxi(int(str(arg).get_slice("=", 1)), 1)
 		if str(arg).is_valid_int():
 			wanted = maxi(int(str(arg)), 4)
 
@@ -85,7 +89,11 @@ func _sweep(name: StringName, runs: int) -> Dictionary:
 	var walked := 0
 	var played := 0
 	for i in runs:
-		var out := Autoplay.play(9000 + i * 7, name)
+		var out := Autoplay.play(9000 + i * 7, name, _nights_wanted)
+		if _nights_wanted == 1:
+			var day: Dictionary = (out["nights"] as Array)[0]
+			print("  %s seed %d: day %d ticks, earned %d, net money %+d, night %s"
+				% [name, 9000 + i * 7, day["day_ticks"], day["day_earned"], day["day_money"], day["ended"]])
 		if bool(out["won"]):
 			won += 1
 		else:

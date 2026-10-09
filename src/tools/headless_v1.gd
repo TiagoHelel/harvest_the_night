@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 34
+const GROUPS := 35
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -103,6 +103,7 @@ func _run() -> void:
 	_task_0159_palette()
 	_task_0160_year_end()
 	_task_0165_days()
+	_task_0166_long_day()
 
 
 func _finish() -> void:
@@ -1000,7 +1001,7 @@ func _task_0127_bed() -> void:
 	# credited. A queue started at 09:00 and slept on keeps its progress and
 	# is not finished overnight.
 	var early := State.create(1275)
-	Sim.advance(early, Phases.tick_at_minute(9 * 60))
+	SuiteKit.reach_day_tick(early, Phases.tick_at_minute(9 * 60))
 	Resources.gain(early, {GameData.WOOD: 20})
 	var bench := Building.anchor_of(early, Farm.cells_with(early, &"workshop")[0])
 	expect(Crafting.start(early, bench, &"fence_kit"), "a fence kit goes on at 09:00")
@@ -3213,4 +3214,70 @@ func _task_0165_days() -> void:
 	expect(int(loaded["plots"][idx]["growth"]) == 3, "reload preserves one pending credit")
 	Save._remove(path)
 	Save._remove(path + ".bak")
+	_completed += 1
+
+
+## 0166 - a longer clock preserves daily production capacity.
+func _task_0166_long_day() -> void:
+	var state := State.create(1660)
+	expect(GameData.DAY_TICKS == 16800 and GameData.DAY_TICKS / GameData.TICK_HZ == 560,
+		"a day lasts nine minutes and twenty seconds")
+	for boundary in [[0, 360], [GameData.DUSK_AT_TICK, 1080], [GameData.DAY_TICKS, 1560]]:
+		state["day_tick"] = boundary[0]
+		expect(Phases.clock_minute(state) == int(boundary[1]),
+			"long-day clock maps boundary %d to minute %d" % boundary)
+		expect(Phases.tick_at_minute(int(boundary[1])) == int(boundary[0]),
+			"the clock inverse preserves that boundary")
+	expect(GameData.check_clock(360, 1080, 1560, GameData.DAY_TICKS).is_empty(),
+		"the long day has whole ticks per game minute")
+	# Nominal steady-state capacity: unlimited inputs, full power, no travel.
+	# A fresh morning loses its last production tick to pass-out, so exact
+	# divisors can deliver one batch fewer. Both limits are in the journal.
+	var batches := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
+		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
+		&"make_incendiary": 24, &"make_gunpowder": 16,
+		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13}
+	var units := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
+		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
+		&"make_incendiary": 96, &"make_gunpowder": 32,
+		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52}
+	expect(batches.size() == GameData.RECIPES.size(), "every recipe has a daily budget")
+	for id in GameData.sorted_names(batches.keys()):
+		var ticks := int(GameData.RECIPES[id]["ticks"])
+		var per_batch := 0
+		for amount in (GameData.RECIPES[id]["output"] as Dictionary).values():
+			per_batch += int(amount)
+		expect((GameData.DAY_TICKS / ticks) * per_batch == int(units[id]),
+			"%s yields %d units/day nominal" % [id, units[id]])
+		expect(GameData.DAY_TICKS / ticks == int(batches[id]),
+			"%s: %d batches/day nominal" % [id, batches[id]])
+		expect((GameData.DAY_TICKS - 1) / ticks >= int(batches[id]) - 1,
+			"%s loses at most one batch at the pass-out boundary" % id)
+	for id in [&"tree", &"ore", &"seam"]:
+		var entry: Dictionary = GameData.GATHERING[id]
+		var work := int(entry["work_ticks"]) * int(entry["hits"])
+		var harvests := 1 + (GameData.DAY_TICKS - 1 - work) / (int(entry["regrow_ticks"]) + work)
+		expect(harvests == (3 if id == &"seam" else 2),
+			"%s gives its initial harvest and returns within the daily budget" % id)
+	expect(int(GameData.GATHERING[&"rock"]["regrow_ticks"]) == 0,
+		"cleared boulders remain cleared")
+	for id in [&"cow", &"chicken"]:
+		var ticks := int(GameData.LIVESTOCK[id]["every_ticks"])
+		expect((GameData.DAY_TICKS - 1) / ticks == (2 if id == &"cow" else 4),
+			"%s: collected promptly, 2 cow or 4 chicken meat before pass-out" % id)
+	var bite_mean := (int(GameData.FISHING["bite_min_ticks"])
+		+ int(GameData.FISHING["bite_max_ticks"])) / 2
+	expect(GameData.DAY_TICKS / bite_mean == 40,
+		"fishing retains forty mean waits per day before reaction and travel")
+	expect(int(GameData.FISHING["window_ticks"]) == 45,
+		"the player's reaction window remains 1.5 seconds")
+	var fuel := int(GameData.BUILDINGS[&"generator"]["fuel_every_ticks"])
+	expect((GameData.DAY_TICKS - 2) / fuel + 1 == 4,
+		"a continuously loaded generator consumes four oil before pass-out")
+	expect(GameData.DAILY_STOCK == {GameData.WOOD: 15, GameData.STONE: 12,
+		GameData.IRON: 8, GameData.WHEAT: 10, GameData.CORN: 8, GameData.CARROT: 12},
+		"daily stock stays per day rather than scaling with real time")
+	state["day_tick"] = 4200
+	expect(Phases.clock_minute(state) == 11 * 60 and State.VERSION == 7,
+		"a saved 4200 ticks now reads 11:00; ticks and save version retain their meaning")
 	_completed += 1

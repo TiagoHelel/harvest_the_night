@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **152 / 296 done**
+`############............`  **153 / 296 done**
 
-0 doing / 144 todo / 0 blocked across 18 phases.
+0 doing / 143 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-144 task(s) left, the ready ones first, then what they
+143 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -241,24 +241,6 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0166 - A day of eight to ten minutes
-
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/phases.gd, src/tools/autoplay.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, tools/balance.py, implementation/BALANCE.md`.
-
-The day becomes eight to ten real minutes, so the 80x65 farm has time in it: crossing it already takes 28 seconds, and the plan's spring day (its appendix) does not fit in four minutes.
-
-- `DAY_TICKS` spans 0126's 1200 game minutes (06:00-02:00) at a whole number of ticks per minute, which 0126's `validate()` rule demands: 12-15 a minute is 14400-18000 ticks, 8-10 real minutes (`# LEVER`). Recommended 14 (16800 ticks, 9 min 20 s) - nine minutes flat is 13.5 a minute and is refused. 0126 already derives `DUSK_AT_TICK` from `DUSK_MINUTE`: check it still lands on 18:00
-- Re-express every per-tick producer against the longer day, with the arithmetic in the journal: `RECIPES` ticks (a kit still takes about a walk across the farm), `LIVESTOCK.every_ticks`, `GATHERING.regrow_ticks` (a node still gives about twice a day), the `FISHING` bite range, the generator's `fuel_every_ticks` and the `DAILY_STOCK` sizes. Nothing may double its daily output by accident
-- Nothing in core or ui may hard-code a tick count for an hour of the clock: the bedtime reminders (0140) and pass-out (0128) read 0126's helpers, and so will 0190's stall hours - grep for `SECONDS` multiples compared with `day_tick`
-- Re-time the suites: no headless group or input case may advance a whole day or a whole morning of ticks. Today's are `_task_0006_phases` and `_task_0021_night_intent` (to dusk), `_task_0030_fishing`, `_task_0031_iron` (`_mine_for_a_day`), `_task_0038_idle` (`_a_busy_day`), `_task_0039_clock`, `_task_0065_defeat`, `_task_0067_autoplay`, `_task_0068_balance`, `_case_0039_clock`, `_case_0091_title` and any v1 group that does (grep `DAY_TICKS`, `DUSK_AT_TICK`, `tick_at_minute`): give them a shorter road - a rigged `day_tick`, a direct morning call - and record each suite's time before and after
-- `Autoplay._a_day` (as 0142 left it) spends the new day; 0142 already plays one day and one night per policy in `_task_0067`/`_task_0068`, so keep them inside the budget by an earlier policy bedtime in the suite or fewer policies there, never by shortening the lever. `tools/autoplay.py` and `tools/balance.py` still run
-- A saved `day_tick` keeps its meaning (ticks since 06:00) and only reads earlier on the longer clock, and producer timers count down as before: no `State.VERSION` bump - say so in the journal
-- DATA moves on purpose (time and producer levers). SIM moves on purpose too: the determinism scenario's kits, animals and clock run on the re-expressed levers. Record both, and add a BALANCE.md note on what one day yields now
-
-  - done when: `_task_0166_long_day` in `src/tools/headless_v1.gd`: `DAY_TICKS` maps onto 06:00-02:00, dusk reads 18:00, and each producer's yield per day (computed from the tables, not simulated) is inside the range the journal claims
-  - done when: headless_check, input_check and both v1 suites finish at least 20 s under `SCRIPT_TIMEOUT_S`, with the times in the journal
-  - done when: A short `tools/autoplay.py` run plays a full day and night, and the journal records the money that day made
 
 ### 0167 - Any grass can be tilled
 
@@ -2463,7 +2445,7 @@ The benchmark's worst case is still Spring 14, where 0153 moved the MVP's night 
 
 ### 0276 - The autoplayer plays a whole year
 
-Waits on 0194, 0233, 0234, 0275, 0166, 0171, 0180, 0186, 0191, 0221.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0194, 0233, 0234, 0275, 0171, 0180, 0186, 0191, 0221.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 0142 taught the robot to sleep; this teaches it the rest of 1.0, so balance can be measured over a whole year: crops by days and season, the fishing minigame, animals and machines, the bin and the peddler, cursor building and repairs, the powers, and carrying on through losses and boss repeats.
 
@@ -2857,10 +2839,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (1/53)
+## 12 - The day that pays  (2/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
-- [ ] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
+- [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
 - [ ] **0167** [Any grass can be tilled](prompts/0167-till-grass.md)
 - [ ] **0168** [Nine new crops](prompts/0168-crop-data.md)
 - [ ] **0169** [An inventory for many things](prompts/0169-inventory.md) - needs 0168
@@ -2979,7 +2961,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0249, 0250, 0254, 0259, 0272
 - [ ] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md) - needs 0270, 0251, 0252, 0255, 0259, 0273
 - [ ] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md) - needs 0274, 0234, 0248, 0233
-- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0194, 0233, 0234, 0275, 0166, 0171, 0180, 0186, 0191, 0221
+- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0194, 0233, 0234, 0275, 0171, 0180, 0186, 0191, 0221
 - [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0271, 0272, 0273, 0274, 0276, 0259
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
