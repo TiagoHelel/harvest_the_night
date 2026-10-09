@@ -19,6 +19,9 @@ const OCCUPANT_VERBS: Dictionary = {
 	&"rock": &"mine",
 	&"ore": &"mine",
 	&"seam": &"mine",
+	&"copper_ore": &"mine",
+	&"coal_seam": &"mine",
+	&"gold_ore": &"mine",
 	&"shop": &"trade",
 }
 
@@ -138,6 +141,8 @@ static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 			return &"craft"
 		if Livestock.is_animal(on["id"]):
 			return Livestock.verb_at(state, cell)
+		if Gathering.is_node(StringName(on["id"])) and not Gathering.is_available(state, StringName(on["id"])):
+			return &""
 		return OCCUPANT_VERBS.get(on["id"], &"")
 	var terrain := Farm.terrain_at(state, cell)
 	if terrain in [Farm.Terrain.GRASS, Farm.Terrain.SOIL] or Farming.is_tilled(state, cell):

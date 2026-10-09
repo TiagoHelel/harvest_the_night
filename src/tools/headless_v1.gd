@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 44
+const GROUPS := 45
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -113,6 +113,7 @@ func _run() -> void:
 	_task_0173_tools()
 	_task_0174_area()
 	_task_0175_swings()
+	_task_0176_ores()
 
 
 func _finish() -> void:
@@ -2697,9 +2698,9 @@ func _task_0156_map_v1() -> void:
 			missing.append(id)
 		for found in cells:
 			var cell: Vector2i = found
-			if Interact.verb_at(farm, cell) != &"" or Farm.walkable(farm, cell):
+			if (not Gathering.is_node(id) and Interact.verb_at(farm, cell) != &"") or Farm.walkable(farm, cell):
 				missing.append("%s at %s is not inert" % [id, cell])
-	expect(missing.is_empty(), "copper, coal, gold and the hardwood stump are on the map, inert",
+	expect(missing.is_empty(), "all reserved nodes are on the map and impassable; unlanded ones stay inert",
 		str(missing))
 	var pieces := {}
 	for found in Farm.cells_with(farm, &"hardwood_stump"):
@@ -3743,7 +3744,7 @@ func _task_0173_tools() -> void:
 	state["held"][GameData.IRON] = 88
 	for tool in GameData.sorted_names(GameData.TOOLS.keys()):
 		expect(ToolTiers.tier(state, tool) == 0 and tool not in GameData.RESOURCES, "%s starts at tier zero outside the ledger" % tool)
-	expect(ToolTiers.why_not(state, &"upgrade_axe_gold") == [&"WHY_TOOL_GOLD_LOCKED"], "gold is listed with its unavailable-ore reason")
+	expect(ToolTiers.why_not(state, &"upgrade_axe_gold") == [&"WHY_TOOL_PREVIOUS"], "a basic axe cannot skip iron for gold")
 	expect(ToolTiers.why_not(state, &"upgrade_rod_iron") == [&"WHY_TOOL_PREVIOUS"], "a bamboo rod cannot skip fibre")
 	expect(Crafting.enqueue(state, bench, &"upgrade_axe_iron"), "money and iron buy an axe order")
 	expect(not Crafting.enqueue(state, bench, &"upgrade_axe_iron"), "a queued upgrade cannot be ordered twice")
@@ -3977,4 +3978,84 @@ func _task_0175_swings() -> void:
 				var text := Names.refusal([&"WHY_GATHER_TOOL", ToolTiers.item(tool, level)])
 				expect(text.contains(Names.of(ToolTiers.item(tool, level))) and UiKit.font().get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x <= 224, "the fully expanded %s tier refusal fits in %s" % [tool, locale])
 	I18n.use("en")
+	_completed += 1
+
+
+## 0176 - quarry resources, permanent autumn gate, fuel and gold delivery.
+func _task_0176_ores() -> void:
+	var state := State.create(1760)
+	state["day"] = GameData.SEASON_DAYS * 2 + 1
+	state["tools"]["pickaxe"] = 1
+	for id in [&"copper_ore", &"coal_seam", &"gold_ore"]:
+		var cell: Vector2i = Farm.cells_with(state, id)[0]
+		var node: Dictionary = GameData.GATHERING[id]
+		var resource: StringName = node["yield"].keys()[0]
+		var before := Resources.amount(state, resource)
+		expect(Interact.verb_at(state, cell) == &"mine", "%s offers mining on Autumn 1" % id)
+		for hit in int(node["hits"]) - 1:
+			expect(Gathering.strike(state, cell).is_empty(), "quarry yield waits for the final hit")
+		expect(Gathering.strike(state, cell) == node["yield"] and Farm.occupant(state, cell).is_empty(), "%s gives its exact yield and leaves an empty cell" % id)
+		expect(Resources.amount(state, resource) == before + int(node["yield"][resource]), "the ledger holds the new resource")
+		for tick in int(node["regrow_ticks"]) - 1:
+			Gathering.tick(state)
+		expect(Farm.occupant(state, cell).is_empty(), "regrowth waits for its exact tick")
+		Gathering.tick(state)
+		expect(Farm.occupant(state, cell).get("id", &"") == id and Gathering.swings_left(state, cell) == int(node["hits"]), "%s returns whole on its exact tick" % id)
+	var gold: Vector2i = Farm.cells_with(state, &"gold_ore")[0]
+	for date in [1, GameData.SEASON_DAYS * 2]:
+		state["day"] = date
+		var before := State.hash_of(state)
+		expect(Interact.verb_at(state, gold) == &"" and Gathering.strike(state, gold).is_empty() and State.hash_of(state) == before, "gold cannot be offered or struck before the first autumn")
+	state["day"] = GameData.SEASON_DAYS * 2 + 1
+	state["days_held"] = 1
+	expect(not Gathering.is_available(state, &"gold_ore"), "a held boss day cannot open gold by the run's day counter")
+	state["days_held"] = 0
+	state["tools"]["pickaxe"] = 0
+	expect(Interact.verb_at(state, gold) == &"mine" and Interact.why_not(state, gold) == [&"WHY_GATHER_TOOL", &"pickaxe_iron"], "Autumn 1 offers gold but explains its iron-pickaxe gate")
+	var before := State.hash_of(state)
+	Interact.complete(state, gold, &"mine")
+	expect(State.hash_of(state) == before, "completing a refused action does not alter the gold")
+	state["tools"]["pickaxe"] = 1
+	expect(Interact.why_not(state, gold).is_empty(), "iron clears the real gold gate")
+	for date in [GameData.SEASON_DAYS * 3 + 1, Calendar.year_days() + 1]:
+		state["day"] = date
+		expect(Interact.verb_at(state, gold) == &"mine", "gold stays open in winter and the next spring")
+	var bench: Vector2i = Farm.cells_with(state, &"workshop")[0]
+	state["tools"]["hoe"] = 1
+	state["held"][GameData.MONEY] = 1000
+	state["held"][GameData.GOLD] = 20
+	expect(Crafting.enqueue(state, bench, &"upgrade_hoe_gold"), "an iron hoe can order its enabled gold tier")
+	expect(Resources.amount(state, GameData.MONEY) == 700 and Resources.amount(state, GameData.GOLD) == 15, "the gold hoe costs its exact $300 and five gold")
+	Sim.advance(state, int(GameData.RECIPES[&"upgrade_hoe_gold"]["ticks"]) + 1)
+	expect(ToolTiers.tier(state, &"hoe") == 1 and state["tools"]["pending"]["hoe"]["tier"] == 2, "the completed order keeps iron until tomorrow")
+	Phases.go_to_bed(state)
+	Phases.start_waves(state)
+	Phases.enter_result(state, false)
+	expect(Phases.begin_day(state) and ToolTiers.tier(state, &"hoe") == 2, "the gold hoe arrives next morning even after a loss")
+	for tool in [&"hoe", &"can", &"axe", &"pickaxe"]:
+		expect(GameData.TOOLS[tool][2]["enabled"] and GameData.TOOLS[tool][2]["cost"].has(GameData.GOLD), "each gold tool is enabled and paid with gold")
+	var plant := State.create(1761)
+	var spot := Vector2i(30, 35)
+	Farm.restore(plant, spot, {"id": &"generator", "anchor": [spot.x, spot.y]})
+	plant["held"][GameData.OIL] = 1
+	plant["held"][GameData.COAL] = 2
+	expect(Power._run(plant, spot, 1, true) and Resources.amount(plant, GameData.OIL) == 0 and Resources.amount(plant, GameData.COAL) == 2, "a fresh tank prefers one oil and leaves coal")
+	plant["power"]["burning"].clear()
+	expect(Power._run(plant, spot, 1, true) and Resources.amount(plant, GameData.COAL) == 1, "one coal starts the same tank when oil is empty")
+	expect(plant["power"]["burning"][Grid.index(spot)] == int(GameData.BUILDINGS[&"generator"]["fuel_every_ticks"]) - 1, "coal lasts exactly as long as oil")
+	var fuel := Resources.amount(plant, GameData.COAL)
+	Power._run(plant, spot, 1, false)
+	expect(Resources.amount(plant, GameData.COAL) == fuel, "build preparation never consumes fuel")
+	plant["power"]["burning"].clear()
+	plant["held"][GameData.COAL] = 0
+	expect(not Power._run(plant, spot, 1, true), "with neither fuel a new tank cannot run")
+	for resource in [GameData.COPPER, GameData.COAL, GameData.GOLD]:
+		expect(GameData.SELL_PRICE.has(resource) and resource in GameData.RESOURCE_GROUPS[0]["members"] and Names.KEYS.has(resource), "each mineral has its price, material group and localized name")
+		expect(UiKit.icon(resource) != null and UiKit.icon(resource, true) != null, "both icon sizes resolve through A020 stand-ins")
+	var bad := GameData.GATHERING.duplicate(true)
+	bad[&"gold_ore"]["work_ticks"] = GameData.GATHERING[&"seam"]["work_ticks"]
+	expect(not GameData.check_iron(bad, GameData.FARM_MAP).is_empty(), "quarry scarcity rejects gold as fast as stone")
+	bad[&"gold_ore"]["first_season"] = &"missing"
+	expect(not GameData.check_gathering(bad).is_empty(), "an unknown opening season is rejected")
+	expect(GameData.validate().is_empty(), "all quarry metadata, prices, costs, fuel and reachability validate")
 	_completed += 1

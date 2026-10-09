@@ -17339,3 +17339,65 @@ src/tools/{headless_v1,input_v1}.gd, assets/locale/strings.csv,
 tools/determinism_data_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/0175-axe-pickaxe.md, implementation/shots/0175/,
 docs/devlog/{index,index.pt_BR}.md (devlog.py --check).
+
+## 0176 - Copper, coal and gold - done 2026-10-09
+
+The existing quarry nodes now yield copper, coal and gold and regrow whole.
+Copper and coal take three 90-tick swings and return one copper/two coal;
+gold takes four 120-tick swings before tool speed and returns one gold.
+Regrowth is 360/300/420 seconds. All three take longer, sell for less per
+harvest and regrow later than stone, guarded by check_iron. Gold opens on
+first Autumn 1 through Calendar.date, requires an iron pickaxe, and stays
+open through winter and later years. Held boss days cannot open it early.
+The existing northeast outcrop from 0156 was retained. UNGATHERED_NODES
+also stays intact because the v5-to-v6 save migration uses that map list.
+
+The three resources have prices, material-group rows, localized names and
+both icon sizes through A020 tinted stand-ins. The existing 16x16/(8,14)
+A021 world stand-ins remain. No PNG art was generated, drawn or edited.
+Gold hoe/can upgrades cost $300 and five gold; axe/pickaxe cost $450 and
+eight gold, keeping the previous-tier requirement and next-morning delivery.
+The generator prefers one oil, then uses one coal when oil is unavailable;
+either fuels the same 140-second tank. Its bilingual description explains
+the fallback, and build preparation consumes neither fuel.
+
+Verify: 60 PASS, 0 FAIL, 0 SKIP in 655s; 18,447 headless asserts (16,887 + 1,560),
+1,586 input checks (1,139 + 447), 5,752 UI checks, 587 bilingual keys, 169 parsed
+scripts, 56 nights with two seeds and both exports. Perf passed at 3,506us
+per night tick and 9,201us per path rebuild. The first full run had only a
+perf failure (59 PASS in 650s); the required unchanged retry passed. Total
+OVER BUDGET is the known notice, not a failed check. SIM 3813670633 ->
+265134837 deliberately moves for the three new held/gained ledger keys;
+DATA 3572289693 -> 1698799174 moves for gathering, tool, resource and fuel
+metadata, accepted with verify.py --accept and stable on the retry.
+
+The new headless group checks exact yields/regrowth, the autumn and iron
+gates, delivery after a lost night, fuel priority and scarcity validation.
+Real SPACE input cannot start gold work in spring or with a basic pickaxe;
+the English/pt_BR highlight explains iron, and iron starts the exact
+80-tick swing and yields one gold after four swings.
+
+Looked at: all eight final pt_BR captures opened individually at original
+1920x1080 against the reference sheet and approved blue farmer. The quarry
+shows its existing scale and distinct copper/coal/gold colors; the material
+ledger names and prices are readable. The night fixture uses Autumn 2,
+since calm Autumn 1 settles immediately, and waits for the bedtime views
+before skipping their beat. Noon, dusk, wave, result and tech keep their
+existing layout. Kept: implementation/shots/0176/quarry-pt_BR.png,
+quarry_materials-pt_BR.png, quarry_night-pt_BR.png, noon-pt_BR.png,
+dusk-pt_BR.png, wave-pt_BR.png, result-pt_BR.png, tech-pt_BR.png.
+
+Notes: all 1716 paths dirty at claim belong to the owner/art pipeline and
+stay outside this commit. No protected file was edited; project.godot,
+.claude/ and implementation/backlog/ remain unstaged. The RUN-key question
+remains open. Never pushed. Backlog: 296 tasks, 163 done, 133 todo, 0 doing,
+0 blocked (55%); 56 todo wait for Codex art. The owner asked to pause the
+heartbeat after this task; no second task will be started.
+
+Files: src/core/{game_data,gathering,interact,power}.gd,
+src/ui/{describe,names,placeholder_art}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/0176-copper-coal-gold.md, implementation/shots/0176/,
+docs/devlog/{index,index.pt_BR}.md (devlog.py --check).

@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-164 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+165 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -207,10 +207,11 @@ voz alta.
 | 0173 | Five tools, three tiers | 2026-10-09 |
 | 0174 | The can and the hoe by tier | 2026-10-09 |
 | 0175 | The axe and the pickaxe by tier | 2026-10-09 |
+| 0176 | Copper, coal and gold | 2026-10-09 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 47 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 48 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -259,6 +260,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Five tools, three tiers** (0173) - `data` 3367436400 -> 2771032843
 - **The can and the hoe by tier** (0174) - `data` 2771032843 -> 1161145246
 - **The axe and the pickaxe by tier** (0175) - `data` 1161145246 -> 3572289693
+- **Copper, coal and gold** (0176) - `data` 3572289693 -> 1698799174
 
 ## O que deu errado
 

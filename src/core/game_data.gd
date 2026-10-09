@@ -196,6 +196,9 @@ const PLAYER_SPEED := 6                 # LEVER: subtile units per tick, 3-12
 const WOOD := &"wood"
 const STONE := &"stone"
 const IRON := &"iron"
+const COPPER := &"copper"
+const COAL := &"coal"
+const GOLD := &"gold"
 const FOOD := &"food"
 const FISH := &"fish"
 const OIL := &"oil"
@@ -241,7 +244,7 @@ const ENERGY := &"energy"
 ## Every resource the ledger knows about, in the order the reference sheet
 ## lays them out.
 const RESOURCES: Array = [
-	WOOD, STONE, IRON, FOOD, FISH, OIL,
+	WOOD, STONE, IRON, COPPER, COAL, GOLD, FOOD, FISH, OIL,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
@@ -255,6 +258,9 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	WOOD: 2,
 	STONE: 3,
 	IRON: 7,
+	COPPER: 5,                       # LEVER: money each, 1-8
+	COAL: 3,                         # LEVER: money each, 1-4
+	GOLD: 8,                         # LEVER: money each, 1-8
 	FOOD: 12,
 	FISH: 8,
 	# **The most valuable thing on the farm to sell, and that is the point.**
@@ -505,6 +511,30 @@ const GATHERING: Dictionary = {
 		"yield": {IRON: 1},             # LEVER: units, 1-2
 		"regrow_ticks": DAY_TICKS / 2,  # LEVER: ticks, half a day between harvests
 	},
+	# Scarcer quarry materials: slower work, lower sale yield and longer
+	# regrowth than stone. Gold opens permanently on the first autumn.
+	&"copper_ore": {
+		"tool": &"pickaxe", "min_tier": 0, # LEVER: required tier, 0-2
+		"work_ticks": 3 * SECONDS,      # LEVER: ticks per swing, 65-150
+		"hits": 3,                      # LEVER: swings, 2-5
+		"yield": {COPPER: 1},           # LEVER: units, 1-2
+		"regrow_ticks": 6 * 60 * SECONDS, # LEVER: ticks, 5-8 minutes
+	},
+	&"coal_seam": {
+		"tool": &"pickaxe", "min_tier": 0, # LEVER: required tier, 0-2
+		"work_ticks": 3 * SECONDS,      # LEVER: ticks per swing, 65-150
+		"hits": 3,                      # LEVER: swings, 2-5
+		"yield": {COAL: 2},             # LEVER: units, 1-2
+		"regrow_ticks": 5 * 60 * SECONDS, # LEVER: ticks, 4-8 minutes
+	},
+	&"gold_ore": {
+		"tool": &"pickaxe", "min_tier": 1, # LEVER: iron pickaxe, 0-2
+		"first_season": &"autumn",     # LEVER: permanent opening season
+		"work_ticks": 4 * SECONDS,      # LEVER: ticks per swing, 90-180
+		"hits": 4,                      # LEVER: swings, 3-6
+		"yield": {GOLD: 1},             # LEVER: units, 1-2
+		"regrow_ticks": 7 * 60 * SECONDS, # LEVER: ticks, 5-9 minutes
+	},
 }
 
 ## Fishing: how long the wait is, how long you have to react, how often it is
@@ -533,22 +563,22 @@ const TOOLS: Dictionary = {
 	&"hoe": [
 		{"name": &"basic", "cost": {}, "enabled": true, "area": 1, "capacity_bonus": 0}, # LEVER: money/ore and tier effects
 		{"name": &"iron", "cost": {MONEY: 100, IRON: 5}, "enabled": true, "area": 3, "capacity_bonus": 0}, # LEVER: money/ore and tier effects
-		{"name": &"gold", "cost": {}, "enabled": false, "area": 5, "capacity_bonus": 0}, # LEVER: money/ore and tier effects
+		{"name": &"gold", "cost": {MONEY: 300, GOLD: 5}, "enabled": true, "area": 5, "capacity_bonus": 0}, # LEVER: money/ore and tier effects
 	],
 	&"can": [
 		{"name": &"basic", "cost": {}, "enabled": true, "area": 1, "capacity_bonus": 0}, # LEVER: money/ore and tier effects
 		{"name": &"iron", "cost": {MONEY: 100, IRON: 5}, "enabled": true, "area": 3, "capacity_bonus": 4}, # LEVER: money/ore and tier effects
-		{"name": &"gold", "cost": {}, "enabled": false, "area": 5, "capacity_bonus": 8}, # LEVER: money/ore and tier effects
+		{"name": &"gold", "cost": {MONEY: 300, GOLD: 5}, "enabled": true, "area": 5, "capacity_bonus": 8}, # LEVER: money/ore and tier effects
 	],
 	&"axe": [
 		{"name": &"basic", "cost": {}, "enabled": true, "gather_percent": 100}, # LEVER: money/ore and tier effects
 		{"name": &"iron", "cost": {MONEY: 150, IRON: 8}, "enabled": true, "gather_percent": 150}, # LEVER: money/ore and tier effects
-		{"name": &"gold", "cost": {}, "enabled": false, "gather_percent": 200}, # LEVER: money/ore and tier effects
+		{"name": &"gold", "cost": {MONEY: 450, GOLD: 8}, "enabled": true, "gather_percent": 200}, # LEVER: money/ore and tier effects
 	],
 	&"pickaxe": [
 		{"name": &"basic", "cost": {}, "enabled": true, "gather_percent": 100}, # LEVER: money/ore and tier effects
 		{"name": &"iron", "cost": {MONEY: 150, IRON: 8}, "enabled": true, "gather_percent": 150}, # LEVER: money/ore and tier effects
-		{"name": &"gold", "cost": {}, "enabled": false, "gather_percent": 200}, # LEVER: money/ore and tier effects
+		{"name": &"gold", "cost": {MONEY: 450, GOLD: 8}, "enabled": true, "gather_percent": 200}, # LEVER: money/ore and tier effects
 	],
 	&"rod": [
 		{"name": &"bamboo", "cost": {}, "enabled": true, "bite_percent": 100, "rare_percent": 100, "zone_percent": 100, "bait_slot": false, "legendary": false}, # LEVER: money/ore and tier effects
@@ -719,6 +749,7 @@ const BUILDINGS: Dictionary = {
 		"energy_draw": 0,
 		"energy_output": 10,            # LEVER: energy per tick, 5-20
 		"fuel": {OIL: 1},
+		"fuel_fallback": {COAL: 1},     # LEVER: units per tank; oil first
 		# A drop a minute, so a full day and night of running is five or six oil
 		# against the twelve a press can make in a day. Expensive enough to be a
 		# decision, cheap enough that the answer is sometimes yes.
@@ -1034,7 +1065,7 @@ const LIVESTOCK: Dictionary = {
 const GROUP_OTHER := &"other"
 
 const RESOURCE_GROUPS: Array = [
-	{"name": &"materials", "members": [WOOD, STONE, IRON]},
+	{"name": &"materials", "members": [WOOD, STONE, IRON, COPPER, COAL, GOLD]},
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
 	{"name": &"seeds", "members": [CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED]},
 	{"name": &"fish", "members": [FISH]},
@@ -2408,6 +2439,15 @@ static func check_iron(nodes: Dictionary, rows: Array) -> Array:
 		errors.append("ore comes back in %d ticks and stone in %d - iron is "
 			% [ore["regrow_ticks"], seam["regrow_ticks"]] + "meant to be scarcer")
 
+	# New quarry materials follow the same scarcity dials as iron.
+	for id in [&"copper_ore", &"coal_seam", &"gold_ore"]:
+		if not nodes.has(id):
+			continue
+		var node: Dictionary = nodes[id]
+		if int(node["work_ticks"]) <= int(seam["work_ticks"]) \
+				or _worth(node["yield"]) >= _worth(seam["yield"]) \
+				or int(node["regrow_ticks"]) <= int(seam["regrow_ticks"]):
+			errors.append("quarry '%s' must be slower and scarcer than stone" % id)
 	# Every source of iron, and where it is standing.
 	for id in sorted_names(nodes.keys()):
 		var node: Dictionary = nodes[id]
@@ -2617,6 +2657,8 @@ static func check_gathering(nodes: Dictionary) -> Array:
 				errors.append("gathering '%s' needs an axe or pickaxe ladder" % node_id)
 			elif typeof(minimum) != TYPE_INT or int(minimum) < 0 or int(minimum) >= TOOLS[tool].size():
 				errors.append("gathering '%s' has an invalid minimum tool tier" % node_id)
+		if entry.has("first_season") and not SEASONS.has(entry["first_season"]):
+			errors.append("gathering '%s' has an unknown opening season" % node_id)
 		for res in sorted_names(entry["yield"].keys()):
 			if not RESOURCES.has(res):
 				errors.append("gathering '%s' yields unknown '%s'"
@@ -2714,11 +2756,10 @@ static func check_buildings(buildings: Dictionary) -> Array:
 			if not RESOURCES.has(res):
 				errors.append("building '%s' costs unknown '%s'"
 					% [building_id, res])
-		if building.has("fuel"):
-			for res in (building["fuel"] as Dictionary):
+		for field in ["fuel", "fuel_fallback"]:
+			for res in sorted_names((building.get(field, {}) as Dictionary).keys()):
 				if not RESOURCES.has(res):
-					errors.append("building '%s' burns unknown '%s'"
-						% [building_id, res])
+					errors.append("building '%s' burns unknown '%s'" % [building_id, res])
 	return errors
 
 

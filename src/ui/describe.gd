@@ -136,6 +136,8 @@ static func building(id: StringName) -> String:
 			[int(one["energy_supply"])]))
 	if int(one.get("energy_draw", 0)) > 0:
 		lines.append(I18n.f(&"DESC_DRAWS", [int(one["energy_draw"])]))
+	if one.has("fuel_fallback"):
+		lines.append(I18n.t(&"DESC_FUEL_FALLBACK"))
 	var makes := _recipes_at(id)
 	if not makes.is_empty():
 		lines.append(I18n.f(&"DESC_MAKES", [", ".join(makes)]))

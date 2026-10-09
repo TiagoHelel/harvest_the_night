@@ -1,7 +1,7 @@
 # 0176 - Copper, coal and gold
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0175, 0156
 - **Likely files:** src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd
 
@@ -29,10 +29,10 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 ## Done when
 
-- [ ] `_task_0176_ores` in `src/tools/headless_v1.gd`: each new node yields its resource and regrows; gold refuses before autumn and with a basic pickaxe and yields after; a gold hoe can be ordered and arrives the next morning
-- [ ] A new `quarry` scenario: `python tools/shot.py 0176 quarry --fhd` shows the quarry with the new nodes by day and by night; opened and looked at
-- [ ] `python tools/verify.py` prints PASS
-- [ ] the determinism hash is unchanged, or the change is deliberate and both
+- [x] `_task_0176_ores` in `src/tools/headless_v1.gd`: each new node yields its resource and regrows; gold refuses before autumn and with a basic pickaxe and yields after; a gold hoe can be ordered and arrives the next morning
+- [x] A new `quarry` scenario: `python tools/shot.py 0176 quarry --fhd` shows the quarry with the new nodes by day and by night; opened and looked at
+- [x] `python tools/verify.py` prints PASS
+- [x] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal
 
 ## House rules

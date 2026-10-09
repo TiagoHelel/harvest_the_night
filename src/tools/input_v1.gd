@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 31
+const V1_CASES := 32
 
 
 func _process(delta: float) -> bool:
@@ -81,6 +81,7 @@ func _run() -> void:
 	await _case_0173_upgrade()
 	await _case_0174_area()
 	await _case_0175_swings()
+	await _case_0176_gold()
 	_finish()
 
 
@@ -2373,4 +2374,48 @@ func _case_0175_swings() -> void:
 		expect(Resources.amount(state, GameData.WOOD) == wood + 3, "faster real-input work pays the same yield once")
 		await close_scene()
 	expect(timers == [27, 18], "the iron axe starts a third shorter timer with the same sharp-tools tech")
+	_completed += 1
+
+
+## 0176 - real SPACE refuses a basic pickaxe, then mines with delivered iron.
+func _case_0176_gold() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.set_speed(1)
+	var gold: Vector2i = Farm.cells_with(state, &"gold_ore")[0]
+	for offset in Farming.NEIGHBOURS:
+		if Farm.walkable(state, gold + offset):
+			_stand_at(state, gold + offset, Farming.NEIGHBOURS.find(-offset))
+			break
+	await frames(3)
+	await press_key(KEY_SPACE, true)
+	await frames(5)
+	await press_key(KEY_SPACE, false)
+	expect(not Player.is_busy(state) and not Farm.occupant(state, gold).has("hp"), "spring SPACE cannot work gold")
+	state["day"] = GameData.SEASON_DAYS * 2 + 1
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		await frames(3)
+		await press_key(KEY_SPACE, true)
+		await frames(5)
+		await press_key(KEY_SPACE, false)
+		var tooltip := require_control("Tooltip")
+		expect(not Player.is_busy(state) and not Farm.occupant(state, gold).has("hp"), "a basic pickaxe cannot start the autumn gold timer")
+		expect(tooltip._world_text.contains(Names.refusal([&"WHY_GATHER_TOOL", &"pickaxe_iron"])), "the real highlight explains the required iron pickaxe in %s" % locale)
+	state["tools"]["pickaxe"] = 1
+	await frames(3)
+	var before := Resources.amount(state, GameData.GOLD)
+	await press_key(KEY_SPACE, true)
+	await until(func() -> bool: return Player.is_busy(state), "iron starts a real gold swing")
+	expect(int(state["player"]["action"].get("total", -1)) == 80, "iron gold mining starts the exact 80-tick timer")
+	await until(func() -> bool: return Farm.occupant(state, gold).is_empty(), "held SPACE mines gold with an iron pickaxe", 2400)
+	await press_key(KEY_SPACE, false)
+	expect(Resources.amount(state, GameData.GOLD) == before + 1, "real gold mining gives its yield exactly once")
+	I18n.use("en")
+	await close_scene()
 	_completed += 1

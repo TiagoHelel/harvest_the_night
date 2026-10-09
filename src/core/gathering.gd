@@ -52,6 +52,13 @@ static func is_node(id: StringName) -> bool:
 	return GameData.GATHERING.has(id)
 
 
+## A season gate opens permanently, including winter and later years.
+static func is_available(state: Dictionary, id: StringName,
+		nodes: Dictionary = GameData.GATHERING) -> bool:
+	var first: StringName = nodes.get(id, {}).get("first_season", &"")
+	return first == &"" or Calendar.date(state) >= GameData.SEASONS.find(first) * GameData.SEASON_DAYS + 1
+
+
 ## The offered verb stays visible; both the input road and direct strikes
 ## ask the same tier gate. A supplied table lets fixtures exercise future nodes.
 static func why_not(state: Dictionary, cell: Vector2i,
@@ -60,6 +67,8 @@ static func why_not(state: Dictionary, cell: Vector2i,
 	if on.is_empty() or not nodes.has(StringName(on["id"])):
 		return []
 	var node: Dictionary = nodes[StringName(on["id"])]
+	if not is_available(state, StringName(on["id"]), nodes):
+		return [&"WHY_GATHER_SEASON", StringName(node["first_season"])]
 	var tool := StringName(node.get("tool", &""))
 	var minimum := int(node.get("min_tier", 0))
 	if tool != &"" and ToolTiers.tier(state, tool) < minimum:

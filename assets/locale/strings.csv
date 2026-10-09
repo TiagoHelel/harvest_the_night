@@ -581,3 +581,8 @@ WHY_TOOL_PREVIOUS,224,Upgrade the previous tier first,Melhore o nível anterior 
 WHY_TOOL_PENDING,224,This tool already has an order,Esta ferramenta já tem um pedido
 WHY_GATHER_TOOL,224,Needs %s,Precisa de %s
 DESC_TOOL_NEXT_MORNING,224,Keep your tool; ready next morning,Use sua ferramenta; pronta amanhã
+ITEM_COPPER,96,Copper,Cobre
+ITEM_COAL,96,Coal,Carvão
+ITEM_GOLD,96,Gold,Ouro
+WHY_GATHER_SEASON,224,Available from %s,Disponível desde %s
+DESC_FUEL_FALLBACK,224,Oil first; coal when empty,Óleo primeiro; carvão se acabar

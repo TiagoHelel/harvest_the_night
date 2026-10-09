@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["quarry", "copper, coal and iron-gated gold on Autumn 1", ""],
 	["can_area", "three dry plots in the iron can's next stroke", ""],
 	["tool_upgrades", "upgrades ready tomorrow and an iron axe in hand", "WorkshopPanel"],
 	["regrowing", "regrowing strawberries beside ripe fruit", ""],
@@ -670,6 +671,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	main.get_node("%WorldView").cursor().follows_pointer = false
 
 	match name:
+		"quarry": _set_quarry(state)
 		"can_area": _set_can_area(state)
 		"tool_upgrades": _set_tool_upgrades(state)
 		"inventory_crops": _set_inventory_crops(state)
@@ -828,6 +830,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		_worth_saying(state)])
 	if name == "tool_upgrades":
 		await _take_tool_chop(main, state, folder)
+	if name == "quarry":
+		await _take_quarry_extras(main, state, folder)
 	if name == "twelve_crops":
 		for i in Farming.seeds().size():
 			main.get_node("%WorldView").get_node("CropStageLabel_%d" % i).free()
@@ -1896,3 +1900,37 @@ func _take_tool_chop(main: Node, state: Dictionary, folder: String) -> void:
 	await process_frame
 	await _shoot("tool_upgrades_chop", folder)
 	print("  tool_upgrades_chop: %s, tier %d" % [farmer._playing, ToolTiers.tier(state, &"axe")])
+
+
+## 0176 - the existing quarry, in daylight, its material ledger, and night.
+func _set_quarry(state: Dictionary) -> void:
+	_on_date(state, GameData.SEASON_DAYS * 2 + 1)
+	state["tools"]["pickaxe"] = 1
+	state["held"][GameData.COPPER] = 12
+	state["held"][GameData.COAL] = 8
+	state["held"][GameData.GOLD] = 5
+	_standing_at = Vector2i(66, 3)
+	_stand(state, _standing_at)
+
+
+func _take_quarry_extras(main: Node, state: Dictionary, folder: String) -> void:
+	_only_showing(main, "InventoryPanel")
+	(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"materials")
+	await process_frame
+	await process_frame
+	await _shoot("quarry_materials", folder)
+	_only_showing(main, "")
+	# Autumn 1 is calm and settles immediately; show the following night.
+	_on_date(state, GameData.SEASON_DAYS * 2 + 2)
+	NightRoad.to_night(state)
+	main.aim_night_camera((Vector2(_standing_at) + Vector2.ONE * 0.5) * float(GameData.TILE_SIZE))
+	var view := main.get_node("%WorldView") as WorldView
+	view.show_state(state)
+	# Let the views notice bedtime before skipping its beat, as _take does.
+	await process_frame
+	await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await _shoot("quarry_night", folder)

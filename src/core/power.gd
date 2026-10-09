@@ -191,7 +191,8 @@ static func _run(state: Dictionary, anchor: Vector2i, wanted: int,
 
 	# A fresh tankful, if there is one to be had. No fuel, no supply - and the
 	# farm drops to whatever it makes on its own, which is not nothing.
-	if not Resources.pay(state, entry["fuel"]):
+	# Preserve the oil road; coal is used only when its tank cannot be paid.
+	if not Resources.pay(state, entry["fuel"]) and not Resources.pay(state, entry["fuel_fallback"]):
 		burning.erase(idx)
 		return false
 	burning[idx] = int(entry["fuel_every_ticks"]) - 1
