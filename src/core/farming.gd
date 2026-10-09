@@ -63,34 +63,50 @@ static func initial() -> Dictionary:
 
 # ------------------------------------------------------------------- asking
 
-## Every crop there is, in a fixed order, which is the order the seed strip
-## draws them and the order the number keys pick them.
-##
-## **Read off `GameData.CROPS`, sorted.** There is no list of crops anywhere
-## else - adding a fourth is one dictionary entry and it appears in the menu, on
-## a number key and in the save file without a line of code being written. The
-## sort is what makes that safe: Dictionary order in the state is not something
-## the determinism hash is allowed to depend on.
+## Every crop in sorted order, including crops outside today's season.
+## The views and slot keys use `in_season`; catalogues and fixtures use this.
 static func seeds() -> Array:
 	return GameData.sorted_names(GameData.CROPS.keys())
 
 
+## Packet resource for a crop id; selection continues to store the crop.
+static func packet(id: StringName) -> StringName:
+	return StringName("%s_seed" % id)
+
+
+## The sorted choices for today's calendar date. Winter offers none.
+static func in_season(state: Dictionary) -> Array:
+	var season: StringName = GameData.SEASONS[Calendar.season_of(Calendar.date(state))]
+	var out: Array = []
+	for id in seeds():
+		if season in GameData.CROPS[id]["seasons"]:
+			out.append(id)
+	return out
+
+
 static func selected_seed(state: Dictionary) -> StringName:
-	return StringName(state["selected_seed"])
+	var ids := in_season(state)
+	var chosen := StringName(state["selected_seed"])
+	return chosen if chosen in ids else (StringName(ids[0]) if not ids.is_empty() else &"")
+
+
+## Persist the season's fallback at dawn and when reconciling an old save.
+static func refresh_seed(state: Dictionary) -> void:
+	state["selected_seed"] = selected_seed(state)
 
 
 ## Choose what the next `plant` puts in the ground. Refuses anything that is
-## not a crop rather than storing it and failing later at the furrow.
+## not an in-season crop rather than failing later at the furrow.
 static func select_seed(state: Dictionary, id: StringName) -> bool:
-	if not GameData.CROPS.has(id):
+	if id not in in_season(state):
 		return false
 	state["selected_seed"] = id
 	return true
 
 
-## Pick by position in `seeds()`, which is what the number keys send.
+## Pick by position in `in_season()`, which is what the number keys send.
 static func select_seed_at(state: Dictionary, index: int) -> bool:
-	var ids := seeds()
+	var ids := in_season(state)
 	if index < 0 or index >= ids.size():
 		return false
 	return select_seed(state, StringName(ids[index]))
@@ -285,17 +301,12 @@ static func _worked(state: Dictionary, cell: Vector2i) -> void:
 		plot(state, cell)["last_worked_morning"] = int(state["day"])
 
 
-## Put the chosen seed in the ground, and pay for it.
-##
-## **Seeds are money, not an inventory item.** Buying a packet and then planting
-## from it would be two steps and a number to manage, for a decision the player
-## has already made by walking to the field. Task 0040 may revisit that when the
-## shop grows; if it does, this is the one function that changes.
+## Put one held packet in the ground. Money changes only at the stall.
 static func _plant(state: Dictionary, cell: Vector2i) -> void:
-	var seed_id: StringName = state["selected_seed"]
-	var data: Dictionary = GameData.CROPS[seed_id]
-	if not Resources.pay(state, {GameData.MONEY: int(data["seed_cost"])}):
-		return                  # no money, no seed, and no half-planted tile
+	var seed_id := selected_seed(state)
+	if seed_id == &"" or not Resources.spend(state, packet(seed_id), 1):
+		return
+	state["selected_seed"] = seed_id
 	var here: Dictionary = (state["plots"] as Dictionary)[Grid.index(cell)]
 	here["crop"] = seed_id
 	here["growth"] = 0
@@ -373,6 +384,7 @@ static func _harvest(state: Dictionary, cell: Vector2i) -> void:
 ## Credit yesterday's watering once, even when a boss holds the calendar.
 ## Consuming the flag also makes an extra call or a save/reload harmless.
 static func morning(state: Dictionary) -> void:
+	refresh_seed(state)
 	var plots: Dictionary = state["plots"]
 	var keys: Array = plots.keys()
 	keys.sort()

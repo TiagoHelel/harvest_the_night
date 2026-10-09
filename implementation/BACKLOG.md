@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#############...........`  **156 / 296 done**
+`#############...........`  **157 / 296 done**
 
-0 doing / 140 todo / 0 blocked across 18 phases.
+0 doing / 139 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-140 task(s) left, the ready ones first, then what they
+139 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,24 +242,23 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0170 - Crops keep to their seasons
+### 0171 - Winter: nothing grows outside
 
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/farming.gd, src/core/shop.gd, src/ui/day_hud.gd, src/ui/shop_panel.gd, src/ui/describe.gd, src/ui/title_screen.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/farming.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
-Each crop keeps to its season, so spring, summer and autumn fields look and pay differently, and seeds become packets bought at the stall (plan sections 3.1 and 3.6). Which packets the stall puts out in which season is 0190's, with the peddler.
+When a season ends its crops wither, and in winter nothing grows outside - yet the day still matters: the pond, the quarry, the workshop and the barn carry it while the farm lives on autumn's stock.
 
-- `CROPS` gains `seasons` (`# LEVER`): carrot, potato, garlic, strawberry in spring; corn, pepper, sunflower, melon in summer; wheat, pumpkin, grape, beet in autumn. No crop lists winter. The season is `GameData.SEASONS[Calendar.season_of(Calendar.date(state))]` (0149; `season_of` returns 0-3). `check_crops` refuses a crop with no season, an unknown one or winter, and may narrow 'no crop dominates' to crops sharing a season (0168 left it open) - say which. What a change of season does to a planted field, winter included, is 0171's
-- Seeds become items, as the plan's stall and the seed packets of A015-A017 expect: a `<crop>_seed` resource per crop with a price, the seeds group, a `Names.KEYS` entry and an `ITEM_<CROP>_SEED` row in both languages (0169's check wants all four). `Farming._plant` spends one packet of the selected crop instead of `seed_cost` in money (its own comment names it as the one function this changes); `selected_seed` still holds a crop id; `STARTING_RESOURCES` gives a few spring packets so day 1 still plants. An old save holds no packets and buys them: no `State.VERSION` bump - say so
-- The price: `Shop.buy_price` is `ceil(SELL_PRICE * BUY_MARKUP)`, so a packet costs either `seed_cost` through a branch there or a packet `SELL_PRICE` the markup turns into about the seed cost - decide. `check_crops` balances on what a packet really costs, and `check_stall`'s buy-and-sell-back loss still holds
-- The stall sells every packet all year for now: they join today's flat `DAILY_STOCK`, so `Shop.buyable()` lists them and the buy rows show them with no new UI; the `SHOP_SEEDS` rows of `shop_panel.gd` stop meaning 'pay at the furrow' (fold them into the buy rows or keep them as the seed picker - say which). **Moved to 0190:** the seasonal stock (this season's packets only, none in winter), because 0190 reworks `Shop.buyable`/`restock` for the peddler anyway
-- Only in-season crops can be chosen: a `Farming.in_season(state)` list feeds the seed strip (with the packets held), `select_seed_at` and the six `SEED_ACTIONS`; `select_seed` refuses an off-season crop. `Farming.initial()` picks `seeds()[0]`, which after 0168 is `beet` (autumn): a new game selects the first spring crop, and a selection that falls out of season moves to the first in-season crop (none in winter). Packet icons draw through the placeholder road (the crop's icon, tinted) until A015/A016/A017 are integrated by 0198/0199/0200
-- Move what plants (grep `Farming.act`, `select_seed`, `Farming.seeds()` and `seed_cost` in the suites and tools): wheat and corn sown on day 1 - Spring 1 - are now refused (`_task_0018_wheat`, `_task_0028_crops`, `_task_0029_watering`, `_case_0028_seeds`); fields sown round-robin over every crop run out of season and of packets (`_a_busy_day`, `_a_full_farm`, `_task_0109_reactions`, `_task_0111_house`, `determinism.gd`, `make_goldens.gd`, `perf_check.gd`, `shot.gd`, `title_screen.gd`'s backdrop); the autoplayer plants corn and must buy packets. Give the suites one shared helper (in the helper script 0112 made) that sets a date in a crop's season and hands over packets, and route them through it; `_case_0040_shop`'s seed rows follow the stall's change
-- Correct `TUT_PLANT`, `DESC_SEED_COST` (`describe.gd`) and any line that says seeds are paid at the furrow, in both languages
-- SIM and DATA move on purpose (twelve packet resources in `held`/`gained`, the starting packets, the planting rule); record both
+- The change of season, moved here from 0170 so one task owns what a season boundary does to the field: on the first morning of a season `Farming.morning` withers every planted crop whose `seasons` does not list the new one (regrowing plants too, once 0172 has them). The plot loses its crop and growth and keeps a `withered` marker naming the crop for the view, like 0155's `trampled`: `Farming` treats it as empty tilled ground and planting clears the marker (no new verb, so no new sound). No crop lists winter, so Winter 1 withers what autumn left in the ground: write that in the journal
+- A withered crop draws through the placeholder road (the crop's stage-2 frame, greyed in code) until A014's withered crop is integrated by 0197
+- `Farming.morning` credits no growth outdoors in a season named by `NO_GROWTH_SEASONS` (`# LEVER`, winter; in `digest()`; `validate()` refuses a name not in `GameData.SEASONS`), so a crop that is in the ground in winter anyway (a test, an old save) never grows
+- Planting in winter is refused with a reason the highlight can show (a `WHY_*` key in both languages), never a silent nothing; tilling still works. Interact has no refusal road today: give it a reason array of the shape `Building.why_not` returns, which `Names.refusal` already turns into words (0175 reuses it for tool tiers)
+- The seed strip says that nothing grows in winter instead of showing an empty list (a `DHUD_*` string in both languages)
+- Assert the rest of a winter day still runs - a check, not a new rule: fishing (winter species once 0179 has them), mining and regrowth, crafting queues and animals all produce
+- No greenhouse: plan section 3.1 puts it after 1.0
+- Winter's look is 0159's; this task adds only the withered stand-in and the HUD line. DATA moves; SIM does not unless the determinism scenario crosses a season - say which
 
-  - done when: `_task_0170_seasons` in `src/tools/headless_v1.gd`: planting spends one packet and no money, and with no packet plants nothing; an off-season crop can be neither selected nor planted, and a summer date offers only summer crops; a new game selects a spring crop; the stall sells a carrot packet at the price the journal states
-  - done when: `_case_0170_seeds` in `src/tools/input_v1.gd`: buy potato packets at the stall, pick them on a slot key, plant one
-  - done when: New `spring_field` and `summer_field` scenarios: `python tools/shot.py 0170 spring_field summer_field --fhd`; opened and looked at
+  - done when: `_task_0171_winter` in `src/tools/headless_v1.gd`: a corn plot withers on the first morning of autumn and a wheat plot sown that morning does not; every planted crop withers on Winter 1; a watered plot gains no day on a winter morning; a seam, a press queue and a cow still produce on a winter day (direct calls or a short run)
+  - done when: New `withered` (the first morning of autumn by a summer field) and `winter_day` scenarios: `python tools/shot.py 0171 withered winter_day --fhd` shows the withered stand-ins and the HUD line; opened and looked at
 
 ### 0172 - Crops that grow back
 
@@ -392,24 +391,6 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
 
-### 0171 - Winter: nothing grows outside
-
-Waits on 0170.  Likely files: `src/core/farming.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-When a season ends its crops wither, and in winter nothing grows outside - yet the day still matters: the pond, the quarry, the workshop and the barn carry it while the farm lives on autumn's stock.
-
-- The change of season, moved here from 0170 so one task owns what a season boundary does to the field: on the first morning of a season `Farming.morning` withers every planted crop whose `seasons` does not list the new one (regrowing plants too, once 0172 has them). The plot loses its crop and growth and keeps a `withered` marker naming the crop for the view, like 0155's `trampled`: `Farming` treats it as empty tilled ground and planting clears the marker (no new verb, so no new sound). No crop lists winter, so Winter 1 withers what autumn left in the ground: write that in the journal
-- A withered crop draws through the placeholder road (the crop's stage-2 frame, greyed in code) until A014's withered crop is integrated by 0197
-- `Farming.morning` credits no growth outdoors in a season named by `NO_GROWTH_SEASONS` (`# LEVER`, winter; in `digest()`; `validate()` refuses a name not in `GameData.SEASONS`), so a crop that is in the ground in winter anyway (a test, an old save) never grows
-- Planting in winter is refused with a reason the highlight can show (a `WHY_*` key in both languages), never a silent nothing; tilling still works. Interact has no refusal road today: give it a reason array of the shape `Building.why_not` returns, which `Names.refusal` already turns into words (0175 reuses it for tool tiers)
-- The seed strip says that nothing grows in winter instead of showing an empty list (a `DHUD_*` string in both languages)
-- Assert the rest of a winter day still runs - a check, not a new rule: fishing (winter species once 0179 has them), mining and regrowth, crafting queues and animals all produce
-- No greenhouse: plan section 3.1 puts it after 1.0
-- Winter's look is 0159's; this task adds only the withered stand-in and the HUD line. DATA moves; SIM does not unless the determinism scenario crosses a season - say which
-
-  - done when: `_task_0171_winter` in `src/tools/headless_v1.gd`: a corn plot withers on the first morning of autumn and a wheat plot sown that morning does not; every planted crop withers on Winter 1; a watered plot gains no day on a winter morning; a seam, a press queue and a cow still produce on a winter day (direct calls or a short run)
-  - done when: New `withered` (the first morning of autumn by a summer field) and `winter_day` scenarios: `python tools/shot.py 0171 withered winter_day --fhd` shows the withered stand-ins and the HUD line; opened and looked at
-
 ### 0174 - The can and the hoe by tier
 
 Waits on 0173.  Likely files: `src/core/farming.gd, src/core/player.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -512,9 +493,27 @@ At night the animals sleep inside and the barn becomes something to defend: brea
   - done when: `_task_0186_barns_night` in `src/tools/headless_v1.gd` (a short night with breakers set down beside the barn, mornings by `Phases.begin_day`): breakers reach a barn and wreck it, then leave it for other prey; it stands, produces nothing the next day, keeps every animal, and works again after a day repair
   - done when: A new `barn_night` scenario: `python tools/shot.py 0186 barn_night --fhd` shows a hurt and a wrecked barn at night and the next morning; opened and looked at
 
+### 0197 - Art: trampled crops and tilled ground
+
+Waits on 0171.  Likely files: `assets/art_source/crops/, assets/art_source/manifest.json, tools/check_crop_art.py, src/ui/world_view.gd`.
+
+The trampled crop of 0155, the withered crop of 0171 and the tilled-grass edges of 0167 get their approved art in place of their stand-ins.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A014` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A014-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/crops/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_crop_art.py`, which checks `tilled`/`tilled_wet` today).
+- Runtime names: the trampled and withered crops (16x16, pivot (8,14)) and the edge pieces under the mask names 0167 wrote into the pack's table; ground pieces keep the soil conventions (pivot (8,16), wet at least 20 RGB darker)
+- Replace the stand-ins in `world_view.gd`'s plot drawing left by 0155, 0167 and 0171, and flip A014's placeholder-registry entries to raster so 0120's check stops listing it
+- Set the pack to integrated: `python implementation/backlog/assets.py set A014 integrated`.
+
+  - done when: `python tools/check_crop_art.py` and `python tools/show_art.py --crops --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0197/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
 ### 0198 - Art: spring crops
 
-Waits on 0170, 0172.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
+Waits on 0172.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
 
 Potato, garlic and strawberry, and the spring seed packets, get their approved art in place of 0168's tinted stand-ins.
 
@@ -532,7 +531,7 @@ Potato, garlic and strawberry, and the spring seed packets, get their approved a
 
 ### 0199 - Art: summer crops
 
-Waits on 0170, 0172.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
+Waits on 0172.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
 
 Pepper, sunflower and melon, corn's regrowing stage and the summer seed packets get their approved art.
 
@@ -550,7 +549,7 @@ Pepper, sunflower and melon, corn's regrowing stage and the summer seed packets 
 
 ### 0200 - Art: autumn crops
 
-Waits on 0170, 0172.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
+Waits on 0172.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
 
 Pumpkin, the grape on its trellis and beet, and the autumn seed packets, get their approved art.
 
@@ -688,24 +687,6 @@ The first artisan machines: a keg and a preserves jar that turn fruit into wine,
   - done when: `_task_0187_keg` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`): grapes in a keg are wine after the recipe's mornings and not one before; a day spent elsewhere still counts; every new recipe has a positive chain margin
   - done when: `_case_0187_keg` in `src/tools/input_v1.gd`: queue wine at a keg from its panel
 
-### 0197 - Art: trampled crops and tilled ground
-
-Waits on 0171.  Likely files: `assets/art_source/crops/, assets/art_source/manifest.json, tools/check_crop_art.py, src/ui/world_view.gd`.
-
-The trampled crop of 0155, the withered crop of 0171 and the tilled-grass edges of 0167 get their approved art in place of their stand-ins.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A014` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A014-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/crops/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_crop_art.py`, which checks `tilled`/`tilled_wet` today).
-- Runtime names: the trampled and withered crops (16x16, pivot (8,14)) and the edge pieces under the mask names 0167 wrote into the pack's table; ground pieces keep the soil conventions (pivot (8,16), wet at least 20 RGB darker)
-- Replace the stand-ins in `world_view.gd`'s plot drawing left by 0155, 0167 and 0171, and flip A014's placeholder-registry entries to raster so 0120's check stops listing it
-- Set the pack to integrated: `python implementation/backlog/assets.py set A014 integrated`.
-
-  - done when: `python tools/check_crop_art.py` and `python tools/show_art.py --crops --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0197/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
 ### 0207 - Art: the farmer fishing
 
 Waits on 0180.  Likely files: `assets/art_source/player-fhd/, assets/art_source/manifest.json, src/ui/player_work.gd, src/ui/player_frames.gd`.
@@ -799,7 +780,7 @@ The dairy, the loom and the mill: milk into cheese and butter, wool into cloth a
 
 ### 0190 - The peddler and his hours
 
-Waits on 0170, 0183, 0185, 0173.  Likely files: `src/core/shop.gd, src/core/interact.gd, src/core/game_data.gd, src/core/livestock.gd, src/ui/shop_panel.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0183, 0185, 0173.  Likely files: `src/core/shop.gd, src/core/interact.gd, src/core/game_data.gd, src/core/livestock.gd, src/ui/shop_panel.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The stall gets a peddler who keeps hours, 08:00 to 17:00, whose seed packets change with the season (plan section 3.6), and who sells what the farm cannot make for itself: animals and tool upgrades.
 
@@ -1048,7 +1029,7 @@ The peddler at the stall and the stall's closed state get their approved art.
 
 ### 0193 - Every season can make what it needs
 
-Waits on 0170, 0176, 0188, 0190, 0192.  Likely files: `src/core/game_data.gd, src/core/shop.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+Waits on 0176, 0188, 0190, 0192.  Likely files: `src/core/game_data.gd, src/core/shop.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
 
 No defence, round, repair meal or feed may depend on a crop whose season has not come yet: every season can make what it needs.
 
@@ -2261,7 +2242,7 @@ Six new enemies and three new bosses each get a voice of their own, so a night h
 
 ### 0287 - Collections and achievements
 
-Waits on 0170, 0182, 0253, 0254, 0255.  Likely files: `src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md`.
+Waits on 0182, 0253, 0254, 0255.  Likely files: `src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md`.
 
 The plan's reason to start Year 2: four collections - fish, crops, the bosses' trophies and a year without losing the house - and a short list of achievements, kept in the profile across runs and shown on one screen.
 
@@ -2784,15 +2765,15 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (5/53)
+## 12 - The day that pays  (6/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
 - [x] **0167** [Any grass can be tilled](prompts/0167-till-grass.md)
 - [x] **0168** [Nine new crops](prompts/0168-crop-data.md)
 - [x] **0169** [An inventory for many things](prompts/0169-inventory.md)
-- [ ] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md)
-- [ ] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md) - needs 0170
+- [x] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md)
+- [ ] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md)
 - [ ] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md)
 - [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md)
 - [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md) - needs 0173
@@ -2811,17 +2792,17 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md) - needs 0184, 0186
 - [ ] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md) - needs 0187, 0185
 - [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md)
-- [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0170, 0183, 0185, 0173
+- [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0183, 0185, 0173
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188, 0184
-- [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0170, 0176, 0188, 0190, 0192
+- [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0176, 0188, 0190, 0192
 - [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0171, 0172, 0174, 0177, 0178, 0180, 0182, 0186, 0191
 - [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md) - needs 0194
 - [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0194, 0195
 - [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - needs 0171 - waits for art A014
-- [ ] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md) - needs 0170, 0172 - waits for art A015
-- [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - needs 0170, 0172 - waits for art A016
-- [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md) - needs 0170, 0172 - waits for art A017
+- [ ] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md) - needs 0172 - waits for art A015
+- [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - needs 0172 - waits for art A016
+- [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md) - needs 0172 - waits for art A017
 - [ ] **0201** [Art: sprinklers](prompts/0201-art-sprinklers.md) - needs 0178 - waits for art A018
 - [ ] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md) - needs 0173, 0176, 0190 - waits for art A019
 - [ ] **0203** [Art: material icons](prompts/0203-art-material-icons.md) - needs 0176, 0177, 0184 - waits for art A020
@@ -2920,7 +2901,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0247, 0248, 0250, 0252, 0253, 0254, 0255, 0257
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0282
 - [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0186, 0256, 0257, 0285
-- [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0170, 0182, 0253, 0254, 0255
+- [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0182, 0253, 0254, 0255
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
 - [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288

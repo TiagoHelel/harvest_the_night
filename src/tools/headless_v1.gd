@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 38
+const GROUPS := 39
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -107,6 +107,7 @@ func _run() -> void:
 	_task_0167_till_grass()
 	_task_0168_crops()
 	_task_0169_inventory()
+	_task_0170_seasons()
 
 
 func _finish() -> void:
@@ -3138,6 +3139,7 @@ func _task_0160_year_end() -> void:
 ## 0165 - watered mornings, missed chores, held dates and old saves.
 func _task_0165_days() -> void:
 	var state := State.create(1650)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 	var cells := Farming.field_cells(state)
 	for cell in [cells[0], cells[1]]:
 		Farming.act(state, cell)
@@ -3277,8 +3279,7 @@ func _task_0166_long_day() -> void:
 	var fuel := int(GameData.BUILDINGS[&"generator"]["fuel_every_ticks"])
 	expect((GameData.DAY_TICKS - 2) / fuel + 1 == 4,
 		"a continuously loaded generator consumes four oil before pass-out")
-	expect(GameData.DAILY_STOCK == {GameData.WOOD: 15, GameData.STONE: 12,
-		GameData.IRON: 8, GameData.WHEAT: 10, GameData.CORN: 8, GameData.CARROT: 12},
+	expect(GameData.DAILY_STOCK[GameData.WOOD] == 15 and GameData.DAILY_STOCK[GameData.STONE] == 12 and GameData.DAILY_STOCK[GameData.IRON] == 8 and GameData.DAILY_STOCK[GameData.WHEAT] == 10 and GameData.DAILY_STOCK[GameData.CORN] == 8 and GameData.DAILY_STOCK[GameData.CARROT] == 12,
 		"daily stock stays per day rather than scaling with real time")
 	state["day_tick"] = 4200
 	expect(Phases.clock_minute(state) == 11 * 60 and State.VERSION == 7,
@@ -3289,6 +3290,7 @@ func _task_0166_long_day() -> void:
 ## 0167 - plots are overlays; only idle empty grass returns to lawn.
 func _task_0167_till_grass() -> void:
 	var state := State.create(1670)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 	var beds := Farm.cells_of(state, Farm.Terrain.SOIL)
 	expect(Farming.field_cells(state) == beds, "untouched field preserves the starter-bed order")
 	var cell := Vector2i(35, 20)
@@ -3419,8 +3421,8 @@ func _task_0168_crops() -> void:
 		var data: Dictionary = GameData.CROPS[id]
 		expect(int(data["growth_days"]) == int(days[id]) and int(data["stages"]) == 4,
 			"%s has its plan days and four stages" % id)
-		expect(not data.has("season") and not data.has("regrowth"),
-			"season and regrowth are later rules for %s" % id)
+		expect(data.has("seasons") and not data.has("regrowth"),
+			"seasons are assigned and regrowth is a later rule for %s" % id)
 		expect(GameData.SELL_PRICE.has(id) and GameData.RESOURCES.has(id),
 			"%s is a priced ledger resource" % id)
 		var grouped := false
@@ -3435,6 +3437,7 @@ func _task_0168_crops() -> void:
 				"%s has a name in %s" % [id, locale])
 		var state := State.create(1680)
 		var cell: Vector2i = Farming.field_cells(state)[0]
+		SuiteKit.crop_supplies(state, id)
 		Farming.select_seed(state, id)
 		Farming.act(state, cell)
 		Farming.act(state, cell)
@@ -3518,4 +3521,57 @@ func _task_0169_inventory() -> void:
 	expect(State.hash_of(state) == before, "grouping and paging do not write state")
 	expect(DayHud.SHOWN == [[GameData.WOOD, GameData.STONE, GameData.IRON],
 		[GameData.FOOD, GameData.MONEY, GameData.TECH]], "six HUD numbers prioritize food, money and essence")
+	_completed += 1
+
+
+## 0170 - season filtering and held seed packets use the real ledger/stall.
+func _task_0170_seasons() -> void:
+	var state := State.create(1700)
+	expect(Farming.selected_seed(state) == GameData.CARROT and Farming.in_season(state) == [&"carrot", &"garlic", &"potato", &"strawberry"], "a new farm selects a spring crop")
+	var cell: Vector2i = Farming.field_cells(state)[0]
+	var money := Resources.amount(state, GameData.MONEY)
+	var packets := Resources.amount(state, GameData.CARROT_SEED)
+	Farming.act(state, cell)
+	Farming.act(state, cell)
+	expect(Farming.crop_on(state, cell) == GameData.CARROT, "a held carrot packet plants")
+	expect(Resources.amount(state, GameData.CARROT_SEED) == packets - 1 and Resources.amount(state, GameData.MONEY) == money, "sowing spends one packet and no money")
+	state["held"][GameData.CARROT_SEED] = 0
+	var empty: Vector2i = Farming.field_cells(state)[1]
+	Farming.act(state, empty)
+	Farming.act(state, empty)
+	expect(Farming.crop_on(state, empty) == &"", "no packet plants nothing")
+	expect(not Farming.select_seed(state, GameData.CORN), "spring cannot select corn")
+	Resources.add(state, GameData.CORN_SEED, 1)
+	state["selected_seed"] = GameData.CORN
+	Farming.act(state, empty)
+	expect(Farming.crop_on(state, empty) != GameData.CORN, "an outdated selection cannot sow an off-season crop")
+	state["day"] = GameData.SEASON_DAYS + 1
+	state["selected_seed"] = GameData.CARROT
+	Farming.morning(state)
+	expect(Farming.in_season(state) == [&"corn", &"melon", &"pepper", &"sunflower"] and Farming.selected_seed(state) == GameData.CORN, "summer offers only summer crops")
+	state["day"] = GameData.SEASON_DAYS * 3 + 1
+	Farming.morning(state)
+	expect(Farming.in_season(state).is_empty() and Farming.selected_seed(state) == &"" and state["selected_seed"] == &"", "winter clears the selection")
+	expect(not Farming.select_seed_at(state, 0), "winter has no numbered sowing slot")
+	Farming.act(state, empty)
+	expect(Farming.crop_on(state, empty) == &"", "winter cannot plant")
+	expect(Shop.buy_price(GameData.CARROT_SEED) == 2 and Shop.sell_price(GameData.CARROT_SEED) == 1, "carrot packets cost $2 and resell for $1")
+	for id in Farming.seeds():
+		var packet := Farming.packet(id)
+		expect(packet in Shop.buyable() and Shop.stock_of(state, packet) > 0, "%s is stocked all year" % packet)
+		expect(Shop.buy_price(packet) == int(GameData.CROPS[id]["seed_cost"]) and Shop.buy_price(packet) > Shop.sell_price(packet), "%s uses the balanced price and loses on resale" % packet)
+		for season in [[], [&"winter"], [&"unknown"]]:
+			var rigged := GameData.CROPS.duplicate(true)
+			rigged[id]["seasons"] = season
+			expect(not GameData.check_crops(rigged).is_empty(), "%s refuses invalid sowing seasons" % id)
+	var old := State.create(1701)
+	for id in Farming.seeds():
+		old["held"].erase(Farming.packet(id))
+		old["gained"].erase(Farming.packet(id))
+		old["stall"]["stock"].erase(Farming.packet(id))
+	old["stall"]["stock"][GameData.WOOD] = 0
+	State.reconcile(old)
+	expect(Shop.buy(old, GameData.CARROT_SEED, 1) and Shop.stock_of(old, GameData.WOOD) == 0, "old saves can buy a new packet without refilling old shelves")
+	Resources.spend(old, GameData.CARROT_SEED, 1)
+	expect(int(old["version"]) == 7 and Resources.amount(old, GameData.CARROT_SEED) == 0, "old saves receive zero packets without a version bump")
 	_completed += 1

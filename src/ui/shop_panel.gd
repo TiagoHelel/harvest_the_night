@@ -129,6 +129,7 @@ func _process(_delta: float) -> void:
 ## added that a row can be wrong about.
 func _shelf_signature() -> int:
 	var n := 1 if Shop.tab(_state) == Shop.SELL else 0
+	n = n * 31 + Calendar.season_of(Calendar.date(_state))
 	n = n * 31 + Farming.seeds().find(Farming.selected_seed(_state))
 	for id in Shop.buyable():
 		n = n * 61 + Shop.stock_of(_state, id)
@@ -138,7 +139,7 @@ func _shelf_signature() -> int:
 func _build() -> void:
 	var chosen := Farming.selected_seed(_state)
 	if chosen != _last_seed:
-		_seed_page = Farming.seeds().find(chosen) / DayHud.SEED_ACTIONS.size()
+		_seed_page = maxi(Farming.in_season(_state).find(chosen), 0) / DayHud.SEED_ACTIONS.size()
 		_last_seed = chosen
 	_built_for = Resources.amount(_state, GameData.MONEY) \
 		+ Shop.value_of_stock(_state) * 1000 \
@@ -166,7 +167,10 @@ func _build() -> void:
 	heading.text = I18n.t(&"SHOP_SEEDS")
 	heading.theme_type_variation = UiKit.WARM
 	pager.add_child(heading)
-	var seeds := Farming.seeds()
+	var seeds := Farming.in_season(_state)
+	if seeds.is_empty():
+		heading.text = I18n.t(&"DHUD_NO_SEEDS")
+		return
 	var pages := ceili(float(seeds.size()) / DayHud.SEED_ACTIONS.size())
 	pager.add_child(_button("ShopSeedsPrevious", I18n.t(&"SEED_PREVIOUS"), _seed_page > 0,
 		func() -> void: _seed_page -= 1; _build()))
@@ -201,9 +205,11 @@ func _seed_row(id: StringName) -> void:
 	var label := Label.new()
 	label.name = "seed_label_%s" % id
 	label.text = I18n.f(&"SHOP_SEED_ROW", [Names.of(id),
-		int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
+		Resources.amount(_state, Farming.packet(id)),
 		Farming.days_to_grow(id), Farming.value_per_season(id)])
 	label.custom_minimum_size = Vector2(168, 0)
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.theme_type_variation = UiKit.WARM if chosen else UiKit.DIM
 	row.add_child(label)
 
@@ -223,6 +229,8 @@ func _sell_row(id: StringName) -> void:
 	label.text = I18n.f(&"SHOP_SELL_ROW",
 		[Names.of(id), held, Shop.sell_price(id)])
 	label.custom_minimum_size = Vector2(168, 0)
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	# **Shown, not hidden**, when there is none: the list is also how a player
 	# learns what this farm produces and what it is worth.
 	label.theme_type_variation = &"" if held > 0 else UiKit.FAINT
@@ -250,6 +258,8 @@ func _buy_row(id: StringName) -> void:
 	# button that refuses for a reason the player cannot see.
 	label.text = I18n.f(&"SHOP_BUY_ROW", [Names.of(id), price, left])
 	label.custom_minimum_size = Vector2(168, 0)
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.theme_type_variation = &"" if afford and left > 0 \
 		else UiKit.FAINT
 	row.add_child(label)
@@ -272,8 +282,11 @@ func _button(button_name: String, text: String, enabled: bool,
 	if button_name.begins_with("sell_one_") or button_name.begins_with("buy_one_"):
 		var id := button_name.trim_prefix("sell_one_").trim_prefix("buy_one_")
 		button.icon = UiKit.icon(StringName(id),true)
+		if id.ends_with("_seed"):
+			button.theme_type_variation = UiKit.SEED_PACKET
 	button.text = text
 	button.disabled = not enabled
 	button.custom_minimum_size = Vector2(34, ROW_HEIGHT)
+	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	button.pressed.connect(action)
 	return button

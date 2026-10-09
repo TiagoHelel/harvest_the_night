@@ -152,7 +152,7 @@ DESC_ONE_SHOT,0,goes off once,explode uma vez só
 DESC_PASSES_WALLS,0,runs straight past walls,passa direto pelos muros
 DESC_RANGE,0,reaches %d tiles,alcança %d ladrilhos
 DESC_RELOAD,0,fires every %s,atira a cada %s
-DESC_SEED_COST,0,seed costs $%d,a semente custa $%d
+DESC_SEED_COST,0,one packet to sow; buy for $%d,um pacote para plantar; compra por $%d
 DESC_SELLS_FOR,0,sells for $%d,vende por $%d
 DESC_SUPPLIES,0,supplies %d power,fornece %d de energia
 DESC_TAKES,0,takes %s,leva %s
@@ -179,8 +179,8 @@ DHUD_NIGHT_WAITING,0,GO TO BED - NIGHT %d,IR DORMIR - NOITE %d
 DHUD_PASS_OUT_SOON,140,passes out in %d min,desmaia em %d min
 DHUD_POWER,0,POWER %d/%d,ENERGIA %d/%d
 DHUD_POWER_SHORT,0,POWER %d/%d  everything at %d%%,ENERGIA %d/%d  tudo a %d%%
-DHUD_SEED_HEADING,168,# CROP    $  DAYS /SEAS,# PLANTA  $  DIAS /EST
-DHUD_SEED_ROW,168,%d %-7s $%-2d %3dd  %2d,%d %-7s $%-2d %3dd  %2d
+DHUD_SEED_HEADING,168,# CROP   BAG DAYS /SEAS,# PLANTA SAC DIAS /EST
+DHUD_SEED_ROW,168,%d %-7s %3d %3dd  %2d,%d %-7s %3d %3dd  %2d
 DHUD_TO_NIGHT,0,GO TO BED,IR DORMIR
 DHUD_WAITING,0,waiting for a bite,esperando fisgar
 DHUD_WATER,0,WATER %d/%d,ÁGUA %d/%d
@@ -363,8 +363,8 @@ SHOP_FIVE,0,5,5
 SHOP_HINT,0,esc to leave,esc para sair
 SHOP_MONEY,0,$ %d,$ %d
 SHOP_ONE,0,1,1
-SHOP_SEEDS,0,SEEDS,SEMENTES
-SHOP_SEED_ROW,0,%s  $%d  %d days  $%d a season,%s  $%d  %d dias  $%d por estação
+SHOP_SEEDS,0,CHOOSE SEEDS,ESCOLHER SEMENTES
+SHOP_SEED_ROW,0,%s x%d  %dd  $%d/season,%s x%d  %dd  $%d/estação
 SHOP_SELL,0,SELL,VENDER
 SHOP_SELL_ROW,0,%s  x%d  @ $%d,%s  x%d  @ $%d
 SHOP_SOW,0,sow,plantar
@@ -437,7 +437,7 @@ TUT_BUILD,462,Pick from the bar below and set it between the house and the dark.
 TUT_CHOP,462,Wood is in the trees. Stand at one and hold SPACE.,A madeira está nas árvores. Fique numa e segure ESPAÇO.
 TUT_CRAFT,462,The workshop turns what you gathered into walls.,A oficina vira o que você colheu em muros.
 TUT_DAWN,462,Keep the house standing until dawn - the countdown is up top.,Mantenha a casa de pé até o amanhecer - a contagem está lá em cima.
-TUT_PLANT,462,"Soil takes a seed. SPACE turns it, SPACE sows it.","A terra aceita semente. ESPAÇO revolve, ESPAÇO planta."
+TUT_PLANT,462,SPACE tills and sows. Each seed packet plants one crop.,ESPAÇO revolve e planta. Cada pacote planta uma cultura.
 TUT_SELL,462,"The stall buys what you gathered, and sells wood, stone and iron.","A banca compra o que você colheu, e vende madeira, pedra e ferro."
 TUT_START,462,"When it is all set, press START. Nothing comes until you do.","Quando estiver tudo pronto, aperte COMEÇAR. Nada vem antes disso."
 TUT_WATER,462,Water crops to grow each morning. Dry crops wait. Fill the can at water.,Regue para crescer a cada manhã. Sem água a planta espera. Encha o regador na água.
@@ -524,3 +524,16 @@ INV_PAGE,300,%s - %d/%d,%s - %d/%d
 INV_PREVIOUS,140,< %s,< %s
 INV_NEXT,140,%s >,%s >
 INV_PRICE,64,$%d each,$%d cada
+ITEM_CARROT_SEED,0,carrot seed,semente de cenoura
+ITEM_POTATO_SEED,0,potato seed,semente de batata
+ITEM_GARLIC_SEED,0,garlic seed,semente de alho
+ITEM_STRAWBERRY_SEED,0,strawberry seed,semente de morango
+ITEM_CORN_SEED,0,corn seed,semente de milho
+ITEM_PEPPER_SEED,0,pepper seed,semente de pimenta
+ITEM_SUNFLOWER_SEED,0,sunflower seed,semente de girassol
+ITEM_MELON_SEED,0,melon seed,semente de melancia
+ITEM_WHEAT_SEED,0,wheat seed,semente de trigo
+ITEM_PUMPKIN_SEED,0,pumpkin seed,semente de abóbora
+ITEM_GRAPE_SEED,0,grape seed,semente de uva
+ITEM_BEET_SEED,0,beet seed,semente de beterraba
+DHUD_NO_SEEDS,168,No sowing in winter,Sem plantio no inverno

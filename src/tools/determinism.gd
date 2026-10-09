@@ -155,6 +155,7 @@ func _set_the_farm_going(state: Dictionary) -> void:
 		var cell: Vector2i = found
 		if sown >= 9:
 			break
+		SuiteKit.crop_supplies(state, StringName(seeds[sown % seeds.size()]))
 		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
 		Farming.act(state, cell)            # till
 		Farming.act(state, cell)            # plant

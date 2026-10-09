@@ -1479,6 +1479,13 @@ func click_control(control_name: String) -> void:
 	if node == null or not (node is Control):
 		return
 	var ctl: Control = node
+	var ancestor := ctl.get_parent()
+	while ancestor != null:
+		if ancestor is ScrollContainer:
+			(ancestor as ScrollContainer).ensure_control_visible(ctl)
+			await frames(3)
+			break
+		ancestor = ancestor.get_parent()
 	await click_at(ctl.global_position + ctl.size * 0.5)
 
 
@@ -1573,7 +1580,8 @@ func _case_0028_seeds() -> void:
 		return
 
 	var state := driver.state
-	var ids := Farming.seeds()
+	var ids := Farming.in_season(state)
+	SuiteKit.crop_supplies(state, ids[0])
 	Farming.select_seed(state, ids[0])
 	await frames(2)
 
@@ -1589,8 +1597,7 @@ func _case_0028_seeds() -> void:
 			"and how long it takes to grow", row.text)
 		expect(row.text.contains(str(Farming.value_per_season(id))),
 			"and what a plot of it is worth over a season", row.text)
-		expect(row.text.contains("$%d" % int((GameData.CROPS[id]
-			as Dictionary)["seed_cost"])), "and what the seed costs", row.text)
+		expect(row.text.contains(str(Resources.amount(state, Farming.packet(id)))), "and held packets", row.text)
 
 	# **The chosen row is the lit one**, so the strip answers "what am I about
 	# to plant" without the player remembering which key they last pressed.
@@ -1619,10 +1626,10 @@ func _case_0028_seeds() -> void:
 		% ink(first))
 
 	# **The last key names the last row of this page** (0168).
-	await tap_key(KEY_6)
+	await tap_key(KEY_4)
 	await frames(2)
-	expect(Farming.selected_seed(state) == StringName(ids[5]),
-		"the sixth slot picks the sixth crop on this page",
+	expect(Farming.selected_seed(state) == StringName(ids[3]),
+		"the fourth slot picks the fourth crop on this page",
 		str(Farming.selected_seed(state)))
 
 	# **And what gets planted is what the strip said.** Walk the farmer onto a
@@ -1632,6 +1639,7 @@ func _case_0028_seeds() -> void:
 		return Farming.selected_seed(state) == StringName(ids[2]),
 		"the 3 key to pick the third crop")
 	var chosen := Farming.selected_seed(state)
+	SuiteKit.crop_supplies(state, chosen)
 
 	var cell := _reachable_plot(state)
 	expect(cell != Vector2i(-1, -1), "there is soil to stand next to")
@@ -2799,7 +2807,7 @@ func _case_0040_shop() -> void:
 		"an empty shelf is a button that says no rather than one that lies")
 
 	# **The seeds, side by side with what the choice needs.**
-	var seed_ids := Farming.seeds()
+	var seed_ids := Farming.in_season(state)
 	for i in seed_ids.size():
 		if i > 0 and i % DayHud.SEED_ACTIONS.size() == 0:
 			await click_control("ShopSeedsNext")
@@ -2809,7 +2817,7 @@ func _case_0040_shop() -> void:
 		expect(seed != null, "%s has a row" % id)
 		if seed == null:
 			continue
-		expect(seed.text.contains("%d days" % Farming.days_to_grow(id)),
+		expect(seed.text.contains("%dd" % Farming.days_to_grow(id)),
 			"saying how long it takes", seed.text)
 		expect(seed.text.contains(str(Farming.value_per_season(id))),
 			"and what it is worth over a season", seed.text)
@@ -2817,7 +2825,7 @@ func _case_0040_shop() -> void:
 	await click_control("ShopSeedsPrevious")
 	await frames(2)
 	var other := &""
-	for id in Farming.seeds():
+	for id in Farming.in_season(state):
 		if Farming.selected_seed(state) != id:
 			other = id
 			break

@@ -209,6 +209,18 @@ const MELON := &"melon"
 const PUMPKIN := &"pumpkin"
 const GRAPE := &"grape"
 const BEET := &"beet"
+const CARROT_SEED := &"carrot_seed"
+const POTATO_SEED := &"potato_seed"
+const GARLIC_SEED := &"garlic_seed"
+const STRAWBERRY_SEED := &"strawberry_seed"
+const CORN_SEED := &"corn_seed"
+const PEPPER_SEED := &"pepper_seed"
+const SUNFLOWER_SEED := &"sunflower_seed"
+const MELON_SEED := &"melon_seed"
+const WHEAT_SEED := &"wheat_seed"
+const PUMPKIN_SEED := &"pumpkin_seed"
+const GRAPE_SEED := &"grape_seed"
+const BEET_SEED := &"beet_seed"
 const MEAT := &"meat"
 const GUNPOWDER := &"gunpowder"
 ## **Technology, and it is a resource on purpose.** It goes through the same
@@ -229,6 +241,7 @@ const ENERGY := &"energy"
 const RESOURCES: Array = [
 	WOOD, STONE, IRON, FOOD, FISH, OIL,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
+	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
 
 ## What the shop will buy, and for how much.
@@ -261,6 +274,18 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	PUMPKIN: 26,                    # LEVER: money each, 1-30
 	GRAPE: 22,                    # LEVER: money each, 1-30
 	BEET: 11,                    # LEVER: money each, 1-30
+	CARROT_SEED: 1,                 # LEVER: packet resale, 1-10
+	POTATO_SEED: 1,                 # LEVER: packet resale, 1-10
+	GARLIC_SEED: 1,                 # LEVER: packet resale, 1-10
+	STRAWBERRY_SEED: 3,                 # LEVER: packet resale, 1-10
+	CORN_SEED: 1,                 # LEVER: packet resale, 1-10
+	PEPPER_SEED: 2,                 # LEVER: packet resale, 1-10
+	SUNFLOWER_SEED: 2,                 # LEVER: packet resale, 1-10
+	MELON_SEED: 4,                 # LEVER: packet resale, 1-10
+	WHEAT_SEED: 1,                 # LEVER: packet resale, 1-10
+	PUMPKIN_SEED: 4,                 # LEVER: packet resale, 1-10
+	GRAPE_SEED: 3,                 # LEVER: packet resale, 1-10
+	BEET_SEED: 2,                 # LEVER: packet resale, 1-10
 	MEAT: 9,
 	# Above the oil it is made from, per craft: two corn and a drop of oil is
 	# $36 in and $44 out. `check_chain()` is what keeps that true.
@@ -290,19 +315,22 @@ const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
 	MONEY: 25,
 	WOOD: 12,
 	STONE: 6,
+	CARROT_SEED: 6,
+	POTATO_SEED: 2,
+	GARLIC_SEED: 2,
 }
 
 
 # ===================================================================== crops
 
 ## The twelve crops of the 1.0 plan, each with a different reason to plant it.
-## Seasons (0170) and regrowth (0172) are deliberately not rules yet.
+## Sowing seasons are rules; regrowth belongs to 0172.
 ##
 ## ## Money, attention, capital - pick two
 ##
 ## The original offers per plot across a fourteen-day season, seed paid for:
 ##
-##     carrot   3d   seed $1   net  5  x 4 harvests  = 20
+##     carrot   3d   seed $2   net  4  x 4 harvests  = 16
 ##     wheat    4d   seed $2   net  6  x 3 harvests  = 18
 ##     corn     8d   seed $4   net 11  x 1 harvest   = 11
 ##
@@ -312,7 +340,7 @@ const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
 ##
 ## The **seed costs** carry the balance. The original sale prices remain
 ## those of `design.md` section 6; the new 1.0 crops ask for more capital
-## as their seasonal value rises. `check_crops()` compares all twelve.
+## as their seasonal value rises. `check_crops()` compares crops sharing a sowing season.
 ##
 ## On top of the money each one feeds something the others do not: wheat is the
 ## money crop, corn is the industry crop - oil and gunpowder come out of it -
@@ -321,72 +349,84 @@ const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
 ## above: the day you need gunpowder, corn is the only crop that makes any.
 const CROPS: Dictionary = {
 	WHEAT: {
+		"seasons": [&"autumn"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 2,                 # LEVER: money, 1-8
 		"growth_days": 4,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,
 	},
 	CORN: {
+		"seasons": [&"summer"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 4,                 # LEVER: money, 1-10
 		"growth_days": 8,              # LEVER: watered mornings, 1-14
 		"yield": 3,                     # LEVER: units per harvest, 2-5
 		"stages": 4,
 	},
 	CARROT: {
-		"seed_cost": 1,                 # LEVER: money, 1-8
+		"seasons": [&"spring"],        # LEVER: sowing seasons, spring-autumn
+		"seed_cost": 2,                 # LEVER: money, 1-8
 		"growth_days": 3,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,
 	},
 	POTATO: {
+		"seasons": [&"spring"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 4,                 # LEVER: money, 1-16
 		"growth_days": 5,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	GARLIC: {
+		"seasons": [&"spring"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 3,                 # LEVER: money, 1-16
 		"growth_days": 4,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	STRAWBERRY: {
+		"seasons": [&"spring"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 8,                 # LEVER: money, 1-16
 		"growth_days": 8,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	PEPPER: {
+		"seasons": [&"summer"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 5,                 # LEVER: money, 1-16
 		"growth_days": 5,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	SUNFLOWER: {
+		"seasons": [&"summer"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 6,                 # LEVER: money, 1-16
 		"growth_days": 7,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	MELON: {
+		"seasons": [&"summer"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 10,                 # LEVER: money, 1-16
 		"growth_days": 10,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	PUMPKIN: {
+		"seasons": [&"autumn"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 11,                 # LEVER: money, 1-16
 		"growth_days": 10,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	GRAPE: {
+		"seasons": [&"autumn"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 9,                 # LEVER: money, 1-16
 		"growth_days": 8,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 	BEET: {
+		"seasons": [&"autumn"],        # LEVER: sowing seasons, spring-autumn
 		"seed_cost": 7,                 # LEVER: money, 1-16
 		"growth_days": 6,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
@@ -928,7 +968,7 @@ const GROUP_OTHER := &"other"
 const RESOURCE_GROUPS: Array = [
 	{"name": &"materials", "members": [WOOD, STONE, IRON]},
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
-	{"name": &"seeds", "members": []},
+	{"name": &"seeds", "members": [CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED]},
 	{"name": &"fish", "members": [FISH]},
 	{"name": &"animal_goods", "members": [MEAT]},
 	{"name": &"artisan_goods", "members": [FOOD, OIL]},
@@ -973,6 +1013,18 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 	WHEAT: 10,
 	CORN: 8,
 	CARROT: 12,
+	CARROT_SEED: 20,              # LEVER: packets a day, 2-40
+	POTATO_SEED: 20,              # LEVER: packets a day, 2-40
+	GARLIC_SEED: 20,              # LEVER: packets a day, 2-40
+	STRAWBERRY_SEED: 20,              # LEVER: packets a day, 2-40
+	CORN_SEED: 20,              # LEVER: packets a day, 2-40
+	PEPPER_SEED: 20,              # LEVER: packets a day, 2-40
+	SUNFLOWER_SEED: 20,              # LEVER: packets a day, 2-40
+	MELON_SEED: 20,              # LEVER: packets a day, 2-40
+	WHEAT_SEED: 20,              # LEVER: packets a day, 2-40
+	PUMPKIN_SEED: 20,              # LEVER: packets a day, 2-40
+	GRAPE_SEED: 20,              # LEVER: packets a day, 2-40
+	BEET_SEED: 20,              # LEVER: packets a day, 2-40
 }
 
 
@@ -2178,13 +2230,23 @@ static func sorted_names(values: Array) -> Array:
 
 static func check_crops(crops: Dictionary) -> Array:
 	var errors: Array = []
-	for crop_id in crops:
+	for crop_id in sorted_names(crops.keys()):
 		if not RESOURCES.has(crop_id):
 			errors.append("crop '%s' is not a resource" % crop_id)
 		if not SELL_PRICE.has(crop_id):
 			errors.append("crop '%s' has no sell price" % crop_id)
 		if int((crops[crop_id] as Dictionary)["growth_days"]) <= 0:
 			errors.append("crop '%s' grows in no time at all" % crop_id)
+
+		var seasons: Array = crops[crop_id].get("seasons", [])
+		if seasons.is_empty():
+			errors.append("crop '%s' has no sowing season" % crop_id)
+		for season in seasons:
+			if season not in SEASONS or season == &"winter":
+				errors.append("crop '%s' has invalid sowing season '%s'" % [crop_id, season])
+		var packet := StringName("%s_seed" % crop_id)
+		if int(crops[crop_id]["seed_cost"]) <= int(SELL_PRICE.get(packet, 0)):
+			errors.append("crop '%s' packet must lose money on resale" % crop_id)
 
 	# **No crop may be the right answer at every money level.** A crop that
 	# pays at least as much per season, for no more visits, off a no larger seed,
@@ -2198,6 +2260,13 @@ static func check_crops(crops: Dictionary) -> Array:
 		for b in ids:
 			if a == b:
 				continue
+			var shared := false
+			for season in crops[a].get("seasons", []):
+				if season in crops[b].get("seasons", []):
+					shared = true
+			if not shared:
+				continue
+
 			var x := _crop_offer(crops, a)
 			var y := _crop_offer(crops, b)
 			if x["value"] >= y["value"] and x["visits"] <= y["visits"] 					and x["seed"] <= y["seed"]:
@@ -2827,6 +2896,9 @@ static func check_stall(stock: Dictionary, prices: Dictionary,
 	for id in sorted_names(prices.keys()):
 		var sells_for := int(prices[id])
 		var costs := int(ceil(float(sells_for) * markup))
+		var crop := StringName(String(id).trim_suffix("_seed"))
+		if String(id).ends_with("_seed") and CROPS.has(crop):
+			costs = int(CROPS[crop]["seed_cost"])
 		if costs <= sells_for:
 			errors.append(("'%s' costs $%d and sells for $%d - buy it and sell "
 				+ "it back and you are richer") % [id, costs, sells_for])

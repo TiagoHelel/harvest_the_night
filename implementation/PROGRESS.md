@@ -16957,3 +16957,83 @@ implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/{0169-inventory,0179-fish-species}.md,
 implementation/shots/0169/, docs/devlog/{index,index.pt_BR}.md
 (refreshed by devlog.py --check).
+
+## 0170 - Crops keep to their seasons - done 2026-10-09
+
+What changed: each crop has its plan sowing season. The strip and its six
+number keys offer only today's crops, show held packet counts, and select the
+first available crop when the previous choice leaves season; winter has no
+selection. Sowing spends one packet and no money. Twelve named, translated,
+priced packet resources join the seeds category and the flat daily shelf.
+The shop's extra seed rows remain an in-season picker, with held quantities;
+actual purchases use the ordinary buy rows. Tutorial and crop descriptions
+now explain packets, and long shop labels wrap without stretching buttons.
+
+Price decision: packet purchases use a Shop.buy_price branch reading the
+crop's seed_cost, which is also the cost used by check_crops. Carrot costs $2
+and resells for $1: its old $1 purchase could not lose money on resale while
+0169 requires every tangible item's positive sale price. Other purchase
+costs remain wheat $2, garlic $3, corn/potato $4, pepper $5, sunflower $6,
+beet $7, strawberry $8, grape $9, melon $10 and pumpkin $11. Packet resale
+prices are $1/$2/$3/$4 and every purchase loses on selling back.
+Dominance is compared only between crops sharing a sowing season, since the
+original carrot/corn/wheat trio no longer offers simultaneous choices.
+All twelve packet shelves carry 20 per day all year; seasonal stock remains
+0190's. New farms get six carrot, two potato and two garlic packets.
+
+Save decision: State.VERSION remains 7. Missing packet balances in old held
+and gained tables reconcile to zero, not the starter gift. New shelves are
+added to old saves without refilling already exhausted shelves, so an old
+save can immediately buy packets. The pure selection getter never writes
+state; dawn, sowing and reconciliation persist its fallback through core.
+Planted crops still follow the existing watered-morning rules, including
+across season changes; field expiry and winter behavior remain 0171's.
+
+Fixtures: SuiteKit.crop_supplies gives test/tool farms packets and a valid
+crop date. Explicit wheat/corn, round-robin fields, determinism, golden maker,
+perf and shot fixtures use it. The disposable title backdrop is always spring
+and supplies its own packets through Resources.add: src/tools is excluded
+from shipped exports, so production UI cannot depend on SuiteKit. The robot
+buys packets at the stall and chooses carrot, corn or wheat in their season;
+it skips sowing in winter. The shared input harness scrolls controls into
+view before clicking. New 0170 rule/input cases cover packet consumption,
+missing packets, off-season refusal, summer/winter choices, dawn fallback,
+old-save purchases and buying/picking/sowing potato through real input.
+
+Verify: 60 PASS, 0 FAIL, 0 SKIP in 590s. Headless 16838 / v1 1271, input 1127 / v1 395,
+all with zero failures; 56 authored nights checked for two seeds, 168 scripts
+parsed, 538 bilingual keys fit, 5488 UI checks passed, exports passed.
+SIM deliberately moved 2176208283 -> 1129539259; DATA deliberately moved
+3933123229 -> 1139704927. Accepted both and the final verification preserves
+both. The first full run found shop button stretching and single-line bounds
+checks on wrapped labels; fixed the controls and measured wrapped width and
+height, plus paged the now 36-resource native icon fixture. perf                         PASS   9.5s  OK    a night tick is 3394us of the 8333 it may have (41%), a path rebuild 9729us of 33333.
+Total OVER BUDGET is the known machine timing notice, not a failed check.
+
+Looked at: all 18 final captures opened individually at full 1920x1080.
+Spring and summer fields have their four distinct crop choices and visible
+held counts; the existing farmer and world scale remain unchanged. Seed
+names follow the crop translations, including melon/melancia. Both seed
+ledger pages and the other eight ledger pages fit the frame; buy rows wrap
+inside the stall's scroll viewport. Existing approved crop icons stand in
+for packets with a tint through PlaceholderArt; no PNG art was created or
+modified, and A015-A017 integration remains 0198-0200's.
+Kept: implementation/shots/0170/spring_field-pt_BR.png,
+summer_field-pt_BR.png, noon-pt_BR.png, dusk-pt_BR.png, wave-pt_BR.png,
+result-pt_BR.png, tech-pt_BR.png, shop_seeds_one-pt_BR.png and
+inventory_full_{materials,crops,seeds,fish,animal_goods,artisan_goods,
+ammunition,farm}_*-pt_BR.png (ten ledger pages).
+
+Notes: the 1716 paths dirty at claim belong to the owner/art pipeline and stay
+outside this commit. Protected paths remain unstaged, including project.godot
+and the backlog art requests/index. The RUN-key question remains open.
+Never pushed. Backlog: 296 tasks, 157 done, 139 todo, 0 doing, 0 blocked; 56 todo wait for Codex art.
+
+Files: src/core/{farming,game_data,shop,state}.gd,
+src/ui/{day_hud,describe,inventory_panel,names,placeholder_art,shop_panel,
+title_screen,ui_kit}.gd, src/tools/{autoplay,determinism,headless_check,
+headless_v1,input_check,input_v1,make_goldens,perf_check,shot,suite_kit,
+ui_art_showcase}.gd, assets/locale/strings.csv,
+tools/determinism_{sim,data}_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/0170-crop-seasons.md, implementation/shots/0170/,
+docs/devlog/{index,index.pt_BR}.md (devlog.py --check).

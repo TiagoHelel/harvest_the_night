@@ -115,3 +115,12 @@ static func watered_mornings(state: Dictionary, days: int = 1) -> void:
 				plot["watered"] = true
 		Farming.dry_out(state)
 		Farming.morning(state)
+
+
+## A crop fixture gets packets and a valid date without weakening the rules.
+static func crop_supplies(state: Dictionary, id: StringName, packets: int = 80) -> void:
+	if id not in Farming.in_season(state):
+		var season: StringName = GameData.CROPS[id]["seasons"][0]
+		state["day"] = GameData.SEASONS.find(season) * GameData.SEASON_DAYS + 1
+		state["days_held"] = 0
+	state["held"][Farming.packet(id)] = packets

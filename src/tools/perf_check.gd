@@ -127,6 +127,7 @@ func _the_worst_case() -> Dictionary:
 	var seeds := Farming.seeds()
 	var sown := 0
 	for found in Farming.field_cells(state):
+		SuiteKit.crop_supplies(state, StringName(seeds[sown % seeds.size()]))
 		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
 		Farming.act(state, found)
 		Farming.act(state, found)
@@ -199,6 +200,7 @@ func _a_busy_day() -> Dictionary:
 	var seeds := Farming.seeds()
 	var sown := 0
 	for found in Farming.field_cells(state):
+		SuiteKit.crop_supplies(state, StringName(seeds[sown % seeds.size()]))
 		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
 		Farming.act(state, found)
 		Farming.act(state, found)

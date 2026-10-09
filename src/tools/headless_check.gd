@@ -186,6 +186,7 @@ func _run() -> void:
 ## The farm expansion and room use the same deterministic state and inputs.
 func _task_0111_house() -> void:
 	var state := State.create(111111)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 	expect(Grid.WIDTH >= Save.V3_FARM.x and Grid.HEIGHT >= Save.V3_FARM.y,
 		"the 45x25 farm this task built is still the top left of today's")
 	var new_bed := Vector2i(31, 21)
@@ -1407,6 +1408,7 @@ func _task_0109_reactions() -> void:
 		if Grid.manhattan(found, plots[0]) > 4:
 			continue
 		for one in [loud, quiet]:
+			SuiteKit.crop_supplies(one, GameData.CARROT)
 			Farming.select_seed(one, GameData.CARROT)
 			Farming.act(one, found)
 			Farming.act(one, found)
@@ -1509,6 +1511,7 @@ func _task_0109_reactions() -> void:
 	for found in soil:
 		if Grid.manhattan(found, near) > 4:
 			continue
+		SuiteKit.crop_supplies(field, GameData.CARROT)
 		Farming.select_seed(field, GameData.CARROT)
 		Farming.act(field, found)
 		Farming.act(field, found)
@@ -2770,6 +2773,7 @@ func _task_0018_wheat() -> void:
 	# **Asked for by name.** Since task 0028 there are three crops and a new
 	# farm starts on carrot, the cheapest; a group about wheat has to say wheat
 	# rather than lean on whichever one happens to be the default.
+	SuiteKit.crop_supplies(state, GameData.WHEAT)
 	Farming.select_seed(state, GameData.WHEAT)
 	var field := Farming.field_cells(state)
 	expect(field.size() == 60, "there are sixty planting beds", str(field.size()))
@@ -2789,8 +2793,8 @@ func _task_0018_wheat() -> void:
 	Interact.complete(state, plot, &"plant")
 	expect(Farming.crop_on(state, plot) == GameData.WHEAT, "which goes in")
 	expect(Resources.amount(state, GameData.MONEY)
-		== money_before - int(data["seed_cost"]),
-		"and is paid for", str(Resources.amount(state, GameData.MONEY)))
+		== money_before,
+		"planting spends no money", str(Resources.amount(state, GameData.MONEY)))
 	expect(Interact.verb_at(state, plot) == &"",
 		"a growing crop offers nothing - there is nothing useful to do yet")
 
@@ -2822,6 +2826,7 @@ func _task_0018_wheat() -> void:
 	# **A night changes nothing, and the morning picks up where it left off.**
 	# The done-when of this task, and the reason a plot is plain data.
 	var overnight := State.create(72)
+	SuiteKit.crop_supplies(overnight, GameData.WHEAT)
 	Farming.select_seed(overnight, GameData.WHEAT)
 	var bed: Vector2i = Farming.field_cells(overnight)[3]
 	Interact.complete(overnight, bed, &"till")
@@ -2849,16 +2854,17 @@ func _task_0018_wheat() -> void:
 	# No money, no seed, and no half-planted tile.
 	var broke := State.create(73)
 	var dirt: Vector2i = Farming.field_cells(broke)[0]
-	Resources.spend(broke, GameData.MONEY,
-		Resources.amount(broke, GameData.MONEY))
+	Resources.spend(broke, GameData.CARROT_SEED,
+		Resources.amount(broke, GameData.CARROT_SEED))
 	Interact.complete(broke, dirt, &"till")
 	Interact.complete(broke, dirt, &"plant")
 	expect(Farming.crop_on(broke, dirt) == &"",
-		"planting with no money plants nothing")
+		"planting with no packets plants nothing")
 	expect(Farming.is_tilled(broke, dirt), "and leaves the tilled ground alone")
 
 	# A whole field, because one plot is not a field.
 	var farmed := State.create(74)
+	SuiteKit.crop_supplies(farmed, GameData.WHEAT)
 	Farming.select_seed(farmed, GameData.WHEAT)
 	Resources.add(farmed, GameData.MONEY, 500)
 	for cell in Farming.field_cells(farmed):
@@ -3045,6 +3051,7 @@ func _task_0019_workshop() -> void:
 ## always a bad deal.
 func _task_0020_shop() -> void:
 	var state := State.create(91)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 	var stall: Vector2i = Farm.cells_with(state, &"shop")[0]
 
 	expect(Interact.verb_at(state, stall) == &"trade", "the stall offers trade")
@@ -3203,6 +3210,7 @@ func _task_0021_night_intent() -> void:
 ## what the farm will let you do.
 func _task_0022_reality() -> void:
 	var state := State.create(111)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 
 	# Build something and note the whole farm, so that "nothing moved" can be
 	# checked rather than eyeballed.
@@ -4200,6 +4208,7 @@ func _task_0028_crops() -> void:
 		Resources.gain(state, {GameData.MONEY: 100})
 		var money_before := Resources.amount(state, GameData.MONEY)
 		var cell := _a_plot(state)
+		SuiteKit.crop_supplies(state, id)
 		expect(Farming.select_seed(state, id), "%s can be chosen" % id)
 		Farming.act(state, cell)                # till
 		Farming.act(state, cell)                # plant
@@ -4207,8 +4216,8 @@ func _task_0028_crops() -> void:
 			"%s is what went in the ground" % id,
 			str(Farming.crop_on(state, cell)))
 		expect(Resources.amount(state, GameData.MONEY)
-			== money_before - int(data["seed_cost"]),
-			"and the seed was paid for",
+			== money_before,
+			"planting spends its held packet",
 			str(Resources.amount(state, GameData.MONEY)))
 
 		var needed := int(data["growth_days"])
@@ -4232,87 +4241,17 @@ func _task_0028_crops() -> void:
 			and Farming.crop_on(state, cell) == &"",
 			"and leaves the ground turned over for the next one")
 
-	# **They differ, on every axis.** Three crops that grew at the same rate
-	# would be one crop with three names.
-	var times: Array = []
-	var values: Array = []
-	var costs: Array = []
-	for id in ids:
-		times.append(Farming.days_to_grow(id))
-		values.append(Farming.value_per_season(id))
-		costs.append(int((GameData.CROPS[id] as Dictionary)["seed_cost"]))
-		print("  %-7s $%d seed, %3dd, %d a harvest, %d visits, %d a season"
-			% [id, int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
-				Farming.days_to_grow(id), Farming.value_per_harvest(id),
-				Farming.harvests_per_season(id), Farming.value_per_season(id)])
-	expect(_all_different(times), "no two crops grow at the same rate",
-		str(times))
-	expect(_all_different(values), "and none is worth the same over a season",
-		str(values))
-	expect(_all_different(costs), "and none costs the same to start",
-		str(costs))
-
-	# **No crop is the right answer at every money level.** More money per day,
-	# for no more trips across the farm, off a no larger seed, would make every
-	# other crop a mistake. `GameData.check_crops()` is what enforces it; this
-	# is the same sum spelled out, so a failure here names the pair.
-	for a in ids:
-		for b in ids:
-			if a == b:
-				continue
-			var seed_a := int((GameData.CROPS[a] as Dictionary)["seed_cost"])
-			var seed_b := int((GameData.CROPS[b] as Dictionary)["seed_cost"])
-			expect(not (Farming.value_per_season(a) >= Farming.value_per_season(b)
-				and Farming.harvests_per_season(a) <= Farming.harvests_per_season(b)
-				and seed_a <= seed_b),
-				"%s does not dominate %s" % [a, b],
-				"%d a season in %d visits off a $%d seed, against %d/%d/$%d"
-					% [Farming.value_per_season(a), Farming.harvests_per_season(a),
-						seed_a, Farming.value_per_season(b),
-						Farming.harvests_per_season(b), seed_b])
-
-	# And each one wins at something, which is the other half of a real choice.
-	expect(_wins_at(ids, func(id: StringName) -> int:
-		return Farming.value_per_season(id)) == GameData.CARROT,
-		"carrot pays the most over a season")
-	expect(_wins_at(ids, func(id: StringName) -> int:
-		return -Farming.harvests_per_season(id)) == GameData.CORN,
-		"corn asks for the fewest trips across the farm")
-	expect(_wins_at(ids, func(id: StringName) -> int:
-		return -int((GameData.CROPS[id] as Dictionary)["seed_cost"]))
-		== GameData.CARROT, "and carrot is what a broke player can afford")
-	expect(Farming.value_per_season(GameData.WHEAT)
-		> Farming.value_per_season(GameData.CORN)
-		and Farming.harvests_per_season(GameData.WHEAT)
-		< Farming.harvests_per_season(GameData.CARROT),
-		"wheat beats corn on money and carrot on walking")
-
-	# **A broke player has exactly one option**, which is what "no right answer
-	# at every money level" means when you have a dollar.
+	# Price balance is now compared within each season; the original three
+	# belong to different seasons and are no longer simultaneous choices.
+	expect(GameData.check_crops(GameData.CROPS).is_empty(), "seasonal crop offers validate")
 	var broke := State.create(901)
-	Resources.spend(broke, GameData.MONEY,
-		Resources.amount(broke, GameData.MONEY) - 1)
-	expect(Resources.amount(broke, GameData.MONEY) == 1, "a dollar left")
-	var affordable: Array = []
-	for id in ids:
-		if int((GameData.CROPS[id] as Dictionary)["seed_cost"]) <= 1:
-			affordable.append(id)
-	expect(affordable == [GameData.CARROT],
-		"and carrot is the only thing that can go in the ground",
-		str(affordable))
-
-	# The furrow refuses rather than half-planting: no money, no seed, and the
-	# plot is still tilled and still empty.
-	var poor_cell := _a_plot(broke)
+	SuiteKit.crop_supplies(broke, GameData.CORN, 0)
 	Farming.select_seed(broke, GameData.CORN)
-	Farming.act(broke, poor_cell)               # till
-	Farming.act(broke, poor_cell)               # plant - and cannot
-	expect(Farming.crop_on(broke, poor_cell) == &"",
-		"corn at four dollars does not go in on one")
-	expect(Resources.amount(broke, GameData.MONEY) == 1,
-		"and the dollar is safe")
-	expect(Farming.verb_at(broke, poor_cell) == &"plant",
-		"the plot is still waiting for a seed")
+	var poor_cell := _a_plot(broke)
+	Farming.act(broke, poor_cell)
+	Farming.act(broke, poor_cell)
+	expect(Farming.crop_on(broke, poor_cell) == &"", "corn needs a held packet")
+	expect(Resources.amount(broke, GameData.MONEY) == 25, "planting cannot spend money")
 
 	# **Selecting refuses what is not a crop**, rather than storing it and
 	# failing at the furrow a minute later.
@@ -4324,7 +4263,7 @@ func _task_0028_crops() -> void:
 	expect(Farming.selected_seed(picky) == StringName(ids[0]),
 		"so the selection is untouched", str(Farming.selected_seed(picky)))
 	expect(Farming.select_seed_at(picky, 1), "slot 2 picks the second crop")
-	expect(Farming.selected_seed(picky) == StringName(Farming.seeds()[1]),
+	expect(Farming.selected_seed(picky) == StringName(Farming.in_season(picky)[1]),
 		"which is the sorted second", str(Farming.selected_seed(picky)))
 
 	# **A fourth crop is one dictionary entry.** Nothing outside GameData names
@@ -4395,6 +4334,7 @@ func _task_0029_watering() -> void:
 		expect(stages == 4, "%s has four stages" % id, str(stages))
 		var state := State.create(1100)
 		Resources.gain(state, {GameData.MONEY: 100})
+		SuiteKit.crop_supplies(state, id)
 		Farming.select_seed(state, id)
 		var cell := _a_plot(state)
 		Farming.act(state, cell)
@@ -4451,6 +4391,7 @@ func _task_0029_watering() -> void:
 	# and the one number a player will actually feel.
 	var race := State.create(1103)
 	Resources.gain(race, {GameData.MONEY: 100})
+	SuiteKit.crop_supplies(race, GameData.WHEAT)
 	Farming.select_seed(race, GameData.WHEAT)
 	var field := Farming.field_cells(race)
 	var wet: Vector2i = field[0]
@@ -4505,6 +4446,7 @@ func _task_0029_watering() -> void:
 
 	# **The carry limit is a limit.** One canful waters exactly that many tiles.
 	var carrying := State.create(1105)
+	SuiteKit.crop_supplies(carrying, GameData.CARROT)
 	Resources.gain(carrying, {GameData.MONEY: 200})
 	carrying["water_can"] = GameData.WATER_CAN_CAPACITY
 	var row := Farming.field_cells(carrying)
@@ -5064,6 +5006,7 @@ func _task_0032_oil() -> void:
 	# **A press is built, not inherited.** It costs, it covers four tiles, and
 	# it will not hang off the edge of the farm.
 	var state := State.create(1400)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 	expect(Building.is_placeable(&"press"), "a press can be placed")
 	expect(Building.size_of(&"press") == Vector2i(4, 3), "four by three",
 		str(Building.size_of(&"press")))
@@ -5500,6 +5443,7 @@ func _task_0034_cooking() -> void:
 	# **Meat comes from somewhere now.** It has been in the resource table with
 	# a price and a recipe since task 0003 and nothing in the world made any.
 	var state := State.create(1600)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 	var cows := Farm.cells_with(state, &"cow")
 	var hens := Farm.cells_with(state, &"chicken")
 	expect(cows.size() > 0, "there is a cow on the farm", str(cows.size()))
@@ -6379,6 +6323,7 @@ func _a_busy_day(seed_value: int, at_the_pond: bool) -> Dictionary:
 		var cell: Vector2i = found
 		if sown >= 9:
 			break
+		SuiteKit.crop_supplies(state, StringName(seeds[sown % seeds.size()]))
 		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
 		Farming.act(state, cell)
 		Farming.act(state, cell)
@@ -6474,6 +6419,7 @@ func _a_full_farm(seed_value: int) -> Dictionary:
 	var sown := 0
 	for found in Farming.field_cells(state):
 		var cell: Vector2i = found
+		SuiteKit.crop_supplies(state, StringName(seeds[sown % seeds.size()]))
 		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
 		Farming.act(state, cell)
 		Farming.act(state, cell)
@@ -6501,6 +6447,7 @@ func _a_full_farm(seed_value: int) -> Dictionary:
 ## 0039 - time passing, without taking the choice away.
 func _task_0039_clock() -> void:
 	var state := State.create(2100)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 
 	# **A day is a lever's worth of ticks**, and the clock counts today rather
 	# than the session.
@@ -6914,6 +6861,7 @@ func _task_0041_tutorial() -> void:
 
 	# **It starts at the beginning and points at something.**
 	var state := State.create(2300)
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 	expect(Tutorial.progress(state) == 0, "nothing done yet")
 	expect(Tutorial.current(state)["id"] == &"chop",
 		"the first line is about the trees",
@@ -14524,7 +14472,7 @@ func _task_0082_shots() -> void:
 	# 0160: the year ending and its credits. Forty-five since 0167:
 	# turned grass beside the starter beds in daylight and at night. Fifty-one
 	# since 0168: twelve crops, both seed pages in the HUD/stall and the ledger.
-	expect(names.size() == 52,
+	expect(names.size() == 54,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

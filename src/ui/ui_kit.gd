@@ -69,6 +69,8 @@ const MARGIN := 3
 ## The four a button can be in, in Godot's own names, because `theme()` hands
 ## each one straight to `Theme.set_stylebox`. Nothing outside this file wires
 ## a button up any more: it is a `Button`, and the theme knows what that is.
+const SEED_PACKET := &"SeedPacket"
+
 const BUTTON_STATES := ["normal", "hover", "pressed", "disabled"]
 
 ## Loaded once each. A panel asking for its background every frame would
@@ -389,6 +391,9 @@ static func _dress_frames(out: Theme) -> void:
 
 
 static func _dress_buttons(out: Theme) -> void:
+	out.set_type_variation(SEED_PACKET, &"Button")
+	for state in ["normal", "hover", "focus", "pressed", "disabled"]:
+		out.set_color(StringName("icon_%s_color" % state), SEED_PACKET, Color(0.72, 0.84, 1.0))
 	# **Three pixels across, none down.** A `Button` computes its minimum
 	# height from its content margins, so a vertical margin here is a control
 	# that ignores the size it was given - the bug that put the build palette

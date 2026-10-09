@@ -239,7 +239,7 @@ static func crop(id: StringName) -> String:
 	var one: Dictionary = entry
 	var lines: Array = [Names.of(id).to_upper()]
 	lines.append(I18n.f(&"DESC_SEED_COST",
-		[int(one.get("seed_cost", 0))]))
+		[Shop.buy_price(Farming.packet(id))]))
 	lines.append(I18n.f(&"DESC_GROWS_IN",
 		[int(one.get("growth_days", 0))]))
 	lines.append(I18n.f(&"DESC_SELLS_FOR",

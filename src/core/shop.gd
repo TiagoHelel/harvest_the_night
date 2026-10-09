@@ -41,17 +41,8 @@ static func sellable() -> Array:
 	return out
 
 
-## What the stall will sell you.
-##
-## Raw materials only, and at a markup: this is for the night you are three
-## stone short at dusk, not for a way to skip the day. Task 0040 stocks it
-## properly and gives it a daily limit.
-## What the stall will sell you: whatever it has in today.
-##
-## Materials for the night you are three stone short at dusk, and the three
-## crops for the evening you are two corn short of gunpowder. Not oil, not
-## gunpowder, not food - **nothing the workshop makes**, because a stall that
-## sold the output of your own machines would be a way to skip owning them.
+## The flat daily shelf: materials, the original harvested crops and every
+## seed packet. Seasonal stock belongs to the peddler pass in 0190.
 static func buyable() -> Array:
 	return GameData.sorted_names(GameData.DAILY_STOCK.keys())
 
@@ -125,6 +116,18 @@ static func restock(state: Dictionary) -> bool:
 	return true
 
 
+## New packet shelves in an old save start stocked; existing shelves keep
+## their quantities, so loading cannot restock a shelf the player emptied.
+static func reconcile_stock(state: Dictionary) -> Array:
+	var added: Array = []
+	var stock: Dictionary = state["stall"]["stock"]
+	for id in buyable():
+		if not stock.has(id):
+			stock[id] = int(GameData.DAILY_STOCK[id])
+			added.append(id)
+	return added
+
+
 static func sell_price(id: StringName) -> int:
 	return int(GameData.SELL_PRICE.get(id, 0))
 
@@ -143,10 +146,14 @@ static func paid_for(state: Dictionary, id: StringName, n: int) -> int:
 		* Tech.bonus(state, "sell_percent", 100) / 100
 
 
-## What the stall charges. Always more than it pays, at every price, rounded up
+## Packets use their crop's balanced seed cost; other goods use the markup.
+## What the stall charges is always more than it pays, rounded up
 ## so that the markup cannot vanish on a cheap item - `headless_check` asserts
 ## the inequality for every sellable thing.
 static func buy_price(id: StringName) -> int:
+	var crop := StringName(String(id).trim_suffix("_seed"))
+	if String(id).ends_with("_seed") and GameData.CROPS.has(crop):
+		return int(GameData.CROPS[crop]["seed_cost"])
 	return int(ceil(float(sell_price(id)) * GameData.BUY_MARKUP))
 
 

@@ -81,6 +81,7 @@ func _a_played_farm() -> Dictionary:
 	for found in Farming.field_cells(state):
 		if sown >= 14:
 			break
+		SuiteKit.crop_supplies(state, StringName(seeds[sown % seeds.size()]))
 		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
 		Farming.act(state, found)
 		Farming.act(state, found)

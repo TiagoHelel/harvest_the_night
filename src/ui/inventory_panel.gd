@@ -235,6 +235,7 @@ func _row(line: Dictionary) -> Control:
 	icon.name = "inv_icon_%s" % line["id"]
 	icon.texture = UiKit.icon(StringName(line["id"]),true)
 	icon.modulate = PlaceholderArt.art_tint(StringName("hud_%s" % line["id"]))
+	icon.modulate = PlaceholderArt.art_tint(StringName("hud_%s" % line["id"]))
 	icon.custom_minimum_size = Vector2(10,10)
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP

@@ -194,11 +194,12 @@ func _begin_backdrop() -> void:
 	_state = State.create(BACKDROP_SEED)
 	# A farm with something growing on it, because an empty field says
 	# nothing about what the days are for.
-	var seeds := Farming.seeds()
+	var seeds := Farming.in_season(_state)
 	var sown := 0
 	for cell in Farming.field_cells(_state):
 		if Interact.verb_at(_state, cell) != &"till":
 			continue
+		Resources.add(_state, Farming.packet(StringName(seeds[sown % seeds.size()])), 1)
 		Farming.select_seed(_state, StringName(seeds[sown % seeds.size()]))
 		Interact.complete(_state, cell, &"till")
 		Interact.complete(_state, cell, &"plant")

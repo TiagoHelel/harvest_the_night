@@ -183,12 +183,17 @@ static func reconcile(state: Dictionary) -> Array:
 		var theirs: Dictionary = fresh[named]
 		for key in _sorted(theirs):
 			if not mine.has(key):
-				mine[key] = theirs[key]
+				mine[key] = 0 if named in ["held", "gained"] and String(key).ends_with("_seed") else theirs[key]
 				notes.append("filled in '%s' in %s" % [str(key), named])
 		for key in _sorted(mine):
 			if not theirs.has(key):
 				mine.erase(key)
 				notes.append("dropped '%s' from %s" % [str(key), named])
+	for id in Shop.reconcile_stock(state):
+		notes.append("stocked new shelf '%s'" % id)
+	if Farming.selected_seed(state) != StringName(state["selected_seed"]):
+		Farming.refresh_seed(state)
+		notes.append("selected an in-season crop")
 	if House.repair_position(state):
 		notes.append("moved indoor player off revised furniture")
 	# A zombie on a sunny afternoon: a lost night used to leave its winners

@@ -94,10 +94,18 @@ func _icon(id: StringName, compact: bool, at: Vector2) -> TextureRect:
 
 
 func _inventory(speaking: String, high: bool) -> void:
+	# Six rows fit the native viewport. Additional packet resources need
+	# another fixture page so captured pixels remain inside the image.
+	for first in range(0, GameData.RESOURCES.size(), 24):
+		_new_room()
+		await _inventory_page(speaking, high, GameData.RESOURCES.slice(first, first + 24), first / 24)
+
+
+func _inventory_page(speaking: String, high: bool, ids: Array, page: int) -> void:
 	_label("%d resources / native 16px + HUD 10px / " % GameData.RESOURCES.size() + speaking,Vector2(12,5),UiKit.WARM)
 	expect(UiKit.missing_icons().is_empty() and UiKit.orphan_icons().is_empty(),"Every actual core resource has an icon and none is orphaned")
-	for i in GameData.RESOURCES.size():
-		var id: StringName = GameData.RESOURCES[i]
+	for i in ids.size():
+		var id: StringName = ids[i]
 		var at := Vector2(12+(i%4)*116,25+(i/4)*39)
 		var name := Names.of(id)
 		expect(UiKit.font().get_string_size(name,HORIZONTAL_ALIGNMENT_LEFT,-1,8).x<=112,"Localized resource name fits its actual fixture column: "+name)
@@ -112,7 +120,7 @@ func _inventory(speaking: String, high: bool) -> void:
 		expect(image.texture.get_size()==image.size,"Native UI never resizes an inventory icon")
 		var source := Image.load_from_file(ProjectSettings.globalize_path(image.texture.resource_path))
 		expect(image.texture.get_image().get_data()==source.get_data(),"Imported source pixels are exact")
-	await _shoot("icons_"+speaking+("_contrast" if high else ""))
+	await _shoot("icons_%d_" % page+speaking+("_contrast" if high else ""))
 	if _capture:
 		var actual := root.get_texture().get_image()
 		for image in _icons:
@@ -335,5 +343,11 @@ func _check_bounds(control: Control) -> void:
 		expect(rect.position.x>=0 and fits_y and rect.end.x<=480,"Actual localized control fits native viewport: "+str(child.name)+" "+str(rect))
 		if child is Label:
 			var label := child as Label
-			var width := label.get_theme_font(&"font").get_string_size(label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,label.get_theme_font_size(&"font_size")).x
+			var font := label.get_theme_font(&"font")
+			var font_size := label.get_theme_font_size(&"font_size")
+			var measured := font.get_string_size(label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size)
+			if label.autowrap_mode != TextServer.AUTOWRAP_OFF:
+				measured = font.get_multiline_string_size(label.text,HORIZONTAL_ALIGNMENT_LEFT,label.size.x,font_size)
+				expect(measured.y<=label.size.y,"Wrapped shop text fits its row height: "+str(child.name))
+			var width := measured.x
 			expect(width<=label.size.x,"Localized label fits its actual allocated row: "+str(child.name))

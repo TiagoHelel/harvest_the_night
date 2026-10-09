@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-158 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+159 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -201,6 +201,7 @@ voz alta.
 | 0167 | Any grass can be tilled | 2026-10-09 |
 | 0168 | Nine new crops | 2026-10-09 |
 | 0169 | An inventory for many things | 2026-10-09 |
+| 0170 | Crops keep to their seasons | 2026-10-09 |
 
 ## Toda vez que o jogo mudou por baixo
 

@@ -557,9 +557,16 @@ static func _work_the_field(state: Dictionary) -> int:
 			var well: Vector2i = Farm.cells_with(state, &"well")[0]
 			Farming.refill_beside(state, well + Vector2i.UP)
 			return GameData.SECONDS
-		Farming.select_seed(state, &"corn" if i % 3 == 0 else &"carrot")
+		var choices := Farming.in_season(state)
+		if not choices.is_empty():
+			var crop: StringName = &"corn" if &"corn" in choices else (&"carrot" if &"carrot" in choices else &"wheat")
+			Farming.select_seed(state, crop)
+			var packet := Farming.packet(crop)
+			if Farming.verb_at(state, plot) == &"plant" and Resources.amount(state, packet) == 0:
+				if not Shop.buy(state, packet, 1):
+					continue
 		var verb := Farming.verb_at(state, plot)
-		if verb == &"":
+		if verb == &"" or (verb == &"plant" and choices.is_empty()):
 			continue
 		Farming.act(state, plot)
 		return int(Interact.DEFAULT_TICKS.get(verb, GameData.SECONDS))

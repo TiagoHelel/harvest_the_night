@@ -66,13 +66,15 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["spring_field", "spring crops and held seed packets", ""],
+	["summer_field", "summer crops and held seed packets", ""],
 	["inventory_crops", "the crop category in the ledger", "InventoryPanel"],
 	["inventory_full", "every item held, every inventory page", "InventoryPanel"],
 	["twelve_crops", "twelve crops at all four stages", ""],
-	["seed_page_one", "first six seeds in the HUD", ""],
-	["seed_page_two", "last six seeds in the HUD", ""],
-	["shop_seeds_one", "first six seeds at the stall", "ShopPanel"],
-	["shop_seeds_two", "last six seeds at the stall", "ShopPanel"],
+	["seed_page_one", "spring choices in the HUD", ""],
+	["seed_page_two", "last spring choice in the HUD", ""],
+	["shop_seeds_one", "spring seed picker at the stall", "ShopPanel"],
+	["shop_seeds_two", "last spring seed choice at the stall", "ShopPanel"],
 	["till_grass", "tilled grass beside starter beds at noon", ""],
 	["till_grass_night", "the same expanded field at night", ""],
 	["noon", "the farm at noon", ""],
@@ -666,6 +668,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"inventory_crops": _set_inventory_crops(state)
 		"inventory_full": _set_inventory_full(state)
 		"twelve_crops": _set_twelve_crops(state)
+		"spring_field": _set_spring_field(state)
+		"summer_field": _set_summer_field(state)
 		"seed_page_one": _set_seed_page_one(state)
 		"seed_page_two": _set_seed_page_two(state)
 		"shop_seeds_one": _set_shop_seeds_one(state)
@@ -1063,12 +1067,13 @@ func _set_options_controls_pad(state: Dictionary) -> void:
 func _a_sown_field(state: Dictionary) -> void:
 	Resources.gain(state, {GameData.MONEY: 999, GameData.WOOD: 180,
 		GameData.STONE: 120, GameData.IRON: 90, GameData.OIL: 30})
-	var seeds := Farming.seeds()
+	var seeds := Farming.in_season(state)
 	var sown := 0
 	var middle := Vector2i.ZERO
 	for cell in Farming.field_cells(state):
 		if Interact.verb_at(state, cell) != &"till":
 			continue
+		SuiteKit.crop_supplies(state, StringName(seeds[sown % seeds.size()]))
 		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
 		Interact.complete(state, cell, &"till")
 		Interact.complete(state, cell, &"plant")
@@ -1101,6 +1106,7 @@ func _set_house_interior(state: Dictionary) -> void:
 ## these beds, and the walk stopped at the well with the crops behind the
 ## crop table. The farmer starts the picture next to them instead.
 func _set_farm_extension(state: Dictionary) -> void:
+	SuiteKit.crop_supplies(state, GameData.CARROT)
 	Resources.gain(state, {GameData.MONEY: 999})
 	for y in range(20, 23):
 		for x in range(30, 34):
@@ -1653,6 +1659,7 @@ func _till_grass_fixture(state: Dictionary, night: bool) -> void:
 				continue
 			Farming.act(state, cell)
 			if (x + y) % 3 == 0:
+				SuiteKit.crop_supplies(state, &"carrot" if x % 2 else &"wheat")
 				Farming.select_seed(state, &"carrot" if x % 2 else &"wheat")
 				Farming.act(state, cell)
 				Farming.act(state, cell)
@@ -1695,12 +1702,14 @@ func _set_twelve_crops(state: Dictionary) -> void:
 func _set_seed_page_one(state: Dictionary) -> void:
 	_set_noon(state)
 	_on_date(state, 2)
-	Farming.select_seed(state, Farming.seeds()[0])
+	SuiteKit.crop_supplies(state, Farming.in_season(state)[0])
+	Farming.select_seed(state, Farming.in_season(state)[0])
 
 
 func _set_seed_page_two(state: Dictionary) -> void:
 	_set_seed_page_one(state)
-	Farming.select_seed(state, Farming.seeds()[6])
+	SuiteKit.crop_supplies(state, Farming.in_season(state)[3])
+	Farming.select_seed(state, Farming.in_season(state)[3])
 
 
 func _set_shop_seeds_one(state: Dictionary) -> void:
@@ -1724,3 +1733,29 @@ func _set_inventory_full(state: Dictionary) -> void:
 	_set_noon(state)
 	for id in GameData.RESOURCES:
 		Resources.add(state, StringName(id), 999)
+
+
+## Four seasonal crops on the actual starter beds, with held packet counts.
+func _set_season_field(state: Dictionary, season: int) -> void:
+	_set_noon(state)
+	_on_date(state, season * GameData.SEASON_DAYS + 2)
+	var ids := Farming.in_season(state)
+	var cells := Farming.field_cells(state)
+	state["plots"].clear()
+	for i in cells.size():
+		var id: StringName = ids[(i / 15) % ids.size()]
+		SuiteKit.crop_supplies(state, id)
+		Farming.select_seed(state, id)
+		Farming.act(state, cells[i])
+		Farming.act(state, cells[i])
+		Farming.plot(state, cells[i])["growth"] = Farming.days_to_grow(id)
+		Farming.plot(state, cells[i])["watered"] = true
+	Farming.select_seed(state, ids[0])
+
+
+func _set_spring_field(state: Dictionary) -> void:
+	_set_season_field(state, 0)
+
+
+func _set_summer_field(state: Dictionary) -> void:
+	_set_season_field(state, 1)

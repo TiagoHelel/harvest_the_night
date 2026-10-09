@@ -1,7 +1,7 @@
 # 0170 - Crops keep to their seasons
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0168, 0149, 0169
 - **Likely files:** src/core/game_data.gd, src/core/farming.gd, src/core/shop.gd, src/ui/day_hud.gd, src/ui/shop_panel.gd, src/ui/describe.gd, src/ui/title_screen.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 
@@ -22,11 +22,11 @@ Each crop keeps to its season, so spring, summer and autumn fields look and pay 
 
 ## Done when
 
-- [ ] `_task_0170_seasons` in `src/tools/headless_v1.gd`: planting spends one packet and no money, and with no packet plants nothing; an off-season crop can be neither selected nor planted, and a summer date offers only summer crops; a new game selects a spring crop; the stall sells a carrot packet at the price the journal states
-- [ ] `_case_0170_seeds` in `src/tools/input_v1.gd`: buy potato packets at the stall, pick them on a slot key, plant one
-- [ ] New `spring_field` and `summer_field` scenarios: `python tools/shot.py 0170 spring_field summer_field --fhd`; opened and looked at
-- [ ] `python tools/verify.py` prints PASS
-- [ ] the determinism hash is unchanged, or the change is deliberate and both
+- [x] `_task_0170_seasons` in `src/tools/headless_v1.gd`: planting spends one packet and no money, and with no packet plants nothing; an off-season crop can be neither selected nor planted, and a summer date offers only summer crops; a new game selects a spring crop; the stall sells a carrot packet at the price the journal states
+- [x] `_case_0170_seeds` in `src/tools/input_v1.gd`: buy potato packets at the stall, pick them on a slot key, plant one
+- [x] New `spring_field` and `summer_field` scenarios: `python tools/shot.py 0170 spring_field summer_field --fhd`; opened and looked at
+- [x] `python tools/verify.py` prints PASS
+- [x] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal
 
 ## House rules

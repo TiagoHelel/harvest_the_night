@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-158 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
+159 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -202,6 +202,7 @@ is the sort of thing this list exists to say out loud.
 | 0167 | Any grass can be tilled | 2026-10-09 |
 | 0168 | Nine new crops | 2026-10-09 |
 | 0169 | An inventory for many things | 2026-10-09 |
+| 0170 | Crops keep to their seasons | 2026-10-09 |
 
 ## Every time the game changed underneath itself
 
