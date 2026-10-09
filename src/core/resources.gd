@@ -39,9 +39,16 @@ static func initial() -> Dictionary:
 	}
 
 
-## How much of one thing the player has.
+## How much of one thing the player has - or, for a group a cost may name
+## (`GameData.ANY_OF`: the fish since task 0179), of all its members together.
 static func amount(state: Dictionary, id: StringName) -> int:
-	return int((state["held"] as Dictionary).get(id, 0))
+	var held: Dictionary = state["held"]
+	if GameData.is_any_of(id):
+		var total := 0
+		for member in GameData.group_members(id):
+			total += int(held.get(member, 0))
+		return total
+	return int(held.get(id, 0))
 
 
 ## Add to the balance. `n` below zero is a mistake at the call site: spending
@@ -84,32 +91,43 @@ static func spend(state: Dictionary, id: StringName, n: int) -> bool:
 ## Whether the whole cost can be paid. Checked across every line before any of
 ## it is taken, which is what makes `pay()` atomic.
 static func can_afford(state: Dictionary, cost: Dictionary) -> bool:
-	var held: Dictionary = state["held"]
 	for id in _sorted(cost):
-		if not GameData.RESOURCES.has(id):
+		if not GameData.RESOURCES.has(id) and not GameData.is_any_of(id):
 			push_error("Resources.can_afford: unknown '%s'" % id)
 			return false
-		if int(held.get(id, 0)) < int(cost[id]):
+		if amount(state, id) < int(cost[id]):
 			return false
 	return true
 
 
 ## Pay a whole cost, or nothing at all.
+##
+## **A group is paid from its members** (task 0179): three fish are taken
+## from the species held in `GameData.pay_order` - the cheapest first, then
+## by name - so a recipe never spends the sturgeon while there is carp.
 static func pay(state: Dictionary, cost: Dictionary) -> bool:
 	if not can_afford(state, cost):
 		return false
 	var held: Dictionary = state["held"]
 	for id in _sorted(cost):
-		held[id] = int(held[id]) - int(cost[id])
+		if not GameData.is_any_of(id):
+			held[id] = int(held[id]) - int(cost[id])
+			continue
+		var owed := int(cost[id])
+		for member in GameData.pay_order(id):
+			var taken := mini(owed, int(held.get(member, 0)))
+			if taken > 0:
+				held[member] = int(held[member]) - taken
+				owed -= taken
 	return true
 
 
 ## What a cost is short by, for the tooltip that says why a button is greyed.
+## A group's shortfall is against all its members together.
 static func missing(state: Dictionary, cost: Dictionary) -> Dictionary:
 	var short := {}
-	var held: Dictionary = state["held"]
 	for id in _sorted(cost):
-		var gap := int(cost[id]) - int(held.get(id, 0))
+		var gap := int(cost[id]) - amount(state, id)
 		if gap > 0:
 			short[id] = gap
 	return short

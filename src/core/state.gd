@@ -30,7 +30,9 @@ extends RefCounted
 ## **6 since task 0156**: the 1.0 farm - new nodes, stumps and cleared spawn
 ## ground laid onto an older farm where it has room for them.
 ## **7 since task 0165**: plot growth counts watered mornings rather than ticks.
-const VERSION := 7
+## **8 since task 0179**: the one `fish` became twelve species; a save's fish
+## arrive as carp, the commonest.
+const VERSION := 8
 
 ## The nested dictionaries whose keys come from the code.
 ##

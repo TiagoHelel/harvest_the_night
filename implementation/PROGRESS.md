@@ -17767,3 +17767,156 @@ assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/backlog/packs/A018-sprinklers.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0178-sprinklers.md,
 implementation/shots/0178/, docs/devlog/{index,index.pt_BR}.md
+
+## 0179 - Fish by pond, season and hour - done 2026-10-09
+
+What changed: the one fish became twelve species across 0156's three ponds.
+Each species has its waters, seasons and hours, and a weight in the draw. A
+cast now asks where and when as well as whether. The triple "rare" fish is
+gone.
+
+**The table** (`GameData.FISH_SPECIES`, in `digest()`, every field a lever):
+- **`ponds`** uses 0156's names, `north_west_pond`, `forest_pond` and
+  `south_east_lake`, found from a cell by `Farm.pond_of`.
+- **`seasons`**.
+- **`hours`**: `[from, to]` on 0126's clock (`Phases.clock_minute`),
+  inclusive.
+- **`weight`**.
+- **The species:**
+  - **Commons:** carp is all year and all day in the two western waters;
+    perch and summer's tilapia keep the south-east lake; catfish bites after
+    18:00 everywhere; sunfish is a summer day in the forest pond; bream is
+    spring and summer, north and south.
+  - **The middling three:** trout on spring and autumn mornings in the
+    north-west; pike in autumn and winter in the west; eel on spring and
+    summer nights in the south.
+  - **The rare three**, one water, one season and a few hours each: dorado
+    at midday in a south-east summer, salmon by day in a north-west autumn,
+    sturgeon at night in a south-east winter.
+- **Prices:** commons $7-10, the middling three $13-15, the rare three
+  $22-25.
+- **Deviation:** a species' value is its `SELL_PRICE` and is not repeated in
+  the table, so one number cannot disagree with itself.
+- **Prices kept under oil.** The first draft priced sturgeon at $40, and
+  0032's "oil is the dearest thing in the ledger" check refused it. The rare
+  three now sit just under oil's $26, at about three commons each. A cast
+  averages about what the old $8 fish did.
+
+**The cast** (`Fishing.begin`):
+- The bite-delay draw stays, and it comes first.
+- Then `Fishing.draw` takes one species from the run RNG, weighted, among
+  `Fishing.catchable(pond, season, minute)` at the moment the line goes in.
+- Water that names no pond would land a carp without a draw. There is none
+  today: each pond's anchor is checked.
+- `reel` gives one of that species, and `last_catch` is
+  `{species, yield}`.
+- `FISHING` keeps its bite and window levers. `rare_in`, `common_yield` and
+  `rare_yield` are gone.
+
+**Any fish, as a rule:**
+- **`GameData.FISH` is the fish group now**, not a resource. It is listed in
+  `ANY_OF`, the groups a cost may name.
+- **The recipes keep their text.** `press_fish_oil` takes `{FISH: 3}` and
+  `cook_fish` `{FISH: 1, CARROT: 1}`, both meaning any species.
+- **`Resources` understands the group:**
+  - `amount` is the sum of all species held;
+  - `can_afford` and `missing` count them together;
+  - `pay` takes members in `GameData.pay_order`, cheapest first and then by
+    name, so a recipe never spends the sturgeon while there is carp.
+- **Prices and checks:**
+  - `_worth` prices a group at its cheapest member, so `check_chain` values a
+    recipe there;
+  - `check_recipes` accepts `ANY_OF` inputs.
+- **The name and icon of "any fish":**
+  - `ITEM_FISH` stays as the name of "fish" in a recipe line;
+  - `icon_fish` stays as its icon, and `UiKit.orphan_icons` accepts an
+    `ANY_OF` group's icon.
+
+**`check_fishing`, rewritten.** Every species must:
+- name real ponds, seasons and in-clock hours, with a weight of at least one;
+- be a priced resource in the fish group.
+
+And every pond must have a catch in every season at every minute of the day.
+This is checked per pond and season by laying the hours end to end. A table
+without carp, for example, leaves the north-west pond quiet and is refused.
+
+**The old fish goes.** `State.VERSION` is 8. `Save._fish_by_species_v7`:
+- moves `held` and `gained` fish into carp, the commonest; carp is a literal,
+  so re-weighting the pond later cannot move an old save;
+- reels in an open line empty;
+- renames `last_catch`.
+
+`make_goldens` wrote `run-v8.sav` and its older and newer shapes.
+
+**The readers that followed:**
+- `headless_check`, the fishing group (0030), rewritten:
+  - its teeth now include the quiet pond;
+  - 400 casts from one shore see every species that can bite there, the
+    commonest more often than the rarest;
+  - the replay log records species.
+- `headless_check`, elsewhere:
+  - the reference sheet's fish is carp;
+  - the yield test gains carp.
+- **`input_check`'s fishing case:** the catch is one fish of the drawn
+  species, named in the last catch.
+- **Three `headless_v1` asserts pinned to version 7** (0166, 0170, 0172) now
+  read "7 or later" or the current version.
+
+**On screen:**
+- The inventory's fish tab lists the twelve, ten to a page.
+- Their icons are 24 A022 stand-ins (`icon_`/`hud_` per species), today's
+  fish icon tinted toward each species' colours, until 0205.
+- A022's Deliverables now state the final list and the three cuts.
+
+**Tests:**
+- `_task_0179_species` (headless_v1) checks:
+  - the tables pass and the plain fish is gone;
+  - each pond's water knows its name;
+  - 40 casts on one seed give the same species twice, and another seed gives
+    others;
+  - no summer-only species can bite in spring at any half hour in any pond;
+  - 200 spring casts at noon on the south-east lake never land one, and 200
+    summer casts do;
+  - the north-west pond and the south-east lake give different sets: carp
+    and trout in one and not the other;
+  - reeling gives the hooked species and names it;
+  - cook_fish spends a carp before a sturgeon;
+  - the press takes the last carp, then a perch, then one sturgeon;
+  - a cost of fish counts every species together;
+  - a version 7 golden carrying 7 fish (9 gained) loads as 7 carp (9 gained)
+    with no plain fish left;
+  - the version 8 golden reads back.
+
+**Notes:**
+- The minigame, the rods' effects, bait and the fish book are later tasks
+  (0180-0182); legendaries are 0182's.
+- The inventory's tab column clips the bottom of its last tab (TOOLS), as it
+  has since 0173 added that tab.
+
+### Hashes
+
+Both moved on purpose, accepted with `verify.py --accept`.
+- **SIM 3052463561 -> 3492418464**: twelve new keys in `held` and `gained`,
+  no `fish` key, and `version` 8. The fixed scenario never fishes, so the
+  draw itself is not what moved it.
+- **DATA 1873325290 -> 4172682401**: `FISH_SPECIES`, `ANY_OF`, the trimmed
+  `FISHING`, the twelve prices, and the fish group's members.
+
+Verify: 60 passed, 0 failed in 651s (the known OVER BUDGET). headless_check 17083
+(+171, its resource-wide loops have twelve more to walk), headless_v1 1692
+(+90), input_check 1167 (+23), input_v1 494 (+26), 606 keys in two
+languages, placeholders 231 stand-ins over 22 packs, perf 3472us a night
+tick.
+
+Looked at: `implementation/shots/0179/inventory_full_fish_1.png` and `_2`.
+The twelve species are listed with their tinted icons and prices; the second
+page holds salmon and sturgeon.
+
+Files: src/core/{game_data,fishing,resources,state}.gd, src/app/save.gd,
+src/ui/{names,placeholder_art,ui_kit}.gd,
+src/tools/{headless_check,headless_v1,input_check}.gd,
+tools/goldens/run-v8{,-older,-newer}.sav, assets/locale/strings.csv,
+tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A022-fish-icons.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0179-fish-species.md,
+implementation/shots/0179/, docs/devlog/{index,index.pt_BR}.md

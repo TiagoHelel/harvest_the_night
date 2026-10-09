@@ -1905,7 +1905,7 @@ func _task_0003_game_data() -> void:
 	# to exist. Carrot and incendiary do not appear on that panel and are not
 	# listed here, which is the point: the sheet is a floor, not a ceiling.
 	for res in [GameData.WOOD, GameData.STONE, GameData.IRON, GameData.FOOD,
-			GameData.FISH, GameData.OIL, GameData.WHEAT, GameData.CORN,
+			GameData.CARP, GameData.OIL, GameData.WHEAT, GameData.CORN,
 			GameData.MEAT, GameData.GUNPOWDER, GameData.MONEY,
 			GameData.ENERGY]:
 		expect(GameData.RESOURCES.has(res),
@@ -2134,8 +2134,8 @@ func _task_0007_resources() -> void:
 		"the total gained remembers what was spent", str(gained[GameData.IRON]))
 
 	# gain() is add() across a whole yield.
-	Resources.gain(state, {GameData.FISH: 2, GameData.WHEAT: 3})
-	expect(Resources.amount(state, GameData.FISH) == 2, "a yield lands")
+	Resources.gain(state, {GameData.CARP: 2, GameData.WHEAT: 3})
+	expect(Resources.amount(state, GameData.CARP) == 2, "a yield lands")
 	expect(Resources.amount(state, GameData.WHEAT) == 3, "every line of it")
 
 	# An unknown id is refused rather than quietly inventing a resource.
@@ -4493,15 +4493,15 @@ func _task_0030_fishing() -> void:
 		str(GameData.check_fishing(table)))
 
 	# The check has teeth. A window of no ticks is a pond nobody can fish, and
-	# a rare fish worth less than the common one is not a rare fish.
+	# since task 0179 a pond with nothing biting at some hour is a quiet pond.
 	var broken: Dictionary = table.duplicate(true)
 	broken["window_ticks"] = 0
 	expect(not GameData.check_fishing(broken).is_empty(),
 		"a pond with no window to react in is refused")
-	broken = table.duplicate(true)
-	broken["rare_yield"] = (table["common_yield"] as Dictionary).duplicate()
-	expect(not GameData.check_fishing(broken).is_empty(),
-		"and so is a rare fish worth no more than the common one")
+	var quiet: Dictionary = GameData.FISH_SPECIES.duplicate(true)
+	quiet.erase(GameData.CARP)
+	expect(not GameData.check_fishing(table, quiet).is_empty(),
+		"and so is a pond left with nothing biting at some hour")
 	broken = table.duplicate(true)
 	broken["bite_min_ticks"] = int(table["bite_max_ticks"]) + 1
 	expect(not GameData.check_fishing(broken).is_empty(),
@@ -4574,20 +4574,31 @@ func _task_0030_fishing() -> void:
 	var other := _fishing_log(1202, 30)
 	expect(first != other, "and a different seed does not - the wait is "
 		+ "really being drawn", str(other.slice(0, 4)))
-	print("  thirty casts on seed 1201: %d rare, first four waits %s"
-		% [_rare_in(first), str(first.slice(0, 4))])
+	print("  thirty casts on seed 1201, the first four: %s" % str(first.slice(0, 4)))
 
-	# **Both fish exist, and the rare one is rarer.** Thirty casts is a small
-	# sample, so this asks for the shape rather than the exact fraction.
+	# **Everything that can bite there does, the commonest most** (task
+	# 0179). Four hundred casts from one shore at one hour: every species the
+	# pond, the season and the minute allow turns up, and the heaviest in
+	# the draw more often than the lightest.
 	var log := _fishing_log(1203, 400)
-	var rare := _rare_in(log)
-	expect(rare > 0, "the rare fish happens", str(rare))
-	expect(rare < log.size(), "and so does the common one", str(rare))
-	var expected := log.size() / int(table["rare_in"])
-	expect(absi(rare - expected) <= expected / 2,
-		"about one in %d of them, over four hundred casts"
-			% int(table["rare_in"]),
-		"%d where %d was expected" % [rare, expected])
+	var seen := {}
+	for entry in log:
+		seen[entry[1]] = int(seen.get(entry[1], 0)) + 1
+	var sample := State.create(1203)
+	var sample_pond := _water_beside(sample, _a_shore(sample))
+	var allowed := Fishing.catchable(Farm.pond_of(sample, sample_pond),
+		Calendar.season_id(Calendar.date(sample)), Phases.clock_minute(sample))
+	var heaviest: StringName = allowed[0]
+	var lightest: StringName = allowed[0]
+	for id in allowed:
+		if int(GameData.FISH_SPECIES[id]["weight"]) > int(GameData.FISH_SPECIES[heaviest]["weight"]):
+			heaviest = id
+		if int(GameData.FISH_SPECIES[id]["weight"]) < int(GameData.FISH_SPECIES[lightest]["weight"]):
+			lightest = id
+	expect(allowed.size() > 1 and seen.size() == allowed.size(),
+		"every species that can bite there does", "%s of %s" % [str(seen.keys()), str(allowed)])
+	expect(int(seen.get(heaviest, 0)) > int(seen.get(lightest, 0)),
+		"and the commonest more often than the rarest", str(seen))
 
 	# **Missing the window loses nothing but the time.**
 	var patient := State.create(1204)
@@ -4689,9 +4700,9 @@ func _other_water(state: Dictionary, not_this: Vector2i) -> Vector2i:
 
 
 ## `casts` casts on one seed, always reeled the moment they bite. Each entry is
-## the wait that was drawn and whether it was the rare one - which is the whole
-## of what the RNG decides about a cast, so two identical logs are two
-## identical ponds.
+## the wait that was drawn and the species on the hook - which is the whole of
+## what the RNG decides about a cast, so two identical logs are two identical
+## ponds.
 func _fishing_log(seed_value: int, casts: int) -> Array:
 	var state := State.create(seed_value)
 	var shore := _a_shore(state)
@@ -4700,20 +4711,12 @@ func _fishing_log(seed_value: int, casts: int) -> Array:
 	for _i in casts:
 		Fishing.begin(state, pond)
 		var wait := Fishing.ticks_left(state)
-		var rare := bool(Fishing.cast_of(state)["rare"])
+		var species := StringName(Fishing.cast_of(state)["species"])
 		while not Fishing.is_biting(state):
 			Fishing.tick(state, shore)
 		Fishing.reel(state)
-		out.append([wait, rare])
+		out.append([wait, species])
 	return out
-
-
-func _rare_in(log: Array) -> int:
-	var n := 0
-	for entry in log:
-		if bool((entry as Array)[1]):
-			n += 1
-	return n
 
 
 ## How many of an occupant the farm map draws. For asserts about scenery, which

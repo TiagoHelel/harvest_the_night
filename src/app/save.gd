@@ -317,7 +317,8 @@ static func _migrate(payload: Dictionary, from_version: int) -> Dictionary:
 ## `_night_is_the_date_v4`.
 static func migrations() -> Dictionary:
 	return {1: _expand_farm_v1, 2: _expand_farm_v2, 3: _expand_farm_v3,
-		4: _night_is_the_date_v4, 5: _farm_v1_0_from_v5, 6: _crops_by_days_v6}
+		4: _night_is_the_date_v4, 5: _farm_v1_0_from_v5, 6: _crops_by_days_v6,
+		7: _fish_by_species_v7}
 
 
 ## The farm each version was written with.
@@ -696,4 +697,28 @@ static func _crops_by_days_v6(previous: Dictionary) -> Dictionary:
 			here["growth"] = 0
 		here.erase("soak")
 	state["version"] = 7
+	return state
+
+
+## **Version 8: the fish are species** (task 0179). The one `fish` a save
+## held and had gained arrives as carp - the commonest when version 8 was
+## written, and a literal so that re-weighting the pond later cannot move an
+## old save. Reconcile alone would drop the key and the fish with it. A line
+## in the water is reeled in empty; the last catch names its carp.
+static func _fish_by_species_v7(previous: Dictionary) -> Dictionary:
+	var state := previous.duplicate(true)
+	for key in ["held", "gained"]:
+		var table: Dictionary = state.get(key, {})
+		# Matched by its text: an old key may have been written either way.
+		for old in table.keys():
+			if str(old) == "fish":
+				var landed := int(table[old])
+				table.erase(old)
+				table[&"carp"] = int(table.get(&"carp", 0)) + landed
+	state["fishing"] = {}
+	var last: Dictionary = state.get("last_catch", {})
+	if not last.is_empty():
+		var landed := int((last.get("yield", {}) as Dictionary).get(&"fish", 1))
+		state["last_catch"] = {"species": &"carp", "yield": {&"carp": landed}}
+	state["version"] = 8
 	return state

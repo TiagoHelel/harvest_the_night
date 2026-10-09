@@ -1,7 +1,7 @@
 # 0179 - Fish by pond, season and hour
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0126, 0149, 0156, 0165
 - **Likely files:** src/core/fishing.gd, src/core/game_data.gd, src/core/crafting.gd, src/app/save.gd, src/core/state.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd
 

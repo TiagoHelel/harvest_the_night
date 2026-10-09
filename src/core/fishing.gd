@@ -103,30 +103,64 @@ static func begin(state: Dictionary, cell: Vector2i) -> bool:
 	if Farm.terrain_at(state, cell) != Farm.Terrain.WATER:
 		return false
 	var table: Dictionary = GameData.FISHING
+	var left := Rng.int_between(state["rng"], int(table["bite_min_ticks"]),
+		int(table["bite_max_ticks"]))
 	state["fishing"] = {
 		"cell": [cell.x, cell.y],
 		"stage": WAITING,
-		"left": Rng.int_between(state["rng"], int(table["bite_min_ticks"]),
-			int(table["bite_max_ticks"])),
+		"left": left,
 		# **Decided at the cast, not at the reel.** Drawing it when the player
 		# reels would mean a fast hand changed what was on the hook, and the
-		# rare one would be a reflex prize rather than a lever.
-		"rare": Rng.chance(state["rng"], 1, int(table["rare_in"])),
+		# rare one would be a reflex prize rather than a lever. Since task
+		# 0179 it is the species: this pond, this season, this hour.
+		"species": draw(state, catchable(Farm.pond_of(state, cell),
+			Calendar.season_id(Calendar.date(state)), Phases.clock_minute(state))),
 	}
 	return true
 
 
+## **The species that can bite** (task 0179) in a pond, in a season, at a
+## minute of the day's clock, in `FISH_SPECIES`' sorted order.
+static func catchable(pond: StringName, season: StringName, minute: int,
+		species: Dictionary = GameData.FISH_SPECIES) -> Array:
+	var out: Array = []
+	for id in GameData.sorted_names(species.keys()):
+		var one: Dictionary = species[id]
+		var hours: Array = one["hours"]
+		if (one["ponds"] as Array).has(pond) and (one["seasons"] as Array).has(season) \
+				and minute >= int(hours[0]) and minute <= int(hours[1]):
+			out.append(id)
+	return out
+
+
+## One of them, from the run's RNG, weighted by `weight`. One draw, and only
+## when there is a choice to make; the commonest of the pond's year when the
+## water names no pond at all.
+static func draw(state: Dictionary, ids: Array,
+		species: Dictionary = GameData.FISH_SPECIES) -> StringName:
+	if ids.is_empty():
+		return GameData.CARP
+	var total := 0
+	for id in ids:
+		total += int((species[id] as Dictionary)["weight"])
+	var roll := Rng.int_between(state["rng"], 0, total - 1)
+	for id in ids:
+		roll -= int((species[id] as Dictionary)["weight"])
+		if roll < 0:
+			return StringName(id)
+	return StringName(ids.back())
+
+
 ## Pull it in. Pays only inside the window; outside it there is nothing on the
-## hook to pay for.
+## hook to pay for. The species drawn at the cast, one of it.
 static func reel(state: Dictionary) -> Dictionary:
 	if not is_biting(state):
 		return {}
-	var rare := bool((state["fishing"] as Dictionary)["rare"])
-	var table: Dictionary = GameData.FISHING
-	var caught: Dictionary = table["rare_yield" if rare else "common_yield"]
+	var species := StringName((state["fishing"] as Dictionary).get("species", GameData.CARP))
+	var caught := {species: 1}
 	Resources.gain(state, caught)
 	state["fishing"] = {}
-	state["last_catch"] = {"rare": rare, "yield": caught.duplicate()}
+	state["last_catch"] = {"species": species, "yield": caught.duplicate()}
 	return caught
 
 

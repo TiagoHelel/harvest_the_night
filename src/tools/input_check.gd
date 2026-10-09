@@ -1905,6 +1905,12 @@ func _case_0030_fishing() -> void:
 	expect(Resources.amount(state, GameData.FISH) > before,
 		"reeling inside the window lands a fish",
 		"%d then %d" % [before, Resources.amount(state, GameData.FISH)])
+	# **One of a species, named** (task 0179): the triple fish is gone; what
+	# lands is the species the cast drew, and the last catch says which.
+	var landed := StringName(Fishing.last_catch(state).get("species", &""))
+	expect(GameData.FISH_SPECIES.has(landed) and Resources.amount(state, landed) >= 1
+		and Resources.amount(state, GameData.FISH) == before + 1,
+		"and it is one fish of the species the cast drew", str(Fishing.last_catch(state)))
 	expect(not Fishing.is_casting(state), "and the line comes out with it")
 	await frames(2)
 	expect(line != null and not line.visible, "and the HUD goes quiet")

@@ -20,7 +20,7 @@ look special without a baked glow. The HUD and the book are not relit at night.
 
 ## Deliverables
 
-The table is provisional: game task 0179 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final list settled by game task 0179. There are twelve species under the ids below, in this order: `carp`, `perch`, `catfish`, `tilapia`, `sunfish`, `bream` (the commons); `trout`, `pike`, `eel` (the middling three); and `dorado`, `salmon`, `sturgeon` (the rare three). The four legendaries are 0182's, under the ids below. Each species has three static cuts: the 32x32 portrait at (16,16), the 16x16 icon at (8,8) and the 10x10 HUD icon at (5,5). Until 0205, the icon and HUD cuts are drawn as tinted `icon_fish`/`hud_fish` stand-ins. `icon_fish` itself stays, as the icon of "any fish", the group a recipe names. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 Every species: one raw source, three cuts from the same crop. Each file is 1 frame,
 1.0 s, static (`loop` false), direction `none`, `mirror: "none"`, draw 1.0, runtime

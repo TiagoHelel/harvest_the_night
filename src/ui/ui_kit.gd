@@ -95,10 +95,12 @@ static func missing_icons() -> Array:
 	return out
 
 
-## Icons in `sprites/ui/` that no resource claims.
+## Icons in `sprites/ui/` that no resource claims - nor a group a cost may
+## name, whose icon stands for any of it (`GameData.ANY_OF`: the fish since
+## task 0179).
 static func orphan_icons() -> Array:
 	var wanted: Dictionary = {}
-	for id in GameData.RESOURCES:
+	for id in GameData.RESOURCES + GameData.ANY_OF:
 		wanted["icon_%s" % id] = true
 	var out: Array = []
 	var folder := DirAccess.open(DIR)

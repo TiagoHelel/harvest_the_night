@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-167 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
+168 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -211,10 +211,11 @@ is the sort of thing this list exists to say out loud.
 | 0176 | Copper, coal and gold | 2026-10-09 |
 | 0177 | Hardwood | 2026-10-09 |
 | 0178 | Sprinklers | 2026-10-09 |
+| 0179 | Fish by pond, season and hour | 2026-10-09 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 51 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 53 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -267,6 +268,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Hardwood** (0177) - `sim` 265134837 -> 3052463561
 - **Hardwood** (0177) - `data` 1698799174 -> 2340660337
 - **Sprinklers** (0178) - `data` 2340660337 -> 1873325290
+- **Fish by pond, season and hour** (0179) - `sim` 3052463561 -> 3492418464
+- **Fish by pond, season and hour** (0179) - `data` 1873325290 -> 4172682401
 
 ## What went wrong
 

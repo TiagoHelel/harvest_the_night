@@ -201,7 +201,23 @@ const COPPER := &"copper"
 const COAL := &"coal"
 const GOLD := &"gold"
 const FOOD := &"food"
+## **Any fish** (task 0179): since the pond became three ponds and twelve
+## species this is the fish group, not a resource. A cost or a recipe input
+## may name it (`ANY_OF`), and it is paid from the species held, cheapest
+## first.
 const FISH := &"fish"
+const CARP := &"carp"
+const PERCH := &"perch"
+const CATFISH := &"catfish"
+const TILAPIA := &"tilapia"
+const SUNFISH := &"sunfish"
+const BREAM := &"bream"
+const TROUT := &"trout"
+const PIKE := &"pike"
+const EEL := &"eel"
+const DORADO := &"dorado"
+const SALMON := &"salmon"
+const STURGEON := &"sturgeon"
 const OIL := &"oil"
 const WHEAT := &"wheat"
 const CORN := &"corn"
@@ -245,7 +261,8 @@ const ENERGY := &"energy"
 ## Every resource the ledger knows about, in the order the reference sheet
 ## lays them out.
 const RESOURCES: Array = [
-	WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, FOOD, FISH, OIL,
+	WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, FOOD, OIL,
+	CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
@@ -267,7 +284,22 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	COAL: 3,                         # LEVER: money each, 1-4
 	GOLD: 8,                         # LEVER: money each, 1-8
 	FOOD: 12,
-	FISH: 8,
+	# **The fish** (task 0179): what each species sells for. A cast's catch
+	# averages about what the one $8 fish did, the rare ones about three
+	# commons - and none above oil, which stays the dearest thing in the
+	# ledger (0032).
+	CARP: 7,                         # LEVER: money each, 4-10
+	PERCH: 8,                        # LEVER: money each, 4-10
+	CATFISH: 10,                     # LEVER: money each, 6-14
+	TILAPIA: 7,                      # LEVER: money each, 4-10
+	SUNFISH: 8,                      # LEVER: money each, 4-10
+	BREAM: 9,                        # LEVER: money each, 5-12
+	TROUT: 13,                       # LEVER: money each, 10-18
+	PIKE: 14,                        # LEVER: money each, 10-18
+	EEL: 15,                         # LEVER: money each, 10-18
+	DORADO: 22,                      # LEVER: money each, 18-25, under oil
+	SALMON: 24,                      # LEVER: money each, 18-25, under oil
+	STURGEON: 25,                    # LEVER: money each, 18-25, under oil
 	# **The most valuable thing on the farm to sell, and that is the point.**
 	# Four corn is $20 of crop; pressing it is twenty seconds and turns it into
 	# $26 of oil. So the press pays for itself - and then every drop of it is
@@ -554,16 +586,64 @@ const GATHERING: Dictionary = {
 	},
 }
 
-## Fishing: how long the wait is, how long you have to react, how often it is
-## the good one. The pond pays the most per action and costs attention rather
-## than resources.
+## Fishing: how long the wait is and how long you have to react. The pond pays
+## the most per action and costs attention rather than resources; what bites
+## is `FISH_SPECIES`'s.
 const FISHING: Dictionary = {
 	"bite_min_ticks": DAY_TICKS / 120,  # LEVER: ticks, 1/120 day (4.67 seconds)
 	"bite_max_ticks": DAY_TICKS / 24,   # LEVER: ticks, 1/24 day (23.33 seconds)
 	"window_ticks": 45,                 # LEVER: ticks to react, 20-60
-	"rare_in": 6,                       # LEVER: 1 in N is the rare one, 4-12
-	"common_yield": {FISH: 1},
-	"rare_yield": {FISH: 3},
+}
+
+## **The fish, by pond, season and hour** (task 0179; plan section 3.2). A
+## cast draws one at the moment it goes in, among those its pond (0156's
+## `PONDS`, by `Farm.pond_of`), the date's season and the clock's minute
+## (`Phases.clock_minute`, `[from, to]` inclusive) allow, weighted by
+## `weight` - so the pond asks where and when as well as whether. What one
+## sells for is `SELL_PRICE`. Every pond has a catch in every season at
+## every minute of the day (`check_fishing`). Legendaries are 0182's.
+const FISH_SPECIES: Dictionary = {
+	# The commons: carp in the two western waters all year and all day,
+	# perch and the summer's tilapia keeping the south-east lake, the
+	# catfish after dark everywhere.
+	CARP: {"ponds": [&"north_west_pond", &"forest_pond"], # LEVER: where
+		"seasons": [&"spring", &"summer", &"autumn", &"winter"], # LEVER: when
+		"hours": [6 * 60, 26 * 60], "weight": 30},  # LEVER: clock minutes; draw weight
+	PERCH: {"ponds": [&"north_west_pond", &"south_east_lake"], # LEVER: where
+		"seasons": [&"spring", &"autumn", &"winter"], # LEVER: when
+		"hours": [6 * 60, 26 * 60], "weight": 25},  # LEVER: clock minutes; draw weight
+	TILAPIA: {"ponds": [&"forest_pond", &"south_east_lake"], # LEVER: where
+		"seasons": [&"summer"],      # LEVER: when
+		"hours": [6 * 60, 26 * 60], "weight": 25},  # LEVER: clock minutes; draw weight
+	CATFISH: {"ponds": [&"north_west_pond", &"forest_pond", &"south_east_lake"], # LEVER: where
+		"seasons": [&"spring", &"summer", &"autumn", &"winter"], # LEVER: when
+		"hours": [18 * 60, 26 * 60], "weight": 18}, # LEVER: clock minutes; draw weight
+	SUNFISH: {"ponds": [&"forest_pond"], # LEVER: where
+		"seasons": [&"summer"],      # LEVER: when
+		"hours": [6 * 60, 18 * 60], "weight": 15},  # LEVER: clock minutes; draw weight
+	BREAM: {"ponds": [&"north_west_pond", &"south_east_lake"], # LEVER: where
+		"seasons": [&"spring", &"summer"], # LEVER: when
+		"hours": [6 * 60, 26 * 60], "weight": 12},  # LEVER: clock minutes; draw weight
+	# The middling three: each one water, one or two seasons, part of the day.
+	TROUT: {"ponds": [&"north_west_pond"], # LEVER: where
+		"seasons": [&"spring", &"autumn"], # LEVER: when
+		"hours": [6 * 60, 12 * 60], "weight": 10},  # LEVER: clock minutes; draw weight
+	PIKE: {"ponds": [&"north_west_pond", &"forest_pond"], # LEVER: where
+		"seasons": [&"autumn", &"winter"], # LEVER: when
+		"hours": [6 * 60, 26 * 60], "weight": 10},  # LEVER: clock minutes; draw weight
+	EEL: {"ponds": [&"forest_pond", &"south_east_lake"], # LEVER: where
+		"seasons": [&"spring", &"summer"], # LEVER: when
+		"hours": [20 * 60, 26 * 60], "weight": 8},   # LEVER: clock minutes; draw weight
+	# The rare three: one water, one season, a few hours.
+	DORADO: {"ponds": [&"south_east_lake"], # LEVER: where
+		"seasons": [&"summer"],      # LEVER: when
+		"hours": [10 * 60, 16 * 60], "weight": 4},   # LEVER: clock minutes; draw weight
+	SALMON: {"ponds": [&"north_west_pond"], # LEVER: where
+		"seasons": [&"autumn"],      # LEVER: when
+		"hours": [6 * 60, 18 * 60], "weight": 3},   # LEVER: clock minutes; draw weight
+	STURGEON: {"ponds": [&"south_east_lake"], # LEVER: where
+		"seasons": [&"winter"],      # LEVER: when
+		"hours": [18 * 60, 26 * 60], "weight": 2},  # LEVER: clock minutes; draw weight
 }
 
 
@@ -1123,13 +1203,44 @@ const RESOURCE_GROUPS: Array = [
 	{"name": &"materials", "members": [WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD]},
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
 	{"name": &"seeds", "members": [CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED]},
-	{"name": &"fish", "members": [FISH]},
+	{"name": FISH, "members": [CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON]},
 	{"name": &"animal_goods", "members": [MEAT]},
 	{"name": &"artisan_goods", "members": [FOOD, OIL]},
 	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
 	{"name": &"night_leftovers", "members": []},
 	{"name": &"farm", "members": [MONEY, ENERGY, TECH]},
 ]
+
+
+## **Groups a cost may name instead of one resource** (task 0179): a recipe
+## that takes `{FISH: 3}` takes three fish of any species. Paid from the
+## members held in `pay_order` - the cheapest first, then by name - and
+## valued at the cheapest member where a price is asked.
+const ANY_OF: Array = [FISH]
+
+
+## The members of one of `RESOURCE_GROUPS`, in table order; empty for none.
+static func group_members(name: StringName) -> Array:
+	for entry in RESOURCE_GROUPS:
+		if StringName((entry as Dictionary)["name"]) == name:
+			return (entry as Dictionary)["members"]
+	return []
+
+
+## Whether a cost may name this instead of a resource (`ANY_OF`).
+static func is_any_of(id: StringName) -> bool:
+	return ANY_OF.has(id)
+
+
+## The members of an `ANY_OF` group in the order a cost takes them: cheapest
+## first, then by name - fixed, so two runs pay with the same fish.
+static func pay_order(group: StringName, prices: Dictionary = SELL_PRICE) -> Array:
+	var members: Array = sorted_names(group_members(group))
+	members.sort_custom(func(a, b) -> bool:
+		var pa := int(prices.get(a, 0))
+		var pb := int(prices.get(b, 0))
+		return pa < pb or (pa == pb and str(a) < str(b)))
+	return members
 
 
 ## What a tower manages on an empty pool.
@@ -2783,7 +2894,7 @@ static func check_recipes(recipes: Dictionary) -> Array:
 			errors.append("recipe '%s' wants unknown station '%s'"
 				% [recipe_id, recipe["station"]])
 		for res in (recipe["inputs"] as Dictionary):
-			if not RESOURCES.has(res):
+			if not RESOURCES.has(res) and not is_any_of(StringName(res)):
 				errors.append("recipe '%s' takes unknown '%s'"
 					% [recipe_id, res])
 		for out in (recipe["output"] as Dictionary):
@@ -2982,28 +3093,52 @@ static func check_map(rows: Array) -> Array:
 ## The pond. Checked like the rest of the tables rather than trusted, because
 ## a bite window of zero ticks is a pond that can never be fished and nothing
 ## else in the game would say so.
-static func check_fishing(table: Dictionary) -> Array:
+##
+## **And the fish** (task 0179). Every species names real ponds, seasons
+## and day-clock hours and has a weight, is a resource with a price, and is
+## in the fish group. And every pond has a catch in every season at every
+## minute of the day: worked out per pond and season by laying the hours
+## that apply end to end, so a gap is a pond that went quiet.
+static func check_fishing(table: Dictionary, species: Dictionary = FISH_SPECIES,
+		ponds: Dictionary = PONDS) -> Array:
 	var errors: Array = []
-	for key in [&"common_yield", &"rare_yield"]:
-		var out: Dictionary = table[key]
-		if out.is_empty():
-			errors.append("fishing %s gives nothing at all" % key)
-		for res in sorted_names(out.keys()):
-			if not RESOURCES.has(res):
-				errors.append("fishing %s yields unknown '%s'" % [key, res])
 	if int(table["bite_min_ticks"]) > int(table["bite_max_ticks"]):
 		errors.append("fishing bites sooner than it can - min %d, max %d"
 			% [table["bite_min_ticks"], table["bite_max_ticks"]])
 	if int(table["window_ticks"]) <= 0:
 		errors.append("fishing gives no window to react in")
-	if int(table["rare_in"]) < 1:
-		errors.append("fishing rare_in must be at least 1")
-	# The rare one has to be worth the wait, or it is not a rare one.
-	var common := _worth(table["common_yield"])
-	var rare := _worth(table["rare_yield"])
-	if rare <= common:
-		errors.append("the rare fish is worth %d and the common one %d"
-			% [rare, common])
+	var fish := group_members(FISH)
+	for id in sorted_names(species.keys()):
+		var one: Dictionary = species[id]
+		if not RESOURCES.has(id) or not SELL_PRICE.has(id) or not fish.has(id):
+			errors.append("fish '%s' is not a priced resource in the fish group" % id)
+		for pond in one["ponds"]:
+			if not ponds.has(pond):
+				errors.append("fish '%s' swims in no pond called '%s'" % [id, pond])
+		for season in one["seasons"]:
+			if not SEASONS.has(season):
+				errors.append("fish '%s' bites in no season called '%s'" % [id, season])
+		var hours: Array = one["hours"]
+		if int(hours[0]) > int(hours[1]) or int(hours[0]) < DAY_START_MINUTE \
+				or int(hours[1]) > DAY_END_MINUTE:
+			errors.append("fish '%s' bites at %s, outside the day's clock" % [id, str(hours)])
+		if int(one["weight"]) < 1:
+			errors.append("fish '%s' has no weight in the draw" % id)
+	for pond in sorted_names(ponds.keys()):
+		for season in SEASONS:
+			var spans: Array = []
+			for id in sorted_names(species.keys()):
+				var one: Dictionary = species[id]
+				if (one["ponds"] as Array).has(pond) and (one["seasons"] as Array).has(season):
+					spans.append([int(one["hours"][0]), int(one["hours"][1])])
+			spans.sort_custom(func(a, b) -> bool: return int(a[0]) < int(b[0]))
+			var reached := DAY_START_MINUTE - 1
+			for span in spans:
+				if int(span[0]) > reached + 1:
+					break
+				reached = maxi(reached, int(span[1]))
+			if reached < DAY_END_MINUTE:
+				errors.append("'%s' in %s has nothing biting from minute %d" % [pond, season, reached + 1])
 	return errors
 
 
@@ -3016,8 +3151,18 @@ static func check_fishing(table: Dictionary) -> Array:
 static func _worth(amounts: Dictionary, prices: Dictionary = SELL_PRICE) -> int:
 	var total := 0
 	for res in sorted_names(amounts.keys()):
-		total += int(prices.get(res, 0)) * int(amounts[res])
+		total += _price_of(StringName(res), prices) * int(amounts[res])
 	return total
+
+
+## What one of a thing sells for: its price, or for an `ANY_OF` group its
+## cheapest member's (task 0179) - which is what a cost naming the group
+## will spend first.
+static func _price_of(res: StringName, prices: Dictionary) -> int:
+	if is_any_of(res):
+		var order := pay_order(res, prices)
+		return 0 if order.is_empty() else int(prices.get(order[0], 0))
+	return int(prices.get(res, 0))
 
 
 ## Every recipe is worth making.
@@ -3409,6 +3554,8 @@ static func digest() -> int:
 		"groups": RESOURCE_GROUPS,
 		"gathering": GATHERING,
 		"fishing": FISHING,
+		"fish_species": FISH_SPECIES,
+		"any_of": ANY_OF,
 		"recipes": RECIPES,
 		"tools": TOOLS,
 		"tool_area_offsets": TOOL_AREA_OFFSETS,

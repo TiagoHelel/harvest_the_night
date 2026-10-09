@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 48
+const GROUPS := 49
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -117,6 +117,7 @@ func _run() -> void:
 	_followup_0176_review()
 	_task_0177_hardwood()
 	_task_0178_sprinklers()
+	_task_0179_species()
 
 
 func _finish() -> void:
@@ -3295,7 +3296,8 @@ func _task_0166_long_day() -> void:
 	expect(GameData.DAILY_STOCK[GameData.WOOD] == 15 and GameData.DAILY_STOCK[GameData.STONE] == 12 and GameData.DAILY_STOCK[GameData.IRON] == 8 and GameData.DAILY_STOCK[GameData.WHEAT] == 10 and GameData.DAILY_STOCK[GameData.CORN] == 8 and GameData.DAILY_STOCK[GameData.CARROT] == 12,
 		"daily stock stays per day rather than scaling with real time")
 	state["day_tick"] = 4200
-	expect(Phases.clock_minute(state) == 11 * 60 and State.VERSION == 7,
+	# 7 or later: 0179 bumped it to 8 for the fish, not for the clock.
+	expect(Phases.clock_minute(state) == 11 * 60 and State.VERSION >= 7,
 		"a saved 4200 ticks now reads 11:00; ticks and save version retain their meaning")
 	_completed += 1
 
@@ -3586,7 +3588,7 @@ func _task_0170_seasons() -> void:
 	State.reconcile(old)
 	expect(Shop.buy(old, GameData.CARROT_SEED, 1) and Shop.stock_of(old, GameData.WOOD) == 0, "old saves can buy a new packet without refilling old shelves")
 	Resources.spend(old, GameData.CARROT_SEED, 1)
-	expect(int(old["version"]) == 7 and Resources.amount(old, GameData.CARROT_SEED) == 0, "old saves receive zero packets without a version bump")
+	expect(int(old["version"]) == State.VERSION and Resources.amount(old, GameData.CARROT_SEED) == 0, "old saves receive zero packets without a version bump")
 	_completed += 1
 
 
@@ -3694,7 +3696,7 @@ func _task_0172_regrow() -> void:
 		var path := "user://task0172-regrow.sav"
 		expect(Save.write_run_at(path, state), "a regrowing %s save writes" % id)
 		var loaded := Save.read_run_at(path)
-		expect(bool(Farming.plot(loaded, cell).get("regrowing", false)) and int(loaded["version"]) == State.VERSION and State.VERSION == 7, "%s round-trips without changing growth units or version" % id)
+		expect(bool(Farming.plot(loaded, cell).get("regrowing", false)) and int(loaded["version"]) == State.VERSION and State.VERSION >= 7, "%s round-trips without changing growth units or version" % id)
 		Save._remove(path)
 		Save._remove(path + ".bak")
 		# The existing hoe resets all plot fields, with no harvest payout.
@@ -4370,3 +4372,136 @@ func _followup_night(state: Dictionary) -> void:
 	Phases.start_waves(state)
 	Phases.enter_result(state, true)
 	Phases.begin_day(state)
+
+
+## 0179 - fish by pond, season and hour. The same seed casts the same
+## species; a summer species never bites in spring; two ponds yield different
+## sets; a recipe that takes fish takes the cheapest species held; and a
+## version 7 save's fish arrive as carp, the commonest.
+func _task_0179_species() -> void:
+	expect(GameData.check_fishing(GameData.FISHING).is_empty() and GameData.validate().is_empty(),
+		"the twelve species and the pond pass their checks", str(GameData.check_fishing(GameData.FISHING)))
+	expect(GameData.group_members(GameData.FISH).size() == 12 and not GameData.RESOURCES.has(GameData.FISH)
+		and GameData.FISH_SPECIES.size() == 12,
+		"twelve species in the fish group, and no plain fish left")
+
+	# **Every pond's water is that pond's**, and every pond has a catch.
+	var state := State.create(1790)
+	var anchors: Dictionary = {}
+	for pond in GameData.sorted_names(GameData.PONDS.keys()):
+		var pair: Array = GameData.PONDS[pond]
+		anchors[pond] = Vector2i(int(pair[0]), int(pair[1]))
+		expect(Farm.pond_of(state, anchors[pond]) == pond, "%s is water that knows its name" % pond)
+
+	# **The same seed casts the same species.**
+	var first := _casts(1791, anchors[&"north_west_pond"], 3, 8 * 60, 40)
+	var again := _casts(1791, anchors[&"north_west_pond"], 3, 8 * 60, 40)
+	var other := _casts(1792, anchors[&"north_west_pond"], 3, 8 * 60, 40)
+	expect(first == again and first != other, "the same seed casts the same species, another seed others",
+		str(first.slice(0, 6)))
+
+	# **A summer species never bites in spring**, at any minute, in any pond.
+	var summer_only: Array = []
+	for id in GameData.sorted_names(GameData.FISH_SPECIES.keys()):
+		if GameData.FISH_SPECIES[id]["seasons"] == [&"summer"]:
+			summer_only.append(id)
+	var leaked: Array = []
+	for pond in anchors:
+		for minute in range(GameData.DAY_START_MINUTE, GameData.DAY_END_MINUTE + 1, 30):
+			for id in Fishing.catchable(pond, &"spring", minute):
+				if summer_only.has(id):
+					leaked.append("%s %s %d" % [pond, id, minute])
+	var spring_lake := _casts(1793, anchors[&"south_east_lake"], 3, 12 * 60, 200)
+	var summer_lake := _casts(1793, anchors[&"south_east_lake"], GameData.SEASON_DAYS + 3, 12 * 60, 200)
+	var in_spring := false
+	var in_summer := false
+	for id in summer_only:
+		in_spring = in_spring or spring_lake.has(id)
+		in_summer = in_summer or summer_lake.has(id)
+	expect(summer_only.has(GameData.DORADO) and leaked.is_empty() and not in_spring and in_summer,
+		"a summer species never bites in spring, and does in summer", str(leaked))
+
+	# **Two ponds, two sets.**
+	var north := {}
+	var south := {}
+	for id in _casts(1794, anchors[&"north_west_pond"], 3, 8 * 60, 200):
+		north[id] = true
+	for id in _casts(1794, anchors[&"south_east_lake"], 3, 8 * 60, 200):
+		south[id] = true
+	expect(north.keys().size() > 1 and south.keys().size() > 1 and north.has(GameData.CARP)
+		and not south.has(GameData.CARP) and north.has(GameData.TROUT) and not south.has(GameData.TROUT),
+		"the north-west pond and the south-east lake yield different sets",
+		"%s against %s" % [str(north.keys()), str(south.keys())])
+
+	# **A cast's catch is the species on the hook, by name.**
+	var line := State.create(1795)
+	Fishing.begin(line, anchors[&"forest_pond"])
+	var hooked := StringName(Fishing.cast_of(line)["species"])
+	line["fishing"]["stage"] = Fishing.BITING
+	var caught := Fishing.reel(line)
+	expect(caught == {hooked: 1} and Resources.amount(line, hooked) == 1
+		and Fishing.last_catch(line)["species"] == hooked and Resources.amount(line, GameData.FISH) == 1,
+		"reeling gives the species drawn at the cast, and the last catch names it", str(caught))
+
+	# **cook_fish takes the cheapest species held; the press, three in order.**
+	var cook := State.create(1796)
+	cook["held"][GameData.STURGEON] = 2
+	cook["held"][GameData.PERCH] = 1
+	cook["held"][GameData.CARP] = 2
+	cook["held"][GameData.CARROT] = 5
+	var order := GameData.pay_order(GameData.FISH)
+	expect(order[0] == GameData.CARP and order.back() == GameData.STURGEON,
+		"fish are paid cheapest first, then by name", str(order))
+	expect(Resources.pay(cook, GameData.RECIPES[&"cook_fish"]["inputs"])
+		and int(cook["held"][GameData.CARP]) == 1 and int(cook["held"][GameData.STURGEON]) == 2,
+		"cook_fish takes a carp, not the sturgeon", str(cook["held"]))
+	expect(Resources.pay(cook, GameData.RECIPES[&"press_fish_oil"]["inputs"])
+		and int(cook["held"][GameData.CARP]) == 0 and int(cook["held"][GameData.PERCH]) == 0
+		and int(cook["held"][GameData.STURGEON]) == 1,
+		"the press takes the last carp, then the perch, then one sturgeon", str(cook["held"]))
+	expect(not Resources.can_afford(cook, {GameData.FISH: 2})
+		and Resources.missing(cook, {GameData.FISH: 3}) == {GameData.FISH: 2},
+		"and a cost of fish counts every species together", str(Resources.missing(cook, {GameData.FISH: 3})))
+	expect(GameData._worth({GameData.FISH: 3}) == 3 * int(GameData.SELL_PRICE[order[0]])
+		and GameData.check_recipes(GameData.RECIPES).is_empty() and GameData.check_chain(GameData.RECIPES, GameData.SELL_PRICE).is_empty(),
+		"recipes name the fish group, valued at the cheapest member")
+	expect(Crafting.recipes_at(&"kitchen").has(&"cook_fish") and Crafting.recipes_at(&"press").has(&"press_fish_oil"),
+		"cook_fish is the kitchen's and press_fish_oil the press's")
+
+	# **A version 7 save's fish arrive as carp, the commonest.**
+	var heaviest: StringName = GameData.CARP
+	for id in GameData.sorted_names(GameData.FISH_SPECIES.keys()):
+		if int(GameData.FISH_SPECIES[id]["weight"]) > int(GameData.FISH_SPECIES[heaviest]["weight"]):
+			heaviest = id
+	var legacy: Dictionary = Save._read("res://tools/goldens/run-v7.sav")["state"]
+	legacy["held"][&"fish"] = 7
+	legacy["gained"][&"fish"] = 9
+	var path := "user://task0179-legacy.sav"
+	expect(Save.write_run_at(path, legacy), "a version 7 golden with fish in it writes")
+	var loaded := Save.read_run_at(path)
+	expect(heaviest == GameData.CARP and int(loaded["version"]) == 8
+		and Resources.amount(loaded, GameData.CARP) == 7 and int(loaded["gained"][GameData.CARP]) == 9
+		and not (loaded["held"] as Dictionary).has(&"fish") and not (loaded["held"] as Dictionary).has("fish"),
+		"its seven fish arrive as seven carp, nine gained, and the plain fish is gone",
+		str(loaded.get("held", {}).get(GameData.CARP, -1)))
+	Save._remove(path)
+	Save._remove(path + ".bak")
+	var current := Save.read_run_at("res://tools/goldens/run-v8.sav")
+	expect(not current.is_empty() and int(current["version"]) == 8 and State.VERSION == 8,
+		"and the version 8 golden reads back at version 8")
+	_completed += 1
+
+
+## `casts` casts into `water` on `seed_value`, on `day` at `minute`: the species
+## on each hook, given up before the next.
+func _casts(seed_value: int, water: Vector2i, day: int, minute: int, casts: int) -> Array:
+	var state := State.create(seed_value)
+	state["day"] = day
+	state["days_held"] = 0
+	state["day_tick"] = Phases.tick_at_minute(minute)
+	var out: Array = []
+	for _i in casts:
+		Fishing.begin(state, water)
+		out.append(StringName(Fishing.cast_of(state)["species"]))
+		Fishing.give_up(state)
+	return out
