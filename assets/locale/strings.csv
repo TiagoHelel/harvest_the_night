@@ -166,6 +166,8 @@ DESC_WORTH,0,worth $%d,vale $%d
 DHUD_AMMO,0,AMMO  %s,MUNIÇÃO  %s
 DHUD_AMMO_NONE,0,AMMO  none needed,MUNIÇÃO  nenhuma precisa
 DHUD_AMMO_ONE,0,%s %d,%s %d
+DHUD_BAIT,0,BAIT  %s x%d  (%s/%s),ISCA  %s x%d  (%s/%s)
+DHUD_BAIT_NONE,0,BAIT  none  (%s/%s),ISCA  nenhuma  (%s/%s)
 DHUD_BEDTIME,140,time for bed - %s,hora de dormir - %s
 DHUD_BITE,0,A BITE - PRESS ON THE GREEN,FISGOU - APERTE NO VERDE
 DHUD_CALM_TONIGHT,138,CALM NIGHT,NOITE CALMA
@@ -232,6 +234,8 @@ ITEM_EEL,0,eel,enguia
 ITEM_DORADO,0,dorado,dourado
 ITEM_SALMON,0,salmon,salmão
 ITEM_STURGEON,0,sturgeon,esturjão
+ITEM_WORM,0,worm,minhoca
+ITEM_BAIT,0,fish bait,isca de peixe
 ITEM_FOOD,0,food,comida
 ITEM_GUNPOWDER,0,gunpowder,pólvora
 ITEM_INCENDIARY,0,incendiary,incendiária
@@ -313,6 +317,7 @@ REC_BARRICADE_KIT,0,barricade kit,kit de barricada
 REC_COOK_FISH,0,cook fish,assar peixe
 REC_COOK_MEAL,0,cook meal,cozinhar refeição
 REC_COOK_ROAST,0,cook roast,fazer assado
+REC_MAKE_BAIT,0,make bait,fazer isca
 REC_FENCE_KIT,0,fence kit,kit de cerca
 REC_MAKE_GUNPOWDER,0,make gunpowder,fazer pólvora
 REC_MAKE_INCENDIARY,0,make incendiary,fazer incendiária
@@ -529,6 +534,7 @@ INV_GROUP_MATERIALS,112,MATERIALS,MATERIAIS
 INV_GROUP_CROPS,112,CROPS,CULTURAS
 INV_GROUP_SEEDS,112,SEEDS,SEMENTES
 INV_GROUP_FISH,112,FISH,PEIXES
+INV_GROUP_BAIT,112,BAIT,ISCAS
 INV_GROUP_ANIMAL_GOODS,112,ANIMAL GOODS,PROD. ANIMAIS
 INV_GROUP_ARTISAN_GOODS,112,ARTISAN GOODS,PROD. ARTESANAIS
 INV_GROUP_AMMUNITION,112,AMMUNITION,MUNIÇÕES

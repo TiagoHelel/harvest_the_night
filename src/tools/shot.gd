@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["bait", "a worm on the iron rod's hook, the line waiting, the bait choice under it", ""],
 	["fishing_bar", "a trout on the line: one hit of two, the marker on its way", ""],
 	["sprinklers", "a copper, an iron and a gold sprinkler at 06:20, spraying", ""],
 	["hardwood", "a chipped big stump and a whole one among the trees", ""],
@@ -725,6 +726,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"hardwood": _set_hardwood(state)
 		"sprinklers": _set_sprinklers(state)
 		"fishing_bar": _set_fishing_bar(state)
+		"bait": _set_bait(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -1422,6 +1424,20 @@ func _set_fishing_bar(state: Dictionary) -> void:
 	line["misses"] = 0
 	line["struck"] = 0
 	line["left"] = int(GameData.FISHING["bar_ticks"])
+
+
+## **Bait on the hook** (task 0181): the bar's shore at 08:00 of Spring 3,
+## the iron rod in hand, three worms and four fish bait held and the worm
+## on - cast, so one is on the hook and two are left, the line waiting and
+## the bait choice under it.
+func _set_bait(state: Dictionary) -> void:
+	_set_fishing_bar(state)
+	Fishing.give_up(state)
+	state["tools"]["rod"] = 2
+	Resources.gain(state, {GameData.WORM: 3, GameData.BAIT: 4})
+	Fishing.choose_bait(state, GameData.WORM)
+	var shore: Vector2i = _standing_at
+	Fishing.begin(state, shore + Player.FACING_STEPS[int(state["player"]["facing"])])
 
 
 ## **Sprinklers at dawn** (task 0178): a copper, an iron and a gold one in

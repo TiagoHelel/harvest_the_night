@@ -40,6 +40,11 @@ extends Control
 ## plain: **task 0078 draws the float going under**, which is the version a
 ## player should get, and this is what keeps the mechanic playable until then.
 ##
+## Under it, **the bait** (task 0181): with the iron rod, at the water, a
+## button saying what the next cast spends and how many are held. A click,
+## or Q/E and the shoulder buttons there, step it round none, worm and fish
+## bait; the choice is the run's, like the seed's.
+##
 ## ## The power line stays up at night
 ##
 ## Everything else here belongs to the day and goes away with it. The energy
@@ -109,6 +114,9 @@ const YEAR_AT := Vector2(4, 16)
 const SEED_ACTIONS: Array = [&"slot_1", &"slot_2", &"slot_3", &"slot_4",
 	&"slot_5", &"slot_6"]
 
+## The bait choice (task 0181), under the fishing line.
+const BAIT_AT := Vector2(186, 220)
+
 
 
 var _state: Dictionary = {}
@@ -134,6 +142,7 @@ var _seed_next: Button
 var _seed_rows: Dictionary = {}     # crop id -> Label
 var _water: Label
 var _line: Label
+var _bait: Button
 var _power: Label
 var _power_icon: TextureRect
 var _ammo: Label
@@ -193,6 +202,19 @@ func _ready() -> void:
 	# player is looking at the water, not at the top bar.
 	_line = _label("FishingLine", Vector2(186, 208), UiKit.WARM)
 	_line.visible = false
+
+	# **The bait on the hook** (task 0181), under the line: up with the iron
+	# rod at the water. A click on it, or Q/E and the shoulder buttons there,
+	# step the choice; `Fishing` keeps it and spends one at the cast. Never
+	# focused, so SPACE casts rather than pressing it.
+	_bait = Button.new()
+	_bait.name = "BaitButton"
+	_bait.position = BAIT_AT
+	_bait.focus_mode = Control.FOCUS_NONE
+	_bait.theme_type_variation = UiKit.ROW
+	_bait.pressed.connect(func() -> void: _step_bait(1))
+	_bait.visible = false
+	add_child(_bait)
 
 	# **Bottom left, and it stays up after dark.** Supply against draw, and
 	# what that is doing to the speed of everything.
@@ -315,16 +337,58 @@ func _process(delta: float) -> void:
 		_ask_for_night()
 
 
-## Pick a seed by its place in the row.
+## Pick a seed by its place in the row - and at the water, step the bait
+## (task 0181) with Q/E or the shoulder buttons, which the night's hotbar
+## only reads after dark and the open inventory takes first.
 func _unhandled_input(event: InputEvent) -> void:
 	if _state.is_empty() or int(_state["phase"]) != Phases.DAY:
 		return
+	if shows_bait():
+		var step := 0
+		if event.is_action_pressed(&"hotbar_next"):
+			step = 1
+		elif event.is_action_pressed(&"hotbar_prev"):
+			step = -1
+		if step != 0:
+			_step_bait(step)
+			get_viewport().set_input_as_handled()
+			return
 	for slot in SEED_ACTIONS.size():
 		if not event.is_action_pressed(SEED_ACTIONS[slot]):
 			continue
 		if Farming.select_seed_at(_state, _seed_page * SEED_ACTIONS.size() + slot):
 			get_viewport().set_input_as_handled()
 		return
+
+
+## Whether the bait choice is up (task 0181): by day, outdoors with no panel
+## open, with a rod that has the slot, while the farmer faces water or has a
+## line in it waiting. Not over the bar, where a press strikes.
+func shows_bait() -> bool:
+	if _state.is_empty() or int(_state["phase"]) != Phases.DAY or House.inside(_state):
+		return false
+	if StringName(_state["open_panel"]) != &"" or not Fishing.has_bait_slot(_state):
+		return false
+	if Fishing.is_casting(_state):
+		return not Fishing.is_biting(_state)
+	return Interact.verb_at(_state, Player.target(_state)) == &"fish"
+
+
+## Step the bait on: the choice is the run's (`Fishing.step_bait`), the way
+## the seed strip's is `Farming`'s.
+func _step_bait(step: int) -> void:
+	if _state.is_empty():
+		return
+	Fishing.step_bait(_state, step)
+	_refresh(true)
+
+
+## The two keys that step the bait, for the device in hand (0121's names).
+func _bait_keys() -> Array:
+	var actions := get_node_or_null(^"/root/Actions")
+	if actions == null:
+		return ["", ""]
+	return [actions.text_of(&"hotbar_prev"), actions.text_of(&"hotbar_next")]
 
 
 ## Ask the rules to put the farmer to bed, which starts the night (task 0127).
@@ -469,6 +533,18 @@ func _refresh(force: bool) -> void:
 		_line.text = I18n.t(&"DHUD_BITE") if biting \
 			else I18n.t(&"DHUD_WAITING")
 		_line.theme_type_variation = UiKit.WARM if biting else UiKit.DIM
+
+	# **The bait** (task 0181), under the line while it is up: what is on,
+	# how many are held, and the keys that step it.
+	_bait.visible = daylight and shows_bait()
+	if _bait.visible:
+		var on := Fishing.bait_of(_state)
+		if on == &"":
+			_bait.text = I18n.f(&"DHUD_BAIT_NONE", _bait_keys())
+		else:
+			_bait.text = I18n.f(&"DHUD_BAIT",
+				[Names.of(on), Resources.amount(_state, on)] + _bait_keys())
+		_bait.reset_size()
 
 	# **Past dusk the button asks.** It never presses itself: `design.md`
 	# promises the player switches reality when they want to. It names the

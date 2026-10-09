@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##############..........`  **167 / 296 done**
+`##############..........`  **168 / 296 done**
 
-0 doing / 129 todo / 0 blocked across 18 phases.
+0 doing / 128 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-129 task(s) left, the ready ones first, then what they
+128 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,21 +242,22 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0181 - Rods and bait
+### 0182 - Legendary fish and the fish book
 
-Ready to pick up.  Likely files: `src/core/fishing.gd, src/core/farming.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/stats.gd, src/core/state.gd, src/ui/fish_book.gd (new), src/ui/inventory_panel.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-The rod's tiers change what bites: fibre brings bites sooner and rare fish more often, iron adds a bait slot and is the only rod a legendary takes.
+Four legendary fish, one a season, each with its own conditions, and a fish book with a page per species - the first collection that makes a player come back.
 
-- Rod effects read from `TOOLS` (`# LEVER`s): the fibre rod shortens the bite range and raises rare weights; the iron rod opens a bait slot and is the gate 0182 checks
-- Worms: tilling (`Farming._till`) finds a `WORM` one time in `WORM_IN` (`# LEVER`, in `digest()`), drawn from the run RNG - SIM moves on purpose (the determinism scenario tills) and the journal records it
-- A fish-scrap bait recipe (a `RECIPES` entry, so a `Names.KEYS` entry and a `REC_*` row): a common fish into several `BAIT` at the workshop or the kitchen - decide. Bait has a sale price like every resource since 0169, and the recipe passes `check_chain`
-- With the iron rod, a held bait is spent at the cast and shortens the wait or raises rarity (`# LEVER`s); which bait is on is a choice the HUD shows, kept in the state (say where; a nested dictionary goes in `State.TABLES`); no bait means no effect, not a refusal
-- `WORM` and `BAIT` with prices, a group, names and strings in both languages. Zombie bait is 0225's, not here
-- Icons through the placeholder road until A023 is integrated by 0206. DATA moves (`WORM_IN`, the rod levers, the recipe) and SIM moves on purpose (the worm draw, the bait choice): record both
+- Four legendaries in `FISH_SPECIES` - the Old Catfish, the Golden Queen, the Ghost Pike and the Ice Sturgeon (ids `old_catfish`, `golden_queen`, `ghost_pike`, `ice_sturgeon`, as A022 names them), one per season - each with a pond, hours and a condition (`# LEVER`s, bounded by `check_fishing`), catchable only on the iron rod and with the hardest bar of 0180
+- Decide whether a legendary can be caught once per run; if so the draw skips it once the book has it
+- The book: a `fish_book` dictionary in the state (keys come from play: `State.RUN_DATA`), species -> times caught and the first day; folded into the profile through `Stats` so it outlives the run
+- A book view (an inventory tab or its own panel) with a page per species, unknown ones as silhouettes with a hint, and a collection count (n of every species, legendaries included); portraits through the placeholder road until A022's are integrated by 0205, the tab icon until A023's by 0206
+- Names and strings for the legendaries and the book in both languages; every hint fits its control (`tools/i18n_check.py`)
+- SIM moves (new draws, four new resources and the `fish_book` key); DATA moves
 
-  - done when: `_task_0181_rods` in `src/tools/headless_v1.gd`: on a fixed seed the fibre rod's mean wait is shorter than bamboo's by what the levers say; bait is spent at an iron-rod cast and not at a bamboo one; tilling finds worms at the rate claimed
-  - done when: `_case_0181_bait` in `src/tools/input_v1.gd`: choose a bait and cast with it
+  - done when: `_task_0182_legendary` in `src/tools/headless_v1.gd`: the spring legendary never bites on the bamboo or fibre rod and does under its conditions on the iron rod; a catch writes the book and the profile
+  - done when: `_case_0182_book` in `src/tools/input_v1.gd`: open the book and turn pages with the keyboard, the mouse and the pad
+  - done when: A new `fish_book` scenario: `python tools/shot.py 0182 fish_book --fhd` shows a page and the count; opened and looked at
 
 ### 0183 - The coop and the barn
 
@@ -480,23 +481,6 @@ The guardian's cursor, the night camera and the fishing bar each get the knob a 
   - done when: `_task_0292_options` in `src/tools/headless_v1.gd`: no file in `src/core/` names `Settings`; `Forecast.tonight` gives the same record at 08:00 as at 18:00
   - done when: the controls and game pages captured at 1920x1080 in both languages (`$GODOT --path . --position -4000,-4000 --script res://src/tools/capture_menus.gd -- --out=res://implementation/shots/0292/`, then again with `--pt_BR`) and opened: no label runs off its row and no two rows overlap
 
-### 0182 - Legendary fish and the fish book
-
-Waits on 0181.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/stats.gd, src/core/state.gd, src/ui/fish_book.gd (new), src/ui/inventory_panel.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Four legendary fish, one a season, each with its own conditions, and a fish book with a page per species - the first collection that makes a player come back.
-
-- Four legendaries in `FISH_SPECIES` - the Old Catfish, the Golden Queen, the Ghost Pike and the Ice Sturgeon (ids `old_catfish`, `golden_queen`, `ghost_pike`, `ice_sturgeon`, as A022 names them), one per season - each with a pond, hours and a condition (`# LEVER`s, bounded by `check_fishing`), catchable only on the iron rod and with the hardest bar of 0180
-- Decide whether a legendary can be caught once per run; if so the draw skips it once the book has it
-- The book: a `fish_book` dictionary in the state (keys come from play: `State.RUN_DATA`), species -> times caught and the first day; folded into the profile through `Stats` so it outlives the run
-- A book view (an inventory tab or its own panel) with a page per species, unknown ones as silhouettes with a hint, and a collection count (n of every species, legendaries included); portraits through the placeholder road until A022's are integrated by 0205, the tab icon until A023's by 0206
-- Names and strings for the legendaries and the book in both languages; every hint fits its control (`tools/i18n_check.py`)
-- SIM moves (new draws, four new resources and the `fish_book` key); DATA moves
-
-  - done when: `_task_0182_legendary` in `src/tools/headless_v1.gd`: the spring legendary never bites on the bamboo or fibre rod and does under its conditions on the iron rod; a catch writes the book and the profile
-  - done when: `_case_0182_book` in `src/tools/input_v1.gd`: open the book and turn pages with the keyboard, the mouse and the pad
-  - done when: A new `fish_book` scenario: `python tools/shot.py 0182 fish_book --fhd` shows a page and the count; opened and looked at
-
 ### 0184 - Feeding, eggs and milk
 
 Waits on 0183.  Likely files: `src/core/livestock.gd, src/core/farming.gd, src/core/phases.gd, src/core/game_data.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
@@ -530,6 +514,42 @@ At night the animals sleep inside and the barn becomes something to defend: brea
 
   - done when: `_task_0186_barns_night` in `src/tools/headless_v1.gd` (a short night with breakers set down beside the barn, mornings by `Phases.begin_day`): breakers reach a barn and wreck it, then leave it for other prey; it stands, produces nothing the next day, keeps every animal, and works again after a day repair
   - done when: A new `barn_night` scenario: `python tools/shot.py 0186 barn_night --fhd` shows a hurt and a wrecked barn at night and the next morning; opened and looked at
+
+### 0205 - Art: fish
+
+Waits on 0182.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/fish_book.gd`.
+
+Every species and the four legendaries get their icons and fish-book portraits.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A022` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A022-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, plus the 32x32 portraits as a family of their own).
+- Runtime names: `ui/icon_<species>` (16x16) and `ui/hud_<species>` (10x10) from one source per species, for the list 0179 and 0182 settled, and a 32x32 book portrait each
+- Replace the stand-ins in the inventory, the catch line and the fish book, and flip A022's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A022 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0205/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
+### 0206 - Art: fishing gear and the minigame
+
+Waits on 0182.  Likely files: `assets/art_source/ui/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/fishing_bar.gd`.
+
+The bobber, the bait icons, the pieces of the fishing bar and the fish-book tab get their approved art.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A023` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A023-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/ui` and `assets/art_source/effects/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`; `tools/check_effect_art.py` if the bobber goes in as an effect).
+- Runtime names: the 8x8 bobber (float and the 2-3 frame bite dip) replacing the float the view draws today; worm and bait icons (16x16 + 10x10); the bar's frame, marker, sweet zone and hit/miss flash at the sizes 0180 settled; the book tab icon (0182)
+- Replace the stand-ins of 0180, 0181 and 0182 and flip A023's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A023 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0206/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0215 - Art: the shipping bin
 
@@ -618,42 +638,6 @@ Copper, coal, gold, hardwood, hay and straw get their approved icons in the inve
   - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0203/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0205 - Art: fish
-
-Waits on 0182.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/fish_book.gd`.
-
-Every species and the four legendaries get their icons and fish-book portraits.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A022` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A022-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, plus the 32x32 portraits as a family of their own).
-- Runtime names: `ui/icon_<species>` (16x16) and `ui/hud_<species>` (10x10) from one source per species, for the list 0179 and 0182 settled, and a 32x32 book portrait each
-- Replace the stand-ins in the inventory, the catch line and the fish book, and flip A022's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A022 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0205/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0206 - Art: fishing gear and the minigame
-
-Waits on 0181, 0182.  Likely files: `assets/art_source/ui/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/fishing_bar.gd`.
-
-The bobber, the bait icons, the pieces of the fishing bar and the fish-book tab get their approved art.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A023` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A023-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui` and `assets/art_source/effects/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`; `tools/check_effect_art.py` if the bobber goes in as an effect).
-- Runtime names: the 8x8 bobber (float and the 2-3 frame bite dip) replacing the float the view draws today; worm and bait icons (16x16 + 10x10); the bar's frame, marker, sweet zone and hit/miss flash at the sizes 0180 settled; the book tab icon (0182)
-- Replace the stand-ins of 0180, 0181 and 0182 and flip A023's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A023 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0206/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0212 - Art: the coop and the barn
@@ -2588,7 +2572,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (16/53)
+## 12 - The day that pays  (17/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2606,8 +2590,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0178** [Sprinklers](prompts/0178-sprinklers.md)
 - [x] **0179** [Fish by pond, season and hour](prompts/0179-fish-species.md)
 - [x] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md)
-- [ ] **0181** [Rods and bait](prompts/0181-rods-bait.md)
-- [ ] **0182** [Legendary fish and the fish book](prompts/0182-legendary-book.md) - needs 0181
+- [x] **0181** [Rods and bait](prompts/0181-rods-bait.md)
+- [ ] **0182** [Legendary fish and the fish book](prompts/0182-legendary-book.md)
 - [ ] **0183** [The coop and the barn](prompts/0183-coop-barn.md)
 - [ ] **0184** [Feeding, eggs and milk](prompts/0184-feeding-products.md) - needs 0183
 - [ ] **0185** [Sheep, pigs and the dog](prompts/0185-sheep-pigs-dog.md) - needs 0184
@@ -2631,7 +2615,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0203** [Art: material icons](prompts/0203-art-material-icons.md) - needs 0184 - waits for art A020
 - [ ] **0204** [Art: copper, coal, gold and hardwood](prompts/0204-art-ore-hardwood.md) - waits for art A021
 - [ ] **0205** [Art: fish](prompts/0205-art-fish-icons.md) - needs 0182 - waits for art A022
-- [ ] **0206** [Art: fishing gear and the minigame](prompts/0206-art-fishing-gear.md) - needs 0181, 0182 - waits for art A023
+- [ ] **0206** [Art: fishing gear and the minigame](prompts/0206-art-fishing-gear.md) - needs 0182 - waits for art A023
 - [ ] **0207** [Art: the farmer fishing](prompts/0207-art-farmer-fishing.md) - waits for art A024
 - [ ] **0208** [Art: the farmer tending animals](prompts/0208-art-farmer-care.md) - needs 0184, 0185 - waits for art A025
 - [ ] **0209** [Art: sheep and pigs](prompts/0209-art-farm-animals.md) - needs 0185 - waits for art A026

@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 50
+const GROUPS := 51
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -119,6 +119,7 @@ func _run() -> void:
 	_task_0178_sprinklers()
 	_task_0179_species()
 	_task_0180_minigame()
+	_task_0181_rods()
 
 
 func _finish() -> void:
@@ -3252,11 +3253,11 @@ func _task_0166_long_day() -> void:
 	var batches := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 24, &"make_gunpowder": 16,
-		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13}
+		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13, &"make_bait": 48}
 	var units := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 96, &"make_gunpowder": 32,
-		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52}
+		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52, &"make_bait": 192}
 	var ordinary := 0
 	for id in GameData.RECIPES:
 		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty():
@@ -4610,6 +4611,217 @@ func _task_0180_minigame() -> void:
 		"a replay with the same presses lands the same fish on the same tick", str(one))
 	expect(bool(one["rng_still"]), "and the RNG is not touched between the bite and the catch")
 	_completed += 1
+
+
+## Task 0181: the rod's tiers and the bait. Fibre waits less and draws the
+## rarer fish more, by its levers; iron has the bait slot and is 0182's
+## legendary gate; a bait on an iron rod is spent at the cast and not on a
+## bamboo one; and the hoe turns up worms at the rate `WORM_IN` claims.
+func _task_0181_rods() -> void:
+	expect(GameData.check_bait(GameData.BAIT_EFFECTS).is_empty() and GameData.validate().is_empty(),
+		"the rods, the baits and the worm's rate pass their checks",
+		str(GameData.check_bait(GameData.BAIT_EFFECTS)))
+	var slower: Dictionary = GameData.BAIT_EFFECTS.duplicate(true)
+	slower[GameData.WORM]["bite_percent"] = 150
+	var starving: Dictionary = GameData.TOOLS.duplicate(true)
+	starving[&"rod"][1]["rare_percent"] = 50
+	var untiered: Dictionary = GameData.FISH_SPECIES.duplicate(true)
+	(untiered[GameData.TROUT] as Dictionary).erase("tier")
+	expect(not GameData.check_bait(slower).is_empty()
+		and not GameData.check_bait(GameData.BAIT_EFFECTS, starving).is_empty()
+		and not GameData.check_bait(GameData.BAIT_EFFECTS, GameData.TOOLS, 1).is_empty()
+		and not GameData.check_bait(GameData.BAIT_EFFECTS, GameData.TOOLS, GameData.WORM_IN, untiered).is_empty(),
+		"a bait that lengthens the wait, a rod that starves the rare fish, a worm in every cell and a fish with no rarity are refused")
+	expect(GameData.check_chain(GameData.RECIPES, GameData.SELL_PRICE).is_empty()
+		and GameData.RECIPES[&"make_bait"]["station"] == &"workshop"
+		and (GameData.RECIPES[&"make_bait"]["inputs"] as Dictionary).has(GameData.FISH)
+		and Names.KEYS.has(&"make_bait") and Names.KEYS.has(GameData.WORM) and Names.KEYS.has(GameData.BAIT)
+		and Names.GROUP_KEYS.has(&"bait") and GameData.SELL_PRICE.has(GameData.WORM)
+		and GameData.SELL_PRICE.has(GameData.BAIT),
+		"fish bait is a workshop recipe the chain passes, and the worm and the bait are priced and named")
+
+	# **Bait is its own group, never a fish**: a recipe that takes any fish
+	# cannot be paid with one, and cutting bait takes the cheapest fish.
+	var larder := State.create(1810)
+	for member in GameData.group_members(GameData.FISH):
+		larder["held"][member] = 0
+	Resources.add(larder, GameData.STURGEON, 1)
+	Resources.add(larder, GameData.CARP, 1)
+	Resources.add(larder, GameData.BAIT, 5)
+	Resources.add(larder, GameData.WORM, 5)
+	expect(Resources.amount(larder, GameData.FISH) == 2 and not GameData.group_members(GameData.FISH).has(GameData.WORM)
+		and GameData.group_members(&"bait") == [GameData.WORM, GameData.BAIT],
+		"worms and bait are counted apart from the fish")
+	expect(Resources.pay(larder, GameData.RECIPES[&"make_bait"]["inputs"])
+		and Resources.amount(larder, GameData.CARP) == 0 and Resources.amount(larder, GameData.STURGEON) == 1,
+		"cutting bait takes the cheapest fish first")
+	var tabs: Array = []
+	for group in Inventory.groups(larder):
+		tabs.append(StringName((group as Dictionary)["name"]))
+	expect(tabs.has(&"bait") and tabs.find(&"bait") == tabs.find(GameData.FISH) + 1,
+		"the inventory has a bait tab, after the fish", str(tabs))
+
+	# **Fibre and iron wait less, by their levers.** The same seed, two
+	# thousand casts a rod into the north-west pond on a spring morning.
+	var water := Vector2i(int(GameData.PONDS[&"north_west_pond"][0]), int(GameData.PONDS[&"north_west_pond"][1]))
+	var bamboo := _waits(1811, water, 0, &"", 2000)
+	var fibre := _waits(1811, water, 1, &"", 2000)
+	var iron := _waits(1811, water, 2, &"", 2000)
+	var wormed := _waits(1811, water, 2, GameData.WORM, 2000)
+	var fibre_lever := int(GameData.TOOLS[&"rod"][1]["bite_percent"])
+	var iron_lever := int(GameData.TOOLS[&"rod"][2]["bite_percent"])
+	var worm_lever := iron_lever * int(GameData.BAIT_EFFECTS[GameData.WORM]["bite_percent"]) / 100
+	var ratios := "fibre %.1f%%, iron %.1f%%, iron and worm %.1f%% of bamboo's %.1f ticks" % [
+		float(fibre["mean"]) / float(bamboo["mean"]) * 100.0, float(iron["mean"]) / float(bamboo["mean"]) * 100.0,
+		float(wormed["mean"]) / float(bamboo["mean"]) * 100.0, float(bamboo["mean"])]
+	expect(fibre_lever < 100 and absf(float(fibre["mean"]) / float(bamboo["mean"]) * 100.0 - fibre_lever) <= 4.0,
+		"the fibre rod's mean wait is bamboo's times its bite_percent", ratios)
+	expect(absf(float(iron["mean"]) / float(bamboo["mean"]) * 100.0 - iron_lever) <= 4.0
+		and absf(float(wormed["mean"]) / float(bamboo["mean"]) * 100.0 - worm_lever) <= 4.0,
+		"the iron rod's is its own, and a worm on it shortens it again", ratios)
+	expect(int(bamboo["longest"]) <= int(GameData.FISHING["bite_max_ticks"])
+		and int(fibre["longest"]) <= int(GameData.FISHING["bite_max_ticks"]) * fibre_lever / 100
+		and int(fibre["shortest"]) >= int(GameData.FISHING["bite_min_ticks"]) * fibre_lever / 100,
+		"and every fibre wait is inside the bite range scaled by it",
+		"%d-%d" % [int(fibre["shortest"]), int(fibre["longest"])])
+
+	# **And draw the rarer fish more.** The trout is the morning's uncommon
+	# here: its weight times the rod's `rare_percent`, the commons untouched.
+	var rod_state := State.create(1812)
+	var trout := int(GameData.FISH_SPECIES[GameData.TROUT]["weight"])
+	var carp := int(GameData.FISH_SPECIES[GameData.CARP]["weight"])
+	var weights: Array = []
+	for tier in 3:
+		rod_state["tools"]["rod"] = tier
+		var rare := Fishing.rare_percent(rod_state, &"")
+		weights.append([Fishing.weight_of(GameData.TROUT, rare), Fishing.weight_of(GameData.CARP, rare)])
+	expect(weights[0] == [trout, carp]
+		and weights[1] == [trout * int(GameData.TOOLS[&"rod"][1]["rare_percent"]) / 100, carp]
+		and int(weights[2][0]) > int(weights[1][0]) and int(weights[2][1]) == carp,
+		"each rod raises the trout's weight by its rare_percent and leaves the carp's", str(weights))
+	# Cast for cast, the trout comes up as often as those weights say -
+	# within four standard deviations of two thousand draws - and each rod,
+	# then fish bait on the iron one, says more often.
+	var baited := _waits(1811, water, 2, GameData.BAIT, 2000)
+	var shares: Array = []
+	var off: Array = []
+	var morning := Fishing.catchable(&"north_west_pond", &"spring", 8 * 60)
+	for run in [[bamboo, 0, &""], [fibre, 1, &""], [iron, 2, &""], [baited, 2, GameData.BAIT]]:
+		rod_state["tools"]["rod"] = int(run[1])
+		var rare := Fishing.rare_percent(rod_state, StringName(run[2]))
+		var total := 0
+		for id in morning:
+			total += Fishing.weight_of(StringName(id), rare)
+		var p := float(Fishing.weight_of(GameData.TROUT, rare)) / float(total)
+		shares.append(p)
+		var seen := int((run[0] as Dictionary)["uncommon"])
+		if absf(float(seen) - p * 2000.0) > 4.0 * sqrt(2000.0 * p * (1.0 - p)):
+			off.append("%d trout against %.0f" % [seen, p * 2000.0])
+	expect(morning.has(GameData.TROUT) and off.is_empty()
+		and float(shares[1]) > float(shares[0]) and float(shares[2]) > float(shares[1])
+		and float(shares[3]) > float(shares[2]),
+		"so the trout comes up more on fibre, more on iron, more again with fish bait, as often as the weights say",
+		"%s %s" % [str(shares), str(off)])
+
+	# **The slot and the gate are iron's.**
+	var gates: Array = []
+	for tier in 3:
+		rod_state["tools"]["rod"] = tier
+		gates.append([Fishing.has_bait_slot(rod_state), Fishing.takes_legendary(rod_state)])
+	expect(gates == [[false, false], [false, false], [true, true]],
+		"only the iron rod has the bait slot, and only it is the rod a legendary takes", str(gates))
+
+	# **Bait is spent at an iron-rod cast and not at a bamboo one.**
+	var line := State.create(1813)
+	line["day"] = 3
+	line["day_tick"] = Phases.tick_at_minute(8 * 60)
+	Resources.add(line, GameData.WORM, 2)
+	expect(Fishing.choose_bait(line, GameData.WORM) and not Fishing.choose_bait(line, GameData.CARP)
+		and Fishing.bait_of(line) == GameData.WORM,
+		"the worm goes on; a carp is not a bait")
+	Fishing.begin(line, water)
+	expect(Resources.amount(line, GameData.WORM) == 2 and StringName(Fishing.cast_of(line)["bait"]) == &"",
+		"the bamboo rod has no slot: the worm stays in the tin and does nothing")
+	Fishing.give_up(line)
+	line["tools"]["rod"] = 2
+	Fishing.begin(line, water)
+	expect(Resources.amount(line, GameData.WORM) == 1 and StringName(Fishing.cast_of(line)["bait"]) == GameData.WORM
+		and int(Fishing.cast_of(line)["left"]) <= int(GameData.FISHING["bite_max_ticks"]) * worm_lever / 100,
+		"the iron rod spends one at the cast, and the wait is the worm's",
+		str(Fishing.cast_of(line).get("left", -1)))
+	Fishing.give_up(line)
+	Resources.spend(line, GameData.WORM, 1)
+	expect(Fishing.begin(line, water) and StringName(Fishing.cast_of(line)["bait"]) == &""
+		and Resources.amount(line, GameData.WORM) == 0,
+		"with none left the line still goes in, plain: no bait is no effect, not a refusal")
+	Fishing.give_up(line)
+	var steps: Array = []
+	for _i in 4:
+		steps.append(Fishing.step_bait(line, 1))
+	steps.append(Fishing.step_bait(line, -1))
+	expect(steps == [GameData.BAIT, &"", GameData.WORM, GameData.BAIT, GameData.WORM],
+		"stepping goes round worm, fish bait and none, both ways", str(steps))
+
+	# **The hoe finds a worm one cell in `WORM_IN`**, drawn from the run's
+	# RNG: every free cell of a farm turned, one at a time.
+	var field := State.create(1814)
+	var turned := _till_the_farm(field, 2400)
+	var found := Resources.amount(field, GameData.WORM)
+	var claimed := float(turned) / float(GameData.WORM_IN)
+	expect(turned >= 1600 and absf(float(found) - claimed) <= claimed * 0.2,
+		"tilling finds worms at the rate claimed", "%d worms in %d cells, %.0f claimed" % [found, turned, claimed])
+	var again := State.create(1814)
+	_till_the_farm(again, 2400)
+	expect(Resources.amount(again, GameData.WORM) == found and str(again["rng"]) == str(field["rng"]),
+		"and the same seed finds the same worms")
+	var plots: Array = (field["plots"] as Dictionary).keys()
+	plots.sort()
+	var tilled := Grid.cell(int(plots[0]))
+	Farming.plot(field, tilled)["crop"] = GameData.CARROT
+	var rng_before := str(field["rng"])
+	expect(Farming.clear_crop(field, tilled) and str(field["rng"]) == rng_before
+		and Resources.amount(field, GameData.WORM) == found,
+		"clearing a crop turns the earth and draws no worm")
+	_completed += 1
+
+
+## Turn up to `most` free cells of the farm with the hoe, one at a time in
+## reading order; how many were turned.
+func _till_the_farm(state: Dictionary, most: int) -> int:
+	var turned := 0
+	for y in Grid.HEIGHT:
+		for x in Grid.WIDTH:
+			if turned < most and Farming.verb_at(state, Vector2i(x, y)) == &"till":
+				Farming.act(state, Vector2i(x, y))
+				turned += 1
+	return turned
+
+
+## `casts` casts into `water` on `seed_value` with the rod at `tier` and
+## `bait` on (and always held): the mean, shortest and longest wait, and how
+## many came up anything but common.
+func _waits(seed_value: int, water: Vector2i, tier: int, bait: StringName, casts: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = 3
+	state["day_tick"] = Phases.tick_at_minute(8 * 60)
+	state["tools"]["rod"] = tier
+	if bait != &"":
+		Resources.add(state, bait, casts)
+		Fishing.choose_bait(state, bait)
+	var total := 0
+	var shortest := 1 << 30
+	var longest := 0
+	var uncommon := 0
+	for _i in casts:
+		Fishing.begin(state, water)
+		var left := int(Fishing.cast_of(state)["left"])
+		total += left
+		shortest = mini(shortest, left)
+		longest = maxi(longest, left)
+		if GameData.FISH_SPECIES[Fishing.cast_of(state)["species"]]["tier"] != &"common":
+			uncommon += 1
+		Fishing.give_up(state)
+	return {"mean": float(total) / float(casts), "shortest": shortest, "longest": longest, "uncommon": uncommon}
 
 
 ## A line on `water`, already biting, of `species` - the cast's own draws

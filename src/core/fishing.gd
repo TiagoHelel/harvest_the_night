@@ -39,6 +39,15 @@ extends RefCounted
 ## a held key strikes once, and the keyboard, the pad's A and a click (`Main`
 ## writes the same edge) are one press. Nothing after the cast is chance: the
 ## marker is a pure function of the ticks since the bite.
+##
+## ## The rod and the bait
+##
+## Task 0181. The rod's tier (`TOOLS` rod) shortens the bite range
+## (`bite_percent`) and multiplies the weight of every species that is not
+## common (`rare_percent`); the iron rod alone has the slot a bait goes in, and
+## is the one a legendary takes (`takes_legendary`, 0182's gate). The bait on
+## (`fishing_bait`) is spent at the cast and does the same two things by its
+## own `BAIT_EFFECTS`; with no bait held, the line goes in plain.
 
 ## What one cast looks like before anything has happened to it.
 const NOTHING: Dictionary = {}
@@ -54,6 +63,11 @@ static func initial() -> Dictionary:
 		# setting through `intent.fishing_assist` - core never reads the
 		# setting. A top-level key; it shapes the next cast, not this one.
 		"fishing_assist": false,
+		# **Which bait is on** (task 0181): `&""` for none, or one of
+		# `GameData.BAITS`. A top-level key, like `selected_seed`, chosen
+		# from the day HUD through `step_bait`; only a rod with the bait slot
+		# spends it, one at each cast.
+		"fishing_bait": &"",
 	}
 
 
@@ -115,6 +129,88 @@ static func zone_for(state: Dictionary, species: StringName) -> int:
 	return clampi(wide, 1, int(table["bar_units"]))
 
 
+## **The bait choices** (task 0181), in the order the HUD steps through
+## them: none, then `GameData.BAITS`.
+static func bait_choices() -> Array:
+	var out: Array = [&""]
+	for id in GameData.BAITS:
+		out.append(StringName(id))
+	return out
+
+
+## Which bait is on: `&""` for none, or one of `GameData.BAITS`.
+static func bait_of(state: Dictionary) -> StringName:
+	var chosen := StringName(state.get("fishing_bait", &""))
+	return chosen if bait_choices().has(chosen) else &""
+
+
+## Put a bait on, or take it off with `&""`. Refuses anything that is not a
+## bait, the way `Farming.select_seed` refuses what is not in season.
+static func choose_bait(state: Dictionary, id: StringName) -> bool:
+	if not bait_choices().has(id):
+		return false
+	state["fishing_bait"] = id
+	return true
+
+
+## Step the choice along `bait_choices()` and round again - what the HUD's
+## bait button and Q/E or the shoulder buttons at the water send.
+static func step_bait(state: Dictionary, step: int) -> StringName:
+	var choices := bait_choices()
+	var next := StringName(choices[posmod(choices.find(bait_of(state)) + step, choices.size())])
+	state["fishing_bait"] = next
+	return next
+
+
+## Whether this farm's rod has the slot a bait goes in: the iron rod's
+## `bait_slot` in `TOOLS`.
+static func has_bait_slot(state: Dictionary) -> bool:
+	return bool(ToolTiers.effects(state, &"rod").get("bait_slot", false))
+
+
+## **The gate 0182 checks**: whether this farm's rod is one a legendary
+## takes - the iron rod's `legendary` in `TOOLS`, and no other.
+static func takes_legendary(state: Dictionary) -> bool:
+	return bool(ToolTiers.effects(state, &"rod").get("legendary", false))
+
+
+## The bait the next cast spends: the one on, when the rod has the slot and
+## one is held; `&""` otherwise. **No bait is no effect, never a refusal** -
+## the line goes in either way.
+static func bait_for_cast(state: Dictionary) -> StringName:
+	var id := bait_of(state)
+	if id == &"" or not has_bait_slot(state) or Resources.amount(state, id) < 1:
+		return &""
+	return id
+
+
+## How long the wait is, in percent of `FISHING`'s bite range: the rod tier's
+## `bite_percent` times the bait's (`BAIT_EFFECTS`).
+static func bite_percent(state: Dictionary, bait: StringName) -> int:
+	var rod := int(ToolTiers.effects(state, &"rod").get("bite_percent", 100))
+	var on := int((GameData.BAIT_EFFECTS.get(bait, {}) as Dictionary).get("bite_percent", 100))
+	return maxi(rod * on / 100, 1)
+
+
+## How much likelier than its weight anything not common is, in percent: the
+## rod tier's `rare_percent` times the bait's.
+static func rare_percent(state: Dictionary, bait: StringName) -> int:
+	var rod := int(ToolTiers.effects(state, &"rod").get("rare_percent", 100))
+	var on := int((GameData.BAIT_EFFECTS.get(bait, {}) as Dictionary).get("rare_percent", 100))
+	return maxi(rod * on / 100, 1)
+
+
+## A species' weight in the draw at a `rare_percent`: its own `weight`, and
+## for anything not common, that times the percent. Never below one.
+static func weight_of(id: StringName, rare: int,
+		species: Dictionary = GameData.FISH_SPECIES) -> int:
+	var one: Dictionary = species[id]
+	var weight := int(one["weight"])
+	if StringName(one.get("tier", &"common")) != &"common":
+		weight = weight * rare / 100
+	return maxi(weight, 1)
+
+
 ## How fast a species' marker runs, in steps a second, under the assist's
 ## pace when it is on.
 static func speed_for(state: Dictionary, species: StringName) -> int:
@@ -165,14 +261,23 @@ static func begin(state: Dictionary, cell: Vector2i) -> bool:
 	if Farm.terrain_at(state, cell) != Farm.Terrain.WATER:
 		return false
 	var table: Dictionary = GameData.FISHING
-	var left := Rng.int_between(state["rng"], int(table["bite_min_ticks"]),
-		int(table["bite_max_ticks"]))
+	# **The bait goes on the hook as the line goes in** (task 0181): spent
+	# here, once, by a rod with the slot - and with the rod it shortens the
+	# wait and brings the rarer fish.
+	var bait := bait_for_cast(state)
+	if bait != &"":
+		Resources.spend(state, bait, 1)
+	var sooner := bite_percent(state, bait)
+	var left := Rng.int_between(state["rng"],
+		maxi(int(table["bite_min_ticks"]) * sooner / 100, 1),
+		maxi(int(table["bite_max_ticks"]) * sooner / 100, 1))
 	# **Decided at the cast, not at the reel.** Drawing it when the player
 	# reels would mean a fast hand changed what was on the hook, and the rare
 	# one would be a reflex prize rather than a lever. Since task 0179 it is
 	# the species: this pond, this season, this hour.
 	var species := draw(state, catchable(Farm.pond_of(state, cell),
-		Calendar.season_id(Calendar.date(state)), Phases.clock_minute(state)))
+		Calendar.season_id(Calendar.date(state)), Phases.clock_minute(state)),
+		GameData.FISH_SPECIES, rare_percent(state, bait))
 	# **And the bar** (task 0180): how wide its green is, how fast its marker,
 	# how many hits - and where the green sits, the last draw a cast makes.
 	var zone := zone_for(state, species)
@@ -185,6 +290,8 @@ static func begin(state: Dictionary, cell: Vector2i) -> bool:
 		"zone_at": Rng.int_between(state["rng"], 0, int(table["bar_units"]) - zone),
 		"speed": speed_for(state, species),
 		"needs": int((GameData.FISH_SPECIES[species] as Dictionary)["hits"]),
+		# What went on the hook, `&""` for nothing - for the HUD and the checks.
+		"bait": bait,
 	}
 	return true
 
@@ -203,19 +310,20 @@ static func catchable(pond: StringName, season: StringName, minute: int,
 	return out
 
 
-## One of them, from the run's RNG, weighted by `weight`. One draw, and only
+## One of them, from the run's RNG, weighted by `weight` - and anything not
+## common by `rare` percent of it (`weight_of`, task 0181). One draw, and only
 ## when there is a choice to make; the commonest of the pond's year when the
 ## water names no pond at all.
 static func draw(state: Dictionary, ids: Array,
-		species: Dictionary = GameData.FISH_SPECIES) -> StringName:
+		species: Dictionary = GameData.FISH_SPECIES, rare: int = 100) -> StringName:
 	if ids.is_empty():
 		return GameData.CARP
 	var total := 0
 	for id in ids:
-		total += int((species[id] as Dictionary)["weight"])
+		total += weight_of(StringName(id), rare, species)
 	var roll := Rng.int_between(state["rng"], 0, total - 1)
 	for id in ids:
-		roll -= int((species[id] as Dictionary)["weight"])
+		roll -= weight_of(StringName(id), rare, species)
 		if roll < 0:
 			return StringName(id)
 	return StringName(ids.back())

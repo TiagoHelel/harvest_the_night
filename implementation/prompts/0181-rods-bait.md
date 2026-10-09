@@ -1,7 +1,7 @@
 # 0181 - Rods and bait
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0179, 0173, 0167
 - **Likely files:** src/core/fishing.gd, src/core/farming.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

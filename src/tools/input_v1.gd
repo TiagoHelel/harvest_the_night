@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 36
+const V1_CASES := 37
 
 
 func _process(delta: float) -> bool:
@@ -86,6 +86,7 @@ func _run() -> void:
 	await _case_0177_hardwood()
 	await _case_0178_sprinkler()
 	await _case_0180_minigame()
+	await _case_0181_bait()
 	_finish()
 
 
@@ -2664,5 +2665,70 @@ func _case_0180_minigame() -> void:
 			"a %s press on the green lands one fish" % device)
 		await frames(2)
 		expect(not bar.shown(), "and the bar goes with it (%s)" % device)
+	await close_scene()
+	_completed += 1
+
+
+## Task 0181: at the water with the iron rod, the bait button says what is
+## on. E, a click on it and the right shoulder step it on, Q and the left
+## shoulder back; SPACE then casts with it, and the worm goes on the hook.
+## With the bamboo rod there is nothing to choose.
+func _case_0181_bait() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var hud := require_control("DayHud") as DayHud
+	var button := require_control("BaitButton") as Button
+	if driver == null or hud == null or button == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.set_speed(1)
+	var water := Vector2i(-1, -1)
+	var shore := Vector2i(-1, -1)
+	var facing := Player.SOUTH
+	for found in Farm.cells_of(state, Farm.Terrain.WATER):
+		for side in Player.FACING_STEPS.size():
+			var dry: Vector2i = found - Player.FACING_STEPS[side]
+			if water == Vector2i(-1, -1) and Farm.walkable(state, dry):
+				water = found
+				shore = dry
+				facing = side
+	expect(water != Vector2i(-1, -1), "fixture: a shore to fish from")
+	_stand_at(state, shore, facing)
+	await frames(2)
+	expect(not button.visible and not hud.shows_bait(), "with the bamboo rod there is no bait to choose")
+	state["tools"]["rod"] = 2
+	Resources.add(state, GameData.WORM, 2)
+	Resources.add(state, GameData.BAIT, 1)
+	await frames(2)
+	expect(button.visible and hud.shows_bait() and Fishing.bait_of(state) == &"",
+		"with the iron rod at the water the bait button is up, nothing on", button.text)
+	await tap_key(KEY_E)
+	await frames(2)
+	expect(Fishing.bait_of(state) == GameData.WORM and button.text.contains(Names.of(GameData.WORM)),
+		"E puts the worm on, and the button says so", button.text)
+	await click_control("BaitButton")
+	await frames(2)
+	expect(Fishing.bait_of(state) == GameData.BAIT and not Fishing.is_casting(state) and not Player.is_busy(state),
+		"a click on it steps to the fish bait and casts nothing", button.text)
+	await tap_key(KEY_Q)
+	await frames(2)
+	expect(Fishing.bait_of(state) == GameData.WORM, "Q steps back to the worm")
+	await _pad_tap(JOY_BUTTON_RIGHT_SHOULDER)
+	await frames(2)
+	expect(Fishing.bait_of(state) == GameData.BAIT, "the right shoulder steps it on")
+	await _pad_tap(JOY_BUTTON_LEFT_SHOULDER)
+	await frames(2)
+	expect(Fishing.bait_of(state) == GameData.WORM, "and the left shoulder back")
+	var worms := Resources.amount(state, GameData.WORM)
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return Fishing.is_casting(state), "the cast with a worm on")
+	expect(Resources.amount(state, GameData.WORM) == worms - 1
+		and StringName(Fishing.cast_of(state).get("bait", &"")) == GameData.WORM,
+		"SPACE casts, and the worm goes on the hook")
+	await frames(2)
+	expect(button.visible and button.text.contains("x%d" % (worms - 1)),
+		"the button stays up while the line waits, one worm fewer", button.text)
 	await close_scene()
 	_completed += 1

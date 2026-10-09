@@ -18083,3 +18083,164 @@ implementation/backlog/packs/{A023-fishing-gear,A024-farmer-fishing}.md
 (A024: the confirmation line only),
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0180-fishing-minigame.md,
 implementation/shots/0180/, docs/devlog/{index,index.pt_BR}.md
+
+## 0181 - Rods and bait - done 2026-10-09
+
+What changed: the rod's tier now changes what bites. Fibre brings the bite
+sooner and the rarer fish more often; iron does both again, has the slot a
+bait goes in, and is the one rod a legendary will take (0182's gate). The hoe
+turns up worms, the workshop cuts a fish into bait, and with the iron rod the
+bait that is on goes on the hook at the cast.
+
+**The rod** (`TOOLS` rod, the 0173 fields, now read):
+- `bite_percent` scales the bite range at the cast: bamboo 100, fibre 80,
+  iron 65 of `bite_min_ticks`-`bite_max_ticks`.
+- `rare_percent` multiplies the draw weight of every species that is not
+  common: bamboo 100, fibre 125, iron 150.
+- `bait_slot` (iron only) is `Fishing.has_bait_slot`, and `legendary` (iron
+  only) is `Fishing.takes_legendary`, the gate 0182 checks.
+
+**Rarity:** each `FISH_SPECIES` entry has a `tier` from `FISH_TIERS`:
+- common: carp, perch, tilapia, catfish, sunfish, bream;
+- uncommon: trout, pike, eel;
+- rare: dorado, salmon, sturgeon.
+
+`Fishing.weight_of` is the species' weight, times the cast's `rare_percent`
+when it is not common. `draw` takes that percent, and at 100 every weight is
+what it was, so a bamboo cast draws exactly as before.
+
+**The bait:**
+- `WORM` and `BAIT` are resources, $1 and $2. They have their own inventory
+  group, `bait` (BAIT / ISCAS), right after the fish. They are not in the fish
+  group: that group is `ANY_OF`, and a recipe taking any fish pays the
+  cheapest first, so a $2 bait would have been cooked as a fish.
+- `BAIT_EFFECTS`: a worm is a 60% wait; fish bait is 200% on the rarer fish.
+- Spent at the cast, in `Fishing.begin`, by a rod with the slot when one is
+  held. It records `line["bait"]`. The wait range is the rod's percent times
+  the bait's, and so is `rare_percent`.
+- **No bait is no effect, never a refusal.** With none held, or on a bamboo
+  or fibre rod, the line goes in plain and nothing is spent.
+- **Which bait is on** is the run's top-level `fishing_bait` (`&""`, `worm`
+  or `bait`), like `selected_seed`. It is not in `State.TABLES`, because it
+  is not a nested dictionary. `State.reconcile` fills it in for an old save
+  from `Fishing.initial()`.
+  - `choose_bait` refuses anything that is not a bait.
+  - `step_bait` goes round none, worm and fish bait, both ways.
+
+**Worms:** `Farming._till` draws `Rng.chance(1, WORM_IN)` for each cell it
+turns (`WORM_IN` 8, a lever in `digest()`). The draw is in `_till`, not in
+`_till_one`, which clearing a crop shares: REMOVE draws nothing.
+
+**The recipe** (a decision the prompt left open): `make_bait` at the
+**workshop**, beside the other supplies it makes: the kits, the gunpowder and
+the incendiary rounds.
+- It takes `{FISH: 1}`, any fish cheapest first, so the commons go first.
+- It makes 4 bait in 5/240 of a day, on the CRAFT tab.
+- `check_chain` passes: $8 of bait from a $7 fish.
+- 0166's daily budget table gained its row: 48 batches and 192 bait a day,
+  nominal.
+- **The kitchen was the first choice, and the first verify refused it.**
+  0034's "makes food" assert holds every kitchen recipe to making food, which
+  is the kitchen's job in the MVP. Bait is gear, not food, so it moved rather
+  than that rule bending.
+- The workshop's first recipe is still the barricade kit (by name, `make_bait`
+  sorts after `fence_kit`).
+
+**`check_bait`** (in `validate()`) refuses each of these:
+- a bait that is not a priced resource in the bait group;
+- a choice list and an effect table that disagree;
+- a rod tier or bait whose wait is outside 25-100%, or whose rarer-fish
+  percent is outside 100-400%;
+- a best rod and bait that would bite in under a second (iron and worm: 54
+  ticks);
+- a worm in every cell;
+- a species with no tier.
+
+**The view:**
+- `DayHud`'s `BaitButton` sits at (186,220), under the fishing line. It shows
+  "BAIT  worm x2  (Q/E)" ("ISCA  minhoca x2  (Q/E)"), or "BAIT  none" with
+  the keys for the device in hand.
+- It is up by day, outdoors with no panel open, with the iron rod, while the
+  farmer faces water or has a line waiting. It hides over the bar, where a
+  press strikes.
+- A click steps it. So do Q/E (the shoulder buttons on a pad), which
+  `DayHud._unhandled_input` takes while the button is up. By day those
+  actions were free: the night hotbar is hidden, and the open inventory takes
+  them first in `_input`.
+- `focus_mode` is NONE, so SPACE casts rather than pressing it.
+- No new action and no `project.godot` change.
+- The icons are A023's `icon_worm`/`hud_worm`/`icon_bait`/`hud_bait`, through
+  0120's road until 0206:
+  - the worm as a carrot tinted pink;
+  - the bait as the meat's chunk, paled.
+  - The A023 doc says where 0181 shows them: the ledger's BAIT tab, and the
+    workshop's make-bait row.
+
+### Hashes
+
+- **SIM 1648872965 -> 3238533707, on purpose.** The determinism scenario
+  tills, and each turned cell now draws its worm from the run's RNG, so
+  every draw after the first furrow moves. The state also gained
+  `fishing_bait`. A bamboo cast with no bait draws exactly as before:
+  100% of the bite range, every weight its own.
+- **DATA 1985581423 -> 3325784326, on purpose.** The new data:
+  - `WORM`, `BAIT`, their prices and the bait group;
+  - each species' `tier` and `FISH_TIERS`;
+  - `WORM_IN`, `BAITS` and `BAIT_EFFECTS`, all in `digest()`;
+  - the `make_bait` recipe.
+  - The first verify recorded 2346516253 with the recipe at the kitchen.
+    That number was never committed: the recipe's move to the workshop
+    gave the final one.
+- The first verify also failed two timing rows, both under load (a 925 s
+  run): perf's path_refresh at 13037 us, and headless_check's "a rebuild
+  is well under half a tick" at 18501 us. Both passed in the second run:
+  a path rebuild at 11684 us of 33333.
+
+Verify: 60 passed, 0 failed in 819s (the known OVER BUDGET): headless_check 17114 asserts, headless_v1 1743, input_check 1171 cases, input_v1 526, sim 3238533707, data 3325784326.
+
+**Tests:**
+- `_task_0181_rods` (headless_v1), on fixed seeds:
+  - The levers pass. Their teeth refuse a bait that lengthens the wait, a rod
+    that starves the rare fish, a worm in every cell and a species with no
+    tier.
+  - Bait is its own group: the fish total ignores it, and cutting bait spends
+    the carp before the sturgeon. The ledger has the bait tab after the fish.
+  - 2000 casts a rod into the north-west pond at 08:00 of Spring 3. The mean
+    waits come out at:
+    - fibre 80.3% of bamboo's (lever 80);
+    - iron 65.5% (65);
+    - iron with a worm 39.9% (39).
+    - Every fibre wait is inside the scaled range.
+  - Each rod raises the trout's weight by its `rare_percent` and leaves the
+    carp's. The trout comes up as often as those weights say, within four
+    standard deviations: 275, 330, 371, and 614 with fish bait on iron.
+  - Only iron has the slot and the gate.
+  - A worm on is kept at a bamboo cast and spent at an iron one, with the
+    worm's wait. With none left the line still goes in, plain. Stepping goes
+    round both ways.
+  - Tilling 2400 cells finds 304 worms (300 claimed). The same seed finds the
+    same ones, and clearing a crop draws none.
+- `_case_0181_bait` (input_v1):
+  - No button on the bamboo rod. With the iron rod at the water it is up.
+  - E puts the worm on, a click steps to the fish bait and casts nothing, Q
+    steps back, RB on and LB back.
+  - SPACE then casts with the worm on the hook, one fewer held, and the
+    button stays up while the line waits.
+- `headless_check` asks for one shot per scenario: 64 now (`bait`).
+
+Looked at:
+- `implementation/shots/0181/bait.png`: the farmer on the north-west dock
+  with the iron rod, the line waiting. "waiting for a bite" sits over
+  "BAIT  worm x2  (Q/E)", neither overlapping.
+- `inventory_full_bait_1.png`: the BAIT tab, worm and fish bait at $1 and
+  $2. The ten tabs fit above the pager.
+- The float on the water is A023's bobber, still not drawn, as in 0180's
+  shot.
+
+Files: src/core/{farming,fishing,game_data}.gd,
+src/ui/{day_hud,names,placeholder_art}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A023-fishing-gear.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0181-rods-bait.md,
+implementation/shots/0181/, docs/devlog/{index,index.pt_BR}.md

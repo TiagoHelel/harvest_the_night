@@ -218,6 +218,10 @@ const EEL := &"eel"
 const DORADO := &"dorado"
 const SALMON := &"salmon"
 const STURGEON := &"sturgeon"
+## **Bait** (task 0181): a worm the hoe turns up, and fish scraps cut at the
+## workshop. Only the iron rod has the slot to use either.
+const WORM := &"worm"
+const BAIT := &"bait"
 const OIL := &"oil"
 const WHEAT := &"wheat"
 const CORN := &"corn"
@@ -263,6 +267,7 @@ const ENERGY := &"energy"
 const RESOURCES: Array = [
 	WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, FOOD, OIL,
 	CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
+	WORM, BAIT,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
@@ -300,6 +305,10 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	DORADO: 22,                      # LEVER: money each, 18-25, under oil
 	SALMON: 24,                      # LEVER: money each, 18-25, under oil
 	STURGEON: 25,                    # LEVER: money each, 18-25, under oil
+	# Bait sells for little: a fish cut into four is worth a little more than
+	# the cheapest fish whole (`check_chain`), and a worm is a worm.
+	WORM: 1,                         # LEVER: money each, 1-3
+	BAIT: 2,                         # LEVER: money each, 2-4
 	# **The most valuable thing on the farm to sell, and that is the point.**
 	# Four corn is $20 of crop; pressing it is twenty seconds and turns it into
 	# $26 of oil. So the press pays for itself - and then every drop of it is
@@ -613,6 +622,11 @@ const FISHING: Dictionary = {
 ## `weight` - so the pond asks where and when as well as whether. What one
 ## sells for is `SELL_PRICE`. Every pond has a catch in every season at
 ## every minute of the day (`check_fishing`). Legendaries are 0182's.
+## **Rarity** (task 0181): `tier` - common, uncommon or rare. A fibre or
+## iron rod (`TOOLS` rod `rare_percent`) and fish bait (`BAIT_EFFECTS`)
+## raise the draw weight of every species that is not common.
+const FISH_TIERS: Array = [&"common", &"uncommon", &"rare"]
+
 const FISH_SPECIES: Dictionary = {
 	# The commons: carp in the two western waters all year and all day,
 	# perch and the summer's tilapia keeping the south-east lake, the
@@ -620,53 +634,53 @@ const FISH_SPECIES: Dictionary = {
 	CARP: {"ponds": [&"north_west_pond", &"forest_pond"], # LEVER: where
 		"seasons": [&"spring", &"summer", &"autumn", &"winter"], # LEVER: when
 		"hours": [6 * 60, 26 * 60], "weight": 30,  # LEVER: clock minutes; draw weight
-		"speed": 60, "zone": 26, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 60, "zone": 26, "hits": 1, "tier": &"common"}, # LEVER: bar steps a second, green steps, presses to land
 	PERCH: {"ponds": [&"north_west_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"spring", &"autumn", &"winter"], # LEVER: when
 		"hours": [6 * 60, 26 * 60], "weight": 25,  # LEVER: clock minutes; draw weight
-		"speed": 60, "zone": 26, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 60, "zone": 26, "hits": 1, "tier": &"common"}, # LEVER: bar steps a second, green steps, presses to land
 	TILAPIA: {"ponds": [&"forest_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"summer"],      # LEVER: when
 		"hours": [6 * 60, 26 * 60], "weight": 25,  # LEVER: clock minutes; draw weight
-		"speed": 60, "zone": 26, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 60, "zone": 26, "hits": 1, "tier": &"common"}, # LEVER: bar steps a second, green steps, presses to land
 	CATFISH: {"ponds": [&"north_west_pond", &"forest_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"spring", &"summer", &"autumn", &"winter"], # LEVER: when
 		"hours": [18 * 60, 26 * 60], "weight": 18,  # LEVER: clock minutes; draw weight
-		"speed": 66, "zone": 24, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 66, "zone": 24, "hits": 1, "tier": &"common"}, # LEVER: bar steps a second, green steps, presses to land
 	SUNFISH: {"ponds": [&"forest_pond"], # LEVER: where
 		"seasons": [&"summer"],      # LEVER: when
 		"hours": [6 * 60, 18 * 60], "weight": 15,  # LEVER: clock minutes; draw weight
-		"speed": 60, "zone": 26, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 60, "zone": 26, "hits": 1, "tier": &"common"}, # LEVER: bar steps a second, green steps, presses to land
 	BREAM: {"ponds": [&"north_west_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"spring", &"summer"], # LEVER: when
 		"hours": [6 * 60, 26 * 60], "weight": 12,  # LEVER: clock minutes; draw weight
-		"speed": 66, "zone": 24, "hits": 1}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 66, "zone": 24, "hits": 1, "tier": &"common"}, # LEVER: bar steps a second, green steps, presses to land
 	# The middling three: each one water, one or two seasons, part of the day.
 	TROUT: {"ponds": [&"north_west_pond"], # LEVER: where
 		"seasons": [&"spring", &"autumn"], # LEVER: when
 		"hours": [6 * 60, 12 * 60], "weight": 10,  # LEVER: clock minutes; draw weight
-		"speed": 84, "zone": 22, "hits": 2}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 84, "zone": 22, "hits": 2, "tier": &"uncommon"}, # LEVER: bar steps a second, green steps, presses to land
 	PIKE: {"ponds": [&"north_west_pond", &"forest_pond"], # LEVER: where
 		"seasons": [&"autumn", &"winter"], # LEVER: when
 		"hours": [6 * 60, 26 * 60], "weight": 10,  # LEVER: clock minutes; draw weight
-		"speed": 84, "zone": 22, "hits": 2}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 84, "zone": 22, "hits": 2, "tier": &"uncommon"}, # LEVER: bar steps a second, green steps, presses to land
 	EEL: {"ponds": [&"forest_pond", &"south_east_lake"], # LEVER: where
 		"seasons": [&"spring", &"summer"], # LEVER: when
 		"hours": [20 * 60, 26 * 60], "weight": 8,  # LEVER: clock minutes; draw weight
-		"speed": 90, "zone": 20, "hits": 2}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 90, "zone": 20, "hits": 2, "tier": &"uncommon"}, # LEVER: bar steps a second, green steps, presses to land
 	# The rare three: one water, one season, a few hours.
 	DORADO: {"ponds": [&"south_east_lake"], # LEVER: where
 		"seasons": [&"summer"],      # LEVER: when
 		"hours": [10 * 60, 16 * 60], "weight": 4,  # LEVER: clock minutes; draw weight
-		"speed": 96, "zone": 18, "hits": 3}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 96, "zone": 18, "hits": 3, "tier": &"rare"}, # LEVER: bar steps a second, green steps, presses to land
 	SALMON: {"ponds": [&"north_west_pond"], # LEVER: where
 		"seasons": [&"autumn"],      # LEVER: when
 		"hours": [6 * 60, 18 * 60], "weight": 3,  # LEVER: clock minutes; draw weight
-		"speed": 96, "zone": 18, "hits": 3}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 96, "zone": 18, "hits": 3, "tier": &"rare"}, # LEVER: bar steps a second, green steps, presses to land
 	STURGEON: {"ponds": [&"south_east_lake"], # LEVER: where
 		"seasons": [&"winter"],      # LEVER: when
 		"hours": [18 * 60, 26 * 60], "weight": 2,  # LEVER: clock minutes; draw weight
-		"speed": 90, "zone": 18, "hits": 3}, # LEVER: bar steps a second, green steps, presses to land
+		"speed": 90, "zone": 18, "hits": 3, "tier": &"rare"}, # LEVER: bar steps a second, green steps, presses to land
 }
 
 
@@ -815,6 +829,15 @@ const RECIPES: Dictionary = {
 		"output": {FOOD: 4},
 		"ticks": DAY_TICKS * 18 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
+	# **Fish scraps into bait** (task 0181), at the workshop beside the other
+	# supplies it makes - the kitchen's recipes are all food (task 0034): any
+	# fish, the cheapest first (`ANY_OF`), into four.
+	&"make_bait": {
+		"station": &"workshop",
+		"inputs": {FISH: 1},
+		"output": {BAIT: 4},             # LEVER: bait a fish makes, 2-6
+		"ticks": DAY_TICKS * 5 / 240,   # LEVER: fraction of a day
+	},
 }
 
 ## How many items a production building may have queued at once.
@@ -911,6 +934,20 @@ const BUILDINGS: Dictionary = {
 		"spray": &"square",             # LEVER: cross or square (the 5x5)
 		"spray_reach": 2,               # LEVER: cells out from it, 1-3
 	},
+}
+
+## **How often the hoe turns up a worm** (task 0181): one cell in this many,
+## drawn from the run's RNG as each cell is turned.
+const WORM_IN := 8                     # LEVER: cells turned per worm, 4-20
+
+## **What a bait on the iron rod does** (task 0181), spent at the cast: a worm
+## brings the bite sooner, fish bait brings the rarer fish. In percent of
+## the wait and of the non-common species' draw weight. The order is the
+## order the choice steps through, after none.
+const BAITS: Array = [WORM, BAIT]
+const BAIT_EFFECTS: Dictionary = {
+	WORM: {"bite_percent": 60, "rare_percent": 100},   # LEVER: percents, 40-100 / 100-300
+	BAIT: {"bite_percent": 100, "rare_percent": 200},  # LEVER: percents, 40-100 / 100-300
 }
 
 ## The shapes a sprinkler's spray can take (task 0178).
@@ -1227,6 +1264,9 @@ const RESOURCE_GROUPS: Array = [
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
 	{"name": &"seeds", "members": [CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED]},
 	{"name": FISH, "members": [CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON]},
+	# Its own group, never the fish's: a recipe that takes any fish pays the
+	# cheapest first, and a bait at $2 would be cheaper than any of them.
+	{"name": &"bait", "members": [WORM, BAIT]},
 	{"name": &"animal_goods", "members": [MEAT]},
 	{"name": &"artisan_goods", "members": [FOOD, OIL]},
 	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
@@ -2331,6 +2371,7 @@ static func validate() -> Array:
 	errors.append_array(check_nights(NIGHTS))
 	errors.append_array(check_map(FARM_MAP))
 	errors.append_array(check_fishing(FISHING))
+	errors.append_array(check_bait(BAIT_EFFECTS))
 	errors.append_array(check_iron(GATHERING, FARM_MAP))
 	errors.append_array(check_reachable(GATHERING, FARM_MAP))
 	errors.append_array(check_spawn_bands(SPAWN_BANDS, FARM_MAP))
@@ -3193,6 +3234,50 @@ static func check_fishing(table: Dictionary, species: Dictionary = FISH_SPECIES,
 	return errors
 
 
+## **The rod and the bait** (task 0181): what each rod tier and each bait
+## does to the wait and to the draw. Either may shorten the wait and favour
+## the rarer fish - never lengthen it or starve them - and together they
+## leave the quickest bite a second away at least. A bait is a priced
+## resource in the bait group, the hoe finds a worm in some cells rather
+## than in all of them, and every species has a rarity.
+static func check_bait(effects: Dictionary, tools: Dictionary = TOOLS,
+		worm_in: int = WORM_IN, species: Dictionary = FISH_SPECIES) -> Array:
+	var errors: Array = []
+	var bait_group := group_members(&"bait")
+	if BAITS.size() != effects.size():
+		errors.append("there are %d baits to choose and %d with an effect" % [BAITS.size(), effects.size()])
+	var quickest_bait := 100
+	for id in sorted_names(effects.keys()):
+		if not BAITS.has(id) or not RESOURCES.has(id) or not SELL_PRICE.has(id) \
+				or not bait_group.has(id):
+			errors.append("bait '%s' is not a priced resource in the bait group" % id)
+		errors.append_array(_check_fishing_percents("bait '%s'" % id, effects[id]))
+		quickest_bait = mini(quickest_bait, int((effects[id] as Dictionary).get("bite_percent", 100)))
+	var quickest_rod := 100
+	var rods: Array = tools[&"rod"]
+	for i in rods.size():
+		errors.append_array(_check_fishing_percents("rod tier %d" % i, rods[i]))
+		quickest_rod = mini(quickest_rod, int((rods[i] as Dictionary).get("bite_percent", 100)))
+	if int(FISHING["bite_min_ticks"]) * quickest_rod * quickest_bait / 10000 < TICK_HZ:
+		errors.append("the best rod and bait bring a bite in under a second")
+	if worm_in < 2:
+		errors.append("the hoe finds a worm in every cell it turns")
+	for id in sorted_names(species.keys()):
+		if not FISH_TIERS.has(StringName((species[id] as Dictionary).get("tier", &""))):
+			errors.append("fish '%s' has no rarity" % id)
+	return errors
+
+
+## One rod tier's or bait's two percents, in bounds: a wait of 25-100% and
+## the rarer fish at 100-400% of their weight.
+static func _check_fishing_percents(what: String, one: Dictionary) -> Array:
+	var bite := int(one.get("bite_percent", 100))
+	var rare := int(one.get("rare_percent", 100))
+	if bite < 25 or bite > 100 or rare < 100 or rare > 400:
+		return ["%s waits %d%% and favours the rarer fish %d%%" % [what, bite, rare]]
+	return []
+
+
 ## What a pile of resources sells for, against a given price list.
 ##
 ## **The price list is a parameter and it has to be.** It read `SELL_PRICE`
@@ -3606,6 +3691,10 @@ static func digest() -> int:
 		"gathering": GATHERING,
 		"fishing": FISHING,
 		"fish_species": FISH_SPECIES,
+		"fish_tiers": FISH_TIERS,
+		"worm_in": WORM_IN,
+		"baits": BAITS,
+		"bait_effects": BAIT_EFFECTS,
 		"any_of": ANY_OF,
 		"recipes": RECIPES,
 		"tools": TOOLS,

@@ -339,6 +339,11 @@ static func clear_crop(state: Dictionary, cell: Vector2i) -> bool:
 static func _till(state: Dictionary, cell: Vector2i) -> void:
 	for at in action_cells(state, cell, &"till"):
 		_till_one(state, at)
+		# **A worm in the turned earth** (task 0181): one cell in `WORM_IN`,
+		# drawn from the run's RNG as each cell is turned - bait for the iron
+		# rod. Here and not in `_till_one`, which clearing a crop shares.
+		if Rng.chance(state["rng"], 1, GameData.WORM_IN):
+			Resources.add(state, GameData.WORM, 1)
 
 
 ## Clearing an existing crop stays a deliberate single-cell action (0172).

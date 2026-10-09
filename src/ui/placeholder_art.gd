@@ -245,6 +245,12 @@ const ART := {
 	&"fishbar_marker": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": FISHBAR_MARKER, "final": FISHBAR_MARKER, "bare": true},
 	&"fishbar_hit": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 3, "seconds": 0.065, "loop": false, "stand_in": &"", "geometry": FISHBAR_FLASH, "final": FISHBAR_FLASH},
 	&"fishbar_miss": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 3, "seconds": 0.065, "loop": false, "stand_in": &"", "geometry": FISHBAR_FLASH, "final": FISHBAR_FLASH},
+	# A023's bait (task 0181): the worm as a carrot gone pink, the fish bait
+	# as the meat's chunk paled, until 0206 integrates the pack.
+	&"icon_worm": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(1.15, 0.7, 0.8), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_worm": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.15, 0.7, 0.8), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"guardian_day": {"pack": "A003", "dir": "res://sprites/props/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW},
 	&"guardian_wake": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 1},
 	&"guardian_night": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.25, "loop": true, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 0},
