@@ -172,6 +172,8 @@ const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
 ## and `bare` is a static file with no frame number (`icon_wall.png`). One
 ## line each, like `POSES`.
 const ART := {
+	&"tilled_edge_n": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/edge_n", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"tilled_edge_corner_nw": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/edge_corner_nw", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
 	&"guardian_day": {"pack": "A003", "dir": "res://sprites/props/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW},
 	&"guardian_wake": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 1},
 	&"guardian_night": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.25, "loop": true, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 0},

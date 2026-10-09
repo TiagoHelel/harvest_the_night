@@ -16717,3 +16717,71 @@ tools/{autoplay,balance}.py, tools/determinism_{sim,data}_hash.txt,
 implementation/{BACKLOG,BALANCE,PROGRESS}.md,
 implementation/prompts/0166-longer-day.md, implementation/shots/0166/,
 docs/devlog/{index,index.pt_BR}.md (refreshed by devlog.py --check).
+
+
+## 0167 - Any grass can be tilled - done 2026-10-09
+
+What changed: the hoe turns empty grass into a plot, and planting, watering
+and harvesting use the same rules as the starter beds. Terrain bytes stay
+unchanged. Bare grass takes the hoe only in front of the farmer, never as
+an underfoot fallback, including at the farm boundary; existing plots retain
+underfoot planting, watering and harvesting. Occupied and non-farm ground
+refuse the hoe.
+
+Empty grass plots return to lawn after TILLED_GRASS_FADES_DAYS=3 mornings;
+planted grass and starter soil never fade. Successful work records
+last_worked_morning only on grass, preserving soil plot shapes and save
+version 7. The absolute day counter counts mornings even when a boss holds
+the calendar. Legacy grass plots acquire their missing age on the first
+loaded morning. Harvesting and trampling renew the empty ground's grace
+period; unsuccessful actions do not.
+
+Farming.field_cells supplies starter soil plus tilled grass in index order
+to the tutorial, autoplay and all field fixtures. Autoplay keeps its terrain
+scan cached while incorporating new/faded grass. Title and shot backdrops sow
+the starter field rather than every newly actionable lawn tile. The ordinary
+soil-only field retains its existing order without an extra sort, avoiding
+a measured tutorial performance regression.
+
+Path cost: tilled grass keeps the grass cost. Hoeing does not call Farm.touch
+or invalidate any flow field, so each stroke avoids a roughly 9 ms route
+rebuild. Turf borders use N1/E2/S4/W8 side masks and NW/NE/SE/SW concave caps;
+starter soil and neighbouring plots join without an internal grass seam.
+The placeholder road reuses the existing terrain edge textures over today's
+dry/wet earth. The final A014 geometry is 16x16, pivot (8,16), draw scale 1.0,
+with clockwise runtime quarter-turns and the grass season-remap material.
+A014 now names 0171 as the withered-crop owner.
+
+Verify: final python tools/verify.py PASS, 60 passed / 0 skipped / 0 failed
+in 600 s (the known total OVER BUDGET warning). headless_check: 16394 asserts,
+0 failed in 76.8 s; headless_v1: 639 asserts, 0 failed in 8.1 s; input_check:
+1076 cases, 0 failed in 85.1 s; input_v1: 246 cases, 0 failed in 45.4 s.
+Every suite remains below the 120 s script timeout; exports passed in 32.8 s.
+Performance: night tick 3500 us of 8333; path rebuild 8925 us of 33333.
+The performance baseline was not changed. The first full run had two failing
+rows: tutorial performance (50 us against 33 us), and the old shot inventory
+count/named night builder. The field fast path and the 45-scenario inventory
+with both named builders corrected them; the complete final run passed.
+SIM remains 2338199505; DATA deliberately moved 375753753 -> 3886875281
+for the fade lever. The final verification reproduced both without --accept.
+
+Shots: implementation/shots/0167/{noon,dusk,wave,result,tech,till_grass,
+till_grass_night}.png, all 1920x1080 and opened individually at original size.
+The expanded northern starter patch shows dry/wet plots, several crop stages,
+an exposed edge and a notch by day and night. The day fixture starts beside
+the patch so its walk does not stop at the well and hide it under the HUD.
+The farmer retains the existing 128-screen-pixel scale. No art PNG was
+generated or edited; these are Godot captures with their import metadata.
+
+Notes: implementation/backlog/packs/A014-crop-ground.md was edited for this
+task but deliberately left unstaged, per the owner's rule for that directory.
+All pre-existing owner/art changes remain outside the commit. The RUN-key
+question remains with the owner. No push. Exactly one backlog task completed.
+
+Files: src/core/{farm,farming,game_data,interact,player,tutorial}.gd,
+src/tools/{autoplay,determinism,headless_check,headless_v1,house_check,
+input_check,input_v1,make_goldens,perf_check,shot}.gd,
+src/ui/{placeholder_art,title_screen,world_view}.gd,
+tools/determinism_data_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/0167-till-grass.md, implementation/shots/0167/,
+docs/devlog/{index,index.pt_BR}.md (refreshed by devlog.py --check).

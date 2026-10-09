@@ -1,7 +1,7 @@
 # 0167 - Any grass can be tilled
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0165
 - **Likely files:** src/core/farming.gd, src/core/interact.gd, src/core/game_data.gd, src/core/tutorial.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/house_check.gd, src/tools/shot.gd, src/core/player.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/A014-crop-ground.md
 
@@ -29,12 +29,12 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 ## Done when
 
-- [ ] `_task_0167_till_grass` in `src/tools/headless_v1.gd` (mornings by `Farming.morning`, never a day of ticks): the hoe on grass makes a plot and leaves the terrain byte alone; an empty tilled grass plot is gone after the fade mornings and a planted one is not; a path cell refuses the hoe
-- [ ] `_case_0167_till_grass` in `src/tools/input_v1.gd`: the farmer walks onto open grass, holds interact, and a plot appears
-- [ ] A new `till_grass` scenario: `python tools/shot.py 0167 till_grass --fhd` shows tilled grass beside the beds by day and by night; opened and looked at
-- [ ] the Deliverables table of `implementation/backlog/packs/A014-crop-ground.md` states the final geometry this task settled (edge masks, canvas, pivot), and the pack's text names 0171, not 0170, as the owner of the withered crop
-- [ ] `python tools/verify.py` prints PASS
-- [ ] the determinism hash is unchanged, or the change is deliberate and both
+- [x] `_task_0167_till_grass` in `src/tools/headless_v1.gd` (mornings by `Farming.morning`, never a day of ticks): the hoe on grass makes a plot and leaves the terrain byte alone; an empty tilled grass plot is gone after the fade mornings and a planted one is not; a path cell refuses the hoe
+- [x] `_case_0167_till_grass` in `src/tools/input_v1.gd`: the farmer walks onto open grass, holds interact, and a plot appears
+- [x] A new `till_grass` scenario: `python tools/shot.py 0167 till_grass --fhd` shows tilled grass beside the beds by day and by night; opened and looked at
+- [x] the Deliverables table of `implementation/backlog/packs/A014-crop-ground.md` states the final geometry this task settled (edge masks, canvas, pivot), and the pack's text names 0171, not 0170, as the owner of the withered crop
+- [x] `python tools/verify.py` prints PASS
+- [x] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal
 
 ## House rules

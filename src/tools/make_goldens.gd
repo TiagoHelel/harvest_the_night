@@ -78,7 +78,7 @@ func _a_played_farm() -> Dictionary:
 
 	var sown := 0
 	var seeds := Farming.seeds()
-	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+	for found in Farming.field_cells(state):
 		if sown >= 14:
 			break
 		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))

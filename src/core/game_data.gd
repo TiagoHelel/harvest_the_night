@@ -322,10 +322,13 @@ const CROPS: Dictionary = {
 
 ## How many tiles one canful waters.
 ##
-## The field is sixty plots, so watering all of it takes eight trips to the
+## The starter field is sixty plots, so watering it takes eight trips to the
 ## water. That is the chore: worth doing, never required, and the reason the
 ## well is somewhere you have to walk to.
 const WATER_CAN_CAPACITY := 8           # LEVER: tiles per fill, 3-20
+
+## Empty turned grass returns to lawn; original soil beds stay forever.
+const TILLED_GRASS_FADES_DAYS := 3       # LEVER: idle empty grass plots, 1-7 mornings
 
 
 # ================================================================== gathering
@@ -1949,6 +1952,8 @@ static func validate() -> Array:
 	errors.append_array(check_calendar(SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
 		FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES))
 	errors.append_array(check_gift(CALM_NIGHT_GIFT))
+	if TILLED_GRASS_FADES_DAYS < 1 or TILLED_GRASS_FADES_DAYS > 7:
+		errors.append("TILLED_GRASS_FADES_DAYS must be within 1-7 mornings")
 	if TRAMPLE_REACH < 0 or TRAMPLE_REACH > 2:
 		errors.append("TRAMPLE_REACH is %d tiles, outside 0-2" % TRAMPLE_REACH)
 	if PASS_OUT_PREPARATION_TICKS <= 0 \
@@ -2978,6 +2983,7 @@ static func digest() -> int:
 		"tutorial": TUTORIAL,
 		"crops": CROPS,
 		"water": [WATER_CAN_CAPACITY],
+		"tilled_grass_fades_days": TILLED_GRASS_FADES_DAYS,
 		"power": [BASE_ENERGY, UNPOWERED_PERCENT],
 		"livestock": LIVESTOCK,
 		"ammo": [EMPTY_RELOAD_PERCENT, EMPTY_DAMAGE_PERCENT],

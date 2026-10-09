@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 22
+const V1_CASES := 23
 
 
 func _process(delta: float) -> bool:
@@ -72,6 +72,7 @@ func _run() -> void:
 	await _case_0158_panel()
 	await _case_0159_seasons()
 	await _case_0160_ending()
+	await _case_0167_till_grass()
 	_finish()
 
 
@@ -372,7 +373,7 @@ func _case_0127_bed() -> void:
 	driver = require_control("SimDriver")
 	state = driver.state
 	await frames(4)
-	var field: Vector2i = Farm.cells_of(state, Farm.Terrain.SOIL)[0]
+	var field: Vector2i = Farming.field_cells(state)[0]
 	var stand := _walkable_neighbour(state, field)
 	_stand_at(state, stand)
 	await frames(3)
@@ -1946,4 +1947,49 @@ func _case_0160_ending() -> void:
 			"before %d, after %d" % [wins, int(Save.read_profile()["runs_won"])])
 		await close_scene()
 	I18n.use("en")
+	_completed += 1
+
+
+## 0167 - walk onto lawn and hold the ordinary interact key to hoe ahead.
+func _case_0167_till_grass() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	var middle := Vector2i(35, 20)
+	var target := middle + Vector2i.RIGHT
+	expect(Farm.terrain_at(state, middle) == Farm.Terrain.GRASS
+		and Farm.is_empty(state, middle) and Farm.is_empty(state, target), "open grass is walkable")
+	_stand_at(state, middle + Vector2i.LEFT, Player.EAST)
+	await press_key(KEY_D, true)
+	await until(func() -> bool: return Player.cell(state) == middle, "walking onto the lawn")
+	await press_key(KEY_D, false)
+	await frames(2)
+	expect(Player.cell(state) == middle and Player.target(state) == target,
+		"the hoe targets the faced lawn after walking")
+	await press_key(KEY_SPACE, true)
+	await until(func() -> bool: return Farming.is_tilled(state, target), "holding interact to till grass")
+	await press_key(KEY_SPACE, false)
+	expect(Farming.is_tilled(state, target) and not Farming.is_tilled(state, middle)
+		and Farm.terrain_at(state, target) == Farm.Terrain.GRASS,
+		"the held key hoes ahead and preserves the lawn's terrain")
+	var world: WorldView = require_control("WorldView")
+	await frames(3)
+	var earth := false
+	var turf := false
+	for sprite in world._plot_sprites:
+		if int(sprite.get_meta("plot_cell", -1)) == Grid.index(target):
+			earth = earth or str(sprite.get_meta("plot_art", "")) == "tilled"
+			turf = turf or str(sprite.get_meta("plot_art", "")) == "tilled_edge_n"
+	expect(earth and turf, "turned earth and its turf border appear in the real view")
+	# An open-ground press facing a path has no underfoot hoe fallback.
+	_stand_at(state, middle, Player.NORTH)
+	state["terrain"][Grid.index(middle + Vector2i.UP)] = Farm.Terrain.PATH
+	await hold_key(KEY_SPACE, 40)
+	expect(not Farming.is_tilled(state, middle), "facing a path never hoes under the farmer's feet")
+	await close_scene()
 	_completed += 1

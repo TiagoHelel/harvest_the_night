@@ -71,7 +71,7 @@ func _run() -> void:
 		if Farm.is_empty(_state, Grid.cell(idx)) 				and _state["terrain"][idx] in [Farm.Terrain.GRASS, Farm.Terrain.SOIL]:
 			available += 1
 	expect(available * 100 >= 787 * 400, "The farm has four times the clear usable land of the 45x25 farm")
-	var beds := Farm.cells_of(_state, Farm.Terrain.SOIL)
+	var beds := Farming.field_cells(_state)
 	for bed in beds:
 		expect(Farm.walkable(_state, bed) and Grid.chebyshev(bed, House.porch(_state)) <= 10,
 			"Every bed is clear ground within ten tiles of the porch")

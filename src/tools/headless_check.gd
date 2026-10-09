@@ -1400,7 +1400,7 @@ func _task_0109_reactions() -> void:
 	# loud one - **without this the comparison below passes by proving
 	# nothing**, which is how it passed the first time the exclusion was
 	# taken out to watch it fail.
-	var plots := Farm.cells_of(loud, Farm.Terrain.SOIL)
+	var plots := Farming.field_cells(loud)
 	SuiteKit.stand_the_farmer(loud, plots[0])
 	SuiteKit.stand_the_farmer(quiet, plots[0])
 	for found in plots:
@@ -1503,7 +1503,7 @@ func _task_0109_reactions() -> void:
 
 	# A crop coming ready near enough to see.
 	var field := State.create(109104)
-	var soil := Farm.cells_of(field, Farm.Terrain.SOIL)
+	var soil := Farming.field_cells(field)
 	SuiteKit.stand_the_farmer(field, soil[0])
 	var near := Player.cell(field)
 	for found in soil:
@@ -2771,7 +2771,7 @@ func _task_0018_wheat() -> void:
 	# farm starts on carrot, the cheapest; a group about wheat has to say wheat
 	# rather than lean on whichever one happens to be the default.
 	Farming.select_seed(state, GameData.WHEAT)
-	var field := Farm.cells_of(state, Farm.Terrain.SOIL)
+	var field := Farming.field_cells(state)
 	expect(field.size() == 60, "there are sixty planting beds", str(field.size()))
 
 	var plot: Vector2i = field[0]
@@ -2823,7 +2823,7 @@ func _task_0018_wheat() -> void:
 	# The done-when of this task, and the reason a plot is plain data.
 	var overnight := State.create(72)
 	Farming.select_seed(overnight, GameData.WHEAT)
-	var bed: Vector2i = Farm.cells_of(overnight, Farm.Terrain.SOIL)[3]
+	var bed: Vector2i = Farming.field_cells(overnight)[3]
 	Interact.complete(overnight, bed, &"till")
 	Interact.complete(overnight, bed, &"plant")
 	Sim.advance(overnight, 300)
@@ -2848,7 +2848,7 @@ func _task_0018_wheat() -> void:
 
 	# No money, no seed, and no half-planted tile.
 	var broke := State.create(73)
-	var dirt: Vector2i = Farm.cells_of(broke, Farm.Terrain.SOIL)[0]
+	var dirt: Vector2i = Farming.field_cells(broke)[0]
 	Resources.spend(broke, GameData.MONEY,
 		Resources.amount(broke, GameData.MONEY))
 	Interact.complete(broke, dirt, &"till")
@@ -2861,7 +2861,7 @@ func _task_0018_wheat() -> void:
 	var farmed := State.create(74)
 	Farming.select_seed(farmed, GameData.WHEAT)
 	Resources.add(farmed, GameData.MONEY, 500)
-	for cell in Farm.cells_of(farmed, Farm.Terrain.SOIL):
+	for cell in Farming.field_cells(farmed):
 		Interact.complete(farmed, cell, &"till")
 		Interact.complete(farmed, cell, &"plant")
 	var counts := Farming.counts(farmed)
@@ -2872,14 +2872,14 @@ func _task_0018_wheat() -> void:
 		"and all of them come up together",
 		str(Farming.counts(farmed)))
 	var before_harvest := Resources.amount(farmed, GameData.WHEAT)
-	for cell in Farm.cells_of(farmed, Farm.Terrain.SOIL):
+	for cell in Farming.field_cells(farmed):
 		Interact.complete(farmed, cell, &"harvest")
 	expect(Resources.amount(farmed, GameData.WHEAT)
 		== before_harvest + 60 * int(data["yield"]),
 		"paying the whole field", str(Resources.amount(farmed, GameData.WHEAT)))
 
 	# You can walk across your own field, and a zombie will be able to too.
-	expect(Farm.walkable(farmed, Farm.cells_of(farmed, Farm.Terrain.SOIL)[10]),
+	expect(Farm.walkable(farmed, Farming.field_cells(farmed)[10]),
 		"a planted tile is still ground, not furniture")
 
 	_completed += 1     # last line: an abandoned group never gets here
@@ -3078,7 +3078,7 @@ func _task_0020_shop() -> void:
 	# opened the shop to think and came back to a dead field would learn to
 	# think somewhere else. The inventory of task 0036 is the other half of
 	# the distinction: a glance at your own pockets does not stop anything.
-	var plot: Vector2i = Farm.cells_of(state, Farm.Terrain.SOIL)[0]
+	var plot: Vector2i = Farming.field_cells(state)[0]
 	Interact.complete(state, plot, &"till")
 	Interact.complete(state, plot, &"plant")
 	var growth_before := int(Farming.plot(state, plot)["growth"])
@@ -3208,7 +3208,7 @@ func _task_0022_reality() -> void:
 	# checked rather than eyeballed.
 	var spot := SuiteKit.any_buildable(state)
 	Farm.place(state, spot, {"id": &"gun_tower", "hp": 60})
-	var tilled: Vector2i = Farm.cells_of(state, Farm.Terrain.SOIL)[0]
+	var tilled: Vector2i = Farming.field_cells(state)[0]
 	Interact.complete(state, tilled, &"till")
 	Interact.complete(state, tilled, &"plant")
 	var farm_by_day := State.hash_of({
@@ -4351,7 +4351,7 @@ func _task_0028_crops() -> void:
 
 ## A soil cell nobody has touched.
 func _a_plot(state: Dictionary) -> Vector2i:
-	for cell in Farm.cells_of(state, Farm.Terrain.SOIL):
+	for cell in Farming.field_cells(state):
 		if Farm.is_empty(state, cell) and not Farming.is_tilled(state, cell):
 			return cell
 	return Vector2i(-1, -1)
@@ -4449,7 +4449,7 @@ func _task_0029_watering() -> void:
 	var race := State.create(1103)
 	Resources.gain(race, {GameData.MONEY: 100})
 	Farming.select_seed(race, GameData.WHEAT)
-	var field := Farm.cells_of(race, Farm.Terrain.SOIL)
+	var field := Farming.field_cells(race)
 	var wet: Vector2i = field[0]
 	var dry: Vector2i = field[1]
 	for cell in [wet, dry]:
@@ -4504,7 +4504,7 @@ func _task_0029_watering() -> void:
 	var carrying := State.create(1105)
 	Resources.gain(carrying, {GameData.MONEY: 200})
 	carrying["water_can"] = GameData.WATER_CAN_CAPACITY
-	var row := Farm.cells_of(carrying, Farm.Terrain.SOIL)
+	var row := Farming.field_cells(carrying)
 	var watered := 0
 	for i in GameData.WATER_CAN_CAPACITY + 3:
 		var cell: Vector2i = row[i]
@@ -6372,7 +6372,7 @@ func _a_busy_day(seed_value: int, at_the_pond: bool) -> Dictionary:
 	# A field, sown and watered.
 	var seeds := Farming.seeds()
 	var sown := 0
-	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+	for found in Farming.field_cells(state):
 		var cell: Vector2i = found
 		if sown >= 9:
 			break
@@ -6404,7 +6404,7 @@ func _a_busy_day(seed_value: int, at_the_pond: bool) -> Dictionary:
 		stand.y * Player.SUBTILE + Player.SUBTILE / 2]
 
 	var grown_before := 0
-	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+	for found in Farming.field_cells(state):
 		grown_before += int(Farming.plot(state, found).get("growth", 0))
 
 	Sim.advance(state, 1)
@@ -6416,7 +6416,7 @@ func _a_busy_day(seed_value: int, at_the_pond: bool) -> Dictionary:
 		Sim.advance(state, 1)
 
 	var grown := 0
-	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+	for found in Farming.field_cells(state):
 		grown += int(Farming.plot(state, found).get("growth", 0))
 	var meat := 0
 	for found in Farm.cells_with(state, &"cow") + Farm.cells_with(state, &"chicken"):
@@ -6469,7 +6469,7 @@ func _a_full_farm(seed_value: int) -> Dictionary:
 	# Every soil tile planted.
 	var seeds := Farming.seeds()
 	var sown := 0
-	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+	for found in Farming.field_cells(state):
 		var cell: Vector2i = found
 		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
 		Farming.act(state, cell)
@@ -6526,7 +6526,7 @@ func _task_0039_clock() -> void:
 	# money, the wood and the planted crop are what they were at 02:00.
 	var stubborn := State.create(2101)
 	Resources.gain(stubborn, {GameData.WOOD: 100, GameData.MONEY: 100})
-	var plot: Vector2i = Farm.cells_of(stubborn, Farm.Terrain.SOIL)[0]
+	var plot: Vector2i = Farming.field_cells(stubborn)[0]
 	Farming.act(stubborn, plot)
 	Farming.act(stubborn, plot)
 
@@ -6579,7 +6579,7 @@ func _task_0039_clock() -> void:
 	# done-when, and it changed an assert of task 0020's that said the
 	# opposite - see the note in that group.
 	var shopping := State.create(2103)
-	var shop_plot: Vector2i = Farm.cells_of(shopping, Farm.Terrain.SOIL)[0]
+	var shop_plot: Vector2i = Farming.field_cells(shopping)[0]
 	Farming.act(shopping, shop_plot)
 	Farming.act(shopping, shop_plot)
 	Sim.advance(shopping, 30)
@@ -14510,8 +14510,9 @@ func _task_0082_shots() -> void:
 	# 0157: the winter build step's routes. Thirty-seven since 0158: the
 	# forecast at dusk, in the build step and on a calm night. Forty-one since
 	# 0159: three seasons at noon and a winter night. Forty-three since
-	# 0160: the year ending and its credits.
-	expect(names.size() == 43,
+	# 0160: the year ending and its credits. Forty-five since 0167:
+	# turned grass beside the starter beds in daylight and at night.
+	expect(names.size() == 45,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
@@ -14522,7 +14523,7 @@ func _task_0082_shots() -> void:
 			"boss_escaped", "calm_morning", "trampled", "north_band", "new_ore", "stump",
 			"winter_build", "forecast_dusk", "forecast_build", "forecast_calm",
 			"season_summer", "season_autumn", "season_winter", "season_winter_night",
-			"options_controls_pad", "year_end", "year_credits"]:
+			"options_controls_pad", "year_end", "year_credits", "till_grass", "till_grass_night"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

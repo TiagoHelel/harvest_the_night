@@ -449,8 +449,8 @@ static func cells_with(state: Dictionary, id: StringName) -> Array:
 	return out
 
 
-## Every cell of a given terrain, in index order. The field is
-## `cells_of(state, Farm.Terrain.SOIL)`; the pond is the WATER one.
+## Every cell of a given terrain, in index order. For farming ground use
+## `Farming.field_cells`: turned grass is a plot overlay, not SOIL terrain.
 static func cells_of(state: Dictionary, terrain: int) -> Array:
 	var out: Array = []
 	var bytes: PackedByteArray = state["terrain"]

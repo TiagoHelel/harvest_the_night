@@ -66,6 +66,8 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["till_grass", "tilled grass beside starter beds at noon", ""],
+	["till_grass_night", "the same expanded field at night", ""],
 	["noon", "the farm at noon", ""],
 	["dusk", "the same farm at dusk", ""],
 	["bedtime", "the same farm at 22:30, time for bed", ""],
@@ -196,6 +198,10 @@ func _initialize() -> void:
 	if wanted.is_empty():
 		for entry in SCENARIOS:
 			wanted.append(str(entry[0]))
+
+	# The expanded-field scenario is always reviewed in both lights.
+	if wanted.has("till_grass") and not wanted.has("till_grass_night"):
+		wanted.append("till_grass_night")
 
 	var folder := OUT + id + "/"
 	DirAccess.make_dir_recursive_absolute(
@@ -650,6 +656,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	main.get_node("%WorldView").cursor().follows_pointer = false
 
 	match name:
+		"till_grass": _set_till_grass(state)
+		"till_grass_night": _set_till_grass_night(state)
 		"noon": _set_noon(state)
 		"dusk": _set_dusk(state)
 		"bedtime": _set_bedtime(state)
@@ -1009,17 +1017,15 @@ func _a_sown_field(state: Dictionary) -> void:
 	var seeds := Farming.seeds()
 	var sown := 0
 	var middle := Vector2i.ZERO
-	for y in GameData.GRID_HEIGHT:
-		for x in GameData.GRID_WIDTH:
-			var cell := Vector2i(x, y)
-			if Interact.verb_at(state, cell) != &"till":
-				continue
-			Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
-			Interact.complete(state, cell, &"till")
-			Interact.complete(state, cell, &"plant")
-			Interact.complete(state, cell, &"water")
-			middle += cell
-			sown += 1
+	for cell in Farming.field_cells(state):
+		if Interact.verb_at(state, cell) != &"till":
+			continue
+		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
+		Interact.complete(state, cell, &"till")
+		Interact.complete(state, cell, &"plant")
+		Interact.complete(state, cell, &"water")
+		middle += cell
+		sown += 1
 	if sown > 0:
 		# **Stand at the near edge of the field.** The camera is thirty tiles
 		# wide and centres on the farmer, so from here one frame holds the
@@ -1574,3 +1580,38 @@ func _set_year_end(state: Dictionary) -> void:
 ## The same ending while the credits are still rolling.
 func _set_year_credits(state: Dictionary) -> void:
 	_set_year_end(state)
+
+
+## 0167 - the starter beds join a hoed lawn, with dry/wet earth and a notch.
+func _set_till_grass(state: Dictionary) -> void:
+	_till_grass_fixture(state, false)
+
+
+func _set_till_grass_night(state: Dictionary) -> void:
+	_till_grass_fixture(state, true)
+
+
+func _till_grass_fixture(state: Dictionary, night: bool) -> void:
+	_on_date(state, 2)
+	Resources.gain(state, {GameData.MONEY: 999})
+	state["water_can"] = Farming.can_capacity(state)
+	for y in range(20, 24):
+		for x in range(30, 37):
+			var cell := Vector2i(x, y)
+			if cell in [Vector2i(36, 20), Vector2i(35, 23)] or not Farm.is_empty(state, cell):
+				continue
+			if Farming.verb_at(state, cell) != &"till":
+				continue
+			Farming.act(state, cell)
+			if (x + y) % 3 == 0:
+				Farming.select_seed(state, &"carrot" if x % 2 else &"wheat")
+				Farming.act(state, cell)
+				Farming.act(state, cell)
+				Farming.plot(state, cell)["growth"] = (x + y) % (Farming.days_to_grow(Farming.crop_on(state, cell)) + 1)
+	_look_at(Vector2i(35, 21))
+	# A fixture starts beside the new plots, beyond the well on the walk in.
+	_stand(state, _standing_at)
+	state["day_tick"] = Phases.tick_at_minute(WorldView.NOON_MINUTE)
+	if night:
+		NightRoad.to_night(state)
+		NightRoad.park(state)

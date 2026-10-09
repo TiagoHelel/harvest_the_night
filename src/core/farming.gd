@@ -22,7 +22,7 @@ extends RefCounted
 ##
 ## ## One verb, four meanings
 ##
-## `Interact` asks this file what a soil tile offers and gets back `till`,
+## `Interact` asks this file what a field tile offers and gets back `till`,
 ## `plant`, `harvest` or nothing, so the highlight and the tooltip can say what
 ## the key will actually do rather than "farm".
 
@@ -133,6 +133,27 @@ static func is_tilled(state: Dictionary, cell: Vector2i) -> bool:
 	return not plot(state, cell).is_empty()
 
 
+## Starter soil beds and turned grass, in cell-index order. Terrain stays
+## untouched: a plot is an overlay, including its original walking cost.
+static func field_cells(state: Dictionary) -> Array:
+	var cells := Farm.cells_of(state, Farm.Terrain.SOIL)
+	var keys: Array = (state["plots"] as Dictionary).keys()
+	keys.sort()
+	var grass: Array = []
+	var terrain: PackedByteArray = state["terrain"]
+	for idx in keys:
+		if int(terrain[int(idx)]) == Farm.Terrain.GRASS:
+			grass.append(Grid.cell(int(idx)))
+	# The normal starter field already has its final order. Avoid re-sorting
+	# it on every tutorial check when there is no grass to merge.
+	if grass.is_empty():
+		return cells
+	cells.append_array(grass)
+	cells.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
+		return Grid.index(a) < Grid.index(b))
+	return cells
+
+
 static func crop_on(state: Dictionary, cell: Vector2i) -> StringName:
 	return plot(state, cell).get("crop", &"")
 
@@ -217,12 +238,13 @@ static func is_ready(state: Dictionary, cell: Vector2i) -> bool:
 ## "harvest" rather than "farm" and the player is never told a key does
 ## something it does not.
 static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
-	if Farm.terrain_at(state, cell) != Farm.Terrain.SOIL:
+	if not Grid.in_bounds(cell):
 		return &""
 	if not Farm.is_empty(state, cell):
 		return &""              # somebody built on the field; that is their call
 	if not is_tilled(state, cell):
-		return &"till"
+		var terrain := Farm.terrain_at(state, cell)
+		return &"till" if terrain in [Farm.Terrain.GRASS, Farm.Terrain.SOIL] else &""
 	if crop_on(state, cell) == &"":
 		return &"plant"
 	if is_ready(state, cell):
@@ -252,6 +274,14 @@ static func act(state: Dictionary, cell: Vector2i) -> void:
 
 static func _till(state: Dictionary, cell: Vector2i) -> void:
 	(state["plots"] as Dictionary)[Grid.index(cell)] = EMPTY_PLOT.duplicate()
+	_worked(state, cell)
+
+
+## Only grass needs an age. `day` counts real mornings even on a held boss
+## date; legacy saved grass plots acquire the field at their first morning.
+static func _worked(state: Dictionary, cell: Vector2i) -> void:
+	if Farm.terrain_at(state, cell) == Farm.Terrain.GRASS:
+		plot(state, cell)["last_worked_morning"] = int(state["day"])
 
 
 ## Put the chosen seed in the ground, and pay for it.
@@ -270,6 +300,7 @@ static func _plant(state: Dictionary, cell: Vector2i) -> void:
 	here["growth"] = 0
 	# Something planted where a crop was trampled (task 0155): the mark goes.
 	here.erase("trampled")
+	_worked(state, cell)
 
 
 ## **The horde walked through it** (task 0155): every crop on these cells is
@@ -292,6 +323,7 @@ static func trample(state: Dictionary, cells: Array) -> int:
 		here["growth"] = 0
 		here.erase("morning_credit")
 		here["trampled"] = crop
+		_worked(state, Grid.cell(idx))
 		lost += 1
 	return lost
 
@@ -307,6 +339,7 @@ static func _water(state: Dictionary, cell: Vector2i) -> void:
 		return
 	here["watered"] = true
 	state["water_can"] = int(state["water_can"]) - 1
+	_worked(state, cell)
 
 
 ## Record planted, watered plots for tomorrow before drying the field.
@@ -333,6 +366,7 @@ static func _harvest(state: Dictionary, cell: Vector2i) -> void:
 	here["growth"] = 0
 	here["watered"] = false
 	here.erase("morning_credit")
+	_worked(state, cell)
 
 
 ## Credit yesterday's watering once, even when a boss holds the calendar.
@@ -343,6 +377,12 @@ static func morning(state: Dictionary) -> void:
 	keys.sort()
 	for idx in keys:
 		var here: Dictionary = plots[idx]
+		if Farm.terrain_at(state, Grid.cell(int(idx))) == Farm.Terrain.GRASS:
+			var last := int(here.get("last_worked_morning", state["day"]))
+			here["last_worked_morning"] = last
+			if here["crop"] == &"" and int(state["day"]) - last >= GameData.TILLED_GRASS_FADES_DAYS:
+				plots.erase(idx)
+				continue
 		var credit := bool(here.get("morning_credit", false))
 		here.erase("morning_credit")
 		var crop: StringName = here["crop"]

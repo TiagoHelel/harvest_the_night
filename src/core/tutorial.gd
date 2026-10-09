@@ -139,7 +139,7 @@ static func _target_for(state: Dictionary, id: StringName) -> Vector2i:
 			return _nearest(state, Farm.cells_with(state, &"tree"))
 		&"plant":
 			var bare: Array = []
-			for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+			for found in Farming.field_cells(state):
 				var cell: Vector2i = found
 				if Farm.is_empty(state, cell) \
 						and Farming.crop_on(state, cell) == &"":
@@ -263,7 +263,7 @@ static func _happened(state: Dictionary, id: StringName) -> bool:
 			return Resources.amount(state, GameData.WOOD) \
 				> int(GameData.STARTING_RESOURCES.get(GameData.WOOD, 0))
 		&"plant":
-			for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+			for found in Farming.field_cells(state):
 				if Farming.crop_on(state, found) != &"":
 					return true
 			return false
@@ -274,7 +274,7 @@ static func _happened(state: Dictionary, id: StringName) -> bool:
 			# on anything yet.
 			if Farming.water_carried(state) > 0:
 				return true
-			for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+			for found in Farming.field_cells(state):
 				if Farming.is_watered(state, found):
 					return true
 			return false

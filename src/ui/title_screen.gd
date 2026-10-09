@@ -196,16 +196,14 @@ func _begin_backdrop() -> void:
 	# nothing about what the days are for.
 	var seeds := Farming.seeds()
 	var sown := 0
-	for y in GameData.GRID_HEIGHT:
-		for x in GameData.GRID_WIDTH:
-			var cell := Vector2i(x, y)
-			if Interact.verb_at(_state, cell) != &"till":
-				continue
-			Farming.select_seed(_state, StringName(seeds[sown % seeds.size()]))
-			Interact.complete(_state, cell, &"till")
-			Interact.complete(_state, cell, &"plant")
-			Interact.complete(_state, cell, &"water")
-			sown += 1
+	for cell in Farming.field_cells(_state):
+		if Interact.verb_at(_state, cell) != &"till":
+			continue
+		Farming.select_seed(_state, StringName(seeds[sown % seeds.size()]))
+		Interact.complete(_state, cell, &"till")
+		Interact.complete(_state, cell, &"plant")
+		Interact.complete(_state, cell, &"water")
+		sown += 1
 	# **Shortly before 02:00** (task 0128): the backdrop does not send for the
 	# night - the farmer passes out, as anyone up that late does, and the
 	# short build step and the night follow by themselves.

@@ -1775,12 +1775,64 @@ func _refresh_plots() -> void:
 			_season.season() if _season != null else 0)
 		_plot_sprite(earth if SeasonView.stand_in(seasonal) else seasonal.get_file(), cell)
 
+		if Farm.terrain_at(_state, cell) == Farm.Terrain.GRASS:
+			var edges := tilled_edge_mask(_state, cell)
+			var corners := tilled_corner_mask(_state, cell)
+			for bit in 4:
+				if edges & (1 << bit):
+					_plot_edge_sprite("tilled_edge_n", cell, bit)
+				if corners & (1 << bit):
+					_plot_edge_sprite("tilled_edge_corner_nw", cell, bit)
+
 		var crop: StringName = here["crop"]
 		if crop != &"":
 			_plot_sprite("%s_%d" % [crop, Farming.stage(_state, cell)],
 				cell)
 		elif here.has("trampled"):
 			_trampled_sprite(StringName(here["trampled"]), cell)
+
+
+## Turf overlays use N1/E2/S4/W8 and the terrain's concave corner scheme.
+## Neighbouring starter beds and plots join without an internal grass seam.
+static func tilled_edge_mask(state: Dictionary, cell: Vector2i) -> int:
+	var mask := 0
+	for bit in 4:
+		if _untilled_grass(state, cell + EDGE_NEIGHBOURS[bit]):
+			mask |= 1 << bit
+	return mask
+
+
+static func tilled_corner_mask(state: Dictionary, cell: Vector2i) -> int:
+	var mask := 0
+	var edges := tilled_edge_mask(state, cell)
+	for bit in 4:
+		if not (edges & CORNER_CARDINALS[bit]) \
+				and _untilled_grass(state, cell + CORNER_NEIGHBOURS[bit]):
+			mask |= 1 << bit
+	return mask
+
+
+static func _untilled_grass(state: Dictionary, cell: Vector2i) -> bool:
+	return Grid.in_bounds(cell) and Farm.terrain_at(state, cell) == Farm.Terrain.GRASS \
+		and not Farming.is_tilled(state, cell)
+
+
+## Rotate the north/NW canvas about the tile's centre. This preserves the
+## final 16x16 canvas and (8,16) ground pivot for all four orientations.
+func _plot_edge_sprite(art: String, cell: Vector2i, quarter_turns: int) -> void:
+	var texture: Texture2D = load(PlaceholderArt.texture_path(CROP_DIR + art + ".png"))
+	if texture == null:
+		return
+	var sprite := Sprite2D.new()
+	sprite.texture = texture
+	sprite.position = Vector2(cell) * GameData.TILE_SIZE + Vector2.ONE * GameData.TILE_SIZE / 2.0
+	sprite.rotation = quarter_turns * PI / 2.0
+	if _season != null:
+		sprite.material = _season.ground
+	sprite.set_meta("plot_cell", Grid.index(cell))
+	sprite.set_meta("plot_art", art)
+	_plots.add_child(sprite)
+	_plot_sprites.append(sprite)
 
 
 ## **A crop the horde walked through** (task 0155). A014 draws it; until the

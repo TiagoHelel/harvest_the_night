@@ -566,12 +566,24 @@ static func _work_the_field(state: Dictionary) -> int:
 	return 0
 
 
-## The soil, in a fixed order. Cached on the state because the field does not
-## move and finding it walks the whole farm.
+## The field, in a fixed order. Cache the starter beds to avoid scanning the
+## terrain every action; turned grass follows the current plots.
 static func _the_field(state: Dictionary) -> Array:
 	if not state.has("autoplay_field"):
-		state["autoplay_field"] = Farm.cells_of(state, Farm.Terrain.SOIL)
-	return state["autoplay_field"]
+		state["autoplay_field"] = Farming.field_cells(state)
+	var cells: Array = []
+	for cell in state["autoplay_field"]:
+		if Farm.terrain_at(state, cell) == Farm.Terrain.SOIL:
+			cells.append(cell)
+	var keys: Array = (state["plots"] as Dictionary).keys()
+	keys.sort()
+	for idx in keys:
+		var cell := Grid.cell(int(idx))
+		if Farm.terrain_at(state, cell) == Farm.Terrain.GRASS:
+			cells.append(cell)
+	cells.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
+		return Grid.index(a) < Grid.index(b))
+	return cells
 
 
 ## Occupant cells in a fixed order, so two runs of a seed upgrade the same

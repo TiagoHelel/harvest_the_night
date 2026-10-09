@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 35
+const GROUPS := 36
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -104,6 +104,7 @@ func _run() -> void:
 	_task_0160_year_end()
 	_task_0165_days()
 	_task_0166_long_day()
+	_task_0167_till_grass()
 
 
 func _finish() -> void:
@@ -1901,7 +1902,7 @@ func _first_day_and_night(farm: Dictionary, part: int) -> void:
 	if part == 0:
 		Resources.gain(farm, {GameData.WOOD: 5})
 		Sim.advance(farm, beat)
-		var plot: Vector2i = Farm.cells_of(farm, Farm.Terrain.SOIL)[0]
+		var plot: Vector2i = Farming.field_cells(farm)[0]
 		Farming.act(farm, plot)
 		Farming.act(farm, plot)
 		Sim.advance(farm, beat)
@@ -3135,7 +3136,7 @@ func _task_0160_year_end() -> void:
 ## 0165 - watered mornings, missed chores, held dates and old saves.
 func _task_0165_days() -> void:
 	var state := State.create(1650)
-	var cells := Farm.cells_of(state, Farm.Terrain.SOIL)
+	var cells := Farming.field_cells(state)
 	for cell in [cells[0], cells[1]]:
 		Farming.act(state, cell)
 		Farming.act(state, cell)
@@ -3170,7 +3171,7 @@ func _task_0165_days() -> void:
 
 	for collapse in [false, true]:
 		var overnight := State.create(1651)
-		var cell: Vector2i = Farm.cells_of(overnight, Farm.Terrain.SOIL)[0]
+		var cell: Vector2i = Farming.field_cells(overnight)[0]
 		Farming.act(overnight, cell)
 		Farming.act(overnight, cell)
 		overnight["water_can"] = 1
@@ -3280,4 +3281,124 @@ func _task_0166_long_day() -> void:
 	state["day_tick"] = 4200
 	expect(Phases.clock_minute(state) == 11 * 60 and State.VERSION == 7,
 		"a saved 4200 ticks now reads 11:00; ticks and save version retain their meaning")
+	_completed += 1
+
+
+## 0167 - plots are overlays; only idle empty grass returns to lawn.
+func _task_0167_till_grass() -> void:
+	var state := State.create(1670)
+	var beds := Farm.cells_of(state, Farm.Terrain.SOIL)
+	expect(Farming.field_cells(state) == beds, "untouched field preserves the starter-bed order")
+	var cell := Vector2i(35, 20)
+	expect(Farm.terrain_at(state, cell) == Farm.Terrain.GRASS and Farm.is_empty(state, cell),
+		"the grass fixture is an empty lawn")
+	Pathing.refresh(state)
+	var version := int(state["grid_version"])
+	var flow := int(state["flow_version"])
+	var cost := Pathing.entry_cost(state, cell)
+	var bytes: PackedByteArray = state["terrain"].duplicate()
+	expect(Interact.verb_at(state, cell) == &"till", "bare grass offers the hoe")
+	Farming.act(state, cell)
+	Pathing.refresh(state)
+	expect(Farming.is_tilled(state, cell) and state["terrain"] == bytes,
+		"the hoe makes a plot without changing any terrain byte")
+	expect(int(state["grid_version"]) == version and int(state["flow_version"]) == flow
+		and Pathing.entry_cost(state, cell) == cost, "hoeing preserves grass cost and cached flow fields")
+	var fields := Farming.field_cells(state)
+	expect(fields.size() == beds.size() + 1 and fields.has(cell), "turned grass joins the field")
+	for i in range(1, fields.size()):
+		expect(Grid.index(fields[i - 1]) < Grid.index(fields[i]), "field cells remain in index order")
+	Farming.act(state, beds[0])
+	expect(Farming.plot(state, beds[0]) == Farming.EMPTY_PLOT,
+		"soil keeps its old plot shape without a fade-age field")
+	var planted := cell + Vector2i.RIGHT
+	Farming.act(state, planted)
+	Farming.act(state, planted)
+	expect(Farming.crop_on(state, planted) != &"", "grass can be planted")
+	var dawn := int(state["day"])
+	for morning in range(1, GameData.TILLED_GRASS_FADES_DAYS + 1):
+		state["day"] = dawn + morning
+		Farming.morning(state)
+		expect(Farming.is_tilled(state, cell) == (morning < GameData.TILLED_GRASS_FADES_DAYS),
+			"empty lawn expires exactly at morning %d" % morning)
+		expect(Farming.is_tilled(state, planted) and Farming.is_tilled(state, beds[0]),
+			"planted grass and starter soil never fade")
+	expect(not Farming.field_cells(state).has(cell), "faded grass leaves the field")
+	# A legacy grass plot gets its missing age once, not a fresh age every dawn.
+	Farming.act(state, cell)
+	Farming.plot(state, cell).erase("last_worked_morning")
+	Farming.morning(state)
+	var legacy := int(state["day"])
+	Farming.morning(state)
+	expect(int(Farming.plot(state, cell)["last_worked_morning"]) == legacy,
+		"a repeated morning and legacy default do not renew empty grass")
+	state["day"] = legacy + GameData.TILLED_GRASS_FADES_DAYS
+	Farming.morning(state)
+	expect(not Farming.is_tilled(state, cell), "legacy grass fades from its first loaded morning")
+	# Working a long-lived crop renews the eventual empty ground's age.
+	state["water_can"] = 1
+	Farming.act(state, planted)
+	expect(Farming.is_watered(state, planted)
+		and int(Farming.plot(state, planted)["last_worked_morning"]) == int(state["day"]),
+		"successful watering records the real morning")
+	Farming.plot(state, planted)["growth"] = Farming.days_to_grow(Farming.crop_on(state, planted))
+	state["day"] = int(state["day"]) + 1
+	Farming.act(state, planted)
+	expect(Farming.crop_on(state, planted) == &""
+		and int(Farming.plot(state, planted)["last_worked_morning"]) == int(state["day"]),
+		"harvesting restarts the empty plot's fade age")
+	state["day"] = int(state["day"]) + GameData.TILLED_GRASS_FADES_DAYS - 1
+	Farming.morning(state)
+	expect(Farming.is_tilled(state, planted), "a recently harvested plot gets the full grace period")
+	Farming.act(state, planted)
+	state["day"] = int(state["day"]) + 10
+	Farming.trample(state, [planted])
+	expect(int(Farming.plot(state, planted)["last_worked_morning"]) == int(state["day"]),
+		"trampled grass gets time to be replanted after the loss")
+	for terrain in [Farm.Terrain.PATH, Farm.Terrain.FLOOR, Farm.Terrain.WATER, Farm.Terrain.ROCK]:
+		state["terrain"][Grid.index(cell)] = terrain
+		Farming.act(state, cell)
+		expect(not Farming.is_tilled(state, cell) and Farming.verb_at(state, cell) == &"",
+			"terrain %d refuses the hoe" % terrain)
+	state["terrain"][Grid.index(cell)] = Farm.Terrain.GRASS
+	state["occupants"][Grid.index(cell)] = {"id": &"tree"}
+	expect(Farming.verb_at(state, cell) == &"", "occupied grass refuses farming")
+	state["occupants"].erase(Grid.index(cell))
+	# Faced-only hoe, including the off-farm boundary; existing plots retain fallback.
+	var who: Dictionary = state["player"]
+	who["pos"] = [cell.x * Player.SUBTILE + Player.SUBTILE / 2,
+		cell.y * Player.SUBTILE + Player.SUBTILE / 2]
+	who["facing"] = Player.NORTH
+	var ahead := cell + Vector2i.UP
+	state["terrain"][Grid.index(ahead)] = Farm.Terrain.PATH
+	expect(Player.target(state) == ahead and Interact.verb_at(state, Player.target(state)) == &"",
+		"facing a path never hoes the grass underfoot")
+	Farming.act(state, cell)
+	expect(Player.target(state) == cell, "a turned grass plot retains underfoot planting")
+	state["terrain"][Grid.index(cell)] = Farm.Terrain.PATH
+	expect(Interact.verb_at(state, cell) == &"plant", "an existing plot works regardless of its terrain")
+	who["pos"] = [Player.SUBTILE / 2, Player.SUBTILE / 2]
+	state["terrain"][0] = Farm.Terrain.GRASS
+	state["occupants"].erase(0)
+	expect(Player.target(state) == Vector2i(0, -1), "the farm edge also refuses the bare-lawn fallback")
+	# All side masks and a concave corner use today's terrain geometry.
+	var border := State.create(1671)
+	var middle := Vector2i(35, 20)
+	for at in Grid.within(middle, 1):
+		border["terrain"][Grid.index(at)] = Farm.Terrain.GRASS
+		border["occupants"].erase(Grid.index(at))
+	for mask in 16:
+		border["plots"].clear()
+		Farming.act(border, middle)
+		for bit in 4:
+			if not (mask & (1 << bit)):
+				Farming.act(border, middle + Grid.STEPS[bit])
+		expect(WorldView.tilled_edge_mask(border, middle) == mask, "turf side mask %d" % mask)
+	border["plots"].clear()
+	for at in Grid.within(middle, 1):
+		if at != middle + Vector2i(-1, -1):
+			Farming.act(border, at)
+	expect(WorldView.tilled_corner_mask(border, middle) == 1, "a concave NW diagonal takes its corner cap")
+	border["terrain"][Grid.index(middle + Vector2i(-1, -1))] = Farm.Terrain.SOIL
+	expect(WorldView.tilled_corner_mask(border, middle) == 0, "starter soil joins without a turf seam")
 	_completed += 1

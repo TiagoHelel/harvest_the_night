@@ -151,7 +151,7 @@ func _set_the_farm_going(state: Dictionary) -> void:
 	# watering of task 0029 all have something to work on.
 	var seeds := Farming.seeds()
 	var sown := 0
-	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+	for found in Farming.field_cells(state):
 		var cell: Vector2i = found
 		if sown >= 9:
 			break
@@ -162,7 +162,7 @@ func _set_the_farm_going(state: Dictionary) -> void:
 	# Half of them watered, so yesterday's watering is represented in the hash too.
 	state["water_can"] = GameData.WATER_CAN_CAPACITY
 	var watered := 0
-	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+	for found in Farming.field_cells(state):
 		var cell: Vector2i = found
 		if watered >= 4:
 			break

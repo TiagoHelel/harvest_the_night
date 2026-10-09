@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **153 / 296 done**
+`############............`  **154 / 296 done**
 
-0 doing / 143 todo / 0 blocked across 18 phases.
+0 doing / 142 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-143 task(s) left, the ready ones first, then what they
+142 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,25 +242,6 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0167 - Any grass can be tilled
-
-Ready to pick up.  Likely files: `src/core/farming.gd, src/core/interact.gd, src/core/game_data.gd, src/core/tutorial.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/house_check.gd, src/tools/shot.gd, src/core/player.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/A014-crop-ground.md`.
-
-Any grass can be tilled, as in Stardew, so the 60 beds become the starter garden rather than the whole of farming - and ground becomes a choice between field and fortress (plan section 5: space has two uses).
-
-- `Interact._offered` sends GRASS as well as SOIL to `Farming.verb_at`, which offers `till` on bare grass and works on any plot whatever the ground under it. **The terrain byte never changes**: `world_view` draws terrain once, so tilled grass is a plot over grass, drawn by `_refresh_plots`
-- Only bare grass and soil take the hoe; path, floor, water, rock and any occupied cell offer nothing. A lawn that offers `till` everywhere changes `Player.target`, whose fallback is the cell he stands on: standing on grass and facing nothing would till under his feet, and every press on open ground now does something. Decide (e.g. grass offers `till` only as the faced cell, never as the fallback), assert it, and grep the input cases that press interact on open grass
-- Untended ground goes back: an empty tilled plot on grass left for `TILLED_GRASS_FADES_DAYS` mornings (`# LEVER`, 1-7) returns to grass in `Farming.morning`; soil beds never fade. The plot remembers the morning it was last worked (plots are `RUN_DATA`: read the new field with a default, reconcile never fills it)
-- Path cost: decide whether tilled grass costs like SOIL in the flow field. Recommended: it keeps the grass cost, because a field that changed the route on every hoe stroke would call `Farm.touch` and rebuild every field (`path_refresh` ~7.9 ms). The journal says which and why
-- Add `Farming.field_cells(state)` (soil beds plus tilled grass, index order) and move every user that means 'the field' off `Farm.cells_of(SOIL)`: `tutorial.gd` (three sites), `autoplay.gd`, `determinism.gd`, `make_goldens.gd`, `perf_check.gd`, `house_check.gd` and the headless/input helpers. With no grass tilled it returns exactly today's cells, so that alone moves no hash
-- Edges of tilled grass: decide the scheme (N1/E2/S4/W8 masks like the barriers, or a plain border) and draw it through the placeholder road with today's `tilled`/`tilled_wet` sprites until A014 is integrated by 0197
-- DATA moves (the lever goes into `digest()`, and `validate()` holds it to 1-7). SIM moves only if the scenario's soil plots change shape: write the new plot field only on tilled grass (soil beds never fade) and it stays - say which
-
-  - done when: `_task_0167_till_grass` in `src/tools/headless_v1.gd` (mornings by `Farming.morning`, never a day of ticks): the hoe on grass makes a plot and leaves the terrain byte alone; an empty tilled grass plot is gone after the fade mornings and a planted one is not; a path cell refuses the hoe
-  - done when: `_case_0167_till_grass` in `src/tools/input_v1.gd`: the farmer walks onto open grass, holds interact, and a plot appears
-  - done when: A new `till_grass` scenario: `python tools/shot.py 0167 till_grass --fhd` shows tilled grass beside the beds by day and by night; opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A014-crop-ground.md` states the final geometry this task settled (edge masks, canvas, pivot), and the pack's text names 0171, not 0170, as the owner of the withered crop
-
 ### 0168 - Nine new crops
 
 Ready to pick up.  Likely files: `src/core/game_data.gd, src/ui/names.gd, assets/locale/strings.csv, src/ui/day_hud.gd, src/ui/shop_panel.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
@@ -430,7 +411,7 @@ Strawberry, corn, pepper and grape grow back after picking, so planting them ear
 
 ### 0174 - The can and the hoe by tier
 
-Waits on 0173, 0167.  Likely files: `src/core/farming.gd, src/core/player.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0173.  Likely files: `src/core/farming.gd, src/core/player.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The can and the hoe earn their tiers: one tile, then three, then five at a stroke, which turns watering a big field from a chore into a walk.
 
@@ -482,7 +463,7 @@ A bite opens a simple timing bar: a marker runs, and you press as it crosses the
 
 ### 0181 - Rods and bait
 
-Waits on 0179, 0173, 0167.  Likely files: `src/core/fishing.gd, src/core/farming.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0179, 0173.  Likely files: `src/core/fishing.gd, src/core/farming.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The rod's tiers change what bites: fibre brings bites sooner and rare fish more often, iron adds a bait slot and is the only rod a legendary takes.
 
@@ -1013,7 +994,7 @@ The kitchen cooks the new harvest - potato, egg, milk and bread - into the food 
 
 ### 0197 - Art: trampled crops and tilled ground
 
-Waits on 0167, 0171.  Likely files: `assets/art_source/crops/, assets/art_source/manifest.json, tools/check_crop_art.py, src/ui/world_view.gd`.
+Waits on 0171.  Likely files: `assets/art_source/crops/, assets/art_source/manifest.json, tools/check_crop_art.py, src/ui/world_view.gd`.
 
 The trampled crop of 0155, the withered crop of 0171 and the tilled-grass edges of 0167 get their approved art in place of their stand-ins.
 
@@ -2839,25 +2820,25 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (2/53)
+## 12 - The day that pays  (3/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
-- [ ] **0167** [Any grass can be tilled](prompts/0167-till-grass.md)
+- [x] **0167** [Any grass can be tilled](prompts/0167-till-grass.md)
 - [ ] **0168** [Nine new crops](prompts/0168-crop-data.md)
 - [ ] **0169** [An inventory for many things](prompts/0169-inventory.md) - needs 0168
 - [ ] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md) - needs 0168, 0169
 - [ ] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md) - needs 0170
 - [ ] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md) - needs 0168
 - [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md)
-- [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md) - needs 0173, 0167
+- [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md) - needs 0173
 - [ ] **0175** [The axe and the pickaxe by tier](prompts/0175-axe-pickaxe.md) - needs 0173
 - [ ] **0176** [Copper, coal and gold](prompts/0176-copper-coal-gold.md) - needs 0175
 - [ ] **0177** [Hardwood](prompts/0177-hardwood.md) - needs 0175
 - [ ] **0178** [Sprinklers](prompts/0178-sprinklers.md) - needs 0176
 - [ ] **0179** [Fish by pond, season and hour](prompts/0179-fish-species.md)
 - [ ] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md) - needs 0179, 0173
-- [ ] **0181** [Rods and bait](prompts/0181-rods-bait.md) - needs 0179, 0173, 0167
+- [ ] **0181** [Rods and bait](prompts/0181-rods-bait.md) - needs 0179, 0173
 - [ ] **0182** [Legendary fish and the fish book](prompts/0182-legendary-book.md) - needs 0181
 - [ ] **0183** [The coop and the barn](prompts/0183-coop-barn.md)
 - [ ] **0184** [Feeding, eggs and milk](prompts/0184-feeding-products.md) - needs 0183, 0168
@@ -2873,7 +2854,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0171, 0172, 0174, 0177, 0178, 0180, 0182, 0186, 0191
 - [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md) - needs 0194
 - [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0194, 0195
-- [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - needs 0167, 0171 - waits for art A014
+- [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - needs 0171 - waits for art A014
 - [ ] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md) - needs 0170, 0172 - waits for art A015
 - [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - needs 0170, 0172 - waits for art A016
 - [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md) - needs 0170, 0172 - waits for art A017

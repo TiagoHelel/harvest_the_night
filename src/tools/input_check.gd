@@ -1673,7 +1673,7 @@ func _case_0028_seeds() -> void:
 
 ## A soil cell with a free tile above it to stand on.
 func _reachable_plot(state: Dictionary) -> Vector2i:
-	for cell in Farm.cells_of(state, Farm.Terrain.SOIL):
+	for cell in Farming.field_cells(state):
 		if not Farm.is_empty(state, cell) or Farming.is_tilled(state, cell):
 			continue
 		if Farm.walkable(state, cell + Vector2i(0, -1)):
@@ -1801,14 +1801,15 @@ func _stand_at(state: Dictionary, cell: Vector2i,
 ## the west end to start the walk from.
 func _a_planted_row(state: Dictionary, count: int) -> Array:
 	Resources.gain(state, {GameData.MONEY: 100})
-	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+	var field := Farming.field_cells(state)
+	for found in field:
 		var cell: Vector2i = found
 		if not Farm.walkable(state, cell + Vector2i(-1, 0)):
 			continue
 		var run: Array = []
 		for i in count:
 			var at := cell + Vector2i(i, 0)
-			if Farm.terrain_at(state, at) != Farm.Terrain.SOIL \
+			if not field.has(at) \
 					or not Farm.is_empty(state, at):
 				break
 			run.append(at)

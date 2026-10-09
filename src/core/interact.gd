@@ -129,7 +129,7 @@ static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 			return Livestock.verb_at(state, cell)
 		return OCCUPANT_VERBS.get(on["id"], &"")
 	var terrain := Farm.terrain_at(state, cell)
-	if terrain == Farm.Terrain.SOIL:
+	if terrain in [Farm.Terrain.GRASS, Farm.Terrain.SOIL] or Farming.is_tilled(state, cell):
 		return Farming.verb_at(state, cell)
 	if terrain == Farm.Terrain.WATER:
 		return Fishing.verb_at(state, cell)

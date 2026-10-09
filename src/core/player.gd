@@ -144,9 +144,13 @@ static func target(state: Dictionary) -> Vector2i:
 	var ahead: Vector2i = here + FACING_STEPS[facing(state)]
 	if Grid.in_bounds(ahead) and Interact.verb_at(state, ahead) != &"":
 		return ahead
-	if Interact.verb_at(state, here) != &"":
+	var underfoot := Interact.verb_at(state, here)
+	# Bare lawn takes the hoe only in front. Existing plots keep the useful
+	# underfoot plant/water/harvest fallback, including at the farm boundary.
+	if underfoot != &"" and not (underfoot == &"till"
+			and Farm.terrain_at(state, here) == Farm.Terrain.GRASS):
 		return here
-	return ahead if Grid.in_bounds(ahead) else here
+	return ahead
 
 
 static func is_busy(state: Dictionary) -> bool:
