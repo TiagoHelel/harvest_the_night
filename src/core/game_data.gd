@@ -284,23 +284,15 @@ const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
 ##
 ## ## Money, attention, capital - pick two
 ##
-## Per plot across a 240 second day, with the seed paid for:
+## Per plot across a fourteen-day season, with the seed paid for:
 ##
-##     carrot  60s   seed $1   net  5  x 4 harvests  = 20     four visits
-##     wheat   90s   seed $2   net  6  x 2 harvests  = 12     two visits
-##     corn   180s   seed $4   net 11  x 1 harvest   = 11     one visit
+##     carrot   3d   seed $1   net  5  x 4 harvests  = 20
+##     wheat    4d   seed $2   net  6  x 3 harvests  = 18
+##     corn     8d   seed $4   net 11  x 1 harvest   = 11
 ##
-## Carrot pays the most and costs the least to start - and wants you standing in
-## the field all day. Corn pays the least and asks for one visit and four
-## dollars, so it is what you plant before going down the mine. Wheat is neither
-## and beats each of them at something: more money than corn, half the walking
-## of carrot.
-##
-## **No crop is better than another on money, visits and seed cost at once** -
-## `check_crops()` enforces that, so a later balance pass cannot quietly flatten
-## the choice. Before this was tuned it was flat: wheat paid 10 a day to
-## carrot's 8 for half the walking and a cheaper seed, which is not a choice,
-## it is a trap.
+## Water every day to earn these harvests. Missing a watering delays the crop
+## without destroying it. No crop wins on money, harvest visits and seed cost
+## at once; `check_crops()` preserves that choice.
 ##
 ## The **seed costs** are what carry the balance; the sale prices are
 ## `design.md` section 6 and stay where the document put them.
@@ -313,38 +305,23 @@ const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
 const CROPS: Dictionary = {
 	WHEAT: {
 		"seed_cost": 2,                 # LEVER: money, 1-8
-		"growth_ticks": 90 * SECONDS,   # LEVER: ticks, 30-180 seconds worth
+		"growth_days": 4,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,
 	},
 	CORN: {
 		"seed_cost": 4,                 # LEVER: money, 1-10
-		"growth_ticks": 180 * SECONDS,  # LEVER: ticks, 90-300 seconds worth
+		"growth_days": 8,              # LEVER: watered mornings, 1-14
 		"yield": 3,                     # LEVER: units per harvest, 2-5
 		"stages": 4,
 	},
 	CARROT: {
 		"seed_cost": 1,                 # LEVER: money, 1-8
-		"growth_ticks": 60 * SECONDS,   # LEVER: ticks, 30-120 seconds worth
+		"growth_days": 3,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,
 	},
 }
-
-## How much faster a watered tile grows, and how long the watering lasts.
-##
-## Unwatered is slower, never dead: this is a cozy game and a missed chore is
-## not a punishment. Thirty-five percent brings carrot in at forty-four seconds
-## instead of sixty - far enough apart to see across a field, not so far that
-## forgetting ruins a day.
-##
-## **A percentage, not a fraction.** This was `0.35` from the day the table was
-## laid out, and nothing ever read it. A float in `src/core/` is a desync
-## waiting for a machine that rounds differently, so it became an integer the
-## moment something needed it: `Farming.tick()` banks it in hundredths of a
-## tick and pays out whole ticks, which is exact for any percentage.
-const WATER_GROWTH_BONUS := 35          # LEVER: percent faster, 10-60
-const WATER_LASTS_UNTIL_NIGHT := true
 
 ## How many tiles one canful waters.
 ##
@@ -2140,11 +2117,11 @@ static func check_crops(crops: Dictionary) -> Array:
 			errors.append("crop '%s' is not a resource" % crop_id)
 		if not SELL_PRICE.has(crop_id):
 			errors.append("crop '%s' has no sell price" % crop_id)
-		if int((crops[crop_id] as Dictionary)["growth_ticks"]) <= 0:
+		if int((crops[crop_id] as Dictionary)["growth_days"]) <= 0:
 			errors.append("crop '%s' grows in no time at all" % crop_id)
 
 	# **No crop may be the right answer at every money level.** A crop that
-	# pays at least as much per day, for no more visits, off a no larger seed,
+	# pays at least as much per season, for no more visits, off a no larger seed,
 	# is a crop that makes every other one a mistake - and three crops one of
 	# which is always correct is one crop and two traps.
 	#
@@ -2163,12 +2140,12 @@ static func check_crops(crops: Dictionary) -> Array:
 	return errors
 
 
-## What one plot of a crop offers over a day: money, trips, and the money it
+## What one plot of a crop offers over a season: money, trips, and the money it
 ## takes to start. The three axes `check_crops()` refuses to let one crop win
 ## outright.
 static func _crop_offer(crops: Dictionary, id: StringName) -> Dictionary:
 	var data: Dictionary = crops[id]
-	var visits := DAY_TICKS / maxi(int(data["growth_ticks"]), 1)
+	var visits := SEASON_DAYS / maxi(int(data["growth_days"]), 1)
 	var net := int(data["yield"]) * int(SELL_PRICE.get(id, 0)) 		- int(data["seed_cost"])
 	return {"value": net * visits, "visits": visits,
 		"seed": int(data["seed_cost"])}
@@ -3007,8 +2984,7 @@ static func digest() -> int:
 		"stock": DAILY_STOCK,
 		"tutorial": TUTORIAL,
 		"crops": CROPS,
-		"water": [WATER_GROWTH_BONUS, WATER_CAN_CAPACITY,
-			WATER_LASTS_UNTIL_NIGHT],
+		"water": [WATER_CAN_CAPACITY],
 		"power": [BASE_ENERGY, UNPOWERED_PERCENT],
 		"livestock": LIVESTOCK,
 		"ammo": [EMPTY_RELOAD_PERCENT, EMPTY_DAMAGE_PERCENT],

@@ -280,6 +280,7 @@ static func begin_day(state: Dictionary) -> bool:
 	# calling it here and on the first tick costs nothing.
 	Shop.restock(state)
 	_enter(state, DAY)
+	Farming.morning(state)
 	return true
 
 

@@ -180,7 +180,7 @@ func _seed_row(id: StringName) -> void:
 	label.name = "seed_label_%s" % id
 	label.text = I18n.f(&"SHOP_SEED_ROW", [Names.of(id),
 		int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
-		Farming.seconds_to_grow(id), Farming.value_per_day(id)])
+		Farming.days_to_grow(id), Farming.value_per_season(id)])
 	label.custom_minimum_size = Vector2(168, 0)
 	label.theme_type_variation = UiKit.WARM if chosen else UiKit.DIM
 	row.add_child(label)

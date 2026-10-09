@@ -1,7 +1,7 @@
 # 0165 - Crops grow by days
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0149, 0151, 0156
 - **Likely files:** src/core/farming.gd, src/core/phases.gd, src/core/sim.gd, src/core/game_data.gd, src/app/save.gd, src/core/state.gd, src/ui/day_hud.gd, src/ui/describe.gd, src/ui/shop_panel.gd, assets/locale/strings.csv, src/tools/perf_names.gd, src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/make_goldens.gd, tools/goldens/, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/effect_showcase.gd, src/tools/house_check.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd
 

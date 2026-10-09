@@ -102,7 +102,6 @@ static func _tick_day(state: Dictionary) -> void:
 	Power.tick(state)
 
 	Building.tick(state)
-	Farming.tick(state)
 	# **Filling the can is a fact about where the player is standing**, so it
 	# is asked here where both are in scope rather than from inside `Farming`,
 	# which `Player` already reaches through `Interact`.

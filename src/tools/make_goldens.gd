@@ -99,6 +99,9 @@ func _a_played_farm() -> Dictionary:
 		for y in range(3, 12):
 			Building.place(state, &"wall", Vector2i(20, y)))
 
+	SuiteKit.watered_mornings(state, 2)
+	for plot in state["plots"].values():
+		plot["watered"] = true
 	Sim.advance(state, TICKS)
 
 	# **And a night, because a run that has never been at night is half a

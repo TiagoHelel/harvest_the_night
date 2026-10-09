@@ -16557,3 +16557,61 @@ src/tools/{headless_check,headless_v1,input_check,input_v1,shot}.gd,
 implementation/prompts/0160-year-end.md, implementation/BACKLOG.md,
 implementation/shots/0160/, implementation/PROGRESS.md,
 docs/devlog/{index,index.pt_BR}.md (refreshed by devlog.py --check).
+
+## 0165 - Crops grow by days - done 2026-10-09
+
+Crops now advance once each morning if watered the previous day: carrot in
+3 days, wheat in 4 and corn in 8. Dry plots wait without losing progress.
+Bedtime records a pending credit before drying the field; morning consumes it,
+including after passing out and after a boss holds the calendar. Trampling
+and harvesting clear any pending credit. The old per-tick growth and soak
+bank are gone, and Farming is no longer a per-tick benchmark system.
+
+The seed strip, shop and tooltip use days and whole harvests per fourteen-day
+season in English and pt_BR. The helpers are now days_to_grow,
+harvests_per_season and value_per_season. The autoplayer refills its can and
+keeps a carrot/corn field plan instead of relying on unwatered crops growing
+while it gathers. The crop-ready music note now announces morning harvest
+news anywhere on the farm, including while the farmer wakes indoors.
+
+Save version 7 migrates legacy tick growth proportionally to whole days,
+rounding down while keeping ready crops ready, and removes soak. The migration
+uses fixed legacy durations. Three new run-v7 goldens were written through
+make_goldens.gd; no older golden was overwritten. Tests cover delayed dry
+carrots, readiness on the third watered morning, credit consumed once,
+bed/pass-out on a held boss date, a half-grown legacy golden, rounding,
+ready preservation and a pending credit across save/reload. Historical tests,
+art fixtures, the house migration check and screenshot ages use the new units.
+
+Verify: PASS, 60 passed / 0 skipped / 0 failed in 596 s (the known total-time
+OVER BUDGET). headless_check 16388 / headless_v1 478 asserts;
+input_check 1075 / input_v1 241 cases; all zero failed. All 56 dates check
+for seeds 0 and 424242; both exports pass. SIM deliberately moved
+50760118 -> 1739556245 (daily crop growth and saved plot shape), DATA
+721761836 -> 2720076483 (growth_days and removed watering bonus).
+The accepted perf baseline removes day_farming: day_tick 93 -> 72 us;
+night_tick 3500 -> 3497 us and path_refresh 9109 -> 8782 us. The full verify
+measured night_tick 3495 us and path_refresh 8886 us, both within budget.
+Early focused checks caught stale version-6 migration expectations and the
+old Farming benchmark assertion; those were corrected before the full PASS.
+
+Shots: implementation/shots/0165/{noon,dusk,wave,result,tech,noon-pt_BR}.png,
+all 1920x1080 and opened individually at original size. Noon assigns several
+growth stages directly; the first day's dusk correctly remains seedlings.
+The days/season columns and watering explanation fit in both languages.
+No art PNG was created or edited; these are game captures.
+
+Notes: owner/art pipeline edits, including project.godot, .claude and
+implementation/backlog/, remain unstaged. The RUN-key decision remains with
+the owner. No push. Exactly one task was completed in this invocation.
+
+Files: src/core/{farming,game_data,phases,reactions,sim,state}.gd,
+src/app/save.gd, src/ui/{day_hud,describe,shop_panel}.gd,
+assets/locale/strings.csv, src/tools/{art_showcase,autoplay,barrier_showcase,
+determinism,effect_showcase,headless_check,headless_v1,house_check,input_check,
+make_goldens,perf_check,perf_names,shot,suite_kit}.gd,
+tools/{perf_baseline,determinism_sim_hash,determinism_data_hash}.txt,
+tools/goldens/run-v7*.sav, implementation/prompts/0165-crops-by-days.md,
+implementation/BACKLOG.md, implementation/PROGRESS.md,
+implementation/shots/0165/, docs/devlog/{index,index.pt_BR}.md
+(refreshed by devlog.py --check).

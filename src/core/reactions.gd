@@ -21,7 +21,7 @@ extends RefCounted
 ##
 ## ## Four, and only where the game already has a moment
 ##
-## A bite on the line, a crop coming ready near enough to see, something of
+## A bite on the line, the morning harvest becoming ready, something of
 ## yours coming down, and the night arriving. The sheet has a heart and a
 ## star and a lightbulb as well and they are not used, because a reaction
 ## invented for a moment the game does not have is a moment the game does not
@@ -117,19 +117,6 @@ static func tick(state: Dictionary) -> void:
 			&"night_began":
 				show(state, &"bang")
 			&"crop_ready":
-				if not night and _near(state, entry):
+				if int(state["phase"]) == Phases.DAY: # Morning harvest news, including indoors.
 					show(state, &"note")
 	mine["seen"] = latest
-
-
-## Whether a cell the event names is close enough for the farmer to have
-## noticed it. A crop coming ready on the far side of the farm is not a thing
-## somebody standing at the pond can see.
-static func _near(state: Dictionary, entry: Dictionary) -> bool:
-	var where: Variant = entry.get("cell", null)
-	if not (where is Array) or (where as Array).size() < 2:
-		return false
-	var cell := Vector2i(int(where[0]), int(where[1]))
-	var here := Player.cell(state)
-	return absi(cell.x - here.x) + absi(cell.y - here.y) \
-		<= int(GameData.REACTION_NEAR)

@@ -159,7 +159,7 @@ func _set_the_farm_going(state: Dictionary) -> void:
 		Farming.act(state, cell)            # till
 		Farming.act(state, cell)            # plant
 		sown += 1
-	# Half of them watered, so the soak arithmetic is in the hash too.
+	# Half of them watered, so yesterday's watering is represented in the hash too.
 	state["water_can"] = GameData.WATER_CAN_CAPACITY
 	var watered := 0
 	for found in Farm.cells_of(state, Farm.Terrain.SOIL):

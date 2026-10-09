@@ -102,6 +102,8 @@ func _run() -> void:
 	legacy["produced"][_legacy_index(Vector2i(13, 8))] = {"at": 40, "yield": {&"wood": 2}}
 	var crops := {Grid.index(Vector2i(14, 7)): legacy["plots"][_legacy_index(Vector2i(14, 7))].duplicate(true),
 		Grid.index(Vector2i(14, 8)): legacy["plots"][_legacy_index(Vector2i(14, 8))].duplicate(true)}
+	for plot in crops.values():
+		plot["growth"] = 0 # Both legacy crops have less than one whole day.
 	var jobs := {Grid.index(Vector2i(12, 8)): legacy["crafting"][_legacy_index(Vector2i(12, 8))].duplicate(true)}
 	var products := {Grid.index(Vector2i(13, 8)): legacy["produced"][_legacy_index(Vector2i(13, 8))].duplicate(true)}
 	var inventory: Dictionary = legacy["held"].duplicate(true)
@@ -133,7 +135,7 @@ func _run() -> void:
 		Player.tick(_state)
 	expect(not _state["plots"].get(Grid.index(field), {}).is_empty(), "New land supports the real planting action")
 	var plot: Dictionary = _state["plots"][Grid.index(field)]
-	plot["growth"] = int(GameData.CROPS[plot["crop"]]["growth_ticks"])
+	plot["growth"] = int(GameData.CROPS[plot["crop"]]["growth_days"])
 	_state["intent"]["interact"] = true
 	for _i in Interact.ticks_for(_state, field, &"harvest"):
 		Player.tick(_state)

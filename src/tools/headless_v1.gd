@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 33
+const GROUPS := 34
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -102,6 +102,7 @@ func _run() -> void:
 	_task_0158_forecast()
 	_task_0159_palette()
 	_task_0160_year_end()
+	_task_0165_days()
 
 
 func _finish() -> void:
@@ -2630,7 +2631,7 @@ func _a_planted_route(seed_value: int, day: int) -> Dictionary:
 				beside[Grid.index(n)] = true
 	for idx in route.keys() + beside.keys():
 		if Farm.is_empty(state, Grid.cell(int(idx))):
-			plots[int(idx)] = {"crop": &"carrot", "growth": 30, "watered": false, "soak": 0}
+			plots[int(idx)] = {"crop": &"carrot", "growth": 30, "watered": false}
 	return state
 
 
@@ -2726,9 +2727,9 @@ func _task_0156_map_v1() -> void:
 	# **The v5 golden comes up to v6 without moving anything on it.**
 	var raw: Dictionary = Save._read("res://tools/goldens/run-v5.sav")
 	var old: Dictionary = raw.get("state", {})
-	var now := Save.read_run_at("res://tools/goldens/run-v5.sav")
+	var now := Save.step_up(old, 5, 6, Save.migrations())
 	expect(int(old.get("version", 0)) == 5 and int(now.get("version", 0)) == 6,
-		"the v5 golden reads as version 6", "%s to %s" % [old.get("version"), now.get("version")])
+		"the v5 map migration reaches version 6", "%s to %s" % [old.get("version"), now.get("version")])
 	var moved: Array = []
 	var cleared := {}
 	for idx in Save._ground_the_1_0_farm_clears():
@@ -3127,4 +3128,89 @@ func _task_0160_year_end() -> void:
 			Sim.advance(state, 2)
 			expect(not Run.is_over(state) and bool(Rewards.last(state).get("calm", false)),
 				"the calm night resolves and endless does not end again")
+	_completed += 1
+
+
+## 0165 - watered mornings, missed chores, held dates and old saves.
+func _task_0165_days() -> void:
+	var state := State.create(1650)
+	var cells := Farm.cells_of(state, Farm.Terrain.SOIL)
+	for cell in [cells[0], cells[1]]:
+		Farming.act(state, cell)
+		Farming.act(state, cell)
+	state["water_can"] = 2
+	Farming.act(state, cells[0])
+	Sim.advance(state, 60)
+	expect(int(Farming.plot(state, cells[0])["growth"]) == 0,
+		"even watered crops do not grow per tick")
+	Farming.dry_out(state)
+	Farming.morning(state)
+	expect(int(Farming.plot(state, cells[0])["growth"]) == 1
+		and int(Farming.plot(state, cells[1])["growth"]) == 0,
+		"watered and dry carrots differ by one day after the first morning")
+	Farming.morning(state)
+	expect(int(Farming.plot(state, cells[0])["growth"]) == 1,
+		"the same morning cannot credit a plot twice")
+	for day in [2, 3]:
+		state["water_can"] = 1
+		Farming.act(state, cells[0])
+		Farming.dry_out(state)
+		Farming.morning(state)
+		expect(Farming.is_ready(state, cells[0]) == (day == 3),
+			"carrot ripens on its third watered morning")
+	expect(Farming.crop_on(state, cells[1]) == &"carrot"
+		and int(Farming.plot(state, cells[1])["growth"]) == 0,
+		"three missed chores leave the dry carrot alive and unchanged")
+	var ready_events := 0
+	for event in Events.since(state, 0):
+		if event["kind"] == &"crop_ready":
+			ready_events += 1
+	expect(ready_events == 1, "ripening emits exactly one crop_ready event")
+
+	for collapse in [false, true]:
+		var overnight := State.create(1651)
+		var cell: Vector2i = Farm.cells_of(overnight, Farm.Terrain.SOIL)[0]
+		Farming.act(overnight, cell)
+		Farming.act(overnight, cell)
+		overnight["water_can"] = 1
+		Farming.act(overnight, cell)
+		overnight["day"] = 14 # A living boss holds the date, but not crop growth.
+		if collapse:
+			Phases.pass_out(overnight)
+		else:
+			Phases.go_to_bed(overnight)
+		Phases.start_waves(overnight)
+		Phases.enter_result(overnight, false)
+		Phases.begin_day(overnight)
+		expect(Calendar.date(overnight) == 14
+			and int(Farming.plot(overnight, cell)["growth"]) == 1,
+			"bed and pass-out both credit a morning even on a held boss date")
+
+	# A real v6 golden supplies the saved farm; only its crop ages are varied.
+	var legacy: Dictionary = Save._read("res://tools/goldens/run-v6.sav")["state"]
+	var idx := Grid.index(cells[0])
+	legacy["plots"][idx] = {"crop": &"wheat", "growth": 1350, "watered": true, "soak": 99}
+	var ready_idx := Grid.index(cells[1])
+	legacy["plots"][ready_idx] = {"crop": &"carrot", "growth": 1800, "watered": false, "soak": 0}
+	var path := "user://task0165-legacy.sav"
+	expect(Save.write_run_at(path, legacy), "the half-grown legacy golden writes")
+	var loaded := Save.read_run_at(path)
+	expect(int(loaded["plots"][idx]["growth"]) == 2
+		and not loaded["plots"][idx].has("soak"), "half-grown wheat becomes two days without a soak bank")
+	expect(Farming.is_ready(loaded, cells[1]), "a ready legacy carrot stays ready")
+	legacy["plots"][idx]["growth"] = 1349
+	var floored := Save.step_up(legacy, 6, 7, Save.migrations())
+	expect(int(floored["plots"][idx]["growth"]) == 1, "fractional legacy days round down")
+	Save._remove(path)
+	Save._remove(path + ".bak")
+
+	# A saved pending credit survives load, but is consumed only once.
+	Farming.dry_out(loaded)
+	expect(Save.write_run_at(path, loaded), "a pending morning can be saved")
+	loaded = Save.read_run_at(path)
+	Farming.morning(loaded)
+	Farming.morning(loaded)
+	expect(int(loaded["plots"][idx]["growth"]) == 3, "reload preserves one pending credit")
+	Save._remove(path)
+	Save._remove(path + ".bak")
 	_completed += 1

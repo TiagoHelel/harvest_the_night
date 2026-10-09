@@ -29,7 +29,8 @@ extends RefCounted
 ## nights won, and `endless` means "past the year" rather than "past the ten".
 ## **6 since task 0156**: the 1.0 farm - new nodes, stumps and cleared spawn
 ## ground laid onto an older farm where it has room for them.
-const VERSION := 6
+## **7 since task 0165**: plot growth counts watered mornings rather than ticks.
+const VERSION := 7
 
 ## The nested dictionaries whose keys come from the code.
 ##

@@ -428,7 +428,7 @@ func _mine_batch() -> void:
 	# is allowed by the existing rules even on a plot.
 	_state = _blank()
 	var cell := Vector2i(14, 9)
-	_state["plots"][Grid.index(cell)] = {"crop": &"corn", "growth": 100000, "watered": true}
+	_state["plots"][Grid.index(cell)] = {"crop": &"corn", "growth": Farming.days_to_grow(&"corn"), "watered": true}
 	_place(&"mine", cell)
 	var walker := Entities.spawn(_state, &"walker", cell)
 	Entities.get_one(_state, walker)["pos"][0] += Player.SUBTILE / 3

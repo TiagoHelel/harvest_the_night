@@ -1583,10 +1583,10 @@ func _case_0028_seeds() -> void:
 		if row == null:
 			continue
 		expect(row.text.contains(str(id)), "which says what it is", row.text)
-		expect(row.text.contains("%ds" % Farming.seconds_to_grow(id)),
+		expect(row.text.contains("%dd" % Farming.days_to_grow(id)),
 			"and how long it takes to grow", row.text)
-		expect(row.text.contains(str(Farming.value_per_day(id))),
-			"and what a plot of it is worth over a day", row.text)
+		expect(row.text.contains(str(Farming.value_per_season(id))),
+			"and what a plot of it is worth over a season", row.text)
 		expect(row.text.contains("$%d" % int((GameData.CROPS[id]
 			as Dictionary)["seed_cost"])), "and what the seed costs", row.text)
 
@@ -1775,6 +1775,13 @@ func _case_0029_watering() -> void:
 			still_wet += 1
 	expect(still_wet == 0, "the night dries the whole field out",
 		str(still_wet))
+	for cell in row:
+		expect(int(Farming.plot(state, cell)["growth"]) == 0,
+			"watering does not grow the crop during the day")
+	Farming.morning(state)
+	for cell in row:
+		expect(int(Farming.plot(state, cell)["growth"]) == 1,
+			"the held-key watering earns tomorrow's growth")
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
@@ -2780,10 +2787,10 @@ func _case_0040_shop() -> void:
 		expect(seed != null, "%s has a row" % id)
 		if seed == null:
 			continue
-		expect(seed.text.contains("%ds" % Farming.seconds_to_grow(id)),
+		expect(seed.text.contains("%d days" % Farming.days_to_grow(id)),
 			"saying how long it takes", seed.text)
-		expect(seed.text.contains(str(Farming.value_per_day(id))),
-			"and what it is worth over a day", seed.text)
+		expect(seed.text.contains(str(Farming.value_per_season(id))),
+			"and what it is worth over a season", seed.text)
 
 	var other := &""
 	for id in Farming.seeds():

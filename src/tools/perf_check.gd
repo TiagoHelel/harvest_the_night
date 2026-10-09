@@ -256,7 +256,6 @@ func _tick_one(state: Dictionary, named: StringName) -> void:
 		&"Combat": Combat.tick(state)
 		&"Building": Building.tick(state)
 		&"Player": Player.tick(state)
-		&"Farming": Farming.tick(state)
 		&"Gathering": Gathering.tick(state)
 		&"Livestock": Livestock.tick(state)
 		&"Tutorial": Tutorial.tick(state)

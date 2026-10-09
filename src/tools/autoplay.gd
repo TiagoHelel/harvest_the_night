@@ -14,7 +14,7 @@ extends RefCounted
 ## A day is `DAY_TICKS` of work. Each action costs what the rules say it costs
 ## - a tree is `work_ticks`, a recipe is its own time - and the robot spends
 ## the day's ticks on actions in its policy's order until they run out. Then
-## the rest of the day is advanced so the crops grow and the press runs.
+## the rest of the day is advanced so the press runs; watered crops grow the next morning.
 ##
 ## **Walking is not counted**, and that is the one thing this instrument is
 ## kinder than a player about. A real farmer spends a good part of a day
@@ -536,13 +536,16 @@ static func _go_and_get(state: Dictionary, res: StringName) -> int:
 ## Till, sow, water or harvest one plot - whichever the field wants next.
 ## Returns what it cost, or zero when the field wants nothing.
 static func _work_the_field(state: Dictionary) -> int:
-	# **Grow what the farm can use.** The seed strip starts on the first crop
-	# in the list and the robot never touched it, so it grew carrots for ten
-	# days - and `press_oil` wants corn. One line, and it is the difference
-	# between a farm that fuels the guns and a farm that is scenery.
-	if not Farm.cells_with(state, &"press").is_empty():
-		Farming.select_seed(state, &"corn")
-	for plot in _the_field(state):
+	# Keep food in the plan while corn takes eight watered mornings to mature.
+	var field := _the_field(state)
+	for i in field.size():
+		var plot: Vector2i = field[i]
+		if Farming.crop_on(state, plot) != &"" and not Farming.is_ready(state, plot) \
+				and not Farming.is_watered(state, plot) and Farming.water_carried(state) == 0:
+			var well: Vector2i = Farm.cells_with(state, &"well")[0]
+			Farming.refill_beside(state, well + Vector2i.UP)
+			return GameData.SECONDS
+		Farming.select_seed(state, &"corn" if i % 3 == 0 else &"carrot")
 		var verb := Farming.verb_at(state, plot)
 		if verb == &"":
 			continue

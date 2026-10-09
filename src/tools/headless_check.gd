@@ -304,7 +304,7 @@ func _task_0102_budget() -> void:
 	for named in ["Waves", "Enemies", "Towers", "Combat"]:
 		expect(PerfNames.NIGHT.has(StringName(named)),
 			"%s is timed on a night" % named)
-	for named in ["Farming", "Gathering", "Livestock", "Crafting"]:
+	for named in ["Gathering", "Livestock", "Crafting"]:
 		expect(PerfNames.DAY.has(StringName(named)),
 			"%s is timed on a day" % named)
 
@@ -783,7 +783,7 @@ func _task_0104_saves() -> void:
 	expect(expanded["terrain"].size() == Grid.CELLS and expanded["terrain"][new_index] == Farm.Terrain.SOIL,
 		"Old terrain lands on the same coordinates in the expanded farm")
 	for key in ["occupants", "plots", "rubble", "crafting", "livestock", "repair_debt", "produced"]:
-		expect(expanded[key][new_index] == {"kept": 17}, "Migration retains indexed run data: " + key)
+		expect(expanded[key][new_index] == ({"kept": 17, "growth": 0} if key == "plots" else {"kept": 17}), "Migration retains indexed run data: " + key)
 	expect(expanded["regrowing"][0] == [new_index, 77, "tree"], "Regrowth retains its position and remaining time")
 	expect(expanded["power"]["burning"][new_index] == 82, "Generator fuel survives the new row stride")
 	expect(expanded["entities"][7] == {"pos": [600, 620], "chewing": new_index, "winding_at": -1},
@@ -1410,6 +1410,8 @@ func _task_0109_reactions() -> void:
 			Farming.select_seed(one, StringName(Farming.seeds()[0]))
 			Farming.act(one, found)
 			Farming.act(one, found)
+	SuiteKit.watered_mornings(loud, 3)
+	SuiteKit.watered_mornings(quiet, 3)
 	var bubbles := 0
 	for _i in 4000:
 		Sim.advance(loud, 1)
@@ -1510,43 +1512,12 @@ func _task_0109_reactions() -> void:
 		Farming.select_seed(field, StringName(Farming.seeds()[0]))
 		Farming.act(field, found)
 		Farming.act(field, found)
-	var noted := false
-	for _i in 12000:
-		Sim.advance(field, 1)
-		if Reactions.now(field) == &"note":
-			noted = true
-			break
-		if int(field["phase"]) != Phases.DAY:
-			break
-	expect(noted, "a crop coming ready nearby puts a note up")
-
-	# **And a far one does not.** Without this the check above passes for a
-	# reaction that fires on every crop on the farm, which is the version
-	# the requirement says no to.
-	var far := State.create(109104)
-	var far_soil := Farm.cells_of(far, Farm.Terrain.SOIL)
-	SuiteKit.stand_the_farmer(far, far_soil[0])
-	var home := Player.cell(far)
-	var sown_far := 0
-	for found in far_soil:
-		if Grid.manhattan(found, home) <= GameData.REACTION_NEAR + 2:
-			continue
-		Farming.select_seed(far, StringName(Farming.seeds()[0]))
-		Farming.act(far, found)
-		Farming.act(far, found)
-		sown_far += 1
-	var far_noted := false
-	for _i in 12000:
-		Sim.advance(far, 1)
-		if Reactions.now(far) == &"note":
-			far_noted = true
-			break
-		if int(far["phase"]) != Phases.DAY:
-			break
-	expect(sown_far > 0, "there is a crop on the far side of the farm",
-		str(sown_far))
-	expect(not far_noted,
-		"and one coming ready over there does not")
+	House.wake(field)
+	SuiteKit.watered_mornings(field, 3)
+	Reactions.tick(field)
+	expect(Reactions.now(field) == &"note", "the morning harvest puts a note up even indoors")
+	Sim.advance(field, GameData.REACTION_TICKS + 1)
+	expect(Reactions.now(field) == &"", "the morning news expires without repeating")
 
 	# The night arriving, and something coming down during it.
 	var night := State.create(109105)
@@ -2805,7 +2776,7 @@ func _task_0018_wheat() -> void:
 
 	var plot: Vector2i = field[0]
 	var data: Dictionary = GameData.CROPS[GameData.WHEAT]
-	var grow_ticks := int(data["growth_ticks"])
+	var grow_days := int(data["growth_days"])
 
 	# **Four verbs, and the cell says which one it is offering.** "farm" would
 	# have been one word for four different keypresses.
@@ -2825,14 +2796,14 @@ func _task_0018_wheat() -> void:
 
 	# It grows, in stages, and only reaches the last one when it is ready.
 	expect(Farming.stage(state, plot) == 0, "it starts at stage 0")
-	Sim.advance(state, grow_ticks / 2)
+	SuiteKit.watered_mornings(state, grow_days / 2)
 	var midway := Farming.stage(state, plot)
 	expect(midway > 0 and midway < int(data["stages"]) - 1,
 		"halfway through it is halfway through", str(midway))
 	expect(not Farming.is_ready(state, plot), "and not ready")
 
-	Sim.advance(state, grow_ticks - grow_ticks / 2)
-	expect(Farming.is_ready(state, plot), "on the tick the lever says, it is")
+	SuiteKit.watered_mornings(state, grow_days - grow_days / 2)
+	expect(Farming.is_ready(state, plot), "on the morning the lever says, it is")
 	expect(Farming.stage(state, plot) == int(data["stages"]) - 1,
 		"at its last stage", str(Farming.stage(state, plot)))
 	expect(Interact.verb_at(state, plot) == &"harvest", "and offers a harvest")
@@ -2857,8 +2828,9 @@ func _task_0018_wheat() -> void:
 	Interact.complete(overnight, bed, &"plant")
 	Sim.advance(overnight, 300)
 	var growth_at_dusk := int(Farming.plot(overnight, bed)["growth"])
-	expect(growth_at_dusk == 300, "it grew all afternoon", str(growth_at_dusk))
+	expect(growth_at_dusk == 0, "daytime ticks do not grow crops", str(growth_at_dusk))
 
+	Farming.plot(overnight, bed)["watered"] = true
 	NightRoad.to_night(overnight)
 	Sim.advance(overnight, 2000)
 	expect(int(Farming.plot(overnight, bed)["growth"]) == growth_at_dusk,
@@ -2870,8 +2842,8 @@ func _task_0018_wheat() -> void:
 	Phases.enter_result(overnight, true)
 	Phases.begin_day(overnight)
 	Sim.advance(overnight, 100)
-	expect(int(Farming.plot(overnight, bed)["growth"]) == growth_at_dusk + 100,
-		"and in the morning it carries on from exactly where it was",
+	expect(int(Farming.plot(overnight, bed)["growth"]) == growth_at_dusk + 1,
+		"and the morning credits yesterday once",
 		str(Farming.plot(overnight, bed)["growth"]))
 
 	# No money, no seed, and no half-planted tile.
@@ -2895,7 +2867,7 @@ func _task_0018_wheat() -> void:
 	var counts := Farming.counts(farmed)
 	expect(int(counts["planted"]) == 60, "sixty plots planted",
 		str(counts))
-	Sim.advance(farmed, grow_ticks)
+	SuiteKit.watered_mornings(farmed, grow_days)
 	expect(int(Farming.counts(farmed)["ready"]) == 60,
 		"and all of them come up together",
 		str(Farming.counts(farmed)))
@@ -4236,15 +4208,15 @@ func _task_0028_crops() -> void:
 			"and the seed was paid for",
 			str(Resources.amount(state, GameData.MONEY)))
 
-		var needed := int(data["growth_ticks"])
-		Sim.advance(state, needed - 1)
+		var needed := int(data["growth_days"])
+		SuiteKit.watered_mornings(state, needed - 1)
 		expect(not Farming.is_ready(state, cell),
-			"%s is not ready a tick early" % id)
+			"%s is not ready a morning early" % id)
 		expect(Farming.verb_at(state, cell) == &"",
 			"and offers nothing to do while it grows", str(id))
-		Sim.advance(state, 1)
+		SuiteKit.watered_mornings(state)
 		expect(Farming.is_ready(state, cell),
-			"%s is ready on the tick the table says" % id, str(needed))
+			"%s is ready on the morning the table says" % id, str(needed))
 		expect(Farming.verb_at(state, cell) == &"harvest",
 			"and now it can be harvested")
 
@@ -4263,16 +4235,16 @@ func _task_0028_crops() -> void:
 	var values: Array = []
 	var costs: Array = []
 	for id in ids:
-		times.append(Farming.seconds_to_grow(id))
-		values.append(Farming.value_per_day(id))
+		times.append(Farming.days_to_grow(id))
+		values.append(Farming.value_per_season(id))
 		costs.append(int((GameData.CROPS[id] as Dictionary)["seed_cost"]))
-		print("  %-7s $%d seed, %3ds, %d a harvest, %d visits, %d a day"
+		print("  %-7s $%d seed, %3dd, %d a harvest, %d visits, %d a season"
 			% [id, int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
-				Farming.seconds_to_grow(id), Farming.value_per_harvest(id),
-				Farming.harvests_per_day(id), Farming.value_per_day(id)])
+				Farming.days_to_grow(id), Farming.value_per_harvest(id),
+				Farming.harvests_per_season(id), Farming.value_per_season(id)])
 	expect(_all_different(times), "no two crops grow at the same rate",
 		str(times))
-	expect(_all_different(values), "and none is worth the same over a day",
+	expect(_all_different(values), "and none is worth the same over a season",
 		str(values))
 	expect(_all_different(costs), "and none costs the same to start",
 		str(costs))
@@ -4287,29 +4259,29 @@ func _task_0028_crops() -> void:
 				continue
 			var seed_a := int((GameData.CROPS[a] as Dictionary)["seed_cost"])
 			var seed_b := int((GameData.CROPS[b] as Dictionary)["seed_cost"])
-			expect(not (Farming.value_per_day(a) >= Farming.value_per_day(b)
-				and Farming.harvests_per_day(a) <= Farming.harvests_per_day(b)
+			expect(not (Farming.value_per_season(a) >= Farming.value_per_season(b)
+				and Farming.harvests_per_season(a) <= Farming.harvests_per_season(b)
 				and seed_a <= seed_b),
 				"%s does not dominate %s" % [a, b],
-				"%d a day in %d visits off a $%d seed, against %d/%d/$%d"
-					% [Farming.value_per_day(a), Farming.harvests_per_day(a),
-						seed_a, Farming.value_per_day(b),
-						Farming.harvests_per_day(b), seed_b])
+				"%d a season in %d visits off a $%d seed, against %d/%d/$%d"
+					% [Farming.value_per_season(a), Farming.harvests_per_season(a),
+						seed_a, Farming.value_per_season(b),
+						Farming.harvests_per_season(b), seed_b])
 
 	# And each one wins at something, which is the other half of a real choice.
 	expect(_wins_at(ids, func(id: StringName) -> int:
-		return Farming.value_per_day(id)) == GameData.CARROT,
-		"carrot pays the most over a day")
+		return Farming.value_per_season(id)) == GameData.CARROT,
+		"carrot pays the most over a season")
 	expect(_wins_at(ids, func(id: StringName) -> int:
-		return -Farming.harvests_per_day(id)) == GameData.CORN,
+		return -Farming.harvests_per_season(id)) == GameData.CORN,
 		"corn asks for the fewest trips across the farm")
 	expect(_wins_at(ids, func(id: StringName) -> int:
 		return -int((GameData.CROPS[id] as Dictionary)["seed_cost"]))
 		== GameData.CARROT, "and carrot is what a broke player can afford")
-	expect(Farming.value_per_day(GameData.WHEAT)
-		> Farming.value_per_day(GameData.CORN)
-		and Farming.harvests_per_day(GameData.WHEAT)
-		< Farming.harvests_per_day(GameData.CARROT),
+	expect(Farming.value_per_season(GameData.WHEAT)
+		> Farming.value_per_season(GameData.CORN)
+		and Farming.harvests_per_season(GameData.WHEAT)
+		< Farming.harvests_per_season(GameData.CARROT),
 		"wheat beats corn on money and carrot on walking")
 
 	# **A broke player has exactly one option**, which is what "no right answer
@@ -4368,8 +4340,8 @@ func _task_0028_crops() -> void:
 	# refused. Built here rather than shipped, so the table stays honest.
 	var rigged: Dictionary = GameData.CROPS.duplicate(true)
 	(rigged[GameData.WHEAT] as Dictionary)["seed_cost"] = 0
-	(rigged[GameData.WHEAT] as Dictionary)["growth_ticks"] = \
-		int((GameData.CROPS[GameData.CARROT] as Dictionary)["growth_ticks"])
+	(rigged[GameData.WHEAT] as Dictionary)["growth_days"] = \
+		int((GameData.CROPS[GameData.CARROT] as Dictionary)["growth_days"])
 	expect(not GameData.check_crops(rigged).is_empty(),
 		"a free crop that grows as fast as carrot and sells for more is refused",
 		str(GameData.check_crops(rigged)))
@@ -4425,11 +4397,11 @@ func _task_0029_watering() -> void:
 		Farming.act(state, cell)
 		Farming.act(state, cell)
 		var seen: Array = []
-		for _i in int(data["growth_ticks"]) + 1:
+		for _i in int(data["growth_days"]) + 1:
 			var stage := Farming.stage(state, cell)
 			if not seen.has(stage):
 				seen.append(stage)
-			Sim.advance(state, 1)
+			SuiteKit.watered_mornings(state)
 		seen.sort()
 		expect(seen == [0, 1, 2, 3],
 			"%s passes through every one of them" % id, str(seen))
@@ -4499,41 +4471,18 @@ func _task_0029_watering() -> void:
 	expect(Farming.water_carried(race) == GameData.WATER_CAN_CAPACITY - 1,
 		"watering it again spends nothing", str(Farming.water_carried(race)))
 
-	var wet_at := -1
-	var dry_at := -1
-	for t in 8000:
-		Sim.advance(race, 1)
-		if wet_at < 0 and Farming.is_ready(race, wet):
-			wet_at = t
-		if dry_at < 0 and Farming.is_ready(race, dry):
-			dry_at = t
-		if wet_at >= 0 and dry_at >= 0:
-			break
-	print("  wheat: watered ready at %d ticks, dry at %d - %d apart"
-		% [wet_at, dry_at, dry_at - wet_at])
-	expect(wet_at > 0 and dry_at > 0, "both of them came up",
-		"%d and %d" % [wet_at, dry_at])
-	expect(wet_at < dry_at, "the watered one first",
-		"%d against %d" % [wet_at, dry_at])
-	# A second of daylight apart is the floor for "measurable": less than that
-	# and nobody watching the field would be able to tell.
-	expect(dry_at - wet_at >= GameData.SECONDS,
-		"by more than a second of daylight", "%d ticks" % (dry_at - wet_at))
-	# And it is the bonus, not a coincidence: dry takes the ticks the table
-	# says, watered takes those ticks scaled by the lever.
-	var needed := int((GameData.CROPS[GameData.WHEAT] as Dictionary)["growth_ticks"])
-	expect(dry_at == needed - 1, "dry takes exactly what the table says",
-		"%d against %d" % [dry_at, needed])
-	expect(absi(wet_at - (needed * 100 / (100 + GameData.WATER_GROWTH_BONUS))) <= 2,
-		"and watered takes that over the lever", "%d ticks" % wet_at)
-
-	# **Never fatal.** The dry one still ripened, and it still pays the same.
+	Farming.dry_out(race)
+	Farming.morning(race)
+	expect(int(Farming.plot(race, wet)["growth"]) == 1, "watering earns one morning")
+	expect(int(Farming.plot(race, dry)["growth"]) == 0, "dry waits without losing the plant")
+	SuiteKit.watered_mornings(race, Farming.days_to_grow(GameData.WHEAT) - 1)
+	expect(Farming.is_ready(race, wet) and not Farming.is_ready(race, dry),
+		"a missed watering leaves exactly one morning to wait")
+	SuiteKit.watered_mornings(race)
 	var paid := Resources.amount(race, GameData.WHEAT)
 	Farming.act(race, dry)
 	expect(Resources.amount(race, GameData.WHEAT) - paid
-		== int((GameData.CROPS[GameData.WHEAT] as Dictionary)["yield"]),
-		"and a crop nobody watered pays the same as one they did",
-		str(Resources.amount(race, GameData.WHEAT) - paid))
+		== int(GameData.CROPS[GameData.WHEAT]["yield"]), "a delayed crop pays the same yield")
 
 	# **An empty can offers nothing**, rather than offering a verb that fails.
 	var empty := State.create(1104)
@@ -4571,13 +4520,11 @@ func _task_0029_watering() -> void:
 	# **The water goes off with the sun.** A plot that stayed wet overnight
 	# would make this a once-per-run job rather than a daily one.
 	expect(Farming.is_watered(carrying, row[0]), "wet at dusk")
-	var soaked := int(Farming.plot(carrying, row[0])["soak"])
 	Phases.begin_preparation(carrying)
 	expect(not Farming.is_watered(carrying, row[0]),
 		"and dry when the night begins")
-	expect(int(Farming.plot(carrying, row[0])["soak"]) == 0,
-		"with the banked fraction gone too - a crop cannot save up a night's "
-		+ "worth of watering it did not get", str(soaked))
+	expect(bool(Farming.plot(carrying, row[0]).get("morning_credit", false)),
+		"yesterday's watering is saved for tomorrow")
 	expect(Farming.crop_on(carrying, row[0]) != &"",
 		"the crop itself is untouched")
 
@@ -6322,7 +6269,7 @@ func _task_0038_idle() -> void:
 		"three queued at dawn, three in the pile by dusk, nobody watching",
 		str(pond_day[&"kits"]))
 	expect(int(pond_day[&"oil"]) > 0, "the press pressed", str(pond_day[&"oil"]))
-	expect(int(pond_day[&"grown"]) > 0, "the crops grew",
+	expect(int(pond_day[&"grown"]) == 0, "the crops wait for morning while other work runs",
 		str(pond_day[&"grown"]))
 	expect(int(pond_day[&"meat"]) > 0, "the animals produced",
 		str(pond_day[&"meat"]))
@@ -6627,8 +6574,8 @@ func _task_0039_clock() -> void:
 	expect(int(shopping["day_tick"]) == clock + 60,
 		"and closing it starts the day again",
 		str(int(shopping["day_tick"]) - clock))
-	expect(int(Farming.plot(shopping, shop_plot)["growth"]) == grown + 60,
-		"with the crop picking up where it left off",
+	expect(int(Farming.plot(shopping, shop_plot)["growth"]) == grown,
+		"with the crop still waiting for morning",
 		str(Farming.plot(shopping, shop_plot)["growth"]))
 
 	# **The inventory is not a menu**, which is the other half of the
@@ -6725,9 +6672,9 @@ func _task_0040_shop() -> void:
 	# **Seeds for all three crops**, side by side with what the choice needs.
 	for id in Farming.seeds():
 		expect(GameData.CROPS.has(id), "%s is a crop" % id)
-		expect(Farming.value_per_day(id) > 0,
-			"with a day's worth to compare", str(Farming.value_per_day(id)))
-		expect(Farming.seconds_to_grow(id) > 0, "and a growing time")
+		expect(Farming.value_per_season(id) > 0,
+			"with a day's worth to compare", str(Farming.value_per_season(id)))
+		expect(Farming.days_to_grow(id) > 0, "and a growing time")
 		expect(Shop.buyable().has(id),
 			"and the stall deals in %s itself" % id, str(Shop.buyable()))
 

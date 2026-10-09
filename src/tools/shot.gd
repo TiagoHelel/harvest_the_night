@@ -1027,7 +1027,7 @@ func _a_sown_field(state: Dictionary) -> void:
 		# is a picture of scenery.
 		middle = Vector2i(middle.x / sown, middle.y / sown)
 		_look_at(Vector2i(middle.x + 3, middle.y))
-	# The crops need time on them or the field is six rows of bare soil.
+	# Daytime establishes the clock; individual scenarios choose crop ages.
 	Sim.advance(state, 40 * GameData.SECONDS)
 
 
@@ -1052,7 +1052,7 @@ func _set_farm_extension(state: Dictionary) -> void:
 			var cell := Vector2i(x, y)
 			Farming.act(state, cell)
 			Farming.act(state, cell)
-			state["plots"][Grid.index(cell)]["growth"] = 2000
+			state["plots"][Grid.index(cell)]["growth"] = Farming.days_to_grow(Farming.crop_on(state, cell))
 	_standing_at = Vector2i(34, 21)
 	_stand(state, _standing_at)
 
@@ -1091,6 +1091,12 @@ func _stand(state: Dictionary, cell: Vector2i) -> void:
 
 func _set_noon(state: Dictionary) -> void:
 	_a_sown_field(state)
+	var keys: Array = state["plots"].keys()
+	keys.sort()
+	for i in keys.size():
+		var plot: Dictionary = state["plots"][keys[i]]
+		var days := Farming.days_to_grow(StringName(plot["crop"]))
+		plot["growth"] = ((i % 4) * days + 2) / 3
 	# **Noon on the clock**, 12:00, where the light ramp is plain day. Until
 	# task 0126 gave the day an hour this was half way, and half way is 16:00.
 	Sim.advance(state, maxi(Phases.tick_at_minute(WorldView.NOON_MINUTE)
@@ -1210,8 +1216,8 @@ func _set_trampled(state: Dictionary) -> void:
 				# Ripe, so the rows the horde spared stand tall beside the
 				# one it pressed flat.
 				plots[Grid.index(cell)] = {"crop": &"carrot",
-					"growth": int((GameData.CROPS[&"carrot"] as Dictionary)["growth_ticks"]),
-					"watered": false, "soak": 0}
+					"growth": int((GameData.CROPS[&"carrot"] as Dictionary)["growth_days"]),
+					"watered": false}
 	NightRoad.to_night(state)
 	NightRoad.park(state)
 	state["house_hp"] = 1

@@ -19,6 +19,6 @@ const NIGHT: Array = [
 
 ## And during a day.
 const DAY: Array = [
-	&"Power", &"Building", &"Farming", &"Gathering", &"Livestock",
+	&"Power", &"Building", &"Gathering", &"Livestock",
 	&"Tutorial", &"Crafting", &"Player", &"Reactions",
 ]

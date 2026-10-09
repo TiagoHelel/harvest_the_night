@@ -317,7 +317,7 @@ static func _migrate(payload: Dictionary, from_version: int) -> Dictionary:
 ## `_night_is_the_date_v4`.
 static func migrations() -> Dictionary:
 	return {1: _expand_farm_v1, 2: _expand_farm_v2, 3: _expand_farm_v3,
-		4: _night_is_the_date_v4, 5: _farm_v1_0_from_v5}
+		4: _night_is_the_date_v4, 5: _farm_v1_0_from_v5, 6: _crops_by_days_v6}
 
 
 ## The farm each version was written with.
@@ -676,3 +676,24 @@ static func _rename(from_path: String, to_path: String) -> bool:
 static func _remove(path: String) -> void:
 	if FileAccess.file_exists(path):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+
+
+## Version 7 converts old tick progress proportionally to whole growth days.
+## The legacy durations are literals: future crop tuning must not alter them.
+static func _crops_by_days_v6(previous: Dictionary) -> Dictionary:
+	var state := previous.duplicate(true)
+	var old_ticks := {&"carrot": 1800, &"wheat": 2700, &"corn": 5400}
+	var days := {&"carrot": 3, &"wheat": 4, &"corn": 8}
+	var plots: Dictionary = state.get("plots", {})
+	var keys: Array = plots.keys()
+	keys.sort()
+	for idx in keys:
+		var here: Dictionary = plots[idx]
+		var crop := StringName(here.get("crop", &""))
+		if old_ticks.has(crop):
+			here["growth"] = clampi(int(here.get("growth", 0)), 0, int(old_ticks[crop])) * int(days[crop]) / int(old_ticks[crop])
+		else:
+			here["growth"] = 0
+		here.erase("soak")
+	state["version"] = 7
+	return state

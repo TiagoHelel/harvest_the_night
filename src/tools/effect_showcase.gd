@@ -269,7 +269,7 @@ func _working() -> void:
 			var crop: StringName = Farming.seeds()[0]
 			var plot := Farming.EMPTY_PLOT.duplicate()
 			plot["crop"] = crop
-			plot["growth"] = int(GameData.CROPS[crop]["growth_ticks"]) if verb==&"harvest" else 0
+			plot["growth"] = int(GameData.CROPS[crop]["growth_days"]) if verb==&"harvest" else 0
 			_state["plots"][idx] = plot
 			_state["water_can"] = GameData.WATER_CAN_CAPACITY
 		elif verb==&"fish":

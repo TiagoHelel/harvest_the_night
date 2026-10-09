@@ -246,7 +246,7 @@ func _build_seed_strip() -> void:
 		var row := _label("seed_%s" % id, Vector2(7, 46 + i * 10), UiKit.DIM)
 		row.text = I18n.f(&"DHUD_SEED_ROW", [i + 1, Names.of(id),
 			int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
-			Farming.seconds_to_grow(id), Farming.value_per_day(id)])
+			Farming.days_to_grow(id), Farming.value_per_season(id)])
 		_seed_rows[id] = row
 
 
@@ -488,7 +488,7 @@ func relabel() -> void:
 		(_seed_rows[id] as Label).text = I18n.f(&"DHUD_SEED_ROW",
 			[i + 1, Names.of(id),
 			int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
-			Farming.seconds_to_grow(id), Farming.value_per_day(id)])
+			Farming.days_to_grow(id), Farming.value_per_season(id)])
 	show_state(_state)
 
 

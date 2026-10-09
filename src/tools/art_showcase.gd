@@ -159,10 +159,10 @@ func _run() -> void:
 	(_state["entities"] as Dictionary).clear()
 	var row := 5
 	for crop in Farming.seeds():
-		var needed := int(GameData.CROPS[crop]["growth_ticks"])
+		var needed := int(GameData.CROPS[crop]["growth_days"])
 		for stage in 4:
 			(_state["plots"] as Dictionary)[Grid.index(Vector2i(9 + stage * 3, row))] = {
-				"crop": crop, "growth": stage * needed / 3, "watered": stage % 2 == 0, "soak": 0}
+				"crop": crop, "growth": (stage * needed + 2) / 3, "watered": stage % 2 == 0}
 		row += 3
 	var column := 21
 	for kind in [&"gun_tower", &"flame_tower", &"mortar", &"auto_crossbow"]:
@@ -632,11 +632,11 @@ func _crops_fixture(lighting: int) -> void:
 
 
 func _crops_put(kind: StringName, stage: int, wet: bool, cell: Vector2i) -> void:
-	var needed := int(GameData.CROPS[kind]["growth_ticks"])
+	var needed := int(GameData.CROPS[kind]["growth_days"])
 	_state["terrain"][Grid.index(cell)] = Farm.Terrain.SOIL
 	_state["plots"][Grid.index(cell)] = {
 		"crop": kind, "growth": ceili(float(stage * needed) / 3.0),
-		"watered": wet, "soak": 0}
+		"watered": wet}
 	expect(Farming.stage(_state, cell) == stage, "Every fixture selects the actual core growth stage")
 
 
@@ -736,9 +736,8 @@ func _crops_family() -> void:
 			var kind: StringName = kinds[row]
 			var cell := Vector2i(12+row*5,9)
 			_crops_put(kind,0,false,cell)
-			for tick in int(GameData.CROPS[kind]["growth_ticks"]):
-				Farming.tick(_state)
-			expect(Farming.is_ready(_state,cell), "Unchanged actual Farming.tick reaches the ready stage")
+			SuiteKit.watered_mornings(_state, Farming.days_to_grow(kind))
+			expect(Farming.is_ready(_state,cell), "Actual watered mornings reaches the ready stage")
 		await _reaction_settle(view)
 		_crops_check()
 		await _shoot("grown_light%d" % lighting, "Real farming growth reaches ready art, without changing growth balance")
@@ -1445,7 +1444,7 @@ func _work_fixture(verb: StringName, facing: int) -> Vector2i:
 				if verb != &"plant":
 					plot["crop"] = crop
 				if verb == &"harvest":
-					plot["growth"] = int(GameData.CROPS[crop]["growth_ticks"])
+					plot["growth"] = int(GameData.CROPS[crop]["growth_days"])
 				_state["plots"][idx] = plot
 			_state["selected_seed"] = crop
 			_state["water_can"] = GameData.WATER_CAN_CAPACITY
@@ -1807,9 +1806,9 @@ func _reactions() -> void:
 	_state["terrain"][Grid.index(cell)] = Farm.Terrain.SOIL
 	var plot := Farming.EMPTY_PLOT.duplicate()
 	plot["crop"] = crop
-	plot["growth"] = int(GameData.CROPS[crop]["growth_ticks"]) - 1
+	plot["growth"] = int(GameData.CROPS[crop]["growth_days"]) - 1
 	_state["plots"][Grid.index(cell)] = plot
-	Farming.tick(_state)
+	SuiteKit.watered_mornings(_state)
 	Reactions.tick(_state)
 	expect(Reactions.now(_state) == &"note", "Actual nearby crop completion selects the existing note")
 	await _reaction_settle(view)

@@ -143,7 +143,7 @@ DESC_DRAWS,0,draws %d power,consome %d de energia
 DESC_EATS_WALLS,0,chews through walls,come os muros
 DESC_FREE,0,free,de graça
 DESC_FROM,0,from %s,de %s
-DESC_GROWS_IN,0,grows in %s,cresce em %s
+DESC_GROWS_IN,0,grows in %d days,cresce em %d dias
 DESC_HITS_FOR,0,hits for %d,bate %d
 DESC_HP,0,%d hit points,%d de vida
 DESC_MAKES,0,makes %s,faz %s
@@ -179,8 +179,8 @@ DHUD_NIGHT_WAITING,0,GO TO BED - NIGHT %d,IR DORMIR - NOITE %d
 DHUD_PASS_OUT_SOON,140,passes out in %d min,desmaia em %d min
 DHUD_POWER,0,POWER %d/%d,ENERGIA %d/%d
 DHUD_POWER_SHORT,0,POWER %d/%d  everything at %d%%,ENERGIA %d/%d  tudo a %d%%
-DHUD_SEED_HEADING,168,# CROP    $  TIME  /DAY,# PLANTA  $  TEMPO /DIA
-DHUD_SEED_ROW,168,%d %-7s $%-2d %3ds  %2d,%d %-7s $%-2d %3ds  %2d
+DHUD_SEED_HEADING,168,# CROP    $  DAYS /SEAS,# PLANTA  $  DIAS /EST
+DHUD_SEED_ROW,168,%d %-7s $%-2d %3dd  %2d,%d %-7s $%-2d %3dd  %2d
 DHUD_TO_NIGHT,0,GO TO BED,IR DORMIR
 DHUD_WAITING,0,waiting for a bite,esperando fisgar
 DHUD_WATER,0,WATER %d/%d,ÁGUA %d/%d
@@ -364,7 +364,7 @@ SHOP_HINT,0,esc to leave,esc para sair
 SHOP_MONEY,0,$ %d,$ %d
 SHOP_ONE,0,1,1
 SHOP_SEEDS,0,SEEDS,SEMENTES
-SHOP_SEED_ROW,0,%s  $%d  %ds  $%d a day,%s  $%d  %ds  $%d por dia
+SHOP_SEED_ROW,0,%s  $%d  %d days  $%d a season,%s  $%d  %d dias  $%d por estação
 SHOP_SELL,0,SELL,VENDER
 SHOP_SELL_ROW,0,%s  x%d  @ $%d,%s  x%d  @ $%d
 SHOP_SOW,0,sow,plantar
@@ -440,7 +440,7 @@ TUT_DAWN,462,Keep the house standing until dawn - the countdown is up top.,Mante
 TUT_PLANT,462,"Soil takes a seed. SPACE turns it, SPACE sows it.","A terra aceita semente. ESPAÇO revolve, ESPAÇO planta."
 TUT_SELL,462,"The stall buys what you gathered, and sells wood, stone and iron.","A banca compra o que você colheu, e vende madeira, pedra e ferro."
 TUT_START,462,"When it is all set, press START. Nothing comes until you do.","Quando estiver tudo pronto, aperte COMEÇAR. Nada vem antes disso."
-TUT_WATER,462,Crops come up sooner watered. Walk to the water to fill the can.,"Regada, a planta cresce antes. Chegue na água para encher o regador."
+TUT_WATER,462,Water crops to grow each morning. Dry crops wait. Fill the can at water.,Regue para crescer a cada manhã. Sem água a planta espera. Encha o regador na água.
 VID_CAP,86,FPS CAP,LIMITE FPS
 VID_CAP_OFF,42,OFF,SEM
 VID_COUNTDOWN,230,KEEP THIS? BACK IN %ds,MANTER ASSIM? VOLTA EM %ds

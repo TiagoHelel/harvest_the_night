@@ -96,3 +96,16 @@ static func advance_in_daylight(state: Dictionary, ticks: int) -> void:
 		var step := mini(left, room)
 		Sim.advance(state, step)
 		left -= step
+
+
+## Advance crop fixtures through watered mornings without simulating long days.
+static func watered_mornings(state: Dictionary, days: int = 1) -> void:
+	for _day in days:
+		var keys: Array = state["plots"].keys()
+		keys.sort()
+		for idx in keys:
+			var plot: Dictionary = state["plots"][idx]
+			if plot["crop"] != &"":
+				plot["watered"] = true
+		Farming.dry_out(state)
+		Farming.morning(state)

@@ -241,7 +241,7 @@ static func crop(id: StringName) -> String:
 	lines.append(I18n.f(&"DESC_SEED_COST",
 		[int(one.get("seed_cost", 0))]))
 	lines.append(I18n.f(&"DESC_GROWS_IN",
-		[_seconds(int(one.get("growth_ticks", 0)))]))
+		[int(one.get("growth_days", 0))]))
 	lines.append(I18n.f(&"DESC_SELLS_FOR",
 		[int(GameData.SELL_PRICE.get(id, 0))]))
 	return "\n".join(lines)

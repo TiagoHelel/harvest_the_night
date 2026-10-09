@@ -28,9 +28,8 @@ extends RefCounted
 
 ## What one plot looks like when it has just been turned over.
 ##
-## `soak` is hundredths of a tick of growth banked from watering. See `tick()`
-## for why the bonus is carried as a fraction rather than applied as one.
-const EMPTY_PLOT := {"crop": &"", "growth": 0, "watered": false, "soak": 0}
+## Growth counts watered mornings. `morning_credit` is consumed once at dawn.
+const EMPTY_PLOT := {"crop": &"", "growth": 0, "watered": false}
 
 ## What the well and the pond are, as far as a watering can is concerned.
 const WELL := &"well"
@@ -98,18 +97,11 @@ static func select_seed_at(state: Dictionary, index: int) -> bool:
 
 # --------------------------------------------------------------- the choice
 
-## What one plot of this crop is worth over one whole day, seed paid for.
+## What one plot of this crop is worth over one whole season, seed paid for.
 ##
-## **This is the number the three crops are balanced on**, and the menu shows
-## it, because the interesting part of the choice is not visible otherwise: corn
-## pays four times what carrot pays per harvest and carrot harvests four times
-## as often, so a player comparing the two sale prices is comparing the wrong
-## pair of numbers.
-##
-## Harvests are counted whole. Half a corn at dusk is worth nothing, which is
-## exactly why the slow crop wants planting in the morning.
-static func value_per_day(id: StringName) -> int:
-	return value_per_harvest(id) * harvests_per_day(id)
+## Whole harvests in one season, net of their seeds.
+static func value_per_season(id: StringName) -> int:
+	return value_per_harvest(id) * harvests_per_season(id)
 
 
 ## Sale value of one harvest less what the seed cost.
@@ -118,16 +110,15 @@ static func value_per_harvest(id: StringName) -> int:
 	return int(data["yield"]) * int(GameData.SELL_PRICE[id]) 		- int(data["seed_cost"])
 
 
-## How many times a plot of this comes round in a day. Also how many times the
+## How many times a watered plot comes round in a season. Also how many times the
 ## player has to walk back to it, which is the real cost of the fast crops.
-static func harvests_per_day(id: StringName) -> int:
-	var ticks := int((GameData.CROPS[id] as Dictionary)["growth_ticks"])
-	return GameData.DAY_TICKS / maxi(ticks, 1)
+static func harvests_per_season(id: StringName) -> int:
+	return GameData.SEASON_DAYS / maxi(days_to_grow(id), 1)
 
 
-## Growing time in whole seconds, for the menu.
-static func seconds_to_grow(id: StringName) -> int:
-	return int((GameData.CROPS[id] as Dictionary)["growth_ticks"]) 		/ GameData.TICK_HZ
+## Growing time in watered days, for the menu.
+static func days_to_grow(id: StringName) -> int:
+	return int((GameData.CROPS[id] as Dictionary)["growth_days"])
 
 
 ## The plot on a cell, or an empty Dictionary when the ground is untouched.
@@ -155,7 +146,7 @@ static func stage(state: Dictionary, cell: Vector2i) -> int:
 		return -1
 	var data: Dictionary = GameData.CROPS[crop]
 	var stages := int(data["stages"])
-	var needed := int(data["growth_ticks"])
+	var needed := int(data["growth_days"])
 	var grown := int(here["growth"])
 	if grown >= needed:
 		return stages - 1
@@ -217,7 +208,7 @@ static func is_ready(state: Dictionary, cell: Vector2i) -> bool:
 	var crop: StringName = here.get("crop", &"")
 	if crop == &"":
 		return false
-	return int(here["growth"]) >= int((GameData.CROPS[crop] as Dictionary)["growth_ticks"])
+	return int(here["growth"]) >= int((GameData.CROPS[crop] as Dictionary)["growth_days"])
 
 
 ## What pressing interact on this cell would do, or `&""` for nothing.
@@ -299,7 +290,7 @@ static func trample(state: Dictionary, cells: Array) -> int:
 			continue
 		here["crop"] = &""
 		here["growth"] = 0
-		here["soak"] = 0
+		here.erase("morning_credit")
 		here["trampled"] = crop
 		lost += 1
 	return lost
@@ -318,21 +309,18 @@ static func _water(state: Dictionary, cell: Vector2i) -> void:
 	state["water_can"] = int(state["water_can"]) - 1
 
 
-## The water goes off with the sun. Called when the night begins.
-##
-## `design.md` makes the farm and the fortress the same ground at different
-## hours; watering is a day thing, and a plot that stayed wet through the night
-## would make the chore a once-per-run job rather than a daily one.
+## Record planted, watered plots for tomorrow before drying the field.
 static func dry_out(state: Dictionary) -> void:
-	if not GameData.WATER_LASTS_UNTIL_NIGHT:
-		return                  # the lever says watering is permanent
 	var plots: Dictionary = state["plots"]
 	var keys: Array = plots.keys()
 	keys.sort()
 	for idx in keys:
 		var here: Dictionary = plots[idx]
+		if here["crop"] != &"" and bool(here["watered"]):
+			here["morning_credit"] = true
+		else:
+			here.erase("morning_credit")
 		here["watered"] = false
-		here["soak"] = 0
 
 
 ## Take the crop and leave the ground turned over, ready for the next one.
@@ -344,51 +332,28 @@ static func _harvest(state: Dictionary, cell: Vector2i) -> void:
 	here["crop"] = &""
 	here["growth"] = 0
 	here["watered"] = false
+	here.erase("morning_credit")
 
 
-# ------------------------------------------------------------------ the tick
-
-## One tick of things growing. Called from `Sim._tick_day()` and from nowhere
-## else, which is the whole of "crops do not grow at night".
-##
-## A planted tile keeps its growth across a night untouched and picks up the
-## next morning exactly where it was - it is plain data in the state, so that
-## falls out of not being ticked rather than having to be arranged.
-static func tick(state: Dictionary) -> void:
+## Credit yesterday's watering once, even when a boss holds the calendar.
+## Consuming the flag also makes an extra call or a save/reload harmless.
+static func morning(state: Dictionary) -> void:
 	var plots: Dictionary = state["plots"]
-	if plots.is_empty():
-		return
-	# Sorted, so that the order plots were tilled in cannot matter. Nothing
-	# here draws from the RNG yet; the weather of a later game would.
 	var keys: Array = plots.keys()
 	keys.sort()
 	for idx in keys:
 		var here: Dictionary = plots[idx]
+		var credit := bool(here.get("morning_credit", false))
+		here.erase("morning_credit")
 		var crop: StringName = here["crop"]
-		if crop == &"":
+		if not credit or crop == &"":
 			continue
-		var needed := int((GameData.CROPS[crop] as Dictionary)["growth_ticks"])
+		var needed := days_to_grow(crop)
 		if int(here["growth"]) >= needed:
 			continue
 		here["growth"] = int(here["growth"]) + 1
-		if int(here["growth"]) >= needed:
+		if int(here["growth"]) == needed:
 			Events.add(state, &"crop_ready", {"crop": crop, "cell": _as_pair(Grid.cell(int(idx)))})
-
-		# **The bonus is banked, not rounded.** Fifty percent of a tick is not a
-		# number a plot can hold, and rounding it to one or to zero every tick
-		# would be a 100% bonus or none at all. So the percentage accumulates in
-		# hundredths and pays out a whole tick whenever it has one - exact,
-		# integer throughout, and any percentage works, which is what makes
-		# WATER_GROWTH_BONUS a lever rather than a choice between two numbers.
-		if not bool(here["watered"]):
-			continue
-		here["soak"] = int(here["soak"]) + GameData.WATER_GROWTH_BONUS
-		while int(here["soak"]) >= 100 and int(here["growth"]) < needed:
-			here["soak"] = int(here["soak"]) - 100
-			here["growth"] = int(here["growth"]) + 1
-			if int(here["growth"]) >= needed:
-				Events.add(state, &"crop_ready",
-					{"crop": crop, "cell": _as_pair(Grid.cell(int(idx)))})
 
 
 ## A cell as the two numbers the state stores everywhere else. Events carry
