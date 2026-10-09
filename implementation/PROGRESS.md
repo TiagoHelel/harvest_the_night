@@ -16785,3 +16785,106 @@ src/ui/{placeholder_art,title_screen,world_view}.gd,
 tools/determinism_data_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/0167-till-grass.md, implementation/shots/0167/,
 docs/devlog/{index,index.pt_BR}.md (refreshed by devlog.py --check).
+
+## 0168 - Nine new crops - done 2026-10-09
+
+What changed: potato, garlic, strawberry, pepper, sunflower, melon, pumpkin,
+grape and beet join the original three crops. All twelve have four stages,
+a harvest price, ledger entries, a crops-group entry and English/pt-BR names.
+Season eligibility and regrowth remain 0170 and 0172. Carrot remains the
+cheap starting seed rather than changing to beet when the sorted list grows.
+The daily produce shelf remains the original six goods; all twelve crops
+are sellable and all twelve seed choices are shown at the stall.
+
+The HUD and stall show six seeds per page, with focusable previous/next
+buttons and a page count. Keys 1-6 pick the visible page's rows; an external
+seed selection brings its page into view. Browsing pages changes no core
+state. The stall viewport was increased enough to show its complete sixth
+seed row in Portuguese. Adding nine resources also overflowed the original
+inventory: a temporary two-column list keeps all 24 rows visible; group
+pages, their translated tabs and the larger resource contract remain 0169.
+
+Balance: watered mornings, seed paid once per harvest, whole harvests in a
+14-day season. Every new table value is a LEVER. No pair dominates on seasonal
+net value, harvest visits and seed cost together.
+
+| Crop | Days | Seed $ | Yield | Sale $ each | Net / harvest | Harvest visits | Net / season |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| carrot | 3 | 1 | 2 | 3 | 5 | 4 | 20 |
+| wheat | 4 | 2 | 2 | 4 | 6 | 3 | 18 |
+| corn | 8 | 4 | 3 | 5 | 11 | 1 | 11 |
+| garlic | 4 | 3 | 2 | 5 | 7 | 3 | 21 |
+| potato | 5 | 4 | 2 | 8 | 12 | 2 | 24 |
+| pepper | 5 | 5 | 2 | 9 | 13 | 2 | 26 |
+| sunflower | 7 | 6 | 2 | 10 | 14 | 2 | 28 |
+| beet | 6 | 7 | 2 | 11 | 15 | 2 | 30 |
+| strawberry | 8 | 8 | 2 | 20 | 32 | 1 | 32 |
+| grape | 8 | 9 | 2 | 22 | 35 | 1 | 35 |
+| melon | 10 | 10 | 2 | 25 | 40 | 1 | 40 |
+| pumpkin | 10 | 11 | 2 | 26 | 41 | 1 | 41 |
+
+Art: A015/A016/A017 are not integrated. The registry resolves each new crop's
+four runtime stages to approved carrot/wheat/corn frames with a crop tint,
+and both icon sizes to existing approved produce icons. New ordinary crops
+use 16x16 at (8,14); sunflower and grape use 16x32 at (8,30), draw scale 1.0.
+AtlasTexture adds eight transparent rows above the existing 16x24 corn source;
+no raster pixels are resized, generated or edited. Their standing and
+trampled sprites keep the same foot. Existing corn stays 16x24 at (8,22).
+A015/A016/A017 Deliverables now record this final geometry and the later
+seed-packet/regrow work explicitly.
+
+Checks: `_task_0168_crops` validates all twelve prices/groups/names, plan-day
+maturity through direct watered mornings, all four resolved stages and the
+actual padded texture sizes. `_case_0168_seed_pages` clicks both pagers,
+presses keys on both pages, chooses at the stall, follows the chosen crop
+back to the HUD and checks Portuguese row bounds. Existing seed/stall cases
+now cover all twelve; legacy reaction fixtures explicitly choose their
+three-day carrot. Art showcases preserve the original fixtures and add a
+bounded twelve-crop grid in all four lights. The UI bounds check respects
+scroll clipping while still checking the outer viewport and label widths.
+
+Verify: python tools/verify.py PASS: 60 PASS / 0 FAIL / 0 SKIP in 584s.
+TOTAL OVER BUDGET is the known runner budget, not a FAIL. Main headless:
+16631/0 (75.4s); v1 headless: 934/0 (8.6s); main input: 1166/0 (81.4s);
+v1 input: 275/0 (45.1s); exports PASS (32.4s). Crop showcase: 10032/0;
+UI showcase: 2892/0; 168 scripts parse; i18n 511 keys in two languages.
+Performance PASS: night tick 3447us / 8333us, path rebuild 8896us / 33333us.
+The first full run was 57 PASS / 3 FAIL in 591s: the old crop-art fixture put
+new crops past the map edge and required real raster ownership; the UI
+showcase exposed the overflowing inventory and counted clipped sell rows as
+out-of-screen controls; old headless assumptions still expected three crops,
+real files and a three-day first sorted seed. These were corrected and the
+full suite rerun. The earlier windowed input attempt used the wrong launch
+mode; the official headless input road passed.
+
+Hashes (intentional): SIM 2338199505 -> 2176208283; DATA 3886875281 -> 887578929.
+Nine extra held/gained keys and the sorted twelve-crop determinism field move
+SIM; the crop/price/resource/group tables move DATA. State.VERSION stays 7;
+existing load normalisation fills missing resource keys from older saves.
+Performance baselines were not accepted or changed.
+
+Shots: implementation/shots/0168/{twelve_crops,seed_page_one,seed_page_two,
+shop_seeds_one,shop_seeds_two,inventory_crops,noon,dusk,wave,result,tech}-pt_BR.png.
+All eleven are 1920x1080 Godot captures, opened individually at original size.
+The showcase has twelve labelled strips and four stages per strip; tall
+stand-ins stay grounded and the farmer keeps his existing 128-screen-pixel
+scale. The screenshot runner refreshes the view after each completed fixture,
+so consecutive identical fields do not reuse a stale signature and disappear.
+Fixture labels are removed after their own capture. No art PNG was generated
+or edited; only Godot screenshots and import metadata were written.
+
+Notes: implementation/backlog/packs/{A015-spring-crops,A016-summer-crops,
+A017-autumn-crops}.md were edited for this task and deliberately left unstaged,
+per the owner's rule for that directory. All pre-existing owner/art changes
+remain outside the commit. The RUN-key question remains with the owner.
+The 0170 prompt now reflects the retained carrot default; its season rule
+and implementation remain for that task. No push. Exactly one backlog task completed.
+
+Files: src/core/{farming,game_data}.gd, src/ui/{day_hud,inventory_panel,names,
+placeholder_art,shop_panel,ui_kit,world_view}.gd,
+src/tools/{art_showcase,ui_art_showcase,headless_check,headless_v1,input_check,
+input_v1,shot}.gd, assets/locale/strings.csv, tools/{placeholders.py,
+determinism_sim_hash.txt,determinism_data_hash.txt},
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/{0168-crop-data,0170-crop-seasons}.md,
+implementation/shots/0168/, docs/devlog/{index,index.pt_BR}.md
+(refreshed by devlog.py --check).

@@ -698,7 +698,7 @@ static func _frame(name: String, bottom: int = MARGIN,
 static func _texture(name: String) -> Texture2D:
 	if _cache.has(name):
 		return _cache[name]
-	var path := DIR + name + ".png"
+	var path := PlaceholderArt.texture_path(DIR + name + ".png")
 	var found: Texture2D = load(path) if ResourceLoader.exists(path) else null
 	_cache[name] = found
 	return found

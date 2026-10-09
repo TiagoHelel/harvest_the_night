@@ -647,9 +647,22 @@ func _crops_check() -> void:
 		var cell := Grid.cell(idx)
 		var art: String = sprite.get_meta("plot_art")
 		var path := WorldView.CROP_DIR + art + ".png"
-		expect(sprite.texture.resource_path == path and RasterArt.FRAMES.has(path), "Every crop and soil uses its required source without fallback")
+		var shape := PlaceholderArt.frame(path)
+		var source := PlaceholderArt.texture_path(path)
+		if shape.is_empty():
+			expect(false, "Every crop has registered runtime geometry: %s" % path)
+			continue
+		var texture: Texture2D = sprite.texture.atlas if sprite.texture is AtlasTexture else sprite.texture
+		expect(texture.resource_path == source and not shape.is_empty(),
+			"Every crop and soil uses its required accepted source or registered stand-in")
+		expect(Vector2i(sprite.texture.get_size()) == shape["canvas"],
+			"Every crop uses its final native canvas, including padded tall stand-ins")
 		expect(sprite.position == Vector2(cell * 16 + Vector2i(8,16)), "Water and growth never shift a crop's logical ground contact")
-		expect(sprite.offset == -Vector2(RasterArt.FRAMES[path]["pivot"]), "Tall corn and soil use their exact separate source pivots")
+		expect(sprite.offset == -Vector2(shape["pivot"]), "Tall crops and soil use their exact separate pivots")
+		var crop := StringName(art.get_slice("_", 0))
+		if shape.has("stand_in") and GameData.CROPS.has(crop):
+			expect(sprite.modulate == PlaceholderArt.art_tint(crop),
+				"A temporary crop draws its registered tint")
 		expect(sprite.get_parent() == _world._plots, "Walkable crop art stays on the ground layer below actors")
 		counts[idx] = int(counts.get(idx, 0)) + 1
 	for idx in _state["plots"]:
@@ -697,7 +710,7 @@ func _crops_family() -> void:
 	_world.set_process(false)
 	for lighting in 4:
 		_crops_fixture(lighting)
-		var kinds := Farming.seeds()
+		var kinds: Array = [&"carrot", &"corn", &"wheat"]
 		for row in kinds.size():
 			for stage in 4:
 				for moisture in 2:
@@ -747,6 +760,20 @@ func _crops_family() -> void:
 		await _reaction_settle(view)
 		_crops_check()
 		await _shoot("farm_light%d" % lighting, "Unchanged production farm crops, dawn/day/dusk/night %d" % lighting)
+
+	# 0168: the original three-row fixtures retain their framing. All twelve
+	# get a separate grid, which never writes beyond the farm's right edge.
+	for lighting in 4:
+		_crops_fixture(lighting)
+		var ids := Farming.seeds()
+		for i in ids.size():
+			for stage in 4:
+				_crops_put(ids[i], stage, stage % 2 == 0,
+					Vector2i(9 + (i % 3) * 6 + stage, 5 + (i / 3) * 3))
+		await _reaction_settle(view)
+		_crops_check()
+		await _shoot("twelve_light%d" % lighting,
+			"Twelve crops / four real growth stages / final canvases and feet")
 
 
 ## Source-owned prop species and real harvest/occlusion fixtures.

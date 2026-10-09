@@ -23,8 +23,8 @@ extends Control
 ## a plot of it is worth over a whole day. **That last number is the reason the
 ## strip exists** - corn sells for more than carrot and carrot is worth more per
 ## day, and a player comparing the two sale prices is comparing the wrong pair
-## of numbers. The rows are built from `Farming.seeds()`, so a fourth crop
-## appears here, on a number key, without this file being touched.
+## of numbers. Six rows per page come from `Farming.seeds()`; number keys
+## always pick the matching row on the visible page (task 0168).
 ##
 ## ## The watering can
 ##
@@ -126,6 +126,11 @@ var driver: SimDriver
 var _labels: Dictionary = {}        # resource id -> Label
 var _last: Dictionary = {}          # resource id -> the number it last showed
 var _flash: Dictionary = {}         # resource id -> seconds of glow left
+var _seed_page := 0
+var _last_seed := &""
+var _seed_badge: Label
+var _seed_previous: Button
+var _seed_next: Button
 var _seed_rows: Dictionary = {}     # crop id -> Label
 var _water: Label
 var _line: Label
@@ -181,7 +186,7 @@ func _ready() -> void:
 	# The can sits under the seed strip, because the two are the same chore:
 	# what am I about to plant, and have I got water for it.
 	_water = _label("WaterCan",
-		Vector2(7, 46 + Farming.seeds().size() * 10 + 3), UiKit.DIM)
+		Vector2(7, 46 + SEED_ACTIONS.size() * 10 + 3), UiKit.DIM)
 
 	# Middle of the screen, under the farmer rather than in a corner: the
 	# player is looking at the water, not at the top bar.
@@ -235,7 +240,7 @@ func _build_seed_strip() -> void:
 	strip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	strip.color = Color(0.05, 0.04, 0.09, 0.66)
 	strip.position = Vector2(4, 33)
-	strip.size = Vector2(134, 13 + ids.size() * 10 + 14)
+	strip.size = Vector2(168, 108)
 	add_child(strip)
 
 	var heading := _label("SeedHeading", Vector2(7, 35), UiKit.WARM)
@@ -243,11 +248,29 @@ func _build_seed_strip() -> void:
 
 	for i in ids.size():
 		var id: StringName = ids[i]
-		var row := _label("seed_%s" % id, Vector2(7, 46 + i * 10), UiKit.DIM)
-		row.text = I18n.f(&"DHUD_SEED_ROW", [i + 1, Names.of(id),
+		var row := _label("seed_%s" % id, Vector2(7, 46 + (i % SEED_ACTIONS.size()) * 10), UiKit.DIM)
+		row.text = I18n.f(&"DHUD_SEED_ROW", [i % SEED_ACTIONS.size() + 1, Names.of(id),
 			int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
 			Farming.days_to_grow(id), Farming.value_per_season(id)])
 		_seed_rows[id] = row
+	_seed_previous = _seed_button("SeedPrevious", &"SEED_PREVIOUS", Vector2(7, 123), -1)
+	_seed_next = _seed_button("SeedNext", &"SEED_NEXT", Vector2(114, 123), 1)
+	_seed_badge = _label("SeedPage", Vector2(77, 125), UiKit.DIM)
+
+
+func _seed_button(node_name: String, key: StringName, at: Vector2, step: int) -> Button:
+	var button := Button.new()
+	button.name = node_name
+	button.text = I18n.t(key)
+	button.position = at
+	button.size = Vector2(50, 14)
+	button.focus_mode = Control.FOCUS_ALL
+	button.theme_type_variation = UiKit.ROW
+	button.pressed.connect(func() -> void:
+		_seed_page = clampi(_seed_page + step, 0, (Farming.seeds().size() - 1) / SEED_ACTIONS.size())
+		_refresh(true))
+	add_child(button)
+	return button
 
 
 ## Everything that belongs to the daylight, hidden together when it ends.
@@ -298,7 +321,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	for slot in SEED_ACTIONS.size():
 		if not event.is_action_pressed(SEED_ACTIONS[slot]):
 			continue
-		if Farming.select_seed_at(_state, slot):
+		if Farming.select_seed_at(_state, _seed_page * SEED_ACTIONS.size() + slot):
 			get_viewport().set_input_as_handled()
 		return
 
@@ -407,9 +430,23 @@ func _refresh(force: bool) -> void:
 	# The chosen row is lit, so the strip answers "what am I about to plant"
 	# without the player having to remember which key they last pressed.
 	var chosen := Farming.selected_seed(_state)
-	for id in _seed_rows:
-		(_seed_rows[id] as Label).theme_type_variation = UiKit.WARM \
-			if id == chosen else UiKit.DIM
+	var seeds := Farming.seeds()
+	if chosen != _last_seed:
+		_seed_page = seeds.find(chosen) / SEED_ACTIONS.size()
+		_last_seed = chosen
+	for i in seeds.size():
+		var row: Label = _seed_rows[seeds[i]]
+		row.visible = i / SEED_ACTIONS.size() == _seed_page
+		row.theme_type_variation = UiKit.WARM if seeds[i] == chosen else UiKit.DIM
+	# The theme arrives after _ready; shrink the default-font minimum again.
+	_seed_previous.size = Vector2(50, 14)
+	_seed_next.size = Vector2(50, 14)
+	_seed_badge.text = I18n.f(&"SEED_PAGE", [_seed_page + 1,
+		ceili(float(seeds.size()) / SEED_ACTIONS.size())])
+	_seed_previous.disabled = _seed_page == 0
+	_seed_next.disabled = (_seed_page + 1) * SEED_ACTIONS.size() >= seeds.size()
+	_seed_previous.text = I18n.t(&"SEED_PREVIOUS")
+	_seed_next.text = I18n.t(&"SEED_NEXT")
 
 	# **The line, while there is one.** Waiting says so quietly; a bite shouts,
 	# because the window is a second and a half.
@@ -486,7 +523,7 @@ func relabel() -> void:
 		if not _seed_rows.has(id):
 			continue
 		(_seed_rows[id] as Label).text = I18n.f(&"DHUD_SEED_ROW",
-			[i + 1, Names.of(id),
+			[i % SEED_ACTIONS.size() + 1, Names.of(id),
 			int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
 			Farming.days_to_grow(id), Farming.value_per_season(id)])
 	show_state(_state)

@@ -1574,6 +1574,8 @@ func _case_0028_seeds() -> void:
 
 	var state := driver.state
 	var ids := Farming.seeds()
+	Farming.select_seed(state, ids[0])
+	await frames(2)
 
 	# **There is a row per crop, and it was built from the table.** Nothing in
 	# the HUD names a crop, so a fourth one appears here on its own.
@@ -1616,12 +1618,11 @@ func _case_0028_seeds() -> void:
 	expect(ink(first) != lit_colour, "off the one it left", "%s"
 		% ink(first))
 
-	# **A key past the last crop changes nothing**, rather than selecting
-	# something that is not there and failing at the furrow a minute later.
+	# **The last key names the last row of this page** (0168).
 	await tap_key(KEY_6)
 	await frames(2)
-	expect(Farming.selected_seed(state) == StringName(ids[1]),
-		"a number with no crop behind it is ignored",
+	expect(Farming.selected_seed(state) == StringName(ids[5]),
+		"the sixth slot picks the sixth crop on this page",
 		str(Farming.selected_seed(state)))
 
 	# **And what gets planted is what the strip said.** Walk the farmer onto a
@@ -2788,7 +2789,12 @@ func _case_0040_shop() -> void:
 		"an empty shelf is a button that says no rather than one that lies")
 
 	# **The seeds, side by side with what the choice needs.**
-	for id in Farming.seeds():
+	var seed_ids := Farming.seeds()
+	for i in seed_ids.size():
+		if i > 0 and i % DayHud.SEED_ACTIONS.size() == 0:
+			await click_control("ShopSeedsNext")
+			await frames(2)
+		var id: StringName = seed_ids[i]
 		var seed: Label = require_control("seed_label_%s" % id)
 		expect(seed != null, "%s has a row" % id)
 		if seed == null:
@@ -2798,6 +2804,8 @@ func _case_0040_shop() -> void:
 		expect(seed.text.contains(str(Farming.value_per_season(id))),
 			"and what it is worth over a season", seed.text)
 
+	await click_control("ShopSeedsPrevious")
+	await frames(2)
 	var other := &""
 	for id in Farming.seeds():
 		if Farming.selected_seed(state) != id:

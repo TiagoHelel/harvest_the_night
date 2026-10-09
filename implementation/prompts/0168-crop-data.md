@@ -1,7 +1,7 @@
 # 0168 - Nine new crops
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0165
 - **Likely files:** src/core/game_data.gd, src/ui/names.gd, assets/locale/strings.csv, src/ui/day_hud.gd, src/ui/shop_panel.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/input_check.gd, src/tools/headless_v1.gd
 

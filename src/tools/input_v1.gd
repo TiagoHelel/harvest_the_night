@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 23
+const V1_CASES := 24
 
 
 func _process(delta: float) -> bool:
@@ -73,6 +73,7 @@ func _run() -> void:
 	await _case_0159_seasons()
 	await _case_0160_ending()
 	await _case_0167_till_grass()
+	await _case_0168_seed_pages()
 	_finish()
 
 
@@ -1991,5 +1992,60 @@ func _case_0167_till_grass() -> void:
 	state["terrain"][Grid.index(middle + Vector2i.UP)] = Farm.Terrain.PATH
 	await hold_key(KEY_SPACE, 40)
 	expect(not Farming.is_tilled(state, middle), "facing a path never hoes under the farmer's feet")
+	await close_scene()
+	_completed += 1
+
+
+## 0168 - page navigation and six keys expose twelve real seed choices.
+func _case_0168_seed_pages() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	var language := I18n.locale()
+	I18n.use("pt_BR")
+	I18n.relabel(_scene)
+	var ids := Farming.seeds()
+	await frames(2)
+	var before := State.hash_of(state)
+	# Freeze the driver while checking that paging changes only the view.
+	driver.set_process(false)
+	await click_control("SeedNext")
+	await frames(2)
+	expect(State.hash_of(state) == before, "browsing a seed page does not write game state")
+	for i in ids.size():
+		var row := require_control("seed_%s" % ids[i]) as Label
+		expect(row != null and row.visible == (i >= 6),
+			"the second HUD page contains exactly its six crops")
+	await tap_key(KEY_6)
+	expect(Farming.selected_seed(state) == ids[11], "6 chooses the sixth crop on page two")
+	await click_control("SeedPrevious")
+	await tap_key(KEY_1)
+	expect(Farming.selected_seed(state) == ids[0], "1 chooses the first crop on page one")
+	Shop.open(state)
+	Shop.show_tab(state, Shop.BUY)
+	await frames(3)
+	await click_control("ShopSeedsNext")
+	await frames(2)
+	for i in range(6, 12):
+		var row := require_control("seed_label_%s" % ids[i]) as Label
+		expect(row != null and row.text.contains(Names.of(ids[i])),
+			"the stall second page names %s" % ids[i])
+		if row == null:
+			continue
+		var scroll := row.get_parent().get_parent().get_parent() as ScrollContainer
+		expect(scroll != null and scroll.get_global_rect().encloses(row.get_global_rect()),
+			"the complete translated row for %s fits the stall viewport" % ids[i])
+	await click_control("sow_%s" % ids[11])
+	expect(Farming.selected_seed(state) == ids[11], "a stall page-two button selects its crop")
+	Shop.close(state)
+	await frames(2)
+	expect((require_control("seed_%s" % ids[11]) as Label).visible,
+		"the HUD follows a seed chosen at the stall")
+	driver.set_process(true)
+	I18n.use(language)
 	await close_scene()
 	_completed += 1

@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-156 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
+157 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -200,10 +200,11 @@ is the sort of thing this list exists to say out loud.
 | 0165 | Crops grow by days | 2026-10-09 |
 | 0166 | A day of eight to ten minutes | 2026-10-09 |
 | 0167 | Any grass can be tilled | 2026-10-09 |
+| 0168 | Nine new crops | 2026-10-09 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 40 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 42 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -245,6 +246,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Waking up: the morning report** (0138) - `sim` 40581503 -> 1222657941
 - **Teaching the new night** (0141) - `sim` 1222657941 -> 3911863006
 - **Teaching the new night** (0141) - `data` 898358060 -> 3047858822
+- **Nine new crops** (0168) - `sim` 2338199505 -> 2176208283
+- **Nine new crops** (0168) - `data` 3886875281 -> 887578929
 
 ## What went wrong
 

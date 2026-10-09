@@ -66,6 +66,12 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["inventory_crops", "the 24 resources in the temporary two-column ledger", "InventoryPanel"],
+	["twelve_crops", "twelve crops at all four stages", ""],
+	["seed_page_one", "first six seeds in the HUD", ""],
+	["seed_page_two", "last six seeds in the HUD", ""],
+	["shop_seeds_one", "first six seeds at the stall", "ShopPanel"],
+	["shop_seeds_two", "last six seeds at the stall", "ShopPanel"],
 	["till_grass", "tilled grass beside starter beds at noon", ""],
 	["till_grass_night", "the same expanded field at night", ""],
 	["noon", "the farm at noon", ""],
@@ -656,6 +662,12 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	main.get_node("%WorldView").cursor().follows_pointer = false
 
 	match name:
+		"inventory_crops": _set_inventory_crops(state)
+		"twelve_crops": _set_twelve_crops(state)
+		"seed_page_one": _set_seed_page_one(state)
+		"seed_page_two": _set_seed_page_two(state)
+		"shop_seeds_one": _set_shop_seeds_one(state)
+		"shop_seeds_two": _set_shop_seeds_two(state)
 		"till_grass": _set_till_grass(state)
 		"till_grass_night": _set_till_grass_night(state)
 		"noon": _set_noon(state)
@@ -716,7 +728,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 
 	if int(state["phase"]) == Phases.DAY:
 		_walk_to(state, _standing_at)
-		main.get_node("%WorldView").look_at_cell(Player.cell(state))
+		main.get_node("%WorldView").look_at_cell(Vector2i(51, 22) if name == "twelve_crops" else Player.cell(state))
 	else:
 		var at := _camera_at if _camera_at.x >= 0 else Farm.house_centre(state)
 		main.aim_night_camera((Vector2(at) + Vector2.ONE * 0.5) * float(GameData.TILE_SIZE))
@@ -724,7 +736,22 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		# picture's middle: the question these pictures answer is whether it
 		# reads over dark ground.
 		main.get_node("%WorldView").cursor().place_at(_open_ground_near(state, at))
+	# Fixtures edit state after begin_run handed it to the view. Two identical
+	# fields can share a cached signature; explicitly hand over the completed
+	# fixture so consecutive seed-page captures keep the crops on screen.
+	main.get_node("%WorldView").show_state(state)
 	_only_showing(main, str(entry[2]))
+	if name == "twelve_crops":
+		for i in Farming.seeds().size():
+			var label := Label.new()
+			label.name = "CropStageLabel_%d" % i
+			label.text = Names.of(Farming.seeds()[i])
+			label.position = Vector2(48 + (i % 3) * 5, 18 + (i / 3) * 3) * GameData.TILE_SIZE - Vector2(0, 16)
+			label.add_theme_font_override("font", UiKit.font())
+			label.add_theme_font_size_override("font_size", 8)
+			label.add_theme_color_override("font_color", UiKit.colour(UiKit.WARM))
+			label.z_index = 100
+			main.get_node("%WorldView").add_child(label)
 
 	for i in SETTLE:
 		# **The game has to be running while the shutter is open.** The view
@@ -749,6 +776,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		(main.get_node("%ResultScreen").get_node("CreditsRoll") as CreditsRoll).finish()
 	_just_before_the_shutter(main, state, name)
 	await process_frame
+	if name == "twelve_crops":
+		view.look_at_cell(Vector2i(51, 22))
 	await RenderingServer.frame_post_draw
 
 	var image := root.get_texture().get_image()
@@ -766,6 +795,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	print("  %-8s %-24s tick %5d  %-11s %s" % [name, str(entry[1]),
 		int(state["tick"]), Phases.name_of(int(state["phase"])),
 		_worth_saying(state)])
+	if name == "twelve_crops":
+		for i in Farming.seeds().size():
+			main.get_node("%WorldView").get_node("CropStageLabel_%d" % i).free()
 
 
 ## Open the shutter and write what is on the screen.
@@ -1012,7 +1044,7 @@ func _set_options_controls_pad(state: Dictionary) -> void:
 
 
 func _a_sown_field(state: Dictionary) -> void:
-	Resources.gain(state, {GameData.MONEY: 240, GameData.WOOD: 180,
+	Resources.gain(state, {GameData.MONEY: 999, GameData.WOOD: 180,
 		GameData.STONE: 120, GameData.IRON: 90, GameData.OIL: 30})
 	var seeds := Farming.seeds()
 	var sown := 0
@@ -1615,3 +1647,56 @@ func _till_grass_fixture(state: Dictionary, night: bool) -> void:
 	if night:
 		NightRoad.to_night(state)
 		NightRoad.park(state)
+
+
+## 0168 - each crop occupies a labelled four-stage strip, at game scale.
+func _set_twelve_crops(state: Dictionary) -> void:
+	_on_date(state, 2)
+	state["plots"].clear()
+	for y in range(16, 31):
+		for x in range(47, 64):
+			var idx := Grid.index(Vector2i(x, y))
+			state["terrain"][idx] = Farm.Terrain.GRASS
+			state["occupants"].erase(idx)
+	state["grid_version"] += 1
+	var ids := Farming.seeds()
+	for i in ids.size():
+		var id: StringName = ids[i]
+		for stage in 4:
+			var cell := Vector2i(48 + (i % 3) * 5 + stage, 18 + (i / 3) * 3)
+			var idx := Grid.index(cell)
+			# A photographed display bed, not a rule for clearing the real farm.
+			state["terrain"][idx] = Farm.Terrain.GRASS
+			state["occupants"].erase(idx)
+			state["plots"][idx] = {"crop": id, "growth": ceili(float(stage * Farming.days_to_grow(id)) / 3.0),
+				"watered": true, "last_worked_morning": int(state["day"])}
+	_standing_at = Vector2i(51, 29)
+	_stand(state, _standing_at)
+	state["day_tick"] = Phases.tick_at_minute(WorldView.NOON_MINUTE)
+
+
+func _set_seed_page_one(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 2)
+	Farming.select_seed(state, Farming.seeds()[0])
+
+
+func _set_seed_page_two(state: Dictionary) -> void:
+	_set_seed_page_one(state)
+	Farming.select_seed(state, Farming.seeds()[6])
+
+
+func _set_shop_seeds_one(state: Dictionary) -> void:
+	_set_seed_page_one(state)
+	Shop.open(state)
+	Shop.show_tab(state, Shop.BUY)
+
+
+func _set_shop_seeds_two(state: Dictionary) -> void:
+	_set_seed_page_two(state)
+	Shop.open(state)
+	Shop.show_tab(state, Shop.BUY)
+
+
+func _set_inventory_crops(state: Dictionary) -> void:
+	_set_seed_page_one(state)

@@ -130,6 +130,8 @@ const NODE_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_
 const STUMP_2X2 := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 30), "draw_scale": 1.0}
 
 ## A014's crop states: one 16x16 tile, pivot at its foot (task 0155).
+const CROP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 30), "draw_scale": 1.0}
+
 const CROP_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
 
 ## A057's morning report header: a 206x40 band, the width of the report's
@@ -197,6 +199,33 @@ const ART := {
 	&"coal_seam": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/seam", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "tint": Color(0.45, 0.45, 0.52)},
 	&"gold_ore": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "tint": Color(1.35, 1.2, 0.55)},
 	&"hardwood_stump": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": STUMP_2X2, "final": STUMP_2X2, "bare": true, "stand_in_scale": 2.0, "tint": Color(0.85, 0.72, 0.62)},
+	&"potato": {"pack": "A015", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/wheat", "stand_in_frames": 4, "tint": Color(0.73, 0.89, 0.54), "geometry": CROP_TILE, "final": CROP_TILE},
+	&"icon_potato": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.73, 0.89, 0.54), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_potato": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.73, 0.89, 0.54), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"garlic": {"pack": "A015", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/wheat", "stand_in_frames": 4, "tint": Color(0.84, 0.96, 1.0), "geometry": CROP_TILE, "final": CROP_TILE},
+	&"icon_garlic": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.84, 0.96, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_garlic": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.84, 0.96, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"strawberry": {"pack": "A015", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(1.0, 0.6, 0.7), "geometry": CROP_TILE, "final": CROP_TILE},
+	&"icon_strawberry": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(1.0, 0.6, 0.7), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_strawberry": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.0, 0.6, 0.7), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"pepper": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(1.0, 0.51, 0.28), "geometry": CROP_TILE, "final": CROP_TILE},
+	&"icon_pepper": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(1.0, 0.51, 0.28), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_pepper": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.0, 0.51, 0.28), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"sunflower": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/corn", "stand_in_frames": 4, "tint": Color(1.0, 0.87, 0.35), "geometry": CROP_TALL, "final": CROP_TALL},
+	&"icon_sunflower": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_corn", "tint": Color(1.0, 0.87, 0.35), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_sunflower": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_corn", "tint": Color(1.0, 0.87, 0.35), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"melon": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(0.43, 0.93, 0.73), "geometry": CROP_TILE, "final": CROP_TILE},
+	&"icon_melon": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.43, 0.93, 0.73), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_melon": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.43, 0.93, 0.73), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"pumpkin": {"pack": "A017", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(1.0, 0.68, 0.32), "geometry": CROP_TILE, "final": CROP_TILE},
+	&"icon_pumpkin": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(1.0, 0.68, 0.32), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_pumpkin": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.0, 0.68, 0.32), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"grape": {"pack": "A017", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/corn", "stand_in_frames": 4, "tint": Color(0.77, 0.56, 1.0), "geometry": CROP_TALL, "final": CROP_TALL},
+	&"icon_grape": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_corn", "tint": Color(0.77, 0.56, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_grape": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_corn", "tint": Color(0.77, 0.56, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"beet": {"pack": "A017", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(0.84, 0.45, 0.78), "geometry": CROP_TILE, "final": CROP_TILE},
+	&"icon_beet": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.84, 0.45, 0.78), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_beet": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.84, 0.45, 0.78), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"trampled": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 	# **Task 0158: the forecast.** A010's marks drawn by code; A011's heads cut
@@ -300,7 +329,11 @@ static func texture_path(path: String) -> String:
 	if ART.has(at[0]):
 		var stand_in := String(ART[at[0]]["stand_in"])
 		# Drawn by code: there is no file to load (`is_drawn`).
-		return "" if stand_in.is_empty() else "res://sprites/%s.png" % stand_in
+		if stand_in.is_empty():
+			return ""
+		if int(ART[at[0]].get("stand_in_frames", 1)) > 1:
+			stand_in += "_%d" % int(at[1])
+		return "res://sprites/%s.png" % stand_in
 	return stand_in_path(at[0], int(at[1]))
 
 

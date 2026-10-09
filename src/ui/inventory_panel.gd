@@ -4,7 +4,7 @@ extends Control
 ## Everything you own, on one key.
 ##
 ## The top bar shows six numbers because that is what fits across 480 pixels.
-## There are fifteen resources. This is where the other nine live.
+## There are twenty-four resources after 0168. This is where the rest live.
 ##
 ## ## It is a view, and it behaves like one
 ##
@@ -32,7 +32,7 @@ extends Control
 const ROW_HEIGHT := 11
 
 var _state: Dictionary = {}
-var _rows: VBoxContainer
+var _rows: HBoxContainer
 var _total: Label
 var _built_for := ""
 
@@ -51,9 +51,9 @@ func _ready() -> void:
 
 	var frame := PanelContainer.new()
 	frame.name = "InventoryFrame"
-	# The complete fifteen-resource ledger is 252px tall at native resolution.
-	frame.position = Vector2(138, 9)
-	frame.custom_minimum_size = Vector2(204, 0)
+	# 0168 keeps the 24-item ledger readable until group pages arrive in 0169.
+	frame.position = Vector2(36, 9)
+	frame.custom_minimum_size = Vector2(408, 0)
 	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(frame)
 
@@ -64,7 +64,7 @@ func _ready() -> void:
 	var title := _line("InventoryTitle", I18n.t(&"INV_TITLE"), UiKit.WARM)
 	column.add_child(title)
 
-	_rows = VBoxContainer.new()
+	_rows = HBoxContainer.new()
 	_rows.name = "InventoryRows"
 	column.add_child(_rows)
 
@@ -132,15 +132,25 @@ func _build() -> void:
 		_rows.remove_child(child)
 		child.queue_free()
 
+	var columns: Array[VBoxContainer] = []
+	var lengths: Array[int] = [0, 0]
+	for i in 2:
+		var list := VBoxContainer.new()
+		list.custom_minimum_size.x = 194
+		_rows.add_child(list)
+		columns.append(list)
 	for entry in Inventory.groups(_state):
 		var group: Dictionary = entry
 		var rows: Array = group["rows"]
 		if rows.is_empty():
 			continue
-		_rows.add_child(_line("group_%s" % group["name"],
+		var slot := 0 if lengths[0] <= lengths[1] else 1
+		var list: VBoxContainer = columns[slot]
+		lengths[slot] += rows.size() + 1
+		list.add_child(_line("group_%s" % group["name"],
 			"- %s" % str(group["name"]).to_upper(), UiKit.WARM))
 		for line in rows:
-			_rows.add_child(_row(line as Dictionary))
+			list.add_child(_row(line as Dictionary))
 
 	var worth := Inventory.worth(_state)
 	_total.text = I18n.f(&"INV_WORTH", [worth])
@@ -156,6 +166,7 @@ func _row(line: Dictionary) -> Control:
 	var icon := TextureRect.new()
 	icon.name = "inv_icon_%s" % line["id"]
 	icon.texture = UiKit.icon(StringName(line["id"]),true)
+	icon.modulate = PlaceholderArt.art_tint(StringName("hud_%s" % line["id"]))
 	icon.custom_minimum_size = Vector2(10,10)
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP

@@ -52,7 +52,8 @@ static func initial() -> Dictionary:
 		# **Not `"seed"`.** That name is already the run's RNG seed, and the
 		# state is one flat namespace: this collided silently and planting did
 		# nothing at all until `State.create()` learned to refuse duplicates.
-		"selected_seed": seeds()[0],
+		# Keep the affordable starter when new ids sort before carrot (0168).
+		"selected_seed": GameData.CARROT,
 		# Tiles' worth of water in hand. Filled by standing next to water, spent
 		# one tile at a time. Starts empty: the farmer walks out of the house in
 		# the morning carrying nothing.

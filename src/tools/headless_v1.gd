@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 36
+const GROUPS := 37
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -105,6 +105,7 @@ func _run() -> void:
 	_task_0165_days()
 	_task_0166_long_day()
 	_task_0167_till_grass()
+	_task_0168_crops()
 
 
 func _finish() -> void:
@@ -3401,4 +3402,60 @@ func _task_0167_till_grass() -> void:
 	expect(WorldView.tilled_corner_mask(border, middle) == 1, "a concave NW diagonal takes its corner cap")
 	border["terrain"][Grid.index(middle + Vector2i(-1, -1))] = Farm.Terrain.SOIL
 	expect(WorldView.tilled_corner_mask(border, middle) == 0, "starter soil joins without a turf seam")
+	_completed += 1
+
+
+## 0168 - all twelve crops earn their ready stage in watered mornings.
+func _task_0168_crops() -> void:
+	var days := {&"carrot": 3, &"wheat": 4, &"corn": 8, &"potato": 5,
+		&"garlic": 4, &"strawberry": 8, &"pepper": 5, &"sunflower": 7,
+		&"melon": 10, &"pumpkin": 10, &"grape": 8, &"beet": 6}
+	expect(GameData.CROPS.size() == 12 and GameData.check_crops(GameData.CROPS).is_empty(),
+		"all twelve crops validate without dominating another crop")
+	var language := I18n.locale()
+	var view := WorldView.new()
+	for id in Farming.seeds():
+		var data: Dictionary = GameData.CROPS[id]
+		expect(int(data["growth_days"]) == int(days[id]) and int(data["stages"]) == 4,
+			"%s has its plan days and four stages" % id)
+		expect(not data.has("season") and not data.has("regrowth"),
+			"season and regrowth are later rules for %s" % id)
+		expect(GameData.SELL_PRICE.has(id) and GameData.RESOURCES.has(id),
+			"%s is a priced ledger resource" % id)
+		var grouped := false
+		for group in GameData.RESOURCE_GROUPS:
+			if group["name"] == &"crops" and id in group["members"]:
+				grouped = true
+		expect(grouped, "%s belongs to the crops group" % id)
+		for locale in ["en", "pt_BR"]:
+			I18n.use(locale)
+			expect(Names.KEYS.has(id) and not Names.of(id).is_empty()
+				and Names.of(id) != str(Names.KEYS.get(id, &"")),
+				"%s has a name in %s" % [id, locale])
+		var state := State.create(1680)
+		var cell: Vector2i = Farming.field_cells(state)[0]
+		Farming.select_seed(state, id)
+		Farming.act(state, cell)
+		Farming.act(state, cell)
+		for morning in range(1, int(days[id]) + 1):
+			state["water_can"] = 1
+			Farming.act(state, cell)
+			Farming.dry_out(state)
+			Farming.morning(state)
+			expect(Farming.is_ready(state, cell) == (morning == int(days[id])),
+				"%s ready only on watered morning %d" % [id, int(days[id])])
+		for stage in 4:
+			var path := "res://sprites/crops/%s_%d.png" % [id, stage]
+			var shape := PlaceholderArt.frame(path)
+			var tall: bool = id in [&"sunflower", &"grape"]
+			expect(shape.get("canvas") == Vector2i(16, 32 if tall else (24 if id == &"corn" else 16))
+				and shape.get("pivot") == Vector2i(8, 30 if tall else (22 if id == &"corn" else 14)),
+				"%s stage %d uses its final crop geometry" % [id, stage])
+			var texture := view._crop_texture("%s_%d" % [id, stage])
+			expect(texture != null and Vector2i(texture.get_size()) == shape["canvas"],
+				"%s stage %d draws on its final canvas without resizing pixels" % [id, stage])
+			expect(ResourceLoader.exists(PlaceholderArt.texture_path(path)),
+				"%s stage %d resolves to approved existing art" % [id, stage])
+	view.free()
+	I18n.use(language)
 	_completed += 1

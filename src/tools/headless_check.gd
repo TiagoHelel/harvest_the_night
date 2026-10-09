@@ -1407,7 +1407,7 @@ func _task_0109_reactions() -> void:
 		if Grid.manhattan(found, plots[0]) > 4:
 			continue
 		for one in [loud, quiet]:
-			Farming.select_seed(one, StringName(Farming.seeds()[0]))
+			Farming.select_seed(one, GameData.CARROT)
 			Farming.act(one, found)
 			Farming.act(one, found)
 	SuiteKit.watered_mornings(loud, 3)
@@ -1509,7 +1509,7 @@ func _task_0109_reactions() -> void:
 	for found in soil:
 		if Grid.manhattan(found, near) > 4:
 			continue
-		Farming.select_seed(field, StringName(Farming.seeds()[0]))
+		Farming.select_seed(field, GameData.CARROT)
 		Farming.act(field, found)
 		Farming.act(field, found)
 	House.wake(field)
@@ -4185,9 +4185,12 @@ func _task_0028_crops() -> void:
 	var ids := Farming.seeds()
 	expect(ids.size() == GameData.CROPS.size(),
 		"every crop is in the seed list", str(ids))
-	expect(ids == [GameData.CARROT, GameData.CORN, GameData.WHEAT],
+	expect(ids == GameData.sorted_names(GameData.CROPS.keys()),
 		"in a fixed, sorted order - the state is not allowed to depend on "
 		+ "Dictionary order", str(ids))
+
+	# Keep the original three-way economic example; 0168 tests all twelve.
+	ids = [GameData.CARROT, GameData.CORN, GameData.WHEAT]
 
 	# **Each crop yields and times what the table says.** Planted, grown a tick
 	# at a time, and harvested through the real verbs.
@@ -4316,12 +4319,12 @@ func _task_0028_crops() -> void:
 	var picky := State.create(902)
 	expect(not Farming.select_seed(picky, &"gun_tower"),
 		"a gun tower is not a seed")
-	expect(not Farming.select_seed_at(picky, ids.size()),
+	expect(not Farming.select_seed_at(picky, Farming.seeds().size()),
 		"and there is no slot past the last crop")
 	expect(Farming.selected_seed(picky) == StringName(ids[0]),
 		"so the selection is untouched", str(Farming.selected_seed(picky)))
 	expect(Farming.select_seed_at(picky, 1), "slot 2 picks the second crop")
-	expect(Farming.selected_seed(picky) == StringName(ids[1]),
+	expect(Farming.selected_seed(picky) == StringName(Farming.seeds()[1]),
 		"which is the sorted second", str(Farming.selected_seed(picky)))
 
 	# **A fourth crop is one dictionary entry.** Nothing outside GameData names
@@ -4329,8 +4332,8 @@ func _task_0028_crops() -> void:
 	# is whatever the table turned out to hold.
 	expect(Farming.seeds().size() == GameData.CROPS.size(),
 		"the seed list is the crop table, not a copy of it")
-	expect(DayHud.SEED_ACTIONS.size() > GameData.CROPS.size(),
-		"and there is a spare hotbar slot for the next one",
+	expect(DayHud.SEED_ACTIONS.size() == 6,
+		"and six hotbar slots page through the crop table",
 		str(DayHud.SEED_ACTIONS.size()))
 	expect(GameData.check_crops(GameData.CROPS).is_empty(),
 		"the shipped table passes its own balance check",
@@ -4409,7 +4412,7 @@ func _task_0029_watering() -> void:
 		# And there is art for each, so "visible" means visible.
 		for stage in 4:
 			var path := "res://sprites/crops/%s_%d.png" % [id, stage]
-			expect(ResourceLoader.exists(path),
+			expect(PlaceholderArt.has_frame(path) and ResourceLoader.exists(PlaceholderArt.texture_path(path)),
 				"%s stage %d has a sprite" % [id, stage], path)
 
 	# **The water comes from the pond and the well**, and both answer the same
@@ -6696,14 +6699,17 @@ func _task_0040_shop() -> void:
 		> Shop.sell_price(GameData.WOOD),
 		"and you cannot chop, sell, and buy back more than you had")
 
-	# **Seeds for all three crops**, side by side with what the choice needs.
+	# **Seeds for all twelve crops**, side by side with what the choice needs.
 	for id in Farming.seeds():
 		expect(GameData.CROPS.has(id), "%s is a crop" % id)
 		expect(Farming.value_per_season(id) > 0,
 			"with a day's worth to compare", str(Farming.value_per_season(id)))
 		expect(Farming.days_to_grow(id) > 0, "and a growing time")
-		expect(Shop.buyable().has(id),
-			"and the stall deals in %s itself" % id, str(Shop.buyable()))
+		expect(Shop.sellable().has(id),
+			"and the stall buys the harvested %s" % id)
+		if GameData.DAILY_STOCK.has(id):
+			expect(Shop.buyable().has(id),
+				"the original daily shelf still stocks %s" % id, str(Shop.buyable()))
 
 	# **Nothing the workshop makes is for sale.** A stall that sold oil would
 	# be a way to skip owning a press.
@@ -14144,8 +14150,9 @@ func _task_0079_ui_kit() -> void:
 	# to finish.
 	var seen: Dictionary = {}
 	for id in GameData.RESOURCES:
-		var image := Image.load_from_file(ProjectSettings.globalize_path(
-			"res://sprites/ui/icon_%s.png" % id))
+		var runtime := "res://sprites/ui/icon_%s.png" % id
+		var source := PlaceholderArt.texture_path(runtime)
+		var image := Image.load_from_file(ProjectSettings.globalize_path(source))
 		expect(image != null, "the %s icon loads" % id)
 		if image == null:
 			continue
@@ -14159,6 +14166,10 @@ func _task_0079_ui_kit() -> void:
 				if image.get_pixel(x, y).a > 0.0:
 					lit += 1
 		expect(lit > 24, "and has something drawn on it", "%d pixels" % lit)
+		if PlaceholderArt.frame(runtime).has("stand_in"):
+			expect(PlaceholderArt.art_tint(StringName("icon_%s" % id)) != Color.WHITE,
+				"the temporary %s icon is registered with its crop tint" % id)
+			continue
 		var fingerprint := image.get_data().hex_encode()
 		expect(not seen.has(fingerprint),
 			"and is not a copy of the %s icon" % str(seen.get(fingerprint, "")))
@@ -14511,8 +14522,9 @@ func _task_0082_shots() -> void:
 	# forecast at dusk, in the build step and on a calm night. Forty-one since
 	# 0159: three seasons at noon and a winter night. Forty-three since
 	# 0160: the year ending and its credits. Forty-five since 0167:
-	# turned grass beside the starter beds in daylight and at night.
-	expect(names.size() == 45,
+	# turned grass beside the starter beds in daylight and at night. Fifty-one
+	# since 0168: twelve crops, both seed pages in the HUD/stall and the ledger.
+	expect(names.size() == 51,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

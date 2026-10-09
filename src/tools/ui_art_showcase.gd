@@ -82,6 +82,7 @@ func _label(text: String, at: Vector2, role: StringName = &"") -> Label:
 func _icon(id: StringName, compact: bool, at: Vector2) -> TextureRect:
 	var image := TextureRect.new()
 	image.texture = UiKit.icon(id,compact)
+	image.modulate = PlaceholderArt.art_tint(StringName(("hud_%s" if compact else "icon_%s") % id))
 	image.position = at
 	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	image.stretch_mode = TextureRect.STRETCH_KEEP
@@ -93,13 +94,13 @@ func _icon(id: StringName, compact: bool, at: Vector2) -> TextureRect:
 
 
 func _inventory(speaking: String, high: bool) -> void:
-	_label("15 resources / native 16px + HUD 10px / " + speaking,Vector2(12,5),UiKit.WARM)
-	expect(UiKit.missing_icons().is_empty() and UiKit.orphan_icons().is_empty(),"Actual core inventory has exactly fifteen icons")
+	_label("%d resources / native 16px + HUD 10px / " % GameData.RESOURCES.size() + speaking,Vector2(12,5),UiKit.WARM)
+	expect(UiKit.missing_icons().is_empty() and UiKit.orphan_icons().is_empty(),"Every actual core resource has an icon and none is orphaned")
 	for i in GameData.RESOURCES.size():
 		var id: StringName = GameData.RESOURCES[i]
-		var at := Vector2(12+(i%3)*152,25+(i/3)*46)
+		var at := Vector2(12+(i%4)*116,25+(i/4)*39)
 		var name := Names.of(id)
-		expect(UiKit.font().get_string_size(name,HORIZONTAL_ALIGNMENT_LEFT,-1,8).x<=148,"Localized resource name fits its actual fixture column: "+name)
+		expect(UiKit.font().get_string_size(name,HORIZONTAL_ALIGNMENT_LEFT,-1,8).x<=112,"Localized resource name fits its actual fixture column: "+name)
 		_label(name,at,UiKit.WARM)
 		_icon(id,false,at+Vector2(2,11))
 		_icon(id,true,at+Vector2(25,14))
@@ -124,7 +125,16 @@ func _inventory(speaking: String, high: bool) -> void:
 						continue
 					visible += 1
 					var at := Vector2i(image.global_position)+Vector2i(x,y)
-					expect(actual.get_pixelv(at).is_equal_approx(pixel),"Actual native inventory pixel survives both themes: "+image.texture.resource_path)
+					var drawn := actual.get_pixelv(at)
+					var target := pixel * image.modulate
+					var exact := drawn.is_equal_approx(target)
+					if image.modulate != Color.WHITE:
+						# Tint multiplication is rounded into the viewport's RGBA8.
+						exact = absf(drawn.r - target.r) <= 1.0 / 255.0 \
+							and absf(drawn.g - target.g) <= 1.0 / 255.0 \
+							and absf(drawn.b - target.b) <= 1.0 / 255.0 \
+							and is_equal_approx(drawn.a, target.a)
+					expect(exact,"Actual native inventory pixel survives both themes: "+image.texture.resource_path)
 			expect(visible>0,"Icon has visible native pixels")
 
 
@@ -307,7 +317,17 @@ func _check_bounds(control: Control) -> void:
 		if not child.is_visible_in_tree():
 			continue
 		var rect: Rect2 = child.get_global_rect()
-		expect(rect.position.x>=0 and rect.position.y>=0 and rect.end.x<=480 and rect.end.y<=270,"Actual localized control fits native viewport: "+str(child.name)+" "+str(rect))
+		var ancestor := child.get_parent()
+		var scroll: ScrollContainer = null
+		while ancestor != null and ancestor != control:
+			if ancestor is ScrollContainer:
+				scroll = ancestor as ScrollContainer
+				break
+			ancestor = ancestor.get_parent()
+		# Scrolled descendants may lie beyond the screen; their enclosing
+		# viewport must fit, and horizontal text still has to fit every row.
+		var fits_y := scroll != null or (rect.position.y >= 0 and rect.end.y <= 270)
+		expect(rect.position.x>=0 and fits_y and rect.end.x<=480,"Actual localized control fits native viewport: "+str(child.name)+" "+str(rect))
 		if child is Label:
 			var label := child as Label
 			var width := label.get_theme_font(&"font").get_string_size(label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,label.get_theme_font_size(&"font_size")).x

@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-156 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+157 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -199,10 +199,11 @@ voz alta.
 | 0165 | Crops grow by days | 2026-10-09 |
 | 0166 | A day of eight to ten minutes | 2026-10-09 |
 | 0167 | Any grass can be tilled | 2026-10-09 |
+| 0168 | Nine new crops | 2026-10-09 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 40 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 42 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -244,6 +245,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Waking up: the morning report** (0138) - `sim` 40581503 -> 1222657941
 - **Teaching the new night** (0141) - `sim` 1222657941 -> 3911863006
 - **Teaching the new night** (0141) - `data` 898358060 -> 3047858822
+- **Nine new crops** (0168) - `sim` 2338199505 -> 2176208283
+- **Nine new crops** (0168) - `data` 3886875281 -> 887578929
 
 ## O que deu errado
 

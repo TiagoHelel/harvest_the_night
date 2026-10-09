@@ -14,8 +14,8 @@ extends Control
 ## Emitted when the player closes it, so the screen can put the keys back.
 signal closed
 
-## Short enough that a full buy tab - six things on the shelf and three seeds
-## under them - fits in the box without anybody having to scroll.
+## Compact shelf rows and six seeds per page (0168). The scroll container
+## still reaches the final row when a language needs more vertical space.
 ##
 ## **A default `Button` ignores this and reserves thirty-one pixels**, which at
 ## eleven rows is three hundred and forty on a screen two hundred and seventy
@@ -28,6 +28,8 @@ var _state: Dictionary = {}
 var _rows: VBoxContainer
 var _tabs: HBoxContainer
 var _money: Label
+var _seed_page := 0
+var _last_seed := &""
 var _built_for := -1        # the money total the rows were last drawn against
 
 
@@ -74,7 +76,7 @@ func _ready() -> void:
 
 	var scroll := ScrollContainer.new()
 	scroll.name = "Scroll"
-	scroll.custom_minimum_size = Vector2(276, 160)
+	scroll.custom_minimum_size = Vector2(276, 174)
 	column.add_child(scroll)
 
 	_rows = VBoxContainer.new()
@@ -134,6 +136,10 @@ func _shelf_signature() -> int:
 
 
 func _build() -> void:
+	var chosen := Farming.selected_seed(_state)
+	if chosen != _last_seed:
+		_seed_page = Farming.seeds().find(chosen) / DayHud.SEED_ACTIONS.size()
+		_last_seed = chosen
 	_built_for = Resources.amount(_state, GameData.MONEY) \
 		+ Shop.value_of_stock(_state) * 1000 \
 		+ _shelf_signature() * 100000
@@ -141,6 +147,7 @@ func _build() -> void:
 		[Resources.amount(_state, GameData.MONEY)])
 
 	for child in _rows.get_children():
+		_rows.remove_child(child)
 		child.queue_free()
 
 	if Shop.tab(_state) == Shop.SELL:
@@ -153,9 +160,24 @@ func _build() -> void:
 	for id in Shop.buyable():
 		_buy_row(id)
 
-	_heading(&"SHOP_SEEDS")
-	for id in Farming.seeds():
-		_seed_row(id)
+	var pager := HBoxContainer.new()
+	_rows.add_child(pager)
+	var heading := Label.new()
+	heading.text = I18n.t(&"SHOP_SEEDS")
+	heading.theme_type_variation = UiKit.WARM
+	pager.add_child(heading)
+	var seeds := Farming.seeds()
+	var pages := ceili(float(seeds.size()) / DayHud.SEED_ACTIONS.size())
+	pager.add_child(_button("ShopSeedsPrevious", I18n.t(&"SEED_PREVIOUS"), _seed_page > 0,
+		func() -> void: _seed_page -= 1; _build()))
+	var badge := Label.new()
+	badge.text = I18n.f(&"SEED_PAGE", [_seed_page + 1, pages])
+	pager.add_child(badge)
+	pager.add_child(_button("ShopSeedsNext", I18n.t(&"SEED_NEXT"), _seed_page + 1 < pages,
+		func() -> void: _seed_page += 1; _build()))
+	for i in range(_seed_page * DayHud.SEED_ACTIONS.size(),
+		mini((_seed_page + 1) * DayHud.SEED_ACTIONS.size(), seeds.size())):
+		_seed_row(seeds[i])
 
 
 func _heading(key: StringName) -> void:

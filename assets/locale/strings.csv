@@ -498,3 +498,15 @@ CRED_ENGINE,300,Made with Godot Engine,Feito com Godot Engine
 CRED_ART,300,Art from approved Codex packs,Arte de pacotes Codex aprovados
 CRED_THANKS,300,Thank you for keeping the farm alive,Obrigado por manter a fazenda viva
 CRED_SKIP,300,CONTINUE / SKIP CREDITS,CONTINUAR / PULAR CRÉDITOS
+ITEM_POTATO,0,potato,batata
+ITEM_GARLIC,0,garlic,alho
+ITEM_STRAWBERRY,0,strawberry,morango
+ITEM_PEPPER,0,pepper,pimenta
+ITEM_SUNFLOWER,0,sunflower,girassol
+ITEM_MELON,0,melon,melancia
+ITEM_PUMPKIN,0,pumpkin,abóbora
+ITEM_GRAPE,0,grape,uva
+ITEM_BEET,0,beet,beterraba
+SEED_PREVIOUS,0,PREV,ANTERIOR
+SEED_NEXT,0,NEXT,PRÓXIMA
+SEED_PAGE,0,%d / %d,%d / %d

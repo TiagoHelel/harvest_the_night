@@ -200,6 +200,15 @@ const OIL := &"oil"
 const WHEAT := &"wheat"
 const CORN := &"corn"
 const CARROT := &"carrot"
+const POTATO := &"potato"
+const GARLIC := &"garlic"
+const STRAWBERRY := &"strawberry"
+const PEPPER := &"pepper"
+const SUNFLOWER := &"sunflower"
+const MELON := &"melon"
+const PUMPKIN := &"pumpkin"
+const GRAPE := &"grape"
+const BEET := &"beet"
 const MEAT := &"meat"
 const GUNPOWDER := &"gunpowder"
 ## **Technology, and it is a resource on purpose.** It goes through the same
@@ -219,7 +228,7 @@ const ENERGY := &"energy"
 ## lays them out.
 const RESOURCES: Array = [
 	WOOD, STONE, IRON, FOOD, FISH, OIL,
-	WHEAT, CORN, CARROT, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
+	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 ]
 
 ## What the shop will buy, and for how much.
@@ -243,6 +252,15 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	WHEAT: 4,
 	CORN: 5,
 	CARROT: 3,
+	POTATO: 8,                    # LEVER: money each, 1-30
+	GARLIC: 5,                    # LEVER: money each, 1-30
+	STRAWBERRY: 20,                    # LEVER: money each, 1-30
+	PEPPER: 9,                    # LEVER: money each, 1-30
+	SUNFLOWER: 10,                    # LEVER: money each, 1-30
+	MELON: 25,                    # LEVER: money each, 1-30
+	PUMPKIN: 26,                    # LEVER: money each, 1-30
+	GRAPE: 22,                    # LEVER: money each, 1-30
+	BEET: 11,                    # LEVER: money each, 1-30
 	MEAT: 9,
 	# Above the oil it is made from, per craft: two corn and a drop of oil is
 	# $36 in and $44 out. `check_chain()` is what keeps that true.
@@ -277,11 +295,12 @@ const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
 
 # ===================================================================== crops
 
-## The three crops of `design.md`, each with a different reason to plant it.
+## The twelve crops of the 1.0 plan, each with a different reason to plant it.
+## Seasons (0170) and regrowth (0172) are deliberately not rules yet.
 ##
 ## ## Money, attention, capital - pick two
 ##
-## Per plot across a fourteen-day season, with the seed paid for:
+## The original offers per plot across a fourteen-day season, seed paid for:
 ##
 ##     carrot   3d   seed $1   net  5  x 4 harvests  = 20
 ##     wheat    4d   seed $2   net  6  x 3 harvests  = 18
@@ -291,8 +310,9 @@ const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
 ## without destroying it. No crop wins on money, harvest visits and seed cost
 ## at once; `check_crops()` preserves that choice.
 ##
-## The **seed costs** are what carry the balance; the sale prices are
-## `design.md` section 6 and stay where the document put them.
+## The **seed costs** carry the balance. The original sale prices remain
+## those of `design.md` section 6; the new 1.0 crops ask for more capital
+## as their seasonal value rises. `check_crops()` compares all twelve.
 ##
 ## On top of the money each one feeds something the others do not: wheat is the
 ## money crop, corn is the industry crop - oil and gunpowder come out of it -
@@ -317,6 +337,60 @@ const CROPS: Dictionary = {
 		"growth_days": 3,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,
+	},
+	POTATO: {
+		"seed_cost": 4,                 # LEVER: money, 1-16
+		"growth_days": 5,              # LEVER: watered mornings, 1-14
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,                    # LEVER: art stages, 4-4
+	},
+	GARLIC: {
+		"seed_cost": 3,                 # LEVER: money, 1-16
+		"growth_days": 4,              # LEVER: watered mornings, 1-14
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,                    # LEVER: art stages, 4-4
+	},
+	STRAWBERRY: {
+		"seed_cost": 8,                 # LEVER: money, 1-16
+		"growth_days": 8,              # LEVER: watered mornings, 1-14
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,                    # LEVER: art stages, 4-4
+	},
+	PEPPER: {
+		"seed_cost": 5,                 # LEVER: money, 1-16
+		"growth_days": 5,              # LEVER: watered mornings, 1-14
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,                    # LEVER: art stages, 4-4
+	},
+	SUNFLOWER: {
+		"seed_cost": 6,                 # LEVER: money, 1-16
+		"growth_days": 7,              # LEVER: watered mornings, 1-14
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,                    # LEVER: art stages, 4-4
+	},
+	MELON: {
+		"seed_cost": 10,                 # LEVER: money, 1-16
+		"growth_days": 10,              # LEVER: watered mornings, 1-14
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,                    # LEVER: art stages, 4-4
+	},
+	PUMPKIN: {
+		"seed_cost": 11,                 # LEVER: money, 1-16
+		"growth_days": 10,              # LEVER: watered mornings, 1-14
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,                    # LEVER: art stages, 4-4
+	},
+	GRAPE: {
+		"seed_cost": 9,                 # LEVER: money, 1-16
+		"growth_days": 8,              # LEVER: watered mornings, 1-14
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,                    # LEVER: art stages, 4-4
+	},
+	BEET: {
+		"seed_cost": 7,                 # LEVER: money, 1-16
+		"growth_days": 6,              # LEVER: watered mornings, 1-14
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,                    # LEVER: art stages, 4-4
 	},
 }
 
@@ -865,7 +939,7 @@ const GROUP_OTHER := &"other"
 const RESOURCE_GROUPS: Array = [
 	{"name": &"materials", "members": [WOOD, STONE, IRON]},
 	{"name": &"larder", "members": [FOOD, FISH, MEAT]},
-	{"name": &"crops", "members": [WHEAT, CORN, CARROT]},
+	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
 	{"name": &"workshop", "members": [OIL, GUNPOWDER, INCENDIARY]},
 	{"name": &"the farm", "members": [MONEY, ENERGY, TECH]},
 ]

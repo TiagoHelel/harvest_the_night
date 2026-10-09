@@ -1854,10 +1854,14 @@ func _trampled_sprite(crop: StringName, cell: Vector2i) -> void:
 	sprite.texture = texture
 	sprite.centered = false
 	ArtPlacement.place(sprite, cell)
+	var runtime := CROP_DIR + "%s_%d.png" % [crop, maxi(ripe, 0)]
+	var shape := PlaceholderArt.frame(runtime)
+	if shape.has("stand_in"):
+		sprite.offset = -Vector2(shape["pivot"])
 	# Flattened onto the ground: half as tall. `place` puts the origin at the
 	# sprite's foot, so its foot stays where it stood.
 	sprite.scale = Vector2(sprite.scale.x, sprite.scale.y * 0.5)
-	sprite.modulate = TRAMPLED_TINT
+	sprite.modulate = TRAMPLED_TINT * PlaceholderArt.art_tint(crop)
 	sprite.set_meta("plot_cell", Grid.index(cell))
 	sprite.set_meta("plot_art", "trampled")
 	_plots.add_child(sprite)
@@ -1874,6 +1878,15 @@ func _plot_sprite(art: String, cell: Vector2i) -> void:
 	sprite.texture = texture
 	sprite.centered = false
 	ArtPlacement.place(sprite, cell)
+	var runtime := CROP_DIR + art + ".png"
+	var shape := PlaceholderArt.frame(runtime)
+	if shape.has("stand_in") and GameData.CROPS.has(StringName(art.get_slice("_", 0))):
+		# Existing stages sit at the foot of the final canvas; no pixels are
+		# resized or generated. The tall crops have eight transparent rows
+		# above the 16x24 corn stand-in in their 16x32 logical canvas.
+		sprite.offset = -Vector2(shape["pivot"])
+		sprite.modulate = PlaceholderArt.art_tint(StringName(art.get_slice("_", 0)))
+	sprite.set_meta("plot_canvas", shape.get("canvas", Vector2i.ZERO))
 	sprite.set_meta("plot_cell", Grid.index(cell))
 	sprite.set_meta("plot_art", art)
 	_plots.add_child(sprite)
@@ -1887,13 +1900,23 @@ func _crop_texture(art: String) -> Texture2D:
 	var key := StringName("crop/" + art)
 	if _textures.has(key):
 		return _textures[key]
-	var path := CROP_DIR + art + ".png"
+	var path := PlaceholderArt.texture_path(CROP_DIR + art + ".png")
 	if not ResourceLoader.exists(path):
 		push_warning("no crop sprite at %s" % path)
 		path = CROP_DIR + "tilled.png"
 		if not ResourceLoader.exists(path):
 			return null
 	var texture: Texture2D = load(path)
+	var shape := PlaceholderArt.frame(CROP_DIR + art + ".png")
+	if shape.has("stand_in") and GameData.CROPS.has(StringName(art.get_slice("_", 0))):
+		var padding := int(shape["canvas"].y) - texture.get_height()
+		if padding > 0:
+			# A transparent margin around existing art, never a new bitmap.
+			var padded := AtlasTexture.new()
+			padded.atlas = texture
+			padded.region = Rect2(Vector2.ZERO, texture.get_size())
+			padded.margin = Rect2(0, padding, 0, padding)
+			texture = padded
 	_textures[key] = texture
 	return texture
 

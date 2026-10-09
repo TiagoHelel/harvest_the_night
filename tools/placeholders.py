@@ -41,7 +41,9 @@ def entries():
             out.append({"name": m.group(1), "pack": m.group(2),
                         "dir": m.group(3) or ACTORS,
                         "bare": '"bare": true' in line,
-                        "frames": int(m.group(4)), "stand_in": m.group(5)})
+                        "frames": int(m.group(4)), "stand_in": m.group(5),
+                        "stand_in_frames": int(re.search(r'"stand_in_frames": (\d+)', line).group(1))
+                        if '"stand_in_frames":' in line else 1})
     return out
 
 
@@ -73,7 +75,8 @@ def check(rows, packs):
             continue        # drawn by code until the pack lands
         if row["dir"] != ACTORS:
             # An ART stand-in is a path under sprites/ (task 0133).
-            if not os.path.exists(os.path.join(ROOT, "sprites", row["stand_in"] + ".png")):
+            suffix = "_0" if row["stand_in_frames"] > 1 else ""
+            if not os.path.exists(os.path.join(ROOT, "sprites", row["stand_in"] + suffix + ".png")):
                 problems.append("%s's stand-in sprites/%s.png is not on disk"
                                 % (row["name"], row["stand_in"]))
             continue
