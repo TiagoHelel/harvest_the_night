@@ -77,8 +77,11 @@ static func why_not(state: Dictionary, cell: Vector2i,
 
 
 ## How many swings are left in it. Full when nobody has touched it.
+##
+## **Counted on the anchor** for a node over more than one cell (task 0177's
+## big stump), so any of its cells answers the same.
 static func swings_left(state: Dictionary, cell: Vector2i) -> int:
-	var on := Farm.occupant(state, cell)
+	var on := Farm.occupant(state, Building.anchor_of(state, cell))
 	if on.is_empty() or not is_node(on["id"]):
 		return 0
 	if on.has("hp"):
@@ -90,11 +93,16 @@ static func swings_left(state: Dictionary, cell: Vector2i) -> int:
 ##
 ## Called by `Interact.complete()`, so the player never has to know that a tree
 ## has hit points.
+##
+## **One thing, whichever cell was hit** (task 0177): a node over more than
+## one cell keeps its swings on its anchor, and its last swing takes every
+## cell of it off the farm - with one entry in `regrowing`, the anchor's.
 static func strike(state: Dictionary, cell: Vector2i,
 		nodes: Dictionary = GameData.GATHERING) -> Dictionary:
-	var on := Farm.occupant(state, cell)
+	var at := Building.anchor_of(state, cell)
+	var on := Farm.occupant(state, at)
 	if on.is_empty() or not nodes.has(StringName(on["id"])) \
-			or not why_not(state, cell, nodes).is_empty():
+			or not why_not(state, at, nodes).is_empty():
 		return {}
 
 	var id: StringName = on["id"]
@@ -106,17 +114,18 @@ static func strike(state: Dictionary, cell: Vector2i,
 		return {}
 
 	# The last swing. It gives up everything it had and schedules its return.
-	Farm.remove(state, cell)
+	for part in Building.footprint(id, at):
+		Farm.remove(state, part)
 	var leaves: StringName = node.get("leaves", &"")
 	if leaves != &"":
-		Farm.restore(state, cell, {"id": leaves})
+		Farm.restore(state, at, {"id": leaves})
 
 	# **A regrowth of zero means gone for good.** Loose boulders on the lawn
 	# are cleared once and the cell is yours; the rock face they came off is
 	# what keeps stone infinite.
 	var regrow := int(node["regrow_ticks"])
 	if regrow > 0:
-		_schedule(state, cell, id, regrow)
+		_schedule(state, at, id, regrow)
 
 	var gained: Dictionary = node["yield"]
 	Resources.gain(state, gained)
@@ -135,11 +144,22 @@ static func tick(state: Dictionary) -> void:
 
 	var ready: Array = []
 	for entry in pending:
-		entry[PENDING_TICKS] = int(entry[PENDING_TICKS]) - 1
+		entry[PENDING_TICKS] = maxi(int(entry[PENDING_TICKS]) - 1, 0)
 		if int(entry[PENDING_TICKS]) <= 0:
 			ready.append(entry)
 
 	for entry in ready:
+		var id := StringName(entry[PENDING_ID])
+		var cells := Building.footprint(id, Grid.cell(int(entry[PENDING_CELL])))
+		if cells.size() > 1:
+			# **Whole, or not yet** (task 0177). A thing over several cells
+			# comes back only when every one of them is clear; while the
+			# player has something on one, it waits - asked again each tick,
+			# its entry still the anchor's - rather than being given up.
+			if _clear_for(state, cells):
+				pending.erase(entry)
+				_restore_whole(state, id, cells)
+			continue
 		pending.erase(entry)
 		var cell := Grid.cell(int(entry[PENDING_CELL]))
 		# Whatever was left behind - a stump - goes, and the real thing takes
@@ -171,6 +191,26 @@ static func _schedule(state: Dictionary, cell: Vector2i, id: StringName,
 	# whatever order the player happens to chop things, and two runs of the
 	# same seed have to bring the same tree back on the same tick.
 	pending.sort_custom(func(a, b): return int(a[PENDING_CELL]) < int(b[PENDING_CELL]))
+
+
+## Whether every cell of a footprint is empty, or holds only what the farm left.
+static func _clear_for(state: Dictionary, cells: Array) -> bool:
+	for part in cells:
+		var on := Farm.occupant(state, part)
+		if not on.is_empty() and not _is_leftover(on["id"]):
+			return false
+	return true
+
+
+## Put a thing over several cells back, every cell carrying its anchor - the
+## first cell of the footprint, its top left - the way `Farm.initial()` lays
+## the map's own.
+static func _restore_whole(state: Dictionary, id: StringName, cells: Array) -> void:
+	var anchor: Vector2i = cells[0]
+	for part in cells:
+		if not Farm.is_empty(state, part):
+			Farm.remove(state, part)
+		Farm.restore(state, part, {"id": id, "anchor": [anchor.x, anchor.y]})
 
 
 ## A stump is the farm's, not the player's: it may be cleared away when the

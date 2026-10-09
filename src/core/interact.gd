@@ -22,6 +22,7 @@ const OCCUPANT_VERBS: Dictionary = {
 	&"copper_ore": &"mine",
 	&"coal_seam": &"mine",
 	&"gold_ore": &"mine",
+	&"hardwood_stump": &"chop",
 	&"shop": &"trade",
 }
 

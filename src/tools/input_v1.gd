@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 33
+const V1_CASES := 34
 
 
 func _process(delta: float) -> bool:
@@ -83,6 +83,7 @@ func _run() -> void:
 	await _case_0175_swings()
 	await _case_0176_gold()
 	await _case_followup_0176_review()
+	await _case_0177_hardwood()
 	_finish()
 
 
@@ -2503,5 +2504,66 @@ func _case_followup_0176_review() -> void:
 	expect(maxi(edges.get_cell_atlas_coords(bed).x, 0) & (1 << bit) and world.terrain_draws() == laid,
 		"and faded back to lawn it gets it back, the terrain never laid again",
 		"%s, %d against %d" % [edges.get_cell_atlas_coords(bed), world.terrain_draws(), laid])
+	await close_scene()
+	_completed += 1
+
+
+## 0177 - a real SPACE at a big stump: refused to the basic axe with the
+## iron axe named; with the iron axe, held SPACE from the cell beside the
+## stump's far corner fells the whole thing, the view chipped from the first
+## swing to the last, for the levers' hardwood.
+func _case_0177_hardwood() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView") as WorldView
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.set_speed(1)
+	var anchor := Building.anchor_of(state, Farm.cells_with(state, &"hardwood_stump")[0])
+	var cells: Array = Building.footprint(&"hardwood_stump", anchor)
+	var stood := false
+	for cell in cells:
+		if cell == anchor:
+			continue
+		for offset in Farming.NEIGHBOURS:
+			var beside: Vector2i = cell + offset
+			if not cells.has(beside) and Farm.walkable(state, beside):
+				_stand_at(state, beside, Farming.NEIGHBOURS.find(-offset))
+				stood = true
+				break
+		if stood:
+			break
+	expect(stood, "fixture: a free cell beside one of the stump's non-anchor cells")
+	await frames(3)
+	await press_key(KEY_SPACE, true)
+	await frames(5)
+	await press_key(KEY_SPACE, false)
+	var tooltip := require_control("Tooltip")
+	expect(not Player.is_busy(state) and Gathering.swings_left(state, anchor) == int(GameData.GATHERING[&"hardwood_stump"]["hits"])
+		and tooltip._world_text.contains(Names.refusal([&"WHY_GATHER_TOOL", &"axe_iron"])),
+		"a basic axe cannot start on the big stump, and the highlight names the iron axe")
+	state["tools"]["axe"] = 1
+	await frames(3)
+	var before := Resources.amount(state, GameData.HARDWOOD)
+	await press_key(KEY_SPACE, true)
+	await until(func() -> bool: return Gathering.swings_left(state, anchor) < int(GameData.GATHERING[&"hardwood_stump"]["hits"]),
+		"an iron axe's first swing lands", 600)
+	await frames(2)
+	var chipped := false
+	for sprite in world.find_children("Prop_*", "Sprite2D", true, false):
+		if StringName(sprite.get_meta("prop_art", &"")) == &"hardwood_stump_chipped":
+			chipped = true
+	expect(chipped, "from the first swing the stump is drawn chipped")
+	await until(func() -> bool: return Farm.is_empty(state, anchor), "held SPACE fells the whole stump", 3000)
+	await press_key(KEY_SPACE, false)
+	var empty := true
+	for cell in cells:
+		empty = empty and Farm.is_empty(state, cell)
+	expect(empty and Resources.amount(state, GameData.HARDWOOD)
+		== before + int(GameData.GATHERING[&"hardwood_stump"]["yield"][GameData.HARDWOOD]),
+		"all four cells go and the hardwood arrives once")
 	await close_scene()
 	_completed += 1

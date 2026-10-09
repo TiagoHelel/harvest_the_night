@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 46
+const GROUPS := 47
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -115,6 +115,7 @@ func _run() -> void:
 	_task_0175_swings()
 	_task_0176_ores()
 	_followup_0176_review()
+	_task_0177_hardwood()
 
 
 func _finish() -> void:
@@ -4175,3 +4176,114 @@ func _followup_season_of(id: StringName) -> int:
 		state["day"] = int(state["day"]) + 1
 		Farming.morning(state)
 	return picked
+
+
+## 0177 - the big stumps: one thing over four cells. A basic axe is refused;
+## an iron axe fells it in the levers' swings, from any of its four cells, for
+## the levers' hardwood; it leaves all four cells with one entry in
+## `regrowing`, the anchor's, and comes back whole after its regrowth - and
+## not while one of its cells is built on.
+func _task_0177_hardwood() -> void:
+	var node: Dictionary = GameData.GATHERING[&"hardwood_stump"]
+	var tree: Dictionary = GameData.GATHERING[&"tree"]
+	var hits := int(node["hits"])
+	var materials: Array = []
+	for group in GameData.RESOURCE_GROUPS:
+		if (group as Dictionary)["name"] == &"materials":
+			materials = (group as Dictionary)["members"]
+	expect(node["tool"] == &"axe" and int(node["min_tier"]) == 1 and hits > int(tree["hits"])
+		and int(node["regrow_ticks"]) > 0 and node["yield"].has(GameData.HARDWOOD)
+		and Interact.OCCUPANT_VERBS.get(&"hardwood_stump") == &"chop",
+		"the big stump is an iron axe's node, more swings than a tree, back again, chopped")
+	expect(GameData.RESOURCES.has(GameData.HARDWOOD) and int(GameData.SELL_PRICE.get(GameData.HARDWOOD, 0)) > 0
+		and materials.has(GameData.HARDWOOD),
+		"hardwood is a material with a price")
+	var name_en := Names.of(GameData.HARDWOOD)
+	I18n.use("pt_BR")
+	var name_pt := Names.of(GameData.HARDWOOD)
+	I18n.use("en")
+	expect(name_en == "hardwood" and name_pt == "madeira de lei", "named in both languages",
+		"%s / %s" % [name_en, name_pt])
+
+	var state := State.create(1771)
+	var anchor := Building.anchor_of(state, Farm.cells_with(state, &"hardwood_stump")[0])
+	var cells: Array = Building.footprint(&"hardwood_stump", anchor)
+	var whole := cells.size() == 4
+	for cell in cells:
+		whole = whole and StringName(Farm.occupant(state, cell).get("id", &"")) == &"hardwood_stump" \
+			and Building.anchor_of(state, cell) == anchor
+	expect(whole, "fixture: one stump over four cells, every one carrying its anchor", str(cells))
+
+	# **A basic axe is refused**, before anything moves.
+	var hash_before := State.hash_of(state)
+	var corner: Vector2i = cells[3]
+	expect(Gathering.why_not(state, corner) == [&"WHY_GATHER_TOOL", ToolTiers.item(&"axe", 1)]
+		and Gathering.strike(state, corner).is_empty() and State.hash_of(state) == hash_before,
+		"a basic axe is refused at the big stump and changes nothing",
+		str(Gathering.why_not(state, corner)))
+
+	# **An iron axe fells it, a swing at each of its cells in turn.**
+	state["tools"]["axe"] = 1
+	var before := Resources.amount(state, GameData.HARDWOOD)
+	var waiting := Gathering.regrowing(state)
+	var counted: Array = []
+	var gained := {}
+	for swing in hits:
+		gained = Gathering.strike(state, cells[swing % 4])
+		if swing < hits - 1:
+			counted.append(Gathering.swings_left(state, cells[(swing + 1) % 4]))
+	var expected_counts: Array = []
+	for left in range(hits - 1, 0, -1):
+		expected_counts.append(left)
+	expect(counted == expected_counts, "every swing counts on the one stump, whichever cell it lands on",
+		"%s against %s" % [counted, expected_counts])
+	expect(gained == node["yield"] and Resources.amount(state, GameData.HARDWOOD) == before + int(node["yield"][GameData.HARDWOOD]),
+		"the last swing gives the levers' hardwood", str(gained))
+	var gone := true
+	for cell in cells:
+		gone = gone and Farm.is_empty(state, cell)
+	var pending: Array = state["regrowing"]
+	var entry: Array = []
+	for one in pending:
+		if int(one[Gathering.PENDING_CELL]) == Grid.index(anchor):
+			entry = one
+	expect(gone and Gathering.regrowing(state) == waiting + 1 and not entry.is_empty()
+		and StringName(entry[Gathering.PENDING_ID]) == &"hardwood_stump",
+		"it leaves all four cells, with one entry in regrowing: the anchor's", str(pending))
+
+	# **Back whole after its regrowth.**
+	SuiteKit.regrow_after(state, int(node["regrow_ticks"]))
+	var back := true
+	for cell in cells:
+		back = back and StringName(Farm.occupant(state, cell).get("id", &"")) == &"hardwood_stump" \
+			and Building.anchor_of(state, cell) == anchor
+	expect(back and Gathering.swings_left(state, corner) == hits and Gathering.regrowing(state) == waiting,
+		"after regrow_ticks it is back on all four cells, whole, anchored as the map laid it")
+
+	# **Not while one of its cells is built on**, and then as soon as it is clear.
+	for swing in hits:
+		Gathering.strike(state, anchor)
+	expect(Farm.place(state, cells[1], {"id": &"fence", "hp": 10}), "fixture: a fence on one of its cells")
+	SuiteKit.regrow_after(state, int(node["regrow_ticks"]))
+	var none := true
+	for cell in cells:
+		none = none and StringName(Farm.occupant(state, cell).get("id", &"")) != &"hardwood_stump"
+	expect(none and StringName(Farm.occupant(state, cells[1])["id"]) == &"fence"
+		and Gathering.regrowing(state) == waiting + 1,
+		"while a fence stands on one cell the stump waits - on none of the four, still pending")
+	var saved: Dictionary = bytes_to_var(var_to_bytes(state))
+	expect(State.hash_of(saved) == State.hash_of(state), "a waiting stump survives a save")
+	Farm.remove(state, cells[1])
+	Gathering.tick(state)
+	var whole_again := true
+	for cell in cells:
+		whole_again = whole_again and StringName(Farm.occupant(state, cell).get("id", &"")) == &"hardwood_stump"
+	expect(whole_again and Gathering.regrowing(state) == waiting, "and the tick its cells are clear, it is back")
+
+	# **Stood beside, and walked round like a tree.**
+	expect(GameData.check_reachable(GameData.GATHERING, GameData.FARM_MAP).is_empty(),
+		"every big stump has a cell to stand on beside it")
+	expect(Pathing._through(&"hardwood_stump", 1) == Pathing._through(&"tree", 1)
+		and not Pathing.is_prey(&"hardwood_stump"),
+		"the flow field treats it like a tree: no way through, nothing to come for")
+	_completed += 1

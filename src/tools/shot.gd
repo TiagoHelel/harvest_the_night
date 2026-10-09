@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["hardwood", "a chipped big stump and a whole one among the trees", ""],
 	["quarry", "copper, coal and iron-gated gold on Autumn 1", ""],
 	["can_area", "three dry plots in the iron can's next stroke", ""],
 	["tool_upgrades", "upgrades ready tomorrow and an iron axe in hand", "WorkshopPanel"],
@@ -719,6 +720,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
+		"hardwood": _set_hardwood(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -1374,6 +1376,20 @@ func _set_new_ore(state: Dictionary) -> void:
 func _set_stump(state: Dictionary) -> void:
 	_standing_at = Vector2i(10, 46)
 	_stand(state, _standing_at)
+
+
+## **The big stumps** (task 0177): the one in the south-west woods chipped
+## by an iron axe's first swing, the farmer beside it with the axe, and the
+## whole one east of him in the same frame, among the trees.
+func _set_hardwood(state: Dictionary) -> void:
+	state["tools"]["axe"] = 1
+	var chipped := Building.anchor_of(state, Vector2i(8, 45))
+	Gathering.strike(state, chipped)
+	# North of it, facing down: the frame then holds both stumps below the
+	# seed list, which since 0168 reaches half way down the left side.
+	_standing_at = Vector2i(9, 44)
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.SOUTH
 
 
 ## **The build step in winter** (task 0157): Winter 2, every side open, a

@@ -17516,3 +17516,121 @@ Files: src/core/{player,sim,game_data}.gd,
 src/ui/{main,result_screen,workshop_panel,world_view}.gd,
 src/tools/{headless_v1,input_v1,shot}.gd, assets/locale/strings.csv,
 implementation/shots/review-0176/, implementation/PROGRESS.md
+
+## 0177 - Hardwood - done 2026-10-09
+
+What changed: the four big stumps 0156 laid in the south-west woods now give
+**hardwood**, and only to an iron axe. This is a reason to buy the iron axe
+early. Each stump is one thing over 2x2 cells:
+- a swing at any of its four cells strikes it;
+- it is drawn chipped from the first swing until the last;
+- the last swing takes all four cells off the farm;
+- it comes back whole the next day.
+
+Hardwood only sells for now; the strong wall of 0231 is what it is for.
+
+**The levers** (`GameData.GATHERING["hardwood_stump"]`):
+- axe, `min_tier` 1;
+- 6 swings, where a tree takes 3;
+- 2 s a swing at tier 0, which is 40 ticks with the iron axe;
+- 2 hardwood;
+- `regrow_ticks` = `DAY_TICKS`.
+
+`SELL_PRICE[HARDWOOD]` is 6, in the materials group right after wood. With
+the iron axe a stump is 8 s of swinging for $12, about half a tree's money
+per second ($3/s). Its worth is meant to be the wall's, not the stall's.
+
+**One thing over four cells** (`Gathering`):
+- `strike` and `swings_left` resolve the cell to its anchor (`Building.anchor_of`).
+  The swing count lives on the anchor's occupant, so all four cells answer
+  the same.
+- The last swing removes every cell of `Building.footprint` and schedules one
+  `regrowing` entry: the anchor's.
+- `tick` brings a footprint back only when all of its cells are clear. Each
+  restored cell carries the anchor, as `Farm.initial()` lays the map's.
+- If the player has built on one cell, the stump **waits**: its entry stays
+  pending and is asked again every tick. A tree on a built cell is given up;
+  a stump is not, so nothing is spent for good.
+- `tick` now clamps a pending count at 0, so a waiting entry does not run
+  negative in the save. A one-cell entry leaves the list the tick it reaches
+  0, so nothing else changes.
+
+**Other pieces:**
+- `Interact.OCCUPANT_VERBS` gives the stump `chop`.
+- The tier gate is 0175's, per cell. A basic axe sees "Needs iron axe" in
+  both languages, and the input case reads it on the highlight.
+- The flow field already treated a node with no `Building` entry as a tree
+  (`Pathing._through` returns `IMPASSABLE`, and the stump is not prey). Now
+  it is asserted.
+- `check_reachable` already walked the stumps through `UNGATHERED_NODES`.
+  That list stays, because the v5-to-v6 save migration lays its nodes into
+  an old farm. Its comment no longer calls them inert.
+
+**The view:**
+- `WorldView.struck_art` draws `<id>_chipped` from the first swing to the
+  last, whenever the registry names that state.
+- The stand-in `hardwood_stump_chipped` (A021) is 0156's 2x stump tinted paler
+  and warmer: fresh wood against the whole stump's darker bark. Side by side
+  it reads; it is only a tint until A021's notch arrives in 0204.
+- Hardwood's icons, `icon_hardwood` and `hud_hardwood` (A020, integrated by
+  0203), are tinted stand-ins of the wood icons, in A020's darker reddish
+  heartwood.
+- A021's Deliverables now state the settled geometry: six 16x16 nodes at
+  (8,14); the stump 32x32 at (16,30) on the bottom centre of its 2x2, in two
+  states (whole, then chipped from the first swing until it falls).
+
+**Tests:**
+- `_task_0177_hardwood` (headless_v1):
+  - the levers and the materials group;
+  - the name in both languages;
+  - a basic axe refused, with the state hash unchanged;
+  - six iron swings across all four cells counting down on one stump;
+  - the yield;
+  - all four cells empty with exactly the anchor's entry pending;
+  - back whole and anchored after `regrow_ticks`;
+  - a fence on one cell keeps all four empty, and the stump survives a save
+    while waiting;
+  - back the tick the fence goes;
+  - `check_reachable`;
+  - the flow field's treatment, the same as a tree's.
+- `_case_0177_hardwood` (input_v1), with real SPACE beside a non-anchor cell:
+  - refused with a basic axe, and the highlight names the iron axe;
+  - with the iron axe, the first swing draws it chipped;
+  - held SPACE fells all four cells;
+  - the hardwood arrives once.
+- Shot count 61 in `headless_check`, which asks for one per scenario.
+
+**Notes:**
+- The 2x2 stand-in fills only the bottom row of its footprint, as A021's
+  envelope asks ("broad, not tall"). So the highlight on a top cell frames
+  grass above the stump. It still says chop; a footprint-wide highlight
+  would be a view task of its own.
+- The `hardwood` scenario stands him north of the chipped stump. The seed
+  list has covered the left of the screen since 0168, and the whole stump
+  further east stays in the same frame.
+
+### Hashes
+
+Both moved on purpose, accepted with `verify.py --accept`.
+- **SIM 265134837 -> 3052463561**: `hardwood` is a new key in `held` and
+  `gained`, and `State.hash_of` folds every key.
+- **DATA 1698799174 -> 2340660337**: the stump's `GATHERING` row,
+  `RESOURCES`, `SELL_PRICE` and the materials group.
+
+Verify: 60 passed, 0 failed in 666s (the known OVER BUDGET). headless_check 16902
+(+15), headless_v1 1591 (+21), input_check 1141 (+2), input_v1 464 (+6), 588
+keys in two languages, placeholders 0 problems, perf 3511us a night tick.
+
+Looked at: `implementation/shots/0177/hardwood.png` at full size, and the
+two stumps side by side zoomed:
+- the chipped one by the farmer is paler and warmer;
+- the whole one to the east keeps 0156's darker bark;
+- both sit among the trees.
+
+Files: src/core/{game_data,gathering,interact}.gd,
+src/ui/{names,placeholder_art,world_view}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A021-ore-hardwood.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0177-hardwood.md,
+implementation/shots/0177/, docs/devlog/{index,index.pt_BR}.md

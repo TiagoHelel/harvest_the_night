@@ -52,6 +52,7 @@ const KEYS: Dictionary = {
 	&"upgrade_rod_iron": &"REC_UPGRADE_ROD_IRON",
 	# ---- what a farm produces and a shop buys
 	&"wood": &"ITEM_WOOD",
+	&"hardwood": &"ITEM_HARDWOOD",
 	&"stone": &"ITEM_STONE",
 	&"iron": &"ITEM_IRON",
 	&"copper": &"ITEM_COPPER",

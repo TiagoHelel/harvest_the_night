@@ -584,5 +584,6 @@ DESC_TOOL_NEXT_MORNING,224,Keep your tool; ready next morning,Use sua ferramenta
 ITEM_COPPER,96,Copper,Cobre
 ITEM_COAL,96,Coal,Carvão
 ITEM_GOLD,96,Gold,Ouro
+ITEM_HARDWOOD,96,hardwood,madeira de lei
 WHY_GATHER_SEASON,224,Available from %s,Disponível a partir de %s
 DESC_FUEL_FALLBACK,224,Oil first; coal when empty,Óleo primeiro; carvão se acabar

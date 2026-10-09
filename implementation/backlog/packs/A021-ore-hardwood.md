@@ -21,7 +21,7 @@ show that the axe has bitten.
 
 ## Deliverables
 
-The table is provisional: game task 0177 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0177. The six nodes are 16x16 at pivot (8,14), draw scale 1.0, each master with one `_b` variant under the ids 0156 chose. The big stump is one 32x32 drawing at pivot (16,30), draw scale 1.0, placed at the bottom centre of its 2x2 footprint, in two states: `hardwood_stump` until the first swing lands and `hardwood_stump_chipped` from then until the last swing fells it (six with the levers of today; the whole stump comes back the next day). Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

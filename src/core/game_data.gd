@@ -194,6 +194,7 @@ const PLAYER_SPEED := 6                 # LEVER: subtile units per tick, 3-12
 # ================================================================== resources
 
 const WOOD := &"wood"
+const HARDWOOD := &"hardwood"
 const STONE := &"stone"
 const IRON := &"iron"
 const COPPER := &"copper"
@@ -244,7 +245,7 @@ const ENERGY := &"energy"
 ## Every resource the ledger knows about, in the order the reference sheet
 ## lays them out.
 const RESOURCES: Array = [
-	WOOD, STONE, IRON, COPPER, COAL, GOLD, FOOD, FISH, OIL,
+	WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, FOOD, FISH, OIL,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
@@ -256,6 +257,10 @@ const RESOURCES: Array = [
 ## neither does energy, which is a rate rather than a stock (task 0033).
 const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	WOOD: 2,
+	# Hardwood only sells until the strong wall (task 0231) builds with it,
+	# and sells low: a stump's two pieces are about half a tree's money per
+	# second of swinging. Its worth is the wall's, not the stall's.
+	HARDWOOD: 6,                     # LEVER: money each, 3-10
 	STONE: 3,
 	IRON: 7,
 	COPPER: 5,                       # LEVER: money each, 1-8
@@ -534,6 +539,18 @@ const GATHERING: Dictionary = {
 		"hits": 4,                      # LEVER: swings, 3-6
 		"yield": {GOLD: 1},             # LEVER: units, 1-2
 		"regrow_ticks": 7 * 60 * SECONDS, # LEVER: ticks, 5-9 minutes
+	},
+	# **The big stumps** (task 0177): one thing over 2x2 cells in the
+	# south-west woods, and the reason to buy an iron axe early. Twice a
+	# tree's swings, each slower, for the strong wall's hardwood (0231); a
+	# swing at any of its four cells strikes it, and it comes back whole the
+	# next day - nothing on the farm is spent for good.
+	&"hardwood_stump": {
+		"tool": &"axe", "min_tier": 1,  # LEVER: iron axe, 0-2
+		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 30-120
+		"hits": 6,                      # LEVER: swings, 4-8 (a tree takes 3)
+		"yield": {HARDWOOD: 2},         # LEVER: units, 1-3
+		"regrow_ticks": DAY_TICKS,      # LEVER: ticks, a whole day
 	},
 }
 
@@ -1065,7 +1082,7 @@ const LIVESTOCK: Dictionary = {
 const GROUP_OTHER := &"other"
 
 const RESOURCE_GROUPS: Array = [
-	{"name": &"materials", "members": [WOOD, STONE, IRON, COPPER, COAL, GOLD]},
+	{"name": &"materials", "members": [WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD]},
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
 	{"name": &"seeds", "members": [CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED]},
 	{"name": &"fish", "members": [FISH]},
@@ -2070,11 +2087,11 @@ const MAP_LEGEND: Dictionary = {
 	"h": [0, &"hardwood_stump"],
 }
 
-## **Nodes on the map with no `GATHERING` row yet** (task 0156): under their
-## final ids, so 0176 (copper, coal, gold) and 0177 (hardwood) change data
-## only. Until then they are inert, impassable obstacles with no verb - and
-## `check_reachable` still sees that each can be stood beside. Each task
-## takes its own off this list when it gives them a row.
+## **The nodes 0156 put on the map before they had a `GATHERING` row**,
+## under their final ids: 0176 gave copper, coal and gold theirs and 0177 the
+## hardwood stump. The list stays because it is what the v5-to-v6 save
+## migration lays into an old farm (`Save`), and `check_reachable` walks it
+## as well as the table.
 const UNGATHERED_NODES: Array = [&"copper_ore", &"coal_seam", &"gold_ore", &"hardwood_stump"]
 
 ## Map props bigger than one cell, by id: one thing over its footprint, with

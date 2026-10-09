@@ -1274,12 +1274,18 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 		return false            # the real art is here, or it is drawn by code
 	if cell != anchor:
 		return true             # one drawing over the whole footprint
+	# **Chipped once the axe has bitten** (task 0177): the pack's second
+	# state, until the last swing takes the whole thing down.
+	var art := struck_art(_state, id, anchor)
+	if art != id:
+		file = PlaceholderArt.texture_path(PlaceholderArt.art_path(art, 0))
 	var sprite := Sprite2D.new()
 	sprite.name = "Prop_%d" % idx
 	sprite.texture = load(file)
+	sprite.set_meta("prop_art", art)
 	ArtPlacement.place(sprite, anchor, Building.size_of(id))
-	sprite.scale *= PlaceholderArt.art_scale(id)
-	sprite.modulate = PlaceholderArt.art_tint(id)
+	sprite.scale *= PlaceholderArt.art_scale(art)
+	sprite.modulate = PlaceholderArt.art_tint(art)
 	if _season != null and _season.season() == SeasonView.WINTER and id in SeasonView.CAPPED:
 		_cap(sprite, id, Building.size_of(id) != Vector2i.ONE)
 	var logical_cells: Array = []
@@ -1291,6 +1297,17 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 	_occupants.add_child(sprite)
 	_sprites.append(sprite)
 	return true
+
+
+## The art a gathering node is drawn as: `<id>_chipped` from its first swing
+## to its last when the registry names that state (A021's big stump, task
+## 0177), and its own otherwise.
+static func struck_art(state: Dictionary, id: StringName, anchor: Vector2i) -> StringName:
+	var chipped := StringName("%s_chipped" % id)
+	if not Gathering.is_node(id) or PlaceholderArt.art(chipped).is_empty():
+		return id
+	var full := int((GameData.GATHERING[id] as Dictionary)["hits"])
+	return chipped if Gathering.swings_left(state, anchor) < full else id
 
 
 ## **A snow cap** (task 0159) over a node in winter: A013's own, or its
