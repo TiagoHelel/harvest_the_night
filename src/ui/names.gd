@@ -20,6 +20,36 @@ extends RefCounted
 
 ## Data id -> the key that names it.
 const KEYS: Dictionary = {
+	&"hoe": &"TOOL_HOE",
+	&"hoe_basic": &"TOOL_HOE_BASIC",
+	&"hoe_iron": &"TOOL_HOE_IRON",
+	&"upgrade_hoe_iron": &"REC_UPGRADE_HOE_IRON",
+	&"hoe_gold": &"TOOL_HOE_GOLD",
+	&"upgrade_hoe_gold": &"REC_UPGRADE_HOE_GOLD",
+	&"can": &"TOOL_CAN",
+	&"can_basic": &"TOOL_CAN_BASIC",
+	&"can_iron": &"TOOL_CAN_IRON",
+	&"upgrade_can_iron": &"REC_UPGRADE_CAN_IRON",
+	&"can_gold": &"TOOL_CAN_GOLD",
+	&"upgrade_can_gold": &"REC_UPGRADE_CAN_GOLD",
+	&"axe": &"TOOL_AXE",
+	&"axe_basic": &"TOOL_AXE_BASIC",
+	&"axe_iron": &"TOOL_AXE_IRON",
+	&"upgrade_axe_iron": &"REC_UPGRADE_AXE_IRON",
+	&"axe_gold": &"TOOL_AXE_GOLD",
+	&"upgrade_axe_gold": &"REC_UPGRADE_AXE_GOLD",
+	&"pickaxe": &"TOOL_PICKAXE",
+	&"pickaxe_basic": &"TOOL_PICKAXE_BASIC",
+	&"pickaxe_iron": &"TOOL_PICKAXE_IRON",
+	&"upgrade_pickaxe_iron": &"REC_UPGRADE_PICKAXE_IRON",
+	&"pickaxe_gold": &"TOOL_PICKAXE_GOLD",
+	&"upgrade_pickaxe_gold": &"REC_UPGRADE_PICKAXE_GOLD",
+	&"rod": &"TOOL_ROD",
+	&"rod_bamboo": &"TOOL_ROD_BAMBOO",
+	&"rod_fibre": &"TOOL_ROD_FIBRE",
+	&"upgrade_rod_fibre": &"REC_UPGRADE_ROD_FIBRE",
+	&"rod_iron": &"TOOL_ROD_IRON",
+	&"upgrade_rod_iron": &"REC_UPGRADE_ROD_IRON",
 	# ---- what a farm produces and a shop buys
 	&"wood": &"ITEM_WOOD",
 	&"stone": &"ITEM_STONE",
@@ -139,6 +169,7 @@ const KEYS: Dictionary = {
 
 ## Literal category keys: the translation checker can see every tab.
 const GROUP_KEYS: Dictionary = {
+	&"tools": &"INV_GROUP_TOOLS",
 	&"materials": &"INV_GROUP_MATERIALS",
 	&"crops": &"INV_GROUP_CROPS",
 	&"seeds": &"INV_GROUP_SEEDS",

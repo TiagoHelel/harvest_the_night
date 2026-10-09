@@ -2408,10 +2408,17 @@ func _case_0036_inventory() -> void:
 
 	# Every resource appears once across bounded pages, never all at once.
 	var seen: Array = []
+	var tools_seen: Array = []
 	for page in panel.page_count():
 		for line in panel.page_rows():
 			var id := StringName(line["id"])
 			var row: Control = require_control("inv_%s" % id)
+			if line.has("tool"):
+				expect(row != null and row.is_visible_in_tree() and id not in tools_seen
+					and locate_control("inv_held_%s" % id) == null,
+					"%s appears once as a permanent tool, without a resource count" % id)
+				tools_seen.append(id)
+				continue
 			expect(row != null and row.is_visible_in_tree() and id not in seen,
 				"%s has exactly one visible page row" % id)
 			seen.append(id)
@@ -2422,6 +2429,7 @@ func _case_0036_inventory() -> void:
 		await tap_key(KEY_E)
 		await frames(2)
 	expect(seen.size() == GameData.RESOURCES.size(), "every resource has a page")
+	expect(tools_seen.size() == GameData.TOOLS.size(), "all five tools have their own inventory page")
 	panel.select_group(&"materials")
 	await frames(2)
 

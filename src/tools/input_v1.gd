@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 28
+const V1_CASES := 29
 
 
 func _process(delta: float) -> bool:
@@ -78,6 +78,7 @@ func _run() -> void:
 	await _case_0170_seeds()
 	await _case_0171_winter()
 	await _case_0172_regrow()
+	await _case_0173_upgrade()
 	_finish()
 
 
@@ -2070,6 +2071,8 @@ func _case_0169_inventory() -> void:
 		expect(Rect2(Vector2.ZERO, Vector2(480,270)).encloses(frame.get_global_rect()),
 			"the inventory frame fits the native viewport")
 		for line in panel.page_rows():
+			if line.has("tool"):
+				continue
 			var id := StringName(line["id"])
 			seen.append(id)
 			var row := require_control("inv_%s" % id) as Control
@@ -2233,5 +2236,46 @@ func _case_0172_regrow() -> void:
 	await _pad_tap(JOY_BUTTON_RIGHT_STICK)
 	await frames(4)
 	expect(Farming.plot(state, cell) == Farming.EMPTY_PLOT, "the pad REMOVE button also clears a regrowing plant")
+	await close_scene()
+	_completed += 1
+
+
+## 0173 - both workshop input paths order once and show tomorrow's delivery.
+func _case_0173_upgrade() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	state["held"][GameData.MONEY] = 1000
+	state["held"][GameData.IRON] = 100
+	var bench: Vector2i = Farm.cells_with(state, &"workshop")[0]
+	_stand_at(state, bench + Vector2i.UP, Player.SOUTH)
+	await frames(3)
+	await click_control("WorkshopToolsTab")
+	await frames(3)
+	var axe := require_control("make_upgrade_axe_iron") as Button
+	if axe != null:
+		axe.grab_focus()
+		await tap_key(KEY_ENTER)
+	await until(func() -> bool: return state["tools"]["pending"].has("axe"), "a keyboard axe order finishes pending tomorrow")
+	await frames(3)
+	expect(ToolTiers.tier(state, &"axe") == 0 and (require_control("WorkshopToolPending") as Label).visible, "the workshop shows pending while the old axe remains usable")
+	await click_control("make_upgrade_can_iron")
+	await until(func() -> bool: return state["tools"]["pending"].has("can"), "a mouse can order finishes pending tomorrow")
+	await frames(3)
+	expect(ToolTiers.tier(state, &"can") == 0 and state["tools"]["pending"].size() == 2, "each input ordered one upgrade")
+	var gold := require_control("make_upgrade_axe_gold") as Button
+	expect(gold != null and gold.disabled, "gold stays visible and refused")
+	var frame := require_control("WorkshopFrame") as Control
+	expect(Rect2(Vector2.ZERO, Vector2(480, 270)).encloses(frame.get_global_rect()), "the upgrade list fits the native viewport", str(frame.get_global_rect()))
+	await tap_key(KEY_I)
+	await frames(2)
+	var inventory := require_control("InventoryPanel") as InventoryPanel
+	inventory.select_group(&"tools")
+	await frames(2)
+	expect(inventory.page_rows().size() == 5 and (require_control("inv_tool_pending_axe") as Label).visible, "inventory shows the five held tools and pending delivery")
 	await close_scene()
 	_completed += 1

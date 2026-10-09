@@ -163,7 +163,9 @@ func _process(_delta: float) -> void:
 	var signature := _signature()
 	if signature != _built_for:
 		_built_for = signature
-		_pages = pages_for(Inventory.groups(_state))
+		var groups := Inventory.groups(_state)
+		groups.append({"name": &"tools", "rows": _tool_rows()})
+		_pages = pages_for(groups)
 		_page = clampi(_page, 0, maxi(0, _pages.size() - 1))
 		_build()
 
@@ -173,6 +175,7 @@ func _signature() -> String:
 		_binding(&"hotbar_next")]
 	for entry in Inventory.rows(_state):
 		parts.append("%s=%d" % [entry["id"], entry["held"]])
+	parts.append(str(_state["tools"]))
 	return ",".join(parts)
 
 
@@ -226,6 +229,8 @@ func _button(node_name: String, text: String, action: Callable) -> Button:
 
 ## One resource: what it is, how much, and what it fetches each.
 func _row(line: Dictionary) -> Control:
+	if line.has("tool"):
+		return _tool_row(line)
 	var held := int(line["held"])
 	var row := HBoxContainer.new()
 	row.name = "inv_%s" % line["id"]
@@ -234,7 +239,6 @@ func _row(line: Dictionary) -> Control:
 	var icon := TextureRect.new()
 	icon.name = "inv_icon_%s" % line["id"]
 	icon.texture = UiKit.icon(StringName(line["id"]),true)
-	icon.modulate = PlaceholderArt.art_tint(StringName("hud_%s" % line["id"]))
 	icon.modulate = PlaceholderArt.art_tint(StringName("hud_%s" % line["id"]))
 	icon.custom_minimum_size = Vector2(10,10)
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -287,3 +291,35 @@ func _line(node_name: String, text: String,
 func _binding(action: StringName) -> String:
 	var actions := get_tree().root.get_node_or_null("Actions")
 	return str(actions.text_of(action)) if actions != null else ""
+
+
+func _tool_rows() -> Array:
+	var rows: Array = []
+	for tool in GameData.sorted_names(GameData.TOOLS.keys()):
+		rows.append({"tool": tool, "id": ToolTiers.item(tool, ToolTiers.tier(_state, tool)),
+			"pending": _state["tools"]["pending"].has(String(tool))})
+	return rows
+
+
+func _tool_row(line: Dictionary) -> Control:
+	var row := HBoxContainer.new()
+	row.name = "inv_%s" % line["id"]
+	row.custom_minimum_size = Vector2(300, ROW_HEIGHT)
+	var icon := TextureRect.new()
+	icon.name = "inv_icon_%s" % line["id"]
+	icon.texture = UiKit.icon(line["id"], true)
+	icon.modulate = PlaceholderArt.art_tint(StringName("hud_%s" % line["id"]))
+	icon.custom_minimum_size = Vector2(10, 10)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP
+	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(icon)
+	var label := _line("inv_name_%s" % line["id"], Names.of(line["id"]), UiKit.DIM)
+	label.custom_minimum_size.x = 170
+	row.add_child(label)
+	if bool(line["pending"]):
+		var pending := _line("inv_tool_pending_%s" % line["tool"], I18n.t(&"INV_TOOL_PENDING"), UiKit.GOOD)
+		pending.custom_minimum_size.x = 110
+		row.add_child(pending)
+	return row

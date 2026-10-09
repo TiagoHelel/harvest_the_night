@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 41
+const GROUPS := 42
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -110,6 +110,7 @@ func _run() -> void:
 	_task_0170_seasons()
 	_task_0171_winter()
 	_task_0172_regrow()
+	_task_0173_tools()
 
 
 func _finish() -> void:
@@ -3248,7 +3249,11 @@ func _task_0166_long_day() -> void:
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 96, &"make_gunpowder": 32,
 		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52}
-	expect(batches.size() == GameData.RECIPES.size(), "every recipe has a daily budget")
+	var ordinary := 0
+	for id in GameData.RECIPES:
+		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty():
+			ordinary += 1
+	expect(batches.size() == ordinary, "every repeatable recipe has a daily budget; permanent upgrades are once per tier")
 	for id in GameData.sorted_names(batches.keys()):
 		var ticks := int(GameData.RECIPES[id]["ticks"])
 		var per_batch := 0
@@ -3726,3 +3731,64 @@ func _0172_morning(state: Dictionary, cell: Vector2i, watered: bool) -> void:
 	Phases.start_waves(state)
 	Phases.enter_result(state, false)
 	Phases.begin_day(state)
+
+
+## 0173 - paid workshop upgrades keep the old tool until the following dawn.
+func _task_0173_tools() -> void:
+	var state := State.create(1730)
+	var bench: Vector2i = Farm.cells_with(state, &"workshop")[0]
+	state["held"][GameData.MONEY] = 1000
+	state["held"][GameData.IRON] = 88
+	for tool in GameData.sorted_names(GameData.TOOLS.keys()):
+		expect(ToolTiers.tier(state, tool) == 0 and tool not in GameData.RESOURCES, "%s starts at tier zero outside the ledger" % tool)
+	expect(ToolTiers.why_not(state, &"upgrade_axe_gold") == [&"WHY_TOOL_GOLD_LOCKED"], "gold is listed with its unavailable-ore reason")
+	expect(ToolTiers.why_not(state, &"upgrade_rod_iron") == [&"WHY_TOOL_PREVIOUS"], "a bamboo rod cannot skip fibre")
+	expect(Crafting.enqueue(state, bench, &"upgrade_axe_iron"), "money and iron buy an axe order")
+	expect(not Crafting.enqueue(state, bench, &"upgrade_axe_iron"), "a queued upgrade cannot be ordered twice")
+	Sim.advance(state, int(GameData.RECIPES[&"upgrade_axe_iron"]["ticks"]) + 1)
+	expect(ToolTiers.tier(state, &"axe") == 0 and state["tools"]["pending"]["axe"]["tier"] == 1, "a completed axe stays basic pending tomorrow")
+	expect(Resources.amount(state, GameData.IRON) == 80 and Resources.amount(state, GameData.MONEY) == 850, "the workshop charges exactly eight iron and $150")
+	var path := "user://task0173-tools.sav"
+	expect(Save.write_run_at(path, state), "a pending upgrade saves")
+	var loaded := Save.read_run_at(path)
+	expect(loaded["tools"] == state["tools"], "the old tool and pending upgrade round-trip")
+	Save._remove(path)
+	Save._remove(path + ".bak")
+	Phases.go_to_bed(state)
+	expect(ToolTiers.tier(state, &"axe") == 0, "the axe is still basic that evening")
+	Phases.start_waves(state)
+	Rewards.settle(state, false)
+	Phases.enter_result(state, false)
+	expect(Resources.amount(state, GameData.IRON) == 60 and state["tools"]["pending"].has("axe"), "a lost night takes 25 percent of iron and no pending tool")
+	expect(Phases.begin_day(state) and ToolTiers.tier(state, &"axe") == 1 and state["tools"]["pending"].is_empty(), "the next morning hands over the iron axe")
+	var tools: Dictionary = state["tools"].duplicate(true)
+	Rewards.settle(state, false)
+	expect(state["tools"] == tools, "a later loss cannot take an owned tool")
+	for recipe in [&"upgrade_hoe_iron", &"upgrade_can_iron", &"upgrade_pickaxe_iron", &"upgrade_rod_fibre", &"upgrade_rod_iron"]:
+		state["held"][GameData.MONEY] = 1000
+		state["held"][GameData.IRON] = 100
+		expect(Crafting.enqueue(state, bench, recipe), "%s can be ordered in ladder order" % recipe)
+		Sim.advance(state, int(GameData.RECIPES[recipe]["ticks"]) + 1)
+		Phases.go_to_bed(state)
+		Phases.start_waves(state)
+		Phases.enter_result(state, false)
+		Phases.begin_day(state)
+		var target := GameData.tool_output(GameData.RECIPES[recipe]["output"].keys()[0])
+		expect(ToolTiers.tier(state, target["tool"]) == target["tier"], "%s arrives at dawn" % recipe)
+	var before := State.hash_of(state)
+	var view := PlayerWork.new()
+	expect(view.head_material(state, &"chop").get_shader_parameter("head_mid") == PlayerWork.HEAD_RAMPS[&"iron"][1], "chopping reads the iron head ramp")
+	expect(view.head_material(state, &"plant") == null and State.hash_of(state) == before, "tool tinting never writes simulation state")
+	view._head_materials.clear()
+	var old := State.create(1731)
+	old.erase("tools")
+	State.reconcile(old)
+	expect(old["tools"] == ToolTiers.initial()["tools"], "an old save receives all five basic tools")
+	var bad := GameData.TOOLS.duplicate(true)
+	bad[&"axe"][1]["cost"][&"imaginary_ore"] = 1
+	expect(not GameData.check_tools(bad).is_empty(), "an unknown ore cost is refused")
+	bad = GameData.TOOLS.duplicate(true)
+	bad[&"axe"].pop_back()
+	expect(not GameData.check_tools(bad).is_empty(), "an incomplete ladder is refused")
+	expect(GameData.check_tools(GameData.TOOLS).is_empty(), "all five ladders validate")
+	_completed += 1

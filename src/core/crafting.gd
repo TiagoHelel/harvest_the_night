@@ -147,6 +147,8 @@ static func recipes_at(station: StringName) -> Array:
 ## when the item reaches the front, so a player can line up five barricades and
 ## go and fetch the wood - which is the semi-idle promise of `design.md`
 ## section 13 rather than a trap for anybody who queues before gathering.
+## Permanent tool upgrades also require their price and preceding tier at
+## order time; ToolTiers refuses duplicate, unavailable or skipped tiers.
 static func can_queue(state: Dictionary, cell: Vector2i,
 		recipe_id: StringName) -> bool:
 	var recipe: Variant = GameData.RECIPES.get(recipe_id, null)
@@ -155,7 +157,7 @@ static func can_queue(state: Dictionary, cell: Vector2i,
 	var on := Farm.occupant(state, cell)
 	if on.is_empty() or on["id"] != (recipe as Dictionary)["station"]:
 		return false
-	return room_at(state, cell) > 0
+	return room_at(state, cell) > 0 and ToolTiers.why_not(state, recipe_id).is_empty()
 
 
 ## Whether the player could start this **now**, materials and all. What the
@@ -432,7 +434,9 @@ static func _deliver(state: Dictionary, recipe_id: StringName) -> void:
 	var ids := GameData.sorted_names(output.keys())
 	for id in ids:
 		var n := int(output[id])
-		if GameData.RESOURCES.has(id):
+		if not GameData.tool_output(id).is_empty():
+			ToolTiers.deliver(state, id)
+		elif GameData.RESOURCES.has(id):
 			Resources.add(state, id, n)
 		else:
 			var all: Dictionary = state["kits"]

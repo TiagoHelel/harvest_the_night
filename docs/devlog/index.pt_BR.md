@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-161 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+162 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -204,10 +204,11 @@ voz alta.
 | 0170 | Crops keep to their seasons | 2026-10-09 |
 | 0171 | Winter: nothing grows outside | 2026-10-09 |
 | 0172 | Crops that grow back | 2026-10-09 |
+| 0173 | Five tools, three tiers | 2026-10-09 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 43 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 45 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -252,6 +253,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Nine new crops** (0168) - `sim` 2338199505 -> 2176208283
 - **Nine new crops** (0168) - `data` 3886875281 -> 887578929
 - **An inventory for many things** (0169) - `data` 887578929 -> 3933123229
+- **Five tools, three tiers** (0173) - `sim` 1129539259 -> 3813670633
+- **Five tools, three tiers** (0173) - `data` 3367436400 -> 2771032843
 
 ## O que deu errado
 

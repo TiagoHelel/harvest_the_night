@@ -516,6 +516,37 @@ const FISHING: Dictionary = {
 }
 
 
+## Five permanent tools, each on one three-step ladder (0173).
+## Effect fields are consumed by 0174/0175/0180/0181; gold costs arrive in 0176.
+const TOOLS: Dictionary = {
+	&"hoe": [
+		{"name": &"basic", "cost": {}, "enabled": true, "area": 1, "capacity_bonus": 0}, # LEVER: money/ore and tier effects
+		{"name": &"iron", "cost": {MONEY: 100, IRON: 5}, "enabled": true, "area": 3, "capacity_bonus": 0}, # LEVER: money/ore and tier effects
+		{"name": &"gold", "cost": {}, "enabled": false, "area": 5, "capacity_bonus": 0}, # LEVER: money/ore and tier effects
+	],
+	&"can": [
+		{"name": &"basic", "cost": {}, "enabled": true, "area": 1, "capacity_bonus": 0}, # LEVER: money/ore and tier effects
+		{"name": &"iron", "cost": {MONEY: 100, IRON: 5}, "enabled": true, "area": 3, "capacity_bonus": 4}, # LEVER: money/ore and tier effects
+		{"name": &"gold", "cost": {}, "enabled": false, "area": 5, "capacity_bonus": 8}, # LEVER: money/ore and tier effects
+	],
+	&"axe": [
+		{"name": &"basic", "cost": {}, "enabled": true, "gather_percent": 100}, # LEVER: money/ore and tier effects
+		{"name": &"iron", "cost": {MONEY: 150, IRON: 8}, "enabled": true, "gather_percent": 150}, # LEVER: money/ore and tier effects
+		{"name": &"gold", "cost": {}, "enabled": false, "gather_percent": 200}, # LEVER: money/ore and tier effects
+	],
+	&"pickaxe": [
+		{"name": &"basic", "cost": {}, "enabled": true, "gather_percent": 100}, # LEVER: money/ore and tier effects
+		{"name": &"iron", "cost": {MONEY: 150, IRON: 8}, "enabled": true, "gather_percent": 150}, # LEVER: money/ore and tier effects
+		{"name": &"gold", "cost": {}, "enabled": false, "gather_percent": 200}, # LEVER: money/ore and tier effects
+	],
+	&"rod": [
+		{"name": &"bamboo", "cost": {}, "enabled": true, "bite_percent": 100, "rare_percent": 100, "zone_percent": 100, "bait_slot": false, "legendary": false}, # LEVER: money/ore and tier effects
+		{"name": &"fibre", "cost": {MONEY: 120, IRON: 4}, "enabled": true, "bite_percent": 80, "rare_percent": 125, "zone_percent": 125, "bait_slot": false, "legendary": false}, # LEVER: money/ore and tier effects
+		{"name": &"iron", "cost": {MONEY: 300, IRON: 12}, "enabled": true, "bite_percent": 65, "rare_percent": 150, "zone_percent": 150, "bait_slot": true, "legendary": true}, # LEVER: money/ore and tier effects
+	],
+}
+
+
 # ==================================================================== recipes
 
 ## What turns into what, and how long it takes.
@@ -523,6 +554,26 @@ const FISHING: Dictionary = {
 ## The bridge the whole game rests on: everything here takes something the day
 ## produced and makes something the night needs.
 const RECIPES: Dictionary = {
+	&"upgrade_hoe_iron": {"station": &"workshop", "inputs": TOOLS[&"hoe"][1]["cost"],
+		"output": {&"hoe_iron": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
+	&"upgrade_hoe_gold": {"station": &"workshop", "inputs": TOOLS[&"hoe"][2]["cost"],
+		"output": {&"hoe_gold": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
+	&"upgrade_can_iron": {"station": &"workshop", "inputs": TOOLS[&"can"][1]["cost"],
+		"output": {&"can_iron": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
+	&"upgrade_can_gold": {"station": &"workshop", "inputs": TOOLS[&"can"][2]["cost"],
+		"output": {&"can_gold": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
+	&"upgrade_axe_iron": {"station": &"workshop", "inputs": TOOLS[&"axe"][1]["cost"],
+		"output": {&"axe_iron": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
+	&"upgrade_axe_gold": {"station": &"workshop", "inputs": TOOLS[&"axe"][2]["cost"],
+		"output": {&"axe_gold": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
+	&"upgrade_pickaxe_iron": {"station": &"workshop", "inputs": TOOLS[&"pickaxe"][1]["cost"],
+		"output": {&"pickaxe_iron": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
+	&"upgrade_pickaxe_gold": {"station": &"workshop", "inputs": TOOLS[&"pickaxe"][2]["cost"],
+		"output": {&"pickaxe_gold": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
+	&"upgrade_rod_fibre": {"station": &"workshop", "inputs": TOOLS[&"rod"][1]["cost"],
+		"output": {&"rod_fibre": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
+	&"upgrade_rod_iron": {"station": &"workshop", "inputs": TOOLS[&"rod"][2]["cost"],
+		"output": {&"rod_iron": 1}, "ticks": TICK_HZ * 3}, # LEVER: workshop seconds, 1-10
 	# **A kit is the structure's cost, paid in advance.** The inputs below are
 	# the same numbers as the `cost` in DEFENCES, and `check_recipes()` refuses
 	# a build where they have drifted apart - they were already 4 wood against
@@ -1756,11 +1807,11 @@ const TOP_TOWER_LEVEL := 3
 const TECH_TREE: Array = [
 	# ---------------------------------------------------------- production
 	{"id": &"sharp tools", "branch": &"production", "cost": 2, "needs": [],
-		"gives": {"gather_percent": 130},
-		"note": "chopping and mining go half again as fast"},
+		"gives": {"gather_percent": 110},
+		"note": "chopping and mining speed +10%"},
 	{"id": &"full cans", "branch": &"production", "cost": 3,
-		"needs": [&"sharp tools"], "gives": {"water_can_bonus": 4},
-		"note": "the watering can holds four more"},
+		"needs": [&"sharp tools"], "gives": {"water_can_bonus": 2},
+		"note": "the watering can holds two more"},
 	{"id": &"steady hands", "branch": &"production", "cost": 4,
 		"needs": [&"full cans"], "gives": {"craft_percent": 135},
 		"note": "the workshop, press and kitchen work a third faster"},
@@ -2041,6 +2092,7 @@ static func validate() -> Array:
 	errors.append_array(check_crops(CROPS))
 	errors.append_array(check_gathering(GATHERING))
 	errors.append_array(check_recipes(RECIPES))
+	errors.append_array(check_tools(TOOLS))
 	errors.append_array(check_buildings(BUILDINGS))
 	errors.append_array(check_defences(DEFENCES))
 	errors.append_array(check_enemies(ENEMIES))
@@ -2552,6 +2604,37 @@ static func check_gathering(nodes: Dictionary) -> Array:
 	return errors
 
 
+## Decode the output's tool and tier without treating tools as resources.
+static func tool_output(id: StringName) -> Dictionary:
+	for tool in sorted_names(TOOLS.keys()):
+		for tier in range(1, TOOLS[tool].size()):
+			if id == StringName("%s_%s" % [tool, TOOLS[tool][tier]["name"]]):
+				return {"tool": tool, "tier": tier}
+	return {}
+
+
+## Costs are actual ledger resources; all five ladders retain three tiers.
+static func check_tools(tools: Dictionary) -> Array:
+	var errors: Array = []
+	for tool in sorted_names(tools.keys()):
+		var tiers: Array = tools[tool]
+		if tiers.size() != 3:
+			errors.append("tool '%s' needs three tiers" % tool)
+		for i in tiers.size():
+			var tier: Dictionary = tiers[i]
+			for res in sorted_names(tier["cost"].keys()):
+				if res not in RESOURCES or int(tier["cost"][res]) <= 0:
+					errors.append("tool '%s' has an invalid tier cost '%s'" % [tool, res])
+			if i > 0 and bool(tier["enabled"]) and (int(tier["cost"].get(MONEY, 0)) <= 0 or tier["cost"].size() < 2):
+				errors.append("tool '%s' needs money and ore" % tool)
+			if tier.has("area") and int(tier["area"]) not in [1, 3, 5]:
+				errors.append("tool '%s' has an invalid area" % tool)
+			for field in ["gather_percent", "bite_percent", "rare_percent", "zone_percent"]:
+				if tier.has(field) and int(tier[field]) <= 0:
+					errors.append("tool '%s' has an invalid effect '%s'" % [tool, field])
+	return errors
+
+
 static func check_recipes(recipes: Dictionary) -> Array:
 	var errors: Array = []
 	for recipe_id in recipes:
@@ -2565,10 +2648,15 @@ static func check_recipes(recipes: Dictionary) -> Array:
 					% [recipe_id, res])
 		for out in (recipe["output"] as Dictionary):
 			# An output is either a resource or something placeable.
-			if not RESOURCES.has(out) and not DEFENCES.has(out):
+			if not RESOURCES.has(out) and not DEFENCES.has(out) and tool_output(StringName(out)).is_empty():
 				errors.append("recipe '%s' makes unknown '%s'"
 					% [recipe_id, out])
 				continue
+			var upgrade := tool_output(StringName(out))
+			if not upgrade.is_empty():
+				var cost: Dictionary = TOOLS[upgrade["tool"]][upgrade["tier"]]["cost"]
+				if recipe["station"] != &"workshop" or recipe["inputs"] != cost or int(recipe["output"][out]) != 1 or recipe["output"].size() != 1:
+					errors.append("recipe '%s' is not the tool tier's exact workshop cost" % recipe_id)
 			# **A kit is the structure's cost, paid early.** Two places to
 			# write one price is two places for it to drift, so the drift is a
 			# red line rather than a surprise at the shop counter.
@@ -3173,6 +3261,7 @@ static func digest() -> int:
 		"gathering": GATHERING,
 		"fishing": FISHING,
 		"recipes": RECIPES,
+		"tools": TOOLS,
 		"queue": [QUEUE_LENGTH],
 		"buildings": BUILDINGS,
 		"defences": DEFENCES,

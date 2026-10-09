@@ -45,6 +45,10 @@ var _progress: Label
 var _built_for := ""
 ## {station cell index: the tally this panel last showed for it}
 var _last_seen: Dictionary = {}
+var _tool_tab := false
+var _tool_tabs: HBoxContainer
+var _tool_pending: Label
+var _recipe_scroll: ScrollContainer
 var _away: Label
 
 
@@ -67,6 +71,21 @@ func _ready() -> void:
 	_title = _line("WorkshopTitle", "", UiKit.WARM)
 	column.add_child(_title)
 
+	_tool_tabs = HBoxContainer.new()
+	column.add_child(_tool_tabs)
+	for tool_tab in [false, true]:
+		var button := Button.new()
+		button.name = "WorkshopToolsTab" if tool_tab else "WorkshopCraftTab"
+		button.text = I18n.t(&"WORK_TOOL_TAB" if tool_tab else &"WORK_RECIPE_TAB")
+		button.theme_type_variation = UiKit.ROW
+		button.custom_minimum_size = Vector2(64, 14)
+		button.pressed.connect(func() -> void:
+			_tool_tab = tool_tab
+			_built_for = "")
+		_tool_tabs.add_child(button)
+	_tool_pending = _line("WorkshopToolPending", I18n.t(&"WORK_TOOL_PENDING"), UiKit.GOOD)
+	column.add_child(_tool_pending)
+
 	_progress = _line("WorkshopProgress", "", UiKit.GOOD)
 	column.add_child(_progress)
 
@@ -82,7 +101,12 @@ func _ready() -> void:
 		UiKit.WARM))
 	_recipes = VBoxContainer.new()
 	_recipes.name = "WorkshopRecipes"
-	column.add_child(_recipes)
+	_recipe_scroll = ScrollContainer.new()
+	_recipe_scroll.name = "WorkshopRecipeScroll"
+	_recipe_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_recipe_scroll.custom_minimum_size = Vector2(130, 112)
+	column.add_child(_recipe_scroll)
+	_recipe_scroll.add_child(_recipes)
 
 
 func show_state(state: Dictionary) -> void:
@@ -171,12 +195,28 @@ func _signature(cell: Vector2i) -> String:
 	for id in Crafting.queue_at(_state, cell):
 		parts.append(str(id))
 	parts.append("stalled" if Crafting.is_stalled(_state, cell) else "running")
+	parts.append(str(_tool_tab))
+	parts.append(str(_state["tools"]))
+	parts.append(str(_state["held"]))
+	parts.append(str(I18n.revision()))
 	return "|".join(parts)
 
 
 func _build(cell: Vector2i) -> void:
 	var station: StringName = Farm.occupant(_state, cell)["id"]
-	_title.text = str(station).to_upper()
+	_title.text = Names.of(station).to_upper()
+	var tools := _tool_tab and station == &"workshop"
+	_tool_tabs.visible = station == &"workshop"
+	(_tool_tabs.get_node("WorkshopCraftTab") as Button).text = I18n.t(&"WORK_RECIPE_TAB")
+	(_tool_tabs.get_node("WorkshopToolsTab") as Button).text = I18n.t(&"WORK_TOOL_TAB")
+	(find_child("WorkshopMakeLabel", true, false) as Label).text = I18n.t(&"WORK_MAKE")
+	_tool_pending.visible = tools and not _state["tools"]["pending"].is_empty()
+	_tool_pending.text = I18n.t(&"WORK_TOOL_PENDING")
+	_frame.position = Vector2(248, 20) if tools else Vector2(336, 32)
+	_frame.custom_minimum_size.x = 224 if tools else 140
+	_frame.size = Vector2.ZERO
+	_recipe_scroll.custom_minimum_size.x = 214 if tools else 130
+	_recipe_scroll.custom_minimum_size.y = 140 if tools else 80
 
 	for holder in [_queue, _recipes]:
 		for child in (holder as VBoxContainer).get_children():
@@ -204,14 +244,45 @@ func _build(cell: Vector2i) -> void:
 	# What it can make. Clicking one puts it on the end.
 	for id in Crafting.recipes_at(station):
 		var recipe_id: StringName = id
+		var recipe: Dictionary = GameData.RECIPES[id]
+		var output := StringName(recipe["output"].keys()[0])
+		var upgrade := GameData.tool_output(output)
+		if tools != (not upgrade.is_empty()):
+			continue
 		var row := Button.new()
 		row.name = "make_%s" % recipe_id
 		Tooltip.describes(row, StringName("recipe:%s" % recipe_id))
-		row.text = str(recipe_id)
+		row.text = Names.of(output) if tools else str(recipe_id)
+		if tools:
+			row.text = "    " + row.text
+			row.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			var icon := TextureRect.new()
+			icon.texture = UiKit.icon(output)
+			icon.modulate = PlaceholderArt.art_tint(StringName("icon_%s" % output))
+			icon.position = Vector2(2, 0)
+			icon.custom_minimum_size = Vector2(16, 16)
+			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			icon.stretch_mode = TextureRect.STRETCH_KEEP
+			icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			row.add_child(icon)
+			row.custom_minimum_size.y = 16
+			var reason := ToolTiers.why_not(_state, id)
+			var detail := Describe.recipe(id)
+			if not reason.is_empty():
+				detail += "\n" + Names.refusal(reason)
+			Tooltip.describes(row, StringName("text:%s" % detail))
+			row.disabled = not Crafting.can_queue(_state, cell, id)
+			if _state["tools"]["pending"].get(String(upgrade["tool"]), {}).get("tier", -1) == upgrade["tier"]:
+				row.text += " *"
+			row.focus_entered.connect(func() -> void: Crafting.select_recipe(_state, recipe_id))
 		_style(row)
+		if tools:
+			row.custom_minimum_size.y = 16
 		row.modulate = Color(1, 1, 1) if Crafting.can_queue(_state, cell,
 			recipe_id) else Color(0.5, 0.48, 0.55)
 		row.pressed.connect(func() -> void:
+			if tools:
+				Crafting.select_recipe(_state, recipe_id)
 			Crafting.enqueue(_state, cell, recipe_id))
 		_recipes.add_child(row)
 

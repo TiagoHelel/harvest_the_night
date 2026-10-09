@@ -17159,3 +17159,68 @@ src/tools/{art_showcase,headless_check,headless_v1,input_v1,shot}.gd,
 assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0172-regrowing-crops.md,
 implementation/shots/0172/, docs/devlog/{index,index.pt_BR}.md (devlog.py --check).
+
+## 0173 - Five tools, three tiers - done 2026-10-09
+
+What changed: five permanent tools now have a saved three-step ladder. The
+workshop sells iron hoe/can/axe/pickaxe and fibre/iron rods for money and iron,
+finishes each order into a pending delivery, and hands it over next morning.
+The old tool remains usable; owned tools and pending deliveries survive the
+25% stock loss. Orders refuse duplicates and skipped tiers. Gold stays listed
+with an unavailable-ore reason until 0176 supplies its costs.
+
+The workshop has localized craft/tools tabs, reasons and a pending marker;
+the inventory has a separate page for the five tools without stock counts or
+sale values. Both draw A019 through the 0120 placeholder registry (30 native
+icon/HUD bindings, no generated or edited PNG art). PlayerWork maps the three
+fixed steel head colours to the held tier through a cached view-only shader,
+leaving source pixels and simulation state intact. Old saves receive basic
+tools through State.TABLES and initial/_adopt, still at save version 7.
+
+Balance: iron hoe/can cost $100 + 5 iron; iron axe/pickaxe $150 + 8 iron;
+fibre rod $120 + 4 iron; iron rod $300 + 12 iron. TOOLS declares the later
+systems' effects: areas 1/3/5, can capacity bonuses 0/4/8, gather speed
+100/150/200%, rod bite time 100/80/65%, rare chance and minigame zone
+100/125/150%, bait and legendary access at rod tier 2. These individual
+mechanical effects are consumed by 0174/0175/0180/0181, not activated here.
+Sharp tools remains a speed improvement, reduced from 130% to 110%: a base
+work timer goes from 100/130 = 76.9% to 100/110 = 90.9% of its old untiered
+length (integer ticks rounded down). With the forthcoming 150% iron tool the
+combined timer will be 100/150 * 100/110 = 60.6%, before tick rounding. Full
+cans falls from +4 to +2: the current 8-charge can now holds 10 rather than 12;
+the later tier capacities 8/12/16 will become 10/14/18 with that tech. Both
+tech notes and TECHNOTE rows now match in English and pt_BR.
+
+Verify: 60 PASS, 0 FAIL, 0 SKIP in 604s; 18,247 headless asserts (16,843 + 1,404), 1,549 input checks (1,133 + 416), 5,752 UI checks, 581 bilingual keys, 169 parsed scripts, 56 nights with two seeds. SIM 1129539259 -> 3813670633 deliberately moves for the
+new tools state and tech changes; DATA 3367436400 -> 2771032843 deliberately
+moves for TOOLS, recipes and the two tech nodes. The first full pass found
+outdated material-null and resource-only assertions plus a genuine workshop
+width overflow during an order. Assertions now accept exactly the active
+tool's cached shader, still suppress reaction glyphs over work, and distinguish
+permanent tool rows from stock. A wider tool panel keeps long production names
+inside 480x270. Both real keyboard and mouse orders complete into pending
+upgrades; save migration/round-trip, dawn delivery, ore loss and invalid costs
+are covered. Total OVER BUDGET is the known machine timing notice.
+
+Looked at: seven final captures opened individually at full 1920x1080 against
+the reference sheet and approved farmer. The upgrade list is readable with
+pending/owned/unavailable rows and scrolling; the final felling swing shows
+the iron head and planted feet after the canopy falls. Noon, dusk, wave,
+result and tech retain their existing scale. Kept:
+implementation/shots/0173/tool_upgrades-pt_BR.png,
+tool_upgrades_chop-pt_BR.png, noon-pt_BR.png, dusk-pt_BR.png, wave-pt_BR.png,
+result-pt_BR.png, tech-pt_BR.png.
+
+Notes: all 1716 paths dirty at claim belong to the owner/art pipeline and
+stay outside this commit. Protected paths, including project.godot and
+implementation/backlog/, remain unstaged. The RUN-key question remains open.
+Never pushed. Backlog: 296 tasks, 160 done, 136 todo, 0 doing, 0 blocked;
+56 todo wait for Codex art.
+
+Files: src/core/{tool_tiers,state,game_data,crafting,phases}.gd,
+src/ui/{workshop_panel,inventory_panel,player_work,player_view,names,describe,
+placeholder_art}.gd, src/ui/tool_head.gdshader, src/tools/{headless_check,
+headless_v1,input_check,input_v1,art_showcase,shot}.gd, assets/locale/strings.csv,
+tools/determinism_{sim,data}_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/0173-tool-tiers.md, implementation/shots/0173/,
+docs/devlog/{index,index.pt_BR}.md (devlog.py --check).

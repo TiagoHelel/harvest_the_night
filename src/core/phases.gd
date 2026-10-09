@@ -281,6 +281,7 @@ static func begin_day(state: Dictionary) -> bool:
 	Shop.restock(state)
 	_enter(state, DAY)
 	Farming.morning(state)
+	ToolTiers.morning(state)
 	return true
 
 

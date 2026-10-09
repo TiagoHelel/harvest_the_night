@@ -41,7 +41,7 @@ const VERSION := 7
 ## it was taken away. Both are mended by looking at a new game.
 const TABLES: Array = [
 	"ability", "build", "gained", "held", "intent", "player", "power",
-	"reaction", "selected_recipe", "stall", "stats", "tutorial", "wave", "house_visit",
+	"reaction", "tools", "selected_recipe", "stall", "stats", "tutorial", "wave", "house_visit",
 ]
 
 ## And the ones whose keys come from playing.
@@ -83,6 +83,7 @@ static func create(seed_value: int) -> Dictionary:
 	_adopt(state, Gathering.initial(), "Gathering")
 	_adopt(state, Farming.initial(), "Farming")
 	_adopt(state, Crafting.initial(), "Crafting")
+	_adopt(state, ToolTiers.initial(), "ToolTiers")
 	_adopt(state, Building.initial(), "Building")
 	_adopt(state, Entities.initial(), "Entities")
 	_adopt(state, Towers.initial(), "Towers")

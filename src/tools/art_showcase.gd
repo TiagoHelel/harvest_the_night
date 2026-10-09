@@ -1782,7 +1782,8 @@ func _reaction_check(view: PlayerView, kind: StringName, holding_rod := false) -
 	var metadata: Dictionary = RasterArt.FRAMES[glyph_path]
 	expect(bubble.visible and bubble.texture.resource_path == glyph_path and bubble.region_rect == Rect2(metadata["bubble"]),
 		"One separate glyph draws the exact source-owned crop")
-	expect(body.material == null, "Nothing masks the farmer under a glyph")
+	expect(body.material == view._work.head_material(_state, view.playing()),
+		"Only the current tool head tint accompanies a glyph")
 	var canvas_transform := bubble.get_global_transform_with_canvas()
 	var first := canvas_transform * Vector2.ZERO
 	var last := canvas_transform * bubble.region_rect.size
@@ -1881,7 +1882,7 @@ func _reactions() -> void:
 			await _reaction_settle(view)
 			var body: Sprite2D = view.get_node("Body")
 			expect(view.playing() == verb and not view.get_node("ReactionBubble").visible
-				and body.material == null, "Reaction never obscures active/returning %s work" % verb)
+				and body.material == view._work.head_material(_state, verb), "Reaction never obscures active/returning %s work" % verb)
 			if kind == &"question":
 				await _shoot("suppressed_work_%s" % verb, "Reaction waits: %s tool pose remains unobscured" % verb)
 	_reaction_fixture()

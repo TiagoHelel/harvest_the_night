@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#############...........`  **159 / 296 done**
+`#############...........`  **160 / 296 done**
 
-0 doing / 137 todo / 0 blocked across 18 phases.
+0 doing / 136 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-137 task(s) left, the ready ones first, then what they
+136 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,24 +242,37 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0173 - Five tools, three tiers
+### 0174 - The can and the hoe by tier
 
-Ready to pick up.  Likely files: `src/core/tool_tiers.gd (new), src/core/state.gd, src/core/game_data.gd, src/core/crafting.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/player_work.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/farming.gd, src/core/player.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-Hoe, watering can, axe, pickaxe and rod, each in three tiers bought at the workshop with money and ore: the first thing day money buys that makes every later day better (plan section 3.7).
+The can and the hoe earn their tiers: one tile, then three, then five at a stroke, which turns watering a big field from a chore into a walk.
 
-- `TOOLS` in `game_data.gd`: hoe, can, axe and pickaxe at basic/iron/gold, the rod at bamboo/fibre/iron, as tiers 0/1/2 of one ladder; each tier's cost (money + ore) and the effect fields 0174, 0175, 0180 and 0181 read, all `# LEVER`
-- The tiers held and any pending upgrade live in a `tools` dictionary (keys from code: `State.TABLES`, through a new `initial()` - e.g. `src/core/tool_tiers.gd` - and one `_adopt` line), all tier 0 in a new game. **Tools are not resources**: `Rewards._loss` iterates `RESOURCES` and must never take one
-- An upgrade is a workshop recipe whose output names a tool tier: a new branch in `Crafting._deliver` (and in `check_recipes`, which accepts only resources and defences today) records it as pending, and `Phases.begin_day` hands it over - ready the next morning. The tool keeps its old tier until then, so no day is spent without a can
-- This task ships tier 1 for all five (iron hoe, can, axe and pickaxe; fibre rod) and the rod's tier 2 (iron). The gold costs arrive with 0176; until then gold is listed and refused with a reason
-- Rebalance the tech nodes that did a tool's job: 'sharp tools' (`gather_percent`) and 'full cans' (`water_can_bonus`) keep their ids, get smaller numbers or a new role, and their `note` and `TECHNOTE_*` rows change in both languages; arithmetic in the journal. `_task_0063_tech_tree` asserts 'sharp tools' makes chopping quicker: keep that true or rewrite it in place
-- The tool in the farmer's hand is not tiered by art (decision): the work frames keep one fixed head ramp and `player_work.gd` tints it per tier, view only. Tool icons in the workshop panel and the inventory use the placeholder road until A019 is integrated by 0202
-- Names and strings for every tool and tier, and a `Names.KEYS` entry with a `REC_*` row for every upgrade recipe (every `RECIPES` id needs one), in both languages; `validate()` checks every tier cost names a real resource; `TOOLS` goes into `digest()`
-- DATA moves (TOOLS, TECH_TREE). SIM moves on purpose: the new `tools` key is in the state and `State.hash_of` folds every key - record both
+- The can's and the hoe's tiers carry an area (`# LEVER`: 1, 3 and 5 tiles, plan section 3.7): the faced tile and the ones beside it across the facing. Pick the shape, draw it, write it down
+- `Farming._water` and `Player._do_instant` water every tile of the area that offers `water`, one unit of the can per tile, in a fixed order; a can short of water waters what it holds
+- A better hoe tills the area through `Farming._till` in one action of the hoe's time, skipping cells 0167 refuses
+- Decide whether the can's tier also raises its capacity (a per-tier `# LEVER` added in `Farming.can_capacity`), and fix the known bug: `day_hud.gd` prints the can against `GameData.WATER_CAN_CAPACITY` instead of `Farming.can_capacity(state)`, so 'full cans' never showed
+- The highlight shows every cell the next press will touch (view only, `world_view.gd`)
+- DATA moves; SIM moves only if the scenario uses an upgraded tool (it should not)
 
-  - done when: `_task_0173_tools` in `src/tools/headless_v1.gd`: an iron axe queued with the money and iron is still basic that evening and iron the next morning; a lost night takes 25% of the iron and no tool
-  - done when: `_case_0173_upgrade` in `src/tools/input_v1.gd`: open the workshop and order an upgrade with the keyboard and with the mouse; it shows as pending
-  - done when: A new `tool_upgrades` scenario: `python tools/shot.py 0173 tool_upgrades --fhd` shows the upgrade list and the farmer chopping with a tinted iron head; opened and looked at
+  - done when: `_task_0174_area` in `src/tools/headless_v1.gd`: an iron can waters three dry plots in one press and spends three; a gold hoe (its tier written into the state - gold cannot be ordered before 0176) tills five grass cells and skips a path cell among them; the HUD's capacity equals `Farming.can_capacity` with 'full cans' bought
+  - done when: `_case_0174_area` in `src/tools/input_v1.gd`: holding interact along a row with an iron can waters it in a third of the steps
+  - done when: A new `can_area` scenario: `python tools/shot.py 0174 can_area --fhd` shows the area highlight; opened and looked at
+
+### 0175 - The axe and the pickaxe by tier
+
+Ready to pick up.  Likely files: `src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, src/ui/main.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+
+The axe and the pickaxe save time by tier, and the hardest things on the farm - hardwood stumps and gold - want the iron ones.
+
+- Fewer swings by tier: the tool's tier scales the swing in `Interact.ticks_for` or the `hits` `Gathering.strike` counts - pick one, keep it integer, and make it compose with 'sharp tools' (`gather_percent`) rather than replace it
+- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing - through the `Interact` reason road 0171 opened (a `Building.why_not`-shaped array that `Names.refusal` words), or open it here if 0171 has not landed
+- The real gates arrive with their nodes - hardwood stumps (0177) want an iron axe, gold (0176) an iron pickaxe - so test the rule here with a rigged entry
+- `validate()` checks `min_tier` against the `TOOLS` ladder; `check_iron` and `check_reachable` still pass
+- DATA moves; SIM only if the scenario gathers with an upgraded tool
+
+  - done when: `_task_0175_swings` in `src/tools/headless_v1.gd`: an iron axe fells a tree in fewer ticks than a basic one, by the percent the lever claims; a rigged `min_tier` node refuses a basic pickaxe and yields to an iron one
+  - done when: The refusal fits its control in both languages (`tools/i18n_check.py`)
 
 ### 0179 - Fish by pond, season and hour
 
@@ -428,41 +441,43 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
 
-### 0174 - The can and the hoe by tier
+### 0176 - Copper, coal and gold
 
-Waits on 0173.  Likely files: `src/core/farming.gd, src/core/player.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0175.  Likely files: `src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
-The can and the hoe earn their tiers: one tile, then three, then five at a stroke, which turns watering a big field from a chore into a walk.
+The quarry gets copper and coal - for sprinklers, tools and the generator - and gold from autumn for the top tier (plan section 3.3).
 
-- The can's and the hoe's tiers carry an area (`# LEVER`: 1, 3 and 5 tiles, plan section 3.7): the faced tile and the ones beside it across the facing. Pick the shape, draw it, write it down
-- `Farming._water` and `Player._do_instant` water every tile of the area that offers `water`, one unit of the can per tile, in a fixed order; a can short of water waters what it holds
-- A better hoe tills the area through `Farming._till` in one action of the hoe's time, skipping cells 0167 refuses
-- Decide whether the can's tier also raises its capacity (a per-tier `# LEVER` added in `Farming.can_capacity`), and fix the known bug: `day_hud.gd` prints the can against `GameData.WATER_CAN_CAPACITY` instead of `Farming.can_capacity(state)`, so 'full cans' never showed
-- The highlight shows every cell the next press will touch (view only, `world_view.gd`)
-- DATA moves; SIM moves only if the scenario uses an upgraded tool (it should not)
+- The copper, coal and gold nodes 0156 put on `FARM_MAP` under their final ids (e.g. `copper_ore`, `coal_seam`, `gold_ore`; its journal names them and the legend characters) become `GATHERING` entries with swings, yield and `regrow_ticks` (`# LEVER`), dearer than stone on the dials the way `check_iron` holds iron, and `Interact.OCCUPANT_VERBS` entries (`mine`, so `Sfx.VERB_SOUNDS` already covers them); gold has `min_tier` 1 (an iron pickaxe, 0175)
+- Gold from autumn: a gold node offers no verb before the first autumn, through 0149's calendar helpers; say whether it stays open in winter
+- `COPPER`, `COAL` and `GOLD` in `RESOURCES`, `SELL_PRICE`, the materials group, `Names.KEYS` and `ITEM_*` rows in both languages (0169's check wants all four)
+- Coal is fuel (plan section 3.3): the generator may burn it instead of oil - decide and say so; 0193 uses coal for spring gunpowder
+- The gold tier's costs for the hoe, can, axe and pickaxe (money + gold, `# LEVER`), so 0173's refused tier opens
+- Nodes keep 0156's stand-ins on the placeholder road (tinted `ore` for copper and gold, `seam` for coal; 16x16, pivot (8,14)) and icons are tinted stand-ins until A021 (0204) and A020 (0203) are integrated
+- DATA moves. SIM moves on purpose: three new resources are new keys in `held`/`gained`, which the state hash folds - record both
 
-  - done when: `_task_0174_area` in `src/tools/headless_v1.gd`: an iron can waters three dry plots in one press and spends three; a gold hoe (its tier written into the state - gold cannot be ordered before 0176) tills five grass cells and skips a path cell among them; the HUD's capacity equals `Farming.can_capacity` with 'full cans' bought
-  - done when: `_case_0174_area` in `src/tools/input_v1.gd`: holding interact along a row with an iron can waters it in a third of the steps
-  - done when: A new `can_area` scenario: `python tools/shot.py 0174 can_area --fhd` shows the area highlight; opened and looked at
+  - done when: `_task_0176_ores` in `src/tools/headless_v1.gd`: each new node yields its resource and regrows; gold refuses before autumn and with a basic pickaxe and yields after; a gold hoe can be ordered and arrives the next morning
+  - done when: A new `quarry` scenario: `python tools/shot.py 0176 quarry --fhd` shows the quarry with the new nodes by day and by night; opened and looked at
 
-### 0175 - The axe and the pickaxe by tier
+### 0177 - Hardwood
 
-Waits on 0173.  Likely files: `src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, src/ui/main.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+Waits on 0175.  Likely files: `src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/core/farm.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
-The axe and the pickaxe save time by tier, and the hardest things on the farm - hardwood stumps and gold - want the iron ones.
+Big stumps give hardwood to an iron axe: a reason to upgrade early, and the stuff of the strong wall (0231).
 
-- Fewer swings by tier: the tool's tier scales the swing in `Interact.ticks_for` or the `hits` `Gathering.strike` counts - pick one, keep it integer, and make it compose with 'sharp tools' (`gather_percent`) rather than replace it
-- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing - through the `Interact` reason road 0171 opened (a `Building.why_not`-shaped array that `Names.refusal` words), or open it here if 0171 has not landed
-- The real gates arrive with their nodes - hardwood stumps (0177) want an iron axe, gold (0176) an iron pickaxe - so test the rule here with a rigged entry
-- `validate()` checks `min_tier` against the `TOOLS` ladder; `check_iron` and `check_reachable` still pass
-- DATA moves; SIM only if the scenario gathers with an upgraded tool
+- The 2x2 stumps 0156 put on the map (`hardwood_stump`, or the id its journal names) become a `GATHERING` node with `min_tier` 1 (iron axe), more swings than a tree, a `HARDWOOD` yield and a `regrow_ticks` (`# LEVER`) - nothing on the farm is exhausted for good - and an `Interact.OCCUPANT_VERBS` entry (`chop`). One occupant over four cells with an anchor, like the stations: a swing at any of its cells strikes it. `Gathering.strike`, `Farm.remove`/`restore` and the regrowth in `Gathering.tick` all work one cell at a time today: the stump leaves all four cells when it falls and comes back only when all four are clear (the anchor's entry in `regrowing`), asserted
+- A chipped look after the first swing, until it falls (view, from `Gathering.swings_left`)
+- `HARDWOOD` in `RESOURCES`, `SELL_PRICE`, the materials group, names and strings in both languages; its icon is a tinted stand-in until A020 is integrated by 0203
+- Its use is 0231's strong wall; here it only sells, and the journal says so. DATA moves; SIM moves on purpose (a new resource in `held`/`gained`) - record both
+- `check_reachable`: every stump has a cell to stand on beside it; the flow field treats it like a tree
+- A scaled stand-in of today's `stump` at 32x32 through the placeholder road until A021 is integrated by 0204
 
-  - done when: `_task_0175_swings` in `src/tools/headless_v1.gd`: an iron axe fells a tree in fewer ticks than a basic one, by the percent the lever claims; a rigged `min_tier` node refuses a basic pickaxe and yields to an iron one
-  - done when: The refusal fits its control in both languages (`tools/i18n_check.py`)
+  - done when: `_task_0177_hardwood` in `src/tools/headless_v1.gd`: a basic axe is refused at a big stump; an iron axe fells it in the swings, for the hardwood, the levers say, from any of its four cells; it is back on all four after `regrow_ticks`, and not while one of them is built on
+  - done when: A new `hardwood` scenario: `python tools/shot.py 0177 hardwood --fhd` shows a whole and a chipped stump beside a tree; opened and looked at
+  - done when: the Deliverables table of `implementation/backlog/packs/A021-ore-hardwood.md` states the final geometry this task settled (the node canvas and variants, the stump's canvas, pivot and states)
 
 ### 0180 - The fishing minigame
 
-Waits on 0179, 0173.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/sim.gd, src/ui/fishing_bar.gd (new), src/ui/main.gd, src/app/input_actions.gd, src/app/settings.gd, project.godot, src/ui/player_work.gd, src/ui/sfx.gd, src/tools/perf_names.gd, src/tools/perf_check.gd, src/tools/determinism.gd, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0179.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/sim.gd, src/ui/fishing_bar.gd (new), src/ui/main.gd, src/app/input_actions.gd, src/app/settings.gd, project.godot, src/ui/player_work.gd, src/ui/sfx.gd, src/tools/perf_names.gd, src/tools/perf_check.gd, src/tools/determinism.gd, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 A bite opens a simple timing bar: a marker runs, and you press as it crosses the green - simpler than Stardew's bar and as good on a pad as on a mouse.
 
@@ -482,7 +497,7 @@ A bite opens a simple timing bar: a marker runs, and you press as it crosses the
 
 ### 0181 - Rods and bait
 
-Waits on 0179, 0173.  Likely files: `src/core/fishing.gd, src/core/farming.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0179.  Likely files: `src/core/fishing.gd, src/core/farming.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The rod's tiers change what bites: fibre brings bites sooner and rare fish more often, iron adds a bait slot and is the only rod a legendary takes.
 
@@ -566,39 +581,23 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0176 - Copper, coal and gold
+### 0178 - Sprinklers
 
-Waits on 0175.  Likely files: `src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0176.  Likely files: `src/core/game_data.gd, src/core/farming.gd, src/core/phases.gd, src/core/pathing.gd, src/core/building.gd, src/ui/names.gd, src/ui/particles.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-The quarry gets copper and coal - for sprinklers, tools and the generator - and gold from autumn for the top tier (plan section 3.3).
+Sprinklers automate the chore: copper, iron and gold ones water the plots around them every morning, so a big field stops costing the whole morning.
 
-- The copper, coal and gold nodes 0156 put on `FARM_MAP` under their final ids (e.g. `copper_ore`, `coal_seam`, `gold_ore`; its journal names them and the legend characters) become `GATHERING` entries with swings, yield and `regrow_ticks` (`# LEVER`), dearer than stone on the dials the way `check_iron` holds iron, and `Interact.OCCUPANT_VERBS` entries (`mine`, so `Sfx.VERB_SOUNDS` already covers them); gold has `min_tier` 1 (an iron pickaxe, 0175)
-- Gold from autumn: a gold node offers no verb before the first autumn, through 0149's calendar helpers; say whether it stays open in winter
-- `COPPER`, `COAL` and `GOLD` in `RESOURCES`, `SELL_PRICE`, the materials group, `Names.KEYS` and `ITEM_*` rows in both languages (0169's check wants all four)
-- Coal is fuel (plan section 3.3): the generator may burn it instead of oil - decide and say so; 0193 uses coal for spring gunpowder
-- The gold tier's costs for the hoe, can, axe and pickaxe (money + gold, `# LEVER`), so 0173's refused tier opens
-- Nodes keep 0156's stand-ins on the placeholder road (tinted `ore` for copper and gold, `seam` for coal; 16x16, pivot (8,14)) and icons are tinted stand-ins until A021 (0204) and A020 (0203) are integrated
-- DATA moves. SIM moves on purpose: three new resources are new keys in `held`/`gained`, which the state hash folds - record both
+- Three tiers (copper, iron, gold) as `BUILDINGS` entries or one id with levels - decide - with costs in their metal plus money, hp and a 1x1 size, built by day like every production building; recipes or a direct cost, with `check_recipes` and `check_buildings` still honest
+- Each morning, after 0165's growth credit, every sprinkler marks the plots of its pattern watered for the new day (four neighbours, 3x3, 5x5 - `# LEVER`), in sorted cell order; they dry at night like any other plot
+- **Never a wall.** `Pathing._through` makes anything without a `path_cost` impassable, so a row of sprinklers would fence the farm. Make them walkable for the flow field like a trap (a declared flag `_through` reads) and not prey - `is_prey` counts any `BUILDINGS` entry with no `path_cost` today, so it reads the same flag - and say whether the farmer walks over them
+- A cell with a sprinkler is not a plot: tilling and planting skip it, and a sprinkler cannot go on a planted plot
+- The spray is code particles (view only); the body draws through the placeholder road until A018 is integrated by 0201
+- `BLD_*`/`REC_*` names and strings in both languages. DATA moves; SIM moves if the state's shape changes (a new station in `selected_recipe`) or the scenario places one - say which
 
-  - done when: `_task_0176_ores` in `src/tools/headless_v1.gd`: each new node yields its resource and regrows; gold refuses before autumn and with a basic pickaxe and yields after; a gold hoe can be ordered and arrives the next morning
-  - done when: A new `quarry` scenario: `python tools/shot.py 0176 quarry --fhd` shows the quarry with the new nodes by day and by night; opened and looked at
-
-### 0177 - Hardwood
-
-Waits on 0175.  Likely files: `src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/core/farm.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-Big stumps give hardwood to an iron axe: a reason to upgrade early, and the stuff of the strong wall (0231).
-
-- The 2x2 stumps 0156 put on the map (`hardwood_stump`, or the id its journal names) become a `GATHERING` node with `min_tier` 1 (iron axe), more swings than a tree, a `HARDWOOD` yield and a `regrow_ticks` (`# LEVER`) - nothing on the farm is exhausted for good - and an `Interact.OCCUPANT_VERBS` entry (`chop`). One occupant over four cells with an anchor, like the stations: a swing at any of its cells strikes it. `Gathering.strike`, `Farm.remove`/`restore` and the regrowth in `Gathering.tick` all work one cell at a time today: the stump leaves all four cells when it falls and comes back only when all four are clear (the anchor's entry in `regrowing`), asserted
-- A chipped look after the first swing, until it falls (view, from `Gathering.swings_left`)
-- `HARDWOOD` in `RESOURCES`, `SELL_PRICE`, the materials group, names and strings in both languages; its icon is a tinted stand-in until A020 is integrated by 0203
-- Its use is 0231's strong wall; here it only sells, and the journal says so. DATA moves; SIM moves on purpose (a new resource in `held`/`gained`) - record both
-- `check_reachable`: every stump has a cell to stand on beside it; the flow field treats it like a tree
-- A scaled stand-in of today's `stump` at 32x32 through the placeholder road until A021 is integrated by 0204
-
-  - done when: `_task_0177_hardwood` in `src/tools/headless_v1.gd`: a basic axe is refused at a big stump; an iron axe fells it in the swings, for the hardwood, the levers say, from any of its four cells; it is back on all four after `regrow_ticks`, and not while one of them is built on
-  - done when: A new `hardwood` scenario: `python tools/shot.py 0177 hardwood --fhd` shows a whole and a chipped stump beside a tree; opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A021-ore-hardwood.md` states the final geometry this task settled (the node canvas and variants, the stump's canvas, pivot and states)
+  - done when: `_task_0178_sprinklers` in `src/tools/headless_v1.gd`: a copper sprinkler waters its four neighbours on a morning and they grow the next; the flow field crosses its cell at ground cost; a breaker does not hunt it
+  - done when: `_case_0178_sprinkler` in `src/tools/input_v1.gd`: place one by day from the build list
+  - done when: A new `sprinklers` scenario: `python tools/shot.py 0178 sprinklers --fhd` shows the three tiers spraying; opened and looked at
+  - done when: the Deliverables table of `implementation/backlog/packs/A018-sprinklers.md` states the final geometry this task settled
 
 ### 0182 - Legendary fish and the fish book
 
@@ -651,6 +650,42 @@ The first artisan machines: a keg and a preserves jar that turn fruit into wine,
 
   - done when: `_task_0187_keg` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`): grapes in a keg are wine after the recipe's mornings and not one before; a day spent elsewhere still counts; every new recipe has a positive chain margin
   - done when: `_case_0187_keg` in `src/tools/input_v1.gd`: queue wine at a keg from its panel
+
+### 0203 - Art: material icons
+
+Waits on 0176, 0177, 0184.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
+
+Copper, coal, gold, hardwood, hay and straw get their approved icons in the inventory, the HUD and the panels.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A020` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A020-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`).
+- Runtime names `ui/icon_<id>` (16x16) and `ui/hud_<id>` (10x10) cut from one source, for the ids 0176, 0177 and 0184 gave copper, coal, gold, hardwood, hay and straw
+- Replace their stand-ins and flip A020's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A020 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0203/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
+### 0204 - Art: copper, coal, gold and hardwood
+
+Waits on 0176, 0177.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/art_placement.gd`.
+
+The new quarry nodes and the big hardwood stumps get their approved art in the world.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A021` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A021-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`; `ArtPlacement` if the 2x2 stump needs it).
+- Runtime names: copper, coal and gold nodes at 16x16, pivot (8,14), each with a `_b` variant through `WorldView.PROP_VARIANTS`/`_prop_variant` like `ore`/`ore_b`; the 2x2 stump whole and chipped at the 32x32 canvas and pivot 0177 settled, placed at the bottom centre of its footprint
+- Replace the stand-ins of 0176 and 0177 and flip A021's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A021 integrated`.
+
+  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --props --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0204/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0207 - Art: the farmer fishing
 
@@ -708,24 +743,6 @@ The guardian's cursor, the night camera and the fishing bar each get the knob a 
   - done when: `_task_0292_options` in `src/tools/headless_v1.gd`: no file in `src/core/` names `Settings`; `Forecast.tonight` gives the same record at 08:00 as at 18:00
   - done when: the controls and game pages captured at 1920x1080 in both languages (`$GODOT --path . --position -4000,-4000 --script res://src/tools/capture_menus.gd -- --out=res://implementation/shots/0292/`, then again with `--pt_BR`) and opened: no label runs off its row and no two rows overlap
 
-### 0178 - Sprinklers
-
-Waits on 0176.  Likely files: `src/core/game_data.gd, src/core/farming.gd, src/core/phases.gd, src/core/pathing.gd, src/core/building.gd, src/ui/names.gd, src/ui/particles.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Sprinklers automate the chore: copper, iron and gold ones water the plots around them every morning, so a big field stops costing the whole morning.
-
-- Three tiers (copper, iron, gold) as `BUILDINGS` entries or one id with levels - decide - with costs in their metal plus money, hp and a 1x1 size, built by day like every production building; recipes or a direct cost, with `check_recipes` and `check_buildings` still honest
-- Each morning, after 0165's growth credit, every sprinkler marks the plots of its pattern watered for the new day (four neighbours, 3x3, 5x5 - `# LEVER`), in sorted cell order; they dry at night like any other plot
-- **Never a wall.** `Pathing._through` makes anything without a `path_cost` impassable, so a row of sprinklers would fence the farm. Make them walkable for the flow field like a trap (a declared flag `_through` reads) and not prey - `is_prey` counts any `BUILDINGS` entry with no `path_cost` today, so it reads the same flag - and say whether the farmer walks over them
-- A cell with a sprinkler is not a plot: tilling and planting skip it, and a sprinkler cannot go on a planted plot
-- The spray is code particles (view only); the body draws through the placeholder road until A018 is integrated by 0201
-- `BLD_*`/`REC_*` names and strings in both languages. DATA moves; SIM moves if the state's shape changes (a new station in `selected_recipe`) or the scenario places one - say which
-
-  - done when: `_task_0178_sprinklers` in `src/tools/headless_v1.gd`: a copper sprinkler waters its four neighbours on a morning and they grow the next; the flow field crosses its cell at ground cost; a breaker does not hunt it
-  - done when: `_case_0178_sprinkler` in `src/tools/input_v1.gd`: place one by day from the build list
-  - done when: A new `sprinklers` scenario: `python tools/shot.py 0178 sprinklers --fhd` shows the three tiers spraying; opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A018-sprinklers.md` states the final geometry this task settled
-
 ### 0188 - The dairy, the loom and the mill
 
 Waits on 0187, 0185.  Likely files: `src/core/game_data.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
@@ -745,7 +762,7 @@ The dairy, the loom and the mill: milk into cheese and butter, wool into cloth a
 
 ### 0190 - The peddler and his hours
 
-Waits on 0183, 0185, 0173.  Likely files: `src/core/shop.gd, src/core/interact.gd, src/core/game_data.gd, src/core/livestock.gd, src/ui/shop_panel.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0183, 0185.  Likely files: `src/core/shop.gd, src/core/interact.gd, src/core/game_data.gd, src/core/livestock.gd, src/ui/shop_panel.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The stall gets a peddler who keeps hours, 08:00 to 17:00, whose seed packets change with the season (plan section 3.6), and who sells what the farm cannot make for itself: animals and tool upgrades.
 
@@ -761,40 +778,22 @@ The stall gets a peddler who keeps hours, 08:00 to 17:00, whose seed packets cha
   - done when: A new `peddler` scenario: `python tools/shot.py 0190 peddler --fhd` shows the stall open with the peddler and closed at dusk; opened and looked at
   - done when: the Deliverables table of `implementation/backlog/packs/A034-peddler.md` states the final geometry and states this task settled
 
-### 0203 - Art: material icons
+### 0201 - Art: sprinklers
 
-Waits on 0176, 0177, 0184.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
+Waits on 0178.  Likely files: `assets/art_source/props/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_ui_art.py`.
 
-Copper, coal, gold, hardwood, hay and straw get their approved icons in the inventory, the HUD and the panels.
+The copper, iron and gold sprinklers of 0178 get their approved bodies and icons; the spray stays code particles.
 
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A020` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A020-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`).
-- Runtime names `ui/icon_<id>` (16x16) and `ui/hud_<id>` (10x10) cut from one source, for the ids 0176, 0177 and 0184 gave copper, coal, gold, hardwood, hay and straw
-- Replace their stand-ins and flip A020's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A020 integrated`.
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A018` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A018-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/props` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`, `tools/check_ui_art.py`).
+- Runtime names for each tier's idle and spray-body frames at the 16x16 canvas and pivot 0178 settled, and an icon (16x16 + 10x10) per tier for the build list
+- Replace 0178's stand-ins and flip A018's placeholder-registry entries to raster; the particle spray is unchanged
+- Set the pack to integrated: `python implementation/backlog/assets.py set A018 integrated`.
 
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
+  - done when: `python tools/check_prop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --props --check` and `--ui --check` pass
   - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0203/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0204 - Art: copper, coal, gold and hardwood
-
-Waits on 0176, 0177.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/art_placement.gd`.
-
-The new quarry nodes and the big hardwood stumps get their approved art in the world.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A021` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A021-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`; `ArtPlacement` if the 2x2 stump needs it).
-- Runtime names: copper, coal and gold nodes at 16x16, pivot (8,14), each with a `_b` variant through `WorldView.PROP_VARIANTS`/`_prop_variant` like `ore`/`ore_b`; the 2x2 stump whole and chipped at the 32x32 canvas and pivot 0177 settled, placed at the bottom centre of its footprint
-- Replace the stand-ins of 0176 and 0177 and flip A021's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A021 integrated`.
-
-  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --props --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0204/`
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0201/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0205 - Art: fish
@@ -920,27 +919,9 @@ The kitchen cooks the new harvest - potato, egg, milk and bread - into the food 
   - done when: `_task_0192_kitchen` in `src/tools/headless_v1.gd`: from spring stock alone (carrot, potato, fish) the kitchen makes food; bread needs flour; every kitchen recipe has a positive chain margin
   - done when: The journal lists every kitchen recipe with its margin
 
-### 0201 - Art: sprinklers
-
-Waits on 0178.  Likely files: `assets/art_source/props/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_ui_art.py`.
-
-The copper, iron and gold sprinklers of 0178 get their approved bodies and icons; the spray stays code particles.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A018` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A018-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`, `tools/check_ui_art.py`).
-- Runtime names for each tier's idle and spray-body frames at the 16x16 canvas and pivot 0178 settled, and an icon (16x16 + 10x10) per tier for the build list
-- Replace 0178's stand-ins and flip A018's placeholder-registry entries to raster; the particle spray is unchanged
-- Set the pack to integrated: `python implementation/backlog/assets.py set A018 integrated`.
-
-  - done when: `python tools/check_prop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --props --check` and `--ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0201/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
 ### 0202 - Art: tool icons
 
-Waits on 0173, 0176, 0190.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/workshop_panel.gd`.
+Waits on 0176, 0190.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/workshop_panel.gd`.
 
 Fifteen tool icons - four tools in three tiers and the three rods - replace 0173's stand-ins wherever a tool is shown.
 
@@ -2730,7 +2711,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (8/53)
+## 12 - The day that pays  (9/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2740,15 +2721,15 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md)
 - [x] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md)
 - [x] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md)
-- [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md)
-- [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md) - needs 0173
-- [ ] **0175** [The axe and the pickaxe by tier](prompts/0175-axe-pickaxe.md) - needs 0173
+- [x] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md)
+- [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md)
+- [ ] **0175** [The axe and the pickaxe by tier](prompts/0175-axe-pickaxe.md)
 - [ ] **0176** [Copper, coal and gold](prompts/0176-copper-coal-gold.md) - needs 0175
 - [ ] **0177** [Hardwood](prompts/0177-hardwood.md) - needs 0175
 - [ ] **0178** [Sprinklers](prompts/0178-sprinklers.md) - needs 0176
 - [ ] **0179** [Fish by pond, season and hour](prompts/0179-fish-species.md)
-- [ ] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md) - needs 0179, 0173
-- [ ] **0181** [Rods and bait](prompts/0181-rods-bait.md) - needs 0179, 0173
+- [ ] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md) - needs 0179
+- [ ] **0181** [Rods and bait](prompts/0181-rods-bait.md) - needs 0179
 - [ ] **0182** [Legendary fish and the fish book](prompts/0182-legendary-book.md) - needs 0181
 - [ ] **0183** [The coop and the barn](prompts/0183-coop-barn.md)
 - [ ] **0184** [Feeding, eggs and milk](prompts/0184-feeding-products.md) - needs 0183
@@ -2757,7 +2738,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md) - needs 0184, 0186
 - [ ] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md) - needs 0187, 0185
 - [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md)
-- [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0183, 0185, 0173
+- [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0183, 0185
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188, 0184
 - [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0176, 0188, 0190, 0192
@@ -2769,7 +2750,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - waits for art A016
 - [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md) - waits for art A017
 - [ ] **0201** [Art: sprinklers](prompts/0201-art-sprinklers.md) - needs 0178 - waits for art A018
-- [ ] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md) - needs 0173, 0176, 0190 - waits for art A019
+- [ ] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md) - needs 0176, 0190 - waits for art A019
 - [ ] **0203** [Art: material icons](prompts/0203-art-material-icons.md) - needs 0176, 0177, 0184 - waits for art A020
 - [ ] **0204** [Art: copper, coal, gold and hardwood](prompts/0204-art-ore-hardwood.md) - needs 0176, 0177 - waits for art A021
 - [ ] **0205** [Art: fish](prompts/0205-art-fish-icons.md) - needs 0182 - waits for art A022

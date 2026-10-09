@@ -121,7 +121,7 @@ CTL_WAITING,104,PRESS A KEY,APERTE UMA TECLA
 CURSOR_ENEMY,0,%s - %d HP,%s - %d de vida
 CURSOR_GROUND,0,open ground,terreno livre
 CURSOR_HOUSE,0,FARMHOUSE,CASA
-CURSOR_REPAIR,0,"mend all: %s - %d of %d HP paid for","consertar tudo: %s - %d de %d de vida pagos"
+CURSOR_REPAIR,0,mend all: %s - %d of %d HP paid for,consertar tudo: %s - %d de %d de vida pagos
 CURSOR_STRUCTURE,0,%s - %d/%d HP - level %d,%s - %d/%d de vida - nível %d
 DEF_AUTO_CROSSBOW,0,auto crossbow,besta automática
 DEF_BARRICADE,0,barricade,barricada
@@ -395,10 +395,10 @@ TECHNOTE_A_FULL_LARDER,0,mending costs two fifths less,consertar custa dois quin
 TECHNOTE_A_NAME_AT_MARKET,0,everything you sell fetches a quarter more,tudo que você vende rende um quarto a mais
 TECHNOTE_A_SECOND_FLARE,0,the flare comes back in a little over half the time,o sinalizador volta em pouco mais da metade do tempo
 TECHNOTE_A_STANDING_ORDER,0,towers cost a quarter less to build,as torres custam um quarto a menos
-TECHNOTE_FULL_CANS,0,the watering can holds four more,o regador leva quatro a mais
+TECHNOTE_FULL_CANS,0,the watering can holds two more,o regador leva dois a mais
 TECHNOTE_LONG_BARRELS,0,every tower reaches one tile further,toda torre alcança um ladrilho a mais
 TECHNOTE_OILED_WORKS,0,every tower reloads a fifth sooner,toda torre recarrega um quinto mais rápido
-TECHNOTE_SHARP_TOOLS,0,chopping and mining go half again as fast,cortar e minerar rendem metade a mais
+TECHNOTE_SHARP_TOOLS,0,chopping and mining speed +10%,velocidade para cortar e minerar +10%
 TECHNOTE_SPARE_STAKES,0,three more barricades a night,mais três barricadas por noite
 TECHNOTE_STEADY_HANDS,0,"the workshop, press and kitchen work a third faster","a oficina, a prensa e a cozinha trabalham um terço mais rápido"
 TECHNOTE_STOUT_TIMBERS,0,the house takes forty more before it falls,a casa aguenta quarenta a mais antes de cair
@@ -540,3 +540,43 @@ DHUD_NO_SEEDS,224,Nothing grows outdoors in winter,Nada cresce ao ar livre no in
 WHY_NO_OUTDOOR_GROWTH,224,Nothing grows outdoors in winter,Nada cresce ao ar livre no inverno
 DHUD_HOE_CLEAR,224,%s: clear with hoe,%s: limpar com enxada
 DESC_REGROWS_IN,224,Regrows in %d watered days,Rebrota em %d dias regados
+TOOL_HOE,180,hoe,enxada
+TOOL_HOE_BASIC,180,basic hoe,enxada básica
+TOOL_HOE_IRON,180,iron hoe,enxada de ferro
+REC_UPGRADE_HOE_IRON,224,Upgrade iron hoe,Melhorar enxada de ferro
+TOOL_HOE_GOLD,180,gold hoe,enxada de ouro
+REC_UPGRADE_HOE_GOLD,224,Upgrade gold hoe,Melhorar enxada de ouro
+TOOL_CAN,180,watering can,regador
+TOOL_CAN_BASIC,180,basic watering can,regador básico
+TOOL_CAN_IRON,180,iron watering can,regador de ferro
+REC_UPGRADE_CAN_IRON,224,Upgrade iron watering can,Melhorar regador de ferro
+TOOL_CAN_GOLD,180,gold watering can,regador de ouro
+REC_UPGRADE_CAN_GOLD,224,Upgrade gold watering can,Melhorar regador de ouro
+TOOL_AXE,180,axe,machado
+TOOL_AXE_BASIC,180,basic axe,machado básico
+TOOL_AXE_IRON,180,iron axe,machado de ferro
+REC_UPGRADE_AXE_IRON,224,Upgrade iron axe,Melhorar machado de ferro
+TOOL_AXE_GOLD,180,gold axe,machado de ouro
+REC_UPGRADE_AXE_GOLD,224,Upgrade gold axe,Melhorar machado de ouro
+TOOL_PICKAXE,180,pickaxe,picareta
+TOOL_PICKAXE_BASIC,180,basic pickaxe,picareta básica
+TOOL_PICKAXE_IRON,180,iron pickaxe,picareta de ferro
+REC_UPGRADE_PICKAXE_IRON,224,Upgrade iron pickaxe,Melhorar picareta de ferro
+TOOL_PICKAXE_GOLD,180,gold pickaxe,picareta de ouro
+REC_UPGRADE_PICKAXE_GOLD,224,Upgrade gold pickaxe,Melhorar picareta de ouro
+TOOL_ROD,180,rod,vara
+TOOL_ROD_BAMBOO,180,bamboo rod,vara de bambu
+TOOL_ROD_FIBRE,180,fibre rod,vara de fibra
+REC_UPGRADE_ROD_FIBRE,224,Upgrade fibre rod,Melhorar vara de fibra
+TOOL_ROD_IRON,180,iron rod,vara de ferro
+REC_UPGRADE_ROD_IRON,224,Upgrade iron rod,Melhorar vara de ferro
+INV_GROUP_TOOLS,112,TOOLS,FERRAMENTAS
+WORK_TOOL_TAB,85,TOOLS,FERRAMENTAS
+WORK_RECIPE_TAB,85,CRAFT,FABRICAR
+WORK_TOOL_PENDING,180,* Ready next morning,* Pronta amanhã
+INV_TOOL_PENDING,110,Ready tomorrow,Pronta amanhã
+WHY_TOOL_GOLD_LOCKED,224,Gold ore is not available yet,Minério de ouro ainda indisponível
+WHY_TOOL_OWNED,224,You already own this tier,Você já tem este nível
+WHY_TOOL_PREVIOUS,224,Upgrade the previous tier first,Melhore o nível anterior primeiro
+WHY_TOOL_PENDING,224,This tool already has an order,Esta ferramenta já tem um pedido
+DESC_TOOL_NEXT_MORNING,224,Keep your tool; ready next morning,Use sua ferramenta; pronta amanhã

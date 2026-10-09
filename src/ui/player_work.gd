@@ -137,3 +137,31 @@ func pose(state: Dictionary, delta: float) -> Dictionary:
 		waiting["frame"] = 0
 		return waiting
 	return {}
+
+
+## A019's head ramps: the view maps fixed steel pixels without editing art/state.
+const TOOL_VERBS := {&"till": &"hoe", &"water": &"can", &"chop": &"axe",
+	&"mine": &"pickaxe", &"fish": &"rod", &"reel": &"rod"}
+const HEAD_RAMPS := {
+	&"basic": [Color("3a3345"), Color("52505c"), Color("6e6c78")],
+	&"iron": [Color("52505c"), Color("6e6c78"), Color("8c8a96")],
+	&"gold": [Color("a8742c"), Color("c49646"), Color("d6ba60")],
+	&"bamboo": [Color("a8742c"), Color("b8ae9a"), Color("d6ba60")],
+	&"fibre": [Color("8a2f2a"), Color("b0423a"), Color("c9635a")],
+}
+var _head_materials: Dictionary = {}
+
+
+func head_material(state: Dictionary, verb: StringName) -> ShaderMaterial:
+	if not TOOL_VERBS.has(verb):
+		return null
+	var tool: StringName = TOOL_VERBS[verb]
+	var name: StringName = ToolTiers.effects(state, tool)["name"]
+	if not _head_materials.has(name):
+		var material := ShaderMaterial.new()
+		material.shader = load("res://src/ui/tool_head.gdshader")
+		material.set_shader_parameter("head_dark", HEAD_RAMPS[name][0])
+		material.set_shader_parameter("head_mid", HEAD_RAMPS[name][1])
+		material.set_shader_parameter("head_light", HEAD_RAMPS[name][2])
+		_head_materials[name] = material
+	return _head_materials[name]

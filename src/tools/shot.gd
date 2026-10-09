@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["tool_upgrades", "upgrades ready tomorrow and an iron axe in hand", "WorkshopPanel"],
 	["regrowing", "regrowing strawberries beside ripe fruit", ""],
 	["withered", "summer crops wither on Autumn 1", ""],
 	["winter_day", "outdoor fields rest in winter", ""],
@@ -668,6 +669,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	main.get_node("%WorldView").cursor().follows_pointer = false
 
 	match name:
+		"tool_upgrades": _set_tool_upgrades(state)
 		"inventory_crops": _set_inventory_crops(state)
 		"inventory_full": _set_inventory_full(state)
 		"twelve_crops": _set_twelve_crops(state)
@@ -822,6 +824,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	print("  %-8s %-24s tick %5d  %-11s %s" % [name, str(entry[1]),
 		int(state["tick"]), Phases.name_of(int(state["phase"])),
 		_worth_saying(state)])
+	if name == "tool_upgrades":
+		await _take_tool_chop(main, state, folder)
 	if name == "twelve_crops":
 		for i in Farming.seeds().size():
 			main.get_node("%WorldView").get_node("CropStageLabel_%d" % i).free()
@@ -920,6 +924,14 @@ func _only_showing(main: Node, wanted: String) -> void:
 func _just_before_the_shutter(main: Node, state: Dictionary,
 		name: String) -> void:
 	match name:
+		"tool_upgrades":
+			SuiteKit.stand_the_farmer(state, _standing_at)
+			main.get_node("%WorldView").look_at_cell(_standing_at)
+			state["player"]["facing"] = Player.SOUTH
+			var panel := main.get_node("%WorkshopPanel") as WorkshopPanel
+			panel._tool_tab = true
+			panel._built_for = ""
+			panel._process(0.0)
 		"react":
 			Reactions.show(state, &"note")
 		"refused":
@@ -1791,3 +1803,57 @@ func _set_regrowing(state: Dictionary) -> void:
 		if i % 6 < 3:
 			Farming.act(state, cells[i])
 	Farming.select_seed(state, GameData.STRAWBERRY)
+
+
+## A real paid axe, delivered at dawn; the can has finished and waits for tomorrow.
+func _set_tool_upgrades(state: Dictionary) -> void:
+	_set_noon(state)
+	state["held"][GameData.MONEY] = 1000
+	state["held"][GameData.IRON] = 100
+	var bench: Vector2i = Farm.cells_with(state, &"workshop")[0]
+	Crafting.enqueue(state, bench, &"upgrade_axe_iron")
+	Sim.advance(state, int(GameData.RECIPES[&"upgrade_axe_iron"]["ticks"]) + 1)
+	Phases.go_to_bed(state)
+	Phases.start_waves(state)
+	Phases.enter_result(state, false)
+	Phases.begin_day(state)
+	House.leave(state)
+	Sim.advance(state, Phases.tick_at_minute(WorldView.NOON_MINUTE))
+	Crafting.enqueue(state, bench, &"upgrade_can_iron")
+	Sim.advance(state, int(GameData.RECIPES[&"upgrade_can_iron"]["ticks"]) + 1)
+	_standing_at = bench + Vector2i.UP
+	state["player"]["facing"] = Player.SOUTH
+
+
+## Freeze the real felling swing at contact, with the delivered iron axe.
+func _take_tool_chop(main: Node, state: Dictionary, folder: String) -> void:
+	var trees := Farm.cells_with(state, &"tree")
+	var tree: Vector2i = trees[0]
+	for candidate in trees:
+		if (candidate as Vector2i).distance_squared_to(Farm.house_centre(state) + Vector2i(7, 7)) < tree.distance_squared_to(Farm.house_centre(state) + Vector2i(7, 7)):
+			tree = candidate
+	var at := tree + Vector2i.RIGHT
+	for nearby in Grid.within(at, 2):
+		if nearby != tree and Farm.occupant(state, nearby).get("id", &"") == &"tree":
+			Farm.remove(state, nearby)
+	state["player"]["pos"] = [at.x * Player.SUBTILE + Player.SUBTILE / 2, at.y * Player.SUBTILE + Player.SUBTILE / 2]
+	state["player"]["facing"] = Player.WEST
+	state["intent"]["interact"] = true
+	Sim.advance(state, 1)
+	var view := main.get_node("%WorldView") as WorldView
+	view.look_at_cell(at)
+	view.show_state(state)
+	var farmer := view.get_node("Occupants/PlayerView") as PlayerView
+	farmer.show_state(state)
+	if not state["player"]["action"].is_empty():
+		while Gathering.swings_left(state, tree) > 1:
+			Sim.advance(state, int(state["player"]["action"]["left"]))
+		Sim.advance(state, int(state["player"]["action"]["left"]) - 1)
+		farmer.before_tick(state)
+		Sim.advance(state, 1)
+		farmer.after_tick(state)
+	farmer._process(0.0)
+	await process_frame
+	await process_frame
+	await _shoot("tool_upgrades_chop", folder)
+	print("  tool_upgrades_chop: %s, tier %d" % [farmer._playing, ToolTiers.tier(state, &"axe")])

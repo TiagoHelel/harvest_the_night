@@ -171,6 +171,7 @@ func _animate(delta: float) -> void:
 	var path := PlayerArt.texture_path(name, frame)
 	var texture := _texture(path)
 	_sprite.texture = texture
+	_sprite.material = _work.head_material(_state, name)
 	_sprite.flip_h = bool(pose["flip"])
 	# A stand-in's own tint and turn (task 0129); white and upright for art
 	# that has arrived.

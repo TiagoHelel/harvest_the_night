@@ -1,7 +1,7 @@
 # 0173 - Five tools, three tiers
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0148, 0126
 - **Likely files:** src/core/tool_tiers.gd (new), src/core/state.gd, src/core/game_data.gd, src/core/crafting.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/player_work.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 
@@ -30,11 +30,11 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 ## Done when
 
-- [ ] `_task_0173_tools` in `src/tools/headless_v1.gd`: an iron axe queued with the money and iron is still basic that evening and iron the next morning; a lost night takes 25% of the iron and no tool
-- [ ] `_case_0173_upgrade` in `src/tools/input_v1.gd`: open the workshop and order an upgrade with the keyboard and with the mouse; it shows as pending
-- [ ] A new `tool_upgrades` scenario: `python tools/shot.py 0173 tool_upgrades --fhd` shows the upgrade list and the farmer chopping with a tinted iron head; opened and looked at
-- [ ] `python tools/verify.py` prints PASS
-- [ ] the determinism hash is unchanged, or the change is deliberate and both
+- [x] `_task_0173_tools` in `src/tools/headless_v1.gd`: an iron axe queued with the money and iron is still basic that evening and iron the next morning; a lost night takes 25% of the iron and no tool
+- [x] `_case_0173_upgrade` in `src/tools/input_v1.gd`: open the workshop and order an upgrade with the keyboard and with the mouse; it shows as pending
+- [x] A new `tool_upgrades` scenario: `python tools/shot.py 0173 tool_upgrades --fhd` shows the upgrade list and the farmer chopping with a tinted iron head; opened and looked at
+- [x] `python tools/verify.py` prints PASS
+- [x] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal
 
 ## House rules

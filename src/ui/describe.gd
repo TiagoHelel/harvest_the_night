@@ -156,6 +156,9 @@ static func recipe(id: StringName) -> String:
 		[_seconds(int(one.get("ticks", 0)))]))
 	lines.append(I18n.f(&"DESC_AT_THE",
 		[Names.of(StringName(one.get("station", &"")))]))
+	for out in one["output"]:
+		if not GameData.tool_output(StringName(out)).is_empty():
+			lines.append(I18n.t(&"DESC_TOOL_NEXT_MORNING"))
 	return "\n".join(lines)
 
 
