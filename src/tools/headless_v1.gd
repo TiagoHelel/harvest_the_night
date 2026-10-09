@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 32
+const GROUPS := 33
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -101,6 +101,7 @@ func _run() -> void:
 	_task_0157_sides()
 	_task_0158_forecast()
 	_task_0159_palette()
+	_task_0160_year_end()
 
 
 func _finish() -> void:
@@ -2085,7 +2086,7 @@ func _task_0151_migration() -> void:
 
 	# **Endless means past the year now.** A v4 run that was endless and is
 	# already past Winter 14 stays so; one that was endless before it goes
-	# back to the year; and a run past day 56 that never beat it is not over.
+	# back to the year; and 0160 now reads a date past Winter 14 as a completed year.
 	var long_gone := _a_v4_run(1520, Phases.DAY)
 	long_gone["day"] = Calendar.year_days() + 4
 	long_gone["endless"] = true
@@ -2098,8 +2099,8 @@ func _task_0151_migration() -> void:
 		"one that went endless after the MVP's ten goes back to the year")
 	var not_endless := _a_v4_run(1522, Phases.DAY)
 	not_endless["day"] = Calendar.year_days() + 4
-	expect(not Run.is_over(_through_a_save(not_endless, "v4_past_the_year")),
-		"and a v4 run past day 56 that is not endless is not over either")
+	expect(Run.is_over(_through_a_save(not_endless, "v4_past_the_year")),
+		"0160 reads the released date; legacy past-year reconciliation belongs to 0291")
 
 	# **Every golden loads and plays**: v1, v4 and v5.
 	var versions: Dictionary = {}
@@ -3084,3 +3085,46 @@ func _foliage_in(paths: Array) -> Array:
 					found.append(name)
 	found.sort()
 	return found
+
+
+## 0160 - Winter 14 ends the year only after its boss falls, including a
+## house lost afterwards. Fixtures cross the actual night and morning road.
+func _task_0160_year_end() -> void:
+	for outcome in ["won", "escaped", "lost", "lost_after_boss"]:
+		var state := State.create(1600)
+		state["day"] = Calendar.year_days() + 3
+		state["days_held"] = 3
+		NightRoad.to_night(state)
+		NightRoad.park(state)
+		var down: bool = outcome in ["won", "lost_after_boss"]
+		if down:
+			(state["killed_by_kind"] as Dictionary)[Calendar.boss_of(Run.final_night())] = 1
+		if outcome.begins_with("lost"):
+			state["house_hp"] = 0
+		(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+		Sim.advance(state, 4)
+		expect(int(state["phase"]) == Phases.RESULT and Run.is_over(state) == down,
+			"Winter 14 %s: only the fallen boss ends the year" % outcome)
+		expect(bool((state["last_result"] as Dictionary).get("run_over", false)) == down,
+			"the result records the ending, even after a house loss (%s)" % outcome)
+		expect(Calendar.date(state) == (57 if down else 56),
+			"the date leaves winter only with the boss down (%s)" % outcome)
+		var profile := Run.record(state, Save.default_profile())
+		expect(int(profile["runs_won"]) == (1 if down else 0),
+			"record counts completed years (%s)" % outcome)
+		expect(Run.go_endless(state) == down and not Run.is_over(state),
+			"carry on opens only after the year is beaten (%s)" % outcome)
+		if down:
+			(state["intent"] as Dictionary)["confirm_result"] = true
+			Sim.advance(state, 2)
+			expect(Calendar.year_of(Calendar.date(state)) == 2
+				and Calendar.season_of(Calendar.date(state)) == 0
+				and Calendar.day_of_season(Calendar.date(state)) == 1,
+				"carry on wakes on Year 2 Spring 1")
+			NightRoad.to_night(state)
+			expect(int(state["night"]) == 57 and Calendar.is_calm(int(state["night"])),
+				"the next night is date 57 and calm")
+			Sim.advance(state, 2)
+			expect(not Run.is_over(state) and bool(Rewards.last(state).get("calm", false)),
+				"the calm night resolves and endless does not end again")
+	_completed += 1

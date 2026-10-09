@@ -312,29 +312,26 @@ RES_CAME_DOWN,200,%d structure came down,%d estrutura caiu
 RES_CAME_DOWN.other,200,%d structures came down,%d estruturas caíram
 RES_COUNTED,0,%d %s,%d %s
 RES_DEFENDING_WELL,0,  for defending well,  por defender bem
-RES_FARM_HELD,0,THE FARM HELD,A FAZENDA AGUENTOU
 RES_FULL_MOON,0,FULL MOON BONUS,BÔNUS DE LUA CHEIA
 RES_GAINED,0,+%d %s,+%d %s
-RES_GATHERED,0,  gathered %s,  colhido %s
 RES_GET_UP,190,GET UP,LEVANTAR
 RES_GIFT,200,A GIFT ON THE PORCH,UM PRESENTE NA VARANDA
-RES_GOT_THROUGH,0,got through,passaram
 RES_HOUSE,0,"house %d/%d, %d still up","casa %d/%d, %d de pé"
 RES_INDENT,0,  %s,  %s
 RES_KILLED,0,"killed %d, %d got through","mortos %d, passaram %d"
 RES_LEFTOVERS,200,left on the farm: nothing yet,deixado na fazenda: nada ainda
 RES_LOST,0,LOST,PERDIDO
 RES_MORNING,200,MORNING OF DAY %d,MANHÃ DO DIA %d
-RES_NEW_FARM,0,"A NEW FARM, A NEW TEN NIGHTS","UMA FAZENDA NOVA, DEZ NOITES NOVAS"
+RES_NEW_FARM,0,A NEW FARM,UMA FAZENDA NOVA
 RES_NIGHT,0,NIGHT %d %s,NOITE %d %s
 RES_NIGHT_OVER,0,NIGHT OVER,FIM DA NOITE
 RES_NOTHING_STANDING,0,nothing left standing,nada de pé
 RES_NOTHING_TO_TAKE,0,  nothing - there was nothing to take,  nada - não havia o que levar
 RES_PAID,0,PAID,PAGO
 RES_PASSED_OUT,200,you passed out at %02d:%02d,você desmaiou às %02d:%02d
-RES_PLAY_ON,0,PLAY ON - THE NIGHTS KEEP COMING,SEGUIR - AS NOITES NÃO PARAM
+RES_PLAY_ON,0,CARRY ON INTO YEAR %d,SEGUIR PARA O ANO %d
 RES_PLUS,0,+%d,+%d
-RES_RUN_LINE,0,"%d days, %d nights, the Giant down","%d dias, %d noites, o Gigante no chão"
+RES_RUN_LINE,0,"%d days lived, %d nights won","%d dias vividos, %d noites vencidas"
 RES_STRUCTURES_LOST,0,structures lost,estruturas perdidas
 RES_SURVIVED,0,SURVIVED,VENCIDA
 RES_TAKEN,0,-%d %s,-%d %s
@@ -493,3 +490,11 @@ HOUSE_TITLE,456,FARMHOUSE,CASA DA FAZENDA
 HOUSE_EXIT_HINT,456,Walk to the door or %s near it to leave.,Caminhe ate a porta ou use %s perto dela para sair.
 HOUSE_BED_HINT,456,%s: go to bed,%s: ir dormir
 HOUSE_ENTER_HINT,240,%s: enter the farmhouse,%s: entrar na casa
+END_TITLE,300,YOU SURVIVED A YEAR,VOCÊ SOBREVIVEU UM ANO
+END_BOSSES,0,bosses down,chefes derrotados
+CRED_GAME,300,HARVEST THE NIGHT,HARVEST THE NIGHT
+CRED_DESIGN,300,A farm built one night at a time,Uma fazenda construída noite após noite
+CRED_ENGINE,300,Made with Godot Engine,Feito com Godot Engine
+CRED_ART,300,Art from approved Codex packs,Arte de pacotes Codex aprovados
+CRED_THANKS,300,Thank you for keeping the farm alive,Obrigado por manter a fazenda viva
+CRED_SKIP,300,CONTINUE / SKIP CREDITS,CONTINUAR / PULAR CRÉDITOS

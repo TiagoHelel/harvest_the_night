@@ -124,6 +124,8 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	print(BuildInfo.line())
+	_result.new_farm_requested.connect(begin_run)
+	_result.run_recorded.connect(_year_recorded)
 	_house_view = HouseView.new()
 	_house_view.name = "HouseView"
 	add_child(_house_view)
@@ -217,6 +219,13 @@ func _went(_to: int, _from: int) -> void:
 		_options.visible = options_up
 
 
+## The ending has banked the year. Keep the live profile in sync so a new
+## morning, the stats screen or save-and-quit cannot erase that victory.
+func _year_recorded(profile: Dictionary) -> void:
+	_profile = profile
+	_stats.show_profile(_profile)
+
+
 ## Start a run on `seed_value` and hand the new state to every screen.
 ##
 ## **A method rather than a block inside `_ready`** because three things want
@@ -273,7 +282,6 @@ func _hand_out() -> void:
 	_build.show_state(_driver.state, _world)
 	_hotbar.show_state(_driver.state)
 	_forecast.show_state(_driver.state)
-	_result.driver = _driver
 	_result.show_state(_driver.state)
 	_inventory.show_state(_driver.state)
 	_workshop.show_state(_driver.state)

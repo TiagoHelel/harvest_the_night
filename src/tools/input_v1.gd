@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 21
+const V1_CASES := 22
 
 
 func _process(delta: float) -> bool:
@@ -71,6 +71,7 @@ func _run() -> void:
 	await _case_0157_routes()
 	await _case_0158_panel()
 	await _case_0159_seasons()
+	await _case_0160_ending()
 	_finish()
 
 
@@ -1878,4 +1879,71 @@ func _case_0159_seasons() -> void:
 		"and Spring 3 of Year 2 is spring again, with no snow")
 	state["day"] = 1
 	await close_scene()
+	_completed += 1
+
+
+## 0160 - Every skip device opens choices without accidentally choosing one.
+func _case_0160_ending() -> void:
+	for device in ["keyboard", "pad", "mouse", "keyboard_cancel", "pad_cancel", "roll"]:
+		await open_scene(MAIN_SCENE)
+		await frames(3)
+		var driver: SimDriver = require_control("SimDriver")
+		var result: ResultScreen = require_control("ResultScreen")
+		var state := driver.state
+		I18n.use("pt_BR" if device == "pad" else "en")
+		state["day"] = Run.final_night()
+		NightRoad.to_night(state)
+		NightRoad.park(state)
+		(state["killed_by_kind"] as Dictionary)[Calendar.boss_of(Run.final_night())] = 1
+		(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+		Sim.advance(state, 4)
+		await frames(4)
+		var credits: CreditsRoll = require_control("CreditsRoll")
+		var carry: Button = require_control("PlayOnButton")
+		var fresh: Button = require_control("ContinueButton")
+		expect(credits.visible and not carry.is_visible_in_tree() and not fresh.is_visible_in_tree(),
+			"credits come before both choices (%s)" % device)
+		if device == "keyboard":
+			await tap_key(KEY_ENTER)
+		elif device == "keyboard_cancel":
+			await tap_key(KEY_ESCAPE)
+		elif device == "pad":
+			await _pad_tap(JOY_BUTTON_A)
+		elif device == "pad_cancel":
+			await _pad_tap(JOY_BUTTON_B)
+		elif device == "roll":
+			credits._process(100.0)
+		else:
+			await click_control("SkipCreditsButton")
+		await frames(4)
+		expect(not credits.visible and Run.is_over(driver.state) and carry.is_visible_in_tree(),
+			"skip only dismisses the credits (%s)" % device)
+		var title: Label = require_control("ResultTitle")
+		expect(title.text == I18n.t(&"END_TITLE") and carry.text == I18n.f(&"RES_PLAY_ON", [2]),
+			"ending names the year and the next year (%s)" % device)
+		expect(_outside_the_frame(result).is_empty(), "the ending fits (%s)" % device,
+			str(_outside_the_frame(result)))
+		var wins := int(Save.read_profile()["runs_won"])
+		if device == "pad":
+			fresh.grab_focus()
+			await _pad_tap(JOY_BUTTON_A)
+			await frames(4)
+			expect(int(driver.state["day"]) == 1 and not Run.is_endless(driver.state),
+				"A NEW FARM starts day 1 of a new run")
+		else:
+			await click_control("PlayOnButton")
+			await frames(4)
+			expect(Run.is_endless(driver.state) and int(driver.state["phase"]) == Phases.DAY
+				and Calendar.date(driver.state) == 57 and House.inside(driver.state),
+				"CARRY ON wakes at home on Year 2 Spring 1 (%s)" % device)
+			NightRoad.to_night(driver.state)
+			Sim.advance(driver.state, 4)
+			await frames(3)
+			expect(bool(Rewards.last(driver.state).get("calm", false)) and not credits.visible,
+				"the calm night banks without replaying the credits (%s)" % device)
+		expect(int(Save.read_profile()["runs_won"]) == wins + 1,
+			"either choice records the year once (%s)" % device,
+			"before %d, after %d" % [wins, int(Save.read_profile()["runs_won"])])
+		await close_scene()
+	I18n.use("en")
 	_completed += 1

@@ -92,6 +92,8 @@ const SCENARIOS: Array = [
 	["tutorial_dawn", "day one's night: dawn's line", ""],
 	["morning", "the morning report, every line it has", "ResultScreen"],
 	["boss_escaped", "the morning after Spring 14's boss got away", "ResultScreen"],
+	["year_end", "the year survived, after the credits", "ResultScreen"],
+	["year_credits", "the credits before the year ending", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
 	["north_band", "standing on the north spawn ground", ""],
@@ -673,6 +675,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"morning": _set_morning(state)
 		"boss_escaped": _set_boss_escaped(state)
 		"calm_morning": _set_calm_morning(state)
+		"year_end": _set_year_end(state)
+		"year_credits": _set_year_credits(state)
 		"trampled": _set_trampled(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
@@ -733,6 +737,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	view._light_for_phase(0.0)
 	# And the bed beat (task 0129), which a build-step scenario would catch.
 	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	if name == "year_end":
+		(main.get_node("%ResultScreen").get_node("CreditsRoll") as CreditsRoll).finish()
 	_just_before_the_shutter(main, state, name)
 	await process_frame
 	await RenderingServer.frame_post_draw
@@ -1543,3 +1549,22 @@ func _the_defence_line(state: Dictionary) -> Vector2i:
 	for cell in towers:
 		sum += cell as Vector2i
 	return Vector2i(sum.x / towers.size(), sum.y / towers.size())
+
+
+## The completed year, without playing fifty-six nights for a picture.
+func _set_year_end(state: Dictionary) -> void:
+	_on_date(state, Run.final_night())
+	_a_defended_farm(state)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	(state["killed_by_kind"] as Dictionary)[Calendar.boss_of(Run.final_night())] = 1
+	state["bosses_down"] = 4
+	state["killed_all_run"] = 1842
+	state["structures_lost"] = 12
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+
+
+## The same ending while the credits are still rolling.
+func _set_year_credits(state: Dictionary) -> void:
+	_set_year_end(state)

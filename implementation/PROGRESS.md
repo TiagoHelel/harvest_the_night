@@ -16504,3 +16504,56 @@ before). headless_check 16366 (+9), headless_v1 431 (+9), input_check
   - the showcases, on the shader error above;
   - headless_check, because the scenario-builder check wants a
     `_set_<name>` for each scenario. The four now have one each.
+
+## 0160 - The end of the year - done 2026-10-09
+
+What changed: Winter 14 ends the year when its boss falls and releases the
+calendar, including a house lost after the boss died. An escaped or unbeaten
+boss keeps the date at 56. The ending shows days lived, nights won, bosses,
+kills, structures lost and the surviving build, preceded by scrolling credits
+that keyboard, mouse and pad can skip without also choosing an ending.
+Both languages offer a new farm or Year 2 Spring 1 and its calm night.
+
+The ending records the year before either choice. Main now receives the
+updated profile and owns starting the new farm, handing its state to every
+panel. The old direct driver restart left panels on the old state and allowed
+Main's cached profile to overwrite the recorded win; the new input case
+checks the win after a new farm and after Year 2's first calm night banks.
+The meaning of best_night is unchanged.
+
+Tests: _task_0160_year_end covers won, escaped, lost, and lost-after-boss
+Winter 14 fixtures with held days, the result flag, records, refusal to carry
+on early, and Year 2's calm night. _case_0160_ending covers keyboard and pad
+confirm/cancel, mouse skip, natural credits completion, both choices, both
+languages and profile persistence. The old ending tests and the shot registry
+were updated in place; there are now 43 shot scenarios.
+
+Shots: implementation/shots/0160/{noon,dusk,wave,result,tech,year_end,
+year_credits,year_end-pt_BR,year_credits-pt_BR}.png, all captured at 1920x1080
+and opened at original size. The first ending frame retained a previous
+container height, and the credits skip button clipped its text; both were
+corrected and their captures reopened. The final ending and credits fit in
+both languages. No art PNG was created or edited; these are game captures.
+
+Verify: PASS, 60 passed / 0 skipped / 0 failed in 608 s (the known total-time
+OVER BUDGET). headless_check 16374 / headless_v1 457 asserts;
+input_check 1067 / input_v1 241 cases; all zero failed. All 56 dates check
+for seeds 0 and 424242, both exports pass. SIM 50760118 and DATA 721761836
+unchanged. The first full run (675 s) caught two failures: raw mouse-button
+constants in the credits (now remappable actions), and the cached profile
+replacing the new-farm win (fixed through Main). The second full run passed.
+
+Notes: 0160 supersedes 0151's synthetic non-endless v4 fixture past day 56:
+the ending now reads the released calendar, not the old paid list. That
+assert now reflects the new rule; the final migration/archive policy for
+legacy MVP saves remains 0291, as planned. No balance or hash baseline moved.
+The existing owner/art changes, including project.godot, .claude and the art
+backlog, were left unstaged. The open question about removing RUN remains
+with the owner. No push.
+
+Files: src/core/{run,phases}.gd, src/ui/{result_screen,credits_roll,main}.gd,
+src/ui/credits_roll.gd.uid, assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,input_check,input_v1,shot}.gd,
+implementation/prompts/0160-year-end.md, implementation/BACKLOG.md,
+implementation/shots/0160/, implementation/PROGRESS.md,
+docs/devlog/{index,index.pt_BR}.md (refreshed by devlog.py --check).

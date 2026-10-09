@@ -12430,12 +12430,12 @@ func _task_0066_run_end() -> void:
 	Rewards.settle(nearly, true)
 	Phases.enter_result(nearly, true)
 	expect(Run.is_over(nearly),
-		"beating it ends the run", str(nearly["nights_paid"]))
+		"the winter boss releases the date and ends the run", str(Calendar.date(nearly)))
 	expect(bool((nearly["last_result"] as Dictionary).get("run_over", false)),
 		"and the result says so, for the screen to read",
 		str(nearly["last_result"]))
 
-	# **Read from the night won, never from a count of wins.** A year with
+	# **Read from the released calendar, never from a count of wins.** A year with
 	# losses in it still ends on Winter 14 won; losing Winter 14 does not.
 	var scarred := _a_run_at_night(6607, Run.final_night())
 	_beat_the_boss(scarred)
@@ -13156,11 +13156,16 @@ func _task_0070_endless() -> void:
 		"and the records screen reads it", str(Stats.lifetime(profile)))
 
 	# **Off the critical path.** `go_endless` refuses a run that has not been
-	# beaten: since task 0151, one whose year's last night was never won.
+	# beaten: the date has not passed the winter boss's hold.
 	var early_run := State.create(779)
 	early_run["nights_won"] = 3
 	expect(not Run.go_endless(early_run),
 		"a run that has not been beaten cannot carry on past the year")
+
+	early_run["day"] = Run.final_night()
+	(early_run["nights_paid"] as Array).append(Run.final_night())
+	expect(not Run.go_endless(early_run),
+		"a paid final date alone cannot bypass the winter boss's hold")
 
 	_completed += 1     # last line: an abandoned group never gets here
 
@@ -14530,8 +14535,9 @@ func _task_0082_shots() -> void:
 	# since 0156: the north band, the new ore and a stump. Thirty-four since
 	# 0157: the winter build step's routes. Thirty-seven since 0158: the
 	# forecast at dusk, in the build step and on a calm night. Forty-one since
-	# 0159: three seasons at noon and a winter night.
-	expect(names.size() == 41,
+	# 0159: three seasons at noon and a winter night. Forty-three since
+	# 0160: the year ending and its credits.
+	expect(names.size() == 43,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
@@ -14542,7 +14548,7 @@ func _task_0082_shots() -> void:
 			"boss_escaped", "calm_morning", "trampled", "north_band", "new_ore", "stump",
 			"winter_build", "forecast_dusk", "forecast_build", "forecast_calm",
 			"season_summer", "season_autumn", "season_winter", "season_winter_night",
-			"options_controls_pad"]:
+			"options_controls_pad", "year_end", "year_credits"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

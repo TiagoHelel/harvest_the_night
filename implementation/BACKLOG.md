@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **150 / 296 done**
+`############............`  **151 / 296 done**
 
-0 doing / 146 todo / 0 blocked across 18 phases.
+0 doing / 145 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-146 task(s) left, the ready ones first, then what they
+145 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -172,25 +172,6 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A005
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0160 - The end of the year
-
-Ready to pick up.  Likely files: `src/core/run.gd, src/ui/result_screen.gd, src/ui/credits_roll.gd (new), src/ui/main.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-When the winter boss - for now the Giant - falls on Winter 14, the year is over: an ending, the credits, and the choice to carry on into a Year 2 that does not end.
-
-- `Run.is_over` is 'the year's last boss has fallen and the run is not endless': with 0153's hold the date passes `Calendar.year_days()` only then. A lost or escaped Winter 14 is not an ending; a Winter 14 lost after its boss fell is
-- The morning report's ending branch (0138's screen, today's `_build_the_ending`): `YOU SURVIVED A YEAR` with what `Run.summary` already holds (days lived, nights won, bosses down, killed, structures lost, the build that won), then two choices
-- Carry on: `Run.go_endless` (only once the year is beaten); the farmer wakes on Year 2 Spring 1 - 0154's calm night - and the nights keep coming through the lookup from today's Endless until 0279 makes later years heavier
-- A new farm: the run is recorded (`Run.record`: `runs_won` counts the year; `best_night` keeps its meaning, any change to it is 0291's) and a new run starts, as `_record_and_restart` does today
-- A credits roll before the choices (`src/ui/credits_roll.gd`): lines from `CRED_*` strings, skippable with confirm or cancel on keyboard, mouse and pad
-- Strings in both languages replace the MVP's: `RES_NEW_FARM` (A NEW FARM / UMA FAZENDA NOVA), `RES_PLAY_ON` (CARRY ON INTO YEAR %d / SEGUIR PARA O ANO %d), `RES_RUN_LINE` without 'the Giant', `END_TITLE` (YOU SURVIVED A YEAR / VOCÊ SOBREVIVEU UM ANO); remove the rows nothing reads any more
-- Keep the node names `ContinueButton` and `PlayOnButton`, and rewrite in place what reads the old ending as 0151 left it: input_check's `_case_0070_endless` (the credits now come first), `_task_0066_run_end`'s over/carry-on asserts and `_task_0070_endless`'s `go_endless` refusals, against the new `Run.is_over`
-- Hashes: SIM must not move (the determinism run never reaches Winter 14) and DATA does not
-
-  - done when: `_task_0160_year_end` in `src/tools/headless_v1.gd`, from a Winter 14 fixture (date 56, started through 0118's road, never by playing the year): boss down -> `Run.is_over` and the result says so; boss escaped -> not over, the date still 56; carried on -> not over, and the next night is date 57, Year 2 Spring 1, calm; `Run.record` counts the year in `runs_won`
-  - done when: `_case_0160_ending` in `src/tools/input_v1.gd`: the ending shows, the credits skip by keyboard and by pad, CARRY ON returns to the farm on Year 2 Spring 1, and A NEW FARM starts day 1 of a new run
-  - done when: A `year_end` shot scenario: `python tools/shot.py 0160 year_end --fhd` and with `--pt_BR`, opened - nothing overflows
 
 ### 0161 - Art: seasons and moons
 
@@ -1612,7 +1593,7 @@ An enemy whose death is the attack: it bursts into ice and the towers near it re
 
 ### 0285 - Music for four seasons
 
-Waits on 0160, 0282.  Likely files: `tools/gen_music.py, assets/music/, src/ui/music.gd, src/app/audio.gd, src/ui/main.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0282.  Likely files: `tools/gen_music.py, assets/music/, src/ui/music.gd, src/app/audio.gd, src/ui/main.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The two MVP pieces become a year: a day piece per season on the shared motif, a winter night, a boss track and the credits, each crossfading on the moment it belongs to. View only: neither hash moves.
 
@@ -2262,7 +2243,7 @@ The bed under everything follows the weather and the season: fog and rain on the
 
 ### 0255 - The Winter Lord
 
-Waits on 0246, 0251, 0160, 0253, 0254.  Likely files: `src/core/enemies.gd, src/core/towers.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0246, 0251, 0253, 0254.  Likely files: `src/core/enemies.gd, src/core/towers.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 The last night of the year: a lord of ice whose cast freezes every tower around it. It tests the whole build - spread, depth, light and the powers - and its fall is the ending.
 
@@ -2372,7 +2353,7 @@ Six new enemies and three new bosses each get a voice of their own, so a night h
 
 ### 0287 - Collections and achievements
 
-Waits on 0160, 0170, 0182, 0253, 0254, 0255.  Likely files: `src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md`.
+Waits on 0170, 0182, 0253, 0254, 0255.  Likely files: `src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md`.
 
 The plan's reason to start Year 2: four collections - fish, crops, the bosses' trophies and a year without losing the house - and a short list of achievements, kept in the profile across runs and shown on one screen.
 
@@ -2559,7 +2540,7 @@ The plan's rule of thumb, checked in every season and not only the first: a good
 
 ### 0279 - Year 2
 
-Waits on 0160, 0277.  Likely files: `src/core/game_data.gd, src/core/almanac.gd, src/core/endless.gd, src/core/waves.gd, src/core/run.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/nights.gd, tools/nights.py, src/tools/perf_check.gd, tools/perf.py, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0277.  Likely files: `src/core/game_data.gd, src/core/almanac.gd, src/core/endless.gd, src/core/waves.gd, src/core/run.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/nights.gd, tools/nights.py, src/tools/perf_check.gd, tools/perf.py, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 After the Winter Lord the farm carries on, and today that means the MVP's endless curve. Replace it with the calendar: Year 2 and every year after replay the four seasons from 0270's templates, heavier each year, with the bosses back on every day 14.
 
@@ -2876,7 +2857,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
-## 11 - Calendar and seasons  (11/16)
+## 11 - Calendar and seasons  (12/16)
 
 - [x] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
 - [x] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
@@ -2889,7 +2870,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0157** [A new side every season](prompts/0157-attack-sides.md)
 - [x] **0158** [The forecast](prompts/0158-forecast.md)
 - [x] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md)
-- [ ] **0160** [The end of the year](prompts/0160-year-end.md)
+- [x] **0160** [The end of the year](prompts/0160-year-end.md)
 - [ ] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md) - waits for art A010
 - [ ] **0162** [Art: forecast heads](prompts/0162-art-forecast-heads.md) - waits for art A011
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
@@ -2993,7 +2974,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0252** [The wraith](prompts/0252-wraith.md) - needs 0229, 0218
 - [ ] **0253** [The Harvester](prompts/0253-harvester.md) - needs 0246, 0231
 - [ ] **0254** [The Scarecrow King](prompts/0254-scarecrow-king.md) - needs 0246, 0249
-- [ ] **0255** [The Winter Lord](prompts/0255-winter-lord.md) - needs 0246, 0251, 0160, 0253, 0254
+- [ ] **0255** [The Winter Lord](prompts/0255-winter-lord.md) - needs 0246, 0251, 0253, 0254
 - [ ] **0256** [Fog and rain](prompts/0256-fog-and-rain.md) - needs 0229
 - [ ] **0257** [The Blood Moon](prompts/0257-blood-moon.md) - needs 0256, 0219, 0246
 - [ ] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md) - needs 0256, 0257
@@ -3020,7 +3001,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0194, 0233, 0234, 0275, 0166, 0171, 0180, 0186, 0191, 0221
 - [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0271, 0272, 0273, 0274, 0276, 0259
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
-- [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0160, 0277
+- [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
 - [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0277, 0278, 0279, 0258
 
 ## 16 - Sound, collections and polish  (0/10)
@@ -3029,9 +3010,9 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md) - needs 0180, 0182, 0196
 - [ ] **0283** [The guardian's sounds](prompts/0283-sfx-night-v2.md) - needs 0233, 0234
 - [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0247, 0248, 0250, 0252, 0253, 0254, 0255, 0257
-- [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0160, 0282
+- [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0282
 - [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0186, 0256, 0257, 0285
-- [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0160, 0170, 0182, 0253, 0254, 0255
+- [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0170, 0182, 0253, 0254, 0255
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
 - [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288

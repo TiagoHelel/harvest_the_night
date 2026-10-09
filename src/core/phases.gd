@@ -249,11 +249,9 @@ static func enter_result(state: Dictionary, survived: bool, escaped: bool = fals
 		state["days_held"] = int(state.get("days_held", 0)) + 1
 	if survived:
 		state["nights_won"] = int(state["nights_won"]) + 1
-		# **The run can end here**: the year's last night won.
-		# `Run.is_over()` is what the result screen asks to know whether it
-		# is showing a night or an ending.
-		if Run.is_over(state):
-			state["last_result"]["run_over"] = true
+	# The boss falling ends the year even if the house fell afterwards.
+	if Run.is_over(state):
+		state["last_result"]["run_over"] = true
 	_enter(state, RESULT)
 	return true
 

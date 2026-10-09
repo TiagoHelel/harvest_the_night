@@ -3657,7 +3657,14 @@ func _case_0070_endless() -> void:
 		Sim.advance(state, 1)
 	expect(Run.is_over(state), "won at dawn, the run is over",
 		str(state["nights_paid"]))
-	await until(func() -> bool: return play_on != null and play_on.visible,
+	await until(func() -> bool: return result.visible, "the year ending")
+	await frames(2)
+	var credits := locate_control("CreditsRoll") as CreditsRoll
+	expect(credits != null and credits.visible and not play_on.is_visible_in_tree(),
+		"credits precede the ending choices")
+	await tap_key(KEY_ESCAPE)
+	await frames(3)
+	await until(func() -> bool: return play_on != null and play_on.is_visible_in_tree(),
 		"the ending to offer the second door")
 	expect(play_on.visible, "a beaten run offers to play on")
 

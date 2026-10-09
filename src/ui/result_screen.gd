@@ -20,6 +20,9 @@ extends Control
 ## could disagree, and the one the player believes is the one on screen.
 
 
+signal new_farm_requested(seed_value: int)
+signal run_recorded(profile: Dictionary)
+
 var _state: Dictionary = {}
 var _header: Control
 var _day: Label
@@ -27,10 +30,11 @@ var _title: Label
 var _lines: VBoxContainer
 var _continue: Button
 var _play_on: Button
+var _credits: CreditsRoll
+var _credits_seen := false
+var _wait_for_release := false
+var _frame: PanelContainer
 
-## Set by `main.gd`, so the ending can start a new run. The screen asks; the
-## app does.
-var driver: SimDriver
 var _built_for := ""
 
 ## **The sunrise is A057's** (`sprites/ui/report_header.png`), registered on
@@ -52,6 +56,7 @@ func _ready() -> void:
 	add_child(dim)
 
 	var frame := PanelContainer.new()
+	_frame = frame
 	frame.name = "ResultFrame"
 	# **Room for the itemised money.** A `PanelContainer` grows with what is
 	# in it, and task 0061 added up to seven rows saying where the money came
@@ -96,13 +101,18 @@ func _ready() -> void:
 	# worth playing, and this is the switch that asks for it.
 	_play_on = Button.new()
 	_play_on.name = "PlayOnButton"
-	_play_on.text = I18n.t(&"RES_PLAY_ON")
+	_play_on.text = I18n.f(&"RES_PLAY_ON", [2])
 	_play_on.clip_text = true
 	_play_on.custom_minimum_size = Vector2(206, 20)
 	_play_on.focus_mode = Control.FOCUS_ALL
 	_play_on.visible = false
 	_play_on.pressed.connect(_carry_on)
 	column.add_child(_play_on)
+
+	_credits = CreditsRoll.new()
+	_credits.name = "CreditsRoll"
+	_credits.finished.connect(_credits_finished)
+	add_child(_credits)
 
 
 ## A057's picture once it is on disk, the code-drawn band until then.
@@ -125,6 +135,12 @@ func _make_header() -> Control:
 
 
 func show_state(state: Dictionary) -> void:
+	if not is_same(_state, state):
+		_credits_seen = false
+		_wait_for_release = false
+		_built_for = ""
+		_credits.visible = false
+		_frame.visible = true
 	_state = state
 
 
@@ -148,14 +164,26 @@ func _process(_delta: float) -> void:
 		_built_for = signature
 		_build(payout)
 
+	# Shrink after queued old rows have left the container.
+	_frame.size = _frame.custom_minimum_size
+	if _credits.visible:
+		return
+	if _wait_for_release:
+		_wait_for_release = Input.is_action_pressed(&"interact") \
+			or Input.is_action_pressed(&"night") or Input.is_action_pressed(&"ui_accept") \
+			or Input.is_action_pressed(&"cancel") or Input.is_action_pressed(&"ui_cancel")
+		return
 	# The keyboard reaches it without having to find it.
 	if Input.is_action_just_pressed(&"interact") \
 			or Input.is_action_just_pressed(&"night"):
-		_confirm()
+		if Run.is_over(_state) and _play_on.has_focus():
+			_carry_on()
+		else:
+			_confirm()
 
 
 func _confirm() -> void:
-	if _state.is_empty():
+	if _state.is_empty() or _credits.visible or _wait_for_release:
 		return
 	# **At the end of a run, this button starts another one.** The run is
 	# written to the profile first: a win that was not recorded is a win the
@@ -166,9 +194,9 @@ func _confirm() -> void:
 	(_state["intent"] as Dictionary)["confirm_result"] = true
 
 
-## Carry on into the nights past the authored ten.
+## Carry on into the next spring and the endless years.
 func _carry_on() -> void:
-	if _state.is_empty() or not Run.is_over(_state):
+	if _state.is_empty() or not Run.is_over(_state) or _credits.visible or _wait_for_release:
 		return
 	_record(_state)
 	Run.go_endless(_state)
@@ -178,18 +206,18 @@ func _carry_on() -> void:
 ## Write the run to the profile and deal a new farm.
 func _record_and_restart() -> void:
 	_record(_state)
-	if driver == null:
-		return
-	# A different seed, so a second run is a different farm's worth of luck.
-	driver.start(int(Time.get_unix_time_from_system()) & 0x7FFFFFFF)
-	_state = driver.state
+	# Main owns starting a run: every panel and the in-memory profile must
+	# move together, or the next banking frame overwrites the recorded win.
+	new_farm_requested.emit(int(Time.get_unix_time_from_system()) & 0x7FFFFFFF)
 	visible = false
 
 
 ## The profile is the thing that outlives a run.
 func _record(state: Dictionary) -> void:
 	var profile := Save.read_profile()
-	Save.write_profile(Run.record(state, profile))
+	profile = Run.record(state, profile)
+	Save.write_profile(profile)
+	run_recorded.emit(profile)
 
 
 func _build(payout: Dictionary) -> void:
@@ -206,18 +234,26 @@ func _build(payout: Dictionary) -> void:
 	var survived := bool(payout["survived"])
 	var escaped := bool(payout.get("escaped", false))
 
-	# **The end of the run gets its own screen.** Ten nights and the Giant is
-	# the whole MVP, and a player who has just done it should not be handed
-	# the same four lines they have read nine times. It stays as it was
-	# until task 0160 reworks it: no sunrise, no morning heading.
+	# The winter boss opens the credits, then the year summary and choices.
 	if _state != null and not _state.is_empty() and Run.is_over(_state):
 		_header.visible = false
 		_day.visible = false
 		_build_the_ending()
 		_continue.text = I18n.t(&"RES_NEW_FARM")
+		_play_on.text = I18n.f(&"RES_PLAY_ON", [Calendar.year_of(Calendar.date(_state))])
 		_play_on.visible = true
+		_frame.position = Vector2(80, 21)
+		_frame.custom_minimum_size = Vector2(320, 228)
+		_frame.size = _frame.custom_minimum_size
+		if not _credits_seen:
+			_credits_seen = true
+			_frame.visible = false
+			_credits.start()
 		return
 	_play_on.visible = false
+	_frame.position = Vector2(128, 30)
+	_frame.custom_minimum_size = Vector2(224, 190)
+	_frame.size = _frame.custom_minimum_size
 
 	_title.text = I18n.f(&"RES_NIGHT", [int(payout["night"]),
 		I18n.t(&"RES_SURVIVED" if survived else &"RES_WAS_LOST")])
@@ -344,38 +380,35 @@ func _build(payout: Dictionary) -> void:
 ## the state. There is no second ledger here to disagree with the first.
 func _build_the_ending() -> void:
 	var run := Run.summary(_state)
-	_title.text = I18n.t(&"RES_FARM_HELD")
+	_title.text = I18n.t(&"END_TITLE")
 	_title.theme_type_variation = UiKit.GOOD
-
-	_row(I18n.f(&"RES_RUN_LINE",
-		[int(run["days"]), int(run["nights_won"])]), "",
-		UiKit.GOOD)
+	_row(I18n.f(&"RES_RUN_LINE", [int(run["days"]), int(run["nights_won"])]), "", UiKit.GOOD)
+	_row(I18n.t(&"END_BOSSES"), str(int(run["bosses"])), UiKit.DIM)
 	_row(I18n.t(&"RES_ZOMBIES"), str(int(run["killed"])), UiKit.DIM)
-	_row(I18n.t(&"RES_GOT_THROUGH"), str(int(run["breaches"])),
-		UiKit.DIM)
-	_row(I18n.t(&"RES_STRUCTURES_LOST"),
-		str(int(run["structures_lost"])), UiKit.DIM)
-
-	var hauled: Array = []
-	for id in _sorted(run["gathered"] as Dictionary):
-		hauled.append(I18n.f(&"RES_COUNTED",
-			[int((run["gathered"] as Dictionary)[id]), Names.of(id)]))
-	if not hauled.is_empty():
-		_row(I18n.f(&"RES_GATHERED", ["  ".join(hauled.slice(0, 4))]),
-			"", UiKit.DIM)
-
+	_row(I18n.t(&"RES_STRUCTURES_LOST"), str(int(run["structures_lost"])), UiKit.DIM)
 	_gap()
 	_row(I18n.t(&"RES_BUILD_WON"), "", UiKit.GOOD)
 	var built: Array = []
 	for id in _sorted(run["build"] as Dictionary):
-		built.append(I18n.f(&"RES_COUNTED",
-			[int((run["build"] as Dictionary)[id]), Names.of(id)]))
-	_row(I18n.f(&"RES_INDENT", ["  ".join(built) if not built.is_empty()
-		else I18n.t(&"RES_NOTHING_STANDING")]), "",
-		UiKit.GOOD)
-	if not (run["technology"] as Array).is_empty():
-		_row(I18n.f(&"RES_INDENT", [", ".join(_named(
-			run["technology"] as Array))]), "", UiKit.DIM)
+		built.append(I18n.f(&"RES_COUNTED", [int((run["build"] as Dictionary)[id]), Names.of(id)]))
+	# The final farm may contain every defence: keep the choices on screen.
+	var scroll := ScrollContainer.new()
+	scroll.name = "EndingBuildScroll"
+	scroll.custom_minimum_size = Vector2(300, 48)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_lines.add_child(scroll)
+	var build := Label.new()
+	build.text = ", ".join(built) if not built.is_empty() else I18n.t(&"RES_NOTHING_STANDING")
+	build.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	build.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	build.theme_type_variation = UiKit.GOOD
+	scroll.add_child(build)
+
+
+func _credits_finished() -> void:
+	_frame.visible = true
+	_wait_for_release = true
+	_play_on.grab_focus()
 
 
 func _row(left: String, right: String, role: StringName = &"") -> void:
@@ -406,14 +439,6 @@ func _wrapped(text: String, role: StringName = &"") -> void:
 	line.custom_minimum_size = Vector2(206, 0)
 	line.theme_type_variation = role
 	_lines.add_child(line)
-
-
-## A list of ids as a list of names.
-func _named(ids: Array) -> Array:
-	var out: Array = []
-	for id in ids:
-		out.append(Names.of(StringName(id)))
-	return out
 
 
 func _gap() -> void:

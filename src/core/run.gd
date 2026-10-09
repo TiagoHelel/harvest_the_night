@@ -3,24 +3,9 @@ extends RefCounted
 
 ## When a run is over, and what it was.
 ##
-## **The MVP ends here.** Ten nights and the Giant, and then a summary that
-## answers the only question `design.md` asks of the whole thing: was the loop
-## worth going round again.
-##
-## ## Over, rather than lost
-##
-## A run ends one way: the year's last night survived (task 0151). Losing
-## costs a night and never the run - the calendar moves on, and only a boss
-## night comes back (0153) - so there is no losing end: `is_over()` asks
-## whether the last night has been beaten and nothing else.
-##
-## ## Carrying on
-##
-## Beating it offers two doors: a new run, or **endless**, which is task
-## 0070's. This file sets the flag and stops; what night eleven is made of is
-## that task's problem, and `Waves.table()` already answers an empty list past
-## the authored ten, so an endless run that arrives before 0070 does is a
-## quiet farm rather than a crash.
+## The year ends when Winter 14's boss falls. The calendar holds that date
+## until then, even when the house survives; a loss after the boss falls
+## still opens Year 2. Endless keeps that farm going through later years.
 ##
 ## ## The summary is read, not kept
 ##
@@ -38,35 +23,26 @@ static func initial() -> Dictionary:
 		# else remembers.
 		"structures_lost": 0,
 		# Set when the player chooses to carry on past the authored nights.
-		# Task 0070 is what makes night eleven worth playing.
 		"endless": false,
 	}
 
 
 # ------------------------------------------------------------------- asking
 
-## The night that ends the run: **the year's last day** (task 0151), Winter
-## 14. 0160 makes it the winter boss; everything that asks which night is
-## the last asks here.
+## The year's last boss night: Winter 14.
 static func final_night() -> int:
 	return Calendar.year_days()
 
 
-## Whether the run has been beaten: the final night survived, and no other
-## way.
-##
-## **Read from a fact that does not move, never from a count of wins**
-## (task 0151): `nights_won` is a count now, and a year with three losses in
-## it is still beaten by winning Winter 14. A night won is a night paid for
-## (`Tech.award`), so the paid list says it.
+## The winter boss has fallen, and the player has not chosen endless.
 static func is_over(state: Dictionary) -> bool:
 	return beat_the_year(state) and not bool(state["endless"])
 
 
-## Whether the year's last night has been won: what `is_over` and
-## `go_endless` both open on.
+## The boss hold releases the calendar only after the boss falls. Unlike
+## the paid list, this also counts a lost night after its boss was killed.
 static func beat_the_year(state: Dictionary) -> bool:
-	return Tech.already_paid(state, final_night())
+	return Calendar.date(state) > final_night()
 
 
 ## Whether this is the last authored night about to be fought.
@@ -93,7 +69,7 @@ static func lost_a_structure(state: Dictionary) -> void:
 ##
 ## Every line is a lookup. The build that won is the farm as it stands, which
 ## is the honest answer to "what beat it" - a list of what was standing when
-## the Giant went down rather than a history of everything ever placed.
+## the winter boss went down rather than a history of everything ever placed.
 static func summary(state: Dictionary) -> Dictionary:
 	return {
 		"days": int(state["day"]),
@@ -155,7 +131,7 @@ static func _worth_gathering(state: Dictionary) -> Dictionary:
 
 ## Carry on past the year. Task 0070 made the nights after it worth
 ## playing; this is the switch that lets a player ask for it, once the
-## year's last night is won.
+## year's winter boss has fallen.
 static func go_endless(state: Dictionary) -> bool:
 	if not beat_the_year(state):
 		return false
