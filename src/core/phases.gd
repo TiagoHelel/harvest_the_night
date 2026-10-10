@@ -287,6 +287,9 @@ static func begin_day(state: Dictionary) -> bool:
 	# water is today's: it is tonight's dry-out that turns it into growth.
 	Farming.sprinkle(state)
 	ToolTiers.morning(state)
+	# **A day in every barrel** (task 0187): the keg's and the jar's batches
+	# are credited a morning each, whatever the farmer did with the day.
+	Crafting.morning(state)
 	# **The animals' hay** (task 0184): a housed one that goes without gives
 	# nothing today.
 	Livestock.feed(state)

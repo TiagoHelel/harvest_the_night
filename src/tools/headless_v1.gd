@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 56
+const GROUPS := 57
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -125,6 +125,7 @@ func _run() -> void:
 	_task_0184_feed()
 	_task_0185_animals()
 	_task_0186_barns_night()
+	_task_0187_keg()
 
 
 func _finish() -> void:
@@ -3265,9 +3266,11 @@ func _task_0166_long_day() -> void:
 		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52, &"make_bait": 192, &"make_hay": 80}
 	var ordinary := 0
 	for id in GameData.RECIPES:
-		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty():
+		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty() \
+				and Crafting.days_of(id) == 0:
 			ordinary += 1
-	expect(batches.size() == ordinary, "every repeatable recipe has a daily budget; permanent upgrades are once per tier")
+	expect(batches.size() == ordinary,
+		"every repeatable recipe timed by the tick has a daily budget; permanent upgrades are once per tier, and a batch in a barrel is counted in mornings (0187)")
 	for id in GameData.sorted_names(batches.keys()):
 		var ticks := int(GameData.RECIPES[id]["ticks"])
 		var per_batch := 0
@@ -5406,6 +5409,161 @@ func _task_0186_barns_night() -> void:
 	expect(Livestock.is_fed(state, barn, 1) and Resources.amount(state, GameData.WOOL) == wool + 1,
 		"and the next morning its sheep eats and gives its fleece again")
 	_completed += 1
+
+
+## Task 0187: days in a barrel. A recipe may take `days` instead of `ticks`,
+## credited each morning from `Phases.begin_day`: grapes in a keg are wine on
+## the recipe's last morning and not one before, whatever the days between
+## held. The keg and the preserves jar are built by day, and each of their
+## four goods is worth its days. At 0 HP a machine stands wrecked with its
+## batch inside, aging nothing, until it is mended.
+func _task_0187_keg() -> void:
+	expect(GameData.validate().is_empty(), "the tables validate with the keg, the jar and their goods",
+		str(GameData.validate()))
+	var grape := {GameData.GRAPE: 1}
+	var wine := {GameData.WINE: 1}
+	expect(not GameData.check_recipes({&"x": {"station": &"keg", "inputs": grape, "output": wine, "ticks": 30, "days": 2}}).is_empty()
+		and not GameData.check_recipes({&"x": {"station": &"keg", "inputs": grape, "output": wine}}).is_empty()
+		and not GameData.check_recipes({&"x": {"station": &"keg", "inputs": grape, "output": wine, "days": 0}}).is_empty()
+		and GameData.check_recipes({&"x": {"station": &"keg", "inputs": grape, "output": wine, "days": 2}}).is_empty(),
+		"a recipe takes ticks or days: exactly one of them, and more than none")
+
+	# **Four goods, each worth its days.**
+	var makes := {&"make_wine": [&"keg", GameData.WINE], &"make_juice": [&"keg", GameData.JUICE],
+		&"make_jelly": [&"preserves_jar", GameData.JELLY], &"make_pickles": [&"preserves_jar", GameData.PICKLES]}
+	for id in GameData.sorted_names(makes.keys()):
+		var recipe: Dictionary = GameData.RECIPES[id]
+		var made: StringName = makes[id][1]
+		var margin := GameData._worth(recipe["output"]) - GameData._worth(recipe["inputs"])
+		expect(recipe["station"] == makes[id][0] and Crafting.days_of(id) > 0 and not recipe.has("ticks")
+			and (recipe["output"] as Dictionary).has(made)
+			and GameData.group_members(&"artisan_goods").has(made) and Names.KEYS.has(made) and Names.KEYS.has(id),
+			"%s: at the %s, in days, an artisan good with a name" % [id, makes[id][0]])
+		expect(margin > 0 and margin >= GameData.AGED_MARGIN_PER_DAY * Crafting.days_of(id),
+			"%s adds $%d over %d mornings: a margin worth its days" % [id, margin, Crafting.days_of(id)])
+	var cheap := GameData.SELL_PRICE.duplicate()
+	cheap[GameData.WINE] = int(cheap[GameData.GRAPE]) + 1
+	expect(not GameData.check_chain({&"make_wine": GameData.RECIPES[&"make_wine"]}, cheap).is_empty(),
+		"a wine a dollar dearer than its grapes is refused: a week in a keg has to pay")
+	expect(GameData.RECIPES[&"make_wine"]["inputs"].has(GameData.GRAPE)
+		and GameData.CROPS.has(GameData.MELON) and GameData.RECIPES[&"make_juice"]["inputs"].has(GameData.MELON),
+		"the keg makes wine from grapes and juice from another fruit")
+	for machine in [&"keg", &"preserves_jar"]:
+		expect(Building.wrecks(machine) and Pathing.is_prey(machine) and Names.KEYS.has(machine)
+			and Crafting.is_station(machine),
+			"the %s is a station with a name, prey to breakers, and wrecks rather than falls" % machine)
+
+	# **Built by day.**
+	var state := State.create(1870)
+	Resources.gain(state, {GameData.WOOD: 300, GameData.IRON: 30, GameData.STONE: 200, GameData.MONEY: 900})
+	expect(Building.catalogue(state).has(&"keg") and Building.catalogue(state).has(&"preserves_jar"),
+		"the keg and the jar are in the day's build list")
+	var keg := _spot_for(state, &"keg")
+	expect(Building.place(state, &"keg", keg), "a keg goes up by day", str(keg))
+	var jar := _spot_for(state, &"preserves_jar")
+	expect(Building.place(state, &"preserves_jar", jar), "and a preserves jar", str(jar))
+
+	# **Grapes are wine after the recipe's mornings and not one before.**
+	var days := Crafting.days_of(&"make_wine")
+	Resources.add(state, GameData.GRAPE, 3)
+	expect(Crafting.start(state, keg, &"make_wine") and Resources.amount(state, GameData.GRAPE) == 0
+		and Crafting.progress_at(state, keg) == [days, days],
+		"three grapes go in as the batch starts, %d mornings to go" % days,
+		str(Crafting.progress_at(state, keg)))
+	Sim.advance(state, GameData.DAY_TICKS / 2)
+	expect(Crafting.progress_at(state, keg) == [days, days],
+		"half a day of ticks ages it not at all: days are the morning's",
+		str(Crafting.progress_at(state, keg)))
+	var early := true
+	for morning in days - 1:
+		# **A day spent elsewhere still counts**: the farmer is nowhere near
+		# the keg, and a third of a day passes between two of the mornings.
+		if morning == 2:
+			Sim.advance(state, GameData.DAY_TICKS / 3)
+		_next_morning(state)
+		early = early and Resources.amount(state, GameData.WINE) == 0 \
+			and int(Crafting.progress_at(state, keg)[0]) == days - morning - 1
+	expect(early and Crafting.making(state, keg) == &"make_wine",
+		"no wine a morning early: one day off the count each morning, a day spent elsewhere among them",
+		str(Crafting.progress_at(state, keg)))
+	_next_morning(state)
+	expect(Resources.amount(state, GameData.WINE) == 3 and not Crafting.busy(state, keg)
+		and int(Crafting.made_at(state, keg).get(&"make_wine", 0)) == 1,
+		"and on the %dth morning, three wine and an empty keg" % days,
+		str(Resources.amount(state, GameData.WINE)))
+
+	# **Waiting on materials, then started by the tick.**
+	expect(Crafting.start(state, keg, &"make_juice") and Crafting.is_stalled(state, keg),
+		"juice queued with no melons waits")
+	_next_morning(state)
+	expect(Crafting.is_stalled(state, keg) and Crafting.progress_at(state, keg) == [0, 0],
+		"and a morning does not count a batch that never started")
+	Resources.add(state, GameData.MELON, 3)
+	Sim.tick(state)
+	expect(Crafting.progress_at(state, keg) == [Crafting.days_of(&"make_juice"), Crafting.days_of(&"make_juice")]
+		and Resources.amount(state, GameData.MELON) == 0,
+		"the melons arrive, and the day's tick starts the batch", str(Crafting.progress_at(state, keg)))
+	for _morning in Crafting.days_of(&"make_juice"):
+		_next_morning(state)
+	expect(Resources.amount(state, GameData.JUICE) == 3, "juice after its mornings")
+
+	# **The jar**, both of its recipes back to back in one queue.
+	Resources.gain(state, {GameData.STRAWBERRY: 3, GameData.PEPPER: 3})
+	expect(Crafting.start(state, jar, &"make_jelly") and Crafting.start(state, jar, &"make_pickles"),
+		"jelly then pickles queued at the jar")
+	for _morning in Crafting.days_of(&"make_jelly"):
+		_next_morning(state)
+	expect(Resources.amount(state, GameData.JELLY) == 3 and Crafting.making(state, jar) == &"make_pickles"
+		and Resources.amount(state, GameData.PEPPER) == 0
+		and Crafting.progress_at(state, jar)[0] == Crafting.days_of(&"make_pickles"),
+		"jelly on its morning, and the pickles step up, pay and start their own count",
+		str(Crafting.progress_at(state, jar)))
+	for _morning in Crafting.days_of(&"make_pickles"):
+		_next_morning(state)
+	expect(Resources.amount(state, GameData.PICKLES) == 3 and not Crafting.busy(state, jar),
+		"and pickles on theirs")
+
+	# **Wrecked, never lost**: the batch stays inside and ages nothing.
+	Resources.add(state, GameData.GRAPE, 3)
+	Crafting.start(state, keg, &"make_wine")
+	_next_morning(state)
+	_next_morning(state)
+	var lost := Run.structures_lost(state)
+	Farm.damage(state, keg, 9999)
+	var standing := true
+	for part in Building.parts_at(state, keg):
+		standing = standing and StringName(Farm.occupant(state, part).get("id", &"")) == &"keg" \
+			and Farm.rubble_at(state, part) == &""
+	expect(Building.is_wrecked(state, keg) and standing and Run.structures_lost(state) == lost + 1
+		and Crafting.making(state, keg) == &"make_wine" and Crafting.progress_at(state, keg)[0] == days - 2,
+		"a keg at 0 HP stands wrecked, no rubble, its wine inside with %d mornings to go" % (days - 2),
+		str(Crafting.progress_at(state, keg)))
+	expect(not Pathing.prey_cells(state).has(keg), "and it is nothing a breaker comes for any more")
+	_next_morning(state)
+	Sim.advance(state, 30)
+	Resources.add(state, GameData.GRAPE, 3)
+	expect(Crafting.progress_at(state, keg)[0] == days - 2 and not Crafting.can_queue(state, keg, &"make_wine")
+		and Interact.verb_at(state, keg) == &"repair",
+		"wrecked, a morning and the ticks age it not at all; it takes nothing and offers only to be mended",
+		"%s, %s" % [str(Crafting.progress_at(state, keg)), Interact.verb_at(state, keg)])
+	Interact.complete(state, keg, &"repair")
+	expect(not Building.is_wrecked(state, keg) and Crafting.can_queue(state, keg, &"make_wine")
+		and Interact.verb_at(state, keg) in [&"repair", &"craft"],
+		"its first hit point back makes it a keg again", str(Interact.verb_at(state, keg)))
+	for _morning in days - 2:
+		_next_morning(state)
+	expect(Resources.amount(state, GameData.WINE) == 6,
+		"and the mornings it lost come after: the wine on its count", str(Resources.amount(state, GameData.WINE)))
+	_completed += 1
+
+
+## The top-left cell of the first place a building of this id fits, in cell
+## order, or (-1, -1).
+func _spot_for(state: Dictionary, id: StringName) -> Vector2i:
+	for idx in Grid.CELLS:
+		if Building.can_place(state, id, Grid.cell(idx)):
+			return Grid.cell(idx)
+	return Vector2i(-1, -1)
 
 
 ## Who lives in the home on `cell`, by kind and in order.

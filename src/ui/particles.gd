@@ -404,7 +404,10 @@ func _watch(delta: float) -> void:
 		var id: StringName = on["id"]
 		standing[int(idx)] = id
 		var at := (Vector2(Grid.cell(int(idx))) + Vector2(0.5, 0.4)) * tile
-		if id in [&"kitchen", &"workshop", &"generator", &"house"]:
+		# The jar's stovepipe too (task 0187), while it works; idle, it is
+		# any other building, and smokes only as a wreck.
+		if id in [&"kitchen", &"workshop", &"generator", &"house"] or (id == &"preserves_jar"
+				and WorldView.station_running(_state, id, Building.anchor_of(_state, Grid.cell(int(idx))))):
 			if id != &"house" and not WorldView.station_running(_state, id, Building.anchor_of(_state, Grid.cell(int(idx)))):
 				continue
 			var anchor: Array = on.get("anchor", [Grid.cell(int(idx)).x, Grid.cell(int(idx)).y])

@@ -169,8 +169,11 @@ static func recipe(id: StringName) -> String:
 		[_costs(one.get("inputs", {}) as Dictionary)]))
 	lines.append(I18n.f(&"DESC_MAKES",
 		[_amounts(one.get("output", {}) as Dictionary)]))
+	# Days for a batch in a barrel (task 0187), seconds at the bench.
+	var days := int(one.get("days", 0))
 	lines.append(I18n.f(&"DESC_TAKES",
-		[_seconds(int(one.get("ticks", 0)))]))
+		[I18n.plural(&"DESC_DAYS", days, [days]) if days > 0
+			else _seconds(int(one.get("ticks", 0)))]))
 	lines.append(I18n.f(&"DESC_AT_THE",
 		[Names.of(StringName(one.get("station", &"")))]))
 	for out in one["output"]:

@@ -4984,10 +4984,22 @@ func _task_0032_oil() -> void:
 	expect(corn_route, "corn presses into oil")
 	expect(fish_route, "and so does fish")
 
-	# **Oil is the most valuable thing on the farm to sell.**
+	# **Oil is the most valuable thing on the farm to sell** - that a day
+	# makes. Since task 0187 the goods that take days in a keg or a jar sell
+	# above it, on purpose (plan section 3.5), and `check_chain` prices their
+	# days; they are the only ones left out here.
+	var aged := {}
+	for id in GameData.sorted_names(GameData.RECIPES.keys()):
+		if Crafting.days_of(id) > 0:
+			for out in (GameData.RECIPES[id]["output"] as Dictionary):
+				aged[out] = true
+	expect(not aged.has(GameData.OIL) and not aged.is_empty(), "the goods left out are the ones that take days",
+		str(aged.keys()))
 	var dearest := &""
 	var best := -1
 	for res in GameData.sorted_names(GameData.SELL_PRICE.keys()):
+		if aged.has(res):
+			continue
 		if int(GameData.SELL_PRICE[res]) > best:
 			best = int(GameData.SELL_PRICE[res])
 			dearest = res
@@ -14511,8 +14523,9 @@ func _task_0082_shots() -> void:
 	# since 0180: the fishing bar mid-catch. Sixty-four since 0181: a worm
 	# on the iron rod's hook. Sixty-five since 0182: the fish book.
 	# Sixty-six since 0183: the coop and the barn. Sixty-seven since 0185:
-	# the barnyard. Sixty-eight since 0186: barns at night.
-	expect(names.size() == 68,
+	# the barnyard. Sixty-eight since 0186: barns at night. Sixty-nine since
+	# 0187: the keg and the jar.
+	expect(names.size() == 69,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

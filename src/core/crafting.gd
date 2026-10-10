@@ -41,6 +41,14 @@ extends RefCounted
 ## things. A recipe whose output *is* a resource - oil, gunpowder, food - goes
 ## to the ledger instead, decided by what the output is rather than by which
 ## recipe made it.
+##
+## ## Days in a barrel
+##
+## Since task 0187 a recipe may take `days` instead of `ticks`: the keg's and
+## the preserves jar's. Its batch is paid for when it starts, like any other,
+## and then counted in mornings - `morning()`, from `Phases.begin_day` - and
+## never by the tick, so a week of wine is seven mornings whatever the farmer
+## does with the days between. `progress_at` answers in days for it.
 
 
 ## The station on this cell is gone. Drop its queue and its record.
@@ -128,6 +136,13 @@ static func start_at(state: Dictionary, cell: Vector2i) -> bool:
 	return start(state, Building.anchor_of(state, cell),
 		selected_at(state, id))
 
+## **Days, not ticks** (task 0187): how many mornings this recipe takes, or 0
+## for one timed by the tick at the bench.
+static func days_of(recipe_id: StringName) -> int:
+	var recipe: Variant = GameData.RECIPES.get(recipe_id, null)
+	return 0 if recipe == null else int((recipe as Dictionary).get("days", 0))
+
+
 ## Every recipe a station can make, in a fixed order.
 static func recipes_at(station: StringName) -> Array:
 	var out: Array = []
@@ -156,6 +171,9 @@ static func can_queue(state: Dictionary, cell: Vector2i,
 		return false
 	var on := Farm.occupant(state, cell)
 	if on.is_empty() or on["id"] != (recipe as Dictionary)["station"]:
+		return false
+	# **A wrecked machine takes nothing** (task 0187) until it is mended.
+	if Building.is_wrecked(state, cell):
 		return false
 	return room_at(state, cell) > 0 and ToolTiers.why_not(state, recipe_id).is_empty()
 
@@ -208,6 +226,7 @@ static func room_at(state: Dictionary, cell: Vector2i) -> int:
 
 ## Ticks left on the item at the front, and how many it started with. For the
 ## bar on the panel. Zero when nothing is running or nothing can be paid for.
+## **Mornings**, for a batch that takes days (task 0187).
 static func progress_at(state: Dictionary, cell: Vector2i) -> Array:
 	var at := job(state, cell)
 	if at.is_empty():
@@ -323,6 +342,14 @@ static func _begin_front(state: Dictionary, at: Dictionary) -> void:
 		at["left"] = 0
 		at["total"] = 0
 		return
+	# **A batch that takes days** (task 0187) is counted in mornings, and
+	# neither steady hands nor a brownout touches it: a barrel ages at its
+	# own pace.
+	var days := days_of(StringName(lined_up[0]))
+	if days > 0:
+		at["left"] = days
+		at["total"] = days
+		return
 	# The batch is costed when it starts. A brown-out half way through does not
 	# lengthen work already committed - the corn is in the hopper.
 	# **`craft_percent` was declared and read by nothing.** "Steady hands"
@@ -358,6 +385,10 @@ static func tick(state: Dictionary) -> void:
 	var emptied: Array = []
 	for idx in keys:
 		var at: Dictionary = all[idx]
+		# **A wrecked machine stands still** (task 0187): no batch starts in
+		# it and none ages until it is mended.
+		if Building.is_wrecked(state, Grid.cell(int(idx))):
+			continue
 
 		# **A stalled front item retries.** `total` of zero means the inputs
 		# were not there when it stepped up; every tick asks again, so a queue
@@ -369,23 +400,59 @@ static func tick(state: Dictionary) -> void:
 				continue
 			continue        # it starts this tick; the first of its ticks is next
 
+		# **Days are the morning's** (task 0187): a batch in a barrel ages in
+		# `morning()`, never by the tick.
+		if days_of(StringName((at["queue"] as Array)[0])) > 0:
+			continue
+
 		at["left"] = int(at["left"]) - 1
 		if int(at["left"]) > 0:
 			continue
-
-		# Off the front, delivered, and the next one steps up and pays.
-		var lined_up: Array = at["queue"]
-		var recipe_id := StringName(lined_up[0])
-		lined_up.remove_at(0)
-		_deliver(state, recipe_id)
-		_record(state, Grid.cell(int(idx)), recipe_id)
-		if lined_up.is_empty():
+		if _finish_front(state, int(idx), at):
 			emptied.append(idx)
-		else:
-			_begin_front(state, at)
 
 	for idx in emptied:
 		all.erase(idx)
+
+
+## **A day for every batch that takes days** (task 0187), once each morning
+## from `Phases.begin_day`. A batch on its last day is delivered, and the next
+## in the queue steps up and pays: its first day is tomorrow's. A wrecked
+## machine's batch waits, aging nothing, and one still waiting on its
+## materials is the day's ticks' to start.
+static func morning(state: Dictionary) -> void:
+	var all: Dictionary = state["crafting"]
+	var keys: Array = all.keys()
+	keys.sort()
+	var emptied: Array = []
+	for idx in keys:
+		var at: Dictionary = all[idx]
+		var lined_up: Array = at["queue"]
+		if lined_up.is_empty() or int(at["total"]) <= 0 \
+				or days_of(StringName(lined_up[0])) <= 0 \
+				or Building.is_wrecked(state, Grid.cell(int(idx))):
+			continue
+		at["left"] = int(at["left"]) - 1
+		if int(at["left"]) > 0:
+			continue
+		if _finish_front(state, int(idx), at):
+			emptied.append(idx)
+	for idx in emptied:
+		all.erase(idx)
+
+
+## Off the front, delivered and written down, and the next one steps up and
+## pays. True when that left the queue empty.
+static func _finish_front(state: Dictionary, idx: int, at: Dictionary) -> bool:
+	var lined_up: Array = at["queue"]
+	var recipe_id := StringName(lined_up[0])
+	lined_up.remove_at(0)
+	_deliver(state, recipe_id)
+	_record(state, Grid.cell(idx), recipe_id)
+	if lined_up.is_empty():
+		return true
+	_begin_front(state, at)
+	return false
 
 
 ## What a station has delivered in total, and on which tick it last did.

@@ -1,7 +1,7 @@
 # 0187 - Days in a barrel: the keg and the preserves jar
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0184, 0168, 0149, 0186
 - **Likely files:** src/core/crafting.gd, src/core/game_data.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

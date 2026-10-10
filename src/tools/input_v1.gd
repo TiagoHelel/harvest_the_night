@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 40
+const V1_CASES := 41
 
 
 func _process(delta: float) -> bool:
@@ -90,6 +90,7 @@ func _run() -> void:
 	await _case_0182_book()
 	await _case_0183_barn()
 	await _case_0185_truffle()
+	await _case_0187_keg()
 	_finish()
 
 
@@ -2916,5 +2917,45 @@ func _case_0185_truffle() -> void:
 		"SPACE to dig the truffle up")
 	expect(Resources.amount(state, GameData.TRUFFLE) == truffles + 1 and Livestock.spots(state).is_empty(),
 		"one truffle, and the spot is gone")
+	await close_scene()
+	_completed += 1
+
+
+## Task 0187: wine queued at a keg from its panel. A keg stands just north
+## of the farmer, who faces it; its panel lists wine, a click on that row
+## starts a batch of grapes, and the panel counts it in days, not seconds.
+func _case_0187_keg() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	Resources.gain(state, {GameData.WOOD: 100, GameData.IRON: 10, GameData.MONEY: 200,
+		GameData.GRAPE: 3})
+	var here := Player.cell(state)
+	var keg := Vector2i(-1, -1)
+	for dy in range(-6, 7):
+		for dx in range(-6, 7):
+			var at := here + Vector2i(dx, dy)
+			if keg.x < 0 and Building.can_place(state, &"keg", at) \
+					and Farm.walkable(state, at + Vector2i(0, 2)):
+				keg = at
+	expect(keg.x >= 0 and Building.place(state, &"keg", keg), "fixture: a keg near the farmer", str(keg))
+	_stand_at(state, keg + Vector2i(0, 2), Player.NORTH)
+	await frames(3)
+	var panel := require_control("WorkshopPanel") as Control
+	expect(panel != null and panel.visible, "facing the keg, its panel is up")
+	await click_control("make_make_wine")
+	await until(func() -> bool: return Crafting.making(state, keg) == &"make_wine",
+		"a click on wine in the keg's panel")
+	var days := Crafting.days_of(&"make_wine")
+	expect(Resources.amount(state, GameData.GRAPE) == 0 and Crafting.progress_at(state, keg) == [days, days],
+		"the grapes go in and the keg counts %d mornings" % days, str(Crafting.progress_at(state, keg)))
+	await frames(2)
+	var line := require_control("WorkshopProgress") as Label
+	expect(line != null and line.text == I18n.plural(&"WORK_AGING", days, [Names.of(&"make_wine"), days]),
+		"the panel counts the batch in days, not seconds", line.text if line != null else "")
 	await close_scene()
 	_completed += 1

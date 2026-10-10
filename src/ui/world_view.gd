@@ -1242,7 +1242,8 @@ func _refresh() -> void:
 			sprite.material = _season.roof_material()
 		if _season.season() == SeasonView.WINTER and id in SeasonView.CAPPED:
 			_cap(sprite, _art_for(on, cell), footprint != Vector2i.ONE)
-		if id in [&"workshop", &"kitchen", &"press", &"generator"]:
+		# Every station with a recipe (the keg and the jar since task 0187).
+		if Crafting.is_station(id) or id == &"generator":
 			sprite.set_meta("station_id", id)
 			sprite.set_meta("station_anchor", anchor)
 			_stations.append(sprite)
@@ -1289,10 +1290,13 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 		return true             # one drawing over the whole footprint
 	# **Chipped once the axe has bitten** (task 0177): the pack's second
 	# state, until the last swing takes the whole thing down. A coop or a
-	# barn hurt or wrecked (task 0186) wears its state's art.
+	# barn hurt or wrecked (task 0186) wears its state's art, and a keg or a
+	# jar (task 0187) its working one too.
 	var art := struck_art(_state, id, anchor)
 	if Building.wrecks(id):
-		art = _worn_home(id, Farm.occupant(_state, anchor))
+		art = _worn_stand_in(id, Farm.occupant(_state, anchor))
+	if Crafting.is_station(id):
+		art = _stand_in_station_art(id, Farm.occupant(_state, anchor), anchor)
 	if art != id:
 		file = PlaceholderArt.texture_path(PlaceholderArt.art_path(art, 0))
 	var sprite := Sprite2D.new()
@@ -1310,15 +1314,34 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 		for x in size.x:
 			logical_cells.append(Grid.index(anchor + Vector2i(x, y)))
 	sprite.set_meta("logical_cells", logical_cells)
+	# **A stand-in station changes with its work** (task 0187): the keg and
+	# the jar join the stations the frame's refresh looks at.
+	if Crafting.is_station(id):
+		sprite.set_meta("station_id", id)
+		sprite.set_meta("station_anchor", anchor)
+		sprite.set_meta("stand_in", true)
+		_stations.append(sprite)
 	_occupants.add_child(sprite)
 	_sprites.append(sprite)
 	return true
 
 
-## A coop or a barn as the night left it (task 0186): `<id>_wreck` at 0 HP,
-## `<id>_hurt` past the wear threshold, itself otherwise - each only where the
-## registry or the real art has it.
-func _worn_home(id: StringName, on: Dictionary) -> StringName:
+## A stand-in station's state (task 0187): hurt or wrecked as
+## `_worn_stand_in` says, else `<id>_active` while it works, else itself -
+## the order `_station_art` keeps for real art, so a damaged machine still
+## reads as damaged while it works.
+func _stand_in_station_art(id: StringName, on: Dictionary, anchor: Vector2i) -> StringName:
+	var worn := _worn_stand_in(id, on)
+	if worn != id or not station_running(_state, id, anchor):
+		return worn
+	var active := StringName("%s_active" % id)
+	return active if not PlaceholderArt.art(active).is_empty() or _exists(active) else id
+
+
+## A building as the night left it (task 0186; the keg and the jar since
+## 0187): `<id>_wreck` at 0 HP, `<id>_hurt` past the wear threshold, itself
+## otherwise - each only where the registry or the real art has it.
+func _worn_stand_in(id: StringName, on: Dictionary) -> StringName:
 	if int(on.get("hp", 1)) <= 0:
 		var wreck := StringName("%s_wreck" % id)
 		if not PlaceholderArt.art(wreck).is_empty() or _exists(wreck):
@@ -2234,7 +2257,8 @@ static func _prop_variant(id: StringName, cell: Vector2i) -> StringName:
 static func station_running(state: Dictionary, id: StringName, anchor: Vector2i) -> bool:
 	if id == &"generator":
 		return Power.is_running(state, anchor)
-	if id not in [&"workshop", &"kitchen", &"press"]:
+	# Any station with a recipe, and since task 0187 never a wrecked one.
+	if not Crafting.is_station(id) or Building.is_wrecked(state, anchor):
 		return false
 	return Crafting.busy(state, anchor) and not Crafting.is_stalled(state, anchor) \
 		and int(Crafting.progress_at(state, anchor)[0]) > 0
@@ -2259,6 +2283,15 @@ func _refresh_stations(delta: float) -> void:
 		var anchor: Vector2i = sprite.get_meta("station_anchor")
 		var on := Farm.occupant(_state, anchor)
 		if on.is_empty():
+			continue
+		# A stand-in (task 0187) swaps to its state's stand-in and tint; every
+		# state of one machine shares its scale.
+		if sprite.has_meta("stand_in"):
+			var art := _stand_in_station_art(sprite.get_meta("station_id"), on, anchor)
+			if art != StringName(sprite.get_meta("prop_art")):
+				sprite.set_meta("prop_art", art)
+				sprite.texture = load(PlaceholderArt.texture_path(PlaceholderArt.art_path(art, 0)))
+				sprite.modulate = PlaceholderArt.art_tint(art)
 			continue
 		var texture := _texture_for(_station_art(sprite.get_meta("station_id"), on, anchor))
 		if sprite.texture != texture:

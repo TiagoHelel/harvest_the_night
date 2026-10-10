@@ -141,7 +141,9 @@ static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 		# could be built and then stood next to uselessly. A fourth station is
 		# a `BUILDINGS` entry and some recipes, and nothing here changes.
 		if Crafting.is_station(on["id"]):
-			return &"craft"
+			# A wrecked machine (task 0187) makes nothing until it is
+			# mended; with nothing to mend it with, it offers nothing.
+			return &"" if Building.is_wrecked(state, cell) else &"craft"
 		# A loose animal, or since task 0183 a coop's or a barn's door.
 		if Livestock.is_animal(on["id"]) or Livestock.is_home(on["id"]):
 			return Livestock.verb_at(state, cell)

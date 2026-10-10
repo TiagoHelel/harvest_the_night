@@ -101,6 +101,8 @@ BLD_IRON_SPRINKLER,0,iron sprinkler,aspersor de ferro
 BLD_GOLD_SPRINKLER,0,gold sprinkler,aspersor de ouro
 BLD_COOP,0,coop,galinheiro
 BLD_BARN,0,barn,celeiro
+BLD_KEG,0,keg,barril
+BLD_PRESERVES_JAR,0,preserves jar,pote de conserva
 BLD_KITCHEN,0,kitchen,cozinha
 BLD_PRESS,0,press,prensa
 BLD_WORKSHOP,0,workshop,oficina
@@ -161,6 +163,8 @@ DESC_SEED_COST,0,one packet to sow; buy for $%d,um pacote para plantar; compra p
 DESC_SELLS_FOR,0,sells for $%d,vende por $%d
 DESC_SUPPLIES,0,supplies %d power,fornece %d de energia
 DESC_TAKES,0,takes %s,leva %s
+DESC_DAYS,0,%d day,%d dia
+DESC_DAYS.other,0,%d days,%d dias
 DESC_TECH_COST,0,costs %d tech,custa %d de tecnologia
 DESC_TILE_EVERY,0,a tile every %s,um ladrilho a cada %s
 DESC_WINDS_UP,0,winds up before it swings,toma impulso antes de bater
@@ -248,6 +252,10 @@ ITEM_EGG,0,egg,ovo
 ITEM_MILK,0,milk,leite
 ITEM_WOOL,0,wool,lã
 ITEM_TRUFFLE,0,truffle,trufa
+ITEM_WINE,0,wine,vinho
+ITEM_JUICE,0,juice,suco
+ITEM_JELLY,0,jelly,geleia
+ITEM_PICKLES,0,pickles,picles
 ITEM_FOOD,0,food,comida
 ITEM_GUNPOWDER,0,gunpowder,pólvora
 ITEM_INCENDIARY,0,incendiary,incendiária
@@ -332,6 +340,10 @@ REC_COOK_MEAL,0,cook meal,cozinhar refeição
 REC_COOK_ROAST,0,cook roast,fazer assado
 REC_MAKE_BAIT,0,make bait,fazer isca
 REC_MAKE_HAY,0,make hay,fazer feno
+REC_MAKE_WINE,0,make wine,fazer vinho
+REC_MAKE_JUICE,0,make juice,fazer suco
+REC_MAKE_JELLY,0,make jelly,fazer geleia
+REC_MAKE_PICKLES,0,make pickles,fazer picles
 REC_FENCE_KIT,0,fence kit,kit de cerca
 REC_MAKE_GUNPOWDER,0,make gunpowder,fazer pólvora
 REC_MAKE_INCENDIARY,0,make incendiary,fazer incendiária
@@ -515,6 +527,8 @@ WORK_AWAY_ONE,0,%d %s,%d %s
 WORK_IDLE,0,idle,parada
 WORK_MAKE,0,- MAKE,- FAZER
 WORK_MAKING,0,%s  %.1fs,%s  %.1fs
+WORK_AGING,0,%s  %d day left,%s  falta %d dia
+WORK_AGING.other,0,%s  %d days left,%s  faltam %d dias
 WORK_QUEUED,0,%d. %s,%d. %s
 WORK_QUEUED_RUNNING,0,%d. %s  (running),%d. %s  (fazendo)
 WORK_ROOM,0,  %d slot free,  %d lugar livre

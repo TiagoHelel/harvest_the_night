@@ -240,6 +240,13 @@ const MILK := &"milk"
 ## truffles a fed pig noses up on the grass round its barn.
 const WOOL := &"wool"
 const TRUFFLE := &"truffle"
+## **The artisan goods** (task 0187; plan section 3.5): what the keg and the
+## preserves jar make of the farm's fruit and vegetables over days - wine and
+## juice, jelly and pickles.
+const WINE := &"wine"
+const JUICE := &"juice"
+const JELLY := &"jelly"
+const PICKLES := &"pickles"
 const OIL := &"oil"
 const WHEAT := &"wheat"
 const CORN := &"corn"
@@ -287,6 +294,7 @@ const RESOURCES: Array = [
 	CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
 	OLD_CATFISH, GOLDEN_QUEEN, GHOST_PIKE, ICE_STURGEON,
 	WORM, BAIT, STRAW, HAY, EGG, MILK, WOOL, TRUFFLE,
+	WINE, JUICE, JELLY, PICKLES,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
@@ -348,6 +356,15 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	# oil (task 0185).
 	WOOL: 10,                        # LEVER: money each, 6-14
 	TRUFFLE: 20,                     # LEVER: money each, 12-25, under oil
+	# **The artisan goods** (task 0187) are the only things on the farm worth
+	# more than oil, and on purpose: plan section 3.5's road for the player
+	# who wants to farm money, where a wine sells for far more than its
+	# grapes. They take days in a machine, never a day's work, so oil is
+	# still the dearest thing a day makes - 0032's assert, narrowed to that.
+	WINE: 60,                        # LEVER: money each, 40-80
+	JUICE: 45,                       # LEVER: money each, 30-60
+	JELLY: 40,                       # LEVER: money each, 30-60
+	PICKLES: 25,                     # LEVER: money each, 15-35
 	# **The most valuable thing on the farm to sell, and that is the point.**
 	# Four corn is $20 of crop; pressing it is twenty seconds and turns it into
 	# $26 of oil. So the press pays for itself - and then every drop of it is
@@ -916,10 +933,47 @@ const RECIPES: Dictionary = {
 		"output": {HAY: 1},             # LEVER: hay a straw makes, 1-3
 		"ticks": DAY_TICKS * 3 / 240,   # LEVER: fraction of a day
 	},
+	# **Days in a barrel** (task 0187; plan section 3.5): a recipe may take
+	# `days` instead of `ticks`. Its batch is credited a day each morning,
+	# from `Phases.begin_day`, never by the tick - so grapes put in today are
+	# wine on the seventh morning, whatever the farmer does with the days
+	# between. The keg ages grapes into wine and melons into juice; the
+	# preserves jar sets strawberries into jelly and peppers into pickles:
+	# a crop of every growing season, and winter lives off the barrels.
+	&"make_wine": {
+		"station": &"keg",
+		"inputs": {GRAPE: 3},           # LEVER: grapes a batch, 1-5
+		"output": {WINE: 3},
+		"days": 7,                      # LEVER: mornings, 4-10
+	},
+	&"make_juice": {
+		"station": &"keg",
+		"inputs": {MELON: 3},           # LEVER: melons a batch, 1-5
+		"output": {JUICE: 3},
+		"days": 4,                      # LEVER: mornings, 2-7
+	},
+	&"make_jelly": {
+		"station": &"preserves_jar",
+		"inputs": {STRAWBERRY: 3},      # LEVER: strawberries a batch, 1-5
+		"output": {JELLY: 3},
+		"days": 3,                      # LEVER: mornings, 2-5
+	},
+	&"make_pickles": {
+		"station": &"preserves_jar",
+		"inputs": {PEPPER: 3},          # LEVER: peppers a batch, 1-5
+		"output": {PICKLES: 3},
+		"days": 3,                      # LEVER: mornings, 2-5
+	},
 }
 
 ## How many items a production building may have queued at once.
 const QUEUE_LENGTH := 5                 # LEVER: items, 3-10
+
+## **A day in a barrel has to pay** (task 0187): a recipe that takes days
+## adds at least this much to its inputs' worth for every morning it holds
+## its machine (`check_chain`), or nobody would leave fruit in a keg for a
+## week.
+const AGED_MARGIN_PER_DAY := 10         # LEVER: money a batch adds a morning, 5-20
 
 
 # ================================================================== buildings
@@ -1033,6 +1087,26 @@ const BUILDINGS: Dictionary = {
 		"energy_draw": 0,
 		"size": Vector2i(5, 4),         # LEVER: cells, up to the 7x4 site
 		"capacity": 4,                  # LEVER: animals it holds, 2-8
+		"wrecks": true,
+	},
+	# **The artisan machines** (task 0187; plan section 3.5), built by day:
+	# the keg ages fruit into wine and juice, the preserves jar sets jelly
+	# and pickles. Breakers hunt them like any building with no path cost.
+	# **Wrecked, never lost**, as the coop and the barn are (0186): a keg
+	# holds a week of grapes, and rubble would pour it out in one night. At
+	# 0 HP it stands with its batch inside, aging nothing, until it is mended.
+	&"keg": {
+		"hp": 60,                       # LEVER: hit points, 30-120
+		"cost": {WOOD: 30, IRON: 3, MONEY: 50},  # LEVER: wood, iron and money
+		"energy_draw": 0,
+		"size": Vector2i(2, 2),         # LEVER: cells; 0188 settles A031's
+		"wrecks": true,
+	},
+	&"preserves_jar": {
+		"hp": 50,                       # LEVER: hit points, 30-120
+		"cost": {STONE: 20, WOOD: 10, MONEY: 50},  # LEVER: stone, wood and money
+		"energy_draw": 0,
+		"size": Vector2i(2, 2),         # LEVER: cells; 0188 settles A031's
 		"wrecks": true,
 	},
 }
@@ -1420,7 +1494,7 @@ const RESOURCE_GROUPS: Array = [
 	# cheapest first, and a bait at $2 would be cheaper than any of them.
 	{"name": &"bait", "members": [WORM, BAIT]},
 	{"name": &"animal_goods", "members": [EGG, MILK, WOOL, TRUFFLE, MEAT]},
-	{"name": &"artisan_goods", "members": [FOOD, OIL]},
+	{"name": &"artisan_goods", "members": [FOOD, OIL, WINE, JUICE, JELLY, PICKLES]},
 	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
 	{"name": &"night_leftovers", "members": []},
 	{"name": &"farm", "members": [MONEY, ENERGY, TECH]},
@@ -3118,6 +3192,14 @@ static func check_recipes(recipes: Dictionary) -> Array:
 		if not BUILDINGS.has(recipe["station"]):
 			errors.append("recipe '%s' wants unknown station '%s'"
 				% [recipe_id, recipe["station"]])
+		# **Ticks or days, exactly one** (task 0187): a job is timed by the
+		# tick at the bench or credited a day a morning - never both, and
+		# never neither.
+		var timed := int(recipe.has("ticks")) + int(recipe.has("days"))
+		if timed != 1:
+			errors.append("recipe '%s' must take ticks or days - exactly one of them" % recipe_id)
+		elif int(recipe.get("ticks", recipe.get("days", 0))) <= 0:
+			errors.append("recipe '%s' takes no time at all" % recipe_id)
 		for res in (recipe["inputs"] as Dictionary):
 			if not RESOURCES.has(res) and not is_any_of(StringName(res)):
 				errors.append("recipe '%s' takes unknown '%s'"
@@ -3539,6 +3621,11 @@ static func check_chain(recipes: Dictionary, prices: Dictionary) -> Array:
 		if made <= into:
 			errors.append(("'%s' turns $%d of goods into $%d - nobody would "
 				+ "ever walk to that station") % [id, into, made])
+		# **And a day in a barrel pays** (task 0187): a batch that holds its
+		# machine for days adds `AGED_MARGIN_PER_DAY` for each of them.
+		elif recipe.has("days") and made - into < AGED_MARGIN_PER_DAY * int(recipe["days"]):
+			errors.append(("'%s' adds $%d over %d mornings - not worth "
+				+ "a machine's days") % [id, made - into, int(recipe["days"])])
 	return errors
 
 
@@ -3949,6 +4036,7 @@ static func digest() -> int:
 		"tools": TOOLS,
 		"tool_area_offsets": TOOL_AREA_OFFSETS,
 		"queue": [QUEUE_LENGTH],
+		"aged": [AGED_MARGIN_PER_DAY],
 		"buildings": BUILDINGS,
 		"spray_shapes": SPRAY_SHAPES,
 		"defences": DEFENCES,

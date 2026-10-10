@@ -84,6 +84,10 @@ const KEYS: Dictionary = {
 	&"milk": &"ITEM_MILK",
 	&"wool": &"ITEM_WOOL",
 	&"truffle": &"ITEM_TRUFFLE",
+	&"wine": &"ITEM_WINE",
+	&"juice": &"ITEM_JUICE",
+	&"jelly": &"ITEM_JELLY",
+	&"pickles": &"ITEM_PICKLES",
 	&"oil": &"ITEM_OIL",
 	&"wheat": &"ITEM_WHEAT",
 	&"corn": &"ITEM_CORN",
@@ -136,6 +140,8 @@ const KEYS: Dictionary = {
 	&"gold_sprinkler": &"BLD_GOLD_SPRINKLER",
 	&"coop": &"BLD_COOP",
 	&"barn": &"BLD_BARN",
+	&"keg": &"BLD_KEG",
+	&"preserves_jar": &"BLD_PRESERVES_JAR",
 
 	# ---- what those make
 	&"barricade_kit": &"REC_BARRICADE_KIT",
@@ -151,6 +157,10 @@ const KEYS: Dictionary = {
 	&"cook_roast": &"REC_COOK_ROAST",
 	&"make_bait": &"REC_MAKE_BAIT",
 	&"make_hay": &"REC_MAKE_HAY",
+	&"make_wine": &"REC_MAKE_WINE",
+	&"make_juice": &"REC_MAKE_JUICE",
+	&"make_jelly": &"REC_MAKE_JELLY",
+	&"make_pickles": &"REC_MAKE_PICKLES",
 
 	# ---- what comes out of the dark. **Plural pairs**, so `I18n.plural`
 	# takes these keys and adds `.one` or `.other` itself.

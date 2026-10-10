@@ -156,6 +156,11 @@ const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_sc
 const COOP := {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "draw_scale": 1.0}
 const BARN := {"canvas": Vector2i(96, 100), "pivot": Vector2i(48, 96), "draw_scale": 1.0}
 
+## A031's keg and preserves jar (task 0187), on the pack's provisional
+## canvas: 48x56 at (24,52) over 2x2 cells, drawn at 1.0, until 0188 settles
+## the five machines.
+const MACHINE_SMALL := {"canvas": Vector2i(48, 56), "pivot": Vector2i(24, 52), "draw_scale": 1.0}
+
 ## A026-A028's animals (task 0185): a large one - cow, sheep, pig, dog - is
 ## 40x32 at (20,30), the chicken 24x24 at (12,22), all drawn at 1.0.
 const ANIMAL_LARGE := {"canvas": Vector2i(40, 32), "pivot": Vector2i(20, 30), "draw_scale": 1.0}
@@ -330,6 +335,28 @@ const ART := {
 	&"coop_wreck": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.6, "tint": Color(0.55, 0.5, 0.48), "geometry": COOP, "final": COOP, "bare": true},
 	&"barn_hurt": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.9, "tint": Color(1.1, 0.72, 0.62), "geometry": BARN, "final": BARN, "bare": true},
 	&"barn_wreck": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.9, "tint": Color(0.55, 0.45, 0.42), "geometry": BARN, "final": BARN, "bare": true},
+	# A031's keg and preserves jar (task 0187), idle, working, hurt and wrecked:
+	# the press, a cask in its frame, oak-dark for the keg; the generator,
+	# a firebox under a pipe, brick-red for the jar - until 0213.
+	&"keg": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press", "stand_in_scale": 0.5, "tint": Color(0.85, 0.68, 0.55), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
+	&"keg_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_active", "stand_in_scale": 0.5, "tint": Color(0.85, 0.68, 0.55), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
+	&"keg_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_hurt", "stand_in_scale": 0.5, "tint": Color(0.85, 0.68, 0.55), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
+	&"keg_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_hurt", "stand_in_scale": 0.5, "tint": Color(0.5, 0.42, 0.38), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
+	&"preserves_jar": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/generator", "stand_in_scale": 0.42, "tint": Color(1.2, 0.85, 0.72), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
+	&"preserves_jar_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/generator_active", "stand_in_scale": 0.42, "tint": Color(1.2, 0.85, 0.72), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
+	&"preserves_jar_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/generator_hurt", "stand_in_scale": 0.42, "tint": Color(1.2, 0.85, 0.72), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
+	&"preserves_jar_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/generator_hurt", "stand_in_scale": 0.42, "tint": Color(0.55, 0.45, 0.42), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
+	# A032's wine, juice, jelly and pickles (task 0187): the oil's barrel in
+	# wine-red, the incendiary's can as a jug of juice, the food's bowl as a
+	# jar of red jelly or green pickles - until 0214.
+	&"icon_wine": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_oil", "tint": Color(0.8, 0.35, 0.65), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_wine": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_oil", "tint": Color(0.8, 0.35, 0.65), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_juice": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_incendiary", "tint": Color(1.25, 1.05, 0.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_juice": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_incendiary", "tint": Color(1.25, 1.05, 0.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_jelly": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_food", "tint": Color(1.0, 0.45, 0.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_jelly": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_food", "tint": Color(1.0, 0.45, 0.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_pickles": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_food", "tint": Color(0.6, 1.1, 0.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_pickles": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_food", "tint": Color(0.6, 1.1, 0.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
 	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},

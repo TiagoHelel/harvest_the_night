@@ -120,7 +120,9 @@ func station_cell() -> Vector2i:
 		return Vector2i(-1, -1)
 	var at := Player.target(_state)
 	var on := Farm.occupant(_state, at)
-	if on.is_empty() or not Crafting.is_station(on["id"]):
+	# A wrecked machine (task 0187) is out of use: it offers to be mended
+	# and nothing else, so it has no panel.
+	if on.is_empty() or not Crafting.is_station(on["id"]) or Building.is_wrecked(_state, at):
 		return Vector2i(-1, -1)
 	return Building.anchor_of(_state, at)
 
@@ -156,6 +158,12 @@ func _process(_delta: float) -> void:
 	if Crafting.is_stalled(_state, cell):
 		_progress.text = I18n.t(&"WORK_STALLED")
 		_progress.theme_type_variation = UiKit.WARN
+	elif int(progress[1]) > 0 and Crafting.days_of(Crafting.making(_state, cell)) > 0:
+		# **Days left, for a batch in a barrel** (task 0187): it ages a
+		# morning at a time, and a countdown in seconds would never move.
+		_progress.text = I18n.plural(&"WORK_AGING", int(progress[0]),
+			[Names.of(Crafting.making(_state, cell)), int(progress[0])])
+		_progress.theme_type_variation = UiKit.GOOD
 	elif int(progress[1]) > 0:
 		_progress.text = I18n.f(&"WORK_MAKING",
 			[Names.of(Crafting.making(_state, cell)),

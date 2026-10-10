@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["keg_jar", "a keg aging wine, five mornings to go, its panel up; a preserves jar beside it setting jelly", "WorkshopPanel"],
 	["barn_night", "a wrecked barn and a hurt one at night; then the next morning, the wreck's animals inside and the hurt one's out", ""],
 	["barnyard", "the barn's cow, sheep and pig and the coop's hens about their homes, a pig's spot, the dog behind the farmer", ""],
 	["coop_barn", "a coop and a barn on their sites at noon, the map's animals moved in and more", ""],
@@ -735,6 +736,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"coop_barn": _set_coop_barn(state)
 		"barnyard": _set_barnyard(state)
 		"barn_night": _set_barn_night(state)
+		"keg_jar": _set_keg_jar(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -987,6 +989,13 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 			panel._process(0.0)
 		"react":
 			Reactions.show(state, &"note")
+		"keg_jar":
+			# Stood again and turned to the keg: the walk to the spot
+			# leaves him facing wherever he last stepped.
+			SuiteKit.stand_the_farmer(state, _standing_at)
+			state["player"]["facing"] = Player.NORTH
+			(main.get_node("%WorldView") as WorldView).look_at_cell(_standing_at)
+			(main.get_node("%WorkshopPanel") as WorkshopPanel)._process(0.0)
 		"refused":
 			# **Pointed by hand, because there is no mouse.** `BuildMode`
 			# takes its cell from the pointer every frame, so a scripted
@@ -1594,6 +1603,40 @@ func _take_barn_morning(main: Node, state: Dictionary, folder: String) -> void:
 		Phases.name_of(int(state["phase"])), int(Farm.occupant(state, wreck).get("hp", -1)),
 		Livestock.residents(state, wreck).size(), Interact.verb_at(state, Livestock.door_of(state, wreck)),
 		int(Farm.occupant(state, hurt).get("hp", -1)) if hurt.x >= 0 else -1])
+
+
+## **Days in a barrel** (task 0187): noon on Spring 3. A keg east of the
+## barn's site aging wine, two of its seven mornings gone and a second batch
+## behind it, its panel up and counting days; a preserves jar beside it
+## setting jelly. Both working.
+func _set_keg_jar(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 3)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 20, GameData.STONE: 100,
+		GameData.MONEY: 500, GameData.GRAPE: 6, GameData.STRAWBERRY: 3})
+	var room: Array = GameData.MAP_SITES[&"barn"]
+	var keg := Vector2i(-1, -1)
+	var jar := Vector2i(-1, -1)
+	for y in range(int(room[1]), int(room[1]) + 6):
+		for x in range(int(room[0]), int(room[0]) + 14):
+			var at := Vector2i(x, y)
+			if keg.x < 0 and Building.can_place(state, &"keg", at) \
+					and Building.can_place(state, &"preserves_jar", at + Vector2i(3, 0)) \
+					and Farm.walkable(state, at + Vector2i(0, 2)):
+				keg = at
+				jar = at + Vector2i(3, 0)
+	Building.place(state, &"keg", keg)
+	Building.place(state, &"preserves_jar", jar)
+	for recipe in [&"make_wine", &"make_wine"]:
+		Crafting.start(state, keg, recipe)
+	Crafting.start(state, jar, &"make_jelly")
+	Crafting.morning(state)
+	Crafting.morning(state)
+	print("  keg_jar: keg at %s %s, jar at %s %s" % [keg, str(Crafting.progress_at(state, keg)),
+		jar, str(Crafting.progress_at(state, jar))])
+	_standing_at = keg + Vector2i(0, 2)
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.NORTH
 
 
 ## **The fish book** (task 0182): a spring Full Moon, and four species

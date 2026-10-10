@@ -19026,3 +19026,193 @@ tools/determinism_data_hash.txt,
 implementation/backlog/packs/A030-coop-barn.md (one sentence),
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0186-barns-at-night.md,
 implementation/shots/0186/, docs/devlog/{index,index.pt_BR}.md
+
+## 0187 - Days in a barrel: the keg and the preserves jar - done 2026-10-10
+
+What changed: the first artisan machines. A keg and a preserves jar, built
+by day, turn the farm's fruit and vegetables into wine, juice, jelly and
+pickles over days. These goods are worth more than anything a single day
+makes.
+
+**Days, not ticks** (`Crafting`):
+- A `RECIPES` entry may say `days` instead of `ticks`. `check_recipes`
+  accepts exactly one of the two, and refuses a recipe that takes no time.
+- **The count:**
+  - A batch pays for its inputs when it starts, as every job does.
+  - `Crafting.morning`, called from `Phases.begin_day` after the tools'
+    morning, takes a day off it. The tick never does.
+  - So the wine is ready on its seventh morning, whatever the farmer did
+    with the days between.
+- **The queue:**
+  - A batch on its last morning is delivered and recorded.
+  - The next batch in the queue steps up and pays, and its first day is
+    the next morning.
+  - A batch still waiting on its inputs is started by the day's ticks, as
+    before. A morning does not count it.
+- **Neither "steady hands" nor a brownout touches days** (decided): a
+  barrel ages at its own pace.
+- **What the player reads:**
+  - The panel says "make wine  5 days left" ("fazer vinho  faltam 5 dias",
+    `WORK_AGING`, with a plural form).
+  - A recipe's tooltip says "takes 7 days" (`DESC_DAYS`).
+
+**The machines** (`BUILDINGS`, every number a lever):
+
+| | Size | HP | Cost | Makes |
+|---|---|---|---|---|
+| keg | 2x2 | 60 | 30 wood, 3 iron, $50 | wine from 3 grapes in 7 days; juice from 3 melons in 4 |
+| preserves jar | 2x2 | 50 | 20 stone, 10 wood, $50 | jelly from 3 strawberries in 3 days; pickles from 3 peppers in 3 |
+
+- **The crops** (decided): one artisan crop per growing season, so every
+  season feeds a machine. Winter lives off the barrels.
+  - spring: strawberry;
+  - summer: melon and pepper;
+  - autumn: grape.
+- One recipe per good, because a recipe has fixed inputs.
+- They are built by day, as every `BUILDINGS` entry is. The day build list
+  has eleven rows now, all on screen (`build_day`).
+- Their names are `BLD_KEG` ("barril") and `BLD_PRESERVES_JAR` ("pote de
+  conserva", the plan's "conserva" with the word that makes it a thing).
+
+**The goods:**
+- WINE $60, JUICE $45, JELLY $40, PICKLES $25 (levers).
+- They are in `artisan_goods` beside food and oil, named in both languages:
+  vinho, suco, geleia, picles.
+- **Above oil, on purpose** (decided):
+  - Plan section 3.5 says a wine sells for far more than its grapes, and
+    grapes are $22 against oil's $26.
+  - 0032's "oil is the dearest thing in the ledger" now means the dearest
+    thing a day makes. `headless_check` leaves out the goods that come out
+    of a days recipe, and asserts that only those are left out.
+- **A margin worth the days** (`AGED_MARGIN_PER_DAY`, a new lever, 10):
+  `check_chain` asks a days recipe to add at least $10 a batch for every
+  morning it holds its machine.
+
+  | Recipe | Adds | Over | A morning |
+  |---|---|---|---|
+  | wine | $114 | 7 mornings | $16 |
+  | juice | $60 | 4 | $15 |
+  | jelly | $60 | 3 | $20 |
+  | pickles | $48 | 3 | $16 |
+
+**At 0 HP a machine is wrecked, not rubble** (decided). Both carry 0186's
+`wrecks: true`.
+- **Why:** a keg holds a week of grapes, and rubble would pour it out in one
+  night.
+- **What a wrecked machine does:**
+  - It stands, with one count of hit points over its footprint and no
+    rubble. It counts as a structure lost in the run's tally.
+  - Its batch stays inside and ages nothing: no morning credit, no tick,
+    and no new batch (`can_queue` refuses).
+  - It offers only repair. `Interact` gives a wrecked station no `craft`,
+    and its panel stays shut.
+- **Any hit point brings it back**, and the mornings it lost come after.
+- 0188 adds the `<id>_wreck` rows to A031; the stand-ins are already
+  registered.
+
+**The view:**
+- **Stand-ins** (0120's road, until 0213):
+  - the keg is the press, oak-dark, at 0.5 (1.0 on screen);
+  - the jar is the generator, brick-red, at 0.42;
+  - each machine has an idle, working, hurt and wrecked stand-in, on A031's
+    provisional 48x56 canvas (`MACHINE_SMALL`).
+- **States** (`WorldView`):
+  - A stand-in station joins the stations' 0.12 s refresh. It swaps to its
+    state's stand-in when it starts or stops working, is hurt or is
+    wrecked (`_stand_in_station_art`: wear first, then work).
+  - `station_running` now covers every station with a recipe, never a
+    wrecked one.
+  - Real-art stations are registered by the same rule, so 0213 changes no
+    code.
+- **The jar's small fire and stovepipe smoke** while it works (`Lighting`,
+  `Particles`). They come from the footprint's middle until A031's points
+  land. An idle jar smokes only as a wreck.
+- **A032's icons** (until 0214):
+  - wine is the oil barrel in wine-red;
+  - juice is the incendiary can in orange;
+  - jelly and pickles are the food bowl, red and green.
+
+### Hashes
+
+- **SIM 216342093 -> 788609249, on purpose:**
+  - the four goods in `held` and `gained`;
+  - the keg and the jar in `selected_recipe`.
+- **DATA 4133877013 -> 178413484, on purpose:**
+  - the four goods, their prices and their group;
+  - the four recipes;
+  - the two machines;
+  - `AGED_MARGIN_PER_DAY` in `digest()`.
+
+Verify: 60 passed, 0 failed in 661s (the known OVER BUDGET), with `--accept`,
+on the first run: headless_check 17348 asserts, headless_v1 1949,
+input_check 1203 cases, input_v1 643, UI art 12080 checks, effects 2997.
+
+**Tests:**
+- `_task_0187_keg` (headless_v1), mornings by `Phases.begin_day`:
+  - **Data:**
+    - `check_recipes` refuses ticks and days together, neither, and zero
+      days; days alone pass.
+    - Each recipe is at its machine, in days, makes a named artisan good,
+      and adds at least $10 a morning.
+    - `check_chain` refuses a wine a dollar dearer than its grapes.
+    - Wine is made from grapes and juice from melons.
+    - Both machines are named stations that breakers hunt and that wreck.
+  - **Built by day:** both are in the day's build list, and both go up.
+  - **Wine:**
+    - Three grapes go in and the count reads 7 of 7.
+    - Half a day of ticks ages it not at all.
+    - Six mornings take one day off each, with a third of a day spent
+      elsewhere among them, and give no wine.
+    - The seventh morning gives three wine and leaves the keg empty.
+  - **Waiting on inputs:**
+    - Juice queued with no melons waits, and a morning does not count it.
+    - The melons arrive, the next tick starts it, and the juice comes after
+      its four mornings.
+  - **The jar:**
+    - Jelly then pickles are queued. Jelly comes on its third morning.
+    - The pickles step up, pay and start their own count, and come three
+      mornings later.
+  - **The wreck:**
+    - Wine is started, two mornings pass, and the keg is bitten to 0.
+    - It stands on every cell with no rubble, counts as one structure lost,
+      keeps its wine with 5 mornings to go, and is no longer prey.
+    - A morning and some ticks age it not at all. It takes nothing and
+      offers only repair.
+    - A repair brings it back, and five mornings later the wine is there.
+  - `_task_0166_long_day` leaves a days recipe out of the per-tick daily
+    budget.
+- `headless_check`:
+  - the oil assert is narrowed as above;
+  - one shot per scenario: 69 now (`keg_jar`).
+- `_case_0187_keg` (input_v1):
+  - A keg stands just north of the farmer, who faces it, and its panel is
+    up.
+  - A click on the wine row queues wine. The grapes go in and seven
+    mornings are counted.
+  - The panel's line is the days string, not seconds.
+
+Looked at (`python tools/shot.py 0187 keg_jar build_day --fhd`, 1920x1080):
+- `keg_jar`, noon on Spring 3:
+  - the keg on the barn's empty site, working, with the farmer below facing
+    it and the dog behind him;
+  - its panel reads "KEG", "make wine  5 days left", the running and
+    waiting batches, and "3 slots free";
+  - the jar three cells east, working, smoke over it.
+- `build_day`: eleven rows, keg and preserves_jar among them, all inside
+  the panel.
+
+Notes:
+- **SPACE at a keg queues juice**, its first recipe in name order, as SPACE
+  at the press queues fish oil. The panel's click is the way to wine. The
+  owner's open question about a keyboard and pad path for station recipes
+  covers both.
+- **Raw recipe ids:** every station's MAKE list shows them ("make_wine"),
+  and has since the panel was made. The queue rows above it are named. This
+  is flagged as a separate task; it was not done here.
+
+Files: src/core/{crafting,game_data,interact,phases}.gd,
+src/ui/{describe,lighting,names,particles,placeholder_art,workshop_panel,world_view}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd, assets/locale/strings.csv,
+tools/determinism_{sim,data}_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/0187-keg-and-jar.md, implementation/shots/0187/,
+docs/devlog/{index,index.pt_BR}.md

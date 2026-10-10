@@ -214,6 +214,8 @@ func _draw() -> void:
 				_glow_at(at, STOVE_RADIUS * tile, STOVE_COLOUR, 0.70)
 			&"generator":
 				_glow_at(at, GENERATOR_RADIUS * tile, GENERATOR_COLOUR, 0.45)
+			&"preserves_jar":
+				_glow_at(at, LANTERN_RADIUS * tile, STOVE_COLOUR, 0.6)
 			&"coop", &"barn":
 				_glow_at(at, LANTERN_RADIUS * tile, LANTERN_COLOUR, 0.55)
 				# Its panes once A030 measures them (`windows_xy`). The stand-in
@@ -292,6 +294,10 @@ func _lights_up(id: StringName, on: Dictionary, cell: Vector2i) -> bool:
 		&"kitchen", &"workshop":
 			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
 		&"generator":
+			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
+		# **The jar's small fire** (task 0187), while it works - A031's
+		# `light_xy` on its firebox once the art lands.
+		&"preserves_jar":
 			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
 		# **The animals' lantern** (task 0186): lit while the coop or the barn
 		# stands, whole or hurt, and dark once it is wrecked - A030 draws the
