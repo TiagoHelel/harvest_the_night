@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 62
+const GROUPS := 63
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -131,6 +131,7 @@ func _run() -> void:
 	_task_0190_peddler()
 	_task_0191_house()
 	_task_0192_kitchen()
+	_task_0193_supply()
 
 
 func _finish() -> void:
@@ -3268,13 +3269,15 @@ func _task_0166_long_day() -> void:
 		&"make_incendiary": 24, &"make_gunpowder": 16,
 		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13, &"make_bait": 48, &"make_hay": 80,
 		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 24, &"make_flour": 40, &"make_sugar": 24,
-		&"cook_stew": 20, &"cook_omelette": 16, &"make_bread": 30, &"cook_supper": 10}
+		&"cook_stew": 20, &"cook_omelette": 16, &"make_bread": 30, &"cook_supper": 10,
+		&"make_gunpowder_coal": 16, &"make_incendiary_pepper": 24, &"press_sunflower_oil": 12}
 	var units := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 96, &"make_gunpowder": 32,
 		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52, &"make_bait": 192, &"make_hay": 80,
 		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 96, &"make_flour": 40, &"make_sugar": 72,
-		&"cook_stew": 40, &"cook_omelette": 48, &"make_bread": 30, &"cook_supper": 60}
+		&"cook_stew": 40, &"cook_omelette": 48, &"make_bread": 30, &"cook_supper": 60,
+		&"make_gunpowder_coal": 32, &"make_incendiary_pepper": 144, &"press_sunflower_oil": 12}
 	var ordinary := 0
 	for id in GameData.RECIPES:
 		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty() \
@@ -5818,7 +5821,12 @@ func _task_0190_peddler() -> void:
 		var own := true
 		for id in packets:
 			own = own and (GameData.CROPS[StringName(String(id).trim_suffix("_seed"))]["seasons"] as Array).has(dated[1])
-		expect(own and packets.size() == (GameData.SEASON_STOCK[dated[1]] as Dictionary).size()
+		# Its packet rows: since task 0193 spring and summer carry feed too.
+		var on_the_shelf := 0
+		for id in GameData.sorted_names((GameData.SEASON_STOCK[dated[1]] as Dictionary).keys()):
+			if String(id).ends_with("_seed"):
+				on_the_shelf += 1
+		expect(own and packets.size() == on_the_shelf
 			and (packets.size() > 0) == (dated[1] != &"winter")
 			and Shop.buyable(day).has(GameData.WOOD),
 			"a %s stall stocks %s packets, beside the materials" % [dated[1], "no" if dated[1] == &"winter" else "only its own"],
@@ -6101,6 +6109,133 @@ func _task_0192_kitchen() -> void:
 		and GameData.tool_output(&"axe_").is_empty() and GameData.tool_output(&"_iron").is_empty(),
 		"every tool's every tier reads back off its id, the first tier and anything else as nothing")
 	_completed += 1
+
+
+## Task 0193: every season can make what it needs. The real tables pass in
+## all four seasons, and each fix holds its season up: without the coal
+## gunpowder spring cannot make gunpowder, without the stall's feed spring
+## and summer have no hay, and a kitchen of only the wheat meal has no spring
+## meal until the stew is put back. The routes are printed for the journal.
+func _task_0193_supply() -> void:
+	var errors := GameData.check_seasonal_supply(GameData.DEFENCES, GameData.RECIPES)
+	expect(errors.is_empty() and GameData.validate().is_empty(), "the real tables pass in all four seasons", str(errors))
+	var spring := true
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		spring = spring and GameData.DEFENCES[id].has("season") \
+			and GameData.defence_season(GameData.DEFENCES[id]) == &"spring"
+	expect(spring, "every defence says the season it unlocks in, and today all eight say spring")
+	# **The routes**, season by season: what each kit, round, meal and feed
+	# is made of, followed back to the ground.
+	for season in GameData.SEASONS:
+		var have := GameData.seasonal_supply(season, GameData.RECIPES)
+		var needs := GameData.seasonal_needs(season, GameData.DEFENCES, GameData.RECIPES)
+		print("  %s:" % season)
+		for res in GameData.sorted_names(needs.keys()):
+			print("    %s, for %s: %s" % [res, ", ".join(needs[res]), _supply_ways(have, res)])
+
+	# **The coal gunpowder holds spring up.**
+	var no_coal := GameData.RECIPES.duplicate(true)
+	no_coal.erase(&"make_gunpowder_coal")
+	var broken := GameData.check_seasonal_supply(GameData.DEFENCES, no_coal)
+	expect(_says(broken, "spring cannot make gunpowder") and not _says(broken, "summer")
+		and not _says(broken, "autumn") and not _says(broken, "winter"),
+		"without the coal gunpowder spring fails by name, and summer's corn makes it again", str(broken))
+	expect(GameData.DAILY_STOCK.has(GameData.CORN) and not GameData.seasonal_supply(&"spring", GameData.RECIPES).has(GameData.CORN),
+		"corn bought at the stall in spring is still a summer crop, and not spring's supply")
+
+	# **The stall's feed holds spring and summer up.**
+	var no_feed := GameData.SEASON_STOCK.duplicate(true)
+	for season in [&"spring", &"summer"]:
+		(no_feed[season] as Dictionary).erase(GameData.STRAW)
+		(no_feed[season] as Dictionary).erase(GameData.HAY)
+	broken = GameData.check_seasonal_supply(GameData.DEFENCES, GameData.RECIPES, no_feed)
+	expect(_says(broken, "spring cannot make hay") and _says(broken, "summer cannot make hay")
+		and not _says(broken, "autumn") and not _says(broken, "winter"),
+		"without straw and hay at the stall the animals go hungry until autumn's wheat", str(broken))
+	expect(GameData.check_season_stock(GameData.SEASON_STOCK).is_empty()
+		and int((GameData.SEASON_STOCK[&"spring"] as Dictionary).get(GameData.HAY, 0)) > 0
+		and not (GameData.SEASON_STOCK[&"autumn"] as Dictionary).has(GameData.HAY),
+		"the shelf carries hay in spring and not in autumn, and its check allows feed")
+
+	# **The stew holds spring's meal up** (0192's, checked here).
+	var only_meal := GameData.RECIPES.duplicate(true)
+	for id in Crafting.recipes_at(&"kitchen"):
+		if id != &"cook_meal":
+			only_meal.erase(id)
+	expect(_says(GameData.check_seasonal_supply(GameData.DEFENCES, only_meal), "spring cannot make food, for mending the house"),
+		"a kitchen of only the wheat meal cannot mend the house in spring")
+	only_meal[&"cook_stew"] = GameData.RECIPES[&"cook_stew"]
+	expect(not _says(GameData.check_seasonal_supply(GameData.DEFENCES, only_meal), "food"),
+		"and the stew of potato and carrot does, in every season")
+
+	# **The season field, and the nodes' own seasons.**
+	var invented := GameData.DEFENCES.duplicate(true)
+	invented[&"pepper_trap"] = {"cost": {GameData.PEPPER: 2, GameData.GOLD: 1}, "season": &"spring"}
+	broken = GameData.check_seasonal_supply(invented, GameData.RECIPES)
+	expect(_says(broken, "spring cannot make pepper, for the pepper_trap")
+		and _says(broken, "spring cannot make gold") and _says(broken, "summer cannot make gold")
+		and not _says(broken, "autumn"),
+		"a spring defence of summer's pepper and autumn's gold fails until autumn", str(broken))
+	(invented[&"pepper_trap"] as Dictionary)["season"] = &"autumn"
+	expect(GameData.check_seasonal_supply(invented, GameData.RECIPES).is_empty(),
+		"and unlocked in autumn it passes")
+	(invented[&"pepper_trap"] as Dictionary)["season"] = &"monsoon"
+	expect(_says(GameData.check_seasonal_supply(invented, GameData.RECIPES), "unlocks in 'monsoon', which is no season"),
+		"a season that is not one is refused")
+
+	# **The three new recipes.**
+	var made := {&"make_gunpowder_coal": [&"workshop", GameData.GUNPOWDER],
+		&"make_incendiary_pepper": [&"workshop", GameData.INCENDIARY],
+		&"press_sunflower_oil": [&"press", GameData.OIL]}
+	for id in GameData.sorted_names(made.keys()):
+		var recipe: Dictionary = GameData.RECIPES[id]
+		expect(recipe["station"] == made[id][0] and (recipe["output"] as Dictionary).has(made[id][1])
+			and GameData.check_chain({id: recipe}, GameData.SELL_PRICE).is_empty()
+			and Names.KEYS.has(id) and I18n.t(Names.KEYS[id]) != String(Names.KEYS[id]),
+			"%s: at the %s, named, and worth making ($%d into $%d)" % [id, made[id][0],
+				GameData._worth(recipe["inputs"]), GameData._worth(recipe["output"])])
+	expect(GameData.check_ammo(GameData.DEFENCES, GameData.RECIPES).is_empty()
+		and not (GameData.RECIPES[&"make_gunpowder_coal"]["inputs"] as Dictionary).has(GameData.CORN),
+		"the rounds are all makeable, and the coal gunpowder takes no corn")
+	var per_oil := func(id: StringName) -> int:
+		return int((GameData.RECIPES[id]["output"] as Dictionary)[GameData.INCENDIARY]) \
+			/ int((GameData.RECIPES[id]["inputs"] as Dictionary)[GameData.OIL])
+	expect(per_oil.call(&"make_incendiary_pepper") > per_oil.call(&"make_incendiary"),
+		"pepper makes more incendiary rounds a drop of oil than wood does")
+	var fresh := State.create(1930)
+	expect(Crafting.selected_at(fresh, &"workshop") == &"barricade_kit" and Crafting.selected_at(fresh, &"press") == &"press_fish_oil",
+		"and no station's default recipe changed")
+	expect(Shop.buyable(fresh).has(GameData.HAY) and Shop.buyable(fresh).has(GameData.STRAW),
+		"a first spring morning's stall sells straw and hay")
+	_completed += 1
+
+
+## Whether any of `errors` says `text`.
+func _says(errors: Array, text: String) -> bool:
+	for error in errors:
+		if String(error).contains(text):
+			return true
+	return false
+
+
+## Every way a season comes by `res` (task 0193): each recipe that makes it
+## and whose inputs the season has, with where those come from - or, for a
+## thing no recipe makes, the field, the node, the pond or the stall.
+func _supply_ways(have: Dictionary, res: StringName) -> String:
+	var ways: Array = []
+	for id in GameData.sorted_names(GameData.RECIPES.keys()):
+		var recipe: Dictionary = GameData.RECIPES[id]
+		if not (recipe["output"] as Dictionary).has(res):
+			continue
+		var parts: Array = []
+		for input in GameData.sorted_names((recipe["inputs"] as Dictionary).keys()):
+			parts.append("%s from %s" % [input, have.get(input, "nowhere")])
+		if not String(", ".join(parts)).contains("nowhere"):
+			ways.append("%s (%s)" % [id, ", ".join(parts)])
+	# What it comes from without a recipe - the stall's hay - goes first.
+	if ways.is_empty() or not GameData.RECIPES.has(StringName(String(have.get(res, "")))):
+		ways.push_front(String(have.get(res, "nowhere")))
+	return "; ".join(ways)
 
 
 ## The top-left cell of the first place a building of this id fits, in cell

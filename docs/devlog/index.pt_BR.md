@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-181 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+182 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -224,10 +224,11 @@ voz alta.
 | 0190 | The peddler and his hours | 2026-10-10 |
 | 0191 | The house in three tiers | 2026-10-10 |
 | 0192 | Cooking with the new harvest | 2026-10-10 |
+| 0193 | Every season can make what it needs | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 78 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 80 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -307,6 +308,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **The house in three tiers** (0191) - `data` 2433837890 -> 2242315931
 - **Cooking with the new harvest** (0192) - `sim` 3215404367 -> 1851684475
 - **Cooking with the new harvest** (0192) - `data` 2242315931 -> 4141573147
+- **Every season can make what it needs** (0193) - `sim` 1851684475 -> 3391018212
+- **Every season can make what it needs** (0193) - `data` 4141573147 -> 2131453559
 
 ## O que deu errado
 

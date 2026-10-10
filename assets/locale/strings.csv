@@ -373,10 +373,13 @@ REC_MAKE_BREAD,0,bake bread,assar pão
 REC_MAKE_SUGAR,0,make sugar,fazer açúcar
 REC_FENCE_KIT,0,fence kit,kit de cerca
 REC_MAKE_GUNPOWDER,0,make gunpowder,fazer pólvora
+REC_MAKE_GUNPOWDER_COAL,0,make coal gunpowder,fazer pólvora de carvão
 REC_MAKE_INCENDIARY,0,make incendiary,fazer incendiária
+REC_MAKE_INCENDIARY_PEPPER,0,make pepper incendiary,fazer incendiária de pimenta
 REC_MINE_KIT,0,mine kit,kit de mina
 REC_PRESS_FISH_OIL,0,press fish oil,prensar óleo de peixe
 REC_PRESS_OIL,0,press oil,prensar óleo
+REC_PRESS_SUNFLOWER_OIL,0,press sunflower oil,prensar óleo de girassol
 REC_WALL_KIT,0,wall kit,kit de muro
 RES_BOSS_ESCAPED,0,%s GOT AWAY - IT COMES BACK TONIGHT,%s FUGIU - VOLTA HOJE À NOITE
 RES_BUILD_WON,0,THE BUILD THAT WON,O QUE SEGUROU A NOITE

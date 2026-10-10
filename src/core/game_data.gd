@@ -927,6 +927,14 @@ const RECIPES: Dictionary = {
 		"output": {OIL: 1},
 		"ticks": DAY_TICKS * 25 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
+	# **Sunflower seeds into oil** (task 0193; plan section 3.1): summer's
+	# other oil crop, two heads a drop - the margin corn's four make.
+	&"press_sunflower_oil": {
+		"station": &"press",
+		"inputs": {SUNFLOWER: 2},       # LEVER: sunflowers a drop, 1-2
+		"output": {OIL: 1},
+		"ticks": DAY_TICKS * 20 / 240,  # LEVER: fraction of a day
+	},
 	# The flamethrower's rounds. `design.md` section 5 names this one exactly.
 	&"make_incendiary": {
 		"station": &"workshop",
@@ -939,6 +947,25 @@ const RECIPES: Dictionary = {
 		"inputs": {CORN: 2, OIL: 1},
 		"output": {GUNPOWDER: 2},
 		"ticks": DAY_TICKS * 15 / 240,  # LEVER: fraction of a day; preserves daily capacity
+	},
+	# **Gunpowder without corn** (task 0193): corn is summer's, and the mine,
+	# the mortar and the towers' second level want gunpowder from the first
+	# spring. Coal from the cliff's seams and the oil the press gets out of
+	# fish (`press_fish_oil`) make it then.
+	&"make_gunpowder_coal": {
+		"station": &"workshop",
+		"inputs": {COAL: 2, OIL: 1},    # LEVER: coal and oil a batch
+		"output": {GUNPOWDER: 2},
+		"ticks": DAY_TICKS * 15 / 240,  # LEVER: fraction of a day
+	},
+	# **Pepper rounds** (task 0193; plan section 3.1, pepper for "stronger
+	# incendiary ammunition"): the same round, more of them a drop of oil -
+	# six against the wood's four. A recipe, not a new kind of round.
+	&"make_incendiary_pepper": {
+		"station": &"workshop",
+		"inputs": {OIL: 1, PEPPER: 1},  # LEVER: oil and peppers a batch
+		"output": {INCENDIARY: 6},      # LEVER: rounds a batch, 5-8 - more than the wood's four
+		"ticks": DAY_TICKS * 10 / 240,  # LEVER: fraction of a day
 	},
 	&"cook_meal": {
 		"station": &"kitchen",
@@ -1386,6 +1413,7 @@ const DEFENCES: Dictionary = {
 		# the hard one. What was wrong was a first tower that cost more than
 		# a first day can make.
 		"cost": {WOOD: 10, IRON: 12},
+		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
 		"targeting": TARGET_CLOSEST_TO_HOUSE,
 		"shape": SHAPE_SINGLE,
 		"hp": 60,                       # LEVER: hit points, 30-120
@@ -1399,6 +1427,7 @@ const DEFENCES: Dictionary = {
 	},
 	&"flame_tower": {
 		"cost": {WOOD: 20, IRON: 25, OIL: 10},
+		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
 		"targeting": TARGET_NEAREST,
 		"shape": SHAPE_CONE,
 		"hp": 70,                       # LEVER: hit points, 40-140
@@ -1440,6 +1469,7 @@ const DEFENCES: Dictionary = {
 	},
 	&"mortar": {
 		"cost": {STONE: 30, IRON: 35, GUNPOWDER: 15},
+		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
 		"targeting": TARGET_CLOSEST_TO_HOUSE,
 		"shape": SHAPE_SPLASH,
 		"hp": 55,                       # LEVER: hit points, 30-100
@@ -1469,6 +1499,7 @@ const DEFENCES: Dictionary = {
 	},
 	&"auto_crossbow": {
 		"cost": {WOOD: 15, IRON: 20},
+		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
 		"targeting": TARGET_CLOSEST_TO_HOUSE,
 		"shape": SHAPE_LINE,
 		"hp": 50,                       # LEVER: hit points, 30-90
@@ -1505,6 +1536,7 @@ const DEFENCES: Dictionary = {
 	},
 	&"mine": {
 		"cost": {IRON: 5, GUNPOWDER: 8},
+		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
 		"hp": 1,
 		"damage": 60,                   # LEVER: on trigger, 30-100
 		"damage_type": DAMAGE_EXPLOSIVE,
@@ -1523,12 +1555,14 @@ const DEFENCES: Dictionary = {
 	},
 	&"fence": {
 		"cost": {WOOD: 5},
+		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
 		"hp": 30,                       # LEVER: hit points, 15-60
 		"path_cost": 6,                 # LEVER: tiles-equivalent detour, 3-12
 		"energy_draw": 0,
 	},
 	&"wall": {
 		"cost": {STONE: 10},
+		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
 		"hp": 120,                      # LEVER: hit points, 60-250
 		"path_cost": 20,                # LEVER: tiles-equivalent detour, 10-40
 		"energy_draw": 0,
@@ -1540,6 +1574,7 @@ const DEFENCES: Dictionary = {
 		# wrong currency for a thing you throw down while they are already
 		# coming. Four wood is $8, and it is one trip to one tree.
 		"cost": {WOOD: 4},
+		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
 		"hp": 20,                       # LEVER: hit points, 10-40
 		"path_cost": 4,                 # LEVER: tiles-equivalent detour, 2-8
 		# **Cheap, temporary and limited** - its identity since every defence
@@ -1727,9 +1762,16 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 ## carries the seeds that can be sown now, beside the materials above, and
 ## none in winter, when nothing grows outside. `check_season_stock` holds
 ## every packet to its crop's sowing seasons.
+##
+## **And feed until the farm grows its own** (task 0193): the animals eat
+## hay from the first morning, and hay is pressed from straw, which comes off
+## wheat - an autumn crop. So the peddler carries straw and hay in spring and
+## summer, and `check_seasonal_supply` holds the shelf to it.
 const SEASON_STOCK: Dictionary = {
-	&"spring": {CARROT_SEED: 20, POTATO_SEED: 20, GARLIC_SEED: 20, STRAWBERRY_SEED: 20},  # LEVER: packets a day, 2-40
-	&"summer": {CORN_SEED: 20, PEPPER_SEED: 20, SUNFLOWER_SEED: 20, MELON_SEED: 20},  # LEVER: packets a day, 2-40
+	&"spring": {CARROT_SEED: 20, POTATO_SEED: 20, GARLIC_SEED: 20, STRAWBERRY_SEED: 20,  # LEVER: packets a day, 2-40
+		STRAW: 10, HAY: 10},            # LEVER: feed a day, 0-20
+	&"summer": {CORN_SEED: 20, PEPPER_SEED: 20, SUNFLOWER_SEED: 20, MELON_SEED: 20,  # LEVER: packets a day, 2-40
+		STRAW: 10, HAY: 10},            # LEVER: feed a day, 0-20
 	&"autumn": {WHEAT_SEED: 20, PUMPKIN_SEED: 20, GRAPE_SEED: 20, BEET_SEED: 20},  # LEVER: packets a day, 2-40
 	&"winter": {},
 }
@@ -2799,6 +2841,7 @@ static func validate() -> Array:
 	for season in SEASONS:
 		errors.append_array(check_stall(stall_stock(season), SELL_PRICE, BUY_MARKUP))
 	errors.append_array(check_season_stock(SEASON_STOCK))
+	errors.append_array(check_seasonal_supply(DEFENCES, RECIPES))
 	errors.append_array(check_stall_hours(STALL_OPENS, STALL_CLOSES))
 	errors.append_array(check_tutorial(TUTORIAL))
 	errors.append_array(check_pathing(TERRAIN_COST, DEFENCES, BUILDINGS))
@@ -4079,6 +4122,10 @@ static func check_season_stock(table: Dictionary) -> Array:
 			errors.append("the stall stocks for '%s', which is no season" % season)
 			continue
 		for id in sorted_names((table[season] as Dictionary).keys()):
+			# **Feed** (task 0193): straw and hay, which the farm cannot make
+			# before its wheat comes in.
+			if id == STRAW or id == ANIMAL_FEED:
+				continue
 			var crop := StringName(String(id).trim_suffix("_seed"))
 			if not String(id).ends_with("_seed") or not CROPS.has(crop):
 				errors.append("%s's shelf has '%s', which is no packet" % [season, id])
@@ -4087,6 +4134,128 @@ static func check_season_stock(table: Dictionary) -> Array:
 		if NO_GROWTH_SEASONS.has(season) and not (table[season] as Dictionary).is_empty():
 			errors.append("%s has packets, and nothing grows then" % season)
 	return errors
+
+
+## **Every season can make what it needs** (task 0193): in each season,
+## everything unlocked by then - every defence's price, kit, rounds and
+## tower levels, the house's repair and the animals' feed - can be made from
+## what that season has (`seasonal_supply`), walked through the recipes. The
+## tables are arguments, so a test can hand it a broken one. An error names
+## the season, the thing it cannot make, and everything that wanted it.
+static func check_seasonal_supply(defences: Dictionary, recipes: Dictionary,
+		season_stock: Dictionary = SEASON_STOCK, daily_stock: Dictionary = DAILY_STOCK) -> Array:
+	var errors: Array = []
+	for id in sorted_names(defences.keys()):
+		if not SEASONS.has(defence_season(defences[id])):
+			errors.append("'%s' unlocks in '%s', which is no season" % [id, defence_season(defences[id])])
+	for season in SEASONS:
+		var have := seasonal_supply(season, recipes, season_stock, daily_stock)
+		var needs := seasonal_needs(season, defences, recipes)
+		for res in sorted_names(needs.keys()):
+			if not have.has(res):
+				var who: Array = needs[res]
+				var named := ", ".join(who.slice(0, who.size() - 1)) + " and " + String(who.back()) \
+					if who.size() > 1 else String(who[0])
+				errors.append("%s cannot make %s, for %s" % [season, res, named])
+	return errors
+
+
+## The season a defence unlocks in (task 0193): its `season`, or spring.
+static func defence_season(entry: Dictionary) -> StringName:
+	return StringName(entry.get("season", SEASONS[0]))
+
+
+## **What a season needs** (task 0193), as `{resource: [who wants it]}`:
+## the price, the kit, the rounds and the tower levels of every defence
+## unlocked by then, what a hit point of house costs to mend, and hay for
+## the animals (every kind is the stall's to sell all year).
+static func seasonal_needs(season: StringName, defences: Dictionary, recipes: Dictionary) -> Dictionary:
+	var by := SEASONS.find(season)
+	var needs := {}
+	for id in sorted_names(defences.keys()):
+		var entry: Dictionary = defences[id]
+		if SEASONS.find(defence_season(entry)) > by:
+			continue
+		var wanted: Array = [entry.get("cost", {}), entry.get("ammo", {})]
+		for level in (TOWER_LEVELS.get(id, []) as Array):
+			wanted.append((level as Dictionary).get("cost", {}))
+		for recipe_id in sorted_names(recipes.keys()):
+			if ((recipes[recipe_id] as Dictionary)["output"] as Dictionary).has(id):
+				wanted.append((recipes[recipe_id] as Dictionary)["inputs"])
+		for table in wanted:
+			for res in sorted_names((table as Dictionary).keys()):
+				_wanted_by(needs, res, "the %s" % id)
+	for res in sorted_names(REPAIR_COST_PER_HP.keys()):
+		_wanted_by(needs, res, "mending the house")
+	for kind in sorted_names(LIVESTOCK.keys()):
+		if int((LIVESTOCK[kind] as Dictionary).get("feed_per_day", 0)) > 0:
+			_wanted_by(needs, ANIMAL_FEED, "the %s" % kind)
+	return needs
+
+
+static func _wanted_by(needs: Dictionary, res: StringName, who: String) -> void:
+	if not needs.has(res):
+		needs[res] = []
+	if not (needs[res] as Array).has(who):
+		(needs[res] as Array).append(who)
+
+
+## **What a season has** (task 0193), as `{resource: where it comes from}`:
+## the crops sown in it or before it and what their harvest leaves (wheat's
+## straw), fish, what the farm's nodes give from their opening season, and
+## what the stall sells then that is not a crop - a crop bought out of its
+## season is still a crop whose season has not come. Then the recipes and
+## the fed animals, to a fixed point; a made thing's source is the recipe's
+## id, the first in name order that could make it.
+static func seasonal_supply(season: StringName, recipes: Dictionary,
+		season_stock: Dictionary = SEASON_STOCK, daily_stock: Dictionary = DAILY_STOCK) -> Dictionary:
+	var by := SEASONS.find(season)
+	var have := {MONEY: "money", FISH: "fishing"}
+	for crop in sorted_names(CROPS.keys()):
+		var first := SEASONS.size()
+		for sown in (CROPS[crop]["seasons"] as Array):
+			first = mini(first, SEASONS.find(sown))
+		if first > by:
+			continue
+		have[crop] = "%s's field" % SEASONS[first]
+		for res in sorted_names((CROPS[crop].get("byproduct", {}) as Dictionary).keys()):
+			if not have.has(res):
+				have[res] = "the %s harvest" % crop
+	for node in sorted_names(GATHERING.keys()):
+		var entry: Dictionary = GATHERING[node]
+		if SEASONS.find(StringName(entry.get("first_season", SEASONS[0]))) > by:
+			continue
+		for res in sorted_names((entry["yield"] as Dictionary).keys()):
+			if not have.has(res):
+				have[res] = "the %s" % node
+	var shelf: Dictionary = daily_stock.duplicate()
+	shelf.merge(season_stock.get(season, {}) as Dictionary)
+	for res in sorted_names(shelf.keys()):
+		if RESOURCES.has(res) and not CROPS.has(res) and not have.has(res):
+			have[res] = "the stall"
+	var grew := true
+	while grew:
+		grew = false
+		for id in sorted_names(recipes.keys()):
+			var recipe: Dictionary = recipes[id]
+			var ready := true
+			for res in sorted_names((recipe["inputs"] as Dictionary).keys()):
+				ready = ready and have.has(res)
+			if not ready:
+				continue
+			for res in sorted_names((recipe["output"] as Dictionary).keys()):
+				if not have.has(res):
+					have[res] = String(id)
+					grew = true
+		for kind in sorted_names(LIVESTOCK.keys()):
+			var animal: Dictionary = LIVESTOCK[kind]
+			if int(animal.get("feed_per_day", 0)) > 0 and not have.has(ANIMAL_FEED):
+				continue
+			for res in sorted_names((animal["produces"] as Dictionary).keys()):
+				if not have.has(res):
+					have[res] = "a fed %s" % kind
+					grew = true
+	return have
 
 
 ## **The peddler's hours** (task 0190): open after the day starts, closed

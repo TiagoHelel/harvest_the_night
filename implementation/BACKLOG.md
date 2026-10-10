@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **179 / 296 done**
+`###############.........`  **180 / 296 done**
 
-0 doing / 117 todo / 0 blocked across 18 phases.
+0 doing / 116 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-117 task(s) left, the ready ones first, then what they
+116 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,21 +242,21 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0193 - Every season can make what it needs
+### 0194 - The day's economy
 
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/shop.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
 
-No defence, round, repair meal or feed may depend on a crop whose season has not come yet: every season can make what it needs.
+The day's money is tuned on purpose: a price for every item, and targets per season so that a good day buys about one new defence (plan section 5's rule of thumb).
 
-- `check_seasonal_supply(...)` in `GameData.validate()`, taking its tables as arguments like `check_chain(recipes, prices)` so a test can hand it a broken one: for each season S, everything unlocked in S - defence kits, ammunition, repair food, animal feed - is makeable from the crops of seasons up to S plus fish, ore, wood, stone and what the stall sells in S (0190's seasonal stock table); it walks the recipe graph
-- What 'unlocked in S' means: a `season` field on `DEFENCES` entries, default spring. Plan section 5 puts the flamethrower in summer and the mortar in autumn, but moving them is 0234's (with the new defences), so today's eight stay spring here
-- Fix the known breaks: gunpowder in spring (a recipe from coal and oil pressed from fish by `press_fish_oil`, since corn is summer), a meal in spring (0192's, checked here), straw and hay sold by the peddler before autumn (rows in 0190's seasonal stock)
-- Pepper and sunflower get their plan roles: pepper makes incendiary rounds at a better yield than wood (a recipe, not a new ammunition rule), and sunflower is pressed into oil
-- Every new recipe passes `check_chain` and `check_ammo` and has a `Names.KEYS` entry and a `REC_*` row in both languages
-- DATA moves; SIM moves if the stall's stock or a station's default recipe (both in the state) changes - say which
+- One reviewed price table for every item: `SELL_PRICE`, seed and animal prices, upgrade and building costs; `check_stall` and `check_chain` pass
+- Money-per-day targets by season, as `# LEVER`s or a table the check reads: a well-worked day at the start of each season buys about one new defence
+- `tools/balance.py` gains sweeps of day strategies - crops, fishing, mining, animals, artisan goods - over a spring and a summer day, headless and outside the suite; it still refuses a dirty tree and restores `game_data.gd`
+- A BALANCE.md section with money per strategy per season against the target, and every lever moved
+- No single strategy wins every season: the day has several ways to earn, which is what 0196 asks
+- DATA moves on purpose (the target table goes into `digest()`); SIM moves if a price or a stock the determinism scenario meets changes - record both
 
-  - done when: `_task_0193_supply` in `src/tools/headless_v1.gd`: the real tables pass for all four seasons; taking out the coal gunpowder recipe makes spring fail by name
-  - done when: The journal lists, season by season, the route to each kit, round, meal and feed
+  - done when: `_task_0194_economy` in `src/tools/headless_v1.gd`: a computed (not simulated) day of each strategy lands inside its season's target band
+  - done when: A `tools/balance.py` run writes the BALANCE.md section, and the journal quotes its numbers
 
 ### 0197 - Art: trampled crops and tilled ground
 
@@ -674,22 +674,6 @@ The guardian's cursor, the night camera and the fishing bar each get the knob a 
   - done when: the same case by day: with forecast all day on, the panel is up at 08:00, and with it off it is hidden at noon as `_case_0158_panel` expects; with fishing assist on, the next cast carries 0180's assist flag, and with it off it does not
   - done when: `_task_0292_options` in `src/tools/headless_v1.gd`: no file in `src/core/` names `Settings`; `Forecast.tonight` gives the same record at 08:00 as at 18:00
   - done when: the controls and game pages captured at 1920x1080 in both languages (`$GODOT --path . --position -4000,-4000 --script res://src/tools/capture_menus.gd -- --out=res://implementation/shots/0292/`, then again with `--pt_BR`) and opened: no label runs off its row and no two rows overlap
-
-### 0194 - The day's economy
-
-Waits on 0193.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
-
-The day's money is tuned on purpose: a price for every item, and targets per season so that a good day buys about one new defence (plan section 5's rule of thumb).
-
-- One reviewed price table for every item: `SELL_PRICE`, seed and animal prices, upgrade and building costs; `check_stall` and `check_chain` pass
-- Money-per-day targets by season, as `# LEVER`s or a table the check reads: a well-worked day at the start of each season buys about one new defence
-- `tools/balance.py` gains sweeps of day strategies - crops, fishing, mining, animals, artisan goods - over a spring and a summer day, headless and outside the suite; it still refuses a dirty tree and restores `game_data.gd`
-- A BALANCE.md section with money per strategy per season against the target, and every lever moved
-- No single strategy wins every season: the day has several ways to earn, which is what 0196 asks
-- DATA moves on purpose (the target table goes into `digest()`); SIM moves if a price or a stock the determinism scenario meets changes - record both
-
-  - done when: `_task_0194_economy` in `src/tools/headless_v1.gd`: a computed (not simulated) day of each strategy lands inside its season's target band
-  - done when: A `tools/balance.py` run writes the BALANCE.md section, and the journal quotes its numbers
 
 ### 0195 - Teaching the new day
 
@@ -2379,7 +2363,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (28/53)
+## 12 - The day that pays  (29/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2409,8 +2393,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0190** [The peddler and his hours](prompts/0190-peddler.md)
 - [x] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [x] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md)
-- [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md)
-- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193
+- [x] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md)
+- [ ] **0194** [The day's economy](prompts/0194-day-economy.md)
 - [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md) - needs 0194
 - [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0194, 0195
 - [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - waits for art A014

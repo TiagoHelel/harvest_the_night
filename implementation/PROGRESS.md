@@ -20024,3 +20024,176 @@ tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/A032-artisan-goods.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0192-cooking-v2.md,
 implementation/shots/0192/, docs/devlog/{index,index.pt_BR}.md
+
+## 0193 - Every season can make what it needs - done 2026-10-10
+
+What changed: no defence, round, repair meal or feed depends on a crop whose
+season has not come yet, and a check holds the tables to that.
+- **The breaks found and fixed:**
+  - spring's gunpowder: a coal recipe;
+  - spring and summer's hay: on the peddler's shelf;
+  - spring's meal: 0192's stew, checked here.
+- **Pepper and sunflower get their plan roles:** more incendiary rounds a
+  drop of oil, and oil.
+
+**The check: `GameData.check_seasonal_supply(defences, recipes,
+season_stock, daily_stock)`**, run by `validate()`.
+- **How it works:** for each season it compares what that season needs
+  (`seasonal_needs`) with what it has (`seasonal_supply`). An error names the
+  season, the thing and everything that wanted it, e.g. "spring cannot make
+  gunpowder, for the auto_crossbow, the gun_tower, the mine and the mortar".
+- **What a season has:**
+  - the crops sown in it or before it, and what their harvest leaves
+    (wheat's straw);
+  - fish;
+  - what the farm's nodes give from their opening season (gold's
+    `first_season` is autumn);
+  - what the stall sells then that is not a crop.
+  - Then the recipes and the fed animals (eggs, milk, wool) are walked to a
+    fixed point. Each thing's source is kept, which is what the route list
+    below is printed from.
+- **A crop bought out of its season does not count (decided).**
+  - `DAILY_STOCK` sells wheat, corn and carrot all year.
+  - Counting them, every crop break would hide behind the stall. The check
+    could then never catch one, and the done-when, spring failing without
+    the coal gunpowder, could not hold.
+  - The goal says "a crop whose season has not come yet", and a bought one
+    is still that.
+- **What a season needs:**
+  - for every defence unlocked by then: its price, its kit, its rounds
+    and its tower levels;
+  - what a hit point of house costs to mend: food and wood;
+  - hay, for every animal kind - the stall sells all four all year.
+- **When a defence unlocks:** the `season` field on each of the eight
+  defences, a `# LEVER` (`defence_season`, spring when absent).
+  - All eight say spring. Plan section 5 puts the flamethrower in summer
+    and the mortar in autumn, and moving them is 0234's.
+
+**The fixes:**
+- **`make_gunpowder_coal`** (workshop): 2 coal and 1 oil into 2
+  gunpowder, $32 into $44.
+  - The oil in spring is `press_fish_oil`'s.
+  - Corn is summer's, and the mine, the mortar and every tower's second
+    level want gunpowder.
+- **Straw and hay on spring's and summer's shelves**, 10 a day each
+  (`# LEVER`s, rows in `SEASON_STOCK`), at $3 and $5.
+  - The animals eat hay from the first morning, and straw comes off wheat,
+    an autumn crop.
+  - `check_season_stock` allows these two rows. Winter's shelf stays
+    empty.
+- **Spring's meal:** 0192's `cook_stew`. A kitchen of only the wheat
+  `cook_meal` fails spring by name; the stew fixes it.
+
+**The plan's roles** (section 3.1):
+- **`make_incendiary_pepper`** (workshop): 1 oil and 1 pepper into 6
+  rounds, against the wood recipe's 4 a drop of oil, $35 into $54. A
+  recipe, not a new ammunition rule.
+- **`press_sunflower_oil`** (press): 2 sunflowers into 1 oil, $20 into
+  $26, the margin corn's four make.
+- **Every new recipe:**
+  - passes `check_chain` and `check_ammo`;
+  - has a daily budget in `_task_0166_long_day`;
+  - has a `Names.KEYS` entry with its `REC_*` row: "make coal gunpowder" /
+    "fazer pólvora de carvão", "make pepper incendiary" / "fazer incendiária
+    de pimenta", "press sunflower oil" / "prensar óleo de girassol".
+- **No station's default recipe changed:** each new id sorts after the
+  old first, so the workshop stays `barricade_kit` and the press
+  `press_fish_oil` (asserted).
+
+**The routes, season by season** (`_task_0193_supply` prints them). "From"
+is where an input comes from. Every recipe that can make a thing that season
+is listed.
+
+Spring:
+- **Kits:**
+  - barricade and fence: wood, from trees;
+  - wall: stone, from rocks;
+  - mine kit: iron, from ore, and gunpowder.
+- **Gunpowder** (the mine, the mortar, and the gun tower's and crossbow's
+  second level): `make_gunpowder_coal` (coal from coal seams, oil from
+  `press_fish_oil`).
+- **Incendiary rounds** (the flamethrower): `make_incendiary` (oil from
+  `press_fish_oil`, wood). Its price's oil is `press_fish_oil` (fish).
+- **Food** (mending the house):
+  - `cook_fish` (carrot, fish);
+  - `cook_omelette` (eggs and milk from fed animals);
+  - `cook_stew` (carrot, potato).
+- **Feed:** hay from the stall, or `make_hay` from the stall's straw.
+
+Summer, as spring plus:
+- **Gunpowder:** `make_gunpowder` (summer's corn, oil).
+- **Rounds:** `make_incendiary_pepper` (summer's pepper, oil).
+- **Oil:** `press_oil` (corn) and `press_sunflower_oil` (sunflower).
+- **Food:** `cook_roast` (summer's corn, the stall's meat).
+- **Feed:** still the stall's straw and hay.
+
+Autumn, as summer plus:
+- **Food:**
+  - `cook_meal` (autumn's wheat);
+  - `cook_supper` (bread from `make_bread`, milk, potato) - the flour is
+    the mill's, from wheat.
+- **Feed:** `make_hay` from the wheat harvest's straw. The stall carries
+  no feed from here on.
+
+Winter: nothing grows, and every route is autumn's, from the stock -
+summer's corn and pepper and autumn's wheat, straw and the rest. The stall
+sells no packets and no feed.
+
+### Hashes
+
+- **SIM 1851684475 -> 3391018212, on purpose: the stall's stock** in the
+  state, with straw and hay on spring's shelf.
+  - No station's default recipe changed.
+  - Measured, not assumed: with the two feed rows taken out of
+    `SEASON_STOCK`, `determinism.gd` printed the old 1851684475 again.
+- **DATA 4141573147 -> 2131453559, on purpose:**
+  - the three recipes;
+  - the stall's feed rows;
+  - the defences' `season` field.
+
+Verify: 60 passed, 0 failed in 643s (the known OVER BUDGET), on the first
+run:
+- headless_check 17490 asserts in 76.4 s, and headless_v1 2171 asserts;
+- input_check 1220 cases and input_v1 668;
+- player work 26513 checks, reactions 708, UI art 13032.
+
+**Tests:**
+- `_task_0193_supply` (headless_v1):
+  - **The real tables:**
+    - They pass in all four seasons, and `validate()` is clean.
+    - Every defence says its season, and all eight say spring.
+  - **Breaking the tables:**
+    - Without `make_gunpowder_coal`, "spring cannot make gunpowder" and no
+      other season fails.
+    - Corn bought in spring is not spring's supply.
+    - Without the stall's straw and hay, spring and summer cannot make hay,
+      and autumn and winter can.
+    - The shelf carries hay in spring and none in autumn, and its check
+      allows feed.
+    - A kitchen of only `cook_meal` cannot mend the house in spring; with
+      `cook_stew` back it can, in every season.
+  - **The season field:**
+    - An invented spring defence of pepper and gold fails spring by name
+      (pepper and gold), and summer on the gold. Gold's ore opens in
+      autumn.
+    - Unlocked in autumn it passes. "monsoon" is refused as no season.
+  - **The new recipes:**
+    - Each is at its station, named, and worth making.
+    - `check_ammo` holds, and the coal gunpowder takes no corn.
+    - Pepper makes more rounds a drop of oil than wood.
+    - The defaults are unchanged.
+    - A first spring morning's stall sells straw and hay.
+- `_task_0190_peddler` counts a shelf's packet rows, not all its rows, now
+  that spring and summer carry feed.
+- `_task_0166_long_day` has the three new recipes' daily budgets.
+
+Looked at (`python tools/shot.py 0193 shop_seeds_one shop_seeds_two --fhd`):
+- **`shop_seeds_one`**, the stall's BUY tab on Spring 2: "hay @ $5 10 left"
+  and "straw @ $3 10 left" among the materials and packets, in name order,
+  and the list scrolls as before.
+- **`shop_seeds_two`**: the same shelf.
+
+Files: src/core/game_data.gd, src/ui/names.gd, assets/locale/strings.csv,
+src/tools/headless_v1.gd, tools/determinism_{sim,data}_hash.txt,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0193-seasonal-supply.md,
+implementation/shots/0193/, docs/devlog/{index,index.pt_BR}.md

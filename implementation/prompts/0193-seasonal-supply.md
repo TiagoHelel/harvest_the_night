@@ -1,7 +1,7 @@
 # 0193 - Every season can make what it needs
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0170, 0176, 0188, 0190, 0192
 - **Likely files:** src/core/game_data.gd, src/core/shop.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd
 

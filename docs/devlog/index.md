@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-181 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
+182 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -225,10 +225,11 @@ is the sort of thing this list exists to say out loud.
 | 0190 | The peddler and his hours | 2026-10-10 |
 | 0191 | The house in three tiers | 2026-10-10 |
 | 0192 | Cooking with the new harvest | 2026-10-10 |
+| 0193 | Every season can make what it needs | 2026-10-10 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 78 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 80 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -308,6 +309,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **The house in three tiers** (0191) - `data` 2433837890 -> 2242315931
 - **Cooking with the new harvest** (0192) - `sim` 3215404367 -> 1851684475
 - **Cooking with the new harvest** (0192) - `data` 2242315931 -> 4141573147
+- **Every season can make what it needs** (0193) - `sim` 1851684475 -> 3391018212
+- **Every season can make what it needs** (0193) - `data` 4141573147 -> 2131453559
 
 ## What went wrong
 
