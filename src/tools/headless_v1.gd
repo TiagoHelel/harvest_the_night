@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 66
+const GROUPS := 67
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -135,6 +135,7 @@ func _run() -> void:
 	_task_0194_economy()
 	_task_0195_tips()
 	_task_0218_perf_ground()
+	_task_0219_essence()
 
 
 func _finish() -> void:
@@ -2057,9 +2058,13 @@ func _task_0150_lookup() -> void:
 	# task 0151.
 	expect(Run.final_night() == Calendar.year_days(),
 		"Run.final_night() is the year's last night", str(Run.final_night()))
-	expect(Tech.least_available() == int(GameData.REWARDS["tech_points"]) * Run.final_night(),
-		"and the least technology a run pays is a point for each of its nights",
-		str(Tech.least_available()))
+	# A point for each night, and since task 0219 a Full Moon's share of it.
+	var least := 0
+	for night in range(1, Run.final_night() + 1):
+		least += Tech.with_the_moon(int(GameData.REWARDS["tech_points"]), night)
+	expect(Tech.least_available() == least,
+		"and the least essence a run pays is a point for each of its nights, a Full Moon's share on top",
+		"%d against %d" % [Tech.least_available(), least])
 	var state := State.create(1500)
 	state["night"] = 7
 	expect(Rewards.night_step(state) == 7, "Rewards.night_step reads the night",
@@ -6525,6 +6530,135 @@ func _task_0218_perf_ground() -> void:
 	expect(budget > 0 and swarm_tick > 0 and swarm_tick <= budget, "and the recorded swarm tick is inside it",
 		"%dus of %d" % [swarm_tick, budget])
 	_completed += 1
+
+
+## 0219 - essence: what a night pays the tree, under its new name, beside a
+## smaller purse. A night won pays `tech_points` and each bonus it earned, a
+## Full Moon its share over again, a replayed night none - and the bounty is
+## for kills only: whoever walks off at dawn pays nothing.
+func _task_0219_essence() -> void:
+	var rewards: Dictionary = GameData.REWARDS
+	# **The levers, and their check.**
+	expect(GameData.check_rewards(rewards).is_empty(), "the night's purse passes its check",
+		str(GameData.check_rewards(rewards)))
+	var dim := rewards.duplicate(true)
+	dim["full_moon_essence_percent"] = 99
+	var greedy := rewards.duplicate(true)
+	greedy["bounty_percent"] = 101
+	expect(not GameData.check_rewards(dim).is_empty() and not GameData.check_rewards(greedy).is_empty(),
+		"a Full Moon paying less essence than an ordinary night is refused, and so is a bounty past the kills' worth")
+	I18n.use("en")
+	expect(Names.of(GameData.TECH) == "essence" and GameData.TECH == &"tech",
+		"the currency is called essence, and its id is still tech", Names.of(GameData.TECH))
+
+	# **A won night pays `tech_points` and each bonus it earned**, kept line
+	# by line in the payout.
+	var each := int(rewards["tech_points"])
+	var bonus_points := 0
+	var house_bonus := 0
+	for row in GameData.TECH_BONUSES:
+		bonus_points += int((row as Dictionary)["points"])
+		if StringName((row as Dictionary)["id"]) == &"house untouched":
+			house_bonus = int((row as Dictionary)["points"])
+	var clean := _essence_night(21900, 3)
+	var paid := Rewards.settle(clean, true)
+	var lines: Dictionary = paid.get("essence_from", {})
+	var summed := 0
+	for line in GameData.sorted_names(lines.keys()):
+		summed += int(lines[line])
+	expect(int(paid["tech"]) == each + bonus_points and summed == int(paid["tech"])
+		and Tech.held(clean) == each + bonus_points,
+		"a night held clean pays the night's essence and every bonus, kept line by line in the payout",
+		"%d paid, %s" % [int(paid["tech"]), str(lines)])
+	expect(int((paid["gained"] as Dictionary).get(GameData.TECH, 0)) == int(paid["tech"]),
+		"and the night's gains say so", str(paid["gained"]))
+	var bitten := _essence_night(21901, 3)
+	bitten["house_hp"] = Phases.house_full(bitten) - 10
+	var less := Rewards.settle(bitten, true)
+	expect(int(less["tech"]) == each + bonus_points - house_bonus
+		and not (less["essence_from"] as Dictionary).has(&"house untouched"),
+		"a house that took a bite earns every bonus but the house's", str(less["essence_from"]))
+
+	# **A Full Moon pays its share over again**, on its own line.
+	var moon := _essence_night(21902, 7)
+	var moonlit := Rewards.settle(moon, true)
+	var ordinary := each + bonus_points
+	var share := ordinary * (int(rewards["full_moon_essence_percent"]) - 100) / 100
+	expect(Calendar.is_full_moon(7) and share > 0
+		and int((moonlit["essence_from"] as Dictionary).get("full moon", 0)) == share
+		and int(moonlit["tech"]) == ordinary + share,
+		"a Full Moon pays %d%% of the night's essence, its share on its own line"
+			% int(rewards["full_moon_essence_percent"]), str(moonlit["essence_from"]))
+	var said := ResultScreen.essence_parts(moonlit["essence_from"])
+	expect(said.size() == GameData.TECH_BONUSES.size() + 2
+		and said[0] == I18n.f(&"RES_ESSENCE_PART", [I18n.t(&"RES_ESSENCE_FOR_SURVIVING"), each])
+		and said.back() == I18n.f(&"RES_ESSENCE_PART", [I18n.t(&"RES_ESSENCE_FULL_MOON"), share]),
+		"and the morning report itemises it: the night first, then the bonuses, then the Full Moon", str(said))
+	var year := 0
+	for night in range(1, Run.final_night() + 1):
+		year += Tech.with_the_moon(ordinary, night)
+	expect(Tech.total_available() == year and year > ordinary * Run.final_night(),
+		"a year's best counts every Full Moon's share", "%d against %d" % [Tech.total_available(), year])
+
+	# **A replayed night pays no essence.**
+	var again := Rewards.settle(clean, true)
+	expect(int(again["tech"]) == 0 and (again["essence_from"] as Dictionary).is_empty()
+		and Tech.held(clean) == each + bonus_points,
+		"a night already paid pays no essence again", str(again["essence_from"]))
+
+	# **The bounty is for kills only.** Held to dawn with two killed and
+	# three still on the farm: the purse pays the two kills' worth at the
+	# bounty's percent, and walking off at dawn kills nobody.
+	var dawn := State.create(21903)
+	expect(NightRoad.to_night(dawn), "a night to hold")
+	NightRoad.park(dawn)
+	var far: Vector2i = Enemies.spawn_cells(dawn, 0)[0]
+	var walkers: Array = []
+	for _i in 5:
+		walkers.append(Entities.spawn(dawn, &"walker", far))
+	for i in 2:
+		Combat.hit(dawn, int(walkers[i]), 100000)
+	var killed_before := int(Stats.of_run(dawn)["killed"])
+	(dawn["wave"] as Dictionary)["dawn_at"] = int(dawn["night_tick"]) + 2
+	dawn["house_hp"] = Phases.house_full(dawn)
+	for _t in 30:
+		if int(dawn["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(dawn, 1)
+	var settled := Rewards.last(dawn)
+	var worth := 2 * int((GameData.ENEMIES[&"walker"] as Dictionary)["reward"])
+	expect(bool(settled.get("survived", false)) and int(settled.get("walked", 0)) == 3,
+		"held to dawn with three still on the farm", str(settled))
+	expect(int((settled.get("money_from", {}) as Dictionary).get("bounty", -1))
+		== worth * int(rewards["bounty_percent"]) / 100
+		and int((dawn["killed_by_kind"] as Dictionary).get(&"walker", 0)) == 2,
+		"the bounty is the two kills' worth at the bounty's percent, and the three are not counted as killed",
+		str(settled.get("money_from", {})))
+	Phases.begin_day(dawn)
+	expect(Entities.count(dawn) == 0 and int((dawn["killed_by_kind"] as Dictionary).get(&"walker", 0)) == 2
+		and int(Stats.of_run(dawn)["killed"]) == killed_before,
+		"and walking off at dawn kills nobody", "%d left, %d killed" % [Entities.count(dawn),
+			int(Stats.of_run(dawn)["killed"])])
+
+	# **A kill's worth, as the cursor says it**: what it puts in the purse.
+	var off: Array = []
+	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
+		var cents := int((GameData.ENEMIES[id] as Dictionary)["reward"]) * int(rewards["bounty_percent"])
+		if roundi(float(Describe.bounty_of(id)) * 100.0) != cents:
+			off.append("%s %s" % [id, Describe.bounty_of(id)])
+	expect(off.is_empty(), "the cursor says what each kill puts in the purse", str(off))
+	_completed += 1
+
+
+## A night won and about to be settled, on a farm where nothing was touched:
+## the house whole, nobody through and nothing in the rubble.
+func _essence_night(seed_value: int, night: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = night
+	state["night"] = night
+	state["house_hp"] = Phases.house_full(state)
+	state["breaches"] = 0
+	return state
 
 
 ## A state at a tip's moment (task 0195), on day two or later: facing open

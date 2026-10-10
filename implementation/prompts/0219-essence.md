@@ -1,7 +1,7 @@
 # 0219 - Essence
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0196, 0137, 0152
 - **Likely files:** src/core/rewards.gd, src/core/tech.gd, src/core/game_data.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/ui/tech_panel.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd
 

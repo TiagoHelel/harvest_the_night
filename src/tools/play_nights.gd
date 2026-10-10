@@ -78,8 +78,10 @@ func _init() -> void:
 		for night in range(1, _nights + 1):
 			var played := _play(night, purse)
 			# What the night paid, for the next one's budget. A night that
-			# fell still pays for what was killed before it fell.
-			purse += Waves.reward_of(night) + int(income)
+			# fell still pays for what was killed before it fell. Since task
+			# 0219 that is the fee and `bounty_percent` of the kills' worth.
+			var table: Dictionary = GameData.REWARDS
+			purse += int(table["base_money"]) + int(table["money_per_night"]) * night 				+ Waves.reward_of(night) * int(table["bounty_percent"]) / 100 + int(income)
 			if not bool(played["held"]):
 				fell.append(night)
 			print("  %5d %5d  %7d %7d %7d %5d%%  %s"

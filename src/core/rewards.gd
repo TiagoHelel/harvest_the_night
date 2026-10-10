@@ -27,6 +27,14 @@ extends RefCounted
 ## that a loss costs a day, not the run: money and technology survive, the
 ## structures that were destroyed stay destroyed, and the farm is still there
 ## in the morning.
+##
+## ## A smaller purse (task 0219)
+##
+## The plan's section 4.6: the day earns the money and the night pays in
+## essence (`Tech`) and in what it leaves lying about. So the purse is small -
+## the levers in `GameData.REWARDS` - and the bounty is a share of what the
+## kills are worth, paid for kills only: whoever walks off at dawn is in no
+## `killed_by_kind` and pays nothing.
 
 
 ## Work out the payout, hand it over, and leave the itemised list in the state
@@ -48,6 +56,9 @@ static func settle(state: Dictionary, survived: bool, escaped: bool = false) -> 
 		# Where the money came from, for the screen. Empty on a loss, and on
 		# a calm night, which pays no money (task 0154).
 		"money_from": {} if not survived or is_calm(state) else _money_from(state),
+		# **The night's essence, line by line** (task 0219), for the morning
+		# report: once `Tech.award` has paid, `would_pay` answers empty.
+		"essence_from": {},
 		"gained": {},
 		"lost": {},
 		# For the morning report (task 0138): whoever is still on the farm
@@ -78,6 +89,7 @@ static func settle(state: Dictionary, survived: bool, escaped: bool = false) -> 
 		if is_calm(state):
 			Tech.mark_paid(state, int(state["night"]))
 		else:
+			summary["essence_from"] = Tech.would_pay(state, int(state["night"]))
 			points = Tech.award(state, int(state["night"]))
 		for id in _sorted(lines):
 			Resources.add(state, id, int(lines[id]))
@@ -204,12 +216,16 @@ static func _money_from(state: Dictionary, percent: int = -1) -> Dictionary:
 		"still standing": 0,
 		"the house untouched": 0,
 	}
+	# **For kills only, and a share of their worth** (task 0219): what each
+	# kind killed tonight is worth, added up, then `bounty_percent` of it,
+	# rounded down once rather than per kill.
+	var worth := 0
 	for kind in _sorted(state["killed_by_kind"] as Dictionary):
 		var data: Variant = GameData.ENEMIES.get(kind, null)
 		if data != null:
-			out["bounty"] = int(out["bounty"]) \
-				+ int((data as Dictionary)["reward"]) \
+			worth += int((data as Dictionary)["reward"]) \
 				* int((state["killed_by_kind"] as Dictionary)[kind])
+	out["bounty"] = worth * int(table["bounty_percent"]) / 100
 
 	var intact := _intact(state)
 	out["nothing touched"] = int(table["intact_structure_bonus"]) * intact

@@ -72,8 +72,9 @@ const BUTTON_SIZE := Vector2(46, 16)
 const START_SIZE := Vector2(146, 16)
 
 ## The house bar's width. 128 since task 0139, from 160, to make room for
-## the hint: still the widest thing in the strip.
-const HOUSE_BAR := 128.0
+## the hint; 96 since task 0219, for the essence held beside the house's
+## numbers. Still the widest thing in the strip.
+const HOUSE_BAR := 96.0
 
 ## The mode hint, at the right end of the strip's second row: right of the
 ## house numbers, left of the screen's edge, never over the hotbar. Room for
@@ -106,6 +107,10 @@ var _left: Label
 var _house_back: ColorRect
 var _house_fill: ColorRect
 var _house_text: Label
+## **The essence held** (task 0219, plan section 9): the tree's currency, by
+## its icon - the tech icon through 0120's road until A036 - and a number.
+var _essence_icon: TextureRect
+var _essence: Label
 var _hint: Label
 var _announce: Label
 var _boss_back: ColorRect
@@ -180,6 +185,19 @@ func _ready() -> void:
 	add_child(_house_fill)
 
 	_house_text = _label("HouseNumbers", Vector2(HOUSE_BAR + 10.0, 12), UiKit.DIM)
+
+	# **The essence held**, right after the house's numbers and left of the
+	# hint, on the strip's second row (task 0219).
+	_essence_icon = TextureRect.new()
+	_essence_icon.name = "EssenceIcon"
+	_essence_icon.texture = UiKit.icon(GameData.TECH, true)
+	_essence_icon.size = Vector2(10, 10)
+	_essence_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_essence_icon.stretch_mode = TextureRect.STRETCH_KEEP
+	_essence_icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_essence_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_essence_icon)
+	_essence = _label("EssenceHeld", Vector2(0, 12), UiKit.WARM)
 
 	# **What a confirm does now** (task 0139): the cursor's look in words.
 	_hint = _label("ModeHint", HINT_AT, UiKit.WARM)
@@ -388,6 +406,11 @@ func date_text() -> String:
 	return _date.text
 
 
+## The essence the strip shows, for `input_v1` and the shots.
+func essence_text() -> String:
+	return _essence.text
+
+
 ## Where the strip's date and marks end, in its own pixels.
 func date_end() -> float:
 	var end := DATE_AT.x + _date.get_minimum_size().x
@@ -406,6 +429,11 @@ func _refresh_house() -> void:
 	var share := clampf(float(hp) / float(full), 0.0, 1.0)
 	_house_fill.size = Vector2(maxf((HOUSE_BAR - 2.0) * share, 0.0), 5.0)
 	_house_text.text = I18n.f(&"NHUD_HOUSE", [hp, full])
+	# The essence follows the numbers, whatever the language made them.
+	var after := _house_text.position.x + _house_text.get_minimum_size().x + 5.0
+	_essence_icon.position = Vector2(after, 13)
+	_essence.position = Vector2(after + 12.0, 12)
+	_essence.text = str(Tech.held(_state))
 
 	var in_danger := hp * 100 / full < GameData.HOUSE_DANGER_PERCENT
 	if in_danger:

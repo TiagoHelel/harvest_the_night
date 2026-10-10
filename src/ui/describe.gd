@@ -214,8 +214,21 @@ static func enemy(id: StringName) -> String:
 		lines.append(I18n.t(&"DESC_PASSES_WALLS"))
 	if bool(one.get("is_boss", false)):
 		lines.append(I18n.t(&"DESC_WINDS_UP"))
-	lines.append(I18n.f(&"DESC_WORTH", [int(one.get("reward", 0))]))
+	lines.append(I18n.f(&"DESC_WORTH", [bounty_of(id)]))
 	return "\n".join(lines)
+
+
+## **What a kill puts in the night's purse** (task 0219): its worth at the
+## bounty's percent (`GameData.REWARDS`), in dollars and cents when it is
+## under a dollar. The night adds them up and rounds down once.
+static func bounty_of(id: StringName) -> String:
+	var cents := int((GameData.ENEMIES.get(id, {}) as Dictionary).get("reward", 0)) \
+		* int(GameData.REWARDS["bounty_percent"])
+	if cents % 100 == 0:
+		return str(cents / 100)
+	if cents % 10 == 0:
+		return "%d.%d" % [cents / 100, (cents % 100) / 10]
+	return "%d.%02d" % [cents / 100, cents % 100]
 
 
 ## What is under the guardian's cursor (task 0131): an enemy first - it is

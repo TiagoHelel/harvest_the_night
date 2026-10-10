@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-186 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+187 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -229,10 +229,11 @@ voz alta.
 | 0195 | Teaching the new day | 2026-10-10 |
 | 0196 | Checkpoint: is the day good on its own? | 2026-10-10 |
 | 0218 | Room for more fields and more bodies | 2026-10-10 |
+| 0219 | Essence | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 82 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 84 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -316,10 +317,12 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Every season can make what it needs** (0193) - `data` 4141573147 -> 2131453559
 - **The day's economy** (0194) - `data` 2131453559 -> 1216212477
 - **Teaching the new day** (0195) - `data` 1216212477 -> 2340919704
+- **Essence** (0219) - `sim` 3391018212 -> 3849555693
+- **Essence** (0219) - `data` 2340919704 -> 3664563880
 
 ## O que deu errado
 
-52 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
+53 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -373,6 +376,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **0107** - And the store screenshot found a bug in the game *(Store assets)*
 - **0196** - What drags, what is busywork, what is missing *(Checkpoint: is the day good on its own?)*
 - **0196** - Found in the tour, and fixed before these numbers *(Checkpoint: is the day good on its own?)*
+- **0219** - Found while doing it *(Essence)*
 
 ## O que nao tem
 

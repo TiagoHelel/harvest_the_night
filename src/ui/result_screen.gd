@@ -331,6 +331,12 @@ func _build(payout: Dictionary) -> void:
 			_row(I18n.f(&"RES_INDENT", ["  ".join(goods)]), "", UiKit.GOOD)
 		if not purse.is_empty():
 			_row(I18n.f(&"RES_INDENT", ["  ".join(purse)]), "", UiKit.GOOD)
+		# **What the essence was for** (task 0219), line by line as
+		# `Tech.would_pay` gave them inside `Rewards.settle`: the night, each
+		# bonus earned, and a Full Moon's share.
+		var parts := essence_parts(payout.get("essence_from", {}))
+		if not parts.is_empty():
+			_listed(I18n.t(&"RES_ESSENCE_FOR"), parts, UiKit.DIM)
 
 		# **What the defending was worth**, which is the half of `design.md`
 		# section 12 that changes how the next night gets built: "+ $112"
@@ -377,6 +383,33 @@ func _build(payout: Dictionary) -> void:
 	# **What the night left lying on the farm**: nothing yet - phase 13's
 	# bones and moon stones are what fill this line.
 	_row(I18n.t(&"RES_LEFTOVERS"), "", UiKit.DIM)
+
+
+## **The essence's lines, in words** (task 0219): the night first, then the
+## bonuses in `GameData.TECH_BONUSES` order, then the Full Moon's share.
+static func essence_parts(lines: Dictionary) -> Array:
+	var order: Array = ["for surviving"]
+	for row in GameData.TECH_BONUSES:
+		order.append(String((row as Dictionary)["id"]))
+	order.append("full moon")
+	var out: Array = []
+	for line in order:
+		if not lines.has(line) and not lines.has(StringName(line)):
+			continue
+		var n := int(lines.get(line, lines.get(StringName(line), 0)))
+		if n > 0:
+			out.append(I18n.f(&"RES_ESSENCE_PART", [I18n.t(ESSENCE_LINES.get(line, &"RES_ESSENCE_FOR_SURVIVING")), n]))
+	return out
+
+
+## Which words say each of the essence's lines.
+const ESSENCE_LINES := {
+	"for surviving": &"RES_ESSENCE_FOR_SURVIVING",
+	"house untouched": &"RES_ESSENCE_HOUSE_UNTOUCHED",
+	"nothing lost": &"RES_ESSENCE_NOTHING_LOST",
+	"not one got through": &"RES_ESSENCE_NOT_ONE_GOT_THROUGH",
+	"full moon": &"RES_ESSENCE_FULL_MOON",
+}
 
 
 ## The run summary: what the whole thing was.
@@ -445,6 +478,41 @@ func _wrapped(text: String, role: StringName = &"") -> void:
 	line.text = text
 	line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	line.custom_minimum_size = Vector2(206, 0)
+	line.theme_type_variation = role
+	_lines.add_child(line)
+
+
+## **Words that go together, broken only between them** (task 0219): the
+## parts after `prefix`, in as many lines as the frame's width needs, the
+## lines after the first indented under it. Wrapping by word broke 'house
+## untouched +1' in two and put the rest at the frame's edge.
+func _listed(prefix: String, parts: Array, role: StringName) -> void:
+	var font := get_theme_font(&"font", &"Label")
+	var font_size := get_theme_font_size(&"font_size", &"Label")
+	var line := prefix
+	var started := false
+	for i in parts.size():
+		var piece := String(parts[i]) + ("," if i < parts.size() - 1 else "")
+		var longer := line + " " + piece
+		if started and font.get_string_size(longer, HORIZONTAL_ALIGNMENT_LEFT, -1,
+				font_size).x > LINE_WIDTH:
+			_plain(line, role)
+			line = "    " + piece
+		else:
+			line = longer
+		started = true
+	_plain(line, role)
+
+
+## The width a line of the report has: the frame's, less its margins.
+const LINE_WIDTH := 206.0
+
+
+## One line, as it is: no wrapping, the frame's width.
+func _plain(text: String, role: StringName = &"") -> void:
+	var line := Label.new()
+	line.text = text
+	line.custom_minimum_size = Vector2(LINE_WIDTH, 0)
 	line.theme_type_variation = role
 	_lines.add_child(line)
 

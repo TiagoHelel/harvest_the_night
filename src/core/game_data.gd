@@ -2503,23 +2503,41 @@ const SPRING_DRAFT_SIDES: Dictionary = {1: [2, 3, 4, 5, 6, 7, 8, 9, 10]}
 # ===================================================================== rewards
 
 ## What a night pays, and what losing one costs.
+##
+## **A smaller purse and essence** (task 0219, plan section 4.6): the day earns
+## the money and the night spends it. A night held well paid two or three
+## well-worked days' money in spring before this, and ten in winter; it now
+## pays about a quarter of one in spring, in money, beside its essence.
+## `implementation/BALANCE.md` sets a spring night beside a spring day.
 const REWARDS: Dictionary = {
 	# Paid for finishing the night at all, growing with the night number.
-	"base_money": 30,                   # LEVER: money, 15-60
-	"money_per_night": 15,              # LEVER: money added per night, 5-30
-	"resources": {WOOD: 10, STONE: 8, IRON: 4},
-	"resources_per_night": {WOOD: 4, STONE: 3, IRON: 2},
+	"base_money": 10,                   # LEVER: money, 5-30
+	"money_per_night": 1,               # LEVER: money added per night, 1-5
+	# **The bounty is a share of what the kills are worth** (task 0219): each
+	# kind's `reward` is its worth, and a night pays this percent of the
+	# worth of everything it killed, rounded down once. At five, killing
+	# everything pays about what holding to dawn does in spring - the plan's
+	# 'holding to the sunrise is worth as much as killing everything'.
+	"bounty_percent": 5,                # LEVER: percent of the kills' worth, 0-100
+	"resources": {WOOD: 5, STONE: 3, IRON: 1},
+	"resources_per_night": {WOOD: 1},
 	# **Defending well should pay more than barely holding**, so this is paid
 	# per structure that came through **without a scratch** rather than per
 	# structure still upright. A wall at one hit point held the line and is
 	# worth nothing here; the player who never let it be touched is the one
 	# being paid.
-	"intact_structure_bonus": 4,        # LEVER: money each, 1-10
+	"intact_structure_bonus": 2,        # LEVER: money each, 1-10
 	# And a smaller one for the ones that took damage and held anyway, so
 	# that a hard-won night is not worth less than a quiet one.
 	"standing_structure_bonus": 1,      # LEVER: money each, 0-4
-	"house_untouched_bonus": 25,        # LEVER: money, 10-50
-	"tech_points": 1,                   # LEVER: per night survived, 1-2
+	"house_untouched_bonus": 10,        # LEVER: money, 10-50
+	# **Essence**, the tree's currency (task 0219; the id is still `tech`):
+	# this for a night won, and `TECH_BONUSES` on top.
+	"tech_points": 1,                   # LEVER: essence per night won, 1-2
+	# **A Full Moon pays its essence over again** (task 0219): what the
+	# night's lines add up to, times this over a hundred, as its own line in
+	# `Tech.would_pay`. `check_rewards` refuses less than an ordinary night.
+	"full_moon_essence_percent": 200,   # LEVER: percent of the night's essence, 100-300
 }
 
 ## What a tower becomes, twice. `design.md` section 12 draws it as
@@ -2892,6 +2910,7 @@ const MAP_SITES: Dictionary = {
 ## nobody should trust.
 static func validate() -> Array:
 	var errors: Array = []
+	errors.append_array(check_rewards(REWARDS))
 	errors.append_array(check_crops(CROPS))
 	errors.append_array(check_gathering(GATHERING))
 	errors.append_array(check_recipes(RECIPES))
@@ -4413,6 +4432,20 @@ static func check_tutorial(steps: Array) -> Array:
 ## **The tips' table** (task 0195): each tip once, with a line that is a
 ## `TIP_` key - its words are `tools/i18n_check.py`'s to measure, as the
 ## tutorial's are - and a short one. The display times run in order.
+## **The night's purse and its essence** (task 0219): a Full Moon never pays
+## less essence than an ordinary night, and the bounty is a share of the
+## kills' worth between none of it and all of it.
+static func check_rewards(rewards: Dictionary) -> Array:
+	var errors: Array = []
+	var moon := int(rewards.get("full_moon_essence_percent", 100))
+	if moon < 100:
+		errors.append("a Full Moon pays %d%% of a night's essence: never less than 100" % moon)
+	var share := int(rewards.get("bounty_percent", 100))
+	if share < 0 or share > 100:
+		errors.append("the bounty pays %d%% of the kills' worth: keep it within 0-100" % share)
+	return errors
+
+
 static func check_tips(tips: Array) -> Array:
 	var errors: Array = []
 	var seen: Dictionary = {}

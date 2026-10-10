@@ -173,10 +173,10 @@ DESC_SUPPLIES,0,supplies %d power,fornece %d de energia
 DESC_TAKES,0,takes %s,leva %s
 DESC_DAYS,0,%d day,%d dia
 DESC_DAYS.other,0,%d days,%d dias
-DESC_TECH_COST,0,costs %d tech,custa %d de tecnologia
+DESC_TECH_COST,0,costs %d essence,custa %d de essência
 DESC_TILE_EVERY,0,a tile every %s,um ladrilho a cada %s
 DESC_WINDS_UP,0,winds up before it swings,toma impulso antes de bater
-DESC_WORTH,0,worth $%d,vale $%d
+DESC_WORTH,0,worth $%s,vale $%s
 DHUD_AMMO,0,AMMO  %s,MUNIÇÃO  %s
 DHUD_AMMO_NONE,0,AMMO  none needed,MUNIÇÃO  nenhuma precisa
 DHUD_AMMO_ONE,0,%s %d,%s %d
@@ -279,7 +279,7 @@ ITEM_MEAT,0,meat,carne
 ITEM_MONEY,0,money,dinheiro
 ITEM_OIL,0,oil,óleo
 ITEM_STONE,0,stone,pedra
-ITEM_TECH,0,tech,tecnologia
+ITEM_TECH,0,essence,essência
 ITEM_WHEAT,0,wheat,trigo
 ITEM_WOOD,0,wood,madeira
 LOG_BOSS,0,the giant is coming,o gigante está vindo
@@ -388,6 +388,13 @@ RES_CAME_DOWN,200,%d structure came down,%d estrutura caiu
 RES_CAME_DOWN.other,200,%d structures came down,%d estruturas caíram
 RES_COUNTED,0,%s x%d,%s x%d
 RES_DEFENDING_WELL,0,  for defending well,  por defender bem
+RES_ESSENCE_FOR,0,  essence:,  essência:
+RES_ESSENCE_FOR_SURVIVING,0,the night,a noite
+RES_ESSENCE_FULL_MOON,0,Full Moon,Lua Cheia
+RES_ESSENCE_HOUSE_UNTOUCHED,0,house untouched,casa intacta
+RES_ESSENCE_NOTHING_LOST,0,nothing lost,nada perdido
+RES_ESSENCE_NOT_ONE_GOT_THROUGH,0,nobody through,ninguém passou
+RES_ESSENCE_PART,0,%s +%d,%s +%d
 RES_FULL_MOON,0,FULL MOON BONUS,BÔNUS DE LUA CHEIA
 RES_GAINED,0,+%d %s,+%d %s
 RES_GET_UP,190,GET UP,LEVANTAR
@@ -495,7 +502,7 @@ TECH_BRANCH_DEFENCE,0,DEFENCE,DEFESA
 TECH_BRANCH_PRODUCTION,0,PRODUCTION,PRODUÇÃO
 TECH_BRANCH_SURVIVAL,0,SURVIVAL,SOBREVIVÊNCIA
 TECH_FULL_CANS,0,full cans,regadores cheios
-TECH_HELD,0,%d points,%d pontos
+TECH_HELD,0,%d essence,%d de essência
 TECH_HINT,0,T or ESC to close,T ou ESC para fechar
 TECH_LONG_BARRELS,0,long barrels,canos longos
 TECH_NODE,0,%s   %d,%s   %d
@@ -506,7 +513,7 @@ TECH_SHARP_TOOLS,0,sharp tools,ferramentas afiadas
 TECH_SPARE_STAKES,0,spare stakes,estacas de reserva
 TECH_STEADY_HANDS,0,steady hands,mãos firmes
 TECH_STOUT_TIMBERS,0,stout timbers,madeira reforçada
-TECH_SUMMARY,464,"%d of %d nodes, %d spent - ten nights pay %d at best, the tree costs %d","%d de %d nós, %d gastos - dez noites rendem %d, a árvore custa %d"
+TECH_SUMMARY,464,"%d of %d nodes, %d spent - the year pays up to %d, the tree costs %d","%d de %d nós, %d gastos - o ano rende até %d, a árvore custa %d"
 TECH_TITLE,0,TECHNOLOGY,TECNOLOGIA
 TECH_TRUE_SIGHTS,0,true sights,mira certeira
 TITLE_BUILD,240,v%s %s - built %s,v%s %s - de %s

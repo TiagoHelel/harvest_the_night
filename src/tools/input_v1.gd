@@ -1000,6 +1000,25 @@ func _case_0138_morning() -> void:
 				I18n.f(&"RES_PASSED_OUT", [(at / 60) % 24, at % 60]),
 				I18n.t(&"RES_LEFTOVERS")]:
 			expect(said.has(line), "the report says '%s'" % line, str(said))
+		# **The essence, and what it was for** (task 0219): '+N essence'
+		# beside the money, and its lines underneath.
+		var payout := Rewards.last(state)
+		var essence := I18n.f(&"RES_GAINED", [int(payout.get("tech", 0)), Names.of(GameData.TECH)])
+		var parts := ResultScreen.essence_parts(payout.get("essence_from", {}))
+		var purse_says := false
+		var opened := false
+		var unsaid: Array = parts.duplicate()
+		for row in said:
+			if String(row).contains(essence):
+				purse_says = true
+			if not parts.is_empty() and String(row).begins_with(I18n.t(&"RES_ESSENCE_FOR") + " " + String(parts[0])):
+				opened = true
+			for part in parts:
+				if String(row).contains(String(part)):
+					unsaid.erase(part)
+		expect(int(payout.get("tech", 0)) > 0 and purse_says and opened and unsaid.is_empty(),
+			"the report says '%s' and what it was for, never a part split in two (%s)" % [essence, locale],
+			"%s missing from %s" % [str(unsaid), str(said)])
 		var outside := _outside_the_frame(result)
 		expect(outside.is_empty(), "and all of it fits inside its frame, on screen (%s)" % locale,
 			str(outside))
@@ -1210,6 +1229,23 @@ func _case_0139_night_hud() -> void:
 		and hint.get_global_rect().position.x >= house_numbers.get_global_rect().end.x,
 		"and starts right of the house numbers",
 		"%s against %s" % [hint.get_global_rect(), house_numbers.get_global_rect()])
+	# **The essence held** (task 0219): its icon and number between the
+	# house's numbers and the hint, saying what the ledger holds - in the
+	# longer of the two languages too.
+	var essence: Label = locate_control("EssenceHeld") as Label
+	var essence_icon: Control = locate_control("EssenceIcon") as Control
+	Resources.add(state, GameData.TECH, 120)
+	for locale in ["pt_BR", "en"]:
+		I18n.use(locale)
+		await frames(2)
+		expect(essence != null and essence_icon != null and essence.is_visible_in_tree()
+			and essence.text == str(Tech.held(state)) and essence_icon.is_visible_in_tree()
+			and essence_icon.get_global_rect().position.x >= house_numbers.get_global_rect().end.x
+			and essence.get_global_rect().end.x <= hint.get_global_rect().position.x,
+			"the strip shows the essence held between the house's numbers and the hint (%s)" % locale,
+			"%s at %s, house to %s, hint from %s" % [essence.text if essence != null else "none",
+				essence.get_global_rect() if essence != null else Rect2(),
+				house_numbers.get_global_rect().end, hint.get_global_rect().position])
 
 	# **A pad reaches START by focus**: Back puts it on the bar, the D-pad
 	# steps nothing while it is there, B takes it off, and A presses.

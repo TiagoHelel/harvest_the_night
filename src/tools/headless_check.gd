@@ -11582,10 +11582,17 @@ func _task_0062_tech() -> void:
 	print("  the run's %d nights pay %d technology at worst and %d at best: "
 		% [Run.final_night(), least, most] + "%d a night, and %d more for a "
 		% [each, bonus_points] + "night played well")
-	expect(least == each * Run.final_night(),
-		"one a night, every night of the run", str(least))
-	expect(most == (each + bonus_points) * Run.final_night(),
-		"and every bonus every night is the ceiling", str(most))
+	# **A Full Moon's share on top** (task 0219), night by night.
+	var floor_by_night := 0
+	var ceiling_by_night := 0
+	for date in range(1, Run.final_night() + 1):
+		floor_by_night += Tech.with_the_moon(each, date)
+		ceiling_by_night += Tech.with_the_moon(each + bonus_points, date)
+	expect(least == floor_by_night,
+		"one a night, every night of the run, a Full Moon's share on top",
+		"%d against %d" % [least, floor_by_night])
+	expect(most == ceiling_by_night,
+		"and every bonus every night is the ceiling", "%d against %d" % [most, ceiling_by_night])
 	expect(most > least,
 		"there is something to play well for",
 		"%d against %d" % [most, least])
@@ -15485,12 +15492,14 @@ func _task_0089_tooltips() -> void:
 		var text := Describe.enemy(id)
 		expect(text.contains("%d hit points" % int(one["hp"])),
 			"the %s tooltip says its live hit points" % id)
-		expect(text.contains("worth $%d" % int(one["reward"])),
-			"and what it is live worth" % [])
+		# What a kill of it puts in the purse (task 0219), not its worth.
+		expect(text.contains(I18n.f(&"DESC_WORTH", [Describe.bounty_of(id)])),
+			"and what a kill of it pays" % [])
 	for row in GameData.TECH_TREE:
 		var one: Dictionary = row
 		var text := Describe.tech(StringName(one["id"]))
-		expect(text.contains("costs %d tech" % int(one["cost"])),
+		# In essence since task 0219: the words come from the table.
+		expect(text.contains(I18n.f(&"DESC_TECH_COST", [int(one["cost"])])),
 			"the '%s' tooltip says its live cost" % one["id"])
 		expect(text.contains(String(one["note"])),
 			"and carries its own note rather than a second copy of it")

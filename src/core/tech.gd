@@ -1,8 +1,13 @@
 class_name Tech
 extends RefCounted
 
-## Technology points: what a night survived is worth towards never having this
-## problem again.
+## Essence: what a night survived is worth towards never having this problem
+## again.
+##
+## **Essence since task 0219** (plan section 4.6): the night hands it over for
+## holding the farm, and the tree is bought with it. Only the words changed -
+## the resource id is still `tech`, so every save still reads - and the tree
+## itself is still the technology tree.
 ##
 ## `design.md` section 12 pays three things for a night - money, resources and
 ## **pontos de tecnologia** - and this is the third. Money buys the next night;
@@ -34,23 +39,44 @@ extends RefCounted
 ## **A year is 56 nights since task 0151**, 224 points at best against a
 ## tree that costs 45. Until 0220 re-prices the tree against the year, its
 ## budget is asked of the authored nights by passing their count.
+##
+## **A Full Moon pays its own share on top** (task 0219), as `would_pay` adds
+## it: night by night, so the dates decide.
 static func total_available(nights: int = -1) -> int:
 	if nights < 0:
 		nights = Run.final_night()
+	var each := int(GameData.REWARDS["tech_points"])
+	for row in GameData.TECH_BONUSES:
+		each += int((row as Dictionary)["points"])
 	var most := 0
-	for _night in range(1, nights + 1):
-		most += int(GameData.REWARDS["tech_points"])
-		for row in GameData.TECH_BONUSES:
-			most += int((row as Dictionary)["points"])
+	for night in range(1, nights + 1):
+		most += with_the_moon(each, night)
 	return most
 
 
 ## The least `nights` nights pay - the run's by default: one a night, no
-## bonuses at all.
+## bonuses at all, and a Full Moon's share of that one.
 static func least_available(nights: int = -1) -> int:
 	if nights < 0:
 		nights = Run.final_night()
-	return int(GameData.REWARDS["tech_points"]) * nights
+	var least := 0
+	for night in range(1, nights + 1):
+		least += with_the_moon(int(GameData.REWARDS["tech_points"]), night)
+	return least
+
+
+## **What a night pays of an ordinary night's essence, in percent** (task
+## 0219): `full_moon_essence_percent` on a Full Moon, 100 otherwise.
+static func moon_percent(night: int) -> int:
+	if Calendar.is_full_moon(night):
+		return int(GameData.REWARDS["full_moon_essence_percent"])
+	return 100
+
+
+## `points` of essence with the night's Full Moon line added, the way
+## `would_pay` adds it: the share over a hundred, rounded down.
+static func with_the_moon(points: int, night: int) -> int:
+	return points + points * (moon_percent(night) - 100) / 100
 
 
 static func initial() -> Dictionary:
@@ -211,11 +237,16 @@ static func already_paid(state: Dictionary, night: int) -> bool:
 	return (state["nights_paid"] as Array).has(night)
 
 
-## What a night would pay, itemised, without paying it. The result screen
-## shows this and `headless_check` adds it up.
+## What a night would pay, itemised, without paying it. `Rewards.settle`
+## keeps these lines in the payout for the morning report, and
+## `headless_check` adds them up.
 ##
 ## Empty when the night has already been paid for, which is the whole of
-## "points cannot be earned by replaying a night already survived".
+## "essence cannot be earned by replaying a night already survived".
+##
+## **A Full Moon is its own line** (task 0219), `"full moon"`: what the other
+## lines add up to, times `full_moon_essence_percent` less a hundred, over a
+## hundred - the money's arithmetic (`Rewards._money_from`).
 static func would_pay(state: Dictionary, night: int) -> Dictionary:
 	if already_paid(state, night):
 		return {}
@@ -224,6 +255,11 @@ static func would_pay(state: Dictionary, night: int) -> Dictionary:
 		var bonus: Dictionary = row
 		if _earned(state, StringName(bonus["id"])):
 			out[StringName(bonus["id"])] = int(bonus["points"])
+	if moon_percent(night) != 100:
+		var ordinary := 0
+		for line in GameData.sorted_names(out.keys()):
+			ordinary += int(out[line])
+		out["full moon"] = with_the_moon(ordinary, night) - ordinary
 	return out
 
 

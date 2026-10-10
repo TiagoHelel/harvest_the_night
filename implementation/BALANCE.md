@@ -463,3 +463,98 @@ Computed: `Economy.day`. Played: `src/tools/day_economy.gd`, the crops over thei
 - **The bands are wide on purpose** (low to high is about 2.2 times). The
   rule is "about one defence", and a band a whole season's ways of earning
   fit inside says that rather than ranking them.
+
+## 0219 - the night's purse (2026-10-10)
+
+**The rule** (plan section 4.6): the day earns the money and the night
+spends it. The night pays essence for the tree, what it leaves lying about,
+and a smaller purse. And "holding to the sunrise is worth as much as killing
+everything".
+
+**A night held well**, as `src/tools/night_pay.gd` prices it through the
+rules (`Rewards._money_from`, `Rewards.preview`, `Tech.would_pay`):
+- everything the night sent is killed;
+- the house is untouched, nothing is lost and nobody gets through;
+- eight defences stand without a scratch.
+
+Materials are counted at what the stall pays for them, as a day is counted.
+
+**A spring day** (0194):
+- **the band:** $180-400 for a well-worked day, $290 in the middle;
+- **one earner all day:** $308 from the field, $294 from the cliff and the
+  woods, $238 from the pond;
+- **0196's played Spring 9:** $1346, on a strawberry morning.
+
+**A spring night held well, before and after:**
+
+| Night | Money before | Money now | Materials before | Materials now | Essence before | Essence now |
+|---|---|---|---|---|---|---|
+| 1 | $138 | $38 | $62 | $21 | 4 | 4 |
+| 2 | $177 | $41 | $89 | $22 | 4 | 4 |
+| 3 | $210 | $42 | $116 | $23 | 4 | 4 |
+| 4 | $285 | $46 | $143 | $24 | 4 | 4 |
+| 5 | $326 | $49 | $170 | $25 | 4 | 4 |
+| 6 | $391 | $52 | $197 | $26 | 4 | 4 |
+| 7, Full Moon | $1146 | $124 | $448 | $54 | 4 | 8 |
+| 8 | $549 | $61 | $251 | $28 | 4 | 4 |
+| 9 | $638 | $65 | $278 | $29 | 4 | 4 |
+| 10 | $657 | $67 | $305 | $30 | 4 | 4 |
+| 11 | $763 | $72 | $332 | $31 | 4 | 4 |
+| 12 | $853 | $77 | $359 | $32 | 4 | 4 |
+| 13 | $942 | $82 | $386 | $33 | 4 | 4 |
+| 14, Full Moon | $3042 | $222 | $826 | $68 | 4 | 8 |
+| **Spring's average** | **$722** | **$74** | **$283** | **$31** | **4.0** | **4.6** |
+
+**A spring night now pays about a quarter of a spring day.**
+- Its $74 is 26% of the band's middle. Its materials are worth another $31.
+- Before, a night held well paid two and a half days' money, and a day's
+  materials besides.
+- **The plan's own spring day** has night 8 paying "+2 essence, $40". Night
+  8 held well pays $61 and 4 essence. The plan's night lost a fence, which
+  costs the "nothing lost" point and the intact money.
+
+**Holding and killing pay about the same, in spring.**
+- A spring night's fee averages $17, and the bounty for killing everything
+  $18 (5% of the kills' worth).
+- Before, the bounty was $373 against a fee of $142.
+
+**The seasons:**
+
+| Season | A day's band | A night's money before | Now | Now, against the band's middle | Materials now | Essence now |
+|---|---|---|---|---|---|---|
+| spring | $180-400 | $722 | $74 | 26% | $31 | 4.6 |
+| summer | $205-460 | $2265 | $152 | 46% | $59 | 4.3 |
+| autumn | $235-530 | $3926 | $239 | 63% | $74 | 4.3 |
+| winter | $270-610 | $5452 | $319 | 72% | $89 | 4.3 |
+
+- **Later seasons still pay more than a quarter.** The bounty grows with
+  the horde, ten times over the year, while the day's band grows half again.
+- Holding every season near spring's share is 0278's: it now asks for it.
+- The calm night of each season after the first pays its gift and no
+  essence, which is why their averages are 4.3.
+
+**Every lever moved** (`GameData.REWARDS`):
+
+| Lever | Was | Now | Why |
+|---|---|---|---|
+| `base_money` | 30 | 10 | The fee for holding: spring's $17 average against $142 |
+| `money_per_night` | 15 | 1 | It grew the fee to $870 by night 56 |
+| `bounty_percent` | - (all of it) | 5 | New. Killing everything paid five times holding to dawn in spring, and the plan says the two are worth the same |
+| `intact_structure_bonus` | 4 | 2 | Eight untouched defences paid $32 |
+| `house_untouched_bonus` | 25 | 10 | With the rest, $26 of bonuses on a night held well, against $57 |
+| `resources` | wood 10, stone 8, iron 4 | wood 5, stone 3, iron 1 | A spring night handed over $283 of materials, a day's worth |
+| `resources_per_night` | wood 4, stone 3, iron 2 | wood 1 | Iron grew to 20 a night by night 9: almost two gun towers |
+| `full_moon_essence_percent` | - | 200 | New. A Full Moon pays its essence twice, as it pays its money twice |
+
+`standing_structure_bonus` (1) and `tech_points` (1) are unchanged. So are
+the three essence bonuses and the Full Moon's money percent.
+
+**What a kill shows.** The cursor's tooltip used to say what an enemy is
+worth. It now says what killing one puts in the purse: a walker "$0.15", the
+giant "$6".
+
+**What the essence buys:**
+- A year held well pays 256 essence at best and 64 at worst. That counts
+  each Full Moon's share: eight Full Moons, two a season.
+- Ten authored nights pay 44 at best, against a tree that costs 45.
+- 0220 re-prices the tree against the year.

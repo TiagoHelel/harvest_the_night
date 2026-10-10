@@ -80,7 +80,11 @@ func _init() -> void:
 				seen[id] = night
 
 	print("")
-	print("  %d enemies over %d nights, worth $%d" % [enemies, last, money])
+	# **Worth, and what a night pays for it** (task 0219): the bounty is
+	# `bounty_percent` of the kills' worth.
+	print("  %d enemies over %d nights, worth $%d - a bounty of $%d at %d%%" % [enemies, last,
+		money, money * int(GameData.REWARDS["bounty_percent"]) / 100,
+		int(GameData.REWARDS["bounty_percent"])])
 
 	# **What the run pays in technology**, which is the budget task 0063 has
 	# to price the tech tree against: the floor is one a night for finishing,

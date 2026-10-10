@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **184 / 296 done**
+`###############.........`  **185 / 296 done**
 
-0 doing / 112 todo / 0 blocked across 18 phases.
+0 doing / 111 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-112 task(s) left, the ready ones first, then what they
+111 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -620,23 +620,42 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0219 - Essence
+### 0220 - The technology tree by season
 
-Ready to pick up.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/game_data.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/ui/tech_panel.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/tech.gd, src/core/calendar.gd, src/ui/tech_panel.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-The night stops paying like a day. It hands over essence - today's technology points under a new name - for holding the farm, and a smaller purse, so money is what the day earns and the night spends (plan section 4.6).
+Each season opens a new floor of the tree, so summer's essence buys something spring could not and the tree grows with the year instead of being finished in the first fortnight (plan section 7).
 
-- Keep the id `tech` (`GameData.TECH`, `Rewards._is_tech`, the saves): only the words change, so no `State.VERSION` bump. `ITEM_TECH` becomes essence / essência and every line that names the currency follows (`DESC_TECH_COST`, `TECH_HELD`'s 'points', any result or HUD line); the tree itself may stay the technology tree (`TECH_TITLE`)
-- Earn rules as LEVERs in `GameData.REWARDS` and `TECH_BONUSES`: a night won pays `tech_points`; the three bonuses stay (house untouched measured against `Phases.house_full`, as 0114 left it); a Full Moon night (`Calendar.is_full_moon`, 0152) multiplies the night's essence by a percent LEVER (100-300), its own line in `Tech.would_pay`; `GameData.validate()` refuses a percent under 100. `nights_paid` still stops a night paying twice
-- The night's money shrinks: `base_money`, `money_per_night` and the material handout (`resources`, `resources_per_night`), read through 0150's `Rewards.night_step`, come down to numbers argued against 0194's money-per-day targets in `implementation/BALANCE.md`; the journal says what a spring night paid before and after
-- The bounty is paid for kills only. `Rewards._money_from` already reads `killed_by_kind`; assert that survivors who walk off at dawn (0137, `Enemies.withdraw`) pay nothing and are not counted as killed
-- Essence on screen: the night HUD shows what is held (plan section 9) and the morning report of 0138 has a '+N essence' line itemised from the lines `Tech.would_pay` gave inside `Rewards.settle`, kept in `payout` for the screen - after `Tech.award` the night is paid and `would_pay` answers empty. The icon is the existing tech icon through the placeholder road until A036 is integrated by 0235
-- Asserts that pin night money or technology (`_task_0061`, `_task_0062`, `_task_0068` and whatever 0150 left of them) are rewritten in place in `src/tools/headless_check.gd` to read the LEVERs rather than literals; `tools/i18n_check.py` is clean in both languages
-- SIM and DATA both move on purpose (the payout and the REWARDS table): record the old and the new numbers in `implementation/PROGRESS.md`
+- `TECH_TREE` rows gain a `season` (0 spring to 3 winter, the calendar of 0149). Today's twelve nodes are spring's floor; summer, autumn and winter each add one node per branch (production, defence, survival) - nine new nodes with notes
+- The gate is the seasons the run has reached, not the season it is in: a winter node stays available in Year 2's spring. Put that question in one pure helper beside 0149's, e.g. `Calendar.season_reached(state, season)` (every season from Year 2 on) - 0233 and 0234 reuse it. `Tech.why_not_buy` refuses an unreached season with a new key (e.g. `WHY_NOT_YET_SEASON` and the season name, a `strings.csv` row in both languages), checked before the price
+- Every new node gives a number a system already reads, or a new `Tech.bonus` key read by the one system that owns it. `Tech.bonus` returns the first owned node that gives a key, so a later tier improving an existing key needs a rule (best value wins, or a key of its own): decide, write it in `tech.gd` and assert it
+- Price it the way task 0063 did: every node reachable in a year, not all of them, against `Tech.total_available()` over the calendar (0150); the arithmetic goes in the journal
+- Leave the powers to 0233, which adds one survival node per season from summer; nothing here gives a power
+- `tech_panel.gd` pages the tree by season (keyboard, mouse and pad), greys an unreached season with its reason and still fits 480x270. `Names.KEYS`, `Names.NOTES` and `TECH_*`/`TECHNOTE_*` rows in `assets/locale/strings.csv` for every new node, in both languages
+- A `GameData.validate()` rule: every `season` is 0-3, `needs` never points at a later season, and each branch has a node in every season. DATA moves on purpose (the tree is in `GameData.digest()`): record it. SIM must not move - no state key is added and the determinism scenario buys nothing
 
-  - done when: `_task_0219_essence` in `src/tools/headless_v1.gd` asserts a won night pays `tech_points` plus each bonus earned, a Full Moon night pays the multiplied amount, a replayed night pays no essence, and a dawn win with survivors pays bounty for the kills only
-  - done when: `python tools/shot.py 0219` captures of the night HUD and the morning report say essence, opened and looked at
-  - done when: The BALANCE.md section sets a spring night's money and essence beside a spring day's money
+  - done when: `_task_0220_tree_seasons` in `src/tools/headless_v1.gd` asserts a summer node is refused in spring with the season reason, is buyable once summer is reached and still in Year 2's spring, and the stacking rule for a repeated bonus key holds
+  - done when: `_case_0220_tree_pages` in `src/tools/input_v1.gd` pages to summer and buys a node with the keyboard and with the pad
+  - done when: `python tools/shot.py 0220` captures of the tree in spring and in autumn, opened and looked at: no node cut off, no two labels on top of each other
+
+### 0221 - What the night leaves behind
+
+Ready to pick up.  Likely files: `src/core/combat.gd, src/core/loot.gd (new), src/core/phases.gd, src/core/player.gd, src/core/state.gd, src/core/game_data.gd, src/core/tech.gd, src/ui/names.gd, src/ui/world_view.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+The night leaves something for the morning: bones where zombies fell and, after a Full Moon, moon stones along the road the horde came by - picked up on the morning round and worth money, essence or fertiliser (plan sections 3.3 and 4.6).
+
+- Loot is a RUN_DATA dictionary (cell index -> {item: count}) listed in `State.RUN_DATA` and adopted through an `initial()` (a small `src/core/loot.gd`). It is not an occupant - nothing walks round it or builds on it - and it survives `Farm.clear_rubble` at `begin_day`. Never name a key `moon_phase`
+- Bones drop in `Combat._kill` on the cell the enemy died on: a per-kind count in `ENEMIES` (`bones`, LEVER 0-6, the Giant more; a row without `bones` drops none, so the enemies of phase 14 opt in), piled per cell up to a cap LEVER, no RNG. Survivors that walk off at dawn drop nothing. A pile on a cell the farmer cannot stand on (a wall, water) goes to the nearest walkable cell by a fixed rule - decide and assert
+- Moon stones: the morning after a Full Moon night (0152), a LEVER number (2-8) lies on cells of the horde's route - e.g. every Kth cell of the flow field from tonight's spawn regions toward the house - chosen deterministically or from a fresh `(seed, day)` stream like `Endless._stream_for`, never the run stream
+- Picked up by day only, when the farmer steps onto the cell in `Player.tick` (no verb, no tool); the pile goes into the ledger and the cell is cleared. Uncollected loot stays, or fades after a LEVER of days - decide and say so
+- `bones` and `moon_stone` are resources: `RESOURCES`, `SELL_PRICE`, a leftovers group in `RESOURCE_GROUPS`, `Names.KEYS` (`ITEM_BONES`, `ITEM_MOON_STONE`) and both languages. Moon stones sell at the stall or trade for essence by day at a LEVER rate through one core function (e.g. `Tech.trade_moon_stones`), offered where an input path already exists - a button in the tech panel, or a station recipe through the workshop panel if `check_chain` can value essence (a recipe needs its `REC_*` key). Every new constant goes into `GameData.digest()` (0112's coverage assert) and `validate()` refuses a cap, a stone count or a rate of zero
+- The morning report's leftovers line (0138) says what is lying on the farm: N bones, M moon stones to collect
+- Drawn through the placeholder road until A036 is integrated by 0235: a code-drawn bone pile and a moon stone with a 2-frame shimmer (the glow is code, view only)
+- SIM moves on purpose (drops in `_kill`, a new state key) and DATA moves (new resources and prices): record both
+
+  - done when: `_task_0221_night_loot` in `src/tools/headless_v1.gd` asserts a killed walker leaves its bones on its cell, the pile survives `begin_day`, stepping on it by day collects it and at night does not, a Full Moon morning lays its stones on the same cells for the same seed, and a traded stone pays the essence LEVER
+  - done when: `_case_0221_collect` in `src/tools/input_v1.gd` walks the farmer over a bone pile and sees the count rise, then trades a moon stone for essence through the panel that offers it
+  - done when: `python tools/shot.py 0221` morning captures show the piles on the road, opened and looked at
 
 ### 0223 - Defences sleep under tarps
 
@@ -936,42 +955,23 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
   - done when: the same group: the 0.1 `settings.cfg` fixture loads with its language, volumes and rebind kept, every key it lacks at its `Settings.DEFAULTS` value, and its `tutorial_seen` of `true` migrated to the 0.1 step ids, so only the new steps are offered
   - done when: 1920x1080 captures of the bed line, the cursor line at night and the forecast line at dusk, in both languages (new scenarios such as `tut_bed`, `tut_cursor`, `tut_forecast`: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast --fhd` and again with `--pt_BR`), opened: each line is on its thing and nothing on screen covers it
 
-### 0220 - The technology tree by season
+### 0222 - Bone meal
 
-Waits on 0219.  Likely files: `src/core/game_data.gd, src/core/tech.gd, src/core/calendar.gd, src/ui/tech_panel.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0221.  Likely files: `src/core/game_data.gd, src/core/farming.gd, src/core/interact.gd, src/ui/day_hud.gd, src/ui/sfx.gd, src/ui/names.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-Each season opens a new floor of the tree, so summer's essence buys something spring could not and the tree grows with the year instead of being finished in the first fortnight (plan section 7).
+Bones go back into the ground: ground into bone meal, they give a plot one day of growth for free, once - the night paying for the day.
 
-- `TECH_TREE` rows gain a `season` (0 spring to 3 winter, the calendar of 0149). Today's twelve nodes are spring's floor; summer, autumn and winter each add one node per branch (production, defence, survival) - nine new nodes with notes
-- The gate is the seasons the run has reached, not the season it is in: a winter node stays available in Year 2's spring. Put that question in one pure helper beside 0149's, e.g. `Calendar.season_reached(state, season)` (every season from Year 2 on) - 0233 and 0234 reuse it. `Tech.why_not_buy` refuses an unreached season with a new key (e.g. `WHY_NOT_YET_SEASON` and the season name, a `strings.csv` row in both languages), checked before the price
-- Every new node gives a number a system already reads, or a new `Tech.bonus` key read by the one system that owns it. `Tech.bonus` returns the first owned node that gives a key, so a later tier improving an existing key needs a rule (best value wins, or a key of its own): decide, write it in `tech.gd` and assert it
-- Price it the way task 0063 did: every node reachable in a year, not all of them, against `Tech.total_available()` over the calendar (0150); the arithmetic goes in the journal
-- Leave the powers to 0233, which adds one survival node per season from summer; nothing here gives a power
-- `tech_panel.gd` pages the tree by season (keyboard, mouse and pad), greys an unreached season with its reason and still fits 480x270. `Names.KEYS`, `Names.NOTES` and `TECH_*`/`TECHNOTE_*` rows in `assets/locale/strings.csv` for every new node, in both languages
-- A `GameData.validate()` rule: every `season` is 0-3, `needs` never points at a later season, and each branch has a node in every season. DATA moves on purpose (the tree is in `GameData.digest()`): record it. SIM must not move - no state key is added and the determinism scenario buys nothing
+- A recipe (e.g. `grind_bone_meal`, at the workshop or 0188's mill) turns bones into `bone_meal`, a new resource with a price, a group, `Names.KEYS` (`ITEM_BONE_MEAL`, its `REC_*`) and both languages; `check_chain` holds (bone meal is worth more than its bones)
+- Fertilising: with bone meal selected in the day HUD's strip beside the seeds (keyboard, mouse and pad), interact on a tilled plot spends one and marks the plot `fertilised` - a new field on the plot in `state["plots"]` (RUN_DATA), read with a default so old saves' plots need no migration and no `State.VERSION` bump. If it is a new verb (e.g. `fertilise` in `Farming.verb_at`), it goes in `Interact.DAY_ONLY` and `DEFAULT_TICKS`, and `Sfx.VERB_SOUNDS` maps it to the nearest generated sound (`sfx/plant`) so `_task_0084_day_sounds` stays green until 0281 gives it its own
+- The rule: at the next morning's growth credit (0165) a fertilised plot grows one extra day, once, and the mark clears. Decide and assert whether it must also have been watered; it never gets round a regrowth (0172) or winter (0171) rule
+- A fertilised plot not yet planted keeps the mark until it is; harvesting clears it
+- The soil marker is drawn through the placeholder road (a tinted tilled tile, dry and wet) until A036 is integrated by 0235
+- SIM and DATA move on purpose: record both
 
-  - done when: `_task_0220_tree_seasons` in `src/tools/headless_v1.gd` asserts a summer node is refused in spring with the season reason, is buyable once summer is reached and still in Year 2's spring, and the stacking rule for a repeated bonus key holds
-  - done when: `_case_0220_tree_pages` in `src/tools/input_v1.gd` pages to summer and buys a node with the keyboard and with the pad
-  - done when: `python tools/shot.py 0220` captures of the tree in spring and in autumn, opened and looked at: no node cut off, no two labels on top of each other
-
-### 0221 - What the night leaves behind
-
-Waits on 0219.  Likely files: `src/core/combat.gd, src/core/loot.gd (new), src/core/phases.gd, src/core/player.gd, src/core/state.gd, src/core/game_data.gd, src/core/tech.gd, src/ui/names.gd, src/ui/world_view.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The night leaves something for the morning: bones where zombies fell and, after a Full Moon, moon stones along the road the horde came by - picked up on the morning round and worth money, essence or fertiliser (plan sections 3.3 and 4.6).
-
-- Loot is a RUN_DATA dictionary (cell index -> {item: count}) listed in `State.RUN_DATA` and adopted through an `initial()` (a small `src/core/loot.gd`). It is not an occupant - nothing walks round it or builds on it - and it survives `Farm.clear_rubble` at `begin_day`. Never name a key `moon_phase`
-- Bones drop in `Combat._kill` on the cell the enemy died on: a per-kind count in `ENEMIES` (`bones`, LEVER 0-6, the Giant more; a row without `bones` drops none, so the enemies of phase 14 opt in), piled per cell up to a cap LEVER, no RNG. Survivors that walk off at dawn drop nothing. A pile on a cell the farmer cannot stand on (a wall, water) goes to the nearest walkable cell by a fixed rule - decide and assert
-- Moon stones: the morning after a Full Moon night (0152), a LEVER number (2-8) lies on cells of the horde's route - e.g. every Kth cell of the flow field from tonight's spawn regions toward the house - chosen deterministically or from a fresh `(seed, day)` stream like `Endless._stream_for`, never the run stream
-- Picked up by day only, when the farmer steps onto the cell in `Player.tick` (no verb, no tool); the pile goes into the ledger and the cell is cleared. Uncollected loot stays, or fades after a LEVER of days - decide and say so
-- `bones` and `moon_stone` are resources: `RESOURCES`, `SELL_PRICE`, a leftovers group in `RESOURCE_GROUPS`, `Names.KEYS` (`ITEM_BONES`, `ITEM_MOON_STONE`) and both languages. Moon stones sell at the stall or trade for essence by day at a LEVER rate through one core function (e.g. `Tech.trade_moon_stones`), offered where an input path already exists - a button in the tech panel, or a station recipe through the workshop panel if `check_chain` can value essence (a recipe needs its `REC_*` key). Every new constant goes into `GameData.digest()` (0112's coverage assert) and `validate()` refuses a cap, a stone count or a rate of zero
-- The morning report's leftovers line (0138) says what is lying on the farm: N bones, M moon stones to collect
-- Drawn through the placeholder road until A036 is integrated by 0235: a code-drawn bone pile and a moon stone with a 2-frame shimmer (the glow is code, view only)
-- SIM moves on purpose (drops in `_kill`, a new state key) and DATA moves (new resources and prices): record both
-
-  - done when: `_task_0221_night_loot` in `src/tools/headless_v1.gd` asserts a killed walker leaves its bones on its cell, the pile survives `begin_day`, stepping on it by day collects it and at night does not, a Full Moon morning lays its stones on the same cells for the same seed, and a traded stone pays the essence LEVER
-  - done when: `_case_0221_collect` in `src/tools/input_v1.gd` walks the farmer over a bone pile and sees the count rise, then trades a moon stone for essence through the panel that offers it
-  - done when: `python tools/shot.py 0221` morning captures show the piles on the road, opened and looked at
+  - done when: `_task_0222_bone_meal` in `src/tools/headless_v1.gd` asserts two plots of one crop planted together, one of them fertilised, finish exactly one day apart, and a second morning grants nothing extra - driving 0165's morning credit directly rather than simulating whole days, which the 120 s suite budget cannot afford
+  - done when: `_case_0222_fertilise` in `src/tools/input_v1.gd` selects bone meal and fertilises a plot with the keyboard
+  - done when: The Deliverables table of `implementation/backlog/packs/A036-night-loot.md` states the final geometry this task settled (the pickups, the fertilised soil, the four icons)
+  - done when: `python tools/shot.py 0222` captures of a fertilised plot dry and wet, opened and looked at
 
 ### 0225 - Zombie bait
 
@@ -1026,6 +1026,26 @@ Two more ways to hold a line: the stone wall upgraded with hardwood into somethi
   - done when: `_task_0231_strong_walls` in `src/tools/headless_v1.gd` asserts a level-2 wall takes the LEVER's longer to chew through and costs the field its levelled `path_cost`, a third upgrade is refused, sandbags sit between fence and wall on hit points and path cost, and repair restores the level-2 maximum
   - done when: The Deliverables table of `implementation/backlog/packs/A043-strong-walls.md` states the final geometry this task settled (and whether sandbags are modules or one piece)
   - done when: `python tools/shot.py 0231` captures of a mixed line - stone, hardwood, sandbags - opened and looked at
+
+### 0233 - Three new powers
+
+Waits on 0232, 0220, 0230.  Likely files: `src/core/ability.gd, src/core/game_data.gd, src/core/enemies.gd, src/core/repair.gd, src/ui/night_hud.gd, src/ui/names.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+Three more buttons for a night going wrong: the farm bell stops every zombie for two seconds, the dog runs out and bites one, and an emergency repair puts a structure back on its feet - each aimed with the cursor, each with its wait (plan section 4.4).
+
+- Power ids `farm_bell`, `call_dog` and `emergency_repair` (not `dog`, the animal of 0185), every number a LEVER in a `GameData` table beside `ABILITY`, listed in `GameData.digest()` (0112's coverage assert) and checked by `validate()` (a cooldown above zero, a node that gives each power). Their state goes inside `state["ability"]` (`State.TABLES`, so reconcile fills old saves)
+- The bell stops every zombie on the farm for 2 s (1-4) through 0230's entity stun counter; decide whether bosses stop, for less or not at all
+- The dog bites the enemy nearest the aimed cell within a radius, for a LEVER damage, after a delay worked out from its distance to the house - no RNG; its run and bite are view only
+- The repair restores 30% (LEVER 15-50) of the aimed structure's levelled maximum (0113), free, through one `Repair` function that `apply` also uses for the cap; decide whether the house counts. A destroyed structure is rubble and cannot be aimed at
+- Own cooldowns (LEVERs), recharged at `begin_night` like the flare. Unlocked by the tree, one per season from summer: three survival rows in `TECH_TREE` with 0220's `season` gate (summer the bell, autumn the dog, winter the repair), each giving its power, priced with 0220's arithmetic (redo it in the journal with the three added); a locked power shows greyed with its node, never hidden
+- Aimed with the cursor through 0232's API; an input action per power in `InputActions.ACTIONS` and `project.godot` with pad bindings (0121's sync check) and `ACT_*` strings in both languages, rebindable
+- The night dog is 0185's stand-in through the placeholder road until A028 is integrated by 0245; the power icons are placeholders until A045 is integrated by 0244
+- `Names.KEYS`/`NOTES` for the new nodes, `POWER_*` names and notes, strings in both languages; the night HUD shows each power's charge or lock
+- SIM and DATA move on purpose: record both
+
+  - done when: `_task_0233_powers` in `src/tools/headless_v1.gd` asserts the bell holds every walker for exactly its ticks, the dog's bite lands on the enemy nearest the aimed cell after the computed delay, the repair restores the LEVER share of a levelled tower, and each power is refused before its node is bought
+  - done when: `_case_0233_powers` in `src/tools/input_v1.gd` aims and fires each power with the mouse and with the pad
+  - done when: The Deliverables table of `implementation/backlog/packs/A028-dog.md` states the final geometry this task settled (the night run and bite, the scale against the farmer)
 
 ### 0237 - Art: the beehive
 
@@ -1174,44 +1194,6 @@ The two MVP pieces become a year: a day piece per season on the shared motif, a 
   - done when: `_case_0285_season_music` in `src/tools/input_v1.gd`: a real run moved to a summer morning is playing the summer piece once the fade is over (`Audio.music_playing()`), and a boss night's build step the boss track
   - done when: The Web pack size before and after (`python tools/release.py`, or why it could not be measured) and `python tools/gen_music.py --report` lengths and seams are in the journal
 
-### 0222 - Bone meal
-
-Waits on 0221.  Likely files: `src/core/game_data.gd, src/core/farming.gd, src/core/interact.gd, src/ui/day_hud.gd, src/ui/sfx.gd, src/ui/names.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Bones go back into the ground: ground into bone meal, they give a plot one day of growth for free, once - the night paying for the day.
-
-- A recipe (e.g. `grind_bone_meal`, at the workshop or 0188's mill) turns bones into `bone_meal`, a new resource with a price, a group, `Names.KEYS` (`ITEM_BONE_MEAL`, its `REC_*`) and both languages; `check_chain` holds (bone meal is worth more than its bones)
-- Fertilising: with bone meal selected in the day HUD's strip beside the seeds (keyboard, mouse and pad), interact on a tilled plot spends one and marks the plot `fertilised` - a new field on the plot in `state["plots"]` (RUN_DATA), read with a default so old saves' plots need no migration and no `State.VERSION` bump. If it is a new verb (e.g. `fertilise` in `Farming.verb_at`), it goes in `Interact.DAY_ONLY` and `DEFAULT_TICKS`, and `Sfx.VERB_SOUNDS` maps it to the nearest generated sound (`sfx/plant`) so `_task_0084_day_sounds` stays green until 0281 gives it its own
-- The rule: at the next morning's growth credit (0165) a fertilised plot grows one extra day, once, and the mark clears. Decide and assert whether it must also have been watered; it never gets round a regrowth (0172) or winter (0171) rule
-- A fertilised plot not yet planted keeps the mark until it is; harvesting clears it
-- The soil marker is drawn through the placeholder road (a tinted tilled tile, dry and wet) until A036 is integrated by 0235
-- SIM and DATA move on purpose: record both
-
-  - done when: `_task_0222_bone_meal` in `src/tools/headless_v1.gd` asserts two plots of one crop planted together, one of them fertilised, finish exactly one day apart, and a second morning grants nothing extra - driving 0165's morning credit directly rather than simulating whole days, which the 120 s suite budget cannot afford
-  - done when: `_case_0222_fertilise` in `src/tools/input_v1.gd` selects bone meal and fertilises a plot with the keyboard
-  - done when: The Deliverables table of `implementation/backlog/packs/A036-night-loot.md` states the final geometry this task settled (the pickups, the fertilised soil, the four icons)
-  - done when: `python tools/shot.py 0222` captures of a fertilised plot dry and wet, opened and looked at
-
-### 0233 - Three new powers
-
-Waits on 0232, 0220, 0230.  Likely files: `src/core/ability.gd, src/core/game_data.gd, src/core/enemies.gd, src/core/repair.gd, src/ui/night_hud.gd, src/ui/names.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Three more buttons for a night going wrong: the farm bell stops every zombie for two seconds, the dog runs out and bites one, and an emergency repair puts a structure back on its feet - each aimed with the cursor, each with its wait (plan section 4.4).
-
-- Power ids `farm_bell`, `call_dog` and `emergency_repair` (not `dog`, the animal of 0185), every number a LEVER in a `GameData` table beside `ABILITY`, listed in `GameData.digest()` (0112's coverage assert) and checked by `validate()` (a cooldown above zero, a node that gives each power). Their state goes inside `state["ability"]` (`State.TABLES`, so reconcile fills old saves)
-- The bell stops every zombie on the farm for 2 s (1-4) through 0230's entity stun counter; decide whether bosses stop, for less or not at all
-- The dog bites the enemy nearest the aimed cell within a radius, for a LEVER damage, after a delay worked out from its distance to the house - no RNG; its run and bite are view only
-- The repair restores 30% (LEVER 15-50) of the aimed structure's levelled maximum (0113), free, through one `Repair` function that `apply` also uses for the cap; decide whether the house counts. A destroyed structure is rubble and cannot be aimed at
-- Own cooldowns (LEVERs), recharged at `begin_night` like the flare. Unlocked by the tree, one per season from summer: three survival rows in `TECH_TREE` with 0220's `season` gate (summer the bell, autumn the dog, winter the repair), each giving its power, priced with 0220's arithmetic (redo it in the journal with the three added); a locked power shows greyed with its node, never hidden
-- Aimed with the cursor through 0232's API; an input action per power in `InputActions.ACTIONS` and `project.godot` with pad bindings (0121's sync check) and `ACT_*` strings in both languages, rebindable
-- The night dog is 0185's stand-in through the placeholder road until A028 is integrated by 0245; the power icons are placeholders until A045 is integrated by 0244
-- `Names.KEYS`/`NOTES` for the new nodes, `POWER_*` names and notes, strings in both languages; the night HUD shows each power's charge or lock
-- SIM and DATA move on purpose: record both
-
-  - done when: `_task_0233_powers` in `src/tools/headless_v1.gd` asserts the bell holds every walker for exactly its ticks, the dog's bite lands on the enemy nearest the aimed cell after the computed delay, the repair restores the LEVER share of a levelled tower, and each power is refused before its node is bought
-  - done when: `_case_0233_powers` in `src/tools/input_v1.gd` aims and fires each power with the mouse and with the pad
-  - done when: The Deliverables table of `implementation/backlog/packs/A028-dog.md` states the final geometry this task settled (the night run and bite, the scale against the farmer)
-
 ### 0234 - The arsenal grows with the seasons
 
 Waits on 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0220, 0223.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -1230,6 +1212,25 @@ The arsenal arrives with the calendar - spring's six, then summer's, autumn's an
   - done when: `_case_0234_hotbar_pages` in `src/tools/input_v1.gd` pages the hotbar and places an autumn defence in autumn
   - done when: The Deliverables tables of `implementation/backlog/packs/A044-tarps.md` and `implementation/backlog/packs/A045-power-weapon-icons.md` state the final geometry this task settled (the tarp families and footprints, the icon list)
   - done when: `python tools/shot.py 0234` captures of the hotbar in spring and in winter, opened and looked at
+
+### 0235 - Art: bones, moon stones and essence
+
+Waits on 0221, 0222.  Likely files: `assets/art_source/props/, assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_crop_art.py, tools/check_ui_art.py`.
+
+The approved bones, moon stones, fertilised soil and night-loot icons go into the game in place of the stand-ins 0219, 0221 and 0222 left - essence's icon included.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A036` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A036-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, `assets/art_source/crops/` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_prop_art.py` `NAMES`, `check_crop_art.py`'s soil names, `check_ui_art.py`, `ArtPlacement` if needed).
+- Runtime names: the bone pile and the moon stone as 16x16 props on a ground pivot (the stone's 2-frame shimmer an animation, its glow left in code); the fertilised ground dry and wet beside `tilled`/`tilled_wet` (the wet one at least 20 RGB darker, as `check_crop_art.py` holds soil to); `icon_`/`hud_` for `bones`, `bone_meal` and `moon_stone`, and the essence art as `ui/icon_tech` and `ui/hud_tech`, since the id stays `tech`
+- `check_ui_art.py` counts the resource icons by `generation_task` (15 plans, 30 entries today, `tech` among them): extend it to the pack's entries rather than loosening the count, and move `tech` out of task 0018's set on purpose (the plan list and the count, with the reason) since the essence icon replaces it
+- Retire the stand-ins of 0219, 0221 and 0222 from 0120's placeholder registry, so its check no longer lists A036
+- Set the pack to integrated: `python implementation/backlog/assets.py set A036 integrated`.
+
+  - done when: The family checks (`check_prop_art.py`, `check_crop_art.py`, `check_ui_art.py`) and the showcase (`python tools/show_art.py --props --check`, `python tools/show_art.py --crops --check` and `python tools/show_art.py --ui --check`) pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of bone piles, a moon stone, a fertilised plot and the essence counter in the real game, opened and looked at, in `implementation/shots/0235/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0236 - Art: the scarecrow decoy and zombie bait
 
@@ -1286,6 +1287,24 @@ The approved hardwood wall and sandbags replace the stand-ins 0231 left.
   - done when: The family checks (`check_barrier_art.py`) and the showcase (`python tools/show_art.py --barriers --check`) pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of a mixed line of stone, hardwood and sandbags in the real game, opened and looked at, in `implementation/shots/0242/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0245 - Art: the dog
+
+Waits on 0233.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/art_placement.gd`.
+
+The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-the-dog power at night.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A028` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A028-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_prop_art.py` `NAMES` and its animal canvas rule, `ArtPlacement` if needed).
+- The dog as an animal like the cow and the chicken (24x24 / (12,22) unless the pack's contract says otherwise - read it): day sit, wag, follow-walk (4) and bark (2-3); night run (4) and bite (3); side view mirrored at runtime like the enemies unless the contract bakes directions
+- The pet's states of 0185 and the power's run and bite of 0233 pick their frames; retire both stand-ins from 0120's placeholder registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A028 integrated`.
+
+  - done when: The family checks (`check_prop_art.py`) and the showcase (`python tools/show_art.py --props --check`) pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the dog following the farmer and the dog called at night in the real game, opened and looked at, in `implementation/shots/0245/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0252 - The wraith
@@ -1346,25 +1365,6 @@ Nights that are not all alike: some are foggy, some rain. Both are known at dusk
   - done when: The same group: in fog a gun tower reaches one tile less unless its cell is lit; in rain a burn deals `rain_fire_percent` and a walker takes the slower count per tile
   - done when: `python tools/shot.py 0256 forecast_fog --fhd` (a new scenario in `src/tools/shot.gd` that finds a foggy (seed, date) through `Weather.event`, never an override) shows the event in the forecast, opened and looked at
 
-### 0235 - Art: bones, moon stones and essence
-
-Waits on 0221, 0222, 0219.  Likely files: `assets/art_source/props/, assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_crop_art.py, tools/check_ui_art.py`.
-
-The approved bones, moon stones, fertilised soil and night-loot icons go into the game in place of the stand-ins 0219, 0221 and 0222 left - essence's icon included.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A036` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A036-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, `assets/art_source/crops/` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_prop_art.py` `NAMES`, `check_crop_art.py`'s soil names, `check_ui_art.py`, `ArtPlacement` if needed).
-- Runtime names: the bone pile and the moon stone as 16x16 props on a ground pivot (the stone's 2-frame shimmer an animation, its glow left in code); the fertilised ground dry and wet beside `tilled`/`tilled_wet` (the wet one at least 20 RGB darker, as `check_crop_art.py` holds soil to); `icon_`/`hud_` for `bones`, `bone_meal` and `moon_stone`, and the essence art as `ui/icon_tech` and `ui/hud_tech`, since the id stays `tech`
-- `check_ui_art.py` counts the resource icons by `generation_task` (15 plans, 30 entries today, `tech` among them): extend it to the pack's entries rather than loosening the count, and move `tech` out of task 0018's set on purpose (the plan list and the count, with the reason) since the essence icon replaces it
-- Retire the stand-ins of 0219, 0221 and 0222 from 0120's placeholder registry, so its check no longer lists A036
-- Set the pack to integrated: `python implementation/backlog/assets.py set A036 integrated`.
-
-  - done when: The family checks (`check_prop_art.py`, `check_crop_art.py`, `check_ui_art.py`) and the showcase (`python tools/show_art.py --props --check`, `python tools/show_art.py --crops --check` and `python tools/show_art.py --ui --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of bone piles, a moon stone, a fertilised plot and the essence counter in the real game, opened and looked at, in `implementation/shots/0235/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
 ### 0243 - Art: the day tarps
 
 Waits on 0223, 0234.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py`.
@@ -1401,24 +1401,6 @@ The approved icons of the three powers and the nine new defences replace the hot
   - done when: The family checks (`check_ui_art.py`) and the showcase (`python tools/show_art.py --ui --check`) pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the hotbar and the power bar in the real game, opened and looked at, in `implementation/shots/0244/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0245 - Art: the dog
-
-Waits on 0233.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/art_placement.gd`.
-
-The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-the-dog power at night.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A028` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A028-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_prop_art.py` `NAMES` and its animal canvas rule, `ArtPlacement` if needed).
-- The dog as an animal like the cow and the chicken (24x24 / (12,22) unless the pack's contract says otherwise - read it): day sit, wag, follow-walk (4) and bark (2-3); night run (4) and bite (3); side view mirrored at runtime like the enemies unless the contract bakes directions
-- The pet's states of 0185 and the power's run and bite of 0233 pick their frames; retire both stand-ins from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A028 integrated`.
-
-  - done when: The family checks (`check_prop_art.py`) and the showcase (`python tools/show_art.py --props --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the dog following the farmer and the dog called at night in the real game, opened and looked at, in `implementation/shots/0245/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0249 - The crow
@@ -1464,7 +1446,7 @@ The enemy that makes a fence a different thing from a wall: it tunnels under fen
 
 ### 0257 - The Blood Moon
 
-Waits on 0256, 0219, 0246.  Likely files: `src/core/weather.gd, src/core/entities.gd, src/core/combat.gd, src/core/game_data.gd, src/core/rewards.gd, src/core/tech.gd, src/ui/forecast_panel.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0256, 0246.  Likely files: `src/core/weather.gd, src/core/entities.gd, src/core/combat.gd, src/core/game_data.gd, src/core/rewards.gd, src/core/tech.gd, src/ui/forecast_panel.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 A rare red night from autumn on: the horde comes back stronger and pays in essence. Rare enough to be an occasion, forecast so it is never an ambush.
 
@@ -1949,6 +1931,7 @@ The plan's rule of thumb, checked in every season and not only the first: a good
 - Measure first, with the year autoplayer: per season, what a focused day earns by earner (crops, fish, animals, machines, mining), the price of each of that season's new defences (0234's money and materials, at stall prices), and what was standing on the night each boss fell - `python tools/autoplay.py --economy` or an equivalent report
 - A real day is the field and then a second earner (0196): the tour's field took two to two and a half game hours, and the rest of the day went to the pond and the cliff. Measure each season against that mixed day - the field, then the best earner for the hours left - beside the focused ones, and say in BALANCE.md which of the two the rule of thumb is held to
 - The hens' clock (0196): a hen holds one egg and its clock waits until it is collected, 4h10m a lay, so the tour's second round, four hours after its first, found nothing. Report eggs a day at one, two and three visits, and keep `holds` at 1 only if the journal says why that is the pressure the plan wants and not a chore
+- The night's purse by season (0219): a night held well pays about a quarter of a well-worked day in spring, but its bounty grows with the horde, to about seven tenths of a winter day (`src/tools/night_pay.gd` prints it). Measure it beside each season's day, and hold every season near spring's share - a `bounty_percent` that falls by season, or a bounty that grows slower than the horde - or the journal says why not
 - Rule of thumb: one well-worked day at the start of each season buys about one of that season's new defences - the ratio per season in BALANCE.md, each within 0.7-1.5 or the journal says why
 - A boss costs 5-7 focused days: the value of the build that beat it, less what stood at the season's start, divided by that season's focused-day income
 - Winter: nothing grows (0171), so the `balanced` policy enters day 43 with autumn's stock, and its winter income (fish, mining, machines, animals) plus that stock pays for winter's defences and repairs to day 56 without running out of food or ammunition - reported per run
@@ -2354,12 +2337,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (1/28)
+## 13 - Weapons of the night  (2/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
-- [ ] **0219** [Essence](prompts/0219-essence.md)
-- [ ] **0220** [The technology tree by season](prompts/0220-tech-by-season.md) - needs 0219
-- [ ] **0221** [What the night leaves behind](prompts/0221-night-loot.md) - needs 0219
+- [x] **0219** [Essence](prompts/0219-essence.md)
+- [ ] **0220** [The technology tree by season](prompts/0220-tech-by-season.md)
+- [ ] **0221** [What the night leaves behind](prompts/0221-night-loot.md)
 - [ ] **0222** [Bone meal](prompts/0222-bone-meal.md) - needs 0221
 - [ ] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md)
 - [ ] **0224** [The scarecrow decoy](prompts/0224-decoy.md)
@@ -2373,7 +2356,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0220, 0230
 - [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0220, 0223
-- [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - needs 0221, 0222, 0219 - waits for art A036
+- [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - needs 0221, 0222 - waits for art A036
 - [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - needs 0224, 0225 - waits for art A037
 - [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - needs 0226 - waits for art A038
 - [ ] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md) - needs 0227 - waits for art A039
@@ -2398,7 +2381,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0254** [The Scarecrow King](prompts/0254-scarecrow-king.md) - needs 0246, 0249
 - [ ] **0255** [The Winter Lord](prompts/0255-winter-lord.md) - needs 0246, 0251, 0253, 0254
 - [ ] **0256** [Fog and rain](prompts/0256-fog-and-rain.md) - needs 0229
-- [ ] **0257** [The Blood Moon](prompts/0257-blood-moon.md) - needs 0256, 0219, 0246
+- [ ] **0257** [The Blood Moon](prompts/0257-blood-moon.md) - needs 0256, 0246
 - [ ] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md) - needs 0256, 0257
 - [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md) - needs 0234, 0247, 0248, 0249, 0250, 0251, 0252, 0253, 0254, 0255, 0256, 0257
 - [ ] **0260** [Art: the spitter](prompts/0260-art-spitter.md) - needs 0247, 0246 - waits for art A046

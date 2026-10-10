@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-186 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
+187 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -230,10 +230,11 @@ is the sort of thing this list exists to say out loud.
 | 0195 | Teaching the new day | 2026-10-10 |
 | 0196 | Checkpoint: is the day good on its own? | 2026-10-10 |
 | 0218 | Room for more fields and more bodies | 2026-10-10 |
+| 0219 | Essence | 2026-10-10 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 82 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 84 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -317,10 +318,12 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Every season can make what it needs** (0193) - `data` 4141573147 -> 2131453559
 - **The day's economy** (0194) - `data` 2131453559 -> 1216212477
 - **Teaching the new day** (0195) - `data` 1216212477 -> 2340919704
+- **Essence** (0219) - `sim` 3391018212 -> 3849555693
+- **Essence** (0219) - `data` 2340919704 -> 3664563880
 
 ## What went wrong
 
-52 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+53 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -374,6 +377,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0107** - And the store screenshot found a bug in the game *(Store assets)*
 - **0196** - What drags, what is busywork, what is missing *(Checkpoint: is the day good on its own?)*
 - **0196** - Found in the tour, and fixed before these numbers *(Checkpoint: is the day good on its own?)*
+- **0219** - Found while doing it *(Essence)*
 
 ## What is not in it
 

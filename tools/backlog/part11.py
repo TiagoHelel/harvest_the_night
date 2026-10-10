@@ -556,6 +556,13 @@ TASKS = [
               "a day at one, two and three visits, and keep `holds` at 1 only "
               "if the journal says why that is the pressure the plan wants "
               "and not a chore",
+              "The night's purse by season (0219): a night held well pays "
+              "about a quarter of a well-worked day in spring, but its bounty "
+              "grows with the horde, to about seven tenths of a winter day "
+              "(`src/tools/night_pay.gd` prints it). Measure it beside each "
+              "season's day, and hold every season near spring's share - a "
+              "`bounty_percent` that falls by season, or a bounty that grows "
+              "slower than the horde - or the journal says why not",
               "Rule of thumb: one well-worked day at the start of each season "
               "buys about one of that season's new defences - the ratio per "
               "season in BALANCE.md, each within 0.7-1.5 or the journal says "

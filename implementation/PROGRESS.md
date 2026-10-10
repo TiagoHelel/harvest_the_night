@@ -20978,3 +20978,206 @@ Files: src/core/{pathing,entities,towers,state}.gd,
 src/tools/{perf_check,headless_v1}.gd, tools/{perf.py,perf_baseline.txt},
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0218-perf-groundwork.md,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0219 - Essence - done 2026-10-10
+
+What changed: the night now pays **essence** - the technology points under a
+new name - and a much smaller purse.
+- A Full Moon pays its essence twice.
+- The bounty is a share of what the kills are worth, and is paid for kills
+  only.
+- The fee, the bonuses and the material handout came down to about a
+  quarter of a spring day.
+- The night HUD shows the essence held, and the morning report says
+  "+N essence" and what it was for.
+
+### The name
+
+- **The id stays `tech`** - `GameData.TECH`, `Rewards._is_tech` and the
+  saves - so `State.VERSION` does not move.
+- **The words that name the currency follow:**
+  - `ITEM_TECH` is essence / essência;
+  - `DESC_TECH_COST` is "costs %d essence" / "custa %d de essência";
+  - `TECH_HELD` is "%d essence" / "%d de essência";
+  - `TECH_SUMMARY` still said "ten nights pay %d at best"; it now says "the
+    year pays up to %d" / "o ano rende até %d".
+- **The tree is still TECHNOLOGY** (`TECH_TITLE`).
+- **The day HUD's row of goods** says essence, beside the tech icon through
+  0120's road until A036 is integrated (0235).
+- `tools/i18n_check.py`: 730 keys in two languages, all of them fit.
+
+### What earns it
+
+- **Unchanged:**
+  - A night won pays `tech_points` (1), and one point for each
+    `TECH_BONUSES` row it earned: the house untouched (against
+    `Phases.house_full`, as 0114 left it), nothing lost, and not one got
+    through.
+  - `nights_paid` still stops a night paying twice.
+- **A Full Moon pays its share over again:**
+  - `REWARDS["full_moon_essence_percent"]` (200, a lever, 100-300).
+  - The night's lines are added up, and the share over a hundred is a line
+    of its own in `Tech.would_pay`, `"full moon"`. It is the money's
+    arithmetic.
+  - `GameData.check_rewards` (in `validate()`) refuses a percent under 100,
+    and a bounty outside 0-100.
+- **The year's totals:** `Tech.total_available` and `least_available` count
+  each Full Moon's share night by night. A year pays 256 at best and 64 at
+  worst; it was 224 and 56.
+
+### The smaller purse
+
+How a spring night held well pays now, against before (BALANCE.md's new
+section, priced by the new `src/tools/night_pay.gd`):
+- **Money:** $74 on average, from $722. That is about a quarter of a spring
+  day, where the band's middle is $290.
+- **Materials:** worth $31, from $283.
+- **Essence:** 4.6 a night.
+- **Spring night 9:** $65, from $638.
+- **The Full Moon of night 14:** $222, from $3042.
+
+**Beyond the prompt's list, and why.** The prompt names the fee and the
+material handout. But a spring night's money was mostly the bounty ($373 of
+$722) and the bonuses ($57): cutting the fee alone left about $560, nearly
+two days. So:
+- **`bounty_percent`, new, 5:** the bounty is that share of the kills'
+  worth, rounded down once a night.
+  - In spring, killing everything is then worth about what holding to dawn
+    is: $18 against a $17 fee.
+  - The plan says the two are worth the same; before, killing paid five
+    times as much.
+- **The bonuses:** `intact_structure_bonus` 4 -> 2 and
+  `house_untouched_bonus` 25 -> 10.
+- **The fee:** `base_money` 30 -> 10 and `money_per_night` 15 -> 1.
+- **The materials:** `resources` from wood 10, stone 8, iron 4 to wood 5,
+  stone 3, iron 1; `resources_per_night` from wood 4, stone 3, iron 2 to
+  wood 1. The handout's iron had grown to almost two gun towers a night by
+  night 9.
+- **The enemy's tooltip** said what an enemy is worth. It now says what a
+  kill puts in the purse (`Describe.bounty_of`): $0.15 for a walker, $6 for
+  the giant.
+
+**The seasons:**
+- A night held well pays 46% of the middle of a summer day, 63% of an autumn
+  day and 72% of a winter day. The bounty grows with the horde, ten times
+  over the year, while the day's band grows by half.
+- 0278 now asks to hold every season near spring's share.
+
+**The bounty is for kills only**, asserted. A night held to dawn with two
+killed and three still standing pays the two kills' worth at the percent.
+The three are in no `killed_by_kind`, and when `Phases.begin_day` sends them
+home the run's kill count does not move.
+
+### On screen
+
+**The night HUD:**
+- The essence held, as the tech icon and a number, on the strip's second
+  row right after the house's numbers.
+- The house bar went from 128 to 96 px to make room.
+- The mode hint still starts right of all of it, in both languages.
+
+**The morning report:**
+- "+21 money +3 essence" on one line, and under it the essence's lines:
+  "essence: the night +1, house untouched +1, nobody through +1", then
+  "Full Moon +N" on a Full Moon.
+- **Laid out by measuring.** The lines break only between parts, and the
+  rest is indented under the first. Wrapping by word had split
+  "house untouched / +1" and put the remainder at the frame's edge.
+- **Where the lines come from:** they are kept in the payout as
+  `essence_from`, taken from `Tech.would_pay` inside `Rewards.settle` before
+  `Tech.award` pays. After that the night is paid and `would_pay` answers
+  empty.
+
+### Later prompts edited
+
+- **0278 (the economy across a year)** gains a requirement: measure the
+  night's purse beside each season's day, and hold every season near
+  spring's share. The ways are a `bounty_percent` that falls by season, or
+  a bounty that grows slower than the horde, or the journal says why not.
+- `tools/backlog/part11.py` holds the same. The rendered prompt matches the
+  render apart from its status line.
+
+### Found while doing it
+
+**`input_check`'s day-one cases depend on `headless_check` running first:**
+- `input_v1` leaves `gameplay/tutorial_seen=true` in this machine's
+  `settings.cfg`, because its tutorial cases finish the lessons.
+- `input_check`'s day-one cases (0041) need it false.
+- In `verify` they pass only because `headless_check`'s 0009 settings group
+  wipes the file first.
+- Run on its own after `input_v1`, `input_check` fails six day-one cases.
+- Nothing here changed that; noted for the next session to run them in
+  `verify`'s order.
+
+### Hashes
+
+- **SIM 3391018212 -> 3849555693, on purpose:**
+  - The payout every night won leaves in the state carries `essence_from`.
+  - The purse is smaller.
+- **DATA 2340919704 -> 3664563880, on purpose:** `REWARDS`, with
+  `bounty_percent` and `full_moon_essence_percent`.
+
+Verify: **PASS**, 60 passed, 0 failed in 662 s (the known OVER BUDGET), with
+`--accept` recording the two hashes above. Perf: a night tick 1372 us, a
+swarm's 6973 us.
+
+**Tests:**
+- **`_task_0219_essence` (headless_v1), 15 asserts:**
+  - **The table:**
+    - The rewards pass their check.
+    - A Full Moon percent under 100, and a bounty over 100, are refused.
+    - The currency is called essence, and its id is still `tech`.
+  - **What a night pays:**
+    - A night held clean pays `tech_points` and every bonus, line by line
+      in `essence_from`, and the gains agree.
+    - A house that took a bite pays every bonus but the house's.
+    - Night 7 pays its Full Moon share on its own line.
+    - The report itemises it: the night first, the Full Moon last.
+    - A year's best counts every Full Moon.
+    - A night already paid pays nothing again.
+  - **The bounty at dawn**, for kills only, as above.
+  - **The tooltips:** every kind's says what its kill puts in the purse.
+- **Rewritten in place:**
+  - `headless_check`:
+    - 0062's floor and ceiling count each Full Moon night by night;
+    - the tree tooltip's cost reads `DESC_TECH_COST`;
+    - the enemy tooltip's worth reads `Describe.bounty_of`.
+  - 0061 already read the levers. Its loop over `resources_per_night` has
+    one row now, so headless_check has 17491 asserts.
+  - `headless_v1`'s 0150 floor adds a Full Moon's share.
+- **input_v1:**
+  - `_case_0138_morning`: the report says "+N essence" and every part of
+    what it was for, none split across lines, inside the frame, in both
+    languages.
+  - `_case_0139_night_hud`: the essence held sits between the house's
+    numbers and the hint, in both languages: 676 cases.
+
+**Looked at** (`python tools/shot.py 0219 wave full_moon morning --fhd`,
+and `morning --pt_BR`):
+- **`wave`** (night 1):
+  - NIGHT 1, SPRING 1, WAVE 2/3, 29 LEFT, DAWN 3:54;
+  - under them, the shorter house bar, HOUSE 100/100, then the essence icon
+    and 0.
+- **`full_moon`** (night 7, under its moon mark): 102 LEFT, and the same
+  strip.
+- **`morning`:**
+  - MORNING OF DAY 2, NIGHT 1 SURVIVED, 2 walked off, 1 structure came down;
+  - PAID: +1 iron +3 stone +5 wood, then "+21 money +3 essence";
+  - "essence: the night +1," with "house untouched +1," and "nobody through
+    +1" indented under it;
+  - "for defending well +10";
+  - GET UP inside the frame.
+- **`morning-pt_BR`:**
+  - "+21 dinheiro +3 essência";
+  - "essência: a noite +1, casa intacta +1," and "ninguém passou +1" under
+    it.
+  - The font draws ê like ë, as in "você", which was already so.
+
+Files: src/core/{game_data,rewards,tech}.gd,
+src/ui/{night_hud,result_screen,describe}.gd, assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,input_v1,nights,play_nights}.gd,
+src/tools/night_pay.gd (new) and .uid, tools/determinism_{sim,data}_hash.txt,
+implementation/{BACKLOG,PROGRESS,BALANCE}.md,
+implementation/prompts/{0219-essence,0278-economy-seasons}.md,
+tools/backlog/part11.py, implementation/shots/0219/,
+docs/devlog/{index,index.pt_BR}.md
