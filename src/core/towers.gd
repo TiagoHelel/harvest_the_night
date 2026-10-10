@@ -28,6 +28,21 @@ extends RefCounted
 ## A projectile chases the id it was fired at. If that id dies first the shot
 ## is wasted, which is correct and is what task 0026 turns into a rule about
 ## not over-committing.
+##
+## ## A tower looks near itself
+##
+## Until task 0218 every tower looked at every zombie on the farm to find the
+## few in its reach, every tick it was loaded. A swarm of a few hundred made
+## that the night's whole cost. Now the crowd is filed once a tick into
+## squares of `CROWD_BUCKET` cells (`_crowd()`), and a tower looks only in the
+## squares its reach touches. It measures each one there exactly as before
+## and breaks a tie by the lower id, so it picks what the whole farm's scan
+## picked - `headless_v1` holds the two to the same answer for every way of
+## aiming.
+
+## The side of one square of the crowd's filing, in cells. **Not a lever**:
+## it changes how fast a tower finds its target, never which one it finds.
+const CROWD_BUCKET := 4
 
 
 static func initial() -> Dictionary:
@@ -80,6 +95,10 @@ static func tick(state: Dictionary) -> void:
 		_cool_down(state)
 		return
 
+	# **Filed once, after the shots in the air have landed.** Nothing walks or
+	# arrives while the towers fire, so the filing stays true for the whole
+	# loop; one killed since is passed over, as the full scan passes it over.
+	var crowd := _crowd(state)
 	var occupants: Dictionary = state["occupants"]
 	for idx in _towers(state):
 		var tower: Dictionary = occupants[idx]
@@ -94,7 +113,7 @@ static func tick(state: Dictionary) -> void:
 			continue
 
 		var cell := cell_of_it
-		var target := _acquire(state, cell, entry)
+		var target := _acquire(state, cell, entry, [], crowd)
 		if target == 0:
 			continue
 
@@ -118,7 +137,7 @@ static func tick(state: Dictionary) -> void:
 		var barrels := maxi(int(entry.get("targets", 1)), 1)
 		var taken: Array = [target]
 		while taken.size() < barrels:
-			var another := _acquire(state, cell, entry, taken)
+			var another := _acquire(state, cell, entry, taken, crowd)
 			if another == 0:
 				break
 			taken.append(another)
@@ -208,8 +227,10 @@ static func reach_of(state: Dictionary, entry: Dictionary) -> int:
 		+ Tech.bonus(state, "tower_range_bonus", 0)
 
 
+## `crowd` is `_crowd()`'s filing for this tick, or empty for a look at the
+## whole farm - which is what `acquire_for()` and `target_of()` take.
 static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
-		skip: Array = []) -> int:
+		skip: Array = [], crowd: Dictionary = {}) -> int:
 	var reach := reach_of(state, entry)
 	if reach <= 0:
 		return 0
@@ -220,7 +241,9 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
 
 	var best := 0
 	var best_threat := 1 << 30
-	for id in Entities.ids(state):
+	var near: Array = Entities.ids(state) if crowd.is_empty() \
+		else _near(crowd, from, reach)
+	for id in near:
 		# Already being shot at by this tower's other barrel.
 		if skip.has(id):
 			continue
@@ -240,13 +263,54 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
 		# comparison for every way of aiming, so adding a sixth is a line in
 		# `_threat_of` and nothing else.
 		var threat := _threat_of(state, how, id, cell, from, house)
-		# The lower entity id breaks a tie. `Entities.ids()` is sorted, so the
-		# first one found at a given score is already the lowest id and `<`
-		# rather than `<=` keeps it.
-		if threat < best_threat:
+		# **The lower entity id breaks a tie**, asked outright. The whole
+		# farm's ids come lowest first and the crowd's squares do not, and
+		# the rule cannot depend on which of the two did the looking.
+		if threat < best_threat or (threat == best_threat and id < best):
 			best_threat = threat
 			best = id
 	return best
+
+
+## **The crowd, filed by where it stands** (task 0218): every live entity's
+## id in the square of `CROWD_BUCKET` cells its cell is in, lowest id first
+## within a square. A local of one `tick()`, never kept in the state.
+static func _crowd(state: Dictionary) -> Dictionary:
+	var across := (Grid.WIDTH + CROWD_BUCKET - 1) / CROWD_BUCKET
+	var down := (Grid.HEIGHT + CROWD_BUCKET - 1) / CROWD_BUCKET
+	var squares := {}
+	for id in Entities.ids(state):
+		var cell := Entities.cell_of(state, int(id))
+		# The full scan passes over the same ones.
+		if cell.x < 0:
+			continue
+		# Off the farm's edge counts as the edge's square, where a tower whose
+		# reach crosses the edge still looks.
+		var at := clampi(cell.y / CROWD_BUCKET, 0, down - 1) * across \
+			+ mini(cell.x / CROWD_BUCKET, across - 1)
+		if squares.has(at):
+			(squares[at] as Array).append(id)
+		else:
+			squares[at] = [id]
+	return {"across": across, "squares": squares}
+
+
+## Every id in the squares a reach of `reach` round `from` touches: everybody
+## in reach and some who are not, whom `_acquire()` measures and passes over.
+static func _near(crowd: Dictionary, from: Vector2i, reach: int) -> Array:
+	var across := int(crowd["across"])
+	var squares: Dictionary = crowd["squares"]
+	var left := clampi(from.x - reach, 0, Grid.WIDTH - 1) / CROWD_BUCKET
+	var right := clampi(from.x + reach, 0, Grid.WIDTH - 1) / CROWD_BUCKET
+	var top := clampi(from.y - reach, 0, Grid.HEIGHT - 1) / CROWD_BUCKET
+	var bottom := clampi(from.y + reach, 0, Grid.HEIGHT - 1) / CROWD_BUCKET
+	var out: Array = []
+	for row in range(top, bottom + 1):
+		for column in range(left, right + 1):
+			var here: Variant = squares.get(row * across + column, null)
+			if here != null:
+				out.append_array(here)
+	return out
 
 
 ## How much this tower wants to shoot that one. Lower wins.
@@ -274,8 +338,16 @@ static func _threat_of(state: Dictionary, how: StringName, id: int,
 ## farm, pay for it and wait for a reload; it should be able to hand the rules
 ## an entry and get an answer.
 static func acquire_for(state: Dictionary, from: Vector2i,
-		entry: Dictionary) -> int:
-	return _acquire(state, from, entry)
+		entry: Dictionary, skip: Array = []) -> int:
+	return _acquire(state, from, entry, skip)
+
+
+## The same question **asked the way `tick()` asks it**, through the crowd's
+## squares (task 0218): the seam that holds the squares to `acquire_for()`'s
+## look at the whole farm.
+static func acquire_nearby_for(state: Dictionary, from: Vector2i,
+		entry: Dictionary, skip: Array = []) -> int:
+	return _acquire(state, from, entry, skip, _crowd(state))
 
 
 ## Land one shot of this declaration on this target, now.

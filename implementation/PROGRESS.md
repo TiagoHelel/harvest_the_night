@@ -20780,3 +20780,201 @@ src/tools/day_tour.gd.uid, implementation/shots/0196/,
 implementation/prompts/{0196-checkpoint-day,0278-economy-seasons,0295-playtest-v1}.md,
 tools/backlog/{part11,part13}.py, implementation/{BACKLOG,PROGRESS}.md,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0218 - Room for more fields and more bodies - done 2026-10-10
+
+What changed: nothing for the player. The decoy, the bait, the digger and
+the rat swarm are coming, and the night now has room for them:
+- a tower looks only near itself;
+- the entity table is no longer sorted on every read;
+- the path fields are named in a registry, and a field after today's three
+  is built only when something asks for it.
+
+The perf scenario gains a swarm of 300 walkers more, held to the tick
+budget.
+
+### The perf table, before and after
+
+"Before" is three runs of `python tools/perf.py --report` at the start of
+the task, and "after" three runs with everything in. "Accepted" is the
+baseline `--accept` wrote. In microseconds:
+
+| | Baseline at the start | Before | After | Accepted |
+|---|---|---|---|---|
+| `night_towers` | 2593 | 2964 / 3015 / 2993 | 584 / 588 / 590 | 598 |
+| `night_tick` | 3497 | 3725 / 3745 / 3728 | 1349 / 1341 / 1352 | 1312 |
+| `night_enemies` | 499 | 459 / 463 / 463 | 497 / 458 / 457 | 452 |
+| `night_traps` | 156 | 155 / 152 / 154 | 154 / 149 / 150 | 148 |
+| `path_refresh` | 8782 | 9245 / 9166 / 9295 | 9216 / 9267 / 9409 | 9149 |
+| `day_tick` | 72 | 76 / 76 / 77 | 77 / 76 / 75 | 75 |
+| `swarm_tick` | - | - | 6736 / 6716 / 6737 | 6775 |
+| `swarm_towers` | - | - | 1335 / 1335 / 1341 | 1331 |
+| `swarm_enemies` | - | - | 3268 / 3252 / 3282 | 3252 |
+
+The worst case is the same as before: 40 towers, 59 walls, 60 crops and 57
+zombies. The swarm counts 357 bodies.
+
+**Why each number moved:**
+- **`night_towers`, 2593 -> 598.** A loaded tower used to sort the 57 ids
+  and measure all 57. Now it reads only the squares its reach touches, and
+  nothing is sorted. That is about five times cheaper than the 2990 this
+  morning measured on the old worst case, and under the prompt's 1028.
+- **`night_tick`, 3497 -> 1312.** Mostly the towers. Every other loop over
+  the entities (the walk, combat, the traps, the flare) stopped sorting
+  too.
+- **`night_enemies`, `night_traps`, `night_combat`:** a few microseconds
+  each from the ids, inside the noise (`night_enemies` ran 457-497 after).
+- **`path_refresh`, 8782 -> 9149: not this task.**
+  - The same three sweeps from the same pass of costs.
+  - The runs before any change already measured 9166-9295.
+  - 8782 was accepted at 0165, and the farm has had more on it since.
+- **`day_crafting` 2 -> 5, `day_tick` 72 -> 75, `day_tutorial`,
+  `night_reactions`, `view_particles`:** noise under the 30 us floor, and
+  the same before the change.
+- **`swarm_*`:** new.
+
+### The swarm
+
+**`perf_check.gd`'s swarm:** the worst case with `SWARM` (300) walkers
+more.
+- They stand on every open cell within `SWARM_MARGIN` (6) of the forty
+  towers' band, in reading order: nothing stands on those cells and the
+  house can be reached from them.
+- They are the rat swarm's stand-in until 0248.
+- **Its lines:** `COUNT swarm`, `PERF swarm_tick` (averaged over
+  `SWARM_TICKS`, 300 ticks, before the guns thin it out),
+  `PERF swarm_towers` and `PERF swarm_enemies`.
+- `PerfNames` is unchanged.
+
+**It fits the budget:**
+- A swarm tick is 6775 us of the 8333 a tick may have (81%).
+- `tools/perf.py` now holds `swarm_tick` to `TICK_BUDGET_US` beside
+  `night_tick` and `day_tick`.
+- Its OK line names the swarm's number.
+
+**What would take it further:**
+- The walk is now the cost: 3252 us, about 9 us a body.
+- Each body reads its kind's row, asks whether it stands on the house, and
+  takes a step in the field.
+- Twice this swarm would not fit as it is. The walk would have to stop
+  asking per body what is the same for a whole kind on a tick.
+- The towers, at 1331 us for 357 bodies, are no longer what limits it.
+
+### A tower looks near itself (`Towers`)
+
+- **`_crowd()` files the crowd once a tick.** Every live id goes into the
+  square of `CROWD_BUCKET` (4) cells it stands in, lowest first within a
+  square.
+  - It is built after the shots in the air have landed, as a local, never
+    in the state.
+  - Off the farm's edge counts as the edge's square.
+- **`_near()`** hands a tower the ids in the squares its reach touches.
+  `_acquire()` measures each exactly as before: the reach, the minimum, the
+  shots already committed, the threat.
+- **The tie is now asked outright:** lower threat, then lower id. The
+  squares do not come lowest id first, and the rule cannot depend on which
+  of the two ways did the looking.
+- **Why the filing stays true through the loop:**
+  - An entity moves only in `Enemies._walk` and arrives only through
+    `Waves.tick`.
+  - Inside the towers' loop one can only die, to a cone or a line.
+  - A dead one is passed over by `cell_of`, exactly as the full scan passes
+    it over.
+- `CROWD_BUCKET` is not a lever. It changes how fast a tower finds its
+  target, never which one it finds.
+- **The seams:**
+  - `acquire_for()` keeps the look at the whole farm, for the tests and
+    for `target_of()`'s threat overlay, and takes the barrels' `skip` now.
+  - `acquire_nearby_for()` asks the way `tick()` asks.
+
+### The entity table in order (`Entities`)
+
+- **`ids()` returns the table's keys, unsorted.**
+  - `next_entity_id` hands ids out ascending and never reuses one.
+  - A Dictionary keeps its keys in the order they went in, and erasing one
+    keeps the rest in place.
+- **`in_order()`** says whether that holds. **`put_in_order()`** mends a
+  table that does not.
+- **`State.reconcile()` calls it where a save is read.**
+  - A real save never needs it: `var_to_bytes` keeps the order, and the
+    farm migrations rewrite entities' values, never their keys.
+  - So the note "put the entities back in id order" should never be
+    printed.
+
+### The fields by name (`Pathing`)
+
+**`Pathing.FIELDS`** is a const table. Each row gives a field's seeds, its
+cost rule, the state keys it is kept under, and whether it is eager:
+- `house`: `flow` and `flow_cost`;
+- `around`: `flow_open` and `open_cost`;
+- `hunt`: `flow_hunt` and `hunt_cost`, with no field at all when there is
+  no prey.
+
+All three are eager, under `flow_version`.
+
+**`_build()` is now driven by the table:**
+- the same three sweeps, from the same one pass of entry costs;
+- the same fields, to the byte, since SIM did not move.
+
+**The accessors:**
+- `Pathing.field(state, name)` is the accessor.
+- `step_by(state, name, cell)` is `step_from()` for any row.
+- `field_from(state, spec)` is the road `field()` takes with a row.
+
+**A row that is not eager** is built on the first `field()` at the current
+`grid_version`. It is kept under its own keys, and `refresh()` never
+touches it. No such row exists until 0224's lure, so the test drives the
+road with a row shaped like it, through `field_from`.
+
+### Hashes
+
+**SIM 3391018212 and DATA 2340919704, unchanged:**
+- No key was added to a new game's state.
+- The squares are a local.
+- A field built when asked for has no keys until it is asked for.
+- The three eager fields keep their keys and their bytes.
+
+Verify: **PASS**, 60 passed, 0 failed in 651 s (the known OVER BUDGET).
+Perf's own line in it: a night tick 1359 us of the 8333 (16%), a swarm's
+6952 us, a path rebuild 9423 us of 33333.
+- headless_check 17493 asserts, and headless_v1 2253 (19.5 s);
+- input_check 1220 cases and input_v1 672.
+
+**Tests:** `_task_0218_perf_ground` (headless_v1), 25 asserts.
+- **The squares against the whole farm:**
+  - A seeded crowd of 243: a quarter of it packed round one spot and three
+    past the farm's far edges.
+  - Their hit points run 1-6, so ties are everywhere. Every seventh is
+    already accounted for by a shot in the air.
+  - A tower every six cells, plus the four corners and a cell on the east
+    edge, makes 148 places.
+  - Every way of aiming at reaches 3, 5 and 12 (with a minimum of 4) makes
+    1776 looks.
+  - First barrel and second, the squares pick what the whole farm picks,
+    and more than a third of the looks found somebody.
+- **The tie, set as a trap:** the lower id stands in the square looked in
+  last, and the higher id in the square looked in first, the same distance
+  away. The lower id is shot.
+- **No trace in the state:** a gun firing into a crowd for 45 ticks
+  leaves the state's keys as they were.
+- **The table stays in order:**
+  - after spawns, kills through `Combat.hit`, more spawns, a save round
+    trip and `Enemies.withdraw`;
+  - the next id after the withdrawal comes after every id there was;
+  - a save written backwards comes back in order through `reconcile`.
+- **A field built when asked for:**
+  - `refresh()` does not build it, and the first ask does: the house's
+    seeds at the open costs, equal to `flow_open`.
+  - Asked again with nothing changed, it is the one already built.
+  - A wall goes up: `refresh()` leaves it stale, and the next ask rebuilds
+    it.
+  - The three eager rows are the fields they always were, and `step_by` is
+    the step it always was.
+  - A new game has no key for it.
+- **The swarm is budgeted:** `tools/perf.py` holds `swarm_tick` to the tick
+  budget, and the recorded baseline is inside it.
+
+Files: src/core/{pathing,entities,towers,state}.gd,
+src/tools/{perf_check,headless_v1}.gd, tools/{perf.py,perf_baseline.txt},
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0218-perf-groundwork.md,
+docs/devlog/{index,index.pt_BR}.md

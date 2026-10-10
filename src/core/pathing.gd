@@ -85,6 +85,21 @@ extends RefCounted
 ## equally cheap ways out takes the first one. That decides which side of a
 ## wall a wave flows around, so it is a rule - not whatever order the
 ## neighbours happened to come back in.
+##
+## ## The fields, by name (task 0218)
+##
+## Every field here is one sweep from a set of **seeds** against one set of
+## **entry costs**, kept in the state under two keys - the field, and the costs
+## `_step_in()` reads beside it - for one `grid_version`. `FIELDS` names each
+## one by those things, so the next field is a row rather than another copy
+## of the arithmetic in `_build()`.
+##
+## **Eager, or built when asked for.** The three every night walks by are
+## `eager`: built together in `refresh()`, as they always were, because their
+## keys are in every new game and folded into SIM. A field after them - 0224's
+## lure, 0250's digger - is built by the first `field()` that asks for it at
+## the current `grid_version`, and never by a rebuild nobody asked for: a lure
+## nobody has set out costs no sweep.
 
 ## A cell the house cannot be reached from: walled in, or across the pond.
 const UNREACHABLE := 0x7FFFFFFF
@@ -93,6 +108,27 @@ const UNREACHABLE := 0x7FFFFFFF
 ## number is never added to anything - it is a marker, and zero is the one
 ## value a real cost can never be.
 const IMPASSABLE := 0
+
+## **Every field, by name** (task 0218). A row says:
+## - `seeds`, where the sweep starts: `house`, the farmhouse; `prey`, whatever a
+##   breaker has come for (`prey_cells()`).
+## - `cost`, what stepping onto a cell costs: `priced`, a barrier is a door
+##   with a price on it; `open`, a barrier is a hole in the map; `hunt`, priced,
+##   with the seeds themselves passable so that the sweep can leave them.
+## - `field`, `costs` and `version`, the state keys it is kept under.
+## - `eager`, built in `refresh()` with the others rather than when asked for.
+## - `none_without_seeds`, no seeds means no field at all - an empty array,
+##   which every reader takes as nowhere to go - rather than a field of
+##   `UNREACHABLE`.
+const FIELDS: Dictionary = {
+	&"house": {"seeds": &"house", "cost": &"priced", "field": "flow",
+		"costs": "flow_cost", "version": "flow_version", "eager": true},
+	&"around": {"seeds": &"house", "cost": &"open", "field": "flow_open",
+		"costs": "open_cost", "version": "flow_version", "eager": true},
+	&"hunt": {"seeds": &"prey", "cost": &"hunt", "field": "flow_hunt",
+		"costs": "hunt_cost", "version": "flow_version", "eager": true,
+		"none_without_seeds": true},
+}
 
 
 static func initial() -> Dictionary:
@@ -122,13 +158,48 @@ static func refresh(state: Dictionary) -> void:
 			and (state["flow"] as PackedInt32Array).size() == Grid.CELLS:
 		return
 	var built := _build(state)
-	state["flow"] = built["field"]
-	state["flow_cost"] = built["cost"]
-	state["flow_open"] = built["open_field"]
-	state["open_cost"] = built["open_cost"]
-	state["flow_hunt"] = built["hunt_field"]
-	state["hunt_cost"] = built["hunt_cost"]
+	for key in GameData.sorted_names(built.keys()):
+		state[String(key)] = built[String(key)]
 	state["flow_version"] = int(state["grid_version"])
+
+
+## **A field, by its name in `FIELDS`**, built for the farm as it stands. An
+## eager one is the one `refresh()` keeps; any other is built here, the first
+## time it is asked for at this `grid_version`, and kept under its own keys.
+static func field(state: Dictionary, name: StringName) -> PackedInt32Array:
+	var spec: Variant = FIELDS.get(name, null)
+	if spec == null:
+		push_error("Pathing.field: no field called '%s'" % name)
+		return PackedInt32Array()
+	return field_from(state, spec as Dictionary)
+
+
+## One step downhill in a named field, or the same cell when there is nowhere
+## to go: `step_from()`, for any field in `FIELDS`.
+static func step_by(state: Dictionary, name: StringName, cell: Vector2i) -> Vector2i:
+	var spec: Variant = FIELDS.get(name, null)
+	if spec == null:
+		push_error("Pathing.step_by: no field called '%s'" % name)
+		return cell
+	var built := field_from(state, spec as Dictionary)
+	return _step_in(built, state[String((spec as Dictionary)["costs"])], cell)
+
+
+## **The road `field()` takes with a row**, for a row written here rather than
+## in `FIELDS`: the seam a test drives a field built when asked for with, until
+## 0224 registers the first one.
+static func field_from(state: Dictionary, spec: Dictionary) -> PackedInt32Array:
+	if bool(spec.get("eager", false)):
+		refresh(state)
+		return state[String(spec["field"])]
+	var version := String(spec["version"])
+	var key := String(spec["field"])
+	if int(state.get(version, -1)) != int(state["grid_version"]) or not state.has(key):
+		var made := _make(state, spec, _entry_costs(state))
+		state[key] = made["field"]
+		state[String(spec["costs"])] = made["cost"]
+		state[version] = int(state["grid_version"])
+	return state[key]
 
 
 ## What getting from this cell to the house costs. `UNREACHABLE` when there is
@@ -306,8 +377,8 @@ static func routes_if_blocked(state: Dictionary, blocked: Vector2i,
 	else:
 		occupants[idx] = was
 
-	var field: PackedInt32Array = built["field"]
-	var cost: PackedInt32Array = built["cost"]
+	var field: PackedInt32Array = built["flow"]
+	var cost: PackedInt32Array = built["flow_cost"]
 	var out: Array = []
 	for start in froms:
 		var at: Vector2i = start
@@ -410,36 +481,66 @@ static func reachable(state: Dictionary, cell: Vector2i) -> bool:
 
 # ------------------------------------------------------------------ building
 
-## Both fields and both sets of entry costs, built together because they come
-## off the same one pass over the farm.
+## Every eager field and its costs, built together because they come off the
+## same one pass over the farm. Keyed by the state keys they are kept under.
 static func _build(state: Dictionary) -> Dictionary:
 	var costs := _entry_costs(state)
-	var home := Farm.cells_with(state, &"house")
+	var built := {}
+	for name in GameData.sorted_names(FIELDS.keys()):
+		var spec: Dictionary = FIELDS[name]
+		if not bool(spec.get("eager", false)):
+			continue
+		var made := _make(state, spec, costs)
+		built[String(spec["field"])] = made["field"]
+		built[String(spec["costs"])] = made["cost"]
+	return built
 
-	# **Skipped when there is nothing to hunt.** Most of night one has nothing
-	# built on the farm at all, and a sweep of seven hundred cells to find out
-	# that the answer is "nowhere" is a sweep worth not doing.
-	var prey := prey_cells(state)
-	var hunt_cost: PackedInt32Array = costs["cost"]
-	var hunt_field := PackedInt32Array()
-	if not prey.is_empty():
-		# A tower is impassable in the field everything else reads, which is
-		# what makes a wave flow around it. The sweep has to be able to leave
-		# one, so here they cost what the ground under them costs.
-		hunt_cost = costs["cost"].duplicate()
-		for cell in prey:
-			hunt_cost[Grid.index(cell)] = Farm.cost_of_terrain(
-				Farm.terrain_at(state, cell))
-		hunt_field = _sweep(state, hunt_cost, prey)
 
-	return {
-		"cost": costs["cost"],
-		"field": _sweep(state, costs["cost"], home),
-		"open_cost": costs["open"],
-		"open_field": _sweep(state, costs["open"], home),
-		"hunt_cost": hunt_cost,
-		"hunt_field": hunt_field,
-	}
+## One field and its costs, off one pass of entry costs: the row's seeds,
+## swept against the row's costs.
+static func _make(state: Dictionary, spec: Dictionary, costs: Dictionary) -> Dictionary:
+	var seeds := _seeds_of(state, StringName(spec["seeds"]))
+	var cost := _costs_by(state, StringName(spec["cost"]), costs, seeds)
+	# **Skipped when there is nothing to go for.** Most of night one has
+	# nothing built on the farm at all, and a sweep of seven hundred cells to
+	# find out that the answer is "nowhere" is a sweep worth not doing.
+	if seeds.is_empty() and bool(spec.get("none_without_seeds", false)):
+		return {"field": PackedInt32Array(), "cost": cost}
+	return {"field": _sweep(state, cost, seeds), "cost": cost}
+
+
+## Where a row's sweep starts.
+static func _seeds_of(state: Dictionary, rule: StringName) -> Array:
+	match rule:
+		&"house":
+			return Farm.cells_with(state, &"house")
+		&"prey":
+			return prey_cells(state)
+	push_error("Pathing: no seeds called '%s'" % rule)
+	return []
+
+
+## What stepping onto each cell costs, by a row's rule.
+static func _costs_by(state: Dictionary, rule: StringName, costs: Dictionary,
+		seeds: Array) -> PackedInt32Array:
+	match rule:
+		&"priced":
+			return costs["cost"]
+		&"open":
+			return costs["open"]
+		&"hunt":
+			if seeds.is_empty():
+				return costs["cost"]
+			# A tower is impassable in the field everything else reads, which
+			# is what makes a wave flow around it. The sweep has to be able to
+			# leave one, so here they cost what the ground under them costs.
+			var hunt: PackedInt32Array = (costs["cost"] as PackedInt32Array).duplicate()
+			for cell in seeds:
+				hunt[Grid.index(cell)] = Farm.cost_of_terrain(
+					Farm.terrain_at(state, cell))
+			return hunt
+	push_error("Pathing: no cost rule called '%s'" % rule)
+	return costs["cost"]
 
 
 ## One field, swept out from a set of seed cells against one set of entry

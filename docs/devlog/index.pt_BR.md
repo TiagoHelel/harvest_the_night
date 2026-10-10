@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-185 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+186 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -228,6 +228,7 @@ voz alta.
 | 0194 | The day's economy | 2026-10-10 |
 | 0195 | Teaching the new day | 2026-10-10 |
 | 0196 | Checkpoint: is the day good on its own? | 2026-10-10 |
+| 0218 | Room for more fields and more bodies | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 

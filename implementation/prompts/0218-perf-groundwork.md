@@ -1,7 +1,7 @@
 # 0218 - Room for more fields and more bodies
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0196
 - **Likely files:** src/core/pathing.gd, src/core/entities.gd, src/core/towers.gd, src/tools/perf_check.gd, tools/perf.py, tools/perf_baseline.txt, src/tools/headless_v1.gd
 

@@ -56,12 +56,45 @@ static func alive(state: Dictionary, id: int) -> bool:
 	return (state["entities"] as Dictionary).has(id)
 
 
-## Every live id, lowest first. **Sorted, always**: every loop over entities is
-## a loop that could resolve a tie, and iteration order is not a rule.
+## Every live id, lowest first: every loop over entities is a loop that could
+## resolve a tie, and iteration order is not a rule.
+##
+## **In order without sorting** (task 0218). Ids are handed out ascending by
+## `next_entity_id` and never reused, and a Dictionary keeps its keys in the
+## order they went in, so the table is lowest first already - and stays so
+## when one is taken out. Sorting it again on every call was most of what a
+## tower's look round cost. `headless_v1` holds the table to that order after
+## spawns, kills, a withdrawal and a save round trip, and `State.reconcile()`
+## puts a save that came in otherwise back in order (`put_in_order()`).
 static func ids(state: Dictionary) -> Array:
-	var out: Array = (state["entities"] as Dictionary).keys()
-	out.sort()
-	return out
+	return (state["entities"] as Dictionary).keys()
+
+
+## Whether the table is lowest id first, as `ids()` takes it to be.
+static func in_order(state: Dictionary) -> bool:
+	var last := 0
+	# **The one loop that reads the table's own order**, because the order is
+	# what it is asking about.
+	for id in (state["entities"] as Dictionary):
+		if int(id) <= last:
+			return false
+		last = int(id)
+	return true
+
+
+## Put the table back in id order, if a save brought it in otherwise. True
+## when it had to.
+static func put_in_order(state: Dictionary) -> bool:
+	if in_order(state):
+		return false
+	var table: Dictionary = state["entities"]
+	var keys: Array = table.keys()
+	keys.sort()
+	var ordered := {}
+	for id in keys:
+		ordered[id] = table[id]
+	state["entities"] = ordered
+	return true
 
 
 static func count(state: Dictionary) -> int:

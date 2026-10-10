@@ -50,6 +50,18 @@ const TOWER_HP := 1000000
 ## And how many times a one-off - a path rebuild - is repeated.
 const REPEATS := 40
 
+## **The swarm** (task 0218): how many walkers more the worst case gets, on
+## open ground round its towers - the rat swarm's stand-in until task 0248.
+const SWARM := 300
+
+## How far round the towers' band they stand, in cells: inside some tower's
+## reach, or a few steps from it.
+const SWARM_MARGIN := 6
+
+## How many ticks the swarm's whole tick is averaged over. Ten seconds: long
+## enough to time, and short enough that the guns have not thinned it out.
+const SWARM_TICKS := 300
+
 ## How many calls a single system gets before the state is copied again.
 ##
 ## **A system ticked on its own goes somewhere the game never goes.** Six
@@ -104,6 +116,16 @@ func _run() -> void:
 			_system(night, named))
 	for named in DAY_SYSTEMS:
 		print("PERF day_%s " % String(named).to_lower(), _system(day, named))
+
+	# **The swarm** (task 0218): the same night with a few hundred bodies
+	# more at the towers, which is what the decoy, the bait, the digger and the
+	# rat swarm are about to ask of it. Its own lines, because the night's must
+	# stay comparable with every baseline before them.
+	var swarm := _the_swarm(night)
+	print("COUNT swarm ", Entities.count(swarm))
+	print("PERF swarm_tick ", _per_tick(swarm, SWARM_TICKS))
+	print("PERF swarm_towers ", _system(swarm, &"Towers"))
+	print("PERF swarm_enemies ", _system(swarm, &"Enemies"))
 
 	# **The path field, which is the one thing that is not per tick.** It is
 	# rebuilt when the walls change, and a player in build mode changes them
@@ -192,6 +214,31 @@ func _the_worst_case() -> Dictionary:
 	return peak
 
 
+## **The worst case and `SWARM` walkers more** (task 0218), spread over the
+## open cells within `SWARM_MARGIN` of the towers' band - every cell nothing
+## stands on that the house can be reached from, in reading order, and round
+## again when there are fewer cells than walkers.
+func _the_swarm(night: Dictionary) -> Dictionary:
+	var state: Dictionary = night.duplicate(true)
+	var lo := Vector2i(Grid.WIDTH, Grid.HEIGHT)
+	var hi := Vector2i(-1, -1)
+	for cell in Towers.cells(state):
+		lo = Vector2i(mini(lo.x, cell.x), mini(lo.y, cell.y))
+		hi = Vector2i(maxi(hi.x, cell.x), maxi(hi.y, cell.y))
+	var open: Array = []
+	for y in range(maxi(lo.y - SWARM_MARGIN, 0), mini(hi.y + SWARM_MARGIN + 1, Grid.HEIGHT)):
+		for x in range(maxi(lo.x - SWARM_MARGIN, 0), mini(hi.x + SWARM_MARGIN + 1, Grid.WIDTH)):
+			var cell := Vector2i(x, y)
+			if Farm.occupant(state, cell).is_empty() and Pathing.reachable(state, cell):
+				open.append(cell)
+	if open.is_empty():
+		push_error("perf_check: no open ground round the towers for the swarm")
+		return state
+	for i in SWARM:
+		Entities.spawn(state, &"walker", open[i % open.size()])
+	return state
+
+
 ## A day with as much going on as a day gets.
 func _a_busy_day() -> Dictionary:
 	var state := State.create(102103)
@@ -218,12 +265,12 @@ func _a_busy_day() -> Dictionary:
 ## inside the 600 ticks after its busiest moment, and an average that ran on
 ## into the morning reported a night tick of 36 us against the towers' 1435:
 ## a number about the result screen, under the night's name.
-func _per_tick(state: Dictionary) -> int:
+func _per_tick(state: Dictionary, most: int = TICKS) -> int:
 	var mine: Dictionary = state.duplicate(true)
 	var phase := int(mine["phase"])
 	var ticks := 0
 	var started := Time.get_ticks_usec()
-	while ticks < TICKS and int(mine["phase"]) == phase:
+	while ticks < most and int(mine["phase"]) == phase:
 		Sim.advance(mine, 1)
 		ticks += 1
 	return int(round(float(Time.get_ticks_usec() - started) / float(maxi(ticks, 1))))

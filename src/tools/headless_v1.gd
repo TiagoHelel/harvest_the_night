@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 65
+const GROUPS := 66
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -134,6 +134,7 @@ func _run() -> void:
 	_task_0193_supply()
 	_task_0194_economy()
 	_task_0195_tips()
+	_task_0218_perf_ground()
 
 
 func _finish() -> void:
@@ -6338,6 +6339,191 @@ func _task_0195_tips() -> void:
 	var twice_remembered := Tips.remember(Tips.remember({}, &"bite"), &"bite")
 	expect((twice_remembered["tips_seen"] as Array) == ["bite"] and Tips.seen(twice_remembered, &"bite"),
 		"remembered once, however many times it is written")
+	_completed += 1
+
+
+## 0218 - room for more fields and more bodies, with nothing changed for the
+## player: a tower looking near itself picks what a look at the whole farm
+## picks, the entity table is lowest id first without being sorted, and a
+## field built when asked for is built only then.
+func _task_0218_perf_ground() -> void:
+	# **The crowd's squares against the whole farm.** A seeded crowd over the
+	# farm and a little past its far edges, thick in places, its hit points
+	# few enough that ties are everywhere, and every seventh one already
+	# accounted for by a shot in the air.
+	var state := State.create(21800)
+	var rng: Array = state["rng"]
+	var crowd: Array = []
+	for i in 240:
+		var cell := Vector2i(Rng.int_between(rng, 0, Grid.WIDTH - 1), Rng.int_between(rng, 0, Grid.HEIGHT - 1))
+		if i % 4 == 0:
+			cell = Vector2i(40 + Rng.int_between(rng, -5, 5), 30 + Rng.int_between(rng, -5, 5))
+		crowd.append(Entities.spawn(state, &"walker", cell))
+	for cell in [Vector2i(Grid.WIDTH, 12), Vector2i(30, Grid.HEIGHT), Vector2i(Grid.WIDTH + 2, Grid.HEIGHT + 2)]:
+		crowd.append(Entities.spawn(state, &"walker", cell))
+	for i in crowd.size():
+		Entities.set_hp(state, int(crowd[i]), 1 + Rng.int_between(rng, 0, 5))
+		if i % 7 == 3:
+			(state["projectiles"] as Array).append({"target": int(crowd[i]), "damage": 1000})
+	var towers: Array = []
+	for y in range(2, Grid.HEIGHT, 6):
+		for x in range(2, Grid.WIDTH, 6):
+			towers.append(Vector2i(x, y))
+	for corner in [Vector2i.ZERO, Vector2i(Grid.WIDTH - 1, 0), Vector2i(0, Grid.HEIGHT - 1),
+			Vector2i(Grid.WIDTH - 1, Grid.HEIGHT - 1), Vector2i(Grid.WIDTH - 1, 12)]:
+		towers.append(corner)
+	var asked := 0
+	var found := 0
+	var differ: Array = []
+	for how in GameData.TARGETING:
+		for reach in [[3, 0], [5, 0], [12, 4]]:
+			var entry := {"range": reach[0], "min_range": reach[1], "targeting": how}
+			for from in towers:
+				var whole := Towers.acquire_for(state, from, entry)
+				var near := Towers.acquire_nearby_for(state, from, entry)
+				asked += 1
+				if whole != near:
+					differ.append([how, reach, from, whole, near])
+				if whole == 0:
+					continue
+				found += 1
+				# And its second barrel, with the first one taken.
+				if Towers.acquire_for(state, from, entry, [whole]) \
+						!= Towers.acquire_nearby_for(state, from, entry, [whole]):
+					differ.append([how, reach, from, "second barrel"])
+	expect(differ.is_empty(), "a tower looking near itself picks what a look at the whole farm picks, every way of aiming",
+		"%d of %d differ, first %s" % [differ.size(), asked, str(differ.slice(0, 3))])
+	expect(found > asked / 3, "and most of those looks found somebody to shoot", "%d of %d" % [found, asked])
+
+	# **A tie goes to the lower id however the squares are walked.** The
+	# lower id stands in a square the look reaches last, the higher one in the
+	# square it reaches first, both the same distance from the tower.
+	var tied := State.create(21800)
+	var tower := Vector2i(40, 32)
+	var lower := Entities.spawn(tied, &"walker", tower + Vector2i(3, 3))
+	var higher := Entities.spawn(tied, &"walker", tower + Vector2i(-3, -3))
+	var nearest := {"range": 5, "targeting": GameData.TARGET_NEAREST}
+	expect(Towers.acquire_nearby_for(tied, tower, nearest) == lower and Towers.acquire_for(tied, tower, nearest) == lower,
+		"a tie goes to the lower id, though the higher one is in the square looked in first",
+		"%d and %d against %d" % [Towers.acquire_nearby_for(tied, tower, nearest), Towers.acquire_for(tied, tower, nearest), lower])
+	expect(higher > lower, "and the two came in that order")
+
+	# **The squares are a local of the tick.** A night of guns and a crowd
+	# leaves the state with the keys it had.
+	var night := State.create(21803)
+	Resources.gain(night, {GameData.WOOD: 500, GameData.STONE: 500, GameData.IRON: 500, GameData.MONEY: 500})
+	expect(NightRoad.to_build(night), "a build step to put a gun up in")
+	var gun := Vector2i(-1, -1)
+	for dy in range(-6, 7):
+		for dx in range(3, 10):
+			var spot := Farm.house_centre(night) + Vector2i(dx, dy)
+			if gun.x < 0 and Building.place(night, &"gun_tower", spot):
+				gun = spot
+	NightRoad.through_build(night)
+	for i in 30:
+		Entities.spawn(night, &"walker", gun + Vector2i(2 + i % 5, -2 + i / 5))
+	var keys_before := GameData.sorted_names(night.keys())
+	var shots := Towers.shots_fired(night)
+	for _i in 45:
+		Towers.tick(night)
+	expect(gun.x >= 0 and Towers.shots_fired(night) > shots, "a gun on the farm, firing into a crowd",
+		"%s, %d shots" % [gun, Towers.shots_fired(night) - shots])
+	expect(GameData.sorted_names(night.keys()) == keys_before, "and its looking keeps nothing in the state")
+
+	# **The table is lowest id first, without a sort.** Spawned, killed
+	# through the rules, spawned again, withdrawn, and through a save.
+	var table := State.create(21801)
+	expect(NightRoad.to_night(table), "a night to put them in")
+	var spawned: Array = Entities.ids(table)
+	for i in 40:
+		spawned.append(Entities.spawn(table, &"walker", Vector2i(10 + i % 20, 10 + i / 20)))
+	expect(Entities.in_order(table) and Entities.ids(table) == spawned, "spawned, the table is lowest id first")
+	var killed := 0
+	for i in range(0, spawned.size(), 3):
+		Combat.hit(table, int(spawned[i]), 100000)
+		killed += 1
+	var sorted_ids := Entities.ids(table).duplicate()
+	sorted_ids.sort()
+	expect(Entities.count(table) == spawned.size() - killed and Entities.in_order(table)
+		and Entities.ids(table) == sorted_ids, "the kills leave it in order",
+		"%d left of %d" % [Entities.count(table), spawned.size()])
+	var newest := 0
+	for i in 10:
+		newest = Entities.spawn(table, &"walker", Vector2i(12 + i, 14))
+	expect(Entities.in_order(table) and int(Entities.ids(table).back()) == newest, "and so do the spawns after them")
+	var back := _through_a_save(table, "entities_0218")
+	expect(not back.is_empty() and Entities.in_order(back) and Entities.ids(back) == Entities.ids(table),
+		"a save round trip keeps the order", "%d against %d" % [Entities.count(back), Entities.count(table)])
+	var shuffled := table.duplicate(true)
+	var reversed := {}
+	var backwards: Array = Entities.ids(shuffled)
+	backwards.reverse()
+	for id in backwards:
+		reversed[id] = (shuffled["entities"] as Dictionary)[id]
+	shuffled["entities"] = reversed
+	var was_out := not Entities.in_order(shuffled)
+	var mended := State.reconcile(shuffled)
+	expect(was_out and mended.has("put the entities back in id order") and Entities.in_order(shuffled)
+		and Entities.ids(shuffled) == Entities.ids(table),
+		"a save that came in out of order is put back in order where it is read", str(mended))
+	Enemies.withdraw(table)
+	var after_dawn := Entities.spawn(table, &"walker", Vector2i(20, 20))
+	expect(Entities.count(table) == 1 and Entities.in_order(table) and after_dawn > newest,
+		"withdrawn, and the next one still comes after every id there was")
+
+	# **A field built when asked for is built only then.** No row of
+	# `FIELDS` is one yet - 0224's lure is the first - so this one is
+	# written here, shaped like it, and driven down the road `field()` takes.
+	var farm := State.create(21802)
+	var lure := {"seeds": &"house", "cost": &"open", "field": "lure_0218",
+		"costs": "lure_0218_cost", "version": "lure_0218_version"}
+	Pathing.refresh(farm)
+	expect(not farm.has("lure_0218") and not farm.has("lure_0218_cost") and not farm.has("lure_0218_version"),
+		"a field built when asked for is not built by the rebuild everything else gets")
+	var made := Pathing.field_from(farm, lure)
+	expect(int(farm.get("lure_0218_version", -1)) == int(farm["grid_version"]) and made.size() == Grid.CELLS,
+		"asked for, it is built for the farm as it stands")
+	expect(made == farm["flow_open"] and farm["lure_0218_cost"] == farm["open_cost"],
+		"and it is the sweep its row describes: from the house, at the open costs")
+	farm["lure_0218"] = PackedInt32Array([7])
+	expect(Pathing.field_from(farm, lure) == PackedInt32Array([7]),
+		"asked again with nothing changed, it is the one already built")
+	var door := Farm.house_centre(farm) + Vector2i(0, 4)
+	(farm["occupants"] as Dictionary)[Grid.index(door)] = {"id": &"wall", "hp": 10}
+	farm["grid_version"] = int(farm["grid_version"]) + 1
+	Pathing.refresh(farm)
+	expect(farm["lure_0218"] == PackedInt32Array([7]) and int(farm["lure_0218_version"]) != int(farm["grid_version"]),
+		"a wall goes up: the rebuild leaves it alone")
+	made = Pathing.field_from(farm, lure)
+	expect(int(farm["lure_0218_version"]) == int(farm["grid_version"]) and made == farm["flow_open"],
+		"and the next ask builds it for the new farm")
+	expect(Pathing.field(farm, &"house") == farm["flow"] and Pathing.field(farm, &"around") == farm["flow_open"]
+		and Pathing.field(farm, &"hunt") == farm["flow_hunt"],
+		"the three every night walks by are the registry's, kept where they always were")
+	var probe := Farm.house_centre(farm) + Vector2i(9, 5)
+	expect(Pathing.step_by(farm, &"house", probe) == Pathing.step_from(farm, probe)
+		and Pathing.step_by(farm, &"around", probe) == Pathing.step_around(farm, probe),
+		"and a step by name is the step it always was")
+	var fresh := State.create(21802)
+	var lazy_keys: Array = []
+	for key in fresh:
+		if String(key).begins_with("lure"):
+			lazy_keys.append(key)
+	expect(lazy_keys.is_empty(), "and a new game has no key for it", str(lazy_keys))
+
+	# **The swarm is held to the tick's budget**, and the baseline is inside
+	# it: a few hundred bodies more than the worst night.
+	var tool_text := FileAccess.get_file_as_string("res://tools/perf.py")
+	expect(tool_text.contains("(\"swarm_tick\", TICK_BUDGET_US)"), "tools/perf.py holds swarm_tick to the tick budget")
+	var at := tool_text.find("TICK_BUDGET_US = ")
+	var budget := tool_text.substr(at + "TICK_BUDGET_US = ".length(), 8).to_int() if at >= 0 else 0
+	var swarm_tick := -1
+	for line in FileAccess.get_file_as_string("res://tools/perf_baseline.txt").split("\n"):
+		var bits := line.strip_edges().split(" ")
+		if bits.size() == 2 and bits[0] == "swarm_tick":
+			swarm_tick = int(bits[1])
+	expect(budget > 0 and swarm_tick > 0 and swarm_tick <= budget, "and the recorded swarm tick is inside it",
+		"%dus of %d" % [swarm_tick, budget])
 	_completed += 1
 
 

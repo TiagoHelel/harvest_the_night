@@ -202,6 +202,11 @@ static func reconcile(state: Dictionary) -> Array:
 		notes.append("selected an in-season crop")
 	if House.repair_position(state):
 		notes.append("moved indoor player off revised furniture")
+	# **The entity table lowest id first** (task 0218), which `Entities.ids()`
+	# reads it as rather than sorting it on every call. A save keeps the
+	# order it was written in, so this only ever mends one that did not.
+	if state.get("entities", null) is Dictionary and Entities.put_in_order(state):
+		notes.append("put the entities back in id order")
 	# A zombie on a sunny afternoon: a lost night used to leave its winners
 	# in the yard into the next night.
 	var withdrawn := Enemies.withdraw_in_daylight(state)

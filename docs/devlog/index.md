@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-185 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
+186 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -229,6 +229,7 @@ is the sort of thing this list exists to say out loud.
 | 0194 | The day's economy | 2026-10-10 |
 | 0195 | Teaching the new day | 2026-10-10 |
 | 0196 | Checkpoint: is the day good on its own? | 2026-10-10 |
+| 0218 | Room for more fields and more bodies | 2026-10-10 |
 
 ## Every time the game changed underneath itself
 
