@@ -229,6 +229,13 @@ const ICE_STURGEON := &"ice_sturgeon"
 ## workshop. Only the iron rod has the slot to use either.
 const WORM := &"worm"
 const BAIT := &"bait"
+## **The animals' goods and their feed** (task 0184; plan section 3.4):
+## straw off every wheat harvest, hay made from it, and what the coop and
+## the barn give for being fed - eggs and milk.
+const STRAW := &"straw"
+const HAY := &"hay"
+const EGG := &"egg"
+const MILK := &"milk"
 const OIL := &"oil"
 const WHEAT := &"wheat"
 const CORN := &"corn"
@@ -275,7 +282,7 @@ const RESOURCES: Array = [
 	WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, FOOD, OIL,
 	CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
 	OLD_CATFISH, GOLDEN_QUEEN, GHOST_PIKE, ICE_STURGEON,
-	WORM, BAIT,
+	WORM, BAIT, STRAW, HAY, EGG, MILK,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
@@ -324,6 +331,15 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	# the cheapest fish whole (`check_chain`), and a worm is a worm.
 	WORM: 1,                         # LEVER: money each, 1-3
 	BAIT: 2,                         # LEVER: money each, 2-4
+	# **Straw is cheap and hay a little less so** (task 0184): pressed into
+	# a bale at the workshop it is worth more than it was loose
+	# (`check_chain`), and a day of an animal's keep is one of them.
+	STRAW: 1,                        # LEVER: money each, 1-2
+	HAY: 2,                          # LEVER: money each, 2-4
+	# What a fed hen and a fed cow give: an egg a little under the meat the
+	# hen used to give, a pail of milk what the cow's meat was.
+	EGG: 4,                          # LEVER: money each, 3-8
+	MILK: 9,                         # LEVER: money each, 6-12
 	# **The most valuable thing on the farm to sell, and that is the point.**
 	# Four corn is $20 of crop; pressing it is twenty seconds and turns it into
 	# $26 of oil. So the press pays for itself - and then every drop of it is
@@ -422,6 +438,9 @@ const CROPS: Dictionary = {
 		"seed_cost": 2,                 # LEVER: money, 1-8
 		"growth_days": 4,              # LEVER: watered mornings, 1-14
 		"yield": 2,                     # LEVER: units per harvest, 1-4
+		# **The straw comes with it** (task 0184): what a harvest leaves
+		# besides the grain, for the animals' hay.
+		"byproduct": {STRAW: 3},        # LEVER: straw per harvest, 1-6
 		"stages": 4,
 	},
 	CORN: {
@@ -880,6 +899,15 @@ const RECIPES: Dictionary = {
 		"output": {BAIT: 4},             # LEVER: bait a fish makes, 2-6
 		"ticks": DAY_TICKS * 5 / 240,   # LEVER: fraction of a day
 	},
+	# **Straw into hay** (task 0184), at the workshop, which every farm has
+	# from the first morning: the press's work is oil (0032) and the
+	# kitchen's is food (0034). A bale is a day of one animal's keep.
+	&"make_hay": {
+		"station": &"workshop",
+		"inputs": {STRAW: 1},
+		"output": {HAY: 1},             # LEVER: hay a straw makes, 1-3
+		"ticks": DAY_TICKS * 3 / 240,   # LEVER: fraction of a day
+	},
 }
 
 ## How many items a production building may have queued at once.
@@ -1304,9 +1332,12 @@ const DEFENCES: Dictionary = {
 ## one; the chickens are the quick, small ones.
 const LIVESTOCK: Dictionary = {
 	&"cow": {
-		"produces": {MEAT: 1},
+		# **Milk, since task 0184** (plan section 3.4), and only when fed.
+		"produces": {MILK: 1},
 		"every_ticks": DAY_TICKS / 3,   # LEVER: ticks, three production intervals/day
 		"holds": 2,                     # LEVER: units before it stops, 1-5
+		# Hay eaten each morning by a housed one (`ANIMAL_FEED`).
+		"feed_per_day": 1,              # LEVER: hay a day, 0-3
 		# **Where it lives and where it comes from** (task 0183): the
 		# `BUILDINGS` home that houses it, and its source - the map, or the
 		# stall (0190).
@@ -1314,9 +1345,11 @@ const LIVESTOCK: Dictionary = {
 		"source": &"map",
 	},
 	&"chicken": {
-		"produces": {MEAT: 1},
+		# **Eggs, since task 0184.**
+		"produces": {EGG: 1},
 		"every_ticks": DAY_TICKS * 5 / 24,  # LEVER: ticks, 4.8 production intervals/day
 		"holds": 1,                     # LEVER: units before it stops, 1-4
+		"feed_per_day": 1,              # LEVER: hay a day, 0-3
 		"home": &"coop",
 		"source": &"map",
 	},
@@ -1326,13 +1359,17 @@ const LIVESTOCK: Dictionary = {
 ## bought at the stall (0190).
 const LIVESTOCK_SOURCES: Array = [&"map", &"stall"]
 
+## **What a housed animal eats** (task 0184): `feed_per_day` of it each
+## morning, or nothing comes off it that day. The map's loose animals graze.
+const ANIMAL_FEED := HAY
+
 ## The plan's inventory categories, including categories filled by later tasks.
 ## Empty categories have no tab. Every shipped resource belongs to one category;
 ## GROUP_OTHER remains a diagnostic fallback for an invalid table, never content.
 const GROUP_OTHER := &"other"
 
 const RESOURCE_GROUPS: Array = [
-	{"name": &"materials", "members": [WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD]},
+	{"name": &"materials", "members": [WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, STRAW, HAY]},
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
 	{"name": &"seeds", "members": [CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED]},
 	{"name": FISH, "members": [CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
@@ -1340,7 +1377,7 @@ const RESOURCE_GROUPS: Array = [
 	# Its own group, never the fish's: a recipe that takes any fish pays the
 	# cheapest first, and a bait at $2 would be cheaper than any of them.
 	{"name": &"bait", "members": [WORM, BAIT]},
-	{"name": &"animal_goods", "members": [MEAT]},
+	{"name": &"animal_goods", "members": [EGG, MILK, MEAT]},
 	{"name": &"artisan_goods", "members": [FOOD, OIL]},
 	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
 	{"name": &"night_leftovers", "members": []},
@@ -1414,6 +1451,10 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 	WHEAT: 10,
 	CORN: 8,
 	CARROT: 12,
+	# **Meat at the stall** (task 0184): the cow gives milk now and the hens
+	# eggs, so the roast's meat is bought - `check_livestock` holds the farm
+	# to having it from somewhere.
+	MEAT: 6,
 	CARROT_SEED: 20,              # LEVER: packets a day, 2-40
 	POTATO_SEED: 20,              # LEVER: packets a day, 2-40
 	GARLIC_SEED: 20,              # LEVER: packets a day, 2-40
@@ -2658,6 +2699,11 @@ static func check_crops(crops: Dictionary) -> Array:
 		var seasons: Array = crops[crop_id].get("seasons", [])
 		if seasons.is_empty():
 			errors.append("crop '%s' has no sowing season" % crop_id)
+		# What a harvest leaves besides the crop (task 0184): real things.
+		var leaves: Dictionary = crops[crop_id].get("byproduct", {})
+		for res in sorted_names(leaves.keys()):
+			if not RESOURCES.has(res) or int(leaves[res]) < 1:
+				errors.append("crop '%s' leaves '%s', which is no resource" % [crop_id, res])
 		for season in seasons:
 			if season not in SEASONS or season == &"winter":
 				errors.append("crop '%s' has invalid sowing season '%s'" % [crop_id, season])
@@ -3455,7 +3501,8 @@ static func check_chain(recipes: Dictionary, prices: Dictionary) -> Array:
 
 
 ## The animals, and the meat they are the only source of.
-static func check_livestock(animals: Dictionary, rows: Array) -> Array:
+static func check_livestock(animals: Dictionary, rows: Array,
+		stock: Dictionary = DAILY_STOCK) -> Array:
 	var errors: Array = []
 	var makes_meat := false
 	for id in sorted_names(animals.keys()):
@@ -3469,6 +3516,8 @@ static func check_livestock(animals: Dictionary, rows: Array) -> Array:
 			errors.append("'%s' produces in no time at all" % id)
 		if int(animal["holds"]) <= 0:
 			errors.append("'%s' holds nothing, so it can never be collected" % id)
+		if int(animal.get("feed_per_day", -1)) < 0:
+			errors.append("'%s' says nothing of what it eats" % id)
 		# **Every kind names its home** (task 0183), a `BUILDINGS` entry
 		# with room in it, and where it comes from. Standing on the map is
 		# no longer every animal's rule: one from the stall (0190) does not.
@@ -3485,8 +3534,11 @@ static func check_livestock(animals: Dictionary, rows: Array) -> Array:
 	# price, and a recipe turns it into the best meal in the game - and for the
 	# first thirty-three tasks nothing in the world produced a single unit of
 	# it.
-	if not makes_meat:
-		errors.append("nothing on the farm produces meat")
+	# **Since task 0184 the stall is a source too**: the cow gives milk and
+	# the hens eggs, and the roast's meat is bought.
+	var meat_had := makes_meat or int(stock.get(MEAT, 0)) > 0
+	if not meat_had:
+		errors.append("nothing on the farm produces meat and the stall sells none")
 	# And every home houses some kind: a coop nothing lives in is a building
 	# that holds nobody.
 	for building in sorted_names(BUILDINGS.keys()):
@@ -3499,8 +3551,15 @@ static func check_livestock(animals: Dictionary, rows: Array) -> Array:
 			errors.append("'%s' has room and no animal lives in it" % building)
 	for id in sorted_names(RECIPES.keys()):
 		var inputs: Dictionary = (RECIPES[id] as Dictionary)["inputs"]
-		if inputs.has(MEAT) and not makes_meat:
+		if inputs.has(MEAT) and not meat_had:
 			errors.append("'%s' wants meat and nothing makes any" % id)
+	# **And the feed comes from somewhere**: a recipe that makes it, or the
+	# stall.
+	var feed_made := int(stock.get(ANIMAL_FEED, 0)) > 0
+	for id in sorted_names(RECIPES.keys()):
+		feed_made = feed_made or ((RECIPES[id] as Dictionary)["output"] as Dictionary).has(ANIMAL_FEED)
+	if not feed_made:
+		errors.append("the animals eat '%s' and nothing makes it" % ANIMAL_FEED)
 	return errors
 
 
@@ -3827,6 +3886,7 @@ static func digest() -> int:
 		"power": [BASE_ENERGY, UNPOWERED_PERCENT],
 		"livestock": LIVESTOCK,
 		"livestock_sources": LIVESTOCK_SOURCES,
+		"animal_feed": ANIMAL_FEED,
 		"ammo": [EMPTY_RELOAD_PERCENT, EMPTY_DAMAGE_PERCENT],
 		"groups": RESOURCE_GROUPS,
 		"gathering": GATHERING,

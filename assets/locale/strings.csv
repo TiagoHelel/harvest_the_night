@@ -242,6 +242,10 @@ ITEM_GHOST_PIKE,0,Ghost Pike,Lúcio Fantasma
 ITEM_ICE_STURGEON,0,Ice Sturgeon,Esturjão de Gelo
 ITEM_WORM,0,worm,minhoca
 ITEM_BAIT,0,fish bait,isca de peixe
+ITEM_STRAW,0,straw,palha
+ITEM_HAY,0,hay,feno
+ITEM_EGG,0,egg,ovo
+ITEM_MILK,0,milk,leite
 ITEM_FOOD,0,food,comida
 ITEM_GUNPOWDER,0,gunpowder,pólvora
 ITEM_INCENDIARY,0,incendiary,incendiária
@@ -324,6 +328,7 @@ REC_COOK_FISH,0,cook fish,assar peixe
 REC_COOK_MEAL,0,cook meal,cozinhar refeição
 REC_COOK_ROAST,0,cook roast,fazer assado
 REC_MAKE_BAIT,0,make bait,fazer isca
+REC_MAKE_HAY,0,make hay,fazer feno
 REC_FENCE_KIT,0,fence kit,kit de cerca
 REC_MAKE_GUNPOWDER,0,make gunpowder,fazer pólvora
 REC_MAKE_INCENDIARY,0,make incendiary,fazer incendiária
@@ -644,5 +649,6 @@ WHY_HOME_IN_USE,224,Animals live here,Tem animais morando aqui
 DESC_SPRINKLES,224,Waters %d plots each morning,Rega %d canteiros toda manhã
 DESC_WALKED_OVER,224,Zombies walk over it,Zumbis passam por cima
 DESC_HOUSES,224,Houses %d animals,Abriga %d animais
+DESC_EATS,224,Each eats %d %s a day,Cada um come %d de %s por dia
 WHY_GATHER_SEASON,224,Available from %s,Disponível a partir de %s
 DESC_FUEL_FALLBACK,224,Oil first; coal when empty,Óleo primeiro; carvão se acabar

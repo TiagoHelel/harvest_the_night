@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-172 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
+173 tasks over 7 days,  to 2026-10-09. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -216,10 +216,11 @@ is the sort of thing this list exists to say out loud.
 | 0181 | Rods and bait | 2026-10-09 |
 | 0182 | Legendary fish and the fish book | 2026-10-09 |
 | 0183 | The coop and the barn | 2026-10-09 |
+| 0184 | Feeding, eggs and milk | 2026-10-09 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 61 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 63 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -282,6 +283,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Legendary fish and the fish book** (0182) - `data` 3325784326 -> 1812557335
 - **The coop and the barn** (0183) - `sim` 42882243 -> 735944060
 - **The coop and the barn** (0183) - `data` 1812557335 -> 91621100
+- **Feeding, eggs and milk** (0184) - `sim` 735944060 -> 1862924429
+- **Feeding, eggs and milk** (0184) - `data` 91621100 -> 232468587
 
 ## What went wrong
 

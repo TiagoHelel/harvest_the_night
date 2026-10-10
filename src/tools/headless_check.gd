@@ -5471,11 +5471,16 @@ func _task_0034_cooking() -> void:
 		GameData.FARM_MAP).is_empty(),
 		"the farm passes its own livestock check",
 		str(GameData.check_livestock(GameData.LIVESTOCK, GameData.FARM_MAP)))
+	# **Since task 0184 the stall is the other source**: the cow gives milk
+	# and the hens eggs, and meat is bought. A farm with neither is refused.
 	var barren: Dictionary = GameData.LIVESTOCK.duplicate(true)
 	for id in barren:
 		(barren[id] as Dictionary)["produces"] = {GameData.WOOD: 1}
-	expect(not GameData.check_livestock(barren, GameData.FARM_MAP).is_empty(),
-		"and a farm where nothing produces meat is refused")
+	expect(not GameData.check_livestock(barren, GameData.FARM_MAP, {}).is_empty(),
+		"and a farm where nothing produces meat and the stall sells none is refused")
+	expect(GameData.check_livestock(barren, GameData.FARM_MAP).is_empty()
+		and int(GameData.DAILY_STOCK.get(GameData.MEAT, 0)) > 0,
+		"while the stall's meat is a source")
 
 	# **A trickle: nothing to do but come back.**
 	var cow: Vector2i = cows[0]
@@ -5504,20 +5509,22 @@ func _task_0034_cooking() -> void:
 	expect(Livestock.ready_at(state, cow) == int(entry["holds"]),
 		"a cow fills up and stops", str(Livestock.ready_at(state, cow)))
 
-	var meat_before := Resources.amount(state, GameData.MEAT)
+	# Whatever the cow gives - meat until task 0184, milk since.
+	var product := StringName((entry["produces"] as Dictionary).keys()[0])
+	var meat_before := Resources.amount(state, product)
 	Interact.complete(state, cow, &"collect")
-	expect(Resources.amount(state, GameData.MEAT)
+	expect(Resources.amount(state, product)
 		== meat_before + int(entry["holds"]),
 		"and collecting takes all of it",
-		str(Resources.amount(state, GameData.MEAT)))
+		str(Resources.amount(state, product)))
 	expect(Livestock.ready_at(state, cow) == 0, "leaving the cow empty")
 	expect(Interact.verb_at(state, cow) == &"",
 		"with nothing to do until it has something again")
-	var after_collect := Resources.amount(state, GameData.MEAT)
+	var after_collect := Resources.amount(state, product)
 	Interact.complete(state, cow, &"collect")
-	expect(Resources.amount(state, GameData.MEAT) == after_collect,
+	expect(Resources.amount(state, product) == after_collect,
 		"and collecting an empty cow takes nothing",
-		str(Resources.amount(state, GameData.MEAT)))
+		str(Resources.amount(state, product)))
 
 	# **The animals are asleep at night**, like the rest of the farm.
 	var nightly := State.create(1601)

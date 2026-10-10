@@ -146,6 +146,13 @@ static func building(id: StringName) -> String:
 	# A coop's or a barn's room (task 0183).
 	if int(one.get("capacity", 0)) > 0:
 		lines.append(I18n.f(&"DESC_HOUSES", [int(one["capacity"])]))
+		# And what keeping them costs a morning (task 0184).
+		var eats := 0
+		for kind in GameData.sorted_names(GameData.LIVESTOCK.keys()):
+			if StringName((GameData.LIVESTOCK[kind] as Dictionary).get("home", &"")) == id:
+				eats = maxi(eats, int((GameData.LIVESTOCK[kind] as Dictionary).get("feed_per_day", 0)))
+		if eats > 0:
+			lines.append(I18n.f(&"DESC_EATS", [eats, Names.of(GameData.ANIMAL_FEED)]))
 	var makes := _recipes_at(id)
 	if not makes.is_empty():
 		lines.append(I18n.f(&"DESC_MAKES", [", ".join(makes)]))

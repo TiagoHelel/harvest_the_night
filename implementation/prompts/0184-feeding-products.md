@@ -1,7 +1,7 @@
 # 0184 - Feeding, eggs and milk
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0183, 0168
 - **Likely files:** src/core/livestock.gd, src/core/farming.gd, src/core/phases.gd, src/core/game_data.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd
 

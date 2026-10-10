@@ -18581,3 +18581,136 @@ assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/A030-coop-barn.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0183-coop-barn.md,
 implementation/shots/0183/, docs/devlog/{index,index.pt_BR}.md
+
+## 0184 - Feeding, eggs and milk - done 2026-10-09
+
+What changed: the animals now give what they are kept for, and the housed
+ones eat.
+- Hens lay eggs and cows give milk.
+- Every wheat harvest leaves straw, and the workshop turns straw into hay.
+- Each morning every housed animal eats a bale. One that goes without gives
+  nothing that day, and is still there, no worse, the next.
+
+**The goods** (all levers; four new resources):
+
+| Resource | Price | Inventory tab | Comes from |
+|---|---|---|---|
+| straw | $1 | materials | 3 per wheat harvest (wheat's `byproduct`) |
+| hay | $2 | materials | `make_hay` at the workshop: 1 straw into 1 hay in 3/240 of a day |
+| egg | $4 | animal goods | chickens, at their old rate and `holds` |
+| milk | $9 | animal goods | cows, at their old rate and `holds` |
+
+- `check_crops` refuses a byproduct that is no resource.
+- **Where the hay is made.** The prompt left the station open:
+  - the press was out, because 0032 holds every press recipe to making oil;
+  - the kitchen was out, because 0034 holds every kitchen recipe to making
+    food (0181 met the same rule);
+  - the workshop stands on every farm from the first morning, and its craft
+    list scrolls.
+  - 0166's daily budget table gained `make_hay`: 80 batches and 80 hay a
+    day, nominal.
+
+**Feeding** (`Livestock`):
+- `ANIMAL_FEED` is hay, and each kind eats `feed_per_day` of it: 1 for both,
+  levers.
+- `Phases.begin_day` calls `Livestock.feed` after the other mornings. Every
+  housed animal eats, home by home in cell order and each in the order it
+  moved in, while there is enough. It records `fed` on the animal's entry in
+  `housed`.
+- An unfed animal's clock does not run that day. What it had waiting stays
+  to be collected. It never dies or sickens.
+- **Decided: day 1 counts as fed.**
+  - An animal is fed the day it moves in (`house` writes `fed: true`), and
+    no morning has come before day 1.
+  - A hen off the grass has grazed, and 0190's bought ones arrive fed.
+  - The first bale is due the next morning.
+- **Decided: the map's loose animals graze.** They are never fed and never
+  hungry, exactly as before.
+  - So `_task_0034_cooking`, `_case_0034_livestock`, `_task_0038_idle` ("the
+    animals produced", `_a_busy_day`, which counts what is waiting, of
+    whatever kind) and the determinism scenario's animals still produce.
+- `Describe.building` adds "Each eats 1 hay a day" to the coop and the barn.
+
+**The meat decision:**
+- `MEAT` stays, and so does `cook_roast`. It is bought at the stall:
+  `DAILY_STOCK` now carries 6 a day, at the usual markup, so a bought meat
+  sold straight back still loses money.
+- No animal gives meat any more. A save's waiting produce is a count, so it
+  comes out as the new product: a cow with 2 waiting gives 2 milk. No
+  version bump.
+- **`check_livestock` follows the decision** and refuses each of these:
+  - a farm where no animal gives meat and the stall sells none (it takes the
+    stock as a parameter now);
+  - a kind that says nothing of what it eats;
+  - a feed that nothing makes, neither a recipe nor the stall.
+- **For 0190**, which turns the stall's stock seasonal: keep meat in every
+  season's stock, or this check moves with it.
+- 0193 sells hay outside autumn. Until then, wheat is an autumn crop, so a
+  coop built in spring has hay only from the wheat a player saved. The
+  map's loose animals need none.
+
+**Icons** go through 0120's road (`icon_`/`hud_` for each), until A029 (0211)
+and A020 (0203) are integrated:
+- the egg is the stone, cream-tinted;
+- the milk is the iron bar, paled to a cool white. The first try was the oil
+  jar whitened, but a tint only multiplies, and the orange jar stayed oil;
+- the hay and the straw are the wheat in two shades.
+- A029's and A020's own pack files carry the owner's unstaged edits and were
+  not touched.
+
+### Hashes
+
+- **SIM 735944060 -> 1862924429, on purpose:**
+  - four new resources in `held` and `gained`;
+  - the stall's stock now carries meat;
+  - the scenario's loose animals keep their timers, but what they hold
+    would come out as eggs and milk.
+- **DATA 91621100 -> 232468587, on purpose:**
+  - the four goods and their prices and groups;
+  - wheat's straw, `make_hay`, the meat in `DAILY_STOCK`;
+  - the products and `feed_per_day` in `LIVESTOCK`, and `ANIMAL_FEED`.
+
+Verify: 60 passed, 0 failed in 687s (the known OVER BUDGET): headless_check 17241 asserts, headless_v1 1852, input_check 1189 cases, input_v1 623, sim 1862924429, data 232468587.
+
+**Tests:**
+- `_task_0184_feed` (headless_v1). Mornings come through `Phases.begin_day`,
+  and produce by stepping `Livestock.tick` an animal's `every_ticks`, never a
+  whole day.
+  - **Data:** the new goods pass. A table with no meat source fails (the
+    stall's meat removed), and so does a cow that says nothing of what it
+    eats.
+  - **Products:** hens give eggs and cows milk. The roast still takes meat,
+    and a meat can be bought at the stall.
+  - **Names:** straw, hay, eggs and milk are priced and named, and hay is
+    the workshop's.
+  - **Straw:** a ripe wheat plot harvested gives its 2 wheat and the lever's
+    3 straw.
+  - **Day 1:** a coop built before any morning counts both hens fed, and
+    they lay an egg each.
+  - **Fed:** with 2 hay, the morning feeds both, and the fed coop lays the
+    next day.
+  - **Unfed:** with none, nobody eats. Over two hens' intervals the coop
+    lays nothing, offers nothing to collect, and still holds both hens.
+  - **One bale, two hens:** the first fed, one egg.
+  - **Loose and saved:** a loose cow eats nothing and gives milk, not meat.
+    The v8 golden's cow with 2 waiting gives 2 milk.
+- **Rewritten in place** (product-agnostic or onto the new products):
+  - `_task_0034_cooking`: the barren-farm assert passes an empty stock, and a
+    new one says the stall's meat is a source. The cow's collection counts
+    its own product.
+  - `_case_0034_livestock`: the hen's product.
+  - `_task_0183_barns` and `_case_0183_barn`: eggs.
+
+Looked at: `implementation/shots/0184/inventory_full_materials_1.png` and
+`inventory_full_animal_goods_1.png`, zoomed.
+- Straw ($1) and hay ($2) close the materials page, in two distinct wheat
+  tints.
+- Egg ($4), milk ($9) and meat ($9) fill the animal goods page, with three
+  distinct icons.
+
+Files: src/core/{farming,game_data,livestock,phases}.gd,
+src/ui/{describe,names,placeholder_art}.gd,
+src/tools/{headless_check,headless_v1,input_check,input_v1}.gd,
+assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0184-feeding-products.md,
+implementation/shots/0184/, docs/devlog/{index,index.pt_BR}.md

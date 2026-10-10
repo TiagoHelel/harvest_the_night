@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 53
+const GROUPS := 54
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -122,6 +122,7 @@ func _run() -> void:
 	_task_0181_rods()
 	_task_0182_legendary()
 	_task_0183_barns()
+	_task_0184_feed()
 
 
 func _finish() -> void:
@@ -3255,11 +3256,11 @@ func _task_0166_long_day() -> void:
 	var batches := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 24, &"make_gunpowder": 16,
-		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13, &"make_bait": 48}
+		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13, &"make_bait": 48, &"make_hay": 80}
 	var units := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 96, &"make_gunpowder": 32,
-		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52, &"make_bait": 192}
+		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52, &"make_bait": 192, &"make_hay": 80}
 	var ordinary := 0
 	for id in GameData.RECIPES:
 		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty():
@@ -4992,9 +4993,10 @@ func _task_0183_barns() -> void:
 	expect(Livestock.ready_at(state, door) == 1 and Interact.verb_at(state, door) == &"collect"
 		and Interact.verb_at(state, coop) == &"",
 		"the hen's waiting egg-to-be came in with her: the door offers to collect, the wall does not")
-	var meat := Resources.amount(state, GameData.MEAT)
+	# Eggs since task 0184; the count is what matters here.
+	var eggs := Resources.amount(state, GameData.EGG)
 	Interact.complete(state, door, &"collect")
-	expect(Resources.amount(state, GameData.MEAT) == meat + 1 and Livestock.ready_at(state, door) == 0,
+	expect(Resources.amount(state, GameData.EGG) == eggs + 1 and Livestock.ready_at(state, door) == 0,
 		"collected at the door")
 	var every := int(GameData.LIVESTOCK[&"chicken"]["every_ticks"])
 	for _i in every:
@@ -5057,6 +5059,139 @@ func _task_0183_barns() -> void:
 		and Livestock.ready_at(legacy, cow_then[0]) >= 1,
 		"a save with loose animals loads, homeless as it was, and its cow still produces")
 	_completed += 1
+
+
+## Task 0184: fed, or nothing. Mornings come through `Phases.begin_day` and
+## produce by stepping `Livestock.tick` an animal's `every_ticks` - never a
+## whole day. A fed coop gives eggs the next day, an unfed one gives none and
+## every hen is still there; a wheat harvest gives the straw the lever says;
+## and the roast's meat still has a source.
+func _task_0184_feed() -> void:
+	expect(GameData.validate().is_empty()
+		and GameData.check_livestock(GameData.LIVESTOCK, GameData.FARM_MAP).is_empty()
+		and GameData.check_chain(GameData.RECIPES, GameData.SELL_PRICE).is_empty(),
+		"eggs, milk, straw and hay pass their checks",
+		str(GameData.check_livestock(GameData.LIVESTOCK, GameData.FARM_MAP)))
+	# **The meat decision**: kept, with `cook_roast`, and bought at the stall.
+	var meatless: Dictionary = GameData.DAILY_STOCK.duplicate(true)
+	meatless.erase(GameData.MEAT)
+	var silent: Dictionary = GameData.LIVESTOCK.duplicate(true)
+	(silent[&"cow"] as Dictionary).erase("feed_per_day")
+	expect(not GameData.check_livestock(GameData.LIVESTOCK, GameData.FARM_MAP, meatless).is_empty()
+		and not GameData.check_livestock(silent, GameData.FARM_MAP).is_empty(),
+		"a farm where no animal gives meat and the stall sells none is refused, and so is a cow that says nothing of what it eats")
+	expect((GameData.LIVESTOCK[&"chicken"]["produces"] as Dictionary).has(GameData.EGG)
+		and (GameData.LIVESTOCK[&"cow"]["produces"] as Dictionary).has(GameData.MILK)
+		and (GameData.RECIPES[&"cook_roast"]["inputs"] as Dictionary).has(GameData.MEAT)
+		and int(GameData.DAILY_STOCK.get(GameData.MEAT, 0)) > 0,
+		"hens lay eggs and cows give milk; the roast still takes meat, and the stall stocks it")
+	var stall := State.create(1840)
+	Resources.gain(stall, {GameData.MONEY: 500})
+	var meat_held := Resources.amount(stall, GameData.MEAT)
+	expect(Shop.buy(stall, GameData.MEAT, 1) and Resources.amount(stall, GameData.MEAT) == meat_held + 1,
+		"and meat can be bought there")
+	var named := true
+	for id in [GameData.STRAW, GameData.HAY, GameData.EGG, GameData.MILK]:
+		named = named and Names.KEYS.has(id) and GameData.SELL_PRICE.has(id) and GameData.RESOURCES.has(id)
+	expect(named and GameData.RECIPES[&"make_hay"]["station"] == &"workshop" and Names.KEYS.has(&"make_hay")
+		and (GameData.RECIPES[&"make_hay"]["output"] as Dictionary).has(GameData.ANIMAL_FEED),
+		"straw, hay, eggs and milk are priced and named, and hay is made from straw at the workshop")
+
+	# **A wheat harvest leaves the straw the lever says.**
+	var field := State.create(1841)
+	var plot: Vector2i = Farming.field_cells(field)[0]
+	(field["plots"] as Dictionary)[Grid.index(plot)] = Farming.EMPTY_PLOT.duplicate()
+	var here: Dictionary = Farming.plot(field, plot)
+	here["crop"] = GameData.WHEAT
+	here["growth"] = Farming.days_to_grow(GameData.WHEAT)
+	var straw := Resources.amount(field, GameData.STRAW)
+	var wheat := Resources.amount(field, GameData.WHEAT)
+	expect(Farming.verb_at(field, plot) == &"harvest", "fixture: a ripe wheat plot")
+	Farming.act(field, plot)
+	var lever := int(GameData.CROPS[GameData.WHEAT]["byproduct"][GameData.STRAW])
+	expect(Resources.amount(field, GameData.STRAW) == straw + lever
+		and Resources.amount(field, GameData.WHEAT) == wheat + int(GameData.CROPS[GameData.WHEAT]["yield"]),
+		"a wheat harvest gives its grain and the straw the lever says", "%d straw" % lever)
+
+	# **Day 1 counts as fed**: a coop built before any morning lays.
+	var state := State.create(1842)
+	Resources.gain(state, {GameData.WOOD: 500, GameData.STONE: 500, GameData.MONEY: 2000})
+	var coop := _site_spot(state, &"coop")
+	expect(Building.place(state, &"coop", coop) and Livestock.residents(state, coop).size() == 2,
+		"fixture: a coop with the map's two hens in it")
+	var door := Livestock.door_of(state, coop)
+	var every := int(GameData.LIVESTOCK[&"chicken"]["every_ticks"])
+	expect(Livestock.is_fed(state, coop, 0) and Livestock.is_fed(state, coop, 1),
+		"on day 1, before any morning, both count as fed")
+	_tick_livestock(state, every)
+	var eggs := Resources.amount(state, GameData.EGG)
+	Interact.complete(state, door, &"collect")
+	expect(Resources.amount(state, GameData.EGG) == eggs + 2, "and lay an egg each")
+
+	# **A fed coop gives eggs the next day.**
+	Resources.add(state, GameData.HAY, 2)
+	_next_morning(state)
+	expect(Resources.amount(state, GameData.HAY) == 0
+		and Livestock.is_fed(state, coop, 0) and Livestock.is_fed(state, coop, 1),
+		"the morning feeds each hen a bale")
+	_tick_livestock(state, every)
+	expect(Livestock.ready_at(state, door) == 2, "and the fed coop lays the next day",
+		str(Livestock.ready_at(state, door)))
+	Interact.complete(state, door, &"collect")
+
+	# **An unfed one gives none, and every hen is still there.**
+	_next_morning(state)
+	expect(not Livestock.is_fed(state, coop, 0) and not Livestock.is_fed(state, coop, 1),
+		"with no hay, nobody eats")
+	_tick_livestock(state, every * 2)
+	expect(Livestock.ready_at(state, door) == 0 and Livestock.residents(state, coop).size() == 2
+		and Interact.verb_at(state, door) == &"",
+		"an unfed coop lays nothing all day, and both hens are still in it")
+	# One bale for two hens: the first in the order they moved in eats.
+	Resources.add(state, GameData.HAY, 1)
+	_next_morning(state)
+	expect(Livestock.is_fed(state, coop, 0) and not Livestock.is_fed(state, coop, 1),
+		"one bale feeds the first hen and not the second")
+	_tick_livestock(state, every)
+	expect(Livestock.ready_at(state, door) == 1, "so one egg comes",
+		str(Livestock.ready_at(state, door)))
+
+	# **The map's loose animals graze**: no hay, and the cow still gives milk.
+	var loose := State.create(1843)
+	var cow: Vector2i = Farm.cells_with(loose, &"cow")[0]
+	_next_morning(loose)
+	_tick_livestock(loose, int(GameData.LIVESTOCK[&"cow"]["every_ticks"]))
+	var milk := Resources.amount(loose, GameData.MILK)
+	var meat := Resources.amount(loose, GameData.MEAT)
+	Interact.complete(loose, cow, &"collect")
+	expect(Resources.amount(loose, GameData.HAY) == 0 and Resources.amount(loose, GameData.MILK) == milk + 1
+		and Resources.amount(loose, GameData.MEAT) == meat,
+		"a loose cow eats nothing and gives milk, not meat")
+
+	# **A saved animal's waiting produce comes out as the new product.**
+	var legacy := Save.read_run_at("res://tools/goldens/run-v8.sav")
+	var saved_cow: Vector2i = Farm.cells_with(legacy, &"cow")[0]
+	Livestock.tick(legacy)
+	(legacy["livestock"][Grid.index(saved_cow)] as Dictionary)["ready"] = 2
+	var saved_milk := Resources.amount(legacy, GameData.MILK)
+	var saved_meat := Resources.amount(legacy, GameData.MEAT)
+	Interact.complete(legacy, saved_cow, &"collect")
+	expect(Resources.amount(legacy, GameData.MILK) == saved_milk + 2
+		and Resources.amount(legacy, GameData.MEAT) == saved_meat,
+		"two waiting in an old save come out as two milk")
+	_completed += 1
+
+
+## Step the animals' clocks `ticks` times, and nothing else.
+func _tick_livestock(state: Dictionary, ticks: int) -> void:
+	for _i in ticks:
+		Livestock.tick(state)
+
+
+## The next morning, as the end of a night hands it over.
+func _next_morning(state: Dictionary) -> void:
+	state["phase"] = Phases.RESULT
+	Phases.begin_day(state)
 
 
 ## The top-left cell of a home's `MAP_SITES` room where one fits, or

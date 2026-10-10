@@ -2308,12 +2308,14 @@ func _case_0034_livestock() -> void:
 	expect(Interact.verb_at(state, hen) == &"",
 		"a chicken with nothing to give offers nothing",
 		str(Interact.verb_at(state, hen)))
-	var nothing := Resources.amount(state, GameData.MEAT)
+	# What a hen gives: meat until task 0184, an egg since.
+	var gives := StringName(((GameData.LIVESTOCK[&"chicken"] as Dictionary)["produces"] as Dictionary).keys()[0])
+	var nothing := Resources.amount(state, gives)
 	await hold_key(KEY_SPACE, 6)
 	await frames(2)
-	expect(Resources.amount(state, GameData.MEAT) == nothing,
+	expect(Resources.amount(state, gives) == nothing,
 		"and pressing interact at it takes nothing",
-		str(Resources.amount(state, GameData.MEAT)))
+		str(Resources.amount(state, gives)))
 
 	# Wait for it to have something. Driven at speed rather than in real time.
 	Livestock.tick(state)
@@ -2329,22 +2331,22 @@ func _case_0034_livestock() -> void:
 	expect(Interact.verb_at(state, hen) == &"collect",
 		"which offers to collect", str(Interact.verb_at(state, hen)))
 
-	# **Press interact and the meat is in the ledger.**
-	var before := Resources.amount(state, GameData.MEAT)
+	# **Press interact and the egg is in the ledger.**
+	var before := Resources.amount(state, gives)
 	await hold_key(KEY_SPACE, 4)
 	await until(func() -> bool:
-		return Resources.amount(state, GameData.MEAT) > before,
-		"the meat to come in")
-	expect(Resources.amount(state, GameData.MEAT) > before,
-		"collecting puts meat in the ledger",
-		"%d then %d" % [before, Resources.amount(state, GameData.MEAT)])
+		return Resources.amount(state, gives) > before,
+		"the egg to come in")
+	expect(Resources.amount(state, gives) > before,
+		"collecting puts it in the ledger",
+		"%d then %d" % [before, Resources.amount(state, gives)])
 	expect(Livestock.ready_at(state, hen) == 0, "and the chicken is empty")
 	await frames(4)
-	expect(Resources.amount(state, GameData.MEAT)
+	expect(Resources.amount(state, gives)
 		== before + int((GameData.LIVESTOCK[&"chicken"]
 			as Dictionary)["holds"]),
 		"once, not once a tick - a held key does not milk it dry",
-		str(Resources.amount(state, GameData.MEAT)))
+		str(Resources.amount(state, gives)))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

@@ -2861,11 +2861,12 @@ func _case_0183_barn() -> void:
 	await frames(2)
 	expect(Interact.verb_at(state, Player.target(state)) == &"collect",
 		"facing the coop's door, the key collects")
-	var meat := Resources.amount(state, GameData.MEAT)
+	# Eggs since task 0184.
+	var eggs := Resources.amount(state, GameData.EGG)
 	await tap_key(KEY_SPACE)
-	await until(func() -> bool: return Resources.amount(state, GameData.MEAT) > meat,
+	await until(func() -> bool: return Resources.amount(state, GameData.EGG) > eggs,
 		"SPACE at the door to collect")
-	expect(Resources.amount(state, GameData.MEAT) == meat + 2 and Livestock.ready_at(state, door) == 0,
+	expect(Resources.amount(state, GameData.EGG) == eggs + 2 and Livestock.ready_at(state, door) == 0,
 		"both hens' worth, and nothing left waiting")
 	await close_scene()
 	_completed += 1

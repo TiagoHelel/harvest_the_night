@@ -32,6 +32,15 @@ extends RefCounted
 ## and collected at its door - the middle of its front row. A home that is
 ## lost leaves its animals waiting in `unhoused`, alive, for the next home of
 ## their kind: no animal ever dies.
+##
+## ## Fed, or nothing
+##
+## Task 0184: a hen gives eggs and a cow milk, and a housed one eats. Each
+## morning (`feed`, from `Phases.begin_day`) every housed animal eats its
+## `feed_per_day` of `ANIMAL_FEED` while there is enough; one that goes
+## without gives nothing that day and is still there, no worse, the next. An
+## animal is fed the day it moves in - day 1 included, before any morning -
+## and the map's loose animals graze: they are never fed and never hungry.
 
 
 static func initial() -> Dictionary:
@@ -52,8 +61,9 @@ static func initial() -> Dictionary:
 		"livestock_version": -1,
 		"livestock_cells": [],
 		# **Who lives where** (task 0183): a home's anchor cell index ->
-		# `{"home": coop or barn, "animals": [{"id", "ready", "left"}]}`. Its
-		# keys come from play (`State.RUN_DATA`).
+		# `{"home": coop or barn, "animals": [{"id", "ready", "left",
+		# "fed"}]}`, `fed` since task 0184. Its keys come from play
+		# (`State.RUN_DATA`).
 		"housed": {},
 		# Animals whose home was lost, `{"id", "ready", "left"}` each, waiting
 		# - producing nothing - for the next home of their kind.
@@ -188,8 +198,37 @@ static func house(state: Dictionary, cell: Vector2i, kind: StringName,
 	if animals.size() >= capacity(id):
 		return false
 	var every := int((GameData.LIVESTOCK[kind] as Dictionary)["every_ticks"])
-	animals.append({"id": kind, "ready": maxi(ready, 0), "left": left if left > 0 else every})
+	# **Fed the day it moves in** (task 0184): a hen off the grass has grazed,
+	# and one bought (0190) comes fed. Tomorrow's morning asks for hay.
+	animals.append({"id": kind, "ready": maxi(ready, 0), "left": left if left > 0 else every,
+		"fed": true})
 	return true
+
+
+## **The morning's hay** (task 0184), from `Phases.begin_day`: every housed
+## animal eats its `feed_per_day` of `ANIMAL_FEED` - home by home in cell
+## order, each in the order it moved in - while there is enough. One that
+## goes without gives nothing today, and is still there tomorrow: no animal
+## dies or sickens. How many went without.
+static func feed(state: Dictionary) -> int:
+	var hungry := 0
+	var homes: Dictionary = state["housed"]
+	var anchors: Array = homes.keys()
+	anchors.sort()
+	for idx in anchors:
+		for animal in ((homes[idx] as Dictionary)["animals"] as Array):
+			var one: Dictionary = animal
+			var eats := int((GameData.LIVESTOCK[one["id"]] as Dictionary).get("feed_per_day", 0))
+			one["fed"] = eats <= 0 or Resources.spend(state, GameData.ANIMAL_FEED, eats)
+			if not bool(one["fed"]):
+				hungry += 1
+	return hungry
+
+
+## Whether the animal at `index` in the home on this cell ate this morning.
+static func is_fed(state: Dictionary, cell: Vector2i, index: int) -> bool:
+	var animals := residents(state, cell)
+	return index >= 0 and index < animals.size() and bool((animals[index] as Dictionary).get("fed", true))
 
 
 ## **A new home takes its kind in** (task 0183), called by `Building.place`:
@@ -266,6 +305,10 @@ static func tick(state: Dictionary) -> void:
 	anchors.sort()
 	for idx in anchors:
 		for animal in ((homes[idx] as Dictionary)["animals"] as Array):
+			# **Unfed gives nothing today** (task 0184); what it had waiting
+			# stays there to be collected.
+			if not bool((animal as Dictionary).get("fed", true)):
+				continue
 			_produce(animal, GameData.LIVESTOCK[(animal as Dictionary)["id"]])
 
 

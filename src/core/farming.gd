@@ -431,6 +431,8 @@ static func _harvest(state: Dictionary, cell: Vector2i) -> void:
 	var crop: StringName = here["crop"]
 	var data: Dictionary = GameData.CROPS[crop]
 	Resources.add(state, crop, int(data["yield"]))
+	# **And what comes with it** (task 0184): the wheat's straw.
+	Resources.gain(state, data.get("byproduct", {}))
 	var regrow := regrow_days(crop)
 	if regrow > 0:
 		here["regrowing"] = true

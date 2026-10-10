@@ -267,6 +267,18 @@ const ART := {
 	&"portrait_golden_queen": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.6, 1.3, 0.4), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
 	&"portrait_ghost_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.4, 1.4, 1.5), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
 	&"portrait_ice_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 1.15, 1.5), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	# 0184's animal goods (A029) and feed (A020), tinted stand-ins until 0211
+	# and 0203: the egg a pale stone, the milk the iron bar paled - a tint
+	# cannot whiten the orange oil jar - the hay
+	# and the straw the wheat in two shades.
+	&"icon_egg": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(1.45, 1.35, 1.15), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_egg": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(1.45, 1.35, 1.15), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_milk": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_iron", "tint": Color(1.35, 1.4, 1.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_milk": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_iron", "tint": Color(1.35, 1.4, 1.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_hay": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.95, 1.1, 0.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_hay": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.95, 1.1, 0.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_straw": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(1.3, 1.25, 1.05), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_straw": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(1.3, 1.25, 1.05), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# A030's coop and barn (task 0183): the kitchen and the workshop, stations
 	# of their kind, scaled to their footprints - the coop small and warm, the
 	# barn barn-red - until 0212.

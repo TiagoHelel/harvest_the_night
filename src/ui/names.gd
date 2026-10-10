@@ -78,6 +78,10 @@ const KEYS: Dictionary = {
 	&"ice_sturgeon": &"ITEM_ICE_STURGEON",
 	&"worm": &"ITEM_WORM",
 	&"bait": &"ITEM_BAIT",
+	&"straw": &"ITEM_STRAW",
+	&"hay": &"ITEM_HAY",
+	&"egg": &"ITEM_EGG",
+	&"milk": &"ITEM_MILK",
 	&"oil": &"ITEM_OIL",
 	&"wheat": &"ITEM_WHEAT",
 	&"corn": &"ITEM_CORN",
@@ -144,6 +148,7 @@ const KEYS: Dictionary = {
 	&"cook_fish": &"REC_COOK_FISH",
 	&"cook_roast": &"REC_COOK_ROAST",
 	&"make_bait": &"REC_MAKE_BAIT",
+	&"make_hay": &"REC_MAKE_HAY",
 
 	# ---- what comes out of the dark. **Plural pairs**, so `I18n.plural`
 	# takes these keys and adds `.one` or `.other` itself.
