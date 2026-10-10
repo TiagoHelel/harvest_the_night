@@ -156,6 +156,11 @@ const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_sc
 const COOP := {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "draw_scale": 1.0}
 const BARN := {"canvas": Vector2i(96, 100), "pivot": Vector2i(48, 96), "draw_scale": 1.0}
 
+## A026-A028's animals (task 0185): a large one - cow, sheep, pig, dog - is
+## 40x32 at (20,30), the chicken 24x24 at (12,22), all drawn at 1.0.
+const ANIMAL_LARGE := {"canvas": Vector2i(40, 32), "pivot": Vector2i(20, 30), "draw_scale": 1.0}
+const ANIMAL_SMALL := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 22), "draw_scale": 1.0}
+
 ## A022's book portraits (task 0182): 32x32 at (16,16), drawn at 1.0.
 const PORTRAIT := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "draw_scale": 1.0}
 
@@ -279,6 +284,41 @@ const ART := {
 	&"hud_hay": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.95, 1.1, 0.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_straw": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(1.3, 1.25, 1.05), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_straw": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(1.3, 1.25, 1.05), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	# 0185's animals at home and the dog: A026's sheep and pig, A027's cow
+	# and chicken and A028's dog, as the cow's and the chicken's props -
+	# tinted and scaled, every frame the same picture - until 0209, 0210
+	# and 0245: the sheep the hen paled and grown (a tinted cow stayed a
+	# cow), the pig the cow in pink, the dog the cow small and brown.
+	# `AnimalView` plays them.
+	&"sheep_idle": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/chicken", "tint": Color(1.2, 1.2, 1.28), "stand_in_scale": 1.35, "geometry": ANIMAL_SMALL, "final": ANIMAL_LARGE},
+	&"sheep_walk": {"pack": "A026", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/chicken", "tint": Color(1.2, 1.2, 1.28), "stand_in_scale": 1.35, "geometry": ANIMAL_SMALL, "final": ANIMAL_LARGE},
+	&"sheep_eat": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/chicken", "tint": Color(1.2, 1.2, 1.28), "stand_in_scale": 1.35, "geometry": ANIMAL_SMALL, "final": ANIMAL_LARGE},
+	&"sheep_sleep": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/chicken", "tint": Color(1.2, 1.2, 1.28), "stand_in_scale": 1.35, "geometry": ANIMAL_SMALL, "final": ANIMAL_LARGE},
+	&"pig_idle": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"pig_walk": {"pack": "A026", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"pig_eat": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"pig_sleep": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"cow_idle": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"cow_walk": {"pack": "A027", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"cow_eat": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"cow_sleep": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"chicken_idle": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
+	&"chicken_walk": {"pack": "A027", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
+	&"chicken_eat": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
+	&"chicken_sleep": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
+	&"pig_dig": {"pack": "A026", "dir": "res://sprites/props/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"dog_sit": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"dog_wag": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.12, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"dog_walk": {"pack": "A028", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"dog_sleep": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	# A029's wool and truffle (task 0185): the gear paled to a skein, the
+	# stone darkened to a truffle's brown, until 0211; its dig spot drawn in
+	# code.
+	&"icon_wool": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_tech", "tint": Color(1.25, 1.2, 1.05), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_wool": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_tech", "tint": Color(1.25, 1.2, 1.05), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_truffle": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(0.62, 0.45, 0.3), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_truffle": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.62, 0.45, 0.3), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"truffle_spot": {"pack": "A029", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
 	# A030's coop and barn (task 0183): the kitchen and the workshop, stations
 	# of their kind, scaled to their footprints - the coop small and warm, the
 	# barn barn-red - until 0212.

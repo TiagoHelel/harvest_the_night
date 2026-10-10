@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 39
+const V1_CASES := 40
 
 
 func _process(delta: float) -> bool:
@@ -89,6 +89,7 @@ func _run() -> void:
 	await _case_0181_bait()
 	await _case_0182_book()
 	await _case_0183_barn()
+	await _case_0185_truffle()
 	_finish()
 
 
@@ -2868,5 +2869,52 @@ func _case_0183_barn() -> void:
 		"SPACE at the door to collect")
 	expect(Resources.amount(state, GameData.EGG) == eggs + 2 and Livestock.ready_at(state, door) == 0,
 		"both hens' worth, and nothing left waiting")
+	await close_scene()
+	_completed += 1
+
+
+## Task 0185: a pig's dig spot four steps east of the farmer on open grass -
+## he walks there holding D, and SPACE at it digs the truffle up.
+func _case_0185_truffle() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.set_speed(1)
+	var here := Player.cell(state)
+	var start := Vector2i(-1, -1)
+	for dy in range(-6, 7):
+		for dx in range(-10, 6):
+			if start.x >= 0:
+				break
+			var from := here + Vector2i(dx, dy)
+			var clear := true
+			for k in 5:
+				clear = clear and Farm.walkable(state, from + Vector2i(k, 0))
+			var spot := from + Vector2i(4, 0)
+			if clear and Farm.terrain_at(state, spot) == Farm.Terrain.GRASS and Farm.is_empty(state, spot) \
+					and not Farming.is_tilled(state, spot):
+				start = from
+	expect(start.x >= 0, "fixture: four clear steps east onto open grass")
+	var target := start + Vector2i(4, 0)
+	(state["dig_spots"] as Dictionary)[Grid.index(target)] = GameData.DIG_GIVES.duplicate()
+	_stand_at(state, start, Player.EAST)
+	await frames(2)
+	expect(Livestock.spots(state) == [target], "a spot waits on the grass")
+	await press_key(KEY_D, true)
+	await until(func() -> bool: return Player.cell(state).x >= target.x - 1, "the walk east to the spot", 900)
+	await press_key(KEY_D, false)
+	await frames(2)
+	expect(Interact.verb_at(state, Player.target(state)) == &"dig",
+		"at the spot, the key digs", str(Player.target(state)))
+	var truffles := Resources.amount(state, GameData.TRUFFLE)
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return Resources.amount(state, GameData.TRUFFLE) > truffles,
+		"SPACE to dig the truffle up")
+	expect(Resources.amount(state, GameData.TRUFFLE) == truffles + 1 and Livestock.spots(state).is_empty(),
+		"one truffle, and the spot is gone")
 	await close_scene()
 	_completed += 1

@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["barnyard", "the barn's cow, sheep and pig and the coop's hens about their homes, a pig's spot, the dog behind the farmer", ""],
 	["coop_barn", "a coop and a barn on their sites at noon, the map's animals moved in and more", ""],
 	["fish_book", "the fish book on the Old Catfish's page, four of sixteen; then a silhouette", "InventoryPanel"],
 	["bait", "a worm on the iron rod's hook, the line waiting, the bait choice under it", ""],
@@ -731,6 +732,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"bait": _set_bait(state)
 		"fish_book": _set_fish_book(state)
 		"coop_barn": _set_coop_barn(state)
+		"barnyard": _set_barnyard(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -1480,6 +1482,38 @@ func _set_coop_barn(state: Dictionary) -> void:
 	# The day's camera follows him: at the barn's door, facing it, the barn
 	# stays clear of the seed strip on the left and the coop is in frame.
 	_standing_at = Livestock.door_of(state, barn) + Vector2i.DOWN
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.NORTH
+
+
+## **The barnyard** (task 0185): noon on Spring 3. The barn on its site with
+## the map's cow, a sheep and two pigs, the coop beside it with four hens, all
+## of them about their homes; the pigs' spots for the morning on the grass;
+## the farmer in the open below the pen, and the dog a step behind him.
+func _set_barnyard(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 3)
+	Resources.gain(state, {GameData.WOOD: 500, GameData.STONE: 500, GameData.MONEY: 2000})
+	var room: Array = GameData.MAP_SITES[&"barn"]
+	var barn := Vector2i(int(room[0]), int(room[1]))
+	Building.place(state, &"barn", barn)
+	for kind in [&"sheep", &"pig", &"pig"]:
+		Livestock.house(state, barn, kind)
+	var coop := Vector2i(-1, -1)
+	for y in range(barn.y, barn.y + 4):
+		for x in range(barn.x + 6, barn.x + 14):
+			if coop.x < 0 and Building.can_place(state, &"coop", Vector2i(x, y + 1)):
+				coop = Vector2i(x, y + 1)
+	if coop.x >= 0 and Building.place(state, &"coop", coop):
+		while Livestock.residents(state, coop).size() < 4:
+			if not Livestock.house(state, coop, &"chicken"):
+				break
+	# The pigs are fed on their first day: their spots for this morning.
+	Livestock.mark_spots(state)
+	print("  barnyard: %d in the barn, %d in the coop, spots %s" % [Livestock.residents(state, barn).size(),
+		Livestock.residents(state, coop).size() if coop.x >= 0 else 0, str(Livestock.spots(state))])
+	# In the open below the barn's pen: the day's camera follows him.
+	_standing_at = barn + Vector2i(3, 6)
 	_stand(state, _standing_at)
 	state["player"]["facing"] = Player.NORTH
 

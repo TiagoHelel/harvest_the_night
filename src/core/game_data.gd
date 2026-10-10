@@ -236,6 +236,10 @@ const STRAW := &"straw"
 const HAY := &"hay"
 const EGG := &"egg"
 const MILK := &"milk"
+## **The barn's other two** (task 0185): wool off a fed sheep, and the
+## truffles a fed pig noses up on the grass round its barn.
+const WOOL := &"wool"
+const TRUFFLE := &"truffle"
 const OIL := &"oil"
 const WHEAT := &"wheat"
 const CORN := &"corn"
@@ -282,7 +286,7 @@ const RESOURCES: Array = [
 	WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, FOOD, OIL,
 	CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
 	OLD_CATFISH, GOLDEN_QUEEN, GHOST_PIKE, ICE_STURGEON,
-	WORM, BAIT, STRAW, HAY, EGG, MILK,
+	WORM, BAIT, STRAW, HAY, EGG, MILK, WOOL, TRUFFLE,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
@@ -340,6 +344,10 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	# hen used to give, a pail of milk what the cow's meat was.
 	EGG: 4,                          # LEVER: money each, 3-8
 	MILK: 9,                         # LEVER: money each, 6-12
+	# A fleece a day, and a truffle - the find of the barnyard, still under
+	# oil (task 0185).
+	WOOL: 10,                        # LEVER: money each, 6-14
+	TRUFFLE: 20,                     # LEVER: money each, 12-25, under oil
 	# **The most valuable thing on the farm to sell, and that is the point.**
 	# Four corn is $20 of crop; pressing it is twenty seconds and turns it into
 	# $26 of oil. So the press pays for itself - and then every drop of it is
@@ -1353,6 +1361,27 @@ const LIVESTOCK: Dictionary = {
 		"home": &"coop",
 		"source": &"map",
 	},
+	# **Sheep and pigs** (task 0185; plan section 3.4) live in the barn and
+	# come from the stall (0190). A fed sheep grows a fleece a day; a fed pig
+	# gives nothing at the door - it marks `digs` spots on the grass round its
+	# barn each morning, and the farmer digs the truffles up.
+	&"sheep": {
+		"produces": {WOOL: 1},
+		"every_ticks": DAY_TICKS,       # LEVER: ticks, one fleece a day
+		"holds": 1,                     # LEVER: units before it stops, 1-3
+		"feed_per_day": 1,              # LEVER: hay a day, 0-3
+		"home": &"barn",
+		"source": &"stall",
+	},
+	&"pig": {
+		"produces": {},
+		"every_ticks": DAY_TICKS,
+		"holds": 1,
+		"feed_per_day": 1,              # LEVER: hay a day, 0-3
+		"digs": 1,                      # LEVER: dig spots a fed pig marks a morning, 1-3
+		"home": &"barn",
+		"source": &"stall",
+	},
 }
 
 ## Where an animal kind comes from (task 0183): standing on `FARM_MAP`, or
@@ -1362,6 +1391,15 @@ const LIVESTOCK_SOURCES: Array = [&"map", &"stall"]
 ## **What a housed animal eats** (task 0184): `feed_per_day` of it each
 ## morning, or nothing comes off it that day. The map's loose animals graze.
 const ANIMAL_FEED := HAY
+
+## **Where a pig digs** (task 0185): open grass - no plot, no path, nothing
+## standing on it or just south of it - up to this many cells out from its
+## barn's walls, beside it or in front and never behind, chosen each morning
+## from the run's RNG.
+## The spots go with the sun.
+const DIG_REACH := 4                    # LEVER: cells out from the barn, 2-8
+## What the farmer turns up at a spot.
+const DIG_GIVES: Dictionary = {TRUFFLE: 1}  # LEVER: truffles a spot, 1-2
 
 ## The plan's inventory categories, including categories filled by later tasks.
 ## Empty categories have no tab. Every shipped resource belongs to one category;
@@ -1377,7 +1415,7 @@ const RESOURCE_GROUPS: Array = [
 	# Its own group, never the fish's: a recipe that takes any fish pays the
 	# cheapest first, and a bait at $2 would be cheaper than any of them.
 	{"name": &"bait", "members": [WORM, BAIT]},
-	{"name": &"animal_goods", "members": [EGG, MILK, MEAT]},
+	{"name": &"animal_goods", "members": [EGG, MILK, WOOL, TRUFFLE, MEAT]},
 	{"name": &"artisan_goods", "members": [FOOD, OIL]},
 	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
 	{"name": &"night_leftovers", "members": []},
@@ -3518,6 +3556,10 @@ static func check_livestock(animals: Dictionary, rows: Array,
 			errors.append("'%s' holds nothing, so it can never be collected" % id)
 		if int(animal.get("feed_per_day", -1)) < 0:
 			errors.append("'%s' says nothing of what it eats" % id)
+		# **Something comes of keeping it** (task 0185): produce at the door,
+		# or spots to dig - a pig gives the second.
+		if (animal["produces"] as Dictionary).is_empty() and int(animal.get("digs", 0)) < 1:
+			errors.append("'%s' gives nothing at the door and digs nothing" % id)
 		# **Every kind names its home** (task 0183), a `BUILDINGS` entry
 		# with room in it, and where it comes from. Standing on the map is
 		# no longer every animal's rule: one from the stall (0190) does not.
@@ -3887,6 +3929,7 @@ static func digest() -> int:
 		"livestock": LIVESTOCK,
 		"livestock_sources": LIVESTOCK_SOURCES,
 		"animal_feed": ANIMAL_FEED,
+		"dig": [DIG_REACH, DIG_GIVES],
 		"ammo": [EMPTY_RELOAD_PERCENT, EMPTY_DAMAGE_PERCENT],
 		"groups": RESOURCE_GROUPS,
 		"gathering": GATHERING,

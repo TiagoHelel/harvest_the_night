@@ -1446,10 +1446,16 @@ func _set_contact(who: Dictionary, pixels: Vector2i) -> void:
 
 
 ## Real interaction fixtures for every existing verb, with production carry.
+## The strip a verb plays (`PlayerArt.VERBS`): its own, or a borrowed one -
+## since task 0185 digging a truffle plays the collect strip until A025.
+func _strip(verb: StringName) -> StringName:
+	return PlayerArt.VERBS.get(verb, verb)
+
+
 func _work_fixture(verb: StringName, facing: int) -> Vector2i:
 	_state = State.create(5005)
 	_state["tick"] = GameData.DUSK_AT_TICK / 2
-	for key in ["occupants", "plots", "entities", "livestock", "crafting", "produced"]:
+	for key in ["occupants", "plots", "entities", "livestock", "crafting", "produced", "dig_spots"]:
 		(_state[key] as Dictionary).clear()
 	Resources.gain(_state, {GameData.MONEY: 1000, GameData.WOOD: 100,
 		GameData.STONE: 100, GameData.IRON: 100, GameData.FOOD: 100})
@@ -1480,6 +1486,9 @@ func _work_fixture(verb: StringName, facing: int) -> Vector2i:
 		&"collect":
 			on[idx] = {"id": &"cow"}
 			_state["livestock"][idx] = {"ready": 1, "left": 100}
+		# A pig's truffle on open grass (task 0185).
+		&"dig":
+			_state["dig_spots"][idx] = GameData.DIG_GIVES.duplicate()
 		&"craft", &"carry":
 			on[idx] = {"id": &"workshop", "hp": int(GameData.BUILDINGS[&"workshop"]["hp"])}
 		&"trade":
@@ -1527,8 +1536,8 @@ func _work_frame(view: PlayerView, verb: StringName, frame: int, facing: int, de
 	view._process(delta)
 	var body: Sprite2D = view.get_node("Body")
 	expect(var_to_bytes(_state) == before, "Work rendering leaves complete isolated state unchanged")
-	expect(view.playing() == verb, "Actual PlayerView plays its own %s work strip" % verb)
-	expect(body.texture != null and body.texture.resource_path == PlayerArt.texture_path(verb, frame),
+	expect(view.playing() == _strip(verb), "Actual PlayerView plays its own %s work strip" % verb)
+	expect(body.texture != null and body.texture.resource_path == PlayerArt.texture_path(_strip(verb), frame),
 		"Actual work completion clock selects %s authored frame %d" % [verb, frame])
 	expect(view.flipped() == (facing == Player.EAST), "Work east mirrors west, with consistent handedness")
 	expect(body.offset == -Vector2(PlayerFrames.FEET) and body.texture.get_size() == Vector2(PlayerFrames.CANVAS),
@@ -1547,17 +1556,17 @@ func _work_cycles() -> void:
 	# 2x2 blocks at half scale - so it is used as authored, never halved.
 	var walking := _screen_detail(PlayerArt.texture_path(&"walk_east", 0))
 	for verb in verbs:
-		for frame in int(PlayerFrames.COUNT[verb]):
-			var path := PlayerArt.texture_path(verb, frame)
+		for frame in int(PlayerFrames.COUNT[_strip(verb)]):
+			var path := PlayerArt.texture_path(_strip(verb), frame)
 			expect(is_equal_approx(_screen_detail(path), walking),
 				"%s keeps the walking farmer's 4x4 art pixel: no detail jump" % path)
 	for facing in [Player.SOUTH, Player.WEST, Player.NORTH, Player.EAST]:
 		for verb in verbs:
 			var at := _work_fixture(verb, facing)
 			expect(Interact.verb_at(_state, at) == verb, "Real target offers %s" % verb)
-			expect(PlayerFrames.COUNT[verb] == 4, "Each verb has four authored frames without aliases")
+			expect(PlayerFrames.COUNT[_strip(verb)] == 4, "Each verb's strip has four authored frames without aliases")
 			for side in [Player.SOUTH, Player.NORTH]:
-				expect(PlayerArt.pose(side, false, verb)["name"] == verb,
+				expect(PlayerArt.pose(side, false, verb)["name"] == _strip(verb),
 					"North/south work intentionally uses reviewed side-on art")
 			var total := Interact.ticks_for(_state, at, verb)
 			var instant := [&"water", &"reel", &"trade"].has(verb)
@@ -1893,7 +1902,7 @@ func _reactions() -> void:
 			Reactions.show(_state, kind)
 			await _reaction_settle(view)
 			var body: Sprite2D = view.get_node("Body")
-			expect(view.playing() == verb and not view.get_node("ReactionBubble").visible
+			expect(view.playing() == _strip(verb) and not view.get_node("ReactionBubble").visible
 				and body.material == view._work.head_material(_state, verb), "Reaction never obscures active/returning %s work" % verb)
 			if kind == &"question":
 				await _shoot("suppressed_work_%s" % verb, "Reaction waits: %s tool pose remains unobscured" % verb)

@@ -14088,8 +14088,10 @@ func _task_0078_transition() -> void:
 
 	# **Day actors and night machines are named**, so the theatre is data
 	# rather than a guess made in a draw call.
+	# Or, since task 0185, an animal that lives on it: the sheep and the pig
+	# come from the stall and live in the barn, never on the map.
 	for id in Transition.DAY_ONLY:
-		expect(_is_farm_occupant(StringName(id)),
+		expect(_is_farm_occupant(StringName(id)) or GameData.LIVESTOCK.has(StringName(id)),
 			"the day-only actor '%s' is a thing on the farm" % id)
 	for id in Transition.WAKES:
 		expect(GameData.DEFENCES.has(StringName(id))
@@ -14508,8 +14510,9 @@ func _task_0082_shots() -> void:
 	# Sixty-two since 0178: the three sprinklers spraying at dawn. Sixty-three
 	# since 0180: the fishing bar mid-catch. Sixty-four since 0181: a worm
 	# on the iron rod's hook. Sixty-five since 0182: the fish book.
-	# Sixty-six since 0183: the coop and the barn.
-	expect(names.size() == 66,
+	# Sixty-six since 0183: the coop and the barn. Sixty-seven since 0185:
+	# the barnyard.
+	expect(names.size() == 67,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

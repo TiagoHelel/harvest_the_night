@@ -18714,3 +18714,178 @@ src/tools/{headless_check,headless_v1,input_check,input_v1}.gd,
 assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0184-feeding-products.md,
 implementation/shots/0184/, docs/devlog/{index,index.pt_BR}.md
+
+## 0185 - Sheep, pigs and the dog - done 2026-10-09
+
+What changed: the barn fills out, and the farm moves.
+- Sheep give wool.
+- Pigs nose up truffles on the grass round their barn, and the farmer digs
+  them out.
+- Every animal at home wanders, eats and naps in front of its coop or barn.
+- A dog follows the farmer by day and sleeps by the porch at night.
+
+**Sheep and pigs** (`LIVESTOCK`, all levers):
+- Both live in the barn, come from the stall (`source: stall`, so 0190 sells
+  them) and eat 1 hay a morning.
+- **Sheep:** a fleece a day (`WOOL`, $10), `holds` 1.
+- **Pig:** gives nothing at the door (`produces` empty). Instead it `digs` 1
+  spot a fed morning.
+- `TRUFFLE` is $20, under oil. Wool and truffle are animal goods, named in
+  both languages.
+- `check_livestock` refuses a kind that gives nothing at the door and digs
+  nothing.
+
+**The truffles** (`Livestock`):
+- **`dig_spots`** is a new state key in `RUN_DATA`: cell -> `DIG_GIVES`
+  (1 truffle).
+- **Marking** (`mark_spots`) runs in `Phases.begin_day` after the hay
+  (`feed`), which decides it: only a fed pig digs.
+  - Each pig picks, from the run's RNG (decided: not a `(seed, day)`
+    stream), one cell among the barn's diggable cells in index order.
+  - Diggable means all of these:
+    - open grass;
+    - not a plot, not a path;
+    - nothing standing on it, and nothing in the two cells south of it;
+    - not the porch;
+    - within `DIG_REACH` (4) of the barn's walls, beside it or in front,
+      never behind.
+  - SIM moves on purpose.
+- **Visibility, two decisions the pictures forced:**
+  - The first takes put the spots north of the barn, under its roof's
+    drawing and the HUD, then among the trees to the west, under a canopy.
+  - A spot nobody can see is no spot. So nothing behind the barn, and
+    nothing just north of anything standing, which is what would be drawn
+    over it.
+- **Digging:**
+  - The new verb `dig` (`DAY_ONLY`, `all_verbs`, an `Interact.complete` arm,
+    15 ticks) is offered on a spot ahead of 0167's `till`, which would
+    otherwise be offered on the grass.
+  - It gives the truffle and the spot is gone.
+  - `Sfx.VERB_SOUNDS` borrows `sfx/collect` until 0281, and
+    `PlayerArt.VERBS` the `collect` strip until A025.
+  - `PlayerWork` now looks a cue's seconds up by its strip, so a borrowed
+    strip works. `PlayerFrames` is generated and was not touched.
+- **At night:** `Phases.begin_preparation` clears the spots (`clear_spots`),
+  so they go with the sun. A spot a building or a bed later covers stops
+  being offered.
+
+**The view** (`src/ui/animal_view.gd`, new, view only):
+- **Housed animals:** each one wanders a pen two and a half rows deep in
+  front of its home.
+  - It starts spread along the pen's front.
+  - It cycles through `walk` (12 px a second), `eat`, `idle` and the odd
+    `sleep`. Each animal has its own fixed sequence, so a picture is
+    repeatable.
+  - It replaces 0183's static row in `WorldView`. The sprites still sit in
+    the occupants layer with the `day_only` mark, so `Transition` fades them
+    at dusk. `DAY_ONLY` now also names `sheep` and `pig`.
+  - headless_check's "a day-only actor is a thing on the farm" now accepts a
+    `LIVESTOCK` kind, since a sheep is never on the map.
+- **The dog:**
+  - It is with the farmer from day 1, a step behind him by day, sitting when
+    near. At night, or while he is indoors or asleep, it sleeps by the porch.
+  - **Nothing in `src/core/` knows it.** It has no state key and no
+    occupant, so the hash cannot see it.
+  - Petting is a view cue: a click on it (the `place` action, consumed), or
+    interact while the farmer faces it with no verb on that cell. It plays
+    the wag and floats a heart. The interact never tills where the dog sits.
+- **The dig spots** are drawn in code as A029's `truffle_spot` until 0211: a
+  heap of turned soil with a truffle's dark top.
+- **Stand-ins**, through 0120's road:
+  - A026's sheep is `props/chicken` paled and grown 1.35x. A tinted cow
+    stayed a cow in the first take.
+  - A026's pig is `props/cow` in pink at 0.8x.
+  - A027's cow and chicken are their own props.
+  - A028's dog is `props/cow` small and brown, at 0.65x.
+  - A029's wool is the gear paled, and its truffle the stone darkened. The
+    coal icon is itself a stand-in, with no file to borrow.
+  - Every animation of each pack's table is registered with its frames and
+    seconds: idle, walk, eat, sleep, `pig_dig`, and the dog's sit, wag, walk
+    and sleep.
+
+**Art settled:**
+- **A026 and A027:** the Deliverables now state that the rows stand as
+  written: canvases, pivots, frames and the visible targets against the
+  16x32 farmer. They also say how `AnimalView` plays the states.
+  - `pig_dig` is registered and not yet played: spots are marked at dawn.
+- **A025** exists, carrying the owner's "blocked" edit, so it was not
+  created. One added line confirms that `dig` plays `collect` until
+  `tend`, and that petting is a view cue with a heart and no farmer pose
+  until `pet_dog`. Only that hunk is committed.
+- A028's table is 0233's to settle. A029's pack file carries the owner's
+  edits and was not touched.
+
+### Hashes
+
+- **SIM 1862924429 -> 216342093, on purpose:**
+  - `WOOL` and `TRUFFLE` in `held` and `gained`;
+  - the new `dig_spots` key;
+  - the scenario's state otherwise does as it did: it houses no pig.
+- **DATA 232468587 -> 1869696351, on purpose:**
+  - sheep and pig in `LIVESTOCK`;
+  - the two goods, their prices and group;
+  - `DIG_REACH` and `DIG_GIVES` in `digest()`.
+
+Verify: 60 passed, 0 failed in 643s (the known OVER BUDGET), on the second run: headless_check 17282 asserts, headless_v1 1878, input_check 1193 cases, input_v1 631, player work 26357, reactions 692, effects 2997, sim 216342093 and data 1869696351 unchanged since the first run's accept.
+
+**Tests:**
+- `_task_0185_animals` (headless_v1). Mornings come through
+  `Phases.begin_day`, and wool by stepping `Livestock.tick` a sheep's
+  `every_ticks`.
+  - **Data:** the checks pass. A pig that neither gives nor digs is refused.
+    Sheep and pigs live in the barn and come from the stall, and wool and
+    truffle are priced, named and animal goods.
+  - **Wool:** a barn with the map's cow, a sheep and a pig, all fed. The
+    sheep's fleece comes at the door, and the pig gives nothing there.
+  - **The pig's spot:** the fed pig marked its spot, on grass, offering `dig`
+    where the hoe would till. Dug, it gives a truffle and is gone, and the
+    cell offers `till` again.
+  - **Forty mornings** with beds, paths and fences crowding the barn's
+    grass: every spot is open grass within reach, beside or in front, with
+    nothing south of it. None on a bed, a path or a building.
+  - **Unfed and night:** a pig with no hay digs nothing. `begin_preparation`
+    clears what was not dug.
+  - **Repeatable:** the same seed and mornings mark the same spots.
+  - **No dog:** a text scan finds no "dog" in any `src/core/` file, and finds
+    it in `animal_view.gd`.
+  - `_task_0183_barns`'s empty-barn teeth now remove every barn kind.
+- `_case_0185_truffle` (input_v1): a spot four steps east on open grass. The
+  farmer walks there holding D, the faced cell offers `dig`, and SPACE digs
+  one truffle and the spot is gone.
+- `headless_check` asks for one shot per scenario: 67 now (`barnyard`).
+- **The first verify failed three showcases.** All three are fixed in
+  place:
+  - **player work** stopped at 13 checks, on a script error. It assumed
+    every verb has a strip of its own: it now follows `PlayerArt.VERBS`
+    (`_strip`), and its work fixture can lay a truffle spot.
+  - **player reactions** wanted the same.
+  - **effect contacts** expects the boots' layer empty once its emitter
+    goes. So the dig spots' node is the boots' layer's sibling, just
+    under it, not its child.
+  - Rerun: player work 26357 checks, reactions 692, effects 2997, none
+    failed.
+
+Looked at (`python tools/shot.py 0185 barnyard --fhd`, 1920x1080), noon on
+Spring 3:
+- the red barn on its site, its cow, sheep and two pigs about the pen;
+- the coop east of it with its four hens;
+- two truffle spots on the grass below them, one beside a tree, one clear in
+  the open;
+- the farmer in the open facing the barn, and the small brown dog sitting a
+  step behind him.
+
+Five takes to get there. Each moved a rule or a stand-in, and the pictures
+are why:
+- everyone heaped on one spot, the dog under a sheep;
+- the sheep a cow and the pig barely pink;
+- the spots under the barn's roof;
+- the spots under the trees.
+
+Files: src/core/{game_data,interact,livestock,phases,state}.gd,
+src/ui/{animal_view (new),names,placeholder_art,player_art,player_work,sfx,transition,world_view}.gd,
+src/tools/{art_showcase,headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/{A025-farmer-care,A026-farm-animals,A027-cow-chicken}.md
+(A025: the one confirming line only),
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0185-sheep-pigs-dog.md,
+implementation/shots/0185/, docs/devlog/{index,index.pt_BR}.md

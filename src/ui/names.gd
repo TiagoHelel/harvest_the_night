@@ -82,6 +82,8 @@ const KEYS: Dictionary = {
 	&"hay": &"ITEM_HAY",
 	&"egg": &"ITEM_EGG",
 	&"milk": &"ITEM_MILK",
+	&"wool": &"ITEM_WOOL",
+	&"truffle": &"ITEM_TRUFFLE",
 	&"oil": &"ITEM_OIL",
 	&"wheat": &"ITEM_WHEAT",
 	&"corn": &"ITEM_CORN",

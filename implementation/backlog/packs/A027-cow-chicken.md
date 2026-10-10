@@ -20,7 +20,7 @@ The player sees them by day round their buildings and asleep there in the dark e
 
 ## Deliverables
 
-The table is provisional: game task 0185 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0185. The rows stand as written: the cow 40x32 at (20,30), the chicken 24x24 at (12,22), draw 1.0, west only with the runtime mirror. **How the game plays them** (`src/ui/animal_view.gd`): a cow in the barn and a hen in the coop wander the two rows in front of their home by day - `walk` at about 12 px a second, `eat` for 2-4 s at a stop, `idle`, now and then `sleep` - and are inside at night. The map's loose cow and chickens, before any home is built, stay the old `props/cow` and `props/chicken` until 0210. Until then every frame here is that prop. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

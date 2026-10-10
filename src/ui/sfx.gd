@@ -57,6 +57,8 @@ const VERB_SOUNDS := {
 	&"plant": &"sfx/plant",
 	&"harvest": &"sfx/harvest",
 	&"collect": &"sfx/collect",
+	# A pig's truffle dug up (task 0185): the collect sound until 0281.
+	&"dig": &"sfx/collect",
 	&"craft": &"sfx/craft",
 	&"trade": &"sfx/trade",
 	&"fish": &"sfx/cast",

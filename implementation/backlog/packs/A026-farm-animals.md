@@ -14,7 +14,7 @@ Task 0185 fills the barn. Sheep give wool, pigs dig truffles, and every animal w
 
 ## Deliverables
 
-The table is provisional: game task 0185 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0185. The rows stand as written: 40x32 at (20,30), draw 1.0, west only with the runtime mirror, and the visible targets against the 16x32 farmer below. **How the game plays them** (`src/ui/animal_view.gd`): an animal that lives in the barn wanders the two rows in front of it by day - `walk` while it crosses them at about 12 px a second, then `eat` for 2-4 s, `idle`, or now and then `sleep` for a few seconds - and is inside at night, not drawn. `pig_dig` is registered but not yet played: 0185's pigs mark their spots at dawn, before anyone is watching, and the spots lie beside or in front of the barn, never behind it. Until 0209 the sheep is `props/chicken` paled and grown 1.35x and the pig `props/cow` in pink at 0.8x. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

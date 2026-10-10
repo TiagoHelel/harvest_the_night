@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 54
+const GROUPS := 55
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -123,6 +123,7 @@ func _run() -> void:
 	_task_0182_legendary()
 	_task_0183_barns()
 	_task_0184_feed()
+	_task_0185_animals()
 
 
 func _finish() -> void:
@@ -4958,7 +4959,10 @@ func _task_0183_barns() -> void:
 	var unsourced: Dictionary = GameData.LIVESTOCK.duplicate(true)
 	unsourced[&"chicken"]["source"] = &"the_moon"
 	var empty_barn: Dictionary = GameData.LIVESTOCK.duplicate(true)
-	empty_barn.erase(&"cow")
+	# Every kind that lives in the barn (task 0185 added the sheep and the pig).
+	for kind in GameData.sorted_names(GameData.LIVESTOCK.keys()):
+		if GameData.LIVESTOCK[kind]["home"] == &"barn":
+			empty_barn.erase(kind)
 	var bought: Dictionary = GameData.LIVESTOCK.duplicate(true)
 	bought[&"sheep"] = (bought[&"cow"] as Dictionary).duplicate(true)
 	bought[&"sheep"]["source"] = &"stall"
@@ -5180,6 +5184,144 @@ func _task_0184_feed() -> void:
 		and Resources.amount(legacy, GameData.MEAT) == saved_meat,
 		"two waiting in an old save come out as two milk")
 	_completed += 1
+
+
+## Task 0185: sheep, pigs and the dog. Mornings come through
+## `Phases.begin_day`, never a whole day of ticks. A fed sheep gives wool; a
+## fed pig marks spots on open grass by its barn - never a plot, a path or an
+## occupied cell - that the farmer digs truffles from, and they go with the
+## sun; and a text scan finds no dog in `src/core/`, so the hash cannot
+## depend on it.
+func _task_0185_animals() -> void:
+	expect(GameData.validate().is_empty()
+		and GameData.check_livestock(GameData.LIVESTOCK, GameData.FARM_MAP).is_empty(),
+		"the sheep and the pig pass the livestock check",
+		str(GameData.check_livestock(GameData.LIVESTOCK, GameData.FARM_MAP)))
+	var idle: Dictionary = GameData.LIVESTOCK.duplicate(true)
+	(idle[&"pig"] as Dictionary)["digs"] = 0
+	expect(not GameData.check_livestock(idle, GameData.FARM_MAP).is_empty(),
+		"a pig that gives nothing at the door and digs nothing is refused")
+	var kinds_ok := true
+	for kind in [&"sheep", &"pig"]:
+		kinds_ok = kinds_ok and GameData.LIVESTOCK[kind]["home"] == &"barn" and GameData.LIVESTOCK[kind]["source"] == &"stall"
+	expect(kinds_ok and Names.KEYS.has(GameData.WOOL) and Names.KEYS.has(GameData.TRUFFLE)
+		and GameData.SELL_PRICE.has(GameData.WOOL) and GameData.SELL_PRICE.has(GameData.TRUFFLE)
+		and GameData.group_members(&"animal_goods").has(GameData.WOOL) and GameData.group_members(&"animal_goods").has(GameData.TRUFFLE),
+		"sheep and pigs live in the barn and come from the stall; wool and truffles are priced, named and animal goods")
+
+	# **A fed sheep gives wool.**
+	var state := State.create(1850)
+	Resources.gain(state, {GameData.WOOD: 500, GameData.STONE: 500, GameData.MONEY: 2000})
+	var barn := _site_spot(state, &"barn")
+	expect(Building.place(state, &"barn", barn) and Livestock.house(state, barn, &"sheep")
+		and Livestock.house(state, barn, &"pig") and Livestock.residents(state, barn).size() == 3,
+		"fixture: a barn with the map's cow, a sheep and a pig")
+	Resources.add(state, GameData.HAY, 3)
+	_next_morning(state)
+	expect(Livestock.is_fed(state, barn, 0) and Livestock.is_fed(state, barn, 1) and Livestock.is_fed(state, barn, 2),
+		"the morning feeds all three")
+	_tick_livestock(state, int(GameData.LIVESTOCK[&"sheep"]["every_ticks"]))
+	var door := Livestock.door_of(state, barn)
+	var wool := Resources.amount(state, GameData.WOOL)
+	var truffles := Resources.amount(state, GameData.TRUFFLE)
+	Interact.complete(state, door, &"collect")
+	expect(Resources.amount(state, GameData.WOOL) == wool + 1 and Resources.amount(state, GameData.TRUFFLE) == truffles,
+		"a fed sheep gives its fleece at the barn's door, and the pig nothing there")
+
+	# **The fed pig dug this morning**: on open grass by the barn, dug up for
+	# a truffle - and the spot's verb wins over the hoe.
+	var spots := Livestock.spots(state)
+	var digs := int(GameData.LIVESTOCK[&"pig"]["digs"])
+	expect(spots.size() == digs, "the fed pig marked its %d spot(s)" % digs, str(spots))
+	var spot: Vector2i = spots[0] if not spots.is_empty() else Vector2i(-1, -1)
+	expect(Farm.terrain_at(state, spot) == Farm.Terrain.GRASS and Interact.verb_at(state, spot) == &"dig",
+		"on open grass, where the hoe would till, the spot offers to dig", str(Interact.verb_at(state, spot)))
+	Interact.complete(state, spot, &"dig")
+	expect(Resources.amount(state, GameData.TRUFFLE) == truffles + int(GameData.DIG_GIVES[GameData.TRUFFLE])
+		and Livestock.spots(state).is_empty() and Interact.verb_at(state, spot) == &"till",
+		"dug, it gives a truffle and is gone, and the grass offers the hoe again")
+
+	# **Never on a plot, a path or an occupied cell**, over forty mornings with
+	# beds, a path and a fence crowding the barn's grass.
+	var crowded := State.create(1851)
+	Resources.gain(crowded, {GameData.WOOD: 500, GameData.STONE: 500, GameData.MONEY: 2000})
+	var pen := _site_spot(crowded, &"barn")
+	Building.place(crowded, &"barn", pen)
+	Livestock.house(crowded, pen, &"pig")
+	var reach := GameData.DIG_REACH
+	var size := Building.size_of(&"barn")
+	var crowding := 0
+	for y in range(pen.y, pen.y + size.y + reach):
+		for x in range(pen.x - reach, pen.x + size.x + reach):
+			var cell := Vector2i(x, y)
+			if not Grid.in_bounds(cell) or Farm.terrain_at(crowded, cell) != Farm.Terrain.GRASS or not Farm.is_empty(crowded, cell):
+				continue
+			crowding += 1
+			match crowding % 3:
+				0:
+					(crowded["plots"] as Dictionary)[Grid.index(cell)] = Farming.EMPTY_PLOT.duplicate()
+				1:
+					crowded["terrain"][Grid.index(cell)] = Farm.Terrain.PATH
+	Farm.touch(crowded)
+	var bad: Array = []
+	var dug := 0
+	for _morning in 40:
+		Resources.add(crowded, GameData.HAY, 2)
+		_next_morning(crowded)
+		for at in Livestock.spots(crowded):
+			var cell: Vector2i = at
+			if Farming.is_tilled(crowded, cell) or Farm.terrain_at(crowded, cell) != Farm.Terrain.GRASS \
+					or not Farm.is_empty(crowded, cell) or not Farm.is_empty(crowded, cell + Vector2i.DOWN) \
+					or cell.x < pen.x - reach or cell.x >= pen.x + size.x + reach \
+					or cell.y < pen.y or cell.y >= pen.y + size.y + reach:
+				bad.append(cell)
+			Interact.complete(crowded, cell, &"dig")
+			dug += 1
+		Phases.begin_preparation(crowded)
+	expect(dug >= 40 * digs and bad.is_empty(),
+		"forty mornings of spots, every one on open grass within reach beside or in front of the barn - never a bed, a path, a building or behind its roof",
+		"%d dug, %s" % [dug, str(bad)])
+
+	# **Unfed, no spot; and the spots go with the sun.**
+	_next_morning(crowded)
+	expect(not Livestock.is_fed(crowded, pen, 1) and Livestock.spots(crowded).is_empty(),
+		"a pig with no hay digs nothing")
+	Resources.add(crowded, GameData.HAY, 2)
+	_next_morning(crowded)
+	var waiting := Livestock.spots(crowded).size()
+	Phases.begin_preparation(crowded)
+	expect(waiting > 0 and Livestock.spots(crowded).is_empty() and Interact.verb_at(crowded, Vector2i.ZERO) != &"dig",
+		"and what is not dug goes when the farmer goes to bed")
+
+	# **The same seed digs the same spots.**
+	expect(_pig_spots(1852) == _pig_spots(1852) and not _pig_spots(1852).is_empty(),
+		"the same seed and mornings mark the same spots")
+
+	# **No dog in the rules.** The pet is the view's alone.
+	var found: Array = []
+	for file_name in DirAccess.get_files_at("res://src/core/"):
+		if String(file_name).ends_with(".gd") \
+				and FileAccess.get_file_as_string("res://src/core/" + String(file_name)).to_lower().contains("dog"):
+			found.append(file_name)
+	expect(found.is_empty() and FileAccess.get_file_as_string("res://src/ui/animal_view.gd").contains("dog"),
+		"a text scan finds no dog in src/core/ - it lives in the view", str(found))
+	_completed += 1
+
+
+## Five mornings of one fed pig in a barn on `seed_value`: every spot marked.
+func _pig_spots(seed_value: int) -> Array:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 500, GameData.STONE: 500, GameData.MONEY: 2000})
+	var barn := _site_spot(state, &"barn")
+	Building.place(state, &"barn", barn)
+	Livestock.house(state, barn, &"pig")
+	var out: Array = []
+	for _morning in 5:
+		Resources.add(state, GameData.HAY, 2)
+		_next_morning(state)
+		out.append_array(Livestock.spots(state))
+		Phases.begin_preparation(state)
+	return out
 
 
 ## Step the animals' clocks `ticks` times, and nothing else.

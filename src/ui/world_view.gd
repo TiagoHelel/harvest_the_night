@@ -223,6 +223,8 @@ var _zzz_textures: Dictionary = {}
 ## The guardian's cursor and the porch guardian (task 0131).
 var _cursor: GuardianCursor
 var _guardian: GuardianView
+## The barnyard: animals at home, the dog, dig spots (task 0185).
+var _animal_view: AnimalView
 ## The cells with a defence on them last time the occupants changed, so a new
 ## one can be spotted (task 0133) - empty until the first look at a state.
 var _defences_seen: Dictionary = {}
@@ -356,6 +358,13 @@ func _ready() -> void:
 	_ground_traps.name = "GroundTraps"
 	add_child(_ground_traps)
 	move_child(_ground_traps, _occupants.get_index())
+	# **The barnyard** (task 0185): the animals at home wandering by their
+	# coop or barn, the dog, and the pigs' dig spots - view only, never the
+	# state's.
+	_animal_view = AnimalView.new()
+	_animal_view.name = "AnimalView"
+	add_child(_animal_view)
+	_animal_view.setup(_occupants, _ground_traps)
 
 
 ## Point the view at a game. Called by whatever screen owns the simulation.
@@ -382,6 +391,8 @@ func show_state(state: Dictionary) -> void:
 	_state = state
 	if _guardian != null:
 		_guardian.show_state(state)
+	if _animal_view != null:
+		_animal_view.show_state(state)
 	_remember_towers(state)
 	_dirty = true
 	if _season != null:
@@ -417,8 +428,7 @@ func _process(delta: float) -> void:
 	# different thing for a different job and is not used here.
 	# House HP lives outside the occupants table; crossing the existing wear
 	# threshold must refresh its drawing even when all nine cells are unchanged.
-	var signature: int = [(_state["occupants"] as Dictionary).hash(), _house_hurt(),
-		_housed_signature()].hash()
+	var signature: int = [(_state["occupants"] as Dictionary).hash(), _house_hurt()].hash()
 	if signature != _last_signature:
 		_last_signature = signature
 		_dirty = true
@@ -1258,68 +1268,6 @@ func _refresh() -> void:
 			mark.size = Vector2(3.0, 3.0)
 			_occupants.add_child(mark)
 			_sprites.append(mark)
-	_draw_housed()
-
-
-## **The animals at home** (task 0183): each home's residents stand along
-## its front by day, either side of the door, a second row a step behind the
-## first - view only; wandering about is 0185's. `Transition` fades them out
-## at dusk with the loose ones (`day_only`).
-func _draw_housed() -> void:
-	var homes: Dictionary = _state.get("housed", {})
-	var anchors: Array = homes.keys()
-	anchors.sort()
-	for idx in anchors:
-		var anchor := Grid.cell(int(idx))
-		var home := Farm.occupant(_state, anchor)
-		if home.is_empty():
-			continue
-		var size := Building.size_of(StringName(home["id"]))
-		var door := Livestock.door_of(_state, anchor)
-		var spots: Array = []
-		for x in size.x:
-			if anchor.x + x != door.x:
-				spots.append(Vector2i(anchor.x + x, anchor.y + size.y))
-		if spots.is_empty():
-			spots.append(door + Vector2i.DOWN)
-		var animals: Array = (homes[idx] as Dictionary)["animals"]
-		for i in animals.size():
-			var kind := StringName((animals[i] as Dictionary)["id"])
-			var spot: Vector2i = spots[i % spots.size()]
-			var row := i / spots.size()
-			var sprite := Sprite2D.new()
-			sprite.name = "Housed_%d_%d" % [int(idx), i]
-			sprite.texture = _texture_for(kind)
-			ArtPlacement.place(sprite, spot)
-			sprite.position += Vector2(float(row) * 6.0, -float(row) * 4.0)
-			sprite.set_meta("day_only", true)
-			sprite.set_meta("housed_at", int(idx))
-			var motion := ShaderMaterial.new()
-			motion.shader = AMBIENT_MOTION
-			if _season != null:
-				_season.dress(motion, false)
-			motion.set_shader_parameter("species", 1 if kind == &"chicken" else 2)
-			motion.set_shader_parameter("phase", float((spot.x * 37 + spot.y * 19 + i * 11) % 101) * 0.13)
-			motion.set_shader_parameter("motion_time", _ambient_time)
-			sprite.material = motion
-			_ambient_materials.append(motion)
-			_occupants.add_child(sprite)
-			_sprites.append(sprite)
-
-
-## Who lives where, without the clocks that tick every frame: a move-in
-## redraws the farm and a hen's timer does not (task 0183).
-func _housed_signature() -> int:
-	var homes: Dictionary = _state.get("housed", {})
-	var anchors: Array = homes.keys()
-	anchors.sort()
-	var parts: Array = []
-	for idx in anchors:
-		var ids: Array = []
-		for animal in ((homes[idx] as Dictionary)["animals"] as Array):
-			ids.append(str((animal as Dictionary)["id"]))
-		parts.append("%d:%s" % [int(idx), ",".join(ids)])
-	return ";".join(parts).hash()
 
 
 ## **A map prop whose pack has not landed** (task 0156: A021's copper, coal

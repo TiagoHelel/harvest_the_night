@@ -1,7 +1,7 @@
 # 0185 - Sheep, pigs and the dog
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0184
 - **Likely files:** src/core/livestock.gd, src/core/game_data.gd, src/core/interact.gd, src/core/phases.gd, src/core/state.gd, src/ui/animal_view.gd (new), src/ui/world_view.gd, src/ui/transition.gd, src/ui/sfx.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

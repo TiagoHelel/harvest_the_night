@@ -41,6 +41,17 @@ extends RefCounted
 ## without gives nothing that day and is still there, no worse, the next. An
 ## animal is fed the day it moves in - day 1 included, before any morning -
 ## and the map's loose animals graze: they are never fed and never hungry.
+##
+## ## The pig's truffles
+##
+## Task 0185. A pig gives nothing at the door. Each morning, after the hay, a
+## fed pig marks its `digs` spots on open grass within `DIG_REACH` of its
+## barn, beside it or in front - no plot, no path, nothing standing there or
+## just south of it, and never behind it, under its roof's drawing - drawn
+## from the run's
+## RNG; the farmer digs them up (`dig`, the verb `Interact` offers there,
+## ahead of the hoe) for `DIG_GIVES`. What is not dug goes with the sun
+## (`clear_spots`, from `Phases.begin_preparation`).
 
 
 static func initial() -> Dictionary:
@@ -68,6 +79,10 @@ static func initial() -> Dictionary:
 		# Animals whose home was lost, `{"id", "ready", "left"}` each, waiting
 		# - producing nothing - for the next home of their kind.
 		"unhoused": [],
+		# **Where the pigs have dug** (task 0185): cell index -> what digging
+		# there gives (`DIG_GIVES`). Keys from play (`State.RUN_DATA`); gone
+		# at night.
+		"dig_spots": {},
 	}
 
 
@@ -225,6 +240,103 @@ static func feed(state: Dictionary) -> int:
 	return hungry
 
 
+## **The pigs dig** (task 0185), from `Phases.begin_day` after the hay: every
+## fed pig, home by home in cell order, marks its `digs` spots on open grass
+## within `DIG_REACH` of its barn's walls, each drawn from the run's RNG
+## among the cells still free, in index order. How many were marked.
+static func mark_spots(state: Dictionary) -> int:
+	var marked := 0
+	var spots: Dictionary = state["dig_spots"]
+	var homes: Dictionary = state["housed"]
+	var anchors: Array = homes.keys()
+	anchors.sort()
+	for idx in anchors:
+		var anchor := Grid.cell(int(idx))
+		for animal in ((homes[idx] as Dictionary)["animals"] as Array):
+			var one: Dictionary = animal
+			var digs := int((GameData.LIVESTOCK[one["id"]] as Dictionary).get("digs", 0))
+			if digs <= 0 or not bool(one.get("fed", true)):
+				continue
+			for _i in digs:
+				var free := diggable_near(state, anchor)
+				if free.is_empty():
+					break
+				var at: Vector2i = free[Rng.int_between(state["rng"], 0, free.size() - 1)]
+				spots[Grid.index(at)] = GameData.DIG_GIVES.duplicate()
+				marked += 1
+	return marked
+
+
+## The cells a pig of the home on `anchor` could dig today: open grass within
+## `DIG_REACH` of its walls - not a plot, not a path, nothing standing there,
+## no spot already - in index order. **Beside it and in front, never behind**:
+## a spot north of the barn would be under its roof's drawing, where nobody
+## could see it or point at it - and for the same reason never just north of
+## anything standing (`_in_sight`), a tree's canopy or a building's wall.
+static func diggable_near(state: Dictionary, anchor: Vector2i) -> Array:
+	var size := Building.size_of(StringName(Farm.occupant(state, anchor).get("id", &"")))
+	var reach := GameData.DIG_REACH
+	var out: Array = []
+	for y in range(anchor.y, anchor.y + size.y + reach):
+		for x in range(anchor.x - reach, anchor.x + size.x + reach):
+			var cell := Vector2i(x, y)
+			if _diggable(state, cell) and not (state["dig_spots"] as Dictionary).has(Grid.index(cell)):
+				out.append(cell)
+	return out
+
+
+static func _diggable(state: Dictionary, cell: Vector2i) -> bool:
+	return Grid.in_bounds(cell) and Farm.terrain_at(state, cell) == Farm.Terrain.GRASS \
+		and Farm.is_empty(state, cell) and not Farming.is_tilled(state, cell) \
+		and cell != House.porch(state) and _in_sight(state, cell)
+
+
+## Whether a spot here could be seen: nothing standing in the two cells south
+## of it, which is what would be drawn over it - a tree's canopy, a wall.
+static func _in_sight(state: Dictionary, cell: Vector2i) -> bool:
+	for step in [Vector2i(0, 1), Vector2i(0, 2)]:
+		var below: Vector2i = cell + step
+		if Grid.in_bounds(below) and not Farm.is_empty(state, below):
+			return false
+	return true
+
+
+## What digging this cell gives, or empty when there is no spot - nor one
+## that a building or a plot has since covered.
+static func spot_at(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var spot: Dictionary = (state.get("dig_spots", {}) as Dictionary).get(Grid.index(cell), {})
+	if spot.is_empty() or not _diggable(state, cell):
+		return {}
+	return spot
+
+
+## Every spot waiting, in index order: for the view and the checks.
+static func spots(state: Dictionary) -> Array:
+	var keys: Array = (state.get("dig_spots", {}) as Dictionary).keys()
+	keys.sort()
+	var out: Array = []
+	for idx in keys:
+		if not spot_at(state, Grid.cell(int(idx))).is_empty():
+			out.append(Grid.cell(int(idx)))
+	return out
+
+
+## **Dig it up** (task 0185): `Interact.complete`'s `dig`. What came out,
+## empty when there was nothing there.
+static func dig(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var gives := spot_at(state, cell)
+	if gives.is_empty():
+		return {}
+	Resources.gain(state, gives)
+	(state["dig_spots"] as Dictionary).erase(Grid.index(cell))
+	return gives
+
+
+## The spots go with the sun (task 0185): `Phases.begin_preparation`.
+static func clear_spots(state: Dictionary) -> void:
+	(state["dig_spots"] as Dictionary).clear()
+
+
 ## Whether the animal at `index` in the home on this cell ate this morning.
 static func is_fed(state: Dictionary, cell: Vector2i, index: int) -> bool:
 	var animals := residents(state, cell)
@@ -309,7 +421,11 @@ static func tick(state: Dictionary) -> void:
 			# stays there to be collected.
 			if not bool((animal as Dictionary).get("fed", true)):
 				continue
-			_produce(animal, GameData.LIVESTOCK[(animal as Dictionary)["id"]])
+			var entry: Dictionary = GameData.LIVESTOCK[(animal as Dictionary)["id"]]
+			# A pig's keep is its spots, not a clock (task 0185).
+			if (entry["produces"] as Dictionary).is_empty():
+				continue
+			_produce(animal, entry)
 
 
 ## One tick of one animal's clock.

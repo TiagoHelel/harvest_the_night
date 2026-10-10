@@ -55,7 +55,7 @@ const TABLES: Array = [
 ## separates these is not how full they are, it is who put the keys there.
 ## Nothing in here is ever added to or taken from by `reconcile()`.
 const RUN_DATA: Array = [
-	"burning", "crafting", "entities", "fish_book", "fishing", "housed", "killed_by_kind",
+	"burning", "crafting", "dig_spots", "entities", "fish_book", "fishing", "housed", "killed_by_kind",
 	"killed_by_kind_all_run", "kits", "last_catch", "last_result", "livestock",
 	"occupants", "payout", "plots", "produced", "repair_debt", "rubble",
 ]

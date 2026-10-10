@@ -80,6 +80,8 @@ const VERBS := {
 	&"fish": &"fish",
 	&"reel": &"reel",
 	&"collect": &"collect",
+	# Digging a truffle (task 0185): the collect strip until A025's tend.
+	&"dig": &"collect",
 	&"craft": &"craft",
 	&"trade": &"trade",
 	&"repair": &"repair",

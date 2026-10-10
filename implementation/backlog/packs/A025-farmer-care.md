@@ -39,6 +39,7 @@ Rules for every row:
   mirror of west and is never delivered: `mirror: "runtime"`, `mirror_pairs: {}`.
   Files `native/<anim>/<dir>/01..04.png` and `runtime/<anim>/<dir>/01..04.png`,
   `01.png` = frame 0. Claude writes `sprites/actors/<anim>_<dir>_<i>.png`.
+- **Game task 0185 confirmed the rows as written.** Digging a pig's truffle (`dig`, 15 ticks) plays the `collect` strip until this pack lands, where it becomes `tend` - frame 0 held for the work timer as below. Petting the dog is a view cue only (a click on it, or the interact key while the farmer faces it with nothing else to do there): a heart over the dog while it plays A028's `dog_wag` stand-in, and no farmer pose until `pet_dog` lands.
 - **How the game plays them** (0185 and 0208 confirm): `tend` plays like the work
   verbs in `src/ui/player_work.gd` - frame 0 held for the collect or dig work timer,
   then 1, 2, 3 at 0.09 s on completion, then idle. `pet_dog` is a view cue with no

@@ -88,7 +88,7 @@ const WAKES := [&"gun_tower", &"flame_tower", &"mortar", &"auto_crossbow",
 ## a thing that stands in a field while zombies walk past it. They fade out as
 ## the light goes and come back with it, which is the cheapest possible way to
 ## say "this is somewhere else now" without touching a rule.
-const DAY_ONLY := [&"cow", &"chicken"]
+const DAY_ONLY := [&"cow", &"chicken", &"sheep", &"pig"]
 
 
 func _find_day_actors() -> void:

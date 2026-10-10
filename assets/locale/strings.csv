@@ -246,6 +246,8 @@ ITEM_STRAW,0,straw,palha
 ITEM_HAY,0,hay,feno
 ITEM_EGG,0,egg,ovo
 ITEM_MILK,0,milk,leite
+ITEM_WOOL,0,wool,lã
+ITEM_TRUFFLE,0,truffle,trufa
 ITEM_FOOD,0,food,comida
 ITEM_GUNPOWDER,0,gunpowder,pólvora
 ITEM_INCENDIARY,0,incendiary,incendiária

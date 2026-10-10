@@ -53,6 +53,8 @@ const DEFAULT_TICKS: Dictionary = {
 	&"reel": 1,
 	# Picking something up off a cow is not work.
 	&"collect": GameData.SECONDS / 3,       # LEVER: ticks, 5-30
+	# Turning a pig's truffle out of the grass (task 0185) is a little.
+	&"dig": GameData.SECONDS / 2,           # LEVER: ticks, 5-30
 	&"trade": 1,                    # opening a panel is not work
 	# Starting a job is a moment. The job itself takes as long as the recipe
 	# says, and the player is free to walk away while it runs.
@@ -78,7 +80,7 @@ const DEFAULT_TICKS: Dictionary = {
 ## before either existed.
 const DAY_ONLY: Array = [
 	&"chop", &"mine", &"till", &"plant", &"harvest", &"fish", &"trade", &"craft",
-	&"water", &"reel", &"collect",
+	&"water", &"reel", &"collect", &"dig",
 ]
 
 
@@ -146,6 +148,10 @@ static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 		if Gathering.is_node(StringName(on["id"])) and not Gathering.is_available(state, StringName(on["id"])):
 			return &""
 		return OCCUPANT_VERBS.get(on["id"], &"")
+	# **A pig's spot wins over the hoe** (task 0185): it is on open grass,
+	# where `till` would otherwise be offered.
+	if not Livestock.spot_at(state, cell).is_empty():
+		return &"dig"
 	var terrain := Farm.terrain_at(state, cell)
 	if terrain in [Farm.Terrain.GRASS, Farm.Terrain.SOIL] or Farming.is_tilled(state, cell):
 		return Farming.verb_at(state, cell)
@@ -227,6 +233,8 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 			Fishing.strike(state)
 		&"collect":
 			Livestock.collect(state, cell)
+		&"dig":
+			Livestock.dig(state, cell)
 		&"craft":
 			Crafting.start_at(state, cell)
 		&"trade":
@@ -246,7 +254,7 @@ static func all_verbs() -> Array:
 	var verbs: Array = []
 	for v in OCCUPANT_VERBS.values() + TERRAIN_VERBS.values() \
 			+ [&"till", &"plant", &"harvest", &"water", &"fish", &"reel",
-				&"craft", &"collect", &"repair"]:
+				&"craft", &"collect", &"dig", &"repair"]:
 		if not verbs.has(v):
 			verbs.append(v)
 	verbs = GameData.sorted_names(verbs)

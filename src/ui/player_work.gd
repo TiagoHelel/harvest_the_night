@@ -98,7 +98,9 @@ func contact(verb: StringName, facing: int, instant: bool) -> void:
 	_order.assign([1, 2, 3, 0] if instant else [1, 2, 3])
 	# A repair may repeat every three ticks. Its return must fit inside that
 	# existing cycle, otherwise every new hit would erase follow-through.
-	_cue_seconds = float(PlayerFrames.SECONDS[verb])
+	# The strip the verb plays (`PlayerArt.VERBS`): its own, or since task
+	# 0185 a borrowed one - digging a truffle plays the collect strip.
+	_cue_seconds = float(PlayerFrames.SECONDS[PlayerArt.VERBS.get(verb, verb)])
 	if not instant:
 		_cue_seconds = minf(_cue_seconds, float(maxi(_total, 1)) / GameData.TICK_HZ / 4.0)
 	_elapsed = 0.0

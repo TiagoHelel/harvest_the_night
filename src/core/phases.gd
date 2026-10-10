@@ -135,6 +135,8 @@ static func begin_preparation(state: Dictionary) -> bool:
 	# The water goes off with the sun: watering is a daily chore, not a job you
 	# do once on day one and never again.
 	Farming.dry_out(state)
+	# And the pigs' spots go with the sun (task 0185).
+	Livestock.clear_spots(state)
 	_enter(state, PREPARATION)
 	# **After the phase changes**, because the last line of day one is "send
 	# for the night" and the only way to know it was sent for is that it is no
@@ -288,6 +290,8 @@ static func begin_day(state: Dictionary) -> bool:
 	# **The animals' hay** (task 0184): a housed one that goes without gives
 	# nothing today.
 	Livestock.feed(state)
+	# **And the fed pigs dig** (task 0185), after the hay that decides it.
+	Livestock.mark_spots(state)
 	return true
 
 
