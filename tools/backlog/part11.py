@@ -544,6 +544,18 @@ TASKS = [
               "(0234's money and materials, at stall prices), and what was "
               "standing on the night each boss fell - `python tools/autoplay.py "
               "--economy` or an equivalent report",
+              "A real day is the field and then a second earner (0196): the "
+              "tour's field took two to two and a half game hours, and the "
+              "rest of the day went to the pond and the cliff. Measure each "
+              "season against that mixed day - the field, then the best "
+              "earner for the hours left - beside the focused ones, and say "
+              "in BALANCE.md which of the two the rule of thumb is held to",
+              "The hens' clock (0196): a hen holds one egg and its clock "
+              "waits until it is collected, 4h10m a lay, so the tour's second "
+              "round, four hours after its first, found nothing. Report eggs "
+              "a day at one, two and three visits, and keep `holds` at 1 only "
+              "if the journal says why that is the pressure the plan wants "
+              "and not a chore",
               "Rule of thumb: one well-worked day at the start of each season "
               "buys about one of that season's new defences - the ratio per "
               "season in BALANCE.md, each within 0.7-1.5 or the journal says "

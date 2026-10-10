@@ -418,9 +418,11 @@ TASKS = [
               "owner's call. Playtest code is `src/app/` and only reads the "
               "state: neither hash moves",
               "Questions the loop cannot answer - whether a stranger reads "
-              "the week's lines (0293), whether a night is long enough - go "
-              "into PLAYTEST.md's 'what to report', not into a guess in the "
-              "journal"],
+              "the week's lines (0293), whether a night is long enough, and "
+              "0196's: after the morning's field, are the pond, the cliff "
+              "and the animals worth doing for themselves or only for the "
+              "night - go into PLAYTEST.md's 'what to report', not into a "
+              "guess in the journal"],
          dod=["`_task_0295_playtest_log` in `src/tools/headless_v1.gd`: a "
               "short scripted run through bed, START, dawn, a lost night and "
               "the next morning writes, in order, the lines the reader "

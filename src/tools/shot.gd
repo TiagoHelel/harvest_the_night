@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["days", "0196's two played days: Spring 9 at 07:00, noon and dusk; then Summer 9 at 07:00, 11:46 and dusk", ""],
 	["tips", "Spring 3, the shipping bin's tip over the bin; then the first bite's over the fishing bar", ""],
 	["kitchen", "a kitchen on the grass at noon in spring, the farmer at it with its panel up: seven dishes, a stew on the fire", "WorkshopPanel"],
 	["house_tiers", "the house in tier I at noon, the farmer by its west wall; then tier II with its plaque over the door, the workshop's upgrades tab offering tier III, and tier III", ""],
@@ -758,6 +759,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"peddler": _set_peddler(state)
 		"house_tiers": _set_house_tiers(state)
 		"tips": _set_tips(state)
+		"days": _set_days(state)
 		"kitchen": _set_kitchen(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
@@ -892,6 +894,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "tips":
 		await _shoot("tips", folder)
 		await _take_tip_bite(main, state, folder)
+		return
+	if name == "days":
+		await _shoot("days_spring_morning", folder)
+		await _take_days(main, state, folder)
 		return
 	if name == "inventory_crops":
 		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
@@ -1912,6 +1918,60 @@ func _take_house_tiers(main: Node, state: Dictionary, folder: String) -> void:
 	await _shoot("house_tiers_3", folder)
 	print("  house_tiers: tiers %s, a whole house %d, the tab offered '%s', the farmer at %s" % [
 		str(bought), Phases.house_full(state), offered, str(_standing_at)])
+
+
+## **The played days** (task 0196): `day_tour.gd`'s Spring 9, its farm played
+## to the morning and then to 07:00 - the strawberries coming in - and the
+## rest of the two days in `_take_days`.
+func _set_days(state: Dictionary) -> void:
+	_become(state, DayTour.prepare(&"spring"))
+	DayTour.play(state, &"spring", 7 * 60)
+	_standing_at = Player.cell(state)
+
+
+## Spring 9's noon (at the pond) and dusk (at the bin, the forecast up), then
+## Summer 9's farm played afresh to 07:00 (the peppers and the corn), 11:46
+## (the jars and the keg being filled) and dusk.
+func _take_days(main: Node, state: Dictionary, folder: String) -> void:
+	var view := main.get_node("%WorldView") as WorldView
+	var season := &"spring"
+	for take in [[&"spring", 12 * 60, "days_spring_noon"], [&"spring", 18 * 60, "days_spring_dusk"],
+			[&"summer", 7 * 60, "days_summer_morning"], [&"summer", 11 * 60 + 46, "days_summer_noon"],
+			[&"summer", 18 * 60, "days_summer_dusk"]]:
+		if StringName(take[0]) != season:
+			season = StringName(take[0])
+			# **Summer on a fresh run, as every scenario is.** Kept, the log
+			# had read spring's record to a later tick than any of summer's,
+			# and went on showing spring's lines over summer.
+			seed(SPARK_SEED)
+			main.begin_run(SEED)
+			_tips_shown_but(main, [])
+			if _speaking != "":
+				I18n.use(_speaking)
+				I18n.relabel(main)
+			state = main.get_node("%SimDriver").state
+			_become(state, DayTour.prepare(season))
+		DayTour.play(state, season, int(take[1]))
+		if Phases.clock_minute(state) < int(take[1]):
+			Sim.advance(state, Phases.tick_at_minute(int(take[1])) - int(state["day_tick"]))
+		view.show_state(state)
+		view.look_at_cell(Player.cell(state))
+		for _i in 12:
+			await process_frame
+		view.look_at_cell(Player.cell(state))
+		view.skip_transition()
+		view._light_for_phase(0.0)
+		await process_frame
+		await RenderingServer.frame_post_draw
+		await _shoot(String(take[2]), folder)
+		print("  days: %s at %02d:%02d, the farmer at %s" % [take[2], Phases.clock_minute(state) / 60,
+			Phases.clock_minute(state) % 60, Player.cell(state)])
+
+
+## Make `state` another, in place: every view keeps the dictionary it holds.
+func _become(state: Dictionary, other: Dictionary) -> void:
+	state.clear()
+	state.merge(other)
 
 
 ## **The tips** (task 0195): noon on Spring 3, a day after the first and its

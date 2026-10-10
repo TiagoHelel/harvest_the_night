@@ -1,7 +1,7 @@
 # 0196 - Checkpoint: is the day good on its own?
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0194, 0195
 - **Likely files:** implementation/PROGRESS.md, implementation/shots/0196/, src/tools/autoplay.gd, implementation/prompts/
 

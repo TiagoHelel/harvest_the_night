@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-184 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
+185 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -228,6 +228,7 @@ is the sort of thing this list exists to say out loud.
 | 0193 | Every season can make what it needs | 2026-10-10 |
 | 0194 | The day's economy | 2026-10-10 |
 | 0195 | Teaching the new day | 2026-10-10 |
+| 0196 | Checkpoint: is the day good on its own? | 2026-10-10 |
 
 ## Every time the game changed underneath itself
 
@@ -318,7 +319,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 
 ## What went wrong
 
-50 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+52 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -370,6 +371,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0106** - The known-issues section names five things and one of them is owed *(The release checklist)*
 - **0107** - The capsules took two looks to stop being wrong *(Store assets)*
 - **0107** - And the store screenshot found a bug in the game *(Store assets)*
+- **0196** - What drags, what is busywork, what is missing *(Checkpoint: is the day good on its own?)*
+- **0196** - Found in the tour, and fixed before these numbers *(Checkpoint: is the day good on its own?)*
 
 ## What is not in it
 

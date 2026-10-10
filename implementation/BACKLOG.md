@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **182 / 296 done**
+`###############.........`  **183 / 296 done**
 
-0 doing / 114 todo / 0 blocked across 18 phases.
+0 doing / 113 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-114 task(s) left, the ready ones first, then what they
+113 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -241,23 +241,6 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0196 - Checkpoint: is the day good on its own?
-
-Ready to pick up.  Likely files: `implementation/PROGRESS.md, implementation/shots/0196/, src/tools/autoplay.gd, implementation/prompts/`.
-
-**The plan's Phase 3 checkpoint.** A spring day and a summer day earn money in different ways, and the day is fun even without thinking about the night. Phase 13 and everything after it waits on this answer.
-
-- Play a spring day and a summer day in the real game, and run the autoplayer through the same days; compare where the money came from
-- FHD captures of both days at morning, noon and dusk in `implementation/shots/0196/`, opened and looked at
-- Answer honestly in the journal: is the day fun even without thinking about the night? What drags, what is busywork, what is missing
-- If the answer changes the plan, edit the later prompts (0197 on) before they run, and say which
-- If the answer is no, mark this task blocked with the reason, so phase 13 does not start on a day that does not work
-- Change no rule here, so neither hash moves: fixes go into later prompts or new tasks
-
-  - done when: The journal says, with numbers, how a spring day and a summer day each made their money - and that they differ
-  - done when: The journal answers the question in one paragraph a reader could disagree with
-  - done when: The captures are in `implementation/shots/0196/` and the journal says what each one shows
 
 ### 0197 - Art: trampled crops and tilled ground
 
@@ -637,6 +620,164 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
+### 0218 - Room for more fields and more bodies
+
+Ready to pick up.  Likely files: `src/core/pathing.gd, src/core/entities.gd, src/core/towers.gd, src/tools/perf_check.gd, tools/perf.py, tools/perf_baseline.txt, src/tools/headless_v1.gd`.
+
+Nothing changes for the player. The decoy, the bait, the digger and the rat swarm are coming, and today every wall placed re-sweeps every path field and every tower scans every zombie; make room before adding to either, with the game playing exactly as it does now.
+
+- A named-field registry in `Pathing`, in code (a const table and one accessor such as `Pathing.field(state, name)`): a field is registered with its seeds, its cost rule and the state keys it is stored under, and is built on first request for the current `grid_version`, never on a rebuild nobody asked for. Today's three (`flow`, `flow_open`, `flow_hunt` and their `*_cost` arrays, under `flow_version`) keep being built eagerly in `refresh` exactly as now, because those keys are folded into SIM. The registry is for 0224's lure field and 0250's digger field, which add their own storage keys (and move SIM) then
+- `Entities.ids` stops sorting on every call, on the strength of an asserted invariant: ids are handed out ascending and never reused (`next_entity_id`), so the table's own order is already ascending - assert it after spawns, kills, `Enemies.withdraw` and a save round trip (if a loaded table does not keep the order, sort it once where the save is read, e.g. `State.reconcile`). No static cache shared between states
+- A spatial bucket for `Towers._acquire`, built once per `Towers.tick` as a local (never stored in the state) from the entity cells, so a tower looks only at the buckets its reach touches. It must pick exactly what the full scan picks for every `TARGETING` mode, ties to the lowest id included; `acquire_for` keeps working for the tests
+- Both hashes unchanged is the bar. `State.hash_of` folds every state key, caches included, so nothing here may add a key to a new game's state. If that proves impossible, prove play identical (kills, house HP and every entity cell at fixed ticks of one seeded night, before and after) and record both numbers in `implementation/PROGRESS.md`
+- A swarm scenario in `src/tools/perf_check.gd`: a few hundred walkers (the rat swarm's stand-in until 0248) against the worst case's towers, with its own `PERF` lines (e.g. `swarm_tick`, `swarm_towers`, `swarm_enemies`) and a `COUNT` of bodies. `PerfNames` is unchanged: no system is added
+- The swarm must sit inside `TICK_BUDGET_US` (8333 us), and `tools/perf.py` holds only `night_tick`, `day_tick` and `path_refresh` to a budget today: add `swarm_tick` to that list so the bar is enforced. If it does not fit, write down what it would take rather than shrinking the swarm
+- Accept the new baseline with `python tools/perf.py --accept` and say in the journal why each number moved
+
+  - done when: `_task_0218_perf_ground` in `src/tools/headless_v1.gd` asserts the bucketed acquire equals the full scan over a seeded crowd for all four targeting modes, `Entities.ids` is ascending after spawns, kills and a save round trip, and a registered field is not built until it is asked for
+  - done when: `python tools/perf.py --report` shows `night_towers` below its baseline at the start of this task (1028 us when this was written) on the old worst case, and `python tools/perf.py` passes with `swarm_tick` inside the tick budget
+  - done when: The journal has the perf table before and after
+
+### 0219 - Essence
+
+Ready to pick up.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/game_data.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/ui/tech_panel.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+
+The night stops paying like a day. It hands over essence - today's technology points under a new name - for holding the farm, and a smaller purse, so money is what the day earns and the night spends (plan section 4.6).
+
+- Keep the id `tech` (`GameData.TECH`, `Rewards._is_tech`, the saves): only the words change, so no `State.VERSION` bump. `ITEM_TECH` becomes essence / essência and every line that names the currency follows (`DESC_TECH_COST`, `TECH_HELD`'s 'points', any result or HUD line); the tree itself may stay the technology tree (`TECH_TITLE`)
+- Earn rules as LEVERs in `GameData.REWARDS` and `TECH_BONUSES`: a night won pays `tech_points`; the three bonuses stay (house untouched measured against `Phases.house_full`, as 0114 left it); a Full Moon night (`Calendar.is_full_moon`, 0152) multiplies the night's essence by a percent LEVER (100-300), its own line in `Tech.would_pay`; `GameData.validate()` refuses a percent under 100. `nights_paid` still stops a night paying twice
+- The night's money shrinks: `base_money`, `money_per_night` and the material handout (`resources`, `resources_per_night`), read through 0150's `Rewards.night_step`, come down to numbers argued against 0194's money-per-day targets in `implementation/BALANCE.md`; the journal says what a spring night paid before and after
+- The bounty is paid for kills only. `Rewards._money_from` already reads `killed_by_kind`; assert that survivors who walk off at dawn (0137, `Enemies.withdraw`) pay nothing and are not counted as killed
+- Essence on screen: the night HUD shows what is held (plan section 9) and the morning report of 0138 has a '+N essence' line itemised from the lines `Tech.would_pay` gave inside `Rewards.settle`, kept in `payout` for the screen - after `Tech.award` the night is paid and `would_pay` answers empty. The icon is the existing tech icon through the placeholder road until A036 is integrated by 0235
+- Asserts that pin night money or technology (`_task_0061`, `_task_0062`, `_task_0068` and whatever 0150 left of them) are rewritten in place in `src/tools/headless_check.gd` to read the LEVERs rather than literals; `tools/i18n_check.py` is clean in both languages
+- SIM and DATA both move on purpose (the payout and the REWARDS table): record the old and the new numbers in `implementation/PROGRESS.md`
+
+  - done when: `_task_0219_essence` in `src/tools/headless_v1.gd` asserts a won night pays `tech_points` plus each bonus earned, a Full Moon night pays the multiplied amount, a replayed night pays no essence, and a dawn win with survivors pays bounty for the kills only
+  - done when: `python tools/shot.py 0219` captures of the night HUD and the morning report say essence, opened and looked at
+  - done when: The BALANCE.md section sets a spring night's money and essence beside a spring day's money
+
+### 0223 - Defences sleep under tarps
+
+Ready to pick up.  Likely files: `src/ui/world_view.gd, src/ui/transition.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd, implementation/backlog/packs/A044-tarps.md`.
+
+By day the defences sleep under tarps and the farm looks like a farm; when the night comes the covers come off with the wake the transition already plays (plan section 5).
+
+- View only: no rule reads a tarp, and both hashes stay where they are
+- In the DAY phase every defence of a tarp family is drawn covered; during the switch into the night the tarps come off with the wake pass in `transition.gd` (`WAKES` kept - the generator still wakes, without a tarp) and go back on when the day begins
+- Decide which families get tarps and why: probably the towers and the other standing one-cell defences, not barriers, mines or traps (a covered wall is still a wall, a covered mine is a lie). Drive the unveil from one list in the view so a later defence joins by being listed; 0234 lists the families of 0224-0231, which leave the list alone
+- A hurt or wrecked defence shows its state by day - through the tarp or instead of it, decide - so the morning never hides damage
+- Drawn through the placeholder road of 0120: a code-drawn or tinted cover per footprint (32x48 towers, 16x32, 16x24) with two unveil frames, until A044 is integrated by 0243
+- Write the chosen families and footprints into the Deliverables table of `implementation/backlog/packs/A044-tarps.md`; 0234 settles the final list
+
+  - done when: `_task_0223_tarps` in `src/tools/headless_v1.gd` asserts every id in the view's tarp list is a `DEFENCES` id and nothing in `src/core/` mentions a tarp
+  - done when: `python tools/shot.py 0223` captures of the same towers by day (covered), at dusk and at night (uncovered), opened and looked at
+
+### 0227 - The pumpkin catapult
+
+Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/towers.gd, src/core/ammo.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+
+A lobbed splash that burns pumpkins instead of gunpowder, so an autumn harvest becomes an autumn defence (plan section 5).
+
+- Id `catapult` (never `pumpkin`, which is the crop): `shape` splash, `aim` ballistic with `flight_ticks`, `ammo` {pumpkin: 1}, a cost in wood and pumpkins, `season` autumn (0193's field - pumpkins are autumn's, so `check_seasonal_supply` fails it as spring). Not a cheaper mortar: shorter reach, no gunpowder, a reason of its own - the journal says when it is the better buy
+- It has `damage`, so `_task_0085_night_sounds` wants a `Sfx.TOWER_SOUNDS` entry: borrow `sfx/mortar` until 0283 gives it a thunk
+- `check_ammo` refuses ammunition no recipe makes. Allow what a crop yields (the `CROPS` table) as well as recipe outputs, or add a recipe - decide, and keep the rule's intent: a tower must be able to fire a proper shot
+- An empty pumpkin pool gives the weak shot every tower has (`Ammo.weak_damage`, `Ammo.weak_reload`), never a silent catapult
+- `TOWER_LEVELS` 1-3 for `catapult`, gated on the same tree nodes as the other towers (`true sights`, `oiled works`)
+- `Names.KEYS` `DEF_CATAPULT`, a `Describe.defence` line, strings in both languages; drawn through the placeholder road (a tinted 32x48 tower per level and state, an 8x8 pumpkin shot, a 4-frame splat) until A039 is integrated by 0238
+- DATA moves (a row, its levels, the ammunition rule); SIM moves only if a state key appears or the scenario builds one - record both numbers
+
+  - done when: `_task_0227_catapult` in `src/tools/headless_v1.gd` asserts a pumpkin lands where it was aimed with the splash falloff the LEVER claims, an empty pool still fires weakly, and levels 1-3 read through `Building.entry_at`
+  - done when: The Deliverables table of `implementation/backlog/packs/A039-catapult.md` states the final geometry this task settled (levels, states, muzzle points, the shot, the splat)
+  - done when: `python tools/shot.py 0227` captures of a volley landing, opened and looked at
+
+### 0230 - The electric fence
+
+Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/enemies.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+
+A barrier like the wooden fence, except whatever bites it is thrown back stunned for a moment - a winter answer that needs the generator running (plan section 5).
+
+- Id `electric_fence`: a barrier (`path_cost` and `hp` LEVERs, within `WIDEST_STEP` by `check_pathing`) with an `energy_draw`, a cost in copper (0176), with wood if it needs a frame, and `season` winter (0193's field). The shock is a stun, not `damage`, so no `Sfx.TOWER_SOUNDS` entry (`_task_0085_night_sounds` wants one exactly when a defence has `damage`; 0283 adds the zap)
+- Stun in `Enemies._gnaw`: an enemy biting an electric fence is stunned for a LEVER of ticks (1-3 s) - a generic entity counter (any source may set it) read at the top of `Enemies._walk`, so a stunned enemy neither moves nor bites; 0233's farm bell writes the same counter. The bite still lands; decide whether bosses get a shorter stun or none. `check_defences` refuses a stun of zero ticks
+- Needs power, degraded never dead: on a short farm the stun is scaled down by `Power.percent`, never to zero
+- Joins like the fence: `WorldView.barrier_mask` joins only `wall` and `fence` today - add the electric fence (decide whether it meets a wooden one) and the placeholder road's `connected` flag, so the joins draw before the art arrives
+- `Names.KEYS` `DEF_ELECTRIC_FENCE`, a `Describe.defence` line, strings in both languages; drawn through the placeholder road (fence-style modules for the 16 masks, whole/hurt, a wreck, a 3-frame zap) until A042 is integrated by 0241
+- DATA moves (a new row); SIM moves only if the scenario meets one or a state key appears - record both numbers
+
+  - done when: `_task_0230_electric_fence` in `src/tools/headless_v1.gd` asserts a walker that bites it stands still for the stun and then bites again, a short farm shortens the stun without removing it, and the field prices it like a barrier
+  - done when: The Deliverables table of `implementation/backlog/packs/A042-electric-fence.md` states the final geometry this task settled
+  - done when: `python tools/shot.py 0230` captures of a joined run of electric fence, opened and looked at
+
+### 0232 - Powers as a list
+
+Ready to pick up.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/pixel_effects.gd, src/tools/effect_showcase.gd, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+Nothing changes for the player. The one flare becomes the first entry of a list of powers, each with its own cooldown and aim cell, so 0233 can add three without a second copy of the cooldown and aiming code.
+
+- `Ability` takes a power id: `ready(state, id)`, `cooldown_left(state, id)`, `charge_percent(state, id)` and `use(state, id, cell)` with the aim cell from 0135's `ability_cell` intent. The flare is the only power and behaves exactly as it does now
+- Hashes unchanged is the bar. `state["ability"]` is in `State.TABLES` and folded into SIM, so the flare keeps its keys (`cooldown`, `flare`, `flare_ticks`, `flares`) and no new state key appears until 0233 adds a power; `intent.ability` stays the flare's edge for the same reason; `GameData.ABILITY` stays byte-identical so DATA does not move
+- If a key truly has to move, prove play identical (a scripted night with two aimed flares, before and after) and record both numbers in `implementation/PROGRESS.md`
+- `Ability.recharge` and `Ability.put_out` work over every power; the `flare_percent` tree bonus stays the flare's
+- Every caller moves to the new signatures - today `main.gd`, `night_hud.gd`, `world_view.gd`, `pixel_effects.gd`, `effect_showcase.gd`, `perf_check.gd`, `_task_0054` as 0135 left it and the input cases (grep `Ability.` for whatever 0135-0142 added: the shot scenarios, the autoplayer) - and no flare-only path is left
+
+  - done when: `_task_0232_powers_list` in `src/tools/headless_v1.gd` asserts the flare's cooldown, aim and damage through the new API match the numbers before the refactor, and an unknown power id is refused without touching the state
+  - done when: `_case_0135_flare_aim` in `src/tools/input_v1.gd` passes with nothing changed but its calls moved to the new API
+
+### 0246 - Bosses in general
+
+Ready to pick up.  Likely files: `src/core/combat.gd, src/ui/night_hud.gd, src/ui/log_panel.gd, src/ui/enemy_motion.gd, src/ui/enemy_deaths.gd, src/ui/pixel_effects.gd, src/ui/world_view.gd, src/ui/sfx.gd, assets/locale/strings.csv, tools/check_giant_art.py, tools/show_art.py, src/tools/giant_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+Three more bosses are coming, and everything that knows about a boss today knows about the Giant by name. Make the bar, the counters, the arrival line, the sounds and the art checks work for anything with `is_boss`, so 0253-0255 are a data entry and a behaviour each.
+
+- `Combat.boss_here` stays the lowest-id boss on the farm; add `Combat.bosses_here(state)` (sorted ids) and `Combat.full_hp(state, id)` (the table's `hp` today), so the boss bar (`NightHud._refresh_boss` reads `ENEMIES[kind]["hp"]` today) reads a body's full health from the one place 0257's elites will change; `Describe.enemy` describes a kind and keeps the table's number
+- Per-boss counters without a new State key: `Combat.bosses_down_of(state, kind)` reads `killed_by_kind_all_run` (RUN_DATA) for `is_boss` kinds; `bosses_down` stays the run total `Run` reports. Raising `boss_arrived` for any `is_boss` is 0153's, not this task's
+- The night HUD's boss bar (`NightHud._refresh_boss`, or wherever 0139 moved it) names whichever boss is up, adds `x2` when more than one is alive (Endless already sends two Giants) and keeps the wind-up flash for any boss with `telegraph_ticks`
+- A boss intro line: `LOG_BOSS` ('the giant is coming') becomes one literal key per boss in a const map in the view (`BOSS_INTRO_GIANT` first; key,width,en,pt_BR rows in `assets/locale/strings.csv`), shown as a banner on `boss_arrived` and as the log line; delete the `LOG_BOSS` row, since `tools/i18n_check.py` fails on unused keys
+- View hard-codes on the Giant's id become boss-generic where the art follows the Giant's pose names (`EnemyMotion.TRACKED` and `_giant_pose`, the five death frames in `EnemyDeaths`, the impact offset in `PixelEffects`, the `giant_windup_` test in `WorldView`): a boss with no authored poses falls back to the ordinary path, and the Giant draws exactly as before. `Sfx` too: `_watch_bodies` announces any `is_boss` on arrival with no position, `nearest_by_kind` leaves every boss out and `_ducks` ducks for any boss voice - so 0253-0255 borrow `sfx/roar_giant` in `ENEMY_SOUNDS` until 0284 voices them
+- `tools/check_giant_art.py` becomes table-driven (family -> motion counts, canvas, pivot, generation task; only the Giant today) and its exact `migrated_enemies() == {five}` becomes a subset check, so a new enemy family cannot fail it; `giant_showcase.gd` takes the family and `tools/show_art.py` routes a new `--boss=<family>` to it (`--giant` unchanged) for the leaves 0266-0268
+- Rewrite `_task_0058_giant`'s 'the only boss in the table' and 'outlasts every other enemy' asserts as every boss against every non-boss (hp, armour, walking `ticks_per_tile`), because 0247-0255 add both kinds
+- Hashes unchanged: helpers, view and tests only
+
+  - done when: `_task_0246_bosses` in `src/tools/headless_v1.gd`: two Giants on the farm give `bosses_here` both ids in order; killing one moves `bosses_down_of(state, &"giant")` and `bosses_down` by one each; every `is_boss` entry has an intro key in the map and in the strings table
+  - done when: `_case_0246_boss_bar` in `src/tools/input_v1.gd`: a spawned Giant raises the bar and the banner, `Sfx.nearest_by_kind()` has no entry for it, and the bar goes when it dies
+  - done when: `python tools/check_giant_art.py` and `python tools/show_art.py --giant --check` pass and report the Giant as before
+  - done when: `python tools/shot.py 0246 boss` (a new scenario: a Giant winding up) opened and looked at: bar, name and banner overlap neither the hotbar nor the time to dawn
+
+### 0281 - The new day's sounds
+
+Ready to pick up.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+Going to bed, waking up, the shipping bin, the peddler, the machines and the new ores each make their own noise, so the longer day of 1.0 sounds as varied as it plays. View only: neither hash moves. (The animal calls are 0286's and the dog's bark 0283's - moved there so this fits one invocation.)
+
+- New recipes in `tools/gen_sfx.py`, built from the same `Noise` and primitives (no `random`): bed (under the blanket), wake (a stretch at 06:00), pass-out (a thud at 02:00), the morning payout coins, the peddler's stall bell, and the tool upgrade (an anvil ring when it is ordered, a bright ting when it is delivered next morning)
+- And the farm's: one working sound per artisan machine (0187's keg and jar, 0188's dairy, loom and mill) and copper, coal and gold variants of `mine` for 0176's nodes. No animal voices here: 0286 writes the calls heard near the coop and the barn and 0283 the dog's bark for its power
+- Furniture and moments: everything played per action keeps the rule `_task_0084_day_sounds` enforces (a peak of at most 0.6 - rendered at `SOFT_PEAK` - under 0.6 s, and quieter and shorter than the bite, so the bite stays the loudest and longest day sound). Bed, wake, pass-out, the morning coins, the stall bell and a delivered tool happen once or twice a day: give them their own list and peak in `gen_sfx.py` (e.g. `MOMENT_SOUNDS`, below `ALARM_PEAK`, joined into `SOUNDS`) and teach that group the named exception rather than loosening its rule
+- `Sfx` hears them from the state and `src/core/` never calls `Audio` nor gains a key for a sound: bed and pass-out on the phase leaving DAY with 0127's `House.asleep` and 0128's `house_visit.passed_out`, wake on 0138's morning, the payout as ONE coins sound when 0189's bin is paid at `begin_day` (never one per coin, never the night's reward; `_watch_money` resets outside DAY and swallows that rise, so read the bin emptying), the stall bell when 0190's `STALL_OPENS` and `STALL_CLOSES` pass, at the stall's cell, the anvil when 0173's pending upgrade appears and the ting when it is handed over
+- A per-target table in `src/ui/sfx.gd` (e.g. `TARGET_SOUNDS`, occupant id -> sound) consulted before `VERB_SOUNDS` with the cell the action already carries: copper, coal and gold nodes sound like their ore and each machine like itself when a job goes in; a target absent from it falls back to the verb's sound
+- Walk `Interact.DAY_ONLY` against `Sfx.VERB_SOUNDS`: every verb 0165-0195 added (0189's `ship` - the bin's lid and drop -, 0185's truffle dig, whatever else the list holds now) was mapped to a borrowed file to keep `_task_0084_day_sounds` green; each gets its own recipe, and two verbs share a file only where the journal says why
+- Every new file is reached by the checks: the per-target table goes into the `wanted` list of `_task_0084_day_sounds` (so the furniture rule measures it), the moment list into the `heard` set its 'nothing in the folder is unreached' assert builds but not into the furniture loop - that assert fails on a WAV nothing asks for
+- The numbers live in `gen_sfx.py` and `sfx.gd`, not in `game_data.gd` - the `Sfx.GROAN_EVERY_SECONDS` reasoning: a noise changes no rule and must not move the data hash
+
+  - done when: `_task_0281_day_sounds` in `src/tools/headless_v1.gd`: every new id is a file, per-action sounds keep the furniture rule, the moment list is named and stays under the alarm, and ore and machine targets resolve to their own sound while an unknown target falls back to the verb's
+  - done when: `_case_0281_day_moments` in `src/tools/input_v1.gd`, reading `Audio.last_played()` and `Audio.plays_of()`: going to bed plays the bed sound once, mining a copper node plays the copper variant and not `sfx/mine`, and a morning with items in the bin plays the coins exactly once
+  - done when: `_task_0084_day_sounds` and `_task_0085_night_sounds` pass; `python tools/gen_sfx.py --report` lengths and peaks of every new sound are in the journal
+
+### 0282 - The sounds of the fishing minigame
+
+Ready to pick up.  Likely files: `tools/gen_sfx.py, tools/gen_music.py, assets/sfx/, assets/music/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+The minigame of 0180 can be played by ear as well as by eye: a tick from the bar, a hit, a miss, the catch, and a fanfare when one of 0182's legendaries comes out of the water. View only: neither hash moves, and no state key is added to be heard.
+
+- Recipes in `tools/gen_sfx.py` for tick, hit, miss and catch. All four are furniture (at most `SOFT_PEAK`, shorter than the bite), so `_task_0084_day_sounds` still finds the bite the loudest and longest day sound: the bite opens the window, these only follow it
+- The tick marks the marker turning at an end of the bar or entering the zone (pick one and say why), never every frame
+- `Sfx` reads hit, miss and catch off 0180's minigame state the way `_watch_fishing` reads `Fishing.is_biting`: a hit or a miss is the edge the press intent left in the state, the catch is the cast ending with a species landed. An assisted hit (0180's option) sounds like any other hit
+- The legendary fanfare is music, not furniture: a short cue in `tools/gen_music.py` beside `sting` (Music bus, at most `STING_PEAK`, a `PIECES` entry so `--check` knows it) built on `MOTIF`, so the year's tune answers the catch. `Sfx` asks `Audio.play` for it when the species landed is one of 0182's legendaries, and the ordinary catch is skipped then
+- Decide what becomes of `sfx/reel` (the MVP's one-press reel): kept as the line coming in under the minigame, or retired with its recipe and its `VERB_SOUNDS` entry - never left as a file nothing plays. `reel` is in `Interact.DAY_ONLY` today and `_task_0084_day_sounds` wants a sound for every verb there, so retire it only if 0180 took the verb out of that list
+- Extend what `_task_0084_day_sounds` collects so every new file in `assets/sfx/` is reached; `python tools/gen_sfx.py --check` and `python tools/gen_music.py --check` are clean
+
+  - done when: `_task_0282_fishing_sounds` in `src/tools/headless_v1.gd`: the four files exist and keep the furniture rule against the bite; the fanfare is in `assets/music/`, under five seconds and at most `STING_PEAK`, and its recipe reads `MOTIF`
+  - done when: `_case_0282_fishing_sounds` in `src/tools/input_v1.gd`: a minigame driven through intents plays the hit for a press in the zone, the miss for one outside it and the catch on landing; a crafted legendary bite landed plays the fanfare and not the catch (`Audio.last_played()`)
+  - done when: `gen_sfx.py --report` and `gen_music.py --report` numbers for the new sounds are in the journal
+
 ### 0289 - Art: the morning report
 
 Waits for Codex art A057.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
@@ -696,164 +837,6 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
   - done when: `_task_0293_first_week` in `src/tools/headless_v1.gd`: a scripted player that only does what `Tutorial.current()` and `points_at()` ask gets from Spring 1 at 06:00 to Spring 2's morning with the house standing and every day-1 step done (going to bed early, so the group stays a few seconds); no step is offered before its day
   - done when: the same group: the 0.1 `settings.cfg` fixture loads with its language, volumes and rebind kept, every key it lacks at its `Settings.DEFAULTS` value, and its `tutorial_seen` of `true` migrated to the 0.1 step ids, so only the new steps are offered
   - done when: 1920x1080 captures of the bed line, the cursor line at night and the forecast line at dusk, in both languages (new scenarios such as `tut_bed`, `tut_cursor`, `tut_forecast`: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast --fhd` and again with `--pt_BR`), opened: each line is on its thing and nothing on screen covers it
-
-### 0218 - Room for more fields and more bodies
-
-Waits on 0196.  Likely files: `src/core/pathing.gd, src/core/entities.gd, src/core/towers.gd, src/tools/perf_check.gd, tools/perf.py, tools/perf_baseline.txt, src/tools/headless_v1.gd`.
-
-Nothing changes for the player. The decoy, the bait, the digger and the rat swarm are coming, and today every wall placed re-sweeps every path field and every tower scans every zombie; make room before adding to either, with the game playing exactly as it does now.
-
-- A named-field registry in `Pathing`, in code (a const table and one accessor such as `Pathing.field(state, name)`): a field is registered with its seeds, its cost rule and the state keys it is stored under, and is built on first request for the current `grid_version`, never on a rebuild nobody asked for. Today's three (`flow`, `flow_open`, `flow_hunt` and their `*_cost` arrays, under `flow_version`) keep being built eagerly in `refresh` exactly as now, because those keys are folded into SIM. The registry is for 0224's lure field and 0250's digger field, which add their own storage keys (and move SIM) then
-- `Entities.ids` stops sorting on every call, on the strength of an asserted invariant: ids are handed out ascending and never reused (`next_entity_id`), so the table's own order is already ascending - assert it after spawns, kills, `Enemies.withdraw` and a save round trip (if a loaded table does not keep the order, sort it once where the save is read, e.g. `State.reconcile`). No static cache shared between states
-- A spatial bucket for `Towers._acquire`, built once per `Towers.tick` as a local (never stored in the state) from the entity cells, so a tower looks only at the buckets its reach touches. It must pick exactly what the full scan picks for every `TARGETING` mode, ties to the lowest id included; `acquire_for` keeps working for the tests
-- Both hashes unchanged is the bar. `State.hash_of` folds every state key, caches included, so nothing here may add a key to a new game's state. If that proves impossible, prove play identical (kills, house HP and every entity cell at fixed ticks of one seeded night, before and after) and record both numbers in `implementation/PROGRESS.md`
-- A swarm scenario in `src/tools/perf_check.gd`: a few hundred walkers (the rat swarm's stand-in until 0248) against the worst case's towers, with its own `PERF` lines (e.g. `swarm_tick`, `swarm_towers`, `swarm_enemies`) and a `COUNT` of bodies. `PerfNames` is unchanged: no system is added
-- The swarm must sit inside `TICK_BUDGET_US` (8333 us), and `tools/perf.py` holds only `night_tick`, `day_tick` and `path_refresh` to a budget today: add `swarm_tick` to that list so the bar is enforced. If it does not fit, write down what it would take rather than shrinking the swarm
-- Accept the new baseline with `python tools/perf.py --accept` and say in the journal why each number moved
-
-  - done when: `_task_0218_perf_ground` in `src/tools/headless_v1.gd` asserts the bucketed acquire equals the full scan over a seeded crowd for all four targeting modes, `Entities.ids` is ascending after spawns, kills and a save round trip, and a registered field is not built until it is asked for
-  - done when: `python tools/perf.py --report` shows `night_towers` below its baseline at the start of this task (1028 us when this was written) on the old worst case, and `python tools/perf.py` passes with `swarm_tick` inside the tick budget
-  - done when: The journal has the perf table before and after
-
-### 0219 - Essence
-
-Waits on 0196.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/game_data.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/ui/tech_panel.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
-
-The night stops paying like a day. It hands over essence - today's technology points under a new name - for holding the farm, and a smaller purse, so money is what the day earns and the night spends (plan section 4.6).
-
-- Keep the id `tech` (`GameData.TECH`, `Rewards._is_tech`, the saves): only the words change, so no `State.VERSION` bump. `ITEM_TECH` becomes essence / essência and every line that names the currency follows (`DESC_TECH_COST`, `TECH_HELD`'s 'points', any result or HUD line); the tree itself may stay the technology tree (`TECH_TITLE`)
-- Earn rules as LEVERs in `GameData.REWARDS` and `TECH_BONUSES`: a night won pays `tech_points`; the three bonuses stay (house untouched measured against `Phases.house_full`, as 0114 left it); a Full Moon night (`Calendar.is_full_moon`, 0152) multiplies the night's essence by a percent LEVER (100-300), its own line in `Tech.would_pay`; `GameData.validate()` refuses a percent under 100. `nights_paid` still stops a night paying twice
-- The night's money shrinks: `base_money`, `money_per_night` and the material handout (`resources`, `resources_per_night`), read through 0150's `Rewards.night_step`, come down to numbers argued against 0194's money-per-day targets in `implementation/BALANCE.md`; the journal says what a spring night paid before and after
-- The bounty is paid for kills only. `Rewards._money_from` already reads `killed_by_kind`; assert that survivors who walk off at dawn (0137, `Enemies.withdraw`) pay nothing and are not counted as killed
-- Essence on screen: the night HUD shows what is held (plan section 9) and the morning report of 0138 has a '+N essence' line itemised from the lines `Tech.would_pay` gave inside `Rewards.settle`, kept in `payout` for the screen - after `Tech.award` the night is paid and `would_pay` answers empty. The icon is the existing tech icon through the placeholder road until A036 is integrated by 0235
-- Asserts that pin night money or technology (`_task_0061`, `_task_0062`, `_task_0068` and whatever 0150 left of them) are rewritten in place in `src/tools/headless_check.gd` to read the LEVERs rather than literals; `tools/i18n_check.py` is clean in both languages
-- SIM and DATA both move on purpose (the payout and the REWARDS table): record the old and the new numbers in `implementation/PROGRESS.md`
-
-  - done when: `_task_0219_essence` in `src/tools/headless_v1.gd` asserts a won night pays `tech_points` plus each bonus earned, a Full Moon night pays the multiplied amount, a replayed night pays no essence, and a dawn win with survivors pays bounty for the kills only
-  - done when: `python tools/shot.py 0219` captures of the night HUD and the morning report say essence, opened and looked at
-  - done when: The BALANCE.md section sets a spring night's money and essence beside a spring day's money
-
-### 0223 - Defences sleep under tarps
-
-Waits on 0196.  Likely files: `src/ui/world_view.gd, src/ui/transition.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd, implementation/backlog/packs/A044-tarps.md`.
-
-By day the defences sleep under tarps and the farm looks like a farm; when the night comes the covers come off with the wake the transition already plays (plan section 5).
-
-- View only: no rule reads a tarp, and both hashes stay where they are
-- In the DAY phase every defence of a tarp family is drawn covered; during the switch into the night the tarps come off with the wake pass in `transition.gd` (`WAKES` kept - the generator still wakes, without a tarp) and go back on when the day begins
-- Decide which families get tarps and why: probably the towers and the other standing one-cell defences, not barriers, mines or traps (a covered wall is still a wall, a covered mine is a lie). Drive the unveil from one list in the view so a later defence joins by being listed; 0234 lists the families of 0224-0231, which leave the list alone
-- A hurt or wrecked defence shows its state by day - through the tarp or instead of it, decide - so the morning never hides damage
-- Drawn through the placeholder road of 0120: a code-drawn or tinted cover per footprint (32x48 towers, 16x32, 16x24) with two unveil frames, until A044 is integrated by 0243
-- Write the chosen families and footprints into the Deliverables table of `implementation/backlog/packs/A044-tarps.md`; 0234 settles the final list
-
-  - done when: `_task_0223_tarps` in `src/tools/headless_v1.gd` asserts every id in the view's tarp list is a `DEFENCES` id and nothing in `src/core/` mentions a tarp
-  - done when: `python tools/shot.py 0223` captures of the same towers by day (covered), at dusk and at night (uncovered), opened and looked at
-
-### 0227 - The pumpkin catapult
-
-Waits on 0196.  Likely files: `src/core/game_data.gd, src/core/towers.gd, src/core/ammo.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-A lobbed splash that burns pumpkins instead of gunpowder, so an autumn harvest becomes an autumn defence (plan section 5).
-
-- Id `catapult` (never `pumpkin`, which is the crop): `shape` splash, `aim` ballistic with `flight_ticks`, `ammo` {pumpkin: 1}, a cost in wood and pumpkins, `season` autumn (0193's field - pumpkins are autumn's, so `check_seasonal_supply` fails it as spring). Not a cheaper mortar: shorter reach, no gunpowder, a reason of its own - the journal says when it is the better buy
-- It has `damage`, so `_task_0085_night_sounds` wants a `Sfx.TOWER_SOUNDS` entry: borrow `sfx/mortar` until 0283 gives it a thunk
-- `check_ammo` refuses ammunition no recipe makes. Allow what a crop yields (the `CROPS` table) as well as recipe outputs, or add a recipe - decide, and keep the rule's intent: a tower must be able to fire a proper shot
-- An empty pumpkin pool gives the weak shot every tower has (`Ammo.weak_damage`, `Ammo.weak_reload`), never a silent catapult
-- `TOWER_LEVELS` 1-3 for `catapult`, gated on the same tree nodes as the other towers (`true sights`, `oiled works`)
-- `Names.KEYS` `DEF_CATAPULT`, a `Describe.defence` line, strings in both languages; drawn through the placeholder road (a tinted 32x48 tower per level and state, an 8x8 pumpkin shot, a 4-frame splat) until A039 is integrated by 0238
-- DATA moves (a row, its levels, the ammunition rule); SIM moves only if a state key appears or the scenario builds one - record both numbers
-
-  - done when: `_task_0227_catapult` in `src/tools/headless_v1.gd` asserts a pumpkin lands where it was aimed with the splash falloff the LEVER claims, an empty pool still fires weakly, and levels 1-3 read through `Building.entry_at`
-  - done when: The Deliverables table of `implementation/backlog/packs/A039-catapult.md` states the final geometry this task settled (levels, states, muzzle points, the shot, the splat)
-  - done when: `python tools/shot.py 0227` captures of a volley landing, opened and looked at
-
-### 0230 - The electric fence
-
-Waits on 0196.  Likely files: `src/core/game_data.gd, src/core/enemies.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
-
-A barrier like the wooden fence, except whatever bites it is thrown back stunned for a moment - a winter answer that needs the generator running (plan section 5).
-
-- Id `electric_fence`: a barrier (`path_cost` and `hp` LEVERs, within `WIDEST_STEP` by `check_pathing`) with an `energy_draw`, a cost in copper (0176), with wood if it needs a frame, and `season` winter (0193's field). The shock is a stun, not `damage`, so no `Sfx.TOWER_SOUNDS` entry (`_task_0085_night_sounds` wants one exactly when a defence has `damage`; 0283 adds the zap)
-- Stun in `Enemies._gnaw`: an enemy biting an electric fence is stunned for a LEVER of ticks (1-3 s) - a generic entity counter (any source may set it) read at the top of `Enemies._walk`, so a stunned enemy neither moves nor bites; 0233's farm bell writes the same counter. The bite still lands; decide whether bosses get a shorter stun or none. `check_defences` refuses a stun of zero ticks
-- Needs power, degraded never dead: on a short farm the stun is scaled down by `Power.percent`, never to zero
-- Joins like the fence: `WorldView.barrier_mask` joins only `wall` and `fence` today - add the electric fence (decide whether it meets a wooden one) and the placeholder road's `connected` flag, so the joins draw before the art arrives
-- `Names.KEYS` `DEF_ELECTRIC_FENCE`, a `Describe.defence` line, strings in both languages; drawn through the placeholder road (fence-style modules for the 16 masks, whole/hurt, a wreck, a 3-frame zap) until A042 is integrated by 0241
-- DATA moves (a new row); SIM moves only if the scenario meets one or a state key appears - record both numbers
-
-  - done when: `_task_0230_electric_fence` in `src/tools/headless_v1.gd` asserts a walker that bites it stands still for the stun and then bites again, a short farm shortens the stun without removing it, and the field prices it like a barrier
-  - done when: The Deliverables table of `implementation/backlog/packs/A042-electric-fence.md` states the final geometry this task settled
-  - done when: `python tools/shot.py 0230` captures of a joined run of electric fence, opened and looked at
-
-### 0232 - Powers as a list
-
-Waits on 0196.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/pixel_effects.gd, src/tools/effect_showcase.gd, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Nothing changes for the player. The one flare becomes the first entry of a list of powers, each with its own cooldown and aim cell, so 0233 can add three without a second copy of the cooldown and aiming code.
-
-- `Ability` takes a power id: `ready(state, id)`, `cooldown_left(state, id)`, `charge_percent(state, id)` and `use(state, id, cell)` with the aim cell from 0135's `ability_cell` intent. The flare is the only power and behaves exactly as it does now
-- Hashes unchanged is the bar. `state["ability"]` is in `State.TABLES` and folded into SIM, so the flare keeps its keys (`cooldown`, `flare`, `flare_ticks`, `flares`) and no new state key appears until 0233 adds a power; `intent.ability` stays the flare's edge for the same reason; `GameData.ABILITY` stays byte-identical so DATA does not move
-- If a key truly has to move, prove play identical (a scripted night with two aimed flares, before and after) and record both numbers in `implementation/PROGRESS.md`
-- `Ability.recharge` and `Ability.put_out` work over every power; the `flare_percent` tree bonus stays the flare's
-- Every caller moves to the new signatures - today `main.gd`, `night_hud.gd`, `world_view.gd`, `pixel_effects.gd`, `effect_showcase.gd`, `perf_check.gd`, `_task_0054` as 0135 left it and the input cases (grep `Ability.` for whatever 0135-0142 added: the shot scenarios, the autoplayer) - and no flare-only path is left
-
-  - done when: `_task_0232_powers_list` in `src/tools/headless_v1.gd` asserts the flare's cooldown, aim and damage through the new API match the numbers before the refactor, and an unknown power id is refused without touching the state
-  - done when: `_case_0135_flare_aim` in `src/tools/input_v1.gd` passes with nothing changed but its calls moved to the new API
-
-### 0246 - Bosses in general
-
-Waits on 0196.  Likely files: `src/core/combat.gd, src/ui/night_hud.gd, src/ui/log_panel.gd, src/ui/enemy_motion.gd, src/ui/enemy_deaths.gd, src/ui/pixel_effects.gd, src/ui/world_view.gd, src/ui/sfx.gd, assets/locale/strings.csv, tools/check_giant_art.py, tools/show_art.py, src/tools/giant_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Three more bosses are coming, and everything that knows about a boss today knows about the Giant by name. Make the bar, the counters, the arrival line, the sounds and the art checks work for anything with `is_boss`, so 0253-0255 are a data entry and a behaviour each.
-
-- `Combat.boss_here` stays the lowest-id boss on the farm; add `Combat.bosses_here(state)` (sorted ids) and `Combat.full_hp(state, id)` (the table's `hp` today), so the boss bar (`NightHud._refresh_boss` reads `ENEMIES[kind]["hp"]` today) reads a body's full health from the one place 0257's elites will change; `Describe.enemy` describes a kind and keeps the table's number
-- Per-boss counters without a new State key: `Combat.bosses_down_of(state, kind)` reads `killed_by_kind_all_run` (RUN_DATA) for `is_boss` kinds; `bosses_down` stays the run total `Run` reports. Raising `boss_arrived` for any `is_boss` is 0153's, not this task's
-- The night HUD's boss bar (`NightHud._refresh_boss`, or wherever 0139 moved it) names whichever boss is up, adds `x2` when more than one is alive (Endless already sends two Giants) and keeps the wind-up flash for any boss with `telegraph_ticks`
-- A boss intro line: `LOG_BOSS` ('the giant is coming') becomes one literal key per boss in a const map in the view (`BOSS_INTRO_GIANT` first; key,width,en,pt_BR rows in `assets/locale/strings.csv`), shown as a banner on `boss_arrived` and as the log line; delete the `LOG_BOSS` row, since `tools/i18n_check.py` fails on unused keys
-- View hard-codes on the Giant's id become boss-generic where the art follows the Giant's pose names (`EnemyMotion.TRACKED` and `_giant_pose`, the five death frames in `EnemyDeaths`, the impact offset in `PixelEffects`, the `giant_windup_` test in `WorldView`): a boss with no authored poses falls back to the ordinary path, and the Giant draws exactly as before. `Sfx` too: `_watch_bodies` announces any `is_boss` on arrival with no position, `nearest_by_kind` leaves every boss out and `_ducks` ducks for any boss voice - so 0253-0255 borrow `sfx/roar_giant` in `ENEMY_SOUNDS` until 0284 voices them
-- `tools/check_giant_art.py` becomes table-driven (family -> motion counts, canvas, pivot, generation task; only the Giant today) and its exact `migrated_enemies() == {five}` becomes a subset check, so a new enemy family cannot fail it; `giant_showcase.gd` takes the family and `tools/show_art.py` routes a new `--boss=<family>` to it (`--giant` unchanged) for the leaves 0266-0268
-- Rewrite `_task_0058_giant`'s 'the only boss in the table' and 'outlasts every other enemy' asserts as every boss against every non-boss (hp, armour, walking `ticks_per_tile`), because 0247-0255 add both kinds
-- Hashes unchanged: helpers, view and tests only
-
-  - done when: `_task_0246_bosses` in `src/tools/headless_v1.gd`: two Giants on the farm give `bosses_here` both ids in order; killing one moves `bosses_down_of(state, &"giant")` and `bosses_down` by one each; every `is_boss` entry has an intro key in the map and in the strings table
-  - done when: `_case_0246_boss_bar` in `src/tools/input_v1.gd`: a spawned Giant raises the bar and the banner, `Sfx.nearest_by_kind()` has no entry for it, and the bar goes when it dies
-  - done when: `python tools/check_giant_art.py` and `python tools/show_art.py --giant --check` pass and report the Giant as before
-  - done when: `python tools/shot.py 0246 boss` (a new scenario: a Giant winding up) opened and looked at: bar, name and banner overlap neither the hotbar nor the time to dawn
-
-### 0281 - The new day's sounds
-
-Waits on 0196.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Going to bed, waking up, the shipping bin, the peddler, the machines and the new ores each make their own noise, so the longer day of 1.0 sounds as varied as it plays. View only: neither hash moves. (The animal calls are 0286's and the dog's bark 0283's - moved there so this fits one invocation.)
-
-- New recipes in `tools/gen_sfx.py`, built from the same `Noise` and primitives (no `random`): bed (under the blanket), wake (a stretch at 06:00), pass-out (a thud at 02:00), the morning payout coins, the peddler's stall bell, and the tool upgrade (an anvil ring when it is ordered, a bright ting when it is delivered next morning)
-- And the farm's: one working sound per artisan machine (0187's keg and jar, 0188's dairy, loom and mill) and copper, coal and gold variants of `mine` for 0176's nodes. No animal voices here: 0286 writes the calls heard near the coop and the barn and 0283 the dog's bark for its power
-- Furniture and moments: everything played per action keeps the rule `_task_0084_day_sounds` enforces (a peak of at most 0.6 - rendered at `SOFT_PEAK` - under 0.6 s, and quieter and shorter than the bite, so the bite stays the loudest and longest day sound). Bed, wake, pass-out, the morning coins, the stall bell and a delivered tool happen once or twice a day: give them their own list and peak in `gen_sfx.py` (e.g. `MOMENT_SOUNDS`, below `ALARM_PEAK`, joined into `SOUNDS`) and teach that group the named exception rather than loosening its rule
-- `Sfx` hears them from the state and `src/core/` never calls `Audio` nor gains a key for a sound: bed and pass-out on the phase leaving DAY with 0127's `House.asleep` and 0128's `house_visit.passed_out`, wake on 0138's morning, the payout as ONE coins sound when 0189's bin is paid at `begin_day` (never one per coin, never the night's reward; `_watch_money` resets outside DAY and swallows that rise, so read the bin emptying), the stall bell when 0190's `STALL_OPENS` and `STALL_CLOSES` pass, at the stall's cell, the anvil when 0173's pending upgrade appears and the ting when it is handed over
-- A per-target table in `src/ui/sfx.gd` (e.g. `TARGET_SOUNDS`, occupant id -> sound) consulted before `VERB_SOUNDS` with the cell the action already carries: copper, coal and gold nodes sound like their ore and each machine like itself when a job goes in; a target absent from it falls back to the verb's sound
-- Walk `Interact.DAY_ONLY` against `Sfx.VERB_SOUNDS`: every verb 0165-0195 added (0189's `ship` - the bin's lid and drop -, 0185's truffle dig, whatever else the list holds now) was mapped to a borrowed file to keep `_task_0084_day_sounds` green; each gets its own recipe, and two verbs share a file only where the journal says why
-- Every new file is reached by the checks: the per-target table goes into the `wanted` list of `_task_0084_day_sounds` (so the furniture rule measures it), the moment list into the `heard` set its 'nothing in the folder is unreached' assert builds but not into the furniture loop - that assert fails on a WAV nothing asks for
-- The numbers live in `gen_sfx.py` and `sfx.gd`, not in `game_data.gd` - the `Sfx.GROAN_EVERY_SECONDS` reasoning: a noise changes no rule and must not move the data hash
-
-  - done when: `_task_0281_day_sounds` in `src/tools/headless_v1.gd`: every new id is a file, per-action sounds keep the furniture rule, the moment list is named and stays under the alarm, and ore and machine targets resolve to their own sound while an unknown target falls back to the verb's
-  - done when: `_case_0281_day_moments` in `src/tools/input_v1.gd`, reading `Audio.last_played()` and `Audio.plays_of()`: going to bed plays the bed sound once, mining a copper node plays the copper variant and not `sfx/mine`, and a morning with items in the bin plays the coins exactly once
-  - done when: `_task_0084_day_sounds` and `_task_0085_night_sounds` pass; `python tools/gen_sfx.py --report` lengths and peaks of every new sound are in the journal
-
-### 0282 - The sounds of the fishing minigame
-
-Waits on 0196.  Likely files: `tools/gen_sfx.py, tools/gen_music.py, assets/sfx/, assets/music/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The minigame of 0180 can be played by ear as well as by eye: a tick from the bar, a hit, a miss, the catch, and a fanfare when one of 0182's legendaries comes out of the water. View only: neither hash moves, and no state key is added to be heard.
-
-- Recipes in `tools/gen_sfx.py` for tick, hit, miss and catch. All four are furniture (at most `SOFT_PEAK`, shorter than the bite), so `_task_0084_day_sounds` still finds the bite the loudest and longest day sound: the bite opens the window, these only follow it
-- The tick marks the marker turning at an end of the bar or entering the zone (pick one and say why), never every frame
-- `Sfx` reads hit, miss and catch off 0180's minigame state the way `_watch_fishing` reads `Fishing.is_biting`: a hit or a miss is the edge the press intent left in the state, the catch is the cast ending with a species landed. An assisted hit (0180's option) sounds like any other hit
-- The legendary fanfare is music, not furniture: a short cue in `tools/gen_music.py` beside `sting` (Music bus, at most `STING_PEAK`, a `PIECES` entry so `--check` knows it) built on `MOTIF`, so the year's tune answers the catch. `Sfx` asks `Audio.play` for it when the species landed is one of 0182's legendaries, and the ordinary catch is skipped then
-- Decide what becomes of `sfx/reel` (the MVP's one-press reel): kept as the line coming in under the minigame, or retired with its recipe and its `VERB_SOUNDS` entry - never left as a file nothing plays. `reel` is in `Interact.DAY_ONLY` today and `_task_0084_day_sounds` wants a sound for every verb there, so retire it only if 0180 took the verb out of that list
-- Extend what `_task_0084_day_sounds` collects so every new file in `assets/sfx/` is reached; `python tools/gen_sfx.py --check` and `python tools/gen_music.py --check` are clean
-
-  - done when: `_task_0282_fishing_sounds` in `src/tools/headless_v1.gd`: the four files exist and keep the furniture rule against the bite; the fanfare is in `assets/music/`, under five seconds and at most `STING_PEAK`, and its recipe reads `MOTIF`
-  - done when: `_case_0282_fishing_sounds` in `src/tools/input_v1.gd`: a minigame driven through intents plays the hit for a press in the zone, the miss for one outside it and the catch on landing; a crafted legendary bite landed plays the fanfare and not the catch (`Audio.last_played()`)
-  - done when: `gen_sfx.py --report` and `gen_music.py --report` numbers for the new sounds are in the journal
 
 ### 0220 - The technology tree by season
 
@@ -1101,7 +1084,7 @@ Rotten fish made by day and thrown down at night: for a few seconds the whole cr
 
 ### 0229 - The searchlight
 
-Waits on 0196, 0226.  Likely files: `src/core/light.gd (new), src/core/game_data.gd, src/core/towers.gd, src/core/ability.gd, src/core/combat.gd, src/ui/lighting.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0226.  Likely files: `src/core/light.gd (new), src/core/game_data.gd, src/core/towers.gd, src/core/ability.gd, src/core/combat.gd, src/ui/lighting.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 A powered lamp that lights the ground around it and lets the towers in its light see a tile further - and the moment light becomes a rule that the wraith and the fog will read (plan section 5).
 
@@ -1120,7 +1103,7 @@ A powered lamp that lights the ground around it and lets the towers in its light
 
 ### 0231 - Hardwood walls and sandbags
 
-Waits on 0196, 0226.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/core/pathing.gd, src/core/repair.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+Waits on 0226.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/core/pathing.gd, src/core/repair.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
 
 Two more ways to hold a line: the stone wall upgraded with hardwood into something a breaker has to work at, and sandbags from the loom as a cheap barrier that soaks more than a fence (plan sections 3.3 and 3.5).
 
@@ -1982,6 +1965,8 @@ Waits on 0277.  Likely files: `src/core/game_data.gd, src/core/shop.gd, src/tool
 The plan's rule of thumb, checked in every season and not only the first: a good day buys about one new defence, a boss costs five to seven focused days, and winter - when nothing grows - lives off what autumn put away.
 
 - Measure first, with the year autoplayer: per season, what a focused day earns by earner (crops, fish, animals, machines, mining), the price of each of that season's new defences (0234's money and materials, at stall prices), and what was standing on the night each boss fell - `python tools/autoplay.py --economy` or an equivalent report
+- A real day is the field and then a second earner (0196): the tour's field took two to two and a half game hours, and the rest of the day went to the pond and the cliff. Measure each season against that mixed day - the field, then the best earner for the hours left - beside the focused ones, and say in BALANCE.md which of the two the rule of thumb is held to
+- The hens' clock (0196): a hen holds one egg and its clock waits until it is collected, 4h10m a lay, so the tour's second round, four hours after its first, found nothing. Report eggs a day at one, two and three visits, and keep `holds` at 1 only if the journal says why that is the pressure the plan wants and not a chore
 - Rule of thumb: one well-worked day at the start of each season buys about one of that season's new defences - the ratio per season in BALANCE.md, each within 0.7-1.5 or the journal says why
 - A boss costs 5-7 focused days: the value of the build that beat it, less what stood at the season's start, divided by that season's focused-day income
 - Winter: nothing grows (0171), so the `balanced` policy enters day 43 with autumn's stock, and its winter income (fish, mining, machines, animals) plus that stock pays for winter's defences and repairs to day 56 without running out of food or ammunition - reported per run
@@ -2084,7 +2069,7 @@ Put the year in front of somebody and learn from it: a build that says it is a p
 - `_task_0105_playtest` in `headless_check.gd` stays true: if a line it reads has moved, rewrite it in the same change
 - The build: `python tools/release.py --playtest` writes `build/playtest/` with `READ ME FIRST.md` beside it, and the badge says playtest. It builds only the Windows playtest preset, so no web budget is weighed here - `PACK_BUDGET` and `WIRE_BUDGET` are 0297's
 - Nothing is sent: the build is made and checked and the journal says where it is. Handing it to a tester is the owner's call. Playtest code is `src/app/` and only reads the state: neither hash moves
-- Questions the loop cannot answer - whether a stranger reads the week's lines (0293), whether a night is long enough - go into PLAYTEST.md's 'what to report', not into a guess in the journal
+- Questions the loop cannot answer - whether a stranger reads the week's lines (0293), whether a night is long enough, and 0196's: after the morning's field, are the pond, the cliff and the animals worth doing for themselves or only for the night - go into PLAYTEST.md's 'what to report', not into a guess in the journal
 
   - done when: `_task_0295_playtest_log` in `src/tools/headless_v1.gd`: a short scripted run through bed, START, dawn, a lost night and the next morning writes, in order, the lines the reader parses, and the session is still open after the lost night - the lost night parked through 0118's road with the house set to fall, so the group takes seconds, not two whole nights
   - done when: `python tools/playtest.py --self-check` passes with the 1.0 sample, and `python tools/playtest.py <folder>` on the log that group wrote answers every question
@@ -2331,7 +2316,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (31/53)
+## 12 - The day that pays  (32/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2364,7 +2349,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md)
 - [x] **0194** [The day's economy](prompts/0194-day-economy.md)
 - [x] **0195** [Teaching the new day](prompts/0195-day-tutorial.md)
-- [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md)
+- [x] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md)
 - [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - waits for art A014
 - [ ] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md) - waits for art A015
 - [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - waits for art A016
@@ -2389,21 +2374,21 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 13 - Weapons of the night  (0/28)
 
-- [ ] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md) - needs 0196
-- [ ] **0219** [Essence](prompts/0219-essence.md) - needs 0196
+- [ ] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
+- [ ] **0219** [Essence](prompts/0219-essence.md)
 - [ ] **0220** [The technology tree by season](prompts/0220-tech-by-season.md) - needs 0219
 - [ ] **0221** [What the night leaves behind](prompts/0221-night-loot.md) - needs 0219
 - [ ] **0222** [Bone meal](prompts/0222-bone-meal.md) - needs 0221
-- [ ] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md) - needs 0196
+- [ ] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md)
 - [ ] **0224** [The scarecrow decoy](prompts/0224-decoy.md) - needs 0218
 - [ ] **0225** [Zombie bait](prompts/0225-zombie-bait.md) - needs 0224
 - [ ] **0226** [The beehive](prompts/0226-beehive.md) - needs 0218
-- [ ] **0227** [The pumpkin catapult](prompts/0227-catapult.md) - needs 0196
+- [ ] **0227** [The pumpkin catapult](prompts/0227-catapult.md)
 - [ ] **0228** [The garlic braid](prompts/0228-garlic-braid.md) - needs 0218
-- [ ] **0229** [The searchlight](prompts/0229-searchlight.md) - needs 0196, 0226
-- [ ] **0230** [The electric fence](prompts/0230-electric-fence.md) - needs 0196
-- [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md) - needs 0196, 0226
-- [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md) - needs 0196
+- [ ] **0229** [The searchlight](prompts/0229-searchlight.md) - needs 0226
+- [ ] **0230** [The electric fence](prompts/0230-electric-fence.md)
+- [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md) - needs 0226
+- [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0220, 0230
 - [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0220, 0223
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - needs 0221, 0222, 0219 - waits for art A036
@@ -2420,7 +2405,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 14 - Enemies and bosses  (0/24)
 
-- [ ] **0246** [Bosses in general](prompts/0246-bosses-general.md) - needs 0196
+- [ ] **0246** [Bosses in general](prompts/0246-bosses-general.md)
 - [ ] **0247** [The spitter](prompts/0247-spitter.md) - needs 0218
 - [ ] **0248** [The rat swarm](prompts/0248-rat-swarm.md) - needs 0218
 - [ ] **0249** [The crow](prompts/0249-crow.md) - needs 0218, 0233, 0234
@@ -2461,8 +2446,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 16 - Sound, collections and polish  (0/10)
 
-- [ ] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md) - needs 0196
-- [ ] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md) - needs 0196
+- [ ] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md)
+- [ ] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md)
 - [ ] **0283** [The guardian's sounds](prompts/0283-sfx-night-v2.md) - needs 0233, 0234
 - [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0247, 0248, 0250, 0252, 0253, 0254, 0255, 0257
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0282

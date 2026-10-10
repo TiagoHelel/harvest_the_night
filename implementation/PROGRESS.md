@@ -20483,3 +20483,300 @@ assets/locale/strings.csv, src/tools/{headless_check,headless_v1,input_check,
 input_v1,shot}.gd, tools/determinism_data_hash.txt,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0195-day-tutorial.md,
 implementation/shots/0195/, docs/devlog/{index,index.pt_BR}.md
+
+## 0196 - Checkpoint: is the day good on its own? - done 2026-10-10
+
+This is the plan's Phase 3 checkpoint. A spring day and a summer day were
+played through the rules: Spring 9 and Summer 9 on one farm, its days before
+played too. The autoplayer was run through the same two days, and both days
+were pictured in the real main scene at morning, noon and dusk. No rule
+moved.
+
+### The answer
+
+**Yes, the day is a good game on its own, but only its mornings are.**
+- **The field is the day.** On a harvest morning it made $1200 of spring's
+  $1346 and $1140 of summer's $1437.
+- **It is where the seasons differ.** Spring is one crop. Summer adds the
+  night's jars and keg, the animals and better ore, so the two days make
+  their money differently.
+- **After the field**, the day is a choice between the pond ($17-18 a game
+  hour) and the cliff ($26-34), and nothing in the day asks for either.
+  Together they made $146 in spring and $163 in summer, about an eighth of
+  the morning's money. The cliff's ore is worth more as towers than as
+  coins.
+- **On the spring morning after a harvest**, the field is 2h41m of
+  watering that earns nothing that day.
+
+So the afternoons stand on the night, not on themselves. That is the
+game's premise, not a fault to fix before phase 13, so this task is done
+and not blocked. A player who loves the fishing bar for itself will
+disagree with the second half; 0295's playtest now asks that question.
+
+### Where the money came from
+
+What each block made is its change in what the farm holds, valued at what
+the stall pays, plus its change in money. Selling turns goods into coins and
+makes nothing. The night's machine batches count as the day's.
+
+**Spring 9**, $1346:
+
+| Block | Game time | Made | A game hour |
+|---|---|---|---|
+| The night's batches | by 06:00 | $0 | - |
+| The field: 30 strawberry plots harvested, 60 watered | 06:00-08:48 | $1200 | - |
+| The cliff and the woods | 08:48-11:32 | $72 | $26 |
+| The pond | 11:32-16:00 | $74 | $17 |
+| The stall: crops and fish sold for $1274 | 16:00-17:00 | $0 | - |
+
+**Summer 9**, $1437:
+
+| Block | Game time | Made | A game hour |
+|---|---|---|---|
+| The night's batches: jelly and juice | by 06:00 | $135 | - |
+| The field: peppers and corn harvested, 80 watered | 06:00-09:16 | $1140 | - |
+| The pond | 09:16-11:30 | $40 | $18 |
+| The animals, round one | 11:30-11:45 | $74 | - |
+| The machines: the keg refilled with melons | 11:45-11:50 | -$75 | - |
+| The cliff and the woods | 11:50-15:30 | $123 | $34 |
+| The animals, round two | 15:30-15:46 | $0 | - |
+| The stall: the day's goods sold for $1389 | 15:46-17:00 | $0 | - |
+
+**They differ:**
+- **Spring's money is one crop:** 89% from the field, and 5% each from the
+  cliff and the pond.
+- **Summer's is spread:**
+  - 79% from the field;
+  - 9% each from the night's batches and from the cliff;
+  - 5% from the animals and 3% from the pond;
+  - -5% for the melons the keg took. Its juice comes back in four days.
+
+**The rates are 0194's focused days, by the hour:**
+- The cliff's $26 and $34 a game hour are that table's $294 and $393 a
+  day, spread over twelve hours.
+- The pond paid a little under its own ($20 and $22), because the bites
+  are drawn.
+
+**The autoplayer**, the `economy` policy to 18:00, on the same two farms:
+- **Spring 9: $1486, $140 more than the tour.**
+  - It harvested the same strawberries (+$1200).
+  - It then spent the day at the cliff and in the woods (+$286), where the
+    tour fished. In spring both pay more than the pond.
+- **Summer 9: $258.**
+  - Crops +$678, to the tour's +$1140.
+  - -$420 of materials spent on building.
+  - It never fished, never collected from an animal, never filled a
+    machine and never sold.
+  - So it measures two of the summer day's six sources. 0276 already
+    teaches it the rest.
+
+**One game hour is 28 real seconds.** Dusk comes 5 min 36 s after 06:00,
+and 02:00 comes after 9 min 20 s.
+
+### What drags, what is busywork, what is missing
+
+**Drags:**
+- **The pond** is the slowest earner in both seasons: $16.6 a game hour in
+  spring and $17.9 in summer.
+- **The money comes in lumps:**
+  - On the harvest morning the field paid $1200.
+  - The next morning, Spring 10, its round took 2h41m and paid $0.
+  - Summer is smoother: Summer 10's round paid $201.
+
+**Busywork:**
+- **Watering by the can.** Every plot is a press: 60 in spring, 80 in
+  summer.
+  - Each can covers 8 plots in spring and 12 in summer, so a round means 7
+    or 8 trips to the well in spring and 6 or 7 in summer.
+  - The whole round took 2h48m in spring and 3h16m in summer: 78 and 91
+    real seconds of a day that reaches dusk in 336.
+  - Sprinklers end it, with money the farm has by summer. An iron one
+    waters 8 plots for $120 and 6 iron. At 07:00 on Summer 9 the farm held
+    $2820 and 37 iron, enough for six of them, or 48 plots.
+  - The tour, like 0194's farm, waters by hand.
+- **The hens.** A hen holds one egg, and its clock waits until the egg is
+  collected: 4h10m for each lay.
+  - The 11:30 round collected $74, what the animals had held since the day
+    before.
+  - The 15:30 round, four hours later, found nothing.
+  - So a full coop means a visit every 4h10m, for a herd that paid 5% of
+    the summer day.
+
+**Missing:**
+- **A reason in the day itself to choose the pond or the cliff.** Nothing
+  says that today is a day for one of them. That is the owner's call, not a
+  prompt edit.
+- **A use for the money that belongs to the day.**
+  - The tour's farm buys nothing for the night, and its money piles up:
+    it held $2820 at 07:00 on Summer 9.
+  - Seeds, sheds, machines, sprinklers and the tool and house tiers are the
+    day's own sinks. Past them, the night is the sink.
+- **The machines can't be felt inside one day.**
+  - The keg took $75 of melons at 11:45, for juice four days later.
+  - What the day gets from the machines is the morning's batches ($135),
+    filled on days before.
+- **Two faults in the pictures**, each its own task:
+  - The station panel's MAKE list prints recipe ids such as `make_juice`.
+    It has been flagged since 0187.
+  - The log prints one "is ready" line per plot, so a harvest morning puts
+    up four identical lines. Flagged now: on an 80-plot farm those events
+    may also push the night's out of the 64-event window.
+
+### How the two days were played
+
+`src/tools/day_tour.gd` is new: a tool, outside the suite, that runs in
+about fifteen seconds.
+
+    godot --headless --path . --script res://src/tools/day_tour.gd
+
+- **The days:** the ninth of spring and the ninth of summer, on seed 1960.
+  The plan's own sample day is a spring ninth.
+- **Through the rules the keys call:**
+  - `Farming.act` harvests, sows and waters;
+  - `Fishing.begin` casts, and `strike` presses while the marker is on the
+    green;
+  - `Gathering.strike` works the cliff;
+  - `Livestock.collect` empties a home at its door;
+  - `Crafting.start` fills a machine;
+  - `Shop.sell` sells at the stall.
+- **What each block costs:** each action costs its own ticks, and the
+  walking costs 0194's allowances:
+  - a tile per plot, and twenty to the well and back for each can;
+  - eight tiles to a node and two to a tree;
+  - thirty to the pond;
+  - ten to a home's door and six to a machine.
+- **Not by hand.** Nobody held the keys. `input_v1`'s cases cover the
+  keys; how they feel is the playtest's question (0295).
+- **The farm under each day was played too:**
+  - The field was sown on the season's first morning, half a money crop and
+    half a quick one: strawberries and potatoes in spring, peppers and corn
+    in summer. That first sowing is given.
+  - It was then worked, sold from and slept on through eight days.
+  - Summer's farm also has what a spring's money buys, on the open grass
+    nearest the house:
+    - a coop with two hens, and a barn with two sheep;
+    - the map's hens and cow, moved in;
+    - two preserves jars and a keg;
+    - $1500, and strawberries and melons left over from spring.
+- **The robot:** each day is played again by the autoplayer, the `economy`
+  policy, to 18:00.
+- **The pictures:** `shot.gd`'s new `days` scenario plays the same days to
+  each picture's minute.
+
+### Found in the tour, and fixed before these numbers
+
+The tour's first numbers had four mistakes of the tour's own, not the
+game's:
+- **Free seeds.** It bought seeds and machine inputs with money it did not
+  have: `Resources.spend` refused and the tour added the packet anyway. Now
+  a broke farmer's plot waits.
+- **Nothing sold before the played day:**
+  - Spring 9 began with $1, and $480 of old potatoes went into Spring 9's
+    sale.
+  - The farm now sells every evening, and the Spring 9 morning holds
+    $393.
+- **A half-watered field.** The field block stopped at a set minute,
+  leaving 21 of 60 plots dry. The field now runs its round out.
+- **Sheds in the wrong places:**
+  - The tour first put summer's sheds on the first free cells, at the
+    top edge of the map in the woods.
+  - The autoplayer's `_room_for` then put the barn on the starter beds.
+  - They now go on the open grass nearest the house, off the beds.
+
+**One in the pictures:**
+- The log kept spring's lines into summer. It had read spring's record to a
+  later tick than any of summer's.
+- The summer pictures now start a fresh run, as every scenario does.
+
+### Later prompts edited
+
+The answer does not stop phase 13 or reorder anything. It sharpens two
+later prompts:
+- **0278 (the economy across a year)** gains two requirements:
+  - **A mixed day.** Measure each season against a real day: the field,
+    then the best earner for the hours left. Today the bands are measured
+    only against focused days, and the rule of thumb has to say which one
+    it is held to.
+  - **The hens' clock.** Report eggs a day at one, two and three visits,
+    and keep `holds` at 1 only if the journal says why that is pressure and
+    not a chore.
+- **0295 (the playtest)** adds this checkpoint's question to what a tester
+  reports, because the loop could only answer it from the rules and the
+  pictures: after the morning's field, are the pond, the cliff and the
+  animals worth doing for themselves, or only for the night?
+- `tools/backlog/part11.py` and `part13.py` hold the same edits. Both
+  rendered prompts match the render, apart from their status line.
+
+**Not edited:**
+- 0276 already teaches the robot the pond, the animals, the machines and
+  the bin, and counts walking.
+- The raw recipe ids in the station panels have been flagged since 0187.
+
+### The pictures
+
+Taken with `python tools/shot.py 0196 days --fhd`; all six were opened.
+- **`days_spring_morning`, 07:05:**
+  - The farmer stands on the top row of the south-east field, among ripe
+    strawberries.
+  - The can is nearly empty (1/8), and the purse holds $393.
+  - The log shows "strawberry is ready" four times, for 30 plots.
+  - The house, the stall and the well sit above him.
+- **`days_spring_noon`, 12:00:**
+  - On the pier at the south-east lake, the season's best water.
+  - Wood 33 and stone 21, from the morning at the cliff and in the woods.
+- **`days_spring_dusk`, 18:00:**
+  - At the bin by the stall, with $1657.
+  - Both fields are watered dark, the strawberries picked back to green.
+  - Tonight's card is up: from the east and south-east, six waves.
+  - The button reads GO TO BED - NIGHT 9.
+- **`days_summer_morning`, 07:00:**
+  - On the field above the workshop, among the peppers and corn, with
+    $2820, wood 472, stone 231 and iron 37.
+  - The coop stands behind the stall, with a hen and the cow beside it.
+  - The keg sits in the clearing above the trees, and the corn stands tall
+    in the south field.
+- **`days_summer_noon`, 11:51:**
+  - At the keg in the clearing above the house, its panel open: juice, four
+    days left.
+  - A preserves jar is working just below him.
+  - Along the bottom are the house, the coop and the barn, with hens and
+    the cow about.
+  - The panel's MAKE list prints `make_juice` and `make_wine`, flagged
+    since 0187.
+- **`days_summer_dusk`, 18:00:**
+  - At the bin, with $4202.
+  - The second jar, east of the stall, is working.
+  - The barn is half under tonight's card: six waves from the east and
+    south-east.
+  - The fields are picked and watered.
+  - The log reads "corn is ready" three times, then "make juice finished".
+  - The button reads NIGHT 23.
+
+**How the pictures differ from the tour:**
+- **They replay the day in pieces**, stopping at each picture's minute. The
+  field's round starts over after the morning picture and is walked twice.
+  So their purse ends a few dollars short of the tour's: $1657 against
+  $1667 in spring, and $4202 against $4209 in summer.
+- **Where the sheds stand.** The coop and the barn stand on open grass by
+  the house. The map keeps room for them by the workshop (0156's sites), and
+  the rules allow either. No number here depends on where: walking is an
+  allowance.
+
+### Hashes
+
+**SIM 3391018212 and DATA 2340919704, unchanged:** no rule, lever or table
+moved. Everything new is a tool, a picture or a prompt.
+
+Verify: **PASS**, 60 passed, 0 failed in 650 s (the known OVER BUDGET),
+- headless_check 17493 asserts, and headless_v1 2228;
+- input_check 1220 cases and input_v1 672.
+
+**No new test.** A checkpoint changes no rule. `headless_check` asks for one
+shot per scenario: 76 now (`days`). The tour is a tool, as 0148's
+`night_session.gd` is, run by hand and kept so it can be run again.
+
+Files: src/tools/{day_tour (new),shot,headless_check}.gd,
+src/tools/day_tour.gd.uid, implementation/shots/0196/,
+implementation/prompts/{0196-checkpoint-day,0278-economy-seasons,0295-playtest-v1}.md,
+tools/backlog/{part11,part13}.py, implementation/{BACKLOG,PROGRESS}.md,
+docs/devlog/{index,index.pt_BR}.md

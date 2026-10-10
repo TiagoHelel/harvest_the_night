@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-184 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+185 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -227,6 +227,7 @@ voz alta.
 | 0193 | Every season can make what it needs | 2026-10-10 |
 | 0194 | The day's economy | 2026-10-10 |
 | 0195 | Teaching the new day | 2026-10-10 |
+| 0196 | Checkpoint: is the day good on its own? | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 
@@ -317,7 +318,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 
 ## O que deu errado
 
-50 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
+52 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -369,6 +370,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **0106** - The known-issues section names five things and one of them is owed *(The release checklist)*
 - **0107** - The capsules took two looks to stop being wrong *(Store assets)*
 - **0107** - And the store screenshot found a bug in the game *(Store assets)*
+- **0196** - What drags, what is busywork, what is missing *(Checkpoint: is the day good on its own?)*
+- **0196** - Found in the tour, and fixed before these numbers *(Checkpoint: is the day good on its own?)*
 
 ## O que nao tem
 

@@ -18,7 +18,7 @@ Put the year in front of somebody and learn from it: a build that says it is a p
 - `_task_0105_playtest` in `headless_check.gd` stays true: if a line it reads has moved, rewrite it in the same change
 - The build: `python tools/release.py --playtest` writes `build/playtest/` with `READ ME FIRST.md` beside it, and the badge says playtest. It builds only the Windows playtest preset, so no web budget is weighed here - `PACK_BUDGET` and `WIRE_BUDGET` are 0297's
 - Nothing is sent: the build is made and checked and the journal says where it is. Handing it to a tester is the owner's call. Playtest code is `src/app/` and only reads the state: neither hash moves
-- Questions the loop cannot answer - whether a stranger reads the week's lines (0293), whether a night is long enough - go into PLAYTEST.md's 'what to report', not into a guess in the journal
+- Questions the loop cannot answer - whether a stranger reads the week's lines (0293), whether a night is long enough, and 0196's: after the morning's field, are the pond, the cliff and the animals worth doing for themselves or only for the night - go into PLAYTEST.md's 'what to report', not into a guess in the journal
 
 ## Done when
 
