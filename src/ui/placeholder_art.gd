@@ -150,6 +150,9 @@ const REPORT_HEADER := {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40),
 const MARK_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_scale": 1.0}
 
+## A022's book portraits (task 0182): 32x32 at (16,16), drawn at 1.0.
+const PORTRAIT := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "draw_scale": 1.0}
+
 ## A011's forecast heads (task 0158): 16x16 at (8,8), drawn at 1.0. Until 0162
 ## the stand-in is the enemy's first walk frame, the 16x16 box over its head
 ## (`stand_in_region`, measured off each frame's opaque rows) - and for the
@@ -231,6 +234,36 @@ const ART := {
 	&"hud_salmon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1.35, 0.85, 0.85), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 0.8, 0.9), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.8, 0.8, 0.9), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	# 0182's legendaries (A022), tinted like the twelve until 0205.
+	&"icon_old_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 0.75, 0.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_old_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.6, 0.75, 0.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_golden_queen": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.6, 1.3, 0.4), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_golden_queen": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1.6, 1.3, 0.4), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_ghost_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.4, 1.4, 1.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_ghost_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1.4, 1.4, 1.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_ice_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 1.15, 1.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_ice_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.8, 1.15, 1.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	# A022's book portraits (task 0182): 32x32 at (16,16), each species' icon
+	# stand-in drawn at twice the size until 0205.
+	&"portrait_carp": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.25, 1.0, 0.55), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_perch": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.9, 1.25, 0.55), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.75, 0.68, 0.6), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_tilapia": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.75, 0.95, 1.25), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_sunfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.65, 1.25, 0.95), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_bream": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.1, 1.05, 0.85), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_trout": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.85, 1.05, 0.7), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 1.2, 0.6), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_eel": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 0.55, 0.45), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_dorado": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.45, 1.2, 0.45), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_salmon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.35, 0.85, 0.85), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 0.8, 0.9), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_old_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 0.75, 0.45), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_golden_queen": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.6, 1.3, 0.4), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_ghost_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.4, 1.4, 1.5), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	&"portrait_ice_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 1.15, 1.5), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
+	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_rod_bamboo": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_rod_bamboo": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_rod_fibre": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1, 0.55, 0.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},

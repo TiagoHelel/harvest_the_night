@@ -48,6 +48,14 @@ extends RefCounted
 ## is the one a legendary takes (`takes_legendary`, 0182's gate). The bait on
 ## (`fishing_bait`) is spent at the cast and does the same two things by its
 ## own `BAIT_EFFECTS`; with no bait held, the line goes in plain.
+##
+## ## The legendaries and the book
+##
+## Task 0182. Four legendaries, one a season, join a cast's draw only on a rod
+## a legendary takes, in their water and hours, when their `condition` holds - a
+## Full Moon day, or their bait on the hook - and **once a run**: the draw
+## skips one the run's `fish_book` already has. Every fish landed writes its
+## page in that book, and `Stats.fold` carries the counts into the profile.
 
 ## What one cast looks like before anything has happened to it.
 const NOTHING: Dictionary = {}
@@ -68,6 +76,13 @@ static func initial() -> Dictionary:
 		# from the day HUD through `step_bait`; only a rod with the bait slot
 		# spends it, one at each cast.
 		"fishing_bait": &"",
+		# **The fish book** (task 0182): species -> `{"caught", "first_day"}`
+		# for every species landed this run, written by `reel`. Its keys come
+		# from play (`State.RUN_DATA`); `Stats.fold` banks it in the profile.
+		"fish_book": {},
+		# What came out of the water last (`reel`), empty before the first.
+		# Declared since task 0182: undeclared, every load dropped it.
+		"last_catch": {},
 	}
 
 
@@ -275,9 +290,14 @@ static func begin(state: Dictionary, cell: Vector2i) -> bool:
 	# reels would mean a fast hand changed what was on the hook, and the rare
 	# one would be a reflex prize rather than a lever. Since task 0179 it is
 	# the species: this pond, this season, this hour.
-	var species := draw(state, catchable(Farm.pond_of(state, cell),
-		Calendar.season_id(Calendar.date(state)), Phases.clock_minute(state)),
-		GameData.FISH_SPECIES, rare_percent(state, bait))
+	# Since task 0182 the legendaries join the draw, on the iron rod, when
+	# theirs holds.
+	var pond := Farm.pond_of(state, cell)
+	var season := Calendar.season_id(Calendar.date(state))
+	var minute := Phases.clock_minute(state)
+	var ids := catchable(pond, season, minute)
+	ids.append_array(legendaries_at(state, pond, season, minute, bait))
+	var species := draw(state, ids, GameData.FISH_SPECIES, rare_percent(state, bait))
 	# **And the bar** (task 0180): how wide its green is, how fast its marker,
 	# how many hits - and where the green sits, the last draw a cast makes.
 	var zone := zone_for(state, species)
@@ -297,17 +317,60 @@ static func begin(state: Dictionary, cell: Vector2i) -> bool:
 
 
 ## **The species that can bite** (task 0179) in a pond, in a season, at a
-## minute of the day's clock, in `FISH_SPECIES`' sorted order.
+## minute of the day's clock, in `FISH_SPECIES`' sorted order. Not the
+## legendaries, which have a gate of their own (`legendaries_at`).
 static func catchable(pond: StringName, season: StringName, minute: int,
 		species: Dictionary = GameData.FISH_SPECIES) -> Array:
 	var out: Array = []
 	for id in GameData.sorted_names(species.keys()):
 		var one: Dictionary = species[id]
-		var hours: Array = one["hours"]
-		if (one["ponds"] as Array).has(pond) and (one["seasons"] as Array).has(season) \
-				and minute >= int(hours[0]) and minute <= int(hours[1]):
+		if is_legendary(id, species):
+			continue
+		if _in_water_and_time(one, pond, season, minute):
 			out.append(id)
 	return out
+
+
+## Whether a species is one of the legendaries (task 0182).
+static func is_legendary(id: StringName,
+		species: Dictionary = GameData.FISH_SPECIES) -> bool:
+	return StringName((species.get(id, {}) as Dictionary).get("tier", &"")) == &"legendary"
+
+
+## **The legendaries that could take this cast** (task 0182), in sorted
+## order: in their pond, season and hours, with their `condition` met - a Full
+## Moon day, or their bait on the hook (`bait`, what the cast put on) - and
+## only on a rod a legendary takes. **Once a run**: one the run's book
+## already has is not drawn again.
+static func legendaries_at(state: Dictionary, pond: StringName, season: StringName,
+		minute: int, bait: StringName, species: Dictionary = GameData.FISH_SPECIES) -> Array:
+	var out: Array = []
+	if not takes_legendary(state):
+		return out
+	var book: Dictionary = state.get("fish_book", {})
+	for id in GameData.sorted_names(species.keys()):
+		var one: Dictionary = species[id]
+		if not is_legendary(id, species) or book.has(id):
+			continue
+		if _in_water_and_time(one, pond, season, minute) \
+				and condition_met(state, StringName(one.get("condition", &"")), bait):
+			out.append(id)
+	return out
+
+
+## Whether a legendary's condition holds for a cast with `bait` on: a Full
+## Moon day (`Calendar.is_full_moon`), or that bait on the hook.
+static func condition_met(state: Dictionary, condition: StringName, bait: StringName) -> bool:
+	if condition == &"full_moon":
+		return Calendar.is_full_moon(Calendar.date(state))
+	return condition != &"" and condition == bait
+
+
+static func _in_water_and_time(one: Dictionary, pond: StringName, season: StringName,
+		minute: int) -> bool:
+	var hours: Array = one["hours"]
+	return (one["ponds"] as Array).has(pond) and (one["seasons"] as Array).has(season) \
+		and minute >= int(hours[0]) and minute <= int(hours[1])
 
 
 ## One of them, from the run's RNG, weighted by `weight` - and anything not
@@ -340,7 +403,24 @@ static func reel(state: Dictionary) -> Dictionary:
 	Resources.gain(state, caught)
 	state["fishing"] = {}
 	state["last_catch"] = {"species": species, "yield": caught.duplicate()}
+	_write_book(state, species)
 	return caught
+
+
+## **The fish book** (task 0182): this run's page for a species - how many
+## have been landed, and the calendar date of the first. `Stats.fold` carries
+## the counts into the profile, so the book outlives the run.
+static func _write_book(state: Dictionary, species: StringName) -> void:
+	var book: Dictionary = state["fish_book"]
+	if not book.has(species):
+		book[species] = {"caught": 0, "first_day": Calendar.date(state)}
+	var page: Dictionary = book[species]
+	page["caught"] = int(page["caught"]) + 1
+
+
+## The run's book: species -> `{"caught", "first_day"}`, for those landed.
+static func book_of(state: Dictionary) -> Dictionary:
+	return state.get("fish_book", {})
 
 
 ## Reel in nothing, on purpose. Walking away does this, and so does the cancel

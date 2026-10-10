@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["fish_book", "the fish book on the Old Catfish's page, four of sixteen; then a silhouette", "InventoryPanel"],
 	["bait", "a worm on the iron rod's hook, the line waiting, the bait choice under it", ""],
 	["fishing_bar", "a trout on the line: one hit of two, the marker on its way", ""],
 	["sprinklers", "a copper, an iron and a gold sprinkler at 06:20, spraying", ""],
@@ -727,6 +728,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"sprinklers": _set_sprinklers(state)
 		"fishing_bar": _set_fishing_bar(state)
 		"bait": _set_bait(state)
+		"fish_book": _set_fish_book(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -816,6 +818,26 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 			await _shoot("inventory_full_%s_%d" % [group["name"], group["part"] + 1], folder)
 			inventory.turn_page(1)
 		print("  inventory_full photographed %d pages" % inventory.page_count())
+		return
+	if name == "fish_book":
+		# The run's book alone, whatever profile is on this machine: an empty
+		# profile, and nothing of the run banked into it (`Main` folds the
+		# run when the date moves). The Old Catfish's page, then the Golden
+		# Queen's, never caught.
+		var ledger := main.get_node("%InventoryPanel") as InventoryPanel
+		(state["stats"]["banked"] as Dictionary).erase("fish_book")
+		ledger.show_profile({})
+		ledger._process(0.0)
+		ledger.select_group(InventoryPanel.BOOK)
+		ledger.turn_page(FishBook.species().find(GameData.OLD_CATFISH))
+		await process_frame
+		await process_frame
+		await _shoot("fish_book", folder)
+		ledger.turn_page(1)
+		await process_frame
+		await process_frame
+		await _shoot("fish_book_unknown", folder)
+		print("  fish_book on %s, then %s" % [ledger.book().shown(), FishBook.species()[FishBook.species().find(GameData.OLD_CATFISH) + 1]])
 		return
 	if name == "inventory_crops":
 		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
@@ -1424,6 +1446,20 @@ func _set_fishing_bar(state: Dictionary) -> void:
 	line["misses"] = 0
 	line["struck"] = 0
 	line["left"] = int(GameData.FISHING["bar_ticks"])
+
+
+## **The fish book** (task 0182): a spring Full Moon, and four species
+## landed this run - three carp, two perch, a trout and, that night, the
+## Old Catfish - each counted in the run's book and held.
+func _set_fish_book(state: Dictionary) -> void:
+	_set_noon(state)
+	var moon := int(GameData.FULL_MOON_DAYS[0])
+	_on_date(state, moon)
+	var book: Dictionary = state["fish_book"]
+	for entry in [[GameData.CARP, 3, 2], [GameData.PERCH, 2, 3], [GameData.TROUT, 1, 5],
+			[GameData.OLD_CATFISH, 1, moon]]:
+		book[entry[0]] = {"caught": entry[1], "first_day": entry[2]}
+		Resources.add(state, entry[0], entry[1])
 
 
 ## **Bait on the hook** (task 0181): the bar's shore at 08:00 of Spring 3,

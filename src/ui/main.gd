@@ -227,7 +227,14 @@ func _went(_to: int, _from: int) -> void:
 ## morning, the stats screen or save-and-quit cannot erase that victory.
 func _year_recorded(profile: Dictionary) -> void:
 	_profile = profile
+	_show_profile()
+
+
+## The profile, to the two screens that read it: the statistics and the
+## inventory's fish book (task 0182).
+func _show_profile() -> void:
 	_stats.show_profile(_profile)
+	_inventory.show_profile(_profile)
 
 
 ## Start a run on `seed_value` and hand the new state to every screen.
@@ -252,7 +259,7 @@ func begin_run(seed_value: int) -> void:
 	# and carry on look like a new attempt.
 	_profile = Stats.begin_run(Save.read_profile())
 	Save.write_profile(_profile)
-	_stats.show_profile(_profile)
+	_show_profile()
 
 
 ## Hand the state every screen holds to every screen that holds one.
@@ -537,7 +544,7 @@ func resume_run(saved: Dictionary) -> void:
 	_driver.resume(saved)
 	_hand_out()
 	_profile = Save.read_profile()
-	_stats.show_profile(_profile)
+	_show_profile()
 	# Already banked up to here, so the night that has not finished yet is
 	# the next one to trigger a save rather than the first one counted twice.
 	_banked_day = int(_driver.state["day"])
@@ -671,7 +678,7 @@ func _bank_if_a_night_ended() -> void:
 	_profile = Stats.fold(_profile, _driver.state)
 	Save.write_profile(_profile)
 	Save.write_run(_driver.state)
-	_stats.show_profile(_profile)
+	_show_profile()
 
 
 ## True on the frame an action goes from up to down, whenever that frame is.

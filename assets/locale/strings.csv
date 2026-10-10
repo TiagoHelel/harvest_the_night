@@ -234,6 +234,10 @@ ITEM_EEL,0,eel,enguia
 ITEM_DORADO,0,dorado,dourado
 ITEM_SALMON,0,salmon,salmão
 ITEM_STURGEON,0,sturgeon,esturjão
+ITEM_OLD_CATFISH,0,Old Catfish,Velho Bagre
+ITEM_GOLDEN_QUEEN,0,Golden Queen,Rainha Dourada
+ITEM_GHOST_PIKE,0,Ghost Pike,Lúcio Fantasma
+ITEM_ICE_STURGEON,0,Ice Sturgeon,Esturjão de Gelo
 ITEM_WORM,0,worm,minhoca
 ITEM_BAIT,0,fish bait,isca de peixe
 ITEM_FOOD,0,food,comida
@@ -592,6 +596,33 @@ REC_UPGRADE_ROD_FIBRE,224,Upgrade fibre rod,Melhorar vara de fibra
 TOOL_ROD_IRON,180,iron rod,vara de ferro
 REC_UPGRADE_ROD_IRON,224,Upgrade iron rod,Melhorar vara de ferro
 INV_GROUP_TOOLS,112,TOOLS,FERRAMENTAS
+INV_GROUP_FISH_BOOK,96,FISH BOOK,LIVRO DE PEIXES
+BOOK_COUNT,300,%d OF %d COLLECTED,%d DE %d NA COLEÇÃO
+BOOK_UNKNOWN,260,? ? ?,? ? ?
+BOOK_TIER_COMMON,260,COMMON,COMUM
+BOOK_TIER_UNCOMMON,260,UNCOMMON,INCOMUM
+BOOK_TIER_RARE,260,RARE,RARO
+BOOK_TIER_LEGENDARY,260,LEGENDARY,LENDÁRIO
+BOOK_CAUGHT,300,caught %d in every run,pescados %d em todas as partidas
+BOOK_NOT_YET,300,never caught yet,nunca pescado ainda
+BOOK_FIRST,300,this run: the first on %s %d,nesta partida: o primeiro em %s %d
+BOOK_NOT_THIS_RUN,300,none yet this run,nenhum nesta partida ainda
+BOOK_HINT_CARP,300,"All year, all day: the north-west and forest ponds.","O ano todo e o dia todo: noroeste e lagoa da mata."
+BOOK_HINT_PERCH,300,"Any season but summer: north-west and south-east.","Fora do verão, o dia todo: noroeste e lago do sudeste."
+BOOK_HINT_CATFISH,300,"After dark, all year, in every water on the farm.","Depois de escurecer, o ano todo, em todas as águas."
+BOOK_HINT_TILAPIA,300,"Summer days in the forest pond and the south-east lake.","Dias de verão na lagoa da mata e no lago do sudeste."
+BOOK_HINT_SUNFISH,300,"Summer daylight in the forest pond.","Luz do dia no verão, na lagoa da mata."
+BOOK_HINT_BREAM,300,"Spring and summer: north-west pond, south-east lake.","Primavera e verão: lago do noroeste e lago do sudeste."
+BOOK_HINT_TROUT,300,"Spring and autumn mornings in the north-west pond.","Manhãs de primavera e outono no lago do noroeste."
+BOOK_HINT_PIKE,300,"Autumn and winter, in the north-west and forest ponds.","Outono e inverno: lago do noroeste e lagoa da mata."
+BOOK_HINT_EEL,300,"Spring and summer nights: forest pond, south-east lake.","Noites de primavera e verão: na mata e no sudeste."
+BOOK_HINT_DORADO,300,"Summer middays on the south-east lake.","Meio do dia no verão, no lago do sudeste."
+BOOK_HINT_SALMON,300,"Autumn daylight in the north-west pond.","Luz do dia no outono, no lago do noroeste."
+BOOK_HINT_STURGEON,300,"Winter nights on the south-east lake.","Noites de inverno no lago do sudeste."
+BOOK_HINT_OLD_CATFISH,300,"Spring nights in the forest pond, under a Full Moon.","Noites de primavera na lagoa da mata, sob a Lua Cheia."
+BOOK_HINT_GOLDEN_QUEEN,300,"Summer noons on the south-east lake, to a worm.","Meio-dia de verão no lago do sudeste, com minhoca."
+BOOK_HINT_GHOST_PIKE,300,"Late autumn nights in the north-west pond, to fish bait.","Noite alta de outono no noroeste, com isca de peixe."
+BOOK_HINT_ICE_STURGEON,300,"Winter dawns on the south-east lake, on a Full Moon day.","Alvorada de inverno no sudeste, em dia de Lua Cheia."
 WORK_TOOL_TAB,85,TOOLS,FERRAMENTAS
 WORK_RECIPE_TAB,85,CRAFT,FABRICAR
 WORK_TOOL_PENDING,180,* Ready next morning,* Pronta amanhã

@@ -79,6 +79,9 @@ static func of_run(state: Dictionary) -> Dictionary:
 		"built": int(mine.get("built", 0)),
 		"built_by_kind": (mine.get("built_by_kind", {}) as Dictionary).duplicate(),
 		"lost": Run.structures_lost(state),
+		# **The fish book** (task 0182): how many of each species this run
+		# has landed, off `Fishing`'s book.
+		"fish_book": _caught(state),
 	}
 
 
@@ -98,6 +101,7 @@ static func lifetime(profile: Dictionary) -> Dictionary:
 		"built": int(life.get("built", 0)),
 		"built_by_kind": (life.get("built_by_kind", {}) as Dictionary).duplicate(),
 		"lost": int(life.get("lost", 0)),
+		"fish_book": (life.get("fish_book", {}) as Dictionary).duplicate(),
 		"runs_started": int(profile.get("runs_started", 0)),
 		"runs_won": int(profile.get("runs_won", 0)),
 	}
@@ -130,7 +134,7 @@ static func fold(profile: Dictionary, state: Dictionary) -> Dictionary:
 		life[field] = int(life.get(field, 0)) + fresh
 		banked[field] = int(now[field])
 
-	for field in ["killed_by_kind", "built_by_kind", "gathered"]:
+	for field in ["killed_by_kind", "built_by_kind", "gathered", "fish_book"]:
 		var into: Dictionary = life.get(field, {})
 		var was: Dictionary = banked.get(field, {})
 		var has: Dictionary = now[field]
@@ -146,12 +150,38 @@ static func fold(profile: Dictionary, state: Dictionary) -> Dictionary:
 	return out
 
 
+## **The book across every run** (task 0182): each species ever landed and
+## how many - the profile's banked count plus whatever this run has landed
+## since it was last folded, so a fish caught a minute ago is in it before
+## the night banks it.
+static func fish_known(profile: Dictionary, state: Dictionary) -> Dictionary:
+	var out: Dictionary = lifetime(profile)["fish_book"]
+	if state.is_empty():
+		return out
+	var banked: Dictionary = ((state.get("stats", {}) as Dictionary).get("banked", {}) as Dictionary).get("fish_book", {})
+	var run := _caught(state)
+	for id in GameData.sorted_names(run.keys()):
+		var fresh := int(run[id]) - int(banked.get(id, 0))
+		if fresh > 0:
+			out[id] = int(out.get(id, 0)) + fresh
+	return out
+
+
 ## A run is about to be played. Bumps the count of runs started, which is the
 ## one lifetime number that cannot be folded from a state - by the time there
 ## is a state to read, it has already begun.
 static func begin_run(profile: Dictionary) -> Dictionary:
 	var out := profile.duplicate(true)
 	out["runs_started"] = int(out.get("runs_started", 0)) + 1
+	return out
+
+
+## Species -> how many landed this run, off the run's fish book.
+static func _caught(state: Dictionary) -> Dictionary:
+	var out := {}
+	var book: Dictionary = state.get("fish_book", {})
+	for id in GameData.sorted_names(book.keys()):
+		out[id] = int((book[id] as Dictionary).get("caught", 0))
 	return out
 
 

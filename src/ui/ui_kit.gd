@@ -85,6 +85,13 @@ static func icon(id: StringName, compact: bool = false) -> Texture2D:
 	return texture if texture != null else _texture("hud_wood" if compact else "icon_wood")
 
 
+## A UI picture by its runtime name in `sprites/ui/` - a book portrait, a tab
+## icon - through 0120's road while its pack is a stand-in, or null (task
+## 0182). Its tint and scale are `PlaceholderArt.art_tint`/`art_scale`.
+static func picture(name: StringName) -> Texture2D:
+	return _texture(String(name))
+
+
 ## Whether every resource has one and no icon is orphaned. The done-when of
 ## task 0079, asked as a question rather than left to a person to check.
 static func missing_icons() -> Array:

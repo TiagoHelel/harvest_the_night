@@ -2,6 +2,8 @@ class_name InventoryPanel
 extends Control
 
 ## A read-only ledger: one category at a time, split into bounded pages.
+## The last tab is the fish book (task 0182), a page per species, turned
+## with the rest.
 ## The day keeps running. Q/E and pad bumpers reuse InputActions' hotbar
 ## actions while this view is open; mouse tabs and arrows use the same pages.
 ## Page and selection state live only here, never in the simulation.
@@ -9,6 +11,8 @@ extends Control
 const ROW_HEIGHT := 16
 const ROW_SPACE := 160
 const ROWS_PER_PAGE := ROW_SPACE / ROW_HEIGHT
+## The fish book's tab (task 0182).
+const BOOK := &"fish_book"
 
 var _state: Dictionary = {}
 var _rows: VBoxContainer
@@ -20,6 +24,10 @@ var _total: Label
 var _built_for := ""
 var _page := 0
 var _pages: Array = []
+## Every run before this one, for the fish book's counts (task 0182): `Main`
+## hands it in as it changes.
+var _profile: Dictionary = {}
+var _book: FishBook
 
 
 func _ready() -> void:
@@ -56,6 +64,11 @@ func _ready() -> void:
 	_rows.name = "InventoryRows"
 	_rows.custom_minimum_size = Vector2(300, ROW_SPACE)
 	content.add_child(_rows)
+	# **The fish book** (task 0182) takes the rows' place on its own pages.
+	_book = FishBook.new()
+	_book.custom_minimum_size.y = ROW_SPACE
+	_book.visible = false
+	content.add_child(_book)
 	var pager := HBoxContainer.new()
 	content.add_child(pager)
 	_previous = _button("InventoryPrevious", "", func() -> void: turn_page(-1))
@@ -68,6 +81,12 @@ func _ready() -> void:
 
 func show_state(state: Dictionary) -> void:
 	_state = state
+	_built_for = ""
+
+
+## Every run so far, for the fish book's counts (task 0182).
+func show_profile(profile: Dictionary) -> void:
+	_profile = profile
 	_built_for = ""
 
 
@@ -97,6 +116,27 @@ static func pages_for(groups: Array) -> Array:
 			pages.append({"name": entry["name"], "part": part, "count": count,
 				"rows": rows.slice(part * ROWS_PER_PAGE, (part + 1) * ROWS_PER_PAGE)})
 	return pages
+
+
+## **The fish book's pages** (task 0182): one a species, in the book's
+## order, after the tools.
+static func book_pages() -> Array:
+	var pages: Array = []
+	var ids := FishBook.species()
+	for i in ids.size():
+		pages.append({"name": BOOK, "part": i, "count": ids.size(), "rows": [],
+			"species": ids[i]})
+	return pages
+
+
+## The fish book on screen (task 0182), for the checks.
+func book() -> FishBook:
+	return _book
+
+
+## Whether the page up is one of the book's.
+func on_book() -> bool:
+	return not _pages.is_empty() and _pages[_page].has("species")
 
 
 ## Public view queries also let the input and screenshot harness visit every page.
@@ -166,6 +206,7 @@ func _process(_delta: float) -> void:
 		var groups := Inventory.groups(_state)
 		groups.append({"name": &"tools", "rows": _tool_rows()})
 		_pages = pages_for(groups)
+		_pages.append_array(book_pages())
 		_page = clampi(_page, 0, maxi(0, _pages.size() - 1))
 		_build()
 
@@ -176,6 +217,8 @@ func _signature() -> String:
 	for entry in Inventory.rows(_state):
 		parts.append("%s=%d" % [entry["id"], entry["held"]])
 	parts.append(str(_state["tools"]))
+	parts.append(str(Fishing.book_of(_state)))
+	parts.append(str(Stats.lifetime(_profile)["fish_book"]))
 	return ",".join(parts)
 
 
@@ -201,6 +244,8 @@ func _build() -> void:
 		tab.toggle_mode = true
 		tab.button_pressed = not _pages.is_empty() and _pages[_page]["name"] == id
 		tab.custom_minimum_size = Vector2(112, 18)
+		if id == BOOK:
+			_book_icon(tab)
 		_tabs.add_child(tab)
 	if not _pages.is_empty():
 		var page: Dictionary = _pages[_page]
@@ -208,6 +253,10 @@ func _build() -> void:
 			page["part"] + 1, page["count"]])
 		for row in page["rows"]:
 			_rows.add_child(_row(row))
+		_rows.visible = not page.has("species")
+		_book.visible = page.has("species")
+		if _book.visible:
+			_book.show_page(_state, _profile, StringName(page["species"]))
 	_previous.text = I18n.f(&"INV_PREVIOUS", [_binding(&"hotbar_prev")])
 	_next.text = I18n.f(&"INV_NEXT", [_binding(&"hotbar_next")])
 	_previous.custom_minimum_size = Vector2(150, 16)
@@ -215,6 +264,13 @@ func _build() -> void:
 	_previous.disabled = _pages.size() < 2
 	_next.disabled = _pages.size() < 2
 	_total.text = I18n.f(&"INV_WORTH", [Inventory.worth(_state)])
+
+
+## A023's book on the book's tab, through 0120's road until 0206: the
+## fish icon itself stands in, untinted - a tab's icon wears the theme's
+## colours, and no screen overrides them.
+func _book_icon(tab: Button) -> void:
+	tab.icon = UiKit.picture(&"hud_book_fish")
 
 
 func _button(node_name: String, text: String, action: Callable) -> Button:

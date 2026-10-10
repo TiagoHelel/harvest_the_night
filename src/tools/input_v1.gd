@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 37
+const V1_CASES := 38
 
 
 func _process(delta: float) -> bool:
@@ -87,6 +87,7 @@ func _run() -> void:
 	await _case_0178_sprinkler()
 	await _case_0180_minigame()
 	await _case_0181_bait()
+	await _case_0182_book()
 	_finish()
 
 
@@ -2730,5 +2731,80 @@ func _case_0181_bait() -> void:
 	await frames(2)
 	expect(button.visible and button.text.contains("x%d" % (worms - 1)),
 		"the button stays up while the line waits, one worm fewer", button.text)
+	await close_scene()
+	_completed += 1
+
+
+## Task 0182: the fish book, opened and its pages turned with the keyboard,
+## the mouse and the pad. A carp landed this run is a known page and the
+## perch beside it a silhouette; the count says one of sixteen.
+func _case_0182_book() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var inventory := require_control("InventoryPanel") as InventoryPanel
+	if driver == null or inventory == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.set_speed(1)
+	var water: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
+	Fishing.begin(state, water)
+	state["fishing"]["species"] = GameData.CARP
+	state["fishing"]["stage"] = Fishing.BITING
+	Fishing.reel(state)
+	# Only this run counts here, whatever an earlier one left on disk: an
+	# empty profile, and nothing of this run banked into one.
+	(state["stats"]["banked"] as Dictionary).erase("fish_book")
+	inventory.show_profile({})
+	var book := inventory.book()
+	var species := FishBook.species()
+
+	# **The keyboard**: I opens the ledger, Q from its first page wraps round
+	# to the book's last, and Q and E turn the book's pages.
+	await tap_key(KEY_I)
+	await frames(2)
+	expect(inventory.is_open() and not inventory.on_book(), "I opens the ledger on its first page")
+	await tap_key(KEY_Q)
+	await frames(2)
+	expect(inventory.on_book() and book.visible and book.shown() == species.back(),
+		"Q wraps round to the book's last page", String(book.shown()))
+	await tap_key(KEY_Q)
+	await frames(2)
+	expect(book.shown() == species[species.size() - 2], "Q turns a page back", String(book.shown()))
+	await tap_key(KEY_E)
+	await frames(2)
+	expect(book.shown() == species.back(), "and E forward again", String(book.shown()))
+
+	# **The mouse**: the book's tab opens it on its first page, the carp's,
+	# and the arrows turn it.
+	await click_control("inv_tab_fish_book")
+	await frames(2)
+	var name_label := book.get_node("BookTop/BookTitles/BookName") as Label
+	var count_label := book.get_node("BookCount") as Label
+	expect(book.shown() == GameData.CARP and book.known() and name_label.text == Names.of(GameData.CARP),
+		"the book's tab opens it on the carp's page, named", name_label.text)
+	expect(count_label.text == I18n.f(&"BOOK_COUNT", [1, species.size()]),
+		"and the count says one of every species", count_label.text)
+	await click_control("InventoryNext")
+	await frames(2)
+	var portrait := book.get_node("BookTop/BookPortrait") as TextureRect
+	expect(book.shown() == GameData.PERCH and not book.known() and name_label.text == I18n.t(&"BOOK_UNKNOWN")
+		and portrait.texture != null and portrait.modulate == Color.BLACK,
+		"the next arrow turns to the perch, never caught: a black silhouette", name_label.text)
+	await click_control("InventoryPrevious")
+	await frames(2)
+	expect(book.shown() == GameData.CARP, "and the previous one back")
+
+	# **The pad**: the shoulder buttons turn it, and X closes the ledger.
+	await _pad_tap(JOY_BUTTON_RIGHT_SHOULDER)
+	await frames(2)
+	expect(book.shown() == GameData.PERCH, "RB turns a page on")
+	await _pad_tap(JOY_BUTTON_LEFT_SHOULDER)
+	await frames(2)
+	expect(book.shown() == GameData.CARP, "LB turns it back")
+	await _pad_tap(JOY_BUTTON_X)
+	await frames(2)
+	expect(not inventory.is_open(), "the pad's inventory button closes the book")
 	await close_scene()
 	_completed += 1

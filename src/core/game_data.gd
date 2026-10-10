@@ -218,6 +218,13 @@ const EEL := &"eel"
 const DORADO := &"dorado"
 const SALMON := &"salmon"
 const STURGEON := &"sturgeon"
+## **The legendaries** (task 0182; plan section 3.2): one a season, each
+## with its own water, hours and condition, only on the iron rod and once a
+## run. Ids as pack A022 names them.
+const OLD_CATFISH := &"old_catfish"
+const GOLDEN_QUEEN := &"golden_queen"
+const GHOST_PIKE := &"ghost_pike"
+const ICE_STURGEON := &"ice_sturgeon"
 ## **Bait** (task 0181): a worm the hoe turns up, and fish scraps cut at the
 ## workshop. Only the iron rod has the slot to use either.
 const WORM := &"worm"
@@ -267,6 +274,7 @@ const ENERGY := &"energy"
 const RESOURCES: Array = [
 	WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, FOOD, OIL,
 	CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
+	OLD_CATFISH, GOLDEN_QUEEN, GHOST_PIKE, ICE_STURGEON,
 	WORM, BAIT,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
@@ -305,6 +313,13 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	DORADO: 22,                      # LEVER: money each, 18-25, under oil
 	SALMON: 24,                      # LEVER: money each, 18-25, under oil
 	STURGEON: 25,                    # LEVER: money each, 18-25, under oil
+	# A legendary sells for no more than a sturgeon: oil stays the dearest
+	# thing in the ledger (0032), and what one is worth is its page in the
+	# book (task 0182).
+	OLD_CATFISH: 25,                 # LEVER: money each, 18-25, under oil
+	GOLDEN_QUEEN: 25,                # LEVER: money each, 18-25, under oil
+	GHOST_PIKE: 25,                  # LEVER: money each, 18-25, under oil
+	ICE_STURGEON: 25,                # LEVER: money each, 18-25, under oil
 	# Bait sells for little: a fish cut into four is worth a little more than
 	# the cheapest fish whole (`check_chain`), and a worm is a worm.
 	WORM: 1,                         # LEVER: money each, 1-3
@@ -621,11 +636,18 @@ const FISHING: Dictionary = {
 ## (`Phases.clock_minute`, `[from, to]` inclusive) allow, weighted by
 ## `weight` - so the pond asks where and when as well as whether. What one
 ## sells for is `SELL_PRICE`. Every pond has a catch in every season at
-## every minute of the day (`check_fishing`). Legendaries are 0182's.
+## every minute of the day (`check_fishing`), the legendaries apart: they
+## bite only when their `condition` holds (task 0182).
 ## **Rarity** (task 0181): `tier` - common, uncommon or rare. A fibre or
 ## iron rod (`TOOLS` rod `rare_percent`) and fish bait (`BAIT_EFFECTS`)
 ## raise the draw weight of every species that is not common.
-const FISH_TIERS: Array = [&"common", &"uncommon", &"rare"]
+## A legendary (task 0182) is drawn only on a rod that takes one
+## (`TOOLS` rod `legendary`), when its `condition` holds, and once a run.
+const FISH_TIERS: Array = [&"common", &"uncommon", &"rare", &"legendary"]
+
+## **What a legendary waits for** (task 0182): its `condition`, one of these - a
+## Full Moon day (`FULL_MOON_DAYS`), or that bait on the hook (`BAITS`).
+const FISH_CONDITIONS: Array = [&"full_moon", WORM, BAIT]
 
 const FISH_SPECIES: Dictionary = {
 	# The commons: carp in the two western waters all year and all day,
@@ -681,6 +703,26 @@ const FISH_SPECIES: Dictionary = {
 		"seasons": [&"winter"],      # LEVER: when
 		"hours": [18 * 60, 26 * 60], "weight": 2,  # LEVER: clock minutes; draw weight
 		"speed": 90, "zone": 18, "hits": 3, "tier": &"rare"}, # LEVER: bar steps a second, green steps, presses to land
+	# **The legendaries** (task 0182): one a season, in one water, a few
+	# hours, and a `condition` - a Full Moon day or a bait on the hook. The
+	# hardest bar there is: three hits, the fastest marker, the narrowest
+	# green (`check_fishing`).
+	OLD_CATFISH: {"ponds": [&"forest_pond"], # LEVER: where
+		"seasons": [&"spring"],      # LEVER: when
+		"hours": [20 * 60, 26 * 60], "weight": 2, "condition": &"full_moon",  # LEVER: clock minutes; draw weight; condition
+		"speed": 108, "zone": 14, "hits": 3, "tier": &"legendary"}, # LEVER: bar steps a second, green steps, presses to land
+	GOLDEN_QUEEN: {"ponds": [&"south_east_lake"], # LEVER: where
+		"seasons": [&"summer"],      # LEVER: when
+		"hours": [11 * 60, 14 * 60], "weight": 2, "condition": WORM,  # LEVER: clock minutes; draw weight; condition
+		"speed": 108, "zone": 14, "hits": 3, "tier": &"legendary"}, # LEVER: bar steps a second, green steps, presses to land
+	GHOST_PIKE: {"ponds": [&"north_west_pond"], # LEVER: where
+		"seasons": [&"autumn"],      # LEVER: when
+		"hours": [22 * 60, 26 * 60], "weight": 2, "condition": BAIT,  # LEVER: clock minutes; draw weight; condition
+		"speed": 108, "zone": 14, "hits": 3, "tier": &"legendary"}, # LEVER: bar steps a second, green steps, presses to land
+	ICE_STURGEON: {"ponds": [&"south_east_lake"], # LEVER: where
+		"seasons": [&"winter"],      # LEVER: when
+		"hours": [6 * 60, 9 * 60], "weight": 2, "condition": &"full_moon",  # LEVER: clock minutes; draw weight; condition
+		"speed": 108, "zone": 14, "hits": 3, "tier": &"legendary"}, # LEVER: bar steps a second, green steps, presses to land
 }
 
 
@@ -1263,7 +1305,8 @@ const RESOURCE_GROUPS: Array = [
 	{"name": &"materials", "members": [WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD]},
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
 	{"name": &"seeds", "members": [CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED]},
-	{"name": FISH, "members": [CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON]},
+	{"name": FISH, "members": [CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
+		OLD_CATFISH, GOLDEN_QUEEN, GHOST_PIKE, ICE_STURGEON]},
 	# Its own group, never the fish's: a recipe that takes any fish pays the
 	# cheapest first, and a bait at $2 would be cheaper than any of them.
 	{"name": &"bait", "members": [WORM, BAIT]},
@@ -3216,11 +3259,16 @@ static func check_fishing(table: Dictionary, species: Dictionary = FISH_SPECIES,
 		var passes := slowest * int(table["bar_ticks"]) / TICK_HZ / maxi(units, 1)
 		if passes < hits:
 			errors.append("fish '%s' needs %d hits and the bar crosses the green %d times" % [id, hits, passes])
+	errors.append_array(_check_legendaries(species))
 	for pond in sorted_names(ponds.keys()):
 		for season in SEASONS:
 			var spans: Array = []
 			for id in sorted_names(species.keys()):
 				var one: Dictionary = species[id]
+				# A legendary bites only when its `condition` holds: it covers
+				# no hour of any pond.
+				if StringName(one.get("tier", &"")) == &"legendary":
+					continue
 				if (one["ponds"] as Array).has(pond) and (one["seasons"] as Array).has(season):
 					spans.append([int(one["hours"][0]), int(one["hours"][1])])
 			spans.sort_custom(func(a, b) -> bool: return int(a[0]) < int(b[0]))
@@ -3231,6 +3279,49 @@ static func check_fishing(table: Dictionary, species: Dictionary = FISH_SPECIES,
 				reached = maxi(reached, int(span[1]))
 			if reached < DAY_END_MINUTE:
 				errors.append("'%s' in %s has nothing biting from minute %d" % [pond, season, reached + 1])
+	return errors
+
+
+## **The legendaries** (task 0182): one a season, each in one season with a
+## condition from `FISH_CONDITIONS`, rarer in the draw than any common, and the
+## hardest bar there is - three hits, a marker no slower and a green no wider
+## than any other species'. Nothing else has a `condition`.
+static func _check_legendaries(species: Dictionary) -> Array:
+	var errors: Array = []
+	var fastest := 0
+	var narrowest := 1 << 30
+	var lightest_common := 1 << 30
+	for id in sorted_names(species.keys()):
+		var one: Dictionary = species[id]
+		if StringName(one.get("tier", &"")) == &"legendary":
+			continue
+		if one.has("condition"):
+			errors.append("fish '%s' waits for something and is not a legendary" % id)
+		fastest = maxi(fastest, int(one.get("speed", 0)))
+		narrowest = mini(narrowest, int(one.get("zone", 0)))
+		if StringName(one.get("tier", &"")) == &"common":
+			lightest_common = mini(lightest_common, int(one["weight"]))
+	var seasons: Dictionary = {}
+	for id in sorted_names(species.keys()):
+		var one: Dictionary = species[id]
+		if StringName(one.get("tier", &"")) != &"legendary":
+			continue
+		if not FISH_CONDITIONS.has(StringName(one.get("condition", &""))):
+			errors.append("legendary '%s' waits for nothing a cast can meet" % id)
+		var own: Array = one["seasons"]
+		if own.size() != 1:
+			errors.append("legendary '%s' bites in %d seasons, not one" % [id, own.size()])
+		for season in own:
+			if seasons.has(season):
+				errors.append("%s has two legendaries: '%s' and '%s'" % [season, seasons[season], id])
+			seasons[season] = id
+		if int(one.get("hits", 0)) != 3 or int(one.get("speed", 0)) < fastest \
+				or int(one.get("zone", 1 << 30)) > narrowest:
+			errors.append("legendary '%s' is not the hardest bar there is" % id)
+		if int(one["weight"]) >= lightest_common:
+			errors.append("legendary '%s' is drawn as often as a common" % id)
+	if not seasons.is_empty() and seasons.size() != SEASONS.size():
+		errors.append("%d seasons of %d have a legendary" % [seasons.size(), SEASONS.size()])
 	return errors
 
 
@@ -3692,6 +3783,7 @@ static func digest() -> int:
 		"fishing": FISHING,
 		"fish_species": FISH_SPECIES,
 		"fish_tiers": FISH_TIERS,
+		"fish_conditions": FISH_CONDITIONS,
 		"worm_in": WORM_IN,
 		"baits": BAITS,
 		"bait_effects": BAIT_EFFECTS,

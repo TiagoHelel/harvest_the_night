@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 51
+const GROUPS := 52
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -120,6 +120,7 @@ func _run() -> void:
 	_task_0179_species()
 	_task_0180_minigame()
 	_task_0181_rods()
+	_task_0182_legendary()
 
 
 func _finish() -> void:
@@ -4385,9 +4386,10 @@ func _followup_night(state: Dictionary) -> void:
 func _task_0179_species() -> void:
 	expect(GameData.check_fishing(GameData.FISHING).is_empty() and GameData.validate().is_empty(),
 		"the twelve species and the pond pass their checks", str(GameData.check_fishing(GameData.FISHING)))
-	expect(GameData.group_members(GameData.FISH).size() == 12 and not GameData.RESOURCES.has(GameData.FISH)
-		and GameData.FISH_SPECIES.size() == 12,
-		"twelve species in the fish group, and no plain fish left")
+	# Twelve, and since task 0182 the four legendaries beside them.
+	expect(GameData.group_members(GameData.FISH).size() == 16 and not GameData.RESOURCES.has(GameData.FISH)
+		and GameData.FISH_SPECIES.size() == 16,
+		"twelve species and four legendaries in the fish group, and no plain fish left")
 
 	# **Every pond's water is that pond's**, and every pond has a catch.
 	var state := State.create(1790)
@@ -4795,6 +4797,177 @@ func _till_the_farm(state: Dictionary, most: int) -> int:
 				Farming.act(state, Vector2i(x, y))
 				turned += 1
 	return turned
+
+
+## Task 0182: the legendaries and the fish book. The spring legendary never
+## bites on the bamboo or fibre rod and does under its conditions on the iron
+## rod; each of the four only in its own water, hours and condition, once a
+## run, on the hardest bar; and a catch writes the run's book and, folded, the
+## profile.
+func _task_0182_legendary() -> void:
+	expect(GameData.check_fishing(GameData.FISHING).is_empty() and GameData.validate().is_empty(),
+		"the four legendaries pass their checks", str(GameData.check_fishing(GameData.FISHING)))
+	var rigged: Dictionary = GameData.FISH_SPECIES.duplicate(true)
+	rigged[GameData.OLD_CATFISH]["condition"] = &"rain"
+	rigged[GameData.GOLDEN_QUEEN]["zone"] = 30
+	rigged[GameData.GHOST_PIKE]["seasons"] = [&"spring"]
+	rigged[GameData.CARP]["condition"] = &"full_moon"
+	var refused := GameData.check_fishing(GameData.FISHING, rigged)
+	expect(refused.size() >= 4,
+		"a condition no cast can meet, an easy bar, two legendaries in one season and a common that waits are refused",
+		str(refused))
+	var by_season: Dictionary = {}
+	for id in GameData.sorted_names(GameData.FISH_SPECIES.keys()):
+		if Fishing.is_legendary(id):
+			by_season[GameData.FISH_SPECIES[id]["seasons"][0]] = id
+	expect(by_season == {&"spring": GameData.OLD_CATFISH, &"summer": GameData.GOLDEN_QUEEN,
+		&"autumn": GameData.GHOST_PIKE, &"winter": GameData.ICE_STURGEON},
+		"one legendary a season: the Old Catfish, the Golden Queen, the Ghost Pike, the Ice Sturgeon", str(by_season))
+
+	# **The spring legendary**: the forest pond after dark on a spring Full
+	# Moon day. Six hundred casts a rod, the same seed.
+	var water := {}
+	for pond in GameData.sorted_names(GameData.PONDS.keys()):
+		water[pond] = Vector2i(int(GameData.PONDS[pond][0]), int(GameData.PONDS[pond][1]))
+	var moon := int(GameData.FULL_MOON_DAYS[0])
+	var night := 21 * 60
+	var counts: Array = []
+	for tier in 3:
+		counts.append(_legend_count(1820, water[&"forest_pond"], moon, night, tier, &"", 600, GameData.OLD_CATFISH))
+	expect(counts[0] == 0 and counts[1] == 0 and counts[2] > 0,
+		"the Old Catfish never bites on the bamboo or fibre rod, and does on the iron one", str(counts))
+	var off: Array = [
+		_legend_count(1820, water[&"forest_pond"], moon - 1, night, 2, &"", 600, GameData.OLD_CATFISH),
+		_legend_count(1820, water[&"forest_pond"], moon, 12 * 60, 2, &"", 600, GameData.OLD_CATFISH),
+		_legend_count(1820, water[&"north_west_pond"], moon, night, 2, &"", 600, GameData.OLD_CATFISH),
+		_legend_count(1820, water[&"forest_pond"], moon + GameData.SEASON_DAYS, night, 2, &"", 600, GameData.OLD_CATFISH),
+	]
+	expect(off == [0, 0, 0, 0],
+		"and not the day before the Full Moon, nor at noon, nor in another pond, nor in summer", str(off))
+	expect(Fishing.catchable(&"forest_pond", &"spring", night).size() > 0
+		and not Fishing.catchable(&"forest_pond", &"spring", night).has(GameData.OLD_CATFISH),
+		"the plain draw never holds a legendary; its own gate adds it")
+
+	# **The other three**, each under its own condition and not without it.
+	var summer := GameData.SEASON_DAYS + 3
+	var autumn := 2 * GameData.SEASON_DAYS + 3
+	var winter_moon := 3 * GameData.SEASON_DAYS + moon
+	var met: Array = [
+		_legend_count(1821, water[&"south_east_lake"], summer, 12 * 60, 2, GameData.WORM, 600, GameData.GOLDEN_QUEEN),
+		_legend_count(1822, water[&"north_west_pond"], autumn, 23 * 60, 2, GameData.BAIT, 600, GameData.GHOST_PIKE),
+		_legend_count(1823, water[&"south_east_lake"], winter_moon, 7 * 60, 2, &"", 600, GameData.ICE_STURGEON),
+	]
+	var unmet: Array = [
+		_legend_count(1821, water[&"south_east_lake"], summer, 12 * 60, 2, GameData.BAIT, 600, GameData.GOLDEN_QUEEN),
+		_legend_count(1822, water[&"north_west_pond"], autumn, 23 * 60, 2, GameData.WORM, 600, GameData.GHOST_PIKE),
+		_legend_count(1823, water[&"south_east_lake"], winter_moon - 1, 7 * 60, 2, &"", 600, GameData.ICE_STURGEON),
+	]
+	expect(met[0] > 0 and met[1] > 0 and met[2] > 0 and unmet == [0, 0, 0],
+		"the Golden Queen takes a worm, the Ghost Pike fish bait and the Ice Sturgeon a Full Moon - and none without",
+		"%s with, %s without" % [str(met), str(unmet)])
+
+	# **Landed, it is in the book - and once a run.**
+	var run := _legend_state(1824, moon, night, 2)
+	var drawn := false
+	for _i in 2000:
+		Fishing.begin(run, water[&"forest_pond"])
+		if StringName(Fishing.cast_of(run)["species"]) == GameData.OLD_CATFISH:
+			drawn = true
+			break
+		Fishing.give_up(run)
+	var line: Dictionary = Fishing.cast_of(run)
+	var hardest := true
+	for id in GameData.sorted_names(GameData.FISH_SPECIES.keys()):
+		if not Fishing.is_legendary(id) and (int(GameData.FISH_SPECIES[id]["speed"]) > int(line["speed"])
+				or Fishing.zone_for(run, id) < int(line["zone"])):
+			hardest = false
+	expect(drawn and int(line["needs"]) == 3 and hardest,
+		"the Old Catfish is the hardest bar there is: three hits, the fastest marker, the narrowest green", str(line))
+	line["stage"] = Fishing.BITING
+	Fishing.reel(run)
+	var book := Fishing.book_of(run)
+	expect(book.has(GameData.OLD_CATFISH) and int(book[GameData.OLD_CATFISH]["caught"]) == 1
+		and int(book[GameData.OLD_CATFISH]["first_day"]) == moon
+		and Resources.amount(run, GameData.OLD_CATFISH) == 1,
+		"a catch writes the book: one Old Catfish, first on the Full Moon", str(book))
+	var again := 0
+	for _i in 600:
+		Fishing.begin(run, water[&"forest_pond"])
+		if StringName(Fishing.cast_of(run)["species"]) == GameData.OLD_CATFISH:
+			again += 1
+		Fishing.give_up(run)
+	expect(again == 0 and Fishing.legendaries_at(run, &"forest_pond", &"spring", night, &"").is_empty(),
+		"once a run: the book has it, and the draw skips it", str(again))
+	Fishing.begin(run, water[&"forest_pond"])
+	run["fishing"]["species"] = GameData.CARP
+	run["fishing"]["stage"] = Fishing.BITING
+	Fishing.reel(run)
+	Fishing.begin(run, water[&"forest_pond"])
+	run["fishing"]["species"] = GameData.CARP
+	run["fishing"]["stage"] = Fishing.BITING
+	Fishing.reel(run)
+	expect(int(Fishing.book_of(run)[GameData.CARP]["caught"]) == 2,
+		"every fish landed counts in the book, the commons too")
+
+	# **The profile keeps it**, folded through `Stats`, banked so a second
+	# fold adds nothing, and a new run starts with an empty book.
+	var profile := Stats.fold({}, run)
+	var twice := Stats.fold(profile, run)
+	var life: Dictionary = Stats.lifetime(twice)["fish_book"]
+	expect(life == {GameData.CARP: 2, GameData.OLD_CATFISH: 1},
+		"the fold writes the book into the profile, and folding again adds nothing", str(life))
+	var next_run := _legend_state(1825, moon, night, 2)
+	expect(Fishing.book_of(next_run).is_empty()
+		and int(Stats.fish_known(twice, next_run).get(GameData.OLD_CATFISH, 0)) == 1
+		and not Fishing.legendaries_at(next_run, &"forest_pond", &"spring", night, &"").is_empty(),
+		"the next run's book is empty and the profile still knows the Old Catfish, which may bite again")
+	Fishing.begin(next_run, water[&"forest_pond"])
+	next_run["fishing"]["species"] = GameData.CARP
+	next_run["fishing"]["stage"] = Fishing.BITING
+	Fishing.reel(next_run)
+	expect(int(Stats.fish_known(twice, next_run)[GameData.CARP]) == 3,
+		"and a carp landed since is counted on top of the banked two, before the night folds it")
+
+	# **The book survives a save**, and the same casts write the same book.
+	var path := "user://task0182-book.sav"
+	expect(Save.write_run_at(path, run), "a run with a book writes")
+	var loaded := Save.read_run_at(path)
+	expect(Fishing.book_of(loaded) == Fishing.book_of(run) and State.hash_of(loaded) == State.hash_of(run),
+		"and reads back with the same pages", str(Fishing.book_of(loaded)))
+	expect(Fishing.last_catch(loaded) == Fishing.last_catch(run) and not Fishing.last_catch(run).is_empty(),
+		"and the last catch with them: declared now, a load no longer drops it", str(Fishing.last_catch(loaded)))
+	Save._remove(path)
+	Save._remove(path + ".bak")
+	expect(State.RUN_DATA.has("fish_book") and not State.TABLES.has("fish_book"),
+		"the book's keys come from play")
+	_completed += 1
+
+
+## How many of `casts` casts into `water` on `seed_value`, on `day` at `minute`
+## with the rod at `tier` and `bait` on and held, came up `wanted`.
+func _legend_count(seed_value: int, water: Vector2i, day: int, minute: int, tier: int,
+		bait: StringName, casts: int, wanted: StringName) -> int:
+	var state := _legend_state(seed_value, day, minute, tier)
+	if bait != &"":
+		Resources.add(state, bait, casts)
+		Fishing.choose_bait(state, bait)
+	var count := 0
+	for _i in casts:
+		Fishing.begin(state, water)
+		if StringName(Fishing.cast_of(state)["species"]) == wanted:
+			count += 1
+		Fishing.give_up(state)
+	return count
+
+
+## A run on `seed_value` on `day` at `minute` of its clock, the rod at `tier`.
+func _legend_state(seed_value: int, day: int, minute: int, tier: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = day
+	state["days_held"] = 0
+	state["day_tick"] = Phases.tick_at_minute(minute)
+	state["tools"]["rod"] = tier
+	return state
 
 
 ## `casts` casts into `water` on `seed_value` with the rod at `tier` and

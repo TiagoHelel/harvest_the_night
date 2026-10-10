@@ -72,6 +72,10 @@ const KEYS: Dictionary = {
 	&"dorado": &"ITEM_DORADO",
 	&"salmon": &"ITEM_SALMON",
 	&"sturgeon": &"ITEM_STURGEON",
+	&"old_catfish": &"ITEM_OLD_CATFISH",
+	&"golden_queen": &"ITEM_GOLDEN_QUEEN",
+	&"ghost_pike": &"ITEM_GHOST_PIKE",
+	&"ice_sturgeon": &"ITEM_ICE_STURGEON",
 	&"worm": &"ITEM_WORM",
 	&"bait": &"ITEM_BAIT",
 	&"oil": &"ITEM_OIL",
@@ -192,6 +196,7 @@ const KEYS: Dictionary = {
 ## Literal category keys: the translation checker can see every tab.
 const GROUP_KEYS: Dictionary = {
 	&"tools": &"INV_GROUP_TOOLS",
+	&"fish_book": &"INV_GROUP_FISH_BOOK",
 	&"materials": &"INV_GROUP_MATERIALS",
 	&"crops": &"INV_GROUP_CROPS",
 	&"seeds": &"INV_GROUP_SEEDS",

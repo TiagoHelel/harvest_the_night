@@ -18244,3 +18244,178 @@ assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/A023-fishing-gear.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0181-rods-bait.md,
 implementation/shots/0181/, docs/devlog/{index,index.pt_BR}.md
+
+## 0182 - Legendary fish and the fish book - done 2026-10-09
+
+What changed: four legendary fish, one a season, bite only on the iron rod,
+in their own water and hours, under their own condition, once a run, on the
+hardest bar there is. Every fish landed now writes a page in the run's fish
+book, the profile keeps the counts across runs, and the ledger's last tab is
+the book: a page per species, a silhouette and a hint for the ones never
+caught, and the collection count over it.
+
+**The four** (`FISH_SPECIES`, ids as A022 names them, `tier` `legendary`):
+
+| Season | Legendary | Water | Hours | Condition |
+|---|---|---|---|---|
+| spring | Old Catfish (Velho Bagre) | forest pond | 20:00-02:00 | a Full Moon day |
+| summer | Golden Queen (Rainha Dourada) | south-east lake | 11:00-14:00 | a worm on the hook |
+| autumn | Ghost Pike (Lúcio Fantasma) | north-west pond | 22:00-02:00 | fish bait on the hook |
+| winter | Ice Sturgeon (Esturjão de Gelo) | south-east lake | 06:00-09:00 | a Full Moon day |
+
+- `condition` is one of `FISH_CONDITIONS`: `full_moon` (the date is one of
+  `FULL_MOON_DAYS`), or a bait id, meaning that bait went on the hook at this
+  cast.
+  - It is called `condition` and not `needs`, because 0180's line already
+    uses `needs` for the hits a fish takes.
+- Each has weight 2, against 12-30 for the commons. With the iron rod's
+  `rare_percent` that is 3, and 6 with fish bait.
+- **The hardest bar:** 3 hits, speed 108 and a green of 14. The fastest
+  other species is 96, the narrowest green 18.
+- Each sells for $25, like the sturgeon. Oil stays the dearest thing in the
+  ledger (0032's rule); what a legendary is worth is its page.
+- **`check_fishing` (`_check_legendaries`)** refuses each of these:
+  - a legendary in more or fewer than one season, or two in one season, or
+    a season without one;
+  - a condition outside `FISH_CONDITIONS`, or a `condition` on anything that
+    is not a legendary;
+  - a bar easier than any other species';
+  - a weight as high as the lightest common's.
+  - The pond-coverage rule now skips legendaries: they cover no hour,
+    because they only bite when their condition holds.
+
+**The rule** (`Fishing`):
+- `catchable` no longer returns legendaries.
+- `legendaries_at(state, pond, season, minute, bait)` adds them at the cast,
+  each one only if all of these hold:
+  - the rod takes a legendary (`takes_legendary`, the iron rod's `legendary`
+    from 0181);
+  - the pond, season and hours are its own;
+  - `condition_met` holds;
+  - **once a run** (decided): the run's book does not have it yet.
+- `begin` draws from both lists. On a bamboo or fibre rod the list is the
+  same as before, so those draws do not move.
+
+**The book:**
+- The state's `fish_book` maps species to `{caught, first_day}`, the first
+  day being the calendar date. Its keys come from play, so it is in
+  `State.RUN_DATA`. `reel` writes it, for every species, commons included.
+- `Stats.of_run` and `lifetime` gain `fish_book`. `Stats.fold` banks it
+  like `killed_by_kind`, so folding twice adds nothing.
+- `Stats.fish_known(profile, state)` is the profile's counts plus whatever
+  the run has landed since its last fold. The page counts a fish caught a
+  minute ago, before the night banks it.
+- **Found in passing, fixed:** `reel` has written `last_catch` since task
+  0030, but `Fishing.initial()` never declared it, so `State.reconcile`
+  dropped it on every load. It is declared now (in `RUN_DATA`). The
+  save-round-trip assert below would not pass without it.
+
+**The view** (`FishBook`, new `src/ui/fish_book.gd`, in the inventory):
+- The ledger's last tab, FISH BOOK (LIVRO DE PEIXES), after TOOLS. It has 16
+  pages, one per species, in the fish group's order: commons, the middling
+  three, the rare three, then the legendaries.
+- They turn with the rest of the ledger: Q/E, the shoulder buttons, and the
+  arrow buttons. From the ledger's first page, Q wraps round to the book's
+  last.
+- A page shows, from the top:
+  - the collection count, "4 OF 16 COLLECTED" ("4 DE 16 NA COLEÇÃO");
+  - the 32x32 portrait;
+  - the name, or "? ? ?" for an unknown species;
+  - the rarity, LEGENDARY in the good colour;
+  - the hint;
+  - "caught N in every run", or "never caught yet";
+  - "this run: the first on SPRING 7", or "none yet this run";
+  - the price, for a known species.
+- An unknown species is its portrait drawn black.
+- The 16 hints are hand-written rows (`BOOK_HINT_*`), each with a 300 px
+  budget that `tools/i18n_check.py` measures in both languages. Three
+  Portuguese hints were shortened to fit.
+- `Main` hands the profile to the inventory (`_show_profile`) everywhere it
+  handed it to the statistics screen.
+- **Art, through 0120's road:**
+  - A022's `portrait_<id>` for all 16: each species' tinted `icon_fish`
+    stand-in, at twice the size (`stand_in_scale` 2, `PORTRAIT` 32x32 at
+    (16,16)).
+  - `icon_`/`hud_` for the four legendaries:
+    - mossy for the Old Catfish;
+    - gold for the Golden Queen;
+    - pale for the Ghost Pike;
+    - ice blue for the Ice Sturgeon.
+  - A023's `hud_book_fish` on the tab: the fish icon, untinted. A tab's icon
+    wears the theme's colours, and headless_check refuses a screen that
+    overrides them. The first try did, and the check caught it.
+  - `UiKit.picture(name)` loads any of them.
+  - A022's and A023's docs say how 0182 uses them.
+
+### Hashes
+
+- **SIM 3238533707 -> 42882243, on purpose.** The state gained
+  `fish_book` and the declared `last_catch`, and four new resources in
+  `held` and `gained`. The determinism scenario casts on the bamboo rod,
+  whose draw is unchanged.
+- **DATA 3325784326 -> 1812557335, on purpose.** The new data:
+  - the four legendaries in `FISH_SPECIES`, `RESOURCES`, `SELL_PRICE` and
+    the fish group;
+  - `legendary` in `FISH_TIERS`;
+  - `FISH_CONDITIONS`, in `digest()`.
+
+Verify: 60 passed, 0 failed in 754s (the known OVER BUDGET): headless_check 17173 asserts, headless_v1 1785, input_check 1179 cases, input_v1 609, sim 42882243, data 1812557335.
+
+**Tests:**
+- `_task_0182_legendary` (headless_v1):
+  - **Data:** the levers pass. Their teeth refuse a condition no cast meets,
+    an easy bar, two legendaries in a season and a common that waits. There
+    is one legendary per season, by name.
+  - **The rod gate**, 600 casts a rod into the forest pond on Spring 7 at
+    21:00: the Old Catfish comes up 0 times on bamboo, 0 on fibre and more
+    than 0 on iron.
+  - **Its conditions:** 0 on the day before the Full Moon, at noon, in the
+    north-west pond, or in summer. The plain draw never holds it.
+  - **The other three:** the Golden Queen bites on a worm and not on fish
+    bait, the Ghost Pike on fish bait and not on a worm, the Ice Sturgeon on
+    a Full Moon and not the day before.
+  - **Landed:** the Old Catfish is drawn naturally on an iron cast, and its
+    line is the hardest bar there is. Reeled in, the book reads one, first on
+    the Full Moon, and one is held.
+  - **Once a run:** 600 more casts never draw it, and `legendaries_at` is
+    empty. Two carp count as two.
+  - **The profile:** a fold writes {carp 2, Old Catfish 1}, and a second
+    fold adds nothing. The next run's book is empty and the profile still
+    knows the Old Catfish, which may bite again. A carp landed since is
+    counted on top of the banked two.
+  - **Saves:** the book survives a save with the same hash, and so does
+    `last_catch`.
+- `_case_0182_book` (input_v1):
+  - I opens the ledger. Q wraps to the book's last page (the Ice Sturgeon),
+    Q turns back and E forward.
+  - A click on the FISH BOOK tab opens the carp's page, named and counted
+    "1 OF 16". The next arrow turns to the perch: never caught, so "? ? ?"
+    and a black silhouette. The previous arrow comes back.
+  - RB and LB turn a page each way, and the pad's X closes the ledger.
+- `headless_check` asks for one shot per scenario: 65 now (`fish_book`).
+- 0179's "twelve species" assert counts sixteen now, with its reason.
+
+Looked at (`python tools/shot.py 0182 fish_book --fhd`, 1920x1080):
+- `implementation/shots/0182/fish_book.png`: the Old Catfish's page.
+  - "FISH BOOK - 13/16" and "4 OF 16 COLLECTED".
+  - The mossy portrait at twice the stand-in's size, the name, LEGENDARY in
+    green, the hint on one line, "caught 1 in every run", "this run: the
+    first on SPRING 7" and "$25 each".
+  - Eleven tabs fit above the total, the book's with the fish icon.
+- `fish_book_unknown.png`: the Golden Queen's page, a black silhouette,
+  "? ? ?", its hint and "never caught yet".
+- **The first take read "0 OF 16 COLLECTED"** with the Old Catfish in the
+  run's book. The scenario had handed the ledger an empty profile, but `Main`
+  had already folded the run into the real one when the date moved, so the
+  run's counts counted as banked. The scenario (and the input case) now
+  clear the run's banked book along with the profile.
+  - In the game the two travel together, so this was the picture's fault and
+    not the rule's.
+
+Files: src/core/{fishing,game_data,state,stats}.gd,
+src/ui/{fish_book (new),inventory_panel,main,names,placeholder_art,ui_kit}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/{A022-fish-icons,A023-fishing-gear}.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0182-legendary-book.md,
+implementation/shots/0182/, docs/devlog/{index,index.pt_BR}.md

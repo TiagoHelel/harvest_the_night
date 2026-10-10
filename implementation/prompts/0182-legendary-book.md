@@ -1,7 +1,7 @@
 # 0182 - Legendary fish and the fish book
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0181
 - **Likely files:** src/core/fishing.gd, src/core/game_data.gd, src/core/stats.gd, src/core/state.gd, src/ui/fish_book.gd (new), src/ui/inventory_panel.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 
