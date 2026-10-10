@@ -10,7 +10,11 @@ const FURNITURE := GameData.HOUSE_FURNITURE
 
 
 static func initial() -> Dictionary:
-	return {"house_visit": {"inside": false, "outside_pos": [],
+	return {
+		# **Which of `HOUSE_TIERS` the house is** (task 0191), from 1. An old
+		# save gets tier I from the reconcile, which is the house it had.
+		"house_tier": 1,
+		"house_visit": {"inside": false, "outside_pos": [],
 		"outside_facing": Player.SOUTH,
 		# Gone to bed (task 0127): set by `Phases.begin_preparation`, so every
 		# road into the build step leaves him asleep; cleared at dawn.
@@ -18,6 +22,57 @@ static func initial() -> Dictionary:
 		# Fell asleep where he stood at 02:00 (task 0128): the build step is
 		# the short one. Cleared by a bedtime and by the morning.
 		"passed_out": false}}
+
+
+## **The house's tier** (task 0191), 1 to `HOUSE_TIERS.size()`.
+static func tier(state: Dictionary) -> int:
+	return clampi(int(state.get("house_tier", 1)), 1, GameData.HOUSE_TIERS.size())
+
+
+## What this tier adds to the house's hit points.
+static func tier_bonus(state: Dictionary) -> int:
+	return int((GameData.HOUSE_TIERS[tier(state) - 1] as Dictionary)["hp_bonus"])
+
+
+## The percentage this tier takes off a house repair.
+static func tier_discount(state: Dictionary) -> int:
+	return int((GameData.HOUSE_TIERS[tier(state) - 1] as Dictionary)["repair_discount"])
+
+
+## What the next tier costs, or empty at the top.
+static func next_cost(state: Dictionary) -> Dictionary:
+	if tier(state) >= GameData.HOUSE_TIERS.size():
+		return {}
+	return ((GameData.HOUSE_TIERS[tier(state)] as Dictionary)["cost"] as Dictionary).duplicate()
+
+
+## Why the next tier cannot be bought now: by day only, not past the top,
+## and paid for in full. Empty when it can.
+static func why_not_tier(state: Dictionary) -> Array:
+	if int(state["phase"]) != Phases.DAY:
+		return [&"WHY_AFTER_DARK"]
+	if tier(state) >= GameData.HOUSE_TIERS.size():
+		return [&"WHY_HOUSE_TOP"]
+	var cost := next_cost(state)
+	if not Resources.can_afford(state, cost):
+		return [&"WHY_SHORT", Resources.missing(state, cost)]
+	return []
+
+
+## **Buy the next tier** (task 0191), at the workshop by day. It is the house
+## from now on - `Phases.house_full` reads it, so tonight's house is the new
+## one - and the new rooms come whole: the hit points it adds are added to
+## what the house has, so a whole house stays whole.
+static func buy_tier(state: Dictionary) -> bool:
+	if not why_not_tier(state).is_empty():
+		return false
+	if not Resources.pay(state, next_cost(state)):
+		return false
+	var before := tier_bonus(state)
+	state["house_tier"] = tier(state) + 1
+	state["house_hp"] = int(state["house_hp"]) + tier_bonus(state) - before
+	Events.add(state, &"house_tier", {"tier": tier(state)})
+	return true
 
 
 static func inside(state: Dictionary) -> bool:

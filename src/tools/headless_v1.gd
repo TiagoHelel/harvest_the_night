@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 60
+const GROUPS := 61
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -129,6 +129,7 @@ func _run() -> void:
 	_task_0188_mills()
 	_task_0189_bin()
 	_task_0190_peddler()
+	_task_0191_house()
 
 
 func _finish() -> void:
@@ -5871,6 +5872,129 @@ func _task_0190_peddler() -> void:
 	expect(shelf_state.has(&"cow") and shelf_state.has(&"upgrade_hoe_iron") and shelf_state.has(GameData.CARROT_SEED)
 		and not shelf_state.has(GameData.CORN_SEED),
 		"the state's shelf holds the season's packets, the animals and the upgrades")
+	_completed += 1
+
+
+## Task 0191: the house in three tiers. Tier II adds its hit points to the
+## whole house, with and without 'stout timbers'; a house repair costs the
+## discounted price, after 'a full larder'; the untouched-house bonus reads the
+## new whole; and the tier is bought by day only, never past the top, the new
+## rooms coming whole.
+func _task_0191_house() -> void:
+	expect(GameData.validate().is_empty() and GameData.check_house_tiers(GameData.HOUSE_TIERS).is_empty(),
+		"the house tiers validate", str(GameData.check_house_tiers(GameData.HOUSE_TIERS)))
+	var weaker := GameData.HOUSE_TIERS.duplicate(true)
+	weaker[2]["hp_bonus"] = 10
+	var paid_first := GameData.HOUSE_TIERS.duplicate(true)
+	paid_first[0]["cost"] = {GameData.MONEY: 1}
+	var over := GameData.HOUSE_TIERS.duplicate(true)
+	over[1]["repair_discount"] = 120
+	expect(not GameData.check_house_tiers(weaker).is_empty() and not GameData.check_house_tiers(paid_first).is_empty()
+		and not GameData.check_house_tiers(over).is_empty(),
+		"a tier weaker than the last, a tier I with a price, and a discount past 100 are refused")
+
+	# **Tier II, with and without 'stout timbers'.**
+	var state := State.create(1910)
+	var bonus := int((GameData.HOUSE_TIERS[1] as Dictionary)["hp_bonus"])
+	expect(House.tier(state) == 1 and Phases.house_full(state) == GameData.HOUSE_HP,
+		"a new game's house is tier I, at the table's hit points")
+	Resources.gain(state, House.next_cost(state))
+	var hp := int(state["house_hp"])
+	var money := Resources.amount(state, GameData.MONEY)
+	expect(House.buy_tier(state) and House.tier(state) == 2
+		and Phases.house_full(state) == GameData.HOUSE_HP + bonus and int(state["house_hp"]) == hp + bonus
+		and Resources.amount(state, GameData.MONEY) == money - int(((GameData.HOUSE_TIERS[1] as Dictionary)["cost"] as Dictionary)[GameData.MONEY]),
+		"tier II, paid for, adds its %d to the whole house, and the new rooms come whole" % bonus)
+	var told := Events.recent(state)
+	expect(not told.is_empty() and (told[told.size() - 1] as Dictionary)["kind"] == &"house_tier"
+		and int((told[told.size() - 1] as Dictionary)["tier"]) == 2, "and the log is told", str(told))
+	# **Every kind the rules record is one `Events` knows.** 0189's `shipped`
+	# was not, so the bin's morning line was refused rather than written, and
+	# only an error in the output said so. Read from the rules' own source.
+	var kinds_used := {}
+	var adds := RegEx.create_from_string("Events\\.add\\(\\w+, &\"(\\w+)\"")
+	for file in DirAccess.get_files_at("res://src/core/"):
+		if file.ends_with(".gd"):
+			for found in adds.search_all(FileAccess.get_file_as_string("res://src/core/" + file)):
+				kinds_used[StringName((found as RegExMatch).get_string(1))] = file
+	var unknown: Array = []
+	for kind in GameData.sorted_names(kinds_used.keys()):
+		if not Events.KINDS.has(kind):
+			unknown.append("%s (%s)" % [kind, kinds_used[kind]])
+	expect(kinds_used.has(&"shipped") and kinds_used.has(&"house_tier") and unknown.is_empty(),
+		"every kind the rules record is in Events.KINDS, 'shipped' and 'house_tier' among them", str(unknown))
+	var timbers := State.create(1911)
+	(timbers["tech_owned"] as Array).append(&"stout timbers")
+	var with_tech := Phases.house_full(timbers)
+	timbers["house_tier"] = 2
+	expect(with_tech > GameData.HOUSE_HP and Phases.house_full(timbers) == with_tech + bonus,
+		"and on top of stout timbers too", str(Phases.house_full(timbers)))
+
+	# **The repair, discounted after the larder.**
+	var mend := State.create(1912)
+	var cell := Farm.house_centre(mend)
+	var kept := 100 - int((GameData.HOUSE_TIERS[1] as Dictionary)["repair_discount"])
+	for larder in [false, true]:
+		if larder:
+			(mend["tech_owned"] as Array).append(&"a full larder")
+		mend["house_tier"] = 1
+		var plain := Repair.per_hp_hundredths(mend, cell)
+		mend["house_tier"] = 2
+		var cheaper := Repair.per_hp_hundredths(mend, cell)
+		var right := not plain.is_empty()
+		for res in GameData.sorted_names(plain.keys()):
+			var raw := int(GameData.REPAIR_COST_PER_HP[res]) * GameData.HOUSE_REPAIR_PERCENT \
+				* Tech.bonus(mend, "repair_percent", 100) / 100
+			right = right and int(cheaper[res]) == maxi(raw * kept / 100, 1) and int(cheaper[res]) < int(plain[res])
+		expect(right, "a tier II house mends at %d%% of tier I's%s" % [kept, ", after a full larder's" if larder else ""],
+			"%s against %s" % [str(cheaper), str(plain)])
+	mend["house_hp"] = Phases.house_full(mend) - 20
+	Resources.gain(mend, {GameData.FOOD: 100, GameData.WOOD: 100})
+	var food := Resources.amount(mend, GameData.FOOD)
+	Repair.apply(mend, cell, 20)
+	var paid := food - Resources.amount(mend, GameData.FOOD)
+	expect(int(mend["house_hp"]) == Phases.house_full(mend) and paid > 0
+		and paid <= 20 * int(Repair.per_hp_hundredths(mend, cell)[GameData.FOOD]) / 100 + 1,
+		"twenty hit points of house cost the discounted food", str(paid))
+
+	# **The untouched-house bonus reads the new whole.**
+	var night := State.create(1913)
+	night["house_tier"] = 2
+	Phases.go_to_bed(night)
+	Phases.start_waves(night)
+	expect(int(night["house_hp"]) == GameData.HOUSE_HP + bonus, "the night starts the house at tier II's whole")
+	var untouched := Rewards._money_from(night, 100)
+	night["house_hp"] = GameData.HOUSE_HP
+	var short := Rewards._money_from(night, 100)
+	expect(int(untouched.get("the house untouched", 0)) > 0 and int(short.get("the house untouched", 0)) == 0,
+		"a tier II house is untouched only at its own whole - tier I's is not enough")
+
+	# **By day, and never past the top.**
+	var asleep := State.create(1914)
+	Resources.gain(asleep, House.next_cost(asleep))
+	Phases.go_to_bed(asleep)
+	expect(not House.buy_tier(asleep) and House.tier(asleep) == 1
+		and House.why_not_tier(asleep)[0] == &"WHY_AFTER_DARK", "not after dark")
+	var broke := State.create(1915)
+	broke["held"][GameData.MONEY] = 0
+	expect(not House.buy_tier(broke) and House.why_not_tier(broke)[0] == &"WHY_SHORT", "not without the money")
+	var top := State.create(1916)
+	top["house_tier"] = GameData.HOUSE_TIERS.size()
+	Resources.gain(top, {GameData.MONEY: 99999, GameData.STONE: 999, GameData.IRON: 999, GameData.WOOD: 999})
+	expect(not House.buy_tier(top) and House.why_not_tier(top)[0] == &"WHY_HOUSE_TOP"
+		and House.tier(top) == GameData.HOUSE_TIERS.size(), "and not past tier III")
+
+	# **Saved, and filled in for an old save.**
+	var path := "user://task0191-house.sav"
+	expect(Save.write_run_at(path, state) and int(Save.read_run_at(path)["house_tier"]) == 2,
+		"the tier saves and loads")
+	Save._remove(path)
+	Save._remove(path + ".bak")
+	var old := State.create(1917)
+	old.erase("house_tier")
+	State.reconcile(old)
+	expect(int(old["house_tier"]) == 1 and int(old["version"]) == State.VERSION,
+		"an old save is filled in at tier I, without a version bump")
 	_completed += 1
 
 

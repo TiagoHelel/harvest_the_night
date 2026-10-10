@@ -286,6 +286,7 @@ LOG_CRAFT_DONE,0,%s finished,%s ficou pronto
 LOG_CROP_READY,0,%s is ready,%s está pronto
 LOG_DAWN,0,dawn - %d walked off,amanheceu - %d foram embora
 LOG_SHIPPED,0,the shipping bin paid $%d,a caixa de envio pagou $%d
+LOG_HOUSE_TIER,0,the house is now %s,a casa agora é %s
 LOG_HOUSE_HIT,0,the house is hit - %d left,a casa foi atingida - %d de vida
 LOG_NIGHT_BEGAN,0,night %d begins,a noite %d começa
 LOG_NIGHT_LOST,0,night %d lost,noite %d perdida
@@ -549,6 +550,7 @@ WHY_ONLY_AT_NIGHT,228,only at night,só de noite
 WHY_ON_THE_HOUSE,228,on the house,em cima da casa
 WHY_ON_THE_ROCK,228,on the rock face,na pedra
 WHY_SHORT,228,short %s,falta %s
+WHY_HOUSE_TOP,228,the house is as sturdy as it gets,a casa já é a mais forte
 WHY_STALL_CLOSED,228,the stall trades %s-%s,a banca abre das %s às %s
 WHY_NO_HOME,228,no %s with room,nenhum %s com espaço
 WHY_SOLD_OUT,228,none left today,acabou por hoje
@@ -679,7 +681,13 @@ BOOK_HINT_OLD_CATFISH,300,"Spring nights in the forest pond, under a Full Moon."
 BOOK_HINT_GOLDEN_QUEEN,300,"Summer noons on the south-east lake, to a worm.","Meio-dia de verão no lago do sudeste, com minhoca."
 BOOK_HINT_GHOST_PIKE,300,"Late autumn nights in the north-west pond, to fish bait.","Noite alta de outono no noroeste, com isca de peixe."
 BOOK_HINT_ICE_STURGEON,300,"Winter dawns on the south-east lake, on a Full Moon day.","Alvorada de inverno no sudeste, em dia de Lua Cheia."
-WORK_TOOL_TAB,85,TOOLS,FERRAMENTAS
+WORK_TOOL_TAB,85,UPGRADES,MELHORIAS
+WORK_HOUSE_NEXT,0,%s  %s,%s  %s
+WORK_HOUSE_TOP,0,%s - as sturdy as it gets,%s - o mais forte que há
+WORK_HOUSE_GIVES,0,the house holds %d tonight and mends %d%% cheaper,a casa aguenta %d esta noite e conserta %d%% mais barato
+HOUSE_TIER_1,0,house I,casa I
+HOUSE_TIER_2,0,house II,casa II
+HOUSE_TIER_3,0,house III,casa III
 WORK_RECIPE_TAB,85,CRAFT,FABRICAR
 WORK_TOOL_PENDING,180,* Ready next morning,* Pronta amanhã
 INV_TOOL_PENDING,110,Ready tomorrow,Pronta amanhã

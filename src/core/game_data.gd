@@ -183,6 +183,23 @@ const PLAYER_START := Vector2i(40, 26)
 ## What the farmhouse can take before the night is lost.
 const HOUSE_HP := 100                   # LEVER: hit points, 60-200
 
+## **The house in three tiers** (task 0191; plan section 3.8): money buys a
+## sturdier house, because the house is what keeps the sleeping farmer safe.
+## Tier I is the house a new game has. Each tier's `hp_bonus` is added to
+## `HOUSE_HP` (and 'stout timbers' on top), and its `repair_discount` is the
+## percentage off every hit point of house mended, after 'a full larder'.
+## Bought at the workshop, by day. `check_house_tiers` keeps the bonuses from
+## falling from one tier to the next.
+const HOUSE_TIERS: Array = [
+	{"cost": {}, "hp_bonus": 0, "repair_discount": 0},
+	{"cost": {MONEY: 500, WOOD: 80, STONE: 60},   # LEVER: money and materials
+		"hp_bonus": 40,                          # LEVER: hit points, 20-80
+		"repair_discount": 20},                  # LEVER: percent, 0-50
+	{"cost": {MONEY: 1500, STONE: 120, IRON: 30}, # LEVER: money and materials
+		"hp_bonus": 100,                         # LEVER: hit points, 50-200
+		"repair_discount": 40},                  # LEVER: percent, 0-70
+]
+
 ## How fast the player walks, in `Player.SUBTILE` units per tick.
 ##
 ## 64 units is a tile and there are 30 ticks a second, so 6 is 2.8 tiles a
@@ -2717,6 +2734,7 @@ static func validate() -> Array:
 	errors.append_array(check_gathering(GATHERING))
 	errors.append_array(check_recipes(RECIPES))
 	errors.append_array(check_tools(TOOLS))
+	errors.append_array(check_house_tiers(HOUSE_TIERS))
 	errors.append_array(check_tool_areas(TOOL_AREA_OFFSETS))
 	errors.append_array(check_buildings(BUILDINGS))
 	errors.append_array(check_defences(DEFENCES))
@@ -3279,6 +3297,33 @@ static func tool_output(id: StringName) -> Dictionary:
 
 
 ## Costs are actual ledger resources; all five ladders retain three tiers.
+## **The house's tiers** (task 0191): the first is free - it is the house a
+## new game has - every later one costs something in the ledger, and no
+## bonus falls from one tier to the next; a discount stays within 0-100.
+static func check_house_tiers(tiers: Array) -> Array:
+	var errors: Array = []
+	if tiers.is_empty() or not ((tiers[0] as Dictionary)["cost"] as Dictionary).is_empty():
+		errors.append("the first house tier is the one a new game has, and costs nothing")
+	var hp := -1
+	var discount := -1
+	for i in tiers.size():
+		var tier: Dictionary = tiers[i]
+		var bonus := int(tier.get("hp_bonus", -1))
+		var off := int(tier.get("repair_discount", -1))
+		if bonus < hp or off < discount:
+			errors.append("house tier %d is weaker than the one before it" % (i + 1))
+		if off < 0 or off > 100:
+			errors.append("house tier %d takes %d%% off a repair" % [i + 1, off])
+		for res in sorted_names((tier["cost"] as Dictionary).keys()):
+			if not RESOURCES.has(res):
+				errors.append("house tier %d costs unknown '%s'" % [i + 1, res])
+		if i > 0 and (tier["cost"] as Dictionary).is_empty():
+			errors.append("house tier %d costs nothing" % (i + 1))
+		hp = bonus
+		discount = off
+	return errors
+
+
 static func check_tools(tools: Dictionary) -> Array:
 	var errors: Array = []
 	for tool in sorted_names(tools.keys()):
@@ -4204,6 +4249,7 @@ static func digest() -> int:
 		"calendar": [SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
 			FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES],
 		"calm": CALM_NIGHT_GIFT,
+		"house_tiers": HOUSE_TIERS,
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
 			PLAYER_SPEED],
 		"house": [HOUSE_SIZE, SHOP_SIZE, HOUSE_ROOM, HOUSE_DOOR,

@@ -226,6 +226,8 @@ var _guardian: GuardianView
 ## The barnyard: animals at home, the dog, dig spots (task 0185).
 var _animal_view: AnimalView
 var _peddler_view: PeddlerView
+var _house_mark: Node2D
+var _house_mark_for := ""
 ## The cells with a defence on them last time the occupants changed, so a new
 ## one can be spotted (task 0133) - empty until the first look at a state.
 var _defences_seen: Dictionary = {}
@@ -372,6 +374,53 @@ func _ready() -> void:
 	_peddler_view.name = "PeddlerView"
 	add_child(_peddler_view)
 	_peddler_view.setup(_occupants)
+	# **The house's tier, marked** (task 0191): a plaque over the door, sorted
+	# with the house it hangs on.
+	_house_mark = Node2D.new()
+	_house_mark.name = "HouseMark"
+	_house_mark.draw.connect(_draw_house_mark)
+	_occupants.add_child(_house_mark)
+
+
+## Where the plaque goes and whether it changed: the house's bottom middle,
+## for the sort, and its tier.
+func _place_house_mark() -> void:
+	if _house_mark == null or _state.is_empty():
+		return
+	var bounds := Farm.house_bounds(_state)
+	var tile := float(GameData.TILE_SIZE)
+	var at := Vector2((float(bounds.position.x) + float(bounds.size.x) * 0.5) * tile,
+		float(bounds.position.y + bounds.size.y) * tile)
+	var signature := "%s/%d" % [str(at), House.tier(_state)]
+	if signature == _house_mark_for:
+		return
+	_house_mark_for = signature
+	# **A pixel below the house's own sort line**, which is this same
+	# bottom middle: on a tie the house, built after the plaque, drew over it.
+	_house_mark.position = at + Vector2(0.0, 1.0)
+	_house_mark.queue_redraw()
+
+
+## **Tiers II and III through 0120's road** (task 0191): today's house with a
+## plaque over its door - two gold studs, or three - until A035's drawings of
+## the sturdier houses land in 0217. Nothing for tier I, or once the tier's
+## own drawing is in.
+func _draw_house_mark() -> void:
+	var tier := House.tier(_state) if not _state.is_empty() else 1
+	if tier < 2 or PlaceholderArt.art(StringName("house_%d" % tier)).is_empty():
+		return
+	var width := float(tier) * 4.0 + 2.0
+	var at := Vector2(-width * 0.5, -HOUSE_MARK_ABOVE - 1.0)
+	_house_mark.draw_rect(Rect2(at - Vector2(1, 1), Vector2(width + 2.0, 7.0)), PaletteData.COLOURS.get(&"ink", Color.BLACK))
+	_house_mark.draw_rect(Rect2(at, Vector2(width, 5.0)), PaletteData.COLOURS.get(&"wood_dark", Color(0.42, 0.29, 0.17)))
+	for i in tier:
+		_house_mark.draw_rect(Rect2(at + Vector2(2.0 + float(i) * 4.0, 1.0), Vector2(2.0, 3.0)),
+			PaletteData.COLOURS.get(&"gold", Color(0.77, 0.59, 0.27)))
+
+
+## How far above the house's ground line the plaque's top is: on the beam
+## over the door, whose top is about 34 above it.
+const HOUSE_MARK_ABOVE := 41.0
 
 
 ## The peddler's drawing (task 0190), for the checks and the pictures.
@@ -442,7 +491,8 @@ func _process(delta: float) -> void:
 	# different thing for a different job and is not used here.
 	# House HP lives outside the occupants table; crossing the existing wear
 	# threshold must refresh its drawing even when all nine cells are unchanged.
-	var signature: int = [(_state["occupants"] as Dictionary).hash(), _house_hurt()].hash()
+	# So does its tier (task 0191), which picks the drawing.
+	var signature: int = [(_state["occupants"] as Dictionary).hash(), _house_hurt(), House.tier(_state)].hash()
 	if signature != _last_signature:
 		_last_signature = signature
 		_dirty = true
@@ -463,6 +513,7 @@ func _process(delta: float) -> void:
 	_refresh_retreats(delta)
 	_enemy_warning.queue_redraw()
 	_refresh_stations(delta)
+	_place_house_mark()
 	_remember_towers(_state)
 	_refresh_wrecks()
 	_process_mine_cues(delta)
@@ -2319,6 +2370,10 @@ func _refresh_stations(delta: float) -> void:
 ## upgraded tower remains that level; every level owns its matching hurt art.
 func _worn(name: StringName, on: Dictionary) -> StringName:
 	var level := maxi(int(on.get("level", 1)), 1)
+	# **The house's tier is its level** (task 0191): `house_2`, `house_3` and
+	# their hurt frames once A035 draws them in 0217, today's house until then.
+	if on.get("id", &"") == &"house" and not _state.is_empty():
+		level = House.tier(_state)
 	var full := StringName("%s_%d" % [name, level]) if level > 1 else name
 	if not _exists(full):
 		full = name

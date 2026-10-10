@@ -22,7 +22,12 @@ of detail; tier I is today's house redrawn at that density and replaces it.
 
 ## Deliverables
 
-The table is provisional: game task 0191 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry and states settled by game task 0191. The rows stand as written: all six frames are 128x128 at (64,120), drawn at 1.0, on the house's same 6x4 footprint, so on screen each tier is exactly as big as today's 64x64 house drawn at 2.0. **The states the game plays** (`WorldView`, view only):
+- **The tier** is `House.tier(state)`, 1 to 3: `house` for tier I, `house_2` for II, `house_3` for III. A new game's house is tier I. A tier is bought by day at the workshop's UPGRADES tab and is the house from that moment, so the night after it was bought is the new tier's first.
+- **Whole or hurt** by the rule today's house uses: `_hurt` below 75% of the whole house (`WorldView.WOUNDED_AT`), whole from there up. Since 0191 the whole house is `Phases.house_full`, which adds the tier's `hp_bonus` (40 for II, 100 for III, levers in `GameData.HOUSE_TIERS`), so a sturdier house takes more hits before it looks hurt.
+- **No wreck**, and nothing between the tiers: a bought tier is drawn at once, with no build animation.
+
+Until 0217 the game draws tiers II and III through 0120's road: today's `house` / `house_hurt` drawing, with a small code-drawn plaque of two or three gold studs on the beam over the door. The plaque goes as each tier's own drawing lands; it is never part of the art. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

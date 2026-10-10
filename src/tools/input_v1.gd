@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 43
+const V1_CASES := 44
 
 
 func _process(delta: float) -> bool:
@@ -93,6 +93,7 @@ func _run() -> void:
 	await _case_0187_keg()
 	await _case_0189_bin()
 	await _case_0190_peddler()
+	await _case_0191_house()
 	_finish()
 
 
@@ -3055,5 +3056,36 @@ func _case_0190_peddler() -> void:
 	await tap_key(KEY_SPACE)
 	await frames(10)
 	expect(not panel.visible and not Shop.is_open(state), "at 17:00 SPACE at the stall opens nothing")
+	await close_scene()
+	_completed += 1
+
+
+## Task 0191: tier II bought by day, with the mouse, from the workshop's
+## upgrades tab - the row under the tools.
+func _case_0191_house() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	Resources.gain(state, House.next_cost(state))
+	var bench: Vector2i = Farm.cells_with(state, &"workshop")[0]
+	_stand_at(state, bench + Vector2i.UP, Player.SOUTH)
+	await frames(3)
+	await click_control("WorkshopToolsTab")
+	await frames(3)
+	var row := require_control("house_tier_up") as Button
+	var scroll := require_control("WorkshopRecipeScroll") as ScrollContainer
+	if row != null and scroll != null:
+		scroll.ensure_control_visible(row)
+	await frames(2)
+	expect(row != null and not row.disabled, "the upgrades tab offers house II", row.text if row != null else "")
+	var full := Phases.house_full(state)
+	await click_control("house_tier_up")
+	await until(func() -> bool: return House.tier(state) == 2, "a click builds house II")
+	expect(Phases.house_full(state) == full + int((GameData.HOUSE_TIERS[1] as Dictionary)["hp_bonus"]),
+		"and the house holds more tonight")
 	await close_scene()
 	_completed += 1

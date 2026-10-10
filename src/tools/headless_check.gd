@@ -14531,8 +14531,8 @@ func _task_0082_shots() -> void:
 	# the barnyard. Sixty-eight since 0186: barns at night. Sixty-nine since
 	# 0187: the keg and the jar. Seventy since 0188: the five machines.
 	# Seventy-one since 0189: the shipping bin. Seventy-two since 0190: the
-	# peddler.
-	expect(names.size() == 72,
+	# peddler. Seventy-three since 0191: the house in three tiers.
+	expect(names.size() == 73,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
@@ -15558,6 +15558,8 @@ func _task_0090_log() -> void:
 		&"night_lost": {"night": 4},
 		&"passed_out": {"day": 3},       # task 0128
 		&"dawn": {"walked": 4},          # task 0137
+		&"shipped": {"money": 40},       # task 0189
+		&"house_tier": {"tier": 2},      # task 0191
 	}
 	for kind in Events.KINDS:
 		expect(samples.has(kind),

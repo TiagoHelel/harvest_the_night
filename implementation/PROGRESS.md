@@ -19688,3 +19688,158 @@ tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/A034-peddler.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0190-peddler.md,
 implementation/shots/0190/, docs/devlog/{index,index.pt_BR}.md
+
+## 0191 - The house in three tiers - done 2026-10-10
+
+What changed: money buys a sturdier house, tiers I, II and III (plan section
+3.8), because the house is what keeps the sleeping farmer safe. Each tier
+has more hit points and cheaper repairs. A new game's house is tier I.
+
+**The tiers** (levers in `GameData.HOUSE_TIERS`, in `digest()`):
+
+| Tier | Price | Hit points added | Off a house repair |
+|---|---|---|---|
+| I | (the house a new game has) | 0 | 0% |
+| II | $500, 80 wood, 60 stone | 40 | 20% |
+| III | $1500, 120 stone, 30 iron | 100 | 40% |
+
+- `check_house_tiers`, run by `validate()`:
+  - tier I is free and every later tier costs something;
+  - no bonus or discount falls from one tier to the next;
+  - a discount stays within 0-100;
+  - every price names a known resource.
+
+**In the state:**
+- `house_tier` is a top-level int from `House.initial()`, so the
+  reconcile fills tier I into an old save without a version bump. The state
+  hash folds it, which is why SIM moved.
+- **`Phases.house_full` adds the tier's `hp_bonus`**, with 'stout timbers'
+  on top. So everything 0114 routed through it follows:
+  - the night's starting house;
+  - the untouched-house bonus, which now needs the tier's own whole house;
+  - the hurt drawing's threshold;
+  - the repair's cap.
+- **The repair** (`Repair.per_hp_hundredths`): the tier's discount comes
+  off what is left after 'a full larder' (task 0113's rule for the house).
+  The two compose rather than add, and a hit point still costs at least 1.
+
+**Buying** (`House.buy_tier`, `why_not_tier`):
+- **The refusals:**
+  - by day only (`WHY_AFTER_DARK`, the workshop's own "the workshop is
+    shut after dark");
+  - never past tier III (`WHY_HOUSE_TOP`, "the house is as sturdy as it
+    gets" / "a casa já é a mais forte");
+  - paid in full (`WHY_SHORT`).
+- **The new rooms come whole:** the hit points the tier adds are added to
+  what the house has, so a whole house stays whole.
+- **It is the house from the moment it is bought**, so the night after
+  buying is the new tier's first.
+- An event, `house_tier`, puts "the house is now house II" / "a casa agora é
+  casa II" in the log.
+
+**The input path: the workshop's tools tab**, which is now called UPGRADES /
+MELHORIAS (`WORK_TOOL_TAB` was TOOLS / FERRAMENTAS).
+- Under the ten tool upgrades, one row names the next tier and its price,
+  the way the stall's order rows put it: "house II  $500 60 stone 80 wood".
+- It is greyed with the reason on its tooltip. Otherwise the tooltip says
+  "the house holds 140 tonight and mends 20% cheaper".
+- At the top it reads "house III - as sturdy as it gets".
+- No new verb, so no `DAY_ONLY`, `all_verbs` or `Sfx.VERB_SOUNDS` entry.
+  The row has no icon: there is no house icon, and wood's fallback would lie.
+
+**There is no storage limit today.** Section 3.8's "more room to keep
+things" is not invented here; the tiers are hit points and repairs only.
+
+**The view:**
+- **Through 0120's road until 0217:**
+  - `PlaceholderArt` has A035's `house_2`, `house_2_hurt`, `house_3` and
+    `house_3_hurt` (geometry `HOUSE_TIER`, 128x128 at (64,120) drawn at
+    1.0), standing in with today's house drawings;
+  - `tools/placeholders.py --check`: 355 stand-ins, no problems.
+- **The plaque:** `WorldView` draws a small dark plaque with two or three
+  gold studs on the beam over the door while the tier's entry is there.
+  - It is sorted a pixel below the house's own sort line. In the first take
+    it sat on the same line, and the house, built after it, drew over it.
+- **The tier is the house's level** in `_worn`, the rule that picks
+  `gun_tower_2`. Once A035's files exist, `house_2` and `house_2_hurt` are
+  drawn with no further wiring; until then the name falls back to today's.
+- The occupants' rebuild signature includes the tier.
+- **A035's Deliverables** state the settled geometry and the states the
+  game plays:
+  - the tier picks the drawing;
+  - hurt below 75% of the tier's whole house;
+  - no wreck, and nothing drawn between the tiers.
+
+**Found and fixed: 0189's `shipped` event was never recorded.**
+- `Events.add` refuses a kind missing from `Events.KINDS`, and `shipped`
+  was never added to it. So the bin's morning log line ("the shipping bin
+  paid $N") was dropped, and only an error in the output said so.
+- `shipped` and `house_tier` are now in `KINDS`, and `_task_0090_log`
+  has a sample for each.
+- `_task_0191_house` now reads every `Events.add` in `src/core/` and asks
+  that each kind is in `KINDS`.
+- The determinism scenario ships nothing, so this alone does not move SIM.
+
+### Hashes
+
+- **SIM 2522152135 -> 3215404367, on purpose:** the `house_tier` key in the
+  state. The determinism scenario never puts anything in the bin (only the
+  tests, the shots and the stall's panel call `Shipping.put`), so the
+  `shipped` fix does not move it.
+- **DATA 2433837890 -> 2242315931, on purpose:** `HOUSE_TIERS` in
+  `digest()`.
+
+Verify: 60 passed, 0 failed in 704s (the known OVER BUDGET), on the first
+run: headless_check 17457 asserts, headless_v1 2095, input_check 1218 cases,
+input_v1 666, UI art 12868 checks, 710 strings in 2 languages.
+
+**Tests:**
+- `_task_0191_house` (headless_v1):
+  - **The check:** the table validates. A tier weaker than the last, a tier
+    I with a price, and a discount past 100 are refused.
+  - **Tier II:**
+    - A new game is tier I at `HOUSE_HP`.
+    - Tier II, paid for, adds its 40 to `house_full` and to the house it
+      has.
+    - It adds the same on top of 'stout timbers'.
+    - The log is told.
+  - **Every `Events.add` kind in `src/core/` is in `KINDS`.**
+  - **The repair:**
+    - A tier II house mends at 80% of tier I's per hit point, with and
+      without 'a full larder', checked against the formula per resource.
+    - Twenty hit points cost the discounted food.
+  - **The untouched-house bonus:**
+    - The night starts the house at tier II's whole.
+    - The bonus is paid at that whole and not at tier I's.
+  - **The refusals:** not after dark, not without the money, not past
+    tier III.
+  - **Saving:**
+    - The tier saves and loads.
+    - An old save without the key reconciles to tier I at the same version.
+- `_case_0191_house` (input_v1):
+  - At the workshop, a click on the UPGRADES tab, then the house row
+    (scrolled into view) builds tier II.
+  - The whole house is 40 more.
+- `headless_check` asks for one shot per scenario: 73 now (`house_tiers`).
+
+Looked at (`python tools/shot.py 0191 house_tiers --fhd`, 1920x1080):
+- **`house_tiers`**, noon on Spring 3: tier I, and the farmer by its west
+  wall. The camera follows him, so the house stands right of the middle,
+  clear of the seed panel.
+- **`house_tiers_2`**: the same house with a two-stud plaque over the door.
+  - The HUD shows $500, 80 wood and 60 stone paid.
+  - The log reads "the house is now house II".
+- **`house_tiers_panel`**: the farmer at the bench, with the UPGRADES tab
+  scrolled to the house row: "house III  30 iron $1500 120 stone", enabled.
+- **`house_tiers_3`**: a three-stud plaque, with $1500, 120 stone and 30
+  iron paid.
+- I enlarged the door in all three tiers: none, two studs, three. The
+  plaque sits on the beam over the door frame.
+
+Files: src/core/{events,game_data,house,phases,repair}.gd,
+src/ui/{log_panel,placeholder_art,workshop_panel,world_view}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A035-house-tiers.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0191-house-tiers.md,
+implementation/shots/0191/, docs/devlog/{index,index.pt_BR}.md

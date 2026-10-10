@@ -56,6 +56,7 @@ const SEVERITY := {
 	&"passed_out": &"warn",
 	&"dawn": &"good",
 	&"shipped": &"good",
+	&"house_tier": &"good",
 }
 
 ## Severity -> the theme role it is written in.
@@ -274,6 +275,10 @@ static func line_for(event: Dictionary) -> String:
 		# The bin paid at dawn (task 0189).
 		&"shipped":
 			return I18n.f(&"LOG_SHIPPED", [int(event.get("money", 0))])
+		# The house built up a tier (task 0191).
+		&"house_tier":
+			return I18n.f(&"LOG_HOUSE_TIER", [I18n.t([&"HOUSE_TIER_1", &"HOUSE_TIER_2",
+				&"HOUSE_TIER_3"][clampi(int(event.get("tier", 1)), 1, 3) - 1])])
 	return ""
 
 

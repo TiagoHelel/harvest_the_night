@@ -174,6 +174,10 @@ const PROP_BIN := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 22), "draw_
 const PEDDLER := {"canvas": Vector2i(40, 40), "pivot": Vector2i(20, 36), "draw_scale": 1.0}
 const SHOP_CLOSED := {"canvas": Vector2i(32, 40), "pivot": Vector2i(16, 36), "draw_scale": 2.0}
 
+## A035's houses (task 0191): 128x128 at (64,120) over the 6x4 footprint,
+## drawn at 1.0 - today's 64x64 house at (32,60) drawn at 2.0, at full density.
+const HOUSE_TIER := {"canvas": Vector2i(128, 128), "pivot": Vector2i(64, 120), "draw_scale": 1.0}
+
 ## A026-A028's animals (task 0185): a large one - cow, sheep, pig, dog - is
 ## 40x32 at (20,30), the chicken 24x24 at (12,22), all drawn at 1.0.
 const ANIMAL_LARGE := {"canvas": Vector2i(40, 32), "pivot": Vector2i(20, 30), "draw_scale": 1.0}
@@ -413,6 +417,12 @@ const ART := {
 	&"peddler_talk": {"pack": "A034", "dir": "res://sprites/actors/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"actors/trade", "stand_in_frames": 4, "tint": Color(1.2, 0.82, 0.72), "geometry": PEDDLER, "final": PEDDLER},
 	&"peddler_walk": {"pack": "A034", "dir": "res://sprites/actors/", "frames": 6, "seconds": 0.1, "loop": true, "stand_in": &"actors/walk_west", "stand_in_frames": 8, "tint": Color(1.2, 0.82, 0.72), "geometry": PEDDLER, "final": PEDDLER},
 	&"shop_closed": {"pack": "A034", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/shop", "tint": Color(0.58, 0.54, 0.64), "geometry": SHOP_CLOSED, "final": SHOP_CLOSED, "bare": true},
+	# A035's sturdier houses (task 0191): today's house, whole or hurt, with
+	# a code-drawn plaque of studs over the door (`WorldView`), until 0217.
+	&"house_2": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
+	&"house_2_hurt": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house_hurt", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
+	&"house_3": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
+	&"house_3_hurt": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house_hurt", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
 	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
 	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},

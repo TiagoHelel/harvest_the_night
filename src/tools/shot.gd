@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["house_tiers", "the house in tier I at noon, the farmer by its west wall; then tier II with its plaque over the door, the workshop's upgrades tab offering tier III, and tier III", ""],
 	["peddler", "the stall open at noon with the peddler at its end; then shut at dusk, nobody there", ""],
 	["shipping_bin", "the shipping bin by the porch at noon; then its panel with wood and carrots in; then the morning report naming what it pays", ""],
 	["machines", "the keg, the preserves jar, the dairy, the loom and the mill in a row at noon, idle; then working", ""],
@@ -743,6 +744,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"machines": _set_machines(state)
 		"shipping_bin": _set_shipping_bin(state)
 		"peddler": _set_peddler(state)
+		"house_tiers": _set_house_tiers(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -868,6 +870,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "peddler":
 		await _shoot("peddler", folder)
 		await _take_stall_dusk(main, state, folder)
+		return
+	if name == "house_tiers":
+		await _shoot("house_tiers", folder)
+		await _take_house_tiers(main, state, folder)
 		return
 	if name == "inventory_crops":
 		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
@@ -1818,6 +1824,64 @@ func _take_stall_dusk(main: Node, state: Dictionary, folder: String) -> void:
 	await _shoot("peddler_dusk", folder)
 	print("  peddler: at %s by noon, %s at dusk; stall %s" % [noon, view.peddler_view().peddler_position(),
 		"open" if Shop.open_hours(state) else "shut"])
+
+
+## **The house in three tiers** (task 0191): noon on Spring 3, the house
+## still tier I, with the money for both tiers above it, and the farmer by
+## its west wall facing it. The camera follows him, so the house stands right
+## of the middle, clear of the seed panel; then tiers II and III and the
+## upgrades tab (`_take_house_tiers`).
+func _set_house_tiers(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 3)
+	Resources.gain(state, {GameData.MONEY: 2500, GameData.WOOD: 200, GameData.STONE: 300,
+		GameData.IRON: 60})
+	var bounds := Farm.house_bounds(state)
+	_standing_at = _open_ground_near(state, Vector2i(bounds.position.x - 1, bounds.end.y))
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.EAST
+
+
+## **Tiers II and III** (task 0191), bought on the spot, each with its plaque
+## over the door; between them the farmer at the bench with the workshop's
+## upgrades tab up, scrolled to the house's row, offering tier III at its
+## price.
+func _take_house_tiers(main: Node, state: Dictionary, folder: String) -> void:
+	var view := main.get_node("%WorldView") as WorldView
+	var bought: Array = [House.tier(state)]
+	House.buy_tier(state)
+	bought.append(House.tier(state))
+	for _i in 6:
+		await process_frame
+	await _shoot("house_tiers_2", folder)
+	var bench: Vector2i = Farm.cells_with(state, &"workshop")[0]
+	SuiteKit.stand_the_farmer(state, bench + Vector2i.UP)
+	state["player"]["facing"] = Player.SOUTH
+	view.look_at_cell(bench + Vector2i.UP)
+	var panel := main.get_node("%WorkshopPanel") as WorkshopPanel
+	panel._tool_tab = true
+	panel._built_for = ""
+	panel._process(0.0)
+	# **Scrolled once it is laid out**: a row added this frame has no place
+	# in the scroll yet.
+	await process_frame
+	var row := panel.find_child("house_tier_up", true, false) as Button
+	if row != null:
+		(panel.find_child("WorkshopRecipeScroll", true, false) as ScrollContainer).ensure_control_visible(row)
+	for _i in 4:
+		await process_frame
+	await _shoot("house_tiers_panel", folder)
+	var offered := row.text.strip_edges() if row != null else "(no row)"
+	House.buy_tier(state)
+	bought.append(House.tier(state))
+	SuiteKit.stand_the_farmer(state, _standing_at)
+	state["player"]["facing"] = Player.EAST
+	view.look_at_cell(_standing_at)
+	for _i in 6:
+		await process_frame
+	await _shoot("house_tiers_3", folder)
+	print("  house_tiers: tiers %s, a whole house %d, the tab offered '%s', the farmer at %s" % [
+		str(bought), Phases.house_full(state), offered, str(_standing_at)])
 
 
 ## **The fish book** (task 0182): a spring Full Moon, and four species

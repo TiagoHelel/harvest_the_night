@@ -53,6 +53,11 @@ const KINDS: Array = [
 	&"passed_out",
 	# 06:00 (task 0137): the night won by holding, and how many walked off.
 	&"dawn",
+	# The morning's pay for what waited in the bin (task 0189). Missing from
+	# this list until task 0191, so it was refused rather than written.
+	&"shipped",
+	# The house built up a tier (task 0191).
+	&"house_tier",
 ]
 
 

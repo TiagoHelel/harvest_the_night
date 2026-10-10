@@ -206,6 +206,7 @@ func _signature(cell: Vector2i) -> String:
 	parts.append("stalled" if Crafting.is_stalled(_state, cell) else "running")
 	parts.append(str(_tool_tab))
 	parts.append(str(_state["tools"]))
+	parts.append(str(House.tier(_state)))
 	parts.append(str(_state["held"]))
 	parts.append(str(I18n.revision()))
 	return "|".join(parts)
@@ -294,6 +295,45 @@ func _build(cell: Vector2i) -> void:
 		row.pressed.connect(func() -> void:
 			Crafting.enqueue(_state, cell, recipe_id))
 		_recipes.add_child(row)
+	# **The house's next tier** (task 0191), under the tools: the other thing
+	# the workshop builds for the farm rather than for the night.
+	if tools:
+		_house_row()
+
+
+## The tier names, through literal keys.
+const HOUSE_TIER_KEYS := [&"HOUSE_TIER_1", &"HOUSE_TIER_2", &"HOUSE_TIER_3"]
+
+
+## **The house's next tier** (task 0191): its name and what it costs, greyed
+## with the reason when it cannot be had - and at the top, the house it is.
+## It is the house from tonight: more hit points, cheaper repairs.
+func _house_row() -> void:
+	var tier := House.tier(_state)
+	var row := Button.new()
+	row.name = "house_tier_up"
+	var why := House.why_not_tier(_state)
+	if tier >= GameData.HOUSE_TIERS.size():
+		row.text = "    " + I18n.f(&"WORK_HOUSE_TOP", [I18n.t(HOUSE_TIER_KEYS[tier - 1])])
+	else:
+		# The price the way the stall's order rows put it (task 0190).
+		var cost: Array = []
+		var price := House.next_cost(_state)
+		for res in GameData.sorted_names(price.keys()):
+			cost.append("$%d" % int(price[res]) if res == GameData.MONEY
+				else "%d %s" % [int(price[res]), Names.of(res)])
+		row.text = "    " + I18n.f(&"WORK_HOUSE_NEXT", [I18n.t(HOUSE_TIER_KEYS[tier]), " ".join(cost)])
+	row.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_style(row)
+	row.custom_minimum_size.y = 16
+	row.disabled = not why.is_empty()
+	row.modulate = Color(1, 1, 1) if why.is_empty() else Color(0.5, 0.48, 0.55)
+	Tooltip.describes(row, StringName("text:%s" % (Names.refusal(why) if not why.is_empty()
+		else I18n.f(&"WORK_HOUSE_GIVES", [Phases.house_full(_state)
+			+ int((GameData.HOUSE_TIERS[tier] as Dictionary)["hp_bonus"]) - House.tier_bonus(_state),
+			int((GameData.HOUSE_TIERS[tier] as Dictionary)["repair_discount"])]))))
+	row.pressed.connect(func() -> void: House.buy_tier(_state))
+	_recipes.add_child(row)
 
 
 ## The compact row the build palette settled on in task 0032, which is now

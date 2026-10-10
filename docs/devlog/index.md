@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-179 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
+180 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -223,10 +223,11 @@ is the sort of thing this list exists to say out loud.
 | 0188 | The dairy, the loom and the mill | 2026-10-10 |
 | 0189 | The shipping bin | 2026-10-10 |
 | 0190 | The peddler and his hours | 2026-10-10 |
+| 0191 | The house in three tiers | 2026-10-10 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 74 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 76 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -302,6 +303,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **The shipping bin** (0189) - `data` 2949384217 -> 1204968759
 - **The peddler and his hours** (0190) - `sim` 3194686093 -> 2522152135
 - **The peddler and his hours** (0190) - `data` 1204968759 -> 2433837890
+- **The house in three tiers** (0191) - `sim` 2522152135 -> 3215404367
+- **The house in three tiers** (0191) - `data` 2433837890 -> 2242315931
 
 ## What went wrong
 

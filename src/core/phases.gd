@@ -167,9 +167,10 @@ static func ticks_to_dawn(state: Dictionary) -> int:
 	return maxi(dawn - int(state["night_tick"]), 0)
 
 
-## What a whole house is worth tonight, the tree included.
+## What a whole house is worth tonight, the tree included - and since task
+## 0191 the house's tier.
 static func house_full(state: Dictionary) -> int:
-	return GameData.HOUSE_HP + Tech.bonus(state, "house_hp_bonus", 0)
+	return GameData.HOUSE_HP + House.tier_bonus(state) + Tech.bonus(state, "house_hp_bonus", 0)
 
 
 ## PREPARATION -> NIGHT: **the one road into the waves** (task 0118).

@@ -47,6 +47,9 @@ extends RefCounted
 ## that sells it is the house's own branch - a discount that skipped the one
 ## thing the branch exists to keep standing would be a note that lies.
 ##
+## **And so does the house's tier** (task 0191): its `repair_discount` comes
+## off what is left after the larder's, so the two compose rather than add.
+##
 ## ## Whole means whole as it is now
 ##
 ## A repair puts back what the thing has when it is whole **today**: the house
@@ -108,9 +111,10 @@ static func per_hp_hundredths(state: Dictionary,
 	var out := {}
 	var discount := Tech.bonus(state, "repair_percent", 100)
 	if is_house(state, cell):
+		var kept := 100 - House.tier_discount(state)
 		for res in GameData.sorted_names(GameData.REPAIR_COST_PER_HP.keys()):
 			out[res] = maxi(int(GameData.REPAIR_COST_PER_HP[res])
-				* GameData.HOUSE_REPAIR_PERCENT * discount / 100, 1)
+				* GameData.HOUSE_REPAIR_PERCENT * discount / 100 * kept / 100, 1)
 		return out
 
 	var entry := Building.entry_at(state, cell)
