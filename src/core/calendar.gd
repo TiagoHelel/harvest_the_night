@@ -24,6 +24,16 @@ static func date(state: Dictionary) -> int:
 	return maxi(int(state["day"]) - int(state.get("days_held", 0)), 1)
 
 
+## **Whether the run has reached a season** (task 0220): this year's seasons
+## up to today's, and every season from Year 2 on - so a winter node stays
+## buyable in Year 2's spring. The tree's gate, and the one 0233's powers and
+## 0234's arsenal ask too. `season` is 0 for spring to 3 for winter.
+static func season_reached(state: Dictionary, season: int,
+		season_days: int = GameData.SEASON_DAYS) -> bool:
+	var today := date(state)
+	return year_of(today, season_days) > 1 or season_of(today, season_days) >= season
+
+
 ## How many days a year has.
 static func year_days(season_days: int = GameData.SEASON_DAYS) -> int:
 	return GameData.SEASONS.size() * maxi(season_days, 1)

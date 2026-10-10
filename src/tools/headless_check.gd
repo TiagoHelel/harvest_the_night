@@ -11723,15 +11723,21 @@ func _every_night(seed_value: int, clean: bool) -> int:
 ## 0063 - the tech tree: twelve nodes and not enough points for them.
 func _task_0063_tech_tree() -> void:
 	# **Twelve nodes, three branches, and the design document's "no giant
-	# tree" taken literally.**
-	expect(Tech.tree().size() == 12,
-		"twelve nodes, no more", str(Tech.tree().size()))
+	# tree" taken literally** - on spring's floor. Since task 0220 every later
+	# season adds a node to each branch.
+	var spring := 0
+	for row in Tech.tree():
+		if int((row as Dictionary).get("season", 0)) == 0:
+			spring += 1
+	expect(spring == 12, "twelve nodes on spring's floor, no more", str(spring))
+	expect(Tech.tree().size() == 12 + Tech.branches().size() * (GameData.SEASONS.size() - 1),
+		"and one a branch on every floor after it", str(Tech.tree().size()))
 	expect(Tech.branches().size() == 3,
 		"in three branches", str(Tech.branches()))
 	for branch in Tech.branches():
-		expect(Tech.nodes_of(StringName(branch)).size() == 4,
-			"four deep: %s" % branch,
-			str(Tech.nodes_of(StringName(branch)).size()))
+		expect(Tech.floor_of(StringName(branch), 0).size() == 4,
+			"four deep in spring: %s" % branch,
+			str(Tech.floor_of(StringName(branch), 0).size()))
 
 	# **Prerequisites are data, and they hold together.**
 	var keys: Dictionary = {}
@@ -11747,26 +11753,27 @@ func _task_0063_tech_tree() -> void:
 				"%s needs %s, which exists" % [one["id"], needed])
 			expect(Tech.node(StringName(needed))["branch"] == one["branch"],
 				"and is in the same branch", str(needed))
-		# **One key, one node.** `Tech.bonus()` answers with the first node
-		# that mentions a key, so two nodes claiming the same number would
-		# make one of them silently do nothing.
+		# **One key, one node a floor.** Since task 0220 a later floor may
+		# give a number again, stronger, and `Tech.bonus()` takes the
+		# stronger; two nodes on one floor claiming it would make one of them
+		# silently do nothing.
 		for key in (one["gives"] as Dictionary):
-			expect(not keys.has(key),
-				"'%s' is given by one node only" % key,
-				"%s and %s" % [str(keys.get(key, "")), str(one["id"])])
-			keys[key] = one["id"]
+			var on_floor := "%s on floor %d" % [key, int(one.get("season", 0))]
+			expect(not keys.has(on_floor),
+				"'%s' is given by one node a floor" % key,
+				"%s and %s" % [str(keys.get(on_floor, "")), str(one["id"])])
+			keys[on_floor] = one["id"]
 
-	# **Every node is reachable inside ten nights, but not all of them.** The
-	# done-when, and the whole reason for the prices. **Asked of the authored
-	# nights** since task 0151: a year pays 224 at best against this tree's
-	# 45, and 0220 re-prices the tree against the year.
-	var authored := Waves.authored_count()
-	var best := Tech.total_available(authored)
-	print("  the whole tree costs %d; ten nights pay %d at best and %d at "
-		% [whole, best, Tech.least_available(authored)] + "worst")
-	expect(whole > best,
-		"the tree costs more than the best run earns - a player cannot have "
-		+ "all of it", "%d against %d" % [whole, best])
+	# **Every node is reachable inside a year, but not all of them.** The
+	# done-when, and the whole reason for the prices - **asked of the year**
+	# since task 0220 re-priced the tree against it (0150's calendar, a Full
+	# Moon's share included).
+	var year := Tech.total_available()
+	print("  the whole tree costs %d; a year pays %d at best and %d at worst"
+		% [whole, year, Tech.least_available()])
+	expect(whole > year,
+		"the tree costs more than the best year earns - a player cannot have "
+		+ "all of it", "%d against %d" % [whole, year])
 	for row in Tech.tree():
 		var one: Dictionary = row
 		var deep := int(one["cost"])
@@ -11775,12 +11782,16 @@ func _task_0063_tech_tree() -> void:
 			var parent := Tech.node(StringName(walk[0]))
 			deep += int(parent["cost"])
 			walk = parent["needs"]
-		expect(deep <= best,
-			"%s and everything it needs comes to %d, which ten nights pay "
+		expect(deep <= year,
+			"%s and everything it needs comes to %d, which a year pays "
 				% [one["id"], deep] + "for", str(deep))
-	# A whole branch is affordable and two are not quite everything.
+	# **Spring's floor against the ten nights**, as task 0063 priced it: a
+	# whole branch is affordable and two are not quite everything.
+	var authored := Waves.authored_count()
+	var best := Tech.total_available(authored)
+	print("  spring's floor against ten nights paying %d at best" % best)
 	var branch_cost := 0
-	for row in Tech.nodes_of(StringName(Tech.branches()[0])):
+	for row in Tech.floor_of(StringName(Tech.branches()[0]), 0):
 		branch_cost += int((row as Dictionary)["cost"])
 	print("  a whole branch costs %d, so a good run takes two and a bit"
 		% branch_cost)
@@ -14550,8 +14561,9 @@ func _task_0082_shots() -> void:
 	# Seventy-one since 0189: the shipping bin. Seventy-two since 0190: the
 	# peddler. Seventy-three since 0191: the house in three tiers.
 	# Seventy-four since 0192: the kitchen. Seventy-five since 0195: the tips.
-	# Seventy-six since 0196: the two played days.
-	expect(names.size() == 76,
+	# Seventy-six since 0196: the two played days. Seventy-seven since 0220:
+	# the tree on autumn's floor.
+	expect(names.size() == 77,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

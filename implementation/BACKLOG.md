@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **185 / 296 done**
+`###############.........`  **186 / 296 done**
 
-0 doing / 111 todo / 0 blocked across 18 phases.
+0 doing / 110 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-111 task(s) left, the ready ones first, then what they
+110 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -620,24 +620,6 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0220 - The technology tree by season
-
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/tech.gd, src/core/calendar.gd, src/ui/tech_panel.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Each season opens a new floor of the tree, so summer's essence buys something spring could not and the tree grows with the year instead of being finished in the first fortnight (plan section 7).
-
-- `TECH_TREE` rows gain a `season` (0 spring to 3 winter, the calendar of 0149). Today's twelve nodes are spring's floor; summer, autumn and winter each add one node per branch (production, defence, survival) - nine new nodes with notes
-- The gate is the seasons the run has reached, not the season it is in: a winter node stays available in Year 2's spring. Put that question in one pure helper beside 0149's, e.g. `Calendar.season_reached(state, season)` (every season from Year 2 on) - 0233 and 0234 reuse it. `Tech.why_not_buy` refuses an unreached season with a new key (e.g. `WHY_NOT_YET_SEASON` and the season name, a `strings.csv` row in both languages), checked before the price
-- Every new node gives a number a system already reads, or a new `Tech.bonus` key read by the one system that owns it. `Tech.bonus` returns the first owned node that gives a key, so a later tier improving an existing key needs a rule (best value wins, or a key of its own): decide, write it in `tech.gd` and assert it
-- Price it the way task 0063 did: every node reachable in a year, not all of them, against `Tech.total_available()` over the calendar (0150); the arithmetic goes in the journal
-- Leave the powers to 0233, which adds one survival node per season from summer; nothing here gives a power
-- `tech_panel.gd` pages the tree by season (keyboard, mouse and pad), greys an unreached season with its reason and still fits 480x270. `Names.KEYS`, `Names.NOTES` and `TECH_*`/`TECHNOTE_*` rows in `assets/locale/strings.csv` for every new node, in both languages
-- A `GameData.validate()` rule: every `season` is 0-3, `needs` never points at a later season, and each branch has a node in every season. DATA moves on purpose (the tree is in `GameData.digest()`): record it. SIM must not move - no state key is added and the determinism scenario buys nothing
-
-  - done when: `_task_0220_tree_seasons` in `src/tools/headless_v1.gd` asserts a summer node is refused in spring with the season reason, is buyable once summer is reached and still in Year 2's spring, and the stacking rule for a repeated bonus key holds
-  - done when: `_case_0220_tree_pages` in `src/tools/input_v1.gd` pages to summer and buys a node with the keyboard and with the pad
-  - done when: `python tools/shot.py 0220` captures of the tree in spring and in autumn, opened and looked at: no node cut off, no two labels on top of each other
-
 ### 0221 - What the night leaves behind
 
 Ready to pick up.  Likely files: `src/core/combat.gd, src/core/loot.gd (new), src/core/phases.gd, src/core/player.gd, src/core/state.gd, src/core/game_data.gd, src/core/tech.gd, src/ui/names.gd, src/ui/world_view.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -1029,7 +1011,7 @@ Two more ways to hold a line: the stone wall upgraded with hardwood into somethi
 
 ### 0233 - Three new powers
 
-Waits on 0232, 0220, 0230.  Likely files: `src/core/ability.gd, src/core/game_data.gd, src/core/enemies.gd, src/core/repair.gd, src/ui/night_hud.gd, src/ui/names.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0232, 0230.  Likely files: `src/core/ability.gd, src/core/game_data.gd, src/core/enemies.gd, src/core/repair.gd, src/ui/night_hud.gd, src/ui/names.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Three more buttons for a night going wrong: the farm bell stops every zombie for two seconds, the dog runs out and bites one, and an emergency repair puts a structure back on its feet - each aimed with the cursor, each with its wait (plan section 4.4).
 
@@ -1196,7 +1178,7 @@ The two MVP pieces become a year: a day piece per season on the shared motif, a 
 
 ### 0234 - The arsenal grows with the seasons
 
-Waits on 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0220, 0223.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0223.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The arsenal arrives with the calendar - spring's six, then summer's, autumn's and winter's - and every defence costs money as well as materials, so the day's purse is what the night is built with (plan sections 2, 5 and 7).
 
@@ -2337,11 +2319,11 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (2/28)
+## 13 - Weapons of the night  (3/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
-- [ ] **0220** [The technology tree by season](prompts/0220-tech-by-season.md)
+- [x] **0220** [The technology tree by season](prompts/0220-tech-by-season.md)
 - [ ] **0221** [What the night leaves behind](prompts/0221-night-loot.md)
 - [ ] **0222** [Bone meal](prompts/0222-bone-meal.md) - needs 0221
 - [ ] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md)
@@ -2354,8 +2336,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0230** [The electric fence](prompts/0230-electric-fence.md)
 - [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md) - needs 0226
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
-- [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0220, 0230
-- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0220, 0223
+- [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0230
+- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0223
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - needs 0221, 0222 - waits for art A036
 - [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - needs 0224, 0225 - waits for art A037
 - [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - needs 0226 - waits for art A038

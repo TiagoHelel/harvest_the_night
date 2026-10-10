@@ -215,6 +215,16 @@ const KEYS: Dictionary = {
 	&"a full larder": &"TECH_A_FULL_LARDER",
 	&"spare stakes": &"TECH_SPARE_STAKES",
 	&"a second flare": &"TECH_A_SECOND_FLARE",
+	# Summer's, autumn's and winter's floors (task 0220).
+	&"keen edges": &"TECH_KEEN_EDGES",
+	&"a full ledger": &"TECH_A_FULL_LEDGER",
+	&"master hands": &"TECH_MASTER_HANDS",
+	&"heavy shot": &"TECH_HEAVY_SHOT",
+	&"tall mounts": &"TECH_TALL_MOUNTS",
+	&"greased works": &"TECH_GREASED_WORKS",
+	&"brick footings": &"TECH_BRICK_FOOTINGS",
+	&"cheap timber": &"TECH_CHEAP_TIMBER",
+	&"a stake pile": &"TECH_A_STAKE_PILE",
 
 	# ---- the branches of it
 	&"production": &"TECH_BRANCH_PRODUCTION",
@@ -281,6 +291,15 @@ const NOTES: Dictionary = {
 	&"a full larder": &"TECHNOTE_A_FULL_LARDER",
 	&"spare stakes": &"TECHNOTE_SPARE_STAKES",
 	&"a second flare": &"TECHNOTE_A_SECOND_FLARE",
+	&"keen edges": &"TECHNOTE_KEEN_EDGES",
+	&"a full ledger": &"TECHNOTE_A_FULL_LEDGER",
+	&"master hands": &"TECHNOTE_MASTER_HANDS",
+	&"heavy shot": &"TECHNOTE_HEAVY_SHOT",
+	&"tall mounts": &"TECHNOTE_TALL_MOUNTS",
+	&"greased works": &"TECHNOTE_GREASED_WORKS",
+	&"brick footings": &"TECHNOTE_BRICK_FOOTINGS",
+	&"cheap timber": &"TECHNOTE_CHEAP_TIMBER",
+	&"a stake pile": &"TECHNOTE_A_STAKE_PILE",
 }
 
 

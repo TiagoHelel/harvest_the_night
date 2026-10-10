@@ -21181,3 +21181,206 @@ implementation/{BACKLOG,PROGRESS,BALANCE}.md,
 implementation/prompts/{0219-essence,0278-economy-seasons}.md,
 tools/backlog/part11.py, implementation/shots/0219/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0220 - The technology tree by season - done 2026-10-10
+
+What changed: the tree has a floor a season.
+- **Spring's floor** is the twelve nodes it had.
+- **Summer, autumn and winter** each add a node to every branch: nine new
+  nodes, each a stronger version of a number spring's floor gives.
+- **A floor opens when the run reaches its season**, and stays open, so
+  Year 2's spring still sells winter's.
+- **The panel** pages the floors by season and greys one the run has not
+  reached, with its reason.
+
+### The nine nodes
+
+| Floor (cost each) | Production | Defence | Survival |
+|---|---|---|---|
+| Summer (16) | keen edges: chopping and mining 125% (`sharp tools` 110%) | heavy shot: tower damage 140% (`true sights` 120%) | brick footings: the house +80 (`stout timbers` +40) |
+| Autumn (27) | a full ledger: selling 140% (`a name at market` 125%) | tall mounts: tower range +2 (`long barrels` +1) | cheap timber: mending 40% (`a full larder` 60%) |
+| Winter (40) | master hands: every bench and machine 170% (`steady hands` 135%) | greased works: tower reload 65% (`oiled works` 80%) | a stake pile: +6 barricades a night (`spare stakes` +3) |
+
+- **Each needs the floor below it in its branch.** Summer's needs spring's
+  last node (`a name at market`, `a standing order`, `a second flare`), so
+  a branch is a chain of seven.
+- **Every one gives a number its system already reads**, so there is no
+  new `Tech.bonus` key.
+- **No powers:** 0233 adds a survival node a season from summer.
+- **Names and notes** are in `Names.KEYS`, `Names.NOTES` and
+  `TECH_*`/`TECHNOTE_*`, in both languages.
+
+### The stacking rule: the stronger wins
+
+**`Tech.bonus` answers the value farthest from what having none gives.**
+That is the caller's `missing`, so the rule picks:
+- the bigger bonus;
+- the bigger percent above a hundred;
+- the smaller percent below it.
+
+So:
+- owning `true sights` and `heavy shot` is 140%, never the 168% that
+  multiplying them would give;
+- selling `heavy shot` back falls to 120%;
+- in either order of buying.
+
+**It walks the table once**, asking `owned.has`, where it used to scan the
+table again for each owned node. Nothing owned returns at once, so a
+tower's reach and damage on the night's hot path cost what they did.
+
+**`GameData.check_tech_tree`**, in `validate()`, holds the tree so that
+"stronger" can mean "later":
+- every `season` is 0-3;
+- a node never needs one on a later floor;
+- every branch has a node on every floor;
+- every number given is a `_percent` (never 100) or a `_bonus` (never 0);
+- a number given on two floors moves the same way on both, and the later
+  floor's is the stronger.
+
+### The gate
+
+**`Calendar.season_reached(state, season)`**, beside 0149's helpers, for
+0233 and 0234 too. It is true for this year's seasons up to today's, and for
+every season from Year 2 on.
+
+**`Tech.why_not_buy` asks it** after the after-dark check and before the
+prerequisites and the price. The reason is `[WHY_NOT_YET_SEASON, season]`:
+"opens in SUMMER" / "abre no VERÃO".
+
+### The price, as 0063 set it, over the year
+
+**What a year pays:** 64 essence at worst and 256 at best
+(`Tech.total_available()`, each Full Moon's share included).
+
+**What the tree costs: 294.**
+- Spring's floor: 45, each branch 2 + 3 + 4 + 6 = 15.
+- Summer's: 3 x 16 = 48.
+- Autumn's: 3 x 27 = 81.
+- Winter's: 3 x 40 = 120.
+
+**Not all of it:** 294 is more than the best year's 256, by about a seventh.
+
+**Every node reachable:** the dearest node with everything under it, a
+winter one, is 15 + 16 + 27 + 40 = 98. That is well inside 256.
+
+**Season by season, for a perfect player:**
+- Spring pays 64: spring's floor (45) and 19 over.
+- By winter's first night 184 is paid: spring, summer and autumn whole cost
+  174.
+- Winter pays 60 more. With what is left, that does not buy winter's 120.
+
+**Spring alone against the ten authored nights** (44 at best), as 0063 set
+it: a branch (15) fits and the three (45) do not.
+
+### The panel (`tech_panel.gd`)
+
+- **A page a season**, opening on today's.
+- **Turning the page:**
+  - Q and E, or LB and RB on a pad: the inventory's own page keys, taken
+    while the tree is up.
+  - The "< Q" and "E >" buttons for the mouse, labelled with the bindings
+    of the device in hand.
+  - The season's name sits between them.
+- **Each floor is drawn from the top of its column.** Spring's twelve fill
+  it, and a later floor's three sit where spring's first row is.
+- **Turning a page puts the keyboard's focus on the first node it can
+  buy**, so the arrows or the D-pad walk the floor and Enter or A buys.
+  - A is read from `interact`, as the night HUD reads it: Godot's
+    `ui_accept` is Enter and Space, with no pad button.
+- **An unreached floor:**
+  - its season's name is dim;
+  - "opens in WINTER" sits under the floor, low on the frame.
+  - It first sat right under the row, where the focused node's tooltip
+    opens and covered it. The picture showed it.
+- **Two old faults, fixed in passing:**
+  - A refused node's tooltip printed the raw refusal (`[&"WHY_COSTS", 6, 0]`).
+    It now reads `Names.refusal`.
+  - The title, the branch names and the hint were written once in
+    `_ready`, so the Portuguese picture said TECHNOLOGY, PRODUCTION... They
+    are written on every redraw now.
+
+### Hashes
+
+- **SIM 3849555693, unchanged:** no state key is added, and the
+  determinism scenario buys nothing.
+- **DATA 3664563880 -> 3553624604, on purpose:** the tree is in `digest()`.
+
+Verify: **PASS**, 60 passed, 0 failed in 662 s (the known OVER BUDGET), on the
+fourth run.
+- **The first run**, with `--accept`, recorded the data hash and failed
+  only perf: the swarm at 9346 us of the 8333 budget.
+- **The next two** failed only on time, and with nothing of 0220 in it:
+  - the swarm reached 13504 us;
+  - `headless_check` and `input_v1` hit verify's 120 s per-script bound.
+  - The machine was shared with other busy applications, and every
+    number grew together - `view_particles`, which nothing here
+    touches, by a third.
+- **Measured alone between runs**, `headless_check` took 91 s and
+  `input_v1` 108 s, both passing.
+- **After a rest the fourth run passed:** `headless_check` 78 s,
+  `input_v1` 102 s, the swarm 6985 us.
+
+**The bound is close.** `SCRIPT_TIMEOUT_S` has been 120 since task 0002,
+and `input_v1` now runs 102 s on a quiet machine. Whether to raise it
+is the owner's call; it is not raised here.
+
+**Tests:**
+- **`_task_0220_tree_seasons` (headless_v1), 13 asserts:**
+  - **The table:**
+    - The tree passes its check.
+    - A fifth season, a need on a later floor, a branch with no summer node,
+      and a later floor that is weaker or pushes the other way are each
+      refused.
+  - **The seasons:** `season_reached` on days 1, 15, 43 and 57.
+  - **The gate:**
+    - A summer node in spring is refused for its season, before its
+      prerequisites and its price, and reads as the season.
+    - It is bought once summer is reached, for its price.
+    - A winter node is bought in Year 2's spring.
+  - **The stacking rule:**
+    - `true sights` with `heavy shot` is 140% in either order, and a tower
+      hits for it.
+    - Selling `heavy shot` back falls to 120%.
+    - Below a hundred the smaller wins (65%), and of two bonuses the
+      bigger (+6).
+- **`headless_check`'s 0063, rewritten in place:**
+  - twelve nodes on spring's floor, and one a branch on every later floor;
+  - one key, one node a floor;
+  - priced against the year (294 against 256, every deep cost inside it),
+    with spring's floor against the ten nights as before;
+  - 17575 asserts.
+- **`_case_0220_tree_pages` (input_v1):**
+  - On Summer 1 the tree opens on summer, with only that floor drawn.
+  - Q turns back to spring, and E forward, with the focus on summer's first
+    node. Enter buys it.
+  - LB and RB turn it, the focus lands on the node still buyable, and A
+    buys it.
+  - Autumn's floor in summer is greyed, with "opens in AUTUMN".
+  - 684 cases.
+- **The shot count is 77 now** (`tech_autumn`).
+
+**Looked at** (`python tools/shot.py 0220 tech tech_autumn --fhd`, and
+`tech_autumn --pt_BR`):
+- **`tech`, Spring 1:**
+  - "< Q SPRING E >" top right;
+  - the twelve nodes in three columns: two bought, three affordable in gold
+    frames, the rest dim;
+  - "2 of 21 nodes, 4 spent - the year pays up to 256, the tree costs 294".
+- **`tech_autumn`, Autumn 2:**
+  - autumn's floor alone: `a full ledger` affordable and focused, `tall
+    mounts` owned in green, `cheap timber` dim (it waits on `brick
+    footings`);
+  - the focused node's tooltip with its price and what it needs.
+- **`tech_autumn_winter`:**
+  - the same tree paged to winter: the season dim, its three nodes dim;
+  - "opens in WINTER" under them, clear of the tooltip.
+- **`tech_autumn-pt_BR`:** TECNOLOGIA, PRODUÇÃO, DEFESA, SOBREVIVÊNCIA,
+  OUTONO, "livro-caixa cheio 27", and "T ou ESC para fechar".
+- **Checked on every picture:** no node cut off and no two labels on top of
+  each other.
+
+Files: src/core/{game_data,tech,calendar}.gd, src/ui/{tech_panel,names}.gd,
+assets/locale/strings.csv, src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+tools/determinism_data_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/0220-tech-by-season.md, implementation/shots/0220/,
+docs/devlog/{index,index.pt_BR}.md

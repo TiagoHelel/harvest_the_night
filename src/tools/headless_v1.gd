@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 67
+const GROUPS := 68
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -136,6 +136,7 @@ func _run() -> void:
 	_task_0195_tips()
 	_task_0218_perf_ground()
 	_task_0219_essence()
+	_task_0220_tree_seasons()
 
 
 func _finish() -> void:
@@ -6659,6 +6660,135 @@ func _essence_night(seed_value: int, night: int) -> Dictionary:
 	state["house_hp"] = Phases.house_full(state)
 	state["breaches"] = 0
 	return state
+
+
+## 0220 - the tree by season: a floor a season, opened when the run reaches
+## it and kept open into Year 2, and a later floor's number the stronger.
+func _task_0220_tree_seasons() -> void:
+	# **The table and its check.**
+	expect(GameData.check_tech_tree(GameData.TECH_TREE).is_empty(), "the tree's floors pass their check",
+		str(GameData.check_tech_tree(GameData.TECH_TREE)))
+	var broken := {}
+	var tree: Array = GameData.TECH_TREE.duplicate(true)
+	var at_heavy := -1
+	var at_sights := -1
+	for i in tree.size():
+		if StringName((tree[i] as Dictionary)["id"]) == &"heavy shot":
+			at_heavy = i
+		if StringName((tree[i] as Dictionary)["id"]) == &"true sights":
+			at_sights = i
+	var fifth: Array = tree.duplicate(true)
+	(fifth[at_heavy] as Dictionary)["season"] = 4
+	broken["a fifth season"] = fifth
+	var backwards: Array = tree.duplicate(true)
+	(backwards[at_sights] as Dictionary)["needs"] = [&"heavy shot"]
+	broken["spring needing summer"] = backwards
+	var bare: Array = tree.duplicate(true)
+	(bare[at_heavy] as Dictionary)["season"] = 2
+	broken["a branch with no summer"] = bare
+	var weaker: Array = tree.duplicate(true)
+	(weaker[at_heavy] as Dictionary)["gives"] = {"tower_damage_percent": 110}
+	broken["a later floor no stronger"] = weaker
+	var opposite: Array = tree.duplicate(true)
+	(opposite[at_heavy] as Dictionary)["gives"] = {"tower_damage_percent": 90}
+	broken["the same number moved the other way"] = opposite
+	var refused: Array = []
+	for why in GameData.sorted_names(broken.keys()):
+		if GameData.check_tech_tree(broken[why]).is_empty():
+			refused.append(why)
+	expect(refused.is_empty(), "and refuses a fifth season, a need on a later floor, a branch missing a floor, "
+		+ "and a later floor that is weaker or pushes the other way", "let through: %s" % str(refused))
+
+	# **The run's seasons**, as `Calendar.season_reached` reads them.
+	var dates := {1: [true, false, false, false], 15: [true, true, false, false],
+		43: [true, true, true, true], 57: [true, true, true, true]}
+	var wrong: Array = []
+	for day in [1, 15, 43, 57]:
+		var on_day := State.create(22000)
+		on_day["day"] = day
+		for season in GameData.SEASONS.size():
+			if Calendar.season_reached(on_day, season) != bool((dates[day] as Array)[season]):
+				wrong.append("day %d season %d" % [day, season])
+	expect(wrong.is_empty(), "a season is reached on its first day and stays reached, every one from Year 2",
+		str(wrong))
+
+	# **A summer node in spring: refused for its season, before its price.**
+	var spring := _tree_day(22001, 9, 0)
+	_own_up_to(spring, &"a standing order")
+	var why_not := Tech.why_not_buy(spring, &"heavy shot")
+	expect(why_not == [&"WHY_NOT_YET_SEASON", &"summer"] and not Tech.buy(spring, &"heavy shot"),
+		"a summer node is refused in spring, for its season", str(why_not))
+	var broke := _tree_day(22002, 9, 0)
+	expect(Tech.why_not_buy(broke, &"heavy shot") == [&"WHY_NOT_YET_SEASON", &"summer"],
+		"and the season is the reason before its prerequisites and its price",
+		str(Tech.why_not_buy(broke, &"heavy shot")))
+	I18n.use("en")
+	expect(Names.refusal(why_not) == I18n.f(&"WHY_NOT_YET_SEASON", [Names.of(&"summer")]),
+		"which reads as the season", Names.refusal(why_not))
+
+	# **Summer reached: it goes in. Year 2's spring: it still does.**
+	var summer := _tree_day(22003, 15, 200)
+	_own_up_to(summer, &"a standing order")
+	var had := Tech.held(summer)
+	expect(Tech.buy(summer, &"heavy shot") and Tech.held(summer) == had - int(Tech.node(&"heavy shot")["cost"]),
+		"bought once summer is reached, for its price", str(Tech.why_not_buy(summer, &"heavy shot")))
+	var year_two := _tree_day(22004, 57, 400)
+	_own_up_to(year_two, &"tall mounts")
+	expect(Calendar.season_of(Calendar.date(year_two)) == 0
+		and Tech.why_not_buy(year_two, &"greased works").is_empty() and Tech.buy(year_two, &"greased works"),
+		"and a winter node is still bought in Year 2's spring", str(Tech.why_not_buy(year_two, &"greased works")))
+
+	# **The stronger wins, whatever the order** - and never the sum.
+	var tower: Dictionary = GameData.DEFENCES[&"gun_tower"]
+	var plain := _tree_day(22005, 15, 0)
+	var first_then_later := _tree_day(22006, 15, 200)
+	_own_up_to(first_then_later, &"heavy shot")
+	var later_first := _tree_day(22007, 15, 0)
+	(later_first["tech_owned"] as Array).assign([&"heavy shot", &"true sights"])
+	var both := Tech.bonus(first_then_later, "tower_damage_percent", 100)
+	expect(both == 140 and Tech.bonus(later_first, "tower_damage_percent", 100) == 140,
+		"owning 'true sights' and 'heavy shot' is 140%, whichever came first", str(both))
+	expect(Towers.damage_of(first_then_later, tower) == int(tower["damage"]) * 140 / 100
+		and Towers.damage_of(first_then_later, tower) > Towers.damage_of(plain, tower),
+		"and a tower hits for it - not for the 168% two fifths on a fifth would be",
+		"%d against %d" % [Towers.damage_of(first_then_later, tower), Towers.damage_of(plain, tower)])
+	Tech.refund(first_then_later, &"heavy shot")
+	expect(Tech.bonus(first_then_later, "tower_damage_percent", 100) == 120,
+		"selling the later back falls to the earlier", str(Tech.bonus(first_then_later, "tower_damage_percent", 100)))
+	var faster := _tree_day(22008, 50, 0)
+	(faster["tech_owned"] as Array).assign([&"oiled works", &"greased works"])
+	var bigger := _tree_day(22009, 50, 0)
+	(bigger["tech_owned"] as Array).assign([&"spare stakes", &"a stake pile"])
+	expect(Tech.bonus(faster, "tower_reload_percent", 100) == 65
+		and Tech.bonus(bigger, "barricade_bonus", 0) == 6,
+		"below a hundred the smaller wins, and of two bonuses the bigger",
+		"%d, %d" % [Tech.bonus(faster, "tower_reload_percent", 100), Tech.bonus(bigger, "barricade_bonus", 0)])
+	expect(Tech.bonus(plain, "tower_damage_percent", 100) == 100,
+		"and nobody owning anything is what the system had")
+	_completed += 1
+
+
+## A day of the run with `essence` in hand.
+func _tree_day(seed_value: int, day: int, essence: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = day
+	if essence > 0:
+		Resources.add(state, GameData.TECH, essence)
+	return state
+
+
+## Own `last` and everything it needs, without paying: written straight into
+## the tree, prerequisites first.
+func _own_up_to(state: Dictionary, last: StringName) -> void:
+	var chain: Array = []
+	var at := last
+	while at != &"":
+		chain.push_front(at)
+		var needs: Array = Tech.node(at)["needs"]
+		at = StringName(needs[0]) if not needs.is_empty() else &""
+	for id in chain:
+		if not Tech.owns(state, id):
+			(state["tech_owned"] as Array).append(id)
 
 
 ## A state at a tip's moment (task 0195), on day two or later: facing open

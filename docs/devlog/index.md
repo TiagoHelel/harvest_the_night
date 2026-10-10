@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-187 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
+188 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -231,10 +231,11 @@ is the sort of thing this list exists to say out loud.
 | 0196 | Checkpoint: is the day good on its own? | 2026-10-10 |
 | 0218 | Room for more fields and more bodies | 2026-10-10 |
 | 0219 | Essence | 2026-10-10 |
+| 0220 | The technology tree by season | 2026-10-10 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 84 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 85 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -320,6 +321,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Teaching the new day** (0195) - `data` 1216212477 -> 2340919704
 - **Essence** (0219) - `sim` 3391018212 -> 3849555693
 - **Essence** (0219) - `data` 2340919704 -> 3664563880
+- **The technology tree by season** (0220) - `data` 3664563880 -> 3553624604
 
 ## What went wrong
 

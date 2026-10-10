@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-187 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+188 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -230,10 +230,11 @@ voz alta.
 | 0196 | Checkpoint: is the day good on its own? | 2026-10-10 |
 | 0218 | Room for more fields and more bodies | 2026-10-10 |
 | 0219 | Essence | 2026-10-10 |
+| 0220 | The technology tree by season | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 84 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 85 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -319,6 +320,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Teaching the new day** (0195) - `data` 1216212477 -> 2340919704
 - **Essence** (0219) - `sim` 3391018212 -> 3849555693
 - **Essence** (0219) - `data` 2340919704 -> 3664563880
+- **The technology tree by season** (0220) - `data` 3664563880 -> 3553624604
 
 ## O que deu errado
 

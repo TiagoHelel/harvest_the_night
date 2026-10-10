@@ -106,6 +106,7 @@ const SCENARIOS: Array = [
 	["full_moon", "the same wave on day 7, under a Full Moon", ""],
 	["result", "the night's result", "ResultScreen"],
 	["tech", "the tech tree", "TechPanel"],
+	["tech_autumn", "the tech tree on Autumn 2, on its own floor: a node bought, one affordable, one waiting on another; then winter's floor, greyed", "TechPanel:autumn"],
 	["pause", "the pause menu", "PauseMenu"],
 	["options_access", "the access tab", "OptionsScreen:access"],
 	["options_video", "the video tab", "OptionsScreen:video"],
@@ -721,6 +722,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"full_moon": _set_full_moon(state)
 		"result": _set_result(state)
 		"tech": _set_tech(state)
+		"tech_autumn": _set_tech_autumn(state)
 		"pause": _set_pause(state)
 		"options_access": _set_options_access(state)
 		"options_video": _set_options_video(state)
@@ -898,6 +900,16 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "days":
 		await _shoot("days_spring_morning", folder)
 		await _take_days(main, state, folder)
+		return
+	if name == "tech_autumn":
+		await _shoot("tech_autumn", folder)
+		# **And winter's floor from autumn** (task 0220): greyed, with the
+		# season it waits for under it.
+		(main.get_node("%TechPanel") as TechPanel).show_page(3)
+		for _i in 3:
+			await process_frame
+		await RenderingServer.frame_post_draw
+		await _shoot("tech_autumn_winter", folder)
 		return
 	if name == "inventory_crops":
 		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
@@ -2330,6 +2342,22 @@ func _set_tech(state: Dictionary) -> void:
 	for id in [&"sharp tools", &"true sights"]:
 		if not Tech.buy(state, id):
 			push_warning("shot: could not buy %s" % id)
+	Sim.advance(state, 2)
+
+
+## **The tree in autumn** (task 0220): Autumn 2, so the panel opens on
+## autumn's floor. Spring's floor and two of summer's are owned, and so is
+## autumn's defence; the essence buys the production node, and the survival
+## one waits on the summer node it needs.
+func _set_tech_autumn(state: Dictionary) -> void:
+	_a_sown_field(state)
+	_on_date(state, 2 * GameData.SEASON_DAYS + 2)
+	for row in GameData.TECH_TREE:
+		if int((row as Dictionary)["season"]) == 0:
+			(state["tech_owned"] as Array).append((row as Dictionary)["id"])
+	for id in [&"keen edges", &"heavy shot", &"tall mounts"]:
+		(state["tech_owned"] as Array).append(id)
+	Resources.gain(state, {GameData.TECH: 30})
 	Sim.advance(state, 2)
 
 

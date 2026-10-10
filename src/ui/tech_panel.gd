@@ -1,12 +1,18 @@
 class_name TechPanel
 extends Control
 
-## The tech tree, on one screen.
+## The tech tree, a floor a page.
 ##
 ## `design.md` section 12 wants somewhere to spend technology and is explicit
 ## that the MVP does not get a giant tree. Twelve nodes in three branches of
 ## four, drawn as three columns, so the whole thing is visible at once and a
 ## player can see what they are giving up as well as what they are taking.
+##
+## **A page a season since task 0220.** Spring's floor is those twelve; summer,
+## autumn and winter add a row each. The panel opens on today's season and
+## turns a page with Q and E - LB and RB on a pad, the arrows by mouse - the
+## inventory's own page keys. A season the run has not reached is drawn
+## greyed, with the reason under it.
 ##
 ## **It reads `Tech` and nothing else.** Which nodes exist, what they cost,
 ## what they need and whether one can be bought today are all questions with
@@ -20,7 +26,7 @@ extends Control
 ## that corner is not hit-testable. Panels that are clicked go after it.
 
 
-## A node's button. Four across, three down, and the whole tree on one screen.
+## A node's button. Three across, four down, and a floor on one screen.
 const NODE_SIZE := Vector2(148, 30)
 
 var _state: Dictionary = {}
@@ -30,6 +36,17 @@ var _reason: Label
 var _note: Label
 var _buttons: Dictionary = {}       # id -> Button
 var _drawn_for := -1
+## **The floor on screen** (task 0220): 0 for spring to 3 for winter.
+var _page := 0
+var _previous: Button
+var _next: Button
+var _season: Label
+var _locked: Label
+## The words set once at `_ready` - the title, the branches, the hint -
+## written again on every redraw, so a language chosen later reaches them.
+var _heading: Label
+var _hint: Label
+var _branch_titles: Dictionary = {}     # branch -> Label
 
 
 func _ready() -> void:
@@ -56,8 +73,8 @@ func _ready() -> void:
 	_frame.size = Vector2(464, 216)
 	add_child(_frame)
 
-	var heading := _label("TechHeading", Vector2(8, 4), UiKit.WARM)
-	heading.text = I18n.t(&"TECH_TITLE")
+	_heading = _label("TechHeading", Vector2(8, 4), UiKit.WARM)
+	_heading.text = I18n.t(&"TECH_TITLE")
 	var icon := TextureRect.new()
 	icon.texture = UiKit.icon(GameData.TECH,true)
 	icon.position = Vector2(120,4)
@@ -73,8 +90,20 @@ func _ready() -> void:
 	# room for a sentence. The buttons are too narrow for one.
 	_note = _label("TechNote", Vector2(8, 172), UiKit.WARM)
 
-	var hint := _label("TechHint", Vector2(300, 4), UiKit.DIM)
-	hint.text = I18n.t(&"TECH_HINT")
+	_hint = _label("TechHint", Vector2(8, 200), UiKit.DIM)
+	_hint.text = I18n.t(&"TECH_HINT")
+
+	# **The seasons' pages**, top right: the inventory's page buttons, read
+	# off the same bindings, and the season between them.
+	_previous = _page_button("TechPrevious", Vector2(286, 2), -1)
+	_next = _page_button("TechNext", Vector2(416, 2), 1)
+	_season = _label("TechSeason", Vector2(330, 4), UiKit.WARM)
+	_season.size = Vector2(84, 11)
+	_season.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	# Why an unreached floor is greyed: low on the frame, above the note,
+	# where the focused node's tooltip - which opens under the row - does
+	# not cover it.
+	_locked = _label("TechSeasonLocked", Vector2(8, 158), UiKit.DIM)
 
 	_build_nodes()
 
@@ -86,30 +115,54 @@ func _build_nodes() -> void:
 		var at := Vector2(6 + column * 152.0, 22.0)
 		var title := _label("TechBranch_" + str(branch), at, UiKit.WARM)
 		title.text = Names.of(branch)
-		var row := 0
-		for entry in Tech.nodes_of(branch):
-			var one: Dictionary = entry
-			var id: StringName = one["id"]
-			var button := Button.new()
-			button.name = "Tech_" + str(id).replace(" ", "_")
-			Tooltip.describes(button, StringName("tech:%s" % id))
-			button.focus_mode = Control.FOCUS_ALL
-			# **Clipped, and the note lives elsewhere.** A `Button` sizes
-			# itself to its text whatever `custom_minimum_size` says, so "the
-			# flare comes back in a little over half the time" made a button a
-			# hundred and ninety-three pixels wide and pushed the third column
-			# off a four-hundred-and-eighty pixel screen. The fifth of this
-			# family after tasks 0032, 0040, 0055 and 0061, and `input_check`
-			# asserts every node is on the screen now.
-			button.clip_text = true
-			button.autowrap_mode = TextServer.AUTOWRAP_OFF
-			_frame.add_child(button)
-			button.position = at + Vector2(0, 14 + row * 34.0)
-			button.size = NODE_SIZE
-			button.custom_minimum_size = NODE_SIZE
-			button.pressed.connect(_buy.bind(id))
-			_buttons[id] = button
-			row += 1
+		_branch_titles[branch] = title
+		# **Each floor from the top of the column** (task 0220): a later
+		# floor's node sits where spring's first does, one floor shown.
+		for season in GameData.SEASONS.size():
+			_build_floor(branch, season, at)
+
+
+func _build_floor(branch: StringName, season: int, at: Vector2) -> void:
+	var row := 0
+	for entry in Tech.floor_of(branch, season):
+		var one: Dictionary = entry
+		var id: StringName = one["id"]
+		var button := Button.new()
+		button.name = "Tech_" + str(id).replace(" ", "_")
+		Tooltip.describes(button, StringName("tech:%s" % id))
+		button.focus_mode = Control.FOCUS_ALL
+		# **Clipped, and the note lives elsewhere.** A `Button` sizes
+		# itself to its text whatever `custom_minimum_size` says, so "the
+		# flare comes back in a little over half the time" made a button a
+		# hundred and ninety-three pixels wide and pushed the third column
+		# off a four-hundred-and-eighty pixel screen. The fifth of this
+		# family after tasks 0032, 0040, 0055 and 0061, and `input_check`
+		# asserts every node is on the screen now.
+		button.clip_text = true
+		button.autowrap_mode = TextServer.AUTOWRAP_OFF
+		_frame.add_child(button)
+		button.position = at + Vector2(0, 14 + row * 34.0)
+		button.size = NODE_SIZE
+		button.custom_minimum_size = NODE_SIZE
+		button.pressed.connect(_buy.bind(id))
+		button.visible = season == _page
+		_buttons[id] = button
+		row += 1
+
+
+## A page button: the inventory's look, never in the focus chain - the
+## arrow keys and the D-pad walk the nodes, Q and E turn the page.
+func _page_button(node_name: String, at: Vector2, step: int) -> Button:
+	var button := Button.new()
+	button.name = node_name
+	button.theme_type_variation = UiKit.ROW
+	button.focus_mode = Control.FOCUS_NONE
+	button.position = at
+	button.size = Vector2(40, 14)
+	button.custom_minimum_size = Vector2(40, 14)
+	button.pressed.connect(func() -> void: turn_page(step))
+	_frame.add_child(button)
+	return button
 
 
 func _label(node_name: String, at: Vector2,
@@ -138,7 +191,77 @@ func open() -> void:
 	if _state.is_empty() or int(_state["phase"]) != Phases.DAY:
 		return
 	visible = true
+	# Today's floor first: the newest the run can buy from.
+	show_page(Calendar.season_of(Calendar.date(_state)))
+
+
+## **Turn the floor** by `step` seasons, round the year (task 0220).
+func turn_page(step: int) -> void:
+	show_page(posmod(_page + step, GameData.SEASONS.size()))
+
+
+## Which floor is on screen, for the checks.
+func page() -> int:
+	return _page
+
+
+## A season's floor by its name: the shot tool's `TechPanel:autumn`.
+func show_tab(season: StringName) -> void:
+	var at := GameData.SEASONS.find(season)
+	if at >= 0:
+		show_page(at)
+
+
+## Put a floor on screen, its nodes and nothing else, and the keyboard's
+## focus on the first of them it can buy - so a pad pages and buys.
+func show_page(season: int) -> void:
+	_page = clampi(season, 0, GameData.SEASONS.size() - 1)
+	for id in _buttons:
+		(_buttons[id] as Button).visible = int(Tech.node(StringName(id)).get("season", 0)) == _page
 	_drawn_for = -1
+	if not _state.is_empty():
+		_refresh()
+	if visible:
+		_focus_first()
+
+
+func _focus_first() -> void:
+	var first: Button = null
+	for row in GameData.TECH_TREE:
+		var button: Button = _buttons.get(StringName((row as Dictionary)["id"]), null)
+		if button == null or not button.visible:
+			continue
+		if first == null:
+			first = button
+		if not button.disabled:
+			button.grab_focus()
+			return
+	if first != null:
+		first.grab_focus()
+
+
+# **Q and E turn the page while the tree is up**, LB and RB on a pad - the
+# inventory's own page keys - taken before the hotbar sees them.
+func _input(event: InputEvent) -> void:
+	if not visible or _state.is_empty():
+		return
+	if event.is_action_pressed(&"hotbar_prev") or event.is_action_pressed(&"hotbar_next"):
+		# Let the shared tracker see the device in hand, as the inventory does.
+		var actions := get_tree().root.get_node_or_null("Actions")
+		if actions != null:
+			actions._input(event)
+		turn_page(-1 if event.is_action_pressed(&"hotbar_prev") else 1)
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed(&"interact"):
+		# **A buys the node the pad is on.** Godot's own `ui_accept` is Enter
+		# and Space and no pad button at all, so the confirm is read here, as
+		# the night HUD reads it - once, for every device - and goes no
+		# further.
+		var on := get_viewport().gui_get_focus_owner() as Button
+		if on != null and _buttons.values().has(on):
+			if not on.disabled:
+				on.pressed.emit()
+			get_viewport().set_input_as_handled()
 
 
 func close() -> void:
@@ -171,7 +294,7 @@ func _process(_delta: float) -> void:
 
 	# Redrawn when something changed, not every frame: twelve buttons of text
 	# rebuilt sixty times a second is sixty times the work for one picture.
-	var signature := Tech.held(_state) * 100 + Tech.owned(_state).size()
+	var signature := Tech.held(_state) * 1000 + Tech.owned(_state).size() * 10 + _page
 	if signature != _drawn_for:
 		_drawn_for = signature
 		_refresh()
@@ -182,7 +305,7 @@ func _process(_delta: float) -> void:
 func _show_the_note() -> void:
 	for id in _buttons:
 		var button: Button = _buttons[id]
-		if button.get_global_rect().has_point(get_global_mouse_position()):
+		if button.visible and button.get_global_rect().has_point(get_global_mouse_position()):
 			_note.text = I18n.f(&"TECH_NOTE", [Names.of(StringName(id)),
 				Names.note_of(StringName(id))])
 			return
@@ -198,6 +321,21 @@ func _refresh() -> void:
 		Tech.owned(_state).size(), Tech.tree().size(), spent,
 		Tech.total_available(), _whole_tree()])
 
+	_heading.text = I18n.t(&"TECH_TITLE")
+	_hint.text = I18n.t(&"TECH_HINT")
+	for branch in _branch_titles:
+		(_branch_titles[branch] as Label).text = Names.of(StringName(branch))
+
+	# **The floor on screen**, and why it is greyed if it is.
+	var season := StringName(GameData.SEASONS[_page])
+	_season.text = Names.of(season)
+	_previous.text = I18n.f(&"INV_PREVIOUS", [_binding(&"hotbar_prev")])
+	_next.text = I18n.f(&"INV_NEXT", [_binding(&"hotbar_next")])
+	var reached := Calendar.season_reached(_state, _page)
+	_season.theme_type_variation = UiKit.WARM if reached else UiKit.DIM
+	_locked.visible = not reached
+	_locked.text = "" if reached else Names.refusal([&"WHY_NOT_YET_SEASON", season])
+
 	for id in _buttons:
 		var one := Tech.node(StringName(id))
 		var button: Button = _buttons[id]
@@ -207,8 +345,9 @@ func _refresh() -> void:
 			[Names.of(StringName(id)), int(one["cost"])])
 		button.disabled = mine or not refused.is_empty()
 		var note := Names.note_of(StringName(id))
+		# The refusal in words: it was printed as the raw `[key, ...]`.
 		button.tooltip_text = note if mine or refused.is_empty() \
-			else I18n.f(&"TECH_REFUSED", [note, refused])
+			else I18n.f(&"TECH_REFUSED", [note, Names.refusal(refused)])
 		# **Disabled says it once.** A locked node is already `disabled`, so
 		# the theme is drawing it in the dull frame with faint letters; the
 		# `modulate` that used to be here multiplied that by a dim colour
@@ -216,6 +355,11 @@ func _refresh() -> void:
 		# disabled button with green letters, which is the only difference
 		# that needs saying.
 		button.theme_type_variation = UiKit.OWNED if mine else &""
+
+
+func _binding(action: StringName) -> String:
+	var actions := get_tree().root.get_node_or_null("Actions")
+	return str(actions.text_of(action)) if actions != null else ""
 
 
 func _whole_tree() -> int:

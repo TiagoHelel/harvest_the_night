@@ -2599,22 +2599,39 @@ const TOWER_LEVELS: Dictionary = {
 const TOP_TOWER_LEVEL := 3
 
 
-## The tech tree: twelve nodes, three branches, four deep.
+## The tech tree: three branches, a floor a season.
 ##
 ## `design.md` section 12 wants somewhere to spend technology and is explicit
-## that the MVP does **not** get a giant tree. Twelve fits on one screen, and
-## the shape - three branches of four - is what makes the choice legible: a
-## player can see the whole thing and still not have it.
+## that the MVP does **not** get a giant tree. Spring's floor is the twelve
+## nodes the MVP had - three branches of four, on one screen - and the shape
+## is what makes the choice legible: a player can see the whole thing and
+## still not have it.
 ##
-## ## Priced against the ten nights
+## ## A floor a season (task 0220, plan section 7)
 ##
-## A run pays 10 technology at worst and 40 at best (`Tech.total_available()`).
-## A branch costs 2 + 3 + 4 + 6 = 15, so all three cost 45 - **more than the
-## best run earns**. That is the point: every node is reachable inside ten
-## nights and not all of them are, which is the done-when.
+## Summer, autumn and winter each add a node to every branch, so a season's
+## essence buys something the season before could not, and the tree grows
+## with the year rather than being done in the first fortnight. `season` is
+## the floor (0 spring to 3 winter); a floor opens when the run reaches its
+## season (`Calendar.season_reached`) and stays open - in Year 2's spring too.
+## Each later node needs the floor below it in its branch, so a branch is a
+## chain of seven.
 ##
-## A good run takes two branches and the shallow end of the third. A bad run
-## takes four or five shallow nodes and feels it.
+## **A later floor strengthens a number an earlier one gave**, and the
+## stronger wins (`Tech.bonus`): owning both is owning the later.
+##
+## ## Priced against the year
+##
+## A year pays 64 essence at worst and 256 at best (`Tech.total_available()`,
+## a Full Moon's share included). The tree costs 294:
+## - spring's floor 45, as before: each branch 2 + 3 + 4 + 6;
+## - summer's 3 x 16, autumn's 3 x 27 and winter's 3 x 40.
+##
+## That is **more than the best year earns** by about a seventh, and the
+## dearest node with everything under it - a winter one - is 15 + 16 + 27 +
+## 40 = 98, well inside it. Every node is reachable in a year and not all of
+## them are. Spring alone is still the old sum: a branch, 15, fits ten nights'
+## 44 and three of them do not.
 ##
 ## ## The effect is a number the rules already read
 ##
@@ -2624,46 +2641,78 @@ const TOP_TOWER_LEVEL := 3
 ## plus one `Tech.bonus()` call wherever it belongs.
 const TECH_TREE: Array = [
 	# ---------------------------------------------------------- production
-	{"id": &"sharp tools", "branch": &"production", "cost": 2, "needs": [],
+	{"id": &"sharp tools", "branch": &"production", "season": 0, "cost": 2, "needs": [],
 		"gives": {"gather_percent": 110},
 		"note": "chopping and mining speed +10%"},
-	{"id": &"full cans", "branch": &"production", "cost": 3,
+	{"id": &"full cans", "branch": &"production", "season": 0, "cost": 3,
 		"needs": [&"sharp tools"], "gives": {"water_can_bonus": 2},
 		"note": "the watering can holds two more"},
-	{"id": &"steady hands", "branch": &"production", "cost": 4,
+	{"id": &"steady hands", "branch": &"production", "season": 0, "cost": 4,
 		"needs": [&"full cans"], "gives": {"craft_percent": 135},
 		"note": "the workshop, press and kitchen work a third faster"},
-	{"id": &"a name at market", "branch": &"production", "cost": 6,
+	{"id": &"a name at market", "branch": &"production", "season": 0, "cost": 6,
 		"needs": [&"steady hands"], "gives": {"sell_percent": 125},
 		"note": "everything you sell fetches a quarter more"},
+	# Task 0220's floors: each a stronger `sharp tools`, `a name at market`
+	# and `steady hands`.
+	{"id": &"keen edges", "branch": &"production", "season": 1, "cost": 16,   # LEVER: essence, 10-30
+		"needs": [&"a name at market"], "gives": {"gather_percent": 125},
+		"note": "chopping and mining speed +25%"},
+	{"id": &"a full ledger", "branch": &"production", "season": 2, "cost": 27,   # LEVER: essence, 15-45
+		"needs": [&"keen edges"], "gives": {"sell_percent": 140},
+		"note": "everything you sell fetches two fifths more"},
+	{"id": &"master hands", "branch": &"production", "season": 3, "cost": 40,   # LEVER: essence, 25-60
+		"needs": [&"a full ledger"], "gives": {"craft_percent": 170},
+		"note": "every bench and machine works seven tenths faster"},
 
 	# ------------------------------------------------------------- defence
-	{"id": &"true sights", "branch": &"defence", "cost": 2, "needs": [],
+	{"id": &"true sights", "branch": &"defence", "season": 0, "cost": 2, "needs": [],
 		"gives": {"tower_damage_percent": 120},
 		"note": "every tower hits a fifth harder"},
-	{"id": &"long barrels", "branch": &"defence", "cost": 3,
+	{"id": &"long barrels", "branch": &"defence", "season": 0, "cost": 3,
 		"needs": [&"true sights"], "gives": {"tower_range_bonus": 1},
 		"note": "every tower reaches one tile further"},
-	{"id": &"oiled works", "branch": &"defence", "cost": 4,
+	{"id": &"oiled works", "branch": &"defence", "season": 0, "cost": 4,
 		"needs": [&"long barrels"], "gives": {"tower_reload_percent": 80},
 		"note": "every tower reloads a fifth sooner"},
-	{"id": &"a standing order", "branch": &"defence", "cost": 6,
+	{"id": &"a standing order", "branch": &"defence", "season": 0, "cost": 6,
 		"needs": [&"oiled works"], "gives": {"tower_cost_percent": 75},
 		"note": "towers cost a quarter less to build"},
+	# Each a stronger `true sights`, `long barrels` and `oiled works`.
+	{"id": &"heavy shot", "branch": &"defence", "season": 1, "cost": 16,   # LEVER: essence, 10-30
+		"needs": [&"a standing order"], "gives": {"tower_damage_percent": 140},
+		"note": "every tower hits two fifths harder"},
+	{"id": &"tall mounts", "branch": &"defence", "season": 2, "cost": 27,   # LEVER: essence, 15-45
+		"needs": [&"heavy shot"], "gives": {"tower_range_bonus": 2},
+		"note": "every tower reaches two tiles further"},
+	{"id": &"greased works", "branch": &"defence", "season": 3, "cost": 40,   # LEVER: essence, 25-60
+		"needs": [&"tall mounts"], "gives": {"tower_reload_percent": 65},
+		"note": "every tower reloads a third sooner"},
 
 	# ------------------------------------------------------------ survival
-	{"id": &"stout timbers", "branch": &"survival", "cost": 2, "needs": [],
+	{"id": &"stout timbers", "branch": &"survival", "season": 0, "cost": 2, "needs": [],
 		"gives": {"house_hp_bonus": 40},
 		"note": "the house takes forty more before it falls"},
-	{"id": &"a full larder", "branch": &"survival", "cost": 3,
+	{"id": &"a full larder", "branch": &"survival", "season": 0, "cost": 3,
 		"needs": [&"stout timbers"], "gives": {"repair_percent": 60},
 		"note": "mending costs two fifths less"},
-	{"id": &"spare stakes", "branch": &"survival", "cost": 4,
+	{"id": &"spare stakes", "branch": &"survival", "season": 0, "cost": 4,
 		"needs": [&"a full larder"], "gives": {"barricade_bonus": 3},
 		"note": "three more barricades a night"},
-	{"id": &"a second flare", "branch": &"survival", "cost": 6,
+	{"id": &"a second flare", "branch": &"survival", "season": 0, "cost": 6,
 		"needs": [&"spare stakes"], "gives": {"flare_percent": 55},
 		"note": "the flare comes back in a little over half the time"},
+	# Each a stronger `stout timbers`, `a full larder` and `spare stakes`. The
+	# powers are 0233's, which adds a survival node a season from summer.
+	{"id": &"brick footings", "branch": &"survival", "season": 1, "cost": 16,   # LEVER: essence, 10-30
+		"needs": [&"a second flare"], "gives": {"house_hp_bonus": 80},
+		"note": "the house takes eighty more before it falls"},
+	{"id": &"cheap timber", "branch": &"survival", "season": 2, "cost": 27,   # LEVER: essence, 15-45
+		"needs": [&"brick footings"], "gives": {"repair_percent": 40},
+		"note": "mending costs three fifths less"},
+	{"id": &"a stake pile", "branch": &"survival", "season": 3, "cost": 40,   # LEVER: essence, 25-60
+		"needs": [&"cheap timber"], "gives": {"barricade_bonus": 6},
+		"note": "six more barricades a night"},
 ]
 
 ## What refunding a node costs, as a percentage of what it cost to buy. **Not
@@ -2911,6 +2960,7 @@ const MAP_SITES: Dictionary = {
 static func validate() -> Array:
 	var errors: Array = []
 	errors.append_array(check_rewards(REWARDS))
+	errors.append_array(check_tech_tree(TECH_TREE))
 	errors.append_array(check_crops(CROPS))
 	errors.append_array(check_gathering(GATHERING))
 	errors.append_array(check_recipes(RECIPES))
@@ -4432,6 +4482,66 @@ static func check_tutorial(steps: Array) -> Array:
 ## **The tips' table** (task 0195): each tip once, with a line that is a
 ## `TIP_` key - its words are `tools/i18n_check.py`'s to measure, as the
 ## tutorial's are - and a short one. The display times run in order.
+## **The tree's floors hold together** (task 0220):
+## - every `season` is a season, 0 to 3;
+## - a node never needs one from a later floor;
+## - every branch has a node on every floor;
+## - every number a node gives is a `_percent` (none is 100) or a `_bonus`
+##   (none is 0);
+## - a number given on two floors moves the same way on both, and the later
+##   floor's is the stronger - which is what lets `Tech.bonus` take the
+##   stronger and mean the later.
+static func check_tech_tree(tree: Array) -> Array:
+	var errors: Array = []
+	var season_of := {}
+	var floors := {}
+	for row in tree:
+		var one: Dictionary = row
+		var season := int(one.get("season", -1))
+		if season < 0 or season >= SEASONS.size():
+			errors.append("tech node '%s' is on floor %d: a season is 0-%d" % [one["id"], season, SEASONS.size() - 1])
+		season_of[StringName(one["id"])] = season
+		var mine: Array = floors.get(StringName(one["branch"]), [])
+		if not mine.has(season):
+			mine.append(season)
+		floors[StringName(one["branch"])] = mine
+	for row in tree:
+		var one: Dictionary = row
+		for needed in (one["needs"] as Array):
+			if int(season_of.get(StringName(needed), -1)) > int(one.get("season", -1)):
+				errors.append("tech node '%s' needs '%s', which is on a later floor" % [one["id"], needed])
+	for branch in sorted_names(floors.keys()):
+		for season in SEASONS.size():
+			if not (floors[branch] as Array).has(season):
+				errors.append("the %s branch has nothing on the %s floor" % [branch, SEASONS[season]])
+	# The numbers, floor by floor: one key's values all on one side of
+	# having none, and each later floor's farther out.
+	var given := {}
+	for row in tree:
+		var one: Dictionary = row
+		for key in sorted_names((one["gives"] as Dictionary).keys()):
+			var neutral := 100 if String(key).ends_with("_percent") else 0
+			if not String(key).ends_with("_percent") and not String(key).ends_with("_bonus"):
+				errors.append("tech node '%s' gives '%s': a number is a _percent or a _bonus" % [one["id"], key])
+				continue
+			var value := int(one["gives"][key])
+			if value == neutral:
+				errors.append("tech node '%s' gives '%s' %d, which is having none" % [one["id"], key, value])
+				continue
+			var earlier: Array = given.get(key, [])
+			for seen in earlier:
+				var was: Array = seen
+				if (value > neutral) != (int(was[1]) > neutral):
+					errors.append("'%s' and '%s' move '%s' opposite ways" % [was[0], one["id"], key])
+				elif int(was[2]) >= int(one.get("season", 0)):
+					errors.append("'%s' and '%s' give '%s' on the same floor" % [was[0], one["id"], key])
+				elif absi(value - neutral) <= absi(int(was[1]) - neutral):
+					errors.append("'%s' gives '%s' no stronger than '%s' on an earlier floor" % [one["id"], key, was[0]])
+			earlier.append([one["id"], value, int(one.get("season", 0))])
+			given[key] = earlier
+	return errors
+
+
 ## **The night's purse and its essence** (task 0219): a Full Moon never pays
 ## less essence than an ordinary night, and the bounty is a share of the
 ## kills' worth between none of it and all of it.

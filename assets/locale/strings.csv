@@ -485,6 +485,15 @@ STATS_TITLE,0,RECORDS,REGISTROS
 TECHNOTE_A_FULL_LARDER,0,mending costs two fifths less,consertar custa dois quintos a menos
 TECHNOTE_A_NAME_AT_MARKET,0,everything you sell fetches a quarter more,tudo que você vende rende um quarto a mais
 TECHNOTE_A_SECOND_FLARE,0,the flare comes back in a little over half the time,o sinalizador volta em pouco mais da metade do tempo
+TECHNOTE_KEEN_EDGES,0,chopping and mining speed +25%,velocidade para cortar e minerar +25%
+TECHNOTE_A_FULL_LEDGER,0,everything you sell fetches two fifths more,tudo que você vende rende dois quintos a mais
+TECHNOTE_MASTER_HANDS,0,every bench and machine works seven tenths faster,toda bancada e máquina trabalha sete décimos mais rápido
+TECHNOTE_HEAVY_SHOT,0,every tower hits two fifths harder,toda torre bate dois quintos mais forte
+TECHNOTE_TALL_MOUNTS,0,every tower reaches two tiles further,toda torre alcança dois ladrilhos a mais
+TECHNOTE_GREASED_WORKS,0,every tower reloads a third sooner,toda torre recarrega um terço mais rápido
+TECHNOTE_BRICK_FOOTINGS,0,the house takes eighty more before it falls,a casa aguenta oitenta a mais antes de cair
+TECHNOTE_CHEAP_TIMBER,0,mending costs three fifths less,consertar custa três quintos a menos
+TECHNOTE_A_STAKE_PILE,0,six more barricades a night,mais seis barricadas por noite
 TECHNOTE_A_STANDING_ORDER,0,towers cost a quarter less to build,as torres custam um quarto a menos
 TECHNOTE_FULL_CANS,0,the watering can holds two more,o regador leva dois a mais
 TECHNOTE_LONG_BARRELS,0,every tower reaches one tile further,toda torre alcança um ladrilho a mais
@@ -497,6 +506,15 @@ TECHNOTE_TRUE_SIGHTS,0,every tower hits a fifth harder,toda torre bate um quinto
 TECH_A_FULL_LARDER,0,a full larder,despensa cheia
 TECH_A_NAME_AT_MARKET,0,a name at market,nome na feira
 TECH_A_SECOND_FLARE,0,a second flare,um segundo sinalizador
+TECH_KEEN_EDGES,0,keen edges,gumes afiados
+TECH_A_FULL_LEDGER,0,a full ledger,livro-caixa cheio
+TECH_MASTER_HANDS,0,master hands,mãos de mestre
+TECH_HEAVY_SHOT,0,heavy shot,tiro pesado
+TECH_TALL_MOUNTS,0,tall mounts,bases altas
+TECH_GREASED_WORKS,0,greased works,engrenagem engraxada
+TECH_BRICK_FOOTINGS,0,brick footings,base de tijolo
+TECH_CHEAP_TIMBER,0,cheap timber,madeira barata
+TECH_A_STAKE_PILE,0,a stake pile,pilha de estacas
 TECH_A_STANDING_ORDER,0,a standing order,encomenda fixa
 TECH_BRANCH_DEFENCE,0,DEFENCE,DEFESA
 TECH_BRANCH_PRODUCTION,0,PRODUCTION,PRODUÇÃO
@@ -557,6 +575,7 @@ WHY_COSTS,228,"costs %d, and you have %d","custa %d, e você tem %d"
 WHY_HOUSE_LOW,228,the house is at %d%% - watch this one,a casa está em %d%% - assista essa
 WHY_IN_THE_WATER,228,in the water,na água
 WHY_NEEDS_NODE,228,needs %s first,precisa de %s antes
+WHY_NOT_YET_SEASON,228,opens in %s,abre no %s
 WHY_NEEDS_TECH,228,needs %s from the tree,precisa de %s na árvore
 WHY_NIGHT_LIMIT,228,"%d a night, and that was the last","%d por noite, e essa foi a última"
 WHY_NOTHING_SELECTED,228,nothing selected,nada selecionado

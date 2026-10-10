@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 45
+const V1_CASES := 46
 
 
 func _process(delta: float) -> bool:
@@ -95,6 +95,7 @@ func _run() -> void:
 	await _case_0190_peddler()
 	await _case_0191_house()
 	await _case_0195_tips()
+	await _case_0220_tree_pages()
 	_finish()
 
 
@@ -3181,3 +3182,78 @@ func _case_0195_tips() -> void:
 	expect(not tips.visible, "and once the fish is in, the tip is gone")
 	await close_scene()
 	_completed += 1
+
+
+## 0220 - the tree a floor a page: on a summer day it opens on summer, Q
+## and E turn it, and a summer node is bought from the keyboard; LB and RB
+## turn it on a pad, and A buys another.
+func _case_0220_tree_pages() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel: TechPanel = require_control("TechPanel")
+	if driver == null or panel == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(3)
+	# Summer reached, the spring chains under the two summer nodes owned,
+	# and the essence for both.
+	state["day"] = 15
+	Resources.gain(state, {GameData.TECH: 100})
+	for id in [&"sharp tools", &"full cans", &"steady hands", &"a name at market",
+			&"true sights", &"long barrels", &"oiled works", &"a standing order"]:
+		(state["tech_owned"] as Array).append(id)
+	await tap_key(KEY_T)
+	await until(func() -> bool: return panel.is_open(), "the tree to open")
+	var keen: Button = locate_control("Tech_keen_edges") as Button
+	var sights: Button = locate_control("Tech_true_sights") as Button
+	expect(panel.page() == 1 and keen != null and keen.is_visible_in_tree()
+		and sights != null and not sights.is_visible_in_tree(),
+		"on a summer day the tree opens on summer's floor, and only that floor is drawn",
+		"page %d" % panel.page())
+
+	# **The keyboard**: Q back to spring, E forward to summer, Enter buys.
+	await tap_key(KEY_Q)
+	await frames(2)
+	expect(panel.page() == 0 and sights.is_visible_in_tree() and not keen.is_visible_in_tree(),
+		"Q turns back to spring", "page %d" % panel.page())
+	await tap_key(KEY_E)
+	await frames(2)
+	expect(panel.page() == 1 and keen.is_visible_in_tree() and keen.has_focus(),
+		"E turns to summer, its first node under the keyboard",
+		"page %d, focus on %s" % [panel.page(), str(get_root_focus())])
+	await tap_key(KEY_ENTER)
+	await until(func() -> bool: return Tech.owns(state, &"keen edges"), "the node to be bought", 60)
+	expect(Tech.owns(state, &"keen edges"), "and Enter buys it")
+
+	# **The pad**: LB and RB turn the page, A buys the next one it can.
+	await _pad_tap(JOY_BUTTON_LEFT_SHOULDER)
+	await frames(2)
+	expect(panel.page() == 0, "LB turns back to spring", "page %d" % panel.page())
+	await _pad_tap(JOY_BUTTON_RIGHT_SHOULDER)
+	await frames(2)
+	var heavy: Button = locate_control("Tech_heavy_shot") as Button
+	expect(panel.page() == 1 and heavy != null and heavy.has_focus(),
+		"RB turns to summer, the focus on the node it can still buy",
+		"page %d" % panel.page())
+	await _pad_tap(JOY_BUTTON_A)
+	await until(func() -> bool: return Tech.owns(state, &"heavy shot"), "the pad's node to be bought", 60)
+	expect(Tech.owns(state, &"heavy shot"), "and A buys it")
+
+	# **A floor not yet reached is greyed, and says why.**
+	await tap_key(KEY_E)
+	await frames(2)
+	var locked: Label = locate_control("TechSeasonLocked") as Label
+	var ledger: Button = locate_control("Tech_a_full_ledger") as Button
+	expect(panel.page() == 2 and locked != null and locked.is_visible_in_tree()
+		and locked.text == Names.refusal([&"WHY_NOT_YET_SEASON", &"autumn"])
+		and ledger != null and ledger.disabled,
+		"autumn's floor in summer is greyed, with the season it waits for",
+		locked.text if locked != null else "none")
+	await close_scene()
+	_completed += 1
+
+
+func get_root_focus() -> Control:
+	return root.gui_get_focus_owner()

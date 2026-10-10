@@ -107,6 +107,15 @@ static func branches() -> Array:
 	return out
 
 
+## The nodes of one branch and one floor (task 0220), in table order.
+static func floor_of(branch: StringName, season: int) -> Array:
+	var out: Array = []
+	for row in GameData.TECH_TREE:
+		if (row as Dictionary)["branch"] == branch and int((row as Dictionary).get("season", 0)) == season:
+			out.append(row)
+	return out
+
+
 ## The nodes of one branch, cheapest first.
 static func nodes_of(branch: StringName) -> Array:
 	var out: Array = []
@@ -146,6 +155,11 @@ static func why_not_buy(state: Dictionary, id: StringName) -> Array:
 	# made before the night, it is a menu they pause in.
 	if int(state["phase"]) != Phases.DAY:
 		return [&"WHY_AFTER_DARK"]
+	# **A floor opens with its season** (task 0220), and stays open: asked
+	# before what it needs and what it costs, because neither matters yet.
+	var season := int(one.get("season", 0))
+	if not Calendar.season_reached(state, season):
+		return [&"WHY_NOT_YET_SEASON", StringName(GameData.SEASONS[season])]
 	for needed in (one["needs"] as Array):
 		if not owns(state, StringName(needed)):
 			return [&"WHY_NEEDS_NODE", StringName(needed)]
@@ -213,17 +227,30 @@ static func refund(state: Dictionary, id: StringName) -> int:
 ## `tower_damage_percent` is and does not know a tree exists; the tree hands
 ## out numbers and does not know what a tower is. `missing` is what to answer
 ## when nobody has bought anything that touches it, which is almost always.
+##
+## **Two nodes giving one number: the stronger wins** (task 0220). That is
+## the value farthest from `missing` - the bigger bonus, the bigger percent
+## above a hundred, the smaller one below it. A later floor strengthens a
+## number an earlier one gave (`GameData.check_tech_tree` holds it so), so
+## owning both is owning the later, and selling the later back falls to the
+## earlier. They never add up: `true sights` and `heavy shot` are 140, not
+## 168. Asked in table order, so a tie is the earlier row - and there is
+## none, since the check refuses a later floor no stronger.
 static func bonus(state: Dictionary, key: String, missing: int) -> int:
 	if state.is_empty() or not state.has("tech_owned"):
 		return missing
-	for id in (state["tech_owned"] as Array):
-		var one := node(StringName(id))
-		if one.is_empty():
+	var owned: Array = state["tech_owned"]
+	if owned.is_empty():
+		return missing
+	var best := missing
+	for row in GameData.TECH_TREE:
+		var gives: Dictionary = (row as Dictionary)["gives"]
+		if not gives.has(key) or not owned.has((row as Dictionary)["id"]):
 			continue
-		var gives: Dictionary = one["gives"]
-		if gives.has(key):
-			return int(gives[key])
-	return missing
+		var value := int(gives[key])
+		if absi(value - missing) > absi(best - missing):
+			best = value
+	return best
 
 
 # ------------------------------------------------------------------- asking
