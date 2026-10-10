@@ -5447,10 +5447,18 @@ func _task_0034_cooking() -> void:
 	var from_crop := false
 	var from_fish := false
 	var from_meat := false
+	# **Or the bread that goes into it** (task 0192): the kitchen bakes the
+	# mill's flour into loaves, and a dish of its own takes them.
+	var bread_eaten := false
+	for id in kitchen:
+		var dish: Dictionary = GameData.RECIPES[id]
+		if (dish["inputs"] as Dictionary).has(GameData.BREAD) and (dish["output"] as Dictionary).has(GameData.FOOD):
+			bread_eaten = true
 	for id in kitchen:
 		var recipe: Dictionary = GameData.RECIPES[id]
-		expect((recipe["output"] as Dictionary).has(GameData.FOOD),
-			"%s makes food" % id, str(recipe["output"]))
+		var output: Dictionary = recipe["output"]
+		expect(output.has(GameData.FOOD) or (output.has(GameData.BREAD) and bread_eaten),
+			"%s makes food, or the bread a dish takes" % id, str(recipe["output"]))
 		var inputs: Dictionary = recipe["inputs"]
 		for res in GameData.sorted_names(inputs.keys()):
 			if GameData.CROPS.has(res):
@@ -14532,7 +14540,8 @@ func _task_0082_shots() -> void:
 	# 0187: the keg and the jar. Seventy since 0188: the five machines.
 	# Seventy-one since 0189: the shipping bin. Seventy-two since 0190: the
 	# peddler. Seventy-three since 0191: the house in three tiers.
-	expect(names.size() == 73,
+	# Seventy-four since 0192: the kitchen.
+	expect(names.size() == 74,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

@@ -64,6 +64,13 @@ static func buyable(state: Dictionary) -> Array:
 	return out
 
 
+## Whether `id` is one of `buyable(state)`, asked without building the shelf
+## and sorting it (task 0192): a purchase asked it of every row and every
+## packet, and the autoplayer's field asks a packet a plot.
+static func _sells(state: Dictionary, id: StringName) -> bool:
+	return GameData.RESOURCES.has(id) and GameData.on_the_stall(season(state), id)
+
+
 ## The animals the peddler brings, in name order (task 0190).
 static func animals() -> Array:
 	return GameData.sorted_names(GameData.ANIMAL_STOCK.keys())
@@ -271,7 +278,7 @@ static func buy(state: Dictionary, id: StringName, n: int) -> bool:
 		return _buy_animals(state, id, n)
 	if GameData.is_tool_upgrade(id):
 		return n == 1 and _order_upgrade(state, id)
-	if not buyable(state).has(id):
+	if not _sells(state, id):
 		return false
 	# **All or nothing, against the stock as well as the purse.** Buying five
 	# when three are left sells none of them rather than three, the same rule
@@ -305,7 +312,7 @@ static func why_not_buy(state: Dictionary, id: StringName, n: int = 1) -> Array:
 			return [&"WHY_SOLD_OUT"]
 		if Livestock.room_for(state, id) < n:
 			return [&"WHY_NO_HOME", Livestock.home_of(id)]
-	elif not buyable(state).has(id):
+	elif not _sells(state, id):
 		return [&"WHY_SOLD_OUT"]
 	elif stock_of(state, id) < n:
 		return [&"WHY_SOLD_OUT"]

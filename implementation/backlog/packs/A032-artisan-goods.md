@@ -2,7 +2,7 @@
 
 - **Status:** todo
 - **For game task:** 0214
-- **Dressed by game tasks:** 0187, 0188
+- **Dressed by game tasks:** 0187, 0188, 0192
 - **Spec after game task:** 0188
 - **Family:** ui
 - **Mode:** A - raw ImageGen sources, Claude reduces them to the 42-colour palette

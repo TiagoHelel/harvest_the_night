@@ -105,8 +105,17 @@ static func _default_selection() -> Dictionary:
 
 
 ## Whether this is something that makes things.
+##
+## **Asked of every occupant on the farm** - the autoplayer's day, the
+## interact verb - so it does not sort the whole recipe table to answer, as
+## `recipes_at` does: with 0192's four kitchen recipes that sort pushed
+## `headless_check` past verify's limit. The answer is whether any recipe
+## names the station, which the order the table is read in cannot change.
 static func is_station(id: StringName) -> bool:
-	return not recipes_at(id).is_empty()
+	for recipe in GameData.RECIPES.values():
+		if (recipe as Dictionary)["station"] == id:
+			return true
+	return false
 
 
 ## What this station will make next.

@@ -1,7 +1,7 @@
 # 0192 - Cooking with the new harvest
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0188, 0184
 - **Likely files:** src/core/game_data.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd
 

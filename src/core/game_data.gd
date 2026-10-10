@@ -273,6 +273,10 @@ const CLOTH := &"cloth"
 const SANDBAG := &"sandbag"
 const FLOUR := &"flour"
 const SUGAR := &"sugar"
+## **The kitchen's bread** (task 0192; plan section 3.5, "the mill: flour,
+## then bread"): baked from the mill's flour, and the best of what goes into
+## the kitchen's supper.
+const BREAD := &"bread"
 const OIL := &"oil"
 const WHEAT := &"wheat"
 const CORN := &"corn"
@@ -320,7 +324,7 @@ const RESOURCES: Array = [
 	CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
 	OLD_CATFISH, GOLDEN_QUEEN, GHOST_PIKE, ICE_STURGEON,
 	WORM, BAIT, STRAW, HAY, EGG, MILK, WOOL, TRUFFLE,
-	WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, SANDBAG, FLOUR, SUGAR,
+	WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, SANDBAG, FLOUR, SUGAR, BREAD,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
@@ -401,6 +405,9 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	SANDBAG: 8,                      # LEVER: money each, 5-12
 	FLOUR: 7,                        # LEVER: money each, 5-10
 	SUGAR: 5,                        # LEVER: money each, 4-8
+	# A loaf is worth more than its sack of flour (`check_chain`), baked
+	# within the day and under oil (task 0192).
+	BREAD: 11,                       # LEVER: money each, 9-14
 	# **The most valuable thing on the farm to sell, and that is the point.**
 	# Four corn is $20 of crop; pressing it is twenty seconds and turns it into
 	# $26 of oil. So the press pays for itself - and then every drop of it is
@@ -936,20 +943,54 @@ const RECIPES: Dictionary = {
 	&"cook_meal": {
 		"station": &"kitchen",
 		"inputs": {CARROT: 2, WHEAT: 1},
-		"output": {FOOD: 2},
+		"output": {FOOD: 2},            # LEVER: food a batch, 1-3
 		"ticks": DAY_TICKS * 12 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	&"cook_fish": {
 		"station": &"kitchen",
 		"inputs": {FISH: 1, CARROT: 1},
-		"output": {FOOD: 3},
+		"output": {FOOD: 3},            # LEVER: food a batch, 2-4
 		"ticks": DAY_TICKS * 15 / 240,  # LEVER: fraction of a day; preserves daily capacity
 	},
 	&"cook_roast": {
 		"station": &"kitchen",
 		"inputs": {MEAT: 1, CORN: 1},
-		"output": {FOOD: 4},
+		"output": {FOOD: 4},            # LEVER: food a batch, 3-5
 		"ticks": DAY_TICKS * 18 / 240,  # LEVER: fraction of a day; preserves daily capacity
+	},
+	# **The new harvest in the pot** (task 0192): potatoes, eggs, milk and
+	# the mill's flour. A stew is spring's meal without wheat - potato and
+	# carrot, the crops a new farm is given seed for - so the house can be
+	# mended from the first week; `cook_meal`'s wheat is autumn's. The
+	# kitchen bakes flour into bread, and bread goes into supper: the better
+	# the dish, the bigger the batch of food.
+	&"cook_stew": {
+		"station": &"kitchen",
+		"inputs": {POTATO: 1, CARROT: 1},
+		"output": {FOOD: 2},            # LEVER: food a batch, 1-3
+		"ticks": DAY_TICKS * 12 / 240,  # LEVER: fraction of a day
+	},
+	&"cook_omelette": {
+		"station": &"kitchen",
+		"inputs": {EGG: 2, MILK: 1},    # LEVER: eggs and milk a batch
+		"output": {FOOD: 3},            # LEVER: food a batch, 2-4
+		"ticks": DAY_TICKS * 15 / 240,  # LEVER: fraction of a day
+	},
+	# **Not `bake_bread`.** A station's default recipe is the first by name
+	# (`Crafting._default_selection`) and it is what SPACE there makes, so a
+	# bread recipe named to sort first would have the kitchen ask a new farm
+	# for flour. `cook_fish` stays the kitchen's default.
+	&"make_bread": {
+		"station": &"kitchen",
+		"inputs": {FLOUR: 1},           # LEVER: flour a loaf, 1-2
+		"output": {BREAD: 1},
+		"ticks": DAY_TICKS * 8 / 240,   # LEVER: fraction of a day
+	},
+	&"cook_supper": {
+		"station": &"kitchen",
+		"inputs": {BREAD: 1, POTATO: 1, MILK: 1},
+		"output": {FOOD: 6},            # LEVER: food a batch, 4-8 - the kitchen's biggest
+		"ticks": DAY_TICKS * 24 / 240,  # LEVER: fraction of a day
 	},
 	# **Fish scraps into bait** (task 0181), at the workshop beside the other
 	# supplies it makes - the kitchen's recipes are all food (task 0034): any
@@ -1600,7 +1641,7 @@ const RESOURCE_GROUPS: Array = [
 	# cheapest first, and a bait at $2 would be cheaper than any of them.
 	{"name": &"bait", "members": [WORM, BAIT]},
 	{"name": &"animal_goods", "members": [EGG, MILK, WOOL, TRUFFLE, MEAT]},
-	{"name": &"artisan_goods", "members": [FOOD, OIL, WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, FLOUR, SUGAR]},
+	{"name": &"artisan_goods", "members": [FOOD, OIL, WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, FLOUR, SUGAR, BREAD]},
 	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
 	{"name": &"night_leftovers", "members": []},
 	{"name": &"farm", "members": [MONEY, ENERGY, TECH]},
@@ -3288,11 +3329,24 @@ static func check_gathering(nodes: Dictionary) -> Array:
 
 
 ## Decode the output's tool and tier without treating tools as resources.
+##
+## **Read off the id, not built for every tool** (task 0192): an output is
+## `<tool>_<tier name>`, so each underscore is a place the tool's name may
+## end, tried shortest first - which for names that are each other's
+## prefixes is name order, the order the old search took. Formatting every
+## tool's every tier to compare against made `tool_upgrades()` cost the stall
+## a third of a millisecond on every purchase.
 static func tool_output(id: StringName) -> Dictionary:
-	for tool in sorted_names(TOOLS.keys()):
-		for tier in range(1, TOOLS[tool].size()):
-			if id == StringName("%s_%s" % [tool, TOOLS[tool][tier]["name"]]):
-				return {"tool": tool, "tier": tier}
+	var text := String(id)
+	var cut := text.find("_")
+	while cut > 0:
+		var tool := StringName(text.substr(0, cut))
+		if TOOLS.has(tool):
+			var tier_name := text.substr(cut + 1)
+			for tier in range(1, TOOLS[tool].size()):
+				if String(TOOLS[tool][tier]["name"]) == tier_name:
+					return {"tool": tool, "tier": tier}
+		cut = text.find("_", cut + 1)
 	return {}
 
 
@@ -3987,6 +4041,13 @@ static func stall_stock(season: StringName) -> Dictionary:
 	for id in tool_upgrades():
 		out[id] = UPGRADE_STOCK
 	return out
+
+
+## Whether the stall's shelf in this season has this on it, without building
+## the shelf (task 0192): what `stall_stock(season).has(id)` says.
+static func on_the_stall(season: StringName, id: StringName) -> bool:
+	return DAILY_STOCK.has(id) or (SEASON_STOCK.get(season, {}) as Dictionary).has(id) \
+		or ANIMAL_STOCK.has(id) or is_tool_upgrade(id)
 
 
 ## The workshop's tool upgrade recipes, in name order (task 0190).

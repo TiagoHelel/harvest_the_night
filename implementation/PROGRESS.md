@@ -19843,3 +19843,184 @@ assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/A035-house-tiers.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0191-house-tiers.md,
 implementation/shots/0191/, docs/devlog/{index,index.pt_BR}.md
+
+## 0192 - Cooking with the new harvest - done 2026-10-10
+
+What changed: the kitchen cooks the new harvest (plan section 3.5, "the
+mill: flour, then bread"). Spring gets a meal without wheat: a stew of
+potato and carrot, the crops a new farm is given seed for, so the house can
+be mended from the first week (`cook_meal`'s wheat is an autumn crop). Eggs
+and milk make an omelette. The mill's flour is baked into bread, a new
+resource, and bread goes into supper, the kitchen's biggest batch.
+
+**Every kitchen recipe and its margin** (sell prices; `_task_0192_kitchen`
+prints the list, and `check_chain` holds every row):
+
+| Recipe | In | Out | Worth in -> out | Margin | Batches / food a day |
+|---|---|---|---|---|---|
+| `cook_meal` | 2 carrot, 1 wheat | 2 food | $10 -> $24 | +$14 | 20 / 40 |
+| `cook_fish` | 1 fish, 1 carrot | 3 food | $10 -> $36 | +$26 | 16 / 48 |
+| `cook_roast` | 1 meat, 1 corn | 4 food | $14 -> $48 | +$34 | 13 / 52 |
+| `cook_stew` (new) | 1 potato, 1 carrot | 2 food | $11 -> $24 | +$13 | 20 / 40 |
+| `cook_omelette` (new) | 2 egg, 1 milk | 3 food | $17 -> $36 | +$19 | 16 / 48 |
+| `make_bread` (new) | 1 flour | 1 bread | $7 -> $11 | +$4 | 30 / 30 bread |
+| `cook_supper` (new) | 1 bread, 1 potato, 1 milk | 6 food | $28 -> $72 | +$44 | 10 / 60 |
+
+- **Levers:**
+  - every kitchen batch of food is a `# LEVER`, the three old ones
+    included (comments only, the numbers kept);
+  - the new recipes' inputs and fractions of a day;
+  - bread's price, $11 (9-14): above its sack of flour, under oil, and
+    made within the day.
+- **The better the dish, the bigger the batch.** Basic meals are 2, fish
+  and the omelette 3, the roast 4, and supper 6.
+  - Supper, the only dish with bread in it, is asserted to be the kitchen's
+    biggest batch.
+  - At ten batches a day it is also the most food a kitchen makes in a
+    day.
+- **The ids `cook_meal`, `cook_fish` and `cook_roast` are kept.**
+
+**`make_bread`, not `bake_bread`: the kitchen's default is still the fish.**
+- A station's default recipe is the first by name
+  (`Crafting._default_selection`), and nothing changes it: it is what SPACE
+  at the kitchen cooks.
+- `bake_bread`, or `cook_bread`, would sort first. SPACE at a new
+  kitchen would then ask a spring farm for flour.
+- So the bread recipe sorts last and `cook_fish` stays the default
+  (asserted). The prompt's "if a new recipe sorts first" does not happen,
+  and the default does not move SIM.
+
+**Bread:**
+- `BREAD` is in `RESOURCES`, in the artisan goods group, sold at the stall
+  for $11, and called "bread" / "pão".
+- Its icon is A032's `icon_bread` and `hud_bread` through 0120's road,
+  until 0214: the stone's two lumps baked crust-brown, a pair of rolls.
+  `tools/placeholders.py --check`: 357 stand-ins, no problems.
+- A032's "Dressed by game tasks" names 0192. Its Deliverables already
+  listed bread, from 0188.
+
+**The names** (`Names.KEYS` and `REC_*` rows in both languages):
+- "cook stew" / "fazer ensopado";
+- "cook omelette" / "fazer omelete";
+- "bake bread" / "assar pão";
+- "cook supper" / "fazer o jantar".
+
+**An old assert moved on purpose:**
+- `_task_0034_cooking` said every kitchen recipe makes food.
+- It now says every one makes food, or the bread that one of its dishes
+  takes.
+
+**The daily budgets:** `_task_0166_long_day` has the four new recipes'
+batches and units a day, as every recipe timed by the tick must.
+
+**Found and fixed: `headless_check` went past verify's 120 s.**
+- **What happened:**
+  - The first verify reported "hung - it never reached quit()". The suite
+    had run into its 120 s limit.
+  - Timed back to back with output to a file, the 0191 commit and this
+    task took the same 122-123 s. So the suite was already at the edge
+    (117 s in 0191's verify), and this task only tipped it.
+  - Two earlier timings of 177 s were my measurement, not the game: Git
+    Bash's pipe into `grep` is slow with this much output.
+- **Where the time went:**
+  - Timed group by group, the autoplayer's groups (`_task_0067_autoplay`,
+    `_task_0068_balance`) were 75 of the 119 s.
+  - An autoplayed day was 7 s of decisions against 0.8 s of simulation.
+  - Most of it was `_work_the_field` asking the stall for a packet, plot
+    by plot. Every `Shop.buy` built the whole shelf, about 400 us
+    (0190's): `stall_stock`, then `tool_upgrades`. That sorted the recipe
+    table and, for each recipe, `tool_output` formatted every tool's every
+    tier to compare against.
+- **The fixes**, all giving the same answers (asserted; the SIM hash this
+  task recorded did not move with them):
+  - `Shop._sells(state, id)`, through `GameData.on_the_stall(season, id)`:
+    whether the shelf has `id`, without building and sorting it. `buy` and
+    `why_not_buy` ask it.
+  - `GameData.tool_output` reads the tool's name off the id, trying each
+    underscore shortest first, which is the old search's name order.
+  - `Crafting.is_station` answers whether any recipe names the station,
+    without sorting the table the way `recipes_at` does.
+  - Sorting only a station's own recipes in `recipes_at` saved nothing,
+    and was put back.
+- **The result:**
+  - A failed purchase costs 3 us instead of 400.
+  - The field's share of an autoplayed day went from 4.0 s to 0.5 s.
+  - `headless_check` takes 80 s instead of 122 s.
+
+**Found, and left as its own task: the autoplayer works every cell of a
+station.**
+- Crafting jobs are keyed by the exact cell, not the building's anchor, and
+  the robot tries every station cell. When the anchor is busy it starts
+  another job on the next cell.
+- Sampled through three days of seed 6700, the `economy` policy ran 12
+  queues at once on the one workshop, `walls` 5, and `towers` 1.
+- That inflates what the balance checks measure. Fixing it changes their
+  outcomes, so it is a task of its own, not a side effect of this one.
+
+**Not done here:** the kitchen panel's MAKE list prints recipe ids
+(`cook_stew`) rather than their names. It already did, and it was flagged
+as its own task in 0187. The queue line and the tooltips use the names.
+
+### Hashes
+
+- **SIM 3215404367 -> 1851684475, on purpose:** `BREAD` in every state's
+  `held` and `gained`.
+  - The kitchen's default selection did not move; it is still `cook_fish`.
+  - The speedups above did not move it either: the second verify, without
+    `--accept`, reproduced it.
+- **DATA 2242315931 -> 4141573147, on purpose:** the four kitchen recipes,
+  and `BREAD` with its price.
+
+Verify: 60 passed, 0 failed in 664s (the known OVER BUDGET), on the second
+run:
+- headless_check 17481 asserts in 75.7 s, and headless_v1 2144 asserts;
+- input_check 1220 cases and input_v1 668;
+- player work 26513 checks, reactions 708, UI art 12968.
+
+The first run failed only headless_check's time limit, as told above. It
+accepted the two hashes, and the second run reproduced them.
+
+**Tests:**
+- `_task_0192_kitchen` (headless_v1):
+  - **The tables:**
+    - The tables validate, and `check_chain` holds for every recipe.
+    - The seven kitchen recipes are the kitchen's and named.
+    - Every one is worth more cooked than its parts (the table above).
+  - **Supper and the default:**
+    - Supper, with the bread, is the biggest batch of food.
+    - A new kitchen's default is still `cook_fish`.
+  - **Bread:** it sells at the stall, is an artisan good, has a name, and
+    has an icon through the road.
+  - **Spring's stock alone:**
+    - Carrot and potato are sown in spring.
+    - A kitchen holding only carrots, a potato and a carp, with no wheat, can
+      start exactly the fish and the stew.
+    - Cooked, they make 2 + 3 food.
+  - **Bread and supper:**
+    - With no flour the loaf waits in the queue; a sack of flour bakes it.
+    - The loaf, a potato and a milk are six food.
+    - Two eggs and a milk are three more.
+  - **The quick answers:**
+    - `on_the_stall` and `_sells` answer as the whole shelf does, in every
+      season, for every resource, animal and recipe.
+    - Every tool's every tier reads back off its id, and the first tier and
+      anything else read as nothing.
+- `headless_check` asks for one shot per scenario: 74 now (`kitchen`).
+
+Looked at (`python tools/shot.py 0192 kitchen inventory_full --fhd`,
+1920x1080):
+- **`kitchen`**, noon on Spring 3: a kitchen on the grass nearest the barn's
+  site, and the farmer below it.
+  - Its panel lists the seven dishes, with the stew running ("cook stew
+    25.5s").
+  - All seven rows fit the scroll without scrolling.
+- **`inventory_full_artisan_goods_2`**: "bread 999 $11 each" after the
+  sugar. I enlarged the icon: two crust-brown rolls, apart from the sugar
+  beside them.
+
+Files: src/core/{crafting,game_data,shop}.gd, src/ui/{names,placeholder_art}.gd,
+src/tools/{headless_check,headless_v1,shot}.gd, assets/locale/strings.csv,
+tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A032-artisan-goods.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0192-cooking-v2.md,
+implementation/shots/0192/, docs/devlog/{index,index.pt_BR}.md

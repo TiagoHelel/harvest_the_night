@@ -407,6 +407,10 @@ const ART := {
 	&"hud_flour": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.6, 1.6, 1.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_sugar": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_money", "tint": Color(1.5, 1.5, 1.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_sugar": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_money", "tint": Color(1.5, 1.5, 1.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	# A032's bread (task 0192): the stone's two lumps baked crust-brown, a
+	# pair of rolls, until 0214.
+	&"icon_bread": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(1.3, 0.85, 0.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_bread": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(1.3, 0.85, 0.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# A033's shipping bin (task 0189): the barricade's planks, warmed and
 	# grown to a bin by the porch, until 0215.
 	&"shipping_bin": {"pack": "A033", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/barricade", "stand_in_scale": 1.35, "tint": Color(1.15, 1.0, 0.8), "geometry": PROP_BIN, "final": PROP_BIN, "bare": true},

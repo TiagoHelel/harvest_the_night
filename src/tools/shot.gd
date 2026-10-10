@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["kitchen", "a kitchen on the grass at noon in spring, the farmer at it with its panel up: seven dishes, a stew on the fire", "WorkshopPanel"],
 	["house_tiers", "the house in tier I at noon, the farmer by its west wall; then tier II with its plaque over the door, the workshop's upgrades tab offering tier III, and tier III", ""],
 	["peddler", "the stall open at noon with the peddler at its end; then shut at dusk, nobody there", ""],
 	["shipping_bin", "the shipping bin by the porch at noon; then its panel with wood and carrots in; then the morning report naming what it pays", ""],
@@ -745,6 +746,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"shipping_bin": _set_shipping_bin(state)
 		"peddler": _set_peddler(state)
 		"house_tiers": _set_house_tiers(state)
+		"kitchen": _set_kitchen(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -1013,6 +1015,11 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 			panel._process(0.0)
 		"react":
 			Reactions.show(state, &"note")
+		"kitchen":
+			SuiteKit.stand_the_farmer(state, _standing_at)
+			state["player"]["facing"] = Player.NORTH
+			(main.get_node("%WorldView") as WorldView).look_at_cell(_standing_at)
+			(main.get_node("%WorkshopPanel") as WorkshopPanel)._process(0.0)
 		"keg_jar":
 			# Stood again and turned to the keg: the walk to the spot
 			# leaves him facing wherever he last stepped.
@@ -1882,6 +1889,45 @@ func _take_house_tiers(main: Node, state: Dictionary, folder: String) -> void:
 	await _shoot("house_tiers_3", folder)
 	print("  house_tiers: tiers %s, a whole house %d, the tab offered '%s', the farmer at %s" % [
 		str(bought), Phases.house_full(state), offered, str(_standing_at)])
+
+
+## **The kitchen** (task 0192): noon on Spring 3, a kitchen on open grass
+## nearest the barn's empty site and the farmer below it facing it, its
+## panel up - the seven dishes, a stew on the fire - with spring's carrots,
+## potatoes and a carp in hand, and flour, eggs and milk for the rest.
+func _set_kitchen(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 3)
+	Resources.gain(state, Building.cost_of(&"kitchen"))
+	Resources.gain(state, {GameData.CARROT: 6, GameData.POTATO: 3, GameData.CARP: 2,
+		GameData.FLOUR: 2, GameData.EGG: 4, GameData.MILK: 2})
+	var room: Array = GameData.MAP_SITES[&"barn"]
+	var site := Vector2i(int(room[0]), int(room[1]))
+	var at := Vector2i(-1, -1)
+	for reach in 24:
+		for dy in range(-reach, reach + 1):
+			for dx in [reach - absi(dy), absi(dy) - reach]:
+				if at.x < 0 and _kitchen_fits(state, site + Vector2i(dx, dy)):
+					at = site + Vector2i(dx, dy)
+	Building.place(state, &"kitchen", at)
+	Crafting.start(state, at, &"cook_stew")
+	_standing_at = at + Vector2i(1, Building.size_of(&"kitchen").y)
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.NORTH
+	print("  kitchen: at %s, the farmer at %s" % [at, _standing_at])
+
+
+## Whether a kitchen fits at `at` with every cell of it open grass, and grass
+## below for the farmer to stand on.
+func _kitchen_fits(state: Dictionary, at: Vector2i) -> bool:
+	if not Building.can_place(state, &"kitchen", at):
+		return false
+	var size := Building.size_of(&"kitchen")
+	for y in size.y + 1:
+		for x in size.x:
+			if Farm.terrain_at(state, at + Vector2i(x, y)) != Farm.Terrain.GRASS:
+				return false
+	return Farm.walkable(state, at + Vector2i(1, size.y))
 
 
 ## **The fish book** (task 0182): a spring Full Moon, and four species

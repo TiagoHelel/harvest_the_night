@@ -269,6 +269,7 @@ ITEM_BUTTER,0,butter,manteiga
 ITEM_CLOTH,0,cloth,tecido
 ITEM_SANDBAG,0,sandbag,saco de areia
 ITEM_FLOUR,0,flour,farinha
+ITEM_BREAD,0,bread,pão
 ITEM_SUGAR,0,sugar,açúcar
 ITEM_FOOD,0,food,comida
 ITEM_GUNPOWDER,0,gunpowder,pólvora
@@ -354,6 +355,9 @@ REC_BARRICADE_KIT,0,barricade kit,kit de barricada
 REC_COOK_FISH,0,cook fish,assar peixe
 REC_COOK_MEAL,0,cook meal,cozinhar refeição
 REC_COOK_ROAST,0,cook roast,fazer assado
+REC_COOK_STEW,0,cook stew,fazer ensopado
+REC_COOK_OMELETTE,0,cook omelette,fazer omelete
+REC_COOK_SUPPER,0,cook supper,fazer o jantar
 REC_MAKE_BAIT,0,make bait,fazer isca
 REC_MAKE_HAY,0,make hay,fazer feno
 REC_MAKE_WINE,0,make wine,fazer vinho
@@ -365,6 +369,7 @@ REC_MAKE_CHEESE,0,make cheese,fazer queijo
 REC_MAKE_CLOTH,0,make cloth,fazer tecido
 REC_MAKE_SANDBAG,0,make sandbags,fazer sacos de areia
 REC_MAKE_FLOUR,0,make flour,fazer farinha
+REC_MAKE_BREAD,0,bake bread,assar pão
 REC_MAKE_SUGAR,0,make sugar,fazer açúcar
 REC_FENCE_KIT,0,fence kit,kit de cerca
 REC_MAKE_GUNPOWDER,0,make gunpowder,fazer pólvora

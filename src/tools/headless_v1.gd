@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 61
+const GROUPS := 62
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -130,6 +130,7 @@ func _run() -> void:
 	_task_0189_bin()
 	_task_0190_peddler()
 	_task_0191_house()
+	_task_0192_kitchen()
 
 
 func _finish() -> void:
@@ -3266,12 +3267,14 @@ func _task_0166_long_day() -> void:
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 24, &"make_gunpowder": 16,
 		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13, &"make_bait": 48, &"make_hay": 80,
-		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 24, &"make_flour": 40, &"make_sugar": 24}
+		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 24, &"make_flour": 40, &"make_sugar": 24,
+		&"cook_stew": 20, &"cook_omelette": 16, &"make_bread": 30, &"cook_supper": 10}
 	var units := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 96, &"make_gunpowder": 32,
 		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52, &"make_bait": 192, &"make_hay": 80,
-		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 96, &"make_flour": 40, &"make_sugar": 72}
+		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 96, &"make_flour": 40, &"make_sugar": 72,
+		&"cook_stew": 40, &"cook_omelette": 48, &"make_bread": 30, &"cook_supper": 60}
 	var ordinary := 0
 	for id in GameData.RECIPES:
 		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty() \
@@ -5995,6 +5998,108 @@ func _task_0191_house() -> void:
 	State.reconcile(old)
 	expect(int(old["house_tier"]) == 1 and int(old["version"]) == State.VERSION,
 		"an old save is filled in at tier I, without a version bump")
+	_completed += 1
+
+
+## Task 0192: the kitchen cooks the new harvest. From spring's stock alone -
+## carrot, potato and a fish - it makes food, with no wheat; bread needs the
+## mill's flour, and supper the bread; and every kitchen recipe is worth more
+## cooked than its parts, the margins printed for the journal.
+func _task_0192_kitchen() -> void:
+	expect(GameData.validate().is_empty() and GameData.check_chain(GameData.RECIPES, GameData.SELL_PRICE).is_empty(),
+		"the tables validate, and every recipe passes check_chain", str(GameData.validate()))
+	var kitchen := Crafting.recipes_at(&"kitchen")
+	for id in [&"cook_meal", &"cook_fish", &"cook_roast", &"cook_stew", &"cook_omelette", &"make_bread", &"cook_supper"]:
+		expect(kitchen.has(id) and Names.KEYS.has(id) and I18n.t(Names.KEYS[id]) != String(Names.KEYS[id]),
+			"%s is the kitchen's, and has a name" % id)
+	# **Every kitchen recipe and its margin**, the list the journal gives.
+	var biggest := &""
+	for id in kitchen:
+		var recipe: Dictionary = GameData.RECIPES[id]
+		var into := GameData._worth(recipe["inputs"])
+		var made := GameData._worth(recipe["output"])
+		print("  %-13s $%2d -> $%2d  +$%-2d  %s" % [id, into, made, made - into, str(recipe["output"])])
+		expect(made > into, "%s is worth cooking: $%d of goods into $%d" % [id, into, made])
+		var food := int((recipe["output"] as Dictionary).get(GameData.FOOD, 0))
+		if biggest == &"" or food > int((GameData.RECIPES[biggest]["output"] as Dictionary).get(GameData.FOOD, 0)):
+			biggest = id
+	expect(biggest == &"cook_supper" and (GameData.RECIPES[&"cook_supper"]["inputs"] as Dictionary).has(GameData.BREAD),
+		"supper, the dish with the bread in it, cooks the kitchen's biggest batch of food", str(biggest))
+	expect(Crafting.selected_at(State.create(1920), &"kitchen") == &"cook_fish",
+		"and what SPACE at a new kitchen cooks is still the fish, not a loaf wanting flour")
+	expect(GameData.SELL_PRICE.has(GameData.BREAD) and Shop.sellable().has(GameData.BREAD)
+		and GameData.group_members(&"artisan_goods").has(GameData.BREAD) and Names.KEYS.has(GameData.BREAD)
+		and not PlaceholderArt.art(&"icon_bread").is_empty() and not PlaceholderArt.art(&"hud_bread").is_empty()
+		and not UiKit.missing_icons().has("bread"),
+		"bread sells at the stall, is an artisan good, has a name, and an icon through 0120's road")
+
+	# **Spring's stock alone**: a kitchen and nothing but carrots, a potato and
+	# a carp - the crops sown in spring and the pond's.
+	for crop in [GameData.CARROT, GameData.POTATO]:
+		expect((GameData.CROPS[crop]["seasons"] as Array).has(&"spring"), "%s is sown in spring" % crop)
+	var state := State.create(1921)
+	Resources.gain(state, Building.cost_of(&"kitchen"))
+	var cell := _spot_for(state, &"kitchen")
+	expect(Building.place(state, &"kitchen", cell), "a kitchen goes up", str(cell))
+	Resources.gain(state, {GameData.CARROT: 3, GameData.POTATO: 1, GameData.CARP: 1})
+	var startable: Array = []
+	for id in kitchen:
+		if Crafting.can_start(state, cell, id):
+			startable.append(id)
+	expect(startable == [&"cook_fish", &"cook_stew"] and Resources.amount(state, GameData.WHEAT) == 0,
+		"with no wheat, the fish and the stew are what it can cook", str(startable))
+	var food := Resources.amount(state, GameData.FOOD)
+	expect(Crafting.start(state, cell, &"cook_stew") and Crafting.start(state, cell, &"cook_fish"),
+		"both go on")
+	Sim.advance(state, int(GameData.RECIPES[&"cook_stew"]["ticks"]) + int(GameData.RECIPES[&"cook_fish"]["ticks"]) + 2)
+	expect(Resources.amount(state, GameData.FOOD) == food + 5 and Resources.amount(state, GameData.POTATO) == 0
+		and Resources.amount(state, GameData.CARROT) == 1 and not Crafting.busy(state, cell),
+		"two food from the stew and three from the fish, spring's potato and carrots spent",
+		str(Resources.amount(state, GameData.FOOD) - food))
+
+	# **Bread needs flour**, and supper the bread.
+	var queued := Crafting.start(state, cell, &"make_bread")
+	expect(queued and Crafting.is_stalled(state, cell) and Resources.amount(state, GameData.BREAD) == 0,
+		"with no flour the loaf waits in the queue")
+	Resources.add(state, GameData.FLOUR, 1)
+	Sim.advance(state, int(GameData.RECIPES[&"make_bread"]["ticks"]) + 2)
+	expect(Resources.amount(state, GameData.BREAD) == 1 and Resources.amount(state, GameData.FLOUR) == 0
+		and not Crafting.busy(state, cell), "a sack of flour bakes a loaf")
+	Resources.gain(state, {GameData.POTATO: 1, GameData.MILK: 1, GameData.EGG: 2})
+	food = Resources.amount(state, GameData.FOOD)
+	expect(Crafting.start(state, cell, &"cook_supper") and Crafting.start(state, cell, &"cook_omelette")
+		and not Crafting.is_stalled(state, cell), "supper and an omelette go on")
+	Sim.advance(state, int(GameData.RECIPES[&"cook_supper"]["ticks"]) + 1)
+	expect(Resources.amount(state, GameData.FOOD) == food + 6 and Resources.amount(state, GameData.BREAD) == 0,
+		"the loaf, a potato and a milk are six food", str(Resources.amount(state, GameData.FOOD) - food))
+	Resources.add(state, GameData.MILK, 1)
+	Sim.advance(state, int(GameData.RECIPES[&"cook_omelette"]["ticks"]) + 2)
+	expect(Resources.amount(state, GameData.FOOD) == food + 9 and Resources.amount(state, GameData.EGG) == 0
+		and not Crafting.busy(state, cell), "and two eggs and a milk are three more")
+
+	# **The quick answers are the old ones.** `headless_check` went past
+	# verify's limit with this task, and the time was the autoplayer's field
+	# asking the stall about a packet a plot: every purchase built the whole
+	# shelf, and every shelf formatted every tool's every tier. The stall now
+	# asks without building it, and a tool's output is read off its id.
+	var ids: Array = GameData.RESOURCES + GameData.LIVESTOCK.keys() + GameData.RECIPES.keys()
+	var same := true
+	for season in GameData.SEASONS:
+		var shelf := GameData.stall_stock(season)
+		for id in ids:
+			same = same and GameData.on_the_stall(season, StringName(id)) == shelf.has(id)
+	var buyer := State.create(1922)
+	for id in GameData.RESOURCES:
+		same = same and Shop._sells(buyer, id) == Shop.buyable(buyer).has(id)
+	expect(same, "the stall's quick question answers as its whole shelf does, in every season, for everything")
+	var decoded := true
+	for tool in GameData.sorted_names(GameData.TOOLS.keys()):
+		for tier in (GameData.TOOLS[tool] as Array).size():
+			var found := GameData.tool_output(StringName("%s_%s" % [tool, GameData.TOOLS[tool][tier]["name"]]))
+			decoded = decoded and (found.is_empty() if tier == 0 else found == {"tool": tool, "tier": tier})
+	expect(decoded and GameData.tool_output(&"wood").is_empty() and GameData.tool_output(&"axe").is_empty()
+		and GameData.tool_output(&"axe_").is_empty() and GameData.tool_output(&"_iron").is_empty(),
+		"every tool's every tier reads back off its id, the first tier and anything else as nothing")
 	_completed += 1
 
 
