@@ -335,7 +335,11 @@ const RESOURCES: Array = [
 ## same scale. Money is not here because money does not sell for money, and
 ## neither does energy, which is a rate rather than a stock (task 0033).
 const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
-	WOOD: 2,
+	# **A dollar since task 0194.** At two, felling trees all day was the
+	# best money on the farm in every season - three wood a tree, a tree in
+	# under four seconds - so it beat every other way of earning. Wood is for
+	# building; selling it is the leftover.
+	WOOD: 1,                         # LEVER: money each, 1-2
 	# Hardwood only sells until the strong wall (task 0231) builds with it,
 	# and sells low: a stump's two pieces are about half a tree's money per
 	# second of swinging. Its worth is the wall's, not the stall's.
@@ -346,19 +350,21 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	COAL: 3,                         # LEVER: money each, 1-4
 	GOLD: 8,                         # LEVER: money each, 1-8
 	FOOD: 12,
-	# **The fish** (task 0179): what each species sells for. A cast's catch
-	# averages about what the one $8 fish did, the rare ones about three
-	# commons - and none above oil, which stays the dearest thing in the
-	# ledger (0032).
-	CARP: 7,                         # LEVER: money each, 4-10
-	PERCH: 8,                        # LEVER: money each, 4-10
-	CATFISH: 10,                     # LEVER: money each, 6-14
-	TILAPIA: 7,                      # LEVER: money each, 4-10
-	SUNFISH: 8,                      # LEVER: money each, 4-10
-	BREAM: 9,                        # LEVER: money each, 5-12
-	TROUT: 13,                       # LEVER: money each, 10-18
-	PIKE: 14,                        # LEVER: money each, 10-18
-	EEL: 15,                         # LEVER: money each, 10-18
+	# **The fish** (task 0179): what each species sells for, the rare ones
+	# about three commons - and none above oil, which stays the dearest thing
+	# in the ledger (0032). **Task 0194 raised all but the cheapest two**, so
+	# a day at the pond earns its season's band (`Economy.fishing`). Carp and
+	# tilapia stay at $7: fish bait (four at $2) and fish oil (three under a
+	# drop's $26) are priced against the cheapest fish.
+	CARP: 7,                         # LEVER: money each, 4-7, under four bait and a third of oil
+	PERCH: 10,                       # LEVER: money each, 7-12
+	CATFISH: 13,                     # LEVER: money each, 8-16
+	TILAPIA: 7,                      # LEVER: money each, 4-7, under four bait and a third of oil
+	SUNFISH: 11,                     # LEVER: money each, 7-12
+	BREAM: 12,                       # LEVER: money each, 8-14
+	TROUT: 17,                       # LEVER: money each, 12-20
+	PIKE: 18,                        # LEVER: money each, 12-20
+	EEL: 19,                         # LEVER: money each, 12-22
 	DORADO: 22,                      # LEVER: money each, 18-25, under oil
 	SALMON: 24,                      # LEVER: money each, 18-25, under oil
 	STURGEON: 25,                    # LEVER: money each, 18-25, under oil
@@ -378,14 +384,15 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	# (`check_chain`), and a day of an animal's keep is one of them.
 	STRAW: 1,                        # LEVER: money each, 1-2
 	HAY: 2,                          # LEVER: money each, 2-4
-	# What a fed hen and a fed cow give: an egg a little under the meat the
-	# hen used to give, a pail of milk what the cow's meat was.
-	EGG: 4,                          # LEVER: money each, 3-8
-	MILK: 9,                         # LEVER: money each, 6-12
+	# What a fed hen and a fed cow give. **Raised by task 0194**, so a day
+	# of animals earns its season's band (`Economy.animals`): an egg still
+	# under the meat a hen used to be, a pail of milk a little over it.
+	EGG: 6,                          # LEVER: money each, 3-8
+	MILK: 11,                        # LEVER: money each, 6-12
 	# A fleece a day, and a truffle - the find of the barnyard, still under
-	# oil (task 0185).
-	WOOL: 10,                        # LEVER: money each, 6-14
-	TRUFFLE: 20,                     # LEVER: money each, 12-25, under oil
+	# oil (task 0185; both raised by 0194).
+	WOOL: 14,                        # LEVER: money each, 6-16
+	TRUFFLE: 24,                     # LEVER: money each, 12-25, under oil
 	# **The artisan goods** (task 0187) are the only things on the farm worth
 	# more than oil, and on purpose: plan section 3.5's road for the player
 	# who wants to farm money, where a wine sells for far more than its
@@ -400,8 +407,8 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	# but the cheese, which ages two mornings. A sandbag is a material, its
 	# night 0231's; flour is bread's (0192) and sugar the jelly's.
 	CHEESE: 20,                      # LEVER: money each, 14-30
-	BUTTER: 22,                      # LEVER: money each, 19-25, two milk's worth and under oil
-	CLOTH: 15,                       # LEVER: money each, 11-25
+	BUTTER: 25,                      # LEVER: money each, 23-25, over two milk and under oil (0194)
+	CLOTH: 18,                       # LEVER: money each, 15-25, over its wool (0194)
 	SANDBAG: 8,                      # LEVER: money each, 5-12
 	FLOUR: 7,                        # LEVER: money each, 5-10
 	SUGAR: 5,                        # LEVER: money each, 4-8
@@ -1572,7 +1579,7 @@ const DEFENCES: Dictionary = {
 		# two stone came to $12 of goods against the fence's $10, so the
 		# "cheapest structure" the task asks for was not - and stone is the
 		# wrong currency for a thing you throw down while they are already
-		# coming. Four wood is $8, and it is one trip to one tree.
+		# coming. Four wood is $4 (since 0194), and it is one trip to one tree.
 		"cost": {WOOD: 4},
 		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
 		"hp": 20,                       # LEVER: hit points, 10-40
@@ -1798,6 +1805,56 @@ const ANIMAL_STOCK: Dictionary = {
 ## one on the stall's shelf this many times a day, at the workshop's price
 ## and through its rules (`ToolTiers`) - ready the next morning, as there.
 const UPGRADE_STOCK := 1                # LEVER: of each upgrade a day, 1-3
+
+## **The day's money, on purpose** (task 0194; plan section 5's rule of
+## thumb): at the start of each season, a well-worked day should buy about
+## one new defence. Each season's band is `[low, high]` money a day.
+## `Economy` computes a day of each way of earning, and
+## `_task_0194_economy` holds every one inside its season's band.
+## Centred on a gun tower's materials at the stall in spring ($266: ten wood
+## and twelve iron), and about a seventh more each season: the towers rise
+## a level and the nights grow, so the defence a later day buys costs more.
+const DAY_TARGETS: Dictionary = {
+	&"spring": [180, 400],             # LEVER: money a well-worked day, low-high
+	&"summer": [205, 460],             # LEVER: money a well-worked day, low-high
+	&"autumn": [235, 530],             # LEVER: money a well-worked day, low-high
+	&"winter": [270, 610],             # LEVER: money a well-worked day, low-high
+}
+
+## **The farm a well-worked day stands on** (task 0194): what a player who
+## spent the season before on that way of earning has at the start of this
+## one. A season with no entry for a strategy has no means for it, and the
+## strategy is not one then: crops in winter, when nothing grows, and the
+## animals and the machines at a new game's start.
+const DAY_FARM: Dictionary = {
+	# The tier every tool has reached: 0 the first, 1 iron (fibre for the
+	# rod), 2 gold (iron for the rod).
+	"tool_tier": {&"spring": 0, &"summer": 1, &"autumn": 1, &"winter": 2},  # LEVER: tool tier, 0-2
+	# The plots a crops day tends: the starter beds, then turned grass.
+	"plots": {&"spring": 60, &"summer": 80, &"autumn": 80},               # LEVER: plots, 20-200
+	# The herd an animals day collects from: two coops of hens, and a barn
+	# (two from autumn) of the rest.
+	"herd": {
+		&"summer": {&"chicken": 8, &"cow": 1, &"sheep": 2, &"pig": 1},   # LEVER: animals of each kind
+		&"autumn": {&"chicken": 8, &"cow": 2, &"sheep": 3, &"pig": 3},   # LEVER: animals of each kind
+		&"winter": {&"chicken": 8, &"cow": 2, &"sheep": 3, &"pig": 3},   # LEVER: animals of each kind
+	},
+	# The machines an artisan day keeps busy, by the recipe each runs.
+	"machines": {
+		&"summer": {&"make_jelly": 4, &"make_pickles": 1, &"make_juice": 1, &"make_cheese": 1},  # LEVER: machines
+		&"autumn": {&"make_wine": 4, &"make_jelly": 4, &"make_pickles": 1, &"make_cheese": 1},   # LEVER: machines
+		&"winter": {&"make_wine": 6, &"make_jelly": 4, &"make_pickles": 1, &"make_cheese": 1},   # LEVER: machines
+	},
+	# From a bite to the fish in hand: the bar, played well (the day sweep
+	# measured under a second for a common).
+	"landing_ticks": 1 * SECONDS,       # LEVER: ticks, 1-3 seconds
+	# When the animals' day ends: bedtime, for collecting is a moment and
+	# the hens lay into the evening.
+	"animal_bed_minute": 25 * 60 + 30,  # LEVER: minutes, 20:00-01:59
+	# Tiles walked to each node on the cliff, and from tree to tree.
+	"walk_to_node": 8,                  # LEVER: tiles, 4-16
+	"walk_to_tree": 2,                  # LEVER: tiles, 1-4
+}
 
 ## **The peddler's hours** (task 0190; plan section 3.6): the stall trades
 ## from 08:00 to 17:00 on 0126's clock, in game minutes. `check_stall_hours`
@@ -2842,6 +2899,7 @@ static func validate() -> Array:
 		errors.append_array(check_stall(stall_stock(season), SELL_PRICE, BUY_MARKUP))
 	errors.append_array(check_season_stock(SEASON_STOCK))
 	errors.append_array(check_seasonal_supply(DEFENCES, RECIPES))
+	errors.append_array(check_day_targets(DAY_TARGETS, DAY_FARM))
 	errors.append_array(check_stall_hours(STALL_OPENS, STALL_CLOSES))
 	errors.append_array(check_tutorial(TUTORIAL))
 	errors.append_array(check_pathing(TERRAIN_COST, DEFENCES, BUILDINGS))
@@ -4160,6 +4218,38 @@ static func check_seasonal_supply(defences: Dictionary, recipes: Dictionary,
 	return errors
 
 
+## **The day's targets and the farm they assume** (task 0194): a band for
+## every season, low under high, neither end falling from one season to the
+## next; and a farm of known tools, animals and machines - every machine's
+## recipe one that takes days, which `Economy.artisan` counts by the morning.
+static func check_day_targets(targets: Dictionary, farm: Dictionary) -> Array:
+	var errors: Array = []
+	var low := 0
+	var high := 0
+	for season in SEASONS:
+		var band: Array = targets.get(season, [])
+		if band.size() != 2 or int(band[0]) <= 0 or int(band[0]) >= int(band[1]):
+			errors.append("%s's day has no band of money, low under high" % season)
+			continue
+		if int(band[0]) < low or int(band[1]) < high:
+			errors.append("%s's day asks less than the season before it" % season)
+		low = int(band[0])
+		high = int(band[1])
+	for season in sorted_names((farm.get("tool_tier", {}) as Dictionary).keys()):
+		var tier := int(farm["tool_tier"][season])
+		if tier < 0 or tier >= (TOOLS[&"rod"] as Array).size():
+			errors.append("%s's tools are at no tier there is" % season)
+	for season in sorted_names((farm.get("herd", {}) as Dictionary).keys()):
+		for kind in sorted_names((farm["herd"][season] as Dictionary).keys()):
+			if not LIVESTOCK.has(kind):
+				errors.append("%s's herd has '%s', which is no animal" % [season, kind])
+	for season in sorted_names((farm.get("machines", {}) as Dictionary).keys()):
+		for id in sorted_names((farm["machines"][season] as Dictionary).keys()):
+			if not RECIPES.has(id) or int((RECIPES[id] as Dictionary).get("days", 0)) <= 0:
+				errors.append("%s's machines run '%s', which is no recipe that takes days" % [season, id])
+	return errors
+
+
 ## The season a defence unlocks in (task 0193): its `season`, or spring.
 static func defence_season(entry: Dictionary) -> StringName:
 	return StringName(entry.get("season", SEASONS[0]))
@@ -4249,11 +4339,14 @@ static func seasonal_supply(season: StringName, recipes: Dictionary,
 					grew = true
 		for kind in sorted_names(LIVESTOCK.keys()):
 			var animal: Dictionary = LIVESTOCK[kind]
-			if int(animal.get("feed_per_day", 0)) > 0 and not have.has(ANIMAL_FEED):
+			# **The map's loose ones graze** (task 0194): they are never fed
+			# and never hungry (`Livestock`), so they give without hay.
+			var grazes := StringName(animal.get("source", &"")) == &"map"
+			if int(animal.get("feed_per_day", 0)) > 0 and not have.has(ANIMAL_FEED) and not grazes:
 				continue
 			for res in sorted_names((animal["produces"] as Dictionary).keys()):
 				if not have.has(res):
-					have[res] = "a fed %s" % kind
+					have[res] = ("a fed %s" if have.has(ANIMAL_FEED) else "a grazing %s") % kind
 					grew = true
 	return have
 
@@ -4480,6 +4573,7 @@ static func digest() -> int:
 			FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES],
 		"calm": CALM_NIGHT_GIFT,
 		"house_tiers": HOUSE_TIERS,
+		"day_economy": [DAY_TARGETS, DAY_FARM],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
 			PLAYER_SPEED],
 		"house": [HOUSE_SIZE, SHOP_SIZE, HOUSE_ROOM, HOUSE_DOOR,

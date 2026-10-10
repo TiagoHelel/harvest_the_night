@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 63
+const GROUPS := 64
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -132,6 +132,7 @@ func _run() -> void:
 	_task_0191_house()
 	_task_0192_kitchen()
 	_task_0193_supply()
+	_task_0194_economy()
 
 
 func _finish() -> void:
@@ -6207,6 +6208,90 @@ func _task_0193_supply() -> void:
 		"and no station's default recipe changed")
 	expect(Shop.buyable(fresh).has(GameData.HAY) and Shop.buyable(fresh).has(GameData.STRAW),
 		"a first spring morning's stall sells straw and hay")
+	_completed += 1
+
+
+## Task 0194: the day's economy. A computed - never simulated - day of each
+## way of earning lands inside its season's band, every season has several
+## ways, and no one way wins them all; the bands and the farm under them are
+## checked; and every item has a price.
+func _task_0194_economy() -> void:
+	expect(GameData.validate().is_empty() and GameData.check_day_targets(GameData.DAY_TARGETS, GameData.DAY_FARM).is_empty(),
+		"the bands and the farm they assume pass their check", str(GameData.check_day_targets(GameData.DAY_TARGETS, GameData.DAY_FARM)))
+	var winners := {}
+	for season in GameData.SEASONS:
+		var band: Array = GameData.DAY_TARGETS[season]
+		var ways := 0
+		var best := &""
+		var row: Array = []
+		for strategy in Economy.STRATEGIES:
+			var money := Economy.day(strategy, season)
+			row.append("%s %s" % [strategy, "-" if money < 0 else "$%d" % money])
+			if money < 0:
+				continue
+			ways += 1
+			expect(money >= int(band[0]) and money <= int(band[1]),
+				"a well-worked %s day of %s makes $%d, inside $%d-%d" % [season, strategy, money, band[0], band[1]])
+			if best == &"" or money > Economy.day(best, season):
+				best = strategy
+		print("  %s ($%d-%d): %s; the most from %s" % [season, band[0], band[1], ", ".join(row), best])
+		expect(ways >= 3, "%s has several ways to earn" % season, str(ways))
+		winners[best] = true
+	expect(winners.size() > 1, "and no one way wins every season", str(winners.keys()))
+	# **The seasons without the means**: nothing grows in winter, and a new
+	# game has no homes and no machines.
+	expect(Economy.crops(&"winter") == -1 and Economy.animals(&"spring") == -1 and Economy.artisan(&"spring") == -1
+		and Economy.crops(&"spring") > 0, "crops have no winter, and animals and machines no first spring")
+
+	# **The check refuses a broken table.**
+	var falling := GameData.DAY_TARGETS.duplicate(true)
+	falling[&"summer"] = [100, 300]
+	var upside := GameData.DAY_TARGETS.duplicate(true)
+	upside[&"autumn"] = [600, 300]
+	var ticking := GameData.DAY_FARM.duplicate(true)
+	(ticking["machines"] as Dictionary)[&"summer"] = {&"make_butter": 1}
+	var stranger := GameData.DAY_FARM.duplicate(true)
+	(stranger["herd"] as Dictionary)[&"summer"] = {&"goat": 2}
+	expect(not GameData.check_day_targets(falling, GameData.DAY_FARM).is_empty()
+		and not GameData.check_day_targets(upside, GameData.DAY_FARM).is_empty()
+		and not GameData.check_day_targets(GameData.DAY_TARGETS, ticking).is_empty()
+		and not GameData.check_day_targets(GameData.DAY_TARGETS, stranger).is_empty(),
+		"a band that falls, a band upside down, a machine on a recipe of ticks and an animal there is none of are refused")
+
+	# **The model reads the game's own numbers.**
+	var fresh := State.create(1940)
+	expect(Economy.map_count(&"ore") == Farm.cells_with(fresh, &"ore").size() and Economy.map_count(&"ore") > 0,
+		"the cliff's ore is counted off the map the farm is built from", str(Economy.map_count(&"ore")))
+	expect(Economy.work_ticks() == Phases.tick_at_minute(GameData.DUSK_MINUTE) and Economy.best_crop(&"spring") == GameData.STRAWBERRY,
+		"the day runs to dusk, and spring's money crop is the strawberry")
+	expect(Economy.input_cost(&"spring", GameData.HAY) == Shop.buy_price(GameData.HAY) and Economy.input_cost(&"autumn", GameData.HAY) == 0
+		and Economy.input_cost(&"summer", GameData.SUGAR) == Shop.buy_price(GameData.SUGAR) and Economy.input_cost(&"autumn", GameData.SUGAR) == 0,
+		"hay and sugar are bought until autumn's wheat and beets, the farm's own after")
+	expect(GameData.seasonal_supply(&"spring", GameData.RECIPES, {}, {}).has(GameData.MILK),
+		"the map's loose cow grazes, and gives milk without hay")
+
+	# **A price for every item.**
+	var unpriced: Array = []
+	for id in GameData.RESOURCES:
+		if id in [GameData.MONEY, GameData.ENERGY, GameData.TECH]:
+			continue
+		if int(GameData.SELL_PRICE.get(id, 0)) <= 0:
+			unpriced.append(id)
+	for kind in GameData.sorted_names(GameData.LIVESTOCK.keys()):
+		if int(GameData.ANIMAL_PRICE.get(kind, 0)) <= 0:
+			unpriced.append(kind)
+	for id in GameData.tool_upgrades():
+		if (GameData.RECIPES[id]["inputs"] as Dictionary).is_empty():
+			unpriced.append(id)
+	for id in GameData.sorted_names(GameData.BUILDINGS.keys()):
+		if (GameData.BUILDINGS[id].get("cost", {}) as Dictionary).is_empty():
+			unpriced.append(id)
+	expect(unpriced.is_empty(), "every item, animal, upgrade and building has a price", str(unpriced))
+	var stalls := true
+	for season in GameData.SEASONS:
+		stalls = stalls and GameData.check_stall(GameData.stall_stock(season), GameData.SELL_PRICE, GameData.BUY_MARKUP).is_empty()
+	expect(stalls and GameData.check_chain(GameData.RECIPES, GameData.SELL_PRICE).is_empty(),
+		"and the stall and the recipes still pass at the new prices")
 	_completed += 1
 
 

@@ -2,6 +2,7 @@
 """Sweep the levers that matter and report the win rate per night.
 
     python tools/balance.py [runs-per-configuration] [lever name]
+    python tools/balance.py days
 
 **It edits `game_data.gd`, runs the autoplayer, and puts the file back.** There
 is no other way to sweep a `const` in GDScript, and making every lever
@@ -16,6 +17,15 @@ Task 0068's done-when is that no night sits at 100% or 0% across every policy,
 which is the difference between a difficulty curve and a wall.
 
 The written report is `implementation/BALANCE.md`.
+
+**`days`** (task 0194) is the day's money instead of the night's survival.
+It plays a well-worked day of each way of earning - the crops, the pond, the
+cliff and the woods, the animals and the machines - in a spring and a summer
+(`src/tools/day_economy.gd`), beside the day `Economy` computes for every
+season and the season's band in `GameData.DAY_TARGETS`. It rewrites its own
+block of BALANCE.md, between `DAYS_BEGIN` and `DAYS_END`, and nothing else.
+It moves no lever, and it keeps the same guard as the sweep: it refuses a
+dirty `game_data.gd` and puts the file back in a `finally`.
 """
 import io
 import os
@@ -81,6 +91,14 @@ LEVERS = [
 
 NIGHTS = 10
 
+BALANCE_MD = os.path.join(ROOT, "implementation", "BALANCE.md")
+DAYS_BEGIN = "<!-- tools/balance.py days writes from here to its end mark -->"
+DAYS_END = "<!-- tools/balance.py days: end -->"
+SEASONS = ["spring", "summer", "autumn", "winter"]
+STRATEGIES = [("crops", "Crops"), ("fishing", "Fishing"),
+              ("mining", "The cliff and the woods"), ("animals", "Animals"),
+              ("artisan", "Artisan goods")]
+
 
 def read():
     return io.open(DATA, encoding="utf-8").read()
@@ -140,7 +158,104 @@ def win_rates(result):
     return out
 
 
+def play_days():
+    """Play the days once. -> {(season, strategy): (computed, played, low, high)},
+    -1 where a strategy has no means that season or was not played."""
+    done = subprocess.run(
+        [GODOT, "--headless", "--path", ROOT,
+         "--script", "res://src/tools/day_economy.gd"],
+        capture_output=True, text=True)
+    rows = {}
+    for line in (done.stdout or "").splitlines():
+        row = re.match(r"DAY (\w+) (\w+) computed (-?\d+) simulated (-?\d+) "
+                       r"target (\d+)-(\d+)$", line.strip())
+        if row:
+            rows[(row.group(1), row.group(2))] = tuple(
+                int(row.group(i)) for i in range(3, 7))
+    return rows
+
+
+def days_block(rows):
+    """The BALANCE.md block: money a well-worked day, by season and strategy,
+    computed and - in spring and summer - played, against the season's band."""
+    out = [DAYS_BEGIN, "",
+           "| Season | Band | %s | Most |" % " | ".join(n for _k, n in STRATEGIES),
+           "|---|---|%s---|" % ("---|" * len(STRATEGIES))]
+    for season in SEASONS:
+        cells = []
+        best = None
+        band = None
+        for key, _name in STRATEGIES:
+            computed, played, low, high = rows.get((season, key), (-1, -1, 0, 0))
+            band = (low, high)
+            if computed < 0:
+                cells.append("-")
+                continue
+            if best is None or computed > best[1]:
+                best = (key, computed)
+            cell = "$%d" % computed
+            if played >= 0:
+                cell += " (played $%d)" % played
+            if not low <= computed <= high or (played >= 0 and not low <= played <= high):
+                cell += " **outside**"
+            cells.append(cell)
+        out.append("| %s | $%d-%d | %s | %s |" % (
+            season, band[0], band[1], " | ".join(cells),
+            dict(STRATEGIES)[best[0]].lower() if best else "-"))
+    out += ["", "Computed: `Economy.day`. Played: `src/tools/day_economy.gd`, the "
+            "crops over their season, the machines until their batches come "
+            "round together, the pond over three days and the animals over "
+            "four, by the day. A dash: the season has no means for it.", "",
+            DAYS_END]
+    return "\n".join(out)
+
+
+def write_days(block):
+    text = io.open(BALANCE_MD, encoding="utf-8").read()
+    if DAYS_BEGIN in text and DAYS_END in text:
+        start = text.index(DAYS_BEGIN)
+        end = text.index(DAYS_END) + len(DAYS_END)
+        text = text[:start] + block + text[end:]
+    else:
+        text = text.rstrip("\n") + "\n\n" + block + "\n"
+    io.open(BALANCE_MD, "w", encoding="utf-8", newline="\n").write(text)
+
+
+def days():
+    if not os.path.exists(GODOT):
+        print("no godot at %s - set GODOT" % GODOT)
+        return 1
+    if not clean_tree():
+        print("game_data.gd has uncommitted changes: commit or stash first,")
+        print("or an interrupted sweep will leave a lever moved.")
+        return 1
+    lock = os.path.join(ROOT, ".balance-lock")
+    try:
+        os.close(os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY))
+    except OSError:
+        print("another sweep holds %s - wait for it, or delete the file if"
+              % lock)
+        print("you are sure nothing is running.")
+        return 1
+    original = read()
+    try:
+        rows = play_days()
+    finally:
+        write(original)
+        os.remove(lock)
+    if not rows:
+        print("the day sweep printed nothing - run it by hand to see why:")
+        print("  godot --headless --path . --script res://src/tools/day_economy.gd")
+        return 1
+    block = days_block(rows)
+    write_days(block)
+    print(block)
+    return 0
+
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "days":
+        return days()
     runs = int(sys.argv[1]) if len(sys.argv) > 1 else 8
     only = sys.argv[2] if len(sys.argv) > 2 else ""
     if not os.path.exists(GODOT):

@@ -10791,8 +10791,10 @@ func _task_0058_giant() -> void:
 			"taking the %s apart to do it" % sealed_with, str(boxed))
 
 	# **A defence of only cheap towers cannot kill it in time**, and one that
-	# concentrates damage can - for less money.
-	var bolts := _giant_against(4304, [[&"auto_crossbow", 16]])
+	# concentrates damage can - for less money. Eighteen crossbows since task
+	# 0194 halved wood's price: sixteen came to less than the four mortars,
+	# and eighteen, which cost more, still let it in.
+	var bolts := _giant_against(4304, [[&"auto_crossbow", 18]])
 	var shells := _giant_against(4304, [[&"mortar", 4]])
 	print("  a giant against %d crossbows ($%d): %s. Against %d mortars "
 		% [bolts["towers"], bolts["spend"],
