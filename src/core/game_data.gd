@@ -247,6 +247,15 @@ const WINE := &"wine"
 const JUICE := &"juice"
 const JELLY := &"jelly"
 const PICKLES := &"pickles"
+## **The dairy's, the loom's and the mill's** (task 0188; plan section 3.5):
+## cheese and butter from milk, cloth from wool and sandbags from cloth, flour
+## from wheat and sugar from beet.
+const CHEESE := &"cheese"
+const BUTTER := &"butter"
+const CLOTH := &"cloth"
+const SANDBAG := &"sandbag"
+const FLOUR := &"flour"
+const SUGAR := &"sugar"
 const OIL := &"oil"
 const WHEAT := &"wheat"
 const CORN := &"corn"
@@ -294,7 +303,7 @@ const RESOURCES: Array = [
 	CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
 	OLD_CATFISH, GOLDEN_QUEEN, GHOST_PIKE, ICE_STURGEON,
 	WORM, BAIT, STRAW, HAY, EGG, MILK, WOOL, TRUFFLE,
-	WINE, JUICE, JELLY, PICKLES,
+	WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, SANDBAG, FLOUR, SUGAR,
 	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
@@ -365,6 +374,16 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	JUICE: 45,                       # LEVER: money each, 30-60
 	JELLY: 40,                       # LEVER: money each, 30-60
 	PICKLES: 25,                     # LEVER: money each, 15-35
+	# **The dairy's, the loom's and the mill's** (task 0188): each above what
+	# it is made of (`check_chain`) and, made within a day, under oil - all
+	# but the cheese, which ages two mornings. A sandbag is a material, its
+	# night 0231's; flour is bread's (0192) and sugar the jelly's.
+	CHEESE: 20,                      # LEVER: money each, 14-30
+	BUTTER: 22,                      # LEVER: money each, 19-25, two milk's worth and under oil
+	CLOTH: 15,                       # LEVER: money each, 11-25
+	SANDBAG: 8,                      # LEVER: money each, 5-12
+	FLOUR: 7,                        # LEVER: money each, 5-10
+	SUGAR: 5,                        # LEVER: money each, 4-8
 	# **The most valuable thing on the farm to sell, and that is the point.**
 	# Four corn is $20 of crop; pressing it is twenty seconds and turns it into
 	# $26 of oil. So the press pays for itself - and then every drop of it is
@@ -952,9 +971,12 @@ const RECIPES: Dictionary = {
 		"output": {JUICE: 3},
 		"days": 4,                      # LEVER: mornings, 2-7
 	},
+	# **Jelly takes sugar** (task 0188; plan section 3.1, "beet becomes sugar
+	# for jellies"): the mill's beet sugar, or the stall's in a first spring
+	# with no autumn behind it.
 	&"make_jelly": {
 		"station": &"preserves_jar",
-		"inputs": {STRAWBERRY: 3},      # LEVER: strawberries a batch, 1-5
+		"inputs": {STRAWBERRY: 3, SUGAR: 1},  # LEVER: strawberries and sugar a batch
 		"output": {JELLY: 3},
 		"days": 3,                      # LEVER: mornings, 2-5
 	},
@@ -963,6 +985,48 @@ const RECIPES: Dictionary = {
 		"inputs": {PEPPER: 3},          # LEVER: peppers a batch, 1-5
 		"output": {PICKLES: 3},
 		"days": 3,                      # LEVER: mornings, 2-5
+	},
+	# **The dairy, the loom and the mill** (task 0188; plan section 3.5).
+	# Butter is churned and cloth woven within the day, by the tick; cheese
+	# is pressed and aged two mornings, the dairy's slow money. A sandbag is
+	# a sack of cloth packed with stone - the filler a farm has by the
+	# cartload - and the mill grinds wheat into flour and boils beet down to
+	# three cubes of sugar a root.
+	&"make_butter": {
+		"station": &"dairy",
+		"inputs": {MILK: 2},            # LEVER: milk a block, 1-3
+		"output": {BUTTER: 1},
+		"ticks": DAY_TICKS * 12 / 240,  # LEVER: fraction of a day
+	},
+	&"make_cheese": {
+		"station": &"dairy",
+		"inputs": {MILK: 3},            # LEVER: milk a batch, 1-5
+		"output": {CHEESE: 3},
+		"days": 2,                      # LEVER: mornings, 1-5
+	},
+	&"make_cloth": {
+		"station": &"loom",
+		"inputs": {WOOL: 1},            # LEVER: wool a bolt, 1-3
+		"output": {CLOTH: 1},
+		"ticks": DAY_TICKS * 20 / 240,  # LEVER: fraction of a day
+	},
+	&"make_sandbag": {
+		"station": &"loom",
+		"inputs": {CLOTH: 1, STONE: 4}, # LEVER: cloth and stone a batch
+		"output": {SANDBAG: 4},         # LEVER: sandbags a cloth makes, 2-6
+		"ticks": DAY_TICKS * 10 / 240,  # LEVER: fraction of a day
+	},
+	&"make_flour": {
+		"station": &"mill",
+		"inputs": {WHEAT: 1},           # LEVER: wheat a sack, 1-3
+		"output": {FLOUR: 1},
+		"ticks": DAY_TICKS * 6 / 240,   # LEVER: fraction of a day
+	},
+	&"make_sugar": {
+		"station": &"mill",
+		"inputs": {BEET: 1},
+		"output": {SUGAR: 3},           # LEVER: sugar a beet makes, 2-4
+		"ticks": DAY_TICKS * 10 / 240,  # LEVER: fraction of a day
 	},
 }
 
@@ -1099,14 +1163,39 @@ const BUILDINGS: Dictionary = {
 		"hp": 60,                       # LEVER: hit points, 30-120
 		"cost": {WOOD: 30, IRON: 3, MONEY: 50},  # LEVER: wood, iron and money
 		"energy_draw": 0,
-		"size": Vector2i(2, 2),         # LEVER: cells; 0188 settles A031's
+		"size": Vector2i(2, 2),         # A031's footprint (task 0188)
 		"wrecks": true,
 	},
 	&"preserves_jar": {
 		"hp": 50,                       # LEVER: hit points, 30-120
 		"cost": {STONE: 20, WOOD: 10, MONEY: 50},  # LEVER: stone, wood and money
 		"energy_draw": 0,
-		"size": Vector2i(2, 2),         # LEVER: cells; 0188 settles A031's
+		"size": Vector2i(2, 2),         # A031's footprint (task 0188)
+		"wrecks": true,
+	},
+	# **The dairy, the loom and the mill** (task 0188), built by day like the
+	# keg and the jar, and wrecked rather than lost at 0 HP (0187). The mill
+	# is the tall one: sails over a stone base, three cells square, and the
+	# wind turns it - none of them draws power.
+	&"dairy": {
+		"hp": 70,                       # LEVER: hit points, 30-120
+		"cost": {WOOD: 40, STONE: 10, MONEY: 120},  # LEVER: wood, stone and money
+		"energy_draw": 0,
+		"size": Vector2i(3, 2),         # A031's footprint (task 0188)
+		"wrecks": true,
+	},
+	&"loom": {
+		"hp": 60,                       # LEVER: hit points, 30-120
+		"cost": {WOOD: 50, IRON: 4, MONEY: 120},  # LEVER: wood, iron and money
+		"energy_draw": 0,
+		"size": Vector2i(3, 2),         # A031's footprint (task 0188)
+		"wrecks": true,
+	},
+	&"mill": {
+		"hp": 90,                       # LEVER: hit points, 40-160
+		"cost": {WOOD: 60, STONE: 30, MONEY: 200},  # LEVER: wood, stone and money
+		"energy_draw": 0,
+		"size": Vector2i(3, 3),         # A031's footprint (task 0188)
 		"wrecks": true,
 	},
 }
@@ -1485,7 +1574,7 @@ const DIG_GIVES: Dictionary = {TRUFFLE: 1}  # LEVER: truffles a spot, 1-2
 const GROUP_OTHER := &"other"
 
 const RESOURCE_GROUPS: Array = [
-	{"name": &"materials", "members": [WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, STRAW, HAY]},
+	{"name": &"materials", "members": [WOOD, HARDWOOD, STONE, IRON, COPPER, COAL, GOLD, STRAW, HAY, SANDBAG]},
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET]},
 	{"name": &"seeds", "members": [CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED]},
 	{"name": FISH, "members": [CARP, PERCH, CATFISH, TILAPIA, SUNFISH, BREAM, TROUT, PIKE, EEL, DORADO, SALMON, STURGEON,
@@ -1494,7 +1583,7 @@ const RESOURCE_GROUPS: Array = [
 	# cheapest first, and a bait at $2 would be cheaper than any of them.
 	{"name": &"bait", "members": [WORM, BAIT]},
 	{"name": &"animal_goods", "members": [EGG, MILK, WOOL, TRUFFLE, MEAT]},
-	{"name": &"artisan_goods", "members": [FOOD, OIL, WINE, JUICE, JELLY, PICKLES]},
+	{"name": &"artisan_goods", "members": [FOOD, OIL, WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, FLOUR, SUGAR]},
 	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
 	{"name": &"night_leftovers", "members": []},
 	{"name": &"farm", "members": [MONEY, ENERGY, TECH]},
@@ -1571,6 +1660,9 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 	# eggs, so the roast's meat is bought - `check_livestock` holds the farm
 	# to having it from somewhere.
 	MEAT: 6,
+	# **Sugar at the stall** (task 0188): jelly takes it, and a first spring
+	# has no autumn's beets behind it.
+	SUGAR: 10,
 	CARROT_SEED: 20,              # LEVER: packets a day, 2-40
 	POTATO_SEED: 20,              # LEVER: packets a day, 2-40
 	GARLIC_SEED: 20,              # LEVER: packets a day, 2-40

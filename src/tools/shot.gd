@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["machines", "the keg, the preserves jar, the dairy, the loom and the mill in a row at noon, idle; then working", ""],
 	["keg_jar", "a keg aging wine, five mornings to go, its panel up; a preserves jar beside it setting jelly", "WorkshopPanel"],
 	["barn_night", "a wrecked barn and a hurt one at night; then the next morning, the wreck's animals inside and the hurt one's out", ""],
 	["barnyard", "the barn's cow, sheep and pig and the coop's hens about their homes, a pig's spot, the dog behind the farmer", ""],
@@ -737,6 +738,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"barnyard": _set_barnyard(state)
 		"barn_night": _set_barn_night(state)
 		"keg_jar": _set_keg_jar(state)
+		"machines": _set_machines(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -850,6 +852,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "barn_night":
 		await _shoot("barn_night", folder)
 		await _take_barn_morning(main, state, folder)
+		return
+	if name == "machines":
+		await _shoot("machines", folder)
+		await _take_machines_working(main, state, folder)
 		return
 	if name == "inventory_crops":
 		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
@@ -1613,7 +1619,7 @@ func _set_keg_jar(state: Dictionary) -> void:
 	_set_noon(state)
 	_on_date(state, 3)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 20, GameData.STONE: 100,
-		GameData.MONEY: 500, GameData.GRAPE: 6, GameData.STRAWBERRY: 3})
+		GameData.MONEY: 500, GameData.GRAPE: 6, GameData.STRAWBERRY: 3, GameData.SUGAR: 1})
 	var room: Array = GameData.MAP_SITES[&"barn"]
 	var keg := Vector2i(-1, -1)
 	var jar := Vector2i(-1, -1)
@@ -1637,6 +1643,96 @@ func _set_keg_jar(state: Dictionary) -> void:
 	_standing_at = keg + Vector2i(0, 2)
 	_stand(state, _standing_at)
 	state["player"]["facing"] = Player.NORTH
+
+
+## **The five machines** (task 0188): noon on Spring 3, a row of them by
+## the barn's empty site - keg, preserves jar, dairy, loom and mill, a cell
+## apart but the keg and the jar side by side - all idle; then the same
+## row working (`_take_machines_working`).
+func _set_machines(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 3)
+	Resources.gain(state, {GameData.WOOD: 600, GameData.IRON: 40, GameData.STONE: 300,
+		GameData.MONEY: 2000})
+	# **On open grass, nearest the barn's empty site** - in rings out from
+	# it, so the row is not put down over the sown field the noon brings.
+	var room: Array = GameData.MAP_SITES[&"barn"]
+	var site := Vector2i(int(room[0]), int(room[1]))
+	var origin := Vector2i(-1, -1)
+	for reach in 24:
+		for dy in range(-reach, reach + 1):
+			for dx in [reach - absi(dy), absi(dy) - reach]:
+				if origin.x < 0 and _row_fits(state, site + Vector2i(dx, dy)):
+					origin = site + Vector2i(dx, dy)
+	_machines = {}
+	var left := origin.x
+	for machine in MACHINE_ROW:
+		_machines[machine] = Vector2i(left, origin.y)
+		Building.place(state, machine, _machines[machine])
+		left += _row_step(machine)
+	print("  machines: a row at %s, %s" % [origin, str(_machines)])
+	# Below the jar: the camera follows him, and this keeps the keg clear of
+	# the seed bag's page in the day HUD's top left corner.
+	_standing_at = origin + Vector2i(3, 4)
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.NORTH
+
+
+## The five, left to right.
+const MACHINE_ROW := [&"keg", &"preserves_jar", &"dairy", &"loom", &"mill"]
+
+
+## From one machine's left edge to the next one's: a cell apart, but the keg
+## and the jar side by side - sixteen cells is what fits between the trees
+## west of the barn's site and the path east of it.
+func _row_step(machine: StringName) -> int:
+	return Building.size_of(machine).x + (0 if machine == &"keg" else 1)
+
+
+## Where `machines` put each of them.
+var _machines: Dictionary = {}
+
+
+## Whether the five fit side by side from `origin`, a cell apart, every cell
+## of them open grass, with grass below for the farmer to stand on.
+func _row_fits(state: Dictionary, origin: Vector2i) -> bool:
+	var left := origin.x
+	for machine in MACHINE_ROW:
+		var at := Vector2i(left, origin.y)
+		if not Building.can_place(state, machine, at):
+			return false
+		for cell in Building.footprint(machine, at):
+			if Farm.terrain_at(state, cell) != Farm.Terrain.GRASS or Farming.is_tilled(state, cell):
+				return false
+		left += _row_step(machine)
+	var stand := origin + Vector2i(3, 4)
+	return Farm.walkable(state, stand) and Farm.terrain_at(state, stand) == Farm.Terrain.GRASS
+
+
+## **The same row working** (task 0188): wine in the keg, jelly in the jar,
+## and five of butter, cloth and flour queued at the others, so none of
+## them runs dry before the shutter.
+func _take_machines_working(main: Node, state: Dictionary, folder: String) -> void:
+	Resources.gain(state, {GameData.GRAPE: 3, GameData.STRAWBERRY: 3, GameData.SUGAR: 1,
+		GameData.MILK: 10, GameData.WOOL: 5, GameData.WHEAT: 5})
+	Crafting.start(state, _machines[&"keg"], &"make_wine")
+	Crafting.start(state, _machines[&"preserves_jar"], &"make_jelly")
+	for _i in 5:
+		Crafting.start(state, _machines[&"dairy"], &"make_butter")
+		Crafting.start(state, _machines[&"loom"], &"make_cloth")
+		Crafting.start(state, _machines[&"mill"], &"make_flour")
+	var view := main.get_node("%WorldView") as WorldView
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await _shoot("machines_working", folder)
+	var running: Array = []
+	for machine in MACHINE_ROW:
+		running.append("%s %s" % [machine, WorldView.station_running(state, machine, _machines[machine])])
+	print("  machines_working: %s" % ", ".join(running))
 
 
 ## **The fish book** (task 0182): a spring Full Moon, and four species

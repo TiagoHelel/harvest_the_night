@@ -103,6 +103,9 @@ BLD_COOP,0,coop,galinheiro
 BLD_BARN,0,barn,celeiro
 BLD_KEG,0,keg,barril
 BLD_PRESERVES_JAR,0,preserves jar,pote de conserva
+BLD_DAIRY,0,dairy,laticínios
+BLD_LOOM,0,loom,tear
+BLD_MILL,0,mill,moinho
 BLD_KITCHEN,0,kitchen,cozinha
 BLD_PRESS,0,press,prensa
 BLD_WORKSHOP,0,workshop,oficina
@@ -256,6 +259,12 @@ ITEM_WINE,0,wine,vinho
 ITEM_JUICE,0,juice,suco
 ITEM_JELLY,0,jelly,geleia
 ITEM_PICKLES,0,pickles,picles
+ITEM_CHEESE,0,cheese,queijo
+ITEM_BUTTER,0,butter,manteiga
+ITEM_CLOTH,0,cloth,tecido
+ITEM_SANDBAG,0,sandbag,saco de areia
+ITEM_FLOUR,0,flour,farinha
+ITEM_SUGAR,0,sugar,açúcar
 ITEM_FOOD,0,food,comida
 ITEM_GUNPOWDER,0,gunpowder,pólvora
 ITEM_INCENDIARY,0,incendiary,incendiária
@@ -344,6 +353,12 @@ REC_MAKE_WINE,0,make wine,fazer vinho
 REC_MAKE_JUICE,0,make juice,fazer suco
 REC_MAKE_JELLY,0,make jelly,fazer geleia
 REC_MAKE_PICKLES,0,make pickles,fazer picles
+REC_MAKE_BUTTER,0,make butter,fazer manteiga
+REC_MAKE_CHEESE,0,make cheese,fazer queijo
+REC_MAKE_CLOTH,0,make cloth,fazer tecido
+REC_MAKE_SANDBAG,0,make sandbags,fazer sacos de areia
+REC_MAKE_FLOUR,0,make flour,fazer farinha
+REC_MAKE_SUGAR,0,make sugar,fazer açúcar
 REC_FENCE_KIT,0,fence kit,kit de cerca
 REC_MAKE_GUNPOWDER,0,make gunpowder,fazer pólvora
 REC_MAKE_INCENDIARY,0,make incendiary,fazer incendiária

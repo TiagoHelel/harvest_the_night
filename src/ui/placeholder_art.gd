@@ -156,10 +156,13 @@ const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_sc
 const COOP := {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "draw_scale": 1.0}
 const BARN := {"canvas": Vector2i(96, 100), "pivot": Vector2i(48, 96), "draw_scale": 1.0}
 
-## A031's keg and preserves jar (task 0187), on the pack's provisional
-## canvas: 48x56 at (24,52) over 2x2 cells, drawn at 1.0, until 0188 settles
-## the five machines.
+## A031's five machines, at the canvases task 0188 settled, all drawn at
+## 1.0: the keg and the preserves jar 48x56 at (24,52) over 2x2 cells, the
+## dairy and the loom 64x64 at (32,60) over 3x2, the mill 64x96 at (32,92)
+## over 3x3.
 const MACHINE_SMALL := {"canvas": Vector2i(48, 56), "pivot": Vector2i(24, 52), "draw_scale": 1.0}
+const MACHINE_WIDE := {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "draw_scale": 1.0}
+const MACHINE_TALL := {"canvas": Vector2i(64, 96), "pivot": Vector2i(32, 92), "draw_scale": 1.0}
 
 ## A026-A028's animals (task 0185): a large one - cow, sheep, pig, dog - is
 ## 40x32 at (20,30), the chicken 24x24 at (12,22), all drawn at 1.0.
@@ -357,6 +360,39 @@ const ART := {
 	&"hud_jelly": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_food", "tint": Color(1.0, 0.45, 0.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_pickles": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_food", "tint": Color(0.6, 1.1, 0.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_pickles": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_food", "tint": Color(0.6, 1.1, 0.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	# A031's dairy, loom and mill (task 0188), idle, working, hurt and
+	# wrecked: the kitchen in cream for the dairy, the workshop in cloth
+	# blue for the loom, and the press grown tall and weathered grey for
+	# the mill - until 0213.
+	&"dairy": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen", "stand_in_scale": 0.65, "tint": Color(1.05, 1.1, 1.25), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
+	&"dairy_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_active", "stand_in_scale": 0.65, "tint": Color(1.05, 1.1, 1.25), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
+	&"dairy_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.65, "tint": Color(1.05, 1.1, 1.25), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
+	&"dairy_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.65, "tint": Color(0.5, 0.5, 0.55), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
+	&"loom": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop", "stand_in_scale": 0.65, "tint": Color(0.85, 0.95, 1.3), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
+	&"loom_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_active", "stand_in_scale": 0.65, "tint": Color(0.85, 0.95, 1.3), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
+	&"loom_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.65, "tint": Color(0.85, 0.95, 1.3), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
+	&"loom_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.65, "tint": Color(0.48, 0.5, 0.58), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
+	&"mill": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press", "stand_in_scale": 0.85, "tint": Color(0.88, 0.86, 0.92), "geometry": MACHINE_TALL, "final": MACHINE_TALL, "bare": true},
+	&"mill_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_active", "stand_in_scale": 0.85, "tint": Color(0.88, 0.86, 0.92), "geometry": MACHINE_TALL, "final": MACHINE_TALL, "bare": true},
+	&"mill_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_hurt", "stand_in_scale": 0.85, "tint": Color(0.88, 0.86, 0.92), "geometry": MACHINE_TALL, "final": MACHINE_TALL, "bare": true},
+	&"mill_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_hurt", "stand_in_scale": 0.85, "tint": Color(0.55, 0.52, 0.5), "geometry": MACHINE_TALL, "final": MACHINE_TALL, "bare": true},
+	# A032's cheese, butter, cloth, sandbag, flour and sugar (task 0188):
+	# the meat's slab in cheese yellow, the food's bowl as butter, the
+	# logs as bolts of blue cloth, the stone as a burlap sack, the
+	# gunpowder's heap as white flour and the coins as sugar cubes -
+	# until 0214.
+	&"icon_cheese": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_meat", "tint": Color(1.3, 1.2, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_cheese": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_meat", "tint": Color(1.3, 1.2, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_butter": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_food", "tint": Color(1.35, 1.3, 0.75), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_butter": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_food", "tint": Color(1.35, 1.3, 0.75), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_cloth": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wood", "tint": Color(0.8, 0.9, 1.35), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_cloth": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wood", "tint": Color(0.8, 0.9, 1.35), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_sandbag": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(1.3, 1.1, 0.75), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_sandbag": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(1.3, 1.1, 0.75), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_flour": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_gunpowder", "tint": Color(1.6, 1.6, 1.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_flour": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.6, 1.6, 1.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_sugar": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_money", "tint": Color(1.5, 1.5, 1.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_sugar": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_money", "tint": Color(1.5, 1.5, 1.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
 	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},

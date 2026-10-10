@@ -21,11 +21,15 @@ sacks.
 
 ## Deliverables
 
-The table is provisional: game task 0188 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final item list settled by game task 0188: the eleven rows stand as written.
+Their ids are the game's resource ids - `wine`, `juice`, `jelly` and `pickles`
+(0187), `cheese`, `butter`, `cloth`, `sandbag`, `flour` and `sugar` (0188), and
+`bread`, which 0192 adds to the kitchen. Jelly takes the mill's sugar; a sandbag
+is a material until 0231 gives it a night. Until 0214 the game draws them with
+stand-ins through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 Every file: 1 frame, 1.0 s, static (`loop` false), direction `none`, `mirror:
-"none"`, draw 1.0, runtime file `sprites/ui/<name>.png`. The ids are the resource
-ids 0187, 0188 and 0192 give the goods; 0188 writes the final list here.
+"none"`, draw 1.0, runtime file `sprites/ui/<name>.png`.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

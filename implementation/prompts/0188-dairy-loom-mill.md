@@ -1,7 +1,7 @@
 # 0188 - The dairy, the loom and the mill
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0187, 0185
 - **Likely files:** src/core/game_data.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd
 

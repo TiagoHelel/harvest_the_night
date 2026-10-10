@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 57
+const GROUPS := 58
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -126,6 +126,7 @@ func _run() -> void:
 	_task_0185_animals()
 	_task_0186_barns_night()
 	_task_0187_keg()
+	_task_0188_mills()
 
 
 func _finish() -> void:
@@ -3259,11 +3260,13 @@ func _task_0166_long_day() -> void:
 	var batches := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 24, &"make_gunpowder": 16,
-		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13, &"make_bait": 48, &"make_hay": 80}
+		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13, &"make_bait": 48, &"make_hay": 80,
+		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 24, &"make_flour": 40, &"make_sugar": 24}
 	var units := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 96, &"make_gunpowder": 32,
-		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52, &"make_bait": 192, &"make_hay": 80}
+		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52, &"make_bait": 192, &"make_hay": 80,
+		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 96, &"make_flour": 40, &"make_sugar": 72}
 	var ordinary := 0
 	for id in GameData.RECIPES:
 		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty() \
@@ -5508,7 +5511,7 @@ func _task_0187_keg() -> void:
 	expect(Resources.amount(state, GameData.JUICE) == 3, "juice after its mornings")
 
 	# **The jar**, both of its recipes back to back in one queue.
-	Resources.gain(state, {GameData.STRAWBERRY: 3, GameData.PEPPER: 3})
+	Resources.gain(state, {GameData.STRAWBERRY: 3, GameData.SUGAR: 1, GameData.PEPPER: 3})
 	expect(Crafting.start(state, jar, &"make_jelly") and Crafting.start(state, jar, &"make_pickles"),
 		"jelly then pickles queued at the jar")
 	for _morning in Crafting.days_of(&"make_jelly"):
@@ -5554,6 +5557,87 @@ func _task_0187_keg() -> void:
 		_next_morning(state)
 	expect(Resources.amount(state, GameData.WINE) == 6,
 		"and the mornings it lost come after: the wine on its count", str(Resources.amount(state, GameData.WINE)))
+	_completed += 1
+
+
+## Task 0188: the dairy, the loom and the mill. Milk into butter by the tick
+## and into cheese over two mornings, wool into cloth and cloth with stone
+## into sandbags, wheat into flour and beet into sugar - every recipe run at
+## its machine and each worth more than its inputs. Jelly now takes the
+## mill's sugar, and the stall sells some for a first spring.
+func _task_0188_mills() -> void:
+	expect(GameData.validate().is_empty(), "the tables validate with the dairy, the loom and the mill",
+		str(GameData.validate()))
+	var makes := {&"make_butter": [&"dairy", GameData.BUTTER], &"make_cheese": [&"dairy", GameData.CHEESE],
+		&"make_cloth": [&"loom", GameData.CLOTH], &"make_sandbag": [&"loom", GameData.SANDBAG],
+		&"make_flour": [&"mill", GameData.FLOUR], &"make_sugar": [&"mill", GameData.SUGAR]}
+	for id in GameData.sorted_names(makes.keys()):
+		var recipe: Dictionary = GameData.RECIPES[id]
+		var made: StringName = makes[id][1]
+		expect(recipe["station"] == makes[id][0] and (recipe["output"] as Dictionary).has(made)
+			and GameData.SELL_PRICE.has(made) and Names.KEYS.has(made) and Names.KEYS.has(id)
+			and GameData.check_chain({id: recipe}, GameData.SELL_PRICE).is_empty()
+			and GameData._worth(recipe["output"]) > GameData._worth(recipe["inputs"]),
+			"%s: at the %s, named, and check_chain holds ($%d of goods into $%d)" % [id, makes[id][0],
+				GameData._worth(recipe["inputs"]), GameData._worth(recipe["output"])])
+	expect(Crafting.days_of(&"make_cheese") > 0 and Crafting.days_of(&"make_butter") == 0
+		and (GameData.RECIPES[&"make_sandbag"]["inputs"] as Dictionary).has(GameData.CLOTH),
+		"cheese ages in mornings, butter is churned by the tick, and a sandbag is made of cloth")
+	expect(GameData.group_members(&"materials").has(GameData.SANDBAG)
+		and GameData.group_members(&"artisan_goods").has(GameData.CHEESE)
+		and GameData.group_members(&"artisan_goods").has(GameData.FLOUR),
+		"a sandbag is a material; the rest are artisan goods")
+	expect((GameData.RECIPES[&"make_jelly"]["inputs"] as Dictionary).has(GameData.SUGAR)
+		and int(GameData.DAILY_STOCK.get(GameData.SUGAR, 0)) > 0
+		and GameData.check_stall(GameData.DAILY_STOCK, GameData.SELL_PRICE, GameData.BUY_MARKUP).is_empty(),
+		"jelly takes sugar, and the stall sells it for a spring with no beets behind it")
+	for machine in [&"dairy", &"loom", &"mill"]:
+		expect(Crafting.is_station(machine) and Names.KEYS.has(machine) and Pathing.is_prey(machine)
+			and Building.wrecks(machine) and int(GameData.BUILDINGS[machine]["energy_draw"]) == 0,
+			"the %s is a named station, prey to breakers, wrecked rather than lost, and draws no power" % machine)
+
+	# **Every recipe runs at its machine.**
+	var state := State.create(1880)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 30, GameData.STONE: 300, GameData.MONEY: 1500})
+	var at := {}
+	# The jar too, for the sugar below: built before the cheese's mornings,
+	# which wake the farmer indoors, where nothing is built.
+	for machine in [&"dairy", &"loom", &"mill", &"preserves_jar"]:
+		at[machine] = _spot_for(state, machine)
+		expect(Building.place(state, machine, at[machine]), "the %s goes up by day" % machine, str(at[machine]))
+	for id in GameData.sorted_names(makes.keys()):
+		var recipe: Dictionary = GameData.RECIPES[id]
+		var made: StringName = makes[id][1]
+		var cell: Vector2i = at[makes[id][0]]
+		Resources.gain(state, recipe["inputs"])
+		var before := Resources.amount(state, made)
+		expect(Crafting.start(state, cell, id) and not Crafting.is_stalled(state, cell), "%s starts" % id)
+		if Crafting.days_of(id) > 0:
+			for _morning in Crafting.days_of(id):
+				_next_morning(state)
+		else:
+			Sim.advance(state, int(recipe["ticks"]) + 1)
+		expect(Resources.amount(state, made) == before + int((recipe["output"] as Dictionary)[made])
+			and not Crafting.busy(state, cell),
+			"%s runs: %d %s out, the %s free again" % [id, int((recipe["output"] as Dictionary)[made]), made, makes[id][0]],
+			str(Resources.amount(state, made)))
+
+	# **Jelly waits for its sugar.**
+	var jar: Vector2i = at[&"preserves_jar"]
+	Resources.add(state, GameData.STRAWBERRY, 3)
+	Resources.spend(state, GameData.SUGAR, Resources.amount(state, GameData.SUGAR))
+	var queued := Crafting.start(state, jar, &"make_jelly")
+	expect(queued and Crafting.is_stalled(state, jar)
+		and Resources.amount(state, GameData.STRAWBERRY) == 3,
+		"strawberries without sugar wait in the jar's queue, and are not taken",
+		"queued %s, stalled %s, strawberries %d, sugar %d, %s" % [queued, Crafting.is_stalled(state, jar),
+			Resources.amount(state, GameData.STRAWBERRY), Resources.amount(state, GameData.SUGAR),
+			str(Crafting.queue_at(state, jar))])
+	Resources.add(state, GameData.SUGAR, 1)
+	Sim.tick(state)
+	expect(not Crafting.is_stalled(state, jar) and Resources.amount(state, GameData.STRAWBERRY) == 0
+		and Resources.amount(state, GameData.SUGAR) == 0,
+		"the sugar arrives and the batch starts, both taken")
 	_completed += 1
 
 

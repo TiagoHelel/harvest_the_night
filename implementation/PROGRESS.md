@@ -19216,3 +19216,163 @@ src/tools/{headless_check,headless_v1,input_v1,shot}.gd, assets/locale/strings.c
 tools/determinism_{sim,data}_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/0187-keg-and-jar.md, implementation/shots/0187/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0188 - The dairy, the loom and the mill - done 2026-10-10
+
+What changed: three more artisan machines.
+- The dairy makes butter and cheese from milk.
+- The loom makes cloth from wool, and sandbags from cloth.
+- The mill makes flour from wheat and sugar from beet.
+
+Jelly now takes the mill's sugar. Packs A031 and A032 are settled.
+
+**The machines** (`BUILDINGS`, every number a lever):
+
+| | Size | HP | Cost |
+|---|---|---|---|
+| dairy | 3x2 | 70 | 40 wood, 10 stone, $120 |
+| loom | 3x2 | 60 | 50 wood, 4 iron, $120 |
+| mill | 3x3 | 90 | 60 wood, 30 stone, $200 |
+
+- They are built by day, and breakers hunt them.
+- They wreck rather than fall, as 0187 decided for machines.
+- None draws power: the wind turns the mill.
+- Their names are "laticínios", "tear" and "moinho".
+
+**The recipes** (levers):
+
+| Recipe | At | In | Out | Time | Worth |
+|---|---|---|---|---|---|
+| make_butter | dairy | 2 milk | 1 butter | 1/20 of a day | $18 -> $22 |
+| make_cheese | dairy | 3 milk | 3 cheese | 2 mornings | $27 -> $60 |
+| make_cloth | loom | 1 wool | 1 cloth | 1/12 of a day | $10 -> $15 |
+| make_sandbag | loom | 1 cloth, 4 stone | 4 sandbags | 1/24 of a day | $27 -> $32 |
+| make_flour | mill | 1 wheat | 1 flour | 1/40 of a day | $4 -> $7 |
+| make_sugar | mill | 1 beet | 3 sugar | 1/24 of a day | $11 -> $15 |
+
+- **Butter is churned by the tick and cheese ages two mornings** (decided):
+  the dairy's quick money and its slow money.
+- **Prices:** CHEESE 20, BUTTER 22, CLOTH 15, SANDBAG 8, FLOUR 7, SUGAR 5.
+  - The goods made within a day stay under oil (0032's rule, narrowed by
+    0187).
+  - The cheese is aged, and `check_chain` asks its two mornings for $20; it
+    adds $33.
+- **The sandbag's filler is stone** (decided): what a farm has by the
+  cartload.
+- **Groups:** the sandbag is a material, and its night use is 0231's. The
+  rest are artisan goods.
+- **0166's daily budget** has five new rows, one per new recipe timed by the
+  tick.
+
+**Jelly takes sugar** (decided; plan section 3.1: "beterraba vira açúcar
+para geleias", beet becomes sugar for jellies):
+- `make_jelly` is now 3 strawberries and 1 sugar into 3 jelly: $65 into
+  $120, still more than the $30 its three mornings ask.
+- **The stall stocks 10 sugar a day**, at $13. A first spring has no
+  autumn's beets behind it, and without the stall's sugar it could make no
+  jelly.
+
+**Art settled:**
+- **A031**, final geometry, as the game's `BUILDINGS` sizes:
+  - **footprints and canvases:** the keg and the jar 2x2 at 48x56 (24,52),
+    the dairy and the loom 3x2 at 64x64 (32,60), the mill 3x3 at 64x96
+    (32,92);
+  - **four states each** (idle, active, hurt, wreck): 20 frames, from
+    four-cell state sheets;
+  - **the wreck:** every row names its `_wreck` and says what is broken.
+    The wreck bullet says it stands on its idle base, inside the footprint,
+    and reads as broken past hurt;
+  - **points:** the jar's are on idle, active and hurt, none on the wreck;
+  - acceptance, method and delivery are updated to match.
+- **A032:** the eleven rows stand as written, and the ids are final: wine,
+  juice, jelly and pickles (0187); cheese, butter, cloth, sandbag, flour and
+  sugar (0188); bread (0192).
+
+**Stand-ins** (0120's road, until 0213 and 0214):
+- **Machines**, each idle, working, hurt and wrecked, on A031's settled
+  canvases (`MACHINE_WIDE`, `MACHINE_TALL`):
+  - the dairy is the kitchen in cream;
+  - the loom is the workshop in cloth blue;
+  - the mill is the press at 0.85, weathered grey.
+- **Icons:**
+  - cheese is the meat's slab in yellow;
+  - butter is the food's bowl in pale yellow;
+  - cloth is the logs in blue;
+  - the sandbag is the stone in tan;
+  - flour is the gunpowder's heap in white;
+  - sugar is the coins in white.
+
+### Hashes
+
+- **SIM 788609249 -> 729970321, on purpose:**
+  - the six goods in `held` and `gained`;
+  - the three machines in `selected_recipe`;
+  - the stall's sugar on its shelf.
+- **DATA 178413484 -> 2949384217, on purpose:**
+  - the six goods, their prices and their groups;
+  - the six recipes, and jelly's sugar;
+  - the three machines;
+  - the stall's sugar.
+
+Verify: 60 passed, 0 failed in 672s (the known OVER BUDGET), with `--accept`,
+on the first run: headless_check 17446 asserts, headless_v1 2031,
+input_check 1218 cases, input_v1 659, UI art 12828 checks.
+
+**Tests:**
+- `_task_0188_mills` (headless_v1):
+  - **Data:**
+    - Each recipe is at its machine, named, and `check_chain` holds.
+    - Cheese takes days, butter ticks, and a sandbag is made of cloth.
+    - The sandbag is a material, and the rest are artisan goods.
+    - Jelly takes sugar, and the stall sells it under its own check.
+    - The three machines are named stations, hunted by breakers, wrecked
+      rather than lost, and draw no power.
+  - **Every recipe runs:**
+    - The three machines and a jar go up by day.
+    - Each tick recipe runs by the tick, and the cheese by its mornings.
+    - Each gives exactly its output and leaves its machine free.
+  - **Jelly waits for its sugar:**
+    - Strawberries with no sugar wait in the queue and are not taken.
+    - The sugar arrives, the tick starts the batch, and both are taken.
+- `_task_0187_keg`: the jar's jelly is given its sugar.
+- `_task_0166_long_day`: five new rows.
+- `headless_check` asks for one shot per scenario: 70 now (`machines`).
+
+Looked at (`python tools/shot.py 0188 machines keg_jar build_day --fhd`,
+1920x1080):
+- **`machines`**, noon on Spring 3: the five in a row on the barn's empty
+  site, on grass, left to right keg, jar, dairy, loom and mill, all idle.
+  The farmer is below the jar.
+- **`machines_working`:** the same row working:
+  - smoke over the jar;
+  - the presses' arms moved (keg and mill);
+  - the dairy's oven lit, and the loom's working art.
+  - All five report running.
+- **`keg_jar`:** the jar sets its jelly with sugar, one morning to go.
+- **`build_day`:** fourteen rows, all inside the panel.
+
+Three takes of `machines`:
+- **The sown field.** The row went down on the sown field the noon brings:
+  `Building.can_place` allows soil and turned earth. The row now asks for
+  open grass under every cell.
+  - That take also showed the mill's first tint, (1.2, 1.15, 1.05), turning
+    the press gold. It is weathered grey now.
+- **The forest.** Asking for a clear column beside the row moved it into
+  the forest, and the farmer stood hidden among the trees. That was
+  dropped.
+- **Sixteen cells.** The path at x=39 and the trees at x=21 leave sixteen
+  cells by the barn's site, so the keg and the jar stand side by side.
+
+Notes:
+- `WorldView.new()` in headless runs leaks one dummy shader RID at exit. It
+  is printed after the totals, and an isolated run shows it comes from the
+  view itself, which older tests already make. It is not new and fails
+  nothing.
+
+Files: src/core/game_data.gd,
+src/ui/{names,placeholder_art}.gd,
+src/tools/{headless_check,headless_v1,shot}.gd, assets/locale/strings.csv,
+tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/{A031-machines,A032-artisan-goods}.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0188-dairy-loom-mill.md,
+implementation/shots/0188/, docs/devlog/{index,index.pt_BR}.md

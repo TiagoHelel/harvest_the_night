@@ -88,6 +88,12 @@ const KEYS: Dictionary = {
 	&"juice": &"ITEM_JUICE",
 	&"jelly": &"ITEM_JELLY",
 	&"pickles": &"ITEM_PICKLES",
+	&"cheese": &"ITEM_CHEESE",
+	&"butter": &"ITEM_BUTTER",
+	&"cloth": &"ITEM_CLOTH",
+	&"sandbag": &"ITEM_SANDBAG",
+	&"flour": &"ITEM_FLOUR",
+	&"sugar": &"ITEM_SUGAR",
 	&"oil": &"ITEM_OIL",
 	&"wheat": &"ITEM_WHEAT",
 	&"corn": &"ITEM_CORN",
@@ -142,6 +148,9 @@ const KEYS: Dictionary = {
 	&"barn": &"BLD_BARN",
 	&"keg": &"BLD_KEG",
 	&"preserves_jar": &"BLD_PRESERVES_JAR",
+	&"dairy": &"BLD_DAIRY",
+	&"loom": &"BLD_LOOM",
+	&"mill": &"BLD_MILL",
 
 	# ---- what those make
 	&"barricade_kit": &"REC_BARRICADE_KIT",
@@ -161,6 +170,12 @@ const KEYS: Dictionary = {
 	&"make_juice": &"REC_MAKE_JUICE",
 	&"make_jelly": &"REC_MAKE_JELLY",
 	&"make_pickles": &"REC_MAKE_PICKLES",
+	&"make_butter": &"REC_MAKE_BUTTER",
+	&"make_cheese": &"REC_MAKE_CHEESE",
+	&"make_cloth": &"REC_MAKE_CLOTH",
+	&"make_sandbag": &"REC_MAKE_SANDBAG",
+	&"make_flour": &"REC_MAKE_FLOUR",
+	&"make_sugar": &"REC_MAKE_SUGAR",
 
 	# ---- what comes out of the dark. **Plural pairs**, so `I18n.plural`
 	# takes these keys and adds `.one` or `.other` itself.
