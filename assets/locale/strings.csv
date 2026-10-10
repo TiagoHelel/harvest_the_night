@@ -107,6 +107,10 @@ BLD_DAIRY,0,dairy,laticínios
 BLD_LOOM,0,loom,tear
 BLD_MILL,0,mill,moinho
 FIX_SHIPPING_BIN,0,shipping bin,caixa de envio
+ANIMAL_CHICKEN,0,chicken,galinha
+ANIMAL_COW,0,cow,vaca
+ANIMAL_SHEEP,0,sheep,ovelha
+ANIMAL_PIG,0,pig,porco
 BLD_KITCHEN,0,kitchen,cozinha
 BLD_PRESS,0,press,prensa
 BLD_WORKSHOP,0,workshop,oficina
@@ -421,18 +425,21 @@ SEASON_SPRING,0,SPRING,PRIMAVERA
 SEASON_SUMMER,0,SUMMER,VERÃO
 SEASON_WINTER,0,WINTER,INVERNO
 SHOP_ALL,0,all,tudo
+SHOP_ANIMALS,0,ANIMALS,ANIMAIS
 SHOP_BUY,0,BUY,COMPRAR
 SHOP_BUY_ROW,0,%s  @ $%d   %d left,%s  @ $%d   %d restam
 SHOP_FIVE,0,5,5
 SHOP_HINT,0,esc to leave,esc para sair
 SHOP_MONEY,0,$ %d,$ %d
 SHOP_ONE,0,1,1
+SHOP_ONE_ROW,0,%s  %s   %d left,%s  %s   %d restam
 SHOP_SEEDS,0,CHOOSE SEEDS,ESCOLHER SEMENTES
 SHOP_SEED_ROW,0,%s x%d  %dd  $%d/season,%s x%d  %dd  $%d/estação
 SHOP_SELL,0,SELL,VENDER
 SHOP_SELL_ROW,0,%s  x%d  @ $%d,%s  x%d  @ $%d
 SHOP_SOW,0,sow,plantar
 SHOP_TITLE,0,MARKET,MERCADO
+SHOP_TOOLS,0,TOOLS,FERRAMENTAS
 SHIP_TITLE,0,SHIPPING BIN,CAIXA DE ENVIO
 SHIP_HEADING,0,PUT IN - PAID AT DAWN,COLOCAR - PAGO DE MANHÃ
 SHIP_DUE,0,in the bin: $%d tomorrow,na caixa: $%d amanhã
@@ -542,6 +549,9 @@ WHY_ONLY_AT_NIGHT,228,only at night,só de noite
 WHY_ON_THE_HOUSE,228,on the house,em cima da casa
 WHY_ON_THE_ROCK,228,on the rock face,na pedra
 WHY_SHORT,228,short %s,falta %s
+WHY_STALL_CLOSED,228,the stall trades %s-%s,a banca abre das %s às %s
+WHY_NO_HOME,228,no %s with room,nenhum %s com espaço
+WHY_SOLD_OUT,228,none left today,acabou por hoje
 WHY_TOP_LEVEL,228,already automatic,já é automática
 WHY_TRAP_LIMIT,228,%d armed is all the farm will take,%d armadas é tudo que a fazenda aguenta
 WORK_AWAY,0,while you were away:  %s,enquanto você estava fora:  %s

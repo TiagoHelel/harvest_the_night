@@ -1663,19 +1663,47 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 	# **Sugar at the stall** (task 0188): jelly takes it, and a first spring
 	# has no autumn's beets behind it.
 	SUGAR: 10,
-	CARROT_SEED: 20,              # LEVER: packets a day, 2-40
-	POTATO_SEED: 20,              # LEVER: packets a day, 2-40
-	GARLIC_SEED: 20,              # LEVER: packets a day, 2-40
-	STRAWBERRY_SEED: 20,              # LEVER: packets a day, 2-40
-	CORN_SEED: 20,              # LEVER: packets a day, 2-40
-	PEPPER_SEED: 20,              # LEVER: packets a day, 2-40
-	SUNFLOWER_SEED: 20,              # LEVER: packets a day, 2-40
-	MELON_SEED: 20,              # LEVER: packets a day, 2-40
-	WHEAT_SEED: 20,              # LEVER: packets a day, 2-40
-	PUMPKIN_SEED: 20,              # LEVER: packets a day, 2-40
-	GRAPE_SEED: 20,              # LEVER: packets a day, 2-40
-	BEET_SEED: 20,              # LEVER: packets a day, 2-40
 }
+
+## **This season's packets** (task 0190, moved here from 0170): the peddler
+## carries the seeds that can be sown now, beside the materials above, and
+## none in winter, when nothing grows outside. `check_season_stock` holds
+## every packet to its crop's sowing seasons.
+const SEASON_STOCK: Dictionary = {
+	&"spring": {CARROT_SEED: 20, POTATO_SEED: 20, GARLIC_SEED: 20, STRAWBERRY_SEED: 20},  # LEVER: packets a day, 2-40
+	&"summer": {CORN_SEED: 20, PEPPER_SEED: 20, SUNFLOWER_SEED: 20, MELON_SEED: 20},  # LEVER: packets a day, 2-40
+	&"autumn": {WHEAT_SEED: 20, PUMPKIN_SEED: 20, GRAPE_SEED: 20, BEET_SEED: 20},  # LEVER: packets a day, 2-40
+	&"winter": {},
+}
+
+## **Animals at the stall** (task 0190): what the peddler asks for each, and
+## how many he brings a day. One bought goes into a coop or a barn of its
+## kind with room (`Livestock.house`), or is not sold at all. Priced at some
+## two weeks of what one gives; `check_stall` keeps each over whatever the
+## stall would pay back for it.
+const ANIMAL_PRICE: Dictionary = {
+	&"chicken": 60,                  # LEVER: money, 30-120
+	&"cow": 150,                     # LEVER: money, 80-300
+	&"sheep": 150,                   # LEVER: money, 80-300
+	&"pig": 220,                     # LEVER: money, 120-400
+}
+const ANIMAL_STOCK: Dictionary = {
+	&"chicken": 4,                   # LEVER: a day, 1-8
+	&"cow": 1,                       # LEVER: a day, 1-4
+	&"sheep": 2,                     # LEVER: a day, 1-4
+	&"pig": 2,                       # LEVER: a day, 1-4
+}
+
+## **The workshop's tool upgrades, from his pack too** (task 0190): each
+## one on the stall's shelf this many times a day, at the workshop's price
+## and through its rules (`ToolTiers`) - ready the next morning, as there.
+const UPGRADE_STOCK := 1                # LEVER: of each upgrade a day, 1-3
+
+## **The peddler's hours** (task 0190; plan section 3.6): the stall trades
+## from 08:00 to 17:00 on 0126's clock, in game minutes. `check_stall_hours`
+## keeps them in order inside the day, and before dusk.
+const STALL_OPENS := 8 * 60             # LEVER: minutes, 06:00-12:00
+const STALL_CLOSES := 17 * 60           # LEVER: minutes, 13:00-dusk
 
 
 ## Day one, in five lines.
@@ -2708,7 +2736,11 @@ static func validate() -> Array:
 	errors.append_array(check_ammo(DEFENCES, RECIPES))
 	errors.append_array(check_groups(RESOURCE_GROUPS, RESOURCES))
 	errors.append_array(check_resource_prices(RESOURCES, SELL_PRICE))
-	errors.append_array(check_stall(DAILY_STOCK, SELL_PRICE, BUY_MARKUP))
+	# Every season's shelf (task 0190), animals and upgrades on it.
+	for season in SEASONS:
+		errors.append_array(check_stall(stall_stock(season), SELL_PRICE, BUY_MARKUP))
+	errors.append_array(check_season_stock(SEASON_STOCK))
+	errors.append_array(check_stall_hours(STALL_OPENS, STALL_CLOSES))
 	errors.append_array(check_tutorial(TUTORIAL))
 	errors.append_array(check_pathing(TERRAIN_COST, DEFENCES, BUILDINGS))
 
@@ -3865,12 +3897,28 @@ static func check_stall(stock: Dictionary, prices: Dictionary,
 		markup: float) -> Array:
 	var errors: Array = []
 	for id in sorted_names(stock.keys()):
-		if not RESOURCES.has(id):
+		# **An animal** (task 0190): a price of its own, and nothing to be
+		# made buying it and selling it back.
+		if LIVESTOCK.has(id):
+			var price := int(ANIMAL_PRICE.get(id, 0))
+			if price <= 0:
+				errors.append("the stall sells a '%s' at no price" % id)
+			elif price <= int(prices.get(id, 0)):
+				errors.append(("a '%s' costs $%d and sells for $%d - buy it and "
+					+ "sell it back and you are richer") % [id, price, int(prices[id])])
+		# **A tool upgrade** (task 0190): the workshop's recipe prices it.
+		elif is_tool_upgrade(id):
+			pass
+		elif not RESOURCES.has(id):
 			errors.append("the stall stocks '%s', which is not a resource" % id)
 		elif not prices.has(id):
 			errors.append("the stall stocks '%s', which has no price" % id)
 		if int(stock[id]) <= 0:
 			errors.append("the stall stocks no '%s' at all" % id)
+	# Every animal the farm keeps is one the stall can sell.
+	for kind in sorted_names(LIVESTOCK.keys()):
+		if int(ANIMAL_PRICE.get(kind, 0)) <= 0 or int(ANIMAL_STOCK.get(kind, 0)) <= 0:
+			errors.append("the stall has no '%s' to sell" % kind)
 
 	for id in sorted_names(prices.keys()):
 		var sells_for := int(prices[id])
@@ -3881,6 +3929,67 @@ static func check_stall(stock: Dictionary, prices: Dictionary,
 		if costs <= sells_for:
 			errors.append(("'%s' costs $%d and sells for $%d - buy it and sell "
 				+ "it back and you are richer") % [id, costs, sells_for])
+	return errors
+
+
+## **The stall's shelf on a day of this season** (task 0190): the materials,
+## the season's packets, the animals and one of each tool upgrade. What
+## `Shop` puts out each morning, and what `validate()` checks for each season.
+static func stall_stock(season: StringName) -> Dictionary:
+	var out: Dictionary = DAILY_STOCK.duplicate()
+	out.merge(SEASON_STOCK.get(season, {}) as Dictionary)
+	out.merge(ANIMAL_STOCK)
+	for id in tool_upgrades():
+		out[id] = UPGRADE_STOCK
+	return out
+
+
+## The workshop's tool upgrade recipes, in name order (task 0190).
+static func tool_upgrades() -> Array:
+	var out: Array = []
+	for id in sorted_names(RECIPES.keys()):
+		if is_tool_upgrade(id):
+			out.append(id)
+	return out
+
+
+## Whether this is a tool upgrade's recipe id.
+static func is_tool_upgrade(id: StringName) -> bool:
+	if not RECIPES.has(id):
+		return false
+	var output: Dictionary = (RECIPES[id] as Dictionary)["output"]
+	return output.size() == 1 and not tool_output(StringName(output.keys()[0])).is_empty()
+
+
+## **Every season's packets are its own** (task 0190): each a crop's packet
+## sown in that season, every season named, and none where nothing grows.
+static func check_season_stock(table: Dictionary) -> Array:
+	var errors: Array = []
+	for season in SEASONS:
+		if not table.has(season):
+			errors.append("the stall says nothing about %s" % season)
+	for season in sorted_names(table.keys()):
+		if not SEASONS.has(season):
+			errors.append("the stall stocks for '%s', which is no season" % season)
+			continue
+		for id in sorted_names((table[season] as Dictionary).keys()):
+			var crop := StringName(String(id).trim_suffix("_seed"))
+			if not String(id).ends_with("_seed") or not CROPS.has(crop):
+				errors.append("%s's shelf has '%s', which is no packet" % [season, id])
+			elif not (CROPS[crop]["seasons"] as Array).has(season):
+				errors.append("%s's shelf has '%s', not sown in %s" % [season, id, season])
+		if NO_GROWTH_SEASONS.has(season) and not (table[season] as Dictionary).is_empty():
+			errors.append("%s has packets, and nothing grows then" % season)
+	return errors
+
+
+## **The peddler's hours** (task 0190): open after the day starts, closed
+## before dusk, and open for some of it.
+static func check_stall_hours(opens: int, closes: int) -> Array:
+	var errors: Array = []
+	if opens < DAY_START_MINUTE or closes > DUSK_MINUTE or opens >= closes:
+		errors.append("the stall opens at %d and closes at %d - it has to keep hours inside %d-%d"
+			% [opens, closes, DAY_START_MINUTE, DUSK_MINUTE])
 	return errors
 
 
@@ -4111,6 +4220,10 @@ static func digest() -> int:
 		"starting": STARTING_RESOURCES,
 		"trade": [BUY_MARKUP, SELL_BACK_FRACTION],
 		"stock": DAILY_STOCK,
+		# The peddler (task 0190).
+		"season_stock": SEASON_STOCK,
+		"animal_stall": [ANIMAL_PRICE, ANIMAL_STOCK, UPGRADE_STOCK],
+		"stall_hours": [STALL_OPENS, STALL_CLOSES],
 		"tutorial": TUTORIAL,
 		"crops": CROPS,
 		"no_growth_seasons": NO_GROWTH_SEASONS,

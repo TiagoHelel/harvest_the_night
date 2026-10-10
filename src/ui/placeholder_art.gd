@@ -168,6 +168,12 @@ const MACHINE_TALL := {"canvas": Vector2i(64, 96), "pivot": Vector2i(32, 92), "d
 ## porch, drawn at 1.0.
 const PROP_BIN := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 22), "draw_scale": 1.0}
 
+## A034's peddler (task 0190): 40x40 at (20,36), the farmer's density, drawn
+## at 1.0; and the closed stall, the legacy `shop`'s 32x40 at (16,36) drawn at
+## 2.0 like it.
+const PEDDLER := {"canvas": Vector2i(40, 40), "pivot": Vector2i(20, 36), "draw_scale": 1.0}
+const SHOP_CLOSED := {"canvas": Vector2i(32, 40), "pivot": Vector2i(16, 36), "draw_scale": 2.0}
+
 ## A026-A028's animals (task 0185): a large one - cow, sheep, pig, dog - is
 ## 40x32 at (20,30), the chicken 24x24 at (12,22), all drawn at 1.0.
 const ANIMAL_LARGE := {"canvas": Vector2i(40, 32), "pivot": Vector2i(20, 30), "draw_scale": 1.0}
@@ -400,6 +406,13 @@ const ART := {
 	# A033's shipping bin (task 0189): the barricade's planks, warmed and
 	# grown to a bin by the porch, until 0215.
 	&"shipping_bin": {"pack": "A033", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/barricade", "stand_in_scale": 1.35, "tint": Color(1.15, 1.0, 0.8), "geometry": PROP_BIN, "final": PROP_BIN, "bare": true},
+	# A034's peddler and the shut stall (task 0190): the farmer's own
+	# frames in a terracotta waistcoat's tint - standing, trading, walking
+	# - and the stall dimmed, until 0216.
+	&"peddler_idle": {"pack": "A034", "dir": "res://sprites/actors/", "frames": 4, "seconds": 0.4, "loop": true, "stand_in": &"actors/idle_south_0", "tint": Color(1.2, 0.82, 0.72), "geometry": PEDDLER, "final": PEDDLER},
+	&"peddler_talk": {"pack": "A034", "dir": "res://sprites/actors/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"actors/trade", "stand_in_frames": 4, "tint": Color(1.2, 0.82, 0.72), "geometry": PEDDLER, "final": PEDDLER},
+	&"peddler_walk": {"pack": "A034", "dir": "res://sprites/actors/", "frames": 6, "seconds": 0.1, "loop": true, "stand_in": &"actors/walk_west", "stand_in_frames": 8, "tint": Color(1.2, 0.82, 0.72), "geometry": PEDDLER, "final": PEDDLER},
+	&"shop_closed": {"pack": "A034", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/shop", "tint": Color(0.58, 0.54, 0.64), "geometry": SHOP_CLOSED, "final": SHOP_CLOSED, "bare": true},
 	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
 	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},

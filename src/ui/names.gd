@@ -155,6 +155,12 @@ const KEYS: Dictionary = {
 	# ---- what the farm comes with (task 0189)
 	&"shipping_bin": &"FIX_SHIPPING_BIN",
 
+	# ---- the animals, which the stall lists by name (task 0190)
+	&"chicken": &"ANIMAL_CHICKEN",
+	&"cow": &"ANIMAL_COW",
+	&"sheep": &"ANIMAL_SHEEP",
+	&"pig": &"ANIMAL_PIG",
+
 	# ---- what those make
 	&"barricade_kit": &"REC_BARRICADE_KIT",
 	&"fence_kit": &"REC_FENCE_KIT",

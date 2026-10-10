@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##############..........`  **176 / 296 done**
+`##############..........`  **177 / 296 done**
 
-0 doing / 120 todo / 0 blocked across 18 phases.
+0 doing / 119 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-120 task(s) left, the ready ones first, then what they
+119 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,24 +242,6 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0190 - The peddler and his hours
-
-Ready to pick up.  Likely files: `src/core/shop.gd, src/core/interact.gd, src/core/game_data.gd, src/core/livestock.gd, src/ui/shop_panel.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The stall gets a peddler who keeps hours, 08:00 to 17:00, whose seed packets change with the season (plan section 3.6), and who sells what the farm cannot make for itself: animals and tool upgrades.
-
-- `trade` is offered only from `STALL_OPENS` to `STALL_CLOSES` (`# LEVER`s in game minutes, 08:00 and 17:00, read through 0126's `Phases.clock_minute`; in `digest()`; `validate()` keeps them in order inside 0126's day); outside them the stall shows a closed state and the verb is refused with a reason in both languages. Gate the verb, not `Shop.buy`/`sell`: an open panel stops the clock, so the stall never closes under the player
-- **Moved here from 0170:** the stock becomes seasonal. A per-season stock table (`# LEVER`, in `digest()`) puts out this season's packets only (0170 left all twelve in the flat `DAILY_STOCK`; none in winter) beside the materials; `Shop._fresh_stock`/`restock` read the date's season and `Shop.buyable()` takes the state (move its callers: `shop_panel.gd`, the autoplayer, the suites). `check_stall` covers every season. 0193 adds straw and hay before autumn
-- Animals and upgrades: chickens, cows, sheep and pigs, delivered into a coop or barn with room (refused, money kept, without one), and 0173's tool upgrades at the same money + ore price through the same order path, so the rule exists once. Neither is a resource: `Shop.buy`, the stall's stock and `check_stall` (resources only today) get a branch, and `check_stall` gives each animal a price with no buy-and-sell-back profit. The four animals get `Names.KEYS` entries and `ANIMAL_*` rows in both languages (the stall lists them by name)
-- Move what trades through the verb before 08:00 to opening hours: `_task_0020_shop`, `_task_0040_shop`, `_case_0020_shop`, `_case_0040_shop`, the autoplayer - grep the suites and `shot.gd` for `trade` and `Shop.open`. The determinism scenario calls `Shop.open` at `day_tick` 1500, before 08:00 on 0166's clock: leave `Shop.open` ungated or accept the SIM move, and say which
-- The peddler stands at the stall in open hours, walking in and out at the edges (view only), through the placeholder road; the closed stall is a dimmed stand-in until A034 is integrated by 0216
-- DATA moves; SIM moves on purpose (the stall's stock in the state turns seasonal and gains animals and upgrades) - record both
-
-  - done when: `_task_0190_peddler` in `src/tools/headless_v1.gd` (hours by a rigged `day_tick`): trade is refused at 07:59 and at 17:00 and offered at 08:00; a spring stall stocks only spring packets, a summer one only summer's and a winter one none; a cow bought with a barn arrives in it, and without one is refused with the money kept
-  - done when: `_case_0190_peddler` in `src/tools/input_v1.gd`: buy a chicken in hours; the closed stall refuses
-  - done when: A new `peddler` scenario: `python tools/shot.py 0190 peddler --fhd` shows the stall open with the peddler and closed at dusk; opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A034-peddler.md` states the final geometry and states this task settled
-
 ### 0191 - The house in three tiers
 
 Ready to pick up.  Likely files: `src/core/phases.gd, src/core/house.gd, src/core/repair.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/sfx.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -381,6 +363,24 @@ The copper, iron and gold sprinklers of 0178 get their approved bodies and icons
   - done when: `python tools/check_prop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --props --check` and `--ui --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0201/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
+### 0202 - Art: tool icons
+
+Waits for Codex art A019.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/workshop_panel.gd`.
+
+Fifteen tool icons - four tools in three tiers and the three rods - replace 0173's stand-ins wherever a tool is shown.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A019` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A019-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, which counts only task 0018's icons today - give it the new family).
+- Runtime names `ui/icon_<tool>_<tier>` (16x16, pivot (8,8)) and `ui/hud_<tool>_<tier>` (10x10, pivot (5,5)) cut from one source, for hoe, can, axe and pickaxe at basic/iron/gold and the rod at bamboo/fibre/iron, as 0173 named the tiers
+- Replace the stand-ins in the workshop panel, the inventory and the stall (0190) and flip A019's placeholder-registry entries to raster. The tool in the farmer's hand stays code-tinted
+- Set the pack to integrated: `python implementation/backlog/assets.py set A019 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0202/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0203 - Art: material icons
@@ -599,6 +599,24 @@ The shipping bin of 0189 gets its approved art, lid and all.
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0215/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
+### 0216 - Art: the peddler
+
+Waits for Codex art A034.  Likely files: `assets/art_source/npc/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_station_art.py, tools/check_npc_art.py (new), tools/verify.py`.
+
+The peddler at the stall and the stall's closed state get their approved art.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A034` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A034-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/npc` and `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_station_art.FAMILY` for the closed stall; a new `tools/check_npc_art.py` wired into `tools/verify.py` for the peddler, saying why in the journal).
+- Runtime names: idle (2-4), talk/wave (2-4) and the walk in/out side cycle (4-8, mirrored at runtime) at the farmer's scale and the pivot 0190 settled; the closed stall matches today's `shop` (32x40, pivot (16,36))
+- Replace 0190's stand-ins and flip A034's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A034 integrated`.
+
+  - done when: `python tools/check_station_art.py`, `python tools/check_npc_art.py` and `python tools/show_art.py --stations --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0216/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
 ### 0289 - Art: the morning report
 
 Waits for Codex art A057.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
@@ -640,7 +658,7 @@ The guardian's cursor, the night camera and the fishing bar each get the knob a 
 
 ### 0193 - Every season can make what it needs
 
-Waits on 0190, 0192.  Likely files: `src/core/game_data.gd, src/core/shop.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+Waits on 0192.  Likely files: `src/core/game_data.gd, src/core/shop.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
 
 No defence, round, repair meal or feed may depend on a crop whose season has not come yet: every season can make what it needs.
 
@@ -653,24 +671,6 @@ No defence, round, repair meal or feed may depend on a crop whose season has not
 
   - done when: `_task_0193_supply` in `src/tools/headless_v1.gd`: the real tables pass for all four seasons; taking out the coal gunpowder recipe makes spring fail by name
   - done when: The journal lists, season by season, the route to each kit, round, meal and feed
-
-### 0202 - Art: tool icons
-
-Waits on 0190.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/workshop_panel.gd`.
-
-Fifteen tool icons - four tools in three tiers and the three rods - replace 0173's stand-ins wherever a tool is shown.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A019` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A019-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, which counts only task 0018's icons today - give it the new family).
-- Runtime names `ui/icon_<tool>_<tier>` (16x16, pivot (8,8)) and `ui/hud_<tool>_<tier>` (10x10, pivot (5,5)) cut from one source, for hoe, can, axe and pickaxe at basic/iron/gold and the rod at bamboo/fibre/iron, as 0173 named the tiers
-- Replace the stand-ins in the workshop panel, the inventory and the stall (0190) and flip A019's placeholder-registry entries to raster. The tool in the farmer's hand stays code-tinted
-- Set the pack to integrated: `python implementation/backlog/assets.py set A019 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0202/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0214 - Art: artisan goods
 
@@ -688,24 +688,6 @@ Wine, juice, jelly, pickles, cheese, butter, cloth, sandbags, flour, bread and s
   - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0214/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0216 - Art: the peddler
-
-Waits on 0190.  Likely files: `assets/art_source/npc/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_station_art.py, tools/check_npc_art.py (new), tools/verify.py`.
-
-The peddler at the stall and the stall's closed state get their approved art.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A034` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A034-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/npc` and `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_station_art.FAMILY` for the closed stall; a new `tools/check_npc_art.py` wired into `tools/verify.py` for the peddler, saying why in the journal).
-- Runtime names: idle (2-4), talk/wave (2-4) and the walk in/out side cycle (4-8, mirrored at runtime) at the farmer's scale and the pivot 0190 settled; the closed stall matches today's `shop` (32x40, pivot (16,36))
-- Replace 0190's stand-ins and flip A034's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A034 integrated`.
-
-  - done when: `python tools/check_station_art.py`, `python tools/check_npc_art.py` and `python tools/show_art.py --stations --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0216/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0217 - Art: the house in three tiers
@@ -2430,7 +2412,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (25/53)
+## 12 - The day that pays  (26/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2457,10 +2439,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md)
 - [x] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md)
 - [x] **0189** [The shipping bin](prompts/0189-shipping-bin.md)
-- [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md)
+- [x] **0190** [The peddler and his hours](prompts/0190-peddler.md)
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md)
-- [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0190, 0192
+- [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0192
 - [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0191
 - [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md) - needs 0194
 - [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0194, 0195
@@ -2469,7 +2451,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - waits for art A016
 - [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md) - waits for art A017
 - [ ] **0201** [Art: sprinklers](prompts/0201-art-sprinklers.md) - waits for art A018
-- [ ] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md) - needs 0190 - waits for art A019
+- [ ] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md) - waits for art A019
 - [ ] **0203** [Art: material icons](prompts/0203-art-material-icons.md) - waits for art A020
 - [ ] **0204** [Art: copper, coal, gold and hardwood](prompts/0204-art-ore-hardwood.md) - waits for art A021
 - [ ] **0205** [Art: fish](prompts/0205-art-fish-icons.md) - waits for art A022
@@ -2483,7 +2465,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0213** [Art: the artisan machines](prompts/0213-art-machines.md) - waits for art A031
 - [ ] **0214** [Art: artisan goods](prompts/0214-art-artisan-goods.md) - needs 0192 - waits for art A032
 - [ ] **0215** [Art: the shipping bin](prompts/0215-art-shipping-bin.md) - waits for art A033
-- [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - needs 0190 - waits for art A034
+- [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - needs 0191 - waits for art A035
 
 ## 13 - Weapons of the night  (0/28)

@@ -225,6 +225,7 @@ var _cursor: GuardianCursor
 var _guardian: GuardianView
 ## The barnyard: animals at home, the dog, dig spots (task 0185).
 var _animal_view: AnimalView
+var _peddler_view: PeddlerView
 ## The cells with a defence on them last time the occupants changed, so a new
 ## one can be spotted (task 0133) - empty until the first look at a state.
 var _defences_seen: Dictionary = {}
@@ -365,6 +366,17 @@ func _ready() -> void:
 	_animal_view.name = "AnimalView"
 	add_child(_animal_view)
 	_animal_view.setup(_occupants, _ground_traps)
+	# **The peddler** (task 0190): at the stall in its hours, and the stall
+	# shut outside them - view only.
+	_peddler_view = PeddlerView.new()
+	_peddler_view.name = "PeddlerView"
+	add_child(_peddler_view)
+	_peddler_view.setup(_occupants)
+
+
+## The peddler's drawing (task 0190), for the checks and the pictures.
+func peddler_view() -> PeddlerView:
+	return _peddler_view
 
 
 ## Point the view at a game. Called by whatever screen owns the simulation.
@@ -393,6 +405,8 @@ func show_state(state: Dictionary) -> void:
 		_guardian.show_state(state)
 	if _animal_view != null:
 		_animal_view.show_state(state)
+	if _peddler_view != null:
+		_peddler_view.show_state(state)
 	_remember_towers(state)
 	_dirty = true
 	if _season != null:
@@ -1240,6 +1254,9 @@ func _refresh() -> void:
 		# the stall and the stations - the whole drawing, or its top quarters.
 		if id in SeasonView.ROOFED and (grouped or cell.y == anchor.y):
 			sprite.material = _season.roof_material()
+		# The stall, which the peddler's hours shut and open (task 0190).
+		if id == &"shop" and grouped and _peddler_view != null:
+			_peddler_view.set_stall(sprite)
 		if _season.season() == SeasonView.WINTER and id in SeasonView.CAPPED:
 			_cap(sprite, _art_for(on, cell), footprint != Vector2i.ONE)
 		# Every station with a recipe (the keg and the jar since task 0187).

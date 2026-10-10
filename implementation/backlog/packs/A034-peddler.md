@@ -21,7 +21,13 @@ the night" at a glance, by dusk and by night, and match today's stall exactly.
 
 ## Deliverables
 
-The table is provisional: game task 0190 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry and states settled by game task 0190. The rows stand as written: 40x40 at (20,36) for every peddler frame, drawn at 1.0 at the farmer's density, and `shop_closed` at the legacy stall's 32x40 at (16,36), drawn at 2.0 like it. **The states the game plays** (`PeddlerView`, view only):
+- `idle` while he stands at his post: the ground just east of the stall's east end, his feet on its front row, facing south.
+- `talk` while the stall's panel is open.
+- `walk` for his walk in and out: half an hour of game time before 08:00 he comes in from twelve cells east along the farm road, facing `west`; from 17:00 he walks back out the same way, the frames mirrored for `east`.
+- `shop_closed` replaces `shop` whenever the stall is outside 08:00-17:00 (`STALL_OPENS`, `STALL_CLOSES`): from 06:00 to his opening, and from 17:00 through dusk.
+
+Until 0216 the game draws them through 0120's road: the farmer's own stand and walk frames, and his trade strip, in a terracotta tint for him, and the stall dimmed for `shop_closed`. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

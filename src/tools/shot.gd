@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["peddler", "the stall open at noon with the peddler at its end; then shut at dusk, nobody there", ""],
 	["shipping_bin", "the shipping bin by the porch at noon; then its panel with wood and carrots in; then the morning report naming what it pays", ""],
 	["machines", "the keg, the preserves jar, the dairy, the loom and the mill in a row at noon, idle; then working", ""],
 	["keg_jar", "a keg aging wine, five mornings to go, its panel up; a preserves jar beside it setting jelly", "WorkshopPanel"],
@@ -741,6 +742,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"keg_jar": _set_keg_jar(state)
 		"machines": _set_machines(state)
 		"shipping_bin": _set_shipping_bin(state)
+		"peddler": _set_peddler(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -862,6 +864,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "shipping_bin":
 		await _shoot("shipping_bin", folder)
 		await _take_bin_extras(main, state, folder)
+		return
+	if name == "peddler":
+		await _shoot("peddler", folder)
+		await _take_stall_dusk(main, state, folder)
 		return
 	if name == "inventory_crops":
 		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
@@ -1783,6 +1789,35 @@ func _take_bin_extras(main: Node, state: Dictionary, folder: String) -> void:
 	await _shoot("shipping_bin_morning", folder)
 	print("  shipping_bin: $%d due, %s, phase %s" % [due, str(Shipping.waiting(state)),
 		Phases.name_of(int(state["phase"]))])
+
+
+## **The peddler** (task 0190): noon on Spring 3, the stall in his hours and
+## him at its east end, the farmer below the stall facing it; then the same
+## stall at dusk (`_take_stall_dusk`).
+func _set_peddler(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 3)
+	var stall: Vector2i = Farm.cells_with(state, &"shop")[0]
+	_standing_at = stall + Vector2i(1, 2)
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.NORTH
+
+
+## **The stall at dusk** (task 0190): 18:00, past his hours and his walk
+## off - the stall shut, nobody at it, and the reason over it where the
+## farmer faces it.
+func _take_stall_dusk(main: Node, state: Dictionary, folder: String) -> void:
+	var view := main.get_node("%WorldView") as WorldView
+	var noon := view.peddler_view().peddler_position()
+	state["day_tick"] = Phases.tick_at_minute(GameData.DUSK_MINUTE)
+	for _i in 6:
+		await process_frame
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await _shoot("peddler_dusk", folder)
+	print("  peddler: at %s by noon, %s at dusk; stall %s" % [noon, view.peddler_view().peddler_position(),
+		"open" if Shop.open_hours(state) else "shut"])
 
 
 ## **The fish book** (task 0182): a spring Full Moon, and four species

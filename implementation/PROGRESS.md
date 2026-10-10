@@ -19522,3 +19522,169 @@ tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/A033-shipping-bin.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0189-shipping-bin.md,
 implementation/shots/0189/, docs/devlog/{index,index.pt_BR}.md
+
+## 0190 - The peddler and his hours - done 2026-10-10
+
+What changed: the stall has a peddler who keeps hours, 08:00 to 17:00 (plan
+section 3.6). His seed packets change with the season. He also sells what
+the farm cannot make for itself: animals, and the workshop's tool upgrades.
+
+**His hours** (levers `STALL_OPENS` 08:00 and `STALL_CLOSES` 17:00, in
+`digest()`):
+- `check_stall_hours` keeps them in order, after the day starts and before
+  dusk.
+- **The verb is gated, not the trade:**
+  - `Interact.why_not` refuses `trade` outside the hours with "the stall
+    trades 08:00-17:00" / "a banca abre das 08:00 às 17:00". The day's world
+    tooltip shows it over the stall.
+  - `Shop.buy`, `sell` and `open` are not gated. An open panel stops the
+    clock, so the stall never closes under the player (asserted).
+- **The determinism scenario's `Shop.open` at day tick 1500** is before
+  08:00. It is left ungated (decided), so the scenario still opens the stall
+  at that tick.
+
+**The season's shelf:**
+- `SEASON_STOCK` (levers) puts out this season's four packets, 20 a day,
+  and none in winter. `DAILY_STOCK` keeps the materials.
+- **New in `GameData`:**
+  - `stall_stock(season)` is the whole shelf: materials, packets, animals
+    and upgrades;
+  - `tool_upgrades()` and `is_tool_upgrade()` name the workshop's upgrade
+    recipes.
+- **New and changed in `Shop`:**
+  - `buyable(state)` now takes the state; its callers moved;
+  - `animals()`, `upgrades()` and `season()` are new;
+  - `restock` and `reconcile_stock` read the date's season.
+- **Checks:**
+  - `check_season_stock` holds every packet to its crop's sowing seasons and
+    winter to none.
+  - `validate()` checks every season's full shelf with `check_stall`.
+
+**Animals** (levers):
+- **Prices and stock:** chicken $60 (4 a day), cow $150 (1), sheep $150 (2),
+  pig $220 (2).
+- **Delivery:**
+  - A bought animal goes into the first standing home of its kind with room,
+    in cell order (`Livestock.home_with_room`, `room_for`). It arrives fed.
+  - It is all or none. The money is paid only when every animal has a home;
+    otherwise the purchase is refused with "no barn with room" and the money
+    is kept.
+- **`check_stall`:** every animal the farm keeps must be priced and
+  stocked, and dearer than anything the stall would pay back for it.
+
+**Tool upgrades:**
+- The workshop's ten upgrade recipes are on his shelf, one of each a day
+  (`UPGRADE_STOCK`).
+- **One rule, the workshop's:**
+  - buying one runs `ToolTiers.why_not`, which checks the day, the ladder,
+    already owned, already pending or queued, and the price;
+  - it pays the recipe's money and ore;
+  - `ToolTiers.deliver` makes it ready the next morning.
+- The workshop then sees it pending (asserted).
+
+**Reasons and the panel:**
+- `Shop.why_not_buy` says why a row is greyed: "none left today", "no coop
+  with room", the ladder's reasons, or short. `can_buy` asks it.
+- **The BUY tab:**
+  - It lists the materials and the season's packets.
+  - Then ANIMALS ("ANIMAIS") and TOOLS ("FERRAMENTAS"). Each row has a name,
+    a cost and how many are left, and one button, greyed with its reason on
+    the tooltip.
+  - An upgrade shows its tool's icon. An animal has no icon yet, rather than
+    the wood every unknown name falls back to.
+- **Names:** the four animals have `ANIMAL_*` names in both languages
+  ("galinha", "vaca", "ovelha", "porco").
+
+**Old tests moved to his hours:**
+- `_task_0020_shop` and `_case_0020_shop` open the stall at 08:00.
+- `_task_0040_shop` reads the season's shelf.
+- 0170's "stocked all year" is now "stocked in its sowing season".
+- The autoplayer buys its in-season packet through `Shop.buy`, not the verb,
+  so it needed no change.
+
+**The view** (`PeddlerView`, new, view only):
+- He walks in from twelve cells east along the farm road from 07:30.
+- From 08:00 he stands at the stall's east end, talking while its panel is
+  open. From 17:00 he walks back out.
+- Outside the hours the stall wears `shop_closed`.
+- **Stand-ins until 0216:**
+  - his are the farmer's stand and walk frames and his trade strip, in a
+    terracotta tint;
+  - the shut stall is dimmed.
+- **A tool fix:** `tools/placeholders.py` now checks an `ART` entry that
+  names the actors' folder as a sprite path. The peddler is the first such
+  entry; the farmer's `POSES` keep their own rule.
+- **A034's Deliverables** state the settled geometry and when the game
+  plays each state.
+
+### Hashes
+
+- **SIM 3194686093 -> 2522152135, on purpose:** the stall's stock in the
+  state is the season's now, and gains the animals and the upgrades.
+- **DATA 1204968759 -> 2433837890, on purpose:**
+  - `SEASON_STOCK`;
+  - `DAILY_STOCK` without its packets;
+  - the animals' prices and stock, `UPGRADE_STOCK`, and the hours, all in
+    `digest()`.
+
+Verify: 60 passed, 0 failed in 700s (the known OVER BUDGET), on the second run:
+headless_check 17444 asserts, headless_v1 2078, input_check 1218 cases,
+input_v1 664, player work 26513 checks, reactions 708, stations 7086,
+UI art 12868. Sim 2522152135 and data 2433837890 are unchanged since the
+first run's accept.
+
+**Tests:**
+- `_task_0190_peddler` (headless_v1):
+  - **The checks:**
+    - The hours are refused out of order, before the day starts, or past
+      dusk.
+    - A packet in winter or out of its season is refused.
+    - An animal that sells back for its price is refused.
+  - **The hours**, by a rigged `day_tick`:
+    - `trade` is shut at 07:59 and 17:00, and open at 08:00 and 16:59.
+    - The 07:59 refusal names his hours.
+    - An open panel at 16:59 stops the clock.
+  - **The shelf:**
+    - Spring and summer stock only their own packets, winter none, and all
+      three keep the materials.
+    - The state's shelf holds packets, animals and upgrades.
+  - **Animals:**
+    - A cow with no barn is refused and the money kept.
+    - With a barn it arrives fed, at its price, one off the shelf.
+    - A full barn takes no pig, and a hen wants a coop.
+  - **Upgrades:**
+    - An iron hoe costs the workshop's money and iron and is pending.
+    - It cannot be bought again, gold cannot be skipped to, and the
+      workshop refuses it too.
+    - The next morning it is in hand.
+- `_case_0190_peddler` (input_v1):
+  - A coop is built. At 09:00 SPACE opens the stall, the BUY tab comes up,
+    and a click on `order_chicken` buys a chicken into the coop. ESC leaves.
+  - At 17:00 SPACE opens nothing.
+- `headless_check` asks for one shot per scenario: 72 now (`peddler`).
+- **The first verify failed four art showcases**, all fixed in place:
+  - **player work and player reactions** traded at 06:00. Their trade
+    fixture now opens at 08:00.
+  - **station activity** expected the stall white. It now expects
+    `shop_closed`'s dimming outside the hours.
+  - **UI display** wants every `buy_one_` button to carry its resource's
+    icon. The animals and the upgrades are orders, not quantities, so their
+    buttons are `order_<id>`, and an upgrade's shows its tool's icon.
+  - The second verify is the one recorded above.
+
+Looked at (`python tools/shot.py 0190 peddler --fhd`, 1920x1080):
+- **`peddler`**, noon on Spring 3: the stall open, the peddler at its east
+  end at the farmer's size, and the farmer below the stall facing it.
+  - In the first take he was twice the farmer's size: the stand-in frames
+    are drawn at half their canvas, and the view now takes their scale.
+- **`peddler_dusk`**, 18:00: the stall dimmed and nobody at it, with the
+  night's forecast up.
+
+Files: src/core/{game_data,interact,livestock,shop}.gd,
+src/ui/{names,peddler_view (new),placeholder_art,shop_panel,world_view}.gd,
+src/tools/{art_showcase,headless_check,headless_v1,input_check,input_v1,shot}.gd,
+tools/placeholders.py, assets/locale/strings.csv,
+tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A034-peddler.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0190-peddler.md,
+implementation/shots/0190/, docs/devlog/{index,index.pt_BR}.md

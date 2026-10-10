@@ -120,6 +120,10 @@ static func why_not(state: Dictionary, cell: Vector2i) -> Array:
 	if verb_at(state, cell) == &"plant" \
 			and Calendar.season_id(Calendar.date(state)) in GameData.NO_GROWTH_SEASONS:
 		return [&"WHY_NO_OUTDOOR_GROWTH"]
+	# **The peddler keeps hours** (task 0190): the stall is still the thing
+	# you are facing, and it says when it opens.
+	if verb_at(state, cell) == &"trade":
+		return Shop.why_closed(state)
 	return []
 
 

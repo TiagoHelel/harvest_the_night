@@ -955,6 +955,8 @@ func _case_0020_shop() -> void:
 		beside.y * Player.SUBTILE + Player.SUBTILE / 2]
 	who["facing"] = _facing_from(beside, stall)
 	Resources.add(state, GameData.WOOD, 12)
+	# In the peddler's hours (task 0190): the clock moved to his opening.
+	state["day_tick"] = Phases.tick_at_minute(GameData.STALL_OPENS)
 	driver.running = true
 	await frames(3)
 

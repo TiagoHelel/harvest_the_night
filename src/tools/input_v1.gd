@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 42
+const V1_CASES := 43
 
 
 func _process(delta: float) -> bool:
@@ -92,6 +92,7 @@ func _run() -> void:
 	await _case_0185_truffle()
 	await _case_0187_keg()
 	await _case_0189_bin()
+	await _case_0190_peddler()
 	_finish()
 
 
@@ -2998,5 +2999,61 @@ func _case_0189_bin() -> void:
 	await until(func() -> bool: return not Shipping.is_open(state), "ESC closes the lid")
 	await frames(2)
 	expect(not panel.visible, "and the panel is gone")
+	await close_scene()
+	_completed += 1
+
+
+## Task 0190: a chicken bought from the peddler in his hours, through the
+## stall's BUY tab, goes into the coop; at 17:00 the stall refuses SPACE.
+func _case_0190_peddler() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel := require_control("ShopPanel") as Control
+	if driver == null or panel == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	Resources.gain(state, {GameData.MONEY: 500, GameData.WOOD: 100, GameData.STONE: 50})
+	var room: Array = GameData.MAP_SITES[&"coop"]
+	var coop := Vector2i(-1, -1)
+	for y in range(int(room[1]), int(room[1]) + int(room[3])):
+		for x in range(int(room[0]), int(room[0]) + int(room[2])):
+			if coop.x < 0 and Building.can_place(state, &"coop", Vector2i(x, y)):
+				coop = Vector2i(x, y)
+	expect(coop.x >= 0 and Building.place(state, &"coop", coop), "fixture: a coop with room", str(coop))
+	var hens := Livestock.residents(state, coop).size()
+	var stall: Vector2i = Farm.cells_with(state, &"shop")[0]
+	var beside := _walkable_neighbour(state, stall)
+	driver.running = false
+	await frames(2)
+	_stand_at(state, beside, _facing_from(beside, stall))
+	state["day_tick"] = Phases.tick_at_minute(GameData.STALL_OPENS + 60)
+	driver.running = true
+	await frames(3)
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return panel.visible, "SPACE at the stall in his hours")
+	await click_control("tab_buy")
+	await until(func() -> bool: return Shop.tab(state) == Shop.BUY, "the buy tab")
+	await frames(2)
+	var button := require_control("order_chicken") as Button
+	var scroll := require_control("Scroll") as ScrollContainer
+	if button != null and scroll != null:
+		scroll.ensure_control_visible(button)
+	await frames(2)
+	await click_control("order_chicken")
+	await until(func() -> bool: return Livestock.residents(state, coop).size() == hens + 1,
+		"a click buys a chicken into the coop")
+	await tap_key(KEY_ESCAPE)
+	await until(func() -> bool: return not panel.visible, "ESC leaves the stall")
+	driver.running = false
+	await frames(2)
+	_stand_at(state, beside, _facing_from(beside, stall))
+	state["day_tick"] = Phases.tick_at_minute(GameData.STALL_CLOSES)
+	driver.running = true
+	await frames(3)
+	await tap_key(KEY_SPACE)
+	await frames(10)
+	expect(not panel.visible and not Shop.is_open(state), "at 17:00 SPACE at the stall opens nothing")
 	await close_scene()
 	_completed += 1

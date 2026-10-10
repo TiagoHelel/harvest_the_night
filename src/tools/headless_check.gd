@@ -3056,6 +3056,9 @@ func _task_0020_shop() -> void:
 
 	expect(Interact.verb_at(state, stall) == &"trade", "the stall offers trade")
 	expect(not Shop.is_open(state), "and nothing is open to begin with")
+	# **In the peddler's hours** (task 0190): before 08:00 the verb is
+	# refused. Moved to opening time.
+	state["day_tick"] = Phases.tick_at_minute(GameData.STALL_OPENS)
 	Interact.complete(state, stall, &"trade")
 	expect(Shop.is_open(state), "interacting opens it")
 
@@ -3167,7 +3170,7 @@ func _task_0020_shop() -> void:
 
 	# Buy then sell always loses. The round trip has to be a loss at every
 	# price or there is a money printer on the farm.
-	for id in Shop.buyable():
+	for id in Shop.buyable(state):
 		expect(Shop.buy_price(id) > Shop.sell_price(id),
 			"buying %s and selling it back loses money" % id)
 
@@ -6662,7 +6665,7 @@ func _task_0040_shop() -> void:
 		"and a markup of one is refused - that is the money button")
 
 	# Round-tripped for real, through the ledger, on every single thing.
-	for id in Shop.buyable():
+	for id in Shop.buyable(state):
 		var round_trip := State.create(2201)
 		Resources.gain(round_trip, {GameData.MONEY: 5000})
 		var purse := Resources.amount(round_trip, GameData.MONEY)
@@ -6693,22 +6696,24 @@ func _task_0040_shop() -> void:
 		expect(Shop.sellable().has(id),
 			"and the stall buys the harvested %s" % id)
 		if GameData.DAILY_STOCK.has(id):
-			expect(Shop.buyable().has(id),
-				"the original daily shelf still stocks %s" % id, str(Shop.buyable()))
+			expect(Shop.buyable(state).has(id),
+				"the original daily shelf still stocks %s" % id, str(Shop.buyable(state)))
 
 	# **Nothing the workshop makes is for sale.** A stall that sold oil would
 	# be a way to skip owning a press.
 	for id in [GameData.OIL, GameData.GUNPOWDER, GameData.INCENDIARY,
 			GameData.FOOD]:
-		expect(not Shop.buyable().has(id),
+		expect(not Shop.buyable(state).has(id),
 			"the stall does not sell %s - that is what the farm is for" % id)
 		expect(Shop.sellable().has(id), "but it will take it off you")
 
 	# ------------------------------------------------- stock, and when it comes
 
-	# **A daily stock, out from the first morning.**
-	for id in Shop.buyable():
-		expect(Shop.stock_of(state, id) == int(GameData.DAILY_STOCK[id]),
+	# **A daily stock, out from the first morning** - the first season's
+	# shelf since task 0190.
+	var shelf_of := GameData.stall_stock(Shop.season(state))
+	for id in Shop.buyable(state):
+		expect(Shop.stock_of(state, id) == int(shelf_of[id]),
 			"day one opens with a full shelf of %s" % id,
 			str(Shop.stock_of(state, id)))
 
@@ -14525,8 +14530,9 @@ func _task_0082_shots() -> void:
 	# Sixty-six since 0183: the coop and the barn. Sixty-seven since 0185:
 	# the barnyard. Sixty-eight since 0186: barns at night. Sixty-nine since
 	# 0187: the keg and the jar. Seventy since 0188: the five machines.
-	# Seventy-one since 0189: the shipping bin.
-	expect(names.size() == 71,
+	# Seventy-one since 0189: the shipping bin. Seventy-two since 0190: the
+	# peddler.
+	expect(names.size() == 72,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

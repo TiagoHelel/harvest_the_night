@@ -252,7 +252,11 @@ func _station_check() -> void:
 		expect(sprite.texture.resource_path == folder+String(id)+suffix+".png", "Activity and wear select distinct authored states from existing core data")
 		expect(sprite.position == Vector2(corner*16+Vector2i(size.x*8,size.y*16)), "Each station sorts at its original footprint bottom center")
 		var pivot := Vector2(24,44) if i < 4 else (Vector2(16,36) if i == 4 else Vector2(12,30))
-		expect(sprite.offset == -pivot and sprite.modulate == Color.WHITE, "All states preserve contact and readable material colors")
+		# The stall outside the peddler's hours (task 0190) is `shop_closed`:
+		# through 0120's road its own drawing, dimmed.
+		var shut := id == &"shop" and not Shop.open_hours(_state)
+		var tint := PlaceholderArt.art_tint(&"shop_closed") if shut else Color.WHITE
+		expect(sprite.offset == -pivot and sprite.modulate == tint, "All states preserve contact and readable material colors")
 		expect(sprite.get_meta("logical_cells").size() == size.x*size.y, "Full drawing retains exactly the existing blocked cells")
 		for y in size.y:
 			for x in size.x:
@@ -1493,6 +1497,8 @@ func _work_fixture(verb: StringName, facing: int) -> Vector2i:
 			on[idx] = {"id": &"workshop", "hp": int(GameData.BUILDINGS[&"workshop"]["hp"])}
 		&"trade":
 			on[idx] = {"id": &"shop"}
+			# In the peddler's hours (task 0190): before 08:00 trade is refused.
+			_state["day_tick"] = Phases.tick_at_minute(GameData.STALL_OPENS)
 		# The shipping bin's lid (task 0189), a one-tick panel verb like trade.
 		&"ship":
 			on[idx] = {"id": &"shipping_bin"}

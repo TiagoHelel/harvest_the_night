@@ -224,6 +224,39 @@ static func house(state: Dictionary, cell: Vector2i, kind: StringName,
 	return true
 
 
+## **Where a bought animal goes** (task 0190): the first home of its kind,
+## in cell order, with room and standing - or (-1, -1).
+static func home_with_room(state: Dictionary, kind: StringName) -> Vector2i:
+	for anchor in _homes_of(state, kind):
+		var at: Vector2i = anchor
+		if residents(state, at).size() < capacity(home_of(kind)):
+			return at
+	return Vector2i(-1, -1)
+
+
+## How many more of this kind the farm's homes can take now: wrecked ones
+## take none.
+static func room_for(state: Dictionary, kind: StringName) -> int:
+	var room := 0
+	for anchor in _homes_of(state, kind):
+		room += maxi(capacity(home_of(kind)) - residents(state, anchor).size(), 0)
+	return room
+
+
+## Every standing home of a kind's anchor, in cell order.
+static func _homes_of(state: Dictionary, kind: StringName) -> Array:
+	var home := home_of(kind)
+	var out: Array = []
+	if home == &"":
+		return out
+	for cell in Farm.cells_with(state, home):
+		var anchor := Building.anchor_of(state, cell)
+		if not out.has(anchor) and not Building.is_wrecked(state, anchor):
+			out.append(anchor)
+	out.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return Grid.index(a) < Grid.index(b))
+	return out
+
+
 ## **The morning's hay** (task 0184), from `Phases.begin_day`: every housed
 ## animal eats its `feed_per_day` of `ANIMAL_FEED` - home by home in cell
 ## order, each in the order it moved in - while there is enough. One that

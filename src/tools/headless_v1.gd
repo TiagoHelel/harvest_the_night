@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 59
+const GROUPS := 60
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -128,6 +128,7 @@ func _run() -> void:
 	_task_0187_keg()
 	_task_0188_mills()
 	_task_0189_bin()
+	_task_0190_peddler()
 
 
 func _finish() -> void:
@@ -3591,7 +3592,12 @@ func _task_0170_seasons() -> void:
 	expect(Shop.buy_price(GameData.CARROT_SEED) == 2 and Shop.sell_price(GameData.CARROT_SEED) == 1, "carrot packets cost $2 and resell for $1")
 	for id in Farming.seeds():
 		var packet := Farming.packet(id)
-		expect(packet in Shop.buyable() and Shop.stock_of(state, packet) > 0, "%s is stocked all year" % packet)
+		# **In its sowing season** since task 0190, which took the stall's
+		# stock seasonal from here.
+		var sown := State.create(1702)
+		sown["day"] = 1 + GameData.SEASON_DAYS * GameData.SEASONS.find((GameData.CROPS[id]["seasons"] as Array)[0])
+		Shop.restock(sown)
+		expect(packet in Shop.buyable(sown) and Shop.stock_of(sown, packet) > 0, "%s is stocked in its sowing season" % packet)
 		expect(Shop.buy_price(packet) == int(GameData.CROPS[id]["seed_cost"]) and Shop.buy_price(packet) > Shop.sell_price(packet), "%s uses the balanced price and loses on resale" % packet)
 		for season in [[], [&"winter"], [&"unknown"]]:
 			var rigged := GameData.CROPS.duplicate(true)
@@ -5742,6 +5748,129 @@ func _task_0189_bin() -> void:
 	expect(StringName(Farm.occupant(stepped, bin).get("id", &"")) == &"tree"
 		and Farm.cells_with(stepped, Shipping.BIN).is_empty(),
 		"one that put something on the site keeps it, and has no bin")
+	_completed += 1
+
+
+## Task 0190: the peddler and his hours. The stall trades from 08:00 to
+## 17:00 (a rigged `day_tick`), its packets are the season's and none in
+## winter, and it sells what the farm cannot make: animals, into a coop or a
+## barn with room, and the workshop's tool upgrades by the workshop's rule.
+func _task_0190_peddler() -> void:
+	expect(GameData.validate().is_empty(), "the tables validate with the peddler's",
+		str(GameData.validate()))
+	expect(GameData.check_stall_hours(GameData.STALL_OPENS, GameData.STALL_CLOSES).is_empty()
+		and not GameData.check_stall_hours(GameData.STALL_CLOSES, GameData.STALL_OPENS).is_empty()
+		and not GameData.check_stall_hours(5 * 60, GameData.STALL_CLOSES).is_empty()
+		and not GameData.check_stall_hours(GameData.STALL_OPENS, GameData.DUSK_MINUTE + 60).is_empty(),
+		"the hours are kept in order, after the day starts and before dusk")
+	var in_winter := GameData.SEASON_STOCK.duplicate(true)
+	in_winter[&"winter"] = {GameData.CARROT_SEED: 5}
+	var out_of_season := GameData.SEASON_STOCK.duplicate(true)
+	out_of_season[&"summer"] = {GameData.CARROT_SEED: 5}
+	expect(not GameData.check_season_stock(in_winter).is_empty()
+		and not GameData.check_season_stock(out_of_season).is_empty(),
+		"a packet in winter, or out of its sowing season, is refused")
+	var cheap := GameData.SELL_PRICE.duplicate()
+	cheap[&"cow"] = int(GameData.ANIMAL_PRICE[&"cow"])
+	expect(not GameData.check_stall(GameData.stall_stock(&"spring"), cheap, GameData.BUY_MARKUP).is_empty(),
+		"an animal that would sell back for what it cost is refused")
+
+	# **His hours, by a rigged clock.**
+	var state := State.create(1900)
+	var stall: Vector2i = Farm.cells_with(state, &"shop")[0]
+	for at in [[GameData.STALL_OPENS - 1, false], [GameData.STALL_OPENS, true],
+			[GameData.STALL_CLOSES - 1, true], [GameData.STALL_CLOSES, false]]:
+		state["day_tick"] = Phases.tick_at_minute(int(at[0]))
+		var open := Interact.verb_at(state, stall) == &"trade" and Interact.why_not(state, stall).is_empty()
+		expect(open == bool(at[1]),
+			"at %02d:%02d the stall is %s" % [int(at[0]) / 60, int(at[0]) % 60, "open" if at[1] else "shut"],
+			str(Interact.why_not(state, stall)))
+	state["day_tick"] = Phases.tick_at_minute(GameData.STALL_OPENS - 1)
+	Interact.complete(state, stall, &"trade")
+	var why := Interact.why_not(state, stall)
+	expect(not Shop.is_open(state) and not why.is_empty() and why[0] == &"WHY_STALL_CLOSED"
+		and Names.refusal(why).contains("08:00") and Names.refusal(why).contains("17:00"),
+		"at 07:59 the verb is refused, and the reason says his hours", Names.refusal(why))
+	state["day_tick"] = Phases.tick_at_minute(GameData.STALL_OPENS)
+	Interact.complete(state, stall, &"trade")
+	expect(Shop.is_open(state), "and at 08:00 it opens the stall")
+	Shop.close(state)
+	state["day_tick"] = Phases.tick_at_minute(GameData.STALL_CLOSES) - 2
+	Interact.complete(state, stall, &"trade")
+	Sim.advance(state, 60)
+	expect(Shop.is_open(state) and int(state["day_tick"]) == Phases.tick_at_minute(GameData.STALL_CLOSES) - 2,
+		"an open panel stops the clock, so the stall never closes under the player")
+	Shop.close(state)
+
+	# **The season's packets.**
+	for dated in [[1, &"spring"], [GameData.SEASON_DAYS + 1, &"summer"], [GameData.SEASON_DAYS * 3 + 1, &"winter"]]:
+		var day := State.create(1901)
+		day["day"] = int(dated[0])
+		Shop.restock(day)
+		var packets: Array = []
+		for id in Shop.buyable(day):
+			if String(id).ends_with("_seed"):
+				packets.append(id)
+		var own := true
+		for id in packets:
+			own = own and (GameData.CROPS[StringName(String(id).trim_suffix("_seed"))]["seasons"] as Array).has(dated[1])
+		expect(own and packets.size() == (GameData.SEASON_STOCK[dated[1]] as Dictionary).size()
+			and (packets.size() > 0) == (dated[1] != &"winter")
+			and Shop.buyable(day).has(GameData.WOOD),
+			"a %s stall stocks %s packets, beside the materials" % [dated[1], "no" if dated[1] == &"winter" else "only its own"],
+			str(packets))
+
+	# **A cow into a barn with room, or not at all.**
+	var farm := State.create(1902)
+	Resources.gain(farm, {GameData.MONEY: 3000, GameData.WOOD: 300, GameData.STONE: 200})
+	var money := Resources.amount(farm, GameData.MONEY)
+	why = Shop.why_not_buy(farm, &"cow")
+	expect(not Shop.buy(farm, &"cow", 1) and Resources.amount(farm, GameData.MONEY) == money
+		and not why.is_empty() and why[0] == &"WHY_NO_HOME",
+		"a cow with no barn is refused, and the money kept", str(why))
+	var barn := _site_spot(farm, &"barn")
+	Building.place(farm, &"barn", barn)
+	var herd := Livestock.residents(farm, barn).size()
+	money = Resources.amount(farm, GameData.MONEY)
+	var shelf := Shop.stock_of(farm, &"cow")
+	expect(Shop.buy(farm, &"cow", 1) and Livestock.residents(farm, barn).size() == herd + 1
+		and StringName((Livestock.residents(farm, barn).back() as Dictionary)["id"]) == &"cow"
+		and bool((Livestock.residents(farm, barn).back() as Dictionary).get("fed", false))
+		and Resources.amount(farm, GameData.MONEY) == money - int(GameData.ANIMAL_PRICE[&"cow"])
+		and Shop.stock_of(farm, &"cow") == shelf - 1,
+		"with a barn the cow arrives in it, fed, at its price, one off the shelf")
+	while Livestock.room_for(farm, &"sheep") > 0 and Shop.can_buy(farm, &"sheep"):
+		Shop.buy(farm, &"sheep", 1)
+	money = Resources.amount(farm, GameData.MONEY)
+	expect(Livestock.room_for(farm, &"pig") == 0 and not Shop.buy(farm, &"pig", 1)
+		and Resources.amount(farm, GameData.MONEY) == money,
+		"a full barn takes no pig, and the money stays", str(Livestock.residents(farm, barn).size()))
+	expect(not Shop.can_buy(farm, &"chicken"), "and a hen wants a coop, not a barn")
+
+	# **Tool upgrades, the workshop's order.**
+	var tools := State.create(1903)
+	Resources.gain(tools, {GameData.MONEY: 1000, GameData.IRON: 100})
+	var recipe: Dictionary = GameData.RECIPES[&"upgrade_hoe_iron"]
+	money = Resources.amount(tools, GameData.MONEY)
+	var iron := Resources.amount(tools, GameData.IRON)
+	expect(Shop.buy(tools, &"upgrade_hoe_iron", 1) and ToolTiers.tier(tools, &"hoe") == 0
+		and (tools["tools"]["pending"] as Dictionary).has("hoe")
+		and Resources.amount(tools, GameData.MONEY) == money - int((recipe["inputs"] as Dictionary)[GameData.MONEY])
+		and Resources.amount(tools, GameData.IRON) == iron - int((recipe["inputs"] as Dictionary)[GameData.IRON]),
+		"an iron hoe from his pack: the workshop's money and iron, ready tomorrow")
+	var bench: Vector2i = Building.anchor_of(tools, Farm.cells_with(tools, &"workshop")[0])
+	expect(not Shop.can_buy(tools, &"upgrade_hoe_iron") and not Shop.can_buy(tools, &"upgrade_hoe_gold")
+		and not Crafting.can_queue(tools, bench, &"upgrade_hoe_iron"),
+		"and one rule for both: not again, no skipping to gold, and the workshop knows it is coming")
+	Phases.go_to_bed(tools)
+	Phases.start_waves(tools)
+	Phases.enter_result(tools, true)
+	Phases.begin_day(tools)
+	expect(ToolTiers.tier(tools, &"hoe") == 1, "the next morning he hands it over")
+	var shelf_state: Dictionary = State.create(1904)["stall"]["stock"]
+	expect(shelf_state.has(&"cow") and shelf_state.has(&"upgrade_hoe_iron") and shelf_state.has(GameData.CARROT_SEED)
+		and not shelf_state.has(GameData.CORN_SEED),
+		"the state's shelf holds the season's packets, the animals and the upgrades")
 	_completed += 1
 
 

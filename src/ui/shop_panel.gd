@@ -154,9 +154,15 @@ func _shelf_signature() -> int:
 	var n := 1 if Shop.tab(_state) == Shop.SELL else 0
 	n = n * 31 + Calendar.season_of(Calendar.date(_state))
 	n = n * 31 + Farming.seeds().find(Farming.selected_seed(_state))
-	for id in Shop.buyable():
+	for id in Shop.buyable(_state):
 		n = n * 61 + Shop.stock_of(_state, id)
-	return n
+	# The animals and the upgrades (task 0190): their shelf, the room in
+	# the homes, and the tools' ladder.
+	for id in Shop.animals():
+		n = n * 61 + Shop.stock_of(_state, id) * 7 + Livestock.room_for(_state, id)
+	for id in Shop.upgrades():
+		n = n * 61 + Shop.stock_of(_state, id)
+	return n * 31 + str(_state["tools"]).hash()
 
 
 func _build() -> void:
@@ -193,8 +199,16 @@ func _build() -> void:
 		return
 
 	_heading(&"SHOP_BUY")
-	for id in Shop.buyable():
+	for id in Shop.buyable(_state):
 		_buy_row(id)
+	# **What the farm cannot make for itself** (task 0190): the animals,
+	# into a coop or a barn with room, and the workshop's tool upgrades.
+	_heading(&"SHOP_ANIMALS")
+	for id in Shop.animals():
+		_one_row(id)
+	_heading(&"SHOP_TOOLS")
+	for id in Shop.upgrades():
+		_one_row(id)
 
 	var pager := HBoxContainer.new()
 	_rows.add_child(pager)
@@ -331,6 +345,39 @@ func _focus(was: String) -> void:
 		button.grab_focus()
 
 
+## **An animal or a tool upgrade** (task 0190): its name, what it costs and
+## how many are left, and one button, greyed with the reason on its tooltip
+## when there is no home for it or the ladder says no.
+func _one_row(id: StringName) -> void:
+	var row := HBoxContainer.new()
+	row.name = "buy_%s" % id
+	row.custom_minimum_size = Vector2(0, ROW_HEIGHT)
+	_rows.add_child(row)
+	var cost: Array = []
+	var price := Shop.cost_of(id)
+	for res in GameData.sorted_names(price.keys()):
+		cost.append("$%d" % int(price[res]) if res == GameData.MONEY
+			else "%d %s" % [int(price[res]), Names.of(res)])
+	var label := Label.new()
+	label.name = "buy_label_%s" % id
+	label.text = I18n.f(&"SHOP_ONE_ROW", [Names.of(id), " ".join(cost), Shop.stock_of(_state, id)])
+	label.custom_minimum_size = Vector2(168, 0)
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var why := Shop.why_not_buy(_state, id)
+	label.theme_type_variation = &"" if why.is_empty() else UiKit.FAINT
+	row.add_child(label)
+	# **An order, not a quantity button**: no resource's icon to show. An
+	# upgrade shows the tool it makes, an animal nothing yet.
+	var button := _button("order_%s" % id, I18n.t(&"SHOP_ONE"), why.is_empty(),
+		func() -> void: Shop.buy(_state, id, 1))
+	if GameData.is_tool_upgrade(id):
+		button.icon = UiKit.icon(StringName(((GameData.RECIPES[id] as Dictionary)["output"] as Dictionary).keys()[0]), true)
+	Tooltip.describes(button, StringName("text:%s" % (Names.refusal(why) if not why.is_empty()
+		else Names.of(id))))
+	row.add_child(button)
+
+
 ## A button that is greyed rather than missing when it cannot be pressed, and
 ## **named**, because `input_check` finds it by name and a button nothing can
 ## find is a button nothing tests.
@@ -340,8 +387,8 @@ func _button(button_name: String, text: String, enabled: bool,
 	button.name = button_name
 	if button_name.begins_with("sell_one_") or button_name.begins_with("buy_one_") \
 			or button_name.begins_with("ship_one_"):
-		var id := button_name.trim_prefix("sell_one_").trim_prefix("buy_one_").trim_prefix("ship_one_")
-		button.icon = UiKit.icon(StringName(id),true)
+		var id := StringName(button_name.trim_prefix("sell_one_").trim_prefix("buy_one_").trim_prefix("ship_one_"))
+		button.icon = UiKit.icon(id, true)
 		if id.ends_with("_seed"):
 			button.theme_type_variation = UiKit.SEED_PACKET
 	button.text = text
