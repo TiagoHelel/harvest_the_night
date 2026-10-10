@@ -248,6 +248,10 @@ static func line_for(event: Dictionary) -> String:
 		&"boss_arrived":
 			return I18n.t(&"LOG_BOSS")
 		&"structure_lost":
+			# A coop or a barn stands wrecked rather than gone (task 0186).
+			if bool(event.get("wrecked", false)):
+				return I18n.f(&"LOG_STRUCTURE_WRECKED",
+					[Names.of(StringName(event.get("id", &"")))])
 			return I18n.f(&"LOG_STRUCTURE_LOST",
 				[Names.of(StringName(event.get("id", &"")))])
 		&"house_hit":

@@ -1288,8 +1288,11 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 	if cell != anchor:
 		return true             # one drawing over the whole footprint
 	# **Chipped once the axe has bitten** (task 0177): the pack's second
-	# state, until the last swing takes the whole thing down.
+	# state, until the last swing takes the whole thing down. A coop or a
+	# barn hurt or wrecked (task 0186) wears its state's art.
 	var art := struck_art(_state, id, anchor)
+	if Building.wrecks(id):
+		art = _worn_home(id, Farm.occupant(_state, anchor))
 	if art != id:
 		file = PlaceholderArt.texture_path(PlaceholderArt.art_path(art, 0))
 	var sprite := Sprite2D.new()
@@ -1310,6 +1313,21 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 	_occupants.add_child(sprite)
 	_sprites.append(sprite)
 	return true
+
+
+## A coop or a barn as the night left it (task 0186): `<id>_wreck` at 0 HP,
+## `<id>_hurt` past the wear threshold, itself otherwise - each only where the
+## registry or the real art has it.
+func _worn_home(id: StringName, on: Dictionary) -> StringName:
+	if int(on.get("hp", 1)) <= 0:
+		var wreck := StringName("%s_wreck" % id)
+		if not PlaceholderArt.art(wreck).is_empty() or _exists(wreck):
+			return wreck
+	if _is_hurt(on):
+		var hurt := StringName("%s_hurt" % id)
+		if not PlaceholderArt.art(hurt).is_empty() or _exists(hurt):
+			return hurt
+	return id
 
 
 ## The art a gathering node is drawn as: `<id>_chipped` from its first swing

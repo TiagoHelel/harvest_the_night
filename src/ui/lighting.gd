@@ -57,6 +57,9 @@ const STOVE_RADIUS := 2.2
 const GENERATOR_RADIUS := 1.6
 const MUZZLE_RADIUS := 2.0
 const BURNING_RADIUS := 1.3
+## A coop's or a barn's lantern by its door (task 0186): small, a light to
+## find it by in the dark rather than a room lit up.
+const LANTERN_RADIUS := 0.8
 const MAX_BURNING_LIGHTS := 12
 
 ## What each of them is the colour of. All of them are above task 0071's
@@ -66,6 +69,7 @@ const STOVE_COLOUR := Color(1.00, 0.70, 0.34)
 const GENERATOR_COLOUR := Color(0.72, 0.88, 1.00)
 const MUZZLE_COLOUR := Color(1.00, 0.90, 0.62)
 const BURNING_COLOUR := Color(1.00, 0.56, 0.24)
+const LANTERN_COLOUR := Color(1.00, 0.80, 0.42)
 ## The porch guardian's eyes (task 0131): small and warm, two points and never
 ## a halo over the house.
 const EYE_RADIUS := 0.45
@@ -198,6 +202,8 @@ func _draw() -> void:
 		var id: StringName = box[0]
 		var at := ((box[1] as Vector2) / float(box[2]) + Vector2(0.5, 0.5)) 			* tile
 		var footprint := Building.bounds_at(_state, Vector2i(box[3])).size
+		if id == &"coop" or id == &"barn":
+			at = _lantern(Vector2i(box[3]), footprint)
 		at = ArtPlacement.emission(id, (box[3] as Vector2) * tile, &"light", at, footprint)
 		match id:
 			&"house":
@@ -208,6 +214,13 @@ func _draw() -> void:
 				_glow_at(at, STOVE_RADIUS * tile, STOVE_COLOUR, 0.70)
 			&"generator":
 				_glow_at(at, GENERATOR_RADIUS * tile, GENERATOR_COLOUR, 0.45)
+			&"coop", &"barn":
+				_glow_at(at, LANTERN_RADIUS * tile, LANTERN_COLOUR, 0.55)
+				# Its panes once A030 measures them (`windows_xy`). The stand-in
+				# has none, and `emissions` would hand the lantern back twice.
+				if PlaceholderArt.frame(WorldView.BUILDING_DIR + str(id) + ".png").has("windows"):
+					for window in ArtPlacement.emissions(id, (box[3] as Vector2) * tile, &"windows", at, &"light", footprint):
+						_glow_at(window, HOUSE_RADIUS * tile, HOUSE_COLOUR, 0.26)
 			_:
 				if WorldView.authored_tower(id):
 					var colour := Color(0.72, 0.88, 1.0) if id == &"auto_crossbow" else MUZZLE_COLOUR
@@ -280,8 +293,23 @@ func _lights_up(id: StringName, on: Dictionary, cell: Vector2i) -> bool:
 			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
 		&"generator":
 			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
+		# **The animals' lantern** (task 0186): lit while the coop or the barn
+		# stands, whole or hurt, and dark once it is wrecked - A030 draws the
+		# wreck with no lantern to light.
+		&"coop", &"barn":
+			return not Building.is_wrecked(_state, cell)
 		_:
 			return _firing(on)
+
+
+## Where a coop's or a barn's lantern hangs until A030's `light_xy` says
+## (task 0186): just left of the door - the middle of the front row - at
+## about the farmer's head, a tile and a half over the ground line, and never
+## above the footprint's top row.
+func _lantern(corner: Vector2i, footprint: Vector2i) -> Vector2:
+	var door := corner + Vector2i(footprint.x / 2, footprint.y - 1)
+	var head := maxf(float(corner.y + footprint.y) - 1.5, float(corner.y) + 0.3)
+	return Vector2(float(door.x) - 0.15, head) * float(GameData.TILE_SIZE)
 
 
 ## Whether this is a tower that has just fired. The same question

@@ -91,6 +91,32 @@ static func walked_over(id: StringName) -> bool:
 	return entry != null and bool((entry as Dictionary).get("walked_over", false))
 
 
+## **Wrecked, never lost** (task 0186): whether this stands at 0 HP instead
+## of coming down - the coop and the barn (`wrecks`). Its hit points are one
+## count over its whole footprint (`set_shared_hp`).
+static func wrecks(id: StringName) -> bool:
+	var entry: Variant = entry_of(id)
+	return entry != null and bool((entry as Dictionary).get("wrecks", false))
+
+
+## Whether the thing on this cell is standing wrecked.
+static func is_wrecked(state: Dictionary, cell: Vector2i) -> bool:
+	var on := Farm.occupant(state, cell)
+	return not on.is_empty() and wrecks(StringName(on["id"])) and int(on.get("hp", 0)) <= 0
+
+
+## Give every cell of the building on this cell the same hit points, and mark
+## it wrecked at 0 - one building, one count, wherever it was bitten or mended.
+static func set_shared_hp(state: Dictionary, cell: Vector2i, hp: int) -> void:
+	for part in parts_at(state, cell):
+		var on := Farm.occupant(state, part)
+		on["hp"] = hp
+		if hp <= 0:
+			on["wrecked"] = true
+		else:
+			on.erase("wrecked")
+
+
 ## Whether this waters the plots round it each morning (task 0178).
 static func sprays(id: StringName) -> bool:
 	var entry: Variant = entry_of(id)

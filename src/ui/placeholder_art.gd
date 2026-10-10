@@ -324,6 +324,12 @@ const ART := {
 	# barn barn-red - until 0212.
 	&"coop": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen", "stand_in_scale": 0.6, "tint": Color(1.15, 1.0, 0.82), "geometry": COOP, "final": COOP, "bare": true},
 	&"barn": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop", "stand_in_scale": 0.9, "tint": Color(1.2, 0.78, 0.68), "geometry": BARN, "final": BARN, "bare": true},
+	# A030's hurt and wrecked states (task 0186): the stations' own hurt art,
+	# tinted the same and darker still for a wreck, until 0212.
+	&"coop_hurt": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.6, "tint": Color(1.05, 0.9, 0.75), "geometry": COOP, "final": COOP, "bare": true},
+	&"coop_wreck": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.6, "tint": Color(0.55, 0.5, 0.48), "geometry": COOP, "final": COOP, "bare": true},
+	&"barn_hurt": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.9, "tint": Color(1.1, 0.72, 0.62), "geometry": BARN, "final": BARN, "bare": true},
+	&"barn_wreck": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.9, "tint": Color(0.55, 0.45, 0.42), "geometry": BARN, "final": BARN, "bare": true},
 	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
 	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},

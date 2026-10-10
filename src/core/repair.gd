@@ -236,7 +236,15 @@ static func apply(state: Dictionary, cell: Vector2i, hp: int) -> int:
 		return doing
 
 	var full := full_hp_at(state, cell)
-	on["hp"] = mini(int(on.get("hp", full)) + doing, full)
+	var was := int(on.get("hp", full))
+	on["hp"] = mini(was + doing, full)
+	# **A wrecked coop or barn comes back with its first hit point** (task
+	# 0186): every cell of it at once, and the breakers' hunt field told, so
+	# it is something to come for again.
+	if Building.wrecks(StringName(on["id"])):
+		Building.set_shared_hp(state, cell, int(on["hp"]))
+		if was <= 0:
+			Farm.touch(state)
 	return doing
 
 

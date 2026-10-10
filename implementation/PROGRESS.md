@@ -18889,3 +18889,140 @@ implementation/backlog/packs/{A025-farmer-care,A026-farm-animals,A027-cow-chicke
 (A025: the one confirming line only),
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0185-sheep-pigs-dog.md,
 implementation/shots/0185/, docs/devlog/{index,index.pt_BR}.md
+
+## 0186 - Barns at night - done 2026-10-10
+
+What changed: the night can now take a coop or a barn away for a day, and
+never for good.
+- Breakers already hunted them, being buildings with no `path_cost`. That is
+  now asserted.
+- At 0 HP a coop or a barn is **wrecked, never lost**. It stands dark and out
+  of use, its animals inside, until it is mended by day.
+- No animal ever dies.
+
+**The rule** (`wrecks`, `src/core/`):
+- `wrecks: true` is on the coop and the barn in `BUILDINGS`, read by
+  `Building.wrecks`. Nothing else declares it.
+- **One count of hit points over the whole footprint** (decided).
+  - `Farm.place` gives each cell its own `hp`, and a breaker gnaws one cell.
+    Every one of a barn's twenty cells would have had to be bitten to 0.
+  - So for a `wrecks` building, `Farm.damage` takes the bite on the shared
+    count (`Building.set_shared_hp`). `Repair.apply` mends every cell at
+    once.
+- **At 0** (`Farm._wreck`):
+  - The occupant stays, marked `wrecked`: still a wall, no rubble.
+  - `Pathing.prey_cells` already skips 0 HP. The hunt field is cached on
+    `grid_version`, so the wreck calls `Farm.touch`, and so does mending it
+    back above 0. Without that, breakers stand at a dead barn all night.
+- **It counts as a structure lost** (decided): `Run.lost_a_structure`, the
+  run's tally that its summary and the stats show.
+  - The morning report's "came down" line counts tonight's rubble, and a
+    wreck leaves none. It stands, and the report leaves it out.
+  - The event is `structure_lost` with `wrecked: true`.
+  - The log reads "Barn wrecked - mend it by day" ("Celeiro arrasado -
+    conserte de dia").
+- **Out of use** (`Livestock`):
+  - It offers no `collect` and gives nothing.
+  - The morning's hay feeds nobody in it and none is spent: its animals are
+    marked unfed.
+  - Its pigs mark no spots, and its animals' clocks do not run.
+  - Its door offers only `repair`: by day by the farmer, and at night by the
+    guardian, 0134's one night verb.
+- **Any hit point brings it back.**
+  - Nothing is removed, so `Farm.forget_cell` never runs.
+  - `Crafting`'s queues and `Livestock`'s residents stay where they were. The
+    residents are asserted.
+
+**The view:**
+- **Hurt and wrecked looks** (`WorldView._worn_home`): `<id>_hurt` under
+  three quarters and `<id>_wreck` at 0, A030's names.
+  - They are registered on 0120's road: the kitchen's and the workshop's own
+    hurt art, tinted like the whole stand-in for hurt and dark for the
+    wreck, until 0212.
+- **Animals inside:** `AnimalView` hides a wrecked home's animals by day too.
+  At night `Transition` already fades all of them.
+- **The lantern** (`Lighting`, new):
+  - A standing coop or barn, whole or hurt, has a small warm lantern lit at
+    night, left of its door at about the farmer's head. It goes dark once
+    the building is wrecked.
+  - A030's `light_xy` takes over when the art lands, and its `windows_xy`
+    light up once measured.
+  - Two reasons. A030 promised it ("0186 lights and wrecks the buildings"),
+    and the picture asked for it: at night the tints alone barely told hurt
+    from wrecked.
+- **One smoke for a wreck** (`Particles`):
+  - A cell under two fifths smokes, so a barn at 0 smoked from all twenty
+    cells: a grid of ghosts over its roof in the first picture.
+  - A `wrecks` building now smokes from one point.
+
+**Art settled:** one sentence in A030's Deliverables now states 0186's rules:
+- hit points shared over the footprint;
+- the hurt and wreck thresholds;
+- the lantern and windows lit on whole and hurt only;
+- where the wreck smokes.
+
+### Hashes
+
+- **SIM 216342093 unchanged:** the determinism scenario has no barn at
+  night. The prompt said to say so.
+- **DATA 1869696351 -> 4133877013, on purpose:** `wrecks` on the coop and
+  the barn.
+
+Verify: 60 passed, 0 failed in 649s (the known OVER BUDGET), with `--accept`:
+headless_check 17283 asserts, headless_v1 1892, input_check 1193 cases,
+input_v1 631, effects 2997, sim 216342093 unchanged and data 1869696351 ->
+4133877013 recorded. The run before the lantern failed the data hash alone.
+
+**Tests:**
+- `_task_0186_barns_night` (headless_v1):
+  - **Data:** only the coop and the barn wreck, and both are prey with no
+    `path_cost`.
+  - **The night:** a barn with the map's cow and a sheep, a parked night, and
+    three breakers set down beside it. They wreck it:
+    - every cell at 0, marked, standing, no rubble;
+    - no longer prey, with the hunt field told (`grid_version` moved);
+    - one structure lost, and every animal still inside;
+    - its door offers only `repair`, and its lantern is dark.
+  - **They move on:** they go on to other prey (prey HP falls), and the wreck
+    stands.
+  - **The next morning:**
+    - no hay spent and nobody fed;
+    - the sheep's clock gives nothing all day;
+    - every animal there, `repair` only.
+  - **The repair:**
+    - One day repair (`Interact.complete`) brings it back: prey again, the
+      farm touched, its lantern lit.
+    - `Repair.apply_all` makes every cell whole.
+    - The next morning the sheep eats and gives its wool.
+- `headless_check` asks for one shot per scenario: 68 now (`barn_night`).
+
+Looked at (`python tools/shot.py 0186 barn_night --fhd`, 1920x1080):
+- **Night 3:**
+  - The site's barn wrecked: dark, one smoke at its roof, no lantern.
+  - A hurt barn east of it: red with cracks, its lantern lit.
+  - The log: "barn wrecked - mend it by day".
+- **Spring 4 at 06:05**, the farmer below the wreck:
+  - the wreck dark brown with nobody in its pen;
+  - the hurt barn's pig in its pen, and its sheep behind a tree;
+  - the log telling the night: wrecked, dawn, survived.
+
+Four takes, each changed by the picture before it:
+- **Ghosts and two wrecks.** A grid of twenty "ghosts" over the barn turned
+  out to be the per-cell smoke. And both barns were wrecked: the breakers
+  set at the hurt one's walls finished it during the settle.
+- **No breakers in the picture.** `shot.py`'s `SimDriver` runs in real time
+  under the settle, up to ten ticks a frame on a loaded machine, so any
+  breaker near the hurt barn makes the picture a race. The test proves that
+  they come.
+- **The camera follows the farmer.** Standing him east put the barns under
+  the seed bag's page, so he stands below the wreck.
+- **The lantern**, because the tints alone barely told hurt from wreck at
+  night.
+
+Files: src/core/{building,farm,game_data,livestock,repair}.gd,
+src/ui/{animal_view,lighting,log_panel,particles,placeholder_art,world_view}.gd,
+src/tools/{headless_check,headless_v1,shot}.gd, assets/locale/strings.csv,
+tools/determinism_data_hash.txt,
+implementation/backlog/packs/A030-coop-barn.md (one sentence),
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0186-barns-at-night.md,
+implementation/shots/0186/, docs/devlog/{index,index.pt_BR}.md

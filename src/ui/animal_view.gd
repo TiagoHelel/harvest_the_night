@@ -179,10 +179,13 @@ func _start_point(anchor: Vector2i, index: int, count: int) -> Vector2:
 
 
 ## Walk, eat, rest, lie down: a little state machine on the animal's own
-## sequence - view only.
+## sequence - view only. A wrecked home keeps its animals inside (task 0186).
 func _step_animal(animal: Dictionary, delta: float) -> void:
 	var sprite: Sprite2D = animal["sprite"]
 	if not is_instance_valid(sprite):
+		return
+	sprite.visible = not Building.is_wrecked(_state, animal["anchor"])
+	if not sprite.visible:
 		return
 	animal["left"] = float(animal["left"]) - delta
 	var mode := StringName(animal["mode"])

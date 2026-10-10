@@ -1,7 +1,7 @@
 # 0186 - Barns at night
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0183, 0137
 - **Likely files:** src/core/farm.gd, src/core/livestock.gd, src/core/repair.gd, src/core/pathing.gd, src/core/run.gd, src/core/crafting.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd
 

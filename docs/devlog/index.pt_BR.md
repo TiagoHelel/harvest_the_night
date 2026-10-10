@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-174 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+175 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -217,10 +217,11 @@ voz alta.
 | 0183 | The coop and the barn | 2026-10-09 |
 | 0184 | Feeding, eggs and milk | 2026-10-09 |
 | 0185 | Sheep, pigs and the dog | 2026-10-09 |
+| 0186 | Barns at night | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 65 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 66 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -287,6 +288,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Feeding, eggs and milk** (0184) - `data` 91621100 -> 232468587
 - **Sheep, pigs and the dog** (0185) - `sim` 1862924429 -> 216342093
 - **Sheep, pigs and the dog** (0185) - `data` 232468587 -> 1869696351
+- **Barns at night** (0186) - `data` 1869696351 -> 4133877013
 
 ## O que deu errado
 

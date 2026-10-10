@@ -398,6 +398,7 @@ func _watch(delta: float) -> void:
 	var occupants: Dictionary = _state["occupants"]
 	var standing: Dictionary = {}
 	var chimneys: Dictionary = {}
+	var wrecks: Dictionary = {}
 	for idx in occupants:
 		var on: Dictionary = occupants[idx]
 		var id: StringName = on["id"]
@@ -419,6 +420,15 @@ func _watch(delta: float) -> void:
 			_burst(at, 1, &"smoke", SMOKE, 8.0)
 			_forms.emit(&"smoke",at,Vector2(0,-4))
 		elif _is_wrecked(on):
+			# **One smoke to a building that shares its hit points** (task
+			# 0186): a coop or a barn at 0 is one wreck, and a puff from each
+			# of its twenty cells was a grid of ghosts over the roof.
+			if Building.wrecks(id):
+				var home := Building.anchor_of(_state, Grid.cell(int(idx)))
+				if wrecks.has(home):
+					continue
+				wrecks[home] = true
+				at = (Vector2(home) + Vector2(Building.bounds_at(_state, home).size) * Vector2(0.5, 0.3)) * tile
 			_burst(at, 1, &"smoke", SMOKE, 10.0)
 			_forms.emit(&"smoke",at,Vector2(0,-4))
 	for idx in _seen_occupants:

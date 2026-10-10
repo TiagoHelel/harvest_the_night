@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 55
+const GROUPS := 56
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -124,6 +124,7 @@ func _run() -> void:
 	_task_0183_barns()
 	_task_0184_feed()
 	_task_0185_animals()
+	_task_0186_barns_night()
 
 
 func _finish() -> void:
@@ -5306,6 +5307,121 @@ func _task_0185_animals() -> void:
 	expect(found.is_empty() and FileAccess.get_file_as_string("res://src/ui/animal_view.gd").contains("dog"),
 		"a text scan finds no dog in src/core/ - it lives in the view", str(found))
 	_completed += 1
+
+
+## Task 0186: barns at night. A short night with breakers set down beside
+## the barn, mornings by `Phases.begin_day`: they reach it and wreck it, then
+## leave it for other prey; it stands, gives nothing the next day, keeps
+## every animal, and works again after a repair by day.
+func _task_0186_barns_night() -> void:
+	expect(GameData.validate().is_empty() and Building.wrecks(&"coop") and Building.wrecks(&"barn")
+		and not Building.wrecks(&"workshop") and not Building.wrecks(&"wall"),
+		"the coop and the barn stand wrecked; nothing else does")
+	expect(Pathing.is_prey(&"coop") and Pathing.is_prey(&"barn")
+		and not GameData.BUILDINGS[&"barn"].has("path_cost"),
+		"breakers hunt coops and barns: buildings with no path cost")
+
+	var state := State.create(1860)
+	Resources.gain(state, {GameData.WOOD: 500, GameData.STONE: 500, GameData.MONEY: 2000})
+	var barn := _site_spot(state, &"barn")
+	expect(Building.place(state, &"barn", barn) and Livestock.house(state, barn, &"sheep"),
+		"fixture: a barn with the map's cow and a sheep")
+	var parts := Building.parts_at(state, barn)
+	var herd := _herd(state, barn)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	for i in 3:
+		Entities.spawn(state, &"breaker", barn + Vector2i(i * 2, 4))
+	var lost := Run.structures_lost(state)
+	var version := int(state["grid_version"])
+	var ticks := 0
+	while not Building.is_wrecked(state, barn) and ticks < 8000:
+		Sim.tick(state)
+		ticks += 1
+	var standing := true
+	var shared := true
+	for part in parts:
+		var on := Farm.occupant(state, part)
+		standing = standing and StringName(on.get("id", &"")) == &"barn" and Farm.rubble_at(state, part) == &""
+		shared = shared and int(on.get("hp", -1)) == 0 and bool(on.get("wrecked", false))
+	expect(Building.is_wrecked(state, barn) and standing and shared,
+		"breakers set down beside it wreck the barn: every cell at 0, marked, still standing, no rubble",
+		"%d ticks" % ticks)
+	var prey := Pathing.prey_cells(state)
+	var hunted := false
+	for part in parts:
+		hunted = hunted or prey.has(part)
+	expect(not hunted and int(state["grid_version"]) > version and Run.structures_lost(state) == lost + 1,
+		"it is no longer prey - the hunt field told - and counts as one structure lost")
+	expect(_herd(state, barn) == herd, "every animal is still inside it")
+	expect(Interact.verb_at(state, Livestock.door_of(state, barn)) == &"repair",
+		"and its door offers only to be mended - repair being the one verb the night keeps (0134)",
+		str(Interact.verb_at(state, Livestock.door_of(state, barn))))
+	# The view's lantern by the door goes out with it.
+	var lamps := Lighting.new()
+	lamps._state = state
+	expect(not lamps._lights_up(&"barn", Farm.occupant(state, barn), barn),
+		"and the lantern by its door is dark")
+
+	# **Then they leave it for other prey.**
+	var others := _prey_hp(state)
+	var more := 0
+	while _prey_hp(state) >= others and more < 6000:
+		Sim.tick(state)
+		more += 1
+	expect(_prey_hp(state) < others and Building.is_wrecked(state, barn)
+		and StringName(Farm.occupant(state, barn).get("id", &"")) == &"barn",
+		"they go on to other prey, and the wreck stands", "%d more ticks" % more)
+
+	# **The next day it gives nothing and keeps everyone.**
+	Resources.add(state, GameData.HAY, 4)
+	_next_morning(state)
+	var door := Livestock.door_of(state, barn)
+	expect(Resources.amount(state, GameData.HAY) == 4 and not Livestock.is_fed(state, barn, 0)
+		and not Livestock.is_fed(state, barn, 1),
+		"the morning feeds nobody in a wreck, and no hay is spent")
+	_tick_livestock(state, int(GameData.LIVESTOCK[&"sheep"]["every_ticks"]))
+	expect(Livestock.ready_at(state, door) == 0 and _herd(state, barn) == herd
+		and Interact.verb_at(state, door) == &"repair",
+		"a wrecked barn gives nothing all day, keeps every animal, and offers only to be mended",
+		str(Interact.verb_at(state, door)))
+
+	# **A repair by day brings it back.**
+	version = int(state["grid_version"])
+	Interact.complete(state, door, &"repair")
+	expect(not Building.is_wrecked(state, barn) and int(state["grid_version"]) > version
+		and Pathing.prey_cells(state).has(barn)
+		and lamps._lights_up(&"barn", Farm.occupant(state, barn), barn),
+		"its first hit point back makes it a barn again - something to come for, its lantern lit")
+	lamps.free()
+	Repair.apply_all(state, door)
+	var whole := true
+	for part in parts:
+		whole = whole and int(Farm.occupant(state, part)["hp"]) == int(GameData.BUILDINGS[&"barn"]["hp"])
+	expect(whole, "mended whole, every cell of it")
+	_next_morning(state)
+	_tick_livestock(state, int(GameData.LIVESTOCK[&"sheep"]["every_ticks"]))
+	var wool := Resources.amount(state, GameData.WOOL)
+	Interact.complete(state, door, &"collect")
+	expect(Livestock.is_fed(state, barn, 1) and Resources.amount(state, GameData.WOOL) == wool + 1,
+		"and the next morning its sheep eats and gives its fleece again")
+	_completed += 1
+
+
+## Who lives in the home on `cell`, by kind and in order.
+func _herd(state: Dictionary, cell: Vector2i) -> Array:
+	var out: Array = []
+	for animal in Livestock.residents(state, cell):
+		out.append(StringName((animal as Dictionary)["id"]))
+	return out
+
+
+## The hit points of everything a breaker would come for.
+func _prey_hp(state: Dictionary) -> int:
+	var total := 0
+	for cell in Pathing.prey_cells(state):
+		total += int(Farm.occupant(state, cell).get("hp", 0))
+	return total
 
 
 ## Five mornings of one fed pig in a barn on `seed_value`: every spot marked.

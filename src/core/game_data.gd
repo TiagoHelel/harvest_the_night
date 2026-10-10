@@ -1023,6 +1023,9 @@ const BUILDINGS: Dictionary = {
 		"energy_draw": 0,
 		"size": Vector2i(3, 2),         # LEVER: cells, up to the 7x4 site
 		"capacity": 4,                  # LEVER: chickens it holds, 2-8
+		# **Wrecked, never lost** (task 0186): at 0 HP it stands, out of use,
+		# its animals inside, until it is mended by day.
+		"wrecks": true,
 	},
 	&"barn": {
 		"hp": 100,                      # LEVER: hit points, 60-200
@@ -1030,6 +1033,7 @@ const BUILDINGS: Dictionary = {
 		"energy_draw": 0,
 		"size": Vector2i(5, 4),         # LEVER: cells, up to the 7x4 site
 		"capacity": 4,                  # LEVER: animals it holds, 2-8
+		"wrecks": true,
 	},
 }
 

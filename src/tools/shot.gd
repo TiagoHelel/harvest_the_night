@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["barn_night", "a wrecked barn and a hurt one at night; then the next morning, the wreck's animals inside and the hurt one's out", ""],
 	["barnyard", "the barn's cow, sheep and pig and the coop's hens about their homes, a pig's spot, the dog behind the farmer", ""],
 	["coop_barn", "a coop and a barn on their sites at noon, the map's animals moved in and more", ""],
 	["fish_book", "the fish book on the Old Catfish's page, four of sixteen; then a silhouette", "InventoryPanel"],
@@ -733,6 +734,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"fish_book": _set_fish_book(state)
 		"coop_barn": _set_coop_barn(state)
 		"barnyard": _set_barnyard(state)
+		"barn_night": _set_barn_night(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -842,6 +844,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		await process_frame
 		await _shoot("fish_book_unknown", folder)
 		print("  fish_book on %s, then %s" % [ledger.book().shown(), FishBook.species()[FishBook.species().find(GameData.OLD_CATFISH) + 1]])
+		return
+	if name == "barn_night":
+		await _shoot("barn_night", folder)
+		await _take_barn_morning(main, state, folder)
 		return
 	if name == "inventory_crops":
 		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
@@ -1516,6 +1522,78 @@ func _set_barnyard(state: Dictionary) -> void:
 	_standing_at = barn + Vector2i(3, 6)
 	_stand(state, _standing_at)
 	state["player"]["facing"] = Player.NORTH
+
+
+## **Barns at night** (task 0186): the night of Spring 3. The barn on its
+## site wrecked - standing at 0 HP, its cow and sheep inside - and a second
+## barn east of it hurt past the wear line; then the next morning
+## (`_take_barn_morning`). **No breakers in the picture**: the driver runs in
+## real time under the settle, up to ten ticks a frame on a loaded machine,
+## and two breakers at its walls had wrecked the hurt one too by the shutter.
+func _set_barn_night(state: Dictionary) -> void:
+	_on_date(state, 3)
+	Resources.gain(state, {GameData.WOOD: 500, GameData.STONE: 500, GameData.MONEY: 2000})
+	var room: Array = GameData.MAP_SITES[&"barn"]
+	var wreck := Vector2i(int(room[0]), int(room[1]))
+	Building.place(state, &"barn", wreck)
+	Livestock.house(state, wreck, &"sheep")
+	var hurt := Vector2i(-1, -1)
+	for x in range(wreck.x + 6, wreck.x + 16):
+		if hurt.x < 0 and Building.can_place(state, &"barn", Vector2i(x, wreck.y)):
+			hurt = Vector2i(x, wreck.y)
+	if hurt.x >= 0 and Building.place(state, &"barn", hurt):
+		for kind in [&"sheep", &"pig"]:
+			Livestock.house(state, hurt, kind)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	# Through `Farm.damage`, the breakers' own road: the wreck is marked,
+	# the hunt field told, the log told.
+	Farm.damage(state, wreck, 999)
+	# Hurt, and not yet smoking: under the art's three quarters and over the
+	# particles' two fifths.
+	if hurt.x >= 0:
+		Farm.damage(state, hurt, 40)
+	_barns = [wreck, hurt]
+	print("  barn_night: wreck at %s %d hp, hurt at %s %d hp" % [wreck, int(Farm.occupant(state, wreck).get("hp", -1)),
+		hurt, int(Farm.occupant(state, hurt).get("hp", -1)) if hurt.x >= 0 else -1])
+	_look_at(wreck + Vector2i(5, 3))
+
+
+## The wrecked barn and the hurt one, for the morning after.
+var _barns: Array = []
+
+
+## **The next morning** (task 0186): dawn ends the night, the report is
+## confirmed, and he is out in front of the two barns - the wreck still
+## standing, nobody in its pen; the hurt one's animals out in theirs.
+func _take_barn_morning(main: Node, state: Dictionary, folder: String) -> void:
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	House.leave(state)
+	var wreck: Vector2i = _barns[0]
+	var hurt: Vector2i = _barns[1]
+	# Below the wreck, facing it: the camera follows him, and this keeps both
+	# barns clear of the seed bag's page in the day HUD's top left corner.
+	_stand(state, wreck + Vector2i(3, 6))
+	state["player"]["facing"] = Player.NORTH
+	_only_showing(main, "")
+	var view := main.get_node("%WorldView") as WorldView
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await _shoot("barn_night_morning", folder)
+	print("  barn_night_morning: %s, wreck %d hp, %d inside, door offers %s; hurt %d hp" % [
+		Phases.name_of(int(state["phase"])), int(Farm.occupant(state, wreck).get("hp", -1)),
+		Livestock.residents(state, wreck).size(), Interact.verb_at(state, Livestock.door_of(state, wreck)),
+		int(Farm.occupant(state, hurt).get("hp", -1)) if hurt.x >= 0 else -1])
 
 
 ## **The fish book** (task 0182): a spring Full Moon, and four species

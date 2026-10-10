@@ -31,7 +31,9 @@ extends RefCounted
 ## the map as occupants, onto the home's list in `housed` with their produce,
 ## and collected at its door - the middle of its front row. A home that is
 ## lost leaves its animals waiting in `unhoused`, alive, for the next home of
-## their kind: no animal ever dies.
+## their kind: no animal ever dies. Since task 0186 a home the night wrecks is
+## not lost: it stands at 0 HP with its animals inside - unfed, giving
+## nothing, offering only to be mended - until a hit point brings it back.
 ##
 ## ## Fed, or nothing
 ##
@@ -143,6 +145,8 @@ static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 	if on.is_empty():
 		return &""
 	if is_home(on["id"]):
+		if Building.is_wrecked(state, cell):
+			return &""
 		return &"collect" if cell == door_of(state, cell) and ready_at(state, cell) > 0 else &""
 	if not is_animal(on["id"]):
 		return &""
@@ -180,7 +184,7 @@ static func collect(state: Dictionary, cell: Vector2i) -> Dictionary:
 
 
 static func _collect_home(state: Dictionary, cell: Vector2i) -> Dictionary:
-	if cell != door_of(state, cell):
+	if cell != door_of(state, cell) or Building.is_wrecked(state, cell):
 		return {}
 	var given := {}
 	for animal in residents(state, cell):
@@ -231,8 +235,14 @@ static func feed(state: Dictionary) -> int:
 	var anchors: Array = homes.keys()
 	anchors.sort()
 	for idx in anchors:
+		# A wrecked home's animals are not fed (task 0186): it gives nothing
+		# today however much hay there is.
+		var wrecked := Building.is_wrecked(state, Grid.cell(int(idx)))
 		for animal in ((homes[idx] as Dictionary)["animals"] as Array):
 			var one: Dictionary = animal
+			if wrecked:
+				one["fed"] = false
+				continue
 			var eats := int((GameData.LIVESTOCK[one["id"]] as Dictionary).get("feed_per_day", 0))
 			one["fed"] = eats <= 0 or Resources.spend(state, GameData.ANIMAL_FEED, eats)
 			if not bool(one["fed"]):
@@ -252,6 +262,8 @@ static func mark_spots(state: Dictionary) -> int:
 	anchors.sort()
 	for idx in anchors:
 		var anchor := Grid.cell(int(idx))
+		if Building.is_wrecked(state, anchor):
+			continue
 		for animal in ((homes[idx] as Dictionary)["animals"] as Array):
 			var one: Dictionary = animal
 			var digs := int((GameData.LIVESTOCK[one["id"]] as Dictionary).get("digs", 0))
@@ -416,6 +428,9 @@ static func tick(state: Dictionary) -> void:
 	var anchors: Array = homes.keys()
 	anchors.sort()
 	for idx in anchors:
+		# **A wrecked home gives nothing** (task 0186).
+		if Building.is_wrecked(state, Grid.cell(int(idx))):
+			continue
 		for animal in ((homes[idx] as Dictionary)["animals"] as Array):
 			# **Unfed gives nothing today** (task 0184); what it had waiting
 			# stays there to be collected.

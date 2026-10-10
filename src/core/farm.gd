@@ -340,6 +340,14 @@ static func damage(state: Dictionary, cell: Vector2i, amount: int) -> int:
 	if left <= 0:
 		return 0
 	var taken := mini(amount, left)
+	# **Wrecked, never lost** (task 0186): a coop or a barn takes the bite on
+	# its one count of hit points, and at 0 it stands - out of use, no
+	# rubble, its animals inside - until it is mended.
+	if Building.wrecks(StringName(on["id"])):
+		Building.set_shared_hp(state, cell, left - taken)
+		if left - taken <= 0:
+			_wreck(state, cell, StringName(on["id"]))
+		return taken
 	on["hp"] = left - taken
 	if int(on["hp"]) <= 0:
 		var id := StringName(on["id"])
@@ -349,6 +357,20 @@ static func damage(state: Dictionary, cell: Vector2i, amount: int) -> int:
 			"id": id, "cell": [cell.x, cell.y],
 		})
 	return taken
+
+
+## **A building wrecked** (task 0186). It stays an occupant and a wall, but
+## nothing comes for it any more: `Pathing.prey_cells` skips 0 HP, and the
+## hunt field is cached on `grid_version`, so the farm is touched - without
+## it the breakers would stand at a dead barn all night. It counts as a
+## structure lost to the run's tally, and the log says wrecked.
+static func _wreck(state: Dictionary, cell: Vector2i, id: StringName) -> void:
+	touch(state)
+	Run.lost_a_structure(state)
+	var anchor := Building.anchor_of(state, cell)
+	Events.add(state, &"structure_lost", {
+		"id": id, "cell": [anchor.x, anchor.y], "wrecked": true,
+	})
 
 
 ## What is lying on a cell after something on it was destroyed, or `&""`.

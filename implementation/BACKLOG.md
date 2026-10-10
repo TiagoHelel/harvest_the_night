@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##############..........`  **172 / 296 done**
+`##############..........`  **173 / 296 done**
 
-0 doing / 124 todo / 0 blocked across 18 phases.
+0 doing / 123 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-124 task(s) left, the ready ones first, then what they
+123 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,22 +242,21 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0186 - Barns at night
+### 0187 - Days in a barrel: the keg and the preserves jar
 
-Ready to pick up.  Likely files: `src/core/farm.gd, src/core/livestock.gd, src/core/repair.gd, src/core/pathing.gd, src/core/run.gd, src/core/crafting.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/core/crafting.gd, src/core/game_data.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-At night the animals sleep inside and the barn becomes something to defend: breakers go for it, and a wrecked barn stands useless until it is mended. No animal ever dies.
+The first artisan machines: a keg and a preserves jar that turn fruit into wine, juice, jelly and pickles over days - the road for a player who wants to farm money (plan section 3.5).
 
-- Animals sleep in their building at night (the view hides them; livestock already ticks only by day)
-- Breakers hunt coops and barns: `Pathing.is_prey` counts a `BUILDINGS` entry with no `path_cost` already - assert it
-- A wrecked-but-standing state: an entry that declares it (e.g. `wrecks: true` on coop and barn) is not removed by `Farm.damage` at 0 HP; it stays an occupant marked wrecked, still impassable, no longer prey (`Pathing.prey_cells` already skips 0 HP), with no rubble; decide whether `Run.lost_a_structure` counts it and assert that. The hunt field is cached on `grid_version` and only `Farm.remove` bumps it today: wrecking (and mending back above 0) must `Farm.touch`, or breakers stand at a 0-HP barn all night - the bug `prey_cells`' own comment records
-- A wrecked building produces nothing and offers only `repair` (by day, by the farmer, as 0134 left it); any HP above 0 brings it back; its animals stay inside, alive, throughout
-- `Crafting.forget_cell` and `Livestock`'s cache must not forget a wrecked building's residents or queue
-- Hurt and wrecked looks are tints of the stand-in through the placeholder road until A030 is integrated by 0212
-- DATA moves (the new flag); SIM moves only if the scenario has a barn at night - say so
+- A per-day recipe credit: a `RECIPES` entry may say `days` (`# LEVER`) instead of `ticks`; `Crafting` credits such a job one day each morning (from `Phases.begin_day`), not per tick, and the panel shows days left (a new string in both languages: `WORK_MAKING` prints seconds). `check_recipes` accepts exactly one of `ticks` and `days`
+- Keg and preserves jar are `BUILDINGS` entries built by day (size, hp, cost as `# LEVER`s; 0188 writes the final sizes into A031). The keg makes wine from grapes and juice from other fruit; the jar makes jelly from fruit and pickles from vegetables - choose which crops
+- `WINE`, `JUICE`, `JELLY` and `PICKLES` with prices, an artisan group, names and strings in both languages; every recipe passes `check_chain` with a margin worth the days
+- Breakers already hunt every building with no `path_cost` (`Pathing.is_prey`), machines included: decide whether a machine at 0 HP takes 0186's wrecked-but-standing state (then 0188 adds `<id>_wreck` rows to A031) or turns to rubble like today's stations, and assert it
+- Machines and goods draw through the placeholder road until A031 (0213) and A032 (0214) are integrated
+- `Names.KEYS` with `BLD_*`/`REC_*` rows for the machines and every recipe, both languages. DATA moves; SIM moves on purpose (four resources in `held`/`gained`, two stations in `selected_recipe`) - record both
 
-  - done when: `_task_0186_barns_night` in `src/tools/headless_v1.gd` (a short night with breakers set down beside the barn, mornings by `Phases.begin_day`): breakers reach a barn and wreck it, then leave it for other prey; it stands, produces nothing the next day, keeps every animal, and works again after a day repair
-  - done when: A new `barn_night` scenario: `python tools/shot.py 0186 barn_night --fhd` shows a hurt and a wrecked barn at night and the next morning; opened and looked at
+  - done when: `_task_0187_keg` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`): grapes in a keg are wine after the recipe's mornings and not one before; a day spent elsewhere still counts; every new recipe has a positive chain margin
+  - done when: `_case_0187_keg` in `src/tools/input_v1.gd`: queue wine at a keg from its panel
 
 ### 0189 - The shipping bin
 
@@ -567,6 +566,24 @@ Egg, milk, wool and truffle get their icons, and the pig's dig spot its look in 
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0211/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
+### 0212 - Art: the coop and the barn
+
+Waits for Codex art A030.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_station_art.py, src/ui/art_placement.gd`.
+
+The coop and the barn get their approved art - whole, hurt and wrecked-but-standing - in place of 0183's stand-ins.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A030` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A030-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_station_art.FAMILY` or a buildings checker wired into `tools/verify.py`).
+- Runtime names: `<id>`, `<id>_hurt` and the wrecked state 0186 added, at the footprints 0183 settled, with door/window light points on opaque pixels; full density - they do **not** join `ArtPlacement.visual_scale`'s 2.0 list
+- Replace the stand-ins of 0183 and 0186 and flip A030's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A030 integrated`.
+
+  - done when: `python tools/check_station_art.py` and `python tools/show_art.py --stations --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0212/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
 ### 0289 - Art: the morning report
 
 Waits for Codex art A057.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
@@ -606,21 +623,22 @@ The guardian's cursor, the night camera and the fishing bar each get the knob a 
   - done when: `_task_0292_options` in `src/tools/headless_v1.gd`: no file in `src/core/` names `Settings`; `Forecast.tonight` gives the same record at 08:00 as at 18:00
   - done when: the controls and game pages captured at 1920x1080 in both languages (`$GODOT --path . --position -4000,-4000 --script res://src/tools/capture_menus.gd -- --out=res://implementation/shots/0292/`, then again with `--pt_BR`) and opened: no label runs off its row and no two rows overlap
 
-### 0187 - Days in a barrel: the keg and the preserves jar
+### 0188 - The dairy, the loom and the mill
 
-Waits on 0186.  Likely files: `src/core/crafting.gd, src/core/game_data.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0187.  Likely files: `src/core/game_data.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
-The first artisan machines: a keg and a preserves jar that turn fruit into wine, juice, jelly and pickles over days - the road for a player who wants to farm money (plan section 3.5).
+The dairy, the loom and the mill: milk into cheese and butter, wool into cloth and sandbags, wheat into flour and beet into sugar.
 
-- A per-day recipe credit: a `RECIPES` entry may say `days` (`# LEVER`) instead of `ticks`; `Crafting` credits such a job one day each morning (from `Phases.begin_day`), not per tick, and the panel shows days left (a new string in both languages: `WORK_MAKING` prints seconds). `check_recipes` accepts exactly one of `ticks` and `days`
-- Keg and preserves jar are `BUILDINGS` entries built by day (size, hp, cost as `# LEVER`s; 0188 writes the final sizes into A031). The keg makes wine from grapes and juice from other fruit; the jar makes jelly from fruit and pickles from vegetables - choose which crops
-- `WINE`, `JUICE`, `JELLY` and `PICKLES` with prices, an artisan group, names and strings in both languages; every recipe passes `check_chain` with a margin worth the days
-- Breakers already hunt every building with no `path_cost` (`Pathing.is_prey`), machines included: decide whether a machine at 0 HP takes 0186's wrecked-but-standing state (then 0188 adds `<id>_wreck` rows to A031) or turns to rubble like today's stations, and assert it
-- Machines and goods draw through the placeholder road until A031 (0213) and A032 (0214) are integrated
-- `Names.KEYS` with `BLD_*`/`REC_*` rows for the machines and every recipe, both languages. DATA moves; SIM moves on purpose (four resources in `held`/`gained`, two stations in `selected_recipe`) - record both
+- Dairy, loom and mill as `BUILDINGS` built by day; recipes (`ticks` or `days`, `# LEVER`s): cheese and butter from milk; cloth from wool and sandbags from cloth plus a filler you choose; flour from wheat and sugar from beet
+- `CHEESE`, `BUTTER`, `CLOTH`, `SANDBAG`, `FLOUR` and `SUGAR` with prices, groups, names and strings in both languages, and `BLD_*`/`REC_*` rows for the machines and every recipe; every value passes `check_chain`. If 0187's jelly should take sugar, add it now
+- Sandbags are a material here: their night use is 0231's. Bread is 0192's (the kitchen, from flour)
+- Settle the art: the five machines' footprints, states (idle, active, hurt, and wreck if 0187 said so) and light/smoke points into A031; the eleven goods into A032 (bread included)
+- Stand-ins through the placeholder road until A031 (0213) and A032 (0214) are integrated
+- DATA moves; SIM moves on purpose (six resources in `held`/`gained`, three stations in `selected_recipe`) - record both
 
-  - done when: `_task_0187_keg` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`): grapes in a keg are wine after the recipe's mornings and not one before; a day spent elsewhere still counts; every new recipe has a positive chain margin
-  - done when: `_case_0187_keg` in `src/tools/input_v1.gd`: queue wine at a keg from its panel
+  - done when: `_task_0188_mills` in `src/tools/headless_v1.gd`: every new recipe runs and `check_chain` holds for each
+  - done when: A new `machines` scenario: `python tools/shot.py 0188 machines --fhd` shows the five machines idle and working; opened and looked at
+  - done when: the Deliverables tables of `implementation/backlog/packs/A031-machines.md` and `A032-artisan-goods.md` state the final geometry and item list this task settled
 
 ### 0202 - Art: tool icons
 
@@ -638,24 +656,6 @@ Fifteen tool icons - four tools in three tiers and the three rods - replace 0173
   - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0202/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0212 - Art: the coop and the barn
-
-Waits on 0186.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_station_art.py, src/ui/art_placement.gd`.
-
-The coop and the barn get their approved art - whole, hurt and wrecked-but-standing - in place of 0183's stand-ins.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A030` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A030-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_station_art.FAMILY` or a buildings checker wired into `tools/verify.py`).
-- Runtime names: `<id>`, `<id>_hurt` and the wrecked state 0186 added, at the footprints 0183 settled, with door/window light points on opaque pixels; full density - they do **not** join `ArtPlacement.visual_scale`'s 2.0 list
-- Replace the stand-ins of 0183 and 0186 and flip A030's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A030 integrated`.
-
-  - done when: `python tools/check_station_art.py` and `python tools/show_art.py --stations --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0212/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0215 - Art: the shipping bin
@@ -711,23 +711,6 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0188 - The dairy, the loom and the mill
-
-Waits on 0187.  Likely files: `src/core/game_data.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-The dairy, the loom and the mill: milk into cheese and butter, wool into cloth and sandbags, wheat into flour and beet into sugar.
-
-- Dairy, loom and mill as `BUILDINGS` built by day; recipes (`ticks` or `days`, `# LEVER`s): cheese and butter from milk; cloth from wool and sandbags from cloth plus a filler you choose; flour from wheat and sugar from beet
-- `CHEESE`, `BUTTER`, `CLOTH`, `SANDBAG`, `FLOUR` and `SUGAR` with prices, groups, names and strings in both languages, and `BLD_*`/`REC_*` rows for the machines and every recipe; every value passes `check_chain`. If 0187's jelly should take sugar, add it now
-- Sandbags are a material here: their night use is 0231's. Bread is 0192's (the kitchen, from flour)
-- Settle the art: the five machines' footprints, states (idle, active, hurt, and wreck if 0187 said so) and light/smoke points into A031; the eleven goods into A032 (bread included)
-- Stand-ins through the placeholder road until A031 (0213) and A032 (0214) are integrated
-- DATA moves; SIM moves on purpose (six resources in `held`/`gained`, three stations in `selected_recipe`) - record both
-
-  - done when: `_task_0188_mills` in `src/tools/headless_v1.gd`: every new recipe runs and `check_chain` holds for each
-  - done when: A new `machines` scenario: `python tools/shot.py 0188 machines --fhd` shows the five machines idle and working; opened and looked at
-  - done when: the Deliverables tables of `implementation/backlog/packs/A031-machines.md` and `A032-artisan-goods.md` state the final geometry and item list this task settled
 
 ### 0192 - Cooking with the new harvest
 
@@ -798,7 +781,7 @@ Wine, juice, jelly, pickles, cheese, butter, cloth, sandbags, flour, bread and s
 
 ### 0194 - The day's economy
 
-Waits on 0193, 0189, 0186, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
+Waits on 0193, 0189, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
 
 The day's money is tuned on purpose: a price for every item, and targets per season so that a good day buys about one new defence (plan section 5's rule of thumb).
 
@@ -1849,7 +1832,7 @@ The year stops being ten written nights plus a curve and becomes tables a design
 
 ### 0286 - Fog, rain and winter wind
 
-Waits on 0186, 0256, 0257, 0285.  Likely files: `tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0256, 0257, 0285.  Likely files: `tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The bed under everything follows the weather and the season: fog and rain on the nights that have them, wind through the winter, the animals heard near their coop and barn, and a short stinger when an event night reaches its build step. View only: neither hash moves. (The animal calls came from 0281 and the stingers from 0284, so those fit one invocation.)
 
@@ -2106,7 +2089,7 @@ The benchmark's worst case is still Spring 14, where 0153 moved the MVP's night 
 
 ### 0276 - The autoplayer plays a whole year
 
-Waits on 0194, 0233, 0234, 0275, 0186, 0191, 0221.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0194, 0233, 0234, 0275, 0191, 0221.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 0142 taught the robot to sleep; this teaches it the rest of 1.0, so balance can be measured over a whole year: crops by days and season, the fishing minigame, animals and machines, the bin and the peddler, cursor building and repairs, the powers, and carrying on through losses and boss repeats.
 
@@ -2500,7 +2483,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (21/53)
+## 12 - The day that pays  (22/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2523,15 +2506,15 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0183** [The coop and the barn](prompts/0183-coop-barn.md)
 - [x] **0184** [Feeding, eggs and milk](prompts/0184-feeding-products.md)
 - [x] **0185** [Sheep, pigs and the dog](prompts/0185-sheep-pigs-dog.md)
-- [ ] **0186** [Barns at night](prompts/0186-barns-at-night.md)
-- [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md) - needs 0186
+- [x] **0186** [Barns at night](prompts/0186-barns-at-night.md)
+- [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md)
 - [ ] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md) - needs 0187
 - [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md)
 - [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md)
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188
 - [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0188, 0190, 0192
-- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0186, 0191
+- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0191
 - [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md) - needs 0194
 - [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0194, 0195
 - [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - waits for art A014
@@ -2549,7 +2532,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0209** [Art: sheep and pigs](prompts/0209-art-farm-animals.md) - waits for art A026
 - [ ] **0210** [Art: the cow and the chicken redrawn](prompts/0210-art-cow-chicken.md) - waits for art A027
 - [ ] **0211** [Art: animal goods](prompts/0211-art-animal-goods.md) - waits for art A029
-- [ ] **0212** [Art: the coop and the barn](prompts/0212-art-coop-barn.md) - needs 0186 - waits for art A030
+- [ ] **0212** [Art: the coop and the barn](prompts/0212-art-coop-barn.md) - waits for art A030
 - [ ] **0213** [Art: the artisan machines](prompts/0213-art-machines.md) - needs 0188 - waits for art A031
 - [ ] **0214** [Art: artisan goods](prompts/0214-art-artisan-goods.md) - needs 0188, 0192 - waits for art A032
 - [ ] **0215** [Art: the shipping bin](prompts/0215-art-shipping-bin.md) - needs 0189 - waits for art A033
@@ -2622,7 +2605,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0249, 0250, 0254, 0259, 0272
 - [ ] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md) - needs 0270, 0251, 0252, 0255, 0259, 0273
 - [ ] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md) - needs 0274, 0234, 0248, 0233
-- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0194, 0233, 0234, 0275, 0186, 0191, 0221
+- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0194, 0233, 0234, 0275, 0191, 0221
 - [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0271, 0272, 0273, 0274, 0276, 0259
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
@@ -2635,7 +2618,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0283** [The guardian's sounds](prompts/0283-sfx-night-v2.md) - needs 0233, 0234
 - [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0247, 0248, 0250, 0252, 0253, 0254, 0255, 0257
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0282
-- [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0186, 0256, 0257, 0285
+- [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0256, 0257, 0285
 - [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0253, 0254, 0255
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
