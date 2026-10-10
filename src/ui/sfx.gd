@@ -61,6 +61,8 @@ const VERB_SOUNDS := {
 	&"dig": &"sfx/collect",
 	&"craft": &"sfx/craft",
 	&"trade": &"sfx/trade",
+	# The shipping bin's lid (task 0189): the stall's sale until 0281.
+	&"ship": &"sfx/sell",
 	&"fish": &"sfx/cast",
 	&"reel": &"sfx/reel",
 }

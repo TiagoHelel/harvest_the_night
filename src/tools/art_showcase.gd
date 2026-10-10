@@ -1493,6 +1493,9 @@ func _work_fixture(verb: StringName, facing: int) -> Vector2i:
 			on[idx] = {"id": &"workshop", "hp": int(GameData.BUILDINGS[&"workshop"]["hp"])}
 		&"trade":
 			on[idx] = {"id": &"shop"}
+		# The shipping bin's lid (task 0189), a one-tick panel verb like trade.
+		&"ship":
+			on[idx] = {"id": &"shipping_bin"}
 		&"repair":
 			# A building since task 0134: the farmer's verb no longer mends a
 			# defence - the cursor does, at night.
@@ -1569,7 +1572,7 @@ func _work_cycles() -> void:
 				expect(PlayerArt.pose(side, false, verb)["name"] == _strip(verb),
 					"North/south work intentionally uses reviewed side-on art")
 			var total := Interact.ticks_for(_state, at, verb)
-			var instant := [&"water", &"reel", &"trade"].has(verb)
+			var instant := [&"water", &"reel", &"trade", &"ship"].has(verb)
 			_state["intent"]["interact"] = true
 			_work_tick(view)
 			await _settle()

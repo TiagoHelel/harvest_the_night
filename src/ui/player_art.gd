@@ -84,6 +84,9 @@ const VERBS := {
 	&"dig": &"collect",
 	&"craft": &"craft",
 	&"trade": &"trade",
+	# Lifting the shipping bin's lid (task 0189): the trade strip until A009's
+	# work strips are re-cut for it.
+	&"ship": &"trade",
 	&"repair": &"repair",
 }
 

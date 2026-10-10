@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["shipping_bin", "the shipping bin by the porch at noon; then its panel with wood and carrots in; then the morning report naming what it pays", ""],
 	["machines", "the keg, the preserves jar, the dairy, the loom and the mill in a row at noon, idle; then working", ""],
 	["keg_jar", "a keg aging wine, five mornings to go, its panel up; a preserves jar beside it setting jelly", "WorkshopPanel"],
 	["barn_night", "a wrecked barn and a hurt one at night; then the next morning, the wreck's animals inside and the hurt one's out", ""],
@@ -739,6 +740,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"barn_night": _set_barn_night(state)
 		"keg_jar": _set_keg_jar(state)
 		"machines": _set_machines(state)
+		"shipping_bin": _set_shipping_bin(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -856,6 +858,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "machines":
 		await _shoot("machines", folder)
 		await _take_machines_working(main, state, folder)
+		return
+	if name == "shipping_bin":
+		await _shoot("shipping_bin", folder)
+		await _take_bin_extras(main, state, folder)
 		return
 	if name == "inventory_crops":
 		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
@@ -1733,6 +1739,50 @@ func _take_machines_working(main: Node, state: Dictionary, folder: String) -> vo
 	for machine in MACHINE_ROW:
 		running.append("%s %s" % [machine, WorldView.station_running(state, machine, _machines[machine])])
 	print("  machines_working: %s" % ", ".join(running))
+
+
+## **The shipping bin** (task 0189): noon on Spring 3, the bin on its site
+## by the porch and the farmer on the site's other cell, facing it - from
+## below, he stood in front of it; then its panel and the next morning
+## (`_take_bin_extras`).
+func _set_shipping_bin(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 3)
+	Resources.gain(state, {GameData.CARROT: 12, GameData.WOOD: 30})
+	var bin: Vector2i = Farm.cells_with(state, Shipping.BIN)[0]
+	_standing_at = bin + Vector2i.RIGHT
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.WEST
+
+
+## **The bin's panel and the morning after** (task 0189): ten carrots and
+## twenty wood in, the panel up with the morning's total on top and the next
+## stack lit; then the night, won at once, and the report's line naming what
+## the bin pays.
+func _take_bin_extras(main: Node, state: Dictionary, folder: String) -> void:
+	Shipping.put(state, GameData.CARROT, 10)
+	Shipping.put(state, GameData.WOOD, 20)
+	Shipping.open(state)
+	_only_showing(main, "ShopPanel")
+	for _i in 4:
+		await process_frame
+	await _shoot("shipping_bin_panel", folder)
+	var due := Shipping.due(state)
+	state["open_panel"] = &""
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+	_only_showing(main, "ResultScreen")
+	var view := main.get_node("%WorldView") as WorldView
+	for _i in SETTLE:
+		await process_frame
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await _shoot("shipping_bin_morning", folder)
+	print("  shipping_bin: $%d due, %s, phase %s" % [due, str(Shipping.waiting(state)),
+		Phases.name_of(int(state["phase"]))])
 
 
 ## **The fish book** (task 0182): a spring Full Moon, and four species

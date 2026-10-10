@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 41
+const V1_CASES := 42
 
 
 func _process(delta: float) -> bool:
@@ -91,6 +91,7 @@ func _run() -> void:
 	await _case_0183_barn()
 	await _case_0185_truffle()
 	await _case_0187_keg()
+	await _case_0189_bin()
 	_finish()
 
 
@@ -2957,5 +2958,45 @@ func _case_0187_keg() -> void:
 	var line := require_control("WorkshopProgress") as Label
 	expect(line != null and line.text == I18n.plural(&"WORK_AGING", days, [Names.of(&"make_wine"), days]),
 		"the panel counts the batch in days, not seconds", line.text if line != null else "")
+	await close_scene()
+	_completed += 1
+
+
+## Task 0189: the shipping bin, by the keyboard and the mouse. Facing the bin,
+## SPACE lifts the lid and the panel opens with a stack's `all` lit; ENTER
+## puts that stack in, a click puts the carrots in, and ESC closes the lid.
+func _case_0189_bin() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel := require_control("ShopPanel") as Control
+	if driver == null or panel == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	Resources.add(state, GameData.CARROT, 6)
+	var bin: Vector2i = Farm.cells_with(state, Shipping.BIN)[0]
+	_stand_at(state, bin + Vector2i.DOWN, Player.NORTH)
+	await frames(2)
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return Shipping.is_open(state), "SPACE at the bin lifts its lid")
+	await frames(3)
+	var lit := panel.get_viewport().gui_get_focus_owner()
+	expect(panel.visible and lit != null and str(lit.name).begins_with("ship_all_"),
+		"the bin's panel is up with a stack's all lit", str(lit.name) if lit != null else "nothing lit")
+	var first := StringName(str(lit.name).trim_prefix("ship_all_")) if lit != null else GameData.WOOD
+	var had := Resources.amount(state, first)
+	await tap_key(KEY_ENTER)
+	await until(func() -> bool: return Shipping.count(state, first) == had and had > 0,
+		"ENTER puts the lit stack in")
+	expect(Resources.amount(state, first) == 0, "and it has left the bag", str(first))
+	await frames(2)
+	await click_control("ship_all_carrot")
+	await until(func() -> bool: return Shipping.count(state, GameData.CARROT) == 6,
+		"a click puts the six carrots in")
+	await tap_key(KEY_ESCAPE)
+	await until(func() -> bool: return not Shipping.is_open(state), "ESC closes the lid")
+	await frames(2)
+	expect(not panel.visible, "and the panel is gone")
 	await close_scene()
 	_completed += 1

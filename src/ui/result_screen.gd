@@ -369,6 +369,11 @@ func _build(payout: Dictionary) -> void:
 		var at := GameData.DAY_END_MINUTE
 		_row(I18n.f(&"RES_PASSED_OUT", [(at / 60) % 24, at % 60]), "",
 			UiKit.WARN)
+	# **The shipping bin** (task 0189): what it pays when he gets up - the
+	# same `Shipping.due` that `Phases.begin_day` puts in the purse.
+	var shipped := Shipping.due(_state)
+	if shipped > 0:
+		_row(I18n.f(&"RES_BIN", [shipped]), "", UiKit.GOOD)
 	# **What the night left lying on the farm**: nothing yet - phase 13's
 	# bones and moon stones are what fill this line.
 	_row(I18n.t(&"RES_LEFTOVERS"), "", UiKit.DIM)

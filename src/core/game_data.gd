@@ -2555,7 +2555,7 @@ const FARM_MAP: Array = [
 	".....................................HHHHHH....................................T",
 	"..............................WWWW...HHHHHH.$$$$....r.......T...T..r...........T",
 	"T.............................WWWW...HHHHHH.$$$$...............................T",
-	"T.............................WWWW..w..pp.................T....................T",
+	"T.............................WWWW..w..pp..B..............T....................T",
 	"T......................T...C....pppppppppppppppppppppppppppppppppppppppppppppppp",
 	"T.T.T.T...T.T.T.T.T.T.Tr...............pp.......pppppppppppppppppppppppppppppppp",
 	"T.........................c.....ssssss.pp.ssssss...............................T",
@@ -2619,6 +2619,9 @@ const MAP_LEGEND: Dictionary = {
 	"k": [3, &"coal_seam"],
 	"g": [3, &"gold_ore"],
 	"h": [0, &"hardwood_stump"],
+	# The shipping bin by the porch (task 0189), on grass, on the site 0156
+	# kept for it.
+	"B": [0, &"shipping_bin"],
 }
 
 ## **The nodes 0156 put on the map before they had a `GATHERING` row**,
@@ -3160,6 +3163,11 @@ static func check_sites(sites: Dictionary, rows: Array) -> Array:
 		var box: Array = sites[id]
 		for y in range(int(box[1]), int(box[1]) + int(box[3])):
 			for x in range(int(box[0]), int(box[0]) + int(box[2])):
+				# What the site was kept for may stand on it (task 0189: the
+				# shipping bin on its own).
+				var entry: Variant = _legend_at(rows, Vector2i(x, y))
+				if entry != null and StringName((entry as Array)[1]) == id:
+					continue
 				if not _clear_ground(rows, Vector2i(x, y)):
 					errors.append("the %s site's %s is not clear ground"
 						% [id, Vector2i(x, y)])

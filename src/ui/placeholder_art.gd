@@ -164,6 +164,10 @@ const MACHINE_SMALL := {"canvas": Vector2i(48, 56), "pivot": Vector2i(24, 52), "
 const MACHINE_WIDE := {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "draw_scale": 1.0}
 const MACHINE_TALL := {"canvas": Vector2i(64, 96), "pivot": Vector2i(32, 92), "draw_scale": 1.0}
 
+## A033's shipping bin (task 0189): 24x24 at (12,22) over one cell by the
+## porch, drawn at 1.0.
+const PROP_BIN := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 22), "draw_scale": 1.0}
+
 ## A026-A028's animals (task 0185): a large one - cow, sheep, pig, dog - is
 ## 40x32 at (20,30), the chicken 24x24 at (12,22), all drawn at 1.0.
 const ANIMAL_LARGE := {"canvas": Vector2i(40, 32), "pivot": Vector2i(20, 30), "draw_scale": 1.0}
@@ -393,6 +397,9 @@ const ART := {
 	&"hud_flour": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.6, 1.6, 1.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_sugar": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_money", "tint": Color(1.5, 1.5, 1.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_sugar": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_money", "tint": Color(1.5, 1.5, 1.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	# A033's shipping bin (task 0189): the barricade's planks, warmed and
+	# grown to a bin by the porch, until 0215.
+	&"shipping_bin": {"pack": "A033", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/barricade", "stand_in_scale": 1.35, "tint": Color(1.15, 1.0, 0.8), "geometry": PROP_BIN, "final": PROP_BIN, "bare": true},
 	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
 	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},

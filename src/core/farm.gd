@@ -31,7 +31,7 @@ const UNWALKABLE := [Terrain.WATER, Terrain.ROCK]
 ## The well joined these at task 0029: it is where the water comes from, and a
 ## player who sold their own well would have sold the farm's only water north
 ## of the pond.
-const FIXTURES := [&"house", &"shop", &"well"]
+const FIXTURES := [&"house", &"shop", &"well", &"shipping_bin"]
 
 
 ## The keys this subsystem owns. `State.create()` merges them in.

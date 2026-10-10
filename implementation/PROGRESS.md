@@ -19376,3 +19376,149 @@ tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/{A031-machines,A032-artisan-goods}.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0188-dairy-loom-mill.md,
 implementation/shots/0188/, docs/devlog/{index,index.pt_BR}.md
+
+## 0189 - The shipping bin - done 2026-10-10
+
+What changed: a shipping bin stands by the porch. The farmer drops stacks in
+at any hour of the day and is paid the next morning, so selling no longer
+waits on the stall's hours (plan section 3.6).
+
+**A fixture, not a building** (decided):
+- **Why:** Stardew's bin is one, and the farm has it from the first morning.
+  A player who had to build the bin would first have to know it exists.
+- **What that gives:** it is in `Farm.FIXTURES`, so it is never sold, never
+  wrecked, and nothing hunts it.
+- **Where:** one cell at (43,26), on the 2x1 site 0156 kept by the porch,
+  between the house's corner and the stall. The site's other cell is left to
+  stand on.
+  - `FARM_MAP` lays it with a new legend character, `B`.
+  - `check_sites` now lets a site hold what it was kept for.
+- **The cost: `State.VERSION` 8 -> 9.**
+  - `Save._shipping_bin_v8` lays the bin on its site where an older farm's
+    cell is still the empty map ground a new farm has there: no occupant,
+    no plot, the same terrain.
+  - A farm that put something on the site keeps it and has no bin.
+  - `make_goldens` wrote `run-v9.sav` and its older and newer shapes. The
+    v8 goldens stay, as the road an old save travels.
+
+**The rule** (`Shipping`, new):
+- **What waits:** `shipping` is a new state key in `RUN_DATA`, resource ->
+  count.
+- **Putting in:** `put` and `put_all` take a stack out of `held` at once.
+  - It is all or nothing, as at the stall.
+  - The bin takes only what the stall would buy, so money does not go in.
+- **Paid at dawn:**
+  - `due()` sums `Shop.paid_for` over the stacks: the sell price and the
+    `sell_percent` bonus.
+  - `Phases.begin_day` calls `pay()` after the stall restocks. The money
+    lands, the bin empties, and the log says "the shipping bin paid $X".
+- **What is in the bin is sold, not stock** (decided). A lost night takes a
+  quarter of `held`; the bin is not touched and the morning pays for all of
+  it.
+- **The day stops while the bin is open** (decided), as at the stall:
+  `open_panel` is `bin`. Choosing what to sell out of a full bag is the same
+  conversation, only with nobody behind the counter.
+- **The verb `ship`:**
+  - it is in `OCCUPANT_VERBS`, `DAY_ONLY` and `ONE_SHOT`, and takes one tick;
+  - its sound borrows `sfx/sell` until 0281, and its pose the trade strip;
+  - `PlayerWork` gives it the stall's one-tick panel cue.
+
+**The panel** (`ShopPanel`, in a bin mode). It reuses the stall's sell rows,
+putting stacks in rather than selling them:
+- **Text:**
+  - title "SHIPPING BIN";
+  - the morning's total where the money was: "in the bin: $X tomorrow";
+  - a heading, "PUT IN - PAID AT DAWN", and no tabs;
+  - the hint "esc to close the lid".
+- **Keyboard and pad**, a way in the stall does not have:
+  - The panel opens with the first live stack's `all` lit.
+  - The arrows and the d-pad walk the rows.
+  - SPACE, ENTER or A puts the stack in, and the light moves on when its
+    row greys.
+  - ESC or B closes it.
+  - The scroll follows the light.
+- **The stall itself is unchanged.**
+
+**The morning report:**
+- It gains the line "the shipping bin pays $X" (`RES_BIN`), from
+  `Shipping.due`, the same sum `begin_day` pays.
+- The line sits above the leftovers line, and only when the bin holds
+  something.
+
+**Names:** "shipping bin" / "caixa de envio" (`FIX_SHIPPING_BIN`), with the
+`SHIP_*`, `RES_BIN` and `LOG_SHIPPED` rows in both languages.
+
+**Art:**
+- The stand-in is the barricade's planks, warmed and grown to a bin, until
+  0215.
+- A033's Deliverables state the settled geometry: one cell at (43,26), and
+  24x24 at (12,22) for the closed bin and the three lid frames. 0215 plays
+  the lid while the panel is open.
+
+### Hashes
+
+- **SIM 729970321 -> 3194686093, on purpose:**
+  - the bin on the map;
+  - the new `shipping` key;
+  - `State.VERSION` 9.
+- **DATA 2949384217 -> 1204968759, on purpose:** `FARM_MAP` has a `B` on the
+  bin's site, and `MAP_LEGEND` the row that reads it.
+
+Verify: 60 passed, 0 failed in 672s (the known OVER BUDGET), with `--accept`,
+on the first run: headless_check 17474 asserts, headless_v1 2056,
+input_check 1218 cases, input_v1 662.
+
+**Tests:**
+- `_task_0189_bin` (headless_v1):
+  - **The fixture:**
+    - One bin stands on its site, a fixture nothing hunts, and
+      `check_sites` passes.
+    - It offers `ship` by day, once a press, with a sound.
+    - Nothing hurts it and nothing takes it down.
+  - **Putting in:**
+    - `ship` opens the panel, and the day stops while it is open.
+    - More carrots than he holds go in not at all.
+    - Ten go in and leave `held` at once. Money does not go in.
+    - Cancel closes the lid.
+  - **Paid at dawn:**
+    - With "a name at market", the bin will pay ten carrots at the price
+      plus the quarter.
+    - A `ResultScreen` built on that morning names the total.
+    - `begin_day` lands exactly that and empties the bin.
+  - **A lost night** takes a quarter of the wood and none of the bin, and
+    the morning pays for all eight carrots. By night the bin offers nothing.
+  - **Saves:**
+    - What waits in the bin saves and loads.
+    - The v8 golden gets the bin on its empty site.
+    - A v8 farm with a tree on the site keeps the tree and has no bin.
+- **Older tests:**
+  - 0156's: the sites are clear of anything but what they were kept for.
+  - 0179's: the v7 and v8 goldens now read at today's version.
+- `_case_0189_bin` (input_v1):
+  - SPACE at the bin opens the panel with a stack's `all` lit.
+  - ENTER puts that stack in, and a click puts the carrots in.
+  - ESC closes the lid.
+- `art_showcase`: `ship` has its target and is a one-tick verb, like trade.
+- `headless_check` asks for one shot per scenario: 71 now (`shipping_bin`).
+
+Looked at (`python tools/shot.py 0189 shipping_bin --fhd`, 1920x1080):
+- **`shipping_bin`**, noon on Spring 3: the bin between the porch and the
+  stall, the farmer on the site's other cell facing it, highlighted.
+  - In the first take he stood below it, and his body hid it.
+- **`shipping_bin_panel`**, with 10 carrots and 20 wood in:
+  - the panel reads "SHIPPING BIN" and "in the bin: $70 tomorrow";
+  - the rows of the stall, with wood's `all` lit in the brighter ring.
+- **`shipping_bin_morning`:**
+  - "NIGHT 3 SURVIVED", the pay, then "the shipping bin pays $70": 10
+    carrots at $3 and 20 wood at $2;
+  - GET UP still inside the frame.
+
+Files: src/core/{shipping (new),state,farm,game_data,interact,phases}.gd,
+src/app/save.gd,
+src/ui/{log_panel,names,placeholder_art,player_art,player_work,result_screen,sfx,shop_panel}.gd,
+src/tools/{art_showcase,headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/goldens/run-v9{,-older,-newer}.sav,
+tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A033-shipping-bin.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0189-shipping-bin.md,
+implementation/shots/0189/, docs/devlog/{index,index.pt_BR}.md

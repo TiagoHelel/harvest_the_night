@@ -76,9 +76,11 @@ func after_tick(state: Dictionary) -> void:
 		# fishing/shop requests do not manufacture a presentation cue.
 		if _verb == &"trade" and StringName(state["open_panel"]) != &"shop":
 			return
+		if _verb == &"ship" and not Shipping.is_open(state):
+			return
 		if _verb == &"reel" and not (state["fishing"] as Dictionary).is_empty():
 			return
-		contact(_verb, _facing, _verb == &"reel" or _verb == &"trade")
+		contact(_verb, _facing, _verb in [&"reel", &"trade", &"ship"])
 	elif _station >= 0 and not Player.is_busy(state):
 		var delivered := int((state["produced"] as Dictionary).get(_station, {}).get("at", -1))
 		if delivered > _produced_at:

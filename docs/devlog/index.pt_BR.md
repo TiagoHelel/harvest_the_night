@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-177 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+178 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -220,10 +220,11 @@ voz alta.
 | 0186 | Barns at night | 2026-10-10 |
 | 0187 | Days in a barrel: the keg and the preserves jar | 2026-10-10 |
 | 0188 | The dairy, the loom and the mill | 2026-10-10 |
+| 0189 | The shipping bin | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 70 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 72 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -295,6 +296,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Days in a barrel: the keg and the preserves jar** (0187) - `data` 4133877013 -> 178413484
 - **The dairy, the loom and the mill** (0188) - `sim` 788609249 -> 729970321
 - **The dairy, the loom and the mill** (0188) - `data` 178413484 -> 2949384217
+- **The shipping bin** (0189) - `sim` 729970321 -> 3194686093
+- **The shipping bin** (0189) - `data` 2949384217 -> 1204968759
 
 ## O que deu errado
 

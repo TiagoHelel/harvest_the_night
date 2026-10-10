@@ -106,6 +106,7 @@ BLD_PRESERVES_JAR,0,preserves jar,pote de conserva
 BLD_DAIRY,0,dairy,laticínios
 BLD_LOOM,0,loom,tear
 BLD_MILL,0,mill,moinho
+FIX_SHIPPING_BIN,0,shipping bin,caixa de envio
 BLD_KITCHEN,0,kitchen,cozinha
 BLD_PRESS,0,press,prensa
 BLD_WORKSHOP,0,workshop,oficina
@@ -280,6 +281,7 @@ LOG_BOSS,0,the giant is coming,o gigante está vindo
 LOG_CRAFT_DONE,0,%s finished,%s ficou pronto
 LOG_CROP_READY,0,%s is ready,%s está pronto
 LOG_DAWN,0,dawn - %d walked off,amanheceu - %d foram embora
+LOG_SHIPPED,0,the shipping bin paid $%d,a caixa de envio pagou $%d
 LOG_HOUSE_HIT,0,the house is hit - %d left,a casa foi atingida - %d de vida
 LOG_NIGHT_BEGAN,0,night %d begins,a noite %d começa
 LOG_NIGHT_LOST,0,night %d lost,noite %d perdida
@@ -392,6 +394,7 @@ RES_PAID,0,PAID,PAGO
 RES_PASSED_OUT,200,you passed out at %02d:%02d,você desmaiou às %02d:%02d
 RES_PLAY_ON,0,CARRY ON INTO YEAR %d,SEGUIR PARA O ANO %d
 RES_PLUS,0,+%d,+%d
+RES_BIN,0,the shipping bin pays $%d,a caixa de envio paga $%d
 RES_RUN_LINE,0,"%d days lived, %d nights won","%d dias vividos, %d noites vencidas"
 RES_STRUCTURES_LOST,0,structures lost,estruturas perdidas
 RES_SURVIVED,0,SURVIVED,VENCIDA
@@ -430,6 +433,10 @@ SHOP_SELL,0,SELL,VENDER
 SHOP_SELL_ROW,0,%s  x%d  @ $%d,%s  x%d  @ $%d
 SHOP_SOW,0,sow,plantar
 SHOP_TITLE,0,MARKET,MERCADO
+SHIP_TITLE,0,SHIPPING BIN,CAIXA DE ENVIO
+SHIP_HEADING,0,PUT IN - PAID AT DAWN,COLOCAR - PAGO DE MANHÃ
+SHIP_DUE,0,in the bin: $%d tomorrow,na caixa: $%d amanhã
+SHIP_HINT,0,esc to close the lid,esc para fechar a tampa
 SIDE_EAST,0,EAST,LESTE
 SIDE_NORTH,0,NORTH,NORTE
 SIDE_SOUTH,0,SOUTH,SUL

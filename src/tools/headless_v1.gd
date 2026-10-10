@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 58
+const GROUPS := 59
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -127,6 +127,7 @@ func _run() -> void:
 	_task_0186_barns_night()
 	_task_0187_keg()
 	_task_0188_mills()
+	_task_0189_bin()
 
 
 func _finish() -> void:
@@ -2738,15 +2739,17 @@ func _task_0156_map_v1() -> void:
 		"Farm.pond_of names three ponds from any of their water, and nothing on land",
 		str(named))
 
-	# **The sites are clear.**
+	# **The sites are clear** - but for what one was kept for: since task
+	# 0189 the shipping bin stands on its own.
 	var taken: Array = []
 	for id in GameData.sorted_names(GameData.MAP_SITES.keys()):
 		var box: Array = GameData.MAP_SITES[id]
 		for y in range(int(box[1]), int(box[1]) + int(box[3])):
 			for x in range(int(box[0]), int(box[0]) + int(box[2])):
-				if not Farm.is_empty(farm, Vector2i(x, y)):
+				var on := Farm.occupant(farm, Vector2i(x, y))
+				if not on.is_empty() and StringName(on["id"]) != id:
 					taken.append([id, Vector2i(x, y)])
-	expect(taken.is_empty(), "the coop's, the barn's and the bin's room is clear", str(taken))
+	expect(taken.is_empty(), "the coop's, the barn's and the bin's room is clear of anything else", str(taken))
 
 	# **The v5 golden comes up to v6 without moving anything on it.**
 	var raw: Dictionary = Save._read("res://tools/goldens/run-v5.sav")
@@ -4495,7 +4498,7 @@ func _task_0179_species() -> void:
 	var path := "user://task0179-legacy.sav"
 	expect(Save.write_run_at(path, legacy), "a version 7 golden with fish in it writes")
 	var loaded := Save.read_run_at(path)
-	expect(heaviest == GameData.CARP and int(loaded["version"]) == 8
+	expect(heaviest == GameData.CARP and int(loaded["version"]) == State.VERSION
 		and Resources.amount(loaded, GameData.CARP) == 7 and int(loaded["gained"][GameData.CARP]) == 9
 		and not (loaded["held"] as Dictionary).has(&"fish") and not (loaded["held"] as Dictionary).has("fish"),
 		"its seven fish arrive as seven carp, nine gained, and the plain fish is gone",
@@ -4503,8 +4506,8 @@ func _task_0179_species() -> void:
 	Save._remove(path)
 	Save._remove(path + ".bak")
 	var current := Save.read_run_at("res://tools/goldens/run-v8.sav")
-	expect(not current.is_empty() and int(current["version"]) == 8 and State.VERSION == 8,
-		"and the version 8 golden reads back at version 8")
+	expect(not current.is_empty() and int(current["version"]) == State.VERSION and State.VERSION >= 8,
+		"and the version 8 golden reads back at today's version")
 	_completed += 1
 
 
@@ -5638,6 +5641,107 @@ func _task_0188_mills() -> void:
 	expect(not Crafting.is_stalled(state, jar) and Resources.amount(state, GameData.STRAWBERRY) == 0
 		and Resources.amount(state, GameData.SUGAR) == 0,
 		"the sugar arrives and the batch starts, both taken")
+	_completed += 1
+
+
+## Task 0189: the shipping bin by the porch. Ten carrots shipped by day leave
+## `held` at once and are paid the next morning at the sell price with the
+## tech bonus; the morning report's line names the total, and the line and
+## the purse agree. What waits is sold, not stock: a lost night leaves it be.
+## The bin is a fixture on its site, and an older save gets one.
+func _task_0189_bin() -> void:
+	var state := State.create(1890)
+	var room: Array = GameData.MAP_SITES[Shipping.BIN]
+	var bin := Vector2i(int(room[0]), int(room[1]))
+	expect(StringName(Farm.occupant(state, bin).get("id", &"")) == Shipping.BIN
+		and Farm.cells_with(state, Shipping.BIN).size() == 1 and Farm.FIXTURES.has(Shipping.BIN)
+		and not Pathing.is_prey(Shipping.BIN) and GameData.check_sites(GameData.MAP_SITES, GameData.FARM_MAP).is_empty(),
+		"one shipping bin stands on its site by the porch, a fixture nothing hunts")
+	expect(Interact.verb_at(state, bin) == &"ship" and Interact.ONE_SHOT.has(&"ship")
+		and Interact.DAY_ONLY.has(&"ship") and Interact.all_verbs().has(&"ship") and Sfx.VERB_SOUNDS.has(&"ship"),
+		"it offers ship by day, once a press, with a sound")
+	expect(Farm.damage(state, bin, 999) == 0 and not Farm.remove(state, bin)
+		and StringName(Farm.occupant(state, bin).get("id", &"")) == Shipping.BIN,
+		"nothing hurts it and nothing takes it down")
+
+	# **Ten carrots in, out of `held` at once.**
+	Interact.complete(state, bin, &"ship")
+	expect(Shipping.is_open(state), "ship lifts the lid: the bin's panel is open")
+	var clock := int(state["day_tick"])
+	Sim.advance(state, 30)
+	expect(int(state["day_tick"]) == clock, "and the day stops while it is open, as at the stall")
+	Resources.add(state, GameData.CARROT, 10)
+	var carrots := Resources.amount(state, GameData.CARROT)
+	expect(not Shipping.put(state, GameData.CARROT, carrots + 1) and Resources.amount(state, GameData.CARROT) == carrots,
+		"more than he has goes in not at all")
+	expect(Shipping.put(state, GameData.CARROT, 10) and Resources.amount(state, GameData.CARROT) == carrots - 10
+		and Shipping.count(state, GameData.CARROT) == 10,
+		"ten carrots go in and leave held at once")
+	expect(not Shipping.takes(GameData.MONEY) and not Shipping.put(state, GameData.MONEY, 1),
+		"money does not go in a shipping bin")
+	state["intent"]["cancel"] = true
+	Sim.advance(state, 1)
+	expect(not Shipping.is_open(state), "cancel closes the lid")
+
+	# **Paid at dawn with the tech bonus**, and the report says so first.
+	(state["tech_owned"] as Array).append(&"a name at market")
+	var paid := Shop.paid_for(state, GameData.CARROT, 10)
+	expect(paid == int(GameData.SELL_PRICE[GameData.CARROT]) * 10 * Tech.bonus(state, "sell_percent", 100) / 100
+		and paid > int(GameData.SELL_PRICE[GameData.CARROT]) * 10 and Shipping.due(state) == paid,
+		"the bin will pay $%d: the sell price and the tech's quarter on top" % paid)
+	Phases.go_to_bed(state)
+	Phases.start_waves(state)
+	Rewards.settle(state, true)
+	Phases.enter_result(state, true)
+	var screen := ResultScreen.new()
+	screen._ready()
+	screen.show_state(state)
+	screen._build(Rewards.last(state))
+	var said := ""
+	for label in screen.find_children("*", "Label", true, false):
+		if (label as Label).text == I18n.f(&"RES_BIN", [paid]):
+			said = (label as Label).text
+	screen.free()
+	expect(said.contains("$%d" % paid), "the morning report names the total", said)
+	var money := Resources.amount(state, GameData.MONEY)
+	expect(Phases.begin_day(state) and Resources.amount(state, GameData.MONEY) == money + paid
+		and Shipping.waiting(state).is_empty(),
+		"and the money lands as the day begins: the line and the purse agree, and the bin is empty")
+
+	# **What waits is sold, not stock.**
+	Resources.gain(state, {GameData.CARROT: 8, GameData.WOOD: 40})
+	expect(Shipping.put(state, GameData.CARROT, 8), "eight more carrots go in")
+	var waiting := Shipping.due(state)
+	Phases.go_to_bed(state)
+	Phases.start_waves(state)
+	expect(Interact.verb_at(state, bin) == &"", "by night the bin offers nothing")
+	var wood := Resources.amount(state, GameData.WOOD)
+	Rewards.settle(state, false)
+	Phases.enter_result(state, false)
+	expect(Resources.amount(state, GameData.WOOD) < wood and Shipping.count(state, GameData.CARROT) == 8
+		and Shipping.due(state) == waiting,
+		"a lost night takes a quarter of the stock and none of the bin")
+	money = Resources.amount(state, GameData.MONEY)
+	Phases.begin_day(state)
+	expect(Resources.amount(state, GameData.MONEY) == money + waiting, "and the morning pays for every carrot in it")
+
+	# **It round-trips, and an older save gets a bin.**
+	Shipping.put(state, GameData.WOOD, 5)
+	var path := "user://task0189-bin.sav"
+	expect(Save.write_run_at(path, state) and Save.read_run_at(path)["shipping"] == state["shipping"],
+		"what waits in the bin saves and loads")
+	Save._remove(path)
+	Save._remove(path + ".bak")
+	var old := Save.read_run_at("res://tools/goldens/run-v8.sav")
+	expect(not old.is_empty() and int(old["version"]) == State.VERSION
+		and StringName(Farm.occupant(old, bin).get("id", &"")) == Shipping.BIN and (old["shipping"] as Dictionary).is_empty(),
+		"a version 8 farm gets the bin on its empty site, and an empty bin")
+	var raw: Dictionary = Save._read("res://tools/goldens/run-v8.sav")["state"]
+	(raw["occupants"] as Dictionary)[Grid.index(bin)] = {"id": &"tree"}
+	var stepped := Save.step_up(raw, 8, State.VERSION, Save.migrations())
+	expect(StringName(Farm.occupant(stepped, bin).get("id", &"")) == &"tree"
+		and Farm.cells_with(stepped, Shipping.BIN).is_empty(),
+		"one that put something on the site keeps it, and has no bin")
 	_completed += 1
 
 

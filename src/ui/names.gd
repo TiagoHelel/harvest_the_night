@@ -152,6 +152,9 @@ const KEYS: Dictionary = {
 	&"loom": &"BLD_LOOM",
 	&"mill": &"BLD_MILL",
 
+	# ---- what the farm comes with (task 0189)
+	&"shipping_bin": &"FIX_SHIPPING_BIN",
+
 	# ---- what those make
 	&"barricade_kit": &"REC_BARRICADE_KIT",
 	&"fence_kit": &"REC_FENCE_KIT",

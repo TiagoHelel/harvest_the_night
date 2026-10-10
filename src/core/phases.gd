@@ -281,6 +281,9 @@ static func begin_day(state: Dictionary) -> bool:
 	# A new day, a new stall. It refuses if it has already been out today, so
 	# calling it here and on the first tick costs nothing.
 	Shop.restock(state)
+	# **The shipping bin pays at dawn** (task 0189): what went in yesterday,
+	# at the stall's price and this morning's tech, and it empties.
+	Shipping.pay(state)
 	_enter(state, DAY)
 	Farming.morning(state)
 	# **The sprinklers after the growth credit** (task 0178), so their

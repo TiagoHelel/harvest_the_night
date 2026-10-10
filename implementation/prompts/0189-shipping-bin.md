@@ -1,7 +1,7 @@
 # 0189 - The shipping bin
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0148, 0138, 0156
 - **Likely files:** src/core/shipping.gd (new), src/core/interact.gd, src/core/phases.gd, src/core/state.gd, src/core/farm.gd, src/core/game_data.gd, src/app/save.gd, src/ui/shop_panel.gd, src/ui/result_screen.gd, src/ui/sfx.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

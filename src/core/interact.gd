@@ -24,6 +24,8 @@ const OCCUPANT_VERBS: Dictionary = {
 	&"gold_ore": &"mine",
 	&"hardwood_stump": &"chop",
 	&"shop": &"trade",
+	# The shipping bin by the porch (task 0189): drop things in, paid at dawn.
+	&"shipping_bin": &"ship",
 }
 
 ## When nothing is standing there, the ground decides.
@@ -56,6 +58,7 @@ const DEFAULT_TICKS: Dictionary = {
 	# Turning a pig's truffle out of the grass (task 0185) is a little.
 	&"dig": GameData.SECONDS / 2,           # LEVER: ticks, 5-30
 	&"trade": 1,                    # opening a panel is not work
+	&"ship": 1,                     # nor is lifting a lid
 	# Starting a job is a moment. The job itself takes as long as the recipe
 	# says, and the player is free to walk away while it runs.
 	&"craft": GameData.SECONDS / 3,         # LEVER: ticks, 5-30
@@ -80,7 +83,7 @@ const DEFAULT_TICKS: Dictionary = {
 ## before either existed.
 const DAY_ONLY: Array = [
 	&"chop", &"mine", &"till", &"plant", &"harvest", &"fish", &"trade", &"craft",
-	&"water", &"reel", &"collect", &"dig",
+	&"water", &"reel", &"collect", &"dig", &"ship",
 ]
 
 
@@ -209,7 +212,7 @@ static func repeats(verb: StringName) -> bool:
 ## held key does a row. A held key that reeled would land every fish without
 ## the player ever reacting to one, and reacting is the mechanic - so reeling
 ## takes the press, once, and the cast it belongs to is gone afterwards anyway.
-const ONE_SHOT: Array = [&"trade", &"craft", &"reel"]
+const ONE_SHOT: Array = [&"trade", &"craft", &"reel", &"ship"]
 
 
 ## The work is finished. Do whatever the verb means.
@@ -241,6 +244,8 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 			Crafting.start_at(state, cell)
 		&"trade":
 			Shop.open(state)
+		&"ship":
+			Shipping.open(state)
 		&"repair":
 			# One hit point per cycle. The loop that repeats a verb is what
 			# turns a held key into a mended wall, and letting go is what

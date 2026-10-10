@@ -318,7 +318,7 @@ static func _migrate(payload: Dictionary, from_version: int) -> Dictionary:
 static func migrations() -> Dictionary:
 	return {1: _expand_farm_v1, 2: _expand_farm_v2, 3: _expand_farm_v3,
 		4: _night_is_the_date_v4, 5: _farm_v1_0_from_v5, 6: _crops_by_days_v6,
-		7: _fish_by_species_v7}
+		7: _fish_by_species_v7, 8: _shipping_bin_v8}
 
 
 ## The farm each version was written with.
@@ -604,6 +604,37 @@ static func _room_to_expand(state: Dictionary, origin: Vector2i, size: Vector2i,
 				return false
 	var front := origin + Vector2i(size.x / 2, size.y)
 	return Grid.in_bounds(front) and (Farm.walkable(state, front) or old_parts.has(front))
+
+
+## **Version 9 (task 0189) puts the shipping bin by the porch**, where the
+## save's cell is the empty map ground a new farm has there: no occupant, no
+## plot, the same terrain. 0156 kept the site clear, so only something the
+## player put there fills it - and then the farm keeps what it built and has
+## no bin. Path caches reset and `grid_version` bumped, as the farm steps do.
+static func _shipping_bin_v8(previous: Dictionary) -> Dictionary:
+	var state := previous.duplicate(true)
+	var occupants: Dictionary = state.get("occupants", {})
+	var plots: Dictionary = state.get("plots", {})
+	var terrain: PackedByteArray = state.get("terrain", PackedByteArray())
+	if terrain.size() != Grid.CELLS:
+		return {}
+	var fresh := Farm.initial()
+	var fresh_occupants: Dictionary = fresh["occupants"]
+	var fresh_terrain: PackedByteArray = fresh["terrain"]
+	var keys: Array = fresh_occupants.keys()
+	keys.sort()
+	for idx in keys:
+		if StringName((fresh_occupants[idx] as Dictionary)["id"]) != Shipping.BIN:
+			continue
+		if occupants.has(idx) or plots.has(idx) or terrain[int(idx)] != fresh_terrain[int(idx)]:
+			continue
+		occupants[idx] = (fresh_occupants[idx] as Dictionary).duplicate(true)
+	state["occupants"] = occupants
+	for key in Pathing.initial():
+		state[key] = Pathing.initial()[key]
+	state["grid_version"] = int(state.get("grid_version", 0)) + 1
+	state["version"] = 9
+	return state
 
 
 ## And the same for the file format.

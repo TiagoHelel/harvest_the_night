@@ -21,7 +21,7 @@ of goods.
 
 ## Deliverables
 
-The table is provisional: game task 0189 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0189. The rows stand as written: the bin is **one cell**, a fixture the farm has from the first morning at (43,26), on the 2x1 site 0156 kept by the porch between the house's corner and the stall, with the site's other cell left clear to stand on; the farmer faces it from beside or below it. Its canvas and pivot are 24x24 at (12,22) for the closed bin and all three lid frames. The panel it opens is the stall's, so the lid lifts while that panel is up; game task 0215 plays the strip. Until then the game draws the bin through 0120's road (a stand-in). Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

@@ -32,7 +32,9 @@ extends RefCounted
 ## **7 since task 0165**: plot growth counts watered mornings rather than ticks.
 ## **8 since task 0179**: the one `fish` became twelve species; a save's fish
 ## arrive as carp, the commonest.
-const VERSION := 8
+## **9 since task 0189**: the shipping bin, a fixture on its site by the porch,
+## laid onto an older farm where the site is still empty.
+const VERSION := 9
 
 ## The nested dictionaries whose keys come from the code.
 ##
@@ -57,7 +59,7 @@ const TABLES: Array = [
 const RUN_DATA: Array = [
 	"burning", "crafting", "dig_spots", "entities", "fish_book", "fishing", "housed", "killed_by_kind",
 	"killed_by_kind_all_run", "kits", "last_catch", "last_result", "livestock",
-	"occupants", "payout", "plots", "produced", "repair_debt", "rubble",
+	"occupants", "payout", "plots", "produced", "repair_debt", "rubble", "shipping",
 ]
 
 const _FNV_OFFSET := 2166136261
@@ -95,6 +97,7 @@ static func create(seed_value: int) -> Dictionary:
 	_adopt(state, Traps.initial(), "Traps")
 	_adopt(state, Tutorial.initial(), "Tutorial")
 	_adopt(state, Shop.initial(), "Shop")
+	_adopt(state, Shipping.initial(), "Shipping")
 	_adopt(state, Livestock.initial(), "Livestock")
 	_adopt(state, Power.initial(), "Power")
 	_adopt(state, Fishing.initial(), "Fishing")

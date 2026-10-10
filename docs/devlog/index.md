@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-177 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
+178 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -221,10 +221,11 @@ is the sort of thing this list exists to say out loud.
 | 0186 | Barns at night | 2026-10-10 |
 | 0187 | Days in a barrel: the keg and the preserves jar | 2026-10-10 |
 | 0188 | The dairy, the loom and the mill | 2026-10-10 |
+| 0189 | The shipping bin | 2026-10-10 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 70 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 72 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -296,6 +297,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Days in a barrel: the keg and the preserves jar** (0187) - `data` 4133877013 -> 178413484
 - **The dairy, the loom and the mill** (0188) - `sim` 788609249 -> 729970321
 - **The dairy, the loom and the mill** (0188) - `data` 178413484 -> 2949384217
+- **The shipping bin** (0189) - `sim` 729970321 -> 3194686093
+- **The shipping bin** (0189) - `data` 2949384217 -> 1204968759
 
 ## What went wrong
 

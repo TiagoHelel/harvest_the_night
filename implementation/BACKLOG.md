@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##############..........`  **175 / 296 done**
+`##############..........`  **176 / 296 done**
 
-0 doing / 121 todo / 0 blocked across 18 phases.
+0 doing / 120 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-121 task(s) left, the ready ones first, then what they
+120 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -241,26 +241,6 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0189 - The shipping bin
-
-Ready to pick up.  Likely files: `src/core/shipping.gd (new), src/core/interact.gd, src/core/phases.gd, src/core/state.gd, src/core/farm.gd, src/core/game_data.gd, src/app/save.gd, src/ui/shop_panel.gd, src/ui/result_screen.gd, src/ui/sfx.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-A shipping bin like Stardew's: drop things in at any hour of the day and be paid the next morning, so selling no longer waits on the stall's hours (plan section 3.6).
-
-- The bin is an occupant with a `ship` verb in `Interact.OCCUPANT_VERBS` (and `DAY_ONLY`, `all_verbs`, and an `Sfx.VERB_SOUNDS` entry - borrow `sfx/sell` until 0281 - or `_task_0084_day_sounds` fails), on the bin site 0156 kept clear by the porch (`MAP_SITES`)
-- Fixture or building - decide and say why. A fixture (`Farm.FIXTURES`, never sold or wrecked) laid by `FARM_MAP` reaches new farms only: old saves need a `State.VERSION` bump with a step that places it on the site when that cell is empty, in the style of 0156's, and a golden at the new version. A cheap day building needs no bump
-- What waits is a `shipping` dictionary in the state (resource -> count; keys come from play: `State.RUN_DATA`); putting a stack in takes it out of `held` at once
-- The morning report (0138's, shown in RESULT before `begin_day`) prints what the bin will pay, worked out with `Shop.paid_for` (the sell price and the `sell_percent` bonus) from what waits; the money lands at `Phases.begin_day` and the bin empties. The line and the ledger agree, asserted
-- A panel to choose what goes in, reusing the stall's sell rows (`shop_panel.gd`); decide whether it stops the clock like the stall (`open_panel`) and say why; keyboard, mouse and pad. `ship` opens a panel, so it joins `Interact.ONE_SHOT` beside `trade` - a repeating verb reopens its panel on the tick after it closes
-- Decide what a lost night does to the bin (the horde takes 25% of the stock): what is in the bin is sold, not stock, or it is taken - write it down and assert it
-- Names and strings in both languages; the bin draws through the placeholder road until A033 is integrated by 0215
-- DATA moves; SIM moves on purpose (the `shipping` key, and the bin if it is on the map) - record both
-
-  - done when: `_task_0189_bin` in `src/tools/headless_v1.gd`: ten carrots shipped by day leave `held` at once and are paid the next morning at the sell price with the tech bonus; the report line names the total
-  - done when: `_case_0189_bin` in `src/tools/input_v1.gd`: open the bin, put one stack in with the keyboard and one with the mouse, close it
-  - done when: A new `shipping_bin` scenario: `python tools/shot.py 0189 shipping_bin --fhd` shows the bin and the morning line; opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A033-shipping-bin.md` states the final geometry this task settled
 
 ### 0190 - The peddler and his hours
 
@@ -601,6 +581,24 @@ The keg, the preserves jar, the dairy, the loom and the mill get their approved 
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0213/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
+### 0215 - Art: the shipping bin
+
+Waits for Codex art A033.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py`.
+
+The shipping bin of 0189 gets its approved art, lid and all.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A033` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A033-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`).
+- Runtime names: the closed bin and its lid-opening strip (2-3 frames, one-shot) at the canvas and pivot 0189 settled; the view plays the lid when the bin's panel opens (view only)
+- Replace 0189's stand-in and flip A033's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A033 integrated`.
+
+  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --props --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0215/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
 ### 0289 - Art: the morning report
 
 Waits for Codex art A057.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
@@ -692,24 +690,6 @@ Wine, juice, jelly, pickles, cheese, butter, cloth, sandbags, flour, bread and s
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0214/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0215 - Art: the shipping bin
-
-Waits on 0189.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py`.
-
-The shipping bin of 0189 gets its approved art, lid and all.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A033` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A033-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`).
-- Runtime names: the closed bin and its lid-opening strip (2-3 frames, one-shot) at the canvas and pivot 0189 settled; the view plays the lid when the bin's panel opens (view only)
-- Replace 0189's stand-in and flip A033's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A033 integrated`.
-
-  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --props --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0215/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
 ### 0216 - Art: the peddler
 
 Waits on 0190.  Likely files: `assets/art_source/npc/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_station_art.py, tools/check_npc_art.py (new), tools/verify.py`.
@@ -748,7 +728,7 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
 
 ### 0194 - The day's economy
 
-Waits on 0193, 0189, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
+Waits on 0193, 0191.  Likely files: `src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd`.
 
 The day's money is tuned on purpose: a price for every item, and targets per season so that a good day buys about one new defence (plan section 5's rule of thumb).
 
@@ -2450,7 +2430,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (24/53)
+## 12 - The day that pays  (25/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2476,12 +2456,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0186** [Barns at night](prompts/0186-barns-at-night.md)
 - [x] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md)
 - [x] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md)
-- [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md)
+- [x] **0189** [The shipping bin](prompts/0189-shipping-bin.md)
 - [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md)
 - [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md)
 - [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0190, 0192
-- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0191
+- [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0191
 - [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md) - needs 0194
 - [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0194, 0195
 - [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - waits for art A014
@@ -2502,7 +2482,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0212** [Art: the coop and the barn](prompts/0212-art-coop-barn.md) - waits for art A030
 - [ ] **0213** [Art: the artisan machines](prompts/0213-art-machines.md) - waits for art A031
 - [ ] **0214** [Art: artisan goods](prompts/0214-art-artisan-goods.md) - needs 0192 - waits for art A032
-- [ ] **0215** [Art: the shipping bin](prompts/0215-art-shipping-bin.md) - needs 0189 - waits for art A033
+- [ ] **0215** [Art: the shipping bin](prompts/0215-art-shipping-bin.md) - waits for art A033
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - needs 0190 - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - needs 0191 - waits for art A035
 

@@ -10,6 +10,13 @@ extends Control
 ##
 ## Task 0081 gives it the game's theme and task 0040 gives it tabs, stock and a
 ## daily limit. What it has to be today is honest and usable.
+##
+## **And the shipping bin's** (task 0189): the same panel opens when the bin's
+## lid does, with the stall's sell rows putting stacks in the bin instead of
+## selling them, the morning's total where the money was, and no tabs. The
+## keyboard and the pad have a way in here that the stall does not: it opens
+## with a row's `all` lit, the arrows and the d-pad walk the rows, and SPACE,
+## ENTER or A puts the stack in.
 
 ## Emitted when the player closes it, so the screen can put the keys back.
 signal closed
@@ -28,6 +35,10 @@ var _state: Dictionary = {}
 var _rows: VBoxContainer
 var _tabs: HBoxContainer
 var _money: Label
+var _title: Label
+var _hint: Label
+## Whether it is the bin's panel rather than the stall's (task 0189).
+var _bin := false
 var _seed_page := 0
 var _last_seed := &""
 var _built_for := -1        # the money total the rows were last drawn against
@@ -48,10 +59,10 @@ func _ready() -> void:
 	column.name = "Column"
 	frame.add_child(column)
 
-	var title := Label.new()
-	title.name = "Title"
-	title.text = I18n.t(&"SHOP_TITLE")
-	column.add_child(title)
+	_title = Label.new()
+	_title.name = "Title"
+	_title.text = I18n.t(&"SHOP_TITLE")
+	column.add_child(_title)
 
 	_money = Label.new()
 	_money.name = "Money"
@@ -77,17 +88,19 @@ func _ready() -> void:
 	var scroll := ScrollContainer.new()
 	scroll.name = "Scroll"
 	scroll.custom_minimum_size = Vector2(276, 174)
+	# The row the keyboard is on stays in view (task 0189).
+	scroll.follow_focus = true
 	column.add_child(scroll)
 
 	_rows = VBoxContainer.new()
 	_rows.name = "Rows"
 	scroll.add_child(_rows)
 
-	var hint := Label.new()
-	hint.name = "Hint"
-	hint.text = I18n.t(&"SHOP_HINT")
-	hint.theme_type_variation = UiKit.DIM
-	column.add_child(hint)
+	_hint = Label.new()
+	_hint.name = "Hint"
+	_hint.text = I18n.t(&"SHOP_HINT")
+	_hint.theme_type_variation = UiKit.DIM
+	column.add_child(_hint)
 
 
 func show_state(state: Dictionary) -> void:
@@ -97,9 +110,11 @@ func show_state(state: Dictionary) -> void:
 func _process(_delta: float) -> void:
 	if _state.is_empty():
 		return
-	var should_be_open := Shop.is_open(_state)
-	if should_be_open != visible:
+	var should_be_open := Shop.is_open(_state) or Shipping.is_open(_state)
+	var bin := Shipping.is_open(_state)
+	if should_be_open != visible or (should_be_open and bin != _bin):
 		visible = should_be_open
+		_bin = bin
 		if visible:
 			_build()
 		else:
@@ -109,10 +124,7 @@ func _process(_delta: float) -> void:
 
 	# Prices never change, but what the player holds does - and a row that said
 	# "sell 12 wood" after you had sold it would be a lie the panel told.
-	var signature := Resources.amount(_state, GameData.MONEY) \
-		+ Shop.value_of_stock(_state) * 1000 \
-		+ _shelf_signature() * 100000
-	if signature != _built_for:
+	if _signature() != _built_for:
 		_build()
 
 	# Lit from the state rather than from the click, so the autoplayer
@@ -121,6 +133,17 @@ func _process(_delta: float) -> void:
 		var tab := child as Button
 		if tab != null:
 			tab.button_pressed = str(tab.name) == "tab_%s" % Shop.tab(_state)
+
+
+## Everything the rows are drawn against: the money and the bag, the
+## shelves, and for the bin what it holds.
+func _signature() -> int:
+	var n := Resources.amount(_state, GameData.MONEY) \
+		+ Shop.value_of_stock(_state) * 1000 \
+		+ _shelf_signature() * 100000
+	if _bin:
+		n = n * 31 + Shipping.due(_state) * 7 + 1
+	return n
 
 
 ## What else the rows depend on, folded into one number: which tab is
@@ -141,15 +164,27 @@ func _build() -> void:
 	if chosen != _last_seed:
 		_seed_page = maxi(Farming.in_season(_state).find(chosen), 0) / DayHud.SEED_ACTIONS.size()
 		_last_seed = chosen
-	_built_for = Resources.amount(_state, GameData.MONEY) \
-		+ Shop.value_of_stock(_state) * 1000 \
-		+ _shelf_signature() * 100000
-	_money.text = I18n.f(&"SHOP_MONEY",
-		[Resources.amount(_state, GameData.MONEY)])
+	_built_for = _signature()
+	_title.text = I18n.t(&"SHIP_TITLE" if _bin else &"SHOP_TITLE")
+	_hint.text = I18n.t(&"SHIP_HINT" if _bin else &"SHOP_HINT")
+	_tabs.visible = not _bin
+	_money.text = I18n.f(&"SHIP_DUE", [Shipping.due(_state)]) if _bin \
+		else I18n.f(&"SHOP_MONEY", [Resources.amount(_state, GameData.MONEY)])
 
+	# The button the keyboard was on, to light again once its row is redrawn.
+	var lit := get_viewport().gui_get_focus_owner() if is_inside_tree() else null
+	var was := str(lit.name) if lit != null and _rows.is_ancestor_of(lit) else ""
 	for child in _rows.get_children():
 		_rows.remove_child(child)
 		child.queue_free()
+
+	# **The bin's rows** (task 0189): the stall's sell rows, putting in.
+	if _bin:
+		_heading(&"SHIP_HEADING")
+		for id in Shop.sellable():
+			_sell_row(id, true)
+		_focus(was)
+		return
 
 	if Shop.tab(_state) == Shop.SELL:
 		_heading(&"SHOP_SELL")
@@ -217,10 +252,12 @@ func _seed_row(id: StringName) -> void:
 		func() -> void: Farming.select_seed(_state, id)))
 
 
-func _sell_row(id: StringName) -> void:
+## One thing the stall will buy - or, for the bin (task 0189), put in it:
+## the same name, count and price, and `ship_` buttons.
+func _sell_row(id: StringName, ship := false) -> void:
 	var held := Resources.amount(_state, id)
 	var row := HBoxContainer.new()
-	row.name = "sell_%s" % id
+	row.name = ("ship_%s" if ship else "sell_%s") % id
 	Tooltip.describes(row, StringName("resource:%s" % id))
 	row.custom_minimum_size = Vector2(0, ROW_HEIGHT)
 	_rows.add_child(row)
@@ -236,6 +273,12 @@ func _sell_row(id: StringName) -> void:
 	label.theme_type_variation = &"" if held > 0 else UiKit.FAINT
 	row.add_child(label)
 
+	if ship:
+		row.add_child(_button("ship_one_%s" % id, I18n.t(&"SHOP_ONE"), held > 0,
+			func() -> void: Shipping.put(_state, id, 1)))
+		row.add_child(_button("ship_all_%s" % id, I18n.t(&"SHOP_ALL"), held > 0,
+			func() -> void: Shipping.put_all(_state, id)))
+		return
 	row.add_child(_button("sell_one_%s" % id, I18n.t(&"SHOP_ONE"), held > 0,
 		func() -> void: Shop.sell(_state, id, 1)))
 	row.add_child(_button("sell_all_%s" % id, I18n.t(&"SHOP_ALL"), held > 0,
@@ -272,6 +315,22 @@ func _buy_row(id: StringName) -> void:
 		func() -> void: Shop.buy(_state, id, 5)))
 
 
+## **The keyboard's and the pad's way into the bin** (task 0189): light the
+## button that was lit before the rows were redrawn, or - when it has gone
+## grey, or nothing was - the first stack that can go in.
+func _focus(was: String) -> void:
+	var button: Button = _rows.find_child(was, true, false) as Button if was != "" else null
+	if button == null or button.disabled:
+		button = null
+		for id in Shop.sellable():
+			var each := _rows.find_child("ship_all_%s" % id, true, false) as Button
+			if each != null and not each.disabled:
+				button = each
+				break
+	if button != null and button.is_inside_tree():
+		button.grab_focus()
+
+
 ## A button that is greyed rather than missing when it cannot be pressed, and
 ## **named**, because `input_check` finds it by name and a button nothing can
 ## find is a button nothing tests.
@@ -279,8 +338,9 @@ func _button(button_name: String, text: String, enabled: bool,
 		action: Callable) -> Button:
 	var button := Button.new()
 	button.name = button_name
-	if button_name.begins_with("sell_one_") or button_name.begins_with("buy_one_"):
-		var id := button_name.trim_prefix("sell_one_").trim_prefix("buy_one_")
+	if button_name.begins_with("sell_one_") or button_name.begins_with("buy_one_") \
+			or button_name.begins_with("ship_one_"):
+		var id := button_name.trim_prefix("sell_one_").trim_prefix("buy_one_").trim_prefix("ship_one_")
 		button.icon = UiKit.icon(StringName(id),true)
 		if id.ends_with("_seed"):
 			button.theme_type_variation = UiKit.SEED_PACKET
