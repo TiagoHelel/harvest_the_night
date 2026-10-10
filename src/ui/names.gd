@@ -128,6 +128,8 @@ const KEYS: Dictionary = {
 	&"copper_sprinkler": &"BLD_COPPER_SPRINKLER",
 	&"iron_sprinkler": &"BLD_IRON_SPRINKLER",
 	&"gold_sprinkler": &"BLD_GOLD_SPRINKLER",
+	&"coop": &"BLD_COOP",
+	&"barn": &"BLD_BARN",
 
 	# ---- what those make
 	&"barricade_kit": &"REC_BARRICADE_KIT",

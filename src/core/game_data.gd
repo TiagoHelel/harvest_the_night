@@ -976,6 +976,25 @@ const BUILDINGS: Dictionary = {
 		"spray": &"square",             # LEVER: cross or square (the 5x5)
 		"spray_reach": 2,               # LEVER: cells out from it, 1-3
 	},
+	# **The coop and the barn** (task 0183; plan section 3.4): the animals'
+	# homes, built by day - on 0156's sites by the workshop, or anywhere
+	# buildable. The first of each takes in the map's loose animals that live
+	# there (`LIVESTOCK` `home`), and `capacity` is how many it holds. The
+	# door is the middle of the front row, where they are collected from.
+	&"coop": {
+		"hp": 60,                       # LEVER: hit points, 40-160
+		"cost": {WOOD: 30, STONE: 10, MONEY: 80},  # LEVER: wood, stone and money
+		"energy_draw": 0,
+		"size": Vector2i(3, 2),         # LEVER: cells, up to the 7x4 site
+		"capacity": 4,                  # LEVER: chickens it holds, 2-8
+	},
+	&"barn": {
+		"hp": 100,                      # LEVER: hit points, 60-200
+		"cost": {WOOD: 60, STONE: 25, MONEY: 200},  # LEVER: wood, stone and money
+		"energy_draw": 0,
+		"size": Vector2i(5, 4),         # LEVER: cells, up to the 7x4 site
+		"capacity": 4,                  # LEVER: animals it holds, 2-8
+	},
 }
 
 ## **How often the hoe turns up a worm** (task 0181): one cell in this many,
@@ -1288,13 +1307,24 @@ const LIVESTOCK: Dictionary = {
 		"produces": {MEAT: 1},
 		"every_ticks": DAY_TICKS / 3,   # LEVER: ticks, three production intervals/day
 		"holds": 2,                     # LEVER: units before it stops, 1-5
+		# **Where it lives and where it comes from** (task 0183): the
+		# `BUILDINGS` home that houses it, and its source - the map, or the
+		# stall (0190).
+		"home": &"barn",
+		"source": &"map",
 	},
 	&"chicken": {
 		"produces": {MEAT: 1},
 		"every_ticks": DAY_TICKS * 5 / 24,  # LEVER: ticks, 4.8 production intervals/day
 		"holds": 1,                     # LEVER: units before it stops, 1-4
+		"home": &"coop",
+		"source": &"map",
 	},
 }
+
+## Where an animal kind comes from (task 0183): standing on `FARM_MAP`, or
+## bought at the stall (0190).
+const LIVESTOCK_SOURCES: Array = [&"map", &"stall"]
 
 ## The plan's inventory categories, including categories filled by later tasks.
 ## Empty categories have no tab. Every shipped resource belongs to one category;
@@ -3439,7 +3469,16 @@ static func check_livestock(animals: Dictionary, rows: Array) -> Array:
 			errors.append("'%s' produces in no time at all" % id)
 		if int(animal["holds"]) <= 0:
 			errors.append("'%s' holds nothing, so it can never be collected" % id)
-		if _cells_of_char(rows, _char_for(id)).is_empty():
+		# **Every kind names its home** (task 0183), a `BUILDINGS` entry
+		# with room in it, and where it comes from. Standing on the map is
+		# no longer every animal's rule: one from the stall (0190) does not.
+		var home := StringName(animal.get("home", &""))
+		if not BUILDINGS.has(home) or int((BUILDINGS[home] as Dictionary).get("capacity", 0)) < 1:
+			errors.append("'%s' lives in '%s', which is no home with room" % [id, home])
+		var source := StringName(animal.get("source", &""))
+		if not LIVESTOCK_SOURCES.has(source):
+			errors.append("'%s' comes from '%s', which is neither the map nor the stall" % [id, source])
+		if source == &"map" and _cells_of_char(rows, _char_for(id)).is_empty():
 			errors.append("there is no '%s' anywhere on the farm" % id)
 
 	# **Meat has to come from somewhere.** It is in the resource table, it has a
@@ -3448,6 +3487,16 @@ static func check_livestock(animals: Dictionary, rows: Array) -> Array:
 	# it.
 	if not makes_meat:
 		errors.append("nothing on the farm produces meat")
+	# And every home houses some kind: a coop nothing lives in is a building
+	# that holds nobody.
+	for building in sorted_names(BUILDINGS.keys()):
+		if int((BUILDINGS[building] as Dictionary).get("capacity", 0)) < 1:
+			continue
+		var housed := false
+		for id in sorted_names(animals.keys()):
+			housed = housed or StringName((animals[id] as Dictionary).get("home", &"")) == building
+		if not housed:
+			errors.append("'%s' has room and no animal lives in it" % building)
 	for id in sorted_names(RECIPES.keys()):
 		var inputs: Dictionary = (RECIPES[id] as Dictionary)["inputs"]
 		if inputs.has(MEAT) and not makes_meat:
@@ -3777,6 +3826,7 @@ static func digest() -> int:
 		"tilled_grass_fades_days": TILLED_GRASS_FADES_DAYS,
 		"power": [BASE_ENERGY, UNPOWERED_PERCENT],
 		"livestock": LIVESTOCK,
+		"livestock_sources": LIVESTOCK_SOURCES,
 		"ammo": [EMPTY_RELOAD_PERCENT, EMPTY_DAMAGE_PERCENT],
 		"groups": RESOURCE_GROUPS,
 		"gathering": GATHERING,

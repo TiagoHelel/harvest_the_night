@@ -11,7 +11,7 @@ extends RefCounted
 ##
 ## The task is explicit about this and it is worth being explicit back:
 ## **passive means there is nothing to manage.** No feeding, no water, no
-## breeding, no happiness, no shelter at night. An animal stands there and
+## breeding, no happiness. An animal stands there and
 ## slowly has something worth taking. That is the whole system, and it is the
 ## whole system on purpose - a farm sim's animal loop is a game in its own
 ## right and this is a tower defence with a farm attached.
@@ -21,6 +21,17 @@ extends RefCounted
 ## somewhere else, and comes to nothing if you never come back. An animal holds
 ## only so much (`holds`), so a cow nobody visits stops producing rather than
 ## banking a fortnight of beef.
+##
+## ## Homes
+##
+## Task 0183 (plan section 3.4) gives them homes: the coop and the barn,
+## `BUILDINGS` entries with a `capacity`. Until one is built the map's cow and
+## chickens stand where `FARM_MAP` put them and work as they always did. The
+## first home built takes the loose animals of its kind in (`move_in`): off
+## the map as occupants, onto the home's list in `housed` with their produce,
+## and collected at its door - the middle of its front row. A home that is
+## lost leaves its animals waiting in `unhoused`, alive, for the next home of
+## their kind: no animal ever dies.
 
 
 static func initial() -> Dictionary:
@@ -40,6 +51,13 @@ static func initial() -> Dictionary:
 		# behaviour: the first call still finds a mismatch and rebuilds.
 		"livestock_version": -1,
 		"livestock_cells": [],
+		# **Who lives where** (task 0183): a home's anchor cell index ->
+		# `{"home": coop or barn, "animals": [{"id", "ready", "left"}]}`. Its
+		# keys come from play (`State.RUN_DATA`).
+		"housed": {},
+		# Animals whose home was lost, `{"id", "ready", "left"}` each, waiting
+		# - producing nothing - for the next home of their kind.
+		"unhoused": [],
 	}
 
 
@@ -49,17 +67,59 @@ static func is_animal(id: StringName) -> bool:
 	return GameData.LIVESTOCK.has(id)
 
 
-## How much is waiting to be collected from the animal on this cell.
+## Whether this is a building animals live in (task 0183): a `BUILDINGS`
+## entry with room - the coop and the barn.
+static func is_home(id: StringName) -> bool:
+	return capacity(id) > 0
+
+
+## How many animals a home holds; 0 for anything else.
+static func capacity(id: StringName) -> int:
+	return int((GameData.BUILDINGS.get(id, {}) as Dictionary).get("capacity", 0))
+
+
+## The home an animal kind lives in (`LIVESTOCK` `home`).
+static func home_of(kind: StringName) -> StringName:
+	return StringName((GameData.LIVESTOCK.get(kind, {}) as Dictionary).get("home", &""))
+
+
+## **A home's door** (task 0183): the middle cell of its front row, where
+## its animals are collected - the cell a farmer standing below it faces.
+static func door_of(state: Dictionary, cell: Vector2i) -> Vector2i:
+	var anchor := Building.anchor_of(state, cell)
+	var size := Building.size_of(StringName(Farm.occupant(state, cell).get("id", &"")))
+	return anchor + Vector2i(size.x / 2, size.y - 1)
+
+
+## Who lives in the home on this cell, in the order they moved in:
+## `{"id", "ready", "left"}` each. Empty for anything that is not one.
+static func residents(state: Dictionary, cell: Vector2i) -> Array:
+	var home: Dictionary = (state["housed"] as Dictionary).get(Grid.index(Building.anchor_of(state, cell)), {})
+	return home.get("animals", [])
+
+
+## How much is waiting to be collected from the animal on this cell - or,
+## at a home, from everyone who lives there.
 static func ready_at(state: Dictionary, cell: Vector2i) -> int:
+	if is_home(StringName(Farm.occupant(state, cell).get("id", &""))):
+		var waiting := 0
+		for animal in residents(state, cell):
+			waiting += int((animal as Dictionary)["ready"])
+		return waiting
 	var pen: Dictionary = state["livestock"]
 	var at: Variant = pen.get(Grid.index(cell), null)
 	return 0 if at == null else int((at as Dictionary)["ready"])
 
 
-## What this cell offers. `Interact` asks here, the way soil asks `Farming`.
+## What this cell offers. `Interact` asks here, the way soil asks `Farming`:
+## a loose animal with something on it, or a home's door with something in.
 static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 	var on := Farm.occupant(state, cell)
-	if on.is_empty() or not is_animal(on["id"]):
+	if on.is_empty():
+		return &""
+	if is_home(on["id"]):
+		return &"collect" if cell == door_of(state, cell) and ready_at(state, cell) > 0 else &""
+	if not is_animal(on["id"]):
 		return &""
 	return &"collect" if ready_at(state, cell) > 0 else &""
 
@@ -73,8 +133,11 @@ static func fullness(state: Dictionary, cell: Vector2i) -> int:
 # -------------------------------------------------------------------- doing
 
 ## Take what is waiting. Returns what came off it, empty when nothing was.
+## At a home's door (task 0183) it is everyone inside, each by its own kind.
 static func collect(state: Dictionary, cell: Vector2i) -> Dictionary:
 	var on := Farm.occupant(state, cell)
+	if not on.is_empty() and is_home(on["id"]):
+		return _collect_home(state, cell)
 	if on.is_empty() or not is_animal(on["id"]):
 		return {}
 	var waiting := ready_at(state, cell)
@@ -91,6 +154,97 @@ static func collect(state: Dictionary, cell: Vector2i) -> Dictionary:
 	return given
 
 
+static func _collect_home(state: Dictionary, cell: Vector2i) -> Dictionary:
+	if cell != door_of(state, cell):
+		return {}
+	var given := {}
+	for animal in residents(state, cell):
+		var one: Dictionary = animal
+		var waiting := int(one["ready"])
+		if waiting <= 0:
+			continue
+		var makes: Dictionary = (GameData.LIVESTOCK[one["id"]] as Dictionary)["produces"]
+		for res in GameData.sorted_names(makes.keys()):
+			given[res] = int(given.get(res, 0)) + int(makes[res]) * waiting
+		one["ready"] = 0
+	Resources.gain(state, given)
+	return given
+
+
+## **Move one in** (task 0183): an animal of `kind` into the home on this
+## cell, with what it had waiting and its timer. False, and nothing changes,
+## when the home is not its kind's or is full. The map's loose animals and the
+## stall (0190) both come in through here.
+static func house(state: Dictionary, cell: Vector2i, kind: StringName,
+		ready: int = 0, left: int = 0) -> bool:
+	var id := StringName(Farm.occupant(state, cell).get("id", &""))
+	if not is_home(id) or not is_animal(kind) or home_of(kind) != id:
+		return false
+	var homes: Dictionary = state["housed"]
+	var idx := Grid.index(Building.anchor_of(state, cell))
+	if not homes.has(idx):
+		homes[idx] = {"home": id, "animals": []}
+	var animals: Array = (homes[idx] as Dictionary)["animals"]
+	if animals.size() >= capacity(id):
+		return false
+	var every := int((GameData.LIVESTOCK[kind] as Dictionary)["every_ticks"])
+	animals.append({"id": kind, "ready": maxi(ready, 0), "left": left if left > 0 else every})
+	return true
+
+
+## **A new home takes its kind in** (task 0183), called by `Building.place`:
+## the loose animals on the map that live in it - in cell order, each taken
+## off the map with what it had waiting - then any whose home was lost, as
+## many as it has room for. **One `Farm.touch`** for every animal that left
+## the map, not one apiece. How many moved in.
+static func move_in(state: Dictionary, cell: Vector2i) -> int:
+	var id := StringName(Farm.occupant(state, cell).get("id", &""))
+	if not is_home(id):
+		return 0
+	var moved := 0
+	var left_the_map := false
+	var occupants: Dictionary = state["occupants"]
+	var pen: Dictionary = state["livestock"]
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var kind := StringName((occupants[idx] as Dictionary)["id"])
+		if not is_animal(kind) or home_of(kind) != id:
+			continue
+		var was: Dictionary = pen.get(idx, {})
+		if not house(state, cell, kind, int(was.get("ready", 0)), int(was.get("left", 0))):
+			break
+		occupants.erase(idx)
+		pen.erase(idx)
+		left_the_map = true
+		moved += 1
+	var still: Array = []
+	for animal in (state["unhoused"] as Array):
+		var one: Dictionary = animal
+		if house(state, cell, StringName(one["id"]), int(one["ready"]), int(one["left"])):
+			moved += 1
+		else:
+			still.append(one)
+	state["unhoused"] = still
+	if left_the_map:
+		Farm.touch(state)
+	return moved
+
+
+## **A home is gone** (task 0183): `Farm.forget_cell` calls this for every
+## cell it clears. When it is a home's anchor, the animals that lived there
+## wait in `unhoused` - alive, producing nothing - for the next home of their
+## kind; none is ever lost with its building.
+static func forget_cell(state: Dictionary, cell: Vector2i) -> void:
+	var homes: Dictionary = state.get("housed", {})
+	var idx := Grid.index(cell)
+	if not homes.has(idx):
+		return
+	for animal in ((homes[idx] as Dictionary)["animals"] as Array):
+		(state["unhoused"] as Array).append(animal)
+	homes.erase(idx)
+
+
 # ------------------------------------------------------------------ the tick
 
 ## One tick of standing in a field. Called from `Sim._tick_day()` and nowhere
@@ -104,17 +258,29 @@ static func tick(state: Dictionary) -> void:
 		if not pen.has(idx):
 			pen[idx] = {"ready": 0, "left": int(entry["every_ticks"])}
 
-		var at: Dictionary = pen[idx]
-		# **A full animal stops.** Nothing accumulates off screen for ever:
-		# come back or lose the difference, which is what makes coming back a
-		# thing you do rather than a thing you schedule.
-		if int(at["ready"]) >= int(entry["holds"]):
-			continue
-		at["left"] = int(at["left"]) - 1
-		if int(at["left"]) > 0:
-			continue
-		at["ready"] = int(at["ready"]) + 1
-		at["left"] = int(entry["every_ticks"])
+		_produce(pen[idx], entry)
+	# **And the housed** (task 0183), home by home in cell order, each in the
+	# order it moved in: the same clock as on the grass.
+	var homes: Dictionary = state["housed"]
+	var anchors: Array = homes.keys()
+	anchors.sort()
+	for idx in anchors:
+		for animal in ((homes[idx] as Dictionary)["animals"] as Array):
+			_produce(animal, GameData.LIVESTOCK[(animal as Dictionary)["id"]])
+
+
+## One tick of one animal's clock.
+static func _produce(at: Dictionary, entry: Dictionary) -> void:
+	# **A full animal stops.** Nothing accumulates off screen for ever:
+	# come back or lose the difference, which is what makes coming back a
+	# thing you do rather than a thing you schedule.
+	if int(at["ready"]) >= int(entry["holds"]):
+		return
+	at["left"] = int(at["left"]) - 1
+	if int(at["left"]) > 0:
+		return
+	at["ready"] = int(at["ready"]) + 1
+	at["left"] = int(entry["every_ticks"])
 
 
 ## Every animal on the farm, in cell order.

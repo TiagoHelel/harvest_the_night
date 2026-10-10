@@ -490,6 +490,10 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 				Farm.remove(state, done)
 			Resources.gain(state, cost_of(id))
 			return false
+	# **A coop or a barn takes its kind in** (task 0183): the map's loose
+	# animals that live there, and any whose home was lost.
+	if Livestock.is_home(id):
+		Livestock.move_in(state, cell)
 	return true
 
 
@@ -499,6 +503,10 @@ static func why_not_sell(state: Dictionary, cell: Vector2i) -> Array:
 	var id: StringName = Farm.occupant(state, cell).get("id", &"")
 	if not is_placeable(id):
 		return [&"WHY_NOTHING_THERE"]
+	# **Not out from under its animals** (task 0183): a coop with hens in
+	# it stays up.
+	if Livestock.is_home(id) and not Livestock.residents(state, cell).is_empty():
+		return [&"WHY_HOME_IN_USE"]
 	return why_not_now(state, id)
 
 

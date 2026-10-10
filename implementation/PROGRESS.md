@@ -18419,3 +18419,165 @@ assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
 implementation/backlog/packs/{A022-fish-icons,A023-fishing-gear}.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0182-legendary-book.md,
 implementation/shots/0182/, docs/devlog/{index,index.pt_BR}.md
+
+## 0183 - The coop and the barn - done 2026-10-09
+
+What changed: animals have homes. A coop and a barn go up by day, the first
+of each takes in the map's loose chickens or cow, and their produce is
+collected at the door. Until one is built, the map's animals stand and work
+exactly as before.
+
+**The buildings** (`BUILDINGS`, all levers; footprints and capacities
+decided here):
+
+| | Size | Holds | HP | Cost |
+|---|---|---|---|---|
+| coop | 3x2 | 4 chickens | 60 | 30 wood, 10 stone, $80 |
+| barn | 5x4 | 4 animals | 100 | 60 wood, 25 stone, $200 |
+
+- Both fit 0156's 7x4 sites, and anywhere else buildable.
+- `BLD_COOP`/`BLD_BARN` name them ("galinheiro", "celeiro").
+- `Describe.building` adds "Houses 4 animals" ("Abriga 4 animais").
+
+**The rule** (`Livestock`):
+- `LIVESTOCK` gains `home` (cow: barn, chicken: coop) and `source`, which
+  is `map` or `stall` (0190's), from `LIVESTOCK_SOURCES`.
+- **`housed`** is a new state key, listed in `State.RUN_DATA`. It maps a
+  home's anchor index to `{home, animals: [{id, ready, left}]}`. Housed
+  animals tick on the loose ones' clock (`_produce`, shared), home by home in
+  cell order.
+- **`move_in`** runs from `Building.place` for a home:
+  - the map's loose animals of its kind, in cell order, up to its capacity:
+    removed from `occupants` and `livestock`, with what they had waiting and
+    their timers;
+  - then any animals in `unhoused`;
+  - **one `Farm.touch`** for all of them.
+  - Every home runs it, so a second coop would take in any loose hens the
+    first had no room for.
+- **`house(state, cell, kind)`** is the one way in. It refuses an animal of
+  another home, or a full home. 0190's stall will deliver through it.
+- **The door** is the middle cell of the front row: (1,1) on the coop and
+  (2,3) on the barn (`door_of`).
+  - Only the door offers `collect`, and only while someone inside has
+    something waiting. The farmer stands below it, facing north. Collecting
+    takes everyone's produce.
+  - `Interact._offered` asks `Livestock` for homes as for loose animals, and
+    a damaged home still offers `repair` first.
+- **No animal is ever lost:**
+  - If a home's anchor is cleared (`Farm.forget_cell` -> `Livestock.forget_cell`),
+    its animals go to **`unhoused`**, a new top-level list. They wait there,
+    producing nothing, until the next home of their kind takes them in.
+  - Selling a home with animals in it is refused (`WHY_HOME_IN_USE`, "Animals
+    live here" / "Tem animais morando aqui").
+  - 0186 turns a destroyed home into a wrecked one that keeps its animals, so
+    `unhoused` becomes rare.
+- **`check_livestock`** is reworked. Each kind names a home with room, and
+  its source is `map` or `stall`. Only a `map` kind must stand on the map:
+  "every animal stands on the map" is no longer a rule. Every home must house
+  some kind.
+- **Saves:** a save with loose animals keeps working. Reconcile fills
+  `housed` and `unhoused`, and its cow and chickens stand and produce as
+  before. No version bump.
+
+**The view:**
+- The coop and barn are drawn through 0120's road. `_stand_in_prop` now
+  takes `sprites/buildings/` entries too.
+  - The coop is the kitchen at 0.6 (1.2 on screen), warm-tinted.
+  - The barn is the workshop at 0.9 (1.8), barn-red.
+  - Both sit at A030's canvases: 64x64 at (32,60) and 96x100 at (48,96).
+- Housed animals are drawn by `WorldView._draw_housed`, view only:
+  - along the row below the building, either side of the door, one per
+    cell, then a second row a step behind;
+  - with the loose animals' ambient motion.
+  - The farm redraws on a signature of who lives where, not on the timers.
+- At dusk `Transition` fades them with the loose ones. They carry a
+  `day_only` meta, and its cache now also watches the number of drawings in
+  the occupants layer, because a hen moving in changes no occupant count.
+- The day build list has nine rows now, all on screen (`build_day` shot).
+  The barn sorts first, so it is the list's default selection.
+- **A030's Deliverables** now state the settled footprints, capacities, the
+  door cell and where the farmer collects, and that the points stand.
+
+**What did not need changing:** `_task_0034_cooking`, `_case_0034_livestock`,
+`_task_0038_idle` and the determinism scenario all use the map's loose
+animals, which behave as they always did while no home exists. No other
+suite needed a rewrite.
+
+### Hashes
+
+- **SIM 42882243 -> 735944060, on purpose.** The state gained `housed`
+  and `unhoused`. The determinism scenario's animals are the map's loose
+  ones and do as they did; it builds no home.
+- **DATA 1812557335 -> 91621100, on purpose:**
+  - the coop and the barn in `BUILDINGS`;
+  - `home` and `source` on each `LIVESTOCK` kind;
+  - `LIVESTOCK_SOURCES`, in `digest()`.
+- **The first verify failed perf alone:** path_refresh at 13132 us
+  against a baseline of 8782, view_particles and night_towers up as much.
+  - The owner's WelcomeBackHero build (one_room_dg) was holding a full
+    core.
+  - An A/B under that same load, the 0182 commit in a scratch worktree
+    against this tree, gave path_refresh of 13556 and 11890 us for 0182
+    and 12285 and 13373 for 0183: the same.
+  - The next verify passed perf at 10317 us. The baseline was not touched.
+
+Verify: 60 passed, 0 failed in 733s (the known OVER BUDGET), on the third run: headless_check 17180 asserts, headless_v1 1807, input_check 1181 cases, input_v1 615, sim 735944060, data 91621100. The first failed perf under the load above; the second failed `_case_0183_barn`'s gliding click, fixed as told under Tests.
+
+**Tests:**
+- `_task_0183_barns` (headless_v1):
+  - **Data:** the homes and sources pass. Their teeth refuse a cow living in
+    a kitchen, a chicken from nowhere, and a barn nobody lives in. A stall
+    animal that is not on the map passes.
+  - **Move-in:** a coop on its site takes both map chickens off the map,
+    with one hen's waiting produce. The farm is touched exactly once beyond
+    its six cells.
+  - **The door** is (1,1) from any of the coop's cells. Only it offers
+    `collect`, and collecting there pays. The hens go on producing on the
+    same clock.
+  - **Capacity:** the coop fills to 4 and refuses a fifth hen and any cow,
+    and is not sold out from under them. A barn takes the map's cow and
+    holds exactly its 4, and no chicken; its door is (2,3).
+  - **A knocked-down coop** leaves its 4 hens in `unhoused`, and the next
+    coop takes them all back.
+  - **Saves:** with no barn the cow works as before. The v8 golden loads
+    with nothing housed, and its cow still produces.
+- `_case_0183_barn` (input_v1):
+  - B opens build mode by day. The coop's row is on screen; a click selects
+    it, and a click on the farm puts it down, below and to the right of
+    where the farmer stands.
+  - The map's two chickens move in, and its description says it houses 4.
+  - B closes the mode. At the door, facing it, SPACE collects both hens'
+    worth.
+  - **It aimed at the coop's site first, and the click missed twice.**
+    - The first time the site was left of the farmer, under the build
+      list.
+    - Then, now and then in a full verify, the farmer was moved beside the
+      site first, and the camera was still gliding when the click landed.
+    - It now builds where he already stands, as 0178's case does. A coop
+      takes the map's hens in wherever it goes up. Two standalone runs
+      passed.
+- `headless_check` asks for one shot per scenario: 66 now (`coop_barn`).
+
+Looked at (`python tools/shot.py 0183 coop_barn --fhd`, 1920x1080):
+- `implementation/shots/0183/coop_barn.png`, noon on Spring 3:
+  - the barn on its site, red, clear of the seed strip, the farmer at its
+    door with his back to us and three cows along its front;
+  - east of it the smaller coop, its four hens in two rows either side of
+    its door.
+  - The coop stands beside the barn rather than on its own site: the two
+    sites are twelve rows apart, more than a screen with the HUD's strips.
+    Three takes to get there:
+    - the coop on its site under the top strip;
+    - the farmer at a corner of the barn, because `_look_at` also moves
+      where he stands;
+    - the barn under the seed strip, because the day's camera follows him.
+- `build_day.png`: the nine-row day build list, the barn first and its 5x4
+  ghost by the farmer.
+
+Files: src/core/{building,farm,game_data,interact,livestock,state}.gd,
+src/ui/{describe,names,placeholder_art,transition,world_view}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A030-coop-barn.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0183-coop-barn.md,
+implementation/shots/0183/, docs/devlog/{index,index.pt_BR}.md

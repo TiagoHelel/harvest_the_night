@@ -143,6 +143,9 @@ static func building(id: StringName) -> String:
 		lines.append(I18n.f(&"DESC_SPRINKLES", [Farming.sprayed_by(id, Vector2i(Grid.WIDTH / 2, Grid.HEIGHT / 2)).size()]))
 	if bool(one.get("walked_over", false)):
 		lines.append(I18n.t(&"DESC_WALKED_OVER"))
+	# A coop's or a barn's room (task 0183).
+	if int(one.get("capacity", 0)) > 0:
+		lines.append(I18n.f(&"DESC_HOUSES", [int(one["capacity"])]))
 	var makes := _recipes_at(id)
 	if not makes.is_empty():
 		lines.append(I18n.f(&"DESC_MAKES", [", ".join(makes)]))

@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 52
+const GROUPS := 53
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -121,6 +121,7 @@ func _run() -> void:
 	_task_0180_minigame()
 	_task_0181_rods()
 	_task_0182_legendary()
+	_task_0183_barns()
 
 
 func _finish() -> void:
@@ -4941,6 +4942,132 @@ func _task_0182_legendary() -> void:
 	expect(State.RUN_DATA.has("fish_book") and not State.TABLES.has("fish_book"),
 		"the book's keys come from play")
 	_completed += 1
+
+
+## Task 0183: the coop and the barn. Building a coop moves the map's
+## chickens in, their produce with them, and it still comes - collected at
+## the door; a full coop refuses another chicken; a barn holds its capacity;
+## a lost home's animals wait for the next; a save with loose animals works.
+func _task_0183_barns() -> void:
+	expect(GameData.check_livestock(GameData.LIVESTOCK, GameData.FARM_MAP).is_empty()
+		and GameData.validate().is_empty(), "the animals' homes and sources pass their checks",
+		str(GameData.check_livestock(GameData.LIVESTOCK, GameData.FARM_MAP)))
+	var homeless: Dictionary = GameData.LIVESTOCK.duplicate(true)
+	homeless[&"cow"]["home"] = &"kitchen"
+	var unsourced: Dictionary = GameData.LIVESTOCK.duplicate(true)
+	unsourced[&"chicken"]["source"] = &"the_moon"
+	var empty_barn: Dictionary = GameData.LIVESTOCK.duplicate(true)
+	empty_barn.erase(&"cow")
+	var bought: Dictionary = GameData.LIVESTOCK.duplicate(true)
+	bought[&"sheep"] = (bought[&"cow"] as Dictionary).duplicate(true)
+	bought[&"sheep"]["source"] = &"stall"
+	expect(not GameData.check_livestock(homeless, GameData.FARM_MAP).is_empty()
+		and not GameData.check_livestock(unsourced, GameData.FARM_MAP).is_empty()
+		and not GameData.check_livestock(empty_barn, GameData.FARM_MAP).is_empty(),
+		"a kind with no home, one from nowhere, and a barn nobody lives in are refused")
+	expect(GameData.check_livestock(bought, GameData.FARM_MAP).is_empty(),
+		"and an animal the stall sells need not stand on the map")
+
+	# **The coop takes the map's chickens in.** Their produce comes with them.
+	var state := State.create(1830)
+	Resources.gain(state, {GameData.WOOD: 500, GameData.STONE: 500, GameData.MONEY: 2000})
+	var hens := Farm.cells_with(state, &"chicken")
+	var cow_cells := Farm.cells_with(state, &"cow")
+	expect(hens.size() == 2 and cow_cells.size() == 1, "fixture: the map's two chickens and a cow", str(hens))
+	Livestock.tick(state)
+	(state["livestock"][Grid.index(hens[0])] as Dictionary)["ready"] = 1
+	var coop := _site_spot(state, &"coop")
+	expect(coop != Vector2i(-1, -1), "fixture: the coop's site has room for one")
+	var version := int(state["grid_version"])
+	expect(Building.place(state, &"coop", coop), "a coop goes up by day on its site")
+	var cells := Building.footprint(&"coop", coop).size()
+	expect(Farm.cells_with(state, &"chicken").is_empty() and Livestock.residents(state, coop).size() == 2
+		and not (state["livestock"] as Dictionary).has(Grid.index(hens[0])),
+		"and both chickens move in, off the map", str(Livestock.residents(state, coop)))
+	expect(int(state["grid_version"]) == version + cells + 1,
+		"with one touch of the farm for both", "%d -> %d" % [version, int(state["grid_version"])])
+	var door := Livestock.door_of(state, coop)
+	expect(door == coop + Vector2i(1, 1) and Livestock.door_of(state, coop + Vector2i(2, 0)) == door,
+		"the coop's door is the middle of its front row, from any of its cells", str(door))
+	expect(Livestock.ready_at(state, door) == 1 and Interact.verb_at(state, door) == &"collect"
+		and Interact.verb_at(state, coop) == &"",
+		"the hen's waiting egg-to-be came in with her: the door offers to collect, the wall does not")
+	var meat := Resources.amount(state, GameData.MEAT)
+	Interact.complete(state, door, &"collect")
+	expect(Resources.amount(state, GameData.MEAT) == meat + 1 and Livestock.ready_at(state, door) == 0,
+		"collected at the door")
+	var every := int(GameData.LIVESTOCK[&"chicken"]["every_ticks"])
+	for _i in every:
+		Livestock.tick(state)
+	expect(Livestock.ready_at(state, door) == 2,
+		"and housed, they go on producing on the same clock", str(Livestock.ready_at(state, door)))
+
+	# **A full coop refuses another chicken**; a cow is not the coop's.
+	var capacity := int(GameData.BUILDINGS[&"coop"]["capacity"])
+	var took: Array = []
+	for _i in capacity:
+		took.append(Livestock.house(state, coop, &"chicken"))
+	expect(took.count(true) == capacity - 2 and took.count(false) == 2
+		and Livestock.residents(state, coop).size() == capacity
+		and not Livestock.house(state, coop, &"chicken") and not Livestock.house(state, door, &"cow"),
+		"the coop fills to its capacity and refuses another chicken, and any cow", str(took))
+	expect(Building.why_not_sell(state, coop) == [&"WHY_HOME_IN_USE"] and Building.sell(state, coop).is_empty(),
+		"and a coop with hens in it is not sold out from under them")
+
+	# **The barn holds its capacity**: the cow, then as many more as it has room for.
+	var barn := _site_spot(state, &"barn")
+	expect(barn != Vector2i(-1, -1) and Building.place(state, &"barn", barn),
+		"a barn goes up on its site")
+	var barn_room := int(GameData.BUILDINGS[&"barn"]["capacity"])
+	expect(Farm.cells_with(state, &"cow").is_empty() and Livestock.residents(state, barn).size() == 1,
+		"and the map's cow moves in")
+	var cows := 1
+	while Livestock.house(state, barn, &"cow"):
+		cows += 1
+	expect(cows == barn_room and Livestock.residents(state, barn).size() == barn_room
+		and not Livestock.house(state, barn, &"chicken"),
+		"the barn holds its capacity of cows, and no chicken", "%d of %d" % [cows, barn_room])
+	expect(Livestock.door_of(state, barn) == barn + Vector2i(2, 3),
+		"its door is the middle of its front row too")
+
+	# **A lost home loses no animal**: they wait, and the next coop takes them.
+	var before := State.hash_of(state)
+	Farm.remove(state, coop)
+	expect((state["unhoused"] as Array).size() == capacity and not (state["housed"] as Dictionary).has(Grid.index(coop))
+		and State.hash_of(state) != before,
+		"a coop knocked down leaves its hens waiting, none lost", str((state["unhoused"] as Array).size()))
+	for part in Building.footprint(&"coop", coop):
+		Farm.remove(state, part)
+	expect(Building.place(state, &"coop", coop) and Livestock.residents(state, coop).size() == capacity
+		and (state["unhoused"] as Array).is_empty(),
+		"and the next coop takes every one of them back in")
+
+	# **Loose animals work as they did** until a home exists - and in a save.
+	var loose := State.create(1831)
+	var cow: Vector2i = Farm.cells_with(loose, &"cow")[0]
+	for _i in int(GameData.LIVESTOCK[&"cow"]["every_ticks"]):
+		Livestock.tick(loose)
+	expect(Livestock.ready_at(loose, cow) == 1 and Interact.verb_at(loose, cow) == &"collect",
+		"with no barn the cow stands where the map put it and works as before")
+	var legacy := Save.read_run_at("res://tools/goldens/run-v8.sav")
+	var cow_then: Array = Farm.cells_with(legacy, &"cow")
+	for _i in int(GameData.LIVESTOCK[&"cow"]["every_ticks"]):
+		Livestock.tick(legacy)
+	expect(not legacy.is_empty() and (legacy["housed"] as Dictionary).is_empty() and not cow_then.is_empty()
+		and Livestock.ready_at(legacy, cow_then[0]) >= 1,
+		"a save with loose animals loads, homeless as it was, and its cow still produces")
+	_completed += 1
+
+
+## The top-left cell of a home's `MAP_SITES` room where one fits, or
+## (-1, -1).
+func _site_spot(state: Dictionary, id: StringName) -> Vector2i:
+	var room: Array = GameData.MAP_SITES[id]
+	for y in range(int(room[1]), int(room[1]) + int(room[3])):
+		for x in range(int(room[0]), int(room[0]) + int(room[2])):
+			if Building.can_place(state, id, Vector2i(x, y)):
+				return Vector2i(x, y)
+	return Vector2i(-1, -1)
 
 
 ## How many of `casts` casts into `water` on `seed_value`, on `day` at `minute`

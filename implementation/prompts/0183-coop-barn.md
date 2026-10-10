@@ -1,7 +1,7 @@
 # 0183 - The coop and the barn
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0126, 0156
 - **Likely files:** src/core/game_data.gd, src/core/livestock.gd, src/core/building.gd, src/core/interact.gd, src/core/state.gd, src/ui/world_view.gd, src/ui/transition.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

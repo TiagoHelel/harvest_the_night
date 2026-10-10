@@ -140,7 +140,8 @@ static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 		# a `BUILDINGS` entry and some recipes, and nothing here changes.
 		if Crafting.is_station(on["id"]):
 			return &"craft"
-		if Livestock.is_animal(on["id"]):
+		# A loose animal, or since task 0183 a coop's or a barn's door.
+		if Livestock.is_animal(on["id"]) or Livestock.is_home(on["id"]):
 			return Livestock.verb_at(state, cell)
 		if Gathering.is_node(StringName(on["id"])) and not Gathering.is_available(state, StringName(on["id"])):
 			return &""

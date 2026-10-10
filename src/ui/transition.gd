@@ -52,6 +52,7 @@ var _day_actors: Array = []
 ## And the things that come on when it gets dark.
 var _wakers: Array = []
 var _last_seen := -1
+var _occupants_layer: Node
 
 
 func _ready() -> void:
@@ -97,12 +98,18 @@ func _find_day_actors() -> void:
 	# reasons that have nothing to do with the number of occupants - so a
 	# cache keyed only on that count holds freed objects, and casting one of
 	# those is an error rather than a null.
-	if occupants.size() == _last_seen and _actors_are_alive():
+	# **And whenever the drawings changed** (task 0183): an animal at home
+	# is a drawing with no occupant under it, so a hen moving in changes
+	# what is drawn and not what stands on the farm.
+	if _occupants_layer == null or not is_instance_valid(_occupants_layer):
+		_occupants_layer = _view.find_child("Occupants", true, false)
+	var world := _occupants_layer
+	var seen := occupants.size() * 100000 + (world.get_child_count() if world != null else 0)
+	if seen == _last_seen and _actors_are_alive():
 		return
-	_last_seen = occupants.size()
+	_last_seen = seen
 	_day_actors.clear()
 	_wakers.clear()
-	var world := _view.find_child("Occupants", true, false)
 	if world == null:
 		return
 	# Source-owned drawings sit at ground pivots. Their logical-cell metadata
@@ -110,6 +117,9 @@ func _find_day_actors() -> void:
 	for child in world.get_children():
 		var sprite := child as Sprite2D
 		if sprite == null:
+			continue
+		if bool(sprite.get_meta("day_only", false)):
+			_day_actors.append(sprite)
 			continue
 		var cells: Array = sprite.get_meta("logical_cells",[])
 		if cells.is_empty():

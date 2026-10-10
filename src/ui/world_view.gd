@@ -417,7 +417,8 @@ func _process(delta: float) -> void:
 	# different thing for a different job and is not used here.
 	# House HP lives outside the occupants table; crossing the existing wear
 	# threshold must refresh its drawing even when all nine cells are unchanged.
-	var signature: int = [(_state["occupants"] as Dictionary).hash(), _house_hurt()].hash()
+	var signature: int = [(_state["occupants"] as Dictionary).hash(), _house_hurt(),
+		_housed_signature()].hash()
 	if signature != _last_signature:
 		_last_signature = signature
 		_dirty = true
@@ -1257,16 +1258,80 @@ func _refresh() -> void:
 			mark.size = Vector2(3.0, 3.0)
 			_occupants.add_child(mark)
 			_sprites.append(mark)
+	_draw_housed()
+
+
+## **The animals at home** (task 0183): each home's residents stand along
+## its front by day, either side of the door, a second row a step behind the
+## first - view only; wandering about is 0185's. `Transition` fades them out
+## at dusk with the loose ones (`day_only`).
+func _draw_housed() -> void:
+	var homes: Dictionary = _state.get("housed", {})
+	var anchors: Array = homes.keys()
+	anchors.sort()
+	for idx in anchors:
+		var anchor := Grid.cell(int(idx))
+		var home := Farm.occupant(_state, anchor)
+		if home.is_empty():
+			continue
+		var size := Building.size_of(StringName(home["id"]))
+		var door := Livestock.door_of(_state, anchor)
+		var spots: Array = []
+		for x in size.x:
+			if anchor.x + x != door.x:
+				spots.append(Vector2i(anchor.x + x, anchor.y + size.y))
+		if spots.is_empty():
+			spots.append(door + Vector2i.DOWN)
+		var animals: Array = (homes[idx] as Dictionary)["animals"]
+		for i in animals.size():
+			var kind := StringName((animals[i] as Dictionary)["id"])
+			var spot: Vector2i = spots[i % spots.size()]
+			var row := i / spots.size()
+			var sprite := Sprite2D.new()
+			sprite.name = "Housed_%d_%d" % [int(idx), i]
+			sprite.texture = _texture_for(kind)
+			ArtPlacement.place(sprite, spot)
+			sprite.position += Vector2(float(row) * 6.0, -float(row) * 4.0)
+			sprite.set_meta("day_only", true)
+			sprite.set_meta("housed_at", int(idx))
+			var motion := ShaderMaterial.new()
+			motion.shader = AMBIENT_MOTION
+			if _season != null:
+				_season.dress(motion, false)
+			motion.set_shader_parameter("species", 1 if kind == &"chicken" else 2)
+			motion.set_shader_parameter("phase", float((spot.x * 37 + spot.y * 19 + i * 11) % 101) * 0.13)
+			motion.set_shader_parameter("motion_time", _ambient_time)
+			sprite.material = motion
+			_ambient_materials.append(motion)
+			_occupants.add_child(sprite)
+			_sprites.append(sprite)
+
+
+## Who lives where, without the clocks that tick every frame: a move-in
+## redraws the farm and a hen's timer does not (task 0183).
+func _housed_signature() -> int:
+	var homes: Dictionary = _state.get("housed", {})
+	var anchors: Array = homes.keys()
+	anchors.sort()
+	var parts: Array = []
+	for idx in anchors:
+		var ids: Array = []
+		for animal in ((homes[idx] as Dictionary)["animals"] as Array):
+			ids.append(str((animal as Dictionary)["id"]))
+		parts.append("%d:%s" % [int(idx), ",".join(ids)])
+	return ";".join(parts).hash()
 
 
 ## **A map prop whose pack has not landed** (task 0156: A021's copper, coal
-## and gold nodes and the hardwood stump), drawn through 0120's road: the
+## and gold nodes and the hardwood stump; since 0183 A030's coop and barn),
+## drawn through 0120's road: the
 ## stand-in's texture, tinted and scaled as its `ART` entry says, once over
 ## the thing's whole footprint at its anchor. False for anything with real
 ## art or no entry, which the loop draws as it always has.
 func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) -> bool:
 	var entry := PlaceholderArt.art(id)
-	if entry.is_empty() or str(entry.get("dir", "")) != PROP_DIR:
+	# A building's too since task 0183: A030's coop and barn.
+	if entry.is_empty() or not str(entry.get("dir", "")) in [PROP_DIR, BUILDING_DIR]:
 		return false
 	var path := PlaceholderArt.art_path(id, 0)
 	var file := PlaceholderArt.texture_path(path)

@@ -150,6 +150,12 @@ const REPORT_HEADER := {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40),
 const MARK_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_scale": 1.0}
 
+## A030's coop and barn (task 0183), at the canvases and pivots that task
+## settled: drawn at 1.0, the coop 64x64 at (32,60) over 3x2 cells, the
+## barn 96x100 at (48,96) over 5x4.
+const COOP := {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "draw_scale": 1.0}
+const BARN := {"canvas": Vector2i(96, 100), "pivot": Vector2i(48, 96), "draw_scale": 1.0}
+
 ## A022's book portraits (task 0182): 32x32 at (16,16), drawn at 1.0.
 const PORTRAIT := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "draw_scale": 1.0}
 
@@ -261,6 +267,11 @@ const ART := {
 	&"portrait_golden_queen": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.6, 1.3, 0.4), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
 	&"portrait_ghost_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.4, 1.4, 1.5), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
 	&"portrait_ice_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 1.15, 1.5), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
+	# A030's coop and barn (task 0183): the kitchen and the workshop, stations
+	# of their kind, scaled to their footprints - the coop small and warm, the
+	# barn barn-red - until 0212.
+	&"coop": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen", "stand_in_scale": 0.6, "tint": Color(1.15, 1.0, 0.82), "geometry": COOP, "final": COOP, "bare": true},
+	&"barn": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop", "stand_in_scale": 0.9, "tint": Color(1.2, 0.78, 0.68), "geometry": BARN, "final": BARN, "bare": true},
 	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
 	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},

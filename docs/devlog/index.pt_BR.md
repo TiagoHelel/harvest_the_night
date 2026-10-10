@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-171 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+172 tarefas em 7 dias, de  a 2026-10-09. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -214,10 +214,11 @@ voz alta.
 | 0180 | The fishing minigame | 2026-10-09 |
 | 0181 | Rods and bait | 2026-10-09 |
 | 0182 | Legendary fish and the fish book | 2026-10-09 |
+| 0183 | The coop and the barn | 2026-10-09 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 59 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 61 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -278,6 +279,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Rods and bait** (0181) - `data` 1985581423 -> 3325784326
 - **Legendary fish and the fish book** (0182) - `sim` 3238533707 -> 42882243
 - **Legendary fish and the fish book** (0182) - `data` 3325784326 -> 1812557335
+- **The coop and the barn** (0183) - `sim` 42882243 -> 735944060
+- **The coop and the barn** (0183) - `data` 1812557335 -> 91621100
 
 ## O que deu errado
 

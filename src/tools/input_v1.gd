@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 38
+const V1_CASES := 39
 
 
 func _process(delta: float) -> bool:
@@ -88,6 +88,7 @@ func _run() -> void:
 	await _case_0180_minigame()
 	await _case_0181_bait()
 	await _case_0182_book()
+	await _case_0183_barn()
 	_finish()
 
 
@@ -2806,5 +2807,65 @@ func _case_0182_book() -> void:
 	await _pad_tap(JOY_BUTTON_X)
 	await frames(2)
 	expect(not inventory.is_open(), "the pad's inventory button closes the book")
+	await close_scene()
+	_completed += 1
+
+
+## Task 0183: a coop put down by day through build mode - B, its row in the
+## day's list, a click on the farm - takes the map's chickens in, and SPACE
+## at its door collects what they have.
+func _case_0183_barn() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	Resources.gain(state, Building.cost_of(&"coop"))
+	# **Where he already stands**, below and to the right of him, as 0178's
+	# case does: clear of the build list and the seed strip on the left, and
+	# with the camera still - a farmer moved first left it gliding, and the
+	# click now and then landed on another cell. A coop takes the map's hens
+	# in wherever it goes up.
+	var spot := Vector2i(-1, -1)
+	var here := Player.cell(state)
+	for dy in range(1, 5):
+		for dx in range(1, 6):
+			var cell := here + Vector2i(dx, dy)
+			if spot == Vector2i(-1, -1) and Building.can_place(state, &"coop", cell):
+				spot = cell
+	expect(spot != Vector2i(-1, -1), "fixture: room for a coop near the farmer")
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return Building.is_active(state), "build mode to open by day")
+	var row := require_control("build_coop") as Button
+	expect(row != null and row.get_global_rect().end.y <= 270.0,
+		"the day's build list has the coop, on the screen")
+	await click_control("build_coop")
+	await until(func() -> bool: return Building.selected(state) == &"coop", "the coop to be selected")
+	await click_cell(spot)
+	await until(func() -> bool:
+		return StringName(Farm.occupant(state, spot).get("id", &"")) == &"coop",
+		"a click on the farm to put it down")
+	expect(Farm.cells_with(state, &"chicken").is_empty() and Livestock.residents(state, spot).size() == 2,
+		"the map's two chickens move in")
+	expect(Describe.building(&"coop").contains(I18n.f(&"DESC_HOUSES", [int(GameData.BUILDINGS[&"coop"]["capacity"])])),
+		"its description says how many it houses")
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return not Building.is_active(state), "build mode to close")
+	# Both hens with something to take, and the farmer at the door, facing it.
+	for animal in Livestock.residents(state, spot):
+		(animal as Dictionary)["ready"] = 1
+	var door := Livestock.door_of(state, spot)
+	_stand_at(state, door + Vector2i.DOWN, Player.NORTH)
+	await frames(2)
+	expect(Interact.verb_at(state, Player.target(state)) == &"collect",
+		"facing the coop's door, the key collects")
+	var meat := Resources.amount(state, GameData.MEAT)
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return Resources.amount(state, GameData.MEAT) > meat,
+		"SPACE at the door to collect")
+	expect(Resources.amount(state, GameData.MEAT) == meat + 2 and Livestock.ready_at(state, door) == 0,
+		"both hens' worth, and nothing left waiting")
 	await close_scene()
 	_completed += 1

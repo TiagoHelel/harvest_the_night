@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["coop_barn", "a coop and a barn on their sites at noon, the map's animals moved in and more", ""],
 	["fish_book", "the fish book on the Old Catfish's page, four of sixteen; then a silhouette", "InventoryPanel"],
 	["bait", "a worm on the iron rod's hook, the line waiting, the bait choice under it", ""],
 	["fishing_bar", "a trout on the line: one hit of two, the marker on its way", ""],
@@ -729,6 +730,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"fishing_bar": _set_fishing_bar(state)
 		"bait": _set_bait(state)
 		"fish_book": _set_fish_book(state)
+		"coop_barn": _set_coop_barn(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_build": _set_forecast_build(state)
@@ -1446,6 +1448,40 @@ func _set_fishing_bar(state: Dictionary) -> void:
 	line["misses"] = 0
 	line["struck"] = 0
 	line["left"] = int(GameData.FISHING["bar_ticks"])
+
+
+## **The coop and the barn** (task 0183): the barn on its site by the
+## animals, the coop beside it to the east - its own site is twelve rows north,
+## too far for one picture - at noon on Spring 3. The map's two chickens and
+## its cow moved in, the coop filled to its four and two more cows in the barn,
+## the farmer at the barn's door.
+func _set_coop_barn(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 3)
+	Resources.gain(state, {GameData.WOOD: 500, GameData.STONE: 500, GameData.MONEY: 2000})
+	var room: Array = GameData.MAP_SITES[&"barn"]
+	var barn := Vector2i(int(room[0]), int(room[1]))
+	var homes: Array = []
+	if Building.place(state, &"barn", barn):
+		homes.append([barn, &"cow", 3])
+	var coop := Vector2i(-1, -1)
+	for y in range(barn.y, barn.y + 4):
+		for x in range(barn.x + 6, barn.x + 14):
+			if coop.x < 0 and Building.can_place(state, &"coop", Vector2i(x, y + 1)):
+				coop = Vector2i(x, y + 1)
+	if coop.x >= 0 and Building.place(state, &"coop", coop):
+		homes.append([coop, &"chicken", 4])
+	for home in homes:
+		while Livestock.residents(state, home[0]).size() < int(home[2]):
+			if not Livestock.house(state, home[0], home[1]):
+				break
+		print("  coop_barn: %s at %s, %d inside, door %s" % [Farm.occupant(state, home[0])["id"], home[0],
+			Livestock.residents(state, home[0]).size(), Livestock.door_of(state, home[0])])
+	# The day's camera follows him: at the barn's door, facing it, the barn
+	# stays clear of the seed strip on the left and the coop is in frame.
+	_standing_at = Livestock.door_of(state, barn) + Vector2i.DOWN
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.NORTH
 
 
 ## **The fish book** (task 0182): a spring Full Moon, and four species

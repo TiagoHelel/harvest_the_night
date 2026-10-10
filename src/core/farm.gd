@@ -229,6 +229,9 @@ static func cost_of_terrain(terrain: int) -> int:
 ## dies" is a promise this function keeps.
 static func forget_cell(state: Dictionary, cell: Vector2i) -> void:
 	Crafting.forget_cell(state, cell)
+	# A home's animals wait for the next one rather than going with it
+	# (task 0183).
+	Livestock.forget_cell(state, cell)
 
 
 ## What is standing on a cell, or an empty Dictionary. **The only way to ask.**
