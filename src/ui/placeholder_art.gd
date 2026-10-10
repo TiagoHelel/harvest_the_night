@@ -350,6 +350,13 @@ const ART := {
 	&"hud_moon_stone": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.95, 1.12, 1.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"bone_pile": {"pack": "A036", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
 	&"moon_stone": {"pack": "A036", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE},
+	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
+	# the fertilised earth the tilled tile paled with it, dry and wet, until
+	# 0235.
+	&"icon_bone_meal": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_gunpowder", "tint": Color(1.5, 1.42, 1.18), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_bone_meal": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.5, 1.42, 1.18), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"tilled_fertilised": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
+	&"tilled_fertilised_wet": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled_wet", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
 	# A030's coop and barn (task 0183): the kitchen and the workshop, stations
 	# of their kind, scaled to their footprints - the coop small and warm, the
 	# barn barn-red - until 0212.

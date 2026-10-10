@@ -21632,3 +21632,205 @@ tools/determinism_data_hash.txt, tools/backlog/{part9,part11}.py,
 implementation/{BACKLOG,BALANCE,PROGRESS}.md,
 implementation/prompts/{0221-night-loot,0222-bone-meal,0278-economy-seasons}.md,
 implementation/shots/0221/, docs/devlog/{index,index.pt_BR}.md
+
+## 0222 - Bone meal - done 2026-10-10
+
+What changed: bones go back into the ground.
+- **Ground at the workshop:** two bones make a sack of bone meal
+  (`grind_bone_meal`), from the first morning on.
+- **Chosen beside the seeds,** three ways:
+  - 7 on the keyboard;
+  - a click on its row in the strip;
+  - LB and RB on a pad, Q and E on the keyboard, which step through the
+    strip.
+- **SPACE on a tilled plot** puts a sack in its earth. The first morning the
+  plot grows, it grows a second day.
+
+### The rules (`src/core/farming.gd`)
+
+**The choice:**
+- **`bone_meal_chosen`** is a new state key. The seed stays chosen under it,
+  and is what a fertilised plot is sown with.
+- **`select_bone_meal`** refuses with none held, and in winter.
+- **`fertilising`** is true while the meal is chosen, held, and the season
+  grows. Running out puts the seed back by itself.
+- **A seed chosen puts it down** (`select_seed`).
+- **`step_choice`** walks today's seeds, then the meal, and round.
+
+**The verb `fertilise`:**
+- With the meal chosen, every tilled plot not yet marked offers it, sown or
+  not.
+- It comes before planting and watering, and never before a harvest.
+- **Wired like any day verb:**
+  - in `Interact.DAY_ONLY` and `DEFAULT_TICKS` (a third of a second, as
+    long as a sowing), `complete` and `all_verbs`;
+  - `Sfx.VERB_SOUNDS` gives it `sfx/plant` until 0281;
+  - `PlayerArt.VERBS` gives it the planting strip.
+
+**The mark** is `fertilised` on the plot. It is read with a default, so no
+save needs mending and `State.VERSION` stays 9.
+
+**The morning (0165).** The first morning that grows the plot at all - watered,
+sown, in a season that grows, short of ready - grows it
+`FERTILISED_EXTRA_DAYS` (1) more. It never grows past ready, and the mark
+is spent.
+- **Decided: it must have been watered.** A dry morning grows nothing and
+  keeps the mark until the can comes. Bone meal is a better morning, not a
+  morning without the can.
+- **Regrowth (0172):** a regrowing plant's regrowth is a morning shorter.
+  It is never past ready, so there is no extra pick.
+- **Winter (0171):** no morning grows, so the mark waits, and the meal
+  cannot be chosen.
+- **A plot not yet sown** keeps the mark until it is sown and grows.
+- **A harvest clears it.** Clearing a crop with the hoe turns the plot over,
+  and the mark with it.
+
+**The lever:** `FERTILISED_EXTRA_DAYS` (1, from 1 to 2). It is in `digest()`,
+and `validate()` refuses it below one.
+
+### The resource and the recipe
+
+- **`bone_meal` is in:**
+  - `RESOURCES`;
+  - `SELL_PRICE`, at $4;
+  - the `night_leftovers` group;
+  - `Names.KEYS` (`ITEM_BONE_MEAL`), and `REC_GRIND_BONE_MEAL` for the
+    recipe, in both languages.
+- **`grind_bone_meal`, at the workshop:**
+  - two bones and twenty game minutes a sack;
+  - `check_chain` holds: $4 out against $2 in.
+- **The workshop, not the mill:** it is the bench the farm starts with, so
+  the first night's bones are the second morning's.
+- **0166's daily budget counts it:** sixty sacks a day.
+
+### What it looks like
+
+**The strip** (`day_hud.gd`):
+- a seventh row under the six seeds, "7 bone meal 6 +1d" and "7 farinha
+  de osso 6 +1d";
+- lit while it is what the key spends, and hidden in winter;
+- clicked through a button with nothing drawn, laid over the row
+  (`MealRowButton`, in a new `UiKit.HIT` role: every state the option
+  heading's clear box). A screen names no mouse button (0095's check)
+  and overrides no theme (0081's), and the row keeps the seed rows'
+  look;
+- the strip is a row deeper, and the can and the page buttons moved down
+  with it.
+
+**Around it:**
+- **The fertilised soil:** A036's `tilled_fertilised` and
+  `tilled_fertilised_wet`, through 0120's road until 0235.
+  - It is the tilled tile paled: the dry one reads sandier, the wet one
+    purplish.
+  - It is drawn under a crop, in every season.
+- **The icons:** the gunpowder's sack paled to bone, for `icon_bone_meal`
+  and `hud_bone_meal`.
+- **A036's Deliverables table is final now.** It says what the game
+  settled:
+  - the pickups lie on one cell each, bones then the stone;
+  - the stone's light is at (6,8);
+  - the fertilised soil replaces the plot's earth until it is spent;
+  - the icon pairs.
+
+### Balance (BALANCE.md's 0222 section)
+
+**Two bones a sack:**
+
+| Season | Sacks a night held well |
+|---|---|
+| spring | 5 |
+| summer | 17 |
+| autumn | 29 |
+
+- **A handful of plots in spring, never the field:** the starter beds hold
+  sixty.
+- **A morning of growth** is worth about $1 on a carrot and $5 on a
+  strawberry. The sack's $4 sits inside that.
+
+### Hashes
+
+- **SIM 3551005946 -> 1719668160, on purpose:** the new state key.
+- **DATA 883229633 -> 2498985787, on purpose:** the resource, its price and
+  group, the recipe and the lever.
+
+Verify: **PASS**, 60 passed, 0 failed in 744 s (the known OVER BUDGET), on the
+third run.
+- **The first,** with `--accept`, recorded both hashes and failed three
+  checks:
+  - 0095's: a screen named `MOUSE_BUTTON_LEFT` for the row's click;
+  - the farmer's work and reaction showcases, which had no fixture for
+    `fertilise`.
+- **The second** failed 0081's: the row's button overrode the theme. The
+  `UiKit.HIT` role is the answer to it.
+- `headless_check` 17630 asserts, `headless_v1` 2350, `input_check` 1244
+  cases, `input_v1` 704.
+- **`input_v1` took 114.4 s of verify's 120** (113 s alone). 0221's
+  warning stands: raising `SCRIPT_TIMEOUT_S` is the owner's call.
+
+**Tests:**
+- **`_task_0222_bone_meal` (headless_v1), 21 asserts:**
+  - **The table:**
+    - the workshop's recipe, worth more than its bones, with
+      `check_chain` quiet;
+    - the meal named in its group, in both languages;
+    - the workshop still opening on barricades.
+  - **The workshop** turns two bones into a sack.
+  - **The choice:**
+    - refused with none held, chosen with some, put down by a seed;
+    - the bumpers step from the last seed to the meal and round;
+    - never in winter.
+  - **The verb:**
+    - a sown plot offers it and takes one sack, once;
+    - it is a day verb with the sowing's ticks, sound and stoop.
+  - **The done-when:**
+    - two carrots sown together, one fertilised, are ready one morning
+      apart;
+    - the fertilised one grew twice on its first morning and once on its
+      second, and its mark is spent.
+  - **The water:** a dry morning grows nothing and keeps the mark, and the
+    watered one spends it.
+  - **The lifetime of the mark:**
+    - unsown, it is kept through a morning;
+    - one morning short, the plot is ready and never past it;
+    - a harvest clears a mark the crop never used;
+    - winter grows nothing and spends nothing;
+    - a plot with no mark is not fertilised.
+- **`_case_0222_fertilise` (input_v1), 5 cases:**
+  - 7 chooses the meal and its row lights;
+  - the faced bed offers it, and SPACE puts one sack in its earth;
+  - a click on the row puts it down;
+  - LB steps from the first seed round to it.
+- **Older checks follow:**
+  - 0166's daily budget lists the recipe;
+  - 0221's group check asks for membership, now that the group holds
+    three;
+  - the farmer's work and reaction showcases (`art_showcase.gd`) build a
+    fixture for every verb, and now build one for `fertilise`: turned
+    earth not yet sown, bone meal chosen.
+- **`headless_check`:** the shot count is 79 (`bone_meal`).
+
+**Looked at** (`python tools/shot.py 0222 bone_meal --fhd`, and `--pt_BR`):
+- **`bone_meal`, Spring 2 at noon:**
+  - the top row of the first six-wide bed: plain dry, fertilised dry, plain
+    wet, fertilised wet, then carrot sprouts on fertilised earth, dry and
+    wet;
+  - each pair reads apart at 4x;
+  - "7 bone meal 6 +1d" lit in the strip.
+  - The first take chose a four-wide bed under the strip, and the second
+    had him standing on the row. The third is the one kept.
+- **`bone_meal_workshop`:** him at the workshop with six bones, the MAKE
+  list holding `grind_bone_meal` between the kits.
+  - The list prints recipe ids rather than names for every recipe. That is
+    older than this task, and already pending ("Name recipes in the
+    station panel's MAKE list").
+- **`bone_meal-pt_BR`:** "7 farinha de osso 6 +1d" inside the strip.
+
+Files: src/core/{game_data,farming,interact}.gd,
+src/ui/{day_hud,ui_kit,world_view,placeholder_art,player_art,sfx,names}.gd,
+assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,input_v1,shot,art_showcase}.gd,
+tools/determinism_sim_hash.txt, tools/determinism_data_hash.txt,
+implementation/backlog/packs/A036-night-loot.md,
+implementation/{BACKLOG,BALANCE,PROGRESS}.md,
+implementation/prompts/0222-bone-meal.md, implementation/shots/0222/,
+docs/devlog/{index,index.pt_BR}.md

@@ -47,6 +47,8 @@ const DEFAULT_TICKS: Dictionary = {
 	&"till": 1 * GameData.SECONDS,          # LEVER: ticks, 15-60
 	&"plant": GameData.SECONDS / 3,         # LEVER: ticks, 5-30
 	&"harvest": GameData.SECONDS / 3,       # LEVER: ticks, 5-30
+	# A handful of bone meal into the earth (task 0222), as quick as a seed.
+	&"fertilise": GameData.SECONDS / 3,     # LEVER: ticks, 5-30
 	&"water": 1,                    # instant; see INSTANT below
 	&"fish": 1 * GameData.SECONDS,
 	# The cast is the moment; the wait afterwards is `Fishing`, not the
@@ -83,7 +85,7 @@ const DEFAULT_TICKS: Dictionary = {
 ## before either existed.
 const DAY_ONLY: Array = [
 	&"chop", &"mine", &"till", &"plant", &"harvest", &"fish", &"trade", &"craft",
-	&"water", &"reel", &"collect", &"dig", &"ship",
+	&"water", &"reel", &"collect", &"dig", &"ship", &"fertilise",
 ]
 
 
@@ -231,7 +233,7 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 	match verb:
 		&"chop", &"mine":
 			Gathering.strike(state, cell)
-		&"till", &"plant", &"harvest", &"water":
+		&"till", &"plant", &"harvest", &"water", &"fertilise":
 			Farming.act(state, cell)
 		&"fish":
 			Fishing.begin(state, cell)
@@ -265,7 +267,7 @@ static func all_verbs() -> Array:
 	var verbs: Array = []
 	for v in OCCUPANT_VERBS.values() + TERRAIN_VERBS.values() \
 			+ [&"till", &"plant", &"harvest", &"water", &"fish", &"reel",
-				&"craft", &"collect", &"dig", &"repair"]:
+				&"craft", &"collect", &"dig", &"repair", &"fertilise"]:
 		if not verbs.has(v):
 			verbs.append(v)
 	verbs = GameData.sorted_names(verbs)

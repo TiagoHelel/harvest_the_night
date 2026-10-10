@@ -200,6 +200,7 @@ DHUD_POWER,0,POWER %d/%d,ENERGIA %d/%d
 DHUD_POWER_SHORT,0,POWER %d/%d  everything at %d%%,ENERGIA %d/%d  tudo a %d%%
 DHUD_SEED_HEADING,168,# CROP   BAG DAYS /SEAS,# PLANTA SAC DIAS /EST
 DHUD_SEED_ROW,168,%d %-7s %3d %3dd  %2d,%d %-7s %3d %3dd  %2d
+DHUD_MEAL_ROW,168,%d %-9s %3d  +%dd,%d %-9s %3d  +%dd
 DHUD_TO_NIGHT,0,GO TO BED,IR DORMIR
 DHUD_WAITING,0,waiting for a bite,esperando fisgar
 DHUD_WATER,0,WATER %d/%d,ÁGUA %d/%d
@@ -281,6 +282,7 @@ ITEM_OIL,0,oil,óleo
 ITEM_STONE,0,stone,pedra
 ITEM_TECH,0,essence,essência
 ITEM_BONES,0,bones,ossos
+ITEM_BONE_MEAL,0,bone meal,farinha de osso
 ITEM_MOON_STONE,0,moon stone,pedra da lua
 ITEM_WHEAT,0,wheat,trigo
 ITEM_WOOD,0,wood,madeira
@@ -373,6 +375,7 @@ REC_MAKE_SANDBAG,0,make sandbags,fazer sacos de areia
 REC_MAKE_FLOUR,0,make flour,fazer farinha
 REC_MAKE_BREAD,0,bake bread,assar pão
 REC_MAKE_SUGAR,0,make sugar,fazer açúcar
+REC_GRIND_BONE_MEAL,0,grind bone meal,moer farinha de osso
 REC_FENCE_KIT,0,fence kit,kit de cerca
 REC_MAKE_GUNPOWDER,0,make gunpowder,fazer pólvora
 REC_MAKE_GUNPOWDER_COAL,0,make coal gunpowder,fazer pólvora de carvão

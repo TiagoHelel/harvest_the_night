@@ -191,6 +191,11 @@ const HEADING := &"Heading"
 ## would be a frame with no room left for the row.
 const ROW := &"Row"
 
+## **A click with nothing drawn** (task 0222): laid over something that
+## draws itself - the seed strip's bone meal row - so the row keeps its own
+## look and the screen still names no mouse button.
+const HIT := &"Hit"
+
 ## The frame the debug read-out wears - the quiet one, because a developer
 ## overlay that competes with the game is an overlay in the way.
 const OVERLAY := &"Overlay"
@@ -491,6 +496,12 @@ static func _dress_buttons(out: Theme) -> void:
 	out.set_color(&"font_hover_color", ROW, colour(WARM))
 	out.set_color(&"font_pressed_color", ROW, colour(WARM))
 	out.set_color(&"font_disabled_color", ROW, colour(FAINT))
+
+	# **A click with nothing drawn** (task 0222): every state the option
+	# heading's clear box.
+	out.set_type_variation(HIT, &"Button")
+	for state in BUTTON_STATES + ["focus"]:
+		out.set_stylebox(StringName(state), HIT, _flat(nothing))
 
 	# **A variation only has to say what differs.** Everything `Owned` does
 	# not name falls through to `Button`, so this is one colour rather than a

@@ -138,6 +138,7 @@ func _run() -> void:
 	_task_0219_essence()
 	_task_0220_tree_seasons()
 	_task_0221_night_loot()
+	_task_0222_bone_meal()
 
 
 func _finish() -> void:
@@ -3280,14 +3281,16 @@ func _task_0166_long_day() -> void:
 		&"cook_meal": 20, &"cook_fish": 16, &"cook_roast": 13, &"make_bait": 48, &"make_hay": 80,
 		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 24, &"make_flour": 40, &"make_sugar": 24,
 		&"cook_stew": 20, &"cook_omelette": 16, &"make_bread": 30, &"cook_supper": 10,
-		&"make_gunpowder_coal": 16, &"make_incendiary_pepper": 24, &"press_sunflower_oil": 12}
+		&"make_gunpowder_coal": 16, &"make_incendiary_pepper": 24, &"press_sunflower_oil": 12,
+		&"grind_bone_meal": 60}
 	var units := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 96, &"make_gunpowder": 32,
 		&"cook_meal": 40, &"cook_fish": 48, &"cook_roast": 52, &"make_bait": 192, &"make_hay": 80,
 		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 96, &"make_flour": 40, &"make_sugar": 72,
 		&"cook_stew": 40, &"cook_omelette": 48, &"make_bread": 30, &"cook_supper": 60,
-		&"make_gunpowder_coal": 32, &"make_incendiary_pepper": 144, &"press_sunflower_oil": 12}
+		&"make_gunpowder_coal": 32, &"make_incendiary_pepper": 144, &"press_sunflower_oil": 12,
+		&"grind_bone_meal": 60}
 	var ordinary := 0
 	for id in GameData.RECIPES:
 		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty() \
@@ -6796,7 +6799,8 @@ func _task_0221_night_loot() -> void:
 	expect(let_through.is_empty(),
 		"and refuse a cap, a stone count, a rate, a fade, a reach or a share of zero, and a body bigger than a pile",
 		"let through: %s" % str(let_through))
-	expect(GameData.group_members(&"night_leftovers") == [GameData.BONES, GameData.MOON_STONE]
+	expect(GameData.group_members(&"night_leftovers").has(GameData.BONES)
+		and GameData.group_members(&"night_leftovers").has(GameData.MOON_STONE)
 		and GameData.SELL_PRICE.has(GameData.BONES) and GameData.SELL_PRICE.has(GameData.MOON_STONE)
 		and Names.KEYS.get(GameData.BONES, &"") == &"ITEM_BONES"
 		and Names.KEYS.get(GameData.MOON_STONE, &"") == &"ITEM_MOON_STONE"
@@ -6963,6 +6967,182 @@ func _task_0221_night_loot() -> void:
 	expect(bare.is_empty() and said == ["3 bones", "1 moon stone"] and dito == ["3 ossos", "1 pedra da lua"],
 		"the report lists 3 bones and 1 moon stone, and nothing on a bare farm",
 		"%s / %s / %s" % [str(bare), str(said), str(dito)])
+	_completed += 1
+
+
+## 0222 - bone meal: bones ground at the workshop give a plot one more
+## morning of growth, once, on the first morning it grows at all.
+func _task_0222_bone_meal() -> void:
+	# **The resource and its recipe.**
+	var recipe: Dictionary = GameData.RECIPES.get(&"grind_bone_meal", {})
+	var bones_in := int((recipe.get("inputs", {}) as Dictionary).get(GameData.BONES, 0))
+	var chain := str(GameData.check_chain(GameData.RECIPES, GameData.SELL_PRICE))
+	expect(StringName(recipe.get("station", &"")) == &"workshop" and bones_in > 0
+		and recipe.get("output", {}) == {GameData.BONE_MEAL: 1}
+		and int(GameData.SELL_PRICE.get(GameData.BONE_MEAL, 0)) > bones_in * int(GameData.SELL_PRICE[GameData.BONES])
+		and not chain.contains("grind_bone_meal"),
+		"the workshop grinds bones into bone meal worth more than its bones", chain)
+	expect(GameData.group_members(&"night_leftovers").has(GameData.BONE_MEAL)
+		and Names.KEYS.get(GameData.BONE_MEAL, &"") == &"ITEM_BONE_MEAL"
+		and Names.KEYS.get(&"grind_bone_meal", &"") == &"REC_GRIND_BONE_MEAL"
+		and Crafting.recipes_at(&"workshop")[0] == &"barricade_kit",
+		"bone meal is a named night leftover, its recipe named, and the workshop still opens on barricades")
+	var language := I18n.locale()
+	var named := true
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		named = named and Names.of(GameData.BONE_MEAL) != "ITEM_BONE_MEAL" \
+			and Names.of(&"grind_bone_meal") != "REC_GRIND_BONE_MEAL"
+	I18n.use(language)
+	expect(named, "in both languages")
+
+	# **Ground at the workshop**: two bones in, a sack out.
+	var mill := State.create(222001)
+	var bench := Building.anchor_of(mill, Farm.cells_with(mill, &"workshop")[0])
+	Resources.add(mill, GameData.BONES, bones_in)
+	var ground := Crafting.start(mill, bench, &"grind_bone_meal")
+	for _t in int(recipe.get("ticks", 0)) + 2:
+		Crafting.tick(mill)
+	expect(ground and Resources.amount(mill, GameData.BONES) == 0
+		and Resources.amount(mill, GameData.BONE_MEAL) == 1,
+		"the workshop turns the bones into a sack of bone meal",
+		"%d bones, %d meal" % [Resources.amount(mill, GameData.BONES), Resources.amount(mill, GameData.BONE_MEAL)])
+
+	# **Choosing it**: refused with none, chosen with some, put down by a
+	# seed, and on the bumpers' road after the season's seeds.
+	var state := State.create(222002)
+	var seeds := Farming.in_season(state)
+	expect(not Farming.select_bone_meal(state) and not Farming.fertilising(state),
+		"bone meal cannot be chosen with none held")
+	Resources.add(state, GameData.BONE_MEAL, 3)
+	expect(Farming.select_bone_meal(state) and Farming.fertilising(state)
+		and Farming.selected_seed(state) == seeds[0],
+		"with some it is chosen, the seed still chosen under it")
+	expect(Farming.select_seed(state, seeds[1]) and not Farming.fertilising(state),
+		"and a seed chosen puts it down")
+	Farming.select_seed(state, seeds[seeds.size() - 1])
+	var stepped := Farming.step_choice(state, 1) and Farming.fertilising(state)
+	stepped = stepped and Farming.step_choice(state, 1) and not Farming.fertilising(state) \
+		and Farming.selected_seed(state) == seeds[0]
+	stepped = stepped and Farming.step_choice(state, -1) and Farming.fertilising(state)
+	expect(stepped, "the bumpers step from the last seed to the bone meal and round to the first")
+	var winter := State.create(222003)
+	winter["day"] = 3 * GameData.SEASON_DAYS + 1
+	Resources.add(winter, GameData.BONE_MEAL, 1)
+	expect(not Farming.select_bone_meal(winter) and not Farming.fertilising(winter),
+		"and never in winter, when nothing grows")
+
+	# **The verb**: the plot's before planting and watering, never before
+	# a harvest, and a day verb with a pose and a sound.
+	var a: Vector2i = Farming.field_cells(state)[0]
+	var b: Vector2i = Farming.field_cells(state)[1]
+	SuiteKit.crop_supplies(state, GameData.CARROT)
+	Farming.select_seed(state, GameData.CARROT)
+	for cell in [a, b]:
+		Farming.act(state, cell)
+		Farming.act(state, cell)
+	expect(Farming.crop_on(state, a) == GameData.CARROT and Farming.crop_on(state, b) == GameData.CARROT,
+		"fixture: two plots of carrots, sown together")
+	Farming.select_bone_meal(state)
+	var meal := Resources.amount(state, GameData.BONE_MEAL)
+	expect(Interact.verb_at(state, a) == &"fertilise", "with bone meal chosen a sown plot offers it",
+		str(Interact.verb_at(state, a)))
+	Farming.act(state, a)
+	expect(Farming.is_fertilised(state, a) and Resources.amount(state, GameData.BONE_MEAL) == meal - 1
+		and Interact.verb_at(state, a) != &"fertilise" and not Farming.is_fertilised(state, b),
+		"and takes one sack, once")
+	Farming.select_seed(state, GameData.CARROT)
+	expect(Interact.DAY_ONLY.has(&"fertilise") and Interact.DEFAULT_TICKS.has(&"fertilise")
+		and Interact.all_verbs().has(&"fertilise") and Sfx.VERB_SOUNDS.get(&"fertilise", &"") == &"sfx/plant"
+		and PlayerArt.VERBS.get(&"fertilise", &"") == &"plant",
+		"a day verb, as long as a sowing, with the sowing's sound and stoop")
+
+	# **The rule**: the fertilised plot finishes exactly a morning before
+	# the other, and its second morning grants nothing extra.
+	var needed := Farming.days_to_grow(GameData.CARROT)
+	var ready_on := {}
+	var growth_a: Array = []
+	for morning in range(1, needed + 1):
+		for cell in [a, b]:
+			if Farming.is_ready(state, cell):
+				continue
+			state["water_can"] = 1
+			Farming.act(state, cell)
+		Farming.dry_out(state)
+		Farming.morning(state)
+		growth_a.append(int(Farming.plot(state, a)["growth"]))
+		for cell in [a, b]:
+			if Farming.is_ready(state, cell) and not ready_on.has(cell):
+				ready_on[cell] = morning
+	expect(int(ready_on.get(a, 0)) == needed - GameData.FERTILISED_EXTRA_DAYS and int(ready_on.get(b, 0)) == needed,
+		"two carrots sown together: the fertilised one is ready a morning before the other",
+		str(ready_on))
+	expect(growth_a.size() >= 2 and int(growth_a[0]) == 1 + GameData.FERTILISED_EXTRA_DAYS
+		and int(growth_a[1]) == int(growth_a[0]) + 1 and not Farming.is_fertilised(state, a),
+		"its first morning grew it twice, its second once, and the mark is spent", str(growth_a))
+
+	# **It wants the can**: dry, the mark waits; watered, it pays.
+	var dry := State.create(222004)
+	var c: Vector2i = Farming.field_cells(dry)[0]
+	SuiteKit.crop_supplies(dry, GameData.CARROT)
+	Farming.select_seed(dry, GameData.CARROT)
+	Farming.act(dry, c)
+	Farming.act(dry, c)
+	Farming.plot(dry, c)["fertilised"] = true
+	Farming.dry_out(dry)
+	Farming.morning(dry)
+	var after_dry := int(Farming.plot(dry, c)["growth"])
+	dry["water_can"] = 1
+	Farming.act(dry, c)
+	Farming.dry_out(dry)
+	Farming.morning(dry)
+	expect(after_dry == 0 and int(Farming.plot(dry, c)["growth"]) == 1 + GameData.FERTILISED_EXTRA_DAYS
+		and not Farming.is_fertilised(dry, c),
+		"a dry morning grows nothing and keeps the mark; the watered one spends it")
+
+	# **Unsown, it keeps the mark until it is sown; ready, a harvest clears
+	# it; one morning short, it never grows past ready.**
+	var unsown := State.create(222005)
+	var d: Vector2i = Farming.field_cells(unsown)[0]
+	Farming.act(unsown, d)
+	Farming.plot(unsown, d)["fertilised"] = true
+	unsown["water_can"] = 1
+	Farming.dry_out(unsown)
+	Farming.morning(unsown)
+	expect(Farming.is_tilled(unsown, d) and Farming.crop_on(unsown, d) == &"" and Farming.is_fertilised(unsown, d),
+		"an unsown fertilised plot keeps its mark through the morning")
+	var plot_d := Farming.plot(unsown, d)
+	plot_d["crop"] = GameData.CARROT
+	plot_d["growth"] = needed - 1
+	plot_d["watered"] = true
+	Farming.dry_out(unsown)
+	Farming.morning(unsown)
+	expect(int(plot_d["growth"]) == needed and not Farming.is_fertilised(unsown, d),
+		"sown and a morning short, it is ready - never past it - and the mark is spent",
+		str(plot_d))
+	plot_d["fertilised"] = true
+	var yield_before := Resources.amount(unsown, GameData.CARROT)
+	Farming.act(unsown, d)
+	expect(Resources.amount(unsown, GameData.CARROT) > yield_before and not Farming.is_fertilised(unsown, d),
+		"and a harvest clears a mark the crop never used")
+
+	# **Winter grows nothing**, fertilised or not, and the mark waits.
+	var cold := State.create(222006)
+	var e: Vector2i = Farming.field_cells(cold)[0]
+	SuiteKit.crop_supplies(cold, GameData.CARROT)
+	Farming.select_seed(cold, GameData.CARROT)
+	Farming.act(cold, e)
+	Farming.act(cold, e)
+	Farming.plot(cold, e)["fertilised"] = true
+	cold["day"] = 3 * GameData.SEASON_DAYS + 2
+	cold["water_can"] = 1
+	Farming.plot(cold, e)["watered"] = true
+	Farming.dry_out(cold)
+	Farming.morning(cold)
+	expect(int(Farming.plot(cold, e)["growth"]) == 0 and Farming.is_fertilised(cold, e),
+		"a winter morning grows nothing and spends nothing")
+	expect(not Farming.is_fertilised(State.create(222007), Farming.field_cells(State.create(222007))[0]),
+		"and a plot with no mark on it - any save's - is not fertilised")
 	_completed += 1
 
 

@@ -1944,9 +1944,14 @@ func _refresh_plots() -> void:
 		# The earth in its season (task 0159): A012's winter plot when it
 		# has landed, today's until then.
 		var earth := "tilled_wet" if bool(here["watered"]) else "tilled"
-		var seasonal := SeasonView.frame_for("crops/" + earth,
-			_season.season() if _season != null else 0)
-		_plot_sprite(earth if SeasonView.stand_in(seasonal) else seasonal.get_file(), cell)
+		# **Bone meal in the earth** (task 0222): A036's fertilised soil, dry
+		# and wet, in every season - the tilled tile paled until 0235.
+		if bool(here.get("fertilised", false)):
+			_plot_sprite("tilled_fertilised_wet" if bool(here["watered"]) else "tilled_fertilised", cell)
+		else:
+			var seasonal := SeasonView.frame_for("crops/" + earth,
+				_season.season() if _season != null else 0)
+			_plot_sprite(earth if SeasonView.stand_in(seasonal) else seasonal.get_file(), cell)
 
 		if Farm.terrain_at(_state, cell) == Farm.Terrain.GRASS:
 			var edges := tilled_edge_mask(_state, cell)
@@ -2134,6 +2139,10 @@ func _plot_sprite(art: String, cell: Vector2i) -> void:
 		# above the 16x24 corn stand-in in their 16x32 logical canvas.
 		sprite.offset = -Vector2(shape["pivot"])
 		sprite.modulate = PlaceholderArt.art_tint(StringName(art if art.ends_with("_regrow") else art.get_slice("_", 0)))
+	elif shape.has("stand_in"):
+		# Earth standing in for earth (task 0222's fertilised soil): the same
+		# canvas, its own tint.
+		sprite.modulate = PlaceholderArt.art_tint(StringName(art))
 	sprite.set_meta("plot_canvas", shape.get("canvas", Vector2i.ZERO))
 	sprite.set_meta("plot_cell", Grid.index(cell))
 	sprite.set_meta("plot_art", art)

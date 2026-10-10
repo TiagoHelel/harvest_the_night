@@ -130,6 +130,7 @@ const SCENARIOS: Array = [
 	["year_credits", "the credits before the year ending", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
+	["bone_meal", "Spring 2 at noon: a starter row turned, plain and fertilised side by side, dry then watered, and carrot sprouts on fertilised earth dry and wet; bone meal chosen in the strip", ""],
 	["night_loot", "the morning after Spring 7's Full Moon, fought from a defended farm: the report counting the bones and moon stones lying about; then him out by the moon stone nearest the house, the night's bones about it", "ResultScreen"],
 	["north_band", "standing on the north spawn ground", ""],
 	["new_ore", "beside the copper, the coal and the gold", ""],
@@ -746,6 +747,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"year_credits": _set_year_credits(state)
 		"trampled": _set_trampled(state)
 		"night_loot": _set_night_loot(state)
+		"bone_meal": _set_bone_meal(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -902,6 +904,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "days":
 		await _shoot("days_spring_morning", folder)
 		await _take_days(main, state, folder)
+		return
+	if name == "bone_meal":
+		await _shoot("bone_meal", folder)
+		await _take_meal_workshop(main, state, folder)
 		return
 	if name == "night_loot":
 		await _shoot("night_loot", folder)
@@ -2351,6 +2357,62 @@ func _set_tech(state: Dictionary) -> void:
 		if not Tech.buy(state, id):
 			push_warning("shot: could not buy %s" % id)
 	Sim.advance(state, 2)
+
+
+## **Bone meal in the earth** (task 0222): Spring 2 at noon. The top row
+## of the first starter bed six wide, turned: plain dry, fertilised dry,
+## plain wet, fertilised wet, then a carrot sprout on fertilised earth dry
+## and one wet. He stands at the foot of the bed, clear of the row, the
+## strip's bone meal chosen.
+func _set_bone_meal(state: Dictionary) -> void:
+	_on_date(state, 2)
+	Resources.gain(state, {GameData.BONE_MEAL: 6})
+	var row: Array = []
+	for cell in Farming.field_cells(state):
+		var at: Vector2i = cell
+		var wide := true
+		for dx in 6:
+			wide = wide and Farm.terrain_at(state, at + Vector2i(dx, 0)) == Farm.Terrain.SOIL
+		if wide:
+			for dx in 6:
+				row.append(at + Vector2i(dx, 0))
+			break
+	for i in row.size():
+		var here: Dictionary = Farming.EMPTY_PLOT.duplicate()
+		(state["plots"] as Dictionary)[Grid.index(row[i] as Vector2i)] = here
+		here["fertilised"] = i % 2 == 1 or i >= 4
+		here["watered"] = i in [2, 3, 5]
+		if i >= 4:
+			here["crop"] = GameData.CARROT
+			here["growth"] = 1
+	Farming.select_bone_meal(state)
+	_look_at((row[2] as Vector2i) + Vector2i(0, 3))
+	Sim.advance(state, maxi(Phases.tick_at_minute(WorldView.NOON_MINUTE)
+		- int(state["tick"]), 1))
+	print("  bone_meal: row %s, %d fertilised, bone meal chosen: %s" % [str(row),
+		row.filter(func(c: Vector2i) -> bool: return Farming.is_fertilised(state, c)).size(),
+		str(Farming.fertilising(state))])
+
+
+## **The bench that grinds it** (task 0222): six bones held, him at the
+## workshop, bone meal chosen among its kits.
+func _take_meal_workshop(main: Node, state: Dictionary, folder: String) -> void:
+	Resources.add(state, GameData.BONES, 6)
+	var bench: Vector2i = Farm.cells_with(state, &"workshop")[0]
+	_stand(state, bench + Vector2i.UP)
+	state["player"]["facing"] = Player.SOUTH
+	Crafting.select_recipe(state, &"grind_bone_meal")
+	_only_showing(main, "WorkshopPanel")
+	var view := main.get_node("%WorldView") as WorldView
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	await process_frame
+	await _shoot("bone_meal_workshop", folder)
+	print("  bone_meal_workshop: at %s, the bench chooses %s" % [str(Player.cell(state)),
+		str(Crafting.selected_at(state, &"workshop"))])
 
 
 ## **What the night leaves behind** (task 0221): Spring 7, a Full Moon,

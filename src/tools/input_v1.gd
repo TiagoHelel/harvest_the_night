@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 47
+const V1_CASES := 48
 
 
 func _process(delta: float) -> bool:
@@ -97,6 +97,7 @@ func _run() -> void:
 	await _case_0195_tips()
 	await _case_0220_tree_pages()
 	await _case_0221_collect()
+	await _case_0222_fertilise()
 	_finish()
 
 
@@ -3309,6 +3310,50 @@ func _case_0221_collect() -> void:
 		and trade != null and trade.disabled,
 		"and A on the pad trades the next, after which the button is off",
 		"%d stones, %d essence" % [Resources.amount(state, GameData.MOON_STONE), Tech.held(state)])
+	await close_scene()
+	_completed += 1
+
+
+## 0222 - 7 chooses bone meal and SPACE fertilises the faced plot; a click on
+## the row puts it down, and LB steps back round to it.
+func _case_0222_fertilise() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(3)
+	House.leave(state)
+	# A tilled bed below him, and two sacks of bone meal.
+	var bed: Vector2i = Farming.field_cells(state)[0]
+	(state["plots"] as Dictionary)[Grid.index(bed)] = Farming.EMPTY_PLOT.duplicate()
+	SuiteKit.stand_the_farmer(state, bed + Vector2i(0, -1))
+	state["player"]["facing"] = Player.SOUTH
+	Resources.add(state, GameData.BONE_MEAL, 2)
+	await frames(2)
+	await tap_key(KEY_7)
+	await frames(2)
+	var row := require_control("MealRow") as Label
+	expect(Farming.fertilising(state) and row != null and row.theme_type_variation == UiKit.WARM,
+		"7 chooses bone meal, and its row lights",
+		"%s, %s" % [str(Farming.fertilising(state)), str(row.theme_type_variation) if row else "none"])
+	expect(Player.target(state) == bed and Interact.verb_at(state, bed) == &"fertilise",
+		"the faced bed offers it", str(Interact.verb_at(state, bed)))
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return Farming.is_fertilised(state, bed), "the bed to be fertilised", 90)
+	expect(Farming.is_fertilised(state, bed) and Resources.amount(state, GameData.BONE_MEAL) == 1,
+		"and SPACE puts one sack in its earth",
+		"%d left" % Resources.amount(state, GameData.BONE_MEAL))
+
+	# **The mouse puts it down; the pad's LB steps back round to it.**
+	await click_control("MealRowButton")
+	await frames(2)
+	expect(not Farming.fertilising(state), "a click on the row puts it down")
+	await _pad_tap(JOY_BUTTON_LEFT_SHOULDER)
+	await frames(2)
+	expect(Farming.fertilising(state), "and LB steps from the first seed round to it")
 	await close_scene()
 	_completed += 1
 

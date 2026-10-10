@@ -1474,17 +1474,21 @@ func _work_fixture(verb: StringName, facing: int) -> Vector2i:
 			on[idx] = {"id": &"tree"}
 		&"mine":
 			on[idx] = {"id": &"rock"}
-		&"till", &"plant", &"water", &"harvest":
+		&"till", &"plant", &"water", &"harvest", &"fertilise":
 			terrain[idx] = Farm.Terrain.SOIL
 			if verb != &"till":
 				var plot := Farming.EMPTY_PLOT.duplicate()
-				if verb != &"plant":
+				# Bone meal (task 0222) goes into turned earth not yet sown.
+				if verb != &"plant" and verb != &"fertilise":
 					plot["crop"] = crop
 				if verb == &"harvest":
 					plot["growth"] = int(GameData.CROPS[crop]["growth_days"])
 				_state["plots"][idx] = plot
 			_state["selected_seed"] = crop
 			_state["water_can"] = GameData.WATER_CAN_CAPACITY
+			if verb == &"fertilise":
+				Resources.add(_state, GameData.BONE_MEAL, 1)
+				Farming.select_bone_meal(_state)
 		&"fish", &"reel":
 			terrain[idx] = Farm.Terrain.WATER
 		&"collect":

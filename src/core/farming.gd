@@ -25,6 +25,19 @@ extends RefCounted
 ## `Interact` asks this file what a field tile offers and gets back `till`,
 ## `plant`, `harvest` or nothing, so the highlight and the tooltip can say what
 ## the key will actually do rather than "farm".
+##
+## ## Bone meal (task 0222)
+##
+## Chosen in the strip beside the seeds, it makes `fertilise` the verb of
+## every tilled plot not yet marked - planted or not - before planting and
+## watering, never before a harvest. The mark (`fertilised` on the plot,
+## read with a default, so no save needs mending) is spent on the first
+## morning the plot grows at all: watered, planted, in a season that grows,
+## and short of ready. That morning it grows `FERTILISED_EXTRA_DAYS` more,
+## never past ready. **It must have been watered**: bone meal is a better
+## morning, not a morning without the can, so a dry plot keeps its mark
+## until the can comes. A plot waiting to be sown keeps it too, and
+## harvesting clears it.
 
 ## What one plot looks like when it has just been turned over.
 ##
@@ -54,6 +67,10 @@ static func initial() -> Dictionary:
 		# nothing at all until `State.create()` learned to refuse duplicates.
 		# Keep the affordable starter when new ids sort before carrot (0168).
 		"selected_seed": GameData.CARROT,
+		# **Bone meal chosen in the strip** (task 0222) rather than the seed:
+		# the seed stays chosen underneath, and is what a fertilised plot is
+		# sown with.
+		"bone_meal_chosen": false,
 		# Tiles' worth of water in hand. Filled by standing next to water, spent
 		# one tile at a time. Starts empty: the farmer walks out of the house in
 		# the morning carrying nothing.
@@ -96,12 +113,51 @@ static func refresh_seed(state: Dictionary) -> void:
 
 
 ## Choose what the next `plant` puts in the ground. Refuses anything that is
-## not an in-season crop rather than failing later at the furrow.
+## not an in-season crop rather than failing later at the furrow. A seed
+## chosen puts the bone meal down (task 0222).
 static func select_seed(state: Dictionary, id: StringName) -> bool:
 	if id not in in_season(state):
 		return false
 	state["selected_seed"] = id
+	state["bone_meal_chosen"] = false
 	return true
+
+
+## **Choose bone meal** (task 0222): refused with none held, or in a season
+## where nothing grows.
+static func select_bone_meal(state: Dictionary) -> bool:
+	if Resources.amount(state, GameData.BONE_MEAL) <= 0 or _dormant(state):
+		return false
+	state["bone_meal_chosen"] = true
+	return true
+
+
+## Whether bone meal is what the field's key spends: chosen, held, and a
+## season that grows. Running out puts the seed back by itself.
+static func fertilising(state: Dictionary) -> bool:
+	return bool(state.get("bone_meal_chosen", false)) \
+		and Resources.amount(state, GameData.BONE_MEAL) > 0 and not _dormant(state)
+
+
+## **Step the strip's choice** (task 0222) - the pad's road to it, LB and
+## RB: through today's seeds and then the bone meal when there is some, and
+## round. False when there is nothing to step to.
+static func step_choice(state: Dictionary, step: int) -> bool:
+	var choices: Array = in_season(state)
+	if Resources.amount(state, GameData.BONE_MEAL) > 0 and not _dormant(state):
+		choices.append(GameData.BONE_MEAL)
+	if choices.size() < 2 or step == 0:
+		return false
+	var now := choices.find(GameData.BONE_MEAL if fertilising(state) else selected_seed(state))
+	var next := posmod(maxi(now, 0) + step, choices.size())
+	if StringName(choices[next]) == GameData.BONE_MEAL:
+		return select_bone_meal(state)
+	return select_seed(state, StringName(choices[next]))
+
+
+## Whether nothing grows outdoors today (0171).
+static func _dormant(state: Dictionary) -> bool:
+	return Calendar.season_id(Calendar.date(state)) in GameData.NO_GROWTH_SEASONS
 
 
 ## Pick by position in `in_season()`, which is what the number keys send.
@@ -157,6 +213,11 @@ static func plot(state: Dictionary, cell: Vector2i) -> Dictionary:
 
 static func is_tilled(state: Dictionary, cell: Vector2i) -> bool:
 	return not plot(state, cell).is_empty()
+
+
+## Whether bone meal is waiting in this plot's earth (task 0222).
+static func is_fertilised(state: Dictionary, cell: Vector2i) -> bool:
+	return bool(plot(state, cell).get("fertilised", false))
 
 
 ## Starter soil beds and turned grass, in cell-index order. Terrain stays
@@ -295,10 +356,14 @@ static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 	if not is_tilled(state, cell):
 		var terrain := Farm.terrain_at(state, cell)
 		return &"till" if terrain in [Farm.Terrain.GRASS, Farm.Terrain.SOIL] else &""
-	if crop_on(state, cell) == &"":
-		return &"plant"
 	if is_ready(state, cell):
 		return &"harvest"
+	# **Bone meal in hand** (task 0222): any tilled plot not yet marked
+	# takes it, sown or not, before it is sown or watered.
+	if fertilising(state) and not is_fertilised(state, cell):
+		return &"fertilise"
+	if crop_on(state, cell) == &"":
+		return &"plant"
 	# **The one chore.** A growing crop used to offer nothing at all, which made
 	# the middle of a crop's life a place the player had no reason to stand. Dry
 	# ground with water in the can offers the can.
@@ -320,6 +385,8 @@ static func act(state: Dictionary, cell: Vector2i) -> void:
 			_harvest(state, cell)
 		&"water":
 			_water(state, cell)
+		&"fertilise":
+			_fertilise(state, cell)
 
 
 ## The explicit hoe road, separate from SPACE's water/harvest verb.
@@ -411,6 +478,17 @@ static func _water(state: Dictionary, cell: Vector2i) -> void:
 		_worked(state, at)
 
 
+## One bone meal into one plot's earth (task 0222). Nothing taken when it
+## will not go.
+static func _fertilise(state: Dictionary, cell: Vector2i) -> void:
+	if not fertilising(state) or not is_tilled(state, cell) or is_fertilised(state, cell):
+		return
+	if not Resources.spend(state, GameData.BONE_MEAL, 1):
+		return
+	plot(state, cell)["fertilised"] = true
+	_worked(state, cell)
+
+
 ## Record planted, watered plots for tomorrow before drying the field.
 static func dry_out(state: Dictionary) -> void:
 	var plots: Dictionary = state["plots"]
@@ -443,6 +521,8 @@ static func _harvest(state: Dictionary, cell: Vector2i) -> void:
 		here["watered"] = false
 		here.erase("regrowing")
 	here.erase("morning_credit")
+	# Bone meal a ready crop never used goes with the crop (task 0222).
+	here.erase("fertilised")
 	_worked(state, cell)
 
 
@@ -484,7 +564,15 @@ static func morning(state: Dictionary) -> void:
 		var needed := days_to_grow(crop)
 		if int(here["growth"]) >= needed:
 			continue
-		here["growth"] = int(here["growth"]) + 1
+		# **Bone meal's morning** (task 0222): the first that grows the plot
+		# at all grows it `FERTILISED_EXTRA_DAYS` more, once, and never past
+		# ready - a regrowing plant's too, which still waits its regrowth's
+		# mornings less that one. Winter has already gone on above.
+		var grows := 1
+		if bool(here.get("fertilised", false)):
+			grows += GameData.FERTILISED_EXTRA_DAYS
+			here.erase("fertilised")
+		here["growth"] = mini(int(here["growth"]) + grows, needed)
 		if int(here["growth"]) == needed:
 			Events.add(state, &"crop_ready", {"crop": crop, "cell": _as_pair(Grid.cell(int(idx)))})
 

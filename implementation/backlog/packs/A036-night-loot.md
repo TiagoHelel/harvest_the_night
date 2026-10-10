@@ -21,13 +21,22 @@ At 1080p, next to the 32px farmer, the pickups must read as small loot lying on 
 
 ## Deliverables
 
-The table is provisional: game task 0222 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+**Final since game task 0222** (2026-10-10). Tasks 0221 and 0222 drew every row below in code or as a tinted stand-in at exactly this canvas and pivot, and the game reads them at these runtime names. Start only when `python implementation/backlog/assets.py next` offers this pack.
+
+What the game settled:
+
+- **The pickups lie on one cell each.** A cell holds bones, a moon stone, or both, drawn in that order (`src/ui/loot_view.gd`).
+  - The 16x16 canvas is the cell itself.
+  - They lie on the ground layer, under the farmer and every actor, by day and by night.
+- **The moon stone's light is code.** Its sprite carries `light_xy` (6,8). The game centres a faint day halo and a cold night glow there (`LootView.STONE_LIGHT`, `Lighting`).
+- **The fertilised soil is the plot's earth.** It replaces `tilled` / `tilled_wet` while the plot is marked, in every season, under a crop or bare. It goes back to the plain tile the morning the mark is spent (`src/ui/world_view.gd`).
+- **The icons follow the inventory's family:** 16x16 at (8,8) for the panels and 10x10 at (5,5) for compact rows. Each is looked up as `icon_<id>` / `hud_<id>`.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
-| `bone_pile` | 16x16 | (8,14) | 1 / 0.55 / static | A low heap of 3-4 pale bones (long bones, a rib), no skull. Visible 11-13 wide x 6-8 tall. Goes to `sprites/props/`. |
-| `moon_stone_0..1` | 16x16 | (8,14) | 2 / 0.4 / loop | A smooth, rounded pale stone with a cool blue-white crescent sheen. Not a faceted gem and not a crystal cluster. Visible 9-11 wide x 7-9 tall. Goes to `sprites/props/`. See the shimmer rule below. |
-| `tilled_fertilised` | 16x16 | (8,16) | 1 / 0.55 / static | Opaque. Today's dry tilled soil with bone-meal clusters. Goes to `sprites/crops/`. |
+| `bone_pile` | 16x16 | (8,14) | 1 / 0.55 / static | A low heap of 3-4 pale bones (long bones, a rib), no skull. Visible 11-13 wide x 6-8 tall (the code drawing: 12 x 7, its lowest row 13). One drawing for any pile, 1 to 9 bones. Goes to `sprites/props/`. |
+| `moon_stone_0..1` | 16x16 | (8,14) | 2 / 0.4 / loop | A smooth, rounded pale stone with a cool blue-white crescent sheen. Not a faceted gem and not a crystal cluster. Visible 9-11 wide x 7-9 tall (the code drawing: 10 x 8). `light_xy` (6,8). Goes to `sprites/props/`. See the shimmer rule below. |
+| `tilled_fertilised` | 16x16 | (8,16) | 1 / 0.55 / static | Opaque. Today's dry tilled soil with bone-meal clusters. Drawn under a crop at any stage. Goes to `sprites/crops/`. |
 | `tilled_fertilised_wet` | 16x16 | (8,16) | 1 / 0.55 / static | Opaque. The same plot, damp. Goes to `sprites/crops/`. |
 | `icon_bones` / `hud_bones` | 16x16 / 10x10 | (8,8) / (5,5) | 1 / 1.0 / static | Two pale bones side by side on a diagonal, with knobbed ends. Cream, so it never reads as the grey iron ingot. |
 | `icon_bone_meal` / `hud_bone_meal` | 16x16 / 10x10 | (8,8) / (5,5) | 1 / 1.0 / static | A small open burlap sack of pale powder, with the knobbed end of one bone sticking out. The bone is what tells it apart from a flour sack. |

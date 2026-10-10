@@ -26,6 +26,12 @@ extends Control
 ## of numbers. Six rows per page come from `Farming.seeds()`; number keys
 ## always pick the matching row on the visible page (task 0168).
 ##
+## **Bone meal under them** (task 0222): a seventh row, how much is held
+## and the morning it buys, lit while it is what the field's key spends.
+## Chosen with 7 or a click on the row, and put down the same way or with
+## a seed's key; LB and RB - Q and E - step through the seeds and the meal,
+## which is how a pad chooses either.
+##
 ## ## The watering can
 ##
 ## Under the strip, because the two are one chore: what am I about to plant,
@@ -114,6 +120,10 @@ const YEAR_AT := Vector2(4, 16)
 const SEED_ACTIONS: Array = [&"slot_1", &"slot_2", &"slot_3", &"slot_4",
 	&"slot_5", &"slot_6"]
 
+## **Bone meal's slot** (task 0222): the seventh, under the six seeds. The
+## night's hotbar reads all eight; by day the seeds take six.
+const MEAL_ACTION := &"slot_7"
+
 ## The bait choice (task 0181), under the fishing line.
 const BAIT_AT := Vector2(186, 220)
 
@@ -140,6 +150,8 @@ var _seed_badge: Label
 var _seed_previous: Button
 var _seed_next: Button
 var _seed_rows: Dictionary = {}     # crop id -> Label
+var _meal_row: Label
+var _meal_button: Button
 var _water: Label
 var _line: Label
 var _bait: Button
@@ -196,7 +208,7 @@ func _ready() -> void:
 	# The can sits under the seed strip, because the two are the same chore:
 	# what am I about to plant, and have I got water for it.
 	_water = _label("WaterCan",
-		Vector2(7, 46 + SEED_ACTIONS.size() * 10 + 3), UiKit.DIM)
+		Vector2(7, 46 + SEED_ACTIONS.size() * 10 + 13), UiKit.DIM)
 
 	# Middle of the screen, under the farmer rather than in a corner: the
 	# player is looking at the water, not at the top bar.
@@ -263,7 +275,8 @@ func _build_seed_strip() -> void:
 	strip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	strip.color = Color(0.05, 0.04, 0.09, 0.66)
 	strip.position = Vector2(4, 33)
-	strip.size = Vector2(168, 108)
+	# Deeper by a row since task 0222, for the bone meal under the seeds.
+	strip.size = Vector2(168, 116)
 	add_child(strip)
 
 	var heading := _label("SeedHeading", Vector2(7, 35), UiKit.WARM)
@@ -276,9 +289,25 @@ func _build_seed_strip() -> void:
 			(0 if _state.is_empty() else Resources.amount(_state, Farming.packet(id))),
 			Farming.days_to_grow(id), Farming.value_per_season(id)])
 		_seed_rows[id] = row
-	_seed_previous = _seed_button("SeedPrevious", &"SEED_PREVIOUS", Vector2(7, 123), -1)
-	_seed_next = _seed_button("SeedNext", &"SEED_NEXT", Vector2(114, 123), 1)
-	_seed_badge = _label("SeedPage", Vector2(77, 125), UiKit.DIM)
+	# **Bone meal**, a row under the six (task 0222), and a click on it
+	# chooses it or puts it down - through a button with nothing drawn,
+	# laid over the row: a screen names no mouse button (0095), and the row
+	# keeps the seed rows' look.
+	_meal_row = _label("MealRow", Vector2(7, 46 + SEED_ACTIONS.size() * 10), UiKit.DIM)
+	_meal_button = Button.new()
+	_meal_button.name = "MealRowButton"
+	_meal_button.focus_mode = Control.FOCUS_NONE
+	_meal_button.theme_type_variation = UiKit.HIT
+	_meal_button.position = _meal_row.position
+	_meal_button.custom_minimum_size = Vector2(160, 10)
+	_meal_button.size = Vector2(160, 10)
+	_meal_button.pressed.connect(func() -> void:
+		if _toggle_meal():
+			_refresh(true))
+	add_child(_meal_button)
+	_seed_previous = _seed_button("SeedPrevious", &"SEED_PREVIOUS", Vector2(7, 131), -1)
+	_seed_next = _seed_button("SeedNext", &"SEED_NEXT", Vector2(114, 131), 1)
+	_seed_badge = _label("SeedPage", Vector2(77, 133), UiKit.DIM)
 
 
 func _seed_button(node_name: String, key: StringName, at: Vector2, step: int) -> Button:
@@ -353,12 +382,38 @@ func _unhandled_input(event: InputEvent) -> void:
 			_step_bait(step)
 			get_viewport().set_input_as_handled()
 			return
+	# **The strip's own two roads** (task 0222), outdoors with no panel up:
+	# the bumpers step its choice, seeds and bone meal, and 7 is the meal.
+	if not House.inside(_state) and StringName(_state["open_panel"]) == &"":
+		var along := 0
+		if event.is_action_pressed(&"hotbar_next"):
+			along = 1
+		elif event.is_action_pressed(&"hotbar_prev"):
+			along = -1
+		if along != 0:
+			if Farming.step_choice(_state, along):
+				get_viewport().set_input_as_handled()
+			return
+		if event.is_action_pressed(MEAL_ACTION):
+			if _toggle_meal():
+				get_viewport().set_input_as_handled()
+			return
 	for slot in SEED_ACTIONS.size():
 		if not event.is_action_pressed(SEED_ACTIONS[slot]):
 			continue
 		if Farming.select_seed_at(_state, _seed_page * SEED_ACTIONS.size() + slot):
 			get_viewport().set_input_as_handled()
 		return
+
+
+## **Bone meal chosen, or put down** for the seed (task 0222): the row's
+## click and its key. The rules decide whether it goes.
+func _toggle_meal() -> bool:
+	if _state.is_empty() or int(_state["phase"]) != Phases.DAY:
+		return false
+	if Farming.fertilising(_state):
+		return Farming.select_seed(_state, Farming.selected_seed(_state))
+	return Farming.select_bone_meal(_state)
 
 
 ## Whether the bait choice is up (task 0181): by day, outdoors with no panel
@@ -516,7 +571,7 @@ func _refresh(force: bool) -> void:
 	_seed_badge.text = I18n.t(&"DHUD_NO_SEEDS") if seeds.is_empty() else I18n.f(&"SEED_PAGE", [_seed_page + 1,
 		ceili(float(seeds.size()) / SEED_ACTIONS.size())])
 	_seed_badge.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if seeds.is_empty() else TextServer.AUTOWRAP_OFF
-	_seed_badge.position = Vector2(7, 46) if seeds.is_empty() else Vector2(77, 125)
+	_seed_badge.position = Vector2(7, 46) if seeds.is_empty() else Vector2(77, 133)
 	_seed_badge.size = Vector2(158, 30) if seeds.is_empty() else Vector2(32, 10)
 	_seed_previous.visible = daylight and not seeds.is_empty()
 	_seed_next.visible = daylight and not seeds.is_empty()
@@ -524,6 +579,16 @@ func _refresh(force: bool) -> void:
 	_seed_next.disabled = (_seed_page + 1) * SEED_ACTIONS.size() >= seeds.size()
 	_seed_previous.text = I18n.t(&"SEED_PREVIOUS")
 	_seed_next.text = I18n.t(&"SEED_NEXT")
+
+	# **Bone meal** (task 0222): how much is held and the morning it buys,
+	# lit while it is what the key spends. Not in a winter, when nothing
+	# grows and the strip says so where the rows were.
+	_meal_row.text = I18n.f(&"DHUD_MEAL_ROW", [SEED_ACTIONS.size() + 1,
+		Names.of(GameData.BONE_MEAL), Resources.amount(_state, GameData.BONE_MEAL),
+		GameData.FERTILISED_EXTRA_DAYS])
+	_meal_row.visible = daylight and not seeds.is_empty()
+	_meal_button.visible = _meal_row.visible
+	_meal_row.theme_type_variation = UiKit.WARM if Farming.fertilising(_state) else UiKit.DIM
 
 	# **The line, while there is one.** Waiting says so quietly; a bite shouts,
 	# because the window is a second and a half.

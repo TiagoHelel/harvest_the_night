@@ -591,3 +591,30 @@ well leaves, before any pile is full (`night_pay.gd`'s new columns):
   essence from 256 to 288, still short of the tree's 294.
 - **What lies about fades** after `LOOT_FADE_DAYS` (3) mornings, so a farm
   nobody walks never holds more than three nights of it.
+
+## 0222 - bone meal (2026-10-10)
+
+**The rule:** two bones make a sack of bone meal at the workshop. A sack
+puts one more morning of growth into one plot, once.
+
+**Two bones a sack** (`grind_bone_meal`), against 0221's bones a night held
+well:
+
+| Season | Bones a night | Sacks a night |
+|---|---|---|
+| spring | 11 | 5 |
+| summer | 34 | 17 |
+| autumn | 59 | 29 |
+| winter | 82 | 41, and nothing grows to spend them on |
+
+- **A handful of plots in spring, never the field.** The starter beds hold
+  sixty plots, and a spring night's bones fertilise five of them.
+- **More later, as the field grows.** By autumn a night's sacks are
+  about half a big field's.
+- **A sack sells for $4**, its two bones for $2: `check_chain` holds.
+- **What the morning is worth:** a plot's season divided by fourteen days.
+  That is about $1 on a carrot and $5 on a strawberry, so the sack's price
+  sits inside what it buys in the field.
+- **The workshop can grind sixty sacks a day.** A sack takes twenty game
+  minutes, so the bench is never what stands between the bones and the
+  field.

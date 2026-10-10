@@ -59,6 +59,8 @@ const VERB_SOUNDS := {
 	&"collect": &"sfx/collect",
 	# A pig's truffle dug up (task 0185): the collect sound until 0281.
 	&"dig": &"sfx/collect",
+	# Bone meal into the furrow (task 0222): the planting sound until 0281.
+	&"fertilise": &"sfx/plant",
 	&"craft": &"sfx/craft",
 	&"trade": &"sfx/trade",
 	# The shipping bin's lid (task 0189): the stall's sale until 0281.

@@ -319,6 +319,9 @@ const INCENDIARY := &"incendiary"
 ## the moon stones along the road the horde came by. `Loot` lays them and
 ## the farmer's boots pick them up.
 const BONES := &"bones"
+## **Bones ground into the ground's own** (task 0222): bone meal, one more
+## morning of growth for a plot. The night paying for the day.
+const BONE_MEAL := &"bone_meal"
 const MOON_STONE := &"moon_stone"
 const MONEY := &"money"
 const ENERGY := &"energy"
@@ -331,7 +334,7 @@ const RESOURCES: Array = [
 	OLD_CATFISH, GOLDEN_QUEEN, GHOST_PIKE, ICE_STURGEON,
 	WORM, BAIT, STRAW, HAY, EGG, MILK, WOOL, TRUFFLE,
 	WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, SANDBAG, FLOUR, SUGAR, BREAD,
-	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH, BONES, MOON_STONE,
+	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH, BONES, BONE_MEAL, MOON_STONE,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
 
@@ -466,6 +469,9 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	# trades for essence at the tree (`Tech.trade_moon_stones`).
 	BONES: 1,                        # LEVER: money each, 1-3
 	MOON_STONE: 20,                  # LEVER: money each, 10-40
+	# Above its two bones (`check_chain`), and well under the morning of
+	# growth it buys a good crop. Its worth is the field's, not the stall's.
+	BONE_MEAL: 4,                    # LEVER: money each, 3-8
 }
 
 ## What the shop charges, as a multiple of what it pays.
@@ -622,6 +628,10 @@ const WATER_CAN_CAPACITY := 8           # LEVER: tiles per fill, 3-20
 
 ## Empty turned grass returns to lawn; original soil beds stay forever.
 const TILLED_GRASS_FADES_DAYS := 3       # LEVER: idle empty grass plots, 1-7 mornings
+
+## **What bone meal buys** (task 0222): the extra mornings a fertilised plot
+## grows on the first morning it grows at all, and then the mark is spent.
+const FERTILISED_EXTRA_DAYS := 1        # LEVER: mornings, 1-2
 
 
 # ================================================================== gathering
@@ -1131,6 +1141,16 @@ const RECIPES: Dictionary = {
 		"inputs": {BEET: 1},
 		"output": {SUGAR: 3},           # LEVER: sugar a beet makes, 2-4
 		"ticks": DAY_TICKS * 10 / 240,  # LEVER: fraction of a day
+	},
+	# **Bones into bone meal** (task 0222), at the workshop the farm starts
+	# with, so the first night's bones are the second morning's. Two a sack:
+	# a spring night held well leaves about eleven (0221), a handful of
+	# plots' worth and never the field.
+	&"grind_bone_meal": {
+		"station": &"workshop",
+		"inputs": {BONES: 2},           # LEVER: bones a sack, 1-4
+		"output": {BONE_MEAL: 1},
+		"ticks": DAY_TICKS * 4 / 240,   # LEVER: fraction of a day
 	},
 }
 
@@ -1697,7 +1717,7 @@ const RESOURCE_GROUPS: Array = [
 	{"name": &"animal_goods", "members": [EGG, MILK, WOOL, TRUFFLE, MEAT]},
 	{"name": &"artisan_goods", "members": [FOOD, OIL, WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, FLOUR, SUGAR, BREAD]},
 	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
-	{"name": &"night_leftovers", "members": [BONES, MOON_STONE]},
+	{"name": &"night_leftovers", "members": [BONES, BONE_MEAL, MOON_STONE]},
 	{"name": &"farm", "members": [MONEY, ENERGY, TECH]},
 ]
 
@@ -3005,6 +3025,9 @@ const MAP_SITES: Dictionary = {
 static func validate() -> Array:
 	var errors: Array = []
 	errors.append_array(check_rewards(REWARDS))
+	if FERTILISED_EXTRA_DAYS < 1:
+		errors.append("bone meal grows a plot %d mornings: it needs at least one"
+			% FERTILISED_EXTRA_DAYS)
 	errors.append_array(check_loot(LOOT_PILE_CAP, MOON_STONES,
 		MOON_STONE_ESSENCE, LOOT_FADE_DAYS, LOOT_REACH, ENEMIES, BONES_EVERY))
 	errors.append_array(check_tech_tree(TECH_TREE))
@@ -4861,6 +4884,8 @@ static func digest() -> int:
 		"no_growth_seasons": NO_GROWTH_SEASONS,
 		"water": [WATER_CAN_CAPACITY],
 		"tilled_grass_fades_days": TILLED_GRASS_FADES_DAYS,
+		# Bone meal's morning (task 0222).
+		"fertilised": [FERTILISED_EXTRA_DAYS],
 		"power": [BASE_ENERGY, UNPOWERED_PERCENT],
 		"livestock": LIVESTOCK,
 		"livestock_sources": LIVESTOCK_SOURCES,

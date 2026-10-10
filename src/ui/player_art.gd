@@ -82,6 +82,9 @@ const VERBS := {
 	&"collect": &"collect",
 	# Digging a truffle (task 0185): the collect strip until A025's tend.
 	&"dig": &"collect",
+	# A handful of bone meal (task 0222): the planting strip, the same
+	# stoop over the furrow.
+	&"fertilise": &"plant",
 	&"craft": &"craft",
 	&"trade": &"trade",
 	# Lifting the shipping bin's lid (task 0189): the trade strip until A009's
