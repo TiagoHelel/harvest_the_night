@@ -377,3 +377,89 @@ would have cut these longer days short; it now scales with the tick budget.
 The balance reader parsed all four results, and each of its seven lever
 patterns matched exactly once. Its stale brownout pattern now accepts the
 current value of 50 rather than silently skipping the lever.
+
+## 0194 - the day's money (2026-10-10)
+
+**The rule** (plan section 5): at the start of each season, what a
+well-worked day earns should buy about one new defence.
+
+**The bands** (`GameData.DAY_TARGETS`, levers): spring $180-400, summer
+$205-460, autumn $235-530, winter $270-610.
+- They are centred on a gun tower's ten wood and twelve iron at the stall's
+  prices in spring: $246 now that wood is $1, $266 before.
+- Each season asks about a seventh more, because the towers rise a level
+  and the nights grow.
+
+**A well-worked day** runs from 06:00 to dusk, and the animals' to 01:30.
+- Its money is what the day makes, at what the stall pays, less what it
+  buys there.
+- An input the season makes for itself costs nothing that day. It is the
+  farm's own (`Economy.input_cost`, from 0193's `seasonal_supply` with the
+  stall's shelves empty).
+
+**The farm under it** (`GameData.DAY_FARM`, levers) is what a player who
+spent the previous season on that way of earning has at the season's start.
+
+| | Spring | Summer | Autumn | Winter |
+|---|---|---|---|---|
+| Tool tier | 0 (basic, bamboo rod) | 1 (iron, fibre rod) | 1 | 2 (gold, iron rod) |
+| Field | 60 plots | 80 | 80 | - (nothing grows) |
+| Herd | - (a new game has no homes) | 8 hens, a cow, 2 sheep, a pig | 8 hens, 2 cows, 3 sheep, 3 pigs | the same |
+| Machines | - (and nothing to fill them) | 4 jars of jelly, 1 of pickles, a keg of juice, a dairy's cheese | 4 kegs of wine, 4 jars of jelly, pickles, cheese | 6 kegs of wine and the rest |
+
+**The five ways of earning** (`Economy`, computed from the tables, never
+played):
+- **Crops:** the season's best money crop on its plots, a season's harvests
+  less its packets, by the day.
+- **Fishing:** casts at the season's best water. Each cast is the wait for a
+  bite on the season's rod, with the throw inside it, plus the landing; each
+  catch is worth the mean of what bites there over the day's hours.
+- **The cliff and the woods** (plan section 3.3, "mine and cut"): whatever
+  pays more for the time. The cliff's nodes that beat a tree a tick, as
+  often as they come back, and the trees for the rest.
+- **Animals:** the herd collected from its morning feed to bedtime, less its
+  hay.
+- **Artisan goods:** the machines kept busy on the farm's own goods, less
+  what the stall alone sells (sugar before the autumn's beets).
+
+<!-- tools/balance.py days writes from here to its end mark -->
+
+| Season | Band | Crops | Fishing | The cliff and the woods | Animals | Artisan goods | Most |
+|---|---|---|---|---|---|---|---|
+| spring | $180-400 | $308 (played $308) | $238 (played $247) | $294 (played $294) | - | - | crops |
+| summer | $205-460 | $280 (played $280) | $262 (played $281) | $393 (played $393) | $247 (played $231) | $231 (played $231) | the cliff and the woods |
+| autumn | $235-530 | $451 | $308 | $393 | $401 | $317 | crops |
+| winter | $270-610 | - | $354 | $474 | $401 | $369 | the cliff and the woods |
+
+Computed: `Economy.day`. Played: `src/tools/day_economy.gd`, the crops over their season, the machines until their batches come round together, the pond over three days and the animals over four, by the day. A dash: the season has no means for it.
+
+<!-- tools/balance.py days: end -->
+
+**Every lever moved:**
+
+| Lever | Was | Now | Why |
+|---|---|---|---|
+| wood, sell | $2 | $1 | Felling trees all day paid about $540 in spring and $750 in summer, more than any other way of earning in every season. Wood is for building. |
+| perch, bream, sunfish, catfish | $8, $9, $8, $10 | $10, $12, $11, $13 | A day at the pond was under every band. |
+| trout, pike, eel | $13, $14, $15 | $17, $18, $19 | The same. Still under oil. |
+| carp, tilapia | $7 | $7, kept | Fish bait (four at $2) and fish oil (three under a drop's $26) are priced against the cheapest fish. |
+| egg, milk | $4, $9 | $6, $11 | A day of animals was under summer's band. |
+| wool, truffle | $10, $20 | $14, $24 | The same. The truffle stays under oil. |
+| butter | $22 | $25 | It stays over its two pails of milk, and under oil. |
+| cloth | $15 | $18 | It stays over its fleece; the sandbag still pays. |
+| `DAY_TARGETS`, `DAY_FARM` | - | new | The bands, and the farm they assume. |
+
+**What the numbers say:**
+- **No one way wins every season.** Crops win spring and autumn, and the
+  cliff and the woods win summer and winter. Fishing, the animals and the
+  machines all sit inside every band they have.
+- **Computed and played agree:**
+  - the crops, the cliff and the woods and the machines to the dollar;
+  - the animals within 7%, four played days against the steady state;
+  - the pond within 8%, because its bites are drawn.
+- **On the cliff, only the seams beat the trees for money**, even with wood
+  at $1. Iron, copper, coal and gold are worth more as towers than as
+  coins, which is what the iron is for.
+- **The bands are wide on purpose** (low to high is about 2.2 times). The
+  rule is "about one defence", and a band a whole season's ways of earning
+  fit inside says that rather than ranking them.

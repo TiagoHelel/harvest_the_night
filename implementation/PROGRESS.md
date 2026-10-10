@@ -20197,3 +20197,149 @@ Files: src/core/game_data.gd, src/ui/names.gd, assets/locale/strings.csv,
 src/tools/headless_v1.gd, tools/determinism_{sim,data}_hash.txt,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0193-seasonal-supply.md,
 implementation/shots/0193/, docs/devlog/{index,index.pt_BR}.md
+
+## 0194 - The day's economy - done 2026-10-10
+
+What changed: the day's money is tuned on purpose, against plan section 5's
+rule of thumb that a well-worked day at the start of each season buys about
+one new defence.
+- **The bands:** a band of money for each season (`GameData.DAY_TARGETS`).
+- **The farm a good day stands on:** `GameData.DAY_FARM`.
+- **A computed day of each way of earning:** `Economy`, new in
+  `src/core/economy.gd`. It covers the crops, the pond, the cliff and the
+  woods, the animals and the machines.
+- **The same days played through the rules:** `src/tools/day_economy.gd`,
+  new, run by `python tools/balance.py days`.
+- **Prices:** reviewed, and the ones that kept a way of earning out of its
+  band were moved, wood the furthest.
+
+**The bands** (levers, in `digest()`):
+- spring $180-400, summer $205-460, autumn $235-530, winter $270-610.
+- They are centred on a gun tower's ten wood and twelve iron at the stall's
+  prices in spring, and ask about a seventh more each season.
+- `check_day_targets` (in `validate()`) holds each band low under high and
+  never falling from one season to the next, and the assumed farm to real
+  tools, animals and machines that take days.
+
+**The day's money, computed** (`Economy.day`):
+- **The day:** 06:00 to dusk, and the animals' to 01:30.
+- **The money:** what the day makes at what the stall pays, less what it
+  buys there. An input the season makes itself is the farm's own and costs
+  nothing (`input_cost`, from 0193's `seasonal_supply` with the shelves
+  empty).
+- **A season without the means** for a way of earning is -1: crops in
+  winter, and the animals and the machines at a new game's start.
+- **Every number comes from the tables:**
+  - `Fishing.catchable` and `weight_of` for the pond;
+  - the farm map for the nodes;
+  - `Crafting.days_of` for the batches.
+
+**The ways of earning:**
+- **Crops:** the season's best money crop on its plots - a season's
+  harvests less its packets, by the day.
+- **Fishing:** casts at the season's best water. The bite's wait starts with
+  the throw, and the landing is the bar played well (`landing_ticks`, 1 s:
+  the sweep measured 24 ticks for a common).
+- **The cliff and the woods:** whatever pays more for the time. The cliff's
+  nodes that beat a tree a tick (`cliff_kinds`), as often as they come back,
+  and the trees for the rest.
+- **Animals:** the herd collected from the morning feed to bedtime. Each
+  clock runs only by day, so a cow gives nearly three pails and a hen nearly
+  four and a half eggs. Less the hay.
+- **Artisan goods:** the season's machines kept busy on the farm's own
+  goods, less what only the stall sells (sugar before the beets).
+
+**Found: wood was the best money on the farm.**
+- At $2 a log, felling trees all day paid about $540 in spring and $750 in
+  summer: three logs a tree, a tree in under four seconds with the walk.
+  That is more than any other way, in every season.
+- Wood is now $1. Even so, on the cliff only the seams beat the trees for
+  money: iron, copper, coal and gold pay better as towers than as coins.
+- `_task_0058_giant`'s giant test priced sixteen crossbows against four mortars by
+  what they sell for. With wood halved the crossbows came cheaper, so the
+  line is now eighteen ($2790, still let in) against the mortars' $2660.
+
+**Every lever moved** (also in BALANCE.md):
+
+| Lever | Was | Now |
+|---|---|---|
+| wood | $2 | $1 |
+| perch, bream, sunfish, catfish | $8, $9, $8, $10 | $10, $12, $11, $13 |
+| trout, pike, eel | $13, $14, $15 | $17, $18, $19 |
+| egg, milk | $4, $9 | $6, $11 |
+| wool, truffle | $10, $20 | $14, $24 |
+| butter, cloth | $22, $15 | $25, $18 |
+
+- Carp and tilapia stay at $7: bait and fish oil are priced against the
+  cheapest fish.
+- Every change keeps `check_chain`, `check_stall` and oil as the dearest
+  thing a day makes.
+- **Reviewed and left alone:** seed costs, animal prices, tool upgrades and
+  building costs. The test asserts every resource, animal, upgrade and
+  building has a price.
+
+**0193's supply learned that the map's loose animals graze.** They give
+without hay (`Livestock` says so), so a spring's milk is the farm's own for
+the omelette and the cheese.
+
+**The numbers** (`python tools/balance.py days`; computed for every season,
+played in spring and summer):
+
+| Season | Band | Crops | Fishing | The cliff and the woods | Animals | Artisan goods | Most |
+|---|---|---|---|---|---|---|---|
+| spring | $180-400 | $308 (played $308) | $238 (played $247) | $294 (played $294) | - | - | crops |
+| summer | $205-460 | $280 (played $280) | $262 (played $281) | $393 (played $393) | $247 (played $231) | $231 (played $231) | the cliff and the woods |
+| autumn | $235-530 | $451 | $308 | $393 | $401 | $317 | crops |
+| winter | $270-610 | - | $354 | $474 | $401 | $369 | the cliff and the woods |
+
+- No one way wins every season: crops win spring and autumn, the cliff and
+  the woods win summer and winter.
+- Computed and played agree:
+  - crops, the cliff and the woods and the machines to the dollar;
+  - the animals within 7% (four played days against the steady state);
+  - the pond within 8% (its bites are drawn).
+
+**Two commits for one task.** `balance.py` refuses a dirty `game_data.gd`,
+by design. So the code went in first, the sweep ran on the clean tree and
+wrote its BALANCE.md block, and the second commit holds that block and this
+journal.
+
+### Hashes
+
+- **SIM 3391018212, unchanged:** the determinism scenario sells nothing whose
+  price moved.
+- **DATA 2131453559 -> 1216212477, on purpose:**
+  - the prices above;
+  - `DAY_TARGETS` and `DAY_FARM`, both in `digest()`.
+
+Verify: 60 passed, 0 failed in 653s (the known OVER BUDGET), on the first
+run:
+- headless_check 17490 asserts in 77.3 s, and headless_v1 2202 asserts;
+- input_check 1220 cases and input_v1 668;
+- player work 26513 checks, reactions 708, UI art 13032.
+
+**Tests:**
+- `_task_0194_economy` (headless_v1):
+  - **The bands:** every season's computed day of every way it has lands
+    inside its band.
+  - **Several ways, no one winner:** each season has at least three ways to
+    earn, and no one way wins them all.
+  - **Seasons without the means:** crops have no winter, and animals and
+    machines no first spring.
+  - **The check:** `check_day_targets` refuses a falling band, an
+    upside-down one, a machine on a recipe of ticks and an animal there is
+    none of.
+  - **The model reads the game:**
+    - the cliff's ore is counted off the farm map;
+    - the day runs to dusk, and spring's money crop is the strawberry;
+    - hay and sugar are bought until autumn;
+    - the map's cow grazes.
+  - **Prices:** every item, animal, upgrade and building has one, and the
+    stall and the recipes pass.
+- `_task_0058_giant` (headless_check): eighteen crossbows, as above.
+
+Files: src/core/{economy (new),game_data}.gd, src/tools/{day_economy
+(new),headless_check,headless_v1}.gd, tools/balance.py,
+tools/determinism_{sim,data}_hash.txt, implementation/BALANCE.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0194-day-economy.md,
+docs/devlog/{index,index.pt_BR}.md

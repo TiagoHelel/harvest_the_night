@@ -1,7 +1,7 @@
 # 0194 - The day's economy
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0193, 0189, 0171, 0172, 0174, 0177, 0178, 0180, 0182, 0186, 0191
 - **Likely files:** src/core/game_data.gd, tools/balance.py, src/tools/autoplay.gd, implementation/BALANCE.md, src/tools/headless_v1.gd
 
