@@ -137,6 +137,7 @@ func _run() -> void:
 	_task_0218_perf_ground()
 	_task_0219_essence()
 	_task_0220_tree_seasons()
+	_task_0221_night_loot()
 
 
 func _finish() -> void:
@@ -6766,6 +6767,242 @@ func _task_0220_tree_seasons() -> void:
 	expect(Tech.bonus(plain, "tower_damage_percent", 100) == 100,
 		"and nobody owning anything is what the system had")
 	_completed += 1
+
+
+## 0221 - what the night leaves behind: a body's bones where it fell, moon
+## stones on the horde's road the morning after a Full Moon, both picked up
+## underfoot by day, and gone after their mornings.
+func _task_0221_night_loot() -> void:
+	# **The levers and their check.**
+	var levers := GameData.check_loot(GameData.LOOT_PILE_CAP, GameData.MOON_STONES,
+		GameData.MOON_STONE_ESSENCE, GameData.LOOT_FADE_DAYS, GameData.LOOT_REACH,
+		GameData.ENEMIES, GameData.BONES_EVERY)
+	expect(levers.is_empty(), "the leftovers' levers pass their check", str(levers))
+	var broken := {
+		"a pile of none": GameData.check_loot(0, 4, 1, 3, 4, {}, 10),
+		"a Full Moon of no stones": GameData.check_loot(9, 0, 1, 3, 4, {}, 10),
+		"a stone for no essence": GameData.check_loot(9, 4, 0, 3, 4, {}, 10),
+		"a pile that lies no morning": GameData.check_loot(9, 4, 1, 0, 4, {}, 10),
+		"a pile that looks nowhere": GameData.check_loot(9, 4, 1, 3, 0, {}, 10),
+		"bones from one body in none": GameData.check_loot(9, 4, 1, 3, 4, {}, 0),
+		"a body bigger than a pile": GameData.check_loot(9, 4, 1, 3, 4, {&"giant": {"bones": 10}}, 10),
+	}
+	var whys: Array = broken.keys()
+	whys.sort()
+	var let_through: Array = []
+	for why in whys:
+		if (broken[why] as Array).is_empty():
+			let_through.append(why)
+	expect(let_through.is_empty(),
+		"and refuse a cap, a stone count, a rate, a fade, a reach or a share of zero, and a body bigger than a pile",
+		"let through: %s" % str(let_through))
+	expect(GameData.group_members(&"night_leftovers") == [GameData.BONES, GameData.MOON_STONE]
+		and GameData.SELL_PRICE.has(GameData.BONES) and GameData.SELL_PRICE.has(GameData.MOON_STONE)
+		and Names.KEYS.get(GameData.BONES, &"") == &"ITEM_BONES"
+		and Names.KEYS.get(GameData.MOON_STONE, &"") == &"ITEM_MOON_STONE"
+		and Shop.sellable().has(GameData.MOON_STONE),
+		"bones and moon stones are priced, named resources - the night's leftovers - and the stall buys a stone")
+	expect(State.RUN_DATA.has("loot") and State.RUN_DATA.has("loot_laid")
+		and not State.create(221000).has("moon_phase"),
+		"what lies on the farm is run data, and no key is called moon_phase")
+
+	# **A killed walker leaves its bones on its cell**, and is no occupant.
+	var state := State.create(221001)
+	var open := _open_patch(state)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	var first := Entities.spawn(state, &"walker", open)
+	Combat.hit(state, first, 9999)
+	var walker_bones := int((GameData.ENEMIES[&"walker"] as Dictionary)["bones"])
+	expect(walker_bones > 0 and Loot.at(state, open) == {GameData.BONES: walker_bones},
+		"a killed walker leaves its bones on its cell", "%s on %s" % [str(Loot.at(state, open)), str(open)])
+	expect(Farm.is_empty(state, open) and Farm.walkable(state, open) and Farm.buildable(state, open),
+		"and a pile is no occupant: walked on and built on as before")
+
+	# **One body of a kind in BONES_EVERY**, on the night's own tally - and
+	# every boss.
+	var second_at := open + Vector2i(1, 0)
+	var second := Entities.spawn(state, &"walker", second_at)
+	Combat.hit(state, second, 9999)
+	expect(GameData.BONES_EVERY == 1 or Loot.at(state, second_at).is_empty(),
+		"tonight's second walker leaves none", str(Loot.at(state, second_at)))
+	expect(Loot.leaves_bones(&"walker", 1) and Loot.leaves_bones(&"walker", GameData.BONES_EVERY + 1)
+		and (GameData.BONES_EVERY == 1 or not Loot.leaves_bones(&"walker", 2))
+		and Loot.leaves_bones(&"giant", 2) and not Loot.leaves_bones(&"no_such_kind", 1),
+		"the first of a kind, then one in BONES_EVERY, leaves its bones, and a boss always does")
+
+	# **The pile survives the morning**; one that walked off at dawn left none.
+	var survivor_at := open + Vector2i(2, 0)
+	Entities.spawn(state, &"walker", survivor_at)
+	Phases.enter_result(state, true)
+	Phases.begin_day(state)
+	expect(Loot.at(state, open) == {GameData.BONES: walker_bones},
+		"the pile survives begin_day's sweep", str(Loot.at(state, open)))
+	expect(Loot.at(state, survivor_at).is_empty() and Entities.count(state) == 0,
+		"and the walker that walked off at dawn left nothing")
+
+	# **Stepping on it by day picks it up**: into the ledger, off the cell.
+	House.leave(state)
+	SuiteKit.stand_the_farmer(state, open - Vector2i(1, 0))
+	var held := Resources.amount(state, GameData.BONES)
+	var move: Array = (state["intent"] as Dictionary)["move"]
+	move[0] = 1
+	move[1] = 0
+	for _t in 60:
+		if Player.cell(state) == open:
+			break
+		Sim.tick(state)
+	move[0] = 0
+	expect(Player.cell(state) == open and Resources.amount(state, GameData.BONES) == held + walker_bones
+		and Loot.at(state, open).is_empty() and not (state["loot_laid"] as Dictionary).has(Grid.index(open)),
+		"stepping onto the pile by day puts its bones in the ledger and clears the cell",
+		"%s, %d held" % [str(Player.cell(state)), Resources.amount(state, GameData.BONES)])
+
+	# **And not after dark.**
+	Loot.drop(state, open, GameData.BONES, 2)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	expect(Loot.collect_at(state, open).is_empty() and int(Loot.at(state, open).get(GameData.BONES, 0)) == 2,
+		"at night the boots pick up nothing", str(Loot.at(state, open)))
+
+	# **A pile holds LOOT_PILE_CAP of a thing**; what falls on a full one is lost.
+	var heap := open + Vector2i(0, 1)
+	var landed := Loot.drop(state, heap, GameData.BONES, GameData.LOOT_PILE_CAP + 5)
+	expect(landed == GameData.LOOT_PILE_CAP and int(Loot.at(state, heap).get(GameData.BONES, 0)) == GameData.LOOT_PILE_CAP
+		and Loot.drop(state, heap, GameData.BONES, 1) == 0 and Loot.drop(state, Vector2i(-5, -5), GameData.BONES, 1) == 0,
+		"a cell holds LOOT_PILE_CAP bones, and nothing lands off the farm", "%d landed" % landed)
+
+	# **Where he cannot stand, the nearest cell he can**: the nearest first,
+	# then reading order - above before left.
+	var steps := Loot.nearest_steps()
+	expect(steps.size() == (2 * GameData.LOOT_REACH + 1) * (2 * GameData.LOOT_REACH + 1) - 1
+		and steps.slice(0, 4) == [Vector2i(0, -1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, 1)],
+		"the steps go nearest first, then top row first and left first", str(steps.slice(0, 6)))
+	var walled := State.create(221002)
+	var spot := _open_patch(walled)
+	Farm.place(walled, spot, {"id": &"wall", "hp": 30})
+	expect(Loot.landing(walled, spot) == spot + Vector2i(0, -1),
+		"bones that fall on a wall land on the cell above it", str(Loot.landing(walled, spot)))
+	Farm.place(walled, spot + Vector2i(0, -1), {"id": &"wall", "hp": 30})
+	NightRoad.to_night(walled)
+	NightRoad.park(walled)
+	var on_wall := Entities.spawn(walled, &"walker", spot)
+	Combat.hit(walled, on_wall, 9999)
+	expect(Loot.at(walled, spot).is_empty() and Loot.at(walled, spot + Vector2i(0, -1)).is_empty()
+		and Loot.at(walled, spot + Vector2i(-1, 0)) == {GameData.BONES: walker_bones},
+		"and with that one walled too, a walker killed on the wall leaves them on the cell to its left",
+		str(Loot.cells(walled)))
+
+	# **A pile lies LOOT_FADE_DAYS mornings, then it is gone** - taken as a
+	# night ends, so the morning report counts what the morning has.
+	var fading := State.create(221003)
+	var lying_at := _open_patch(fading)
+	Loot.drop(fading, lying_at, GameData.BONES, 1)
+	var mornings := 0
+	for _night in GameData.LOOT_FADE_DAYS + 1:
+		NightRoad.to_night(fading)
+		NightRoad.park(fading)
+		Phases.enter_result(fading, true)
+		Phases.begin_day(fading)
+		if not Loot.at(fading, lying_at).is_empty():
+			mornings += 1
+	expect(mornings == GameData.LOOT_FADE_DAYS and Loot.at(fading, lying_at).is_empty(),
+		"an untouched pile lies LOOT_FADE_DAYS mornings and is gone on the next",
+		"%d mornings" % mornings)
+
+	# **A Full Moon morning: its stones on the horde's road**, the same cells
+	# for the same seed, off a stream of the night's own.
+	var moon_a := _moon_morning(221004, 7)
+	var dice_kept := _moon_dice_kept
+	var moon_b := _moon_morning(221004, 7)
+	var stones := Loot.cells_with(moon_a, GameData.MOON_STONE)
+	var road := Loot.road(moon_a)
+	var off_road: Array = []
+	for cell in stones:
+		if not road.has(cell) or not Farm.walkable(moon_a, cell):
+			off_road.append(cell)
+	expect(stones.size() == GameData.MOON_STONES and stones == Loot.cells_with(moon_b, GameData.MOON_STONE),
+		"a Full Moon morning lays MOON_STONES stones, on the same cells for the same seed",
+		"%s against %s" % [str(stones), str(Loot.cells_with(moon_b, GameData.MOON_STONE))])
+	expect(off_road.is_empty() and dice_kept,
+		"each on the horde's road, where he can stand, and the run's own dice untouched", str(off_road))
+	expect(Loot.cells_with(_moon_morning(221005, 6), GameData.MOON_STONE).is_empty(),
+		"and an ordinary night lays none")
+	expect(LootView.stone_lights(moon_a).size() == GameData.MOON_STONES,
+		"every stone has its light for the night")
+
+	# **A moon stone trades for MOON_STONE_ESSENCE essence by day**, and not
+	# after dark.
+	var trader := State.create(221006)
+	Resources.add(trader, GameData.MOON_STONE, 2)
+	var essence := Tech.held(trader)
+	expect(Tech.trade_moon_stones(trader, 1) == GameData.MOON_STONE_ESSENCE
+		and Tech.held(trader) == essence + GameData.MOON_STONE_ESSENCE
+		and Resources.amount(trader, GameData.MOON_STONE) == 1,
+		"a traded stone pays the essence lever", "%d essence" % Tech.held(trader))
+	expect(Tech.trade_moon_stones(trader, 2) == 0 and Resources.amount(trader, GameData.MOON_STONE) == 1,
+		"more stones than are held trade none")
+	NightRoad.to_night(trader)
+	expect(Tech.trade_moon_stones(trader, 1) == 0 and Resources.amount(trader, GameData.MOON_STONE) == 1
+		and Tech.why_not_trade(trader) == [&"WHY_AFTER_DARK"], "and none after dark")
+	expect(Tech.why_not_trade(State.create(221007)) == [&"WHY_NO_MOON_STONE"],
+		"with no stone held, it says so")
+
+	# **The morning report says what is lying about**, in both languages.
+	var language := I18n.locale()
+	var report := State.create(221008)
+	I18n.use("en")
+	var bare := ResultScreen.leftovers_parts(report)
+	var at := _open_patch(report)
+	Loot.drop(report, at, GameData.BONES, 3)
+	Loot.drop(report, at + Vector2i(1, 0), GameData.MOON_STONE, 1)
+	var said := ResultScreen.leftovers_parts(report)
+	I18n.use("pt_BR")
+	var dito := ResultScreen.leftovers_parts(report)
+	I18n.use(language)
+	expect(bare.is_empty() and said == ["3 bones", "1 moon stone"] and dito == ["3 ossos", "1 pedra da lua"],
+		"the report lists 3 bones and 1 moon stone, and nothing on a bare farm",
+		"%s / %s / %s" % [str(bare), str(said), str(dito)])
+	_completed += 1
+
+
+## The first cell in reading order with open ground `reach` tiles round it:
+## buildable, untilled and empty.
+func _open_patch(state: Dictionary, reach: int = 3) -> Vector2i:
+	for idx in Grid.CELLS:
+		var cell := Grid.cell(idx)
+		var open := true
+		for dy in range(-reach, reach + 1):
+			for dx in range(-reach, reach + 1):
+				var near := cell + Vector2i(dx, dy)
+				if not Grid.in_bounds(near) or not Farm.buildable(state, near) \
+						or Farming.is_tilled(state, near):
+					open = false
+					break
+			if not open:
+				break
+		if open:
+			return cell
+	return Vector2i(-1, -1)
+
+
+## Whether the last `_moon_morning` night ended with the run's dice untouched.
+var _moon_dice_kept := false
+
+
+## The morning after `day`'s night, held: through the build step, the night
+## parked, its end and the day begun.
+func _moon_morning(seed_value: int, day: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = day
+	state["nights_won"] = day - 1
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	var dice: Array = (state["rng"] as Array).duplicate()
+	Phases.enter_result(state, true)
+	_moon_dice_kept = dice == (state["rng"] as Array)
+	Phases.begin_day(state)
+	return state
 
 
 ## A day of the run with `essence` in hand.

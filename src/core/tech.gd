@@ -323,6 +323,33 @@ static func spend(state: Dictionary, points: int) -> bool:
 	return Resources.spend(state, GameData.TECH, points)
 
 
+# -------------------------------------------------------------- moon stones
+
+## Why a moon stone cannot be traded for essence now (task 0221): a key and
+## its arguments, or an empty Array when it can - see `why_not_buy`.
+static func why_not_trade(state: Dictionary) -> Array:
+	if int(state["phase"]) != Phases.DAY:
+		return [&"WHY_AFTER_DARK"]
+	if Resources.amount(state, GameData.MOON_STONE) <= 0:
+		return [&"WHY_NO_MOON_STONE"]
+	return []
+
+
+## **Moon stones for essence** (task 0221; plan section 3.3: "they are
+## worth essence or money"), by day, `MOON_STONE_ESSENCE` a stone. The
+## stall buys them for money; this is the other half, and the one door to
+## it. Returns the essence paid - 0, with nothing taken, after dark or for
+## more stones than are held.
+static func trade_moon_stones(state: Dictionary, n: int = 1) -> int:
+	if n <= 0 or not why_not_trade(state).is_empty():
+		return 0
+	if not Resources.spend(state, GameData.MOON_STONE, n):
+		return 0
+	var paid := n * GameData.MOON_STONE_ESSENCE
+	Resources.add(state, GameData.TECH, paid)
+	return paid
+
+
 # ------------------------------------------------------------ the conditions
 
 ## Whether one of the table's conditions was met tonight.

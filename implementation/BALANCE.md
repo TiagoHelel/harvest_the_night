@@ -558,3 +558,36 @@ giant "$6".
   each Full Moon's share: eight Full Moons, two a season.
 - Ten authored nights pay 44 at best, against a tree that costs 45.
 - 0220 re-prices the tree against the year.
+
+## 0221 - what the night leaves behind (2026-10-10)
+
+**The rule** (plan sections 3.3 and 4.6): the morning picks up bones where
+zombies fell and, after a Full Moon, moon stones along the horde's road. A
+bone sells for $1 and becomes bone meal at 0222; a stone sells for $20 or
+trades for 1 essence at the tree.
+
+**Every body's bones were a second purse.** At a bone a body,
+`src/tools/night_pay.gd` priced a spring night held well at 80 bones and a
+winter one at 637 - more than the night's purse in every season, and in
+winter more than a whole day. The plan's own spring morning picks up six.
+The kills heap up where the towers stand: the autoplayer's spring nights
+killed on 5 to 24 cells, so the pile cap alone did not hold it.
+
+**So one body of a kind in `BONES_EVERY` (8) leaves its bones**: the
+night's first, its ninth, its seventeenth; a boss always. What a night held
+well leaves, before any pile is full (`night_pay.gd`'s new columns):
+
+| Season | Bones a night | Their worth | With the moon stones, averaged | The night's purse | A day's band |
+|---|---|---|---|---|---|
+| spring | 11 | $11 | $23 | $74 | $180-400 |
+| summer | 34 | $34 | $46 | $152 | $205-460 |
+| autumn | 59 | $59 | $70 | $239 | $235-530 |
+| winter | 82 | $82 | $93 | $319 | $270-610 |
+
+- **Night 8 leaves 11** with everything it sent killed, and fewer as
+  fewer fall.
+- **A Full Moon's four stones** are $80 at the stall or 4 essence. Eight
+  Full Moons are 32 stones a year: traded, they lift the best year's
+  essence from 256 to 288, still short of the tree's 294.
+- **What lies about fades** after `LOOT_FADE_DAYS` (3) mornings, so a farm
+  nobody walks never holds more than three nights of it.

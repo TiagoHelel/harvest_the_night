@@ -562,7 +562,11 @@ TASKS = [
               "(`src/tools/night_pay.gd` prints it). Measure it beside each "
               "season's day, and hold every season near spring's share - a "
               "`bounty_percent` that falls by season, or a bounty that grows "
-              "slower than the horde - or the journal says why not",
+              "slower than the horde - or the journal says why not. Count "
+              "what the night leaves lying about with it (0221): bones at "
+              "$1 and a Full Moon's four moon stones at $20 are $23 a "
+              "spring night and $93 a winter one at the stall "
+              "(`night_pay.gd`'s last columns)",
               "Rule of thumb: one well-worked day at the start of each season "
               "buys about one of that season's new defences - the ratio per "
               "season in BALANCE.md, each within 0.7-1.5 or the journal says "

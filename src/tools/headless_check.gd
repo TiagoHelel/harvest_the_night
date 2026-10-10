@@ -14562,8 +14562,9 @@ func _task_0082_shots() -> void:
 	# peddler. Seventy-three since 0191: the house in three tiers.
 	# Seventy-four since 0192: the kitchen. Seventy-five since 0195: the tips.
 	# Seventy-six since 0196: the two played days. Seventy-seven since 0220:
-	# the tree on autumn's floor.
-	expect(names.size() == 77,
+	# the tree on autumn's floor. Seventy-eight since 0221: the night's
+	# leftovers.
+	expect(names.size() == 78,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

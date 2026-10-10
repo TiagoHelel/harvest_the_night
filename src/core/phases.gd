@@ -240,6 +240,10 @@ static func enter_result(state: Dictionary, survived: bool, escaped: bool = fals
 	if not escaped:
 		Events.add(state, &"night_won" if survived else &"night_lost",
 			{"night": int(state["night"])})
+	# **What the night leaves lying about** (task 0221): the piles that have
+	# lain long enough go and a Full Moon lays its stones - before the day
+	# turns over, so tonight's piles are as old as tonight.
+	Loot.night_ends(state)
 	# **A day passes either way; `nights_won` only on a win**, and it is a
 	# count now, not an index (task 0151). The next night is the next day's
 	# in the calendar, so a lost night is not fought again - the loss costs

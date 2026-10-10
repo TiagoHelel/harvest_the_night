@@ -225,6 +225,8 @@ var _cursor: GuardianCursor
 var _guardian: GuardianView
 ## The barnyard: animals at home, the dog, dig spots (task 0185).
 var _animal_view: AnimalView
+## What the night left lying about (task 0221).
+var _loot_view: LootView
 var _peddler_view: PeddlerView
 var _house_mark: Node2D
 var _house_mark_for := ""
@@ -368,6 +370,13 @@ func _ready() -> void:
 	_animal_view.name = "AnimalView"
 	add_child(_animal_view)
 	_animal_view.setup(_occupants, _ground_traps)
+	# **What the night left lying about** (task 0221): the bone piles and
+	# the moon stones on the ground, under the boots and beside the dig
+	# spots - view only.
+	_loot_view = LootView.new()
+	_loot_view.name = "LootView"
+	add_child(_loot_view)
+	move_child(_loot_view, _ground_traps.get_index())
 	# **The peddler** (task 0190): at the stall in its hours, and the stall
 	# shut outside them - view only.
 	_peddler_view = PeddlerView.new()
@@ -454,6 +463,8 @@ func show_state(state: Dictionary) -> void:
 		_guardian.show_state(state)
 	if _animal_view != null:
 		_animal_view.show_state(state)
+	if _loot_view != null:
+		_loot_view.show_state(state)
 	if _peddler_view != null:
 		_peddler_view.show_state(state)
 	_remember_towers(state)

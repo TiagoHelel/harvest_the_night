@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 46
+const V1_CASES := 47
 
 
 func _process(delta: float) -> bool:
@@ -96,6 +96,7 @@ func _run() -> void:
 	await _case_0191_house()
 	await _case_0195_tips()
 	await _case_0220_tree_pages()
+	await _case_0221_collect()
 	_finish()
 
 
@@ -3253,6 +3254,81 @@ func _case_0220_tree_pages() -> void:
 		locked.text if locked != null else "none")
 	await close_scene()
 	_completed += 1
+
+
+## 0221 - the farmer walks over a bone pile with D and the count rises; then
+## a moon stone trades for essence through the tree's button, by mouse and by
+## the pad's A.
+func _case_0221_collect() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel: TechPanel = require_control("TechPanel")
+	if driver == null or panel == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(3)
+	House.leave(state)
+	# Open ground east of him, and a pile of three on the next cell.
+	var start := _an_east_walk(state)
+	SuiteKit.stand_the_farmer(state, start)
+	var pile := start + Vector2i(1, 0)
+	Loot.drop(state, pile, GameData.BONES, 3)
+	await frames(2)
+	var held := Resources.amount(state, GameData.BONES)
+	await hold_key(KEY_D, 40)
+	expect(Resources.amount(state, GameData.BONES) == held + 3 and Loot.at(state, pile).is_empty(),
+		"walking over a bone pile with D picks it up: the count rises by its three",
+		"%d held, %s left on %s" % [Resources.amount(state, GameData.BONES), str(Loot.at(state, pile)), str(pile)])
+
+	# **A moon stone for essence, through the tree.**
+	Resources.add(state, GameData.MOON_STONE, 2)
+	var essence := Tech.held(state)
+	await tap_key(KEY_T)
+	await until(func() -> bool: return panel.is_open(), "the tree to open")
+	await frames(2)
+	var trade: Button = locate_control("TechTradeStone") as Button
+	expect(trade != null and trade.is_visible_in_tree() and not trade.disabled
+		and trade.text == I18n.f(&"TECH_TRADE", [2]),
+		"the tree offers the trade, counting the two stones held",
+		trade.text if trade != null else "none")
+	await click_control("TechTradeStone")
+	await until(func() -> bool: return Tech.held(state) > essence, "the stone to be traded", 60)
+	expect(Tech.held(state) == essence + GameData.MOON_STONE_ESSENCE
+		and Resources.amount(state, GameData.MOON_STONE) == 1,
+		"a click trades one stone for its essence", "%d essence" % Tech.held(state))
+	if trade != null:
+		trade.grab_focus()
+	await _pad_tap(JOY_BUTTON_A)
+	await until(func() -> bool: return Resources.amount(state, GameData.MOON_STONE) == 0,
+		"the pad's trade", 60)
+	await frames(3)
+	expect(Resources.amount(state, GameData.MOON_STONE) == 0
+		and Tech.held(state) == essence + 2 * GameData.MOON_STONE_ESSENCE
+		and trade != null and trade.disabled,
+		"and A on the pad trades the next, after which the button is off",
+		"%d stones, %d essence" % [Resources.amount(state, GameData.MOON_STONE), Tech.held(state)])
+	await close_scene()
+	_completed += 1
+
+
+## The first cell near the farmer with three walkable, bare cells running
+## east from it - somewhere to walk onto a pile.
+func _an_east_walk(state: Dictionary) -> Vector2i:
+	var here := Player.cell(state)
+	for dy in range(0, 12):
+		for dx in range(-12, 12):
+			var cell := here + Vector2i(dx, dy)
+			var clear := true
+			for step in 4:
+				var on := cell + Vector2i(step, 0)
+				if not Farm.walkable(state, on) or Farming.is_tilled(state, on) \
+						or not Loot.at(state, on).is_empty():
+					clear = false
+			if clear:
+				return cell
+	return here
 
 
 func get_root_focus() -> Control:

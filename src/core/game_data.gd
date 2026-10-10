@@ -314,6 +314,12 @@ const TECH := &"tech"
 ## two seconds was the most expensive trigger in the game - forty-five drops
 ## over a night, eleven hundred dollars of fuel. Rounds are what it burns now.
 const INCENDIARY := &"incendiary"
+## **What the night leaves on the farm** (task 0221; plan sections 3.3
+## and 4.6): the bones of whatever fell, and the morning after a Full Moon
+## the moon stones along the road the horde came by. `Loot` lays them and
+## the farmer's boots pick them up.
+const BONES := &"bones"
+const MOON_STONE := &"moon_stone"
 const MONEY := &"money"
 const ENERGY := &"energy"
 
@@ -325,7 +331,7 @@ const RESOURCES: Array = [
 	OLD_CATFISH, GOLDEN_QUEEN, GHOST_PIKE, ICE_STURGEON,
 	WORM, BAIT, STRAW, HAY, EGG, MILK, WOOL, TRUFFLE,
 	WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, SANDBAG, FLOUR, SUGAR, BREAD,
-	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
+	WHEAT, CORN, CARROT, POTATO, GARLIC, STRAWBERRY, PEPPER, SUNFLOWER, MELON, PUMPKIN, GRAPE, BEET, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH, BONES, MOON_STONE,
 	CARROT_SEED, POTATO_SEED, GARLIC_SEED, STRAWBERRY_SEED, CORN_SEED, PEPPER_SEED, SUNFLOWER_SEED, MELON_SEED, WHEAT_SEED, PUMPKIN_SEED, GRAPE_SEED, BEET_SEED,
 ]
 
@@ -454,6 +460,12 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	# ammunition. A thin margin on purpose - rounds are for burning, not for
 	# selling, and `check_chain()` still wants the kitchen to beat the stall.
 	INCENDIARY: 9,
+	# **The night's leftovers** (task 0221). A bone is a dollar, so a night's
+	# bodies are pocket money beside its purse, and 0222 grinds them into
+	# something worth more. A moon stone sells for a good hour of a day, or
+	# trades for essence at the tree (`Tech.trade_moon_stones`).
+	BONES: 1,                        # LEVER: money each, 1-3
+	MOON_STONE: 20,                  # LEVER: money each, 10-40
 }
 
 ## What the shop charges, as a multiple of what it pays.
@@ -1685,7 +1697,7 @@ const RESOURCE_GROUPS: Array = [
 	{"name": &"animal_goods", "members": [EGG, MILK, WOOL, TRUFFLE, MEAT]},
 	{"name": &"artisan_goods", "members": [FOOD, OIL, WINE, JUICE, JELLY, PICKLES, CHEESE, BUTTER, CLOTH, FLOUR, SUGAR, BREAD]},
 	{"name": &"ammunition", "members": [GUNPOWDER, INCENDIARY]},
-	{"name": &"night_leftovers", "members": []},
+	{"name": &"night_leftovers", "members": [BONES, MOON_STONE]},
 	{"name": &"farm", "members": [MONEY, ENERGY, TECH]},
 ]
 
@@ -2044,6 +2056,9 @@ const ENEMIES: Dictionary = {
 		"ticks_per_tile": 20,           # LEVER: ticks, 12-30 (lower is faster)
 		"damage": 10,                   # LEVER: to the house, 4-16
 		"reward": 3,                    # LEVER: money, 1-6
+		# **Left where it falls** (task 0221), and on no other ending: one
+		# that bites the house or walks off at dawn takes its own away.
+		"bones": 1,                     # LEVER: bones, 0-6
 		"armour": 0,
 	},
 	&"runner": {
@@ -2057,6 +2072,7 @@ const ENEMIES: Dictionary = {
 		"ticks_per_tile": 9,            # LEVER: ticks, 6-14
 		"damage": 3,                    # LEVER: to the house, 1-6
 		"reward": 4,                    # LEVER: money, 2-8
+		"bones": 1,                     # LEVER: bones, 0-6
 		"armour": 0,
 		# **It does not stop for what you built.** Everything else takes a
 		# wall apart when the wall is the cheapest way home (task 0049); a
@@ -2100,6 +2116,7 @@ const ENEMIES: Dictionary = {
 		"ticks_per_tile": 38,           # LEVER: ticks, 30-50
 		"damage": 15,                   # LEVER: to the house, 8-25
 		"reward": 12,                   # LEVER: money, 6-20
+		"bones": 2,                     # LEVER: bones, 0-6
 	},
 	&"breaker": {
 		# It goes for what you built rather than what you live in, which makes
@@ -2127,6 +2144,7 @@ const ENEMIES: Dictionary = {
 		# nothing until task 0052.
 		"targets_structures": true,
 		"reward": 8,                    # LEVER: money, 4-14
+		"bones": 1,                     # LEVER: bones, 0-6
 		"armour": 1,
 	},
 	&"giant": {
@@ -2139,6 +2157,8 @@ const ENEMIES: Dictionary = {
 		"targets_structures": false,
 		"telegraph_ticks": 1 * SECONDS, # LEVER: ticks before the heavy hit
 		"reward": 120,                  # LEVER: money, 60-200
+		# A heap of its own, the most one cell holds.
+		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
 		"armour": 6,                    # LEVER: damage off each hit, 3-10
 		"is_boss": true,
 	},
@@ -2757,6 +2777,31 @@ const DEFEAT_KEEPS_TECH := true
 ## dice - see `Pathing.horde_routes`.
 const TRAMPLE_REACH := 0                # LEVER: tiles either side of a route, 0-2
 
+## **What the night leaves lying about** (task 0221; plan sections 3.3 and
+## 4.6): `Loot` lays it, and the farmer picks it up by walking over it.
+##
+## How many of one thing a cell holds. A choke point where forty walkers
+## fell is a heap of nine bones, not forty.
+const LOOT_PILE_CAP := 9                # LEVER: of one thing on a cell, 3-20
+## **One body of a kind in this many leaves its bones** - the night's
+## first, its ninth, its seventeenth - and a boss always does. At every
+## body a spring night left eighty bones and a winter one six hundred: a
+## second purse bigger than the first, where the plan's own spring
+## morning picks up six.
+const BONES_EVERY := 8                  # LEVER: bodies of a kind, 1-20
+## How far a pile that fell where nobody can stand - a spike trap, a wall,
+## the pond's edge - looks for ground the farmer can reach. Past it, it is
+## lost.
+const LOOT_REACH := 4                   # LEVER: tiles, 1-6
+## How many mornings a pile lies before it is gone, from the night it was
+## last added to.
+const LOOT_FADE_DAYS := 3               # LEVER: mornings, 1-7
+## **The moon stones a Full Moon leaves** along the horde's road (plan
+## section 3.3: the night feeding the day).
+const MOON_STONES := 4                  # LEVER: stones, 2-8
+## What one trades for at the tree, by day (`Tech.trade_moon_stones`).
+const MOON_STONE_ESSENCE := 1           # LEVER: essence a stone, 1-3
+
 
 # ====================================================================== the map
 
@@ -2960,6 +3005,8 @@ const MAP_SITES: Dictionary = {
 static func validate() -> Array:
 	var errors: Array = []
 	errors.append_array(check_rewards(REWARDS))
+	errors.append_array(check_loot(LOOT_PILE_CAP, MOON_STONES,
+		MOON_STONE_ESSENCE, LOOT_FADE_DAYS, LOOT_REACH, ENEMIES, BONES_EVERY))
 	errors.append_array(check_tech_tree(TECH_TREE))
 	errors.append_array(check_crops(CROPS))
 	errors.append_array(check_gathering(GATHERING))
@@ -4556,6 +4603,34 @@ static func check_rewards(rewards: Dictionary) -> Array:
 	return errors
 
 
+## **The night's leftovers hold together** (task 0221): a pile holds
+## something, a Full Moon leaves something, a stone trades for something,
+## a pile lies a morning at least and looks a tile at least for ground -
+## and no body leaves more bones than a pile holds, which would throw the
+## rest away as it fell.
+static func check_loot(cap: int, stones: int, rate: int, fade: int,
+		reach: int, enemies: Dictionary, every: int = BONES_EVERY) -> Array:
+	var errors: Array = []
+	if every <= 0:
+		errors.append("one body in %d leaves its bones: it needs at least one" % every)
+	if cap <= 0:
+		errors.append("a pile holds %d of a thing: it needs at least one" % cap)
+	if stones <= 0:
+		errors.append("a Full Moon leaves %d moon stones: it needs at least one" % stones)
+	if rate <= 0:
+		errors.append("a moon stone trades for %d essence: it needs at least one" % rate)
+	if fade <= 0:
+		errors.append("a pile lies %d mornings: it needs at least one" % fade)
+	if reach <= 0:
+		errors.append("a pile looks %d tiles for ground: it needs at least one" % reach)
+	for id in sorted_names(enemies.keys()):
+		var bones := int((enemies[id] as Dictionary).get("bones", 0))
+		if bones < 0 or bones > cap:
+			errors.append("enemy '%s' leaves %d bones and a pile holds %d"
+				% [id, bones, cap])
+	return errors
+
+
 static func check_tips(tips: Array) -> Array:
 	var errors: Array = []
 	var seen: Dictionary = {}
@@ -4831,6 +4906,9 @@ static func digest() -> int:
 		"rewards": REWARDS,
 		"defeat": [DEFEAT_LOSS_PERCENT, DEFEAT_KEEPS_MONEY,
 			DEFEAT_KEEPS_TECH, TRAMPLE_REACH],
+		# **What the night leaves lying about** (task 0221).
+		"loot": [LOOT_PILE_CAP, BONES_EVERY, LOOT_REACH, LOOT_FADE_DAYS,
+			MOON_STONES, MOON_STONE_ESSENCE],
 		"tech": [TECH_BONUSES, TECH_TREE, TECH_REFUND_PERCENT],
 		"levels": [TOWER_LEVELS, TOP_TOWER_LEVEL],
 	})

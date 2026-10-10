@@ -230,6 +230,9 @@ static func tick(state: Dictionary) -> void:
 
 	if dx != 0 or dy != 0:
 		_step(state, dx, dy)
+		# **The night's leftovers are picked up underfoot** (task 0221): no
+		# verb and no tool, only the boots. `Loot` refuses after dark.
+		Loot.collect_at(state, cell(state))
 	elif bool(intent.get("interact", false)) and not is_busy(state):
 		_begin(state, target(state))
 

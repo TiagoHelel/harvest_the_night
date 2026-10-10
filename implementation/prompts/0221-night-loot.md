@@ -1,7 +1,7 @@
 # 0221 - What the night leaves behind
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0219, 0152
 - **Likely files:** src/core/combat.gd, src/core/loot.gd (new), src/core/phases.gd, src/core/player.gd, src/core/state.gd, src/core/game_data.gd, src/core/tech.gd, src/ui/names.gd, src/ui/world_view.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

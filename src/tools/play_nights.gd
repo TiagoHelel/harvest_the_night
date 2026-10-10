@@ -72,7 +72,7 @@ func _init() -> void:
 	for income in INCOMES:
 		print("")
 		print("  a day of farming worth $%d" % int(income))
-		print("  night  sent  $reward  $purse  towers  power  result")
+		print("  night  sent  $reward  $purse  towers  power  bones  piles  result")
 		var fell: Array = []
 		var purse := 0
 		for night in range(1, _nights + 1):
@@ -84,10 +84,11 @@ func _init() -> void:
 			purse += int(table["base_money"]) + int(table["money_per_night"]) * night 				+ Waves.reward_of(night) * int(table["bounty_percent"]) / 100 + int(income)
 			if not bool(played["held"]):
 				fell.append(night)
-			print("  %5d %5d  %7d %7d %7d %5d%%  %s"
+			print("  %5d %5d  %7d %7d %7d %5d%%  %5d  %5d  %s"
 				% [night, Waves.size_of(night), Waves.reward_of(night),
 					int(played["budget"]), int(played["towers"]),
-					int(played["power"]),
+					int(played["power"]), int(played["bones"]),
+					int(played["piles"]),
 					"held, house %d/%d after %ds"
 						% [int(played["house"]), int(played["house_full"]),
 							int(played["ticks"]) / GameData.TICK_HZ]
@@ -253,6 +254,10 @@ func _play(night: int, budget: int) -> Dictionary:
 		"left": Waves.remaining(state),
 		"budget": budget,
 		"unspent": left,
+		# **What it left lying about** (task 0221): the bones, after every
+		# pile's cap, and on how many cells.
+		"bones": int(Loot.lying(state).get(GameData.BONES, 0)),
+		"piles": Loot.cells_with(state, GameData.BONES).size(),
 	}
 
 

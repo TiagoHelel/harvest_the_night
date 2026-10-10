@@ -74,6 +74,10 @@ const LANTERN_COLOUR := Color(1.00, 0.80, 0.42)
 ## a halo over the house.
 const EYE_RADIUS := 0.45
 const EYE_COLOUR := Color(1.00, 0.78, 0.40)
+## A moon stone's own light (task 0221): small and cold, a mark on the
+## horde's road rather than a lamp.
+const MOON_STONE_RADIUS := 0.7
+const MOON_STONE_COLOUR := Color(0.78, 0.90, 1.00)
 
 var _state: Dictionary = {}
 var _glow: Texture2D
@@ -242,6 +246,11 @@ func _draw() -> void:
 	# thing is redrawn rather than cached.
 	for where in burning_lights():
 		_glow_at(where, BURNING_RADIUS * tile, BURNING_COLOUR, 0.22)
+
+	# **The moon stones** (task 0221): a cold point on each, where its
+	# sheen is, so the road the horde came by shows in the dark.
+	for where in LootView.stone_lights(_state):
+		_glow_at(where, MOON_STONE_RADIUS * tile, MOON_STONE_COLOUR, 0.30)
 
 
 ## A two-pixel glass core, not a brightness exemption over the roof or farm.

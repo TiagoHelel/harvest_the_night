@@ -341,6 +341,15 @@ const ART := {
 	&"icon_truffle": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(0.62, 0.45, 0.3), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_truffle": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.62, 0.45, 0.3), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"truffle_spot": {"pack": "A029", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	# A036's night loot (task 0221): the bones' icon the stone paled to bone
+	# and the moon stone's the stone cooled to moonlight, until 0235; the
+	# pile and the stone on the ground drawn in code (`LootView`).
+	&"icon_bones": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(1.3, 1.28, 1.12), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_bones": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(1.3, 1.28, 1.12), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_moon_stone": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(0.95, 1.12, 1.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_moon_stone": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.95, 1.12, 1.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"bone_pile": {"pack": "A036", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
+	&"moon_stone": {"pack": "A036", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE},
 	# A030's coop and barn (task 0183): the kitchen and the workshop, stations
 	# of their kind, scaled to their footprints - the coop small and warm, the
 	# barn barn-red - until 0212.

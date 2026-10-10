@@ -59,6 +59,7 @@ const TABLES: Array = [
 const RUN_DATA: Array = [
 	"burning", "crafting", "dig_spots", "entities", "fish_book", "fishing", "housed", "killed_by_kind",
 	"killed_by_kind_all_run", "kits", "last_catch", "last_result", "livestock",
+	"loot", "loot_laid",
 	"occupants", "payout", "plots", "produced", "repair_debt", "rubble", "shipping",
 ]
 
@@ -103,6 +104,7 @@ static func create(seed_value: int) -> Dictionary:
 	_adopt(state, Fishing.initial(), "Fishing")
 	_adopt(state, Waves.initial(), "Waves")
 	_adopt(state, Rewards.initial(), "Rewards")
+	_adopt(state, Loot.initial(), "Loot")
 	_adopt(state, Ability.initial(), "Ability")
 	_adopt(state, Repair.initial(), "Repair")
 	_adopt(state, Tech.initial(), "Tech")

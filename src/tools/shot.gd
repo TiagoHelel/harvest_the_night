@@ -130,6 +130,7 @@ const SCENARIOS: Array = [
 	["year_credits", "the credits before the year ending", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
+	["night_loot", "the morning after Spring 7's Full Moon, fought from a defended farm: the report counting the bones and moon stones lying about; then him out by the moon stone nearest the house, the night's bones about it", "ResultScreen"],
 	["north_band", "standing on the north spawn ground", ""],
 	["new_ore", "beside the copper, the coal and the gold", ""],
 	["stump", "in the woods, by a hardwood stump", ""],
@@ -744,6 +745,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"year_end": _set_year_end(state)
 		"year_credits": _set_year_credits(state)
 		"trampled": _set_trampled(state)
+		"night_loot": _set_night_loot(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -900,6 +902,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "days":
 		await _shoot("days_spring_morning", folder)
 		await _take_days(main, state, folder)
+		return
+	if name == "night_loot":
+		await _shoot("night_loot", folder)
+		await _take_loot_morning(main, state, folder)
 		return
 	if name == "tech_autumn":
 		await _shoot("tech_autumn", folder)
@@ -2336,6 +2342,8 @@ func _set_tech(state: Dictionary) -> void:
 	# affordable and out of reach. One state of anything is a picture that
 	# cannot say what the other two look like.
 	Resources.gain(state, {GameData.TECH: 9})
+	# And three moon stones, so the trade at the bottom is on offer (0221).
+	Resources.gain(state, {GameData.MOON_STONE: 3})
 	# **The ids have spaces in them.** `&"sharp_tools"` bought nothing and
 	# said nothing, and the picture came back with "0 of 12 nodes" on it
 	# while the panel showed nine points unspent.
@@ -2343,6 +2351,70 @@ func _set_tech(state: Dictionary) -> void:
 		if not Tech.buy(state, id):
 			push_warning("shot: could not buy %s" % id)
 	Sim.advance(state, 2)
+
+
+## **What the night leaves behind** (task 0221): Spring 7, a Full Moon,
+## fought from a defended farm to dawn - the morning report says what is
+## lying on the farm to collect.
+##
+## **Held, by a propped-up house.** A Full Moon's horde is more than this
+## fixture's eight towers hold, and a lost night's report is a report about
+## the loss: its line of what was taken runs off the frame. The house is
+## mended every tick, so the night runs to dawn and the bones are the real
+## night's.
+func _set_night_loot(state: Dictionary) -> void:
+	_on_date(state, 7)
+	_a_defended_farm(state, true)
+	NightRoad.to_night(state)
+	for _t in Sim.MOST_TICKS_IN_A_NIGHT:
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+		state["house_hp"] = Phases.house_full(state)
+		Sim.advance(state, 1)
+	Sim.advance(state, 2)
+	print("  night_loot: %s lying, %d piles, stones on %s" % [str(Loot.lying(state)),
+		Loot.cells(state).size(), str(Loot.cells_with(state, GameData.MOON_STONE))])
+	_look_at(_the_defence_line(state))
+
+
+## **The morning round** (task 0221): the report confirmed, he is out below
+## the moon stone nearest the house, facing it, with the night's bones lying
+## about - nothing picked up yet.
+func _take_loot_morning(main: Node, state: Dictionary, folder: String) -> void:
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	House.leave(state)
+	var home := Farm.house_centre(state)
+	var stone := home
+	var best := 1 << 30
+	for cell in Loot.cells_with(state, GameData.MOON_STONE):
+		var far := ((cell as Vector2i) - home).length_squared()
+		if far < best:
+			best = far
+			stone = cell
+	var spot := stone + Vector2i(0, 2)
+	for step in [Vector2i(0, 2), Vector2i(0, 3), Vector2i(-2, 0), Vector2i(2, 0), Vector2i(0, -2)]:
+		var at: Vector2i = stone + (step as Vector2i)
+		if Farm.walkable(state, at) and Loot.at(state, at).is_empty():
+			spot = at
+			break
+	_stand(state, spot)
+	state["player"]["facing"] = Player.NORTH
+	_only_showing(main, "")
+	var view := main.get_node("%WorldView") as WorldView
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await _shoot("night_loot_morning", folder)
+	print("  night_loot_morning: %s, him at %s, the stone at %s, %s lying" % [
+		Phases.name_of(int(state["phase"])), str(Player.cell(state)), str(stone),
+		str(Loot.lying(state))])
 
 
 ## **The tree in autumn** (task 0220): Autumn 2, so the panel opens on

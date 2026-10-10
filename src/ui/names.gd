@@ -126,6 +126,8 @@ const KEYS: Dictionary = {
 	&"money": &"ITEM_MONEY",
 	&"energy": &"ITEM_ENERGY",
 	&"tech": &"ITEM_TECH",
+	&"bones": &"ITEM_BONES",
+	&"moon_stone": &"ITEM_MOON_STONE",
 
 	# ---- what a night is held off with
 	&"gun_tower": &"DEF_GUN_TOWER",

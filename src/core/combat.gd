@@ -140,6 +140,10 @@ static func _kill(state: Dictionary, id: int) -> void:
 	# it; task 0066 ends the run on this.
 	if bool((GameData.ENEMIES[kind] as Dictionary).get("is_boss", false)):
 		state["bosses_down"] = int(state.get("bosses_down", 0)) + 1
+	# **Its bones stay where it fell** (task 0221): on its cell, or the
+	# nearest one the farmer can stand on. Only a kill leaves them - one that
+	# bites the house or walks off at dawn is removed elsewhere, whole.
+	Loot.drop_bones(state, kind, Entities.cell_of(state, id))
 
 	Entities.remove(state, id)
 	# **Nothing is left pointing at it.** A projectile chasing a dead id is

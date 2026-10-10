@@ -21384,3 +21384,251 @@ assets/locale/strings.csv, src/tools/{headless_check,headless_v1,input_v1,shot}.
 tools/determinism_data_hash.txt, implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/0220-tech-by-season.md, implementation/shots/0220/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0221 - What the night leaves behind - done 2026-10-10
+
+What changed: the night leaves something for the morning (plan sections 3.3
+and 4.6).
+- **Bones** where a zombie fell: one body of a kind in eight.
+- **Moon stones** the morning after a Full Moon: four, along the road the
+  horde came by.
+- **Picked up underfoot**, by day, with no verb and no tool. A pile left
+  alone is gone after three mornings.
+- **Sold at the stall** ($1 a bone, $20 a stone), or a stone **traded for
+  essence** at the tree.
+
+### The rules (`src/core/loot.gd`, new)
+
+**Two RUN_DATA keys, adopted through `Loot.initial()`:**
+- `loot`: cell index -> {item: count};
+- `loot_laid`: cell index -> the day of the night it was last added to.
+- Neither is called `moon_phase`.
+
+**A pile is not an occupant.** Nothing walks round it or is refused a build
+on it, the pathing never hears of it, and `Farm.clear_rubble` leaves it.
+
+**Bones** are dropped in `Combat._kill`, before the body is removed:
+- its `ENEMIES` row's `bones` - walker, runner and breaker 1, tank 2, the
+  giant 9 - and none for a row without one, so phase 14's enemies opt in;
+- only on a kill: a bite on the house and the walk-off at dawn remove a body
+  elsewhere, whole.
+
+**One body of a kind in `BONES_EVERY` (8) leaves them:**
+- the night's first of that kind, its ninth, its seventeenth, read off the
+  night's own tally (`killed_by_kind`);
+- a boss always;
+- why, under Balance.
+
+**A pile holds `LOOT_PILE_CAP` (9) of a thing**, and what falls on a full one
+is lost.
+
+**Where it lands - the fixed rule the prompt asked for:**
+- on its cell when the farmer can stand there (`Farm.walkable`);
+- else on the nearest cell he can: by distance, then reading order (the top
+  row first, the left first), within `LOOT_REACH` (4) tiles;
+- none that near and it is lost.
+- A body that falls on a wall leaves its bones on the cell above it; with
+  that one walled too, on the cell to its left.
+
+**Moon stones** come in `Loot.night_ends`, which `Phases.enter_result` calls
+before the day turns over:
+- when the night that ended was a Full Moon, however it ended - the moon does
+  not ask who held;
+- `MOON_STONES` (4) of them, one a cell, on the horde's road. The road starts
+  at the middle spawn cell of each of tonight's regions and follows the flow
+  field's steps to the house, in walking order. Only cells he can stand on
+  count.
+- They lie on every Kth cell of it, from an offset drawn from a stream of the
+  night's own. That stream mixes the run's seed and the night the way
+  `Endless` mixes its waves', with a salt of its own. The run's dice are never
+  touched.
+
+**Picked up underfoot.** In `Player.tick`, after a step, `Loot.collect_at`
+puts the cell's pile in the ledger and clears the cell. After dark it
+refuses.
+
+**The fade:**
+- a pile lies `LOOT_FADE_DAYS` (3) mornings, counted from the night it was
+  last added to;
+- the end of a night takes what has lain that long - at the night's end
+  rather than at dawn, so the morning report counts what the morning has.
+
+### The resources and the trade
+
+- **`bones` and `moon_stone` are in:**
+  - `RESOURCES`;
+  - `SELL_PRICE`, at $1 and $20;
+  - the `night_leftovers` group, empty until now;
+  - `Names.KEYS` (`ITEM_BONES`, `ITEM_MOON_STONE`), in both languages.
+- **`Tech.trade_moon_stones(state, n)`** is the one door to the trade:
+  - by day, `MOON_STONE_ESSENCE` (1) essence a stone;
+  - nothing taken for more stones than are held;
+  - `Tech.why_not_trade` says why not: after dark, or none held.
+- **`GameData.check_loot`**, in `validate()`, refuses:
+  - a cap, a stone count, a rate, a fade, a reach or a share of zero;
+  - a body that leaves more bones than a pile holds.
+- **Every new lever is in `digest()`**, on its `loot` line.
+
+### What it looks like
+
+**`LootView`** (`src/ui/loot_view.gd`, new) draws on the ground beside the
+dig spots, view only. A036's bone pile and moon stone are drawn in code until
+0235, in their 16x16 boxes at (8,14):
+- **The bones:** two pale bones heaped, each with the two-lobed ends that make
+  a bone a bone, on a soft shadow.
+- **The moon stone:**
+  - smooth and rounded, pale blue-white, shaded blue at its lower right;
+  - a glint slides along its upper left, two frames of 0.4 s;
+  - a faint halo of its own light by day.
+- **The first drawings did not read.** The picture showed a flat white tray
+  and a blue-grey pebble beside the farm's grey rocks, and both were redrawn.
+
+**Around it:**
+- **`Lighting`:** a small cold glow on each stone after dark.
+- **The icons:** tinted stand-ins of the stone's icon until 0235 - cream for
+  bones, moonlight for the stone. They are registered under A036, which
+  `placeholders.py` now lists with six stand-ins.
+- **The morning report's leftovers line** (0138):
+  - "on the farm to collect: 10 bones, 4 moon stones", broken between the
+    parts when it is long;
+  - "nothing lying on the farm" when there is nothing.
+- **The tree:**
+  - "TRADE A MOON STONE (3)" at the bottom right;
+  - in the focus chain, so the mouse, Enter and the pad's A all trade;
+  - dim with no stones, its tooltip saying why.
+
+### Balance (BALANCE.md's 0221 section)
+
+**A bone a body was a second purse.**
+- `night_pay.gd` priced a spring night held well at 80 bones and a winter one
+  at 637. That is more than the night's purse in every season, and in winter
+  more than a whole day.
+- The plan's own spring morning picks up six.
+- The kills heap up where the towers stand: the autoplayer's spring nights
+  killed on 5 to 24 cells. So the pile cap alone did not hold it.
+
+**One in eight, a night held well** (`night_pay.gd`'s new columns):
+
+| Season | Bones a night | With the moon stones, at the stall | The night's purse |
+|---|---|---|---|
+| spring | 11 | $23 | $74 |
+| summer | 34 | $46 | $152 |
+| autumn | 59 | $70 | $239 |
+| winter | 82 | $93 | $319 |
+
+**The moon stones:**
+- a Full Moon's four are $80 at the stall, or 4 essence;
+- traded, a year's 32 lift the best year's essence from 256 to 288, still
+  short of the tree's 294. `Tech.total_available()` and the tree's summary
+  count the nights only.
+
+**Passed on:**
+- 0222 is told how many bones there are, to set what a bone meal takes;
+- 0278 counts the leftovers beside the night's purse.
+
+### Hashes
+
+- **SIM 3849555693 -> 3551005946, on purpose:** two new state keys, bones in `_kill`,
+  and stones at a Full Moon's end.
+- **DATA 3553624604 -> 883229633, on purpose:** the two resources and their
+  prices, the group, the enemy rows' `bones`, and the six levers.
+
+Verify: **PASS**, 60 passed, 0 failed in 778 s (the known OVER BUDGET), on the
+first run, with `--accept`.
+- `headless_check` 17606 asserts, `headless_v1` 2320, `input_check` 1242
+  cases, `input_v1` 697.
+- **The bound is closer still:** `input_v1` took 114.8 s of verify's 120.
+  - It took 106 s run alone, and 102 s in 0220's last run.
+  - Every suite ran about a seventh slower than in that run, so most of the
+    rise is the machine; 0221's case is about four seconds of it.
+  - Whether to raise `SCRIPT_TIMEOUT_S` is the owner's call. It is not
+    raised here.
+
+**Tests:**
+- **`_task_0221_night_loot` (headless_v1), 26 asserts:**
+  - **The table:**
+    - the levers pass their check;
+    - each zero and a body bigger than a pile are refused.
+  - **The resources:**
+    - priced and named, the night's leftovers;
+    - the stall buys a stone;
+    - the two keys are RUN_DATA, and none is `moon_phase`.
+  - **The bones:**
+    - a killed walker leaves its bones on its cell, and the cell stays
+      walkable and buildable;
+    - tonight's second walker leaves none;
+    - the rule picks the first, then one in eight, and every boss.
+  - **The morning:**
+    - the pile survives `begin_day`;
+    - the walker that walked off at dawn left nothing.
+  - **Picking up:**
+    - a step onto the cell by day puts the bones in the ledger and clears the
+      cell;
+    - at night the boots pick up nothing.
+  - **The cap:** a cell holds nine, and nothing lands off the farm.
+  - **Where it lands:**
+    - the steps go nearest first, then in reading order;
+    - on a wall, the cell above;
+    - with that one walled too, the cell to its left, through a real kill.
+  - **The fade:** through the real night's end, a pile lies three mornings and
+    is gone on the fourth.
+  - **The moon stones:**
+    - a Full Moon lays four, on the same cells for the same seed;
+    - every one on the road, where he can stand, with the run's dice
+      untouched;
+    - an ordinary night lays none;
+    - every stone has its light.
+  - **The trade:**
+    - a stone pays the essence lever;
+    - more stones than are held trade none;
+    - none after dark, and with none held it says so.
+  - **The report:** "3 bones", "1 moon stone" and "3 ossos", "1 pedra da lua",
+    and nothing on a bare farm.
+- **`_case_0221_collect` (input_v1), 4 cases:**
+  - D walks the farmer over a pile of three and the count rises by three;
+  - the tree offers the trade with two stones held;
+  - a click trades one and A on the pad the other;
+  - after that the button is dim.
+- **`headless_check`:** the shot count is 78 (`night_loot`).
+
+**Looked at** (`python tools/shot.py 0221 night_loot tech inventory_full
+--fhd`, and `night_loot tech --pt_BR`):
+- **`night_loot`:** the morning report of Spring 7's Full Moon, held to dawn.
+  Its last line, in green: "on the farm to collect: 10 bones, 4 moon stones".
+  - The fixture mends the house every tick. A Full Moon's horde is more than
+    the shot's eight towers hold, and the first picture, of a lost night, had
+    its line of things taken running off the frame. That is an older layout
+    fault of the lost report, not this task's.
+- **`night_loot_morning`:**
+  - the farmer under the moon stone nearest the house;
+  - bone piles along the east road, and the other stones down it and on the
+    grass by the fence;
+  - read at 4x: two-lobed bones, and a pale, haloed stone unlike the grey
+    rocks around it.
+- **`tech`:** "TRADE A MOON STONE (3)" bottom right, under the summary and
+  clear of the hint. The `tech` scenario now holds three stones so the button
+  is lit.
+- **`inventory_full_night_leftovers_1`:** NIGHT LEFTOVERS, with bones at $1
+  each and moon stone at $20 each, under their stand-in icons. The scenario's
+  other thirty pages were deleted from the folder: nothing on them is 0221's.
+- **pt_BR:** "na fazenda para recolher: 10 ossos, 4 pedras da lua" and
+  "TROCAR PEDRA DA LUA (3)", both inside their frames.
+
+**Found in passing, and passed on as tasks:**
+- **A second bite settles a lost night twice.** When the house falls,
+  `Enemies.tick` goes on walking the rest, and a second bite on the same tick
+  calls `Rewards.settle` again: the loss is taken twice, and the log says
+  "enter_result from RESULT". The autoplayer showed it on night 12.
+- **`play_nights.gd` kills nothing today.** Its nights all fall in under a
+  minute, already a pending task. It now prints the bones and piles it
+  leaves, for when it does.
+
+Files: src/core/{loot,game_data,state,combat,player,phases,tech}.gd,
+src/core/loot.gd.uid, src/ui/{loot_view,world_view,lighting,tech_panel,
+result_screen,names,placeholder_art}.gd, src/ui/loot_view.gd.uid,
+assets/locale/strings.csv, src/tools/{headless_check,headless_v1,input_v1,
+shot,night_pay,play_nights}.gd, tools/determinism_sim_hash.txt,
+tools/determinism_data_hash.txt, tools/backlog/{part9,part11}.py,
+implementation/{BACKLOG,BALANCE,PROGRESS}.md,
+implementation/prompts/{0221-night-loot,0222-bone-meal,0278-economy-seasons}.md,
+implementation/shots/0221/, docs/devlog/{index,index.pt_BR}.md

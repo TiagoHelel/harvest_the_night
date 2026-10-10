@@ -320,6 +320,12 @@ TASKS = [
               "price, a group, `Names.KEYS` (`ITEM_BONE_MEAL`, its `REC_*`) "
               "and both languages; `check_chain` holds (bone meal is worth "
               "more than its bones)",
+              "How many bones there are (0221): one body of a kind in "
+              "`BONES_EVERY` (8) leaves its bones - about 11 a spring night "
+              "held well and 82 a winter one (`src/tools/night_pay.gd`'s "
+              "Bones column). Set the bones a bone meal takes against that, "
+              "so a night's bones fertilise a handful of plots and not the "
+              "field, and say the ratio in BALANCE.md",
               "Fertilising: with bone meal selected in the day HUD's strip "
               "beside the seeds (keyboard, mouse and pad), interact on a "
               "tilled plot spends one and marks the plot `fertilised` - a new "

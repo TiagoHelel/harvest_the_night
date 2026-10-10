@@ -380,9 +380,29 @@ func _build(payout: Dictionary) -> void:
 	var shipped := Shipping.due(_state)
 	if shipped > 0:
 		_row(I18n.f(&"RES_BIN", [shipped]), "", UiKit.GOOD)
-	# **What the night left lying on the farm**: nothing yet - phase 13's
-	# bones and moon stones are what fill this line.
-	_row(I18n.t(&"RES_LEFTOVERS"), "", UiKit.DIM)
+	# **What the night left lying on the farm** (task 0221): the bones and
+	# the moon stones the morning round will pick up - counted after the
+	# night's end took what had lain too long, so it is what the morning has.
+	var left := leftovers_parts(_state)
+	if left.is_empty():
+		_row(I18n.t(&"RES_LEFTOVERS"), "", UiKit.DIM)
+	else:
+		_listed(I18n.t(&"RES_LEFTOVERS_LYING"), left, UiKit.GOOD)
+
+
+## **The leftovers line's parts, in words** (task 0221): "12 bones", then
+## "4 moon stones" - what `Loot` says is lying on the farm, nothing for
+## a thing there is none of.
+static func leftovers_parts(state: Dictionary) -> Array:
+	var lying := Loot.lying(state)
+	var out: Array = []
+	var bones := int(lying.get(GameData.BONES, 0))
+	if bones > 0:
+		out.append(I18n.plural(&"RES_LEFT_BONES", bones, [bones]))
+	var stones := int(lying.get(GameData.MOON_STONE, 0))
+	if stones > 0:
+		out.append(I18n.plural(&"RES_LEFT_STONES", stones, [stones]))
+	return out
 
 
 ## **The essence's lines, in words** (task 0219): the night first, then the

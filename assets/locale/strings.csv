@@ -280,6 +280,8 @@ ITEM_MONEY,0,money,dinheiro
 ITEM_OIL,0,oil,óleo
 ITEM_STONE,0,stone,pedra
 ITEM_TECH,0,essence,essência
+ITEM_BONES,0,bones,ossos
+ITEM_MOON_STONE,0,moon stone,pedra da lua
 ITEM_WHEAT,0,wheat,trigo
 ITEM_WOOD,0,wood,madeira
 LOG_BOSS,0,the giant is coming,o gigante está vindo
@@ -402,7 +404,12 @@ RES_GIFT,200,A GIFT ON THE PORCH,UM PRESENTE NA VARANDA
 RES_HOUSE,0,"house %d/%d, %d still up","casa %d/%d, %d de pé"
 RES_INDENT,0,  %s,  %s
 RES_KILLED,0,"killed %d, %d got through","mortos %d, passaram %d"
-RES_LEFTOVERS,200,left on the farm: nothing yet,deixado na fazenda: nada ainda
+RES_LEFTOVERS,200,nothing lying on the farm,nada largado na fazenda
+RES_LEFTOVERS_LYING,200,on the farm to collect:,na fazenda para recolher:
+RES_LEFT_BONES,0,%d bone,%d osso
+RES_LEFT_BONES.other,0,%d bones,%d ossos
+RES_LEFT_STONES,0,%d moon stone,%d pedra da lua
+RES_LEFT_STONES.other,0,%d moon stones,%d pedras da lua
 RES_LOST,0,LOST,PERDIDO
 RES_MORNING,200,MORNING OF DAY %d,MANHÃ DO DIA %d
 RES_NEW_FARM,0,A NEW FARM,UMA FAZENDA NOVA
@@ -522,6 +529,8 @@ TECH_BRANCH_SURVIVAL,0,SURVIVAL,SOBREVIVÊNCIA
 TECH_FULL_CANS,0,full cans,regadores cheios
 TECH_HELD,0,%d essence,%d de essência
 TECH_HINT,0,T or ESC to close,T ou ESC para fechar
+TECH_TRADE,140,TRADE A MOON STONE (%d),TROCAR PEDRA DA LUA (%d)
+TECH_TRADE_NOTE,0,a moon stone for %d essence,uma pedra da lua por %d de essência
 TECH_LONG_BARRELS,0,long barrels,canos longos
 TECH_NODE,0,%s   %d,%s   %d
 TECH_NOTE,0,%s - %s,%s - %s
@@ -576,6 +585,7 @@ WHY_HOUSE_LOW,228,the house is at %d%% - watch this one,a casa está em %d%% - a
 WHY_IN_THE_WATER,228,in the water,na água
 WHY_NEEDS_NODE,228,needs %s first,precisa de %s antes
 WHY_NOT_YET_SEASON,228,opens in %s,abre no %s
+WHY_NO_MOON_STONE,228,no moon stones to trade,nenhuma pedra da lua para trocar
 WHY_NEEDS_TECH,228,needs %s from the tree,precisa de %s na árvore
 WHY_NIGHT_LIMIT,228,"%d a night, and that was the last","%d por noite, e essa foi a última"
 WHY_NOTHING_SELECTED,228,nothing selected,nada selecionado

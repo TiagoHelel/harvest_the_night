@@ -47,6 +47,9 @@ var _locked: Label
 var _heading: Label
 var _hint: Label
 var _branch_titles: Dictionary = {}     # branch -> Label
+## **A moon stone for essence** (task 0221), bottom right: the one door
+## to `Tech.trade_moon_stones`.
+var _trade: Button
 
 
 func _ready() -> void:
@@ -104,6 +107,20 @@ func _ready() -> void:
 	# where the focused node's tooltip - which opens under the row - does
 	# not cover it.
 	_locked = _label("TechSeasonLocked", Vector2(8, 158), UiKit.DIM)
+
+	# **Moon stones for essence** (task 0221), under the summary and right
+	# of the hint. In the focus chain, so the arrows and the D-pad reach it
+	# from the nodes above, and Enter or A trades.
+	_trade = Button.new()
+	_trade.name = "TechTradeStone"
+	_trade.theme_type_variation = UiKit.ROW
+	_trade.focus_mode = Control.FOCUS_ALL
+	_trade.clip_text = true
+	_trade.position = Vector2(296, 198)
+	_trade.size = Vector2(160, 14)
+	_trade.custom_minimum_size = Vector2(160, 14)
+	_trade.pressed.connect(_trade_one)
+	_frame.add_child(_trade)
 
 	_build_nodes()
 
@@ -258,7 +275,7 @@ func _input(event: InputEvent) -> void:
 		# the night HUD reads it - once, for every device - and goes no
 		# further.
 		var on := get_viewport().gui_get_focus_owner() as Button
-		if on != null and _buttons.values().has(on):
+		if on != null and (_buttons.values().has(on) or on == _trade):
 			if not on.disabled:
 				on.pressed.emit()
 			get_viewport().set_input_as_handled()
@@ -294,7 +311,8 @@ func _process(_delta: float) -> void:
 
 	# Redrawn when something changed, not every frame: twelve buttons of text
 	# rebuilt sixty times a second is sixty times the work for one picture.
-	var signature := Tech.held(_state) * 1000 + Tech.owned(_state).size() * 10 + _page
+	var signature := hash([Tech.held(_state), Tech.owned(_state).size(), _page,
+		Resources.amount(_state, GameData.MOON_STONE)])
 	if signature != _drawn_for:
 		_drawn_for = signature
 		_refresh()
@@ -303,6 +321,9 @@ func _process(_delta: float) -> void:
 
 ## The note of whichever node the cursor is over, or nothing.
 func _show_the_note() -> void:
+	if _trade.get_global_rect().has_point(get_global_mouse_position()):
+		_note.text = I18n.f(&"TECH_TRADE_NOTE", [GameData.MOON_STONE_ESSENCE])
+		return
 	for id in _buttons:
 		var button: Button = _buttons[id]
 		if button.visible and button.get_global_rect().has_point(get_global_mouse_position()):
@@ -335,6 +356,14 @@ func _refresh() -> void:
 	_season.theme_type_variation = UiKit.WARM if reached else UiKit.DIM
 	_locked.visible = not reached
 	_locked.text = "" if reached else Names.refusal([&"WHY_NOT_YET_SEASON", season])
+
+	# The trade: how many stones there are to trade, and why not when not.
+	var not_now := Tech.why_not_trade(_state)
+	_trade.text = I18n.f(&"TECH_TRADE", [Resources.amount(_state, GameData.MOON_STONE)])
+	_trade.disabled = not not_now.is_empty()
+	var trade_note := I18n.f(&"TECH_TRADE_NOTE", [GameData.MOON_STONE_ESSENCE])
+	_trade.tooltip_text = trade_note if not_now.is_empty() \
+		else I18n.f(&"TECH_REFUSED", [trade_note, Names.refusal(not_now)])
 
 	for id in _buttons:
 		var one := Tech.node(StringName(id))
@@ -374,4 +403,12 @@ func _buy(id: StringName) -> void:
 		return
 	# **The rules decide.** The button is a request, the same as a key press.
 	Tech.buy(_state, id)
+	_drawn_for = -1
+
+
+## Trade one moon stone for essence: a request, as a node is.
+func _trade_one() -> void:
+	if _state.is_empty():
+		return
+	Tech.trade_moon_stones(_state, 1)
 	_drawn_for = -1
