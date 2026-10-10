@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **181 / 296 done**
+`###############.........`  **182 / 296 done**
 
-0 doing / 115 todo / 0 blocked across 18 phases.
+0 doing / 114 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-115 task(s) left, the ready ones first, then what they
+114 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -242,21 +242,22 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0195 - Teaching the new day
+### 0196 - Checkpoint: is the day good on its own?
 
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/ui/tips.gd (new, e.g.), src/ui/tutorial_prompt.gd, src/ui/main.gd, src/app/save.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `implementation/PROGRESS.md, implementation/shots/0196/, src/tools/autoplay.gd, implementation/prompts/`.
 
-The new day explains itself once: tilling grass, the seasons, the shipping bin, the fishing bar and the animals each get one tip, at the moment they first matter.
+**The plan's Phase 3 checkpoint.** A spring day and a summer day earn money in different ways, and the day is fun even without thinking about the night. Phase 13 and everything after it waits on this answer.
 
-- Tips, not day-one lines: `MAX_TUTORIAL_LINES` still caps the first day. A tip fires from the state (the first stand on open grass with the hoe, the first morning of a new season, the first stand by the bin, the first bite, the first animal bought) and is remembered in the profile so it never shows twice
-- Tips live in the view: `src/ui/` reads the state for the trigger and the profile (`Save.read_profile`/`write_profile`) for what was shown, through a pure `due(state, profile)` the headless group can call. No rule in `src/core/` reads them (their table may sit in `game_data.gd` beside `TUTORIAL`, as data), so SIM must not move; they never gate or pause anything. The day-one lines remember themselves in the `gameplay/tutorial_seen` Settings key (`tutorial_prompt.gd`): say why the tips use the profile instead, or use Settings too
-- `check_tutorial` (or a new check) covers the tip table in `game_data.gd`: unique, short, naming a string key that exists. List it in `digest()` (DATA moves) or exempt it in `_task_0112_digest` as view text - say which
-- Strings in both languages, each fitting its control (`tools/i18n_check.py`); a tip sits on the thing it describes (`tutorial_prompt.gd`)
-- The guided Spring 1-7 is 0293's, not here
+- Play a spring day and a summer day in the real game, and run the autoplayer through the same days; compare where the money came from
+- FHD captures of both days at morning, noon and dusk in `implementation/shots/0196/`, opened and looked at
+- Answer honestly in the journal: is the day fun even without thinking about the night? What drags, what is busywork, what is missing
+- If the answer changes the plan, edit the later prompts (0197 on) before they run, and say which
+- If the answer is no, mark this task blocked with the reason, so phase 13 does not start on a day that does not work
+- Change no rule here, so neither hash moves: fixes go into later prompts or new tasks
 
-  - done when: `_task_0195_tips` in `src/tools/headless_v1.gd`: each tip fires once on its trigger and never again with the profile flag set
-  - done when: `_case_0195_tips` in `src/tools/input_v1.gd`: a tip appears on the first bite and is dismissed
-  - done when: A new `tips` scenario: `python tools/shot.py 0195 tips --fhd` shows two tips in place; opened and looked at
+  - done when: The journal says, with numbers, how a spring day and a summer day each made their money - and that they differ
+  - done when: The journal answers the question in one paragraph a reader could disagree with
+  - done when: The captures are in `implementation/shots/0196/` and the journal says what each one shows
 
 ### 0197 - Art: trampled crops and tilled ground
 
@@ -675,26 +676,9 @@ The guardian's cursor, the night camera and the fishing bar each get the knob a 
   - done when: `_task_0292_options` in `src/tools/headless_v1.gd`: no file in `src/core/` names `Settings`; `Forecast.tonight` gives the same record at 08:00 as at 18:00
   - done when: the controls and game pages captured at 1920x1080 in both languages (`$GODOT --path . --position -4000,-4000 --script res://src/tools/capture_menus.gd -- --out=res://implementation/shots/0292/`, then again with `--pt_BR`) and opened: no label runs off its row and no two rows overlap
 
-### 0196 - Checkpoint: is the day good on its own?
-
-Waits on 0195.  Likely files: `implementation/PROGRESS.md, implementation/shots/0196/, src/tools/autoplay.gd, implementation/prompts/`.
-
-**The plan's Phase 3 checkpoint.** A spring day and a summer day earn money in different ways, and the day is fun even without thinking about the night. Phase 13 and everything after it waits on this answer.
-
-- Play a spring day and a summer day in the real game, and run the autoplayer through the same days; compare where the money came from
-- FHD captures of both days at morning, noon and dusk in `implementation/shots/0196/`, opened and looked at
-- Answer honestly in the journal: is the day fun even without thinking about the night? What drags, what is busywork, what is missing
-- If the answer changes the plan, edit the later prompts (0197 on) before they run, and say which
-- If the answer is no, mark this task blocked with the reason, so phase 13 does not start on a day that does not work
-- Change no rule here, so neither hash moves: fixes go into later prompts or new tasks
-
-  - done when: The journal says, with numbers, how a spring day and a summer day each made their money - and that they differ
-  - done when: The journal answers the question in one paragraph a reader could disagree with
-  - done when: The captures are in `implementation/shots/0196/` and the journal says what each one shows
-
 ### 0293 - The first week, taught
 
-Waits on 0195.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/ui/tutorial_prompt.gd, src/app/settings.gd, tools/goldens/, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/ui/tutorial_prompt.gd, src/app/settings.gd, tools/goldens/, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 A stranger learns 1.0 the way they learned the MVP's first day - one short line, on the thing it is about, gone when it is done - but spread over Spring 1 to 7, so the first morning is not a lecture and the forecast, the bin and the rod arrive when they first matter.
 
@@ -2347,7 +2331,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
 - [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
 
-## 12 - The day that pays  (30/53)
+## 12 - The day that pays  (31/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2379,8 +2363,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md)
 - [x] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md)
 - [x] **0194** [The day's economy](prompts/0194-day-economy.md)
-- [ ] **0195** [Teaching the new day](prompts/0195-day-tutorial.md)
-- [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md) - needs 0195
+- [x] **0195** [Teaching the new day](prompts/0195-day-tutorial.md)
+- [ ] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md)
 - [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - waits for art A014
 - [ ] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md) - waits for art A015
 - [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - waits for art A016
@@ -2492,7 +2476,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 - [ ] **0291** [Saves into 1.0](prompts/0291-saves-v1.md) - needs 0279, 0287
 - [ ] **0292** [Options for the new controls](prompts/0292-options-v1.md)
-- [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md) - needs 0195
+- [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md)
 - [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0287, 0293, 0291, 0292
 - [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0280, 0291, 0292, 0293, 0294
 - [ ] **0296** [The store page and trailer for 1.0](prompts/0296-store-v1.md) - needs 0290, 0294

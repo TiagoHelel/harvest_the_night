@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-183 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+184 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -226,10 +226,11 @@ voz alta.
 | 0192 | Cooking with the new harvest | 2026-10-10 |
 | 0193 | Every season can make what it needs | 2026-10-10 |
 | 0194 | The day's economy | 2026-10-10 |
+| 0195 | Teaching the new day | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 81 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 82 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -312,6 +313,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Every season can make what it needs** (0193) - `sim` 1851684475 -> 3391018212
 - **Every season can make what it needs** (0193) - `data` 4141573147 -> 2131453559
 - **The day's economy** (0194) - `data` 2131453559 -> 1216212477
+- **Teaching the new day** (0195) - `data` 1216212477 -> 2340919704
 
 ## O que deu errado
 

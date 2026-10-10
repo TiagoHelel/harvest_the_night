@@ -106,6 +106,7 @@ var _hotbar: Hotbar
 var _forecast: ForecastPanel
 ## The bar a bite opens (task 0180).
 var _fishing_bar: FishingBar
+var _tips: Tips
 
 
 ## **The theme goes on before anything is built against it**, which is why
@@ -141,6 +142,12 @@ func _ready() -> void:
 	_night_hud.get_parent().move_child(_forecast, _night_hud.get_index() + 1)
 	_fishing_bar = FishingBar.new()
 	_night_hud.get_parent().add_child(_fishing_bar)
+	# **The new day's tips** (task 0195): beside day one's prompt, over the
+	# farm and the bar, under every panel.
+	_tips = Tips.new()
+	_tips.name = "Tips"
+	_tutorial.get_parent().add_child(_tips)
+	_tutorial.get_parent().move_child(_tips, _tutorial.get_index() + 1)
 	var window := get_window()
 	_window_focused = window.has_focus()
 	window.focus_entered.connect(func() -> void: _window_focused = true)
@@ -300,6 +307,10 @@ func _hand_out() -> void:
 	_tutorial.house = _house_view
 	_tutorial.night_hud = _night_hud
 	_tutorial.show_state(_driver.state, _world)
+	_tips.keeper = self
+	_tips.tutorial = _tutorial
+	_tips.hud = _hud
+	_tips.show_state(_driver.state, _world)
 	_lighting.show_state(_driver.state)
 	_particles.show_state(_driver.state)
 	_transition.show_state(_driver.state, _world)
@@ -679,6 +690,18 @@ func _bank_if_a_night_ended() -> void:
 	Save.write_profile(_profile)
 	Save.write_run(_driver.state)
 	_show_profile()
+
+
+## The profile, for the tips (task 0195).
+func profile() -> Dictionary:
+	return _profile
+
+
+## **A tip was shown** (task 0195): into the profile and written at once, so
+## it is in every later save and never shows again, a crash included.
+func remember_tip(id: StringName) -> void:
+	_profile = Tips.remember(_profile, id)
+	Save.write_profile(_profile)
 
 
 ## True on the frame an action goes from up to down, whenever that frame is.

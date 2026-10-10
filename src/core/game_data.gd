@@ -1909,6 +1909,28 @@ const TUTORIAL: Array = [
 	{"id": &"dawn", "line": &"TUT_DAWN"},
 ]
 
+## **The new day's tips** (task 0195). There is one each for what the first
+## day does not teach: tilling grass, the seasons, the shipping bin, the
+## fishing bar and the animals.
+## - **When:** each shows once ever, at the moment it first matters, from the
+##   second day on. The first day is `TUTORIAL`'s, still capped by
+##   `MAX_TUTORIAL_LINES`.
+## - **Who reads it:** this is data for the view. `Tips` (in `src/ui/`)
+##   reads each trigger off the state and what was shown off the profile.
+##   No rule reads this table.
+const TIPS: Array = [
+	{"id": &"till", "line": &"TIP_TILL"},
+	{"id": &"season", "line": &"TIP_SEASON"},
+	{"id": &"bin", "line": &"TIP_BIN"},
+	{"id": &"bite", "line": &"TIP_BITE"},
+	{"id": &"animal", "line": &"TIP_ANIMAL"},
+]
+## How long a tip stays up, in the screen's seconds. It stays while its
+## moment lasts, but never less than the first number (a line that flickers
+## past is a line spent) and never more than the second. It goes by itself.
+const TIP_MIN_SECONDS := 2              # LEVER: seconds, 1-4
+const TIP_SECONDS := 6                  # LEVER: seconds, 3-12
+
 
 ## What repairing costs, per hit point put back.
 ## What a hit point of **the house** costs. The house has no build cost to
@@ -2902,6 +2924,7 @@ static func validate() -> Array:
 	errors.append_array(check_day_targets(DAY_TARGETS, DAY_FARM))
 	errors.append_array(check_stall_hours(STALL_OPENS, STALL_CLOSES))
 	errors.append_array(check_tutorial(TUTORIAL))
+	errors.append_array(check_tips(TIPS))
 	errors.append_array(check_pathing(TERRAIN_COST, DEFENCES, BUILDINGS))
 
 	for res in sorted_names(REPAIR_COST_PER_HP.keys()):
@@ -4387,6 +4410,26 @@ static func check_tutorial(steps: Array) -> Array:
 	return errors
 
 
+## **The tips' table** (task 0195): each tip once, with a line that is a
+## `TIP_` key - its words are `tools/i18n_check.py`'s to measure, as the
+## tutorial's are - and a short one. The display times run in order.
+static func check_tips(tips: Array) -> Array:
+	var errors: Array = []
+	var seen: Dictionary = {}
+	for entry in tips:
+		var tip: Dictionary = entry
+		var id := StringName(tip.get("id", &""))
+		if id == &"" or seen.has(id):
+			errors.append("tip '%s' is nameless or appears twice" % id)
+		seen[id] = true
+		var line := String(tip.get("line", ""))
+		if not line.begins_with("TIP_") or line.length() > MAX_TUTORIAL_LINE_LENGTH:
+			errors.append("tip '%s' names '%s', which is no short TIP_ key" % [id, line])
+	if TIP_MIN_SECONDS <= 0 or TIP_MIN_SECONDS > TIP_SECONDS:
+		errors.append("a tip stays %d-%d seconds, which is no range" % [TIP_MIN_SECONDS, TIP_SECONDS])
+	return errors
+
+
 ## Every enemy needs the four numbers the night loop reads off it, and the one
 ## that ignores structures has to be worth ignoring them for.
 ##
@@ -4595,6 +4638,7 @@ static func digest() -> int:
 		"animal_stall": [ANIMAL_PRICE, ANIMAL_STOCK, UPGRADE_STOCK],
 		"stall_hours": [STALL_OPENS, STALL_CLOSES],
 		"tutorial": TUTORIAL,
+		"tips": [TIPS, TIP_MIN_SECONDS, TIP_SECONDS],
 		"crops": CROPS,
 		"no_growth_seasons": NO_GROWTH_SEASONS,
 		"water": [WATER_CAN_CAPACITY],

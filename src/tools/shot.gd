@@ -66,6 +66,7 @@ const OUT := "res://implementation/shots/"
 ## The set, in the order the task names them. Each is a scenario name, the
 ## line that describes it, and the screen to bring up over the world.
 const SCENARIOS: Array = [
+	["tips", "Spring 3, the shipping bin's tip over the bin; then the first bite's over the fishing bar", ""],
 	["kitchen", "a kitchen on the grass at noon in spring, the farmer at it with its panel up: seven dishes, a stew on the fire", "WorkshopPanel"],
 	["house_tiers", "the house in tier I at noon, the farmer by its west wall; then tier II with its plaque over the door, the workshop's upgrades tab offering tier III, and tier III", ""],
 	["peddler", "the stall open at noon with the peddler at its end; then shut at dusk, nobody there", ""],
@@ -283,6 +284,10 @@ func _initialize() -> void:
 	root.add_child(main)
 	await process_frame
 	await process_frame
+	# **The profile's tips, put back at the end** (task 0195): every picture
+	# plays the real main scene, which writes the tips it shows into this
+	# machine's profile.
+	var tips_before := (Save.read_profile().get("tips_seen", []) as Array).duplicate()
 
 	for name in wanted:
 		var entry := _scenario(name)
@@ -292,6 +297,9 @@ func _initialize() -> void:
 			continue
 		await _take(main, entry, folder)
 
+	var profile := Save.read_profile()
+	profile["tips_seen"] = tips_before
+	Save.write_profile(profile)
 	print("%d written, %d failed, into %s" % [_written, _failed, folder])
 	quit(1 if _failed > 0 else 0)
 
@@ -666,6 +674,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	# the one before it. Same seed each time, so the farm is the same farm.
 	seed(SPARK_SEED)
 	main.begin_run(SEED)
+	# **No tip in a picture that is not about one** (task 0195): every tip
+	# counts as shown until the `tips` scenario lets one through.
+	_tips_shown_but(main, [])
 	# **After the run is built, not before.** The `Locale` autoload sets the
 	# language from `Settings` in its own `_ready`, which happens somewhere
 	# in the middle of all this - so the language is put on again here, where
@@ -746,6 +757,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"shipping_bin": _set_shipping_bin(state)
 		"peddler": _set_peddler(state)
 		"house_tiers": _set_house_tiers(state)
+		"tips": _set_tips(state)
 		"kitchen": _set_kitchen(state)
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
@@ -876,6 +888,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "house_tiers":
 		await _shoot("house_tiers", folder)
 		await _take_house_tiers(main, state, folder)
+		return
+	if name == "tips":
+		await _shoot("tips", folder)
+		await _take_tip_bite(main, state, folder)
 		return
 	if name == "inventory_crops":
 		(main.get_node("%InventoryPanel") as InventoryPanel).select_group(&"crops")
@@ -1015,6 +1031,13 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 			panel._process(0.0)
 		"react":
 			Reactions.show(state, &"note")
+		"tips":
+			# Turned to the bin again, and its tip let through: the next
+			# frame puts it up.
+			SuiteKit.stand_the_farmer(state, _standing_at)
+			state["player"]["facing"] = Player.WEST
+			(main.get_node("%WorldView") as WorldView).look_at_cell(_standing_at)
+			_tips_shown_but(main, [&"bin"])
 		"kitchen":
 			SuiteKit.stand_the_farmer(state, _standing_at)
 			state["player"]["facing"] = Player.NORTH
@@ -1889,6 +1912,65 @@ func _take_house_tiers(main: Node, state: Dictionary, folder: String) -> void:
 	await _shoot("house_tiers_3", folder)
 	print("  house_tiers: tiers %s, a whole house %d, the tab offered '%s', the farmer at %s" % [
 		str(bought), Phases.house_full(state), offered, str(_standing_at)])
+
+
+## **The tips** (task 0195): noon on Spring 3, a day after the first and its
+## lessons behind it, the farmer beside the shipping bin facing it - its tip
+## over the bin; then the first bite's over the bar (`_take_tip_bite`).
+func _set_tips(state: Dictionary) -> void:
+	_set_noon(state)
+	_on_date(state, 3)
+	_standing_at = Farm.cells_with(state, Shipping.BIN)[0] + Vector2i.RIGHT
+	_stand(state, _standing_at)
+	state["player"]["facing"] = Player.WEST
+
+
+## **The first bite's tip** (task 0195): the farmer on the north-west pond's
+## shore, a line in, a fish on it at once - the bar up, and its tip over it.
+func _take_tip_bite(main: Node, state: Dictionary, folder: String) -> void:
+	var tips := main.find_child("Tips", true, false) as Tips
+	var at: Array = GameData.PONDS[&"north_west_pond"]
+	var water := Vector2i(-1, -1)
+	var shore := Vector2i(-1, -1)
+	for radius in 12:
+		for cell in Grid.within(Vector2i(int(at[0]), int(at[1])), radius):
+			if water.x >= 0 or Farm.terrain_at(state, cell) != Farm.Terrain.WATER:
+				continue
+			if Farm.walkable(state, cell + Vector2i.DOWN):
+				water = cell
+				shore = cell + Vector2i.DOWN
+	SuiteKit.stand_the_farmer(state, shore)
+	state["player"]["facing"] = Player.NORTH
+	(main.get_node("%WorldView") as WorldView).look_at_cell(shore)
+	_tips_shown_but(main, [&"bite"])
+	# The bin's tip goes first: its moment is over once he walks off, and
+	# one tip is up at a time.
+	for _i in 900:
+		if tips == null or tips.showing() == &"":
+			break
+		await process_frame
+	Fishing.begin(state, water)
+	state["fishing"]["left"] = 1
+	for _i in 120:
+		await process_frame
+		if Fishing.is_biting(state) and tips != null and tips.showing() == &"bite":
+			break
+	for _i in 4:
+		await process_frame
+	await RenderingServer.frame_post_draw
+	await _shoot("tips_bite", folder)
+	print("  tips: the bin's, then %s at the bar (biting %s)" % [tips.showing() if tips != null else &"none",
+		Fishing.is_biting(state)])
+
+
+## Every tip counted as shown in the run's profile but `let`.
+func _tips_shown_but(main: Node, let: Array) -> void:
+	var shown: Array = []
+	for entry in GameData.TIPS:
+		var id := StringName((entry as Dictionary)["id"])
+		if not let.has(id):
+			shown.append(String(id))
+	(main.call(&"profile") as Dictionary)["tips_seen"] = shown
 
 
 ## **The kitchen** (task 0192): noon on Spring 3, a kitchen on open grass

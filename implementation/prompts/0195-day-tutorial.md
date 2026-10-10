@@ -1,7 +1,7 @@
 # 0195 - Teaching the new day
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0194
 - **Likely files:** src/core/game_data.gd, src/ui/tips.gd (new, e.g.), src/ui/tutorial_prompt.gd, src/ui/main.gd, src/app/save.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

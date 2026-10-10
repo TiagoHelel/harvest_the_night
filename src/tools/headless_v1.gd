@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 64
+const GROUPS := 65
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -133,6 +133,7 @@ func _run() -> void:
 	_task_0192_kitchen()
 	_task_0193_supply()
 	_task_0194_economy()
+	_task_0195_tips()
 
 
 func _finish() -> void:
@@ -6293,6 +6294,87 @@ func _task_0194_economy() -> void:
 	expect(stalls and GameData.check_chain(GameData.RECIPES, GameData.SELL_PRICE).is_empty(),
 		"and the stall and the recipes still pass at the new prices")
 	_completed += 1
+
+
+## Task 0195: the new day's tips. Each fires on its moment and once - a
+## profile that has seen it never sees it again - none on the first day; the
+## table passes its check and every line has words; and reading them moves
+## nothing in the state.
+func _task_0195_tips() -> void:
+	expect(GameData.check_tips(GameData.TIPS).is_empty(), "the tip table passes its check",
+		str(GameData.check_tips(GameData.TIPS)))
+	var twice := GameData.TIPS.duplicate(true)
+	twice.append(twice[0])
+	var keyless := GameData.TIPS.duplicate(true)
+	(keyless[0] as Dictionary)["line"] = &"a line, not a key"
+	expect(not GameData.check_tips(twice).is_empty() and not GameData.check_tips(keyless).is_empty(),
+		"a tip twice, and a line that is no TIP_ key, are refused")
+	var ids: Array = []
+	for entry in GameData.TIPS:
+		var key := StringName((entry as Dictionary)["line"])
+		expect(I18n.t(key) != String(key), "%s has words" % key)
+		ids.append(StringName((entry as Dictionary)["id"]))
+	expect(ids == [&"till", &"season", &"bin", &"bite", &"animal"],
+		"five tips: tilling grass, the seasons, the bin, the bite and the animals", str(ids))
+	expect((Save.default_profile().get("tips_seen", null) as Array).is_empty(), "a new profile has seen none")
+
+	# **Each on its moment, once.** The others are marked seen, so each is
+	# asked on its own.
+	for id in ids:
+		var state := _tip_moment(id)
+		var others: Array = []
+		for other in ids:
+			if other != id:
+				others.append(String(other))
+		var profile := {"tips_seen": others}
+		var before := State.hash_of(state)
+		expect(Tips.triggered(id, state) and Tips.due(state, profile) == id, "the %s tip is due at its moment" % id)
+		expect(Tips.due(state, Tips.remember(profile, id)) == &"", "and never again once the profile has it")
+		expect(State.hash_of(state) == before, "reading the %s tip moves nothing in the state" % id)
+	var first := _tip_moment(&"bin")
+	first["day"] = 1
+	expect(Tips.triggered(&"bin", first) and Tips.due(first, {}) == &"",
+		"none on the first day, which is the tutorial's, even at its moment")
+	var twice_remembered := Tips.remember(Tips.remember({}, &"bite"), &"bite")
+	expect((twice_remembered["tips_seen"] as Array) == ["bite"] and Tips.seen(twice_remembered, &"bite"),
+		"remembered once, however many times it is written")
+	_completed += 1
+
+
+## A state at a tip's moment (task 0195), on day two or later: facing open
+## grass, a season's first morning, facing the bin, a fish biting, a coop
+## with the map's hens in it.
+func _tip_moment(id: StringName) -> Dictionary:
+	var state := State.create(1950)
+	state["day"] = 2
+	match id:
+		&"till":
+			for idx in Grid.CELLS:
+				var cell := Grid.cell(idx)
+				var stand := cell + Vector2i.DOWN
+				if Farm.terrain_at(state, cell) == Farm.Terrain.GRASS and Interact.verb_at(state, cell) == &"till" \
+						and Grid.in_bounds(stand) and Farm.walkable(state, stand):
+					SuiteKit.stand_the_farmer(state, stand)
+					state["player"]["facing"] = Player.NORTH
+					break
+		&"season":
+			state["day"] = GameData.SEASON_DAYS + 1
+		&"bin":
+			SuiteKit.stand_the_farmer(state, Farm.cells_with(state, Shipping.BIN)[0] + Vector2i.RIGHT)
+			state["player"]["facing"] = Player.WEST
+		&"bite":
+			for found in Farm.cells_of(state, Farm.Terrain.WATER):
+				var dry: Vector2i = found + Vector2i.DOWN
+				if Grid.in_bounds(dry) and Farm.walkable(state, dry) and not Fishing.is_casting(state):
+					SuiteKit.stand_the_farmer(state, dry)
+					state["player"]["facing"] = Player.NORTH
+					Fishing.begin(state, found)
+					state["fishing"]["left"] = 1
+					Sim.advance(state, 2)
+		&"animal":
+			Resources.gain(state, Building.cost_of(&"coop"))
+			Building.place(state, &"coop", _spot_for(state, &"coop"))
+	return state
 
 
 ## Whether any of `errors` says `text`.

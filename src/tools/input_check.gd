@@ -58,11 +58,25 @@ var _scene: Node = null
 
 
 func _initialize() -> void:
+	_tips_before = (Save.read_profile().get("tips_seen", []) as Array).duplicate()
 	# Not awaited: `_run()` needs frames to pass, which only happens once
 	# `_initialize()` has returned and the main loop is turning. `_finish()` is
 	# called at the end of `_run()`, and the watchdog covers the case where it
 	# never gets there.
 	_run()
+
+
+## **The profile's tips, as this run found them** (task 0195). The cases play
+## the real main scene, which writes every tip it shows into the profile on
+## this machine, and a test run would otherwise teach the next player
+## nothing. Put back when the run ends.
+var _tips_before: Array = []
+
+
+func _put_tips_back() -> void:
+	var profile := Save.read_profile()
+	profile["tips_seen"] = _tips_before.duplicate()
+	Save.write_profile(profile)
 
 
 func _process(delta: float) -> bool:
@@ -477,6 +491,7 @@ func _finish() -> void:
 		print("  FAIL  a case did not finish   %d of %d completed"
 			% [_completed, CASES])
 	print("%d cases, %d failed" % [passed + failed, failed])
+	_put_tips_back()
 	quit(1 if failed > 0 else 0)
 
 

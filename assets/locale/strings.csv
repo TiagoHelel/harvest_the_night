@@ -525,6 +525,11 @@ TUT_PLANT,462,SPACE tills and sows. Each seed packet plants one crop.,ESPAÇO re
 TUT_SELL,462,"The stall buys what you gathered, and sells wood, stone and iron.","A banca compra o que você colheu, e vende madeira, pedra e ferro."
 TUT_START,462,"When it is all set, press START. Nothing comes until you do.","Quando estiver tudo pronto, aperte COMEÇAR. Nada vem antes disso."
 TUT_WATER,462,Water crops to grow each morning. Dry crops wait. Fill the can at water.,Regue para crescer a cada manhã. Sem água a planta espera. Encha o regador na água.
+TIP_ANIMAL,462,Housed animals eat a bale of hay each morning. Collect at the door.,Animais abrigados comem um fardo de feno por manhã. Colete na porta.
+TIP_BIN,462,Drop goods in the bin any time - they are paid for next morning.,Deixe produtos na caixa a qualquer hora - o pagamento chega de manhã.
+TIP_BITE,462,Press SPACE when the marker crosses the green - a big fish takes more.,Aperte ESPAÇO quando o marcador cruzar o verde - peixe grande pede mais.
+TIP_SEASON,462,"A new season: last season's crops wither, and the stall sells new seeds.","Estação nova: as culturas da anterior murcham, e a banca vende sementes novas."
+TIP_TILL,462,Any grass can be tilled: face it and hold SPACE.,Qualquer grama pode ser arada: fique de frente e segure ESPAÇO.
 VID_CAP,86,FPS CAP,LIMITE FPS
 VID_CAP_OFF,42,OFF,SEM
 VID_COUNTDOWN,230,KEEP THIS? BACK IN %ds,MANTER ASSIM? VOLTA EM %ds

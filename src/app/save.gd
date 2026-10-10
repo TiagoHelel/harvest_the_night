@@ -77,6 +77,9 @@ static func default_profile() -> Dictionary:
 		"best_night": 0,
 		"unlocks": [],
 		"stats": {},
+		# **The tips shown** (task 0195), by id: once ever, so a tip a
+		# player has seen in one run does not teach them again in the next.
+		"tips_seen": [],
 	}
 
 

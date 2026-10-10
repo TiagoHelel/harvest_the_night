@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 44
+const V1_CASES := 45
 
 
 func _process(delta: float) -> bool:
@@ -94,6 +94,7 @@ func _run() -> void:
 	await _case_0189_bin()
 	await _case_0190_peddler()
 	await _case_0191_house()
+	await _case_0195_tips()
 	_finish()
 
 
@@ -106,6 +107,7 @@ func _finish() -> void:
 		print("  FAIL  a case did not finish   %d of %d completed"
 			% [_completed, V1_CASES])
 	print("%d cases, %d failed" % [passed + failed, failed])
+	_put_tips_back()
 	quit(1 if failed > 0 else 0)
 
 
@@ -3087,5 +3089,59 @@ func _case_0191_house() -> void:
 	await until(func() -> bool: return House.tier(state) == 2, "a click builds house II")
 	expect(Phases.house_full(state) == full + int((GameData.HOUSE_TIERS[1] as Dictionary)["hp_bonus"]),
 		"and the house holds more tonight")
+	await close_scene()
+	_completed += 1
+
+
+## Task 0195: on a day after the first, the first bite puts its tip over the
+## bar and into the profile; landing the fish ends its moment, and the tip
+## goes by itself.
+func _case_0195_tips() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var tips := require_control("Tips") as Tips
+	if driver == null or tips == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.set_speed(1)
+	# A day after the first, its lessons behind it, and every tip seen but
+	# the bite's.
+	state["day"] = 2
+	state["nights_won"] = 1
+	var lessons: Array = []
+	for step in Tutorial.steps():
+		lessons.append(StringName((step as Dictionary)["id"]))
+	((state["tutorial"] as Dictionary)["done"] as Array).assign(lessons)
+	var profile: Dictionary = _scene.call(&"profile")
+	profile["tips_seen"] = ["till", "season", "bin", "animal"]
+	var water := Vector2i(-1, -1)
+	var shore := Vector2i(-1, -1)
+	var facing := Player.SOUTH
+	for found in Farm.cells_of(state, Farm.Terrain.WATER):
+		for side in Player.FACING_STEPS.size():
+			var dry: Vector2i = found - Player.FACING_STEPS[side]
+			if water == Vector2i(-1, -1) and Farm.walkable(state, dry):
+				water = found
+				shore = dry
+				facing = side
+	_stand_at(state, shore, facing)
+	await frames(2)
+	expect(tips.showing() == &"", "no tip before the bite")
+	expect(Fishing.begin(state, water), "a line goes in")
+	state["fishing"]["left"] = 1
+	await until(func() -> bool: return Fishing.is_biting(state), "the bite")
+	await until(func() -> bool: return tips.showing() == &"bite", "its tip")
+	expect(tips.visible and Tips.seen(_scene.call(&"profile"), &"bite"),
+		"the bite's tip is up over the bar, and the profile has it")
+	state["fishing"]["zone_at"] = 0
+	state["fishing"]["zone"] = int(GameData.FISHING["bar_units"])
+	state["fishing"]["needs"] = 1
+	await frames(2)
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool: return not Fishing.is_casting(state), "the fish landed")
+	await until(func() -> bool: return tips.showing() == &"", "the tip going by itself", 6000)
+	expect(not tips.visible, "and once the fish is in, the tip is gone")
 	await close_scene()
 	_completed += 1

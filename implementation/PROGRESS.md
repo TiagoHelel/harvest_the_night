@@ -20343,3 +20343,143 @@ Files: src/core/{economy (new),game_data}.gd, src/tools/{day_economy
 tools/determinism_{sim,data}_hash.txt, implementation/BALANCE.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0194-day-economy.md,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0195 - Teaching the new day - done 2026-10-10
+
+What changed: the new day explains itself once. Tilling grass, the seasons,
+the shipping bin, the fishing bar and the animals each get one tip. A tip
+shows at the moment it first matters, over the thing it is about, and
+never again: what was shown is kept in the profile.
+
+**The tips** (`GameData.TIPS`, beside `TUTORIAL`, data only), each from
+the state:
+
+| Tip | Its moment | Where it sits | English | Português |
+|---|---|---|---|---|
+| `till` | the farmer, by day and out of doors, faces open grass the hoe would turn | over that grass | Any grass can be tilled: face it and hold SPACE. | Qualquer grama pode ser arada: fique de frente e segure ESPAÇO. |
+| `season` | the first morning of a season after the first | under the date | A new season: last season's crops wither, and the stall sells new seeds. | Estação nova: as culturas da anterior murcham, e a banca vende sementes novas. |
+| `bin` | the farmer faces the shipping bin | over the bin | Drop goods in the bin any time - they are paid for next morning. | Deixe produtos na caixa a qualquer hora - o pagamento chega de manhã. |
+| `bite` | a fish is on the line and the bar is up | over the bar | Press SPACE when the marker crosses the green - a big fish takes more. | Aperte ESPAÇO quando o marcador cruzar o verde - peixe grande pede mais. |
+| `animal` | an animal lives in a home | over the home's door | Housed animals eat a bale of hay each morning. Collect at the door. | Animais abrigados comem um fardo de feno por manhã. Colete na porta. |
+
+- **Each statement was checked against the rules:**
+  - out-of-season crops wither at a season boundary (`Farming`);
+  - the bin pays the next morning (0189);
+  - SPACE strikes;
+  - a species' `hits` can be more than one;
+  - a housed animal eats one hay a morning.
+- **`animal` fires on an animal in a home, not only on one bought.**
+  Buying records nothing in the state, and the map's hens and cow move in
+  when the first coop or barn goes up. A housed animal is the one that eats
+  hay, which is what the tip is about.
+- **Not on the first day**, which is the tutorial's: `MAX_TUTORIAL_LINES`
+  still caps it. Nor while a tutorial line is up. One tip at a time.
+
+**View only: SIM does not move.**
+- `Tips` (`src/ui/tips.gd`, new) reads the triggers off the state and
+  writes nothing to it.
+- Its `mouse_filter` is IGNORE, so a tip gates nothing and pauses nothing.
+- **How long one stays up:** while its moment lasts, but at least
+  `TIP_MIN_SECONDS` (2) and at most `TIP_SECONDS` (6), then it goes by
+  itself. Both are levers.
+- `Tips.due(state, profile)` is pure: the first tip of the table whose
+  moment it is and that the profile has not seen, from the second day on.
+
+**The profile, not Settings.** Day one's lines remember themselves in the
+`gameplay/tutorial_seen` Settings key. A tip remembers itself in the
+profile's new `tips_seen` (also in `Save.default_profile`), because:
+- it is history rather than a preference, and belongs with the profile's
+  other lifetime facts (runs, stats, the fish book), which an options
+  screen's defaults do not touch;
+- the profile is plain data `Save.read_profile` hands over without an
+  autoload, so `due` runs headless as it is.
+
+**How the profile is written:**
+- `Main` keeps the profile, and a tip shown goes into it and is written at
+  once (`Main.remember_tip`). It is then in every later save, so a tip
+  never shows twice, even after a crash.
+- `Stats.fold` duplicates the profile whole, so `tips_seen` survives it.
+
+**Tests and shots leave the profile as they found it.** Both play the real
+main scene, which writes every tip it shows into this machine's profile.
+A test run would otherwise teach the next player nothing.
+- `input_check` and `input_v1` put `tips_seen` back when they finish.
+- The shot tool counts every tip as shown in each picture, and lets one
+  through only in `tips`, so no other picture gains one. It puts
+  `tips_seen` back at the end.
+
+**The check:** `check_tips` (in `validate()`) holds each tip once, its line
+a short `TIP_` key, and the two display times in order.
+- The words are `tools/i18n_check.py`'s to measure, as the tutorial's are:
+  723 keys in two languages, all of them fit their 462 pixels.
+- **`TIPS` and both times are in `digest()`**, beside `TUTORIAL`, which is
+  there too, so DATA moves. They are not exempted as view text.
+
+**Found and fixed in the tips, and left as its own task for the
+tutorial.**
+- The first take put the bin's tip in the bottom-right corner. It used
+  `TutorialPrompt`'s formula for a farm cell, `get_viewport_transform()`,
+  which carries the window's x4 content scale under `canvas_items`.
+- That stretch mode is the game's: a 480x270 viewport in a 1920x1080
+  window.
+- The tips now use `WorldView.cell_to_screen`, as the world tooltip does.
+- Day one's lines very likely sit in the wrong place in the real game for
+  the same reason. The tests run in `viewport` mode, where both formulas
+  agree, and the shot tool mutes the prompt. Confirming and fixing it is
+  its own task, not slipped in here.
+
+### Hashes
+
+- **SIM 3391018212, unchanged:** the tips are view only.
+- **DATA 1216212477 -> 2340919704, on purpose:** `TIPS`, `TIP_MIN_SECONDS`
+  and `TIP_SECONDS` in `digest()`.
+
+Verify: 60 passed, 0 failed in 647s (the known OVER BUDGET), on the second
+run:
+- headless_check 17492 asserts, and headless_v1 2228;
+- input_check 1220 cases and input_v1 672;
+- player work 26513 checks, reactions 708, UI art 13032.
+
+The first run failed one assert: `headless_check` holds every bare
+`keys.sort()` in a screen to a comment saying its keys are integers.
+`Tips._first_home` sorts cell indices, and now says so. The second run
+reproduced the data hash the first accepted.
+
+After both runs the machine's profile still had `tips_seen: []`: the test
+runs and the pictures put it back.
+
+**Tests:**
+- `_task_0195_tips` (headless_v1):
+  - **The table:**
+    - It passes its check, and a tip twice and a line that is no `TIP_`
+      key are refused.
+    - It holds five tips in order, each with words.
+    - A new profile has seen none.
+  - **Each on its moment, once:** for each of the five, a state at its
+    moment (with the others marked seen):
+    - it is triggered and due;
+    - once the profile has it, it is never due again;
+    - reading it leaves `State.hash_of` unchanged.
+  - **The edges:**
+    - None fires on the first day, even at its moment.
+    - A tip is remembered once however many times it is written.
+- `_case_0195_tips` (input_v1), on Spring 2 with every tip seen but the
+  bite's:
+  - no tip before the bite;
+  - at the first bite its tip is up over the bar, and the profile has it;
+  - SPACE on the green lands the fish, and the tip goes by itself.
+- `headless_check` asks for one shot per scenario: 75 now (`tips`).
+
+Looked at (`python tools/shot.py 0195 tips --fhd`):
+- **`tips`**, noon on Spring 3: the bin's tip over the bin, its pointer on
+  it, and the farmer beside it.
+- **`tips_bite`**: the farmer at the north-west pond, the bar up, and the
+  bite's tip over it, with the bar's own "A BITE - PRESS ON THE GREEN"
+  below. The tip says what that does not: the key, and that a big fish
+  takes more than one.
+
+Files: src/core/game_data.gd, src/ui/{main,tips (new)}.gd, src/app/save.gd,
+assets/locale/strings.csv, src/tools/{headless_check,headless_v1,input_check,
+input_v1,shot}.gd, tools/determinism_data_hash.txt,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0195-day-tutorial.md,
+implementation/shots/0195/, docs/devlog/{index,index.pt_BR}.md
