@@ -43,6 +43,9 @@ func _run() -> void:
 	relight.layer = 1
 	root.add_child(relight)
 	_world = load("res://scenes/World.tscn").instantiate()
+	# **The towers themselves by daylight**, never their day tarps (task
+	# 0223): this is where their art is looked at.
+	_world.tarps = false
 	root.add_child(_world)
 	_world.set_process(false)
 	await process_frame

@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-190 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+191 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -233,6 +233,7 @@ voz alta.
 | 0220 | The technology tree by season | 2026-10-10 |
 | 0221 | What the night leaves behind | 2026-10-10 |
 | 0222 | Bone meal | 2026-10-10 |
+| 0223 | Defences sleep under tarps | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **188 / 296 done**
+`###############.........`  **189 / 296 done**
 
-0 doing / 108 todo / 0 blocked across 18 phases.
+0 doing / 107 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-108 task(s) left, the ready ones first, then what they
+107 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -620,22 +620,6 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0223 - Defences sleep under tarps
-
-Ready to pick up.  Likely files: `src/ui/world_view.gd, src/ui/transition.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd, implementation/backlog/packs/A044-tarps.md`.
-
-By day the defences sleep under tarps and the farm looks like a farm; when the night comes the covers come off with the wake the transition already plays (plan section 5).
-
-- View only: no rule reads a tarp, and both hashes stay where they are
-- In the DAY phase every defence of a tarp family is drawn covered; during the switch into the night the tarps come off with the wake pass in `transition.gd` (`WAKES` kept - the generator still wakes, without a tarp) and go back on when the day begins
-- Decide which families get tarps and why: probably the towers and the other standing one-cell defences, not barriers, mines or traps (a covered wall is still a wall, a covered mine is a lie). Drive the unveil from one list in the view so a later defence joins by being listed; 0234 lists the families of 0224-0231, which leave the list alone
-- A hurt or wrecked defence shows its state by day - through the tarp or instead of it, decide - so the morning never hides damage
-- Drawn through the placeholder road of 0120: a code-drawn or tinted cover per footprint (32x48 towers, 16x32, 16x24) with two unveil frames, until A044 is integrated by 0243
-- Write the chosen families and footprints into the Deliverables table of `implementation/backlog/packs/A044-tarps.md`; 0234 settles the final list
-
-  - done when: `_task_0223_tarps` in `src/tools/headless_v1.gd` asserts every id in the view's tarp list is a `DEFENCES` id and nothing in `src/core/` mentions a tarp
-  - done when: `python tools/shot.py 0223` captures of the same towers by day (covered), at dusk and at night (uncovered), opened and looked at
-
 ### 0224 - The scarecrow decoy
 
 Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -1160,7 +1144,7 @@ The two MVP pieces become a year: a day piece per season on the shared motif, a 
 
 ### 0234 - The arsenal grows with the seasons
 
-Waits on 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0223.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The arsenal arrives with the calendar - spring's six, then summer's, autumn's and winter's - and every defence costs money as well as materials, so the day's purse is what the night is built with (plan sections 2, 5 and 7).
 
@@ -1312,7 +1296,7 @@ Nights that are not all alike: some are foggy, some rain. Both are known at dusk
 
 ### 0243 - Art: the day tarps
 
-Waits on 0223, 0234.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py`.
+Waits on 0234.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py`.
 
 The approved tarps cover the defences by day and unveil at nightfall, in place of the code-drawn covers 0223 left.
 
@@ -2282,14 +2266,14 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (5/28)
+## 13 - Weapons of the night  (6/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
 - [x] **0220** [The technology tree by season](prompts/0220-tech-by-season.md)
 - [x] **0221** [What the night leaves behind](prompts/0221-night-loot.md)
 - [x] **0222** [Bone meal](prompts/0222-bone-meal.md)
-- [ ] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md)
+- [x] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md)
 - [ ] **0224** [The scarecrow decoy](prompts/0224-decoy.md)
 - [ ] **0225** [Zombie bait](prompts/0225-zombie-bait.md) - needs 0224
 - [ ] **0226** [The beehive](prompts/0226-beehive.md)
@@ -2300,7 +2284,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md) - needs 0226
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0230
-- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0223
+- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
 - [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - needs 0224, 0225 - waits for art A037
 - [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - needs 0226 - waits for art A038
@@ -2309,7 +2293,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md) - needs 0229 - waits for art A041
 - [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md) - needs 0230 - waits for art A042
 - [ ] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md) - needs 0231 - waits for art A043
-- [ ] **0243** [Art: the day tarps](prompts/0243-art-tarps.md) - needs 0223, 0234 - waits for art A044
+- [ ] **0243** [Art: the day tarps](prompts/0243-art-tarps.md) - needs 0234 - waits for art A044
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - needs 0233, 0234 - waits for art A045
 - [ ] **0245** [Art: the dog](prompts/0245-art-dog.md) - needs 0233 - waits for art A028
 

@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-190 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
+191 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -234,6 +234,7 @@ is the sort of thing this list exists to say out loud.
 | 0220 | The technology tree by season | 2026-10-10 |
 | 0221 | What the night leaves behind | 2026-10-10 |
 | 0222 | Bone meal | 2026-10-10 |
+| 0223 | Defences sleep under tarps | 2026-10-10 |
 
 ## Every time the game changed underneath itself
 

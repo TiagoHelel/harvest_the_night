@@ -84,6 +84,46 @@ const WAKES := [&"gun_tower", &"flame_tower", &"mortar", &"auto_crossbow",
 	&"generator"]
 
 
+## **The defences that sleep under a tarp by day** (task 0223), and the
+## cover each wears (A044's footprints): one list, so a later defence joins
+## by being listed - 0234 lists 0224-0231's. The towers, which stand on the
+## farm all day looking like guns; never a barrier, a mine or a trap - a
+## covered wall is still a wall, and a covered mine is a lie. The generator
+## still wakes in `WAKES`, without one.
+const TARPS := {
+	&"gun_tower": &"tarp_tower",
+	&"auto_crossbow": &"tarp_tower",
+	&"flame_tower": &"tarp_tower",
+	&"mortar": &"tarp_tower",
+}
+
+## How long each of A044's two unveil frames shows.
+const UNVEIL_SECONDS := 0.12
+
+
+## **Where the tarps are in the change** (task 0223): on in the light, off
+## in the dark, and the two unveil frames at the wake - the middle of the
+## change, where the guns flare - `UNVEIL_SECONDS` each. Dawn plays them
+## backwards and the cover goes back on. `seconds` is the change's length.
+static func tarp_stage(going_dark: bool, transitioning: bool, progress: float,
+		seconds: float) -> int:
+	if not transitioning:
+		return TarpArt.OFF if going_dark else TarpArt.COVERED
+	var share := UNVEIL_SECONDS / maxf(seconds, 0.05)
+	var past := progress - 0.5
+	if going_dark:
+		if past < 0.0:
+			return TarpArt.COVERED
+		if past < share:
+			return TarpArt.YANK
+		return TarpArt.AWAY if past < share * 2.0 else TarpArt.OFF
+	if past < 0.0:
+		return TarpArt.OFF
+	if past < share:
+		return TarpArt.AWAY
+	return TarpArt.YANK if past < share * 2.0 else TarpArt.COVERED
+
+
 ## **The day's animals, and only them.** A cow is a thing you keep; it is not
 ## a thing that stands in a field while zombies walk past it. They fade out as
 ## the light goes and come back with it, which is the cheapest possible way to

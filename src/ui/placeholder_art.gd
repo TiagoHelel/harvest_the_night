@@ -201,6 +201,11 @@ const GROUND_ATLAS := {"canvas": Vector2i(256, 80), "pivot": Vector2i(0, 0), "dr
 
 ## A013's seasonal trees (task 0159): 40x48 at (20,44), today's tree's box.
 const TREE_FRAME := {"canvas": Vector2i(40, 48), "pivot": Vector2i(20, 44), "draw_scale": 1.0}
+## A044's three tarp footprints (task 0223): a tower's canvas, and the tall
+## and the short one-cell defences'.
+const TARP_TOWER := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
+const TARP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
+const TARP_SHORT := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
 
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
@@ -350,6 +355,17 @@ const ART := {
 	&"hud_moon_stone": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.95, 1.12, 1.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"bone_pile": {"pack": "A036", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
 	&"moon_stone": {"pack": "A036", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE},
+	# A044's tarps (task 0223), drawn in code by `TarpArt` at each footprint
+	# until 0243: the cover, the torn cover, and the two unveil frames.
+	&"tarp_tower": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_TOWER, "final": TARP_TOWER, "bare": true},
+	&"tarp_tower_hurt": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_TOWER, "final": TARP_TOWER, "bare": true},
+	&"tarp_tower_unveil": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 2, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": TARP_TOWER, "final": TARP_TOWER},
+	&"tarp_tall": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_TALL, "final": TARP_TALL, "bare": true},
+	&"tarp_tall_hurt": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_TALL, "final": TARP_TALL, "bare": true},
+	&"tarp_tall_unveil": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 2, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": TARP_TALL, "final": TARP_TALL},
+	&"tarp_short": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT, "bare": true},
+	&"tarp_short_hurt": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT, "bare": true},
+	&"tarp_short_unveil": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 2, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT},
 	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
 	# the fertilised earth the tilled tile paled with it, dry and wet, until
 	# 0235.

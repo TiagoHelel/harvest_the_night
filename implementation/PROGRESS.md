@@ -21834,3 +21834,137 @@ implementation/backlog/packs/A036-night-loot.md,
 implementation/{BACKLOG,BALANCE,PROGRESS}.md,
 implementation/prompts/0222-bone-meal.md, implementation/shots/0222/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0223 - Defences sleep under tarps - done 2026-10-10
+
+What changed: by day the towers sleep under tarps, so the farm looks like a
+farm.
+- At the switch into the night the covers are yanked off at the wake.
+- At dawn they go back on.
+- View only: no rule reads a tarp.
+
+### The list and the timing (`src/ui/transition.gd`)
+
+**`Transition.TARPS` is the one list:** defence id -> A044 footprint.
+- **Today:** `gun_tower`, `auto_crossbow`, `flame_tower` and `mortar`, on
+  `tarp_tower`.
+- **Why these:** the towers stand on the farm all day looking like guns.
+- **Never a barrier, a mine or a trap:** a covered wall is still a wall,
+  and a covered mine is a lie.
+- **The generator still wakes in `WAKES`,** without a tarp.
+- **0234 lists 0224-0231's** by adding rows; nothing else changes.
+
+**`Transition.tarp_stage(going_dark, transitioning, progress, seconds)`:**
+- covered in daylight, off in the dark;
+- at the wake - the middle of the change, where the towers flare - A044's
+  two unveil frames, `UNVEIL_SECONDS` (0.12) each;
+- into the night: yank, then away. Into the day: away, then yank, then the
+  cover back on.
+
+### The cover (`src/ui/world_view.gd`, `src/ui/tarp_art.gd`)
+
+**On the tower's sprite:**
+- Each tower in the list gets a `Tarp` child at the same ground pivot, so
+  it sorts the way the tower does.
+- It is made and dressed in the same `_refresh` that makes the tower. A
+  rebuild - every tree the farmer chops is one - never shows a sleeping
+  tower bare for a frame.
+- **Covered:** the tower's own drawing is hidden (`self_modulate`) and the
+  cover shown.
+- **Unveil:** the tower is shown and the frame drawn over it.
+- **Off:** the child is hidden.
+- `WorldView.tarp_stage()` reads the light's own change, and
+  `_dress_tarps` re-dresses every cover when the stage moves.
+- **`WorldView.tarps`** (on by default) switches them off. The tower
+  showcase uses it, because it is where the towers' art is looked at by
+  daylight. Its "no children on a tower" check (no legacy level pips)
+  found the cover as a child and failed 108 times on the first full run.
+
+**Damage, decided: through the tarp.**
+- A hurt tower - past its own 75% - wears the torn cover, so the morning
+  never hides the night's damage.
+- A defence that came down is rubble, swept at dawn, so by day there is no
+  wreck to cover.
+
+**`TarpArt` draws A044's twelve files in code** until 0243, at the pack's
+canvases and pivots. They are registered as drawn stand-ins in
+`PlaceholderArt`, which gains `TARP_TOWER`, `TARP_TALL` and `TARP_SHORT`.
+- **The cover:**
+  - a khaki mound in `bone_dark`, lit along its upper left edge, shaded
+    `wood_light` and `soil_light`, with folds;
+  - cinched by a `gold_dark` rope with its knot, a skirt pegged with
+    `wood_dark` stakes, an `ink_soft` outline;
+  - standing on the pivot's row.
+- **The torn cover:** a dark hole low on its left under the rope, a flap
+  hanging from it, the rope snapped. The hole sits clear of the smoke a
+  hurt defence sends up from its top.
+- **The yank:** the canvas whipped up and to the west above the defence.
+- **Away:** a bundle at the upper left.
+
+**A044's Deliverables table** now carries the chosen families, these rules,
+and where the stand-in lives.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged,** as a view-only task must
+leave them.
+
+Verify: **PASS**, 60 of 60 - in the run that also closed 0147, with this task's lines in the tree.
+- `verify.py --fast` passed 59 and skipped the exports. The exports passed
+  alone right after, on the same tree (721 s and 48 s).
+- **The six full runs before it never went green** on this shared machine,
+  where the ChatGPT and Codex apps held a quarter of the CPU. Every check
+  passed in at least one of them; only time failed:
+  - perf's swarm, at 9175 to 12549 us of the 8333 budget;
+  - the 120 s bound on `input_check` and `input_v1`;
+  - once, `headless_check`'s wall-fall cost (45 ms of 33).
+- **Run on their own, `input_check` and `input_v1` fail the tutorial
+  cases.** An earlier suite leaves `gameplay/tutorial_seen` true in the real
+  `user://settings.cfg`, and inside verify `headless_check` wipes that file
+  before they start. Not this task's doing, but a suite run alone needs
+  that file reset first. Through a Git Bash pipe they also run five times
+  slower; run them from Python, as verify does.
+
+**Tests:**
+- **`_task_0223_tarps` (headless_v1), 6 asserts:**
+  - every id in the view's list is a defence;
+  - barriers and mines sleep bare, and the generator wakes without a tarp;
+  - nothing in `src/core/` mentions a tarp;
+  - each footprint's cover stands on its pivot's row, the torn one differs,
+    the unveil frames fly, and every listed defence wears a known
+    footprint;
+  - covered in daylight, off in the dark;
+  - into the night covered, yank, away, off; into the day off, away, yank,
+    covered.
+- **`headless_check`:** the shot count is 80 (`tarps`).
+- No input case: nothing new is pressed.
+
+**Looked at** (`python tools/shot.py 0223 tarps --fhd`):
+- **`tarps`, Spring 3 at 12:10:**
+  - eight towers beside the stall, under khaki covers with their ropes and
+    folds;
+  - the front row's last one torn - its hole, its snapped rope, the smoke
+    of its damage;
+  - the farm reads as a farm.
+- **`tarps_dusk`, 19:05:** the same covers in the warm light, still on.
+- **`tarps_unveil`:**
+  - he has gone to bed, and the cold band crosses the farm;
+  - the towers are bare and flaring, the canvas whipped up above each.
+- **`tarps_night`:** the build step, every tower bare.
+- **What the takes found:**
+  - The first drawing was too bright: cream mounds that outshone the house.
+    Now khaki, lit on one edge.
+  - The first unveil and night pictures had the house's room over the farm.
+    The bed's beat starts a frame after the phase turns, so a skip made at
+    the turn skipped nothing; the tool now skips it every frame.
+  - The first torn cover was hidden behind the front row. The hurt tower is
+    the front row's last now.
+
+Files: src/ui/{tarp_art,transition,world_view,placeholder_art}.gd,
+src/ui/tarp_art.gd.uid,
+src/tools/{headless_check,headless_v1,shot,tower_showcase}.gd,
+implementation/backlog/packs/A044-tarps.md,
+implementation/{BACKLOG,PROGRESS}.md,
+implementation/prompts/0223-defence-tarps.md, implementation/shots/0223/,
+docs/devlog/{index,index.pt_BR}.md
+

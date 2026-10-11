@@ -130,6 +130,7 @@ const SCENARIOS: Array = [
 	["year_credits", "the credits before the year ending", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
+	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["bone_meal", "Spring 2 at noon: a starter row turned, plain and fertilised side by side, dry then watered, and carrot sprouts on fertilised earth dry and wet; bone meal chosen in the strip", ""],
 	["night_loot", "the morning after Spring 7's Full Moon, fought from a defended farm: the report counting the bones and moon stones lying about; then him out by the moon stone nearest the house, the night's bones about it", "ResultScreen"],
 	["north_band", "standing on the north spawn ground", ""],
@@ -748,6 +749,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"trampled": _set_trampled(state)
 		"night_loot": _set_night_loot(state)
 		"bone_meal": _set_bone_meal(state)
+		"tarps": _set_tarps(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -904,6 +906,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "days":
 		await _shoot("days_spring_morning", folder)
 		await _take_days(main, state, folder)
+		return
+	if name == "tarps":
+		await _shoot("tarps", folder)
+		await _take_tarps_evening(main, state, folder)
 		return
 	if name == "bone_meal":
 		await _shoot("bone_meal", folder)
@@ -2357,6 +2363,58 @@ func _set_tech(state: Dictionary) -> void:
 		if not Tech.buy(state, id):
 			push_warning("shot: could not buy %s" % id)
 	Sim.advance(state, 2)
+
+
+## **The defences asleep** (task 0223): a defended farm at noon on Spring 3,
+## its towers under tarps, and one tower hurt last night - its cover torn.
+func _set_tarps(state: Dictionary) -> void:
+	_on_date(state, 3)
+	_a_defended_farm(state)
+	# The front row's last tower, whose cover nothing stands in front of.
+	var hurt := Vector2i(-1, -1)
+	for id in [&"gun_tower", &"auto_crossbow"]:
+		for cell in Farm.cells_with(state, id):
+			var at: Vector2i = cell
+			if hurt.x < 0 or at.y > hurt.y or (at.y == hurt.y and at.x > hurt.x):
+				hurt = at
+	if hurt.x >= 0:
+		Farm.damage(state, hurt, WorldView.levelled_stat(Farm.occupant(state, hurt), "hp") * 2 / 3)
+	Sim.advance(state, maxi(Phases.tick_at_minute(WorldView.NOON_MINUTE) - int(state["tick"]), 1))
+	_look_at(_the_defence_line(state))
+	print("  tarps: %d towers, the one at %s hurt" % [Farm.cells_with(state, &"gun_tower").size()
+		+ Farm.cells_with(state, &"auto_crossbow").size(), str(hurt)])
+
+
+## **Dusk, the wake and the night** (task 0223): the same towers at 18:30,
+## still covered; then he goes to bed and the covers are yanked off at the
+## wake, caught on that frame; then the night, every tower bare.
+func _take_tarps_evening(main: Node, state: Dictionary, folder: String) -> void:
+	var view := main.get_node("%WorldView") as WorldView
+	Sim.advance(state, maxi(GameData.DUSK_AT_TICK + 30 * GameData.SECONDS - int(state["day_tick"]), 1))
+	for _i in SETTLE:
+		await process_frame
+	await _shoot("tarps_dusk", folder)
+	(state["intent"] as Dictionary)["sleep"] = true
+	Sim.advance(state, 1)
+	main.aim_night_camera((Vector2(_camera_at) + Vector2.ONE * 0.5) * float(GameData.TILE_SIZE))
+	# **The bed's beat cut short as it starts**, every frame: it begins a
+	# frame after the phase turns, and it would hold the room over the farm
+	# through the whole change.
+	var house := main.get_node("HouseView") as HouseView
+	for _f in 240:
+		await process_frame
+		house.skip_bedtime()
+		if view.tarp_stage() == TarpArt.YANK:
+			break
+	var caught := view.tarp_stage()
+	await _shoot("tarps_unveil", folder)
+	view.skip_transition()
+	for _i in 4:
+		await process_frame
+		house.skip_bedtime()
+	await _shoot("tarps_night", folder)
+	print("  tarps_dusk / tarps_unveil (stage %d) / tarps_night (stage %d), %s" % [caught,
+		view.tarp_stage(), Phases.name_of(int(state["phase"]))])
 
 
 ## **Bone meal in the earth** (task 0222): Spring 2 at noon. The top row

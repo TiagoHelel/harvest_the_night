@@ -120,6 +120,13 @@ var _sprites: Array[Node] = []
 ## Existing production jobs drive a bounded cached-sprite update. This never
 ## allocates occupant nodes or adds a timer to simulation state.
 var _stations: Array[Sprite2D] = []
+## The defences under a tarp (task 0223), and the stage they were last
+## dressed for.
+var _tarped: Array[Sprite2D] = []
+var _tarp_stage := -1
+## **Whether the day's tarps are drawn** (task 0223): yes in the game. The
+## tower showcase turns them off, to look at the towers by daylight.
+var tarps := true
 const AMBIENT_MOTION := preload("res://src/ui/ambient_motion.gdshader")
 var _ambient_materials: Array[ShaderMaterial] = []
 ## **The season on screen** (task 0159): the remap the ground and the trees
@@ -524,6 +531,7 @@ func _process(delta: float) -> void:
 	_refresh_retreats(delta)
 	_enemy_warning.queue_redraw()
 	_refresh_stations(delta)
+	_dress_tarps()
 	_place_house_mark()
 	_remember_towers(_state)
 	_refresh_wrecks()
@@ -733,6 +741,50 @@ func _wear(ramp: Dictionary) -> void:
 ## The ramp the light is heading for, for `input_check` to read back.
 func ramp_target() -> Dictionary:
 	return _ramp_now()
+
+
+## **Where the tarps are now** (task 0223), off the light's own change.
+func tarp_stage() -> int:
+	return Transition.tarp_stage(going_dark(), is_transitioning(),
+		transition_progress(), _transition_seconds)
+
+
+## A tarp on a defence (task 0223): a child at the same ground pivot, so it
+## sorts with the defence it covers; what the defence draws is hidden while
+## the cover is on, and the unveil frames are drawn over it. A hurt one's
+## cover is torn, so the morning never hides the night's damage - and a
+## defence that came down is rubble, swept at dawn, with nothing to cover.
+func _tarp(sprite: Sprite2D, footprint: StringName, hurt: bool) -> void:
+	var cover := Sprite2D.new()
+	cover.name = "Tarp"
+	cover.centered = false
+	cover.offset = -Vector2(TarpArt.pivot(footprint))
+	cover.set_meta("tarp", footprint)
+	cover.set_meta("hurt", hurt)
+	sprite.add_child(cover)
+	_tarped.append(sprite)
+	_dress_tarp(sprite, tarp_stage())
+
+
+## Every tarp to the stage the change is at, when it moves.
+func _dress_tarps() -> void:
+	var stage := tarp_stage()
+	if stage == _tarp_stage:
+		return
+	_tarp_stage = stage
+	for sprite in _tarped:
+		if is_instance_valid(sprite):
+			_dress_tarp(sprite, stage)
+
+
+func _dress_tarp(sprite: Sprite2D, stage: int) -> void:
+	var cover := sprite.get_node_or_null(^"Tarp") as Sprite2D
+	if cover == null:
+		return
+	sprite.self_modulate.a = 0.0 if stage == TarpArt.COVERED else 1.0
+	cover.texture = TarpArt.texture(StringName(cover.get_meta("tarp")), stage,
+		bool(cover.get_meta("hurt")))
+	cover.visible = cover.texture != null
 
 
 ## Cut the fade short. The simulation was never waiting for it, so this changes
@@ -1244,6 +1296,7 @@ func _refresh() -> void:
 		sprite.queue_free()
 	_sprites.clear()
 	_stations.clear()
+	_tarped.clear()
 	_ambient_materials.clear()
 	if _season != null:
 		_season.forget_sprites()
@@ -1290,6 +1343,10 @@ func _refresh() -> void:
 		else:
 			logical_cells.append(idx)
 		sprite.set_meta("logical_cells", logical_cells)
+		# **Under a tarp by day** (task 0223), dressed as it is made, so a
+		# rebuild never shows a sleeping tower bare for a frame.
+		if tarps and Transition.TARPS.has(id):
+			_tarp(sprite, StringName(Transition.TARPS[id]), _is_hurt(on))
 		# **A tree in its season** (task 0159): A013's frame for it when there
 		# is one, remapped unless it is the real thing.
 		var remapped := true

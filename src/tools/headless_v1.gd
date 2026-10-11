@@ -139,6 +139,7 @@ func _run() -> void:
 	_task_0220_tree_seasons()
 	_task_0221_night_loot()
 	_task_0222_bone_meal()
+	_task_0223_tarps()
 
 
 func _finish() -> void:
@@ -6968,6 +6969,82 @@ func _task_0221_night_loot() -> void:
 		"the report lists 3 bones and 1 moon stone, and nothing on a bare farm",
 		"%s / %s / %s" % [str(bare), str(said), str(dito)])
 	_completed += 1
+
+
+## 0223 - the defences sleep under tarps by day: one list in the view, of
+## real defences and never a barrier or a mine; A044's footprints drawn at
+## their canvases; the change's stages - and not a word of it in the rules.
+func _task_0223_tarps() -> void:
+	var ids: Array = GameData.sorted_names(Transition.TARPS.keys())
+	var strangers: Array = []
+	for id in ids:
+		if not GameData.DEFENCES.has(id):
+			strangers.append(id)
+	expect(not ids.is_empty() and strangers.is_empty(),
+		"every id in the view's tarp list is a defence", str(strangers))
+	var bare := true
+	for id in [&"wall", &"fence", &"barricade", &"mine"]:
+		bare = bare and not Transition.TARPS.has(id)
+	expect(bare and Transition.WAKES.has(&"generator") and not Transition.TARPS.has(&"generator"),
+		"barriers and mines sleep bare, and the generator still wakes without a tarp")
+	var mentions: Array = []
+	for file_name in DirAccess.get_files_at("res://src/core/"):
+		if String(file_name).ends_with(".gd") \
+				and FileAccess.get_file_as_string("res://src/core/" + file_name).to_lower().contains("tarp"):
+			mentions.append(file_name)
+	expect(mentions.is_empty(), "nothing in src/core/ mentions a tarp", str(mentions))
+
+	# **A044's three footprints**, drawn by code at their canvases: a cover
+	# standing on the pivot's row, a torn one that differs, unveil frames up
+	# in the air.
+	var footprints := [&"tarp_tower", &"tarp_tall", &"tarp_short"]
+	var wrong: Array = []
+	for footprint in footprints:
+		var foot := TarpArt.pivot(footprint)
+		var whole := TarpArt.drawing(footprint, TarpArt.COVERED)
+		var torn := TarpArt.drawing(footprint, TarpArt.COVERED, true)
+		var yank := TarpArt.drawing(footprint, TarpArt.YANK)
+		var away := TarpArt.drawing(footprint, TarpArt.AWAY)
+		if not (PlaceholderArt.is_drawn(TarpArt.path_of(footprint, TarpArt.COVERED))
+				and PlaceholderArt.is_drawn(TarpArt.path_of(footprint, TarpArt.YANK))
+				and Vector2i(whole.get_size()) == TarpArt.canvas(footprint)
+				and _lowest_row(whole) == foot.y - 1 and _lowest_row(torn) == foot.y - 1
+				and torn.get_data() != whole.get_data()
+				and _lowest_row(yank) < foot.y / 2 and _lowest_row(away) < foot.y / 2):
+			wrong.append(footprint)
+	var covers := true
+	for id in ids:
+		covers = covers and footprints.has(Transition.TARPS[id])
+	expect(wrong.is_empty() and covers,
+		"each footprint's cover stands on its pivot's row, the torn one differs, the unveil flies; every listed defence wears one",
+		str(wrong))
+
+	# **The change**: covered in daylight, off in the dark, and at the wake
+	# the two frames - forwards into the night, backwards into the day.
+	var seconds := GameData.TRANSITION_SECONDS
+	var share := Transition.UNVEIL_SECONDS / seconds
+	expect(Transition.tarp_stage(false, false, 1.0, seconds) == TarpArt.COVERED
+		and Transition.tarp_stage(true, false, 1.0, seconds) == TarpArt.OFF,
+		"covered in daylight, off in the dark")
+	var dusk: Array = []
+	var dawn: Array = []
+	for at in [0.3, 0.5 + share * 0.5, 0.5 + share * 1.5, 0.9]:
+		dusk.append(Transition.tarp_stage(true, true, at, seconds))
+		dawn.append(Transition.tarp_stage(false, true, at, seconds))
+	expect(dusk == [TarpArt.COVERED, TarpArt.YANK, TarpArt.AWAY, TarpArt.OFF]
+		and dawn == [TarpArt.OFF, TarpArt.AWAY, TarpArt.YANK, TarpArt.COVERED],
+		"into the night the cover comes off at the wake, yanked and then away; at dawn the same frames backwards",
+		str([dusk, dawn]))
+	_completed += 1
+
+
+## The lowest row with anything drawn on it, or -1.
+func _lowest_row(image: Image) -> int:
+	for y in range(image.get_height() - 1, -1, -1):
+		for x in image.get_width():
+			if image.get_pixel(x, y).a > 0.0:
+				return y
+	return -1
 
 
 ## 0222 - bone meal: bones ground at the workshop give a plot one more

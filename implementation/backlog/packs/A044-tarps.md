@@ -22,11 +22,30 @@ still say "a defence sleeps here", including when it was damaged last night.
 
 The table is provisional: game task 0234 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
 
-Families (provisional - 0223 writes its chosen list and 0234 settles it):
-`tarp_tower` covers `gun_tower`, `auto_crossbow`, `flame_tower`, `mortar`,
-`beehive`, `catapult` and `searchlight` at every level; `tarp_tall` covers
-`decoy`; `tarp_short` covers `garlic_braid`. Barriers, mines and the bait get no
-tarp. A wrecked defence shows its `_wreck` sprite by day with no tarp.
+Families - **chosen by game task 0223** (2026-10-10), and 0234 settles them:
+
+- **The game's one list is `Transition.TARPS`** (`src/ui/transition.gd`).
+  Today it holds the towers the farm has: `tarp_tower` covers `gun_tower`,
+  `auto_crossbow`, `flame_tower` and `mortar` at every level.
+- **0234 adds 0224-0231's defences:** `beehive`, `catapult` and
+  `searchlight` on `tarp_tower`, `decoy` on `tarp_tall` and `garlic_braid`
+  on `tarp_short`.
+- **No tarp for barriers, mines or the bait:** a covered wall is still a
+  wall, and a covered mine is a lie. The generator still wakes at dusk,
+  bare.
+- **A hurt defence wears the `_hurt` cover by day**, past the tower's own
+  hurt threshold, so the morning never hides the night's damage.
+- **A defence that came down is rubble,** swept at dawn, so by day there is
+  no `_wreck` to cover.
+- **Every file below is drawn by code until 0243** (`TarpArt`,
+  `src/ui/tarp_art.gd`), at these canvases and pivots: a khaki mound roped
+  and pegged, a torn one, a yank and a flying bundle.
+- **The game shows a covered state *instead of* the defence**, as a child
+  of its sprite at the same pivot, so it sorts the way the defence does.
+  The unveil frames are drawn over it.
+- **The unveil plays at the wake:** the middle of the switch into the
+  night, where the towers flare, 0.12 s a frame. At dawn it plays
+  backwards, and the cover goes back on.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
