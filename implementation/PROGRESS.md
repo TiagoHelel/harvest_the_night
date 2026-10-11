@@ -24750,3 +24750,174 @@ implementation/backlog/packs/A041-searchlight.md,
 implementation/prompts/0229-searchlight.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0229/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0230 - The electric fence - done 2026-10-11
+
+What changed: a winter barrier built as the wooden fence is - priced by the
+field, joined to its neighbours - except that whatever bites it is thrown
+back stunned for a moment: a winter answer that needs the generator running
+(the plan's section 5, "atordoa quem encosta").
+- **The stun is a count on the enemy**, any source's to set - 0233's bell
+  will set the same one.
+- **The bite still lands**, and the biter stands - neither walking nor biting
+  - for two seconds; a boss for a quarter of that.
+- **Short of power it stuns for less, never none.**
+
+### The row (`src/core/game_data.gd`)
+
+**`electric_fence` in `DEFENCES`:**
+- **Cost:** 2 copper and 5 wood (LEVER) - the wooden fence's wood and the
+  wire. **`season` winter.** 40 hit points (LEVER 20-80).
+- **A barrier:** `path_cost` 8 (LEVER 4-16). The worst step `check_pathing`
+  asks of it - soil 2, the fence 8, garlic's 6 - is 16, inside `WIDEST_STEP`
+  (32).
+- **The shock:** `stun_ticks` 60, two seconds (LEVER 1-3 s);
+  `boss_stun_percent` 25 (LEVER 0-100).
+- **`energy_draw`** 1 a piece (LEVER 1-2): a run of fourteen is one
+  generator's worth with the farm's own trickle.
+- **No `damage` and no `reload_ticks`:** it hurts nothing and shoots nothing,
+  so no `Sfx.TOWER_SOUNDS` entry (0283 gives it the zap's sound). Not prey:
+  a breaker breaks through it, as through any barrier in its way, and hunts
+  what is built behind it.
+
+**`check_defences`** refuses a stun of no ticks, and a boss's share outside
+0-100.
+
+### The stun (`src/core/enemies.gd`)
+
+- **`Enemies.stun(state, id, ticks)`** writes `stun` on the entity -
+  refreshed, never stacked: a second shock while the first holds keeps the
+  longer. Written only when something stuns, as the flare's `slow` is, so a
+  night with no electric fence holds no new key.
+- **Read at the top of `_walk`:** a stunned enemy counts it down and does
+  nothing else - its step, its bite's wait and its wind-up held where they
+  are. The flare's `slow` runs down all the same: five seconds is five
+  seconds.
+- **In `_gnaw`:** what was bitten is read before the bite, the bite lands,
+  then the biter is stunned for `shock_ticks` - the bite that brings the
+  fence down too, for the wire was live when it was bitten. `_chew` (the
+  sealed-in case) goes through `_gnaw`, so it stuns as well.
+- **`Enemies.shock_ticks(state, kind, bitten)`:** the bitten thing's
+  `stun_ticks`, a boss's `boss_stun_percent` of it, `Power.percent` of that,
+  never under a tick while there is any.
+- **`Enemies.is_stunned`**, for the view and the asserts.
+
+So a walker shut in a ring of wooden fence bites every 21 ticks; in a ring
+of electric fence every 81 - its 60 ticks stunned and then the bite's own
+wait, which starts when the stun ends.
+
+### Decided
+
+- **Bosses: a quarter.** A giant smashes a fence in one blow anyway; a full
+  two seconds per fence on the season's last boss would make a field of
+  wire a boss answer, and none at all would leave the wire meaning nothing to
+  it. 15 ticks at full power, 7 at the power floor.
+- **It meets the wooden fence and the wall** (`WorldView.JOINED_BARRIERS`,
+  which `barrier_mask` reads): a run of wire can carry on a wooden fence or
+  end on a wall, and those join it back. A042 already asked for the mixed
+  seam.
+- **Short of power:** `Power.percent` of the stun, floored at a tick - 57%
+  with four pieces and an auto crossbow on the farm's own trickle, 34 ticks
+  of 60.
+
+### The view (`src/ui/`)
+
+- **The placeholder road until 0241** (A042 is `todo`): `ElectricFenceArt`
+  draws it in code at A042's 16x32 on (8,28):
+  - **three modules**, whole and hurt - a dark iron post with a cap and
+    white insulators, two taut copper wires on rows 13 and 17 with ink
+    under each, and the north-south run seen from above;
+  - **the 32 masks** composed from them with the contract's recipe (section
+    2.3: N, W, E, S, the post on top), as `build.py` will;
+  - **the wreck**, a fallen post and coiled wire on rows 21-27;
+  - **the zap**, three 12x12 frames round (6,6): a spark, the arcs at their
+    widest, a fade.
+- **`PlaceholderArt`** registers the 32 masks, the wreck and the zap (34
+  entries). `frame()` passes an entry's `connected` on, so the masks join
+  before the art arrives.
+- **`WorldView`:**
+  - the joins (`JOINED_BARRIERS`), the drawing in `_texture_for`'s chain,
+    and its wreck in `_refresh_wrecks`;
+  - **the zap**, frame to frame as the catapult's splats: an enemy whose
+    stun is longer this frame than the last (`fresh_stuns`) gets one half
+    way from its feet to the cell it bit, 13 px up at the wires' height
+    (`zap_point`), on the night cues' layer above the relight, capped at
+    eight - never a state key;
+  - **the stunned stand cold blue** (`actor_tint`), the hurt cue first.
+- **The hotbar** shows a straight run, mask 10: the bare post read as a
+  stick.
+- **The words:** `DEF_ELECTRIC_FENCE`, "electric fence" / "cerca elétrica";
+  `DESC_STUNS` (the stun and a boss's share) and `DESC_STUN_SHORT`.
+- **A042's Deliverables table** is final: the module geometry measured on
+  the drawing, the insulators inside the post's ink, how the game joins,
+  hurts, wrecks and zaps it.
+
+### Hashes
+
+- **SIM 2958532891, unchanged:** the determinism scenario meets no electric
+  fence, and a night without one writes no `stun`.
+- **DATA 2479540053 -> 2576543805:** the electric fence's row.
+
+Verify: **PASS**, 60 of 60 in 969 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 17818 asserts, `headless_v1` 2546,
+  `input_check` 1251 cases, `input_v1` 720 (108 s).
+- **perf:** a night tick 1567 us, the swarm's 8165, a path rebuild 10681, 15372 with the decoys and 11073 with the garlic - a night that meets no wire pays nothing for it.
+
+**Tests:**
+- **`_task_0230_electric_fence` (headless_v1):**
+  - the row and its checks - no stun refused, a boss's share past the
+    whole refused, a path cost past `WIDEST_STEP` refused;
+  - **the field prices it like a barrier:** its ground and 8 in the priced
+    field, a wall in the runners' open one, broken through, not prey;
+  - **a walker shut in a ring** bites a wooden fence every 21 ticks and an
+    electric one every 81, standing still and stunned for exactly the 60
+    between;
+  - **a short farm** - 57% - stuns it for 34 and it bites again that much
+    sooner;
+  - **a boss** stands 15 ticks, 7 at the power floor; a wooden fence and a
+    wall stun nobody;
+  - **any source's count:** a walker stunned in the open stands exactly its
+    ten ticks - a shorter stun after keeps the longer - its flare slow
+    running down, and walks on;
+  - the words in both languages; the joins with the fence, the wall and its
+    own kind, never the decoy; the road's 33 drawings; each mask's arms
+    against its bits, every hurt one apart from its whole, the snapped wire
+    showing past the post, the wreck low, the seam with the wooden fence on
+    four rows; the zap's frames; `fresh_stuns`, `zap_point` and the cold
+    blue; the hotbar's icon and slot; the shot and A042's table.
+- **Old groups touched:** `headless_v1`'s 0193 counts winter's two;
+  `headless_check`'s 98 scenarios, and its building art knows the drawing.
+- **No input case:** an electric fence goes down by the hotbar and the
+  cursor, which their cases walk for every defence.
+
+**Looked at** (`python tools/shot.py 0230 electric_fence --fhd`), Winter 2's
+night with a generator running, power 14 of 14:
+- **The run:** a line of electric fence across the east road, a corner at
+  its top with the fence in hand beside it - its ghost joined - a wooden
+  stub off it making a tee, and at its foot an arm either way, the east one
+  carried on by a wooden fence; the road's cell hurt, and a wreck by the
+  corner.
+- **The walkers:** three down the road, the first stunned at the road's cell,
+  cold blue, the zap's arcs between it and the wire; the other two coming on.
+- **What the takes found:**
+  - the white insulators on the post's edge were the snow after the relight
+    - they sit inside the post's ink now;
+  - walkers went round the south end: the house is a row south of the road,
+    so a short line cost no more to walk round than to bite - the line runs
+    six rows south;
+  - walkers on three rows all came to the road's cell and stood on one
+    another, so they come down the road one behind another;
+  - the wreck lay behind the hotbar, and the cursor's words over a walker,
+    so both moved;
+  - the first fuel goes in before the night, or the run starts it at half
+    power.
+
+Files: src/core/{game_data,enemies}.gd,
+src/ui/{electric_fence_art,placeholder_art,world_view,hotbar,names,describe}.gd,
+src/ui/electric_fence_art.gd.uid, assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,shot}.gd,
+tools/determinism_data_hash.txt,
+implementation/backlog/packs/A042-electric-fence.md,
+implementation/prompts/0230-electric-fence.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0230/,
+docs/devlog/{index,index.pt_BR}.md

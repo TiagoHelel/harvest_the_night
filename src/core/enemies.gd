@@ -40,6 +40,13 @@ extends RefCounted
 ## it is gone - at its lifetime, or once `eaten_by` have reached it - and then
 ## the crowd on it walks on.
 ##
+## ## Stunned
+##
+## An enemy with a `stun` count stands where it is - neither walking nor
+## biting - until the count runs out (task 0230). Any source may set it,
+## through `stun()`: a bite on an electric fence does (`shock_ticks()`), and
+## 0233's farm bell will.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -234,6 +241,18 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	if one.is_empty():
 		return
 	var data: Dictionary = GameData.ENEMIES[one["kind"]]
+
+	# **Stunned, it stands** (task 0230): neither walking nor biting - its
+	# step, its bite's wait and its wind-up held where they are - until the
+	# count runs out. A flare's slow runs down all the same: five seconds is
+	# five seconds.
+	var stunned := int(one.get("stun", 0))
+	if stunned > 0:
+		one["stun"] = stunned - 1
+		var slowed := int(one.get("slow", 0))
+		if slowed > 0:
+			one["slow"] = slowed - 1
+		return
 
 	# **Standing on it counts.** The flow field says distance zero at the house
 	# and "stay where you are" everywhere distance cannot improve, so a zombie
@@ -448,8 +467,14 @@ static func _gnaw(state: Dictionary, id: int, data: Dictionary,
 	# hundred. Everything else declares nothing and gets a hundred, so the
 	# multiply is free for them and the table says which is which.
 	var percent := int(data.get("structure_damage_percent", 100))
+	# What it bit, before the bite can bring it down (task 0230).
+	var bitten := StringName(Farm.occupant(state, cell).get("id", &""))
 	Farm.damage(state, cell, maxi(int(data["damage"]) * percent / 100, 1))
 	one["chewing"] = Grid.index(cell)
+	# **A live wire bites back** (task 0230): the bite lands all the same, and
+	# whoever bit an electric fence stands stunned - the bite that brings it
+	# down too, for the wire was live when it was bitten.
+	stun(state, id, shock_ticks(state, StringName(one["kind"]), bitten))
 
 
 ## Whether this one is winding up a blow rather than walking. For the view,
@@ -461,6 +486,40 @@ static func is_winding(state: Dictionary, id: int) -> bool:
 	var telegraph := int((GameData.ENEMIES[one["kind"]] as Dictionary)
 		.get("telegraph_ticks", 0))
 	return telegraph > 0 and int(one.get("chew_wait", 0)) > 0
+
+
+## **Stun one for `ticks`** (task 0230): it stands where it is - neither
+## walking nor biting - until the count runs out (`_walk()`). Refreshed and
+## never stacked: a second shock while the first still holds keeps the
+## longer. Any source may call it; an electric fence's bite does, and 0233's
+## bell will.
+static func stun(state: Dictionary, id: int, ticks: int) -> void:
+	var one := Entities.get_one(state, id)
+	if one.is_empty() or ticks <= 0:
+		return
+	one["stun"] = maxi(int(one.get("stun", 0)), ticks)
+
+
+## Whether this one stands stunned. For the view, and for the asserts.
+static func is_stunned(state: Dictionary, id: int) -> bool:
+	return int(Entities.get_one(state, id).get("stun", 0)) > 0
+
+
+## **How long a bite on `bitten` stuns a `kind`** (task 0230): the bitten
+## thing's `stun_ticks` - none for anything without - a boss's
+## `boss_stun_percent` of it, and on a farm short of power `Power.percent()`
+## of that: never less than a tick while there is any stun at all.
+static func shock_ticks(state: Dictionary, kind: StringName, bitten: StringName) -> int:
+	var row: Dictionary = GameData.DEFENCES.get(bitten, {})
+	var ticks := int(row.get("stun_ticks", 0))
+	if ticks <= 0:
+		return 0
+	if bool((GameData.ENEMIES[kind] as Dictionary).get("is_boss", false)):
+		var share := int(row.get("boss_stun_percent", 100))
+		if share <= 0:
+			return 0
+		ticks = ticks * share / 100
+	return maxi(ticks * Power.percent(state) / 100, 1)
 
 
 ## The cell a wind-up is aimed at, or `(-1, -1)`.

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **210 / 296 done**
+`#################.......`  **211 / 296 done**
 
-0 doing / 86 todo / 0 blocked across 18 phases.
+0 doing / 85 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-86 task(s) left, the ready ones first, then what they
+85 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -354,23 +354,6 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0230 - The electric fence
-
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/enemies.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
-
-A barrier like the wooden fence, except whatever bites it is thrown back stunned for a moment - a winter answer that needs the generator running (plan section 5).
-
-- Id `electric_fence`: a barrier (`path_cost` and `hp` LEVERs, within `WIDEST_STEP` by `check_pathing`) with an `energy_draw`, a cost in copper (0176), with wood if it needs a frame, and `season` winter (0193's field). The shock is a stun, not `damage`, so no `Sfx.TOWER_SOUNDS` entry (`_task_0085_night_sounds` wants one exactly when a defence has `damage`; 0283 adds the zap)
-- Stun in `Enemies._gnaw`: an enemy biting an electric fence is stunned for a LEVER of ticks (1-3 s) - a generic entity counter (any source may set it) read at the top of `Enemies._walk`, so a stunned enemy neither moves nor bites; 0233's farm bell writes the same counter. The bite still lands; decide whether bosses get a shorter stun or none. `check_defences` refuses a stun of zero ticks
-- Needs power, degraded never dead: on a short farm the stun is scaled down by `Power.percent`, never to zero
-- Joins like the fence: `WorldView.barrier_mask` joins only `wall` and `fence` today - add the electric fence (decide whether it meets a wooden one) and the placeholder road's `connected` flag, so the joins draw before the art arrives
-- `Names.KEYS` `DEF_ELECTRIC_FENCE`, a `Describe.defence` line, strings in both languages; drawn through the placeholder road (fence-style modules for the 16 masks, whole/hurt, a wreck, a 3-frame zap) until A042 is integrated by 0241
-- DATA moves (a new row); SIM moves only if the scenario meets one or a state key appears - record both numbers
-
-  - done when: `_task_0230_electric_fence` in `src/tools/headless_v1.gd` asserts a walker that bites it stands still for the stun and then bites again, a short farm shortens the stun without removing it, and the field prices it like a barrier
-  - done when: The Deliverables table of `implementation/backlog/packs/A042-electric-fence.md` states the final geometry this task settled
-  - done when: `python tools/shot.py 0230` captures of a joined run of electric fence, opened and looked at
-
 ### 0231 - Hardwood walls and sandbags
 
 Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/core/pathing.gd, src/core/repair.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
@@ -515,6 +498,25 @@ The approved searchlight replaces the stand-in 0229 left, and its beam starts fr
   - done when: The family checks (`check_tower_art.py`) and the showcase (`python tools/show_art.py --towers --check`) pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of searchlights at both levels lighting a tower line in the real game, opened and looked at, in `implementation/shots/0240/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0241 - Art: the electric fence
+
+Waits for Codex art A042.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_effect_art.py`.
+
+The approved electric fence, joined on all sixteen masks, and its zap replace the stand-ins 0230 left.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A042` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A042-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/` and `assets/art_source/effects/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_barrier_art.py`, `check_effect_art.py`, `ArtPlacement` if needed).
+- Source modules `buildings/modules/electric_fence_{post,horizontal,vertical}` (and `_hurt`) composed into `electric_fence_join_<mask>` for the 16 N1/E2/S4/W8 masks and `_hurt`, plus `_wreck`, at 16x32 / (8,28) like the fence. `check_barrier_art.py` checks `('wall', 'fence')` and 84 entries of task 0014: add the family and its count
+- `WorldView.connected_barrier` reads the `connected` flag the importer writes from `join_mask`, so the joined art replaces 0230's placeholder joins with no view change - check it. The zap (3 frames, one-shot) is an effect family played when the stun lands, its own checked block in `check_effect_art.py` beside task 0017's 25 frames
+- Retire 0230's stand-ins from 0120's placeholder registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A042 integrated`.
+
+  - done when: The family checks (`check_barrier_art.py`, `check_effect_art.py`) and the showcase (`python tools/show_art.py --barriers --check` and `python tools/show_art.py --effects --check`) pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of a joined run of electric fence zapping a biter in the real game, opened and looked at, in `implementation/shots/0241/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0246 - Bosses in general
@@ -734,7 +736,7 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
 
 ### 0233 - Three new powers
 
-Waits on 0232, 0230.  Likely files: `src/core/ability.gd, src/core/game_data.gd, src/core/enemies.gd, src/core/repair.gd, src/ui/night_hud.gd, src/ui/names.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0232.  Likely files: `src/core/ability.gd, src/core/game_data.gd, src/core/enemies.gd, src/core/repair.gd, src/ui/night_hud.gd, src/ui/names.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Three more buttons for a night going wrong: the farm bell stops every zombie for two seconds, the dog runs out and bites one, and an emergency repair puts a structure back on its feet - each aimed with the cursor, each with its wait (plan section 4.4).
 
@@ -754,7 +756,7 @@ Three more buttons for a night going wrong: the farm bell stops every zombie for
 
 ### 0234 - The arsenal grows with the seasons
 
-Waits on 0230, 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The arsenal arrives with the calendar - spring's six, then summer's, autumn's and winter's - and every defence costs money as well as materials, so the day's purse is what the night is built with (plan sections 2, 5 and 7).
 
@@ -770,25 +772,6 @@ The arsenal arrives with the calendar - spring's six, then summer's, autumn's an
   - done when: `_case_0234_hotbar_pages` in `src/tools/input_v1.gd` pages the hotbar and places an autumn defence in autumn
   - done when: The Deliverables tables of `implementation/backlog/packs/A044-tarps.md` and `implementation/backlog/packs/A045-power-weapon-icons.md` state the final geometry this task settled (the tarp families and footprints, the icon list)
   - done when: `python tools/shot.py 0234` captures of the hotbar in spring and in winter, opened and looked at
-
-### 0241 - Art: the electric fence
-
-Waits on 0230.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_effect_art.py`.
-
-The approved electric fence, joined on all sixteen masks, and its zap replace the stand-ins 0230 left.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A042` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A042-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/` and `assets/art_source/effects/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_barrier_art.py`, `check_effect_art.py`, `ArtPlacement` if needed).
-- Source modules `buildings/modules/electric_fence_{post,horizontal,vertical}` (and `_hurt`) composed into `electric_fence_join_<mask>` for the 16 N1/E2/S4/W8 masks and `_hurt`, plus `_wreck`, at 16x32 / (8,28) like the fence. `check_barrier_art.py` checks `('wall', 'fence')` and 84 entries of task 0014: add the family and its count
-- `WorldView.connected_barrier` reads the `connected` flag the importer writes from `join_mask`, so the joined art replaces 0230's placeholder joins with no view change - check it. The zap (3 frames, one-shot) is an effect family played when the stun lands, its own checked block in `check_effect_art.py` beside task 0017's 25 frames
-- Retire 0230's stand-ins from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A042 integrated`.
-
-  - done when: The family checks (`check_barrier_art.py`, `check_effect_art.py`) and the showcase (`python tools/show_art.py --barriers --check` and `python tools/show_art.py --effects --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of a joined run of electric fence zapping a biter in the real game, opened and looked at, in `implementation/shots/0241/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0242 - Art: hardwood walls and sandbags
 
@@ -1890,7 +1873,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (12/28)
+## 13 - Weapons of the night  (13/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
@@ -1904,18 +1887,18 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0227** [The pumpkin catapult](prompts/0227-catapult.md)
 - [x] **0228** [The garlic braid](prompts/0228-garlic-braid.md)
 - [x] **0229** [The searchlight](prompts/0229-searchlight.md)
-- [ ] **0230** [The electric fence](prompts/0230-electric-fence.md)
+- [x] **0230** [The electric fence](prompts/0230-electric-fence.md)
 - [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md)
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
-- [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0230
-- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0230, 0231
+- [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232
+- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0231
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
 - [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - waits for art A037
 - [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - waits for art A038
 - [ ] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md) - waits for art A039
 - [ ] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md) - waits for art A040
 - [ ] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md) - waits for art A041
-- [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md) - needs 0230 - waits for art A042
+- [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md) - waits for art A042
 - [ ] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md) - needs 0231 - waits for art A043
 - [ ] **0243** [Art: the day tarps](prompts/0243-art-tarps.md) - needs 0234 - waits for art A044
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - needs 0233, 0234 - waits for art A045

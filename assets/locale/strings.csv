@@ -143,6 +143,7 @@ DEF_BARRICADE,0,barricade,barricada
 DEF_BEEHIVE,0,beehive,colmeia
 DEF_CATAPULT,0,pumpkin catapult,catapulta de abóbora
 DEF_DECOY,0,decoy,espantalho-isca
+DEF_ELECTRIC_FENCE,0,electric fence,cerca elétrica
 DEF_FENCE,0,fence,cerca
 DEF_FLAME_TOWER,0,flame tower,torre de fogo
 DEF_GARLIC_BRAID,0,garlic braid,réstia de alho
@@ -178,6 +179,8 @@ DESC_REPELS,0,"zombies walk round %d tiles of it, at %d%% speed inside","os zumb
 DESC_WEARS,0,"wilts its second night, to %d%%, and is spent after","murcha na segunda noite, a %d%%, e se esgota depois"
 DESC_LIGHTS,0,"lights %d tiles round it, and towers in light reach %d further","ilumina %d ladrilhos em volta, e torres na luz alcançam %d a mais"
 DESC_LIGHT_SHORT,0,%d fewer when power runs short,%d a menos quando falta energia
+DESC_STUNS,0,"whatever bites it stands stunned for %s, a boss for %d%% of that","quem a morde fica atordoado por %s, um chefe por %d%% disso"
+DESC_STUN_SHORT,0,for less when power runs short,menos quando falta energia
 DESC_MAKES,0,makes %s,faz %s
 DESC_NOT_FOR_SALE,0,not for sale,não se vende
 DESC_ONE_SHOT,0,goes off once,explode uma vez só

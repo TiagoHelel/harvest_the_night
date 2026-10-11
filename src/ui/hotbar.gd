@@ -212,9 +212,12 @@ func _icon_of(id: StringName) -> Texture2D:
 	elif ResourceLoader.exists("res://sprites/ui/%s.png" % name):
 		file = "res://sprites/ui/%s.png" % name
 	elif PlaceholderArt.is_drawn(file):
-		# The decoy's drawing, or the garlic braid's (task 0228).
+		# The decoy's drawing, the garlic braid's (task 0228) or the
+		# electric fence's (task 0230).
 		var drawn := DecoyArt.texture(id)
-		return drawn if drawn != null else GarlicArt.texture(id)
+		if drawn == null:
+			drawn = GarlicArt.texture(id)
+		return drawn if drawn != null else ElectricFenceArt.icon(id)
 	elif not PlaceholderArt.art(id).is_empty():
 		# **A stand-in tower** (task 0226's hive, until A038): its own
 		# stand-in, scaled into the box.

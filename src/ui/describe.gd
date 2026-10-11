@@ -165,6 +165,12 @@ static func defence(id: StringName) -> String:
 	if int(one.get("light_tiles", 0)) > 0:
 		lines.append(I18n.f(&"DESC_LIGHTS", [int(one["light_tiles"]), GameData.LIGHT_REACH_BONUS]))
 		lines.append(I18n.f(&"DESC_LIGHT_SHORT", [GameData.LIGHT_SHORT_SHRINK]))
+	# **The electric fence's** (task 0230): how long a bite stuns, a boss's
+	# share of it, and that a farm short of power stuns for less.
+	if int(one.get("stun_ticks", 0)) > 0:
+		lines.append(I18n.f(&"DESC_STUNS", [_seconds(int(one["stun_ticks"])),
+			int(one.get("boss_stun_percent", 100))]))
+		lines.append(I18n.t(&"DESC_STUN_SHORT"))
 	return "\n".join(lines)
 
 

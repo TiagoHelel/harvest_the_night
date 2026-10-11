@@ -180,6 +180,12 @@ var _actors: Node2D
 ## The bees on the stung, out of the night's ramp (task 0226), and their pool.
 var _swarms: Node2D
 var _swarm_sprites: Array[Sprite2D] = []
+## The zaps where a stun lands, out of the ramp too (task 0230): the ones
+## playing, `{"sprite", "age"}` oldest first, and each enemy's stun last
+## frame, by id - a longer one this frame is a fresh shock.
+var _zaps: Node2D
+var _zap_cues: Array = []
+var _stunned: Dictionary = {}
 var _actor_sprites: Array[Node] = []
 var _shots: Node2D
 ## Only presentation remembers launch points and the level of destroyed towers.
@@ -350,6 +356,10 @@ func _ready() -> void:
 	_swarms = Node2D.new()
 	_swarms.name = "Swarms"
 	cue_layer.add_child(_swarms)
+	# **The zaps where a stun lands** (task 0230), beside them.
+	_zaps = Node2D.new()
+	_zaps.name = "Zaps"
+	cue_layer.add_child(_zaps)
 	_zzz = Sprite2D.new()
 	_zzz.name = "Zzz"
 	_zzz.centered = false
@@ -555,6 +565,7 @@ func _process(delta: float) -> void:
 	_refresh_wrecks()
 	_process_mine_cues(delta)
 	_refresh_splats(delta)
+	_refresh_zaps(delta)
 	if _shots != null:
 		# Skipping a night does not emit per-tick observer signals.
 		var alive: Dictionary = {}
@@ -1772,8 +1783,7 @@ func _refresh_actors() -> void:
 		sprite.texture = _texture_for(_pose_of(one))
 		# Keep material planes and family silhouettes during the core hurt cue.
 		sprite.flip_h = _enemy_motion.faces_right(one) if EnemyMotion.TRACKED.has(one["kind"]) else false
-		sprite.modulate = Color(1.25, 1.12, 1.12) if int(one.get("hurt", 0)) > 0 \
-			else Color(1, 1, 1)
+		sprite.modulate = actor_tint(_state, one)
 		# **Anchored at the feet, not at a tile corner.** An enemy is no
 		# longer one tile - motion has transparent clearance around the body - so the
 		# old "half a tile back and up" drew them with their shins in the
@@ -1788,6 +1798,16 @@ func _refresh_actors() -> void:
 		if Combat.is_stung(_state, int(ids[i])):
 			heads.append(sprite.position - Vector2(0.0, roundf(float(pivot.y) * SWARM_HEIGHT)))
 	_place_swarms(heads)
+
+
+## The tint an enemy is drawn in: the core's hurt cue, else - since task 0230
+## - cold blue while it stands stunned, else none.
+static func actor_tint(state: Dictionary, one: Dictionary) -> Color:
+	if int(one.get("hurt", 0)) > 0:
+		return Color(1.25, 1.12, 1.12)
+	if Enemies.is_stunned(state, int(one.get("id", 0))):
+		return STUNNED_TINT
+	return Color(1, 1, 1)
 
 
 ## **The bees on the stung** (task 0226): A038's swarm round the head of each
@@ -1945,6 +1965,79 @@ func _refresh_splats(delta: float) -> void:
 			_splats.remove_at(i)
 			continue
 		sprite.texture = texture
+
+
+## **A spark where a stun lands** (task 0230): each enemy whose stun is longer
+## this frame than the last - a fresh shock, by the driver's ticks or a skipped
+## stretch - gets A042's three-frame zap where it bit (`zap_point`), on the
+## night cues' layer, out of the ramp: a spark at night has to be the
+## brightest thing there. Frame to frame, as the splats are, never a state
+## key. Capped, oldest first.
+func _refresh_zaps(delta: float) -> void:
+	if _zaps == null or _state.is_empty():
+		return
+	_zaps.transform = _actors.get_global_transform()
+	var night := int(_state["phase"]) == Phases.NIGHT
+	var now: Dictionary = {}
+	if night:
+		for id in fresh_stuns(_state, _stunned):
+			_zap_at(zap_point(_state, Entities.get_one(_state, int(id))))
+		for id in Entities.ids(_state):
+			var left := int(Entities.get_one(_state, int(id)).get("stun", 0))
+			if left > 0:
+				now[int(id)] = left
+	_stunned = now
+	var each := ElectricFenceArt.zap_seconds()
+	for i in range(_zap_cues.size() - 1, -1, -1):
+		var cue: Dictionary = _zap_cues[i]
+		cue["age"] = float(cue["age"]) + maxf(delta, 0.0)
+		var sprite: Sprite2D = cue["sprite"]
+		var texture := ElectricFenceArt.zap(int(floorf(float(cue["age"]) / each))) if night else null
+		if texture == null:
+			sprite.queue_free()
+			_zap_cues.remove_at(i)
+			continue
+		sprite.texture = texture
+
+
+## The ids, lowest first, whose stun is longer now than in `before` - a stun
+## by id, as `_refresh_zaps` keeps it: the ones a shock has just landed on.
+static func fresh_stuns(state: Dictionary, before: Dictionary) -> Array:
+	var out: Array = []
+	for id in Entities.ids(state):
+		var left := int(Entities.get_one(state, int(id)).get("stun", 0))
+		if left > int(before.get(int(id), 0)):
+			out.append(int(id))
+	return out
+
+
+## **Where a stun's zap goes**: half way from the enemy's feet to the cell it
+## bit - the wire it touched - at the wires' height, `ZAP_LIFT` over the
+## ground; over its feet when what stunned it was not a bite next to it.
+static func zap_point(state: Dictionary, one: Dictionary) -> Vector2:
+	var lift := Vector2(0.0, ZAP_LIFT)
+	var feet := ArtPlacement.contact(one["pos"]) - lift
+	var bit := int(one.get("chewing", -1))
+	var here := Entities.cell_of(state, int(one.get("id", 0)))
+	if bit < 0 or Grid.manhattan(Grid.cell(bit), here) != 1:
+		return feet
+	var wire := (Vector2(Grid.cell(bit)) + Vector2(0.5, 1.0)) * float(GameData.TILE_SIZE) - lift
+	return (feet + wire) * 0.5
+
+
+func _zap_at(at: Vector2) -> void:
+	if _zap_cues.size() >= ZAP_CAP:
+		(_zap_cues[0]["sprite"] as Sprite2D).queue_free()
+		_zap_cues.remove_at(0)
+	var sprite := Sprite2D.new()
+	sprite.name = "Zap"
+	sprite.centered = false
+	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	sprite.texture = ElectricFenceArt.zap(0)
+	sprite.offset = -Vector2(ElectricFenceArt.zap_pivot())
+	sprite.position = at.round()
+	_zaps.add_child(sprite)
+	_zap_cues.append({"sprite": sprite, "age": 0.0})
 
 
 func _splat_at(cell: Vector2i) -> void:
@@ -2162,7 +2255,7 @@ func _refresh_wrecks() -> void:
 	for cell in Farm.rubble_cells(_state):
 		var id := Farm.rubble_at(_state, cell)
 		var stand_in := stand_in_tower(id)
-		if (not authored_tower(id) and not stand_in and id not in [&"wall", &"fence", &"barricade", &"mine", &"decoy"]) or not Farm.occupant(_state, cell).is_empty():
+		if (not authored_tower(id) and not stand_in and id not in [&"wall", &"fence", &"barricade", &"mine", &"decoy", &"electric_fence"]) or not Farm.occupant(_state, cell).is_empty():
 			continue
 		var idx := Grid.index(cell)
 		visible[idx] = true
@@ -2563,13 +2656,20 @@ static func connected_barrier(id: StringName) -> bool:
 	return bool((PlaceholderArt.frame(BUILDING_DIR + str(id) + ".png") as Dictionary).get("connected", false))
 
 
+## The barriers that join their neighbours: the wall, the fence and - since
+## task 0230 - the electric fence, which meets both, so a run of wire can
+## carry on a wooden fence or end on a wall.
+const JOINED_BARRIERS: Array[StringName] = [&"wall", &"fence", &"electric_fence"]
+
+
 ## The same N1/E2/S4/W8 order as terrain. No empty-cell decorative posts;
-## adjacent stone/wood barriers meet while unrelated structures stay separate.
+## adjacent stone/wood/wire barriers meet while unrelated structures stay
+## separate.
 static func barrier_mask(state: Dictionary, cell: Vector2i) -> int:
 	var mask := 0
 	for bit in EDGE_NEIGHBOURS.size():
 		var at: Vector2i = cell + EDGE_NEIGHBOURS[bit]
-		if Grid.in_bounds(at) and Farm.occupant(state, at).get("id", &"") in [&"wall", &"fence"]:
+		if Grid.in_bounds(at) and JOINED_BARRIERS.has(StringName(Farm.occupant(state, at).get("id", &""))):
 			mask |= 1 << bit
 	return mask
 
@@ -2794,6 +2894,9 @@ func _texture_for(id: StringName) -> Texture2D:
 	# And task 0228's garlic braid, `GarlicArt`'s until A040.
 	if coded == null:
 		coded = GarlicArt.texture(id)
+	# And task 0230's electric fence, every mask and the wreck, until A042.
+	if coded == null:
+		coded = ElectricFenceArt.texture(id)
 	if coded != null:
 		_textures[id] = coded
 		return coded
@@ -2873,6 +2976,12 @@ const GARLIC_GROUND := Color(0.91, 0.88, 0.81, 0.16)
 ## pixels (task 0227), and how many splats burst at once.
 const PUMPKIN_ARC := 14.0
 const SPLAT_CAP := 8
+
+## **A stunned enemy stands cold blue** (task 0230), and a zap plays where the
+## shock landed: at the wires' height over the ground, a few at a time.
+const STUNNED_TINT := Color(0.7, 0.88, 1.5)
+const ZAP_LIFT := 13.0
+const ZAP_CAP := 8
 
 
 ## The fallback. Task 0075 makes this unreachable.

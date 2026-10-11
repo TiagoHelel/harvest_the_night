@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 74
+const GROUPS := 75
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -153,6 +153,7 @@ func _run() -> void:
 	_task_0227_catapult()
 	_task_0228_garlic()
 	_task_0229_light()
+	_task_0230_electric_fence()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -6176,8 +6177,8 @@ func _task_0193_supply() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		var said := GameData.defence_season(GameData.DEFENCES[id]) if GameData.DEFENCES[id].has("season") else &""
 		seasons[said] = int(seasons.get(said, 0)) + 1
-	expect(seasons == {&"spring": 8, &"summer": 3, &"autumn": 2, &"winter": 1},
-		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225) and hive (0226), autumn's catapult (0227) and braid (0228), and winter's searchlight (0229)", str(seasons))
+	expect(seasons == {&"spring": 8, &"summer": 3, &"autumn": 2, &"winter": 2},
+		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225) and hive (0226), autumn's catapult (0227) and braid (0228), and winter's searchlight (0229) and electric fence (0230)", str(seasons))
 	# **The routes**, season by season: what each kit, round, meal and feed
 	# is made of, followed back to the ground.
 	for season in GameData.SEASONS:
@@ -8369,6 +8370,328 @@ func _task_0229_light() -> void:
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A041-searchlight.md").contains("Final geometry settled by game task 0229"),
 		"shot.gd has a lit and an unlit tower line, and A041's table says the geometry this task settled")
 	_completed += 1
+
+## 0230 - the electric fence. A winter barrier built as the wooden fence is -
+## priced by the field and joined to its neighbours - that stuns whatever
+## bites it: the bite lands, then the biter stands, neither walking nor
+## biting, for the fence's `stun_ticks`; a boss for its share, a farm short of
+## power for less and never none. The stun is a count on the entity that any
+## source may set (0233's bell will). Drawn in code until A042.
+func _task_0230_electric_fence() -> void:
+	# **The row, and its checks.**
+	var row: Dictionary = GameData.DEFENCES[&"electric_fence"]
+	var cost: Dictionary = row["cost"]
+	var stun := int(row["stun_ticks"])
+	var share := int(row["boss_stun_percent"])
+	expect(cost.size() == 2 and cost.has(GameData.COPPER) and cost.has(GameData.WOOD)
+		and int(row["path_cost"]) > 0 and int(row["hp"]) > 0 and int(row["energy_draw"]) > 0
+		and stun >= GameData.SECONDS and stun <= 3 * GameData.SECONDS and share >= 0 and share < 100
+		and not row.has("damage") and not row.has("reload_ticks") and GameData.defence_season(row) == &"winter"
+		and not Sfx.TOWER_SOUNDS.has(&"electric_fence") and not Pathing.is_prey(&"electric_fence"),
+		"an electric fence costs copper and wood, is a barrier with hit points, draws power, stuns for 1-3 seconds and a boss for less, does no damage and makes no tower sound, is winter's, and no breaker hunts it",
+		str(row))
+	var dead := GameData.DEFENCES.duplicate(true)
+	(dead[&"electric_fence"] as Dictionary)["stun_ticks"] = 0
+	var greedy := GameData.DEFENCES.duplicate(true)
+	(greedy[&"electric_fence"] as Dictionary)["boss_stun_percent"] = 150
+	var wide := GameData.DEFENCES.duplicate(true)
+	(wide[&"electric_fence"] as Dictionary)["path_cost"] = GameData.WIDEST_STEP
+	expect(_says(GameData.check_defences(dead), "stuns for no time at all")
+		and _says(GameData.check_defences(greedy), "stuns a boss for 150%")
+		and _says(GameData.check_pathing(GameData.TERRAIN_COST, wide, GameData.BUILDINGS), "'electric_fence'")
+		and GameData.validate().is_empty(),
+		"a stun of no ticks is refused, so is a boss's share past the whole, and a path cost past WIDEST_STEP; the real tables pass")
+
+	# **The field prices it like a barrier**: its ground and its path cost in
+	# the priced field, a wall in the runners' open one, a thing to break
+	# through - not prey.
+	var farm := State.create(23000)
+	Resources.gain(farm, {GameData.COPPER: 200, GameData.WOOD: 200})
+	NightRoad.into_build(farm)
+	var spot := _open_square(farm, 4, &"electric_fence")
+	expect(Building.place(farm, &"electric_fence", spot), "an electric fence goes down in the build step", str(spot))
+	Pathing.refresh(farm)
+	var ground := Farm.cost_of_terrain(int((farm["terrain"] as PackedByteArray)[Grid.index(spot)]))
+	expect(Pathing.entry_cost(farm, spot) == ground + int(row["path_cost"])
+		and int((farm["open_cost"] as PackedInt32Array)[Grid.index(spot)]) == Pathing.IMPASSABLE
+		and Pathing.breaks_through(farm, spot),
+		"the field prices it like a barrier: %d for its ground and %d to break through, and a wall to the runners" % [ground, int(row["path_cost"])],
+		str(Pathing.entry_cost(farm, spot)))
+
+	# **A walker that bites it stands still for the stun, then bites again.**
+	# Shut in a ring of each kind of fence, the ticks between its first two
+	# bites: a wooden fence's are the bite's own rhythm, an electric fence's
+	# that and the stun.
+	var wooden := _ring_bites(23001, &"fence", false)
+	var wired := _ring_bites(23001, &"electric_fence", false)
+	var wired_state: Dictionary = wired["state"]
+	expect(Enemies.shock_ticks(wired_state, &"walker", &"electric_fence") == stun
+		and int(wooden["gap"]) > 0 and int(wired["gap"]) == int(wooden["gap"]) + stun
+		and int(wired["stunned"]) == stun and bool(wired["stood"]) and int(wooden["stunned"]) == 0,
+		"a walker that bites an electric fence stands stunned and still for %d ticks, then bites again: %d ticks between bites, a wooden fence's %d"
+			% [stun, int(wired["gap"]), int(wooden["gap"])],
+		"%d/%d stunned %d" % [int(wired["gap"]), int(wooden["gap"]), int(wired["stunned"])])
+
+	# **A farm short of power stuns for less, never none**: an auto crossbow
+	# beyond the ring draws more than the farm has.
+	var short := _ring_bites(23001, &"electric_fence", true)
+	var percent := int(short["percent"])
+	var weak := stun * percent / 100
+	expect(percent < 100 and weak > 0 and weak < stun and int(short["gap"]) == int(wooden["gap"]) + weak
+		and int(short["stunned"]) == weak,
+		"short of power - %d%% - the stun is %d ticks, not %d and not none, and the walker bites again that much sooner" % [percent, weak, stun],
+		"%d stunned %d" % [int(short["gap"]), int(short["stunned"])])
+
+	# **A boss stands for its share**, even on the least powered farm; a
+	# wooden fence and a wall stun nobody.
+	var dim := State.create(23002)
+	(dim["power"] as Dictionary)["percent"] = GameData.UNPOWERED_PERCENT
+	var boss := stun * share / 100
+	expect(Enemies.shock_ticks(farm, &"giant", &"electric_fence") == boss
+		and Enemies.shock_ticks(dim, &"giant", &"electric_fence") == maxi(boss * GameData.UNPOWERED_PERCENT / 100, 1)
+		and Enemies.shock_ticks(dim, &"walker", &"electric_fence") == stun * GameData.UNPOWERED_PERCENT / 100
+		and Enemies.shock_ticks(farm, &"walker", &"fence") == 0 and Enemies.shock_ticks(farm, &"walker", &"wall") == 0,
+		"a boss stands %d ticks of it, and on the least powered farm %d - never none; a wooden fence and a wall stun nobody"
+			% [boss, Enemies.shock_ticks(dim, &"giant", &"electric_fence")])
+
+	# **The count is any source's** (0233's bell will set it): a walker in the
+	# open, stunned for ten ticks - a shorter stun after keeps the longer -
+	# stands where it is for exactly those and walks on after, slowly; a
+	# flare's slow runs down while it stands.
+	var open := State.create(23003)
+	Resources.gain(open, {GameData.STRAW: 200, GameData.WOOD: 200})
+	NightRoad.to_night(open)
+	NightRoad.park(open)
+	Enemies.withdraw(open)
+	var stander := Entities.spawn(open, &"walker", _open_square(open, 4))
+	Enemies.stun(open, stander, 10)
+	Enemies.stun(open, stander, 4)
+	(Entities.get_one(open, stander) as Dictionary)["slow"] = 15
+	var at: Array = (Entities.get_one(open, stander)["pos"] as Array).duplicate()
+	var held := 0
+	for _i in 10:
+		Enemies.tick(open)
+		if Entities.get_one(open, stander)["pos"] == at:
+			held += 1
+	var stood_out := not Enemies.is_stunned(open, stander)
+	var slowed := int(Entities.get_one(open, stander).get("slow", 0))
+	for _i in 3:
+		Enemies.tick(open)
+	expect(held == 10 and stood_out and slowed == 5 and Entities.get_one(open, stander)["pos"] != at,
+		"stunned for ten ticks by any source, it stands for those ten - a shorter stun after keeps the longer - its flare slow running down, and walks on the next",
+		"%d held, slow %d" % [held, slowed])
+
+	# **The words.**
+	var said := {}
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		said[locale] = Describe.defence(&"electric_fence")
+	I18n.use("en")
+	var seconds := "%.1fs" % (float(stun) / float(GameData.TICK_HZ))
+	expect(Names.KEYS.get(&"electric_fence") == &"DEF_ELECTRIC_FENCE"
+		and (said["en"] as String).contains("ELECTRIC FENCE")
+		and (said["en"] as String).contains("whatever bites it stands stunned for %s, a boss for %d%% of that" % [seconds, share])
+		and (said["en"] as String).contains("for less when power runs short")
+		and (said["en"] as String).contains("things walk round it if they can")
+		and (said["pt_BR"] as String).contains("CERCA EL") and (said["pt_BR"] as String).contains("atordoado por %s" % seconds),
+		"its name, its stun, a boss's share and a short farm's, and that it blocks, in both languages", str(said))
+
+	# **The joins**: it meets its own kind, the wooden fence and the wall -
+	# which meet it back - and nothing else.
+	var joined := State.create(23004)
+	Resources.gain(joined, {GameData.COPPER: 20, GameData.WOOD: 20})
+	NightRoad.into_build(joined)
+	var centre := _open_square(joined, 2, &"electric_fence")
+	Farm.place(joined, centre, {"id": &"electric_fence", "hp": 40})
+	Farm.place(joined, centre + Vector2i(0, -1), {"id": &"decoy", "hp": 200})
+	Farm.place(joined, centre + Vector2i(1, 0), {"id": &"fence", "hp": 30})
+	Farm.place(joined, centre + Vector2i(0, 1), {"id": &"wall", "hp": 120})
+	Farm.place(joined, centre + Vector2i(-1, 0), {"id": &"electric_fence", "hp": 40})
+	var mask := WorldView.barrier_mask(joined, centre)
+	var wood_mask := WorldView.barrier_mask(joined, centre + Vector2i(1, 0))
+	var wall_mask := WorldView.barrier_mask(joined, centre + Vector2i(0, 1))
+	expect(mask == 14 and (wood_mask & 8) != 0 and (wall_mask & 1) != 0 and WorldView.connected_barrier(&"electric_fence"),
+		"it joins the wooden fence east, the wall south and its own kind west, not the decoy north, and the fence and the wall join it back",
+		"%d %d %d" % [mask, wood_mask, wall_mask])
+
+	# **Drawn through 0120's road**: the 32 masks and the wreck registered to
+	# A042 at its 16x32 on (8,28), drawn in code, every standing one
+	# `connected`.
+	var road: Array = []
+	for name in ElectricFenceArt.names():
+		var path := ElectricFenceArt.path_of(name)
+		var frame := PlaceholderArt.frame(path)
+		if (frame.get("canvas") != Vector2i(16, 32) or frame.get("pivot") != Vector2i(8, 28)
+				or not PlaceholderArt.is_drawn(path) or str(PlaceholderArt.art(name).get("pack", "")) != "A042"
+				or bool(frame.get("connected", false)) == (name == ElectricFenceArt.WRECK)
+				or ElectricFenceArt.texture(name) == null):
+			road.append(name)
+	expect(ElectricFenceArt.names().size() == 33 and road.is_empty() and ElectricFenceArt.texture(&"fence") == null
+		and ElectricFenceArt.texture(&"decoy") == null,
+		"the 32 masks and the wreck drawn through 0120's road at A042's 16x32 on (8,28), every standing one connected", str(road))
+
+	# **Each mask's arms match its bits** - the west column, the east column,
+	# above the post's cap, below its foot - and every hurt one's alpha
+	# differs from the whole one's, the break showing past the post.
+	var arms: Array = []
+	for hurt in [false, true]:
+		for m in 16:
+			var name := ElectricFenceArt.name_of(m, hurt)
+			var image := ElectricFenceArt.drawing(name)
+			var seen := [_any_opaque(image, Rect2i(0, 12, 1, 8)), _any_opaque(image, Rect2i(15, 12, 1, 8)),
+				_any_opaque(image, Rect2i(0, 0, 16, 7)), _any_opaque(image, Rect2i(0, 20, 16, 12))]
+			if image.get_size() != Vector2i(16, 32) or seen != [(m & 8) != 0, (m & 2) != 0, (m & 1) != 0, (m & 4) != 0]:
+				arms.append(name)
+			if hurt and _alpha_apart(image, ElectricFenceArt.drawing(ElectricFenceArt.name_of(m, false))) < 3:
+				arms.append("%s as whole" % name)
+	var post := ElectricFenceArt.module(&"post", false)
+	var span := ElectricFenceArt.module(&"horizontal", false)
+	expect(arms.is_empty() and post.get_used_rect().end.y - 1 == 19 and span.get_used_rect().end.y - 1 <= 19
+		and _any_opaque(span, Rect2i(0, 12, 1, 8)) and _any_opaque(span, Rect2i(15, 12, 1, 8))
+		and _any_opaque(ElectricFenceArt.module(&"horizontal", true), Rect2i(4, 14, 1, 2)),
+		"every mask's arms match its bits, every hurt one differs from its whole one, the post and the span stand on row 20, and the snapped wire hangs outside the post",
+		str(arms))
+	var wreck := ElectricFenceArt.drawing(ElectricFenceArt.WRECK)
+	var pile := wreck.get_used_rect()
+	var wood := Image.load_from_file(ProjectSettings.globalize_path("res://sprites/buildings/fence_join_10.png"))
+	wood.convert(Image.FORMAT_RGBA8)
+	var straight := ElectricFenceArt.drawing(ElectricFenceArt.name_of(10, false))
+	var seam := 0
+	for y in 32:
+		if straight.get_pixel(15, y).a > 0.0 and wood.get_pixel(0, y).a > 0.0:
+			seam += 1
+	expect(pile.size.y <= 8 and pile.end.y - 1 == 27 and pile.size.x <= 14 and seam >= 2,
+		"the wreck is a low pile on the cell's ground line, and a straight run meets the wooden fence's on %d rows" % seam,
+		"%s %d" % [str(pile), seam])
+
+	# **The zap**: three 12x12 frames, the arcs the widest and the fade less,
+	# inside a clear pixel, a 0.065 s one-shot.
+	var areas: Array = []
+	var inside := true
+	for i in ElectricFenceArt.ZAP_FRAMES:
+		var image := ElectricFenceArt.zap_drawing(i)
+		var used := image.get_used_rect()
+		areas.append(_opaque_count(image))
+		inside = inside and image.get_size() == Vector2i(12, 12) and used.position.x >= 1 and used.position.y >= 1 \
+			and used.end.x <= 11 and used.end.y <= 11
+	expect(inside and areas.size() == 3 and int(areas[1]) > int(areas[0]) and int(areas[2]) < int(areas[1])
+		and ElectricFenceArt.zap(3) == null and ElectricFenceArt.zap(0) != null
+		and PlaceholderArt.is_drawn(ElectricFenceArt.ZAP_PATH % 0) and is_equal_approx(ElectricFenceArt.zap_seconds(), 0.065)
+		and ElectricFenceArt.zap_pivot() == Vector2i(6, 6),
+		"the zap: three 12x12 frames round (6,6) inside a clear pixel - a spark, the arcs at their widest, a fade - a 0.065 s one-shot, drawn in code for A042",
+		str(areas))
+
+	# **The view**: a fresh stun is a zap half way to the wire it bit, at the
+	# wires' height; the stunned stand cold blue, the hurt cue first.
+	var walker := int(wired["walker"])
+	var one := Entities.get_one(wired_state, walker)
+	var bit := Grid.cell(int(one["chewing"]))
+	var here := Entities.cell_of(wired_state, walker)
+	var expected_zap := ((Vector2(here) + Vector2(bit)) * 0.5 + Vector2(0.5, 1.0)) * float(GameData.TILE_SIZE) \
+		- Vector2(0.0, WorldView.ZAP_LIFT)
+	var tints := [WorldView.actor_tint(wired_state, one)]
+	one["hurt"] = 2
+	tints.append(WorldView.actor_tint(wired_state, one))
+	one["hurt"] = 0
+	one["stun"] = 0
+	tints.append(WorldView.actor_tint(wired_state, one))
+	one["stun"] = stun
+	expect(WorldView.fresh_stuns(wired_state, {}) == [walker] and WorldView.fresh_stuns(wired_state, {walker: stun}).is_empty()
+		and WorldView.fresh_stuns(wired_state, {walker: 3}) == [walker]
+		and WorldView.zap_point(wired_state, one).is_equal_approx(expected_zap)
+		and tints == [WorldView.STUNNED_TINT, Color(1.25, 1.12, 1.12), Color(1, 1, 1)],
+		"a fresh stun plays a zap half way to the wire it bit, %d px up; the stunned stand cold blue, the hurt cue first" % int(WorldView.ZAP_LIFT),
+		"%s %s" % [str(WorldView.zap_point(wired_state, one)), str(tints)])
+
+	# **The hotbar**: a straight run in its box, winter's, before the lamp.
+	var bar := Hotbar.new()
+	var icon := bar._icon_of(&"electric_fence")
+	bar.free()
+	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
+	expect(icon != null and icon == ElectricFenceArt.texture(ElectricFenceArt.name_of(10, false))
+		and order.find(&"electric_fence") >= 0 and order.find(&"electric_fence") == order.find(&"searchlight") - 1,
+		"the hotbar shows a straight run of it, winter's first, before the searchlight", str(order))
+	expect(FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"electric_fence\", ")
+		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A042-electric-fence.md").contains("Final geometry settled by game task 0230"),
+		"shot.gd has a joined run of electric fence, and A042's table says the geometry this task settled")
+	_completed += 1
+
+
+## A walker shut in a ring of `id` on open ground in a parked night - the farm
+## `short` of power by an auto crossbow beyond the ring, or not - ticked until
+## it has bitten twice: the ticks between the two bites, how many ticks from
+## the first it stood stunned, whether it stood exactly where it was, the
+## farm's power and the walker (task 0230).
+func _ring_bites(seed_value: int, id: StringName, short: bool) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.COPPER: 200, GameData.WOOD: 200, GameData.IRON: 200})
+	NightRoad.into_build(state)
+	var spot := _open_square(state, 4, id)
+	var ring: Array = []
+	for step in Enemies.NEIGHBOURS:
+		var at: Vector2i = spot + step
+		expect(Building.place(state, id, at), "a %s goes down round the walker's cell" % id, str(at))
+		ring.append(at)
+	if short:
+		expect(Building.place(state, &"auto_crossbow", spot + Vector2i(3, 0)), "an auto crossbow goes up beyond the ring",
+			str(spot))
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	Power.tick(state, false)
+	var walker := Entities.spawn(state, &"walker", spot)
+	var hp := {}
+	for at in ring:
+		hp[at] = int(Farm.occupant(state, at)["hp"])
+	var bites: Array = []
+	var stunned := 0
+	var stood := true
+	var pos: Array = (Entities.get_one(state, walker)["pos"] as Array).duplicate()
+	for tick in 300:
+		Enemies.tick(state)
+		for at in ring:
+			var now := int(Farm.occupant(state, at).get("hp", 0))
+			if now < int(hp[at]):
+				bites.append(tick)
+				hp[at] = now
+		if bites.size() >= 2:
+			break
+		if bites.size() == 1:
+			if Enemies.is_stunned(state, walker):
+				stunned += 1
+			stood = stood and Entities.get_one(state, walker)["pos"] == pos
+	return {"state": state, "walker": walker, "stunned": stunned, "stood": stood,
+		"gap": int(bites[1]) - int(bites[0]) if bites.size() >= 2 else -1, "percent": Power.percent(state)}
+
+
+## Whether anything in `rect` of `image` is opaque (task 0230).
+func _any_opaque(image: Image, rect: Rect2i) -> bool:
+	for y in range(rect.position.y, rect.end.y):
+		for x in range(rect.position.x, rect.end.x):
+			if image.get_pixel(x, y).a > 0.0:
+				return true
+	return false
+
+
+## How many pixels of `image` are opaque (task 0230).
+func _opaque_count(image: Image) -> int:
+	var n := 0
+	for y in image.get_height():
+		for x in image.get_width():
+			if image.get_pixel(x, y).a > 0.0:
+				n += 1
+	return n
+
+
+## How many pixels are opaque in one of two same-sized images and not the
+## other (task 0230).
+func _alpha_apart(a: Image, b: Image) -> int:
+	var n := 0
+	for y in a.get_height():
+		for x in a.get_width():
+			if (a.get_pixel(x, y).a > 0.0) != (b.get_pixel(x, y).a > 0.0):
+				n += 1
+	return n
 
 
 ## Every cell within `radius` of `centre`, a square, into `cells` (task 0229).

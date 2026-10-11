@@ -145,6 +145,7 @@ const KEYS: Dictionary = {
 	&"catapult": &"DEF_CATAPULT",
 	&"garlic_braid": &"DEF_GARLIC_BRAID",
 	&"searchlight": &"DEF_SEARCHLIGHT",
+	&"electric_fence": &"DEF_ELECTRIC_FENCE",
 
 	# ---- what a day builds
 	&"workshop": &"BLD_WORKSHOP",

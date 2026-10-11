@@ -13955,6 +13955,9 @@ func _building_art(name: StringName) -> Image:
 			return DecoyArt.drawing(name)
 		if path.is_empty() and GarlicArt.texture(name) != null:
 			return GarlicArt.drawing(name)
+		# And task 0230's electric fence, every mask and its wreck.
+		if path.is_empty() and ElectricFenceArt.texture(name) != null:
+			return ElectricFenceArt.drawing(name)
 	return null
 
 
@@ -14595,8 +14598,9 @@ func _task_0082_shots() -> void:
 	# a crowd lured to a decoy. Ninety-three since 0225: one turned to a bait.
 	# Ninety-four since 0226: a hive at work. Ninety-five since 0227: a volley.
 	# Ninety-six since 0228: a route round a braid. Ninety-seven since 0229:
-	# a lit and an unlit tower line.
-	expect(names.size() == 97,
+	# a lit and an unlit tower line. Ninety-eight since 0230: a joined run of
+	# electric fence.
+	expect(names.size() == 98,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

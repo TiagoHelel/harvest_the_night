@@ -1807,6 +1807,27 @@ const DEFENCES: Dictionary = {
 		# tiles, never none - degraded, never dead, as the rest of `Power`.
 		"energy_draw": 2,               # LEVER: energy per tick, 1-3
 	},
+	&"electric_fence": {
+		# **A fence that bites back** (task 0230; the plan's section 5,
+		# winter): built as the wooden fence is - a barrier the field prices,
+		# joined to its neighbours - except that whatever bites it is thrown
+		# back stunned (`Enemies.stun()`), standing where it is, neither
+		# walking nor biting. Copper for the wire and wood for the posts.
+		"cost": {COPPER: 2, WOOD: 5},   # LEVER: copper and wood
+		"season": &"winter",            # LEVER: the season it unlocks in (0234 gates it)
+		"hp": 40,                       # LEVER: hit points, 20-80
+		"path_cost": 8,                 # LEVER: tiles-equivalent detour, 4-16
+		# **The shock**: the ticks a biter stands stunned, the bite landing
+		# all the same. Not `damage`: it hurts nothing and shoots nothing, so
+		# no tower sound (0283 gives it its zap).
+		"stun_ticks": 2 * SECONDS,      # LEVER: ticks, 1-3 seconds worth
+		# **A boss shrugs most of it off**: this share of the stun, never
+		# less than a tick - and none at all at 0.
+		"boss_stun_percent": 25,        # LEVER: percent of the stun, 0-100
+		# **Powered**: a farm short of it stuns for `Power.percent()` of the
+		# time, never none - degraded, never dead, as the rest of `Power`.
+		"energy_draw": 1,               # LEVER: energy per tick, 1-2
+	},
 }
 
 ## The animals on the reference sheet, and the meat that comes off them.
@@ -4138,6 +4159,14 @@ static func check_defences(defences: Dictionary) -> Array:
 		# **A lamp lights something** (task 0229).
 		if defence.has("light_tiles") and int(defence["light_tiles"]) <= 0:
 			errors.append("defence '%s' lights no tiles" % defence_id)
+		# **A shock stuns for something** (task 0230): one of no ticks would
+		# be a fence with extra words, and a boss's share is a share.
+		if defence.has("stun_ticks") and int(defence["stun_ticks"]) <= 0:
+			errors.append("defence '%s' stuns for no time at all" % defence_id)
+		if defence.has("boss_stun_percent"):
+			var share := int(defence["boss_stun_percent"])
+			if share < 0 or share > 100:
+				errors.append("defence '%s' stuns a boss for %d%% of it" % [defence_id, share])
 		# **Garlic's area** (task 0228): it reaches some tiles, costs something
 		# to cross, slows without stopping, and keeps some strength wilted.
 		if defence.has("repel_tiles"):

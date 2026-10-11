@@ -20,20 +20,24 @@ run of electric fence must be told apart from a wooden fence at a glance.
 
 ## Deliverables
 
-The table is provisional: game task 0230 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0230. The rows stand as written, with the module geometry below measured on the stand-in the game draws today. **How the game plays them:** an electric fence is one cell, a barrier the zombies' field prices like the wooden fence, and it joins on all 16 masks to its own kind, to the wooden fence and to the wall - a run of wire can carry on a wooden fence or end on a wall, so the mixed seam is a real case, not a curiosity. Whatever bites it stands stunned for two seconds (a boss for a quarter of that; less on a farm short of power, never none); the bite lands all the same. It is `_hurt` below three quarters of its hit points and `_wreck` once it falls, as rubble the morning sweeps. **The zap** plays once, the moment a stun lands, half way from the biter's feet to the cell it bit and 13 px over the ground - the wires' height - on the night cues' layer, above the relight; the stunned one is tinted a cold blue by the view for as long as it stands (no art). Until 0241 the whole family is drawn in code by `ElectricFenceArt` through 0120's road, the 32 masks composed with the recipe below from its three modules exactly as `build.py` will. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
-| `buildings/modules/electric_fence_post` | 16x32 | (8,28) | 1 / static (0.55) | Dark iron post with 2-3 white insulator pixels and a cap. Visible 4-5 wide x 12-14 tall, centred on x 8, lowest opaque row 19 (it stands on row 20, the cell's centre line, like `fence_post` rows 7-19). |
-| `buildings/modules/electric_fence_horizontal` | 16x32 | (8,28) | 1 / static | East-west span, no end posts: 2-3 taut 1 px copper wires with ink undersides, opaque at x 0 and x 15. Rows 12-19 exactly like `fence_horizontal`, so a mixed run meets the wooden fence on at least 2 rows. |
-| `buildings/modules/electric_fence_vertical` | 16x32 | (8,28) | 1 / static | North-south span seen from above, a narrow wire run receding along the screen Y axis (not upright poles): 3-4 wide, centred on x 8, content inside rows 8-27 and reaching both ends. |
+| `buildings/modules/electric_fence_post` | 16x32 | (8,28) | 1 / static (0.55) | Dark iron post with a cap and white ceramic insulators, x 6-9, rows 7-19: ink sides, the cap on row 7, the foot on row 19 (it stands on row 20, the cell's centre line, like `fence_post`). **The insulators sit inside the post's ink**, on the wire rows 13 and 17: a white pixel against the winter snow is the snow after the relight, so one on the post's edge vanishes at night. |
+| `buildings/modules/electric_fence_horizontal` | 16x32 | (8,28) | 1 / static | East-west span, no end posts: two taut 1 px copper wires on rows 13 and 17, each with an ink row under it (14 and 18), opaque at x 0 and x 15. Those rows are opaque in `fence_horizontal` too, so a mixed run meets the wooden fence on four. Dark wires read against snow; keep them darker than the snow. |
+| `buildings/modules/electric_fence_vertical` | 16x32 | (8,28) | 1 / static | North-south run seen from above, the two wires receding along the screen Y axis (not upright poles): x 7 and 9 with ink between, rows 11-27, as `fence_vertical` (x 7-9, rows 11-27). |
 | `buildings/modules/electric_fence_{post,horizontal,vertical}_hurt` | 16x32 | (8,28) | 1 each / static | Same scale and placement: a bent post and a cracked insulator; one wire snapped and hanging in each span. Every hurt module's alpha shape differs from its whole one, and the post never covers the whole break. |
-| `buildings/electric_fence_wreck` | 16x32 | (8,28) | 1 / static | A low tangle of bent posts and coiled wire on the cell: visible height at most 8, width at most 14, lowest row 27 (like `fence_wreck` rows 21-27). |
+| `buildings/electric_fence_wreck` | 16x32 | (8,28) | 1 / static | A low tangle of a fallen post and coiled wire on the cell: visible height at most 8, width at most 14, lowest row 27 (like `fence_wreck` rows 21-27; the stand-in's is x 2-13, rows 21-27). |
 | `buildings/electric_fence`, `electric_fence_join_<1..15>` | 16x32 | (8,28) | 1 each / static | **Composed by build.py, not generated**: the 16 whole masks (mask 0 is the post alone), with the contract's recipe (section 2.3: N=1, E=2, S=4, W=8; slices and pastes from the table; order N, W, E, S, post on top). |
 | `buildings/electric_fence_hurt`, `electric_fence_join_<1..15>_hurt` | 16x32 | (8,28) | 1 each / static | The same 16 masks from the hurt modules. |
-| `effects/zap_0..2` | 12x12 | (6,6) | 3 at 0.065 s, one-shot | A small electric arc burst: jagged 1 px pale-blue/white arcs with 2-3 warm spark specks. Poses `spark` (small), `arc` (largest area), `fade` (a few specks, less than `arc`). Inside the canvas with 1 px clear; no full-frame bloom. |
+| `effects/zap_0..2` | 12x12 | (6,6) | 3 at 0.065 s, one-shot | A small electric arc burst: jagged 1 px pale-blue/white arcs with 2-3 warm spark specks. Poses `spark` (small), `arc` (largest area), `fade` (a few specks, less than `arc`). Inside the canvas with 1 px clear; no full-frame bloom. Drawn over the relight, so its own colours are what the player sees. |
 
 - Every row: dir `none`, `mirror: "none"`, draw scale 1.0, no metadata points.
+- **The stand-in until 0241** (task 0230): `PlaceholderArt` registers the 32
+  masks (`connected`, so they join before the art arrives), the wreck and the
+  zap as drawn by code (`ElectricFenceArt`). The pack has no icon: the hotbar
+  shows the straight run, mask 10, scaled into its 16x16 box.
 - One `content_scale` across all six modules and the wreck (contract 2.3).
 - No glow, spark or arc is ever baked into a module: the fence is dark metal
   until the zap plays.

@@ -141,6 +141,7 @@ const SCENARIOS: Array = [
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
 	["searchlight", "a lit and an unlit tower line at night: Winter 2, a generator running, the east road with a line of gun towers north of it under a searchlight and a line south of it in the dark, tanks coming down the road - the lit line firing a tile further than the dark one can", ""],
+	["electric_fence", "a joined run of electric fence at night: Winter 2, a generator running, a line of electric fence across the east road with a corner, a wooden stub making a tee, two arms at its foot and a wooden fence carrying the east one on, the road's cell hurt and a west arm at the top a wreck; walkers coming down the road, the first stunned where it bit - cold blue, its zap still playing - and the fence picked on the hotbar, its ghost joining the north arm", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
 	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
 	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
@@ -778,6 +779,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"catapult": _set_catapult(state)
 		"garlic": _set_garlic(state)
 		"searchlight": _set_searchlight(state)
+		"electric_fence": _set_electric_fence(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1101,6 +1103,27 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 					"aims" if Towers.target_of(state, post as Vector2i) != 0 else "waits"])
 			print("  searchlight: %s; power %d%%, %d shots fired" % [", ".join(aimed), Power.percent(state),
 				Towers.shots_fired(state)])
+		"electric_fence":
+			# Who stands stunned at the shutter, and what the line has left
+			# (task 0230).
+			var view := main.get_node("%WorldView") as WorldView
+			var biters: Array = []
+			for id in Entities.ids(state):
+				var one := Entities.get_one(state, int(id))
+				biters.append("%s at %s bit %s stun %d wait %d" % [one["kind"], str(Entities.cell_of(state, int(id))),
+					str(Grid.cell(int(one.get("chewing", -1)))) if int(one.get("chewing", -1)) >= 0 else "-",
+					int(one.get("stun", 0)), int(one.get("chew_wait", 0))])
+			var road_hp := int(Farm.occupant(state, _electric_gate).get("hp", 0))
+			print("  electric_fence: %s; the gate %s at %d hp; power %d%%, %d zaps playing"
+				% [", ".join(biters), str(_electric_gate), road_hp, Power.percent(state), view._zap_cues.size()])
+			# The fence in hand off the end of the north arm, where its ghost
+			# joins the run - and the cursor's words clear of the walkers.
+			var mode: Node = main.get_node_or_null("%BuildMode")
+			var hand := _electric_gate + Vector2i(2, -4)
+			if mode != null:
+				mode.set("_pointer", view.cell_to_screen(hand))
+				view.cursor().place_at(hand)
+				mode.call("_follow_cursor")
 		"garlic":
 			# The braid in hand on the road (task 0228), and the preview it
 			# draws.
@@ -2706,6 +2729,85 @@ func _set_searchlight(state: Dictionary) -> void:
 
 ## The gun towers `_set_searchlight` put up, the lit line first (task 0229).
 var _searchlight_lines: Array = []
+
+
+## **A joined run of electric fence** (task 0230): Winter 2. A generator put
+## up by day and fed. At night a stretch of the east road, which runs straight
+## west to the house, cleared of its trees: a line of electric fence across it,
+## north to south, turning east at its top - a corner - with a wooden stub west
+## off it - a tee - and at its foot an arm either way, the east one carried on
+## by a wooden fence, wire and wood joined; the road's cell hurt, and a west
+## arm at the top a wreck. Three walkers coming down the road, the first
+## placed to bite some ten ticks before the shutter - some 74 on - so it
+## stands stunned, cold blue, its zap at its widest; the fence in hand off the
+## north arm, its ghost joined to it (`_just_before_the_shutter`).
+func _set_electric_fence(state: Dictionary) -> void:
+	_on_date(state, 3 * GameData.SEASON_DAYS + 2)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 100, GameData.STONE: 100,
+		GameData.COPPER: 60, GameData.OIL: 40})
+	var plant := Vector2i(-1, -1)
+	for radius in 12:
+		for cell in Grid.within(Player.cell(state) + Vector2i(-6, 3), radius):
+			if plant.x < 0 and Building.why_not(state, &"generator", cell).is_empty():
+				plant = cell
+	if plant.x < 0 or not Building.place(state, &"generator", plant):
+		push_warning("shot: no room for the generator")
+		_look_at(Player.cell(state))
+		return
+	Pathing.refresh(state)
+	var road := _east_road(state)
+	var bend: Vector2i = road[mini(9, road.size() - 1)]
+	# The stretch cleared of its trees and stones, so the run reads as a run.
+	for dy in range(-6, 7):
+		for dx in range(-5, 11):
+			var at := bend + Vector2i(dx, dy)
+			var on := Farm.occupant(state, at)
+			if not on.is_empty() and Building.entry_of(StringName(on["id"])) == null \
+					and StringName(on["id"]) != &"house" and not Farm.FIXTURES.has(StringName(on["id"])):
+				Farm.remove(state, at)
+	NightRoad.into_build(state)
+	# Long enough either way that going round costs more than biting through:
+	# the house is a row south of the road.
+	var wire: Array = []
+	for dy in range(-4, 7):
+		wire.append(bend + Vector2i(0, dy))
+	wire.append_array([bend + Vector2i(1, -4), bend + Vector2i(-1, -4), bend + Vector2i(1, 6),
+		bend + Vector2i(-1, 6)])
+	var laid := 0
+	for cell in wire:
+		if Building.place(state, &"electric_fence", cell as Vector2i):
+			laid += 1
+	# Wood meeting the wire: a stub west off the line - a tee - and the south
+	# arm carried on east.
+	for dx in [-1, -2]:
+		Building.place(state, &"fence", bend + Vector2i(int(dx), -1))
+	for dx in range(2, 5):
+		Building.place(state, &"fence", bend + Vector2i(dx, 6))
+	_electric_gate = bend
+	# The road's cell bitten before - hurt - and a west arm at the top down.
+	(Farm.occupant(state, bend) as Dictionary)["hp"] = 15
+	Farm.damage(state, bend + Vector2i(-1, -4), 1000)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	# The generator's first fuel in, so the run is at full power from the
+	# night's first tick.
+	Power.tick(state)
+	# Three walkers down the road, the first fourteen subtiles into its fifth
+	# cell east of the line: it crosses into the cell before the line some
+	# sixty-five ticks on and bites.
+	var first := Entities.spawn(state, &"walker", bend + Vector2i(5, 0))
+	(Entities.get_one(state, first)["pos"] as Array)[0] = (bend.x + 5) * Player.SUBTILE + 14
+	Entities.spawn(state, &"walker", bend + Vector2i(8, 0))
+	Entities.spawn(state, &"walker", bend + Vector2i(11, 0))
+	print("  electric_fence: %d of %d laid round %s, power %d%%" % [laid, wire.size(), str(bend),
+		Power.percent(state)])
+	Building.select(state, &"electric_fence")
+	_look_at(bend + Vector2i(2, 2))
+
+
+## The road's cell of the run `_set_electric_fence` laid (task 0230).
+var _electric_gate := Vector2i(-1, -1)
 
 
 ## **The route bending round a braid** (task 0228): Autumn 2's build step, a
