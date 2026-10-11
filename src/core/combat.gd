@@ -46,6 +46,12 @@ static func bosses_here(state: Dictionary) -> Array:
 	return out
 
 
+## **Whether a kind's death chills the towers round it** (task 0251): its
+## row has a burst, `chill_tiles`.
+static func chills(kind: StringName) -> bool:
+	return int((GameData.ENEMIES.get(kind, {}) as Dictionary).get("chill_tiles", 0)) > 0
+
+
 ## Whether a kind is a boss: its `is_boss`.
 static func is_boss(kind: StringName) -> bool:
 	return kind != &"" and bool((GameData.ENEMIES.get(kind, {}) as Dictionary).get("is_boss", false))
@@ -175,6 +181,14 @@ static func _kill(state: Dictionary, id: int) -> void:
 	# nearest one the farmer can stand on. Only a kill leaves them - one that
 	# bites the house or walks off at dawn is removed elsewhere, whole.
 	Loot.drop_bones(state, kind, Entities.cell_of(state, id))
+	# **Its death is the attack** (task 0251): a kind that `chills` bursts
+	# into ice where it fell, and every tower round it reloads slowly for a
+	# while. Only a kill: one that bites the house or walks off at dawn goes
+	# whole, with nothing to burst.
+	if chills(kind):
+		var row: Dictionary = GameData.ENEMIES[kind]
+		Towers.chill_around(state, Entities.cell_of(state, id), int(row["chill_tiles"]),
+			int(row["chill_ticks"]), int(row["chill_reload_percent"]))
 
 	Entities.remove(state, id)
 	# **Nothing is left pointing at it.** A projectile chasing a dead id is

@@ -39,6 +39,15 @@ extends RefCounted
 ## and breaks a tie by the lower id, so it picks what the whole farm's scan
 ## picked - `headless_v1` holds the two to the same answer for every way of
 ## aiming.
+##
+## ## Chilled
+##
+## A frost zombie's death (task 0251) chills every tower round where it fell:
+## for `chill_ticks` each reload a tower is given after a shot is
+## `chill_reload_percent` as fast. The chill is a countdown on the occupant,
+## beside `reload` - per-tower bookkeeping that changes no shape on the farm,
+## so never `Farm.touch()` - counted down every turn the tower has, firing or
+## not, and gone at dawn (`thaw()`).
 
 ## The side of one square of the crowd's filing, in cells. **Not a lever**:
 ## it changes how fast a tower finds its target, never which one it finds.
@@ -106,6 +115,9 @@ static func tick(state: Dictionary) -> void:
 		# **The levelled entry**, so a Torre Automatica is the gun tower's
 		# own row with its three numbers changed and nothing here knows.
 		var entry: Dictionary = Building.entry_at(state, cell_of_it)
+		# **Chilled** (task 0251): counted down every turn, reloading or not,
+		# and the reload after a shot slowed while it lasts.
+		var speed := _chill_turn(tower)
 
 		var reload := int(tower.get("reload", 0))
 		if reload > 0:
@@ -174,6 +186,10 @@ static func tick(state: Dictionary) -> void:
 		# the hive draws some, so this is the hive's alone.
 		tower["reload"] = reload_ticks if int(entry.get("energy_draw", 0)) <= 0 \
 			else Power.scaled_ticks(state, reload_ticks)
+		# **A chilled tower reloads slowly** (task 0251): the reload this shot
+		# leaves, at the chill's speed, in integers - fifty is twice as long.
+		if speed < 100:
+			tower["reload"] = int(tower["reload"]) * 100 / speed
 		# The round burns for the whole wait until the next shot: this one
 		# covers `reload + 1` ticks of firing, the tick it fired on included.
 		if armed and tower.has("ammo_lit"):
@@ -205,13 +221,85 @@ static func _load(state: Dictionary, tower: Dictionary,
 
 
 ## Reload everything, without looking for targets. What a quiet tick costs.
+## A chill counts down here too (task 0251): it lasts its ticks whether or not
+## anything is left to shoot.
 static func _cool_down(state: Dictionary) -> void:
 	var occupants: Dictionary = state["occupants"]
 	for idx in _towers(state):
 		var tower: Dictionary = occupants[idx]
+		_chill_turn(tower)
 		var reload := int(tower.get("reload", 0))
 		if reload > 0:
 			tower["reload"] = reload - 1
+
+
+# ------------------------------------------------------------------- chilled
+
+## **A burst of ice round `cell`** (task 0251's frost zombie): every tower
+## within `tiles` of it - Chebyshev, the cached tower cells in order - is
+## chilled for `ticks`, and each reload it is given after a shot meanwhile is
+## `percent` as fast. **Refreshed, never stacked**, the rule
+## `Combat.set_alight` keeps for a fire: the longer chill and the slower
+## speed of the two win, so a second burst on a chilled tower starts its
+## chill again rather than slowing it twice. How many it chilled.
+static func chill_around(state: Dictionary, cell: Vector2i, tiles: int,
+		ticks: int, percent: int) -> int:
+	if tiles <= 0 or ticks <= 0 or percent <= 0 or percent >= 100:
+		return 0
+	var occupants: Dictionary = state["occupants"]
+	var chilled := 0
+	for idx in _towers(state):
+		if Grid.chebyshev(Grid.cell(int(idx)), cell) > tiles:
+			continue
+		var tower: Dictionary = occupants[idx]
+		tower["chill"] = maxi(int(tower.get("chill", 0)), ticks)
+		tower["chill_percent"] = mini(int(tower.get("chill_percent", 100)), percent)
+		chilled += 1
+	return chilled
+
+
+## **How long the tower on `cell` stays chilled**, in ticks (task 0251): 0
+## when it is not. For the view's frost, and for 0255's Winter Lord, whose
+## freeze sits beside this chill.
+static func chill_left(state: Dictionary, cell: Vector2i) -> int:
+	return int(Farm.occupant(state, cell).get("chill", 0))
+
+
+## **How fast a tower's reload runs, in percent** (task 0251): its chill's
+## while it is chilled - and after, while the reload a chill slowed is still
+## running - 100 otherwise. The view measures a muzzle flash by it, against
+## the reload the tower was actually given.
+static func reload_speed(on: Dictionary) -> int:
+	return int(on.get("chill_percent", 100))
+
+
+## **No chill outlives the night** (task 0251): every tower thawed, from
+## `Enemies.withdraw()` at dawn.
+static func thaw(state: Dictionary) -> void:
+	var occupants: Dictionary = state["occupants"]
+	for idx in _towers(state):
+		var tower: Dictionary = occupants[idx]
+		tower.erase("chill")
+		tower.erase("chill_percent")
+
+
+## **One turn of a tower's chill** (task 0251), every tick, firing or not:
+## the speed a shot this turn reloads at - the chill's while it lasts, 100
+## once it is over - and the chill a tick shorter, gone at nothing. The speed
+## stays on the tower while the reload it slowed is still running, so the
+## view measures that reload's flash against what it was given; it goes when
+## that reload does. A tower never chilled is never written to.
+static func _chill_turn(tower: Dictionary) -> int:
+	var left := int(tower.get("chill", 0))
+	if left > 0:
+		if left == 1:
+			tower.erase("chill")
+		else:
+			tower["chill"] = left - 1
+		return int(tower.get("chill_percent", 100))
+	if tower.has("chill_percent") and int(tower.get("reload", 0)) <= 0:
+		tower.erase("chill_percent")
+	return 100
 
 
 # ----------------------------------------------------------------- targeting

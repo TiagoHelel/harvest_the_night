@@ -2594,6 +2594,33 @@ const ENEMIES: Dictionary = {
 		# Not lured: it has a road of its own, under the fences.
 		"lurable": false,
 	},
+	&"frost_zombie": {
+		# **Its death is the attack** (task 0251): winter's first new enemy.
+		# It walks and bites as a walker does; killed, it bursts into ice, and
+		# every tower within `chill_tiles` of where it fell reloads slowly for
+		# `chill_ticks` (`Combat._kill`, `Towers.chill_around`). Killing one
+		# right under the tower line now costs something.
+		#
+		# One mortar shell at the centre puts it down (40, its armour off) -
+		# the answer that reaches it far from the line.
+		"hp": 35,                       # LEVER: hit points, 25-60
+		# A stiff, frozen-jointed shamble: a little slower than the walker.
+		"ticks_per_tile": 24,           # LEVER: ticks, 18-30 (lower is faster)
+		"damage": 10,                   # LEVER: to the house, 6-16
+		"reward": 6,                    # LEVER: money, 4-10
+		"bones": 1,                     # LEVER: bones, 0-6
+		"armour": 1,                    # LEVER: damage off each hit, 0-2
+		# **The burst**: how far it reaches (Chebyshev, so a square round the
+		# cell it fell on), how long a tower stays chilled, and how fast it
+		# reloads meanwhile - fifty is twice as slow. `check_enemies` refuses
+		# a burst of nothing and a speed outside 1-99.
+		"chill_tiles": 2,               # LEVER: tiles, 1-3
+		"chill_ticks": 5 * SECONDS,     # LEVER: ticks, 3-8 seconds worth
+		"chill_reload_percent": 50,     # LEVER: percent of the reload speed, 25-75
+		# A decoy turns it as it turns a walker - and one pulled away from
+		# the guns before it dies is an answer to its burst.
+		"lurable": true,
+	},
 }
 
 
@@ -5368,6 +5395,7 @@ static func check_enemies(enemies: Dictionary) -> Array:
 		if bool(one.get("is_boss", false)) and bool(one.get("lurable", false)):
 			errors.append("enemy '%s' is a boss and can be lured" % id)
 		errors.append_array(_check_spit(id, one))
+		errors.append_array(_check_chill(id, one))
 		# **A cluster is at least one** (task 0248): a release of nothing
 		# would count bodies it never sent.
 		if one.has("cluster") and int(one["cluster"]) < 1:
@@ -5381,6 +5409,28 @@ static func check_enemies(enemies: Dictionary) -> Array:
 			errors.append(("enemy '%s' ignores structures without being "
 				+ "faster than the ones that do not - it would be a slow "
 				+ "zombie taking the long way round") % id)
+	return errors
+
+
+## **A frost zombie's burst** (task 0251), for an enemy that declares any
+## `chill_` lever: a burst that reaches at least a tile and lasts at least a
+## tick, and a chilled reload between 1 and 99 percent as fast - 100 would
+## chill nothing, and nothing would stop a tower for good.
+static func _check_chill(id: StringName, one: Dictionary) -> Array:
+	var errors: Array = []
+	var chills := false
+	for key in sorted_names(one.keys()):
+		chills = chills or String(key).begins_with("chill_")
+	if not chills:
+		return errors
+	if int(one.get("chill_tiles", 0)) <= 0:
+		errors.append("enemy '%s' bursts over no tiles" % id)
+	if int(one.get("chill_ticks", 0)) <= 0:
+		errors.append("enemy '%s' chills for no time" % id)
+	var percent := int(one.get("chill_reload_percent", 0))
+	if percent < 1 or percent > 99:
+		errors.append("enemy '%s' leaves a chilled tower reloading at %d%% - it wants 1-99"
+			% [id, percent])
 	return errors
 
 

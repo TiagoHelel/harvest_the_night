@@ -105,6 +105,8 @@ const ENEMY_SOUNDS := {
 	&"crow": &"sfx/groan_runner",
 	# The breaker's, a dig at things, until 0284 gives the digger its own.
 	&"digger": &"sfx/groan_breaker",
+	# The tank's, a heavy cold voice, until 0284 gives the frost zombie its own.
+	&"frost_zombie": &"sfx/groan_tank",
 }
 
 ## **What a boss with no voice of its own roars with** (task 0246): the

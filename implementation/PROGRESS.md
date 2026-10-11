@@ -26467,3 +26467,200 @@ assets/locale/strings.csv, tools/{perf.py,perf_baseline.txt,determinism_data_has
 implementation/backlog/packs/A049-digger.md,
 implementation/prompts/0250-digger.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0250/, docs/devlog/{index,index.pt_BR}.md
+
+## 0251 - The frost zombie - done 2026-10-11
+
+What changed: winter's first new enemy, whose death is the attack. Killed, a
+frost zombie bursts into ice, and every tower within two tiles of where it
+fell reloads at half speed for five seconds. Killing one right under the
+tower line now costs something. A mortar shell far out, or a decoy that
+pulls it away from the guns, is the answer.
+
+No night sends one yet. Like 0247-0250's enemies, it waits for the
+season's waves (0059's `NO_NIGHT_YET`).
+
+### The rules (`src/core/`)
+
+**`ENEMIES.frost_zombie`**, with levers:
+- hp 35, armour 1, 24 ticks a tile, 10 to the house, $6, 1 bone;
+- **the burst:** `chill_tiles` 2 (Chebyshev), `chill_ticks` 5 seconds,
+  `chill_reload_percent` 50 (twice as slow);
+- lured, as the walker is.
+
+It sits inside the tank's bounds (0051) and under every boss (0058). One
+mortar shell at the centre (40, less its armour) puts it down.
+
+**`check_enemies`** refuses a burst over no tiles, one that lasts no time,
+and a chilled speed outside 1-99 (`_check_chill`, for a row with any
+`chill_` lever).
+
+**The burst** (`Combat._kill`): a kind that `Combat.chills` calls
+`Towers.chill_around` with its row's numbers, from the cell it fell on,
+before it is removed. Only a kill: one that bites the house or walks off
+at dawn goes whole.
+
+**The chill** (`Towers`):
+- **on the occupant**, beside `reload`: `chill` (ticks left) and
+  `chill_percent` (the speed). Written straight to the tower's dictionary,
+  never through `Farm.touch`, so `grid_version` and every field stay put.
+  It goes to every tower within `chill_tiles` of the cell, from the cached
+  tower cells in order;
+- **refreshed, never stacked**, the `Combat.set_alight` rule: the longer
+  chill and the slower speed of two bursts win;
+- **counted down every turn** (`_chill_turn`), in `Towers.tick` and in
+  `_cool_down`, firing or not. The speed is read before the countdown, so
+  a chill of N ticks covers exactly N turns whichever system killed the
+  zombie: a shell before the towers' loop, a cone or a line inside it, a
+  sting after it;
+- **the reload after a shot** is scaled by the speed in integers
+  (`reload * 100 / percent`), after the tech, the empty pool and the
+  power have had their say;
+- **no chill outlives the night:** `Enemies.withdraw` calls
+  `Towers.thaw`. Occupants are run data, so a save made mid-night keeps it;
+- `Towers.chill_left(state, cell)` for the view and for 0255's Winter Lord,
+  and `Towers.reload_speed(on)`.
+
+### Decided
+
+- **The speed stays on the tower after the chill,** while the reload it
+  slowed is still running, and goes when that reload does. The view
+  measures a muzzle flash against the reload a tower was given (`just_fired`
+  takes the speed). Without that, a chilled gun would show its fire art for
+  most of a slow reload and look like it was firing more. And when the
+  chill ended under a slowed reload, the flash would come back on.
+- **Lured.** A walker gone cold, and the decoy is an answer to the burst:
+  one pulled away from the guns before it dies chills nothing that matters.
+  0224's test listed exactly the walker, the runner and the tank; it lists
+  the frost zombie now.
+- **Hp 35, not 40.** At 40 a centred mortar shell (40, armour 1) left it at
+  one hit point. 35 makes one shell the clean answer that reaches it far
+  from the line.
+
+### The view (`src/ui/`)
+
+- **A050's stand-ins** (`PlaceholderArt`), until 0264: the walker tinted
+  cold (`FROST_TINT`) for the master, the walk, the attack, the death and
+  the forecast head.
+- **The ice burst, drawn in code** by the new `FrostArt`: four frames on
+  24x24 round (12,12). (0) an ice crystal, rimmed and cracked; (1) the burst
+  at its widest, 17 by 15, the crystal in four pieces and twelve shards out;
+  (2) only the shards' ends; (3) seven dim chips. Water blues with a `moon`
+  tip on each shard, and nothing that reads as a light.
+- **`PixelEffects` plays it** (`ice_shatter`, 0.08 s a frame) where one was
+  killed, 12 px over its ground point (`BODY_LIFT`), under the night's ramp.
+  It is a family in `DRAWN`, a table of its own beside the raster `COUNTS`,
+  until 0264 lands A050's PNGs and moves it there.
+  A kill, not a vanishing: before each tick it notes the run's kills of the
+  kinds that burst, and after it a body of such a kind that is gone bursts
+  only against a kill of its kind that tick. One that bit the house bursts
+  nothing.
+- **A chilled tower is frosted:** `WorldView.chill_tint` (`CHILL_TINT`) on
+  the tower's `self_modulate`, on a stand-in tower's too, multiplied with
+  its own tint.
+- **The words:** `Names` has `ENEMY_FROST_ZOMBIE`, `Describe` `DESC_CHILLS`
+  ("slows towers when it dies"), and `Sfx` borrows the tank's voice until
+  0284.
+- **A050's table is final**, with how the game plays it.
+
+### Found
+
+- **The first frost never reached the screen.** `Transition` sets every
+  tower's `modulate` each frame (the guns' flare at dusk, and a warm
+  `(1, 0.94, 0.78)` after), so a frost on `modulate` was overwritten before
+  it was drawn. A debug run showed the gun tower's `modulate` at
+  `(1.41, 1.33, 1.10)` mid-transition. The frost is on `self_modulate`
+  now.
+- **A frost that only turned it blue was invisible at night.** The relight
+  drains most of a colour (saturation 0.76) and keeps how bright it is, and
+  blue weighs least in brightness. The tint is lighter overall now as well
+  as bluer, `(1.05, 1.5, 2.3)`.
+- **The first scene stood the towers on the field's last row,** with dark
+  soil behind them hiding the frost. It is on open snow now.
+- **The effect showcase holds every family in `PixelEffects.COUNTS` to a
+  raster PNG.** With the drawn burst in that table, the first full verify
+  failed it (18 of 2921 checks). The burst went into `DRAWN`, and the
+  showcase is back to 2997 checks with none failed.
+- **Two full verifies ran a third slower than the first,** with another
+  game left running on the machine (`WelcomeBackHero`, from 13:56).
+  Everything slowed alike, the path rebuild that nothing here touches
+  included (11436 to 14179 us). `input_check` and `input_v1` crossed
+  verify's 120 s and were killed. A killed run leaves `Crash`'s breadcrumb
+  behind, and the next `input_check` met it as a crash report on the title
+  screen (case 0091), before its own case 0103 empties the folder. The
+  owner closed the game; one `input_check` run swept the breadcrumb, and
+  the verify that counts ran on a quiet machine.
+- **The first burst drawing had its crystal outweigh the burst** (57
+  pixels against 48), against A050's "it grows from frame 0 to frame 1".
+  The crystal is smaller and the shards longer: 28, 53, 20 and 7.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. No frost zombie dies in the determinism
+  night, and a tower never chilled is never written to: `_chill_turn` only
+  reads it.
+- **DATA 1095207733 -> 762535020:** the frost zombie's row.
+
+Verify: **PASS**, 60 of 60 in 1014 s. The data hash was recorded by an earlier `--accept` run that failed only the effect showcase (see Found).
+- **Suites:** `headless_check` 17995 asserts, `headless_v1` 2658, `input_check` 1265 cases, `input_v1` 732 (111 s).
+- **perf:** a night tick 1728 us, the swarm's 5698, a path rebuild 11420, 16615 with the decoys and 11608 with the garlic. The baseline did not move: an unchilled tower's chill is one dictionary read a turn.
+
+**Tests:**
+- **`_task_0251_frost` (headless_v1):**
+  - the row inside the tank's bounds, a burst over 1-3 tiles at 25-75
+    percent; `check_enemies` refuses a burst over no tiles, for no time,
+    or at 0 or 100;
+  - **the burst:** three gun towers in a row, two a tile from where one is
+    killed and the third four tiles off. The two are chilled for
+    `chill_ticks`, the third has no chill key, and `grid_version` has not
+    moved;
+  - a save made then keeps the chill (`reconcile` notes nothing);
+  - **their next reload,** shot on the same tick as the third's at a tank,
+    is the untouched one's times 100 / `chill_reload_percent`. The view
+    frosts the chilled tower and not the other, and measures its flash
+    against the slow reload;
+  - **exactly `chill_ticks`:** 1 left on the last chilled tick, gone on the
+    next, `grid_version` still where it was. The next shot after it reloads
+    as it always did;
+  - **the morning thaws it:** a burst late in the night, gone after
+    `begin_day`;
+  - **two bursts refresh, never stack:** a second burst forty ticks after
+    the first starts the chill again, and the reload is slowed once, on the
+    number;
+  - its name, `DESC_CHILLS`, the voice;
+  - **on screen:** killed inside a tick, `PixelEffects` holds one
+    `ice_shatter` at its body's middle. One that walks from the porch into
+    the house and bites it bursts nothing;
+  - **the drawing:** on A050's canvas, a 1 px clear border, growing to its
+    widest at frame 1 (at most 22 by 18) and smaller by frame 3, every frame
+    its own, in the pack's ice keys only.
+- **Old groups touched:**
+  - 0224's lured list gains the frost zombie;
+  - `NO_NIGHT_YET` gains it, and headless_check counts 109 scenes.
+
+**Looked at** (`python tools/shot.py 0251 frost --fhd`):
+- **`frost`, Winter 2's night:** four gun towers in a row on open snow
+  south-east of the house. A frost zombie was killed below the first two by
+  the shutter (`chilled 150, 150, 0, 0`). The first two are frosted
+  grey-blue, with pale blue edges and barrels; the other two are their own
+  brown. The ice burst is at its widest between the first two, blue shards
+  out from where it fell, with the dust of the death under it. Two more
+  frost zombies come in from the east: the walker with a cold blue face
+  and hands.
+- **What the takes found:**
+  - **the first** had no frost at all: the four towers' pixels were
+    identical but for the burst, because `Transition` owns a tower's
+    `modulate`;
+  - **the second**, on `self_modulate`, was frosted, but faintly against
+    the dark field the towers stood on;
+  - **the third**, on open snow, read, but one frost zombie was half
+    behind a tree and the other out of the picture;
+  - **the fourth**, with the lighter frost and the zombies set down at the
+    shutter, had one under the cursor's label. It stands clear of it now.
+
+Files: src/core/{combat,enemies,game_data,towers}.gd,
+src/ui/{frost_art,pixel_effects,placeholder_art,world_view,names,describe,sfx}.gd,
+src/tools/{headless_check,headless_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/backlog/packs/A050-frost-zombie.md,
+implementation/prompts/0251-frost-zombie.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0251/, docs/devlog/{index,index.pt_BR}.md

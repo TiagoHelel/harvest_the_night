@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 84
+const GROUPS := 85
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -163,6 +163,7 @@ func _run() -> void:
 	_task_0248_rats()
 	_task_0249_crow()
 	_task_0250_digger()
+	_task_0251_frost()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -7165,8 +7166,10 @@ func _task_0224_decoy() -> void:
 	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
 		if bool((GameData.ENEMIES[id] as Dictionary).get("lurable", false)):
 			lurable.append(id)
-	expect(lurable == [&"runner", &"tank", &"walker"] and (GameData.ENEMIES[&"breaker"] as Dictionary).has("lurable"),
-		"the walker, the runner and the tank are lured; the breaker says it is not, and no boss is", str(lurable))
+	# And 0251's frost zombie, a walker gone cold: one pulled away from the
+	# guns before it dies is an answer to its burst.
+	expect(lurable == [&"frost_zombie", &"runner", &"tank", &"walker"] and (GameData.ENEMIES[&"breaker"] as Dictionary).has("lurable"),
+		"the walker, the runner, the tank and the frost zombie are lured; the breaker says it is not, and no boss is", str(lurable))
 	expect(Pathing.is_prey(&"decoy") and not Traps.is_trap(&"decoy"),
 		"a breaker hunts it as prey: nothing to walk through")
 	var no_reach := GameData.DEFENCES.duplicate(true)
@@ -10228,6 +10231,198 @@ func _digger_column(seed_value: int, with_what: StringName) -> Dictionary:
 		left += int(Farm.occupant(state, cell as Vector2i).get("hp", 0))
 	return {"home": int(state["house_hp"]) < before, "lost": cells.size() * hp - left,
 		"under": under, "seen_under": seen, "onward": onward, "cells": cells.size()}
+
+
+## 0251 - the frost zombie. One killed beside two towers makes their next
+## reload slower by its chill for exactly its ticks; a tower out of its reach
+## is untouched, the farm's shape never moves, a save keeps the chill and the
+## morning thaws it. Two bursts on one tower refresh, never stack.
+func _task_0251_frost() -> void:
+	var row: Dictionary = GameData.ENEMIES[&"frost_zombie"]
+	var tank: Dictionary = GameData.ENEMIES[&"tank"]
+	var ticks := int(row["chill_ticks"])
+	var percent := int(row["chill_reload_percent"])
+	var tiles := int(row["chill_tiles"])
+	expect(Combat.chills(&"frost_zombie") and not Combat.chills(&"walker") and tiles >= 1 and tiles <= 3
+		and percent >= 25 and percent <= 75 and ticks > 0 and int(row["hp"]) < int(tank["hp"])
+		and int(row.get("armour", 0)) < int(tank["armour"]) and int(row["ticks_per_tile"]) < int(tank["ticks_per_tile"])
+		and not Combat.is_boss(&"frost_zombie") and GameData.check_enemies(GameData.ENEMIES).is_empty(),
+		"a frost zombie bursts over 1-3 tiles at 25-75 percent of the reload speed, inside the tank's bounds", str(row))
+	var refused: Array = []
+	for broken in [{"chill_tiles": 0}, {"chill_ticks": 0}, {"chill_reload_percent": 0}, {"chill_reload_percent": 100}]:
+		var table := GameData.ENEMIES.duplicate(true)
+		(table[&"frost_zombie"] as Dictionary).merge(broken as Dictionary, true)
+		if not GameData.check_enemies(table).is_empty():
+			refused.append(broken)
+	expect(refused.size() == 4, "check_enemies refuses a burst over no tiles, for no time, or at a speed of 0 or 100",
+		str(refused))
+
+	# **The burst**: three gun towers in a row, the first two a tile from
+	# where one is killed and the third four tiles off; a tank in reach of
+	# all three to shoot at.
+	var state := _powers_night(25100)
+	var fell := _open_square(state, 5, &"gun_tower")
+	var near_a := fell + Vector2i(-1, -1)
+	var near_b := fell + Vector2i(1, -1)
+	var far := fell + Vector2i(4, -1)
+	var gun_hp := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["hp"])
+	for at in [near_a, near_b, far]:
+		Farm.place(state, at as Vector2i, {"id": &"gun_tower", "hp": gun_hp})
+	var version := int(state["grid_version"])
+	var frost := Entities.spawn(state, &"frost_zombie", fell)
+	Combat.hit(state, frost, 999)
+	var a := Farm.occupant(state, near_a)
+	var b := Farm.occupant(state, near_b)
+	var c := Farm.occupant(state, far)
+	expect(not Entities.alive(state, frost) and Towers.chill_left(state, near_a) == ticks
+		and Towers.chill_left(state, near_b) == ticks and Towers.chill_left(state, far) == 0
+		and not c.has("chill") and not c.has("chill_percent") and int(state["grid_version"]) == version,
+		"killed, it chills the two towers beside it for chill_ticks and not the one four tiles off - and grid_version stays put",
+		"%d %d %d, version %d -> %d" % [Towers.chill_left(state, near_a), Towers.chill_left(state, near_b),
+			Towers.chill_left(state, far), version, int(state["grid_version"])])
+	var saved := State.copy(state)
+	var notes := State.reconcile(saved)
+	expect(notes.is_empty() and Towers.chill_left(saved, near_a) == ticks,
+		"a save made mid-night keeps the chill: the occupants are the run's", str(notes))
+
+	# Their next reload, shot on the same tick as the third's.
+	Entities.spawn(state, &"tank", fell + Vector2i(1, 1))
+	Sim.advance(state, 1)
+	var normal := int(c.get("reload", 0))
+	expect(normal > 0 and int(a.get("reload", 0)) == normal * 100 / percent
+		and int(b.get("reload", 0)) == normal * 100 / percent,
+		"their next reload is chill_reload_percent as fast as the untouched tower's, shot on the same tick",
+		"%d and %d against %d" % [int(a.get("reload", 0)), int(b.get("reload", 0)), normal])
+	expect(WorldView.just_fired(a) and not WorldView.just_fired(a.merged({"reload": normal}, true))
+		and WorldView.chill_tint(state, near_a) != Color.WHITE and WorldView.chill_tint(state, far) == Color.WHITE,
+		"the view frosts a chilled tower and not the other, and measures its flash against the slow reload it was given")
+
+	# **For exactly chill_ticks**, counted every turn whatever the tower does.
+	Sim.advance(state, ticks - 2)
+	var last := Towers.chill_left(state, near_a)
+	Sim.advance(state, 1)
+	expect(last == 1 and Towers.chill_left(state, near_a) == 0 and not a.has("chill")
+		and int(state["grid_version"]) == version,
+		"the chill lasts exactly chill_ticks and goes, the farm's shape never moved", "%d at the last tick" % last)
+	# And the next shot after it, at the speed it always had.
+	a["reload"] = 0
+	Entities.spawn(state, &"tank", near_a + Vector2i(0, 2))
+	Sim.advance(state, 1)
+	expect(int(a.get("reload", 0)) == normal and not a.has("chill_percent"),
+		"once the chill is gone a shot reloads as it always did", str(a.get("reload", 0)))
+
+	# **The morning thaws it**: a burst late in the night, gone at dawn.
+	var frost_late := Entities.spawn(state, &"frost_zombie", fell)
+	Combat.hit(state, frost_late, 999)
+	var chilled_late := Towers.chill_left(state, near_b)
+	Phases.enter_result(state, true)
+	Phases.begin_day(state)
+	expect(chilled_late == ticks and Towers.chill_left(state, near_a) == 0 and Towers.chill_left(state, near_b) == 0
+		and not Farm.occupant(state, near_b).has("chill_percent"),
+		"no chill outlives the night: the morning thaws every tower", str(chilled_late))
+
+	# **Two bursts refresh, never stack**: the second, forty ticks on, starts
+	# the chill again, and the reload is slowed once - asserted on the number.
+	var twice := _powers_night(25101)
+	var spot := _open_square(twice, 5, &"gun_tower")
+	var held := spot + Vector2i(-1, -1)
+	var free := spot + Vector2i(4, -1)
+	Farm.place(twice, held, {"id": &"gun_tower", "hp": gun_hp})
+	Farm.place(twice, free, {"id": &"gun_tower", "hp": gun_hp})
+	Combat.hit(twice, Entities.spawn(twice, &"frost_zombie", spot), 999)
+	Sim.advance(twice, 40)
+	var between := Towers.chill_left(twice, held)
+	Combat.hit(twice, Entities.spawn(twice, &"frost_zombie", spot), 999)
+	var refreshed := Towers.chill_left(twice, held)
+	Entities.spawn(twice, &"tank", spot + Vector2i(1, 1))
+	Sim.advance(twice, 1)
+	var once := int(Farm.occupant(twice, free).get("reload", 0))
+	expect(between == ticks - 40 and refreshed == ticks
+		and int(Farm.occupant(twice, held).get("reload", 0)) == once * 100 / percent and once > 0,
+		"two bursts on one tower refresh its chill rather than stack it: its reload is slowed once",
+		"%d then %d; %d against %d" % [between, refreshed, int(Farm.occupant(twice, held).get("reload", 0)), once])
+
+	# **The words and the voice.**
+	expect(Names.of(&"frost_zombie") == I18n.t(&"ENEMY_FROST_ZOMBIE")
+		and Describe.enemy(&"frost_zombie").contains(I18n.t(&"DESC_CHILLS"))
+		and Sfx.ENEMY_SOUNDS.get(&"frost_zombie", &"") == &"sfx/groan_tank",
+		"it has its name, a tooltip line that its death slows towers, and the tank's voice until its own")
+
+	# **The burst on screen**: `PixelEffects` plays the shatter where one is
+	# killed inside a tick, at its body's middle - and none for one that only
+	# bit the house, which was no death.
+	var shown := _powers_night(25102)
+	var doomed := Entities.spawn(shown, &"frost_zombie", _open_square(shown, 3, &"gun_tower"))
+	var feet: Array = Entities.get_one(shown, doomed)["pos"]
+	Combat.sting(shown, doomed, 999, 30)
+	var forms := PixelEffects.new()
+	forms.before_tick(shown, [])
+	Sim.advance(shown, 1)
+	forms.after_tick(shown)
+	var per := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
+	var bursts: Array = []
+	for record in forms.records:
+		if StringName(record["family"]) == &"ice_shatter":
+			bursts.append(record["at"])
+	var middle := Vector2(int(feet[0]), int(feet[1])) * per - Vector2(0, PixelEffects.BODY_LIFT)
+	var biter := _powers_night(25103)
+	var porch := House.porch(biter)
+	var hungry := Entities.spawn(biter, &"frost_zombie", porch)
+	var watched := PixelEffects.new()
+	var house_before := int(biter["house_hp"])
+	for _t in 300:
+		watched.before_tick(biter, [])
+		Sim.advance(biter, 1)
+		watched.after_tick(biter)
+		if not Entities.alive(biter, hungry):
+			break
+	var quiet := true
+	for record in watched.records:
+		quiet = quiet and StringName(record["family"]) != &"ice_shatter"
+	expect(not Entities.alive(shown, doomed) and bursts.size() == 1 and (bursts[0] as Vector2) == middle
+		and not Entities.alive(biter, hungry) and int(biter["house_hp"]) < house_before and quiet,
+		"killed in a tick it bursts into ice at its body's middle; one that bites the house bursts nothing",
+		"%s against %s; bitten %s, quiet %s" % [str(bursts), str(middle), int(biter["house_hp"]) < house_before, quiet])
+
+	# **The drawing**: A050's shatter on 24x24 round (12,12), a 1 px clear
+	# border, growing to frame 1 - at most 22 by 18 - and smaller by frame 3,
+	# every frame its own, in the pack's ice keys only.
+	var allowed: Array = []
+	for key in [&"ink", &"ink_soft", &"water_dark", &"water", &"water_light", &"moon", &"bone", &"stone_light", &"night_light"]:
+		allowed.append(PaletteData.COLOURS[key])
+	var counts: Array = []
+	var boxes: Array = []
+	var frames := {}
+	var off: Array = []
+	for i in 4:
+		var path := FrostArt.SHATTER_PATH % i
+		var texture := FrostArt.texture_at(path)
+		var image := texture.get_image() if texture != null else null
+		if image == null or image.get_size() != Vector2i(24, 24) \
+				or PlaceholderArt.frame(path).get("pivot", Vector2i.ZERO) != Vector2i(12, 12):
+			off.append(path)
+			continue
+		frames[image.get_data()] = true
+		var used := image.get_used_rect()
+		boxes.append(used)
+		var count := 0
+		for y in 24:
+			for x in 24:
+				var colour := image.get_pixel(x, y)
+				if colour.a <= 0.0:
+					continue
+				count += 1
+				if not allowed.has(colour):
+					off.append("%s: %s at %d,%d" % [path, colour, x, y])
+		counts.append(count)
+		if used.position.x < 1 or used.position.y < 1 or used.end.x > 23 or used.end.y > 23:
+			off.append("%s off its border: %s" % [path, used])
+	expect(off.is_empty() and frames.size() == 4 and int(counts[0]) < int(counts[1]) and int(counts[3]) < int(counts[1])
+		and (boxes[1] as Rect2i).size.x <= 22 and (boxes[1] as Rect2i).size.y <= 18
+		and (boxes[3] as Rect2i).get_area() < (boxes[1] as Rect2i).get_area(),
+		"the ice burst sits on A050's canvas, grows to its widest and fades, every frame its own, in the ice's keys",
+		"%s %s %s" % [str(off), str(counts), str(boxes)])
+	_completed += 1
 
 
 ## A crop on `cell` (task 0249): tilled, sown with `crop`, nothing grown yet.

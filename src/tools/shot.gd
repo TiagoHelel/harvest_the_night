@@ -147,6 +147,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
+	["frost", "towers chilled by a frost zombie's burst: Winter 2's night, four gun towers in a row on open snow south-east of the house and a frost zombie killed between the first two by the shutter - those two frosted, the other two not, the ice burst at its widest, and two more frost zombies coming in from the east", ""],
 	["digger", "a digger under a fence: Autumn 2's night, a fence laid across a digger's road home over open ground east of the house, and the digger under it by the shutter - a mound of soil beneath the rails, no body above, the fence untouched", ""],
 	["crow", "crows on the field: Autumn 2's night, the starter field sown, a crow landed on it and pecking a crop, and another flying in from the south over a run of wall towards the next one - lifted over its shadow, which lies on the ground under the wall", ""],
 	["rats", "rats in clusters: Summer 2's night, three clusters of six come over open ground south-east of the house towards it - each a crowd of small grey bodies, ears and tails, not a smear", ""],
@@ -800,6 +801,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"rats": _set_rats(state)
 		"crow": _set_crow(state)
 		"digger": _set_digger(state)
+		"frost": _set_frost(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1158,6 +1160,32 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				str(Entities.cell_of(state, _boss_giant)), Enemies.is_winding(state, _boss_giant),
 				str(Enemies.winding_at(state, _boss_giant)),
 				int(state["house_hp"]), (main.find_child("NightHud", true, false) as NightHud).banner_text()])
+		"frost":
+			# **A burst at the shutter** (task 0251): one more frost zombie
+			# killed between the first two towers inside a tick the effects
+			# watch - the towers between shots, so no flash hides the frost -
+			# and its burst held at its widest.
+			var particles := main.get_node("%Particles") as Particles
+			for at in _frost_line:
+				Farm.occupant(state, at as Vector2i)["reload"] = 2
+			var doomed := Entities.spawn(state, &"frost_zombie", _frost_at)
+			Combat.sting(state, doomed, 999, 30)
+			particles.before_tick(state)
+			Sim.advance(state, 1)
+			particles.after_tick(state)
+			var bursts := 0
+			for record in particles._forms.records:
+				if StringName(record["family"]) == &"ice_shatter":
+					record["age"] = PixelEffects.seconds(&"ice_shatter") * 1.25
+					bursts += 1
+			# And two more coming in from the east, out of the line's reach
+			# and clear of the trees: what the walker gone cold looks like.
+			for offset in [Vector2i(12, 0), Vector2i(13, -3)]:
+				Entities.spawn(state, &"frost_zombie", _frost_at + (offset as Vector2i))
+			var line: Array = []
+			for at in _frost_line:
+				line.append("%s chilled %d" % [str(at), Towers.chill_left(state, at as Vector2i)])
+			print("  frost: killed %s, %d burst; %s" % [not Entities.alive(state, doomed), bursts, ", ".join(line)])
 		"digger":
 			# Until it is under the fence (task 0250), a tick at a time.
 			for _i in 300:
@@ -3238,6 +3266,36 @@ func _set_digger(state: Dictionary) -> void:
 	_digger = Entities.spawn(state, &"digger", start)
 	print("  digger: from %s, the fence across its road at %s" % [str(start), str(_digger_fence)])
 	_look_at(_digger_fence)
+
+
+## **Towers chilled by a frost zombie's burst** (task 0251): Winter 2's night,
+## parked, four gun towers in a row two apart on open ground south-east of
+## the house. By the shutter (`_just_before_the_shutter`) a frost zombie is
+## killed under the first two and two more come in from the east.
+func _set_frost(state: Dictionary) -> void:
+	_on_date(state, 3 * GameData.SEASON_DAYS + 2)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200, GameData.MONEY: 400})
+	# Below the field's edge, on open snow: the first take stood the line on
+	# the field's last row, dark soil behind the towers hiding the frost.
+	var middle := _clear_patch(state, Farm.house_centre(state) + Vector2i(8, 13), 4)
+	NightRoad.into_build(state)
+	_frost_line = []
+	for x in [-3, -1, 1, 3]:
+		var at: Vector2i = middle + Vector2i(int(x), 0)
+		if middle.x >= 0 and Building.place(state, &"gun_tower", at):
+			_frost_line.append(at)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	_frost_at = middle + Vector2i(-2, 1)
+	print("  frost: the line %s, the burst to come at %s" % [str(_frost_line), str(_frost_at)])
+	_look_at(middle + Vector2i(4, 0))
+
+
+## The towers `_set_frost` put down, west to east, and where the one at the
+## shutter is killed.
+var _frost_line: Array = []
+var _frost_at := Vector2i.ZERO
 
 
 ## The digger `_set_digger` sent, and its fence's middle.

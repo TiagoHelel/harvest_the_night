@@ -14,7 +14,13 @@ The frost zombie is winter's first new enemy. Its death is the attack: it bursts
 
 ## Deliverables
 
-The table is provisional: game task 0251 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0251. The rows stand as written: 64x48 standing on (32,44) for the body, 24x24 round (12,12) for the shatter, the frames and seconds of the table. **How the game plays them:**
+- **Walking:** 24 ticks a tile, a little over a tile a second, on the four `walk` frames at 0.125 s each, facing the way it moves. It bites the house and gnaws a wall as a walker does; until 0264 it does that on its walk frames, and `attack` waits for it.
+- **Its death:** only a kill bursts. Where one is killed, `ice_shatter_0..3` plays once, 0.08 s a frame, centred 12 px over its ground point, over the ground under the night's ramp like everything else, never as a light. One that bites the house goes whole, with no burst. Until 0264 the body left behind is `frost_zombie_death_3`, squashed.
+- **The chill is not art:** every tower within 2 tiles of where it fell is drawn frosted, a tint in code, for the 5 seconds it reloads slowly.
+- **Night colours:** the relight drains most of a colour and keeps how bright it is. The water blues of the shatter go dark against night snow, and what carries the burst is the pale `moon` tip on each shard. Keep the tips light. A body that is only bluer than the walker reads at night only where it is lighter too, so give the face, the hands and the ice spikes the light.
+
+Until 0264 every frame but the shatter stands in as the walker tinted cold (`PlaceholderArt`), the shatter is drawn in code (`FrostArt`), and the forecast head is the box over the walker's head, tinted the same, all through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

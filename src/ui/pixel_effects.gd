@@ -9,6 +9,14 @@ const COUNTS := {&"muzzle":3, &"impact":3, &"flame":4, &"smoke":4,
 	&"dust":3, &"splash":4, &"flare":4}
 const OPACITY := {&"muzzle":1.0, &"impact":0.85, &"flame":1.0,
 	&"smoke":0.6, &"dust":0.8, &"splash":1.0, &"flare":1.0}
+## **One-shots drawn in code until their pack lands** (task 0251: A050's ice
+## burst, `FrostArt`), frames by family, played as the raster ones are at
+## full opacity. `COUNTS` stays the raster families the effect showcase holds
+## to their PNGs; the leaf that integrates a pack moves its family there.
+const DRAWN := {&"ice_shatter":4}
+## How far over the ground point a burst plays: the body's middle, as an
+## impact's (A050's "minus 12 px", task 0251).
+const BODY_LIFT := 12
 const WARM_FAMILIES := [&"muzzle", &"flame", &"flare"]
 
 var limit := MAX_FORMS
@@ -25,12 +33,20 @@ var _entities: Dictionary = {}
 var _guns: Dictionary = {}
 var _flares := 0
 var _work := PlayerWork.new()
+## **A kill, not a vanishing** (task 0251): the run's kills by kind before
+## the tick, for the kinds that burst - a frost zombie that bites the house
+## goes as surely as one that is shot, and only the shot one bursts - and how
+## many of this tick's the bursts have spent.
+var _kills: Dictionary = {}
+var _bursts: Dictionary = {}
 
 
 func reset() -> void:
 	records.clear()
 	_entities.clear()
 	_guns.clear()
+	_kills.clear()
+	_bursts.clear()
 	_work.reset()
 	_tick = -1
 	_credit = 0.0
@@ -59,7 +75,7 @@ func set_density(value: float) -> void:
 
 
 func emit(family: StringName, at: Vector2, velocity := Vector2.ZERO) -> bool:
-	if limit <= 0 or density <= 0.0 or not COUNTS.has(family):
+	if limit <= 0 or density <= 0.0 or frames_of(family) <= 0:
 		return false
 	_credit += density
 	if _credit < 1.0:
@@ -79,6 +95,12 @@ static func seconds(family: StringName) -> float:
 	return float(PlaceholderArt.frame(path_for(family, 0))["seconds"])
 
 
+## How many frames a family plays: a raster one's or a drawn one's, 0 for
+## none (task 0251).
+static func frames_of(family: StringName) -> int:
+	return int(COUNTS.get(family, DRAWN.get(family, 0)))
+
+
 func advance(delta: float, parent: Node2D) -> void:
 	# Main's child Particles enters the tree before WorldView creates its
 	# ground layer in _ready. Bind on first playback, when that layer exists.
@@ -89,7 +111,7 @@ func advance(delta: float, parent: Node2D) -> void:
 	for i in range(records.size()-1, -1, -1):
 		var record := records[i]
 		record["age"] = float(record["age"]) + maxf(delta, 0.0)
-		if float(record["age"]) + 0.000001 >= seconds(record["family"]) * int(COUNTS[record["family"]]):
+		if float(record["age"]) + 0.000001 >= seconds(record["family"]) * frames_of(record["family"]):
 			records.remove_at(i)
 		elif motion:
 			record["at"] = (record["at"] as Vector2) + (record["velocity"] as Vector2) * delta
@@ -114,28 +136,35 @@ func advance(delta: float, parent: Node2D) -> void:
 		if sprite.get_parent()!=target:
 			sprite.reparent(target,false)
 		var phase := int(floorf((float(record["age"]) + 0.000001) / seconds(family))) if motion else 0
-		var path := path_for(family, mini(phase, int(COUNTS[family])-1))
+		var path := path_for(family, mini(phase, frames_of(family)-1))
 		if not _textures.has(path):
-			_textures[path] = load(path)
+			# Drawn in code until its pack lands (task 0251's ice burst).
+			_textures[path] = FrostArt.texture_at(path) if PlaceholderArt.is_drawn(path) else load(path)
 		sprite.texture = _textures[path]
 		sprite.offset = -Vector2(PlaceholderArt.frame(path)["pivot"])
 		sprite.position = (record["at"] as Vector2).round()
 		# Steady accessibility mode holds the first silhouette with a gentle
 		# fade, instead of enlarging/flashing it or moving fragments.
-		var fade := 1.0 if motion else 1.0-float(record["age"])/(seconds(family)*int(COUNTS[family]))
-		sprite.modulate = Color(1, 1, 1, float(OPACITY[family])*fade)
+		var fade := 1.0 if motion else 1.0-float(record["age"])/(seconds(family)*frames_of(family))
+		sprite.modulate = Color(1, 1, 1, float(OPACITY.get(family, 1.0))*fade)
 
 
 func before_tick(state: Dictionary, gun_cells: Array) -> void:
 	_tick = int(state["tick"])
 	_entities.clear()
 	_guns.clear()
+	_kills.clear()
+	_bursts.clear()
+	var killed: Dictionary = state["killed_by_kind"]
 	for id in Entities.ids(state):
 		var one := Entities.get_one(state, int(id))
 		# Borrow only the coordinate array until after this core tick. A death
 		# following movement then emits at its final contact, not the old cell.
 		_entities[int(id)] = [one["pos"],
 			int(one.get("hurt",0)), Combat.is_burning(state,int(id)), StringName(one["kind"])]
+		var kind := StringName(one["kind"])
+		if Combat.chills(kind) and not _kills.has(kind):
+			_kills[kind] = int(killed.get(kind, 0))
 	for idx in gun_cells:
 		_guns[int(idx)] = int(state["occupants"][int(idx)].get("reload",0))
 	_flares = Ability.used(state, Ability.FLARE)
@@ -156,6 +185,10 @@ func after_tick(state: Dictionary) -> void:
 		if one.is_empty():
 			var coordinates: Array = was[0]
 			emit(&"dust", Vector2(coordinates[0],coordinates[1])*per)
+			# **A frost zombie bursts into ice where it was killed** (task
+			# 0251), its body's middle over the ground point.
+			if _bursts_now(state, was[3]):
+				emit(&"ice_shatter", Vector2(coordinates[0],coordinates[1])*per - Vector2(0, BODY_LIFT))
 			continue
 		var at := Vector2(one["pos"][0],one["pos"][1])*per
 		if int(one.get("hurt",0)) > int(was[1]):
@@ -184,4 +217,21 @@ func after_tick(state: Dictionary) -> void:
 		_work._fresh = false
 	_entities.clear()
 	_guns.clear()
+	_kills.clear()
+	_bursts.clear()
 	_tick = -1
+
+
+## **Whether a body of `kind` gone this tick bursts** (task 0251): a kind that
+## `Combat.chills`, with one of this tick's kills of it not yet spent on
+## another. The ones that bit the house or walked off were not killed, and
+## burst nothing.
+func _bursts_now(state: Dictionary, kind: StringName) -> bool:
+	if not _kills.has(kind):
+		return false
+	var fresh := int((state["killed_by_kind"] as Dictionary).get(kind, 0)) - int(_kills[kind])
+	var spent := int(_bursts.get(kind, 0))
+	if fresh <= spent:
+		return false
+	_bursts[kind] = spent + 1
+	return true

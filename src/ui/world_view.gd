@@ -1455,6 +1455,10 @@ func _refresh() -> void:
 		sprite.name = "Prop_%d" % idx
 		sprite.texture = whole if grouped else _texture_for(_art_for(on, cell))
 		ArtPlacement.place(sprite, anchor if grouped else cell, footprint if grouped else Vector2i.ONE)
+		# **Frosted while it is chilled** (task 0251): on `self_modulate`,
+		# because `Transition` owns a tower's `modulate` - the guns' flare at
+		# dusk, every frame.
+		sprite.self_modulate = chill_tint(_state, cell)
 		var logical_cells: Array = []
 		if grouped:
 			for y in footprint.y:
@@ -1576,8 +1580,9 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 	ArtPlacement.place(sprite, anchor, Building.size_of(id))
 	sprite.scale *= PlaceholderArt.art_scale(art)
 	# The stand-in's own tint only: A013's snow cap (task 0164) is a child of
-	# the node and stays snow on a copper, coal or gold stand-in.
-	sprite.self_modulate = PlaceholderArt.art_tint(art)
+	# the node and stays snow on a copper, coal or gold stand-in. A stand-in
+	# tower frosted while it is chilled too (task 0251).
+	sprite.self_modulate = PlaceholderArt.art_tint(art) * chill_tint(_state, anchor)
 	if _season != null and _season.season() == SeasonView.WINTER and id in SeasonView.CAPPED:
 		_cap(sprite, id, Building.size_of(id) != Vector2i.ONE)
 	var logical_cells: Array = []
@@ -3060,8 +3065,19 @@ static func just_fired(on: Dictionary) -> bool:
 	var left := int(on.get("reload", 0))
 	if left <= 0:
 		return false
-	var whole := levelled_stat(on, "reload_ticks")
+	# **Against the reload it was given** (task 0251): a chilled tower's is
+	# longer, and its flash the same first moment of it - not lit for most of
+	# a slow reload, which would read as a tower firing more.
+	var whole := levelled_stat(on, "reload_ticks") * 100 / maxi(Towers.reload_speed(on), 1)
 	return whole > 0 and left * 100 >= whole * FLASH_PERCENT
+
+
+## **The frost on a chilled tower** (task 0251): `CHILL_TINT` while a frost
+## zombie's burst has it reloading slowly (`Towers.chill_left`), white
+## otherwise and for anything that is not a tower. A tint and no art, as the
+## pack asks.
+static func chill_tint(state: Dictionary, cell: Vector2i) -> Color:
+	return CHILL_TINT if Towers.chill_left(state, cell) > 0 else Color.WHITE
 
 
 ## Whether it has taken enough to show it. The same threshold the tint uses,
@@ -3275,6 +3291,13 @@ func _wear_of(on: Dictionary, id: StringName) -> Color:
 
 ## Below this share of its hit points a structure starts to look it.
 const WOUNDED_AT := 0.75
+
+## **A chilled tower's frost** (task 0251): paler, and the blues most - the
+## tower as the burst left it. The night's relight drains most of a colour
+## and keeps how bright it is, so a frost that only turned it blue was gone by
+## the time it reached the screen (the first take); this one is lighter too,
+## and still under the night's ramp like everything on the ground.
+const CHILL_TINT := Color(1.05, 1.5, 2.3)
 
 ## How much of a reload still has to be left for the muzzle to be lit. High,
 ## so the flash is a moment rather than a lamp: at 80 a gun on a one second

@@ -883,7 +883,8 @@ static func _bite(state: Dictionary, id: int, data: Dictionary) -> void:
 ## many went. Called from `Phases.begin_day()`.
 ##
 ## **Everything that was only about them goes too**: the shots still in the
-## air, the fires, the flare. None of those advance by day - only
+## air, the fires, the flare - and the chill a frost zombie left on the
+## towers (task 0251). None of those advance by day - only
 ## `Sim._tick_night()` moves them - so one left over would hang over the farm
 ## all afternoon and land on whatever walked under it the next night.
 ##
@@ -900,6 +901,7 @@ static func withdraw(state: Dictionary) -> int:
 	(state["burning"] as Dictionary).clear()
 	(state["stung"] as Dictionary).clear()
 	Ability.put_out(state)
+	Towers.thaw(state)
 	return gone
 
 

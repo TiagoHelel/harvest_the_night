@@ -258,6 +258,13 @@ const CROW := {"canvas": Vector2i(32, 24), "pivot": Vector2i(16, 22), "draw_scal
 const DIGGER := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "draw_scale": 1.0}
 const DIGGER_TINT := Color(1.25, 0.92, 0.62)
 
+## A050's frost zombie (task 0251): the families' 64x48 standing on (32,44),
+## drawn at 1.0, the walker it stands in as gone cold; and its ice burst,
+## the flare's 24x24 round (12,12) - a whole body's worth of shards.
+const FROST_ZOMBIE := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "draw_scale": 1.0}
+const FROST_TINT := Color(0.78, 1.0, 1.45)
+const ICE_SHATTER := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 12), "draw_scale": 1.0}
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -405,6 +412,15 @@ const ART := {
 	&"digger_death": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": DIGGER_TINT, "geometry": DIGGER, "final": DIGGER},
 	&"digger_mound": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.125, "loop": true, "stand_in": &"", "geometry": DIGGER, "final": DIGGER},
 	&"head_digger": {"pack": "A049", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": DIGGER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
+	# A050's frost zombie (task 0251): the walker gone cold, every pose its
+	# own, until 0264; its ice burst drawn in code (`FrostArt`), and its
+	# forecast head the box over the walker's head.
+	&"frost_zombie": {"pack": "A050", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker", "tint": FROST_TINT, "geometry": FROST_ZOMBIE, "final": FROST_ZOMBIE, "bare": true},
+	&"frost_zombie_walk": {"pack": "A050", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.125, "loop": true, "stand_in": &"enemies/walker_walk", "stand_in_frames": 4, "tint": FROST_TINT, "geometry": FROST_ZOMBIE, "final": FROST_ZOMBIE},
+	&"frost_zombie_attack": {"pack": "A050", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_attack", "stand_in_frames": 3, "tint": FROST_TINT, "geometry": FROST_ZOMBIE, "final": FROST_ZOMBIE},
+	&"frost_zombie_death": {"pack": "A050", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": FROST_TINT, "geometry": FROST_ZOMBIE, "final": FROST_ZOMBIE},
+	&"ice_shatter": {"pack": "A050", "dir": "res://sprites/effects/", "frames": 4, "seconds": 0.08, "loop": false, "stand_in": &"", "geometry": ICE_SHATTER, "final": ICE_SHATTER},
+	&"head_frost_zombie": {"pack": "A050", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": FROST_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
 	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn

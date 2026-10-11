@@ -11012,7 +11012,7 @@ func _giant_walk_in(seed_value: int) -> int:
 ## **The kinds no night sends yet** (task 0247): in the table and on the farm
 ## for the checks, out of the authored nights until 0270-0274 put them in the
 ## year and take them off this list. 0248-0252 add theirs.
-const NO_NIGHT_YET: Array = [&"spitter", &"rat", &"crow", &"digger"]
+const NO_NIGHT_YET: Array = [&"spitter", &"rat", &"crow", &"digger", &"frost_zombie"]
 
 
 func _task_0059_wave_data() -> void:
@@ -14648,8 +14648,9 @@ func _task_0082_shots() -> void:
 	# and five since 0247: a spitter working on a tower line. A hundred and
 	# six since 0248: rats in clusters. A hundred and seven since 0249: crows
 	# over a wall and on the field. A hundred and eight since 0250: a digger
-	# under a fence.
-	expect(names.size() == 108,
+	# under a fence. A hundred and nine since 0251: towers chilled by a frost
+	# zombie's burst.
+	expect(names.size() == 109,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
