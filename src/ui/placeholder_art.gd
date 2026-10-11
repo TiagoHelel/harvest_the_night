@@ -271,6 +271,11 @@ const ICE_SHATTER := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 12), "dr
 const WRAITH := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "draw_scale": 1.0}
 const WRAITH_TINT := Color(1.6, 1.7, 2.0)
 
+## A052's Harvester (task 0253): the Giant's 80x64 standing on (40,60), drawn
+## at 1.0 - the Giant it stands in as gone to rust.
+const HARVESTER := {"canvas": Vector2i(80, 64), "pivot": Vector2i(40, 60), "draw_scale": 1.0}
+const HARVESTER_TINT := Color(1.5, 0.82, 0.55)
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -435,6 +440,17 @@ const ART := {
 	&"wraith_attack": {"pack": "A051", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_attack", "stand_in_frames": 3, "tint": WRAITH_TINT, "geometry": WRAITH, "final": WRAITH},
 	&"wraith_death": {"pack": "A051", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": WRAITH_TINT, "geometry": WRAITH, "final": WRAITH},
 	&"head_wraith": {"pack": "A051", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": WRAITH_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
+	# A052's Harvester (task 0253): the Giant gone to rust, until 0266 - its
+	# roll the Giant's walk, its wind-up the Giant's, its charge the walk
+	# again, its crush the slam, its fall the Giant's; and its forecast mark
+	# the Giant's head.
+	&"harvester": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant", "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER, "bare": true},
+	&"harvester_walk": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.14, "loop": true, "stand_in": &"enemies/giant_walk", "stand_in_frames": 4, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
+	&"harvester_windup": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_windup", "stand_in_frames": 3, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
+	&"harvester_charge": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": true, "stand_in": &"enemies/giant_walk", "stand_in_frames": 4, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
+	&"harvester_crush": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_slam", "stand_in_frames": 3, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
+	&"harvester_death": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 5, "seconds": 0.12, "loop": false, "stand_in": &"enemies/giant_death", "stand_in_frames": 5, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
+	&"head_harvester": {"pack": "A052", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/head_giant", "tint": HARVESTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
 	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
 	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn

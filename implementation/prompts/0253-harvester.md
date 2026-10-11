@@ -1,7 +1,7 @@
 # 0253 - The Harvester
 
 - **Phase:** 14 - Enemies and bosses
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0246, 0231
 - **Likely files:** src/core/enemies.gd, src/core/game_data.gd, src/ui/enemy_motion.gd, src/ui/world_view.gd, src/ui/night_hud.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd
 

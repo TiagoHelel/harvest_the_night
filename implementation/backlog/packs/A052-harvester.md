@@ -14,7 +14,15 @@ The Harvester is summer's boss (Summer 14): an old harvesting machine possessed 
 
 ## Deliverables
 
-The table is provisional: game task 0253 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack. 0253 keeps the Giant's 80x64 unless it writes a justification for 112x80 / (56,76) in its journal and in this table.
+Final geometry settled by game task 0253: **the Giant's 80x64 standing on (40,60), kept.** Nothing in the rules or the view asks for more room, so 0253 writes no case for 112x80. The rows stand as written, with the frames and seconds of the table. **How the game plays them:**
+- **The roll:** 44 ticks a tile, about two thirds of a tile a second, on the four `walk` frames at 0.14 s each, facing the way it moves.
+- **The wind-up:** `telegraph_ticks`, a second and a half - the same rear before a charge, before a gnaw and at the house. `windup_0..2` play at 0.1 s each, and frame 2 holds for the rest of it. Before a charge, a strip drawn in code covers every cell the charge will enter, edged in the warning's red. It ends where something will hold, or at the house. The boss bar flashes through every wind-up.
+- **The charge:** `charge_0..3` loop at 0.1 s while it runs its line at 3 ticks a tile (ten tiles a second), six tiles at most, along a row or a column - so it faces west, or east mirrored, or moves straight up or down the screen in the west-facing frames.
+- **The crush:** until 0266 its gnaws and bites show the wind-up and then the roll, and `crush` waits for 0266 to play on each contact. Every structure the charge brings down leaves its own wreck; `wreck_debris` plays nowhere until 0266 emits it at each one.
+- **Death:** until 0266 the body left behind is `harvester_death_4`, squashed.
+- **Night colours:** summer's night is the teal one, and the rust stand-in reads on it by its warm body against the cool ground. Keep the machine warm-toned, rust and old paint, so it never reads as part of the night.
+
+Until 0266 every frame stands in as the Giant gone to rust (`PlaceholderArt`), and the forecast mark is the Giant's head, tinted the same, all through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

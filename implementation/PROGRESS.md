@@ -26821,3 +26821,187 @@ assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/backlog/packs/A051-wraith.md,
 implementation/prompts/0252-wraith.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0252/, docs/devlog/{index,index.pt_BR}.md
+
+## 0253 - The Harvester - done 2026-10-11
+
+What changed: summer's boss. A possessed harvesting machine rolls in slowly.
+Every eight seconds of rolling it stops and rears, its line telegraphed on
+the ground, and then charges down a row or column towards the house. It
+crushes every structure in its way and stops at the first that holds. A
+stone wall falls to it; the hardwood wall holds. One thick wall is a speed
+bump; layers are a defence. It comes on Summer 14 in the Giant's place.
+
+### The rules (`src/core/`)
+
+**`ENEMIES.harvester`**, with levers:
+- `is_boss`; hp 1100, armour 6, a roll of 44 ticks a tile, 45 to the
+  house, 300% on what it gnaws, $150, 9 bones, not lured;
+- `telegraph_ticks` 45 (a second and a half);
+- `charge_every_ticks` 240 (eight seconds of rolling), `charge_tiles` 6,
+  `charge_ticks_per_tile` 3 (ten tiles a second);
+- `crush_damage` 180.
+
+It passes 0246's every-boss-against-every-non-boss checks (0058's group):
+more hit points, slower, and better armoured than anything that is not a
+boss.
+
+**`check_enemies`** (`_check_charge`) refuses a charger missing any of its
+levers or the wind-up it runs on, any of them at zero, or a charge no
+faster than its roll.
+
+**`SEASON_BOSSES[1]` is the Harvester**: Summer 14's boss, and every
+summer's last night after. Spring 14 is still the Giant's, and autumn and
+winter stay the Giant's until 0254-0255.
+
+**The charge, in `Enemies`** (inside `Enemies.tick`, so `PerfNames` is
+unchanged; only a row with `charge_tiles` pays for any of it):
+- **the clock:** `charge_in` counts the ticks it spends rolling and
+  gnawing, not winding, running or stunned;
+- **the wind-up:** the line is fixed when it starts, as `charge_from` and
+  `charge_dir`. It is the row or column from where it stands towards the
+  house centre along the dominant axis, ties to the row
+  (`charge_direction`). The wind-up runs `telegraph_ticks` through
+  `winding_at` (the line's first cell) and `chew_wait`, so `is_winding` is
+  true for exactly those ticks and 0246's bar flashes. It ends on the tick
+  the run starts;
+- **the run** (`charge_left`): `charge_ticks_per_tile` along the line,
+  ignoring the field, the remainder carried as a walk carries it. Each cell
+  is asked before it is entered (`charge_meets`):
+  - it goes on over open ground, rubble, and anything walked over (a mine
+    under it then goes off on Traps' turn);
+  - it crushes the player's structures: `crush_damage` through
+    `Farm.damage`, going on through what falls and stopping at what holds;
+  - it stops at the map's edge, at ground nothing crosses (water, rock) and
+    at what it cannot crush - a tree, a rock, the stall, the well, the bin;
+  - at the house it bites, which spends it as every bite does;
+- **then** (`_end_charge`) it rolls and gnaws as before. The next blow winds
+  up afresh, and the clock starts again;
+- `Enemies.charge_line(state, id)` gives the cells telegraphed, in order:
+  `charge_tiles` long from where it was fixed, cut at what stops it, and
+  ending at the house or at the first structure that would hold.
+  `charge_meets`, `charge_direction` and `is_charging` are public for the
+  view and the tests.
+
+**The fields** are rebuilt lazily by `Pathing.refresh` at the top of the next
+`Enemies.tick`, once however many walls fell in the tick before.
+
+### Decided
+
+- **The wind-up is `telegraph_ticks`**, not a `charge_windup_ticks`: one
+  tell, the same rear before a charge, a gnaw and the house, so a player
+  learns one rhythm per boss.
+- **`crush_damage` 180**: a stone wall (120) falls, and so do sandbags (70)
+  and fences. The hardwood wall - the wall's level, 240 through
+  `Building.levelled_stat` - holds, and is left at 60.
+- **What it cannot crush stops it**, as water does: the farm's own things
+  are not the player's walls. A station that stands at 0 HP as a wreck
+  holds it too, since the wreck is still there.
+- **A tile a tick at most**: the fastest the lever goes (1) is one tile a
+  tick, so one charge never brings down two walls in one tick. The
+  required "three walls in one tick, one rebuild" is three Harvesters'
+  charges landing together, and the test does exactly that.
+- **80x64 kept** for A052: nothing in the rules or the view asks for more
+  room.
+
+### The view (`src/ui/`)
+
+- **A052's stand-ins** (`PlaceholderArt`), until 0266: the Giant gone to rust
+  (`HARVESTER_TINT`) on its 80x64 standing on (40,60):
+  - the master;
+  - the roll and the charge, both the Giant's walk;
+  - the wind-up, the Giant's;
+  - the crush, its slam;
+  - the death, its fall;
+  - the forecast mark, its head.
+- **`posed_off_the_rules`:** running its line, the charge on the clock;
+  winding up - for a charge or a blow - rearing by the telegraph's progress,
+  frame 2 held.
+- **The strip** (`_draw_enemy_warning`): during a charge's wind-up,
+  `CHARGE_STRIP` over every cell of `charge_line`, pulsing and edged in the
+  ring's red. A blow's wind-up keeps the ring.
+- **The words:** `Names` has `ENEMY_HARVESTER` and its intro in
+  `BOSS_INTROS` (`BOSS_INTRO_HARVESTER`), `Describe` `DESC_CHARGES`
+  ("charges in a straight line"), and `Sfx` borrows the Giant's roar until
+  0284. 0246's bar, name and banner needed nothing.
+- **A052's table is final**, with how the game plays it.
+
+### Found
+
+- **0059's "every enemy is sent" check read only the authored nights,** and
+  found the Harvester unsent: a season's boss is put in by the calendar
+  (0153), in no authored night. The check counts `SEASON_BOSSES` now.
+- **The first strip was a pink smudge.** A fill alone, at 42%, faded over the
+  walls under summer's night ramp. It is stronger now and edged in the
+  ring's red.
+- **The first scene's line ran north,** and in the after picture the stopped
+  machine stood in front of the hardwood wall it had stopped at. The scene
+  runs along a row now, east of the house. The cursor's label also sat on
+  the machine's head; it has been moved off.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. The determinism night is Spring 1.
+- **DATA 2971249203 -> 4051846968:** the Harvester's row and
+  `SEASON_BOSSES`.
+
+Verify: **PASS**, 60 of 60 in 1028 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 18040 asserts, `headless_v1` 2672, `input_check` 1267 cases, `input_v1` 734 (113 s).
+- **perf:** a night tick 1752 us, the swarm's 5861, a path rebuild 11605, 16944 with the decoys and 11781 with the garlic. The baseline did not move: the worst case is Spring 14's Giant, and a row without `charge_tiles` pays one lookup.
+
+**Tests:**
+- **`_task_0253_harvester` (headless_v1):**
+  - it is a boss whose crush brings a stone wall down and leaves the
+    hardwood one standing. `check_enemies` refuses each of the five levers
+    missing or at zero (ten ways) and a charge no faster than the roll;
+  - **one charge down its line**, three stone layers on its second, third
+    and fourth cells and a hardwood wall on its sixth:
+    - the line, fixed when the wind-up starts, is the six cells to the
+      hardwood;
+    - the wind-up lasts exactly `telegraph_ticks`, drawn as `windup` and
+      then `charge`;
+    - a fourth stone wall laid on its first cell while it winds up does not
+      turn it: it runs through all four, every one rubble;
+    - it stops before the hardwood, which loses exactly `crush_damage` and
+      holds;
+  - **at a pond** it stops on the shore: the line ends there, and it never
+    stands in the water;
+  - **three walls down on one tick**, three Harvesters charging side by
+    side: the fields were not rebuilt during that tick, and were rebuilt
+    once at the next tick's refresh;
+  - **sealed in a ring of stone walls,** it still reaches the house and bites
+    it. Killing one moves `bosses_down_of(harvester)`;
+  - Summer 14 is its night and Spring 14 still the Giant's. Its name, intro,
+    `DESC_CHARGES` and voice.
+- **Old groups touched:** 0059's sent kinds count `SEASON_BOSSES`, and
+  headless_check counts 111 scenes. No 0153-0160 group or scene had put a
+  Giant on Summer 14 by name; they ask `Calendar.boss_of`.
+
+**Looked at** (`python tools/shot.py 0253 harvester --fhd`):
+- **`harvester`, Summer 14's night:** east of the house, a 3x3 block of stone
+  walls (its second, third and fourth cells, each layer three cells across
+  the line) and a hardwood wall three cells long on its sixth. The
+  Harvester, the Giant gone to rust, stands east of them, reared with an
+  arm up a third of a second into its wind-up. The boss bar reads HARVESTER
+  1100/1100 in the flashing orange. A red-edged strip runs west over the
+  stone block to the hardwood, which is where it ends
+  (`the line [(48, 31) ... (43, 31)]`).
+- **`harvester_after`:** the charge run. A corridor is cut through the middle
+  of the stone block, its top and bottom rows still standing. The machine
+  stands before the hardwood wall, which holds at 60, and the bar is back
+  to red. The log says "wall destroyed" three times
+  (`stopped at (44, 31), the line's walls 2:0, 3:0, 4:0, 6:60`).
+- **What the takes found:**
+  - **the first** had the line running north, and after the charge the
+    machine stood in front of the hardwood it had stopped at;
+  - **its strip** was a pink smudge over the walls;
+  - **the cursor's label** sat on the machine's head. The scene runs along a
+    row now, the strip is stronger and edged, and the cursor is off to the
+    south-west.
+
+Files: src/core/{enemies,game_data}.gd,
+src/ui/{placeholder_art,world_view,names,describe,sfx}.gd,
+src/tools/{headless_check,headless_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/backlog/packs/A052-harvester.md,
+implementation/prompts/0253-harvester.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0253/, docs/devlog/{index,index.pt_BR}.md

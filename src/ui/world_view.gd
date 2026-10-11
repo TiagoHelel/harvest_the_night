@@ -1024,8 +1024,22 @@ func _draw_enemy_warning() -> void:
 		# cooldown or stale target while walking must not promise another slam.
 		if not EnemyMotion.is_windup(_pose_of(Entities.get_one(_state, int(id)))):
 			continue
-		var middle := (Vector2(aimed) + Vector2(0.5, 0.5)) * size
 		var swing := fmod(float(Time.get_ticks_msec()) / 400.0, 1.0)
+		# **A charge's line** (task 0253): a strip on every cell it will
+		# enter, pulsing, from the rules' own line - where it ends is where
+		# something will hold, or the house.
+		var line := Enemies.charge_line(_state, int(id))
+		if not line.is_empty():
+			var strip := Rect2(Vector2(line[0] as Vector2i) * size, Vector2(size, size))
+			for cell in line:
+				var box := Rect2(Vector2(cell as Vector2i) * size, Vector2(size, size))
+				strip = strip.merge(box)
+				_enemy_warning.draw_rect(box.grow(-1.0), Color(CHARGE_STRIP, CHARGE_STRIP.a * (0.7 + 0.3 * swing)))
+			# Edged in the ring's red: under the night's ramp a fill alone was
+			# a pink smudge over the walls (the first take).
+			_enemy_warning.draw_rect(strip.grow(-1.0), Color(1.0, 0.45, 0.30, 0.9), false, 2.0)
+			continue
+		var middle := (Vector2(aimed) + Vector2(0.5, 0.5)) * size
 		_enemy_warning.draw_arc(middle, size * (1.4 - 0.6 * swing), 0.0, TAU, 24,
 			Color(1.0, 0.45, 0.30, 0.9), 2.0, true)
 
@@ -3280,9 +3294,22 @@ func _pose_of(one: Dictionary) -> StringName:
 ## stunned, standing; else its four steps on the clock, a frame for its walk
 ## frame's seconds (A046's 0.125, A047's rat 0.1, task 0248) - it walks or it
 ## chews, and either way it is busy. Under a fence, a digger is its mound
-## (task 0250).
+## (task 0250). A charger rears through its wind-up and runs its charge (task
+## 0253).
 static func posed_off_the_rules(state: Dictionary, one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
+	# **A charger** (task 0253's Harvester): running its line, its charge on
+	# the clock; winding up - for a charge or a blow - rearing, a frame for
+	# each of its frame's seconds and the last held.
+	if one.has("charge_left") and PlaceholderArt.has_frame(ENEMY_DIR + "%s_charge_0.png" % kind):
+		var run_each := maxi(roundi(float(PlaceholderArt.frame(ENEMY_DIR + "%s_charge_0.png" % kind)
+			.get("seconds", 0.1)) * float(GameData.TICK_HZ)), 1)
+		return StringName("%s_charge_%d" % [kind, (int(state["tick"]) / run_each + int(one["id"])) % 4])
+	if Enemies.is_winding(state, int(one["id"])) and PlaceholderArt.has_frame(ENEMY_DIR + "%s_windup_0.png" % kind):
+		var rear_each := maxi(roundi(float(PlaceholderArt.frame(ENEMY_DIR + "%s_windup_0.png" % kind)
+			.get("seconds", 0.1)) * float(GameData.TICK_HZ)), 1)
+		var reared := int((GameData.ENEMIES[kind] as Dictionary).get("telegraph_ticks", 0)) - int(one.get("chew_wait", 0))
+		return StringName("%s_windup_%d" % [kind, clampi(reared / rear_each, 0, 2)])
 	# **Under a fence, a mound** (task 0250's digger), on its own clock.
 	if Enemies.underground(state, int(one["id"])):
 		var seconds := float(PlaceholderArt.frame(ENEMY_DIR + "%s_mound_0.png" % kind).get("seconds", 0.125))
@@ -3389,6 +3416,11 @@ const SWARM_SPREAD := [Vector2(0, 0), Vector2(-6, -2), Vector2(5, -3), Vector2(-
 ## **A stunned enemy stands cold blue** (task 0230), and a zap plays where the
 ## shock landed: at the wires' height over the ground, a few at a time.
 const STUNNED_TINT := Color(0.7, 0.88, 1.5)
+
+## **A charge's strip** (task 0253): the warning's red over the cells a
+## charger's wind-up has fixed, faint enough that what stands there shows
+## through it.
+const CHARGE_STRIP := Color(1.0, 0.42, 0.28, 0.55)
 
 ## **How much of a wraith shows outside light** (task 0252): faint, never
 ## gone - the player always knows one is there; it is the towers that cannot

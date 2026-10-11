@@ -11153,6 +11153,12 @@ func _task_0059_wave_data() -> void:
 				fresh += 1
 		expect(fresh <= 1,
 			"night %d introduces at most one new kind" % night, str(fresh))
+	# **A season's boss is the calendar's to send** (task 0153): it comes on
+	# the season's last night whatever was written for it. 0253's Harvester
+	# is in no authored night and comes every Summer 14.
+	for boss in GameData.SEASON_BOSSES:
+		if not seen.has(boss):
+			seen[boss] = -1
 	var unsent: Array = []
 	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
 		if not seen.has(id) and not NO_NIGHT_YET.has(id):
@@ -14650,8 +14656,9 @@ func _task_0082_shots() -> void:
 	# over a wall and on the field. A hundred and eight since 0250: a digger
 	# under a fence. A hundred and nine since 0251: towers chilled by a frost
 	# zombie's burst. A hundred and ten since 0252: a wraith in the beam and
-	# one out of it.
-	expect(names.size() == 110,
+	# one out of it. A hundred and eleven since 0253: the Harvester's wind-up
+	# and the line after its charge.
+	expect(names.size() == 111,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

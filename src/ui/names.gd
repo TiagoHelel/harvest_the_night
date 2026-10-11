@@ -223,6 +223,7 @@ const KEYS: Dictionary = {
 	&"digger": &"ENEMY_DIGGER",
 	&"frost_zombie": &"ENEMY_FROST_ZOMBIE",
 	&"wraith": &"ENEMY_WRAITH",
+	&"harvester": &"ENEMY_HARVESTER",
 
 	# ---- what the tech tree buys
 	&"sharp tools": &"TECH_SHARP_TOOLS",
@@ -343,6 +344,7 @@ const NOTES: Dictionary = {
 ## `boss_arrived`. 0253-0255 add theirs with their rows.
 const BOSS_INTROS: Dictionary = {
 	&"giant": &"BOSS_INTRO_GIANT",
+	&"harvester": &"BOSS_INTRO_HARVESTER",
 }
 
 

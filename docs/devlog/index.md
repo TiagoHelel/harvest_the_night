@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-224 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+225 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -268,10 +268,11 @@ is the sort of thing this list exists to say out loud.
 | 0250 | The digger | 2026-10-11 |
 | 0251 | The frost zombie | 2026-10-11 |
 | 0252 | The wraith | 2026-10-11 |
+| 0253 | The Harvester | 2026-10-11 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 112 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 113 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -385,10 +386,11 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **The digger** (0250) - `data` 3398662868 -> 1095207733
 - **The frost zombie** (0251) - `data` 1095207733 -> 762535020
 - **The wraith** (0252) - `data` 762535020 -> 2971249203
+- **The Harvester** (0253) - `data` 2971249203 -> 4051846968
 
 ## What went wrong
 
-60 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+61 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -450,6 +452,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0250** - Found *(The digger)*
 - **0251** - Found *(The frost zombie)*
 - **0252** - Found *(The wraith)*
+- **0253** - Found *(The Harvester)*
 
 ## What is not in it
 

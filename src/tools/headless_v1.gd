@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 86
+const GROUPS := 87
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -165,6 +165,7 @@ func _run() -> void:
 	_task_0250_digger()
 	_task_0251_frost()
 	_task_0252_wraith()
+	_task_0253_harvester()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -10576,6 +10577,184 @@ func _wraith_past_a_tower(seed_value: int, light: StringName) -> Dictionary:
 					and not Light.is_lit(state, Entities.cell_of(state, id))
 				break
 	return out
+
+
+## 0253 - the Harvester. Its line is fixed when the wind-up starts and the
+## wind-up lasts its telegraph's ticks; three stone layers fall to one charge
+## and a hardwood wall holds it; it never crosses water; three walls brought
+## down on one tick cost the fields one rebuild; sealed in, it still reaches
+## the house; killing it moves its tally; Summer 14 is its night.
+func _task_0253_harvester() -> void:
+	var row: Dictionary = GameData.ENEMIES[&"harvester"]
+	var telegraph := int(row["telegraph_ticks"])
+	var crush := int(row["crush_damage"])
+	var stone := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
+	var hardwood := Building.levelled_stat({"id": &"wall", "level": 2}, "hp")
+	var refused: Array = []
+	for key in ["charge_every_ticks", "charge_tiles", "charge_ticks_per_tile", "crush_damage", "telegraph_ticks"]:
+		for broken in ["zero", "gone"]:
+			var table := GameData.ENEMIES.duplicate(true)
+			if broken == "gone":
+				(table[&"harvester"] as Dictionary).erase(key)
+			else:
+				(table[&"harvester"] as Dictionary)[key] = 0
+			if _says(GameData.check_enemies(table), "charges with no %s" % key):
+				refused.append("%s %s" % [key, broken])
+	var slow := GameData.ENEMIES.duplicate(true)
+	(slow[&"harvester"] as Dictionary)["charge_ticks_per_tile"] = int(row["ticks_per_tile"])
+	expect(Combat.is_boss(&"harvester") and crush > stone and crush < hardwood and refused.size() == 10
+		and _says(GameData.check_enemies(slow), "charges no faster than it walks")
+		and GameData.check_enemies(GameData.ENEMIES).is_empty(),
+		"the Harvester is a boss whose crush brings a stone wall down and leaves the hardwood one standing; check_enemies refuses a charger missing a lever, with one at zero, or charging no faster than it rolls",
+		"%d against %d and %d; %s" % [crush, stone, hardwood, str(refused)])
+
+	# **One charge down its line**: three stone layers on its second, third
+	# and fourth cells and a hardwood wall on its sixth; a fourth stone wall
+	# laid on its first cell while it winds up.
+	var state := _powers_night(25300)
+	var spot := _open_square(state, 6, &"wall")
+	var dir := Enemies.charge_direction(state, spot)
+	for k in [2, 3, 4]:
+		Farm.place(state, spot + dir * int(k), {"id": &"wall", "hp": stone})
+	var holding := spot + dir * 6
+	Farm.place(state, holding, {"id": &"wall", "hp": hardwood, "level": 2})
+	Pathing.refresh(state)
+	var boss := Entities.spawn(state, &"harvester", spot)
+	(Entities.get_one(state, boss))["charge_in"] = 1
+	Sim.advance(state, 1)
+	var line := Enemies.charge_line(state, boss)
+	var rearing := WorldView.posed_off_the_rules(state, Entities.get_one(state, boss))
+	var wound := 0
+	while Enemies.is_winding(state, boss) and wound < 1000:
+		wound += 1
+		if wound == telegraph / 2:
+			Farm.place(state, spot + dir, {"id": &"wall", "hp": stone})
+		Sim.advance(state, 1)
+	var running := WorldView.posed_off_the_rules(state, Entities.get_one(state, boss))
+	var crossed: Array = [Entities.cell_of(state, boss)]
+	var ran := 0
+	while Entities.alive(state, boss) and Entities.get_one(state, boss).has("charge_dir") and ran < 200:
+		Sim.advance(state, 1)
+		ran += 1
+		var at := Entities.cell_of(state, boss)
+		if crossed.back() != at:
+			crossed.append(at)
+	var want_line: Array = []
+	var want_crossed: Array = [spot]
+	for k in range(1, 7):
+		want_line.append(spot + dir * k)
+		if k < 6:
+			want_crossed.append(spot + dir * k)
+	var down := true
+	for k in [1, 2, 3, 4]:
+		down = down and Farm.occupant(state, spot + dir * int(k)).is_empty() \
+			and Farm.rubble_at(state, spot + dir * int(k)) == &"wall"
+	expect(wound == telegraph and line == want_line and crossed == want_crossed and down
+		and int(Farm.occupant(state, holding).get("hp", 0)) == hardwood - crush
+		and String(rearing).begins_with("harvester_windup_") and String(running).begins_with("harvester_charge_"),
+		"fixed when the wind-up starts, the wind-up lasts telegraph_ticks; then it runs its line through four stone walls - the one laid while it wound up too - and stops before the hardwood, which loses crush_damage and holds",
+		"wound %d, line %s, crossed %s, hardwood %d, %s / %s" % [wound, str(line), str(crossed),
+			int(Farm.occupant(state, holding).get("hp", 0)), rearing, running])
+
+	# **It never crosses water**: three cells of land and then the pond on its
+	# line - it stops on the shore.
+	var wet := _powers_night(25301)
+	var pond := Vector2i(-1, -1)
+	var way := Vector2i.ZERO
+	for idx in Grid.CELLS:
+		var cell := Grid.cell(idx)
+		if pond.x >= 0 or Farm.terrain_at(wet, cell) != Farm.Terrain.WATER:
+			continue
+		var d := Enemies.charge_direction(wet, cell)
+		if d == Vector2i.ZERO or Enemies.charge_direction(wet, cell - d * 3) != d:
+			continue
+		var dry := true
+		for k in [1, 2, 3]:
+			dry = dry and Enemies.charge_meets(wet, cell - d * int(k)) == Enemies.CHARGE_ON
+		if dry:
+			pond = cell
+			way = d
+	var swimmer := Entities.spawn(wet, &"harvester", pond - way * 3)
+	(Entities.get_one(wet, swimmer))["charge_in"] = 1
+	Sim.advance(wet, 1)
+	var shore_line := Enemies.charge_line(wet, swimmer)
+	var touched_water := false
+	for _t in 300:
+		Sim.advance(wet, 1)
+		touched_water = touched_water or Farm.terrain_at(wet, Entities.cell_of(wet, swimmer)) == Farm.Terrain.WATER
+		if not Entities.get_one(wet, swimmer).has("charge_dir"):
+			break
+	expect(pond.x >= 0 and shore_line == [pond - way * 2, pond - way] and not touched_water
+		and Entities.cell_of(wet, swimmer) == pond - way,
+		"a charge at a pond stops on the shore: its line ends there and it never stands in the water",
+		"%s %s at %s" % [str(pond), str(shore_line), str(Entities.cell_of(wet, swimmer))])
+
+	# **Three walls down on one tick, one rebuild**: three Harvesters charging
+	# side by side, a stone wall two cells down each line - the fields are
+	# rebuilt once, at the next tick's refresh, not once a wall.
+	var three := _powers_night(25302)
+	var middle := _open_square(three, 6, &"wall")
+	var ahead := Enemies.charge_direction(three, middle)
+	var across := Vector2i(ahead.y, ahead.x)
+	var bosses: Array = []
+	var aligned := true
+	for k in [-2, 0, 2]:
+		var from: Vector2i = middle + across * int(k)
+		aligned = aligned and Enemies.charge_direction(three, from) == ahead
+		Farm.place(three, from + ahead * 2, {"id": &"wall", "hp": stone})
+		bosses.append(Entities.spawn(three, &"harvester", from))
+	Pathing.refresh(three)
+	for id in bosses:
+		(Entities.get_one(three, int(id)))["charge_in"] = 1
+	var fell := 0
+	var built_during := -1
+	var grid_after := -1
+	for _t in 300:
+		var grid_before := int(three["grid_version"])
+		Sim.advance(three, 1)
+		fell = int(three["grid_version"]) - grid_before
+		if fell > 0:
+			built_during = int(three["flow_version"]) - grid_before
+			grid_after = int(three["grid_version"])
+			break
+	Sim.advance(three, 1)
+	expect(aligned and fell == 3 and built_during == 0 and int(three["flow_version"]) == grid_after,
+		"three walls brought down by three charges on one tick rebuild the fields once, at the next tick's refresh",
+		"%s: %d fell, flow %d behind during, then %d against %d" % [aligned, fell, built_during,
+			int(three["flow_version"]), grid_after])
+
+	# **Sealed in a ring of stone walls, it still reaches the house**; and
+	# killing one moves its tally.
+	var sealed := _powers_night(25303)
+	var pen := _open_square(sealed, 4, &"wall")
+	for step in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1),
+			Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(-1, -1)]:
+		Farm.place(sealed, pen + (step as Vector2i), {"id": &"wall", "hp": stone})
+	Pathing.refresh(sealed)
+	var penned := Entities.spawn(sealed, &"harvester", pen)
+	var roof := int(sealed["house_hp"])
+	for _t in 9000:
+		Sim.advance(sealed, 1)
+		if not Entities.alive(sealed, penned):
+			break
+	var tally := Combat.bosses_down_of(sealed, &"harvester")
+	var victim := Entities.spawn(sealed, &"harvester", pen)
+	Combat.hit(sealed, victim, 1 << 20)
+	expect(int(sealed["house_hp"]) < roof and not Entities.alive(sealed, penned)
+		and Combat.bosses_down_of(sealed, &"harvester") == tally + 1,
+		"sealed in a ring of stone walls it still reaches the house and bites it; killing one moves bosses_down_of(harvester)",
+		"%d of %d" % [int(sealed["house_hp"]), roof])
+
+	# **Summer 14 is its night**, and Spring 14 still the Giant's; its words
+	# and its voice.
+	var summer := 2 * GameData.SEASON_DAYS
+	expect(GameData.SEASON_BOSSES[1] == &"harvester" and Calendar.boss_of(summer) == &"harvester"
+		and Calendar.boss_of(GameData.SEASON_DAYS) == &"giant"
+		and StringName(Waves.night_of(summer).get("boss", &"")) == &"harvester" and Waves.kinds_of(summer).has(&"harvester")
+		and Names.of(&"harvester") == I18n.t(&"ENEMY_HARVESTER") and Names.boss_intro(&"harvester") == I18n.t(&"BOSS_INTRO_HARVESTER")
+		and Describe.enemy(&"harvester").contains(I18n.t(&"DESC_CHARGES")) and Sfx.voice_of(&"harvester") == &"sfx/roar_giant",
+		"Summer 14 is the Harvester's night and Spring 14 still the Giant's; it has its name, its intro, a tooltip line that it charges, and the Giant's roar until its own")
+	_completed += 1
 
 
 ## A crop on `cell` (task 0249): tilled, sown with `crop`, nothing grown yet.

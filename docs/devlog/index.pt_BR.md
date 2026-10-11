@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-224 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+225 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -267,10 +267,11 @@ voz alta.
 | 0250 | The digger | 2026-10-11 |
 | 0251 | The frost zombie | 2026-10-11 |
 | 0252 | The wraith | 2026-10-11 |
+| 0253 | The Harvester | 2026-10-11 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 112 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 113 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -384,10 +385,11 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **The digger** (0250) - `data` 3398662868 -> 1095207733
 - **The frost zombie** (0251) - `data` 1095207733 -> 762535020
 - **The wraith** (0252) - `data` 762535020 -> 2971249203
+- **The Harvester** (0253) - `data` 2971249203 -> 4051846968
 
 ## O que deu errado
 
-60 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
+61 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -449,6 +451,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **0250** - Found *(The digger)*
 - **0251** - Found *(The frost zombie)*
 - **0252** - Found *(The wraith)*
+- **0253** - Found *(The Harvester)*
 
 ## O que nao tem
 

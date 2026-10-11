@@ -168,6 +168,7 @@ DESC_COSTS,0,costs %s,custa %s
 DESC_DAMAGE,0,%d %s damage,%d de dano %s
 DESC_DRAWS,0,draws %d power,consome %d de energia
 DESC_BURROWS,0,digs under fences,cava por baixo das cercas
+DESC_CHARGES,0,charges in a straight line,investe em linha reta
 DESC_CHILLS,0,slows towers when it dies,deixa as torres lentas ao morrer
 DESC_EATS_WALLS,0,chews through walls,come os muros
 DESC_FLIES,0,flies over walls and mines,voa por cima de muros e minas
@@ -255,7 +256,10 @@ ENEMY_FROST_ZOMBIE,0,frost zombie,zumbi de gelo
 ENEMY_FROST_ZOMBIE.other,0,frost zombies,zumbis de gelo
 ENEMY_GIANT,0,giant,gigante
 ENEMY_GIANT.other,0,giants,gigantes
+ENEMY_HARVESTER,0,harvester,colheitadeira
+ENEMY_HARVESTER.other,0,harvesters,colheitadeiras
 BOSS_INTRO_GIANT,0,the giant is coming,o gigante está vindo
+BOSS_INTRO_HARVESTER,0,the harvester is coming,a colheitadeira está vindo
 ENEMY_RAT,0,rat,rato
 ENEMY_RAT.other,0,rats,ratos
 ENEMY_RUNNER,0,runner,corredor

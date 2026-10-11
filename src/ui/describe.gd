@@ -295,6 +295,9 @@ static func enemy(id: StringName) -> String:
 	# A digger (task 0250).
 	if bool(one.get("burrows", false)):
 		lines.append(I18n.t(&"DESC_BURROWS"))
+	# A charger (task 0253).
+	if int(one.get("charge_tiles", 0)) > 0:
+		lines.append(I18n.t(&"DESC_CHARGES"))
 	# A wraith (task 0252).
 	if bool(one.get("needs_light", false)):
 		lines.append(I18n.t(&"DESC_NEEDS_LIGHT"))

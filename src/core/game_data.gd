@@ -90,9 +90,9 @@ const FULL_MOON_REWARD_PERCENT := 200   # LEVER: percent of the night's pay, 150
 
 ## **Each season's boss** (task 0153), in `SEASONS` order: the one that comes
 ## on the season's last night, and back every night after until it falls.
-## The Giant for all four until 0253-0255 bring the Harvester, the Scarecrow
-## King and the Winter Lord.
-const SEASON_BOSSES: Array = [&"giant", &"giant", &"giant", &"giant"]
+## Summer's is the Harvester since task 0253; the Giant holds autumn and
+## winter until 0254-0255 bring the Scarecrow King and the Winter Lord.
+const SEASON_BOSSES: Array = [&"giant", &"harvester", &"giant", &"giant"]
 
 ## **The calm night's gift** (task 0154): what is waiting on the porch the
 ## morning after the first night of a season, when the horde regroups after
@@ -2639,6 +2639,42 @@ const ENEMIES: Dictionary = {
 		"bones": 0,                     # LEVER: bones, 0-1
 		"armour": 0,
 		# Straw does not fool what drifts in from the dark.
+		"lurable": false,
+	},
+	&"harvester": {
+		# **Summer's boss** (task 0253; the plan's Colheitadeira): an old
+		# harvesting machine possessed by the rot. It rolls in slowly, and
+		# every `charge_every_ticks` of rolling and gnawing it stops, winds up
+		# on a line fixed then - the row or column towards the house along the
+		# dominant axis, ties to the row - and charges down it at
+		# `charge_ticks_per_tile`, ignoring the field (`Enemies`). Every
+		# structure it enters takes `crush_damage`: it carries on through what
+		# that brings down and stops at the first that holds, at ground
+		# nothing crosses, after `charge_tiles`, or at the house with a bite.
+		# Then it rolls and gnaws as before. One thick wall is a speed bump;
+		# layers are a defence.
+		#
+		# **The wind-up is `telegraph_ticks`**, its one tell: the same rear
+		# before a charge, a gnaw and the house, so a player learns one
+		# rhythm for it.
+		"is_boss": true,
+		"hp": 1100,                     # LEVER: hit points, 700-1600
+		# Slower than every one that walks (0246) - it rolls.
+		"ticks_per_tile": 44,           # LEVER: ticks, 39-60
+		"damage": 45,                   # LEVER: to the house, 30-60
+		"structure_damage_percent": 300,   # LEVER: percent, 200-500
+		"telegraph_ticks": 3 * SECONDS / 2,   # LEVER: ticks, 1-2 seconds worth
+		"charge_every_ticks": 8 * SECONDS,    # LEVER: ticks of rolling, 5-12 seconds worth
+		"charge_tiles": 6,              # LEVER: tiles, 4-10
+		"charge_ticks_per_tile": 3,     # LEVER: ticks, 1-6 (lower is faster)
+		# **A stone wall falls to it, the hardwood wall holds** (0231's level,
+		# 240): one charge takes down every stone wall in its row and stops at
+		# the first hardwood - which it leaves at 60.
+		"crush_damage": 180,            # LEVER: to a structure, 121-239 (a stone wall 120, hardwood 240)
+		"reward": 150,                  # LEVER: money, 80-250
+		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
+		# Armoured as a machine, more than anything that is not a boss.
+		"armour": 6,                    # LEVER: damage off each hit, 5-10
 		"lurable": false,
 	},
 }
@@ -5416,6 +5452,7 @@ static func check_enemies(enemies: Dictionary) -> Array:
 			errors.append("enemy '%s' is a boss and can be lured" % id)
 		errors.append_array(_check_spit(id, one))
 		errors.append_array(_check_chill(id, one))
+		errors.append_array(_check_charge(id, one))
 		# **A cluster is at least one** (task 0248): a release of nothing
 		# would count bodies it never sent.
 		if one.has("cluster") and int(one["cluster"]) < 1:
@@ -5429,6 +5466,26 @@ static func check_enemies(enemies: Dictionary) -> Array:
 			errors.append(("enemy '%s' ignores structures without being "
 				+ "faster than the ones that do not - it would be a slow "
 				+ "zombie taking the long way round") % id)
+	return errors
+
+
+## **A charger's numbers** (task 0253), for an enemy that declares any
+## `charge_` lever or a `crush_damage`: every one of them and the wind-up it
+## runs on (`telegraph_ticks`), none of them zero, and a charge quicker than
+## its walk.
+static func _check_charge(id: StringName, one: Dictionary) -> Array:
+	var errors: Array = []
+	var charges := one.has("crush_damage")
+	for key in sorted_names(one.keys()):
+		charges = charges or String(key).begins_with("charge_")
+	if not charges:
+		return errors
+	for field in ["charge_every_ticks", "charge_tiles", "charge_ticks_per_tile", "crush_damage",
+			"telegraph_ticks"]:
+		if int(one.get(field, 0)) <= 0:
+			errors.append("enemy '%s' charges with no %s" % [id, field])
+	if int(one.get("charge_ticks_per_tile", 0)) >= int(one.get("ticks_per_tile", 0)):
+		errors.append("enemy '%s' charges no faster than it walks" % id)
 	return errors
 
 

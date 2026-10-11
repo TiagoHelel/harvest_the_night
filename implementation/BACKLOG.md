@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **222 / 296 done**
+`##################......`  **223 / 296 done**
 
-0 doing / 74 todo / 0 blocked across 18 phases.
+0 doing / 73 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-74 task(s) left, the ready ones first, then what they
+73 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -562,26 +562,6 @@ The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-t
   - done when: FHD (1920x1080) captures by day and by night of the dog following the farmer and the dog called at night in the real game, opened and looked at, in `implementation/shots/0245/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0253 - The Harvester
-
-Ready to pick up.  Likely files: `src/core/enemies.gd, src/core/game_data.gd, src/ui/enemy_motion.gd, src/ui/world_view.gd, src/ui/night_hud.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-Summer's boss: a possessed machine that winds up and charges in a straight line, flattening the walls in its row. It tests defence in depth - one thick wall is a speed bump, layers are a defence.
-
-- `ENEMIES.harvester` with `is_boss` and `# LEVER`s: hp, armour, walking `ticks_per_tile`, damage, reward, `telegraph_ticks`, `charge_every_ticks`, `charge_tiles`, `charge_ticks_per_tile`, `crush_damage`; `check_enemies` refuses a charger missing any of them or with a zero; it passes 0246's 'every boss outlasts every non-boss' asserts
-- The charge, in `Enemies` (inside `Enemies.tick`, `PerfNames` unchanged): every `charge_every_ticks` it stops and winds up with the line fixed when the wind-up starts - the row or column towards the house centre along the dominant axis, ties to the row - then moves along it at `charge_ticks_per_tile`, ignoring the flow field. `telegraph_ticks` already times the wind-up before every gnaw and at the house (`_gnaw`, `_swung_at_the_house`): reuse it for the charge or add `charge_windup_ticks`, and say which
-- Every structure entered takes `crush_damage` through `Farm.damage`; it carries on through what it destroys and stops at the first that survives, at impassable terrain, at `charge_tiles` or at the house (a bite), then walks and gnaws as usual. Set the numbers so a stone wall falls and the wall's hardwood level (0231's `TOWER_LEVELS` row, read through `Building.entry_at`) holds a charge, and state them
-- `Enemies.charge_line(state, id)` returns the telegraphed cells for the view and the tests; the wind-up goes through `is_winding`/`winding_at` so the 0246 bar flashes
-- Destroyed walls rebuild the fields at most once a tick (they are rebuilt lazily by `Pathing.refresh`; assert one rebuild after a charge crushes three walls in one tick)
-- Summer's day-14 boss: `GameData.SEASON_BOSSES[1]` (0153's table) becomes `&"harvester"`, and any 0153-0160 group or shot scenario that put a Giant on Summer 14 is rewritten in place; its 0246 intro `BOSS_INTRO_HARVESTER`; Names.KEYS `harvester`, `ENEMY_HARVESTER`/`.other` (harvester/harvesters, colheitadeira/colheitadeiras) and `DESC_CHARGES` ('charges in a straight line' / 'investe em linha reta'); `Sfx.ENEMY_SOUNDS.harvester` borrows `sfx/roar_giant` (0246 made `Sfx` boss-generic) until 0284
-- On screen: a strip on the telegraphed cells during the wind-up (view only) and the boss through 0120's placeholder road at the Giant's 80x64 pivot (40,60), with its forecast mark, until A052 is integrated by 0266
-- Hashes: DATA moves (ENEMIES, SEASON_BOSSES); SIM should not - the determinism night is Spring 1
-
-  - done when: `_task_0253_harvester` in `src/tools/headless_v1.gd`: the line is fixed when the wind-up starts and the wind-up lasts exactly the levers' ticks; three stone layers lose what the levers say and a structure with more hp than `crush_damage` stops the charge; it never leaves the map or crosses water
-  - done when: The same group: sealed in, it still reaches the house, and killing it moves `bosses_down_of(state, &"harvester")`
-  - done when: `python tools/shot.py 0253 harvester` (wind-up with its strip, and the line after the charge) opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A052-harvester.md` states the final geometry this task settled (80x64, or up to 112x80 if justified)
-
 ### 0254 - The Scarecrow King
 
 Ready to pick up.  Likely files: `src/core/enemies.gd, src/core/game_data.gd, src/ui/enemy_motion.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
@@ -728,6 +708,24 @@ The wraith as Codex drew it, in place of 0252's stand-in, fading in and out of t
   - done when: FHD (1920x1080) captures in the real game by day (the head in the dusk forecast) and by night (one in the searchlight beam, one outside it), opened and looked at, in `implementation/shots/0265/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
+### 0266 - Art: the Harvester
+
+Waits for Codex art A052.  Likely files: `assets/art_source/enemies/harvester/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_giant_art.py, tools/gen_sprites.py, src/tools/headless_check.gd, src/tools/giant_showcase.gd, src/ui/enemy_motion.gd`.
+
+The Harvester as Codex drew it, in place of 0253's stand-in: the wind-up you learn to fear and the charge that follows it.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A052` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A052-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/enemies/harvester/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`gen_sprites.migrated_enemies()`, 0246's boss table in `check_giant_art.py`, `ArtPlacement` if the canvas is larger than 80x64).
+- At the canvas 0253 settled (80x64 pivot (40,60), or up to 112x80): `harvester` master, `harvester_walk_0..3` (move), `harvester_windup_0..2`, the charge/crush frames, `harvester_death_0..4`, the wreck debris and the forecast mark; 0246's boss path picks the windup on the telegraph and the charge frames while 0253's charge runs
+- Replace 0253's placeholders in 0120's registry; the telegraph strip on the ground stays code. The first boss leaf to land (0266-0268, any order) rewrites `_task_0074_zombie_art`'s 'the Giant is the biggest thing on the field' as 'every boss outsizes every non-boss'
+- Set the pack to integrated: `python implementation/backlog/assets.py set A052 integrated`.
+
+  - done when: `python tools/check_giant_art.py` and `python tools/show_art.py --boss=harvester --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures in the real game by day (the mark in the dusk forecast) and by night (wind-up with the strip, and mid-charge), opened and looked at, in `implementation/shots/0266/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
 ### 0281 - The new day's sounds
 
 Ready to pick up.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -844,7 +842,7 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
 
 ### 0255 - The Winter Lord
 
-Waits on 0253, 0254.  Likely files: `src/core/enemies.gd, src/core/towers.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0254.  Likely files: `src/core/enemies.gd, src/core/towers.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 The last night of the year: a lord of ice whose cast freezes every tower around it. It tests the whole build - spread, depth, light and the powers - and its fall is the ending.
 
@@ -877,24 +875,6 @@ A rare red night from autumn on: the horde comes back stronger and pays in essen
   - done when: `_task_0257_blood_moon` in `src/tools/headless_v1.gd`: over seeds 0-49 and dates 1-56 (pure calls) no Blood Moon falls in spring, summer or on a boss night, and the autumn and winter counts are printed; on one, a walker spawns with the scaled hp and `full_hp` reads it; winning pays the extra essence, once
   - done when: `python tools/shot.py 0257 forecast_blood_moon --fhd` (a new scenario that finds a Blood Moon (seed, date) through `Weather.event`) shows it in the forecast, opened and looked at
   - done when: the Deliverables table of `implementation/backlog/packs/A055-event-icons.md` states the final geometry this task settled (fog, rain and Blood Moon at 16x16 and 10x10)
-
-### 0266 - Art: the Harvester
-
-Waits on 0253.  Likely files: `assets/art_source/enemies/harvester/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_giant_art.py, tools/gen_sprites.py, src/tools/headless_check.gd, src/tools/giant_showcase.gd, src/ui/enemy_motion.gd`.
-
-The Harvester as Codex drew it, in place of 0253's stand-in: the wind-up you learn to fear and the charge that follows it.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A052` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A052-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/enemies/harvester/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`gen_sprites.migrated_enemies()`, 0246's boss table in `check_giant_art.py`, `ArtPlacement` if the canvas is larger than 80x64).
-- At the canvas 0253 settled (80x64 pivot (40,60), or up to 112x80): `harvester` master, `harvester_walk_0..3` (move), `harvester_windup_0..2`, the charge/crush frames, `harvester_death_0..4`, the wreck debris and the forecast mark; 0246's boss path picks the windup on the telegraph and the charge frames while 0253's charge runs
-- Replace 0253's placeholders in 0120's registry; the telegraph strip on the ground stays code. The first boss leaf to land (0266-0268, any order) rewrites `_task_0074_zombie_art`'s 'the Giant is the biggest thing on the field' as 'every boss outsizes every non-boss'
-- Set the pack to integrated: `python implementation/backlog/assets.py set A052 integrated`.
-
-  - done when: `python tools/check_giant_art.py` and `python tools/show_art.py --boss=harvester --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures in the real game by day (the mark in the dusk forecast) and by night (wind-up with the strip, and mid-charge), opened and looked at, in `implementation/shots/0266/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0267 - Art: the Scarecrow King
 
@@ -949,7 +929,7 @@ Fog that looks like fog, rain you can see, a red moon that makes the farm look w
 
 ### 0259 - Every weapon has its night
 
-Waits on 0253, 0254, 0255, 0256, 0257.  Likely files: `src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md`.
+Waits on 0254, 0255, 0256, 0257.  Likely files: `src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md`.
 
 The plan's test for phases 4 and 5 turned into numbers: every weapon is the best buy somewhere, and every enemy needs a different answer. The report is what the night authors of 0270-0274 build the year from.
 
@@ -1023,7 +1003,7 @@ The year stops being ten written nights plus a curve and becomes tables a design
 
 ### 0284 - The new enemies and bosses, heard
 
-Waits on 0253, 0254, 0255, 0257.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0254, 0255, 0257.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Six new enemies and three new bosses each get a voice of their own, so a night heard with your eyes shut still says what is coming. View only: neither hash moves, and no state key is added to be heard. (The night events' stingers moved to 0286, beside the event beds, so this fits one invocation.)
 
@@ -1059,7 +1039,7 @@ The bed under everything follows the weather and the season: fog and rain on the
 
 ### 0287 - Collections and achievements
 
-Waits on 0253, 0254, 0255.  Likely files: `src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md`.
+Waits on 0254, 0255.  Likely files: `src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md`.
 
 The plan's reason to start Year 2: four collections - fish, crops, the bosses' trophies and a year without losing the house - and a short list of achievements, kept in the profile across runs and shown on one screen.
 
@@ -1117,7 +1097,7 @@ The book cover, the four boss trophies and the achievement badges Codex drew rep
 
 ### 0272 - Summer's fourteen nights
 
-Waits on 0270, 0253, 0259, 0271.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
+Waits on 0270, 0259, 0271.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
 
 Summer opens the second side and brings the first enemies that change what a spring defence is worth: the spitter shoots towers from range, the rats come in numbers that mines and fire love, and on day 28 the Harvester charges straight through the walls.
 
@@ -1692,7 +1672,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - waits for art A045
 - [ ] **0245** [Art: the dog](prompts/0245-art-dog.md) - waits for art A028
 
-## 14 - Enemies and bosses  (7/24)
+## 14 - Enemies and bosses  (8/24)
 
 - [x] **0246** [Bosses in general](prompts/0246-bosses-general.md)
 - [x] **0247** [The spitter](prompts/0247-spitter.md)
@@ -1701,20 +1681,20 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0250** [The digger](prompts/0250-digger.md)
 - [x] **0251** [The frost zombie](prompts/0251-frost-zombie.md)
 - [x] **0252** [The wraith](prompts/0252-wraith.md)
-- [ ] **0253** [The Harvester](prompts/0253-harvester.md)
+- [x] **0253** [The Harvester](prompts/0253-harvester.md)
 - [ ] **0254** [The Scarecrow King](prompts/0254-scarecrow-king.md)
-- [ ] **0255** [The Winter Lord](prompts/0255-winter-lord.md) - needs 0253, 0254
+- [ ] **0255** [The Winter Lord](prompts/0255-winter-lord.md) - needs 0254
 - [ ] **0256** [Fog and rain](prompts/0256-fog-and-rain.md)
 - [ ] **0257** [The Blood Moon](prompts/0257-blood-moon.md) - needs 0256
 - [ ] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md) - needs 0256, 0257
-- [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md) - needs 0253, 0254, 0255, 0256, 0257
+- [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md) - needs 0254, 0255, 0256, 0257
 - [ ] **0260** [Art: the spitter](prompts/0260-art-spitter.md) - waits for art A046
 - [ ] **0261** [Art: the rat swarm](prompts/0261-art-rats.md) - waits for art A047
 - [ ] **0262** [Art: the crow](prompts/0262-art-crow.md) - waits for art A048
 - [ ] **0263** [Art: the digger](prompts/0263-art-digger.md) - waits for art A049
 - [ ] **0264** [Art: the frost zombie](prompts/0264-art-frost-zombie.md) - waits for art A050
 - [ ] **0265** [Art: the wraith](prompts/0265-art-wraith.md) - waits for art A051
-- [ ] **0266** [Art: the Harvester](prompts/0266-art-harvester.md) - needs 0253 - waits for art A052
+- [ ] **0266** [Art: the Harvester](prompts/0266-art-harvester.md) - waits for art A052
 - [ ] **0267** [Art: the Scarecrow King](prompts/0267-art-scarecrow-king.md) - needs 0254 - waits for art A053
 - [ ] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md) - needs 0255 - waits for art A054
 - [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md) - needs 0256, 0257 - waits for art A055
@@ -1723,7 +1703,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 - [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0256, 0257
 - [ ] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md) - needs 0270
-- [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0253, 0259, 0271
+- [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0259, 0271
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0254, 0259, 0272
 - [ ] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md) - needs 0270, 0255, 0259, 0273
 - [ ] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md) - needs 0274
@@ -1738,10 +1718,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md)
 - [ ] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md)
 - [ ] **0283** [The guardian's sounds](prompts/0283-sfx-night-v2.md)
-- [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0253, 0254, 0255, 0257
+- [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0254, 0255, 0257
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0282
 - [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0256, 0257, 0285
-- [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0253, 0254, 0255
+- [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0254, 0255
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
 - [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288

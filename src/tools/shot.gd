@@ -147,6 +147,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
+	["harvester", "the Harvester's charge: Summer 14's night, three layers of stone wall and one of hardwood across open ground east of the house, the Harvester before them winding up with its strip over the line by the shutter; then harvester_after, the line its charge left - a corridor through the stone, the hardwood holding", ""],
 	["wraith", "wraiths in the light and out of it: Winter 2's night, a searchlight and a gun tower on open snow south-east of the house, one wraith in the lamp's square - solid, a target - and one out in the dark - faint, never gone", ""],
 	["frost", "towers chilled by a frost zombie's burst: Winter 2's night, four gun towers in a row on open snow south-east of the house and a frost zombie killed between the first two by the shutter - those two frosted, the other two not, the ice burst at its widest, and two more frost zombies coming in from the east", ""],
 	["digger", "a digger under a fence: Autumn 2's night, a fence laid across a digger's road home over open ground east of the house, and the digger under it by the shutter - a mound of soil beneath the rails, no body above, the fence untouched", ""],
@@ -804,6 +805,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"digger": _set_digger(state)
 		"frost": _set_frost(state)
 		"wraith": _set_wraith(state)
+		"harvester": _set_harvester(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -975,6 +977,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "days":
 		await _shoot("days_spring_morning", folder)
 		await _take_days(main, state, folder)
+		return
+	if name == "harvester":
+		await _shoot("harvester", folder)
+		await _take_harvester_after(main, state, folder)
 		return
 	if name == "tarps":
 		await _shoot("tarps", folder)
@@ -1162,6 +1168,18 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				str(Entities.cell_of(state, _boss_giant)), Enemies.is_winding(state, _boss_giant),
 				str(Enemies.winding_at(state, _boss_giant)),
 				int(state["house_hp"]), (main.find_child("NightHud", true, false) as NightHud).banner_text()])
+		"harvester":
+			# **Winding up before the layers** (task 0253): set down at the
+			# shutter, its clock run out, a third of a second into its rear.
+			_harvester = Entities.spawn(state, &"harvester", _harvester_from)
+			(Entities.get_one(state, _harvester))["charge_in"] = 1
+			Sim.advance(state, 10)
+			# The cursor and its label clear of the line.
+			(main.get_node("%WorldView") as WorldView).cursor().place_at(
+				_open_ground_near(state, _harvester_from + Vector2i(-2, 5)))
+			print("  harvester: winding %s, %d ticks left of it, the line %s" % [
+				Enemies.is_winding(state, _harvester), int(Entities.get_one(state, _harvester).get("chew_wait", 0)),
+				str(Enemies.charge_line(state, _harvester))])
 		"wraith":
 			# **One in the beam and one out of it** (task 0252), set down at the
 			# shutter so the settle walks neither out of its light.
@@ -3290,6 +3308,62 @@ func _set_digger(state: Dictionary) -> void:
 	_digger = Entities.spawn(state, &"digger", start)
 	print("  digger: from %s, the fence across its road at %s" % [str(start), str(_digger_fence)])
 	_look_at(_digger_fence)
+
+
+## **The Harvester's charge** (task 0253): Summer 14's night, parked: across
+## open ground east of the house, on the line from where it will stand
+## to the house, three layers of stone wall - its second, third and fourth
+## cells - and one of hardwood on its sixth, each three cells wide. By the
+## shutter it stands before them winding up (`_just_before_the_shutter`);
+## `harvester_after` is the line its charge left (`_take_harvester_after`).
+func _set_harvester(state: Dictionary) -> void:
+	_on_date(state, 2 * GameData.SEASON_DAYS)
+	# East of the house, level with it, so the line runs west along a row: the
+	# first take ran north, and the machine stood in front of the hardwood it
+	# had stopped at.
+	var middle := _clear_patch(state, Farm.house_centre(state) + Vector2i(15, 0), 4)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	_harvester_from = middle + Vector2i(3, 0)
+	var dir := Enemies.charge_direction(state, _harvester_from)
+	var across := Vector2i(dir.y, dir.x)
+	var stone := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
+	var laid := 0
+	for k in [2, 3, 4, 6]:
+		for j in [-1, 0, 1]:
+			var at: Vector2i = _harvester_from + dir * int(k) + across * int(j)
+			var wall := {"id": &"wall", "hp": stone} if k < 6 else {"id": &"wall",
+				"hp": Building.levelled_stat({"id": &"wall", "level": 2}, "hp"), "level": 2}
+			if Farm.place(state, at, wall):
+				laid += 1
+	Pathing.refresh(state)
+	print("  harvester: from %s towards %s, %d walls laid" % [str(_harvester_from), str(dir), laid])
+	_look_at(_harvester_from + dir * 3)
+
+
+## Where `_set_harvester` stands the Harvester, and the one it set down.
+var _harvester_from := Vector2i.ZERO
+var _harvester := 0
+
+
+## **The line its charge left** (task 0253): the charge run out, a few frames
+## for the view to see the wrecks, and `harvester_after`.
+func _take_harvester_after(main: Node, state: Dictionary, folder: String) -> void:
+	for _i in 300:
+		var one := Entities.get_one(state, _harvester)
+		if one.is_empty() or not one.has("charge_dir"):
+			break
+		Sim.advance(state, 1)
+	var dir := Enemies.charge_direction(state, _harvester_from)
+	var standing: Array = []
+	for k in [2, 3, 4, 6]:
+		standing.append("%d:%d" % [k, int(Farm.occupant(state, _harvester_from + dir * int(k)).get("hp", 0))])
+	print("  harvester_after: stopped at %s, the line's walls %s" % [str(Entities.cell_of(state, _harvester)),
+		", ".join(standing)])
+	for _i in 6:
+		await process_frame
+	await _shoot("harvester_after", folder)
 
 
 ## **Wraiths in the light and out of it** (task 0252): Winter 2's night, a

@@ -109,6 +109,8 @@ const ENEMY_SOUNDS := {
 	&"frost_zombie": &"sfx/groan_tank",
 	# The walker's, until 0284 gives the wraith its own.
 	&"wraith": &"sfx/groan_walker",
+	# The Giant's roar, until 0284 gives the Harvester its engine.
+	&"harvester": &"sfx/roar_giant",
 }
 
 ## **What a boss with no voice of its own roars with** (task 0246): the

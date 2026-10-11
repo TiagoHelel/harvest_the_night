@@ -79,6 +79,24 @@ extends RefCounted
 ## barrier loses nothing. On open ground it is a walker again, and a wall or
 ## the house it gnaws and bites as one.
 ##
+## ## Charging
+##
+## A **charger** (task 0253's Harvester) has `charge_tiles`. Every
+## `charge_every_ticks` it spends rolling and gnawing (`charge_in` counts them
+## down) it stops and winds up for `telegraph_ticks` - its one tell, the one
+## before a gnaw - through `winding_at` and `chew_wait`, so everything that
+## shows a wind-up shows this one. The line is fixed when the wind-up starts
+## (`charge_from`, `charge_dir`): the row or column from where it stands
+## towards the house centre along the dominant axis, ties to the row. Then it
+## runs the line at `charge_ticks_per_tile`, ignoring the field
+## (`charge_left`). Every structure it enters takes `crush_damage` through
+## `Farm.damage`: it carries on through what that brings down and stops at the
+## first that holds, at the map's edge, at ground nothing crosses, at what it
+## cannot crush (a tree, the stall), after `charge_tiles`, or at the house -
+## with a bite, which spends it as any bite does. Then it rolls and gnaws as
+## before, its clock started again. The walls it brings down rebuild the
+## fields once, at the next `Pathing.refresh`, however many fell.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -343,6 +361,11 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	# in the air as it holds a walker on the ground.
 	if bool(data.get("flies", false)):
 		_fly(state, id, data)
+		return
+
+	# **A charger winds up and charges** (task 0253): while either lasts it
+	# is all it does, and its clock to the next runs while it rolls and gnaws.
+	if int(data.get("charge_tiles", 0)) > 0 and _charging(state, id, data, one):
 		return
 
 	# **Standing on it counts.** The flow field says distance zero at the house
@@ -720,6 +743,170 @@ static func _fly(state: Dictionary, id: int, data: Dictionary) -> void:
 		return
 	if at == goal:
 		one["peck"] = maxi(int(data["peck_ticks"]), 1)
+
+
+# ------------------------------------------------------------------ charging
+
+## What a charge meets on a cell (task 0253): nothing it can go on into - the
+## map's edge, ground nothing crosses, what it cannot crush; open ground,
+## rubble or something walked over; one of the player's structures; the house.
+const CHARGE_STOP := 0
+const CHARGE_ON := 1
+const CHARGE_CRUSH := 2
+const CHARGE_HOUSE := 3
+
+
+## **A charger's turn** (task 0253): true while it winds up or runs its line -
+## all it does this tick - and false while it rolls and gnaws, its clock to
+## the next wind-up running down. The wind-up ends on its last tick with the
+## run's first: `telegraph_ticks` of winding, not one more.
+static func _charging(state: Dictionary, id: int, data: Dictionary, one: Dictionary) -> bool:
+	if one.has("charge_left"):
+		_run_the_charge(state, id, data, one)
+		return true
+	if one.has("charge_dir"):
+		var wait := int(one.get("chew_wait", 0)) - 1
+		one["chew_wait"] = maxi(wait, 0)
+		if wait > 0:
+			return true
+		one.erase("winding_at")
+		one["charge_left"] = int(data["charge_tiles"])
+		_run_the_charge(state, id, data, one)
+		return true
+	var due := int(one.get("charge_in", int(data["charge_every_ticks"])))
+	if due > 1:
+		one["charge_in"] = due - 1
+		return false
+	var here := Vector2i(int(one["pos"][0]) / Player.SUBTILE, int(one["pos"][1]) / Player.SUBTILE)
+	var dir := charge_direction(state, here)
+	# On the house it bites instead; it charges when it is off it.
+	if dir == Vector2i.ZERO or Farm.occupant(state, here).get("id", &"") == &"house":
+		one["charge_in"] = 1
+		return false
+	# **The line, fixed now**: from here, towards the house.
+	one.erase("charge_in")
+	one["charge_from"] = Grid.index(here)
+	one["charge_dir"] = [dir.x, dir.y]
+	one["winding_at"] = Grid.index(here + dir)
+	one["chew_wait"] = maxi(int(data.get("telegraph_ticks", 0)), 1)
+	return true
+
+
+## **The way a charge from `cell` goes** (task 0253): one step towards the
+## house centre along the dominant axis, the row on a tie; nothing from the
+## house centre itself.
+static func charge_direction(state: Dictionary, cell: Vector2i) -> Vector2i:
+	var delta := Farm.house_centre(state) - cell
+	if delta == Vector2i.ZERO:
+		return Vector2i.ZERO
+	if absi(delta.x) >= absi(delta.y):
+		return Vector2i(signi(delta.x), 0)
+	return Vector2i(0, signi(delta.y))
+
+
+## **What a charge meets on `cell`** (task 0253): `CHARGE_STOP` at the map's
+## edge, on ground nothing crosses and at anything it cannot crush - a tree, a
+## rock, the stall; `CHARGE_ON` over open ground, rubble or something walked
+## over (a mine, a sprinkler, bait); `CHARGE_CRUSH` at one of the player's
+## structures; `CHARGE_HOUSE` at the house.
+static func charge_meets(state: Dictionary, cell: Vector2i) -> int:
+	if not Grid.in_bounds(cell) or Farm.cost_of_terrain(Farm.terrain_at(state, cell)) <= 0:
+		return CHARGE_STOP
+	var on := Farm.occupant(state, cell)
+	if on.is_empty():
+		return CHARGE_ON
+	var kind := StringName(on["id"])
+	if kind == &"house":
+		return CHARGE_HOUSE
+	if Traps.is_trap(kind) or Building.walked_over(kind):
+		return CHARGE_ON
+	if Building.entry_of(kind) == null or Farm.FIXTURES.has(kind):
+		return CHARGE_STOP
+	return CHARGE_CRUSH
+
+
+## **One tick of a charge** (task 0253): along its line at
+## `charge_ticks_per_tile`, the remainder carried as a walk carries it, and
+## each cell asked before it is entered. A structure there takes
+## `crush_damage` and lets it on only if that brought it down; the house takes
+## a bite, which spends it; anything else that stops it, or the last of its
+## `charge_tiles`, ends the charge where it stands.
+static func _run_the_charge(state: Dictionary, id: int, data: Dictionary, one: Dictionary) -> void:
+	var dir := Vector2i(int(one["charge_dir"][0]), int(one["charge_dir"][1]))
+	var per_tile := maxi(int(data["charge_ticks_per_tile"]), 1)
+	var progress := int(one["step"]) + Player.SUBTILE
+	var move := progress / per_tile
+	one["step"] = progress - move * per_tile
+	var at := Vector2i(int(one["pos"][0]), int(one["pos"][1]))
+	var over := false
+	for _i in move:
+		var to := at + dir
+		# Off the map's top or left edge: no cell of it.
+		if to.x < 0 or to.y < 0:
+			over = true
+			break
+		var here := Vector2i(at.x / Player.SUBTILE, at.y / Player.SUBTILE)
+		var into := Vector2i(to.x / Player.SUBTILE, to.y / Player.SUBTILE)
+		if into != here:
+			if int(one["charge_left"]) <= 0:
+				over = true
+				break
+			var meets := charge_meets(state, into)
+			if meets == CHARGE_HOUSE:
+				_bite(state, id, data)
+				return
+			if meets == CHARGE_STOP:
+				over = true
+				break
+			if meets == CHARGE_CRUSH:
+				Farm.damage(state, into, int(data["crush_damage"]))
+				if not Farm.occupant(state, into).is_empty():
+					over = true
+					break
+			one["charge_left"] = int(one["charge_left"]) - 1
+		at = to
+	one["pos"][0] = at.x
+	one["pos"][1] = at.y
+	if over:
+		_end_charge(one, data)
+
+
+## A charge over (task 0253): back to rolling and gnawing, the wind-up's marks
+## gone - the next blow winds up afresh - and the clock to the next started.
+static func _end_charge(one: Dictionary, data: Dictionary) -> void:
+	for key in ["charge_from", "charge_dir", "charge_left", "winding_at", "chew_wait"]:
+		one.erase(key)
+	one["charge_in"] = int(data["charge_every_ticks"])
+
+
+## **The cells a charger's line telegraphs** (task 0253), in the order it
+## enters them: from where the line was fixed, while it winds up or runs -
+## `charge_tiles` long, cut at what stops it, and ending at the house or at
+## the first structure that would hold. For the view's strip and the tests;
+## empty for anything not charging.
+static func charge_line(state: Dictionary, id: int) -> Array:
+	var one := Entities.get_one(state, id)
+	if one.is_empty() or not one.has("charge_dir"):
+		return []
+	var data: Dictionary = GameData.ENEMIES[one["kind"]]
+	var dir := Vector2i(int(one["charge_dir"][0]), int(one["charge_dir"][1]))
+	var at := Grid.cell(int(one["charge_from"]))
+	var out: Array = []
+	for _i in int(data["charge_tiles"]):
+		at += dir
+		var meets := charge_meets(state, at)
+		if meets == CHARGE_STOP:
+			break
+		out.append(at)
+		if meets == CHARGE_HOUSE or (meets == CHARGE_CRUSH
+				and int(Farm.occupant(state, at).get("hp", 0)) > int(data["crush_damage"])):
+			break
+	return out
+
+
+## Whether this one is running a charge's line (task 0253).
+static func is_charging(state: Dictionary, id: int) -> bool:
+	return Entities.get_one(state, id).has("charge_left")
 
 
 ## Whether a telegraphing enemy has finished winding up at the house. True at
