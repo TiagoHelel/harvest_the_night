@@ -255,6 +255,13 @@ static func kits(state: Dictionary, id: StringName) -> int:
 	return int((state["kits"] as Dictionary).get(id, 0))
 
 
+## Put `n` on the pile: a finished job's, or one a placing that could not
+## finish hands back (task 0234).
+static func bank_kit(state: Dictionary, id: StringName, n: int = 1) -> void:
+	var all: Dictionary = state["kits"]
+	all[id] = int(all.get(id, 0)) + n
+
+
 ## Take one off the pile. Build mode calls this; it refuses rather than going
 ## negative, the same way the ledger does.
 static func take_kit(state: Dictionary, id: StringName) -> bool:
@@ -515,5 +522,4 @@ static func _deliver(state: Dictionary, recipe_id: StringName) -> void:
 		elif GameData.RESOURCES.has(id):
 			Resources.add(state, id, n)
 		else:
-			var all: Dictionary = state["kits"]
-			all[id] = int(all.get(id, 0)) + n
+			bank_kit(state, id, n)

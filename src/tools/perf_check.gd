@@ -252,10 +252,15 @@ func _the_swarm(night: Dictionary) -> Dictionary:
 		push_error("perf_check: no open ground round the towers for the swarm")
 		return state
 	Resources.gain(state, {GameData.STRAW: 100, GameData.WOOD: 100})
+	# **Summer's straw on Spring 14's night** (task 0234): the calendar opened
+	# for the placing and put back, so the night measured is still the boss's.
+	var day := int(state["day"])
+	SuiteKit.open_arsenal(state, [&"decoy"])
 	for k in DECOYS:
 		var spot: Vector2i = open[open.size() * (k + 1) / (DECOYS + 1)]
 		if Building.place(state, &"decoy", spot):
 			Farm.occupant(state, spot)["hp"] = DECOY_HP
+	state["day"] = day
 	# The lure built with the fields every night walks by, as they are: what
 	# a rebuild costs is `lure_refresh`'s line, not the swarm's first tick.
 	Pathing.refresh(state)
@@ -277,9 +282,13 @@ func _with_garlic(night: Dictionary) -> Dictionary:
 		hi = Vector2i(maxi(hi.x, cell.x), maxi(hi.y, cell.y))
 	var open := _open_round(state, lo, hi)
 	Resources.gain(state, {GameData.GARLIC: 200, GameData.WOOD: 100})
+	# Autumn's braids on Spring 14's night, as the swarm's straw (task 0234).
+	var day := int(state["day"])
+	SuiteKit.open_arsenal(state, [&"garlic_braid"])
 	for k in GARLIC_BRAIDS:
 		if not open.is_empty():
 			Building.place(state, &"garlic_braid", open[open.size() * (k + 1) / (GARLIC_BRAIDS + 1)])
+	state["day"] = day
 	return state
 
 

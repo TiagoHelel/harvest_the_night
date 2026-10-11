@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 51
+const V1_CASES := 52
 
 
 func _process(delta: float) -> bool:
@@ -101,6 +101,7 @@ func _run() -> void:
 	await _case_0224_decoy()
 	await _case_0225_bait()
 	await _case_0233_powers()
+	await _case_0234_hotbar_pages()
 	_finish()
 
 
@@ -732,13 +733,24 @@ func _case_0133_hotbar() -> void:
 	var bare: Array = []
 	for id in [&"gun_tower", &"auto_crossbow", &"flame_tower", &"mortar", &"mine",
 			&"fence", &"wall", &"barricade"]:
+		# On its season's page (task 0234): summer's flamethrower and autumn's
+		# mortar are turned to.
 		var slot := locate_control("Hotbar_%s" % id)
+		for _turn in hotbar.pages().size():
+			if slot != null:
+				break
+			hotbar.turn(1)
+			await frames(2)
+			slot = locate_control("Hotbar_%s" % id)
 		var icon: TextureRect = slot.get_node_or_null("Icon") as TextureRect if slot != null else null
 		if icon == null or icon.texture == null \
 				or icon.texture.resource_path != "res://sprites/ui/icon_%s.png" % id \
 				or icon.texture.get_size() != Vector2(16, 16) or icon.size != Vector2(16, 16):
 			bare.append(id)
-	expect(bare.is_empty(), "every A005 defence's slot wears its own 16x16 icon", str(bare))
+	while hotbar.page() != 0:
+		hotbar.turn(1)
+		await frames(2)
+	expect(bare.is_empty(), "every A005 defence's slot wears its own 16x16 icon, on its season's page", str(bare))
 
 	# **The number keys**: slot_2 is the second defence, and not a seed.
 	await tap_key(KEY_2)
@@ -937,6 +949,108 @@ func _case_0135_flare_aim() -> void:
 	await until(func() -> bool: return Ability.used(state, Ability.FLARE) > 1, "the armed flare to go off")
 	expect(Ability.aimed_at(state, Ability.FLARE) == [target.x, target.y] and not cursor.is_armed(),
 		"and the next click flares the clicked cell", str(Ability.aimed_at(state, Ability.FLARE)))
+	await close_scene()
+	_completed += 1
+
+
+## 0234 - the hotbar a page a season. Autumn 2's build step: the hotbar
+## opens on spring's page with nothing picked; the page turner's arrow turns
+## it to summer's and to autumn's with a click, picking nothing; a click on
+## the catapult picks it and one on the farm puts it down, paid in wood,
+## pumpkins and money. The bumper steps on through the slots to winter's page,
+## greyed and its season dim - still shut in autumn - and Escape puts it away,
+## back on spring's. Every price on every page fits its slot, in both
+## languages.
+func _case_0234_hotbar_pages() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	state["day"] = 2 * GameData.SEASON_DAYS + 2
+	Resources.gain(state, {GameData.WOOD: 200, GameData.PUMPKIN: 20, GameData.MONEY: 300})
+	NightRoad.into_build(state)
+	world.skip_transition()
+	var hotbar := locate_control("Hotbar") as Hotbar
+	await until(func() -> bool: return hotbar != null and hotbar.visible and locate_control("Hotbar_gun_tower") != null,
+		"spring's page")
+	expect(hotbar.page() == 0 and (hotbar.pages()[0] as Array).has(&"gun_tower") and hotbar.pages().size() == 4
+		and Building.selected(state) == &"" and locate_control("Hotbar_catapult") == null,
+		"the build step opens the hotbar on spring's page, nothing picked", str(hotbar.pages()))
+
+	# **The arrow**: a click a page, nothing picked.
+	await click_control("HotbarNext")
+	await until(func() -> bool: return locate_control("Hotbar_decoy") != null, "summer's page")
+	await click_control("HotbarNext")
+	await until(func() -> bool: return locate_control("Hotbar_catapult") != null, "autumn's page")
+	var season := locate_control("HotbarSeason") as Label
+	expect(hotbar.page() == 2 and season != null and season.text == Names.of(&"autumn")
+		and Building.selected(state) == &"" and locate_control("Hotbar_gun_tower") == null,
+		"the page turner's arrow turns to summer's and to autumn's with a click, picking nothing",
+		season.text if season != null else "none")
+
+	# **An autumn defence in autumn**: picked with a click, put down with one.
+	await click_control("Hotbar_catapult")
+	await until(func() -> bool: return Building.selected(state) == &"catapult", "the catapult")
+	var spot := Vector2i(-1, -1)
+	var middle := world.screen_to_cell(Vector2(240.0, 120.0))
+	for radius in 6:
+		for candidate in Grid.within(middle, radius):
+			if spot.x < 0 and Building.why_not(state, &"catapult", candidate).is_empty():
+				spot = candidate
+	var money := Resources.amount(state, GameData.MONEY)
+	await click_cell(spot)
+	await until(func() -> bool: return StringName(Farm.occupant(state, spot).get("id", &"")) == &"catapult",
+		"the catapult to go down")
+	expect(StringName(Farm.occupant(state, spot).get("id", &"")) == &"catapult"
+		and Resources.amount(state, GameData.MONEY) == money - Building.money_of(&"catapult"),
+		"an autumn defence goes down in autumn, its money paid with its wood and pumpkins", str(spot))
+
+	# **The bumper steps on through the slots** - the mortar, then winter's
+	# first - and winter's page is greyed, its season dim.
+	await _pad_tap(JOY_BUTTON_RIGHT_SHOULDER)
+	await _pad_tap(JOY_BUTTON_RIGHT_SHOULDER)
+	await until(func() -> bool: return hotbar.page() == 3 and locate_control("Hotbar_searchlight") != null,
+		"winter's page")
+	var lamp := locate_control("Hotbar_searchlight") as Control
+	expect(lamp != null and lamp.modulate == Hotbar.FADED and season.theme_type_variation == UiKit.DIM
+		and Building.why_not(state, &"searchlight", spot + Vector2i(0, 3))[0] == &"WHY_NOT_YET_SEASON",
+		"the bumper steps on through the slots to winter's page, greyed and its season dim - still shut in autumn",
+		str(Building.selected(state)))
+	await tap_key(KEY_ESCAPE)
+	await until(func() -> bool: return hotbar.page() == 0 and locate_control("Hotbar_gun_tower") != null, "spring's page")
+	expect(Building.selected(state) == &"" and hotbar.page() == 0,
+		"and Escape puts it away, back on spring's page")
+
+	# **Every price fits its slot**, on every page and in both languages; and
+	# every season's name its place on the page turner.
+	var wide: Array = []
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		for page in hotbar.pages().size():
+			await frames(2)
+			for id in (hotbar.pages()[hotbar.page()] as Array):
+				var price := locate_control("Hotbar_%s" % id).get_node_or_null("Price") as Label
+				if price == null:
+					wide.append("%s missing" % id)
+					continue
+				var font := price.get_theme_font(&"font")
+				var size := price.get_theme_font_size(&"font_size")
+				for line in price.text.split("\n"):
+					if font.get_string_size(line, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x > Hotbar.SLOT.x:
+						wide.append("%s %s: %s" % [locale, id, line])
+			var named := locate_control("HotbarSeason") as Label
+			if named.get_theme_font(&"font").get_string_size(named.text, HORIZONTAL_ALIGNMENT_LEFT, -1,
+					named.get_theme_font_size(&"font_size")).x > named.size.x:
+				wide.append("%s %s" % [locale, named.text])
+			hotbar.turn(1)
+	I18n.use("en")
+	expect(wide.is_empty(), "every price fits its slot on every page, and every season's name the page turner, in both languages",
+		str(wide))
 	await close_scene()
 	_completed += 1
 
@@ -3567,10 +3681,10 @@ func _case_0222_fertilise() -> void:
 	_completed += 1
 
 
-## 0224 - a decoy put down with the cursor at night. Q, the previous slot,
-## picks it from nothing - the last defence, alone on the hotbar's second page,
-## wearing its drawing - a click on open ground puts it there for its straw,
-## and a bite makes it lean.
+## 0224 - a decoy put down with the cursor at night, on Summer 2's: the page
+## turner's arrow turns the hotbar to summer's page (task 0234) and a click
+## picks the decoy, wearing its drawing; a click on open ground puts it there
+## for its straw, and a bite makes it lean.
 func _case_0224_decoy() -> void:
 	await open_scene(MAIN_SCENE)
 	var driver: SimDriver = require_control("SimDriver")
@@ -3583,6 +3697,8 @@ func _case_0224_decoy() -> void:
 	await frames(4)
 	# **Straight into the night**: GO TO BED's road is its own cases', and
 	# this one is about the cursor - no bed's beat to sit through on the way.
+	# Summer 2's: the decoy is summer's (task 0234).
+	state["day"] = GameData.SEASON_DAYS + 2
 	NightRoad.to_night(state)
 	NightRoad.park(state)
 	Resources.gain(state, {GameData.STRAW: 40, GameData.WOOD: 40})
@@ -3591,10 +3707,10 @@ func _case_0224_decoy() -> void:
 	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT and hotbar != null and hotbar.visible,
 		"the night's hotbar")
 
-	# Q from nothing is the last slot - the bait since task 0225 - on the
-	# second page, summer's; a click there picks the decoy.
-	await tap_key(KEY_Q)
-	await until(func() -> bool: return locate_control("Hotbar_decoy") != null, "the second page")
+	# The arrow turns to summer's page (task 0234); a click there picks the
+	# decoy.
+	await click_control("HotbarNext")
+	await until(func() -> bool: return locate_control("Hotbar_decoy") != null, "summer's page")
 	await click_control("Hotbar_decoy")
 	await until(func() -> bool: return Building.selected(state) == &"decoy", "the decoy's slot")
 	await frames(2)
@@ -3602,7 +3718,7 @@ func _case_0224_decoy() -> void:
 	var icon: TextureRect = slot.get_node_or_null("Icon") as TextureRect if slot != null else null
 	expect(Building.selected(state) == &"decoy" and icon != null and icon.texture == DecoyArt.texture(&"decoy")
 		and locate_control("Hotbar_wall") == null,
-		"Q from nothing turns the hotbar to its second page, summer's, and a click there picks the decoy, wearing its drawing",
+		"the arrow turns the hotbar to summer's page, and a click there picks the decoy, wearing its drawing",
 		String(Building.selected(state)))
 
 	var spot := Vector2i(-1, -1)
@@ -3643,10 +3759,10 @@ func _case_0224_decoy() -> void:
 
 
 ## 0225 - a bait made by day and thrown with the cursor at night. A press by
-## the farmer, faced: its panel's row makes a bait's kit from any fish. At
-## night Q from nothing turns to the hotbar's second page - its last slot the
-## catapult since task 0227 - and a click there picks the bait, counting its
-## one kit; a click on open ground throws it there, the kit spent.
+## the farmer, faced: its panel's row makes a bait's kit from any fish. On
+## Summer 2's night (task 0234) the page turner's arrow turns the hotbar to
+## summer's page and a click there picks the bait, counting its one kit and
+## its money; a click on open ground throws it there, the kit spent.
 func _case_0225_bait() -> void:
 	await open_scene(MAIN_SCENE)
 	var driver: SimDriver = require_control("SimDriver")
@@ -3683,13 +3799,15 @@ func _case_0225_bait() -> void:
 	expect(Crafting.kits(state, &"zombie_bait") == 1 and Resources.amount(state, cheapest) == 0,
 		"made by day: one bait's kit, from the fish", str(Crafting.kits(state, &"zombie_bait")))
 
+	# Summer 2's night: the bait is summer's (task 0234).
+	state["day"] = GameData.SEASON_DAYS + 2
 	NightRoad.to_night(state)
 	NightRoad.park(state)
 	world.skip_transition()
 	var hotbar := locate_control("Hotbar") as Hotbar
 	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT and hotbar != null and hotbar.visible,
 		"the night's hotbar")
-	await tap_key(KEY_Q)
+	await click_control("HotbarNext")
 	await until(func() -> bool: return locate_control("Hotbar_zombie_bait") != null, "the bait's page")
 	await click_control("Hotbar_zombie_bait")
 	await until(func() -> bool: return Building.selected(state) == &"zombie_bait", "the bait's slot")
@@ -3698,7 +3816,7 @@ func _case_0225_bait() -> void:
 	var price: Label = slot.get_node_or_null("Price") as Label if slot != null else null
 	expect(Building.selected(state) == &"zombie_bait" and price != null
 		and price.text.begins_with(I18n.f(&"HOTBAR_KITS", [1])),
-		"Q from nothing turns to the second page, and a click there picks the bait, counting its one kit",
+		"the arrow turns to summer's page, and a click there picks the bait, counting its one kit",
 		price.text if price != null else "none")
 	var spot := Vector2i(-1, -1)
 	var middle := world.screen_to_cell(Vector2(240.0, 120.0))

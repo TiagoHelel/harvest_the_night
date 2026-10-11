@@ -197,6 +197,7 @@ DESC_AMMO_SHOT,0,%d %s a shot,%d %s por tiro
 DESC_AMMO_EVERY,0,%d %s every %s of fire,%d %s a cada %s de fogo
 DESC_SEED_COST,0,one packet to sow; buy for $%d,um pacote para plantar; compra por $%d
 DESC_SELLS_FOR,0,sells for $%d,vende por $%d
+DESC_SEASON,0,comes in %s,chega no %s
 DESC_SUPPLIES,0,supplies %d power,fornece %d de energia
 DESC_TAKES,0,takes %s,leva %s
 DESC_DAYS,0,%d day,%d dia
@@ -259,6 +260,10 @@ FCAST_WAVES.other,142,%d WAVES,%d ONDAS
 GAME_LANGUAGE,86,LANGUAGE,IDIOMA
 GAME_NIGHT_SPEED,200,NIGHT SPEED,VELOCIDADE DA NOITE
 HOTBAR_KITS,0,x%d,x%d
+HOTBAR_MONEY,0,$%d,$%d
+HOTBAR_PAGE,54,%d/%d,%d/%d
+HOTBAR_PAGE_NEXT,12,>,>
+HOTBAR_PAGE_PREV,12,<,<
 HOTBAR_LEFT,0,%d/night,%d/noite
 INV_TITLE,0,WHAT YOU HAVE,O QUE VOCÊ TEM
 INV_WORTH,0,all of it sells for  $%d,tudo isso vale  $%d

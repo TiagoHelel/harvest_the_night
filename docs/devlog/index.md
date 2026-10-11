@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-216 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+217 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -260,10 +260,11 @@ is the sort of thing this list exists to say out loud.
 | 0231 | Hardwood walls and sandbags | 2026-10-11 |
 | 0232 | Powers as a list | 2026-10-11 |
 | 0233 | Three new powers | 2026-10-11 |
+| 0234 | The arsenal grows with the seasons | 2026-10-11 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 103 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 105 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -368,6 +369,8 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Hardwood walls and sandbags** (0231) - `data` 2576543805 -> 1845073021
 - **Three new powers** (0233) - `sim` 2958532891 -> 3940398993
 - **Three new powers** (0233) - `data` 1845073021 -> 1109408054
+- **The arsenal grows with the seasons** (0234) - `sim` 3940398993 -> 4210782773
+- **The arsenal grows with the seasons** (0234) - `data` 1109408054 -> 3781358399
 
 ## What went wrong
 

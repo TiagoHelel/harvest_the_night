@@ -1459,6 +1459,23 @@ const STING_EVERY_TICKS := SECONDS
 ## `range` and `min_range` are in tiles. `reload_ticks` is the gap between
 ## shots. Task 0042 turns these entries into declarative behaviour so the combat
 ## code stops growing a branch per tower.
+##
+## **The arsenal grows with the seasons** (task 0234; the plan's sections 2, 5
+## and 7). Each `season` is a rule, asked by `Building.why_not` through
+## `Calendar.season_reached`, so Year 2 keeps them all:
+## - spring: the gun tower, the crossbow, the mine and the three barriers;
+## - summer: the flamethrower, the decoy, the hive, the bait and the sandbags;
+## - autumn: the mortar, the catapult and the garlic;
+## - winter: the searchlight and the electric fence.
+##
+## **Every defence costs money as well as materials**: a `MONEY` share in its
+## `cost`. A kit is the materials paid early, so placing one still charges
+## the money. The shares grow with the season a defence opens in, as the
+## day's money does (0194):
+## - spring's are small, so a new game's $25 still puts up the first gun
+##   tower and a fence on night one, off a day at the rock face;
+## - none reaches $100, so a price still fits its hotbar slot.
+## `implementation/BALANCE.md` argues each one against the day.
 const DEFENCES: Dictionary = {
 	&"gun_tower": {
 		# **Twelve iron, not fifteen**, and the autoplayer of task 0067 is
@@ -1473,8 +1490,8 @@ const DEFENCES: Dictionary = {
 		# come back than stone, and all three are right - iron is meant to be
 		# the hard one. What was wrong was a first tower that cost more than
 		# a first day can make.
-		"cost": {WOOD: 10, IRON: 12},
-		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
+		"cost": {WOOD: 10, IRON: 12, MONEY: 15},  # LEVER: wood, iron and $10-25
+		"season": &"spring",            # LEVER: the season it opens in (task 0234)
 		"targeting": TARGET_CLOSEST_TO_HOUSE,
 		"shape": SHAPE_SINGLE,
 		"hp": 60,                       # LEVER: hit points, 30-120
@@ -1487,8 +1504,10 @@ const DEFENCES: Dictionary = {
 		"targets": 1,
 	},
 	&"flame_tower": {
-		"cost": {WOOD: 20, IRON: 25, OIL: 10},
-		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
+		"cost": {WOOD: 20, IRON: 25, OIL: 10, MONEY: 90},  # LEVER: wood, iron, oil and $60-99
+		# **Summer's** (task 0234): the oil and the rounds it burns are a
+		# summer's work, and its fire is the first answer to the summer's rats.
+		"season": &"summer",            # LEVER: the season it opens in (task 0234)
 		"targeting": TARGET_NEAREST,
 		"shape": SHAPE_CONE,
 		"hp": 70,                       # LEVER: hit points, 40-140
@@ -1529,8 +1548,10 @@ const DEFENCES: Dictionary = {
 		"energy_draw": 2,
 	},
 	&"mortar": {
-		"cost": {STONE: 30, IRON: 35, GUNPOWDER: 15},
-		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
+		"cost": {STONE: 30, IRON: 35, GUNPOWDER: 15, MONEY: 95},  # LEVER: stone, iron, powder and $60-99
+		# **Autumn's** (task 0234): a shell lobbed over the walls, for the
+		# season the diggers come under them and the crows over.
+		"season": &"autumn",            # LEVER: the season it opens in (task 0234)
 		"targeting": TARGET_CLOSEST_TO_HOUSE,
 		"shape": SHAPE_SPLASH,
 		"hp": 55,                       # LEVER: hit points, 30-100
@@ -1559,8 +1580,8 @@ const DEFENCES: Dictionary = {
 		"energy_draw": 1,
 	},
 	&"auto_crossbow": {
-		"cost": {WOOD: 15, IRON: 20},
-		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
+		"cost": {WOOD: 15, IRON: 20, MONEY: 30},  # LEVER: wood, iron and $20-45
+		"season": &"spring",            # LEVER: the season it opens in (task 0234)
 		"targeting": TARGET_CLOSEST_TO_HOUSE,
 		"shape": SHAPE_LINE,
 		"hp": 50,                       # LEVER: hit points, 30-90
@@ -1596,8 +1617,8 @@ const DEFENCES: Dictionary = {
 		"energy_draw": 3,               # hungry: the reason to build a generator
 	},
 	&"mine": {
-		"cost": {IRON: 5, GUNPOWDER: 8},
-		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
+		"cost": {IRON: 5, GUNPOWDER: 8, MONEY: 8},  # LEVER: iron, powder and $4-15
+		"season": &"spring",            # LEVER: the season it opens in (task 0234)
 		"hp": 1,
 		"damage": 60,                   # LEVER: on trigger, 30-100
 		"damage_type": DAMAGE_EXPLOSIVE,
@@ -1615,15 +1636,15 @@ const DEFENCES: Dictionary = {
 		"energy_draw": 0,
 	},
 	&"fence": {
-		"cost": {WOOD: 5},
-		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
+		"cost": {WOOD: 5, MONEY: 2},    # LEVER: wood and $1-4
+		"season": &"spring",            # LEVER: the season it opens in (task 0234)
 		"hp": 30,                       # LEVER: hit points, 15-60
 		"path_cost": 6,                 # LEVER: tiles-equivalent detour, 3-12
 		"energy_draw": 0,
 	},
 	&"wall": {
-		"cost": {STONE: 10},
-		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
+		"cost": {STONE: 10, MONEY: 4},  # LEVER: stone and $2-8
+		"season": &"spring",            # LEVER: the season it opens in (task 0234)
 		"hp": 120,                      # LEVER: hit points, 60-250
 		"path_cost": 20,                # LEVER: tiles-equivalent detour, 10-40
 		"energy_draw": 0,
@@ -1634,8 +1655,8 @@ const DEFENCES: Dictionary = {
 		# "cheapest structure" the task asks for was not - and stone is the
 		# wrong currency for a thing you throw down while they are already
 		# coming. Four wood is $4 (since 0194), and it is one trip to one tree.
-		"cost": {WOOD: 4},
-		"season": &"spring",            # LEVER: the season it unlocks in (0234 moves some)
+		"cost": {WOOD: 4, MONEY: 1},    # LEVER: wood and $1-2
+		"season": &"spring",            # LEVER: the season it opens in (task 0234)
 		"hp": 20,                       # LEVER: hit points, 10-40
 		"path_cost": 4,                 # LEVER: tiles-equivalent detour, 2-8
 		# **Cheap, temporary and limited** - its identity since every defence
@@ -1656,8 +1677,8 @@ const DEFENCES: Dictionary = {
 		# **No `path_cost`**: a wave flows round it like a tower, and a
 		# breaker hunts it as prey. **No `reload_ticks` and no `damage`**:
 		# nothing in `Towers` collects it and it makes no sound of its own.
-		"cost": {STRAW: 8, WOOD: 4},    # LEVER: straw and wood
-		"season": &"summer",            # LEVER: the season it unlocks in (0234 gates it)
+		"cost": {STRAW: 8, WOOD: 4, MONEY: 8},  # LEVER: straw, wood and $5-15
+		"season": &"summer",            # LEVER: the season it opens in (task 0234)
 		# **Two hundred: it is there to be bitten.** Twenty walker bites, and
 		# a crowd bites it four sides at once - the seconds it buys are the
 		# seconds the towers get.
@@ -1680,9 +1701,9 @@ const DEFENCES: Dictionary = {
 		# cost names the fish group, which a recipe pays from any species
 		# (task 0179) and the ledger never holds - so there is no road from
 		# the ledger at night, and nothing to refund in fish.
-		"cost": {FISH: 2},              # LEVER: fish a bait, 1-4
+		"cost": {FISH: 2, MONEY: 2},    # LEVER: fish a bait 1-4, and $1-4
 		"kit_only": true,
-		"season": &"summer",            # LEVER: the season it unlocks in (0234 gates it)
+		"season": &"summer",            # LEVER: the season it opens in (task 0234)
 		# One hit point, as a mine has: nothing bites a thing it walks over.
 		"hp": 1,
 		# **Walked over** (0178's flag, the sprinklers'): the ground's cost
@@ -1703,8 +1724,8 @@ const DEFENCES: Dictionary = {
 		# **Bees that sting what comes near and keep stinging** (task 0226;
 		# the plan's section 5, summer). Wood for the box and sunflowers for
 		# the colony - and as strong as the field planted round it.
-		"cost": {WOOD: 15, SUNFLOWER: 4},  # LEVER: wood and sunflowers
-		"season": &"summer",            # LEVER: the season it unlocks in (0234 gates it)
+		"cost": {WOOD: 15, SUNFLOWER: 4, MONEY: 60},  # LEVER: wood, sunflowers and $40-80
+		"season": &"summer",            # LEVER: the season it opens in (task 0234)
 		"targeting": TARGET_NEAREST,
 		# **A sting lands at once and keeps hurting** (`Combat.sting()`),
 		# refreshed and never stacked, as a fire is. Nothing flies.
@@ -1742,8 +1763,8 @@ const DEFENCES: Dictionary = {
 		# and hits softer, but it has no ground it cannot touch (no
 		# `min_range`), it lobs at whatever comes nearest it, and it needs no
 		# gunpowder, no iron and no power - only wood and what the field grew.
-		"cost": {WOOD: 30, PUMPKIN: 4},    # LEVER: wood and pumpkins
-		"season": &"autumn",            # LEVER: the season it unlocks in (0234 gates it)
+		"cost": {WOOD: 30, PUMPKIN: 4, MONEY: 40},  # LEVER: wood, pumpkins and $25-60
+		"season": &"autumn",            # LEVER: the season it opens in (task 0234)
 		"targeting": TARGET_NEAREST,
 		"shape": SHAPE_SPLASH,
 		"hp": 70,                       # LEVER: hit points, 40-110
@@ -1771,8 +1792,8 @@ const DEFENCES: Dictionary = {
 		# 5, autumn): the ground round it is somewhere zombies would rather
 		# walk round, and the ones that come through anyway walk slowly
 		# (`Garlic`). The id is never `garlic`, which is the crop.
-		"cost": {GARLIC: 4, WOOD: 2},   # LEVER: garlic and a little wood
-		"season": &"autumn",            # LEVER: the season it unlocks in (0234 gates it)
+		"cost": {GARLIC: 4, WOOD: 2, MONEY: 8},  # LEVER: garlic, a little wood and $5-15
+		"season": &"autumn",            # LEVER: the season it opens in (task 0234)
 		# One hit point, as a bait has: it is walked over, and nothing bites
 		# a thing it walks over.
 		"hp": 1,
@@ -1798,8 +1819,8 @@ const DEFENCES: Dictionary = {
 		# standing in light sees `LIGHT_REACH_BONUS` further - and light is
 		# what the wraith and the fog will read. It does not shoot: no
 		# `reload_ticks`, no `damage`. A breaker hunts it like anything built.
-		"cost": {IRON: 12, COPPER: 8},  # LEVER: iron and copper
-		"season": &"winter",            # LEVER: the season it unlocks in (0234 gates it)
+		"cost": {IRON: 12, COPPER: 8, MONEY: 80},  # LEVER: iron, copper and $50-99
+		"season": &"winter",            # LEVER: the season it opens in (task 0234)
 		"hp": 60,                       # LEVER: hit points, 40-100
 		# **How far round it is lit**, a square as a tower's reach is.
 		"light_tiles": 4,               # LEVER: tiles, 3-6
@@ -1813,8 +1834,8 @@ const DEFENCES: Dictionary = {
 		# joined to its neighbours - except that whatever bites it is thrown
 		# back stunned (`Enemies.stun()`), standing where it is, neither
 		# walking nor biting. Copper for the wire and wood for the posts.
-		"cost": {COPPER: 2, WOOD: 5},   # LEVER: copper and wood
-		"season": &"winter",            # LEVER: the season it unlocks in (0234 gates it)
+		"cost": {COPPER: 2, WOOD: 5, MONEY: 6},  # LEVER: copper, wood and $3-10
+		"season": &"winter",            # LEVER: the season it opens in (task 0234)
 		"hp": 40,                       # LEVER: hit points, 20-80
 		"path_cost": 8,                 # LEVER: tiles-equivalent detour, 4-16
 		# **The shock**: the ticks a biter stands stunned, the bite landing
@@ -1834,10 +1855,10 @@ const DEFENCES: Dictionary = {
 		# wall is dear - two sacks are half a bolt of cloth and two stone,
 		# where a wall is ten - and it soaks more than a fence: between the two
 		# on hit points and on what the field asks to break through it.
-		"cost": {SANDBAG: 2},           # LEVER: sandbags, 1-4
-		# **Summer's**: a flock in a barn and a loom are a summer's work, not
-		# a first spring's (0234 confirms it).
-		"season": &"summer",            # LEVER: the season it unlocks in (0234 confirms)
+		"cost": {SANDBAG: 2, MONEY: 3}, # LEVER: sandbags 1-4, and $2-6
+		# **Summer's**, and task 0234 keeps it there: a flock in a barn and a
+		# loom are a summer's work, not a first spring's.
+		"season": &"summer",            # LEVER: the season it opens in (task 0234)
 		"hp": 70,                       # LEVER: hit points, 40-100 (a fence 30, a wall 120)
 		"path_cost": 12,                # LEVER: tiles-equivalent detour, 8-16 (a fence 6, a wall 20)
 		"energy_draw": 0,
@@ -4081,14 +4102,16 @@ static func check_recipes(recipes: Dictionary) -> Array:
 				var cost: Dictionary = TOOLS[upgrade["tool"]][upgrade["tier"]]["cost"]
 				if recipe["station"] != &"workshop" or recipe["inputs"] != cost or int(recipe["output"][out]) != 1 or recipe["output"].size() != 1:
 					errors.append("recipe '%s' is not the tool tier's exact workshop cost" % recipe_id)
-			# **A kit is the structure's cost, paid early.** Two places to
-			# write one price is two places for it to drift, so the drift is a
-			# red line rather than a surprise at the shop counter.
+			# **A kit is the structure's materials, paid early.** Two places
+			# to write one price is two places for it to drift, so the drift is
+			# a red line rather than a surprise at the shop counter. **Never
+			# its money** (task 0234): placing a kit still charges that.
 			if DEFENCES.has(out) and int((recipe["output"] as Dictionary)[out]) == 1:
-				var price: Dictionary = (DEFENCES[out] as Dictionary)["cost"]
+				var price: Dictionary = ((DEFENCES[out] as Dictionary)["cost"] as Dictionary).duplicate()
+				price.erase(MONEY)
 				if recipe["inputs"] != price:
 					errors.append(("recipe '%s' costs %s and the '%s' it makes "
-						+ "costs %s - a kit has to be the price paid early")
+						+ "is made of %s - a kit has to be the materials paid early")
 						% [recipe_id, recipe["inputs"], out, price])
 	return errors
 
@@ -4122,6 +4145,16 @@ static func check_defences(defences: Dictionary) -> Array:
 	var errors: Array = []
 	for defence_id in sorted_names(defences.keys()):
 		var defence: Dictionary = defences[defence_id]
+
+		# **A season of the four, and money as well as materials** (task
+		# 0234): the calendar opens a defence, and the day's purse pays a
+		# share of every one.
+		if not SEASONS.has(defence_season(defence)):
+			errors.append("defence '%s' opens in '%s', which is no season"
+				% [defence_id, defence.get("season", &"")])
+		var price: Dictionary = defence.get("cost", {})
+		if int(price.get(MONEY, 0)) <= 0 or price.size() < 2:
+			errors.append("defence '%s' costs no money, or nothing but money" % defence_id)
 
 		# **A tower that shoots says how it picks and how it lands.** The words
 		# are checked against the lists above, so a typo is a red line at boot
@@ -4865,7 +4898,8 @@ static func check_day_targets(targets: Dictionary, farm: Dictionary) -> Array:
 	return errors
 
 
-## The season a defence unlocks in (task 0193): its `season`, or spring.
+## The season a defence opens in (task 0193; a rule since task 0234): its
+## `season`, or spring.
 static func defence_season(entry: Dictionary) -> StringName:
 	return StringName(entry.get("season", SEASONS[0]))
 

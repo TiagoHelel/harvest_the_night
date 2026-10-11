@@ -184,10 +184,11 @@ func _play(night: int, budget: int) -> Dictionary:
 	state["night"] = night
 	state["day"] = night
 	state["nights_won"] = night - 1
-	# Materials and power are not what is being measured: the build is.
+	# Materials and power are not what is being measured: the build is. The
+	# money shares come off the ledger (task 0234); the purse below decides.
 	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
 		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000,
-		GameData.FOOD: 9000})
+		GameData.FOOD: 9000, GameData.MONEY: 9000})
 
 	# **Power by day, towers by night** (task 0132): a generator goes up by day
 	# only, so the ones the shopping list will need are counted first, off the

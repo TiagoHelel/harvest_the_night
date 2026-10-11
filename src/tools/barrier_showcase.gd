@@ -123,6 +123,8 @@ func _blank(light: int = 0) -> Dictionary:
 	player["pos"] = [440 * Player.SUBTILE / 16, 244 * Player.SUBTILE / 16]
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
+	# Every season's barriers go down here (task 0234).
+	SuiteKit.open_every_season(state)
 	return state
 
 

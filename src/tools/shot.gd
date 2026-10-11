@@ -144,6 +144,9 @@ const SCENARIOS: Array = [
 	["electric_fence", "a joined run of electric fence at night: Winter 2, a generator running, a line of electric fence across the east road with a corner, a wooden stub making a tee, two arms at its foot and a wooden fence carrying the east one on, the road's cell hurt and a west arm at the top a wreck; walkers coming down the road, the first stunned where it bit - cold blue, its zap still playing - and the fence picked on the hotbar, its ghost joining the north arm", ""],
 	["strong_walls", "a mixed line at night: Summer 2, a long line across the east road - stone, hardwood walls (the stone wall's level two) either side of the road and sandbags on it - an arm off it in one row of stone, hardwood, stone, sandbags and a fence, and a foot of sandbags, the last of them down; walkers come down the road and bite the sandbags, the cheapest way through; the sandbags picked on the hotbar, their ghost joining the arm's end", ""],
 	["powers", "the three new powers at work at night: Winter 2, a tank leading two walkers down the east road toward the house; the dog sent at the tank and caught at its bite beside its feet, the farm bell rung a moment after - its rings going out from the house and every zombie stood still in cold blue, with no spark - and the hurt middle of three walls by the road mended, its square closing in; the night bar's upper row showing all three charging", ""],
+	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
+	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
+	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
 	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
 	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
@@ -784,6 +787,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"electric_fence": _set_electric_fence(state)
 		"strong_walls": _set_strong_walls(state)
 		"powers": _set_powers(state)
+		"arsenal_spring": _set_arsenal_spring(state)
+		"arsenal_winter": _set_arsenal_winter(state)
+		"arsenal_locked": _set_arsenal_locked(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1128,6 +1134,9 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				mode.set("_pointer", view.cell_to_screen(hand))
 				view.cursor().place_at(hand)
 				mode.call("_follow_cursor")
+		"arsenal_locked":
+			# Turned by hand to autumn's page, nothing picked (task 0234).
+			(main.get("_hotbar") as Hotbar).turn(2)
 		"powers":
 			# The dog sent at the tank and - timed so the shutter finds it at
 			# its bite - the bell rung and the wall mended (task 0233).
@@ -2619,6 +2628,8 @@ func _set_tech(state: Dictionary) -> void:
 ## `STIR_TICKS`) are its walk in - so the picture is of them arriving at a
 ## decoy still standing, not of the heap they left.
 func _set_decoy(state: Dictionary) -> void:
+	# Summer's (task 0234): Summer 2's night.
+	_on_date(state, GameData.SEASON_DAYS + 2)
 	_a_defended_farm(state, true)
 	Resources.gain(state, {GameData.STRAW: 60, GameData.WOOD: 30})
 	var middle := _clear_patch(state, Player.cell(state) + Vector2i(19, 1), 4)
@@ -2653,6 +2664,8 @@ func _set_decoy(state: Dictionary) -> void:
 ## rest from five to eight, further than a decoy pulls, still on their way.
 ## The bait is picked on the hotbar with one kit left, its page turned.
 func _set_zombie_bait(state: Dictionary) -> void:
+	# Summer's (task 0234): Summer 2's night.
+	_on_date(state, GameData.SEASON_DAYS + 2)
 	_a_defended_farm(state, true)
 	var middle := _clear_patch(state, Player.cell(state) + Vector2i(19, 1), 4)
 	if middle.x < 0:
@@ -2732,7 +2745,7 @@ func _set_beehive(state: Dictionary) -> void:
 func _set_searchlight(state: Dictionary) -> void:
 	_on_date(state, 3 * GameData.SEASON_DAYS + 2)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200, GameData.STONE: 100,
-		GameData.COPPER: 50, GameData.OIL: 40})
+		GameData.COPPER: 50, GameData.OIL: 40, GameData.MONEY: 400})
 	var plant := Vector2i(-1, -1)
 	for radius in 12:
 		for cell in Grid.within(Player.cell(state) + Vector2i(-6, 3), radius):
@@ -2792,7 +2805,7 @@ var _searchlight_lines: Array = []
 func _set_electric_fence(state: Dictionary) -> void:
 	_on_date(state, 3 * GameData.SEASON_DAYS + 2)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 100, GameData.STONE: 100,
-		GameData.COPPER: 60, GameData.OIL: 40})
+		GameData.COPPER: 60, GameData.OIL: 40, GameData.MONEY: 400})
 	var plant := Vector2i(-1, -1)
 	for radius in 12:
 		for cell in Grid.within(Player.cell(state) + Vector2i(-6, 3), radius):
@@ -2870,7 +2883,7 @@ var _electric_gate := Vector2i(-1, -1)
 func _set_strong_walls(state: Dictionary) -> void:
 	_on_date(state, GameData.SEASON_DAYS + 2)
 	Resources.gain(state, {GameData.STONE: 300, GameData.HARDWOOD: 60, GameData.SANDBAG: 40,
-		GameData.WOOD: 60})
+		GameData.WOOD: 60, GameData.MONEY: 400})
 	(state["tech_owned"] as Array).append(&"stout timbers")
 	Pathing.refresh(state)
 	var road := _east_road(state)
@@ -2971,6 +2984,38 @@ func _set_powers(state: Dictionary) -> void:
 	_look_at(house + Vector2i(6, 0))
 
 
+## **The hotbar in spring** (task 0234): Spring 3's build step on a modest
+## purse - enough for the gun tower, not for the mine - with a wall's kit
+## banked, the gun tower picked on spring's page.
+func _set_arsenal_spring(state: Dictionary) -> void:
+	_on_date(state, 3)
+	Resources.gain(state, {GameData.WOOD: 40, GameData.IRON: 14, GameData.STONE: 20, GameData.MONEY: 60})
+	Crafting.bank_kit(state, &"wall")
+	NightRoad.into_build(state)
+	Building.select(state, &"gun_tower")
+	_look_at(Farm.house_centre(state) + Vector2i(5, 0))
+
+
+## **The hotbar in winter** (task 0234): Winter 3's build step, every season
+## open, the searchlight picked on winter's page.
+func _set_arsenal_winter(state: Dictionary) -> void:
+	_on_date(state, 3 * GameData.SEASON_DAYS + 3)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 100, GameData.STONE: 100,
+		GameData.COPPER: 40, GameData.MONEY: 400})
+	NightRoad.into_build(state)
+	Building.select(state, &"searchlight")
+	_look_at(Farm.house_centre(state) + Vector2i(5, 0))
+
+
+## **A season still shut** (task 0234): Spring 3's build step, nothing
+## picked; the hotbar is turned to autumn's page just before the shutter.
+func _set_arsenal_locked(state: Dictionary) -> void:
+	_on_date(state, 3)
+	Resources.gain(state, {GameData.WOOD: 40, GameData.IRON: 14, GameData.STONE: 20, GameData.MONEY: 60})
+	NightRoad.into_build(state)
+	_look_at(Farm.house_centre(state) + Vector2i(5, 0))
+
+
 ## The wall `_set_powers` hurt, and how far into the bell's ring and the
 ## dog's bite the shutter falls, in ticks (task 0233).
 var _powers_wall := Vector2i(-1, -1)
@@ -2987,7 +3032,7 @@ const POWERS_INTO_BITE := 4
 ## (`_just_before_the_shutter`).
 func _set_garlic(state: Dictionary) -> void:
 	_on_date(state, 2 * GameData.SEASON_DAYS + 2)
-	Resources.gain(state, {GameData.GARLIC: 20, GameData.WOOD: 20})
+	Resources.gain(state, {GameData.GARLIC: 20, GameData.WOOD: 20, GameData.MONEY: 100})
 	NightRoad.into_build(state)
 	Pathing.refresh(state)
 	var road := _east_road(state)

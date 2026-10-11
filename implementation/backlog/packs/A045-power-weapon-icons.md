@@ -21,14 +21,31 @@ with no text.
 
 ## Deliverables
 
-The table is provisional: game task 0234 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0234: the eleven rows below are the
+final list, each one source cut twice at the canvases written. Start only when `python implementation/backlog/assets.py next` offers this pack.
+
+**Who reads them** (task 0234):
+- **The three powers:** the night HUD's power row and its hint (0233).
+- **Seven of the weapons:** the hotbar at 16x16 and the night hint at 10x10 -
+  the decoy, the beehive, the catapult, the garlic braid, the searchlight, the
+  electric fence and the sandbags.
+- **The hardwood wall** (`wall_2`): nothing reads it yet - the hotbar has one
+  wall slot, whatever its level. It is in the list for the level's upgrade
+  line once one shows a picture.
+- **Until 0244 they are stand-ins**, registered under A045 in 0120's road:
+  - the decoy, the braid, the wire and the sandbags drawn in code (their
+    drawings on the farm), with no 10x10;
+  - the hive, the catapult and the searchlight as the icon of the tower they
+    stand in for on the farm (the mortar's, the crossbow's and the gun
+    tower's), tinted as there.
 
 Every item: one raw source cut into `icon_<id>` 16x16 pivot (8,8) (visible at most
 14x14) and `hud_<id>` 10x10 pivot (5,5) (visible at most 8x8); 1 frame, 1.0 s,
 static (`loop` false), direction `none`, `mirror: "none"`, draw 1.0, runtime files
 `sprites/ui/icon_<id>.png` and `sprites/ui/hud_<id>.png`. No levels, `_hurt`,
-cooldown or greyed variants: those are code. The ids are 0233's and 0231's; 0234
-writes the final list here.
+cooldown or greyed variants: those are code - the hotbar greys a defence its
+season has not opened (0234) as it greys one it cannot pay for. The ids are
+0233's and 0231's, and the list below is 0234's final one.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

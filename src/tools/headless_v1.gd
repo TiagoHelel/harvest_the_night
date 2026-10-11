@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 78
+const GROUPS := 79
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -157,6 +157,7 @@ func _run() -> void:
 	_task_0231_strong_walls()
 	_task_0232_powers_list()
 	_task_0233_powers()
+	_task_0234_arsenal()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -296,7 +297,8 @@ func _task_0113_repairs() -> void:
 	(towers["tech_owned"] as Array).append_array(
 		[&"true sights", &"oiled works"])
 	Resources.gain(towers, {GameData.WOOD: 500, GameData.STONE: 500,
-		GameData.IRON: 500, GameData.GUNPOWDER: 500, GameData.FOOD: 500})
+		GameData.IRON: 500, GameData.GUNPOWDER: 500, GameData.FOOD: 500,
+		GameData.MONEY: 500})
 	Phases.begin_preparation(towers)
 	var top := SuiteKit.any_buildable(towers)
 	expect(Building.place(towers, &"gun_tower", top), "a gun tower goes down",
@@ -684,10 +686,11 @@ func _task_0116_ammo() -> void:
 ## Returns the state and the tower's cell.
 func _tower_night(seed_value: int, id: StringName, techs: Array) -> Dictionary:
 	var state := State.create(seed_value)
+	SuiteKit.open_arsenal(state, [id])
 	(state["tech_owned"] as Array).append_array(techs)
 	Resources.gain(state, {GameData.WOOD: 900, GameData.STONE: 900,
 		GameData.IRON: 900, GameData.OIL: 900, GameData.GUNPOWDER: 900,
-		GameData.INCENDIARY: 100})
+		GameData.INCENDIARY: 100, GameData.MONEY: 900})
 	Phases.begin_preparation(state)
 	var cell := SuiteKit.any_buildable(state)
 	expect(Building.place(state, id, cell), "a %s goes down" % id, str(cell))
@@ -1385,6 +1388,8 @@ func _task_0132_night_build() -> void:
 	var phases := {}
 	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT]:
 		var state := State.create(1320)
+		# Every season's (task 0234): the phase is this group's question.
+		SuiteKit.open_arsenal(state, GameData.DEFENCES.keys())
 		Resources.gain(state, plenty)
 		# A thing from a kit only (task 0225) goes down from its kit.
 		for id in GameData.sorted_names(GameData.DEFENCES.keys()):
@@ -6197,8 +6202,8 @@ func _task_0193_supply() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		var said := GameData.defence_season(GameData.DEFENCES[id]) if GameData.DEFENCES[id].has("season") else &""
 		seasons[said] = int(seasons.get(said, 0)) + 1
-	expect(seasons == {&"spring": 8, &"summer": 4, &"autumn": 2, &"winter": 2},
-		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225), hive (0226) and sandbags (0231), autumn's catapult (0227) and braid (0228), and winter's searchlight (0229) and electric fence (0230)", str(seasons))
+	expect(seasons == {&"spring": 6, &"summer": 5, &"autumn": 3, &"winter": 2},
+		"every defence says the season it opens in: spring's six, summer's flamethrower (0234), decoy (0224), bait (0225), hive (0226) and sandbags (0231), autumn's mortar (0234), catapult (0227) and braid (0228), and winter's searchlight (0229) and electric fence (0230)", str(seasons))
 	# **The routes**, season by season: what each kit, round, meal and feed
 	# is made of, followed back to the ground.
 	for season in GameData.SEASONS:
@@ -7109,13 +7114,13 @@ func _task_0223_tarps() -> void:
 func _task_0224_decoy() -> void:
 	# **The row, the flags, and their checks.**
 	var row: Dictionary = GameData.DEFENCES[&"decoy"]
-	var cost: Dictionary = row["cost"]
+	var cost := Building.materials_of(&"decoy")
 	var reach := int(row.get("lure_tiles", 0))
-	expect(cost.size() == 2 and cost.has(GameData.STRAW) and cost.has(GameData.WOOD)
+	expect(cost.size() == 2 and cost.has(GameData.STRAW) and cost.has(GameData.WOOD) and Building.money_of(&"decoy") > 0
 		and int(row["hp"]) >= 100 and int(row["hp"]) <= 250 and reach >= 3 and reach <= 8
 		and not row.has("reload_ticks") and not row.has("path_cost") and not row.has("damage")
 		and GameData.defence_season(row) == &"summer",
-		"a decoy costs straw and wood, stands 100-250, pulls from 3-8 tiles, shoots and blocks nothing, and is summer's",
+		"a decoy costs straw, wood and money, stands 100-250, pulls from 3-8 tiles, shoots and blocks nothing, and is summer's",
 		str(row))
 	var lurable: Array = []
 	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
@@ -7283,10 +7288,8 @@ func _task_0224_decoy() -> void:
 	var icon := bar._icon_of(&"decoy")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
-	var spring := order.slice(0, 8)
-	expect(icon == DecoyArt.texture(&"decoy") and order.find(&"decoy") >= 8
-		and spring == GameData.sorted_names(spring),
-		"the hotbar shows the drawing, after spring's eight, which keep their places", str(order))
+	expect(icon == DecoyArt.texture(&"decoy") and order.find(&"decoy") >= _first_of_season(order, 1),
+		"the hotbar shows the drawing, among summer's after spring's, which keep their places", str(order))
 	var said := {}
 	for locale in ["en", "pt_BR"]:
 		I18n.use(locale)
@@ -7320,17 +7323,18 @@ func _task_0225_bait() -> void:
 	var reach := int(row["lure_tiles"])
 	var lifetime := int(row["lifetime_ticks"])
 	var eaten_by := int(row["eaten_by"])
-	expect((row["cost"] as Dictionary).keys() == [GameData.FISH] and Building.kit_only(&"zombie_bait")
+	expect(Building.materials_of(&"zombie_bait").keys() == [GameData.FISH] and Building.money_of(&"zombie_bait") > 0
+		and Building.kit_only(&"zombie_bait")
 		and Building.walked_over(&"zombie_bait") and reach >= 6 and reach <= 14 and reach > int(decoy["lure_tiles"])
 		and lifetime >= 5 * GameData.SECONDS and lifetime <= 20 * GameData.SECONDS and eaten_by > 0
 		and int(row["per_night_limit"]) > 0 and GameData.defence_season(row) == &"summer"
 		and not row.has("damage") and not row.has("reload_ticks") and not row.has("path_cost")
 		and Pathing.lure_reach() == reach,
-		"a bait costs fish, comes from a kit only, is walked over, pulls further than a decoy, lasts 5-20 s, is eaten up, is rationed, is summer's, and shoots and blocks nothing",
+		"a bait costs fish and a little money, comes from a kit only, is walked over, pulls further than a decoy, lasts 5-20 s, is eaten up, is rationed, is summer's, and shoots and blocks nothing",
 		str(row))
-	expect(kit["station"] == &"press" and kit["inputs"] == row["cost"] and kit["output"] == {&"zombie_bait": 1}
-		and Building.kit_station(&"zombie_bait") == &"press",
-		"the press makes its kit, for the bait's own cost", str(kit))
+	expect(kit["station"] == &"press" and kit["inputs"] == Building.materials_of(&"zombie_bait")
+		and kit["output"] == {&"zombie_bait": 1} and Building.kit_station(&"zombie_bait") == &"press",
+		"the press makes its kit, for the bait's own fish", str(kit))
 	var paid_in_fish := GameData.DEFENCES.duplicate(true)
 	(paid_in_fish[&"decoy"] as Dictionary)["cost"] = {GameData.FISH: 2}
 	var priced := GameData.DEFENCES.duplicate(true)
@@ -7529,17 +7533,17 @@ func _task_0225_bait() -> void:
 func _task_0226_beehive() -> void:
 	# **The row, the levers and their checks.**
 	var row: Dictionary = GameData.DEFENCES[&"beehive"]
-	var cost: Dictionary = row["cost"]
+	var cost := Building.materials_of(&"beehive")
 	var steps: Array = GameData.TOWER_LEVELS[&"beehive"]
 	var gives: Dictionary = (steps[0] as Dictionary)["gives"] if steps.size() == 1 else {}
-	expect(cost.size() == 2 and cost.has(GameData.WOOD) and cost.has(GameData.SUNFLOWER)
+	expect(cost.size() == 2 and cost.has(GameData.WOOD) and cost.has(GameData.SUNFLOWER) and Building.money_of(&"beehive") > 0
 		and row.has("reload_ticks") and StringName(row["shape"]) == GameData.SHAPE_STING
 		and StringName(row["damage_type"]) == GameData.DAMAGE_STING and int(row["damage"]) > 0
 		and int(row["range"]) <= 3 and int(row["sting_ticks"]) > 0 and int(row["energy_draw"]) == 0
 		and int(row["flower_reach"]) >= 2 and int(row["flower_reach"]) <= 4 and int(row["stock_flowers"]) > 0
 		and GameData.defence_season(row) == &"summer" and Sfx.TOWER_SOUNDS.has(&"beehive")
 		and int(gives.get("targets", 1)) > int(row["targets"]),
-		"a hive costs wood and sunflowers, stings close by, gathers from 2-4 tiles, draws no power, is summer's, sounds, and has one upgrade - to two stings at once",
+		"a hive costs wood, sunflowers and money, stings close by, gathers from 2-4 tiles, draws no power, is summer's, sounds, and has one upgrade - to two stings at once",
 		str(row))
 	var unrefused: Array = []
 	for pair in [["damage", "stings for nothing"], ["sting_ticks", "stings for nothing"],
@@ -7659,7 +7663,8 @@ func _task_0226_beehive() -> void:
 	# level two at its price, stinging two at once; a third is refused by
 	# name, for nothing.
 	var up := State.create(22606)
-	Resources.gain(up, {GameData.WOOD: 200, GameData.SUNFLOWER: 40})
+	SuiteKit.open_arsenal(up, [&"beehive"])
+	Resources.gain(up, {GameData.WOOD: 200, GameData.SUNFLOWER: 40, GameData.MONEY: 500})
 	(up["tech_owned"] as Array).append(&"true sights")
 	NightRoad.into_build(up)
 	var cell := _open_square(up, 4, &"beehive")
@@ -7731,8 +7736,10 @@ func _task_0226_beehive() -> void:
 	var icon := bar._icon_of(&"beehive")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
-	expect(icon != null and icon.resource_path == "res://sprites/buildings/mortar.png" and order.find(&"beehive") == 8,
-		"the hotbar shows the hive's stand-in, first of summer's after spring's eight", str(order))
+	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_mortar.png"
+		and PlaceholderArt.art(&"icon_beehive").get("pack", "") == "A045"
+		and order.find(&"beehive") >= _first_of_season(order, 1),
+		"the hotbar shows the hive's stand-in - A045's road since task 0234, the mortar's icon - among summer's after spring's", str(order))
 	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
 	expect(shots.contains("[\"beehive\", ")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A038-beehive.md").contains("Final geometry settled by game task 0226"),
@@ -7746,8 +7753,10 @@ func _task_0226_beehive() -> void:
 ## for; then START into a parked night with nobody in it (task 0226).
 func _hive_night(seed_value: int, growing: int, stored: int, more: Array = []) -> Dictionary:
 	var state := State.create(seed_value)
+	SuiteKit.open_arsenal(state, [&"beehive"])
 	var price := int((GameData.DEFENCES[&"beehive"]["cost"] as Dictionary)[GameData.SUNFLOWER])
-	Resources.gain(state, {GameData.WOOD: 200, GameData.SUNFLOWER: price * (1 + more.size()) + stored})
+	Resources.gain(state, {GameData.WOOD: 200, GameData.SUNFLOWER: price * (1 + more.size()) + stored,
+		GameData.MONEY: 500})
 	NightRoad.into_build(state)
 	var spot := _open_square(state, 4, &"beehive")
 	expect(Building.place(state, &"beehive", spot), "a hive goes down in the build step", str(spot))
@@ -7792,13 +7801,13 @@ func _task_0227_catapult() -> void:
 	# **The row, and not a cheaper mortar.**
 	var row: Dictionary = GameData.DEFENCES[&"catapult"]
 	var mortar: Dictionary = GameData.DEFENCES[&"mortar"]
-	var cost: Dictionary = row["cost"]
-	expect(cost.size() == 2 and cost.has(GameData.WOOD) and cost.has(GameData.PUMPKIN)
+	var cost := Building.materials_of(&"catapult")
+	expect(cost.size() == 2 and cost.has(GameData.WOOD) and cost.has(GameData.PUMPKIN) and Building.money_of(&"catapult") > 0
 		and StringName(row["shape"]) == GameData.SHAPE_SPLASH and StringName(row["aim"]) == GameData.AIM_BALLISTIC
 		and int(row["flight_ticks"]) > 0 and row["ammo"] == {GameData.PUMPKIN: 1}
 		and GameData.defence_season(row) == &"autumn" and Sfx.TOWER_SOUNDS.get(&"catapult") == &"sfx/mortar"
 		and not GameData.DEFENCES.has(GameData.PUMPKIN),
-		"a catapult costs wood and pumpkins, lobs a splash at a place a pumpkin a shot, is autumn's and thumps like a mortar - and its id is not the crop's",
+		"a catapult costs wood, pumpkins and money, lobs a splash at a place a pumpkin a shot, is autumn's and thumps like a mortar - and its id is not the crop's",
 		str(row))
 	expect(int(row["range"]) < int(mortar["range"]) and int(row["damage"]) < int(mortar["damage"])
 		and int(row.get("min_range", 0)) == 0 and int(mortar["min_range"]) > 0
@@ -7890,7 +7899,9 @@ func _task_0227_catapult() -> void:
 	# **Three levels, read through `Building.entry_at`**: each laid over the
 	# row as its step gives, the last a volley - two pumpkins a throw.
 	var up := State.create(22702)
-	Resources.gain(up, {GameData.WOOD: 300, GameData.STONE: 100, GameData.IRON: 100, GameData.PUMPKIN: 10})
+	SuiteKit.open_arsenal(up, [&"catapult"])
+	Resources.gain(up, {GameData.WOOD: 300, GameData.STONE: 100, GameData.IRON: 100, GameData.PUMPKIN: 10,
+		GameData.MONEY: 500})
 	(up["tech_owned"] as Array).append_array([&"true sights", &"oiled works"])
 	NightRoad.into_build(up)
 	var cell := _open_square(up, 4, &"catapult")
@@ -7993,9 +8004,10 @@ func _task_0227_catapult() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		if GameData.SEASONS.find(GameData.defence_season(GameData.DEFENCES[id])) < 2:
 			before_autumn += 1
-	expect(icon != null and icon.resource_path == "res://sprites/buildings/auto_crossbow.png"
-		and order.find(&"catapult") == before_autumn,
-		"the hotbar shows its stand-in, autumn's first, after spring's and summer's", str(order))
+	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_auto_crossbow.png"
+		and PlaceholderArt.art(&"icon_catapult").get("pack", "") == "A045"
+		and order.find(&"catapult") >= before_autumn,
+		"the hotbar shows its stand-in - A045's road since task 0234, the crossbow's icon - among autumn's, after spring's and summer's", str(order))
 	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
 	expect(shots.contains("[\"catapult\", ")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A039-catapult.md").contains("Final geometry settled by game task 0227"),
@@ -8013,15 +8025,15 @@ func _task_0227_catapult() -> void:
 func _task_0228_garlic() -> void:
 	# **The row, and its checks.**
 	var row: Dictionary = GameData.DEFENCES[&"garlic_braid"]
-	var cost: Dictionary = row["cost"]
-	expect(cost.size() == 2 and cost.has(GameData.GARLIC) and cost.has(GameData.WOOD)
+	var cost := Building.materials_of(&"garlic_braid")
+	expect(cost.size() == 2 and cost.has(GameData.GARLIC) and cost.has(GameData.WOOD) and Building.money_of(&"garlic_braid") > 0
 		and int(cost[GameData.WOOD]) < int(cost[GameData.GARLIC])
 		and GameData.defence_season(row) == &"autumn" and Building.walked_over(&"garlic_braid")
 		and not Pathing.is_prey(&"garlic_braid") and not Traps.is_trap(&"garlic_braid")
 		and not row.has("damage") and not row.has("path_cost") and not Sfx.TOWER_SOUNDS.has(&"garlic_braid")
 		and int(row["repel_tiles"]) >= 1 and int(row["repel_tiles"]) <= 3
 		and not GameData.DEFENCES.has(GameData.GARLIC),
-		"a braid costs garlic and a little wood, is autumn's, is walked over - never prey, never a trap, no sound - and reaches 1-3 tiles; its id is not the crop's",
+		"a braid costs garlic, a little wood and money, is autumn's, is walked over - never prey, never a trap, no sound - and reaches 1-3 tiles; its id is not the crop's",
 		str(row))
 	var unrefused: Array = []
 	for lever in [["repel_tiles", 0, "repels from no tiles"], ["repel_cost", 0, "or for nothing"],
@@ -8078,7 +8090,8 @@ func _task_0228_garlic() -> void:
 	# house, and a braid on it: the build step's preview bends round its
 	# area, and once it is hung the road the wave walks is that preview.
 	var road_farm := State.create(22801)
-	Resources.gain(road_farm, {GameData.GARLIC: 20, GameData.WOOD: 20})
+	SuiteKit.open_arsenal(road_farm, [&"garlic_braid"])
+	Resources.gain(road_farm, {GameData.GARLIC: 20, GameData.WOOD: 20, GameData.MONEY: 100})
 	NightRoad.into_build(road_farm)
 	Pathing.refresh(road_farm)
 	var from: Vector2i = Enemies.spawn_cells(road_farm, int(Calendar.open_sides(Phases.night_ahead(road_farm))[0]))[0]
@@ -8176,7 +8189,8 @@ func _task_0228_garlic() -> void:
 		and (farm["repel"] as PackedByteArray).is_empty(),
 		"spent it stays, drawn spent, does nothing, and sells for nothing - its garlic is used up")
 	var late := State.create(22804)
-	Resources.gain(late, {GameData.GARLIC: 20, GameData.WOOD: 20})
+	SuiteKit.open_arsenal(late, [&"garlic_braid"])
+	Resources.gain(late, {GameData.GARLIC: 20, GameData.WOOD: 20, GameData.MONEY: 100})
 	NightRoad.to_night(late)
 	NightRoad.park(late)
 	var late_spot := _open_square(late, 4, &"garlic_braid")
@@ -8237,15 +8251,15 @@ func _task_0228_garlic() -> void:
 func _task_0229_light() -> void:
 	# **The row, and its checks.**
 	var row: Dictionary = GameData.DEFENCES[&"searchlight"]
-	var cost: Dictionary = row["cost"]
+	var cost := Building.materials_of(&"searchlight")
 	var tiles := int(row["light_tiles"])
 	var steps: Array = GameData.TOWER_LEVELS[&"searchlight"]
 	var wider := int(((steps[0] as Dictionary)["gives"] as Dictionary).get("light_tiles", 0)) if steps.size() == 1 else 0
-	expect(cost.size() == 2 and cost.has(GameData.IRON) and cost.has(GameData.COPPER)
+	expect(cost.size() == 2 and cost.has(GameData.IRON) and cost.has(GameData.COPPER) and Building.money_of(&"searchlight") > 0
 		and not row.has("reload_ticks") and not row.has("damage") and int(row["energy_draw"]) > 0
 		and tiles >= 3 and tiles <= 6 and GameData.defence_season(row) == &"winter"
 		and not Sfx.TOWER_SOUNDS.has(&"searchlight") and Pathing.is_prey(&"searchlight") and wider > tiles,
-		"a searchlight costs iron and copper, draws power, lights 3-6 tiles, shoots nothing, is winter's, is hunted by breakers, and has one upgrade - a wider light",
+		"a searchlight costs iron, copper and money, draws power, lights 3-6 tiles, shoots nothing, is winter's, is hunted by breakers, and has one upgrade - a wider light",
 		str(row))
 	var unlit := GameData.DEFENCES.duplicate(true)
 	(unlit[&"searchlight"] as Dictionary)["light_tiles"] = 0
@@ -8256,7 +8270,8 @@ func _task_0229_light() -> void:
 
 	# **Each source of light.** The porch, on a farm with nothing else.
 	var farm := State.create(22900)
-	Resources.gain(farm, {GameData.IRON: 200, GameData.COPPER: 200, GameData.WOOD: 200})
+	SuiteKit.open_arsenal(farm, [&"searchlight"])
+	Resources.gain(farm, {GameData.IRON: 200, GameData.COPPER: 200, GameData.WOOD: 200, GameData.MONEY: 500})
 	var porch := House.porch(farm)
 	var expected := {}
 	_lit_square(expected, porch, GameData.PORCH_LIGHT_TILES)
@@ -8383,7 +8398,7 @@ func _task_0229_light() -> void:
 	var icon := bar._icon_of(&"searchlight")
 	bar.free()
 	expect(road.is_empty() and WorldView.stand_in_tower(&"searchlight") and shown == [&"searchlight_2_fire", &"searchlight_2"]
-		and icon != null and icon.resource_path == "res://sprites/buildings/gun_tower.png",
+		and icon != null and icon.resource_path == "res://sprites/ui/icon_gun_tower.png",
 		"drawn through 0120's road: the gun tower in lamp white at A041's 32x48 on (16,44), its lens a light point but on the wreck; lit at night at full power, dark by day; the hotbar's icon",
 		"%s %s" % [str(road), str(shown)])
 	expect(FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"searchlight\", ")
@@ -8400,15 +8415,15 @@ func _task_0229_light() -> void:
 func _task_0230_electric_fence() -> void:
 	# **The row, and its checks.**
 	var row: Dictionary = GameData.DEFENCES[&"electric_fence"]
-	var cost: Dictionary = row["cost"]
+	var cost := Building.materials_of(&"electric_fence")
 	var stun := int(row["stun_ticks"])
 	var share := int(row["boss_stun_percent"])
-	expect(cost.size() == 2 and cost.has(GameData.COPPER) and cost.has(GameData.WOOD)
+	expect(cost.size() == 2 and cost.has(GameData.COPPER) and cost.has(GameData.WOOD) and Building.money_of(&"electric_fence") > 0
 		and int(row["path_cost"]) > 0 and int(row["hp"]) > 0 and int(row["energy_draw"]) > 0
 		and stun >= GameData.SECONDS and stun <= 3 * GameData.SECONDS and share >= 0 and share < 100
 		and not row.has("damage") and not row.has("reload_ticks") and GameData.defence_season(row) == &"winter"
 		and not Sfx.TOWER_SOUNDS.has(&"electric_fence") and not Pathing.is_prey(&"electric_fence"),
-		"an electric fence costs copper and wood, is a barrier with hit points, draws power, stuns for 1-3 seconds and a boss for less, does no damage and makes no tower sound, is winter's, and no breaker hunts it",
+		"an electric fence costs copper, wood and money, is a barrier with hit points, draws power, stuns for 1-3 seconds and a boss for less, does no damage and makes no tower sound, is winter's, and no breaker hunts it",
 		str(row))
 	var dead := GameData.DEFENCES.duplicate(true)
 	(dead[&"electric_fence"] as Dictionary)["stun_ticks"] = 0
@@ -8426,7 +8441,8 @@ func _task_0230_electric_fence() -> void:
 	# the priced field, a wall in the runners' open one, a thing to break
 	# through - not prey.
 	var farm := State.create(23000)
-	Resources.gain(farm, {GameData.COPPER: 200, GameData.WOOD: 200})
+	SuiteKit.open_arsenal(farm, [&"electric_fence"])
+	Resources.gain(farm, {GameData.COPPER: 200, GameData.WOOD: 200, GameData.MONEY: 500})
 	NightRoad.into_build(farm)
 	var spot := _open_square(farm, 4, &"electric_fence")
 	expect(Building.place(farm, &"electric_fence", spot), "an electric fence goes down in the build step", str(spot))
@@ -8519,7 +8535,8 @@ func _task_0230_electric_fence() -> void:
 	# **The joins**: it meets its own kind, the wooden fence and the wall -
 	# which meet it back - and nothing else.
 	var joined := State.create(23004)
-	Resources.gain(joined, {GameData.COPPER: 20, GameData.WOOD: 20})
+	SuiteKit.open_arsenal(joined, [&"electric_fence"])
+	Resources.gain(joined, {GameData.COPPER: 20, GameData.WOOD: 20, GameData.MONEY: 100})
 	NightRoad.into_build(joined)
 	var centre := _open_square(joined, 2, &"electric_fence")
 	Farm.place(joined, centre, {"id": &"electric_fence", "hp": 40})
@@ -8644,7 +8661,9 @@ func _task_0230_electric_fence() -> void:
 ## farm's power and the walker (task 0230).
 func _ring_bites(seed_value: int, id: StringName, short: bool) -> Dictionary:
 	var state := State.create(seed_value)
-	Resources.gain(state, {GameData.COPPER: 200, GameData.WOOD: 200, GameData.IRON: 200})
+	SuiteKit.open_arsenal(state, [id])
+	Resources.gain(state, {GameData.COPPER: 200, GameData.WOOD: 200, GameData.IRON: 200,
+		GameData.MONEY: 500})
 	NightRoad.into_build(state)
 	var spot := _open_square(state, 4, id)
 	var ring: Array = []
@@ -8703,11 +8722,12 @@ func _task_0231_strong_walls() -> void:
 		and int(gives.get("hp", 0)) > int(wall["hp"]) and int(gives.get("path_cost", 0)) > int(wall["path_cost"]),
 		"the wall has one level, behind 'stout timbers' and paid in hardwood, which rebuilds it with more hit points and a dearer way through",
 		str(step))
-	expect((bags["cost"] as Dictionary).keys() == [GameData.SANDBAG] and GameData.defence_season(bags) == &"summer"
+	expect(Building.materials_of(&"sandbag_wall").keys() == [GameData.SANDBAG] and Building.money_of(&"sandbag_wall") > 0
+		and GameData.defence_season(bags) == &"summer"
 		and int(fence["hp"]) < int(bags["hp"]) and int(bags["hp"]) < int(wall["hp"])
 		and int(fence["path_cost"]) < int(bags["path_cost"]) and int(bags["path_cost"]) < int(wall["path_cost"])
 		and not bags.has("damage") and not Sfx.TOWER_SOUNDS.has(&"sandbag_wall") and not Pathing.is_prey(&"sandbag_wall"),
-		"a sandbag wall is paid in sandbags, is summer's, sits between the fence and the wall on hit points and path cost, does no damage and nobody hunts it",
+		"a sandbag wall is paid in sandbags and a little money, is summer's, sits between the fence and the wall on hit points and path cost, does no damage and nobody hunts it",
 		str(bags))
 	var levels := GameData.TOWER_LEVELS.duplicate(true)
 	((levels[&"wall"] as Array)[0]["gives"] as Dictionary)["path_cost"] = GameData.WIDEST_STEP
@@ -8719,7 +8739,8 @@ func _task_0231_strong_walls() -> void:
 	# **Upgraded by the cursor's road, as a tower is**: refused before the
 	# node, then once, then never a third.
 	var farm := State.create(23100)
-	Resources.gain(farm, {GameData.STONE: 200, GameData.HARDWOOD: 40, GameData.SANDBAG: 20})
+	SuiteKit.open_arsenal(farm, [&"sandbag_wall"])
+	Resources.gain(farm, {GameData.STONE: 200, GameData.HARDWOOD: 40, GameData.SANDBAG: 20, GameData.MONEY: 200})
 	NightRoad.into_build(farm)
 	var spot := _open_square(farm, 4, &"wall")
 	expect(Building.place(farm, &"wall", spot), "a stone wall goes up in the build step", str(spot))
@@ -8765,8 +8786,11 @@ func _task_0231_strong_walls() -> void:
 	var plain_built := Building.place(farm, &"wall", plain)
 	var plain_made := Building.made_of(farm, plain)
 	var mended := Repair.apply(farm, spot, 1000)
-	expect(made == {GameData.STONE: 10, GameData.HARDWOOD: 4} and rates.has(GameData.STONE) and rates.has(GameData.HARDWOOD)
-		and plain_built and plain_made == {GameData.STONE: 10}
+	# Its price is what it is made of (task 0234): the stone wall's stone and
+	# money share, and the hardwood its level rebuilt it with.
+	expect(made == {GameData.STONE: 10, GameData.MONEY: Building.money_of(&"wall"), GameData.HARDWOOD: 4}
+		and rates.has(GameData.STONE) and rates.has(GameData.HARDWOOD)
+		and plain_built and plain_made == Building.cost_of(&"wall")
 		and Repair.full_hp_at(farm, spot) == int(gives["hp"]) and mended == int(gives["hp"]) - 100
 		and int(Farm.occupant(farm, spot)["hp"]) == int(gives["hp"]),
 		"a hardwood wall is made of stone and hardwood and mends in both, to %d; a stone one is stone" % int(gives["hp"]),
@@ -8800,7 +8824,8 @@ func _task_0231_strong_walls() -> void:
 	# **The joins**: sandbags meet sandbags, walls at any level, fences - a
 	# line is one line - and a hardwood wall is drawn as its level.
 	var joined := State.create(23102)
-	Resources.gain(joined, {GameData.SANDBAG: 20})
+	SuiteKit.open_arsenal(joined, [&"sandbag_wall"])
+	Resources.gain(joined, {GameData.SANDBAG: 20, GameData.MONEY: 100})
 	NightRoad.into_build(joined)
 	var centre := _open_square(joined, 2, &"sandbag_wall")
 	Farm.place(joined, centre, {"id": &"sandbag_wall", "hp": 70})
@@ -8868,14 +8893,14 @@ func _task_0231_strong_walls() -> void:
 		"every mask's arms match its bits and every hurt one differs from its whole one; the hardwood wall has the stone wall's shape in all 32 masks, in other colours; the sandbags' post is low on row 19; both wrecks lie low on row 27",
 		"%s post %s wrecks %s %s" % [str(arms.slice(0, 6)), str(post), str(bag_wreck), str(wood_wreck)])
 
-	# **The hotbar**: a straight run of sandbags, summer's, by name.
+	# **The hotbar**: a straight run of sandbags, among summer's.
 	var bar := Hotbar.new()
 	var icon := bar._icon_of(&"sandbag_wall")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
 	expect(icon != null and icon == StrongWallArt.texture(JoinRecipe.name_of(StrongWallArt.SANDBAGS, 10, false))
-		and order.find(&"sandbag_wall") == order.find(&"decoy") + 1,
-		"the hotbar shows a straight run of sandbags, among summer's after the decoy", str(order))
+		and order.find(&"sandbag_wall") >= _first_of_season(order, 1) and Building.season_of(&"sandbag_wall") == 1,
+		"the hotbar shows a straight run of sandbags, among summer's", str(order))
 	expect(FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"strong_walls\", ")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A043-strong-walls.md").contains("Final geometry settled by game task 0231"),
 		"shot.gd has a mixed line, and A043's table says the geometry this task settled")
@@ -9181,6 +9206,223 @@ func _task_0233_powers() -> void:
 	_completed += 1
 
 
+## 0234 - the arsenal grows with the seasons, and every defence costs money.
+## Each defence is refused before its season with the season's name and goes
+## down from its first day, and Year 2's spring keeps winter's; a kit still
+## pays its money; the checks refuse a kit drifting from its materials, a
+## season that is none and a defence with no money or nothing but; the order
+## is the year's, a page a season, each from the cheapest; every season opens
+## a defence a good day buys; the new families sleep under tarps and wake.
+func _task_0234_arsenal() -> void:
+	# **The plan's table** (section 5), read off `GameData.DEFENCES`.
+	var plan := {&"spring": [&"auto_crossbow", &"barricade", &"fence", &"gun_tower", &"mine", &"wall"],
+		&"summer": [&"beehive", &"decoy", &"flame_tower", &"sandbag_wall", &"zombie_bait"],
+		&"autumn": [&"catapult", &"garlic_braid", &"mortar"],
+		&"winter": [&"electric_fence", &"searchlight"]}
+	var by_table := {}
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var season := GameData.defence_season(GameData.DEFENCES[id])
+		if not by_table.has(season):
+			by_table[season] = []
+		(by_table[season] as Array).append(id)
+	expect(by_table == plan,
+		"each defence opens in the plan's season: spring the guns, the crossbow, the mine and the barriers; summer the flamethrower, the decoy, the hive, the bait and the sandbags; autumn the mortar, the catapult and the garlic; winter the searchlight and the electric fence",
+		str(by_table))
+
+	# **A rule**: every defence asked in the build step on the last day
+	# before each season, on its first, and on Year 2's first.
+	var plenty := {GameData.WOOD: 900, GameData.STONE: 900, GameData.IRON: 900,
+		GameData.OIL: 900, GameData.GUNPOWDER: 900, GameData.MONEY: 9000,
+		GameData.COPPER: 900, GameData.STRAW: 900, GameData.SUNFLOWER: 900,
+		GameData.PUMPKIN: 900, GameData.GARLIC: 900, GameData.SANDBAG: 900}
+	var sd := GameData.SEASON_DAYS
+	var wrong: Array = []
+	var asked := 0
+	for day in [1, sd, sd + 1, 2 * sd, 2 * sd + 1, 3 * sd, 3 * sd + 1, Calendar.year_days() + 1]:
+		var state := State.create(23400 + day)
+		state["day"] = day
+		Resources.gain(state, plenty)
+		for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+			if Building.kit_only(id):
+				Crafting.bank_kit(state, id, 3)
+		NightRoad.into_build(state)
+		var today := Calendar.season_of(day) if Calendar.year_of(day) == 1 else GameData.SEASONS.size() - 1
+		for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+			var season := Building.season_of(id)
+			var want: Array = [] if season <= today else [&"WHY_NOT_YET_SEASON", StringName(GameData.SEASONS[season])]
+			var reason := Building.why_not(state, id, _clear_for(state, id))
+			asked += 1
+			if reason != want:
+				wrong.append("%s on day %d: %s" % [id, day, str(reason)])
+	expect(wrong.is_empty() and asked == 8 * GameData.DEFENCES.size(),
+		"every defence is refused before its season with the season's name and goes down from its first day - and Year 2's spring keeps winter's",
+		str(wrong.slice(0, 4)))
+
+	# **Money as well as materials**, under a hundred so the price fits its
+	# slot; and the checks.
+	var bad_shares: Array = []
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var money := Building.money_of(id)
+		if money <= 0 or money >= 100 or Building.materials_of(id).is_empty():
+			bad_shares.append(id)
+	var drift_money := GameData.RECIPES.duplicate(true)
+	(drift_money[&"mine_kit"] as Dictionary)["inputs"] = Building.cost_of(&"mine").duplicate()
+	var drift_iron := GameData.RECIPES.duplicate(true)
+	((drift_iron[&"mine_kit"] as Dictionary)["inputs"] as Dictionary)[GameData.IRON] = 4
+	var monsoon := GameData.DEFENCES.duplicate(true)
+	(monsoon[&"decoy"] as Dictionary)["season"] = &"monsoon"
+	var free := GameData.DEFENCES.duplicate(true)
+	((free[&"wall"] as Dictionary)["cost"] as Dictionary).erase(GameData.MONEY)
+	var only_money := GameData.DEFENCES.duplicate(true)
+	(only_money[&"wall"] as Dictionary)["cost"] = {GameData.MONEY: 10}
+	expect(bad_shares.is_empty()
+		and _says(GameData.check_recipes(drift_money), "a kit has to be the materials paid early")
+		and _says(GameData.check_recipes(drift_iron), "a kit has to be the materials paid early")
+		and _says(GameData.check_defences(monsoon), "which is no season")
+		and _says(GameData.check_defences(free), "costs no money, or nothing but money")
+		and _says(GameData.check_defences(only_money), "costs no money, or nothing but money")
+		and GameData.validate().is_empty(),
+		"every defence costs money under $100 and materials; the checks refuse a kit that pays the money or drifts from the materials, a season that is none, and a defence with no money or nothing but; the real tables pass",
+		str(bad_shares))
+
+	# **A kit is the materials paid early, and placing it still charges the
+	# money**: refused short of it with the kit kept, then down for the money
+	# alone.
+	var kit_farm := State.create(23410)
+	Crafting.bank_kit(kit_farm, &"mine", 2)
+	NightRoad.into_build(kit_farm)
+	var mine_spot := _clear_for(kit_farm, &"mine")
+	var share := Building.money_of(&"mine")
+	Resources.spend(kit_farm, GameData.MONEY, Resources.amount(kit_farm, GameData.MONEY))
+	var broke := Building.why_not(kit_farm, &"mine", mine_spot)
+	var kept := not Building.place(kit_farm, &"mine", mine_spot) and Crafting.kits(kit_farm, &"mine") == 2
+	Resources.gain(kit_farm, {GameData.MONEY: share + 5})
+	var iron := Resources.amount(kit_farm, GameData.IRON)
+	var powder := Resources.amount(kit_farm, GameData.GUNPOWDER)
+	var placed := Building.place(kit_farm, &"mine", mine_spot)
+	expect(broke == [&"WHY_SHORT", {GameData.MONEY: share}] and kept and placed
+		and Crafting.kits(kit_farm, &"mine") == 1 and Resources.amount(kit_farm, GameData.MONEY) == 5
+		and Resources.amount(kit_farm, GameData.IRON) == iron and Resources.amount(kit_farm, GameData.GUNPOWDER) == powder,
+		"a mine from a kit still charges its $%d: refused short of it with the kit kept, then down for the money alone - no iron, no powder" % share,
+		"%s, $%d left" % [str(broke), Resources.amount(kit_farm, GameData.MONEY)])
+
+	# **Off the ledger, the whole price; sold, the fraction of all of it.**
+	var ledger := State.create(23411)
+	Resources.gain(ledger, {GameData.WOOD: 10, GameData.IRON: 12})
+	NightRoad.into_build(ledger)
+	var gun := _clear_for(ledger, &"gun_tower")
+	var before := Resources.amount(ledger, GameData.MONEY)
+	var up := Building.place(ledger, &"gun_tower", gun)
+	var paid := before - Resources.amount(ledger, GameData.MONEY)
+	var back := Building.sell(ledger, gun)
+	expect(up and paid == Building.money_of(&"gun_tower")
+		and back == Building.refund_for_cost(Building.cost_of(&"gun_tower"))
+		and int(back.get(GameData.MONEY, 0)) == int(floor(float(Building.money_of(&"gun_tower")) * GameData.SELL_BACK_FRACTION))
+		and int(back.get(GameData.MONEY, 0)) > 0,
+		"off the ledger a gun tower takes its materials and its $%d, and sold it gives back the fraction of both" % Building.money_of(&"gun_tower"),
+		str(back))
+	# Mending takes its share of the money too, as a coop's always has.
+	var post := State.create(23412)
+	Resources.gain(post, {GameData.WOOD: 100, GameData.IRON: 100, GameData.MONEY: 100})
+	NightRoad.into_build(post)
+	var tower := _clear_for(post, &"gun_tower")
+	var built := Building.place(post, &"gun_tower", tower)
+	var bill := Repair.cost_at(post, tower, Repair.full_hp_at(post, tower))
+	var fair := Building.money_of(&"gun_tower") * GameData.REPAIR_PERCENT / 100
+	expect(built and int(bill.get(GameData.MONEY, 0)) >= fair - 1 and int(bill.get(GameData.MONEY, 0)) <= fair,
+		"a full mend takes %d%% of the money as of the materials, as a coop's always has" % GameData.REPAIR_PERCENT,
+		str(bill))
+
+	# **The order: the year's, each season from the cheapest** - a page a
+	# season on the hotbar.
+	var order: Array = Building.placeable_ids().slice(0, GameData.DEFENCES.size())
+	var in_order := true
+	for i in order.size() - 1:
+		var a: StringName = order[i]
+		var b: StringName = order[i + 1]
+		var sa := Building.season_of(a)
+		var sb := Building.season_of(b)
+		in_order = in_order and (sa < sb or (sa == sb and (Building.price_of(a) < Building.price_of(b)
+			or (Building.price_of(a) == Building.price_of(b) and String(a) < String(b)))))
+	var sizes: Array = []
+	for page in Hotbar.pages_of(order):
+		sizes.append((page as Array).size())
+	expect(in_order and sizes == [6, 5, 3, 2] and Hotbar.per_page() >= 6 and order[0] == &"barricade",
+		"the hotbar's order is the year's, each season from the cheapest - spring's barricade first - a page a season: six, five, three and two",
+		"%s %s" % [str(order), str(sizes)])
+
+	# **A good day buys about one new defence** (plan section 5): every season
+	# opens one whose money and materials, at what the stall charges, are
+	# inside 0194's band for its day; and a new game's purse still pays the
+	# first gun tower's money and a fence's on night one.
+	var buys := {}
+	for id in order:
+		var named: StringName = GameData.SEASONS[Building.season_of(id)]
+		var band: Array = GameData.DAY_TARGETS[named]
+		if Building.price_of(id) >= int(band[0]) and Building.price_of(id) <= int(band[1]):
+			buys[named] = id
+	var purse := int(GameData.STARTING_RESOURCES[GameData.MONEY])
+	expect(buys.size() == GameData.SEASONS.size()
+		and purse >= Building.money_of(&"gun_tower") + Building.money_of(&"fence"),
+		"every season opens a defence a good day buys - %s - and a new game's $%d still pays a gun tower's money and a fence's on night one" % [str(buys), purse],
+		str(buys))
+
+	# **The words**: a defence's tooltip says its season, spring's none; a
+	# slot's price, money first, and a kit's money.
+	var shelf := State.create(23413)
+	Resources.gain(shelf, plenty)
+	Crafting.bank_kit(shelf, &"mine")
+	var bar := Hotbar.new()
+	bar.show_state(shelf)
+	var gun_line := bar._price_line(&"gun_tower")
+	var kit_line := bar._price_line(&"mine")
+	var stake_line := bar._price_line(&"barricade")
+	bar.free()
+	var dollars := func(id: StringName) -> String: return I18n.f(&"HOTBAR_MONEY", [Building.money_of(id)])
+	expect(Describe.defence(&"decoy").contains(I18n.f(&"DESC_SEASON", [Names.of(&"summer")]))
+		and not Describe.defence(&"gun_tower").contains(I18n.f(&"DESC_SEASON", [Names.of(&"spring")]))
+		and gun_line == "%s 12i\n10w" % dollars.call(&"gun_tower")
+		and kit_line == "%s %s" % [I18n.f(&"HOTBAR_KITS", [1]), dollars.call(&"mine")]
+		and stake_line.begins_with("%s 4w\n" % dollars.call(&"barricade")),
+		"a tooltip says the season a defence comes in, spring's none; a slot shows the money first, and a kit the money it still asks",
+		"%s / %s / %s" % [gun_line, kit_line, stake_line])
+
+	# **The new families sleep under tarps and wake at dusk** (0223's list,
+	# A044's footprints), and wear A045's icons through 0120's road.
+	var covered := true
+	for pair in [[&"beehive", &"tarp_tower"], [&"catapult", &"tarp_tower"], [&"searchlight", &"tarp_tower"],
+			[&"decoy", &"tarp_tall"], [&"garlic_braid", &"tarp_short"]]:
+		covered = covered and Transition.TARPS.get(pair[0], &"") == pair[1]
+	for id in [&"sandbag_wall", &"electric_fence", &"zombie_bait"]:
+		covered = covered and not Transition.TARPS.has(id)
+	var woken := Transition.WAKES.has(&"beehive") and Transition.WAKES.has(&"catapult") \
+		and Transition.WAKES.has(&"searchlight")
+	var unregistered: Array = []
+	for id in [&"decoy", &"beehive", &"catapult", &"garlic_braid", &"searchlight", &"electric_fence", &"sandbag_wall"]:
+		if PlaceholderArt.art(StringName("icon_%s" % id)).get("pack", "") != "A045":
+			unregistered.append(id)
+	expect(covered and woken and unregistered.is_empty()
+		and PlaceholderArt.art(&"icon_zombie_bait").get("pack", "") == "A037",
+		"the hive, the catapult and the searchlight sleep under the tower's tarp and wake, the decoy under the tall one, the braid under the short one - never the sandbags, the wire or the bait; each wears A045's icon through 0120's road, the bait A037's",
+		str(unregistered))
+
+	# **The robot plans round a shut season**, as round any refusal.
+	var robot := State.create(23414)
+	var policy := SuiteKit.early_policy(&"towers")
+	var at_mortar := (policy["build"] as Array).find(&"mortar")
+	robot["autoplay_step"] = at_mortar
+	Autoplay._one_thing(robot, policy)
+	expect(at_mortar >= 0 and int(robot["autoplay_step"]) == at_mortar + 1,
+		"the robot plans round a mortar in spring", str(robot["autoplay_step"]))
+
+	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
+	expect(shots.contains("[\"arsenal_spring\", ") and shots.contains("[\"arsenal_winter\", ")
+		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A044-tarps.md").contains("Final geometry settled by game task 0234")
+		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A045-power-weapon-icons.md").contains("Final geometry settled by game task 0234"),
+		"shot.gd has the hotbar in spring and in winter, and A044's and A045's tables are final")
+	_completed += 1
+
+
 ## A parked night with nobody on the farm (task 0232).
 func _powers_night(seed_value: int) -> Dictionary:
 	var state := State.create(seed_value)
@@ -9301,7 +9543,8 @@ func _a_dark_cell(state: Dictionary, from: Vector2i, at_least: int, clear: int =
 ## nothing on it - with garlic and wood to spare (task 0228).
 func _garlic_build(seed_value: int) -> Dictionary:
 	var state := State.create(seed_value)
-	Resources.gain(state, {GameData.GARLIC: 40, GameData.WOOD: 40})
+	SuiteKit.open_arsenal(state, [&"garlic_braid"])
+	Resources.gain(state, {GameData.GARLIC: 40, GameData.WOOD: 40, GameData.MONEY: 500})
 	NightRoad.into_build(state)
 	var spot := _open_square(state, 4, &"garlic_braid")
 	expect(Building.place(state, &"garlic_braid", spot), "a braid hung in the build step", str(spot))
@@ -9326,8 +9569,9 @@ func _walked_from(state: Dictionary, from: Vector2i) -> Array:
 ## it (task 0227).
 func _catapult_night(seed_value: int, pumpkins: int) -> Dictionary:
 	var state := State.create(seed_value)
+	SuiteKit.open_arsenal(state, [&"catapult"])
 	var price := int((GameData.DEFENCES[&"catapult"]["cost"] as Dictionary)[GameData.PUMPKIN])
-	Resources.gain(state, {GameData.WOOD: 200, GameData.PUMPKIN: price + pumpkins})
+	Resources.gain(state, {GameData.WOOD: 200, GameData.PUMPKIN: price + pumpkins, GameData.MONEY: 500})
 	NightRoad.into_build(state)
 	var spot := _open_square(state, 6, &"catapult")
 	expect(Building.place(state, &"catapult", spot), "a catapult goes down in the build step", str(spot))
@@ -9352,7 +9596,8 @@ func _moved_toward(from: Vector2i, now: Vector2i, aim: Vector2i) -> bool:
 ## at night (task 0224). Nobody else on the farm.
 func _decoy_night(seed_value: int, offsets: Array = [Vector2i.ZERO]) -> Dictionary:
 	var state := State.create(seed_value)
-	Resources.gain(state, {GameData.STRAW: 200, GameData.WOOD: 200})
+	SuiteKit.open_arsenal(state, [&"decoy"])
+	Resources.gain(state, {GameData.STRAW: 200, GameData.WOOD: 200, GameData.MONEY: 500})
 	NightRoad.to_night(state)
 	NightRoad.park(state)
 	Enemies.withdraw(state)
@@ -9366,11 +9611,15 @@ func _decoy_night(seed_value: int, offsets: Array = [Vector2i.ZERO]) -> Dictiona
 
 ## The cell nearest the house, ring by ring and each ring in reading order,
 ## with `radius` cells of bare ground every way round it - grass or path, a
-## step of one each - and room for a decoy, or for `id` (task 0226's hive).
+## step of one each - and ground for a decoy, or for `id` (task 0226's hive).
+## **The ground, not the rules** (task 0234): what it costs and the season it
+## opens in are the test's to ask, so a fixture finds the same ground in
+## spring as in winter.
 func _open_square(state: Dictionary, radius: int, id: StringName = &"decoy") -> Vector2i:
 	# Every new game has the same farm, so the ground found once is asked
 	# about first.
-	if _decoy_ground.x >= 0 and Building.can_place(state, id, _decoy_ground) 			and _bare_round(state, _decoy_ground, radius):
+	if _decoy_ground.x >= 0 and _ground_for(state, id, _decoy_ground) \
+			and _bare_round(state, _decoy_ground, radius):
 		return _decoy_ground
 	var house := Farm.house_centre(state)
 	for ring in range(radius + 2, 60):
@@ -9379,10 +9628,26 @@ func _open_square(state: Dictionary, radius: int, id: StringName = &"decoy") -> 
 				if maxi(absi(dx), absi(dy)) != ring:
 					continue
 				var cell := house + Vector2i(dx, dy)
-				if Building.can_place(state, id, cell) and _bare_round(state, cell, radius):
+				if _ground_for(state, id, cell) and _bare_round(state, cell, radius):
 					_decoy_ground = cell
 					return cell
 	return Vector2i(-1, -1)
+
+
+## Where a season's defences start in a hotbar order (task 0234).
+func _first_of_season(order: Array, season: int) -> int:
+	for i in order.size():
+		if Building.season_of(StringName(order[i])) >= season:
+			return i
+	return order.size()
+
+
+## Whether every cell `id` would cover is ground a thing may go on.
+func _ground_for(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
+	for at in Building.footprint(id, cell):
+		if not Farm.why_not_buildable(state, at).is_empty():
+			return false
+	return true
 
 
 func _bare_round(state: Dictionary, centre: Vector2i, radius: int) -> bool:

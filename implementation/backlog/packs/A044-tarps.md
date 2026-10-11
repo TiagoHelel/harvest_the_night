@@ -20,19 +20,23 @@ still say "a defence sleeps here", including when it was damaged last night.
 
 ## Deliverables
 
-The table is provisional: game task 0234 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0234: the three footprints and the
+rows below stand as written, and every defence of the year is now placed on
+one of them or on none. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
-Families - **chosen by game task 0223** (2026-10-10), and 0234 settles them:
+Families - **chosen by game task 0223** (2026-10-10), **settled by 0234**
+(2026-10-11):
 
 - **The game's one list is `Transition.TARPS`** (`src/ui/transition.gd`).
-  Today it holds the towers the farm has: `tarp_tower` covers `gun_tower`,
-  `auto_crossbow`, `flame_tower` and `mortar` at every level.
-- **0234 adds 0224-0231's defences:** `beehive`, `catapult` and
-  `searchlight` on `tarp_tower`, `decoy` on `tarp_tall` and `garlic_braid`
-  on `tarp_short`.
+- **`tarp_tower`** covers the towers at every level: `gun_tower`,
+  `auto_crossbow`, `flame_tower` and `mortar`, and since 0234 `beehive`,
+  `catapult` and `searchlight` - the three new families that also flare at
+  the wake (`Transition.WAKES`).
+- **`tarp_tall`** covers the `decoy`, **`tarp_short`** the `garlic_braid`.
 - **No tarp for barriers, mines or the bait:** a covered wall is still a
-  wall, and a covered mine is a lie. The generator still wakes at dusk,
-  bare.
+  wall, and a covered mine is a lie - so not the fence, the wall at either
+  level, the barricade, the sandbags or the electric fence, the mine or
+  the zombie bait. The generator still wakes at dusk, bare.
 - **A hurt defence wears the `_hurt` cover by day**, past the tower's own
   hurt threshold, so the morning never hides the night's damage.
 - **A defence that came down is rubble,** swept at dawn, so by day there is

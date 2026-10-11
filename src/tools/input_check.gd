@@ -1339,7 +1339,7 @@ func _case_0027_the_loop() -> void:
 
 	# Press the button a player would press, then arm the farm in the build
 	# step - where defences go up since task 0119.
-	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200, GameData.MONEY: 200})
 	await click_control("NightButton")
 	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
 		"the night to begin")
@@ -2222,7 +2222,7 @@ func _case_0033_power() -> void:
 	var settled := ink(power)
 
 	# **Build past the farm's means and the line says so.**
-	Resources.gain(state, {GameData.WOOD: 600, GameData.IRON: 600})
+	Resources.gain(state, {GameData.WOOD: 600, GameData.IRON: 600, GameData.MONEY: 600})
 	# By day the towers are the ones that went up last night (task 0119).
 	var built: int = SuiteKit.built_last_night(state, func() -> int:
 		var up := 0
@@ -2386,6 +2386,9 @@ func _case_0035_ammo() -> void:
 		return
 
 	var state := driver.state
+	# **Autumn** (task 0234): the flamethrower's rounds open with summer and
+	# the mortar's powder with autumn, so the line has every kind to name.
+	state["day"] = 2 * GameData.SEASON_DAYS + 1
 	var ammo: Label = require_control("AmmoLine")
 	expect(ammo != null, "the HUD has an ammunition line")
 	if ammo == null:
@@ -2394,9 +2397,8 @@ func _case_0035_ammo() -> void:
 		return
 
 	await frames(2)
-	expect(ammo.visible, "and it is up on day one")
-	# The kinds the run has reached (task 0227): autumn's pumpkins are not
-	# on spring's line.
+	expect(ammo.visible, "and it is up by day")
+	# The kinds the run has reached (task 0227): autumn's line has them all.
 	for res in Ammo.kinds_reached(state):
 		expect(ammo.text.contains(str(res)),
 			"it names %s" % res, ammo.text)
@@ -2406,7 +2408,7 @@ func _case_0035_ammo() -> void:
 		Resources.spend(state, res, Resources.amount(state, res))
 	await frames(2)
 	var warned := ink(ammo)
-	Resources.gain(state, {GameData.GUNPOWDER: 9, GameData.INCENDIARY: 9})
+	Resources.gain(state, {GameData.GUNPOWDER: 9, GameData.INCENDIARY: 9, GameData.PUMPKIN: 9})
 	await frames(2)
 	expect(ink(ammo) != warned, "and a stocked one is not",
 		"%s then %s" % [warned, ink(ammo)])
@@ -4550,7 +4552,7 @@ func _case_0082_shots() -> void:
 	# Long strings need a long night behind them.
 	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
 		GameData.STONE: 900, GameData.OIL: 200, GameData.GUNPOWDER: 120,
-		GameData.INCENDIARY: 60})
+		GameData.INCENDIARY: 60, GameData.MONEY: 900})
 	var here := Player.cell(state)
 	NightRoad.to_build(state)     # where defences go up, since task 0119
 	var put := 0
@@ -4911,7 +4913,7 @@ func _case_0085_night_sounds() -> void:
 	driver.running = false
 	await frames(2)
 	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
-		GameData.STONE: 900, GameData.GUNPOWDER: 200})
+		GameData.STONE: 900, GameData.GUNPOWDER: 200, GameData.MONEY: 900})
 	var here := Player.cell(state)
 	NightRoad.to_build(state)     # where defences go up, since task 0119
 	var put := 0
@@ -5432,7 +5434,7 @@ func _case_0090_log() -> void:
 	# done-when, asked by playing one: prepare, fight, and read what the log
 	# said about it afterwards.
 	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
-		GameData.STONE: 900, GameData.GUNPOWDER: 200})
+		GameData.STONE: 900, GameData.GUNPOWDER: 200, GameData.MONEY: 900})
 	var here := Player.cell(state)
 	NightRoad.to_build(state)     # where defences go up, since task 0119
 	var put := 0

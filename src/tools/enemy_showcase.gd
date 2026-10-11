@@ -112,6 +112,9 @@ func _blank(night: bool = false) -> Dictionary:
 		(state["held"] as Dictionary)[resource] = 10000
 	state["player"]["pos"] = [26 * Player.SUBTILE, 16 * Player.SUBTILE]
 	state["player"]["action"] = {}
+	# Every season's towers can go up here (task 0234): the effects' firing
+	# line builds the flamethrower and the mortar.
+	SuiteKit.open_every_season(state)
 	return state
 
 

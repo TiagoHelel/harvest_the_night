@@ -104,6 +104,10 @@ static func defence(id: StringName) -> String:
 	var one: Dictionary = entry
 	var lines: Array = [Names.of(id).to_upper()]
 	lines.append(_costs(one.get("cost", {}) as Dictionary))
+	# **The season it comes in** (task 0234), for any but spring's.
+	var season := Building.season_of(id)
+	if season > 0:
+		lines.append(I18n.f(&"DESC_SEASON", [Names.of(StringName(GameData.SEASONS[season]))]))
 	lines.append(I18n.f(&"DESC_HP", [int(one.get("hp", 0))]))
 	if one.has("damage"):
 		lines.append(I18n.f(&"DESC_DAMAGE", [int(one["damage"]),

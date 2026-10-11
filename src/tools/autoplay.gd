@@ -284,6 +284,13 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# and none of the walls its plan named next.
 	var ahead := _the_plan_ahead(state, policy)
 	var want: StringName = ahead["want"]
+	# **Not before its season** (task 0234): a defence the calendar has not
+	# opened is planned around, as a rule's refusal is. The mortar of the
+	# spring plans waits for the autumn the cursor comes round to it in.
+	if GameData.DEFENCES.has(want) and int(ahead["ahead"]) == 0 \
+			and not Building.unlocked(state, want):
+		_next_step(state)
+		return GameData.SECONDS
 	var short := Resources.missing(state, ahead["saving_for"])
 	if short.is_empty() and not GameData.DEFENCES.has(want) \
 			and int(ahead["ahead"]) == 0:
@@ -384,7 +391,7 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# It goes here rather than at the front of the queue because a player
 	# plants when there is nothing more urgent. Putting it first was a robot
 	# that farmed all day and met night one with no tower.
-	var farmed := _work_the_field(state)
+	var farmed := _work_the_field(state, int(saving_for.get(GameData.MONEY, 0)))
 	if farmed > 0:
 		return farmed
 
@@ -522,6 +529,11 @@ static func _would_raid(saving_for: Dictionary, recipe_id: StringName) -> bool:
 ## rather than of the map, so "the seams are empty today" and "no seam yields
 ## gunpowder" are not the same answer.
 static func _can_be_gathered(res: StringName) -> bool:
+	# **Money comes in by itself** (task 0234): the night's purse pays it, so
+	# a defence short of its money share is waited for. Planned around, the
+	# robot would skip every tower whose money it had not yet been paid.
+	if res == GameData.MONEY:
+		return true
 	for id in GameData.sorted_names(GameData.GATHERING.keys()):
 		if ((GameData.GATHERING[id] as Dictionary).get("yield", {})
 				as Dictionary).has(res):
@@ -546,8 +558,10 @@ static func _go_and_get(state: Dictionary, res: StringName) -> int:
 # --------------------------------------------------------------- the sums
 
 ## Till, sow, water or harvest one plot - whichever the field wants next.
-## Returns what it cost, or zero when the field wants nothing.
-static func _work_the_field(state: Dictionary) -> int:
+## Returns what it cost, or zero when the field wants nothing. **Never with
+## the money the plan is saving for** (task 0234): a packet is bought only out
+## of what is left over `keep`, as a recipe never raids the plan's materials.
+static func _work_the_field(state: Dictionary, keep: int = 0) -> int:
 	# Keep food in the plan while corn takes eight watered mornings to mature.
 	var field := _the_field(state)
 	for i in field.size():
@@ -563,7 +577,8 @@ static func _work_the_field(state: Dictionary) -> int:
 			Farming.select_seed(state, crop)
 			var packet := Farming.packet(crop)
 			if Farming.verb_at(state, plot) == &"plant" and Resources.amount(state, packet) == 0:
-				if not Shop.buy(state, packet, 1):
+				if (Resources.amount(state, GameData.MONEY) - Shop.buy_price(packet) < keep
+						or not Shop.buy(state, packet, 1)):
 					continue
 		var verb := Farming.verb_at(state, plot)
 		if verb == &"" or (verb == &"plant" and choices.is_empty()):

@@ -117,6 +117,28 @@ static func watered_mornings(state: Dictionary, days: int = 1) -> void:
 		Farming.morning(state)
 
 
+## **A defence fixture gets a date its season has reached** (task 0234),
+## without weakening the rule: the first day of the latest season among
+## `ids`, this year, when today is earlier - as `crop_supplies` does for a
+## crop. Never a switch in the rules.
+static func open_arsenal(state: Dictionary, ids: Array) -> void:
+	var latest := 0
+	for id in ids:
+		latest = maxi(latest, Building.season_of(StringName(id)))
+	if not Calendar.season_reached(state, latest):
+		state["day"] = latest * GameData.SEASON_DAYS + 1
+		state["days_held"] = 0
+
+
+## **Every defence open, the ground still spring's** (task 0234): Year 2's
+## first day, which keeps every season's arsenal (`Calendar.season_reached`).
+## For a showcase that puts all of them on one farm and checks colours a
+## winter's snow would move.
+static func open_every_season(state: Dictionary) -> void:
+	state["day"] = Calendar.year_days() + 1
+	state["days_held"] = 0
+
+
 ## A crop fixture gets packets and a valid date without weakening the rules.
 static func crop_supplies(state: Dictionary, id: StringName, packets: int = 80) -> void:
 	if id not in Farming.in_season(state):

@@ -25406,3 +25406,222 @@ implementation/backlog/packs/A028-dog.md,
 implementation/prompts/0233-new-powers.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0233/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0234 - The arsenal grows with the seasons - done 2026-10-11
+
+What changed: the night's arsenal arrives with the calendar, and every
+defence costs money as well as materials (the plan's sections 2, 5 and 7).
+- **Spring opens with six:** the gun tower, the crossbow, the mine and the
+  three barriers.
+- **Summer** brings the flamethrower, the decoy, the hive, the bait and the
+  sandbags; **autumn** the mortar, the catapult and the garlic; **winter**
+  the searchlight and the electric fence. Year 2 keeps them all.
+- **Every price has a money share**, which a kit does not pay, so the day's
+  purse is what the night is built with.
+- **The hotbar is a page a season**, each from the cheapest, with a page
+  turner. A season not yet reached shows greyed, its prices there to save
+  for.
+
+### The rules (`src/core/`)
+
+**The season, a rule:**
+- `Building.why_not` refuses a defence before its season with
+  `[WHY_NOT_YET_SEASON, season]` ("opens in SUMMER").
+- It asks after the phase and before the allowance and the price, through
+  `Calendar.season_reached` - 0220's gate, so Year 2 keeps every one.
+- The flamethrower moves to summer and the mortar to autumn.
+
+**The money share** (`MONEY` in each `cost`, levers):
+- **New calls:** `Building.money_of`, `materials_of` (the cost less the
+  money), `price_of`, `season_of`, `unlocked` and `charge_for`.
+  - `price_of` is the money and the materials at the stall's price, a group
+    at its cheapest kind.
+- **A kit still pays the money:** `affordable` and `why_not` ask a
+  kit-holder for it (`WHY_SHORT` the money).
+- **`place`** takes the kit and the money, or the whole price. A placing
+  that cannot finish gives back what it took and the kit
+  (`Crafting.bank_kit`, which a finished job now banks through too).
+- **A refund** gives back the fraction of the money too
+  (`refund_for_cost`).
+- **A mend** takes its share of the money, as a coop's always has: 0113's
+  rule is a share of the build cost, and the build cost has money in it now.
+
+**The order:** `placeable_ids()` is the year's order, each season from the
+cheapest (`price_of`, the name for a tie), worked out once.
+
+**`validate()`:**
+- `check_defences` refuses a season that is not one of the four, and a
+  defence with no money or nothing but money.
+- `check_recipes` holds a kit to the materials: the cost less its money.
+
+### Decided
+
+- **The plan's table, as written.**
+- **The hardwood wall stays a level of spring's wall.** Its gates are
+  'stout timbers', spring's survival node, and the iron axe a big stump
+  needs - both earned, neither the calendar's. The plan puts "muro" in
+  spring.
+- **The sandbags stay summer's** (0231): a flock in a barn and a loom are a
+  summer's work.
+- **Money shares grow with the season** (`implementation/BALANCE.md`):
+  - spring's fit a new game's $25 - the gun tower's $15 and a fence's $2 on
+    night one;
+  - none reaches $100, so a price fits its slot;
+  - every season opens a defence a good day buys.
+- **The bait costs money too** ($2, off its kit): every defence does.
+- **Upgrades stay materials.** The plan's "parte do custo das defesas" is
+  the price of putting one down; a level is the tree's and the materials'
+  (0064).
+- **A page a season rather than a scroll:**
+  - a page holds one season, six at most, so the keys 1-6 are that season's
+    and the page turner says which;
+  - a later season never moves spring's slots;
+  - turning a page picks nothing; Q, E and the bumpers step a slot at a time
+    through every page; Escape is back on spring's.
+
+### The view (`src/ui/`)
+
+- **The hotbar:**
+  - pages by season (`Hotbar.pages_of`), and the page turner `HotbarPages`
+    at the row's end: "<", the season (dim until reached), "n/4", ">".
+    `turn(step)` is the arrows' click;
+  - a slot greyed before its season, as when it cannot be paid for;
+  - **money first:** "$15 12i" over "10w"; a kit "x1 $8".
+- **`Describe.defence`** says the season a defence comes in ("comes in
+  SUMMER"); spring's say nothing.
+- **The tarps and the wake** (0223's list, A044's footprints):
+  - `Transition.TARPS` gains the hive, the catapult and the searchlight on
+    `tarp_tower`, the decoy on `tarp_tall` and the garlic braid on
+    `tarp_short`;
+  - `WAKES` gains the hive, the catapult and the searchlight;
+  - never the sandbags, the wire or the bait.
+- **A045's icons through 0120's road**, registered for 0244 to retire:
+  - drawn in code for the decoy, the braid, the wire and the sandbags (their
+    drawings on the farm);
+  - the hive, the catapult and the searchlight wear the icon of the tower
+    they stand in for - the mortar's, the crossbow's, the gun tower's -
+    tinted as on the farm, with their 10x10 for the hint.
+- **The words:** `HOTBAR_MONEY`, `HOTBAR_PAGE`, `HOTBAR_PAGE_PREV` and
+  `_NEXT`, `DESC_SEASON`.
+- **A044's and A045's tables are final.**
+
+### The tools
+
+- **`SuiteKit.open_arsenal(state, ids)`:** a defence fixture gets a date its
+  season has reached, as `crop_supplies` does for a crop - never a switch in
+  the rules.
+- **`SuiteKit.open_every_season(state)`:** Year 2's first day, every defence
+  open on a spring farm - for the showcases (towers, barriers, enemies and
+  effects), whose colours a winter's snow would move.
+- **The robot (`autoplay.gd`):**
+  - it plans round a defence its season has not opened;
+  - it waits for money rather than planning round it;
+  - it never buys seed with the money its plan is saving for. It had spent
+    its $25 on carrot packets by noon of day one, and met night one with
+    no tower.
+- **`perf_check`:** the swarm's decoys and the garlic go down on Spring
+  14's night with the calendar opened for the placing and put back, so the
+  night measured is the same.
+- **`play_nights`:** money on the ledger for the shares; its purse still
+  decides.
+- **`shot.gd`:** the decoy and bait scenes move to Summer 2; the
+  searchlight, fence, strong walls and garlic scenes get money; three new
+  scenes.
+
+### Hashes
+
+- **SIM 3940398993 -> 4210782773:** the scenario's two gun towers and three
+  walls now take their $42 from the purse, which the hash folds in. **Play is
+  unchanged:** hashed with that money put back on the ledger, the scenario
+  comes to 3940398993, the old number. Nothing in it is a later season's.
+- **DATA 1109408054 -> 3781358399:** every defence's money share, the
+  flamethrower's and the mortar's seasons, and the season comments.
+
+Verify: **PASS**, 60 of 60 in 981 s, the run that recorded both hashes.
+- **Suites:** `headless_check` 17932 asserts, `headless_v1` 2600, `input_check` 1259 cases, `input_v1` 728 (110 s).
+- **perf:** a night tick 1662 us, the swarm's 8086, a path rebuild 11368, 16246 with the decoys and 11312 with the garlic.
+
+**Tests:**
+- **`_task_0234_arsenal` (headless_v1):**
+  - the plan's table read off `DEFENCES`;
+  - every defence asked in the build step on the last day before each
+    season, on its first and on Year 2's first: refused with its season's
+    name, then open;
+  - every defence's money under $100 and a material; the checks refuse a kit
+    paying the money or drifting from the materials, a season that is none,
+    and a defence with no money or nothing but;
+  - **a mine from a kit:** refused short of its $8 with the kit kept, then
+    down for the money alone;
+  - **a gun tower off the ledger:** the whole price, and sold, the fraction
+    of all of it; a full mend takes half its money;
+  - **the order:** by season then price, the barricade first, pages of six,
+    five, three and two;
+  - **the day:** every season opens a defence a good day buys, and a new
+    game's $25 pays the gun tower's and a fence's money;
+  - the season line in the tooltip, the slot's money first and a kit's money;
+  - the tarps, the wakes and A045's road; the robot planning round the
+    mortar in spring; the shots and the packs.
+- **`_case_0234_hotbar_pages` (input_v1)**, in Autumn 2's build step:
+  - spring's page first, nothing picked;
+  - the arrow turns to summer's and autumn's with a click, picking nothing;
+  - the catapult picked with a click and put down with one, its money paid;
+  - the bumper steps on to winter's page, greyed and dim - still shut in
+    autumn;
+  - Escape is back on spring's;
+  - every price fits its slot, and every season's name the page turner, in
+    both languages.
+- **Old groups touched:**
+  - **`headless_v1`:**
+    - `_open_square` asks the ground, not the rules;
+    - the fixtures of 0113, 0116, 0132 and 0224-0231 are dated and paid
+      for;
+    - the rows of 0224-0231 read as materials and money;
+    - 0193 counts the seasons as the plan's, and the hotbar's order reads
+      0234's;
+    - 0226, 0227 and 0229 see A045's icons.
+  - **`headless_check`:**
+    - the fight helpers have money and, for a mortar, a date;
+    - 0023, 0027, 0033 and 0041 have money;
+    - 0042's declared tower has a money share;
+    - 0048 holds the mine's kit to its materials;
+    - 0057 prices money at its face, building and mending alike;
+    - 0066's run puts a gun tower up where a mortar is not open yet;
+    - 103 scenarios.
+  - **`input_check`:** 0027, 0033, 0082 and 0085 have money; 0035's ammo
+    line is read in autumn, where it names every kind.
+  - **`input_v1`:** 0133 finds A005's icons on their seasons' pages; 0224's
+    decoy and 0225's bait go down on Summer 2's night, their page turned to
+    by the arrow.
+
+**Looked at** (`python tools/shot.py 0234 arsenal_spring arsenal_winter
+arsenal_locked decoy zombie_bait --fhd`):
+- **`arsenal_spring`, Spring 3's build step on a modest purse:** spring's
+  six from the barricade ("$1 4w", 5/night), the wall's kit ("x1 $4") and
+  the gun tower picked ("$15 12i" over "10w"). The crossbow and the mine are
+  greyed, short of iron and powder. The page turner reads "< SPRING 1/4 >".
+- **`arsenal_winter`, Winter 3's:** winter's page - the electric fence
+  "$6 2c" and the searchlight "$80 8c", picked - and the ammo line naming
+  all three kinds.
+- **`arsenal_locked`, Spring 3's with autumn's page turned to by hand:**
+  the garlic, the catapult and the mortar greyed, with their whole prices
+  ("$95 15g" over "35i 30s").
+- **`decoy` and `zombie_bait`** on Summer 2 now, their scenes as before, the
+  hotbar on summer's page.
+- **What the takes found:**
+  - a shut season's slots showed what was short tonight - "4g", "4p" - which
+    says nothing about a season not yet open. They show the whole price now,
+    to save for;
+  - **the season's name dims by colour alone** (184 against 232 on its
+    brightest pixels): readable beside the greyed slots, not on its own;
+  - **the picked slot's price is gold on gold**, hard to read. It was the
+    same in 0231's shot - the theme's pressed slot since 0133 - and is worth
+    a look of its own.
+
+Files: src/core/{building,crafting,game_data}.gd,
+src/ui/{hotbar,describe,placeholder_art,transition}.gd,
+src/tools/{autoplay,suite_kit,headless_check,headless_v1,input_check,input_v1,shot,perf_check,play_nights,tower_showcase,barrier_showcase,enemy_showcase}.gd,
+assets/locale/strings.csv, tools/{determinism_sim_hash,determinism_data_hash}.txt,
+implementation/backlog/packs/{A044-tarps,A045-power-weapon-icons}.md,
+implementation/BALANCE.md, implementation/prompts/0234-arsenal-by-season.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0234/,
+docs/devlog/{index,index.pt_BR}.md

@@ -81,20 +81,28 @@ func _process(_delta: float) -> void:
 ## 0078 asks for - a farm where only the light changed would be a farm that
 ## had not woken up.
 const WAKES := [&"gun_tower", &"flame_tower", &"mortar", &"auto_crossbow",
-	&"generator"]
+	&"generator", &"beehive", &"catapult", &"searchlight"]
 
 
 ## **The defences that sleep under a tarp by day** (task 0223), and the
 ## cover each wears (A044's footprints): one list, so a later defence joins
-## by being listed - 0234 lists 0224-0231's. The towers, which stand on the
-## farm all day looking like guns; never a barrier, a mine or a trap - a
-## covered wall is still a wall, and a covered mine is a lie. The generator
-## still wakes in `WAKES`, without one.
+## by being listed. The towers, which stand on the farm all day looking like
+## guns, and since task 0234 the seasons' new families: the hive, the
+## catapult and the searchlight under the tower's cover, the decoy under the
+## tall one and the garlic braid under the short one. Never a barrier, a mine
+## or a trap - a covered wall is still a wall, and a covered mine is a lie -
+## so not the sandbags, the wire or the bait. The generator still wakes in
+## `WAKES`, without one; so do the three new towers, which flare at the wake.
 const TARPS := {
 	&"gun_tower": &"tarp_tower",
 	&"auto_crossbow": &"tarp_tower",
 	&"flame_tower": &"tarp_tower",
 	&"mortar": &"tarp_tower",
+	&"beehive": &"tarp_tower",
+	&"catapult": &"tarp_tower",
+	&"searchlight": &"tarp_tower",
+	&"decoy": &"tarp_tall",
+	&"garlic_braid": &"tarp_short",
 }
 
 ## How long each of A044's two unveil frames shows.

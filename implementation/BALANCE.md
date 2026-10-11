@@ -618,3 +618,69 @@ well:
 - **The workshop can grind sixty sacks a day.** A sack takes twenty game
   minutes, so the bench is never what stands between the bones and the
   field.
+
+## 0234 - the arsenal by season, and its money (2026-10-11)
+
+**The rules** (plan sections 1, 5 and 7):
+- the calendar opens the arsenal: spring the gun tower, the crossbow, the
+  mine and the three barriers; summer the flamethrower, the decoy, the hive,
+  the bait and the sandbags; autumn the mortar, the catapult and the garlic;
+  winter the searchlight and the electric fence;
+- the day's money pays part of every defence, the materials the rest;
+- at the start of each season a good day buys about one new defence, and
+  beating the boss takes five to seven days of focused saving.
+
+**The measure is 0194's**: a defence's price is its money share and its
+materials at what the stall charges for them (`Building.price_of`), what it
+costs somebody who has only money. It is set against the season's band for
+a well-worked day (`GameData.DAY_TARGETS`); "days" below is the price over
+the band's middle.
+
+**The money shares** (`MONEY` in each `cost`, levers) grow with the season a
+defence opens in, as the day's money does:
+- **spring's are small**, so a new game's $25 still pays the first gun
+  tower's $15 and a fence's $2 on night one, off a day at the rock face (the
+  robot's night-one tower is 0067's assert);
+- **none reaches $100**, so a price, money first, fits its 40-pixel slot.
+
+| Season | Defence | Materials at the stall | Money | Price | Days | Money's part |
+|---|---|---|---|---|---|---|
+| spring ($180-400) | barricade | $12 | $1 | $13 | 0.04 | 8% |
+| | fence | $15 | $2 | $17 | 0.06 | 12% |
+| | wall | $80 | $4 | $84 | 0.3 | 5% |
+| | **gun tower** | $246 | $15 | $261 | **0.9** | 6% |
+| | auto crossbow | $405 | $30 | $435 | 1.5 | 7% |
+| | mine | $530 | $8 | $538 | 1.9 | 1% |
+| summer ($205-460) | zombie bait | $36 | $2 | $38 | 0.1 | 5% |
+| | sandbag wall | $40 | $3 | $43 | 0.1 | 7% |
+| | decoy | $36 | $8 | $44 | 0.1 | 18% |
+| | **beehive** | $145 | $60 | $205 | **0.6** | 29% |
+| | flamethrower | $1160 | $90 | $1250 | 3.8 | 7% |
+| autumn ($235-530) | garlic braid | $58 | $8 | $66 | 0.2 | 12% |
+| | **catapult** | $350 | $40 | $390 | **1.0** | 10% |
+| | mortar | $1695 | $95 | $1790 | 4.7 | 5% |
+| winter ($270-610) | electric fence | $41 | $6 | $47 | 0.1 | 13% |
+| | **searchlight** | $320 | $80 | $400 | **0.9** | 20% |
+
+The bait's fish are counted at the cheapest kind's price.
+
+**What the numbers say:**
+- **Every season opens a defence a good day buys** (in bold), its price
+  inside the season's band. `_task_0234_arsenal` asserts it, so a lever moved
+  far enough to break the rule fails the suite. Summer's hive sits at the
+  band's low end, and with a decoy and a line of sandbags it is a day.
+- **The heavy towers are the season's saving:** the crossbow a day and a
+  half, the mine two, the flamethrower nearly four and the mortar nearly
+  five. The plan's five to seven days for the boss buys one of them and a
+  level or two.
+- **The barriers and the throwaways cost a fraction of a day:** the
+  barricade, the fence, the sandbags, the bait, the decoy, the garlic and
+  the wire a fifth or less, the wall under a third.
+- **Money's part is what the day's purse buys outright:**
+  - a twentieth of a heavy tower, whose materials are the work;
+  - a fifth to a third of the new seasons' openers - the hive, the
+    searchlight - which are bought more than gathered.
+- **A kit is the materials only:** placing one still charges its money, so
+  the night's purse decides how many kits go down as well as what is built.
+- **Mending takes its share of the money too:** 50% (`REPAIR_PERCENT`) of
+  it for a whole mend, as a coop's always has.

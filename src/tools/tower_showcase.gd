@@ -118,6 +118,8 @@ func _blank(material_light: int = 0) -> Dictionary:
 	state["phase"] = Phases.DAY if material_light < 2 else Phases.NIGHT
 	state["house_cell"] = [20, 7]
 	_set_contact(state["player"], Vector2i(296, 246))
+	# Every season's towers go up here (task 0234).
+	SuiteKit.open_every_season(state)
 	return state
 
 

@@ -17,6 +17,17 @@ extends RefCounted
 ## it. Banking kits during the day is how a player puts a wall up at night,
 ## when there is nothing to gather and no time to gather it.
 ##
+## **Less the money** (task 0234): a defence's cost has a `MONEY` share, and a
+## kit is its materials only (`materials_of`). Placing from a kit still
+## charges the money (`money_of`), so the day's purse pays for every defence
+## however it was made.
+##
+## ## The calendar opens the arsenal
+##
+## A defence goes down from the season it opens in (task 0234, `unlocked`):
+## summer's flamethrower is refused all spring with the season's name, and
+## Year 2 keeps every one.
+##
 ## ## The phase decides what may go down
 ##
 ## **The plan's decision 4** (task 0132): the day earns and the night spends.
@@ -78,18 +89,72 @@ static func catalogue(state: Dictionary) -> Array:
 ## build mode had a second code path for buildings is the day the two answers
 ## start disagreeing.
 ##
-## **The defences in the order the year hands them out** (task 0224), each
-## season's by name: spring's eight, then summer's decoy. A defence a later
-## season adds goes on the end of the hotbar, so the slots and keys a player
-## learnt in spring do not move under them.
+## **The defences in the order the year hands them out** (task 0224), and
+## within a season from the cheapest (task 0234: `price_of`, the name for a
+## tie). A defence a later season adds goes after the earlier seasons', so
+## the slots and keys a player learnt in spring do not move under them.
 static func placeable_ids() -> Array:
-	var names := GameData.sorted_names(GameData.DEFENCES.keys())
-	var defences: Array = []
-	for season in GameData.SEASONS:
-		for id in names:
-			if GameData.defence_season(GameData.DEFENCES[id]) == season:
-				defences.append(id)
-	return defences + GameData.sorted_names(GameData.BUILDINGS.keys())
+	if _order.is_empty():
+		var names := GameData.sorted_names(GameData.DEFENCES.keys())
+		for season in GameData.SEASONS:
+			var these: Array = []
+			for id in names:
+				if GameData.defence_season(GameData.DEFENCES[id]) == season:
+					these.append(id)
+			these.sort_custom(func(a: StringName, b: StringName) -> bool:
+				return price_of(a) < price_of(b) or (price_of(a) == price_of(b) and String(a) < String(b)))
+			_order.append_array(these)
+		_order.append_array(GameData.sorted_names(GameData.BUILDINGS.keys()))
+	return _order.duplicate()
+
+
+## `placeable_ids()`, worked out once: the tables are constants, and the
+## hotbar asks every frame.
+static var _order: Array = []
+
+
+## **The season a defence opens in** (task 0234), 0 for spring to 3 for
+## winter. A production building has none, and answers spring.
+static func season_of(id: StringName) -> int:
+	if not GameData.DEFENCES.has(id):
+		return 0
+	return maxi(GameData.SEASONS.find(GameData.defence_season(GameData.DEFENCES[id])), 0)
+
+
+## **Whether the calendar has opened it** (task 0234): a defence from its
+## season on, and every one from Year 2 - `Calendar.season_reached`, the
+## tree's own gate. A production building always.
+static func unlocked(state: Dictionary, id: StringName) -> bool:
+	return Calendar.season_reached(state, season_of(id))
+
+
+## **The money share of its price** (task 0234): what placing it charges, off
+## a kit as much as off the ledger.
+static func money_of(id: StringName) -> int:
+	return int(cost_of(id).get(GameData.MONEY, 0))
+
+
+## Its price less the money: what a kit is made of (task 0234).
+static func materials_of(id: StringName) -> Dictionary:
+	var out: Dictionary = cost_of(id).duplicate()
+	out.erase(GameData.MONEY)
+	return out
+
+
+## **What it costs somebody who has only money** (task 0234): its money, and
+## its materials at what the stall charges for them - a group such as the fish
+## at its cheapest kind. The measure 0194 set the day's money against; the
+## hotbar's order and the table in `implementation/BALANCE.md`.
+static func price_of(id: StringName) -> int:
+	var cost := cost_of(id)
+	var out := 0
+	for res in GameData.sorted_names(cost.keys()):
+		if res == GameData.MONEY:
+			out += int(cost[res])
+			continue
+		var each: StringName = GameData.pay_order(res)[0] if GameData.is_any_of(res) else res
+		out += Shop.buy_price(each) * int(cost[res])
+	return out
 
 
 ## **Walked over, never a wall** (task 0178): a structure that declares it -
@@ -453,13 +518,22 @@ static func why_not_now(state: Dictionary, id: StringName) -> Array:
 	return [&"WHY_ONLY_AT_NIGHT"] if GameData.DEFENCES.has(id) else [&"WHY_NOT_AT_NIGHT"]
 
 
-## Whether it can be paid for, by kit or by ledger.
+## Whether it can be paid for, by kit or by ledger. **A kit still wants its
+## money** (task 0234): it is the materials paid early, never the purse.
 static func affordable(state: Dictionary, id: StringName) -> bool:
 	if Crafting.kits(state, id) > 0:
-		return true
+		return Resources.can_afford(state, {GameData.MONEY: money_of(id)})
 	if kit_only(id):
 		return false
 	return Resources.can_afford(state, cost_of(id))
+
+
+## What placing it would charge now: the money alone when a kit is banked,
+## the whole price when not (task 0234).
+static func charge_for(state: Dictionary, id: StringName) -> Dictionary:
+	if Crafting.kits(state, id) > 0:
+		return {GameData.MONEY: money_of(id)} if money_of(id) > 0 else {}
+	return cost_of(id)
 
 
 ## **Down from a kit only** (task 0225): the zombie bait, whose cost is the fish
@@ -492,6 +566,10 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> Array:
 	var wrong := why_not_now(state, id)
 	if not wrong.is_empty():
 		return wrong
+	# **Not before its season** (task 0234), asked before the allowance and
+	# the price, neither of which matters yet - as the tree asks it.
+	if not unlocked(state, id):
+		return [&"WHY_NOT_YET_SEASON", StringName(GameData.SEASONS[season_of(id)])]
 	# **The allowance, before the money.** Being told "you have used your five"
 	# is a different sentence from "you are short two wood", and the first one
 	# is the one that is true.
@@ -512,9 +590,9 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> Array:
 	if sprays(id) and Farming.crop_on(state, cell) != &"":
 		return [&"WHY_ON_A_CROP"]
 	if not affordable(state, id):
-		if kit_only(id):
+		if kit_only(id) and Crafting.kits(state, id) <= 0:
 			return [&"WHY_KIT_ONLY", kit_station(id)]
-		return [&"WHY_SHORT", Resources.missing(state, cost_of(id))]
+		return [&"WHY_SHORT", Resources.missing(state, charge_for(state, id))]
 	return []
 
 
@@ -547,16 +625,23 @@ static func refund_for_cost(cost: Dictionary) -> Dictionary:
 
 # -------------------------------------------------------------------- doing
 
-## Put it down. Pays with a kit if there is one, and out of the ledger if not.
+## Put it down. Pays with a kit if there is one, and out of the ledger if not
+## - the money share out of the ledger either way (task 0234).
 static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 	if not can_place(state, id, cell):
 		return false
 
-	# The kit first: it is the cost already paid, and a player who banked one
-	# during the day meant to use it. A thing from a kit only has no other way.
-	if not Crafting.take_kit(state, id):
-		if kit_only(id) or not Resources.pay(state, cost_of(id)):
-			return false
+	# The kit first: it is the materials already paid, and a player who banked
+	# one during the day meant to use it. A thing from a kit only has no other
+	# way. Then what is left to pay: the money, or the whole price.
+	var paid := charge_for(state, id)
+	var from_kit := Crafting.take_kit(state, id)
+	if not from_kit and kit_only(id):
+		return false
+	if not Resources.pay(state, paid):
+		if from_kit:
+			Crafting.bank_kit(state, id)
+		return false
 
 	var entry: Dictionary = entry_of(id)
 	var occupant := {"id": id, "hp": int(entry.get("hp", 1))}
@@ -599,7 +684,10 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 				if done == at:
 					break
 				Farm.remove(state, done)
-			Resources.gain(state, cost_of(id))
+			# What was paid comes back, and the kit with it.
+			Resources.gain(state, paid)
+			if from_kit:
+				Crafting.bank_kit(state, id)
 			return false
 	# **A coop or a barn takes its kind in** (task 0183): the map's loose
 	# animals that live there, and any whose home was lost.

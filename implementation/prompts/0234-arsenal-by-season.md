@@ -1,7 +1,7 @@
 # 0234 - The arsenal grows with the seasons
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0149, 0220, 0223
 - **Likely files:** src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 
