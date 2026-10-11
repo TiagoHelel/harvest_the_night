@@ -60,6 +60,8 @@ extends RefCounted
 ## over that same levelled maximum, so one full mend of anything costs
 ## `REPAIR_PERCENT` of what building it cost - its own materials, not the
 ## upgrades': the gunpowder that bought level three is not in its walls.
+## **Unless the level rebuilt it** (task 0231): a wall rebuilt in hardwood is
+## made of stone and hardwood, and mends in both (`Building.made_of()`).
 ##
 ## ## All or nothing, per hit point
 ##
@@ -121,7 +123,8 @@ static func per_hp_hundredths(state: Dictionary,
 	if entry.is_empty():
 		return out
 	var full := maxi(int(entry.get("hp", 0)), 1)
-	var cost: Dictionary = entry["cost"]
+	# What it is made of (task 0231): its price, and a rebuilding level's.
+	var cost := Building.made_of(state, cell)
 	for res in GameData.sorted_names(cost.keys()):
 		# `cost * 100 * percent / 100 / full`, with the hundreds cancelled.
 		# **At least one hundredth**, so nothing on the farm is free to keep

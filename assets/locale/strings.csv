@@ -150,8 +150,10 @@ DEF_GARLIC_BRAID,0,garlic braid,réstia de alho
 DEF_GUN_TOWER,0,gun tower,torre de tiro
 DEF_MINE,0,mine,mina
 DEF_MORTAR,0,mortar,morteiro
+DEF_SANDBAG_WALL,0,sandbag wall,sacos de areia
 DEF_SEARCHLIGHT,0,searchlight,holofote
 DEF_WALL,0,wall,muro
+DEF_WALL_2,0,hardwood wall,muro de madeira de lei
 DEF_ZOMBIE_BAIT,0,zombie bait,isca de zumbi
 DESC_AFTER,0,after %s,depois de %s
 DESC_AMMO,0,loaded into towers,carregada nas torres
@@ -536,7 +538,7 @@ TECHNOTE_OILED_WORKS,0,every tower reloads a fifth sooner,toda torre recarrega u
 TECHNOTE_SHARP_TOOLS,0,chopping and mining speed +10%,velocidade para cortar e minerar +10%
 TECHNOTE_SPARE_STAKES,0,three more barricades a night,mais três barricadas por noite
 TECHNOTE_STEADY_HANDS,0,"the workshop, press and kitchen work a third faster","a oficina, a prensa e a cozinha trabalham um terço mais rápido"
-TECHNOTE_STOUT_TIMBERS,0,the house takes forty more before it falls,a casa aguenta quarenta a mais antes de cair
+TECHNOTE_STOUT_TIMBERS,0,"the house takes forty more before it falls, and a stone wall can be rebuilt in hardwood","a casa aguenta quarenta a mais antes de cair, e um muro de pedra pode ser refeito em madeira de lei"
 TECHNOTE_TRUE_SIGHTS,0,every tower hits a fifth harder,toda torre bate um quinto mais forte
 TECH_A_FULL_LARDER,0,a full larder,despensa cheia
 TECH_A_NAME_AT_MARKET,0,a name at market,nome na feira

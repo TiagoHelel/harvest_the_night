@@ -178,6 +178,43 @@ static func _levels_of(id: StringName) -> Array:
 	return GameData.TOWER_LEVELS.get(id, [])
 
 
+## **One number of an occupant at its level** (task 0231): its row's, with
+## every step up to its level laid over it as `entry_at()` lays them - without
+## a cell to look up or a row to copy, for the field, which prices every
+## occupant on every rebuild, and for the view. `missing` when neither says.
+static func levelled_stat(on: Dictionary, key: String, missing: int = 0) -> int:
+	var entry: Variant = entry_of(StringName(on.get("id", &"")))
+	if entry == null:
+		return missing
+	var value := int((entry as Dictionary).get(key, missing))
+	var steps := _levels_of(StringName(on["id"]))
+	for step in steps.slice(0, maxi(int(on.get("level", 1)) - 1, 0)):
+		value = int(((step as Dictionary)["gives"] as Dictionary).get(key, value))
+	return value
+
+
+## **What the thing on this cell is made of** (task 0231): its row's price,
+## and the price of every level that rebuilt it (`rebuilds`) - the hardwood a
+## wall was rebuilt in is in its walls, where the gunpowder that bought a
+## tower's level three is not (0113). What mending it takes a share of.
+static func made_of(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var on := Farm.occupant(state, cell)
+	if on.is_empty():
+		return {}
+	var entry: Variant = entry_of(StringName(on["id"]))
+	if entry == null:
+		return {}
+	var out: Dictionary = ((entry as Dictionary).get("cost", {}) as Dictionary).duplicate()
+	var steps := _levels_of(StringName(on["id"]))
+	for step in steps.slice(0, maxi(int(on.get("level", 1)) - 1, 0)):
+		if not bool((step as Dictionary).get("rebuilds", false)):
+			continue
+		var paid: Dictionary = (step as Dictionary)["cost"]
+		for res in GameData.sorted_names(paid.keys()):
+			out[res] = int(out.get(res, 0)) + int(paid[res])
+	return out
+
+
 ## What upgrading this cell one level would cost, the tree's discount applied.
 static func upgrade_cost(state: Dictionary, cell: Vector2i) -> Dictionary:
 	var on := Farm.occupant(state, cell)

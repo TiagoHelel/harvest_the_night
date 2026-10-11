@@ -305,7 +305,8 @@ static func under_cursor(state: Dictionary, cell: Vector2i) -> String:
 	if Building.entry_of(id) == null:
 		return ""
 	var full := Repair.full_hp_at(state, anchor)
-	return I18n.f(&"CURSOR_STRUCTURE", [Names.of(id).to_upper(),
+	# Its level's own name where it has one (task 0231's hardwood wall).
+	return I18n.f(&"CURSOR_STRUCTURE", [Names.of_level(id, Building.level_at(state, anchor)).to_upper(),
 		int(on.get("hp", full)), full, Building.level_at(state, anchor)])
 
 

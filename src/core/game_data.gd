@@ -1828,6 +1828,20 @@ const DEFENCES: Dictionary = {
 		# time, never none - degraded, never dead, as the rest of `Power`.
 		"energy_draw": 1,               # LEVER: energy per tick, 1-2
 	},
+	&"sandbag_wall": {
+		# **Sacks of the loom's sandbags stacked into a line** (task 0231; the
+		# plan's 3.5, the loom's cloth made into sandbags). Cheap where the
+		# wall is dear - two sacks are half a bolt of cloth and two stone,
+		# where a wall is ten - and it soaks more than a fence: between the two
+		# on hit points and on what the field asks to break through it.
+		"cost": {SANDBAG: 2},           # LEVER: sandbags, 1-4
+		# **Summer's**: a flock in a barn and a loom are a summer's work, not
+		# a first spring's (0234 confirms it).
+		"season": &"summer",            # LEVER: the season it unlocks in (0234 confirms)
+		"hp": 70,                       # LEVER: hit points, 40-100 (a fence 30, a wall 120)
+		"path_cost": 12,                # LEVER: tiles-equivalent detour, 8-16 (a fence 6, a wall 20)
+		"energy_draw": 0,
+	},
 }
 
 ## The animals on the reference sheet, and the meat that comes off them.
@@ -2870,6 +2884,21 @@ const TOWER_LEVELS: Dictionary = {
 		{"needs": &"true sights", "cost": {IRON: 15, COPPER: 12},
 			"gives": {"light_tiles": 6, "hp": 90}},
 	],
+	# **The hardwood wall** (task 0231; plan section 3.3): the stone wall
+	# rebuilt with the big stumps' hardwood - beams and iron straps - into
+	# something a breaker has to work at, and dearer for the field to go
+	# through. One step, behind 'stout timbers' - the survival branch's,
+	# where the house's timbers are - and the iron axe that fells a stump.
+	# **It rebuilds** (`rebuilds`): the hardwood is in its walls from then
+	# on, so mending it costs stone and hardwood, where the gunpowder that
+	# bought a tower's level three is not in its walls (0113).
+	&"wall": [
+		{"needs": &"stout timbers", "cost": {HARDWOOD: 4},   # LEVER: hardwood, 2-8
+			"rebuilds": true,
+			# `path_cost` 24 is the most the field's wheel holds (`WIDEST_STEP`)
+			# with garlic's over the worst ground.
+			"gives": {"hp": 240, "path_cost": 24}},   # LEVER: hit points 160-320, path cost 21-24
+	],
 	&"catapult": [
 		{"needs": &"true sights", "cost": {WOOD: 20, IRON: 10},
 			"gives": {"damage": 36, "hp": 95, "range": 8}},
@@ -2984,7 +3013,7 @@ const TECH_TREE: Array = [
 	# ------------------------------------------------------------ survival
 	{"id": &"stout timbers", "branch": &"survival", "season": 0, "cost": 2, "needs": [],
 		"gives": {"house_hp_bonus": 40},
-		"note": "the house takes forty more before it falls"},
+		"note": "the house takes forty more before it falls, and a stone wall can be rebuilt in hardwood"},
 	{"id": &"a full larder", "branch": &"survival", "season": 0, "cost": 3,
 		"needs": [&"stout timbers"], "gives": {"repair_percent": 60},
 		"note": "mending costs two fifths less"},
@@ -3446,7 +3475,7 @@ static func check_calendar(seasons: Array, season_days: int,
 ## cell in the wrong bucket and the route comes out subtly wrong. So the
 ## widest step is checked against the tables rather than kept in step by hand.
 static func check_pathing(terrain: Array, defences: Dictionary,
-		buildings: Dictionary) -> Array:
+		buildings: Dictionary, levels: Dictionary = TOWER_LEVELS) -> Array:
 	var errors: Array = []
 
 	var ground := 0
@@ -3480,6 +3509,16 @@ static func check_pathing(terrain: Array, defences: Dictionary,
 			if through > 0 and int(entry.get("hp", 0)) <= 0:
 				errors.append(("'%s' declares a path cost but has no hit points - "
 					+ "there would be no way through it after all") % id)
+	# **A level is priced too** (task 0231): the field prices a levelled
+	# occupant from its levelled row, so a hardwood wall's dearer way through
+	# has to fit the wheel as surely as the stone wall's.
+	for id in sorted_names(levels.keys()):
+		for step in (levels[id] as Array):
+			var through := int(((step as Dictionary)["gives"] as Dictionary).get("path_cost", 0))
+			if ground + through + garlic > WIDEST_STEP:
+				errors.append(("stepping into a levelled '%s' costs %d, garlic's %d included, "
+					+ "which is wider than WIDEST_STEP (%d)") % [id, ground + through + garlic,
+					garlic, WIDEST_STEP])
 
 	# **Every lure's head start fits the wheel** (task 0225): the lure field
 	# seeds each lure at how much less far it pulls than the widest, and the

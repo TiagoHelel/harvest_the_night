@@ -12002,8 +12002,9 @@ func _task_0064_tower_levels() -> void:
 	for id in GameData.sorted_names(GameData.TOWER_LEVELS.keys()):
 		var last_step: Dictionary = (GameData.TOWER_LEVELS[id] as Array).back()
 		var changed := false
-		# A lamp's - task 0229's searchlight - lights wider.
-		for key in ["targets", "min_range", "burn_ticks", "pierce", "light_tiles"]:
+		# A lamp's - task 0229's searchlight - lights wider, and a wall's -
+		# 0231's hardwood - is dearer for the field to go through.
+		for key in ["targets", "min_range", "burn_ticks", "pierce", "light_tiles", "path_cost"]:
 			if (last_step["gives"] as Dictionary).has(key):
 				changed = true
 		expect(changed,
@@ -13958,6 +13959,9 @@ func _building_art(name: StringName) -> Image:
 		# And task 0230's electric fence, every mask and its wreck.
 		if path.is_empty() and ElectricFenceArt.texture(name) != null:
 			return ElectricFenceArt.drawing(name)
+		# And task 0231's hardwood wall and sandbags.
+		if path.is_empty() and StrongWallArt.texture(name) != null:
+			return StrongWallArt.drawing(name)
 	return null
 
 
@@ -14599,8 +14603,8 @@ func _task_0082_shots() -> void:
 	# Ninety-four since 0226: a hive at work. Ninety-five since 0227: a volley.
 	# Ninety-six since 0228: a route round a braid. Ninety-seven since 0229:
 	# a lit and an unlit tower line. Ninety-eight since 0230: a joined run of
-	# electric fence.
-	expect(names.size() == 98,
+	# electric fence. Ninety-nine since 0231: a mixed line.
+	expect(names.size() == 99,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

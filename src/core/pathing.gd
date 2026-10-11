@@ -852,7 +852,7 @@ static func _entry_costs(state: Dictionary) -> Dictionary:
 			continue
 		var on: Dictionary = occupants[key]
 		var ground := int(cost[idx])
-		var priced := _through(StringName(on["id"]), ground)
+		var priced := _through(on, ground)
 		cost[idx] = priced
 		# A barrier - something that cost more to enter than the ground under
 		# it - is a door in one field and a wall in the other.
@@ -909,7 +909,8 @@ static func _repel(state: Dictionary, braids: Array, cost: PackedInt32Array,
 
 ## What stepping onto a cell with this standing on it costs, given what the
 ## ground under it costs.
-static func _through(id: StringName, ground: int) -> int:
+static func _through(on: Dictionary, ground: int) -> int:
+	var id := StringName(on["id"])
 	# The house is the destination, so it has to be reachable even though
 	# nothing can stand on it.
 	if id == &"house":
@@ -931,7 +932,9 @@ static func _through(id: StringName, ground: int) -> int:
 	var entry: Variant = Building.entry_of(id)
 	if entry == null:
 		return IMPASSABLE
-	var through := int((entry as Dictionary).get("path_cost", 0))
+	# **At its level** (task 0231): a hardwood wall is the wall's row with a
+	# dearer way through, and the field has to know it.
+	var through := Building.levelled_stat(on, "path_cost")
 	if through <= 0:
 		return IMPASSABLE
 	return ground + through

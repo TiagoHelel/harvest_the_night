@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **211 / 296 done**
+`#################.......`  **212 / 296 done**
 
-0 doing / 85 todo / 0 blocked across 18 phases.
+0 doing / 84 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-85 task(s) left, the ready ones first, then what they
+84 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -354,23 +354,6 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0231 - Hardwood walls and sandbags
-
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/core/pathing.gd, src/core/repair.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
-
-Two more ways to hold a line: the stone wall upgraded with hardwood into something a breaker has to work at, and sandbags from the loom as a cheap barrier that soaks more than a fence (plan sections 3.3 and 3.5).
-
-- A `TOWER_LEVELS` row for `wall`: level 2 paid in hardwood (0177), more `hp` and `path_cost`, upgraded by cursor like a tower (0226's fix refuses a third level). `Building.entry_at` already lays a level over any id, but the field does not read it: `Pathing._through` prices an occupant from `Building.entry_of` (the base row), so `_entry_costs` must price a levelled occupant from its levelled entry, and `check_pathing` must read `TOWER_LEVELS`' `path_cost` too, so the level stays within `WIDEST_STEP`
-- Sandbags: 0188 planned `SANDBAG` as a material (read what it actually made). A material means the barrier gets its own id (e.g. `sandbag_wall`) paid in sandbags, because `Names.KEYS` is keyed by id; if 0188 made a kit instead, it becomes the `DEFENCES` row that kit places. Its `hp` and `path_cost` LEVERs sit between the fence and the wall, and its `season` (0193's field) is decided here and confirmed by 0234. Neither has `damage`, so no `Sfx.TOWER_SOUNDS` entry
-- A level-2 wall mends to its levelled HP (0113) and costs what that level is made of - assert it
-- Joins: `WorldView.barrier_mask` decides who meets whom - a hardwood wall joins stone walls, sandbags join sandbags (decide whether they meet walls) - and `_barrier_name` learns the wall's level
-- `Names.KEYS` and strings in both languages for the new id and the upgrade; drawn through the placeholder road (level-2 wall modules for the 16 masks, whole/hurt/wreck; the sandbag pieces) until A043 is integrated by 0242
-- DATA moves (a level row, a new barrier). SIM must not move for the determinism scenario's level-1 walls; if pricing levelled occupants moves it, say why - record both numbers
-
-  - done when: `_task_0231_strong_walls` in `src/tools/headless_v1.gd` asserts a level-2 wall takes the LEVER's longer to chew through and costs the field its levelled `path_cost`, a third upgrade is refused, sandbags sit between fence and wall on hit points and path cost, and repair restores the level-2 maximum
-  - done when: The Deliverables table of `implementation/backlog/packs/A043-strong-walls.md` states the final geometry this task settled (and whether sandbags are modules or one piece)
-  - done when: `python tools/shot.py 0231` captures of a mixed line - stone, hardwood, sandbags - opened and looked at
-
 ### 0232 - Powers as a list
 
 Ready to pick up.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/pixel_effects.gd, src/tools/effect_showcase.gd, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -385,6 +368,25 @@ Nothing changes for the player. The one flare becomes the first entry of a list 
 
   - done when: `_task_0232_powers_list` in `src/tools/headless_v1.gd` asserts the flare's cooldown, aim and damage through the new API match the numbers before the refactor, and an unknown power id is refused without touching the state
   - done when: `_case_0135_flare_aim` in `src/tools/input_v1.gd` passes with nothing changed but its calls moved to the new API
+
+### 0234 - The arsenal grows with the seasons
+
+Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+The arsenal arrives with the calendar - spring's six, then summer's, autumn's and winter's - and every defence costs money as well as materials, so the day's purse is what the night is built with (plan sections 2, 5 and 7).
+
+- The `season` field 0193 put on `DEFENCES` (default spring; 0224-0231 set their own) becomes a rule, per the plan's table: spring the gun tower, crossbow, mine, fence, barricade and wall; summer the flamethrower, decoy, beehive and bait; autumn the mortar, catapult and garlic braid; winter the searchlight and electric fence. Confirm the hardwood wall level and the sandbags and say why. Gated through 0220's `Calendar.season_reached` (Year 2 keeps all), refused in `Building.why_not` with 0220's season key, shown greyed in the hotbar with its season; `validate()` refuses a `season` outside 0-3
+- Moving the flamethrower and the mortar out of spring is a rule change: every test, tool and showcase that builds them on day 1 (perf_check's worst case, `_task_0043`, `_task_0044`, the tower groups, `tower_showcase`, the autoplayer) gets a test helper that sets the calendar - never a switch in core
+- Money in the cost (plan sections 1 and 7): each `cost` gains a money share (LEVERs). A kit pays the materials in advance and placing it still charges the money: `check_recipes` compares the kit's inputs with the cost less its money, `Building.affordable` and `why_not` ask for the money even when a kit is held (today a kit alone says yes), `Building.place` takes the money either way, and refunds follow `refund_for_cost`
+- The hotbar of 0133 already pages or scrolls: give it a fixed order, by season then by cost, and group or page it by season if that reads better - decide; keyboard, mouse and pad still reach every slot
+- 0223's tarp list and `transition.gd`'s `WAKES` take the new families; every new defence has its hotbar icon through the placeholder road until A045 is integrated by 0244
+- Prices argued against 0194's money per day: at the start of a season a good day buys about one new defence (plan section 5) - a table in `implementation/BALANCE.md`
+- SIM and DATA move on purpose: record both
+
+  - done when: `_task_0234_arsenal` in `src/tools/headless_v1.gd` asserts each defence is refused before its season with the season reason and placeable after, Year 2's spring keeps winter's defences, a placed kit still charges its money, and `GameData.validate()` refuses a kit whose inputs drift from the materials
+  - done when: `_case_0234_hotbar_pages` in `src/tools/input_v1.gd` pages the hotbar and places an autumn defence in autumn
+  - done when: The Deliverables tables of `implementation/backlog/packs/A044-tarps.md` and `implementation/backlog/packs/A045-power-weapon-icons.md` state the final geometry this task settled (the tarp families and footprints, the icon list)
+  - done when: `python tools/shot.py 0234` captures of the hotbar in spring and in winter, opened and looked at
 
 ### 0235 - Art: bones, moon stones and essence
 
@@ -517,6 +519,25 @@ The approved electric fence, joined on all sixteen masks, and its zap replace th
   - done when: The family checks (`check_barrier_art.py`, `check_effect_art.py`) and the showcase (`python tools/show_art.py --barriers --check` and `python tools/show_art.py --effects --check`) pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of a joined run of electric fence zapping a biter in the real game, opened and looked at, in `implementation/shots/0241/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0242 - Art: hardwood walls and sandbags
+
+Waits for Codex art A043.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py`.
+
+The approved hardwood wall and sandbags replace the stand-ins 0231 left.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A043` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A043-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_barrier_art.py`, `ArtPlacement` if needed).
+- The level-2 wall's modules composed into its join names (the naming 0231 gave `_barrier_name`) for the 16 masks, whole/hurt, plus a wreck; the sandbags as modules or one piece, as 0231 settled, whole/hurt/wreck
+- Extend `check_barrier_art.py` with both families and their counts rather than loosening the 84
+- Retire 0231's stand-ins from 0120's placeholder registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A043 integrated`.
+
+  - done when: The family checks (`check_barrier_art.py`) and the showcase (`python tools/show_art.py --barriers --check`) pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of a mixed line of stone, hardwood and sandbags in the real game, opened and looked at, in `implementation/shots/0242/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0246 - Bosses in general
@@ -754,47 +775,49 @@ Three more buttons for a night going wrong: the farm bell stops every zombie for
   - done when: `_case_0233_powers` in `src/tools/input_v1.gd` aims and fires each power with the mouse and with the pad
   - done when: The Deliverables table of `implementation/backlog/packs/A028-dog.md` states the final geometry this task settled (the night run and bite, the scale against the farmer)
 
-### 0234 - The arsenal grows with the seasons
+### 0243 - Art: the day tarps
 
-Waits on 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0234.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py`.
 
-The arsenal arrives with the calendar - spring's six, then summer's, autumn's and winter's - and every defence costs money as well as materials, so the day's purse is what the night is built with (plan sections 2, 5 and 7).
+The approved tarps cover the defences by day and unveil at nightfall, in place of the code-drawn covers 0223 left.
 
-- The `season` field 0193 put on `DEFENCES` (default spring; 0224-0231 set their own) becomes a rule, per the plan's table: spring the gun tower, crossbow, mine, fence, barricade and wall; summer the flamethrower, decoy, beehive and bait; autumn the mortar, catapult and garlic braid; winter the searchlight and electric fence. Confirm the hardwood wall level and the sandbags and say why. Gated through 0220's `Calendar.season_reached` (Year 2 keeps all), refused in `Building.why_not` with 0220's season key, shown greyed in the hotbar with its season; `validate()` refuses a `season` outside 0-3
-- Moving the flamethrower and the mortar out of spring is a rule change: every test, tool and showcase that builds them on day 1 (perf_check's worst case, `_task_0043`, `_task_0044`, the tower groups, `tower_showcase`, the autoplayer) gets a test helper that sets the calendar - never a switch in core
-- Money in the cost (plan sections 1 and 7): each `cost` gains a money share (LEVERs). A kit pays the materials in advance and placing it still charges the money: `check_recipes` compares the kit's inputs with the cost less its money, `Building.affordable` and `why_not` ask for the money even when a kit is held (today a kit alone says yes), `Building.place` takes the money either way, and refunds follow `refund_for_cost`
-- The hotbar of 0133 already pages or scrolls: give it a fixed order, by season then by cost, and group or page it by season if that reads better - decide; keyboard, mouse and pad still reach every slot
-- 0223's tarp list and `transition.gd`'s `WAKES` take the new families; every new defence has its hotbar icon through the placeholder road until A045 is integrated by 0244
-- Prices argued against 0194's money per day: at the start of a season a good day buys about one new defence (plan section 5) - a table in `implementation/BALANCE.md`
-- SIM and DATA move on purpose: record both
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A044` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A044-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (a tarp checker such as `tools/check_tarp_art.py` wired into `tools/verify.py`, or the tower and barrier checkers, `ArtPlacement` if needed).
+- One cover per footprint 0234 settled (32x48 towers, 16x32, 16x24) plus its 2 unveil frames; the family list comes from the pack's Deliverables table, and the unveil plays in the transition's wake pass
+- A hurt or wrecked defence still reads by day the way 0223 decided
+- Retire 0223's code-drawn covers from 0120's placeholder registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A044 integrated`.
 
-  - done when: `_task_0234_arsenal` in `src/tools/headless_v1.gd` asserts each defence is refused before its season with the season reason and placeable after, Year 2's spring keeps winter's defences, a placed kit still charges its money, and `GameData.validate()` refuses a kit whose inputs drift from the materials
-  - done when: `_case_0234_hotbar_pages` in `src/tools/input_v1.gd` pages the hotbar and places an autumn defence in autumn
-  - done when: The Deliverables tables of `implementation/backlog/packs/A044-tarps.md` and `implementation/backlog/packs/A045-power-weapon-icons.md` state the final geometry this task settled (the tarp families and footprints, the icon list)
-  - done when: `python tools/shot.py 0234` captures of the hotbar in spring and in winter, opened and looked at
-
-### 0242 - Art: hardwood walls and sandbags
-
-Waits on 0231.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py`.
-
-The approved hardwood wall and sandbags replace the stand-ins 0231 left.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A043` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A043-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_barrier_art.py`, `ArtPlacement` if needed).
-- The level-2 wall's modules composed into its join names (the naming 0231 gave `_barrier_name`) for the 16 masks, whole/hurt, plus a wreck; the sandbags as modules or one piece, as 0231 settled, whole/hurt/wreck
-- Extend `check_barrier_art.py` with both families and their counts rather than loosening the 84
-- Retire 0231's stand-ins from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A043 integrated`.
-
-  - done when: The family checks (`check_barrier_art.py`) and the showcase (`python tools/show_art.py --barriers --check`) pass
+  - done when: The family checks (the tarp checks - the new checker, or the tower and barrier checkers that took them) and the showcase (`python tools/show_art.py --towers --check` and `python tools/show_art.py --barriers --check`) pass
   - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of a mixed line of stone, hardwood and sandbags in the real game, opened and looked at, in `implementation/shots/0242/`
+  - done when: FHD (1920x1080) captures by day and by night of covered defences of every footprint and their unveil at nightfall in the real game, opened and looked at, in `implementation/shots/0243/`
   - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0250 - The digger
+
+Waits on 0234.  Likely files: `src/core/pathing.gd, src/core/enemies.gd, src/core/towers.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/shot.gd, src/tools/headless_v1.gd`.
+
+The enemy that makes a fence a different thing from a wall: it tunnels under fences and barricades and comes up on the other side. Only a real wall stops it.
+
+- `ENEMIES.digger` with `# LEVER`s (hp, `ticks_per_tile` slower than the runner's 9 so `check_enemies` holds, damage, reward, armour) and a `burrows` flag; inside `_task_0051_tank`'s non-boss bounds
+- A burrow field through 0218's named-field registry, built on first request by a digger, so a night without one never builds it: a barrier flagged `burrowable` costs only the ground under it (`Pathing._through` and `_entry_costs`), everything else as in the flow field
+- `check_defences` makes every barrier (`path_cost` > 0) declare `burrowable`: fence and barricade yes, wall no (0231's hardwood wall is the wall's `TOWER_LEVELS` row and inherits it); 0231's sandbag barrier, 0230's electric fence and anything else with a `path_cost` decided and written in the journal
+- On a `burrowable` barrier's cell it is underground: in `Enemies._walk` it passes instead of `_gnaw`ing, `Towers._acquire` (0218's bucketed version) cannot target it and the barrier loses nothing; on open ground it surfaces, and walls and the house are gnawed and bitten as a walker does (`_gnaw`, `_bite`)
+- The tie-breaks of `Grid.STEPS` and 0049's rule hold: a digger never alternates between two cells for 20 ticks
+- A digger case in `src/tools/perf_check.gd` (its own `PERF` line, fifty walls and fences, the burrow field built): its path rebuild stays inside `PATH_BUDGET_US` (33333 us) in `python tools/perf.py --report`, the baseline accepted with the reason in the journal
+- Names.KEYS `digger`, `ENEMY_DIGGER`/`ENEMY_DIGGER.other` (digger/diggers, escavador/escavadores); `DESC_BURROWS` ('digs under fences' / 'cava por baixo das cercas'); `Sfx.ENEMY_SOUNDS.digger` borrows `sfx/groan_breaker` until 0284
+- On screen through 0120's placeholder road: a tinted stand-in, a code-drawn mound while underground and its forecast head, until A049 is integrated by 0263
+- Hashes: DATA moves; SIM should not (no digger in the determinism night, so no field is built)
+
+  - done when: `_task_0250_digger` in `src/tools/headless_v1.gd`: a digger reaches the house through a ring of fences without a fence losing a hit point, a ring of walls makes it gnaw, and a tower cannot target it while it is under a fence
+  - done when: The same group asserts the burrow field is never built on a night without a digger
+  - done when: `python tools/shot.py 0250 digger` (a new scenario) opened and looked at: the mound reads as under the fence
+  - done when: the Deliverables table of `implementation/backlog/packs/A049-digger.md` states the final geometry this task settled
 
 ### 0253 - The Harvester
 
-Waits on 0246, 0231.  Likely files: `src/core/enemies.gd, src/core/game_data.gd, src/ui/enemy_motion.gd, src/ui/world_view.gd, src/ui/night_hud.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0246.  Likely files: `src/core/enemies.gd, src/core/game_data.gd, src/ui/enemy_motion.gd, src/ui/world_view.gd, src/ui/night_hud.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 Summer's boss: a possessed machine that winds up and charges in a straight line, flattening the walls in its row. It tests defence in depth - one thick wall is a speed bump, layers are a defence.
 
@@ -918,25 +941,6 @@ The two MVP pieces become a year: a day piece per season on the shared motif, a 
   - done when: `_case_0285_season_music` in `src/tools/input_v1.gd`: a real run moved to a summer morning is playing the summer piece once the fade is over (`Audio.music_playing()`), and a boss night's build step the boss track
   - done when: The Web pack size before and after (`python tools/release.py`, or why it could not be measured) and `python tools/gen_music.py --report` lengths and seams are in the journal
 
-### 0243 - Art: the day tarps
-
-Waits on 0234.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py`.
-
-The approved tarps cover the defences by day and unveil at nightfall, in place of the code-drawn covers 0223 left.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A044` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A044-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (a tarp checker such as `tools/check_tarp_art.py` wired into `tools/verify.py`, or the tower and barrier checkers, `ArtPlacement` if needed).
-- One cover per footprint 0234 settled (32x48 towers, 16x32, 16x24) plus its 2 unveil frames; the family list comes from the pack's Deliverables table, and the unveil plays in the transition's wake pass
-- A hurt or wrecked defence still reads by day the way 0223 decided
-- Retire 0223's code-drawn covers from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A044 integrated`.
-
-  - done when: The family checks (the tarp checks - the new checker, or the tower and barrier checkers that took them) and the showcase (`python tools/show_art.py --towers --check` and `python tools/show_art.py --barriers --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of covered defences of every footprint and their unveil at nightfall in the real game, opened and looked at, in `implementation/shots/0243/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
 ### 0244 - Art: power and new weapon icons
 
 Waits on 0233, 0234.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
@@ -994,27 +998,6 @@ The first thing that does not walk: it flies over walls and mines and lands to e
   - done when: `python tools/shot.py 0249 crow` (a new scenario) opened and looked at: in flight it reads as above the wall, landed as on the field
   - done when: the Deliverables table of `implementation/backlog/packs/A048-crow.md` states the final geometry this task settled
 
-### 0250 - The digger
-
-Waits on 0234.  Likely files: `src/core/pathing.gd, src/core/enemies.gd, src/core/towers.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-The enemy that makes a fence a different thing from a wall: it tunnels under fences and barricades and comes up on the other side. Only a real wall stops it.
-
-- `ENEMIES.digger` with `# LEVER`s (hp, `ticks_per_tile` slower than the runner's 9 so `check_enemies` holds, damage, reward, armour) and a `burrows` flag; inside `_task_0051_tank`'s non-boss bounds
-- A burrow field through 0218's named-field registry, built on first request by a digger, so a night without one never builds it: a barrier flagged `burrowable` costs only the ground under it (`Pathing._through` and `_entry_costs`), everything else as in the flow field
-- `check_defences` makes every barrier (`path_cost` > 0) declare `burrowable`: fence and barricade yes, wall no (0231's hardwood wall is the wall's `TOWER_LEVELS` row and inherits it); 0231's sandbag barrier, 0230's electric fence and anything else with a `path_cost` decided and written in the journal
-- On a `burrowable` barrier's cell it is underground: in `Enemies._walk` it passes instead of `_gnaw`ing, `Towers._acquire` (0218's bucketed version) cannot target it and the barrier loses nothing; on open ground it surfaces, and walls and the house are gnawed and bitten as a walker does (`_gnaw`, `_bite`)
-- The tie-breaks of `Grid.STEPS` and 0049's rule hold: a digger never alternates between two cells for 20 ticks
-- A digger case in `src/tools/perf_check.gd` (its own `PERF` line, fifty walls and fences, the burrow field built): its path rebuild stays inside `PATH_BUDGET_US` (33333 us) in `python tools/perf.py --report`, the baseline accepted with the reason in the journal
-- Names.KEYS `digger`, `ENEMY_DIGGER`/`ENEMY_DIGGER.other` (digger/diggers, escavador/escavadores); `DESC_BURROWS` ('digs under fences' / 'cava por baixo das cercas'); `Sfx.ENEMY_SOUNDS.digger` borrows `sfx/groan_breaker` until 0284
-- On screen through 0120's placeholder road: a tinted stand-in, a code-drawn mound while underground and its forecast head, until A049 is integrated by 0263
-- Hashes: DATA moves; SIM should not (no digger in the determinism night, so no field is built)
-
-  - done when: `_task_0250_digger` in `src/tools/headless_v1.gd`: a digger reaches the house through a ring of fences without a fence losing a hit point, a ring of walls makes it gnaw, and a tower cannot target it while it is under a fence
-  - done when: The same group asserts the burrow field is never built on a night without a digger
-  - done when: `python tools/shot.py 0250 digger` (a new scenario) opened and looked at: the mound reads as under the fence
-  - done when: the Deliverables table of `implementation/backlog/packs/A049-digger.md` states the final geometry this task settled
-
 ### 0258 - Fog, rain and a red moon on screen
 
 Waits on 0256, 0257.  Likely files: `src/ui/lighting.gd, src/ui/particles.gd, src/ui/fog.gdshader (new), src/ui/world_view.gd, tools/palette.py, src/ui/palette_data.gd (generated), src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/shot.gd, src/tools/input_v1.gd`.
@@ -1030,6 +1013,24 @@ Fog that looks like fog, rain you can see, a red moon that makes the farm look w
 
   - done when: `_case_0258_event_visuals` in `src/tools/input_v1.gd`: each event turns its layer on with the night and off at dawn, the rain particle count follows the density setting, and a night with the layers on and one with them off end on the same SIM hash
   - done when: `python tools/shot.py 0258 fog rain blood_moon full_moon --fhd` opened and looked at beside `docs/reference-sheet.png`: the farm stays readable in every one
+
+### 0263 - Art: the digger
+
+Waits on 0250, 0246.  Likely files: `assets/art_source/enemies/digger/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd`.
+
+The digger as Codex drew it, in place of 0250's stand-in: going down, the mound moving under the fence, coming up.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A049` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A049-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/enemies/digger/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`gen_sprites.migrated_enemies()`, `check_enemy_art.FAMILIES` with its extra motions, `EnemyMotion.FAMILIES`/`TRACKED`).
+- At 64x48 pivot (32,44): `digger_walk_0..3`, `digger_burrow_0..3` (one-shot), `digger_mound_0..N` (loop, 2-3 frames), `digger_emerge_0..3`, `digger_attack_0..2`, `digger_death_0..3` with the usual aliases, and the forecast head
+- `EnemyMotion` plays burrow on the tick 0250 puts it underground, the mound while it stays there and emerge when it surfaces; replace 0250's placeholders in 0120's registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A049 integrated`.
+
+  - done when: `python tools/check_enemy_art.py` and `python tools/show_art.py --enemies --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures in the real game by day (the head in the dusk forecast) and by night (a mound under a fence line), opened and looked at, in `implementation/shots/0263/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0266 - Art: the Harvester
 
@@ -1159,24 +1160,6 @@ The crow as Codex drew it, in place of 0249's stand-in: in the air, landing, pec
   - done when: `python tools/check_enemy_art.py` and `python tools/show_art.py --enemies --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures in the real game by day (the head in the dusk forecast) and by night (one over a wall, one pecking a crop), opened and looked at, in `implementation/shots/0262/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0263 - Art: the digger
-
-Waits on 0250, 0246.  Likely files: `assets/art_source/enemies/digger/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd`.
-
-The digger as Codex drew it, in place of 0250's stand-in: going down, the mound moving under the fence, coming up.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A049` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A049-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/enemies/digger/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`gen_sprites.migrated_enemies()`, `check_enemy_art.FAMILIES` with its extra motions, `EnemyMotion.FAMILIES`/`TRACKED`).
-- At 64x48 pivot (32,44): `digger_walk_0..3`, `digger_burrow_0..3` (one-shot), `digger_mound_0..N` (loop, 2-3 frames), `digger_emerge_0..3`, `digger_attack_0..2`, `digger_death_0..3` with the usual aliases, and the forecast head
-- `EnemyMotion` plays burrow on the tick 0250 puts it underground, the mound while it stays there and emerge when it surfaces; replace 0250's placeholders in 0120's registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A049 integrated`.
-
-  - done when: `python tools/check_enemy_art.py` and `python tools/show_art.py --enemies --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures in the real game by day (the head in the dusk forecast) and by night (a mound under a fence line), opened and looked at, in `implementation/shots/0263/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0271 - Spring's fourteen nights
@@ -1873,7 +1856,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (13/28)
+## 13 - Weapons of the night  (14/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
@@ -1888,10 +1871,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0228** [The garlic braid](prompts/0228-garlic-braid.md)
 - [x] **0229** [The searchlight](prompts/0229-searchlight.md)
 - [x] **0230** [The electric fence](prompts/0230-electric-fence.md)
-- [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md)
+- [x] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md)
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232
-- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0231
+- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md)
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
 - [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - waits for art A037
 - [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - waits for art A038
@@ -1899,7 +1882,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md) - waits for art A040
 - [ ] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md) - waits for art A041
 - [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md) - waits for art A042
-- [ ] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md) - needs 0231 - waits for art A043
+- [ ] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md) - waits for art A043
 - [ ] **0243** [Art: the day tarps](prompts/0243-art-tarps.md) - needs 0234 - waits for art A044
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - needs 0233, 0234 - waits for art A045
 - [ ] **0245** [Art: the dog](prompts/0245-art-dog.md) - needs 0233 - waits for art A028
@@ -1913,7 +1896,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0250** [The digger](prompts/0250-digger.md) - needs 0234
 - [ ] **0251** [The frost zombie](prompts/0251-frost-zombie.md)
 - [ ] **0252** [The wraith](prompts/0252-wraith.md)
-- [ ] **0253** [The Harvester](prompts/0253-harvester.md) - needs 0246, 0231
+- [ ] **0253** [The Harvester](prompts/0253-harvester.md) - needs 0246
 - [ ] **0254** [The Scarecrow King](prompts/0254-scarecrow-king.md) - needs 0246, 0249
 - [ ] **0255** [The Winter Lord](prompts/0255-winter-lord.md) - needs 0246, 0251, 0253, 0254
 - [ ] **0256** [Fog and rain](prompts/0256-fog-and-rain.md)

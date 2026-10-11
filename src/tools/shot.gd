@@ -142,6 +142,7 @@ const SCENARIOS: Array = [
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
 	["searchlight", "a lit and an unlit tower line at night: Winter 2, a generator running, the east road with a line of gun towers north of it under a searchlight and a line south of it in the dark, tanks coming down the road - the lit line firing a tile further than the dark one can", ""],
 	["electric_fence", "a joined run of electric fence at night: Winter 2, a generator running, a line of electric fence across the east road with a corner, a wooden stub making a tee, two arms at its foot and a wooden fence carrying the east one on, the road's cell hurt and a west arm at the top a wreck; walkers coming down the road, the first stunned where it bit - cold blue, its zap still playing - and the fence picked on the hotbar, its ghost joining the north arm", ""],
+	["strong_walls", "a mixed line at night: Summer 2, a long line across the east road - stone, hardwood walls (the stone wall's level two) either side of the road and sandbags on it - an arm off it in one row of stone, hardwood, stone, sandbags and a fence, and a foot of sandbags, the last of them down; walkers come down the road and bite the sandbags, the cheapest way through; the sandbags picked on the hotbar, their ghost joining the arm's end", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
 	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
 	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
@@ -780,6 +781,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"garlic": _set_garlic(state)
 		"searchlight": _set_searchlight(state)
 		"electric_fence": _set_electric_fence(state)
+		"strong_walls": _set_strong_walls(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1124,6 +1126,28 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				mode.set("_pointer", view.cell_to_screen(hand))
 				view.cursor().place_at(hand)
 				mode.call("_follow_cursor")
+		"strong_walls":
+			# Where each walker stands and what it is biting at the shutter,
+			# and the line's pieces as they are (task 0231).
+			var walkers: Array = []
+			for id in Entities.ids(state):
+				var one := Entities.get_one(state, int(id))
+				walkers.append("%s at %s bit %s" % [one["kind"], str(Entities.cell_of(state, int(id))),
+					str(Grid.cell(int(one.get("chewing", -1)))) if int(one.get("chewing", -1)) >= 0 else "-"])
+			var pieces: Array = []
+			for cell in _strong_line:
+				var on := Farm.occupant(state, cell as Vector2i)
+				pieces.append("%s%s %d" % [on.get("id", "rubble"), "_%d" % int(on.get("level", 1)) if int(on.get("level", 1)) > 1 else "",
+					int(on.get("hp", 0))])
+			print("  strong_walls: %s; line %s" % [", ".join(walkers), ", ".join(pieces)])
+			# The sandbags in hand off the arm's end, where their ghost joins
+			# the fence - and the cursor's words clear of the line.
+			var strong_mode: Node = main.get_node_or_null("%BuildMode")
+			var strong_view := main.get_node("%WorldView") as WorldView
+			if strong_mode != null:
+				strong_mode.set("_pointer", strong_view.cell_to_screen(_strong_hand))
+				strong_view.cursor().place_at(_strong_hand)
+				strong_mode.call("_follow_cursor")
 		"garlic":
 			# The braid in hand on the road (task 0228), and the preview it
 			# draws.
@@ -2808,6 +2832,77 @@ func _set_electric_fence(state: Dictionary) -> void:
 
 ## The road's cell of the run `_set_electric_fence` laid (task 0230).
 var _electric_gate := Vector2i(-1, -1)
+
+
+## **A mixed line** (task 0231): Summer 2's night. A stretch of the east road,
+## which runs straight west to the house, cleared of its trees: a line of wall
+## across it, north to south and longer than the screen - going round it costs
+## more than breaking through - stone, then hardwood (the stone wall's level
+## two) either side of the road and sandbags on it; an arm off it running west
+## in one row of stone, hardwood, stone, sandbags and two fences; a foot
+## running east in sandbags, the last of them down. A hardwood wall is hurt.
+## Walkers come down the road and bite the sandbags, the cheapest way through;
+## more sandbags in hand off the arm's end (`_just_before_the_shutter`).
+func _set_strong_walls(state: Dictionary) -> void:
+	_on_date(state, GameData.SEASON_DAYS + 2)
+	Resources.gain(state, {GameData.STONE: 300, GameData.HARDWOOD: 60, GameData.SANDBAG: 40,
+		GameData.WOOD: 60})
+	(state["tech_owned"] as Array).append(&"stout timbers")
+	Pathing.refresh(state)
+	var road := _east_road(state)
+	var bend: Vector2i = road[mini(9, road.size() - 1)]
+	# The stretch cleared of its trees and stones, so the line reads as a line.
+	for dy in range(-6, 8):
+		for dx in range(-6, 10):
+			var at := bend + Vector2i(dx, dy)
+			var on := Farm.occupant(state, at)
+			if not on.is_empty() and Building.entry_of(StringName(on["id"])) == null \
+					and StringName(on["id"]) != &"house" and not Farm.FIXTURES.has(StringName(on["id"])):
+				Farm.remove(state, at)
+	NightRoad.into_build(state)
+	# Down the line, then the top arm west and the foot east: what goes where,
+	# and which walls are rebuilt in hardwood.
+	var pieces := {}
+	for dy in range(-6, 8):
+		pieces[bend + Vector2i(0, dy)] = &"sandbag_wall" if dy == 0 else &"wall"
+	pieces[bend + Vector2i(-1, -3)] = &"wall"
+	pieces[bend + Vector2i(-2, -3)] = &"wall"
+	pieces[bend + Vector2i(-3, -3)] = &"sandbag_wall"
+	pieces[bend + Vector2i(-4, -3)] = &"fence"
+	pieces[bend + Vector2i(-5, -3)] = &"fence"
+	_strong_hand = bend + Vector2i(-6, -3)
+	for dx in range(1, 4):
+		pieces[bend + Vector2i(dx, 4)] = &"sandbag_wall"
+	var hardwood := [bend + Vector2i(0, -2), bend + Vector2i(0, -1), bend + Vector2i(0, 1),
+		bend + Vector2i(0, 2), bend + Vector2i(-1, -3)]
+	_strong_line = []
+	var laid := 0
+	for cell in pieces:
+		if Building.place(state, StringName(pieces[cell]), cell as Vector2i):
+			laid += 1
+			_strong_line.append(cell)
+	var rebuilt := 0
+	for cell in hardwood:
+		if Building.upgrade(state, cell as Vector2i):
+			rebuilt += 1
+	# A hardwood wall by the road hurt, and the foot's last sandbag down.
+	(Farm.occupant(state, bend + Vector2i(0, 1)) as Dictionary)["hp"] = 120
+	Farm.damage(state, bend + Vector2i(3, 4), 1000)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	for dx in [2, 4, 7]:
+		Entities.spawn(state, &"walker", bend + Vector2i(int(dx), 0))
+	print("  strong_walls: %d of %d laid round %s, %d rebuilt in hardwood" % [laid, pieces.size(), str(bend),
+		rebuilt])
+	Building.select(state, &"sandbag_wall")
+	_look_at(bend + Vector2i(-1, 0))
+
+
+## The pieces `_set_strong_walls` laid, in the order it laid them, and where
+## it holds the sandbags in hand (task 0231).
+var _strong_line: Array = []
+var _strong_hand := Vector2i(-1, -1)
 
 
 ## **The route bending round a braid** (task 0228): Autumn 2's build step, a

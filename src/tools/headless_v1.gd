@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 75
+const GROUPS := 76
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -154,6 +154,7 @@ func _run() -> void:
 	_task_0228_garlic()
 	_task_0229_light()
 	_task_0230_electric_fence()
+	_task_0231_strong_walls()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -1375,7 +1376,7 @@ func _task_0132_night_build() -> void:
 		GameData.OIL: 9000, GameData.GUNPOWDER: 9000, GameData.MONEY: 9000,
 		GameData.FOOD: 9000, GameData.COPPER: 9000, GameData.GOLD: 9000,
 		GameData.STRAW: 9000, GameData.SUNFLOWER: 9000, GameData.PUMPKIN: 9000,
-		GameData.GARLIC: 9000}
+		GameData.GARLIC: 9000, GameData.SANDBAG: 9000}
 	var phases := {}
 	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT]:
 		var state := State.create(1320)
@@ -4371,7 +4372,7 @@ func _task_0177_hardwood() -> void:
 	# **Stood beside, and walked round like a tree.**
 	expect(GameData.check_reachable(GameData.GATHERING, GameData.FARM_MAP).is_empty(),
 		"every big stump has a cell to stand on beside it")
-	expect(Pathing._through(&"hardwood_stump", 1) == Pathing._through(&"tree", 1)
+	expect(Pathing._through({"id": &"hardwood_stump"}, 1) == Pathing._through({"id": &"tree"}, 1)
 		and not Pathing.is_prey(&"hardwood_stump"),
 		"the flow field treats it like a tree: no way through, nothing to come for")
 	_completed += 1
@@ -4435,7 +4436,7 @@ func _task_0178_sprinklers() -> void:
 	Pathing.refresh(state)
 	var bare := Vector2i(32, 32)
 	expect(Farm.is_empty(state, bare) and Pathing.entry_cost(state, at) == Pathing.entry_cost(state, bare)
-		and Farm.terrain_at(state, bare) == Farm.Terrain.SOIL and Pathing._through(&"copper_sprinkler", 7) == 7,
+		and Farm.terrain_at(state, bare) == Farm.Terrain.SOIL and Pathing._through({"id": &"copper_sprinkler"}, 7) == 7,
 		"the flow field crosses its cell at the ground's cost",
 		"%d against %d" % [Pathing.entry_cost(state, at), Pathing.entry_cost(state, bare)])
 	expect(not Pathing.is_prey(&"gold_sprinkler") and not Pathing.prey_cells(state).has(at)
@@ -6177,8 +6178,8 @@ func _task_0193_supply() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		var said := GameData.defence_season(GameData.DEFENCES[id]) if GameData.DEFENCES[id].has("season") else &""
 		seasons[said] = int(seasons.get(said, 0)) + 1
-	expect(seasons == {&"spring": 8, &"summer": 3, &"autumn": 2, &"winter": 2},
-		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225) and hive (0226), autumn's catapult (0227) and braid (0228), and winter's searchlight (0229) and electric fence (0230)", str(seasons))
+	expect(seasons == {&"spring": 8, &"summer": 4, &"autumn": 2, &"winter": 2},
+		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225), hive (0226) and sandbags (0231), autumn's catapult (0227) and braid (0228), and winter's searchlight (0229) and electric fence (0230)", str(seasons))
 	# **The routes**, season by season: what each kit, round, meal and feed
 	# is made of, followed back to the ground.
 	for season in GameData.SEASONS:
@@ -8662,6 +8663,243 @@ func _ring_bites(seed_value: int, id: StringName, short: bool) -> Dictionary:
 			stood = stood and Entities.get_one(state, walker)["pos"] == pos
 	return {"state": state, "walker": walker, "stunned": stunned, "stood": stood,
 		"gap": int(bites[1]) - int(bites[0]) if bites.size() >= 2 else -1, "percent": Power.percent(state)}
+
+
+## 0231 - the hardwood wall and the sandbags. The stone wall's level two,
+## rebuilt in the big stumps' hardwood behind 'stout timbers': more hit
+## points, and dearer for the field to go through - priced at its level - and
+## mended in stone and hardwood; no third. The sandbag wall, paid in the
+## loom's sandbags, between the fence and the wall on both. Both join the
+## line; drawn in code until A043.
+func _task_0231_strong_walls() -> void:
+	# **The rows, and their checks.**
+	var wall: Dictionary = GameData.DEFENCES[&"wall"]
+	var fence: Dictionary = GameData.DEFENCES[&"fence"]
+	var bags: Dictionary = GameData.DEFENCES[&"sandbag_wall"]
+	var steps: Array = GameData.TOWER_LEVELS[&"wall"]
+	var step: Dictionary = steps[0] if steps.size() == 1 else {}
+	var gives: Dictionary = step.get("gives", {})
+	expect(steps.size() == 1 and StringName(step.get("needs", &"")) == &"stout timbers"
+		and (step["cost"] as Dictionary).keys() == [GameData.HARDWOOD] and bool(step.get("rebuilds", false))
+		and int(gives.get("hp", 0)) > int(wall["hp"]) and int(gives.get("path_cost", 0)) > int(wall["path_cost"]),
+		"the wall has one level, behind 'stout timbers' and paid in hardwood, which rebuilds it with more hit points and a dearer way through",
+		str(step))
+	expect((bags["cost"] as Dictionary).keys() == [GameData.SANDBAG] and GameData.defence_season(bags) == &"summer"
+		and int(fence["hp"]) < int(bags["hp"]) and int(bags["hp"]) < int(wall["hp"])
+		and int(fence["path_cost"]) < int(bags["path_cost"]) and int(bags["path_cost"]) < int(wall["path_cost"])
+		and not bags.has("damage") and not Sfx.TOWER_SOUNDS.has(&"sandbag_wall") and not Pathing.is_prey(&"sandbag_wall"),
+		"a sandbag wall is paid in sandbags, is summer's, sits between the fence and the wall on hit points and path cost, does no damage and nobody hunts it",
+		str(bags))
+	var levels := GameData.TOWER_LEVELS.duplicate(true)
+	((levels[&"wall"] as Array)[0]["gives"] as Dictionary)["path_cost"] = GameData.WIDEST_STEP
+	expect(_says(GameData.check_pathing(GameData.TERRAIN_COST, GameData.DEFENCES, GameData.BUILDINGS, levels),
+		"a levelled 'wall'") and GameData.check_pathing(GameData.TERRAIN_COST, GameData.DEFENCES,
+		GameData.BUILDINGS).is_empty() and GameData.validate().is_empty(),
+		"check_pathing reads the levels' path cost too - a level past WIDEST_STEP is refused - and the real tables pass")
+
+	# **Upgraded by the cursor's road, as a tower is**: refused before the
+	# node, then once, then never a third.
+	var farm := State.create(23100)
+	Resources.gain(farm, {GameData.STONE: 200, GameData.HARDWOOD: 40, GameData.SANDBAG: 20})
+	NightRoad.into_build(farm)
+	var spot := _open_square(farm, 4, &"wall")
+	expect(Building.place(farm, &"wall", spot), "a stone wall goes up in the build step", str(spot))
+	var before_node := Building.why_not_upgrade(farm, spot)
+	(farm["tech_owned"] as Array).append(&"stout timbers")
+	Pathing.refresh(farm)
+	var ground := Farm.cost_of_terrain(int((farm["terrain"] as PackedByteArray)[Grid.index(spot)]))
+	var stone_cost := Pathing.entry_cost(farm, spot)
+	var hardwood_before := Resources.amount(farm, GameData.HARDWOOD)
+	var rebuilt := Building.upgrade(farm, spot)
+	Pathing.refresh(farm)
+	var on := Farm.occupant(farm, spot)
+	expect(before_node == [&"WHY_NEEDS_TECH", &"stout timbers"] and rebuilt and Building.level_at(farm, spot) == 2
+		and int(on["hp"]) == int(gives["hp"])
+		and hardwood_before - Resources.amount(farm, GameData.HARDWOOD) == int((step["cost"] as Dictionary)[GameData.HARDWOOD])
+		and Building.why_not_upgrade(farm, spot) == [&"WHY_LAST_LEVEL"] and not Building.upgrade(farm, spot),
+		"refused until 'stout timbers', then rebuilt in hardwood to %d hit points, and a third level refused" % int(gives["hp"]),
+		"%s %s" % [str(before_node), str(Building.why_not_upgrade(farm, spot))])
+	expect(stone_cost == ground + int(wall["path_cost"]) and Pathing.entry_cost(farm, spot) == ground + int(gives["path_cost"])
+		and Building.levelled_stat(on, "path_cost") == int(gives["path_cost"])
+		and int((farm["open_cost"] as PackedInt32Array)[Grid.index(spot)]) == Pathing.IMPASSABLE,
+		"the field prices it at its level: %d to go through the stone wall, %d the hardwood one, a wall to the runners either way"
+			% [stone_cost, Pathing.entry_cost(farm, spot)])
+
+	# **A level-two wall takes its hit points' longer to chew through**: a
+	# walker shut in a ring of each, its bites until one gives.
+	var stone := _ring_breaks(23101, 1)
+	var hard := _ring_breaks(23101, 2)
+	var bite := int(GameData.ENEMIES[&"walker"]["damage"])
+	expect(int(stone["bites"]) == int(wall["hp"]) / bite and int(hard["bites"]) == int(gives["hp"]) / bite
+		and int(hard["ticks"]) > int(stone["ticks"]) * 2 - int(stone["gap"]),
+		"a walker shut in breaks a stone wall in %d bites and a hardwood one in %d - %d ticks against %d"
+			% [int(stone["bites"]), int(hard["bites"]), int(stone["ticks"]), int(hard["ticks"])],
+		str([stone, hard]))
+
+	# **Mended to its level, in what it is made of**: stone and hardwood,
+	# where a level-one wall mends in stone alone and a tower's upgrades are
+	# not in its walls.
+	on["hp"] = 100
+	var made := Building.made_of(farm, spot)
+	var rates := Repair.per_hp_hundredths(farm, spot)
+	var plain := _open_square(farm, 2, &"wall")
+	var plain_built := Building.place(farm, &"wall", plain)
+	var plain_made := Building.made_of(farm, plain)
+	var mended := Repair.apply(farm, spot, 1000)
+	expect(made == {GameData.STONE: 10, GameData.HARDWOOD: 4} and rates.has(GameData.STONE) and rates.has(GameData.HARDWOOD)
+		and plain_built and plain_made == {GameData.STONE: 10}
+		and Repair.full_hp_at(farm, spot) == int(gives["hp"]) and mended == int(gives["hp"]) - 100
+		and int(Farm.occupant(farm, spot)["hp"]) == int(gives["hp"]),
+		"a hardwood wall is made of stone and hardwood and mends in both, to %d; a stone one is stone" % int(gives["hp"]),
+		"%s %s %d" % [str(made), str(rates), mended])
+
+	# **Sandbags priced between**, by the field too.
+	var bag_spot := _open_square(farm, 2, &"sandbag_wall")
+	expect(Building.place(farm, &"sandbag_wall", bag_spot), "a sandbag wall goes down in the build step", str(bag_spot))
+	Pathing.refresh(farm)
+	var bag_ground := Farm.cost_of_terrain(int((farm["terrain"] as PackedByteArray)[Grid.index(bag_spot)]))
+	expect(Pathing.entry_cost(farm, bag_spot) == bag_ground + int(bags["path_cost"]) and Pathing.breaks_through(farm, bag_spot),
+		"the field prices a sandbag wall at %d to go through" % int(bags["path_cost"]))
+
+	# **The words**: the sandbags' name, the hardwood wall's own, the cursor
+	# naming a wall at its level, the node saying what it rebuilds.
+	var said := {}
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		said[locale] = [Names.of(&"sandbag_wall"), Names.of_level(&"wall", 2), Names.of_level(&"wall", 1),
+			Describe.under_cursor(farm, spot), Names.note_of(&"stout timbers"), Describe.defence(&"sandbag_wall")]
+	I18n.use("en")
+	var en: Array = said["en"]
+	var pt: Array = said["pt_BR"]
+	expect(Names.KEYS.get(&"sandbag_wall") == &"DEF_SANDBAG_WALL" and en[0] == "sandbag wall" and en[1] == "hardwood wall"
+		and en[2] == "wall" and (en[3] as String).begins_with("HARDWOOD WALL - %d/%d" % [int(gives["hp"]), int(gives["hp"])])
+		and (en[4] as String).contains("hardwood") and (en[5] as String).contains("SANDBAG WALL")
+		and pt[0] == "sacos de areia" and pt[1] == "muro de madeira de lei" and (pt[4] as String).contains("madeira de lei"),
+		"the sandbags and the hardwood wall named in both languages, the cursor naming a wall at its level, and 'stout timbers' saying it rebuilds walls",
+		str(said))
+
+	# **The joins**: sandbags meet sandbags, walls at any level, fences - a
+	# line is one line - and a hardwood wall is drawn as its level.
+	var joined := State.create(23102)
+	Resources.gain(joined, {GameData.SANDBAG: 20})
+	NightRoad.into_build(joined)
+	var centre := _open_square(joined, 2, &"sandbag_wall")
+	Farm.place(joined, centre, {"id": &"sandbag_wall", "hp": 70})
+	Farm.place(joined, centre + Vector2i(0, -1), {"id": &"wall", "hp": 240, "level": 2})
+	Farm.place(joined, centre + Vector2i(1, 0), {"id": &"sandbag_wall", "hp": 70})
+	Farm.place(joined, centre + Vector2i(0, 1), {"id": &"decoy", "hp": 200})
+	Farm.place(joined, centre + Vector2i(-1, 0), {"id": &"fence", "hp": 30})
+	var view := WorldView.new()
+	view._state = joined
+	var drawn := [view._barrier_name(Farm.occupant(joined, centre), centre),
+		view._barrier_name(Farm.occupant(joined, centre + Vector2i(0, -1)), centre + Vector2i(0, -1))]
+	view.free()
+	expect(WorldView.barrier_mask(joined, centre) == 11 and WorldView.connected_barrier(&"sandbag_wall")
+		and drawn == [&"sandbag_wall_join_11", &"wall_2_join_4"],
+		"sandbags join the hardwood wall north, sandbags east and the fence west, not the decoy south; the wall above is drawn as level two, joined down",
+		str(drawn))
+
+	# **Drawn through 0120's road**: both families' 32 masks and wrecks at
+	# A043's 16x32 on (8,28), drawn in code, every standing one connected.
+	var road: Array = []
+	for name in StrongWallArt.names():
+		var path := StrongWallArt.path_of(name)
+		var frame := PlaceholderArt.frame(path)
+		if (frame.get("canvas") != Vector2i(16, 32) or frame.get("pivot") != Vector2i(8, 28)
+				or not PlaceholderArt.is_drawn(path) or str(PlaceholderArt.art(name).get("pack", "")) != "A043"
+				or bool(frame.get("connected", false)) == str(name).ends_with("_wreck")
+				or StrongWallArt.texture(name) == null):
+			road.append(name)
+	expect(StrongWallArt.names().size() == 66 and road.is_empty() and StrongWallArt.texture(&"wall") == null
+		and StrongWallArt.texture(&"electric_fence") == null,
+		"both families' 32 masks and wrecks drawn through 0120's road at A043's 16x32 on (8,28), every standing one connected",
+		str(road))
+
+	# **Each mask's arms match its bits**, every hurt one differs from its
+	# whole one; the hardwood wall keeps the stone wall's shape, mask for
+	# mask, in other colours; the sandbags are low.
+	var arms: Array = []
+	var recoloured := 0
+	for family in StrongWallArt.FAMILIES:
+		for hurt in [false, true]:
+			for m in 16:
+				var name := JoinRecipe.name_of(family, m, hurt)
+				var image := StrongWallArt.drawing(name)
+				var seen := [_any_opaque(image, Rect2i(0, 12, 1, 8)), _any_opaque(image, Rect2i(15, 12, 1, 8)),
+					_any_opaque(image, Rect2i(0, 0, 16, 4)), _any_opaque(image, Rect2i(0, 20, 16, 12))]
+				if image.get_size() != Vector2i(16, 32) or seen != [(m & 8) != 0, (m & 2) != 0, (m & 1) != 0, (m & 4) != 0]:
+					arms.append(name)
+				if hurt and _alpha_apart(image, StrongWallArt.drawing(JoinRecipe.name_of(family, m, false))) < 3:
+					arms.append("%s as whole" % name)
+				if family == StrongWallArt.HARDWOOD:
+					var stone_name := JoinRecipe.name_of("wall", m, hurt)
+					var stone_image := Image.load_from_file(ProjectSettings.globalize_path("res://sprites/buildings/%s.png" % stone_name))
+					stone_image.convert(Image.FORMAT_RGBA8)
+					if _alpha_apart(image, stone_image) > 0:
+						arms.append("%s off the stone's shape" % name)
+					if image.get_data() != stone_image.get_data():
+						recoloured += 1
+	var post := StrongWallArt.module(StrongWallArt.SANDBAGS, &"post", false).get_used_rect()
+	var bag_wreck := StrongWallArt.drawing(StrongWallArt.wreck_of(StrongWallArt.SANDBAGS)).get_used_rect()
+	var wood_wreck := StrongWallArt.drawing(StrongWallArt.wreck_of(StrongWallArt.HARDWOOD)).get_used_rect()
+	expect(arms.is_empty() and recoloured == 32
+		and post.size.x >= 8 and post.size.x <= 10 and post.size.y >= 7 and post.size.y <= 9 and post.end.y - 1 == 19
+		and bag_wreck.size.y <= 6 and bag_wreck.end.y - 1 == 27 and bag_wreck.size.x <= 14
+		and wood_wreck.size.y <= 8 and wood_wreck.end.y - 1 == 27 and wood_wreck.size.x <= 14,
+		"every mask's arms match its bits and every hurt one differs from its whole one; the hardwood wall has the stone wall's shape in all 32 masks, in other colours; the sandbags' post is low on row 19; both wrecks lie low on row 27",
+		"%s post %s wrecks %s %s" % [str(arms.slice(0, 6)), str(post), str(bag_wreck), str(wood_wreck)])
+
+	# **The hotbar**: a straight run of sandbags, summer's, by name.
+	var bar := Hotbar.new()
+	var icon := bar._icon_of(&"sandbag_wall")
+	bar.free()
+	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
+	expect(icon != null and icon == StrongWallArt.texture(JoinRecipe.name_of(StrongWallArt.SANDBAGS, 10, false))
+		and order.find(&"sandbag_wall") == order.find(&"decoy") + 1,
+		"the hotbar shows a straight run of sandbags, among summer's after the decoy", str(order))
+	expect(FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"strong_walls\", ")
+		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A043-strong-walls.md").contains("Final geometry settled by game task 0231"),
+		"shot.gd has a mixed line, and A043's table says the geometry this task settled")
+	_completed += 1
+
+
+## A walker shut in a ring of stone walls at `level` on open ground in a
+## parked night, ticked until one of them gives: how many bites that took, the
+## ticks from the first bite to the last, and the ticks between two bites
+## (task 0231).
+func _ring_breaks(seed_value: int, level: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.STONE: 200, GameData.HARDWOOD: 40})
+	(state["tech_owned"] as Array).append(&"stout timbers")
+	NightRoad.into_build(state)
+	var spot := _open_square(state, 4, &"wall")
+	var ring: Array = []
+	for step in Enemies.NEIGHBOURS:
+		var at: Vector2i = spot + step
+		expect(Building.place(state, &"wall", at) and (level < 2 or Building.upgrade(state, at)),
+			"a level %d wall goes up round the walker's cell" % level, str(at))
+		ring.append(at)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	Entities.spawn(state, &"walker", spot)
+	var hp := {}
+	for at in ring:
+		hp[at] = int(Farm.occupant(state, at)["hp"])
+	var bites: Array = []
+	for tick in 2000:
+		Enemies.tick(state)
+		var broke := false
+		for at in ring:
+			var now := int(Farm.occupant(state, at).get("hp", 0))
+			if now < int(hp[at]):
+				bites.append(tick)
+				hp[at] = now
+				broke = broke or now <= 0
+		if broke:
+			break
+	return {"bites": bites.size(), "ticks": int(bites.back()) - int(bites[0]) if bites.size() > 1 else 0,
+		"gap": int(bites[1]) - int(bites[0]) if bites.size() > 1 else 0}
 
 
 ## Whether anything in `rect` of `image` is opaque (task 0230).

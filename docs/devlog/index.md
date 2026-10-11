@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-213 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+214 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -257,10 +257,11 @@ is the sort of thing this list exists to say out loud.
 | 0228 | The garlic braid | 2026-10-11 |
 | 0229 | The searchlight | 2026-10-11 |
 | 0230 | The electric fence | 2026-10-11 |
+| 0231 | Hardwood walls and sandbags | 2026-10-11 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 100 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 101 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -362,6 +363,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **The searchlight** (0229) - `sim` 2065757832 -> 2958532891
 - **The searchlight** (0229) - `data` 1970672788 -> 2479540053
 - **The electric fence** (0230) - `data` 2479540053 -> 2576543805
+- **Hardwood walls and sandbags** (0231) - `data` 2576543805 -> 1845073021
 
 ## What went wrong
 

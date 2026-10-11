@@ -24921,3 +24921,170 @@ implementation/backlog/packs/A042-electric-fence.md,
 implementation/prompts/0230-electric-fence.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0230/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0231 - Hardwood walls and sandbags - done 2026-10-11
+
+What changed: two more ways to hold a line (the plan's 3.3 and 3.5).
+- **The hardwood wall:** the stone wall rebuilt with the big stumps'
+  hardwood into something a breaker has to work at - twice the hit points,
+  dearer for the field to go through.
+- **Sandbags from the loom:** a cheap barrier that soaks more than a fence.
+- **Every barrier joins every other**, so a line is one line whatever it is
+  made of.
+
+### The rows (`src/core/game_data.gd`)
+
+**`TOWER_LEVELS[&"wall"]`, one step:**
+- **Gate:** `needs` 'stout timbers' - the survival branch's first node,
+  "madeira reforçada", where the house's timbers are - as every tower's
+  level two needs 'true sights'.
+- **Cost:** 4 hardwood (LEVER 2-8). The iron axe that fells a big stump is
+  the other gate.
+- **Gives:** 240 hit points (LEVER 160-320) and `path_cost` 24 (20 the
+  stone's).
+- **`rebuilds`:** see the repair, below.
+- 24 is the most the field's wheel holds with garlic's 6 over the worst
+  ground: 2 + 24 + 6 = `WIDEST_STEP`.
+
+**The 'stout timbers' note** now says so, in the tree and in both languages:
+"...and a stone wall can be rebuilt in hardwood".
+
+**`sandbag_wall` in `DEFENCES`:**
+- **Cost:** 2 of the loom's sandbags (LEVER 1-4) - half a bolt of cloth and
+  two stone, where a stone wall is ten stone. 0188 made `SANDBAG` a
+  material, so the barrier has its own id.
+- 70 hit points (LEVER 40-100) and `path_cost` 12 (LEVER 8-16): between the
+  fence's 30 and 6 and the wall's 120 and 20.
+- No `damage`, so no tower sound.
+
+**`check_pathing`** takes the levels too (`levels`, defaulting to
+`TOWER_LEVELS`): a level's `path_cost` has to fit the wheel as the row's
+does.
+
+### Decided
+
+- **The sandbags are summer's:** a flock in a barn and a loom are a summer's
+  work, not a first spring's. 0234's prompt names them for it to confirm.
+- **The hardwood wall is a level, not an id:** it joins stone walls in one
+  run because it is one, and the plan's table keeps "muro" as one defence.
+- **Sandbags meet everything** - walls at any level, fences, the electric
+  fence, sandbags. A043's review already lays out a mixed line, and a gap in
+  a wall stopped with sandbags should look stopped.
+- **The hardwood wall mends in stone and hardwood:** a step that `rebuilds`
+  puts its price into what the thing is made of (`Building.made_of()`),
+  which repair takes its share of. A tower's levels stay out of its walls,
+  as 0113 decided: the gunpowder that bought level three is not in them.
+
+### The rules (`src/core/`)
+
+- **`Building.levelled_stat(on, key)`:** a number of an occupant at its
+  level, without a cell to look up or a row to copy. The view's
+  `levelled_stat` now calls it.
+- **`Pathing._through` takes the occupant** and prices it at its level, so a
+  hardwood wall costs the field 24 and a stone one still 20.
+- **`Repair.per_hp_hundredths`** shares out `Building.made_of()` instead of
+  the row's price:
+  - a stone wall mends at 4 hundredths of stone a hit point;
+  - a hardwood one at 2 of stone and 1 of hardwood, so a whole mend is
+    about 5 stone and 2 hardwood for 240 hit points.
+- **An upgrade by the cursor, as a tower's:** the cursor's upgrade look is
+  any placeable `can_upgrade`, so nothing in the input changed. A third
+  level is refused with the last-level reason (0226).
+
+### The view (`src/ui/`)
+
+- **`JoinRecipe`:** the contract's recipe, now shared. 0230's
+  `ElectricFenceArt` composes with it too.
+- **`StrongWallArt` draws A043 until 0242:**
+  - **the hardwood wall** - the stone wall's own module pixels with hardwood
+    laid over them, never over the stone's dark outline. A cap, two plank
+    bands and an iron strap round the pier, two bolted beams along the span,
+    beams down the north-south run with straps across. Its silhouette is the
+    stone's, mask for mask; its wreck is the stone heap with broken beams;
+  - **the sandbags** - code-drawn burlap sacks with twine: three for the post,
+    two staggered courses for the span, a line of five for the run. Hurt, a
+    sack slumps or is gone and sand is spilled; the wreck is two burst sacks
+    lying flat.
+- **`PlaceholderArt`:** 66 entries.
+- **`WorldView`:**
+  - joins the sandbags (`JOINED_BARRIERS`);
+  - names a barrier's drawing at its level (`wall_2_join_<m>`);
+  - remembers a levelled barrier's level for its wreck;
+  - draws no level pips on a joined barrier, whose drawing shows the level.
+- **The words:**
+  - `DEF_SANDBAG_WALL`, "sandbag wall" / "sacos de areia";
+  - `DEF_WALL_2`, "hardwood wall" / "muro de madeira de lei", which
+    `Names.of_level` gives the cursor's line for a level-two wall.
+- **The hotbar** shows the sandbags' straight run.
+- **A043's Deliverables table** is final: the names, modules not one piece,
+  the geometry measured on the stand-in, and how the game plays both.
+
+### Hashes
+
+- **SIM 2958532891, unchanged:** the determinism scenario's walls are level one, and the field prices a level-one wall as it always did.
+- **DATA 2576543805 -> 1845073021:** the wall's level, the sandbag wall's row and the 'stout timbers' note.
+
+Verify: **PASS**, 60 of 60 in 962 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 17841 asserts, `headless_v1` 2570, `input_check` 1252 cases, `input_v1` 720 (108 s).
+- **perf:** a night tick 1609 us, the swarm's 8001, a path rebuild 11024, 15560 with the decoys and 11551 with the garlic - a levelled stat read per occupant on a rebuild.
+
+**Tests:**
+- **`_task_0231_strong_walls` (headless_v1):**
+  - the rows; `check_pathing` refusing a level past `WIDEST_STEP`;
+  - the upgrade refused before 'stout timbers', taken once - 4 hardwood, to
+    240 - and a third refused;
+  - **the field pricing it at its level:** 20 for the stone wall, 24 for the
+    hardwood one, a wall to the runners either way;
+  - **a walker shut in a ring:** a stone wall in 12 bites over 231 ticks, a
+    hardwood one in 24 over 483;
+  - **the mend:** `made_of` stone and hardwood against a stone wall's stone,
+    both in the rates, mended to 240;
+  - **the sandbags:** the field pricing them at 12;
+  - **the words** in both languages, the cursor naming the level;
+  - **the joins:** sandbags with the hardwood wall, sandbags and the fence,
+    not the decoy; the wall drawn as `wall_2_join_4`;
+  - **the drawings:** the road's 66; every mask's arms against its bits,
+    every hurt one apart from its whole; the hardwood's alpha the stone's in
+    all 32 masks and its colours not; the sandbags' low post, both wrecks
+    low; the hotbar's icon and slot; the shot and A043's table.
+- **Old groups touched:**
+  - `headless_v1`'s 0193 counts summer's four, its 0132 rich farm has
+    sandbags, and its two `Pathing._through` calls pass an occupant;
+  - `headless_check`'s 0064 lets a last level change `path_cost`, it has 99
+    scenarios, and its building art knows `StrongWallArt`.
+- **`input_v1` found it** ("every hint fits its line"): the hint "BOTÃO
+  ESQUERDO: consertar muro de sacos de areia" was 263 px of 256. In
+  Portuguese the sandbags are "sacos de areia".
+- **No new input case:** the wall goes up a level by the cursor's upgrade
+  road and the sandbags down by the hotbar, which their cases walk for
+  every defence.
+
+**Looked at** (`python tools/shot.py 0231 strong_walls --fhd`), Summer 2's
+night:
+- **The line:** across the east road, longer than the screen - stone, then
+  hardwood walls either side of the road and sandbags on it.
+- **An arm** off it in one row of stone, hardwood, stone, sandbags and two
+  fences, and the sandbags in hand at its end, their ghost joined.
+- **A foot** of sandbags, the last one down; a hardwood wall hurt.
+- **The walkers** come down the road and bite the sandbags, the cheapest way
+  through; the build preview's dots run through them.
+- **What the takes found:**
+  - with the house a row south of the road, walkers went round a short line
+    rather than through its sandbags, so the line runs off the screen both
+    ways;
+  - the cursor's words sat over the line until the sandbags in hand moved to
+    the arm's end;
+  - the sandbags' wreck was 15 px wide, against A043's 14.
+- **At night** the hardwood reads as dark bands on the lighter stone and the
+  sandbags as a row of sacks: subtle at 1x, legible zoomed. The real art's
+  job, and A043's review question.
+
+Files: src/core/{game_data,building,pathing,repair}.gd,
+src/ui/{join_recipe,strong_wall_art,electric_fence_art,placeholder_art,world_view,hotbar,names,describe}.gd,
+src/ui/{join_recipe,strong_wall_art}.gd.uid, assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,shot}.gd,
+tools/determinism_data_hash.txt,
+implementation/backlog/packs/A043-strong-walls.md,
+implementation/prompts/0231-strong-walls.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0231/,
+docs/devlog/{index,index.pt_BR}.md

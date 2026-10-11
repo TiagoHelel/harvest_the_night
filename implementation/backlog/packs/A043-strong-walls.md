@@ -21,29 +21,33 @@ stone.
 
 ## Deliverables
 
-The table is provisional: game task 0231 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0231. The names below are final, and **the sandbags are modules** (the default), not one piece. **How the game plays them:** the hardwood wall is **level two of `wall`**, not an id of its own - an upgrade by the cursor like a tower's, behind the tree's 'stout timbers', paid in four hardwood, to 240 hit points and a dearer way through for the field (its `path_cost` 24 against the stone's 20); the view draws a level-two wall's cell as `wall_2_*`, so a run of stone and hardwood is one run, and it mends in stone and hardwood. The sandbag wall is **its own id, `sandbag_wall`**, summer's, two of the loom's sandbags a piece, 70 hit points and `path_cost` 12 - between the fence and the wall. **Every barrier joins every other** - stone or hardwood wall, fence, electric fence, sandbags - so a line is one line whatever it is made of, and the mixed seams are real cases. Each is `_hurt` below three quarters of its levelled hit points and `_wreck` once it falls, as rubble the morning sweeps; the hardwood wall falls to `wall_2_wreck` when the view saw it standing at level two. Until 0242 both families are drawn in code by `StrongWallArt` through 0120's road: the hardwood laid over the stone wall's own module pixels - so its silhouette is the stone's, mask for mask - and the sandbags as code-drawn sacks; each family's 32 masks composed with the recipe below exactly as `build.py` will. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
-| `buildings/modules/wall_2_post` | 16x32 | (8,28) | 1 / static (0.55) | Hardwood. Stone pier wrapped by dark hardwood planks with an iron strap and a hardwood cap. Envelope of `wall_post`: x 5-10 (±1), rows 5-19, lowest opaque row 19 (stands on row 20). |
-| `buildings/modules/wall_2_horizontal` | 16x32 | (8,28) | 1 / static | East-west span, no end piers: stone courses faced with two horizontal hardwood beams and bolts. Rows 12-19 exactly, opaque at x 0 and x 15, so it meets `wall_horizontal` on at least 2 rows. |
-| `buildings/modules/wall_2_vertical` | 16x32 | (8,28) | 1 / static | North-south span seen from above along the screen Y axis (not an upright pillar): x 6-10, content inside rows 8-27 and reaching both ends, like `wall_vertical` rows 9-27. |
+| `buildings/modules/wall_2_post` | 16x32 | (8,28) | 1 / static (0.55) | Hardwood. Stone pier wrapped by dark hardwood planks with an iron strap and a hardwood cap. Envelope of `wall_post`: x 5-10 (±1), rows 5-19, lowest opaque row 19 (stands on row 20). The stand-in keeps it exactly and bands the stone: the cap on rows 5-6, planks on 9-10 and 15-16, the strap on 12 - dark bands on light stone, which is what reads after the night relight. |
+| `buildings/modules/wall_2_horizontal` | 16x32 | (8,28) | 1 / static | East-west span, no end piers: stone courses faced with two horizontal hardwood beams and bolts. Rows 12-19 exactly, opaque at x 0 and x 15, so it meets `wall_horizontal` on at least 2 rows. The stand-in's beams are rows 13-14 and 17-18. |
+| `buildings/modules/wall_2_vertical` | 16x32 | (8,28) | 1 / static | North-south span seen from above along the screen Y axis (not an upright pillar): x 6-10, content inside rows 8-27 and reaching both ends, like `wall_vertical` rows 9-27. The stand-in runs a beam down each side of the stone (x 7 and 9) with straps across on rows 12, 18 and 24. |
 | `buildings/modules/wall_2_{post,horizontal,vertical}_hurt` | 16x32 | (8,28) | 1 each / static | Same scale and placement: split planks, a sprung strap, a missing stone; every hurt module's alpha shape differs from its whole one. |
-| `buildings/wall_2_wreck` | 16x32 | (8,28) | 1 / static | Low heap of stone and broken hardwood beams: height at most 8, width at most 14, lowest row 27 (like `wall_wreck` rows 23-27). |
+| `buildings/wall_2_wreck` | 16x32 | (8,28) | 1 / static | Low heap of stone and broken hardwood beams: height at most 8, width at most 14, lowest row 27 (like `wall_wreck` rows 23-27; the stand-in's is rows 22-27). |
 | `buildings/wall_2`, `wall_2_join_<1..15>`, `wall_2_hurt`, `wall_2_join_<1..15>_hurt` | 16x32 | (8,28) | 1 each / static | **Composed by build.py** from the six modules (32 masks), with the contract's recipe (section 2.3). |
-| `buildings/modules/sandbag_wall_post` | 16x32 | (8,28) | 1 / static | A small stack of 3 sacks (2 below, 1 on top). Visible about 8-10 wide x 7-9 tall, centred on x 8, lowest opaque row 19. |
-| `buildings/modules/sandbag_wall_horizontal` | 16x32 | (8,28) | 1 / static | Two staggered courses of plump sacks, 3 per course, spanning x 0-15; rows 12-19, the same span rows as the wall and the fence. |
-| `buildings/modules/sandbag_wall_vertical` | 16x32 | (8,28) | 1 / static | A line of sacks seen from above along the screen Y axis: x 5-11, content inside rows 8-27 and reaching both ends. |
+| `buildings/modules/sandbag_wall_post` | 16x32 | (8,28) | 1 / static | A small stack of 3 sacks (2 below, 1 on top). Visible about 8-10 wide x 7-9 tall, centred on x 8, lowest opaque row 19 (the stand-in's: x 3-12, rows 12-19). |
+| `buildings/modules/sandbag_wall_horizontal` | 16x32 | (8,28) | 1 / static | Two staggered courses of plump sacks, 3 per course, spanning x 0-15; rows 12-19, the same span rows as the wall and the fence, opaque at x 0 and x 15 (the lower course) so it meets the wall, the fence and the electric fence. |
+| `buildings/modules/sandbag_wall_vertical` | 16x32 | (8,28) | 1 / static | A line of sacks seen from above along the screen Y axis: x 5-11, content inside rows 8-27 and reaching both ends - five sacks four rows each, so a run's sacks line up cell to cell. |
 | `buildings/modules/sandbag_wall_{post,horizontal,vertical}_hurt` | 16x32 | (8,28) | 1 each / static | Split sacks slumped, a gap in a course, a little sand spilled within the pile (no ground patch); alpha shape differs from whole. |
-| `buildings/sandbag_wall_wreck` | 16x32 | (8,28) | 1 / static | Flattened, burst sacks: height at most 6, width at most 14, lowest row 27. |
+| `buildings/sandbag_wall_wreck` | 16x32 | (8,28) | 1 / static | Flattened, burst sacks: height at most 6, width at most 14, lowest row 27 (the stand-in's: rows 24-27, x 1-13). |
 | `buildings/sandbag_wall`, `sandbag_wall_join_<1..15>`, `sandbag_wall_hurt`, `sandbag_wall_join_<1..15>_hurt` | 16x32 | (8,28) | 1 each / static | **Composed by build.py** from the six sandbag modules (32 masks). |
 
 - Every row: dir `none`, `mirror: "none"`, draw scale 1.0, no metadata points.
 - One `content_scale` per family across its six modules and its wreck.
-- **Names are provisional**: `wall_2_*` follows the tower level naming
-  (`<id>_<level>`) and `sandbag_wall` is the id 0231 suggests for a barrier paid
-  in the loom's `sandbag` material. 0231 writes the final names and whether the
-  sandbags are modules (this default) or one 16x24 piece, and rewrites this table.
+- **The names are final** (task 0231): `wall_2_*` follows the tower level
+  naming (`<id>_<level>`), and `sandbag_wall` is the id of the barrier paid in
+  the loom's `sandbag` material. The sandbags are modules.
+- **The stand-in until 0242** (task 0231): `PlaceholderArt` registers both
+  families' 32 masks (`connected`) and wrecks as drawn by code
+  (`StrongWallArt`). The pack has no icon: the hotbar shows the sandbags'
+  straight run, mask 10, scaled into its 16x16 box; the hardwood wall is an
+  upgrade, not a slot.
 - `contract.json` carries `joins` for both families; native paths are
   `native/<runtime name without folder>/none/01.png` (78 files).
 

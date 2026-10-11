@@ -1447,8 +1447,9 @@ func _refresh() -> void:
 		else:
 			_occupants.add_child(sprite)
 		_sprites.append(sprite)
-		# Complete authored levels communicate their reinforcement themselves.
-		var pips := 0 if authored_tower(id) else maxi(int(on.get("level", 1)) - 1, 0)
+		# Complete authored levels communicate their reinforcement themselves,
+		# and so does a joined barrier's (task 0231's hardwood wall).
+		var pips := 0 if authored_tower(id) or connected_barrier(id) else maxi(int(on.get("level", 1)) - 1, 0)
 		for pip in pips:
 			var mark := ColorRect.new()
 			mark.color = Color(1.0, 0.86, 0.42, 0.95)
@@ -2239,7 +2240,9 @@ func _remember_towers(state: Dictionary) -> void:
 		_tower_history.erase(idx)
 	for idx in occupants:
 		var on: Dictionary = occupants[idx]
-		if authored_tower(on["id"]) or stand_in_tower(on["id"]):
+		# A levelled barrier's too (task 0231): the hardwood wall falls to its
+		# own wreck.
+		if authored_tower(on["id"]) or stand_in_tower(on["id"]) or GameData.TOWER_LEVELS.has(StringName(on["id"])):
 			_tower_history[idx] = {"id": on["id"], "level": maxi(int(on.get("level", 1)), 1)}
 
 
@@ -2255,7 +2258,7 @@ func _refresh_wrecks() -> void:
 	for cell in Farm.rubble_cells(_state):
 		var id := Farm.rubble_at(_state, cell)
 		var stand_in := stand_in_tower(id)
-		if (not authored_tower(id) and not stand_in and id not in [&"wall", &"fence", &"barricade", &"mine", &"decoy", &"electric_fence"]) or not Farm.occupant(_state, cell).is_empty():
+		if (not authored_tower(id) and not stand_in and id not in [&"wall", &"fence", &"barricade", &"mine", &"decoy", &"electric_fence", &"sandbag_wall"]) or not Farm.occupant(_state, cell).is_empty():
 			continue
 		var idx := Grid.index(cell)
 		visible[idx] = true
@@ -2267,7 +2270,10 @@ func _refresh_wrecks() -> void:
 			sprite.name = "Wreck_%d" % idx
 			_wrecks.add_child(sprite)
 			_wreck_sprites[idx] = sprite
-		var wreck_name := tower_name(remembered, "_wreck") if authored_tower(id) or stand_in else StringName(str(id) + "_wreck")
+		# A levelled barrier's wreck at the level it stood at (task 0231's
+		# hardwood wall), as a tower's is.
+		var wreck_name := tower_name(remembered, "_wreck") if authored_tower(id) or stand_in \
+			or GameData.TOWER_LEVELS.has(id) else StringName(str(id) + "_wreck")
 		# A stand-in tower's wreck (task 0226's hive) is its registry entry's
 		# file, tinted and scaled as the standing one is.
 		if stand_in and not PlaceholderArt.art(wreck_name).is_empty():
@@ -2656,10 +2662,12 @@ static func connected_barrier(id: StringName) -> bool:
 	return bool((PlaceholderArt.frame(BUILDING_DIR + str(id) + ".png") as Dictionary).get("connected", false))
 
 
-## The barriers that join their neighbours: the wall, the fence and - since
-## task 0230 - the electric fence, which meets both, so a run of wire can
-## carry on a wooden fence or end on a wall.
-const JOINED_BARRIERS: Array[StringName] = [&"wall", &"fence", &"electric_fence"]
+## The barriers that join their neighbours: the wall - at any level, the
+## hardwood one too - the fence, since task 0230 the electric fence, and
+## since 0231 the sandbags. Every one meets every other, so a line is one line
+## whatever it is made of: a run of wire carries on a wooden fence, sandbags
+## stop a gap between two walls.
+const JOINED_BARRIERS: Array[StringName] = [&"wall", &"fence", &"electric_fence", &"sandbag_wall"]
 
 
 ## The same N1/E2/S4/W8 order as terrain. No empty-cell decorative posts;
@@ -2674,9 +2682,11 @@ static func barrier_mask(state: Dictionary, cell: Vector2i) -> int:
 	return mask
 
 
+## A barrier's drawing for its cell: its family at its level - `wall_2`, the
+## hardwood wall, since task 0231 - the mask its neighbours make, and hurt.
 func _barrier_name(on: Dictionary, cell: Vector2i) -> StringName:
 	var mask := barrier_mask(_state, cell)
-	var id := str(on["id"]) + ("_join_%d" % mask if mask else "")
+	var id := str(tower_name(on)) + ("_join_%d" % mask if mask else "")
 	return StringName(id + ("_hurt" if _is_hurt(on) else ""))
 
 
@@ -2783,16 +2793,10 @@ func _just_fired(on: Dictionary) -> bool:
 	return just_fired(on)
 
 
-## Read the same level overlay as Building without a cell lookup or state write.
+## Read the same level overlay as Building without a cell lookup or state write
+## (`Building.levelled_stat()`, the field's since task 0231).
 static func levelled_stat(on: Dictionary, key: String, missing: int = 0) -> int:
-	var entry: Variant = Building.entry_of(StringName(on["id"]))
-	if entry == null:
-		return missing
-	var value := int((entry as Dictionary).get(key, missing))
-	var steps: Array = GameData.TOWER_LEVELS.get(StringName(on["id"]), [])
-	for step in steps.slice(0, maxi(int(on.get("level", 1)) - 1, 0)):
-		value = int((step["gives"] as Dictionary).get(key, value))
-	return value
+	return Building.levelled_stat(on, key, missing)
 
 
 static func just_fired(on: Dictionary) -> bool:
@@ -2897,6 +2901,9 @@ func _texture_for(id: StringName) -> Texture2D:
 	# And task 0230's electric fence, every mask and the wreck, until A042.
 	if coded == null:
 		coded = ElectricFenceArt.texture(id)
+	# And task 0231's hardwood wall and sandbags, until A043.
+	if coded == null:
+		coded = StrongWallArt.texture(id)
 	if coded != null:
 		_textures[id] = coded
 		return coded

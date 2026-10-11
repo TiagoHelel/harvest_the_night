@@ -146,6 +146,10 @@ const KEYS: Dictionary = {
 	&"garlic_braid": &"DEF_GARLIC_BRAID",
 	&"searchlight": &"DEF_SEARCHLIGHT",
 	&"electric_fence": &"DEF_ELECTRIC_FENCE",
+	&"sandbag_wall": &"DEF_SANDBAG_WALL",
+	# A level with a name of its own (task 0231): the wall rebuilt in hardwood,
+	# by its runtime name, `<id>_<level>` (`of_level()`).
+	&"wall_2": &"DEF_WALL_2",
 
 	# ---- what a day builds
 	&"workshop": &"BLD_WORKSHOP",
@@ -326,6 +330,13 @@ static func of(id: StringName) -> String:
 	if KEYS.has(id):
 		return I18n.t(KEYS[id])
 	return String(id).replace("_", " ")
+
+
+## **A thing at its level** (task 0231): the level's own name where it has
+## one - the hardwood wall - and the thing's otherwise.
+static func of_level(id: StringName, level: int) -> String:
+	var levelled := StringName("%s_%d" % [id, level])
+	return of(levelled) if level > 1 and KEYS.has(levelled) else of(id)
 
 
 ## A refusal from the rules, as a sentence.

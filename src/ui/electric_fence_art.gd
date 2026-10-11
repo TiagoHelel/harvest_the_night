@@ -10,8 +10,8 @@ extends RefCounted
 ##   x 0-15, on rows 13 and 17 - rows the wooden fence's span has too, so a
 ##   mixed run meets it on four; and the north-south run seen from above,
 ##   two wires down x 7 and 9 on rows 11-27;
-## - **the 32 joins composed from them** with the contract's recipe (its
-##   section 2.3: N, W, E, S, then the post on top), as A042's `build.py`
+## - **the 32 joins composed from them** with the contract's recipe
+##   (`JoinRecipe`: N, W, E, S, then the post on top), as A042's `build.py`
 ##   will compose them;
 ## - **the wreck**, a low tangle of a fallen post and coiled wire on rows
 ##   21-27;
@@ -28,15 +28,6 @@ const ID := &"electric_fence"
 const WRECK := &"electric_fence_wreck"
 const ZAP_PATH := "res://sprites/effects/zap_%d.png"
 const ZAP_FRAMES := 3
-
-## The recipe (ART-CONTRACT 2.3): the bit, the module, the slice of it and
-## where the slice is pasted, in the order they are pasted - the post last.
-const RECIPE := [
-	[1, &"vertical", Rect2i(0, 8, 16, 20), Vector2i(0, 0)],
-	[8, &"horizontal", Rect2i(0, 0, 8, 32), Vector2i(0, 0)],
-	[2, &"horizontal", Rect2i(8, 0, 8, 32), Vector2i(8, 0)],
-	[4, &"vertical", Rect2i(0, 8, 16, 20), Vector2i(0, 8)],
-]
 
 ## The wires' rows on the span, and the post's columns.
 const WIRES := [13, 17]
@@ -68,10 +59,7 @@ static var _made: Dictionary = {}
 ## Every runtime name the fence stands under: the sixteen masks whole - mask
 ## 0 is the bare `electric_fence` - the sixteen hurt, and the wreck.
 static func names() -> Array:
-	var out: Array = []
-	for hurt in ["", "_hurt"]:
-		for mask in 16:
-			out.append(name_of(mask, hurt == "_hurt"))
+	var out: Array = JoinRecipe.names(str(ID))
 	out.append(WRECK)
 	return out
 
@@ -79,7 +67,7 @@ static func names() -> Array:
 ## The runtime name of a mask, whole or hurt: what `WorldView._barrier_name()`
 ## asks for.
 static func name_of(mask: int, hurt: bool) -> StringName:
-	return StringName(str(ID) + ("_join_%d" % mask if mask > 0 else "") + ("_hurt" if hurt else ""))
+	return JoinRecipe.name_of(str(ID), mask, hurt)
 
 
 ## The drawing a runtime name wears while A042 has not landed. Null for a name
@@ -114,26 +102,15 @@ static func path_of(id: StringName) -> String:
 static func drawing(id: StringName) -> Image:
 	if id == WRECK:
 		return _wreck()
-	var name := str(id)
-	var hurt := name.ends_with("_hurt")
-	var mask := 0
-	var at := name.find("_join_")
-	if at >= 0:
-		mask = int(name.substr(at + 6).trim_suffix("_hurt"))
-	return compose(mask, hurt)
+	var join := JoinRecipe.parse(str(ID), str(id))
+	return compose(maxi(int(join[0]), 0), bool(join[1]))
 
 
-## **A mask composed with the recipe**: each arm's slice pasted where the
-## table says, the post over them.
+## **A mask composed with the recipe** (`JoinRecipe`): each arm's slice pasted
+## where the table says, the post over them.
 static func compose(mask: int, hurt: bool) -> Image:
-	var image := _blank()
-	for step in RECIPE:
-		if mask & int(step[0]):
-			var part := module(StringName(step[1]), hurt)
-			image.blend_rect(part, step[2] as Rect2i, step[3] as Vector2i)
-	var post := module(&"post", hurt)
-	image.blend_rect(post, Rect2i(Vector2i.ZERO, post.get_size()), Vector2i.ZERO)
-	return image
+	return JoinRecipe.compose({&"post": module(&"post", hurt), &"horizontal": module(&"horizontal", hurt),
+		&"vertical": module(&"vertical", hurt)}, mask)
 
 
 ## One module - `post`, `horizontal` or `vertical` - whole or hurt.

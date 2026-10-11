@@ -1,7 +1,7 @@
 # 0231 - Hardwood walls and sandbags
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0196, 0177, 0188, 0132, 0226
 - **Likely files:** src/core/game_data.gd, src/core/building.gd, src/core/pathing.gd, src/core/repair.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd
 
