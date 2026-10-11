@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-214 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+215 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -258,6 +258,7 @@ is the sort of thing this list exists to say out loud.
 | 0229 | The searchlight | 2026-10-11 |
 | 0230 | The electric fence | 2026-10-11 |
 | 0231 | Hardwood walls and sandbags | 2026-10-11 |
+| 0232 | Powers as a list | 2026-10-11 |
 
 ## Every time the game changed underneath itself
 

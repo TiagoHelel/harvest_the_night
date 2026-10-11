@@ -3207,13 +3207,13 @@ func _case_0054_ability() -> void:
 	expect(int(state["phase"]) == Phases.DAY, "it starts as day")
 	await tap_key(KEY_F)
 	await frames(3)
-	expect(Ability.flares_used(state) == 0,
+	expect(Ability.used(state, Ability.FLARE) == 0,
 		"pressing it in daylight does nothing",
-		str(Ability.flares_used(state)))
+		str(Ability.used(state, Ability.FLARE)))
 
 	NightRoad.to_night(state)
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
-	expect(Ability.ready(state), "and the flare is charged")
+	expect(Ability.ready(state, Ability.FLARE), "and the flare is charged")
 
 	# **Aimed with the cursor** (task 0135): the mouse puts it on a cell, and
 	# something stands right beside that cell to be flared.
@@ -3231,10 +3231,10 @@ func _case_0054_ability() -> void:
 	var hp_before := int(Entities.get_one(state, victim).get("hp", 0))
 
 	await tap_key(KEY_F)
-	await until(func() -> bool: return Ability.flares_used(state) > 0,
+	await until(func() -> bool: return Ability.used(state, Ability.FLARE) > 0,
 		"the flare to go off")
-	expect(Ability.flares_used(state) == 1, "one press, one flare",
-		str(Ability.flares_used(state)))
+	expect(Ability.used(state, Ability.FLARE) == 1, "one press, one flare",
+		str(Ability.used(state, Ability.FLARE)))
 	expect(int(Entities.get_one(state, victim).get("hp", 0)) < hp_before,
 		"and the thing beside the aimed cell is hurt by it",
 		str(Entities.get_one(state, victim).get("hp", 0)))
@@ -3242,23 +3242,23 @@ func _case_0054_ability() -> void:
 
 	# **The player can see it.** The rules record where it went off, which is
 	# all the view needs and all it is allowed to know.
-	expect(Ability.flare_at(state) == [aim.x, aim.y],
+	expect(Ability.aimed_at(state, Ability.FLARE) == [aim.x, aim.y],
 		"the burst is recorded where the cursor was",
-		str(Ability.flare_at(state)))
+		str(Ability.aimed_at(state, Ability.FLARE)))
 
 	# **Two in the same second are impossible**, through the key as well as
 	# through the rule.
-	var after := Ability.flares_used(state)
+	var after := Ability.used(state, Ability.FLARE)
 	for _i in 4:
 		await tap_key(KEY_F)
 	await frames(6)
-	expect(Ability.flares_used(state) == after,
+	expect(Ability.used(state, Ability.FLARE) == after,
 		"four more presses inside a second set off nothing",
-		str(Ability.flares_used(state)))
-	expect(not Ability.ready(state), "it is still waiting")
-	expect(Ability.charge_percent(state) < 100,
+		str(Ability.used(state, Ability.FLARE)))
+	expect(not Ability.ready(state, Ability.FLARE), "it is still waiting")
+	expect(Ability.charge_percent(state, Ability.FLARE) < 100,
 		"and the ring the HUD draws is not full",
-		str(Ability.charge_percent(state)))
+		str(Ability.charge_percent(state, Ability.FLARE)))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
@@ -3503,19 +3503,19 @@ func _case_0056_night_hud() -> void:
 	# The flare, and it reports its own wait afterwards. **The control arms
 	# it** since task 0135, and the next click on the farm lets it go there.
 	var flare: Button = locate_control("FlareButton") as Button
-	expect(Ability.ready(state), "the flare is charged")
+	expect(Ability.ready(state, Ability.FLARE), "the flare is charged")
 	expect(not flare.disabled, "so the control is live")
 	await click_control("FlareButton")
 	await frames(2)
-	expect(Ability.flares_used(state) == 0, "clicking it arms the flare and fires nothing yet",
-		str(Ability.flares_used(state)))
+	expect(Ability.used(state, Ability.FLARE) == 0, "clicking it arms the flare and fires nothing yet",
+		str(Ability.used(state, Ability.FLARE)))
 	var target := Farm.house_centre(state) + Vector2i(3, 3)
 	await click_cell(target)
-	await until(func() -> bool: return Ability.flares_used(state) > 0,
+	await until(func() -> bool: return Ability.used(state, Ability.FLARE) > 0,
 		"the flare to go off")
-	expect(Ability.flares_used(state) == 1 and Ability.flare_at(state) == [target.x, target.y],
+	expect(Ability.used(state, Ability.FLARE) == 1 and Ability.aimed_at(state, Ability.FLARE) == [target.x, target.y],
 		"and the next click on the farm sets it off there",
-		str(Ability.flare_at(state)))
+		str(Ability.aimed_at(state, Ability.FLARE)))
 	await frames(2)
 	expect(flare.disabled, "and then the control goes dead")
 	expect(flare.text.contains("%"),

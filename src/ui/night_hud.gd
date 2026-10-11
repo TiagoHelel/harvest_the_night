@@ -617,8 +617,8 @@ func _refresh_boss() -> void:
 func _refresh_controls() -> void:
 	# **The flare**, with its wait on it rather than a bare "no". Disabled is
 	# enough: the theme draws a disabled button in ink_soft with faint letters.
-	var charge := Ability.charge_percent(_state)
-	_flare.disabled = not Ability.ready(_state)
+	var charge := Ability.charge_percent(_state, Ability.FLARE)
+	_flare.disabled = not Ability.ready(_state, Ability.FLARE)
 	_flare.text = I18n.t(&"NHUD_FLARE") if not _flare.disabled \
 		else I18n.f(&"NHUD_FLARE_CHARGE", [charge])
 
@@ -662,7 +662,7 @@ func _refresh_start() -> void:
 func _do_flare() -> void:
 	# **Armed, not fired** (task 0135): the flare goes where it is aimed, so
 	# the button hands the aim to the cursor and the next confirm lets it go.
-	if not _state.is_empty() and cursor != null and Ability.ready(_state):
+	if not _state.is_empty() and cursor != null and Ability.ready(_state, Ability.FLARE):
 		cursor.arm()
 	# Let go of the focus, so a pad's next A confirms at the cursor rather
 	# than pressing the button again.

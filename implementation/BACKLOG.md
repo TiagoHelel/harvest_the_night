@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **212 / 296 done**
+`#################.......`  **213 / 296 done**
 
-0 doing / 84 todo / 0 blocked across 18 phases.
+0 doing / 83 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-84 task(s) left, the ready ones first, then what they
+83 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -354,20 +354,25 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0232 - Powers as a list
+### 0233 - Three new powers
 
-Ready to pick up.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/pixel_effects.gd, src/tools/effect_showcase.gd, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/ability.gd, src/core/game_data.gd, src/core/enemies.gd, src/core/repair.gd, src/ui/night_hud.gd, src/ui/names.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-Nothing changes for the player. The one flare becomes the first entry of a list of powers, each with its own cooldown and aim cell, so 0233 can add three without a second copy of the cooldown and aiming code.
+Three more buttons for a night going wrong: the farm bell stops every zombie for two seconds, the dog runs out and bites one, and an emergency repair puts a structure back on its feet - each aimed with the cursor, each with its wait (plan section 4.4).
 
-- `Ability` takes a power id: `ready(state, id)`, `cooldown_left(state, id)`, `charge_percent(state, id)` and `use(state, id, cell)` with the aim cell from 0135's `ability_cell` intent. The flare is the only power and behaves exactly as it does now
-- Hashes unchanged is the bar. `state["ability"]` is in `State.TABLES` and folded into SIM, so the flare keeps its keys (`cooldown`, `flare`, `flare_ticks`, `flares`) and no new state key appears until 0233 adds a power; `intent.ability` stays the flare's edge for the same reason; `GameData.ABILITY` stays byte-identical so DATA does not move
-- If a key truly has to move, prove play identical (a scripted night with two aimed flares, before and after) and record both numbers in `implementation/PROGRESS.md`
-- `Ability.recharge` and `Ability.put_out` work over every power; the `flare_percent` tree bonus stays the flare's
-- Every caller moves to the new signatures - today `main.gd`, `night_hud.gd`, `world_view.gd`, `pixel_effects.gd`, `effect_showcase.gd`, `perf_check.gd`, `_task_0054` as 0135 left it and the input cases (grep `Ability.` for whatever 0135-0142 added: the shot scenarios, the autoplayer) - and no flare-only path is left
+- Power ids `farm_bell`, `call_dog` and `emergency_repair` (not `dog`, the animal of 0185), every number a LEVER in a `GameData` table beside `ABILITY`, listed in `GameData.digest()` (0112's coverage assert) and checked by `validate()` (a cooldown above zero, a node that gives each power). Their state goes inside `state["ability"]` (`State.TABLES`, so reconcile fills old saves)
+- The bell stops every zombie on the farm for 2 s (1-4) through 0230's entity stun counter; decide whether bosses stop, for less or not at all
+- The dog bites the enemy nearest the aimed cell within a radius, for a LEVER damage, after a delay worked out from its distance to the house - no RNG; its run and bite are view only
+- The repair restores 30% (LEVER 15-50) of the aimed structure's levelled maximum (0113), free, through one `Repair` function that `apply` also uses for the cap; decide whether the house counts. A destroyed structure is rubble and cannot be aimed at
+- Own cooldowns (LEVERs), recharged at `begin_night` like the flare. Unlocked by the tree, one per season from summer: three survival rows in `TECH_TREE` with 0220's `season` gate (summer the bell, autumn the dog, winter the repair), each giving its power, priced with 0220's arithmetic (redo it in the journal with the three added); a locked power shows greyed with its node, never hidden
+- Aimed with the cursor through 0232's API; an input action per power in `InputActions.ACTIONS` and `project.godot` with pad bindings (0121's sync check) and `ACT_*` strings in both languages, rebindable
+- The night dog is 0185's stand-in through the placeholder road until A028 is integrated by 0245; the power icons are placeholders until A045 is integrated by 0244
+- `Names.KEYS`/`NOTES` for the new nodes, `POWER_*` names and notes, strings in both languages; the night HUD shows each power's charge or lock
+- SIM and DATA move on purpose: record both
 
-  - done when: `_task_0232_powers_list` in `src/tools/headless_v1.gd` asserts the flare's cooldown, aim and damage through the new API match the numbers before the refactor, and an unknown power id is refused without touching the state
-  - done when: `_case_0135_flare_aim` in `src/tools/input_v1.gd` passes with nothing changed but its calls moved to the new API
+  - done when: `_task_0233_powers` in `src/tools/headless_v1.gd` asserts the bell holds every walker for exactly its ticks, the dog's bite lands on the enemy nearest the aimed cell after the computed delay, the repair restores the LEVER share of a levelled tower, and each power is refused before its node is bought
+  - done when: `_case_0233_powers` in `src/tools/input_v1.gd` aims and fires each power with the mouse and with the pad
+  - done when: The Deliverables table of `implementation/backlog/packs/A028-dog.md` states the final geometry this task settled (the night run and bite, the scale against the farmer)
 
 ### 0234 - The arsenal grows with the seasons
 
@@ -755,26 +760,6 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
   - done when: the same group: the 0.1 `settings.cfg` fixture loads with its language, volumes and rebind kept, every key it lacks at its `Settings.DEFAULTS` value, and its `tutorial_seen` of `true` migrated to the 0.1 step ids, so only the new steps are offered
   - done when: 1920x1080 captures of the bed line, the cursor line at night and the forecast line at dusk, in both languages (new scenarios such as `tut_bed`, `tut_cursor`, `tut_forecast`: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast --fhd` and again with `--pt_BR`), opened: each line is on its thing and nothing on screen covers it
 
-### 0233 - Three new powers
-
-Waits on 0232.  Likely files: `src/core/ability.gd, src/core/game_data.gd, src/core/enemies.gd, src/core/repair.gd, src/ui/night_hud.gd, src/ui/names.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Three more buttons for a night going wrong: the farm bell stops every zombie for two seconds, the dog runs out and bites one, and an emergency repair puts a structure back on its feet - each aimed with the cursor, each with its wait (plan section 4.4).
-
-- Power ids `farm_bell`, `call_dog` and `emergency_repair` (not `dog`, the animal of 0185), every number a LEVER in a `GameData` table beside `ABILITY`, listed in `GameData.digest()` (0112's coverage assert) and checked by `validate()` (a cooldown above zero, a node that gives each power). Their state goes inside `state["ability"]` (`State.TABLES`, so reconcile fills old saves)
-- The bell stops every zombie on the farm for 2 s (1-4) through 0230's entity stun counter; decide whether bosses stop, for less or not at all
-- The dog bites the enemy nearest the aimed cell within a radius, for a LEVER damage, after a delay worked out from its distance to the house - no RNG; its run and bite are view only
-- The repair restores 30% (LEVER 15-50) of the aimed structure's levelled maximum (0113), free, through one `Repair` function that `apply` also uses for the cap; decide whether the house counts. A destroyed structure is rubble and cannot be aimed at
-- Own cooldowns (LEVERs), recharged at `begin_night` like the flare. Unlocked by the tree, one per season from summer: three survival rows in `TECH_TREE` with 0220's `season` gate (summer the bell, autumn the dog, winter the repair), each giving its power, priced with 0220's arithmetic (redo it in the journal with the three added); a locked power shows greyed with its node, never hidden
-- Aimed with the cursor through 0232's API; an input action per power in `InputActions.ACTIONS` and `project.godot` with pad bindings (0121's sync check) and `ACT_*` strings in both languages, rebindable
-- The night dog is 0185's stand-in through the placeholder road until A028 is integrated by 0245; the power icons are placeholders until A045 is integrated by 0244
-- `Names.KEYS`/`NOTES` for the new nodes, `POWER_*` names and notes, strings in both languages; the night HUD shows each power's charge or lock
-- SIM and DATA move on purpose: record both
-
-  - done when: `_task_0233_powers` in `src/tools/headless_v1.gd` asserts the bell holds every walker for exactly its ticks, the dog's bite lands on the enemy nearest the aimed cell after the computed delay, the repair restores the LEVER share of a levelled tower, and each power is refused before its node is bought
-  - done when: `_case_0233_powers` in `src/tools/input_v1.gd` aims and fires each power with the mouse and with the pad
-  - done when: The Deliverables table of `implementation/backlog/packs/A028-dog.md` states the final geometry this task settled (the night run and bite, the scale against the farmer)
-
 ### 0243 - Art: the day tarps
 
 Waits on 0234.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py`.
@@ -793,6 +778,63 @@ The approved tarps cover the defences by day and unveil at nightfall, in place o
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of covered defences of every footprint and their unveil at nightfall in the real game, opened and looked at, in `implementation/shots/0243/`
   - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0244 - Art: power and new weapon icons
+
+Waits on 0233, 0234.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
+
+The approved icons of the three powers and the nine new defences replace the hotbar and HUD stand-ins 0233 and 0234 left.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A045` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A045-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, `ArtPlacement` if needed).
+- `ui/icon_*` (16x16) and `ui/hud_*` (10x10) cut from one source each, as the resource icons are, for `farm_bell`, `call_dog`, `emergency_repair` and the decoy, zombie bait, beehive, catapult, garlic braid, searchlight, electric fence, hardwood wall and sandbags (the ids 0231 and 0233 chose)
+- The hotbar and the night HUD read them by id; extend `check_ui_art.py`'s counts for the pack
+- Retire the icon stand-ins of 0233 and 0234 from 0120's placeholder registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A045 integrated`.
+
+  - done when: The family checks (`check_ui_art.py`) and the showcase (`python tools/show_art.py --ui --check`) pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the hotbar and the power bar in the real game, opened and looked at, in `implementation/shots/0244/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0245 - Art: the dog
+
+Waits on 0233.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/art_placement.gd`.
+
+The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-the-dog power at night.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A028` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A028-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_prop_art.py` `NAMES` and its animal canvas rule, `ArtPlacement` if needed).
+- The dog as an animal like the cow and the chicken (24x24 / (12,22) unless the pack's contract says otherwise - read it): day sit, wag, follow-walk (4) and bark (2-3); night run (4) and bite (3); side view mirrored at runtime like the enemies unless the contract bakes directions
+- The pet's states of 0185 and the power's run and bite of 0233 pick their frames; retire both stand-ins from 0120's placeholder registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A028 integrated`.
+
+  - done when: The family checks (`check_prop_art.py`) and the showcase (`python tools/show_art.py --props --check`) pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the dog following the farmer and the dog called at night in the real game, opened and looked at, in `implementation/shots/0245/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0249 - The crow
+
+Waits on 0233, 0234.  Likely files: `src/core/enemies.gd, src/core/traps.gd, src/core/towers.gd, src/core/farming.gd, src/core/events.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/log_panel.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+
+The first thing that does not walk: it flies over walls and mines and lands to eat the field. Defending the farm stops being only about the house and starts being about the harvest.
+
+- `ENEMIES.crow` with `# LEVER`s (hp, `ticks_per_tile` in flight, damage, reward, `peck_ticks` to eat one crop) and a `flies` flag; `check_enemies`: a flyer declares neither `ignores_structures` nor `targets_structures` and is left out of the 'fastest kind that stops' comparison (a fast crow counted there would fail the runner). Inside `_task_0051_tank`'s non-boss bounds
+- Straight flight, no sweep: it heads for the nearest plot with a crop in `state["plots"]` (Manhattan, ties by the lower cell index) one unit at a time along the dominant axis, like `_walk`'s inner loop, ignoring walls and occupants; with no crop on the farm it flies at the house and bites
+- Landed, it waits `peck_ticks`, then the crop is eaten through a `Farming` helper (the plot stays tilled and loses crop and growth - reuse 0155's trampling path if it fits) and it takes off for the next one; a new `Events.KINDS` entry `crop_eaten` with a `LogPanel.SEVERITY` entry and a `line_for` branch (`LOG_CROP_EATEN`, 'a crow ate the %s' / 'um corvo comeu %s')
+- Barriers and mines never see it: `Traps.tick` skips flyers, and it never reaches `_gnaw` or the fields; it moves inside `Enemies.tick`, so `PerfNames` is unchanged
+- Which defences hit it is data: a `hits_flying` flag on every DEFENCES entry with `reload_ticks` (0224-0231's included), refused by `check_defences` when missing so any later defence must choose; `Towers._acquire`, `_burn_cone`, `_pierce_line` and splash landings (`_land_at`) skip flyers otherwise. Decide the powers too (the flare and 0233's bell and dog) and whether a landed crow counts as on the ground; the table and the reasons go in the journal
+- Names.KEYS `crow`, `ENEMY_CROW`/`ENEMY_CROW.other` (crow/crows, corvo/corvos); `DESC_FLIES` in `Describe.enemy`; `Sfx.ENEMY_SOUNDS.crow` borrows `sfx/groan_runner` until 0284
+- On screen: drawn above its cell with a code-drawn shadow on the ground (the pack's flying exception), through 0120's placeholder road with its forecast head until A048 is integrated by 0262
+- Hashes: DATA moves (ENEMIES and the DEFENCES flags); SIM should not
+
+  - done when: `_task_0249_crow` in `src/tools/headless_v1.gd`: a crow spawned behind a wall line reaches a planted plot in the straight-line tick count, eats it after `peck_ticks`, crosses a mine without setting it off, and is acquired only by `hits_flying` towers
+  - done when: With nothing planted it reaches the house and bites, so an empty field never softlocks a night
+  - done when: `python tools/shot.py 0249 crow` (a new scenario) opened and looked at: in flight it reads as above the wall, landed as on the field
+  - done when: the Deliverables table of `implementation/backlog/packs/A048-crow.md` states the final geometry this task settled
 
 ### 0250 - The digger
 
@@ -924,6 +966,24 @@ The wraith as Codex drew it, in place of 0252's stand-in, fading in and out of t
   - done when: FHD (1920x1080) captures in the real game by day (the head in the dusk forecast) and by night (one in the searchlight beam, one outside it), opened and looked at, in `implementation/shots/0265/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
+### 0283 - The guardian's sounds
+
+Waits on 0233, 0234.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/ui/main.gd, src/app/audio.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+The night is played through the cursor now, so the cursor's work, the START horn, the four powers and the new defences get sounds - heard from where the guardian is looking, not from the farmer asleep in bed. View only: neither hash moves, and no state key is added to be heard.
+
+- The ears: at night `Sfx` calls `listen_at` with the centre of 0130's night camera (`main.gd` owns the `WorldView`; hand it over the way `Music.show_state` gets it), not `_where_the_player_is()` (the sleeping farmer), and `nearest_by_kind` measures from the same point. `Audio` has no getter for its ears today: add one if the checks need it. If 0130 already did this, say so and move on
+- The cursor's hand, quieter than the weapons (at most `SOFT_PEAK`) and played at its cell: place (a defence that appears), upgrade (its `level` rising), repair (hp or `house_hp` rising in PREPARATION/NIGHT, not the fill `begin_night` does) and sell. A defence that vanishes leaving rubble (`Farm.rubble_at`) broke and one that leaves none was sold - `_watch_structures` sounds every vanished non-mine as `wall_break` today, and a sale must not; put the decision in a static helper the checks can ask
+- The START horn on 0136's PREPARATION -> NIGHT edge: once a night, with no position (`AudioScript.NOWHERE`), on the `DUCKS` list, below `NIGHT_PEAK`
+- The powers of 0232/0233 - flare, farm bell, the dog and emergency repair - each heard when its cooldown rises (the reading `_watch_towers` uses for `reload`), at the aimed cell; the bell, which stops every zombie, with no position. The dog's bark and bite are written here (moved from 0281; 0286 leaves the dog out of its animal calls)
+- The defences of 0224-0231: a straw rustle when the decoy is hit, the beehive's buzz, the catapult's thunk (and a splat where the pumpkin lands, if the shell is already in the state), the searchlight's hum and the electric fence's zap when it stuns. Buzz and hum are per kind and not per structure - from the nearest stinging hive or lit searchlight, the way groans are - so ten hives are not ten loops
+- Replace every borrowed entry 0224-0231 put in `Sfx.TOWER_SOUNDS` to keep `_task_0085_night_sounds` green. That group's rule still holds: `TOWER_SOUNDS` lists exactly the defences with `damage` (their shot), so the rustle, the hum and the zap of defences without it - and the buzz, if it is not the hive's shot - go in a table of their own (e.g. `DEFENCE_SOUNDS`). The house being hit stays the loudest file in `assets/sfx/`, and every new night file stays shorter than the Giant's roar, which that group still asserts is the longest night sound until 0284 rewrites it
+- Extend `_night_sound_ids()` in `headless_check.gd` with every new list, because `_task_0084_day_sounds` builds its 'nothing in the folder is unreached' set from it
+
+  - done when: `_task_0283_guardian_sounds` in `src/tools/headless_v1.gd`: every new id is a file under `NIGHT_PEAK`, no two damaging defences share a file, every defence without `damage` is out of `TOWER_SOUNDS`, and the sold/broken/spent helper answers right for a crafted sale, a wreck with rubble and a spent mine
+  - done when: `_case_0283_guardian_sounds` in `src/tools/input_v1.gd`: in the build step the cursor places, upgrades and sells a defence and `Audio.last_played()` is place, upgrade, sell (never `sfx/wall_break`); START plays the horn; an aimed flare plays the flare; panning the camera away from a firing tower makes it quieter (`Audio.loudness`)
+  - done when: `_task_0084_day_sounds` and `_task_0085_night_sounds` pass; `python tools/gen_sfx.py --report` for the new sounds is in the journal
+
 ### 0285 - Music for four seasons
 
 Waits on 0282.  Likely files: `tools/gen_music.py, assets/music/, src/ui/music.gd, src/app/audio.gd, src/ui/main.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -941,62 +1001,24 @@ The two MVP pieces become a year: a day piece per season on the shared motif, a 
   - done when: `_case_0285_season_music` in `src/tools/input_v1.gd`: a real run moved to a summer morning is playing the summer piece once the fade is over (`Audio.music_playing()`), and a boss night's build step the boss track
   - done when: The Web pack size before and after (`python tools/release.py`, or why it could not be measured) and `python tools/gen_music.py --report` lengths and seams are in the journal
 
-### 0244 - Art: power and new weapon icons
+### 0254 - The Scarecrow King
 
-Waits on 0233, 0234.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
+Waits on 0246, 0249.  Likely files: `src/core/enemies.gd, src/core/game_data.gd, src/ui/enemy_motion.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
-The approved icons of the three powers and the nine new defences replace the hotbar and HUD stand-ins 0233 and 0234 left.
+Autumn's boss calls the sky down: it stops, casts, and a flock of crows rises around it. It asks what the crow asked - cover in the air and care for the field - under pressure.
 
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A045` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A045-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, `ArtPlacement` if needed).
-- `ui/icon_*` (16x16) and `ui/hud_*` (10x10) cut from one source each, as the resource icons are, for `farm_bell`, `call_dog`, `emergency_repair` and the decoy, zombie bait, beehive, catapult, garlic braid, searchlight, electric fence, hardwood wall and sandbags (the ids 0231 and 0233 chose)
-- The hotbar and the night HUD read them by id; extend `check_ui_art.py`'s counts for the pack
-- Retire the icon stand-ins of 0233 and 0234 from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A045 integrated`.
+- `ENEMIES.scarecrow_king` with `is_boss` and `# LEVER`s: hp, armour, `ticks_per_tile`, damage, reward, `telegraph_ticks` (the cast), `summon_every_ticks`, `flock_size`, `summon_cap` (crows it may raise in one night, so a long fight cannot flood the farm); it passes 0246's boss-against-non-boss asserts
+- Summons on deterministic cells: a fixed list of offsets around its cell (a table in `game_data.gd`, listed in `digest()`), clipped to the map, taken in list order - no RNG draw. They are 0249's `crow` through `Entities.spawn`, flying from there to the field; `check_enemies` refuses a `flock_size` above the offsets, a `summon_cap` below `flock_size`, or a summoned kind that does not fly
+- Summoned crows are not wave members: `Waves` counts and the forecast are unchanged, and the night still ends at dawn (0137) or when everything is dead; decide whether they pay bounty (a farmable King is an exploit) and say why
+- The cast is the telegraph: it stands for `telegraph_ticks` and is `is_winding` (reusing `winding_at`/`chew_wait`, as `_gnaw` does), so the 0246 bar flashes; otherwise it walks the flow field and bites like a walker, inside `Enemies.tick`
+- Autumn's day-14 boss: `GameData.SEASON_BOSSES[2]` becomes `&"scarecrow_king"` (any group that put a Giant on Autumn 14 is rewritten in place); `BOSS_INTRO_SCARECROW_KING`; Names.KEYS `scarecrow_king`, `ENEMY_SCARECROW_KING`/`.other` (scarecrow king/scarecrow kings, rei espantalho/reis espantalhos) and `DESC_SUMMONS` ('calls down crows' / 'chama os corvos'); `Sfx.ENEMY_SOUNDS.scarecrow_king` borrows `sfx/roar_giant` until 0284
+- On screen through 0120's placeholder road: a cast pose, the flock rising and its forecast mark at the boss canvas, until A053 is integrated by 0267
+- Hashes: DATA moves (ENEMIES, the offsets, SEASON_BOSSES); SIM should not - the determinism night is Spring 1
 
-  - done when: The family checks (`check_ui_art.py`) and the showcase (`python tools/show_art.py --ui --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the hotbar and the power bar in the real game, opened and looked at, in `implementation/shots/0244/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0245 - Art: the dog
-
-Waits on 0233.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/art_placement.gd`.
-
-The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-the-dog power at night.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A028` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A028-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_prop_art.py` `NAMES` and its animal canvas rule, `ArtPlacement` if needed).
-- The dog as an animal like the cow and the chicken (24x24 / (12,22) unless the pack's contract says otherwise - read it): day sit, wag, follow-walk (4) and bark (2-3); night run (4) and bite (3); side view mirrored at runtime like the enemies unless the contract bakes directions
-- The pet's states of 0185 and the power's run and bite of 0233 pick their frames; retire both stand-ins from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A028 integrated`.
-
-  - done when: The family checks (`check_prop_art.py`) and the showcase (`python tools/show_art.py --props --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the dog following the farmer and the dog called at night in the real game, opened and looked at, in `implementation/shots/0245/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0249 - The crow
-
-Waits on 0233, 0234.  Likely files: `src/core/enemies.gd, src/core/traps.gd, src/core/towers.gd, src/core/farming.gd, src/core/events.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/log_panel.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-The first thing that does not walk: it flies over walls and mines and lands to eat the field. Defending the farm stops being only about the house and starts being about the harvest.
-
-- `ENEMIES.crow` with `# LEVER`s (hp, `ticks_per_tile` in flight, damage, reward, `peck_ticks` to eat one crop) and a `flies` flag; `check_enemies`: a flyer declares neither `ignores_structures` nor `targets_structures` and is left out of the 'fastest kind that stops' comparison (a fast crow counted there would fail the runner). Inside `_task_0051_tank`'s non-boss bounds
-- Straight flight, no sweep: it heads for the nearest plot with a crop in `state["plots"]` (Manhattan, ties by the lower cell index) one unit at a time along the dominant axis, like `_walk`'s inner loop, ignoring walls and occupants; with no crop on the farm it flies at the house and bites
-- Landed, it waits `peck_ticks`, then the crop is eaten through a `Farming` helper (the plot stays tilled and loses crop and growth - reuse 0155's trampling path if it fits) and it takes off for the next one; a new `Events.KINDS` entry `crop_eaten` with a `LogPanel.SEVERITY` entry and a `line_for` branch (`LOG_CROP_EATEN`, 'a crow ate the %s' / 'um corvo comeu %s')
-- Barriers and mines never see it: `Traps.tick` skips flyers, and it never reaches `_gnaw` or the fields; it moves inside `Enemies.tick`, so `PerfNames` is unchanged
-- Which defences hit it is data: a `hits_flying` flag on every DEFENCES entry with `reload_ticks` (0224-0231's included), refused by `check_defences` when missing so any later defence must choose; `Towers._acquire`, `_burn_cone`, `_pierce_line` and splash landings (`_land_at`) skip flyers otherwise. Decide the powers too (the flare and 0233's bell and dog) and whether a landed crow counts as on the ground; the table and the reasons go in the journal
-- Names.KEYS `crow`, `ENEMY_CROW`/`ENEMY_CROW.other` (crow/crows, corvo/corvos); `DESC_FLIES` in `Describe.enemy`; `Sfx.ENEMY_SOUNDS.crow` borrows `sfx/groan_runner` until 0284
-- On screen: drawn above its cell with a code-drawn shadow on the ground (the pack's flying exception), through 0120's placeholder road with its forecast head until A048 is integrated by 0262
-- Hashes: DATA moves (ENEMIES and the DEFENCES flags); SIM should not
-
-  - done when: `_task_0249_crow` in `src/tools/headless_v1.gd`: a crow spawned behind a wall line reaches a planted plot in the straight-line tick count, eats it after `peck_ticks`, crosses a mine without setting it off, and is acquired only by `hits_flying` towers
-  - done when: With nothing planted it reaches the house and bites, so an empty field never softlocks a night
-  - done when: `python tools/shot.py 0249 crow` (a new scenario) opened and looked at: in flight it reads as above the wall, landed as on the field
-  - done when: the Deliverables table of `implementation/backlog/packs/A048-crow.md` states the final geometry this task settled
+  - done when: `_task_0254_scarecrow_king` in `src/tools/headless_v1.gd`: each cast raises `flock_size` crows on the listed cells after exactly `telegraph_ticks`, two runs agree cell for cell, and no night raises more than `summon_cap`
+  - done when: The same group: a King with a planted field and no `hits_flying` cover costs crops, one with cover over the field costs few - print both counts
+  - done when: `python tools/shot.py 0254 scarecrow_king` (mid-cast) opened and looked at
+  - done when: the Deliverables table of `implementation/backlog/packs/A053-scarecrow-king.md` states the final geometry this task settled
 
 ### 0258 - Fog, rain and a red moon on screen
 
@@ -1013,6 +1035,24 @@ Fog that looks like fog, rain you can see, a red moon that makes the farm look w
 
   - done when: `_case_0258_event_visuals` in `src/tools/input_v1.gd`: each event turns its layer on with the night and off at dawn, the rain particle count follows the density setting, and a night with the layers on and one with them off end on the same SIM hash
   - done when: `python tools/shot.py 0258 fog rain blood_moon full_moon --fhd` opened and looked at beside `docs/reference-sheet.png`: the farm stays readable in every one
+
+### 0262 - Art: the crow
+
+Waits on 0249, 0246.  Likely files: `assets/art_source/enemies/crow/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd, src/ui/world_view.gd`.
+
+The crow as Codex drew it, in place of 0249's stand-in: in the air, landing, pecking and falling.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A048` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A048-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/enemies/crow/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`gen_sprites.migrated_enemies()`, `check_enemy_art.FAMILIES`, `EnemyMotion.FAMILIES`/`TRACKED`).
+- The flying exception: `crow_fly_0..3` (loop), `crow_land_0`, `crow_peck_0..2`, `crow_death_0..3` (the fall), side view mirrored at runtime; the checker takes this family's motions from its own row (not the fixed walk/attack/death `COUNTS`), exempts flying frames from the ground-contact row and asserts no baked shadow - the shadow stays 0249's code shadow. Keep `crow`, `_walk_b`, `_attack`, `_death` aliases (or teach `_task_0074_zombie_art` the exception) so the suite's art groups still pass
+- `EnemyMotion` maps 0249's states (in flight, landed, pecking, falling) to these names and keeps 0249's height offset; replace 0249's placeholders and the forecast head in 0120's registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A048 integrated`.
+
+  - done when: `python tools/check_enemy_art.py` and `python tools/show_art.py --enemies --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures in the real game by day (the head in the dusk forecast) and by night (one over a wall, one pecking a crop), opened and looked at, in `implementation/shots/0262/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0263 - Art: the digger
 
@@ -1089,24 +1129,6 @@ The year stops being ten written nights plus a curve and becomes tables a design
   - done when: For days 1-56 and two seeds, 0158's forecast counts equal `Waves.size_of`/`kinds_of` for the same day
   - done when: The year from `python tools/nights.py` is in the journal: count, hit points and reward per day, by season
 
-### 0283 - The guardian's sounds
-
-Waits on 0233, 0234.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/ui/main.gd, src/app/audio.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The night is played through the cursor now, so the cursor's work, the START horn, the four powers and the new defences get sounds - heard from where the guardian is looking, not from the farmer asleep in bed. View only: neither hash moves, and no state key is added to be heard.
-
-- The ears: at night `Sfx` calls `listen_at` with the centre of 0130's night camera (`main.gd` owns the `WorldView`; hand it over the way `Music.show_state` gets it), not `_where_the_player_is()` (the sleeping farmer), and `nearest_by_kind` measures from the same point. `Audio` has no getter for its ears today: add one if the checks need it. If 0130 already did this, say so and move on
-- The cursor's hand, quieter than the weapons (at most `SOFT_PEAK`) and played at its cell: place (a defence that appears), upgrade (its `level` rising), repair (hp or `house_hp` rising in PREPARATION/NIGHT, not the fill `begin_night` does) and sell. A defence that vanishes leaving rubble (`Farm.rubble_at`) broke and one that leaves none was sold - `_watch_structures` sounds every vanished non-mine as `wall_break` today, and a sale must not; put the decision in a static helper the checks can ask
-- The START horn on 0136's PREPARATION -> NIGHT edge: once a night, with no position (`AudioScript.NOWHERE`), on the `DUCKS` list, below `NIGHT_PEAK`
-- The powers of 0232/0233 - flare, farm bell, the dog and emergency repair - each heard when its cooldown rises (the reading `_watch_towers` uses for `reload`), at the aimed cell; the bell, which stops every zombie, with no position. The dog's bark and bite are written here (moved from 0281; 0286 leaves the dog out of its animal calls)
-- The defences of 0224-0231: a straw rustle when the decoy is hit, the beehive's buzz, the catapult's thunk (and a splat where the pumpkin lands, if the shell is already in the state), the searchlight's hum and the electric fence's zap when it stuns. Buzz and hum are per kind and not per structure - from the nearest stinging hive or lit searchlight, the way groans are - so ten hives are not ten loops
-- Replace every borrowed entry 0224-0231 put in `Sfx.TOWER_SOUNDS` to keep `_task_0085_night_sounds` green. That group's rule still holds: `TOWER_SOUNDS` lists exactly the defences with `damage` (their shot), so the rustle, the hum and the zap of defences without it - and the buzz, if it is not the hive's shot - go in a table of their own (e.g. `DEFENCE_SOUNDS`). The house being hit stays the loudest file in `assets/sfx/`, and every new night file stays shorter than the Giant's roar, which that group still asserts is the longest night sound until 0284 rewrites it
-- Extend `_night_sound_ids()` in `headless_check.gd` with every new list, because `_task_0084_day_sounds` builds its 'nothing in the folder is unreached' set from it
-
-  - done when: `_task_0283_guardian_sounds` in `src/tools/headless_v1.gd`: every new id is a file under `NIGHT_PEAK`, no two damaging defences share a file, every defence without `damage` is out of `TOWER_SOUNDS`, and the sold/broken/spent helper answers right for a crafted sale, a wreck with rubble and a spent mine
-  - done when: `_case_0283_guardian_sounds` in `src/tools/input_v1.gd`: in the build step the cursor places, upgrades and sells a defence and `Audio.last_played()` is place, upgrade, sell (never `sfx/wall_break`); START plays the horn; an aimed flare plays the flare; panning the camera away from a firing tower makes it quieter (`Audio.loudness`)
-  - done when: `_task_0084_day_sounds` and `_task_0085_night_sounds` pass; `python tools/gen_sfx.py --report` for the new sounds is in the journal
-
 ### 0286 - Fog, rain and winter wind
 
 Waits on 0256, 0257, 0285.  Likely files: `tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -1124,63 +1146,6 @@ The bed under everything follows the weather and the season: fog and rain on the
   - done when: `_task_0286_weather_ambience` in `src/tools/headless_v1.gd`: `bed_for` answers for every season, phase and event; each new bed loops and stays under the old peak; no touch is in both a day and a night list, and winter's hold no cricket and no songbird; animal calls are offered only where a coop or barn with animals stands; each stinger is in `assets/music/`, at most `STING_PEAK` and on 0285's not-loop list
   - done when: `_case_0286_weather_ambience` in `src/tools/input_v1.gd`: a foggy night's build step plays the fog bed (`Audio.bed_playing()`) and the fog stinger once (`Audio.plays_of()`), and a winter morning the winter bed
   - done when: `python tools/gen_ambience.py --report` for the new beds (length, peak, seam) and `gen_music.py --report` for the stingers are in the journal
-
-### 0254 - The Scarecrow King
-
-Waits on 0246, 0249.  Likely files: `src/core/enemies.gd, src/core/game_data.gd, src/ui/enemy_motion.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-Autumn's boss calls the sky down: it stops, casts, and a flock of crows rises around it. It asks what the crow asked - cover in the air and care for the field - under pressure.
-
-- `ENEMIES.scarecrow_king` with `is_boss` and `# LEVER`s: hp, armour, `ticks_per_tile`, damage, reward, `telegraph_ticks` (the cast), `summon_every_ticks`, `flock_size`, `summon_cap` (crows it may raise in one night, so a long fight cannot flood the farm); it passes 0246's boss-against-non-boss asserts
-- Summons on deterministic cells: a fixed list of offsets around its cell (a table in `game_data.gd`, listed in `digest()`), clipped to the map, taken in list order - no RNG draw. They are 0249's `crow` through `Entities.spawn`, flying from there to the field; `check_enemies` refuses a `flock_size` above the offsets, a `summon_cap` below `flock_size`, or a summoned kind that does not fly
-- Summoned crows are not wave members: `Waves` counts and the forecast are unchanged, and the night still ends at dawn (0137) or when everything is dead; decide whether they pay bounty (a farmable King is an exploit) and say why
-- The cast is the telegraph: it stands for `telegraph_ticks` and is `is_winding` (reusing `winding_at`/`chew_wait`, as `_gnaw` does), so the 0246 bar flashes; otherwise it walks the flow field and bites like a walker, inside `Enemies.tick`
-- Autumn's day-14 boss: `GameData.SEASON_BOSSES[2]` becomes `&"scarecrow_king"` (any group that put a Giant on Autumn 14 is rewritten in place); `BOSS_INTRO_SCARECROW_KING`; Names.KEYS `scarecrow_king`, `ENEMY_SCARECROW_KING`/`.other` (scarecrow king/scarecrow kings, rei espantalho/reis espantalhos) and `DESC_SUMMONS` ('calls down crows' / 'chama os corvos'); `Sfx.ENEMY_SOUNDS.scarecrow_king` borrows `sfx/roar_giant` until 0284
-- On screen through 0120's placeholder road: a cast pose, the flock rising and its forecast mark at the boss canvas, until A053 is integrated by 0267
-- Hashes: DATA moves (ENEMIES, the offsets, SEASON_BOSSES); SIM should not - the determinism night is Spring 1
-
-  - done when: `_task_0254_scarecrow_king` in `src/tools/headless_v1.gd`: each cast raises `flock_size` crows on the listed cells after exactly `telegraph_ticks`, two runs agree cell for cell, and no night raises more than `summon_cap`
-  - done when: The same group: a King with a planted field and no `hits_flying` cover costs crops, one with cover over the field costs few - print both counts
-  - done when: `python tools/shot.py 0254 scarecrow_king` (mid-cast) opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A053-scarecrow-king.md` states the final geometry this task settled
-
-### 0262 - Art: the crow
-
-Waits on 0249, 0246.  Likely files: `assets/art_source/enemies/crow/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd, src/ui/world_view.gd`.
-
-The crow as Codex drew it, in place of 0249's stand-in: in the air, landing, pecking and falling.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A048` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A048-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/enemies/crow/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`gen_sprites.migrated_enemies()`, `check_enemy_art.FAMILIES`, `EnemyMotion.FAMILIES`/`TRACKED`).
-- The flying exception: `crow_fly_0..3` (loop), `crow_land_0`, `crow_peck_0..2`, `crow_death_0..3` (the fall), side view mirrored at runtime; the checker takes this family's motions from its own row (not the fixed walk/attack/death `COUNTS`), exempts flying frames from the ground-contact row and asserts no baked shadow - the shadow stays 0249's code shadow. Keep `crow`, `_walk_b`, `_attack`, `_death` aliases (or teach `_task_0074_zombie_art` the exception) so the suite's art groups still pass
-- `EnemyMotion` maps 0249's states (in flight, landed, pecking, falling) to these names and keeps 0249's height offset; replace 0249's placeholders and the forecast head in 0120's registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A048 integrated`.
-
-  - done when: `python tools/check_enemy_art.py` and `python tools/show_art.py --enemies --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures in the real game by day (the head in the dusk forecast) and by night (one over a wall, one pecking a crop), opened and looked at, in `implementation/shots/0262/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0271 - Spring's fourteen nights
-
-Waits on 0270.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, spring's `SEASON_NIGHTS`), src/tools/play_nights.gd, tools/play_nights.py, src/tools/headless_v1.gd`.
-
-Spring is the season that teaches: the walker, the runner, the tank and the breaker one at a time, all from the east, a Full Moon on day 7 and the Giant on day 14. Today's ten nights are the raw material, but they were balanced for two sides and a ten-night run, so they are rewritten rather than pasted.
-
-- First the instrument, moved here from 0270: `tools/play_nights.py` forwards its arguments (today it passes none) and `python tools/play_nights.py <from> <to>` plays that range of dates with the scripted build, buying only what each date's season has unlocked (0234's `unlock_season`, money and materials) from a purse that starts where a run would be (what the earlier dates paid plus the income). 0272-0274 author with it
-- Every spring night comes from the east only (0157's east region; 0270 already deleted the allowance today's ten had). Today's night 2, 'the same again from two sides', becomes a lesson one side can teach
-- The plan's rhythm: days 1-6 grow gently, day 7 is a Full Moon of the kinds already met, days 8-13 grow again with the season's novelty - the breaker, 'Primavera (fim)' - and day 14 is the Full Moon with the Giant (0153's row) in company. A starting map: today's 1-6 to days 1-6, today's 7 (breakers) to day 8, today's 8-9 spread over 9-13, today's 10 to day 14 - change it if the numbers say so
-- One new thing a night at most, and the night after an introduction is where it bites (0060's rule): the walker on 1, the runner and the tank in days 2-6, the breaker in 8-13. The introductions, day 7 and day 14 are `KEY_NIGHTS`; the other days come from spring's template
-- Day 1 stays the tutorial night: a normal night 1 (the calm night only follows a fallen boss), winnable with what the tutorial (0141) gives; the tutorial asserts of 0041/0141 stay green
-- Every night fits the night length (0137) with room for the last wave to be fought before dawn, **and fills it** (moved here by 0148): its last wave is sent no earlier than `NIGHT_TICKS - DAWN_MARGIN_TICKS - NIGHT_FILL_TICKS`, a new `# LEVER` in `src/core/game_data.gd` (60 s, 30-120) in `digest()`'s `time` row, and `tools/nights.py` prints each night's last send against that line. 0148 measured today's ten sending everything by 36-84 s of a 240 s night: every night it played was over, everything dead, about a minute in, and none of a thousand autoplayed nights reached dawn, so the plan's 'holding on until sunrise is worth as much as killing everything' (4.5) and its three to five minutes of waves never happen. Spread the waves - a later last wave, gaps that leave quiet stretches between them - rather than shortening `NIGHT_TICKS` below the plan's three minutes; day 1 too, still winnable with the tutorial's tower
-- Notes in the voice of the authored ten, English, one line each - they are what `tools/nights.py` prints
-- Author against `python tools/nights.py 1 14` (count, hit points and reward climb, peaking on 7 and 14) and `python tools/play_nights.py 1 14` at its three incomes
-- DATA moves on purpose; SIM moves if day 1 changed, because the determinism scenario fights it - both numbers in `implementation/PROGRESS.md`
-
-  - done when: `_task_0271_spring_nights` in `src/tools/headless_v1.gd`: days 1-14 send only the walker, runner, tank, breaker and the Giant, only from the east; each kind is first sent on its authored introduction day; day 7 is the largest of days 1-7 and day 14 the largest of spring in hit points; the Giant is on day 14 and nowhere else; every day 1-14 sends its last wave after the fill line (`NIGHT_FILL_TICKS`) and before the dawn margin
-  - done when: `python tools/play_nights.py 1 14` output is in the journal: night 1 holds at the lowest income, and every night that falls is named with what the curve does there; `python tools/play_nights.py 15 20` runs on 0270's summer draft and buys nothing summer has not unlocked
-  - done when: Spring's table from `python tools/nights.py 1 14` is in the journal beside the old ten nights' numbers
 
 ### 0255 - The Winter Lord
 
@@ -1218,6 +1183,26 @@ The Scarecrow King as Codex drew it, in place of 0254's stand-in, raising its ar
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures in the real game by day (the mark in the dusk forecast) and by night (mid-cast with the flock rising), opened and looked at, in `implementation/shots/0267/`
   - done when: the sim and data hashes are unchanged (art never moves them)
+
+### 0271 - Spring's fourteen nights
+
+Waits on 0270.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, spring's `SEASON_NIGHTS`), src/tools/play_nights.gd, tools/play_nights.py, src/tools/headless_v1.gd`.
+
+Spring is the season that teaches: the walker, the runner, the tank and the breaker one at a time, all from the east, a Full Moon on day 7 and the Giant on day 14. Today's ten nights are the raw material, but they were balanced for two sides and a ten-night run, so they are rewritten rather than pasted.
+
+- First the instrument, moved here from 0270: `tools/play_nights.py` forwards its arguments (today it passes none) and `python tools/play_nights.py <from> <to>` plays that range of dates with the scripted build, buying only what each date's season has unlocked (0234's `unlock_season`, money and materials) from a purse that starts where a run would be (what the earlier dates paid plus the income). 0272-0274 author with it
+- Every spring night comes from the east only (0157's east region; 0270 already deleted the allowance today's ten had). Today's night 2, 'the same again from two sides', becomes a lesson one side can teach
+- The plan's rhythm: days 1-6 grow gently, day 7 is a Full Moon of the kinds already met, days 8-13 grow again with the season's novelty - the breaker, 'Primavera (fim)' - and day 14 is the Full Moon with the Giant (0153's row) in company. A starting map: today's 1-6 to days 1-6, today's 7 (breakers) to day 8, today's 8-9 spread over 9-13, today's 10 to day 14 - change it if the numbers say so
+- One new thing a night at most, and the night after an introduction is where it bites (0060's rule): the walker on 1, the runner and the tank in days 2-6, the breaker in 8-13. The introductions, day 7 and day 14 are `KEY_NIGHTS`; the other days come from spring's template
+- Day 1 stays the tutorial night: a normal night 1 (the calm night only follows a fallen boss), winnable with what the tutorial (0141) gives; the tutorial asserts of 0041/0141 stay green
+- Every night fits the night length (0137) with room for the last wave to be fought before dawn, **and fills it** (moved here by 0148): its last wave is sent no earlier than `NIGHT_TICKS - DAWN_MARGIN_TICKS - NIGHT_FILL_TICKS`, a new `# LEVER` in `src/core/game_data.gd` (60 s, 30-120) in `digest()`'s `time` row, and `tools/nights.py` prints each night's last send against that line. 0148 measured today's ten sending everything by 36-84 s of a 240 s night: every night it played was over, everything dead, about a minute in, and none of a thousand autoplayed nights reached dawn, so the plan's 'holding on until sunrise is worth as much as killing everything' (4.5) and its three to five minutes of waves never happen. Spread the waves - a later last wave, gaps that leave quiet stretches between them - rather than shortening `NIGHT_TICKS` below the plan's three minutes; day 1 too, still winnable with the tutorial's tower
+- Notes in the voice of the authored ten, English, one line each - they are what `tools/nights.py` prints
+- Author against `python tools/nights.py 1 14` (count, hit points and reward climb, peaking on 7 and 14) and `python tools/play_nights.py 1 14` at its three incomes
+- DATA moves on purpose; SIM moves if day 1 changed, because the determinism scenario fights it - both numbers in `implementation/PROGRESS.md`
+
+  - done when: `_task_0271_spring_nights` in `src/tools/headless_v1.gd`: days 1-14 send only the walker, runner, tank, breaker and the Giant, only from the east; each kind is first sent on its authored introduction day; day 7 is the largest of days 1-7 and day 14 the largest of spring in hit points; the Giant is on day 14 and nowhere else; every day 1-14 sends its last wave after the fill line (`NIGHT_FILL_TICKS`) and before the dawn margin
+  - done when: `python tools/play_nights.py 1 14` output is in the journal: night 1 holds at the lowest income, and every night that falls is named with what the curve does there; `python tools/play_nights.py 15 20` runs on 0270's summer draft and buys nothing summer has not unlocked
+  - done when: Spring's table from `python tools/nights.py 1 14` is in the journal beside the old ten nights' numbers
 
 ### 0259 - Every weapon has its night
 
@@ -1856,7 +1841,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (14/28)
+## 13 - Weapons of the night  (15/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
@@ -1872,8 +1857,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0229** [The searchlight](prompts/0229-searchlight.md)
 - [x] **0230** [The electric fence](prompts/0230-electric-fence.md)
 - [x] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md)
-- [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
-- [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232
+- [x] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
+- [ ] **0233** [Three new powers](prompts/0233-new-powers.md)
 - [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md)
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
 - [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - waits for art A037

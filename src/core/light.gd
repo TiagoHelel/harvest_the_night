@@ -10,7 +10,7 @@ extends RefCounted
 ## - within a standing **searchlight**'s `light_tiles`, a square as a tower's
 ##   reach is - a tile less on a farm short of power, never out;
 ## - within `PORCH_LIGHT_TILES` of the house's **porch**;
-## - in the **flare**'s area while it burns (`Ability.flare_at`);
+## - in the **flare**'s area while it burns (`Ability.aimed_at`);
 ## - under an enemy that is **burning** (`Combat.is_burning`).
 ##
 ## ## Cached where it stands still, asked fresh where it moves
@@ -62,7 +62,7 @@ static func lamp_tiles(state: Dictionary, cell: Vector2i) -> int:
 ## than read from the cache. For the tests and the view; writes nothing.
 static func lit_cells(state: Dictionary) -> Array:
 	var lit: Dictionary = _steady_cells(state)
-	var flare := Ability.flare_at(state)
+	var flare := Ability.aimed_at(state, Ability.FLARE)
 	if not flare.is_empty():
 		var radius := int(GameData.ABILITY["radius_tiles"])
 		_stamp(lit, Vector2i(int(flare[0]), int(flare[1])), radius)
@@ -117,7 +117,7 @@ static func _stamp(lit: Dictionary, centre: Vector2i, radius: int) -> void:
 
 
 static func _flared(state: Dictionary, cell: Vector2i) -> bool:
-	var flare := Ability.flare_at(state)
+	var flare := Ability.aimed_at(state, Ability.FLARE)
 	return not flare.is_empty() and Grid.chebyshev(Vector2i(int(flare[0]), int(flare[1])), cell) \
 		<= int(GameData.ABILITY["radius_tiles"])
 

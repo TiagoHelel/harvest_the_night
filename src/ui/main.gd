@@ -375,7 +375,7 @@ func _process(_delta: float) -> void:
 	# **Only a press that can fire is written** (task 0135): `Ability.tick` runs
 	# at night alone, so a press by day stayed in the intent and went off on
 	# the night's first tick, wherever the cursor happened to be.
-	if live and ability and Ability.ready(_driver.state):
+	if live and ability and Ability.ready(_driver.state, Ability.FLARE):
 		intent["ability"] = true
 	# **START** (task 0136): an edge the build step spends and every other
 	# phase drops.
@@ -442,7 +442,7 @@ func _drive_cursor(delta: float) -> void:
 	intent["ability_cell"] = [cell.x, cell.y]
 	# Its reach is shown while the flare is ready and the FLARE button is armed
 	# or the ability key held - and then the cursor reads aim.
-	var ready := Ability.ready(_driver.state)
+	var ready := Ability.ready(_driver.state, Ability.FLARE)
 	if not ready:
 		cursor.disarm()
 	var aiming := ready and (cursor.is_armed() or Input.is_action_pressed(&"ability"))

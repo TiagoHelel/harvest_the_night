@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-214 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+215 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -257,6 +257,7 @@ voz alta.
 | 0229 | The searchlight | 2026-10-11 |
 | 0230 | The electric fence | 2026-10-11 |
 | 0231 | Hardwood walls and sandbags | 2026-10-11 |
+| 0232 | Powers as a list | 2026-10-11 |
 
 ## Toda vez que o jogo mudou por baixo
 

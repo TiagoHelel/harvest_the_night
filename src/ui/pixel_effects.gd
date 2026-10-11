@@ -138,7 +138,7 @@ func before_tick(state: Dictionary, gun_cells: Array) -> void:
 			int(one.get("hurt",0)), Combat.is_burning(state,int(id)), StringName(one["kind"])]
 	for idx in gun_cells:
 		_guns[int(idx)] = int(state["occupants"][int(idx)].get("reload",0))
-	_flares = Ability.flares_used(state)
+	_flares = Ability.used(state, Ability.FLARE)
 	_work.before_tick(state)
 
 
@@ -169,8 +169,8 @@ func after_tick(state: Dictionary) -> void:
 		if not on.is_empty() and int(on.get("reload",0)) > int(_guns[idx]):
 			for muzzle in WorldView.tower_muzzles(on,Grid.cell(int(idx))):
 				emit(&"flame" if on["id"]==&"flame_tower" else &"muzzle",muzzle)
-	if Ability.flares_used(state) > _flares:
-		var at := Ability.flare_at(state)
+	if Ability.used(state, Ability.FLARE) > _flares:
+		var at := Ability.aimed_at(state, Ability.FLARE)
 		if at.size()==2:
 			emit(&"flare",(Vector2(at[0],at[1])+Vector2(0.5,0.5))*GameData.TILE_SIZE)
 	_work.after_tick(state)

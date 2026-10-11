@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 76
+const GROUPS := 77
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -155,6 +155,7 @@ func _run() -> void:
 	_task_0229_light()
 	_task_0230_electric_fence()
 	_task_0231_strong_walls()
+	_task_0232_powers_list()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -1198,13 +1199,13 @@ func _task_0129_asleep() -> void:
 
 	# **The flare goes off without him, where it is aimed** (task 0135; 0129
 	# put it on the house centre until the cursor could aim it).
-	expect(Ability.ready(state), "the flare is charged at night")
+	expect(Ability.ready(state, Ability.FLARE), "the flare is charged at night")
 	var house := Farm.house_centre(state) + Vector2i(2, 3)
 	intent["ability_cell"] = [house.x, house.y]
 	intent["ability"] = true
 	Sim.advance(state, 1)
-	expect(Ability.flare_at(state) == [house.x, house.y],
-		"a flare lands on the aimed cell", str(Ability.flare_at(state)))
+	expect(Ability.aimed_at(state, Ability.FLARE) == [house.x, house.y],
+		"a flare lands on the aimed cell", str(Ability.aimed_at(state, Ability.FLARE)))
 
 	# **REPAIR without him**: `repair_cell` on the house, in the build step.
 	var mend := State.create(1292)
@@ -1591,8 +1592,8 @@ func _task_0135_aimed_flare() -> void:
 	intent["ability_cell"] = [aim.x, aim.y]
 	intent["ability"] = true
 	Sim.advance(state, 1)
-	expect(Ability.flare_at(state) == [aim.x, aim.y], "the flare goes off on the aimed cell",
-		str(Ability.flare_at(state)))
+	expect(Ability.aimed_at(state, Ability.FLARE) == [aim.x, aim.y], "the flare goes off on the aimed cell",
+		str(Ability.aimed_at(state, Ability.FLARE)))
 	expect(int(Entities.get_one(state, near).get("hp", -1)) in range(1, 500) and Ability.is_slowed(state, near),
 		"the zombie by the aimed cell is hit and slowed")
 	expect(int(Entities.get_one(state, home).get("hp", -1)) == 500 and not Ability.is_slowed(state, home),
@@ -1607,10 +1608,10 @@ func _task_0135_aimed_flare() -> void:
 		dark_intent["ability_cell"] = nowhere
 		dark_intent["ability"] = true
 		Sim.advance(dark, 1)
-		expect(Ability.flares_used(dark) == 0 and Ability.ready(dark)
-			and Ability.charge_percent(dark) == 100 and Ability.flare_at(dark).is_empty(),
+		expect(Ability.used(dark, Ability.FLARE) == 0 and Ability.ready(dark, Ability.FLARE)
+			and Ability.charge_percent(dark, Ability.FLARE) == 100 and Ability.aimed_at(dark, Ability.FLARE).is_empty(),
 			"a flare at %s is refused and keeps its charge" % str(nowhere),
-			"used %d, ready %s" % [Ability.flares_used(dark), Ability.ready(dark)])
+			"used %d, ready %s" % [Ability.used(dark, Ability.FLARE), Ability.ready(dark, Ability.FLARE)])
 		expect(not bool(dark_intent["ability"]), "and the press is consumed all the same")
 
 	# **An old save is filled in**: `ability_cell` is nowhere until a cursor
@@ -8262,7 +8263,7 @@ func _task_0229_light() -> void:
 	(farm["ability"] as Dictionary)["cooldown"] = 0
 	(farm["intent"] as Dictionary)["ability_cell"] = [flare_at.x, flare_at.y]
 	var radius := int(GameData.ABILITY["radius_tiles"])
-	var flared := (Ability.use(farm) and Light.is_lit(farm, flare_at + Vector2i(radius, radius))
+	var flared := (Ability.use(farm, Ability.FLARE, Ability.aim_of(farm)) and Light.is_lit(farm, flare_at + Vector2i(radius, radius))
 		and not Light.is_lit(farm, flare_at + Vector2i(radius + 1, 0)))
 	for _i in int(GameData.ABILITY["flare_ticks"]):
 		Ability.tick(farm)
@@ -8861,6 +8862,110 @@ func _task_0231_strong_walls() -> void:
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A043-strong-walls.md").contains("Final geometry settled by game task 0231"),
 		"shot.gd has a mixed line, and A043's table says the geometry this task settled")
 	_completed += 1
+
+
+## 0232 - powers as a list. The flare is the first entry of `Ability.POWERS`,
+## asked and used by id with its own wait and its own aim, and nothing about
+## it changed: the keys it keeps in the state, its wait with and without the
+## tree's bonus, the burst where it is aimed, the press that sets it off. A
+## power that is not one is refused, and the state is not touched.
+func _task_0232_powers_list() -> void:
+	var table: Dictionary = GameData.ABILITY
+	var fresh := State.create(23200)
+	expect(Ability.ORDER == [Ability.FLARE] and Ability.POWERS.keys() == [Ability.FLARE]
+		and Ability.numbers(Ability.FLARE) == table and Ability.is_power(Ability.FLARE)
+		and (fresh["ability"] as Dictionary).keys() == ["cooldown", "flare", "flare_ticks", "flares"],
+		"the flare is the one power, its numbers GameData.ABILITY's and its keys in the state the four it has had since 0054",
+		str((fresh["ability"] as Dictionary).keys()))
+
+	# **Its wait, through the new calls**: the lever's whole, and the tree's
+	# 'a second flare' off it.
+	var night := _powers_night(23201)
+	var aim := _open_square(night, 5)
+	var walker: Dictionary = GameData.ENEMIES[&"walker"]
+	var radius := int(table["radius_tiles"])
+	var ids: Array = []
+	for ring in radius + 2:
+		var id := Entities.spawn(night, &"walker", aim + Vector2i(ring, 0))
+		Entities.set_hp(night, id, 500)
+		ids.append(id)
+	var charged := [Ability.ready(night, Ability.FLARE), Ability.charge_percent(night, Ability.FLARE),
+		Ability.cooldown_left(night, Ability.FLARE), Ability.full_cooldown(night, Ability.FLARE)]
+	var went := Ability.use(night, Ability.FLARE, aim)
+	expect(charged == [true, 100, 0, int(table["cooldown_ticks"])] and went
+		and Ability.cooldown_left(night, Ability.FLARE) == int(table["cooldown_ticks"])
+		and not Ability.ready(night, Ability.FLARE) and Ability.used(night, Ability.FLARE) == 1
+		and Ability.charge_percent(night, Ability.FLARE) == 0,
+		"charged at night, it goes off and waits its whole %d ticks, counted once" % int(table["cooldown_ticks"]),
+		"%s then %d" % [str(charged), Ability.cooldown_left(night, Ability.FLARE)])
+	var quick := _powers_night(23202)
+	(quick["tech_owned"] as Array).append(&"a second flare")
+	var quick_aim := _open_square(quick, 5)
+	expect(Ability.use(quick, Ability.FLARE, quick_aim)
+		and Ability.cooldown_left(quick, Ability.FLARE) == int(table["cooldown_ticks"])
+			* int(Tech.node(&"a second flare")["gives"]["flare_percent"]) / 100,
+		"'a second flare' still takes its share off the flare's wait, and only the flare's",
+		str(Ability.cooldown_left(quick, Ability.FLARE)))
+
+	# **Its aim and its damage**: the burst lands on the cell it was given,
+	# shows for its ticks, and hurts and slows everything within its radius
+	# and nothing past it.
+	var took: Array = []
+	var slowed: Array = []
+	for id in ids:
+		took.append(500 - int(Entities.get_one(night, int(id)).get("hp", 500)))
+		slowed.append(int(Entities.get_one(night, int(id)).get("slow", 0)))
+	var hit := maxi(int(table["damage"]) - int(walker.get("armour", 0)), Combat.MINIMUM_HIT)
+	var inside := true
+	for ring in radius + 1:
+		inside = inside and int(took[ring]) == hit and int(slowed[ring]) == int(table["slow_ticks"])
+	expect(Ability.aimed_at(night, Ability.FLARE) == [aim.x, aim.y]
+		and Ability.showing(night, Ability.FLARE) == int(table["flare_ticks"])
+		and inside and int(took[radius + 1]) == 0 and int(slowed[radius + 1]) == 0,
+		"the burst lands on the cell it was given, shows %d ticks, and takes %d off and slows everything within %d tiles and nothing past"
+			% [int(table["flare_ticks"]), hit, radius], "%s %s" % [str(took), str(slowed)])
+
+	# **Its press**: `intent.ability` with the cursor's cell, as since 0135.
+	var pressed := _powers_night(23203)
+	var cell := _open_square(pressed, 5)
+	(pressed["intent"] as Dictionary)["ability_cell"] = [cell.x, cell.y]
+	(pressed["intent"] as Dictionary)["ability"] = true
+	Ability.tick(pressed)
+	expect(Ability.used(pressed, Ability.FLARE) == 1 and Ability.aimed_at(pressed, Ability.FLARE) == [cell.x, cell.y]
+		and Ability.aim_of(pressed) == cell and not bool((pressed["intent"] as Dictionary)["ability"])
+		and Ability.cooldown_left(pressed, Ability.FLARE) == int(table["cooldown_ticks"]) - 1
+		and Ability.showing(pressed, Ability.FLARE) == int(table["flare_ticks"]) - 1,
+		"the ability press flares the cursor's cell and is spent, and the tick runs both counts down")
+
+	# **Recharged and put out, every power.**
+	Ability.put_out(pressed)
+	var out := [Ability.aimed_at(pressed, Ability.FLARE).is_empty(), Ability.showing(pressed, Ability.FLARE),
+		Ability.cooldown_left(pressed, Ability.FLARE) > 0]
+	Ability.recharge(pressed)
+	expect(out == [true, 0, true] and Ability.ready(pressed, Ability.FLARE)
+		and Ability.charge_percent(pressed, Ability.FLARE) == 100,
+		"put out, the mark is gone and the wait stays; recharged, it is ready", str(out))
+
+	# **A power that is not one is refused, and nothing is touched.**
+	var before := var_to_bytes(pressed)
+	var asked := [Ability.use(pressed, &"nonesuch", cell), Ability.ready(pressed, &"nonesuch"),
+		Ability.cooldown_left(pressed, &"nonesuch"), Ability.charge_percent(pressed, &"nonesuch"),
+		Ability.used(pressed, &"nonesuch"), Ability.aimed_at(pressed, &"nonesuch"),
+		Ability.showing(pressed, &"nonesuch"), Ability.numbers(&"nonesuch"), Ability.is_power(&"nonesuch")]
+	expect(asked == [false, false, 0, 0, 0, [], 0, {}, false] and var_to_bytes(pressed) == before,
+		"an id that is not a power is refused at every call, and the state is byte for byte as it was",
+		str(asked))
+	_completed += 1
+
+
+## A parked night with nobody on the farm (task 0232).
+func _powers_night(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.STRAW: 200, GameData.WOOD: 200})
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	return state
 
 
 ## A walker shut in a ring of stone walls at `level` on open ground in a

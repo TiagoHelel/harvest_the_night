@@ -25088,3 +25088,95 @@ implementation/backlog/packs/A043-strong-walls.md,
 implementation/prompts/0231-strong-walls.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0231/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0232 - Powers as a list - done 2026-10-11
+
+What changed: nothing for the player. The one flare became the first entry
+of a list of powers, each asked and used by its id with its own wait and its
+own aim cell. 0233 can then add the farm bell, the dog and the repair as rows
+and an effect each, without a second copy of the waiting and the aiming.
+
+### The list (`src/core/ability.gd`)
+
+- **`Ability.POWERS`, keyed by id** (`Ability.FLARE`, the only one), says
+  where each power keeps itself in `state["ability"]`:
+  - its wait (`cooldown`) and how many have gone off (`used`);
+  - where the last one went (`at`) and how long that shows (`showing`);
+  - the lever that says how long it shows (`lasts`);
+  - the tree's bonus to its wait (`bonus`).
+- **`ORDER`** fixes the order every loop takes, and that the night HUD will
+  show them in.
+- **The flare's entry names the keys it has had since 0054** - `cooldown`,
+  `flares`, `flare`, `flare_ticks` - so `state["ability"]` holds exactly the
+  four it held, and no key appears until 0233 adds a power.
+- **`Ability.numbers(id)`** is `GameData.ABILITY` for the flare, untouched.
+
+**The calls, by id:**
+- `ready(state, id)`, `cooldown_left(state, id)`, `charge_percent(state, id)`;
+- `full_cooldown(state, id)` - the lever with the tree's bonus off it, the
+  flare's `flare_percent` and nobody else's;
+- `use(state, id, cell)` - the aim given rather than read; `aim_of(state)`
+  reads 0135's `intent.ability_cell`;
+- `aimed_at`, `showing`, `used` - the view's and the statistics' questions,
+  which were `flare_at`, `flare_ticks` and `flares_used`;
+- `is_power(id)`.
+- **An id that is not a power** is refused by every call - not ready, no
+  wait, no charge, nothing aimed - and `use` touches nothing.
+
+**Everything else:**
+- **`use`** does what the flare's always did, in the same order: the wait,
+  the count, the mark, then the effect, `match`ed by id (`_flare`, its burst
+  unchanged).
+- **`recharge` and `put_out`** loop over every power.
+- **`tick`** runs every power's two counts down. `intent.ability` stays the
+  flare's press, and the intent is in the state too.
+
+### The callers
+
+Every caller moved to the new signatures, 105 calls in all:
+- **The rules:** `Light` and `Run`.
+- **The view:** `main.gd`, `night_hud.gd`, `pixel_effects.gd` and
+  `world_view.gd`.
+- **The tools:** `effect_showcase.gd` and `night_session.gd`.
+- **The suites:** `_task_0054` as 0135 left it, the rest of
+  `headless_check`, `headless_v1`, `input_check` and `input_v1` -
+  `_case_0135_flare_aim` with nothing changed but its calls.
+- **Not callers:** the shot scenarios and the autoplayer never called
+  `Ability`, and `perf_check` only calls `tick`, whose signature stayed.
+- **Nothing flare-only is left:** the old one-argument calls are gone, so
+  one left behind would not compile.
+
+### Hashes
+
+- **SIM 2958532891 and DATA 1845073021, both unchanged** - the bar this task
+  set itself.
+- No key moved, so no scripted night had to prove play identical.
+
+Verify: **PASS**, 60 of 60 in 962 s, both hashes unchanged.
+- **Suites:** `headless_check` 17841 asserts, `headless_v1` 2577, `input_check` 1252 cases, `input_v1` 720 (107 s); perf a night tick 1624 us.
+
+**Tests:**
+- **`_task_0232_powers_list` (headless_v1):**
+  - the list is the flare, its numbers `GameData.ABILITY`'s, its keys the
+    four of 0054;
+  - **through the new calls:** charged at night; gone off and waiting its
+    whole 2400 ticks, counted once; 'a second flare' still taking its share
+    off the flare's wait;
+  - **the burst:** on the cell it was given, showing 30 ticks, 25 off and 150
+    ticks of slow for every walker within 3 tiles and nothing at 4;
+  - **the ability press** flaring the cursor's cell, spent, both counts
+    running down on the tick;
+  - `put_out` taking the mark and keeping the wait, `recharge` making it
+    ready;
+  - **an unknown id refused** at every call with the state byte for byte as
+    it was.
+- **No visible change, so no shots.**
+- **For 0233:** a power is a row in `POWERS` and `ORDER` with keys of its
+  own, its numbers through `numbers()` - its table beside `ABILITY` - and an
+  effect in `use`'s `match`.
+
+Files: src/core/{ability,light,run}.gd,
+src/ui/{main,night_hud,pixel_effects,world_view}.gd,
+src/tools/{effect_showcase,night_session,headless_check,headless_v1,input_check,input_v1}.gd,
+implementation/prompts/0232-powers-refactor.md,
+implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md

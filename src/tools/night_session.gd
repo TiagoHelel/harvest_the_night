@@ -124,9 +124,9 @@ func _night_by_mouse(driver: SimDriver, state: Dictionary) -> void:
 	var aim := world.screen_to_cell(Vector2(300.0, 130.0))
 	await _point_at(world, aim)
 	await click_cell(aim)
-	await until(func() -> bool: return Ability.flares_used(state) > 0, "the flare", 300)
-	expect(Ability.flare_at(state) == [aim.x, aim.y], "the flare goes where it was clicked",
-		str(Ability.flare_at(state)))
+	await until(func() -> bool: return Ability.used(state, Ability.FLARE) > 0, "the flare", 300)
+	expect(Ability.aimed_at(state, Ability.FLARE) == [aim.x, aim.y], "the flare goes where it was clicked",
+		str(Ability.aimed_at(state, Ability.FLARE)))
 
 	# **An upgrade by middle click, a sale by right click.**
 	if not towers.is_empty():
@@ -306,9 +306,9 @@ func _night_by_pad(driver: SimDriver, state: Dictionary) -> void:
 	await frames(30)
 	await _pad_axis(JOY_AXIS_TRIGGER_RIGHT, 1.0)
 	await _pad_axis(JOY_AXIS_TRIGGER_RIGHT, 0.0)
-	await until(func() -> bool: return Ability.flares_used(state) > 0, "RT's flare", 600)
-	expect(Ability.flares_used(state) > 0, "RT lets a flare go at the cursor",
-		"%s at %s" % [Ability.flare_at(state), cursor.cell()])
+	await until(func() -> bool: return Ability.used(state, Ability.FLARE) > 0, "RT's flare", 600)
+	expect(Ability.used(state, Ability.FLARE) > 0, "RT lets a flare go at the cursor",
+		"%s at %s" % [Ability.aimed_at(state, Ability.FLARE), cursor.cell()])
 	driver.set_speed(4)
 	await until(func() -> bool: return int(state["phase"]) == Phases.RESULT,
 		"the night at 4x", 5000000)

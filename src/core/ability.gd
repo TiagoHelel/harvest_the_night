@@ -1,7 +1,7 @@
 class_name Ability
 extends RefCounted
 
-## The one button that changes a night.
+## The buttons that change a night: a list of powers, the flare first.
 ##
 ## A flare: it goes off where the player is standing, hurts everything within a
 ## few tiles and leaves what survives walking at half speed for a few seconds.
@@ -38,25 +38,58 @@ extends RefCounted
 ## would start night four with a flare that is mysteriously not ready, and
 ## nothing on screen could explain why. So the night gives it back, and inside
 ## the night it costs what the lever says.
+##
+## ## A list of powers (task 0232)
+##
+## The flare is the first entry of a list. Each power has an id, its own wait,
+## its own count and where it last went off, all under `state["ability"]`, and
+## the same few functions ask and use any of them by id - so 0233's three
+## powers are rows in `POWERS` and an effect each, not a second copy of the
+## waiting and the aiming. **The flare keeps the keys it has had since task
+## 0054** - `cooldown`, `flare`, `flare_ticks` and `flares` -
+## because `state["ability"]` is folded into the determinism hash and renaming
+## them would move it for nothing; `intent.ability` stays its press, and
+## `GameData.ABILITY` its numbers, for the same reason.
+
+## The flare's id: the first power, and the one `intent.ability` presses.
+const FLARE := &"flare"
+
+## **Every power and where it keeps itself in `state["ability"]`**: its wait
+## (`cooldown`), how many have gone off (`used`), where the last one went
+## (`at`) and how long that shows (`showing`); the lever in its numbers that
+## says how long it shows (`lasts`), and the tree's bonus to its wait
+## (`bonus`).
+const POWERS := {
+	FLARE: {"cooldown": "cooldown", "used": "flares", "at": "flare", "showing": "flare_ticks",
+		"lasts": "flare_ticks", "bonus": "flare_percent"},
+}
+
+## The powers in a fixed order - the order the night HUD will show them, and
+## the order every loop over them takes.
+const ORDER: Array[StringName] = [FLARE]
 
 
-## A new night, a charged flare. Called from `Phases.begin_night()`, beside
-## the barricade allowance that works the same way.
+## A new night, every power charged. Called from `Phases.begin_night()`,
+## beside the barricade allowance that works the same way.
 static func recharge(state: Dictionary) -> void:
 	var one: Dictionary = state["ability"]
-	one["cooldown"] = 0
-	one["flare_ticks"] = 0
-	one["flare"] = []
+	for id in ORDER:
+		var keys: Dictionary = POWERS[id]
+		one[keys["cooldown"]] = 0
+		one[keys["showing"]] = 0
+		one[keys["at"]] = []
 
 
-## The flare goes out with the night. Its ticks only count down in the dark,
-## so one set off in the last seconds of a night would otherwise burn over the
-## farm all day. Called at dawn by `Enemies.withdraw()`; the charge is left to
-## `recharge()`, which the next night calls anyway.
+## Every power's mark goes out with the night. A flare's ticks only count down
+## in the dark, so one set off in the last seconds of a night would otherwise
+## burn over the farm all day. Called at dawn by `Enemies.withdraw()`; the
+## charge is left to `recharge()`, which the next night calls anyway.
 static func put_out(state: Dictionary) -> void:
 	var one: Dictionary = state["ability"]
-	one["flare_ticks"] = 0
-	one["flare"] = []
+	for id in ORDER:
+		var keys: Dictionary = POWERS[id]
+		one[keys["showing"]] = 0
+		one[keys["at"]] = []
 
 
 static func initial() -> Dictionary:
@@ -79,41 +112,83 @@ static func initial() -> Dictionary:
 
 # ------------------------------------------------------------------- asking
 
-## Whether pressing it now would do anything.
+## Whether `id` names a power.
+static func is_power(id: StringName) -> bool:
+	return POWERS.has(id)
+
+
+## A power's numbers: the flare's are `GameData.ABILITY`, byte for byte as
+## they were. Empty for anything that is not a power.
+static func numbers(id: StringName) -> Dictionary:
+	return GameData.ABILITY if id == FLARE else {}
+
+
+## Whether pressing this power now would do anything. False for an id that is
+## not a power.
 ##
 ## Night only: there is nothing to slow at noon, and a flare that could be
 ## wasted by day is a trap rather than a decision.
-static func ready(state: Dictionary) -> bool:
-	return int(state["phase"]) == Phases.NIGHT and cooldown_left(state) <= 0
+static func ready(state: Dictionary, id: StringName) -> bool:
+	return is_power(id) and int(state["phase"]) == Phases.NIGHT and cooldown_left(state, id) <= 0
 
 
-static func cooldown_left(state: Dictionary) -> int:
-	return int((state["ability"] as Dictionary)["cooldown"])
+## Ticks until this power can be used again; 0 for an id that is not a power.
+static func cooldown_left(state: Dictionary, id: StringName) -> int:
+	if not is_power(id):
+		return 0
+	return int((state["ability"] as Dictionary)[(POWERS[id] as Dictionary)["cooldown"]])
 
 
-## How far through the wait it is, as a percentage. A hundred is ready, and the
-## HUD of task 0056 draws this as a ring.
-static func charge_percent(state: Dictionary) -> int:
-	var full := int(GameData.ABILITY["cooldown_ticks"]) \
-		* Tech.bonus(state, "flare_percent", 100) / 100
+## The whole of a power's wait on this farm: its lever, with the tree's bonus
+## to it - the flare's `flare_percent` - taken off.
+static func full_cooldown(state: Dictionary, id: StringName) -> int:
+	if not is_power(id):
+		return 0
+	return int(numbers(id)["cooldown_ticks"]) \
+		* Tech.bonus(state, String((POWERS[id] as Dictionary)["bonus"]), 100) / 100
+
+
+## How far through its wait a power is, as a percentage. A hundred is ready,
+## and the HUD of task 0056 draws this as a ring. 0 for an id that is not a
+## power.
+static func charge_percent(state: Dictionary, id: StringName) -> int:
+	if not is_power(id):
+		return 0
+	var full := full_cooldown(state, id)
 	if full <= 0:
 		return 100
-	return mini((full - cooldown_left(state)) * 100 / full, 100)
+	return mini((full - cooldown_left(state, id)) * 100 / full, 100)
 
 
-## Where the last flare went off, or an empty array. For the view.
-static func flare_at(state: Dictionary) -> Array:
+## Where a power last went off while it still shows, or an empty array. For
+## the view, and for `Light`.
+static func aimed_at(state: Dictionary, id: StringName) -> Array:
+	if not is_power(id):
+		return []
 	var one: Dictionary = state["ability"]
-	return [] if int(one["flare_ticks"]) <= 0 else (one["flare"] as Array)
+	var keys: Dictionary = POWERS[id]
+	return [] if int(one[keys["showing"]]) <= 0 else (one[keys["at"]] as Array)
 
 
-## How many ticks of flare the view has left to draw.
-static func flare_ticks(state: Dictionary) -> int:
-	return int((state["ability"] as Dictionary)["flare_ticks"])
+## How many ticks of a power's mark the view has left to draw.
+static func showing(state: Dictionary, id: StringName) -> int:
+	if not is_power(id):
+		return 0
+	return int((state["ability"] as Dictionary)[(POWERS[id] as Dictionary)["showing"]])
 
 
-static func flares_used(state: Dictionary) -> int:
-	return int((state["ability"] as Dictionary)["flares"])
+## How many times a power has gone off this run, for the statistics.
+static func used(state: Dictionary, id: StringName) -> int:
+	if not is_power(id):
+		return 0
+	return int((state["ability"] as Dictionary)[(POWERS[id] as Dictionary)["used"]])
+
+
+## Where the guardian's cursor aims the powers (task 0135):
+## `intent.ability_cell`, as a cell - `(-1, -1)` when nothing is aimed.
+static func aim_of(state: Dictionary) -> Vector2i:
+	var aimed: Array = (state["intent"] as Dictionary).get("ability_cell", [-1, -1])
+	return Vector2i(int(aimed[0]), int(aimed[1]))
 
 
 ## Whether this one is walking slowly because of a flare.
@@ -135,26 +210,33 @@ static func slowed_ticks(per_tile: int, percent: int = 0) -> int:
 
 # -------------------------------------------------------------------- doing
 
-## Set one off **where it is aimed** (task 0135): `intent.ability_cell`, which
-## the guardian's cursor writes. False when it was not ready or is aimed at
-## nowhere - off the farm, or `[-1, -1]` - and then nothing at all happened:
-## no cooldown, no count.
-static func use(state: Dictionary) -> bool:
-	if not ready(state):
+## Set a power off **at `cell`** (task 0135's aim; `aim_of()` reads the
+## cursor's). False when it is not a power, is not ready or is aimed at
+## nowhere - off the farm, or `(-1, -1)` - and then nothing at all happened:
+## no wait, no count, nothing in the state touched.
+static func use(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
+	if not ready(state, id):
 		return false
-	var aimed: Array = (state["intent"] as Dictionary).get("ability_cell", [-1, -1])
-	var centre := Vector2i(int(aimed[0]), int(aimed[1]))
-	if not Grid.in_bounds(centre):
+	if not Grid.in_bounds(cell):
 		return false
 
 	var one: Dictionary = state["ability"]
-	one["cooldown"] = int(GameData.ABILITY["cooldown_ticks"]) \
-		* Tech.bonus(state, "flare_percent", 100) / 100
-	one["flares"] = int(one["flares"]) + 1
+	var keys: Dictionary = POWERS[id]
+	one[keys["cooldown"]] = full_cooldown(state, id)
+	one[keys["used"]] = int(one[keys["used"]]) + 1
 
-	one["flare"] = [centre.x, centre.y]
-	one["flare_ticks"] = int(GameData.ABILITY["flare_ticks"])
+	one[keys["at"]] = [cell.x, cell.y]
+	one[keys["showing"]] = int(numbers(id)[keys["lasts"]])
 
+	match id:
+		FLARE:
+			_flare(state, cell)
+	return true
+
+
+## **The flare's effect**: everything within `radius_tiles` of `cell`, by
+## Chebyshev, slowed and hit.
+static func _flare(state: Dictionary, centre: Vector2i) -> void:
 	var damage := int(GameData.ABILITY["damage"])
 	var radius := int(GameData.ABILITY["radius_tiles"])
 	var slow := int(GameData.ABILITY["slow_ticks"])
@@ -171,17 +253,18 @@ static func use(state: Dictionary) -> bool:
 		# longer there, and the order is a rule rather than an accident.
 		(Entities.get_one(state, id))["slow"] = slow
 		Combat.hit(state, id, damage, kind)
-	return true
 
 
-## One tick of waiting, and of the flare fading.
+## One tick of waiting, and of every power's mark fading.
 ##
 ## Called from `Sim._tick_night()` only: see the note at the top about the
 ## cooldown not running by day.
 static func tick(state: Dictionary) -> void:
 	var intent: Dictionary = state["intent"]
+	# **`intent.ability` is the flare's press**, as it has been since task
+	# 0054: the intent is in the state too. 0233's powers bring their own.
 	if bool(intent.get("ability", false)):
-		use(state)
+		use(state, FLARE, aim_of(state))
 	# **Consumed whether or not it worked.** A press that arrived on a tick
 	# when the flare was still warm is a press that is gone; holding the key
 	# through a cooldown and having it fire the instant it came back would be
@@ -189,7 +272,9 @@ static func tick(state: Dictionary) -> void:
 	intent["ability"] = false
 
 	var one: Dictionary = state["ability"]
-	if int(one["cooldown"]) > 0:
-		one["cooldown"] = int(one["cooldown"]) - 1
-	if int(one["flare_ticks"]) > 0:
-		one["flare_ticks"] = int(one["flare_ticks"]) - 1
+	for id in ORDER:
+		var keys: Dictionary = POWERS[id]
+		if int(one[keys["cooldown"]]) > 0:
+			one[keys["cooldown"]] = int(one[keys["cooldown"]]) - 1
+		if int(one[keys["showing"]]) > 0:
+			one[keys["showing"]] = int(one[keys["showing"]]) - 1

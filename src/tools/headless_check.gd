@@ -9957,53 +9957,53 @@ func _task_0054_ability() -> void:
 	# **Not by day.** There is nothing to slow at noon.
 	var noon := State.create(3600)
 	expect(int(noon["phase"]) == Phases.DAY, "it is daytime")
-	expect(not Ability.ready(noon), "the flare is not ready by day")
-	expect(not Ability.use(noon), "and pressing it does nothing")
-	expect(Ability.flares_used(noon) == 0, "nothing went off",
-		str(Ability.flares_used(noon)))
+	expect(not Ability.ready(noon, Ability.FLARE), "the flare is not ready by day")
+	expect(not Ability.use(noon, Ability.FLARE, Ability.aim_of(noon)), "and pressing it does nothing")
+	expect(Ability.used(noon, Ability.FLARE) == 0, "nothing went off",
+		str(Ability.used(noon, Ability.FLARE)))
 
 	# **One press, then a long wait.** The done-when: two uses in the same
 	# second are impossible.
 	var night := _fresh_night(3601)
 	# Aimed, since task 0135: a flare at nowhere is refused.
 	_aim(night, Farm.house_centre(night))
-	expect(Ability.ready(night), "at night it is ready")
-	expect(Ability.charge_percent(night) == 100, "and fully charged",
-		str(Ability.charge_percent(night)))
-	expect(Ability.use(night), "it goes off")
-	expect(Ability.flares_used(night) == 1, "once")
-	expect(not Ability.ready(night), "and is not ready again on the same tick")
-	expect(not Ability.use(night), "a second press does nothing at all")
-	expect(Ability.flares_used(night) == 1, "still once",
-		str(Ability.flares_used(night)))
+	expect(Ability.ready(night, Ability.FLARE), "at night it is ready")
+	expect(Ability.charge_percent(night, Ability.FLARE) == 100, "and fully charged",
+		str(Ability.charge_percent(night, Ability.FLARE)))
+	expect(Ability.use(night, Ability.FLARE, Ability.aim_of(night)), "it goes off")
+	expect(Ability.used(night, Ability.FLARE) == 1, "once")
+	expect(not Ability.ready(night, Ability.FLARE), "and is not ready again on the same tick")
+	expect(not Ability.use(night, Ability.FLARE, Ability.aim_of(night)), "a second press does nothing at all")
+	expect(Ability.used(night, Ability.FLARE) == 1, "still once",
+		str(Ability.used(night, Ability.FLARE)))
 
 	Sim.advance(night, GameData.SECONDS)
-	expect(not Ability.ready(night),
+	expect(not Ability.ready(night, Ability.FLARE),
 		"nor a second later - which is the done-when, in its own words",
-		str(Ability.cooldown_left(night)))
-	expect(Ability.charge_percent(night) < 100, "the ring is not full",
-		str(Ability.charge_percent(night)))
+		str(Ability.cooldown_left(night, Ability.FLARE)))
+	expect(Ability.charge_percent(night, Ability.FLARE) < 100, "the ring is not full",
+		str(Ability.charge_percent(night, Ability.FLARE)))
 
 	var wait := int(table["cooldown_ticks"])
 	Sim.advance(night, wait - GameData.SECONDS - 1)
-	expect(not Ability.ready(night), "nor a tick before its time",
-		str(Ability.cooldown_left(night)))
+	expect(not Ability.ready(night, Ability.FLARE), "nor a tick before its time",
+		str(Ability.cooldown_left(night, Ability.FLARE)))
 	Sim.advance(night, 2)
-	expect(Ability.ready(night), "and ready on the tick the lever says",
-		str(Ability.cooldown_left(night)))
-	expect(Ability.charge_percent(night) == 100, "with a full ring")
+	expect(Ability.ready(night, Ability.FLARE), "and ready on the tick the lever says",
+		str(Ability.cooldown_left(night, Ability.FLARE)))
+	expect(Ability.charge_percent(night, Ability.FLARE) == 100, "with a full ring")
 
 	# **The wait runs only at night, and every night starts charged.**
 	var carried := _fresh_night(3602)
 	_aim(carried, Farm.house_centre(carried))
-	Ability.use(carried)
-	var mid := Ability.cooldown_left(carried)
+	Ability.use(carried, Ability.FLARE, Ability.aim_of(carried))
+	var mid := Ability.cooldown_left(carried, Ability.FLARE)
 	expect(mid > 0, "the flare is spent")
 	Phases.enter_result(carried, true)
 	Sim.advance(carried, 300)
-	expect(Ability.cooldown_left(carried) == mid,
+	expect(Ability.cooldown_left(carried, Ability.FLARE) == mid,
 		"ten seconds of the result screen do not charge it",
-		"%d against %d" % [Ability.cooldown_left(carried), mid])
+		"%d against %d" % [Ability.cooldown_left(carried, Ability.FLARE), mid])
 
 	# ...and the next night hands it back, so nobody ever begins a night
 	# looking at a flare that is not ready for a reason they cannot see.
@@ -10011,10 +10011,10 @@ func _task_0054_ability() -> void:
 	Sim.advance(carried, 2)
 	NightRoad.to_night(carried)
 	expect(int(carried["phase"]) == Phases.NIGHT, "another night")
-	expect(Ability.ready(carried),
+	expect(Ability.ready(carried, Ability.FLARE),
 		"which begins with the flare charged",
-		str(Ability.cooldown_left(carried)))
-	expect(Ability.flare_at(carried).is_empty(),
+		str(Ability.cooldown_left(carried, Ability.FLARE)))
+	expect(Ability.aimed_at(carried, Ability.FLARE).is_empty(),
 		"and nothing of the old one left to draw")
 
 	# **It hurts and slows everything in the radius, and nothing outside it.**
@@ -10044,7 +10044,7 @@ func _task_0054_ability() -> void:
 	var one := Entities.spawn(wears, &"walker", Farm.house_centre(wears))
 	Entities.set_hp(wears, one, 500)
 	_aim(wears, Farm.house_centre(wears))
-	Ability.use(wears)
+	Ability.use(wears, Ability.FLARE, Ability.aim_of(wears))
 	expect(Ability.is_slowed(wears, one), "it is slowed")
 	Sim.advance(wears, int(table["slow_ticks"]) + 2)
 	expect(not Ability.is_slowed(wears, one),
@@ -10052,16 +10052,16 @@ func _task_0054_ability() -> void:
 
 	# **The view is told where it happened, and then forgets.**
 	var seen := _fresh_night(3605)
-	expect(Ability.flare_at(seen).is_empty(), "nothing to draw yet")
+	expect(Ability.aimed_at(seen, Ability.FLARE).is_empty(), "nothing to draw yet")
 	# **Where it was aimed** (task 0135; 0129 had it on the house).
 	var aimed := Farm.house_centre(seen) + Vector2i(5, 4)
 	_aim(seen, aimed)
-	Ability.use(seen)
-	expect(Ability.flare_at(seen) == [aimed.x, aimed.y],
+	Ability.use(seen, Ability.FLARE, Ability.aim_of(seen))
+	expect(Ability.aimed_at(seen, Ability.FLARE) == [aimed.x, aimed.y],
 		"it went off where it was aimed",
-		str(Ability.flare_at(seen)))
+		str(Ability.aimed_at(seen, Ability.FLARE)))
 	Sim.advance(seen, int(table["flare_ticks"]) + 2)
-	expect(Ability.flare_at(seen).is_empty(),
+	expect(Ability.aimed_at(seen, Ability.FLARE).is_empty(),
 		"and a second later there is nothing left to draw")
 
 	# **One turned wave a night, not every wave.** The other done-when,
@@ -10116,7 +10116,7 @@ func _flare_a_line(seed_value: int) -> Dictionary:
 		who.append(id)
 
 	_aim(state, centre)
-	Ability.use(state)
+	Ability.use(state, Ability.FLARE, Ability.aim_of(state))
 
 	var took: Array = []
 	var slowed: Array = []
@@ -10142,7 +10142,7 @@ func _count_the_flares(seed_value: int) -> Dictionary:
 	for _tick in 20000:
 		if int(state["phase"]) != Phases.NIGHT:
 			break
-		if Ability.ready(state) and Ability.use(state):
+		if Ability.ready(state, Ability.FLARE) and Ability.use(state, Ability.FLARE, Ability.aim_of(state)):
 			flares += 1
 		Sim.advance(state, 1)
 		ticks += 1
@@ -10175,7 +10175,7 @@ func _flare_a_wave(seed_value: int, press: bool) -> Dictionary:
 	var before := int(state["house_hp"])
 	for _tick in 4000:
 		# Fire when the crowd is under the aim, which is what a player does.
-		if press and Ability.ready(state) and _crowd_near(state, stand) >= 3:
+		if press and Ability.ready(state, Ability.FLARE) and _crowd_near(state, stand) >= 3:
 			(state["intent"] as Dictionary)["ability"] = true
 		Sim.advance(state, 1)
 		if Entities.count(state) == 0:
@@ -10183,7 +10183,7 @@ func _flare_a_wave(seed_value: int, press: bool) -> Dictionary:
 	return {
 		"sent": sent,
 		"house_lost": before - int(state["house_hp"]),
-		"flares": Ability.flares_used(state),
+		"flares": Ability.used(state, Ability.FLARE),
 	}
 
 
@@ -12272,10 +12272,10 @@ func _task_0065_defeat() -> void:
 		"%d of %d still there" % [Entities.count(yard), winners])
 	expect((yard["burning"] as Dictionary).is_empty()
 		and (yard["projectiles"] as Array).is_empty()
-		and Ability.flare_at(yard).is_empty(),
+		and Ability.aimed_at(yard, Ability.FLARE).is_empty(),
 		"with the fires, the shots and the flare that were only about them",
 		"%d burning, %d shots, flare %s" % [(yard["burning"] as Dictionary).size(),
-			(yard["projectiles"] as Array).size(), str(Ability.flare_at(yard))])
+			(yard["projectiles"] as Array).size(), str(Ability.aimed_at(yard, Ability.FLARE))])
 	Sim.advance(yard, GameData.SECONDS * 30)
 	expect(Entities.count(yard) == 0, "nobody comes back while the sun is up",
 		str(Entities.count(yard)))

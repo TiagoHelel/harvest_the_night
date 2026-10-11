@@ -1034,10 +1034,10 @@ func _draw_highlight() -> void:
 	# Drawn entirely from what the rules already recorded - where it went off
 	# and how many ticks are left - so there is nothing for the view to
 	# remember and nothing here that could disagree with the damage.
-	var burst := Ability.flare_at(_state)
+	var burst := Ability.aimed_at(_state, Ability.FLARE)
 	if not burst.is_empty():
 		var full := maxf(float(GameData.ABILITY["flare_ticks"]), 1.0)
-		var left := float(Ability.flare_ticks(_state))
+		var left := float(Ability.showing(_state, Ability.FLARE))
 		var grown := 1.0 - left / full          # 0 at the bang, 1 at the end
 		var reach := float(int(GameData.ABILITY["radius_tiles"])) + 0.5
 		var middle := (Vector2(float(burst[0]), float(burst[1]))

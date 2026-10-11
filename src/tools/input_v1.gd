@@ -908,10 +908,10 @@ func _case_0135_flare_aim() -> void:
 	await frames(2)
 	expect(cursor.cell() == aim, "the cursor is on the cell to aim at", str(cursor.cell()))
 	await press_key(KEY_F, true)
-	await until(func() -> bool: return Ability.flares_used(state) > 0, "the flare to go off")
+	await until(func() -> bool: return Ability.used(state, Ability.FLARE) > 0, "the flare to go off")
 	await press_key(KEY_F, false)
-	expect(Ability.flare_at(state) == [aim.x, aim.y],
-		"pressing the ability key flares the cursor's cell", str(Ability.flare_at(state)))
+	expect(Ability.aimed_at(state, Ability.FLARE) == [aim.x, aim.y],
+		"pressing the ability key flares the cursor's cell", str(Ability.aimed_at(state, Ability.FLARE)))
 
 	# **The button**: armed, the reach shows round the cursor and the look is
 	# aim; the next click flares the clicked cell; cancel disarms.
@@ -927,15 +927,15 @@ func _case_0135_flare_aim() -> void:
 		"the square is radius_tiles round the cursor, the cells the flare hits", str(reach.size()))
 	await tap_key(KEY_ESCAPE)
 	await frames(2)
-	expect(not cursor.is_armed() and Ability.flares_used(state) == 1,
+	expect(not cursor.is_armed() and Ability.used(state, Ability.FLARE) == 1,
 		"cancel disarms it and fires nothing")
 	await click_control("FlareButton")
 	await frames(2)
 	var target := world.screen_to_cell(Vector2(180.0, 110.0))
 	await click_cell(target)
-	await until(func() -> bool: return Ability.flares_used(state) > 1, "the armed flare to go off")
-	expect(Ability.flare_at(state) == [target.x, target.y] and not cursor.is_armed(),
-		"and the next click flares the clicked cell", str(Ability.flare_at(state)))
+	await until(func() -> bool: return Ability.used(state, Ability.FLARE) > 1, "the armed flare to go off")
+	expect(Ability.aimed_at(state, Ability.FLARE) == [target.x, target.y] and not cursor.is_armed(),
+		"and the next click flares the clicked cell", str(Ability.aimed_at(state, Ability.FLARE)))
 	await close_scene()
 	_completed += 1
 
@@ -1389,10 +1389,10 @@ func _case_0139_night_hud() -> void:
 		and night_hud.hint_text() == I18n.f(&"NHUD_HINT_AIM", [actions.text_of(&"place")]),
 		"an armed flare's hint says a click lets it go", night_hud.hint_text())
 	await click_cell(spot)
-	await until(func() -> bool: return Ability.flares_used(state) > 0, "the flare")
+	await until(func() -> bool: return Ability.used(state, Ability.FLARE) > 0, "the flare")
 	await frames(2)
 	expect(flare.disabled and flare.text == I18n.f(&"NHUD_FLARE_CHARGE",
-		[Ability.charge_percent(state)]), "and then the flare shows its charge", flare.text)
+		[Ability.charge_percent(state, Ability.FLARE)]), "and then the flare shows its charge", flare.text)
 
 	# **SKIP is refused under SKIP_MIN_HOUSE_PERCENT, and says why.**
 	state["house_hp"] = maxi(Phases.house_full(state)

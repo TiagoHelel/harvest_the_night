@@ -87,7 +87,7 @@ static func summary(state: Dictionary) -> Dictionary:
 		"technology": Tech.owned(state).duplicate(),
 		"money": Resources.amount(state, GameData.MONEY),
 		"house_hp": int(state["house_hp"]),
-		"flares": Ability.flares_used(state),
+		"flares": Ability.used(state, Ability.FLARE),
 		"traps": Traps.sprung(state),
 		"bosses": Combat.bosses_down(state),
 	}

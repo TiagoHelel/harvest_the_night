@@ -368,8 +368,8 @@ func _crowd() -> void:
 	_observers_before()
 	_state["tick"] = int(_state["tick"])+1
 	control["tick"] = int(control["tick"])+1
-	Ability.use(_state)
-	Ability.use(control)
+	Ability.use(_state, Ability.FLARE, Ability.aim_of(_state))
+	Ability.use(control, Ability.FLARE, Ability.aim_of(control))
 	_observers_after(control)
 	var flare := false
 	for record in _fx._forms.records:
