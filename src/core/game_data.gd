@@ -1733,6 +1733,39 @@ const DEFENCES: Dictionary = {
 		# Bees run on nothing the generator makes (`Towers.tick`).
 		"energy_draw": 0,
 	},
+	&"catapult": {
+		# **A pumpkin lobbed into the crowd** (task 0227; the plan's section 5,
+		# autumn): timber, rope and the harvest - an autumn field become an
+		# autumn defence. The id is never `pumpkin`, which is the crop.
+		#
+		# **Not a cheaper mortar.** It reaches little more than half as far
+		# and hits softer, but it has no ground it cannot touch (no
+		# `min_range`), it lobs at whatever comes nearest it, and it needs no
+		# gunpowder, no iron and no power - only wood and what the field grew.
+		"cost": {WOOD: 30, PUMPKIN: 4},    # LEVER: wood and pumpkins
+		"season": &"autumn",            # LEVER: the season it unlocks in (0234 gates it)
+		"targeting": TARGET_NEAREST,
+		"shape": SHAPE_SPLASH,
+		"hp": 70,                       # LEVER: hit points, 40-110
+		"damage": 30,                   # LEVER: at the centre, 15-45
+		# A pumpkin is a blunt thing, however it bursts.
+		"damage_type": DAMAGE_IMPACT,
+		"range": 7,                     # LEVER: tiles, 5-9
+		"splash_tiles": 2,              # LEVER: tiles, 1-3
+		"splash_falloff_percent": 60,   # LEVER: percent at the edge, 30-90
+		"reload_ticks": 4 * SECONDS,    # LEVER: ticks, 3-6 seconds worth
+		# **Lobbed at a place**, as a mortar's shell is: it lands where it was
+		# aimed, and a zombie can walk out from under it.
+		"aim": AIM_BALLISTIC,
+		"flight_ticks": 30,             # LEVER: ticks in the air, 20-45
+		# **One pumpkin a throw**, from the store: an empty one throws stones,
+		# the weak shot every tower has, never nothing (`Ammo`).
+		"ammo": {PUMPKIN: 1},
+		# One thing at a time until a level says otherwise.
+		"targets": 1,
+		# Timber and rope: the generator's shortage never slows it (`Towers.tick`).
+		"energy_draw": 0,
+	},
 }
 
 ## The animals on the reference sheet, and the meat that comes off them.
@@ -2718,8 +2751,8 @@ const REWARDS: Dictionary = {
 ## tower and the crossbow start shooting two things at once (`targets`, which
 ## has been in the table since it was written and read by nothing), the mortar
 ## stops needing a minimum range, and the flamethrower's fire lasts twice as
-## long. A level three that was only bigger numbers would be a lever with a
-## price tag on it.
+## long; the catapult (task 0227) throws two pumpkins at once. A level three
+## that was only bigger numbers would be a lever with a price tag on it.
 ##
 ## ## Gated by the tree as well as by the purse
 ##
@@ -2765,6 +2798,16 @@ const TOWER_LEVELS: Dictionary = {
 	&"beehive": [
 		{"needs": &"true sights", "cost": {WOOD: 20, SUNFLOWER: 8},
 			"gives": {"hp": 90, "targets": 2}},
+	],
+	# **The catapult** (task 0227): an iron-banded arm on wheels, then a
+	# heavier frame on a stone footing - A039's levels - which ends in a
+	# second arm: two pumpkins a throw (`targets`), a volley.
+	&"catapult": [
+		{"needs": &"true sights", "cost": {WOOD: 20, IRON: 10},
+			"gives": {"damage": 36, "hp": 95, "range": 8}},
+		{"needs": &"oiled works", "cost": {WOOD: 25, STONE: 30, IRON: 15},
+			"gives": {"damage": 42, "hp": 125, "range": 8, "splash_tiles": 3,
+				"targets": 2}},
 	],
 }
 
@@ -4395,13 +4438,19 @@ static func check_kits(defences: Dictionary, recipes: Dictionary) -> Array:
 ## had any way of producing it. A tower whose ammunition cannot be made is a
 ## tower that is permanently on its weak shot, and nothing in the game would
 ## say why.
-static func check_ammo(defences: Dictionary, recipes: Dictionary) -> Array:
+static func check_ammo(defences: Dictionary, recipes: Dictionary,
+		crops: Dictionary = CROPS) -> Array:
 	var errors: Array = []
 	var makeable: Dictionary = {}
 	for id in sorted_names(recipes.keys()):
 		for res in sorted_names(((recipes[id] as Dictionary)["output"]
 				as Dictionary).keys()):
 			makeable[res] = true
+	# **Or grown** (task 0227): the catapult's pumpkins come out of a field,
+	# not off a bench, and a field is as sure a road to a proper shot as a
+	# recipe is. Which season it grows in is `check_seasonal_supply`'s to say.
+	for crop in sorted_names(crops.keys()):
+		makeable[crop] = true
 
 	for id in sorted_names(defences.keys()):
 		var defence: Dictionary = defences[id]
@@ -4411,8 +4460,9 @@ static func check_ammo(defences: Dictionary, recipes: Dictionary) -> Array:
 			if not RESOURCES.has(res):
 				errors.append("'%s' fires unknown '%s'" % [id, res])
 			elif not makeable.has(res):
-				errors.append(("'%s' fires '%s' and no recipe makes any - that "
-					+ "tower can never fire a proper shot") % [id, res])
+				errors.append(("'%s' fires '%s' and no recipe makes any nor any "
+					+ "field grows it - that tower can never fire a proper shot")
+					% [id, res])
 	return errors
 
 

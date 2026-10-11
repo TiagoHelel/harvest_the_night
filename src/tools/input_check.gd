@@ -2395,7 +2395,9 @@ func _case_0035_ammo() -> void:
 
 	await frames(2)
 	expect(ammo.visible, "and it is up on day one")
-	for res in Ammo.kinds():
+	# The kinds the run has reached (task 0227): autumn's pumpkins are not
+	# on spring's line.
+	for res in Ammo.kinds_reached(state):
 		expect(ammo.text.contains(str(res)),
 			"it names %s" % res, ammo.text)
 

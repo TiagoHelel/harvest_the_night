@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-209 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+210 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -253,10 +253,11 @@ is the sort of thing this list exists to say out loud.
 | 0224 | The scarecrow decoy | 2026-10-11 |
 | 0225 | Zombie bait | 2026-10-11 |
 | 0226 | The beehive | 2026-10-11 |
+| 0227 | The pumpkin catapult | 2026-10-11 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 94 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 95 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -352,6 +353,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Zombie bait** (0225) - `data` 3465552205 -> 2947162752
 - **The beehive** (0226) - `sim` 3837945514 -> 642923490
 - **The beehive** (0226) - `data` 2947162752 -> 2287996408
+- **The pumpkin catapult** (0227) - `data` 2287996408 -> 3966054259
 
 ## What went wrong
 

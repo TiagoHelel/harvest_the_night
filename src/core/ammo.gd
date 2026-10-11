@@ -98,6 +98,21 @@ static func kinds() -> Array:
 	return out
 
 
+## **The kinds the run has reached** (task 0227): the ammunition of every
+## defence whose season `Calendar.season_reached` - 0234's gate, and every
+## season from Year 2 on - in `kinds()`'s order. What the HUD's line counts,
+## so autumn's pumpkins are not an empty pool all spring and summer.
+static func kinds_reached(state: Dictionary) -> Array:
+	var out: Array = []
+	for res in kinds():
+		for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+			var season := GameData.SEASONS.find(GameData.defence_season(GameData.DEFENCES[id]))
+			if needed_by(id).has(res) and Calendar.season_reached(state, season):
+				out.append(res)
+				break
+	return out
+
+
 ## What is in the pool of every kind, for the line on the HUD.
 static func pool(state: Dictionary) -> Dictionary:
 	var out := {}

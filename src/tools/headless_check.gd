@@ -14586,8 +14586,8 @@ func _task_0082_shots() -> void:
 	# and its peppers and corn regrowing. Ninety since 0204: the big stumps at
 	# night. Ninety-one since 0213: the machines worn. Ninety-two since 0224:
 	# a crowd lured to a decoy. Ninety-three since 0225: one turned to a bait.
-	# Ninety-four since 0226: a hive at work.
-	expect(names.size() == 94,
+	# Ninety-four since 0226: a hive at work. Ninety-five since 0227: a volley.
+	expect(names.size() == 95,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

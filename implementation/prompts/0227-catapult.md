@@ -1,7 +1,7 @@
 # 0227 - The pumpkin catapult
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0196, 0132, 0168
 - **Likely files:** src/core/game_data.gd, src/core/towers.gd, src/core/ammo.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd
 

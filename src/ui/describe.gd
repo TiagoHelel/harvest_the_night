@@ -114,6 +114,18 @@ static func defence(id: StringName) -> String:
 	if int(one.get("reload_ticks", 0)) > 0:
 		lines.append(I18n.f(&"DESC_RELOAD",
 			[_seconds(int(one["reload_ticks"]))]))
+	# **What it spends and where it lands** (task 0227): the store's rounds a
+	# shot - the catapult's pumpkins, the mortar's powder - or a round per so
+	# much fire, and how far round its landing a splash reaches.
+	var ammo: Dictionary = one.get("ammo", {})
+	for res in GameData.sorted_names(ammo.keys()):
+		if int(one.get("ammo_every_ticks", 0)) > 0:
+			lines.append(I18n.f(&"DESC_AMMO_EVERY", [int(ammo[res]), Names.of(res),
+				_seconds(int(one["ammo_every_ticks"]))]))
+		else:
+			lines.append(I18n.f(&"DESC_AMMO_SHOT", [int(ammo[res]), Names.of(res)]))
+	if StringName(one.get("shape", &"")) == GameData.SHAPE_SPLASH:
+		lines.append(I18n.f(&"DESC_SPLASHES", [int(one.get("splash_tiles", 1))]))
 	if int(one.get("energy_draw", 0)) > 0:
 		lines.append(I18n.f(&"DESC_DRAWS", [int(one["energy_draw"])]))
 	if int(one.get("path_cost", 0)) > 0:

@@ -20,7 +20,7 @@ after the night relight, and the splat must read as pumpkin, not blood.
 
 ## Deliverables
 
-The table is provisional: game task 0227 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0227. The rows stand as written: the catapult 32x48 standing on (16,44) at three levels in four states each, the pumpkin shot 8x8 round (4,4) in three looping frames, and the splat 20x16 on (10,14) in four one-shot frames. **How the game plays them:** a catapult is one cell, a tower that throws a pumpkin from the store every four seconds at the nearest thing in its reach - level three, the family's last, two at a time: a volley. A pumpkin is lobbed at the cell its target stood on and lands there a second later, whoever has walked off, splashing two tiles round (three at level three). The tower wears `_fire` for the first fifth of its reload after each throw, `_hurt` below three quarters of its hit points (firing first, as the towers do), and `_wreck` once it falls, as rubble the morning sweeps, at the level it stood at. The shot tumbles on a 14-pixel arc the view draws over its straight line, and the splat bursts once on the cell it lands on, over the ground and under the night's relight. With no pumpkins a catapult throws a stone - the plain dot every shot is, and no splat. Until 0238 the catapult is the auto crossbow burnt to pumpkin orange and drawn smaller (0.7, 0.8 and 0.9) so the levels grow, the shot is drawn in code by `CatapultArt`, and the splat is the splash in pumpkin, through 0120's road; the shot leaves from the cell's middle until the real fire frames' `muzzle_xy` land, and from there after. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
@@ -35,6 +35,14 @@ The table is provisional: game task 0227 settles the final canvas/footprint/stat
 
 - Every row: dir `none`, `mirror: "none"`, draw scale 1.0. The catapult throws
   toward the upper right like every existing tower; never deliver a mirrored copy.
+- **The stand-in until 0238** (task 0227): `PlaceholderArt` registers the
+  twelve tower names with `buildings/auto_crossbow` and its states and levels
+  as stand-ins, tinted orange and scaled down; `CatapultArt`
+  (`src/ui/catapult_art.gd`) draws the shot's three frames at this canvas and
+  pivot - a six-pixel pumpkin, `flame` with `gold_dark` ribs, its `wood_dark`
+  stem at 12, 4 and 8 o'clock - and the splat stands in as
+  `effects/splash_0..3` tinted. The pack has no icon: the hotbar shows
+  `catapult` scaled into its 16x16 box.
 - **Points** (contract section 5), per level, on whole, hurt and fire:
   `muzzle_xy` on an opaque pixel of the bucket (the pumpkin in whole and hurt,
   the bucket lip in fire), `muzzles_xy` = `[muzzle_xy]` (one bucket per level),

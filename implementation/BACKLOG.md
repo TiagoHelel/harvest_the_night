@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **207 / 296 done**
+`#################.......`  **208 / 296 done**
 
-0 doing / 89 todo / 0 blocked across 18 phases.
+0 doing / 88 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-89 task(s) left, the ready ones first, then what they
+88 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -354,24 +354,6 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0227 - The pumpkin catapult
-
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/towers.gd, src/core/ammo.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-A lobbed splash that burns pumpkins instead of gunpowder, so an autumn harvest becomes an autumn defence (plan section 5).
-
-- Id `catapult` (never `pumpkin`, which is the crop): `shape` splash, `aim` ballistic with `flight_ticks`, `ammo` {pumpkin: 1}, a cost in wood and pumpkins, `season` autumn (0193's field - pumpkins are autumn's, so `check_seasonal_supply` fails it as spring). Not a cheaper mortar: shorter reach, no gunpowder, a reason of its own - the journal says when it is the better buy
-- It has `damage`, so `_task_0085_night_sounds` wants a `Sfx.TOWER_SOUNDS` entry: borrow `sfx/mortar` until 0283 gives it a thunk
-- `check_ammo` refuses ammunition no recipe makes. Allow what a crop yields (the `CROPS` table) as well as recipe outputs, or add a recipe - decide, and keep the rule's intent: a tower must be able to fire a proper shot
-- An empty pumpkin pool gives the weak shot every tower has (`Ammo.weak_damage`, `Ammo.weak_reload`), never a silent catapult
-- `TOWER_LEVELS` 1-3 for `catapult`, gated on the same tree nodes as the other towers (`true sights`, `oiled works`)
-- `Names.KEYS` `DEF_CATAPULT`, a `Describe.defence` line, strings in both languages; drawn through the placeholder road (a tinted 32x48 tower per level and state, an 8x8 pumpkin shot, a 4-frame splat) until A039 is integrated by 0238
-- DATA moves (a row, its levels, the ammunition rule); SIM moves only if a state key appears or the scenario builds one - record both numbers
-
-  - done when: `_task_0227_catapult` in `src/tools/headless_v1.gd` asserts a pumpkin lands where it was aimed with the splash falloff the LEVER claims, an empty pool still fires weakly, and levels 1-3 read through `Building.entry_at`
-  - done when: The Deliverables table of `implementation/backlog/packs/A039-catapult.md` states the final geometry this task settled (levels, states, muzzle points, the shot, the splat)
-  - done when: `python tools/shot.py 0227` captures of a volley landing, opened and looked at
-
 ### 0228 - The garlic braid
 
 Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/core/phases.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/headless_v1.gd`.
@@ -513,6 +495,25 @@ The approved beehive and its bees replace the stand-ins 0226 left.
   - done when: The family checks (`check_tower_art.py`, `check_effect_art.py`) and the showcase (`python tools/show_art.py --towers --check` and `python tools/show_art.py --effects --check`) pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of a hive at each level stinging a crowd in the real game, opened and looked at, in `implementation/shots/0237/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0238 - Art: the pumpkin catapult
+
+Waits for Codex art A039.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/check_effect_art.py, tools/import_art.py`.
+
+The approved catapult, its pumpkin and its splat replace the stand-ins 0227 left.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A039` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A039-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/` and `assets/art_source/effects/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_tower_art.py` `FAMILIES`, `check_effect_art.py`, `ArtPlacement` if needed).
+- `buildings/catapult`, `catapult_2` and `catapult_3` x the four states at 32x48 with `muzzle_xy`/`muzzles_xy` on opaque pixels; the `tower` metadata in `import_art.py` for this pack; the per-family checks 0237 made in `check_tower_art.py` (if 0237 has not landed, make them here), with `gen_sprites.migrated_towers()` still the four legacy families
+- The pumpkin shot (8x8) drawn where the view draws a mortar shell, and the splat (4 frames, one-shot) as an effect family in `check_effect_art.py` - its own checked block, leaving task 0017's count of 25 frames alone
+- Retire 0227's stand-ins from 0120's placeholder registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A039 integrated`.
+
+  - done when: The family checks (`check_tower_art.py`, `check_effect_art.py`) and the showcase (`python tools/show_art.py --towers --check` and `python tools/show_art.py --effects --check`) pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of each level firing and a pumpkin landing in the real game, opened and looked at, in `implementation/shots/0238/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0246 - Bosses in general
@@ -714,7 +715,7 @@ Three more buttons for a night going wrong: the farm bell stops every zombie for
 
 ### 0234 - The arsenal grows with the seasons
 
-Waits on 0227, 0228, 0229, 0230, 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0228, 0229, 0230, 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The arsenal arrives with the calendar - spring's six, then summer's, autumn's and winter's - and every defence costs money as well as materials, so the day's purse is what the night is built with (plan sections 2, 5 and 7).
 
@@ -730,25 +731,6 @@ The arsenal arrives with the calendar - spring's six, then summer's, autumn's an
   - done when: `_case_0234_hotbar_pages` in `src/tools/input_v1.gd` pages the hotbar and places an autumn defence in autumn
   - done when: The Deliverables tables of `implementation/backlog/packs/A044-tarps.md` and `implementation/backlog/packs/A045-power-weapon-icons.md` state the final geometry this task settled (the tarp families and footprints, the icon list)
   - done when: `python tools/shot.py 0234` captures of the hotbar in spring and in winter, opened and looked at
-
-### 0238 - Art: the pumpkin catapult
-
-Waits on 0227.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/check_effect_art.py, tools/import_art.py`.
-
-The approved catapult, its pumpkin and its splat replace the stand-ins 0227 left.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A039` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A039-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/` and `assets/art_source/effects/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_tower_art.py` `FAMILIES`, `check_effect_art.py`, `ArtPlacement` if needed).
-- `buildings/catapult`, `catapult_2` and `catapult_3` x the four states at 32x48 with `muzzle_xy`/`muzzles_xy` on opaque pixels; the `tower` metadata in `import_art.py` for this pack; the per-family checks 0237 made in `check_tower_art.py` (if 0237 has not landed, make them here), with `gen_sprites.migrated_towers()` still the four legacy families
-- The pumpkin shot (8x8) drawn where the view draws a mortar shell, and the splat (4 frames, one-shot) as an effect family in `check_effect_art.py` - its own checked block, leaving task 0017's count of 25 frames alone
-- Retire 0227's stand-ins from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A039 integrated`.
-
-  - done when: The family checks (`check_tower_art.py`, `check_effect_art.py`) and the showcase (`python tools/show_art.py --towers --check` and `python tools/show_art.py --effects --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of each level firing and a pumpkin landing in the real game, opened and looked at, in `implementation/shots/0238/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0239 - Art: the garlic braid
 
@@ -1945,7 +1927,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (9/28)
+## 13 - Weapons of the night  (10/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
@@ -1956,18 +1938,18 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0224** [The scarecrow decoy](prompts/0224-decoy.md)
 - [x] **0225** [Zombie bait](prompts/0225-zombie-bait.md)
 - [x] **0226** [The beehive](prompts/0226-beehive.md)
-- [ ] **0227** [The pumpkin catapult](prompts/0227-catapult.md)
+- [x] **0227** [The pumpkin catapult](prompts/0227-catapult.md)
 - [ ] **0228** [The garlic braid](prompts/0228-garlic-braid.md)
 - [ ] **0229** [The searchlight](prompts/0229-searchlight.md)
 - [ ] **0230** [The electric fence](prompts/0230-electric-fence.md)
 - [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md)
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0230
-- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0227, 0228, 0229, 0230, 0231
+- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0228, 0229, 0230, 0231
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
 - [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - waits for art A037
 - [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - waits for art A038
-- [ ] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md) - needs 0227 - waits for art A039
+- [ ] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md) - waits for art A039
 - [ ] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md) - needs 0228 - waits for art A040
 - [ ] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md) - needs 0229 - waits for art A041
 - [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md) - needs 0230 - waits for art A042

@@ -208,6 +208,13 @@ const BAIT := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale
 const HIVE := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
 const SWARM := {"canvas": Vector2i(8, 8), "pivot": Vector2i(4, 4), "draw_scale": 1.0}
 
+## A039's catapult (task 0227): the tower family's 32x48 on (16,44), the
+## pumpkin shot's 8x8 round (4,4), and the splat's 20x16 on (10,14) - the
+## splash's - all drawn at 1.0.
+const CATAPULT := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
+const PUMPKIN_SHOT := {"canvas": Vector2i(8, 8), "pivot": Vector2i(4, 4), "draw_scale": 1.0}
+const PUMPKIN_SPLAT := {"canvas": Vector2i(20, 16), "pivot": Vector2i(10, 14), "draw_scale": 1.0}
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -293,6 +300,24 @@ const ART := {
 	&"beehive_2_fire": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_fire", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
 	&"beehive_2_wreck": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_wreck", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
 	&"bee_swarm": {"pack": "A038", "dir": "res://sprites/effects/", "frames": 3, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": SWARM, "final": SWARM},
+	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
+	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn
+	# low, growing with each level, until 0238; the pumpkin in the air drawn
+	# in code (`CatapultArt`), and its splat the water's splash in pumpkin.
+	&"catapult": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.7, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_hurt": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_hurt", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.7, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_fire": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_fire", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.7, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_wreck": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_wreck", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.7, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_2": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_2", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.8, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_2_hurt": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_2_hurt", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.8, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_2_fire": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_2_fire", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.8, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_2_wreck": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_2_wreck", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.8, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_3": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_3_hurt": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3_hurt", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_3_fire": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3_fire", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"catapult_3_wreck": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3_wreck", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	&"pumpkin_shot": {"pack": "A039", "dir": "res://sprites/effects/", "frames": 3, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": PUMPKIN_SHOT, "final": PUMPKIN_SHOT},
+	&"pumpkin_splat": {"pack": "A039", "dir": "res://sprites/effects/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"effects/splash", "stand_in_frames": 4, "tint": Color(1.6, 0.85, 0.3), "geometry": PUMPKIN_SPLAT, "final": PUMPKIN_SPLAT},
 	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
 	# the fertilised earth the tilled tile paled with it, dry and wet, until
 	# 0235.

@@ -471,10 +471,12 @@ func _refresh(force: bool) -> void:
 	_power.theme_type_variation = UiKit.WARN if percent < 100 \
 		else UiKit.DIM
 
-	# **What is left to shoot**, and a warning when a kind has run dry.
+	# **What is left to shoot**, and a warning when a kind has run dry - the
+	# kinds the run has reached (task 0227), so autumn's pumpkins are not a
+	# dry pool all spring.
 	var parts: Array = []
 	var empty := false
-	for res in Ammo.kinds():
+	for res in Ammo.kinds_reached(_state):
 		var held := Resources.amount(_state, res)
 		parts.append(I18n.f(&"DHUD_AMMO_ONE", [Names.of(res), held]))
 		if held <= 0:

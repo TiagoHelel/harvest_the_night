@@ -209,6 +209,11 @@ var _mine_before: Dictionary = {}
 var _mine_sprung_before := 0
 var _mine_selling := -1
 var _mine_cues: Dictionary = {}
+## The pumpkins in the air last frame (task 0227), by shot id: the cell each
+## was thrown at, for its splat once it is gone; and the splats bursting now,
+## `{"sprite", "age"}`, oldest first.
+var _pumpkins: Dictionary = {}
+var _splats: Array = []
 var _mine_tick_before := -1
 var _mine_losses_before: Dictionary = {}
 var _mine_grid_version := -1
@@ -549,6 +554,7 @@ func _process(delta: float) -> void:
 	_remember_towers(_state)
 	_refresh_wrecks()
 	_process_mine_cues(delta)
+	_refresh_splats(delta)
 	if _shots != null:
 		# Skipping a night does not emit per-tick observer signals.
 		var alive: Dictionary = {}
@@ -1861,8 +1867,83 @@ func _draw_shots() -> void:
 		return
 	for shot in (_state["projectiles"] as Array):
 		var at := shot_position(shot)
+		# **A pumpkin in the air** (task 0227): A039's tumbling shot, lifted
+		# on its arc, for a thrower of pumpkins with one to throw. An empty
+		# catapult's stone stays the plain dot every shot is.
+		if throws_pumpkins(StringName(shot.get("from", &""))) and bool(shot.get("armed", true)):
+			var pumpkin := CatapultArt.shot(CatapultArt.frame_at(_ambient_time))
+			if pumpkin != null:
+				_shots.draw_texture(pumpkin, at - Vector2(4.0, 4.0 + arc_lift(shot)))
+				continue
 		_shots.draw_rect(Rect2(at - Vector2.ONE, Vector2(2, 2)),
 			PaletteData.COLOURS[&"flame_hot"])
+
+
+## Whether a defence throws pumpkins (task 0227): its rounds are the crop's.
+static func throws_pumpkins(id: StringName) -> bool:
+	return Ammo.needed_by(id).has(GameData.PUMPKIN)
+
+
+## **How high a lobbed pumpkin is over its line** (task 0227): a parabola over
+## its flight, `PUMPKIN_ARC` pixels at the top. A picture of the throw, never
+## a place the rules know - they carry it straight and land it on its cell.
+static func arc_lift(shot: Dictionary) -> float:
+	var total := int((GameData.DEFENCES.get(StringName(shot.get("from", &"")), {})
+		as Dictionary).get("flight_ticks", 0))
+	if total <= 0:
+		return 0.0
+	var gone := clampf(1.0 - float(int(shot.get("left", 0))) / float(total), 0.0, 1.0)
+	return roundf(4.0 * PUMPKIN_ARC * gone * (1.0 - gone))
+
+
+## **A pumpkin bursts where it lands** (task 0227): each one in the air last
+## frame and gone this one - landed, whether by the driver's ticks or a
+## skipped stretch - leaves A039's four-frame splat on the cell it was thrown
+## at, over the ground and under the night's ramp. Frame to frame, as `Juice`
+## finds its landed shots, never a state key. Capped, oldest first.
+func _refresh_splats(delta: float) -> void:
+	if _shots == null or _state.is_empty():
+		return
+	var night := int(_state["phase"]) == Phases.NIGHT
+	var now: Dictionary = {}
+	if night:
+		for shot in (_state["projectiles"] as Array):
+			if throws_pumpkins(StringName(shot.get("from", &""))) and bool(shot.get("armed", true)) \
+					and StringName(shot.get("aim", GameData.AIM_GUIDED)) == GameData.AIM_BALLISTIC:
+				now[int(shot["id"])] = Vector2i(int(shot["to"][0]), int(shot["to"][1]))
+		var ids: Array = _pumpkins.keys()
+		ids.sort()
+		for id in ids:
+			if not now.has(id):
+				_splat_at(_pumpkins[id])
+	_pumpkins = now
+	var each := CatapultArt.splat_seconds()
+	for i in range(_splats.size() - 1, -1, -1):
+		var splat: Dictionary = _splats[i]
+		splat["age"] = float(splat["age"]) + maxf(delta, 0.0)
+		var sprite: Sprite2D = splat["sprite"]
+		var frame := int(floorf(float(splat["age"]) / each))
+		var texture := CatapultArt.splat(frame) if night else null
+		if texture == null:
+			sprite.queue_free()
+			_splats.remove_at(i)
+			continue
+		sprite.texture = texture
+
+
+func _splat_at(cell: Vector2i) -> void:
+	if _splats.size() >= SPLAT_CAP:
+		(_splats[0]["sprite"] as Sprite2D).queue_free()
+		_splats.remove_at(0)
+	var sprite := Sprite2D.new()
+	sprite.name = "PumpkinSplat"
+	sprite.centered = false
+	sprite.texture = CatapultArt.splat(0)
+	sprite.offset = -Vector2(CatapultArt.splat_pivot())
+	sprite.position = (Vector2(cell) + Vector2(0.5, 0.75)) * float(GameData.TILE_SIZE)
+	sprite.self_modulate = CatapultArt.splat_tint()
+	_shots.add_child(sprite)
+	_splats.append({"sprite": sprite, "age": 0.0})
 
 
 static func authored_tower(id: StringName) -> bool:
@@ -2733,6 +2814,11 @@ const FLASH_PERCENT := 80
 ## drawing's pivot over its feet: round the head - a walker's is some 24
 ## pixels up of its 44.
 const SWARM_HEIGHT := 0.55
+
+## How high a lobbed pumpkin rises over its line at the top of its arc, in
+## pixels (task 0227), and how many splats burst at once.
+const PUMPKIN_ARC := 14.0
+const SPLAT_CAP := 8
 
 
 ## The fallback. Task 0075 makes this unreachable.

@@ -140,6 +140,7 @@ const SCENARIOS: Array = [
 	["trampled", "the morning after a loss, by the trampled crops", ""],
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
+	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
 	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
 	["zombie_bait", "a crowd turned toward a zombie bait at night: a rotten fish thrown past a defended farm's fence, the nearest already eating on it and the rest - from further than a decoy pulls - on their way; the bait picked on the hotbar, one kit left", ""],
 	["bone_meal", "Spring 2 at noon: a starter row turned, plain and fertilised side by side, dry then watered, and carrot sprouts on fertilised earth dry and wet; bone meal chosen in the strip", ""],
@@ -772,6 +773,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"decoy": _set_decoy(state)
 		"zombie_bait": _set_zombie_bait(state)
 		"beehive": _set_beehive(state)
+		"catapult": _set_catapult(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1087,6 +1089,14 @@ func _only_showing(main: Node, wanted: String) -> void:
 func _just_before_the_shutter(main: Node, state: Dictionary,
 		name: String) -> void:
 	match name:
+		"catapult":
+			# What the shutter finds (task 0227): the pumpkins in the air, and
+			# the splats bursting.
+			var view := main.get_node("%WorldView") as WorldView
+			var up: Array = []
+			for shot in (state["projectiles"] as Array):
+				up.append("%s %d left" % [str(shot["to"]), int(shot["left"])])
+			print("  catapult: %d in the air (%s), %d bursting" % [up.size(), ", ".join(up), view._splats.size()])
 		"beehive":
 			# What the shutter finds (task 0226): who is stung, and for what.
 			var stung: Array = []
@@ -2609,6 +2619,55 @@ func _set_beehive(state: Dictionary) -> void:
 		Entities.count(state)])
 	Building.select(state, &"beehive")
 	_look_at(middle + Vector2i(2, 1))
+
+
+## **A volley landing** (task 0227): Autumn 2's night on the defended farm,
+## three catapults past its fence - one a level, three and two upgraded in the
+## build step - and a crowd coming at them from the east. Each thrower's first
+## pumpkin is timed by its reload, so the shutter finds level one's burst on
+## the ground, level two's at the top of its arc and level three's volley of
+## two coming down. The catapult is picked on the hotbar, autumn's slot.
+func _set_catapult(state: Dictionary) -> void:
+	_on_date(state, 2 * GameData.SEASON_DAYS + 2)
+	_a_defended_farm(state, true)
+	Resources.gain(state, {GameData.PUMPKIN: 40, GameData.WOOD: 120, GameData.STONE: 80,
+		GameData.IRON: 80})
+	(state["tech_owned"] as Array).append_array([&"true sights", &"oiled works"])
+	var middle := _clear_patch(state, Player.cell(state) + Vector2i(19, 1), 4)
+	var throwers := [middle + Vector2i(-2, -2), middle + Vector2i(-2, 0), middle + Vector2i(-2, 2)]
+	for i in throwers.size():
+		if middle.x < 0 or not Building.place(state, &"catapult", throwers[i]):
+			push_warning("shot: no open patch for the catapults")
+			_look_at(_the_defence_line(state))
+			return
+		for _l in i:
+			Building.upgrade(state, throwers[i])
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	# Their first throws, timed to the shutter: level one's down and
+	# bursting, level two's in the air, level three's two just thrown.
+	for i in throwers.size():
+		Farm.occupant(state, throwers[i])["reload"] = CATAPULT_FIRST_THROWS[i]
+	# Tanks and breakers in front, which a pumpkin does not fell at a throw,
+	# and walkers behind them.
+	var crowd := {Vector2i(2, -2): &"tank", Vector2i(3, 0): &"tank", Vector2i(2, 2): &"tank",
+		Vector2i(3, -1): &"breaker", Vector2i(3, 3): &"breaker", Vector2i(5, -2): &"walker",
+		Vector2i(5, 1): &"walker", Vector2i(5, 3): &"walker"}
+	for at in crowd:
+		Entities.spawn(state, crowd[at], middle + (at as Vector2i))
+	print("  catapults at %s, levels %s; %d coming, %d pumpkins in the store" % [str(throwers),
+		str(throwers.map(func(c: Vector2i) -> int: return Building.level_at(state, c))),
+		Entities.count(state), Resources.amount(state, GameData.PUMPKIN)])
+	Building.select(state, &"catapult")
+	_look_at(middle + Vector2i(1, 0))
+
+
+## The ticks before each of `_set_catapult`'s three throws its first pumpkin
+## (task 0227), by level: timed so the shutter - some 73 ticks on, the stir's
+## 60 and the driver's - finds one burst, one at the top of its arc and a
+## volley coming down.
+const CATAPULT_FIRST_THROWS := [28, 57, 52]
 
 
 ## The cell nearest `near` with `radius` cells of nothing standing every way

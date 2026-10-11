@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 71
+const GROUPS := 72
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -150,6 +150,7 @@ func _run() -> void:
 	_task_0224_decoy()
 	_task_0225_bait()
 	_task_0226_beehive()
+	_task_0227_catapult()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -1368,7 +1369,7 @@ func _task_0132_night_build() -> void:
 	var plenty := {GameData.WOOD: 9000, GameData.STONE: 9000, GameData.IRON: 9000,
 		GameData.OIL: 9000, GameData.GUNPOWDER: 9000, GameData.MONEY: 9000,
 		GameData.FOOD: 9000, GameData.COPPER: 9000, GameData.GOLD: 9000,
-		GameData.STRAW: 9000, GameData.SUNFLOWER: 9000}
+		GameData.STRAW: 9000, GameData.SUNFLOWER: 9000, GameData.PUMPKIN: 9000}
 	var phases := {}
 	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT]:
 		var state := State.create(1320)
@@ -6170,8 +6171,8 @@ func _task_0193_supply() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		var said := GameData.defence_season(GameData.DEFENCES[id]) if GameData.DEFENCES[id].has("season") else &""
 		seasons[said] = int(seasons.get(said, 0)) + 1
-	expect(seasons == {&"spring": 8, &"summer": 3},
-		"every defence says the season it unlocks in: spring's eight, and summer's decoy (0224), bait (0225) and hive (0226)", str(seasons))
+	expect(seasons == {&"spring": 8, &"summer": 3, &"autumn": 1},
+		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225) and hive (0226), and autumn's catapult (0227)", str(seasons))
 	# **The routes**, season by season: what each kit, round, meal and feed
 	# is made of, followed back to the ground.
 	for season in GameData.SEASONS:
@@ -7753,6 +7754,239 @@ func _stung_by_hive(night: Dictionary, ticks: int) -> int:
 		Towers.tick(state)
 		Combat.tick(state)
 	return 1000 - int(Entities.get_one(state, walker).get("hp", 0))
+
+
+## 0227 - the pumpkin catapult. An autumn tower that lobs a pumpkin from the
+## store at a place and splashes it with the falloff its lever claims - not a
+## cheaper mortar; a round may come out of a field as well as off a bench;
+## out of pumpkins it throws a stone, weakly, and is never silent; three
+## levels laid over its row, the last a volley; and the HUD counts pumpkins
+## only once the run has reached autumn.
+func _task_0227_catapult() -> void:
+	# **The row, and not a cheaper mortar.**
+	var row: Dictionary = GameData.DEFENCES[&"catapult"]
+	var mortar: Dictionary = GameData.DEFENCES[&"mortar"]
+	var cost: Dictionary = row["cost"]
+	expect(cost.size() == 2 and cost.has(GameData.WOOD) and cost.has(GameData.PUMPKIN)
+		and StringName(row["shape"]) == GameData.SHAPE_SPLASH and StringName(row["aim"]) == GameData.AIM_BALLISTIC
+		and int(row["flight_ticks"]) > 0 and row["ammo"] == {GameData.PUMPKIN: 1}
+		and GameData.defence_season(row) == &"autumn" and Sfx.TOWER_SOUNDS.get(&"catapult") == &"sfx/mortar"
+		and not GameData.DEFENCES.has(GameData.PUMPKIN),
+		"a catapult costs wood and pumpkins, lobs a splash at a place a pumpkin a shot, is autumn's and thumps like a mortar - and its id is not the crop's",
+		str(row))
+	expect(int(row["range"]) < int(mortar["range"]) and int(row["damage"]) < int(mortar["damage"])
+		and int(row.get("min_range", 0)) == 0 and int(mortar["min_range"]) > 0
+		and int(row["energy_draw"]) == 0 and not cost.has(GameData.IRON) and not cost.has(GameData.STONE),
+		"not a cheaper mortar: a shorter reach and a softer hit, but no ground it cannot touch, and no gunpowder, iron, stone or power")
+	var spring := GameData.DEFENCES.duplicate(true)
+	(spring[&"catapult"] as Dictionary)["season"] = &"spring"
+	var unseasoned := GameData.check_seasonal_supply(spring, GameData.RECIPES)
+	expect(GameData.check_seasonal_supply(GameData.DEFENCES, GameData.RECIPES).is_empty()
+		and _says(unseasoned, "spring cannot make pumpkin") and _says(unseasoned, "summer cannot make pumpkin")
+		and not _says(unseasoned, "autumn"),
+		"as autumn's it passes 0193's check; unlocked in spring it fails there - pumpkins are autumn's", str(unseasoned))
+
+	# **A round out of a field.** `check_ammo` takes what a crop yields as
+	# well as what a recipe makes; with no field the catapult is refused, and
+	# a round nothing makes or grows still is.
+	var no_field := GameData.check_ammo(GameData.DEFENCES, GameData.RECIPES, {})
+	var exotic := GameData.DEFENCES.duplicate(true)
+	(exotic[&"catapult"] as Dictionary)["ammo"] = {GameData.MEAT: 1}
+	expect(GameData.check_ammo(GameData.DEFENCES, GameData.RECIPES).is_empty()
+		and _says(no_field, "'catapult' fires 'pumpkin'")
+		and _says(GameData.check_ammo(exotic, GameData.RECIPES), "'catapult' fires 'meat'"),
+		"a round a field grows is a proper shot; with no field the catapult is refused, and so is one nothing makes or grows",
+		str(no_field))
+
+	# **It lands where it was aimed, with the falloff the lever claims.** A
+	# walker at four tiles, one more on its cell, one a tile off and one at
+	# the splash's edge, one past it: the throw goes to the first; it walks
+	# off before the pumpkin comes down, which lands on its cell all the same.
+	var night: Dictionary = _catapult_night(22700, 5)
+	var state: Dictionary = night["state"]
+	var spot: Vector2i = night["spot"]
+	var reach := int(row["splash_tiles"])
+	var aim := spot + Vector2i(4, 0)
+	var thrown_at := Entities.spawn(state, &"walker", aim)
+	var on_it := Entities.spawn(state, &"walker", aim)
+	var off_one := Entities.spawn(state, &"walker", aim + Vector2i(0, -1))
+	var at_edge := Entities.spawn(state, &"walker", aim + Vector2i(0, reach))
+	var past := Entities.spawn(state, &"walker", aim + Vector2i(0, -reach - 1))
+	for id in [thrown_at, on_it, off_one, at_edge, past]:
+		Entities.set_hp(state, id, 1000)
+	Towers.tick(state)
+	var flying: Array = state["projectiles"]
+	expect(Towers.shots_fired(state) == 1 and flying.size() == 1 and int(flying[0]["target"]) == thrown_at
+		and Vector2i(int(flying[0]["to"][0]), int(flying[0]["to"][1])) == aim
+		and Resources.amount(state, GameData.PUMPKIN) == 4,
+		"one throw, at the nearest, aimed at its cell, and one pumpkin out of the store", str(flying))
+	Entities.get_one(state, thrown_at)["pos"] = [(spot.x + 1) * Player.SUBTILE + Player.SUBTILE / 2,
+		(spot.y + 5) * Player.SUBTILE + Player.SUBTILE / 2]
+	for _i in int(row["flight_ticks"]):
+		Towers.tick(state)
+	var full := Towers.damage_of(state, row)
+	var edge := int(row["splash_falloff_percent"])
+	var took := func(id: int) -> int: return 1000 - int(Entities.get_one(state, id)["hp"])
+	var lost := [took.call(on_it), took.call(off_one), took.call(at_edge), took.call(past), took.call(thrown_at)]
+	print("  a pumpkin's splash: %s - the middle, a tile off, the edge, past it, the one it was thrown at" % str(lost))
+	expect((state["projectiles"] as Array).is_empty()
+		and lost == [full, full * (100 - (100 - edge) / reach) / 100, full * edge / 100, 0, 0],
+		"it lands where it was aimed: full in the middle, %d%% at the edge as the lever claims, between them on the way out, nothing past it - nor on the one it was thrown at, who walked off" % edge,
+		str(lost))
+
+	# **An empty pool still throws**: a stone, the weak shot every tower
+	# has - weaker, slower to reload, no splash - at the one it was thrown
+	# at, wherever it has walked.
+	var dry: Dictionary = _catapult_night(22701, 0)
+	var empty: Dictionary = dry["state"]
+	var at: Vector2i = dry["spot"]
+	var hit := Entities.spawn(empty, &"walker", at + Vector2i(4, 0))
+	var near := Entities.spawn(empty, &"walker", at + Vector2i(4, 0))
+	for id in [hit, near]:
+		Entities.set_hp(empty, id, 1000)
+	Towers.tick(empty)
+	var stone: Array = empty["projectiles"]
+	var thrower := Farm.occupant(empty, at)
+	expect(Towers.shots_fired(empty) == 1 and stone.size() == 1 and not bool(stone[0]["armed"])
+		and StringName(stone[0]["shape"]) == GameData.SHAPE_SINGLE
+		and int(stone[0]["damage"]) == Ammo.weak_damage(full)
+		and int(thrower["reload"]) == Ammo.weak_reload(int(row["reload_ticks"])),
+		"with no pumpkins it still throws: a stone, for the weak damage, reloading the weak time",
+		str(stone))
+	Entities.get_one(empty, hit)["pos"] = [(at.x + 2) * Player.SUBTILE + Player.SUBTILE / 2,
+		(at.y + 3) * Player.SUBTILE + Player.SUBTILE / 2]
+	for _i in int(row["flight_ticks"]):
+		Towers.tick(empty)
+	expect(1000 - int(Entities.get_one(empty, hit)["hp"]) == Ammo.weak_damage(full)
+		and int(Entities.get_one(empty, near)["hp"]) == 1000,
+		"and the stone finds the one it was thrown at, with no splash round its cell - never a silent catapult")
+
+	# **Three levels, read through `Building.entry_at`**: each laid over the
+	# row as its step gives, the last a volley - two pumpkins a throw.
+	var up := State.create(22702)
+	Resources.gain(up, {GameData.WOOD: 300, GameData.STONE: 100, GameData.IRON: 100, GameData.PUMPKIN: 10})
+	(up["tech_owned"] as Array).append_array([&"true sights", &"oiled works"])
+	NightRoad.into_build(up)
+	var cell := _open_square(up, 4, &"catapult")
+	expect(Building.place(up, &"catapult", cell), "a catapult goes down in the build step", str(cell))
+	var steps: Array = GameData.TOWER_LEVELS[&"catapult"]
+	var wanted := row.duplicate(true)
+	var read: Array = []
+	var laid := true
+	for level in [1, 2, 3]:
+		if level > 1:
+			laid = Building.upgrade(up, cell) and laid
+			for key in ((steps[level - 2] as Dictionary)["gives"] as Dictionary):
+				wanted[key] = ((steps[level - 2] as Dictionary)["gives"] as Dictionary)[key]
+		var entry := Building.entry_at(up, cell)
+		read.append([int(entry["damage"]), int(entry["range"]), int(entry["splash_tiles"]), int(entry["targets"])])
+		for key in ["damage", "hp", "range", "splash_tiles", "targets", "reload_ticks", "flight_ticks"]:
+			laid = laid and int(entry[key]) == int(wanted[key])
+	expect(laid and steps.size() == 2 and Building.level_at(up, cell) == 3
+		and Building.why_not_upgrade(up, cell) == [&"WHY_TOP_LEVEL"] and int((read.back() as Array)[3]) == 2,
+		"levels 1-3 read through Building.entry_at, each its step laid over the row, the third two at once",
+		str(read))
+	NightRoad.through_build(up)
+	NightRoad.park(up)
+	Enemies.withdraw(up)
+	for offset in [Vector2i(4, 0), Vector2i(4, 2)]:
+		Entities.spawn(up, &"walker", cell + (offset as Vector2i))
+	var before := Resources.amount(up, GameData.PUMPKIN)
+	Towers.tick(up)
+	expect(Towers.in_flight(up) == 2 and Resources.amount(up, GameData.PUMPKIN) == before - 1,
+		"at level three a throw is a volley: two pumpkins in the air, one out of the store")
+
+	# **The HUD's line counts pumpkins once the run has reached autumn**, and
+	# from Year 2 on in every season.
+	var dated := State.create(22703)
+	var by_season: Array = []
+	for day in [1, GameData.SEASON_DAYS + 1, 2 * GameData.SEASON_DAYS + 1, Calendar.year_days() + 1]:
+		dated["day"] = day
+		by_season.append(Ammo.kinds_reached(dated).has(GameData.PUMPKIN))
+	expect(by_season == [false, false, true, true] and Ammo.kinds().has(GameData.PUMPKIN),
+		"pumpkins are ammunition, counted on the HUD from autumn and in Year 2's spring", str(by_season))
+
+	# **The words, the sound and the placeholder road.**
+	var said := {}
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		said[locale] = Describe.defence(&"catapult")
+	I18n.use("en")
+	expect(Names.KEYS.get(&"catapult") == &"DEF_CATAPULT"
+		and (said["en"] as String).contains("PUMPKIN CATAPULT") and (said["en"] as String).contains("1 pumpkin a shot")
+		and (said["en"] as String).contains("%d tiles round where it lands" % reach)
+		and (said["pt_BR"] as String).contains("CATAPULTA DE ABÓBORA") and (said["pt_BR"] as String).contains("1 abóbora por tiro")
+		and Describe.defence(&"mortar").contains("1 gunpowder a shot"),
+		"its name, its pumpkin a shot and its splash, in both languages - and the mortar says what it spends too", str(said))
+	var road: Array = []
+	for level in ["", "_2", "_3"]:
+		for state_name in ["", "_hurt", "_fire", "_wreck"]:
+			var name := StringName("catapult%s%s" % [level, state_name])
+			var path := PlaceholderArt.art_path(name, 0)
+			var frame := PlaceholderArt.frame(path)
+			var file := PlaceholderArt.texture_path(path)
+			if frame.get("canvas") != Vector2i(32, 48) or frame.get("pivot") != Vector2i(16, 44) \
+					or not file.begins_with("res://sprites/buildings/auto_crossbow") or not ResourceLoader.exists(file) \
+					or PlaceholderArt.art_tint(name) == Color.WHITE or str(PlaceholderArt.art(name).get("pack", "")) != "A039":
+				road.append(name)
+	expect(road.is_empty() and WorldView.stand_in_tower(&"catapult") and WorldView.throws_pumpkins(&"catapult")
+		and not WorldView.throws_pumpkins(&"mortar"),
+		"drawn through 0120's road: the auto crossbow in pumpkin orange at A039's 32x48 on (16,44), every level and state",
+		str(road))
+	var frames: Array = []
+	var inside := true
+	for i in CatapultArt.SHOT_FRAMES:
+		var image := CatapultArt.drawing(i)
+		frames.append(image.get_data())
+		for y in image.get_height():
+			for x in image.get_width():
+				if image.get_pixel(x, y).a > 0.0:
+					inside = inside and x >= 1 and x <= 6 and y >= 1 and y <= 6
+		inside = inside and image.get_size() == Vector2i(8, 8)
+	var splats: Array = []
+	for i in CatapultArt.SPLAT_FRAMES + 1:
+		var splat := CatapultArt.splat(i)
+		splats.append(splat.resource_path if splat != null else "")
+	expect(inside and frames[0] != frames[1] and frames[1] != frames[2] and frames[0] != frames[2]
+		and PlaceholderArt.is_drawn(CatapultArt.SHOT_PATH % 0)
+		and splats == ["res://sprites/effects/splash_0.png", "res://sprites/effects/splash_1.png",
+			"res://sprites/effects/splash_2.png", "res://sprites/effects/splash_3.png", ""]
+		and CatapultArt.splat_pivot() == Vector2i(10, 14) and CatapultArt.splat_tint() != Color.WHITE,
+		"the shot: three 8x8 frames of a tumbling pumpkin, drawn in code; the splat: four frames of the splash in pumpkin on (10,14), then gone",
+		str(splats))
+	var flight := int(row["flight_ticks"])
+	expect(WorldView.arc_lift({"from": &"catapult", "left": flight}) == 0.0
+		and WorldView.arc_lift({"from": &"catapult", "left": flight / 2}) == WorldView.PUMPKIN_ARC
+		and WorldView.arc_lift({"from": &"catapult", "left": 0}) == 0.0,
+		"a pumpkin rises on its arc from the throw, highest half way, and comes down on its cell")
+	var bar := Hotbar.new()
+	var icon := bar._icon_of(&"catapult")
+	bar.free()
+	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
+	expect(icon != null and icon.resource_path == "res://sprites/buildings/auto_crossbow.png"
+		and order.find(&"catapult") == order.size() - 1,
+		"the hotbar shows its stand-in, autumn's, after spring's and summer's", str(order))
+	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
+	expect(shots.contains("[\"catapult\", ")
+		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A039-catapult.md").contains("Final geometry settled by game task 0227"),
+		"shot.gd has a volley landing, and A039's table says the geometry this task settled")
+	_completed += 1
+
+
+## A catapult put down in the build step on open ground, `pumpkins` in the
+## store once it is paid for, then START into a parked night with nobody in
+## it (task 0227).
+func _catapult_night(seed_value: int, pumpkins: int) -> Dictionary:
+	var state := State.create(seed_value)
+	var price := int((GameData.DEFENCES[&"catapult"]["cost"] as Dictionary)[GameData.PUMPKIN])
+	Resources.gain(state, {GameData.WOOD: 200, GameData.PUMPKIN: price + pumpkins})
+	NightRoad.into_build(state)
+	var spot := _open_square(state, 6, &"catapult")
+	expect(Building.place(state, &"catapult", spot), "a catapult goes down in the build step", str(spot))
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	return {"state": state, "spot": spot}
 
 
 ## Whether a body that was at `from` moved toward `aim` this tick, as `Enemies`

@@ -142,6 +142,7 @@ const KEYS: Dictionary = {
 	&"decoy": &"DEF_DECOY",
 	&"zombie_bait": &"DEF_ZOMBIE_BAIT",
 	&"beehive": &"DEF_BEEHIVE",
+	&"catapult": &"DEF_CATAPULT",
 
 	# ---- what a day builds
 	&"workshop": &"BLD_WORKSHOP",

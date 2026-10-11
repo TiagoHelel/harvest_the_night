@@ -24234,3 +24234,191 @@ implementation/backlog/packs/A038-beehive.md,
 implementation/prompts/0226-beehive.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0226/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0227 - The pumpkin catapult - done 2026-10-11
+
+What changed: an autumn tower that lobs a pumpkin from the store at a place
+and splashes it - the autumn harvest turned into an autumn defence (the
+plan's section 5).
+- **The throw:** a ballistic splash, a pumpkin a shot, landing on the cell
+  it was aimed at a second later, whoever has walked off.
+- **Not a cheaper mortar:** a shorter reach and a softer hit, but no ground
+  it cannot touch, and no gunpowder, iron, stone or power.
+- **Out of pumpkins** it throws a stone: the weak shot every tower has.
+- **Three levels**, the last a volley of two.
+
+### The row (`src/core/game_data.gd`)
+
+**`catapult` in `DEFENCES`** (never `pumpkin`, the crop):
+- **Cost:** 30 wood and 4 pumpkins (LEVER). **`season` autumn.**
+- **The throw:** `shape` splash, `aim` ballistic, `flight_ticks` 30 - a
+  second (LEVER 20-45); `targeting` nearest; `range` 7 (LEVER 5-9) and no
+  `min_range`.
+- **The hit:** 30 impact at the centre (LEVER 15-45) - a pumpkin is a blunt
+  thing - over `splash_tiles` 2 (LEVER 1-3), 60% at the edge (LEVER 30-90).
+- **`reload_ticks`** 4 s (LEVER 3-6); **`ammo`** {pumpkin: 1}; 70 hit
+  points (LEVER 40-110); `energy_draw` 0, so 0226's rule keeps a power
+  shortage off it.
+
+**`TOWER_LEVELS[&"catapult"]`**, gated as every tower's:
+- true sights, 20 wood and 10 iron: 36 damage, 95 hit points, range 8;
+- oiled works, 25 wood, 30 stone and 15 iron: 42 damage, 125 hit points,
+  splash 3 and **`targets` 2 - a volley**, its "changes how it works".
+- A039's levels are the same story: an iron-banded arm on wheels, then a
+  heavier frame on a stone footing.
+
+### When it is the better buy
+
+The prompt asks. Against the mortar - range 12, minimum 4, 40 explosive at
+the centre, a gunpowder a shot, 30 stone, 35 iron and 15 gunpowder:
+- **Close in.** A mortar cannot touch the four tiles round itself; the
+  catapult reaches all seven, and lobs at whatever comes nearest it. Put
+  beside a mortar it covers the mortar's dead ground; put on the fence line
+  it covers the ground in front of the guns.
+- **On a farm short of metal, powder or power.** 30 wood and 4 pumpkins is
+  $134 at the stall's prices against the mortar's $665. Its rounds come off
+  the field rather than the workshop's gunpowder line, and it draws no
+  power.
+- **Not at range, and not against armour.** A little over half the reach,
+  three quarters of the hit at the centre, and a tank shrugs four off every
+  pumpkin.
+- **A throw costs a pumpkin:** $26 at the stall, against gunpowder's $22. An
+  autumn field is money or a night's ammunition - the plan's "💰 ou 🛡".
+
+### Decided: a round may be grown (`check_ammo`)
+
+The prompt's either/or. **`check_ammo` takes what a crop yields as well as
+what a recipe makes** (a `crops` argument, `CROPS` by default):
+- **The rule's intent holds:** a tower must be able to fire a proper shot,
+  and a field is as sure a road to one as a bench.
+- **Seasons are not its question:** `check_seasonal_supply` fails the
+  catapult unlocked in spring, for pumpkins are autumn's.
+- **Still refused:** with no field the catapult is, and a round neither made
+  nor grown is - the old meat test.
+
+### Decided: the HUD counts what the run has reached (`Ammo.kinds_reached`)
+
+- **Pumpkins are ammunition from day one:** `Ammo.kinds`, and the
+  "loaded into towers" line of its tooltip.
+- **The problem:** the day HUD's line counted every kind and warned on any
+  at zero, so an empty pumpkin pool would have been a warning all spring
+  and summer.
+- **The fix:** it counts the ammunition of every defence whose season
+  `Calendar.season_reached` - 0234's gate, and every season from Year 2 on.
+- **`input_check`'s ammo case** reads the reached kinds.
+
+### The tooltip (`src/ui/describe.gd`)
+
+**Two lines for every tower they fit:**
+- **What it spends:** "1 pumpkin a shot", the mortar's "1 gunpowder a
+  shot", the flamethrower's "1 incendiary every 2.0s of fire".
+- **The splash:** "hits everything 2 tiles round where it lands".
+- **The mortar's tooltip said neither until now.**
+
+### The view (`src/ui/`)
+
+- **The placeholder road until 0238** (A039 is `todo`): the auto crossbow -
+  timber, bow and rope, the nearest thing to a throwing arm - tinted pumpkin
+  orange and drawn at 0.7, 0.8 and 0.9, so the levels grow and it reads
+  apart from the real crossbow; twelve names, through 0226's stand-in tower
+  states and wrecks.
+- **The pumpkin in the air:** `CatapultArt` draws A039's 8x8 shot in code,
+  three frames of a tumbling pumpkin (its stem at 12, 4 and 8 o'clock).
+  - **The arc:** `WorldView` lifts it on a 14-pixel arc over the straight
+    line the rules carry it on - a picture of the throw, `arc_lift`.
+  - **No pumpkin, no picture:** an empty catapult's stone stays the plain
+    dot.
+- **The splat:** the splash in pumpkin (`effects/splash_0..3` tinted), four
+  frames once on the landing cell.
+  - **Found frame to frame,** a pumpkin in the air last frame and gone now,
+    as `Juice` finds its landed shots. The shot tool's stir and a skipped
+    stretch tick without the per-tick observers.
+  - **Not a `PixelEffects` family:** `effect_showcase` holds every family
+    to real raster frames.
+- **Under the night's relight:** the pumpkin and its splat grey at night as
+  a mortar's shell does. Things in the world follow the ambient light; the
+  hive's swarm (0226) is a sign on what is hurting, like a burn. Whether the
+  splat should sit with the warm forms is a question for A039's night
+  preview.
+- **Not here:**
+  - the tarp (0234);
+  - the throw's own cue: it flashes and lights at the stand-in's fallback
+    muzzle until A039's `muzzle_xy` lands, and the shot leaves from there
+    once the real art is a tower `WorldView` knows;
+  - its own thunk - `sfx/mortar` until 0283.
+- **The words:** `DEF_CATAPULT`, "pumpkin catapult" / "catapulta de
+  abóbora"; `DESC_AMMO_SHOT`, `DESC_AMMO_EVERY` and `DESC_SPLASHES`.
+- **A039's Deliverables table** is final: the geometry this task settled,
+  how the game plays each row and where the shot leaves from.
+
+### Hashes
+
+- **DATA 2287996408 -> 3966054259:** the catapult's row and its levels.
+- **SIM 642923490 unchanged:** no state key was added, the determinism
+  scenario builds no catapult, and nothing in the rules' tick reads the
+  ammunition rule or the HUD's kinds.
+
+Verify: **PASS**, 60 of 60 in 946 s, the run that recorded DATA.
+- **Suites:** `headless_check` 17760 asserts, `headless_v1` 2482,
+  `input_check` 1248 cases, `input_v1` 720 (108 s).
+- **perf:** a night tick 1433 us, the swarm's 7553, a path rebuild 10426
+  and 14454 with the decoys.
+
+**Tests:**
+- **`_task_0227_catapult` (headless_v1):**
+  - the row, and not a cheaper mortar; autumn's in 0193's check, failing it
+    unlocked in spring;
+  - a round grown is a proper shot, refused with no field;
+  - **it lands where it was aimed, with the falloff the lever claims:** of
+    walkers held at four tiles, the one it was thrown at walks off and the
+    pumpkin lands on its cell all the same - 30, 24, 18, 0 and 0 for the
+    middle, a tile off, the edge, past it and the one that walked;
+  - **an empty pool still fires:** a stone, for the weak damage and the weak
+    reload, finding the one it was thrown at with no splash;
+  - **levels 1-3 read through `Building.entry_at`,** each step laid over the
+    row, and level three's volley: two in the air, one pumpkin out of the
+    store;
+  - the HUD's kinds by date: no pumpkin in spring or summer, pumpkins in
+    autumn and in Year 2's spring;
+  - the words in both languages, the mortar's spending line, the
+    placeholder road at every level and state, the shot's frames, the
+    splat's stand-ins, the arc, the hotbar's icon and order, the shot and
+    A039's table.
+- **Old groups touched:**
+  - `headless_v1`: 0132's rich farm holds pumpkins; 0193 counts autumn's
+    one;
+  - `headless_check`: 95 scenarios;
+  - `input_check`: 0035's ammo line names the kinds the run has reached;
+  - `input_v1`: 0225's case - Q from nothing now lands on the catapult, the
+    last slot, so a click picks the bait on that page.
+- **No input case:** a catapult goes down and up a level by the hotbar and
+  the cursor, which their cases walk for every defence.
+
+**Looked at** (`python tools/shot.py 0227 catapult --fhd`), Autumn 2's night
+past the defended farm's fence:
+- **The catapults:** three in a column, levels one to three, the crossbow in
+  pumpkin orange growing with each level.
+- **The crowd:** tanks and breakers in front, walkers behind, coming from the
+  east.
+- **At the shutter:** three pumpkins in the air - level two's at the top of
+  its arc, level three's volley of two coming down by the tanks - and level
+  one's burst on the ground.
+- **The hotbar's second page:** the catapult picked over "4p 30w", "place
+  pumpkin catapult" in the night bar, and "pumpkin 25" on the ammo line in
+  autumn.
+- **What the takes found:**
+  - a crowd of walkers dead before the shutter - a pumpkin fells a walker
+    at a throw - so tanks and breakers in front;
+  - the throws timed to the 73 ticks the shutter comes after;
+  - the first pumpkin's two dark ribs read as a barrel under the relight;
+    one groove and a lit corner read as a round thing.
+
+Files: src/core/{game_data,ammo}.gd,
+src/ui/{catapult_art,placeholder_art,world_view,day_hud,names,describe,sfx}.gd,
+src/ui/catapult_art.gd.uid, assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,input_check,input_v1,shot}.gd,
+tools/determinism_data_hash.txt,
+implementation/backlog/packs/A039-catapult.md,
+implementation/prompts/0227-catapult.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0227/,
+docs/devlog/{index,index.pt_BR}.md

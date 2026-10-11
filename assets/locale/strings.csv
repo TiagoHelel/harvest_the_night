@@ -141,6 +141,7 @@ CURSOR_STRUCTURE,0,%s - %d/%d HP - level %d,%s - %d/%d de vida - nível %d
 DEF_AUTO_CROSSBOW,0,auto crossbow,besta automática
 DEF_BARRICADE,0,barricade,barricada
 DEF_BEEHIVE,0,beehive,colmeia
+DEF_CATAPULT,0,pumpkin catapult,catapulta de abóbora
 DEF_DECOY,0,decoy,espantalho-isca
 DEF_FENCE,0,fence,cerca
 DEF_FLAME_TOWER,0,flame tower,torre de fogo
@@ -177,6 +178,9 @@ DESC_ONE_SHOT,0,goes off once,explode uma vez só
 DESC_PASSES_WALLS,0,runs straight past walls,passa direto pelos muros
 DESC_RANGE,0,reaches %d tiles,alcança %d ladrilhos
 DESC_RELOAD,0,fires every %s,atira a cada %s
+DESC_SPLASHES,0,hits everything %d tiles round where it lands,acerta tudo a %d ladrilhos de onde cai
+DESC_AMMO_SHOT,0,%d %s a shot,%d %s por tiro
+DESC_AMMO_EVERY,0,%d %s every %s of fire,%d %s a cada %s de fogo
 DESC_SEED_COST,0,one packet to sow; buy for $%d,um pacote para plantar; compra por $%d
 DESC_SELLS_FOR,0,sells for $%d,vende por $%d
 DESC_SUPPLIES,0,supplies %d power,fornece %d de energia

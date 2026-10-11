@@ -3540,8 +3540,9 @@ func _case_0224_decoy() -> void:
 
 ## 0225 - a bait made by day and thrown with the cursor at night. A press by
 ## the farmer, faced: its panel's row makes a bait's kit from any fish. At
-## night Q from nothing picks the bait - the last slot - counting its one kit,
-## and a click on open ground throws it there, the kit spent.
+## night Q from nothing turns to the hotbar's second page - its last slot the
+## catapult since task 0227 - and a click there picks the bait, counting its
+## one kit; a click on open ground throws it there, the kit spent.
 func _case_0225_bait() -> void:
 	await open_scene(MAIN_SCENE)
 	var driver: SimDriver = require_control("SimDriver")
@@ -3586,11 +3587,14 @@ func _case_0225_bait() -> void:
 		"the night's hotbar")
 	await tap_key(KEY_Q)
 	await until(func() -> bool: return locate_control("Hotbar_zombie_bait") != null, "the bait's page")
+	await click_control("Hotbar_zombie_bait")
+	await until(func() -> bool: return Building.selected(state) == &"zombie_bait", "the bait's slot")
+	await frames(2)
 	var slot := locate_control("Hotbar_zombie_bait")
 	var price: Label = slot.get_node_or_null("Price") as Label if slot != null else null
 	expect(Building.selected(state) == &"zombie_bait" and price != null
 		and price.text.begins_with(I18n.f(&"HOTBAR_KITS", [1])),
-		"Q from nothing picks the bait, the last slot, counting its one kit",
+		"Q from nothing turns to the second page, and a click there picks the bait, counting its one kit",
 		price.text if price != null else "none")
 	var spot := Vector2i(-1, -1)
 	var middle := world.screen_to_cell(Vector2(240.0, 120.0))

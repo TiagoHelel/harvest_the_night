@@ -84,6 +84,9 @@ const TOWER_SOUNDS := {
 	# The flame's hiss for a swarm leaving the hive (task 0226), until 0283
 	# gives it a buzz.
 	&"beehive": &"sfx/flame",
+	# The mortar's thump for a pumpkin thrown (task 0227), until 0283 gives
+	# the catapult its own.
+	&"catapult": &"sfx/mortar",
 }
 
 ## One voice each, so a crowd is a chord rather than a wall.
