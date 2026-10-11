@@ -1883,6 +1883,8 @@ func _refresh_actors() -> void:
 		var shadow := sprite.get_node("Shadow") as Node2D
 		shadow.position.y = lift - 1.0
 		shadow.z_index = -1 if aloft else 0
+		# Under a fence there is no body to cast one (task 0250).
+		shadow.visible = not Enemies.underground(_state, int(ids[i]))
 		var metadata := _enemy_frame(pose, sprite.texture)
 		var pivot: Vector2i = metadata.get("pivot",
 			Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height()))
@@ -1961,6 +1963,9 @@ static func drawn_enemy(path: String) -> Texture2D:
 	# And task 0249's crow, until A048.
 	if drawn == null:
 		drawn = CrowArt.texture_at(path)
+	# And task 0250's digger's mound, until A049.
+	if drawn == null:
+		drawn = DiggerArt.texture_at(path)
 	return drawn
 
 
@@ -3214,9 +3219,15 @@ func _pose_of(one: Dictionary) -> StringName:
 ## spit and its rear before the next (`spit_wait`), standing between;
 ## stunned, standing; else its four steps on the clock, a frame for its walk
 ## frame's seconds (A046's 0.125, A047's rat 0.1, task 0248) - it walks or it
-## chews, and either way it is busy.
+## chews, and either way it is busy. Under a fence, a digger is its mound
+## (task 0250).
 static func posed_off_the_rules(state: Dictionary, one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
+	# **Under a fence, a mound** (task 0250's digger), on its own clock.
+	if Enemies.underground(state, int(one["id"])):
+		var seconds := float(PlaceholderArt.frame(ENEMY_DIR + "%s_mound_0.png" % kind).get("seconds", 0.125))
+		var each := maxi(roundi(seconds * float(GameData.TICK_HZ)), 1)
+		return StringName("%s_mound_%d" % [kind, (int(state["tick"]) / each + int(one["id"])) % 3])
 	if int(one.get("spitting", -1)) >= 0:
 		var every := maxi(int((GameData.ENEMIES[kind] as Dictionary).get("spit_every_ticks", 1)), 1)
 		var wait := int(one.get("spit_wait", 0))

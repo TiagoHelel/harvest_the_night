@@ -283,7 +283,9 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
 		var distance := Grid.chebyshev(from, cell)
 		if distance > reach or distance < minimum:
 			continue
-		if not up and Enemies.airborne(state, id):
+		# Not under ground, and not in the air unless it reaches it (tasks 0249
+		# and 0250).
+		if not Enemies.in_reach(state, id, up):
 			continue
 		# **Not what is already accounted for.** Without this a line of towers
 		# all fires at the leader, most of those shots land on a corpse, and
@@ -563,8 +565,8 @@ static func _pierce_line(state: Dictionary, from: Vector2i,
 		var to := cell - from
 		if to.x * aim.x + to.y * aim.y <= 0:
 			continue        # behind the tower
-		if not up and Enemies.airborne(state, id):
-			continue        # over the line, not on it (task 0249)
+		if not Enemies.in_reach(state, id, up):
+			continue        # over the line or under it (tasks 0249, 0250)
 		# **A line one tile wide.** The cross product is the perpendicular
 		# distance times the aim's length, so comparing it against the aim's
 		# length squared asks "within about a tile of the line" with no square
@@ -651,8 +653,8 @@ static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
 		var across := absi(to.x * aim.y - to.y * aim.x)
 		if across * 1000 > along * spread:
 			continue
-		# Over the flame, not in it (task 0249).
-		if not up and Enemies.airborne(state, id):
+		# Over the flame or under it, not in it (tasks 0249, 0250).
+		if not Enemies.in_reach(state, id, up):
 			continue
 
 		Combat.hit(state, id, damage,
@@ -725,7 +727,7 @@ static func _land_at(state: Dictionary, shot: Dictionary, middle: Vector2i,
 		var apart := Grid.chebyshev(middle, cell)
 		if apart > radius:
 			continue
-		if not up and Enemies.airborne(state, id):
+		if not Enemies.in_reach(state, id, up):
 			continue
 		# Integer throughout: full in the middle, `edge` percent at the rim,
 		# straight line between.

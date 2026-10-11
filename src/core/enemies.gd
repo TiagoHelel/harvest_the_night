@@ -70,6 +70,15 @@ extends RefCounted
 ## it, and a mine never sees it; landed, it is on the ground like anything
 ## else.
 ##
+## ## Under ground
+##
+## A **digger** (task 0250) `burrows`: it walks the burrow field, where a
+## `burrowable` barrier - a fence, a barricade, the wire - costs only the
+## ground under it, and passes under one rather than biting it. While it is
+## on such a cell it is `underground`: nothing that hits reaches it and the
+## barrier loses nothing. On open ground it is a walker again, and a wall or
+## the house it gnaws and bites as one.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -417,6 +426,10 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	# is ordered and deterministic because the field is.
 	elif bool(data.get("targets_structures", false)):
 		next = Pathing.step_hunt(state, here)
+	# **A digger goes under** (task 0250): its own field, where a fence is
+	# the ground under it.
+	elif bool(data.get("burrows", false)):
+		next = Pathing.step_by(state, &"burrow", here)
 	if next == here:
 		next = Pathing.step_from(state, here)
 	if next == here and Pathing.distance(state, here) == Pathing.UNREACHABLE:
@@ -433,7 +446,9 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 		# a zombie with no path takes the nearest thing in its way apart.
 		_chew(state, id, data, here)
 		return
-	if Pathing.breaks_through(state, next):
+	# Under a fence it goes on, and the fence loses nothing (task 0250).
+	if Pathing.breaks_through(state, next) and not (bool(data.get("burrows", false))
+			and Pathing.burrowable_at(state, next)):
 		# **The cheapest way home is through this.** Not the nearest structure
 		# and not the one lowest in reading order: the one the field picked,
 		# which is the one actually in the way.
@@ -562,6 +577,24 @@ static func _advance_spit(state: Dictionary) -> void:
 		still.append(shot)
 	flying.clear()
 	flying.append_array(still)
+
+
+## **Whether this one is under ground now** (task 0250): a burrower standing on
+## a `burrowable` barrier's cell. Nothing that hits reaches it there.
+static func underground(state: Dictionary, id: int) -> bool:
+	var one := Entities.get_one(state, id)
+	if one.is_empty() or not bool((GameData.ENEMIES.get(StringName(one["kind"]), {}) as Dictionary).get("burrows", false)):
+		return false
+	return Pathing.burrowable_at(state, Vector2i(int(one["pos"][0]) / Player.SUBTILE,
+		int(one["pos"][1]) / Player.SUBTILE))
+
+
+## **Whether anything that hits can reach this one** (tasks 0249 and 0250):
+## not under ground, and not in the air for what does not reach it.
+static func in_reach(state: Dictionary, id: int, up: bool) -> bool:
+	if underground(state, id):
+		return false
+	return up or not airborne(state, id)
 
 
 ## Whether a kind flies (task 0249).

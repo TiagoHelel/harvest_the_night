@@ -252,6 +252,12 @@ const RAT := {"canvas": Vector2i(24, 16), "pivot": Vector2i(12, 14), "draw_scale
 ## flight the view lifts it and draws the shadow under it.
 const CROW := {"canvas": Vector2i(32, 24), "pivot": Vector2i(16, 22), "draw_scale": 1.0}
 
+## A049's digger (task 0250): the families' 64x48 standing on (32,44), drawn
+## at 1.0, its mound on the same canvas; the walker it stands in as is caked
+## in soil.
+const DIGGER := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "draw_scale": 1.0}
+const DIGGER_TINT := Color(1.25, 0.92, 0.62)
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -390,6 +396,15 @@ const ART := {
 	&"crow_peck": {"pack": "A048", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.12, "loop": true, "stand_in": &"", "geometry": CROW, "final": CROW},
 	&"crow_death": {"pack": "A048", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": CROW, "final": CROW},
 	&"head_crow": {"pack": "A048", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
+	# A049's digger (task 0250): the walker caked in soil, every pose its own,
+	# until 0263; its mound while it is under a fence drawn in code
+	# (`DiggerArt`), and its forecast head the box over the walker's head.
+	&"digger": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker", "tint": DIGGER_TINT, "geometry": DIGGER, "final": DIGGER, "bare": true},
+	&"digger_walk": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.125, "loop": true, "stand_in": &"enemies/walker_walk", "stand_in_frames": 4, "tint": DIGGER_TINT, "geometry": DIGGER, "final": DIGGER},
+	&"digger_attack": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_attack", "stand_in_frames": 3, "tint": DIGGER_TINT, "geometry": DIGGER, "final": DIGGER},
+	&"digger_death": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": DIGGER_TINT, "geometry": DIGGER, "final": DIGGER},
+	&"digger_mound": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.125, "loop": true, "stand_in": &"", "geometry": DIGGER, "final": DIGGER},
+	&"head_digger": {"pack": "A049", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": DIGGER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
 	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn

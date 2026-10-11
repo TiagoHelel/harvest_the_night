@@ -1648,6 +1648,8 @@ const DEFENCES: Dictionary = {
 		"season": &"spring",            # LEVER: the season it opens in (task 0234)
 		"hp": 30,                       # LEVER: hit points, 15-60
 		"path_cost": 6,                 # LEVER: tiles-equivalent detour, 3-12
+		# **A digger goes under** (task 0250): posts and rails over open ground.
+		"burrowable": true,
 		"energy_draw": 0,
 	},
 	&"wall": {
@@ -1655,6 +1657,9 @@ const DEFENCES: Dictionary = {
 		"season": &"spring",            # LEVER: the season it opens in (task 0234)
 		"hp": 120,                      # LEVER: hit points, 60-250
 		"path_cost": 20,                # LEVER: tiles-equivalent detour, 10-40
+		# **The real wall a digger cannot get under** (task 0250): footings in
+		# the ground. Its hardwood level is the same wall.
+		"burrowable": false,
 		"energy_draw": 0,
 	},
 	&"barricade": {
@@ -1667,6 +1672,8 @@ const DEFENCES: Dictionary = {
 		"season": &"spring",            # LEVER: the season it opens in (task 0234)
 		"hp": 20,                       # LEVER: hit points, 10-40
 		"path_cost": 4,                 # LEVER: tiles-equivalent detour, 2-8
+		# Thrown down on the ground: a digger goes under (task 0250).
+		"burrowable": true,
 		# **Cheap, temporary and limited** - its identity since every defence
 		# goes down at night (task 0132). It expires, so it cannot quietly
 		# become a cheaper wall: the clock starts with the waves, wherever in
@@ -1850,6 +1857,9 @@ const DEFENCES: Dictionary = {
 		"season": &"winter",            # LEVER: the season it opens in (task 0234)
 		"hp": 40,                       # LEVER: hit points, 20-80
 		"path_cost": 8,                 # LEVER: tiles-equivalent detour, 4-16
+		# **A fence for all its wire** (task 0250): a digger goes under, and
+		# what never bites it never shocks it.
+		"burrowable": true,
 		# **The shock**: the ticks a biter stands stunned, the bite landing
 		# all the same. Not `damage`: it hurts nothing and shoots nothing, so
 		# no tower sound (0283 gives it its zap).
@@ -1873,6 +1883,9 @@ const DEFENCES: Dictionary = {
 		"season": &"summer",            # LEVER: the season it opens in (task 0234)
 		"hp": 70,                       # LEVER: hit points, 40-100 (a fence 30, a wall 120)
 		"path_cost": 12,                # LEVER: tiles-equivalent detour, 8-16 (a fence 6, a wall 20)
+		# **No way under a heap of sand** (task 0250): the bags fill the
+		# trench they would dig - the cheaper wall a digger stops at.
+		"burrowable": false,
 		"energy_draw": 0,
 	},
 }
@@ -2561,6 +2574,24 @@ const ENEMIES: Dictionary = {
 		"peck_ticks": 3 * SECONDS,      # LEVER: ticks, 1-6 seconds worth
 		"bones": 0,                     # LEVER: bones, 0-1
 		"armour": 0,
+		"lurable": false,
+	},
+	&"digger": {
+		# **The one that makes a fence a different thing from a wall** (task
+		# 0250): autumn's tunneller. It walks the burrow field (`Pathing`),
+		# where a `burrowable` barrier costs only the ground under it, and goes
+		# under one rather than through - the barrier loses nothing and no
+		# tower can see it while it is down there. A wall, the house and
+		# everything else it gnaws and bites as a walker does.
+		"burrows": true,
+		"hp": 35,                       # LEVER: hit points, 20-60
+		# Slower than the runner, so `check_enemies` holds: it stops for walls.
+		"ticks_per_tile": 16,           # LEVER: ticks, 12-24 (lower is faster)
+		"damage": 6,                    # LEVER: to the house, 4-10
+		"reward": 5,                    # LEVER: money, 3-8
+		"bones": 1,                     # LEVER: bones, 0-6
+		"armour": 1,                    # LEVER: damage off each hit, 0-2
+		# Not lured: it has a road of its own, under the fences.
 		"lurable": false,
 	},
 }
@@ -4240,6 +4271,11 @@ static func check_defences(defences: Dictionary) -> Array:
 		var price: Dictionary = defence.get("cost", {})
 		if int(price.get(MONEY, 0)) <= 0 or price.size() < 2:
 			errors.append("defence '%s' costs no money, or nothing but money" % defence_id)
+		# **Every barrier says whether a digger goes under it** (task 0250),
+		# so a later one cannot say nothing and be guessed at.
+		if int(defence.get("path_cost", 0)) > 0 and not defence.has("burrowable"):
+			errors.append("defence '%s' is a barrier and never says whether a digger goes under it"
+				% defence_id)
 
 		# **A tower that shoots says how it picks and how it lands.** The words
 		# are checked against the lists above, so a typo is a red line at boot

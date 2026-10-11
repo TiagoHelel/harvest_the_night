@@ -292,6 +292,9 @@ static func enemy(id: StringName) -> String:
 	# A spitter's reach (task 0247).
 	if int(one.get("spit_range", 0)) > 0:
 		lines.append(I18n.f(&"DESC_SPITS", [int(one["spit_range"])]))
+	# A digger (task 0250).
+	if bool(one.get("burrows", false)):
+		lines.append(I18n.t(&"DESC_BURROWS"))
 	# A flyer (task 0249).
 	if bool(one.get("flies", false)):
 		lines.append(I18n.t(&"DESC_FLIES"))

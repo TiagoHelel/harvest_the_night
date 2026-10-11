@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-221 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+222 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -264,10 +264,11 @@ voz alta.
 | 0247 | The spitter | 2026-10-11 |
 | 0248 | The rat swarm | 2026-10-11 |
 | 0249 | The crow | 2026-10-11 |
+| 0250 | The digger | 2026-10-11 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 109 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 110 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -378,10 +379,11 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **The spitter** (0247) - `data` 3781358399 -> 689488709
 - **The rat swarm** (0248) - `data` 689488709 -> 3959926207
 - **The crow** (0249) - `data` 3959926207 -> 3398662868
+- **The digger** (0250) - `data` 3398662868 -> 1095207733
 
 ## O que deu errado
 
-57 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
+58 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -440,6 +442,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **0247** - Found *(The spitter)*
 - **0248** - Found *(The rat swarm)*
 - **0249** - Found *(The crow)*
+- **0250** - Found *(The digger)*
 
 ## O que nao tem
 

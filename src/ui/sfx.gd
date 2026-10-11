@@ -103,6 +103,8 @@ const ENEMY_SOUNDS := {
 	&"rat": &"sfx/groan_runner",
 	# The runner's too, until 0284 gives the crow its own.
 	&"crow": &"sfx/groan_runner",
+	# The breaker's, a dig at things, until 0284 gives the digger its own.
+	&"digger": &"sfx/groan_breaker",
 }
 
 ## **What a boss with no voice of its own roars with** (task 0246): the

@@ -20,7 +20,14 @@ At 1x the mound must read as "something under the ground", not as a rock or a di
 
 ## Deliverables
 
-The table is provisional: game task 0250 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0250. The rows stand as written: 64x48 standing on (32,44), the frames and seconds of the table. **How the game plays them:**
+- **On open ground:** it walks at 16 ticks a tile, a little under two tiles a second, on the four `walk` frames at 0.125 s each, facing the way it moves. A wall or the house it gnaws as a walker does; until 0263 it does that on its walk frames, and `attack` waits for it.
+- **Under a barrier it can dig under:** the fence, the barricade and the electric fence (every barrier's row says whether; the wall and the sandbag wall are not among them). For as long as it is on that cell it shows `mound_0..2` at 0.125 s each, with no shadow, and the barrier is drawn over it, so the posts cut across the mound as it slides under them. Nothing that hits reaches it there; the bell's peal still stuns it.
+- **Burrow and emerge:** until 0263 tracks the dive and the climb, it goes straight from the walk to the mound and back. From 0263 `burrow_0..3` plays once going in and `emerge_0..3` once coming out, so `burrow_3` must match `mound_0` as the table says.
+- **Death:** until 0263 the corpse is `digger_death_3`, squashed.
+- **Night colours:** the relight takes the soil ramp down to the night ground's own tone, and a mound in mid soil disappeared into it. What reads is a body at the light end of the soil ramp under a dark top edge, with a pale crest. Keep the mound lighter than the ground it heaves under.
+
+Until 0263 every frame but the mound stands in as the walker, tinted soil-brown (`PlaceholderArt`), and the mound is drawn in code (`DiggerArt`), both through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

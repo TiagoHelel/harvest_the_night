@@ -1,16 +1,17 @@
 # What this game costs today, in microseconds.
 # Moved with: python tools/perf.py --accept
+burrow_refresh 16794
 day_building 3
 day_crafting 5
 day_gathering 1
-day_livestock 9
+day_livestock 10
 day_player 4
 day_power 2
 day_reactions 3
-day_tick 78
-day_tutorial 33
-garlic_refresh 11670
-lure_refresh 16115
+day_tick 77
+day_tutorial 34
+garlic_refresh 11484
+lure_refresh 17265
 night_ability 3
 night_building 4
 night_combat 36
@@ -18,14 +19,14 @@ night_enemies 578
 night_player 2
 night_power 4
 night_reactions 4
-night_tick 1648
-night_towers 773
-night_traps 157
+night_tick 1671
+night_towers 782
+night_traps 160
 night_tutorial 17
 night_waves 3
-path_refresh 11302
-swarm_enemies 3317
-swarm_tick 5570
-swarm_towers 1457
+path_refresh 11925
+swarm_enemies 3662
+swarm_tick 5583
+swarm_towers 1584
 view_lighting 0
-view_particles 369
+view_particles 375

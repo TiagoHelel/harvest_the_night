@@ -123,6 +123,16 @@ extends RefCounted
 ## lure, 0250's digger - is built by the first `field()` that asks for it at
 ## the current `grid_version`, and never by a rebuild nobody asked for: a lure
 ## nobody has set out costs no sweep.
+##
+## ## Five, because a digger goes under (task 0250)
+##
+## The **burrow** field is the house's, swept against the priced costs with
+## every `burrowable` barrier costing only the ground under it: a digger walks
+## it and passes under a fence where everybody else bites through it, and a
+## wall is a wall to it as to anybody. Its keys are not a new game's: they are
+## made by the first digger that asks, so a night without one never builds it
+## and SIM never folds it in - `State.MADE_WHEN_ASKED` keeps a save from
+## dropping them.
 
 ## A cell the house cannot be reached from: walled in, or across the pond.
 const UNREACHABLE := 0x7FFFFFFF
@@ -139,7 +149,8 @@ const IMPASSABLE := 0
 ## - `cost`, what stepping onto a cell costs: `priced`, a barrier is a door
 ##   with a price on it; `open`, a barrier is a hole in the map; `hunt`, priced,
 ##   with the seeds themselves passable so that the sweep can leave them;
-##   `lure`, open, with the seeds passable the same way.
+##   `lure`, open, with the seeds passable the same way; `burrow`, priced, with
+##   a `burrowable` barrier costing the ground under it (task 0250).
 ## - `field`, `costs` and `version`, the state keys it is kept under.
 ## - `eager`, built in `refresh()` with the others rather than when asked for.
 ## - `none_without_seeds`, no seeds means no field at all - an empty array,
@@ -156,6 +167,8 @@ const FIELDS: Dictionary = {
 	&"lure": {"seeds": &"lures", "cost": &"lure", "field": "flow_lure",
 		"costs": "lure_cost", "version": "lure_version",
 		"none_without_seeds": true},
+	&"burrow": {"seeds": &"house", "cost": &"burrow", "field": "flow_burrow",
+		"costs": "burrow_cost", "version": "burrow_version"},
 }
 
 
@@ -446,6 +459,17 @@ static func distance_around(state: Dictionary, cell: Vector2i) -> int:
 	return int(field[idx])
 
 
+## **Whether a digger goes under this** (task 0250): a barrier its row says is
+## `burrowable` - the fence, the barricade, the electric fence.
+static func burrowable(id: StringName) -> bool:
+	return bool((GameData.DEFENCES.get(id, {}) as Dictionary).get("burrowable", false))
+
+
+## The same of what stands on a cell.
+static func burrowable_at(state: Dictionary, cell: Vector2i) -> bool:
+	return burrowable(StringName(Farm.occupant(state, cell).get("id", &"")))
+
+
 ## Whether the way on runs through something that has to come down first.
 ##
 ## The house is where they are going and a trap is something they step on;
@@ -677,6 +701,20 @@ static func _costs_by(state: Dictionary, rule: StringName, costs: Dictionary,
 			return costs["cost"]
 		&"open":
 			return costs["open"]
+		&"burrow":
+			# **Under, not through** (task 0250): the priced map with each
+			# burrowable barrier's own price taken off what entering its cell
+			# costs - the ground and any garlic left. Cells, so sorted.
+			var under: PackedInt32Array = (costs["cost"] as PackedInt32Array).duplicate()
+			var occupants: Dictionary = state["occupants"]
+			var where: Array = occupants.keys()
+			where.sort()
+			for key in where:
+				var on: Dictionary = occupants[key]
+				var idx := int(key)
+				if burrowable(StringName(on.get("id", &""))) and int(under[idx]) != IMPASSABLE:
+					under[idx] = int(under[idx]) - Building.levelled_stat(on, "path_cost")
+			return under
 		&"hunt", &"lure":
 			# The hunt walks the priced map and the lure the open one (task
 			# 0224): a decoy pulls whoever can walk to it, and sends nobody

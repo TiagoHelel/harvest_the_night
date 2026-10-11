@@ -1,7 +1,7 @@
 # 0250 - The digger
 
 - **Phase:** 14 - Enemies and bosses
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0218, 0234
 - **Likely files:** src/core/pathing.gd, src/core/enemies.gd, src/core/towers.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/shot.gd, src/tools/headless_v1.gd
 

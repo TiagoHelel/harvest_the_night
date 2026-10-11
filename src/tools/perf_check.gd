@@ -148,6 +148,13 @@ func _run() -> void:
 	# **And with four decoys standing** (task 0224): the same rebuild, and the
 	# lure beside it the way a night asks for it.
 	print("PERF lure_refresh ", _lure_path(swarm))
+	# **And the digger's** (task 0250): the same rebuild with the burrow field
+	# swept beside the fields every night walks by, the way the first digger
+	# to ask builds it - on the worst case's wall line with every other wall
+	# a fence, so it has barriers to go under and barriers it cannot.
+	var dug := _with_fences(night)
+	print("COUNT burrow_fences ", Farm.cells_with(dug, &"fence").size())
+	print("PERF burrow_refresh ", _burrow_path(dug))
 	# **And with ten garlic braids hung** (task 0228): their areas are part of
 	# the entry costs every field is swept against.
 	var garlic := _with_garlic(night)
@@ -401,6 +408,32 @@ func _lure_path(state: Dictionary) -> int:
 		mine["grid_version"] = int(mine["grid_version"]) + 1
 		Pathing.refresh(mine)
 		Pathing.field(mine, &"lure")
+	return int(round(float(Time.get_ticks_usec() - started) / float(REPEATS)))
+
+
+## **The worst case with every other wall of its line a fence** (task 0250),
+## in reading order: the walls and fences the digger's case is measured on.
+func _with_fences(night: Dictionary) -> Dictionary:
+	var state: Dictionary = night.duplicate(true)
+	var walls := Farm.cells_with(state, &"wall")
+	var hp := int((GameData.DEFENCES[&"fence"] as Dictionary)["hp"])
+	for i in range(1, walls.size(), 2):
+		var cell: Vector2i = walls[i]
+		if Farm.remove(state, cell):
+			Farm.place(state, cell, {"id": &"fence", "hp": hp})
+	return state
+
+
+## **Microseconds per rebuild with the burrow field in it** (task 0250): the
+## fields every night walks by and the digger's, asked the way `Enemies.tick`
+## asks for it.
+func _burrow_path(state: Dictionary) -> int:
+	var mine: Dictionary = state.duplicate(true)
+	var started := Time.get_ticks_usec()
+	for _i in REPEATS:
+		mine["grid_version"] = int(mine["grid_version"]) + 1
+		Pathing.refresh(mine)
+		Pathing.field(mine, &"burrow")
 	return int(round(float(Time.get_ticks_usec() - started) / float(REPEATS)))
 
 

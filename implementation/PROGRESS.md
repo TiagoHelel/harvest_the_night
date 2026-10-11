@@ -26295,3 +26295,175 @@ assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/backlog/packs/A048-crow.md,
 implementation/prompts/0249-crow.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0249/, docs/devlog/{index,index.pt_BR}.md
+
+## 0250 - The digger - done 2026-10-11
+
+What changed: autumn's tunneller, the enemy that makes a fence a different
+thing from a wall. On open ground a digger walks as a walker does. A fence,
+a barricade or the electric fence it goes under rather than biting: while it
+is under one nothing that hits reaches it, and the barrier loses nothing. A
+wall or sandbags stop it, and those it gnaws through. A cheap fence line is
+no longer the answer to everything.
+
+No night sends one yet. Like the spitter, the rat and the crow, it waits for
+the season's waves (0059's `NO_NIGHT_YET`).
+
+### The rules (`src/core/`)
+
+**`ENEMIES.digger`**, with levers:
+- `burrows`; hp 35, armour 1, 16 ticks a tile (the runner's 9 stays the
+  fastest), 6 to the house, $5, 1 bone;
+- not lured: it follows its own field, and a lure's field would walk it
+  round the fences it goes under.
+
+It sits inside the tank's bounds (0051) and under every boss (0058).
+
+**Every barrier says `burrowable`** (a defence with a `path_cost`), and
+`check_defences` refuses one that does not. The decisions are in the next
+section.
+
+**The burrow field**, a fifth row of 0218's `Pathing.FIELDS`:
+- seeded at the house. Its costs are the walker's priced map with each
+  burrowable barrier's own `path_cost`, at its level, taken off its cell:
+  the ground under it, and any garlic, is what it costs. That is derived
+  in `_costs_by` from the priced map, so `_through` and `_entry_costs` are
+  untouched;
+- **built when asked for** (not `eager`), the first time a digger steps at
+  a `grid_version`, so a night without one never builds it;
+- **its keys are not a new game's.** The lure's are (0224), but "never
+  built" is tested here as "not there". `State.MADE_WHEN_ASKED` names
+  them, so `reconcile` keeps them in a save that has them instead of
+  dropping them as unknown;
+- `Pathing.burrowable(id)` and `burrowable_at(state, cell)`.
+
+**The walk** (`Enemies._walk`): a `burrows` kind steps by the burrow field.
+Onto a burrowable barrier it goes on, with no `_gnaw`. A wall it gnaws and
+the house it bites as a walker does (`_gnaw`, `_bite`). The field holds
+0049's rule: the tests' digger never stands on a cell twice.
+
+**`Enemies.underground(state, id)`:** a burrower on a burrowable barrier's
+cell. **`Enemies.in_reach(state, id, up)`:** not underground, and not in the
+air unless `up`. Everything that hits asks it now, in place of 0249's
+`airborne`:
+- `Towers._acquire`, `_pierce_line`, `_burn_cone`, and a splash landing
+  (`_land_at`);
+- a mine's blast (`Traps`);
+- the dog (`Ability.dog_target`) and a flare's burst (`_flare`).
+
+### Decided: what it goes under, and what reaches it there
+
+| Barrier | Burrowable | Why |
+|---|---|---|
+| Fence | yes | posts and rails over open ground (the prompt) |
+| Barricade | yes | thrown down on the ground (the prompt) |
+| Electric fence (0230) | yes | a fence for all its wire. What never bites it never shocks it, so the wire is no answer to a digger |
+| Wall | no | "only a real wall stops it": footings in the ground. 0231's hardwood wall is the wall's level row and inherits it |
+| Sandbag wall (0231) | no | the bags fill the trench it would dig: the cheaper wall a digger stops at |
+
+- **Under a barrier nothing that hits reaches it:** no tower, cone, line,
+  splash, mine blast, flare or dog. The barrier takes nothing either: it
+  never bites what it goes under.
+- **The farm bell's peal still stuns it** under there, the one power that
+  works on it there. The peal goes through the ground.
+- **On open ground it is a walker for everything.** The answer to a digger
+  is a wall, or guns covering the ground on the far side of the fence.
+
+### The view (`src/ui/`)
+
+- **A049's stand-ins** (`PlaceholderArt`), until 0263: the walker tinted
+  soil-brown (`DIGGER_TINT`) for the master, the walk, the attack, the
+  death and the forecast head.
+- **The mound, drawn in code** by the new `DiggerArt` through 0120's road:
+  three frames on 64x48 standing on (32,44). A low heap 17 wide and 6 tall
+  with clods trailing east, its crest heaving west.
+- **`WorldView`:**
+  - `posed_off_the_rules`: under a barrier a digger is `digger_mound_0..2`,
+    on its own 0.125 s clock;
+  - no shadow while it is under;
+  - `drawn_enemy` answers for the mound.
+- **The words:** `Names` has `ENEMY_DIGGER`, `Describe` `DESC_BURROWS`
+  ("digs under fences"), and `Sfx` borrows the breaker's voice until 0284.
+- **A049's table is final**, with how the game plays it.
+
+### Found
+
+- **The first scenes missed the fence.** Laid north-south five cells from
+  the digger, the fence was walked past at its end, because the digger's
+  road home never crossed that line; another take had it through before the
+  shutter. The scene now lays the fence across the digger's own burrow road,
+  seven steps out, and ticks until it is under.
+- **A mound in mid soil disappeared at night** (the first drawing). Its body
+  is the light end of the soil ramp now, under an `ink_soft` top edge, with
+  a `bone` crest.
+- **The test's first fence stood on a field plot**, where nothing is built.
+  The cases find open ground with `_open_square`.
+- **The perf case first ran on the worst case's wall line alone:** no fence
+  in it, nothing to go under. It turns every other wall into a fence now (29
+  of the 59), as the prompt's "walls and fences" asks.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. No digger walks in the determinism night,
+  so no burrow field is built, and every hit asks `in_reach` of walkers that
+  are never underground.
+- **DATA 3398662868 -> 1095207733:** the digger's row and every barrier's
+  `burrowable`.
+
+Verify: **PASS**, 60 of 60 in 1001 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 17983 asserts, `headless_v1` 2645, `input_check` 1264 cases, `input_v1` 732 (111 s).
+- **perf:** a night tick 1703 us, the swarm's 5630, a path rebuild 11436, 15913 with the decoys and 11727 with the garlic.
+- **The digger's rebuild** (`burrow_refresh`) is a new line: 16794 us of the 33333, on 30 walls and 29 fences - the eager fields and the burrow sweep. The baseline was accepted with it (`perf.py --accept`).
+- **`swarm_towers` 1457 -> 1584** is this task's real cost in the tick: every candidate asks `in_reach`, which looks its kind up for `burrows` even for a tower that hits flying. The rest moved within the noise between runs (night_tick 1648 -> 1671, path_refresh 11302 -> 11925, swarm_enemies 3317 -> 3662 after runs of 3405 and 3416). A day tick of 115 in the first accept was measured again at 77.
+
+**Tests:**
+- **`_task_0250_digger` (headless_v1):**
+  - the row: it burrows, it is slower than the runner, inside the tank's
+    bounds, and no boss;
+  - every barrier says `burrowable` (the fence, the barricade and the wire
+    yes, the wall and the sandbags no), and `check_defences` refuses one
+    that does not;
+  - a night of walkers never builds the burrow field: none of its keys;
+  - **the ring of fences** is a column of them across the whole farm, every
+    buildable cell, three steps in from the east spawn (51 fences at x 65).
+    The digger is home in 409 ticks with no fence a hit point the worse. It
+    was 16 ticks under, a gun tower two cells off never picked it there, and
+    it never stood on a cell twice;
+  - **the same column in walls** it gnaws through (one wall, its 120), home
+    in 733 ticks. That the walls stop it shows the column closes its way;
+  - in the burrow field a fence costs the ground under it and a wall its
+    price, and a save keeps the field (`reconcile` notes nothing);
+  - under a fence no shell's splash, mine blast or dog reaches it, and the
+    fence takes nothing. The bell stuns it;
+  - its name, `DESC_BURROWS`, the voice;
+  - the view: the mound under a fence and the walk on open ground. The
+    drawing is on A049's canvas: row 43, centred, 14-18 wide and 5-7 tall,
+    a trail of 8 at most, every frame its own.
+- **Old groups touched:** `NO_NIGHT_YET` gains the digger, and headless_check
+  counts 108 scenes.
+- **Perf:** `perf_check` measures `burrow_refresh` on the worst case with
+  fences in its wall line (`_with_fences`), and `perf.py` budgets it with
+  the path rebuilds.
+
+**Looked at** (`python tools/shot.py 0250 digger --fhd`):
+- **`digger`, Autumn 2's night:** a north-south fence east of the house,
+  laid across the digger's road seven steps from where it set out. It is
+  six cells long, with a shrub where the seventh would stand, and all six
+  are at their 30 hit points at the shutter. The digger is under it at (43, 27): a
+  low mound of soil with a pale crest beside the posts, the posts drawn
+  across it, and no body or shadow above it. It reads as something moving
+  under the ground beside a fence, not as a rock.
+- **What the takes found:**
+  - **the first** had the fence off the digger's road, so the digger walked
+    past its end;
+  - **another** had the digger through the fence before the shutter;
+  - **the first mound** was mid soil, and the night took it down to
+    nothing. The scene's fence is on the digger's own road now, and the
+    mound is light under a dark edge.
+
+Files: src/core/{ability,enemies,game_data,pathing,state,towers,traps}.gd,
+src/ui/{digger_art,placeholder_art,world_view,names,describe,sfx}.gd,
+src/tools/{headless_check,headless_v1,perf_check,shot}.gd,
+assets/locale/strings.csv, tools/{perf.py,perf_baseline.txt,determinism_data_hash.txt},
+implementation/backlog/packs/A049-digger.md,
+implementation/prompts/0250-digger.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0250/, docs/devlog/{index,index.pt_BR}.md

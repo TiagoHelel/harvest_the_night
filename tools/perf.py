@@ -189,6 +189,7 @@ def main():
                          ("swarm_tick", TICK_BUDGET_US),
                          ("path_refresh", PATH_BUDGET_US),
                          ("lure_refresh", PATH_BUDGET_US),
+                         ("burrow_refresh", PATH_BUDGET_US),
                          ("garlic_refresh", PATH_BUDGET_US)]:
         if timings.get(name, 0) > budget:
             bad.append("%s is %dus and the budget is %d"

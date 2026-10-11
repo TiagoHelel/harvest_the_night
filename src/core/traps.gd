@@ -140,8 +140,8 @@ static func _detonate(state: Dictionary, cell: Vector2i,
 		var apart := Grid.chebyshev(cell, at_cell)
 		if apart > radius:
 			continue
-		# Nor does its blast reach the air (task 0249).
-		if Enemies.airborne(state, other):
+		# Nor does its blast reach the air (task 0249), or under a fence (0250).
+		if not Enemies.in_reach(state, other, false):
 			continue
 		var share := 100 - (100 - edge) * apart / radius
 		Combat.hit(state, other, maxi(damage * share / 100, 1), kind)

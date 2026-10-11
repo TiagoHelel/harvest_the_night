@@ -310,8 +310,8 @@ static func dog_target(state: Dictionary, cell: Vector2i) -> int:
 		if at.x < 0 or Grid.chebyshev(cell, at) > radius:
 			continue
 		# **It cannot reach the air** (task 0249): a crow it can bite is a
-		# crow on the field.
-		if Enemies.airborne(state, id):
+		# crow on the field - nor under a fence (task 0250).
+		if not Enemies.in_reach(state, id, false):
 			continue
 		var far := [Grid.chebyshev(cell, at), Grid.manhattan(cell, at)]
 		if int(far[0]) < int(best_far[0]) or (int(far[0]) == int(best_far[0]) and int(far[1]) < int(best_far[1])):
@@ -388,6 +388,10 @@ static func _flare(state: Dictionary, centre: Vector2i) -> void:
 	for id in Entities.ids(state):
 		var at := Entities.cell_of(state, id)
 		if at.x < 0 or Grid.chebyshev(centre, at) > radius:
+			continue
+		# A flare's burst reaches the air (task 0249), never under a fence
+		# (task 0250).
+		if Enemies.underground(state, id):
 			continue
 		# **Slowed before it is hit.** A flare that killed something and then
 		# tried to slow the corpse would be reading a dictionary that is no

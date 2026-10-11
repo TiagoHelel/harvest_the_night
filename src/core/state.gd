@@ -182,7 +182,7 @@ static func reconcile(state: Dictionary) -> Array:
 			state[key] = fresh[key]
 			notes.append("filled in '%s', which this save predates" % key)
 	for key in _sorted(state):
-		if not fresh.has(key):
+		if not fresh.has(key) and not MADE_WHEN_ASKED.has(key):
 			state.erase(key)
 			notes.append("dropped '%s', which this build no longer has" % key)
 
@@ -240,6 +240,14 @@ static func _sorted(from: Dictionary) -> Array:
 		keys.append(key)
 	keys.sort()
 	return keys
+
+
+## **Keys made when asked for, never by a new game** (task 0250): the burrow
+## field, built by the first digger that asks for it. `reconcile()` neither
+## fills them in nor drops them - a save from a night with a digger keeps its
+## field, and one without has none - and a night with no digger never folds
+## them into SIM.
+const MADE_WHEN_ASKED: Array = ["flow_burrow", "burrow_cost", "burrow_version"]
 
 
 ## The keys the hash does not look at.

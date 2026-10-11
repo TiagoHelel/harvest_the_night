@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 83
+const GROUPS := 84
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -162,6 +162,7 @@ func _run() -> void:
 	_task_0247_spitter()
 	_task_0248_rats()
 	_task_0249_crow()
+	_task_0250_digger()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -10064,6 +10065,169 @@ func _task_0249_crow() -> void:
 		"the crow is drawn on A048's canvas: grounded on row 21, flying clear of it, every frame its own, the fall settling at 8 at most, the head on A011's box",
 		"%s %s head %s" % [str(off), str(tall), str(head_used)])
 	_completed += 1
+
+
+## 0250 - the digger. It reaches the house through a column of fences across
+## the farm without a fence losing a hit point - under them, where no tower
+## can see it and no step goes back - and a column of walls makes it gnaw. The
+## burrow field is never built on a night without one, and a save keeps it.
+func _task_0250_digger() -> void:
+	var row: Dictionary = GameData.ENEMIES[&"digger"]
+	var tank: Dictionary = GameData.ENEMIES[&"tank"]
+	var runner := int((GameData.ENEMIES[&"runner"] as Dictionary)["ticks_per_tile"])
+	expect(bool(row["burrows"]) and int(row["ticks_per_tile"]) > runner and int(row["hp"]) < int(tank["hp"])
+		and int(row.get("armour", 0)) < int(tank["armour"]) and int(row["ticks_per_tile"]) < int(tank["ticks_per_tile"])
+		and not Combat.is_boss(&"digger") and GameData.check_enemies(GameData.ENEMIES).is_empty(),
+		"a digger burrows, slower than the runner and inside the tank's bounds", str(row))
+	var undecided: Array = []
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var entry: Dictionary = GameData.DEFENCES[id]
+		if int(entry.get("path_cost", 0)) > 0 and not entry.has("burrowable"):
+			undecided.append(id)
+	var untold := GameData.DEFENCES.duplicate(true)
+	(untold[&"fence"] as Dictionary).erase("burrowable")
+	var under: Array = []
+	for id in [&"fence", &"barricade", &"electric_fence", &"wall", &"sandbag_wall"]:
+		if Pathing.burrowable(id):
+			under.append(id)
+	expect(undecided.is_empty() and _says(GameData.check_defences(untold), "never says whether a digger goes under it")
+		and under == [&"fence", &"barricade", &"electric_fence"],
+		"every barrier says whether a digger goes under it - the fence, the barricade and the wire yes, the wall and the sandbags no - and check_defences refuses one that does not",
+		"%s; under %s" % [str(undecided), str(under)])
+
+	# **No digger, no burrow field**: a night of walkers never builds it.
+	var plain := _powers_night(25001)
+	Entities.spawn(plain, &"walker", Enemies.spawn_cells(plain, 0)[0])
+	Sim.advance(plain, 300)
+	expect(not plain.has("flow_burrow") and not plain.has("burrow_cost") and not plain.has("burrow_version"),
+		"a night without a digger never builds the burrow field")
+
+	# **Under a column of fences**: home, no fence a hit point the worse, out
+	# of every tower's sight while it is under one, and never a step back.
+	var fenced := _digger_column(25000, &"fence")
+	expect(bool(fenced["home"]) and int(fenced["lost"]) == 0 and int(fenced["under"]) > 0
+		and int(fenced["seen_under"]) == 0 and bool(fenced["onward"]),
+		"a digger reaches the house through a column of fences across the farm, under them - no fence a hit point the worse, no tower picking it while it is down there, no step back",
+		str(fenced))
+	var walled := _digger_column(25000, &"wall")
+	expect(bool(walled["home"]) and int(walled["lost"]) > 0 and int(walled["under"]) == 0,
+		"a column of walls it gnaws through, as a walker does", str(walled))
+
+	# **The burrow field's costs**: a fence costs the ground under it, a wall
+	# its price; and a save keeps the field it was built with.
+	var priced := _powers_night(25002)
+	var post := _open_square(priced, 3, &"wall")
+	var post_wall := post + Vector2i(2, 0)
+	Farm.place(priced, post, {"id": &"fence", "hp": 30})
+	Farm.place(priced, post_wall, {"id": &"wall", "hp": 120})
+	var dug := Pathing.field(priced, &"burrow")
+	var costs: PackedInt32Array = priced["burrow_cost"]
+	var ground := Farm.cost_of_terrain(Farm.terrain_at(priced, post))
+	var wall_ground := Farm.cost_of_terrain(Farm.terrain_at(priced, post_wall))
+	var kept := State.copy(priced)
+	var notes := State.reconcile(kept)
+	expect(dug.size() == Grid.CELLS and int(costs[Grid.index(post)]) == ground
+		and int(costs[Grid.index(post_wall)]) == wall_ground + int((GameData.DEFENCES[&"wall"] as Dictionary)["path_cost"])
+		and notes.is_empty() and kept.has("flow_burrow"),
+		"in the burrow field a fence costs the ground under it and a wall its price, and a save keeps the field", str(notes))
+
+	# **Nothing that hits reaches it under a fence**: a shell's splash, a mine's
+	# blast, the dog; the bell's peal does.
+	var hidden := _powers_night(25003)
+	(hidden["tech_owned"] as Array).append_array([&"a farm bell"])
+	var gate := _open_square(hidden, 3, &"wall")
+	Farm.place(hidden, gate, {"id": &"fence", "hp": 30})
+	var mole := Entities.spawn(hidden, &"digger", gate)
+	var whole := int(Entities.get_one(hidden, mole)["hp"])
+	Towers.land_at_for_test(hidden, Building.entry_of(&"mortar"), gate)
+	Farm.place(hidden, gate + Vector2i(1, 0), {"id": &"mine", "hp": 1})
+	Traps.detonate_for_test(hidden, gate + Vector2i(1, 0))
+	var bitten := Ability.dog_target(hidden, gate)
+	var rung := Ability.use(hidden, Ability.FARM_BELL, gate)
+	expect(Enemies.underground(hidden, mole) and int(Entities.get_one(hidden, mole)["hp"]) == whole and bitten == 0
+		and int(Farm.occupant(hidden, gate).get("hp", 0)) == 30 and rung and Enemies.is_stunned(hidden, mole),
+		"under a fence no shell, mine or dog reaches it and the fence takes nothing - the bell's peal does")
+
+	# **The words and the voice.**
+	expect(Names.of(&"digger") == I18n.t(&"ENEMY_DIGGER") and Describe.enemy(&"digger").contains(I18n.t(&"DESC_BURROWS"))
+		and Sfx.ENEMY_SOUNDS.get(&"digger", &"") == &"sfx/groan_breaker",
+		"it has its name, a tooltip line that it digs, and the breaker's voice until its own")
+
+	# **The view**: under a fence its mound, on open ground its walk; the
+	# mound drawn in code on A049's canvas - feet on row 43, centred, 14-18
+	# wide and 5-7 tall with a trail of at most 8 behind, every frame its own.
+	var down := WorldView.posed_off_the_rules(hidden, Entities.get_one(hidden, mole))
+	var up := WorldView.posed_off_the_rules(hidden, {"id": 99, "kind": &"digger", "pos": [0, 0]})
+	var mounds := {}
+	var off: Array = []
+	for i in 3:
+		var path := WorldView.ENEMY_DIR + "digger_mound_%d.png" % i
+		var drawing := WorldView.drawn_enemy(path)
+		var image := drawing.get_image() if drawing != null else null
+		if image == null:
+			off.append(path)
+			continue
+		mounds[image.get_data()] = true
+		var heap := Rect2i()
+		for y in image.get_height():
+			for x in range(0, 41):
+				if image.get_pixel(x, y).a > 0.0:
+					heap = heap.expand(Vector2i(x, y)) if heap.has_area() or heap.position != Vector2i.ZERO else Rect2i(x, y, 1, 1)
+		var used := image.get_used_rect()
+		if image.get_size() != Vector2i(64, 48) or used.end.y != 44 or used.end.x - 41 > 8 \
+				or absi((heap.position.x + heap.end.x) / 2 - 32) > 1 or heap.size.x + 1 < 14 or heap.size.x + 1 > 18 \
+				or heap.size.y + 1 < 5 or heap.size.y + 1 > 7:
+			off.append("%s heap %s used %s" % [path, heap, used])
+	expect(String(down).begins_with("digger_mound_") and String(up).begins_with("digger_walk_")
+		and off.is_empty() and mounds.size() == 3,
+		"under a fence it is drawn as its mound and on open ground walking; the mound sits on A049's canvas, every frame its own",
+		"%s %s %s" % [down, up, str(off)])
+	_completed += 1
+
+
+## **A digger against a column of `with_what` across the farm** (task 0250),
+## three cells in from the east spawn's road, every buildable cell of it: home
+## or not, the hit points the column lost, the ticks it spent under ground,
+## how often a gun tower beside it picked it there, and whether every step
+## went on to a cell it had not stood on.
+func _digger_column(seed_value: int, with_what: StringName) -> Dictionary:
+	var state := _powers_night(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var at := spawn
+	for _i in 3:
+		at = Pathing.step_from(state, at)
+	var hp := int((GameData.DEFENCES[with_what] as Dictionary)["hp"])
+	var cells: Array = []
+	for y in Grid.HEIGHT:
+		var cell := Vector2i(at.x, y)
+		if Farm.buildable(state, cell):
+			Farm.place(state, cell, {"id": with_what, "hp": hp})
+			cells.append(cell)
+	Pathing.refresh(state)
+	var before := int(state["house_hp"])
+	var id := Entities.spawn(state, &"digger", spawn)
+	var under := 0
+	var seen := 0
+	var onward := true
+	var trail: Array = [Entities.cell_of(state, id)]
+	for _t in 6000:
+		Sim.advance(state, 1)
+		if not Entities.alive(state, id):
+			break
+		var here := Entities.cell_of(state, id)
+		if here != trail.back():
+			onward = onward and not trail.has(here)
+			trail.append(here)
+		if Enemies.underground(state, id):
+			under += 1
+			if Towers.acquire_for(state, here + Vector2i(2, 0), GameData.DEFENCES[&"gun_tower"]) == id:
+				seen += 1
+	var left := 0
+	for cell in cells:
+		left += int(Farm.occupant(state, cell as Vector2i).get("hp", 0))
+	return {"home": int(state["house_hp"]) < before, "lost": cells.size() * hp - left,
+		"under": under, "seen_under": seen, "onward": onward, "cells": cells.size()}
 
 
 ## A crop on `cell` (task 0249): tilled, sown with `crop`, nothing grown yet.

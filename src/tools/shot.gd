@@ -147,6 +147,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
+	["digger", "a digger under a fence: Autumn 2's night, a fence laid across a digger's road home over open ground east of the house, and the digger under it by the shutter - a mound of soil beneath the rails, no body above, the fence untouched", ""],
 	["crow", "crows on the field: Autumn 2's night, the starter field sown, a crow landed on it and pecking a crop, and another flying in from the south over a run of wall towards the next one - lifted over its shadow, which lies on the ground under the wall", ""],
 	["rats", "rats in clusters: Summer 2's night, three clusters of six come over open ground south-east of the house towards it - each a crowd of small grey bodies, ears and tails, not a smear", ""],
 	["spitter", "a spitter working on a tower line: Summer 2's night, three towers in a row across open ground south-east of the house - a flamethrower each end, a gun tower between - and three spitters come up from the south, standing off at four tiles and spitting: a glob just landed on the line, another in the air", ""],
@@ -798,6 +799,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"spitter": _set_spitter(state)
 		"rats": _set_rats(state)
 		"crow": _set_crow(state)
+		"digger": _set_digger(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1156,6 +1158,19 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				str(Entities.cell_of(state, _boss_giant)), Enemies.is_winding(state, _boss_giant),
 				str(Enemies.winding_at(state, _boss_giant)),
 				int(state["house_hp"]), (main.find_child("NightHud", true, false) as NightHud).banner_text()])
+		"digger":
+			# Until it is under the fence (task 0250), a tick at a time.
+			for _i in 300:
+				if not Entities.alive(state, _digger) or Enemies.underground(state, _digger):
+					break
+				Sim.advance(state, 1)
+			var dig_view := main.get_node("%WorldView") as WorldView
+			dig_view.cursor().place_at(_open_ground_near(state, _digger_fence + Vector2i(-5, -4)))
+			var whole := 0
+			for cell in Farm.cells_with(state, &"fence"):
+				whole += int(Farm.occupant(state, cell as Vector2i).get("hp", 0))
+			print("  digger: under the fence %s at %s, the fence at %d hit points" % [
+				Enemies.underground(state, _digger), str(Entities.cell_of(state, _digger)), whole])
 		"crow":
 			# Until the one coming in is over the wall, the other still
 			# pecking (task 0249), a tick at a time.
@@ -3196,6 +3211,38 @@ func _set_crow(state: Dictionary) -> void:
 	_crow_flying = Entities.spawn(state, &"crow", low + Vector2i(0, 9))
 	print("  crow: %d crops sown, the bottom row's east end %s, the wall at %s" % [sown.size(), str(low), str(_crow_wall)])
 	_look_at(low + Vector2i(-1, 2))
+
+
+## **A digger under a fence** (task 0250): Autumn 2's night, parked, a digger
+## on open ground east of the house and a fence seven cells long laid across
+## the road its burrow field takes it home by, seven steps on - under the
+## fence by the shutter (`_just_before_the_shutter`).
+func _set_digger(state: Dictionary) -> void:
+	_on_date(state, 2 * GameData.SEASON_DAYS + 2)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	var start := _clear_patch(state, Farm.house_centre(state) + Vector2i(12, 0), 4) + Vector2i(3, 0)
+	# Seven steps on: more than the settle walks it, so it is still coming.
+	var road: Array = [start]
+	for _i in 9:
+		road.append(Pathing.step_by(state, &"burrow", road.back() as Vector2i))
+	_digger_fence = road[7]
+	var heading: Vector2i = (road[8] as Vector2i) - (road[7] as Vector2i)
+	var across := Vector2i(0, 1) if heading.x != 0 else Vector2i(1, 0)
+	for k in range(-3, 4):
+		var at := _digger_fence + across * k
+		if Farm.buildable(state, at):
+			Farm.place(state, at, {"id": &"fence", "hp": int((GameData.DEFENCES[&"fence"] as Dictionary)["hp"])})
+	Pathing.refresh(state)
+	_digger = Entities.spawn(state, &"digger", start)
+	print("  digger: from %s, the fence across its road at %s" % [str(start), str(_digger_fence)])
+	_look_at(_digger_fence)
+
+
+## The digger `_set_digger` sent, and its fence's middle.
+var _digger := 0
+var _digger_fence := Vector2i.ZERO
 
 
 ## The crows `_set_crow` put down, and its wall's middle.
