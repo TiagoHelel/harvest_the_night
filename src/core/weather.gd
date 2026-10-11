@@ -1,0 +1,99 @@
+class_name Weather
+extends RefCounted
+
+## **The night's weather** (task 0256; the plan's "Eventos que mudam a
+## noite"): some nights are foggy and some rain, and both are known at dusk -
+## the forecast names them - so they change what the farmer builds rather than
+## punish a player for not guessing. `GameData.NIGHT_EVENTS` says how often and
+## what each does:
+##
+## - **Fog**: a tower in the dark reaches `fog_reach_penalty` tiles less,
+##   never under one; a tower on a lit cell (`Light.is_lit`) does not - the
+##   searchlight cancels it (`Towers.reach_of`).
+## - **Rain**: fire - a `DAMAGE_FIRE` hit and a burn's tick - deals
+##   `rain_fire_percent` of itself (`damped`), and a hive's sting is never
+##   fire; the mud takes `rain_mud_percent` off a walker's speed, by the one
+##   rule every slow follows (`Enemies.slowed_ticks`). A flyer is over it.
+##
+## ## A function of the date, never of the run
+##
+## `event(seed, date)` is the one answer every reader takes - the forecast,
+## the towers, the walking, the fire, and later the night on screen. It is
+## rolled from a stream of the run's seed and the calendar date
+## (`Calendar.date`, which 0153's hold keeps on a boss's night until it
+## falls), mixed the way `Endless._stream_for` deals a generated night and
+## salted so it is never that night's own stream - and never `state["rng"]`,
+## so asking it a thousand times moves nothing. It keeps nothing either: no
+## State key, so a save cannot disagree with it.
+##
+## **At most one event a night**, and none on the first night of the game or
+## a calm night (`Calendar.is_calm`).
+##
+## **Asked once per system tick**: `Towers.tick`, `Enemies.tick` and
+## `Combat.tick` each ask `tonight()` once and hand the answer down, so a
+## swarm does not pay for it a body at a time.
+
+const NONE := &""
+const FOG := &"fog"
+const RAIN := &"rain"
+
+## Every event a night can roll, in the order the roll meets them - the rows
+## of `GameData.NIGHT_EVENTS`, which `check_night_events` holds to this list.
+const EVENTS: Array = [FOG, RAIN]
+
+## Mixed into the night's stream, so the weather of a night is never the wave
+## table's draw for it.
+const STREAM_SALT := 0x2545F491
+
+
+## The event of the night of `date` in a run started on `seed_value`: `FOG`,
+## `RAIN` or `NONE`.
+##
+## One draw from 0 to 99 against the season's shares, taken in `EVENTS`
+## order: a spring roll of 7 with fog at 10 is fog, one of 25 with rain at 20
+## after it is rain, and one of 30 or more is a plain night.
+static func event(seed_value: int, date: int) -> StringName:
+	if date <= 1 or Calendar.is_calm(date):
+		return NONE
+	var season := Calendar.season_id(date)
+	var rng := Rng.create(Endless._stream_for(seed_value, date) ^ STREAM_SALT)
+	var roll := Rng.int_between(rng, 0, 99)
+	var below := 0
+	for kind in EVENTS:
+		var row: Dictionary = GameData.NIGHT_EVENTS.get(kind, {})
+		below += int((row.get("weights", {}) as Dictionary).get(season, 0))
+		if roll < below:
+			return kind
+	return NONE
+
+
+## Tonight's event: the one for today's date (`Calendar.date`), which is the
+## night the build step opens on.
+static func tonight(state: Dictionary) -> StringName:
+	return event(int(state["seed"]), Calendar.date(state))
+
+
+## How many tiles a tower in the dark loses to tonight's weather: the fog's
+## `fog_reach_penalty`, nothing on any other night.
+static func reach_penalty(weather: StringName) -> int:
+	if weather != FOG:
+		return 0
+	return int((GameData.NIGHT_EVENTS[FOG] as Dictionary)["fog_reach_penalty"])
+
+
+## **What a hit deals in tonight's weather**: fire in the rain - a
+## `DAMAGE_FIRE` hit, or a burn's tick - `rain_fire_percent` of itself, never
+## under one; anything else, and any hit on another night, all of itself. A
+## hive's sting is `DAMAGE_STING`, never fire.
+static func damped(amount: int, type: StringName, weather: StringName) -> int:
+	if weather != RAIN or type != GameData.DAMAGE_FIRE or amount <= 0:
+		return amount
+	return maxi(amount * int((GameData.NIGHT_EVENTS[RAIN] as Dictionary)["rain_fire_percent"]) / 100, 1)
+
+
+## The share of a walker's speed tonight's mud takes off, in percent: the
+## rain's `rain_mud_percent`, nothing on any other night.
+static func mud_percent(weather: StringName) -> int:
+	if weather != RAIN:
+		return 0
+	return int((GameData.NIGHT_EVENTS[RAIN] as Dictionary)["rain_mud_percent"])

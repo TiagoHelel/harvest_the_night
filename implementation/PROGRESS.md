@@ -27304,3 +27304,180 @@ assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/backlog/packs/A054-winter-lord.md,
 implementation/prompts/0255-winter-lord.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0255/, docs/devlog/{index,index.pt_BR}.md
+
+## 0256 - Fog and rain - done 2026-10-11
+
+What changed: nights are not all alike. Some are foggy: a tower in the dark
+reaches a tile less and one in light does not. Some rain: fire burns at half
+strength and the mud slows every walker. Both are known at dusk - the
+forecast names the night's weather with a mark and a word - so they change
+what the farmer builds rather than punish a player for not guessing. Rules
+only: the fog and the rain on screen are 0258's.
+
+### The rules (`src/core/`)
+
+**`Weather`** (`src/core/weather.gd`, new: `Events` is already the log):
+- `Weather.event(seed, date)` is the one answer every reader takes: `FOG`,
+  `RAIN` or `NONE`. It is keyed on the calendar date, which 0153's hold
+  keeps on a boss's night, not on `day`.
+- **One roll**, 0-99, from `Rng.create(Endless._stream_for(seed, date) ^
+  STREAM_SALT)` - salted so it is never the wave table's stream, and never
+  `state["rng"]`. It is held against the season's shares in `EVENTS` order:
+  at most one event a night.
+- None on date 1 and none on a calm night (`Calendar.is_calm`).
+- `tonight(state)` asks it for `Calendar.date`. No State key, none named
+  `moon_phase`: nothing is kept, so a save cannot disagree with it.
+- Pure helpers for what each does: `reach_penalty`, `damped` (fire's share),
+  `mud_percent`.
+
+**`GameData.NIGHT_EVENTS`**, a row per event:
+- per-season `weights` (percent, `# LEVER`): fog 10/10/20/20 and rain
+  20/15/15/0 for spring, summer, autumn and winter;
+- the fog's `fog_reach_penalty` 1;
+- the rain's `rain_fire_percent` 50 and `rain_mud_percent` 20.
+
+The table and `NIGHT_EVENT_LEVERS`, the levers' ranges, are in `digest()`.
+
+**`check_night_events`**, in `validate()`, refuses:
+- an event `Weather` cannot play;
+- a season without a share, or a share of something that is no season;
+- a share outside 0-100, and a season's shares over 100;
+- a lever missing or outside its range (1-2, 25-90, 10-50).
+
+**Fog, in `Towers`**:
+- `reach_of(state, entry, cell)` asks tonight's weather. Every shape reads
+  `_reach_of(..., weather)` with the answer the tick asked once.
+- A lit cell (`Light.is_lit`) still reaches `LIGHT_REACH_BONUS` further, and
+  the fog does not touch it: the searchlight cancels it.
+- In the dark, the reach is `fog_reach_penalty` less, never under one.
+- `_acquire` takes the weather. `acquire_for`, `acquire_nearby_for` and
+  `target_of` ask it once each, as do the cone's and the bolt's test seams.
+
+**Rain on fire**, `Weather.damped(amount, type, weather)`:
+- a `DAMAGE_FIRE` hit deals `rain_fire_percent` of itself, floored and
+  never under one. The flame's cone of 3 deals 1, its burn of 2 a second
+  deals 1;
+- it is applied where each shape works out its damage, once a shot: the
+  cone, the bolt, and a projectile of fire if a tower ever fires one;
+- and in `Combat._tick_burning` for each burn tick;
+- a hive's sting is `DAMAGE_STING` and is never damped.
+
+**The mud, in `Enemies`**: `Enemies.slowed_ticks(base, flared, garlic, mud)`
+is now the one written rule for every slow on a walker. The flare's, the
+garlic's and the mud's: the slowest of those on it, never two at once.
+`_walk` calls it. A flyer goes through `_fly`, which the mud never reaches.
+
+**Asked once per system tick**:
+- `Towers.tick` asks after its quiet-tick return;
+- `Enemies.tick` asks after its empty-farm return and hands the mud to
+  `_walk`;
+- `Combat` asks in `_tick_burning`, only while something burns.
+
+**`Forecast.of`** fills 0158's `event` slot from `Weather.event`.
+
+### Decided
+
+- **The weights**:
+  - spring and summer rain more than they fog;
+  - autumn and winter fog more, the plan's example fog falling in spring;
+  - winter has no rain: its nights are cold and clear or foggy, and the
+    searchlight - winter's own - has the fog to answer.
+  - Every season's shares stay under half its nights.
+- **Fire in the rain is floored, never under one.** At 50% the cone's 3 is 1
+  and the burn's 2 is 1: the flamethrower loses about half its night, which
+  is the plan's "o fogo enfraquece".
+- **The mud slows a walker's walk, not a charge's roll.** The Harvester
+  walking between charges is slowed. A flyer is over the mud.
+- **Combat asks only while something burns.** Its whole tick costs some 36
+  us, and a weather roll on every quiet tick would have been a share of that.
+
+### The view (`src/ui/`)
+
+- **`ForecastPanel`**:
+  - the night's weather puts its mark after the night's own, at the right;
+  - and says itself in words in the cool colour: `FCAST_FOG` (FOG /
+    NEBLINA) and `FCAST_RAIN` (RAIN / CHUVA), width 142, beside 0158's
+    rows (`EVENT_WORDS`);
+  - `marks()` lists what it shows, for the tests.
+- **A055's marks through 0120's road** until 0269:
+  - `icon_fog`, `hud_fog`, `icon_rain` and `hud_rain` are registered in
+    `PlaceholderArt` as drawn;
+  - `WeatherArt` (`src/ui/weather_art.gd`, new) draws them from the palette:
+    three staggered bands of mist, a grey cloud with three drops falling to
+    the lower left;
+  - `CalendarMark` draws a drawn mark through it, outside A010's `MARKS`.
+- The 10x10 cuts are registered and drawn, but nothing shows one yet: the
+  forecast's mark is the 16x16. The night HUD's strip, beside the moon and
+  the boss, is where one would go, and no task asks for it yet.
+
+### Found
+
+- **0158's forecast group asserted "no event yet"** on date 3. With seed
+  1580 that date rains now. It asserts the night's own weather instead.
+- **`Towers._fire` had two lines run together**: the projectile's `type`,
+  with three tabs in the middle of the line where a continuation used to be.
+  GDScript reads it, so it was harmless. It is rewritten with the type
+  worked out first, because the rain needs it. The same join is still on
+  the `shape` line below it and on `_advance_projectiles`' ballistic test.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. The determinism night is Spring 1, which
+  never has weather.
+- **DATA 612138885 -> 417880566:** the new table and its levers' ranges.
+
+Verify: **PASS**, 60 of 60 in 1053 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 18110 asserts, `headless_v1` 2704, `input_check` 1269 cases, `input_v1` 735 (115 s - five short of the script limit, and still the suite closest to it).
+- **perf:** a night tick 1782 us, the swarm's 5860, a path rebuild 11548, 16478 with the decoys and 11243 with the garlic. The baseline did not move: the weather is three rolls a busy tick, and the mud one more comparison a walker.
+
+**Tests:**
+- **`_task_0256_fog_rain` (headless_v1), the rules:**
+  - every refusal of `check_night_events`; the real table passes and is in
+    the digest;
+  - over seeds 0-49 and dates 1-56, pure calls: a night's weather is the
+    same however often asked, and Spring 1 and the calm nights have none;
+  - each season's share is printed and within five points of its weight
+    (the widest is autumn's rain, 12.5% against 15);
+  - the forecast names the same event;
+  - a thousand asks leave the hash alone, and a hundred draws from the run's
+    stream leave the night foggy. No State key.
+- **The same group, against a clear twin** - the same farm on a night of the
+  same season with no weather:
+  - in fog a gun tower in the dark reaches one tile less, never under one,
+    and one on the lit porch as far as on a clear night;
+  - at the clear night's reach the gun's look, its crowd's squares, the
+    flame's cone and the crossbow's bolt all reach a walker, and in the fog
+    none does, while the gun still reaches one a tile nearer;
+  - through `Towers.tick` itself the gun fires on the clear night and holds
+    in the fog;
+  - in the rain the cone and the burn are damped and a sting is not;
+  - a walker crosses a tile in 25 ticks rather than 20 (64 units against
+    80), and a crow flies as far as on a dry night;
+  - the slow rule's combinations;
+  - A055's four marks drawn at their boxes, and a word for each event.
+- **Old groups touched:**
+  - 0158's event assert;
+  - `_case_0158_panel` (input_v1) takes the run's first foggy and rainy
+    nights, and a boss night with weather when the year has one, into its
+    every-line-fits loop in both languages, and asserts their marks and
+    words (734 -> 735 cases);
+  - headless_check counts 114 scenes.
+
+**Looked at** (`python tools/shot.py 0256 forecast_fog --fhd`, and with `--pt_BR`):
+- **`forecast_fog`, Spring 11 at 18:36:** the first night of the shots' run
+  that `Weather` makes foggy - found through it, never forced. The forecast
+  reads TONIGHT, SPRING 11, from the EAST, 6 WAVES, then FOG in the cool
+  blue, above the four heads and their counts. At the panel's top right is
+  the fog's mark: three staggered bands of mist, pale on top and dark
+  beneath, clear of the title and the date.
+- **In Portuguese:** ESTA NOITE, PRIMAVERA 11, pelo LESTE, 6 ONDAS,
+  NEBLINA. Every line fits and the date stays clear of the mark.
+
+Files: src/core/weather.gd (new, with its .uid),
+src/core/{game_data,towers,combat,enemies,forecast,light}.gd,
+src/ui/weather_art.gd (new, with its .uid),
+src/ui/{calendar_mark,forecast_panel,placeholder_art}.gd,
+src/tools/{headless_v1,input_v1,headless_check,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/prompts/0256-fog-and-rain.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0256/, docs/devlog/{index,index.pt_BR}.md

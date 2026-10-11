@@ -2235,6 +2235,21 @@ func _case_0157_routes() -> void:
 ## step, gone once START is pressed; every line inside it, in both languages,
 ## for the kinds of night a year has; and the night strip naming the date
 ## beside the night, its widest clear of the wave counter.
+## This run's first foggy and first rainy night of the year, and its first
+## boss night with weather if it has one (task 0256): `{event or &"boss": date}`.
+func _weathered_dates(seed_value: int) -> Dictionary:
+	var out := {}
+	for date in range(2, Calendar.year_days() + 1):
+		var tonight := Weather.event(seed_value, date)
+		if tonight == Weather.NONE:
+			continue
+		if not out.has(tonight):
+			out[tonight] = date
+		if Calendar.is_boss_night(date) and not out.has(&"boss"):
+			out[&"boss"] = date
+	return out
+
+
 func _case_0158_panel() -> void:
 	await open_scene(MAIN_SCENE)
 	var driver: SimDriver = require_control("SimDriver")
@@ -2259,9 +2274,12 @@ func _case_0158_panel() -> void:
 		"at 18:00 the forecast is up, for today's Full Moon", str(panel.shown()))
 
 	# **Every line inside the panel**, in both languages: plain, Full Moon,
-	# boss and calm nights from all four seasons.
+	# boss and calm nights from all four seasons - and since task 0256 this
+	# run's first foggy and first rainy night, and a boss night with weather
+	# when its year has one: three marks at the right.
 	var bad: Array = []
-	for date in [3, 7, 14, 15, 21, 28, 35, 42, 43, 49, 52, 56]:
+	var weathered := _weathered_dates(int(state["seed"]))
+	for date in [3, 7, 14, 15, 21, 28, 35, 42, 43, 49, 52, 56] + weathered.values():
 		state["day"] = date
 		state["nights_won"] = date - 1
 		for locale in ["en", "pt_BR"]:
@@ -2272,6 +2290,21 @@ func _case_0158_panel() -> void:
 	I18n.use("en")
 	expect(bad.is_empty(), "every line of every forecast fits its panel, in both languages",
 		str(bad.slice(0, 4)))
+	# **The weather on it** (task 0256): the first foggy night's mark beside
+	# the night's own and FOG in words; the first rainy night's, RAIN.
+	var told: Array = []
+	for kind in [Weather.FOG, Weather.RAIN]:
+		if not weathered.has(kind):
+			told.append("no %s in the year" % kind)
+			continue
+		state["day"] = int(weathered[kind])
+		state["nights_won"] = int(state["day"]) - 1
+		await frames(2)
+		if (StringName(panel.shown().get("event", &"")) != kind or not panel.marks().has(kind)
+				or not panel.texts().has(I18n.t(ForecastPanel.EVENT_WORDS[kind]))):
+			told.append("%s on %d: %s %s" % [kind, int(state["day"]), str(panel.marks()), str(panel.texts())])
+	expect(told.is_empty(), "a foggy night's forecast shows its mark and FOG, a rainy night's its mark and RAIN",
+		str(told))
 
 	# **In the build step**: Winter 14, to bed at 18:00.
 	state["day"] = 4 * GameData.SEASON_DAYS

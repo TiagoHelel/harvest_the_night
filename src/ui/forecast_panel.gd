@@ -9,14 +9,14 @@ extends Control
 ## so it can only be as wrong as the night is. From the top:
 ##
 ## - the season's mark, TONIGHT and the date, with the night's marks at the
-##   right: a Full Moon, a boss, a calm night (A010's art since task 0161);
+##   right: a Full Moon, a boss, a calm night (A010's art since task 0161),
+##   and the night's weather (task 0256; A055's, drawn in code until 0269);
 ## - the sides in words - from the EAST, or from every side;
-## - the waves, the Full Moon and the boss in words;
+## - the waves, the Full Moon, the boss and the weather in words;
 ## - one head and count per kind, in the order they arrive (A011's heads
 ##   since task 0162: exact crops of each enemy's own walk frame).
 ##
-## A calm night says so and nothing else. 0256's events have a slot in the
-## forecast and nothing here until then.
+## A calm night says so and nothing else - and has no weather (`Weather`).
 ##
 ## **It holds no game state.** The forecast is asked again only when the run,
 ## the date or the language changes - `Waves.night_of` builds a generated
@@ -31,6 +31,9 @@ const LINE := 10.0
 const HEAD := 16.0
 ## Between one head-and-count and the next.
 const HEAD_GAP := 6.0
+
+## **The night's weather in words** (task 0256), by `Weather` event.
+const EVENT_WORDS := {&"fog": &"FCAST_FOG", &"rain": &"FCAST_RAIN"}
 
 var _state: Dictionary = {}
 var _built_for := ""
@@ -107,6 +110,15 @@ func shown() -> Dictionary:
 	return _forecast
 
 
+## The night's marks it shows, rightmost first: `full_moon`, `boss_night`,
+## `calm_night` and the weather's - for `input_v1` and the shots.
+func marks() -> Array:
+	var out: Array = []
+	for one in _marks:
+		out.append(one.mark)
+	return out
+
+
 ## Every line of words on it, in order - for the width checks.
 func texts() -> Array:
 	var out: Array = [_title.text, _date.text]
@@ -177,6 +189,9 @@ func _build() -> void:
 		night_marks.append(&"boss_night")
 	if bool(f["calm"]):
 		night_marks.append(&"calm_night")
+	# **The night's weather** (task 0256), after the night's own marks.
+	if EVENT_WORDS.has(StringName(f["event"])):
+		night_marks.append(StringName(f["event"]))
 	var x := WIDTH - PAD
 	for which in night_marks:
 		var one := CalendarMark.new()
@@ -206,6 +221,8 @@ func _build() -> void:
 		if StringName(f["boss"]) != &"":
 			y = _line("Boss", I18n.f(&"FCAST_BOSS",
 				[Names.of(StringName(f["boss"])).to_upper()]), y, UiKit.BAD)
+		if EVENT_WORDS.has(StringName(f["event"])):
+			y = _line("Event", I18n.t(EVENT_WORDS[StringName(f["event"])]), y, UiKit.COOL)
 		y = _lay_heads(f["kinds"], y + 2.0)
 	size = Vector2(WIDTH, y + PAD)
 	_back.size = size

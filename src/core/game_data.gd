@@ -110,6 +110,39 @@ const SUMMON_OFFSETS: Array = [
 ## defended, so no night money, materials or technology.
 const CALM_NIGHT_GIFT: Dictionary = {WOOD: 20, STONE: 20, FOOD: 10}  # LEVER: units each, 0-60
 
+## **The night's weather** (task 0256; `Weather`): what share of each
+## season's nights are foggy and what share rain - percent, rolled once a
+## night from the run's seed and the date, so the forecast knows it at dusk -
+## and what each does. At most one a night, so a season's shares add up to at
+## most 100; never on the first night of the game or a calm one.
+##
+## - **Fog**: a tower in the dark reaches `fog_reach_penalty` tiles less,
+##   never under one; one on a lit cell (`Light.is_lit`) does not.
+## - **Rain**: fire - a `DAMAGE_FIRE` hit and a burn's tick - deals
+##   `rain_fire_percent` of itself, never under one, and the mud takes
+##   `rain_mud_percent` off a walker's speed. A flyer is over it.
+##
+## Spring and summer rain more than they fog; autumn and winter fog more,
+## and winter's nights are cold and clear or foggy - the searchlight, winter's
+## own, has the fog to answer.
+const NIGHT_EVENTS: Dictionary = {
+	&"fog": {
+		"weights": {&"spring": 10, &"summer": 10, &"autumn": 20, &"winter": 20},  # LEVER: percent of a season's nights, 0-100
+		"fog_reach_penalty": 1,         # LEVER: tiles off a tower in the dark, 1-2
+	},
+	&"rain": {
+		"weights": {&"spring": 20, &"summer": 15, &"autumn": 15, &"winter": 0},  # LEVER: percent of a season's nights, 0-100
+		"rain_fire_percent": 50,        # LEVER: percent of fire's damage in the rain, 25-90
+		"rain_mud_percent": 20,         # LEVER: percent of a walker's speed the mud takes, 10-50
+	},
+}
+
+## The range each night event's levers are held to (`check_night_events`).
+const NIGHT_EVENT_LEVERS: Dictionary = {
+	&"fog": {"fog_reach_penalty": [1, 2]},
+	&"rain": {"rain_fire_percent": [25, 90], "rain_mud_percent": [10, 50]},
+}
+
 ## **The short build step after passing out** (task 0128). A farmer still up
 ## at 02:00 collapses where he stands and the night begins anyway, with this
 ## much time to build: staying up late is allowed, and it costs preparation,
@@ -3711,6 +3744,7 @@ static func validate() -> Array:
 		PASS_OUT_WARNING_MINUTE, DAY_END_MINUTE))
 	errors.append_array(check_calendar(SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
 		FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES))
+	errors.append_array(check_night_events(NIGHT_EVENTS))
 	errors.append_array(check_no_growth_seasons(NO_GROWTH_SEASONS))
 	errors.append_array(check_gift(CALM_NIGHT_GIFT))
 	if TILLED_GRASS_FADES_DAYS < 1 or TILLED_GRASS_FADES_DAYS > 7:
@@ -3815,6 +3849,49 @@ static func check_calendar(seasons: Array, season_days: int,
 	if season_days < 2:
 		errors.append("a season of %d days has no first day and last day apart"
 			% season_days)
+	return errors
+
+
+## **The night's weather holds together** (task 0256): every event is one
+## `Weather` can play, with a share of every season's nights from 0 to 100 -
+## and at most 100 between them, since a night has one event at most - and
+## its levers in `NIGHT_EVENT_LEVERS`' ranges. Takes the table as an
+## argument, like `check_calendar()`, so a check can hand it a bad one.
+static func check_night_events(events: Dictionary, seasons: Array = SEASONS) -> Array:
+	var errors: Array = []
+	var total := {}
+	for kind in sorted_names(events.keys()):
+		var name := StringName(kind)
+		var row: Dictionary = events[kind]
+		if not Weather.EVENTS.has(name):
+			errors.append("the night event '%s' is not one Weather can play" % name)
+		var weights: Dictionary = row.get("weights", {})
+		for season in seasons:
+			if not weights.has(season):
+				errors.append("the night event '%s' has no share of %s's nights" % [name, season])
+				continue
+			var weight := int(weights[season])
+			if weight < 0 or weight > 100:
+				errors.append("the night event '%s' falls on %d%% of %s's nights, outside 0-100"
+					% [name, weight, season])
+			total[season] = int(total.get(season, 0)) + weight
+		for season in sorted_names(weights.keys()):
+			if not seasons.has(StringName(season)):
+				errors.append("the night event '%s' has a share of '%s', which is no season"
+					% [name, season])
+		var levers: Dictionary = NIGHT_EVENT_LEVERS.get(name, {})
+		for lever in sorted_names(levers.keys()):
+			var key := String(lever)
+			var span: Array = levers[key]
+			if not row.has(key):
+				errors.append("the night event '%s' has no %s" % [name, key])
+			elif int(row[key]) < int(span[0]) or int(row[key]) > int(span[1]):
+				errors.append("the night event '%s' has a %s of %d, outside %d-%d"
+					% [name, key, int(row[key]), int(span[0]), int(span[1])])
+	for season in seasons:
+		if int(total.get(season, 0)) > 100:
+			errors.append("%s's night events add up to %d%% of its nights: a night has one at most"
+				% [season, int(total[season])])
 	return errors
 
 
@@ -5778,6 +5855,8 @@ static func digest() -> int:
 		"calendar": [SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
 			FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES],
 		"calm": CALM_NIGHT_GIFT,
+		# **The night's weather** (task 0256).
+		"night_events": [NIGHT_EVENTS, NIGHT_EVENT_LEVERS],
 		"house_tiers": HOUSE_TIERS,
 		"day_economy": [DAY_TARGETS, DAY_FARM],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,

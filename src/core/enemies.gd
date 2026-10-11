@@ -312,10 +312,13 @@ static func tick(state: Dictionary) -> void:
 	# **The lure, asked once a tick** (task 0224), and nothing more than
 	# whether it is empty while no decoy stands.
 	var pull := _pull(state)
+	# **The mud, asked once a tick** (task 0256): the share of a walker's
+	# speed tonight's rain takes off, nothing on any other night.
+	var mud := Weather.mud_percent(Weather.tonight(state))
 	# Sorted by id, so two zombies arriving on the same tick always land in the
 	# same order - which decides which of them the last hit point goes to.
 	for id in Entities.ids(state):
-		_walk(state, id, pull)
+		_walk(state, id, pull, mud)
 
 
 ## **What a decoy pulls with**, as the walking reads it (task 0224): the lure
@@ -361,7 +364,7 @@ static func _reached_bait(state: Dictionary, cell: Vector2i) -> void:
 		Farm.remove(state, cell)
 
 
-static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
+static func _walk(state: Dictionary, id: int, pull: Dictionary, mud: int = 0) -> void:
 	var one := Entities.get_one(state, id)
 	if one.is_empty():
 		return
@@ -418,20 +421,16 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	if int(data.get("spit_range", 0)) > 0 and _stood_and_spat(state, id, data, on):
 		return
 
-	var base := maxi(int(data["ticks_per_tile"]), 1)
-	var per_tile := base
 	# **Flared things walk slowly**, and the count runs down whether they are
 	# walking or chewing - five seconds is five seconds.
 	var slow := int(one.get("slow", 0))
 	if slow > 0:
 		one["slow"] = slow - 1
-		per_tile = Ability.slowed_ticks(base)
-	# **So do the ones walking through garlic** (task 0228): the area's share
-	# off their speed, one array read for the cell they stand on. With a
-	# flare too, the stronger of the two - never both.
-	var garlic := Pathing.repelled(state, on)
-	if garlic > 0:
-		per_tile = maxi(per_tile, Ability.slowed_ticks(base, 100 - garlic))
+	# **So do the ones walking through garlic** (task 0228) - the area's share
+	# off their speed, one array read for the cell they stand on - **and
+	# through the rain's mud** (task 0256). One rule for the three.
+	var per_tile := slowed_ticks(maxi(int(data["ticks_per_tile"]), 1), slow > 0,
+		Pathing.repelled(state, on), mud)
 
 	# The remainder is carried, so the speed is exactly what the lever says
 	# rather than whatever integer division left behind.
@@ -531,6 +530,23 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	# **Arrived at a bait** (task 0225): the lure's 0 under a lured foot.
 	elif lured and landed != here and _lure_away(state, pull, landed) == 0:
 		_reached_bait(state, landed)
+
+
+## **Every slow on a walker, by one rule** (tasks 0131, 0228 and 0256): the
+## flare's, the garlic's and the rain's mud - the strongest of those it is in,
+## never two at once, so a flared walker in garlic in the mud walks at the
+## slowest of the three and not at their product. `garlic` and `mud` are the
+## share of speed each takes off, in percent, 0 for none; the answer is the
+## ticks a tile takes, `base` when nothing slows it.
+static func slowed_ticks(base: int, flared: bool, garlic: int, mud: int) -> int:
+	var per_tile := base
+	if flared:
+		per_tile = maxi(per_tile, Ability.slowed_ticks(base))
+	if garlic > 0:
+		per_tile = maxi(per_tile, Ability.slowed_ticks(base, 100 - garlic))
+	if mud > 0:
+		per_tile = maxi(per_tile, Ability.slowed_ticks(base, 100 - mud))
+	return per_tile
 
 
 ## **A spitter's turn** (task 0247). Its spit's wait runs down whatever it

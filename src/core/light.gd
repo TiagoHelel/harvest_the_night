@@ -3,7 +3,7 @@ extends RefCounted
 
 ## **What is lit at night** (task 0229; the plan's section 5): the one place
 ## light is a rule. The searchlight's whole job, and what the wraith (0252)
-## and the fog (0256) will read; `lighting.gd` may draw from it, never the
+## and the fog (0256) read; `lighting.gd` may draw from it, never the
 ## other way round.
 ##
 ## A cell is lit when it is:

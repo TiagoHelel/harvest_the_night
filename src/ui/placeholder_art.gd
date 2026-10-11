@@ -482,6 +482,12 @@ const ART := {
 	&"winter_lord_death": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 5, "seconds": 0.12, "loop": false, "stand_in": &"enemies/giant_death", "stand_in_frames": 5, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
 	&"head_winter_lord": {"pack": "A054", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/head_giant", "tint": WINTER_LORD_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
 	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
+	# A055's night weather (task 0256): fog and rain in the forecast's event
+	# slot, drawn in code (`WeatherArt`) at both boxes until 0269.
+	&"icon_fog": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_fog": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_rain": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_rain": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
 	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn
 	# low, growing with each level, until 0238; the pumpkin in the air drawn

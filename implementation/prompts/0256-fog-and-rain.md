@@ -1,7 +1,7 @@
 # 0256 - Fog and rain
 
 - **Phase:** 14 - Enemies and bosses
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0158, 0229
 - **Likely files:** src/core/weather.gd (new), src/core/forecast.gd, src/core/game_data.gd, src/core/towers.gd, src/core/combat.gd, src/core/enemies.gd, src/ui/forecast_panel.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd
 

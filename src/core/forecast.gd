@@ -12,9 +12,9 @@ extends RefCounted
 ##
 ## **Never the run's stream.** It reads `state["seed"]` and never
 ## `state["rng"]`: asking the forecast a thousand times must leave the run
-## exactly where it was. Nothing in it is random today; 0256's events, which
-## will be, come from a fresh `(seed, date)` stream the way
-## `Endless._stream_for` deals a generated night.
+## exactly where it was. The one thing in it that is random, the night's
+## weather (task 0256), is `Weather.event`'s: a fresh `(seed, date)` stream
+## the way `Endless._stream_for` deals a generated night.
 
 
 ## The forecast for one date of a run started on `seed_value`:
@@ -25,7 +25,8 @@ extends RefCounted
 ## - `sides`: `GameData.SPAWN_SIDES` ids (`&"east"`...), in `SPAWNS` order;
 ## - `waves`: how many; `kinds`: `[kind, count]` pairs in the order each kind
 ##   first arrives; `count`: everything the night sends;
-## - `event`: an empty slot (`&""`) that 0256 fills from `(seed, date)`.
+## - `event`: the night's weather (task 0256), `Weather.event` - `&"fog"`,
+##   `&"rain"`, or `&""` for none.
 static func of(seed_value: int, date: int) -> Dictionary:
 	var one := Waves.night_of(date, seed_value)
 	var rows: Array = one.get("waves", [])
@@ -54,7 +55,7 @@ static func of(seed_value: int, date: int) -> Dictionary:
 		"waves": rows.size(),
 		"kinds": kinds,
 		"count": Waves.size_in(one),
-		"event": &"",
+		"event": Weather.event(seed_value, date),
 	}
 
 

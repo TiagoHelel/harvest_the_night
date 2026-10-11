@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 89
+const GROUPS := 90
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -168,6 +168,7 @@ func _run() -> void:
 	_task_0253_harvester()
 	_task_0254_scarecrow_king()
 	_task_0255_winter_lord()
+	_task_0256_fog_rain()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -3081,8 +3082,8 @@ func _task_0158_forecast() -> void:
 				came, total, named])
 		expect(int(said["date"]) == date and said["season"] == Calendar.season_id(date)
 			and int(said["day_of_season"]) == Calendar.day_of_season(date)
-			and said["event"] == &"",
-			"date %d: its date, season and day, and no event yet" % date, str(said))
+			and StringName(said["event"]) == Weather.event(1580, date),
+			"date %d: its date, season and day, and the night's weather (task 0256)" % date, str(said))
 	var moon := Forecast.of(1580, GameData.SEASON_DAYS + 7)
 	var calm := Forecast.of(1580, GameData.SEASON_DAYS + 1)
 	expect(bool(moon["full_moon"]) and not bool(moon["calm"]) and int(moon["waves"]) > 0
@@ -11076,6 +11077,299 @@ func _task_0255_winter_lord() -> void:
 		and Sfx.voice_of(&"winter_lord") == &"sfx/roar_giant",
 		"Winter 14, the year's last night, is the Winter Lord's; it has its name, its intro, a tooltip line that it freezes the towers, and the Giant's roar until its own")
 	_completed += 1
+
+
+## 0256 - fog and rain. A night's weather is a function of the seed and the
+## date: the same however often it is asked and whatever the run's stream
+## did, none on Spring 1 or a calm night, each season's share within five
+## points of its weight, and the forecast names it. In fog a tower in the
+## dark reaches a tile less - by every shape, and through the towers' own
+## tick - and one in light does not; in the rain fire is damped and a sting
+## is not, and a walker takes the mud's slower count per tile while a flyer
+## keeps its own.
+func _task_0256_fog_rain() -> void:
+	# **The table, and its checks.**
+	var events: Dictionary = GameData.NIGHT_EVENTS
+	var spring_fog := int(((events[Weather.FOG] as Dictionary)["weights"] as Dictionary)[&"spring"])
+	var unrefused: Array = []
+	for broken in [
+			[[Weather.FOG, "weights", &"spring"], 101, "falls on 101% of spring's nights, outside 0-100"],
+			[[Weather.RAIN, "weights", &"summer"], -1, "outside 0-100"],
+			[[Weather.RAIN, "weights", &"spring"], 101 - spring_fog, "add up to 101% of its nights"],
+			[[Weather.FOG, "fog_reach_penalty"], 0, "fog_reach_penalty of 0, outside 1-2"],
+			[[Weather.RAIN, "rain_fire_percent"], 100, "rain_fire_percent of 100, outside 25-90"],
+			[[Weather.RAIN, "rain_mud_percent"], 0, "rain_mud_percent of 0, outside 10-50"],
+			[[&"hail", "weights"], {}, "'hail' is not one Weather can play"]]:
+		if not _says(GameData.check_night_events(_night_events_with(broken[0], broken[1])), broken[2]):
+			unrefused.append(broken[2])
+	var unseasoned := events.duplicate(true)
+	((unseasoned[Weather.RAIN] as Dictionary)["weights"] as Dictionary).erase(&"winter")
+	((unseasoned[Weather.RAIN] as Dictionary)["weights"] as Dictionary)[&"monsoon"] = 5
+	var unseasoned_errors := GameData.check_night_events(unseasoned)
+	expect(unrefused.is_empty() and _says(unseasoned_errors, "no share of winter's nights")
+		and _says(unseasoned_errors, "'monsoon', which is no season")
+		and GameData.check_night_events(events).is_empty() and GameData.validate().is_empty()
+		and Weather.EVENTS == [Weather.FOG, Weather.RAIN]
+		and GameData.sorted_names(events.keys()) == GameData.sorted_names(Weather.EVENTS)
+		and FileAccess.get_file_as_string("res://src/core/game_data.gd").contains(
+			"\"night_events\": [NIGHT_EVENTS, NIGHT_EVENT_LEVERS]"),
+		"a share outside 0-100, a season's shares over 100, a lever out of its range, an event Weather cannot play, a season missing and one that is none are all refused; the real table passes and is in the data's digest",
+		str(unrefused))
+
+	# **The roll**: steady, none on Spring 1 or a calm night, and each
+	# season's share near its weight - pure calls, no simulation.
+	var nights := {}
+	var fell := {}
+	var unsteady: Array = []
+	var on_quiet: Array = []
+	for seed_value in 50:
+		for date in range(1, Calendar.year_days() + 1):
+			var one := Weather.event(seed_value, date)
+			if Weather.event(seed_value, date) != one:
+				unsteady.append([seed_value, date])
+			if date == 1 or Calendar.is_calm(date):
+				if one != Weather.NONE:
+					on_quiet.append([seed_value, date, one])
+				continue
+			var season := Calendar.season_id(date)
+			nights[season] = int(nights.get(season, 0)) + 1
+			if one != Weather.NONE:
+				var tally: Dictionary = fell.get(season, {})
+				tally[one] = int(tally.get(one, 0)) + 1
+				fell[season] = tally
+	var off: Array = []
+	var shares := PackedStringArray()
+	for season in GameData.SEASONS:
+		for kind in Weather.EVENTS:
+			var weight := int(((events[kind] as Dictionary)["weights"] as Dictionary)[season])
+			var count := int((fell.get(season, {}) as Dictionary).get(kind, 0))
+			var share := 100.0 * count / maxi(int(nights.get(season, 0)), 1)
+			shares.append("%s %s %.1f%% of %d (weight %d)" % [season, kind, share, int(nights.get(season, 0)), weight])
+			if absf(share - weight) > 5.0:
+				off.append("%s %s %.1f against %d" % [season, kind, share, weight])
+	print("  the weather over seeds 0-49, Spring 1 to Winter 14: " + ", ".join(shares))
+	expect(unsteady.is_empty() and on_quiet.is_empty(),
+		"a night's weather is the same however often it is asked, and Spring 1 and the calm nights have none",
+		"%s %s" % [str(unsteady.slice(0, 3)), str(on_quiet.slice(0, 3))])
+	expect(off.is_empty(), "each season's share of fog and of rain is within five points of its weight", str(off))
+	var unnamed: Array = []
+	for seed_value in 5:
+		for date in range(1, Calendar.year_days() + 1):
+			if StringName(Forecast.of(seed_value, date)["event"]) != Weather.event(seed_value, date):
+				unnamed.append([seed_value, date])
+	expect(unnamed.is_empty(), "and the forecast names the night's own weather", str(unnamed.slice(0, 3)))
+
+	# **Never the run's stream, and nothing kept.**
+	var fog_at := _weather_date(Weather.FOG)
+	var foggy := _parked_on(int(fog_at[0]), int(fog_at[1]))
+	var keys := foggy.keys().size()
+	var hash_before := State.hash_of(foggy)
+	for _i in 1000:
+		Weather.tonight(foggy)
+	var unmoved := State.hash_of(foggy) == hash_before
+	for _i in 100:
+		Rng.next_u32(foggy["rng"])
+	expect(unmoved and Weather.tonight(foggy) == Weather.FOG
+		and Weather.event(int(fog_at[0]), int(fog_at[1])) == Weather.FOG
+		and StringName(Forecast.tonight(foggy)["event"]) == Weather.FOG and foggy.keys().size() == keys
+		and not foggy.has("weather") and not foggy.has("moon_phase"),
+		"a thousand asks leave the state's hash alone, and after a hundred draws from the run's stream the night is still foggy, in the forecast too - and no State key holds it",
+		"%s, unmoved %s" % [str(fog_at), unmoved])
+
+	# **Fog: a tile less in the dark, none less in light.** Its clear twin is
+	# the same farm on a night of the same season with no weather.
+	var clear := _parked_on(int(fog_at[0]), _clear_date(int(fog_at[0]), int(fog_at[1])))
+	var penalty := int((events[Weather.FOG] as Dictionary)["fog_reach_penalty"])
+	var gun: Dictionary = GameData.DEFENCES[&"gun_tower"]
+	var flame: Dictionary = GameData.DEFENCES[&"flame_tower"]
+	var bow: Dictionary = GameData.DEFENCES[&"auto_crossbow"]
+	var porch := House.porch(foggy)
+	var dark := _a_dark_cell(foggy, porch, 10)
+	var plain := Towers.reach_of(clear, gun, dark)
+	var short := Towers.reach_of(foggy, gun, dark)
+	var lit := Towers.reach_of(foggy, gun, porch)
+	expect(Weather.tonight(clear) == Weather.NONE and plain == int(gun["range"]) and short == plain - penalty
+		and lit == Towers.reach_of(clear, gun, porch) and lit == plain + GameData.LIGHT_REACH_BONUS
+		and Towers.reach_of(foggy, {"range": 1}, dark) == 1,
+		"in fog a gun tower in the dark reaches %d less, never under one tile, and one on the lit porch as far as on a clear night" % penalty,
+		"%d clear, %d in fog, %d lit" % [plain, short, lit])
+	# Every shape: a walker at the clear night's reach of each is reached on
+	# the clear night and not in the fog - the gun's look, the crowd's
+	# squares, the flame's cone and the crossbow's bolt.
+	var full := int((GameData.ENEMIES[&"walker"] as Dictionary)["hp"])
+	var reached: Array = []
+	for farm in [clear, foggy]:
+		var walker := Entities.spawn(farm, &"walker", dark + Vector2i(plain, 0))
+		var looked := Towers.acquire_for(farm, dark, gun) == walker
+		var squared := Towers.acquire_nearby_for(farm, dark, gun) == walker
+		Enemies.withdraw(farm)
+		var nearer := Entities.spawn(farm, &"walker", dark + Vector2i(plain - penalty, 0))
+		var near_seen := Towers.acquire_for(farm, dark, gun) == nearer
+		Enemies.withdraw(farm)
+		var burnt := Entities.spawn(farm, &"walker", dark + Vector2i(int(flame["range"]), 0))
+		Towers.burn_cone_for_test(farm, dark, flame, burnt, true)
+		var cone := int(Entities.get_one(farm, burnt)["hp"]) < full
+		Enemies.withdraw(farm)
+		var shot := Entities.spawn(farm, &"walker", dark + Vector2i(int(bow["range"]), 0))
+		Towers.pierce_line_for_test(farm, dark, bow, shot, true)
+		var bolt := int(Entities.get_one(farm, shot)["hp"]) < full
+		Enemies.withdraw(farm)
+		reached.append([looked, squared, near_seen, cone, bolt])
+	expect(reached == [[true, true, true, true, true], [false, false, true, false, false]],
+		"at the clear night's reach the gun, its crowd's squares, the flame's cone and the crossbow's bolt all reach a walker; in the fog none does, and the gun reaches one a tile nearer",
+		str(reached))
+	# And through the towers' own tick, which asks the weather once.
+	var fired: Array = []
+	for farm in [clear, foggy]:
+		Farm.place(farm, dark, {"id": &"gun_tower", "hp": int(gun["hp"])})
+		Entities.spawn(farm, &"walker", dark + Vector2i(plain, 0))
+		var before := int(farm["shots_fired"])
+		Towers.tick(farm)
+		fired.append(int(farm["shots_fired"]) - before)
+		Enemies.withdraw(farm)
+	expect(fired == [1, 0], "and in the towers' own tick: on the clear night the gun fires at it, in the fog it holds", str(fired))
+
+	# **Rain: fire damped, never a sting.**
+	var rain_at := _weather_date(Weather.RAIN)
+	var rainy := _parked_on(int(rain_at[0]), int(rain_at[1]))
+	var dry := _parked_on(int(rain_at[0]), _clear_date(int(rain_at[0]), int(rain_at[1])))
+	var fire_percent := int((events[Weather.RAIN] as Dictionary)["rain_fire_percent"])
+	var open := _a_dark_cell(rainy, Farm.house_centre(rainy), 12)
+	var lost: Array = []
+	for farm in [dry, rainy]:
+		var burnt := Entities.spawn(farm, &"walker", open + Vector2i(2, 0))
+		Towers.burn_cone_for_test(farm, open, flame, burnt, true)
+		var hp := int(Entities.get_one(farm, burnt)["hp"])
+		for _t in GameData.BURN_EVERY_TICKS:
+			Combat.tick(farm)
+		var by_burn := hp - int(Entities.get_one(farm, burnt)["hp"])
+		var stung := Entities.spawn(farm, &"walker", open + Vector2i(0, 3))
+		Combat.sting(farm, stung, 4, 2 * GameData.SECONDS)
+		Combat.tick(farm)
+		lost.append([full - hp, by_burn, full - int(Entities.get_one(farm, stung)["hp"])])
+		Enemies.withdraw(farm)
+	var dry_lost: Array = lost[0]
+	var wet_lost: Array = lost[1]
+	expect(Weather.tonight(rainy) == Weather.RAIN and Weather.tonight(dry) == Weather.NONE
+		and dry_lost == [int(flame["damage"]), int(flame["burn_damage"]), 4]
+		and wet_lost == [maxi(int(flame["damage"]) * fire_percent / 100, 1),
+			maxi(int(flame["burn_damage"]) * fire_percent / 100, 1), 4]
+		and int(wet_lost[0]) < int(dry_lost[0]) and int(wet_lost[1]) < int(dry_lost[1])
+		and Weather.damped(6, GameData.DAMAGE_FIRE, Weather.RAIN) == 6 * fire_percent / 100
+		and Weather.damped(1, GameData.DAMAGE_FIRE, Weather.RAIN) == 1
+		and Weather.damped(6, GameData.DAMAGE_STING, Weather.RAIN) == 6
+		and Weather.damped(6, GameData.DAMAGE_IMPACT, Weather.RAIN) == 6
+		and Weather.damped(6, GameData.DAMAGE_FIRE, Weather.FOG) == 6,
+		"in the rain the flame's cone and its burn deal %d%% of themselves, never under one, and a hive's sting all of itself" % fire_percent,
+		"dry %s, rain %s" % [str(dry_lost), str(wet_lost)])
+
+	# **The mud: a walker's slower count, a flyer's own.**
+	var mud := int((events[Weather.RAIN] as Dictionary)["rain_mud_percent"])
+	var base := int((GameData.ENEMIES[&"walker"] as Dictionary)["ticks_per_tile"])
+	var muddy := Ability.slowed_ticks(base, 100 - mud)
+	var moved: Array = []
+	for farm in [dry, rainy]:
+		var walker := Entities.spawn(farm, &"walker", open)
+		var crow := Entities.spawn(farm, &"crow", open + Vector2i(0, 4))
+		var walked := 0
+		var flown := 0
+		var at_w := Entities.position(farm, walker)
+		var at_c := Entities.position(farm, crow)
+		for _t in muddy:
+			Enemies.tick(farm)
+			var now_w := Entities.position(farm, walker)
+			var now_c := Entities.position(farm, crow)
+			walked += absi(now_w.x - at_w.x) + absi(now_w.y - at_w.y)
+			flown += absi(now_c.x - at_c.x) + absi(now_c.y - at_c.y)
+			at_w = now_w
+			at_c = now_c
+		moved.append([walked, flown])
+		Enemies.withdraw(farm)
+	print("  in %d ticks: dry, the walker %d units and the crow %d; in the rain %d and %d"
+		% [muddy, int(moved[0][0]), int(moved[0][1]), int(moved[1][0]), int(moved[1][1])])
+	expect(Weather.mud_percent(Weather.RAIN) == mud and Weather.mud_percent(Weather.FOG) == 0 and muddy > base
+		and int(moved[1][0]) == Player.SUBTILE and int(moved[0][0]) > Player.SUBTILE
+		and int(moved[1][1]) == int(moved[0][1]) and int(moved[1][1]) > 0,
+		"in the rain a walker crosses a tile in %d ticks rather than %d, and a crow flies as far as on a dry night" % [muddy, base],
+		str(moved))
+	var flare := Ability.slowed_ticks(base)
+	var garlic := 100 - int((GameData.DEFENCES[&"garlic_braid"] as Dictionary)["repel_speed_percent"])
+	var braided := Ability.slowed_ticks(base, 100 - garlic)
+	expect(Enemies.slowed_ticks(base, false, 0, 0) == base and Enemies.slowed_ticks(base, false, 0, mud) == muddy
+		and Enemies.slowed_ticks(base, true, 0, mud) == maxi(flare, muddy)
+		and Enemies.slowed_ticks(base, false, garlic, mud) == maxi(braided, muddy)
+		and Enemies.slowed_ticks(base, true, garlic, mud) == maxi(maxi(flare, braided), muddy),
+		"the mud joins the flare's and the garlic's slows by their one rule: the slowest of those on a walker, never two at once")
+
+	# **Its marks** through 0120's road until 0269: A055's fog and rain at
+	# both boxes, drawn in code; the forecast has a word for each.
+	var marks_wrong: Array = []
+	for which in Weather.EVENTS:
+		for small in [false, true]:
+			var side := CalendarMark.HUD if small else CalendarMark.ICON
+			var path := CalendarMark.file_of(which, small)
+			var mark := CalendarMark.new()
+			mark.setup(which, small)
+			var texture := mark.texture()
+			if (not PlaceholderArt.is_drawn(path)
+					or str(PlaceholderArt.art(StringName(path.get_file().get_basename())).get("pack", "")) != "A055"
+					or texture == null or texture.resource_name != path
+					or Vector2i(texture.get_size()) != Vector2i(side, side)):
+				marks_wrong.append(path.get_file())
+			mark.free()
+	expect(marks_wrong.is_empty() and not CalendarMark.MARKS.has(Weather.FOG)
+		and GameData.sorted_names(ForecastPanel.EVENT_WORDS.keys()) == GameData.sorted_names(Weather.EVENTS),
+		"fog and rain have A055's marks at 16x16 and 10x10, drawn in code until 0269, and a word each on the forecast",
+		str(marks_wrong))
+	_completed += 1
+
+
+## `GameData.NIGHT_EVENTS` with one value set at `path` - an event, then the
+## keys under it, made where missing - for a check to refuse (task 0256).
+func _night_events_with(path: Array, value: Variant) -> Dictionary:
+	var table := GameData.NIGHT_EVENTS.duplicate(true)
+	var at: Dictionary = table
+	for key in path.slice(0, path.size() - 1):
+		if not at.has(key):
+			at[key] = {}
+		at = at[key]
+	at[path.back()] = value
+	return table
+
+
+## The first `(seed, date)` from seed 25600 whose night `Weather` makes
+## `kind` - found, never forced - and not a Full Moon, so the night sends
+## nothing a test did not put there (task 0256).
+func _weather_date(kind: StringName) -> Array:
+	for seed_value in range(25600, 25800):
+		for date in range(2, Calendar.year_days() + 1):
+			if Weather.event(seed_value, date) == kind and not Calendar.is_full_moon(date):
+				return [seed_value, date]
+	return [-1, -1]
+
+
+## A night of `date`'s season with no weather in the same run - not the first
+## of the game, a calm night or a Full Moon: the clear twin a weather test
+## compares with (task 0256).
+func _clear_date(seed_value: int, date: int) -> int:
+	var first := date - Calendar.day_of_season(date) + 1
+	for day in range(first, first + GameData.SEASON_DAYS):
+		if (day > 1 and not Calendar.is_calm(day) and not Calendar.is_full_moon(day)
+				and Weather.event(seed_value, day) == Weather.NONE):
+			return day
+	return 1
+
+
+## A parked night with nobody in it on `date` of a run started on
+## `seed_value`, every night before it won (task 0256).
+func _parked_on(seed_value: int, date: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = date
+	state["nights_won"] = date - 1
+	expect(NightRoad.to_night(state), "into the night of day %d" % date)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	return state
 
 
 ## A crop on `cell` (task 0249): tilled, sown with `crop`, nothing grown yet.

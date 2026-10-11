@@ -10,6 +10,9 @@ extends Control
 ## leaf, a snowflake - and the three night marks never one another: a whole
 ## moon, a horned skull, a crescent with a star. The HUD is never relit, so a
 ## mark keeps its colours at night.
+##
+## **Or a night's weather** (task 0256): A055's `fog` and `rain`, at the same
+## two boxes, drawn in code (`WeatherArt`) until 0269 integrates the pack.
 
 ## The two boxes, in native pixels.
 const ICON := 16
@@ -33,12 +36,16 @@ func setup(which: StringName, small: bool = false) -> void:
 	var side := float(HUD if compact else ICON)
 	size = Vector2(side, side)
 	custom_minimum_size = size
-	var path := PlaceholderArt.texture_path(file_of(mark, compact))
-	_texture = load(path) if path != "" and ResourceLoader.exists(path) else null
+	var file := file_of(mark, compact)
+	if PlaceholderArt.is_drawn(file):
+		_texture = WeatherArt.texture_at(file)
+	else:
+		var path := PlaceholderArt.texture_path(file)
+		_texture = load(path) if path != "" and ResourceLoader.exists(path) else null
 	queue_redraw()
 
 
-## Where A010 delivers a mark.
+## Where A010 delivers a mark, and A055 a night's weather.
 static func file_of(which: StringName, small: bool) -> String:
 	return "res://sprites/ui/%s_%s.png" % ["hud" if small else "icon", which]
 

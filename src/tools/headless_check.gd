@@ -14659,8 +14659,9 @@ func _task_0082_shots() -> void:
 	# one out of it. A hundred and eleven since 0253: the Harvester's wind-up
 	# and the line after its charge. A hundred and twelve since 0254: the
 	# Scarecrow King mid-cast. A hundred and thirteen since 0255: the Winter
-	# Lord's aura during a cast.
-	expect(names.size() == 113,
+	# Lord's aura during a cast. A hundred and fourteen since 0256: a foggy
+	# night's forecast.
+	expect(names.size() == 114,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

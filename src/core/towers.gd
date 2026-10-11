@@ -55,6 +55,14 @@ extends RefCounted
 ## `aura_tiles` for its `freeze_ticks`: a frozen tower's reload stops counting
 ## and it does not fire. A countdown beside the chill (`frozen`), never through
 ## `Farm.touch()`, refreshed and never stacked, and thawed at dawn with it.
+##
+## ## Weather
+##
+## Tonight's weather (task 0256, `Weather`) is asked once a tick and handed to
+## every shape: in fog a tower in the dark sees `fog_reach_penalty` less,
+## never under a tile, while one in light does not (`reach_of`); in the rain a
+## shot of fire deals `rain_fire_percent` of itself (`Weather.damped`), the
+## cone's and any other.
 
 ## The side of one square of the crowd's filing, in cells. **Not a lever**:
 ## it changes how fast a tower finds its target, never which one it finds.
@@ -115,6 +123,10 @@ static func tick(state: Dictionary) -> void:
 	# arrives while the towers fire, so the filing stays true for the whole
 	# loop; one killed since is passed over, as the full scan passes it over.
 	var crowd := _crowd(state)
+	# **Tonight's weather, asked once** (task 0256): the fog every tower's
+	# reach reads and the rain on its fire, handed down to each shape rather
+	# than asked again by each.
+	var weather := Weather.tonight(state)
 	var occupants: Dictionary = state["occupants"]
 	for idx in _towers(state):
 		var tower: Dictionary = occupants[idx]
@@ -141,9 +153,9 @@ static func tick(state: Dictionary) -> void:
 		# second on the same one is a second wasted - and tops one up only
 		# when there is not.
 		var spreads := StringName(entry.get("shape", GameData.SHAPE_SINGLE)) == GameData.SHAPE_STING
-		var target := _acquire(state, cell, entry, [], crowd, spreads)
+		var target := _acquire(state, cell, entry, weather, [], crowd, spreads)
 		if target == 0 and spreads:
-			target = _acquire(state, cell, entry, [], crowd)
+			target = _acquire(state, cell, entry, weather, [], crowd)
 		if target == 0:
 			continue
 
@@ -167,22 +179,22 @@ static func tick(state: Dictionary) -> void:
 		var barrels := maxi(int(entry.get("targets", 1)), 1)
 		var taken: Array = [target]
 		while taken.size() < barrels:
-			var another := _acquire(state, cell, entry, taken, crowd, spreads)
+			var another := _acquire(state, cell, entry, weather, taken, crowd, spreads)
 			if another == 0 and spreads:
-				another = _acquire(state, cell, entry, taken, crowd)
+				another = _acquire(state, cell, entry, weather, taken, crowd)
 			if another == 0:
 				break
 			taken.append(another)
 		for at in taken:
 			match StringName(entry.get("shape", GameData.SHAPE_SINGLE)):
 				GameData.SHAPE_CONE:
-					_burn_cone(state, cell, entry, int(at), armed)
+					_burn_cone(state, cell, entry, int(at), armed, weather)
 				GameData.SHAPE_LINE:
-					_pierce_line(state, cell, entry, int(at), armed)
+					_pierce_line(state, cell, entry, int(at), armed, weather)
 				GameData.SHAPE_STING:
 					_sting(state, tower, entry, int(at), armed)
 				_:
-					_fire(state, cell, tower["id"], entry, int(at), armed)
+					_fire(state, cell, tower["id"], entry, int(at), armed, weather)
 
 		# **Asked fresh after every shot**, so a generator running dry part way
 		# through a night slows the guns from the next shot rather than from the
@@ -380,23 +392,37 @@ static func damage_of(state: Dictionary, entry: Dictionary,
 ##
 ## **And where it stands** (task 0229): a tower whose own cell is lit
 ## (`Light.is_lit`) sees `LIGHT_REACH_BONUS` further.
+##
+## **And in what weather** (task 0256): in fog a tower in the dark sees
+## `fog_reach_penalty` less, never under a tile; one in light does not - the
+## searchlight cancels the fog. Tonight's weather is asked here; the tick asks
+## it once and hands it to `_reach_of`.
 static func reach_of(state: Dictionary, entry: Dictionary, cell: Vector2i) -> int:
+	return _reach_of(state, entry, cell, Weather.tonight(state))
+
+
+## `reach_of` in a weather already asked: what every shape reads.
+static func _reach_of(state: Dictionary, entry: Dictionary, cell: Vector2i,
+		weather: StringName) -> int:
 	var reach := int(entry.get("range", 0))
 	if reach <= 0:
 		return 0
 	reach += Tech.bonus(state, "tower_range_bonus", 0)
 	if Light.is_lit(state, cell):
-		reach += GameData.LIGHT_REACH_BONUS
-	return reach
+		return reach + GameData.LIGHT_REACH_BONUS
+	return maxi(reach - Weather.reach_penalty(weather), 1)
 
 
 ## `crowd` is `_crowd()`'s filing for this tick, or empty for a look at the
 ## whole farm - which is what `acquire_for()` and `target_of()` take.
 ##
 ## `unstung` passes over everything a hive has already stung (task 0226).
+##
+## `weather` is tonight's (task 0256), asked once by whoever looks.
 static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
-		skip: Array = [], crowd: Dictionary = {}, unstung: bool = false) -> int:
-	var reach := reach_of(state, entry, from)
+		weather: StringName, skip: Array = [], crowd: Dictionary = {},
+		unstung: bool = false) -> int:
+	var reach := _reach_of(state, entry, from, weather)
 	if reach <= 0:
 		return 0
 	var minimum := int(entry.get("min_range", 0))
@@ -515,7 +541,7 @@ static func _threat_of(state: Dictionary, how: StringName, id: int,
 ## an entry and get an answer.
 static func acquire_for(state: Dictionary, from: Vector2i,
 		entry: Dictionary, skip: Array = []) -> int:
-	return _acquire(state, from, entry, skip)
+	return _acquire(state, from, entry, Weather.tonight(state), skip)
 
 
 ## The same question **asked the way `tick()` asks it**, through the crowd's
@@ -523,7 +549,7 @@ static func acquire_for(state: Dictionary, from: Vector2i,
 ## look at the whole farm.
 static func acquire_nearby_for(state: Dictionary, from: Vector2i,
 		entry: Dictionary, skip: Array = []) -> int:
-	return _acquire(state, from, entry, skip, _crowd(state))
+	return _acquire(state, from, entry, Weather.tonight(state), skip, _crowd(state))
 
 
 ## Land one shot of this declaration on this target, now.
@@ -566,7 +592,7 @@ static func target_of(state: Dictionary, cell: Vector2i) -> int:
 	var entry: Variant = GameData.DEFENCES.get(tower["id"], null)
 	if entry == null or not (entry as Dictionary).has("reload_ticks"):
 		return 0
-	return _acquire(state, cell, entry as Dictionary)
+	return _acquire(state, cell, entry as Dictionary, Weather.tonight(state))
 
 
 # --------------------------------------------------------------- projectiles
@@ -575,8 +601,11 @@ static func target_of(state: Dictionary, cell: Vector2i) -> int:
 ## the best it can with what is in the hopper: a third of the damage, plain
 ## impact, and none of what made it special - a mortar that cannot reach for
 ## powder is lobbing a rock.
+##
+## A shot of fire in the rain (task 0256) carries `Weather.damped`'s share.
 static func _fire(state: Dictionary, from: Vector2i, kind: StringName,
-		entry: Dictionary, target: int, armed: bool = true) -> void:
+		entry: Dictionary, target: int, armed: bool = true,
+		weather: StringName = Weather.NONE) -> void:
 	var tiles_per_second := float(entry.get("projectile_tiles_per_second", 12))
 	var speed := int(tiles_per_second * float(Player.SUBTILE)
 		/ float(GameData.TICK_HZ))
@@ -587,6 +616,8 @@ static func _fire(state: Dictionary, from: Vector2i, kind: StringName,
 	if aimed.x < 0:
 		aimed = from
 
+	var type := StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)) \
+		if armed else GameData.DAMAGE_IMPACT
 	var id := int(state["next_projectile_id"])
 	state["next_projectile_id"] = id + 1
 	(state["projectiles"] as Array).append({
@@ -595,8 +626,8 @@ static func _fire(state: Dictionary, from: Vector2i, kind: StringName,
 		"pos": [from.x * Player.SUBTILE + Player.SUBTILE / 2,
 				from.y * Player.SUBTILE + Player.SUBTILE / 2],
 		"target": target,
-		"damage": damage_of(state, entry, armed),
-		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)) 			if armed else GameData.DAMAGE_IMPACT,
+		"damage": Weather.damped(damage_of(state, entry, armed), type, weather),
+		"type": type,
 		"armed": armed,
 		# **The shot carries its shape**, because it lands after the tower has
 		# finished thinking about it - and, at night nine, possibly after the
@@ -686,15 +717,15 @@ static func _advance_projectiles(state: Dictionary) -> void:
 ## Integer throughout, and the same two products as the cone - the dot for "in
 ## front of the tower", the cross for "on the line rather than beside it".
 static func _pierce_line(state: Dictionary, from: Vector2i,
-		entry: Dictionary, target: int, armed: bool) -> void:
+		entry: Dictionary, target: int, armed: bool, weather: StringName) -> void:
 	var aim := Entities.cell_of(state, target) - from
 	if aim == Vector2i.ZERO:
 		return
-	var reach := reach_of(state, entry, from)
-	var damage := damage_of(state, entry, armed)
+	var reach := _reach_of(state, entry, from, weather)
+	var kind := StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT))
+	var damage := Weather.damped(damage_of(state, entry, armed), kind, weather)
 	var falloff := int(entry.get("pierce_falloff_percent", 0))
 	var most := maxi(int(entry.get("pierce", 1)), 1)
-	var kind := StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT))
 	var up := bool(entry.get("hits_flying", false))
 
 	# Everything on the line, nearest first. `Entities.ids()` is sorted, so two
@@ -738,7 +769,7 @@ static func _pierce_line(state: Dictionary, from: Vector2i,
 ## other shapes have.
 static func pierce_line_for_test(state: Dictionary, from: Vector2i,
 		entry: Dictionary, target: int, armed: bool) -> void:
-	_pierce_line(state, from, entry, target, armed)
+	_pierce_line(state, from, entry, target, armed, Weather.tonight(state))
 
 
 ## Everything in the wedge between this tower and what it is aiming at.
@@ -753,7 +784,7 @@ static func pierce_line_for_test(state: Dictionary, from: Vector2i,
 ## the tangent of the half-angle, worked out once at boot by
 ## `GameData.check_defences()` and never in here.
 static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
-		target: int, armed: bool) -> void:
+		target: int, armed: bool, weather: StringName) -> void:
 	var aim := Entities.cell_of(state, target) - from
 	if aim == Vector2i.ZERO:
 		aim = Vector2i(1, 0)
@@ -762,10 +793,12 @@ static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
 	# so with 'long barrels' the tower picked a target a tile past its own
 	# cone, spent a round and burnt nobody - and 'true sights' never reached
 	# the flame at all.
-	var reach := reach_of(state, entry, from)
+	var reach := _reach_of(state, entry, from, weather)
 	var spread := int(entry.get("cone_spread_permille", 0))
-	# A pilot light when unarmed: the weak shot of task 0035.
-	var damage := damage_of(state, entry, armed)
+	# A pilot light when unarmed: the weak shot of task 0035. **Damped in the
+	# rain** (task 0256), when it is fire.
+	var kind := StringName(entry.get("damage_type", GameData.DAMAGE_FIRE))
+	var damage := Weather.damped(damage_of(state, entry, armed), kind, weather)
 	# **The burn is not scaled by the tree.** 'true sights' makes every tower
 	# *hit* a fifth harder; the burning afterwards is the fire's own number,
 	# and at 2, 3 and 4 a fifth more rounds back to the same integer anyway.
@@ -799,8 +832,7 @@ static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
 		if not Enemies.in_reach(state, id, up):
 			continue
 
-		Combat.hit(state, id, damage,
-			StringName(entry.get("damage_type", GameData.DAMAGE_FIRE)))
+		Combat.hit(state, id, damage, kind)
 		if burn > 0 and burn_ticks > 0:
 			Combat.set_alight(state, id, burn, burn_ticks)
 
@@ -812,7 +844,7 @@ static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
 ## than build a farm and wait for a reload.
 static func burn_cone_for_test(state: Dictionary, from: Vector2i,
 		entry: Dictionary, target: int, armed: bool) -> void:
-	_burn_cone(state, from, entry, target, armed)
+	_burn_cone(state, from, entry, target, armed, Weather.tonight(state))
 
 
 ## A shot arrives. **What it does when it gets there is the shape it carries**,

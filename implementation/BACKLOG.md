@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **225 / 296 done**
+`##################......`  **226 / 296 done**
 
-0 doing / 71 todo / 0 blocked across 18 phases.
+0 doing / 70 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-71 task(s) left, the ready ones first, then what they
+70 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -562,24 +562,22 @@ The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-t
   - done when: FHD (1920x1080) captures by day and by night of the dog following the farmer and the dog called at night in the real game, opened and looked at, in `implementation/shots/0245/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0256 - Fog and rain
+### 0257 - The Blood Moon
 
-Ready to pick up.  Likely files: `src/core/weather.gd (new), src/core/forecast.gd, src/core/game_data.gd, src/core/towers.gd, src/core/combat.gd, src/core/enemies.gd, src/ui/forecast_panel.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/core/weather.gd, src/core/entities.gd, src/core/combat.gd, src/core/game_data.gd, src/core/rewards.gd, src/core/tech.gd, src/ui/forecast_panel.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
-Nights that are not all alike: some are foggy, some rain. Both are known at dusk, so they change what you build rather than punish you for not guessing.
+A rare red night from autumn on: the horde comes back stronger and pays in essence. Rare enough to be an occasion, forecast so it is never an ambush.
 
-- `Weather.event(seed, date)` in a new `src/core/weather.gd` (class name `Weather` - `Events` is already the log), keyed on the calendar date (`Calendar.date`, which 0153's hold keeps on 14), not on `day`: a fresh stream mixed like `Endless._stream_for` but salted so it is not the wave table's stream, never `state["rng"]`; at most one event a night; it returns none on date 1 and on `Calendar.is_calm(date)`; no State key, and none may be named `moon_phase`. The one function every reader calls (0270 will let a night record pin or forbid an event through it)
-- `GameData.NIGHT_EVENTS` with per-season weights (percent, `# LEVER`) for `fog` and `rain` and their levers, listed in `GameData.digest()` and checked by a new `check_night_events` in `validate()`: weights 0-100, a season's weights summing to at most 100, each lever in range
-- Fog: `Towers.reach_of` (which 0229 taught the tower's cell) loses `fog_reach_penalty` (1) down to a floor of 1, except for a tower on a lit cell (`Light.is_lit`, 0229) - the searchlight cancels it; every shape that reads reach gets the same answer
-- Rain: `DAMAGE_FIRE` hits and burn ticks deal `rain_fire_percent` (bees are not fire, even if 0226 reused `burning`), and mud slows walkers by `rain_mud_percent` in `Enemies._walk`, composed with the flare's (`Ability.slowed_ticks`) and the garlic's slows by one written rule; flyers (0249's `flies`) are not slowed
-- Ask `Weather` once per system tick (`Towers.tick`, `Enemies.tick`, `Combat.tick`), not once per body, so a swarm does not pay for it; `python tools/perf.py --report` stays inside its tolerance
-- The `event` slot 0158 left in `Forecast.of(seed, date)` is filled from `Weather.event`; `src/ui/forecast_panel.gd` shows its icon (placeholder until A055 is integrated by 0269) and `FCAST_FOG`/`FCAST_RAIN` (FOG / NEBLINA, RAIN / CHUVA, widths measured), beside 0158's `FCAST_*` rows
-- Rules only: fog and rain on screen are 0258's
-- Hashes: DATA moves (a new table); SIM should not, since the determinism night is Spring 1 - if it does, the journal says why
+- `blood_moon` joins `GameData.NIGHT_EVENTS`: weight 0 in spring and summer (refused otherwise by `check_night_events`), a small `# LEVER` weight in autumn and winter; `Weather.event` never returns it when `Calendar.is_boss_night(date)` (an elite boss is another balance problem); decide whether it may fall on `Calendar.is_full_moon(date)` and say why
+- Elites: on a Blood Moon night `Entities.spawn` (reading `Weather.event` for `Calendar.date(state)`) scales hp by `blood_moon_hp_percent` (120-200, integers) and writes `max_hp` on the elite only, so ordinary nights are untouched and 0246's `Combat.full_hp` (and any health bar that reads it) uses it
+- Extra essence through 0219's earn rules: a `blood_moon_essence` `# LEVER` in `GameData.REWARDS`, its own itemised line in `Tech.would_pay` on a won night, shown in the morning report as a `RES_*` row in both languages; `nights_paid` still stops it paying twice
+- In the forecast slot (`Forecast.of`'s `event`, `forecast_panel.gd`): `FCAST_BLOOD_MOON` (BLOOD MOON / LUA DE SANGUE) and the icon placeholder until A055 is integrated by 0269
+- `Waves.size_of` and the forecast count do not change: elites are tougher, not more
+- Hashes: DATA moves; SIM should not (`max_hp` exists only on elites)
 
-  - done when: `_task_0256_fog_rain` in `src/tools/headless_v1.gd`: the event for a (seed, date) is the same however often it is asked and whatever the run RNG did; over seeds 0-49 and dates 1-56 (pure calls, no simulation) each season's share of fog and rain is within 5 points of its weight (printed); date 1 and a calm date have none; `Forecast.of` names the same event
-  - done when: The same group: in fog a gun tower reaches one tile less unless its cell is lit; in rain a burn deals `rain_fire_percent` and a walker takes the slower count per tile
-  - done when: `python tools/shot.py 0256 forecast_fog --fhd` (a new scenario in `src/tools/shot.gd` that finds a foggy (seed, date) through `Weather.event`, never an override) shows the event in the forecast, opened and looked at
+  - done when: `_task_0257_blood_moon` in `src/tools/headless_v1.gd`: over seeds 0-49 and dates 1-56 (pure calls) no Blood Moon falls in spring, summer or on a boss night, and the autumn and winter counts are printed; on one, a walker spawns with the scaled hp and `full_hp` reads it; winning pays the extra essence, once
+  - done when: `python tools/shot.py 0257 forecast_blood_moon --fhd` (a new scenario that finds a Blood Moon (seed, date) through `Weather.event`) shows it in the forecast, opened and looked at
+  - done when: the Deliverables table of `implementation/backlog/packs/A055-event-icons.md` states the final geometry this task settled (fog, rain and Blood Moon at 16x16 and 10x10)
 
 ### 0260 - Art: the spitter
 
@@ -877,61 +875,9 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
   - done when: the same group: the 0.1 `settings.cfg` fixture loads with its language, volumes and rebind kept, every key it lacks at its `Settings.DEFAULTS` value, and its `tutorial_seen` of `true` migrated to the 0.1 step ids, so only the new steps are offered
   - done when: 1920x1080 captures of the bed line, the cursor line at night and the forecast line at dusk, in both languages (new scenarios such as `tut_bed`, `tut_cursor`, `tut_forecast`: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast --fhd` and again with `--pt_BR`), opened: each line is on its thing and nothing on screen covers it
 
-### 0257 - The Blood Moon
-
-Waits on 0256.  Likely files: `src/core/weather.gd, src/core/entities.gd, src/core/combat.gd, src/core/game_data.gd, src/core/rewards.gd, src/core/tech.gd, src/ui/forecast_panel.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
-
-A rare red night from autumn on: the horde comes back stronger and pays in essence. Rare enough to be an occasion, forecast so it is never an ambush.
-
-- `blood_moon` joins `GameData.NIGHT_EVENTS`: weight 0 in spring and summer (refused otherwise by `check_night_events`), a small `# LEVER` weight in autumn and winter; `Weather.event` never returns it when `Calendar.is_boss_night(date)` (an elite boss is another balance problem); decide whether it may fall on `Calendar.is_full_moon(date)` and say why
-- Elites: on a Blood Moon night `Entities.spawn` (reading `Weather.event` for `Calendar.date(state)`) scales hp by `blood_moon_hp_percent` (120-200, integers) and writes `max_hp` on the elite only, so ordinary nights are untouched and 0246's `Combat.full_hp` (and any health bar that reads it) uses it
-- Extra essence through 0219's earn rules: a `blood_moon_essence` `# LEVER` in `GameData.REWARDS`, its own itemised line in `Tech.would_pay` on a won night, shown in the morning report as a `RES_*` row in both languages; `nights_paid` still stops it paying twice
-- In the forecast slot (`Forecast.of`'s `event`, `forecast_panel.gd`): `FCAST_BLOOD_MOON` (BLOOD MOON / LUA DE SANGUE) and the icon placeholder until A055 is integrated by 0269
-- `Waves.size_of` and the forecast count do not change: elites are tougher, not more
-- Hashes: DATA moves; SIM should not (`max_hp` exists only on elites)
-
-  - done when: `_task_0257_blood_moon` in `src/tools/headless_v1.gd`: over seeds 0-49 and dates 1-56 (pure calls) no Blood Moon falls in spring, summer or on a boss night, and the autumn and winter counts are printed; on one, a walker spawns with the scaled hp and `full_hp` reads it; winning pays the extra essence, once
-  - done when: `python tools/shot.py 0257 forecast_blood_moon --fhd` (a new scenario that finds a Blood Moon (seed, date) through `Weather.event`) shows it in the forecast, opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A055-event-icons.md` states the final geometry this task settled (fog, rain and Blood Moon at 16x16 and 10x10)
-
-### 0285 - Music for four seasons
-
-Waits on 0282.  Likely files: `tools/gen_music.py, assets/music/, src/ui/music.gd, src/app/audio.gd, src/ui/main.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The two MVP pieces become a year: a day piece per season on the shared motif, a winter night, a boss track and the credits, each crossfading on the moment it belongs to. View only: neither hash moves.
-
-- `tools/gen_music.py` adds day pieces for summer, autumn and winter beside today's `farm`, which becomes spring (keep its id or rename it and every reader in the same pass), a winter night beside `night`, a boss track and the credits. All read `MOTIF` at the one `BPM = 75` - a crossfade between two tempos is a stumble, as the module says - and each season gets its own scale, register and density
-- Every looping piece gets the seam the module already builds (`snap()`, `wrapped()` tails) and runs longer than 15 s. The credits play once, as long as 0160's roll; they and the cues (`sting` and 0282's fanfare; 0286 adds its event stingers to the same list later) are named as not-loops rather than excused from the seam check in bulk. `Audio.play_music` loops whatever it plays (`_looping` sets the shared stream's loop mode), so the credits need a play-once road in `src/app/audio.gd`
-- `Music.piece_for` stays static and askable and gains what it now needs: the season (0149's calendar) and whether tonight is a boss night (0153). Day plays that season's piece; the build step, the night and the morning report play the night piece (the winter one in winter); a boss night plays the boss track; a menu keeps the spring piece behind `audio/music_in_menus`
-- Crossfades use the one length there is (`fade_seconds()`, the transition's): the season turns on the first morning of the new season, the boss track arrives with a boss night's build step and leaves at dawn, the credits take over on 0160's ending screen. Decide whether `layer_for`'s urgent layer plays over the boss track, and say why
-- Size: a 96 s piece is about 4.2 MB of WAV in the repository and about 0.85 MB of QOA in the pack, and `tools/release.py` holds the Web pack to `PACK_BUDGET` (3.5 MB gzipped, 2.31 MB at task 0100). Measure before and after, prefer shorter loops for the new pieces, and if the budget must move, move it on purpose with both numbers in the journal. Time matters too: `tools/verify.py` runs `gen_music.py --check`, which renders every piece (about 13 s for today's four) - put its time before and after in the journal
-- Rewrite `_task_0086_music` in `headless_check.gd` for the new `piece_for` and the new list: its seam, motif and one-tempo checks cover every looping piece
-
-  - done when: `_task_0285_season_music` in `src/tools/headless_v1.gd`: `piece_for` answers right for each season and phase, a boss night, and a menu with the setting off and on; every looping piece's `_loop_seam` ratio is at most 1.0 and its length over 15 s; every arrangement reads `MOTIF`
-  - done when: `_case_0285_season_music` in `src/tools/input_v1.gd`: a real run moved to a summer morning is playing the summer piece once the fade is over (`Audio.music_playing()`), and a boss night's build step the boss track
-  - done when: The Web pack size before and after (`python tools/release.py`, or why it could not be measured) and `python tools/gen_music.py --report` lengths and seams are in the journal
-
-### 0288 - Art: the collection book, trophies and badges
-
-Waits on 0287.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/collections_screen.gd`.
-
-The book cover, the four boss trophies and the achievement badges Codex drew replace 0287's stand-ins, so the screen a player opens before Year 2 looks like the rest of the game.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A056` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A056-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/<family>/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_<family>_art.py`, `ArtPlacement` if needed).
-- Family `ui`, no text in any of it: names, canvases and pivots exactly as A056's Deliverables table (settled by 0287) - the cover, the tab icons, a trophy per `is_boss` enemy, a badge per achievement id, the ornament. `tools/check_ui_art.py` hard-codes the 0018 resource icons (`len(plans)==15`): give the A056 set its own section and counts rather than loosening that one, and show it in `ui_art_showcase.gd`
-- Delete A056's entries from 0120's placeholder registry (`src/ui/placeholder_art.gd`) once the raster outputs land at the same paths, so `collections_screen.gd` draws the real art through the lookup it already uses and `python tools/placeholders.py` no longer lists A056; locked trophies and badges stay the same art dimmed by code
-- Set the pack to integrated: `python implementation/backlog/assets.py set A056 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass with the A056 set counted
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures of the collections screen, every tab with a full profile, opened in a run by day and by night, opened and looked at, in `implementation/shots/0288/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
 ### 0258 - Fog, rain and a red moon on screen
 
-Waits on 0256, 0257.  Likely files: `src/ui/lighting.gd, src/ui/particles.gd, src/ui/fog.gdshader (new), src/ui/world_view.gd, tools/palette.py, src/ui/palette_data.gd (generated), src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/shot.gd, src/tools/input_v1.gd`.
+Waits on 0257.  Likely files: `src/ui/lighting.gd, src/ui/particles.gd, src/ui/fog.gdshader (new), src/ui/world_view.gd, tools/palette.py, src/ui/palette_data.gd (generated), src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/shot.gd, src/tools/input_v1.gd`.
 
 Fog that looks like fog, rain you can see, a red moon that makes the farm look wrong - and none of it touches a rule.
 
@@ -947,7 +893,7 @@ Fog that looks like fog, rain you can see, a red moon that makes the farm look w
 
 ### 0259 - Every weapon has its night
 
-Waits on 0256, 0257.  Likely files: `src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md`.
+Waits on 0257.  Likely files: `src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md`.
 
 The plan's test for phases 4 and 5 turned into numbers: every weapon is the best buy somewhere, and every enemy needs a different answer. The report is what the night authors of 0270-0274 build the year from.
 
@@ -964,7 +910,7 @@ The plan's test for phases 4 and 5 turned into numbers: every weapon is the best
 
 ### 0269 - Art: fog, rain and the Blood Moon icons
 
-Waits on 0256, 0257.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/forecast_panel.gd`.
+Waits on 0257.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/forecast_panel.gd`.
 
 The three night events as Codex drew them, in the forecast slot where 0256 and 0257 left placeholders.
 
@@ -982,7 +928,7 @@ The three night events as Codex drew them, in the forecast slot where 0256 and 0
 
 ### 0270 - Fifty-six nights as data
 
-Waits on 0256, 0257.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0257.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 The year stops being ten written nights plus a curve and becomes tables a designer can read: a template per season, hand-written key nights (every introduction, every Full Moon) and a seeded generator for the nights in between. Nothing downstream of `Waves.night_of` can tell which is which, so the season tasks after this one edit data (0271 also gives `play_nights` a day range).
 
@@ -1019,23 +965,40 @@ Six new enemies and three new bosses each get a voice of their own, so a night h
   - done when: `_case_0284_boss_voices` in `src/tools/input_v1.gd`: a boss spawned in a real scene plays its voice once with no position and ducks the bed (`Audio.duck_gain()`)
   - done when: `_task_0085_night_sounds` (rewritten) passes; `python tools/gen_sfx.py --report` for every new sound is in the journal
 
-### 0286 - Fog, rain and winter wind
+### 0285 - Music for four seasons
 
-Waits on 0256, 0257, 0285.  Likely files: `tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0282.  Likely files: `tools/gen_music.py, assets/music/, src/ui/music.gd, src/app/audio.gd, src/ui/main.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-The bed under everything follows the weather and the season: fog and rain on the nights that have them, wind through the winter, the animals heard near their coop and barn, and a short stinger when an event night reaches its build step. View only: neither hash moves. (The animal calls came from 0281 and the stingers from 0284, so those fit one invocation.)
+The two MVP pieces become a year: a day piece per season on the shared motif, a winter night, a boss track and the credits, each crossfading on the moment it belongs to. View only: neither hash moves.
 
-- `tools/gen_ambience.py` writes a fog bed and a rain bed for the night, and a winter bed (wind, no birds, no crickets) for winter's day and night, looped with its `seamless()` and under `BED_PEAK` - the bed stays the quietest thing in the game
-- `Ambience.bed_for` stays static and gains the season and tonight's event: an event night's bed beats the season's, and winter's beats the ordinary day and night beds. The event is 0256's `Weather` answer for `(seed, day)` (0257 added the Blood Moon to it) - the function the forecast panel calls, never a second draw and never the view's own `RandomNumberGenerator`
-- Touches by season: winter gets its own short lists (no crickets, no songbirds), and no touch is in both a day list and a night list
-- Animals near barns, written here (moved from 0281): cluck, moo, baa and oink in `gen_ambience.py` from `gen_sfx`'s primitives (it already imports `gen_sfx`), at most `TOUCH_PEAK`, played at the coop's and the barn's cells through the existing falloff - by day while the building stands with animals of that kind in it (0183's residents), and as a sleepy murmur at night, when they sleep inside (0186). The dog is not here: its bark is 0283's power sound. Decide whether a wrecked-but-standing barn still murmurs
-- The beds change on the cue they use today (`Audio.play_bed` with the transition's length); nothing changes the bed in the middle of a night
-- Event stingers (moved from 0284): fog, rain, the Blood Moon (0257) and the Full Moon (0152) as short cues in `tools/gen_music.py` beside `sting` - `PIECES` entries, at most `STING_PEAK`, named in 0285's not-loop list - played once through `Audio.play` (the Music bus, because the file is in `assets/music/`) when a night with that event reaches its build step. The event is the same `Weather` answer the bed reads (the Full Moon is 0152's `Calendar.is_full_moon`), never decided in the view
-- Rewrite `_task_0087_ambience` in `headless_check.gd` for the new `bed_for`: every file is still asked for, every bed loops (`_loop_seam` at most 1.0) and peaks under 0.3, and the house being hit still stands far above the ducked bed
+- `tools/gen_music.py` adds day pieces for summer, autumn and winter beside today's `farm`, which becomes spring (keep its id or rename it and every reader in the same pass), a winter night beside `night`, a boss track and the credits. All read `MOTIF` at the one `BPM = 75` - a crossfade between two tempos is a stumble, as the module says - and each season gets its own scale, register and density
+- Every looping piece gets the seam the module already builds (`snap()`, `wrapped()` tails) and runs longer than 15 s. The credits play once, as long as 0160's roll; they and the cues (`sting` and 0282's fanfare; 0286 adds its event stingers to the same list later) are named as not-loops rather than excused from the seam check in bulk. `Audio.play_music` loops whatever it plays (`_looping` sets the shared stream's loop mode), so the credits need a play-once road in `src/app/audio.gd`
+- `Music.piece_for` stays static and askable and gains what it now needs: the season (0149's calendar) and whether tonight is a boss night (0153). Day plays that season's piece; the build step, the night and the morning report play the night piece (the winter one in winter); a boss night plays the boss track; a menu keeps the spring piece behind `audio/music_in_menus`
+- Crossfades use the one length there is (`fade_seconds()`, the transition's): the season turns on the first morning of the new season, the boss track arrives with a boss night's build step and leaves at dawn, the credits take over on 0160's ending screen. Decide whether `layer_for`'s urgent layer plays over the boss track, and say why
+- Size: a 96 s piece is about 4.2 MB of WAV in the repository and about 0.85 MB of QOA in the pack, and `tools/release.py` holds the Web pack to `PACK_BUDGET` (3.5 MB gzipped, 2.31 MB at task 0100). Measure before and after, prefer shorter loops for the new pieces, and if the budget must move, move it on purpose with both numbers in the journal. Time matters too: `tools/verify.py` runs `gen_music.py --check`, which renders every piece (about 13 s for today's four) - put its time before and after in the journal
+- Rewrite `_task_0086_music` in `headless_check.gd` for the new `piece_for` and the new list: its seam, motif and one-tempo checks cover every looping piece
 
-  - done when: `_task_0286_weather_ambience` in `src/tools/headless_v1.gd`: `bed_for` answers for every season, phase and event; each new bed loops and stays under the old peak; no touch is in both a day and a night list, and winter's hold no cricket and no songbird; animal calls are offered only where a coop or barn with animals stands; each stinger is in `assets/music/`, at most `STING_PEAK` and on 0285's not-loop list
-  - done when: `_case_0286_weather_ambience` in `src/tools/input_v1.gd`: a foggy night's build step plays the fog bed (`Audio.bed_playing()`) and the fog stinger once (`Audio.plays_of()`), and a winter morning the winter bed
-  - done when: `python tools/gen_ambience.py --report` for the new beds (length, peak, seam) and `gen_music.py --report` for the stingers are in the journal
+  - done when: `_task_0285_season_music` in `src/tools/headless_v1.gd`: `piece_for` answers right for each season and phase, a boss night, and a menu with the setting off and on; every looping piece's `_loop_seam` ratio is at most 1.0 and its length over 15 s; every arrangement reads `MOTIF`
+  - done when: `_case_0285_season_music` in `src/tools/input_v1.gd`: a real run moved to a summer morning is playing the summer piece once the fade is over (`Audio.music_playing()`), and a boss night's build step the boss track
+  - done when: The Web pack size before and after (`python tools/release.py`, or why it could not be measured) and `python tools/gen_music.py --report` lengths and seams are in the journal
+
+### 0288 - Art: the collection book, trophies and badges
+
+Waits on 0287.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/collections_screen.gd`.
+
+The book cover, the four boss trophies and the achievement badges Codex drew replace 0287's stand-ins, so the screen a player opens before Year 2 looks like the rest of the game.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A056` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A056-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/<family>/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_<family>_art.py`, `ArtPlacement` if needed).
+- Family `ui`, no text in any of it: names, canvases and pivots exactly as A056's Deliverables table (settled by 0287) - the cover, the tab icons, a trophy per `is_boss` enemy, a badge per achievement id, the ornament. `tools/check_ui_art.py` hard-codes the 0018 resource icons (`len(plans)==15`): give the A056 set its own section and counts rather than loosening that one, and show it in `ui_art_showcase.gd`
+- Delete A056's entries from 0120's placeholder registry (`src/ui/placeholder_art.gd`) once the raster outputs land at the same paths, so `collections_screen.gd` draws the real art through the lookup it already uses and `python tools/placeholders.py` no longer lists A056; locked trophies and badges stay the same art dimmed by code
+- Set the pack to integrated: `python implementation/backlog/assets.py set A056 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass with the A056 set counted
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures of the collections screen, every tab with a full profile, opened in a run by day and by night, opened and looked at, in `implementation/shots/0288/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0271 - Spring's fourteen nights
 
@@ -1056,6 +1019,24 @@ Spring is the season that teaches: the walker, the runner, the tank and the brea
   - done when: `_task_0271_spring_nights` in `src/tools/headless_v1.gd`: days 1-14 send only the walker, runner, tank, breaker and the Giant, only from the east; each kind is first sent on its authored introduction day; day 7 is the largest of days 1-7 and day 14 the largest of spring in hit points; the Giant is on day 14 and nowhere else; every day 1-14 sends its last wave after the fill line (`NIGHT_FILL_TICKS`) and before the dawn margin
   - done when: `python tools/play_nights.py 1 14` output is in the journal: night 1 holds at the lowest income, and every night that falls is named with what the curve does there; `python tools/play_nights.py 15 20` runs on 0270's summer draft and buys nothing summer has not unlocked
   - done when: Spring's table from `python tools/nights.py 1 14` is in the journal beside the old ten nights' numbers
+
+### 0286 - Fog, rain and winter wind
+
+Waits on 0257, 0285.  Likely files: `tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+The bed under everything follows the weather and the season: fog and rain on the nights that have them, wind through the winter, the animals heard near their coop and barn, and a short stinger when an event night reaches its build step. View only: neither hash moves. (The animal calls came from 0281 and the stingers from 0284, so those fit one invocation.)
+
+- `tools/gen_ambience.py` writes a fog bed and a rain bed for the night, and a winter bed (wind, no birds, no crickets) for winter's day and night, looped with its `seamless()` and under `BED_PEAK` - the bed stays the quietest thing in the game
+- `Ambience.bed_for` stays static and gains the season and tonight's event: an event night's bed beats the season's, and winter's beats the ordinary day and night beds. The event is 0256's `Weather` answer for `(seed, day)` (0257 added the Blood Moon to it) - the function the forecast panel calls, never a second draw and never the view's own `RandomNumberGenerator`
+- Touches by season: winter gets its own short lists (no crickets, no songbirds), and no touch is in both a day list and a night list
+- Animals near barns, written here (moved from 0281): cluck, moo, baa and oink in `gen_ambience.py` from `gen_sfx`'s primitives (it already imports `gen_sfx`), at most `TOUCH_PEAK`, played at the coop's and the barn's cells through the existing falloff - by day while the building stands with animals of that kind in it (0183's residents), and as a sleepy murmur at night, when they sleep inside (0186). The dog is not here: its bark is 0283's power sound. Decide whether a wrecked-but-standing barn still murmurs
+- The beds change on the cue they use today (`Audio.play_bed` with the transition's length); nothing changes the bed in the middle of a night
+- Event stingers (moved from 0284): fog, rain, the Blood Moon (0257) and the Full Moon (0152) as short cues in `tools/gen_music.py` beside `sting` - `PIECES` entries, at most `STING_PEAK`, named in 0285's not-loop list - played once through `Audio.play` (the Music bus, because the file is in `assets/music/`) when a night with that event reaches its build step. The event is the same `Weather` answer the bed reads (the Full Moon is 0152's `Calendar.is_full_moon`), never decided in the view
+- Rewrite `_task_0087_ambience` in `headless_check.gd` for the new `bed_for`: every file is still asked for, every bed loops (`_loop_seam` at most 1.0) and peaks under 0.3, and the house being hit still stands far above the ducked bed
+
+  - done when: `_task_0286_weather_ambience` in `src/tools/headless_v1.gd`: `bed_for` answers for every season, phase and event; each new bed loops and stays under the old peak; no touch is in both a day and a night list, and winter's hold no cricket and no songbird; animal calls are offered only where a coop or barn with animals stands; each stinger is in `assets/music/`, at most `STING_PEAK` and on 0285's not-loop list
+  - done when: `_case_0286_weather_ambience` in `src/tools/input_v1.gd`: a foggy night's build step plays the fog bed (`Audio.bed_playing()`) and the fog stinger once (`Audio.plays_of()`), and a winter morning the winter bed
+  - done when: `python tools/gen_ambience.py --report` for the new beds (length, peak, seam) and `gen_music.py --report` for the stingers are in the journal
 
 ### 0290 - The 1.0 visual gate
 
@@ -1634,7 +1615,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - waits for art A045
 - [ ] **0245** [Art: the dog](prompts/0245-art-dog.md) - waits for art A028
 
-## 14 - Enemies and bosses  (10/24)
+## 14 - Enemies and bosses  (11/24)
 
 - [x] **0246** [Bosses in general](prompts/0246-bosses-general.md)
 - [x] **0247** [The spitter](prompts/0247-spitter.md)
@@ -1646,10 +1627,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0253** [The Harvester](prompts/0253-harvester.md)
 - [x] **0254** [The Scarecrow King](prompts/0254-scarecrow-king.md)
 - [x] **0255** [The Winter Lord](prompts/0255-winter-lord.md)
-- [ ] **0256** [Fog and rain](prompts/0256-fog-and-rain.md)
-- [ ] **0257** [The Blood Moon](prompts/0257-blood-moon.md) - needs 0256
-- [ ] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md) - needs 0256, 0257
-- [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md) - needs 0256, 0257
+- [x] **0256** [Fog and rain](prompts/0256-fog-and-rain.md)
+- [ ] **0257** [The Blood Moon](prompts/0257-blood-moon.md)
+- [ ] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md) - needs 0257
+- [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md) - needs 0257
 - [ ] **0260** [Art: the spitter](prompts/0260-art-spitter.md) - waits for art A046
 - [ ] **0261** [Art: the rat swarm](prompts/0261-art-rats.md) - waits for art A047
 - [ ] **0262** [Art: the crow](prompts/0262-art-crow.md) - waits for art A048
@@ -1659,11 +1640,11 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0266** [Art: the Harvester](prompts/0266-art-harvester.md) - waits for art A052
 - [ ] **0267** [Art: the Scarecrow King](prompts/0267-art-scarecrow-king.md) - waits for art A053
 - [ ] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md) - waits for art A054
-- [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md) - needs 0256, 0257 - waits for art A055
+- [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md) - needs 0257 - waits for art A055
 
 ## 15 - Fifty-six nights and balance  (0/11)
 
-- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0256, 0257
+- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0257
 - [ ] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md) - needs 0270
 - [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0259, 0271
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0259, 0272
@@ -1682,7 +1663,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0283** [The guardian's sounds](prompts/0283-sfx-night-v2.md)
 - [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0257
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0282
-- [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0256, 0257, 0285
+- [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0257, 0285
 - [ ] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057

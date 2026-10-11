@@ -268,10 +268,16 @@ static func burn_left(state: Dictionary, id: int) -> int:
 ## **It keeps burning after it leaves the cone**, which is the whole of what
 ## damage over time buys: a flamethrower that only hurt what was standing in
 ## front of it would be a short-range gun tower that cost oil.
+##
+## **Damped in the rain** (task 0256): each tick of it deals
+## `rain_fire_percent` of itself (`Weather.damped`), never under one.
 static func _tick_burning(state: Dictionary) -> void:
 	var burning: Dictionary = state["burning"]
 	if burning.is_empty():
 		return
+	# **Tonight's weather, asked once a tick** - and only while something
+	# burns, which is when it matters.
+	var weather := Weather.tonight(state)
 	# Sorted, because two things burning out on the same tick have to die in
 	# the same order on every machine.
 	var ids: Array = burning.keys()
@@ -286,7 +292,8 @@ static func _tick_burning(state: Dictionary) -> void:
 		fire["next"] = int(fire["next"]) - 1
 		if int(fire["next"]) <= 0:
 			fire["next"] = GameData.BURN_EVERY_TICKS
-			hit(state, int(id), int(fire["damage"]), GameData.DAMAGE_FIRE)
+			hit(state, int(id), Weather.damped(int(fire["damage"]), GameData.DAMAGE_FIRE, weather),
+				GameData.DAMAGE_FIRE)
 		if int(fire["left"]) <= 0 or not Entities.alive(state, int(id)):
 			out.append(id)
 	for id in out:
@@ -299,7 +306,7 @@ static func _tick_burning(state: Dictionary) -> void:
 ##
 ## **A table beside `burning`, not a second kind of fire.** A thing can burn
 ## and be stung at once - a flamethrower and a hive on the same crowd - and
-## each is topped up by its own kind; the rain of task 0256 puts `burning` out
+## each is topped up by its own kind; the rain of task 0256 damps `burning`
 ## and never touches a sting. **Refreshed, never stacked**, as a fire is: two
 ## hives on one zombie are one sting, for the longer time at the stronger
 ## damage.
