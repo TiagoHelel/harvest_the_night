@@ -280,6 +280,7 @@ ENEMY_WINTER_LORD,0,winter lord,senhor do inverno
 ENEMY_WINTER_LORD.other,0,winter lords,senhores do inverno
 ENEMY_WALKER,0,walker,andarilho
 ENEMY_WALKER.other,0,walkers,andarilhos
+FCAST_BLOOD_MOON,142,BLOOD MOON,LUA DE SANGUE
 FCAST_BOSS,142,%s IS COMING,%s ESTÁ VINDO
 FCAST_CALM,142,A CALM NIGHT,NOITE CALMA
 FCAST_EVERY_SIDE,142,from every side,por todos os lados
@@ -475,6 +476,7 @@ RES_CAME_DOWN,200,%d structure came down,%d estrutura caiu
 RES_CAME_DOWN.other,200,%d structures came down,%d estruturas caíram
 RES_COUNTED,0,%s x%d,%s x%d
 RES_DEFENDING_WELL,0,  for defending well,  por defender bem
+RES_ESSENCE_BLOOD_MOON,0,Blood Moon,Lua de Sangue
 RES_ESSENCE_FOR,0,  essence:,  essência:
 RES_ESSENCE_FOR_SURVIVING,0,the night,a noite
 RES_ESSENCE_FULL_MOON,0,Full Moon,Lua Cheia

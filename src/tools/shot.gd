@@ -171,6 +171,7 @@ const SCENARIOS: Array = [
 	["forecast_build", "the build step on Winter 14: a boss under a Full Moon, from every side", ""],
 	["forecast_calm", "Summer 1 at 18:30: the forecast of a calm night", ""],
 	["forecast_fog", "a foggy night's forecast at 18:30: the first night of the shots' run that Weather makes foggy, found and never forced - its mark beside the night's own and FOG in words", ""],
+	["forecast_blood_moon", "a Blood Moon's forecast at 18:30: the first night of the shots' run that Weather makes a Blood Moon, found and never forced - its red mark with the drip and BLOOD MOON in red", ""],
 	["season_summer", "the farm at noon on Summer 3", ""],
 	["season_autumn", "the farm at noon on Autumn 3", ""],
 	["season_winter", "the farm at noon on Winter 3, snowing", ""],
@@ -841,6 +842,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"forecast_build": _set_forecast_build(state)
 		"forecast_calm": _set_forecast_calm(state)
 		"forecast_fog": _set_forecast_fog(state)
+		"forecast_blood_moon": _set_forecast_blood_moon(state)
 		"season_summer": _set_season_summer(state)
 		"season_autumn": _set_season_autumn(state)
 		"season_winter": _set_season_winter(state)
@@ -2697,16 +2699,28 @@ func _set_forecast_calm(state: Dictionary) -> void:
 ## **A foggy night's forecast** (task 0256): the first date of the shots'
 ## run whose night `Weather` makes foggy - found, never forced - at 18:30.
 func _set_forecast_fog(state: Dictionary) -> void:
+	_set_forecast_of(state, Weather.FOG)
+
+
+## **A Blood Moon's forecast** (task 0257): the same for the run's first
+## Blood Moon, in a later year when the first has none.
+func _set_forecast_blood_moon(state: Dictionary) -> void:
+	_set_forecast_of(state, Weather.BLOOD_MOON)
+
+
+## The first date of the shots' run whose night `Weather` makes `kind` - found,
+## never forced - at 18:30, its field sown.
+func _set_forecast_of(state: Dictionary, kind: StringName) -> void:
 	var date := 2
-	while date < 10 * Calendar.year_days() and Weather.event(int(state["seed"]), date) != Weather.FOG:
+	while date < 10 * Calendar.year_days() and Weather.event(int(state["seed"]), date) != kind:
 		date += 1
 	_on_date(state, date)
 	_a_sown_field(state)
 	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
 		- int(state["day_tick"]), 1))
-	print("  the first fog of the run: %s %d, date %d - the forecast says %s"
-		% [Calendar.season_id(date), Calendar.day_of_season(date), date,
-			Forecast.tonight(state)["event"]])
+	print("  the run's first %s: %s %d of year %d, date %d - the forecast says %s"
+		% [kind, Calendar.season_id(date), Calendar.day_of_season(date), Calendar.year_of(date),
+			date, Forecast.tonight(state)["event"]])
 
 
 ## **Out of bed at 06:00** (task 0138): the report confirmed, he stands on

@@ -2235,11 +2235,12 @@ func _case_0157_routes() -> void:
 ## step, gone once START is pressed; every line inside it, in both languages,
 ## for the kinds of night a year has; and the night strip naming the date
 ## beside the night, its widest clear of the wave counter.
-## This run's first foggy and first rainy night of the year, and its first
-## boss night with weather if it has one (task 0256): `{event or &"boss": date}`.
+## This run's first night of each event, and its first boss night with
+## weather (tasks 0256 and 0257): `{event or &"boss": date}`, over its first
+## four years - a Blood Moon may not rise in the first.
 func _weathered_dates(seed_value: int) -> Dictionary:
 	var out := {}
-	for date in range(2, Calendar.year_days() + 1):
+	for date in range(2, 4 * Calendar.year_days() + 1):
 		var tonight := Weather.event(seed_value, date)
 		if tonight == Weather.NONE:
 			continue
@@ -2275,8 +2276,8 @@ func _case_0158_panel() -> void:
 
 	# **Every line inside the panel**, in both languages: plain, Full Moon,
 	# boss and calm nights from all four seasons - and since task 0256 this
-	# run's first foggy and first rainy night, and a boss night with weather
-	# when its year has one: three marks at the right.
+	# run's first night of each weather (0257's Blood Moon too), and a boss
+	# night with weather: three marks at the right.
 	var bad: Array = []
 	var weathered := _weathered_dates(int(state["seed"]))
 	for date in [3, 7, 14, 15, 21, 28, 35, 42, 43, 49, 52, 56] + weathered.values():
@@ -2291,9 +2292,10 @@ func _case_0158_panel() -> void:
 	expect(bad.is_empty(), "every line of every forecast fits its panel, in both languages",
 		str(bad.slice(0, 4)))
 	# **The weather on it** (task 0256): the first foggy night's mark beside
-	# the night's own and FOG in words; the first rainy night's, RAIN.
+	# the night's own and FOG in words; the first rainy night's, RAIN; the
+	# first Blood Moon's, BLOOD MOON (task 0257).
 	var told: Array = []
-	for kind in [Weather.FOG, Weather.RAIN]:
+	for kind in Weather.EVENTS:
 		if not weathered.has(kind):
 			told.append("no %s in the year" % kind)
 			continue
@@ -2303,7 +2305,7 @@ func _case_0158_panel() -> void:
 		if (StringName(panel.shown().get("event", &"")) != kind or not panel.marks().has(kind)
 				or not panel.texts().has(I18n.t(ForecastPanel.EVENT_WORDS[kind]))):
 			told.append("%s on %d: %s %s" % [kind, int(state["day"]), str(panel.marks()), str(panel.texts())])
-	expect(told.is_empty(), "a foggy night's forecast shows its mark and FOG, a rainy night's its mark and RAIN",
+	expect(told.is_empty(), "a foggy night's forecast shows its mark and FOG, a rainy night's RAIN and a Blood Moon's BLOOD MOON",
 		str(told))
 
 	# **In the build step**: Winter 14, to bed at 18:00.

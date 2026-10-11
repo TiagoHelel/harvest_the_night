@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **226 / 296 done**
+`##################......`  **227 / 296 done**
 
-0 doing / 70 todo / 0 blocked across 18 phases.
+0 doing / 69 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-70 task(s) left, the ready ones first, then what they
+69 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -562,22 +562,38 @@ The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-t
   - done when: FHD (1920x1080) captures by day and by night of the dog following the farmer and the dog called at night in the real game, opened and looked at, in `implementation/shots/0245/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0257 - The Blood Moon
+### 0258 - Fog, rain and a red moon on screen
 
-Ready to pick up.  Likely files: `src/core/weather.gd, src/core/entities.gd, src/core/combat.gd, src/core/game_data.gd, src/core/rewards.gd, src/core/tech.gd, src/ui/forecast_panel.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/ui/lighting.gd, src/ui/particles.gd, src/ui/fog.gdshader (new), src/ui/world_view.gd, tools/palette.py, src/ui/palette_data.gd (generated), src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/shot.gd, src/tools/input_v1.gd`.
 
-A rare red night from autumn on: the horde comes back stronger and pays in essence. Rare enough to be an occasion, forecast so it is never an ambush.
+Fog that looks like fog, rain you can see, a red moon that makes the farm look wrong - and none of it touches a rule.
 
-- `blood_moon` joins `GameData.NIGHT_EVENTS`: weight 0 in spring and summer (refused otherwise by `check_night_events`), a small `# LEVER` weight in autumn and winter; `Weather.event` never returns it when `Calendar.is_boss_night(date)` (an elite boss is another balance problem); decide whether it may fall on `Calendar.is_full_moon(date)` and say why
-- Elites: on a Blood Moon night `Entities.spawn` (reading `Weather.event` for `Calendar.date(state)`) scales hp by `blood_moon_hp_percent` (120-200, integers) and writes `max_hp` on the elite only, so ordinary nights are untouched and 0246's `Combat.full_hp` (and any health bar that reads it) uses it
-- Extra essence through 0219's earn rules: a `blood_moon_essence` `# LEVER` in `GameData.REWARDS`, its own itemised line in `Tech.would_pay` on a won night, shown in the morning report as a `RES_*` row in both languages; `nights_paid` still stops it paying twice
-- In the forecast slot (`Forecast.of`'s `event`, `forecast_panel.gd`): `FCAST_BLOOD_MOON` (BLOOD MOON / LUA DE SANGUE) and the icon placeholder until A055 is integrated by 0269
-- `Waves.size_of` and the forecast count do not change: elites are tougher, not more
-- Hashes: DATA moves; SIM should not (`max_hp` exists only on elites)
+- View only, both hashes unchanged: everything reads `Weather.event` (0256, 0257) and `Light.is_lit` (0229), and nothing writes the state
+- Fog: a code noise shader over the world (no new PNG), thinner on lit cells so the searchlight visibly cuts it
+- Rain: particles in `particles.gd` bounded by the accessibility particle density setting (`a11y/particle_density`), a darker night ramp, and a mud tint on walkable ground
+- Blood Moon: a red night ramp. Ramps go the road 0152 used for the Full Moon: `rain` and `blood_moon` entries in `tools/palette.py` `RAMPS`, written into `PaletteData` by `python tools/gen_sprites.py` (never edit `palette_data.gd`), picked by `WorldView._night_ramp()`. Check that the Full Moon still reads brighter than an ordinary night and that the ramps (ordinary, Full Moon, fog, rain, Blood Moon) are told apart at a glance
+- Cost: `perf_check.gd`'s view timing (`_view`, today's `view_lighting`/`view_particles`) gains a rain night at 4x as its own `PERF` line (e.g. `view_rain`), inside `tools/perf.py`'s tolerance and accepted with the reason in the journal
+- Shot scenarios `fog`, `rain`, `blood_moon` and `full_moon` in `src/tools/shot.gd`, each finding a (seed, date) through `Weather.event` or `Calendar.is_full_moon` rather than an override
 
-  - done when: `_task_0257_blood_moon` in `src/tools/headless_v1.gd`: over seeds 0-49 and dates 1-56 (pure calls) no Blood Moon falls in spring, summer or on a boss night, and the autumn and winter counts are printed; on one, a walker spawns with the scaled hp and `full_hp` reads it; winning pays the extra essence, once
-  - done when: `python tools/shot.py 0257 forecast_blood_moon --fhd` (a new scenario that finds a Blood Moon (seed, date) through `Weather.event`) shows it in the forecast, opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A055-event-icons.md` states the final geometry this task settled (fog, rain and Blood Moon at 16x16 and 10x10)
+  - done when: `_case_0258_event_visuals` in `src/tools/input_v1.gd`: each event turns its layer on with the night and off at dawn, the rain particle count follows the density setting, and a night with the layers on and one with them off end on the same SIM hash
+  - done when: `python tools/shot.py 0258 fog rain blood_moon full_moon --fhd` opened and looked at beside `docs/reference-sheet.png`: the farm stays readable in every one
+
+### 0259 - Every weapon has its night
+
+Ready to pick up.  Likely files: `src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md`.
+
+The plan's test for phases 4 and 5 turned into numbers: every weapon is the best buy somewhere, and every enemy needs a different answer. The report is what the night authors of 0270-0274 build the year from.
+
+- A headless tool, not a suite group: `src/tools/matchups.gd` run by `tools/matchups.py`, seeded and deterministic, printing its run time, with `--only=<enemy>` for quick reruns; it stays out of `verify.py` (the 120 s per-suite timeout). Keep a full run to about ten minutes by shortening the lane's fight, not by dropping rows of the grid
+- The arena: one fixed lane on the real farm map with a fixed base defence; for every `GameData.DEFENCES` entry (the plan's fourteen plus 0225's bait and 0231's sandbags - print the count), the same budget (0234's money plus materials, materials at `SELL_PRICE`) spent on it at the level its season allows, placed by a fixed rule; a fixed group of one enemy kind, and each boss with its season's escort
+- Per pair: house damage, kills, ticks to clear and structures lost; the score is house damage prevented per unit of cost against the base alone
+- The same grid under fog, rain and the Blood Moon, so the searchlight, fire and the mines get their nights
+- Prove: every defence is the top buy against at least one enemy, boss or event (a barrier or a support piece - decoy, garlic, searchlight - may be scored as the best addition to the base line rather than alone; say how); no defence is top against every enemy; every new enemy's top answer differs from the walker's. Where a claim fails, a lever may move here (at most a few, DATA recorded) or the failure goes to 0277 with its numbers
+- `implementation/MATCHUPS.md`: the table, each enemy's top three answers, each defence's best night, and a line per enemy for the night authors (e.g. 'rats: mines, flamethrower')
+
+  - done when: `python tools/matchups.py` exits 0 and names, for every `DEFENCES` entry, the enemy or event where it is the best buy, or marks it UNPROVEN with its numbers; every UNPROVEN line is in the journal as handed to 0277
+  - done when: Two runs write the same `implementation/MATCHUPS.md` byte for byte
+  - done when: The journal answers in one paragraph, with the numbers, whether each enemy asks for a different answer, and lists any lever moved
 
 ### 0260 - Art: the spitter
 
@@ -741,6 +757,45 @@ The Winter Lord as Codex drew it, in place of 0255's stand-in: the last thing th
   - done when: FHD (1920x1080) captures in the real game by day (the mark in the dusk forecast) and by night (mid-cast, towers freezing), opened and looked at, in `implementation/shots/0268/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
+### 0269 - Art: fog, rain and the Blood Moon icons
+
+Waits for Codex art A055.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/forecast_panel.gd`.
+
+The three night events as Codex drew them, in the forecast slot where 0256 and 0257 left placeholders.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A055` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A055-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_ui_art.py` pins the 0018 resource set - add this pack as its own checked block).
+- `ui/icon_fog`, `ui/icon_rain`, `ui/icon_blood_moon` at 16x16 pivot (8,8) and the matching `ui/hud_*` at 10x10 pivot (5,5), each pair cut from the same raw source at different nearest scales (visible size at most 14 and 8 px)
+- Replace 0256's and 0257's placeholders in the forecast slot (`src/ui/forecast_panel.gd`, 0158) through 0120's registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A055 integrated`.
+
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures in the real game by day (each event in the dusk forecast) and by night (the build step's forecast), opened and looked at, in `implementation/shots/0269/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
+
+### 0270 - Fifty-six nights as data
+
+Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+
+The year stops being ten written nights plus a curve and becomes tables a designer can read: a template per season, hand-written key nights (every introduction, every Full Moon) and a seeded generator for the nights in between. Nothing downstream of `Waves.night_of` can tell which is which, so the season tasks after this one edit data (0271 also gives `play_nights` a day range).
+
+- A night is still `{note, opening_ticks, gap_ticks, waves}` with waves `[kind, count, spawn, delay?]`, so `Waves`, `Enemies`, `Rewards`, the forecast (0158) and the HUD need no new case. Two new tables in `src/core/game_data.gd`: `SEASON_NIGHTS` (per season: the sides it deals from - indices open for that season in 0157's `SIDES_BY_SEASON`, never a second copy of that table - each with the day it joins, so a season brings a new side in gently; the kinds of its mix with a weight and the day each joins; a size in hit points - the honest measure 0060 used, `play_nights.gd`'s `_hit_points_of` - at the season's second and thirteenth day; waves and gap from/to; every number a `# LEVER` with a range) and `KEY_NIGHTS` (day of the year 1-56 -> a record)
+- Key nights are each kind's introduction and the Full Moons on days 7 and 14 of every season. No record names a boss: 0153's rule in `Waves.night_of` adds the `SEASON_BOSSES` row on day 14 (0253-0255 put theirs there), so a day-14 key night writes only the boss's company. Draft content so all 56 resolve: today's nights 1-9 as spring's days 1-9 and today's 10, without its Giant row, as day 14, their south-east rows moved to the east; delete 0157's commented allowance for today's ten, which nothing needs now (0271 has nothing left to remove). Day 1 stays byte-identical. Summer to winter get drafts that send spring's kinds only; 0271-0274 author them for real
+- Days 15, 29 and 43 are 0154's calm dates (`Calendar.is_calm`): `night_of` already returns the calm record for them, so they carry no key night and the generator never makes one
+- A node-free generator - `src/core/almanac.gd` with `Almanac.night(seed, day)`, or the home 0150/0158 already gave the calendar lookup (extend it, never a second one) - fills every other day from its season's template with a fresh stream from `(seed, day)` (the `Endless._stream_for` pattern), never `state["rng"]`. The seed orders the waves and picks among the open sides; it never changes the totals per kind (the `Endless` contract)
+- `Waves.plain_night(day, seed)` (0150) is where the year comes from - the key night first, else the generator - and `night_of` keeps 0152-0154's rules on top of it, unchanged. `Waves.tonight` keeps caching generated records on `state.wave.tonight`, so no new State key and `remaining()` stays free per frame. `GameData.NIGHTS` retires here (its rows are spring's draft) and `Waves.authored_count()` with it: grep `src/` and `tools/` for both and move every reader. Past day 56 the lookup keeps serving `Endless.night` until 0279 (if its base or step must read something new, the journal says what day 57 sends before and after); `perf_check.gd`'s worst case stays on Spring 14 (0153) until 0275
+- Decide in one place whether 0152's Full Moon percent scales an authored Full Moon record or is already written into it - one, never both, and the forecast's count equals what is sent. A key night may pin or forbid an event with an optional `event` field, read by 0256's `Weather` chooser for that `(seed, day)`; a pin still obeys `check_night_events` and `Weather`'s own rules (no Blood Moon before autumn, on a boss night or - 0257's decision - on a Full Moon; nothing on Spring 1 or a calm date)
+- `GameData.check_nights(templates, key_nights)` takes its tables as arguments, as it takes `nights` today, so a test can hand it a broken copy. It refuses: a boss in any template or key night (the boss row is 0153's); an unknown kind in a template; a side not open in that season (0157); a size that falls or a gap that grows across a season (0060's curve rules); a key-night day outside 1-56 or on a calm date; a Full Moon day without a key night; a schedule that outlasts the night (0137); an unknown `event`. The per-record rules are one function: `validate()` runs it on seed 0's year only, so loading stays cheap, and 0151's `python tools/nights.py --check` gate runs it on every date for its two seeds
+- `GameData.digest()` lists `SEASON_NIGHTS` and `KEY_NIGHTS` and drops `NIGHTS` (0112's coverage assert passes). DATA moves on purpose; SIM should not, day 1 being identical - if it moves, the journal says why. What 0150-0153 left of `_task_0058_giant`, `_task_0059_wave_data`, `_task_0060_ten_nights` and `_task_0070_endless` in `src/tools/headless_check.gd` that reads `GameData.NIGHTS` rows reads the year through `Waves.plain_night` instead, keeping what each asserted
+- `python tools/nights.py` prints the year by default: a block per season, each day's kinds, sides, count, hit points, reward and event, with key, Full Moon, boss and calm days marked, then first-seen per kind and the size bars. Its positional arguments change from today's `[count] [seed]` to `[from] [to] [seed]` (`python tools/nights.py 15 28 3` prints a range); `--check` stays; the docstrings of `nights.gd` and `nights.py` say so
+
+  - done when: `_task_0270_year_records` in `src/tools/headless_v1.gd`: for seeds 0-4 every day 1-56 is a key night, a generated record or a calm date; generated records pass the per-record rules an authored one does; two seeds send the same totals per kind on every day; generating day 30 leaves `state["rng"]` untouched; no kind is sent before the day its key night or template introduces it; day 1's record equals the old night 1
+  - done when: The same group hands `check_nights` doctored copies - a boss in a key night, an unknown kind in a template's mix, a spring night from the south-east, a key night on day 15 - and each is refused
+  - done when: For days 1-56 and two seeds, 0158's forecast counts equal `Waves.size_of`/`kinds_of` for the same day
+  - done when: The year from `python tools/nights.py` is in the journal: count, hit points and reward per day, by season
+
 ### 0281 - The new day's sounds
 
 Ready to pick up.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -794,6 +849,24 @@ The night is played through the cursor now, so the cursor's work, the START horn
   - done when: `_task_0283_guardian_sounds` in `src/tools/headless_v1.gd`: every new id is a file under `NIGHT_PEAK`, no two damaging defences share a file, every defence without `damage` is out of `TOWER_SOUNDS`, and the sold/broken/spent helper answers right for a crafted sale, a wreck with rubble and a spent mine
   - done when: `_case_0283_guardian_sounds` in `src/tools/input_v1.gd`: in the build step the cursor places, upgrades and sells a defence and `Audio.last_played()` is place, upgrade, sell (never `sfx/wall_break`); START plays the horn; an aimed flare plays the flare; panning the camera away from a firing tower makes it quieter (`Audio.loudness`)
   - done when: `_task_0084_day_sounds` and `_task_0085_night_sounds` pass; `python tools/gen_sfx.py --report` for the new sounds is in the journal
+
+### 0284 - The new enemies and bosses, heard
+
+Ready to pick up.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+Six new enemies and three new bosses each get a voice of their own, so a night heard with your eyes shut still says what is coming. View only: neither hash moves, and no state key is added to be heard. (The night events' stingers moved to 0286, beside the event beds, so this fits one invocation.)
+
+- Recipes for the spitter (the spit, and a splat on the tower 0247's projectile hits), the rat swarm (a squeak), the crow (a caw over wingbeats), the digger (a burrowing rumble and a burst when it surfaces), the frost zombie (a shatter as it dies and a crackle on the towers it chills) and the wraith (a whisper)
+- Voices stay per kind and not per body: `nearest_by_kind` keeps a swarm of fifty rats to one voice (0085's promise). Deaths that differ by kind go through a small per-kind table that falls back to `DEATH_SOUND` and keeps `DEATH_GAP`
+- The wraith cannot be shot outside light (0252): decide whether its whisper plays with no position (you know they are out, not where) or only from wraiths in light, and write why in the journal
+- Three boss voices - the Harvester's engine, the Scarecrow King's call, the Winter Lord's ice - and their specials: the Harvester's charge telegraph and the crunch of the walls it crushes, the King summoning crows, the Winter Lord's freezing aura; each special heard on the edge its telegraph or effect already sets in the state (`is_winding`, 0253's `charge_line`, 0251's `Towers.chill_left`, 0255's `frozen` countdown), read like `reload`
+- Every boss is announced like the Giant: on arrival, with no position, ducking the ambience. Wherever `sfx.gd` still tests `kind == &"giant"` (`_watch_bodies`, `nearest_by_kind`, `_ducks`), read `is_boss` instead, unless 0246 already did
+- Rewrite `_task_0085_night_sounds`: 'the Giant's roar is the longest sound at night' becomes 'every boss voice is longer than every ordinary night sound'; the house being hit stays the loudest file (bosses at `GIANT_PEAK` or below); replace each borrowed `ENEMY_SOUNDS` entry 0247-0255 left
+- Extend `_night_sound_ids()` so every new file in `assets/sfx/` is reached. The event stingers (fog, rain, the Blood Moon, the Full Moon) are not this task's: 0286 writes and plays them
+
+  - done when: `_task_0284_enemy_sounds` in `src/tools/headless_v1.gd`: every enemy in `GameData.ENEMIES` has a voice file of its own, every boss voice is longer than any ordinary night sound and quieter than the alarm, and fifty rats are one entry in `nearest_by_kind`
+  - done when: `_case_0284_boss_voices` in `src/tools/input_v1.gd`: a boss spawned in a real scene plays its voice once with no position and ducks the bed (`Audio.duck_gain()`)
+  - done when: `_task_0085_night_sounds` (rewritten) passes; `python tools/gen_sfx.py --report` for every new sound is in the journal
 
 ### 0287 - Collections and achievements
 
@@ -875,95 +948,25 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
   - done when: the same group: the 0.1 `settings.cfg` fixture loads with its language, volumes and rebind kept, every key it lacks at its `Settings.DEFAULTS` value, and its `tutorial_seen` of `true` migrated to the 0.1 step ids, so only the new steps are offered
   - done when: 1920x1080 captures of the bed line, the cursor line at night and the forecast line at dusk, in both languages (new scenarios such as `tut_bed`, `tut_cursor`, `tut_forecast`: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast --fhd` and again with `--pt_BR`), opened: each line is on its thing and nothing on screen covers it
 
-### 0258 - Fog, rain and a red moon on screen
+### 0271 - Spring's fourteen nights
 
-Waits on 0257.  Likely files: `src/ui/lighting.gd, src/ui/particles.gd, src/ui/fog.gdshader (new), src/ui/world_view.gd, tools/palette.py, src/ui/palette_data.gd (generated), src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/shot.gd, src/tools/input_v1.gd`.
+Waits on 0270.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, spring's `SEASON_NIGHTS`), src/tools/play_nights.gd, tools/play_nights.py, src/tools/headless_v1.gd`.
 
-Fog that looks like fog, rain you can see, a red moon that makes the farm look wrong - and none of it touches a rule.
+Spring is the season that teaches: the walker, the runner, the tank and the breaker one at a time, all from the east, a Full Moon on day 7 and the Giant on day 14. Today's ten nights are the raw material, but they were balanced for two sides and a ten-night run, so they are rewritten rather than pasted.
 
-- View only, both hashes unchanged: everything reads `Weather.event` (0256, 0257) and `Light.is_lit` (0229), and nothing writes the state
-- Fog: a code noise shader over the world (no new PNG), thinner on lit cells so the searchlight visibly cuts it
-- Rain: particles in `particles.gd` bounded by the accessibility particle density setting (`a11y/particle_density`), a darker night ramp, and a mud tint on walkable ground
-- Blood Moon: a red night ramp. Ramps go the road 0152 used for the Full Moon: `rain` and `blood_moon` entries in `tools/palette.py` `RAMPS`, written into `PaletteData` by `python tools/gen_sprites.py` (never edit `palette_data.gd`), picked by `WorldView._night_ramp()`. Check that the Full Moon still reads brighter than an ordinary night and that the ramps (ordinary, Full Moon, fog, rain, Blood Moon) are told apart at a glance
-- Cost: `perf_check.gd`'s view timing (`_view`, today's `view_lighting`/`view_particles`) gains a rain night at 4x as its own `PERF` line (e.g. `view_rain`), inside `tools/perf.py`'s tolerance and accepted with the reason in the journal
-- Shot scenarios `fog`, `rain`, `blood_moon` and `full_moon` in `src/tools/shot.gd`, each finding a (seed, date) through `Weather.event` or `Calendar.is_full_moon` rather than an override
+- First the instrument, moved here from 0270: `tools/play_nights.py` forwards its arguments (today it passes none) and `python tools/play_nights.py <from> <to>` plays that range of dates with the scripted build, buying only what each date's season has unlocked (0234's `unlock_season`, money and materials) from a purse that starts where a run would be (what the earlier dates paid plus the income). 0272-0274 author with it
+- Every spring night comes from the east only (0157's east region; 0270 already deleted the allowance today's ten had). Today's night 2, 'the same again from two sides', becomes a lesson one side can teach
+- The plan's rhythm: days 1-6 grow gently, day 7 is a Full Moon of the kinds already met, days 8-13 grow again with the season's novelty - the breaker, 'Primavera (fim)' - and day 14 is the Full Moon with the Giant (0153's row) in company. A starting map: today's 1-6 to days 1-6, today's 7 (breakers) to day 8, today's 8-9 spread over 9-13, today's 10 to day 14 - change it if the numbers say so
+- One new thing a night at most, and the night after an introduction is where it bites (0060's rule): the walker on 1, the runner and the tank in days 2-6, the breaker in 8-13. The introductions, day 7 and day 14 are `KEY_NIGHTS`; the other days come from spring's template
+- Day 1 stays the tutorial night: a normal night 1 (the calm night only follows a fallen boss), winnable with what the tutorial (0141) gives; the tutorial asserts of 0041/0141 stay green
+- Every night fits the night length (0137) with room for the last wave to be fought before dawn, **and fills it** (moved here by 0148): its last wave is sent no earlier than `NIGHT_TICKS - DAWN_MARGIN_TICKS - NIGHT_FILL_TICKS`, a new `# LEVER` in `src/core/game_data.gd` (60 s, 30-120) in `digest()`'s `time` row, and `tools/nights.py` prints each night's last send against that line. 0148 measured today's ten sending everything by 36-84 s of a 240 s night: every night it played was over, everything dead, about a minute in, and none of a thousand autoplayed nights reached dawn, so the plan's 'holding on until sunrise is worth as much as killing everything' (4.5) and its three to five minutes of waves never happen. Spread the waves - a later last wave, gaps that leave quiet stretches between them - rather than shortening `NIGHT_TICKS` below the plan's three minutes; day 1 too, still winnable with the tutorial's tower
+- Notes in the voice of the authored ten, English, one line each - they are what `tools/nights.py` prints
+- Author against `python tools/nights.py 1 14` (count, hit points and reward climb, peaking on 7 and 14) and `python tools/play_nights.py 1 14` at its three incomes
+- DATA moves on purpose; SIM moves if day 1 changed, because the determinism scenario fights it - both numbers in `implementation/PROGRESS.md`
 
-  - done when: `_case_0258_event_visuals` in `src/tools/input_v1.gd`: each event turns its layer on with the night and off at dawn, the rain particle count follows the density setting, and a night with the layers on and one with them off end on the same SIM hash
-  - done when: `python tools/shot.py 0258 fog rain blood_moon full_moon --fhd` opened and looked at beside `docs/reference-sheet.png`: the farm stays readable in every one
-
-### 0259 - Every weapon has its night
-
-Waits on 0257.  Likely files: `src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md`.
-
-The plan's test for phases 4 and 5 turned into numbers: every weapon is the best buy somewhere, and every enemy needs a different answer. The report is what the night authors of 0270-0274 build the year from.
-
-- A headless tool, not a suite group: `src/tools/matchups.gd` run by `tools/matchups.py`, seeded and deterministic, printing its run time, with `--only=<enemy>` for quick reruns; it stays out of `verify.py` (the 120 s per-suite timeout). Keep a full run to about ten minutes by shortening the lane's fight, not by dropping rows of the grid
-- The arena: one fixed lane on the real farm map with a fixed base defence; for every `GameData.DEFENCES` entry (the plan's fourteen plus 0225's bait and 0231's sandbags - print the count), the same budget (0234's money plus materials, materials at `SELL_PRICE`) spent on it at the level its season allows, placed by a fixed rule; a fixed group of one enemy kind, and each boss with its season's escort
-- Per pair: house damage, kills, ticks to clear and structures lost; the score is house damage prevented per unit of cost against the base alone
-- The same grid under fog, rain and the Blood Moon, so the searchlight, fire and the mines get their nights
-- Prove: every defence is the top buy against at least one enemy, boss or event (a barrier or a support piece - decoy, garlic, searchlight - may be scored as the best addition to the base line rather than alone; say how); no defence is top against every enemy; every new enemy's top answer differs from the walker's. Where a claim fails, a lever may move here (at most a few, DATA recorded) or the failure goes to 0277 with its numbers
-- `implementation/MATCHUPS.md`: the table, each enemy's top three answers, each defence's best night, and a line per enemy for the night authors (e.g. 'rats: mines, flamethrower')
-
-  - done when: `python tools/matchups.py` exits 0 and names, for every `DEFENCES` entry, the enemy or event where it is the best buy, or marks it UNPROVEN with its numbers; every UNPROVEN line is in the journal as handed to 0277
-  - done when: Two runs write the same `implementation/MATCHUPS.md` byte for byte
-  - done when: The journal answers in one paragraph, with the numbers, whether each enemy asks for a different answer, and lists any lever moved
-
-### 0269 - Art: fog, rain and the Blood Moon icons
-
-Waits on 0257.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/forecast_panel.gd`.
-
-The three night events as Codex drew them, in the forecast slot where 0256 and 0257 left placeholders.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A055` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A055-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_ui_art.py` pins the 0018 resource set - add this pack as its own checked block).
-- `ui/icon_fog`, `ui/icon_rain`, `ui/icon_blood_moon` at 16x16 pivot (8,8) and the matching `ui/hud_*` at 10x10 pivot (5,5), each pair cut from the same raw source at different nearest scales (visible size at most 14 and 8 px)
-- Replace 0256's and 0257's placeholders in the forecast slot (`src/ui/forecast_panel.gd`, 0158) through 0120's registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A055 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures in the real game by day (each event in the dusk forecast) and by night (the build step's forecast), opened and looked at, in `implementation/shots/0269/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0270 - Fifty-six nights as data
-
-Waits on 0257.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
-
-The year stops being ten written nights plus a curve and becomes tables a designer can read: a template per season, hand-written key nights (every introduction, every Full Moon) and a seeded generator for the nights in between. Nothing downstream of `Waves.night_of` can tell which is which, so the season tasks after this one edit data (0271 also gives `play_nights` a day range).
-
-- A night is still `{note, opening_ticks, gap_ticks, waves}` with waves `[kind, count, spawn, delay?]`, so `Waves`, `Enemies`, `Rewards`, the forecast (0158) and the HUD need no new case. Two new tables in `src/core/game_data.gd`: `SEASON_NIGHTS` (per season: the sides it deals from - indices open for that season in 0157's `SIDES_BY_SEASON`, never a second copy of that table - each with the day it joins, so a season brings a new side in gently; the kinds of its mix with a weight and the day each joins; a size in hit points - the honest measure 0060 used, `play_nights.gd`'s `_hit_points_of` - at the season's second and thirteenth day; waves and gap from/to; every number a `# LEVER` with a range) and `KEY_NIGHTS` (day of the year 1-56 -> a record)
-- Key nights are each kind's introduction and the Full Moons on days 7 and 14 of every season. No record names a boss: 0153's rule in `Waves.night_of` adds the `SEASON_BOSSES` row on day 14 (0253-0255 put theirs there), so a day-14 key night writes only the boss's company. Draft content so all 56 resolve: today's nights 1-9 as spring's days 1-9 and today's 10, without its Giant row, as day 14, their south-east rows moved to the east; delete 0157's commented allowance for today's ten, which nothing needs now (0271 has nothing left to remove). Day 1 stays byte-identical. Summer to winter get drafts that send spring's kinds only; 0271-0274 author them for real
-- Days 15, 29 and 43 are 0154's calm dates (`Calendar.is_calm`): `night_of` already returns the calm record for them, so they carry no key night and the generator never makes one
-- A node-free generator - `src/core/almanac.gd` with `Almanac.night(seed, day)`, or the home 0150/0158 already gave the calendar lookup (extend it, never a second one) - fills every other day from its season's template with a fresh stream from `(seed, day)` (the `Endless._stream_for` pattern), never `state["rng"]`. The seed orders the waves and picks among the open sides; it never changes the totals per kind (the `Endless` contract)
-- `Waves.plain_night(day, seed)` (0150) is where the year comes from - the key night first, else the generator - and `night_of` keeps 0152-0154's rules on top of it, unchanged. `Waves.tonight` keeps caching generated records on `state.wave.tonight`, so no new State key and `remaining()` stays free per frame. `GameData.NIGHTS` retires here (its rows are spring's draft) and `Waves.authored_count()` with it: grep `src/` and `tools/` for both and move every reader. Past day 56 the lookup keeps serving `Endless.night` until 0279 (if its base or step must read something new, the journal says what day 57 sends before and after); `perf_check.gd`'s worst case stays on Spring 14 (0153) until 0275
-- Decide in one place whether 0152's Full Moon percent scales an authored Full Moon record or is already written into it - one, never both, and the forecast's count equals what is sent. A key night may pin or forbid an event with an optional `event` field, read by 0256's `Weather` chooser for that `(seed, day)`; a pin still obeys `check_night_events` (no Blood Moon before autumn or on a boss night, nothing on Spring 1 or a calm date)
-- `GameData.check_nights(templates, key_nights)` takes its tables as arguments, as it takes `nights` today, so a test can hand it a broken copy. It refuses: a boss in any template or key night (the boss row is 0153's); an unknown kind in a template; a side not open in that season (0157); a size that falls or a gap that grows across a season (0060's curve rules); a key-night day outside 1-56 or on a calm date; a Full Moon day without a key night; a schedule that outlasts the night (0137); an unknown `event`. The per-record rules are one function: `validate()` runs it on seed 0's year only, so loading stays cheap, and 0151's `python tools/nights.py --check` gate runs it on every date for its two seeds
-- `GameData.digest()` lists `SEASON_NIGHTS` and `KEY_NIGHTS` and drops `NIGHTS` (0112's coverage assert passes). DATA moves on purpose; SIM should not, day 1 being identical - if it moves, the journal says why. What 0150-0153 left of `_task_0058_giant`, `_task_0059_wave_data`, `_task_0060_ten_nights` and `_task_0070_endless` in `src/tools/headless_check.gd` that reads `GameData.NIGHTS` rows reads the year through `Waves.plain_night` instead, keeping what each asserted
-- `python tools/nights.py` prints the year by default: a block per season, each day's kinds, sides, count, hit points, reward and event, with key, Full Moon, boss and calm days marked, then first-seen per kind and the size bars. Its positional arguments change from today's `[count] [seed]` to `[from] [to] [seed]` (`python tools/nights.py 15 28 3` prints a range); `--check` stays; the docstrings of `nights.gd` and `nights.py` say so
-
-  - done when: `_task_0270_year_records` in `src/tools/headless_v1.gd`: for seeds 0-4 every day 1-56 is a key night, a generated record or a calm date; generated records pass the per-record rules an authored one does; two seeds send the same totals per kind on every day; generating day 30 leaves `state["rng"]` untouched; no kind is sent before the day its key night or template introduces it; day 1's record equals the old night 1
-  - done when: The same group hands `check_nights` doctored copies - a boss in a key night, an unknown kind in a template's mix, a spring night from the south-east, a key night on day 15 - and each is refused
-  - done when: For days 1-56 and two seeds, 0158's forecast counts equal `Waves.size_of`/`kinds_of` for the same day
-  - done when: The year from `python tools/nights.py` is in the journal: count, hit points and reward per day, by season
-
-### 0284 - The new enemies and bosses, heard
-
-Waits on 0257.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Six new enemies and three new bosses each get a voice of their own, so a night heard with your eyes shut still says what is coming. View only: neither hash moves, and no state key is added to be heard. (The night events' stingers moved to 0286, beside the event beds, so this fits one invocation.)
-
-- Recipes for the spitter (the spit, and a splat on the tower 0247's projectile hits), the rat swarm (a squeak), the crow (a caw over wingbeats), the digger (a burrowing rumble and a burst when it surfaces), the frost zombie (a shatter as it dies and a crackle on the towers it chills) and the wraith (a whisper)
-- Voices stay per kind and not per body: `nearest_by_kind` keeps a swarm of fifty rats to one voice (0085's promise). Deaths that differ by kind go through a small per-kind table that falls back to `DEATH_SOUND` and keeps `DEATH_GAP`
-- The wraith cannot be shot outside light (0252): decide whether its whisper plays with no position (you know they are out, not where) or only from wraiths in light, and write why in the journal
-- Three boss voices - the Harvester's engine, the Scarecrow King's call, the Winter Lord's ice - and their specials: the Harvester's charge telegraph and the crunch of the walls it crushes, the King summoning crows, the Winter Lord's freezing aura; each special heard on the edge its telegraph or effect already sets in the state (`is_winding`, 0253's `charge_line`, 0251's `Towers.chill_left`, 0255's `frozen` countdown), read like `reload`
-- Every boss is announced like the Giant: on arrival, with no position, ducking the ambience. Wherever `sfx.gd` still tests `kind == &"giant"` (`_watch_bodies`, `nearest_by_kind`, `_ducks`), read `is_boss` instead, unless 0246 already did
-- Rewrite `_task_0085_night_sounds`: 'the Giant's roar is the longest sound at night' becomes 'every boss voice is longer than every ordinary night sound'; the house being hit stays the loudest file (bosses at `GIANT_PEAK` or below); replace each borrowed `ENEMY_SOUNDS` entry 0247-0255 left
-- Extend `_night_sound_ids()` so every new file in `assets/sfx/` is reached. The event stingers (fog, rain, the Blood Moon, the Full Moon) are not this task's: 0286 writes and plays them
-
-  - done when: `_task_0284_enemy_sounds` in `src/tools/headless_v1.gd`: every enemy in `GameData.ENEMIES` has a voice file of its own, every boss voice is longer than any ordinary night sound and quieter than the alarm, and fifty rats are one entry in `nearest_by_kind`
-  - done when: `_case_0284_boss_voices` in `src/tools/input_v1.gd`: a boss spawned in a real scene plays its voice once with no position and ducks the bed (`Audio.duck_gain()`)
-  - done when: `_task_0085_night_sounds` (rewritten) passes; `python tools/gen_sfx.py --report` for every new sound is in the journal
+  - done when: `_task_0271_spring_nights` in `src/tools/headless_v1.gd`: days 1-14 send only the walker, runner, tank, breaker and the Giant, only from the east; each kind is first sent on its authored introduction day; day 7 is the largest of days 1-7 and day 14 the largest of spring in hit points; the Giant is on day 14 and nowhere else; every day 1-14 sends its last wave after the fill line (`NIGHT_FILL_TICKS`) and before the dawn margin
+  - done when: `python tools/play_nights.py 1 14` output is in the journal: night 1 holds at the lowest income, and every night that falls is named with what the curve does there; `python tools/play_nights.py 15 20` runs on 0270's summer draft and buys nothing summer has not unlocked
+  - done when: Spring's table from `python tools/nights.py 1 14` is in the journal beside the old ten nights' numbers
 
 ### 0285 - Music for four seasons
 
@@ -1000,29 +1003,26 @@ The book cover, the four boss trophies and the achievement badges Codex drew rep
   - done when: FHD (1920x1080) captures of the collections screen, every tab with a full profile, opened in a run by day and by night, opened and looked at, in `implementation/shots/0288/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0271 - Spring's fourteen nights
+### 0272 - Summer's fourteen nights
 
-Waits on 0270.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, spring's `SEASON_NIGHTS`), src/tools/play_nights.gd, tools/play_nights.py, src/tools/headless_v1.gd`.
+Waits on 0270, 0259, 0271.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
 
-Spring is the season that teaches: the walker, the runner, the tank and the breaker one at a time, all from the east, a Full Moon on day 7 and the Giant on day 14. Today's ten nights are the raw material, but they were balanced for two sides and a ten-night run, so they are rewritten rather than pasted.
+Summer opens the second side and brings the first enemies that change what a spring defence is worth: the spitter shoots towers from range, the rats come in numbers that mines and fire love, and on day 28 the Harvester charges straight through the walls.
 
-- First the instrument, moved here from 0270: `tools/play_nights.py` forwards its arguments (today it passes none) and `python tools/play_nights.py <from> <to>` plays that range of dates with the scripted build, buying only what each date's season has unlocked (0234's `unlock_season`, money and materials) from a purse that starts where a run would be (what the earlier dates paid plus the income). 0272-0274 author with it
-- Every spring night comes from the east only (0157's east region; 0270 already deleted the allowance today's ten had). Today's night 2, 'the same again from two sides', becomes a lesson one side can teach
-- The plan's rhythm: days 1-6 grow gently, day 7 is a Full Moon of the kinds already met, days 8-13 grow again with the season's novelty - the breaker, 'Primavera (fim)' - and day 14 is the Full Moon with the Giant (0153's row) in company. A starting map: today's 1-6 to days 1-6, today's 7 (breakers) to day 8, today's 8-9 spread over 9-13, today's 10 to day 14 - change it if the numbers say so
-- One new thing a night at most, and the night after an introduction is where it bites (0060's rule): the walker on 1, the runner and the tank in days 2-6, the breaker in 8-13. The introductions, day 7 and day 14 are `KEY_NIGHTS`; the other days come from spring's template
-- Day 1 stays the tutorial night: a normal night 1 (the calm night only follows a fallen boss), winnable with what the tutorial (0141) gives; the tutorial asserts of 0041/0141 stay green
-- Every night fits the night length (0137) with room for the last wave to be fought before dawn, **and fills it** (moved here by 0148): its last wave is sent no earlier than `NIGHT_TICKS - DAWN_MARGIN_TICKS - NIGHT_FILL_TICKS`, a new `# LEVER` in `src/core/game_data.gd` (60 s, 30-120) in `digest()`'s `time` row, and `tools/nights.py` prints each night's last send against that line. 0148 measured today's ten sending everything by 36-84 s of a 240 s night: every night it played was over, everything dead, about a minute in, and none of a thousand autoplayed nights reached dawn, so the plan's 'holding on until sunrise is worth as much as killing everything' (4.5) and its three to five minutes of waves never happen. Spread the waves - a later last wave, gaps that leave quiet stretches between them - rather than shortening `NIGHT_TICKS` below the plan's three minutes; day 1 too, still winnable with the tutorial's tower
-- Notes in the voice of the authored ten, English, one line each - they are what `tools/nights.py` prints
-- Author against `python tools/nights.py 1 14` (count, hit points and reward climb, peaking on 7 and 14) and `python tools/play_nights.py 1 14` at its three incomes
-- DATA moves on purpose; SIM moves if day 1 changed, because the determinism scenario fights it - both numbers in `implementation/PROGRESS.md`
+- Days 16-28 fight; day 15 is 0154's calm night after the Giant. The east and the south-east are open (0157), and the first south-east night is a small one, so the new side is learned before it is tested
+- Summer's first fight starts below spring's Full Moons and above spring's day 6, so the year still climbs; spring's four kinds stay in the mix at summer's share
+- The spitter and the rat swarm are introduced on different nights - one in days 16-20, the other in days 22-27 - never together; the Full Moon on day 21 sends what is already known; the night after each introduction bites
+- Day 28 is the Full Moon with the Harvester in company, so it cannot be focused alone: the Harvester is the row 0153's rule adds from `SEASON_BOSSES` (0253 put it there), and this task writes its company
+- Read 0259's `implementation/MATCHUPS.md` first: every night's mix has an answer in what summer's arsenal (0234) has unlocked by that day - the flamethrower, the decoy, the beehive and the bait arrive this season - and the journal says which weapon each new enemy is meant to teach
+- Rats are many bodies: print the peak entity count of the largest rat night and compare it with what the swarm scenario of 0218/0248 in `perf_check.gd` measured; the year's worst case is 0275's
+- Author against `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` (0271's range), starting from spring's final numbers; notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
 
-  - done when: `_task_0271_spring_nights` in `src/tools/headless_v1.gd`: days 1-14 send only the walker, runner, tank, breaker and the Giant, only from the east; each kind is first sent on its authored introduction day; day 7 is the largest of days 1-7 and day 14 the largest of spring in hit points; the Giant is on day 14 and nowhere else; every day 1-14 sends its last wave after the fill line (`NIGHT_FILL_TICKS`) and before the dawn margin
-  - done when: `python tools/play_nights.py 1 14` output is in the journal: night 1 holds at the lowest income, and every night that falls is named with what the curve does there; `python tools/play_nights.py 15 20` runs on 0270's summer draft and buys nothing summer has not unlocked
-  - done when: Spring's table from `python tools/nights.py 1 14` is in the journal beside the old ten nights' numbers
+  - done when: `_task_0272_summer_nights` in `src/tools/headless_v1.gd`: days 16-28 send only kinds introduced by that day, only from the east and the south-east; the spitter and the rats are first sent on their introduction days, on different nights; the Harvester is on day 28 and nowhere else; days 21 and 28 are the largest of their halves in hit points
+  - done when: `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` output in the journal, with the matchup line for each new enemy and the peak rat count
 
 ### 0286 - Fog, rain and winter wind
 
-Waits on 0257, 0285.  Likely files: `tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0285.  Likely files: `tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The bed under everything follows the weather and the season: fog and rain on the nights that have them, wind through the winter, the animals heard near their coop and barn, and a short stinger when an event night reaches its build step. View only: neither hash moves. (The animal calls came from 0281 and the stingers from 0284, so those fit one invocation.)
 
@@ -1056,23 +1056,6 @@ Before 1.0 ships, look at the whole game in its real frame - every screen, seaso
   - done when: 0120's placeholder check prints zero packs pending (A057 excepted only when declined and 0289 closed), quoted in the journal
   - done when: The catalogue names a capture for every family and state in the lists above
   - done when: Every follow-up is filed as a task (and a pack when it needs art) with ids, each one in 0297's deps, none left as prose
-
-### 0272 - Summer's fourteen nights
-
-Waits on 0270, 0259, 0271.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
-
-Summer opens the second side and brings the first enemies that change what a spring defence is worth: the spitter shoots towers from range, the rats come in numbers that mines and fire love, and on day 28 the Harvester charges straight through the walls.
-
-- Days 16-28 fight; day 15 is 0154's calm night after the Giant. The east and the south-east are open (0157), and the first south-east night is a small one, so the new side is learned before it is tested
-- Summer's first fight starts below spring's Full Moons and above spring's day 6, so the year still climbs; spring's four kinds stay in the mix at summer's share
-- The spitter and the rat swarm are introduced on different nights - one in days 16-20, the other in days 22-27 - never together; the Full Moon on day 21 sends what is already known; the night after each introduction bites
-- Day 28 is the Full Moon with the Harvester in company, so it cannot be focused alone: the Harvester is the row 0153's rule adds from `SEASON_BOSSES` (0253 put it there), and this task writes its company
-- Read 0259's `implementation/MATCHUPS.md` first: every night's mix has an answer in what summer's arsenal (0234) has unlocked by that day - the flamethrower, the decoy, the beehive and the bait arrive this season - and the journal says which weapon each new enemy is meant to teach
-- Rats are many bodies: print the peak entity count of the largest rat night and compare it with what the swarm scenario of 0218/0248 in `perf_check.gd` measured; the year's worst case is 0275's
-- Author against `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` (0271's range), starting from spring's final numbers; notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
-
-  - done when: `_task_0272_summer_nights` in `src/tools/headless_v1.gd`: days 16-28 send only kinds introduced by that day, only from the east and the south-east; the spitter and the rats are first sent on their introduction days, on different nights; the Harvester is on day 28 and nowhere else; days 21 and 28 are the largest of their halves in hit points
-  - done when: `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` output in the journal, with the matchup line for each new enemy and the peak rat count
 
 ### 0273 - Autumn's fourteen nights
 
@@ -1615,7 +1598,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - waits for art A045
 - [ ] **0245** [Art: the dog](prompts/0245-art-dog.md) - waits for art A028
 
-## 14 - Enemies and bosses  (11/24)
+## 14 - Enemies and bosses  (12/24)
 
 - [x] **0246** [Bosses in general](prompts/0246-bosses-general.md)
 - [x] **0247** [The spitter](prompts/0247-spitter.md)
@@ -1628,9 +1611,9 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0254** [The Scarecrow King](prompts/0254-scarecrow-king.md)
 - [x] **0255** [The Winter Lord](prompts/0255-winter-lord.md)
 - [x] **0256** [Fog and rain](prompts/0256-fog-and-rain.md)
-- [ ] **0257** [The Blood Moon](prompts/0257-blood-moon.md)
-- [ ] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md) - needs 0257
-- [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md) - needs 0257
+- [x] **0257** [The Blood Moon](prompts/0257-blood-moon.md)
+- [ ] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md)
+- [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md)
 - [ ] **0260** [Art: the spitter](prompts/0260-art-spitter.md) - waits for art A046
 - [ ] **0261** [Art: the rat swarm](prompts/0261-art-rats.md) - waits for art A047
 - [ ] **0262** [Art: the crow](prompts/0262-art-crow.md) - waits for art A048
@@ -1640,11 +1623,11 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0266** [Art: the Harvester](prompts/0266-art-harvester.md) - waits for art A052
 - [ ] **0267** [Art: the Scarecrow King](prompts/0267-art-scarecrow-king.md) - waits for art A053
 - [ ] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md) - waits for art A054
-- [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md) - needs 0257 - waits for art A055
+- [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md) - waits for art A055
 
 ## 15 - Fifty-six nights and balance  (0/11)
 
-- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0257
+- [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md)
 - [ ] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md) - needs 0270
 - [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0259, 0271
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0259, 0272
@@ -1661,9 +1644,9 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md)
 - [ ] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md)
 - [ ] **0283** [The guardian's sounds](prompts/0283-sfx-night-v2.md)
-- [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0257
+- [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md)
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0282
-- [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0257, 0285
+- [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0285
 - [ ] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057

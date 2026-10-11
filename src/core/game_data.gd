@@ -121,10 +121,15 @@ const CALM_NIGHT_GIFT: Dictionary = {WOOD: 20, STONE: 20, FOOD: 10}  # LEVER: un
 ## - **Rain**: fire - a `DAMAGE_FIRE` hit and a burn's tick - deals
 ##   `rain_fire_percent` of itself, never under one, and the mud takes
 ##   `rain_mud_percent` off a walker's speed. A flyer is over it.
+## - **Blood Moon** (task 0257): from autumn on and rare, never on a boss
+##   night or a Full Moon (`Weather.event`). Every body that comes is an
+##   elite with `blood_moon_hp_percent` of its hit points - a boss never -
+##   and a won one pays `REWARDS.blood_moon_essence` on its own line.
 ##
 ## Spring and summer rain more than they fog; autumn and winter fog more,
 ## and winter's nights are cold and clear or foggy - the searchlight, winter's
-## own, has the fog to answer.
+## own, has the fog to answer. The Blood Moon is last in `Weather.EVENTS`, so
+## the fog and the rain keep the nights they had before it rose.
 const NIGHT_EVENTS: Dictionary = {
 	&"fog": {
 		"weights": {&"spring": 10, &"summer": 10, &"autumn": 20, &"winter": 20},  # LEVER: percent of a season's nights, 0-100
@@ -135,13 +140,23 @@ const NIGHT_EVENTS: Dictionary = {
 		"rain_fire_percent": 50,        # LEVER: percent of fire's damage in the rain, 25-90
 		"rain_mud_percent": 20,         # LEVER: percent of a walker's speed the mud takes, 10-50
 	},
+	&"blood_moon": {
+		"weights": {&"spring": 0, &"summer": 0, &"autumn": 5, &"winter": 5},  # LEVER: percent of a season's nights, 0 before autumn, 0-100
+		"blood_moon_hp_percent": 150,   # LEVER: percent of an elite's hit points, 120-200
+	},
 }
 
 ## The range each night event's levers are held to (`check_night_events`).
 const NIGHT_EVENT_LEVERS: Dictionary = {
 	&"fog": {"fog_reach_penalty": [1, 2]},
 	&"rain": {"rain_fire_percent": [25, 90], "rain_mud_percent": [10, 50]},
+	&"blood_moon": {"blood_moon_hp_percent": [120, 200]},
 }
+
+## **The season a night event first falls in** (task 0257): before it, its
+## share must be 0 (`check_night_events`) - the plan's Blood Moon, rare and
+## only from autumn on.
+const NIGHT_EVENT_FIRST_SEASON: Dictionary = {&"blood_moon": &"autumn"}
 
 ## **The short build step after passing out** (task 0128). A farmer still up
 ## at 02:00 collapses where he stands and the night begins anyway, with this
@@ -3175,6 +3190,9 @@ const REWARDS: Dictionary = {
 	# night's lines add up to, times this over a hundred, as its own line in
 	# `Tech.would_pay`. `check_rewards` refuses less than an ordinary night.
 	"full_moon_essence_percent": 200,   # LEVER: percent of the night's essence, 100-300
+	# **A Blood Moon pays its own line** (task 0257): this much essence for a
+	# won Blood Moon night, on top of the rest - its elites were the work.
+	"blood_moon_essence": 2,            # LEVER: essence, 1-5
 }
 
 ## What a tower becomes, twice. `design.md` section 12 draws it as
@@ -3855,8 +3873,10 @@ static func check_calendar(seasons: Array, season_days: int,
 ## **The night's weather holds together** (task 0256): every event is one
 ## `Weather` can play, with a share of every season's nights from 0 to 100 -
 ## and at most 100 between them, since a night has one event at most - and
-## its levers in `NIGHT_EVENT_LEVERS`' ranges. Takes the table as an
-## argument, like `check_calendar()`, so a check can hand it a bad one.
+## its levers in `NIGHT_EVENT_LEVERS`' ranges, and none of it in a season
+## before `NIGHT_EVENT_FIRST_SEASON` says it rises (task 0257). Takes the
+## table as an argument, like `check_calendar()`, so a check can hand it a
+## bad one.
 static func check_night_events(events: Dictionary, seasons: Array = SEASONS) -> Array:
 	var errors: Array = []
 	var total := {}
@@ -3879,6 +3899,11 @@ static func check_night_events(events: Dictionary, seasons: Array = SEASONS) -> 
 			if not seasons.has(StringName(season)):
 				errors.append("the night event '%s' has a share of '%s', which is no season"
 					% [name, season])
+		var first := seasons.find(StringName(NIGHT_EVENT_FIRST_SEASON.get(name, &"")))
+		for i in maxi(first, 0):
+			if int(weights.get(seasons[i], 0)) > 0:
+				errors.append("the night event '%s' falls in %s, before %s"
+					% [name, seasons[i], seasons[first]])
 		var levers: Dictionary = NIGHT_EVENT_LEVERS.get(name, {})
 		for lever in sorted_names(levers.keys()):
 			var key := String(lever)
@@ -5499,6 +5524,9 @@ static func check_rewards(rewards: Dictionary) -> Array:
 	var share := int(rewards.get("bounty_percent", 100))
 	if share < 0 or share > 100:
 		errors.append("the bounty pays %d%% of the kills' worth: keep it within 0-100" % share)
+	var blood := int(rewards.get("blood_moon_essence", 1))
+	if blood < 1:
+		errors.append("a Blood Moon pays %d essence: it needs at least one" % blood)
 	return errors
 
 
@@ -5856,7 +5884,7 @@ static func digest() -> int:
 			FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES],
 		"calm": CALM_NIGHT_GIFT,
 		# **The night's weather** (task 0256).
-		"night_events": [NIGHT_EVENTS, NIGHT_EVENT_LEVERS],
+		"night_events": [NIGHT_EVENTS, NIGHT_EVENT_LEVERS, NIGHT_EVENT_FIRST_SEASON],
 		"house_tiers": HOUSE_TIERS,
 		"day_economy": [DAY_TARGETS, DAY_FARM],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,

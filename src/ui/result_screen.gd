@@ -333,7 +333,7 @@ func _build(payout: Dictionary) -> void:
 			_row(I18n.f(&"RES_INDENT", ["  ".join(purse)]), "", UiKit.GOOD)
 		# **What the essence was for** (task 0219), line by line as
 		# `Tech.would_pay` gave them inside `Rewards.settle`: the night, each
-		# bonus earned, and a Full Moon's share.
+		# bonus earned, a Full Moon's share and a Blood Moon's (task 0257).
 		var parts := essence_parts(payout.get("essence_from", {}))
 		if not parts.is_empty():
 			_listed(I18n.t(&"RES_ESSENCE_FOR"), parts, UiKit.DIM)
@@ -406,12 +406,14 @@ static func leftovers_parts(state: Dictionary) -> Array:
 
 
 ## **The essence's lines, in words** (task 0219): the night first, then the
-## bonuses in `GameData.TECH_BONUSES` order, then the Full Moon's share.
+## bonuses in `GameData.TECH_BONUSES` order, then the Full Moon's share and
+## the Blood Moon's (task 0257).
 static func essence_parts(lines: Dictionary) -> Array:
 	var order: Array = ["for surviving"]
 	for row in GameData.TECH_BONUSES:
 		order.append(String((row as Dictionary)["id"]))
 	order.append("full moon")
+	order.append("blood moon")
 	var out: Array = []
 	for line in order:
 		if not lines.has(line) and not lines.has(StringName(line)):
@@ -429,6 +431,7 @@ const ESSENCE_LINES := {
 	"nothing lost": &"RES_ESSENCE_NOTHING_LOST",
 	"not one got through": &"RES_ESSENCE_NOT_ONE_GOT_THROUGH",
 	"full moon": &"RES_ESSENCE_FULL_MOON",
+	"blood moon": &"RES_ESSENCE_BLOOD_MOON",
 }
 
 

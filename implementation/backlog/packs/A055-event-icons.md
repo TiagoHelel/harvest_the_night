@@ -20,7 +20,14 @@ must never be mistaken for A010's Full Moon, even by a colour-blind player.
 
 ## Deliverables
 
-The table is provisional: game task 0257 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game tasks 0256 and 0257: **every mark at both boxes, `icon_<id>` 16x16 on (8,8) and `hud_<id>` 10x10 on (5,5)**, one static frame each, as the table says. **How the game plays them:**
+- **Where:** the 16x16 cut sits in the forecast panel (0158), at its top right after the night's own marks (a Full Moon's, a boss's), on the dark navy HUD - by day from 18:00 and in the night's build step. Nothing asks for the 10x10 cut yet; the night HUD's strip, beside the date and the night's marks, is where it would go.
+- **How often:** fog falls on 10-20% of a season's nights. Rain falls on 15-20% of spring's, summer's and autumn's and on none of winter's. The Blood Moon falls on 5% of autumn's and winter's (`GameData.NIGHT_EVENTS`). There is at most one event a night, and none on a calm night.
+- **The Blood Moon never falls on a boss night or a Full Moon**, so it never sits beside A010's Full Moon in the panel. Its drip still has to tell the two apart on its own, in the greyscale copy too.
+- **Words beside each:** FOG / NEBLINA and RAIN / CHUVA in the panel's cool blue, BLOOD MOON / LUA DE SANGUE in the boss's red.
+- **Night colours:** none. The HUD is never relit, so each mark keeps its colours at night. 0258's fog, rain and red ramp are the world's, not the icons'.
+
+Until 0269 every mark is drawn in code (`WeatherArt`) at its box through 0120's road: three staggered bands of mist, a grey cloud with three drops, and a red disc with one drip. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 Every item: one raw source cut into `icon_<id>` 16x16 pivot (8,8) (visible at most
 14x14) and `hud_<id>` 10x10 pivot (5,5) (visible at most 8x8), 1 frame, 1.0 s,

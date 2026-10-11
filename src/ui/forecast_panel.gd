@@ -32,8 +32,11 @@ const HEAD := 16.0
 ## Between one head-and-count and the next.
 const HEAD_GAP := 6.0
 
-## **The night's weather in words** (task 0256), by `Weather` event.
-const EVENT_WORDS := {&"fog": &"FCAST_FOG", &"rain": &"FCAST_RAIN"}
+## **The night's weather in words** (task 0256), by `Weather` event - the
+## Blood Moon's since task 0257 - in the cool colour, or the boss's red.
+const EVENT_WORDS := {&"fog": &"FCAST_FOG", &"rain": &"FCAST_RAIN",
+	&"blood_moon": &"FCAST_BLOOD_MOON"}
+const EVENT_ROLES := {&"blood_moon": UiKit.BAD}
 
 var _state: Dictionary = {}
 var _built_for := ""
@@ -222,7 +225,8 @@ func _build() -> void:
 			y = _line("Boss", I18n.f(&"FCAST_BOSS",
 				[Names.of(StringName(f["boss"])).to_upper()]), y, UiKit.BAD)
 		if EVENT_WORDS.has(StringName(f["event"])):
-			y = _line("Event", I18n.t(EVENT_WORDS[StringName(f["event"])]), y, UiKit.COOL)
+			y = _line("Event", I18n.t(EVENT_WORDS[StringName(f["event"])]), y,
+				EVENT_ROLES.get(StringName(f["event"]), UiKit.COOL))
 		y = _lay_heads(f["kinds"], y + 2.0)
 	size = Vector2(WIDTH, y + PAD)
 	_back.size = size

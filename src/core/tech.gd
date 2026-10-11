@@ -42,6 +42,10 @@ extends RefCounted
 ##
 ## **A Full Moon pays its own share on top** (task 0219), as `would_pay` adds
 ## it: night by night, so the dates decide.
+##
+## **The calendar's ceiling, not a run's** (task 0257): a Blood Moon is the
+## run's own roll (`Weather.event`), and each one a run has pays its
+## `blood_moon_essence` over this.
 static func total_available(nights: int = -1) -> int:
 	if nights < 0:
 		nights = Run.final_night()
@@ -274,6 +278,10 @@ static func already_paid(state: Dictionary, night: int) -> bool:
 ## **A Full Moon is its own line** (task 0219), `"full moon"`: what the other
 ## lines add up to, times `full_moon_essence_percent` less a hundred, over a
 ## hundred - the money's arithmetic (`Rewards._money_from`).
+##
+## **So is a Blood Moon** (task 0257), `"blood moon"`: `blood_moon_essence`
+## on top, for the run's own night (`Weather.event`). It never falls on a
+## Full Moon, so the two lines never meet.
 static func would_pay(state: Dictionary, night: int) -> Dictionary:
 	if already_paid(state, night):
 		return {}
@@ -287,6 +295,8 @@ static func would_pay(state: Dictionary, night: int) -> Dictionary:
 		for line in GameData.sorted_names(out.keys()):
 			ordinary += int(out[line])
 		out["full moon"] = with_the_moon(ordinary, night) - ordinary
+	if Weather.event(int(state["seed"]), night) == Weather.BLOOD_MOON:
+		out["blood moon"] = int(GameData.REWARDS["blood_moon_essence"])
 	return out
 
 

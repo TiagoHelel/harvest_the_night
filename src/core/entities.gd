@@ -28,6 +28,12 @@ static func initial() -> Dictionary:
 
 
 ## Put something on the farm. Returns its id.
+##
+## **On a Blood Moon it comes as an elite** (task 0257): tonight's weather
+## (`Weather.tonight`) raises its hit points to `Weather.elite_hp` and writes
+## them down as `max_hp` - on the elite only, so an ordinary night's bodies
+## are what they always were. Never a boss: an elite boss is another balance
+## problem.
 static func spawn(state: Dictionary, kind: StringName, cell: Vector2i) -> int:
 	var data: Variant = GameData.ENEMIES.get(kind, null)
 	if data == null:
@@ -35,7 +41,7 @@ static func spawn(state: Dictionary, kind: StringName, cell: Vector2i) -> int:
 		return 0
 	var id := int(state["next_entity_id"])
 	state["next_entity_id"] = id + 1
-	(state["entities"] as Dictionary)[id] = {
+	var one := {
 		"id": id,
 		"kind": kind,
 		"pos": [cell.x * Player.SUBTILE + Player.SUBTILE / 2,
@@ -45,7 +51,18 @@ static func spawn(state: Dictionary, kind: StringName, cell: Vector2i) -> int:
 		# not need a float anywhere. Task 0025 uses it.
 		"step": 0,
 	}
+	if not bool((data as Dictionary).get("is_boss", false)) \
+			and Weather.tonight(state) == Weather.BLOOD_MOON:
+		one["hp"] = Weather.elite_hp(int(one["hp"]))
+		one["max_hp"] = int(one["hp"])
+	(state["entities"] as Dictionary)[id] = one
 	return id
+
+
+## **Whether a body is a Blood Moon's elite** (task 0257): it carries
+## `max_hp`, which nothing else does.
+static func is_elite(state: Dictionary, id: int) -> bool:
+	return get_one(state, id).has("max_hp")
 
 
 static func get_one(state: Dictionary, id: int) -> Dictionary:

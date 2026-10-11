@@ -11685,12 +11685,21 @@ func _task_0062_tech() -> void:
 	var worst := _every_night(6204, false)
 	print("  every night played perfectly: %d technology. Played badly: %d"
 		% [best, worst])
-	expect(best == most,
-		"perfect nights pay exactly the ceiling",
-		"%d against %d" % [best, most])
-	expect(worst == least,
-		"and scruffy ones exactly the floor",
-		"%d against %d" % [worst, least])
+	# **Each of a run's Blood Moons pays its own line on top** (task 0257):
+	# the ceiling and the floor are the calendar's, a Blood Moon the run's.
+	var red_best := 0
+	var red_worst := 0
+	for date in range(1, Run.final_night() + 1):
+		if Weather.event(6203, date) == Weather.BLOOD_MOON:
+			red_best += int(GameData.REWARDS["blood_moon_essence"])
+		if Weather.event(6204, date) == Weather.BLOOD_MOON:
+			red_worst += int(GameData.REWARDS["blood_moon_essence"])
+	expect(best == most + red_best,
+		"perfect nights pay exactly the ceiling, the run's Blood Moons on top",
+		"%d against %d and %d" % [best, most, red_best])
+	expect(worst == least + red_worst,
+		"and scruffy ones exactly the floor, the same",
+		"%d against %d and %d" % [worst, least, red_worst])
 
 	# **Points survive a save and a reload.** The done-when.
 	var kept: Dictionary = perfect["state"]
@@ -14660,8 +14669,8 @@ func _task_0082_shots() -> void:
 	# and the line after its charge. A hundred and twelve since 0254: the
 	# Scarecrow King mid-cast. A hundred and thirteen since 0255: the Winter
 	# Lord's aura during a cast. A hundred and fourteen since 0256: a foggy
-	# night's forecast.
-	expect(names.size() == 114,
+	# night's forecast. A hundred and fifteen since 0257: a Blood Moon's.
+	expect(names.size() == 115,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

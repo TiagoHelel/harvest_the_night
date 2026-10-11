@@ -57,13 +57,15 @@ static func is_boss(kind: StringName) -> bool:
 	return kind != &"" and bool((GameData.ENEMIES.get(kind, {}) as Dictionary).get("is_boss", false))
 
 
-## **A body's full health** (task 0246): its kind's `hp` in the table today -
-## the one place 0257's elites will change it, which the boss bar and the
+## **A body's full health** (task 0246): its kind's `hp` in the table, or a
+## Blood Moon elite's own `max_hp` (task 0257) - which the boss bar and the
 ## checks read rather than the table. 0 for nobody.
 static func full_hp(state: Dictionary, id: int) -> int:
 	var one := Entities.get_one(state, id)
 	if one.is_empty():
 		return 0
+	if one.has("max_hp"):
+		return int(one["max_hp"])
 	return int((GameData.ENEMIES[StringName(one["kind"])] as Dictionary).get("hp", 0))
 
 

@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 90
+const GROUPS := 91
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -169,6 +169,7 @@ func _run() -> void:
 	_task_0254_scarecrow_king()
 	_task_0255_winter_lord()
 	_task_0256_fog_rain()
+	_task_0257_blood_moon()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -11109,10 +11110,10 @@ func _task_0256_fog_rain() -> void:
 	expect(unrefused.is_empty() and _says(unseasoned_errors, "no share of winter's nights")
 		and _says(unseasoned_errors, "'monsoon', which is no season")
 		and GameData.check_night_events(events).is_empty() and GameData.validate().is_empty()
-		and Weather.EVENTS == [Weather.FOG, Weather.RAIN]
+		and Weather.EVENTS.slice(0, 2) == [Weather.FOG, Weather.RAIN]
 		and GameData.sorted_names(events.keys()) == GameData.sorted_names(Weather.EVENTS)
 		and FileAccess.get_file_as_string("res://src/core/game_data.gd").contains(
-			"\"night_events\": [NIGHT_EVENTS, NIGHT_EVENT_LEVERS]"),
+			"\"night_events\": [NIGHT_EVENTS, NIGHT_EVENT_LEVERS, NIGHT_EVENT_FIRST_SEASON]"),
 		"a share outside 0-100, a season's shares over 100, a lever out of its range, an event Weather cannot play, a season missing and one that is none are all refused; the real table passes and is in the data's digest",
 		str(unrefused))
 
@@ -11140,7 +11141,7 @@ func _task_0256_fog_rain() -> void:
 	var off: Array = []
 	var shares := PackedStringArray()
 	for season in GameData.SEASONS:
-		for kind in Weather.EVENTS:
+		for kind in [Weather.FOG, Weather.RAIN]:
 			var weight := int(((events[kind] as Dictionary)["weights"] as Dictionary)[season])
 			var count := int((fell.get(season, {}) as Dictionary).get(kind, 0))
 			var share := 100.0 * count / maxi(int(nights.get(season, 0)), 1)
@@ -11319,8 +11320,142 @@ func _task_0256_fog_rain() -> void:
 			mark.free()
 	expect(marks_wrong.is_empty() and not CalendarMark.MARKS.has(Weather.FOG)
 		and GameData.sorted_names(ForecastPanel.EVENT_WORDS.keys()) == GameData.sorted_names(Weather.EVENTS),
-		"fog and rain have A055's marks at 16x16 and 10x10, drawn in code until 0269, and a word each on the forecast",
+		"every night event - fog, rain and since 0257 the Blood Moon - has A055's marks at 16x16 and 10x10, drawn in code until 0269, and a word on the forecast",
 		str(marks_wrong))
+	_completed += 1
+
+
+## 0257 - the Blood Moon. A rare red night from autumn on: never in spring or
+## summer, on a boss night or on a Full Moon. Every body that comes is an
+## elite with the lever's share of hit points - a boss never - whose full
+## health `Combat.full_hp` reads; the night sends no more of them than it
+## would; and a won one pays its essence on its own line, once.
+func _task_0257_blood_moon() -> void:
+	var row: Dictionary = GameData.NIGHT_EVENTS[Weather.BLOOD_MOON]
+	var weights: Dictionary = row["weights"]
+	var percent := int(row["blood_moon_hp_percent"])
+	var essence := int(GameData.REWARDS["blood_moon_essence"])
+	# **The row, and its checks.**
+	var unrefused: Array = []
+	for broken in [
+			[[Weather.BLOOD_MOON, "weights", &"spring"], 1, "'blood_moon' falls in spring, before autumn"],
+			[[Weather.BLOOD_MOON, "weights", &"summer"], 1, "'blood_moon' falls in summer, before autumn"],
+			[[Weather.BLOOD_MOON, "blood_moon_hp_percent"], 119, "blood_moon_hp_percent of 119, outside 120-200"],
+			[[Weather.BLOOD_MOON, "blood_moon_hp_percent"], 201, "blood_moon_hp_percent of 201, outside 120-200"]]:
+		if not _says(GameData.check_night_events(_night_events_with(broken[0], broken[1])), broken[2]):
+			unrefused.append(broken[2])
+	var unpaid := GameData.REWARDS.duplicate(true)
+	unpaid["blood_moon_essence"] = 0
+	expect(unrefused.is_empty() and _says(GameData.check_rewards(unpaid), "a Blood Moon pays 0 essence")
+		and int(weights[&"spring"]) == 0 and int(weights[&"summer"]) == 0
+		and int(weights[&"autumn"]) > 0 and int(weights[&"autumn"]) <= 10
+		and int(weights[&"winter"]) > 0 and int(weights[&"winter"]) <= 10
+		and percent >= 120 and percent <= 200 and essence >= 1
+		and Weather.EVENTS.back() == Weather.BLOOD_MOON
+		and GameData.check_night_events(GameData.NIGHT_EVENTS).is_empty() and GameData.validate().is_empty(),
+		"a Blood Moon before autumn, an elite outside 120-200% and a Blood Moon that pays nothing are refused; the real table gives it a small share of autumn's and winter's nights, last in the roll",
+		str(unrefused))
+
+	# **When it rises** - pure calls, no simulation.
+	var risen := {}
+	var misplaced: Array = []
+	for seed_value in 50:
+		for date in range(1, Calendar.year_days() + 1):
+			if Weather.event(seed_value, date) != Weather.BLOOD_MOON:
+				continue
+			if (Calendar.season_of(date) < 2 or Calendar.is_boss_night(date)
+					or Calendar.is_full_moon(date)):
+				misplaced.append([seed_value, date])
+			var season := Calendar.season_id(date)
+			risen[season] = int(risen.get(season, 0)) + 1
+	print("  Blood Moons over seeds 0-49, Spring 1 to Winter 14: %d in autumn and %d in winter"
+		% [int(risen.get(&"autumn", 0)), int(risen.get(&"winter", 0))])
+	expect(misplaced.is_empty() and int(risen.get(&"autumn", 0)) > 0 and int(risen.get(&"winter", 0)) > 0,
+		"no Blood Moon falls in spring, in summer, on a boss night or on a Full Moon, and some rise in autumn and in winter",
+		str(misplaced.slice(0, 3)))
+
+	# **Elites**: on a Blood Moon a walker - put down or sent by a wave - comes
+	# with the lever's share of hit points, written down as `max_hp`, which
+	# `full_hp` reads after a hit; a Giant comes as it is; and a night of the
+	# same season with no weather sends plain ones.
+	var at := _weather_date(Weather.BLOOD_MOON)
+	var seed_found := int(at[0])
+	var date_found := int(at[1])
+	var red := _parked_on(seed_found, date_found)
+	var plain_night := _parked_on(seed_found, _clear_date(seed_found, date_found))
+	var walker_hp := int((GameData.ENEMIES[&"walker"] as Dictionary)["hp"])
+	var elite_hp := walker_hp * percent / 100
+	var elite := Entities.spawn(red, &"walker", Enemies.spawn_cells(red, 0)[0])
+	var by_wave := Enemies.spawn(red, &"walker", 0)
+	var giant := Entities.spawn(red, &"giant", Enemies.spawn_cells(red, 0)[0])
+	var plain := Entities.spawn(plain_night, &"walker", Enemies.spawn_cells(plain_night, 0)[0])
+	Combat.hit(red, elite, 5)
+	var one := Entities.get_one(red, elite)
+	expect(Weather.tonight(red) == Weather.BLOOD_MOON and Weather.tonight(plain_night) == Weather.NONE
+		and Weather.elite_hp(walker_hp) == elite_hp and elite_hp > walker_hp
+		and int(one.get("max_hp", 0)) == elite_hp and int(one["hp"]) == elite_hp - 5
+		and Combat.full_hp(red, elite) == elite_hp
+		and Entities.is_elite(red, elite) and Entities.is_elite(red, by_wave)
+		and int(Entities.get_one(red, by_wave)["hp"]) == elite_hp
+		and not Entities.is_elite(red, giant)
+		and int(Entities.get_one(red, giant)["hp"]) == int((GameData.ENEMIES[&"giant"] as Dictionary)["hp"])
+		and not Entities.is_elite(plain_night, plain) and Combat.full_hp(plain_night, plain) == walker_hp,
+		"on the Blood Moon a walker comes with %d%% of its hit points as its max_hp, which full_hp reads after a hit; a Giant comes as it is, and a plain night's walker has no max_hp" % percent,
+		"%s %s" % [str(at), str(one)])
+	var said := Forecast.of(seed_found, date_found)
+	expect(StringName(said["event"]) == Weather.BLOOD_MOON
+		and int(said["count"]) == Waves.size_in(Waves.night_of(date_found, seed_found))
+		and not SuiteKit.code_lines_of("res://src/core/waves.gd").contains("Weather"),
+		"its forecast names the Blood Moon and counts what the night sends, and the waves never ask the weather: elites are tougher, not more",
+		str(said))
+
+	# **A won Blood Moon pays its essence on its own line, once.**
+	I18n.use("en")
+	var won := _essence_night(seed_found, date_found)
+	var paid := Rewards.settle(won, true)
+	var lines: Dictionary = paid["essence_from"]
+	var summed := 0
+	for line in GameData.sorted_names(lines.keys()):
+		summed += int(lines[line])
+	var again := Rewards.settle(won, true)
+	var quiet := Rewards.settle(_essence_night(seed_found, _clear_date(seed_found, date_found)), true)
+	var parts := ResultScreen.essence_parts(lines)
+	expect(int(lines.get("blood moon", 0)) == essence and summed == int(paid["tech"])
+		and int(again["tech"]) == 0 and (again["essence_from"] as Dictionary).is_empty()
+		and Tech.held(won) == int(paid["tech"])
+		and not (quiet["essence_from"] as Dictionary).has("blood moon")
+		and int(quiet["tech"]) == int(paid["tech"]) - essence
+		and not parts.is_empty()
+		and parts.back() == I18n.f(&"RES_ESSENCE_PART", [I18n.t(&"RES_ESSENCE_BLOOD_MOON"), essence]),
+		"a won Blood Moon pays %d essence more on its own line, which the morning report names last; a plain night of its season does not, and nothing is paid a second time" % essence,
+		"%s, again %s" % [str(lines), str(again["essence_from"])])
+
+	# **On the forecast**: its word in the boss's red beside A055's mark,
+	# drawn in code until 0269 - a red disc whose drip changes its outline, so
+	# it is never only the colour that tells it from A010's Full Moon.
+	var mark := CalendarMark.new()
+	mark.setup(Weather.BLOOD_MOON)
+	var small := CalendarMark.new()
+	small.setup(Weather.BLOOD_MOON, true)
+	var texture := mark.texture()
+	var full_moon: Texture2D = load(CalendarMark.file_of(&"full_moon", false))
+	var outline_differs := false
+	if texture != null and full_moon != null:
+		var drawn := texture.get_image()
+		var white := full_moon.get_image()
+		for y in CalendarMark.ICON:
+			for x in CalendarMark.ICON:
+				if (drawn.get_pixel(x, y).a > 0.5) != (white.get_pixel(x, y).a > 0.5):
+					outline_differs = true
+	expect(ForecastPanel.EVENT_WORDS.get(Weather.BLOOD_MOON, &"") == &"FCAST_BLOOD_MOON"
+		and ForecastPanel.EVENT_ROLES.get(Weather.BLOOD_MOON, &"") == UiKit.BAD
+		and texture != null and Vector2i(texture.get_size()) == Vector2i(CalendarMark.ICON, CalendarMark.ICON)
+		and small.texture() != null and Vector2i(small.texture().get_size()) == Vector2i(CalendarMark.HUD, CalendarMark.HUD)
+		and PlaceholderArt.is_drawn(CalendarMark.file_of(Weather.BLOOD_MOON, false))
+		and outline_differs,
+		"the forecast says BLOOD MOON in the boss's red beside A055's mark, drawn in code until 0269 at both boxes, its outline not the Full Moon's")
+	mark.free()
+	small.free()
 	_completed += 1
 
 

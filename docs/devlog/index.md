@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-228 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+229 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -272,10 +272,11 @@ is the sort of thing this list exists to say out loud.
 | 0254 | The Scarecrow King | 2026-10-11 |
 | 0255 | The Winter Lord | 2026-10-11 |
 | 0256 | Fog and rain | 2026-10-11 |
+| 0257 | The Blood Moon | 2026-10-11 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 116 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 117 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -393,10 +394,11 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **The Scarecrow King** (0254) - `data` 4051846968 -> 1042213124
 - **The Winter Lord** (0255) - `data` 1042213124 -> 612138885
 - **Fog and rain** (0256) - `data` 612138885 -> 417880566
+- **The Blood Moon** (0257) - `data` 417880566 -> 663742656
 
 ## What went wrong
 
-64 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+65 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -462,6 +464,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0254** - Found *(The Scarecrow King)*
 - **0255** - Found *(The Winter Lord)*
 - **0256** - Found *(Fog and rain)*
+- **0257** - Found *(The Blood Moon)*
 
 ## What is not in it
 

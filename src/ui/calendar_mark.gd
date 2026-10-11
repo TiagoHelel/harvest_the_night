@@ -11,8 +11,9 @@ extends Control
 ## moon, a horned skull, a crescent with a star. The HUD is never relit, so a
 ## mark keeps its colours at night.
 ##
-## **Or a night's weather** (task 0256): A055's `fog` and `rain`, at the same
-## two boxes, drawn in code (`WeatherArt`) until 0269 integrates the pack.
+## **Or a night's weather** (task 0256): A055's `fog`, `rain` and, since task
+## 0257, `blood_moon`, at the same two boxes, drawn in code (`WeatherArt`)
+## until 0269 integrates the pack.
 
 ## The two boxes, in native pixels.
 const ICON := 16

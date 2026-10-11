@@ -27481,3 +27481,161 @@ src/tools/{headless_v1,input_v1,headless_check,shot}.gd,
 assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/prompts/0256-fog-and-rain.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0256/, docs/devlog/{index,index.pt_BR}.md
+
+## 0257 - The Blood Moon - done 2026-10-11
+
+What changed: from autumn on, a rare night turns red. Every zombie that comes
+on it is an elite with half its hit points again, and a won Blood Moon pays
+two essence more, on its own line in the morning report. The forecast says
+so at dusk - BLOOD MOON in red, and a red moon with a drip - so it is an
+occasion and never an ambush. It never falls on a boss night or a Full Moon.
+
+### The rules (`src/core/`)
+
+**`GameData.NIGHT_EVENTS[&"blood_moon"]`**:
+- shares 0/0/5/5 of spring's, summer's, autumn's and winter's nights;
+- `blood_moon_hp_percent` 150 (`# LEVER`, 120-200), its range in
+  `NIGHT_EVENT_LEVERS`;
+- `NIGHT_EVENT_FIRST_SEASON` (`{blood_moon: autumn}`) makes
+  `check_night_events` refuse any share in a season before it.
+- All three tables are in `digest()`.
+
+**`Weather`**:
+- `BLOOD_MOON` is **last in `EVENTS`**, so the roll meets fog and rain
+  first: every night 0256 made foggy or rainy is still so;
+- `event()` never returns it on a boss night (`Calendar.is_boss_night`) or
+  a Full Moon (`Calendar.is_full_moon`). The roll that would have made one
+  there makes a plain night;
+- `elite_hp(hp)` is the hit points at the lever's share, rounded down.
+
+**Elites, in `Entities.spawn`**: on a Blood Moon (`Weather.tonight`) a body
+that is no boss comes with `Weather.elite_hp` hit points, written down as
+`max_hp` on it alone. `Entities.is_elite` asks for that key, and
+`Combat.full_hp` reads it - the boss bar and the checks with it. An ordinary
+night's bodies have no `max_hp`, so the SIM hash cannot move.
+
+**Its pay**:
+- `REWARDS.blood_moon_essence`, 2 (`# LEVER`, 1-5). `check_rewards`
+  refuses less than one;
+- `Tech.would_pay` adds it as a `"blood moon"` line when
+  `Weather.event(seed, night)` says so. `nights_paid` still stops a second
+  payment;
+- `Tech.total_available` stays the calendar's ceiling; each Blood Moon a run
+  rolls pays on top of it.
+
+**No more of them**: `Waves` never asks the weather, so the night's count -
+`Waves.size_of` and the forecast's - is what it would be on any night.
+Elites are tougher, not more.
+
+### Decided
+
+- **Never on a Full Moon.** The Full Moon is already the season's big
+  night - half as many again, paying double. An elite one would stack two
+  spikes on a single night, 150% of the horde at 150% of its hit points.
+  It would also put a white moon and a red one side by side in the
+  forecast, the one pair A055 worries a player could mix up. A real blood
+  moon is a full moon, but the game's Full Moon is a date and its Blood Moon
+  an occasion, and they are better as two nights than as one. 0270's pins
+  obey this too: its prompt and `tools/backlog/part11.py` now say so.
+- **Never an elite boss, on any night.** The plan keeps the Blood Moon off
+  boss nights, and the same reason keeps a boss off the Blood Moon. A
+  generated night past Year 1 can carry a Giant on a night that is not a
+  boss night, and it comes as itself.
+- **Rare**: 5% of autumn's and of winter's nights, which come to some 0.55
+  a season over the eleven nights it can fall on. That is about one a year,
+  and some years have none. Over seeds 0-49, 25 rose in autumn and 16 in
+  winter.
+- **150% and 2 essence**:
+  - a walker of 20 comes with 30;
+  - a won night paid 1-4 essence and a Blood Moon pays 3-6 - three times
+    a scruffy night's, and half again on a perfect one.
+
+### The view (`src/ui/`)
+
+- **The forecast**: `BLOOD MOON` / `LUA DE SANGUE` (`FCAST_BLOOD_MOON`,
+  width 142) in the boss's red (`EVENT_ROLES`), beside its mark at the right.
+- **A055's mark through 0120's road** until 0269: `icon_blood_moon` and
+  `hud_blood_moon` are registered as drawn. `WeatherArt` paints a disc in
+  the roof ramp, outlined in ink, lit at its upper left, with blood craters
+  and a drip from its lower edge. The drip makes its outline differ from
+  A010's Full Moon, which is asserted, so colour is never the only cue.
+- **The morning report** names the line last among the essence's parts
+  (`RES_ESSENCE_BLOOD_MOON`, Blood Moon / Lua de Sangue).
+- **A055's table is final**: every mark at both boxes, where the game shows
+  them and how often each event falls.
+
+### Found
+
+- **headless_check's "perfect nights pay exactly the ceiling" got 262
+  against 256**: seed 6203's year has three Blood Moons. The ceiling and the
+  floor are the calendar's, so the group now adds each run's Blood Moons to
+  both, counted through `Weather`.
+- **0256's group pinned what the Blood Moon changes**:
+  - `EVENTS == [fog, rain]` now asks that the two come first;
+  - the digest's line now has `NIGHT_EVENT_FIRST_SEASON` in it;
+  - the five-point share check stays on fog and rain;
+  - its marks loop now checks the Blood Moon's two as well.
+- **Another session's two Godot processes** (`one-room-dg`, snapshots) ran
+  a core each throughout. The suites ran slower standalone: headless_v1
+  48 s, headless_check 115 s, input_check 103 s, input_v1 121 s.
+- **The placeholder reads at 4x a little like a balloon on its string.**
+  A055's drip is the real answer.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. Spring 1 has no weather, and `max_hp`
+  exists only on elites.
+- **DATA 417880566 -> 663742656:** the Blood Moon's row, its range, its first
+  season and `blood_moon_essence`.
+
+Verify: **PASS**, 60 of 60 in 1081 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 18111 asserts, `headless_v1` 2712, `input_check` 1269 cases, `input_v1` 735 in 119 s - under a second short of verify's 120 s limit for a script. The owner's call, as before: the next input case this suite gains may tip it over.
+- **perf:** a night tick 1826 us, the swarm's 6104, a path rebuild 11534, 16550 with the decoys and 12090 with the garlic. The baseline did not move: a spawn asks the weather once, and nothing else asks it more than 0256 did.
+
+**Tests:**
+- **`_task_0257_blood_moon` (headless_v1), the rules:**
+  - a share before autumn, an elite outside 120-200% and a Blood Moon
+    paying nothing are refused; the real table has a small share of autumn
+    and winter, last in the roll;
+  - over seeds 0-49 and dates 1-56, pure calls: none in spring, summer, on
+    a boss night or a Full Moon, and the autumn and winter counts printed;
+  - on the first Blood Moon from seed 25600, a walker put down and one sent
+    by a wave come with 150%, as their `max_hp`, which `full_hp` reads
+    after a hit. A Giant comes as itself, and a plain night of the same
+    season has no `max_hp`;
+  - its forecast's count is what the night sends, and `waves.gd` never
+    names the weather.
+- **The same group, the pay and the mark:**
+  - a won Blood Moon pays `blood_moon_essence` on its own line, last in the
+    morning report's parts, and nothing the second time. A plain night of
+    its season pays exactly that much less;
+  - the word in red, the mark drawn at both boxes, its outline not the Full
+    Moon's.
+- **Old groups touched:**
+  - 0256's fog and rain checks;
+  - headless_check's essence ceiling and floor;
+  - `_case_0158_panel` (input_v1) finds the run's first night of every
+    event over four years and checks each one's mark and word, the Blood
+    Moon's included, and fits every line in both languages;
+  - headless_check counts 115 scenes.
+
+**Looked at** (`python tools/shot.py 0257 forecast_blood_moon --fhd`, and with `--pt_BR`):
+- **`forecast_blood_moon`, Autumn 3 of Year 1 at 18:36:** the first night
+  of the shots' run that `Weather` makes a Blood Moon, found through it and
+  never forced. The forecast reads TONIGHT, AUTUMN 3, from the EAST,
+  SOUTH-EAST, NORTH, 7 WAVES, and then BLOOD MOON in the boss's red, above
+  four heads and their counts. At the panel's top right is the Blood Moon's
+  mark: a red disc lit at its upper left, with dark craters and a drip from
+  its lower edge, clear of the title and the date. At 4x the drip reads a
+  little like a balloon's string; A055 draws the real one.
+- **In Portuguese:** ESTA NOITE, OUTONO 3, pelo LESTE, SUDESTE, NORTE, 7
+  ONDAS, LUA DE SANGUE. Every line fits.
+
+Files: src/core/{weather,entities,combat,game_data,tech}.gd,
+src/ui/{weather_art,calendar_mark,forecast_panel,placeholder_art,result_screen}.gd,
+src/tools/{headless_v1,input_v1,headless_check,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+tools/backlog/part11.py, implementation/backlog/packs/A055-event-icons.md,
+implementation/prompts/{0257-blood-moon,0270-night-records-v2}.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0257/,
+docs/devlog/{index,index.pt_BR}.md

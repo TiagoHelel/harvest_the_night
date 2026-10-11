@@ -77,8 +77,9 @@ TASKS = [
               "never both, and the forecast's count equals what is sent. A key "
               "night may pin or forbid an event with an optional `event` "
               "field, read by 0256's `Weather` chooser for that `(seed, day)`; "
-              "a pin still obeys `check_night_events` (no Blood Moon before "
-              "autumn or on a boss night, nothing on Spring 1 or a calm date)",
+              "a pin still obeys `check_night_events` and `Weather`'s own "
+              "rules (no Blood Moon before autumn, on a boss night or - 0257's "
+              "decision - on a Full Moon; nothing on Spring 1 or a calm date)",
               "`GameData.check_nights(templates, key_nights)` takes its tables "
               "as arguments, as it takes `nights` today, so a test can hand it "
               "a broken copy. It refuses: a boss in any template or key night "
