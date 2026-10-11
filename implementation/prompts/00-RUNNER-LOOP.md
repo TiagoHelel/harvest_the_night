@@ -90,6 +90,8 @@ House rules, non-negotiable:
   `src/tools/headless_check.gd` and `src/tools/input_check.gd`; from 0112 on
   they go in `src/tools/headless_v1.gd` and `src/tools/input_v1.gd` (task
   0112 makes them, because the old suites are close to verify's 120 s limit).
+  From task 0258 on a new input case goes in `src/tools/input_v2.gd`, even
+  where its prompt says `input_v1`, for the same reason.
 - **Art comes only from Codex.** New sprites arrive as approved packs in
   `implementation/backlog/` (see its README) and are promoted through the
   raster pipeline (`assets/art_source/`, the manifest, `tools/import_art.py`).

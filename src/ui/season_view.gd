@@ -59,6 +59,10 @@ const ROOFED: Array = [&"house", &"shop", &"workshop", &"kitchen", &"press",
 const CAPPED: Array = [&"stump", &"rock", &"ore", &"seam", &"copper_ore",
 	&"coal_seam", &"gold_ore", &"hardwood_stump"]
 
+## **The palette entries a rainy night muddies** (task 0258): the grass's and
+## the soil's, which the path is drawn in too.
+const MUDDIED: Array = [&"grass_dark", &"grass", &"grass_light", &"soil_dark", &"soil", &"soil_light"]
+
 ## Emitted the frame the season on screen moves.
 signal changed(season: int)
 
@@ -101,6 +105,17 @@ func season() -> int:
 ## What the shader is set to - for `input_v1`.
 func shader_season() -> int:
 	return int(ground.get_shader_parameter("season"))
+
+
+## **The ground gone to mud** (task 0258): 0 dry to 1 a whole rainy night's,
+## on the ground's material only - `WeatherView` fades it with the night.
+func set_mud(amount: float) -> void:
+	ground.set_shader_parameter("mud", clampf(amount, 0.0, 1.0))
+
+
+## How muddy the ground is drawn now - for `input_v2`.
+func mud() -> float:
+	return float(ground.get_shader_parameter("mud"))
 
 
 ## **The season on screen** for a state: its date's, except under the morning
@@ -173,6 +188,14 @@ func _dress(material: ShaderMaterial, remapped: bool) -> void:
 	material.set_shader_parameter("season", _season)
 	if material != ground:
 		_worn.append(material)
+		return
+	# What the rain muddies (task 0258): the grass and the soil, the path's
+	# soil with them - never water, rock or the path's stones.
+	var ground_entries := PackedVector3Array()
+	for entry in MUDDIED:
+		ground_entries.append(_vec(entry))
+	material.set_shader_parameter("mud_from", ground_entries)
+	material.set_shader_parameter("mud", 0.0)
 
 
 func _switch_to(now: int) -> void:

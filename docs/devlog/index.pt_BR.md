@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-229 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+230 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -272,6 +272,7 @@ voz alta.
 | 0255 | The Winter Lord | 2026-10-11 |
 | 0256 | Fog and rain | 2026-10-11 |
 | 0257 | The Blood Moon | 2026-10-11 |
+| 0258 | Fog, rain and a red moon on screen | 2026-10-11 |
 
 ## Toda vez que o jogo mudou por baixo
 
@@ -397,7 +398,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 
 ## O que deu errado
 
-65 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
+66 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -464,6 +465,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **0255** - Found *(The Winter Lord)*
 - **0256** - Found *(Fog and rain)*
 - **0257** - Found *(The Blood Moon)*
+- **0258** - Found *(Fog, rain and a red moon on screen)*
 
 ## O que nao tem
 

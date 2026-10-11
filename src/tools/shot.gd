@@ -111,7 +111,10 @@ const SCENARIOS: Array = [
 	["dusk", "the same farm at dusk", ""],
 	["bedtime", "the same farm at 22:30, time for bed", ""],
 	["wave", "a wave mid-fight", ""],
-	["full_moon", "the same wave on day 7, under a Full Moon", ""],
+	["full_moon", "the same wave under the first Full Moon of the shots' run with no weather, found through Calendar.is_full_moon and Weather - brighter, and still night", ""],
+	["fog", "the same wave on the first foggy night of the shots' run, found through Weather: the fog over the farm, and thinner on the lit ground round the porch", ""],
+	["rain", "the same wave on the first rainy night of the shots' run, found through Weather: the darker ramp, the drops and the mud on the ground", ""],
+	["blood_moon", "the same wave on the first Blood Moon of the shots' run, found through Weather: the red ramp over elites", ""],
 	["result", "the night's result", "ResultScreen"],
 	["tech", "the tech tree", "TechPanel"],
 	["tech_autumn", "the tech tree on Autumn 2, on its own floor: a node bought, one affordable, one waiting on another; then winter's floor, greyed", "TechPanel:autumn"],
@@ -763,6 +766,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"bedtime": _set_bedtime(state)
 		"wave": _set_wave(state)
 		"full_moon": _set_full_moon(state)
+		"fog": _set_fog(state)
+		"rain": _set_rain(state)
+		"blood_moon": _set_blood_moon(state)
 		"result": _set_result(state)
 		"tech": _set_tech(state)
 		"tech_autumn": _set_tech_autumn(state)
@@ -2789,6 +2795,12 @@ func _set_dusk(state: Dictionary) -> void:
 
 func _set_wave(state: Dictionary) -> void:
 	_a_defended_farm(state, true)
+	_fight_the_wave(state)
+
+
+## The night begun on a defended farm and the wave sent at it, four seconds
+## in: the second half of `wave`.
+func _fight_the_wave(state: Dictionary) -> void:
 	NightRoad.to_night(state)
 	Sim.advance(state, 1)
 	# **Spawned by hand rather than waited for.** A wave arriving on its own
@@ -2806,12 +2818,60 @@ func _set_wave(state: Dictionary) -> void:
 	_look_at(_the_defence_line(state))
 
 
-## **The wave under a Full Moon** (task 0152): the same fight on day 7, so
-## the two pictures differ only in the light - brighter, and still night.
+## **The wave under a Full Moon** (task 0152): the same fight, so the two
+## pictures differ only in the light - brighter, and still night. Since task
+## 0258 on the run's first Full Moon with no weather, found through
+## `Calendar.is_full_moon` and `Weather` rather than written down.
 func _set_full_moon(state: Dictionary) -> void:
-	state["day"] = 7
-	state["nights_won"] = 6
+	var date := 2
+	while date < 10 * Calendar.year_days() and not (Calendar.is_full_moon(date)
+			and not Calendar.is_boss_night(date)
+			and Weather.event(int(state["seed"]), date) == Weather.NONE):
+		date += 1
+	_on_weather_date(state, date)
 	_set_wave(state)
+
+
+## **The wave in the fog** (task 0258): the fog thinning on the lit ground
+## round the porch, as it thins round a searchlight - which is winter's, and
+## snow under fog is two pales on each other, so the run's first fog is
+## spring's grass.
+func _set_fog(state: Dictionary) -> void:
+	_on_weather_date(state, _first_of(state, Weather.FOG))
+	_set_wave(state)
+
+
+## **The wave in the rain** (task 0258).
+func _set_rain(state: Dictionary) -> void:
+	_on_weather_date(state, _first_of(state, Weather.RAIN))
+	_set_wave(state)
+
+
+## **The wave under a Blood Moon** (task 0258), its walkers elites.
+func _set_blood_moon(state: Dictionary) -> void:
+	_on_weather_date(state, _first_of(state, Weather.BLOOD_MOON))
+	_set_wave(state)
+
+
+## The first night of the shots' run that `Weather` makes `kind`, never a boss
+## night - and in `season` (0 spring to 3 winter) when one is given.
+func _first_of(state: Dictionary, kind: StringName, season: int = -1) -> int:
+	var date := 2
+	while date < 10 * Calendar.year_days() and (Weather.event(int(state["seed"]), date) != kind
+			or Calendar.is_boss_night(date)
+			or (season >= 0 and Calendar.season_of(date) != season)):
+		date += 1
+	return date
+
+
+## The run on `date`, said aloud: the season, the day, the year and the night's
+## weather - so a picture's caption can be checked against what it shows.
+func _on_weather_date(state: Dictionary, date: int) -> void:
+	_on_date(state, date)
+	print("  %s %d of year %d, date %d: %s%s" % [Calendar.season_id(date),
+		Calendar.day_of_season(date), Calendar.year_of(date), date,
+		Weather.event(int(state["seed"]), date) if Weather.event(int(state["seed"]), date) != Weather.NONE else "no weather",
+		", a Full Moon" if Calendar.is_full_moon(date) else ""])
 
 
 func _set_result(state: Dictionary) -> void:

@@ -166,6 +166,10 @@ func _run() -> void:
 	var seen := _view(night)
 	print("PERF view_lighting ", int(seen[0]))
 	print("PERF view_particles ", int(seen[1]))
+	# **And a rainy night at four times speed** (task 0258): the emitter's
+	# per-frame thinking with the rain over the same fight, four ticks of it
+	# between frames. Its own line, so the two above stay comparable.
+	print("PERF view_rain ", _view_rain(night))
 
 
 ## Night ten, everything built, the biggest wave the table sends.
@@ -473,6 +477,33 @@ func _view(state: Dictionary) -> Array:
 	lighting.free()
 	particles.free()
 	return [int(round(lit)), int(round(sparks))]
+
+
+## Microseconds per frame of the emitter's thinking on a rainy night at four
+## times speed (task 0258): a copy of the worst case's night, its night moved
+## to the first of its run that `Weather` makes rainy - found, never forced -
+## and four ticks between frames. Only the frames are timed.
+func _view_rain(state: Dictionary) -> int:
+	var wet := state.duplicate(true)
+	var date := 2
+	while date < 10 * Calendar.year_days() and Weather.event(int(wet["seed"]), date) != Weather.RAIN:
+		date += 1
+	wet["night"] = date
+	var particles := Particles.new()
+	root.add_child(particles)
+	particles._ready()
+	particles.show_state(wet)
+	var spent := 0
+	for _i in TICKS:
+		for _t in 4:
+			Sim.tick(wet)
+		var started := Time.get_ticks_usec()
+		particles._process(1.0 / 60.0)
+		spent += Time.get_ticks_usec() - started
+	print("COUNT raindrops ", particles.raindrops())
+	root.remove_child(particles)
+	particles.free()
+	return int(round(float(spent) / float(TICKS)))
 
 
 ## Somewhere a building of this size fits, or (-1, -1).

@@ -7,13 +7,30 @@ shader_type canvas_item;
 
 varying vec4 sprite_tint;
 
+// **Mud** (task 0258): on a rainy night the ground - the palette entries in
+// `mud_from`, the grass and the soil - darkens toward wet earth by `mud`, 0
+// dry. Only the ground's material sets it, so a roof never goes muddy; water,
+// rock and the path's stones are not in the list.
+uniform float mud = 0.0;
+uniform vec3 mud_tint = vec3(0.72, 0.6, 0.5);
+uniform vec3 mud_from[6];
+
 void vertex() {
 	sprite_tint = COLOR;
 }
 
 void fragment() {
 	vec4 source = texture(TEXTURE, UV);
+	vec3 drawn = source.rgb;
 	source.rgb = seasonal(source.rgb);
+	if (mud > 0.0) {
+		for (int i = 0; i < 6; i++) {
+			if (distance(drawn, mud_from[i]) < 0.008) {
+				source.rgb = mix(source.rgb, source.rgb * mud_tint, mud);
+				break;
+			}
+		}
+	}
 	// How far under its column's top edge this pixel is - one row more than
 	// the snow, for the line it lies under - or -1 for deeper, or no snow.
 	int depth = -1;

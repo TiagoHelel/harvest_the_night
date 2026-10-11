@@ -7,6 +7,8 @@ Scripts run by `tools/verify.py`, never by the game.
 - `input_check.gd` - real clicks and keys through the real UI (task 0011)
 - `headless_v1.gd` / `input_v1.gd` - the same two suites for every task from
   0112 on; the old pair keeps tasks up to 0111 (task 0112)
+- `input_v2.gd` - the input cases from task 0258 on, once `input_v1` had
+  filled verify's 120 s; it extends `input_v1` (task 0258)
 - `suite_kit.gd` - plain helpers the suites share, moved rather than copied
   (task 0112)
 - `autoplayer.gd` - plays the ten nights for balance data (task 0067)

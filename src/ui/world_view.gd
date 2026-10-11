@@ -272,6 +272,9 @@ var _animal_view: AnimalView
 ## What the night left lying about (task 0221).
 var _loot_view: LootView
 var _peddler_view: PeddlerView
+## **The night's weather** (task 0258): the fog over the farm and the mud on
+## it; the rain is `Particles`', the ramps `_night_ramp`'s.
+var _weather: WeatherView
 var _house_mark: Node2D
 var _house_mark_for := ""
 ## The cells with a defence on them last time the occupants changed, so a new
@@ -449,6 +452,11 @@ func _ready() -> void:
 	_peddler_view.name = "PeddlerView"
 	add_child(_peddler_view)
 	_peddler_view.setup(_occupants)
+	# **The night's weather** (task 0258): the fog over the actors, the mud
+	# on the ground's material - view only.
+	_weather = WeatherView.new()
+	_weather.setup(self, _season)
+	add_child(_weather)
 	# **The house's tier, marked** (task 0191): a plaque over the door, sorted
 	# with the house it hangs on.
 	_house_mark = Node2D.new()
@@ -533,6 +541,8 @@ func show_state(state: Dictionary) -> void:
 		_loot_view.show_state(state)
 	if _peddler_view != null:
 		_peddler_view.show_state(state)
+	if _weather != null:
+		_weather.show_state(state)
 	_remember_towers(state)
 	_dirty = true
 	if _season != null:
@@ -757,7 +767,24 @@ static func _dusk_ramp() -> Dictionary:
 ## The night's ramp - **a Full Moon's when tonight is one** (task 0152):
 ## brighter, and still night. The evening deepens towards it too, so a Full
 ## Moon's dusk already looks like one.
+##
+## **And the weather's** (task 0258): a rainy night's, darker and greyer -
+## over any moon, which the cloud hides - and a Blood Moon's red one. A foggy
+## night wears its moon's and the fog over it (`WeatherView`).
 func _night_ramp() -> Dictionary:
+	var weather := WeatherView.tonight(_state) \
+		if _weather == null or _weather.is_enabled() else Weather.NONE
+	match weather:
+		Weather.RAIN:
+			return {"tint": PaletteData.RAIN_TINT, "lift": PaletteData.RAIN_LIFT,
+				"saturation": PaletteData.RAIN_SATURATION,
+				"warm_keep": PaletteData.RAIN_WARM_KEEP,
+				"warm_edge": PaletteData.RAIN_WARM_EDGE}
+		Weather.BLOOD_MOON:
+			return {"tint": PaletteData.BLOOD_MOON_TINT, "lift": PaletteData.BLOOD_MOON_LIFT,
+				"saturation": PaletteData.BLOOD_MOON_SATURATION,
+				"warm_keep": PaletteData.BLOOD_MOON_WARM_KEEP,
+				"warm_edge": PaletteData.BLOOD_MOON_WARM_EDGE}
 	if _tonight_is_full_moon():
 		return {"tint": PaletteData.FULL_MOON_TINT, "lift": PaletteData.FULL_MOON_LIFT,
 			"saturation": PaletteData.FULL_MOON_SATURATION,
@@ -767,6 +794,16 @@ func _night_ramp() -> Dictionary:
 		"saturation": PaletteData.NIGHT_SATURATION,
 		"warm_keep": PaletteData.NIGHT_WARM_KEEP,
 		"warm_edge": PaletteData.NIGHT_WARM_EDGE}
+
+
+## The ramp tonight's night wears - for `input_v2` and the shots.
+func night_ramp() -> Dictionary:
+	return _night_ramp()
+
+
+## The night's weather on screen (task 0258) - for `input_v2`.
+func weather_view() -> WeatherView:
+	return _weather
 
 
 ## Whether the night this farm is in, or heading for, is a Full Moon: the

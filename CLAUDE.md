@@ -29,7 +29,9 @@ current scope".
 4. **Tests ship with the change.** A new rule gets an assert and a new input
    path gets a case, same pass, not later: in `src/tools/headless_check.gd` /
    `input_check.gd` up to task 0111, and from 0112 on in
-   `src/tools/headless_v1.gd` / `input_v1.gd` (made by task 0112).
+   `src/tools/headless_v1.gd` / `input_v1.gd` (made by task 0112). From task
+   0258 on, a new input case goes in `src/tools/input_v2.gd` even where its
+   prompt still says `input_v1`: that suite reached 119 of verify's 120 s.
 
 ## Conventions
 

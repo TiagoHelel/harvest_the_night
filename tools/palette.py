@@ -185,6 +185,29 @@ RAMPS = {
         "warm_keep":  1.00,
         "warm_edge":  0.06,
     },
+    # **A rainy night** (task 0258): cloud over whatever moon there is - a
+    # Full Moon's too - so darker than an ordinary night and greyer: the
+    # tint comes down, the lift leans cold rather than purple and the colour
+    # drains further. The windows, the braziers and the muzzle flashes carry
+    # it, and the drops over the top say why.
+    "rain": {
+        "tint":       (0.32, 0.36, 0.66),
+        "lift":       (0.04, 0.05, 0.09),
+        "saturation": 0.60,
+        "warm_keep":  1.00,
+        "warm_edge":  0.06,
+    },
+    # **A Blood Moon** (tasks 0257 and 0258): the night turned red so the farm
+    # looks wrong at a glance - red held up, green and blue pulled down, a red
+    # lift where the ordinary night's is purple - and still dark enough that
+    # the lamps and the muzzle flashes are the bright things.
+    "blood_moon": {
+        "tint":       (0.58, 0.24, 0.28),
+        "lift":       (0.09, 0.012, 0.03),
+        "saturation": 0.78,
+        "warm_keep":  1.00,
+        "warm_edge":  0.06,
+    },
 }
 
 

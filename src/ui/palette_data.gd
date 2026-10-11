@@ -54,6 +54,17 @@ const COLOURS := {
 	&"wood_light": Color8(168, 124, 78),
 }
 
+## The blood_moon ramp: what the same pixels look like after dark.
+const BLOOD_MOON_TINT := Color(0.580, 0.240, 0.280)
+const BLOOD_MOON_LIFT := Color(0.090, 0.012, 0.030)
+const BLOOD_MOON_SATURATION := 0.780
+## Legacy brightness threshold; 1 disables all material exemptions.
+## Actual fire/window cores use semantic emission layers.
+const BLOOD_MOON_WARM_KEEP := 1.000
+## How wide that threshold is, so a flame has no hard
+## outline where the exemption stops.
+const BLOOD_MOON_WARM_EDGE := 0.060
+
 ## The dawn ramp: what the same pixels look like after dark.
 const DAWN_TINT := Color(0.920, 0.900, 1.020)
 const DAWN_LIFT := Color(0.020, 0.020, 0.050)
@@ -108,6 +119,17 @@ const NIGHT_WARM_KEEP := 1.000
 ## How wide that threshold is, so a flame has no hard
 ## outline where the exemption stops.
 const NIGHT_WARM_EDGE := 0.060
+
+## The rain ramp: what the same pixels look like after dark.
+const RAIN_TINT := Color(0.320, 0.360, 0.660)
+const RAIN_LIFT := Color(0.040, 0.050, 0.090)
+const RAIN_SATURATION := 0.600
+## Legacy brightness threshold; 1 disables all material exemptions.
+## Actual fire/window cores use semantic emission layers.
+const RAIN_WARM_KEEP := 1.000
+## How wide that threshold is, so a flame has no hard
+## outline where the exemption stops.
+const RAIN_WARM_EDGE := 0.060
 
 ## **The grass and the foliage** (task 0159): the entries the season
 ## remap touches, in the order its shader counts them.

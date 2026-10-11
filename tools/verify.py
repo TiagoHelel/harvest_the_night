@@ -812,6 +812,12 @@ def main():
         check_script("input_v1", "src/tools/input_v1.gd",
                      "not written yet - task 0112",
                      pattern=r"\d+ cases?, \d+ failed")
+        # **Every input case from task 0258 on** (task 0258): `input_v1`
+        # reached 119 of its 120 seconds at 0257, as the old suites had
+        # filled theirs when 0112 started it.
+        check_script("input_v2", "src/tools/input_v2.gd",
+                     "not written yet - task 0258",
+                     pattern=r"\d+ cases?, \d+ failed")
         if fast:
             skip("exports", "--fast")
         else:

@@ -67,6 +67,18 @@ const SPRAY_COLOURS := [&"water_light", &"water", &"moon"]
 ## How long a drop flies, in seconds.
 const SPRAY_LIFE := 0.6
 
+## **Rain** (task 0258): drops a second over whatever the camera sees, at
+## full density, falling this fast in world pixels a second - slanting, and
+## streaks rather than flakes. Water's lightest blue and the moon's white. From
+## the same pool, so the cap is still a cap and the density setting turns the
+## rain down with the rest; and on the night `WeatherView` shows rain, with the
+## light's own fade.
+const RAIN_PER_SECOND := 150.0
+const RAIN_FALL := Vector2(-40.0, 220.0)
+const RAIN_COLOURS := [&"water_light", &"moon"]
+## How long a streak is, in world pixels.
+const RAIN_STREAK := 4
+
 ## The cap when nothing says otherwise. `video/max_particles` moves it and
 ## `a11y/particle_density` scales what is asked for - one turns the ceiling
 ## down and the other turns the tap down, which are different things.
@@ -92,11 +104,14 @@ var _span: PackedFloat32Array = PackedFloat32Array()
 var _size: PackedByteArray = PackedByteArray()
 var _tint: PackedColorArray = PackedColorArray()
 ## 1 for a snowflake, which falls at its own pace rather than slowing; 2 for
-## a sprinkler's drop, which flies at its own pace the same way.
+## a sprinkler's drop, which flies at its own pace the same way; 3 for a
+## raindrop (task 0258), the same again, drawn as a streak.
 var _falling: PackedByteArray = PackedByteArray()
 var _next := 0
 var _snow_due := 0.0
 var _snow_was := false
+var _rain_due := 0.0
+var _rain_was := false
 ## Drops owed to each sprinkler cell, by index.
 var _spray_due: Dictionary = {}
 
@@ -254,6 +269,7 @@ func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
 	_snow(delta)
+	_rain(delta)
 	_spray(delta)
 	_advance(delta)
 	_forms.advance(delta, self)
@@ -275,6 +291,11 @@ func _advance(delta: float) -> void:
 		if _left[i] <= 0.0:
 			continue
 		_left[i] -= delta
+		if _falling[i] == 3:
+			# A raindrop keeps its pace and its slant, all the way down.
+			_x[i] += _vx[i] * delta
+			_y[i] += _vy[i] * delta
+			continue
 		if _falling[i] >= 1:
 			# A flake keeps its pace and sways a little on the way down; a
 			# drop keeps its pace out to where it lands.
@@ -304,6 +325,16 @@ func _draw() -> void:
 		# A drop is water until it lands: whole for most of its flight.
 		if _falling[i] == 2:
 			lit.a = minf(lit.a * 3.0, 1.0)
+		# **A raindrop is a streak** (task 0258): a pixel wide, a few long,
+		# slanting the way it falls - and not quite whole, so the farm reads
+		# through it.
+		if _falling[i] == 3:
+			lit.a = 0.75
+			var top := Vector2(floorf(_x[i]), floorf(_y[i]))
+			for step in RAIN_STREAK:
+				draw_rect(Rect2(top + Vector2(roundf(_vx[i] / _vy[i] * float(step)), float(step)),
+					Vector2.ONE), lit, true)
+			continue
 		var wide := float(_size[i])
 		draw_rect(Rect2(floorf(_x[i]), floorf(_y[i]), wide, wide), lit, true)
 
@@ -567,6 +598,82 @@ func _flake(corner: Vector2, view: Vector2, down: float) -> void:
 	_size[i] = 1
 	_tint[i] = PaletteData.COLOURS[SNOW_COLOURS[randi() % SNOW_COLOURS.size()]]
 	_falling[i] = 1
+
+
+# ------------------------------------------------------------------ the rain
+
+## Whether it is raining on screen (task 0258): a night `WeatherView` shows
+## rain on, with particles allowed and moving.
+func raining() -> bool:
+	return not _state.is_empty() and _density > 0.0 and _motion and _cap > 0 \
+		and _rain_strength() > 0.0
+
+
+## How many raindrops are in the air - for `input_v2`.
+func raindrops() -> int:
+	var n := 0
+	for i in _left.size():
+		if _left[i] > 0.0 and _falling[i] == 3:
+			n += 1
+	return n
+
+
+## How many drops the rain keeps in the air over a view `tall` world pixels
+## high at this density, at full strength - what the first frame of rain puts
+## down at once. For `input_v2`, which holds the count to the setting.
+func rain_wanted(tall: float) -> int:
+	return int(RAIN_PER_SECOND * _density * tall / RAIN_FALL.y)
+
+
+## How strongly it rains now, 0 to 1: the world's `WeatherView` when there is
+## one, and a night that is tonight's rain otherwise - which is the timing's,
+## with no world round it.
+func _rain_strength() -> float:
+	var weather := get_parent().get_node_or_null(^"Weather") as WeatherView \
+		if get_parent() != null else null
+	if weather != null:
+		return weather.strength(Weather.RAIN)
+	return 1.0 if int(_state["phase"]) != Phases.DAY \
+		and WeatherView.tonight(_state) == Weather.RAIN else 0.0
+
+
+## Let raindrops into the camera's view from its top edge - and, the first
+## frame it rains, all the way down it, so the night does not open on a dry
+## sky. As many as the light's fade into the night allows. On the wall clock,
+## like every particle.
+func _rain(delta: float) -> void:
+	if not raining():
+		_rain_was = false
+		_rain_due = 0.0
+		return
+	var strength := _rain_strength()
+	var to_world := get_global_transform_with_canvas().affine_inverse()
+	var corner := to_world * Vector2.ZERO
+	var view := to_world.basis_xform(get_viewport_rect().size)
+	if not _rain_was:
+		_rain_was = true
+		for _i in int(rain_wanted(view.y) * strength):
+			_raindrop(corner, view, randf() * view.y)
+	_rain_due += RAIN_PER_SECOND * _density * strength * delta
+	while _rain_due >= 1.0:
+		_rain_due -= 1.0
+		_raindrop(corner, view, -float(RAIN_STREAK))
+
+
+func _raindrop(corner: Vector2, view: Vector2, down: float) -> void:
+	var i := _slot()
+	if i < 0:
+		return
+	# Wider than the view by the slant, so the right edge is never dry.
+	_x[i] = corner.x + randf() * (view.x - RAIN_FALL.x * view.y / RAIN_FALL.y)
+	_y[i] = corner.y + down
+	_vx[i] = RAIN_FALL.x * (0.9 + randf() * 0.2)
+	_vy[i] = RAIN_FALL.y * (0.85 + randf() * 0.3)
+	_left[i] = maxf((view.y + 4.0 - down) / _vy[i], 0.05)
+	_span[i] = 0.6
+	_size[i] = 1
+	_tint[i] = PaletteData.COLOURS[RAIN_COLOURS[randi() % RAIN_COLOURS.size()]]
+	_falling[i] = 3
 
 
 # ----------------------------------------------------------------- the spray

@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-229 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+230 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -273,6 +273,7 @@ is the sort of thing this list exists to say out loud.
 | 0255 | The Winter Lord | 2026-10-11 |
 | 0256 | Fog and rain | 2026-10-11 |
 | 0257 | The Blood Moon | 2026-10-11 |
+| 0258 | Fog, rain and a red moon on screen | 2026-10-11 |
 
 ## Every time the game changed underneath itself
 
@@ -398,7 +399,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 
 ## What went wrong
 
-65 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+66 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -465,6 +466,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0255** - Found *(The Winter Lord)*
 - **0256** - Found *(Fog and rain)*
 - **0257** - Found *(The Blood Moon)*
+- **0258** - Found *(Fog, rain and a red moon on screen)*
 
 ## What is not in it
 

@@ -27639,3 +27639,170 @@ tools/backlog/part11.py, implementation/backlog/packs/A055-event-icons.md,
 implementation/prompts/{0257-blood-moon,0270-night-records-v2}.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0257/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0258 - Fog, rain and a red moon on screen - done 2026-10-11
+
+What changed: the night's weather can be seen. Fog drifts over the farm in
+stepped pixel banks, and it thins on the lit ground round the porch and
+under a searchlight. Rain falls in streaks over a darker, greyer night and
+turns the ground to mud. A Blood Moon turns the whole night red, so the farm
+looks wrong at a glance. Every layer comes with the night and goes at dawn,
+and none of it touches a rule: both hashes are unchanged, and a night ends on
+the same SIM hash with the layers on or off.
+
+### The view (`src/ui/`)
+
+**`WeatherView`** (`src/ui/weather_view.gd`, new) is a child of `WorldView`:
+- it owns the fog and the mud;
+- `tonight(state)` answers `Weather.event` for the night being fought, or
+  today's before it begins, remembered per seed and night, so a frame asking
+  it often works it out once;
+- every layer's strength is the light's own fade into the night
+  (`WorldView.visual_nightness`). Through the morning's fade it shows the
+  night just gone, never the one ahead;
+- `set_enabled(false)` takes every layer off, the ramps included, for the
+  hash check.
+
+**Fog** (`src/ui/fog.gdshader`, new: a noise worked out in the shader, no
+PNG):
+- a `ColorRect` over the whole farm at z 14, over the actors and under the
+  particles, so snow falls in front of it;
+- it is drawn under the night's ramp, so the night colours it. The night's
+  cues, the lamps and the HUD stay above it;
+- `bone_dark`, at most 55% thick, in whole world pixels and four steps,
+  drifting 3 px a second - and still when `a11y/flashing` is off;
+- **thinner on lit cells**: a mask of `Light.lit_cells`, refreshed ten times
+  a second, leaves 20% of the fog there. That is the porch's light, a
+  searchlight's, a flare's and a burning zombie's. `lit_cells` works the
+  farm out afresh and writes nothing, as the view must.
+
+**Rain**:
+- **drops in `Particles`**: 150 a second at full density, times the light's
+  fade, from the same pool, so the cap is still a cap. `a11y/particle_density`
+  turns them down with everything else, and `a11y/flashing` off stops them
+  as it stops the snow;
+- each drop is a four-pixel streak, slanting a little, 75% opaque, in
+  `water_light` and `moon`;
+- `raining()`, `raindrops()` and `rain_wanted()` are for the tests;
+- **mud**: `season_remap.gdshader` gains `mud` and `mud_from`, set on the
+  ground's material alone (`SeasonView.set_mud`). It darkens the grass and
+  the soil palette entries toward wet earth - the path is drawn in soil, so
+  it muddies too. Water, rock, the path's stones and every roof stay dry.
+
+**The ramps**, the road 0152 took for the Full Moon:
+- `rain` and `blood_moon` are added to `tools/palette.py` `RAMPS` and written
+  into `PaletteData` by `python tools/gen_sprites.py`. Only
+  `palette_data.gd` changed; no sprite did;
+- `WorldView._night_ramp()` picks them. Rain goes over any moon, because the
+  cloud hides it, so a rainy Full Moon is a rainy night;
+- a foggy night wears its moon's ramp under the veil.
+- `night_ramp()` and `weather_view()` are public for the tests.
+
+### Decided
+
+- **No fog ramp.** The veil is what tells a foggy night apart, and a
+  greyer ramp under it only made it murkier.
+- **Told apart at a glance**, measured as the world area's mean luma in the
+  shots:
+  - an ordinary night 60.5 and a Full Moon 80.9 - still the brighter;
+  - rain 45.4, darker and greyer;
+  - fog 64.8, with violet banks over it;
+  - the Blood Moon 52.8, red (100, 33, 30).
+  - The first rain ramp measured 39.6 and the farm was hard to read, so it
+    came up; the first Blood Moon was as bright as an ordinary night and
+    came down a little.
+- **The fog shot is spring's.** The run's first foggy winter night put fog
+  over snow, two pales on each other with nothing to see. The searchlight is
+  winter's, so it is not in the picture; the lit porch shows the same rule.
+
+### `input_v2`: the input suite is full
+
+`input_v1` took 115 s on an idle machine at 0256 and 119.3 of verify's 120 s
+at 0257. This task needs an input case, and every later prompt names more.
+So, as 0112 did when the MVP's suites filled, a new file starts:
+- `src/tools/input_v2.gd` extends `input_v1.gd` (which extends
+  `input_check.gd`), so every helper is inherited, none copied;
+- `tools/verify.py` runs it after `input_v1`;
+- `CLAUDE.md` rule 4, the runner loop's step 3 and `src/tools/README.md` now
+  say a new input case goes there from 0258 on, even where its prompt still
+  says `input_v1`;
+- no limit was raised and nothing moved across.
+- **The owner's call stands**: `SCRIPT_TIMEOUT_S` could rise instead, and
+  this file can be folded back if it does.
+
+### Found
+
+- **The first fog shot opened the arsenal with `SuiteKit.open_arsenal`,
+  which moves the date to the arsenal's season.** The farm landed on Winter
+  1, a calm night that ended at once, and the picture was a morning report.
+- **`python tools/verify.py --help` starts a full verify**: there is no help
+  flag. It was stopped at once.
+- **`skip_transition()` before the view has seen the new phase skips
+  nothing.** The view starts its fade on the next frame, so the layers were
+  still coming up at the check. `_settled` waits a frame first.
+- **The first run on a new date starts with banked `stats` that the runs
+  after it do not have**, layers on or off. Playing on, off, on, off showed
+  only the first differing. Each compared pair now follows a thrown-away
+  night of its own date.
+
+### Hashes and cost
+
+- **SIM unchanged:** 1167439413. **DATA unchanged:** 663742656. Nothing in
+  `src/core/` or `game_data.gd` was touched.
+- **perf, accepted** with `python tools/perf.py --accept`:
+  - for the new line, `view_rain`: 480 us a frame, against
+    `view_particles`' 370. It is the emitter on a rainy night with four
+    ticks between frames, which is 4x speed. The headless viewport is
+    small, so 8 drops were in the air at the end: the line times the rain's
+    thinking, not a screenful of it;
+  - the baseline's other lines moved with it, drift since the last accept
+    and all well inside the 40% tolerance: night_tick 1671 -> 1726,
+    swarm_tick 5583 -> 5729, night_enemies 578 -> 628, night_towers
+    782 -> 812, path_refresh 11925 -> 10800, lure_refresh 17265 -> 15514,
+    burrow_refresh 16794 -> 16077, garlic_refresh 11484 -> 11182,
+    view_particles 375 -> 370.
+
+Verify: **PASS**, 61 of 61 in 1020 s, both hashes unchanged; perf a night tick 1776 us, a swarm's 5795, a path rebuild 11053 (15810 with the decoys, 11101 with the garlic).
+- **Suites:** `headless_check` 18115 asserts, `headless_v1` 2712, `input_check` 1269 cases, `input_v1` 735 (115 s), `input_v2` 3 (14 s).
+
+**Tests:**
+- **`_case_0258_event_visuals` (input_v2)**, for each event's first night in
+  the run:
+  - at noon nothing;
+  - in its waves its layer: the fog's thickness; the rain's drops, mud and
+    ramp; the Blood Moon's ramp;
+  - after the morning nothing again.
+- **The same case, the density and the hash:**
+  - the first frame of rain puts down as many drops as the density asks:
+    some at full, none at none, half at half;
+  - a foggy night and a rainy one end on the same SIM hash with their layers
+    on and off.
+- **headless_check** counts 118 scenes.
+
+**Looked at** (`python tools/shot.py 0258 wave full_moon fog rain blood_moon --fhd`), each beside `docs/reference-sheet.png`. It is the same wave each time, on the date each one finds:
+- **`wave`, Spring 1, an ordinary night**: the sheet's blue-purple dark, with
+  the windows and the muzzle flashes the bright things.
+- **`full_moon`, Spring 7**, the run's first Full Moon with no weather:
+  greyer and brighter, and still night.
+- **`fog`, Spring 11**: violet banks of fog in stepped pixel edges over the
+  field and the road, the walkers on the right veiled by them. The ground
+  just in front of the porch, which the porch lights, stays clear.
+- **`rain`, Spring 2**: a darker, greyer night, with four-pixel streaks
+  falling all over it. The road and the grass are a shade muddier, the
+  windows and the flashes still carry the picture, and the walkers read as
+  walkers.
+- **`blood_moon`, Autumn 3**: the whole farm gone red, the trees and the
+  road with it. The windows glow orange in it and the elites stand dark
+  against the red: wrong at a glance, and every shape still readable.
+- The farm stays readable in every one. The Blood Moon leaves the sheet's
+  palette on purpose.
+
+Files: src/ui/weather_view.gd and src/ui/fog.gdshader (new, with their
+.uid files), src/ui/{world_view,particles,season_view}.gd,
+src/ui/season_remap.gdshader, src/ui/palette_data.gd (generated),
+tools/palette.py, src/tools/input_v2.gd (new, with its .uid),
+src/tools/{perf_check,shot,headless_check}.gd, src/tools/README.md,
+tools/{verify.py,perf_baseline.txt}, CLAUDE.md,
+implementation/prompts/{00-RUNNER-LOOP,0258-event-visuals}.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0258/,
+docs/devlog/{index,index.pt_BR}.md
