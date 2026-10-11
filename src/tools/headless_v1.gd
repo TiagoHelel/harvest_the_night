@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 73
+const GROUPS := 74
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -152,6 +152,7 @@ func _run() -> void:
 	_task_0226_beehive()
 	_task_0227_catapult()
 	_task_0228_garlic()
+	_task_0229_light()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -587,8 +588,10 @@ func _task_0116_ammo() -> void:
 	# spend the round and burn nobody.
 	var far := _tower_night(1162, &"flame_tower", [&"true sights", &"long barrels"])
 	var flame: Dictionary = GameData.DEFENCES[&"flame_tower"]
-	var reach := Towers.reach_of(far["state"], flame)
-	expect(reach == int(flame["range"]) + 1, "long barrels: one tile further",
+	# At the tower's own cell (task 0229): a tile more again if it is lit.
+	var reach := Towers.reach_of(far["state"], flame, far["tower"])
+	var lit_bonus := GameData.LIGHT_REACH_BONUS if Light.is_lit(far["state"], far["tower"]) else 0
+	expect(reach == int(flame["range"]) + 1 + lit_bonus, "long barrels: one tile further",
 		str(reach))
 	var out_there := Entities.spawn(far["state"], &"walker",
 		(far["tower"] as Vector2i) + Vector2i(reach, 0))
@@ -6173,8 +6176,8 @@ func _task_0193_supply() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		var said := GameData.defence_season(GameData.DEFENCES[id]) if GameData.DEFENCES[id].has("season") else &""
 		seasons[said] = int(seasons.get(said, 0)) + 1
-	expect(seasons == {&"spring": 8, &"summer": 3, &"autumn": 2},
-		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225) and hive (0226), and autumn's catapult (0227) and braid (0228)", str(seasons))
+	expect(seasons == {&"spring": 8, &"summer": 3, &"autumn": 2, &"winter": 1},
+		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225) and hive (0226), autumn's catapult (0227) and braid (0228), and winter's searchlight (0229)", str(seasons))
 	# **The routes**, season by season: what each kit, round, meal and feed
 	# is made of, followed back to the ground.
 	for season in GameData.SEASONS:
@@ -8202,6 +8205,207 @@ func _task_0228_garlic() -> void:
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A040-garlic-braid.md").contains("Final geometry settled by game task 0228"),
 		"perf.py holds a rebuild with ten braids to the path's budget, shot.gd has the route bending round one, and A040's table says the geometry this task settled")
 	_completed += 1
+
+
+## 0229 - the searchlight. A winter lamp on a mast, powered and never
+## shooting; light as a rule in one place (`Light`): a searchlight's square,
+## the porch, the flare's area while it burns and the cell of whatever burns.
+## A tower standing in light reaches a tile further; a farm short of power
+## lights a tile less, never none; the cache of what stands still rebuilds
+## when a searchlight goes up or comes down; one upgrade, to a wider light.
+func _task_0229_light() -> void:
+	# **The row, and its checks.**
+	var row: Dictionary = GameData.DEFENCES[&"searchlight"]
+	var cost: Dictionary = row["cost"]
+	var tiles := int(row["light_tiles"])
+	var steps: Array = GameData.TOWER_LEVELS[&"searchlight"]
+	var wider := int(((steps[0] as Dictionary)["gives"] as Dictionary).get("light_tiles", 0)) if steps.size() == 1 else 0
+	expect(cost.size() == 2 and cost.has(GameData.IRON) and cost.has(GameData.COPPER)
+		and not row.has("reload_ticks") and not row.has("damage") and int(row["energy_draw"]) > 0
+		and tiles >= 3 and tiles <= 6 and GameData.defence_season(row) == &"winter"
+		and not Sfx.TOWER_SOUNDS.has(&"searchlight") and Pathing.is_prey(&"searchlight") and wider > tiles,
+		"a searchlight costs iron and copper, draws power, lights 3-6 tiles, shoots nothing, is winter's, is hunted by breakers, and has one upgrade - a wider light",
+		str(row))
+	var unlit := GameData.DEFENCES.duplicate(true)
+	(unlit[&"searchlight"] as Dictionary)["light_tiles"] = 0
+	expect(_says(GameData.check_defences(unlit), "lights no tiles") and GameData.validate().is_empty()
+		and FileAccess.get_file_as_string("res://src/core/game_data.gd").contains(
+			"\"light\": [PORCH_LIGHT_TILES, LIGHT_REACH_BONUS, LIGHT_SHORT_SHRINK]"),
+		"a lamp lighting no tiles is refused, the real tables pass, and the porch's radius, the reach in light and a short farm's shrink are in the data's digest")
+
+	# **Each source of light.** The porch, on a farm with nothing else.
+	var farm := State.create(22900)
+	Resources.gain(farm, {GameData.IRON: 200, GameData.COPPER: 200, GameData.WOOD: 200})
+	var porch := House.porch(farm)
+	var expected := {}
+	_lit_square(expected, porch, GameData.PORCH_LIGHT_TILES)
+	expect(Light.lit_cells(farm) == _sorted_cells(expected) and Light.is_lit(farm, porch)
+		and not Light.is_lit(farm, porch + Vector2i(GameData.PORCH_LIGHT_TILES + 1, 0)),
+		"the porch lights %d tiles round the door, and no further" % GameData.PORCH_LIGHT_TILES)
+	# A searchlight hung on open ground, in the build step.
+	NightRoad.into_build(farm)
+	var lamp := _open_square(farm, tiles + 2, &"searchlight")
+	var before: Array = (farm["light_for"] as Array).duplicate()
+	expect(Building.place(farm, &"searchlight", lamp), "a searchlight goes up", str(lamp))
+	_lit_square(expected, lamp, tiles)
+	expect(Light.is_lit(farm, lamp + Vector2i(tiles, -tiles)) and Light.lit_cells(farm) == _sorted_cells(expected)
+		and (farm["light_for"] as Array) != before
+		and int((farm["light_for"] as Array)[0]) == int(farm["grid_version"]),
+		"a searchlight lights the square %d round it and the porch still lights its own - the cache rebuilt for the farm it went up on" % tiles)
+	# The flare while it burns, and the cell of a burning zombie.
+	NightRoad.through_build(farm)
+	NightRoad.park(farm)
+	Enemies.withdraw(farm)
+	var flare_at := _a_dark_cell(farm, lamp, 12, int(GameData.ABILITY["radius_tiles"]) + 1)
+	(farm["ability"] as Dictionary)["cooldown"] = 0
+	(farm["intent"] as Dictionary)["ability_cell"] = [flare_at.x, flare_at.y]
+	var radius := int(GameData.ABILITY["radius_tiles"])
+	var flared := (Ability.use(farm) and Light.is_lit(farm, flare_at + Vector2i(radius, radius))
+		and not Light.is_lit(farm, flare_at + Vector2i(radius + 1, 0)))
+	for _i in int(GameData.ABILITY["flare_ticks"]):
+		Ability.tick(farm)
+	expect(flared and not Light.is_lit(farm, flare_at),
+		"the flare lights its %d tiles while it burns, and the dark comes back when it is out" % radius)
+	var torch := _a_dark_cell(farm, lamp, 20, 1)
+	var burner := Entities.spawn(farm, &"walker", torch)
+	var dark_before := Light.is_lit(farm, torch)
+	Combat.set_alight(farm, burner, 1, 2 * GameData.SECONDS)
+	expect(not dark_before and Light.is_lit(farm, torch) and not Light.is_lit(farm, torch + Vector2i(1, 0)),
+		"a burning zombie lights the cell it burns on, and that one only")
+	Enemies.withdraw(farm)
+
+	# **A tower in light reaches a tile further.** A gun tower beside the
+	# lamp and one in the dark, a walker one tile past the dark one's reach
+	# from each.
+	var gun: Dictionary = GameData.DEFENCES[&"gun_tower"]
+	var lit_post := lamp + Vector2i(0, 1)
+	var dark_post := _a_dark_cell(farm, lamp, 22)
+	var plain := Towers.reach_of(farm, gun, dark_post)
+	var near := Entities.spawn(farm, &"walker", lit_post + Vector2i(plain + 1, 0))
+	var far := Entities.spawn(farm, &"walker", dark_post + Vector2i(plain + 1, 0))
+	expect(Towers.reach_of(farm, gun, lit_post) == plain + GameData.LIGHT_REACH_BONUS
+		and Towers.acquire_for(farm, lit_post, gun) == near and Towers.acquire_nearby_for(farm, lit_post, gun) == near
+		and Towers.acquire_for(farm, dark_post, gun) == 0 and Towers.acquire_nearby_for(farm, dark_post, gun) == 0,
+		"a gun tower in light acquires one tile further than one in the dark, by the whole farm's look and the crowd's squares alike",
+		"%d and %d" % [Towers.reach_of(farm, gun, lit_post), plain])
+	Enemies.withdraw(farm)
+
+	# **A farm short of power lights a tile less, never none**: an auto
+	# crossbow beside the lamp, and the power worked out.
+	var crossbow := _a_dark_cell(farm, lamp, 8)
+	expect(Building.place(farm, &"auto_crossbow", crossbow), "an auto crossbow goes up", str(crossbow))
+	Power.tick(farm, false)
+	var short_tiles := Light.lamp_tiles(farm, lamp)
+	var shrunk := {}
+	_lit_square(shrunk, porch, GameData.PORCH_LIGHT_TILES)
+	_lit_square(shrunk, lamp, short_tiles)
+	expect(Power.is_short(farm) and short_tiles == maxi(tiles - GameData.LIGHT_SHORT_SHRINK, 1)
+		and Light.is_lit(farm, lamp + Vector2i(short_tiles, 0)) and Light.lit_cells(farm) == _sorted_cells(shrunk)
+		and not WorldView.lamp_at_full(farm),
+		"short of power - %d%% - it lights %d tiles, not %d and not none, and its lens shows dark" % [Power.percent(farm), short_tiles, tiles],
+		str(short_tiles))
+	Building.sell(farm, crossbow)
+	Power.tick(farm, false)
+	expect(not Power.is_short(farm) and Light.lamp_tiles(farm, lamp) == tiles and WorldView.lamp_at_full(farm),
+		"and its light comes back with the power")
+
+	# **The cache rebuilds when a searchlight goes up or comes down.**
+	var second := _a_dark_cell(farm, lamp, 16)
+	var stamp: Array = (farm["light_for"] as Array).duplicate()
+	var dark_then := Light.is_lit(farm, second)
+	expect(Building.place(farm, &"searchlight", second), "a second searchlight goes up", str(second))
+	var lit_now := Light.is_lit(farm, second)
+	var stamp_up: Array = (farm["light_for"] as Array).duplicate()
+	Building.sell(farm, second)
+	expect(not dark_then and lit_now and stamp_up != stamp and not Light.is_lit(farm, second)
+		and (farm["light_for"] as Array) != stamp_up,
+		"put up, its cells are lit at once; taken down, they are dark again - the cache rebuilt both times")
+
+	# **One upgrade, to a wider light**, and no further.
+	(farm["tech_owned"] as Array).append(&"true sights")
+	expect(Building.upgrade(farm, lamp) and Light.lamp_tiles(farm, lamp) == wider
+		and Light.is_lit(farm, lamp + Vector2i(wider, 0))
+		and Building.why_not_upgrade(farm, lamp) == [&"WHY_LAST_LEVEL"],
+		"upgraded it lights %d tiles, and a third level is refused" % wider)
+
+	# **The words and the placeholder road.**
+	var said := {}
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		said[locale] = Describe.defence(&"searchlight")
+	I18n.use("en")
+	expect(Names.KEYS.get(&"searchlight") == &"DEF_SEARCHLIGHT"
+		and (said["en"] as String).contains("SEARCHLIGHT")
+		and (said["en"] as String).contains("lights %d tiles round it, and towers in light reach %d further" % [tiles, GameData.LIGHT_REACH_BONUS])
+		and (said["pt_BR"] as String).contains("HOLOFOTE") and (said["pt_BR"] as String).contains("ilumina %d ladrilhos" % tiles),
+		"its name, its light and what light gives a tower, in both languages", str(said))
+	var road: Array = []
+	for level in ["", "_2"]:
+		for state_name in ["", "_hurt", "_fire", "_wreck"]:
+			var name := StringName("searchlight%s%s" % [level, state_name])
+			var path := PlaceholderArt.art_path(name, 0)
+			var frame := PlaceholderArt.frame(path)
+			var file := PlaceholderArt.texture_path(path)
+			if frame.get("canvas") != Vector2i(32, 48) or frame.get("pivot") != Vector2i(16, 44) \
+					or not file.begins_with("res://sprites/buildings/gun_tower") or not ResourceLoader.exists(file) \
+					or frame.has("light") != (state_name != "_wreck") \
+					or str(PlaceholderArt.art(name).get("pack", "")) != "A041":
+				road.append(name)
+	var view := WorldView.new()
+	view._state = farm
+	var shown := [view._stand_in_tower_art(Farm.occupant(farm, lamp))]
+	farm["phase"] = Phases.DAY
+	shown.append(view._stand_in_tower_art(Farm.occupant(farm, lamp)))
+	farm["phase"] = Phases.NIGHT
+	view.free()
+	var bar := Hotbar.new()
+	var icon := bar._icon_of(&"searchlight")
+	bar.free()
+	expect(road.is_empty() and WorldView.stand_in_tower(&"searchlight") and shown == [&"searchlight_2_fire", &"searchlight_2"]
+		and icon != null and icon.resource_path == "res://sprites/buildings/gun_tower.png",
+		"drawn through 0120's road: the gun tower in lamp white at A041's 32x48 on (16,44), its lens a light point but on the wreck; lit at night at full power, dark by day; the hotbar's icon",
+		"%s %s" % [str(road), str(shown)])
+	expect(FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"searchlight\", ")
+		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A041-searchlight.md").contains("Final geometry settled by game task 0229"),
+		"shot.gd has a lit and an unlit tower line, and A041's table says the geometry this task settled")
+	_completed += 1
+
+
+## Every cell within `radius` of `centre`, a square, into `cells` (task 0229).
+func _lit_square(cells: Dictionary, centre: Vector2i, radius: int) -> void:
+	for dy in range(-radius, radius + 1):
+		for dx in range(-radius, radius + 1):
+			var at := centre + Vector2i(dx, dy)
+			if Grid.in_bounds(at):
+				cells[Grid.index(at)] = true
+
+
+func _sorted_cells(cells: Dictionary) -> Array:
+	var keys: Array = cells.keys()
+	keys.sort()
+	var out: Array = []
+	for idx in keys:
+		out.append(Grid.cell(int(idx)))
+	return out
+
+
+## The first cell, ring by ring out from `from` at `at_least` tiles or more,
+## that is buildable, has room eight tiles east, and is dark - with every cell
+## within `clear` of it dark too (task 0229).
+func _a_dark_cell(state: Dictionary, from: Vector2i, at_least: int, clear: int = 0) -> Vector2i:
+	for ring in range(at_least, 60):
+		for cell in Grid.within(from, ring):
+			if Grid.chebyshev(from, cell) != ring or not Farm.buildable(state, cell) \
+					or not Grid.in_bounds(cell + Vector2i(8, 0)):
+				continue
+			var dark := true
+			for dy in range(-clear, clear + 1):
+				for dx in range(-clear, clear + 1):
+					var at: Vector2i = cell + Vector2i(dx, dy)
+					dark = dark and Grid.in_bounds(at) and not Light.is_lit(state, at)
+			if dark:
+				return cell
+	return Vector2i(-1, -1)
 
 
 ## A braid hung in the build step on bare ground - four cells of it every way,

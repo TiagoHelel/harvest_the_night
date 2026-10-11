@@ -70,6 +70,11 @@ const GENERATOR_COLOUR := Color(0.72, 0.88, 1.00)
 const MUZZLE_COLOUR := Color(1.00, 0.90, 0.62)
 const BURNING_COLOUR := Color(1.00, 0.56, 0.24)
 const LANTERN_COLOUR := Color(1.00, 0.80, 0.42)
+## **The searchlight** (task 0229): a cold white pool over the ground the rules
+## call lit, a beam down to it from the lens, and the lens itself.
+const SEARCHLIGHT_COLOUR := Color(0.86, 0.94, 1.00)
+const SEARCHLIGHT_POOL := 0.28
+const LENS_RADIUS := 0.7
 ## The porch guardian's eyes (task 0131): small and warm, two points and never
 ## a halo over the house.
 const EYE_RADIUS := 0.45
@@ -220,6 +225,15 @@ func _draw() -> void:
 				_glow_at(at, GENERATOR_RADIUS * tile, GENERATOR_COLOUR, 0.45)
 			&"preserves_jar":
 				_glow_at(at, LANTERN_RADIUS * tile, STOVE_COLOUR, 0.6)
+			&"searchlight":
+				# The pool over the square the rules light - `Light.lamp_tiles`,
+				# a tile less short of power - the beam down to it, and the lens.
+				var tiles := Light.lamp_tiles(_state, Vector2i(box[3]))
+				var ground := ((box[3] as Vector2) + Vector2(0.5, 0.5)) * tile
+				var lens := _lens_of(box[4], Vector2i(box[3]))
+				_glow_at(ground, (float(tiles) + 0.5) * tile, SEARCHLIGHT_COLOUR, SEARCHLIGHT_POOL)
+				_beam(lens, ground, float(tiles) * tile * 0.5)
+				_glow_at(lens, LENS_RADIUS * tile, SEARCHLIGHT_COLOUR, 0.6)
 			&"coop", &"barn":
 				_glow_at(at, LANTERN_RADIUS * tile, LANTERN_COLOUR, 0.55)
 				# Its panes once A030 measures them (`windows_xy`). The stand-in
@@ -313,6 +327,10 @@ func _lights_up(id: StringName, on: Dictionary, cell: Vector2i) -> bool:
 		# wreck with no lantern to light.
 		&"coop", &"barn":
 			return not Building.is_wrecked(_state, cell)
+		# **The searchlight is on all night** (task 0229), dimmer short of
+		# power but never out.
+		&"searchlight":
+			return true
 		_:
 			return _firing(on)
 
@@ -353,6 +371,32 @@ func _glow_at(at: Vector2, radius: float, colour: Color,
 	draw_texture_rect(_glow,
 		Rect2(screen - Vector2(radius, radius), Vector2(radius, radius) * 2.0),
 		false, lit)
+
+
+## **A searchlight's lens** (task 0229): its drawing's `light` point, at its
+## level, measured from the canvas its pivot stands on the cell's bottom
+## middle - the stand-in's registry carries no `cell_offset` to measure from.
+func _lens_of(on: Dictionary, cell: Vector2i) -> Vector2:
+	var tile := float(GameData.TILE_SIZE)
+	var frame := PlaceholderArt.frame(WorldView.BUILDING_DIR + str(WorldView.tower_name(on)) + ".png")
+	var foot := (Vector2(cell) + Vector2(0.5, 1.0)) * tile
+	if not frame.has("light"):
+		return foot - Vector2(0.0, tile)
+	return foot - Vector2(frame.get("pivot", Vector2i(16, 44))) + Vector2(frame["light"])
+
+
+## **A searchlight's beam** (task 0229): a soft wedge from the lens down to
+## the ground it lights, `half` pixels either side of the pool's middle -
+## brightest at the lens, nearly nothing where it lands.
+func _beam(lens: Vector2, ground: Vector2, half: float) -> void:
+	var to_screen := get_viewport().get_canvas_transform()
+	var points := PackedVector2Array([to_screen * lens, to_screen * (ground + Vector2(-half, 0.0)),
+		to_screen * (ground + Vector2(half, 0.0))])
+	var bright := SEARCHLIGHT_COLOUR
+	bright.a = 0.22
+	var faint := SEARCHLIGHT_COLOUR
+	faint.a = 0.03
+	draw_polygon(points, PackedColorArray([bright, faint, faint]))
 
 
 ## A round falloff, computed once.

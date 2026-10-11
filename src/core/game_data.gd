@@ -1792,6 +1792,21 @@ const DEFENCES: Dictionary = {
 		"wilted_percent": 50,           # LEVER: percent of its strength, 20-80
 		"energy_draw": 0,
 	},
+	&"searchlight": {
+		# **A powered lamp on a mast** (task 0229; the plan's section 5,
+		# winter): the ground round it is lit (`Light`), and every tower
+		# standing in light sees `LIGHT_REACH_BONUS` further - and light is
+		# what the wraith and the fog will read. It does not shoot: no
+		# `reload_ticks`, no `damage`. A breaker hunts it like anything built.
+		"cost": {IRON: 12, COPPER: 8},  # LEVER: iron and copper
+		"season": &"winter",            # LEVER: the season it unlocks in (0234 gates it)
+		"hp": 60,                       # LEVER: hit points, 40-100
+		# **How far round it is lit**, a square as a tower's reach is.
+		"light_tiles": 4,               # LEVER: tiles, 3-6
+		# **Powered**: a farm short of it lights `LIGHT_SHORT_SHRINK` fewer
+		# tiles, never none - degraded, never dead, as the rest of `Power`.
+		"energy_draw": 2,               # LEVER: energy per tick, 1-3
+	},
 }
 
 ## The animals on the reference sheet, and the meat that comes off them.
@@ -2828,6 +2843,12 @@ const TOWER_LEVELS: Dictionary = {
 	# **The catapult** (task 0227): an iron-banded arm on wheels, then a
 	# heavier frame on a stone footing - A039's levels - which ends in a
 	# second arm: two pumpkins a throw (`targets`), a volley.
+	# **The searchlight** (task 0229): a larger drum on a lattice mast - a
+	# wider light, which is the whole of how a lamp works. One step.
+	&"searchlight": [
+		{"needs": &"true sights", "cost": {IRON: 15, COPPER: 12},
+			"gives": {"light_tiles": 6, "hp": 90}},
+	],
 	&"catapult": [
 		{"needs": &"true sights", "cost": {WOOD: 20, IRON: 10},
 			"gives": {"damage": 36, "hp": 95, "range": 8}},
@@ -2840,6 +2861,13 @@ const TOWER_LEVELS: Dictionary = {
 ## The most any tower can be upgraded to. Level one is the thing as built. A
 ## family with fewer rows stops at its last (task 0226).
 const TOP_TOWER_LEVEL := 3
+
+## **Light** (task 0229; `Light`): how far round the house's porch is lit, how
+## much further a tower standing in light reaches, and how many tiles a
+## searchlight loses on a farm short of power - degraded, never dead.
+const PORCH_LIGHT_TILES := 2            # LEVER: tiles round the porch, 1-3
+const LIGHT_REACH_BONUS := 1            # LEVER: tiles further in light, 1-2
+const LIGHT_SHORT_SHRINK := 1           # LEVER: tiles lost short of power, 1-2
 
 
 ## The tech tree: three branches, a floor a season.
@@ -4107,6 +4135,9 @@ static func check_defences(defences: Dictionary) -> Array:
 				% defence_id)
 		if defence.has("eaten_by") and int(defence["eaten_by"]) <= 0:
 			errors.append("defence '%s' is eaten by nobody" % defence_id)
+		# **A lamp lights something** (task 0229).
+		if defence.has("light_tiles") and int(defence["light_tiles"]) <= 0:
+			errors.append("defence '%s' lights no tiles" % defence_id)
 		# **Garlic's area** (task 0228): it reaches some tiles, costs something
 		# to cross, slows without stopping, and keeps some strength wilted.
 		if defence.has("repel_tiles"):
@@ -5235,4 +5266,7 @@ static func digest() -> int:
 			MOON_STONES, MOON_STONE_ESSENCE],
 		"tech": [TECH_BONUSES, TECH_TREE, TECH_REFUND_PERCENT],
 		"levels": [TOWER_LEVELS, TOP_TOWER_LEVEL],
+		# **Light** (task 0229): the porch's, a tower's reach in it, and a
+		# short farm's lamp.
+		"light": [PORCH_LIGHT_TILES, LIGHT_REACH_BONUS, LIGHT_SHORT_SHRINK],
 	})

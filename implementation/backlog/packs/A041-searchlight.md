@@ -20,7 +20,7 @@ day and after the night relight.
 
 ## Deliverables
 
-The table is provisional: game task 0229 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0229. The rows stand as written: the searchlight 32x48 standing on (16,44) at two levels in four states each. **How the game plays them:** a searchlight is one cell, a tower that never shoots and lights the ground round it - a square four tiles out, six at level two, its only upgrade and the family's last - and every tower standing in light reaches a tile further. **`_fire` is kept, and means the lamp at full**: the view shows it from the sun going down to the morning on a farm with all the power it wants; by day, and on a farm short of power - whose lamp lights a tile less, never none - it shows the whole state, the lens dark, which is the cue that it is not at full. It is `_hurt` below three quarters of its hit points (lit first, as the towers' firing is) and `_wreck` once it falls, as rubble the morning sweeps, at the level it stood at. The pool of light over the lit square, the beam from the lens down to it and the lens's own glow are code, and they start at `light_xy`. Until 0240 the searchlight is the gun tower in a cold lamp white at each level and state, through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
@@ -31,6 +31,12 @@ The table is provisional: game task 0229 settles the final canvas/footprint/stat
 | `buildings/searchlight_2` + `_hurt`, `_fire`, `_wreck` | 32x48 | (16,44) | 1 each / static | L2, same state rules. Visible about 20-22 wide x 30-34 tall. |
 
 - Every row: dir `none`, `mirror: "none"`, draw scale 1.0.
+- **The stand-in until 0240** (task 0229): `PlaceholderArt` registers the
+  eight names with `buildings/gun_tower` and its states and level as
+  stand-ins, tinted a cold white, each with a `light_xy` on the stand-in's
+  turret - (16,23) at level one and (15,22) at level two - and none on the
+  wrecks; `Lighting` draws the pool, the beam and the lens from there. The
+  pack has no icon: the hotbar shows `searchlight` scaled into its 16x16 box.
 - **Points** (contract section 5): per level, on whole, hurt and fire, one
   `light_xy` on an opaque pixel at the centre of the lens (expected near x 16-20,
   y 18-24 for L1 and y 12-18 for L2 - measure the real art). No muzzle points:

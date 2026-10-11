@@ -1521,9 +1521,11 @@ func _stand_in_station_art(id: StringName, on: Dictionary, anchor: Vector2i) -> 
 
 
 ## Whether `id` is a tower drawn through 0120's road (task 0226's hive): a
-## defence that shoots, with a stand-in where its pack's art will go.
+## defence that shoots - or lights (task 0229's searchlight) - with a stand-in
+## where its pack's art will go.
 static func stand_in_tower(id: StringName) -> bool:
-	return not authored_tower(id) and (GameData.DEFENCES.get(id, {}) as Dictionary).has("reload_ticks") \
+	var row: Dictionary = GameData.DEFENCES.get(id, {})
+	return not authored_tower(id) and (row.has("reload_ticks") or row.has("light_tiles")) \
 		and not PlaceholderArt.art(id).is_empty()
 
 
@@ -1535,7 +1537,10 @@ func _stand_in_tower_art(on: Dictionary) -> StringName:
 	if PlaceholderArt.art(full).is_empty():
 		full = StringName(on["id"])
 	var lit := StringName("%s_fire" % full)
-	if just_fired(on) and not PlaceholderArt.art(lit).is_empty():
+	# A lamp's `_fire` is its lens lit (task 0229): on at night, at full power.
+	var lamp := (GameData.DEFENCES.get(StringName(on["id"]), {}) as Dictionary).has("light_tiles")
+	var firing := lamp_at_full(_state) if lamp else just_fired(on)
+	if firing and not PlaceholderArt.art(lit).is_empty():
 		return lit
 	var hurt := StringName("%s_hurt" % full)
 	if _is_hurt(on) and not PlaceholderArt.art(hurt).is_empty():
@@ -2536,6 +2541,13 @@ static func garlic_art(on: Dictionary) -> StringName:
 		Garlic.SPENT:
 			return StringName("%s_spent" % id)
 	return id
+
+
+## **Whether a lamp burns at full** (task 0229): from the sun going down to
+## the morning, on a farm with all the power it wants. Short of power its
+## light shrinks and its lens shows dark - the cue that it is not at full.
+static func lamp_at_full(state: Dictionary) -> bool:
+	return not state.is_empty() and int(state["phase"]) != Phases.DAY and not Power.is_short(state)
 
 
 ## Whether a thing's drawing lies on the ground - no taller than a tile - so

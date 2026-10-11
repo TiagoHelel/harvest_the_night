@@ -58,7 +58,7 @@ const TABLES: Array = [
 ## Nothing in here is ever added to or taken from by `reconcile()`.
 const RUN_DATA: Array = [
 	"burning", "crafting", "dig_spots", "entities", "fish_book", "fishing", "housed", "killed_by_kind",
-	"killed_by_kind_all_run", "kits", "last_catch", "last_result", "livestock",
+	"killed_by_kind_all_run", "kits", "last_catch", "last_result", "light_cells", "livestock",
 	"loot", "loot_laid",
 	"occupants", "payout", "plots", "produced", "repair_debt", "rubble", "shipping",
 	"stung",
@@ -96,6 +96,7 @@ static func create(seed_value: int) -> Dictionary:
 	_adopt(state, Pathing.initial(), "Pathing")
 	_adopt(state, Enemies.initial(), "Enemies")
 	_adopt(state, Combat.initial(), "Combat")
+	_adopt(state, Light.initial(), "Light")
 	_adopt(state, Traps.initial(), "Traps")
 	_adopt(state, Tutorial.initial(), "Tutorial")
 	_adopt(state, Shop.initial(), "Shop")

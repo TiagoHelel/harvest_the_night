@@ -24586,3 +24586,167 @@ implementation/backlog/packs/A040-garlic-braid.md,
 implementation/prompts/0228-garlic-braid.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0228/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0229 - The searchlight - done 2026-10-11
+
+What changed: a powered winter lamp on a mast that lights the ground round it
+and lets the towers in its light see a tile further - and the moment light
+became a rule, in one place, that the wraith (0252) and the fog (0256) will
+read (the plan's section 5).
+- **`Light.is_lit`:** true within a searchlight's square, round the
+  porch, in the flare's area while it burns, and under whatever is burning.
+- **A tower standing in light** reaches `LIGHT_REACH_BONUS` (1) further.
+- **Short of power** the lamp lights a tile less, never none.
+- **One upgrade,** to a wider light.
+
+### The row (`src/core/game_data.gd`)
+
+**`searchlight` in `DEFENCES`:**
+- **Cost:** 12 iron and 8 copper (LEVER). **`season` winter.** 60 hit
+  points (LEVER 40-100).
+- **The light:** `light_tiles` 4 (LEVER 3-6).
+- **`energy_draw`** 2 (LEVER 1-3).
+- **No `reload_ticks` and no `damage`:** it shoots nothing and makes no
+  sound; a breaker hunts it as it hunts anything built.
+
+**The checks and the levels:**
+- **`check_defences`** refuses a lamp of no tiles.
+- **`TOWER_LEVELS[&"searchlight"]`:** one step - true sights, 15 iron and
+  12 copper - to `light_tiles` 6 and 90 hit points. 0226's cap refuses a
+  third.
+- **Three constants,** in the data's digest under `"light"`:
+  - `PORCH_LIGHT_TILES` 2 (LEVER 1-3);
+  - `LIGHT_REACH_BONUS` 1 (LEVER 1-2);
+  - `LIGHT_SHORT_SHRINK` 1 (LEVER 1-2).
+
+### Light, in one place (`src/core/light.gd`)
+
+- **Cached where it stands still:** the searchlights' squares (square, as a
+  tower's reach is) and the porch's.
+  - Kept in `light_cells` - a Dictionary, in `State.RUN_DATA` - stamped in
+    `light_for` with the `grid_version` and the short flag they were built
+    for, as `Towers._towers` keeps its list.
+  - A searchlight going up or coming down, or the power running short or
+    coming back, rebuilds it on the next ask.
+- **Asked fresh where it moves:** the flare's square (`Ability.flare_at`,
+  `radius_tiles`) and the cell of each burning enemy.
+- **Asked, never ticked**, so nothing joins `PerfNames`.
+- **Only the rules ask the cached way** (`is_lit`), for asking writes the
+  cache into the state. The view asks `lamp_tiles` and `lit_cells`, which
+  write nothing - a view that refreshed the cache would move the
+  determinism hash.
+
+### The reach in light (`src/core/towers.gd`)
+
+**`Towers.reach_of(state, entry, cell)` learns the tower's cell**, and adds
+`LIGHT_REACH_BONUS` when it is lit. Every caller moved:
+- **The rules:** `_acquire` (0218's bucketed version and the whole farm's
+  look, so `acquire_for` and `target_of` with it), the line and the cone.
+- **The old asserts:**
+  - `headless_check`'s tree test asks a cell in the dark;
+  - `headless_v1`'s 0116 cone asks the tower's own cell and allows its
+    light.
+- **The view:** none to move. 0131's cursor draws the flare's reach, and
+  nothing in the view draws a tower's.
+
+### Decided: power
+
+**On a farm short of power a lamp lights `LIGHT_SHORT_SHRINK` fewer tiles,
+never fewer than one** - degraded, never dead, as the rest of `Power` - and
+its lens shows dark. It comes back with the power. Asserted with an auto
+crossbow beside the lamp: 5 drawn of 4, the farm at 80%.
+
+### Decided: `_fire` (A041)
+
+**Kept, as the lamp at full:** the view shows it from the sun going down to
+the morning on a farm with all the power it wants. By day, and short of
+power, it shows the whole state, the lens dark - the cue that the light has
+shrunk.
+
+### The view (`src/ui/`)
+
+- **The placeholder road until 0240** (A041 is `todo`):
+  - the gun tower - a post with a head on it - in a cold lamp white, at
+    each level and state;
+  - its `light_xy` on the stand-in's turret, (16,23) and (15,22), and none
+    on a wreck;
+  - through 0226's stand-in tower states, which now take a lamp too.
+- **`Lighting`** draws at night:
+  - a cold pool over the square the rules light (`lamp_tiles`, so a tile
+    smaller short of power);
+  - a soft beam down to it from the lens;
+  - the lens's own glow.
+- **The words:** `DEF_SEARCHLIGHT`, "searchlight" / "holofote";
+  `DESC_LIGHTS` and `DESC_LIGHT_SHORT`.
+- **The copper, coal and gold items are lowercase now**, as every other
+  material: the searchlight is the first defence whose cost names copper,
+  and its tooltip read "costs 8 Copper, 12 iron".
+- **A041's Deliverables table** is final: the geometry, `_fire` as the lamp
+  at full, and where the code's light starts.
+- **Not here:** the tarp and the wake (0234), the fog (0256) and the wraith
+  (0252), which read `Light`.
+
+### Hashes
+
+- **SIM 2065757832 -> 2958532891:** a new game holds `light_cells` and
+  `light_for`. They are the whole of the move: the determinism scenario run
+  with those two keys left out of every sample prints 2065757832 again, so
+  the porch's light changed nobody's reach in it.
+- **DATA 1970672788 -> 2479540053:** the searchlight's row, its level and
+  the three light constants.
+
+Verify: **PASS**, 60 of 60 in 959 s, the run that recorded both.
+- **Suites:** `headless_check` 17801 asserts, `headless_v1` 2516,
+  `input_check` 1250 cases, `input_v1` 720 (107 s).
+- **perf:** a night tick 1582 us - up some 140 from 0228's, the light asked
+  in every acquisition - the swarm's 7988, a path rebuild 10725, 15090 with
+  the decoys and 11071 with the garlic.
+
+**Tests:**
+- **`_task_0229_light` (headless_v1):**
+  - the row and its checks, the digest's three constants;
+  - **the lit cells of each source:** the porch's square on a bare farm; a
+    searchlight's beside it, exactly, the cache stamped with the farm it
+    went up on; the flare's while it burns and none after; a burning
+    zombie's cell and no other;
+  - **a gun tower in light acquiring one tile further** than one in the
+    dark, by the whole farm's look and by the crowd's squares;
+  - **a short farm shrinking the light** a tile and no more, the lens dark,
+    and both back with the power;
+  - **the cache rebuilding when a searchlight goes up or comes down**;
+  - one upgrade and no third;
+  - the words in both languages, the placeholder road at both levels and
+    every state, lit at night and dark by day, the hotbar's icon, the shot
+    and A041's table.
+- **Old groups touched:**
+  - `headless_v1`: 0193 counts winter's one; 0116's cone reach;
+  - `headless_check`: the tree's reach asked in the dark; 0064's last
+    levels may change how a lamp lights; 97 scenarios.
+- **No input case:** a searchlight goes down and up a level by the hotbar
+  and the cursor, which their cases walk for every defence.
+
+**Looked at** (`python tools/shot.py 0229 searchlight --fhd`), Winter 2's
+night with a generator running:
+- **The stage:** a stretch of the east road cleared of its trees, the
+  searchlight north of it with its lens lit, its beam down and its pool
+  reaching a row of three gun towers.
+- **The rows:** another three to the south, in the dark.
+- **The tanks:** three coming down the road, the first six tiles off. The
+  lit row's nearest tower aims and has fired; the dark row waits, a tile
+  short.
+- **What the takes found:**
+  - the beam drawn upward from under the tower - the stand-in's registry
+    has no `cell_offset`, so the lens is measured from the pivot now;
+  - tanks off the road walked north for the house and never came in reach;
+  - towers in columns stacked into one pole, so they stand in rows;
+  - the trees hid both rows, so the stretch is cleared for the picture.
+
+Files: src/core/{light,game_data,towers,state}.gd, src/core/light.gd.uid,
+src/ui/{lighting,placeholder_art,world_view,names,describe}.gd,
+assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,shot}.gd,
+tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A041-searchlight.md,
+implementation/prompts/0229-searchlight.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0229/,
+docs/devlog/{index,index.pt_BR}.md

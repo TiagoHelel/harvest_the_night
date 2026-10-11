@@ -11873,9 +11873,11 @@ func _task_0063_tech_tree() -> void:
 		"a tower with true sights hits harder", "%d against %d"
 			% [Towers.damage_of(geared, tower), Towers.damage_of(plain, tower)])
 	expect(Tech.buy(geared, &"long barrels"), "and the next")
-	expect(Towers.reach_of(geared, tower) > Towers.reach_of(plain, tower),
+	# Asked of a cell in the dark (task 0229): the tree's reach alone.
+	var dark := Vector2i(0, 0)
+	expect(Towers.reach_of(geared, tower, dark) > Towers.reach_of(plain, tower, dark),
 		"and reaches further", "%d against %d"
-			% [Towers.reach_of(geared, tower), Towers.reach_of(plain, tower)])
+			% [Towers.reach_of(geared, tower, dark), Towers.reach_of(plain, tower, dark)])
 
 	expect(Tech.buy(geared, &"stout timbers"), "the survival branch too")
 	expect(Phases.house_full(geared) > Phases.house_full(plain),
@@ -12000,7 +12002,8 @@ func _task_0064_tower_levels() -> void:
 	for id in GameData.sorted_names(GameData.TOWER_LEVELS.keys()):
 		var last_step: Dictionary = (GameData.TOWER_LEVELS[id] as Array).back()
 		var changed := false
-		for key in ["targets", "min_range", "burn_ticks", "pierce"]:
+		# A lamp's - task 0229's searchlight - lights wider.
+		for key in ["targets", "min_range", "burn_ticks", "pierce", "light_tiles"]:
 			if (last_step["gives"] as Dictionary).has(key):
 				changed = true
 		expect(changed,
@@ -14591,8 +14594,9 @@ func _task_0082_shots() -> void:
 	# night. Ninety-one since 0213: the machines worn. Ninety-two since 0224:
 	# a crowd lured to a decoy. Ninety-three since 0225: one turned to a bait.
 	# Ninety-four since 0226: a hive at work. Ninety-five since 0227: a volley.
-	# Ninety-six since 0228: a route round a braid.
-	expect(names.size() == 96,
+	# Ninety-six since 0228: a route round a braid. Ninety-seven since 0229:
+	# a lit and an unlit tower line.
+	expect(names.size() == 97,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

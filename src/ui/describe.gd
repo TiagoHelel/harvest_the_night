@@ -160,6 +160,11 @@ static func defence(id: StringName) -> String:
 		lines.append(I18n.f(&"DESC_REPELS", [int(one["repel_tiles"]),
 			int(one.get("repel_speed_percent", 100))]))
 		lines.append(I18n.f(&"DESC_WEARS", [int(one.get("wilted_percent", 0))]))
+	# **The searchlight's** (task 0229): how far it lights, what light gives a
+	# tower, and what a farm short of power takes from it.
+	if int(one.get("light_tiles", 0)) > 0:
+		lines.append(I18n.f(&"DESC_LIGHTS", [int(one["light_tiles"]), GameData.LIGHT_REACH_BONUS]))
+		lines.append(I18n.f(&"DESC_LIGHT_SHORT", [GameData.LIGHT_SHORT_SHRINK]))
 	return "\n".join(lines)
 
 

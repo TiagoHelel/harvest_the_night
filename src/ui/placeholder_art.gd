@@ -215,6 +215,13 @@ const CATAPULT := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_
 const PUMPKIN_SHOT := {"canvas": Vector2i(8, 8), "pivot": Vector2i(4, 4), "draw_scale": 1.0}
 const PUMPKIN_SPLAT := {"canvas": Vector2i(20, 16), "pivot": Vector2i(10, 14), "draw_scale": 1.0}
 
+## A041's searchlight (task 0229): the tower family's 32x48 on (16,44), drawn
+## at 1.0; its lens - `light_xy`, where the beam leaves - on the stand-in's
+## turret, level by level.
+const SEARCHLIGHT := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
+const LENS := [Vector2i(16, 23)]
+const LENS_2 := [Vector2i(15, 22)]
+
 ## A040's garlic braid (task 0228): 16x24 standing on (8,20), the barricade's
 ## canvas, drawn at 1.0.
 const GARLIC := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
@@ -320,6 +327,17 @@ const ART := {
 	&"catapult_3_hurt": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3_hurt", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
 	&"catapult_3_fire": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3_fire", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
 	&"catapult_3_wreck": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3_wreck", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
+	# A041's searchlight (task 0229): the gun tower - a post with a head on it -
+	# in a cold lamp white, at each level and state, its lens on the turret,
+	# until 0240; the beam and the pool of light are code (`Lighting`).
+	&"searchlight": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS, "lit_from": 0},
+	&"searchlight_hurt": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_hurt", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS, "lit_from": 0},
+	&"searchlight_fire": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_fire", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS, "lit_from": 0},
+	&"searchlight_wreck": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_wreck", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true},
+	&"searchlight_2": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_2", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS_2, "lit_from": 0},
+	&"searchlight_2_hurt": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_2_hurt", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS_2, "lit_from": 0},
+	&"searchlight_2_fire": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_2_fire", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS_2, "lit_from": 0},
+	&"searchlight_2_wreck": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_2_wreck", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true},
 	# A040's garlic braid (task 0228), drawn in code by `GarlicArt` until 0239:
 	# fresh, wilted and spent.
 	&"garlic_braid": {"pack": "A040", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": GARLIC, "final": GARLIC, "bare": true},

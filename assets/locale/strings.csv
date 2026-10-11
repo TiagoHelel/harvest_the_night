@@ -149,6 +149,7 @@ DEF_GARLIC_BRAID,0,garlic braid,réstia de alho
 DEF_GUN_TOWER,0,gun tower,torre de tiro
 DEF_MINE,0,mine,mina
 DEF_MORTAR,0,mortar,morteiro
+DEF_SEARCHLIGHT,0,searchlight,holofote
 DEF_WALL,0,wall,muro
 DEF_ZOMBIE_BAIT,0,zombie bait,isca de zumbi
 DESC_AFTER,0,after %s,depois de %s
@@ -175,6 +176,8 @@ DESC_SUNFLOWERS,0,"+1 a sting for every %d sunflowers growing within %d tiles, u
 DESC_HIVE_STOCK,0,"with too few growing, eats up to %d from the store a night","se poucos crescem, come até %d do estoque por noite"
 DESC_REPELS,0,"zombies walk round %d tiles of it, at %d%% speed inside","os zumbis desviam de %d ladrilhos em volta, a %d%% da velocidade ali dentro"
 DESC_WEARS,0,"wilts its second night, to %d%%, and is spent after","murcha na segunda noite, a %d%%, e se esgota depois"
+DESC_LIGHTS,0,"lights %d tiles round it, and towers in light reach %d further","ilumina %d ladrilhos em volta, e torres na luz alcançam %d a mais"
+DESC_LIGHT_SHORT,0,%d fewer when power runs short,%d a menos quando falta energia
 DESC_MAKES,0,makes %s,faz %s
 DESC_NOT_FOR_SALE,0,not for sale,não se vende
 DESC_ONE_SHOT,0,goes off once,explode uma vez só
@@ -771,9 +774,9 @@ WHY_TOOL_PREVIOUS,224,Upgrade the previous tier first,Melhore o nível anterior 
 WHY_TOOL_PENDING,224,This tool already has an order,Esta ferramenta já tem um pedido
 WHY_GATHER_TOOL,224,Needs %s,Precisa de %s
 DESC_TOOL_NEXT_MORNING,224,Keep your tool; ready next morning,Use sua ferramenta; pronta amanhã
-ITEM_COPPER,96,Copper,Cobre
-ITEM_COAL,96,Coal,Carvão
-ITEM_GOLD,96,Gold,Ouro
+ITEM_COPPER,96,copper,cobre
+ITEM_COAL,96,coal,carvão
+ITEM_GOLD,96,gold,ouro
 ITEM_HARDWOOD,96,hardwood,madeira de lei
 WHY_ON_A_CROP,224,Not on a crop,Não em cima de uma planta
 WHY_HOME_IN_USE,224,Animals live here,Tem animais morando aqui

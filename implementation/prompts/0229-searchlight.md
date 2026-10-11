@@ -1,7 +1,7 @@
 # 0229 - The searchlight
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0196, 0132, 0226
 - **Likely files:** src/core/light.gd (new), src/core/game_data.gd, src/core/towers.gd, src/core/ability.gd, src/core/combat.gd, src/ui/lighting.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd
 

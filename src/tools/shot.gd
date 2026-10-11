@@ -140,6 +140,7 @@ const SCENARIOS: Array = [
 	["trampled", "the morning after a loss, by the trampled crops", ""],
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
+	["searchlight", "a lit and an unlit tower line at night: Winter 2, a generator running, the east road with a line of gun towers north of it under a searchlight and a line south of it in the dark, tanks coming down the road - the lit line firing a tile further than the dark one can", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
 	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
 	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
@@ -776,6 +777,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"beehive": _set_beehive(state)
 		"catapult": _set_catapult(state)
 		"garlic": _set_garlic(state)
+		"searchlight": _set_searchlight(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1091,6 +1093,14 @@ func _only_showing(main: Node, wanted: String) -> void:
 func _just_before_the_shutter(main: Node, state: Dictionary,
 		name: String) -> void:
 	match name:
+		"searchlight":
+			# Who each tower has in its sights at the shutter (task 0229).
+			var aimed: Array = []
+			for post in _searchlight_lines:
+				aimed.append("%s %s %s" % [str(post), "lit" if Light.is_lit(state, post as Vector2i) else "dark",
+					"aims" if Towers.target_of(state, post as Vector2i) != 0 else "waits"])
+			print("  searchlight: %s; power %d%%, %d shots fired" % [", ".join(aimed), Power.percent(state),
+				Towers.shots_fired(state)])
 		"garlic":
 			# The braid in hand on the road (task 0228), and the preview it
 			# draws.
@@ -2638,6 +2648,64 @@ func _set_beehive(state: Dictionary) -> void:
 		Entities.count(state)])
 	Building.select(state, &"beehive")
 	_look_at(middle + Vector2i(2, 1))
+
+
+## **A lit and an unlit tower line** (task 0229): Winter 2. A generator put up
+## by day and fed. At night a stretch of the east road, cleared of its trees,
+## which the tanks walk straight down to the house: a row of three gun towers
+## three rows north of it with a searchlight behind them, a row three south of
+## it in the dark; tanks on the road eight tiles east of both rows' last
+## tower. At the shutter - some 73 ticks on - the first tank is six tiles off:
+## inside the lit row's reach and a tile outside the dark one's, so one row
+## fires and the other waits.
+func _set_searchlight(state: Dictionary) -> void:
+	_on_date(state, 3 * GameData.SEASON_DAYS + 2)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200, GameData.STONE: 100,
+		GameData.COPPER: 50, GameData.OIL: 40})
+	var plant := Vector2i(-1, -1)
+	for radius in 12:
+		for cell in Grid.within(Player.cell(state) + Vector2i(-6, 3), radius):
+			if plant.x < 0 and Building.why_not(state, &"generator", cell).is_empty():
+				plant = cell
+	if plant.x < 0 or not Building.place(state, &"generator", plant):
+		push_warning("shot: no room for the generator")
+		_look_at(Player.cell(state))
+		return
+	Pathing.refresh(state)
+	var road := _east_road(state)
+	var bend: Vector2i = road[mini(9, road.size() - 1)]
+	# The stretch cleared of its trees and stones, so the two lines read as
+	# lines - a stage, as the shot's other scenes clear a patch.
+	for dy in range(-7, 6):
+		for dx in range(-4, 13):
+			var at := bend + Vector2i(dx, dy)
+			var on := Farm.occupant(state, at)
+			if not on.is_empty() and Building.entry_of(StringName(on["id"])) == null \
+					and StringName(on["id"]) != &"house" and not Farm.FIXTURES.has(StringName(on["id"])):
+				Farm.remove(state, at)
+	NightRoad.into_build(state)
+	_searchlight_lines = []
+	for offset in [Vector2i(-2, -3), Vector2i(0, -3), Vector2i(2, -3), Vector2i(-2, 3), Vector2i(0, 3), Vector2i(2, 3)]:
+		var post := bend + (offset as Vector2i)
+		if Building.place(state, &"gun_tower", post):
+			_searchlight_lines.append(post)
+	var lamp := bend + Vector2i(0, -6)
+	Building.place(state, &"searchlight", lamp)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	for k in 3:
+		Entities.spawn(state, &"tank", bend + Vector2i(10 + k, 0))
+	print("  searchlight: lamp at %s, posts %s, power %d%%" % [str(lamp), str(_searchlight_lines),
+		Power.percent(state)])
+	Building.select(state, &"searchlight")
+	_look_at(bend + Vector2i(3, -1))
+
+
+
+
+## The gun towers `_set_searchlight` put up, the lit line first (task 0229).
+var _searchlight_lines: Array = []
 
 
 ## **The route bending round a braid** (task 0228): Autumn 2's build step, a

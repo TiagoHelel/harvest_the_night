@@ -236,10 +236,17 @@ static func damage_of(state: Dictionary, entry: Dictionary,
 	return damage if armed else Ammo.weak_damage(damage)
 
 
-static func reach_of(state: Dictionary, entry: Dictionary) -> int:
+##
+## **And where it stands** (task 0229): a tower whose own cell is lit
+## (`Light.is_lit`) sees `LIGHT_REACH_BONUS` further.
+static func reach_of(state: Dictionary, entry: Dictionary, cell: Vector2i) -> int:
 	var reach := int(entry.get("range", 0))
-	return 0 if reach <= 0 else reach \
-		+ Tech.bonus(state, "tower_range_bonus", 0)
+	if reach <= 0:
+		return 0
+	reach += Tech.bonus(state, "tower_range_bonus", 0)
+	if Light.is_lit(state, cell):
+		reach += GameData.LIGHT_REACH_BONUS
+	return reach
 
 
 ## `crowd` is `_crowd()`'s filing for this tick, or empty for a look at the
@@ -248,7 +255,7 @@ static func reach_of(state: Dictionary, entry: Dictionary) -> int:
 ## `unstung` passes over everything a hive has already stung (task 0226).
 static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
 		skip: Array = [], crowd: Dictionary = {}, unstung: bool = false) -> int:
-	var reach := reach_of(state, entry)
+	var reach := reach_of(state, entry, from)
 	if reach <= 0:
 		return 0
 	var minimum := int(entry.get("min_range", 0))
@@ -534,7 +541,7 @@ static func _pierce_line(state: Dictionary, from: Vector2i,
 	var aim := Entities.cell_of(state, target) - from
 	if aim == Vector2i.ZERO:
 		return
-	var reach := reach_of(state, entry)
+	var reach := reach_of(state, entry, from)
 	var damage := damage_of(state, entry, armed)
 	var falloff := int(entry.get("pierce_falloff_percent", 0))
 	var most := maxi(int(entry.get("pierce", 1)), 1)
@@ -603,7 +610,7 @@ static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
 	# so with 'long barrels' the tower picked a target a tile past its own
 	# cone, spent a round and burnt nobody - and 'true sights' never reached
 	# the flame at all.
-	var reach := reach_of(state, entry)
+	var reach := reach_of(state, entry, from)
 	var spread := int(entry.get("cone_spread_permille", 0))
 	# A pilot light when unarmed: the weak shot of task 0035.
 	var damage := damage_of(state, entry, armed)
