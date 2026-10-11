@@ -172,6 +172,7 @@ DESC_CHARGES,0,charges in a straight line,investe em linha reta
 DESC_CHILLS,0,slows towers when it dies,deixa as torres lentas ao morrer
 DESC_EATS_WALLS,0,chews through walls,come os muros
 DESC_FLIES,0,flies over walls and mines,voa por cima de muros e minas
+DESC_FREEZES,0,freezes the towers around it,congela as torres em volta
 DESC_FREE,0,free,de graça
 DESC_FROM,0,from %s,de %s
 DESC_GROWS_IN,0,grows in %d days,cresce em %d dias
@@ -262,6 +263,7 @@ ENEMY_HARVESTER.other,0,harvesters,colheitadeiras
 BOSS_INTRO_GIANT,0,the giant is coming,o gigante está vindo
 BOSS_INTRO_HARVESTER,0,the harvester is coming,a colheitadeira está vindo
 BOSS_INTRO_SCARECROW_KING,0,the scarecrow king is coming,o rei espantalho está vindo
+BOSS_INTRO_WINTER_LORD,0,the winter lord is coming,o senhor do inverno está vindo
 ENEMY_RAT,0,rat,rato
 ENEMY_RAT.other,0,rats,ratos
 ENEMY_RUNNER,0,runner,corredor
@@ -274,6 +276,8 @@ ENEMY_TANK,0,tank,brutamontes
 ENEMY_TANK.other,0,tanks,brutamontes
 ENEMY_WRAITH,0,wraith,assombração
 ENEMY_WRAITH.other,0,wraiths,assombrações
+ENEMY_WINTER_LORD,0,winter lord,senhor do inverno
+ENEMY_WINTER_LORD.other,0,winter lords,senhores do inverno
 ENEMY_WALKER,0,walker,andarilho
 ENEMY_WALKER.other,0,walkers,andarilhos
 FCAST_BOSS,142,%s IS COMING,%s ESTÁ VINDO

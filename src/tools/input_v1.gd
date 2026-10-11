@@ -2284,9 +2284,10 @@ func _case_0158_panel() -> void:
 	await until(func() -> bool: return not house_view.is_showing_bedtime(),
 		"the bed beat to end", 100000)
 	await frames(3)
-	expect(panel.visible and StringName(panel.shown().get("boss", &"")) == &"giant"
+	# Winter 14's boss is the Winter Lord since task 0255.
+	expect(panel.visible and StringName(panel.shown().get("boss", &"")) == &"winter_lord"
 		and bool(panel.shown().get("full_moon", false)),
-		"in the build step the forecast is up: the Giant under a Full Moon",
+		"in the build step the forecast is up: the Winter Lord under a Full Moon",
 		str(panel.shown()))
 	expect(hud.date_text() == I18n.f(&"DHUD_DATE", [Names.of(&"winter"), 14]),
 		"and the night strip names the date beside the night", hud.date_text())
@@ -2399,7 +2400,8 @@ func _case_0160_ending() -> void:
 		state["day"] = Run.final_night()
 		NightRoad.to_night(state)
 		NightRoad.park(state)
-		(state["killed_by_kind"] as Dictionary)[Calendar.boss_of(Run.final_night())] = 1
+		# **The Winter Lord killed** (task 0255): the year's last boss, falling.
+		Combat.hit(state, Entities.spawn(state, &"winter_lord", Enemies.spawn_cells(state, 0)[0]), 1 << 20)
 		(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
 		Sim.advance(state, 4)
 		await frames(4)

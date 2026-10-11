@@ -109,6 +109,16 @@ extends RefCounted
 ## (`Combat._kill`), and not a wave's - `Waves` keeps its own counts. No more
 ## than `summon_cap` rise in a night (`raised`); after that it only walks.
 ##
+## ## Freezing
+##
+## A **freezer** (task 0255's Winter Lord) has an `aura_tiles`. Every
+## `freeze_every_ticks` it spends walking and biting (`freeze_in`) it stops
+## and casts for `telegraph_ticks` - its one tell - through `winding_at` and
+## `chew_wait`, standing on the cell it cast on (`freezing`). The tick the
+## cast ends, every tower within `aura_tiles` of that cell is frozen for
+## `freeze_ticks` (`Towers.freeze_around`): its reload stops counting and it
+## does not fire. `aura_cells` gives the square, for the view.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -382,6 +392,9 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	# **A summoner casts** (task 0254): while it does, it stands; its clock to
 	# the next runs while it walks and bites.
 	if data.has("summons") and _summoning(state, id, data, one):
+		return
+	# **So does a freezer** (task 0255), and its cast freezes the towers.
+	if int(data.get("aura_tiles", 0)) > 0 and _freezing(state, id, data, one):
 		return
 
 	# **Standing on it counts.** The flow field says distance zero at the house
@@ -993,6 +1006,64 @@ static func flock_cells(state: Dictionary, id: int) -> Array:
 	if one.is_empty() or not one.has("casting"):
 		return []
 	return _flock_cells(state, GameData.ENEMIES[one["kind"]], one)
+
+
+# ------------------------------------------------------------------ freezing
+
+## **A freezer's turn** (task 0255): true while it casts - all it does this
+## tick - and false while it walks and bites, its clock to the next cast
+## running down. The towers freeze on the cast's last tick:
+## `telegraph_ticks` of casting, not one more.
+static func _freezing(state: Dictionary, id: int, data: Dictionary, one: Dictionary) -> bool:
+	if one.has("freezing"):
+		var wait := int(one.get("chew_wait", 0)) - 1
+		one["chew_wait"] = maxi(wait, 0)
+		if wait > 0:
+			return true
+		Towers.freeze_around(state, Grid.cell(int(one["freezing"])), int(data["aura_tiles"]),
+			int(data["freeze_ticks"]))
+		for key in ["freezing", "winding_at", "chew_wait"]:
+			one.erase(key)
+		one["freeze_in"] = int(data["freeze_every_ticks"])
+		return true
+	var due := int(one.get("freeze_in", int(data["freeze_every_ticks"])))
+	if due > 1:
+		one["freeze_in"] = due - 1
+		return false
+	var here := Vector2i(int(one["pos"][0]) / Player.SUBTILE, int(one["pos"][1]) / Player.SUBTILE)
+	# On the house it bites instead; it casts when it is off it.
+	if Farm.occupant(state, here).get("id", &"") == &"house":
+		one["freeze_in"] = 1
+		return false
+	one.erase("freeze_in")
+	one["freezing"] = Grid.index(here)
+	one["winding_at"] = Grid.index(here)
+	one["chew_wait"] = maxi(int(data.get("telegraph_ticks", 0)), 1)
+	return true
+
+
+## **The square a freezer's cast will freeze** (task 0255): every cell within
+## `aura_tiles` of the cell it casts on, on the map, in index order - while
+## it casts; empty otherwise. The towers on it are the ones the freeze lands
+## on. For the view's reach on the ground and the tests.
+static func aura_cells(state: Dictionary, id: int) -> Array:
+	var one := Entities.get_one(state, id)
+	if one.is_empty() or not one.has("freezing"):
+		return []
+	var tiles := int((GameData.ENEMIES[one["kind"]] as Dictionary)["aura_tiles"])
+	var at := Grid.cell(int(one["freezing"]))
+	var out: Array = []
+	for dy in range(-tiles, tiles + 1):
+		for dx in range(-tiles, tiles + 1):
+			var cell := at + Vector2i(dx, dy)
+			if Grid.in_bounds(cell):
+				out.append(cell)
+	return out
+
+
+## Whether this one is casting a freeze (task 0255).
+static func is_freezing(state: Dictionary, id: int) -> bool:
+	return Entities.get_one(state, id).has("freezing")
 
 
 ## Whether this one is casting (task 0254).

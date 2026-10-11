@@ -1020,6 +1020,18 @@ func _draw_enemy_warning() -> void:
 		var aimed := Enemies.winding_at(_state, id)
 		if aimed.x < 0:
 			continue
+		# **A freeze's reach** (task 0255): the square of ground the Winter
+		# Lord's cast will freeze every tower on, from the rules' own cells,
+		# laid on the ground in ice and edged, pulsing while it casts.
+		var aura := Enemies.aura_cells(_state, int(id))
+		if not aura.is_empty():
+			var pulse := fmod(float(Time.get_ticks_msec()) / 400.0, 1.0)
+			var reach := Rect2(Vector2(aura[0] as Vector2i) * size, Vector2(size, size))
+			for cell in aura:
+				reach = reach.merge(Rect2(Vector2(cell as Vector2i) * size, Vector2(size, size)))
+			_enemy_warning.draw_rect(reach, Color(AURA_GROUND, AURA_GROUND.a * (0.7 + 0.3 * pulse)))
+			_enemy_warning.draw_rect(reach.grow(-1.0), AURA_EDGE, false, 2.0)
+			continue
 		# **A cast's cells** (task 0254): a ring closing on every cell the
 		# flock will rise on, from the rules' own list - where the crows will
 		# be, the moment the cast ends.
@@ -3141,10 +3153,13 @@ static func just_fired(on: Dictionary) -> bool:
 
 
 ## **The frost on a chilled tower** (task 0251): `CHILL_TINT` while a frost
-## zombie's burst has it reloading slowly (`Towers.chill_left`), white
-## otherwise and for anything that is not a tower. A tint and no art, as the
-## pack asks.
+## zombie's burst has it reloading slowly (`Towers.chill_left`) - and the ice
+## on a frozen one, `FROZEN_TINT`, while a Winter Lord's cast holds it (task
+## 0255, `Towers.frozen_left`) - white otherwise and for anything that is not
+## a tower. Tints and no art, as the packs ask.
 static func chill_tint(state: Dictionary, cell: Vector2i) -> Color:
+	if Towers.frozen_left(state, cell) > 0:
+		return FROZEN_TINT
 	return CHILL_TINT if Towers.chill_left(state, cell) > 0 else Color.WHITE
 
 
@@ -3308,10 +3323,10 @@ func _pose_of(one: Dictionary) -> StringName:
 ## 0253).
 static func posed_off_the_rules(state: Dictionary, one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
-	# **A summoner casting** (task 0254's Scarecrow King): its cast by the
-	# cast's progress, a frame for each of its frame's seconds and the last
-	# held.
-	if one.has("casting") and PlaceholderArt.has_frame(ENEMY_DIR + "%s_cast_0.png" % kind):
+	# **A summoner or a freezer casting** (tasks 0254 and 0255, the Scarecrow
+	# King and the Winter Lord): its cast by the cast's progress, a frame for
+	# each of its frame's seconds and the last held.
+	if (one.has("casting") or one.has("freezing")) and PlaceholderArt.has_frame(ENEMY_DIR + "%s_cast_0.png" % kind):
 		var cast_each := maxi(roundi(float(PlaceholderArt.frame(ENEMY_DIR + "%s_cast_0.png" % kind)
 			.get("seconds", 0.1)) * float(GameData.TICK_HZ)), 1)
 		var cast := int((GameData.ENEMIES[kind] as Dictionary).get("telegraph_ticks", 0)) - int(one.get("chew_wait", 0))
@@ -3387,6 +3402,16 @@ const WOUNDED_AT := 0.75
 ## the time it reached the screen (the first take); this one is lighter too,
 ## and still under the night's ramp like everything on the ground.
 const CHILL_TINT := Color(1.05, 1.5, 2.3)
+
+## **A frozen tower's ice** (task 0255): whiter than a chill's frost, as the
+## tower is held rather than slowed - still under the night's ramp, never lit.
+const FROZEN_TINT := Color(1.55, 1.85, 2.5)
+
+## **A freeze's reach on the ground** (task 0255): ice over the square the
+## Winter Lord's cast will freeze, faint enough that what stands there shows
+## through it, and its edge.
+const AURA_GROUND := Color(0.75, 0.9, 1.0, 0.28)
+const AURA_EDGE := Color(0.85, 0.95, 1.0, 0.85)
 
 ## How much of a reload still has to be left for the muzzle to be lit. High,
 ## so the flash is a moment rather than a lamp: at 80 a gun on a one second

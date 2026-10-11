@@ -113,6 +113,8 @@ const ENEMY_SOUNDS := {
 	&"harvester": &"sfx/roar_giant",
 	# The Giant's too, until 0284 gives the Scarecrow King its own.
 	&"scarecrow_king": &"sfx/roar_giant",
+	# The Giant's too, until 0284 gives the Winter Lord its own.
+	&"winter_lord": &"sfx/roar_giant",
 }
 
 ## **What a boss with no voice of its own roars with** (task 0246): the

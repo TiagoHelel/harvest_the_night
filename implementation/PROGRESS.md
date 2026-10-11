@@ -27151,3 +27151,156 @@ assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/backlog/packs/A053-scarecrow-king.md,
 implementation/prompts/0254-scarecrow-king.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0254/, docs/devlog/{index,index.pt_BR}.md
+
+## 0255 - The Winter Lord - done 2026-10-11
+
+What changed: the last night of the year has its lord of ice. The Winter
+Lord walks and bites as a walker does. Every twelve seconds of walking it
+stops and casts for two seconds, its reach laid on the ground in ice, and
+every tower within three tiles freezes for four seconds: no reload, no shot.
+It tests the whole build - spread, depth, light and the powers - and its
+fall on Winter 14 is the year's ending. With it the four seasons have their
+four bosses.
+
+### The rules (`src/core/`)
+
+**`ENEMIES.winter_lord`**, with levers:
+- `is_boss`; hp 1800, armour 7, 48 ticks a tile, 50 to the house, 300% on
+  what it gnaws, $250, 9 bones, not lured;
+- `telegraph_ticks` 60, the cast;
+- `freeze_every_ticks` 360 (twelve seconds of walking), `aura_tiles` 3,
+  `freeze_ticks` 120.
+
+It is **the strongest boss in the table** (asserted): more hit points than
+the Harvester's 1100 and the King's 1200, the Giant's 900. It passes 0246's
+every-boss-against-every-non-boss checks.
+
+**`check_enemies`** (`_check_freeze`) refuses a freeze with any of its three
+levers or the cast at zero.
+
+**`SEASON_BOSSES[3]` is the Winter Lord**: Winter 14, the year's last
+night, so 0160's ending fires on its fall. `Waves.boss_fell` reads tonight's
+record, which sends the Lord, so a Giant killed that night ends nothing.
+
+**The cast, in `Enemies`** (inside `Enemies.tick`; only a row with
+`aura_tiles` pays for it):
+- `freeze_in` counts the ticks it walks and bites. When it runs out, the Lord
+  stands and casts for `telegraph_ticks` on the cell it stands on
+  (`freezing`), through `winding_at` and `chew_wait`, so it is
+  `is_winding` and 0246's bar flashes;
+- the tick the cast ends, `Towers.freeze_around` freezes every tower within
+  `aura_tiles` of that cell;
+- `Enemies.aura_cells(state, id)` gives the square, for the view, while it
+  casts. `is_freezing` is public too.
+
+**The freeze, in `Towers`**, beside 0251's chill on the occupant and never
+through `Farm.touch`:
+- a `frozen` countdown, refreshed and never stacked (the longer of two
+  freezes wins);
+- `_frozen_turn` spends each turn of it in `Towers.tick` and `_cool_down`:
+  a frozen tower's reload does not count and it does not fire. The chill
+  still counts down through it;
+- `thaw()` clears it with the chill, at dawn;
+- `Towers.frozen_left(state, cell)`, for the view.
+- The freeze lands in the enemies' turn, before the towers', so the tick it
+  lands is its first turn: frozen for exactly `freeze_ticks` turns.
+
+### Decided
+
+- **The cast is `telegraph_ticks`**, as every boss's tell is since 0253.
+- **A frozen tower does nothing**, not only "stops reloading": a tower with
+  its reload at nothing would otherwise fire through a freeze, which is no
+  freeze.
+- **The aura is a square**, as a tower's reach and a chill's burst are.
+- **The ice on the towers is a tint**, `FROZEN_TINT`, whiter than the chill's
+  frost. A054's `ice_shards` at each frozen tower's base wait for 0268 to
+  emit them.
+
+### The view (`src/ui/`)
+
+- **A054's stand-ins** (`PlaceholderArt`), until 0268: the Giant gone to ice
+  (`WINTER_LORD_TINT`) on 80x64 standing on (40,60):
+  - the master;
+  - the walk, the Giant's;
+  - the cast, the Giant's wind-up with the last frame held for the fourth;
+  - the attack, the slam;
+  - the death, the Giant's fall;
+  - the forecast mark, its head.
+- **`posed_off_the_rules`** plays a freezer's cast as it does a summoner's.
+- **The reach** (`_draw_enemy_warning`): while it casts, the square from
+  `aura_cells` laid on the ground in ice (`AURA_GROUND`), pulsing and edged
+  (`AURA_EDGE`).
+- **Frozen towers**: `chill_tint` gives `FROZEN_TINT` while
+  `Towers.frozen_left` holds, ahead of the chill.
+- **The words:** `Names` has `ENEMY_WINTER_LORD` and its intro
+  (`BOSS_INTRO_WINTER_LORD`), `Describe` `DESC_FREEZES` ("freezes the towers
+  around it"), and `Sfx` borrows the Giant's roar until 0284.
+- **A054's table is final**, with how the game plays it.
+
+### Found
+
+- **The freeze's first turn is the tick it lands.** The test first expected
+  `freeze_ticks` left after landing, and found one fewer: the towers' turn
+  that tick was already the freeze's. The count is exact, with that turn in
+  it.
+- **The ringed Lord gnawed through a hardwood wall during the count,** which
+  moved `grid_version` under an assert about the freeze. It is stunned once
+  the freeze lands - still the towers' target - and the freeze moves
+  nothing.
+- **0158's forecast case on Winter 14 expected the Giant** under a Full Moon.
+  It names the Winter Lord now.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. The determinism night is Spring 1.
+- **DATA 1042213124 -> 612138885:** the Lord's row and `SEASON_BOSSES`.
+
+Verify: **PASS**, 60 of 60 in 1017 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 18108 asserts, `headless_v1` 2688, `input_check` 1269 cases, `input_v1` 734 (115 s).
+- **perf:** a night tick 1768 us, the swarm's 5784, a path rebuild 11471, 16517 with the decoys and 12076 with the garlic. The baseline did not move: a row that does not freeze pays one lookup, and a tower one more.
+
+**Tests:**
+- **`_task_0255_winter_lord` (headless_v1):**
+  - the strongest boss in the table, more than the Harvester and the King.
+    `check_enemies` refuses each freeze lever, and the cast, at zero;
+  - **one cast**, the Lord ringed in hardwood with three gun towers inside
+    its aura (two and three tiles off) and two outside (four and five):
+    - it stands exactly `telegraph_ticks`, flashing, in its cast pose, its
+      49 cells of reach out;
+    - then exactly the three inside freeze, drawn in `FROZEN_TINT`, and the
+      two outside never do;
+    - their reloads hold for exactly `freeze_ticks` while the others fire;
+    - then every one fires again, and `grid_version` never moved;
+  - a second freeze refreshes the first rather than stacking, and dawn
+    thaws every tower;
+  - Winter 14 is its night; its name, intro, `DESC_FREEZES` and voice.
+- **0160 rewritten in place:**
+  - `_task_0160_year_end` kills a Winter Lord on Winter 14 through
+    `Combat`: the year ends, and `bosses_down_of(winter_lord)` is one. A new
+    outcome, a Giant killed there, ends nothing;
+  - `_case_0160_ending` in input_v1 kills a Winter Lord to bring up the
+    ending.
+- **Old groups touched:** input_v1's 0158 forecast case names the Winter Lord
+  on Winter 14, and headless_check counts 113 scenes. input_check's
+  every-kind case meets the Lord unasked: one case more (1268 -> 1269), a
+  Winter Lord walking out of the dark, drawn from its stand-in.
+
+**Looked at** (`python tools/shot.py 0255 winter_lord --fhd`):
+- **`winter_lord`, Winter 14's night, the year's last:** open snow south-east
+  of the house, five gun towers - three within three tiles of where the
+  Lord stands, two beyond. The Lord, the Giant gone to ice, is held in its
+  cast with an arm raised, and the boss bar reads WINTER LORD 1790/1800 in
+  the flashing orange. The outside towers had hit it while it cast. Its
+  reach is laid on the ground: a faint ice square seven tiles across, edged
+  (`49 cells of reach`). The three towers inside it are still white with the
+  ice of the cast before (`99` ticks left each), and the two outside are
+  their own brown, one firing (`0`). The cursor's label sits below, clear of
+  it.
+
+Files: src/core/{enemies,game_data,towers}.gd,
+src/ui/{placeholder_art,world_view,names,describe,sfx}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/backlog/packs/A054-winter-lord.md,
+implementation/prompts/0255-winter-lord.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0255/, docs/devlog/{index,index.pt_BR}.md

@@ -281,6 +281,11 @@ const HARVESTER_TINT := Color(1.5, 0.82, 0.55)
 const SCARECROW_KING := {"canvas": Vector2i(80, 64), "pivot": Vector2i(40, 60), "draw_scale": 1.0}
 const SCARECROW_KING_TINT := Color(1.2, 1.0, 0.45)
 
+## A054's Winter Lord (task 0255): the Giant's 80x64 standing on (40,60),
+## drawn at 1.0 - the Giant it stands in as gone to ice.
+const WINTER_LORD := {"canvas": Vector2i(80, 64), "pivot": Vector2i(40, 60), "draw_scale": 1.0}
+const WINTER_LORD_TINT := Color(0.95, 1.15, 1.65)
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -466,6 +471,16 @@ const ART := {
 	&"scarecrow_king_attack": {"pack": "A053", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_slam", "stand_in_frames": 3, "tint": SCARECROW_KING_TINT, "geometry": SCARECROW_KING, "final": SCARECROW_KING},
 	&"scarecrow_king_death": {"pack": "A053", "dir": "res://sprites/enemies/", "frames": 5, "seconds": 0.12, "loop": false, "stand_in": &"enemies/giant_death", "stand_in_frames": 5, "tint": SCARECROW_KING_TINT, "geometry": SCARECROW_KING, "final": SCARECROW_KING},
 	&"head_scarecrow_king": {"pack": "A053", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/head_giant", "tint": SCARECROW_KING_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
+	# A054's Winter Lord (task 0255): the Giant gone to ice, until 0268 - its
+	# walk the Giant's, its cast the Giant's wind-up (four frames on three:
+	# the last held), its attack the slam, its fall the Giant's; and its
+	# forecast mark the Giant's head.
+	&"winter_lord": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant", "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD, "bare": true},
+	&"winter_lord_walk": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.14, "loop": true, "stand_in": &"enemies/giant_walk", "stand_in_frames": 4, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
+	&"winter_lord_cast": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_windup", "stand_in_frames": 3, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
+	&"winter_lord_attack": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_slam", "stand_in_frames": 3, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
+	&"winter_lord_death": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 5, "seconds": 0.12, "loop": false, "stand_in": &"enemies/giant_death", "stand_in_frames": 5, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
+	&"head_winter_lord": {"pack": "A054", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/head_giant", "tint": WINTER_LORD_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
 	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
 	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn

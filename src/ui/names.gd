@@ -225,6 +225,7 @@ const KEYS: Dictionary = {
 	&"wraith": &"ENEMY_WRAITH",
 	&"harvester": &"ENEMY_HARVESTER",
 	&"scarecrow_king": &"ENEMY_SCARECROW_KING",
+	&"winter_lord": &"ENEMY_WINTER_LORD",
 
 	# ---- what the tech tree buys
 	&"sharp tools": &"TECH_SHARP_TOOLS",
@@ -347,6 +348,7 @@ const BOSS_INTROS: Dictionary = {
 	&"giant": &"BOSS_INTRO_GIANT",
 	&"harvester": &"BOSS_INTRO_HARVESTER",
 	&"scarecrow_king": &"BOSS_INTRO_SCARECROW_KING",
+	&"winter_lord": &"BOSS_INTRO_WINTER_LORD",
 }
 
 

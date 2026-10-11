@@ -48,6 +48,13 @@ extends RefCounted
 ## beside `reload` - per-tower bookkeeping that changes no shape on the farm,
 ## so never `Farm.touch()` - counted down every turn the tower has, firing or
 ## not, and gone at dawn (`thaw()`).
+##
+## ## Frozen
+##
+## The Winter Lord's cast (task 0255) freezes every tower within its
+## `aura_tiles` for its `freeze_ticks`: a frozen tower's reload stops counting
+## and it does not fire. A countdown beside the chill (`frozen`), never through
+## `Farm.touch()`, refreshed and never stacked, and thawed at dawn with it.
 
 ## The side of one square of the crowd's filing, in cells. **Not a lever**:
 ## it changes how fast a tower finds its target, never which one it finds.
@@ -118,6 +125,10 @@ static func tick(state: Dictionary) -> void:
 		# **Chilled** (task 0251): counted down every turn, reloading or not,
 		# and the reload after a shot slowed while it lasts.
 		var speed := _chill_turn(tower)
+		# **Frozen** (task 0255): a turn of the freeze and nothing else - no
+		# reload counted, no shot.
+		if _frozen_turn(tower):
+			continue
 
 		var reload := int(tower.get("reload", 0))
 		if reload > 0:
@@ -228,6 +239,8 @@ static func _cool_down(state: Dictionary) -> void:
 	for idx in _towers(state):
 		var tower: Dictionary = occupants[idx]
 		_chill_turn(tower)
+		if _frozen_turn(tower):
+			continue
 		var reload := int(tower.get("reload", 0))
 		if reload > 0:
 			tower["reload"] = reload - 1
@@ -273,14 +286,54 @@ static func reload_speed(on: Dictionary) -> int:
 	return int(on.get("chill_percent", 100))
 
 
-## **No chill outlives the night** (task 0251): every tower thawed, from
-## `Enemies.withdraw()` at dawn.
+## **No chill outlives the night** (task 0251), nor a freeze (task 0255):
+## every tower thawed, from `Enemies.withdraw()` at dawn.
 static func thaw(state: Dictionary) -> void:
 	var occupants: Dictionary = state["occupants"]
 	for idx in _towers(state):
 		var tower: Dictionary = occupants[idx]
 		tower.erase("chill")
 		tower.erase("chill_percent")
+		tower.erase("frozen")
+
+
+## **A freeze round `cell`** (task 0255's Winter Lord): every tower within
+## `tiles` of it - Chebyshev, the cached tower cells in order - frozen for
+## `ticks`: its reload stops counting and it does not fire. Refreshed, never
+## stacked: the longer of two freezes wins. Beside the chill, on the occupant,
+## never `Farm.touch()`. How many it froze.
+static func freeze_around(state: Dictionary, cell: Vector2i, tiles: int, ticks: int) -> int:
+	if tiles <= 0 or ticks <= 0:
+		return 0
+	var occupants: Dictionary = state["occupants"]
+	var frozen := 0
+	for idx in _towers(state):
+		if Grid.chebyshev(Grid.cell(int(idx)), cell) > tiles:
+			continue
+		var tower: Dictionary = occupants[idx]
+		tower["frozen"] = maxi(int(tower.get("frozen", 0)), ticks)
+		frozen += 1
+	return frozen
+
+
+## **How long the tower on `cell` stays frozen**, in ticks (task 0255): 0 when
+## it is not. For the view's ice.
+static func frozen_left(state: Dictionary, cell: Vector2i) -> int:
+	return int(Farm.occupant(state, cell).get("frozen", 0))
+
+
+## **One turn of a tower's freeze** (task 0255): true while it is frozen - the
+## turn is the freeze's, a tick shorter, gone at nothing - and false for a
+## tower that is not, which is never written to.
+static func _frozen_turn(tower: Dictionary) -> bool:
+	var left := int(tower.get("frozen", 0))
+	if left <= 0:
+		return false
+	if left == 1:
+		tower.erase("frozen")
+	else:
+		tower["frozen"] = left - 1
+	return true
 
 
 ## **One turn of a tower's chill** (task 0251), every tick, firing or not:

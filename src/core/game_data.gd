@@ -90,9 +90,10 @@ const FULL_MOON_REWARD_PERCENT := 200   # LEVER: percent of the night's pay, 150
 
 ## **Each season's boss** (task 0153), in `SEASONS` order: the one that comes
 ## on the season's last night, and back every night after until it falls.
-## Summer's is the Harvester since task 0253 and autumn's the Scarecrow King
-## since 0254; the Giant holds winter until 0255 brings the Winter Lord.
-const SEASON_BOSSES: Array = [&"giant", &"harvester", &"scarecrow_king", &"giant"]
+## The Giant's spring, then the Harvester's summer (task 0253), the Scarecrow
+## King's autumn (0254) and the Winter Lord's winter (0255) - whose fall on
+## the year's last night is its ending (0160).
+const SEASON_BOSSES: Array = [&"giant", &"harvester", &"scarecrow_king", &"winter_lord"]
 
 ## **Where a summoner's flock rises** (task 0254), round the cell it casts
 ## on, taken in this order and clipped to the map - never a draw from the
@@ -2714,6 +2715,35 @@ const ENEMIES: Dictionary = {
 		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
 		# More than anything that is not a boss.
 		"armour": 5,                    # LEVER: damage off each hit, 5-10
+		"lurable": false,
+	},
+	&"winter_lord": {
+		# **The year's last boss** (task 0255; the plan's Senhor do Inverno):
+		# a lord of ice. It walks the field and bites as a walker does, and
+		# every `freeze_every_ticks` of walking it stops and casts - standing
+		# `telegraph_ticks`, its one tell, before a blow and at the house too
+		# - and every tower within `aura_tiles` of it when the cast lands
+		# stops counting its reload for `freeze_ticks` (`Towers.freeze_around`,
+		# beside 0251's chill). It tests the whole build - spread, depth,
+		# light and the powers - and its fall on Winter 14 is the year's
+		# ending (0160).
+		"is_boss": true,
+		# **The strongest boss in the table**: more than the Harvester's and
+		# the King's.
+		"hp": 1800,                     # LEVER: hit points, 1300-2400
+		# Slower than every one that walks (0246).
+		"ticks_per_tile": 48,           # LEVER: ticks, 39-60
+		"damage": 50,                   # LEVER: to the house, 30-70
+		"structure_damage_percent": 300,   # LEVER: percent, 200-500
+		"telegraph_ticks": 2 * SECONDS, # LEVER: ticks, 1-3 seconds worth (the cast)
+		"freeze_every_ticks": 12 * SECONDS,   # LEVER: ticks of walking, 8-20 seconds worth
+		# A square, as a tower's reach is: the towers it freezes are the ones
+		# a spread-out build keeps out of it.
+		"aura_tiles": 3,                # LEVER: tiles, 2-5
+		"freeze_ticks": 4 * SECONDS,    # LEVER: ticks, 2-8 seconds worth
+		"reward": 250,                  # LEVER: money, 120-400
+		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
+		"armour": 7,                    # LEVER: damage off each hit, 5-10
 		"lurable": false,
 	},
 }
@@ -5493,6 +5523,7 @@ static func check_enemies(enemies: Dictionary) -> Array:
 		errors.append_array(_check_chill(id, one))
 		errors.append_array(_check_charge(id, one))
 		errors.append_array(_check_summon(id, one, enemies))
+		errors.append_array(_check_freeze(id, one))
 		# **A cluster is at least one** (task 0248): a release of nothing
 		# would count bodies it never sent.
 		if one.has("cluster") and int(one["cluster"]) < 1:
@@ -5506,6 +5537,19 @@ static func check_enemies(enemies: Dictionary) -> Array:
 			errors.append(("enemy '%s' ignores structures without being "
 				+ "faster than the ones that do not - it would be a slow "
 				+ "zombie taking the long way round") % id)
+	return errors
+
+
+## **A freezer's numbers** (task 0255), for an enemy that declares any
+## `freeze_` lever or an `aura_tiles`: all three and the cast it runs on
+## (`telegraph_ticks`), none of them zero.
+static func _check_freeze(id: StringName, one: Dictionary) -> Array:
+	var errors: Array = []
+	if not (one.has("freeze_every_ticks") or one.has("freeze_ticks") or one.has("aura_tiles")):
+		return errors
+	for field in ["freeze_every_ticks", "aura_tiles", "freeze_ticks", "telegraph_ticks"]:
+		if int(one.get(field, 0)) <= 0:
+			errors.append("enemy '%s' freezes with no %s" % [id, field])
 	return errors
 
 

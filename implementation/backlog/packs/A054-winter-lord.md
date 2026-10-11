@@ -14,7 +14,14 @@ The Winter Lord is the final boss: the last night of Year 1 (Winter 14). It is a
 
 ## Deliverables
 
-The table is provisional: game task 0255 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0255: **the Giant's 80x64 standing on (40,60)**. The rows stand as written, with the frames and seconds of the table. **How the game plays them:**
+- **The walk:** 48 ticks a tile, a little over half a tile a second, on the four `walk` frames at 0.14 s each, facing the way it moves. It bites the house and gnaws a wall as a walker does. Until 0268 it does that on its walk frames, and `attack` waits for it.
+- **The cast:** every twelve seconds of walking it stops for `telegraph_ticks`, two seconds. `cast_0..3` play at 0.1 s each, and frame 3 holds for the rest of the two seconds. Meanwhile the square of ground within three tiles of it is laid in ice by code and edged, and the boss bar flashes. The tick the cast ends, every tower inside that square freezes for four seconds: its reload stops and it does not fire. A frozen tower is drawn whiter than a frost zombie's chill, also by code.
+- **`ice_shards`** play nowhere until 0268 emits them at the base of every tower the freeze lands on.
+- **Death:** its fall on Winter 14 is the year's ending (0160's path). Until 0268 the body left behind is `winter_lord_death_4`, squashed.
+- **Night colours:** winter's night is the bluest of the four, and the icy stand-in reads on the snow by its lighter body and dark outline. Keep the Lord's ice pale and its outline dark, matte and never lit, so it stands off the snow and belongs with A050's frost zombie.
+
+Until 0268 every frame stands in as the Giant gone to ice (`PlaceholderArt`): its cast is the Giant's three-frame wind-up with the last frame held for the fourth, and its forecast mark is the Giant's head, tinted the same, all through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

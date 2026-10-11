@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 88
+const GROUPS := 89
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -167,6 +167,7 @@ func _run() -> void:
 	_task_0252_wraith()
 	_task_0253_harvester()
 	_task_0254_scarecrow_king()
+	_task_0255_winter_lord()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -3228,15 +3229,26 @@ func _foliage_in(paths: Array) -> Array:
 ## 0160 - Winter 14 ends the year only after its boss falls, including a
 ## house lost afterwards. Fixtures cross the actual night and morning road.
 func _task_0160_year_end() -> void:
-	for outcome in ["won", "escaped", "lost", "lost_after_boss"]:
+	for outcome in ["won", "escaped", "lost", "lost_after_boss", "giant"]:
 		var state := State.create(1600)
 		state["day"] = Calendar.year_days() + 3
 		state["days_held"] = 3
 		NightRoad.to_night(state)
 		NightRoad.park(state)
 		var down: bool = outcome in ["won", "lost_after_boss"]
+		# **The Winter Lord killed on Winter 14** (task 0255), the year's last
+		# boss, through `Combat` - and a Giant killed there instead, which no
+		# longer ends the year.
+		var gate: Vector2i = Enemies.spawn_cells(state, 0)[0]
 		if down:
-			(state["killed_by_kind"] as Dictionary)[Calendar.boss_of(Run.final_night())] = 1
+			Combat.hit(state, Entities.spawn(state, &"winter_lord", gate), 1 << 20)
+		elif outcome == "giant":
+			Combat.hit(state, Entities.spawn(state, &"giant", gate), 1 << 20)
+		if outcome == "won":
+			expect(Calendar.boss_of(Run.final_night()) == &"winter_lord"
+				and Combat.bosses_down_of(state, &"winter_lord") == 1,
+				"Winter 14's boss is the Winter Lord, and killing it moves bosses_down_of(winter_lord) to one",
+				str(Combat.bosses_down_of(state, &"winter_lord")))
 		if outcome.begins_with("lost"):
 			state["house_hp"] = 0
 		(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
@@ -10938,6 +10950,132 @@ func _ring_in_hardwood(state: Dictionary, cell: Vector2i) -> void:
 		for dx in [-1, 0, 1]:
 			if dx != 0 or dy != 0:
 				Farm.place(state, cell + Vector2i(int(dx), int(dy)), {"id": &"wall", "hp": hp, "level": 2})
+
+
+## 0255 - the Winter Lord. A cast freezes exactly the towers inside
+## `aura_tiles` for `freeze_ticks` - their reloads held, no shot - with
+## `grid_version` still, and every tower fires again afterwards; a second
+## freeze refreshes and never stacks; dawn thaws them; it is the strongest
+## boss, and Winter 14 is its night.
+func _task_0255_winter_lord() -> void:
+	var row: Dictionary = GameData.ENEMIES[&"winter_lord"]
+	var telegraph := int(row["telegraph_ticks"])
+	var aura := int(row["aura_tiles"])
+	var freeze := int(row["freeze_ticks"])
+	var weaker: Array = []
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if kind != &"winter_lord" and Combat.is_boss(kind) and int((GameData.ENEMIES[kind] as Dictionary)["hp"]) >= int(row["hp"]):
+			weaker.append(kind)
+	var refused: Array = []
+	for key in ["freeze_every_ticks", "aura_tiles", "freeze_ticks", "telegraph_ticks"]:
+		var table := GameData.ENEMIES.duplicate(true)
+		(table[&"winter_lord"] as Dictionary)[key] = 0
+		if _says(GameData.check_enemies(table), "freezes with no %s" % key):
+			refused.append(key)
+	expect(Combat.is_boss(&"winter_lord") and weaker.is_empty() and refused.size() == 4
+		and int(row["hp"]) > int((GameData.ENEMIES[&"harvester"] as Dictionary)["hp"])
+		and int(row["hp"]) > int((GameData.ENEMIES[&"scarecrow_king"] as Dictionary)["hp"])
+		and GameData.check_enemies(GameData.ENEMIES).is_empty(),
+		"the Winter Lord is the strongest boss in the table - more than the Harvester and the King - and check_enemies refuses a freeze with any lever at zero",
+		"%s %s" % [str(weaker), str(refused)])
+
+	# **One cast**: gun towers two and three tiles from where it stands - in
+	# its aura - and four and five tiles off; the Lord the one they shoot.
+	var state := _powers_night(25500)
+	var spot := _open_square(state, 6, &"wall")
+	var gun_hp := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["hp"])
+	var inside: Array = [spot + Vector2i(2, 0), spot + Vector2i(-3, 1), spot + Vector2i(0, -3)]
+	var outside: Array = [spot + Vector2i(4, 0), spot + Vector2i(-2, 5)]
+	for at in inside + outside:
+		Farm.place(state, at as Vector2i, {"id": &"gun_tower", "hp": gun_hp})
+	_ring_in_hardwood(state, spot)
+	Pathing.refresh(state)
+	var lord := Entities.spawn(state, &"winter_lord", spot)
+	(Entities.get_one(state, lord))["freeze_in"] = 1
+	Sim.advance(state, 1)
+	var square := Enemies.aura_cells(state, lord)
+	var flashing := Enemies.is_winding(state, lord)
+	var pose := WorldView.posed_off_the_rules(state, Entities.get_one(state, lord))
+	var cast := 1
+	while Enemies.is_freezing(state, lord) and cast < 1000:
+		Sim.advance(state, 1)
+		cast += 1
+	var version := int(state["grid_version"])
+	var froze := true
+	# The tick it lands is the freeze's first turn: it lands in the enemies'
+	# turn, before the towers'.
+	for at in inside:
+		froze = froze and Towers.frozen_left(state, at as Vector2i) == freeze - 1 \
+			and WorldView.chill_tint(state, at as Vector2i) == WorldView.FROZEN_TINT
+	for at in outside:
+		froze = froze and Towers.frozen_left(state, at as Vector2i) == 0 \
+			and not Farm.occupant(state, at as Vector2i).has("frozen")
+	expect(cast - 1 == telegraph and flashing and String(pose).begins_with("winter_lord_cast_")
+		and square.size() == (2 * aura + 1) * (2 * aura + 1) and square.has(spot + Vector2i(aura, aura))
+		and not square.has(spot + Vector2i(aura + 1, 0)) and froze,
+		"a cast stands telegraph_ticks, its bar flashing and its reach on the ground, then freezes exactly the towers inside aura_tiles for freeze_ticks",
+		"cast %d, %d cells, %s" % [cast - 1, square.size(), pose])
+	# Held: their reloads do not count and they do not fire, for exactly
+	# `freeze_ticks`; the others go on firing; then every one fires again.
+	# The Lord stunned from here - a target still - so its gnawing at the
+	# hardwood round it moves no grid under the count (the first run's did).
+	Enemies.stun(state, lord, 100 * GameData.SECONDS)
+	var held: Dictionary = {}
+	for at in inside:
+		held[at] = int(Farm.occupant(state, at as Vector2i).get("reload", 0))
+	var still := true
+	for _t in freeze - 2:
+		Sim.advance(state, 1)
+		for at in inside:
+			still = still and int(Farm.occupant(state, at as Vector2i).get("reload", 0)) == int(held[at])
+	var last := Towers.frozen_left(state, inside[0] as Vector2i)
+	Sim.advance(state, 1)
+	for at in inside:
+		still = still and int(Farm.occupant(state, at as Vector2i).get("reload", 0)) == int(held[at])
+	var thawed := Towers.frozen_left(state, inside[0] as Vector2i) == 0
+	var fired_again: Dictionary = {}
+	var fired_outside := false
+	var before: Dictionary = {}
+	for at in inside + outside:
+		before[at] = int(Farm.occupant(state, at as Vector2i).get("reload", 0))
+	for _t in 3 * GameData.SECONDS:
+		Sim.advance(state, 1)
+		for at in inside + outside:
+			var now := int(Farm.occupant(state, at as Vector2i).get("reload", 0))
+			if now > int(before[at]):
+				if inside.has(at):
+					fired_again[at] = true
+				else:
+					fired_outside = true
+			before[at] = now
+	expect(still and last == 1 and thawed and fired_again.size() == inside.size() and fired_outside
+		and int(state["grid_version"]) == version,
+		"frozen, their reloads hold for exactly freeze_ticks while the others fire; then every one fires again, and grid_version never moved",
+		"held %s, last %d, thawed %s, again %s, outside %s, grid %d against %d" % [still, last, thawed,
+			str(fired_again.keys()), fired_outside, int(state["grid_version"]), version])
+
+	# **Refreshed, never stacked; thawed at dawn.**
+	Towers.freeze_around(state, spot, aura, freeze)
+	Sim.advance(state, 10)
+	Towers.freeze_around(state, spot, aura, freeze)
+	var refreshed := Towers.frozen_left(state, inside[0] as Vector2i)
+	Phases.enter_result(state, true)
+	Phases.begin_day(state)
+	expect(refreshed == freeze and Towers.frozen_left(state, inside[0] as Vector2i) == 0
+		and not Farm.occupant(state, inside[0] as Vector2i).has("frozen"),
+		"a second freeze refreshes the first rather than stacking, and dawn thaws every tower", str(refreshed))
+
+	# **Winter 14 is its night**; its words and its voice.
+	var winter := 4 * GameData.SEASON_DAYS
+	expect(GameData.SEASON_BOSSES[3] == &"winter_lord" and Calendar.boss_of(winter) == &"winter_lord"
+		and Calendar.boss_of(Run.final_night()) == &"winter_lord"
+		and StringName(Waves.night_of(winter).get("boss", &"")) == &"winter_lord"
+		and Names.of(&"winter_lord") == I18n.t(&"ENEMY_WINTER_LORD")
+		and Names.boss_intro(&"winter_lord") == I18n.t(&"BOSS_INTRO_WINTER_LORD")
+		and Describe.enemy(&"winter_lord").contains(I18n.t(&"DESC_FREEZES"))
+		and Sfx.voice_of(&"winter_lord") == &"sfx/roar_giant",
+		"Winter 14, the year's last night, is the Winter Lord's; it has its name, its intro, a tooltip line that it freezes the towers, and the Giant's roar until its own")
+	_completed += 1
 
 
 ## A crop on `cell` (task 0249): tilled, sown with `crop`, nothing grown yet.

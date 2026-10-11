@@ -147,6 +147,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
+	["winter_lord", "the Winter Lord's aura during a cast: Winter 14's night, the year's last, gun towers round open snow south-east of the house - three inside its reach, two outside - the Lord in its cast with its reach laid on the ground in ice, the towers inside still iced from the cast before, the two outside firing", ""],
 	["scarecrow_king", "the Scarecrow King mid-cast: Autumn 14's night, the starter field sown, the King east of it on open ground standing in its cast with rings on the six cells its flock will rise on, and the flock it raised before flying in over the field", ""],
 	["harvester", "the Harvester's charge: Summer 14's night, three layers of stone wall and one of hardwood across open ground east of the house, the Harvester before them winding up with its strip over the line by the shutter; then harvester_after, the line its charge left - a corridor through the stone, the hardwood holding", ""],
 	["wraith", "wraiths in the light and out of it: Winter 2's night, a searchlight and a gun tower on open snow south-east of the house, one wraith in the lamp's square - solid, a target - and one out in the dark - faint, never gone", ""],
@@ -808,6 +809,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"wraith": _set_wraith(state)
 		"harvester": _set_harvester(state)
 		"scarecrow_king": _set_scarecrow_king(state)
+		"winter_lord": _set_winter_lord(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1170,6 +1172,23 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				str(Entities.cell_of(state, _boss_giant)), Enemies.is_winding(state, _boss_giant),
 				str(Enemies.winding_at(state, _boss_giant)),
 				int(state["house_hp"]), (main.find_child("NightHud", true, false) as NightHud).banner_text()])
+		"winter_lord":
+			# **Mid-cast, the towers inside still iced from the cast before**
+			# (task 0255): set down at the shutter, one cast run through, then a
+			# second begun and caught two thirds of a second in.
+			var lord := Entities.spawn(state, &"winter_lord", _lord_at)
+			(Entities.get_one(state, lord))["freeze_in"] = 1
+			var cast := int((GameData.ENEMIES[&"winter_lord"] as Dictionary)["telegraph_ticks"])
+			Sim.advance(state, cast + 1)
+			(Entities.get_one(state, lord))["freeze_in"] = 1
+			Sim.advance(state, 20)
+			var iced: Array = []
+			for at in _lord_towers:
+				iced.append("%s %d" % [str(at), Towers.frozen_left(state, at as Vector2i)])
+			(main.get_node("%WorldView") as WorldView).cursor().place_at(
+				_open_ground_near(state, _lord_at + Vector2i(-6, 5)))
+			print("  winter_lord: freezing %s, %d cells of reach, the towers %s" % [
+				Enemies.is_freezing(state, lord), Enemies.aura_cells(state, lord).size(), ", ".join(iced)])
 		"scarecrow_king":
 			# **Mid-cast, its first flock out** (task 0254): set down at the
 			# shutter, one cast run through and its flock let fly a second and a
@@ -3329,6 +3348,32 @@ func _set_digger(state: Dictionary) -> void:
 	_digger = Entities.spawn(state, &"digger", start)
 	print("  digger: from %s, the fence across its road at %s" % [str(start), str(_digger_fence)])
 	_look_at(_digger_fence)
+
+
+## **The Winter Lord's aura during a cast** (task 0255): Winter 14's night,
+## parked: gun towers round open snow, three within the Lord's `aura_tiles`
+## of where it will stand and two beyond, the Lord set down by the shutter
+## (`_just_before_the_shutter`).
+func _set_winter_lord(state: Dictionary) -> void:
+	_on_date(state, 4 * GameData.SEASON_DAYS)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200, GameData.MONEY: 400})
+	_lord_at = _clear_patch(state, Farm.house_centre(state) + Vector2i(8, 13), 5)
+	NightRoad.into_build(state)
+	_lord_towers = []
+	for offset in [Vector2i(2, -1), Vector2i(-3, 1), Vector2i(1, 3), Vector2i(5, 0), Vector2i(-2, -5)]:
+		var at: Vector2i = _lord_at + offset
+		if Building.place(state, &"gun_tower", at):
+			_lord_towers.append(at)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	print("  winter_lord: the Lord to stand at %s, towers %s" % [str(_lord_at), str(_lord_towers)])
+	_look_at(_lord_at + Vector2i(1, 0))
+
+
+## Where `_set_winter_lord` will stand the Lord, and the towers round it.
+var _lord_at := Vector2i.ZERO
+var _lord_towers: Array = []
 
 
 ## **The Scarecrow King mid-cast** (task 0254): Autumn 14's night, parked, the
