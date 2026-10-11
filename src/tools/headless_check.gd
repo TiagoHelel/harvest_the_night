@@ -11007,6 +11007,12 @@ func _giant_walk_in(seed_value: int) -> int:
 
 
 ## 0059 - a night is a table a designer edits, not code.
+## **The kinds no night sends yet** (task 0247): in the table and on the farm
+## for the checks, out of the authored nights until 0270-0274 put them in the
+## year and take them off this list. 0248-0252 add theirs.
+const NO_NIGHT_YET: Array = [&"spitter"]
+
+
 func _task_0059_wave_data() -> void:
 	# **Every night is a record with its own pace.** Read as written (task
 	# 0150): this is the authored curve's test, so it asks `plain_night`,
@@ -11145,9 +11151,17 @@ func _task_0059_wave_data() -> void:
 				fresh += 1
 		expect(fresh <= 1,
 			"night %d introduces at most one new kind" % night, str(fresh))
-	expect(seen.size() == GameData.ENEMIES.size(),
-		"and every enemy in the table turns up in the authored nights",
-		str(seen))
+	var unsent: Array = []
+	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if not seen.has(id) and not NO_NIGHT_YET.has(id):
+			unsent.append(id)
+	var stale: Array = []
+	for id in NO_NIGHT_YET:
+		if seen.has(id) or not GameData.ENEMIES.has(id):
+			stale.append(id)
+	expect(unsent.is_empty() and stale.is_empty(),
+		"and every enemy in the table turns up in the authored nights - but the ones no night sends yet, which none does",
+		"%s unsent, %s stale" % [str(unsent), str(stale)])
 	expect(int(seen[&"giant"]) == Waves.authored_count(),
 		"with the Giant on the last authored night", str(seen))
 
@@ -13638,8 +13652,15 @@ func _task_0073_player_art() -> void:
 
 ## 0074 - the enemies, and the silhouette test.
 func _task_0074_zombie_art() -> void:
-	var kinds := GameData.sorted_names(GameData.ENEMIES.keys())
-	expect(kinds.size() == 5, "five enemies to draw", str(kinds.size()))
+	# **The kinds with raster art** (task 0247): the five this task drew and
+	# whatever pack has landed since. A kind still on its stand-in is 0120's
+	# group's (`_task_0120_placeholders` in headless_v1).
+	var kinds: Array = []
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if RasterArt.FRAMES.has("res://sprites/enemies/%s.png" % kind):
+			kinds.append(kind)
+	expect(kinds.size() >= 5 and kinds.has(&"walker") and kinds.has(&"giant"),
+		"the five enemies drawn, and any pack landed since", str(kinds))
 
 	# **Every kind has every pose.** The walk is two frames, the attack is
 	# one, and the death is one - drawn or derived, but present.
@@ -14621,8 +14642,9 @@ func _task_0082_shots() -> void:
 	# electric fence. Ninety-nine since 0231: a mixed line. A hundred since
 	# 0233: the three powers at work. A hundred and three since 0234: the
 	# hotbar in spring, in winter and on a season still shut. A hundred and
-	# four since 0246: a boss winding up under its bar and banner.
-	expect(names.size() == 104,
+	# four since 0246: a boss winding up under its bar and banner. A hundred
+	# and five since 0247: a spitter working on a tower line.
+	expect(names.size() == 105,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
@@ -15453,8 +15475,11 @@ func _task_0088_juice() -> void:
 
 	# **A squash on death needs something to squash.** Task 0077 drew a
 	# fallen pose for every enemy and nothing has ever played it; this is
-	# what plays it, so this is where it gets checked.
+	# what plays it, so this is where it gets checked. Every kind with raster
+	# art (task 0247): a stand-in's last death frame is 0120's group's.
 	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if not RasterArt.FRAMES.has("res://sprites/enemies/%s.png" % kind):
+			continue
 		expect(ResourceLoader.exists("res://sprites/enemies/%s_death.png"
 			% kind), "the %s has a body to leave behind" % kind)
 

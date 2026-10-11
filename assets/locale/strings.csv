@@ -193,6 +193,7 @@ DESC_PASSES_WALLS,0,runs straight past walls,passa direto pelos muros
 DESC_RANGE,0,reaches %d tiles,alcança %d ladrilhos
 DESC_RELOAD,0,fires every %s,atira a cada %s
 DESC_SPLASHES,0,hits everything %d tiles round where it lands,acerta tudo a %d ladrilhos de onde cai
+DESC_SPITS,0,spits at towers from %d tiles,cospe nas torres a %d ladrilhos
 DESC_AMMO_SHOT,0,%d %s a shot,%d %s por tiro
 DESC_AMMO_EVERY,0,%d %s every %s of fire,%d %s a cada %s de fogo
 DESC_SEED_COST,0,one packet to sow; buy for $%d,um pacote para plantar; compra por $%d
@@ -242,10 +243,12 @@ DMG_STING,0,sting,ferrão
 ENEMY_BREAKER,0,breaker,quebrador
 ENEMY_BREAKER.other,0,breakers,quebradores
 ENEMY_GIANT,0,giant,gigante
-BOSS_INTRO_GIANT,0,the giant is coming,o gigante está vindo
 ENEMY_GIANT.other,0,giants,gigantes
+BOSS_INTRO_GIANT,0,the giant is coming,o gigante está vindo
 ENEMY_RUNNER,0,runner,corredor
 ENEMY_RUNNER.other,0,runners,corredores
+ENEMY_SPITTER,0,spitter,cuspidor
+ENEMY_SPITTER.other,0,spitters,cuspidores
 ENEMY_TANK,0,tank,brutamontes
 ENEMY_TANK.other,0,tanks,brutamontes
 ENEMY_WALKER,0,walker,andarilho

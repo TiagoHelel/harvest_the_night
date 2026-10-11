@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-218 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+219 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -262,10 +262,11 @@ is the sort of thing this list exists to say out loud.
 | 0233 | Three new powers | 2026-10-11 |
 | 0234 | The arsenal grows with the seasons | 2026-10-11 |
 | 0246 | Bosses in general | 2026-10-11 |
+| 0247 | The spitter | 2026-10-11 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 105 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 107 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -372,10 +373,12 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Three new powers** (0233) - `data` 1845073021 -> 1109408054
 - **The arsenal grows with the seasons** (0234) - `sim` 3940398993 -> 4210782773
 - **The arsenal grows with the seasons** (0234) - `data` 1109408054 -> 3781358399
+- **The spitter** (0247) - `sim` 4210782773 -> 1167439413
+- **The spitter** (0247) - `data` 3781358399 -> 689488709
 
 ## What went wrong
 
-54 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+55 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -431,6 +434,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0196** - Found in the tour, and fixed before these numbers *(Checkpoint: is the day good on its own?)*
 - **0219** - Found while doing it *(Essence)*
 - **0246** - Found *(Bosses in general)*
+- **0247** - Found *(The spitter)*
 
 ## What is not in it
 

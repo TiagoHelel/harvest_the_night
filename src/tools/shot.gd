@@ -147,6 +147,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
+	["spitter", "a spitter working on a tower line: Summer 2's night, three towers in a row across open ground south-east of the house - a flamethrower each end, a gun tower between - and three spitters come up from the south, standing off at four tiles and spitting: a glob just landed on the line, another in the air", ""],
 	["boss", "a boss winding up: Spring 14's night, the Giant come up to a line of wall east of the house and winding up its blow on it, the ring on its target - its bar and name up top and its intro across the screen under them, clear of the time to dawn and of the hotbar", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
 	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
@@ -792,6 +793,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"arsenal_winter": _set_arsenal_winter(state)
 		"arsenal_locked": _set_arsenal_locked(state)
 		"boss": _set_boss(state)
+		"spitter": _set_spitter(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1150,6 +1152,34 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				str(Entities.cell_of(state, _boss_giant)), Enemies.is_winding(state, _boss_giant),
 				str(Enemies.winding_at(state, _boss_giant)),
 				int(state["house_hp"]), (main.find_child("NightHud", true, false) as NightHud).banner_text()])
+		"spitter":
+			# Until a glob the view saw in the air has landed - its splat
+			# plays on the next frame - and another has just left a mouth,
+			# its spitter on the release (task 0247), a tick at a time.
+			var view := main.get_node("%WorldView") as WorldView
+			var landed := false
+			var flying := false
+			for _i in 240:
+				var aloft: Dictionary = {}
+				flying = false
+				for shot in (state["enemy_shots"] as Array):
+					aloft["%d:%d" % [int(shot["by"]), int(shot["fired"])]] = true
+					var gone := int(shot["flight"]) - int(shot["left"])
+					flying = flying or (gone >= 1 and gone <= 2)
+				landed = false
+				for key in view._globs:
+					landed = landed or not aloft.has(key)
+				if landed and flying:
+					break
+				Sim.advance(state, 1)
+			var hurt: Array = []
+			for cell in _spit_line:
+				hurt.append(int(Farm.occupant(state, cell as Vector2i).get("hp", 0)))
+			# The cursor's words off the line's west end, clear of the spit.
+			if not _spit_line.is_empty():
+				view.cursor().place_at(_open_ground_near(state, (_spit_line[0] as Vector2i) + Vector2i(-6, -2)))
+			print("  spitter: %d spitting, %d globs up, landed %s, just spat %s, the line at %s" % [
+				_spitting(state), (state["enemy_shots"] as Array).size(), landed, flying, str(hurt)])
 		"arsenal_locked":
 			# Turned by hand to autumn's page, nothing picked (task 0234).
 			(main.get("_hotbar") as Hotbar).turn(2)
@@ -3058,6 +3088,45 @@ func _set_boss(state: Dictionary) -> void:
 
 ## The Giant `_set_boss` sent in.
 var _boss_giant := 0
+
+
+## **A spitter working on a tower line** (task 0247): Summer 2's night, a
+## row of three towers across open ground south-east of the house - a
+## flamethrower each end, which cannot reach four tiles, and a gun tower
+## between, which can - and three spitters south of it, a tile to three past
+## their reach on their road home, walked up and spitting by the shutter
+## (`_just_before_the_shutter`).
+func _set_spitter(state: Dictionary) -> void:
+	_on_date(state, GameData.SEASON_DAYS + 2)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200, GameData.OIL: 60,
+		GameData.MONEY: 400})
+	var middle := _clear_patch(state, Farm.house_centre(state) + Vector2i(8, 9), 5)
+	NightRoad.into_build(state)
+	_spit_line = []
+	for offset in [Vector2i(-2, -3), Vector2i(0, -3), Vector2i(2, -3)]:
+		var at: Vector2i = middle + offset
+		if middle.x >= 0 and Building.place(state, &"gun_tower" if offset.x == 0 else &"flame_tower", at):
+			_spit_line.append(at)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	for offset in [Vector2i(-2, 3), Vector2i(1, 4), Vector2i(3, 2)]:
+		Entities.spawn(state, &"spitter", middle + (offset as Vector2i))
+	print("  spitter: the line %s, three spitters south of it" % str(_spit_line))
+	_look_at(middle + Vector2i(0, -1))
+
+
+## The towers `_set_spitter` put down, west to east.
+var _spit_line: Array = []
+
+
+## How many enemies are spitting at something now.
+func _spitting(state: Dictionary) -> int:
+	var count := 0
+	for id in Entities.ids(state):
+		if Enemies.spitting_at(state, int(id)).x >= 0:
+			count += 1
+	return count
 
 
 ## The wall `_set_powers` hurt, and how far into the bell's ring and the

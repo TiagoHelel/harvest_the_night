@@ -253,6 +253,8 @@ func _lay_heads(kinds: Array, y: float) -> float:
 		head.name = "Head_%s" % kind
 		head.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		head.texture = _head_of(kind)
+		# A stand-in's head soured as its body is (task 0247's spitter).
+		head.self_modulate = PlaceholderArt.art_tint(StringName("head_%s" % kind))
 		head.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		head.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		head.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED

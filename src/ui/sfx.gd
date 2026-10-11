@@ -96,6 +96,9 @@ const ENEMY_SOUNDS := {
 	&"tank": &"sfx/groan_tank",
 	&"breaker": &"sfx/groan_breaker",
 	&"giant": &"sfx/roar_giant",
+	# **The walker's groan, borrowed** (task 0247) until 0284 gives the
+	# spitter a voice of its own.
+	&"spitter": &"sfx/groan_walker",
 }
 
 ## **What a boss with no voice of its own roars with** (task 0246): the

@@ -47,6 +47,17 @@ extends RefCounted
 ## through `stun()`: a bite on an electric fence does (`shock_ticks()`), and
 ## 0233's farm bell will.
 ##
+## ## Spat at from range
+##
+## A **spitter** (task 0247) with a tower - anything that shoots - within its
+## `spit_range` stands where it is and spits at the nearest, every
+## `spit_every_ticks`; with none it walks and bites like a walker. The glob is
+## aimed at the tower's cell when it leaves, flies `spit_tiles_per_second`,
+## and lands through `Farm.damage` on whatever stands there then - nothing, if
+## the tower has gone. The globs in the air are `enemy_shots`, kept apart
+## from the towers' `projectiles`, which `Combat.incoming` reads, and moved
+## here at the top of the tick, as a tower's shots are at the top of its.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -80,6 +91,11 @@ static func initial() -> Dictionary:
 		"breaches": 0,
 		# And for the whole run, which `begin_night()` does not clear.
 		"breaches_all_run": 0,
+		# **The spit in the air** (task 0247): a record for each glob, in the
+		# order they were spat - who spat it and when, where it is (integer
+		# sub-tiles), the cell it was aimed at, its flight and how much of it
+		# is left, and what it does to a structure.
+		"enemy_shots": [],
 	}
 
 
@@ -180,6 +196,11 @@ static func _beside_the_line(state: Dictionary, region: Array) -> Array:
 
 ## One tick of everything walking in. Called from `Sim._tick_night()`.
 static func tick(state: Dictionary) -> void:
+	# **The spit in the air first** (task 0247), as a tower's shots are: a
+	# glob spat this tick has not flown yet, one whose spitter has fallen
+	# lands all the same - and before the field is asked, so a tower it
+	# brought down is already off the farm the walking reads.
+	_advance_spit(state)
 	Pathing.refresh(state)
 	if Entities.count(state) == 0:
 		return
@@ -267,6 +288,12 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 		if not _swung_at_the_house(state, id, data, on):
 			return
 		_bite(state, id, data)
+		return
+
+	# **A spitter stands off a tower** (task 0247): within its `spit_range`
+	# of one it stays where it is and spits, and with none it walks on like
+	# a walker.
+	if int(data.get("spit_range", 0)) > 0 and _stood_and_spat(state, id, data, on):
 		return
 
 	var base := maxi(int(data["ticks_per_tile"]), 1)
@@ -376,6 +403,104 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	# **Arrived at a bait** (task 0225): the lure's 0 under a lured foot.
 	elif lured and landed != here and _lure_away(state, pull, landed) == 0:
 		_reached_bait(state, landed)
+
+
+## **A spitter's turn** (task 0247). Its spit's wait runs down whatever it
+## is doing - a stun holds it, as it holds a bite's. With a tower within
+## `spit_range` it stands, its slow running down as a walker's does, and
+## spits once the wait is out; true. With none it is spitting at nothing,
+## and false: it walks.
+static func _stood_and_spat(state: Dictionary, id: int, data: Dictionary,
+		here: Vector2i) -> bool:
+	var one := Entities.get_one(state, id)
+	var wait := int(one.get("spit_wait", 0))
+	if wait > 0:
+		one["spit_wait"] = wait - 1
+	var mark := spit_target(state, here, int(data["spit_range"]))
+	if mark.x < 0:
+		one.erase("spitting")
+		return false
+	one["spitting"] = Grid.index(mark)
+	var slow := int(one.get("slow", 0))
+	if slow > 0:
+		one["slow"] = slow - 1
+	if int(one.get("spit_wait", 0)) <= 0:
+		one["spit_wait"] = maxi(int(data["spit_every_ticks"]), 1)
+		_spit(state, id, data, mark)
+	return true
+
+
+## **The tower a spitter spits at** (task 0247): the nearest thing that
+## shoots within `reach` of `from`, by Chebyshev distance - a tower's own
+## measure of reach - and the lower cell index on a tie, which
+## `Towers.cells()` coming in cell order gives for nothing. `(-1, -1)` for
+## none.
+static func spit_target(state: Dictionary, from: Vector2i, reach: int) -> Vector2i:
+	var best := Vector2i(-1, -1)
+	var nearest := reach + 1
+	for cell in Towers.cells(state):
+		var apart := Grid.chebyshev(from, cell as Vector2i)
+		if apart < nearest:
+			nearest = apart
+			best = cell
+	return best
+
+
+## The cell a spitter is spitting at, or `(-1, -1)` while it walks. For the
+## view, and for the asserts.
+static func spitting_at(state: Dictionary, id: int) -> Vector2i:
+	var idx := int(Entities.get_one(state, id).get("spitting", -1))
+	return Grid.cell(idx) if idx >= 0 else Vector2i(-1, -1)
+
+
+## **A glob leaves** (task 0247), from where the spitter stands, aimed at the
+## tower's cell. Its flight is that cell's middle away by the Chebyshev
+## measure the spit range is in, at `spit_tiles_per_second`, rounded up and
+## never under a tick: a glob at a tower four tiles off along a diagonal
+## lands as soon as one four tiles off along a row.
+static func _spit(state: Dictionary, id: int, data: Dictionary, at: Vector2i) -> void:
+	var one := Entities.get_one(state, id)
+	var from := Vector2i(int(one["pos"][0]), int(one["pos"][1]))
+	var to := at * Player.SUBTILE + Vector2i(Player.SUBTILE / 2, Player.SUBTILE / 2)
+	var speed := maxi(int(data["spit_tiles_per_second"]) * Player.SUBTILE
+		/ GameData.TICK_HZ, 1)
+	var apart := maxi(absi(to.x - from.x), absi(to.y - from.y))
+	var flight := maxi((apart + speed - 1) / speed, 1)
+	(state["enemy_shots"] as Array).append({
+		"by": id,
+		"fired": int(state["tick"]),
+		"pos": [from.x, from.y],
+		"to": [at.x, at.y],
+		"left": flight,
+		"flight": flight,
+		"damage": int(data["spit_damage"]),
+	})
+
+
+## **The spit in the air, a tick on** (task 0247): each glob carried a share
+## of the way left towards its cell's middle, and on its last tick landed
+## there through `Farm.damage` - on whatever stands there now. An empty cell,
+## or rubble, takes nothing; a tower it brings down leaves rubble and a
+## `structure_lost`, as a bite's does.
+static func _advance_spit(state: Dictionary) -> void:
+	var flying: Array = state["enemy_shots"]
+	if flying.is_empty():
+		return
+	var still: Array = []
+	for shot in flying:
+		var left := int(shot["left"]) - 1
+		shot["left"] = left
+		var cell := Vector2i(int(shot["to"][0]), int(shot["to"][1]))
+		if left <= 0:
+			Farm.damage(state, cell, int(shot["damage"]))
+			continue
+		var to := cell * Player.SUBTILE + Vector2i(Player.SUBTILE / 2, Player.SUBTILE / 2)
+		var at := Vector2i(int(shot["pos"][0]), int(shot["pos"][1]))
+		shot["pos"][0] = at.x + (to.x - at.x) / (left + 1)
+		shot["pos"][1] = at.y + (to.y - at.y) / (left + 1)
+		still.append(shot)
+	flying.clear()
+	flying.append_array(still)
 
 
 ## Whether a telegraphing enemy has finished winding up at the house. True at
@@ -568,6 +693,9 @@ static func withdraw(state: Dictionary) -> int:
 	for id in Entities.ids(state):
 		Entities.remove(state, int(id))
 	(state["projectiles"] as Array).clear()
+	# The spit in the air too (task 0247): a glob left over would land on a
+	# tower at dusk.
+	(state["enemy_shots"] as Array).clear()
 	(state["burning"] as Dictionary).clear()
 	(state["stung"] as Dictionary).clear()
 	Ability.put_out(state)

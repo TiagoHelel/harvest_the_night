@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-218 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+219 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -261,10 +261,11 @@ voz alta.
 | 0233 | Three new powers | 2026-10-11 |
 | 0234 | The arsenal grows with the seasons | 2026-10-11 |
 | 0246 | Bosses in general | 2026-10-11 |
+| 0247 | The spitter | 2026-10-11 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 105 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 107 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -371,10 +372,12 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Three new powers** (0233) - `data` 1845073021 -> 1109408054
 - **The arsenal grows with the seasons** (0234) - `sim` 3940398993 -> 4210782773
 - **The arsenal grows with the seasons** (0234) - `data` 1109408054 -> 3781358399
+- **The spitter** (0247) - `sim` 4210782773 -> 1167439413
+- **The spitter** (0247) - `data` 3781358399 -> 689488709
 
 ## O que deu errado
 
-54 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
+55 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -430,6 +433,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **0196** - Found in the tour, and fixed before these numbers *(Checkpoint: is the day good on its own?)*
 - **0219** - Found while doing it *(Essence)*
 - **0246** - Found *(Bosses in general)*
+- **0247** - Found *(The spitter)*
 
 ## O que nao tem
 

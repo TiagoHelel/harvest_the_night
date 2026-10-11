@@ -365,6 +365,8 @@ func _corpse(at: Vector2, kind: StringName) -> void:
 	var sprite := _c_sprite[slot] as Sprite2D
 	sprite.texture = _corpse_art(kind)
 	sprite.visible = sprite.texture != null
+	# Soured as the body was, while it stands in (task 0247).
+	sprite.self_modulate = PlaceholderArt.art_tint(StringName("%s_death" % kind))
 
 
 ## **Sprites, not `draw_texture`.** Drawn through `_draw` on this layer, every
@@ -437,6 +439,12 @@ func _draw() -> void:
 func _corpse_art(kind: StringName) -> Texture2D:
 	var path := "res://sprites/enemies/%s_death.png" % kind
 	if not ResourceLoader.exists(path):
+		# **A stand-in's last death frame** (task 0247's spitter, through
+		# 0120's road), until its pack brings the `<kind>_death` alias.
+		var last := int(PlaceholderArt.art(StringName("%s_death" % kind)).get("frames", 0)) - 1
+		path = PlaceholderArt.texture_path("res://sprites/enemies/%s_death_%d.png" % [kind, last]) \
+			if last >= 0 else ""
+	if path.is_empty() or not ResourceLoader.exists(path):
 		return null
 	return load(path)
 

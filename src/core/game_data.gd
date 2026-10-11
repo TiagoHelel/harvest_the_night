@@ -2478,6 +2478,34 @@ const ENEMIES: Dictionary = {
 		"armour": 6,                    # LEVER: damage off each hit, 3-10
 		"is_boss": true,
 	},
+	&"spitter": {
+		# **The first that hurts what you built without touching it** (task
+		# 0247): summer's ranged zombie. With a tower within `spit_range` it
+		# stands off and spits at it (`Enemies`); with none it walks and
+		# bites like a walker. A tower line in the open becomes something to
+		# cover, not only something to build.
+		#
+		# A little frailer and slower than a walker: what it costs you is a
+		# tower at range, not the roof.
+		"hp": 30,                       # LEVER: hit points, 18-50
+		"ticks_per_tile": 24,           # LEVER: ticks, 18-32 (lower is faster)
+		"damage": 8,                    # LEVER: to the house, 4-12
+		"reward": 6,                    # LEVER: money, 3-9
+		"bones": 1,                     # LEVER: bones, 0-6
+		"armour": 0,
+		# **A tile short of the gun tower's reach**, so a tower can always
+		# answer it: `check_enemies` refuses a spit range of nothing, or one
+		# as long as the gun tower's base `range`. A flamethrower's three
+		# cannot reach it at four; a gun tower's five can.
+		"spit_range": 4,                # LEVER: tiles, 3-4 (under the gun tower's 5)
+		"spit_damage": 10,              # LEVER: to a structure, a spit, 5-20
+		"spit_every_ticks": 2 * SECONDS,   # LEVER: ticks, 1-4 seconds worth
+		# The glob's flight, slow enough to watch cross the dark.
+		"spit_tiles_per_second": 6,     # LEVER: tiles a second, 4-10
+		# **Not lured** (task 0247): it stops for a tower in reach, not for
+		# straw, and a decoy is not a tower.
+		"lurable": false,
+	},
 }
 
 
@@ -5232,6 +5260,7 @@ static func check_enemies(enemies: Dictionary) -> Array:
 		# last night is not won with a decoy.
 		if bool(one.get("is_boss", false)) and bool(one.get("lurable", false)):
 			errors.append("enemy '%s' is a boss and can be lured" % id)
+		errors.append_array(_check_spit(id, one))
 
 	for id in sorted_names(enemies.keys()):
 		var one: Dictionary = enemies[id]
@@ -5241,6 +5270,29 @@ static func check_enemies(enemies: Dictionary) -> Array:
 			errors.append(("enemy '%s' ignores structures without being "
 				+ "faster than the ones that do not - it would be a slow "
 				+ "zombie taking the long way round") % id)
+	return errors
+
+
+## **A spitter's numbers** (task 0247), for an enemy that declares any
+## `spit_` lever: all four of them, and a range short of the gun tower's
+## base `range` - so a tower can always answer it.
+static func _check_spit(id: StringName, one: Dictionary) -> Array:
+	var errors: Array = []
+	var spits := false
+	for key in sorted_names(one.keys()):
+		spits = spits or String(key).begins_with("spit_")
+	if not spits:
+		return errors
+	for field in ["spit_damage", "spit_every_ticks", "spit_tiles_per_second"]:
+		if int(one.get(field, 0)) <= 0:
+			errors.append("enemy '%s' spits with no %s" % [id, field])
+	var reach := int(one.get("spit_range", 0))
+	var gun := int((DEFENCES[&"gun_tower"] as Dictionary).get("range", 0))
+	if reach <= 0:
+		errors.append("enemy '%s' spits from no tiles" % id)
+	elif reach >= gun:
+		errors.append(("enemy '%s' spits from %d tiles, as far as a gun tower "
+			+ "reaches (%d) - no tower could answer it") % [id, reach, gun])
 	return errors
 
 

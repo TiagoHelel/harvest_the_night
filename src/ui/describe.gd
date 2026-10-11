@@ -289,6 +289,9 @@ static func enemy(id: StringName) -> String:
 		lines.append(I18n.t(&"DESC_EATS_WALLS"))
 	if bool(one.get("ignores_structures", false)):
 		lines.append(I18n.t(&"DESC_PASSES_WALLS"))
+	# A spitter's reach (task 0247).
+	if int(one.get("spit_range", 0)) > 0:
+		lines.append(I18n.f(&"DESC_SPITS", [int(one["spit_range"])]))
 	# Any boss that winds up - a `telegraph_ticks` to wind up through (0246).
 	if bool(one.get("is_boss", false)) and int(one.get("telegraph_ticks", 0)) > 0:
 		lines.append(I18n.t(&"DESC_WINDS_UP"))

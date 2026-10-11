@@ -235,6 +235,15 @@ const ZAP := {"canvas": Vector2i(12, 12), "pivot": Vector2i(6, 6), "draw_scale":
 ## fence's 16x32 standing on (8,28), drawn at 1.0.
 const STRONG_WALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
 
+## A046's spitter (task 0247): the ordinary families' 64x48 standing on
+## (32,44), drawn at 1.0; its glob in flight 8x8 round (4,4), and the splat
+## where it lands 12x12 round (6,6), an impact's box. The walker it stands in
+## as is soured to the throat sac's yellow-green.
+const SPITTER := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "draw_scale": 1.0}
+const SPIT := {"canvas": Vector2i(8, 8), "pivot": Vector2i(4, 4), "draw_scale": 1.0}
+const SPIT_SPLAT := {"canvas": Vector2i(12, 12), "pivot": Vector2i(6, 6), "draw_scale": 1.0}
+const SPITTER_TINT := Color(1.45, 1.65, 0.4)
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -348,6 +357,17 @@ const ART := {
 	&"beehive_2_fire": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_fire", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
 	&"beehive_2_wreck": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_wreck", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
 	&"bee_swarm": {"pack": "A038", "dir": "res://sprites/effects/", "frames": 3, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": SWARM, "final": SWARM},
+	# A046's spitter (task 0247): the walker - the same canvas, the same feet -
+	# soured to the sac's yellow-green, every pose its own, until 0260; its
+	# glob and the splat where it lands drawn in code (`SpitterArt`), and its
+	# forecast head the box over the walker's head, soured the same.
+	&"spitter": {"pack": "A046", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker", "tint": SPITTER_TINT, "geometry": SPITTER, "final": SPITTER, "bare": true},
+	&"spitter_walk": {"pack": "A046", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.125, "loop": true, "stand_in": &"enemies/walker_walk", "stand_in_frames": 4, "tint": SPITTER_TINT, "geometry": SPITTER, "final": SPITTER},
+	&"spitter_attack": {"pack": "A046", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_attack", "stand_in_frames": 3, "tint": SPITTER_TINT, "geometry": SPITTER, "final": SPITTER},
+	&"spitter_death": {"pack": "A046", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": SPITTER_TINT, "geometry": SPITTER, "final": SPITTER},
+	&"spit": {"pack": "A046", "dir": "res://sprites/effects/", "frames": 2, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": SPIT, "final": SPIT},
+	&"spit_splat": {"pack": "A046", "dir": "res://sprites/effects/", "frames": 3, "seconds": 0.08, "loop": false, "stand_in": &"", "geometry": SPIT_SPLAT, "final": SPIT_SPLAT},
+	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
 	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn
 	# low, growing with each level, until 0238; the pumpkin in the air drawn
@@ -670,6 +690,17 @@ static func art_tint(name: StringName) -> Color:
 
 static func art_scale(name: StringName) -> float:
 	return float((ART.get(name, {}) as Dictionary).get("stand_in_scale", 1.0))
+
+
+## **The tint of whatever answers for a path** (task 0247): its `ART`
+## stand-in's, for a view that draws a stand-in by its runtime path - the
+## spitter's frames are the walker's, soured. White for real art and for a
+## path nobody registered.
+static func tint_of(path: String) -> Color:
+	if RasterArt.FRAMES.has(path):
+		return Color.WHITE
+	var at := _registered(path)
+	return art_tint(at[0]) if not at.is_empty() else Color.WHITE
 
 
 ## The part of an `ART` stand-in's file that stands in (task 0158): a

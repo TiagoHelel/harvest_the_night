@@ -4135,9 +4135,12 @@ func _case_0074_zombie_art() -> void:
 			"a %s walks out of the dark" % kind)
 	await frames(6)
 
-	# **Every one of them is drawn from its own art.** The flat block the view
-	# falls back to is generated at runtime and has no `resource_path`, which
-	# is how a fallback is told from a file.
+	# **Every one of them is drawn from its own art** - or, for a kind whose
+	# pack has not landed (task 0247's spitter), from its stand-in, found
+	# through 0120's lookup: the file it stands in with, or a drawing named
+	# for the path it stands for. The flat block the view falls back to is
+	# generated at runtime and has no `resource_path`, which is how a
+	# fallback is told from a file.
 	var actors: Node2D = view.find_child("Actors", true, false)
 	expect(actors != null, "the actors are on their own layer")
 	var drawn := 0
@@ -4147,15 +4150,31 @@ func _case_0074_zombie_art() -> void:
 			var sprite := child as Sprite2D
 			if sprite == null or sprite.texture == null:
 				continue
-			if str(sprite.texture.resource_path).contains("/enemies/"):
+			if str(sprite.texture.resource_path).contains("/enemies/") \
+					or str(sprite.texture.resource_name).contains("/enemies/"):
 				drawn += 1
 			elif str(sprite.texture.resource_path) == "":
 				fallen_back += 1
 	expect(drawn >= kinds.size(),
-		"every enemy on the field is drawn from the enemy art",
+		"every enemy on the field is drawn from the enemy art or its stand-in",
 		"%d drawn, %d on the fallback block" % [drawn, fallen_back])
 	expect(fallen_back == 0, "and none of them is a purple block",
 		str(fallen_back))
+	# **A stand-in is the lookup's**, soured as its entry says.
+	var standing: Array = []
+	var wrong: Array = []
+	for id in Entities.ids(state):
+		var one := Entities.get_one(state, int(id))
+		var pose := view._pose_of(one)
+		var path := WorldView.ENEMY_DIR + str(pose) + ".png"
+		if PlaceholderArt.frame(path).get("stand_in", "") == "":
+			continue
+		standing.append(one["kind"])
+		var file := PlaceholderArt.texture_path(path)
+		if file == path or not ResourceLoader.exists(file):
+			wrong.append(path)
+	expect(standing.has(&"spitter") and wrong.is_empty(),
+		"and a kind on its stand-in is drawn through the lookup", "%s: %s" % [str(standing), str(wrong)])
 
 	# **The pose follows the rules.** `winding_at` is the rules' own word for
 	# "about to hit something", and the Giant has a telegraph of its own.

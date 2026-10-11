@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 80
+const GROUPS := 81
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -159,6 +159,7 @@ func _run() -> void:
 	_task_0233_powers()
 	_task_0234_arsenal()
 	_task_0246_bosses()
+	_task_0247_spitter()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -860,6 +861,34 @@ func _task_0120_placeholders() -> void:
 			readers.append(file)
 	expect(readers.is_empty(), "only the lookup reads RasterArt.FRAMES in src/ui",
 		str(readers))
+
+	# **An enemy with no raster art stands in through the lookup** (task
+	# 0247): its master, walk, attack and death at the canvas and pivot of
+	# the art they stand for, and its head registered - the art groups
+	# (0074, 0088) check only the kinds with raster art.
+	var standing: Array = []
+	var off: Array = []
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		var master := "res://sprites/enemies/%s.png" % kind
+		if RasterArt.FRAMES.has(master):
+			continue
+		standing.append(kind)
+		var paths: Array = [master]
+		for pose in [["walk", 4], ["attack", 3], ["death", 4]]:
+			for i in int(pose[1]):
+				paths.append("res://sprites/enemies/%s_%s_%d.png" % [kind, pose[0], i])
+		for path in paths:
+			var answer := PlaceholderArt.frame(path)
+			var file := PlaceholderArt.texture_path(path)
+			var texture: Texture2D = load(file) if file != path and ResourceLoader.exists(file) else null
+			if answer.is_empty() or texture == null or Vector2i(texture.get_size()) != answer["canvas"] \
+					or answer["pivot"] != PlaceholderArt.frame(file).get("pivot", Vector2i(-1, -1)):
+				off.append(path)
+		if PlaceholderArt.art(StringName("head_%s" % kind)).is_empty():
+			off.append("head_%s" % kind)
+	expect(not standing.is_empty() and off.is_empty(),
+		"every enemy without raster art stands in through the lookup - master, walk, attack, death and head - at the canvas and pivot of what it stands for",
+		"%s: %s" % [str(standing), str(off.slice(0, 4))])
 	_completed += 1
 
 
@@ -9480,6 +9509,249 @@ func _task_0246_bosses() -> void:
 		"the view reads is_boss: the Giant moves as a boss drawn in its poses (TRACKED its old name), its voice is the table's, and no boss path names it - sfx.gd only in its table of voices",
 		"%s %d" % [str(by_name), voices])
 	_completed += 1
+
+
+## 0247 - the spitter. With a tower within `spit_range` it stands off and
+## lands `spit_damage` every `spit_every_ticks` - measured - and with none it
+## walks to the house; one seed lands the same spits on the same ticks; dawn
+## leaves nothing in the air; a glob on an empty cell does nothing and one
+## that brings a tower down leaves rubble and a `structure_lost`. A tower whose
+## reach covers it kills it first; one that cannot reach it is worn down.
+func _task_0247_spitter() -> void:
+	var row: Dictionary = GameData.ENEMIES[&"spitter"]
+	var gun := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["range"])
+	var reach := int(row["spit_range"])
+	var every := int(row["spit_every_ticks"])
+	var spit := int(row["spit_damage"])
+	expect(reach >= 1 and reach < gun and spit > 0 and every > 0 and int(row["spit_tiles_per_second"]) > 0
+		and not bool(row.get("lurable", false)) and not Combat.is_boss(&"spitter"),
+		"a spitter spits from short of a gun tower's reach, at every lever's own number, and is neither lured nor a boss",
+		str(row))
+	var none := GameData.ENEMIES.duplicate(true)
+	(none[&"spitter"] as Dictionary)["spit_range"] = 0
+	var far := GameData.ENEMIES.duplicate(true)
+	(far[&"spitter"] as Dictionary)["spit_range"] = gun
+	var dry := GameData.ENEMIES.duplicate(true)
+	(dry[&"spitter"] as Dictionary)["spit_damage"] = 0
+	expect(GameData.check_enemies(GameData.ENEMIES).is_empty() and _says(GameData.check_enemies(none), "spits from no tiles")
+		and _says(GameData.check_enemies(far), "as far as a gun tower") and _says(GameData.check_enemies(dry), "spits with no spit_damage"),
+		"check_enemies refuses a spit range of nothing or as long as the gun tower's, and a spit of nothing")
+
+	# **It stands off a gun tower and spits, measured**: every landing is
+	# `spit_damage`, a `spit_every_ticks` apart, and it never moves - kept
+	# alive to be measured, as the tower would kill it.
+	var stood := _spit_duel(24700, &"gun_tower", 1 << 20)
+	var drops: Array = stood["drops"]
+	var apart: Array = []
+	var each: Array = []
+	for i in drops.size():
+		each.append(int((drops[i] as Array)[1]))
+		if i > 0:
+			apart.append(int((drops[i] as Array)[0]) - int((drops[i - 1] as Array)[0]))
+	var lands := drops.size() >= 3
+	for one in each:
+		lands = lands and int(one) == spit
+	for gap in apart:
+		lands = lands and int(gap) == every
+	expect(lands and not bool(stood["moved"]) and int(stood["tower_hp"]) == 0
+		and Farm.rubble_at(stood["state"], stood["cell"]) == &"gun_tower" and int(stood["lost"]) == 1,
+		"with a gun tower in reach it stands and lands spit_damage every spit_every_ticks, measured, until the tower is rubble with a structure_lost",
+		"%s apart %s, moved %s" % [str(each), str(apart), stood["moved"]])
+	var again := _spit_duel(24700, &"gun_tower", 1 << 20)
+	expect(str(again["drops"]) == str(stood["drops"]),
+		"two runs of one seed land the same spits on the same ticks", str(again["drops"]))
+
+	# **With none it walks to the house** and bites like a walker, spitting
+	# at nothing on the way.
+	var walk := _powers_night(24701)
+	var full := int(walk["house_hp"])
+	var walker := Enemies.spawn(walk, &"spitter", 0)
+	var spat := false
+	for _i in 6000:
+		Sim.advance(walk, 1)
+		spat = spat or not (walk["enemy_shots"] as Array).is_empty() or Enemies.spitting_at(walk, walker).x >= 0
+		if not Entities.alive(walk, walker):
+			break
+	expect(walker > 0 and not Entities.alive(walk, walker) and not spat
+		and int(walk["house_hp"]) == full - int(row["damage"]),
+		"with no tower in reach it walks the field to the house and bites it like a walker",
+		"house %d of %d, spat %s" % [int(walk["house_hp"]), full, spat])
+
+	# **Dawn leaves nothing in the air.**
+	var dawn := _powers_night(24702)
+	var post := _spit_ground(dawn)
+	Farm.place(dawn, post, {"id": &"gun_tower", "hp": 60})
+	Entities.set_hp(dawn, Entities.spawn(dawn, &"spitter", post + Vector2i(reach, 0)), 1 << 20)
+	for _i in 120:
+		Sim.advance(dawn, 1)
+		if not (dawn["enemy_shots"] as Array).is_empty():
+			break
+	var aloft := (dawn["enemy_shots"] as Array).size()
+	(dawn["wave"] as Dictionary)["dawn_at"] = int(dawn["night_tick"]) + 1
+	Sim.advance(dawn, 2)
+	var day := Phases.begin_day(dawn)
+	expect(aloft > 0 and day and (dawn["enemy_shots"] as Array).is_empty() and Entities.count(dawn) == 0,
+		"a glob in the air at dawn is gone with the spitter when the day begins", "%d aloft" % aloft)
+
+	# **A glob on an empty cell does nothing**: the tower taken away under it
+	# - no rubble, nothing lost.
+	var empty := _powers_night(24703)
+	var gone := _spit_ground(empty)
+	Farm.place(empty, gone, {"id": &"gun_tower", "hp": 60})
+	Entities.set_hp(empty, Entities.spawn(empty, &"spitter", gone + Vector2i(reach, 0)), 1 << 20)
+	for _i in 120:
+		Sim.advance(empty, 1)
+		if not (empty["enemy_shots"] as Array).is_empty():
+			break
+	var flying := (empty["enemy_shots"] as Array).size()
+	Farm.remove(empty, gone)
+	var from := int(empty["tick"])
+	for _i in 120:
+		Sim.advance(empty, 1)
+		if (empty["enemy_shots"] as Array).is_empty():
+			break
+	var lost := 0
+	for event in Events.since(empty, from):
+		if StringName((event as Dictionary)["kind"]) == &"structure_lost":
+			lost += 1
+	expect(flying > 0 and (empty["enemy_shots"] as Array).is_empty() and Farm.occupant(empty, gone).is_empty()
+		and Farm.rubble_at(empty, gone) == &"" and lost == 0,
+		"a glob landing on a cell left empty does nothing: no rubble, nothing lost", "%d lost" % lost)
+
+	# **A tower whose reach covers it kills it before losing the tower; one
+	# that cannot reach it is worn down.** Both numbers printed.
+	var covered := _spit_duel(24704, &"gun_tower", 0)
+	var short := _spit_duel(24705, &"flame_tower", 0)
+	var flame := int((GameData.DEFENCES[&"flame_tower"] as Dictionary)["range"])
+	print("  a spitter at %d tiles: a gun tower (reach %d) kills it in %d ticks with %d of %d hit points left; a flamethrower (reach %d) is worn down in %d ticks, the spitter untouched at %d"
+		% [reach, gun, int(covered["ticks"]), int(covered["tower_hp"]), int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["hp"]),
+			flame, int(short["ticks"]), int(short["spitter_hp"])])
+	expect(not bool(covered["alive"]) and int(covered["tower_hp"]) > 0,
+		"a gun tower, whose reach covers it, kills it before losing the tower", str(covered["tower_hp"]))
+	expect(flame < reach and bool(short["alive"]) and int(short["spitter_hp"]) == int(row["hp"])
+		and int(short["tower_hp"]) == 0 and Farm.rubble_at(short["state"], short["cell"]) == &"flame_tower" and int(short["lost"]) == 1,
+		"a flamethrower, which cannot reach it, is worn down to rubble with the spitter untouched",
+		"%d ticks" % int(short["ticks"]))
+
+	# **The words and the voice**: its name, its tooltip's reach, the
+	# walker's groan borrowed.
+	expect(Names.of(&"spitter") == I18n.t(&"ENEMY_SPITTER")
+		and Describe.enemy(&"spitter").contains(I18n.f(&"DESC_SPITS", [reach]))
+		and Sfx.ENEMY_SOUNDS.get(&"spitter", &"") == &"sfx/groan_walker",
+		"it has its name, a tooltip line for its reach, and the walker's groan until it has its own")
+
+	# **The view plays it off the rules**: the release and the recovery after
+	# each spit, the rear before the next, standing between and walking off
+	# the clock; the glob lifted from the mouth to the tower on its arc.
+	var poses: Array = []
+	for wait in [every, every - SPIT_SETTLE, 3, every / 2]:
+		poses.append(WorldView.posed_off_the_rules(stood["state"],
+			{"id": 1, "kind": &"spitter", "spitting": 0, "spit_wait": wait}))
+	poses.append(WorldView.posed_off_the_rules(stood["state"], {"id": 1, "kind": &"spitter"}))
+	var shot := {"pos": [0, 0], "left": 10, "flight": 10}
+	var leaves := WorldView.spit_position(shot)
+	shot["left"] = 0
+	var arrives := WorldView.spit_position(shot)
+	expect(poses.slice(0, 4) == [&"spitter_attack_1", &"spitter_attack_2", &"spitter_attack_0", &"spitter"]
+		and String(poses[4]).begins_with("spitter_walk_")
+		and is_equal_approx(-leaves.y, WorldView.SPIT_MOUTH_LIFT) and is_equal_approx(-arrives.y, WorldView.SPIT_HIT_LIFT),
+		"the view plays the spit off the rules, and the glob leaves the mouth and lands up the tower", str(poses))
+
+	# **The glob and the splat drawn in code** until A046: the glob 4-6
+	# pixels inside its 8x8, a frame squashed from the other; the splat
+	# growing then shrinking inside its 12x12; a pixel clear all round.
+	var sizes: Array = []
+	var bordered := true
+	for i in SpitterArt.GLOB_FRAMES:
+		var image := SpitterArt.glob(i).get_image()
+		var used := image.get_used_rect()
+		sizes.append(used.size)
+		bordered = bordered and image.get_size() == Vector2i(8, 8) and used.position.x >= 1 and used.position.y >= 1 \
+			and used.end.x <= 7 and used.end.y <= 7
+	var areas: Array = []
+	for i in SpitterArt.SPLAT_FRAMES:
+		var image := SpitterArt.splat(i).get_image()
+		var used := image.get_used_rect()
+		var area := 0
+		for y in image.get_height():
+			for x in image.get_width():
+				area += 1 if image.get_pixel(x, y).a > 0.0 else 0
+		areas.append(area)
+		bordered = bordered and image.get_size() == Vector2i(12, 12) and used.position.x >= 1 and used.position.y >= 1 \
+			and used.end.x <= 11 and used.end.y <= 11 and used.size.x <= 10 and used.size.y <= 10
+	var round_glob := true
+	for size in sizes:
+		round_glob = round_glob and (size as Vector2i).x >= 4 and (size as Vector2i).x <= 6 and (size as Vector2i).y >= 4 and (size as Vector2i).y <= 6
+	expect(bordered and round_glob and sizes[0] != sizes[1] and int(areas[0]) < int(areas[1]) and int(areas[2]) < int(areas[1])
+		and SpitterArt.splat(SpitterArt.SPLAT_FRAMES) == null,
+		"the glob is 4-6 pixels a frame, one a squash of the other, and the splat grows and shrinks, a pixel clear all round",
+		"%s %s" % [str(sizes), str(areas)])
+	_completed += 1
+
+
+## How many ticks into its gap the recovery pose has given way (task 0247):
+## past the release and into the recovery.
+const SPIT_SETTLE := 4
+
+
+## **A spitter against one tower** (task 0247): a parked night, `tower` on
+## open ground and a spitter `spit_range` east of it - at `hp` when that is
+## not 0 - ticked until one of them is gone. The landings on the tower as
+## `[tick, damage]`, whether the spitter moved while the tower stood, who is
+## left and at what, the ticks it took and the `structure_lost`s.
+func _spit_duel(seed_value: int, tower: StringName, hp: int) -> Dictionary:
+	var state := _powers_night(seed_value)
+	var at := _spit_ground(state)
+	var full := int((GameData.DEFENCES[tower] as Dictionary)["hp"])
+	Farm.place(state, at, {"id": tower, "hp": full})
+	var reach := int((GameData.ENEMIES[&"spitter"] as Dictionary)["spit_range"])
+	var id := Entities.spawn(state, &"spitter", at + Vector2i(reach, 0))
+	if hp > 0:
+		Entities.set_hp(state, id, hp)
+	var start: Array = (Entities.get_one(state, id)["pos"] as Array).duplicate()
+	var from := int(state["tick"])
+	var last := full
+	var drops: Array = []
+	var moved := false
+	var ticks := 0
+	for t in 3000:
+		Sim.advance(state, 1)
+		ticks = t + 1
+		var on := Farm.occupant(state, at)
+		var now := int(on.get("hp", 0)) if StringName(on.get("id", &"")) == tower else 0
+		if now < last:
+			drops.append([int(state["tick"]), last - now])
+			last = now
+		# While the tower stands: the tick it falls, the spitter walks on.
+		if Entities.alive(state, id) and now > 0:
+			moved = moved or str(Entities.get_one(state, id)["pos"]) != str(start)
+		if not Entities.alive(state, id) or now <= 0:
+			break
+	var lost := 0
+	for event in Events.since(state, from):
+		if StringName((event as Dictionary)["kind"]) == &"structure_lost":
+			lost += 1
+	return {"state": state, "cell": at, "drops": drops, "moved": moved, "ticks": ticks,
+		"alive": Entities.alive(state, id), "spitter_hp": int(Entities.get_one(state, id).get("hp", 0)),
+		"tower_hp": last, "lost": lost}
+
+
+## Open ground for a tower with the six cells east of it open too - room for
+## a spitter to stand at its range (task 0247).
+func _spit_ground(state: Dictionary) -> Vector2i:
+	var house := Farm.house_centre(state)
+	for ring in range(6, 30):
+		for dy in range(-ring, ring + 1):
+			for dx in range(-ring, ring + 1):
+				if maxi(absi(dx), absi(dy)) != ring:
+					continue
+				var cell := house + Vector2i(dx, dy)
+				var open := Farm.buildable(state, cell)
+				for x in range(1, 7):
+					open = open and Farm.walkable(state, cell + Vector2i(x, 0)) and Farm.buildable(state, cell + Vector2i(x, 0))
+				if open:
+					return cell
+	return Vector2i(-1, -1)
 
 
 ## A parked night with nobody on the farm (task 0232).

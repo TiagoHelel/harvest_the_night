@@ -223,6 +223,15 @@ var _mine_cues: Dictionary = {}
 ## `{"sprite", "age"}`, oldest first.
 var _pumpkins: Dictionary = {}
 var _splats: Array = []
+## The spitters' globs in the air last frame (task 0247), by who spat and
+## when: the cell each was aimed at, for its splat once it has landed.
+var _globs: Dictionary = {}
+## Where they are drawn (task 0247): the night cues' layer, out of the
+## night's tint, as the bees and the zaps are.
+var _spit: Node2D
+## Which way each untracked enemy last moved (task 0247's spitter), by id:
+## `[x, faces_right]`. Pictures only; the rules have no facing.
+var _heading: Dictionary = {}
 var _mine_tick_before := -1
 var _mine_losses_before: Dictionary = {}
 var _mine_grid_version := -1
@@ -369,6 +378,13 @@ func _ready() -> void:
 	_zaps = Node2D.new()
 	_zaps.name = "Zaps"
 	cue_layer.add_child(_zaps)
+	# **A spitter's globs and their splats** (task 0247), beside them: the
+	# night greyed a green glob to a pebble, and the spit has to be seen
+	# crossing the dark.
+	_spit = Node2D.new()
+	_spit.name = "Spit"
+	_spit.draw.connect(_draw_spit)
+	cue_layer.add_child(_spit)
 	_zzz = Sprite2D.new()
 	_zzz.name = "Zzz"
 	_zzz.centered = false
@@ -585,6 +601,9 @@ func _process(delta: float) -> void:
 			if not alive.has(id):
 				_shot_origins.erase(id)
 		_shots.queue_redraw()
+	if _spit != null and _actors != null:
+		_spit.transform = _actors.get_global_transform()
+		_spit.queue_redraw()
 
 
 # -------------------------------------------------------------------- light
@@ -1840,10 +1859,13 @@ func _refresh_actors() -> void:
 	for i in ids.size():
 		var one := Entities.get_one(_state, int(ids[i]))
 		var sprite: Sprite2D = _actor_sprites[i]
-		sprite.texture = _texture_for(_pose_of(one))
+		var pose := _pose_of(one)
+		sprite.texture = _texture_for(pose)
 		# Keep material planes and family silhouettes during the core hurt cue.
-		sprite.flip_h = _enemy_motion.faces_right(one) if EnemyMotion.tracks(one["kind"]) else false
+		sprite.flip_h = _faces_right(one)
 		sprite.modulate = actor_tint(_state, one)
+		# **A stand-in's tint** (task 0247's soured walker), white for real art.
+		sprite.self_modulate = PlaceholderArt.tint_of(ENEMY_DIR + str(pose) + ".png")
 		# **Anchored at the feet, not at a tile corner.** An enemy is no
 		# longer one tile - motion has transparent clearance around the body - so the
 		# old "half a tile back and up" drew them with their shins in the
@@ -1858,6 +1880,28 @@ func _refresh_actors() -> void:
 		if Combat.is_stung(_state, int(ids[i])):
 			heads.append(sprite.position - Vector2(0.0, roundf(float(pivot.y) * SWARM_HEIGHT)))
 	_place_swarms(heads)
+	for id in _heading.keys():
+		if not Entities.alive(_state, int(id)):
+			_heading.erase(id)
+
+
+## Which way an enemy faces: a tracked family's motion says; an untracked one
+## (task 0247's spitter) faces the tower it spits at, else the way it last
+## moved - west, the way the art is drawn, until it has.
+func _faces_right(one: Dictionary) -> bool:
+	if EnemyMotion.tracks(one["kind"]):
+		return _enemy_motion.faces_right(one)
+	var id := int(one["id"])
+	var x := int(one["pos"][0])
+	var was: Array = _heading.get(id, [x, false])
+	var right := bool(was[1])
+	if x != int(was[0]):
+		right = x > int(was[0])
+	var aimed := Enemies.spitting_at(_state, id)
+	if aimed.x >= 0 and aimed.x != x / Player.SUBTILE:
+		right = aimed.x > x / Player.SUBTILE
+	_heading[id] = [x, right]
+	return right
 
 
 ## The tint an enemy is drawn in: the core's hurt cue, else - since task 0230
@@ -1952,6 +1996,7 @@ func _refresh_retreats(delta: float) -> void:
 		sprite.position = ArtPlacement.contact(EnemyRetreats.position(cue))
 		sprite.flip_h = bool(cue["right"])
 		sprite.modulate = Color(1, 1, 1, EnemyRetreats.alpha(cue))
+		sprite.self_modulate = PlaceholderArt.tint_of(ENEMY_DIR + str(EnemyRetreats.pose(cue)) + ".png")
 		var metadata: Dictionary = PlaceholderArt.frame(sprite.texture.resource_path)
 		sprite.offset = -Vector2(metadata.get("pivot", Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
 
@@ -1975,6 +2020,32 @@ func _draw_shots() -> void:
 			PaletteData.COLOURS[&"flame_hot"])
 
 
+## **A spitter's globs in the air** (task 0247): A046's wobble, from the
+## mouth to the tower's middle on a low arc (`spit_position`), on the night
+## cues' layer.
+func _draw_spit() -> void:
+	if _state.is_empty():
+		return
+	var glob := SpitterArt.glob(SpitterArt.frame_at(_ambient_time))
+	if glob == null:
+		return
+	for shot in (_state["enemy_shots"] as Array):
+		_spit.draw_texture(glob, spit_position(shot) - Vector2(SpitterArt.glob_pivot()))
+
+
+## **Where a glob is drawn** (task 0247): where the rules carry it, lifted
+## from `SPIT_MOUTH_LIFT` over the spitter's feet to `SPIT_HIT_LIFT` up the
+## tower as it goes, and `SPIT_ARC` more at the top of its flight. A
+## picture of the spit, never a place the rules know.
+static func spit_position(shot: Dictionary) -> Vector2:
+	var per := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
+	var at := Vector2(float(shot["pos"][0]), float(shot["pos"][1])) * per
+	var flight := maxi(int(shot.get("flight", 1)), 1)
+	var gone := clampf(1.0 - float(int(shot.get("left", 0))) / float(flight), 0.0, 1.0)
+	var lift := lerpf(SPIT_MOUTH_LIFT, SPIT_HIT_LIFT, gone) + 4.0 * SPIT_ARC * gone * (1.0 - gone)
+	return Vector2(floorf(at.x), floorf(at.y - lift))
+
+
 ## Whether a defence throws pumpkins (task 0227): its rounds are the crop's.
 static func throws_pumpkins(id: StringName) -> bool:
 	return Ammo.needed_by(id).has(GameData.PUMPKIN)
@@ -1996,7 +2067,10 @@ static func arc_lift(shot: Dictionary) -> float:
 ## frame and gone this one - landed, whether by the driver's ticks or a
 ## skipped stretch - leaves A039's four-frame splat on the cell it was thrown
 ## at, over the ground and under the night's ramp. Frame to frame, as `Juice`
-## finds its landed shots, never a state key. Capped, oldest first.
+## finds its landed shots, never a state key. Capped, oldest first. **A
+## spitter's glob too** (task 0247): A046's three-frame splat up the tower it
+## was spat at, the pumpkins' pool shared, out of the night's tint with the
+## globs.
 func _refresh_splats(delta: float) -> void:
 	if _shots == null or _state.is_empty():
 		return
@@ -2013,13 +2087,28 @@ func _refresh_splats(delta: float) -> void:
 			if not now.has(id):
 				_splat_at(_pumpkins[id])
 	_pumpkins = now
-	var each := CatapultArt.splat_seconds()
+	# **And a spitter's glob, on the tower it was spat at** (task 0247): one
+	# in the air last frame and gone this one has landed.
+	var globs: Dictionary = {}
+	if night:
+		for shot in (_state["enemy_shots"] as Array):
+			globs["%d:%d" % [int(shot["by"]), int(shot["fired"])]] = Vector2i(int(shot["to"][0]), int(shot["to"][1]))
+		var spat: Array = _globs.keys()
+		spat.sort()
+		for key in spat:
+			if not globs.has(key):
+				_splat_at(_globs[key], true)
+	_globs = globs
 	for i in range(_splats.size() - 1, -1, -1):
 		var splat: Dictionary = _splats[i]
 		splat["age"] = float(splat["age"]) + maxf(delta, 0.0)
 		var sprite: Sprite2D = splat["sprite"]
+		var spit := bool(splat.get("spit", false))
+		var each := SpitterArt.splat_seconds() if spit else CatapultArt.splat_seconds()
 		var frame := int(floorf(float(splat["age"]) / each))
-		var texture := CatapultArt.splat(frame) if night else null
+		var texture: Texture2D = null
+		if night:
+			texture = SpitterArt.splat(frame) if spit else CatapultArt.splat(frame)
 		if texture == null:
 			sprite.queue_free()
 			_splats.remove_at(i)
@@ -2117,19 +2206,23 @@ func _zap_at(at: Vector2) -> void:
 	_zap_cues.append({"sprite": sprite, "age": 0.0})
 
 
-func _splat_at(cell: Vector2i) -> void:
+## A splat on `cell`: a pumpkin's on the ground, or - `spit`, task 0247 - a
+## glob's up the tower it was spat at, where its flight ended.
+func _splat_at(cell: Vector2i, spit: bool = false) -> void:
 	if _splats.size() >= SPLAT_CAP:
 		(_splats[0]["sprite"] as Sprite2D).queue_free()
 		_splats.remove_at(0)
 	var sprite := Sprite2D.new()
-	sprite.name = "PumpkinSplat"
+	sprite.name = "SpitSplat" if spit else "PumpkinSplat"
 	sprite.centered = false
-	sprite.texture = CatapultArt.splat(0)
-	sprite.offset = -Vector2(CatapultArt.splat_pivot())
+	sprite.texture = SpitterArt.splat(0) if spit else CatapultArt.splat(0)
+	sprite.offset = -Vector2(SpitterArt.splat_pivot() if spit else CatapultArt.splat_pivot())
 	sprite.position = (Vector2(cell) + Vector2(0.5, 0.75)) * float(GameData.TILE_SIZE)
-	sprite.self_modulate = CatapultArt.splat_tint()
-	_shots.add_child(sprite)
-	_splats.append({"sprite": sprite, "age": 0.0})
+	if spit:
+		sprite.position.y -= SPIT_HIT_LIFT
+	sprite.self_modulate = Color.WHITE if spit else CatapultArt.splat_tint()
+	(_spit if spit else _shots).add_child(sprite)
+	_splats.append({"sprite": sprite, "age": 0.0, "spit": spit})
 
 
 static func authored_tower(id: StringName) -> bool:
@@ -2968,6 +3061,16 @@ func _texture_for(id: StringName) -> Texture2D:
 			_textures[id] = drawn
 			return drawn
 
+	# **An enemy's stand-in** (task 0247's spitter, through 0120's road): the
+	# registered stand-in's file - a family's frame, which `tint_of` sours -
+	# until its pack lands.
+	var stand_in := PlaceholderArt.texture_path(ENEMY_DIR + str(id) + ".png")
+	if stand_in != ENEMY_DIR + str(id) + ".png" and ResourceLoader.exists(stand_in):
+		var standing: Texture2D = load(stand_in)
+		if standing != null:
+			_textures[id] = standing
+			return standing
+
 	# **Drawn in code until its pack lands** (task 0224's decoy, through
 	# 0120's road): `DecoyArt`'s drawing, at the pack's canvas and pivot.
 	var coded := DecoyArt.texture(id)
@@ -3003,6 +3106,10 @@ func _pose_of(one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
 	if EnemyMotion.tracks(kind):
 		return _enemy_motion.pose(one, _state)
+	# **An untracked kind in the families' pose names** (task 0247's spitter,
+	# its stand-in through 0120's road until 0260): played off the rules.
+	if PlaceholderArt.has_frame(ENEMY_DIR + "%s_walk_0.png" % kind):
+		return posed_off_the_rules(_state, one)
 	if int(one.get("winding_at", -1)) >= 0:
 		var telegraph := StringName("%s_telegraph" % kind)
 		if ResourceLoader.exists(ENEMY_DIR + str(telegraph) + ".png"):
@@ -3011,6 +3118,30 @@ func _pose_of(one: Dictionary) -> StringName:
 	var beat := (int(_state["tick"]) / ENEMY_WALK_TICKS
 		+ int(one.get("id", 0))) % 2
 	return kind if beat == 0 else StringName("%s_walk_b" % kind)
+
+
+## **The pose of an untracked kind drawn in the families' names** (task
+## 0247), off the rules alone: spitting, its release and recovery after each
+## spit and its rear before the next (`spit_wait`), standing between;
+## stunned, standing; else its four steps on the clock, `STAND_IN_STEP_TICKS`
+## a frame - it walks or it chews, and either way it is busy.
+static func posed_off_the_rules(state: Dictionary, one: Dictionary) -> StringName:
+	var kind: StringName = one["kind"]
+	if int(one.get("spitting", -1)) >= 0:
+		var every := maxi(int((GameData.ENEMIES[kind] as Dictionary).get("spit_every_ticks", 1)), 1)
+		var wait := int(one.get("spit_wait", 0))
+		var since := every - wait
+		if since < SPIT_RELEASE_TICKS:
+			return StringName("%s_attack_1" % kind)
+		if since < SPIT_RELEASE_TICKS + SPIT_RECOVER_TICKS:
+			return StringName("%s_attack_2" % kind)
+		if wait <= SPIT_REAR_TICKS:
+			return StringName("%s_attack_0" % kind)
+		return kind
+	if Enemies.is_stunned(state, int(one["id"])):
+		return kind
+	var step := (int(state["tick"]) / STAND_IN_STEP_TICKS + int(one["id"])) % 4
+	return StringName("%s_walk_%d" % [kind, step])
 
 
 ## How battered a structure looks, as a tint.
@@ -3059,6 +3190,21 @@ const GARLIC_GROUND := Color(0.91, 0.88, 0.81, 0.16)
 ## pixels (task 0227), and how many splats burst at once.
 const PUMPKIN_ARC := 14.0
 const SPLAT_CAP := 8
+
+## **A spitter's glob** (task 0247): it leaves the mouth this high over the
+## spitter's feet, lands this high on a tower - its middle - and rises this
+## much over its line on the way. Pictures of the spit; the rules carry it
+## straight from foot to cell.
+const SPIT_MOUTH_LIFT := 22.0
+const SPIT_HIT_LIFT := 14.0
+const SPIT_ARC := 6.0
+## **Its stand-in's poses round a spit** (task 0247), in ticks: the release
+## and the recovery after it, and the rear before the next. A walk frame
+## lasts `STAND_IN_STEP_TICKS` - A046's 0.125 s.
+const SPIT_RELEASE_TICKS := 3
+const SPIT_RECOVER_TICKS := 5
+const SPIT_REAR_TICKS := 6
+const STAND_IN_STEP_TICKS := 4
 
 ## **A stunned enemy stands cold blue** (task 0230), and a zap plays where the
 ## shock landed: at the wires' height over the ground, a few at a time.

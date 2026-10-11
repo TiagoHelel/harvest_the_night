@@ -25782,3 +25782,186 @@ tools/{check_giant_art,show_art}.py, assets/locale/strings.csv,
 implementation/prompts/0246-bosses-general.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0246/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0247 - The spitter - done 2026-10-11
+
+What changed: summer's first new enemy, and the first that hurts what you
+built without touching it. With a tower within four tiles a spitter stands
+still and spits at it every two seconds; with none it walks and bites like a
+walker. A gun tower out-ranges it by a tile and kills it; a flamethrower
+cannot reach it and is worn down. A tower line in the open now needs cover.
+
+### The rules (`src/core/`)
+
+**`ENEMIES.spitter`**, with levers:
+- hp 30, 24 ticks a tile, 8 to the house, $6 and a bone;
+- `spit_range` 4, `spit_damage` 10, `spit_every_ticks` 2 s and
+  `spit_tiles_per_second` 6;
+- not lured.
+
+It sits inside 0051's bounds (less hp and armour than the tank, faster) and
+0058's (every boss above it).
+
+**`check_enemies`** (`_check_spit`) asks all four spit levers of an enemy
+that declares any. It refuses a range of nothing, or one as long as the gun
+tower's base `range`.
+
+**`Enemies`:**
+- **`_stood_and_spat`**, in `_walk` after the house check:
+  - the spit's wait runs down whatever it does, and a stun holds it, as it
+    holds a bite's;
+  - with a tower in reach it stands, its slow running down as a walker's
+    does, and spits once the wait is out;
+  - with none it walks.
+- **`spit_target`**: the nearest thing that shoots (`Towers.cells()`) by
+  Chebyshev, the lower cell index on a tie.
+- **`_spit`**: a glob leaves the spitter's feet for the tower's cell. Its
+  flight is the cell's middle away by Chebyshev at `spit_tiles_per_second`,
+  rounded up.
+- **`enemy_shots`**: a top-level Array (`Enemies.initial`), kept apart from
+  the towers' `projectiles`.
+  - **`_advance_spit`** moves them first in `Enemies.tick`, before the field
+    is asked, so a tower one brought down is already off the farm the
+    walking reads. `PerfNames` is unchanged.
+  - A glob lands through `Farm.damage` on whatever stands there then:
+    nothing on an empty cell, rubble and a `structure_lost` for a tower it
+    brings down.
+  - `withdraw` clears them.
+- **`spitting_at`** for the view and the checks.
+
+### The view (`src/ui/`)
+
+- **A046 through 0120's road**, until 0260:
+  - the spitter's master, walk, attack and death are the walker's frames,
+    tinted yellow-green (`SPITTER_TINT`);
+  - the glob and the splat are drawn in code by the new `SpitterArt`;
+  - the forecast head is the walker's head box, tinted the same.
+- **`PlaceholderArt.tint_of(path)`**: a stand-in's tint by the runtime path
+  it stands for.
+- **`WorldView`:**
+  - `_texture_for` loads an enemy's stand-in;
+  - the actors and the retreats wear its tint;
+  - **`posed_off_the_rules`** plays an untracked kind drawn in the families'
+    pose names off the rules: the release for 3 ticks after a spit, the
+    recovery for 5, the rear for the 6 before the next, standing between,
+    and the walk on the clock;
+  - an untracked enemy faces the tower it spits at, else the way it last
+    moved;
+  - **the globs** go from 22 px over the feet to 14 px up the tower on a
+    6 px arc (`spit_position`), and the splat plays 14 px up the tower's
+    cell. Both are on the night cues' layer, as the bees and the zaps are.
+- **The rest:**
+  - `Juice` leaves a stand-in's last death frame, tinted;
+  - `ForecastPanel` tints a stand-in head;
+  - `Names` has `ENEMY_SPITTER`, `Describe` `DESC_SPITS` and `Sfx` the
+    walker's groan for it.
+- **The words:** `ENEMY_SPITTER` and `.other`, `DESC_SPITS`. 0246's
+  `BOSS_INTRO_GIANT` moves after `ENEMY_GIANT.other`, so the plural pair is
+  together again.
+- **A046's table is final**, with how the game plays it.
+
+### Decided
+
+- **Four tiles, a tile short of the gun tower's five:**
+  - the gun tower answers it from further than it can spit, and so do the
+    crossbow and the catapult (7) and the mortar (12, its four-tile floor
+    included);
+  - the flamethrower's three and the hive's two cannot reach it, so the
+    summer's close-in towers need a gun behind them.
+- **Chebyshev for the target and for the flight**, a tower's own measure of
+  reach. A diagonal spit flies as fast as a straight one.
+- **Aimed at the cell, not the tower**, as a mortar's shell is: it lands on
+  whatever stands there then.
+- **The wait is a reload.** It runs while it walks, so a spitter that walks
+  up to a second tower spits as soon as the wait is out.
+- **Not lured:** it stops for towers, not for straw. 0224's list of the lured
+  stands as written.
+- **Not tracked by `EnemyMotion`:** that is the authored families' motion
+  system, and whether the spitter joins it is 0260's call with the real art.
+  Until then its poses are read straight off the rules.
+- **The spit above the night's relight.** Relit, the green glob was a grey
+  pebble and the splat a smear (the first takes).
+
+### Found
+
+- **A spitter walks north past a column of towers it is never within four
+  tiles of.** The first take put the line beside the spitters' road home
+  instead of across it, and only one stopped. The scene puts the line across
+  their road. The rule is right: it stops for what is in reach.
+- **`perf`'s swarm tick sits at its budget on this machine.** Six timings of
+  the 300-walker swarm came to 8045-8406 us against 8333, two of them over:
+  - with this task's check: 8215, 8290 and 8406;
+  - with it switched off: 8354, 8045 and 8284.
+
+  The check costs a walker one table lookup a tick (85 ns measured, some
+  25 us a tick for the swarm), inside the noise. The first verify failed on
+  it at 8336 us. The budget is the design's, and moving it is the owner's
+  call.
+
+### Hashes
+
+- **SIM 4210782773 -> 1167439413:** the state gains `enemy_shots`, and
+  nothing else moved. Hashed without that key, the scenario comes to
+  4210782773, the old number. It has no spitter in it.
+- **DATA 3781358399 -> 689488709:** the spitter's row.
+
+Verify: **PASS**, 60 of 60 in 985 s. The first run, with `--accept`, recorded both hashes and failed only `perf`'s swarm, at 8336 us (Found).
+- **Suites:** `headless_check` 17942 asserts, `headless_v1` 2617, `input_check` 1261 cases, `input_v1` 732 (111 s).
+- **perf:** a night tick 1672 us, the swarm's 8256, a path rebuild 11381, 16279 with the decoys and 11806 with the garlic.
+
+**Tests:**
+- **`_task_0247_spitter` (headless_v1):**
+  - the row's levers; `check_enemies` refuses a range of nothing, one as
+    long as the gun tower's, and a spit of nothing;
+  - **measured:** with a gun tower in reach - the spitter kept alive - it
+    stands and lands 10 every 60 ticks until the tower is rubble with one
+    `structure_lost`;
+  - two runs of one seed land the same spits on the same ticks;
+  - with no tower it walks from the east spawn to the house and bites it;
+  - a glob in the air at dawn is gone when the day begins;
+  - a glob on a cell left empty does nothing;
+  - **the duel, both numbers printed:** `a spitter at 4 tiles: a gun tower
+    (reach 5) kills it in 134 ticks with 40 of 60 hit points left; a
+    flamethrower (reach 3) is worn down in 383 ticks, the spitter untouched
+    at 30`;
+  - its name, `DESC_SPITS`, the borrowed groan;
+  - the poses round a spit, and the glob's lift from mouth to tower;
+  - the glob 4-6 px a frame, and the splat growing then shrinking, a pixel
+    clear all round.
+- **`_task_0120_placeholders`:** every enemy without raster art stands in
+  through the lookup - master, walk, attack, death and head - at the canvas
+  and pivot of what it stands for.
+- **Old groups touched:**
+  - `_task_0074_zombie_art` and `_task_0088_juice` check the kinds with
+    raster art;
+  - `_task_0059_wave_data` exempts `NO_NIGHT_YET` (the spitter), a list that
+    fails if it goes stale;
+  - `_case_0074_zombie_art` counts a stand-in through the lookup as drawn,
+    and checks the spitter is drawn through it;
+  - headless_check counts 105 scenarios.
+
+**Looked at** (`python tools/shot.py 0247 spitter --fhd`):
+- **`spitter`, Summer 2's night:** a row of three towers across open ground
+  south-east of the house - flamethrower, gun tower, flamethrower - and three
+  spitters four tiles south of it, standing and spitting:
+  - the west one is on its release, a green glob just leaving its mouth;
+  - a splat is on the west flamethrower (50 of 70) and one on the gun tower
+    (40 of 60);
+  - the gun tower fires back ("6+", "12+").
+- **The cursor's words** are moved off the line's west end, clear of the
+  spit.
+- **What the takes found:**
+  - the line beside the spitters' road home: only one stopped (Found);
+  - relit, the glob was a grey pebble and the splat a blue smear. Both are
+    on the night cues' layer now, the glob without an ink rim;
+  - the stand-in at `Color(1.15, 1.2, 0.6)` read as a walker at night; at
+    `(1.45, 1.65, 0.4)` the three read yellow-green. Their shape is still
+    the walker's: the silhouette is A046's to give.
+
+Files: src/core/{enemies,game_data}.gd,
+src/ui/{placeholder_art,spitter_art,world_view,juice,forecast_panel,names,describe,sfx}.gd,
+src/tools/{headless_check,headless_v1,input_check,shot}.gd,
+assets/locale/strings.csv, tools/{determinism_sim_hash,determinism_data_hash}.txt,
+implementation/backlog/packs/A046-spitter.md,
+implementation/prompts/0247-spitter.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0247/, docs/devlog/{index,index.pt_BR}.md

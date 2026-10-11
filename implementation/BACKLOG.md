@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **216 / 296 done**
+`##################......`  **217 / 296 done**
 
-0 doing / 80 todo / 0 blocked across 18 phases.
+0 doing / 79 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-80 task(s) left, the ready ones first, then what they
+79 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -562,27 +562,6 @@ The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-t
   - done when: FHD (1920x1080) captures by day and by night of the dog following the farmer and the dog called at night in the real game, opened and looked at, in `implementation/shots/0245/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0247 - The spitter
-
-Ready to pick up.  Likely files: `src/core/enemies.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/describe.gd, src/ui/names.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
-
-The first enemy that hurts what you built without touching it: it stops at range and spits at a tower. A tower line in the open becomes something to cover, not only something to build.
-
-- `ENEMIES.spitter` with `# LEVER`s: hp, `ticks_per_tile`, damage to the house, reward, `spit_range` (tiles, 3-5), `spit_damage` (to a structure), `spit_every_ticks`, `spit_tiles_per_second`; `check_enemies` refuses a spit range of zero or one that reaches as far as the gun tower's base `range` (5), so a tower can always answer it. Keep it inside `_task_0051_tank`'s non-boss bounds (less hp and armour than the tank, faster than it) and `_task_0058_giant`'s
-- In `Enemies._walk`: with a tower (a DEFENCES entry with `reload_ticks`) within `spit_range` - Chebyshev, nearest first, ties by the lower cell index - it stands and spits; with none it walks the flow field and bites like a walker
-- Enemy projectiles are new and kept apart from the towers' `projectiles`, which `Combat.incoming` and `worth_shooting` read: a top-level `enemy_shots` Array (only Dictionaries need a TABLES/RUN_DATA line), integer positions, aimed at a cell when fired, landing through `Farm.damage` after its flight
-- Advance them inside `Enemies.tick` so `PerfNames.NIGHT` stays true; if a new `X.tick` goes into `Sim._tick_night` instead, add it to `src/tools/perf_names.gd` and `perf_check.gd` in this task
-- `Enemies.withdraw` clears `enemy_shots` at dawn; a spit landing on an empty cell does nothing; a tower it destroys leaves rubble and a `structure_lost` event like a bite
-- Names.KEYS `spitter`, rows `ENEMY_SPITTER` and `ENEMY_SPITTER.other` (spitter/spitters, cuspidor/cuspidores) and a `Describe.enemy` line `DESC_SPITS` ('spits at towers from %d tiles' / 'cospe nas torres a %d ladrilhos'); `Sfx.ENEMY_SOUNDS.spitter` borrows the nearest generated voice (`sfx/groan_walker`) so `_task_0085_night_sounds` passes, until 0284 gives it its own
-- On screen through 0120's placeholder road: the spitter at 64x48 pivot (32,44), the spit in flight (8x8) and a code-drawn splat, plus its forecast head - placeholders until A046 is integrated by 0260
-- The first kind past the MVP's five breaks the art groups that count `ENEMIES`: rewrite in place `_task_0074_zombie_art` (`kinds.size() == 5`, a file per pose, the silhouette and biggest-Giant tests) and `_task_0088_juice` (a death body per kind) to check the kinds with raster art, leaving stand-ins to 0120's `_task_0120_placeholders`; `_case_0074_zombie_art` in `input_check.gd` counts a stand-in through 0120's lookup as drawn. If `_task_0059_wave_data` still wants every `ENEMIES` kind in the authored nights, exempt the kinds no night sends yet in one named list (0270-0274 put them in the year). Later enemy tasks only add to what this leaves
-- Hashes: DATA moves (a new ENEMIES entry); SIM moves once, because the state gains `enemy_shots` - nothing else in the determinism scenario may change, and the journal says so
-
-  - done when: `_task_0247_spitter` in `src/tools/headless_v1.gd`: with a gun tower inside `spit_range` it stops and lands `spit_damage` every `spit_every_ticks` (measured); with none it walks to the house; two runs of one seed land the same spits on the same ticks; nothing is left in `enemy_shots` after dawn
-  - done when: The same group: a tower whose reach covers it kills it before losing the tower, and a tower that cannot reach it is worn down - print both numbers
-  - done when: `python tools/shot.py 0247 spitter` (a new scenario: a spitter working on a tower line) opened and looked at; the rewritten `_task_0074_zombie_art`, `_task_0088_juice` and `_case_0074_zombie_art` pass with the spitter on its stand-in
-  - done when: the Deliverables table of `implementation/backlog/packs/A046-spitter.md` states the final geometry this task settled
-
 ### 0248 - The rat swarm
 
 Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/waves.gd, src/core/enemies.gd, src/tools/perf_check.gd, tools/perf_baseline.txt, src/ui/names.gd, src/ui/describe.gd, src/ui/sfx.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd`.
@@ -721,6 +700,24 @@ Nights that are not all alike: some are foggy, some rain. Both are known at dusk
   - done when: `_task_0256_fog_rain` in `src/tools/headless_v1.gd`: the event for a (seed, date) is the same however often it is asked and whatever the run RNG did; over seeds 0-49 and dates 1-56 (pure calls, no simulation) each season's share of fog and rain is within 5 points of its weight (printed); date 1 and a calm date have none; `Forecast.of` names the same event
   - done when: The same group: in fog a gun tower reaches one tile less unless its cell is lit; in rain a burn deals `rain_fire_percent` and a walker takes the slower count per tile
   - done when: `python tools/shot.py 0256 forecast_fog --fhd` (a new scenario in `src/tools/shot.gd` that finds a foggy (seed, date) through `Weather.event`, never an override) shows the event in the forecast, opened and looked at
+
+### 0260 - Art: the spitter
+
+Waits for Codex art A046.  Likely files: `assets/art_source/enemies/spitter/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd`.
+
+The spitter as Codex drew it, in place of 0247's stand-in: its walk, the spit, the splat and its forecast head.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A046` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A046-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/enemies/spitter/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`gen_sprites.migrated_enemies()`, `check_enemy_art.FAMILIES` and its pinned generation task `'0015'`, the effect checker's pinned 0017 set, `EnemyMotion.FAMILIES`/`TRACKED`) with a block for this pack rather than loosening the old counts.
+- Runtime names as the ordinary enemies at 64x48 pivot (32,44): `enemies/spitter`, `spitter_walk_0..3` (0.125 s, loop), `spitter_attack_0..2` (the spit), `spitter_death_0..3`, with the `_walk_b`/`_attack`/`_death` aliases; the spit (8x8, 2 frames) and the splat (3) in the effects family; the 16x16 forecast head where 0158 put the others
+- Replace 0247's placeholders in 0120's registry (the leaf flips ownership to raster) and drive the attack pose from the real spit, not a bite.
+- Set the pack to integrated: `python implementation/backlog/assets.py set A046 integrated`.
+
+  - done when: `python tools/check_enemy_art.py`, `python tools/check_effect_art.py` and `python tools/show_art.py --enemies --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures in the real game by day (its head in the dusk forecast) and by night (spitting at a tower), opened and looked at, in `implementation/shots/0260/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0281 - The new day's sounds
 
@@ -871,24 +868,6 @@ A rare red night from autumn on: the horde comes back stronger and pays in essen
   - done when: `_task_0257_blood_moon` in `src/tools/headless_v1.gd`: over seeds 0-49 and dates 1-56 (pure calls) no Blood Moon falls in spring, summer or on a boss night, and the autumn and winter counts are printed; on one, a walker spawns with the scaled hp and `full_hp` reads it; winning pays the extra essence, once
   - done when: `python tools/shot.py 0257 forecast_blood_moon --fhd` (a new scenario that finds a Blood Moon (seed, date) through `Weather.event`) shows it in the forecast, opened and looked at
   - done when: the Deliverables table of `implementation/backlog/packs/A055-event-icons.md` states the final geometry this task settled (fog, rain and Blood Moon at 16x16 and 10x10)
-
-### 0260 - Art: the spitter
-
-Waits on 0247.  Likely files: `assets/art_source/enemies/spitter/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd`.
-
-The spitter as Codex drew it, in place of 0247's stand-in: its walk, the spit, the splat and its forecast head.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A046` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A046-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/enemies/spitter/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`gen_sprites.migrated_enemies()`, `check_enemy_art.FAMILIES` and its pinned generation task `'0015'`, the effect checker's pinned 0017 set, `EnemyMotion.FAMILIES`/`TRACKED`) with a block for this pack rather than loosening the old counts.
-- Runtime names as the ordinary enemies at 64x48 pivot (32,44): `enemies/spitter`, `spitter_walk_0..3` (0.125 s, loop), `spitter_attack_0..2` (the spit), `spitter_death_0..3`, with the `_walk_b`/`_attack`/`_death` aliases; the spit (8x8, 2 frames) and the splat (3) in the effects family; the 16x16 forecast head where 0158 put the others
-- Replace 0247's placeholders in 0120's registry (the leaf flips ownership to raster) and drive the attack pose from the real spit, not a bite.
-- Set the pack to integrated: `python implementation/backlog/assets.py set A046 integrated`.
-
-  - done when: `python tools/check_enemy_art.py`, `python tools/check_effect_art.py` and `python tools/show_art.py --enemies --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures in the real game by day (its head in the dusk forecast) and by night (spitting at a tower), opened and looked at, in `implementation/shots/0260/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0261 - Art: the rat swarm
 
@@ -1127,7 +1106,7 @@ The bed under everything follows the weather and the season: fog and rain on the
 
 ### 0259 - Every weapon has its night
 
-Waits on 0247, 0248, 0249, 0250, 0251, 0252, 0253, 0254, 0255, 0256, 0257.  Likely files: `src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md`.
+Waits on 0248, 0249, 0250, 0251, 0252, 0253, 0254, 0255, 0256, 0257.  Likely files: `src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md`.
 
 The plan's test for phases 4 and 5 turned into numbers: every weapon is the best buy somewhere, and every enemy needs a different answer. The report is what the night authors of 0270-0274 build the year from.
 
@@ -1182,7 +1161,7 @@ Spring is the season that teaches: the walker, the runner, the tank and the brea
 
 ### 0284 - The new enemies and bosses, heard
 
-Waits on 0247, 0248, 0250, 0252, 0253, 0254, 0255, 0257.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0248, 0250, 0252, 0253, 0254, 0255, 0257.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Six new enemies and three new bosses each get a voice of their own, so a night heard with your eyes shut still says what is coming. View only: neither hash moves, and no state key is added to be heard. (The night events' stingers moved to 0286, beside the event beds, so this fits one invocation.)
 
@@ -1220,7 +1199,7 @@ The plan's reason to start Year 2: four collections - fish, crops, the bosses' t
 
 ### 0272 - Summer's fourteen nights
 
-Waits on 0270, 0247, 0248, 0253, 0259, 0271.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
+Waits on 0270, 0248, 0253, 0259, 0271.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
 
 Summer opens the second side and brings the first enemies that change what a spring defence is worth: the spitter shoots towers from range, the rats come in numbers that mines and fire love, and on day 28 the Harvester charges straight through the walls.
 
@@ -1813,10 +1792,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - waits for art A045
 - [ ] **0245** [Art: the dog](prompts/0245-art-dog.md) - waits for art A028
 
-## 14 - Enemies and bosses  (1/24)
+## 14 - Enemies and bosses  (2/24)
 
 - [x] **0246** [Bosses in general](prompts/0246-bosses-general.md)
-- [ ] **0247** [The spitter](prompts/0247-spitter.md)
+- [x] **0247** [The spitter](prompts/0247-spitter.md)
 - [ ] **0248** [The rat swarm](prompts/0248-rat-swarm.md)
 - [ ] **0249** [The crow](prompts/0249-crow.md)
 - [ ] **0250** [The digger](prompts/0250-digger.md)
@@ -1828,8 +1807,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0256** [Fog and rain](prompts/0256-fog-and-rain.md)
 - [ ] **0257** [The Blood Moon](prompts/0257-blood-moon.md) - needs 0256
 - [ ] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md) - needs 0256, 0257
-- [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md) - needs 0247, 0248, 0249, 0250, 0251, 0252, 0253, 0254, 0255, 0256, 0257
-- [ ] **0260** [Art: the spitter](prompts/0260-art-spitter.md) - needs 0247 - waits for art A046
+- [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md) - needs 0248, 0249, 0250, 0251, 0252, 0253, 0254, 0255, 0256, 0257
+- [ ] **0260** [Art: the spitter](prompts/0260-art-spitter.md) - waits for art A046
 - [ ] **0261** [Art: the rat swarm](prompts/0261-art-rats.md) - needs 0248 - waits for art A047
 - [ ] **0262** [Art: the crow](prompts/0262-art-crow.md) - needs 0249 - waits for art A048
 - [ ] **0263** [Art: the digger](prompts/0263-art-digger.md) - needs 0250 - waits for art A049
@@ -1844,7 +1823,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 - [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md) - needs 0256, 0257
 - [ ] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md) - needs 0270
-- [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0247, 0248, 0253, 0259, 0271
+- [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0248, 0253, 0259, 0271
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0249, 0250, 0254, 0259, 0272
 - [ ] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md) - needs 0270, 0251, 0252, 0255, 0259, 0273
 - [ ] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md) - needs 0274, 0248
@@ -1859,7 +1838,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md)
 - [ ] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md)
 - [ ] **0283** [The guardian's sounds](prompts/0283-sfx-night-v2.md)
-- [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0247, 0248, 0250, 0252, 0253, 0254, 0255, 0257
+- [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md) - needs 0248, 0250, 0252, 0253, 0254, 0255, 0257
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md) - needs 0282
 - [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0256, 0257, 0285
 - [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0253, 0254, 0255
