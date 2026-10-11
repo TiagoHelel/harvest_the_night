@@ -139,6 +139,7 @@ const KEYS: Dictionary = {
 	&"fence": &"DEF_FENCE",
 	&"wall": &"DEF_WALL",
 	&"barricade": &"DEF_BARRICADE",
+	&"decoy": &"DEF_DECOY",
 
 	# ---- what a day builds
 	&"workshop": &"BLD_WORKSHOP",

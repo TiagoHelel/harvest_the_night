@@ -29,6 +29,12 @@ extends RefCounted
 ## of `Pathing`, swept from a different place, and none of them knows how the
 ## walking works.
 ##
+## A **decoy** (task 0224) turns whoever its row says can be lured - the
+## walker, the runner and the tank, never a boss - when it stands within the
+## decoy's `lure_tiles` by the lure field: that one walks the lure instead of
+## its own field and bites the straw. The decoy's fall rebuilds the lure on
+## the spot, and whoever walks after it that tick is back on its own road.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -166,13 +172,44 @@ static func tick(state: Dictionary) -> void:
 	if Entities.count(state) == 0:
 		return
 
+	# **The lure, asked once a tick** (task 0224), and nothing more than
+	# whether it is empty while no decoy stands.
+	var pull := _pull(state)
 	# Sorted by id, so two zombies arriving on the same tick always land in the
 	# same order - which decides which of them the last hit point goes to.
 	for id in Entities.ids(state):
-		_walk(state, id)
+		_walk(state, id, pull)
 
 
-static func _walk(state: Dictionary, id: int) -> void:
+## **What a decoy pulls with**, as the walking reads it (task 0224): the lure
+## field, how far it reaches and the farm it was built for. Empty when no
+## decoy stands - every night until one goes down.
+static func _pull(state: Dictionary) -> Dictionary:
+	var field := Pathing.field(state, &"lure")
+	if field.is_empty():
+		return {}
+	return {"field": field, "reach": Pathing.lure_reach(),
+		"version": int(state["grid_version"])}
+
+
+## Whether a decoy has this one: the lure field says the nearest is within its
+## reach, and it is not standing on the straw. **A farm changed since the tick
+## began is asked again first** - a decoy bitten down a moment ago is a field
+## rebuilt without it, so whoever walks after the bite that tick is back on
+## its own road.
+static func _lured(state: Dictionary, pull: Dictionary, here: Vector2i) -> bool:
+	if int(pull["version"]) != int(state["grid_version"]):
+		pull["field"] = Pathing.field(state, &"lure")
+		pull["version"] = int(state["grid_version"])
+	var field: PackedInt32Array = pull["field"]
+	var idx := Grid.index(here)
+	if idx < 0 or field.size() != Grid.CELLS:
+		return false
+	var away := int(field[idx])
+	return away > 0 and away <= int(pull["reach"])
+
+
+static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	var one := Entities.get_one(state, id)
 	if one.is_empty():
 		return
@@ -215,13 +252,20 @@ static func _walk(state: Dictionary, id: int) -> void:
 	# nothing - and with fifty of them that was most of the tick.
 	var at := Vector2i(int(one["pos"][0]), int(one["pos"][1]))
 	var here := Vector2i(at.x / Player.SUBTILE, at.y / Player.SUBTILE)
+	var next := here
+	# **A decoy turns the lurable** (task 0224). Within its reach by the lure
+	# field, one walks that field instead of its own, and the straw is the
+	# next cell in the end: `breaks_through()` says so and it bites. A runner
+	# too - it goes round a wall, and not round this.
+	if not pull.is_empty() and bool(data.get("lurable", false)) \
+			and _lured(state, pull, here):
+		next = Pathing.step_lure(state, here)
 	# **A runner goes round what you built.** It asks the field with the
 	# barriers taken out of it, and only falls back to the one everybody else
 	# uses when that field has no answer - which means there is no way round
 	# at all, and standing still in front of a wall would turn sealing the
 	# farm into a win condition.
-	var next := here
-	if bool(data.get("ignores_structures", false)):
+	elif bool(data.get("ignores_structures", false)):
 		next = Pathing.step_around(state, here)
 	# **A breaker has come for the towers.** It walks the field swept from
 	# everything the player built, and falls through to the house only when

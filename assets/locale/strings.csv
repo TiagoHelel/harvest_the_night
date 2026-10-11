@@ -140,6 +140,7 @@ CURSOR_REPAIR,0,mend all: %s - %d of %d HP paid for,consertar tudo: %s - %d de %
 CURSOR_STRUCTURE,0,%s - %d/%d HP - level %d,%s - %d/%d de vida - nível %d
 DEF_AUTO_CROSSBOW,0,auto crossbow,besta automática
 DEF_BARRICADE,0,barricade,barricada
+DEF_DECOY,0,decoy,espantalho-isca
 DEF_FENCE,0,fence,cerca
 DEF_FLAME_TOWER,0,flame tower,torre de fogo
 DEF_GUN_TOWER,0,gun tower,torre de tiro
@@ -161,6 +162,7 @@ DESC_FROM,0,from %s,de %s
 DESC_GROWS_IN,0,grows in %d days,cresce em %d dias
 DESC_HITS_FOR,0,hits for %d,bate %d
 DESC_HP,0,%d hit points,%d de vida
+DESC_LURES,0,pulls zombies from up to %d tiles,atrai zumbis a até %d ladrilhos
 DESC_MAKES,0,makes %s,faz %s
 DESC_NOT_FOR_SALE,0,not for sale,não se vende
 DESC_ONE_SHOT,0,goes off once,explode uma vez só

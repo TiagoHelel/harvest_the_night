@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 48
+const V1_CASES := 49
 
 
 func _process(delta: float) -> bool:
@@ -98,6 +98,7 @@ func _run() -> void:
 	await _case_0220_tree_pages()
 	await _case_0221_collect()
 	await _case_0222_fertilise()
+	await _case_0224_decoy()
 	_finish()
 
 
@@ -771,7 +772,11 @@ func _case_0133_hotbar() -> void:
 		String(Building.selected(state)))
 
 	# **A placement at the cursor uses the selection**: the wall's slot, then a
-	# click on a free cell.
+	# click on a free cell. RB first, round from the last slot to the first
+	# page: the decoy (task 0224) is on a page of its own.
+	await _pad_button(JOY_BUTTON_RIGHT_SHOULDER, true)
+	await _pad_button(JOY_BUTTON_RIGHT_SHOULDER, false)
+	await until(func() -> bool: return locate_control("Hotbar_wall") != null, "the first page")
 	await click_control("Hotbar_wall")
 	await frames(2)
 	expect(Building.selected(state) == &"wall", "the wall's slot picks the wall")
@@ -3453,6 +3458,76 @@ func _case_0222_fertilise() -> void:
 	await _pad_tap(JOY_BUTTON_LEFT_SHOULDER)
 	await frames(2)
 	expect(Farming.fertilising(state), "and LB steps from the first seed round to it")
+	await close_scene()
+	_completed += 1
+
+
+## 0224 - a decoy put down with the cursor at night. Q, the previous slot,
+## picks it from nothing - the last defence, alone on the hotbar's second page,
+## wearing its drawing - a click on open ground puts it there for its straw,
+## and a bite makes it lean.
+func _case_0224_decoy() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	# **Straight into the night**: GO TO BED's road is its own cases', and
+	# this one is about the cursor - no bed's beat to sit through on the way.
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Resources.gain(state, {GameData.STRAW: 40, GameData.WOOD: 40})
+	world.skip_transition()
+	var hotbar := locate_control("Hotbar") as Hotbar
+	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT and hotbar != null and hotbar.visible,
+		"the night's hotbar")
+
+	await tap_key(KEY_Q)
+	await until(func() -> bool: return locate_control("Hotbar_decoy") != null, "the decoy's page")
+	var slot := locate_control("Hotbar_decoy")
+	var icon: TextureRect = slot.get_node_or_null("Icon") as TextureRect if slot != null else null
+	expect(Building.selected(state) == &"decoy" and icon != null and icon.texture == DecoyArt.texture(&"decoy")
+		and locate_control("Hotbar_wall") == null,
+		"Q from nothing picks the decoy, alone on the hotbar's second page and wearing its drawing",
+		String(Building.selected(state)))
+
+	var spot := Vector2i(-1, -1)
+	var middle := world.screen_to_cell(Vector2(240.0, 120.0))
+	for radius in 6:
+		for candidate in Grid.within(middle, radius):
+			if spot.x < 0 and Building.why_not(state, &"decoy", candidate).is_empty():
+				spot = candidate
+	var straw := Resources.amount(state, GameData.STRAW)
+	await click_cell(spot)
+	await until(func() -> bool: return StringName(Farm.occupant(state, spot).get("id", &"")) == &"decoy",
+		"the decoy to go down")
+	expect(world.cursor().cell() == spot and StringName(Farm.occupant(state, spot).get("id", &"")) == &"decoy"
+		and Resources.amount(state, GameData.STRAW) == straw - int(Building.cost_of(&"decoy")[GameData.STRAW]),
+		"a click at night puts it down at the cursor, for its straw", str(spot))
+
+	# **Put away, the first page is back**, and 1 is the first defence again.
+	await tap_key(KEY_ESCAPE)
+	await until(func() -> bool: return locate_control("Hotbar_wall") != null, "the first page")
+	await tap_key(KEY_1)
+	await frames(2)
+	var first: StringName = Building.catalogue(state)[0]
+	expect(locate_control("Hotbar_decoy") == null and Building.selected(state) == first,
+		"Escape puts it away and the hotbar is on its first page, where 1 is the first defence",
+		String(Building.selected(state)))
+
+	# **Struck, it leans west first**, from the frame the bite is seen.
+	await frames(3)
+	Farm.damage(state, spot, 10)
+	await until(func() -> bool: return world.decoy_sway_age(spot) < DecoyArt.SWAY_SECONDS, "the sway to start")
+	var drawn: Sprite2D = world._decoys.get(Grid.index(spot)) as Sprite2D
+	expect(drawn != null and drawn.texture == DecoyArt.texture(&"decoy") and drawn.offset == -Vector2(8, 28)
+		and drawn.skew < 0.0,
+		"the decoy is drawn on its pivot and leans west when it is bitten",
+		str(drawn.skew) if drawn != null else "none")
 	await close_scene()
 	_completed += 1
 

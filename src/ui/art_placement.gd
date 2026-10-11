@@ -2,17 +2,24 @@ class_name ArtPlacement
 extends RefCounted
 
 ## All standing drawings sort at their ground contact, never their image corner.
+##
+## **A drawing made in code** until its pack lands (task 0224's decoy) has no
+## file, and carries the runtime path it stands for as its name: it is placed
+## by that path's pivot, like the art it stands in for.
 static func place(sprite: Sprite2D, cell: Vector2i, footprint := Vector2i.ONE) -> void:
 	var tile := float(GameData.TILE_SIZE)
 	var texture := sprite.texture
-	var metadata: Dictionary = PlaceholderArt.frame(texture.resource_path)
+	var path := texture.resource_path
+	if path.is_empty() and texture.resource_name.begins_with("res://"):
+		path = texture.resource_name
+	var metadata: Dictionary = PlaceholderArt.frame(path)
 	var pivot: Vector2 = Vector2(metadata.get("pivot",
 		Vector2i(texture.get_width() / 2, texture.get_height())))
 	sprite.centered = false
 	sprite.position = Vector2(cell) * tile + Vector2(float(footprint.x) * tile * 0.5,
 		float(footprint.y) * tile)
 	sprite.offset = -pivot
-	sprite.scale = Vector2.ONE * visual_scale(texture.resource_path)
+	sprite.scale = Vector2.ONE * visual_scale(path)
 
 
 ## Doors and furniture-sized production buildings now match the 30px farmer.

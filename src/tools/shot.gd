@@ -139,6 +139,7 @@ const SCENARIOS: Array = [
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
+	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
 	["bone_meal", "Spring 2 at noon: a starter row turned, plain and fertilised side by side, dry then watered, and carrot sprouts on fertilised earth dry and wet; bone meal chosen in the strip", ""],
 	["night_loot", "the morning after Spring 7's Full Moon, fought from a defended farm: the report counting the bones and moon stones lying about; then him out by the moon stone nearest the house, the night's bones about it", "ResultScreen"],
 	["north_band", "standing on the north spawn ground", ""],
@@ -766,6 +767,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"night_loot": _set_night_loot(state)
 		"bone_meal": _set_bone_meal(state)
 		"tarps": _set_tarps(state)
+		"decoy": _set_decoy(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1081,6 +1083,17 @@ func _only_showing(main: Node, wanted: String) -> void:
 func _just_before_the_shutter(main: Node, state: Dictionary,
 		name: String) -> void:
 	match name:
+		"decoy":
+			# What the shutter finds: each decoy's hit points, and who is
+			# biting the first (task 0224).
+			var standing: Array = []
+			for cell in Farm.rubble_cells(state) + Pathing.lure_cells(state):
+				standing.append("%s %d" % [cell, int(Farm.occupant(state, cell).get("hp", 0))])
+			var biting := 0
+			for id in Entities.ids(state):
+				if int(Entities.get_one(state, id).get("chewing", -1)) >= 0:
+					biting += 1
+			print("  decoy: %s; %d of %d have bitten" % [", ".join(standing), biting, Entities.count(state)])
 		"can_area":
 			SuiteKit.stand_the_farmer(state, _standing_at)
 			state["player"]["facing"] = Player.SOUTH
@@ -2460,6 +2473,65 @@ func _set_tech(state: Dictionary) -> void:
 		if not Tech.buy(state, id):
 			push_warning("shot: could not buy %s" % id)
 	Sim.advance(state, 2)
+
+
+## **A lured crowd** (task 0224): the defended farm's night with three decoys
+## on open ground past its fence - the three states A037 draws. Walkers, a
+## runner and a tank come for the first from the north and the east - the far
+## side, so it stands in front of them - and bite it hurt while the guns
+## work; the second, out of their reach, stands whole; the third is bitten
+## down to its heap of straw. The decoy is picked on the hotbar, which turns
+## to its page.
+##
+## **Timed to the shutter, not to a `Sim.advance`**: the crowd starts at the
+## decoy's reach, and the two seconds every picture runs (`SETTLE` frames of
+## `STIR_TICKS`) are its walk in - so the picture is of them arriving at a
+## decoy still standing, not of the heap they left.
+func _set_decoy(state: Dictionary) -> void:
+	_a_defended_farm(state, true)
+	Resources.gain(state, {GameData.STRAW: 60, GameData.WOOD: 30})
+	var middle := _clear_patch(state, Player.cell(state) + Vector2i(19, 1), 4)
+	var spots: Array = []
+	for offset in [Vector2i.ZERO, Vector2i(-4, 3), Vector2i(-2, 4)]:
+		var spot: Vector2i = middle + offset
+		if middle.x >= 0 and Building.place(state, &"decoy", spot):
+			spots.append(spot)
+	if spots.size() < 3:
+		push_warning("shot: only %d decoys went down" % spots.size())
+		_look_at(_the_defence_line(state))
+		return
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	Farm.damage(state, spots[2], int((GameData.DEFENCES[&"decoy"] as Dictionary)["hp"]))
+	# Five steps out - the decoy's reach - and the tank three: the walk in
+	# is the picture's two seconds and a little more the driver adds.
+	var crowd := {Vector2i(0, -3): &"tank", Vector2i(-3, -2): &"runner",
+		Vector2i(1, -4): &"walker", Vector2i(-1, -4): &"walker", Vector2i(2, -3): &"walker",
+		Vector2i(-2, -3): &"walker", Vector2i(3, -2): &"walker", Vector2i(4, -1): &"walker"}
+	for at in crowd:
+		Entities.spawn(state, crowd[at], (spots[0] as Vector2i) + (at as Vector2i))
+	print("  decoys at %s, %d coming for the first" % [str(spots), Entities.count(state)])
+	Building.select(state, &"decoy")
+	_look_at((spots[0] as Vector2i) + Vector2i(-1, 2))
+
+
+## The cell nearest `near` with `radius` cells of nothing standing every way
+## round it - no tree in front of what is put there - ring by ring.
+func _clear_patch(state: Dictionary, near: Vector2i, radius: int) -> Vector2i:
+	for ring in 12:
+		for cell in Grid.within(near, ring):
+			if Grid.chebyshev(near, cell) != ring:
+				continue
+			var clear := true
+			for dy in range(-radius, radius + 1):
+				for dx in range(-radius, radius + 1):
+					var at: Vector2i = cell + Vector2i(dx, dy)
+					clear = clear and Grid.in_bounds(at) and Farm.occupant(state, at).is_empty() \
+						and Farm.walkable(state, at)
+			if clear:
+				return cell
+	return Vector2i(-1, -1)
 
 
 ## **The defences asleep** (task 0223): a defended farm at noon on Spring 3,

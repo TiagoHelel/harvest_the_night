@@ -196,6 +196,9 @@ const TARP_TOWER := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "dra
 const TARP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
 const TARP_SHORT := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
 
+## A037's decoy (task 0224): 16x32 standing on (8,28), drawn at 1.0.
+const DECOY := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -258,6 +261,12 @@ const ART := {
 	&"tarp_short": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT, "bare": true},
 	&"tarp_short_hurt": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT, "bare": true},
 	&"tarp_short_unveil": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 2, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT},
+	# A037's decoy (task 0224), drawn in code by `DecoyArt` until 0236:
+	# standing, hurt and wrecked. Its sway is the view leaning the drawing
+	# until the pack's strips land.
+	&"decoy": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": DECOY, "final": DECOY, "bare": true},
+	&"decoy_hurt": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": DECOY, "final": DECOY, "bare": true},
+	&"decoy_wreck": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": DECOY, "final": DECOY, "bare": true},
 	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
 	# the fertilised earth the tilled tile paled with it, dry and wet, until
 	# 0235.

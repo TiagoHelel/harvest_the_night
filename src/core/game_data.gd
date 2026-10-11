@@ -1624,6 +1624,28 @@ const DEFENCES: Dictionary = {
 		"per_night_limit": 5,           # LEVER: how many, 2-10
 		"energy_draw": 0,
 	},
+	&"decoy": {
+		# **A straw figure that takes the blows** (task 0224; the plan's
+		# summer defence, "chamariz: atrai os zumbis e aguenta pancada").
+		# Straw from the wheat and the stall, and wood for its stake: $12 of
+		# goods, three barricades' worth, for something that stands ten times
+		# as long under the teeth.
+		#
+		# **No `path_cost`**: a wave flows round it like a tower, and a
+		# breaker hunts it as prey. **No `reload_ticks` and no `damage`**:
+		# nothing in `Towers` collects it and it makes no sound of its own.
+		"cost": {STRAW: 8, WOOD: 4},    # LEVER: straw and wood
+		"season": &"summer",            # LEVER: the season it unlocks in (0234 gates it)
+		# **Two hundred: it is there to be bitten.** Twenty walker bites, and
+		# a crowd bites it four sides at once - the seconds it buys are the
+		# seconds the towers get.
+		"hp": 200,                      # LEVER: hit points, 100-250
+		# **How far it pulls**: a lurable enemy whose walk to the nearest
+		# decoy, by the lure field, is at most this many tiles leaves its
+		# road and comes to bite the straw instead.
+		"lure_tiles": 5,                # LEVER: tiles, 3-8
+		"energy_draw": 0,
+	},
 }
 
 ## The animals on the reference sheet, and the meat that comes off them.
@@ -2080,6 +2102,10 @@ const ENEMIES: Dictionary = {
 		# that bites the house or walks off at dawn takes its own away.
 		"bones": 1,                     # LEVER: bones, 0-6
 		"armour": 0,
+		# **A decoy turns it** (task 0224): within the decoy's `lure_tiles`
+		# by the lure field it walks to the straw figure and bites that
+		# instead of the house.
+		"lurable": true,
 	},
 	&"runner": {
 		# Fast and fragile: it arrives before a mortar can reload, which is what
@@ -2105,6 +2131,9 @@ const ENEMIES: Dictionary = {
 		# walker: a maze does nothing to it, and only something that shoots
 		# will do.
 		"ignores_structures": true,
+		# A maze does nothing to it and a decoy does (task 0224): the straw
+		# figure is the one thing that stops a runner short of the door.
+		"lurable": true,
 	},
 	&"tank": {
 		# Armour is flat and applies per hit, so many small hits are worse than
@@ -2137,6 +2166,9 @@ const ENEMIES: Dictionary = {
 		"damage": 15,                   # LEVER: to the house, 8-25
 		"reward": 12,                   # LEVER: money, 6-20
 		"bones": 2,                     # LEVER: bones, 0-6
+		# **Lured too** (task 0224): the slow brute is the one worth holding
+		# still where the mortars land, and a straw figure is how.
+		"lurable": true,
 	},
 	&"breaker": {
 		# It goes for what you built rather than what you live in, which makes
@@ -2166,6 +2198,11 @@ const ENEMIES: Dictionary = {
 		"reward": 8,                    # LEVER: money, 4-14
 		"bones": 1,                     # LEVER: bones, 0-6
 		"armour": 1,
+		# **Not lured** (task 0224): it already goes for what you built by its
+		# own hunt field, and a decoy - no `path_cost`, hit points - is among
+		# what it hunts, nearest first. A pull on top would only make it
+		# skip a nearer tower for the straw.
+		"lurable": false,
 	},
 	&"giant": {
 		"hp": 900,                      # LEVER: hit points, 500-1600
@@ -3856,6 +3893,16 @@ static func check_defences(defences: Dictionary) -> Array:
 			if int(defence["min_range"]) >= int(defence["range"]):
 				errors.append(("defence '%s' has a minimum range at or past "
 					+ "its maximum") % defence_id)
+		# **A lure pulls from somewhere and can be bitten** (task 0224): one
+		# that reached no tile would pull nobody, and one with no hit points
+		# would be bitten for ever - and the hunt field would never lead a
+		# breaker to it.
+		if defence.has("lure_tiles"):
+			if int(defence["lure_tiles"]) <= 0:
+				errors.append("defence '%s' lures from no tiles at all" % defence_id)
+			if int(defence.get("hp", 0)) <= 0:
+				errors.append("defence '%s' lures and has no hit points to bite"
+					% defence_id)
 	return errors
 
 
@@ -4707,6 +4754,10 @@ static func check_enemies(enemies: Dictionary) -> Array:
 				% id)
 		if not bool(one.get("ignores_structures", false)):
 			fastest = mini(fastest, int(one.get("ticks_per_tile", 1 << 30)))
+		# **A boss is never turned by straw** (task 0224): the season's
+		# last night is not won with a decoy.
+		if bool(one.get("is_boss", false)) and bool(one.get("lurable", false)):
+			errors.append("enemy '%s' is a boss and can be lured" % id)
 
 	for id in sorted_names(enemies.keys()):
 		var one: Dictionary = enemies[id]

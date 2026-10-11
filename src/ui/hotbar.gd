@@ -9,7 +9,8 @@ extends Control
 ## **Built from `Building.catalogue`**, in its order, never from a list here:
 ## a defence added to `GameData.DEFENCES` gets a slot with no edit. More slots
 ## than fit between the log and the night HUD's bottom-right controls go on
-## pages, and the page is the one holding the selection.
+## pages, and the page is the one holding the selection - the first, with
+## nothing picked (task 0224).
 ##
 ## It decides nothing. A slot is picked with a click, `slot_1`..`slot_8` (the
 ## seed keys by day, which `DayHud` leaves alone at night) or `hotbar_prev` /
@@ -74,9 +75,10 @@ func _process(_delta: float) -> void:
 		return
 	_ids = Building.catalogue(_state)
 	var chosen := _ids.find(Building.selected(_state)) if Building.is_active(_state) else -1
-	if chosen >= 0:
-		_page = chosen / per_page()
-	_page = clampi(_page, 0, maxi((_ids.size() - 1) / per_page(), 0))
+	# **The first page with nothing picked** (task 0224). The decoy is alone
+	# on a second one, and once it is put away the slots and the keys a
+	# player knows are back where they were - not on a page of one.
+	_page = chosen / per_page() if chosen >= 0 else 0
 	var key := _signature(chosen)
 	if key != _built_for:
 		_built_for = key
@@ -193,7 +195,8 @@ func _key_of(index: int) -> String:
 
 ## The defence's `icon_<id>` - A005's eight since task 0147 - or a later
 ## pack's registered stand-in; a defence no pack has drawn yet falls back to
-## its own building sprite, so a new one still shows something.
+## its own building sprite, so a new one still shows something - the drawing
+## made in code when that is all there is (task 0224's decoy, until A037).
 func _icon_of(id: StringName) -> Texture2D:
 	var name := StringName("icon_%s" % id)
 	var file := "res://sprites/buildings/%s.png" % id
@@ -201,6 +204,8 @@ func _icon_of(id: StringName) -> Texture2D:
 		file = PlaceholderArt.texture_path(PlaceholderArt.art_path(name, 0))
 	elif ResourceLoader.exists("res://sprites/ui/%s.png" % name):
 		file = "res://sprites/ui/%s.png" % name
+	elif PlaceholderArt.is_drawn(file):
+		return DecoyArt.texture(id)
 	if not _textures.has(file):
 		_textures[file] = load(file) if ResourceLoader.exists(file) else null
 	return _textures[file]

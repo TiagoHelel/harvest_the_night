@@ -37,7 +37,12 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 68
+const GROUPS := 69
+
+## A005's eight defences, the ones it drew icons for (task 0147). A later
+## defence wears its own pack's, or its drawing until then (0224's decoy).
+const A005_DEFENCES: Array = [&"auto_crossbow", &"barricade", &"fence", &"flame_tower",
+	&"gun_tower", &"mine", &"mortar", &"wall"]
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -46,6 +51,8 @@ var failed := 0
 
 var _completed := 0
 var _finished := false
+## Where 0224's decoys found bare ground, once (`_open_square`).
+var _decoy_ground := Vector2i(-1, -1)
 var _elapsed := 0.0
 
 
@@ -140,6 +147,7 @@ func _run() -> void:
 	_task_0221_night_loot()
 	_task_0222_bone_meal()
 	_task_0223_tarps()
+	_task_0224_decoy()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -1357,7 +1365,8 @@ func _task_0132_night_build() -> void:
 	# fresh, rich farm per phase, and a clear spot sized to the thing.
 	var plenty := {GameData.WOOD: 9000, GameData.STONE: 9000, GameData.IRON: 9000,
 		GameData.OIL: 9000, GameData.GUNPOWDER: 9000, GameData.MONEY: 9000,
-		GameData.FOOD: 9000, GameData.COPPER: 9000, GameData.GOLD: 9000}
+		GameData.FOOD: 9000, GameData.COPPER: 9000, GameData.GOLD: 9000,
+		GameData.STRAW: 9000}
 	var phases := {}
 	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT]:
 		var state := State.create(1320)
@@ -1389,7 +1398,7 @@ func _task_0132_night_build() -> void:
 		"every defence only at night and every building only by day, with the reason",
 		str(wrong.slice(0, 4)))
 	expect(Building.catalogue(phases[Phases.DAY]) == GameData.sorted_names(GameData.BUILDINGS.keys())
-		and Building.catalogue(phases[Phases.NIGHT]) == GameData.sorted_names(GameData.DEFENCES.keys()),
+		and GameData.sorted_names(Building.catalogue(phases[Phases.NIGHT])) == GameData.sorted_names(GameData.DEFENCES.keys()),
 		"by day the palette holds the buildings, at night the defences",
 		"%s / %s" % [Building.catalogue(phases[Phases.DAY]), Building.catalogue(phases[Phases.NIGHT])])
 
@@ -6151,11 +6160,12 @@ func _task_0192_kitchen() -> void:
 func _task_0193_supply() -> void:
 	var errors := GameData.check_seasonal_supply(GameData.DEFENCES, GameData.RECIPES)
 	expect(errors.is_empty() and GameData.validate().is_empty(), "the real tables pass in all four seasons", str(errors))
-	var spring := true
+	var seasons := {}
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
-		spring = spring and GameData.DEFENCES[id].has("season") \
-			and GameData.defence_season(GameData.DEFENCES[id]) == &"spring"
-	expect(spring, "every defence says the season it unlocks in, and today all eight say spring")
+		var said := GameData.defence_season(GameData.DEFENCES[id]) if GameData.DEFENCES[id].has("season") else &""
+		seasons[said] = int(seasons.get(said, 0)) + 1
+	expect(seasons == {&"spring": 8, &"summer": 1},
+		"every defence says the season it unlocks in: spring's eight, and 0224's decoy summer's", str(seasons))
 	# **The routes**, season by season: what each kit, round, meal and feed
 	# is made of, followed back to the ground.
 	for season in GameData.SEASONS:
@@ -6500,9 +6510,9 @@ func _task_0218_perf_ground() -> void:
 	expect(Entities.count(table) == 1 and Entities.in_order(table) and after_dawn > newest,
 		"withdrawn, and the next one still comes after every id there was")
 
-	# **A field built when asked for is built only then.** No row of
-	# `FIELDS` is one yet - 0224's lure is the first - so this one is
-	# written here, shaped like it, and driven down the road `field()` takes.
+	# **A field built when asked for is built only then.** Written here,
+	# shaped like 0224's lure - the first row of `FIELDS` built when asked -
+	# and driven down the road `field()` takes, under keys of its own.
 	var farm := State.create(21802)
 	var lure := {"seeds": &"house", "cost": &"open", "field": "lure_0218",
 		"costs": "lure_0218_cost", "version": "lure_0218_version"}
@@ -6536,7 +6546,7 @@ func _task_0218_perf_ground() -> void:
 	var fresh := State.create(21802)
 	var lazy_keys: Array = []
 	for key in fresh:
-		if String(key).begins_with("lure"):
+		if String(key).begins_with("lure_0218"):
 			lazy_keys.append(key)
 	expect(lazy_keys.is_empty(), "and a new game has no key for it", str(lazy_keys))
 
@@ -7056,12 +7066,314 @@ func _task_0223_tarps() -> void:
 	_completed += 1
 
 
+## 0224 - the decoy. A straw figure on summer's row, with no `path_cost` and
+## nothing to shoot; a lure field in `Pathing`'s registry, swept from every
+## decoy standing and built only while one stands. A walker within
+## `lure_tiles` of it by the field walks to it and bites it while one beyond
+## walks on to the house; a runner is lured, the Giant is not; the lured take
+## their own road again on the tick it falls; of two, the nearer by the field
+## wins and a tie goes the first way in `Grid.STEPS`.
+func _task_0224_decoy() -> void:
+	# **The row, the flags, and their checks.**
+	var row: Dictionary = GameData.DEFENCES[&"decoy"]
+	var cost: Dictionary = row["cost"]
+	var reach := int(row.get("lure_tiles", 0))
+	expect(cost.size() == 2 and cost.has(GameData.STRAW) and cost.has(GameData.WOOD)
+		and int(row["hp"]) >= 100 and int(row["hp"]) <= 250 and reach >= 3 and reach <= 8
+		and not row.has("reload_ticks") and not row.has("path_cost") and not row.has("damage")
+		and GameData.defence_season(row) == &"summer",
+		"a decoy costs straw and wood, stands 100-250, pulls from 3-8 tiles, shoots and blocks nothing, and is summer's",
+		str(row))
+	var lurable: Array = []
+	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if bool((GameData.ENEMIES[id] as Dictionary).get("lurable", false)):
+			lurable.append(id)
+	expect(lurable == [&"runner", &"tank", &"walker"] and (GameData.ENEMIES[&"breaker"] as Dictionary).has("lurable"),
+		"the walker, the runner and the tank are lured; the breaker says it is not, and no boss is", str(lurable))
+	expect(Pathing.is_prey(&"decoy") and not Traps.is_trap(&"decoy"),
+		"a breaker hunts it as prey: nothing to walk through")
+	var no_reach := GameData.DEFENCES.duplicate(true)
+	(no_reach[&"decoy"] as Dictionary)["lure_tiles"] = 0
+	var no_hp := GameData.DEFENCES.duplicate(true)
+	(no_hp[&"decoy"] as Dictionary)["hp"] = 0
+	var boss := GameData.ENEMIES.duplicate(true)
+	(boss[&"giant"] as Dictionary)["lurable"] = true
+	expect(_says(GameData.check_defences(no_reach), "lures from no tiles")
+		and _says(GameData.check_defences(no_hp), "no hit points to bite")
+		and _says(GameData.check_enemies(boss), "is a boss and can be lured")
+		and GameData.validate().is_empty(),
+		"a lure reaching no tile, one with no hit points and a lurable boss fail the checks; the real tables pass")
+
+	# **The field: a row of the registry, built when asked and only while a
+	# decoy stands.** Its keys are a new game's, which moves SIM.
+	var spec: Dictionary = Pathing.FIELDS[&"lure"]
+	var fresh := State.create(22400)
+	expect(not bool(spec.get("eager", false)) and bool(spec.get("none_without_seeds", false))
+		and (fresh["flow_lure"] as PackedInt32Array).is_empty() and (fresh["lure_cost"] as PackedInt32Array).is_empty()
+		and int(fresh["lure_version"]) == -1 and Pathing.lure_reach() == reach,
+		"the lure is a row of Pathing's registry, built when asked, its keys in a new game")
+	var bare: Dictionary = _decoy_night(22401, [])
+	var quiet: Dictionary = bare["state"]
+	Entities.spawn(quiet, &"walker", (bare["spot"] as Vector2i) + Vector2i(2, 0))
+	for _i in 20:
+		Enemies.tick(quiet)
+	expect(int(quiet["lure_version"]) == int(quiet["grid_version"])
+		and (quiet["flow_lure"] as PackedInt32Array).is_empty() and (quiet["lure_cost"] as PackedInt32Array).is_empty(),
+		"a farm with no decoy pays nothing for it: asked every tick, no costs and no sweep")
+
+	# **Within reach and beyond.** A walker four tiles off, a runner three,
+	# the Giant two; and a walker whose road home never comes within reach.
+	var night: Dictionary = _decoy_night(22402)
+	var state: Dictionary = night["state"]
+	var spot: Vector2i = night["spot"]
+	var full := int(Farm.occupant(state, spot).get("hp", 0))
+	expect(Pathing.lure_cells(state) == [spot] and Pathing.distance_lure(state, spot) == 0
+		and Pathing.distance_lure(state, spot + Vector2i(reach - 1, 0)) <= reach,
+		"a decoy stands at night, and the lure is swept from it", str(spot))
+	var beyond := _beyond_the_lure(state, spot, reach)
+	var walker := Entities.spawn(state, &"walker", spot + Vector2i(reach - 1, 0))
+	var runner := Entities.spawn(state, &"runner", spot + Vector2i(0, 2 - reach))
+	var giant := Entities.spawn(state, &"giant", spot + Vector2i(1, 1))
+	var stray := Entities.spawn(state, &"walker", beyond)
+	var home_before := Pathing.distance(state, beyond)
+	var bitten := {}
+	var strayed := false
+	for _i in 240:
+		Enemies.tick(state)
+		for id in [walker, runner, giant, stray]:
+			if int(Entities.get_one(state, id).get("chewing", -1)) == Grid.index(spot):
+				bitten[id] = true
+		if not Entities.get_one(state, stray).is_empty():
+			strayed = strayed or Pathing.distance_lure(state, Entities.cell_of(state, stray)) <= reach
+	var left := int(Farm.occupant(state, spot).get("hp", 0))
+	var home_after := Pathing.distance(state, Entities.cell_of(state, stray))
+	expect(bitten.has(walker) and left < full, "the walker within reach walks to the decoy and bites it",
+		"%d of %d" % [left, full])
+	expect(beyond.x >= 0 and not bitten.has(stray) and not strayed and home_after < home_before,
+		"while the one beyond walks on to the house", "%s, %d then %d" % [beyond, home_before, home_after])
+	expect(bitten.has(runner), "a runner is lured too - round a wall, not round this")
+	expect(not bitten.has(giant) and not Entities.get_one(state, giant).is_empty(),
+		"and the Giant is not: it walks its own road past the straw")
+
+	# **The tick it falls.** One bite from the end, a walker at it and a
+	# second lured one walking in, after it by id: the bite fells it, and the
+	# second goes by its own road on that same tick.
+	var fall: Dictionary = _decoy_night(22403)
+	var felled: Dictionary = fall["state"]
+	var at: Vector2i = fall["spot"]
+	var biter := Entities.spawn(felled, &"walker", at + Vector2i(1, 0))
+	var coming := _turned_by_the_lure(felled, at, reach)
+	var follower := Entities.spawn(felled, &"walker", coming)
+	var home_step := Pathing.step_from(felled, coming)
+	Pathing.field(felled, &"lure")
+	var lure_step := Pathing.step_lure(felled, coming)
+	var standing := felled.duplicate(true)
+	Farm.occupant(felled, at)["hp"] = 1
+	Enemies.tick(felled)
+	Enemies.tick(standing)
+	var moved := _step_of(felled, follower, coming)
+	var lured := _step_of(standing, follower, coming)
+	expect(biter < follower and Farm.occupant(felled, at).is_empty() and Farm.rubble_at(felled, at) == &"decoy"
+		and Pathing.field(felled, &"lure").is_empty(),
+		"one bite fells it: its straw on the ground, and no lure left")
+	expect(coming.x >= 0 and home_step != lure_step and lured == lure_step - coming and moved == home_step - coming,
+		"and the one walking in takes its own road that same tick, where with the decoy up it was walking to it",
+		"%s: lured %s, felled %s, home %s" % [coming, lured, moved, home_step - coming])
+
+	# **Two decoys: the nearer by the field, and a tie the first way out.**
+	var pair: Dictionary = _decoy_night(22404, [Vector2i(0, -2), Vector2i(0, 2)])
+	var two: Dictionary = pair["state"]
+	var middle: Vector2i = pair["spot"]
+	Pathing.field(two, &"lure")
+	expect(Pathing.lure_cells(two).size() == 2
+		and Pathing.step_lure(two, middle) == middle + Grid.STEPS[0]
+		and Pathing.step_lure(two, middle + Vector2i(0, 1)) == middle + Vector2i(0, 2),
+		"of two decoys the nearer by the field wins, and an even walk goes north, first in Grid.STEPS")
+	var even := Entities.spawn(two, &"walker", middle)
+	var nearer := Entities.spawn(two, &"walker", middle + Vector2i(0, 1))
+	for _i in 60:
+		Enemies.tick(two)
+	expect(int(Entities.get_one(two, even).get("chewing", -1)) == Grid.index(middle + Vector2i(0, -2))
+		and int(Entities.get_one(two, nearer).get("chewing", -1)) == Grid.index(middle + Vector2i(0, 2)),
+		"and the walkers bite the ones the field sent them to")
+
+	# **The view's road and the words.** Drawn in code at A037's canvas
+	# until 0236, standing on its pivot; the hotbar puts it after spring's
+	# eight; its tooltip says how far it pulls, in both languages.
+	var shapes := {}
+	for name in DecoyArt.STATES:
+		var path := DecoyArt.path_of(name)
+		var image := DecoyArt.drawing(name)
+		var frame := PlaceholderArt.frame(path)
+		var texture := DecoyArt.texture(name)
+		var blue := false
+		for y in image.get_height():
+			for x in image.get_width():
+				var c := image.get_pixel(x, y)
+				for cloth in [&"cloth", &"cloth_dark", &"cloth_light"]:
+					blue = blue or (c.a > 0.0 and c.is_equal_approx(PaletteData.COLOURS[cloth]))
+		shapes[name] = [image.get_used_rect(), blue, PlaceholderArt.is_drawn(path)
+			and str(PlaceholderArt.art(name).get("pack", "")) == "A037" and frame.get("canvas") == Vector2i(16, 32)
+			and frame.get("pivot") == Vector2i(8, 28) and image.get_size() == Vector2i(16, 32)
+			and texture != null and texture.resource_name == path]
+	var whole: Rect2i = shapes[&"decoy"][0]
+	var wreck: Rect2i = shapes[&"decoy_wreck"][0]
+	var stake := DecoyArt.drawing(&"decoy")
+	var wood: Color = PaletteData.COLOURS[&"wood_dark"]
+	expect(whole.end.y == 28 and whole.position.x == 2 and whole.end.x == 14
+		and whole.size.y >= 25 and whole.size.y <= 27
+		and stake.get_pixel(7, 27) == wood and stake.get_pixel(8, 27) == wood
+		and stake.get_pixel(6, 27) == stake.get_pixel(9, 27)
+		and stake.get_pixel(5, 27).a == 0.0 and stake.get_pixel(10, 27).a == 0.0,
+		"standing, it fills A037's box: 12 wide on x 2..13, 25-27 tall to row 27, its stake's foot on x 8", str(whole))
+	expect(DecoyArt.drawing(&"decoy_hurt").get_data() != stake.get_data()
+		and wreck.end.y == 28 and wreck.size.y <= 8 and wreck.size.x <= 14,
+		"hurt it is another shape, and wrecked a heap at most 8 tall and 14 wide on the same row", str(wreck))
+	var road := true
+	for name in shapes:
+		road = road and not bool(shapes[name][1]) and bool(shapes[name][2])
+	expect(road, "each drawn in code on 0120's road, none of the farmer's blue, named for where A037 delivers it")
+	var sprite := Sprite2D.new()
+	sprite.texture = DecoyArt.texture(&"decoy")
+	ArtPlacement.place(sprite, spot)
+	expect(sprite.offset == -Vector2(8, 28) and sprite.scale == Vector2.ONE,
+		"and a sprite wearing it stands on its pivot", str(sprite.offset))
+	sprite.free()
+	expect([DecoyArt.lean(0.05), DecoyArt.lean(0.15), DecoyArt.lean(0.25), DecoyArt.lean(0.35)] == [-2.0, 1.0, -1.0, 0.0]
+		and is_equal_approx(sin(DecoyArt.skew_for(-2.0)) * DecoyArt.HEIGHT, -2.0),
+		"struck, it leans two west, one east, one west and stands, a tenth of a second each")
+	var bar := Hotbar.new()
+	var icon := bar._icon_of(&"decoy")
+	bar.free()
+	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
+	expect(icon == DecoyArt.texture(&"decoy") and order.back() == &"decoy"
+		and order.slice(0, order.size() - 1) == GameData.sorted_names(order.slice(0, order.size() - 1)),
+		"the hotbar shows the drawing, after spring's eight, which keep their places", str(order))
+	var said := {}
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		said[locale] = Describe.defence(&"decoy")
+	I18n.use("en")
+	expect(Names.KEYS.get(&"decoy") == &"DEF_DECOY" and said["en"].contains("from up to %d tiles" % reach)
+		and said["pt_BR"].contains("%d ladrilhos" % reach) and said["pt_BR"].contains("ESPANTALHO-ISCA"),
+		"its name and its pull, in both languages", str(said))
+
+	# **Perf and the picture**: decoys in the swarm, the rebuild with them
+	# held to the path's budget, and a lured crowd to photograph.
+	var perf_tool := FileAccess.get_file_as_string("res://tools/perf.py")
+	var perf_check := FileAccess.get_file_as_string("res://src/tools/perf_check.gd")
+	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
+	expect(perf_tool.contains("(\"lure_refresh\", PATH_BUDGET_US)") and perf_check.contains("Building.place(state, &\"decoy\"")
+		and perf_check.contains("const DECOYS := 4") and shots.contains("[\"decoy\", "),
+		"perf.py holds the rebuild with decoys to the path's budget, perf_check puts four in the swarm, and shot.gd has a lured crowd")
+	_completed += 1
+
+
+## A parked night with a clear square of ground round `spot` - six cells every
+## way and nothing on it - and a decoy on each of `offsets` from it, put down
+## at night (task 0224). Nobody else on the farm.
+func _decoy_night(seed_value: int, offsets: Array = [Vector2i.ZERO]) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.STRAW: 200, GameData.WOOD: 200})
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	var spot := _open_square(state, 6)
+	for offset in offsets:
+		expect(Building.place(state, &"decoy", spot + (offset as Vector2i)), "a decoy goes down at night",
+			str(spot + (offset as Vector2i)))
+	Pathing.refresh(state)
+	return {"state": state, "spot": spot}
+
+
+## The cell nearest the house, ring by ring and each ring in reading order,
+## with `radius` cells of bare ground every way round it - grass or path, a
+## step of one each - and room for a decoy.
+func _open_square(state: Dictionary, radius: int) -> Vector2i:
+	# Every new game has the same farm, so the ground found once is asked
+	# about first.
+	if _decoy_ground.x >= 0 and Building.can_place(state, &"decoy", _decoy_ground) 			and _bare_round(state, _decoy_ground, radius):
+		return _decoy_ground
+	var house := Farm.house_centre(state)
+	for ring in range(radius + 2, 60):
+		for dy in range(-ring, ring + 1):
+			for dx in range(-ring, ring + 1):
+				if maxi(absi(dx), absi(dy)) != ring:
+					continue
+				var cell := house + Vector2i(dx, dy)
+				if Building.can_place(state, &"decoy", cell) and _bare_round(state, cell, radius):
+					_decoy_ground = cell
+					return cell
+	return Vector2i(-1, -1)
+
+
+func _bare_round(state: Dictionary, centre: Vector2i, radius: int) -> bool:
+	for dy in range(-radius, radius + 1):
+		for dx in range(-radius, radius + 1):
+			var cell := centre + Vector2i(dx, dy)
+			if not Grid.in_bounds(cell) or not Farm.occupant(state, cell).is_empty() \
+					or Farm.cost_of_terrain(Farm.terrain_at(state, cell)) != 1:
+				return false
+	return true
+
+
+## A bare cell out of a decoy's reach whose whole road home stays out of it
+## (task 0224), the first in reading order a few tiles past the reach.
+func _beyond_the_lure(state: Dictionary, spot: Vector2i, reach: int) -> Vector2i:
+	Pathing.refresh(state)
+	for dy in range(-reach - 6, reach + 7):
+		for dx in range(-reach - 6, reach + 7):
+			var cell := spot + Vector2i(dx, dy)
+			var apart := absi(dx) + absi(dy)
+			if apart < reach + 3 or not Grid.in_bounds(cell) or not Farm.occupant(state, cell).is_empty() \
+					or not Pathing.reachable(state, cell):
+				continue
+			var clear := true
+			var at := cell
+			for _step in 40:
+				clear = clear and Pathing.distance_lure(state, at) > reach
+				var next := Pathing.step_from(state, at)
+				if next == at:
+					break
+				at = next
+			if clear:
+				return cell
+	return Vector2i(-1, -1)
+
+
+## A bare cell within a decoy's reach where the lure and the road home part
+## ways - the first in reading order - so which one is walked shows (0224).
+func _turned_by_the_lure(state: Dictionary, spot: Vector2i, reach: int) -> Vector2i:
+	Pathing.refresh(state)
+	Pathing.field(state, &"lure")
+	for dy in range(-reach, reach + 1):
+		for dx in range(-reach, reach + 1):
+			var cell := spot + Vector2i(dx, dy)
+			var away := Pathing.distance_lure(state, cell)
+			if absi(dx) + absi(dy) < 2 or away > reach or not Farm.occupant(state, cell).is_empty():
+				continue
+			if Pathing.step_lure(state, cell) != Pathing.step_from(state, cell):
+				return cell
+	return Vector2i(-1, -1)
+
+
+## Which way one walked from the middle of `from` on the last tick: the unit
+## step of its move, or zero.
+func _step_of(state: Dictionary, id: int, from: Vector2i) -> Vector2i:
+	var one := Entities.get_one(state, id)
+	if one.is_empty():
+		return Vector2i.ZERO
+	var middle := from * Player.SUBTILE + Vector2i.ONE * (Player.SUBTILE / 2)
+	var moved := Vector2i(int(one["pos"][0]), int(one["pos"][1])) - middle
+	return Vector2i(signi(moved.x), signi(moved.y))
+
+
 ## 0147 - A005's night icons: the 24 cuts are raster art at their boxes and
 ## nothing stands in for them; the hotbar draws each defence's own 16x16 and
 ## the night bar its 10x10 pictures, START's, the flare's, the speed's and
 ## the setting moon's.
 func _task_0147_night_icons() -> void:
-	var ids: Array = GameData.sorted_names(GameData.DEFENCES.keys()) + NightHud.ICONS
+	var ids: Array = A005_DEFENCES + NightHud.ICONS
 	var wrong: Array = []
 	for id in ids:
 		for cut in [["icon", 16], ["hud", 10]]:
@@ -7080,13 +7392,13 @@ func _task_0147_night_icons() -> void:
 
 	var bar := Hotbar.new()
 	var bare: Array = []
-	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+	for id in A005_DEFENCES:
 		var texture := bar._icon_of(id)
 		if texture == null or texture.resource_path != "res://sprites/ui/icon_%s.png" % id \
 				or texture.get_size() != Vector2(16, 16):
 			bare.append(id)
 	bar.free()
-	expect(bare.is_empty(), "the hotbar draws each defence's own 16x16 icon", str(bare))
+	expect(bare.is_empty(), "the hotbar draws each of A005's defences its own 16x16 icon", str(bare))
 
 	var hud := NightHud.new()
 	hud._ready()

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **204 / 296 done**
+`#################.......`  **205 / 296 done**
 
-0 doing / 92 todo / 0 blocked across 18 phases.
+0 doing / 91 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-92 task(s) left, the ready ones first, then what they
+91 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -354,24 +354,23 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0224 - The scarecrow decoy
+### 0225 - Zombie bait
 
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/core/building.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-A straw figure that pulls nearby zombies off their road and takes their blows while the towers work - the first defence that changes where the horde goes without walling it in.
+Rotten fish made by day and thrown down at night: for a few seconds the whole crowd around it turns toward it - the pond paying into the night (plan section 3.2).
 
-- Id `decoy` (not `scarecrow`, which is the porch guardian, and no crop id). A `DEFENCES` row: a cost in straw (the resource 0184 and 0193 brought in) and wood, a high `hp` LEVER (100-250), a `lure_tiles` LEVER (3-8), no `reload_ticks` (it is not a tower) and no `path_cost`, so breakers already hunt it as prey. Its `season` (0193's field on `DEFENCES`) is summer, per the plan's table, so `check_seasonal_supply` judges it right; 0234 does the gating. No `damage` either, so no `Sfx.TOWER_SOUNDS` entry: `_task_0085_night_sounds` wants a sound exactly when a defence has `damage`
-- The lure rule: a lure field registered in 0218's `Pathing` registry, swept from decoy cells and built only while a decoy stands. An enemy whose `ENEMIES` row says it can be lured (a new flag: walker and runner yes, bosses never; decide the tank and the breaker) and is within `lure_tiles` of a decoy by the lure field walks down that field instead of its own, and bites the decoy through `Enemies._gnaw` when it is the next cell
-- When the decoy falls the lured go back to their own field the same tick. Two decoys: the nearer by the field wins, ties by `Grid.STEPS`
-- `GameData.validate()`: a lure has `lure_tiles` > 0 and hit points (`check_defences`); no boss is lurable (`check_enemies`)
-- Perf: a farm without decoys pays nothing for the lure field; with four decoys the rebuild stays inside `PATH_BUDGET_US`. Add decoys to perf_check's swarm scenario
-- `Names.KEYS` `DEF_DECOY`, a `Describe.defence` line for the lure (a `DESC_*` key), strings in both languages; placed by cursor at night like every defence (0132)
-- Drawn through the placeholder road (a code-drawn straw figure at 16x32, whole/hurt/wreck) until A037 is integrated by 0236; the hit sway is view only
-- DATA moves (a new row and the lurable flags). SIM moves on purpose too if the lure field's storage keys are in a new game's state, because `State.hash_of` folds every key, cached fields included: record both numbers and why
+- Id `zombie_bait`: a recipe at the kitchen (or the press) turns fish into a bait kit, through 0179's rule that a recipe taking `fish` accepts any species; the kit's inputs equal the `DEFENCES` cost, as `check_recipes` demands. 0179's fish group is understood by `Crafting`, not by `Resources.pay`: either the bait goes down from a kit only (the ledger road refused with a reason) or its `cost` names a real resource - decide. Its `season` (0193's field) is summer, as 0234's table says
+- It reuses 0224's lure rule and lurable flags, with a wider `lure_tiles` LEVER (6-14). Decide how one lure field honours two reaches (each source seeded with its own head start, or the bait as a second registered field) and keep 'the nearer by the field wins'
+- Walkable like a mine: a `walkable` flag on the `DEFENCES` row that `Pathing._through` (the ground's cost) and `Pathing.is_prey` (left out) both read, so nothing breaks through it and breakers do not hunt it. 0228's garlic braid uses the same flag - if 0228 landed first, reuse it. `check_defences` refuses a walkable row with a `path_cost`
+- Consumed: it lasts `lifetime_ticks` (LEVER, 5-20 s) and goes when that runs out or when a LEVER number of zombies have reached it, whichever is first; it leaves no rubble
+- A per-night limit LEVER like the barricade's, read through `Building.left_tonight` - which today adds the tree's `barricade_bonus` to every `per_night_limit`: make that the barricade's alone, or decide the bait shares it, and assert which
+- `Names.KEYS` (`DEF_ZOMBIE_BAIT`, its `REC_*`), a `Describe.defence` line, strings in both languages; no `damage`, so no `Sfx.TOWER_SOUNDS` entry; drawn through the placeholder road (a 16x16 fish on the ground and its icon) until A037 is integrated by 0236
+- DATA moves (a row and a recipe); SIM moves only if a state key is added or the determinism scenario meets a bait - record which
 
-  - done when: `_task_0224_decoy` in `src/tools/headless_v1.gd` asserts a walker within `lure_tiles` walks to the decoy and bites it while one beyond walks on to the house, a runner is lured, the Giant is not, and the lured return to the road the tick the decoy falls
-  - done when: `_case_0224_decoy` in `src/tools/input_v1.gd` places a decoy with the cursor at night
-  - done when: `python tools/perf.py` passes with decoys in the swarm, and a `shot.gd` scenario of a lured crowd, captured with `python tools/shot.py 0224`, is opened and looked at
+  - done when: `_task_0225_bait` in `src/tools/headless_v1.gd` asserts a crowd beyond any decoy's reach turns toward the bait, the bait goes at its lifetime or its arrival count, and the crowd is back on its road the same tick
+  - done when: `_case_0225_bait` in `src/tools/input_v1.gd` makes a bait by day and places it with the cursor at night
+  - done when: The Deliverables table of `implementation/backlog/packs/A037-decoy.md` states the final geometry this task settled (decoy states and sway frames, the bait on the ground, its icon)
 
 ### 0226 - The beehive
 
@@ -655,24 +654,6 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
   - done when: the same group: the 0.1 `settings.cfg` fixture loads with its language, volumes and rebind kept, every key it lacks at its `Settings.DEFAULTS` value, and its `tutorial_seen` of `true` migrated to the 0.1 step ids, so only the new steps are offered
   - done when: 1920x1080 captures of the bed line, the cursor line at night and the forecast line at dusk, in both languages (new scenarios such as `tut_bed`, `tut_cursor`, `tut_forecast`: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast --fhd` and again with `--pt_BR`), opened: each line is on its thing and nothing on screen covers it
 
-### 0225 - Zombie bait
-
-Waits on 0224.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/core/building.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Rotten fish made by day and thrown down at night: for a few seconds the whole crowd around it turns toward it - the pond paying into the night (plan section 3.2).
-
-- Id `zombie_bait`: a recipe at the kitchen (or the press) turns fish into a bait kit, through 0179's rule that a recipe taking `fish` accepts any species; the kit's inputs equal the `DEFENCES` cost, as `check_recipes` demands. 0179's fish group is understood by `Crafting`, not by `Resources.pay`: either the bait goes down from a kit only (the ledger road refused with a reason) or its `cost` names a real resource - decide. Its `season` (0193's field) is summer, as 0234's table says
-- It reuses 0224's lure rule and lurable flags, with a wider `lure_tiles` LEVER (6-14). Decide how one lure field honours two reaches (each source seeded with its own head start, or the bait as a second registered field) and keep 'the nearer by the field wins'
-- Walkable like a mine: a `walkable` flag on the `DEFENCES` row that `Pathing._through` (the ground's cost) and `Pathing.is_prey` (left out) both read, so nothing breaks through it and breakers do not hunt it. 0228's garlic braid uses the same flag - if 0228 landed first, reuse it. `check_defences` refuses a walkable row with a `path_cost`
-- Consumed: it lasts `lifetime_ticks` (LEVER, 5-20 s) and goes when that runs out or when a LEVER number of zombies have reached it, whichever is first; it leaves no rubble
-- A per-night limit LEVER like the barricade's, read through `Building.left_tonight` - which today adds the tree's `barricade_bonus` to every `per_night_limit`: make that the barricade's alone, or decide the bait shares it, and assert which
-- `Names.KEYS` (`DEF_ZOMBIE_BAIT`, its `REC_*`), a `Describe.defence` line, strings in both languages; no `damage`, so no `Sfx.TOWER_SOUNDS` entry; drawn through the placeholder road (a 16x16 fish on the ground and its icon) until A037 is integrated by 0236
-- DATA moves (a row and a recipe); SIM moves only if a state key is added or the determinism scenario meets a bait - record which
-
-  - done when: `_task_0225_bait` in `src/tools/headless_v1.gd` asserts a crowd beyond any decoy's reach turns toward the bait, the bait goes at its lifetime or its arrival count, and the crowd is back on its road the same tick
-  - done when: `_case_0225_bait` in `src/tools/input_v1.gd` makes a bait by day and places it with the cursor at night
-  - done when: The Deliverables table of `implementation/backlog/packs/A037-decoy.md` states the final geometry this task settled (decoy states and sway frames, the bait on the ground, its icon)
-
 ### 0229 - The searchlight
 
 Waits on 0226.  Likely files: `src/core/light.gd (new), src/core/game_data.gd, src/core/towers.gd, src/core/ability.gd, src/core/combat.gd, src/ui/lighting.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
@@ -728,6 +709,25 @@ Three more buttons for a night going wrong: the farm bell stops every zombie for
   - done when: `_task_0233_powers` in `src/tools/headless_v1.gd` asserts the bell holds every walker for exactly its ticks, the dog's bite lands on the enemy nearest the aimed cell after the computed delay, the repair restores the LEVER share of a levelled tower, and each power is refused before its node is bought
   - done when: `_case_0233_powers` in `src/tools/input_v1.gd` aims and fires each power with the mouse and with the pad
   - done when: The Deliverables table of `implementation/backlog/packs/A028-dog.md` states the final geometry this task settled (the night run and bite, the scale against the farmer)
+
+### 0236 - Art: the scarecrow decoy and zombie bait
+
+Waits on 0225.  Likely files: `assets/art_source/defences/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_ui_art.py, tools/verify.py`.
+
+The approved straw decoy and rotten-fish bait replace the stand-ins 0224 and 0225 left.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A037` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A037-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_barrier_art.py`, `check_ui_art.py`, `ArtPlacement` if needed).
+- Runtime names follow the one-cell pieces: `buildings/decoy`, `_hurt` and `_wreck` at 16x32 on the ground pivot, the hit sway (2-3 frames) as a short one-shot the view plays when it is struck; the bait on the ground at 16x16 like the mine; `icon_`/`hud_` for the bait kit
+- `check_barrier_art.py` counts task 0014's 84 entries and checks the mine's single pieces: extend it for the pack's entries, or add a `check_decoy_art.py` wired into `tools/verify.py` if the shape does not fit
+- Retire the stand-ins of 0224 and 0225 from 0120's placeholder registry; if 0223/0234 gave the decoy a tarp, check it still unveils
+- Set the pack to integrated: `python implementation/backlog/assets.py set A037 integrated`.
+
+  - done when: The family checks (`check_barrier_art.py`, `check_ui_art.py`) and the showcase (`python tools/show_art.py --barriers --check` and `python tools/show_art.py --ui --check`) pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of a decoy whole, hurt and struck, and a bait on the ground in the real game, opened and looked at, in `implementation/shots/0236/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0237 - Art: the beehive
 
@@ -878,7 +878,7 @@ The two MVP pieces become a year: a day piece per season on the shared motif, a 
 
 ### 0234 - The arsenal grows with the seasons
 
-Waits on 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0225, 0226, 0227, 0228, 0229, 0230, 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The arsenal arrives with the calendar - spring's six, then summer's, autumn's and winter's - and every defence costs money as well as materials, so the day's purse is what the night is built with (plan sections 2, 5 and 7).
 
@@ -894,25 +894,6 @@ The arsenal arrives with the calendar - spring's six, then summer's, autumn's an
   - done when: `_case_0234_hotbar_pages` in `src/tools/input_v1.gd` pages the hotbar and places an autumn defence in autumn
   - done when: The Deliverables tables of `implementation/backlog/packs/A044-tarps.md` and `implementation/backlog/packs/A045-power-weapon-icons.md` state the final geometry this task settled (the tarp families and footprints, the icon list)
   - done when: `python tools/shot.py 0234` captures of the hotbar in spring and in winter, opened and looked at
-
-### 0236 - Art: the scarecrow decoy and zombie bait
-
-Waits on 0224, 0225.  Likely files: `assets/art_source/defences/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_ui_art.py, tools/verify.py`.
-
-The approved straw decoy and rotten-fish bait replace the stand-ins 0224 and 0225 left.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A037` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A037-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_barrier_art.py`, `check_ui_art.py`, `ArtPlacement` if needed).
-- Runtime names follow the one-cell pieces: `buildings/decoy`, `_hurt` and `_wreck` at 16x32 on the ground pivot, the hit sway (2-3 frames) as a short one-shot the view plays when it is struck; the bait on the ground at 16x16 like the mine; `icon_`/`hud_` for the bait kit
-- `check_barrier_art.py` counts task 0014's 84 entries and checks the mine's single pieces: extend it for the pack's entries, or add a `check_decoy_art.py` wired into `tools/verify.py` if the shape does not fit
-- Retire the stand-ins of 0224 and 0225 from 0120's placeholder registry; if 0223/0234 gave the decoy a tarp, check it still unveils
-- Set the pack to integrated: `python implementation/backlog/assets.py set A037 integrated`.
-
-  - done when: The family checks (`check_barrier_art.py`, `check_ui_art.py`) and the showcase (`python tools/show_art.py --barriers --check` and `python tools/show_art.py --ui --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of a decoy whole, hurt and struck, and a bait on the ground in the real game, opened and looked at, in `implementation/shots/0236/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0240 - Art: the searchlight
 
@@ -2000,7 +1981,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (6/28)
+## 13 - Weapons of the night  (7/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
@@ -2008,8 +1989,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0221** [What the night leaves behind](prompts/0221-night-loot.md)
 - [x] **0222** [Bone meal](prompts/0222-bone-meal.md)
 - [x] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md)
-- [ ] **0224** [The scarecrow decoy](prompts/0224-decoy.md)
-- [ ] **0225** [Zombie bait](prompts/0225-zombie-bait.md) - needs 0224
+- [x] **0224** [The scarecrow decoy](prompts/0224-decoy.md)
+- [ ] **0225** [Zombie bait](prompts/0225-zombie-bait.md)
 - [ ] **0226** [The beehive](prompts/0226-beehive.md)
 - [ ] **0227** [The pumpkin catapult](prompts/0227-catapult.md)
 - [ ] **0228** [The garlic braid](prompts/0228-garlic-braid.md)
@@ -2018,9 +1999,9 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md) - needs 0226
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0230
-- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231
+- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0225, 0226, 0227, 0228, 0229, 0230, 0231
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
-- [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - needs 0224, 0225 - waits for art A037
+- [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - needs 0225 - waits for art A037
 - [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - needs 0226 - waits for art A038
 - [ ] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md) - needs 0227 - waits for art A039
 - [ ] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md) - needs 0228 - waits for art A040

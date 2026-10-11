@@ -1212,10 +1212,16 @@ func _case_0023_build_mode() -> void:
 		str(Building.selected(state)))
 
 	# The palette lists everything the phase allows - **the hotbar's slots**
-	# in the build step since task 0133.
-	for id in Building.catalogue(state):
+	# in the build step since task 0133, a page at a time since task 0224's
+	# decoy made nine: each on the page that holds it when it is picked.
+	var offered: Array = Building.catalogue(state)
+	for id in offered:
+		Building.select(state, id)
+		await frames(2)
 		expect(locate_control("Hotbar_%s" % id) != null,
 			"the palette offers %s" % id)
+	Building.select(state, offered[0])
+	await frames(2)
 
 	await click_control("Hotbar_wall")
 	await frames(3)

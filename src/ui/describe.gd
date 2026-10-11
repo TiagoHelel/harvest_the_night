@@ -120,6 +120,9 @@ static func defence(id: StringName) -> String:
 		lines.append(I18n.t(&"DESC_BLOCKS"))
 	if bool(one.get("one_shot", false)):
 		lines.append(I18n.t(&"DESC_ONE_SHOT"))
+	# **How far a lure pulls** (task 0224), the live lever.
+	if int(one.get("lure_tiles", 0)) > 0:
+		lines.append(I18n.f(&"DESC_LURES", [int(one["lure_tiles"])]))
 	return "\n".join(lines)
 
 

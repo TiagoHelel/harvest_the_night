@@ -23589,3 +23589,250 @@ in a run slow from end to end - the machine's load.
 - **The 16x16 and 10x10 cuts side by side on the dark panel,** with the
   oil and the food beside them: no two read alike. The wine's 10x10 is the
   slimmest, three pixels wide.
+
+## 0224 - The scarecrow decoy - done 2026-10-11
+
+What changed: summer's straw figure is in the game.
+- **It pulls:** a zombie that can be lured, within `lure_tiles` of a decoy
+  by the walk, leaves its road and bites the decoy instead of the house.
+- **The towers work meanwhile.** It is the first defence that changes where
+  the horde goes without walling it in.
+- **On its fall,** the lured take their own road again that same tick.
+
+### The row and the flags (`src/core/game_data.gd`)
+
+**`decoy` in `DEFENCES`:**
+- **Cost:** straw 8 and wood 4 (LEVER), $12 of goods - three barricades'
+  worth for something that stands ten times as long.
+- **`hp` 200** (LEVER 100-250): twenty walker bites. A crowd bites it from
+  four sides at once, so the seconds it buys are the towers'.
+- **`lure_tiles` 5** (LEVER 3-8), in the field's own units: steps of walking,
+  each what entering its cell costs.
+- **`season` summer,** per the plan's table. `check_seasonal_supply` finds
+  summer's straw at the stall, and 0234 gates it.
+- **No `reload_ticks`, no `damage`, no `path_cost`.** It is no tower and
+  makes no sound, waves flow round it, and a breaker hunts it as prey.
+
+**`lurable` on `ENEMIES`, decided:**
+- **The walker, the runner and the tank:** yes. The slow brute is the one
+  worth holding still where the mortars land.
+- **The breaker:** an explicit `false`. It already goes for what you built
+  by its own hunt field, and a decoy is among what it hunts, nearest first.
+  A pull on top would only make it skip a nearer tower for the straw.
+- **The Giant:** none, and no boss can be.
+
+**`validate()`:**
+- `check_defences`: a row with `lure_tiles` needs it above 0, and hit points.
+- `check_enemies`: a boss that is lurable is an error.
+
+### The lure field (`src/core/pathing.gd`)
+
+**The first row of 0218's registry built only when asked:**
+`&"lure": {seeds lures, cost lure, flow_lure / lure_cost / lure_version,
+none_without_seeds}`.
+- **Seeds, `lure_cells()`:** every defence standing whose row says
+  `lure_tiles`, with hit points left.
+- **Cost, the new `lure` rule:** the hunt's trick on the open map. Barriers
+  are holes and the decoys themselves are passable. **Decided:** a decoy
+  pulls whoever can walk to it and sends nobody through a wall to get
+  there - not even a runner, which goes round walls and not round this.
+- **`field_from` asks for the seeds first.** A row with
+  `none_without_seeds` and none is an empty field and empty costs: no pass
+  of entry costs and no sweep.
+- **`lure_reach()`** is the widest `lure_tiles` in the table: the decoy's,
+  one kind of lure today.
+- **`step_lure()` and `distance_lure()`** sit beside the hunt's.
+- **The three keys are in `Pathing.initial()`.** A save is reconciled to a
+  new game's keys, and one a night had made would be "dropped" from every
+  save that crossed a night. SIM moves for it, on purpose.
+
+### The walking (`src/core/enemies.gd`)
+
+**`Enemies.tick` asks for the lure once (`_pull`):** the field, its reach and
+the `grid_version` it was built for.
+- **No decoy standing:** an empty pull. Each walker then asks nothing more
+  than whether it is empty.
+- **A walker in reach:** `_walk` gives the lure first say, before the
+  runner's open field and the breaker's hunt.
+- **Lured:** the field's value under it is within reach and above 0. Such a
+  walker steps by `step_lure`, and when the straw is the next cell,
+  `breaks_through` sends it to `_gnaw`.
+- **The farm changed since the tick began** (a decoy bitten down a moment
+  ago): `_lured` asks for the field again first. Whoever walks after the
+  bite that tick takes its own road.
+- **Two decoys:** the field holds the nearer by the walk. `_step_in`'s
+  strict `<` gives a tie to the first way out in `Grid.STEPS` - north.
+
+### The hotbar's order (`src/core/building.gd`)
+
+`placeable_ids()` lists the defences **in the order the year hands them out**,
+then by name: spring's eight, then the decoy.
+- **Why:** a ninth defence turned the hotbar's second page on (eight to a
+  page).
+- **By name, the decoy would have been third,** pushing the wall onto page
+  two and moving every key a player learnt in spring.
+- **Now it sits alone on page two,** reached by Q or LB from nothing.
+
+**The page with nothing picked is the first** (`src/ui/hotbar.gd`). The page
+used to be whichever one had last held the selection, so once the decoy was
+put away the hotbar stayed on a page of one, and 1 picked the decoy. The
+`wave` shot found it: taken after `decoy`, it showed one slot.
+
+### The view (`src/ui/`)
+
+**`DecoyArt` draws A037's three states in code until 0236,** at its 16x32
+standing on (8,28):
+- **Whole:** a sack head with stitched eyes and mouth and twine at the
+  neck, a faded red shirt on the crossbar, and straw at the collar, cuffs
+  and waist. It stands on a two-pixel stake whose foot is centred on x 8, on
+  row 27. It is 12 wide on x 2..13 and 25 tall.
+- **Hurt:** the head slumped a pixel down and east. The west sleeve is off
+  the bar and hanging, the shirt is torn, and straw spills down the stake.
+- **Wreck:** a stump in a heap of straw, a rag of the shirt, and the sack
+  head rolled east. It is 7 rows tall and 12 wide on row 27.
+- **What it does not have:** no hat, no lit eyes and none of the farmer's
+  blue, so it is not the porch guardian.
+
+**The road to the view:**
+- **`PlaceholderArt`:** `decoy`, `decoy_hurt` and `decoy_wreck` are drawn
+  A037 entries on `DECOY`.
+- **The texture's name:** each carries the runtime path it stands for.
+- **`ArtPlacement.place`:** reads that name when the texture has no file,
+  so the decoy, its ghost and its heap stand on the pivot.
+- **`WorldView`:** `_texture_for` and `_exists` know the drawings, so hurt
+  is chosen as for any defence. `_refresh_wrecks` leaves a decoy's heap.
+- **The hotbar:** shows the drawing, as it shows any defence with no icon.
+
+**The hit sway is view only (`_sway_decoys`):** it watches each decoy's hit
+points the rules keep.
+- **The lean:** on a drop, the drawing leans the top of the straw two
+  pixels west, one back east, then one west, a tenth of a second each, and
+  stands. It is a skew about the stake's foot.
+- **Decided:** the strip plays as A037 authored it, west first, whoever bit
+  it. A037's pack notes now say so, and say where the stand-in lives.
+
+**The words:**
+- `Names.KEYS` has `DEF_DECOY`: "decoy", in Portuguese "espantalho-isca" -
+  the pack's own word, so it is not mistaken for the porch's guardian.
+- `Describe.defence` adds `DESC_LURES` with the live lever: "pulls zombies
+  from up to 5 tiles", "atrai zumbis a até 5 ladrilhos".
+
+### Performance
+
+**`perf_check` puts four decoys in the swarm** (`DECOYS`), spread along its
+ground, with `DECOY_HP` nothing bites through while it is timed, as the
+guns have. Their lure is built with the fields every night walks by, before
+the swarm is timed. It measures **`lure_refresh`**: the rebuild with them
+standing, the lure asked the way a night asks. `tools/perf.py` holds that
+line to `PATH_BUDGET_US`.
+
+**Measured on a loaded machine:**
+- **The load itself:** untouched systems ran 30-68% over their baselines
+  in the same run (`view_particles` +68%, `night_tick` +44%).
+- **The lure rebuild:** `lure_refresh` 17381 us against `path_refresh`
+  12534, inside the 33333 budget.
+- **A farm with no decoy:** per tick, `_pull` is 1.7 us. Per change to the
+  farm, `lure_cells` is a 238 us look along 634 occupants, against the
+  12 ms rebuild it rides with.
+- **The swarm's night is ten ticks long:** the house falls under the crowd
+  at its tenth tick, with or without decoys. So `swarm_tick` is the average
+  of ten ticks, and a lure built on the first of them was in it. Built
+  beforehand, the decoys cost the swarm nothing measurable.
+- **Timed in one process, decoys and none interleaved:**
+  - `Enemies.tick` alone: 8323 us with them against 8289 without;
+  - the whole tick, two rounds: 9751 and 10813 us with them, against 9632
+    and 9463 without;
+  - the swarm without a decoy is over the 8333 budget on this load too.
+- **The baseline was not moved.** The runs above were taken on a load that
+  would have hidden the next regression. `lure_refresh` has no baseline yet;
+  the green run below measured it at 13538 us, and it waits for a quiet
+  `--accept`.
+
+### Hashes
+
+- **DATA 2498985787 -> 3465552205:** the decoy's row and the lurable flags.
+- **SIM 1719668160 -> 3837945514:** the lure's three keys are in a new
+  game's state, and every night records the `grid_version` its empty field
+  was asked at.
+
+Verify: **PASS**, 60 of 60 in 998 s.
+- **Suites:** `headless_check` 17661 asserts, `headless_v1` 2411,
+  `input_check` 1245 cases, `input_v1` 715 (105 s).
+- **Hashes:** SIM 3837945514 and DATA 3465552205, as recorded.
+- **perf:** a night tick 1375 us, the swarm with its decoys 7506, a path
+  rebuild 9894 and 13538 with the decoys.
+- **The two full runs before it failed on time alone.** A game on this
+  machine held a core all through them.
+  - perf's swarm ran at 9221 and 11067 us of its 8333 budget.
+  - `input_v1` hit its 120 s bound in the second. Run alone right after, it
+    took 127 s: 715 cases, 0 failed.
+  - Between the two, its case went into the night by `NightRoad` instead of
+    GO TO BED's bed beat, and the swarm's lure was built beforehand.
+
+**Tests:**
+- **`_task_0224_decoy` (headless_v1):**
+  - the row's levers, the flags and the two checks;
+  - the registry row, its keys in a new game, and a night with no decoy
+    leaving both arrays empty;
+  - a walker four tiles off biting the decoy, while one beyond walks home
+    with its whole road out of reach;
+  - a runner lured, the Giant not;
+  - the felled tick: one bite from the end, with the walker coming after
+    it on its own road and the same tick with the decoy up walking to it;
+  - two decoys, the nearer and the tie north, then each walker biting the
+    one the field sent it to;
+  - the drawings against A037's geometry, with no farmer blue, standing on
+    the pivot;
+  - the lean, the hotbar's drawing and order, and both languages;
+  - perf's lines and shot's scenario.
+- **Old groups a ninth defence touched:**
+  - 0132's rich farm has straw;
+  - its night palette is compared as a set;
+  - 0193 counts spring's eight and summer's one;
+  - 0147 and the UI showcase name A005's eight;
+  - 0218's test field keeps keys of its own;
+  - `headless_check`'s drawing lookup knows a drawing made in code;
+  - its shot count is 92.
+- **`_case_0224_decoy` (input_v1):**
+  - at night, Q from nothing picks the decoy, alone on page two and wearing
+    its drawing;
+  - a click on open ground puts it down at the cursor for its straw;
+  - Escape puts it away, the first page is back, and 1 picks the first
+    defence;
+  - a bite makes it lean west from the frame it is seen.
+- **The page touches two old cases:** `_case_0133_hotbar` presses RB round
+  to page one before the wall's slot, and `input_check`'s palette visits
+  each slot on its page.
+
+**Looked at** (`python tools/shot.py 0224 decoy wave --fhd`):
+- **`decoy`, a night past the defended farm's fence:**
+  - **Three decoys on open ground:**
+    - the first bitten hurt (110 of 200 at the shutter), with all eight of
+      a tank, a runner and six walkers at it - come in from the north and
+      the east;
+    - the second whole, out of their reach;
+    - the third a heap of straw with a rag of its shirt.
+  - **The decoy picked:** its ghost green at the cursor, "place decoy" in
+    the hint, and the hotbar on its second page.
+  - **At night the straw figures read as small red-shirted dummies on
+    stakes,** shorter than the walkers - neither zombies nor the farmer.
+    Their straw is dim; that is A037's to brighten.
+- **`wave`:** the hotbar on its first page, spring's eight under 1-8.
+- **What the takes found:**
+  - **The first take stood the decoys among the trees** and gave the crowd
+    a second and a half before the picture's own two seconds of stirring.
+    The crowd hid the first decoy and then bit the first two down: "decoy
+    destroyed" two and three times in the log. They now go on a patch with
+    nothing standing within four cells, and the crowd starts at the decoy's
+    reach, timed to arrive with the shutter.
+  - **The `wave` take after it showed a hotbar of one slot** - the page
+    fix above.
+
+Files: src/core/{game_data,pathing,enemies,building}.gd,
+src/ui/{decoy_art,placeholder_art,art_placement,world_view,hotbar,names,describe}.gd,
+src/ui/decoy_art.gd.uid, assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,input_check,input_v1,perf_check,shot,ui_art_showcase}.gd,
+tools/perf.py, tools/determinism_{data,sim}_hash.txt,
+implementation/backlog/packs/A037-decoy.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0224-decoy.md,
+implementation/shots/0224/, docs/devlog/{index,index.pt_BR}.md

@@ -124,6 +124,10 @@ var _stations: Array[Sprite2D] = []
 ## dressed for.
 var _tarped: Array[Sprite2D] = []
 var _tarp_stage := -1
+## The decoys' sprites by cell index, made again with the rest (task 0224),
+## and what each was last seen at: its hit points, and how long since a bite.
+var _decoys: Dictionary = {}
+var _decoy_hits: Dictionary = {}
 ## **Whether the day's tarps are drawn** (task 0223): yes in the game. The
 ## tower showcase turns them off, to look at the towers by daylight.
 var tarps := true
@@ -531,6 +535,7 @@ func _process(delta: float) -> void:
 	_refresh_retreats(delta)
 	_enemy_warning.queue_redraw()
 	_refresh_stations(delta)
+	_sway_decoys(delta)
 	_dress_tarps()
 	_place_house_mark()
 	_remember_towers(_state)
@@ -1297,6 +1302,7 @@ func _refresh() -> void:
 	_sprites.clear()
 	_stations.clear()
 	_tarped.clear()
+	_decoys.clear()
 	_ambient_materials.clear()
 	if _season != null:
 		_season.forget_sprites()
@@ -1388,6 +1394,9 @@ func _refresh() -> void:
 			sprite.set_meta("station_id", id)
 			sprite.set_meta("station_anchor", anchor)
 			_stations.append(sprite)
+		# A decoy, which sways when it is struck (task 0224).
+		if id == &"decoy":
+			_decoys[int(idx)] = sprite
 		if id == &"tree":
 			var shadow := Sprite2D.new()
 			shadow.texture = load(PlayerView.SHADOW)
@@ -1632,6 +1641,34 @@ func _refresh_zzz(delta: float) -> void:
 ## way `sfx.gd` and `particles.gd` spot things: this frame's occupants against
 ## the last. No `Events` kind, so the hash never hears of it. The first look at
 ## a state only learns what is there.
+## **A decoy sways when it is struck** (task 0224): A037's lean - the top of
+## the straw two pixels west, one back east, one west, upright - a tenth of a
+## second each, whoever bit it, the stake's foot staying put. Until A037's
+## strips land it is the whole drawing leaning (`DecoyArt.lean`). View only:
+## it watches the hit points the rules keep and nothing reads it back.
+func _sway_decoys(delta: float) -> void:
+	var occupants: Dictionary = _state["occupants"]
+	for idx in _decoy_hits.keys():
+		if not _decoys.has(idx):
+			_decoy_hits.erase(idx)
+	for idx in _decoys:
+		var sprite: Sprite2D = _decoys[idx]
+		if not is_instance_valid(sprite):
+			continue
+		var hp := int((occupants.get(idx, {}) as Dictionary).get("hp", 0))
+		var seen: Dictionary = _decoy_hits.get(idx, {"hp": hp, "age": INF})
+		seen["age"] = 0.0 if hp < int(seen["hp"]) else float(seen["age"]) + delta
+		seen["hp"] = hp
+		_decoy_hits[idx] = seen
+		sprite.skew = DecoyArt.skew_for(DecoyArt.lean(float(seen["age"])))
+
+
+## How far into its sway the decoy on a cell is, in seconds - `INF` for one
+## standing still - for the asserts.
+func decoy_sway_age(cell: Vector2i) -> float:
+	return float((_decoy_hits.get(Grid.index(cell), {}) as Dictionary).get("age", INF))
+
+
 func _watch_defences() -> void:
 	var now := {}
 	var occupants: Dictionary = _state["occupants"]
@@ -1964,7 +2001,7 @@ func _refresh_wrecks() -> void:
 	var visible: Dictionary = {}
 	for cell in Farm.rubble_cells(_state):
 		var id := Farm.rubble_at(_state, cell)
-		if (not authored_tower(id) and id not in [&"wall", &"fence", &"barricade", &"mine"]) or not Farm.occupant(_state, cell).is_empty():
+		if (not authored_tower(id) and id not in [&"wall", &"fence", &"barricade", &"mine", &"decoy"]) or not Farm.occupant(_state, cell).is_empty():
 			continue
 		var idx := Grid.index(cell)
 		visible[idx] = true
@@ -2500,6 +2537,10 @@ func _exists(name: StringName) -> bool:
 		if ResourceLoader.exists(str(folder) + str(name) + ".png"):
 			found = true
 			break
+	# **Or drawn in code until its pack lands** (task 0224's decoy, hurt as
+	# well as whole): art by that name all the same.
+	if not found and PlaceholderArt.is_drawn(str(BUILDING_DIR) + str(name) + ".png"):
+		found = true
 	_known[name] = found
 	return found
 
@@ -2546,6 +2587,13 @@ func _texture_for(id: StringName) -> Texture2D:
 		if drawn != null:
 			_textures[id] = drawn
 			return drawn
+
+	# **Drawn in code until its pack lands** (task 0224's decoy, through
+	# 0120's road): `DecoyArt`'s drawing, at the pack's canvas and pivot.
+	var coded := DecoyArt.texture(id)
+	if coded != null:
+		_textures[id] = coded
+		return coded
 
 	# A quarter nobody has drawn falls back to the whole thing, and that to a
 	# flat block, so a new building is visible before it is pretty.

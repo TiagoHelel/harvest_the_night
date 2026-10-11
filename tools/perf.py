@@ -180,12 +180,14 @@ def main():
     table(timings, counts, old)
 
     # **The swarm's tick is held to the same budget** (task 0218): a few
-    # hundred bodies more is what the night is about to be asked for.
+    # hundred bodies more is what the night is about to be asked for. And
+    # the rebuild with four decoys standing to the path's (task 0224).
     bad = []
     for name, budget in [("night_tick", TICK_BUDGET_US),
                          ("day_tick", TICK_BUDGET_US),
                          ("swarm_tick", TICK_BUDGET_US),
-                         ("path_refresh", PATH_BUDGET_US)]:
+                         ("path_refresh", PATH_BUDGET_US),
+                         ("lure_refresh", PATH_BUDGET_US)]:
         if timings.get(name, 0) > budget:
             bad.append("%s is %dus and the budget is %d"
                        % (name, timings[name], budget))
@@ -228,11 +230,12 @@ def main():
 
     print("")
     print("OK    a night tick is %dus of the %d it may have (%.0f%%), "
-          "a swarm's %dus, a path rebuild %dus of %d"
+          "a swarm's %dus, a path rebuild %dus of %d (%dus with decoys)"
           % (timings.get("night_tick", 0), TICK_BUDGET_US,
              timings.get("night_tick", 0) * 100.0 / TICK_BUDGET_US,
              timings.get("swarm_tick", 0),
-             timings.get("path_refresh", 0), PATH_BUDGET_US))
+             timings.get("path_refresh", 0), PATH_BUDGET_US,
+             timings.get("lure_refresh", 0)))
     return 0
 
 

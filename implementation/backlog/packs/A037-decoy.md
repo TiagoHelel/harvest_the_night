@@ -35,8 +35,13 @@ The table is provisional: game task 0225 settles the final canvas/footprint/stat
 | `ui/hud_zombie_bait` | 10x10 | (5,5) | 1 / static (1.0) | Same raw crop as the icon, a second `content_scale`; visible at most 8. |
 
 - Every row: dir `none`, `mirror: "none"`, draw scale 1.0, no metadata points.
-- The authored sway leans **west first**; the view may play it as is for any
-  biter (0224 decides whether it mirrors the strip). Never deliver an east copy.
+- The authored sway leans **west first**, and the view plays it as is for any
+  biter: 0224 decided not to mirror the strip. Never deliver an east copy.
+- **The stand-in until 0236** (task 0224): `DecoyArt` (`src/ui/decoy_art.gd`)
+  draws `decoy`, `decoy_hurt` and `decoy_wreck` in code at this canvas and
+  pivot, registered as drawn in `PlaceholderArt`, and the view leans the whole
+  drawing through the same three poses (`DecoyArt.SWAY_TOPS`). The hotbar shows
+  `decoy` scaled into its 16x16 box: this pack has no decoy icon.
 - `decoy`, `decoy_hurt` and `decoy_wreck` share one `content_scale` (one raw
   sheet). Each sway strip has its own single `content_scale`, chosen so its
   stake and body height equal `decoy`'s.

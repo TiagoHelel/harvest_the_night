@@ -77,9 +77,19 @@ static func catalogue(state: Dictionary) -> Array:
 ## does it cost to take up again" is the same question for both - and the day
 ## build mode had a second code path for buildings is the day the two answers
 ## start disagreeing.
+##
+## **The defences in the order the year hands them out** (task 0224), each
+## season's by name: spring's eight, then summer's decoy. A defence a later
+## season adds goes on the end of the hotbar, so the slots and keys a player
+## learnt in spring do not move under them.
 static func placeable_ids() -> Array:
-	return GameData.sorted_names(GameData.DEFENCES.keys()) \
-		+ GameData.sorted_names(GameData.BUILDINGS.keys())
+	var names := GameData.sorted_names(GameData.DEFENCES.keys())
+	var defences: Array = []
+	for season in GameData.SEASONS:
+		for id in names:
+			if GameData.defence_season(GameData.DEFENCES[id]) == season:
+				defences.append(id)
+	return defences + GameData.sorted_names(GameData.BUILDINGS.keys())
 
 
 ## **Walked over, never a wall** (task 0178): a structure that declares it -

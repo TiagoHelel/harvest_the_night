@@ -63,6 +63,20 @@ extends RefCounted
 ## It is skipped entirely when there is nothing built, which is most of night
 ## one, and a breaker with an empty hunt field falls through to the house.
 ##
+## ## Four, because straw pulls (task 0224)
+##
+## The **lure** is swept from every decoy standing, at the open costs with the
+## decoys themselves passable: a barrier is a hole in the map, so a decoy pulls
+## whoever can walk to it and sends nobody through a wall to get there - a
+## runner included, which goes round a wall and does not go round this.
+## `Enemies` reads it for whoever its row says can be lured, within the
+## decoy's `lure_tiles`, and the nearest decoy by the walk is the one walked
+## to because that is what a field is.
+##
+## It is built when asked for, and while no decoy stands it is never built at
+## all: the seeds are looked for first, and none is an empty field without a
+## pass of entry costs or a sweep.
+##
 ## ## A zombie cannot oscillate
 ##
 ## Every step is onto a cell whose field value is `field[here] - enter(next)`,
@@ -111,10 +125,12 @@ const IMPASSABLE := 0
 
 ## **Every field, by name** (task 0218). A row says:
 ## - `seeds`, where the sweep starts: `house`, the farmhouse; `prey`, whatever a
-##   breaker has come for (`prey_cells()`).
+##   breaker has come for (`prey_cells()`); `lures`, every decoy standing
+##   (`lure_cells()`).
 ## - `cost`, what stepping onto a cell costs: `priced`, a barrier is a door
 ##   with a price on it; `open`, a barrier is a hole in the map; `hunt`, priced,
-##   with the seeds themselves passable so that the sweep can leave them.
+##   with the seeds themselves passable so that the sweep can leave them;
+##   `lure`, open, with the seeds passable the same way.
 ## - `field`, `costs` and `version`, the state keys it is kept under.
 ## - `eager`, built in `refresh()` with the others rather than when asked for.
 ## - `none_without_seeds`, no seeds means no field at all - an empty array,
@@ -127,6 +143,9 @@ const FIELDS: Dictionary = {
 		"costs": "open_cost", "version": "flow_version", "eager": true},
 	&"hunt": {"seeds": &"prey", "cost": &"hunt", "field": "flow_hunt",
 		"costs": "hunt_cost", "version": "flow_version", "eager": true,
+		"none_without_seeds": true},
+	&"lure": {"seeds": &"lures", "cost": &"lure", "field": "flow_lure",
+		"costs": "lure_cost", "version": "lure_version",
 		"none_without_seeds": true},
 }
 
@@ -149,6 +168,14 @@ static func initial() -> Dictionary:
 		"hunt_cost": PackedInt32Array(),
 		# Which `grid_version` the four above were built for. -1 is "never".
 		"flow_version": -1,
+		# **The lure** (task 0224): swept from every decoy standing, built the
+		# first time a night asks for it at a `grid_version`, and empty - field
+		# and costs - while none stands. Its keys are a new game's because a
+		# save is reconciled to a new game's keys, and one a night had made
+		# would be "dropped" from every save that crossed a night.
+		"flow_lure": PackedInt32Array(),
+		"lure_cost": PackedInt32Array(),
+		"lure_version": -1,
 	}
 
 
@@ -186,8 +213,8 @@ static func step_by(state: Dictionary, name: StringName, cell: Vector2i) -> Vect
 
 
 ## **The road `field()` takes with a row**, for a row written here rather than
-## in `FIELDS`: the seam a test drives a field built when asked for with, until
-## 0224 registers the first one.
+## in `FIELDS`: the seam a test drives a field built when asked for with. The
+## lure (task 0224) is the first row of `FIELDS` to take it.
 static func field_from(state: Dictionary, spec: Dictionary) -> PackedInt32Array:
 	if bool(spec.get("eager", false)):
 		refresh(state)
@@ -195,9 +222,19 @@ static func field_from(state: Dictionary, spec: Dictionary) -> PackedInt32Array:
 	var version := String(spec["version"])
 	var key := String(spec["field"])
 	if int(state.get(version, -1)) != int(state["grid_version"]) or not state.has(key):
-		var made := _make(state, spec, _entry_costs(state))
-		state[key] = made["field"]
-		state[String(spec["costs"])] = made["cost"]
+		# **The seeds first** (task 0224). A field that is nothing without
+		# them, with none, is an empty field and empty costs for one look
+		# along the occupants: no pass of entry costs and no sweep, which is
+		# what a farm with no decoy pays for the lure - once a change to the
+		# farm, and nothing a tick.
+		var seeds := _seeds_of(state, StringName(spec["seeds"]))
+		if seeds.is_empty() and bool(spec.get("none_without_seeds", false)):
+			state[key] = PackedInt32Array()
+			state[String(spec["costs"])] = PackedInt32Array()
+		else:
+			var made := _make(state, spec, _entry_costs(state), seeds)
+			state[key] = made["field"]
+			state[String(spec["costs"])] = made["cost"]
 		state[version] = int(state["grid_version"])
 	return state[key]
 
@@ -268,6 +305,65 @@ static func distance_hunt(state: Dictionary, cell: Vector2i) -> int:
 	if field.size() != Grid.CELLS:
 		return UNREACHABLE
 	return int(field[idx])
+
+
+## The next cell on the way to **the nearest decoy** (task 0224), or the same
+## cell when none stands or this is one. Which decoy is the field's to say: the
+## nearer by what the walk costs, a tie to the first way out in `Grid.STEPS`.
+##
+## Reads the lure as it was last built, like `step_hunt()`: the caller has
+## asked `field(state, &"lure")` at this `grid_version` first.
+static func step_lure(state: Dictionary, cell: Vector2i) -> Vector2i:
+	return _step_in(state["flow_lure"], state["lure_cost"], cell)
+
+
+## What reaching the nearest decoy costs from here, built for the farm as it
+## stands. `UNREACHABLE` with none standing or none to be walked to.
+static func distance_lure(state: Dictionary, cell: Vector2i) -> int:
+	var idx := Grid.index(cell)
+	if idx < 0:
+		return UNREACHABLE
+	var lure := field(state, &"lure")
+	if lure.size() != Grid.CELLS:
+		return UNREACHABLE
+	return int(lure[idx])
+
+
+## **How far a lure pulls** (task 0224): the widest `lure_tiles` in `DEFENCES`,
+## in the lure field's own units - steps of walking, each what entering its
+## cell costs, so a soil tile is two. One kind of lure today; a second that
+## pulled less far than the decoy would want a field of its own.
+static func lure_reach() -> int:
+	var widest := 0
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		widest = maxi(widest,
+			int((GameData.DEFENCES[id] as Dictionary).get("lure_tiles", 0)))
+	return widest
+
+
+## **Every cell with a lure standing on it** (task 0224): a defence whose row
+## says `lure_tiles`, with hit points left. A decoy bitten to nothing is
+## rubble, and nothing is pulled towards rubble.
+static func lure_cells(state: Dictionary) -> Array:
+	# Matched first and sorted after, as `Farm.cells_with` does: the farm holds
+	# hundreds of trees and stones, and only the few cells that lure need
+	# putting in order.
+	var found: Array = []
+	var occupants: Dictionary = state["occupants"]
+	for key in occupants:
+		var on: Dictionary = occupants[key]
+		var entry: Variant = GameData.DEFENCES.get(StringName(on["id"]), null)
+		if entry == null or int((entry as Dictionary).get("lure_tiles", 0)) <= 0:
+			continue
+		var idx := int(key)
+		if int(on.get("hp", 0)) <= 0 or idx < 0 or idx >= Grid.CELLS:
+			continue
+		found.append(idx)
+	found.sort()
+	var out: Array = []
+	for idx in found:
+		out.append(Grid.cell(int(idx)))
+	return out
 
 
 ## Whether this is a thing a breaker has come for: something the player built
@@ -490,16 +586,17 @@ static func _build(state: Dictionary) -> Dictionary:
 		var spec: Dictionary = FIELDS[name]
 		if not bool(spec.get("eager", false)):
 			continue
-		var made := _make(state, spec, costs)
+		var made := _make(state, spec, costs,
+			_seeds_of(state, StringName(spec["seeds"])))
 		built[String(spec["field"])] = made["field"]
 		built[String(spec["costs"])] = made["cost"]
 	return built
 
 
 ## One field and its costs, off one pass of entry costs: the row's seeds,
-## swept against the row's costs.
-static func _make(state: Dictionary, spec: Dictionary, costs: Dictionary) -> Dictionary:
-	var seeds := _seeds_of(state, StringName(spec["seeds"]))
+## found by the caller, swept against the row's costs.
+static func _make(state: Dictionary, spec: Dictionary, costs: Dictionary,
+		seeds: Array) -> Dictionary:
 	var cost := _costs_by(state, StringName(spec["cost"]), costs, seeds)
 	# **Skipped when there is nothing to go for.** Most of night one has
 	# nothing built on the farm at all, and a sweep of seven hundred cells to
@@ -516,6 +613,8 @@ static func _seeds_of(state: Dictionary, rule: StringName) -> Array:
 			return Farm.cells_with(state, &"house")
 		&"prey":
 			return prey_cells(state)
+		&"lures":
+			return lure_cells(state)
 	push_error("Pathing: no seeds called '%s'" % rule)
 	return []
 
@@ -528,17 +627,22 @@ static func _costs_by(state: Dictionary, rule: StringName, costs: Dictionary,
 			return costs["cost"]
 		&"open":
 			return costs["open"]
-		&"hunt":
+		&"hunt", &"lure":
+			# The hunt walks the priced map and the lure the open one (task
+			# 0224): a decoy pulls whoever can walk to it, and sends nobody
+			# through a wall to get there.
+			var base: PackedInt32Array = costs["cost"] if rule == &"hunt" \
+				else costs["open"]
 			if seeds.is_empty():
-				return costs["cost"]
+				return base
 			# A tower is impassable in the field everything else reads, which
 			# is what makes a wave flow around it. The sweep has to be able to
 			# leave one, so here they cost what the ground under them costs.
-			var hunt: PackedInt32Array = (costs["cost"] as PackedInt32Array).duplicate()
+			var passable: PackedInt32Array = base.duplicate()
 			for cell in seeds:
-				hunt[Grid.index(cell)] = Farm.cost_of_terrain(
+				passable[Grid.index(cell)] = Farm.cost_of_terrain(
 					Farm.terrain_at(state, cell))
-			return hunt
+			return passable
 	push_error("Pathing: no cost rule called '%s'" % rule)
 	return costs["cost"]
 

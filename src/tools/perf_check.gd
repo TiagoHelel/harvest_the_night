@@ -58,6 +58,13 @@ const SWARM := 300
 ## reach, or a few steps from it.
 const SWARM_MARGIN := 6
 
+## **Four decoys in the swarm** (task 0224), spread over the ground it stands
+## on, so the lure is built and asked by every walker on every tick it times.
+## Hit points nothing bites through while it is timed, as the guns have: this
+## measures what the lure costs, not how long straw lasts.
+const DECOYS := 4
+const DECOY_HP := 1000000
+
 ## How many ticks the swarm's whole tick is averaged over. Ten seconds: long
 ## enough to time, and short enough that the guns have not thinned it out.
 const SWARM_TICKS := 300
@@ -119,10 +126,12 @@ func _run() -> void:
 
 	# **The swarm** (task 0218): the same night with a few hundred bodies
 	# more at the towers, which is what the decoy, the bait, the digger and the
-	# rat swarm are about to ask of it. Its own lines, because the night's must
-	# stay comparable with every baseline before them.
+	# rat swarm are about to ask of it - the decoy in it since task 0224. Its
+	# own lines, because the night's must stay comparable with every baseline
+	# before them.
 	var swarm := _the_swarm(night)
 	print("COUNT swarm ", Entities.count(swarm))
+	print("COUNT decoys ", Pathing.lure_cells(swarm).size())
 	print("PERF swarm_tick ", _per_tick(swarm, SWARM_TICKS))
 	print("PERF swarm_towers ", _system(swarm, &"Towers"))
 	print("PERF swarm_enemies ", _system(swarm, &"Enemies"))
@@ -131,6 +140,9 @@ func _run() -> void:
 	# rebuilt when the walls change, and a player in build mode changes them
 	# once a click.
 	print("PERF path_refresh ", _path(night))
+	# **And with four decoys standing** (task 0224): the same rebuild, and the
+	# lure beside it the way a night asks for it.
+	print("PERF lure_refresh ", _lure_path(swarm))
 
 	# And the view's per-frame thinking, which is not its drawing. Two
 	# numbers rather than one: a total cannot say which of them grew.
@@ -217,7 +229,8 @@ func _the_worst_case() -> Dictionary:
 ## **The worst case and `SWARM` walkers more** (task 0218), spread over the
 ## open cells within `SWARM_MARGIN` of the towers' band - every cell nothing
 ## stands on that the house can be reached from, in reading order, and round
-## again when there are fewer cells than walkers.
+## again when there are fewer cells than walkers. **`DECOYS` go down first**
+## (task 0224), evenly along that ground, and the walkers round them.
 func _the_swarm(night: Dictionary) -> Dictionary:
 	var state: Dictionary = night.duplicate(true)
 	var lo := Vector2i(Grid.WIDTH, Grid.HEIGHT)
@@ -225,18 +238,35 @@ func _the_swarm(night: Dictionary) -> Dictionary:
 	for cell in Towers.cells(state):
 		lo = Vector2i(mini(lo.x, cell.x), mini(lo.y, cell.y))
 		hi = Vector2i(maxi(hi.x, cell.x), maxi(hi.y, cell.y))
+	var open := _open_round(state, lo, hi)
+	if open.is_empty():
+		push_error("perf_check: no open ground round the towers for the swarm")
+		return state
+	Resources.gain(state, {GameData.STRAW: 100, GameData.WOOD: 100})
+	for k in DECOYS:
+		var spot: Vector2i = open[open.size() * (k + 1) / (DECOYS + 1)]
+		if Building.place(state, &"decoy", spot):
+			Farm.occupant(state, spot)["hp"] = DECOY_HP
+	# The lure built with the fields every night walks by, as they are: what
+	# a rebuild costs is `lure_refresh`'s line, not the swarm's first tick.
+	Pathing.refresh(state)
+	Pathing.field(state, &"lure")
+	open = _open_round(state, lo, hi)
+	for i in SWARM:
+		Entities.spawn(state, &"walker", open[i % open.size()])
+	return state
+
+
+## The cells within `SWARM_MARGIN` of a band that nothing stands on and the
+## house can be reached from, in reading order.
+func _open_round(state: Dictionary, lo: Vector2i, hi: Vector2i) -> Array:
 	var open: Array = []
 	for y in range(maxi(lo.y - SWARM_MARGIN, 0), mini(hi.y + SWARM_MARGIN + 1, Grid.HEIGHT)):
 		for x in range(maxi(lo.x - SWARM_MARGIN, 0), mini(hi.x + SWARM_MARGIN + 1, Grid.WIDTH)):
 			var cell := Vector2i(x, y)
 			if Farm.occupant(state, cell).is_empty() and Pathing.reachable(state, cell):
 				open.append(cell)
-	if open.is_empty():
-		push_error("perf_check: no open ground round the towers for the swarm")
-		return state
-	for i in SWARM:
-		Entities.spawn(state, &"walker", open[i % open.size()])
-	return state
+	return open
 
 
 ## A day with as much going on as a day gets.
@@ -320,6 +350,19 @@ func _path(state: Dictionary) -> int:
 	for _i in REPEATS:
 		mine["grid_version"] = int(mine["grid_version"]) + 1
 		Pathing.refresh(mine)
+	return int(round(float(Time.get_ticks_usec() - started) / float(REPEATS)))
+
+
+## **Microseconds per rebuild with the lure in it** (task 0224): the fields
+## every night walks by and the lure swept from the decoys standing, asked the
+## way `Enemies.tick` asks for it.
+func _lure_path(state: Dictionary) -> int:
+	var mine: Dictionary = state.duplicate(true)
+	var started := Time.get_ticks_usec()
+	for _i in REPEATS:
+		mine["grid_version"] = int(mine["grid_version"]) + 1
+		Pathing.refresh(mine)
+		Pathing.field(mine, &"lure")
 	return int(round(float(Time.get_ticks_usec() - started) / float(REPEATS)))
 
 

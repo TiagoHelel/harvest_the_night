@@ -13935,6 +13935,10 @@ func _building_art(name: StringName) -> Image:
 		var path := PlaceholderArt.texture_path("%s%s.png" % [folder, name])
 		if not path.is_empty() and ResourceLoader.exists(path):
 			return Image.load_from_file(ProjectSettings.globalize_path(path))
+		# **Or drawn in code** until its pack lands (task 0224's decoy): the
+		# drawing the view puts there.
+		if path.is_empty() and DecoyArt.texture(name) != null:
+			return DecoyArt.drawing(name)
 	return null
 
 
@@ -14571,8 +14575,9 @@ func _task_0082_shots() -> void:
 	# Eighty-six since 0197: the withered field at night. Eighty-seven since
 	# 0198: spring's ripe field at night. Eighty-nine since 0199: summer's,
 	# and its peppers and corn regrowing. Ninety since 0204: the big stumps at
-	# night. Ninety-one since 0213: the machines worn.
-	expect(names.size() == 91,
+	# night. Ninety-one since 0213: the machines worn. Ninety-two since 0224:
+	# a crowd lured to a decoy.
+	expect(names.size() == 92,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
