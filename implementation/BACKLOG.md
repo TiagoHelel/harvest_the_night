@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **228 / 296 done**
+`###################.....`  **229 / 296 done**
 
-0 doing / 68 todo / 0 blocked across 18 phases.
+0 doing / 67 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-68 task(s) left, the ready ones first, then what they
+67 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -562,23 +562,6 @@ The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-t
   - done when: FHD (1920x1080) captures by day and by night of the dog following the farmer and the dog called at night in the real game, opened and looked at, in `implementation/shots/0245/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0259 - Every weapon has its night
-
-Ready to pick up.  Likely files: `src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md`.
-
-The plan's test for phases 4 and 5 turned into numbers: every weapon is the best buy somewhere, and every enemy needs a different answer. The report is what the night authors of 0270-0274 build the year from.
-
-- A headless tool, not a suite group: `src/tools/matchups.gd` run by `tools/matchups.py`, seeded and deterministic, printing its run time, with `--only=<enemy>` for quick reruns; it stays out of `verify.py` (the 120 s per-suite timeout). Keep a full run to about ten minutes by shortening the lane's fight, not by dropping rows of the grid
-- The arena: one fixed lane on the real farm map with a fixed base defence; for every `GameData.DEFENCES` entry (the plan's fourteen plus 0225's bait and 0231's sandbags - print the count), the same budget (0234's money plus materials, materials at `SELL_PRICE`) spent on it at the level its season allows, placed by a fixed rule; a fixed group of one enemy kind, and each boss with its season's escort
-- Per pair: house damage, kills, ticks to clear and structures lost; the score is house damage prevented per unit of cost against the base alone
-- The same grid under fog, rain and the Blood Moon, so the searchlight, fire and the mines get their nights
-- Prove: every defence is the top buy against at least one enemy, boss or event (a barrier or a support piece - decoy, garlic, searchlight - may be scored as the best addition to the base line rather than alone; say how); no defence is top against every enemy; every new enemy's top answer differs from the walker's. Where a claim fails, a lever may move here (at most a few, DATA recorded) or the failure goes to 0277 with its numbers
-- `implementation/MATCHUPS.md`: the table, each enemy's top three answers, each defence's best night, and a line per enemy for the night authors (e.g. 'rats: mines, flamethrower')
-
-  - done when: `python tools/matchups.py` exits 0 and names, for every `DEFENCES` entry, the enemy or event where it is the best buy, or marks it UNPROVEN with its numbers; every UNPROVEN line is in the journal as handed to 0277
-  - done when: Two runs write the same `implementation/MATCHUPS.md` byte for byte
-  - done when: The journal answers in one paragraph, with the numbers, whether each enemy asks for a different answer, and lists any lever moved
-
 ### 0260 - Art: the spitter
 
 Waits for Codex art A046.  Likely files: `assets/art_source/enemies/spitter/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd`.
@@ -989,7 +972,7 @@ The book cover, the four boss trophies and the achievement badges Codex drew rep
 
 ### 0272 - Summer's fourteen nights
 
-Waits on 0270, 0259, 0271.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
+Waits on 0270, 0271.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
 
 Summer opens the second side and brings the first enemies that change what a spring defence is worth: the spitter shoots towers from range, the rats come in numbers that mines and fire love, and on day 28 the Harvester charges straight through the walls.
 
@@ -1043,7 +1026,7 @@ Before 1.0 ships, look at the whole game in its real frame - every screen, seaso
 
 ### 0273 - Autumn's fourteen nights
 
-Waits on 0270, 0259, 0272.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, autumn's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
+Waits on 0270, 0272.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, autumn's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
 
 Autumn opens the north and brings the two enemies that ignore the shape of a maze: the crow flies over it to eat the crops, the digger goes under the fences and barricades. The Scarecrow King calls his flocks on day 42, and the Blood Moon can rise from now on.
 
@@ -1060,7 +1043,7 @@ Autumn opens the north and brings the two enemies that ignore the shape of a maz
 
 ### 0274 - Winter's fourteen nights
 
-Waits on 0270, 0259, 0273.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, winter's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
+Waits on 0270, 0273.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, winter's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
 
 Winter is the exam: every side open, the frost zombie that slows the towers it dies beside, the wraith that cannot be shot outside the light, and the Winter Lord on day 56. Nothing grows, so these nights are fought with what autumn put away.
 
@@ -1117,7 +1100,7 @@ Waits on 0275.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd,
 
 ### 0277 - Balancing the year
 
-Waits on 0271, 0272, 0273, 0274, 0276, 0259.  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
+Waits on 0271, 0272, 0273, 0274, 0276.  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
 
 The phase's own target: an average player reaches winter having lost two to four nights, and every boss falls. Measured with the year autoplayer, moved with levers, written down - the way 0068 did it for ten nights.
 
@@ -1582,7 +1565,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - waits for art A045
 - [ ] **0245** [Art: the dog](prompts/0245-art-dog.md) - waits for art A028
 
-## 14 - Enemies and bosses  (13/24)
+## 14 - Enemies and bosses  (14/24)
 
 - [x] **0246** [Bosses in general](prompts/0246-bosses-general.md)
 - [x] **0247** [The spitter](prompts/0247-spitter.md)
@@ -1597,7 +1580,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0256** [Fog and rain](prompts/0256-fog-and-rain.md)
 - [x] **0257** [The Blood Moon](prompts/0257-blood-moon.md)
 - [x] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md)
-- [ ] **0259** [Every weapon has its night](prompts/0259-matchups.md)
+- [x] **0259** [Every weapon has its night](prompts/0259-matchups.md)
 - [ ] **0260** [Art: the spitter](prompts/0260-art-spitter.md) - waits for art A046
 - [ ] **0261** [Art: the rat swarm](prompts/0261-art-rats.md) - waits for art A047
 - [ ] **0262** [Art: the crow](prompts/0262-art-crow.md) - waits for art A048
@@ -1613,12 +1596,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 - [ ] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md)
 - [ ] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md) - needs 0270
-- [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0259, 0271
-- [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0259, 0272
-- [ ] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md) - needs 0270, 0259, 0273
+- [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0270, 0271
+- [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0272
+- [ ] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md) - needs 0270, 0273
 - [ ] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md) - needs 0274
 - [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0275
-- [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0271, 0272, 0273, 0274, 0276, 0259
+- [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0271, 0272, 0273, 0274, 0276
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
 - [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0277, 0278, 0279

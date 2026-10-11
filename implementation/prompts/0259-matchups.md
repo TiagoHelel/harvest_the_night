@@ -1,7 +1,7 @@
 # 0259 - Every weapon has its night
 
 - **Phase:** 14 - Enemies and bosses
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0234, 0247, 0248, 0249, 0250, 0251, 0252, 0253, 0254, 0255, 0256, 0257
 - **Likely files:** src/tools/matchups.gd, tools/matchups.py, implementation/MATCHUPS.md
 

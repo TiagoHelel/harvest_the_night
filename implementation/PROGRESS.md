@@ -27806,3 +27806,148 @@ tools/{verify.py,perf_baseline.txt}, CLAUDE.md,
 implementation/prompts/{00-RUNNER-LOOP,0258-event-visuals}.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0258/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0259 - Every weapon has its night - done 2026-10-11
+
+What changed: the plan's test for phases 4 and 5 is a tool now, and its
+first answer is "not yet". `python tools/matchups.py` plays every defence on
+the same budget, on top of a fixed base line, against one group of every
+enemy and every boss with its escort, on an ordinary night and under fog,
+rain and the Blood Moon. That is 952 fights in about twelve minutes, seeded,
+and written to `implementation/MATCHUPS.md` byte for byte the same on every
+run. Four defences prove a night of their own; twelve are UNPROVEN and go to
+0277 with their numbers. No lever moved.
+
+### The tool
+
+**`src/tools/matchups.gd`**, run by **`tools/matchups.py`**:
+- headless; out of `verify.py`, whose scripts get 120 s;
+- it prints the defences' count (16: the plan's fourteen with 0225's bait
+  and 0231's sandbags), the budget, every fight (`ROW`), the claims
+  (`CLAIM`) and its run time;
+- `--only=<enemy>` plays one enemy's rows and writes nothing;
+- the Python side writes the report from between two markers, LF only.
+
+**The arena**, as the tool's header and the report's opening say:
+- **The lane** is the last 24 cells of the east spawn's road to the house,
+  worked out once on the bare farm. Every group walks in from its far end,
+  so the lane's fight is short and the grid is whole.
+- **The base line**: two level-one gun towers four cells out, and five
+  generators by day, so nothing is short of power. The house has a million
+  hit points, so it never falls and every bite is counted.
+- **The budget** is the dearest unit's price, 1910: the level-three
+  mortar, money plus materials at `SELL_PRICE` (0234's). Every level's node
+  (true sights, oiled works, stout timbers) is on spring's floor, so each
+  defence goes in at the top level its season allows, the levels' costs in
+  its price.
+- **Placement**:
+  - beside the lane, alternating sides: what shoots, lights or lures;
+  - on the road: what is walked over, and the mine;
+  - two cells round the house, the lane's side first: the barriers;
+  - what lasts a while (the barricade, the bait) goes down when the group
+    comes within 10 cells of the house;
+  - the bait comes from banked kits.
+- **The group**: 1440 hit points of one kind, sent one every 8 ticks, rats
+  in clusters of eight. A boss comes with 360 of each of its season's two
+  kinds: walkers and runners, spitters and rats, crows and diggers, frost
+  zombies and wraiths.
+- **The nights**: each event's first night in Year 2 for the seed - every
+  season's arsenal is open there - never a Full Moon, a boss night or a
+  calm one.
+
+**The score** is house damage prevented against the base line alone, per
+thousand of the budget, so a barrier or a support piece is scored as what it
+adds to the base line. **The top buy** is the highest score; on a tie, the
+quicker clear, then the more kills.
+
+### Decided
+
+- **Per thousand of the budget, not of what was spent.** Per thousand
+  spent, five barricades (25) that turned one bite away scored 400 and beat
+  every tower line. Every defence is handed the same sum, and one that
+  cannot take it all - the rule's room, the barricade's five a night, the
+  bait's three - is not made cheaper by that.
+- **The barriers ring the house.** In rows across an open lane they were
+  walked round and prevented nothing; walls round a farmstead are how they
+  are played.
+- **Ties go to the quicker clear.** A level-three line wipes any one-kind
+  group, and against the walker six defences tie at full prevention. The
+  quicker clear is the one with room for a bigger group. Ties on spending
+  were weighed: they put the one crossbow on top of nearly every column,
+  which says less.
+
+### Does each enemy ask for a different answer?
+
+Not yet. On the ordinary night the top buys are:
+- the catapult for 8 of the 14 enemies (breaker, digger, rat, spitter, tank,
+  the Giant, the Harvester, the Winter Lord);
+- the auto crossbow for 3 (crow, runner, the Scarecrow King);
+- the mortar for 2 (walker, frost zombie);
+- the mine for 1 (the wraith).
+
+That is four different answers over fourteen enemies, the same four under
+fog (6/4/3/1), rain (mortar 7, crossbow 5) and the Blood Moon (catapult 9).
+The splash pair wins wherever a group comes on the ground in a column.
+Three things break that:
+- what flies, which the splash cannot reach: the crossbow, against the crow
+  and the King's flock;
+- what runs, where the crossbow clears quicker;
+- what cannot be seen, where the mine on the road does the work and the
+  searchlight is second.
+
+Five of the six new enemies' top answers differ from the walker's mortar -
+the spitter, rat and digger catapult, the crow crossbow, the wraith mine.
+The frost zombie's is the mortar too. No defence tops every enemy on any
+night. **No lever moved**; DATA unchanged.
+
+### UNPROVEN, handed to 0277
+
+Each line gives the defence's best score anywhere and the top there:
+- **barricade**: 6, the Scarecrow King on the ordinary night; crossbow 119.
+- **beehive**: 345, walker, ordinary - full prevention, tied with five
+  others; the mortar clears quicker.
+- **decoy**: 94, tank, ordinary - full prevention, tied; the catapult
+  clears quicker.
+- **electric fence, fence, sandbag wall, wall**: 49, breaker, ordinary -
+  full prevention, the breakers held at the ring; the catapult clears
+  quicker.
+- **flame tower**: 350, walker, fog - tied; the mortar clears quicker.
+- **garlic braid**: 15, the Scarecrow King, ordinary; crossbow 119. On the
+  road it bends the walk round its area and costs the house more than it
+  saves - negative against seven of the fourteen on the ordinary night.
+- **gun tower**: 350, walker, fog - tied; the mortar clears quicker.
+- **searchlight**: 34, breaker, ordinary; catapult 49. Against the wraith
+  it is second, 18, behind the mine's 113.
+- **zombie bait**: 7, tank, rain; mortar 94. Three a night for ten seconds
+  barely holds a column.
+
+**What 0277 should weigh**:
+- the grid saturates: the budget buys level-three lines that stop any one
+  group, so a larger group, level one, or a spend tie-break would each tell
+  more;
+- a barrier wins nothing alone by this measure, though it does hold the
+  breakers;
+- the garlic needs a placement that does not push the walk round it.
+
+### Found
+
+- **A stray `cat >` waiting on stdin** hung the first probe of the
+  defences' prices. Written with the Write tool instead.
+- **Mines are traps, not walked over**, and went in rows until the role read
+  `Traps.is_trap`. The bait is kit-only and needs its kits banked.
+- **The bait rotted before anything arrived** when it went down in the
+  build step (ten seconds of life), which is why what lasts a while is now
+  put down as the group comes.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. **DATA unchanged:** 663742656. Nothing in
+  `src/core/` or `game_data.gd` was touched.
+
+**Runs:** two full runs, 726 s and 727 s for 952 fights each, wrote the same `MATCHUPS.md` (1178 lines) byte for byte; `python tools/matchups.py --only=walker` takes about 50 s.
+Verify: **PASS**, 61 of 61 in 1028 s, both hashes unchanged; the new script parses with the other 200.
+- **Suites:** `headless_check` 18115 asserts, `headless_v1` 2712, `input_check` 1269 cases, `input_v1` 735 (115 s), `input_v2` 3 (14 s).
+
+Files: src/tools/matchups.gd (new, with its .uid), tools/matchups.py (new),
+implementation/MATCHUPS.md (new), implementation/prompts/0259-matchups.md,
+implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
