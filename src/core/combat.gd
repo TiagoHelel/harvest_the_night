@@ -168,7 +168,13 @@ static func _kill(state: Dictionary, id: int) -> void:
 	state["killed"] = int(state.get("killed", 0)) + 1
 	var by_kind: Dictionary = state["killed_by_kind"]
 	var kind: StringName = one["kind"]
-	by_kind[kind] = int(by_kind.get(kind, 0)) + 1
+	# **A King's flock is not the night's** (task 0254): a summoned body is a
+	# kill, here and in the run's tallies, but not in the night's tally by
+	# kind - which pays the bounty and drops the bones. A King left casting
+	# would be a farm of crows.
+	var summoned := bool(one.get("summoned", false))
+	if not summoned:
+		by_kind[kind] = int(by_kind.get(kind, 0)) + 1
 
 	# **The run's own tally, beside the night's.** `killed` is cleared every
 	# `begin_night()` - a night that inherited last night's count would be a
@@ -185,7 +191,8 @@ static func _kill(state: Dictionary, id: int) -> void:
 	# **Its bones stay where it fell** (task 0221): on its cell, or the
 	# nearest one the farmer can stand on. Only a kill leaves them - one that
 	# bites the house or walks off at dawn is removed elsewhere, whole.
-	Loot.drop_bones(state, kind, Entities.cell_of(state, id))
+	if not summoned:
+		Loot.drop_bones(state, kind, Entities.cell_of(state, id))
 	# **Its death is the attack** (task 0251): a kind that `chills` bursts
 	# into ice where it fell, and every tower round it reloads slowly for a
 	# while. Only a kill: one that bites the house or walks off at dawn goes

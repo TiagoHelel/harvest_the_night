@@ -14657,8 +14657,9 @@ func _task_0082_shots() -> void:
 	# under a fence. A hundred and nine since 0251: towers chilled by a frost
 	# zombie's burst. A hundred and ten since 0252: a wraith in the beam and
 	# one out of it. A hundred and eleven since 0253: the Harvester's wind-up
-	# and the line after its charge.
-	expect(names.size() == 111,
+	# and the line after its charge. A hundred and twelve since 0254: the
+	# Scarecrow King mid-cast.
+	expect(names.size() == 112,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

@@ -14,7 +14,13 @@ The Scarecrow King is autumn's boss (Autumn 14). It walks the flow field like a 
 
 ## Deliverables
 
-The table is provisional: game task 0254 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0254: **the Giant's 80x64 standing on (40,60)**. The rows stand as written, with the frames and seconds of the table. **How the game plays them:**
+- **The walk:** 42 ticks a tile, a little under three quarters of a tile a second, on the four `walk` frames at 0.14 s each, facing the way it moves. It bites the house and gnaws a wall as a walker does. Until 0267 it does that on its walk frames, and `attack` waits for it.
+- **The cast:** every ten seconds of walking it stops for `telegraph_ticks`, two seconds. `cast_0..3` play at 0.1 s each, and frame 3 holds for the rest of the two seconds. Meanwhile a ring drawn in code closes on each of the six cells the flock will rise on, and the boss bar flashes. The tick the cast ends, six crows - A048's, separate bodies - rise on those cells: two tiles out round the cell it cast on (west, east, north, south, then the corners), clipped to the map. They fly for the field. No more than eighteen rise in a night; after that it only walks.
+- **Death:** until 0267 the body left behind is `scarecrow_king_death_4`, squashed.
+- **Night colours:** autumn's night is a brown dusk. The straw-dark stand-in reads on it as yellow-green over the ground, and the crows' blue-black reads against both. Keep the King's straw and coat darker than A003's porch guardian and A037's decoy, so the crowned one never reads as either.
+
+Until 0267 every frame stands in as the Giant gone to dark straw (`PlaceholderArt`): its cast is the Giant's three-frame wind-up with the last frame held for the fourth, and its forecast mark is the Giant's head, tinted the same, all through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

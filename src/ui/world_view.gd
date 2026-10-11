@@ -1020,6 +1020,16 @@ func _draw_enemy_warning() -> void:
 		var aimed := Enemies.winding_at(_state, id)
 		if aimed.x < 0:
 			continue
+		# **A cast's cells** (task 0254): a ring closing on every cell the
+		# flock will rise on, from the rules' own list - where the crows will
+		# be, the moment the cast ends.
+		var flock := Enemies.flock_cells(_state, int(id))
+		if not flock.is_empty():
+			var beat := fmod(float(Time.get_ticks_msec()) / 400.0, 1.0)
+			for cell in flock:
+				_enemy_warning.draw_arc((Vector2(cell as Vector2i) + Vector2(0.5, 0.5)) * size,
+					size * (0.6 - 0.25 * beat), 0.0, TAU, 16, Color(1.0, 0.45, 0.30, 0.9), 2.0, true)
+			continue
 		# The same observed wind-up drives both body and ring. A post-hit
 		# cooldown or stale target while walking must not promise another slam.
 		if not EnemyMotion.is_windup(_pose_of(Entities.get_one(_state, int(id)))):
@@ -3298,6 +3308,14 @@ func _pose_of(one: Dictionary) -> StringName:
 ## 0253).
 static func posed_off_the_rules(state: Dictionary, one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
+	# **A summoner casting** (task 0254's Scarecrow King): its cast by the
+	# cast's progress, a frame for each of its frame's seconds and the last
+	# held.
+	if one.has("casting") and PlaceholderArt.has_frame(ENEMY_DIR + "%s_cast_0.png" % kind):
+		var cast_each := maxi(roundi(float(PlaceholderArt.frame(ENEMY_DIR + "%s_cast_0.png" % kind)
+			.get("seconds", 0.1)) * float(GameData.TICK_HZ)), 1)
+		var cast := int((GameData.ENEMIES[kind] as Dictionary).get("telegraph_ticks", 0)) - int(one.get("chew_wait", 0))
+		return StringName("%s_cast_%d" % [kind, clampi(cast / cast_each, 0, 3)])
 	# **A charger** (task 0253's Harvester): running its line, its charge on
 	# the clock; winding up - for a charge or a blow - rearing, a frame for
 	# each of its frame's seconds and the last held.

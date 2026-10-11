@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 87
+const GROUPS := 88
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -166,6 +166,7 @@ func _run() -> void:
 	_task_0251_frost()
 	_task_0252_wraith()
 	_task_0253_harvester()
+	_task_0254_scarecrow_king()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -10755,6 +10756,188 @@ func _task_0253_harvester() -> void:
 		and Describe.enemy(&"harvester").contains(I18n.t(&"DESC_CHARGES")) and Sfx.voice_of(&"harvester") == &"sfx/roar_giant",
 		"Summer 14 is the Harvester's night and Spring 14 still the Giant's; it has its name, its intro, a tooltip line that it charges, and the Giant's roar until its own")
 	_completed += 1
+
+
+## 0254 - the Scarecrow King. Each cast raises `flock_size` crows on the
+## listed cells after exactly `telegraph_ticks`, two runs agree cell for cell,
+## and no night raises more than `summon_cap`; a field with no cover in the
+## air loses crops to the flock and one with it few; the flock is no wave's
+## and the night's: no bounty, no bones, and the night waits for it.
+func _task_0254_scarecrow_king() -> void:
+	var row: Dictionary = GameData.ENEMIES[&"scarecrow_king"]
+	var telegraph := int(row["telegraph_ticks"])
+	var flock := int(row["flock_size"])
+	var cap := int(row["summon_cap"])
+	var big := GameData.ENEMIES.duplicate(true)
+	(big[&"scarecrow_king"] as Dictionary)["flock_size"] = GameData.SUMMON_OFFSETS.size() + 1
+	var small := GameData.ENEMIES.duplicate(true)
+	(small[&"scarecrow_king"] as Dictionary)["summon_cap"] = flock - 1
+	var walking := GameData.ENEMIES.duplicate(true)
+	(walking[&"scarecrow_king"] as Dictionary)["summons"] = &"walker"
+	expect(Combat.is_boss(&"scarecrow_king") and StringName(row["summons"]) == &"crow" and flock <= GameData.SUMMON_OFFSETS.size()
+		and cap >= flock and _says(GameData.check_enemies(big), "SUMMON_OFFSETS has")
+		and _says(GameData.check_enemies(small), "less than one flock") and _says(GameData.check_enemies(walking), "which does not fly")
+		and GameData.check_enemies(GameData.ENEMIES).is_empty(),
+		"the King is a boss that summons crows; check_enemies refuses a flock bigger than the offsets, a night's cap under a flock, and a summoned kind that walks",
+		"%d of %d, cap %d" % [flock, GameData.SUMMON_OFFSETS.size(), cap])
+
+	# **The casts**: each `telegraph_ticks` long, each flock on the listed
+	# cells round where it cast, until the night's cap - twice, cell for cell.
+	var first := _king_casts(25400)
+	var second := _king_casts(25400)
+	var exact := true
+	for i in (first["casts"] as Array).size():
+		var cast: Dictionary = (first["casts"] as Array)[i]
+		var want: Array = []
+		for offset in GameData.SUMMON_OFFSETS:
+			var at: Vector2i = (cast["from"] as Vector2i) + (offset as Vector2i)
+			if want.size() < mini(flock, cap - flock * i) and Grid.in_bounds(at):
+				want.append(at)
+		exact = exact and int(cast["ticks"]) == telegraph and cast["cells"] == want \
+			and cast["marked"] == want and String(cast["pose"]).begins_with("scarecrow_king_cast_")
+	expect(exact and (first["casts"] as Array).size() == ceili(float(cap) / float(flock))
+		and int(first["raised"]) == cap and bool(first["summoned"]) and bool(first["waves_untouched"])
+		and first["casts"] == second["casts"],
+		"each cast stands telegraph_ticks, cast pose and marks on the cells, then raises its flock on the listed cells; no night raises more than summon_cap; two runs agree cell for cell, and the waves' own counts never move",
+		"%s raised %d" % [str(first["casts"]).left(400), int(first["raised"])])
+
+	# **Cover in the air**: the same field and the same King, once with no
+	# tower that hits what flies and once with gun towers round it.
+	var bare := _king_over_a_field(25401, false)
+	var covered := _king_over_a_field(25401, true)
+	print("  0254: the flock took %d crops off a field with no cover in the air, %d off one with gun towers round it" % [bare, covered])
+	expect(bare > 0 and covered < bare,
+		"a King's flock costs a field with no cover in the air crops, and one with gun towers round it fewer",
+		"%d bare, %d covered" % [bare, covered])
+
+	# **The flock is the King's, not the night's**: a summoned crow killed is a
+	# kill, but pays no bounty and leaves no bones - a wave's crow does both;
+	# and with the waves done the night waits for the flock.
+	var night := _powers_night(25402)
+	var spot := _open_square(night, 3, &"wall")
+	var wild := Entities.spawn(night, &"crow", spot)
+	var raised := Entities.spawn(night, &"crow", spot + Vector2i(2, 0))
+	(Entities.get_one(night, raised))["summoned"] = true
+	var tally: Dictionary = (night["killed_by_kind"] as Dictionary).duplicate()
+	var kills := int(night["killed"])
+	var run := int(night["killed_all_run"])
+	var piles := (night["loot"] as Dictionary).size()
+	Combat.hit(night, raised, 999)
+	var after_raised := [int((night["killed_by_kind"] as Dictionary).get(&"crow", 0)), int(night["killed"]),
+		int(night["killed_all_run"]), (night["loot"] as Dictionary).size()]
+	Combat.hit(night, wild, 999)
+	var flown := Entities.spawn(night, &"crow", spot + Vector2i(0, 2))
+	(Entities.get_one(night, flown))["summoned"] = true
+	(night["wave"] as Dictionary)["done"] = true
+	Sim.advance(night, 1)
+	var waited := int(night["phase"]) == Phases.NIGHT
+	Combat.hit(night, flown, 999)
+	Sim.advance(night, 1)
+	expect(after_raised == [int(tally.get(&"crow", 0)), kills + 1, run + 1, piles]
+		and int((night["killed_by_kind"] as Dictionary).get(&"crow", 0)) == int(tally.get(&"crow", 0)) + 1
+		and waited and int(night["phase"]) == Phases.RESULT,
+		"a summoned crow killed is a kill but pays no bounty and leaves no bones, where a wave's crow counts; with the waves done the night waits for the flock and ends when it is dead",
+		"%s; waited %s" % [str(after_raised), waited])
+
+	# **Autumn 14 is its night**; its words and voice.
+	var autumn := 3 * GameData.SEASON_DAYS
+	expect(GameData.SEASON_BOSSES[2] == &"scarecrow_king" and Calendar.boss_of(autumn) == &"scarecrow_king"
+		and StringName(Waves.night_of(autumn).get("boss", &"")) == &"scarecrow_king"
+		and Calendar.boss_of(2 * GameData.SEASON_DAYS) == &"harvester" and Calendar.boss_of(GameData.SEASON_DAYS) == &"giant"
+		and Names.of(&"scarecrow_king") == I18n.t(&"ENEMY_SCARECROW_KING")
+		and Names.boss_intro(&"scarecrow_king") == I18n.t(&"BOSS_INTRO_SCARECROW_KING")
+		and Describe.enemy(&"scarecrow_king").contains(I18n.t(&"DESC_SUMMONS"))
+		and Sfx.voice_of(&"scarecrow_king") == &"sfx/roar_giant",
+		"Autumn 14 is the Scarecrow King's night; it has its name, its intro, a tooltip line that it calls down crows, and the Giant's roar until its own")
+	_completed += 1
+
+
+## **A King's casts until its night's cap** (task 0254): on open ground in a
+## parked night, ringed in hardwood so it stays put, its clock run out each
+## time it walks again. For each cast, where it stood, the ticks from its
+## start to its flock, the cells the flock rose on and the cells the view was
+## told while it cast, and its pose then; how many rose in all, whether every
+## one is `summoned`, and whether the waves' own counts stayed put - what is
+## left of the wave, which wave, whether they are done (the first try
+## compared the whole record, and a parked night's wait runs down every tick).
+func _king_casts(seed_value: int) -> Dictionary:
+	var state := _powers_night(seed_value)
+	var spot := _open_square(state, 4, &"wall")
+	_ring_in_hardwood(state, spot)
+	var king := Entities.spawn(state, &"scarecrow_king", spot)
+	# The waves' own counts - what is left of this one, which one, whether
+	# they are done; their wait runs down whatever happens.
+	var counts := func() -> Array:
+		var wave: Dictionary = state["wave"]
+		return [int(wave["left"]), int(wave["index"]), bool(wave["done"])]
+	var before_counts: Array = counts.call()
+	var casts: Array = []
+	var summoned := true
+	for _try in 8:
+		(Entities.get_one(state, king))["summon_in"] = 1
+		var before := Entities.ids(state)
+		Sim.advance(state, 1)
+		if not Enemies.is_casting(state, king):
+			break
+		var from := Grid.cell(int(Entities.get_one(state, king)["casting"]))
+		var marked := Enemies.flock_cells(state, king)
+		var pose := WorldView.posed_off_the_rules(state, Entities.get_one(state, king))
+		var ticks := 1
+		while Enemies.is_casting(state, king) and ticks < 1000:
+			Sim.advance(state, 1)
+			ticks += 1
+		var cells: Array = []
+		for id in Entities.ids(state):
+			if not before.has(id) and int(id) != king:
+				cells.append(Entities.cell_of(state, int(id)))
+				summoned = summoned and Enemies.is_summoned(state, int(id))
+		casts.append({"from": from, "ticks": ticks - 1, "cells": cells, "marked": marked, "pose": pose})
+	return {"casts": casts, "raised": int(Entities.get_one(state, king).get("raised", 0)),
+		"summoned": summoned, "waves_untouched": counts.call() == before_counts}
+
+
+## **A King and its flock over a planted field** (task 0254): the starter
+## field sown with carrots, the King ringed in hardwood a dozen tiles east of
+## it, its casts on their own clock; `covered` puts gun towers - which hit
+## what flies - on the open ground round the field. How many crops the flock
+## had eaten after a minute and a half.
+func _king_over_a_field(seed_value: int, covered: bool) -> int:
+	var state := _powers_night(seed_value)
+	var field := Farming.field_cells(state)
+	for cell in field:
+		_sow(state, cell as Vector2i, &"carrot")
+	var lo := field[0] as Vector2i
+	var hi := field[0] as Vector2i
+	for cell in field:
+		lo = Vector2i(mini(lo.x, (cell as Vector2i).x), mini(lo.y, (cell as Vector2i).y))
+		hi = Vector2i(maxi(hi.x, (cell as Vector2i).x), maxi(hi.y, (cell as Vector2i).y))
+	if covered:
+		for at in [Vector2i(lo.x - 2, lo.y - 2), Vector2i(hi.x + 2, lo.y - 2), Vector2i(lo.x - 2, hi.y + 2),
+				Vector2i(hi.x + 2, hi.y + 2), Vector2i((lo.x + hi.x) / 2, lo.y - 2), Vector2i((lo.x + hi.x) / 2, hi.y + 2)]:
+			if Farm.buildable(state, at as Vector2i):
+				Farm.place(state, at as Vector2i, {"id": &"gun_tower", "hp": int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["hp"])})
+	var lair := Vector2i(hi.x + 12, (lo.y + hi.y) / 2)
+	for dx in 8:
+		if not Farm.buildable(state, lair):
+			lair.x += 1
+	_ring_in_hardwood(state, lair)
+	Pathing.refresh(state)
+	Entities.spawn(state, &"scarecrow_king", lair)
+	Sim.advance(state, 90 * GameData.SECONDS)
+	var eaten := 0
+	for cell in field:
+		if Farming.crop_on(state, cell as Vector2i) == &"":
+			eaten += 1
+	return eaten
+
+
+## Eight hardwood walls round `cell` (task 0254), on what of them will go down.
+func _ring_in_hardwood(state: Dictionary, cell: Vector2i) -> void:
+	var hp := Building.levelled_stat({"id": &"wall", "level": 2}, "hp")
+	for dy in [-1, 0, 1]:
+		for dx in [-1, 0, 1]:
+			if dx != 0 or dy != 0:
+				Farm.place(state, cell + Vector2i(int(dx), int(dy)), {"id": &"wall", "hp": hp, "level": 2})
 
 
 ## A crop on `cell` (task 0249): tilled, sown with `crop`, nothing grown yet.

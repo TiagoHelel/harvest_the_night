@@ -111,6 +111,8 @@ const ENEMY_SOUNDS := {
 	&"wraith": &"sfx/groan_walker",
 	# The Giant's roar, until 0284 gives the Harvester its engine.
 	&"harvester": &"sfx/roar_giant",
+	# The Giant's too, until 0284 gives the Scarecrow King its own.
+	&"scarecrow_king": &"sfx/roar_giant",
 }
 
 ## **What a boss with no voice of its own roars with** (task 0246): the

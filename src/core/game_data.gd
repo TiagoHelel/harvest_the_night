@@ -90,9 +90,18 @@ const FULL_MOON_REWARD_PERCENT := 200   # LEVER: percent of the night's pay, 150
 
 ## **Each season's boss** (task 0153), in `SEASONS` order: the one that comes
 ## on the season's last night, and back every night after until it falls.
-## Summer's is the Harvester since task 0253; the Giant holds autumn and
-## winter until 0254-0255 bring the Scarecrow King and the Winter Lord.
-const SEASON_BOSSES: Array = [&"giant", &"harvester", &"giant", &"giant"]
+## Summer's is the Harvester since task 0253 and autumn's the Scarecrow King
+## since 0254; the Giant holds winter until 0255 brings the Winter Lord.
+const SEASON_BOSSES: Array = [&"giant", &"harvester", &"scarecrow_king", &"giant"]
+
+## **Where a summoner's flock rises** (task 0254), round the cell it casts
+## on, taken in this order and clipped to the map - never a draw from the
+## RNG, so a cast lands the same on every machine. A ring two tiles out: west
+## and east, north and south, then the corners.
+const SUMMON_OFFSETS: Array = [
+	Vector2i(-2, 0), Vector2i(2, 0), Vector2i(0, -2), Vector2i(0, 2),
+	Vector2i(-2, -2), Vector2i(2, -2), Vector2i(-2, 2), Vector2i(2, 2),
+]
 
 ## **The calm night's gift** (task 0154): what is waiting on the porch the
 ## morning after the first night of a season, when the horde regroups after
@@ -2675,6 +2684,36 @@ const ENEMIES: Dictionary = {
 		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
 		# Armoured as a machine, more than anything that is not a boss.
 		"armour": 6,                    # LEVER: damage off each hit, 5-10
+		"lurable": false,
+	},
+	&"scarecrow_king": {
+		# **Autumn's boss** (task 0254; the plan's Rei Espantalho): it calls the
+		# sky down. It walks the field and bites as a walker does, and every
+		# `summon_every_ticks` of walking it stops and casts - standing
+		# `telegraph_ticks`, its one tell, before a blow and at the house too -
+		# and a flock of `flock_size` crows rises round it on
+		# `SUMMON_OFFSETS`, flying for the field (`Enemies`). No more than
+		# `summon_cap` in a night, so a long fight cannot flood the farm. It
+		# asks what the crow asked - cover in the air and care for the field
+		# - under pressure.
+		#
+		# **Its flock is not the night's**: a summoned crow pays no bounty and
+		# leaves no bones (`Combat._kill`) - a King left casting would be a
+		# farm of them.
+		"is_boss": true,
+		"hp": 1200,                     # LEVER: hit points, 800-1600
+		# Slower than every one that walks (0246): a lurch on stilts.
+		"ticks_per_tile": 42,           # LEVER: ticks, 39-60
+		"damage": 40,                   # LEVER: to the house, 25-60
+		"telegraph_ticks": 2 * SECONDS, # LEVER: ticks, 1-3 seconds worth (the cast)
+		"summons": &"crow",
+		"summon_every_ticks": 10 * SECONDS,   # LEVER: ticks of walking, 6-15 seconds worth
+		"flock_size": 6,                # LEVER: crows a cast, 3-8 (SUMMON_OFFSETS holds 8)
+		"summon_cap": 18,               # LEVER: crows a night, at least a flock
+		"reward": 140,                  # LEVER: money, 80-220
+		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
+		# More than anything that is not a boss.
+		"armour": 5,                    # LEVER: damage off each hit, 5-10
 		"lurable": false,
 	},
 }
@@ -5453,6 +5492,7 @@ static func check_enemies(enemies: Dictionary) -> Array:
 		errors.append_array(_check_spit(id, one))
 		errors.append_array(_check_chill(id, one))
 		errors.append_array(_check_charge(id, one))
+		errors.append_array(_check_summon(id, one, enemies))
 		# **A cluster is at least one** (task 0248): a release of nothing
 		# would count bodies it never sent.
 		if one.has("cluster") and int(one["cluster"]) < 1:
@@ -5466,6 +5506,29 @@ static func check_enemies(enemies: Dictionary) -> Array:
 			errors.append(("enemy '%s' ignores structures without being "
 				+ "faster than the ones that do not - it would be a slow "
 				+ "zombie taking the long way round") % id)
+	return errors
+
+
+## **A summoner's numbers** (task 0254), for an enemy that `summons`: a kind
+## in the table that flies, a cast (`telegraph_ticks`) and a wait between
+## casts, a flock of at least one and no more than `SUMMON_OFFSETS` has cells
+## for, and a night's cap no smaller than one flock.
+static func _check_summon(id: StringName, one: Dictionary, enemies: Dictionary) -> Array:
+	var errors: Array = []
+	if not one.has("summons"):
+		return errors
+	var kind := StringName(one["summons"])
+	if not enemies.has(kind) or not bool((enemies[kind] as Dictionary).get("flies", false)):
+		errors.append("enemy '%s' summons '%s', which does not fly" % [id, kind])
+	for field in ["summon_every_ticks", "flock_size", "summon_cap", "telegraph_ticks"]:
+		if int(one.get(field, 0)) <= 0:
+			errors.append("enemy '%s' summons with no %s" % [id, field])
+	if int(one.get("flock_size", 0)) > SUMMON_OFFSETS.size():
+		errors.append("enemy '%s' summons a flock of %d and SUMMON_OFFSETS has %d cells"
+			% [id, int(one.get("flock_size", 0)), SUMMON_OFFSETS.size()])
+	if int(one.get("summon_cap", 0)) < int(one.get("flock_size", 0)):
+		errors.append("enemy '%s' may summon %d a night, less than one flock of %d"
+			% [id, int(one.get("summon_cap", 0)), int(one.get("flock_size", 0))])
 	return errors
 
 
@@ -5734,6 +5797,8 @@ static func digest() -> int:
 		"speeds": [SPEEDS, SKIP_MIN_HOUSE_PERCENT],
 		"night_hud": [HOUSE_DANGER_PERCENT, WAVE_WARNING_TICKS],
 		"enemies": ENEMIES,
+		# Where a summoner's flock rises (task 0254).
+		"summon_offsets": SUMMON_OFFSETS,
 		"nights": NIGHTS,
 		"wave_gap": [WAVE_GAP_TICKS, SPAWN_INTERVAL_TICKS],
 		# **The generated nights are balance too.** They are not in `NIGHTS`,

@@ -27005,3 +27005,149 @@ assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/backlog/packs/A052-harvester.md,
 implementation/prompts/0253-harvester.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0253/, docs/devlog/{index,index.pt_BR}.md
+
+## 0254 - The Scarecrow King - done 2026-10-11
+
+What changed: autumn's boss calls the sky down. It walks the field and bites
+as a walker does. Every ten seconds of walking it stops and casts for two
+seconds, and a flock of six crows rises round it and flies for the field -
+eighteen at most in a night. It asks what the crow asked, cover in the air
+and care for the field, under pressure. It comes on Autumn 14 in the Giant's
+place.
+
+### The rules (`src/core/`)
+
+**`ENEMIES.scarecrow_king`**, with levers:
+- `is_boss`; hp 1200, armour 5, 42 ticks a tile, 40 to the house, $140,
+  9 bones, not lured;
+- `telegraph_ticks` 60, the cast;
+- `summons` the crow, `summon_every_ticks` 300 (ten seconds of walking),
+  `flock_size` 6, `summon_cap` 18.
+
+It passes 0246's every-boss-against-every-non-boss checks.
+
+**`SUMMON_OFFSETS`** (in `GameData`, and in `digest()`): where a flock rises
+round the cell the King casts on. A ring two tiles out - west, east, north,
+south, then the corners - taken in that order and clipped to the map. It is
+never a draw from the RNG, so a cast lands the same on every machine.
+
+**`check_enemies`** (`_check_summon`) refuses:
+- a summoned kind that does not fly, or is not in the table;
+- a cast, a wait, a flock or a cap of nothing;
+- a flock bigger than the offsets have cells for;
+- a night's cap smaller than one flock.
+
+**`SEASON_BOSSES[2]` is the Scarecrow King**: Autumn 14 and every autumn's
+last night after. Winter stays the Giant's until 0255.
+
+**The cast, in `Enemies`** (inside `Enemies.tick`; only a row that `summons`
+pays for it):
+- `summon_in` counts the ticks it walks and bites. When it runs out, the
+  King stands and casts for `telegraph_ticks`, its one tell (as before a
+  blow and at the house). The cast goes through `winding_at` and
+  `chew_wait`, so it is `is_winding` and 0246's bar flashes;
+- `casting` holds the cell it cast on. The tick the cast ends, `flock_size`
+  crows rise on `SUMMON_OFFSETS` round that cell, through `Entities.spawn`,
+  each marked `summoned`, and fly for the field as 0249's crow does;
+- **the cap:** `raised` counts tonight's crows. A cast raises no more than
+  `summon_cap` has left, and once it is reached the King only walks;
+- `Enemies.flock_cells(state, id)` gives the cells a cast will raise its
+  flock on, while it casts. `is_casting` and `is_summoned` are public too.
+
+### Decided: the flock is the King's, not the night's
+
+- **No bounty and no bones.** A summoned crow killed is a kill - in the
+  night's `killed` and the run's tallies - but not in the night's tally by
+  kind (`killed_by_kind`), which is what pays the bounty and drops the
+  bones (`Combat._kill`). The bounty is worked out from that tally alone.
+  A King left casting would otherwise be a farm: eighteen crows a night,
+  paid for by stalling the boss.
+- **No wave's.** `Waves` keeps its own counts - what is left of a wave,
+  which wave, whether they are done - and the forecast reads the night's
+  record; neither moves for a flock. The night still ends at dawn, or when
+  the waves are done and everything is dead. The flock is part of
+  "everything": the night waits for it, and the LEFT on the HUD counts it
+  while it flies.
+- **The cast is `telegraph_ticks`**, as the Harvester's wind-up is: one tell
+  per boss. Its blows and its bite at the house wind up the same two
+  seconds.
+
+### The view (`src/ui/`)
+
+- **A053's stand-ins** (`PlaceholderArt`), until 0267: the Giant gone to dark
+  straw (`SCARECROW_KING_TINT`) on 80x64 standing on (40,60):
+  - the master;
+  - the walk, the Giant's;
+  - the cast, the Giant's three-frame wind-up with the last held for the
+    fourth. `PlaceholderArt.texture_path` now lets a stand-in with fewer
+    frames hold its last;
+  - the attack, the slam;
+  - the death, the Giant's fall;
+  - the forecast mark, the Giant's head.
+- **`posed_off_the_rules`**: casting, its cast by the cast's progress, the
+  last frame held.
+- **The rings** (`_draw_enemy_warning`): while it casts, a ring closes on
+  every cell the flock will rise on, from `flock_cells`.
+- **The words:** `Names` has `ENEMY_SCARECROW_KING` and its intro
+  (`BOSS_INTRO_SCARECROW_KING`), `Describe` `DESC_SUMMONS` ("calls down
+  crows"), and `Sfx` borrows the Giant's roar until 0284.
+- **A053's table is final**, with how the game plays it.
+
+### Found
+
+- **The test first compared the whole wave record** before and after the
+  casts. A parked night's wait runs down every tick, so it never matched.
+  It compares the waves' counts now: what is left of the wave, which wave,
+  whether they are done.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. The determinism night is Spring 1.
+- **DATA 4051846968 -> 1042213124:** the King's row, `SUMMON_OFFSETS` and
+  `SEASON_BOSSES`.
+
+Verify: **PASS**, 60 of 60 in 1007 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 18074 asserts, `headless_v1` 2677, `input_check` 1268 cases, `input_v1` 734 (112 s).
+- **perf:** a night tick 1807 us, the swarm's 6120, a path rebuild 12509, 17415 with the decoys and 12759 with the garlic. The baseline did not move: the worst case is Spring 14's Giant, and a row that does not summon pays one lookup.
+
+**Tests:**
+- **`_task_0254_scarecrow_king` (headless_v1):**
+  - the King is a boss that summons crows. `check_enemies` refuses a flock
+    bigger than the offsets, a night's cap under a flock, and a summoned
+    kind that walks;
+  - **the casts**, ringed in hardwood so the King stays put:
+    - each stands exactly `telegraph_ticks`, in its cast pose, with its
+      cells marked;
+    - then six crows rise on the listed cells round where it cast, every
+      one `summoned`;
+    - three casts make the night's eighteen, and a fourth never comes;
+    - two runs agree cell for cell, and the waves' own counts never move;
+  - **cover in the air**, the same King a dozen tiles from the sown starter
+    field for a minute and a half: **38 crops lost with no cover, 13 with
+    six gun towers round the field** (printed);
+  - a summoned crow killed is a kill but pays no bounty, where a wave's crow
+    counts. With the waves done, the night waits for the flock and ends when
+    it is dead;
+  - Autumn 14 is its night (summer the Harvester's, spring the Giant's).
+    Its name, intro, `DESC_SUMMONS` and voice.
+- **Old groups touched:** headless_check counts 112 scenes.
+
+**Looked at** (`python tools/shot.py 0254 scarecrow_king --fhd`):
+- **`scarecrow_king`, Autumn 14's night:** the starter field sown (60 plots),
+  and the King on open ground a dozen tiles east of it: the Giant gone to
+  dark straw, its arm raised, held in the last frame of its cast. The boss
+  bar reads SCARECROW KING 1200/1200 in the flashing orange. Six reddish
+  rings close on the cells round it - two tiles out: west, east, north,
+  south and the two upper corners - where its next flock will rise. Its
+  first flock, six crows a second and a half out, flies west for the field
+  with their shadows under them (`casting true, 6 of its flock in the
+  air`). The cursor's label is down at the bottom right, clear of all of
+  it.
+
+Files: src/core/{combat,enemies,game_data}.gd,
+src/ui/{placeholder_art,world_view,names,describe,sfx}.gd,
+src/tools/{headless_check,headless_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/backlog/packs/A053-scarecrow-king.md,
+implementation/prompts/0254-scarecrow-king.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0254/, docs/devlog/{index,index.pt_BR}.md

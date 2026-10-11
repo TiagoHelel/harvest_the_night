@@ -276,6 +276,11 @@ const WRAITH_TINT := Color(1.6, 1.7, 2.0)
 const HARVESTER := {"canvas": Vector2i(80, 64), "pivot": Vector2i(40, 60), "draw_scale": 1.0}
 const HARVESTER_TINT := Color(1.5, 0.82, 0.55)
 
+## A053's Scarecrow King (task 0254): the Giant's 80x64 standing on (40,60),
+## drawn at 1.0 - the Giant it stands in as gone to dark straw.
+const SCARECROW_KING := {"canvas": Vector2i(80, 64), "pivot": Vector2i(40, 60), "draw_scale": 1.0}
+const SCARECROW_KING_TINT := Color(1.2, 1.0, 0.45)
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -451,6 +456,16 @@ const ART := {
 	&"harvester_crush": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_slam", "stand_in_frames": 3, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
 	&"harvester_death": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 5, "seconds": 0.12, "loop": false, "stand_in": &"enemies/giant_death", "stand_in_frames": 5, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
 	&"head_harvester": {"pack": "A052", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/head_giant", "tint": HARVESTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
+	# A053's Scarecrow King (task 0254): the Giant gone to dark straw, until
+	# 0267 - its walk the Giant's, its cast the Giant's wind-up (four frames
+	# on three: the last held), its attack the slam, its fall the Giant's;
+	# and its forecast mark the Giant's head.
+	&"scarecrow_king": {"pack": "A053", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant", "tint": SCARECROW_KING_TINT, "geometry": SCARECROW_KING, "final": SCARECROW_KING, "bare": true},
+	&"scarecrow_king_walk": {"pack": "A053", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.14, "loop": true, "stand_in": &"enemies/giant_walk", "stand_in_frames": 4, "tint": SCARECROW_KING_TINT, "geometry": SCARECROW_KING, "final": SCARECROW_KING},
+	&"scarecrow_king_cast": {"pack": "A053", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_windup", "stand_in_frames": 3, "tint": SCARECROW_KING_TINT, "geometry": SCARECROW_KING, "final": SCARECROW_KING},
+	&"scarecrow_king_attack": {"pack": "A053", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_slam", "stand_in_frames": 3, "tint": SCARECROW_KING_TINT, "geometry": SCARECROW_KING, "final": SCARECROW_KING},
+	&"scarecrow_king_death": {"pack": "A053", "dir": "res://sprites/enemies/", "frames": 5, "seconds": 0.12, "loop": false, "stand_in": &"enemies/giant_death", "stand_in_frames": 5, "tint": SCARECROW_KING_TINT, "geometry": SCARECROW_KING, "final": SCARECROW_KING},
+	&"head_scarecrow_king": {"pack": "A053", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/head_giant", "tint": SCARECROW_KING_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
 	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
 	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn
@@ -735,8 +750,11 @@ static func texture_path(path: String) -> String:
 		# Drawn by code: there is no file to load (`is_drawn`).
 		if stand_in.is_empty():
 			return ""
-		if int(ART[at[0]].get("stand_in_frames", 1)) > 1:
-			stand_in += "_%d" % int(at[1])
+		# **A stand-in with fewer frames holds its last** (task 0254): A053's
+		# four-frame cast on the Giant's three-frame wind-up.
+		var frames := int(ART[at[0]].get("stand_in_frames", 1))
+		if frames > 1:
+			stand_in += "_%d" % mini(int(at[1]), frames - 1)
 		return "res://sprites/%s.png" % stand_in
 	return stand_in_path(at[0], int(at[1]))
 

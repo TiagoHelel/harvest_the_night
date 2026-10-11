@@ -97,6 +97,18 @@ extends RefCounted
 ## before, its clock started again. The walls it brings down rebuild the
 ## fields once, at the next `Pathing.refresh`, however many fell.
 ##
+## ## Summoning
+##
+## A **summoner** (task 0254's Scarecrow King) `summons` a kind that flies.
+## Every `summon_every_ticks` it spends walking and biting (`summon_in`) it
+## stops and casts for `telegraph_ticks` - its one tell, as before a blow -
+## through `winding_at` and `chew_wait`. The tick the cast ends, `flock_size`
+## of them rise on `SUMMON_OFFSETS` round the cell it cast on, clipped to the
+## map and taken in order, never a draw from the RNG, and fly for the field
+## as any crow does. Each is `summoned`: the King's flock, not the night's
+## (`Combat._kill`), and not a wave's - `Waves` keeps its own counts. No more
+## than `summon_cap` rise in a night (`raised`); after that it only walks.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -366,6 +378,10 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	# **A charger winds up and charges** (task 0253): while either lasts it
 	# is all it does, and its clock to the next runs while it rolls and gnaws.
 	if int(data.get("charge_tiles", 0)) > 0 and _charging(state, id, data, one):
+		return
+	# **A summoner casts** (task 0254): while it does, it stands; its clock to
+	# the next runs while it walks and bites.
+	if data.has("summons") and _summoning(state, id, data, one):
 		return
 
 	# **Standing on it counts.** The flow field says distance zero at the house
@@ -902,6 +918,91 @@ static func charge_line(state: Dictionary, id: int) -> Array:
 				and int(Farm.occupant(state, at).get("hp", 0)) > int(data["crush_damage"])):
 			break
 	return out
+
+
+# ----------------------------------------------------------------- summoning
+
+## **A summoner's turn** (task 0254): true while it casts - all it does this
+## tick - and false while it walks and bites, its clock to the next cast
+## running down. The flock rises on the cast's last tick: `telegraph_ticks`
+## of casting, not one more. Once `summon_cap` have risen tonight it casts no
+## more.
+static func _summoning(state: Dictionary, id: int, data: Dictionary, one: Dictionary) -> bool:
+	if one.has("casting"):
+		var wait := int(one.get("chew_wait", 0)) - 1
+		one["chew_wait"] = maxi(wait, 0)
+		if wait > 0:
+			return true
+		var raised := _raise_the_flock(state, data, one)
+		for key in ["casting", "winding_at", "chew_wait"]:
+			one.erase(key)
+		one["raised"] = int(one.get("raised", 0)) + raised
+		one["summon_in"] = int(data["summon_every_ticks"])
+		return true
+	if int(one.get("raised", 0)) >= int(data["summon_cap"]):
+		return false
+	var due := int(one.get("summon_in", int(data["summon_every_ticks"])))
+	if due > 1:
+		one["summon_in"] = due - 1
+		return false
+	var here := Vector2i(int(one["pos"][0]) / Player.SUBTILE, int(one["pos"][1]) / Player.SUBTILE)
+	# On the house it bites instead; it casts when it is off it.
+	if Farm.occupant(state, here).get("id", &"") == &"house":
+		one["summon_in"] = 1
+		return false
+	one.erase("summon_in")
+	one["casting"] = Grid.index(here)
+	one["winding_at"] = Grid.index(here)
+	one["chew_wait"] = maxi(int(data.get("telegraph_ticks", 0)), 1)
+	return true
+
+
+## **The flock rises** (task 0254): one of the kind it `summons` on each of
+## `flock_cells`, `summoned`. How many rose.
+static func _raise_the_flock(state: Dictionary, data: Dictionary, one: Dictionary) -> int:
+	var kind := StringName(data["summons"])
+	var cells := _flock_cells(state, data, one)
+	for cell in cells:
+		var raised := Entities.spawn(state, kind, cell as Vector2i)
+		(Entities.get_one(state, raised))["summoned"] = true
+	return cells.size()
+
+
+## The cells a cast raises its flock on: `SUMMON_OFFSETS` round the cell it
+## casts on, in order, the ones off the map left out, `flock_size` of them at
+## most and no more than tonight's `summon_cap` has left.
+static func _flock_cells(state: Dictionary, data: Dictionary, one: Dictionary) -> Array:
+	var at := Grid.cell(int(one["casting"])) if one.has("casting") \
+		else Vector2i(int(one["pos"][0]) / Player.SUBTILE, int(one["pos"][1]) / Player.SUBTILE)
+	var most := mini(int(data["flock_size"]), int(data["summon_cap"]) - int(one.get("raised", 0)))
+	var out: Array = []
+	for offset in GameData.SUMMON_OFFSETS:
+		if out.size() >= most:
+			break
+		var cell: Vector2i = at + (offset as Vector2i)
+		if Grid.in_bounds(cell):
+			out.append(cell)
+	return out
+
+
+## **The cells a summoner's cast will raise its flock on** (task 0254), in
+## order - while it casts; empty otherwise, and for anything that does not
+## summon. For the view's marks and the tests.
+static func flock_cells(state: Dictionary, id: int) -> Array:
+	var one := Entities.get_one(state, id)
+	if one.is_empty() or not one.has("casting"):
+		return []
+	return _flock_cells(state, GameData.ENEMIES[one["kind"]], one)
+
+
+## Whether this one is casting (task 0254).
+static func is_casting(state: Dictionary, id: int) -> bool:
+	return Entities.get_one(state, id).has("casting")
+
+
+## Whether this one was summoned (task 0254): a King's flock, not the night's.
+static func is_summoned(state: Dictionary, id: int) -> bool:
+	return bool(Entities.get_one(state, id).get("summoned", false))
 
 
 ## Whether this one is running a charge's line (task 0253).
