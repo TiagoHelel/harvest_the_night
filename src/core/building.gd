@@ -220,10 +220,18 @@ static func why_not_upgrade(state: Dictionary, cell: Vector2i) -> Array:
 	var on := Farm.occupant(state, cell)
 	if on.is_empty():
 		return [&"WHY_NOTHING_THERE"]
-	if _levels_of(StringName(on["id"])).is_empty():
+	var steps := _levels_of(StringName(on["id"]))
+	if steps.is_empty():
 		return [&"WHY_NO_UPGRADE", StringName(on["id"])]
-	if level_at(state, cell) >= GameData.TOP_TOWER_LEVEL:
+	var level := level_at(state, cell)
+	if level >= GameData.TOP_TOWER_LEVEL:
 		return [&"WHY_TOP_LEVEL"]
+	# **A family stops at its last row** (task 0226). The hive has one step,
+	# and a check against `TOP_TOWER_LEVEL` alone let it go up again into a
+	# level with no row - free, since `upgrade_cost` has nothing to say past
+	# the table - and the same for any family with fewer rows than three.
+	if level > steps.size():
+		return [&"WHY_LAST_LEVEL"]
 	# **The phase's rule, and nothing more** (task 0132): a defence goes up a
 	# level in the build step or mid-wave - the plan (4.3) lets upgrades go
 	# on while they are coming - and never by day.

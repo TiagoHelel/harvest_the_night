@@ -121,9 +121,11 @@ func _build(chosen: int) -> void:
 		var icon := TextureRect.new()
 		icon.name = "Icon"
 		icon.texture = _icon_of(id)
-		# A stand-in's own tint (task 0225's bait, the fish rotted green);
-		# white for real art.
-		icon.modulate = PlaceholderArt.art_tint(StringName("icon_%s" % id))
+		# A stand-in's own tint (task 0225's bait, the fish rotted green; a
+		# stand-in tower's, task 0226's hive, when it has no icon); white for
+		# real art.
+		var tinted := StringName("icon_%s" % id)
+		icon.modulate = PlaceholderArt.art_tint(tinted if not PlaceholderArt.art(tinted).is_empty() else id)
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -211,6 +213,10 @@ func _icon_of(id: StringName) -> Texture2D:
 		file = "res://sprites/ui/%s.png" % name
 	elif PlaceholderArt.is_drawn(file):
 		return DecoyArt.texture(id)
+	elif not PlaceholderArt.art(id).is_empty():
+		# **A stand-in tower** (task 0226's hive, until A038): its own
+		# stand-in, scaled into the box.
+		file = PlaceholderArt.texture_path(PlaceholderArt.art_path(id, 0))
 	if not _textures.has(file):
 		_textures[file] = load(file) if ResourceLoader.exists(file) else null
 	return _textures[file]

@@ -503,6 +503,7 @@ static func withdraw(state: Dictionary) -> int:
 		Entities.remove(state, int(id))
 	(state["projectiles"] as Array).clear()
 	(state["burning"] as Dictionary).clear()
+	(state["stung"] as Dictionary).clear()
 	Ability.put_out(state)
 	return gone
 

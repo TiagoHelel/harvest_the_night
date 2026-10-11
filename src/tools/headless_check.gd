@@ -7086,8 +7086,9 @@ func _task_0042_declared() -> void:
 	expect(not GameData.check_defences(typo).is_empty(),
 		"and a splash over no tiles at all")
 
-	# **Three damage types, named in one place.**
-	expect(GameData.DAMAGE_TYPES.size() == 3, "impact, fire and explosive",
+	# **Four damage types, named in one place**: the hive's sting since task
+	# 0226.
+	expect(GameData.DAMAGE_TYPES.size() == 4, "impact, fire, explosive and sting",
 		str(GameData.DAMAGE_TYPES))
 
 	# **The port moved nothing.** The gun tower declares what it always did:
@@ -11917,8 +11918,9 @@ func _task_0064_tower_levels() -> void:
 		str(GameData.TOP_TOWER_LEVEL))
 	for id in GameData.sorted_names(GameData.TOWER_LEVELS.keys()):
 		var steps: Array = GameData.TOWER_LEVELS[id]
-		expect(steps.size() == GameData.TOP_TOWER_LEVEL - 1,
-			"a %s has two upgrades" % id, str(steps.size()))
+		# One or two since task 0226: the hive has one.
+		expect(steps.size() >= 1 and steps.size() <= GameData.TOP_TOWER_LEVEL - 1,
+			"a %s has one or two upgrades" % id, str(steps.size()))
 		expect(GameData.DEFENCES.has(id),
 			"and %s is a defence that exists" % id)
 		var last := 0
@@ -11994,8 +11996,7 @@ func _task_0064_tower_levels() -> void:
 		"a Torre Automatica shoots more than one thing at a time - which is "
 		+ "a behaviour, not a bigger number", str(top["targets"]))
 	for id in GameData.sorted_names(GameData.TOWER_LEVELS.keys()):
-		var last_step: Dictionary = (GameData.TOWER_LEVELS[id]
-			as Array)[GameData.TOP_TOWER_LEVEL - 2]
+		var last_step: Dictionary = (GameData.TOWER_LEVELS[id] as Array).back()
 		var changed := false
 		for key in ["targets", "min_range", "burn_ticks", "pierce"]:
 			if (last_step["gives"] as Dictionary).has(key):
@@ -14585,7 +14586,8 @@ func _task_0082_shots() -> void:
 	# and its peppers and corn regrowing. Ninety since 0204: the big stumps at
 	# night. Ninety-one since 0213: the machines worn. Ninety-two since 0224:
 	# a crowd lured to a decoy. Ninety-three since 0225: one turned to a bait.
-	expect(names.size() == 93,
+	# Ninety-four since 0226: a hive at work.
+	expect(names.size() == 94,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

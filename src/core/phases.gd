@@ -197,6 +197,9 @@ static func begin_night(state: Dictionary) -> bool:
 	# it now, with the waves (task 0132).
 	Building.start_lifetimes(state)
 	Ability.recharge(state)
+	# **The hives are fed for the night** (task 0226): their sunflowers
+	# counted, and the store's eaten where too few grow.
+	Towers.feed_hives(state)
 
 	# The night to be fought is today's in the calendar (task 0151).
 	state["night"] = night_ahead(state)

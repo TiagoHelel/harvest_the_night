@@ -108,6 +108,8 @@ static func tick(state: Dictionary) -> void:
 	# nothing else is happening, and the fire going out is the last thing that
 	# happens on some nights.
 	_tick_burning(state)
+	# The stings after the fire (task 0226), in the same sorted order.
+	_tick_stung(state)
 	if Entities.count(state) == 0:
 		return
 	for id in Entities.ids(state):
@@ -164,6 +166,8 @@ static func initial() -> Dictionary:
 		"bosses_down": 0,
 		# {entity id: {"left": ticks, "damage": per second, "next": ticks}}
 		"burning": {},
+		# The same, for a hive's stings (task 0226): `sting()`.
+		"stung": {},
 	}
 
 
@@ -232,3 +236,68 @@ static func _tick_burning(state: Dictionary) -> void:
 			out.append(id)
 	for id in out:
 		burning.erase(id)
+
+
+# ------------------------------------------------------------------ stinging
+
+## Sting something, or top the sting up if it already has one (task 0226).
+##
+## **A table beside `burning`, not a second kind of fire.** A thing can burn
+## and be stung at once - a flamethrower and a hive on the same crowd - and
+## each is topped up by its own kind; the rain of task 0256 puts `burning` out
+## and never touches a sting. **Refreshed, never stacked**, as a fire is: two
+## hives on one zombie are one sting, for the longer time at the stronger
+## damage.
+##
+## **The first lands at once** (`next` 1, and `tick()` runs after the
+## towers'): a sting is felt when it is given. A top-up keeps the running
+## count, so stinging again never puts a hit off.
+static func sting(state: Dictionary, id: int, damage: int, ticks: int) -> void:
+	if damage <= 0 or ticks <= 0 or not Entities.alive(state, id):
+		return
+	var stung: Dictionary = state["stung"]
+	if stung.has(id):
+		var already: Dictionary = stung[id]
+		already["left"] = maxi(int(already["left"]), ticks)
+		already["damage"] = maxi(int(already["damage"]), damage)
+		return
+	stung[id] = {
+		"left": ticks,
+		"damage": damage,
+		"next": 1,
+	}
+
+
+static func is_stung(state: Dictionary, id: int) -> bool:
+	return (state["stung"] as Dictionary).has(id)
+
+
+## How long this one has left stung, in ticks. Zero when it is not.
+static func sting_left(state: Dictionary, id: int) -> int:
+	var stung: Dictionary = state["stung"]
+	return 0 if not stung.has(id) else int((stung[id] as Dictionary)["left"])
+
+
+## One tick of everything stung: `_tick_burning`'s rule - sorted ids, a hit
+## every `STING_EVERY_TICKS` - with the sting's own damage type.
+static func _tick_stung(state: Dictionary) -> void:
+	var stung: Dictionary = state["stung"]
+	if stung.is_empty():
+		return
+	var ids: Array = stung.keys()
+	ids.sort()
+	var out: Array = []
+	for id in ids:
+		if not Entities.alive(state, int(id)):
+			out.append(id)
+			continue
+		var bees: Dictionary = stung[id]
+		bees["left"] = int(bees["left"]) - 1
+		bees["next"] = int(bees["next"]) - 1
+		if int(bees["next"]) <= 0:
+			bees["next"] = GameData.STING_EVERY_TICKS
+			hit(state, int(id), int(bees["damage"]), GameData.DAMAGE_STING)
+		if int(bees["left"]) <= 0 or not Entities.alive(state, int(id)):
+			out.append(id)
+	for id in out:
+		stung.erase(id)

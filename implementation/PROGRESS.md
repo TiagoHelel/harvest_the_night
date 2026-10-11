@@ -24037,3 +24037,200 @@ implementation/backlog/packs/A037-decoy.md,
 implementation/prompts/{0225-zombie-bait,0228-garlic-braid}.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0225/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0226 - The beehive - done 2026-10-11
+
+What changed: a summer tower of bees that sting what comes near and keep
+stinging, as strong as the sunflowers planted round it (the plan's section
+5) - a defence that asks for a field beside it.
+- **The sting:** damage over time, refreshed and never stacked, as a fire
+  is - in a table of its own.
+- **The field:** the sunflowers growing round a hive, counted once at
+  `begin_night`, make its sting stronger; where too few grow - autumn,
+  winter - it eats some from the store instead. One with neither still
+  stings, weakly.
+- **One upgrade**, to two stings at once, and no family goes past its last
+  row any more.
+
+### The row (`src/core/game_data.gd`)
+
+**`beehive` in `DEFENCES`:**
+- **Cost:** 15 wood and 4 sunflowers (LEVER). **`season` summer.**
+- **A tower:** `reload_ticks` a second, so `Towers` collects it;
+  `targeting` nearest; `range` 2 (LEVER 1-3); 60 hit points (LEVER 40-100).
+- **The sting:** `shape` `sting` (new, `SHAPE_STING`), `damage_type`
+  `sting` (new, `DAMAGE_STING`), `damage` 1 a second stung (LEVER 1-3),
+  `sting_ticks` 4 s (LEVER 2-8). Nothing flies: it lands at once, like the
+  cone.
+- **The field's levers:** `flower_reach` 3 tiles (LEVER 2-4),
+  `flowers_per_sting` 3 (LEVER 2-5), `most_flowers` 9 (LEVER 3-15),
+  `stock_flowers` 6 a hive a night (LEVER 1-12).
+- **`energy_draw` 0.**
+
+**`check_defences`:** refuses a sting with no damage or no `sting_ticks`,
+and any of the four sunflower levers at zero.
+
+**`TOWER_LEVELS[&"beehive"]`:** one step - true sights, 20 wood and 8
+sunflowers - giving 90 hit points and `targets` 2: two stings at once, its
+"changes how it works". Bees are not a machine, so there is no third.
+
+### Decided: a sibling table, not a generalised `burning`
+
+The prompt's either/or. **`stung`**, a RUN_DATA table beside `burning`, in
+`Combat`:
+- `Combat.sting()` tops up as `set_alight` does: the longer time, the
+  stronger damage, never a second sting. `_tick_stung` runs after
+  `_tick_burning` in `Combat.tick`, in sorted ids, a hit every
+  `STING_EVERY_TICKS` (a second).
+- **Why:** a thing can burn and be stung at once, each topped up by its own
+  kind, and 0256's rain puts out `burning` without a type to look at. A save
+  from before simply lacks the key, and `State.reconcile` fills it from a
+  new game: no version bump.
+- **The first hurts at once** (`next` 1, and `Combat.tick` runs after the
+  towers'), where a fire's first burn comes a second later: the cone hits
+  as it lights, and a sting has no hit of its own.
+- `Enemies.withdraw` clears it with `burning`.
+
+### The sunflower curve (`Towers.feed_hives`, `Towers.sting_of`)
+
+**A sting hurts for `damage + min(flowers, most_flowers) / flowers_per_sting`
+a second.** At the shipped levers, from 1:
+- 0-2 sunflowers: 1 a second (a hive with neither stings, weakly);
+- 3-5: 2; 6-8: 3; 9 or more: 4.
+
+**Counted once a night, at `Phases.begin_night`,** and written on the
+occupant as `flowers` - bookkeeping, no `Farm.touch()`:
+- **Growing:** every plot sown with a sunflower (`Farming.crop_on`), ripe or
+  not, within `flower_reach` tiles - a square, as a tower's reach is. A
+  sunflower in reach of two hives counts for both.
+- **The store, where fewer grow than it can use:** up to `stock_flowers`,
+  **in whole stings' worth only**, so none is eaten for nothing - four
+  growing and one in the store eats none. Hives in cell order, so two short
+  of the store share it the same way on every machine.
+- **A hive put down mid-wave** has not been fed: it stings for its damage
+  alone until the next night.
+
+Measured (`_task_0226_beehive`): a hive among nine sunflowers took 16 off a
+walker held in its reach for four seconds; the same hive with none, 4.
+
+### The bees (`src/core/towers.gd`)
+
+- **The bees spread:** a hive stings one not yet stung while there is one
+  in reach (`_acquire`'s `unstung`), and tops a sting up only when there is
+  not - a sting is never stacked, so a second on the same one is a second
+  wasted. Level two's second sting goes to a second one the same way.
+- **Bees run on no generator:** a tower that draws no power is not slowed
+  when the farm is short of it. Every tower before the hive draws some, so
+  this moves nothing else.
+
+### The cap on upgrades (`src/core/building.gd`)
+
+**`why_not_upgrade` stops a family at its last row**, for every family: a
+hive at level two is refused with `WHY_LAST_LEVEL`, "already at its last
+level". Before, only `TOP_TOWER_LEVEL` was asked, and a one-step family
+went up again for nothing (`upgrade_cost` is empty past the table) into a
+level with no row. `WHY_TOP_LEVEL`, "already automatic", stays the
+three-level towers' word.
+
+### The view (`src/ui/`)
+
+- **The placeholder road until 0237** (A038 is `todo`): the hive is the
+  mortar - the low tower on the family's 32x48 canvas - tinted honey, at
+  each level and state: `beehive`, `_hurt`, `_fire`, `_wreck` and the `_2`
+  four, registered in `PlaceholderArt`. `WorldView` picks a stand-in
+  tower's state as `_worn` does a real one's (fire first, then hurt), and
+  remembers its level for the wreck.
+- **The swarm:** `HiveArt` (`src/ui/hive_art.gd`) draws A038's three 8x8
+  frames in code, five bees of two pixels, gold and ink, a tenth of a
+  second each; `WorldView` hangs one round the head of every stung enemy.
+- **Out of the night's ramp, found by the shot:** as a child of the enemy's
+  sprite the swarm was relit to grey specks (#575469 from gold) - the
+  relight drains everything but the semantic fire forms drawn above it. The
+  swarm is to a sting what a burning one's flames are to a fire, so it is on
+  the night cues' layer now, beside the Zzz and the cursor.
+- **The damage numbers:** `Juice` knows a sting by `state["stung"]` and
+  writes it in honey (`gold`), louder than a bullet and quieter than fire.
+- **The hotbar** shows the hive's stand-in, tinted, scaled into its 16x16
+  box (A038 has no icon). **The sound** is `sfx/flame` until 0283's buzz.
+- **Not here:** the tarp, which `Transition.TARPS` says 0234 lists for
+  0224-0231's defences; and the sting's own cue - a sting still flashes and
+  lights like the mortar it stands in as, at the fallback muzzle, until 0237
+  puts A038's bees-leaving cue on its `muzzle_xy`.
+- **The words:** `DEF_BEEHIVE` "beehive" / "colmeia", `DMG_STING` "sting" /
+  "ferrão"; for the tooltip `DESC_STINGS`, `DESC_SUNFLOWERS` and
+  `DESC_HIVE_STOCK`; for the refusal `WHY_LAST_LEVEL`.
+- **A038's Deliverables table** is final: the geometry this task settled
+  and how the game plays each row.
+
+### Hashes
+
+- **SIM 3837945514 -> 642923490:** a new game holds the `stung` table,
+  empty, and the determinism scenario hashes every key. It is the one thing
+  that changes on a farm with no hive: the scenario meets none, nothing is
+  fed and nobody is stung, the three-level towers are refused at three as
+  before, and every tower before the hive draws power.
+- **DATA 2947162752 -> 2287996408:** the hive's row and its level.
+
+Verify: **PASS**, 60 of 60 in 959 s, the run that recorded both.
+- **Suites:** `headless_check` 17714 asserts, `headless_v1` 2462,
+  `input_check` 1247 cases, `input_v1` 720 (107 s).
+- **perf:** a night tick 1474 us, the swarm's 7876, a path rebuild 10682
+  and 15136 with the decoys.
+- **The suites before it found:** 0132's rich farm had no sunflowers for
+  the hive; the 0224 test's `_open_square` asked whether a decoy - straw -
+  could go down, and now takes the thing to place; 0042 counted three
+  damage types, and 0088 wanted a colour for the sting's number.
+
+**Tests:**
+- **`_task_0226_beehive` (headless_v1):**
+  - the row's levers; a sting of no damage or no time and each sunflower
+    lever at zero refused, the real tables passing;
+  - the sting refreshed rather than stacked: stung three times at once, the
+    last weaker and shorter, one sting - the first hit at once, 8 off over
+    four seconds, no more for the extra stings; topped up two seconds in by
+    a weaker one, four seconds again from there at the stronger damage, 12
+    off; and a withdrawn night leaves nobody stung;
+  - fed at the waves: a hive among nine growing sunflowers outdoes one
+    without (16 against 4), and the one without still stings;
+  - the store at `begin_night`: 6 of 20 taken; none of one with four
+    growing; two hives short of a store of eight, the second taking none of
+    what the first left;
+  - the bees go to the one not yet stung;
+  - a two-level family refuses a third upgrade, by name and for nothing;
+  - the words in both languages, the placeholder road at every level and
+    state, the swarm's three frames, the hotbar's icon, the shot and A038's
+    table.
+- **Old groups touched:**
+  - `headless_v1`: 0132's rich farm holds sunflowers; 0193 counts summer's
+    three; 0224 reads the decoy after spring's eight (the hive is summer's
+    first); `_open_square` takes the thing to be placed.
+  - `headless_check`: 0042 counts four damage types; 0064 allows one or two
+    upgrades and reads every family's last; 94 scenarios.
+- **No input case:** placing and upgrading a hive is the hotbar's and the
+  cursor's road, which their cases already walk for every defence.
+
+**Looked at** (`python tools/shot.py 0226 beehive --fhd`), Summer 2's night
+past the defended farm's fence:
+- **The hives:** the first beside a bed of nine grown sunflowers, fed 9; the
+  second two tiles south, upgraded - six of the bed in its reach and three
+  more from the store, fed 9; a third south-west of the bed knocked down to
+  its wreck, "beehive destroyed" in the log. Honey mortars at both levels
+  and the wreck.
+- **The crowd:** four of six stung at the shutter, each wearing its swarm -
+  gold specks round the head - and honey "4"s over them.
+- **The hotbar's second page:** the hive picked, its tinted mortar over
+  "4s 15w", "place beehive" in the night bar.
+- **What the takes found:** the swarm grey under the relight (moved out of
+  it); a spring date for a summer defence (now Summer 2); the camera on the
+  hives' cell, its cursor over the second (moved east); the store eaten to
+  one by the three hives, the slot red (more sunflowers given).
+
+Files: src/core/{game_data,combat,towers,building,phases,state,enemies}.gd,
+src/ui/{hive_art,placeholder_art,world_view,hotbar,juice,names,describe,sfx}.gd,
+src/ui/hive_art.gd.uid, assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,shot}.gd,
+tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A038-beehive.md,
+implementation/prompts/0226-beehive.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0226/,
+docs/devlog/{index,index.pt_BR}.md

@@ -24,8 +24,9 @@ extends Node2D
 ## in `state["projectiles"]` and **carries its own `type` and `target`**; when
 ## one disappears it has landed, so the damage its target takes that frame is
 ## that type. A flame tower has no projectile, but its victims are in
-## `state["burning"]`. A mine has neither, and is spotted by the same signal
-## that sounds it: a `one_shot` defence that is no longer there.
+## `state["burning"]`, and a hive's in `state["stung"]` (task 0226). A mine
+## has neither, and is spotted by the same signal that sounds it: a
+## `one_shot` defence that is no longer there.
 ##
 ## Nothing is guessed and nothing was added to the state to make it work.
 ##
@@ -78,6 +79,8 @@ const TYPE_COLOURS := {
 	&"impact": &"bone",
 	&"fire": &"flame",
 	&"explosive": &"gold_light",
+	# A hive's sting (task 0226): honey.
+	&"sting": &"gold",
 }
 
 var _state: Dictionary = {}
@@ -280,6 +283,10 @@ func _type_of(id: int, landed: Dictionary, blasts: Array,
 	for where in blasts:
 		if (where as Vector2).distance_to(at) < GameData.TILE_SIZE * 3:
 			return GameData.DAMAGE_EXPLOSIVE
+	# A sting (task 0226): its victims are in `state["stung"]`, as a fire's
+	# are in `burning` - quieter than either of those, louder than a bullet.
+	if Combat.is_stung(_state, id):
+		return GameData.DAMAGE_STING
 	return GameData.DAMAGE_IMPACT
 
 
@@ -317,7 +324,7 @@ func gather(id: int, amount: int, at: Vector2, type: StringName) -> void:
 
 
 func _louder(a: StringName, b: StringName) -> bool:
-	var order := [GameData.DAMAGE_IMPACT, GameData.DAMAGE_FIRE,
+	var order := [GameData.DAMAGE_IMPACT, GameData.DAMAGE_STING, GameData.DAMAGE_FIRE,
 		GameData.DAMAGE_EXPLOSIVE]
 	return order.find(a) > order.find(b)
 

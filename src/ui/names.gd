@@ -141,6 +141,7 @@ const KEYS: Dictionary = {
 	&"barricade": &"DEF_BARRICADE",
 	&"decoy": &"DEF_DECOY",
 	&"zombie_bait": &"DEF_ZOMBIE_BAIT",
+	&"beehive": &"DEF_BEEHIVE",
 
 	# ---- what a day builds
 	&"workshop": &"BLD_WORKSHOP",
@@ -242,6 +243,7 @@ const KEYS: Dictionary = {
 	&"impact": &"DMG_IMPACT",
 	&"fire": &"DMG_FIRE",
 	&"explosive": &"DMG_EXPLOSIVE",
+	&"sting": &"DMG_STING",
 
 	# ---- where a recipe is made
 	&"workbench": &"STATION_WORKBENCH",

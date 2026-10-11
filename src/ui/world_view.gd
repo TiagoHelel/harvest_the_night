@@ -177,6 +177,9 @@ var _ghost_id: StringName = &""
 ## thing that is always moving, so a signature check would cost more than the
 ## redraw it saved.
 var _actors: Node2D
+## The bees on the stung, out of the night's ramp (task 0226), and their pool.
+var _swarms: Node2D
+var _swarm_sprites: Array[Sprite2D] = []
 var _actor_sprites: Array[Node] = []
 var _shots: Node2D
 ## Only presentation remembers launch points and the level of destroyed towers.
@@ -337,6 +340,11 @@ func _ready() -> void:
 	_route_dots.name = "RoutePreview"
 	_route_dots.draw.connect(_draw_route)
 	cue_layer.add_child(_route_dots)
+	# **The bees on the stung** (task 0226), over the route and under the
+	# Zzz and the cursor (`_place_swarms`).
+	_swarms = Node2D.new()
+	_swarms.name = "Swarms"
+	cue_layer.add_child(_swarms)
 	_zzz = Sprite2D.new()
 	_zzz.name = "Zzz"
 	_zzz.centered = false
@@ -1448,6 +1456,10 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 		art = _worn_stand_in(id, Farm.occupant(_state, anchor))
 	if Crafting.is_station(id):
 		art = _stand_in_station_art(id, Farm.occupant(_state, anchor), anchor)
+	# **A stand-in tower** (task 0226's hive, until A038): its level's
+	# stand-in, lit as it stings and hurt past the wear threshold.
+	if stand_in_tower(id):
+		art = _stand_in_tower_art(Farm.occupant(_state, anchor))
 	if art != id:
 		file = PlaceholderArt.texture_path(PlaceholderArt.art_path(art, 0))
 	var sprite := Sprite2D.new()
@@ -1489,6 +1501,29 @@ func _stand_in_station_art(id: StringName, on: Dictionary, anchor: Vector2i) -> 
 		return worn
 	var active := StringName("%s_active" % id)
 	return active if not PlaceholderArt.art(active).is_empty() or _exists(active) else id
+
+
+## Whether `id` is a tower drawn through 0120's road (task 0226's hive): a
+## defence that shoots, with a stand-in where its pack's art will go.
+static func stand_in_tower(id: StringName) -> bool:
+	return not authored_tower(id) and (GameData.DEFENCES.get(id, {}) as Dictionary).has("reload_ticks") \
+		and not PlaceholderArt.art(id).is_empty()
+
+
+## A stand-in tower's state (task 0226): `<id>` or `<id>_<level>`, then
+## `_fire` while it has just fired or else `_hurt` past the wear threshold -
+## `_worn`'s order for real towers - each only where the registry has it.
+func _stand_in_tower_art(on: Dictionary) -> StringName:
+	var full := tower_name(on)
+	if PlaceholderArt.art(full).is_empty():
+		full = StringName(on["id"])
+	var lit := StringName("%s_fire" % full)
+	if just_fired(on) and not PlaceholderArt.art(lit).is_empty():
+		return lit
+	var hurt := StringName("%s_hurt" % full)
+	if _is_hurt(on) and not PlaceholderArt.art(hurt).is_empty():
+		return hurt
+	return full
 
 
 ## A building as the night left it (task 0186; the keg and the jar since
@@ -1708,6 +1743,7 @@ func _refresh_actors() -> void:
 		spare.queue_free()
 
 	var scale_factor := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
+	var heads: Array = []
 	for i in ids.size():
 		var one := Entities.get_one(_state, int(ids[i]))
 		var sprite: Sprite2D = _actor_sprites[i]
@@ -1724,8 +1760,34 @@ func _refresh_actors() -> void:
 		# a zombie stand on the tile the rules say it is on.
 		sprite.position = ArtPlacement.contact(one["pos"])
 		var metadata: Dictionary = PlaceholderArt.frame(sprite.texture.resource_path)
-		sprite.offset = -Vector2(metadata.get("pivot",
-			Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
+		var pivot: Vector2i = metadata.get("pivot",
+			Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height()))
+		sprite.offset = -Vector2(pivot)
+		if Combat.is_stung(_state, int(ids[i])):
+			heads.append(sprite.position - Vector2(0.0, roundf(float(pivot.y) * SWARM_HEIGHT)))
+	_place_swarms(heads)
+
+
+## **The bees on the stung** (task 0226): A038's swarm round the head of each
+## one a hive has stung, for as long as the sting lasts - on the night cues'
+## layer, out of the ramp, as a burning one's flames are on the particles':
+## a sign of what is hurting it, which the night must not grey out. Pooled.
+func _place_swarms(heads: Array) -> void:
+	if _swarms == null:
+		return
+	_swarms.transform = _actors.get_global_transform()
+	var bees: Texture2D = HiveArt.swarm(HiveArt.frame_at(_ambient_time)) if not heads.is_empty() else null
+	while _swarm_sprites.size() < heads.size():
+		var sprite := Sprite2D.new()
+		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		_swarms.add_child(sprite)
+		_swarm_sprites.append(sprite)
+	for i in _swarm_sprites.size():
+		var sprite := _swarm_sprites[i]
+		sprite.visible = i < heads.size()
+		if sprite.visible:
+			sprite.texture = bees
+			sprite.position = heads[i]
 
 
 ## Bounded source-owned one-shots. Removed core entities stay removed.
@@ -1987,7 +2049,7 @@ func _remember_towers(state: Dictionary) -> void:
 		_tower_history.erase(idx)
 	for idx in occupants:
 		var on: Dictionary = occupants[idx]
-		if authored_tower(on["id"]):
+		if authored_tower(on["id"]) or stand_in_tower(on["id"]):
 			_tower_history[idx] = {"id": on["id"], "level": maxi(int(on.get("level", 1)), 1)}
 
 
@@ -2002,7 +2064,8 @@ func _refresh_wrecks() -> void:
 	var visible: Dictionary = {}
 	for cell in Farm.rubble_cells(_state):
 		var id := Farm.rubble_at(_state, cell)
-		if (not authored_tower(id) and id not in [&"wall", &"fence", &"barricade", &"mine", &"decoy"]) or not Farm.occupant(_state, cell).is_empty():
+		var stand_in := stand_in_tower(id)
+		if (not authored_tower(id) and not stand_in and id not in [&"wall", &"fence", &"barricade", &"mine", &"decoy"]) or not Farm.occupant(_state, cell).is_empty():
 			continue
 		var idx := Grid.index(cell)
 		visible[idx] = true
@@ -2014,9 +2077,16 @@ func _refresh_wrecks() -> void:
 			sprite.name = "Wreck_%d" % idx
 			_wrecks.add_child(sprite)
 			_wreck_sprites[idx] = sprite
-		var wreck_name := tower_name(remembered, "_wreck") if authored_tower(id) else StringName(str(id) + "_wreck")
-		sprite.texture = _texture_for(&"mine_spent" if id == &"mine" else wreck_name)
+		var wreck_name := tower_name(remembered, "_wreck") if authored_tower(id) or stand_in else StringName(str(id) + "_wreck")
+		# A stand-in tower's wreck (task 0226's hive) is its registry entry's
+		# file, tinted and scaled as the standing one is.
+		if stand_in and not PlaceholderArt.art(wreck_name).is_empty():
+			sprite.texture = load(PlaceholderArt.texture_path(PlaceholderArt.art_path(wreck_name, 0)))
+		else:
+			sprite.texture = _texture_for(&"mine_spent" if id == &"mine" else wreck_name)
 		ArtPlacement.place(sprite, cell)
+		sprite.scale *= PlaceholderArt.art_scale(wreck_name)
+		sprite.self_modulate = PlaceholderArt.art_tint(wreck_name)
 	for idx in _wreck_sprites.keys():
 		if not visible.has(idx):
 			(_wreck_sprites[idx] as Sprite2D).hide()
@@ -2658,6 +2728,11 @@ const WOUNDED_AT := 0.75
 ## so the flash is a moment rather than a lamp: at 80 a gun on a one second
 ## reload is lit for about a fifth of a second after each shot.
 const FLASH_PERCENT := 80
+
+## How high on a stung thing the swarm hangs (task 0226), as a share of its
+## drawing's pivot over its feet: round the head - a walker's is some 24
+## pixels up of its 44.
+const SWARM_HEIGHT := 0.55
 
 
 ## The fallback. Task 0075 makes this unreachable.

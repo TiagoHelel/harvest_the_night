@@ -61,6 +61,7 @@ const RUN_DATA: Array = [
 	"killed_by_kind_all_run", "kits", "last_catch", "last_result", "livestock",
 	"loot", "loot_laid",
 	"occupants", "payout", "plots", "produced", "repair_debt", "rubble", "shipping",
+	"stung",
 ]
 
 const _FNV_OFFSET := 2166136261

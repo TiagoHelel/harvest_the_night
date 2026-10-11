@@ -1411,7 +1411,12 @@ const SHAPE_CONE := &"cone"
 ## reads as instantaneous anyway.
 const SHAPE_LINE := &"line"
 
-const SHAPES: Array = [SHAPE_SINGLE, SHAPE_SPLASH, SHAPE_CONE, SHAPE_LINE]
+## **A sting** (task 0226): it lands the instant it is given, as the cone
+## does, and keeps hurting for `sting_ticks` - `Combat.sting()`, refreshed and
+## never stacked, the way a fire is. Nothing flies. The hive's.
+const SHAPE_STING := &"sting"
+
+const SHAPES: Array = [SHAPE_SINGLE, SHAPE_SPLASH, SHAPE_CONE, SHAPE_LINE, SHAPE_STING]
 
 
 ## **What a shot in the air is doing.** `guided` follows what it was fired at
@@ -1432,8 +1437,11 @@ const AIMS: Array = [AIM_GUIDED, AIM_BALLISTIC]
 const DAMAGE_IMPACT := &"impact"
 const DAMAGE_FIRE := &"fire"
 const DAMAGE_EXPLOSIVE := &"explosive"
+## The hive's (task 0226): its own word, so a sting is never a fire to the
+## rain of task 0256.
+const DAMAGE_STING := &"sting"
 
-const DAMAGE_TYPES: Array = [DAMAGE_IMPACT, DAMAGE_FIRE, DAMAGE_EXPLOSIVE]
+const DAMAGE_TYPES: Array = [DAMAGE_IMPACT, DAMAGE_FIRE, DAMAGE_EXPLOSIVE, DAMAGE_STING]
 
 ## How often a burning thing takes its burn damage.
 ##
@@ -1441,6 +1449,10 @@ const DAMAGE_TYPES: Array = [DAMAGE_IMPACT, DAMAGE_FIRE, DAMAGE_EXPLOSIVE]
 ## as what a designer means by it - "two a second" - and so that a burn is a
 ## handful of arithmetic over its life instead of ninety.
 const BURN_EVERY_TICKS := SECONDS
+
+## How often a stung thing takes its sting (task 0226): once a second, as a
+## burn does, so `damage` on the hive's row reads as "one a second".
+const STING_EVERY_TICKS := SECONDS
 
 ## The six things from the reference sheet that go on the farm at night.
 ##
@@ -1685,6 +1697,40 @@ const DEFENCES: Dictionary = {
 		"lifetime_ticks": 10 * SECONDS, # LEVER: ticks, 5-20 seconds worth
 		"eaten_by": 8,                  # LEVER: zombies, 3-16
 		"per_night_limit": 3,           # LEVER: how many, 1-6
+		"energy_draw": 0,
+	},
+	&"beehive": {
+		# **Bees that sting what comes near and keep stinging** (task 0226;
+		# the plan's section 5, summer). Wood for the box and sunflowers for
+		# the colony - and as strong as the field planted round it.
+		"cost": {WOOD: 15, SUNFLOWER: 4},  # LEVER: wood and sunflowers
+		"season": &"summer",            # LEVER: the season it unlocks in (0234 gates it)
+		"targeting": TARGET_NEAREST,
+		# **A sting lands at once and keeps hurting** (`Combat.sting()`),
+		# refreshed and never stacked, as a fire is. Nothing flies.
+		"shape": SHAPE_STING,
+		"hp": 60,                       # LEVER: hit points, 40-100
+		# **Per second stung**, before the sunflowers: armour takes its slice
+		# off every one, so a tank feels the minimum hit and no more.
+		"damage": 1,                    # LEVER: per second stung, 1-3
+		"damage_type": DAMAGE_STING,
+		"range": 2,                     # LEVER: tiles, 1-3
+		# A new sting a second, given to one not yet stung while there is one
+		# in reach (`Towers.tick`): the bees spread over a crowd.
+		"reload_ticks": SECONDS,        # LEVER: ticks, 15-60
+		"sting_ticks": 4 * SECONDS,     # LEVER: ticks, 2-8 seconds worth
+		"targets": 1,
+		# **As strong as the field round it**, worked out once a night at
+		# `begin_night` (`Towers.feed_hives`): every sunflower growing within
+		# `flower_reach` tiles counts, and each `flowers_per_sting` of them
+		# add one to the sting, up to `most_flowers`. With too few growing -
+		# autumn, winter - it eats up to `stock_flowers` from the store a
+		# night instead, in whole stings' worth.
+		"flower_reach": 3,              # LEVER: tiles, 2-4
+		"flowers_per_sting": 3,         # LEVER: sunflowers a +1, 2-5
+		"most_flowers": 9,              # LEVER: sunflowers that count, 3-15
+		"stock_flowers": 6,             # LEVER: from the store, a hive a night, 1-12
+		# Bees run on nothing the generator makes (`Towers.tick`).
 		"energy_draw": 0,
 	},
 }
@@ -2711,9 +2757,19 @@ const TOWER_LEVELS: Dictionary = {
 			"gives": {"damage": 5, "hp": 130, "burn_damage": 4,
 				"burn_ticks": 6 * SECONDS}},
 	],
+	# **A hive has one step** (task 0226): a broader, sturdier box with
+	# bees enough to sting two at a time (`targets`) - how it works, not
+	# only its numbers. Bees are not a machine and "automatic" is not a word
+	# for them, so there is no third: `Building.why_not_upgrade` stops a
+	# family at its last row.
+	&"beehive": [
+		{"needs": &"true sights", "cost": {WOOD: 20, SUNFLOWER: 8},
+			"gives": {"hp": 90, "targets": 2}},
+	],
 }
 
-## The most any tower can be upgraded to. Level one is the thing as built.
+## The most any tower can be upgraded to. Level one is the thing as built. A
+## family with fewer rows stops at its last (task 0226).
 const TOP_TOWER_LEVEL := 3
 
 
@@ -3883,6 +3939,12 @@ static func check_defences(defences: Dictionary) -> Array:
 						errors.append(("defence '%s' opens %d degrees, which is "
 							+ "%d per mille, but says %d")
 							% [defence_id, degrees, wanted, spread])
+			elif shape == SHAPE_STING and (int(defence.get("damage", 0)) <= 0
+					or int(defence.get("sting_ticks", 0)) <= 0):
+				# **A sting hurts, for a while** (task 0226): one that did no
+				# damage, or for no time, would be a tower that only buzzes.
+				errors.append("defence '%s' stings for nothing, or for no time at all"
+					% defence_id)
 			# `aim` is taken: task 0042 uses it for the targeting word.
 			var travel := StringName(defence.get("aim", AIM_GUIDED))
 			if not AIMS.has(travel):
@@ -3969,6 +4031,14 @@ static func check_defences(defences: Dictionary) -> Array:
 				% defence_id)
 		if defence.has("eaten_by") and int(defence["eaten_by"]) <= 0:
 			errors.append("defence '%s' is eaten by nobody" % defence_id)
+		# **A hive's sunflowers** (task 0226): counted from some tiles round
+		# it, a sting's worth at a time, up to a most it can use, and eaten
+		# from the store a night - none of them at zero, or the field it asks
+		# for would do nothing.
+		for lever in ["flower_reach", "flowers_per_sting", "most_flowers", "stock_flowers"]:
+			if defence.has(lever) and int(defence[lever]) <= 0:
+				errors.append("defence '%s' has a %s of %d"
+					% [defence_id, lever, int(defence[lever])])
 	return errors
 
 

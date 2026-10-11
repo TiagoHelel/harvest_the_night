@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-208 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+209 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -251,10 +251,11 @@ voz alta.
 | 0214 | Art: artisan goods | 2026-10-10 |
 | 0224 | The scarecrow decoy | 2026-10-11 |
 | 0225 | Zombie bait | 2026-10-11 |
+| 0226 | The beehive | 2026-10-11 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 92 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 94 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -348,6 +349,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **The scarecrow decoy** (0224) - `data` 2498985787 -> 3465552205
 - **The scarecrow decoy** (0224) - `sim` 1719668160 -> 3837945514
 - **Zombie bait** (0225) - `data` 3465552205 -> 2947162752
+- **The beehive** (0226) - `sim` 3837945514 -> 642923490
+- **The beehive** (0226) - `data` 2947162752 -> 2287996408
 
 ## O que deu errado
 

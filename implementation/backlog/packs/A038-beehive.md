@@ -19,7 +19,7 @@ while the sting lasts. Both must read at 1x after the night relight.
 
 ## Deliverables
 
-The table is provisional: game task 0226 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0226. The rows stand as written: the hive 32x48 standing on (16,44) at two levels in four states each, and the bee swarm 8x8 round (4,4) in three looping frames. **How the game plays them:** a hive is one cell, a tower that stings the nearest thing in its reach once a second - one not yet stung while there is one - and level two, its only upgrade and the family's last (`Building.why_not_upgrade` refuses a third), stings two at a time. It wears `_fire` for the first fifth of its reload after each sting, `_hurt` below three quarters of its hit points (firing first, as the towers do), and `_wreck` once it falls, as rubble the morning sweeps, at the level it stood at. The swarm loops on every stung enemy, round its head, for as long as the sting lasts - four seconds, topped up by another sting and never doubled. Until 0237 the hive is the mortar tinted honey at each level and state and the swarm is drawn in code by `HiveArt`, through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
@@ -31,6 +31,12 @@ The table is provisional: game task 0226 settles the final canvas/footprint/stat
 | `effects/bee_swarm_0..2` | 8x8 | (4,4) | 3 at 0.1 s, loop | 4-6 bees, each 1-2 px (gold body, ink stripe), in a loose cloud centred on (4,4) ±1; visible inside x 1..6, y 1..6. Poses `cloud_a`, `cloud_b`, `cloud_c`: the bees shuffle, the cloud does not grow or shrink by more than a quarter. Frame 2 leads back to frame 0. |
 
 - Every row: dir `none`, `mirror: "none"`, draw scale 1.0.
+- **The stand-in until 0237** (task 0226): `PlaceholderArt` registers the
+  eight tower names with `buildings/mortar`, `mortar_hurt`, `mortar_fire`,
+  `mortar_wreck` and their `_2` frames as stand-ins, tinted honey, and
+  `HiveArt` (`src/ui/hive_art.gd`) draws the swarm's three frames at this
+  canvas and pivot - five bees of two pixels, gold with an ink stripe. The
+  pack has no icon: the hotbar shows `beehive` scaled into its 16x16 box.
 - **Points** (contract section 5), per level, on whole, hurt and fire:
   `muzzle_xy` on an opaque pixel of the entrance slot (expected near x 15-19,
   y 33-37 for L1 and y 28-34 for L2 - measure the real art), `muzzles_xy` =

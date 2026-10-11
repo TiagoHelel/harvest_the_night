@@ -140,6 +140,7 @@ const SCENARIOS: Array = [
 	["trampled", "the morning after a loss, by the trampled crops", ""],
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
+	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
 	["zombie_bait", "a crowd turned toward a zombie bait at night: a rotten fish thrown past a defended farm's fence, the nearest already eating on it and the rest - from further than a decoy pulls - on their way; the bait picked on the hotbar, one kit left", ""],
 	["bone_meal", "Spring 2 at noon: a starter row turned, plain and fertilised side by side, dry then watered, and carrot sprouts on fertilised earth dry and wet; bone meal chosen in the strip", ""],
 	["night_loot", "the morning after Spring 7's Full Moon, fought from a defended farm: the report counting the bones and moon stones lying about; then him out by the moon stone nearest the house, the night's bones about it", "ResultScreen"],
@@ -770,6 +771,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"tarps": _set_tarps(state)
 		"decoy": _set_decoy(state)
 		"zombie_bait": _set_zombie_bait(state)
+		"beehive": _set_beehive(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1085,6 +1087,15 @@ func _only_showing(main: Node, wanted: String) -> void:
 func _just_before_the_shutter(main: Node, state: Dictionary,
 		name: String) -> void:
 	match name:
+		"beehive":
+			# What the shutter finds (task 0226): who is stung, and for what.
+			var stung: Array = []
+			var ids: Array = (state["stung"] as Dictionary).keys()
+			ids.sort()
+			for id in ids:
+				var bees: Dictionary = (state["stung"] as Dictionary)[id]
+				stung.append("%d:%d" % [int(id), int(bees["damage"])])
+			print("  beehive: %d of %d stung (%s)" % [stung.size(), Entities.count(state), ", ".join(stung)])
 		"zombie_bait":
 			# What the shutter finds (task 0225): the bait, and who is on it.
 			var bait: Array = Pathing.lure_cells(state)
@@ -2551,6 +2562,53 @@ func _set_zombie_bait(state: Dictionary) -> void:
 	print("  bait at %s, %d coming for it" % [str(middle), Entities.count(state)])
 	Building.select(state, &"zombie_bait")
 	_look_at(middle + Vector2i(-2, 2))
+
+
+## **A hive at work beside a sunflower bed** (task 0226): Summer 2, the
+## defended farm's build step, a hive past its fence beside a bed of nine grown sunflowers and
+## a second two tiles south of it, upgraded, out of reach of most of the bed
+## and fed the rest from the store, and a third south-west of the bed knocked
+## down to its wreck; then the waves, the hives fed, and a crowd
+## of walkers two and three tiles east coming through their reach - the
+## picture's two seconds are their first stings. The hive is picked on the
+## hotbar, which turns to summer's page; the camera and the cursor rest two
+## tiles east of the hives, clear of them and of the bed.
+func _set_beehive(state: Dictionary) -> void:
+	_on_date(state, GameData.SEASON_DAYS + 2)
+	_a_defended_farm(state, true)
+	Resources.gain(state, {GameData.SUNFLOWER: 60})
+	(state["tech_owned"] as Array).append(&"true sights")
+	var middle := _clear_patch(state, Player.cell(state) + Vector2i(19, 1), 4)
+	if middle.x < 0 or not Building.place(state, &"beehive", middle) \
+			or not Building.place(state, &"beehive", middle + Vector2i(0, 2)) \
+			or not Building.place(state, &"beehive", middle + Vector2i(-2, 3)):
+		push_warning("shot: no open patch for the hives")
+		_look_at(_the_defence_line(state))
+		return
+	Building.upgrade(state, middle + Vector2i(0, 2))
+	# The bed: three by three west of the first hive, grown and watered.
+	for dy in range(-2, 1):
+		for dx in range(-3, 0):
+			var plot: Dictionary = Farming.EMPTY_PLOT.duplicate()
+			plot["crop"] = GameData.SUNFLOWER
+			plot["growth"] = int((GameData.CROPS[GameData.SUNFLOWER] as Dictionary)["growth_days"])
+			plot["watered"] = true
+			(state["plots"] as Dictionary)[Grid.index(middle + Vector2i(dx, dy))] = plot
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	Farm.damage(state, middle + Vector2i(-2, 3), int((GameData.DEFENCES[&"beehive"] as Dictionary)["hp"]))
+	var crowd := {Vector2i(2, -1): &"walker", Vector2i(3, 0): &"walker", Vector2i(2, 1): &"runner",
+		Vector2i(3, 2): &"walker", Vector2i(2, 3): &"walker", Vector2i(4, -2): &"walker", Vector2i(4, 3): &"tank"}
+	for at in crowd:
+		Entities.spawn(state, crowd[at], middle + (at as Vector2i))
+	print("  hives at %s and %s: %d and %d sunflowers, %d in the store; the third's rubble '%s'; %d coming" % [
+		str(middle), str(middle + Vector2i(0, 2)), int(Farm.occupant(state, middle).get("flowers", 0)),
+		int(Farm.occupant(state, middle + Vector2i(0, 2)).get("flowers", 0)),
+		Resources.amount(state, GameData.SUNFLOWER), Farm.rubble_at(state, middle + Vector2i(-2, 3)),
+		Entities.count(state)])
+	Building.select(state, &"beehive")
+	_look_at(middle + Vector2i(2, 1))
 
 
 ## The cell nearest `near` with `radius` cells of nothing standing every way

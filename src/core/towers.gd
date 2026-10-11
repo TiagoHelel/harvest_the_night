@@ -113,7 +113,14 @@ static func tick(state: Dictionary) -> void:
 			continue
 
 		var cell := cell_of_it
-		var target := _acquire(state, cell, entry, [], crowd)
+		# **Bees spread** (task 0226): a hive stings one not yet stung while
+		# there is one in reach - a sting is refreshed, never stacked, so a
+		# second on the same one is a second wasted - and tops one up only
+		# when there is not.
+		var spreads := StringName(entry.get("shape", GameData.SHAPE_SINGLE)) == GameData.SHAPE_STING
+		var target := _acquire(state, cell, entry, [], crowd, spreads)
+		if target == 0 and spreads:
+			target = _acquire(state, cell, entry, [], crowd)
 		if target == 0:
 			continue
 
@@ -137,7 +144,9 @@ static func tick(state: Dictionary) -> void:
 		var barrels := maxi(int(entry.get("targets", 1)), 1)
 		var taken: Array = [target]
 		while taken.size() < barrels:
-			var another := _acquire(state, cell, entry, taken, crowd)
+			var another := _acquire(state, cell, entry, taken, crowd, spreads)
+			if another == 0 and spreads:
+				another = _acquire(state, cell, entry, taken, crowd)
 			if another == 0:
 				break
 			taken.append(another)
@@ -147,6 +156,8 @@ static func tick(state: Dictionary) -> void:
 					_burn_cone(state, cell, entry, int(at), armed)
 				GameData.SHAPE_LINE:
 					_pierce_line(state, cell, entry, int(at), armed)
+				GameData.SHAPE_STING:
+					_sting(state, tower, entry, int(at), armed)
 				_:
 					_fire(state, cell, tower["id"], entry, int(at), armed)
 
@@ -158,7 +169,11 @@ static func tick(state: Dictionary) -> void:
 			* Tech.bonus(state, "tower_reload_percent", 100) / 100
 		if not armed:
 			reload_ticks = Ammo.weak_reload(reload_ticks)
-		tower["reload"] = Power.scaled_ticks(state, reload_ticks)
+		# **Bees run on no generator** (task 0226): a tower that draws no
+		# power is not slowed when the farm is short of it. Every tower before
+		# the hive draws some, so this is the hive's alone.
+		tower["reload"] = reload_ticks if int(entry.get("energy_draw", 0)) <= 0 \
+			else Power.scaled_ticks(state, reload_ticks)
 		# The round burns for the whole wait until the next shot: this one
 		# covers `reload + 1` ticks of firing, the tick it fired on included.
 		if armed and tower.has("ammo_lit"):
@@ -229,8 +244,10 @@ static func reach_of(state: Dictionary, entry: Dictionary) -> int:
 
 ## `crowd` is `_crowd()`'s filing for this tick, or empty for a look at the
 ## whole farm - which is what `acquire_for()` and `target_of()` take.
+##
+## `unstung` passes over everything a hive has already stung (task 0226).
 static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
-		skip: Array = [], crowd: Dictionary = {}) -> int:
+		skip: Array = [], crowd: Dictionary = {}, unstung: bool = false) -> int:
 	var reach := reach_of(state, entry)
 	if reach <= 0:
 		return 0
@@ -243,9 +260,12 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
 	var best_threat := 1 << 30
 	var near: Array = Entities.ids(state) if crowd.is_empty() \
 		else _near(crowd, from, reach)
+	var stung: Dictionary = state["stung"]
 	for id in near:
 		# Already being shot at by this tower's other barrel.
 		if skip.has(id):
+			continue
+		if unstung and stung.has(id):
 			continue
 		var cell := Entities.cell_of(state, id)
 		if cell.x < 0:
@@ -685,6 +705,69 @@ static func _land_at(state: Dictionary, shot: Dictionary, middle: Vector2i,
 		# straight line between.
 		var share := 100 - (100 - edge) * apart / radius
 		Combat.hit(state, id, maxi(damage * share / 100, 1), kind)
+
+
+# ------------------------------------------------------------------ the hives
+
+## **A sting** (task 0226): the bees are on it at once, and it hurts every
+## second for `sting_ticks` - `Combat.sting()`, refreshed and never stacked -
+## for the hive's damage and its sunflowers' share (`sting_of`).
+static func _sting(state: Dictionary, hive: Dictionary, entry: Dictionary,
+		target: int, armed: bool) -> void:
+	Combat.sting(state, target, sting_of(state, hive, entry, armed),
+		int(entry.get("sting_ticks", 0)))
+
+
+## **What a hive's sting hurts for, a second** (task 0226): the levelled
+## damage with the tree's share, and one more for every `flowers_per_sting`
+## of the sunflowers it was fed at `begin_night`, up to `most_flowers`. A
+## hive put down since has not been fed, and stings for the damage alone.
+static func sting_of(state: Dictionary, hive: Dictionary, entry: Dictionary,
+		armed: bool = true) -> int:
+	var per := maxi(int(entry.get("flowers_per_sting", 0)), 1)
+	var flowers := mini(int(hive.get("flowers", 0)), int(entry.get("most_flowers", 0)))
+	return damage_of(state, entry, armed) + flowers / per
+
+
+## **Every hive fed for the night** (task 0226), once, from
+## `Phases.begin_night`: the sunflowers growing within its `flower_reach`,
+## and - where fewer grow than it can use, as in autumn and winter - up to
+## `stock_flowers` more from the store, in whole stings' worth only, so none
+## is eaten for nothing. Hives in cell order, so two short of the store share
+## it the same way on every machine; a sunflower in reach of two counts for
+## both. Written on the occupant as `flowers`: bookkeeping that changes no
+## shape on the farm, so no `Farm.touch()`.
+static func feed_hives(state: Dictionary) -> void:
+	var occupants: Dictionary = state["occupants"]
+	for idx in _towers(state):
+		var hive: Dictionary = occupants[idx]
+		var cell := Grid.cell(int(idx))
+		var entry: Dictionary = Building.entry_at(state, cell)
+		if StringName(entry.get("shape", GameData.SHAPE_SINGLE)) != GameData.SHAPE_STING:
+			continue
+		var most := int(entry.get("most_flowers", 0))
+		var per := maxi(int(entry.get("flowers_per_sting", 0)), 1)
+		var growing := growing_flowers(state, cell, int(entry.get("flower_reach", 0)))
+		var eaten := 0
+		if growing < most:
+			var could := mini(mini(int(entry.get("stock_flowers", 0)), most - growing),
+				Resources.amount(state, GameData.SUNFLOWER))
+			eaten = maxi((growing + could) / per * per - growing, 0)
+			if eaten > 0:
+				Resources.pay(state, {GameData.SUNFLOWER: eaten})
+		hive["flowers"] = mini(growing + eaten, most)
+
+
+## The sunflowers growing within `reach` tiles of `cell`, a square as a
+## tower's reach is: every plot sown with one (`Farming.crop_on`), ripe or not.
+static func growing_flowers(state: Dictionary, cell: Vector2i, reach: int) -> int:
+	var count := 0
+	for dy in range(-reach, reach + 1):
+		for dx in range(-reach, reach + 1):
+			var at := cell + Vector2i(dx, dy)
+			if Grid.in_bounds(at) and Farming.crop_on(state, at) == GameData.SUNFLOWER:
+				count += 1
+	return count
 
 
 ## How many shots every tower on the farm has fired, ever.

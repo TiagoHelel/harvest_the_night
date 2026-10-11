@@ -133,6 +133,15 @@ static func defence(id: StringName) -> String:
 		lines.append(I18n.f(&"DESC_LASTS", [_seconds(int(one["lifetime_ticks"]))]))
 	if int(one.get("eaten_by", 0)) > 0:
 		lines.append(I18n.f(&"DESC_EATEN_BY", [int(one["eaten_by"])]))
+	# **The hive's** (task 0226): how long a sting hurts, what the
+	# sunflowers round it add, and what it eats from the store without them.
+	if int(one.get("sting_ticks", 0)) > 0:
+		lines.append(I18n.f(&"DESC_STINGS", [_seconds(int(one["sting_ticks"]))]))
+	if int(one.get("flowers_per_sting", 0)) > 0:
+		lines.append(I18n.f(&"DESC_SUNFLOWERS", [int(one["flowers_per_sting"]),
+			int(one.get("flower_reach", 0)), int(one.get("most_flowers", 0))]))
+	if int(one.get("stock_flowers", 0)) > 0:
+		lines.append(I18n.f(&"DESC_HIVE_STOCK", [int(one["stock_flowers"])]))
 	return "\n".join(lines)
 
 

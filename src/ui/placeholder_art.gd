@@ -203,6 +203,11 @@ const DECOY := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scal
 ## a mine does, drawn at 1.0.
 const BAIT := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
 
+## A038's hive (task 0226): the tower family's 32x48 standing on (16,44), and
+## the bee swarm's 8x8 round its middle (4,4), both drawn at 1.0.
+const HIVE := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
+const SWARM := {"canvas": Vector2i(8, 8), "pivot": Vector2i(4, 4), "draw_scale": 1.0}
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -276,6 +281,18 @@ const ART := {
 	&"zombie_bait": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": BAIT, "final": BAIT, "bare": true},
 	&"icon_zombie_bait": {"pack": "A037", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.95, 1.2, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_zombie_bait": {"pack": "A037", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.95, 1.2, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	# A038's hive (task 0226): the mortar - the low tower on the family's
+	# canvas - in honey, at each level and state, until 0237; the bee swarm
+	# drawn in code by `HiveArt`.
+	&"beehive": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
+	&"beehive_hurt": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_hurt", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
+	&"beehive_fire": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_fire", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
+	&"beehive_wreck": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_wreck", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
+	&"beehive_2": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
+	&"beehive_2_hurt": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_hurt", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
+	&"beehive_2_fire": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_fire", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
+	&"beehive_2_wreck": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_wreck", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
+	&"bee_swarm": {"pack": "A038", "dir": "res://sprites/effects/", "frames": 3, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": SWARM, "final": SWARM},
 	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
 	# the fertilised earth the tilled tile paled with it, dry and wet, until
 	# 0235.

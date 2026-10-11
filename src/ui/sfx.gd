@@ -81,6 +81,9 @@ const TOWER_SOUNDS := {
 	&"flame_tower": &"sfx/flame",
 	&"mortar": &"sfx/mortar",
 	&"mine": &"sfx/mine_blast",
+	# The flame's hiss for a swarm leaving the hive (task 0226), until 0283
+	# gives it a buzz.
+	&"beehive": &"sfx/flame",
 }
 
 ## One voice each, so a crowd is a chord rather than a wall.

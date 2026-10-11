@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 70
+const GROUPS := 71
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -149,6 +149,7 @@ func _run() -> void:
 	_task_0223_tarps()
 	_task_0224_decoy()
 	_task_0225_bait()
+	_task_0226_beehive()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -1367,7 +1368,7 @@ func _task_0132_night_build() -> void:
 	var plenty := {GameData.WOOD: 9000, GameData.STONE: 9000, GameData.IRON: 9000,
 		GameData.OIL: 9000, GameData.GUNPOWDER: 9000, GameData.MONEY: 9000,
 		GameData.FOOD: 9000, GameData.COPPER: 9000, GameData.GOLD: 9000,
-		GameData.STRAW: 9000}
+		GameData.STRAW: 9000, GameData.SUNFLOWER: 9000}
 	var phases := {}
 	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT]:
 		var state := State.create(1320)
@@ -6169,8 +6170,8 @@ func _task_0193_supply() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		var said := GameData.defence_season(GameData.DEFENCES[id]) if GameData.DEFENCES[id].has("season") else &""
 		seasons[said] = int(seasons.get(said, 0)) + 1
-	expect(seasons == {&"spring": 8, &"summer": 2},
-		"every defence says the season it unlocks in: spring's eight, and summer's decoy (0224) and bait (0225)", str(seasons))
+	expect(seasons == {&"spring": 8, &"summer": 3},
+		"every defence says the season it unlocks in: spring's eight, and summer's decoy (0224), bait (0225) and hive (0226)", str(seasons))
 	# **The routes**, season by season: what each kit, round, meal and feed
 	# is made of, followed back to the ground.
 	for season in GameData.SEASONS:
@@ -7256,7 +7257,7 @@ func _task_0224_decoy() -> void:
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
 	var spring := order.slice(0, 8)
-	expect(icon == DecoyArt.texture(&"decoy") and order.find(&"decoy") == 8
+	expect(icon == DecoyArt.texture(&"decoy") and order.find(&"decoy") >= 8
 		and spring == GameData.sorted_names(spring),
 		"the hotbar shows the drawing, after spring's eight, which keep their places", str(order))
 	var said := {}
@@ -7492,6 +7493,268 @@ func _task_0225_bait() -> void:
 	_completed += 1
 
 
+## 0226 - the beehive. A summer tower whose sting is damage over time in a
+## table beside the fire's, refreshed and never stacked; as strong as the
+## sunflowers growing round it, counted once at `begin_night`, and fed from
+## the store - in whole stings' worth, hives in cell order - where too few
+## grow; its bees spread over a crowd; one upgrade, and no family goes past
+## its last row.
+func _task_0226_beehive() -> void:
+	# **The row, the levers and their checks.**
+	var row: Dictionary = GameData.DEFENCES[&"beehive"]
+	var cost: Dictionary = row["cost"]
+	var steps: Array = GameData.TOWER_LEVELS[&"beehive"]
+	var gives: Dictionary = (steps[0] as Dictionary)["gives"] if steps.size() == 1 else {}
+	expect(cost.size() == 2 and cost.has(GameData.WOOD) and cost.has(GameData.SUNFLOWER)
+		and row.has("reload_ticks") and StringName(row["shape"]) == GameData.SHAPE_STING
+		and StringName(row["damage_type"]) == GameData.DAMAGE_STING and int(row["damage"]) > 0
+		and int(row["range"]) <= 3 and int(row["sting_ticks"]) > 0 and int(row["energy_draw"]) == 0
+		and int(row["flower_reach"]) >= 2 and int(row["flower_reach"]) <= 4 and int(row["stock_flowers"]) > 0
+		and GameData.defence_season(row) == &"summer" and Sfx.TOWER_SOUNDS.has(&"beehive")
+		and int(gives.get("targets", 1)) > int(row["targets"]),
+		"a hive costs wood and sunflowers, stings close by, gathers from 2-4 tiles, draws no power, is summer's, sounds, and has one upgrade - to two stings at once",
+		str(row))
+	var unrefused: Array = []
+	for pair in [["damage", "stings for nothing"], ["sting_ticks", "stings for nothing"],
+			["flower_reach", "a flower_reach of 0"], ["flowers_per_sting", "a flowers_per_sting of 0"],
+			["most_flowers", "a most_flowers of 0"], ["stock_flowers", "a stock_flowers of 0"]]:
+		var broken := GameData.DEFENCES.duplicate(true)
+		(broken[&"beehive"] as Dictionary)[pair[0]] = 0
+		if not _says(GameData.check_defences(broken), pair[1]):
+			unrefused.append(pair[0])
+	expect(unrefused.is_empty() and GameData.check_defences(GameData.DEFENCES).is_empty()
+		and GameData.validate().is_empty(),
+		"a sting of no damage or for no time, and each sunflower lever at zero, fail the check; the real tables pass",
+		str(unrefused))
+
+	# **The sting: refreshed, never stacked**, in a table of its own. Three
+	# walkers held still: one stung once; one stung three times at once, the
+	# last weaker and shorter; one topped up two seconds in by a weaker sting.
+	var night: Dictionary = _decoy_night(22600, [])
+	var state: Dictionary = night["state"]
+	var spot: Vector2i = night["spot"]
+	var once := Entities.spawn(state, &"walker", spot)
+	var thrice := Entities.spawn(state, &"walker", spot + Vector2i(1, 0))
+	var topped := Entities.spawn(state, &"walker", spot + Vector2i(2, 0))
+	var full := int(Entities.get_one(state, once)["hp"])
+	var long := 4 * GameData.SECONDS
+	Combat.sting(state, once, 2, long)
+	for pair in [[2, long], [2, long], [1, GameData.SECONDS]]:
+		Combat.sting(state, thrice, int(pair[0]), int(pair[1]))
+	Combat.sting(state, topped, 2, long)
+	var one: Dictionary = (state["stung"] as Dictionary).get(thrice, {})
+	expect((state["stung"] as Dictionary).size() == 3 and int(one.get("damage", 0)) == 2
+		and int(one.get("left", 0)) == long and (state["burning"] as Dictionary).is_empty()
+		and State.RUN_DATA.has("stung"),
+		"stung three times at once, the last weaker and shorter, it is one sting at the stronger damage for the longer time - in its own table, not the fire's",
+		str(one))
+	var first := 0
+	for tick in 2 * long:
+		Combat.tick(state)
+		if tick == 0:
+			first = full - int(Entities.get_one(state, once)["hp"])
+		if tick == 2 * GameData.SECONDS - 1:
+			Combat.sting(state, topped, 1, long)
+	var lost_once := full - int(Entities.get_one(state, once)["hp"])
+	var lost_thrice := full - int(Entities.get_one(state, thrice)["hp"])
+	var lost_topped := full - int(Entities.get_one(state, topped)["hp"])
+	expect(first == 2 and lost_once == 8 and lost_thrice == lost_once and not Combat.is_stung(state, once),
+		"the first hurts at once and one a second after it for its four seconds - 8 off, then gone - and stung three times it lost no more",
+		"%d first, %d and %d" % [first, lost_once, lost_thrice])
+	expect(lost_topped == 12 and not Combat.is_stung(state, topped),
+		"topped up two seconds in by a weaker sting, it ran four seconds again from there at its stronger damage: 12 off",
+		str(lost_topped))
+	Combat.sting(state, once, 2, long)
+	Enemies.withdraw(state)
+	expect((state["stung"] as Dictionary).is_empty(), "and a withdrawn night leaves nobody stung")
+
+	# **As strong as its field.** The same hive on the same farm, among nine
+	# growing sunflowers and among none, nothing in the store; a walker held
+	# in its reach for the sting's four seconds.
+	var bloom: Dictionary = _hive_night(22601, 9, 0)
+	var bare: Dictionary = _hive_night(22601, 0, 0)
+	var hive_bloom := Farm.occupant(bloom["state"], bloom["spot"])
+	var hive_bare := Farm.occupant(bare["state"], bare["spot"])
+	var per := int(row["flowers_per_sting"])
+	var strong := Towers.sting_of(bloom["state"], hive_bloom, row)
+	var weak := Towers.sting_of(bare["state"], hive_bare, row)
+	expect(int(hive_bloom.get("flowers", -1)) == mini(9, int(row["most_flowers"]))
+		and int(hive_bare.get("flowers", -1)) == 0
+		and strong == int(row["damage"]) + mini(9, int(row["most_flowers"])) / per and weak == int(row["damage"])
+		and Resources.amount(bloom["state"], GameData.SUNFLOWER) == 0,
+		"fed at the waves: nine growing within its reach make the sting stronger; with neither, it stings for its damage alone",
+		"%d and %d" % [strong, weak])
+	var hits := (long + GameData.STING_EVERY_TICKS - 1) / GameData.STING_EVERY_TICKS
+	var felt_bloom := _stung_by_hive(bloom, long)
+	var felt_bare := _stung_by_hive(bare, long)
+	print("  a hive among nine sunflowers took %d off a walker in four seconds; one with none, %d" % [felt_bloom, felt_bare])
+	expect(felt_bloom == hits * strong and felt_bare == hits * weak and felt_bloom > felt_bare and felt_bare > 0,
+		"a hive among growing sunflowers outdoes one without, and one without still stings, weakly",
+		"%d against %d" % [felt_bloom, felt_bare])
+
+	# **Fed from the store where too few grow**, in whole stings' worth: six
+	# of twenty; none of one for a hive with four growing; and two hives short
+	# of a store of eight share it in cell order, the second taking none of
+	# the two left.
+	var stocked: Dictionary = _hive_night(22602, 0, 20)
+	var odd: Dictionary = _hive_night(22603, 4, 1)
+	var pair_night: Dictionary = _hive_night(22604, 0, 8, [Vector2i(0, 3)])
+	var stock := int(row["stock_flowers"])
+	var took := mini(stock, int(row["most_flowers"])) / per * per
+	expect(int(Farm.occupant(stocked["state"], stocked["spot"]).get("flowers", -1)) == took
+		and Resources.amount(stocked["state"], GameData.SUNFLOWER) == 20 - took,
+		"a hive with stocked sunflowers and none growing takes them at begin_night: %d of 20" % took,
+		str(Resources.amount(stocked["state"], GameData.SUNFLOWER)))
+	expect(int(Farm.occupant(odd["state"], odd["spot"]).get("flowers", -1)) == 4
+		and Resources.amount(odd["state"], GameData.SUNFLOWER) == 1,
+		"with four growing and one in the store it eats none: one more would make no sting stronger")
+	var second: Vector2i = (pair_night["spot"] as Vector2i) + Vector2i(0, 3)
+	expect(int(Farm.occupant(pair_night["state"], pair_night["spot"]).get("flowers", -1)) == took
+		and int(Farm.occupant(pair_night["state"], second).get("flowers", -1)) == 0
+		and Resources.amount(pair_night["state"], GameData.SUNFLOWER) == 8 - took,
+		"two hives short of a store of eight: the first in cell order takes its share, the second none of what is left",
+		str(Resources.amount(pair_night["state"], GameData.SUNFLOWER)))
+
+	# **The bees spread**: of two walkers in reach the nearer already stung,
+	# the hive stings the other.
+	var spread: Dictionary = _hive_night(22605, 0, 0)
+	var swarm_state: Dictionary = spread["state"]
+	var near := Entities.spawn(swarm_state, &"walker", (spread["spot"] as Vector2i) + Vector2i(1, 0))
+	var far := Entities.spawn(swarm_state, &"walker", (spread["spot"] as Vector2i) + Vector2i(2, 0))
+	Combat.sting(swarm_state, near, 1, long)
+	var left_near := Combat.sting_left(swarm_state, near)
+	Towers.tick(swarm_state)
+	expect(Combat.is_stung(swarm_state, far) and Combat.sting_left(swarm_state, near) == left_near
+		and Towers.shots_fired(swarm_state) == 1,
+		"with the nearer in reach already stung, the bees go to the other rather than topping it up")
+
+	# **One upgrade, and no further.** With true sights the hive goes to
+	# level two at its price, stinging two at once; a third is refused by
+	# name, for nothing.
+	var up := State.create(22606)
+	Resources.gain(up, {GameData.WOOD: 200, GameData.SUNFLOWER: 40})
+	(up["tech_owned"] as Array).append(&"true sights")
+	NightRoad.into_build(up)
+	var cell := _open_square(up, 4, &"beehive")
+	expect(Building.place(up, &"beehive", cell), "a hive goes down in the build step", str(cell))
+	var bill := Building.upgrade_cost(up, cell)
+	var had := Resources.amount(up, GameData.SUNFLOWER)
+	expect(Building.upgrade(up, cell) and Building.level_at(up, cell) == 2
+		and int(Building.entry_at(up, cell)["targets"]) == 2
+		and Resources.amount(up, GameData.SUNFLOWER) == had - int(bill.get(GameData.SUNFLOWER, 0)),
+		"it goes to level two at its price, two stings at once", str(bill))
+	var wood := Resources.amount(up, GameData.WOOD)
+	var refusal := Building.why_not_upgrade(up, cell)
+	expect(refusal == [&"WHY_LAST_LEVEL"] and not Building.upgrade(up, cell)
+		and Building.level_at(up, cell) == 2 and Building.upgrade_cost(up, cell).is_empty()
+		and Resources.amount(up, GameData.WOOD) == wood
+		and I18n.t(&"WHY_LAST_LEVEL") != "WHY_LAST_LEVEL",
+		"a two-level family refuses a third upgrade - at its last level, for nothing", str(refusal))
+
+	# **The words, the sound and the placeholder road.**
+	var said := {}
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		said[locale] = Describe.defence(&"beehive")
+	I18n.use("en")
+	var seconds := "%.1fs" % (float(int(row["sting_ticks"])) / float(GameData.TICK_HZ))
+	expect(Names.KEYS.get(&"beehive") == &"DEF_BEEHIVE" and Names.KEYS.get(&"sting") == &"DMG_STING"
+		and (said["en"] as String).contains("BEEHIVE") and (said["en"] as String).contains("hurts for " + seconds)
+		and (said["en"] as String).contains("every %d sunflowers growing within %d tiles" % [per, int(row["flower_reach"])])
+		and (said["en"] as String).contains("up to %d from the store" % stock)
+		and (said["pt_BR"] as String).contains("COLMEIA") and (said["pt_BR"] as String).contains("girassóis")
+		and (said["pt_BR"] as String).contains("ferrão"),
+		"its name, its sting and its sunflowers, in both languages", str(said))
+	var road: Array = []
+	for name in [&"beehive", &"beehive_hurt", &"beehive_fire", &"beehive_wreck",
+			&"beehive_2", &"beehive_2_hurt", &"beehive_2_fire", &"beehive_2_wreck"]:
+		var path := PlaceholderArt.art_path(name, 0)
+		var frame := PlaceholderArt.frame(path)
+		var file := PlaceholderArt.texture_path(path)
+		if frame.get("canvas") != Vector2i(32, 48) or frame.get("pivot") != Vector2i(16, 44) \
+				or not file.begins_with("res://sprites/buildings/mortar") or not ResourceLoader.exists(file) \
+				or PlaceholderArt.art_tint(name) == Color.WHITE or str(PlaceholderArt.art(name).get("pack", "")) != "A038":
+			road.append(name)
+	var view := WorldView.new()
+	var states := [view._stand_in_tower_art({"id": &"beehive", "level": 2, "hp": 10, "reload": GameData.SECONDS}),
+		view._stand_in_tower_art({"id": &"beehive", "level": 1, "hp": 10, "reload": 0}),
+		view._stand_in_tower_art({"id": &"beehive", "level": 2, "hp": 90, "reload": 0})]
+	view.free()
+	expect(road.is_empty() and WorldView.stand_in_tower(&"beehive") and not WorldView.stand_in_tower(&"gun_tower")
+		and states == [&"beehive_2_fire", &"beehive_hurt", &"beehive_2"],
+		"drawn through 0120's road: the mortar in honey at A038's 32x48 on (16,44), each level and state, lit as it stings and hurt below its threshold",
+		"%s %s" % [str(road), str(states)])
+	var frames: Array = []
+	var inside := true
+	for i in 3:
+		var image := HiveArt.drawing(i)
+		frames.append(image.get_data())
+		var lit := 0
+		for y in image.get_height():
+			for x in image.get_width():
+				if image.get_pixel(x, y).a > 0.0:
+					lit += 1
+					inside = inside and x >= 1 and x <= 6 and y >= 1 and y <= 6
+		inside = inside and lit == 10 and image.get_size() == Vector2i(8, 8)
+	expect(inside and frames[0] != frames[1] and frames[1] != frames[2] and frames[0] != frames[2]
+		and PlaceholderArt.is_drawn(HiveArt.path_of(0)) and HiveArt.frame_at(0.05) == 0
+		and HiveArt.frame_at(0.15) == 1 and HiveArt.frame_at(0.35) == 0,
+		"the swarm: three 8x8 frames of five bees inside x 1..6 and y 1..6, a tenth of a second each round and round, drawn in code for A038")
+	var bar := Hotbar.new()
+	var icon := bar._icon_of(&"beehive")
+	bar.free()
+	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
+	expect(icon != null and icon.resource_path == "res://sprites/buildings/mortar.png" and order.find(&"beehive") == 8,
+		"the hotbar shows the hive's stand-in, first of summer's after spring's eight", str(order))
+	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
+	expect(shots.contains("[\"beehive\", ")
+		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A038-beehive.md").contains("Final geometry settled by game task 0226"),
+		"shot.gd has a hive at work, and A038's table says the geometry this task settled")
+	_completed += 1
+
+
+## A hive put down in the build step on open ground - with one more at each
+## of `more` from it - `growing` sunflowers sown round the first, nearest
+## first and within its reach, and `stored` in the store once they are paid
+## for; then START into a parked night with nobody in it (task 0226).
+func _hive_night(seed_value: int, growing: int, stored: int, more: Array = []) -> Dictionary:
+	var state := State.create(seed_value)
+	var price := int((GameData.DEFENCES[&"beehive"]["cost"] as Dictionary)[GameData.SUNFLOWER])
+	Resources.gain(state, {GameData.WOOD: 200, GameData.SUNFLOWER: price * (1 + more.size()) + stored})
+	NightRoad.into_build(state)
+	var spot := _open_square(state, 4, &"beehive")
+	expect(Building.place(state, &"beehive", spot), "a hive goes down in the build step", str(spot))
+	for offset in more:
+		expect(Building.place(state, &"beehive", spot + (offset as Vector2i)), "and another beside it",
+			str(spot + (offset as Vector2i)))
+	var reach := int(GameData.DEFENCES[&"beehive"]["flower_reach"])
+	var sown := 0
+	for ring in range(1, reach + 1):
+		for cell in Grid.within(spot, ring):
+			if sown < growing and Grid.chebyshev(spot, cell) == ring and Farm.occupant(state, cell).is_empty():
+				var plot: Dictionary = Farming.EMPTY_PLOT.duplicate()
+				plot["crop"] = GameData.SUNFLOWER
+				(state["plots"] as Dictionary)[Grid.index(cell)] = plot
+				sown += 1
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	return {"state": state, "spot": spot}
+
+
+## What a hive's stings take off a walker held two tiles east of it, in its
+## reach, for `ticks` of the towers and the combat - nothing else moving - with
+## hit points enough never to fall (task 0226).
+func _stung_by_hive(night: Dictionary, ticks: int) -> int:
+	var state: Dictionary = night["state"]
+	var walker := Entities.spawn(state, &"walker", (night["spot"] as Vector2i) + Vector2i(2, 0))
+	Entities.set_hp(state, walker, 1000)
+	for _i in ticks:
+		Towers.tick(state)
+		Combat.tick(state)
+	return 1000 - int(Entities.get_one(state, walker).get("hp", 0))
+
+
 ## Whether a body that was at `from` moved toward `aim` this tick, as `Enemies`
 ## moves one: along the bigger of the two gaps, a unit at a time (0225).
 func _moved_toward(from: Vector2i, now: Vector2i, aim: Vector2i) -> bool:
@@ -7521,11 +7784,11 @@ func _decoy_night(seed_value: int, offsets: Array = [Vector2i.ZERO]) -> Dictiona
 
 ## The cell nearest the house, ring by ring and each ring in reading order,
 ## with `radius` cells of bare ground every way round it - grass or path, a
-## step of one each - and room for a decoy.
-func _open_square(state: Dictionary, radius: int) -> Vector2i:
+## step of one each - and room for a decoy, or for `id` (task 0226's hive).
+func _open_square(state: Dictionary, radius: int, id: StringName = &"decoy") -> Vector2i:
 	# Every new game has the same farm, so the ground found once is asked
 	# about first.
-	if _decoy_ground.x >= 0 and Building.can_place(state, &"decoy", _decoy_ground) 			and _bare_round(state, _decoy_ground, radius):
+	if _decoy_ground.x >= 0 and Building.can_place(state, id, _decoy_ground) 			and _bare_round(state, _decoy_ground, radius):
 		return _decoy_ground
 	var house := Farm.house_centre(state)
 	for ring in range(radius + 2, 60):
@@ -7534,7 +7797,7 @@ func _open_square(state: Dictionary, radius: int) -> Vector2i:
 				if maxi(absi(dx), absi(dy)) != ring:
 					continue
 				var cell := house + Vector2i(dx, dy)
-				if Building.can_place(state, &"decoy", cell) and _bare_round(state, cell, radius):
+				if Building.can_place(state, id, cell) and _bare_round(state, cell, radius):
 					_decoy_ground = cell
 					return cell
 	return Vector2i(-1, -1)
