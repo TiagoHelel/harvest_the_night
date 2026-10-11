@@ -147,6 +147,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
+	["wraith", "wraiths in the light and out of it: Winter 2's night, a searchlight and a gun tower on open snow south-east of the house, one wraith in the lamp's square - solid, a target - and one out in the dark - faint, never gone", ""],
 	["frost", "towers chilled by a frost zombie's burst: Winter 2's night, four gun towers in a row on open snow south-east of the house and a frost zombie killed between the first two by the shutter - those two frosted, the other two not, the ice burst at its widest, and two more frost zombies coming in from the east", ""],
 	["digger", "a digger under a fence: Autumn 2's night, a fence laid across a digger's road home over open ground east of the house, and the digger under it by the shutter - a mound of soil beneath the rails, no body above, the fence untouched", ""],
 	["crow", "crows on the field: Autumn 2's night, the starter field sown, a crow landed on it and pecking a crop, and another flying in from the south over a run of wall towards the next one - lifted over its shadow, which lies on the ground under the wall", ""],
@@ -802,6 +803,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"crow": _set_crow(state)
 		"digger": _set_digger(state)
 		"frost": _set_frost(state)
+		"wraith": _set_wraith(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1160,6 +1162,28 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				str(Entities.cell_of(state, _boss_giant)), Enemies.is_winding(state, _boss_giant),
 				str(Enemies.winding_at(state, _boss_giant)),
 				int(state["house_hp"]), (main.find_child("NightHud", true, false) as NightHud).banner_text()])
+		"wraith":
+			# **One in the beam and one out of it** (task 0252), set down at the
+			# shutter so the settle walks neither out of its light.
+			var in_beam := Entities.spawn(state, &"wraith", _wraith_lamp + Vector2i(2, 1))
+			# Out in the dark on bare ground: the first take had it under a
+			# bush, which hid the faint one's head.
+			var out_there := Vector2i(-1, -1)
+			for dx in range(8, 16):
+				for dy in [1, 2, 0, 3]:
+					var at := _wraith_lamp + Vector2i(dx, int(dy))
+					if out_there.x < 0 and not Light.lit_now(state, at) and Farm.occupant(state, at).is_empty() 							and Farm.occupant(state, at + Vector2i(0, -1)).is_empty() 							and Farm.occupant(state, at + Vector2i(1, -1)).is_empty() 							and Farm.occupant(state, at + Vector2i(-1, -1)).is_empty():
+						out_there = at
+			var in_dark := Entities.spawn(state, &"wraith", out_there)
+			# The cursor and its label off to the west, clear of both.
+			(main.get_node("%WorldView") as WorldView).cursor().place_at(
+				_open_ground_near(state, _wraith_lamp + Vector2i(-6, 1)))
+			var said: Array = []
+			for id in [in_beam, in_dark]:
+				var at := Entities.cell_of(state, int(id))
+				said.append("%s lit %s presence %.2f" % [str(at), Light.lit_now(state, at),
+					WorldView.wraith_presence(Light.lit_now(state, at))])
+			print("  wraith: %s" % ", ".join(said))
 		"frost":
 			# **A burst at the shutter** (task 0251): one more frost zombie
 			# killed between the first two towers inside a tick the effects
@@ -3266,6 +3290,30 @@ func _set_digger(state: Dictionary) -> void:
 	_digger = Entities.spawn(state, &"digger", start)
 	print("  digger: from %s, the fence across its road at %s" % [str(start), str(_digger_fence)])
 	_look_at(_digger_fence)
+
+
+## **Wraiths in the light and out of it** (task 0252): Winter 2's night, a
+## searchlight and a gun tower beside it on open snow south-east of the house;
+## by the shutter (`_just_before_the_shutter`) a wraith in the lamp's square
+## and another out in the dark.
+func _set_wraith(state: Dictionary) -> void:
+	_on_date(state, 3 * GameData.SEASON_DAYS + 2)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200, GameData.COPPER: 60, GameData.MONEY: 400})
+	var middle := _clear_patch(state, Farm.house_centre(state) + Vector2i(8, 13), 4)
+	NightRoad.into_build(state)
+	_wraith_lamp = middle
+	var lamp_up := middle.x >= 0 and Building.place(state, &"searchlight", middle)
+	var gun_up := middle.x >= 0 and Building.place(state, &"gun_tower", middle + Vector2i(-2, 0))
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	print("  wraith: the lamp at %s up %s, the gun beside it up %s, %d tiles lit round it" % [
+		str(middle), lamp_up, gun_up, Light.lamp_tiles(state, middle)])
+	_look_at(middle + Vector2i(4, 0))
+
+
+## Where `_set_wraith` put its searchlight.
+var _wraith_lamp := Vector2i.ZERO
 
 
 ## **Towers chilled by a frost zombie's burst** (task 0251): Winter 2's night,

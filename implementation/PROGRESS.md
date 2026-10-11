@@ -26664,3 +26664,160 @@ assets/locale/strings.csv, tools/determinism_data_hash.txt,
 implementation/backlog/packs/A050-frost-zombie.md,
 implementation/prompts/0251-frost-zombie.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0251/, docs/devlog/{index,index.pt_BR}.md
+
+## 0252 - The wraith - done 2026-10-11
+
+What changed: winter's answer to a defence that only shoots. In the dark no
+tower can aim at a wraith. Light makes it a target - a searchlight's square,
+the porch, a flare's burst, a fire under it - from the tick it stands in it.
+What does not aim still finds it in the dark. On screen it is faint outside
+light and solid in it, never gone.
+
+No night sends one yet. Like 0247-0251's enemies, it waits for the season's
+waves (0059's `NO_NIGHT_YET`).
+
+### The rules (`src/core/`)
+
+**`ENEMIES.wraith`**, with levers:
+- `needs_light`; hp 30, 18 ticks a tile (a drift a little quicker than the
+  walker), 12 to the house, $7, armour 0;
+- no bones, since a shade leaves nothing to pick up; and not lured, since
+  straw does not fool what drifts in from the dark.
+
+It sits inside the tank's bounds (0051) and under every boss (0058). It
+outlives a flare's 25, so a flare lights it for the guns rather than killing
+it outright.
+
+**Light is 0229's rule, asked:** `Light.is_lit(state, cell)` - the
+searchlights' squares, the porch, the flare's burst, a burning body's cell.
+Nothing here defines light again.
+
+**Sight:**
+- `Enemies.needs_light(kind)` and `Enemies.in_sight(state, id)`: anything
+  but a `needs_light` kind on a cell `is_lit` leaves dark;
+- `Combat.worth_shooting` passes over a wraith out of sight, and
+  `Towers._acquire` asks it for every candidate, so no tower picks one in
+  the dark. The light is asked only for a `needs_light` kind, on the row
+  `worth_shooting` already has in hand: other kinds pay nothing for it;
+- **from the tick it steps into light it is a target.** The night's order
+  moves the enemies before the towers fire, so a wraith that stepped into a
+  lit cell this tick is shot this tick;
+- **a shot already in the air still lands:** a guided shot chases its id
+  and never asks again.
+
+**`Light.lit_now(state, cell)`**, for the view: the same answer as `is_lit`,
+writing nothing. `is_lit` refreshes the cache in the state, and a view
+writing state would make a watched night differ from a skipped one. It
+reads the cache when it is current and works the farm out afresh when it
+is not.
+
+### Decided: what aims, and what does not
+
+| | In the dark | In light |
+|---|---|---|
+| Every tower's pick: gun, crossbow, hive, flamethrower, mortar, catapult | no | yes |
+| A shot already in the air | lands | lands |
+| A shell's splash, a mortar's or a catapult's | hits it | hits it |
+| The flamethrower's cone, fired at something else | burns it, and the fire under it lights it for every gun | burns it |
+| The crossbow's bolt through the line | hits it | hits it |
+| A mine's blast | hits it | hits it |
+| The flare | hits and slows it, and lights it for a second | hits and slows it |
+| The farm bell | stuns it | stuns it |
+| The dog | finds it by its nose | finds it |
+
+The recommendation taken: area damage still hurts it, so the dark has
+answers that are not light. Fire is both: a flamethrower that catches one
+in the cone lights it for the guns.
+
+### The view (`src/ui/`)
+
+- **`wraith_fade.gdshader`** (new): the presence the view hands over in the
+  sprite's alpha becomes the shade's strength. The art stays opaque with
+  binary alpha, as A051 asks. In the dark its rows waver a little, each on
+  its own clock; in light it is still.
+- **`WorldView`:** a wraith's sprite gets the fade's one material, and the
+  pooled sprite gets it back off for every other body. Its presence is
+  `wraith_presence(Light.lit_now(...))`: 1.0 lit, `WRAITH_FAINT` (0.35) out
+  of light. It eases there at `WRAITH_FADE_PER_SECOND` (a quarter of a
+  second end to end), and at once the first time it is drawn. Its shadow
+  fades with it. The two numbers are the view's, not levers: they change
+  nothing the rules see.
+- **A051's stand-ins** (`PlaceholderArt`), until 0265: the walker gone pale
+  (`WRAITH_TINT`) for the master, the float, the attack, the dissipate and
+  the forecast head.
+- **The words:** `Names` has `ENEMY_WRAITH`, `Describe` `DESC_NEEDS_LIGHT`
+  ("can only be aimed at in light"), and `Sfx` borrows the walker's voice
+  until 0284.
+- **A051's table is final**, with how the game plays it.
+
+### Found
+
+- **A tree stood on the test's first lamp cell,** two cells beside the
+  wraith's eleventh step: the run never lit. The helper looks for the first
+  open ground about there, on either side of the road.
+- **The input case's first lamp went down by the house,** where the porch
+  went on lighting the wraith when the lamp came down. It now picks a spot
+  whose wraith cell is dark without the lamp.
+- **`input_v1`, run on its own right after `headless_check`, took 119 s
+  once.** Timed alone, the new case costs 0.7 s, as the boss bar's does. The
+  rest was the machine: the suite was already at 111-112 s against verify's
+  120.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. No wraith walks in the determinism night,
+  and the light is asked only for a `needs_light` kind.
+- **DATA 762535020 -> 2971249203:** the wraith's row.
+
+Verify: **PASS**, 60 of 60 in 1001 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 18006 asserts, `headless_v1` 2666, `input_check` 1266 cases, `input_v1` 734 (112 s).
+- **perf:** a night tick 1710 us, the swarm's 5648, a path rebuild 11486, 15835 with the decoys and 11776 with the garlic. The baseline did not move: the light is asked only for a wraith.
+
+**Tests:**
+- **`_task_0252_wraith` (headless_v1):**
+  - the row: it needs light, outlives a flare's burst, and sits inside the
+    tank's bounds;
+  - **past a gun tower in the dark,** from the east spawn, the tower two
+    cells beside its fifth step, three times:
+    - by a searchlight: about a hundred ticks in reach in the dark without
+      a shot; on tick 99 it stood in the lamp's square, and the tower fired
+      that tick;
+    - by a flare set off on it after twenty ticks in reach in the dark, and
+      by a fire set under it: fired on in the tick it was lit;
+    - the searchlight's shot, with the lamp taken down under it, still
+      landed on the wraith in the dark;
+  - **in the dark** no tower picks it and `worth_shooting` passes it over,
+    while the dog's nose, a mortar shell's splash and a mine's blast find it;
+  - **the view's light is the rules'**: `lit_now` gives `is_lit`'s answer on
+    a row across a lamp's square without writing the cache, and
+    `wraith_presence` is 1 in light and `WRAITH_FAINT` out of it, never 0;
+  - its name, `DESC_NEEDS_LIGHT`, the voice.
+- **`_case_0252_wraith_fade` (input_v1):** a night with a searchlight standing
+  and the world held still. A wraith in its square is drawn solid and one in
+  the dark at 0.35, both through the fade shader, and a walker plain, with no
+  shader. With the lamp taken down, the lit one eases down to faint rather
+  than cutting.
+- **Old groups touched:** `NO_NIGHT_YET` gains the wraith, and headless_check
+  counts 110 scenes.
+
+**Looked at** (`python tools/shot.py 0252 wraith --fhd`):
+- **`wraith`, Winter 2's night:** a searchlight and a gun tower beside it on
+  open snow south-east of the house. The lamp's lens is lit and its beam and
+  pool lie east of it (4 tiles lit). A wraith stands in the pool, drawn
+  solid, and the gun is firing at it (its muzzle lit). Six tiles further
+  east, out in the dark, the other wraith is a translucent shade, its rows
+  slightly wavering: there to the eye, with no tower aiming at it
+  (`(47, 35) lit presence 1.00, (53, 36) dark presence 0.35`).
+- **What the takes found:**
+  - **the first** had the dark wraith under a bush, which hid its faint
+    head;
+  - **the second** had it under the cursor's label. The scene now picks
+    bare ground for it and moves the cursor off to the west.
+
+Files: src/core/{combat,enemies,game_data,light,towers}.gd,
+src/ui/{wraith_fade.gdshader,placeholder_art,world_view,names,describe,sfx}.gd,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/backlog/packs/A051-wraith.md,
+implementation/prompts/0252-wraith.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0252/, docs/devlog/{index,index.pt_BR}.md

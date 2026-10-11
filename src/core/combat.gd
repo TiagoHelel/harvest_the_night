@@ -119,7 +119,8 @@ static func incoming(state: Dictionary, id: int) -> int:
 	return total
 
 
-## Whether it is worth shooting at all: alive, and not already accounted for.
+## Whether it is worth shooting at all: alive, seen (task 0252), and not
+## already accounted for.
 ##
 ## The arithmetic uses the same armour the hit will, so a tank is not written
 ## off as dead because four crossbow bolts add up to its hit points on paper.
@@ -128,6 +129,10 @@ static func worth_shooting(state: Dictionary, id: int) -> bool:
 	if one.is_empty():
 		return false
 	var data: Dictionary = GameData.ENEMIES[one["kind"]]
+	# **Not what cannot be seen** (task 0252): a wraith in the dark is no
+	# target for any tower, until the tick it stands in light.
+	if bool(data.get("needs_light", false)) and not Enemies.in_sight(state, id):
+		return false
 	var armour := int(data.get("armour", 0))
 
 	var committed := 0

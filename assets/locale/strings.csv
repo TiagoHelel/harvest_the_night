@@ -175,6 +175,7 @@ DESC_FREE,0,free,de graça
 DESC_FROM,0,from %s,de %s
 DESC_GROWS_IN,0,grows in %d days,cresce em %d dias
 DESC_HITS_FOR,0,hits for %d,bate %d
+DESC_NEEDS_LIGHT,0,can only be aimed at in light,só dá para mirar nela na luz
 DESC_HP,0,%d hit points,%d de vida
 DESC_LURES,0,pulls zombies from up to %d tiles,atrai zumbis a até %d ladrilhos
 DESC_KIT_ONLY,0,only from a kit made at the %s,só de um kit feito na %s
@@ -263,6 +264,8 @@ ENEMY_SPITTER,0,spitter,cuspidor
 ENEMY_SPITTER.other,0,spitters,cuspidores
 ENEMY_TANK,0,tank,brutamontes
 ENEMY_TANK.other,0,tanks,brutamontes
+ENEMY_WRAITH,0,wraith,assombração
+ENEMY_WRAITH.other,0,wraiths,assombrações
 ENEMY_WALKER,0,walker,andarilho
 ENEMY_WALKER.other,0,walkers,andarilhos
 FCAST_BOSS,142,%s IS COMING,%s ESTÁ VINDO

@@ -14,7 +14,13 @@ The wraith is winter's answer to a defence that only shoots: in the dark, no tow
 
 ## Deliverables
 
-The table is provisional: game task 0252 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0252. The rows stand as written: 64x48 standing on (32,44), the frames and seconds of the table. **How the game plays them:**
+- **The float:** 18 ticks a tile, a little over one and a half tiles a second, on the four `walk` frames at 0.125 s each, facing the way it moves. It bites the house and gnaws a wall as a walker does; until 0265 it does that on its walk frames, and `attack` waits for it.
+- **The fade is the shader's** (`src/ui/wraith_fade.gdshader`), never the art's. Where its cell is lit it is drawn solid. Outside light it is drawn at 35%, and its rows waver a little, each on its own clock. Between the two it eases over a quarter of a second, and its shadow fades with it. The lit cells are the ones the towers ask about: a searchlight's square, two tiles round the porch, a flare's burst while it shows, a fire under it.
+- **Death:** until 0265 the body left behind is `wraith_death_3`, squashed, and solid; the fade is for the living.
+- **Night colours:** at 35% what carries it on night snow is its dark outline over the pale body. A faint stand-in with its rim reads as a shade, and without it the body would melt into the snow. Keep a dark rim round the pale form on every frame.
+
+Until 0265 every frame stands in as the walker gone pale (`PlaceholderArt`), and the forecast head is the box over the walker's head, tinted the same, all through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

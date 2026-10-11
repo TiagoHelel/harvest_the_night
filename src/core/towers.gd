@@ -378,7 +378,8 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
 		# **Not what is already accounted for.** Without this a line of towers
 		# all fires at the leader, most of those shots land on a corpse, and
 		# the wave behind walks past untouched - which looks exactly like the
-		# towers being too weak, and is not.
+		# towers being too weak, and is not. **Nor what it cannot see** (task
+		# 0252): `worth_shooting` passes over a wraith in the dark.
 		if not Combat.worth_shooting(state, id):
 			continue
 		# **Lower is better, whatever "better" means to this tower.** One

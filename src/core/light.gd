@@ -23,7 +23,7 @@ extends RefCounted
 ##
 ## **Asked, never ticked**: nothing advances it. And only the rules ask the
 ## cached way (`is_lit`), because asking refreshes the cache in the state: the
-## view asks `lamp_tiles` and `lit_cells`, which write nothing.
+## view asks `lamp_tiles`, `lit_cells` and `lit_now`, which write nothing.
 
 static func initial() -> Dictionary:
 	return {
@@ -42,6 +42,20 @@ static func is_lit(state: Dictionary, cell: Vector2i) -> bool:
 	if _steady(state).has(idx):
 		return true
 	return _flared(state, cell) or _burning_on(state, cell)
+
+
+## **The same question, asked by the view** (task 0252's wraith fade):
+## whether this cell is lit, writing nothing - the rules' cache read when it
+## is current, the farm worked out afresh when it is not (the frame after the
+## farm changed, until the rules' next look refreshes it).
+static func lit_now(state: Dictionary, cell: Vector2i) -> bool:
+	var idx := Grid.index(cell)
+	if idx < 0:
+		return false
+	var steady: Dictionary = state["light_cells"]
+	if state["light_for"] != [int(state["grid_version"]), Power.is_short(state)]:
+		steady = _steady_cells(state)
+	return steady.has(idx) or _flared(state, cell) or _burning_on(state, cell)
 
 
 ## **How far a lamp standing here lights tonight**, in tiles: its levelled

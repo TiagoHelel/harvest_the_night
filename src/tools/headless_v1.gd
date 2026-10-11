@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 85
+const GROUPS := 86
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -164,6 +164,7 @@ func _run() -> void:
 	_task_0249_crow()
 	_task_0250_digger()
 	_task_0251_frost()
+	_task_0252_wraith()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -10423,6 +10424,158 @@ func _task_0251_frost() -> void:
 		"the ice burst sits on A050's canvas, grows to its widest and fades, every frame its own, in the ice's keys",
 		"%s %s %s" % [str(off), str(counts), str(boxes)])
 	_completed += 1
+
+
+## 0252 - the wraith. A gun tower lets one walk past it in the dark and shoots
+## it on the first tick it stands in a searchlight's square, a flare's burst or
+## a fire under it; a shot already in the air still lands; and what does not
+## aim - a shell's splash, a mine, the dog's nose - finds it in the dark.
+func _task_0252_wraith() -> void:
+	var row: Dictionary = GameData.ENEMIES[&"wraith"]
+	var tank: Dictionary = GameData.ENEMIES[&"tank"]
+	expect(Enemies.needs_light(&"wraith") and not Enemies.needs_light(&"walker") and int(row["hp"]) < int(tank["hp"])
+		and int(row.get("armour", 0)) < int(tank["armour"]) and int(row["ticks_per_tile"]) < int(tank["ticks_per_tile"])
+		and int(row["hp"]) > int(GameData.ABILITY["damage"]) and not Combat.is_boss(&"wraith")
+		and GameData.check_enemies(GameData.ENEMIES).is_empty(),
+		"a wraith needs light to be aimed at, outlives a flare's burst, and sits inside the tank's bounds", str(row))
+
+	# **Past a gun tower in the dark, shot on the first tick it stands lit**:
+	# in the searchlight's square, in a flare's burst, with a fire under it.
+	for light in [&"searchlight", &"flare", &"fire"]:
+		var run := _wraith_past_a_tower(25200 + ["searchlight", "flare", "fire"].find(String(light)), light)
+		expect(int(run["dark_in_reach"]) > 0 and int(run["shot_in_dark"]) == 0 and int(run["first_lit"]) >= 0
+			and int(run["shot_at"]) == int(run["first_lit"]) and String(run["source"]) == String(light),
+			"a gun tower lets a wraith walk past it in the dark and shoots it on the first tick it stands lit by the %s" % light,
+			str(run))
+		if light == &"searchlight":
+			expect(bool(run["landed_in_dark"]),
+				"the shot already in the air lands, though the lamp came down under it", str(run))
+
+	# **What does not aim finds it in the dark**: no tower picks it and
+	# `worth_shooting` passes it over, but the dog goes by its nose, a shell's
+	# splash lands on it and a mine's blast reaches it.
+	var dark := _powers_night(25203)
+	var spot := _open_square(dark, 3, &"gun_tower")
+	var shade := Entities.spawn(dark, &"wraith", spot)
+	var whole := int(Entities.get_one(dark, shade)["hp"])
+	var unseen := not Light.is_lit(dark, spot) and not Enemies.in_sight(dark, shade) and not Combat.worth_shooting(dark, shade) \
+		and Towers.acquire_for(dark, spot + Vector2i(2, 1), GameData.DEFENCES[&"gun_tower"]) == 0
+	var sniffed := Ability.dog_target(dark, spot) == shade
+	Towers.land_at_for_test(dark, Building.entry_of(&"mortar"), spot)
+	var shelled := not Entities.alive(dark, shade) or int(Entities.get_one(dark, shade)["hp"]) < whole
+	# The mine on a night of its own, so the shell has not already done it.
+	var mined := _powers_night(25205)
+	var other := Entities.spawn(mined, &"wraith", spot)
+	Farm.place(mined, spot + Vector2i(1, 0), {"id": &"mine", "hp": 1})
+	Traps.detonate_for_test(mined, spot + Vector2i(1, 0))
+	var blasted := not Entities.alive(mined, other) or int(Entities.get_one(mined, other)["hp"]) < whole
+	expect(unseen and sniffed and shelled and blasted,
+		"in the dark no tower aims at it, but the dog's nose, a shell's splash and a mine's blast find it",
+		"unseen %s, dog %s, shell %s, mine %s" % [unseen, sniffed, shelled, blasted])
+
+	# **The view asks the same rule, writing nothing** (`Light.lit_now`): the
+	# same answer as `is_lit` on a row of cells across a lamp's square, and
+	# the cache untouched until the rules ask.
+	var lamps := _powers_night(25204)
+	var lamp := _open_square(lamps, 5, &"searchlight")
+	Farm.place(lamps, lamp, {"id": &"searchlight", "hp": int((GameData.DEFENCES[&"searchlight"] as Dictionary)["hp"])})
+	var stamp: Array = (lamps["light_for"] as Array).duplicate()
+	var seen: Array = []
+	for dx in range(-7, 8):
+		seen.append(Light.lit_now(lamps, lamp + Vector2i(dx, 1)))
+	var untouched: bool = lamps["light_for"] == stamp
+	var agree := true
+	for dx in range(-7, 8):
+		agree = agree and bool(seen[dx + 7]) == Light.is_lit(lamps, lamp + Vector2i(dx, 1))
+	expect(untouched and agree and seen.has(true) and seen.has(false)
+		and WorldView.wraith_presence(true) == 1.0 and WorldView.wraith_presence(false) == WorldView.WRAITH_FAINT
+		and WorldView.WRAITH_FAINT > 0.0 and WorldView.WRAITH_FAINT < 1.0,
+		"the view's light is the rules' light, asked without writing; a wraith shows solid in it and faint - never gone - outside",
+		"%s %s %s" % [untouched, agree, str(seen)])
+
+	# **The words and the voice.**
+	expect(Names.of(&"wraith") == I18n.t(&"ENEMY_WRAITH") and Describe.enemy(&"wraith").contains(I18n.t(&"DESC_NEEDS_LIGHT"))
+		and Sfx.ENEMY_SOUNDS.get(&"wraith", &"") == &"sfx/groan_walker",
+		"it has its name, a tooltip line that it can only be aimed at in light, and the walker's voice until its own")
+	_completed += 1
+
+
+## **A wraith from the east spawn past a gun tower** (task 0252): the tower two
+## cells beside its road at the fifth step, in reach of it in the dark, and
+## `light` coming on where it walks - `searchlight`, a lamp two cells beside its
+## road about its eleventh step, on the first open ground there (a tree stood
+## on the first try), whose square starts four steps short of it; `flare` set
+## off on it and
+## `fire` set under it once it has walked twenty ticks in reach in the dark.
+## The ticks it spent in reach and dark, shots fired at it in the dark, the
+## first tick it stood lit and the tick the tower first fired at it, what lit
+## it, and - the lamp's - whether that shot landed after the lamp came down.
+func _wraith_past_a_tower(seed_value: int, light: StringName) -> Dictionary:
+	var state := _powers_night(seed_value)
+	Pathing.refresh(state)
+	var road: Array = [Enemies.spawn_cells(state, 0)[0]]
+	for _i in 14:
+		road.append(Pathing.step_from(state, road.back() as Vector2i))
+	var heading: Vector2i = (road[5] as Vector2i) - (road[4] as Vector2i)
+	var side := Vector2i(heading.y, heading.x) * 2
+	if not Farm.buildable(state, (road[4] as Vector2i) + side):
+		side = -side
+	var tower: Vector2i = (road[4] as Vector2i) + side
+	Farm.place(state, tower, {"id": &"gun_tower", "hp": int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["hp"])})
+	var lamp := Vector2i(-1, -1)
+	if light == &"searchlight":
+		for k in [10, 11, 12, 9]:
+			for s in [side, -side]:
+				var at: Vector2i = (road[k] as Vector2i) + (s as Vector2i)
+				if lamp.x < 0 and Farm.buildable(state, at):
+					lamp = at
+		Farm.place(state, lamp, {"id": &"searchlight", "hp": int((GameData.DEFENCES[&"searchlight"] as Dictionary)["hp"])})
+	Pathing.refresh(state)
+	var gun: Dictionary = GameData.DEFENCES[&"gun_tower"]
+	var id := Entities.spawn(state, &"wraith", road[0] as Vector2i)
+	var out := {"dark_in_reach": 0, "shot_in_dark": 0, "first_lit": -1, "shot_at": -1, "source": "",
+		"landed_in_dark": false}
+	var hp_at_shot := -1
+	for t in 600:
+		var before := int(state["shots_fired"])
+		Sim.advance(state, 1)
+		if not Entities.alive(state, id):
+			break
+		var here := Entities.cell_of(state, id)
+		var fired := int(state["shots_fired"]) > before
+		if not Light.is_lit(state, here):
+			if Grid.chebyshev(here, tower) <= Towers.reach_of(state, gun, tower):
+				out["dark_in_reach"] = int(out["dark_in_reach"]) + 1
+			if fired and int(out["first_lit"]) < 0:
+				out["shot_in_dark"] = int(out["shot_in_dark"]) + 1
+			# The flare and the fire come on after twenty ticks of it in reach
+			# in the dark, the tower looking straight at it.
+			if int(out["first_lit"]) < 0 and int(out["dark_in_reach"]) == 20:
+				if light == &"flare":
+					Ability.use(state, Ability.FLARE, here)
+				elif light == &"fire":
+					Combat.set_alight(state, id, 1, 10 * GameData.SECONDS)
+		elif int(out["first_lit"]) < 0:
+			out["first_lit"] = t
+			out["source"] = "searchlight" if Light.lamp_tiles(state, lamp) > 0 \
+				and Grid.chebyshev(lamp, here) <= Light.lamp_tiles(state, lamp) \
+				else ("flare" if not Ability.aimed_at(state, Ability.FLARE).is_empty()
+				else ("fire" if Combat.is_burning(state, id) else "porch"))
+		if fired and int(out["shot_at"]) < 0:
+			out["shot_at"] = t
+			hp_at_shot = int(Entities.get_one(state, id)["hp"])
+			if light == &"searchlight":
+				# **The lamp comes down under the shot in the air.**
+				Farm.remove(state, lamp)
+		if int(out["shot_at"]) >= 0:
+			var flying := false
+			for shot in (state["projectiles"] as Array):
+				flying = flying or int((shot as Dictionary)["target"]) == id
+			if not flying:
+				out["landed_in_dark"] = int(Entities.get_one(state, id)["hp"]) < hp_at_shot \
+					and not Light.is_lit(state, Entities.cell_of(state, id))
+				break
+	return out
 
 
 ## A crop on `cell` (task 0249): tilled, sown with `crop`, nothing grown yet.

@@ -265,6 +265,12 @@ const FROST_ZOMBIE := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "d
 const FROST_TINT := Color(0.78, 1.0, 1.45)
 const ICE_SHATTER := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 12), "draw_scale": 1.0}
 
+## A051's wraith (task 0252): the families' 64x48 standing on (32,44), drawn
+## at 1.0, the walker it stands in as gone pale as a shade. Its fading is
+## `wraith_fade.gdshader`'s, never the art's.
+const WRAITH := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "draw_scale": 1.0}
+const WRAITH_TINT := Color(1.6, 1.7, 2.0)
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -421,6 +427,14 @@ const ART := {
 	&"frost_zombie_death": {"pack": "A050", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": FROST_TINT, "geometry": FROST_ZOMBIE, "final": FROST_ZOMBIE},
 	&"ice_shatter": {"pack": "A050", "dir": "res://sprites/effects/", "frames": 4, "seconds": 0.08, "loop": false, "stand_in": &"", "geometry": ICE_SHATTER, "final": ICE_SHATTER},
 	&"head_frost_zombie": {"pack": "A050", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": FROST_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
+	# A051's wraith (task 0252): the walker gone pale, every pose its own,
+	# until 0265; faint outside light by `wraith_fade.gdshader`, and its
+	# forecast head the box over the walker's head.
+	&"wraith": {"pack": "A051", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker", "tint": WRAITH_TINT, "geometry": WRAITH, "final": WRAITH, "bare": true},
+	&"wraith_walk": {"pack": "A051", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.125, "loop": true, "stand_in": &"enemies/walker_walk", "stand_in_frames": 4, "tint": WRAITH_TINT, "geometry": WRAITH, "final": WRAITH},
+	&"wraith_attack": {"pack": "A051", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_attack", "stand_in_frames": 3, "tint": WRAITH_TINT, "geometry": WRAITH, "final": WRAITH},
+	&"wraith_death": {"pack": "A051", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": WRAITH_TINT, "geometry": WRAITH, "final": WRAITH},
+	&"head_wraith": {"pack": "A051", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": WRAITH_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
 	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn

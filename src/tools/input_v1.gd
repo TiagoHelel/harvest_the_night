@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 53
+const V1_CASES := 54
 
 
 func _process(delta: float) -> bool:
@@ -103,6 +103,7 @@ func _run() -> void:
 	await _case_0233_powers()
 	await _case_0234_hotbar_pages()
 	await _case_0246_boss_bar()
+	await _case_0252_wraith_fade()
 	_finish()
 
 
@@ -952,6 +953,76 @@ func _case_0135_flare_aim() -> void:
 		"and the next click flares the clicked cell", str(Ability.aimed_at(state, Ability.FLARE)))
 	await close_scene()
 	_completed += 1
+
+
+## 0252 - the wraith's fade. On a night with a searchlight standing, a wraith
+## in its square is drawn solid and one out in the dark faint - never gone -
+## both through the fade shader, and a walker beside it plain; taken out of
+## the light, the first fades to faint.
+func _case_0252_wraith_fade() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(2)
+	state["day"] = 3 * GameData.SEASON_DAYS + 2
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	world.skip_transition()
+	# The world held still: the light and the bodies stay where they are put.
+	driver.running = false
+	# Off the porch's light: the first try stood the lamp by the house, and the
+	# porch went on lighting the wraith when the lamp came down.
+	var middle := world.screen_to_cell(Vector2(240.0, 135.0))
+	var lamp := Vector2i(-1, -1)
+	for radius in range(4, 16, 2):
+		for candidate in Grid.within(middle, radius):
+			if lamp.x < 0 and Farm.buildable(state, candidate) and not Light.lit_now(state, candidate + Vector2i(2, 0)):
+				lamp = candidate
+	Farm.place(state, lamp, {"id": &"searchlight", "hp": int((GameData.DEFENCES[&"searchlight"] as Dictionary)["hp"])})
+	var out_there := Vector2i(-1, -1)
+	for dx in range(8, 16):
+		if out_there.x < 0 and not Light.lit_now(state, lamp + Vector2i(dx, 1)):
+			out_there = lamp + Vector2i(dx, 1)
+	var bright := Entities.spawn(state, &"wraith", lamp + Vector2i(2, 0))
+	var faint := Entities.spawn(state, &"wraith", out_there)
+	var plain := Entities.spawn(state, &"walker", out_there + Vector2i(0, 2))
+	await frames(4)
+	var lit_sprite := _actor_sprite_of(world, state, bright)
+	var dark_sprite := _actor_sprite_of(world, state, faint)
+	var walker_sprite := _actor_sprite_of(world, state, plain)
+	var shaded := func(sprite: Sprite2D) -> bool:
+		return sprite != null and sprite.material is ShaderMaterial \
+			and (sprite.material as ShaderMaterial).shader == WorldView.WRAITH_FADE
+	expect(Light.lit_now(state, lamp + Vector2i(2, 0)) and not Light.lit_now(state, out_there)
+		and shaded.call(lit_sprite) and shaded.call(dark_sprite) and walker_sprite != null and walker_sprite.material == null
+		and is_equal_approx(lit_sprite.modulate.a, 1.0) and is_equal_approx(dark_sprite.modulate.a, WorldView.WRAITH_FAINT)
+		and is_equal_approx(walker_sprite.modulate.a, 1.0),
+		"a wraith in the searchlight's square is drawn solid, one in the dark faint and never gone, both through the fade shader - a walker plain",
+		"%s / %s" % [lit_sprite.modulate.a if lit_sprite != null else -1.0, dark_sprite.modulate.a if dark_sprite != null else -1.0])
+	# Out of the light, it fades - eased, not cut.
+	Farm.remove(state, lamp)
+	await frames(1)
+	var fading := _actor_sprite_of(world, state, bright).modulate.a
+	await until(func() -> bool: return is_equal_approx(_actor_sprite_of(world, state, bright).modulate.a, WorldView.WRAITH_FAINT),
+		"the wraith to fade")
+	expect(fading > WorldView.WRAITH_FAINT and is_equal_approx(_actor_sprite_of(world, state, bright).modulate.a, WorldView.WRAITH_FAINT),
+		"with the lamp gone it fades to faint, eased rather than cut", str(fading))
+	driver.running = true
+	await close_scene()
+	_completed += 1
+
+
+## The pooled sprite drawing `id` this frame (task 0252): the actors are
+## drawn in id order, one sprite each.
+func _actor_sprite_of(world: WorldView, state: Dictionary, id: int) -> Sprite2D:
+	var at := Entities.ids(state).find(id)
+	return world._actor_sprites[at] as Sprite2D if at >= 0 and at < world._actor_sprites.size() else null
 
 
 ## 0246 - the boss bar for any boss. A Giant spawned as a wave spawns one -

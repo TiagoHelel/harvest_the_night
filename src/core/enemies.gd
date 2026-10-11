@@ -597,6 +597,24 @@ static func in_reach(state: Dictionary, id: int, up: bool) -> bool:
 	return up or not airborne(state, id)
 
 
+## **Whether a kind can only be aimed at in light** (task 0252): its
+## `needs_light`.
+static func needs_light(kind: StringName) -> bool:
+	return bool((GameData.ENEMIES.get(kind, {}) as Dictionary).get("needs_light", false))
+
+
+## **Whether a tower can see this one to aim at it** (task 0252): anything but
+## a `needs_light` kind on a cell `Light` leaves dark. Aiming asks it; what
+## lands on an area never does.
+static func in_sight(state: Dictionary, id: int) -> bool:
+	var one := Entities.get_one(state, id)
+	if one.is_empty():
+		return false
+	if not needs_light(StringName(one["kind"])):
+		return true
+	return Light.is_lit(state, Entities.cell_of(state, id))
+
+
 ## Whether a kind flies (task 0249).
 static func flies(kind: StringName) -> bool:
 	return bool((GameData.ENEMIES.get(kind, {}) as Dictionary).get("flies", false))

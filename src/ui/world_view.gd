@@ -132,6 +132,9 @@ var _decoy_hits: Dictionary = {}
 ## tower showcase turns them off, to look at the towers by daylight.
 var tarps := true
 const AMBIENT_MOTION := preload("res://src/ui/ambient_motion.gdshader")
+## **A wraith's fade** (task 0252): the shader that turns its presence into a
+## shade - one material for every wraith on the farm.
+const WRAITH_FADE := preload("res://src/ui/wraith_fade.gdshader")
 var _ambient_materials: Array[ShaderMaterial] = []
 ## **The season on screen** (task 0159): the remap the ground and the trees
 ## wear, the roofs' snow and the caps'. Its own node; see `SeasonView`.
@@ -232,6 +235,10 @@ var _spit: Node2D
 ## Which way each untracked enemy last moved (task 0247's spitter), by id:
 ## `[x, faces_right]`. Pictures only; the rules have no facing.
 var _heading: Dictionary = {}
+## How much of each wraith shows, by id, eased towards its light's (task
+## 0252), and the one material their fade shares.
+var _presence: Dictionary = {}
+var _wraith_fade: ShaderMaterial
 var _mine_tick_before := -1
 var _mine_losses_before: Dictionary = {}
 var _mine_grid_version := -1
@@ -576,7 +583,7 @@ func _process(delta: float) -> void:
 		_plots_signature = plots
 		_refresh_plots()
 
-	_refresh_actors()
+	_refresh_actors(delta)
 	_refresh_ambient(delta)
 	_refresh_zzz(delta)
 	_refresh_deaths(delta)
@@ -1846,7 +1853,7 @@ func zzz_showing() -> bool:
 
 
 ## Enemy sprites share the y-sorted layer with the player and trees.
-func _refresh_actors() -> void:
+func _refresh_actors(delta: float = 0.0) -> void:
 	if _actors == null:
 		return
 	var ids := Entities.ids(_state)
@@ -1871,6 +1878,14 @@ func _refresh_actors() -> void:
 		sprite.modulate = actor_tint(_state, one)
 		# **A stand-in's tint** (task 0247's soured walker), white for real art.
 		sprite.self_modulate = PlaceholderArt.tint_of(ENEMY_DIR + str(pose) + ".png")
+		# **A wraith is faint outside light** (task 0252): the fade shader on
+		# its sprite, its presence in the alpha the shader reads - its shadow
+		# with it. Every other body solid and plain: the sprites are pooled.
+		var fades := Enemies.needs_light(StringName(one["kind"]))
+		sprite.material = _wraith_material() if fades else null
+		if fades:
+			sprite.modulate.a = _presence_of(int(ids[i]),
+				Light.lit_now(_state, Entities.cell_of(_state, int(ids[i]))), delta)
 		# **Anchored at the feet, not at a tile corner.** An enemy is no
 		# longer one tile - motion has transparent clearance around the body - so the
 		# old "half a tile back and up" drew them with their shins in the
@@ -1900,6 +1915,35 @@ func _refresh_actors() -> void:
 	for id in _heading.keys():
 		if not Entities.alive(_state, int(id)):
 			_heading.erase(id)
+	for id in _presence.keys():
+		if not Entities.alive(_state, int(id)):
+			_presence.erase(id)
+
+
+## **How much of a wraith shows now** (task 0252): `wraith_presence` of its
+## cell's light, eased there from where it was at `WRAITH_FADE_PER_SECOND` -
+## and at once the first time it is drawn, so one does not fade in from
+## nothing as it arrives.
+func _presence_of(id: int, lit: bool, delta: float) -> float:
+	var target := wraith_presence(lit)
+	var now := move_toward(float(_presence.get(id, target)), target,
+		WRAITH_FADE_PER_SECOND * maxf(delta, 0.0))
+	_presence[id] = now
+	return now
+
+
+## **A wraith's presence in light and out of it** (task 0252): solid where a
+## tower can aim at it, `WRAITH_FAINT` where it cannot.
+static func wraith_presence(lit: bool) -> float:
+	return 1.0 if lit else WRAITH_FAINT
+
+
+## The one material every wraith's fade shares (task 0252).
+func _wraith_material() -> ShaderMaterial:
+	if _wraith_fade == null:
+		_wraith_fade = ShaderMaterial.new()
+		_wraith_fade.shader = WRAITH_FADE
+	return _wraith_fade
 
 
 ## **How high a flyer is drawn** (task 0249): `FLIGHT_LIFT` in the air,
@@ -3345,6 +3389,13 @@ const SWARM_SPREAD := [Vector2(0, 0), Vector2(-6, -2), Vector2(5, -3), Vector2(-
 ## **A stunned enemy stands cold blue** (task 0230), and a zap plays where the
 ## shock landed: at the wires' height over the ground, a few at a time.
 const STUNNED_TINT := Color(0.7, 0.88, 1.5)
+
+## **How much of a wraith shows outside light** (task 0252): faint, never
+## gone - the player always knows one is there; it is the towers that cannot
+## aim at it. And how fast it comes and goes: a whole fade in a quarter of a
+## second.
+const WRAITH_FAINT := 0.35
+const WRAITH_FADE_PER_SECOND := 4.0
 const ZAP_LIFT := 13.0
 const ZAP_CAP := 8
 

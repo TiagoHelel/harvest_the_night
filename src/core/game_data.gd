@@ -2621,6 +2621,26 @@ const ENEMIES: Dictionary = {
 		# the guns before it dies is an answer to its burst.
 		"lurable": true,
 	},
+	&"wraith": {
+		# **Winter's answer to a defence that only shoots** (task 0252): in
+		# the dark no tower can aim at it (`needs_light`). A searchlight's
+		# square, the porch, a flare's burst or a fire under it (`Light`) make
+		# it a target from the tick it stands in one, and a shot already in
+		# the air still lands. What does not aim finds it anywhere: a shell's
+		# splash, a mine, the cone and the bolt through the line, the flare,
+		# the bell, and the dog, which goes by its nose.
+		"needs_light": true,
+		"hp": 30,                       # LEVER: hit points, 18-45
+		# It drifts: a little quicker than the walker.
+		"ticks_per_tile": 18,           # LEVER: ticks, 14-26 (lower is faster)
+		"damage": 12,                   # LEVER: to the house, 8-16
+		"reward": 7,                    # LEVER: money, 4-10
+		# A shade leaves nothing to pick up in the morning.
+		"bones": 0,                     # LEVER: bones, 0-1
+		"armour": 0,
+		# Straw does not fool what drifts in from the dark.
+		"lurable": false,
+	},
 }
 
 
