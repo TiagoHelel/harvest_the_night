@@ -4170,10 +4170,17 @@ func _case_0074_zombie_art() -> void:
 		if PlaceholderArt.frame(path).get("stand_in", "") == "":
 			continue
 		standing.append(one["kind"])
+		# A drawing (task 0248's rat) is the lookup's by the path it is named
+		# for; a file that stands in, by the file.
+		if PlaceholderArt.is_drawn(path):
+			var drawing := WorldView.drawn_enemy(path)
+			if drawing == null or String(drawing.resource_name) != path:
+				wrong.append(path)
+			continue
 		var file := PlaceholderArt.texture_path(path)
 		if file == path or not ResourceLoader.exists(file):
 			wrong.append(path)
-	expect(standing.has(&"spitter") and wrong.is_empty(),
+	expect(standing.has(&"spitter") and standing.has(&"rat") and wrong.is_empty(),
 		"and a kind on its stand-in is drawn through the lookup", "%s: %s" % [str(standing), str(wrong)])
 
 	# **The pose follows the rules.** `winding_at` is the rules' own word for

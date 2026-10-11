@@ -1872,8 +1872,8 @@ func _refresh_actors() -> void:
 		# ground and their heads in the next row. Bottom-centre on the cell
 		# they occupy is the same rule the player uses, and it is what makes
 		# a zombie stand on the tile the rules say it is on.
-		sprite.position = ArtPlacement.contact(one["pos"])
-		var metadata: Dictionary = PlaceholderArt.frame(sprite.texture.resource_path)
+		sprite.position = ArtPlacement.contact(one["pos"]) + crowd_offset(one)
+		var metadata := _enemy_frame(pose, sprite.texture)
 		var pivot: Vector2i = metadata.get("pivot",
 			Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height()))
 		sprite.offset = -Vector2(pivot)
@@ -1883,6 +1883,34 @@ func _refresh_actors() -> void:
 	for id in _heading.keys():
 		if not Entities.alive(_state, int(id)):
 			_heading.erase(id)
+
+
+## **A swarm spread for the eye** (task 0248): bodies of a kind that comes
+## several at once walk one field onto one cell and one point, and drawn
+## there a cluster of six is one rat. Each is drawn `SWARM_SPREAD` off its
+## point by its id - a picture, never where the rules have it.
+static func crowd_offset(one: Dictionary) -> Vector2:
+	if Waves.cluster_of(StringName(one["kind"])) <= 1:
+		return Vector2.ZERO
+	return SWARM_SPREAD[int(one.get("id", 0)) % SWARM_SPREAD.size()]
+
+
+## **An enemy pose's geometry** (task 0248): by the runtime path the pose is
+## drawn at, which answers for real art, a stand-in's file and a drawing
+## alike - a drawn rat has no file of its own to ask - else by the texture.
+static func _enemy_frame(pose: StringName, texture: Texture2D) -> Dictionary:
+	var frame := PlaceholderArt.frame(ENEMY_DIR + str(pose) + ".png")
+	if frame.is_empty() and texture != null:
+		frame = PlaceholderArt.frame(texture.resource_path)
+	return frame
+
+
+## **An enemy drawn in code until its pack lands** (task 0248's rat), by its
+## runtime path: the frame's drawing, or null. Every enemy drawing answers
+## here - the world's actors, `Juice`'s corpse, the forecast's head and the
+## checks - and 0249-0252 add theirs.
+static func drawn_enemy(path: String) -> Texture2D:
+	return RatArt.texture_at(path)
 
 
 ## Which way an enemy faces: a tracked family's motion says; an untracked one
@@ -1997,7 +2025,7 @@ func _refresh_retreats(delta: float) -> void:
 		sprite.flip_h = bool(cue["right"])
 		sprite.modulate = Color(1, 1, 1, EnemyRetreats.alpha(cue))
 		sprite.self_modulate = PlaceholderArt.tint_of(ENEMY_DIR + str(EnemyRetreats.pose(cue)) + ".png")
-		var metadata: Dictionary = PlaceholderArt.frame(sprite.texture.resource_path)
+		var metadata := _enemy_frame(EnemyRetreats.pose(cue), sprite.texture)
 		sprite.offset = -Vector2(metadata.get("pivot", Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
 
 
@@ -3074,6 +3102,9 @@ func _texture_for(id: StringName) -> Texture2D:
 	# **Drawn in code until its pack lands** (task 0224's decoy, through
 	# 0120's road): `DecoyArt`'s drawing, at the pack's canvas and pivot.
 	var coded := DecoyArt.texture(id)
+	# And an enemy drawn in code, task 0248's rat, until A047.
+	if coded == null:
+		coded = drawn_enemy(ENEMY_DIR + str(id) + ".png")
 	# And task 0228's garlic braid, `GarlicArt`'s until A040.
 	if coded == null:
 		coded = GarlicArt.texture(id)
@@ -3123,8 +3154,9 @@ func _pose_of(one: Dictionary) -> StringName:
 ## **The pose of an untracked kind drawn in the families' names** (task
 ## 0247), off the rules alone: spitting, its release and recovery after each
 ## spit and its rear before the next (`spit_wait`), standing between;
-## stunned, standing; else its four steps on the clock, `STAND_IN_STEP_TICKS`
-## a frame - it walks or it chews, and either way it is busy.
+## stunned, standing; else its four steps on the clock, a frame for its walk
+## frame's seconds (A046's 0.125, A047's rat 0.1, task 0248) - it walks or it
+## chews, and either way it is busy.
 static func posed_off_the_rules(state: Dictionary, one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
 	if int(one.get("spitting", -1)) >= 0:
@@ -3140,7 +3172,9 @@ static func posed_off_the_rules(state: Dictionary, one: Dictionary) -> StringNam
 		return kind
 	if Enemies.is_stunned(state, int(one["id"])):
 		return kind
-	var step := (int(state["tick"]) / STAND_IN_STEP_TICKS + int(one["id"])) % 4
+	var seconds := float(PlaceholderArt.frame(ENEMY_DIR + "%s_walk_0.png" % kind).get("seconds", 0.125))
+	var each := maxi(roundi(seconds * float(GameData.TICK_HZ)), 1)
+	var step := (int(state["tick"]) / each + int(one["id"])) % 4
 	return StringName("%s_walk_%d" % [kind, step])
 
 
@@ -3199,12 +3233,16 @@ const SPIT_MOUTH_LIFT := 22.0
 const SPIT_HIT_LIFT := 14.0
 const SPIT_ARC := 6.0
 ## **Its stand-in's poses round a spit** (task 0247), in ticks: the release
-## and the recovery after it, and the rear before the next. A walk frame
-## lasts `STAND_IN_STEP_TICKS` - A046's 0.125 s.
+## and the recovery after it, and the rear before the next.
 const SPIT_RELEASE_TICKS := 3
 const SPIT_RECOVER_TICKS := 5
 const SPIT_REAR_TICKS := 6
-const STAND_IN_STEP_TICKS := 4
+
+## **How a swarm is spread for the eye** (task 0248), in pixels by the body's
+## id: within half a rat of its point, so a cluster on one cell reads as a
+## crowd of rats round it.
+const SWARM_SPREAD := [Vector2(0, 0), Vector2(-6, -2), Vector2(5, -3), Vector2(-3, 3),
+	Vector2(7, 1), Vector2(-8, 1), Vector2(2, 4), Vector2(4, -5)]
 
 ## **A stunned enemy stands cold blue** (task 0230), and a zap plays where the
 ## shock landed: at the wires' height over the ground, a few at a time.

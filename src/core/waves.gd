@@ -285,8 +285,9 @@ static func _delay_in(one: Dictionary, index: int) -> int:
 
 ## **How long a night takes to send everything** (task 0137): ticks from the
 ## night's first to the tick its last member is sent, counted exactly as
-## `tick()` spends them - a wave's delay, then a member every
-## `SPAWN_INTERVAL_TICKS` + 1. What `check_nights` holds inside the night.
+## `tick()` spends them - a wave's delay, then a release every
+## `SPAWN_INTERVAL_TICKS` + 1: a body, or a cluster of a kind that comes
+## several at once (task 0248). What `check_nights` holds inside the night.
 static func schedule_ticks(one: Dictionary) -> int:
 	if one.is_empty():
 		return 0
@@ -294,8 +295,20 @@ static func schedule_ticks(one: Dictionary) -> int:
 	var ticks := 0
 	for i in rows.size():
 		ticks += _delay_in(one, i) + 1
-		ticks += (int((rows[i] as Array)[1]) - 1) * (interval_in(one) + 1)
+		ticks += (releases_of(rows[i] as Array) - 1) * (interval_in(one) + 1)
 	return ticks
+
+
+## **How many come out at once** of a kind (task 0248): its `cluster`, one
+## for every kind that does not say.
+static func cluster_of(kind: StringName) -> int:
+	return maxi(int((GameData.ENEMIES.get(kind, {}) as Dictionary).get("cluster", 1)), 1)
+
+
+## How many releases a wave row takes: its bodies, a cluster at a time.
+static func releases_of(row: Array) -> int:
+	var each := cluster_of(StringName(row[0]))
+	return (int(row[1]) + each - 1) / each
 
 
 ## The ticks between two members of a wave: the house pace, or a night's own
@@ -354,8 +367,12 @@ static func tick(state: Dictionary) -> void:
 		if _is_boss(StringName(row[0])):
 			Events.add(state, &"boss_arrived", {"enemy": StringName(row[0])})
 
-	Enemies.spawn(state, StringName(row[0]), int(row[2]))
-	wave["left"] = int(wave["left"]) - 1
+	# **A cluster at a time** (task 0248): a kind that comes `cluster` at once
+	# sends that many on this tick, round the first, and the wave counts them
+	# all - so what is left and what the forecast promised stay bodies.
+	var sent := mini(cluster_of(StringName(row[0])), int(wave["left"]))
+	Enemies.spawn_cluster(state, StringName(row[0]), int(row[2]), sent)
+	wave["left"] = int(wave["left"]) - sent
 
 	if int(wave["left"]) > 0:
 		wave["wait"] = interval_in(tonight(state))

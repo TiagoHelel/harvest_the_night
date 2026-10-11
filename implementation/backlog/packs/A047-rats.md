@@ -14,7 +14,13 @@ Summer brings swarms of undead rats. Each wave member releases 4-10 rats on adja
 
 ## Deliverables
 
-The table is provisional: game task 0248 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0248. The rows stand as written: 24x16 standing on (12,14), the frames and seconds of the table. **How the game plays them:**
+- **Clusters:** a summer wave releases six rats at once, the first on a spawn cell and five on its four neighbours. The swarm walks the same road to the house, so each cluster ends up on one cell. The view spreads each rat by its id, up to 8 px across and 5 px up or down of its point, so six on a cell read as a crowd round it: the master and the walk must still read when they overlap by half.
+- **Movement:** a rat walks a tile in 12 ticks (2.5 tiles a second) on the four `walk` frames, 0.1 s each, facing the way it last moved.
+- **Walls and the house:** it stops for walls and chews through them as a walker does. Until 0261 a chewing rat scurries in place: the game plays the bite and the three-frame death once that leaf tracks the rat. Until then the corpse is `rat_death_2` squashed and faded.
+- **Night colours:** the rat is seen almost only at night. **After the relight a grey rat turns the blue of the field's stones**, and a cluster reads as a heap of rocks, so keep the fur grey-brown (the soils, not the stones).
+
+Until 0261 every frame and the forecast head are drawn in code (`RatArt`) through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

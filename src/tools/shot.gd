@@ -147,6 +147,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
+	["rats", "rats in clusters: Summer 2's night, three clusters of six come over open ground south-east of the house towards it - each a crowd of small grey bodies, ears and tails, not a smear", ""],
 	["spitter", "a spitter working on a tower line: Summer 2's night, three towers in a row across open ground south-east of the house - a flamethrower each end, a gun tower between - and three spitters come up from the south, standing off at four tiles and spitting: a glob just landed on the line, another in the air", ""],
 	["boss", "a boss winding up: Spring 14's night, the Giant come up to a line of wall east of the house and winding up its blow on it, the ring on its target - its bar and name up top and its intro across the screen under them, clear of the time to dawn and of the hotbar", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
@@ -794,6 +795,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"arsenal_locked": _set_arsenal_locked(state)
 		"boss": _set_boss(state)
 		"spitter": _set_spitter(state)
+		"rats": _set_rats(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1152,6 +1154,15 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				str(Entities.cell_of(state, _boss_giant)), Enemies.is_winding(state, _boss_giant),
 				str(Enemies.winding_at(state, _boss_giant)),
 				int(state["house_hp"]), (main.find_child("NightHud", true, false) as NightHud).banner_text()])
+		"rats":
+			# The cursor's words up and to the left of the clusters (task
+			# 0248), clear of them.
+			var rats_view := main.get_node("%WorldView") as WorldView
+			rats_view.cursor().place_at(_open_ground_near(state, _rats_at + Vector2i(-7, -4)))
+			var kinds := {}
+			for id in Entities.ids(state):
+				kinds[Entities.cell_of(state, int(id))] = true
+			print("  rats: %d on the farm over %d cells" % [Entities.count(state), kinds.size()])
 		"spitter":
 			# Until a glob the view saw in the air has landed - its splat
 			# plays on the next frame - and another has just left a mouth,
@@ -3114,6 +3125,27 @@ func _set_spitter(state: Dictionary) -> void:
 		Entities.spawn(state, &"spitter", middle + (offset as Vector2i))
 	print("  spitter: the line %s, three spitters south of it" % str(_spit_line))
 	_look_at(middle + Vector2i(0, -1))
+
+
+## **Rats in clusters** (task 0248): Summer 2's night, parked, three clusters
+## of `cluster` rats laid down as a wave releases them, on open ground
+## south-east of the house, a few tiles apart and coming in - the settle walks
+## them towards the picture's middle.
+func _set_rats(state: Dictionary) -> void:
+	_on_date(state, GameData.SEASON_DAYS + 2)
+	var middle := _clear_patch(state, Farm.house_centre(state) + Vector2i(8, 9), 5)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	var cluster := int((GameData.ENEMIES[&"rat"] as Dictionary)["cluster"])
+	for offset in [Vector2i(4, 3), Vector2i(7, 1), Vector2i(5, 6)]:
+		Enemies.cluster_at(state, &"rat", middle + (offset as Vector2i), cluster)
+	_rats_at = middle
+	_look_at(middle + Vector2i(1, 1))
+
+
+## Where `_set_rats` sent them from.
+var _rats_at := Vector2i.ZERO
 
 
 ## The towers `_set_spitter` put down, west to east.

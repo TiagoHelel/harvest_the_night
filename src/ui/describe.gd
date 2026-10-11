@@ -292,6 +292,9 @@ static func enemy(id: StringName) -> String:
 	# A spitter's reach (task 0247).
 	if int(one.get("spit_range", 0)) > 0:
 		lines.append(I18n.f(&"DESC_SPITS", [int(one["spit_range"])]))
+	# A swarm's cluster (task 0248).
+	if int(one.get("cluster", 1)) > 1:
+		lines.append(I18n.f(&"DESC_SWARMS", [int(one["cluster"])]))
 	# Any boss that winds up - a `telegraph_ticks` to wind up through (0246).
 	if bool(one.get("is_boss", false)) and int(one.get("telegraph_ticks", 0)) > 0:
 		lines.append(I18n.t(&"DESC_WINDS_UP"))

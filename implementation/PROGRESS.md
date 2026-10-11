@@ -25965,3 +25965,174 @@ assets/locale/strings.csv, tools/{determinism_sim_hash,determinism_data_hash}.tx
 implementation/backlog/packs/A046-spitter.md,
 implementation/prompts/0247-spitter.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0247/, docs/devlog/{index,index.pt_BR}.md
+
+## 0248 - The rat swarm - done 2026-10-11
+
+What changed: summer's second new enemy, a crowd of small fast bodies. A wave
+of rats comes out six at a time on neighbouring cells. A gun tower spends a
+whole shot on each rat; a mine, a crossbow's line or a flame cone takes many.
+The perf benchmark's swarm, 0218's stand-in walkers, is rats now.
+
+### The rules (`src/core/`)
+
+**`ENEMIES.rat`**, with levers:
+- hp 4, 12 ticks a tile, 1 to the house, $1, no armour;
+- no bones;
+- `cluster` 6: six come out of each release;
+- not lured.
+
+**`check_enemies`** refuses a `cluster` under one. The runner's rule stands
+untouched.
+
+**Clusters:**
+- **`Enemies.spawn_cluster(state, kind, where, count)`:**
+  - the first goes on a spawn cell drawn from the run's RNG, as
+    `Enemies.spawn` puts any one;
+  - the rest go on its walkable, reachable neighbours in `NEIGHBOURS` order,
+    round them again past the fourth, or on the first's own cell when it has
+    none;
+  - nothing else is drawn.
+- **`cluster_at(state, kind, at, count)`** lays a cluster on a cell of the
+  caller's: the seam the lane check and the picture use.
+- **`Waves.tick`** releases `min(cluster, left)` each time, and the wave
+  still counts bodies, so `Waves.size_of`, `remaining` and the forecast stay
+  true.
+- **`Waves.cluster_of(kind)`**, **`releases_of(row)`**, and
+  **`schedule_ticks`** counting releases, as `tick()` spends them. A kind
+  that comes one at a time comes out exactly as before.
+
+### The view (`src/ui/`)
+
+- **A047 drawn in code** by the new `RatArt`, through 0120's road until 0261:
+  - the master, the four-frame scurry, the bite, the three-frame death and
+    the forecast head, on 24x16 standing on (12,14);
+  - grey-brown fur, a rot patch, a pink-grey ear and tail, a pale eye.
+- **`WorldView`:**
+  - **`drawn_enemy(path)`** is the one place an enemy drawn in code answers:
+    the actors, `Juice`'s corpse, the forecast's head and the checks;
+  - **`_enemy_frame`**: a pose's pivot by the runtime path it is drawn at,
+    since a drawing has no file of its own;
+  - **`crowd_offset`**: a kind with a `cluster` is drawn up to 8 px off its
+    point by its id (`SWARM_SPREAD`) - a picture only;
+  - `posed_off_the_rules` steps the walk on the frame's own seconds: 0.1 s
+    for the rat, the spitter's 0.125 s as before.
+- **The words:** `Names` has `ENEMY_RAT`, `Describe` `DESC_SWARMS` ("comes 6
+  at a time") and `Sfx` the runner's voice for it. The rows are `ENEMY_RAT`
+  and `.other` and `DESC_SWARMS`.
+- **A047's table is final**, with how the game plays it.
+
+### The tools
+
+- **`perf_check.gd`:** the swarm is `SWARM` (300) rats, where 0218 used
+  walkers as their stand-in.
+- **`shot.gd`:** the `rats` scene.
+
+### Decided
+
+- **It stops for walls, at 12 ticks a tile.** A rat that went round them
+  would make every wall useless on a summer night. A wall that funnels a
+  swarm onto a mine is the answer. Stopping, it has to be slower than the
+  runner's 9.
+- **Not lured** (a swarm pours) and **no bones**: one body in `BONES_EVERY`
+  of a swarm would out-earn its bounty.
+- **$1 a rat:** three hundred pay a $15 bounty, under the $38 fee for
+  holding Summer 14 and far under a summer day's $205-460.
+- **The view spreads a cluster.** The rules may put six on one cell, as
+  bodies always could share one, and one field walks them onto one point.
+  Drawn there, a cluster was one rat (the first take).
+- **"A mine kills more per unit of cost than a gun tower" holds by the money
+  a defence is put down with, not by its whole price** (the lane check,
+  three clusters of six past each):
+
+  | Defence | Killed | A rat by its money | A rat by its price |
+  |---|---|---|---|
+  | mine | 5 | $1.60 ($8) | $107.60 ($538) |
+  | auto crossbow | 18 | $1.67 ($30) | $24.17 ($435) |
+  | gun tower | 7 | $2.14 ($15) | $37.29 ($261) |
+  | flamethrower | 18 | $5.00 ($90) | $69.44 ($1250) |
+
+  - **By the money**, the night's purse since 0234, the mine is the cheapest
+    rat. The check holds it to that.
+  - **By `Building.price_of`**, materials at the stall's price, gunpowder at
+    $55 makes a mine $538: twice a gun tower. A charge that goes off once
+    cannot make that back on one cluster.
+  - **The crossbow's line and the flame cone kill the whole lane**, the gun
+    tower 7 of 18, the mine 5 of its six.
+  - **So "mines and fire are the answer" holds by the purse and by the
+    moment.** By the stall's price, the crossbow is - a question for 0278's
+    balance pass.
+- **The perf baseline is moved** (`python tools/perf.py --accept`; it last
+  moved at 0218):
+  - **the swarm's lines because the swarm is rats now:** `swarm_tick` 6775
+    -> 5570, `swarm_enemies` 3252 -> 3317 (the walking, no guns: the same
+    work a body), `swarm_towers` 1331 -> 1457;
+  - **the rest is drift since 0218**, all inside the 40% tolerance, moved
+    with them because `--accept` moves the table whole: `night_tick` 1312
+    -> 1648, `night_enemies` 452 -> 578, `night_towers` 598 -> 773 and
+    `path_refresh` 9149 -> 11302;
+  - `lure_refresh` (16115) and `garlic_refresh` (11670) enter it for the
+    first time.
+
+### Found
+
+- **A cluster walks onto one point.** Six rats released on five cells
+  converge on the road home within a few tiles. The rules allow it, and the
+  view spreads them.
+- **Under the night's relight a grey rat is the blue of the field's
+  stones.** The second take read as heaps of rocks. The fur is brown now,
+  and A047's table says so.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. No night sends a rat, and a kind that comes
+  one at a time is released as before.
+- **DATA 689488709 -> 3959926207:** the rat's row.
+
+Verify: **PASS**, 60 of 60 in 998 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 17954 asserts, `headless_v1` 2626, `input_check` 1262 cases, `input_v1` 732 (111 s).
+- **perf:** a night tick 1639 us, the swarm's 5413 (rats), a path rebuild 11373, 16384 with the decoys and 11245 with the garlic.
+
+**Tests:**
+- **`_task_0248_rats` (headless_v1):**
+  - the row's levers inside the task's ranges; slower than the runner, as
+    it stops for walls;
+  - `check_enemies` refuses a cluster of nothing and a rat as fast as the
+    runner;
+  - a cluster is the first on a spawn cell and the rest round it in
+    `NEIGHBOURS` order, with the same RNG after it as after one spawn;
+  - a wave of 14 comes out 6, 6 and 2, a release a tick: `Waves.size_of`'s
+    count, `releases_of`'s three and `schedule_ticks`' length;
+  - **the lane, the table above printed:** a mine takes its cluster with one
+    charge and kills more for its money than the gun tower; the gun tower
+    kills a rat a shot at most and lets most by; the crossbow and the flame
+    cone kill more than it;
+  - three hundred rats' bounty under Summer 14's fee, and no bones;
+  - its name, `DESC_SWARMS`, the borrowed voice;
+  - the drawing on A047's canvas: feet on row 13, a pixel clear, every frame
+    its own, 7-9 tall and 20 long standing, the lunge 3 further, dying lower
+    to 6, the head on A011's box.
+- **`_task_0120_placeholders`:** an enemy's stand-in can be drawn in code at
+  its pack's canvas. Each pose's frames are counted from the registry.
+- **Old groups touched:**
+  - `NO_NIGHT_YET` gains the rat;
+  - headless_check counts 106 scenarios;
+  - `_case_0074_zombie_art` takes a drawing by the path it is named for, and
+    wants the rat among the stand-ins.
+
+**Looked at** (`python tools/shot.py 0248 rats --fhd`):
+- **`rats`, Summer 2's night:** three clusters of six come over open ground
+  south-east of the house, a few tiles apart. Each is a clump of small brown
+  four-legged bodies, ears up, heads to the house: a crowd, not a smear.
+- **What the takes found:**
+  - **the first** had each cluster on one point, drawn as one dark rat:
+    "18 on the farm over 3 cells". The view spreads them now;
+  - **the second**, in grey, read as heaps of the field's blue stones under
+    the relight. The fur is brown now.
+
+Files: src/core/{enemies,game_data,waves}.gd,
+src/ui/{rat_art,placeholder_art,world_view,juice,forecast_panel,names,describe,sfx}.gd,
+src/tools/{headless_check,headless_v1,input_check,shot,perf_check}.gd,
+assets/locale/strings.csv, tools/{determinism_data_hash,perf_baseline}.txt,
+implementation/backlog/packs/A047-rats.md,
+implementation/prompts/0248-rat-swarm.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0248/, docs/devlog/{index,index.pt_BR}.md

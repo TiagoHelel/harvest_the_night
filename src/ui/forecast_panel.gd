@@ -268,8 +268,8 @@ func _lay_heads(kinds: Array, y: float) -> float:
 
 ## A kind's head: its `ui/head_<kind>` - A011's five since task 0162, drawn at
 ## their native 16x16 with no flip - a later pack's registered stand-in, a box
-## of the walk frame, or, for a kind no pack has drawn yet, the whole walk
-## frame shrunk into the box.
+## of the walk frame or a drawing (task 0248's rat), or, for a kind no pack
+## has drawn yet, the whole walk frame shrunk into the box.
 func _head_of(kind: StringName) -> Texture2D:
 	var art := StringName("head_%s" % kind)
 	if _textures.has(art):
@@ -285,6 +285,9 @@ func _head_of(kind: StringName) -> Texture2D:
 				cut.atlas = texture
 				cut.region = Rect2(region)
 				texture = cut
+		# A head drawn in code (task 0248's rat), until its pack lands.
+		if texture == null:
+			texture = WorldView.drawn_enemy(PlaceholderArt.art_path(art, 0))
 	elif ResourceLoader.exists("res://sprites/ui/%s.png" % art):
 		texture = load("res://sprites/ui/%s.png" % art)
 	elif ResourceLoader.exists("res://sprites/enemies/%s_walk_0.png" % kind):

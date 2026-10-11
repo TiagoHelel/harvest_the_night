@@ -50,8 +50,9 @@ const TOWER_HP := 1000000
 ## And how many times a one-off - a path rebuild - is repeated.
 const REPEATS := 40
 
-## **The swarm** (task 0218): how many walkers more the worst case gets, on
-## open ground round its towers - the rat swarm's stand-in until task 0248.
+## **The swarm** (task 0218): how many bodies more the worst case gets, on
+## open ground round its towers - rats since task 0248, whose stand-in the
+## walkers were.
 const SWARM := 300
 
 ## How far round the towers' band they stand, in cells: inside some tower's
@@ -59,7 +60,7 @@ const SWARM := 300
 const SWARM_MARGIN := 6
 
 ## **Four decoys in the swarm** (task 0224), spread over the ground it stands
-## on, so the lure is built and asked by every walker on every tick it times.
+## on, so the lure is built and asked by every rat on every tick it times.
 ## Hit points nothing bites through while it is timed, as the guns have: this
 ## measures what the lure costs, not how long straw lasts.
 const DECOYS := 4
@@ -235,11 +236,11 @@ func _the_worst_case() -> Dictionary:
 	return peak
 
 
-## **The worst case and `SWARM` walkers more** (task 0218), spread over the
-## open cells within `SWARM_MARGIN` of the towers' band - every cell nothing
-## stands on that the house can be reached from, in reading order, and round
-## again when there are fewer cells than walkers. **`DECOYS` go down first**
-## (task 0224), evenly along that ground, and the walkers round them.
+## **The worst case and `SWARM` rats more** (tasks 0218 and 0248), spread
+## over the open cells within `SWARM_MARGIN` of the towers' band - every cell
+## nothing stands on that the house can be reached from, in reading order, and
+## round again when there are fewer cells than rats. **`DECOYS` go down first**
+## (task 0224), evenly along that ground, and the rats round them.
 func _the_swarm(night: Dictionary) -> Dictionary:
 	var state: Dictionary = night.duplicate(true)
 	var lo := Vector2i(Grid.WIDTH, Grid.HEIGHT)
@@ -266,8 +267,10 @@ func _the_swarm(night: Dictionary) -> Dictionary:
 	Pathing.refresh(state)
 	Pathing.field(state, &"lure")
 	open = _open_round(state, lo, hi)
+	# **Rats** (task 0248): the swarm 0218 was built for, a few hundred small
+	# fast bodies that a gun tower spends a whole shot on each.
 	for i in SWARM:
-		Entities.spawn(state, &"walker", open[i % open.size()])
+		Entities.spawn(state, &"rat", open[i % open.size()])
 	return state
 
 

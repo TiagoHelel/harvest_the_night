@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 81
+const GROUPS := 82
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -160,6 +160,7 @@ func _run() -> void:
 	_task_0234_arsenal()
 	_task_0246_bosses()
 	_task_0247_spitter()
+	_task_0248_rats()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -874,11 +875,17 @@ func _task_0120_placeholders() -> void:
 			continue
 		standing.append(kind)
 		var paths: Array = [master]
-		for pose in [["walk", 4], ["attack", 3], ["death", 4]]:
-			for i in int(pose[1]):
-				paths.append("res://sprites/enemies/%s_%s_%d.png" % [kind, pose[0], i])
+		for pose in ["walk", "attack", "death"]:
+			for i in int(PlaceholderArt.art(StringName("%s_%s" % [kind, pose])).get("frames", 0)):
+				paths.append("res://sprites/enemies/%s_%s_%d.png" % [kind, pose, i])
 		for path in paths:
 			var answer := PlaceholderArt.frame(path)
+			if PlaceholderArt.is_drawn(path):
+				# **Or drawn in code** (task 0248's rat), at its pack's canvas.
+				var drawing := WorldView.drawn_enemy(path)
+				if answer.is_empty() or drawing == null or Vector2i(drawing.get_size()) != answer["canvas"]:
+					off.append(path)
+				continue
 			var file := PlaceholderArt.texture_path(path)
 			var texture: Texture2D = load(file) if file != path and ResourceLoader.exists(file) else null
 			if answer.is_empty() or texture == null or Vector2i(texture.get_size()) != answer["canvas"] \
@@ -887,7 +894,7 @@ func _task_0120_placeholders() -> void:
 		if PlaceholderArt.art(StringName("head_%s" % kind)).is_empty():
 			off.append("head_%s" % kind)
 	expect(not standing.is_empty() and off.is_empty(),
-		"every enemy without raster art stands in through the lookup - master, walk, attack, death and head - at the canvas and pivot of what it stands for",
+		"every enemy without raster art stands in through the lookup - master, walk, attack, death and head - at the canvas and pivot of what it stands for, or drawn in code at its pack's",
 		"%s: %s" % [str(standing), str(off.slice(0, 4))])
 	_completed += 1
 
@@ -9687,6 +9694,201 @@ func _task_0247_spitter() -> void:
 		"the glob is 4-6 pixels a frame, one a squash of the other, and the splat grows and shrinks, a pixel clear all round",
 		"%s %s" % [str(sizes), str(areas)])
 	_completed += 1
+
+
+## 0248 - the rat swarm. One release is `cluster` rats on adjacent cells on
+## one tick, with no draw past the first; a wave sends the bodies
+## `Waves.size_of` counts, a cluster a release; a mine under the cluster kills
+## more rats for its price than a gun tower in the same lane; and a swarm's
+## bounty stays small beside a night's fee.
+func _task_0248_rats() -> void:
+	var row: Dictionary = GameData.ENEMIES[&"rat"]
+	var runner := int((GameData.ENEMIES[&"runner"] as Dictionary)["ticks_per_tile"])
+	var cluster := int(row["cluster"])
+	expect(int(row["hp"]) >= 2 and int(row["hp"]) <= 6 and int(row["ticks_per_tile"]) >= 10
+		and int(row["ticks_per_tile"]) <= 14 and int(row["damage"]) >= 1 and int(row["damage"]) <= 2
+		and int(row["reward"]) == 1 and int(row.get("armour", 0)) == 0 and cluster >= 4 and cluster <= 10
+		and not bool(row.get("ignores_structures", false)) and int(row["ticks_per_tile"]) > runner,
+		"a rat: 2-6 hit points, 10-14 ticks a tile - slower than the runner, as it stops for walls - 1-2 to the house, $1, no armour, 4-10 at a time",
+		str(row))
+	var none := GameData.ENEMIES.duplicate(true)
+	(none[&"rat"] as Dictionary)["cluster"] = 0
+	var fast := GameData.ENEMIES.duplicate(true)
+	(fast[&"rat"] as Dictionary)["ticks_per_tile"] = runner
+	expect(GameData.check_enemies(GameData.ENEMIES).is_empty() and _says(GameData.check_enemies(none), "comes 0 at a time")
+		and _says(GameData.check_enemies(fast), "ignores structures without being faster"),
+		"check_enemies refuses a cluster of nothing, and a rat that stops for walls as fast as the runner")
+
+	# **One release, round the first, no draw past it**: the rest on its
+	# walkable, reachable neighbours in `Enemies.NEIGHBOURS` order, round
+	# again past the last.
+	var placed := _powers_night(24800)
+	var drawn := State.copy(placed)
+	var alone := Enemies.spawn(drawn, &"rat", 0)
+	var ids := Enemies.spawn_cluster(placed, &"rat", 0, cluster)
+	var first := Entities.cell_of(placed, int(ids[0]))
+	var ring: Array = []
+	for step in Enemies.NEIGHBOURS:
+		var cell: Vector2i = first + step
+		if Grid.in_bounds(cell) and Farm.walkable(placed, cell) and Pathing.reachable(placed, cell):
+			ring.append(cell)
+	var round_it := ids.size() == cluster and not ring.is_empty()
+	for i in range(1, ids.size()):
+		round_it = round_it and Entities.cell_of(placed, int(ids[i])) == ring[(i - 1) % ring.size()]
+	expect(round_it and first == Entities.cell_of(drawn, alone) and str(placed["rng"]) == str(drawn["rng"]),
+		"a cluster is the first on a spawn cell from the run's RNG and the rest round it in NEIGHBOURS order, with no draw past the first",
+		"%s round %s" % [str(first), str(ring)])
+
+	# **A wave counts bodies, a cluster a release**: two full clusters and a
+	# short one, each out on one tick, `Waves.size_of`'s count in all.
+	var swarm := State.create(24801)
+	swarm["day"] = 30
+	swarm["nights_won"] = 29
+	Phases.begin_preparation(swarm)
+	var bodies := 2 * cluster + 2
+	var record := {"note": "a swarm", "opening_ticks": 0, "waves": [[&"rat", bodies, 0]], "for_night": 30}
+	(swarm["wave"] as Dictionary)["tonight"] = record
+	NightRoad.through_build(swarm)
+	swarm["house_hp"] = 100000
+	var rises: Array = []
+	var was := Entities.count(swarm)
+	if was > 0:
+		rises.append(was)
+	for _i in 4 * (Waves.interval_in(record) + 1):
+		Sim.tick(swarm)
+		var now := Entities.count(swarm)
+		if now != was:
+			rises.append(now - was)
+		was = now
+	var sent := 0
+	for rise in rises:
+		sent += int(rise)
+	expect(rises == [cluster, cluster, 2] and sent == Waves.size_in(record) and Waves.releases_of(record["waves"][0]) == 3
+		and Waves.schedule_ticks(record) == 1 + 2 * (Waves.interval_in(record) + 1) and int((swarm["wave"] as Dictionary)["left"]) == 0,
+		"a wave of %d rats comes out a cluster a tick - %d, %d and %d - which is the count Waves.size_of gave, three releases long" % [bodies, cluster, cluster, 2],
+		str(rises))
+
+	# **A mine under the cluster, against a gun tower in the same lane**, and
+	# the crossbow and the flamethrower beside them: what each kills of three
+	# clusters passing, and what a rat costs - by the money it is put down
+	# with, the night's purse since 0234, and by its whole price at the stall.
+	var lanes := {}
+	for id in [&"mine", &"gun_tower", &"auto_crossbow", &"flame_tower"]:
+		lanes[id] = _rat_lane(24802, id)
+	var parts: Array = []
+	for id in [&"mine", &"gun_tower", &"auto_crossbow", &"flame_tower"]:
+		var lane: Dictionary = lanes[id]
+		var kills := maxi(int(lane["kills"]), 1)
+		parts.append("%s %d killed, $%.2f a rat by its money ($%d), $%.2f by its price ($%d)" % [id, int(lane["kills"]),
+			float(lane["money"]) / float(kills), int(lane["money"]), float(lane["price"]) / float(kills), int(lane["price"])])
+	print("  three clusters of %d down one lane: %s" % [cluster, "; ".join(parts)])
+	var mine: Dictionary = lanes[&"mine"]
+	var gun: Dictionary = lanes[&"gun_tower"]
+	expect(int(mine["kills"]) >= cluster - 1 and int(mine["kills"]) * int(gun["money"]) > int(gun["kills"]) * int(mine["money"])
+		and int(gun["kills"]) <= int(gun["shots"]) and int(gun["kills"]) < 3 * cluster,
+		"a mine under the cluster takes it with one charge and kills more rats for its money than a gun tower in the same lane, which kills a rat a shot at most and lets most by",
+		"; ".join(parts))
+	expect(int((lanes[&"flame_tower"] as Dictionary)["kills"]) > int(gun["kills"])
+		and int((lanes[&"auto_crossbow"] as Dictionary)["kills"]) > int(gun["kills"]),
+		"and the flame cone and the crossbow's line kill more of the lane than the gun tower", "; ".join(parts))
+
+	# **A swarm does not out-earn a day**: three hundred rats - the perf
+	# swarm - pay a bounty under the fee for holding the summer's last night.
+	var bounty := 300 * int(row["reward"]) * int(GameData.REWARDS["bounty_percent"]) / 100
+	var fee := int(GameData.REWARDS["base_money"]) + int(GameData.REWARDS["money_per_night"]) * 2 * GameData.SEASON_DAYS
+	expect(bounty < fee and int(row.get("bones", 0)) == 0,
+		"three hundred rats pay $%d of bounty, under the $%d fee for holding Summer 14, and leave no bones" % [bounty, fee])
+
+	# **The words and the voice**: its name, its tooltip's cluster, the
+	# runner's voice borrowed.
+	expect(Names.of(&"rat") == I18n.t(&"ENEMY_RAT") and Describe.enemy(&"rat").contains(I18n.f(&"DESC_SWARMS", [cluster]))
+		and Sfx.ENEMY_SOUNDS.get(&"rat", &"") == &"sfx/groan_runner",
+		"it has its name, a tooltip line for its cluster, and the runner's voice until it has its own")
+
+	# **Drawn in code until A047**: every frame 24x16 with its feet on row
+	# 13 and a pixel clear all round, none the same as another, 7-9 tall
+	# standing and 20 long at most, the death never growing and ending at 6
+	# at most; the head on A011's box, cut flat at row 14.
+	var frames: Array = [&"rat"]
+	for pose in [["walk", 4], ["attack", 3], ["death", 3]]:
+		for i in int(pose[1]):
+			frames.append(StringName("rat_%s_%d" % [pose[0], i]))
+	var shapes := {}
+	var wrong: Array = []
+	var heights := {}
+	for name in frames:
+		var texture := WorldView.drawn_enemy(WorldView.ENEMY_DIR + str(name) + ".png")
+		var image := texture.get_image() if texture != null else null
+		if image == null:
+			wrong.append(name)
+			continue
+		var used := image.get_used_rect()
+		heights[name] = used.size.y
+		shapes[image.get_data()] = true
+		if image.get_size() != Vector2i(24, 16) or used.end.y != 14 or used.position.x < 1 or used.position.y < 1 \
+				or used.end.x > 23:
+			wrong.append("%s %s" % [name, used])
+		heights[str(name) + " long"] = used.size.x
+	var standing := true
+	for name in [&"rat", &"rat_walk_0", &"rat_walk_1", &"rat_walk_2", &"rat_walk_3", &"rat_attack_2"]:
+		standing = standing and int(heights.get(name, 0)) >= 7 and int(heights.get(name, 0)) <= 9 \
+			and int(heights.get(str(name) + " long", 99)) <= 20
+	# The lunge's snout at most 3 pixels past the standing one.
+	standing = standing and int(heights.get("rat_attack_1 long", 99)) <= int(heights.get("rat long", 0)) + 3
+	var head := WorldView.drawn_enemy("res://sprites/ui/head_rat.png")
+	var head_used := head.get_image().get_used_rect() if head != null else Rect2i()
+	expect(wrong.is_empty() and shapes.size() == frames.size() and standing
+		and int(heights.get(&"rat_death_1", 99)) <= int(heights.get(&"rat_death_0", 0))
+		and int(heights.get(&"rat_death_2", 99)) <= int(heights.get(&"rat_death_1", 0)) and int(heights.get(&"rat_death_2", 99)) <= 6
+		and head != null and head.get_size() == Vector2(16, 16) and head_used.end.y == 15 and head_used.size.x <= 13
+		and head_used.size.y >= 12 and head_used.size.y <= 13,
+		"the rat is drawn on A047's canvas: feet on row 13, a pixel clear, every frame its own, 7-9 tall and 20 long standing, the lunge 3 further, dying lower to 6, its head on A011's box",
+		"%s %s head %s" % [str(wrong), str(heights), str(head_used)])
+	_completed += 1
+
+
+## **Three clusters of rats down one lane past `id`** (task 0248): a parked
+## night, the east spawn's road home, the clusters `SPAWN_INTERVAL_TICKS`
+## apart from four cells along it and `id` six on - a mine on the road, a
+## tower on the first open cell beside it - with rounds for anything that
+## burns them. What it killed before the last rat was dead or home, its
+## money and its price, and the shots fired.
+func _rat_lane(seed_value: int, id: StringName) -> Dictionary:
+	var state := _powers_night(seed_value)
+	state["house_hp"] = 100000
+	var needs := Ammo.needed_by(id)
+	for res in GameData.sorted_names(needs.keys()):
+		Resources.gain(state, {res: 100})
+	var at: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var road: Array = [at]
+	for _i in Grid.CELLS:
+		var next := Pathing.step_from(state, at)
+		if next == at:
+			break
+		road.append(next)
+		at = next
+	var start: Vector2i = road[4]
+	var post: Vector2i = road[10]
+	if id != &"mine":
+		var side := Vector2i(-1, -1)
+		for step in Enemies.NEIGHBOURS:
+			var cell: Vector2i = (road[10] as Vector2i) + step
+			if side.x < 0 and not road.has(cell) and Farm.buildable(state, cell):
+				side = cell
+		post = side
+	Farm.place(state, post, {"id": id, "hp": int((GameData.DEFENCES[id] as Dictionary)["hp"])})
+	Pathing.refresh(state)
+	var cluster := int((GameData.ENEMIES[&"rat"] as Dictionary)["cluster"])
+	var sent: Array = []
+	for t in 900:
+		if t % (GameData.SPAWN_INTERVAL_TICKS + 1) == 0 and sent.size() < 3 * cluster:
+			sent.append_array(Enemies.cluster_at(state, &"rat", start, cluster))
+		Sim.advance(state, 1)
+		if sent.size() >= 3 * cluster and Entities.count(state) == 0:
+			break
+	return {"kills": int((state["killed_by_kind"] as Dictionary).get(&"rat", 0)),
+		"price": Building.price_of(id), "money": Building.money_of(id), "post": post,
+		"shots": Towers.shots_fired(state)}
 
 
 ## How many ticks into its gap the recovery pose has given way (task 0247):

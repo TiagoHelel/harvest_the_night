@@ -2506,6 +2506,32 @@ const ENEMIES: Dictionary = {
 		# straw, and a decoy is not a tower.
 		"lurable": false,
 	},
+	&"rat": {
+		# **A crowd of small fast bodies** (task 0248): summer's swarm. A
+		# single-target tower spends a whole shot on each, a mine's splash
+		# and the flamethrower's cone take many at once.
+		#
+		# **It stops for walls**, and chews through them as a walker does: a
+		# rat that went round them would make every wall on the farm useless
+		# against a summer night, where a wall that funnels a swarm onto a mine
+		# is the answer. Stopping, it has to be slower than the runner, which
+		# `check_enemies` holds to going round faster than anything that stops.
+		"hp": 4,                        # LEVER: hit points, 2-6
+		"ticks_per_tile": 12,           # LEVER: ticks, 10-14 (lower is faster)
+		"damage": 1,                    # LEVER: to the house, 1-2
+		"reward": 1,                    # LEVER: money, 1-2
+		# **Nothing worth the morning's walk.** One body in `BONES_EVERY`
+		# leaves its bones, and a swarm's bones would out-earn its bounty.
+		"bones": 0,                     # LEVER: bones, 0-1
+		"armour": 0,
+		# **How many come out at once** (task 0248): one wave release is a
+		# cluster this big on adjacent cells (`Waves.tick`), so a wave of
+		# twenty-four is four clusters of six. A wave still counts bodies.
+		# `check_enemies` refuses less than one.
+		"cluster": 6,                   # LEVER: rats a release, 4-10
+		# Not turned by straw: a swarm pours.
+		"lurable": false,
+	},
 }
 
 
@@ -5261,6 +5287,10 @@ static func check_enemies(enemies: Dictionary) -> Array:
 		if bool(one.get("is_boss", false)) and bool(one.get("lurable", false)):
 			errors.append("enemy '%s' is a boss and can be lured" % id)
 		errors.append_array(_check_spit(id, one))
+		# **A cluster is at least one** (task 0248): a release of nothing
+		# would count bodies it never sent.
+		if one.has("cluster") and int(one["cluster"]) < 1:
+			errors.append("enemy '%s' comes %d at a time: at least one" % [id, int(one["cluster"])])
 
 	for id in sorted_names(enemies.keys()):
 		var one: Dictionary = enemies[id]

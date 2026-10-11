@@ -117,6 +117,49 @@ static func spawn(state: Dictionary, kind: StringName, where: int) -> int:
 	return Entities.spawn(state, kind, cell)
 
 
+## **A cluster** (task 0248): `count` of a kind at once. The first goes on a
+## cell of spawn point `where` from the run's RNG, as `spawn()` puts any one;
+## the rest on that cell's walkable, reachable neighbours in `NEIGHBOURS`
+## order, round them again past the fourth - bodies may share a cell, as they
+## already can - or on the first's own cell when it has none. No draw past
+## the first. The ids, or none when the first found nowhere to stand.
+static func spawn_cluster(state: Dictionary, kind: StringName, where: int,
+		count: int) -> Array:
+	var first := spawn(state, kind, where)
+	if first == 0:
+		return []
+	return [first] + _round(state, kind, Entities.cell_of(state, first), count - 1)
+
+
+## **A cluster on a cell of the caller's** (task 0248): the first on `at`, the
+## rest round it as `spawn_cluster` puts them - what a check or a picture
+## lays down where it wants one. The ids.
+static func cluster_at(state: Dictionary, kind: StringName, at: Vector2i,
+		count: int) -> Array:
+	return [Entities.spawn(state, kind, at)] + _round(state, kind, at, count - 1)
+
+
+## `count` more round `at`: on its walkable, reachable neighbours in
+## `NEIGHBOURS` order, round again past the last, or on `at` itself when it
+## has none.
+static func _round(state: Dictionary, kind: StringName, at: Vector2i,
+		count: int) -> Array:
+	var out: Array = []
+	if count <= 0:
+		return out
+	var ring: Array = []
+	for step in NEIGHBOURS:
+		var cell: Vector2i = at + step
+		if Grid.in_bounds(cell) and Farm.walkable(state, cell) \
+				and Pathing.reachable(state, cell):
+			ring.append(cell)
+	if ring.is_empty():
+		ring.append(at)
+	for i in count:
+		out.append(Entities.spawn(state, kind, ring[i % ring.size()]))
+	return out
+
+
 ## The cells a given spawn point can use: the ones in its region that something
 ## can actually stand on and get to the house from.
 ##

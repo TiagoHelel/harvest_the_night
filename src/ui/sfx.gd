@@ -99,6 +99,8 @@ const ENEMY_SOUNDS := {
 	# **The walker's groan, borrowed** (task 0247) until 0284 gives the
 	# spitter a voice of its own.
 	&"spitter": &"sfx/groan_walker",
+	# The runner's, a quick small voice, until 0284 gives the rat its own.
+	&"rat": &"sfx/groan_runner",
 }
 
 ## **What a boss with no voice of its own roars with** (task 0246): the

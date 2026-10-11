@@ -218,6 +218,7 @@ const KEYS: Dictionary = {
 	&"breaker": &"ENEMY_BREAKER",
 	&"giant": &"ENEMY_GIANT",
 	&"spitter": &"ENEMY_SPITTER",
+	&"rat": &"ENEMY_RAT",
 
 	# ---- what the tech tree buys
 	&"sharp tools": &"TECH_SHARP_TOOLS",

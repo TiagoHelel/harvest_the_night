@@ -438,15 +438,19 @@ func _draw() -> void:
 
 func _corpse_art(kind: StringName) -> Texture2D:
 	var path := "res://sprites/enemies/%s_death.png" % kind
-	if not ResourceLoader.exists(path):
-		# **A stand-in's last death frame** (task 0247's spitter, through
-		# 0120's road), until its pack brings the `<kind>_death` alias.
-		var last := int(PlaceholderArt.art(StringName("%s_death" % kind)).get("frames", 0)) - 1
-		path = PlaceholderArt.texture_path("res://sprites/enemies/%s_death_%d.png" % [kind, last]) \
-			if last >= 0 else ""
-	if path.is_empty() or not ResourceLoader.exists(path):
+	if ResourceLoader.exists(path):
+		return load(path)
+	# **A stand-in's last death frame** (tasks 0247 and 0248), through 0120's
+	# road, until its pack brings the `<kind>_death` alias: the spitter's file
+	# that stands in, or the rat's drawing.
+	var last := int(PlaceholderArt.art(StringName("%s_death" % kind)).get("frames", 0)) - 1
+	if last < 0:
 		return null
-	return load(path)
+	var runtime := "res://sprites/enemies/%s_death_%d.png" % [kind, last]
+	var file := PlaceholderArt.texture_path(runtime)
+	if not file.is_empty() and ResourceLoader.exists(file):
+		return load(file)
+	return WorldView.drawn_enemy(runtime)
 
 
 func _colour_of(type: StringName) -> Color:
