@@ -147,6 +147,7 @@ DEF_GUN_TOWER,0,gun tower,torre de tiro
 DEF_MINE,0,mine,mina
 DEF_MORTAR,0,mortar,morteiro
 DEF_WALL,0,wall,muro
+DEF_ZOMBIE_BAIT,0,zombie bait,isca de zumbi
 DESC_AFTER,0,after %s,depois de %s
 DESC_AMMO,0,loaded into towers,carregada nas torres
 DESC_AMOUNT,0,%d %s,%d %s
@@ -163,6 +164,9 @@ DESC_GROWS_IN,0,grows in %d days,cresce em %d dias
 DESC_HITS_FOR,0,hits for %d,bate %d
 DESC_HP,0,%d hit points,%d de vida
 DESC_LURES,0,pulls zombies from up to %d tiles,atrai zumbis a até %d ladrilhos
+DESC_KIT_ONLY,0,only from a kit made at the %s,só de um kit feito na %s
+DESC_LASTS,0,lasts %s,dura %s
+DESC_EATEN_BY,0,gone once %d have eaten,acaba quando %d tiverem comido
 DESC_MAKES,0,makes %s,faz %s
 DESC_NOT_FOR_SALE,0,not for sale,não se vende
 DESC_ONE_SHOT,0,goes off once,explode uma vez só
@@ -388,6 +392,7 @@ REC_PRESS_FISH_OIL,0,press fish oil,prensar óleo de peixe
 REC_PRESS_OIL,0,press oil,prensar óleo
 REC_PRESS_SUNFLOWER_OIL,0,press sunflower oil,prensar óleo de girassol
 REC_WALL_KIT,0,wall kit,kit de muro
+REC_ZOMBIE_BAIT_KIT,0,zombie bait,isca de zumbi
 RES_BOSS_ESCAPED,0,%s GOT AWAY - IT COMES BACK TONIGHT,%s FUGIU - VOLTA HOJE À NOITE
 RES_BUILD_WON,0,THE BUILD THAT WON,O QUE SEGUROU A NOITE
 RES_CALM_NIGHT,0,A CALM NIGHT - THE HORDE REGROUPED,NOITE CALMA - A HORDA SE REAGRUPOU
@@ -610,6 +615,8 @@ WHY_NO_HOME,228,no %s with room,nenhum %s com espaço
 WHY_SOLD_OUT,228,none left today,acabou por hoje
 WHY_TOP_LEVEL,228,already automatic,já é automática
 WHY_TRAP_LIMIT,228,%d armed is all the farm will take,%d armadas é tudo que a fazenda aguenta
+WHY_KIT_ONLY,228,make one at the %s first,faça uma na %s antes
+WHY_THROWN,228,it stays where it was thrown,fica onde foi jogada
 WORK_AWAY,0,while you were away:  %s,enquanto você estava fora:  %s
 WORK_AWAY_ONE,0,%d %s,%d %s
 WORK_IDLE,0,idle,parada

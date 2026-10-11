@@ -23836,3 +23836,204 @@ tools/perf.py, tools/determinism_{data,sim}_hash.txt,
 implementation/backlog/packs/A037-decoy.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/prompts/0224-decoy.md,
 implementation/shots/0224/, docs/devlog/{index,index.pt_BR}.md
+
+## 0225 - Zombie bait - done 2026-10-11
+
+What changed: a rotten fish, made at the press by day from any fish and
+thrown down at night from its kit.
+- **The pull:** for ten seconds, everything that can be lured within ten
+  tiles of it by the walk turns toward it.
+- **The trap:** the ones that reach it stop on it to eat - a crowd in one
+  place, for whatever the player laid beside it (the plan's 3.2, "um peixe
+  podre que atrai a horda para uma armadilha").
+- **The end:** it goes at its lifetime or once eight have reached it,
+  leaving nothing, and the crowd on it walks on that same tick.
+
+### The row and the kit (`src/core/game_data.gd`)
+
+**`zombie_bait` in `DEFENCES`:**
+- **Cost:** two fish (LEVER), from its kit only (`kit_only`).
+- **`season` summer,** as 0234's table says.
+- **One hit point,** as the mine has.
+- **`walked_over`.**
+- **`lure_tiles` 10** (LEVER 6-14).
+- **`lifetime_ticks`** 10 s (LEVER 5-20).
+- **`eaten_by` 8** (LEVER 3-16).
+- **`per_night_limit` 3** (LEVER 1-6).
+- **No `damage`, `reload_ticks` or `path_cost`:** so no sound either.
+
+**`zombie_bait_kit` at the press:** its inputs are the bait's own cost, and
+it takes 420 ticks, forty a day.
+
+**Decided, where it is made: the press.** The prompt offered the kitchen or
+the press.
+- The kitchen's recipes are all food, and 0192 holds each to its margin.
+- The press already takes fish, for oil.
+- 0032's "every press recipe makes oil" now looks only at what the press
+  makes as a resource.
+
+**Decided, the prompt's either/or: from a kit only.**
+- **Why:** `Resources.pay` does understand the fish group (0179 taught it),
+  but:
+  - `check_defences` refused a group in a cost;
+  - a sale would hand back "fish", which the ledger cannot hold;
+  - and the night has no fish to spare.
+- **So the cost names the group on a `kit_only` row,** the one place
+  `check_defences` now allows a group.
+- **`Building.affordable`** is a kit.
+- **`why_not` without one:** `WHY_KIT_ONLY` with the station, "make one at
+  the press first".
+- **`place`** never pays from the ledger.
+- **`why_not_sell`:** `WHY_THROWN`, "it stays where it was thrown".
+- **`check_kits`:** a kit-only defence has a recipe that makes it.
+
+**Decided, walkable: 0178's `walked_over`, not a new flag.**
+- `_through`, `is_prey` and `breaks_through` already read it, for the
+  sprinklers.
+- `check_defences` refuses a walked-over row with a `path_cost`.
+- 0228's prompt, and its source in `tools/backlog/part9.py`, now say so.
+
+**Decided: the tree's spare stakes are the barricade's alone**
+(`Building.left_tonight`). Its nodes say "barricades", and the bait is
+rationed by the fish.
+
+### One lure field, two reaches (`src/core/pathing.gd`)
+
+**Decided: every lure is seeded at its own head start** (`_heads_of`): the
+widest reach less its own.
+- **Today:** the decoy at 5 and the bait at 0.
+- **So:** "within `lure_reach()` by the field" is "within its own
+  `lure_tiles`" for each, and where two pulls overlap, the nearer by the
+  field wins.
+- **One sweep:** one field and one sweep for both.
+
+**A seed is pinned at its head start:** no wave lowers it.
+- **The problem it solves:** the decoy's cell is passable in the lure's
+  costs so that it can be bitten. A wave could otherwise lower it, and the
+  walk to a bait behind a decoy would go through the straw.
+- **Lures only:** `_sweep` keeps the old path for the eager fields - the
+  extra test runs only on a relaxation that already improves a cell.
+
+**`distance_lure()`** is now the walk plus that head start.
+**`check_pathing`** holds the head start inside the bucket wheel
+(`WIDEST_STEP`).
+
+### The walking (`src/core/enemies.gd`)
+
+- **`_lure_away`** replaces `_lured`: the field's value, asked again if the
+  farm changed since the tick began.
+- **On a bait** (the field's 0, walked over), one eats: it stands there.
+- **Within reach,** it walks the lure.
+- **A lured step that lands on the field's 0** is an arrival, counted on the
+  bait as `eaten` (`_reached_bait`). At `eaten_by`, `Farm.remove` takes the
+  bait, with no rubble, and whoever walks after that in the tick has the
+  field rebuilt without it.
+- **The lifetime is the barricade's `Building.expire`,** first in the
+  night's tick, so a bait that runs out is gone before anybody moves.
+
+### The view (`src/ui/`)
+
+- **`DecoyArt` draws the bait:**
+  - a fish belly-up in the rot greens the walkers wear, darker underneath;
+  - ribs through the torn top, a dull eye, a gaping mouth, the tail's lower
+    lobe bitten off;
+  - 12x6 with its outline on x 2..13, lying on row 13 - A037's 16x16 on
+    (8,14).
+- **`PlaceholderArt`:**
+  - `zombie_bait` is drawn;
+  - `icon_zombie_bait` and `hud_zombie_bait` stand in as the fish's icons,
+    tinted green;
+  - the hotbar and the night bar's hint now wear a stand-in's tint.
+- **On the ground layer with the mines,** under the feet of the crowd that
+  stands on it.
+- **The hotbar counts a kit-only thing's kits,** "x0" or "x1": it has no
+  price to show.
+- **The words:**
+  - `DEF_ZOMBIE_BAIT`, "zombie bait" / "isca de zumbi";
+  - `REC_ZOMBIE_BAIT_KIT`;
+  - for the tooltip, `DESC_KIT_ONLY`, `DESC_LASTS` and `DESC_EATEN_BY`, plus
+    0178's `DESC_WALKED_OVER`. `DESC_LASTS` also gives the barricade's
+    tooltip its 60 s;
+  - for the refusals, `WHY_KIT_ONLY` and `WHY_THROWN`.
+- **A037's Deliverables table** is now final: the geometry this task settled
+  and how the game plays each row.
+
+### Hashes
+
+- **DATA 3465552205 -> 2947162752:** the bait's row and its kit.
+- **SIM 3837945514 unchanged:**
+  - no state key was added - the bait's `eaten` count lives on its occupant,
+    and only while one stands;
+  - the determinism scenario meets no bait;
+  - the head starts and the pinned seeds leave a farm with no lure, or with
+    decoys alone, as it was. The decoy shot came out at 0224's numbers.
+
+Verify: **PASS**, 60 of 60 in 951 s, the run that recorded DATA.
+- **Suites:** `headless_check` 17674 asserts, `headless_v1` 2435,
+  `input_check` 1246 cases, `input_v1` 720 (106 s).
+- **perf:** a night tick 1396 us, the swarm with its decoys 7717, a path
+  rebuild 10933 and 14981 with the decoys.
+- **The run before it** passed all the rest and failed only on the data
+  hash it was there to move.
+
+**Tests:**
+- **`_task_0225_bait` (headless_v1):**
+  - the row's levers and the kit at the press;
+  - five refusals (fish off a kit, a walked-over barrier, a bait eaten by
+    nobody, a kit nothing makes, a head start the wheel cannot hold) and the
+    real tables passing;
+  - the kit made at the press from the cheapest fish;
+  - a kit-only refusal that spends no fish, and the throw with a kit;
+  - `WHY_THROWN`;
+  - walked over: the ground's cost, not prey, the lure's 0;
+  - ten walkers beyond a decoy's reach pulled the bait's way. They eat, and
+    it goes at the eighth with the eaters walking on that tick;
+  - three eaters walking their own road on the tick its lifetime ends;
+  - three a night, and the spare stakes the barricade's;
+  - the drawing on its pivot's row, and the tinted icon with "x0";
+  - the words in both languages, and A037's table.
+- **Old groups touched:**
+  - 0132's rich farm holds a kit for a kit-only defence;
+  - 0166 budgets the kit's forty a day;
+  - 0193 counts summer's two;
+  - 0224 reads the decoy at its head start and the hotbar's order by
+    position;
+  - in `headless_check`: a cost in fish priced at the cheapest fish, a
+    walked-over thing stepped onto and not hunted, the press's oil, and 93
+    scenarios.
+- **`_case_0225_bait` (input_v1):**
+  - a press by the farmer, its panel's row clicked;
+  - its time stepped;
+  - at night Q from nothing picks the bait, counting its one kit;
+  - a click throws it at the cursor and spends the kit.
+- **`_case_0224_decoy`:** Q now turns to the second page - the bait is the
+  last slot - and a click there picks the decoy.
+
+**Looked at:** (`python tools/shot.py 0225 zombie_bait decoy --fhd`):
+- **`zombie_bait`, a night past the defended farm's fence:**
+  - **The crowd:** of eight coming for the fish, three were eating on it at
+    the shutter. The rest came from five to eight tiles - further than a
+    decoy pulls - with the tank last.
+  - **The fish on the ground** is small and dark under their feet, dim at
+    night: A037's to brighten.
+  - **The hotbar's second page:** the decoy short of straw, and the bait
+    picked, its fish rotted green, "x1" over "2/night".
+  - **The hint** reads "place zombie bait" with the fish beside it.
+- **`decoy`:**
+  - 0224's picture at 0224's numbers: 110 and 200 hit points and the heap;
+  - its second page now holds both, the bait's slot greyed at "x0".
+- **What the takes found:**
+  - the night bar's hint wore the fish untinted, blue, until it took a
+    stand-in's tint as the hotbar does;
+  - the scene was first called `bait`, which 0181's fishing scene already
+    is. It is `zombie_bait` now.
+
+Files: src/core/{game_data,pathing,enemies,building}.gd,
+src/ui/{decoy_art,placeholder_art,world_view,hotbar,night_hud,names,describe}.gd,
+assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+tools/backlog/part9.py, tools/determinism_data_hash.txt,
+implementation/backlog/packs/A037-decoy.md,
+implementation/prompts/{0225-zombie-bait,0228-garlic-braid}.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0225/,
+docs/devlog/{index,index.pt_BR}.md

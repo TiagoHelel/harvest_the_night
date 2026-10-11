@@ -621,12 +621,13 @@ TASKS = [
               "anyway (plan sections 3.1 and 5).",
          req=["Id `garlic_braid` (never `garlic`, the crop), paid in garlic "
               "and a little wood, `season` autumn (0193's field, per the "
-              "plan's table). Walkable like a trap through the `walkable` "
-              "flag 0225 puts on `DEFENCES` (add it here if 0225 has not "
-              "landed): `Pathing._through` gives it the ground's cost and "
-              "`Pathing.is_prey` leaves it out (today a defence with no "
-              "`path_cost` is prey); it is not `one_shot`, so `Traps` never "
-              "sees it. No `damage`, so no `Sfx.TOWER_SOUNDS` entry",
+              "plan's table). Walkable like a trap through `walked_over`, "
+              "0178's flag that 0225 put on the bait's `DEFENCES` row: "
+              "`Pathing._through` gives it the ground's cost and "
+              "`Pathing.is_prey` and `breaks_through` leave it out, and "
+              "`check_defences` refuses it with a `path_cost`; it is not "
+              "`one_shot`, so `Traps` never sees it. No `damage`, so no "
+              "`Sfx.TOWER_SOUNDS` entry",
               "Repelling is a cost: cells within N tiles (LEVER 1-3) cost a "
               "LEVER more in `Pathing._entry_costs`, in the shared and the "
               "open field, never more than one braid's worth however many "

@@ -140,6 +140,7 @@ const SCENARIOS: Array = [
 	["trampled", "the morning after a loss, by the trampled crops", ""],
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
+	["zombie_bait", "a crowd turned toward a zombie bait at night: a rotten fish thrown past a defended farm's fence, the nearest already eating on it and the rest - from further than a decoy pulls - on their way; the bait picked on the hotbar, one kit left", ""],
 	["bone_meal", "Spring 2 at noon: a starter row turned, plain and fertilised side by side, dry then watered, and carrot sprouts on fertilised earth dry and wet; bone meal chosen in the strip", ""],
 	["night_loot", "the morning after Spring 7's Full Moon, fought from a defended farm: the report counting the bones and moon stones lying about; then him out by the moon stone nearest the house, the night's bones about it", "ResultScreen"],
 	["north_band", "standing on the north spawn ground", ""],
@@ -768,6 +769,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"bone_meal": _set_bone_meal(state)
 		"tarps": _set_tarps(state)
 		"decoy": _set_decoy(state)
+		"zombie_bait": _set_zombie_bait(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1083,6 +1085,14 @@ func _only_showing(main: Node, wanted: String) -> void:
 func _just_before_the_shutter(main: Node, state: Dictionary,
 		name: String) -> void:
 	match name:
+		"zombie_bait":
+			# What the shutter finds (task 0225): the bait, and who is on it.
+			var bait: Array = Pathing.lure_cells(state)
+			var eating := 0
+			for id in Entities.ids(state):
+				if not bait.is_empty() and Entities.cell_of(state, id) == bait[0]:
+					eating += 1
+			print("  bait: %s, %d eating on it of %d" % [str(bait), eating, Entities.count(state)])
 		"decoy":
 			# What the shutter finds: each decoy's hit points, and who is
 			# biting the first (task 0224).
@@ -2514,6 +2524,33 @@ func _set_decoy(state: Dictionary) -> void:
 	print("  decoys at %s, %d coming for the first" % [str(spots), Entities.count(state)])
 	Building.select(state, &"decoy")
 	_look_at((spots[0] as Vector2i) + Vector2i(-1, 2))
+
+
+## **A crowd turned toward a bait** (task 0225): the defended farm's night,
+## a rotten fish thrown on open ground past its fence and a crowd coming in to
+## it - the nearest three steps or less, eating on it by the shutter, and the
+## rest from five to eight, further than a decoy pulls, still on their way.
+## The bait is picked on the hotbar with one kit left, its page turned.
+func _set_zombie_bait(state: Dictionary) -> void:
+	_a_defended_farm(state, true)
+	var middle := _clear_patch(state, Player.cell(state) + Vector2i(19, 1), 4)
+	if middle.x < 0:
+		push_warning("shot: no open patch for the bait")
+		_look_at(_the_defence_line(state))
+		return
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	(state["kits"] as Dictionary)[&"zombie_bait"] = 2
+	Building.place(state, &"zombie_bait", middle)
+	var crowd := {Vector2i(2, 0): &"walker", Vector2i(0, -3): &"walker", Vector2i(-3, 0): &"runner",
+		Vector2i(4, -2): &"walker", Vector2i(-4, 3): &"walker", Vector2i(-2, -4): &"walker",
+		Vector2i(3, 4): &"walker", Vector2i(4, 4): &"tank"}
+	for at in crowd:
+		Entities.spawn(state, crowd[at], middle + (at as Vector2i))
+	print("  bait at %s, %d coming for it" % [str(middle), Entities.count(state)])
+	Building.select(state, &"zombie_bait")
+	_look_at(middle + Vector2i(-2, 2))
 
 
 ## The cell nearest `near` with `radius` cells of nothing standing every way

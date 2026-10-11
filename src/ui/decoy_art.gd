@@ -5,7 +5,9 @@ extends RefCounted
 ## A037's canvas and pivot - 16x32 standing on (8,28), the stake's foot on row
 ## 27 and centred on x 8 - whole; hurt, the shirt torn and straw spilling, the
 ## head slumped and an arm hanging off the crossbar; and wrecked, the stake
-## snapped over a heap of straw with the sack head rolled off it.
+## snapped over a heap of straw with the sack head rolled off it. **And the
+## zombie bait** (task 0225), A037's other drawing: a fish rotting belly-up on
+## the ground, 16x16 lying on (8,14).
 ##
 ## **Drawn in code until 0236 integrates A037** (`PlaceholderArt.is_drawn`):
 ## made into a texture once each, named for the runtime path it stands for so
@@ -15,6 +17,9 @@ extends RefCounted
 
 ## The decoy's states, by runtime name.
 const STATES := [&"decoy", &"decoy_hurt", &"decoy_wreck"]
+
+## Everything here, the bait with them.
+const DRAWN := [&"decoy", &"decoy_hurt", &"decoy_wreck", &"zombie_bait"]
 
 ## **The sway when it is struck**: A037's three poses as how far the top of
 ## the straw leans, in pixels - two west, one back east, one west - a tenth of
@@ -32,7 +37,7 @@ static var _made: Dictionary = {}
 ## The texture a state of the decoy wears: A037's when it has landed, the code
 ## drawing until then. Null for a name that is not one of the decoy's.
 static func texture(name: StringName) -> Texture2D:
-	if not STATES.has(name):
+	if not DRAWN.has(name):
 		return null
 	var path := path_of(name)
 	if not PlaceholderArt.is_drawn(path):
@@ -78,6 +83,8 @@ static func drawing(name: StringName) -> Image:
 			_hurt(image, foot.x, bottom)
 		&"decoy_wreck":
 			_wreck(image, foot.x, bottom)
+		&"zombie_bait":
+			_bait(image, foot.x, bottom)
 		_:
 			_whole(image, foot.x, bottom)
 	_outline(image, bottom)
@@ -153,6 +160,24 @@ static func _wreck(image: Image, centre: int, bottom: int) -> void:
 		for x in range(centre + 2, centre + 5):
 			_put(image, x, y, &"soil_light" if x == centre + 4 or y == bottom - 1 else &"bone_dark")
 	_put(image, centre + 3, bottom - 2, &"ink")
+
+
+## The bait: a fish rotting belly-up on the ground, in the rot the walkers
+## wear and darker underneath, its ribs through the torn top, a dull eye and
+## a gaping mouth, the tail's lower lobe bitten off - twelve wide with its
+## outline, on x 2..13, lying on the pivot's row.
+static func _bait(image: Image, centre: int, bottom: int) -> void:
+	for x in range(centre - 4, centre + 3):
+		_put(image, x, bottom - 3, &"rot")
+		_put(image, x, bottom - 2, &"rot_dark" if x % 2 == 0 else &"rot")
+	for x in range(centre - 3, centre + 2):
+		_put(image, x, bottom - 4, &"bone" if x % 2 == 0 else &"rot")
+		_put(image, x, bottom - 1, &"rot_dark")
+	_put(image, centre - 5, bottom - 2, &"rot_dark")
+	_put(image, centre - 4, bottom - 3, &"ink")
+	_put(image, centre + 3, bottom - 3, &"rot_dark")
+	_put(image, centre + 3, bottom - 2, &"rot_dark")
+	_put(image, centre + 4, bottom - 4, &"rot")
 
 
 ## The stake, two pixels wide and centred on the pivot: lit on its west side.

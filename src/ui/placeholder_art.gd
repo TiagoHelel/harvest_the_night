@@ -199,6 +199,10 @@ const TARP_SHORT := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw
 ## A037's decoy (task 0224): 16x32 standing on (8,28), drawn at 1.0.
 const DECOY := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
 
+## A037's bait on the ground (task 0225): one 16x16 tile lying on (8,14), as
+## a mine does, drawn at 1.0.
+const BAIT := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -267,6 +271,11 @@ const ART := {
 	&"decoy": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": DECOY, "final": DECOY, "bare": true},
 	&"decoy_hurt": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": DECOY, "final": DECOY, "bare": true},
 	&"decoy_wreck": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": DECOY, "final": DECOY, "bare": true},
+	# A037's bait (task 0225): the fish on the ground drawn in code by
+	# `DecoyArt`, and its icons the fish's own rotted green, until 0236.
+	&"zombie_bait": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": BAIT, "final": BAIT, "bare": true},
+	&"icon_zombie_bait": {"pack": "A037", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.95, 1.2, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_zombie_bait": {"pack": "A037", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.95, 1.2, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
 	# the fertilised earth the tilled tile paled with it, dry and wet, until
 	# 0235.

@@ -353,7 +353,10 @@ static func left_tonight(state: Dictionary, id: StringName) -> int:
 	if entry == null:
 		return 0
 	var limit := int((entry as Dictionary).get("per_night_limit", 0))
-	if limit > 0:
+	# **The tree's spare stakes are the barricade's** (task 0225): its nodes
+	# say "barricades", and the bait - the other thing with a nightly
+	# allowance - is rationed by the fish, not by the stakes.
+	if limit > 0 and id == &"barricade":
 		limit += Tech.bonus(state, "barricade_bonus", 0)
 	if limit <= 0:
 		return 1 << 30          # no limit declared, so no limit applied
@@ -409,7 +412,25 @@ static func why_not_now(state: Dictionary, id: StringName) -> Array:
 static func affordable(state: Dictionary, id: StringName) -> bool:
 	if Crafting.kits(state, id) > 0:
 		return true
+	if kit_only(id):
+		return false
 	return Resources.can_afford(state, cost_of(id))
+
+
+## **Down from a kit only** (task 0225): the zombie bait, whose cost is the fish
+## a recipe pays from any species and the ledger never holds.
+static func kit_only(id: StringName) -> bool:
+	var entry: Variant = entry_of(id)
+	return entry != null and bool((entry as Dictionary).get("kit_only", false))
+
+
+## The station whose recipe makes this one's kit, first by name, or `&""`.
+static func kit_station(id: StringName) -> StringName:
+	for recipe_id in GameData.sorted_names(GameData.RECIPES.keys()):
+		var recipe: Dictionary = GameData.RECIPES[recipe_id]
+		if (recipe["output"] as Dictionary).has(id):
+			return StringName(recipe["station"])
+	return &""
 
 
 static func can_place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
@@ -446,6 +467,8 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> Array:
 	if sprays(id) and Farming.crop_on(state, cell) != &"":
 		return [&"WHY_ON_A_CROP"]
 	if not affordable(state, id):
+		if kit_only(id):
+			return [&"WHY_KIT_ONLY", kit_station(id)]
 		return [&"WHY_SHORT", Resources.missing(state, cost_of(id))]
 	return []
 
@@ -482,9 +505,9 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 		return false
 
 	# The kit first: it is the cost already paid, and a player who banked one
-	# during the day meant to use it.
+	# during the day meant to use it. A thing from a kit only has no other way.
 	if not Crafting.take_kit(state, id):
-		if not Resources.pay(state, cost_of(id)):
+		if kit_only(id) or not Resources.pay(state, cost_of(id)):
 			return false
 
 	var entry: Dictionary = entry_of(id)
@@ -543,6 +566,10 @@ static func why_not_sell(state: Dictionary, cell: Vector2i) -> Array:
 	# it stays up.
 	if Livestock.is_home(id) and not Livestock.residents(state, cell).is_empty():
 		return [&"WHY_HOME_IN_USE"]
+	# **Thrown stays thrown** (task 0225): a bait's price is fish of any kind,
+	# and the ledger has no such thing to give back.
+	if kit_only(id):
+		return [&"WHY_THROWN"]
 	return why_not_now(state, id)
 
 

@@ -546,6 +546,9 @@ func _refresh_hint_icon(named: StringName) -> void:
 	_hint_icon.visible = picture != null
 	if picture == null:
 		return
+	# A stand-in's own tint (task 0225's bait, the fish rotted green); white
+	# for real art.
+	_hint_icon.modulate = PlaceholderArt.art_tint(StringName("hud_%s" % named))
 	_hint_icon.position = Vector2(floorf(hint_words_at())
 		- PICTURE_GAP - _hint_icon.size.x, HINT_AT.y + 1.0)
 

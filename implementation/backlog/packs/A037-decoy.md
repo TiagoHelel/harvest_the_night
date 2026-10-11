@@ -21,7 +21,7 @@ shorter than the 32 px farmer.
 
 ## Deliverables
 
-The table is provisional: game task 0225 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0225. The rows stand as written: the decoy 16x32 standing on (8,28) in its three states and two three-frame sway strips, the bait 16x16 lying on (8,14), and the bait's icon at 16x16 and 10x10. **How the game plays them:** a decoy is one cell, bitten from its four sides by a crowd that does not collide, so the biters stand on the cells round it; it is `decoy_hurt` below three quarters of its hit points and `decoy_wreck` once it falls, as rubble the morning sweeps; each bite plays the sway strip of the state it is in, west first, whoever bit it (0224). A bait is one cell that the crowd walks onto and stands on to eat - several of them on that one cell at once, drawn under their feet - until it is gone, at its lifetime or once enough have eaten, with no wreck; its icon is the hotbar slot's (`icon_zombie_bait`) and the compact rows' (`hud_zombie_bait`). Until 0236 the decoy and the bait are drawn in code by `DecoyArt` and the icons are the fish's own, rotted green, through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
@@ -42,6 +42,9 @@ The table is provisional: game task 0225 settles the final canvas/footprint/stat
   pivot, registered as drawn in `PlaceholderArt`, and the view leans the whole
   drawing through the same three poses (`DecoyArt.SWAY_TOPS`). The hotbar shows
   `decoy` scaled into its 16x16 box: this pack has no decoy icon.
+- **The bait's stand-in** (task 0225): `DecoyArt` draws `zombie_bait` in code,
+  a rot-green fish belly-up on the pivot's row, 12x6 with its outline; the
+  icons are `ui/icon_fish` and `ui/hud_fish` tinted green.
 - `decoy`, `decoy_hurt` and `decoy_wreck` share one `content_scale` (one raw
   sheet). Each sway strip has its own single `content_scale`, chosen so its
   stake and body height equal `decoy`'s.

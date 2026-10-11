@@ -1404,8 +1404,9 @@ func _refresh() -> void:
 			shadow.modulate.a = PlayerView.SHADOW_ALPHA
 			shadow.show_behind_parent = true
 			sprite.add_child(shadow)
-		# Pressure discs lie under boots, never paint over an actor's legs.
-		if id == &"mine":
+		# Pressure discs lie under boots, never paint over an actor's legs -
+		# and so does a bait (task 0225), with a crowd stood on it eating.
+		if id == &"mine" or (GameData.DEFENCES.has(id) and Building.walked_over(id)):
 			_ground_traps.add_child(sprite)
 		else:
 			_occupants.add_child(sprite)

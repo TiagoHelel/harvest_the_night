@@ -77,6 +77,15 @@ extends RefCounted
 ## all: the seeds are looked for first, and none is an empty field without a
 ## pass of entry costs or a sweep.
 ##
+## **One field, two reaches** (task 0225). A zombie bait pulls from further
+## than a decoy, and both go in the same sweep: each lure is seeded at how
+## much less far it pulls than the widest (`_heads_of`), so "within the
+## widest reach by the field" means "within its own reach" for each of them,
+## and where two pulls overlap the nearer by the field still wins. A seed
+## keeps its head start - no wave lowers it - so no walk to a bait goes
+## through a decoy on the way: a lure is where a walk ends, never a step on
+## it.
+##
 ## ## A zombie cannot oscillate
 ##
 ## Every step is onto a cell whose field value is `field[here] - enter(next)`,
@@ -125,8 +134,8 @@ const IMPASSABLE := 0
 
 ## **Every field, by name** (task 0218). A row says:
 ## - `seeds`, where the sweep starts: `house`, the farmhouse; `prey`, whatever a
-##   breaker has come for (`prey_cells()`); `lures`, every decoy standing
-##   (`lure_cells()`).
+##   breaker has come for (`prey_cells()`); `lures`, every decoy and bait
+##   standing (`lure_cells()`), each at its own head start (`_heads_of()`).
 ## - `cost`, what stepping onto a cell costs: `priced`, a barrier is a door
 ##   with a price on it; `open`, a barrier is a hole in the map; `hunt`, priced,
 ##   with the seeds themselves passable so that the sweep can leave them;
@@ -307,9 +316,10 @@ static func distance_hunt(state: Dictionary, cell: Vector2i) -> int:
 	return int(field[idx])
 
 
-## The next cell on the way to **the nearest decoy** (task 0224), or the same
-## cell when none stands or this is one. Which decoy is the field's to say: the
-## nearer by what the walk costs, a tie to the first way out in `Grid.STEPS`.
+## The next cell on the way to **the nearest lure** (tasks 0224 and 0225), or
+## the same cell when none stands or this is one. Which lure is the field's to
+## say: the nearer by the walk and its head start, a tie to the first way out
+## in `Grid.STEPS`.
 ##
 ## Reads the lure as it was last built, like `step_hunt()`: the caller has
 ## asked `field(state, &"lure")` at this `grid_version` first.
@@ -317,8 +327,10 @@ static func step_lure(state: Dictionary, cell: Vector2i) -> Vector2i:
 	return _step_in(state["flow_lure"], state["lure_cost"], cell)
 
 
-## What reaching the nearest decoy costs from here, built for the farm as it
-## stands. `UNREACHABLE` with none standing or none to be walked to.
+## The lure field's value here, built for the farm as it stands: the walk to
+## the lure that pulls hardest from here, plus that lure's head start - so a
+## lurable thing is pulled while it is at most `lure_reach()`. `UNREACHABLE`
+## with none standing or none to be walked to.
 static func distance_lure(state: Dictionary, cell: Vector2i) -> int:
 	var idx := Grid.index(cell)
 	if idx < 0:
@@ -331,8 +343,9 @@ static func distance_lure(state: Dictionary, cell: Vector2i) -> int:
 
 ## **How far a lure pulls** (task 0224): the widest `lure_tiles` in `DEFENCES`,
 ## in the lure field's own units - steps of walking, each what entering its
-## cell costs, so a soil tile is two. One kind of lure today; a second that
-## pulled less far than the decoy would want a field of its own.
+## cell costs, so a soil tile is two. A lure that pulls less far starts that
+## much further along (`_heads_of()`, task 0225), so this one number is the
+## line for every lure.
 static func lure_reach() -> int:
 	var widest := 0
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
@@ -603,7 +616,8 @@ static func _make(state: Dictionary, spec: Dictionary, costs: Dictionary,
 	# find out that the answer is "nowhere" is a sweep worth not doing.
 	if seeds.is_empty() and bool(spec.get("none_without_seeds", false)):
 		return {"field": PackedInt32Array(), "cost": cost}
-	return {"field": _sweep(state, cost, seeds), "cost": cost}
+	return {"field": _sweep(state, cost, seeds,
+		_heads_of(state, StringName(spec["seeds"]), seeds)), "cost": cost}
 
 
 ## Where a row's sweep starts.
@@ -617,6 +631,23 @@ static func _seeds_of(state: Dictionary, rule: StringName) -> Array:
 			return lure_cells(state)
 	push_error("Pathing: no seeds called '%s'" % rule)
 	return []
+
+
+## **Where each seed's walk starts counting** (task 0225), beside `seeds`:
+## nothing for the house and the prey, every one of them at 0; for a lure,
+## how much less far it pulls than the widest (`lure_reach()`), so one field
+## swept from a decoy and a bait at once says "pulled" within each one's own
+## reach.
+static func _heads_of(state: Dictionary, rule: StringName, seeds: Array) -> PackedInt32Array:
+	var heads := PackedInt32Array()
+	if rule != &"lures":
+		return heads
+	var widest := lure_reach()
+	for cell in seeds:
+		var on := Farm.occupant(state, cell)
+		var entry: Dictionary = GameData.DEFENCES.get(StringName(on.get("id", &"")), {})
+		heads.append(maxi(widest - int(entry.get("lure_tiles", widest)), 0))
+	return heads
 
 
 ## What stepping onto each cell costs, by a row's rule.
@@ -649,8 +680,13 @@ static func _costs_by(state: Dictionary, rule: StringName, costs: Dictionary,
 
 ## One field, swept out from a set of seed cells against one set of entry
 ## costs. The seeds are wherever whoever reads this field is trying to get to.
+##
+## **With `heads`** (task 0225, the lure's) each seed starts at its own head
+## start and is pinned there: no wave lowers it, so no walk goes through a
+## seed to a cheaper one beyond. Without them every seed starts at 0, which
+## nothing can lower anyway.
 static func _sweep(state: Dictionary, cost: PackedInt32Array,
-		seeds: Array) -> PackedInt32Array:
+		seeds: Array, heads: PackedInt32Array = PackedInt32Array()) -> PackedInt32Array:
 	var field := PackedInt32Array()
 	field.resize(Grid.CELLS)
 	field.fill(UNREACHABLE)
@@ -670,13 +706,20 @@ static func _sweep(state: Dictionary, cost: PackedInt32Array,
 		wheel.append([])
 
 	var queued := 0
-	for cell in seeds:
-		var idx := Grid.index(cell)
-		if idx < 0 or int(field[idx]) == 0:
+	var pinned := not heads.is_empty()
+	var pin := PackedByteArray()
+	if pinned:
+		pin.resize(Grid.CELLS)
+	for i in seeds.size():
+		var idx := Grid.index(seeds[i])
+		var start := int(heads[i]) if pinned else 0
+		if idx < 0 or int(field[idx]) <= start:
 			continue
-		field[idx] = 0
-		(wheel[0] as Array).append(idx)
+		field[idx] = start
+		(wheel[start % wheel_size] as Array).append(idx)
 		queued += 1
+		if pinned:
+			pin[idx] = 1
 
 	# Nothing is ever filed further ahead than `WIDEST_STEP`, so the bucket
 	# being emptied is never one being filled: the wheel can be a ring.
@@ -721,25 +764,29 @@ static func _sweep(state: Dictionary, cost: PackedInt32Array,
 				# walks in from it.
 				if idx >= width:
 					var n_idx := idx - width
-					if cost[n_idx] != IMPASSABLE and through < field[n_idx]:
+					if cost[n_idx] != IMPASSABLE and through < field[n_idx] \
+							and (not pinned or pin[n_idx] == 0):
 						field[n_idx] = through
 						into.append(n_idx)
 						queued += 1
 				if x < width - 1:
 					var n_idx := idx + 1
-					if cost[n_idx] != IMPASSABLE and through < field[n_idx]:
+					if cost[n_idx] != IMPASSABLE and through < field[n_idx] \
+							and (not pinned or pin[n_idx] == 0):
 						field[n_idx] = through
 						into.append(n_idx)
 						queued += 1
 				if idx < last_row:
 					var n_idx := idx + width
-					if cost[n_idx] != IMPASSABLE and through < field[n_idx]:
+					if cost[n_idx] != IMPASSABLE and through < field[n_idx] \
+							and (not pinned or pin[n_idx] == 0):
 						field[n_idx] = through
 						into.append(n_idx)
 						queued += 1
 				if x > 0:
 					var n_idx := idx - 1
-					if cost[n_idx] != IMPASSABLE and through < field[n_idx]:
+					if cost[n_idx] != IMPASSABLE and through < field[n_idx] \
+							and (not pinned or pin[n_idx] == 0):
 						field[n_idx] = through
 						into.append(n_idx)
 						queued += 1

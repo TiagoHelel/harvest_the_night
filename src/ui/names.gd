@@ -140,6 +140,7 @@ const KEYS: Dictionary = {
 	&"wall": &"DEF_WALL",
 	&"barricade": &"DEF_BARRICADE",
 	&"decoy": &"DEF_DECOY",
+	&"zombie_bait": &"DEF_ZOMBIE_BAIT",
 
 	# ---- what a day builds
 	&"workshop": &"BLD_WORKSHOP",
@@ -171,6 +172,7 @@ const KEYS: Dictionary = {
 	&"fence_kit": &"REC_FENCE_KIT",
 	&"mine_kit": &"REC_MINE_KIT",
 	&"wall_kit": &"REC_WALL_KIT",
+	&"zombie_bait_kit": &"REC_ZOMBIE_BAIT_KIT",
 	&"press_oil": &"REC_PRESS_OIL",
 	&"press_fish_oil": &"REC_PRESS_FISH_OIL",
 	&"make_incendiary": &"REC_MAKE_INCENDIARY",

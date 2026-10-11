@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 49
+const V1_CASES := 50
 
 
 func _process(delta: float) -> bool:
@@ -99,6 +99,7 @@ func _run() -> void:
 	await _case_0221_collect()
 	await _case_0222_fertilise()
 	await _case_0224_decoy()
+	await _case_0225_bait()
 	_finish()
 
 
@@ -3486,13 +3487,18 @@ func _case_0224_decoy() -> void:
 	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT and hotbar != null and hotbar.visible,
 		"the night's hotbar")
 
+	# Q from nothing is the last slot - the bait since task 0225 - on the
+	# second page, summer's; a click there picks the decoy.
 	await tap_key(KEY_Q)
-	await until(func() -> bool: return locate_control("Hotbar_decoy") != null, "the decoy's page")
+	await until(func() -> bool: return locate_control("Hotbar_decoy") != null, "the second page")
+	await click_control("Hotbar_decoy")
+	await until(func() -> bool: return Building.selected(state) == &"decoy", "the decoy's slot")
+	await frames(2)
 	var slot := locate_control("Hotbar_decoy")
 	var icon: TextureRect = slot.get_node_or_null("Icon") as TextureRect if slot != null else null
 	expect(Building.selected(state) == &"decoy" and icon != null and icon.texture == DecoyArt.texture(&"decoy")
 		and locate_control("Hotbar_wall") == null,
-		"Q from nothing picks the decoy, alone on the hotbar's second page and wearing its drawing",
+		"Q from nothing turns the hotbar to its second page, summer's, and a click there picks the decoy, wearing its drawing",
 		String(Building.selected(state)))
 
 	var spot := Vector2i(-1, -1)
@@ -3528,6 +3534,76 @@ func _case_0224_decoy() -> void:
 		and drawn.skew < 0.0,
 		"the decoy is drawn on its pivot and leans west when it is bitten",
 		str(drawn.skew) if drawn != null else "none")
+	await close_scene()
+	_completed += 1
+
+
+## 0225 - a bait made by day and thrown with the cursor at night. A press by
+## the farmer, faced: its panel's row makes a bait's kit from any fish. At
+## night Q from nothing picks the bait - the last slot - counting its one kit,
+## and a click on open ground throws it there, the kit spent.
+func _case_0225_bait() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	Resources.gain(state, {GameData.WOOD: 100, GameData.IRON: 20})
+	var cheapest: StringName = GameData.pay_order(GameData.FISH)[0]
+	Resources.add(state, cheapest, 2)
+	var here := Player.cell(state)
+	var press := Vector2i(-1, -1)
+	for dy in range(-10, 11):
+		for dx in range(-10, 11):
+			var at := here + Vector2i(dx, dy)
+			if press.x < 0 and Building.can_place(state, &"press", at) \
+					and Farm.walkable(state, at + Vector2i(1, 3)):
+				press = at
+	expect(press.x >= 0 and Building.place(state, &"press", press), "fixture: a press near the farmer", str(press))
+	_stand_at(state, press + Vector2i(1, 3), Player.NORTH)
+	await frames(3)
+	var panel := require_control("WorkshopPanel") as Control
+	expect(panel != null and panel.visible, "facing the press, its panel is up")
+	await click_control("make_zombie_bait_kit")
+	await until(func() -> bool: return (Crafting.making(state, press) == &"zombie_bait_kit"
+		or Crafting.kits(state, &"zombie_bait") > 0), "a click on the bait in the press's panel")
+	# The press's own time, stepped rather than waited out.
+	for _i in int(GameData.RECIPES[&"zombie_bait_kit"]["ticks"]) * 4:
+		if Crafting.kits(state, &"zombie_bait") > 0:
+			break
+		Sim.advance(state, 1)
+	expect(Crafting.kits(state, &"zombie_bait") == 1 and Resources.amount(state, cheapest) == 0,
+		"made by day: one bait's kit, from the fish", str(Crafting.kits(state, &"zombie_bait")))
+
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	world.skip_transition()
+	var hotbar := locate_control("Hotbar") as Hotbar
+	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT and hotbar != null and hotbar.visible,
+		"the night's hotbar")
+	await tap_key(KEY_Q)
+	await until(func() -> bool: return locate_control("Hotbar_zombie_bait") != null, "the bait's page")
+	var slot := locate_control("Hotbar_zombie_bait")
+	var price: Label = slot.get_node_or_null("Price") as Label if slot != null else null
+	expect(Building.selected(state) == &"zombie_bait" and price != null
+		and price.text.begins_with(I18n.f(&"HOTBAR_KITS", [1])),
+		"Q from nothing picks the bait, the last slot, counting its one kit",
+		price.text if price != null else "none")
+	var spot := Vector2i(-1, -1)
+	var middle := world.screen_to_cell(Vector2(240.0, 120.0))
+	for radius in 6:
+		for candidate in Grid.within(middle, radius):
+			if spot.x < 0 and Building.why_not(state, &"zombie_bait", candidate).is_empty():
+				spot = candidate
+	await click_cell(spot)
+	await until(func() -> bool: return StringName(Farm.occupant(state, spot).get("id", &"")) == &"zombie_bait",
+		"the bait to go down")
+	expect(StringName(Farm.occupant(state, spot).get("id", &"")) == &"zombie_bait"
+		and Crafting.kits(state, &"zombie_bait") == 0,
+		"a click throws it down at the cursor, and the kit is spent", str(spot))
 	await close_scene()
 	_completed += 1
 

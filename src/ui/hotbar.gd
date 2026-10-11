@@ -121,6 +121,9 @@ func _build(chosen: int) -> void:
 		var icon := TextureRect.new()
 		icon.name = "Icon"
 		icon.texture = _icon_of(id)
+		# A stand-in's own tint (task 0225's bait, the fish rotted green);
+		# white for real art.
+		icon.modulate = PlaceholderArt.art_tint(StringName("icon_%s" % id))
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -160,7 +163,9 @@ func _build(chosen: int) -> void:
 func _price_line(id: StringName) -> String:
 	var lines: Array = []
 	var banked := Crafting.kits(_state, id)
-	if banked > 0:
+	# A thing from a kit only (task 0225) counts its kits, none and all: its
+	# cost is fish nobody can pay at night.
+	if banked > 0 or Building.kit_only(id):
 		lines.append(I18n.f(&"HOTBAR_KITS", [banked]))
 	else:
 		var cost := Building.cost_of(id)

@@ -35,6 +35,11 @@ extends RefCounted
 ## its own field and bites the straw. The decoy's fall rebuilds the lure on
 ## the spot, and whoever walks after it that tick is back on its own road.
 ##
+## A **zombie bait** (task 0225) pulls the same way from further off, and is
+## walked onto rather than bitten: whoever reaches it stops there to eat until
+## it is gone - at its lifetime, or once `eaten_by` have reached it - and then
+## the crowd on it walks on.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -192,21 +197,36 @@ static func _pull(state: Dictionary) -> Dictionary:
 		"version": int(state["grid_version"])}
 
 
-## Whether a decoy has this one: the lure field says the nearest is within its
-## reach, and it is not standing on the straw. **A farm changed since the tick
-## began is asked again first** - a decoy bitten down a moment ago is a field
-## rebuilt without it, so whoever walks after the bite that tick is back on
-## its own road.
-static func _lured(state: Dictionary, pull: Dictionary, here: Vector2i) -> bool:
+## What the lure field says of a cell: the walk to the lure that pulls
+## hardest from there, plus its head start (`Pathing.distance_lure`), or
+## `Pathing.UNREACHABLE`. Pulled while it is above 0 and at most the pull's
+## reach. **A farm changed since the tick began is asked again first** - a
+## decoy bitten down or a bait eaten up a moment ago is a field rebuilt
+## without it, so whoever walks after that, that tick, is back on its own
+## road.
+static func _lure_away(state: Dictionary, pull: Dictionary, cell: Vector2i) -> int:
 	if int(pull["version"]) != int(state["grid_version"]):
 		pull["field"] = Pathing.field(state, &"lure")
 		pull["version"] = int(state["grid_version"])
 	var field: PackedInt32Array = pull["field"]
-	var idx := Grid.index(here)
+	var idx := Grid.index(cell)
 	if idx < 0 or field.size() != Grid.CELLS:
-		return false
-	var away := int(field[idx])
-	return away > 0 and away <= int(pull["reach"])
+		return Pathing.UNREACHABLE
+	return int(field[idx])
+
+
+## **One more has reached the bait on this cell** (task 0225), and stops to
+## eat. Once `eaten_by` have, it is gone - taken away like an expired
+## barricade, with no rubble - and the lure is rebuilt without it.
+static func _reached_bait(state: Dictionary, cell: Vector2i) -> void:
+	var on := Farm.occupant(state, cell)
+	var entry: Dictionary = GameData.DEFENCES.get(StringName(on.get("id", &"")), {})
+	var most := int(entry.get("eaten_by", 0))
+	if most <= 0:
+		return
+	on["eaten"] = int(on.get("eaten", 0)) + 1
+	if int(on["eaten"]) >= most:
+		Farm.remove(state, cell)
 
 
 static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
@@ -253,12 +273,21 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	var at := Vector2i(int(one["pos"][0]), int(one["pos"][1]))
 	var here := Vector2i(at.x / Player.SUBTILE, at.y / Player.SUBTILE)
 	var next := here
-	# **A decoy turns the lurable** (task 0224). Within its reach by the lure
-	# field, one walks that field instead of its own, and the straw is the
-	# next cell in the end: `breaks_through()` says so and it bites. A runner
-	# too - it goes round a wall, and not round this.
-	if not pull.is_empty() and bool(data.get("lurable", false)) \
-			and _lured(state, pull, here):
+	var lured := false
+	if not pull.is_empty() and bool(data.get("lurable", false)):
+		var away := _lure_away(state, pull, here)
+		# **On a bait, it eats** (task 0225): a lure it can stand on holds it
+		# there until the bait is gone - the crowd in one place, for whatever
+		# the player laid beside it.
+		if away == 0 and Building.walked_over(StringName(Farm.occupant(state, here).get("id", &""))):
+			return
+		lured = away > 0 and away <= int(pull["reach"])
+	# **A lure turns the lurable** (tasks 0224 and 0225). Within its reach by
+	# the lure field, one walks that field instead of its own: to a decoy,
+	# which is the next cell in the end - `breaks_through()` says so and it
+	# bites - or onto a bait. A runner too: it goes round a wall, and not
+	# round this.
+	if lured:
 		next = Pathing.step_lure(state, here)
 	# **A runner goes round what you built.** It asks the field with the
 	# barriers taken out of it, and only falls back to the one everybody else
@@ -318,6 +347,9 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 	var landed := Vector2i(at.x / Player.SUBTILE, at.y / Player.SUBTILE)
 	if landed != here and Farm.occupant(state, landed).get("id", &"") == &"house":
 		_bite(state, id, data)
+	# **Arrived at a bait** (task 0225): the lure's 0 under a lured foot.
+	elif lured and landed != here and _lure_away(state, pull, landed) == 0:
+		_reached_bait(state, landed)
 
 
 ## Whether a telegraphing enemy has finished winding up at the house. True at

@@ -123,6 +123,16 @@ static func defence(id: StringName) -> String:
 	# **How far a lure pulls** (task 0224), the live lever.
 	if int(one.get("lure_tiles", 0)) > 0:
 		lines.append(I18n.f(&"DESC_LURES", [int(one["lure_tiles"])]))
+	# **The bait's** (task 0225): where its kit is made - the only road to
+	# it - that it is walked over, how long it lasts and who eats it up.
+	if Building.kit_only(id):
+		lines.append(I18n.f(&"DESC_KIT_ONLY", [Names.of(Building.kit_station(id))]))
+	if bool(one.get("walked_over", false)):
+		lines.append(I18n.t(&"DESC_WALKED_OVER"))
+	if int(one.get("lifetime_ticks", 0)) > 0:
+		lines.append(I18n.f(&"DESC_LASTS", [_seconds(int(one["lifetime_ticks"]))]))
+	if int(one.get("eaten_by", 0)) > 0:
+		lines.append(I18n.f(&"DESC_EATEN_BY", [int(one["eaten_by"])]))
 	return "\n".join(lines)
 
 

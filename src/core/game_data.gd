@@ -964,6 +964,16 @@ const RECIPES: Dictionary = {
 		"output": {OIL: 1},
 		"ticks": DAY_TICKS * 20 / 240,  # LEVER: fraction of a day
 	},
+	# **Rotten fish for the night** (task 0225): any fish, the cheapest first
+	# (`ANY_OF`), pressed and left to turn. The press's, where fish already go
+	# for oil - the kitchen's recipes are all food, each held to its margin
+	# (0192). Its inputs are the bait's own cost, as every kit's are.
+	&"zombie_bait_kit": {
+		"station": &"press",
+		"inputs": {FISH: 2},
+		"output": {&"zombie_bait": 1},
+		"ticks": DAY_TICKS * 6 / 240,   # LEVER: fraction of a day
+	},
 	# The flamethrower's rounds. `design.md` section 5 names this one exactly.
 	&"make_incendiary": {
 		"station": &"workshop",
@@ -1644,6 +1654,37 @@ const DEFENCES: Dictionary = {
 		# decoy, by the lure field, is at most this many tiles leaves its
 		# road and comes to bite the straw instead.
 		"lure_tiles": 5,                # LEVER: tiles, 3-8
+		"energy_draw": 0,
+	},
+	&"zombie_bait": {
+		# **A rotten fish thrown down at night** (task 0225; the plan's 3.2,
+		# "um peixe podre que atrai a horda para uma armadilha"). For a few
+		# seconds everything that can be lured, from further off than a decoy
+		# pulls, turns toward it - and stops on it to eat, wherever the
+		# player laid the trap.
+		#
+		# **From a kit only** (`kit_only`): the press rots any fish into one
+		# by day (`zombie_bait_kit`), and the night has no fish to spare. The
+		# cost names the fish group, which a recipe pays from any species
+		# (task 0179) and the ledger never holds - so there is no road from
+		# the ledger at night, and nothing to refund in fish.
+		"cost": {FISH: 2},              # LEVER: fish a bait, 1-4
+		"kit_only": true,
+		"season": &"summer",            # LEVER: the season it unlocks in (0234 gates it)
+		# One hit point, as a mine has: nothing bites a thing it walks over.
+		"hp": 1,
+		# **Walked over** (0178's flag, the sprinklers'): the ground's cost
+		# to the field, so nothing breaks through it and nothing hunts it.
+		"walked_over": true,
+		# **Further than a decoy pulls**: the lure field seeds every lure at
+		# how much less far it pulls than the widest (`Pathing._heads_of`).
+		"lure_tiles": 10,               # LEVER: tiles, 6-14
+		# **Eaten, then gone**: it lasts this long from the waves, or until
+		# this many have reached it to eat, whichever comes first - and it
+		# leaves nothing behind.
+		"lifetime_ticks": 10 * SECONDS, # LEVER: ticks, 5-20 seconds worth
+		"eaten_by": 8,                  # LEVER: zombies, 3-16
+		"per_night_limit": 3,           # LEVER: how many, 1-6
 		"energy_draw": 0,
 	},
 }
@@ -3090,6 +3131,7 @@ static func validate() -> Array:
 	errors.append_array(check_chain(RECIPES, SELL_PRICE))
 	errors.append_array(check_livestock(LIVESTOCK, FARM_MAP))
 	errors.append_array(check_ammo(DEFENCES, RECIPES))
+	errors.append_array(check_kits(DEFENCES, RECIPES))
 	errors.append_array(check_groups(RESOURCE_GROUPS, RESOURCES))
 	errors.append_array(check_resource_prices(RESOURCES, SELL_PRICE))
 	# Every season's shelf (task 0190), animals and upgrades on it.
@@ -3257,6 +3299,20 @@ static func check_pathing(terrain: Array, defences: Dictionary,
 			if through > 0 and int(entry.get("hp", 0)) <= 0:
 				errors.append(("'%s' declares a path cost but has no hit points - "
 					+ "there would be no way through it after all") % id)
+
+	# **Every lure's head start fits the wheel** (task 0225): the lure field
+	# seeds each lure at how much less far it pulls than the widest, and the
+	# sweep files that start in its bucket wheel.
+	var widest := 0
+	var narrowest := 1 << 30
+	for id in sorted_names(defences.keys()):
+		var tiles := int((defences[id] as Dictionary).get("lure_tiles", 0))
+		if tiles > 0:
+			widest = maxi(widest, tiles)
+			narrowest = mini(narrowest, tiles)
+	if widest > 0 and widest - narrowest > WIDEST_STEP:
+		errors.append(("lures pull from %d to %d tiles, and the head start "
+			+ "between them is wider than WIDEST_STEP (%d)") % [narrowest, widest, WIDEST_STEP])
 
 	return errors
 
@@ -3848,7 +3904,10 @@ static func check_defences(defences: Dictionary) -> Array:
 					% [defence_id, kind])
 
 		for res in (defence["cost"] as Dictionary):
-			if not RESOURCES.has(res):
+			# **A group only on a kit** (task 0225): the fish group is a
+			# recipe's to pay from any species, never the ledger's.
+			if not RESOURCES.has(res) and not (is_any_of(StringName(res))
+					and bool(defence.get("kit_only", false))):
 				errors.append("defence '%s' costs unknown '%s'"
 					% [defence_id, res])
 		# Outside the `reload_ticks` guard on purpose: this is the check for the
@@ -3903,6 +3962,13 @@ static func check_defences(defences: Dictionary) -> Array:
 			if int(defence.get("hp", 0)) <= 0:
 				errors.append("defence '%s' lures and has no hit points to bite"
 					% defence_id)
+		# **Walked over is no barrier** (task 0225): the field gives it the
+		# ground's cost, so a price for breaking through would never be read.
+		if bool(defence.get("walked_over", false)) and defence.has("path_cost"):
+			errors.append("defence '%s' is walked over and priced as a barrier"
+				% defence_id)
+		if defence.has("eaten_by") and int(defence["eaten_by"]) <= 0:
+			errors.append("defence '%s' is eaten by nobody" % defence_id)
 	return errors
 
 
@@ -4234,6 +4300,21 @@ static func check_livestock(animals: Dictionary, rows: Array,
 		feed_made = feed_made or ((RECIPES[id] as Dictionary)["output"] as Dictionary).has(ANIMAL_FEED)
 	if not feed_made:
 		errors.append("the animals eat '%s' and nothing makes it" % ANIMAL_FEED)
+	return errors
+
+
+## **A defence from a kit only has a kit to come from** (task 0225): one no
+## recipe made could never go down at all.
+static func check_kits(defences: Dictionary, recipes: Dictionary) -> Array:
+	var errors: Array = []
+	for id in sorted_names(defences.keys()):
+		if not bool((defences[id] as Dictionary).get("kit_only", false)):
+			continue
+		var made := false
+		for recipe_id in sorted_names(recipes.keys()):
+			made = made or ((recipes[recipe_id] as Dictionary)["output"] as Dictionary).has(id)
+		if not made:
+			errors.append("defence '%s' goes down from a kit only and nothing makes one" % id)
 	return errors
 
 

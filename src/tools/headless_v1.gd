@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 69
+const GROUPS := 70
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -148,6 +148,7 @@ func _run() -> void:
 	_task_0222_bone_meal()
 	_task_0223_tarps()
 	_task_0224_decoy()
+	_task_0225_bait()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -1371,6 +1372,10 @@ func _task_0132_night_build() -> void:
 	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT]:
 		var state := State.create(1320)
 		Resources.gain(state, plenty)
+		# A thing from a kit only (task 0225) goes down from its kit.
+		for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+			if Building.kit_only(id):
+				(state["kits"] as Dictionary)[id] = 9
 		if phase != Phases.DAY:
 			NightRoad.into_build(state)
 		if phase == Phases.NIGHT:
@@ -3310,7 +3315,7 @@ func _task_0166_long_day() -> void:
 		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 24, &"make_flour": 40, &"make_sugar": 24,
 		&"cook_stew": 20, &"cook_omelette": 16, &"make_bread": 30, &"cook_supper": 10,
 		&"make_gunpowder_coal": 16, &"make_incendiary_pepper": 24, &"press_sunflower_oil": 12,
-		&"grind_bone_meal": 60}
+		&"grind_bone_meal": 60, &"zombie_bait_kit": 40}
 	var units := {&"barricade_kit": 40, &"fence_kit": 48, &"mine_kit": 30,
 		&"wall_kit": 24, &"press_oil": 12, &"press_fish_oil": 9,
 		&"make_incendiary": 96, &"make_gunpowder": 32,
@@ -3318,7 +3323,7 @@ func _task_0166_long_day() -> void:
 		&"make_butter": 20, &"make_cloth": 12, &"make_sandbag": 96, &"make_flour": 40, &"make_sugar": 72,
 		&"cook_stew": 40, &"cook_omelette": 48, &"make_bread": 30, &"cook_supper": 60,
 		&"make_gunpowder_coal": 32, &"make_incendiary_pepper": 144, &"press_sunflower_oil": 12,
-		&"grind_bone_meal": 60}
+		&"grind_bone_meal": 60, &"zombie_bait_kit": 40}
 	var ordinary := 0
 	for id in GameData.RECIPES:
 		if GameData.tool_output(GameData.RECIPES[id]["output"].keys()[0]).is_empty() \
@@ -6164,8 +6169,8 @@ func _task_0193_supply() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		var said := GameData.defence_season(GameData.DEFENCES[id]) if GameData.DEFENCES[id].has("season") else &""
 		seasons[said] = int(seasons.get(said, 0)) + 1
-	expect(seasons == {&"spring": 8, &"summer": 1},
-		"every defence says the season it unlocks in: spring's eight, and 0224's decoy summer's", str(seasons))
+	expect(seasons == {&"spring": 8, &"summer": 2},
+		"every defence says the season it unlocks in: spring's eight, and summer's decoy (0224) and bait (0225)", str(seasons))
 	# **The routes**, season by season: what each kit, round, meal and feed
 	# is made of, followed back to the ground.
 	for season in GameData.SEASONS:
@@ -7110,7 +7115,7 @@ func _task_0224_decoy() -> void:
 	var fresh := State.create(22400)
 	expect(not bool(spec.get("eager", false)) and bool(spec.get("none_without_seeds", false))
 		and (fresh["flow_lure"] as PackedInt32Array).is_empty() and (fresh["lure_cost"] as PackedInt32Array).is_empty()
-		and int(fresh["lure_version"]) == -1 and Pathing.lure_reach() == reach,
+		and int(fresh["lure_version"]) == -1 and Pathing.lure_reach() >= reach,
 		"the lure is a row of Pathing's registry, built when asked, its keys in a new game")
 	var bare: Dictionary = _decoy_night(22401, [])
 	var quiet: Dictionary = bare["state"]
@@ -7127,8 +7132,12 @@ func _task_0224_decoy() -> void:
 	var state: Dictionary = night["state"]
 	var spot: Vector2i = night["spot"]
 	var full := int(Farm.occupant(state, spot).get("hp", 0))
-	expect(Pathing.lure_cells(state) == [spot] and Pathing.distance_lure(state, spot) == 0
-		and Pathing.distance_lure(state, spot + Vector2i(reach - 1, 0)) <= reach,
+	# Seeded at its head start (task 0225): how much less far it pulls than
+	# the widest lure, so it pulls within its own `lure_tiles`.
+	var head := Pathing.lure_reach() - reach
+	expect(Pathing.lure_cells(state) == [spot] and Pathing.distance_lure(state, spot) == head
+		and Pathing.distance_lure(state, spot + Vector2i(reach - 1, 0)) == head + reach - 1
+		and Pathing.distance_lure(state, spot + Vector2i(reach + 1, 0)) > Pathing.lure_reach(),
 		"a decoy stands at night, and the lure is swept from it", str(spot))
 	var beyond := _beyond_the_lure(state, spot, reach)
 	var walker := Entities.spawn(state, &"walker", spot + Vector2i(reach - 1, 0))
@@ -7144,7 +7153,7 @@ func _task_0224_decoy() -> void:
 			if int(Entities.get_one(state, id).get("chewing", -1)) == Grid.index(spot):
 				bitten[id] = true
 		if not Entities.get_one(state, stray).is_empty():
-			strayed = strayed or Pathing.distance_lure(state, Entities.cell_of(state, stray)) <= reach
+			strayed = strayed or Pathing.distance_lure(state, Entities.cell_of(state, stray)) <= Pathing.lure_reach()
 	var left := int(Farm.occupant(state, spot).get("hp", 0))
 	var home_after := Pathing.distance(state, Entities.cell_of(state, stray))
 	expect(bitten.has(walker) and left < full, "the walker within reach walks to the decoy and bites it",
@@ -7246,8 +7255,9 @@ func _task_0224_decoy() -> void:
 	var icon := bar._icon_of(&"decoy")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
-	expect(icon == DecoyArt.texture(&"decoy") and order.back() == &"decoy"
-		and order.slice(0, order.size() - 1) == GameData.sorted_names(order.slice(0, order.size() - 1)),
+	var spring := order.slice(0, 8)
+	expect(icon == DecoyArt.texture(&"decoy") and order.find(&"decoy") == 8
+		and spring == GameData.sorted_names(spring),
 		"the hotbar shows the drawing, after spring's eight, which keep their places", str(order))
 	var said := {}
 	for locale in ["en", "pt_BR"]:
@@ -7267,6 +7277,229 @@ func _task_0224_decoy() -> void:
 		and perf_check.contains("const DECOYS := 4") and shots.contains("[\"decoy\", "),
 		"perf.py holds the rebuild with decoys to the path's budget, perf_check puts four in the swarm, and shot.gd has a lured crowd")
 	_completed += 1
+
+
+## 0225 - the zombie bait. A rotten fish the press makes by day from any fish,
+## thrown down at night from a kit only; walked over, never hunted and never
+## broken through; a crowd beyond any decoy's reach turns toward it and eats
+## on it; it goes at its arrival count or its lifetime, leaving nothing, and
+## the crowd is back on its road the same tick.
+func _task_0225_bait() -> void:
+	# **The row, the kit, and their checks.**
+	var row: Dictionary = GameData.DEFENCES[&"zombie_bait"]
+	var decoy: Dictionary = GameData.DEFENCES[&"decoy"]
+	var kit: Dictionary = GameData.RECIPES[&"zombie_bait_kit"]
+	var reach := int(row["lure_tiles"])
+	var lifetime := int(row["lifetime_ticks"])
+	var eaten_by := int(row["eaten_by"])
+	expect((row["cost"] as Dictionary).keys() == [GameData.FISH] and Building.kit_only(&"zombie_bait")
+		and Building.walked_over(&"zombie_bait") and reach >= 6 and reach <= 14 and reach > int(decoy["lure_tiles"])
+		and lifetime >= 5 * GameData.SECONDS and lifetime <= 20 * GameData.SECONDS and eaten_by > 0
+		and int(row["per_night_limit"]) > 0 and GameData.defence_season(row) == &"summer"
+		and not row.has("damage") and not row.has("reload_ticks") and not row.has("path_cost")
+		and Pathing.lure_reach() == reach,
+		"a bait costs fish, comes from a kit only, is walked over, pulls further than a decoy, lasts 5-20 s, is eaten up, is rationed, is summer's, and shoots and blocks nothing",
+		str(row))
+	expect(kit["station"] == &"press" and kit["inputs"] == row["cost"] and kit["output"] == {&"zombie_bait": 1}
+		and Building.kit_station(&"zombie_bait") == &"press",
+		"the press makes its kit, for the bait's own cost", str(kit))
+	var paid_in_fish := GameData.DEFENCES.duplicate(true)
+	(paid_in_fish[&"decoy"] as Dictionary)["cost"] = {GameData.FISH: 2}
+	var priced := GameData.DEFENCES.duplicate(true)
+	(priced[&"zombie_bait"] as Dictionary)["path_cost"] = 4
+	var uneaten := GameData.DEFENCES.duplicate(true)
+	(uneaten[&"zombie_bait"] as Dictionary)["eaten_by"] = 0
+	var unmade := GameData.RECIPES.duplicate(true)
+	unmade.erase(&"zombie_bait_kit")
+	var too_far := GameData.DEFENCES.duplicate(true)
+	(too_far[&"zombie_bait"] as Dictionary)["lure_tiles"] = 60
+	expect(_says(GameData.check_defences(paid_in_fish), "costs unknown 'fish'")
+		and _says(GameData.check_defences(priced), "walked over and priced")
+		and _says(GameData.check_defences(uneaten), "eaten by nobody")
+		and _says(GameData.check_kits(GameData.DEFENCES, unmade), "nothing makes one")
+		and _says(GameData.check_pathing(GameData.TERRAIN_COST, too_far, GameData.BUILDINGS), "wider than WIDEST_STEP")
+		and GameData.validate().is_empty(),
+		"fish in a cost off a kit, a walked-over barrier, a bait eaten by nobody, a kit nothing makes and a head start the wheel cannot hold all fail; the real tables pass")
+
+	# **Made by day at the press, from any fish - the cheapest first.**
+	var day := State.create(22500)
+	Resources.gain(day, {GameData.WOOD: 100, GameData.IRON: 20})
+	var bench := _clear_for(day, &"press")
+	expect(Building.place(day, &"press", bench), "a press goes up by day", str(bench))
+	var order := GameData.pay_order(GameData.FISH)
+	var cheap: StringName = order[0]
+	var dear: StringName = order[order.size() - 1]
+	Resources.gain(day, {cheap: 2, dear: 1})
+	expect(Crafting.enqueue(day, bench, &"zombie_bait_kit"), "its kit is queued at the press")
+	for _i in int(kit["ticks"]) * 4:
+		if Crafting.kits(day, &"zombie_bait") > 0:
+			break
+		Sim.advance(day, 1)
+	expect(Crafting.kits(day, &"zombie_bait") == 1 and Resources.amount(day, cheap) == 0
+		and Resources.amount(day, dear) == 1,
+		"and made: a bait's kit, paid in the cheapest fish held, the dearest left", "%s and %s" % [cheap, dear])
+
+	# **Down from a kit only.**
+	var night: Dictionary = _decoy_night(22501, [])
+	var state: Dictionary = night["state"]
+	var spot: Vector2i = night["spot"]
+	Resources.gain(state, {cheap: 4})
+	var fish := Resources.amount(state, GameData.FISH)
+	expect(not Building.affordable(state, &"zombie_bait")
+		and Building.why_not(state, &"zombie_bait", spot) == [&"WHY_KIT_ONLY", &"press"]
+		and not Building.place(state, &"zombie_bait", spot) and Resources.amount(state, GameData.FISH) == fish,
+		"with fish and no kit it is refused - make one at the press first - and no fish are spent")
+	(state["kits"] as Dictionary)[&"zombie_bait"] = 1
+	expect(Building.place(state, &"zombie_bait", spot) and Crafting.kits(state, &"zombie_bait") == 0
+		and Resources.amount(state, GameData.FISH) == fish,
+		"with the kit it goes down, and the fish stay where they were")
+	expect(Building.why_not_sell(state, spot) == [&"WHY_THROWN"] and Building.sell(state, spot).is_empty()
+		and StringName(Farm.occupant(state, spot).get("id", &"")) == &"zombie_bait",
+		"thrown stays thrown: there is no fish to give back")
+	Pathing.refresh(state)
+	expect(Pathing.entry_cost(state, spot) == Farm.cost_of_terrain(Farm.terrain_at(state, spot))
+		and not Pathing.is_prey(&"zombie_bait") and not Pathing.breaks_through(state, spot)
+		and Pathing.distance_lure(state, spot) == 0,
+		"walked over: the ground's cost, nothing a breaker hunts, nothing to break through, and the lure's 0")
+
+	# **A crowd beyond any decoy's reach turns toward the bait, and eats.**
+	# A decoy six west of it; ten walkers three to seven east, nine and more
+	# from the straw. The farthest are spawned first, so the last to arrive
+	# eats before the ones already eating are walked that tick.
+	var pair: Dictionary = _decoy_night(22502, [Vector2i(-6, 0)])
+	var both: Dictionary = pair["state"]
+	var bait: Vector2i = pair["spot"]
+	(both["kits"] as Dictionary)[&"zombie_bait"] = 1
+	expect(Building.place(both, &"zombie_bait", bait), "a bait goes down beside the decoy", str(bait))
+	Pathing.refresh(both)
+	Pathing.field(both, &"lure")
+	var crowd: Array = []
+	var turned := 0
+	for at in [Vector2i(6, -1), Vector2i(6, 1), Vector2i(6, 0), Vector2i(5, -1), Vector2i(5, 1),
+			Vector2i(5, 0), Vector2i(4, -1), Vector2i(4, 1), Vector2i(4, 0), Vector2i(3, 0)]:
+		var cell: Vector2i = bait + at
+		var away := Pathing.distance_lure(both, cell)
+		var by_decoy := absi(at.x + 6) + absi(at.y)
+		if by_decoy > int(decoy["lure_tiles"]) and away == absi(at.x) + absi(at.y) \
+				and Pathing.distance_lure(both, Pathing.step_lure(both, cell)) < away:
+			turned += 1
+		crowd.append(Entities.spawn(both, &"walker", cell))
+	expect(turned == crowd.size(), "ten walkers beyond the decoy's reach, each pulled the bait's way by the field",
+		"%d of %d" % [turned, crowd.size()])
+	var ever_on := {}
+	var gone_at := -1
+	var walked_on := 0
+	for t in 400:
+		var before := {}
+		for id in crowd:
+			var one := Entities.get_one(both, int(id))
+			if not one.is_empty() and Entities.cell_of(both, int(id)) == bait:
+				before[id] = [int(one["pos"][0]), int(one["pos"][1])]
+		Enemies.tick(both)
+		for id in crowd:
+			if not Entities.get_one(both, int(id)).is_empty() and Entities.cell_of(both, int(id)) == bait:
+				ever_on[id] = true
+		if Farm.occupant(both, bait).is_empty():
+			gone_at = t
+			for id in before:
+				var one := Entities.get_one(both, int(id))
+				if not one.is_empty() and [int(one["pos"][0]), int(one["pos"][1])] != before[id]:
+					walked_on += 1
+			break
+	expect(gone_at >= 0 and ever_on.size() == eaten_by and walked_on > 0 and Farm.rubble_at(both, bait) == &"",
+		"they stop on it to eat; it goes as the %dth reaches it, with nothing left on the ground, and the ones eating on it walk on that very tick" % eaten_by,
+		"tick %d: %d reached, %d walked on" % [gone_at, ever_on.size(), walked_on])
+
+	# **At its lifetime**, through the farm's own tick (`Building.expire`
+	# first): three eating on it, too few to finish it, walk their own road
+	# on the tick it goes.
+	var timed: Dictionary = _decoy_night(22503, [])
+	var later: Dictionary = timed["state"]
+	var cell: Vector2i = timed["spot"]
+	(later["kits"] as Dictionary)[&"zombie_bait"] = 1
+	Building.place(later, &"zombie_bait", cell)
+	var placed_at := int(later["tick"])
+	var eaters: Array = []
+	for at in [Vector2i(2, 0), Vector2i(0, 3), Vector2i(-3, 0)]:
+		eaters.append(Entities.spawn(later, &"walker", cell + at))
+	var expired_at := -1
+	var homeward := 0
+	for _i in lifetime + 30:
+		Pathing.refresh(later)
+		var roads := {}
+		for id in eaters:
+			var one := Entities.get_one(later, int(id))
+			roads[id] = [Vector2i(int(one["pos"][0]), int(one["pos"][1])),
+				Pathing.step_from(later, Entities.cell_of(later, int(id))) * Player.SUBTILE
+					+ Vector2i.ONE * (Player.SUBTILE / 2)]
+		Sim.tick(later)
+		if Farm.occupant(later, cell).is_empty():
+			expired_at = int(later["tick"]) - placed_at
+			for id in eaters:
+				var one := Entities.get_one(later, int(id))
+				if _moved_toward(roads[id][0], Vector2i(int(one["pos"][0]), int(one["pos"][1])), roads[id][1]):
+					homeward += 1
+			break
+	expect(absi(expired_at - lifetime) <= 1 and homeward == eaters.size() and Farm.rubble_at(later, cell) == &""
+		and Pathing.field(later, &"lure").is_empty(),
+		"unfinished, it is gone at its lifetime with nothing left, and the three eating on it walk their own road that tick",
+		"%d of %d ticks, %d homeward" % [expired_at, lifetime, homeward])
+
+	# **Rationed, and the tree's spare stakes are the barricade's alone.**
+	var limit := int(row["per_night_limit"])
+	var staked: Dictionary = _decoy_night(22504, [])["state"]
+	(staked["tech_owned"] as Array).assign([&"spare stakes"])
+	var bonus := Tech.bonus(staked, "barricade_bonus", 0)
+	expect(bonus > 0 and Building.left_tonight(staked, &"zombie_bait") == limit
+		and Building.left_tonight(staked, &"barricade") == int(GameData.DEFENCES[&"barricade"]["per_night_limit"]) + bonus,
+		"%d baits a night, spare stakes or none, while the stakes add %d barricades" % [limit, bonus])
+	(staked["kits"] as Dictionary)[&"zombie_bait"] = limit + 1
+	var down := 0
+	for dx in limit:
+		if Building.place(staked, &"zombie_bait", (_decoy_ground) + Vector2i(dx - 2, 3)):
+			down += 1
+	expect(down == limit and Building.why_not(staked, &"zombie_bait", _decoy_ground + Vector2i(2, -3))[0] == &"WHY_NIGHT_LIMIT",
+		"and the next is refused with the night's reason", str(down))
+
+	# **On the ground and in the hotbar**, through 0120's road until 0236.
+	var image := DecoyArt.drawing(&"zombie_bait")
+	var used := image.get_used_rect()
+	var frame := PlaceholderArt.frame(DecoyArt.path_of(&"zombie_bait"))
+	expect(used.end.y == 14 and used.size.y >= 5 and used.size.y <= 7 and used.position.x >= 2 and used.end.x <= 14
+		and PlaceholderArt.is_drawn(DecoyArt.path_of(&"zombie_bait")) and frame.get("canvas") == Vector2i(16, 16)
+		and frame.get("pivot") == Vector2i(8, 14) and str(PlaceholderArt.art(&"zombie_bait").get("pack", "")) == "A037",
+		"on the ground a fish lying on its pivot's row, about twelve wide and six tall, drawn in code for A037", str(used))
+	var bar := Hotbar.new()
+	bar.show_state(state)
+	var icon := bar._icon_of(&"zombie_bait")
+	var price := bar._price_line(&"zombie_bait")
+	bar.free()
+	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_fish.png"
+		and PlaceholderArt.art_tint(&"icon_zombie_bait") != Color.WHITE and price.begins_with(I18n.f(&"HOTBAR_KITS", [0])),
+		"its slot wears the fish rotted green, and counts its kits, none and all", price)
+	var said := {}
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		said[locale] = [Describe.defence(&"zombie_bait"), Names.refusal([&"WHY_KIT_ONLY", &"press"])]
+	I18n.use("en")
+	expect(Names.KEYS.get(&"zombie_bait") == &"DEF_ZOMBIE_BAIT" and Names.KEYS.get(&"zombie_bait_kit") == &"REC_ZOMBIE_BAIT_KIT"
+		and (said["en"][0] as String).contains("from up to %d tiles" % reach)
+		and (said["en"][0] as String).contains("%d have eaten" % eaten_by)
+		and (said["pt_BR"][0] as String).contains("ISCA DE ZUMBI") and (said["pt_BR"][1] as String).contains("prensa"),
+		"its name, its pull, its kit and who eats it, in both languages", str(said))
+	expect(FileAccess.get_file_as_string("res://implementation/backlog/packs/A037-decoy.md").contains("Final geometry settled by game task 0225"),
+		"and A037's table says the geometry this task settled")
+	_completed += 1
+
+
+## Whether a body that was at `from` moved toward `aim` this tick, as `Enemies`
+## moves one: along the bigger of the two gaps, a unit at a time (0225).
+func _moved_toward(from: Vector2i, now: Vector2i, aim: Vector2i) -> bool:
+	var gap := aim - from
+	var moved := now - from
+	if absi(gap.x) >= absi(gap.y):
+		return gap.x != 0 and signi(moved.x) == signi(gap.x) and moved.y == 0
+	return signi(moved.y) == signi(gap.y) and moved.x == 0
 
 
 ## A parked night with a clear square of ground round `spot` - six cells every
@@ -7331,7 +7564,7 @@ func _beyond_the_lure(state: Dictionary, spot: Vector2i, reach: int) -> Vector2i
 			var clear := true
 			var at := cell
 			for _step in 40:
-				clear = clear and Pathing.distance_lure(state, at) > reach
+				clear = clear and Pathing.distance_lure(state, at) > Pathing.lure_reach()
 				var next := Pathing.step_from(state, at)
 				if next == at:
 					break
@@ -7350,7 +7583,7 @@ func _turned_by_the_lure(state: Dictionary, spot: Vector2i, reach: int) -> Vecto
 		for dx in range(-reach, reach + 1):
 			var cell := spot + Vector2i(dx, dy)
 			var away := Pathing.distance_lure(state, cell)
-			if absi(dx) + absi(dy) < 2 or away > reach or not Farm.occupant(state, cell).is_empty():
+			if absi(dx) + absi(dy) < 2 or away > Pathing.lure_reach() or not Farm.occupant(state, cell).is_empty():
 				continue
 			if Pathing.step_lure(state, cell) != Pathing.step_from(state, cell):
 				return cell

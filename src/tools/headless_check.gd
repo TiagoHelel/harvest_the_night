@@ -4971,6 +4971,10 @@ func _task_0032_oil() -> void:
 	# **Two ways in**, which is what "corn or fish" asks for.
 	var into_oil: Array = []
 	for id in Crafting.recipes_at(&"press"):
+		# A kit is not oil: since task 0225 the press also rots fish into a
+		# zombie bait, the defence itself.
+		if GameData.DEFENCES.has(StringName((GameData.RECIPES[id]["output"] as Dictionary).keys()[0])):
+			continue
 		into_oil.append(id)
 	expect(into_oil.size() >= 2, "the press takes more than one thing",
 		str(into_oil))
@@ -5686,7 +5690,9 @@ func _task_0034_cooking() -> void:
 func _price_of(amounts: Dictionary) -> int:
 	var total := 0
 	for res in GameData.sorted_names(amounts.keys()):
-		total += int(GameData.SELL_PRICE.get(res, 0)) * int(amounts[res])
+		# A group at its cheapest member (task 0225's bait costs fish), as
+		# the game prices it.
+		total += GameData._price_of(StringName(res), GameData.SELL_PRICE) * int(amounts[res])
 	return total
 
 
@@ -8605,7 +8611,8 @@ func _task_0049_pathing() -> void:
 		Farm.place(priced, spot, {"id": id, "hp": maxi(int(entry.get("hp", 1)), 1)})
 		Pathing.refresh(priced)
 		var cost := Pathing.entry_cost(priced, spot)
-		if Traps.is_trap(id):
+		# A trap and a thing walked over (task 0225's bait) are stepped onto.
+		if Traps.is_trap(id) or Building.walked_over(id):
 			expect(cost == ground, "a %s costs nothing to step onto" % id,
 				str(cost))
 		elif entry.has("path_cost"):
@@ -9423,7 +9430,8 @@ func _task_0052_breaker() -> void:
 	# `_cost_of()` reads the other way round.
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		var entry: Dictionary = GameData.DEFENCES[id]
-		var wanted := not entry.has("path_cost") and not Traps.is_trap(id)
+		var wanted := not entry.has("path_cost") and not Traps.is_trap(id) \
+			and not Building.walked_over(id)
 		expect(Pathing.is_prey(id) == wanted,
 			"a breaker %s a %s" % ["comes for" if wanted else "ignores", id])
 	# Every building but the ones it walks over (task 0178's sprinklers).
@@ -14576,8 +14584,8 @@ func _task_0082_shots() -> void:
 	# 0198: spring's ripe field at night. Eighty-nine since 0199: summer's,
 	# and its peppers and corn regrowing. Ninety since 0204: the big stumps at
 	# night. Ninety-one since 0213: the machines worn. Ninety-two since 0224:
-	# a crowd lured to a decoy.
-	expect(names.size() == 92,
+	# a crowd lured to a decoy. Ninety-three since 0225: one turned to a bait.
+	expect(names.size() == 93,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
