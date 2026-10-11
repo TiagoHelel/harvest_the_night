@@ -990,6 +990,16 @@ func _draw_route() -> void:
 	if _preview.is_empty():
 		return
 	var size := float(GameData.TILE_SIZE)
+	# **The ground the garlic holds** (task 0228), faint under the dots while
+	# a preview is up: the route is drawn bending round something, and this is
+	# the something. Read off the rules' own area, never worked out here.
+	if not _state.is_empty():
+		var area: PackedByteArray = _state.get("repel", PackedByteArray())
+		if area.size() == Grid.CELLS:
+			for idx in Grid.CELLS:
+				if int(area[idx]) > 0:
+					_route_dots.draw_rect(Rect2(Vector2(Grid.cell(idx)) * size,
+						Vector2(size, size)), GARLIC_GROUND)
 	var step := 0
 	for found in _preview:
 		step += 1
@@ -1420,7 +1430,8 @@ func _refresh() -> void:
 			sprite.add_child(shadow)
 		# Pressure discs lie under boots, never paint over an actor's legs -
 		# and so does a bait (task 0225), with a crowd stood on it eating.
-		if id == &"mine" or (GameData.DEFENCES.has(id) and Building.walked_over(id)):
+		# A braid stands up among them (task 0228): only a flat thing lies under.
+		if id == &"mine" or (GameData.DEFENCES.has(id) and Building.walked_over(id) and lies_flat(id)):
 			_ground_traps.add_child(sprite)
 		else:
 			_occupants.add_child(sprite)
@@ -2493,6 +2504,10 @@ func _art_for(on: Dictionary, cell: Vector2i) -> StringName:
 	var id: StringName = on["id"]
 	if connected_barrier(id):
 		return _barrier_name(on, cell)
+	# **A braid as the nights have left it** (task 0228): A040's fresh, wilted
+	# or spent.
+	if Garlic.repels(id):
+		return garlic_art(on)
 
 	# **The house has nine tiles and no anchor.** `FARM_MAP` lays it down a
 	# cell at a time, so every one of them asks for the same drawing and the
@@ -2509,6 +2524,27 @@ func _art_for(on: Dictionary, cell: Vector2i) -> StringName:
 	var pair: Array = at
 	return _worn(StringName("%s_%d_%d" % [id, cell.x - int(pair[0]),
 		cell.y - int(pair[1])]), on)
+
+
+## The drawing a garlic braid wears (task 0228): its id fresh, `_wilted` and
+## `_spent` after, by `Garlic.state_of`.
+static func garlic_art(on: Dictionary) -> StringName:
+	var id := StringName(on["id"])
+	match Garlic.state_of(on):
+		Garlic.WILTED:
+			return StringName("%s_wilted" % id)
+		Garlic.SPENT:
+			return StringName("%s_spent" % id)
+	return id
+
+
+## Whether a thing's drawing lies on the ground - no taller than a tile - so
+## the feet that walk over it are drawn over it (task 0225's bait), rather
+## than standing up among them to be sorted with them (task 0228's braid).
+static func lies_flat(id: StringName) -> bool:
+	var canvas: Vector2i = PlaceholderArt.frame(BUILDING_DIR + str(id) + ".png").get("canvas",
+		Vector2i(GameData.TILE_SIZE, GameData.TILE_SIZE))
+	return canvas.y <= GameData.TILE_SIZE
 
 
 static func connected_barrier(id: StringName) -> bool:
@@ -2743,6 +2779,9 @@ func _texture_for(id: StringName) -> Texture2D:
 	# **Drawn in code until its pack lands** (task 0224's decoy, through
 	# 0120's road): `DecoyArt`'s drawing, at the pack's canvas and pivot.
 	var coded := DecoyArt.texture(id)
+	# And task 0228's garlic braid, `GarlicArt`'s until A040.
+	if coded == null:
+		coded = GarlicArt.texture(id)
 	if coded != null:
 		_textures[id] = coded
 		return coded
@@ -2814,6 +2853,9 @@ const FLASH_PERCENT := 80
 ## drawing's pivot over its feet: round the head - a walker's is some 24
 ## pixels up of its 44.
 const SWARM_HEIGHT := 0.55
+
+## The garlic's ground under a route preview (task 0228): the bulbs' bone, faint.
+const GARLIC_GROUND := Color(0.91, 0.88, 0.81, 0.16)
 
 ## How high a lobbed pumpkin rises over its line at the top of its arc, in
 ## pixels (task 0227), and how many splats burst at once.

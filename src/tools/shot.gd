@@ -140,6 +140,7 @@ const SCENARIOS: Array = [
 	["trampled", "the morning after a loss, by the trampled crops", ""],
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
+	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
 	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
 	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
 	["zombie_bait", "a crowd turned toward a zombie bait at night: a rotten fish thrown past a defended farm's fence, the nearest already eating on it and the rest - from further than a decoy pulls - on their way; the bait picked on the hotbar, one kit left", ""],
@@ -774,6 +775,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"zombie_bait": _set_zombie_bait(state)
 		"beehive": _set_beehive(state)
 		"catapult": _set_catapult(state)
+		"garlic": _set_garlic(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1089,6 +1091,23 @@ func _only_showing(main: Node, wanted: String) -> void:
 func _just_before_the_shutter(main: Node, state: Dictionary,
 		name: String) -> void:
 	match name:
+		"garlic":
+			# The braid in hand on the road (task 0228), and the preview it
+			# draws.
+			var garlic_mode: Node = main.get_node_or_null("%BuildMode")
+			var garlic_view: Node = main.get_node_or_null("%WorldView")
+			if garlic_mode == null or garlic_view == null:
+				return
+			garlic_mode.set("_pointer", garlic_view.cell_to_screen(_garlic_in_hand))
+			garlic_view.cursor().place_at(_garlic_in_hand)
+			garlic_mode.call("_follow_cursor")
+			var crossed := 0
+			for cell in garlic_view.previewed_route():
+				if Grid.chebyshev(cell as Vector2i, _garlic_hung) <= int(GameData.DEFENCES[&"garlic_braid"]["repel_tiles"]):
+					crossed += 1
+			print("  garlic: %d route cells from %d sides, %d in the hung braid's area"
+				% [garlic_view.previewed_route().size(),
+					Calendar.open_sides(Phases.night_ahead(state)).size(), crossed])
 		"catapult":
 			# What the shutter finds (task 0227): the pumpkins in the air, and
 			# the splats bursting.
@@ -2619,6 +2638,57 @@ func _set_beehive(state: Dictionary) -> void:
 		Entities.count(state)])
 	Building.select(state, &"beehive")
 	_look_at(middle + Vector2i(2, 1))
+
+
+## **The route bending round a braid** (task 0228): Autumn 2's build step, a
+## garlic braid hung twelve steps down the east road, which ran straight
+## along its row - and the build step's preview drawing the road round the
+## braid's area, through 0130's camera hook. A second braid in hand, on open
+## ground north of the road where its own area changes nothing, is what puts
+## the preview up; the cursor is put on it at the shutter
+## (`_just_before_the_shutter`).
+func _set_garlic(state: Dictionary) -> void:
+	_on_date(state, 2 * GameData.SEASON_DAYS + 2)
+	Resources.gain(state, {GameData.GARLIC: 20, GameData.WOOD: 20})
+	NightRoad.into_build(state)
+	Pathing.refresh(state)
+	var road := _east_road(state)
+	_garlic_hung = road[mini(12, road.size() - 1)]
+	if not Building.place(state, &"garlic_braid", _garlic_hung):
+		push_warning("shot: the braid would not go down at %s" % str(_garlic_hung))
+	# The one in hand: the nearest cell it could go down on, seven rows north
+	# of the hung one - its area well clear of the road and of the bend.
+	_garlic_in_hand = _garlic_hung + Vector2i(0, -7)
+	for radius in 4:
+		for cell in Grid.within(_garlic_hung + Vector2i(0, -7), radius):
+			if _garlic_in_hand == _garlic_hung + Vector2i(0, -7) \
+					and Building.why_not(state, &"garlic_braid", cell).is_empty():
+				_garlic_in_hand = cell
+	var build: Dictionary = state["build"]
+	build["active"] = true
+	build["selected"] = &"garlic_braid"
+	_camera_at = _garlic_hung + Vector2i(-2, -2)
+	print("  garlic: hung at %s on a road of %d, in hand at %s" % [str(_garlic_hung), road.size(),
+		str(_garlic_in_hand)])
+
+
+## Where `_set_garlic` hung its braid and holds the other (task 0228).
+var _garlic_hung := Vector2i(-1, -1)
+var _garlic_in_hand := Vector2i(-1, -1)
+
+
+## The east road: the first spawn cell of the east side, down the house's
+## field to the door, before anything bends it.
+func _east_road(state: Dictionary) -> Array:
+	var at: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var road: Array = [at]
+	for _i in Grid.CELLS:
+		var next := Pathing.step_from(state, at)
+		if next == at:
+			break
+		road.append(next)
+		at = next
+	return road
 
 
 ## **A volley landing** (task 0227): Autumn 2's night on the defended farm,

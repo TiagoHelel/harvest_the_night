@@ -250,13 +250,20 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 		_bite(state, id, data)
 		return
 
-	var per_tile := maxi(int(data["ticks_per_tile"]), 1)
+	var base := maxi(int(data["ticks_per_tile"]), 1)
+	var per_tile := base
 	# **Flared things walk slowly**, and the count runs down whether they are
 	# walking or chewing - five seconds is five seconds.
 	var slow := int(one.get("slow", 0))
 	if slow > 0:
 		one["slow"] = slow - 1
-		per_tile = Ability.slowed_ticks(per_tile)
+		per_tile = Ability.slowed_ticks(base)
+	# **So do the ones walking through garlic** (task 0228): the area's share
+	# off their speed, one array read for the cell they stand on. With a
+	# flare too, the stronger of the two - never both.
+	var garlic := Pathing.repelled(state, on)
+	if garlic > 0:
+		per_tile = maxi(per_tile, Ability.slowed_ticks(base, 100 - garlic))
 
 	# The remainder is carried, so the speed is exactly what the lever says
 	# rather than whatever integer division left behind.

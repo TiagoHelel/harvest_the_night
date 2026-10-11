@@ -143,6 +143,7 @@ const KEYS: Dictionary = {
 	&"zombie_bait": &"DEF_ZOMBIE_BAIT",
 	&"beehive": &"DEF_BEEHIVE",
 	&"catapult": &"DEF_CATAPULT",
+	&"garlic_braid": &"DEF_GARLIC_BRAID",
 
 	# ---- what a day builds
 	&"workshop": &"BLD_WORKSHOP",

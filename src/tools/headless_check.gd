@@ -8612,9 +8612,11 @@ func _task_0049_pathing() -> void:
 		Farm.place(priced, spot, {"id": id, "hp": maxi(int(entry.get("hp", 1)), 1)})
 		Pathing.refresh(priced)
 		var cost := Pathing.entry_cost(priced, spot)
-		# A trap and a thing walked over (task 0225's bait) are stepped onto.
+		# A trap and a thing walked over (task 0225's bait) are stepped onto -
+		# a garlic braid (task 0228) for its area's extra, its own cell in it.
 		if Traps.is_trap(id) or Building.walked_over(id):
-			expect(cost == ground, "a %s costs nothing to step onto" % id,
+			var area := int(entry.get("repel_cost", 0))
+			expect(cost == ground + area, "a %s costs nothing to step onto but its garlic" % id,
 				str(cost))
 		elif entry.has("path_cost"):
 			expect(cost == ground + int(entry["path_cost"]),
@@ -13944,10 +13946,12 @@ func _building_art(name: StringName) -> Image:
 		var path := PlaceholderArt.texture_path("%s%s.png" % [folder, name])
 		if not path.is_empty() and ResourceLoader.exists(path):
 			return Image.load_from_file(ProjectSettings.globalize_path(path))
-		# **Or drawn in code** until its pack lands (task 0224's decoy): the
-		# drawing the view puts there.
+		# **Or drawn in code** until its pack lands (task 0224's decoy, 0228's
+		# garlic braid): the drawing the view puts there.
 		if path.is_empty() and DecoyArt.texture(name) != null:
 			return DecoyArt.drawing(name)
+		if path.is_empty() and GarlicArt.texture(name) != null:
+			return GarlicArt.drawing(name)
 	return null
 
 
@@ -14587,7 +14591,8 @@ func _task_0082_shots() -> void:
 	# night. Ninety-one since 0213: the machines worn. Ninety-two since 0224:
 	# a crowd lured to a decoy. Ninety-three since 0225: one turned to a bait.
 	# Ninety-four since 0226: a hive at work. Ninety-five since 0227: a volley.
-	expect(names.size() == 95,
+	# Ninety-six since 0228: a route round a braid.
+	expect(names.size() == 96,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

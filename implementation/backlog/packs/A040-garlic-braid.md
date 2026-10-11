@@ -20,7 +20,7 @@ barricade's height, half the farmer's.
 
 ## Deliverables
 
-The table is provisional: game task 0228 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0228. The rows stand as written: the braid 16x24 standing on (8,20), in its three states. **How the game plays them:** a braid is one cell, walked over - the crowd steps onto it and past it, and it is drawn standing up among them, sorted with their feet - and its area is code: every cell within two tiles of it costs more to enter, so a wave bends round it where the way round is cheaper, and the ones that come through walk at 60% of their speed. It is `garlic_braid` from the build step it is hung in through its first night, `garlic_braid_wilted` its second night (half as strong), and `garlic_braid_spent` from its third night on: spent, it does nothing and stays, drawn spent, until the player sells it - for nothing, its garlic used up. A braid hung mid-wave is in its first night already. Nothing bites it, so there is no hurt or wreck. Until 0239 the three states are drawn in code by `GarlicArt`, through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
@@ -30,9 +30,16 @@ The table is provisional: game task 0228 settles the final canvas/footprint/stat
 
 - Every row: dir `none`, `mirror: "none"`, draw scale 1.0, no metadata points
   (the repelling area and any scent wisps are code).
-- No `_hurt` or `_wreck`: the braid is walkable and nothing bites it. If 0228
-  decides that a spent braid disappears, `garlic_braid_spent` is still delivered
-  (it is what the player sees on the last night).
+- No `_hurt` or `_wreck`: the braid is walkable and nothing bites it. 0228
+  decided that a spent braid stays until it is sold, so `garlic_braid_spent`
+  is what the player sees from its third night on.
+- **The stand-in until 0239** (task 0228): `GarlicArt`
+  (`src/ui/garlic_art.gd`) draws the three states in code at this canvas and
+  pivot - a two-wide stake (`wood`, `wood_dark`) on x 7..8 down to row 19, a
+  crosspiece, a plait of `gold` stems, six `bone` bulbs fresh, four duller and
+  sagging wilted, two shrivelled on dry stems spent - registered as drawn in
+  `PlaceholderArt`. The hotbar shows `garlic_braid` scaled into its 16x16 box:
+  this pack has no icon.
 - The three states share one `content_scale` (one raw sheet) and the same stake:
   same x (±0), same top row (±1), lowest row 19.
 - Delivery paths: `native/garlic_braid/none/01.png`,

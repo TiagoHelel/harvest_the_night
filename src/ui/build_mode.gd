@@ -174,8 +174,10 @@ func _follow_cursor() -> void:
 	# blocks the way, and only where it could go: previewing a route around a
 	# tower the player cannot afford is answering a question nobody asked.
 	if reason.is_empty() and _blocks_the_way(id):
+		# A braid is asked as itself (task 0228): its area bends the way, it
+		# does not block it.
 		_view.show_route(Pathing.routes_if_blocked(_state, cell,
-			_ways_in(), ROUTE_STEPS))
+			_ways_in(), ROUTE_STEPS, id if Garlic.repels(id) else &"wall"))
 	else:
 		_view.clear_route()
 
@@ -188,8 +190,10 @@ func _by_cursor() -> bool:
 ## Whether this is a thing zombies have to go round. A tower blocks too, but
 ## a player putting one down is thinking about range, not about traffic; the
 ## line is for the things whose whole job is traffic.
+##
+## **And a garlic braid** (task 0228): its whole job is traffic too.
 func _blocks_the_way(id: StringName) -> bool:
-	return (GameData.DEFENCES.get(id, {}) as Dictionary).has("path_cost")
+	return (GameData.DEFENCES.get(id, {}) as Dictionary).has("path_cost") or Garlic.repels(id)
 
 
 ## Where to draw the routes from (task 0157): the first spawn cell of every

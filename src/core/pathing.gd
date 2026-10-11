@@ -185,6 +185,10 @@ static func initial() -> Dictionary:
 		"flow_lure": PackedInt32Array(),
 		"lure_cost": PackedInt32Array(),
 		"lure_version": -1,
+		# **Garlic's slow, by cell** (task 0228): the share of speed a braid
+		# takes off whoever stands there, built with the fields from the same
+		# pass of entry costs, and empty while no braid has strength left.
+		"repel": PackedByteArray(),
 	}
 
 
@@ -421,6 +425,16 @@ static func prey_cells(state: Dictionary) -> Array:
 	return out
 
 
+## **The share of speed garlic takes off whoever stands on this cell** (task
+## 0228), in percent: 0 where no braid reaches, or none has strength left.
+static func repelled(state: Dictionary, cell: Vector2i) -> int:
+	var area: PackedByteArray = state.get("repel", PackedByteArray())
+	var idx := Grid.index(cell)
+	if idx < 0 or area.size() != Grid.CELLS:
+		return 0
+	return int(area[idx])
+
+
 ## What getting home costs somebody who will not break anything.
 static func distance_around(state: Dictionary, cell: Vector2i) -> int:
 	var idx := Grid.index(cell)
@@ -467,8 +481,12 @@ static func route_if_blocked(state: Dictionary, blocked: Vector2i,
 ## shows a route from every side open tonight. One field is built and every
 ## start walks it, so five sides cost one sweep; the routes come back one
 ## after another in a single list of cells, the way the dotted line draws.
+##
+## **`as_what` is what is pretended there** (task 0228): a wall for anything that
+## blocks, and a garlic braid - fresh - for one, whose area bends the route
+## without blocking it.
 static func routes_if_blocked(state: Dictionary, blocked: Vector2i,
-		froms: Array, most: int = 200) -> Array:
+		froms: Array, most: int = 200, as_what: StringName = &"wall") -> Array:
 	var occupants: Dictionary = state["occupants"]
 	var idx := Grid.index(blocked)
 	if idx < 0:
@@ -477,7 +495,7 @@ static func routes_if_blocked(state: Dictionary, blocked: Vector2i,
 
 	# Pretend, ask, put it back. Nothing else may run between these two lines,
 	# and nothing does: this is a query, not a tick.
-	occupants[idx] = {"id": &"wall", "hp": 1}
+	occupants[idx] = {"id": as_what, "hp": 1}
 	var built := _build(state)
 	# The preview is about where a wall sends them, so it reads the field
 	# everything walks by - not the one a breaker hunts by.
@@ -591,10 +609,11 @@ static func reachable(state: Dictionary, cell: Vector2i) -> bool:
 # ------------------------------------------------------------------ building
 
 ## Every eager field and its costs, built together because they come off the
-## same one pass over the farm. Keyed by the state keys they are kept under.
+## same one pass over the farm. Keyed by the state keys they are kept under -
+## garlic's slow among them (task 0228), off that same pass.
 static func _build(state: Dictionary) -> Dictionary:
 	var costs := _entry_costs(state)
-	var built := {}
+	var built := {"repel": costs["repel"]}
 	for name in GameData.sorted_names(FIELDS.keys()):
 		var spec: Dictionary = FIELDS[name]
 		if not bool(spec.get("eager", false)):
@@ -826,18 +845,66 @@ static func _entry_costs(state: Dictionary) -> Dictionary:
 	# day somebody makes it matter, so it is sorted and the reason is here.
 	var where: Array = occupants.keys()
 	where.sort()
+	var braids: Array = []
 	for key in where:
 		var idx := int(key)
 		if idx < 0 or idx >= Grid.CELLS or int(cost[idx]) == IMPASSABLE:
 			continue
+		var on: Dictionary = occupants[key]
 		var ground := int(cost[idx])
-		var priced := _through(StringName((occupants[key] as Dictionary)["id"]),
-			ground)
+		var priced := _through(StringName(on["id"]), ground)
 		cost[idx] = priced
 		# A barrier - something that cost more to enter than the ground under
 		# it - is a door in one field and a wall in the other.
 		open[idx] = IMPASSABLE if priced != ground else priced
-	return {"cost": cost, "open": open}
+		# A garlic braid with strength left, for the area below (task 0228).
+		if Garlic.strength(on) > 0:
+			braids.append(idx)
+	return {"cost": cost, "open": open, "repel": _repel(state, braids, cost, open)}
+
+
+## **The ground round the garlic** (task 0228). Every cell within a braid's
+## `repel_tiles` - a square, as a tower's reach is - costs its `repel_cost`
+## more to enter, in the priced costs and the open ones alike, so runners
+## bend round it too; and every one takes its share off a walker's speed. A
+## wilted braid at its `wilted_percent` of both. **Never more than one
+## braid's worth**: where two overlap the stronger counts, once. Returns the
+## slow by cell, or an empty array when no braid has strength left - which is
+## every farm without one, and costs it one empty check.
+static func _repel(state: Dictionary, braids: Array, cost: PackedInt32Array,
+		open: PackedInt32Array) -> PackedByteArray:
+	var area := PackedByteArray()
+	if braids.is_empty():
+		return area
+	area.resize(Grid.CELLS)
+	var extra := PackedInt32Array()
+	extra.resize(Grid.CELLS)
+	var touched: Array = []
+	var occupants: Dictionary = state["occupants"]
+	for idx in braids:
+		var on: Dictionary = occupants[idx]
+		var row: Dictionary = GameData.DEFENCES[StringName(on["id"])]
+		var strength := Garlic.strength(on)
+		var reach := int(row["repel_tiles"])
+		var adds := int(row["repel_cost"]) * strength / 100
+		var slows := (100 - int(row["repel_speed_percent"])) * strength / 100
+		var centre := Grid.cell(int(idx))
+		for dy in range(-reach, reach + 1):
+			for dx in range(-reach, reach + 1):
+				var at := centre + Vector2i(dx, dy)
+				if not Grid.in_bounds(at):
+					continue
+				var i := at.y * Grid.WIDTH + at.x
+				if int(area[i]) == 0 and int(extra[i]) == 0:
+					touched.append(i)
+				extra[i] = maxi(int(extra[i]), adds)
+				area[i] = maxi(int(area[i]), slows)
+	for i in touched:
+		if int(cost[i]) != IMPASSABLE:
+			cost[i] = int(cost[i]) + int(extra[i])
+		if int(open[i]) != IMPASSABLE:
+			open[i] = int(open[i]) + int(extra[i])
+	return area
 
 
 ## What stepping onto a cell with this standing on it costs, given what the

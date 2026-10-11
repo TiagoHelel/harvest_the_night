@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 72
+const GROUPS := 73
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -151,6 +151,7 @@ func _run() -> void:
 	_task_0225_bait()
 	_task_0226_beehive()
 	_task_0227_catapult()
+	_task_0228_garlic()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -1369,7 +1370,8 @@ func _task_0132_night_build() -> void:
 	var plenty := {GameData.WOOD: 9000, GameData.STONE: 9000, GameData.IRON: 9000,
 		GameData.OIL: 9000, GameData.GUNPOWDER: 9000, GameData.MONEY: 9000,
 		GameData.FOOD: 9000, GameData.COPPER: 9000, GameData.GOLD: 9000,
-		GameData.STRAW: 9000, GameData.SUNFLOWER: 9000, GameData.PUMPKIN: 9000}
+		GameData.STRAW: 9000, GameData.SUNFLOWER: 9000, GameData.PUMPKIN: 9000,
+		GameData.GARLIC: 9000}
 	var phases := {}
 	for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT]:
 		var state := State.create(1320)
@@ -6171,8 +6173,8 @@ func _task_0193_supply() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		var said := GameData.defence_season(GameData.DEFENCES[id]) if GameData.DEFENCES[id].has("season") else &""
 		seasons[said] = int(seasons.get(said, 0)) + 1
-	expect(seasons == {&"spring": 8, &"summer": 3, &"autumn": 1},
-		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225) and hive (0226), and autumn's catapult (0227)", str(seasons))
+	expect(seasons == {&"spring": 8, &"summer": 3, &"autumn": 2},
+		"every defence says the season it unlocks in: spring's eight, summer's decoy (0224), bait (0225) and hive (0226), and autumn's catapult (0227) and braid (0228)", str(seasons))
 	# **The routes**, season by season: what each kit, round, meal and feed
 	# is made of, followed back to the ground.
 	for season in GameData.SEASONS:
@@ -7963,14 +7965,267 @@ func _task_0227_catapult() -> void:
 	var icon := bar._icon_of(&"catapult")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
+	var before_autumn := 0
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		if GameData.SEASONS.find(GameData.defence_season(GameData.DEFENCES[id])) < 2:
+			before_autumn += 1
 	expect(icon != null and icon.resource_path == "res://sprites/buildings/auto_crossbow.png"
-		and order.find(&"catapult") == order.size() - 1,
-		"the hotbar shows its stand-in, autumn's, after spring's and summer's", str(order))
+		and order.find(&"catapult") == before_autumn,
+		"the hotbar shows its stand-in, autumn's first, after spring's and summer's", str(order))
 	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
 	expect(shots.contains("[\"catapult\", ")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A039-catapult.md").contains("Final geometry settled by game task 0227"),
 		"shot.gd has a volley landing, and A039's table says the geometry this task settled")
 	_completed += 1
+
+
+## 0228 - the garlic braid. Hung on a post in autumn and walked over; the
+## ground round it costs more to enter in the priced and the open field
+## alike - one braid's worth where two overlap - so a route with a cheap way
+## round bends round it, and the ones that come through walk at its speed, or
+## a flare's if that is slower, never both. Fresh its first night, wilted its
+## second, spent after, moved on at `begin_night` and touching the grid once
+## when it changes; spent it does nothing and sells for nothing.
+func _task_0228_garlic() -> void:
+	# **The row, and its checks.**
+	var row: Dictionary = GameData.DEFENCES[&"garlic_braid"]
+	var cost: Dictionary = row["cost"]
+	expect(cost.size() == 2 and cost.has(GameData.GARLIC) and cost.has(GameData.WOOD)
+		and int(cost[GameData.WOOD]) < int(cost[GameData.GARLIC])
+		and GameData.defence_season(row) == &"autumn" and Building.walked_over(&"garlic_braid")
+		and not Pathing.is_prey(&"garlic_braid") and not Traps.is_trap(&"garlic_braid")
+		and not row.has("damage") and not row.has("path_cost") and not Sfx.TOWER_SOUNDS.has(&"garlic_braid")
+		and int(row["repel_tiles"]) >= 1 and int(row["repel_tiles"]) <= 3
+		and not GameData.DEFENCES.has(GameData.GARLIC),
+		"a braid costs garlic and a little wood, is autumn's, is walked over - never prey, never a trap, no sound - and reaches 1-3 tiles; its id is not the crop's",
+		str(row))
+	var unrefused: Array = []
+	for lever in [["repel_tiles", 0, "repels from no tiles"], ["repel_cost", 0, "or for nothing"],
+			["repel_speed_percent", 100, "at 100% of their speed"], ["wilted_percent", 101, "keeps 101% of itself"]]:
+		var broken := GameData.DEFENCES.duplicate(true)
+		(broken[&"garlic_braid"] as Dictionary)[lever[0]] = lever[1]
+		if not _says(GameData.check_defences(broken), lever[2]):
+			unrefused.append(lever[0])
+	var priced := GameData.DEFENCES.duplicate(true)
+	(priced[&"garlic_braid"] as Dictionary)["path_cost"] = 4
+	var worst := 0
+	for ground in GameData.TERRAIN_COST:
+		worst = maxi(worst, int(ground))
+	var dearest := 0
+	for table in [GameData.DEFENCES, GameData.BUILDINGS]:
+		for id in GameData.sorted_names((table as Dictionary).keys()):
+			dearest = maxi(dearest, int(((table as Dictionary)[id] as Dictionary).get("path_cost", 0)))
+	var too_strong := GameData.DEFENCES.duplicate(true)
+	(too_strong[&"garlic_braid"] as Dictionary)["repel_cost"] = GameData.WIDEST_STEP - worst - dearest + 1
+	expect(unrefused.is_empty() and _says(GameData.check_defences(priced), "walked over and priced as a barrier")
+		and _says(GameData.check_pathing(GameData.TERRAIN_COST, too_strong, GameData.BUILDINGS), "wider than WIDEST_STEP")
+		and worst + dearest + int(row["repel_cost"]) <= GameData.WIDEST_STEP
+		and GameData.validate().is_empty(),
+		"no tiles, no cost, full speed and an over-full wilt are refused, and so is a priced braid and a garlic extra that would pass WIDEST_STEP on the worst step; the real tables pass",
+		str(unrefused))
+
+	# **The area: a price and a slow, one braid's worth.** A braid on bare
+	# ground in the build step, and a second two tiles east whose area
+	# overlaps it.
+	var built: Dictionary = _garlic_build(22800)
+	var state: Dictionary = built["state"]
+	var spot: Vector2i = built["spot"]
+	var reach := int(row["repel_tiles"])
+	var extra := int(row["repel_cost"])
+	var share := 100 - int(row["repel_speed_percent"])
+	expect(Building.place(state, &"garlic_braid", spot + Vector2i(2, 0)), "a second braid two tiles east")
+	Pathing.refresh(state)
+	var wrong: Array = []
+	for dy in range(-reach - 1, reach + 2):
+		for dx in range(-reach - 1, reach + 4):
+			var at := spot + Vector2i(dx, dy)
+			var ground := Farm.cost_of_terrain(Farm.terrain_at(state, at))
+			var within := absi(dy) <= reach and dx >= -reach and dx <= 2 + reach
+			var want := ground + (extra if within else 0)
+			var open: PackedInt32Array = state["open_cost"]
+			if Pathing.entry_cost(state, at) != want or int(open[Grid.index(at)]) != want \
+					or Pathing.repelled(state, at) != (share if within else 0):
+				wrong.append(at)
+	expect(wrong.is_empty(),
+		"every cell within reach of a braid costs its extra more to enter, priced and open alike, and slows by its share - once where two overlap - and the ring outside is plain ground",
+		str(wrong.slice(0, 4)))
+
+	# **A route with a cheap way round avoids it.** The east road to the
+	# house, and a braid on it: the build step's preview bends round its
+	# area, and once it is hung the road the wave walks is that preview.
+	var road_farm := State.create(22801)
+	Resources.gain(road_farm, {GameData.GARLIC: 20, GameData.WOOD: 20})
+	NightRoad.into_build(road_farm)
+	Pathing.refresh(road_farm)
+	var from: Vector2i = Enemies.spawn_cells(road_farm, int(Calendar.open_sides(Phases.night_ahead(road_farm))[0]))[0]
+	var plain := _walked_from(road_farm, from)
+	var hung: Vector2i = plain[mini(12, plain.size() - 1)]
+	var bent := Pathing.routes_if_blocked(road_farm, hung, [from], 400, &"garlic_braid")
+	expect(Building.place(road_farm, &"garlic_braid", hung), "a braid hung on the road", str(hung))
+	Pathing.refresh(road_farm)
+	var walked := _walked_from(road_farm, from)
+	var crossed := 0
+	for cell in walked:
+		if Grid.chebyshev(cell as Vector2i, hung) <= reach:
+			crossed += 1
+	print("  the east road: %d steps straight, %d round a braid at %s" % [plain.size(), walked.size(), str(hung)])
+	expect(plain.has(hung) and crossed == 0 and walked.size() > plain.size()
+		and walked.slice(1) == bent and Farm.occupant(road_farm, walked.back()).get("id", &"") == &"house",
+		"a route with a cheap way round bends round the braid's whole area to the house - the road the build step's preview drew",
+		"%d of %d cells in its area" % [crossed, walked.size()])
+
+	# **The ones that come through walk at its speed** - or a flare's if
+	# that is slower, never both. Walkers on the braid, held to its area for
+	# the ticks a tile takes there; one on plain ground beside them.
+	var slow_farm: Dictionary = _garlic_build(22802)
+	var crowd: Dictionary = slow_farm["state"]
+	var braid: Vector2i = slow_farm["spot"]
+	NightRoad.through_build(crowd)
+	NightRoad.park(crowd)
+	Enemies.withdraw(crowd)
+	var walker: Dictionary = GameData.ENEMIES[&"walker"]
+	var per_tile := int(walker["ticks_per_tile"])
+	var garlic_ticks := Ability.slowed_ticks(per_tile, int(row["repel_speed_percent"]))
+	var flare_ticks := Ability.slowed_ticks(per_tile)
+	var through: Array = []
+	for _i in 4:
+		through.append(Entities.spawn(crowd, &"walker", braid))
+	var flared := Entities.spawn(crowd, &"walker", braid)
+	Entities.get_one(crowd, flared)["slow"] = 100000
+	var plain_one := Entities.spawn(crowd, &"walker", braid + Vector2i(0, reach + 2))
+	var moved := {}
+	var last := {}
+	for id in through + [flared, plain_one]:
+		moved[id] = 0
+		last[id] = Entities.position(crowd, id)
+	for tick in maxi(garlic_ticks, flare_ticks):
+		Enemies.tick(crowd)
+		for id in moved:
+			var now := Entities.position(crowd, id)
+			var step := absi(now.x - (last[id] as Vector2i).x) + absi(now.y - (last[id] as Vector2i).y)
+			if tick < garlic_ticks or id == flared:
+				moved[id] = int(moved[id]) + step
+			last[id] = now
+	var crossing: Array = []
+	for id in through:
+		crossing.append(int(moved[id]))
+	print("  through the garlic: %s units in %d ticks; flared in it %d in %d; on plain ground %d"
+		% [str(crossing), garlic_ticks, int(moved[flared]), flare_ticks, int(moved[plain_one])])
+	var all_one := true
+	for units in crossing:
+		all_one = all_one and int(units) == Player.SUBTILE
+	expect(all_one and garlic_ticks > per_tile,
+		"a crowd forced through walks a tile in %d ticks, at the lever's %d%% of its speed" % [garlic_ticks, int(row["repel_speed_percent"])],
+		str(crossing))
+	expect(int(moved[flared]) == Player.SUBTILE and flare_ticks > garlic_ticks
+		and int(moved[plain_one]) > Player.SUBTILE,
+		"flared inside it, the stronger slow - the flare's - and never both; on plain ground a walker goes further",
+		"%d and %d" % [int(moved[flared]), int(moved[plain_one])])
+
+	# **It wears**: fresh its first night, wilted its second, spent after -
+	# moved on at `begin_night` through the road into each night, never a
+	# played one - and the grid touched once on the nights it changes.
+	var worn: Dictionary = _garlic_build(22803)
+	var farm: Dictionary = worn["state"]
+	var post: Vector2i = worn["spot"]
+	var seen: Array = []
+	for night in 4:
+		if night > 0:
+			Phases.enter_result(farm, true)
+			Phases.begin_day(farm)
+			NightRoad.into_build(farm)
+		var version := int(farm["grid_version"])
+		NightRoad.through_build(farm)
+		Pathing.refresh(farm)
+		var on := Farm.occupant(farm, post)
+		seen.append([String(Garlic.state_of(on)), int(farm["grid_version"]) - version,
+			Pathing.entry_cost(farm, post) - Farm.cost_of_terrain(Farm.terrain_at(farm, post)),
+			Pathing.repelled(farm, post)])
+	var wilted := int(row["wilted_percent"])
+	expect(seen == [["fresh", 0, extra, share], ["wilted", 1, extra * wilted / 100, share * wilted / 100],
+		["spent", 1, 0, 0], ["spent", 0, 0, 0]],
+		"fresh its first night, wilted to %d%% its second, spent after - the grid touched on the two nights it changed and no other" % wilted,
+		str(seen))
+	var spent := Farm.occupant(farm, post)
+	expect(Building.refund_for(farm, post).is_empty() and not spent.is_empty()
+		and WorldView.garlic_art(spent) == &"garlic_braid_spent"
+		and (farm["repel"] as PackedByteArray).is_empty(),
+		"spent it stays, drawn spent, does nothing, and sells for nothing - its garlic is used up")
+	var late := State.create(22804)
+	Resources.gain(late, {GameData.GARLIC: 20, GameData.WOOD: 20})
+	NightRoad.to_night(late)
+	NightRoad.park(late)
+	var late_spot := _open_square(late, 4, &"garlic_braid")
+	expect(Building.place(late, &"garlic_braid", late_spot)
+		and Garlic.state_of(Farm.occupant(late, late_spot)) == Garlic.FRESH
+		and int(Farm.occupant(late, late_spot)["nights"]) == 1,
+		"hung mid-wave it is in its first night already: wilted at the next")
+
+	# **The words, the placeholder road and the preview.**
+	var said := {}
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		said[locale] = Describe.defence(&"garlic_braid")
+	I18n.use("en")
+	expect(Names.KEYS.get(&"garlic_braid") == &"DEF_GARLIC_BRAID"
+		and (said["en"] as String).contains("GARLIC BRAID")
+		and (said["en"] as String).contains("round %d tiles of it, at %d%% speed" % [reach, int(row["repel_speed_percent"])])
+		and (said["en"] as String).contains("to %d%%" % wilted)
+		and (said["pt_BR"] as String).contains("RÉSTIA DE ALHO") and (said["pt_BR"] as String).contains("%d ladrilhos" % reach),
+		"its name, its area, its slow and its wear, in both languages", str(said))
+	var drawn: Array = []
+	var fresh := GarlicArt.drawing(&"garlic_braid")
+	for name in GarlicArt.DRAWN:
+		var image := GarlicArt.drawing(name)
+		var used := image.get_used_rect()
+		if image.get_size() != Vector2i(16, 24) or used.end.y != 20 or used.position.x < 2 or used.end.x > 14 \
+				or not PlaceholderArt.is_drawn(GarlicArt.path_of(name)) \
+				or str(PlaceholderArt.art(name).get("pack", "")) != "A040" \
+				or image.get_pixel(7, 19) != PaletteData.COLOURS[&"wood"] or image.get_pixel(8, 19) != PaletteData.COLOURS[&"wood_dark"] \
+				or (name != &"garlic_braid" and image.get_data() == fresh.get_data()):
+			drawn.append(name)
+	var bar := Hotbar.new()
+	var icon := bar._icon_of(&"garlic_braid")
+	bar.free()
+	var mode := BuildMode.new()
+	var previews := mode._blocks_the_way(&"garlic_braid") and mode._blocks_the_way(&"wall") and not mode._blocks_the_way(&"gun_tower")
+	mode.free()
+	expect(drawn.is_empty() and icon == GarlicArt.texture(&"garlic_braid") and previews
+		and not WorldView.lies_flat(&"garlic_braid") and WorldView.lies_flat(&"zombie_bait"),
+		"drawn in code for A040 at 16x24 on its stake, fresh, wilted and spent apart; standing among the feet that pass, not under them; the hotbar's icon; and a braid in hand draws the route as a wall does",
+		str(drawn))
+	var perf_tool := FileAccess.get_file_as_string("res://tools/perf.py")
+	var perf_check := FileAccess.get_file_as_string("res://src/tools/perf_check.gd")
+	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
+	expect(perf_tool.contains("(\"garlic_refresh\", PATH_BUDGET_US)") and perf_check.contains("const GARLIC_BRAIDS := 10")
+		and shots.contains("[\"garlic\", ")
+		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A040-garlic-braid.md").contains("Final geometry settled by game task 0228"),
+		"perf.py holds a rebuild with ten braids to the path's budget, shot.gd has the route bending round one, and A040's table says the geometry this task settled")
+	_completed += 1
+
+
+## A braid hung in the build step on bare ground - four cells of it every way,
+## nothing on it - with garlic and wood to spare (task 0228).
+func _garlic_build(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.GARLIC: 40, GameData.WOOD: 40})
+	NightRoad.into_build(state)
+	var spot := _open_square(state, 4, &"garlic_braid")
+	expect(Building.place(state, &"garlic_braid", spot), "a braid hung in the build step", str(spot))
+	return {"state": state, "spot": spot}
+
+
+## The road from `from` down the house's field, every cell of it, `from` first.
+func _walked_from(state: Dictionary, from: Vector2i) -> Array:
+	var road: Array = [from]
+	var at := from
+	for _i in Grid.CELLS:
+		var next := Pathing.step_from(state, at)
+		if next == at:
+			break
+		road.append(next)
+		at = next
+	return road
 
 
 ## A catapult put down in the build step on open ground, `pumpkins` in the

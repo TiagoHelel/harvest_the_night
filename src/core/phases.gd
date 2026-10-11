@@ -200,6 +200,8 @@ static func begin_night(state: Dictionary) -> bool:
 	# **The hives are fed for the night** (task 0226): their sunflowers
 	# counted, and the store's eaten where too few grow.
 	Towers.feed_hives(state)
+	# **And the garlic a night older** (task 0228): fresh, wilted, spent.
+	Garlic.wear(state)
 
 	# The night to be fought is today's in the calendar (task 0151).
 	state["night"] = night_ahead(state)

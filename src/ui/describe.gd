@@ -154,6 +154,12 @@ static func defence(id: StringName) -> String:
 			int(one.get("flower_reach", 0)), int(one.get("most_flowers", 0))]))
 	if int(one.get("stock_flowers", 0)) > 0:
 		lines.append(I18n.f(&"DESC_HIVE_STOCK", [int(one["stock_flowers"])]))
+	# **The garlic's** (task 0228): how far round it they would rather walk,
+	# how slowly they cross it, and how it wears.
+	if int(one.get("repel_tiles", 0)) > 0:
+		lines.append(I18n.f(&"DESC_REPELS", [int(one["repel_tiles"]),
+			int(one.get("repel_speed_percent", 100))]))
+		lines.append(I18n.f(&"DESC_WEARS", [int(one.get("wilted_percent", 0))]))
 	return "\n".join(lines)
 
 

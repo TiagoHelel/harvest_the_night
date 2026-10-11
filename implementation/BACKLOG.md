@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **208 / 296 done**
+`#################.......`  **209 / 296 done**
 
-0 doing / 88 todo / 0 blocked across 18 phases.
+0 doing / 87 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-88 task(s) left, the ready ones first, then what they
+87 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -354,24 +354,6 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0228 - The garlic braid
-
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/pathing.gd, src/core/enemies.gd, src/core/phases.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/headless_v1.gd`.
-
-Hung on a post, it makes the ground around it somewhere zombies would rather walk round, and slows the ones that come through anyway (plan sections 3.1 and 5).
-
-- Id `garlic_braid` (never `garlic`, the crop), paid in garlic and a little wood, `season` autumn (0193's field, per the plan's table). Walkable like a trap through `walked_over`, 0178's flag that 0225 put on the bait's `DEFENCES` row: `Pathing._through` gives it the ground's cost and `Pathing.is_prey` and `breaks_through` leave it out, and `check_defences` refuses it with a `path_cost`; it is not `one_shot`, so `Traps` never sees it. No `damage`, so no `Sfx.TOWER_SOUNDS` entry
-- Repelling is a cost: cells within N tiles (LEVER 1-3) cost a LEVER more in `Pathing._entry_costs`, in the shared and the open field, never more than one braid's worth however many overlap. Every step stays within `WIDEST_STEP` (32): extend `check_pathing` to add the garlic extra to the worst terrain and the worst `path_cost`
-- Slowing: inside the area an enemy walks at a percent of its speed (LEVER) in `Enemies._walk`, worked out like `Ability.slowed_ticks`; with a flare too, the stronger of the two applies, not both. Build the area as a per-cell array with the field (the pass over the occupants is already there) so `_walk` reads one entry, never a search per zombie per tick
-- It wears out: full strength the first night, wilted (a LEVER share) the second, spent after - kept on the occupant, moved on at `Phases.begin_night`. The strength is part of the path costs, so a night that changes any braid bumps the grid once (`Farm.touch`) and the fields rebuild; the no-touch rule is for per-tick status. A spent braid does nothing and stays until sold, or goes (decide). The states match A040: fresh, wilted, spent
-- Perf: the area cost is part of `_entry_costs`, so measure `path_refresh` with ten braids; it stays inside `PATH_BUDGET_US`
-- `Names.KEYS` `DEF_GARLIC_BRAID`, a `Describe.defence` line, strings in both languages; drawn through the placeholder road (16x24, fresh/wilted/spent) until A040 is integrated by 0239
-- SIM and DATA: record both
-
-  - done when: `_task_0228_garlic` in `src/tools/headless_v1.gd` asserts a route with a cheap way round avoids the braid, a crowd forced through walks at the LEVER's speed, the braid wilts and is spent on the nights it says (driven through `Phases.begin_night`, not whole played nights), and `GameData.validate()` refuses a garlic extra that would pass `WIDEST_STEP`
-  - done when: The Deliverables table of `implementation/backlog/packs/A040-garlic-braid.md` states the final geometry this task settled
-  - done when: `python tools/shot.py 0228` captures of the route bending round a braid (0130's camera hook), opened and looked at
-
 ### 0229 - The searchlight
 
 Ready to pick up.  Likely files: `src/core/light.gd (new), src/core/game_data.gd, src/core/towers.gd, src/core/ability.gd, src/core/combat.gd, src/ui/lighting.gd, src/ui/names.gd, src/ui/describe.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
@@ -514,6 +496,25 @@ The approved catapult, its pumpkin and its splat replace the stand-ins 0227 left
   - done when: The family checks (`check_tower_art.py`, `check_effect_art.py`) and the showcase (`python tools/show_art.py --towers --check` and `python tools/show_art.py --effects --check`) pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of each level firing and a pumpkin landing in the real game, opened and looked at, in `implementation/shots/0238/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0239 - Art: the garlic braid
+
+Waits for Codex art A040.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/verify.py`.
+
+The approved garlic braid, fresh, wilted and spent, replaces the stand-in 0228 left.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A040` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A040-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_barrier_art.py`, `ArtPlacement` if needed).
+- `buildings/garlic_braid`, `_wilted` and `_spent` at 16x24 on the barricade's ground pivot; the wear state 0228 keeps on the occupant picks the frame
+- Extend `check_barrier_art.py`'s single-piece checks (or a family checker wired into `tools/verify.py`) for the three states
+- Retire 0228's stand-in from 0120's placeholder registry
+- Set the pack to integrated: `python implementation/backlog/assets.py set A040 integrated`.
+
+  - done when: The family checks (`check_barrier_art.py`) and the showcase (`python tools/show_art.py --barriers --check`) pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of braids fresh, wilted and spent beside a route in the real game, opened and looked at, in `implementation/shots/0239/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0246 - Bosses in general
@@ -715,7 +716,7 @@ Three more buttons for a night going wrong: the farm bell stops every zombie for
 
 ### 0234 - The arsenal grows with the seasons
 
-Waits on 0228, 0229, 0230, 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0229, 0230, 0231.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The arsenal arrives with the calendar - spring's six, then summer's, autumn's and winter's - and every defence costs money as well as materials, so the day's purse is what the night is built with (plan sections 2, 5 and 7).
 
@@ -731,25 +732,6 @@ The arsenal arrives with the calendar - spring's six, then summer's, autumn's an
   - done when: `_case_0234_hotbar_pages` in `src/tools/input_v1.gd` pages the hotbar and places an autumn defence in autumn
   - done when: The Deliverables tables of `implementation/backlog/packs/A044-tarps.md` and `implementation/backlog/packs/A045-power-weapon-icons.md` state the final geometry this task settled (the tarp families and footprints, the icon list)
   - done when: `python tools/shot.py 0234` captures of the hotbar in spring and in winter, opened and looked at
-
-### 0239 - Art: the garlic braid
-
-Waits on 0228.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/verify.py`.
-
-The approved garlic braid, fresh, wilted and spent, replaces the stand-in 0228 left.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A040` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A040-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_barrier_art.py`, `ArtPlacement` if needed).
-- `buildings/garlic_braid`, `_wilted` and `_spent` at 16x24 on the barricade's ground pivot; the wear state 0228 keeps on the occupant picks the frame
-- Extend `check_barrier_art.py`'s single-piece checks (or a family checker wired into `tools/verify.py`) for the three states
-- Retire 0228's stand-in from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A040 integrated`.
-
-  - done when: The family checks (`check_barrier_art.py`) and the showcase (`python tools/show_art.py --barriers --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of braids fresh, wilted and spent beside a route in the real game, opened and looked at, in `implementation/shots/0239/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0240 - Art: the searchlight
 
@@ -1927,7 +1909,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (10/28)
+## 13 - Weapons of the night  (11/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
@@ -1939,18 +1921,18 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0225** [Zombie bait](prompts/0225-zombie-bait.md)
 - [x] **0226** [The beehive](prompts/0226-beehive.md)
 - [x] **0227** [The pumpkin catapult](prompts/0227-catapult.md)
-- [ ] **0228** [The garlic braid](prompts/0228-garlic-braid.md)
+- [x] **0228** [The garlic braid](prompts/0228-garlic-braid.md)
 - [ ] **0229** [The searchlight](prompts/0229-searchlight.md)
 - [ ] **0230** [The electric fence](prompts/0230-electric-fence.md)
 - [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md)
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0230
-- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0228, 0229, 0230, 0231
+- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0229, 0230, 0231
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
 - [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - waits for art A037
 - [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - waits for art A038
 - [ ] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md) - waits for art A039
-- [ ] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md) - needs 0228 - waits for art A040
+- [ ] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md) - waits for art A040
 - [ ] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md) - needs 0229 - waits for art A041
 - [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md) - needs 0230 - waits for art A042
 - [ ] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md) - needs 0231 - waits for art A043

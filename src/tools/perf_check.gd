@@ -65,6 +65,10 @@ const SWARM_MARGIN := 6
 const DECOYS := 4
 const DECOY_HP := 1000000
 
+## **Ten garlic braids** (task 0228) over the same ground, for the rebuild with
+## their areas in the entry costs: `garlic_refresh`, held to the path's budget.
+const GARLIC_BRAIDS := 10
+
 ## How many ticks the swarm's whole tick is averaged over. Ten seconds: long
 ## enough to time, and short enough that the guns have not thinned it out.
 const SWARM_TICKS := 300
@@ -143,6 +147,11 @@ func _run() -> void:
 	# **And with four decoys standing** (task 0224): the same rebuild, and the
 	# lure beside it the way a night asks for it.
 	print("PERF lure_refresh ", _lure_path(swarm))
+	# **And with ten garlic braids hung** (task 0228): their areas are part of
+	# the entry costs every field is swept against.
+	var garlic := _with_garlic(night)
+	print("COUNT garlic ", Farm.cells_with(garlic, &"garlic_braid").size())
+	print("PERF garlic_refresh ", _path(garlic))
 
 	# And the view's per-frame thinking, which is not its drawing. Two
 	# numbers rather than one: a total cannot say which of them grew.
@@ -254,6 +263,23 @@ func _the_swarm(night: Dictionary) -> Dictionary:
 	open = _open_round(state, lo, hi)
 	for i in SWARM:
 		Entities.spawn(state, &"walker", open[i % open.size()])
+	return state
+
+
+## **The worst case with `GARLIC_BRAIDS` braids hung** (task 0228), evenly
+## along the open ground round the towers' band, fresh.
+func _with_garlic(night: Dictionary) -> Dictionary:
+	var state: Dictionary = night.duplicate(true)
+	var lo := Vector2i(Grid.WIDTH, Grid.HEIGHT)
+	var hi := Vector2i(-1, -1)
+	for cell in Towers.cells(state):
+		lo = Vector2i(mini(lo.x, cell.x), mini(lo.y, cell.y))
+		hi = Vector2i(maxi(hi.x, cell.x), maxi(hi.y, cell.y))
+	var open := _open_round(state, lo, hi)
+	Resources.gain(state, {GameData.GARLIC: 200, GameData.WOOD: 100})
+	for k in GARLIC_BRAIDS:
+		if not open.is_empty():
+			Building.place(state, &"garlic_braid", open[open.size() * (k + 1) / (GARLIC_BRAIDS + 1)])
 	return state
 
 

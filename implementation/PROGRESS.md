@@ -24422,3 +24422,167 @@ implementation/backlog/packs/A039-catapult.md,
 implementation/prompts/0227-catapult.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0227/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0228 - The garlic braid - done 2026-10-11
+
+What changed: an autumn braid of garlic hung on a post and walked over. The
+ground round it is somewhere zombies would rather walk round, and the ones
+that come through walk slowly (the plan's sections 3.1 and 5).
+- **A price, not a wall:** every cell within two tiles costs six more to
+  enter, in the priced field and the open one, so runners bend round it
+  too - one braid's worth where two overlap.
+- **A slow:** inside, 60% of their speed; with a flare too, the stronger of
+  the two.
+- **It wears:** fresh its first night, wilted - half - its second, spent
+  after. Spent it stays until sold, for nothing.
+
+### The row (`src/core/game_data.gd`)
+
+**`garlic_braid` in `DEFENCES`** (never `garlic`, the crop):
+- **Cost:** 4 garlic and 2 wood (LEVER). **`season` autumn.**
+- **Walked over** (0178's flag), one hit point; no `damage`, no
+  `path_cost`, no sound.
+- **The area:** `repel_tiles` 2 (LEVER 1-3), `repel_cost` 6 (LEVER 2-10),
+  `repel_speed_percent` 60 (LEVER 30-90).
+- **The wear:** `wilted_percent` 50 (LEVER 20-80).
+
+**The checks:**
+- **`check_defences`** refuses an area of no tiles or no cost, a speed of
+  nothing or of all of it, a wilt outside 0-100 - and, 0225's, a walked-over
+  row with a `path_cost`.
+- **`check_pathing`** adds the largest `repel_cost` to every step it holds
+  to `WIDEST_STEP`: tilled soil's 2, a wall's 20 and garlic's 6 is 28 of 32.
+
+### Decided: the area is a price in the entry costs (`src/core/pathing.gd`)
+
+- **One pass:** `_entry_costs` notes the braids with strength left as its
+  occupant loop passes them; `_repel` then stamps each braid's square with
+  the strongest extra and slow per cell and adds the extras once, priced
+  and open alike.
+  - **Every field gets it:** the lure and the hunt fields are swept from
+    those costs, so a lured or a hunting zombie would rather go round too.
+- **The slow is an array kept with the fields:** `state["repel"]`, the share
+  of speed taken off per cell, built in `refresh()` and empty while no braid
+  has strength left. `Enemies._walk` reads one entry for the cell it stands
+  on.
+- **Like a flare:** `Ability.slowed_ticks` takes a percent now - the flare's
+  rule for any share - and `_walk` keeps the larger of the two tile times,
+  never both.
+- **The route preview:**
+  - **A braid in hand previews too:** `BuildMode` shows the route for one
+    (`_blocks_the_way`), asked as itself through `routes_if_blocked`'s new
+    `as_what`, which still pretends a wall for everything that blocks.
+  - **The garlic's ground is drawn:** the view draws it faint under the
+    dots, read off `state["repel"]`.
+
+### Decided: the wear, and the spent braid (`src/core/garlic.gd`)
+
+- **`Garlic` keeps it:**
+  - `state_of` reads the nights a braid has seen begin: fresh to one,
+    wilted at two, spent after;
+  - `strength`;
+  - `wear`, from `Phases.begin_night`: a night more each, and
+    `Farm.touch` once when any braid's state changed - not on its first
+    night, whose state does not.
+- **Hung mid-wave** it is in its first night already (`Building.place`
+  writes `nights` 1); hung in the build step it starts counting at the
+  waves.
+- **Spent it stays** - A040 draws a spent braid, so it is meant to be seen -
+  and does nothing. `Building.refund_for` gives nothing back for it: its
+  garlic is used up.
+
+### Measured
+
+- **The east road:** 27 steps straight to the door. With a braid hung 12
+  steps down it, 32 round it and no cell in its area - the road the build
+  step's preview drew.
+- **Through the garlic** a walker (20 ticks a tile) takes 33 a tile: 64
+  units in 33 ticks. Flared in it, 40 - the flare's, the stronger - not the
+  66 of both. On plain ground beside it, 105 units in the same 33 ticks.
+- **perf:** `garlic_refresh`, the rebuild with ten braids hung, 11035 us
+  against 11042 for the plain one - nothing measurable, a third of
+  `PATH_BUDGET_US` (33333).
+
+### The view (`src/ui/`)
+
+- **The placeholder road until 0239** (A040 is `todo`): `GarlicArt` draws
+  the three states in code at 16x24 on (8,20):
+  - the stake two wide on x 7..8 down to row 19, and a crosspiece;
+  - fresh, six bone bulbs on a plait of gold stems;
+  - wilted, four duller and sagging;
+  - spent, two shrivelled ones on dry stems.
+- **`WorldView`** draws a braid by its state (`garlic_art`). It stands up
+  among the feet that pass, sorted with them, where a flat walked-over thing
+  - the bait - lies under them (`lies_flat`).
+- **The hotbar** wears the fresh drawing; **the words** are
+  `DEF_GARLIC_BRAID`, "garlic braid" / "réstia de alho", `DESC_REPELS` and
+  `DESC_WEARS`.
+- **A040's Deliverables table** is final: the geometry, how the game plays
+  each state, and that a spent braid stays.
+
+### Hashes
+
+- **SIM 642923490 -> 2065757832:** a new game holds the `repel` array -
+  empty, for no braid stands. It is the whole of the move: the determinism
+  scenario run with that one key left out of every sample prints 642923490
+  again.
+- **DATA 3966054259 -> 1970672788:** the braid's row.
+
+Verify: **PASS**, 60 of 60 in 954 s, the run that recorded both.
+- **Suites:** `headless_check` 17777 asserts, `headless_v1` 2499,
+  `input_check` 1249 cases, `input_v1` 720 (106 s).
+- **perf:** a night tick 1443 us, the swarm's 7876, a path rebuild 10818,
+  15169 with the decoys and 11156 with the garlic.
+
+**Tests:**
+- **`_task_0228_garlic` (headless_v1):**
+  - the row and its checks - a garlic extra that would pass `WIDEST_STEP`
+    on the worst step refused, the real tables passing;
+  - the area: every cell within reach costs its extra, priced and open
+    alike, and slows by its share - once where two braids overlap - the
+    ring outside plain ground;
+  - **a route with a cheap way round avoids it:** the east road bends round
+    its whole area to the house, as the preview said;
+  - **a crowd forced through walks at the lever's speed,** a flared one in
+    it at the flare's and never both, one on plain ground further;
+  - **it wilts and is spent on the nights it says,** driven through
+    `begin_night` by the road into each night rather than played nights,
+    the grid touched on the two nights it changed;
+  - spent it stays and sells for nothing; hung mid-wave it is in its first
+    night;
+  - the words in both languages, the drawings, the hotbar, the preview, the
+    flat and the standing, perf, the shot and A040's table.
+- **Old groups touched:**
+  - `headless_v1`: 0132's rich farm holds garlic; 0193 counts autumn's two;
+    0227 reads the catapult as autumn's first slot, no longer the last;
+  - `headless_check`: a walked-over thing costs the ground plus its garlic;
+    the defences' drawings are found in `GarlicArt` too; 96 scenarios.
+- **No input case:** hanging a braid is the hotbar's and the cursor's, which
+  their cases walk; the preview's rule is asserted in `_task_0228_garlic`.
+
+**Looked at** (`python tools/shot.py 0228 garlic --fhd`), Autumn 2's build
+step:
+- **The braid** hung twelve steps down the east road, its two tiles of
+  ground a faint square round it.
+- **The preview:** the dotted road bending along the square's edge and back
+  up to the house. A second braid is in hand north of the road, where its own
+  area changes nothing, to put the preview up.
+- **The hotbar's second page** with the braid picked over "4g 2w", and
+  "place garlic braid" in the bar.
+- **What the takes found:**
+  - with the second braid in hand on the road as well, the routes fled both
+    to a lane at the screen's foot and nothing read as a bend;
+  - the bend did not read either until the ground it bends round was drawn;
+  - the fresh bulbs' terracotta streaks read as spots of blood: they are
+    `stone_light` now.
+
+Files: src/core/{garlic,game_data,pathing,enemies,ability,phases,building}.gd,
+src/core/garlic.gd.uid,
+src/ui/{garlic_art,placeholder_art,world_view,hotbar,build_mode,names,describe}.gd,
+src/ui/garlic_art.gd.uid, assets/locale/strings.csv,
+src/tools/{headless_check,headless_v1,perf_check,shot}.gd, tools/perf.py,
+tools/determinism_{sim,data}_hash.txt,
+implementation/backlog/packs/A040-garlic-braid.md,
+implementation/prompts/0228-garlic-braid.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0228/,
+docs/devlog/{index,index.pt_BR}.md

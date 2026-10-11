@@ -487,6 +487,9 @@ static func refund_for(state: Dictionary, cell: Vector2i) -> Dictionary:
 	var on := Farm.occupant(state, cell)
 	if on.is_empty() or not is_placeable(on["id"]):
 		return {}
+	# **A spent braid gives nothing back** (task 0228): its garlic is used up.
+	if Garlic.repels(StringName(on["id"])) and Garlic.state_of(on) == Garlic.SPENT:
+		return {}
 	return refund_for_cost(cost_of(on["id"]))
 
 
@@ -520,6 +523,10 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 
 	var entry: Dictionary = entry_of(id)
 	var occupant := {"id": id, "hp": int(entry.get("hp", 1))}
+	# **Garlic hung mid-wave is in its first night already** (task 0228); one
+	# hung in the build step starts counting at the waves (`Garlic.wear`).
+	if Garlic.repels(id) and int(state["phase"]) == Phases.NIGHT:
+		occupant["nights"] = 1
 	if entry.has("lifetime_ticks"):
 		if int(state["phase"]) == Phases.NIGHT:
 			occupant["expires"] = int(state["tick"]) + int(entry["lifetime_ticks"])

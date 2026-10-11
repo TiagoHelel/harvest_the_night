@@ -1766,6 +1766,32 @@ const DEFENCES: Dictionary = {
 		# Timber and rope: the generator's shortage never slows it (`Towers.tick`).
 		"energy_draw": 0,
 	},
+	&"garlic_braid": {
+		# **A braid of garlic hung on a post** (task 0228; the plan's 3.1 and
+		# 5, autumn): the ground round it is somewhere zombies would rather
+		# walk round, and the ones that come through anyway walk slowly
+		# (`Garlic`). The id is never `garlic`, which is the crop.
+		"cost": {GARLIC: 4, WOOD: 2},   # LEVER: garlic and a little wood
+		"season": &"autumn",            # LEVER: the season it unlocks in (0234 gates it)
+		# One hit point, as a bait has: it is walked over, and nothing bites
+		# a thing it walks over.
+		"hp": 1,
+		# **Walked over** (0178's flag): the ground's cost on its own cell,
+		# never prey, never broken through - the repelling is the area's.
+		"walked_over": true,
+		# **The area**: every cell within this many tiles, a square, costs
+		# `repel_cost` more to enter - in the priced field and the open one,
+		# never more than one braid's worth where two overlap - and is walked
+		# at `repel_speed_percent` of a zombie's speed. `check_pathing` holds
+		# the cost and the worst step to `WIDEST_STEP`.
+		"repel_tiles": 2,               # LEVER: tiles round it, 1-3
+		"repel_cost": 6,                # LEVER: tiles of detour a cell is worth, 2-10
+		"repel_speed_percent": 60,      # LEVER: percent of speed inside, 30-90
+		# **It wears out**: fresh the first night, at this share of both the
+		# second, spent after.
+		"wilted_percent": 50,           # LEVER: percent of its strength, 20-80
+		"energy_draw": 0,
+	},
 }
 
 ## The animals on the reference sheet, and the meat that comes off them.
@@ -3382,15 +3408,22 @@ static func check_pathing(terrain: Array, defences: Dictionary,
 	if ground <= 0:
 		errors.append("no terrain can be crossed at all")
 
+	# **Garlic's extra on top of any step** (task 0228): a braid's area can lie
+	# over the worst ground and the worst barrier, and the sum has to fit the
+	# wheel as surely as either does alone.
+	var garlic := 0
+	for id in sorted_names(defences.keys()):
+		garlic = maxi(garlic, int((defences[id] as Dictionary).get("repel_cost", 0)))
 	for table in [defences, buildings]:
 		for id in sorted_names((table as Dictionary).keys()):
 			var entry: Dictionary = (table as Dictionary)[id]
 			var through := int(entry.get("path_cost", 0))
 			if through < 0:
 				errors.append("'%s' costs less than nothing to break" % id)
-			if ground + through > WIDEST_STEP:
-				errors.append(("stepping into '%s' costs %d, which is wider than "
-					+ "WIDEST_STEP (%d)") % [id, ground + through, WIDEST_STEP])
+			if ground + through + garlic > WIDEST_STEP:
+				errors.append(("stepping into '%s' costs %d, garlic's %d included, which is "
+					+ "wider than WIDEST_STEP (%d)") % [id, ground + through + garlic, garlic,
+					WIDEST_STEP])
 			# **A thing you can walk through is a thing you can break.** The
 			# field prices a barrier by how long getting through it takes; if
 			# nothing could take it apart, a zombie would route into it and then
@@ -4074,6 +4107,20 @@ static func check_defences(defences: Dictionary) -> Array:
 				% defence_id)
 		if defence.has("eaten_by") and int(defence["eaten_by"]) <= 0:
 			errors.append("defence '%s' is eaten by nobody" % defence_id)
+		# **Garlic's area** (task 0228): it reaches some tiles, costs something
+		# to cross, slows without stopping, and keeps some strength wilted.
+		if defence.has("repel_tiles"):
+			if int(defence["repel_tiles"]) <= 0 or int(defence.get("repel_cost", 0)) <= 0:
+				errors.append("defence '%s' repels from no tiles, or for nothing"
+					% defence_id)
+			var speed := int(defence.get("repel_speed_percent", 0))
+			if speed <= 0 or speed >= 100:
+				errors.append("defence '%s' walks them through at %d%% of their speed"
+					% [defence_id, speed])
+			var wilted := int(defence.get("wilted_percent", -1))
+			if wilted < 0 or wilted > 100:
+				errors.append("defence '%s' keeps %d%% of itself wilted"
+					% [defence_id, wilted])
 		# **A hive's sunflowers** (task 0226): counted from some tiles round
 		# it, a sting's worth at a time, up to a most it can use, and eaten
 		# from the store a night - none of them at zero, or the field it asks

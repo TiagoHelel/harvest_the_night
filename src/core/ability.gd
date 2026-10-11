@@ -121,14 +121,16 @@ static func is_slowed(state: Dictionary, id: int) -> bool:
 	return int(Entities.get_one(state, id).get("slow", 0)) > 0
 
 
-## What `ticks_per_tile` becomes for something that has been flared.
+## What `ticks_per_tile` becomes for something that has been flared - or, given
+## a `percent`, for something walking at that share of its speed (task 0228's
+## garlic).
 ##
 ## `slow_percent` is **percent of normal speed**, so fifty percent doubles how
 ## long a tile takes. Written that way round because "half speed" is what a
 ## designer means and `ticks_per_tile` is the opposite of speed.
-static func slowed_ticks(per_tile: int) -> int:
-	var percent := maxi(int(GameData.ABILITY["slow_percent"]), 1)
-	return maxi(per_tile * 100 / percent, per_tile + 1)
+static func slowed_ticks(per_tile: int, percent: int = 0) -> int:
+	var share := maxi(percent if percent > 0 else int(GameData.ABILITY["slow_percent"]), 1)
+	return maxi(per_tile * 100 / share, per_tile + 1)
 
 
 # -------------------------------------------------------------------- doing
