@@ -28,21 +28,50 @@ extends RefCounted
 ## wave behind it walks past untouched - which looks exactly like the towers
 ## being too weak and is not.
 
-## Whether anything with `is_boss` is on the farm right now. The night HUD
-## puts a name and a health bar up for it.
+## Whether anything with `is_boss` is on the farm right now - the lowest id
+## of them, or 0. The night HUD puts a name and a health bar up for it.
 static func boss_here(state: Dictionary) -> int:
+	var bosses := bosses_here(state)
+	return int(bosses[0]) if not bosses.is_empty() else 0
+
+
+## **Every boss on the farm** (task 0246), lowest id first: Endless sends
+## two Giants, and 0253-0255 add bosses of their own.
+static func bosses_here(state: Dictionary) -> Array:
+	var out: Array = []
 	for id in Entities.ids(state):
-		var kind: StringName = Entities.get_one(state, id).get("kind", &"")
-		if kind == &"":
-			continue
-		if bool((GameData.ENEMIES[kind] as Dictionary).get("is_boss", false)):
-			return id
-	return 0
+		if is_boss(StringName(Entities.get_one(state, id).get("kind", &""))):
+			out.append(int(id))
+	out.sort()
+	return out
+
+
+## Whether a kind is a boss: its `is_boss`.
+static func is_boss(kind: StringName) -> bool:
+	return kind != &"" and bool((GameData.ENEMIES.get(kind, {}) as Dictionary).get("is_boss", false))
+
+
+## **A body's full health** (task 0246): its kind's `hp` in the table today -
+## the one place 0257's elites will change it, which the boss bar and the
+## checks read rather than the table. 0 for nobody.
+static func full_hp(state: Dictionary, id: int) -> int:
+	var one := Entities.get_one(state, id)
+	if one.is_empty():
+		return 0
+	return int((GameData.ENEMIES[StringName(one["kind"])] as Dictionary).get("hp", 0))
 
 
 ## How many bosses have been put down this run.
 static func bosses_down(state: Dictionary) -> int:
 	return int(state.get("bosses_down", 0))
+
+
+## **How many of one boss have been put down this run** (task 0246), off the
+## run's tally by kind - no counter of its own. 0 for a kind that is no boss.
+static func bosses_down_of(state: Dictionary, kind: StringName) -> int:
+	if not is_boss(kind):
+		return 0
+	return int((state.get("killed_by_kind_all_run", {}) as Dictionary).get(kind, 0))
 
 
 ## What lands however good the armour is.

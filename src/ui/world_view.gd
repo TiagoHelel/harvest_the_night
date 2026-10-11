@@ -996,7 +996,7 @@ func _draw_enemy_warning() -> void:
 			continue
 		# The same observed wind-up drives both body and ring. A post-hit
 		# cooldown or stale target while walking must not promise another slam.
-		if not str(_pose_of(Entities.get_one(_state, int(id)))).begins_with("giant_windup_"):
+		if not EnemyMotion.is_windup(_pose_of(Entities.get_one(_state, int(id)))):
 			continue
 		var middle := (Vector2(aimed) + Vector2(0.5, 0.5)) * size
 		var swing := fmod(float(Time.get_ticks_msec()) / 400.0, 1.0)
@@ -1842,7 +1842,7 @@ func _refresh_actors() -> void:
 		var sprite: Sprite2D = _actor_sprites[i]
 		sprite.texture = _texture_for(_pose_of(one))
 		# Keep material planes and family silhouettes during the core hurt cue.
-		sprite.flip_h = _enemy_motion.faces_right(one) if EnemyMotion.TRACKED.has(one["kind"]) else false
+		sprite.flip_h = _enemy_motion.faces_right(one) if EnemyMotion.tracks(one["kind"]) else false
 		sprite.modulate = actor_tint(_state, one)
 		# **Anchored at the feet, not at a tile corner.** An enemy is no
 		# longer one tile - motion has transparent clearance around the body - so the
@@ -3001,7 +3001,7 @@ func _texture_for(id: StringName) -> Texture2D:
 ## Removed entities use the separate bounded death pool.
 func _pose_of(one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
-	if EnemyMotion.TRACKED.has(kind):
+	if EnemyMotion.tracks(kind):
 		return _enemy_motion.pose(one, _state)
 	if int(one.get("winding_at", -1)) >= 0:
 		var telegraph := StringName("%s_telegraph" % kind)

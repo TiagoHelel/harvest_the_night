@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 52
+const V1_CASES := 53
 
 
 func _process(delta: float) -> bool:
@@ -102,6 +102,7 @@ func _run() -> void:
 	await _case_0225_bait()
 	await _case_0233_powers()
 	await _case_0234_hotbar_pages()
+	await _case_0246_boss_bar()
 	_finish()
 
 
@@ -949,6 +950,67 @@ func _case_0135_flare_aim() -> void:
 	await until(func() -> bool: return Ability.used(state, Ability.FLARE) > 1, "the armed flare to go off")
 	expect(Ability.aimed_at(state, Ability.FLARE) == [target.x, target.y] and not cursor.is_armed(),
 		"and the next click flares the clicked cell", str(Ability.aimed_at(state, Ability.FLARE)))
+	await close_scene()
+	_completed += 1
+
+
+## 0246 - the boss bar for any boss. A Giant spawned as a wave spawns one -
+## its body and its `boss_arrived` - raises the bar, its name and its banner,
+## clear of the hotbar and of the time to dawn; `Sfx.nearest_by_kind` leaves it
+## out; a second one says x2; and the bar goes when they are dead.
+func _case_0246_boss_bar() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	var sfx: Sfx = require_control("Sfx")
+	if driver == null or world == null or sfx == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	world.skip_transition()
+	var dawn := locate_control("DawnCountdown") as Control
+	await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT and dawn != null and dawn.is_visible_in_tree(),
+		"the night")
+	var bar := locate_control("BossBar") as Control
+	var named := locate_control("BossName") as Label
+	var banner := locate_control("BossBanner") as Label
+	expect(bar != null and named != null and banner != null and not bar.is_visible_in_tree()
+		and not banner.is_visible_in_tree(), "no boss on the farm, no bar and no banner")
+	# On a tick nothing has written to yet: the banner reads what is newer
+	# than the last tick it read, and a wave's announcement is never older.
+	var fresh := func() -> bool:
+		for one in (state["events"] as Array):
+			if int((one as Dictionary)["tick"]) >= int(state["tick"]):
+				return false
+		return true
+	await until(fresh, "a tick with nothing in the record yet")
+	var house := Farm.house_centre(state)
+	var giant := Entities.spawn(state, &"giant", house + Vector2i(12, 0))
+	Events.add(state, &"boss_arrived", {"enemy": &"giant"})
+	await until(func() -> bool: return bar.is_visible_in_tree() and banner.is_visible_in_tree(),
+		"the bar and the banner")
+	var hotbar := Rect2(Hotbar.AT, Vector2(Hotbar.RIGHT - Hotbar.AT.x, Hotbar.SLOT.y))
+	var clear := true
+	for shown in [bar, named, banner]:
+		var box := (shown as Control).get_global_rect()
+		clear = clear and not box.intersects(dawn.get_global_rect()) and not box.intersects(hotbar)
+	expect(named.text.begins_with(Names.of(&"giant").to_upper()) and banner.text == Names.boss_intro(&"giant").to_upper()
+		and clear and not sfx.nearest_by_kind().has(&"giant"),
+		"a Giant spawned as a wave spawns one raises its bar, its name and its banner, clear of the hotbar and the time to dawn - and the nearest voices leave it out",
+		"%s / %s" % [named.text, banner.text])
+	var second := Entities.spawn(state, &"giant", house + Vector2i(12, 3))
+	await until(func() -> bool: return named.text.contains(I18n.f(&"NHUD_BOSS_MANY", [Names.of(&"giant").to_upper(), 2])),
+		"x2 on the bar")
+	expect(named.text.contains(I18n.f(&"NHUD_BOSS_MANY", [Names.of(&"giant").to_upper(), 2])),
+		"a second one alive puts x2 on the bar", named.text)
+	Combat.hit(state, giant, 1 << 20)
+	Combat.hit(state, second, 1 << 20)
+	await until(func() -> bool: return not bar.is_visible_in_tree(), "the bar to go")
+	expect(not bar.is_visible_in_tree() and not named.is_visible_in_tree(), "and the bar goes when they are dead")
 	await close_scene()
 	_completed += 1
 

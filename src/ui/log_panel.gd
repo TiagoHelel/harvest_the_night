@@ -248,7 +248,8 @@ static func line_for(event: Dictionary) -> String:
 			return I18n.f(&"LOG_WAVE_BEGAN", [int(event.get("wave", 0)),
 				int(event.get("waves", 0)), _how_many(event)])
 		&"boss_arrived":
-			return I18n.t(&"LOG_BOSS")
+			# Each boss's own line (task 0246), as the night HUD's banner.
+			return Names.boss_intro(StringName(event.get("enemy", &"")))
 		&"structure_lost":
 			# A coop or a barn stands wrecked rather than gone (task 0186).
 			if bool(event.get("wrecked", false)):

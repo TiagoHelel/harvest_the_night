@@ -86,6 +86,11 @@ const BUTTON_SIZE := Vector2(46, 16)
 ## START has the bar to itself in the build step.
 const START_SIZE := Vector2(146, 16)
 
+## **A boss's banner** (task 0246): across the screen under the boss bar's
+## name, for this long after it arrives.
+const BANNER_AT := Vector2(0, 56)
+const BANNER_SECONDS := 3.0
+
 ## **The powers' row** (task 0233), just over the bar: three buttons the
 ## width of SKIP, each its picture and its charge.
 const POWERS_AT := Vector2(330, 230)
@@ -152,6 +157,11 @@ var _announce: Label
 var _boss_back: ColorRect
 var _boss_fill: ColorRect
 var _boss_name: Label
+## **A boss's intro, as a banner** (task 0246), and how long it has left
+## and the newest event it has read.
+var _boss_banner: Label
+var _banner_left := 0.0
+var _banner_read := -1
 var _bar: Control
 var _start: Button
 var _dawn: Label
@@ -273,6 +283,14 @@ func _ready() -> void:
 
 	_boss_name = _label("BossName", Vector2(120, 40), UiKit.WARM)
 	_boss_name.visible = false
+
+	# **A boss's intro, across the screen under its bar** (task 0246): its
+	# line from `Names.boss_intro`, on its `boss_arrived` for
+	# `BANNER_SECONDS` - clear of the hotbar and of the time to dawn.
+	_boss_banner = _label("BossBanner", BANNER_AT, UiKit.HEADING)
+	_boss_banner.size = Vector2(480, 12)
+	_boss_banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_boss_banner.visible = false
 
 	# **The announcement, in the middle, where you are already looking.**
 	_announce = _label("WaveWarning", Vector2(0, 92), UiKit.HEADING)
@@ -411,11 +429,18 @@ func _picture(node_name: String, picture: StringName, at: Vector2) -> TextureRec
 
 func show_state(state: Dictionary) -> void:
 	_state = state
+	# Everything already in the record counts as read, as the log's does: a
+	# loaded night does not announce its boss again.
+	_banner_read = -1
+	for one in (state.get("events", []) as Array):
+		_banner_read = maxi(_banner_read, int((one as Dictionary)["tick"]))
+	_banner_left = 0.0
 
 
 func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
+	_banner_left = maxf(_banner_left - delta, 0.0)
 	var phase := int(_state["phase"])
 	var after_dark := phase == Phases.NIGHT
 	var building := phase == Phases.PREPARATION
@@ -439,7 +464,7 @@ func _process(delta: float) -> void:
 	if building:
 		_night.text = I18n.f(&"NHUD_NIGHT", [Phases.night_ahead(_state)])
 		_announce.visible = false
-		for node in [_boss_back, _boss_fill, _boss_name]:
+		for node in [_boss_back, _boss_fill, _boss_name, _boss_banner]:
 			(node as CanvasItem).visible = false
 		_refresh_start()
 		return
@@ -639,31 +664,64 @@ func _id_at(cell: Vector2i) -> StringName:
 	return StringName(on.get("id", &""))
 
 
-## The boss bar, up only while there is one on the farm.
+## The boss bar, up only while there is one on the farm (task 0246: any
+## `is_boss`, the lowest id's health against `Combat.full_hp`, its name, and
+## `x2` when more than one is alive - Endless sends two Giants).
 func _refresh_boss() -> void:
-	var boss := Combat.boss_here(_state)
-	var here := boss != 0
+	_refresh_banner()
+	var bosses := Combat.bosses_here(_state)
+	var here := not bosses.is_empty()
 	_boss_back.visible = here
 	_boss_fill.visible = here
 	_boss_name.visible = here
 	if not here:
 		return
+	var boss := int(bosses[0])
 	var one := Entities.get_one(_state, boss)
 	var kind: StringName = one.get("kind", &"")
-	var full := maxi(int((GameData.ENEMIES[kind] as Dictionary)["hp"]), 1)
+	var full := maxi(Combat.full_hp(_state, boss), 1)
 	var share := clampf(float(int(one.get("hp", 0))) / float(full), 0.0, 1.0)
 	_boss_fill.size = Vector2(maxf(238.0 * share, 0.0), 7.0)
-	_boss_name.text = I18n.f(&"NHUD_BOSS", [Names.of(kind).to_upper(),
-		int(one.get("hp", 0)), full])
+	var named := Names.of(kind).to_upper()
+	if bosses.size() > 1:
+		named = I18n.f(&"NHUD_BOSS_MANY", [named, bosses.size()])
+	_boss_name.text = I18n.f(&"NHUD_BOSS", [named, int(one.get("hp", 0)), full])
 	# **And it flashes while it is winding up**, which is the second the
-	# player has to do something about the blow.
-	if Enemies.is_winding(_state, boss):
+	# player has to do something about the blow - any boss with a
+	# `telegraph_ticks` to wind up through.
+	var winds := int((GameData.ENEMIES[kind] as Dictionary).get("telegraph_ticks", 0)) > 0
+	if winds and Enemies.is_winding(_state, boss):
 		_boss_name.theme_type_variation = UiKit.BAD \
 			if fmod(_pulse, 0.3) < 0.15 else UiKit.WARM
 		_boss_fill.color = Color(1.0, 0.72, 0.30)
 	else:
 		_boss_name.theme_type_variation = UiKit.WARM
 		_boss_fill.color = Color(0.86, 0.26, 0.30)
+
+
+## **The banner** (task 0246): a boss's intro on its `boss_arrived`, for
+## `BANNER_SECONDS`, pulsing as the wave warning does. The events are read
+## up to the newest, so two on one tick are both seen.
+func _refresh_banner() -> void:
+	var newest := _banner_read
+	for one in (_state["events"] as Array):
+		var event: Dictionary = one
+		if int(event["tick"]) <= _banner_read:
+			continue
+		newest = maxi(newest, int(event["tick"]))
+		if StringName(event.get("kind", &"")) == &"boss_arrived":
+			_boss_banner.text = Names.boss_intro(StringName(event.get("enemy", &""))).to_upper()
+			_banner_left = BANNER_SECONDS
+	_banner_read = newest
+	_boss_banner.visible = _banner_left > 0.0
+	if _boss_banner.visible:
+		_boss_banner.modulate = Color.WHITE if fmod(_pulse, 0.6) < 0.3 \
+			else Color(1, 1, 1, 0.6)
+
+
+## The banner's words while it shows, else empty - for the checks.
+func banner_text() -> String:
+	return _boss_banner.text if _boss_banner.visible else ""
 
 
 func _refresh_controls() -> void:

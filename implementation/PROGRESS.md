@@ -25625,3 +25625,160 @@ implementation/backlog/packs/{A044-tarps,A045-power-weapon-icons}.md,
 implementation/BALANCE.md, implementation/prompts/0234-arsenal-by-season.md,
 implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0234/,
 docs/devlog/{index,index.pt_BR}.md
+
+## 0246 - Bosses in general - done 2026-10-11
+
+What changed: everything that knew about a boss knew about the Giant by name.
+The bar, the counters, the arrival line, the sounds, the poses and the art
+checks now read `is_boss`, so 0253-0255 are a data entry and a behaviour
+each. The Giant draws, sounds and checks exactly as before.
+
+### The rules (`src/core/combat.gd`)
+
+- **`bosses_here(state)`:** every boss on the farm, lowest id first.
+  `boss_here` stays the lowest of them, or 0.
+- **`is_boss(kind)`:** the kind's `is_boss`, false for none.
+- **`full_hp(state, id)`:** a body's full health - its kind's `hp` today, 0
+  for nobody. The one place 0257's elites will change; the boss bar reads it.
+- **`bosses_down_of(state, kind)`:** one boss's tally off the run's
+  `killed_by_kind_all_run`, 0 for a kind that is no boss. No new state key;
+  `bosses_down` stays the run's total.
+
+### The view (`src/ui/`)
+
+**The boss bar** (`NightHud._refresh_boss`):
+- names whichever boss is up, its health off `full_hp`;
+- **"x2"** when more than one is alive (`NHUD_BOSS_MANY`, "GIANT x2") -
+  Endless already sends two;
+- the wind-up flash only for a boss with `telegraph_ticks`.
+
+**The intro:**
+- `LOG_BOSS` is gone. `Names.BOSS_INTROS` holds one literal key a boss -
+  `BOSS_INTRO_GIANT` first - and `Names.boss_intro(kind)` reads it, a boss's
+  name for one with none.
+- **The banner** (`BossBanner`): on a `boss_arrived`, the intro across the
+  screen at y 56, under the bar and above the wave warning's row (92), for
+  three seconds. It blinks by alpha, as the wave warning does.
+- **A loaded night does not announce again:** what is already in the record
+  counts as read, as the log's does.
+- **The log's line** is the same intro.
+
+**The poses** - generic where the art follows the Giant's pose names:
+- `EnemyMotion.TRACKED` is `tracks(kind)` and `tracked()`: the ordinary four
+  and every boss drawn in poses.
+  - **`TRACKED` stays, as `tracked()` under its old name**, read on use. The
+    FHD pilots' captures in `implementation/fhd-player/` spawn their lineup
+    off it, and the first verify failed on their parse.
+- **`posed_boss(kind)`:** a boss whose art has `<kind>_windup_0`. One with no
+  authored poses goes the ordinary path.
+- `_giant_pose` is `_boss_pose`: `<kind>_walk_N`, `_windup_N`, `_slam_N`, on
+  the kind's own `telegraph_ticks`.
+- **The rest:** `EnemyDeaths` plays five frames for a posed boss;
+  `PixelEffects` lifts its impact to 20; `WorldView` tests a wind-up with
+  `EnemyMotion.is_windup`.
+
+**The sounds** (`Sfx`):
+- `voice_of(kind)`: a kind's own voice, a boss's the Giant's roar
+  (`BOSS_VOICE`) until 0284 voices it, nothing for anything else;
+- `_watch_bodies` announces any boss on arrival, with no position;
+- `nearest_by_kind` leaves every boss out;
+- `_ducks` ducks for any boss's voice.
+
+**`Describe`:** "winds up" only for a boss with `telegraph_ticks`.
+
+### The tools
+
+- **`tools/check_giant_art.py` is table-driven:** `BOSSES` holds each
+  family's motion counts, canvas, pivot, cell offset and generation task -
+  the Giant's today. The five families' ownership is a subset check, so a
+  new family cannot fail it. It prints the Giant's line as before.
+- **`tools/show_art.py --boss=<family>`** runs `giant_showcase.gd` for that
+  family; `--giant` is unchanged. A family other than the Giant photographs
+  into `implementation/shots/sprites/boss/<family>/`.
+- **`giant_showcase.gd`** takes the family: its lineup, pose names, pivot
+  and the house's damage are the family's.
+
+### Decided
+
+- **The banner under the bar, not over the world's middle.** Over the
+  house it would cover the fight it announces.
+- **The intro falls back to the name**, so a boss added without one says
+  what it is rather than printing a key. The check still wants a key for
+  every boss.
+- **A posed boss is one with a wind-up drawn.** Every pose name the view
+  asks for follows from it. A boss without one takes the path any untracked
+  enemy takes: its telegraph or attack picture while it winds up, a
+  two-beat walk otherwise.
+- **0058's walking speed leaves out what flies** (the plan's "walking
+  `ticks_per_tile`"): a flier is not on the same road.
+
+### Found
+
+- **A Giant that walks into the house bites as it lands, with no wind-up.**
+  `Enemies._walk`'s landing check calls `_bite` at once; only one already
+  standing on the house goes through `_swung_at_the_house`. 0058's measure
+  is against walls, and the Giant's showcase spawns it on the house, so
+  neither saw it. The first take of the shot had the Giant gone and the
+  house at 60. 0253's prompt counts on the house wind-up. Fixing it moves
+  SIM: a task of its own.
+- **The hotbar's first slot overflows:** the barricade's "5/night" runs
+  past the slot's left edge. It is in 0234's `arsenal_spring` too, and was
+  missed there.
+- `input_v1` took 114 s of its 120 in one run; this task's case costs 0.43 s.
+
+### Hashes
+
+Unchanged: SIM 4210782773, DATA 3781358399. Helpers, view and tests only.
+
+Verify: **PASS**, 60 of 60 in 1004 s. The first run was 59: the script parse failed on the FHD pilots' captures, which read `EnemyMotion.TRACKED`.
+- **Suites:** `headless_check` 17930 asserts, `headless_v1` 2604, `input_check` 1259 cases, `input_v1` 732 (113 s).
+- **perf:** a night tick 1683 us, the swarm's 8280, a path rebuild 10901, 15598 with the decoys and 11232 with the garlic.
+
+**Tests:**
+- **`_task_0246_bosses` (headless_v1):**
+  - two Giants on the farm give `bosses_here` both ids, lowest first, and
+    `boss_here` the lower; `full_hp` is the table's, nobody's 0;
+  - killing one moves `bosses_down_of(state, &"giant")` and `bosses_down`
+    by one each; a walker is no boss;
+  - every boss has an intro key in the map and a row in the strings table,
+    and `LOG_BOSS` is gone;
+  - the Giant is a posed boss and the walker is not; `tracked()` is the
+    five; the voices are the table's; no boss path in the view names the
+    Giant.
+- **`_case_0246_boss_bar` (input_v1)**, on a parked night:
+  - no boss, no bar and no banner;
+  - a Giant spawned as a wave spawns one raises the bar, its name and the
+    banner, clear of the hotbar and the time to dawn, and the nearest
+    voices leave it out;
+  - a second one puts "x2" on the bar;
+  - the bar goes when they are dead.
+- **Old groups touched (`headless_check`):** 0058's "the only boss" and
+  "outlasts every other" are every boss against every non-boss - hp, armour
+  and walking speed; 104 scenarios.
+- **The art:** `python tools/check_giant_art.py` prints the Giant's line as
+  before; `show_art.py --giant --check` and `--boss=giant --check` pass the
+  same checks (2433 checks, 0 failed, each).
+
+**Looked at** (`python tools/shot.py 0246 boss --fhd`):
+- **`boss`, Spring 14's night:** the Giant at a line of wall east of the
+  house, its arm up late in the wind-up, the ring on the wall it is about to
+  hit.
+- **Up top:** the bar under the strip, "GIANT 900/900" under the bar, and
+  "THE GIANT IS COMING" across the screen under them. All three are clear
+  of "DAWN 4:00" at the strip's right and of the hotbar. The log has the
+  same line.
+- **What the takes found:**
+  - **Two tiles out, the Giant was gone** and the house at 60: it walked
+    into the house and bit as it landed, with no wind-up (Found, above).
+  - **Twelve tiles out**, the same, later. The scene stages 0058's wall
+    line, which is where a Giant winds up today.
+  - **The banner was caught on its dim beat** (alpha 0.6, the wave
+    warning's blink). It reads over the trees, a little faint.
+
+Files: src/core/combat.gd,
+src/ui/{enemy_motion,enemy_deaths,pixel_effects,world_view,juice,sfx,night_hud,names,log_panel,describe}.gd,
+src/tools/{giant_showcase,enemy_showcase,headless_check,headless_v1,input_v1,shot}.gd,
+tools/{check_giant_art,show_art}.py, assets/locale/strings.csv,
+implementation/prompts/0246-bosses-general.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0246/,
+docs/devlog/{index,index.pt_BR}.md

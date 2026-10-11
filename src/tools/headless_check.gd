@@ -10712,19 +10712,25 @@ func _a_ruined_night(seed_value: int) -> Dictionary:
 func _task_0058_giant() -> void:
 	var giant: Dictionary = GameData.ENEMIES[&"giant"]
 
-	# **The biggest, the slowest, the best armoured, and the only boss.**
+	# **Every boss is the biggest, the slowest and the best armoured** (task
+	# 0246: every boss against every non-boss, since 0247-0255 add both kinds).
+	# Slower than every one that walks: a flier is not on the same road.
+	var bosses: Array = []
+	var others: Array = []
 	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
-		if id == &"giant":
-			continue
-		var one: Dictionary = GameData.ENEMIES[id]
-		expect(int(one["hp"]) < int(giant["hp"]),
-			"a giant outlasts a %s" % id, str(one["hp"]))
-		expect(int(one["ticks_per_tile"]) < int(giant["ticks_per_tile"]),
-			"and is slower than one - you watch it come", str(one))
-		expect(int(one.get("armour", 0)) < int(giant["armour"]),
-			"and better armoured", str(one.get("armour", 0)))
-		expect(not bool(one.get("is_boss", false)),
-			"and it is the only boss in the table", id)
+		(bosses if Combat.is_boss(id) else others).append(id)
+	expect(bosses.has(&"giant"), "the giant is a boss", str(bosses))
+	for boss in bosses:
+		var big: Dictionary = GameData.ENEMIES[boss]
+		for id in others:
+			var one: Dictionary = GameData.ENEMIES[id]
+			expect(int(one["hp"]) < int(big["hp"]),
+				"a %s outlasts a %s" % [boss, id], str(one["hp"]))
+			if not bool(one.get("flies", false)):
+				expect(int(one["ticks_per_tile"]) < int(big["ticks_per_tile"]),
+					"and is slower than one - you watch it come", str(one))
+			expect(int(one.get("armour", 0)) < int(big["armour"]),
+				"and better armoured", str(one.get("armour", 0)))
 	expect(int(giant["structure_damage_percent"]) > 100,
 		"it smashes what it walks into", str(giant["structure_damage_percent"]))
 	expect(not bool(giant["targets_structures"]),
@@ -14614,8 +14620,9 @@ func _task_0082_shots() -> void:
 	# a lit and an unlit tower line. Ninety-eight since 0230: a joined run of
 	# electric fence. Ninety-nine since 0231: a mixed line. A hundred since
 	# 0233: the three powers at work. A hundred and three since 0234: the
-	# hotbar in spring, in winter and on a season still shut.
-	expect(names.size() == 103,
+	# hotbar in spring, in winter and on a season still shut. A hundred and
+	# four since 0246: a boss winding up under its bar and banner.
+	expect(names.size() == 104,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

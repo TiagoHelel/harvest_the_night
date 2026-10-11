@@ -1,9 +1,23 @@
 extends "res://src/tools/enemy_showcase.gd"
 
 ## Real Giant movement/hits and removed-enemy playback on the native renderer.
+##
+## **Any boss drawn in the Giant's pose names** (task 0246): `--boss=<family>`
+## picks it, `--giant` and no flag the Giant, whose pictures and report are as
+## before. The leaves 0266-0268 run it for theirs.
+
+## The boss family shown, and each one's ground pivot.
+var _family: StringName = &"giant"
+const PIVOTS := {&"giant": Vector2(40, 60)}
+
+
 func _run() -> void:
 	CaptureSize.configure(root)
-	_folder = "res://implementation/shots/sprites/0016/giant/"
+	for arg in OS.get_cmdline_user_args():
+		if String(arg).begins_with("--boss="):
+			_family = StringName(String(arg).trim_prefix("--boss="))
+	_folder = "res://implementation/shots/sprites/0016/giant/" if _family == &"giant" \
+		else "res://implementation/shots/sprites/boss/%s/" % _family
 	await _setup()
 	await _boss_identity()
 	await _boss_walk(false)
@@ -14,15 +28,31 @@ func _run() -> void:
 	await _death_playback(false)
 	await _death_playback(true)
 	await _pool_guards()
-	print("GIANT SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+	print("%s SHOWCASE: %d checks, %d failed" % [String(_family).to_upper(), _checks, _failed])
 	quit(1 if _failed > 0 else 0)
+
+
+## The ordinary four and the boss, as the Giant's five identities were.
+func _lineup() -> Array[StringName]:
+	var out: Array[StringName] = EnemyMotion.FAMILIES.duplicate()
+	out.append(_family)
+	return out
+
+
+## The boss's pose name: `walk`, `windup`, `slam` and a frame.
+func _pose_name(motion: String, frame: int) -> StringName:
+	return StringName("%s_%s_%d" % [_family, motion, frame])
+
+
+func _prefix(motion: String) -> String:
+	return "%s_%s_" % [_family, motion]
 
 
 func _boss_identity() -> void:
 	for night in [false,true]:
 		_state = _blank(night)
-		for i in EnemyMotion.TRACKED.size():
-			Entities.spawn(_state,EnemyMotion.TRACKED[i],Vector2i(5+i*4,9))
+		for i in _lineup().size():
+			Entities.spawn(_state,_lineup()[i],Vector2i(5+i*4,9))
 		await _settle()
 		await _shoot("identities_%d" % int(night), "Five identities / Giant 42px body / existing farm scale")
 		if not night:
@@ -34,7 +64,7 @@ func _boss_identity() -> void:
 func _boss_walk(left: bool) -> void:
 	_state = _blank(true)
 	_house(Vector2i(2,8) if left else Vector2i(26,8))
-	var id := Entities.spawn(_state,&"giant",Vector2i(21 if left else 6,9))
+	var id := Entities.spawn(_state,_family,Vector2i(21 if left else 6,9))
 	for i in 4:
 		Entities.spawn(_state,EnemyMotion.FAMILIES[i],Vector2i(19 if left else 8,3+i*3))
 	await _settle()
@@ -43,7 +73,7 @@ func _boss_walk(left: bool) -> void:
 		_step()
 		var one := Entities.get_one(_state,id)
 		var pose := _world._pose_of(one)
-		if str(pose).begins_with("giant_walk_"):
+		if str(pose).begins_with(_prefix("walk")):
 			seen[pose] = true
 		if t in [15,31,47,63,79,95]:
 			await _settle()
@@ -64,7 +94,7 @@ func _boss_attack(right: bool) -> void:
 	_state["phase"] = Phases.PREPARATION  # where defences go up since task 0119
 	expect(Building.place(_state,&"wall",cell+toward),"Actual paid wall is the Giant's only route")
 	_state["phase"] = Phases.NIGHT
-	var id := Entities.spawn(_state,&"giant",cell)
+	var id := Entities.spawn(_state,_family,cell)
 	await _settle()
 	var poses: Dictionary = {}
 	var hit_tick := -1
@@ -73,11 +103,11 @@ func _boss_attack(right: bool) -> void:
 		_step()
 		var one := Entities.get_one(_state,id)
 		var pose := _world._pose_of(one)
-		if str(pose).begins_with("giant_windup_") or str(pose).begins_with("giant_slam_"):
+		if str(pose).begins_with(_prefix("windup")) or str(pose).begins_with(_prefix("slam")):
 			if not poses.has(pose):
 				await _settle()
 				await _shoot("attack_%d_%s" % [int(right),str(pose)], "Actual core target/wait/hit / body and ring agree")
-				if str(pose).begins_with("giant_windup_"):
+				if str(pose).begins_with(_prefix("windup")):
 					expect(Enemies.winding_at(_state,id)==cell+toward,"Raised arm targets the existing core ring cell")
 					expect(_world._enemy_motion.faces_right(one)==right,"Wind-up faces its observed target")
 					await _ring_pixels()
@@ -85,14 +115,14 @@ func _boss_attack(right: bool) -> void:
 		var hp := int(Farm.occupant(_state,cell+toward).get("hp",0))
 		if hp < last_hp and hit_tick < 0:
 			hit_tick = t
-			expect(str(pose).begins_with("giant_slam_"),"The slam starts on the actual damage tick")
+			expect(str(pose).begins_with(_prefix("slam")),"The slam starts on the actual damage tick")
 		if hit_tick < 0:
 			expect(hp==120,"Telegraph does not invent early wall damage")
 		last_hp = hp
-	expect(hit_tick>=int(GameData.ENEMIES[&"giant"]["telegraph_ticks"]),"Giant's first strike preserves the existing warning")
+	expect(hit_tick>=int(GameData.ENEMIES[_family]["telegraph_ticks"]),"Giant's first strike preserves the existing warning")
 	for prefix in ["windup","slam"]:
 		for frame in 3:
-			expect(poses.has(StringName("giant_%s_%d" % [prefix,frame])),"All three actual "+prefix+" poses played")
+			expect(poses.has(_pose_name(prefix,frame)),"All three actual "+prefix+" poses played")
 	# A loaded target is read directly; a stale distant target is not a tell.
 	one_saved_guard(id,cell+toward)
 
@@ -103,12 +133,12 @@ func one_saved_guard(id: int, target: Vector2i) -> void:
 	one["chew_wait"] = 12
 	one["pos"] = [3*Player.SUBTILE,3*Player.SUBTILE]
 	_world._enemy_motion.clear()
-	expect(_world._pose_of(one)==&"giant","A distant stale saved wind-up cannot advertise an attack")
+	expect(_world._pose_of(one)==_family,"A distant stale saved wind-up cannot advertise an attack")
 
 
 func _house_warning() -> void:
 	_state = _blank(true)
-	var id := Entities.spawn(_state,&"giant",Vector2i(26,8))
+	var id := Entities.spawn(_state,_family,Vector2i(26,8))
 	await _settle()
 	var seen: Dictionary = {}
 	for t in 34:
@@ -117,13 +147,13 @@ func _house_warning() -> void:
 		if one.is_empty():
 			continue
 		var pose := _world._pose_of(one)
-		if str(pose).begins_with("giant_windup_") and not seen.has(pose):
+		if str(pose).begins_with(_prefix("windup")) and not seen.has(pose):
 			seen[pose] = true
 			await _settle()
 			await _shoot("house_"+str(pose),"Existing house wind-up / visible ring above roof and boss")
 			await _ring_pixels()
 	expect(seen.size()==3,"House wind-up preserves all three real warning phases")
-	expect(not Entities.alive(_state,id) and int(_state["house_hp"])==60,"The actual house strike consumes the Giant and deals the original forty damage")
+	expect(not Entities.alive(_state,id) and int(_state["house_hp"])==GameData.HOUSE_HP-int(GameData.ENEMIES[_family]["damage"]),"The actual house strike consumes the Giant and deals the original forty damage")
 	expect(_world._enemy_deaths._cues.size()==1,"A spent Giant is removed and gets one bounded visual death")
 	_world._refresh_actors()
 	_world._refresh_deaths(0.0)
@@ -153,8 +183,8 @@ func _ring_pixels() -> void:
 func _death_playback(night: bool) -> void:
 	_state = _blank(true)
 	var ids: Array[int] = []
-	for i in EnemyMotion.TRACKED.size():
-		ids.append(Entities.spawn(_state,EnemyMotion.TRACKED[i],Vector2i(6+i*4,9)))
+	for i in _lineup().size():
+		ids.append(Entities.spawn(_state,_lineup()[i],Vector2i(6+i*4,9)))
 	await _settle()
 	var control := _state.duplicate(true)
 	var before := var_to_bytes(_state)
@@ -190,7 +220,7 @@ func _death_playback(night: bool) -> void:
 			var sprite: Sprite2D = _world._death_sprites[i]
 			expect(sprite.texture.resource_path==WorldView.ENEMY_DIR+"%s_death_%d.png" % [cue["kind"],frame],"Actual death texture advances through every authored frame once")
 			expect(sprite.position==ArtPlacement.contact([cue["pos"].x,cue["pos"].y]),"Every death frame keeps the last core contact")
-			expect(sprite.offset==Vector2(-40,-60) if cue["kind"]==&"giant" else sprite.offset==Vector2(-32,-44),"Death texture retains its complete family's ground pivot")
+			expect(sprite.offset==-PIVOTS.get(_family,Vector2(40,60)) if cue["kind"]==_family else sprite.offset==Vector2(-32,-44),"Death texture retains its complete family's ground pivot")
 		for sprite in _world._death_sprites:
 			if sprite.visible:
 				expect(sprite.get_parent().y_sort_enabled,"Death depth still uses the last feet position")
@@ -208,7 +238,7 @@ func _pool_guards() -> void:
 	_state = _blank(true)
 	var ids: Array[int] = []
 	for i in 64:
-		ids.append(Entities.spawn(_state,EnemyMotion.TRACKED[i%5],Vector2i(5+i%20,3+i/20)))
+		ids.append(Entities.spawn(_state,_lineup()[i%_lineup().size()],Vector2i(5+i%20,3+i/20)))
 	await _settle()
 	_world.before_tick(_state)
 	_state["tick"] = int(_state["tick"])+1

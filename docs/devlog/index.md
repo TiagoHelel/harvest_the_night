@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-217 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+218 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -261,6 +261,7 @@ is the sort of thing this list exists to say out loud.
 | 0232 | Powers as a list | 2026-10-11 |
 | 0233 | Three new powers | 2026-10-11 |
 | 0234 | The arsenal grows with the seasons | 2026-10-11 |
+| 0246 | Bosses in general | 2026-10-11 |
 
 ## Every time the game changed underneath itself
 
@@ -374,7 +375,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 
 ## What went wrong
 
-53 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+54 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -429,6 +430,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0196** - What drags, what is busywork, what is missing *(Checkpoint: is the day good on its own?)*
 - **0196** - Found in the tour, and fixed before these numbers *(Checkpoint: is the day good on its own?)*
 - **0219** - Found while doing it *(Essence)*
+- **0246** - Found *(Bosses in general)*
 
 ## What is not in it
 

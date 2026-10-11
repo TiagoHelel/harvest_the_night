@@ -98,6 +98,10 @@ const ENEMY_SOUNDS := {
 	&"giant": &"sfx/roar_giant",
 }
 
+## **What a boss with no voice of its own roars with** (task 0246): the
+## Giant's, until 0284 voices 0253-0255's bosses.
+const BOSS_VOICE := &"sfx/roar_giant"
+
 ## The `Audio` script, **preloaded rather than named**. `verify.py` parses
 ## each file on its own with no autoloads registered, so `Audio.NOWHERE`
 ## would be an undeclared identifier there and the parse row would go red for
@@ -304,7 +308,7 @@ func _watch_towers() -> void:
 	_reloads = now
 
 
-## Impacts, deaths, and the Giant announcing itself.
+## Impacts, deaths, and a boss announcing itself (any `is_boss`, task 0246).
 func _watch_bodies() -> void:
 	var now: Dictionary = {}
 	for entity_id in Entities.ids(_state):
@@ -322,8 +326,8 @@ func _watch_bodies() -> void:
 			# so the roar arrives at full volume from the far fence - which
 			# is the requirement, and the only place the falloff is skipped
 			# on purpose.
-			if kind == &"giant":
-				_ask_at(ENEMY_SOUNDS[kind], AudioScript.NOWHERE, 1)
+			if Combat.is_boss(kind):
+				_ask_at(voice_of(kind), AudioScript.NOWHERE, 1)
 			continue
 		# On the rise, not for as long as it shows: `hurt` is a countdown and
 		# reading it as a level emitted on every frame of it.
@@ -401,8 +405,8 @@ func nearest_by_kind() -> Dictionary:
 		if one.is_empty():
 			continue
 		var kind := StringName(one["kind"])
-		if not ENEMY_SOUNDS.has(kind) or kind == &"giant":
-			continue        # the Giant announces itself and does not mutter
+		if not ENEMY_SOUNDS.has(kind) or Combat.is_boss(kind):
+			continue        # a boss announces itself and does not mutter
 		var at := _body_middle(one)
 		var best: Variant = nearest.get(kind, null)
 		if best == null or ears.distance_to(at) < ears.distance_to(best):
@@ -456,4 +460,18 @@ func _ask_at(id: StringName, at: Vector2, gap: int) -> void:
 
 
 func _ducks(id: StringName) -> bool:
-	return DUCKS.has(id) or id == ENEMY_SOUNDS[&"giant"]
+	if DUCKS.has(id):
+		return true
+	# **Any boss's voice ducks the rest** (task 0246), as the Giant's did.
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if Combat.is_boss(StringName(kind)) and voice_of(StringName(kind)) == id:
+			return true
+	return false
+
+
+## **A kind's voice** (task 0246): its own in `ENEMY_SOUNDS`, a boss's the
+## Giant's roar until it has one, and nothing for anything else.
+static func voice_of(kind: StringName) -> StringName:
+	if ENEMY_SOUNDS.has(kind):
+		return ENEMY_SOUNDS[kind]
+	return BOSS_VOICE if Combat.is_boss(kind) else &""

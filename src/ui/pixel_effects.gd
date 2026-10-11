@@ -159,7 +159,8 @@ func after_tick(state: Dictionary) -> void:
 			continue
 		var at := Vector2(one["pos"][0],one["pos"][1])*per
 		if int(one.get("hurt",0)) > int(was[1]):
-			emit(&"impact", at-Vector2(0,20 if was[3]==&"giant" else 12))
+			# Higher on a boss drawn in the Giant's poses (task 0246).
+			emit(&"impact", at-Vector2(0,20 if EnemyMotion.posed_boss(was[3]) else 12))
 		if Combat.is_burning(state,int(id)) and not bool(was[2]):
 			emit(&"flame", at-Vector2(0,4))
 	for idx in _guns:

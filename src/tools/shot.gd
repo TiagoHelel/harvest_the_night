@@ -147,6 +147,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
+	["boss", "a boss winding up: Spring 14's night, the Giant come up to a line of wall east of the house and winding up its blow on it, the ring on its target - its bar and name up top and its intro across the screen under them, clear of the time to dawn and of the hotbar", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
 	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
 	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
@@ -790,6 +791,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"arsenal_spring": _set_arsenal_spring(state)
 		"arsenal_winter": _set_arsenal_winter(state)
 		"arsenal_locked": _set_arsenal_locked(state)
+		"boss": _set_boss(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1134,6 +1136,20 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				mode.set("_pointer", view.cell_to_screen(hand))
 				view.cursor().place_at(hand)
 				mode.call("_follow_cursor")
+		"boss":
+			# Walked on to the wall and caught late in the wind-up (task 0246),
+			# a tick at a time so the wall takes nothing first.
+			var telegraph := int((GameData.ENEMIES[&"giant"] as Dictionary)["telegraph_ticks"])
+			for _i in 600:
+				var giant := Entities.get_one(state, _boss_giant)
+				if giant.is_empty() or (Enemies.is_winding(state, _boss_giant)
+						and int(giant.get("chew_wait", 0)) <= telegraph / 3):
+					break
+				Sim.advance(state, 1)
+			print("  boss: the giant at %s winding %s on %s, house %d, banner '%s'" % [
+				str(Entities.cell_of(state, _boss_giant)), Enemies.is_winding(state, _boss_giant),
+				str(Enemies.winding_at(state, _boss_giant)),
+				int(state["house_hp"]), (main.find_child("NightHud", true, false) as NightHud).banner_text()])
 		"arsenal_locked":
 			# Turned by hand to autumn's page, nothing picked (task 0234).
 			(main.get("_hotbar") as Hotbar).turn(2)
@@ -3014,6 +3030,34 @@ func _set_arsenal_locked(state: Dictionary) -> void:
 	Resources.gain(state, {GameData.WOOD: 40, GameData.IRON: 14, GameData.STONE: 20, GameData.MONEY: 60})
 	NightRoad.into_build(state)
 	_look_at(Farm.house_centre(state) + Vector2i(5, 0))
+
+
+## **A boss winding up** (task 0246): Spring 14's night, parked, a line of
+## wall across the farm east of the house - 0058's measure of the wind-up -
+## and the Giant three tiles beyond it, walked up to it and winding up by the
+## shutter (`_just_before_the_shutter`), its arrival announced as a wave
+## announces one, so its bar, its name and its banner are up.
+##
+## **A wall, not the house**: a Giant that walks into the house bites as it
+## lands, with no wind-up (`Enemies._walk`), so the first take had it gone.
+func _set_boss(state: Dictionary) -> void:
+	_on_date(state, GameData.SEASON_DAYS)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	var house := Farm.house_centre(state)
+	var wall := {"id": &"wall", "hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])}
+	for y in Grid.HEIGHT:
+		if Farm.buildable(state, Vector2i(house.x + 10, y)):
+			Farm.place(state, Vector2i(house.x + 10, y), wall.duplicate())
+	Pathing.refresh(state)
+	_boss_giant = Entities.spawn(state, &"giant", house + Vector2i(13, 0))
+	Events.add(state, &"boss_arrived", {"enemy": &"giant"})
+	_look_at(house + Vector2i(6, 0))
+
+
+## The Giant `_set_boss` sent in.
+var _boss_giant := 0
 
 
 ## The wall `_set_powers` hurt, and how far into the bell's ring and the

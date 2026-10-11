@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 79
+const GROUPS := 80
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -158,6 +158,7 @@ func _run() -> void:
 	_task_0232_powers_list()
 	_task_0233_powers()
 	_task_0234_arsenal()
+	_task_0246_bosses()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -9420,6 +9421,64 @@ func _task_0234_arsenal() -> void:
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A044-tarps.md").contains("Final geometry settled by game task 0234")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A045-power-weapon-icons.md").contains("Final geometry settled by game task 0234"),
 		"shot.gd has the hotbar in spring and in winter, and A044's and A045's tables are final")
+	_completed += 1
+
+
+## 0246 - bosses in general. Two Giants on the farm give `bosses_here` both
+## ids in order and `boss_here` the lower; `full_hp` is the table's; killing
+## one moves `bosses_down_of(state, &"giant")` and `bosses_down` by one each,
+## and a kind that is no boss has none; every `is_boss` entry has an intro key
+## in the map and a row in the strings table; the view's boss paths read
+## `is_boss`, never the Giant's name.
+func _task_0246_bosses() -> void:
+	var state := _powers_night(24600)
+	var house := Farm.house_centre(state)
+	var first := Entities.spawn(state, &"giant", house + Vector2i(12, 0))
+	var walker := Entities.spawn(state, &"walker", house + Vector2i(12, 2))
+	var second := Entities.spawn(state, &"giant", house + Vector2i(12, 4))
+	var giant_hp := int((GameData.ENEMIES[&"giant"] as Dictionary)["hp"])
+	var walker_hp := int((GameData.ENEMIES[&"walker"] as Dictionary)["hp"])
+	expect(Combat.bosses_here(state) == [first, second] and Combat.boss_here(state) == first and first < second
+		and Combat.full_hp(state, first) == giant_hp and Combat.full_hp(state, walker) == walker_hp
+		and Combat.full_hp(state, second + 99) == 0,
+		"two Giants on the farm: bosses_here both, lowest id first, boss_here the lower; full_hp the table's, nobody's 0",
+		str(Combat.bosses_here(state)))
+	var down := Combat.bosses_down(state)
+	var giants := Combat.bosses_down_of(state, &"giant")
+	Combat.hit(state, first, 1 << 20)
+	expect(Combat.bosses_down_of(state, &"giant") == giants + 1 and Combat.bosses_down(state) == down + 1
+		and Combat.bosses_here(state) == [second] and Combat.bosses_down_of(state, &"walker") == 0,
+		"killing one moves bosses_down_of(giant) and bosses_down by one each, off the run's tally; a walker is no boss",
+		"%d %d" % [Combat.bosses_down_of(state, &"giant"), Combat.bosses_down(state)])
+
+	# **Every boss has its intro**: a literal key in the view's map, a row in
+	# the strings table; LOG_BOSS is gone.
+	var rows := FileAccess.get_file_as_string("res://assets/locale/strings.csv")
+	var missing: Array = []
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if Combat.is_boss(kind):
+			var key := StringName(Names.BOSS_INTROS.get(kind, &""))
+			if key == &"" or not rows.contains("\n%s," % key):
+				missing.append(kind)
+	expect(missing.is_empty() and not rows.contains("\nLOG_BOSS,")
+		and Names.boss_intro(&"giant") == I18n.t(&"BOSS_INTRO_GIANT"),
+		"every boss has its intro key in the map and a row in the strings table, and LOG_BOSS is gone", str(missing))
+
+	# **The view reads `is_boss`**: the Giant moves in its poses as a boss
+	# drawn in them; its voice is the table's; and no boss path names it.
+	var view := ["enemy_motion.gd", "enemy_deaths.gd", "pixel_effects.gd", "night_hud.gd", "log_panel.gd", "juice.gd"]
+	var by_name: Array = []
+	for file in view:
+		if SuiteKit.code_lines_of("res://src/ui/" + file).contains("&\"giant\""):
+			by_name.append(file)
+	var voices := SuiteKit.code_lines_of("res://src/ui/sfx.gd").count("&\"giant\"")
+	expect(EnemyMotion.posed_boss(&"giant") and not EnemyMotion.posed_boss(&"walker")
+		and EnemyMotion.tracks(&"giant") and EnemyMotion.tracked() == [&"walker", &"runner", &"tank", &"breaker", &"giant"]
+		and EnemyMotion.TRACKED == EnemyMotion.tracked()
+		and Sfx.voice_of(&"giant") == &"sfx/roar_giant" and Sfx.voice_of(&"walker") == &"sfx/groan_walker"
+		and by_name.is_empty() and voices == 1,
+		"the view reads is_boss: the Giant moves as a boss drawn in its poses (TRACKED its old name), its voice is the table's, and no boss path names it - sfx.gd only in its table of voices",
+		"%s %d" % [str(by_name), voices])
 	_completed += 1
 
 

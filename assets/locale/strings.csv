@@ -242,6 +242,7 @@ DMG_STING,0,sting,ferrão
 ENEMY_BREAKER,0,breaker,quebrador
 ENEMY_BREAKER.other,0,breakers,quebradores
 ENEMY_GIANT,0,giant,gigante
+BOSS_INTRO_GIANT,0,the giant is coming,o gigante está vindo
 ENEMY_GIANT.other,0,giants,gigantes
 ENEMY_RUNNER,0,runner,corredor
 ENEMY_RUNNER.other,0,runners,corredores
@@ -320,7 +321,6 @@ ITEM_BONE_MEAL,0,bone meal,farinha de osso
 ITEM_MOON_STONE,0,moon stone,pedra da lua
 ITEM_WHEAT,0,wheat,trigo
 ITEM_WOOD,0,wood,madeira
-LOG_BOSS,0,the giant is coming,o gigante está vindo
 LOG_CRAFT_DONE,0,%s finished,%s ficou pronto
 LOG_CROP_READY,0,%s is ready,%s está pronto
 LOG_DAWN,0,dawn - %d walked off,amanheceu - %d foram embora
@@ -336,6 +336,7 @@ LOG_STRUCTURE_WRECKED,0,%s wrecked - mend it by day,%s arrasado - conserte de di
 LOG_TITLE,0,WHAT HAPPENED,O QUE ACONTECEU
 LOG_WAVE_BEGAN,0,wave %d of %d: %s,onda %d de %d: %s
 NHUD_BOSS,0,%s  %d/%d,%s  %d/%d
+NHUD_BOSS_MANY,0,%s x%d,%s x%d
 NHUD_DAWN,110,DAWN %d:%02d,AMANHECER %d:%02d
 NHUD_FLARE,34,FLARE,SINAL
 NHUD_FLARE_CHARGE,34,%d%%,%d%%

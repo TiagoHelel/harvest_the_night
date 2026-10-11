@@ -14,7 +14,10 @@ from shot import FIXED_FPS, WINDOW_AT
 def main():
     args = sys.argv[1:]
     flags = ["--headless"] if "--check" in args else ["--position", WINDOW_AT]
-    script = "atmosphere_showcase.gd" if "--atmosphere" in args else "ui_art_showcase.gd" if "--ui" in args else "effect_showcase.gd" if "--effects" in args else "giant_showcase.gd" if "--giant" in args else "enemy_showcase.gd" if "--enemies" in args else "barrier_showcase.gd" if "--barriers" in args else "tower_showcase.gd" if "--towers" in args else "art_showcase.gd"
+    # `--boss=<family>` (task 0246) is the Giant's showcase for another boss
+    # drawn in its pose names; `--giant` is `--boss=giant`, unchanged.
+    boss = "--giant" in args or any(arg.startswith("--boss=") for arg in args)
+    script = "atmosphere_showcase.gd" if "--atmosphere" in args else "ui_art_showcase.gd" if "--ui" in args else "effect_showcase.gd" if "--effects" in args else "giant_showcase.gd" if boss else "enemy_showcase.gd" if "--enemies" in args else "barrier_showcase.gd" if "--barriers" in args else "tower_showcase.gd" if "--towers" in args else "art_showcase.gd"
     if "--visibility" in args:
         script = "visibility_showcase.gd"
     if "--house-visit" in args:

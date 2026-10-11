@@ -332,6 +332,21 @@ const NOTES: Dictionary = {
 }
 
 
+## **Each boss's intro** (task 0246): one literal key a boss, so the string
+## check finds every one - the night HUD's banner and the log's line on its
+## `boss_arrived`. 0253-0255 add theirs with their rows.
+const BOSS_INTROS: Dictionary = {
+	&"giant": &"BOSS_INTRO_GIANT",
+}
+
+
+## A boss's intro, in the language up; its name alone for a boss with none.
+static func boss_intro(kind: StringName) -> String:
+	if BOSS_INTROS.has(kind):
+		return I18n.t(BOSS_INTROS[kind])
+	return of(kind)
+
+
 ## What this thing is called.
 ##
 ## **An id with no name reads as itself**, spaced out rather than

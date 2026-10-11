@@ -38,7 +38,7 @@ func after_tick(state: Dictionary) -> void:
 			if Entities.alive(state, int(id)):
 				continue
 			var before: Dictionary = _before[id]
-			if not EnemyMotion.TRACKED.has(before["kind"]):
+			if not EnemyMotion.tracks(before["kind"]):
 				continue
 			var at: Array = before["coordinates"]
 			if _cues.size() == CAP:
@@ -53,7 +53,8 @@ func advance(delta: float) -> void:
 	for i in range(_cues.size() - 1, -1, -1):
 		var cue: Dictionary = _cues[i]
 		cue["age"] = float(cue["age"]) + maxf(delta, 0.0)
-		var frames := 5 if cue["kind"] == &"giant" else 4
+		# Five for a boss in the Giant's poses (task 0246), four otherwise.
+		var frames := 5 if EnemyMotion.posed_boss(cue["kind"]) else 4
 		if float(cue["age"]) >= frames * FRAME_SECONDS:
 			_cues.remove_at(i)
 

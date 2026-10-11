@@ -326,7 +326,7 @@ func _dawn() -> void:
 	var cells: Array[Vector2i] = [Vector2i(22, 8), Vector2i(30, 9),
 		Vector2i(26, 12), Vector2i(25, 4), Vector2i(29, 11)]
 	for i in cells.size():
-		Entities.spawn(_state, EnemyMotion.TRACKED[i], cells[i])
+		Entities.spawn(_state, EnemyMotion.tracked()[i], cells[i])
 	_state["phase"] = Phases.RESULT
 	await _settle()
 	_world.look_at_cell(Vector2i(26, 8))
