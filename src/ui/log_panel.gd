@@ -57,6 +57,8 @@ const SEVERITY := {
 	&"dawn": &"good",
 	&"shipped": &"good",
 	&"house_tier": &"good",
+	# A crow ate a crop (task 0249): the harvest is under attack.
+	&"crop_eaten": &"bad",
 }
 
 ## Severity -> the theme role it is written in.
@@ -276,6 +278,9 @@ static func line_for(event: Dictionary) -> String:
 		# The bin paid at dawn (task 0189).
 		&"shipped":
 			return I18n.f(&"LOG_SHIPPED", [int(event.get("money", 0))])
+		# A crow ate a crop off the field (task 0249).
+		&"crop_eaten":
+			return I18n.f(&"LOG_CROP_EATEN", [Names.of(StringName(event.get("crop", &"")))])
 		# The house built up a tier (task 0191).
 		&"house_tier":
 			return I18n.f(&"LOG_HOUSE_TIER", [I18n.t([&"HOUSE_TIER_1", &"HOUSE_TIER_2",

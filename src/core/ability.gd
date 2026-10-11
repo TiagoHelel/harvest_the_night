@@ -309,6 +309,10 @@ static func dog_target(state: Dictionary, cell: Vector2i) -> int:
 		var at := Entities.cell_of(state, id)
 		if at.x < 0 or Grid.chebyshev(cell, at) > radius:
 			continue
+		# **It cannot reach the air** (task 0249): a crow it can bite is a
+		# crow on the field.
+		if Enemies.airborne(state, id):
+			continue
 		var far := [Grid.chebyshev(cell, at), Grid.manhattan(cell, at)]
 		if int(far[0]) < int(best_far[0]) or (int(far[0]) == int(best_far[0]) and int(far[1]) < int(best_far[1])):
 			best = id

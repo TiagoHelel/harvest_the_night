@@ -58,6 +58,8 @@ const KINDS: Array = [
 	&"shipped",
 	# The house built up a tier (task 0191).
 	&"house_tier",
+	# A crow ate a crop off the field (task 0249).
+	&"crop_eaten",
 ]
 
 

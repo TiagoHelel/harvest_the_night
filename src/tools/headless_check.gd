@@ -7151,6 +7151,8 @@ func _task_0042_declared() -> void:
 		"range": 8,
 		"reload_ticks": 30,
 		"energy_draw": 0,
+		# Every tower says whether it reaches the air since task 0249.
+		"hits_flying": false,
 	}
 	expect(GameData.check_defences({&"test_burner": burner}).is_empty(),
 		"a tower dealing 3 fire in a radius passes the check",
@@ -11010,7 +11012,7 @@ func _giant_walk_in(seed_value: int) -> int:
 ## **The kinds no night sends yet** (task 0247): in the table and on the farm
 ## for the checks, out of the authored nights until 0270-0274 put them in the
 ## year and take them off this list. 0248-0252 add theirs.
-const NO_NIGHT_YET: Array = [&"spitter", &"rat"]
+const NO_NIGHT_YET: Array = [&"spitter", &"rat", &"crow"]
 
 
 func _task_0059_wave_data() -> void:
@@ -14644,8 +14646,9 @@ func _task_0082_shots() -> void:
 	# hotbar in spring, in winter and on a season still shut. A hundred and
 	# four since 0246: a boss winding up under its bar and banner. A hundred
 	# and five since 0247: a spitter working on a tower line. A hundred and
-	# six since 0248: rats in clusters.
-	expect(names.size() == 106,
+	# six since 0248: rats in clusters. A hundred and seven since 0249: crows
+	# over a wall and on the field.
+	expect(names.size() == 107,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
@@ -15678,6 +15681,7 @@ func _task_0090_log() -> void:
 		&"dawn": {"walked": 4},          # task 0137
 		&"shipped": {"money": 40},       # task 0189
 		&"house_tier": {"tier": 2},      # task 0191
+		&"crop_eaten": {"crop": &"carrot", "cell": [2, 3]},  # task 0249
 	}
 	for kind in Events.KINDS:
 		expect(samples.has(kind),

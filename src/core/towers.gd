@@ -265,6 +265,9 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
 
 	var best := 0
 	var best_threat := 1 << 30
+	# **Whether it reaches the air** (task 0249): what does not, never picks
+	# a flyer in it.
+	var up := bool(entry.get("hits_flying", false))
 	var near: Array = Entities.ids(state) if crowd.is_empty() \
 		else _near(crowd, from, reach)
 	var stung: Dictionary = state["stung"]
@@ -279,6 +282,8 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
 			continue
 		var distance := Grid.chebyshev(from, cell)
 		if distance > reach or distance < minimum:
+			continue
+		if not up and Enemies.airborne(state, id):
 			continue
 		# **Not what is already accounted for.** Without this a line of towers
 		# all fires at the leader, most of those shots land on a corpse, and
@@ -546,6 +551,7 @@ static func _pierce_line(state: Dictionary, from: Vector2i,
 	var falloff := int(entry.get("pierce_falloff_percent", 0))
 	var most := maxi(int(entry.get("pierce", 1)), 1)
 	var kind := StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT))
+	var up := bool(entry.get("hits_flying", false))
 
 	# Everything on the line, nearest first. `Entities.ids()` is sorted, so two
 	# standing the same distance away are always taken in the same order.
@@ -557,6 +563,8 @@ static func _pierce_line(state: Dictionary, from: Vector2i,
 		var to := cell - from
 		if to.x * aim.x + to.y * aim.y <= 0:
 			continue        # behind the tower
+		if not up and Enemies.airborne(state, id):
+			continue        # over the line, not on it (task 0249)
 		# **A line one tile wide.** The cross product is the perpendicular
 		# distance times the aim's length, so comparing it against the aim's
 		# length squared asks "within about a tile of the line" with no square
@@ -619,6 +627,7 @@ static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
 	# and at 2, 3 and 4 a fifth more rounds back to the same integer anyway.
 	var burn := int(entry.get("burn_damage", 0))
 	var burn_ticks := int(entry.get("burn_ticks", 0))
+	var up := bool(entry.get("hits_flying", false))
 	if not armed:
 		# No fire at all: what makes a flamethrower a flamethrower is the
 		# thing it cannot do without rounds.
@@ -641,6 +650,9 @@ static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
 		# happens before the multiply.
 		var across := absi(to.x * aim.y - to.y * aim.x)
 		if across * 1000 > along * spread:
+			continue
+		# Over the flame, not in it (task 0249).
+		if not up and Enemies.airborne(state, id):
 			continue
 
 		Combat.hit(state, id, damage,
@@ -701,12 +713,19 @@ static func _land_at(state: Dictionary, shot: Dictionary, middle: Vector2i,
 	# two machines have to kill the same one first.
 	var radius := maxi(int(shot.get("splash_tiles", 1)), 1)
 	var edge := int(shot.get("splash_falloff_percent", 100))
+	# **A burst on the ground misses the air** (task 0249), unless what threw
+	# it reaches the air - asked of the tower it came from, which the shot
+	# names, so no shot carries a new key.
+	var up := bool((GameData.DEFENCES.get(StringName(shot.get("from", &"")), {})
+		as Dictionary).get("hits_flying", false))
 	for id in Entities.ids(state):
 		var cell := Entities.cell_of(state, id)
 		if cell.x < 0:
 			continue
 		var apart := Grid.chebyshev(middle, cell)
 		if apart > radius:
+			continue
+		if not up and Enemies.airborne(state, id):
 			continue
 		# Integer throughout: full in the middle, `edge` percent at the rim,
 		# straight line between.

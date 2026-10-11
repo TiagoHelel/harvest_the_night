@@ -168,6 +168,7 @@ DESC_COSTS,0,costs %s,custa %s
 DESC_DAMAGE,0,%d %s damage,%d de dano %s
 DESC_DRAWS,0,draws %d power,consome %d de energia
 DESC_EATS_WALLS,0,chews through walls,come os muros
+DESC_FLIES,0,flies over walls and mines,voa por cima de muros e minas
 DESC_FREE,0,free,de graça
 DESC_FROM,0,from %s,de %s
 DESC_GROWS_IN,0,grows in %d days,cresce em %d dias
@@ -243,6 +244,8 @@ DMG_IMPACT,0,impact,impacto
 DMG_STING,0,sting,ferrão
 ENEMY_BREAKER,0,breaker,quebrador
 ENEMY_BREAKER.other,0,breakers,quebradores
+ENEMY_CROW,0,crow,corvo
+ENEMY_CROW.other,0,crows,corvos
 ENEMY_GIANT,0,giant,gigante
 ENEMY_GIANT.other,0,giants,gigantes
 BOSS_INTRO_GIANT,0,the giant is coming,o gigante está vindo
@@ -328,6 +331,7 @@ ITEM_MOON_STONE,0,moon stone,pedra da lua
 ITEM_WHEAT,0,wheat,trigo
 ITEM_WOOD,0,wood,madeira
 LOG_CRAFT_DONE,0,%s finished,%s ficou pronto
+LOG_CROP_EATEN,0,a crow ate the %s,um corvo comeu %s
 LOG_CROP_READY,0,%s is ready,%s está pronto
 LOG_DAWN,0,dawn - %d walked off,amanheceu - %d foram embora
 LOG_SHIPPED,0,the shipping bin paid $%d,a caixa de envio pagou $%d

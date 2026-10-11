@@ -98,6 +98,9 @@ static func tick(state: Dictionary) -> void:
 		var trap := at(state, cell)
 		if trap.is_empty():
 			continue
+		# **What flies over it never sets it off** (task 0249).
+		if Enemies.airborne(state, id):
+			continue
 		_detonate(state, cell, StringName(trap["id"]))
 
 
@@ -136,6 +139,9 @@ static func _detonate(state: Dictionary, cell: Vector2i,
 			continue
 		var apart := Grid.chebyshev(cell, at_cell)
 		if apart > radius:
+			continue
+		# Nor does its blast reach the air (task 0249).
+		if Enemies.airborne(state, other):
 			continue
 		var share := 100 - (100 - edge) * apart / radius
 		Combat.hit(state, other, maxi(damage * share / 100, 1), kind)

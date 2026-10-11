@@ -248,6 +248,10 @@ const SPITTER_TINT := Color(1.45, 1.65, 0.4)
 ## 64x48 of the zombies: a rat is a quarter of the farmer's height.
 const RAT := {"canvas": Vector2i(24, 16), "pivot": Vector2i(12, 14), "draw_scale": 1.0}
 
+## A048's crow (task 0249): 32x24 standing on (16,22), drawn at 1.0. In
+## flight the view lifts it and draws the shadow under it.
+const CROW := {"canvas": Vector2i(32, 24), "pivot": Vector2i(16, 22), "draw_scale": 1.0}
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -378,6 +382,14 @@ const ART := {
 	&"rat_attack": {"pack": "A047", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": RAT, "final": RAT},
 	&"rat_death": {"pack": "A047", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": RAT, "final": RAT},
 	&"head_rat": {"pack": "A047", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
+	# A048's crow (task 0249), drawn in code by `CrowArt` until 0262: the
+	# master, the flight, the touchdown, the peck, the fall and its head.
+	&"crow": {"pack": "A048", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": CROW, "final": CROW, "bare": true},
+	&"crow_fly": {"pack": "A048", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": CROW, "final": CROW},
+	&"crow_land": {"pack": "A048", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": CROW, "final": CROW},
+	&"crow_peck": {"pack": "A048", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.12, "loop": true, "stand_in": &"", "geometry": CROW, "final": CROW},
+	&"crow_death": {"pack": "A048", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": CROW, "final": CROW},
+	&"head_crow": {"pack": "A048", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
 	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
 	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn

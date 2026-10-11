@@ -1873,6 +1873,16 @@ func _refresh_actors() -> void:
 		# they occupy is the same rule the player uses, and it is what makes
 		# a zombie stand on the tile the rules say it is on.
 		sprite.position = ArtPlacement.contact(one["pos"]) + crowd_offset(one)
+		# **A flyer in the air is drawn above its point** (task 0249), over
+		# everything on the ground - a wall it crosses included - and its
+		# shadow left down there under it.
+		var lift := flight_lift(_state, one)
+		var aloft := Enemies.airborne(_state, int(ids[i]))
+		sprite.position.y -= lift
+		sprite.z_index = 1 if aloft else 0
+		var shadow := sprite.get_node("Shadow") as Node2D
+		shadow.position.y = lift - 1.0
+		shadow.z_index = -1 if aloft else 0
 		var metadata := _enemy_frame(pose, sprite.texture)
 		var pivot: Vector2i = metadata.get("pivot",
 			Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height()))
@@ -1883,6 +1893,43 @@ func _refresh_actors() -> void:
 	for id in _heading.keys():
 		if not Entities.alive(_state, int(id)):
 			_heading.erase(id)
+
+
+## **How high a flyer is drawn** (task 0249): `FLIGHT_LIFT` in the air,
+## coming down over the last tile to the crop it is landing on, nothing
+## landed - and nothing for anything that walks. A picture of the height; the
+## rules have the crow on its cell all the while.
+static func flight_lift(state: Dictionary, one: Dictionary) -> float:
+	if not Enemies.flies(StringName(one["kind"])) or one.has("peck"):
+		return 0.0
+	var aimed := int(one.get("flying_to", -1))
+	if aimed < 0:
+		return FLIGHT_LIFT
+	var goal := Grid.cell(aimed) * Player.SUBTILE + Vector2i(Player.SUBTILE / 2, Player.SUBTILE / 2)
+	var apart := absi(goal.x - int(one["pos"][0])) + absi(goal.y - int(one["pos"][1]))
+	return FLIGHT_LIFT * clampf(float(apart) / float(Player.SUBTILE), 0.0, 1.0)
+
+
+## **A flyer's pose** (task 0249), off the rules: landed, its touchdown for
+## the first `LANDING_TICKS` and its take-off for the last, pecking between;
+## in the air, its wingbeat on the clock. Each loop at its frame's seconds.
+static func flyer_pose(state: Dictionary, one: Dictionary) -> StringName:
+	var kind: StringName = one["kind"]
+	if one.has("peck"):
+		var left := int(one["peck"])
+		var full := int((GameData.ENEMIES[kind] as Dictionary).get("peck_ticks", 1))
+		if left > full - LANDING_TICKS or left <= LANDING_TICKS:
+			return StringName("%s_land_0" % kind)
+		return StringName("%s_peck_%d" % [kind, _beat(state, one, kind, "peck", 3)])
+	return StringName("%s_fly_%d" % [kind, _beat(state, one, kind, "fly", 4)])
+
+
+## Which of `frames` a loop shows now: its frame's seconds on the clock,
+## offset by the body's id so a flock does not beat as one.
+static func _beat(state: Dictionary, one: Dictionary, kind: StringName, loop: String, frames: int) -> int:
+	var seconds := float(PlaceholderArt.frame(ENEMY_DIR + "%s_%s_0.png" % [kind, loop]).get("seconds", 0.1))
+	var each := maxi(roundi(seconds * float(GameData.TICK_HZ)), 1)
+	return (int(state["tick"]) / each + int(one.get("id", 0))) % frames
 
 
 ## **A swarm spread for the eye** (task 0248): bodies of a kind that comes
@@ -1910,7 +1957,11 @@ static func _enemy_frame(pose: StringName, texture: Texture2D) -> Dictionary:
 ## here - the world's actors, `Juice`'s corpse, the forecast's head and the
 ## checks - and 0249-0252 add theirs.
 static func drawn_enemy(path: String) -> Texture2D:
-	return RatArt.texture_at(path)
+	var drawn := RatArt.texture_at(path)
+	# And task 0249's crow, until A048.
+	if drawn == null:
+		drawn = CrowArt.texture_at(path)
+	return drawn
 
 
 ## Which way an enemy faces: a tracked family's motion says; an untracked one
@@ -2025,6 +2076,10 @@ func _refresh_retreats(delta: float) -> void:
 		sprite.flip_h = bool(cue["right"])
 		sprite.modulate = Color(1, 1, 1, EnemyRetreats.alpha(cue))
 		sprite.self_modulate = PlaceholderArt.tint_of(ENEMY_DIR + str(EnemyRetreats.pose(cue)) + ".png")
+		# A flyer leaves in the air (task 0249).
+		var lift := FLIGHT_LIFT if Enemies.flies(StringName(cue["kind"])) else 0.0
+		sprite.position.y -= lift
+		(sprite.get_node("Shadow") as Node2D).position.y = lift - 1.0
 		var metadata := _enemy_frame(EnemyRetreats.pose(cue), sprite.texture)
 		sprite.offset = -Vector2(metadata.get("pivot", Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
 
@@ -3137,6 +3192,9 @@ func _pose_of(one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
 	if EnemyMotion.tracks(kind):
 		return _enemy_motion.pose(one, _state)
+	# **A flyer's poses** (task 0249's crow): in the air, landed, pecking.
+	if Enemies.flies(kind):
+		return flyer_pose(_state, one)
 	# **An untracked kind in the families' pose names** (task 0247's spitter,
 	# its stand-in through 0120's road until 0260): played off the rules.
 	if PlaceholderArt.has_frame(ENEMY_DIR + "%s_walk_0.png" % kind):
@@ -3237,6 +3295,12 @@ const SPIT_ARC := 6.0
 const SPIT_RELEASE_TICKS := 3
 const SPIT_RECOVER_TICKS := 5
 const SPIT_REAR_TICKS := 6
+
+## **How high a crow flies** (task 0249), in pixels over its shadow - A048's
+## review flies it over a wall at this - and how many ticks a touchdown and a
+## take-off show.
+const FLIGHT_LIFT := 10.0
+const LANDING_TICKS := 4
 
 ## **How a swarm is spread for the eye** (task 0248), in pixels by the body's
 ## id: within half a rat of its point, so a cluster on one cell reads as a

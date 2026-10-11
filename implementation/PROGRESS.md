@@ -26136,3 +26136,162 @@ assets/locale/strings.csv, tools/{determinism_data_hash,perf_baseline}.txt,
 implementation/backlog/packs/A047-rats.md,
 implementation/prompts/0248-rat-swarm.md, implementation/{BACKLOG,PROGRESS}.md,
 implementation/shots/0248/, docs/devlog/{index,index.pt_BR}.md
+
+## 0249 - The crow - done 2026-10-11
+
+What changed: autumn's flyer, the first enemy that does not walk. A crow
+flies straight over walls and mines to the nearest planted plot, lands, eats
+the crop and takes off for the next. With nothing planted it flies at the
+house and bites. Defending the farm is now about the harvest too.
+
+### The rules (`src/core/`)
+
+**`ENEMIES.crow`**, with levers:
+- `flies`; hp 8, 14 ticks a tile in the air, 3 to the house, $3;
+- `peck_ticks` 3 s to eat a crop;
+- no bones, not lured.
+
+It sits inside the tank's bounds (0051) and under every boss (0058).
+
+**`check_enemies`:** a flyer declares neither `ignores_structures` nor
+`targets_structures`. It must eat in some time. It is left out of the
+"fastest that stops" comparison, so a fast crow does not fail the runner.
+
+**Flight** (`Enemies._fly`, inside `Enemies.tick`, so `PerfNames` is
+unchanged):
+- **the target** is the nearest plot with a crop (`nearest_crop`:
+  Manhattan, the lower cell index on a tie). It is chosen when the crow
+  takes off and kept in `flying_to` until it lands there or the crop is
+  gone. With nothing growing the target is the house, for good
+  (`HOUSE_BOUND`): nothing grows at night;
+- **the move** is straight, one unit at a time along the dominant axis, as a
+  walker's step, at `ticks_per_tile`. A flare's slow slows it, and a stun
+  holds it in the air. No wall, field, garlic or lure touches it;
+- **landed**, it stands `peck_ticks` (`peck`), then the crop is eaten
+  (`Farming.eat`: 0155's trampling path - the plot tilled, crop and growth
+  gone, the `trampled` mark for the view) and `crop_eaten` is recorded;
+- **house-bound**, it bites the moment it is over the house.
+
+**`Enemies.flies(kind)` and `airborne(state, id)`:** a flyer not standing on
+a plot.
+
+**What reaches the air:**
+- every tower with `reload_ticks` declares `hits_flying`, and
+  `check_defences` refuses one that does not;
+- `Towers._acquire`, `_burn_cone`, `_pierce_line` and a splash landing
+  (`_land_at`, asked of the tower the shot names - no shot carries a new
+  key) pass over a crow in the air unless the defence `hits_flying`;
+- a mine is never set off by one (`Traps.tick`), and its blast does not
+  reach the air;
+- the dog's bite does not reach the air (`dog_target`).
+
+**`Events.KINDS`** gains `crop_eaten`.
+
+### The view (`src/ui/`)
+
+- **A048 drawn in code** by the new `CrowArt`, through 0120's road until
+  0262: the master, four wingbeats, the touchdown, three pecks, a four-frame
+  fall and the forecast head, on 32x24 standing on (16,22). Blue-black, with
+  `moon` along the back.
+- **`WorldView`:**
+  - **`flight_lift`:** 10 px over its point in the air, coming down over
+    the last tile to its crop, nothing landed;
+  - an airborne crow is drawn over everything on the ground, its shadow
+    left on the ground under it;
+  - **`flyer_pose`:** the wingbeat in the air; touchdown and take-off for 4
+    ticks each end of a peck, pecking between;
+  - `drawn_enemy` answers for the crow too.
+- **`EnemyRetreats`:** a flyer flies off at dawn.
+- **The log:** `crop_eaten` is `bad`, "a crow ate the carrot"
+  (`LOG_CROP_EATEN`).
+- **The words:** `Names` has `ENEMY_CROW`, `Describe` `DESC_FLIES` ("flies
+  over walls and mines") and `Sfx` the runner's voice.
+- **A048's table is final**, with how the game plays it.
+
+### Decided: what reaches a crow
+
+| | In the air | Landed |
+|---|---|---|
+| Gun tower | yes - a gun shoots up | yes |
+| Auto crossbow | yes - a bolt flies level and true | yes |
+| Beehive | yes - bees fly | yes |
+| Flamethrower | no - fire along the ground | yes |
+| Mortar | no - a lobbed shell bursts on the ground | yes |
+| Catapult | no - as the mortar | yes |
+| Mine | no - never set off, its blast misses the air | its blast, yes |
+| Flare | yes - a burst in the air, hit and slowed | yes |
+| Farm bell | yes - stunned where it flies | yes |
+| Dog | no - it cannot reach the air | yes |
+
+- **Landed is on the ground**, for everything. A crow eating the field is
+  the one moment the ground weapons have it. That is the answer to a crow
+  for a farm without guns: it has to come down to eat.
+- **The target is kept, not asked again each tick:** "straight flight, no
+  sweep". Nothing grows at night, so only a crop already eaten changes it.
+- **A crop eaten is trampled**, 0155's path. The plot stays tilled and
+  shows a flattened crop until something is sown.
+
+### Found
+
+- **A crow at 10 px over a wall was drawn behind it**, in the middle of the
+  wall's height (the first take). An airborne crow is drawn over the ground
+  layer now, its shadow under it.
+- **A north-south wall line reads as a post** under a crow flying west. The
+  scene flies it north over an east-west run, as A048's review does.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. No crow flies in the determinism night,
+  and every ground weapon asks `airborne` of a walker and gets no.
+- **DATA 3959926207 -> 3398662868:** the crow's row and every tower's
+  `hits_flying`.
+
+Verify: **PASS**, 60 of 60 in 1004 s, the run that recorded the data hash.
+- **Suites:** `headless_check` 17971 asserts, `headless_v1` 2636, `input_check` 1263 cases, `input_v1` 732 (113 s).
+- **perf:** a night tick 1747 us, the swarm's 5587, a path rebuild 11811, 16855 with the decoys and 12018 with the garlic.
+
+**Tests:**
+- **`_task_0249_crow` (headless_v1):**
+  - the row inside the tank's bounds;
+  - `check_enemies` refuses a flyer that walks round walls or eats in no
+    time, and leaves a fast one out of the runner's race;
+  - every tower says `hits_flying`, and `check_defences` refuses one that
+    does not;
+  - **over the wall and the mine:** a crow behind a wall across its line
+    and a mine on it lands on the carrot in its straight line's 238 ticks
+    and eats it 90 later. The wall and the mine are untouched, the plot is
+    still tilled, and the log says "a crow ate the carrot";
+  - with nothing planted it flies at the house and bites;
+  - **every tower asked from as far as it reaches** (four tiles at most): in
+    the air only the three that hit what flies pick it, landed all six do.
+    No flame, shell, mine or dog reaches it in the air; landed, the dog
+    would bite it and a shell hits it;
+  - a flare hits and slows it in the air, and the bell stuns it there;
+  - its name, `DESC_FLIES`, the voice, the log's severity;
+  - the view lifts it over its shadow in the air and sets it down to peck;
+  - the drawing on A048's canvas: grounded frames on row 21, flight frames
+    clear of it, every frame its own, the fall settling at 8 at most, the
+    head on A011's box.
+- **Old groups touched:**
+  - `NO_NIGHT_YET` gains the crow, and headless_check counts 107 scenes;
+  - 0042's test burner says `hits_flying`;
+  - 0090's log check has a `crop_eaten` sample.
+
+**Looked at** (`python tools/shot.py 0249 crow --fhd`):
+- **`crow`, Autumn 2's night:** the starter field sown. A crow is landed on
+  it, pecking among the seedlings: on the field. Another comes in from the
+  south over a five-cell run of wall, drawn over the wall's stones with its
+  shadow on the grass below: in the air, above the wall.
+- **What the takes found:**
+  - **the first**, over a north-south wall line, had the crow behind the
+    wall at half its height;
+  - **the second**, drawn over the ground layer, crossed a line that reads
+    as a post. The scene flies it north over an east-west run now.
+
+Files: src/core/{ability,enemies,events,farming,game_data,towers,traps}.gd,
+src/ui/{crow_art,enemy_retreats,placeholder_art,world_view,log_panel,names,describe,sfx}.gd,
+src/tools/{headless_check,headless_v1,shot}.gd,
+assets/locale/strings.csv, tools/determinism_data_hash.txt,
+implementation/backlog/packs/A048-crow.md,
+implementation/prompts/0249-crow.md, implementation/{BACKLOG,PROGRESS}.md,
+implementation/shots/0249/, docs/devlog/{index,index.pt_BR}.md

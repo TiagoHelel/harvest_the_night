@@ -1499,6 +1499,8 @@ const DEFENCES: Dictionary = {
 		"damage_type": DAMAGE_IMPACT,
 		"range": 5,                     # LEVER: tiles, 3-8
 		"reload_ticks": 1 * SECONDS,    # LEVER: ticks, 15-60
+		# **Whether it reaches the air** (task 0249): a gun shoots up.
+		"hits_flying": true,
 		"projectile_tiles_per_second": 14,
 		"energy_draw": 1,               # LEVER: energy per tick, 0-3
 		"targets": 1,
@@ -1537,6 +1539,8 @@ const DEFENCES: Dictionary = {
 		# Twice a second: a flamethrower is a continuous thing and this is as
 		# close as a fixed tick gets without pretending otherwise.
 		"reload_ticks": SECONDS / 2,    # LEVER: ticks, 5-30
+		# Fire along the ground: a crow over it is out of the cone (task 0249).
+		"hits_flying": false,
 		"ammo": {INCENDIARY: 1},
 		# One thing at a time until a level says otherwise.
 		"targets": 1,
@@ -1569,6 +1573,8 @@ const DEFENCES: Dictionary = {
 		# table was written in fractions and the rules want integers.
 		"splash_falloff_percent": 50,   # LEVER: percent at the edge, 20-80
 		"reload_ticks": 5 * SECONDS,    # LEVER: ticks, 3-8 seconds worth
+		# A lobbed shell bursts on the ground (task 0249).
+		"hits_flying": false,
 		# **Aimed at a place, not at a zombie.** A shell that followed its
 		# target would be a guided missile with a long fuse, and the minimum
 		# range below would be the only interesting thing about the tower.
@@ -1598,6 +1604,8 @@ const DEFENCES: Dictionary = {
 		"damage_type": DAMAGE_IMPACT,
 		"range": 7,                     # LEVER: tiles, 5-10
 		"reload_ticks": 15,             # LEVER: ticks, 8-30
+		# A bolt flies level and true: it takes a bird (task 0249).
+		"hits_flying": true,
 		# Bolts, not powder: the crossbow is the tower you can keep firing
 		# on a night when the workshop stood idle. It pays for that in
 		# energy instead - three, the hungriest thing on the farm.
@@ -1739,6 +1747,8 @@ const DEFENCES: Dictionary = {
 		# A new sting a second, given to one not yet stung while there is one
 		# in reach (`Towers.tick`): the bees spread over a crowd.
 		"reload_ticks": SECONDS,        # LEVER: ticks, 15-60
+		# Bees fly (task 0249).
+		"hits_flying": true,
 		"sting_ticks": 4 * SECONDS,     # LEVER: ticks, 2-8 seconds worth
 		"targets": 1,
 		# **As strong as the field round it**, worked out once a night at
@@ -1775,6 +1785,8 @@ const DEFENCES: Dictionary = {
 		"splash_tiles": 2,              # LEVER: tiles, 1-3
 		"splash_falloff_percent": 60,   # LEVER: percent at the edge, 30-90
 		"reload_ticks": 4 * SECONDS,    # LEVER: ticks, 3-6 seconds worth
+		# A lobbed pumpkin lands on the ground, as a shell does (task 0249).
+		"hits_flying": false,
 		# **Lobbed at a place**, as a mortar's shell is: it lands where it was
 		# aimed, and a zombie can walk out from under it.
 		"aim": AIM_BALLISTIC,
@@ -2530,6 +2542,25 @@ const ENEMIES: Dictionary = {
 		# `check_enemies` refuses less than one.
 		"cluster": 6,                   # LEVER: rats a release, 4-10
 		# Not turned by straw: a swarm pours.
+		"lurable": false,
+	},
+	&"crow": {
+		# **The first that does not walk** (task 0249): autumn's flyer. It
+		# flies straight over walls and mines to the nearest plot with a crop
+		# on it, lands, eats it and takes off for the next one (`Enemies`);
+		# with nothing growing it flies at the house and bites. Only what
+		# `hits_flying` reaches it in the air - landed, it is on the ground
+		# like anything else.
+		"flies": true,
+		"hp": 8,                        # LEVER: hit points, 5-15
+		# In flight: no wall slows it and no field routes it.
+		"ticks_per_tile": 14,           # LEVER: ticks, 10-20 (lower is faster)
+		"damage": 3,                    # LEVER: to the house, 2-6
+		"reward": 3,                    # LEVER: money, 2-5
+		# How long it stands on a plot before the crop is gone.
+		"peck_ticks": 3 * SECONDS,      # LEVER: ticks, 1-6 seconds worth
+		"bones": 0,                     # LEVER: bones, 0-1
+		"armour": 0,
 		"lurable": false,
 	},
 }
@@ -4215,6 +4246,11 @@ static func check_defences(defences: Dictionary) -> Array:
 		# rather than a tower that quietly falls back to the default and looks
 		# like a balance problem.
 		if defence.has("reload_ticks"):
+			# **Every tower chooses whether it reaches the air** (task 0249),
+			# so a later one cannot say nothing and be guessed at.
+			if not defence.has("hits_flying"):
+				errors.append("defence '%s' shoots and never says whether it hits what flies"
+					% defence_id)
 			var aim := StringName(defence.get("targeting",
 				TARGET_CLOSEST_TO_HOUSE))
 			if not TARGETING.has(aim):
@@ -5280,7 +5316,16 @@ static func check_enemies(enemies: Dictionary) -> Array:
 			errors.append(("enemy '%s' does less to a structure than to the "
 				+ "house, which is what the multiplier is for not to do")
 				% id)
-		if not bool(one.get("ignores_structures", false)):
+		# **A flyer is on no road** (task 0249): it neither goes round what
+		# was built nor goes for it, and its speed in the air is no measure of
+		# the fastest thing that stops for a wall - a fast crow counted there
+		# would fail the runner.
+		if bool(one.get("flies", false)):
+			if bool(one.get("ignores_structures", false)) or bool(one.get("targets_structures", false)):
+				errors.append("enemy '%s' flies and says how it walks round or at what was built" % id)
+			if int(one.get("peck_ticks", 0)) <= 0:
+				errors.append("enemy '%s' flies and eats a crop in no time" % id)
+		elif not bool(one.get("ignores_structures", false)):
 			fastest = mini(fastest, int(one.get("ticks_per_tile", 1 << 30)))
 		# **A boss is never turned by straw** (task 0224): the season's
 		# last night is not won with a decoy.

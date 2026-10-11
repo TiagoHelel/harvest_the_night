@@ -58,6 +58,18 @@ extends RefCounted
 ## from the towers' `projectiles`, which `Combat.incoming` reads, and moved
 ## here at the top of the tick, as a tower's shots are at the top of its.
 ##
+## ## In the air
+##
+## A **crow** (task 0249) `flies`: no wall, mine or field touches it. It flies
+## straight - one unit at a time along the dominant axis, as a walker's step
+## does - to the nearest plot with a crop on it (Manhattan, the lower cell
+## index on a tie), chosen when it takes off and kept until it lands there or
+## the crop is gone. Landed, it stands `peck_ticks`, eats the crop
+## (`Farming.eat`) and takes off for the next. With nothing growing it flies
+## at the house and bites. In the air only a tower that `hits_flying` reaches
+## it, and a mine never sees it; landed, it is on the ground like anything
+## else.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -318,6 +330,12 @@ static func _walk(state: Dictionary, id: int, pull: Dictionary) -> void:
 			one["slow"] = slowed - 1
 		return
 
+	# **A flyer flies** (task 0249), over everything below it - a stun holds it
+	# in the air as it holds a walker on the ground.
+	if bool(data.get("flies", false)):
+		_fly(state, id, data)
+		return
+
 	# **Standing on it counts.** The flow field says distance zero at the house
 	# and "stay where you are" everywhere distance cannot improve, so a zombie
 	# that ended up on the house would have stood on the porch for ever. Found
@@ -544,6 +562,113 @@ static func _advance_spit(state: Dictionary) -> void:
 		still.append(shot)
 	flying.clear()
 	flying.append_array(still)
+
+
+## Whether a kind flies (task 0249).
+static func flies(kind: StringName) -> bool:
+	return bool((GameData.ENEMIES.get(kind, {}) as Dictionary).get("flies", false))
+
+
+## **Whether this one is in the air now** (task 0249): a flyer not standing on
+## a plot to eat it. What only a tower that `hits_flying` reaches; a mine, and
+## the power that bites from the porch, never see it.
+static func airborne(state: Dictionary, id: int) -> bool:
+	var one := Entities.get_one(state, id)
+	return not one.is_empty() and flies(StringName(one["kind"])) and not one.has("peck")
+
+
+## **The nearest plot with a crop on it** (task 0249): Manhattan from `from`,
+## the lower cell index on a tie. `(-1, -1)` when nothing grows.
+static func nearest_crop(state: Dictionary, from: Vector2i) -> Vector2i:
+	var plots: Dictionary = state["plots"]
+	var keys: Array = plots.keys()
+	keys.sort()
+	var best := Vector2i(-1, -1)
+	var nearest := 1 << 30
+	for idx in keys:
+		if StringName((plots[idx] as Dictionary).get("crop", &"")) == &"":
+			continue
+		var cell := Grid.cell(int(idx))
+		var apart := Grid.manhattan(from, cell)
+		if apart < nearest:
+			nearest = apart
+			best = cell
+	return best
+
+
+## **Where a flyer is flying** (task 0249): the crop it took off for while
+## there is still a crop there, else the nearest now - kept in `flying_to` -
+## else the house (`HOUSE_BOUND`), for good: nothing grows at night.
+static func _flight_target(state: Dictionary, one: Dictionary) -> Vector2i:
+	var kept := int(one.get("flying_to", -1))
+	if kept == HOUSE_BOUND:
+		return Farm.house_centre(state)
+	if kept >= 0 and Farming.crop_on(state, Grid.cell(kept)) != &"":
+		return Grid.cell(kept)
+	var here := Vector2i(int(one["pos"][0]) / Player.SUBTILE, int(one["pos"][1]) / Player.SUBTILE)
+	var crop := nearest_crop(state, here)
+	if crop.x < 0:
+		one["flying_to"] = HOUSE_BOUND
+		return Farm.house_centre(state)
+	one["flying_to"] = Grid.index(crop)
+	return crop
+
+
+## What `flying_to` says of a flyer with nothing left to eat: the house.
+const HOUSE_BOUND := -2
+
+
+## **A flyer's turn** (task 0249). Landed, it pecks: the wait runs down and
+## at its end the crop goes and it takes off. In the air it flies straight at
+## its target at `ticks_per_tile` - a flare's slow slowing it as it slows a
+## walker - landing on a crop's plot and biting the house the moment it is
+## over it.
+static func _fly(state: Dictionary, id: int, data: Dictionary) -> void:
+	var one := Entities.get_one(state, id)
+	if one.has("peck"):
+		var left := int(one["peck"]) - 1
+		if left > 0:
+			one["peck"] = left
+			return
+		one.erase("peck")
+		one.erase("flying_to")
+		var here := Entities.cell_of(state, id)
+		var crop := Farming.eat(state, here)
+		if crop != &"":
+			Events.add(state, &"crop_eaten", {"crop": crop, "cell": [here.x, here.y]})
+		return
+
+	var target := _flight_target(state, one)
+	var base := maxi(int(data["ticks_per_tile"]), 1)
+	var per_tile := base
+	var slow := int(one.get("slow", 0))
+	if slow > 0:
+		one["slow"] = slow - 1
+		per_tile = Ability.slowed_ticks(base)
+	var progress := int(one["step"]) + Player.SUBTILE
+	var move := progress / per_tile
+	one["step"] = progress - move * per_tile
+
+	var at := Vector2i(int(one["pos"][0]), int(one["pos"][1]))
+	var goal := target * Player.SUBTILE + Vector2i(Player.SUBTILE / 2, Player.SUBTILE / 2)
+	for _i in move:
+		var delta := goal - at
+		if delta == Vector2i.ZERO:
+			break
+		if absi(delta.x) >= absi(delta.y):
+			at.x += signi(delta.x)
+		else:
+			at.y += signi(delta.y)
+	one["pos"][0] = at.x
+	one["pos"][1] = at.y
+
+	if int(one.get("flying_to", -1)) == HOUSE_BOUND:
+		var over := Vector2i(at.x / Player.SUBTILE, at.y / Player.SUBTILE)
+		if Farm.occupant(state, over).get("id", &"") == &"house":
+			_bite(state, id, data)
+		return
+	if at == goal:
+		one["peck"] = maxi(int(data["peck_ticks"]), 1)
 
 
 ## Whether a telegraphing enemy has finished winding up at the house. True at

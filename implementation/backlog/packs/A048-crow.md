@@ -19,7 +19,15 @@ At 1x it must read as "in the air" in flight and as "on the field" when landed, 
 
 ## Deliverables
 
-The table is provisional: game task 0249 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0249. The rows stand as written: 32x24 standing on (16,22), the frames and seconds of the table. **How the game plays them:**
+- **In flight:** drawn 10 px over its point (`WorldView.FLIGHT_LIFT`), over everything on the ground - a wall it crosses included - with `sprites/actors/shadow.png` left at the pivot on the ground. It comes down over the last tile to the crop it lands on.
+- **Speed and facing:** it flies straight at 14 ticks a tile, about two tiles a second, on the four `fly` frames at 0.1 s each, facing the way it last moved.
+- **On the field:** it shows `land_0` for the first 4 ticks and the last 4 of its three-second peck, and `peck_0..2` between, 0.12 s each.
+- **The house:** with nothing growing it flies at the house and bites it from the air. The bite pose waits for 0262, like the four-frame fall.
+- **Death:** until 0262 the corpse is `crow_death_3` squashed and faded.
+- **Night colours:** the relight takes the black feathers to a dark navy, and what reads is the cool `moon` edge along the back. Keep it.
+
+Until 0262 every frame and the forecast head are drawn in code (`CrowArt`) through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

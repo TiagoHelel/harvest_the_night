@@ -101,6 +101,8 @@ const ENEMY_SOUNDS := {
 	&"spitter": &"sfx/groan_walker",
 	# The runner's, a quick small voice, until 0284 gives the rat its own.
 	&"rat": &"sfx/groan_runner",
+	# The runner's too, until 0284 gives the crow its own.
+	&"crow": &"sfx/groan_runner",
 }
 
 ## **What a boss with no voice of its own roars with** (task 0246): the

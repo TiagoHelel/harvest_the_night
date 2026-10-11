@@ -147,6 +147,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
+	["crow", "crows on the field: Autumn 2's night, the starter field sown, a crow landed on it and pecking a crop, and another flying in from the south over a run of wall towards the next one - lifted over its shadow, which lies on the ground under the wall", ""],
 	["rats", "rats in clusters: Summer 2's night, three clusters of six come over open ground south-east of the house towards it - each a crowd of small grey bodies, ears and tails, not a smear", ""],
 	["spitter", "a spitter working on a tower line: Summer 2's night, three towers in a row across open ground south-east of the house - a flamethrower each end, a gun tower between - and three spitters come up from the south, standing off at four tiles and spitting: a glob just landed on the line, another in the air", ""],
 	["boss", "a boss winding up: Spring 14's night, the Giant come up to a line of wall east of the house and winding up its blow on it, the ring on its target - its bar and name up top and its intro across the screen under them, clear of the time to dawn and of the hotbar", ""],
@@ -796,6 +797,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"boss": _set_boss(state)
 		"spitter": _set_spitter(state)
 		"rats": _set_rats(state)
+		"crow": _set_crow(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1154,6 +1156,21 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				str(Entities.cell_of(state, _boss_giant)), Enemies.is_winding(state, _boss_giant),
 				str(Enemies.winding_at(state, _boss_giant)),
 				int(state["house_hp"]), (main.find_child("NightHud", true, false) as NightHud).banner_text()])
+		"crow":
+			# Until the one coming in is over the wall, the other still
+			# pecking (task 0249), a tick at a time.
+			var over := false
+			for _i in 240:
+				over = Enemies.airborne(state, _crow_flying) \
+					and StringName(Farm.occupant(state, Entities.cell_of(state, _crow_flying)).get("id", &"")) == &"wall"
+				if over:
+					break
+				Sim.advance(state, 1)
+			var crow_view := main.get_node("%WorldView") as WorldView
+			crow_view.cursor().place_at(_open_ground_near(state, _crow_wall + Vector2i(7, 1)))
+			print("  crow: in the air over the wall %s at %s, the other pecking %s, %d crops eaten" % [over,
+				str(Entities.cell_of(state, _crow_flying)), Entities.get_one(state, _crow_pecking).has("peck"),
+				_eaten(state)])
 		"rats":
 			# The cursor's words up and to the left of the clusters (task
 			# 0248), clear of them.
@@ -3146,6 +3163,54 @@ func _set_rats(state: Dictionary) -> void:
 
 ## Where `_set_rats` sent them from.
 var _rats_at := Vector2i.ZERO
+
+
+## **Crows on the field** (task 0249): Autumn 2's night, the starter field
+## sown, a run of wall east to west a few cells below its bottom row, one crow
+## put down on the field - it lands at once - and one far below the wall,
+## which flies north at the nearest crop and so over the wall by the shutter
+## (`_just_before_the_shutter`), as A048's review flies it.
+func _set_crow(state: Dictionary) -> void:
+	_on_date(state, 2 * GameData.SEASON_DAYS + 2)
+	_a_sown_field(state)
+	var sown: Array = []
+	for cell in Farming.field_cells(state):
+		if Farming.crop_on(state, cell as Vector2i) != &"":
+			sown.append(cell)
+	# The bottom row's east end: what the one coming in flies at.
+	var low: Vector2i = sown[0]
+	for cell in sown:
+		var at: Vector2i = cell
+		if at.y > low.y or (at.y == low.y and at.x > low.x):
+			low = at
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	_crow_wall = low + Vector2i(0, 3)
+	var wall := {"id": &"wall", "hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])}
+	for dx in range(-2, 3):
+		if Farm.buildable(state, _crow_wall + Vector2i(dx, 0)):
+			Farm.place(state, _crow_wall + Vector2i(dx, 0), wall.duplicate())
+	Pathing.refresh(state)
+	_crow_pecking = Entities.spawn(state, &"crow", low + Vector2i(-3, -1))
+	_crow_flying = Entities.spawn(state, &"crow", low + Vector2i(0, 9))
+	print("  crow: %d crops sown, the bottom row's east end %s, the wall at %s" % [sown.size(), str(low), str(_crow_wall)])
+	_look_at(low + Vector2i(-1, 2))
+
+
+## The crows `_set_crow` put down, and its wall's middle.
+var _crow_pecking := 0
+var _crow_flying := 0
+var _crow_wall := Vector2i.ZERO
+
+
+## How many crops the crows have eaten tonight.
+func _eaten(state: Dictionary) -> int:
+	var count := 0
+	for event in (state["events"] as Array):
+		if StringName((event as Dictionary)["kind"]) == &"crop_eaten":
+			count += 1
+	return count
 
 
 ## The towers `_set_spitter` put down, west to east.

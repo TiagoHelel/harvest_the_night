@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 82
+const GROUPS := 83
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -161,6 +161,7 @@ func _run() -> void:
 	_task_0246_bosses()
 	_task_0247_spitter()
 	_task_0248_rats()
+	_task_0249_crow()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -9845,6 +9846,231 @@ func _task_0248_rats() -> void:
 		"the rat is drawn on A047's canvas: feet on row 13, a pixel clear, every frame its own, 7-9 tall and 20 long standing, the lunge 3 further, dying lower to 6, its head on A011's box",
 		"%s %s head %s" % [str(wrong), str(heights), str(head_used)])
 	_completed += 1
+
+
+## 0249 - the crow. Spawned behind a wall line it flies over the wall and a
+## mine - neither touched - to a planted plot in the straight-line tick
+## count, eats it `peck_ticks` after landing and says so in the log; with
+## nothing planted it flies at the house and bites. In the air only the
+## towers that `hits_flying` acquire it, and no ground weapon, mine or dog
+## reaches it; landed, everything does. The flare and the bell reach it in
+## the air.
+func _task_0249_crow() -> void:
+	var row: Dictionary = GameData.ENEMIES[&"crow"]
+	var tank: Dictionary = GameData.ENEMIES[&"tank"]
+	var per_tile := int(row["ticks_per_tile"])
+	var peck := int(row["peck_ticks"])
+	expect(bool(row["flies"]) and not row.has("ignores_structures") and not row.has("targets_structures")
+		and peck > 0 and int(row["hp"]) < int(tank["hp"]) and int(row.get("armour", 0)) < int(tank["armour"])
+		and per_tile < int(tank["ticks_per_tile"]) and not Combat.is_boss(&"crow"),
+		"a crow flies, says nothing of walls, eats in peck_ticks, and sits inside the tank's bounds", str(row))
+	var walks := GameData.ENEMIES.duplicate(true)
+	(walks[&"crow"] as Dictionary)["ignores_structures"] = true
+	var quick := GameData.ENEMIES.duplicate(true)
+	(quick[&"crow"] as Dictionary)["ticks_per_tile"] = 2
+	var greedy := GameData.ENEMIES.duplicate(true)
+	(greedy[&"crow"] as Dictionary)["peck_ticks"] = 0
+	var untold := GameData.DEFENCES.duplicate(true)
+	(untold[&"gun_tower"] as Dictionary).erase("hits_flying")
+	var undecided: Array = []
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var entry: Dictionary = GameData.DEFENCES[id]
+		if entry.has("reload_ticks") and not entry.has("hits_flying"):
+			undecided.append(id)
+	expect(GameData.check_enemies(GameData.ENEMIES).is_empty() and _says(GameData.check_enemies(walks), "flies and says how it walks")
+		and GameData.check_enemies(quick).is_empty() and _says(GameData.check_enemies(greedy), "eats a crop in no time")
+		and undecided.is_empty() and _says(GameData.check_defences(untold), "never says whether it hits what flies"),
+		"check_enemies refuses a flyer that walks round walls or eats in no time and leaves a fast one out of the runner's race; every tower says whether it hits what flies, and check_defences refuses one that does not",
+		str(undecided))
+
+	# **Over the wall and the mine, straight to the crop**: in the tick count
+	# of its straight line, eaten `peck_ticks` after it lands, and the wall
+	# and the mine untouched.
+	var state := _powers_night(24900)
+	var crop: Vector2i = Farming.field_cells(state)[0]
+	_sow(state, crop, &"carrot")
+	var start := crop + Vector2i(14, 3)
+	var crow := Entities.spawn(state, &"crow", start)
+	var from := Vector2i(int(Entities.get_one(state, crow)["pos"][0]), int(Entities.get_one(state, crow)["pos"][1]))
+	var goal := crop * Player.SUBTILE + Vector2i(Player.SUBTILE / 2, Player.SUBTILE / 2)
+	# Its line, cell by cell, as it will fly it: a wall across it two cells
+	# out and a mine on it past the wall, on the first ground each can go on.
+	var line: Array = []
+	var step := from
+	while step != goal:
+		var delta := goal - step
+		if absi(delta.x) >= absi(delta.y):
+			step.x += signi(delta.x)
+		else:
+			step.y += signi(delta.y)
+		var over := Vector2i(step.x / Player.SUBTILE, step.y / Player.SUBTILE)
+		if line.is_empty() or line.back() != over:
+			line.append(over)
+	var walls: Array = []
+	var mine := Vector2i(-1, -1)
+	for i in range(2, line.size() - 2):
+		var cell: Vector2i = line[i]
+		if walls.is_empty() and Farm.buildable(state, cell):
+			for dy in [-1, 0, 1]:
+				var at_wall := cell + Vector2i(0, int(dy))
+				if Farm.buildable(state, at_wall):
+					Farm.place(state, at_wall, {"id": &"wall", "hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])})
+					walls.append(at_wall)
+		elif not walls.is_empty() and mine.x < 0 and i > line.find(walls[0]) + 1 and Farm.buildable(state, cell):
+			mine = cell
+			Farm.place(state, mine, {"id": &"mine", "hp": 1})
+	Pathing.refresh(state)
+	var straight := (absi(goal.x - from.x) + absi(goal.y - from.y)) * per_tile
+	straight = (straight + Player.SUBTILE - 1) / Player.SUBTILE
+	var landed := -1
+	var eaten := -1
+	var aloft_over_wall := false
+	for t in 2000:
+		Sim.advance(state, 1)
+		var one := Entities.get_one(state, crow)
+		aloft_over_wall = aloft_over_wall or (walls.has(Entities.cell_of(state, crow)) and Enemies.airborne(state, crow))
+		if landed < 0 and one.has("peck"):
+			landed = t + 1
+		if Farming.crop_on(state, crop) == &"":
+			eaten = t + 1
+			break
+	var said := ""
+	for event in Events.since(state, 0):
+		if StringName((event as Dictionary)["kind"]) == &"crop_eaten":
+			said = LogPanel.line_for(event)
+	var standing := true
+	for cell in walls:
+		standing = standing and int(Farm.occupant(state, cell as Vector2i).get("hp", 0)) == int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
+	expect(walls.size() >= 2 and mine.x >= 0 and aloft_over_wall and landed == straight and eaten == landed + peck
+		and StringName(Farm.occupant(state, mine).get("id", &"")) == &"mine" and int(state.get("traps_sprung", 0)) == 0 and standing
+		and Farming.is_tilled(state, crop) and said == I18n.f(&"LOG_CROP_EATEN", [Names.of(&"carrot")]),
+		"a crow flies over a wall line and a mine, neither touched, lands on the crop in the straight line's %d ticks and eats it %d later - the plot still tilled, and the log says so" % [straight, peck],
+		"landed %d, eaten %d, over the wall %s, '%s'" % [landed, eaten, aloft_over_wall, said])
+
+	# **With nothing planted it flies at the house and bites** - an empty
+	# field never holds a night open.
+	var bare := _powers_night(24901)
+	var full := int(bare["house_hp"])
+	var hungry := Entities.spawn(bare, &"crow", Farm.house_centre(bare) + Vector2i(12, 4))
+	var gone := -1
+	for t in 2000:
+		Sim.advance(bare, 1)
+		if not Entities.alive(bare, hungry):
+			gone = t + 1
+			break
+	expect(gone > 0 and int(bare["house_hp"]) == full - int(row["damage"]),
+		"with nothing planted it flies at the house and bites, %d ticks out" % gone, "%d of %d" % [int(bare["house_hp"]), full])
+
+	# **What reaches it in the air, and what reaches it landed.** Every tower
+	# asked from four tiles off: in the air, only the ones that hit what
+	# flies; landed, all of them.
+	var sky := _powers_night(24902)
+	var field: Vector2i = Farming.field_cells(sky)[2]
+	_sow(sky, field, &"carrot")
+	var bird := Entities.spawn(sky, &"crow", field)
+	var picked: Array = []
+	var wrong: Array = []
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var entry: Dictionary = Building.entry_of(id)
+		if not entry.has("reload_ticks"):
+			continue
+		# From as far as it reaches, four tiles at most and never inside its
+		# floor: the hive's two, the flamethrower's three.
+		var post := field + Vector2i(clampi(int(entry.get("range", 0)), maxi(int(entry.get("min_range", 0)), 1), 4), 0)
+		var up := bool(entry["hits_flying"])
+		var aloft := Towers.acquire_for(sky, post, entry) == bird
+		(Entities.get_one(sky, bird))["peck"] = peck
+		var down := Towers.acquire_for(sky, post, entry) == bird
+		(Entities.get_one(sky, bird)).erase("peck")
+		picked.append("%s %s/%s" % [id, aloft, down])
+		if aloft != up or not down:
+			wrong.append(id)
+	expect(Enemies.airborne(sky, bird) and wrong.is_empty() and picked.size() == 6,
+		"in the air only the towers that hit what flies pick it, and landed every tower does", "%s; wrong %s" % [str(picked), str(wrong)])
+	var was := int(Entities.get_one(sky, bird)["hp"])
+	Towers.burn_cone_for_test(sky, field + Vector2i(2, 0), Building.entry_of(&"flame_tower"), bird, true)
+	Towers.land_at_for_test(sky, Building.entry_of(&"mortar"), field)
+	Farm.place(sky, field + Vector2i(1, 1), {"id": &"mine", "hp": 1})
+	Traps.detonate_for_test(sky, field + Vector2i(1, 1))
+	var dog := Ability.dog_target(sky, field)
+	var unhurt := int(Entities.get_one(sky, bird)["hp"]) == was and dog == 0
+	(Entities.get_one(sky, bird))["peck"] = peck
+	var on_the_ground := Ability.dog_target(sky, field) == bird
+	Towers.land_at_for_test(sky, Building.entry_of(&"mortar"), field)
+	var shelled := not Entities.alive(sky, bird) or int(Entities.get_one(sky, bird)["hp"]) < was
+	expect(unhurt and on_the_ground and shelled,
+		"in the air no flame, shell, mine or dog reaches it; landed, the dog would bite it and a shell hits it")
+
+	# **The flare and the bell reach the air**: a flare hits and slows it, the
+	# bell stuns it where it flies.
+	var flared := _powers_night(24903)
+	(flared["tech_owned"] as Array).append_array([&"a farm bell"])
+	var flyer := Entities.spawn(flared, &"crow", Farm.house_centre(flared) + Vector2i(10, 6))
+	# Kept alive through the flare's blast to be looked at: it kills a crow.
+	Entities.set_hp(flared, flyer, 999)
+	var at := Entities.cell_of(flared, flyer)
+	var lit := Ability.use(flared, Ability.FLARE, at)
+	var rung := Ability.use(flared, Ability.FARM_BELL, at)
+	expect(lit and rung and Enemies.airborne(flared, flyer) and int(Entities.get_one(flared, flyer)["hp"]) < 999
+		and Ability.is_slowed(flared, flyer) and Enemies.is_stunned(flared, flyer),
+		"a flare hits and slows a crow in the air, and the bell stuns it there")
+
+	# **The words and the voice.**
+	expect(Names.of(&"crow") == I18n.t(&"ENEMY_CROW") and Describe.enemy(&"crow").contains(I18n.t(&"DESC_FLIES"))
+		and Sfx.ENEMY_SOUNDS.get(&"crow", &"") == &"sfx/groan_runner" and LogPanel.SEVERITY.has(&"crop_eaten"),
+		"it has its name, a tooltip line that it flies, the runner's voice until its own, and a log line")
+
+	# **The view lifts it in the air and sets it down to eat**: `FLIGHT_LIFT`
+	# over its shadow flying, nothing landed; the wingbeat aloft, touchdown and
+	# peck on the field.
+	var sight := {"id": 1, "kind": &"crow", "pos": [0, 0], "flying_to": -1}
+	var aloft_lift := WorldView.flight_lift(state, sight)
+	var aloft_pose := WorldView.flyer_pose(state, sight)
+	sight["peck"] = peck
+	var touch := WorldView.flyer_pose(state, sight)
+	sight["peck"] = peck / 2
+	var pecking := WorldView.flyer_pose(state, sight)
+	expect(is_equal_approx(aloft_lift, WorldView.FLIGHT_LIFT) and is_equal_approx(WorldView.flight_lift(state, sight), 0.0)
+		and String(aloft_pose).begins_with("crow_fly_") and touch == &"crow_land_0" and String(pecking).begins_with("crow_peck_"),
+		"the view lifts a crow over its shadow in the air and sets it down to peck", "%s %s %s" % [aloft_pose, touch, pecking])
+
+	# **Drawn in code until A048**: every frame 32x24 with a pixel clear all
+	# round, none the same as another; the grounded ones on row 21, the
+	# flight ones clear of the pivot row; the fall never growing and ending
+	# on the ground at 8 tall at most; the head on A011's box.
+	var grounded := [&"crow", &"crow_land_0", &"crow_peck_0", &"crow_peck_1", &"crow_peck_2", &"crow_death_3"]
+	var aloft := [&"crow_fly_0", &"crow_fly_1", &"crow_fly_2", &"crow_fly_3", &"crow_death_0", &"crow_death_1", &"crow_death_2"]
+	var shapes := {}
+	var off: Array = []
+	var tall := {}
+	for name in grounded + aloft:
+		var texture := WorldView.drawn_enemy(WorldView.ENEMY_DIR + str(name) + ".png")
+		var image := texture.get_image() if texture != null else null
+		if image == null:
+			off.append(name)
+			continue
+		var used := image.get_used_rect()
+		shapes[image.get_data()] = true
+		tall[name] = used.size.y
+		var bottom_ok := used.end.y == 22 if grounded.has(name) else used.end.y <= 22
+		if image.get_size() != Vector2i(32, 24) or not bottom_ok or used.position.x < 1 or used.position.y < 1 or used.end.x > 31:
+			off.append("%s %s" % [name, used])
+	var head := WorldView.drawn_enemy("res://sprites/ui/head_crow.png")
+	var head_used := head.get_image().get_used_rect() if head != null else Rect2i()
+	expect(off.is_empty() and shapes.size() == grounded.size() + aloft.size()
+		and int(tall[&"crow_death_1"]) <= int(tall[&"crow_death_0"]) and int(tall[&"crow_death_2"]) <= int(tall[&"crow_death_1"])
+		and int(tall[&"crow_death_3"]) <= mini(int(tall[&"crow_death_2"]), 8)
+		and head != null and head_used.end.y == 15 and head_used.size.x <= 13 and head_used.size.y >= 12 and head_used.size.y <= 13,
+		"the crow is drawn on A048's canvas: grounded on row 21, flying clear of it, every frame its own, the fall settling at 8 at most, the head on A011's box",
+		"%s %s head %s" % [str(off), str(tall), str(head_used)])
+	_completed += 1
+
+
+## A crop on `cell` (task 0249): tilled, sown with `crop`, nothing grown yet.
+func _sow(state: Dictionary, cell: Vector2i, crop: StringName) -> void:
+	var plot := Farming.EMPTY_PLOT.duplicate()
+	plot["crop"] = crop
+	(state["plots"] as Dictionary)[Grid.index(cell)] = plot
 
 
 ## **Three clusters of rats down one lane past `id`** (task 0248): a parked

@@ -470,6 +470,18 @@ static func trample(state: Dictionary, cells: Array) -> int:
 	return lost
 
 
+## **A crow ate it** (task 0249): the crop on this cell gone as the horde's
+## trampling takes one (`trample`) - the plot tilled, its crop and growth
+## gone, its `trampled` mark for the view. The crop eaten, or `&""` for a cell
+## with none.
+static func eat(state: Dictionary, cell: Vector2i) -> StringName:
+	var crop := crop_on(state, cell)
+	if crop == &"":
+		return crop
+	trample(state, [cell])
+	return crop
+
+
 ## One unit per eligible plot, including a partial stroke from a short can.
 static func _water(state: Dictionary, cell: Vector2i) -> void:
 	for at in action_cells(state, cell, &"water"):

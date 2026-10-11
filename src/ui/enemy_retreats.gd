@@ -104,6 +104,9 @@ static func position(cue: Dictionary) -> Array:
 ## quarter tile.
 static func pose(cue: Dictionary) -> StringName:
 	var frame := int(travelled(cue) / float(Player.SUBTILE / 4)) % 4
+	# A flyer flies off (task 0249).
+	if Enemies.flies(StringName(cue["kind"])):
+		return StringName("%s_fly_%d" % [cue["kind"], frame])
 	return StringName("%s_walk_%d" % [cue["kind"], frame])
 
 
