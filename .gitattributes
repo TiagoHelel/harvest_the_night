@@ -8,3 +8,6 @@
 # Submitted prompts are hashed as bytes; retain their exact saved newlines.
 implementation/sprites/generation/0014-*.prompt.txt -text whitespace=cr-at-eol
 implementation/fhd-player/directional/prompts/*.prompt.txt -text whitespace=cr-at-eol
+# Codex deliveries too (task 0147 on): the art manifest hashes their contracts,
+# approvals, call records and prompts as delivered, CRLF and all.
+implementation/backlog/deliveries/** -text whitespace=cr-at-eol

@@ -16,8 +16,8 @@ extends Node
 ## - **Snow on the roofs** in winter, by a code mask: the top rows of the
 ##   house's, the stations' and the stall's opaque pixels draw in `bone` and
 ##   `moon` (`roof_material`). And over every stump, rock, seam and ore node a
-##   snow cap - A013's, or until 0164 its stand-in: the host itself through
-##   the same mask, the snow alone (`cap_material`).
+##   snow cap - A013's since task 0164; a registered stand-in would be the
+##   host itself through the same mask, the snow alone (`cap_material`).
 ## - **Snowfall** is `Particles`', which asks `season_on_screen` too.
 ##
 ## ## The hooks the art packs fill in
@@ -27,7 +27,11 @@ extends Node
 ## stand-in - and `name` otherwise; `carries_season` says whether that frame
 ## is the real thing, which the remap then leaves alone. A seasonal terrain
 ## atlas, when one exists, goes onto the terrain's tile set (`WorldView`).
-## So 0163 and 0164 only add frames and delete their registry lines.
+## So 0163 and 0164 only added frames and deleted their registry lines:
+## A012's winter tiles, and `gen_sprites`' winter atlas built from them, are
+## what winter's ground is drawn with (0163), and A013's spring, autumn and
+## winter trees and its caps what the trees and the nodes wear (0164) - all
+## unremapped. Summer keeps today's trees, through the remap.
 ##
 ## ## When it changes
 ##
@@ -233,10 +237,18 @@ static func file_of(art: String) -> String:
 	return "res://sprites/%s.png" % art
 
 
+## A node drawn in another node's shape wears that node's cap. A021's coal
+## seams are seams (task 0204): A013's generic cap, fitted to the ore and the
+## rock, floats above them, and the seam's own sits on them as it does on a
+## seam.
+const CAP_LIKE := {&"coal_seam": &"seam", &"coal_seam_b": &"seam"}
+
+
 ## The snow cap for a node drawn as `art` (`"rock_b"`), a path like
-## `frame_for`'s: its own (A013's `props/<art>_snow`), or the generic one.
+## `frame_for`'s: its own (A013's `props/<art>_snow`), its shape's
+## (`CAP_LIKE`), or the generic one.
 static func cap_for(art: StringName, two_by_two: bool) -> String:
-	var own := "props/%s_snow" % art
+	var own := "props/%s_snow" % CAP_LIKE.get(art, art)
 	if PlaceholderArt.has_frame(file_of(own)) or ResourceLoader.exists(file_of(own)):
 		return own
 	return "props/snow_cap_2x2" if two_by_two else "props/snow_cap"

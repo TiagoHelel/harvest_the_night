@@ -1,0 +1,1 @@
+32px silhouette differed from common pike by23pixels, below the24pixel minimum.

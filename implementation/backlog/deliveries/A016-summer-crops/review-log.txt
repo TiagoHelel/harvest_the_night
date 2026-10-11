@@ -1,0 +1,8 @@
+2026-10-10 | Ownerbatchinstruction: "gere todos e no final faca um arquivo html pra eu revisar". Review/approval gates deferred to finalbatchreview under ownerinstruction. A015 master used as accepted-for-review candidate, not ownerapproved; no approval inferred. Task0168 confirmed done. Planned28 nativeframes.
+Melon r1 rejected: ripe height7. Targeted ImageGen r2 accepted for owner review;28nativeframes, numericchecks pass. No owner approval inferred.
+
+2026-10-10 Final batch disposition: review. All candidate checks pass; owner review deferred to unified batch page. No approval inferred. All false checks concern rejected diagnostic candidates or missing production export. Owner words authorising batch/final review: "gere todos e no final faca um arquivo html pra eu revisar". No approval, integration, commit or push.
+
+2026-10-10 / Explicit batch approval
+Owner words, verbatim: "esses estao aprovados, tem mais pra gerar?"
+All 28 complete production exports approved for integration. Original raster hashes preserved; APPROVAL.json and Claude handoff recorded. Runtime not integrated.

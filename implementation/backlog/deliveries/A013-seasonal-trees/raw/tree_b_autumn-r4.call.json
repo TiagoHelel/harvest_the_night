@@ -1,0 +1,30 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 exact1024x1536tree_bedit targetgeometry. Image2 approvedAUTUMNCOLOUR referenceONLY. Apply image2 subduedochre/gold/brown leafshading toimage1 crown, allhighlightplanes mutedochreRGB21418696, middlesRGB19615070, shadowsRGB16811644, rustRGB1384742/1766658. Replace bright yelloworangehighlights with these mutedochres. ALLleafcolourredchannel<=215, bluechannel>=70 forochre/goldplanes; no orangeRGB24216060, no palehotyellow246217122. Nogreen leaves. Preserve originaltree_bsilhouette,trunk,roots,size,position,exact1024x1536canvas andtransparentmargins, neutralupperleftlight. No glow, ground, shadow, scene,text,crop,recenter orscale.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_autumn-r3.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r4.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_autumn-r3.png",
+      "sha256": "5ea6b218171d532c09e16facd0d2df12bca9a44fd5f1b673f80b8541cf28eeda",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_b_autumn-r3-5ea6b21817.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r4.png",
+      "sha256": "ad4d1d8fb2152c74c2b0f994b39ff97fb187293688affa38251f854af1b40139",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-54bca125-62a0-4f58-bdd3-d11eb43aaa71.png",
+  "copied_raw_path": "raw/tree_b_autumn-r4.png",
+  "raw_sha256": "4726e00cb0b3efdc8020d85ade80b342c0f7647c16b6d4fba396e4319c89462c",
+  "date": "2026-10-07",
+  "revision": 4,
+  "decision": "inspection pending"
+}

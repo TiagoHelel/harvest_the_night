@@ -1,0 +1,276 @@
+{
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 27,
+  "frames_found": 27,
+  "grounded_on_pivot": true,
+  "icon_bounds_ok": true,
+  "icon_colours_at_least2": true,
+  "icon_density": true,
+  "icons_unique": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/garlic/none/01.png": {
+      "bounds": [
+        7,
+        12,
+        10,
+        14
+      ],
+      "opaque_pixels": 5
+    },
+    "native/garlic/none/02.png": {
+      "bounds": [
+        6,
+        9,
+        10,
+        14
+      ],
+      "opaque_pixels": 11
+    },
+    "native/garlic/none/03.png": {
+      "bounds": [
+        3,
+        6,
+        13,
+        14
+      ],
+      "opaque_pixels": 26
+    },
+    "native/garlic/none/04.png": {
+      "bounds": [
+        3,
+        3,
+        14,
+        14
+      ],
+      "opaque_pixels": 54
+    },
+    "native/hud_carrot_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 56
+    },
+    "native/hud_garlic/none/01.png": {
+      "bounds": [
+        1,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 39
+    },
+    "native/hud_garlic_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 56
+    },
+    "native/hud_potato/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "opaque_pixels": 40
+    },
+    "native/hud_potato_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 56
+    },
+    "native/hud_strawberry/none/01.png": {
+      "bounds": [
+        2,
+        2,
+        9,
+        9
+      ],
+      "opaque_pixels": 37
+    },
+    "native/hud_strawberry_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 56
+    },
+    "native/icon_carrot_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 168
+    },
+    "native/icon_garlic/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        15,
+        15
+      ],
+      "opaque_pixels": 111
+    },
+    "native/icon_garlic_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 168
+    },
+    "native/icon_potato/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "opaque_pixels": 124
+    },
+    "native/icon_potato_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 168
+    },
+    "native/icon_strawberry/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        15,
+        15
+      ],
+      "opaque_pixels": 116
+    },
+    "native/icon_strawberry_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 168
+    },
+    "native/potato/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        10,
+        14
+      ],
+      "opaque_pixels": 7
+    },
+    "native/potato/none/02.png": {
+      "bounds": [
+        4,
+        9,
+        12,
+        14
+      ],
+      "opaque_pixels": 24
+    },
+    "native/potato/none/03.png": {
+      "bounds": [
+        3,
+        6,
+        14,
+        14
+      ],
+      "opaque_pixels": 55
+    },
+    "native/potato/none/04.png": {
+      "bounds": [
+        2,
+        3,
+        14,
+        14
+      ],
+      "opaque_pixels": 85
+    },
+    "native/strawberry/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        10,
+        14
+      ],
+      "opaque_pixels": 5
+    },
+    "native/strawberry/none/02.png": {
+      "bounds": [
+        5,
+        9,
+        12,
+        14
+      ],
+      "opaque_pixels": 17
+    },
+    "native/strawberry/none/03.png": {
+      "bounds": [
+        3,
+        7,
+        13,
+        14
+      ],
+      "opaque_pixels": 46
+    },
+    "native/strawberry/none/04.png": {
+      "bounds": [
+        3,
+        6,
+        14,
+        14
+      ],
+      "opaque_pixels": 61
+    },
+    "native/strawberry_regrow/none/01.png": {
+      "bounds": [
+        3,
+        6,
+        14,
+        14
+      ],
+      "opaque_pixels": 54
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "packets_same_box": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "regrow_height": true,
+  "same_crop_per_pair": true,
+  "source_transparency_matches_call": true,
+  "stage_targets": true,
+  "stages_rise": true,
+  "visible_targets": true,
+  "wet_cue_exposed": true
+}

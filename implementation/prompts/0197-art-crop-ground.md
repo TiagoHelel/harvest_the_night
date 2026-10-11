@@ -1,7 +1,7 @@
 # 0197 - Art: trampled crops and tilled ground
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0167, 0155, 0171
 - **Likely files:** assets/art_source/crops/, assets/art_source/manifest.json, tools/check_crop_art.py, src/ui/world_view.gd
 - **Art packs:** A014

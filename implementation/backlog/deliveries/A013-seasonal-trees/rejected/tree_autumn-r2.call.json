@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the exact summer tree edit target. Return the SAME1024x1536portrait canvas and SAME tree bounds approximately x35..997,y220..1355. Preserve every transparent margin and pixel grid. Do NOT enlarge to fill the image, recrop, recenter or rescale. Change ONLY leaf colours to muted autumn ochre, rust and gold. Preserve trunk, roots, each branch, outline silhouette, all individual foliage clusters, camera, lighting and positions exactly. The fixed downstream scale is0.03700440528634361: changing size breaks the asset. No flame/fire/glow, no flame_hot yellow; at most10percent green left. No added fallen leaves, ground or shadow. Real transparent alpha including all margins, one complete tree.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\tree.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\tree.png",
+      "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-72c06097-e8c8-443f-ab1c-222cd8591dba.png",
+  "copied_raw_path": "raw/tree_autumn-r2.png",
+  "raw_sha256": "1fde58d08a8ef73c013b67861b234f957390dfb9326972d8bb53406ed37227dc",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tree_autumn-r2.png"
+}

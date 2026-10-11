@@ -1,0 +1,131 @@
+[
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "tree_autumn-r4",
+    "revision": 4,
+    "args": {
+      "prompt": "Use case: precise-object-edit. Image1 EXACT autumn tree target. ONE leaf-colour correction ONLY. Replace EVERY pale bright yellow/cream foliage highlight with DARKER subdued mustard-gold, RGB214,186,96 (#d6ba60) or darker. No leaf pixel can use flame_hot RGB246217122, no cream or pale yellow foliage remains. Restrained gold_light21418696 highlights ONLY, shadowsunchanged. Trunkandrootcolours stayexactlyunchanged. Keep exact1024x1536source canvas, all transparentmargins, position, size, outlines, branch/root geometry and all colouredclusters unchanged. Nevercrop,recenter,scale,add/removeleaves. NO fireorange, glow, particle, scene, background, shadow or lettering. True transparentalpha.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r3.png"
+      ],
+      "transparent_background": true
+    }
+  },
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "tree_b_autumn-r2",
+    "revision": 2,
+    "args": {
+      "prompt": "Use case: precise-object-edit. Image1 EXACT autumn tree target. ONE leaf-colour correction ONLY. Replace EVERY pale bright yellow/cream foliage highlight with DARKER subdued mustard-gold, RGB214,186,96 (#d6ba60) or darker. No leaf pixel can use flame_hot RGB246217122, no cream or pale yellow foliage remains. Restrained gold_light21418696 highlights ONLY, shadowsunchanged. Trunkandrootcolours stayexactlyunchanged. Keep exact1024x1536source canvas, all transparentmargins, position, size, outlines, branch/root geometry and all colouredclusters unchanged. Nevercrop,recenter,scale,add/removeleaves. NO fireorange, glow, particle, scene, background, shadow or lettering. True transparentalpha.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_autumn-r1.png"
+      ],
+      "transparent_background": true
+    }
+  },
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "stump_snow-r1",
+    "revision": 1,
+    "args": {
+      "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is stump FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\stump.png",
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+      ],
+      "transparent_background": true
+    }
+  },
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "rock_b_snow-r1",
+    "revision": 1,
+    "args": {
+      "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is rock_b FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\rock_b.png",
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+      ],
+      "transparent_background": true
+    }
+  },
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "ore_snow-r1",
+    "revision": 1,
+    "args": {
+      "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is ore FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore.png",
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+      ],
+      "transparent_background": true
+    }
+  },
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "ore_b_snow-r1",
+    "revision": 1,
+    "args": {
+      "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is ore_b FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore_b.png",
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+      ],
+      "transparent_background": true
+    }
+  },
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "seam_snow-r1",
+    "revision": 1,
+    "args": {
+      "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is seam FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\seam.png",
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+      ],
+      "transparent_background": true
+    }
+  },
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "seam_b_snow-r1",
+    "revision": 1,
+    "args": {
+      "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is seam_b FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\seam_b.png",
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+      ],
+      "transparent_background": true
+    }
+  },
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "snow_cap-r1",
+    "revision": 1,
+    "args": {
+      "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is ore FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is rock FIT reference only: neverdraw the host object, its colours, outline or ground. Image3 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore.png",
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\rock.png",
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+      ],
+      "transparent_background": true
+    }
+  },
+  {
+    "folder": "A013-seasonal-trees",
+    "stem": "snow_cap_2x2-r1",
+    "revision": 1,
+    "args": {
+      "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is stump FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Wider cap for the2x2hardwoodstump standin: finalnative32square, cap about19x5pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+      "referenced_image_paths": [
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\stump.png",
+        "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+      ],
+      "transparent_background": true
+    }
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "path": "docs/reference-sheet.png",
+    "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/masters/style-day.png",
+    "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/masters/style-night.png",
+    "sha256": "850d7ee8738f0f1faa3e827e6c5ba71d48c203df16b5d4fa0db736471ca0b6c4",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+    "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "sprites/props/tree.png",
+    "sha256": "f617f07274a98b22fc29cf37b8b39ce85f3739aff9087c5062048abb472d9425",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "sprites/props/tree_b.png",
+    "sha256": "9db2fcc63ee78043ab78f62ead5b9252aab39f93caa5d51152408d79f9354776",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "sprites/props/stump.png",
+    "sha256": "93d4e1ba9fe3de4d84be3bf6313fc724d0c9e6fe852628c603fa23c6c31f9455",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "sprites/props/rock.png",
+    "sha256": "2e9d0c2f94fae2594180778c6ab9c97802a2451efc713dd7d97cb1c85a0f3bf4",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "sprites/props/rock_b.png",
+    "sha256": "cb32e7cd15c39980dde7be381366b30d51e3f0a5576c29b822c7f3db05971e16",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "sprites/props/ore.png",
+    "sha256": "abe01f81c58dfbb004aabe5a3b1fbf8f20013aff7559959e305b19941afe5d8e",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "sprites/props/ore_b.png",
+    "sha256": "063b932a485f579187492c37b5f546be73f11bc4169600678fe2c064f728f79d",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "sprites/props/seam.png",
+    "sha256": "c47420d873606a1469a6ea1bc82a3dd8ef5185b60625ed99e3dce809224818c9",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "sprites/props/seam_b.png",
+    "sha256": "eb96153bde91e9fd384503745415e796486534a58dcd144fe5d09eb06e6c2ad8",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/masters/tree.png",
+    "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/props/tree_b.png",
+    "sha256": "e7b4138f147769e67cbf4ab86b2dcfc04393b2f16a2062147ceb38eaa8986215",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/props/stump.png",
+    "sha256": "04b155a793e485b04dfa3ee1102d9244589c0c9e5ef12183be8f8091d498a10e",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/props/rock.png",
+    "sha256": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/props/rock_b.png",
+    "sha256": "1fa07696f592a1ef51059e2f15b14cbef0603083ff4e4e1e32b42c6a208313b9",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/props/ore.png",
+    "sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/props/ore_b.png",
+    "sha256": "06ee39306995017ec320a8f89dadd61ce64295e5d9ec8967051bd1e277ce8edf",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/props/seam.png",
+    "sha256": "7e92de1560eb2f23a5fd3c4ebdac3d9574324d66a95d205f6273fb385fcde940",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  },
+  {
+    "path": "assets/art_source/props/seam_b.png",
+    "sha256": "5a83f0de1842a9bed331987bb7c6e7d37898bd98fa22fde7ad899dd5dd966bb9",
+    "role": "Current approved identity, material, scale or edit target; see exact call for role"
+  }
+]

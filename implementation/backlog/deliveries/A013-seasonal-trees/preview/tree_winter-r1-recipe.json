@@ -1,0 +1,35 @@
+{
+  "anim": "tree_winter",
+  "stem": "tree_winter-r1",
+  "importer": {
+    "id": "A013/tree_winter",
+    "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_winter-r1.png",
+    "crop_xywh": [
+      51,
+      212,
+      941,
+      1141
+    ],
+    "content_scale": 0.03700440528634361,
+    "content_anchor_xy": [
+      17,
+      42
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "canvas_wh": [
+      40,
+      48
+    ],
+    "pivot_xy": [
+      20,
+      44
+    ]
+  },
+  "unclipped_bounds": [
+    3,
+    2,
+    38,
+    44
+  ]
+}

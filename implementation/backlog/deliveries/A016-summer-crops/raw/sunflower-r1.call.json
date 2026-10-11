@@ -1,0 +1,29 @@
+{
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: A016 sunflower growth-stage strip.\nInput images: Image1: approved crop layout/scale/style reference; Image2: approved farmstyle reference\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x32 pixels with contact pivot 8,30; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background, isolated objects only. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP + STRIP: Exactly 4 equal cells in ONE horizontal strip for sunflower. Ordered stages: 1. seed mound, height2-3pixels. 2. two leaves, height5-7pixels. 3. stalk with broad leaves and closed GREEN bud, height14-18pixels. 4. stalk2pixelswide, broad leaves and big YELLOW flowerhead9-12pixelswide with a brown seeddisc, tilted a little to viewer, height24-28pixels. Wide transparent gutters. Same pixel scale throughout, planted stays tiny, never enlarged separately. Stem centres and lowest opaque raw pixels share one baseline. Native visible bounds inside x1..14, minimum1pixel clear above. Each stage is visibly larger through ripe; regrow preserves the mature bush but has NO maturefruit. At most150pixels over the plotcell. Simple coarse deliberate clusters; no soil, shadows, glow, scenery, particles, labels, lines or text. Camera and outlines match existing crops. Sunflower is nearly as tall as farmer, NOT a tiny flowericon; watermelon is a low spreading vine. These are downstream native dimensions, source must survive nearestpixel reduction.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\crops\\corn.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A016-summer-crops\\raw\\sunflower-r1.png",
+  "date": "2026-10-10",
+  "decision": "accepted for owner review; numeric checks recorded separately",
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\crops\\corn.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7572ff35-870f-4779-a9d4-fe92b8f22161.png",
+  "revision": 1,
+  "sha256": "c574d09a6c886f91e1c4d9ac52415ae4f482bfd653ac2a83a53d90ad5720b750",
+  "tool": "image_gen.imagegen"
+}

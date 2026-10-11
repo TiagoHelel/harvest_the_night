@@ -1,0 +1,804 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "coal_seam",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/coal_seam-none-0-night.png",
+          "path": "native/coal_seam/none/01.png",
+          "points": {},
+          "pose": "coal_seam 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "coal_seam 0"
+      ]
+    },
+    {
+      "anim": "coal_seam_b",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/coal_seam_b-none-0-night.png",
+          "path": "native/coal_seam_b/none/01.png",
+          "points": {},
+          "pose": "coal_seam_b 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "coal_seam_b 0"
+      ]
+    },
+    {
+      "anim": "copper_ore",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/copper_ore-none-0-night.png",
+          "path": "native/copper_ore/none/01.png",
+          "points": {},
+          "pose": "copper_ore 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "copper_ore 0"
+      ]
+    },
+    {
+      "anim": "copper_ore_b",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/copper_ore_b-none-0-night.png",
+          "path": "native/copper_ore_b/none/01.png",
+          "points": {},
+          "pose": "copper_ore_b 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "copper_ore_b 0"
+      ]
+    },
+    {
+      "anim": "gold_ore",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/gold_ore-none-0-night.png",
+          "path": "native/gold_ore/none/01.png",
+          "points": {},
+          "pose": "gold_ore 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "gold_ore 0"
+      ]
+    },
+    {
+      "anim": "gold_ore_b",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/gold_ore_b-none-0-night.png",
+          "path": "native/gold_ore_b/none/01.png",
+          "points": {},
+          "pose": "gold_ore_b 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "gold_ore_b 0"
+      ]
+    },
+    {
+      "anim": "hardwood_stump",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hardwood_stump-none-0-night.png",
+          "path": "native/hardwood_stump/none/01.png",
+          "points": {},
+          "pose": "hardwood_stump 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        30
+      ],
+      "poses": [
+        "hardwood_stump 0"
+      ]
+    },
+    {
+      "anim": "hardwood_stump_chipped",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hardwood_stump_chipped-none-0-night.png",
+          "path": "native/hardwood_stump_chipped/none/01.png",
+          "points": {},
+          "pose": "hardwood_stump_chipped 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        30
+      ],
+      "poses": [
+        "hardwood_stump_chipped 0"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/props/ore.png",
+      "pivot_xy": [
+        8,
+        14
+      ]
+    }
+  ],
+  "date": "2026-10-10",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "copper_ore",
+      "call": "raw/copper_ore-master-c1-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/copper_ore/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "copper_ore 0",
+      "prompt": "raw/copper_ore-master-c1-r1.prompt.txt",
+      "prompt_sha256": "5f96185ce1f4169a3acd94df53b377db6c6282e12ecb8312981e3476aea195ed",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          10
+        ],
+        "content_scale": 0.0161587567351551,
+        "crop_xywh": [
+          268,
+          374,
+          733,
+          594
+        ]
+      },
+      "runtime_name": "sprites/props/copper_ore.png",
+      "seconds": 0.55,
+      "sha256": "0a4d8b2a77aa949d4d199c36a93aafb6e4cf76d1e32eded846955555953d1434",
+      "source": "raw/copper_ore-master-c1-r1.png",
+      "source_sha256": "fa929ad48f92257af8e698882cea35a3afaf7592927b2f0a148a6a0b37c3cb83",
+      "visible_limits_wh": [
+        [
+          10,
+          14
+        ],
+        [
+          8,
+          11
+        ]
+      ]
+    },
+    {
+      "anim": "copper_ore_b",
+      "call": "raw/copper_ore_b-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/copper_ore_b/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "copper_ore_b 0",
+      "prompt": "raw/copper_ore_b-r1.prompt.txt",
+      "prompt_sha256": "3a5c9ea4ad2ea172887d681f4c6da5d0ca8a11c1e63d260fe8caa5a3e897d411",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          10
+        ],
+        "content_scale": 0.0161587567351551,
+        "crop_xywh": [
+          261,
+          373,
+          730,
+          594
+        ]
+      },
+      "runtime_name": "sprites/props/copper_ore_b.png",
+      "seconds": 0.55,
+      "sha256": "71ffc6ab1d36a3023ef79295c241bd6126597643ab1d5f48158f1a9bcc46aa28",
+      "source": "raw/copper_ore_b-r1.png",
+      "source_sha256": "1fec79d3843569d5372eaf89cb5b0bc56d298c0823a88a81d28d180a7a35fd56",
+      "visible_limits_wh": [
+        [
+          10,
+          14
+        ],
+        [
+          8,
+          11
+        ]
+      ]
+    },
+    {
+      "anim": "coal_seam",
+      "call": "raw/coal_seam-master-c1-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/coal_seam/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "coal_seam 0",
+      "prompt": "raw/coal_seam-master-c1-r1.prompt.txt",
+      "prompt_sha256": "092615bf72b544a63728513e5ab4034e1f95fd1ee0634ed162429c11da6ec2d4",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.01144633668218574,
+        "crop_xywh": [
+          247,
+          363,
+          1078,
+          583
+        ]
+      },
+      "runtime_name": "sprites/props/coal_seam.png",
+      "seconds": 0.55,
+      "sha256": "fdd6421cd23836e26578499e81fbec64d6b63d818ca8b58464f8dbb017ec0d12",
+      "source": "raw/coal_seam-master-c1-r1.png",
+      "source_sha256": "b9092b0a970eaa99e55dcb380a3cbb87eb1e4190ac4053f1ad26b768ca56eb93",
+      "visible_limits_wh": [
+        [
+          10,
+          14
+        ],
+        [
+          6,
+          8
+        ]
+      ]
+    },
+    {
+      "anim": "coal_seam_b",
+      "call": "raw/coal_seam_b-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/coal_seam_b/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "coal_seam_b 0",
+      "prompt": "raw/coal_seam_b-r1.prompt.txt",
+      "prompt_sha256": "3a5c9ea4ad2ea172887d681f4c6da5d0ca8a11c1e63d260fe8caa5a3e897d411",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.01144633668218574,
+        "crop_xywh": [
+          241,
+          292,
+          1109,
+          637
+        ]
+      },
+      "runtime_name": "sprites/props/coal_seam_b.png",
+      "seconds": 0.55,
+      "sha256": "6e6e51238791ff983cab7e9d0af0e089c918f723dabfbd298d6f8df21a7d04f3",
+      "source": "raw/coal_seam_b-r1.png",
+      "source_sha256": "c67236c463b46c36bbd9751464c2051f528b381b78fc85725f71c76f42baf10c",
+      "visible_limits_wh": [
+        [
+          10,
+          14
+        ],
+        [
+          6,
+          8
+        ]
+      ]
+    },
+    {
+      "anim": "gold_ore",
+      "call": "raw/gold_ore-master-c2-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/gold_ore/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "stone",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "gold_ore 0",
+      "prompt": "raw/gold_ore-master-c2-r1.prompt.txt",
+      "prompt_sha256": "3ac9d96390f9c8d75aabbe5ae23b5b5981cae2ed774e977dffb7ef957f5bd887",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          10
+        ],
+        "content_scale": 0.014623665280431606,
+        "crop_xywh": [
+          384,
+          197,
+          820,
+          651
+        ]
+      },
+      "runtime_name": "sprites/props/gold_ore.png",
+      "seconds": 0.55,
+      "sha256": "32d4bb21b607cb791e3edf4caa2ddec8568b5e786e15c88ce0b4a687e709be4c",
+      "source": "raw/gold_ore-master-c2-r1.png",
+      "source_sha256": "37fc2a5a57cab060bdfd3a817af61a6cc88fee33db797f4e60c46093d1918fd9",
+      "visible_limits_wh": [
+        [
+          10,
+          14
+        ],
+        [
+          8,
+          11
+        ]
+      ]
+    },
+    {
+      "anim": "gold_ore_b",
+      "call": "raw/gold_ore_b-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/gold_ore_b/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "stone",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "gold_ore_b 0",
+      "prompt": "raw/gold_ore_b-r1.prompt.txt",
+      "prompt_sha256": "3a5c9ea4ad2ea172887d681f4c6da5d0ca8a11c1e63d260fe8caa5a3e897d411",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          10
+        ],
+        "content_scale": 0.014623665280431606,
+        "crop_xywh": [
+          372,
+          184,
+          812,
+          693
+        ]
+      },
+      "runtime_name": "sprites/props/gold_ore_b.png",
+      "seconds": 0.55,
+      "sha256": "1817e931c35aad77c77702b9759f89bde6abc3c9386636a81077f8ea81575190",
+      "source": "raw/gold_ore_b-r1.png",
+      "source_sha256": "9f5fba4567ccb132ad60359e777d2d278bd1cb422052ce7a0f1d9916ee082de7",
+      "visible_limits_wh": [
+        [
+          10,
+          14
+        ],
+        [
+          8,
+          11
+        ]
+      ]
+    },
+    {
+      "anim": "hardwood_stump",
+      "call": "raw/hardwood_stump-master-c2-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hardwood_stump/none/01.png",
+      "palette_keys": [
+        "ink",
+        "soil_dark",
+        "soil",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "bone_dark"
+      ],
+      "pivot_xy": [
+        16,
+        30
+      ],
+      "points": {},
+      "pose": "hardwood_stump 0",
+      "prompt": "raw/hardwood_stump-master-c2-r1.prompt.txt",
+      "prompt_sha256": "958fe3412d10803f09d85fadbf37c1b62767a0366a28d60a0a554431d4049a50",
+      "recipe": {
+        "content_anchor_xy": [
+          14,
+          16
+        ],
+        "content_scale": 0.020691802315066017,
+        "crop_xywh": [
+          58,
+          156,
+          1425,
+          776
+        ]
+      },
+      "runtime_name": "sprites/props/hardwood_stump.png",
+      "seconds": 0.55,
+      "sha256": "2a19f7135e7eddafa212876cad19d9b060fb30e946641a28c2d1b540d4fc70a0",
+      "source": "raw/hardwood_stump-master-c2-r1.png",
+      "source_sha256": "4b35f7e8d573fdd7ee3340e9cf2b88c96c16c8bebe1ce664dc398407dbb68e1d",
+      "visible_limits_wh": [
+        [
+          26,
+          30
+        ],
+        [
+          16,
+          18
+        ]
+      ]
+    },
+    {
+      "anim": "hardwood_stump_chipped",
+      "call": "raw/hardwood_stump_chipped-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hardwood_stump_chipped/none/01.png",
+      "palette_keys": [
+        "ink",
+        "soil_dark",
+        "soil",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "bone_dark"
+      ],
+      "pivot_xy": [
+        16,
+        30
+      ],
+      "points": {},
+      "pose": "hardwood_stump_chipped 0",
+      "prompt": "raw/hardwood_stump_chipped-r1.prompt.txt",
+      "prompt_sha256": "888d44bff865f6ae3800de734ed7ddfd2001b31577976bade78b0b7acde370e5",
+      "recipe": {
+        "content_anchor_xy": [
+          14,
+          16
+        ],
+        "content_scale": 0.020691802315066017,
+        "crop_xywh": [
+          58,
+          156,
+          1425,
+          776
+        ]
+      },
+      "runtime_name": "sprites/props/hardwood_stump_chipped.png",
+      "seconds": 0.55,
+      "sha256": "090d0759b79af73ffe612ad8a6bc320a410d3d1be4671b4886b05c3887f311a1",
+      "source": "raw/hardwood_stump_chipped-r1.png",
+      "source_sha256": "fff93dd7e1759c6e69fd5c5b444ad4227a47b0e06adccd128214e0b0d28624c0",
+      "visible_limits_wh": [
+        [
+          26,
+          30
+        ],
+        [
+          16,
+          18
+        ]
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A021",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A021-ore-hardwood\\raw\\copper_ore-master-c1-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "fa929ad48f92257af8e698882cea35a3afaf7592927b2f0a148a6a0b37c3cb83"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\seam.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "7e92de1560eb2f23a5fd3c4ebdac3d9574324d66a95d205f6273fb385fcde940"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A021-ore-hardwood\\raw\\coal_seam-master-c1-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "b9092b0a970eaa99e55dcb380a3cbb87eb1e4190ac4053f1ad26b768ca56eb93"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A021-ore-hardwood\\raw\\gold_ore-master-c2-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "37fc2a5a57cab060bdfd3a817af61a6cc88fee33db797f4e60c46093d1918fd9"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\stump.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "04b155a793e485b04dfa3ee1102d9244589c0c9e5ef12183be8f8091d498a10e"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\tree.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A021-ore-hardwood\\raw\\hardwood_stump-master-c2-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "4b35f7e8d573fdd7ee3340e9cf2b88c96c16c8bebe1ce664dc398407dbb68e1d"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A021-ore-hardwood",
+  "status": "approved for integration",
+  "supersedes": [],
+  "tool": "built-in ImageGen"
+}

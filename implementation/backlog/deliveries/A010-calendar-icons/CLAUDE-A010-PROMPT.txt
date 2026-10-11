@@ -1,0 +1,39 @@
+A010 - Seasons and moons
+Approval date: 2026-10-10
+Owner words, verbatim: "aprovado, manda o prompt pro claude"
+Status: approved for integration; runtime_integrated remains false.
+
+Authoritative folder: implementation/backlog/deliveries/A010-calendar-icons/
+Read contract.json, APPROVAL.json and checks.json before integrating. All 14 native exports are approved. No older delivery folders are superseded. rejected/ and preview/ are review evidence, not source art.
+
+Integrate through game task 0161, replacing the code-drawn calendar and night forecast marks from task 0158. The four seasons are spring sprout, summer sun, autumn leaf, winter snowflake. The three night marks are full_moon, boss_night (horned skull) and calm_night (crescent with star). Create exactly the runtime aliases below. icon_ uses 16x16; hud_ uses 10x10. Existing resource icons and A005 dawn_moon are comparisons, not new deliverables.
+
+Mode A: selected ImageGen raw sources with per-file importer recipes from contract.json, using tools/palette.py:COLOURS and each recorded palette_keys subset. Preserve crop_xywh, content_scale, content_anchor_xy, alpha_threshold 128, canvas and pivot. Each pair shares one source and measured crop, with separate recorded 16px and 10px scales. Pale moons use a restricted palette to avoid a sun-like golden cast. Approved native exports already match render_source; reproduce those pixels exactly through the raster pipeline. This pack has no runtime/ 2x layer.
+
+Mapping and aliases:
+native/icon_full_moon/none/01.png -> sprites/ui/icon_full_moon.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/hud_full_moon/none/01.png -> sprites/ui/hud_full_moon.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/icon_calm_night/none/01.png -> sprites/ui/icon_calm_night.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/hud_calm_night/none/01.png -> sprites/ui/hud_calm_night.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/icon_boss_night/none/01.png -> sprites/ui/icon_boss_night.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/hud_boss_night/none/01.png -> sprites/ui/hud_boss_night.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/icon_spring/none/01.png -> sprites/ui/icon_spring.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/hud_spring/none/01.png -> sprites/ui/hud_spring.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/icon_summer/none/01.png -> sprites/ui/icon_summer.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/hud_summer/none/01.png -> sprites/ui/hud_summer.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/icon_autumn/none/01.png -> sprites/ui/icon_autumn.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/hud_autumn/none/01.png -> sprites/ui/hud_autumn.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/icon_winter/none/01.png -> sprites/ui/icon_winter.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+native/hud_winter/none/01.png -> sprites/ui/hud_winter.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none
+
+Frame order: 01.png is frame 0. All states have mirror none: no baked or runtime flip, including the crescent opening to the right. Metadata points are {} for every static UI state, with the pivots above in native coordinates. No deviations were authorized; deviations and supersedes are empty. Visible bounds must remain at most 14x14 or 8x8, centered with one-pixel clear padding. HUD icons are not world-relit at night; world-night previews are reference only.
+
+Never regenerate, repaint, recolour, resample or retime the approved art. Never cut sprites from GIFs, previews or screenshots. Never use art files outside contract.json. Never add a runtime flip to a baked mirror. Keep full_moon distinct from A005's setting dawn_moon and calm_night. Preserve full_moon raw provenance for A055's later separate Blood Moon pack; do not create that variant during this integration.
+
+Integration steps:
+1. Verify every export SHA256 against both contract.json and APPROVAL.json; verify selected raw/source, prompt and reference hashes and call provenance. Run the delivery build.py --check. All checks must pass. If a mismatch occurs, stop the integration task with the precise reason rather than silently changing approved art.
+2. Promote selected raw sources byte-for-byte to versioned assets/art_source/ui/ locations. Add the recorded per-file raster recipes, aliases, prompt/reference/approval provenance and ownership.json entries. Adapt source paths to the promoted locations only; keep hashes and transform parameters. Run python tools/import_art.py and verify that outputs match the approved exports exactly. Do not promote preview/ or rejected/.
+3. Extend hard-coded UI family lists in the art checks where necessary; bind the aliases into the calendar and forecast UI from task 0158. Preserve the specified canvas, pivot, draw scale, static timing and no-flip behavior.
+4. Run python tools/verify.py and recheck promoted hashes.
+5. Inspect FHD captures by day and night. Confirm the four seasons differ by silhouette at 10x10, the skull reads as boss night, and full, calm and setting moons remain distinct on the dark HUD. UI is not world-relit.
+6. Only after integration and validation, run python implementation/backlog/assets.py set A010 integrated. This transition belongs to Claude. Do not touch deferred farmer packs or the cancelled run pack. Do not commit or push unless the owner requests it.

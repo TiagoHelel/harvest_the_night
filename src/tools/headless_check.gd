@@ -14564,8 +14564,15 @@ func _task_0082_shots() -> void:
 	# Seventy-six since 0196: the two played days. Seventy-seven since 0220:
 	# the tree on autumn's floor. Seventy-eight since 0221: the night's
 	# leftovers. Seventy-nine since 0222: bone meal in the earth. Eighty
-	# since 0223: the defences asleep under tarps.
-	expect(names.size() == 80,
+	# since 0223: the defences asleep under tarps. Eighty-one since 0163: a
+	# line in the pond in winter. Eighty-three since 0164: the snow caps on
+	# the quarry and on the big stumps. Eighty-four since 0202: the ledger
+	# opened at night. Eighty-five since 0211: the barnyard at night.
+	# Eighty-six since 0197: the withered field at night. Eighty-seven since
+	# 0198: spring's ripe field at night. Eighty-nine since 0199: summer's,
+	# and its peppers and corn regrowing. Ninety since 0204: the big stumps at
+	# night. Ninety-one since 0213: the machines worn.
+	expect(names.size() == 91,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

@@ -1,0 +1,881 @@
+{
+  "pack": "A020",
+  "slug": "A020-material-icons",
+  "title": "Material icons",
+  "date": "2026-10-07",
+  "status": "approved for integration",
+  "runtime_integrated": false,
+  "palette_mode": "A",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "colour_ramp": [],
+  "alpha_threshold": 128,
+  "tool": "built-in ImageGen",
+  "references": [
+    {
+      "path": "assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/ui/panel.png",
+      "sha256": "0c7d37fe6f4c333a048959f0d5b4b6867cce201d270f260ec78f367d082a1863",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/button_normal.png",
+      "sha256": "86afdc394f1706e5d09cd56dbe3b26ee581b18992cce2832924c4b3e5ad6b160",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/terrain/grass.png",
+      "sha256": "4d1d187493ab8275082ea8aed39ab884e50384b9bb35cc750276ffbd3b54fc3e",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_wood.png",
+      "sha256": "6d0275b93c12105ae00a148ca6f27aaf586a985cb4897bba84ef6ec2b89d9148",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_wood.png",
+      "sha256": "fc1bf6a471078c71e0b99e7a79be2e24f9a888cd541f6914304bdd6124080540",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_iron.png",
+      "sha256": "cc8315903bb141470e6f26dc65cbd19287823fb42f945cfd8bdd0f05fc890ef6",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_iron.png",
+      "sha256": "6c505a65227e474d97624412188021eb0a8d977e1b88939ed5d8541689ec6edc",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_money.png",
+      "sha256": "e1131306f92cc6a2de702395d1aec2d517a9eab39223f540be603198c793979e",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_money.png",
+      "sha256": "13a5ff774d41199fb21607aa4838cfc5571d8adf644749e64ac641746b2bfb97",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_gunpowder.png",
+      "sha256": "2d845f087c16c5d93865d01d371406fde74b800ce2c7a588255327f6554ac63d",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_gunpowder.png",
+      "sha256": "b53006783e93480773e16853c039544b82a0b3162fcd1b6581c38ba6b5540dfb",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_stone.png",
+      "sha256": "0aef918775dab9c27284725d28a507c50e0d3788dca6deadc9eea410037d254e",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_stone.png",
+      "sha256": "69678215024f2f74a275dda79fed76277da5a5d35fe77ba6e7f62d60fe239bcc",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_wheat.png",
+      "sha256": "6df63672d3ee3fa397ca4e7e148b8bb43b7b51bd895d7cb4eddb7e07b531bcf0",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_wheat.png",
+      "sha256": "9773b76da64350118f2a142c03222ace36bf38fde7d9e574ce1b4aa262fc3e94",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/props/ore.png",
+      "sha256": "abe01f81c58dfbb004aabe5a3b1fbf8f20013aff7559959e305b19941afe5d8e",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/props/ore_b.png",
+      "sha256": "063b932a485f579187492c37b5f546be73f11bc4169600678fe2c064f728f79d",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/props/seam.png",
+      "sha256": "c47420d873606a1469a6ea1bc82a3dd8ef5185b60625ed99e3dce809224818c9",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/props/stump.png",
+      "sha256": "93d4e1ba9fe3de4d84be3bf6313fc724d0c9e6fe852628c603fa23c6c31f9455",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "assets/art_source/ui/iron.png",
+      "sha256": "f1b60c1d3931ea8777448af0b68d533d2e6b8e69f1da7efb417c35403d77538d",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A020-material-icons/preview/input-history/straw-r1-7cdffaa9c1.png",
+      "sha256": "7cdffaa9c109c174c67e3aba666405dcff16a208cfa34c5ded7cc728dd1583df",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "animations": [
+    {
+      "anim": "icon_copper",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static copper icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_copper",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static copper icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_gold",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static gold icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_gold",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static gold icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_coal",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static coal icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_coal",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static coal icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_hardwood",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static hardwood icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_hardwood",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static hardwood icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_hay",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static hay icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_hay",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static hay icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_straw",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static straw icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_straw",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static straw icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    }
+  ],
+  "mirror_pairs": {},
+  "files": [
+    {
+      "output": "native/icon_copper/none/01.png",
+      "sha256": "25ec20e3a3346a2eef8298b8c01c8362db5aeb59a929751101a805d36ab44fab",
+      "runtime_name": "sprites/ui/icon_copper.png",
+      "anim": "icon_copper",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/copper-r1.png",
+      "source_sha256": "063aca6b5c7e0441fb65970de69a3c4be68d645c164773ebe79d23dca18ddafc",
+      "prompt": "raw/copper-r1.prompt.txt",
+      "prompt_sha256": "5e6433eb0e0ab22e61c7dbfd8c348db00d58470479bc328ac6c2c6b1b0889c53",
+      "call": "raw/copper-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          294,
+          393,
+          691,
+          547
+        ],
+        "content_scale": 0.020260492040520984,
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "roof_dark",
+          "skin_dark",
+          "skin",
+          "skin_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_copper/none/01.png",
+      "sha256": "6099f301ed2f6ef7807bf3f94ef6840b1b515a4184e105e4994b635a2ea3b7bf",
+      "runtime_name": "sprites/ui/hud_copper.png",
+      "anim": "hud_copper",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/copper-r1.png",
+      "source_sha256": "063aca6b5c7e0441fb65970de69a3c4be68d645c164773ebe79d23dca18ddafc",
+      "prompt": "raw/copper-r1.prompt.txt",
+      "prompt_sha256": "5e6433eb0e0ab22e61c7dbfd8c348db00d58470479bc328ac6c2c6b1b0889c53",
+      "call": "raw/copper-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          294,
+          393,
+          691,
+          547
+        ],
+        "content_scale": 0.011577424023154847,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "roof_dark",
+          "skin_dark",
+          "skin",
+          "skin_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_gold/none/01.png",
+      "sha256": "02c4e110a12d69f40b0136e40c4c4515ac3dd5bc82759fbf6b065584a2e9d677",
+      "runtime_name": "sprites/ui/icon_gold.png",
+      "anim": "icon_gold",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/gold-r1.png",
+      "source_sha256": "0cb2a587809ae2bdc55fa95690ba2ccfdfeb44c2ac1ae3442f1ffbaf0ad76e26",
+      "prompt": "raw/gold-r1.prompt.txt",
+      "prompt_sha256": "ce3f2d1fa4a5b5feab7a7e9d0cf232dd89a216e13321c6ae5d914e7f1a18857a",
+      "call": "raw/gold-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          280,
+          372,
+          726,
+          584
+        ],
+        "content_scale": 0.01928374655647383,
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "gold_dark",
+          "gold",
+          "gold_light",
+          "flame_hot"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_gold/none/01.png",
+      "sha256": "2f590e8f98992e46af4b8302cdbd0faa71e43545565f261d08fcf661e2d05ca2",
+      "runtime_name": "sprites/ui/hud_gold.png",
+      "anim": "hud_gold",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/gold-r1.png",
+      "source_sha256": "0cb2a587809ae2bdc55fa95690ba2ccfdfeb44c2ac1ae3442f1ffbaf0ad76e26",
+      "prompt": "raw/gold-r1.prompt.txt",
+      "prompt_sha256": "ce3f2d1fa4a5b5feab7a7e9d0cf232dd89a216e13321c6ae5d914e7f1a18857a",
+      "call": "raw/gold-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          280,
+          372,
+          726,
+          584
+        ],
+        "content_scale": 0.011019283746556474,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "gold_dark",
+          "gold",
+          "gold_light",
+          "flame_hot"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_coal/none/01.png",
+      "sha256": "9d429acac2084168b8c3c654b5bc5cbf1d533f635a75c62133337a02eccd73dd",
+      "runtime_name": "sprites/ui/icon_coal.png",
+      "anim": "icon_coal",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/coal-r1.png",
+      "source_sha256": "e610d05a2861651f3662a02754968692280dfddec96e9faa870c06194ee594b5",
+      "prompt": "raw/coal-r1.prompt.txt",
+      "prompt_sha256": "e997b9c1ad25fa385b6ae930b5ec52b7788fcd5c0834875e49aaf225e6470545",
+      "call": "raw/coal-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          333,
+          396,
+          605,
+          507
+        ],
+        "content_scale": 0.023140495867768594,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "stone_dark",
+          "stone",
+          "stone_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_coal/none/01.png",
+      "sha256": "6393df3405692c8a9ff873b554724df6f443145947269a59d7d440d5cee9f429",
+      "runtime_name": "sprites/ui/hud_coal.png",
+      "anim": "hud_coal",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/coal-r1.png",
+      "source_sha256": "e610d05a2861651f3662a02754968692280dfddec96e9faa870c06194ee594b5",
+      "prompt": "raw/coal-r1.prompt.txt",
+      "prompt_sha256": "e997b9c1ad25fa385b6ae930b5ec52b7788fcd5c0834875e49aaf225e6470545",
+      "call": "raw/coal-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          333,
+          396,
+          605,
+          507
+        ],
+        "content_scale": 0.013223140495867768,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "stone_dark",
+          "stone",
+          "stone_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_hardwood/none/01.png",
+      "sha256": "f731bcadc26d212c696c17fd733c3893ea489f2462d651a2c1eed9990756ebdb",
+      "runtime_name": "sprites/ui/icon_hardwood.png",
+      "anim": "icon_hardwood",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/hardwood-r1.png",
+      "source_sha256": "f1dd0570398d5d6dcb106d23d050675bbfb0121ad4e125a7cc6e95da0814f352",
+      "prompt": "raw/hardwood-r1.prompt.txt",
+      "prompt_sha256": "feaf42178dfb08ebec3ad70d8d894427a0d3b33ff4bda634aec9d2765d5329e2",
+      "call": "raw/hardwood-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          321,
+          381,
+          630,
+          570
+        ],
+        "content_scale": 0.022222222222222223,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "wood_dark",
+          "soil_dark",
+          "roof_dark",
+          "wood"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_hardwood/none/01.png",
+      "sha256": "614c564b074aa9e116b91eb5e2a77b16648f7bb6bead9f573a56047d6216d593",
+      "runtime_name": "sprites/ui/hud_hardwood.png",
+      "anim": "hud_hardwood",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/hardwood-r1.png",
+      "source_sha256": "f1dd0570398d5d6dcb106d23d050675bbfb0121ad4e125a7cc6e95da0814f352",
+      "prompt": "raw/hardwood-r1.prompt.txt",
+      "prompt_sha256": "feaf42178dfb08ebec3ad70d8d894427a0d3b33ff4bda634aec9d2765d5329e2",
+      "call": "raw/hardwood-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          321,
+          381,
+          630,
+          570
+        ],
+        "content_scale": 0.012698412698412698,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "wood_dark",
+          "soil_dark",
+          "roof_dark",
+          "wood"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_hay/none/01.png",
+      "sha256": "e5319d65f0d693e663bb5977d53c6f4789c219c8c3daf9fed0474039bff3c640",
+      "runtime_name": "sprites/ui/icon_hay.png",
+      "anim": "icon_hay",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/hay-r1.png",
+      "source_sha256": "25e57ded51e9f5088e0bbbc5f0b4b526a24f6a37a20e055fd3a43686966a2ade",
+      "prompt": "raw/hay-r1.prompt.txt",
+      "prompt_sha256": "df000ba29fec220fc84c44bf50ceb223f0b536c897c044c8a33c779c7f4e6cbc",
+      "call": "raw/hay-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          253,
+          349,
+          779,
+          654
+        ],
+        "content_scale": 0.01797175866495507,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "gold_dark",
+          "gold",
+          "gold_light",
+          "grass_light",
+          "wood_dark"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_hay/none/01.png",
+      "sha256": "7ad99cf56968c7e1b25a49135cd52fb04fcd7c0de7769c5800b0f48abf23aad7",
+      "runtime_name": "sprites/ui/hud_hay.png",
+      "anim": "hud_hay",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/hay-r1.png",
+      "source_sha256": "25e57ded51e9f5088e0bbbc5f0b4b526a24f6a37a20e055fd3a43686966a2ade",
+      "prompt": "raw/hay-r1.prompt.txt",
+      "prompt_sha256": "df000ba29fec220fc84c44bf50ceb223f0b536c897c044c8a33c779c7f4e6cbc",
+      "call": "raw/hay-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          253,
+          349,
+          779,
+          654
+        ],
+        "content_scale": 0.010269576379974325,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "gold_dark",
+          "gold",
+          "gold_light",
+          "grass_light",
+          "wood_dark"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_straw/none/01.png",
+      "sha256": "29aebe8eb06f9ffa0aabaddda8d852075042ae36e550ffd16102f44f602bc2c5",
+      "runtime_name": "sprites/ui/icon_straw.png",
+      "anim": "icon_straw",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/straw-r2.png",
+      "source_sha256": "0afde9b139bc6b80bd723b99e6e0dd316af37749cadc0cfa73487afc87aefcb8",
+      "prompt": "raw/straw-r2.prompt.txt",
+      "prompt_sha256": "c335ba9322c83534df0e7f0378e72beb5c8d16cdc108292d7014fe96e9770991",
+      "call": "raw/straw-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          296,
+          247,
+          1202,
+          446
+        ],
+        "content_scale": 0.011647254575707155,
+        "content_anchor_xy": [
+          7,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "bone_dark",
+          "gold_light",
+          "bone",
+          "wood_dark"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_straw/none/01.png",
+      "sha256": "2ef3de326fa4c6e5c70c02075ac21c255918f1259edb43f1e0db6a67ce921482",
+      "runtime_name": "sprites/ui/hud_straw.png",
+      "anim": "hud_straw",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/straw-r2.png",
+      "source_sha256": "0afde9b139bc6b80bd723b99e6e0dd316af37749cadc0cfa73487afc87aefcb8",
+      "prompt": "raw/straw-r2.prompt.txt",
+      "prompt_sha256": "c335ba9322c83534df0e7f0378e72beb5c8d16cdc108292d7014fe96e9770991",
+      "call": "raw/straw-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          296,
+          247,
+          1202,
+          446
+        ],
+        "content_scale": 0.0066555740432612314,
+        "content_anchor_xy": [
+          4,
+          1
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "bone_dark",
+          "gold_light",
+          "bone",
+          "wood_dark"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "exemptions": {
+    "grounded_on_pivot": "UI icons are centred on their visual pivot; no ground contact.",
+    "points_on_opaque": "No gameplay points required for static icons."
+  },
+  "final_approval_pending": false,
+  "approval": "APPROVAL.json"
+}

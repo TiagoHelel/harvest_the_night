@@ -1,0 +1,26 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is exactcompletecanvas edit target. Preserve exact1024x1536canvas, originaltreeoutline/trunk/roots/size/position and transparentmargins. ONE colourcorrection: replace ALL brightorange/flame leavesRGB24216060 with muted ochre goldRGB20315965 or goldshadowRGB15110239. No orangeRGB24216060 and no palehotyellowRGB246217122 anywhere. Rustpatchesroofbrownred permitted butmuted, no flames. Autumncrown: subduedochre/gold/brown withunchangedwoodtrunk, no green. Keepallgeometry, darkoutlines, clusters. No glow, shadow, text, ground, crop/recenter/scale.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_autumn-r2.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_autumn-r2.png",
+      "sha256": "00795407d270dc5da2522a553205557ba88b07bd83c70d1e81339f20219bb5d0",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_b_autumn-r2-00795407d2.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-b0f9db12-508f-4eca-9339-00690f6d8f86.png",
+  "copied_raw_path": "raw/tree_b_autumn-r3.png",
+  "raw_sha256": "5ea6b218171d532c09e16facd0d2df12bca9a44fd5f1b673f80b8541cf28eeda",
+  "date": "2026-10-07",
+  "revision": 3,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tree_b_autumn-r3.png"
+}

@@ -1,0 +1,45 @@
+A012 - Winter ground
+Approval date: 2026-10-10
+Owner words, verbatim: "aprovado"
+Status: approved for integration. runtime_integrated is false; Codex has not integrated game assets.
+
+Authoritative folder: implementation/backlog/deliveries/A012-winter-ground/
+Read APPROVAL.json, contract.json, checks.json and this handoff. All 11 exports are approved. No older delivery folders are superseded. rejected/ and preview/ are review evidence, not source art.
+
+Integration task: 0163. Replace task 0159's winter ground palette-remap placeholders with the delivered snow terrain. Winter is days 43-56. Preserve existing water animation and fishing: water is not frozen. Current rock, floor and the three water tiles remain their existing art.
+
+Palette mode A: selected ImageGen raw files, tools/palette.py:COLOURS with each file's palette_keys, and the exact per-file importer recipe in contract.json. Preserve source hashes, crop_xywh, content_scale, content_anchor_xy, alpha_threshold 128, canvas and pivot. Opaque tiles and north side overlays use a whole square crop and scale 16/W, anchor (8,16); the shore corner uses its recorded measured square crop. Do not recompute crops or normalize scales. The four grass variants share scale and border pixels. Approved native files already match render_source. There is no runtime/ 2x layer.
+
+Mapping and runtime aliases:
+native/grass_winter/none/01.png -> sprites/terrain/grass_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/grass_b_winter/none/01.png -> sprites/terrain/grass_b_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/grass_c_winter/none/01.png -> sprites/terrain/grass_c_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/grass_d_winter/none/01.png -> sprites/terrain/grass_d_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/path_winter/none/01.png -> sprites/terrain/path_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/soil_winter/none/01.png -> sprites/terrain/soil_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/tilled_winter/none/01.png -> sprites/crops/tilled_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/edge_n_winter/none/01.png -> sprites/terrain/edge_n_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/shore_n_winter/none/01.png -> sprites/terrain/shore_n_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/tilled_wet_winter/none/01.png -> sprites/crops/tilled_wet_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+native/shore_corner_nw_winter/none/01.png -> sprites/terrain/shore_corner_nw_winter.png | 16x16 pivot (8,16), draw 1.0 | one static frame, 0.55 s, no loop, direction none
+
+01.png is frame 0. All delivered states use mirror none, with no horizontal flips. points is {} for every state; native pivot is (8,16). The eight opaque tiles cover whole cells; edge_n_winter, shore_n_winter and shore_corner_nw_winter are transparent overlays attached to the north edge. Do not interpret their pivot as an actor's ground-contact point. No deviations were authorized; deviations and supersedes are empty.
+
+Derived assets to create at integration through manifest operations only:
+- sprites/terrain/edge_e_winter.png, edge_s_winter.png, edge_w_winter.png: clockwise rotations of edge_n_winter by 1, 2 and 3 quarter-turns.
+- sprites/terrain/shore_e_winter.png, shore_s_winter.png, shore_w_winter.png: the same clockwise quarter-turns of shore_n_winter.
+- sprites/terrain/edge_corner_nw_winter.png: slice_canvas (0,0,1,1) from edge_n_winter, placed at (0,0) in a transparent 16x16 canvas as the existing edge corner recipe does.
+- edge_corner_ne/se/sw_winter and shore_corner_ne/se/sw_winter: clockwise 1/2/3 quarter-turns of the corresponding northwest caps.
+These are rotations or exact slices, never runtime mirrors or new artwork. Composite north, east, south, west sides in that order for masks N=1, E=2, S=4, W=8; retain the existing corner-mask rule and atlas arrangement.
+
+Recommend sprites/terrain/atlas_winter.png in the existing atlas.png's exact 256x80 layout. Use soil_winter/path_winter and current water/rock/floor in row 0, winter grass variants in row 2, winter edge/shore masks in rows 3-4 and matching corner slots. Use task 0159's seasonal hook to select the winter atlas; preserve the existing non-winter atlas. Preserve the grass variation rule h=(x*73856093)^(y*19349663), abs(h)%32: 31 -> d, 25-30 -> c, 18-24 -> b, otherwise master.
+
+Never regenerate, repaint, recolour, resample or retime approved art. Never cut sprites from GIFs, preview images or screenshots. Never use unlisted source art or rejected candidates. Only the exact manifest rotations and slices above are additional derived outputs. Never add a runtime flip to a baked mirror. Preserve snow warmth, quiet density, seamless borders, furrows, darker wet soil and shoreline transparency.
+
+Integration steps:
+1. Verify all 11 export SHA256 values against contract.json and APPROVAL.json. Verify selected source/prompt hashes, call records and reference provenance. Run the delivery build.py --check; all checks must pass. On a discrepancy, stop the integration task with its precise reason; do not silently repair approved art.
+2. Promote selected raw sources byte-for-byte into versioned assets/art_source/terrain/ and assets/art_source/crops/ locations. Add exact raster recipes, aliases, prompt/reference/approval provenance and ownership.json records. Adapt source paths to their promoted locations only; retain hashes and all conversion parameters. Run python tools/import_art.py and confirm approved outputs match the delivered hashes.
+3. Add the exact rotated/sliced derivative entries and winter atlas composition described above. Extend hard-coded terrain/crop art-check lists as needed. Bind task 0159's seasonal ground hook to the accepted winter assets and remove only the superseded winter ground remap behavior.
+4. Run python tools/verify.py. Confirm opaque tiles remain seamless, grass variant borders identical, overlays connected and at most three rows deep, crop furrows preserved, wet soil at least 20 mean brightness below dry, and snow at least 25 above path/soil.
+5. Inspect FHD game captures by day and night, including a planted farm, path intersections, pond sides/corners and winter fishing. Confirm readable actors and natural edges without visible seams. World relighting remains the game's responsibility, not baked into sprites.
+6. Only after integration and validation, run python implementation/backlog/assets.py set A012 integrated. Claude owns this transition. Do not touch deferred farmer packs or the cancelled run pack. Do not commit or push unless the owner asks.

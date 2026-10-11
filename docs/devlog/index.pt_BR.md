@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-191 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+206 tarefas em 8 dias, de  a 2026-10-10. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -234,6 +234,21 @@ voz alta.
 | 0221 | What the night leaves behind | 2026-10-10 |
 | 0222 | Bone meal | 2026-10-10 |
 | 0223 | Defences sleep under tarps | 2026-10-10 |
+| 0147 | Art: the night hotbar and HUD icons | 2026-10-10 |
+| 0161 | Art: seasons and moons | 2026-10-10 |
+| 0162 | Art: forecast heads | 2026-10-10 |
+| 0163 | Art: winter ground | 2026-10-10 |
+| 0164 | Art: trees through the seasons | 2026-10-10 |
+| 0202 | Art: tool icons | 2026-10-10 |
+| 0203 | Art: material icons | 2026-10-10 |
+| 0211 | Art: animal goods | 2026-10-10 |
+| 0197 | Art: trampled crops and tilled ground | 2026-10-10 |
+| 0198 | Art: spring crops | 2026-10-10 |
+| 0199 | Art: summer crops | 2026-10-10 |
+| 0204 | Art: copper, coal, gold and hardwood | 2026-10-10 |
+| 0205 | Art: fish | 2026-10-10 |
+| 0213 | Art: the artisan machines | 2026-10-10 |
+| 0214 | Art: artisan goods | 2026-10-10 |
 
 ## Toda vez que o jogo mudou por baixo
 

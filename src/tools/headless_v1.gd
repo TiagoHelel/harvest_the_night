@@ -140,6 +140,21 @@ func _run() -> void:
 	_task_0221_night_loot()
 	_task_0222_bone_meal()
 	_task_0223_tarps()
+	_task_0147_night_icons()
+	_task_0161_calendar_icons()
+	_task_0162_forecast_heads()
+	_task_0163_winter_ground()
+	_task_0164_seasonal_trees()
+	_task_0202_tool_icons()
+	_task_0203_material_icons()
+	_task_0211_animal_goods()
+	_task_0197_crop_ground()
+	_task_0198_spring_crops()
+	_task_0199_summer_crops()
+	_task_0204_ore_hardwood()
+	_task_0205_fish()
+	_task_0213_machines()
+	_task_0214_artisan_goods()
 
 
 func _finish() -> void:
@@ -1277,7 +1292,7 @@ func _task_0131_guardian() -> void:
 	for name in GameData.sorted_names(PlaceholderArt.ART.keys()):
 		var entry: Dictionary = PlaceholderArt.ART[name]
 		if not ["A003", "A004"].has(entry["pack"]):
-			continue       # A005's icons are 0133's to check
+			continue       # the guardian's and the cursor's packs only
 		mine += 1
 		var shape: Dictionary = entry["geometry"]
 		for i in int(entry["frames"]):
@@ -3078,20 +3093,23 @@ func _task_0159_palette() -> void:
 		"under Spring 14's morning report it is still spring; summer comes with the day",
 		"%d, then %d" % [under_report, SeasonView.season_on_screen(state)])
 
-	# **The lookups the packs fill in**: stand-ins today, the base frame
-	# where a season has none, and the caps by host.
+	# **The lookups the packs fill in**: the season's own frame - A012's and
+	# A013's, real art since 0163 and 0164 - the base frame where a season
+	# has none, and the caps by host.
 	expect(SeasonView.frame_for("props/tree", 0) == "props/tree_spring"
 		and SeasonView.frame_for("props/tree_b", 3) == "props/tree_b_winter"
 		and SeasonView.frame_for("props/tree", 1) == "props/tree"
-		and SeasonView.stand_in("props/tree_b_winter")
-		and not SeasonView.carries_season("props/tree", 3)
-		and SeasonView.texture_file("props/tree_winter") == "res://sprites/props/tree.png",
-		"a tree's season is A013's stand-in, drawn as today's tree; summer is today's")
+		and not SeasonView.stand_in("props/tree_b_winter")
+		and SeasonView.carries_season("props/tree", 3)
+		and SeasonView.texture_file("props/tree_winter") == "res://sprites/props/tree_winter.png",
+		"a tree's season is A013's own since task 0164; summer is today's")
 	expect(SeasonView.frame_for("terrain/atlas", 3) == "terrain/atlas_winter"
-		and SeasonView.stand_in("terrain/atlas_winter")
+		and SeasonView.carries_season("terrain/atlas", 3)
+		and not SeasonView.stand_in("terrain/atlas_winter")
 		and SeasonView.frame_for("terrain/atlas", 2) == "terrain/atlas"
-		and SeasonView.frame_for("crops/tilled", 3) == "crops/tilled_winter",
-		"the winter ground is A012's stand-in, and autumn has none")
+		and SeasonView.frame_for("crops/tilled", 3) == "crops/tilled_winter"
+		and SeasonView.carries_season("crops/tilled_wet", 3),
+		"the winter ground is A012's own since task 0163, and autumn has none")
 	expect(SeasonView.cap_for(&"rock_b", false) == "props/rock_b_snow"
 		and SeasonView.cap_for(&"copper_ore", false) == "props/snow_cap"
 		and SeasonView.cap_for(&"hardwood_stump", true) == "props/snow_cap_2x2",
@@ -4101,7 +4119,7 @@ func _task_0176_ores() -> void:
 	expect(not Power._run(plant, spot, 1, true), "with neither fuel a new tank cannot run")
 	for resource in [GameData.COPPER, GameData.COAL, GameData.GOLD]:
 		expect(GameData.SELL_PRICE.has(resource) and resource in GameData.RESOURCE_GROUPS[0]["members"] and Names.KEYS.has(resource), "each mineral has its price, material group and localized name")
-		expect(UiKit.icon(resource) != null and UiKit.icon(resource, true) != null, "both icon sizes resolve through A020 stand-ins")
+		expect(UiKit.icon(resource) != null and UiKit.icon(resource, true) != null, "both icon sizes resolve, A020's art since 0203")
 	var bad := GameData.GATHERING.duplicate(true)
 	bad[&"gold_ore"]["work_ticks"] = GameData.GATHERING[&"seam"]["work_ticks"]
 	expect(not GameData.check_iron(bad, GameData.FARM_MAP).is_empty(), "quarry scarcity rejects gold as fast as stone")
@@ -6051,9 +6069,9 @@ func _task_0192_kitchen() -> void:
 		"and what SPACE at a new kitchen cooks is still the fish, not a loaf wanting flour")
 	expect(GameData.SELL_PRICE.has(GameData.BREAD) and Shop.sellable().has(GameData.BREAD)
 		and GameData.group_members(&"artisan_goods").has(GameData.BREAD) and Names.KEYS.has(GameData.BREAD)
-		and not PlaceholderArt.art(&"icon_bread").is_empty() and not PlaceholderArt.art(&"hud_bread").is_empty()
+		and UiKit.icon(GameData.BREAD) != null and UiKit.icon(GameData.BREAD, true) != null
 		and not UiKit.missing_icons().has("bread"),
-		"bread sells at the stall, is an artisan good, has a name, and an icon through 0120's road")
+		"bread sells at the stall, is an artisan good, has a name, and its icons, A032's art since 0214")
 
 	# **Spring's stock alone**: a kitchen and nothing but carrots, a potato and
 	# a carp - the crops sown in spring and the pond's.
@@ -7035,6 +7053,561 @@ func _task_0223_tarps() -> void:
 		and dawn == [TarpArt.OFF, TarpArt.AWAY, TarpArt.YANK, TarpArt.COVERED],
 		"into the night the cover comes off at the wake, yanked and then away; at dawn the same frames backwards",
 		str([dusk, dawn]))
+	_completed += 1
+
+
+## 0147 - A005's night icons: the 24 cuts are raster art at their boxes and
+## nothing stands in for them; the hotbar draws each defence's own 16x16 and
+## the night bar its 10x10 pictures, START's, the flare's, the speed's and
+## the setting moon's.
+func _task_0147_night_icons() -> void:
+	var ids: Array = GameData.sorted_names(GameData.DEFENCES.keys()) + NightHud.ICONS
+	var wrong: Array = []
+	for id in ids:
+		for cut in [["icon", 16], ["hud", 10]]:
+			var name := StringName("%s_%s" % [cut[0], id])
+			var path := "res://sprites/ui/%s.png" % name
+			var frame := PlaceholderArt.frame(path)
+			var side := int(cut[1])
+			if frame.get("canvas") != Vector2i(side, side) \
+					or frame.get("pivot") != Vector2i(side / 2, side / 2) \
+					or bool(frame.get("loop", true)) or frame.has("stand_in") \
+					or not PlaceholderArt.art(name).is_empty() or not ResourceLoader.exists(path):
+				wrong.append(name)
+	expect(ids.size() == 12 and wrong.is_empty(),
+		"A005's 24 cuts are raster art at 16x16 (8,8) and 10x10 (5,5), and none has a stand-in",
+		str(wrong))
+
+	var bar := Hotbar.new()
+	var bare: Array = []
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var texture := bar._icon_of(id)
+		if texture == null or texture.resource_path != "res://sprites/ui/icon_%s.png" % id \
+				or texture.get_size() != Vector2(16, 16):
+			bare.append(id)
+	bar.free()
+	expect(bare.is_empty(), "the hotbar draws each defence's own 16x16 icon", str(bare))
+
+	var hud := NightHud.new()
+	hud._ready()
+	var worn := {
+		"start": hud._start.icon, "flare": hud._flare.icon, "speed": hud._speed.icon,
+		"dawn_moon": hud._dawn_moon.texture,
+	}
+	var undressed: Array = []
+	for id in worn:
+		var texture: Texture2D = worn[id]
+		if texture == null or texture.resource_path != "res://sprites/ui/hud_%s.png" % id \
+				or texture.get_size() != Vector2(10, 10):
+			undressed.append(id)
+	expect(undressed.is_empty() and hud._skip.icon == null,
+		"START, the flare and the speed wear their 10x10 pictures and the countdown its setting moon; SKIP keeps its word alone",
+		str(undressed))
+	expect(hud._dawn_moon.position.x + hud._dawn_moon.size.x + NightHud.PICTURE_GAP
+		<= hud._dawn.position.x and hud._speed.position.x >= NightHud.FLARE_SIZE.x
+		and hud._speed.position.x + NightHud.SPEED_SIZE.x < hud._skip.position.x
+		and hud._skip.position.x + NightHud.BUTTON_SIZE.x <= NightHud.BAR_SIZE.x,
+		"the moon stands just left of the countdown, and the bar's three buttons still fit it side by side")
+	hud.free()
+	expect(UiKit.orphan_icons().is_empty(), "every icon in sprites/ui is claimed",
+		str(UiKit.orphan_icons()))
+	_completed += 1
+
+
+## 0161 - A010's calendar marks: the 14 cuts are raster art at their boxes,
+## nothing stands in for them, and a mark draws its pack file - seven marks
+## told apart at both sizes.
+func _task_0161_calendar_icons() -> void:
+	var wrong: Array = []
+	var drawn: Array = []
+	var seen := {16: {}, 10: {}}
+	for which in CalendarMark.MARKS:
+		for small in [false, true]:
+			var side := CalendarMark.HUD if small else CalendarMark.ICON
+			var path := CalendarMark.file_of(which, small)
+			var frame := PlaceholderArt.frame(path)
+			if frame.get("canvas") != Vector2i(side, side) \
+					or frame.get("pivot") != Vector2i(side / 2, side / 2) \
+					or frame.has("stand_in") or PlaceholderArt.is_drawn(path) \
+					or not PlaceholderArt.art(StringName(path.get_file().get_basename())).is_empty():
+				wrong.append(path.get_file())
+			var mark := CalendarMark.new()
+			mark.setup(which, small)
+			var texture := mark.texture()
+			if texture == null or texture.resource_path != path \
+					or texture.get_size() != Vector2(side, side) or mark.size != Vector2(side, side):
+				drawn.append(path.get_file())
+			elif seen[side].has(texture.get_image().get_data()):
+				drawn.append("%s copies %s" % [path.get_file(), seen[side][texture.get_image().get_data()]])
+			else:
+				seen[side][texture.get_image().get_data()] = path.get_file()
+			mark.free()
+	expect(CalendarMark.MARKS.size() == 7 and wrong.is_empty(),
+		"A010's 14 cuts are raster art at 16x16 (8,8) and 10x10 (5,5), and none is drawn by code",
+		str(wrong))
+	expect(drawn.is_empty(), "every mark draws its own pack file at its size, no two alike",
+		str(drawn))
+	expect(UiKit.orphan_icons().is_empty(), "and every icon in sprites/ui is claimed",
+		str(UiKit.orphan_icons()))
+	_completed += 1
+
+
+## 0162 - A011's forecast heads: the five are raster art at 16x16 (8,8) with
+## nothing standing in, and the panel shows each kind its own whole file - no
+## box cut out of a walk frame any more - in its body's own colours.
+func _task_0162_forecast_heads() -> void:
+	var kinds: Array = [&"walker", &"runner", &"tank", &"breaker", &"giant"]
+	var wrong: Array = []
+	var shown: Array = []
+	var panel := ForecastPanel.new()
+	for kind in kinds:
+		var name := StringName("head_%s" % kind)
+		var path := "res://sprites/ui/%s.png" % name
+		var frame := PlaceholderArt.frame(path)
+		if frame.get("canvas") != Vector2i(16, 16) or frame.get("pivot") != Vector2i(8, 8) \
+				or frame.has("stand_in") or not PlaceholderArt.art(name).is_empty() \
+				or not ResourceLoader.exists(path):
+			wrong.append(kind)
+		var head := panel._head_of(kind)
+		if head == null or head is AtlasTexture or head.resource_path != path \
+				or head.get_size() != Vector2(16, 16):
+			shown.append(kind)
+			continue
+		var body := Image.load_from_file(ProjectSettings.globalize_path(
+			"res://sprites/enemies/%s_walk_0.png" % kind))
+		var colours := {}
+		for y in body.get_height():
+			for x in body.get_width():
+				var c := body.get_pixel(x, y)
+				if c.a > 0.5:
+					colours[c.to_html(false)] = true
+		var image := head.get_image()
+		for y in image.get_height():
+			for x in image.get_width():
+				var c := image.get_pixel(x, y)
+				if c.a > 0.5 and not colours.has(c.to_html(false)) and not shown.has(kind):
+					shown.append(kind)
+	panel.free()
+	expect(wrong.is_empty(), "A011's five heads are raster art at 16x16 (8,8), and none has a stand-in",
+		str(wrong))
+	expect(shown.is_empty(),
+		"the forecast shows each kind its own whole head file, in its body's own colours",
+		str(shown))
+	_completed += 1
+
+
+## 0163 - A012's winter ground: its 24 tiles (11 approved, 13 rotated or
+## sliced from them) are raster art in their 16x16 box, nothing stands in,
+## and the winter atlas is today's grid with snow where A012 drew it - the
+## water, the rock and the floor are today's, so a pond is never frozen.
+func _task_0163_winter_ground() -> void:
+	var names: Array = []
+	for name in ["grass", "grass_b", "grass_c", "grass_d", "path", "soil"]:
+		names.append("terrain/%s_winter" % name)
+	for prefix in ["edge", "shore"]:
+		for side in ["n", "e", "s", "w"]:
+			names.append("terrain/%s_%s_winter" % [prefix, side])
+		for corner in ["nw", "ne", "se", "sw"]:
+			names.append("terrain/%s_corner_%s_winter" % [prefix, corner])
+	names.append("crops/tilled_winter")
+	names.append("crops/tilled_wet_winter")
+	var wrong: Array = []
+	for name in names:
+		var path := "res://sprites/%s.png" % name
+		var frame := PlaceholderArt.frame(path)
+		if frame.get("canvas") != Vector2i(16, 16) or frame.get("pivot") != Vector2i(8, 16) \
+				or frame.has("stand_in") or SeasonView.stand_in(name) or not ResourceLoader.exists(path):
+			wrong.append(name)
+	expect(names.size() == 24 and wrong.is_empty(),
+		"A012's 24 winter tiles are raster art at 16x16 (8,16), and none has a stand-in",
+		str(wrong))
+
+	var today := Image.load_from_file(ProjectSettings.globalize_path("res://sprites/terrain/atlas.png"))
+	var winter := Image.load_from_file(ProjectSettings.globalize_path("res://sprites/terrain/atlas_winter.png"))
+	var kept := true
+	var snowed := 0
+	# Row 0 is the terrain byte's order (`gen_sprites.ATLAS_ROWS[0]`).
+	var row := [&"grass", &"soil", &"water", &"rock", &"path", &"floor"]
+	for column in row.size():
+		var cell := Rect2i(column * 16, 0, 16, 16)
+		var same := today.get_region(cell).get_data() == winter.get_region(cell).get_data()
+		if [&"water", &"rock", &"floor"].has(row[column]):
+			kept = kept and same
+		elif not same:
+			snowed += 1
+	for column in 3:
+		var cell := Rect2i(column * 16, 16, 16, 16)
+		kept = kept and today.get_region(cell).get_data() == winter.get_region(cell).get_data()
+	expect(winter.get_size() == Vector2i(256, 80) and kept and snowed == 3,
+		"the winter atlas is today's 256x80 grid: grass, soil and path snowed, the water's three frames, the rock and the floor today's",
+		"%s, %d snowed" % [winter.get_size(), snowed])
+	_completed += 1
+
+
+## 0164 - A013's seasons of the trees and its snow caps: raster art in their
+## boxes with nothing standing in, every tree on today's tree's ground row,
+## summer still today's, and each node's cap its own - the copper, coal and
+## gold nodes the generic one, the hardwood stump the 2x2.
+func _task_0164_seasonal_trees() -> void:
+	var wrong: Array = []
+	for tree in ["tree", "tree_b"]:
+		for season in ["spring", "autumn", "winter"]:
+			var name := "props/%s_%s" % [tree, season]
+			var path := "res://sprites/%s.png" % name
+			var frame := PlaceholderArt.frame(path)
+			if frame.get("canvas") != Vector2i(40, 48) or frame.get("pivot") != Vector2i(20, 44) \
+					or frame.has("stand_in") or SeasonView.stand_in(name) or not ResourceLoader.exists(path) \
+					or _lowest_row(Image.load_from_file(ProjectSettings.globalize_path(path))) != 43:
+				wrong.append(name)
+		if SeasonView.frame_for("props/" + tree, 1) != "props/" + tree:
+			wrong.append("summer's %s" % tree)
+	for cap in ["stump", "rock", "rock_b", "ore", "ore_b", "seam", "seam_b"]:
+		var name := "props/%s_snow" % cap
+		var path := "res://sprites/%s.png" % name
+		var frame := PlaceholderArt.frame(path)
+		if frame.get("canvas") != Vector2i(16, 16) or frame.get("pivot") != Vector2i(8, 14) \
+				or SeasonView.stand_in(name) or SeasonView.cap_for(StringName(cap), false) != name:
+			wrong.append(name)
+	var two := PlaceholderArt.frame("res://sprites/props/snow_cap_2x2.png")
+	if two.get("canvas") != Vector2i(32, 32) or two.get("pivot") != Vector2i(16, 30) \
+			or SeasonView.stand_in("props/snow_cap_2x2") \
+			or SeasonView.cap_for(&"hardwood_stump", true) != "props/snow_cap_2x2" \
+			or SeasonView.cap_for(&"copper_ore", false) != "props/snow_cap" \
+			or SeasonView.stand_in("props/snow_cap"):
+		wrong.append("the generic caps")
+	expect(wrong.is_empty(),
+		"A013's six trees stand on today's row 43 and its nine caps are its own, none a stand-in; summer keeps today's trees",
+		str(wrong))
+	_completed += 1
+
+
+## 0202 - A019's tool icons: every tool at every tier, as 0173 named them, is
+## raster art at 16x16 and 10x10 with nothing standing in and no tint, what
+## the workshop, the ledger and the stall ask `UiKit.icon` for - and the tool
+## in his hand keeps 0173's head ramps, A019's recorded tier ramps exactly.
+func _task_0202_tool_icons() -> void:
+	var wrong: Array = []
+	var asked := 0
+	for tool in GameData.sorted_names(GameData.TOOLS.keys()):
+		for tier in (GameData.TOOLS[tool] as Array).size():
+			var item := ToolTiers.item(tool, tier)
+			for cut in [["icon", 16, false], ["hud", 10, true]]:
+				var name := StringName("%s_%s" % [cut[0], item])
+				var path := "res://sprites/ui/%s.png" % name
+				var frame := PlaceholderArt.frame(path)
+				var texture := UiKit.icon(item, bool(cut[2]))
+				var side := int(cut[1])
+				if frame.get("canvas") != Vector2i(side, side) or frame.has("stand_in") \
+						or not PlaceholderArt.art(name).is_empty() or PlaceholderArt.art_tint(name) != Color.WHITE \
+						or texture == null or texture.resource_path != path:
+					wrong.append(name)
+				asked += 1
+	expect(asked == 30 and wrong.is_empty(),
+		"A019's 30 cuts are raster art that UiKit hands out untinted, none a stand-in", str(wrong))
+	# **The tiers' ramps** (A019's contract `tier_ramps`, dark to light), which
+	# the in-hand head tint maps stone_dark/stone/stone_light onto.
+	var ramps := {
+		&"basic": [&"ink_soft", &"stone_dark", &"stone"],
+		&"iron": [&"stone_dark", &"stone", &"stone_light"],
+		&"gold": [&"gold_dark", &"gold", &"gold_light"],
+		&"bamboo": [&"gold_dark", &"bone_dark", &"gold_light"],
+		&"fibre": [&"roof_dark", &"roof", &"roof_light"],
+	}
+	var drift: Array = []
+	for name in ramps:
+		for i in 3:
+			if (PlayerWork.HEAD_RAMPS[name][i] as Color).to_rgba32() \
+					!= (PaletteData.COLOURS[ramps[name][i]] as Color).to_rgba32():
+				drift.append("%s %d" % [name, i])
+	expect(PlayerWork.HEAD_RAMPS.size() == ramps.size() and drift.is_empty(),
+		"the tool in his hand keeps A019's recorded tier ramps", str(drift))
+	_completed += 1
+
+
+## **A020's materials** (task 0203): copper, gold and coal from the forge
+## (0176), hardwood (0177), hay and straw (0184), each at 16 and at 10 - the
+## raster files `UiKit.icon` hands the ledger, the stall and the workshop,
+## untinted, with no stand-in left behind them.
+func _task_0203_material_icons() -> void:
+	var wrong: Array = []
+	var asked := 0
+	for id in [GameData.COPPER, GameData.GOLD, GameData.COAL, GameData.HARDWOOD,
+			GameData.HAY, GameData.STRAW]:
+		for cut in [["icon", 16, false], ["hud", 10, true]]:
+			var name := StringName("%s_%s" % [cut[0], id])
+			var path := "res://sprites/ui/%s.png" % name
+			var frame := PlaceholderArt.frame(path)
+			var texture := UiKit.icon(id, bool(cut[2]))
+			var side := int(cut[1])
+			if frame.get("canvas") != Vector2i(side, side) or frame.has("stand_in") 					or not PlaceholderArt.art(name).is_empty() or PlaceholderArt.art_tint(name) != Color.WHITE 					or texture == null or texture.resource_path != path:
+				wrong.append(name)
+			asked += 1
+	expect(asked == 12 and wrong.is_empty(),
+		"A020's 12 cuts are raster art that UiKit hands out untinted, none a stand-in", str(wrong))
+	_completed += 1
+
+
+## **A029's animal goods** (task 0211): the egg, the milk, the wool and the
+## truffle at 16 and at 10 - the raster files `UiKit.icon` hands the ledger
+## and the stall, untinted - and the pig's dig spot, the approved mound the
+## barnyard draws where 0185 marks one.
+func _task_0211_animal_goods() -> void:
+	var wrong: Array = []
+	var asked := 0
+	for id in [GameData.EGG, GameData.MILK, GameData.WOOL, GameData.TRUFFLE]:
+		for cut in [["icon", 16, false], ["hud", 10, true]]:
+			var name := StringName("%s_%s" % [cut[0], id])
+			var path := "res://sprites/ui/%s.png" % name
+			var frame := PlaceholderArt.frame(path)
+			var texture := UiKit.icon(id, bool(cut[2]))
+			var side := int(cut[1])
+			if frame.get("canvas") != Vector2i(side, side) or frame.has("stand_in") 					or not PlaceholderArt.art(name).is_empty() or PlaceholderArt.art_tint(name) != Color.WHITE 					or texture == null or texture.resource_path != path:
+				wrong.append(name)
+			asked += 1
+	expect(asked == 8 and wrong.is_empty(),
+		"A029's 8 cuts are raster art that UiKit hands out untinted, none a stand-in", str(wrong))
+	var spot := PlaceholderArt.frame("res://sprites/props/truffle_spot.png")
+	var view := AnimalView.new()
+	var texture := view._texture(&"truffle_spot", 0, &"truffle_spot")
+	expect(PlaceholderArt.art(&"truffle_spot").is_empty() and spot.get("canvas") == Vector2i(16, 16)
+		and spot.get("pivot") == Vector2i(8, 14) and not spot.has("stand_in")
+		and texture != null and texture.resource_path == "res://sprites/props/truffle_spot.png"
+		and view._pivot(texture) == Vector2(8, 14),
+		"the dig spot is A029's raster mound, 16x16 at (8,14), and the barnyard draws that file",
+		str(spot))
+	view.free()
+	_completed += 1
+
+
+## **A014's crop ground** (task 0197): the trampled and withered crops at
+## (8,14) and the bed's turf edge and corner at (8,16) are raster art the
+## plots draw untinted, with the drawn stand-ins of 0155 and 0171 gone.
+func _task_0197_crop_ground() -> void:
+	var wrong: Array = []
+	for art in [[&"trampled", Vector2i(8, 14)], [&"withered", Vector2i(8, 14)],
+			[&"tilled_edge_n", Vector2i(8, 16)], [&"tilled_edge_corner_nw", Vector2i(8, 16)]]:
+		var path := WorldView.CROP_DIR + str(art[0]) + ".png"
+		var frame := PlaceholderArt.frame(path)
+		if frame.get("canvas") != Vector2i(16, 16) or frame.get("pivot") != art[1] \
+				or frame.has("stand_in") or not PlaceholderArt.art(art[0]).is_empty() \
+				or PlaceholderArt.is_drawn(path) or PlaceholderArt.texture_path(path) != path \
+				or PlaceholderArt.art_tint(art[0]) != Color.WHITE:
+			wrong.append(art[0])
+	expect(wrong.is_empty(), "A014's four pieces are raster art at their pivots, none a stand-in",
+		str(wrong))
+	var view := WorldView.new()
+	expect(not view.has_method("_withered_sprite") and not view.has_method("_trampled_sprite")
+		and not ResourceLoader.exists("res://src/ui/withered.gdshader"),
+		"the drawn withered and trampled stand-ins are gone with their shader")
+	view.free()
+	_completed += 1
+
+
+## **A015's spring crops** (task 0198): potato, garlic and strawberry at
+## their four stages and the strawberry regrowing, 16x16 at (8,14), and the
+## produce's and the four spring packets' icons at 16 and at 10 - raster art
+## the plots and `UiKit` hand out untinted. The carrot keeps its own crop and
+## produce; only its packet is A015's.
+func _task_0198_spring_crops() -> void:
+	var wrong: Array = []
+	var frames: Array = []
+	for crop in [GameData.POTATO, GameData.GARLIC, GameData.STRAWBERRY]:
+		for stage in 4:
+			frames.append("%s_%d" % [crop, stage])
+	frames.append("strawberry_regrow")
+	for art in frames:
+		var path := WorldView.CROP_DIR + str(art) + ".png"
+		var frame := PlaceholderArt.frame(path)
+		if frame.get("canvas") != Vector2i(16, 16) or frame.get("pivot") != Vector2i(8, 14) 				or frame.has("stand_in") or PlaceholderArt.texture_path(path) != path:
+			wrong.append(art)
+	for id in [GameData.POTATO, GameData.GARLIC, GameData.STRAWBERRY, GameData.CARROT_SEED,
+			GameData.POTATO_SEED, GameData.GARLIC_SEED, GameData.STRAWBERRY_SEED]:
+		for cut in [["icon", 16, false], ["hud", 10, true]]:
+			var name := StringName("%s_%s" % [cut[0], id])
+			var path := "res://sprites/ui/%s.png" % name
+			var frame := PlaceholderArt.frame(path)
+			var texture := UiKit.icon(id, bool(cut[2]))
+			if frame.get("canvas") != Vector2i(int(cut[1]), int(cut[1])) or frame.has("stand_in") 					or not PlaceholderArt.art(name).is_empty() or PlaceholderArt.art_tint(name) != Color.WHITE 					or texture == null or texture.resource_path != path:
+				wrong.append(name)
+	for crop in [GameData.POTATO, GameData.GARLIC, GameData.STRAWBERRY]:
+		if not PlaceholderArt.art(crop).is_empty() or PlaceholderArt.art_tint(crop) != Color.WHITE:
+			wrong.append(crop)
+	expect(frames.size() == 13 and wrong.is_empty(),
+		"A015's 13 crop frames and 14 icon cuts are raster art, untinted, none a stand-in", str(wrong))
+	_completed += 1
+
+
+## **A016's summer crops** (task 0199): pepper and melon at their four
+## stages, 16x16 at (8,14), the tall sunflower's 16x32 at (8,30), pepper's
+## and corn's regrowing stages, and the produce's and the four summer
+## packets' icons at 16 and at 10 - raster art, untinted. Corn keeps its own
+## four stages; only its regrowth is A016's.
+func _task_0199_summer_crops() -> void:
+	var wrong: Array = []
+	var frames: Array = []
+	for crop in [GameData.PEPPER, GameData.MELON]:
+		for stage in 4:
+			frames.append(["%s_%d" % [crop, stage], Vector2i(16, 16), Vector2i(8, 14)])
+	for stage in 4:
+		frames.append(["sunflower_%d" % stage, Vector2i(16, 32), Vector2i(8, 30)])
+	frames.append(["pepper_regrow", Vector2i(16, 16), Vector2i(8, 14)])
+	frames.append(["corn_regrow", Vector2i(16, 24), Vector2i(8, 22)])
+	for art in frames:
+		var path := WorldView.CROP_DIR + str(art[0]) + ".png"
+		var frame := PlaceholderArt.frame(path)
+		if frame.get("canvas") != art[1] or frame.get("pivot") != art[2] \
+				or frame.has("stand_in") or PlaceholderArt.texture_path(path) != path:
+			wrong.append(art[0])
+	for id in [GameData.PEPPER, GameData.SUNFLOWER, GameData.MELON, GameData.CORN_SEED,
+			GameData.PEPPER_SEED, GameData.SUNFLOWER_SEED, GameData.MELON_SEED]:
+		for cut in [["icon", 16, false], ["hud", 10, true]]:
+			var name := StringName("%s_%s" % [cut[0], id])
+			var path := "res://sprites/ui/%s.png" % name
+			var frame := PlaceholderArt.frame(path)
+			var texture := UiKit.icon(id, bool(cut[2]))
+			if frame.get("canvas") != Vector2i(int(cut[1]), int(cut[1])) or frame.has("stand_in") \
+					or not PlaceholderArt.art(name).is_empty() or PlaceholderArt.art_tint(name) != Color.WHITE \
+					or texture == null or texture.resource_path != path:
+				wrong.append(name)
+	for crop in [GameData.PEPPER, GameData.SUNFLOWER, GameData.MELON, &"corn_regrow", &"pepper_regrow"]:
+		if not PlaceholderArt.art(crop).is_empty() or PlaceholderArt.art_tint(crop) != Color.WHITE:
+			wrong.append(crop)
+	expect(frames.size() == 14 and wrong.is_empty(),
+		"A016's 14 crop frames and 14 icon cuts are raster art, untinted, none a stand-in", str(wrong))
+	_completed += 1
+
+
+## **A021's nodes** (task 0204): copper, coal and gold and their `_b`
+## variants at 16x16 on (8,14), and the big stump whole and chipped at 32x32 on
+## (16,30) - raster art, untinted, no stand-in left. The map picks each forge
+## node's variant by cell as it does the ore's, the chipped stump is drawn from
+## the first swing, and the coal seams wear the seam's snow cap.
+func _task_0204_ore_hardwood() -> void:
+	var wrong: Array = []
+	for art in [[&"copper_ore", Vector2i(16, 16)], [&"copper_ore_b", Vector2i(16, 16)],
+			[&"coal_seam", Vector2i(16, 16)], [&"coal_seam_b", Vector2i(16, 16)],
+			[&"gold_ore", Vector2i(16, 16)], [&"gold_ore_b", Vector2i(16, 16)],
+			[&"hardwood_stump", Vector2i(32, 32)], [&"hardwood_stump_chipped", Vector2i(32, 32)]]:
+		var path := WorldView.PROP_DIR + str(art[0]) + ".png"
+		var frame := PlaceholderArt.frame(path)
+		var pivot := Vector2i(8, 14) if art[1] == Vector2i(16, 16) else Vector2i(16, 30)
+		if frame.get("canvas") != art[1] or frame.get("pivot") != pivot or frame.has("stand_in") \
+				or not PlaceholderArt.art(art[0]).is_empty() or PlaceholderArt.art_tint(art[0]) != Color.WHITE \
+				or PlaceholderArt.texture_path(path) != path:
+			wrong.append(art[0])
+	for id in [&"copper_ore", &"coal_seam", &"gold_ore"]:
+		if WorldView.PROP_VARIANTS.get(id, []) != [id, StringName("%s_b" % id)]:
+			wrong.append("variants of %s" % id)
+	expect(wrong.is_empty(), "A021's eight nodes are raster art at their boxes, each forge node with its variant",
+		str(wrong))
+	var state := State.create(4321)
+	var anchor := Building.anchor_of(state, Farm.cells_with(state, &"hardwood_stump")[0])
+	var whole := WorldView.struck_art(state, &"hardwood_stump", anchor)
+	state["tools"]["axe"] = 1
+	Gathering.strike(state, anchor)
+	expect(whole == &"hardwood_stump" and WorldView.struck_art(state, &"hardwood_stump", anchor) == &"hardwood_stump_chipped"
+		and SeasonView.cap_for(&"coal_seam", false) == "props/seam_snow"
+		and SeasonView.cap_for(&"coal_seam_b", false) == "props/seam_snow"
+		and SeasonView.cap_for(&"gold_ore_b", false) == "props/snow_cap",
+		"the big stump is drawn chipped from its first swing, and coal wears the seam's cap",
+		"%s, %s" % [whole, WorldView.struck_art(state, &"hardwood_stump", anchor)])
+	_completed += 1
+
+
+## **A022's fish** (task 0205): every species of the book - the twelve and
+## the four legendaries - at three scales from one source, raster art,
+## untinted: the icon pair `UiKit.icon` hands the ledger and the stall, and the
+## portrait the book draws (black while the fish is unknown). The generic
+## `icon_fish` a recipe names stays the resource icon it was.
+func _task_0205_fish() -> void:
+	var wrong: Array = []
+	var asked := 0
+	for id in GameData.sorted_names(GameData.FISH_SPECIES.keys()):
+		for cut in [["icon", 16, false], ["hud", 10, true], ["portrait", 32, false]]:
+			var name := StringName("%s_%s" % [cut[0], id])
+			var path := "res://sprites/ui/%s.png" % name
+			var frame := PlaceholderArt.frame(path)
+			var texture := UiKit.picture(name) if cut[0] == "portrait" else UiKit.icon(id, bool(cut[2]))
+			if frame.get("canvas") != Vector2i(int(cut[1]), int(cut[1])) or frame.has("stand_in") \
+					or not PlaceholderArt.art(name).is_empty() or PlaceholderArt.art_tint(name) != Color.WHITE \
+					or texture == null or texture.resource_path != path:
+				wrong.append(name)
+			asked += 1
+	var generic := UiKit.icon(GameData.FISH)
+	expect(asked == 48 and wrong.is_empty() and generic != null
+		and generic.resource_path == "res://sprites/ui/icon_fish.png",
+		"A022's 48 cuts are raster art, untinted, none a stand-in, and the generic fish stays",
+		str(wrong))
+	_completed += 1
+
+
+## **A031's machines** (task 0213): the keg, the preserves jar, the dairy, the
+## loom and the mill, each idle, active, hurt and wrecked - raster art at the
+## boxes 0188 settled, at full density, every state a variant of the idle one.
+## A wreck draws as a wreck, and the jar's fire and smoke rise from A031's
+## firebox: inside its drawing, where the footprint puts the canvas.
+func _task_0213_machines() -> void:
+	var wrong: Array = []
+	var boxes := {&"keg": [Vector2i(48, 56), Vector2i(24, 52)], &"preserves_jar": [Vector2i(48, 56), Vector2i(24, 52)],
+		&"dairy": [Vector2i(64, 64), Vector2i(32, 60)], &"loom": [Vector2i(64, 64), Vector2i(32, 60)],
+		&"mill": [Vector2i(64, 96), Vector2i(32, 92)]}
+	for id in boxes:
+		for suffix in ["", "_active", "_hurt", "_wreck"]:
+			var art := StringName("%s%s" % [id, suffix])
+			var path := WorldView.BUILDING_DIR + str(art) + ".png"
+			var frame := PlaceholderArt.frame(path)
+			var size := Building.size_of(id)
+			var offset: Vector2i = Vector2i(size.x * 8, size.y * 16) - boxes[id][1]
+			if frame.get("canvas") != boxes[id][0] or frame.get("pivot") != boxes[id][1] \
+					or frame.get("cell_offset") != offset or frame.has("stand_in") \
+					or not PlaceholderArt.art(art).is_empty() or PlaceholderArt.art_tint(art) != Color.WHITE \
+					or ArtPlacement.visual_scale(path) != 1.0:
+				wrong.append(art)
+	expect(wrong.is_empty(), "A031's twenty states are raster art at their boxes and full density", str(wrong))
+	var state := State.create(4321)
+	var view := WorldView.new()
+	view._state = state
+	var wreck := {"id": &"loom", "hp": 0}
+	var corner := Vector2(64, 96)
+	var light := ArtPlacement.emission(&"preserves_jar", corner, &"light", Vector2.ZERO, Vector2i(2, 2))
+	var smoke := ArtPlacement.emission(&"preserves_jar", corner, &"smoke", Vector2.ZERO, Vector2i(2, 2))
+	# The canvas's corner sits at the footprint's bottom middle less the pivot.
+	var canvas := corner + Vector2(16, 32) - Vector2(24, 52)
+	expect(view._station_art(&"loom", wreck, Vector2i(4, 6)) == &"loom_wreck"
+		and light == canvas + Vector2(21, 47) and smoke == canvas + Vector2(35, 22)
+		and not PlaceholderArt.frame(WorldView.BUILDING_DIR + "preserves_jar_wreck.png").has("light"),
+		"a wrecked machine draws its wreck, and the jar's fire and smoke rise from its firebox",
+		"%s %s %s" % [view._station_art(&"loom", wreck, Vector2i(4, 6)), light, smoke])
+	view.free()
+	_completed += 1
+
+
+## **A032's artisan goods** (task 0214): the eleven goods of the machines
+## and the kitchen at 16 and at 10 - raster art `UiKit.icon` hands the ledger,
+## the stall and the panels, untinted - while the oil's and the food's icons
+## stay the resource icons they were.
+func _task_0214_artisan_goods() -> void:
+	var wrong: Array = []
+	var asked := 0
+	for id in [GameData.WINE, GameData.JUICE, GameData.JELLY, GameData.PICKLES, GameData.CHEESE,
+			GameData.BUTTER, GameData.CLOTH, GameData.SANDBAG, GameData.FLOUR, GameData.SUGAR,
+			GameData.BREAD]:
+		for cut in [["icon", 16, false], ["hud", 10, true]]:
+			var name := StringName("%s_%s" % [cut[0], id])
+			var path := "res://sprites/ui/%s.png" % name
+			var frame := PlaceholderArt.frame(path)
+			var texture := UiKit.icon(id, bool(cut[2]))
+			if frame.get("canvas") != Vector2i(int(cut[1]), int(cut[1])) or frame.has("stand_in") \
+					or not PlaceholderArt.art(name).is_empty() or PlaceholderArt.art_tint(name) != Color.WHITE \
+					or texture == null or texture.resource_path != path:
+				wrong.append(name)
+			asked += 1
+	var oil := UiKit.icon(GameData.OIL)
+	var food := UiKit.icon(GameData.FOOD)
+	expect(asked == 22 and wrong.is_empty() and oil != null and oil.resource_path == "res://sprites/ui/icon_oil.png"
+		and food != null and food.resource_path == "res://sprites/ui/icon_food.png",
+		"A032's 22 cuts are raster art, untinted, none a stand-in, and oil and food keep theirs",
+		str(wrong))
 	_completed += 1
 
 

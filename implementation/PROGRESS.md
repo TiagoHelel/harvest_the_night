@@ -21968,3 +21968,1624 @@ implementation/{BACKLOG,PROGRESS}.md,
 implementation/prompts/0223-defence-tarps.md, implementation/shots/0223/,
 docs/devlog/{index,index.pt_BR}.md
 
+## 0147 - Art: the night hotbar and HUD icons - done 2026-10-10
+
+What changed: Codex pack A005, approved by the owner on 2026-10-10 ("aprovado"),
+is in the game.
+- **The hotbar** draws each defence's own 16x16 icon.
+- **The night bar** draws START's horn, the flare and the speed's chevrons at
+  10x10 on their buttons.
+- **The dawn countdown** has the setting moon before it.
+- **The mode hint** shows the defence it names - or the flare, when it aims
+  one - just left of its words.
+
+### The delivery, checked before anything moved
+
+- **All 24 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 12 selected raws, their prompts and their call records.**
+- **The references are on disk at their hashes.** Two r2 calls were given
+  their r1 candidates, `gun_tower-r1` and `flame_tower-r1`. Those now live
+  byte-identical in the delivery's `preview/input-history/`, which
+  `contract.json` lists.
+- **The delivery's `build.py --check` passes:** identical bytes and no
+  failed check.
+
+### The promotion (raster pipeline)
+
+- **The 12 raws** were copied byte for byte to
+  `assets/art_source/ui/night/<id>-r<N>.png`.
+- **24 manifest entries** (`ui/icon_<id>` 16x16 at (8,8) and `ui/hud_<id>`
+  10x10 at (5,5), `display_role` inventory / compact_hud) carry:
+  - each file's recorded recipe unchanged: crop, scale, anchor, alpha 128,
+    and `palette_keys` in its recorded order, which decides ties in the
+    reduction;
+  - the source path adapted to its promoted place, and nothing else;
+  - `generation_task` A005, `integration_task` 0147;
+  - the revision, the tool and the approval in words.
+- **Their references hold the provenance:**
+  - each call's input images;
+  - the call record;
+  - the approved native export;
+  - the delivery's `contract.json` and `APPROVAL.json`.
+  `import_art.py` checks every one of them against its hash. The prompts
+  stay in the delivery folder, which the handoff names as the authority.
+  **So `implementation/backlog/deliveries/A005-night-icons/` has to be
+  committed with this.**
+- **`ownership.json`** gives the 24 outputs to the raster importer.
+- **Pixels, not bytes:**
+  - `import_art.py` writes its own PNG encoding, so a runtime file's bytes
+    and sha256 are not those of Codex's export, which PIL wrote.
+  - Every runtime file decodes to exactly the approved RGBA pixels, all 24.
+  - `check_ui_art.py` now holds that forever, against the approved export
+    named in each entry's references.
+
+### The game
+
+- **`PlaceholderArt`** loses A005's eight hotbar entries. `HOTBAR_ICON`
+  stays, for a later defence's stand-in (A045).
+- **`Hotbar._icon_of`** already preferred `sprites/ui/icon_<id>.png`. Only
+  its comments change.
+- **`NightHud`:**
+  - **START, the flare and the speed** wear `hud_start`, `hud_flare` and
+    `hud_speed` as their `icon`. SKIP keeps its word alone: the pack has no
+    picture for it.
+  - **The bar is no longer thirds.** A picture and the theme's gap take
+    14 px of a button, so the flare grows to 54 for its 29 px of FLARE and
+    the speed shrinks to 38 round the 17 of `%dx`. SKIP stays 46. The three
+    still fill the bar's 146.
+  - **`DawnMoon`** (`hud_dawn_moon`) stands at (348,3), just left of the
+    countdown, and goes and comes with it.
+  - **`ModeHintIcon`** shows the 10x10 of the defence the hint names: placed,
+    upgraded, sold or mended. When aiming, it shows the flare's. It sits
+    2 px left of the right-aligned words (`hint_words_at`).
+  - **Everything is drawn at native size.** The HUD layer is never relit, so
+    the pictures keep their colours at night.
+- **`UiKit.orphan_icons`** now counts the defences and `NightHud.ICONS` as
+  claimed.
+- **`strings.csv`:** the five keys drawn beside a picture now state the room
+  left for their words:
+  - `NHUD_FLARE`, `NHUD_FLARE_CHARGE`: 34;
+  - `NHUD_SPEED`: 18;
+  - `NHUD_START`, `NHUD_START_IN`: 126.
+  `i18n_check` holds every text to that room.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: **PASS**, 60 of 60, with 0223's lines in the tree too.
+- `verify.py --fast` passed 59 and skipped the exports (721 s). The exports
+  passed alone right after (48 s).
+- `headless_v1` 2361 asserts, `input_v1` 709 cases and `input_check` 1244,
+  0 failed. Perf: a swarm at 7586 us of the 8333.
+
+**Tests:**
+- **`_task_0147_night_icons` (headless_v1), 5 asserts:**
+  - The 24 cuts answer from RasterArt at their boxes, with no stand-in.
+  - The hotbar's icon for each of the eight defences is its own 16x16.
+  - START, the flare and the speed wear their 10x10s, the countdown its
+    moon, and SKIP none.
+  - The moon and the bar's three buttons fit.
+  - No icon in `sprites/ui` is an orphan.
+- **`_case_0133_hotbar` (input_v1):** in the real game, every A005 slot
+  wears its own 16x16 at native size.
+- **`_case_0139_night_hud` (input_v1):**
+  - START's horn, with every way START reads fitting beside it in both
+    languages.
+  - The wall's picture just left of its hint, right of the house's numbers.
+  - The flare's and the speed's pictures, with their words fitting.
+  - The moon between the widest count, in both languages, and the
+    countdown.
+- **`tools/check_ui_art.py`:** an A005 family under the resource icons'
+  rules, plus the approved pixels.
+- **`ui_art_showcase` (`show_art --ui`):** an A005 page in both languages and
+  both contrasts. The pack's own files, never a stand-in, at native size,
+  pixel-exact.
+
+**Shots:** `python tools/shot.py 0147 forecast_build wave repair aim --fhd`, and
+with `--pt_BR`, opened:
+- **`forecast_build`, Winter 14's build step:**
+  - the hotbar's eight slots each wear their defence - the crossbow, the
+    barricade's logs, the fence, the flame tank, the gun, the mine's red
+    button, the mortar, the wall - greyed where unaffordable;
+  - START has the horn at its left.
+- **`wave`:**
+  - FLARE with the flare, the speed's gold chevrons before 1x, SKIP alone;
+  - the setting moon before DAWN 3:54, clear of 29 LEFT.
+- **`repair`:** "LEFT CLICK: mend gun tower" with the gun's 10x10 just
+  left of it.
+- **`aim`, in Portuguese:** "BOTÃO ESQUERDO: soltar o sinal" with the
+  flare; SINAL, 1x and PULAR fit their buttons. No two things overlap.
+- **Unlit at night:** the pictures keep their own colours over the dark
+  strip.
+
+## 0161 - Art: seasons and moons - done 2026-10-10
+
+What changed: Codex pack A010, approved by the owner on 2026-10-10 ("aprovado,
+manda o prompt pro claude"), is in the game.
+- **The four seasons:** spring's sprout, summer's sun, autumn's leaf, winter's
+  snowflake.
+- **The three night marks:** the Full Moon, the boss night's horned skull and
+  the calm night's crescent with its star.
+- **Where they show:** the forecast panel at 16x16 and the night strip at
+  10x10, in place of 0158's code-drawn marks.
+
+### The delivery, checked before anything moved
+
+- **All 14 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 7 selected raws, their prompts, call records and
+  references.**
+- **The delivery's `build.py --check` passes:** identical bytes and every
+  check true, `season_silhouettes_distinct` and `night_marks_distinct`
+  among them.
+
+### The promotion
+
+- **The 7 raws** went byte for byte to
+  `assets/art_source/ui/calendar/<id>-r1.png`.
+- **14 manifest entries**, `ui/icon_<id>` 16x16 at (8,8) and `ui/hud_<id>`
+  10x10 at (5,5), carry the provenance the way 0147 set it out:
+  - each file's recorded recipe unchanged. The pale moons keep their
+    restricted `palette_keys`, so they never turn sun-gold.
+  - the source path adapted to its promoted place, and nothing else;
+  - the call's input images, the call record, the approved export, the
+    contract and the approval as hashed references;
+  - `generation_task` A010, `integration_task` 0161.
+- **`ownership.json`** gives the 14 outputs to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.** The
+  importer's PNG encoding differs from PIL's, as in 0147, so the bytes do
+  not match. `check_ui_art.py` holds the pixels.
+- **The prompts and approvals stay in the delivery folder**, which has to be
+  committed with this.
+
+### The game
+
+- **`PlaceholderArt`** loses A010's 14 entries. `MARK_ICON` and `MARK_HUD`
+  stay: the seed, material and bait icons still stand in at those boxes.
+- **`CalendarMark` draws only its pack file now.** The seven code-drawn
+  shapes are deleted, as 0158 promised, and so is `is_stand_in`, which
+  nothing asked for any more. `texture()` is for the checks.
+- **`UiKit.orphan_icons`** now counts `CalendarMark.MARKS` as claimed.
+- **No layout moves:** the forecast and the strip already drew a mark in its
+  box at its native size. The HUD is never relit, so the marks keep their
+  colours at night.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: 59 of 60 (946 s). Only perf failed: the swarm at 10195 us of the 8333.
+- **The machine, not the task.** Run alone three times after, perf failed at
+  8698, 8911 and 12698 us, and in the last run every row had doubled
+  together - `day_tutorial` 31 -> 62 us, `day_tick` 75 -> 143 - which no
+  art or view change does.
+- **The same tree's 0147 run passed perf** an hour earlier (7586 us).
+- `headless_v1` 2364 asserts, `input_v1` 709 cases and `input_check` 1244,
+  0 failed.
+
+**Tests:**
+- **`_task_0161_calendar_icons` (headless_v1), 3 asserts:**
+  - The 14 cuts answer from RasterArt at their boxes, with no stand-in.
+  - Every `CalendarMark` draws its own file at its size, the seven marks
+    distinct at both sizes.
+  - No icon in `sprites/ui` is an orphan.
+- **`tools/check_ui_art.py`:** an A010 family under the icon rules, plus
+  the approved pixels.
+- **`ui_art_showcase`:** an A010 page in both languages and both contrasts.
+- No input case: nothing new is pressed.
+
+**Shots:** `python tools/shot.py 0161 forecast_dusk forecast_build forecast_calm dusk --fhd`,
+and with `--pt_BR`, opened:
+- **`forecast_dusk`, Autumn 7 at 18:36, by day:** the orange maple leaf by
+  TONIGHT, and the pale cratered Full Moon at the right.
+- **`forecast_build`, Winter 14's build step:**
+  - the snowflake, the horned skull and the moon on the panel;
+  - the same three at 10x10 on the night strip after WINTER 14, each still
+    its own shape.
+- **`forecast_calm`, Summer 1:** the sun, and the crescent with its star
+  for A CALM NIGHT.
+- **`dusk`:** spring's sprout.
+- **Distinct and unlit:** the three moons - full, calm, and 0147's setting
+  dawn moon - never read as one another, and the marks keep their colours
+  by day and by night.
+
+## 0162 - Art: forecast heads - done 2026-10-10
+
+What changed: Codex pack A011, approved by the owner on 2026-10-10
+("aprovado"), is in the game.
+- **The forecast's five heads** - walker, runner, tank, breaker and Giant - are
+  the owner's choice of 2026-10-08: exact crops of each enemy's own walk
+  frame 0, no longer 0158's boxes cut out of the frame.
+- **The owner's words, verbatim:** "ficou bem incoerente, faz um recorte da
+  cabeca dos sprites atuais que dai nao tem erro". The generated busts are
+  retired in the delivery.
+
+### The delivery, checked before anything moved
+
+- **All 5 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 5 source snapshots.**
+- **The live enemy frames have not moved:** each of
+  `sprites/enemies/<kind>_walk_0.png` still hashes as the snapshot it was cut
+  from. Had one changed, the integration would have stopped.
+- **The delivery's `build.py --check` passes:** identical bytes and every
+  check true.
+
+### The promotion
+
+- **The 5 snapshots** went byte for byte to
+  `assets/art_source/ui/heads/<kind>-walk-0-r1.png`.
+- **5 manifest entries**, `ui/head_<kind>` 16x16 at (8,8), are Codex's
+  validated exact-source adapters (`integration-recipes.json`):
+  - the crop with its alpha trim, scale 1, the anchor, alpha 128;
+  - palette `exact-source`, so no colour is reduced;
+  - the source path adapted to its promoted place, and nothing else.
+- **No ImageGen provenance is invented.** The delivery's prompt and call are
+  null. The entry's `prompt` is `head-crops.json`, the recorded owner request
+  and crop record, and `tool` says what it was: "deterministic crop
+  explicitly requested by owner". A `deviation` field quotes the owner's
+  words.
+- **The references:**
+  - the live enemy frame, as the head's pixel and colour authority. If a
+    body is ever redrawn, `import_art.py` stops at the head that no longer
+    matches it, on purpose.
+  - the approved export, the adapters, the contract and the approval.
+- **`ownership.json`** gives the 5 outputs to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.** As
+  with A005 and A010, the importer's PNG bytes are its own.
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses A011's five entries. `HEAD_ICON` and
+  `stand_in_region` stay for a later enemy's head, which stands in the way
+  0158 drew A011's.
+- **`ForecastPanel._head_of`** already preferred `sprites/ui/head_<kind>.png`.
+  Only its comments change: the panel asks for `ui/head_<kind>`, and nothing
+  else changes.
+- **Drawn at 16x16, no flip.** The panel is UI, never relit, so a head keeps
+  its body's colours at night.
+- **`forecast_dusk` moves to Spring 14 at 18:30**, as the task asks: the
+  first season's boss night, whose forecast lists all five kinds. Autumn 7's
+  had four.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: 58 of 60 (932 s), and both failures were time.
+- **perf:** the swarm at 11791 us of the 8333, with every row slowed
+  together as in 0161's run.
+- **`headless_check` hit verify's 120 s bound.** Run alone right after,
+  through Python as verify runs it, it passed: 17632 asserts, 0 failed, in
+  108 s.
+- `headless_v1` 2366 asserts, `input_check` 1244 cases and `input_v1` 709,
+  0 failed.
+
+**Tests:**
+- **`_task_0162_forecast_heads` (headless_v1), 2 asserts:**
+  - The five are raster art at 16x16 (8,8) with no stand-in.
+  - The panel's head for each kind is its whole file - not an
+    `AtlasTexture` box of a walk frame - in only its body's own colours.
+- **`tools/check_ui_art.py`:** a heads family (`HEADS`, which later enemies
+  join):
+  - exact-source at scale 1;
+  - 16x16 (8,8), standing on row 14 with row 15 clear;
+  - binary alpha, every colour from the live body, no two alike;
+  - the approved pixels.
+- **`ui_art_showcase`:** an A011 page in both languages and both contrasts.
+- No input case: nothing new is pressed.
+
+**Shots:** `python tools/shot.py 0162 forecast_dusk forecast_build --fhd`, and with
+`--pt_BR`, opened:
+- **`forecast_dusk`, Spring 14 at 18:36, by day:** the boss night's
+  forecast lists all five kinds:
+  - walker 60 (brown hair, red shirt), runner 42 (green head), tank 31
+    (yellow-green armour), breaker 54 (dark, a blue strap);
+  - the Giant 1, with its stone plates.
+- **`forecast_build`, Winter 14's night, in Portuguese:** the same five
+  heads, the same pixels over the dark panel. The panel is not relit.
+- **Readable and distinct at 16x16:** none is a box cut out of a body any
+  more, and no two read alike.
+
+## 0163 - Art: winter ground - done 2026-10-10
+
+What changed: Codex pack A012, approved by the owner on 2026-10-10 ("aprovado"),
+is in the game.
+- **Winter, days 43 to 56,** lies on real snow: snowed grass in four
+  variations, a snowed path and soil, snowed banks and shores, and tilled
+  earth with snow on its ridges and its furrows dark, dry and wet.
+- **This replaces 0159's palette remap** of today's ground. The remap stays
+  for whatever this pack does not cover.
+- **Not frozen:** the water, the rock and the floor keep today's tiles, so
+  the pond stays open and fishing goes on.
+
+### The delivery, checked before anything moved
+
+- **All 11 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 11 selected raws, their prompts and call records.**
+- **The five r2 calls were given their r1 candidates.** Those live
+  byte-identical in the delivery's `preview/input-history/`, which the
+  contract lists, under absolute Windows paths there; they are normalised
+  here.
+- **The delivery's `build.py --check` passes:** identical bytes and every
+  check true - seamless, quiet density, overlay geometry, grass borders
+  shared, snow above path and soil, furrows kept, wet darker by 20.
+
+### The promotion
+
+- **The raws went byte for byte** to `assets/art_source/terrain/winter/` and
+  `assets/art_source/crops/winter/`.
+- **11 manifest entries** `terrain/<name>_winter` and `crops/tilled*_winter`,
+  16x16 at (8,16), 0.55 s:
+  - each file's recipe unchanged, with its own `palette_keys`;
+  - the 0147 provenance: inputs, call record, approved export, contract and
+    approval;
+  - `generation_task` A012, `integration_task` 0163.
+- **13 derived entries, through manifest operations only,** the way today's
+  banks derive:
+  - `edge_e/s/w_winter` and `shore_e/s/w_winter`: 1, 2 and 3 clockwise
+    quarter-turns of the north side;
+  - `edge_corner_nw_winter`: `slice_canvas` (0,0,1,1) of `edge_n_winter`;
+  - the edge and shore `ne/se/sw` caps: quarter-turns of their north-west
+    caps.
+  All 13 match an independent rotation and slice of their parents, pixel
+  for pixel.
+- **`ownership.json`:** the 24 outputs are raster-owned, and the winter
+  atlas `ascii`.
+- **Every approved file decodes to exactly the approved RGBA pixels.** The
+  importer's PNG encoding is its own, as in 0147.
+- **The delivery folder has to be committed with this.**
+
+### The winter atlas (`tools/gen_sprites.py`)
+
+- **`build_atlas(season)`** builds `ATLAS_ROWS`, the edge and shore mask
+  rows and the corner slots, with each cell's `seasonal()` tile: the
+  season's own raster tile where its pack delivered one, today's otherwise.
+- **`SEASON_ATLASES`** writes `sprites/terrain/atlas_winter.png`, once the
+  winter tiles are raster-owned.
+- **The same 256x80 grid** as `atlas.png`:
+  - row 0 snows on grass, soil and path, and keeps today's water, rock and
+    floor;
+  - row 1 is the water's three frames;
+  - row 2 is the four winter grasses;
+  - rows 3 and 4 are the winter edge and shore masks, N=1 E=2 S=4 W=8, as
+    today;
+  - the corner slots hold the winter caps.
+- **The grass variation rule is untouched,** since it reads the same cells.
+- **`atlas.png` is byte for byte what it was.**
+
+### The game
+
+- **No view code changes.** 0159's hook already swaps the tile set's texture
+  for `SeasonView.frame_for("terrain/atlas", WINTER)`. With A012's real
+  `atlas_winter` there, `carries_season` turns the ground's remap off. The
+  plots take `crops/tilled_winter` and `tilled_wet_winter` through the same
+  lookup.
+- **No cell is laid again** for the swap, and `input_v1` holds that.
+- **`PlaceholderArt`** loses A012's 12 entries: the atlas, the six tiles,
+  the north side and shore, the shore cap and the two tilled.
+  `GROUND_TILE` and `GROUND_ATLAS` stay for another season's ground.
+- **Comments:** `SeasonView`'s and `WorldView._apply_ground_art`'s say
+  what 0163 did.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: 59 of 60 (870 s, perf passing). The one failure was this task's own:
+- **`headless_check` wants a `func _set_<name>(` for every scenario**, and
+  `winter_fishing` first called `_set_fishing_bar` with a date from the
+  table.
+- **It has its own builder now,** `_set_winter_fishing`, and
+  `headless_check` passed right after (17633 asserts, 0 failed). Nothing
+  else changed.
+- `headless_v1` 2368 asserts, `input_v1` 710 cases and `input_check` 1244,
+  0 failed. `check_terrain_art`, `check_crop_art`, `import_art --check` and
+  the terrain, water and crop showcases all pass.
+
+**Tests:**
+- **`_task_0163_winter_ground` (headless_v1), 2 asserts:**
+  - The 24 winter tiles answer from RasterArt at 16x16 (8,16), none a
+    stand-in.
+  - The winter atlas is 256x80, with grass, soil and path snowed, and the
+    water's frames, the rock and the floor today's.
+- **`_task_0159_seasons`'s lookup assert now expects A012's real atlas:**
+  `carries_season`, not a stand-in, and autumn with none.
+- **`_case_0159_seasons` (input_v1):** on Winter 3 the tile set draws
+  `atlas_winter.png` and the ground's remap is off. Spring 3 of Year 2 is
+  back on `atlas.png`. No new frames were waited for.
+- **`tools/check_terrain_art.py`, the winter family:**
+  - six seamless opaque tiles, the four grasses sharing their borders;
+  - snow 25 brighter than the winter path and soil: 221 against 168 and
+    96;
+  - banks at most three rows deep, with exact rotations and caps;
+  - the winter atlas source-exact in all 80 cells, 15 of them snowed.
+- **`tools/check_crop_art.py`, winter soil:**
+  - its own sources, opaque;
+  - wet 38 darker than dry, against at least 20;
+  - today's furrow rows still dark under the snow.
+- **The winter fishing scenario** brings `shot.gd` to 81 scenarios.
+  `headless_check`'s count follows.
+
+**Shots:** `python tools/shot.py 0163 season_winter season_winter_night winter_day winter_build winter_fishing --fhd`, opened:
+- **`season_winter`, Winter 3 at noon:**
+  - the farm under snow: the grass's four variations with no seam
+    between them, and the snowed path with its tracks, joining the grass
+    with no line;
+  - the tilled beds with snow on the ridges and the furrows dark.
+- **`winter_day`:** Winter 1's rested fields on the winter tilled earth.
+- **`winter_fishing`, the north-west pond at noon:** the snowed shore's
+  thin bank all round, outer and inner corners unbroken, and the water open
+  and blue under the snowfall, a trout on the line.
+- **`winter_build` and `season_winter_night`:**
+  - the same ground under the night's blue light, the pond's shore and
+    corners included;
+  - the world's relight darkens it the way it darkens today's ground; no
+    night is baked into the tiles.
+- **Unchanged:** the trees are still 0159's remapped stand-ins, which A013
+  replaces in 0164.
+- **Already in `_set_noon`, not this task's:** taking `season_winter`
+  prints a SCRIPT ERROR from `Farming.days_to_grow` on a winter plot with
+  no crop. The picture is still taken at 12:06.
+
+## 0164 - Art: trees through the seasons - done 2026-10-10
+
+What changed: Codex pack A013, approved by the owner on 2026-10-10 ("aprovado"),
+is in the game.
+- **Both tree species wear their season:** spring's blossom, autumn's rust,
+  winter's bare branches. Summer keeps today's trees.
+- **In winter every node on the farm wears a settled snow cap:**
+  - stumps, rocks, ores and seams have their own;
+  - the copper, coal and gold nodes take the generic one;
+  - the big stump takes the 2x2.
+- **This replaces 0159's remapped stand-ins.**
+
+### The delivery, checked before anything moved
+
+- **All 15 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the selected raws, their prompts and call records.** Earlier
+  revisions given to the later calls live byte-identical under `preview/` or
+  `rejected/`, which the contract lists.
+- **The delivery's `build.py --check` passes** with identical bytes, and
+  `blossom_clusters_at_least3` is the one false check.
+- **That false check is the owner's disclosed and approved exception:**
+  `tree_b_spring` keeps exactly one isolated pale blossom pixel. It is
+  recorded in `APPROVAL.json`'s `accepted_qa_exceptions` and in the
+  contract's deviations. No other check fails.
+
+### The promotion
+
+- **The 15 raws** went byte for byte to `assets/art_source/props/seasonal/`.
+- **15 manifest entries** - `props/tree_<season>`, `props/tree_b_<season>`,
+  `props/<host>_snow`, `props/snow_cap` and `props/snow_cap_2x2` - carry:
+  - each file's recipe unchanged;
+  - the 0147 provenance, `generation_task` A013 and `integration_task`
+    0164.
+- **Every tree is `variant_of` `props/tree`, `tree_b`'s seasons too**,
+  since variants do not chain. They are at its exact scale
+  (0.03700440528634361) with no `palette_keys`, and the importer's variant
+  check holds the canvas, the pivot and the scale to it.
+- **The caps keep their own palette subset:** bone, moon, bone_dark,
+  stone_light, night.
+- **`tree_b_spring`'s entry carries `accepted_qa_exception`:** the owner's
+  words and the measured singleton.
+- **`ownership.json`** gives the 15 outputs to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **No new view code for the art itself.** 0159's hooks fill in:
+  - `SeasonView.frame_for` finds `props/tree_<season>`, and
+    `carries_season` takes the remap off it;
+  - `cap_for` finds `props/<host>_snow` or the generic caps;
+  - `WorldView._cap` draws a real cap at its own size and pivot over the
+    host's foot - the same canvas origin - never stretched.
+  The wind shader is the trees' as before, with the crown moving and the
+  trunk and roots still.
+- **One view fix the caps needed.** A021's stand-ins - copper, coal, gold,
+  the hardwood stump - are today's ore, seam and stump tinted with
+  `modulate`, which a child inherits. The cap came out copper on copper and
+  gold on gold. The tint is `self_modulate` now: the node's own, and the
+  snow stays snow.
+- **`PlaceholderArt`** loses A013's 15 entries, and `TREE_FRAME` with them,
+  which nothing else used. `NODE_TILE` and `STUMP_2X2` stay for A021's
+  stand-ins.
+- **Comments:** `SeasonView`'s and `WorldView._cap`'s say what 0164 did.
+- **`shot.gd` gains `winter_quarry` and `winter_stumps`**, so that a capture
+  shows every cap host: 83 scenarios, and `headless_check`'s count follows.
+- **`art_showcase`'s prop check** expects a tree to wear its species'
+  season where A013 drew one: the same box and pivot, its own source.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: 59 of 60 (887 s). Only perf failed: the swarm at 8527 us of the 8333.
+- **Run alone twice after, perf passed** on the second run: a swarm at
+  7687 us, a night tick at 1478 us (18%). The first alone run read
+  14442 us; it moves with this shared machine's load, never with art.
+- `headless_v1` 2369 asserts, `input_v1` 710 cases and `input_check` 1244,
+  0 failed. `check_prop_art`, `import_art --check` and the prop and art
+  showcases pass (51392 and 507 checks).
+
+**Tests:**
+- **`_task_0164_seasonal_trees` (headless_v1), 1 assert:**
+  - the six trees answer from RasterArt at 40x48 (20,44), not stand-ins,
+    on row 43;
+  - summer still answers today's trees;
+  - every cap is its own at its box, and the copper's generic and the
+    hardwood stump's 2x2 caps are found.
+- **`_task_0159_palette`'s lookup assert now expects A013's real trees:**
+  `carries_season` in winter, and the winter file is the tree's own.
+- **`tools/check_prop_art.py`, the seasonal trees** - A013's own measures:
+  - raster-owned, exact, `variant_of` `props/tree` at its scale;
+  - grounded and in one piece, height and trunk centre in range;
+  - spring blooming a fifth to two fifths of its leaves, in clusters of
+    three or more except the one owner-accepted singleton, which the check
+    still counts and prints;
+  - autumn with no flame_hot, at most 8% flame and 10% green;
+  - winter with no green and at least 26 wide.
+- **`tools/check_prop_art.py`, the caps:**
+  - the nine fit their hosts the way the delivery fitted them: on the
+    host's top band, mostly over it, 2-6 rows deep, 55-80% of its width,
+    centred, in one piece;
+  - the generic cap on the ore and the rock, the 2x2 on the stump at
+    twice its size.
+
+**Shots:** `python tools/shot.py 0164 noon season_summer season_autumn season_winter season_winter_night winter_quarry winter_stumps --fhd`,
+opened:
+- **The same two trees, one of each species, through the year:**
+  - spring's pale blossom in clusters;
+  - summer's today's green;
+  - autumn's rust and gold - leaves, not a fire;
+  - winter's bare branches with snow on them.
+  The roots never move between them, and at night the world's light darkens
+  them as it does everything; none of the art is a night variant.
+- **`winter_quarry`:** a white cap on every rock and seam and on the
+  copper, the coal and the gold, each sitting on its host's top. Before
+  the `self_modulate` fix, the cap on the copper and the gold had come out
+  their own colour.
+- **`winter_stumps`:** the bare woods, the stump's cap and the big stumps'
+  2x2 caps on their tops.
+
+## 0202 - Art: tool icons - done 2026-10-10
+
+What changed: Codex pack A019, approved by the owner on 2026-10-10 ("aprovado"),
+is in the game.
+- **Fifteen tool icons, each at 16x16 and 10x10:** hoe, can, axe and pickaxe
+  at basic, iron and gold, and the rod at bamboo, fibre and iron, as 0173
+  named the tiers.
+- **They replace 0173's tinted stand-ins** wherever a tool is shown: the
+  workshop's upgrades, the ledger's tools, the stall's rows and the compact
+  cuts.
+- **The tool in his hand stays code-tinted,** on the same ramps as before.
+
+### The delivery, checked before anything moved
+
+- **All 30 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 15 selected raws, their prompts and call records.**
+  `can_basic-r2` and `can_gold-r2` were given their r1 candidates, kept
+  byte-identical in `preview/input-history/`.
+- **The delivery's `build.py --check` passes:** identical bytes and every
+  check true.
+
+### The promotion
+
+- **The 15 raws** went byte for byte to `assets/art_source/ui/tools/`.
+- **30 manifest entries**, `ui/icon_<tool>_<tier>` 16x16 at (8,8)
+  `inventory` and `ui/hud_<tool>_<tier>` 10x10 at (5,5) `compact_hud`,
+  carry each file's recipe unchanged and the 0147 provenance.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses A019's 30 entries. The binding was already
+  there: the workshop, the ledger and the stall ask `UiKit.icon` for the
+  tool's item, and `art_tint` is white once nothing stands in.
+- **The `ART` table's comment** gives `icon_copper.png` as its example of a
+  bare entry, since `icon_wall.png` is A005's raster art now.
+- **`UiKit.orphan_icons`** counts every tool at every tier
+  (`ToolTiers.item`) as claimed.
+- **The tier ramps:** A019's contract records them, dark to light -
+  basic, iron, gold, bamboo and fibre. They are exactly
+  `PlayerWork.HEAD_RAMPS`, the in-hand head tint 0173 maps
+  stone_dark/stone/stone_light onto. Nothing to change, and now a test
+  holds the two together. No farmer art or animation was touched.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: **PASS**, 60 of 60 (985 s, the known OVER BUDGET), perf passing.
+- `headless_v1` 2371 asserts and `input_v1` 710 cases, 0 failed.
+- **`inventory_night` came after that run.** `headless_check` alone then
+  passed with it, at 84 scenarios: 17637 asserts, 0 failed.
+
+**Tests:**
+- **`_task_0202_tool_icons` (headless_v1), 2 asserts:**
+  - the 30 cuts are raster art, untinted, and what `UiKit.icon` hands out;
+  - `PlayerWork.HEAD_RAMPS` equals A019's recorded ramps, colour for
+    colour.
+- **`tools/check_ui_art.py`:**
+  - an A019 family under the icon rules, plus the approved pixels;
+  - each tool's three tiers share their cut's recorded scale, so no tier is
+    enlarged.
+- **`ui_art_showcase`:** an A019 page, every tool at every tier, in both
+  languages and both contrasts.
+- **A shot scenario, `inventory_night`:** everything held and the ledger
+  opened on Spring 3's night with the waves held off, its materials, animal
+  goods and tools pages photographed. `headless_check` counts 84
+  scenarios.
+- No input case: nothing new is pressed.
+
+**Shots:** `python tools/shot.py 0202 tool_upgrades inventory_full peddler --fhd`,
+`tool_upgrades --fhd --pt_BR` and `inventory_night --fhd`, opened:
+- **`tool_upgrades`, by day:** the workshop's MAKE list with a 16x16 icon on
+  every row, in English and in Portuguese:
+  - the gold and the iron axe, can, hoe and pickaxe, each its own metal -
+    gold warm, iron grey;
+  - the fibre rod;
+  - a row that cannot be paid for is greyed, its icon with it.
+- **`inventory_full`'s tools page, by day:** the 10x10 cuts of the basic
+  axe, can, hoe and pickaxe and the bamboo rod, beside their names.
+- **`inventory_night`:** the same five on Spring 3's night, unchanged; the
+  ledger is UI and out of the night's light.
+- **No tool icon in `peddler` and `peddler_dusk`:** the stall is shut in
+  both. Its rows are held by the test and the showcase instead.
+- **Seen in passing, not this task's:** at night, three things draw over the
+  ledger's lower part:
+  - the defence hotbar, which has sat under the tooltip and over every panel
+    since 0133;
+  - the log's last line;
+  - the cursor's world tooltip.
+  It is left for its own task.
+
+## 0203 - Art: material icons - done 2026-10-10
+
+What changed: Codex pack A020, approved by the owner on 2026-10-10 ("aprovado"),
+is in the game.
+- **Six material icons, each at 16x16 and 10x10:** copper, gold and coal from
+  the forge (0176), hardwood (0177), hay and straw (0184), under their own
+  resource ids.
+- **They replace the tinted stand-ins:**
+  - copper and gold were the iron bar tinted;
+  - coal was the stone darkened;
+  - hardwood was the wood darkened;
+  - hay and straw were the wheat in two shades.
+
+### The delivery, checked before anything moved
+
+- **All 12 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 6 selected raws, their prompts and call records**, and the
+  references they were given.
+- **`straw-r2` was given its r1 candidate**, kept byte-identical in
+  `preview/input-history/` (and in `rejected/`).
+- **The delivery's `build.py --check` passes:** identical bytes, and every
+  check true - gold with no flame orange, coal's facets readable, the ingots
+  iron's size.
+
+### The promotion
+
+- **The 6 raws** went byte for byte to `assets/art_source/ui/materials/`.
+- **12 manifest entries**, `ui/icon_<id>` 16x16 at (8,8) `inventory` and
+  `ui/hud_<id>` 10x10 at (5,5) `compact_hud`. Each carries its file's recipe
+  unchanged, with the same provenance as 0147.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses A020's 12 entries. The binding was already
+  there:
+  - the ledger and the stall's and the bin's rows ask `UiKit.icon` for the
+    resource;
+  - the workshop writes its costs as letters ("8g 5i"), not pictures;
+  - the top bar shows only its six (wood, stone, iron, food, money,
+    essence);
+  - `art_tint` is white once nothing stands in.
+  Two comments follow: the animal goods' entry no longer speaks for the
+  feed, and the `ART` table's example of a bare entry is `icon_carp.png`.
+- **Where they show:** the 10x10 cuts in the ledger's materials page and
+  in the stall's and the bin's rows.
+- **The 16x16 cuts have no place in the game yet.** The workshop's CRAFT
+  rows, where hay is made, are text only. They are seen in the showcase.
+- **A021's world nodes** (the copper, coal and gold in the quarry and the
+  hardwood stumps) are another pack and stay its stand-ins.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: 59 of 60 (968 s). The one failure was time: `input_v1` hit the 120 s
+bound ("hung").
+- **Run after `headless_check`, as verify runs them, it passed:** 710 cases,
+  0 failed, in 123 s. That is still over the bound, on a machine whose
+  ChatGPT apps had used hours of CPU, and 0203 adds no input case.
+- `headless_v1` 2372 asserts, 0 failed.
+- `check_ui_art`, `import_art --check` and `show_art --ui --check` (14928
+  checks) pass.
+
+**Tests:**
+- **`_task_0203_material_icons` (headless_v1), 1 assert:** the 12 cuts are
+  raster art, untinted, and what `UiKit.icon` hands out. 0176's own assert
+  says "A020's art since 0203" where it said "through A020 stand-ins".
+- **`tools/check_ui_art.py`:**
+  - an A020 family under the icon rules, plus the approved pixels;
+  - the delivery's own measures:
+    - copper's and gold's ingots are as wide as iron's and within a row
+      as tall;
+    - gold has no flame orange, so it never reads as money;
+    - coal shows its steel facets: three or more pixels at 16, one or
+      more at 10.
+- **`ui_art_showcase`:** an A020 page, both cuts of the six, in both
+  languages and both contrasts.
+- No input case: nothing new is pressed.
+
+**Shots:** `python tools/shot.py 0203 inventory_full inventory_night --fhd` and
+`inventory_night --fhd --pt_BR`, plus
+`python tools/show_art.py --ui --out=implementation/shots/0203/showcase` (its
+A020 pages kept), opened:
+- **The ledger's materials page, by day and on Spring 3's night:** the six
+  at 10x10 in their rows beside wood, stone and iron:
+  - copper's red ingot beside iron's grey;
+  - gold's yellow ingot, unlike any coin;
+  - coal's dark lump, its steel facets carrying it on the dark panel;
+  - hardwood's dark log under wood's orange one;
+  - straw's flat sheaf and hay's bale.
+  Day and night are the same pixels, because the panel is UI.
+- **`showcase/family_A020_*`:** both cuts of the six, at 16 and at 10, in
+  both languages and both contrasts.
+- **Seen in passing, not this task's:**
+  - "Copper", "Coal" and "Gold" ("Cobre", "Carvão", "Ouro") are the only
+    capitalised item names, since 0176;
+  - the showcase's capture mode, with a real window, fails 2904 pixel
+    checks. Every one is on a stand-in tinted brighter than white, which the
+    screen clamps and the check does not. Its headless `--check`, which
+    verify runs, passes.
+  Both are left for their own tasks.
+
+## 0211 - Art: animal goods - done 2026-10-10
+
+What changed: Codex pack A029, approved by the owner on 2026-10-10 ("aprovado"),
+is in the game.
+- **Four goods, each at 16x16 and 10x10:** the egg, the milk, the wool
+  and the truffle, under their own resource ids. The egg and the milk come
+  from the coop and the barn (0184); the wool and the truffle from the sheep
+  and the pig (0185).
+- **They replace the tinted stand-ins:**
+  - the egg was the stone paled;
+  - the milk was the iron bar paled;
+  - the wool was the gear paled to a skein;
+  - the truffle was the stone browned.
+- **The pig's dig spot is the approved mound,** 16x16 at (8,14), where 0185
+  had drawn a heap in code.
+
+### The delivery, checked before anything moved
+
+- **All 9 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 5 selected raws, their prompts, their call records** and the
+  references they were given.
+- **The delivery's `build.py --check` passes:** identical bytes and every
+  check true, the spot's box among them.
+
+### The promotion
+
+- **The 4 icon raws** went byte for byte to `assets/art_source/ui/animal_goods/`.
+- **The spot's own raw**, never cut from the icon, went to
+  `assets/art_source/props/animal_goods/`.
+- **9 manifest entries:**
+  - `ui/icon_<id>` 16x16 at (8,8) `inventory`;
+  - `ui/hud_<id>` 10x10 at (5,5) `compact_hud`;
+  - `props/truffle_spot` 16x16 at (8,14), 0.55 s, a world prop.
+  Each carries its file's recipe unchanged, with the same provenance as
+  0147.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses A029's 9 entries and their two comments. The
+  icons' binding was already there: the ledger and the stall's and the
+  bin's rows ask `UiKit.icon`.
+- **`AnimalView._draw_spots` draws the spot's texture**, no longer seven
+  rectangles in code. It is stood on its cell the way `ArtPlacement.place`
+  stands every prop: the pivot on the cell's bottom middle, so the
+  mound's lowest row is the cell's last. Its layer is unchanged, beside the
+  boots' layer under the y-sorted world. It is in the world, so the
+  evening darkens it with the grass.
+- **The spots still go with the sun** (0185, `Phases.begin_preparation`):
+  no spot lives into the night phase, so the darkest light one ever meets
+  is the late evening's.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: 59 of 60 (928 s). Only perf failed: the swarm at 12131 us of the 8333,
+with eleven more rows over beside it - the machine's load.
+- **Run alone after, perf passed:** a swarm at 7678 us, a night tick at
+  1508 us (18%).
+- `headless_v1` 2374 asserts and `input_v1` 710 cases (110.6 s), 0 failed.
+- `check_ui_art`, `check_prop_art`, `import_art --check` and
+  `show_art --ui --check` (15056 checks) pass.
+
+**Tests:**
+- **`_task_0211_animal_goods` (headless_v1), 2 asserts:**
+  - the 8 cuts are raster art, untinted, and what `UiKit.icon` hands out;
+  - the dig spot is A029's raster mound, 16x16 at (8,14), and the
+    barnyard draws that file at that pivot.
+- **`tools/check_ui_art.py`:**
+  - an A029 family under the icon rules, plus the approved pixels;
+  - milk and wool keep their cream ramps, with no skin or flame colour.
+- **`tools/check_prop_art.py`:**
+  - `truffle_spot` joins the props: raster-owned, exact, grounded on row
+    13, in one piece;
+  - its box is the delivery's: 11-13 wide, 7-9 tall, centred on x=8.
+- **`ui_art_showcase`:** an A029 page, in both languages and both
+  contrasts.
+- **A shot scenario, `barnyard_night`:** the same barnyard at 01:30, the
+  farmer still up. `headless_check` counts 85 scenarios.
+- No input case: nothing new is pressed, and digging is 0185's.
+
+**Shots:** `python tools/shot.py 0211 barnyard barnyard_night inventory_full inventory_night --fhd`
+and `inventory_night --fhd --pt_BR`, plus
+`python tools/show_art.py --ui --out=implementation/shots/0211/showcase` (its
+A029 pages kept), opened:
+- **`barnyard`, Spring 3 at noon:** the pigs' two spots on the grass by the
+  barn.
+  - Each is a low mound of turned earth with the truffle showing.
+  - It reads as dug earth, unlike the rocks, the stumps and the tilled beds.
+  - The western one sits partly under a tree's crown: its layer is under
+    the y-sorted world, as 0185 made it.
+- **`barnyard_night`, the same at 01:30:** the mound under the evening's
+  deepest light, darkened with the grass, still readable.
+  - The first take of this scenario was on the night proper, and it showed
+    no spot at all, as the rules say: the spots go at bedtime.
+- **The ledger's animal goods page, by day and at night (and in
+  Portuguese):** the two eggs, the bottle with its red cap, the skein with
+  its loose strand and the cut truffle, at 10x10. Day and night are the same
+  pixels.
+- **`showcase/family_A029_*`:** both cuts of the four, at 16 and at 10.
+
+## 0197 - Art: trampled crops and tilled ground - done 2026-10-10
+
+What changed: Codex pack A014, approved by the owner on 2026-10-10 ("esses estao
+aprovados, tem mais pra gerar?"), is in the game.
+- **A trampled crop and a withered one,** 16x16 at (8,14). They replace
+  what 0155 and 0171 drew in code:
+  - the ripe frame squashed and browned;
+  - stage 2 greyed through a shader.
+- **The bed's turf on the lawn,** the north edge and the north-west corner,
+  16x16 at (8,16). They replace 0167's stand-ins, the terrain's own edge
+  and corner pieces.
+
+### The delivery, checked before anything moved
+
+- **All 4 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 4 selected raws, their prompts, call records and the
+  reference** each was given (the terrain's `edge-n.png`).
+- **This batch's call records keep the raw's hash as `sha256`** and their
+  generation-time `decision`; the approval is `APPROVAL.json`'s.
+- **The delivery's `build.py --check` passes:** 25 outputs, all its checks.
+
+### The promotion
+
+- **The 4 raws** went byte for byte to `assets/art_source/crops/crop_ground/`.
+- **4 manifest entries** under the handoff's aliases (`crops/trampled`,
+  `crops/withered`, `crops/tilled_edge_n`, `crops/tilled_edge_corner_nw`).
+  Each carries its recipe unchanged, palette keys included, with the same
+  provenance as 0147.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.** No
+  rotated copies are made: the turns are the game's.
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses A014's 4 entries. The crop geometries' doc,
+  which had A014's name over the tall crops' box, now says what the three
+  boxes are.
+- **The turf was already turned at runtime** by `_plot_edge_sprite`:
+  - the north edge 0-3 quarter-turns clockwise about the tile's middle for
+    N, E, S, W;
+  - the north-west corner turned to the diagonal whose two cardinals are
+    closed;
+  - beds that touch join with no edge between them;
+  - `SeasonView.ground` remaps the turf's grass ramp, as it does the lawn's.
+  It now draws A014's pieces.
+- **`world_view.gd` draws the withered and the trampled plot with
+  `_plot_sprite`,** like the earth under them. The drawn stand-ins are
+  deleted with their shader:
+  - `_withered_sprite` and `_trampled_sprite`;
+  - `TRAMPLED_TINT` and `WITHERED_SHADER`;
+  - `src/ui/withered.gdshader` and its `.uid`.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: **PASS**, 60 of 60 (911 s, the known OVER BUDGET).
+- `headless_v1` 2376 asserts and `input_v1` 711 cases (109.6 s), 0 failed.
+- `check_crop_art`, `import_art --check` and `show_art --crops --check`
+  (11808 checks) pass.
+
+**Tests:**
+- **`_task_0197_crop_ground` (headless_v1), 2 asserts:**
+  - the four pieces are raster art at their pivots, untinted, with no
+    stand-in left;
+  - the drawn stand-ins and their shader are gone.
+- **`_case_0167_till_grass` (input_v1), 1 new assert:** the lone plot the
+  hoe opens on the lawn draws A014's edge, turned once for each side still
+  lawn.
+- **`tools/check_crop_art.py`, the trampled and withered crops:**
+  raster-owned, exact, binary, grounded on row 13 and leaving three
+  quarters of the wet cue.
+- **`tools/check_crop_art.py`, the turf:**
+  - the edge runs the tile's whole top, at most 3 rows deep;
+  - the corner sits in the top-left 3x3;
+  - on each of the 16 masks, with every corner the rule could add, the
+    turf stays out of the bed's middle and leaves at least half the wet
+    cue. The worst is a lone plot, at 160 of 256.
+- **`show_art --crops` (`art_showcase`), a new page under every light:**
+  - beds on the lawn in the shapes that give all 16 masks: a lone plot, two
+    dominoes, two lines of three and a 3x3 block;
+  - a ring whose hole shows the four corners;
+  - a withered and a trampled plot, dry and wet.
+  `_crops_check` now also checks each turf piece's turn about its tile's
+  middle (whole quarters, never mirrored), and counts each plot's overlay
+  and turf.
+- **A shot scenario, `withered_night`:** Autumn 1's withered field on its
+  night, three plots trampled. `headless_check` counts 86 scenarios.
+
+**Shots:** `python tools/shot.py 0197 till_grass withered withered_night trampled --fhd`
+(`till_grass` brings `till_grass_night`), plus
+`python tools/show_art.py --crops --out=implementation/shots/0197/showcase`
+(its four `ground_light` pages kept), opened:
+- **`till_grass`, by day:** the lawn the hoe turned wears A014's grass
+  lip on each side that is still lawn, and none between beds.
+- **`till_grass_night`:** the same lip, dark with the lawn: a pixel or two
+  of ragged grass, quiet but there.
+- **`withered`, Autumn 1's morning:** the summer field's dead stalks,
+  brown, rust and dry orange on the earth.
+- **`withered_night`:** the same field at night, three plots trampled.
+  Both overlays are dark with the ground and still tell apart: the withered
+  stalks stand, the trampled ones lie on the tile's last rows.
+- **`trampled`, the morning after a loss:** the pressed row between the
+  spared ones.
+- **`showcase/ground_light0-3`,** at dawn, day, dusk and night:
+  - the sixteen masks and the ring's four corners;
+  - the grass lip joining round the block and the ring's hole;
+  - no seam between beds;
+  - the wet earth showing under every turf.
+- **Seen in passing, not this task's:** with a real window the crops
+  showcase fails 24 checks that only run when it captures. They expect one
+  watering to spend one unit and change one plot, and the can waters its
+  tier's area since 0173. Its headless `--check`, which verify runs,
+  never reaches them. It is left for its own task.
+
+## 0198 - Art: spring crops - done 2026-10-10
+
+What changed: Codex pack A015, approved by the owner on 2026-10-10 ("esses estao
+aprovados, tem mais pra gerar?"), is in the game.
+- **Potato, garlic and strawberry** at their four stages (planted, sprout,
+  growing, ripe), 16x16 at (8,14), and the strawberry regrowing after a
+  pick. They replace 0168's stand-ins, wheat and carrot tinted.
+- **Their produce's icons** and **the four spring seed packets**, carrot's
+  included, at 16x16 and 10x10. They replace 0170's tinted packets and 0168's
+  tinted produce. The packets are cream paper with spring's band, and
+  carrot's is the master later seasons follow.
+- **The carrot keeps its own crop and produce;** only its packet is new.
+
+### The delivery, checked before anything moved
+
+- **All 27 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 10 selected raws, their prompts, call records and
+  references.** An input a raw was given that is not itself a selected source
+  is matched by hash where the delivery keeps it.
+- **The delivery's `build.py --check` passes.**
+
+### The promotion
+
+- **The 3 growth strips** went byte for byte to
+  `assets/art_source/crops/spring_crops/`.
+- **The 7 icon raws** went to `assets/art_source/ui/spring_crops/`.
+- **27 manifest entries** under the handoff's aliases: `crops/<crop>_0..3`
+  (animation `crops/<crop>`), `crops/strawberry_regrow`, `ui/icon_<id>`
+  16x16 `inventory` and `ui/hud_<id>` 10x10 `compact_hud`. Each carries its
+  recipe unchanged, the strips' sheet cells included, with the same
+  provenance as 0147.
+- **One field more than the contract:** the importer asks every sheet cell's
+  `gutter_xy`, which no recipe records. The strips' cells abut (0-492,
+  492-993...), so it is `[0, 0]`, as on 0010's carrot. It decides nothing
+  about the pixels.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses A015's 18 entries (each crop's four frames are
+  one). The binding was already there:
+  - `_plot_sprite` draws `<crop>_<stage>`, and `<crop>_regrow` while a
+    picked strawberry regrows;
+  - the ledger and the stall's rows ask `UiKit.icon` (the day HUD's seed
+    strip is words only);
+  - tints and stand-in offsets fall away with the entries.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: **PASS**, 60 of 60 (927 s, the known OVER BUDGET).
+- `headless_v1` 2377 asserts and `input_v1` 711 cases (106.6 s), 0 failed.
+- `check_crop_art` (27 outputs), `check_ui_art`, `import_art --check`,
+  `show_art --crops --check` (11760 checks) and `--ui --check` (15280)
+  pass.
+
+**Tests:**
+- **`_task_0198_spring_crops` (headless_v1), 1 assert:**
+  - the 13 crop frames are raster art at (8,14);
+  - the 14 icon cuts are raster art, untinted, and what `UiKit.icon` hands
+    out;
+  - no stand-in or tint is left for the three crops.
+- **`tools/check_crop_art.py`:**
+  - potato, garlic and strawberry join `KINDS`: exact, grounded, four
+    distinct stages growing taller, the wet cue showing under each;
+  - a new `REGROW` table checks the strawberry's regrowing stage the same
+    way.
+- **`tools/check_ui_art.py`:** an A015 family under the icon rules, plus the
+  approved pixels.
+- **`ui_art_showcase`:** an A015 page.
+- **`show_art --crops`:** its twelve-crop page now draws spring's real
+  stages.
+- **Shot scenarios:**
+  - `spring_field_night`, the ripe spring field on its night;
+  - `inventory_night` now also opens the crops and seeds pages.
+  `headless_check` counts 87 scenarios.
+
+**Shots:** `python tools/shot.py 0198 spring_field spring_field_night regrowing shop_seeds_one inventory_full inventory_night --fhd`
+and `inventory_night shop_seeds_one --fhd --pt_BR`, opened:
+- **`spring_field`, Spring 2 at noon:** the beds' ripe rows, the wet
+  furrows showing between them:
+  - the carrot;
+  - garlic's white bulbs under yellowing leaves;
+  - potato's flowers over gold tubers;
+  - strawberry's white flowers and red fruit.
+- **`spring_field_night`:** the same rows under the night's light,
+  darkened with the earth.
+- **`regrowing`:** strawberries regrowing, leaves and a flower, beside the
+  ripe ones.
+- **`shop_seeds_one`, in both languages:** the market's buy rows wear the
+  four spring packets on their buttons, and hay and straw wear A020's icons.
+- **The ledger's crops and seeds pages, by day and at night:**
+  - potato, garlic and strawberry at 10x10;
+  - the four spring packets, cream paper with spring's band;
+  - corn's and pepper's packets, still stand-ins until A016.
+  Day and night are the same pixels.
+
+## 0199 - Art: summer crops - done 2026-10-10
+
+What changed: Codex pack A016, approved by the owner on 2026-10-10 ("esses estao
+aprovados, tem mais pra gerar?"), is in the game.
+- **Pepper and melon at their four stages,** 16x16 at (8,14), and **the
+  sunflower's four,** the tall 16x32 at (8,30) that 0168 settled. They
+  replace 0168's stand-ins.
+- **Pepper and corn regrowing after a pick,** pepper 16x16 at (8,14), corn
+  16x24 at (8,22). They replace 0172's stand-ins.
+- **Their produce's icons** and **the four summer seed packets** (corn,
+  pepper, sunflower, melon), at 16x16 and 10x10, on A015's cream paper with
+  summer's band. They replace 0170's tinted packets.
+- **Corn keeps its own four stages;** only its regrowth is new.
+
+### The delivery, checked before anything moved
+
+- **All 28 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 11 selected raws, their prompts, call records and
+  references.** `melon-r2` was given its r1 candidate, kept byte-identical in
+  `rejected/`. This contract writes its sources with backslashes, which
+  change nothing.
+- **The delivery's `build.py --check` passes:** 28 native files, no
+  failures.
+
+### The promotion
+
+- **The 4 growth strips** (corn's regrowth among them) went byte for byte
+  to `assets/art_source/crops/summer_crops/`.
+- **The 7 icon raws** went to `assets/art_source/ui/summer_crops/`.
+- **28 manifest entries** under the handoff's aliases, recipes unchanged,
+  with the same provenance as 0147. The strips' sheet cells abut, so their
+  `gutter_xy` is `[0, 0]`, as in 0198.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses A016's 19 entries. The binding was already
+  there:
+  - `_plot_sprite` draws `<crop>_<stage>`, and `<crop>_regrow` while a
+    picked pepper or corn regrows;
+  - the tall sunflower stands at its own pivot, as 0168 drew its padded
+    stand-in;
+  - the ledger and the stall's rows ask `UiKit.icon`.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: **PASS**, 60 of 60 (917 s, the known OVER BUDGET).
+- `headless_v1` 2378 asserts and `input_v1` 711 cases (107.2 s), 0 failed.
+- `check_crop_art` (41 outputs), `check_ui_art`, `import_art --check`,
+  `show_art --crops --check` (11708 checks) and `--ui --check` (15504)
+  pass.
+
+**Tests:**
+- **`_task_0199_summer_crops` (headless_v1), 1 assert:**
+  - the 14 crop frames are raster art at their boxes;
+  - the 14 icon cuts are raster art, untinted, and what `UiKit.icon` hands
+    out;
+  - no stand-in or tint is left for the crops and their regrowths.
+- **`tools/check_crop_art.py`:**
+  - pepper, melon and sunflower join `KINDS`, with a `BOXES` table for the
+    boxes that are not one tile (corn's 16x24, the sunflower's 16x32): exact,
+    grounded, four distinct stages growing taller, the wet cue showing;
+  - `REGROW` adds the pepper's and the corn's regrowing stages.
+- **`tools/check_ui_art.py`:** an A016 family under the icon rules, plus the
+  approved pixels.
+- **`ui_art_showcase`:** an A016 page.
+- **`show_art --crops`:** its pages now draw summer's real stages and corn's
+  regrowth.
+- **Shot scenarios:**
+  - `summer_field_night`, the ripe summer field on its night;
+  - `summer_regrowing`, every other ripe pepper and corn picked.
+  `headless_check` counts 89 scenarios.
+
+**Shots:** `python tools/shot.py 0199 summer_field summer_field_night summer_regrowing inventory_full inventory_night --fhd`
+and `inventory_night --fhd --pt_BR`, opened:
+- **`summer_field`, Summer 2 at noon:** the wet furrows show between the
+  rows:
+  - the corn standing with its cobs;
+  - the melons;
+  - the peppers red with fruit;
+  - the tall sunflowers, their heads above the bed and their feet in their
+    furrows.
+- **`summer_field_night`:** the same rows under the night's light, the
+  sunflowers' heads still reading above the bed.
+- **`summer_regrowing`:** every other ripe pepper and corn picked:
+  - the pepper regrowing green, with no fruit;
+  - the corn regrowing as a stalk with a pale tassel and no cob;
+  - each beside one still ripe.
+- **The ledger's crops and seeds pages, by day and at night (and in
+  Portuguese):**
+  - pepper's chilli, sunflower's head and melon's slice at 10x10;
+  - the four summer packets on the spring master's paper, with summer's
+    band.
+  Day and night are the same pixels. Wheat's, pumpkin's, grape's and beet's
+  are still stand-ins: A017 is blocked.
+
+## 0204 - Art: copper, coal, gold and hardwood - done 2026-10-10
+
+What changed: Codex pack A021, approved by the owner on 2026-10-10 ("esses estao
+aprovados, tem mais pra gerar?"), is in the game.
+- **Copper, coal and gold in the world,** 16x16 at (8,14), each with a `_b`
+  variant the map picks by cell as it picks `ore_b`. They replace 0176's
+  stand-ins: the ore and the seam, tinted.
+- **The hardwood stump, whole and chipped,** one 32x32 drawing at (16,30)
+  over its 2x2 footprint, chipped from the first axe swing. It replaces
+  0177's stand-in, the tree stump drawn at twice its size.
+
+### The delivery, checked before anything moved
+
+- **All 8 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 8 selected raws, their prompts, call records and
+  references.**
+- **The delivery's `build.py --check` passes:** 8 production frames, no
+  failures.
+- **This contract keeps each file's `palette_keys` beside its recipe,** not
+  in it. Rendered as the delivery's `build.py` renders it (the file's keys
+  over the recipe's), every export is exact.
+
+### The promotion
+
+- **The 8 raws** went byte for byte to `assets/art_source/props/ore_hardwood/`.
+- **8 manifest entries** under the handoff's aliases, recipes and palette
+  keys unchanged, with the same provenance as 0147. Each `_b` and the
+  chipped stump are `variant_of` their master; the importer holds them to
+  its canvas, pivot, scale and palette keys.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses A021's 5 entries and the `STUMP_2X2` box they
+  alone used.
+- **`WorldView.PROP_VARIANTS`** gains `copper_ore`, `coal_seam` and
+  `gold_ore` with their `_b`s.
+- **The big stump, and two bugs the integration would have made:**
+  - **It was drawn whole only through the stand-in road** (`_stand_in_prop`).
+    The loop draws real art over a 2x2 footprint as one drawing at its
+    bottom middle (`ArtPlacement.place`), but it chose the drawing with
+    `_station_art`, which knows nothing of a struck node. It now asks
+    `struck_art` for a gathering node, and records the drawing as
+    `prop_art`, as the stand-in road did and `input_v1` reads.
+  - **`struck_art` found the chipped state only in the stand-in
+    registry,** so with the pack in the stump would never have been drawn
+    chipped again. It now asks whether that state is drawn at all
+    (`PlaceholderArt.has_frame`).
+- **The coal seams' snow** (A013, task 0164).
+  - A013's generic cap was fitted to the ore and the rock. On the real coal
+    seam, low as a seam, only 6% of it lies over the seam: it floats two
+    rows above it.
+  - `SeasonView.CAP_LIKE` gives both coal seams the seam's own cap, A013's
+    approved `seam_snow`, which sits on them by A013's own fit.
+  - No art changed: which approved cap sits on which node is the view's
+    choice.
+- **The big stump's 2x2 cap,** fitted to the stand-in, sits on the real
+  stump almost exactly:
+  - 86% of it lies over the crown, centred, at the right depth and width;
+  - only its left tip, 4 pixels, hangs past the stump's sloping shoulder;
+  - it stays as A013 placed it. The shots show it reading as snow on the
+    crown, and the check holds it to no more than those 4 pixels.
+- **Copper and gold take the generic cap as the ore does,** and fit it.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: **PASS**, 60 of 60 (943 s, the known OVER BUDGET).
+- `headless_v1` 2380 asserts and `input_v1` 711 cases (108.1 s), 0 failed.
+- `check_prop_art`, `import_art --check` and `show_art --props --check`
+  (82892 checks) pass.
+
+**Tests:**
+- **`_task_0204_ore_hardwood` (headless_v1), 2 asserts:**
+  - the eight nodes are raster art at their boxes, untinted, each forge
+    node with its variant;
+  - on the real map the big stump is drawn chipped from its first swing,
+    and the coal seams wear the seam's cap.
+- **`_case_0177_hardwood`'s "from the first swing the stump is drawn
+  chipped" (input_v1)** holds with the real art.
+- **`tools/check_prop_art.py`, the nodes:**
+  - the eight are raster-owned, exact, grounded on their pivots, in one
+    piece, inside the delivery's envelopes;
+  - each variant keeps its master's scale and keys and is another drawing.
+- **`tools/check_prop_art.py`, the ramps beside iron and stone:**
+  - copper's skin hues, which no stone wears;
+  - gold's ramp without the iron ore's rust;
+  - coal a fifth night with nothing warm, where no stone passes 15%.
+- **`tools/check_prop_art.py`, the winter caps:**
+  - copper and gold fit the generic cap by A013's rule, and coal the
+    seam's;
+  - the 2x2 cap lies over each big stump, 80% or more, with at most 4
+    pixels off its shoulder.
+- **`show_art --props` (`art_showcase`), a new page under each light:**
+  - copper, coal and gold in both variants on the quarry's rock;
+  - the big stump whole, then chipped by a real swing that gives nothing
+    yet.
+  `_props_check` now also counts the forge nodes and checks the big stump's
+  drawing, state and contact. Its catalogue's variant counts include the
+  forge nodes (base most common).
+- **A shot scenario, `hardwood_night`:** the two big stumps on that night.
+  `headless_check` counts 90 scenarios.
+
+**Shots:** `python tools/shot.py 0204 quarry hardwood hardwood_night winter_quarry winter_stumps --fhd`
+(`quarry` brings `quarry_night` and its ledger), opened:
+- **`quarry`, Autumn 1:** on the quarry's rock, among the stone and the
+  iron ore, each node reads apart:
+  - copper's red-veined boulders;
+  - gold's yellow-flecked ones;
+  - coal's low black seams.
+- **`quarry_night`:** the same nodes darkened with the rock.
+- **`winter_quarry`:** a cap on each node:
+  - the generic one sitting on copper and gold;
+  - on coal the seam's cap, on the seam's top and not above it.
+- **`hardwood`, Spring 1:** both stand on the bottom middle of their 2x2:
+  - the big stump the axe has bitten, beside the farmer, the bite low on
+    its face;
+  - the whole one, with its rings.
+- **`hardwood_night`:** both under the night's light.
+- **`winter_stumps`:** the 2x2 cap reads as snow on each crown. The four
+  pixels of its left tip past the shoulder do not show at FHD.
+
+## 0205 - Art: fish - done 2026-10-10
+
+What changed: Codex pack A022, approved by the owner on 2026-10-10 ("esses estao
+aprovados, tem mais pra gerar?"), is in the game.
+- **The book's sixteen fish,** each at three scales from one source and
+  one crop, facing west:
+  - the twelve of 0179;
+  - the four legendaries of 0182: the Old Catfish, the Golden Queen, the
+    Ghost Pike and the Ice Sturgeon.
+- **The three cuts of each:**
+  - a 32x32 book portrait at (16,16);
+  - a 16x16 inventory icon;
+  - a 10x10 compact one.
+- **They replace the stand-ins,** the fish icon tinted toward each
+  species, drawn twice its size on the book's page.
+- **The generic `icon_fish` and `hud_fish`,** which recipes name for any
+  fish, stay the resource icons they were.
+
+### The delivery, checked before anything moved
+
+- **All 48 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 16 selected raws, their prompts, call records and
+  references.** `ghost_pike`'s was given its r1 candidate, kept
+  byte-identical in `rejected/`.
+- **The delivery's `build.py --check` passes:** 48 production frames, no
+  failures.
+
+### The promotion
+
+- **The 16 raws** went byte for byte to `assets/art_source/ui/fish/`.
+- **48 manifest entries** under the handoff's aliases, recipes unchanged,
+  with the same provenance as 0147:
+  - `ui/portrait_<id>` 32x32 `book_portrait`;
+  - `ui/icon_<id>` 16x16 `inventory`;
+  - `ui/hud_<id>` 10x10 `compact_hud`.
+  Each carries its `resource_id`, as 0018's do.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses:
+  - A022's 48 entries and their three comments;
+  - the `PORTRAIT` box they alone used.
+  The `ART` table's example of a bare entry is now `hud_bait.png`.
+- **The binding was already there:**
+  - the ledger and the stall's rows ask `UiKit.icon`;
+  - the book asks `UiKit.picture` for `portrait_<id>`, and draws a fish
+    never landed as that portrait in black. The silhouette stays the
+    runtime's, as the handoff asks: no approved portrait is replaced.
+  - A catch is told in words, so it draws no fish.
+- **Seen at native size:** the sturgeon's and the Ice Sturgeon's 10x10 cuts
+  are the slimmest, grey and pale blue, the quietest on the dark panel. They
+  are the approved art.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: **PASS**, 60 of 60 (975 s, the known OVER BUDGET).
+- `headless_v1` 2381 asserts and `input_v1` 711 cases (107.4 s), 0 failed.
+- `check_ui_art`, `import_art --check` and `show_art --ui --check` (16272
+  checks) pass.
+
+**Tests:**
+- **`_task_0205_fish` (headless_v1), 1 assert:**
+  - the 48 cuts are raster art, untinted, and what `UiKit.icon` and
+    `UiKit.picture` hand out;
+  - the generic fish icon is unchanged.
+- **`tools/check_ui_art.py`:**
+  - an A022 family of icon pairs under the icon rules;
+  - a new `PORTRAITS` family: each portrait cut from its pair's source and
+    crop, 32x32 at (16,16), clear of the edge, binary, at its approved
+    pixels;
+  - no two portraits within 24 alpha pixels of one silhouette.
+- **`ui_art_showcase`:** an A022 page for the icons and one for the
+  portraits at 32. `_picture` sizes a `portrait_` at 32x32.
+- **Shot scenario `inventory_night`:** it now also opens the fish page and
+  the fish book.
+
+**Shots:** `python tools/shot.py 0205 fish_book inventory_full inventory_night --fhd`
+and `fish_book inventory_night --fhd --pt_BR`, opened:
+- **`fish_book`:**
+  - the Old Catfish's page shows its 32x32 portrait, whiskered and facing
+    west;
+  - `fish_book_unknown` is the Golden Queen, never landed, its own
+    portrait in black.
+- **`inventory_full_fish_book_1..16`, each page's portrait side by side:**
+  - the four landed in colour: carp, perch, trout and the Old Catfish;
+  - the twelve others as black silhouettes, each a shape of its own.
+- **The ledger's fish pages, by day and at night (and in Portuguese):** the
+  sixteen at 10x10, all facing west. The sturgeons are the slimmest. Day and
+  night are the same pixels.
+- **`inventory_night_fish_book`:** the book open at night on the carp's
+  portrait, unrelit.
+
+## 0213 - Art: the artisan machines - done 2026-10-10
+
+What changed: Codex pack A031, approved by the owner on 2026-10-10 ("esses estao
+aprovados, tem mais pra gerar?"), is in the game.
+- **The five machines of 0187 and 0188,** each in its four states:
+  idle, active, hurt and the wreck that stands at 0 HP. They replace the
+  stand-ins (the press, the generator, the kitchen and the workshop,
+  tinted and scaled).
+- **The machines and their boxes,** all drawn at 1.0 on their footprints'
+  bottom middle:
+  - the keg and the preserves jar, 48x56 at (24,52) over 2x2;
+  - the dairy and the loom, 64x64 at (32,60) over 3x2;
+  - the mill, 64x96 at (32,92) over 3x3.
+- **The jar is a glazed crock on a brick stove.** Its firebox light and
+  stovepipe smoke rise from where A031 drew them, only while it works.
+
+### The delivery, checked before anything moved
+
+- **All 20 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 5 selected raws, their prompts, call records and
+  references.** Each machine's states come from one sheet.
+- **Inputs that are not themselves selected sources are referenced in
+  place.** The keg's states were given the keg's first master, which stays
+  in the delivery's `raw/`.
+- **The delivery's `build.py --check` passes:** 20 production frames, no
+  failures.
+
+### The promotion
+
+- **The 5 state sheets** went byte for byte to
+  `assets/art_source/buildings/machines/`.
+- **20 manifest entries** under the handoff's aliases, recipes unchanged,
+  with the same provenance as 0147:
+  - each `_active`, `_hurt` and `_wreck` is `variant_of` its idle drawing;
+  - the jar's idle, active and hurt carry `light_xy` (21,47) and
+    `smoke_xy` (35,22), the importer's emission fields; its wreck has none.
+- **One field more than the contract, on all 20: `cell_offset_xy`.** It is
+  where the canvas's corner sits from the footprint's, as the house, the
+  towers and the enemies record it. It follows from the footprint and the
+  recorded pivot: (-8,-20) for the keg and the jar, (-8,-28) for the dairy
+  and the loom, (-8,-44) for the mill.
+  - `ArtPlacement.emission` adds it to a point at full density.
+  - Without it, the jar's smoke would have risen 8 pixels right and 20
+    down, inside the crock.
+  - It moves no pixel.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses:
+  - A031's 20 entries and their two comments;
+  - the `MACHINE_SMALL`, `MACHINE_WIDE` and `MACHINE_TALL` boxes they alone
+    used.
+- **A wreck, which the stand-in road knew and the real road did not.**
+  `_station_art`, which picks a station's drawing once its art is real,
+  knew wear and work but no wreck. It drew a machine at 0 HP as hurt. It now
+  draws `<id>_wreck` where the building stands wrecked (`Building.wrecks`)
+  and the wreck is drawn.
+- **The jar's light and smoke were already only for its work** (0187's
+  `Lighting._lights_up` and `Particles`). They now find A031's points. The
+  lighting comment says so.
+- **None of the five is in `ArtPlacement.visual_scale`'s 2.0 list.**
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: **PASS**, 60 of 60 (999 s, the known OVER BUDGET).
+- `headless_v1` 2383 asserts and `input_v1` 711 cases (109.2 s), 0 failed.
+- `check_station_art`, `import_art --check` and `show_art --stations
+  --check` (7714 checks) pass.
+
+**Tests:**
+- **`_task_0213_machines` (headless_v1), 2 asserts:**
+  - the 20 states are raster art at their boxes, with their footprint's
+    offset, untinted, at full density;
+  - a wrecked machine draws its wreck, and the jar's light and smoke land
+    on its canvas at (21,47) and (35,22) from the canvas's corner.
+- **`tools/check_station_art.py`, a `MACHINES` family, for each machine:**
+  - every state: its A031 source, box, base and offset at 1.0, a same-scale
+    variant of the idle drawing, grounded on its pivot, binary, unlike its
+    other states, exact;
+  - the jar's points on opaque pixels of every state but the wreck, which
+    has none.
+- **`show_art --stations` (`art_showcase`), a machines page under each
+  light:**
+  - the five placed through the real API, then idle, at a real job, past
+    the wear line and wrecked;
+  - each drawn once over its footprint, on its base, untinted;
+  - a wreck still standing;
+  - the jar's fire lit only while it works.
+- **Shot scenarios:**
+  - `machines` now also takes the row at 01:30 (`machines_evening`);
+  - `machines_worn` is new.
+  `headless_check` counts 91 scenarios.
+
+**Shots:** `python tools/shot.py 0213 machines machines_worn keg_jar --fhd`, opened:
+- **`machines`, Spring 3 at noon, idle:** in a row, each standing on its
+  footprint at full density:
+  - the keg, a hooped barrel;
+  - the jar, a glazed crock on its brick stove, its firebox dark;
+  - the dairy and the loom, open sheds with their churns and their loom;
+  - the mill, a windmill on a stone base.
+- **`machines_working`:** each at its job:
+  - the keg's tap;
+  - the jar's firebox burning, with smoke rising from the top of its pipe;
+  - the mill's sails set.
+- **`machines_evening`, 01:30:** the keg and the jar still at their
+  days-long jobs, the others idle. The jar's firebox burns and smokes under
+  the evening's light, and the rest stay dark.
+- **`machines_worn`:** each wreck stands where it was, and the log says to
+  mend them by day:
+  - the keg's hoops and the dairy's frame past the wear line;
+  - the jar cracked open;
+  - the loom fallen in;
+  - the mill whole.
+- **`keg_jar`:** the working keg with its panel up and the working jar
+  beside it. The panel names its recipes by their ids, which is task
+  0187's, and already a task of its own.
+
+## 0214 - Art: artisan goods - done 2026-10-10
+
+What changed: Codex pack A032, approved by the owner on 2026-10-10 ("esses estao
+aprovados, tem mais pra gerar?"), is in the game.
+- **Eleven goods, each at 16x16 and 10x10,** under their own resource
+  ids:
+  - the machines' wine, juice, jelly and pickles (0187);
+  - their cheese, butter, cloth, sandbag, flour and sugar (0188);
+  - the kitchen's bread (0192).
+- **They replace the tinted stand-ins** borrowed from the oil, the food,
+  the meat, the logs, the stone, the gunpowder and the coins.
+- **The oil's and the food's own icons stay.** The sandbag here is the item
+  in the ledger, not the defence wall a later pack will draw.
+
+### The delivery, checked before anything moved
+
+- **All 22 exports** match `contract.json` and `APPROVAL.json`.
+- **So do the 11 selected raws, their prompts, call records and
+  references.**
+- **The delivery's `build.py --check` passes:** 22 production frames, no
+  failures.
+
+### The promotion
+
+- **The 11 raws** went byte for byte to `assets/art_source/ui/artisan_goods/`.
+- **22 manifest entries,** `ui/icon_<id>` 16x16 `inventory` and
+  `ui/hud_<id>` 10x10 `compact_hud`, recipes unchanged, with the same
+  provenance as 0147.
+- **`ownership.json`** gives them to the raster importer.
+- **Every runtime file decodes to exactly the approved RGBA pixels.**
+- **The delivery folder has to be committed with this.**
+
+### The game
+
+- **`PlaceholderArt`** loses A032's 22 entries and their three comments.
+- **The binding was already there:** the ledger and the stall's rows ask
+  `UiKit.icon`. A machine's panel lists its recipes and its queue in words.
+- **0192's own assert expected bread's icons on 0120's road.** It now asks
+  for them in both sizes, A032's art since 0214.
+
+### Hashes
+
+**SIM 1719668160 and DATA 2498985787 unchanged:** art and view only.
+
+Verify: 59 of 60 (1408 s). Only perf failed: the swarm at 9178 us of the 8333,
+in a run slow from end to end - the machine's load.
+- **Run alone after, perf passed:** a swarm at 7156 us, a night tick at
+  1403 us (17%).
+- `headless_v1` 2384 asserts and `input_v1` 711 cases (111.4 s), 0 failed.
+- `check_ui_art`, `import_art --check` and `show_art --ui --check` (16624
+  checks) pass.
+
+**Tests:**
+- **`_task_0214_artisan_goods` (headless_v1), 1 assert:**
+  - the 22 cuts are raster art, untinted, and what `UiKit.icon` hands out;
+  - the oil and the food keep their icons.
+- **`tools/check_ui_art.py`:** an A032 family under the icon rules (one
+  source and crop per pair, a clear border, visible within 14 and 8), plus
+  the approved pixels.
+- **`ui_art_showcase`:** an A032 page.
+- **Shot scenario `inventory_night`:** it now also opens the artisan goods
+  page.
+
+**Shots:** `python tools/shot.py 0214 inventory_full inventory_night --fhd` and
+`inventory_night --fhd --pt_BR`, opened:
+- **The ledger's artisan goods pages, by day and at night (and in
+  Portuguese):** the eleven at 10x10 beside the food and the oil, each its
+  own shape:
+  - the bottles apart: wine's slim bottle, juice's round jug, the oil's
+    flask;
+  - the jars apart: jelly's red and pickles' green;
+  - flour's sack, sugar's cubes, bread's crusted loaf, cheese's wedge,
+    butter's block, cloth's blue bolt.
+  Day and night are the same pixels.
+- **The 16x16 and 10x10 cuts side by side on the dark panel,** with the
+  oil and the food beside them: no two read alike. The wine's 10x10 is the
+  slimmest, three pixels wide.

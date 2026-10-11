@@ -1,0 +1,13 @@
+{
+  "stem": "straw-r2",
+  "revision": 2,
+  "folder": "A020-material-icons",
+  "args": {
+    "prompt": "Use case: precise-object-edit. Image1 is the straw sheaf edit target. Change ONLY the pose and silhouette: lay this loose tied sheaf HORIZONTALLY left to right, not on the45degree wheat/log diagonal. Long pale stalks with flared ends at both LEFT and RIGHT, one narrow dark timber twine tie at the centre. Overall native14wide6-8high, compact8wide4-5high. No grain heads or leaves, not a rectangular hay bale. Keep the same pale bone/bone_dark/gold_light material, coloured dark outline, simple2-3flatplanes, neutral upper-left light. ONE complete unclipped isolated sheaf centred on true transparent alpha. Image2 wood icon is STYLE ONLY. No background, ground, shadow, halo, labels, blur, gradients or additional objects.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A020-material-icons\\raw\\straw-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png"
+    ],
+    "transparent_background": true
+  }
+}

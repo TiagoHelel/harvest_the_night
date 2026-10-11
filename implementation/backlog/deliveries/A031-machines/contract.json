@@ -1,0 +1,1710 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "dairy",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dairy-none-0-night.png",
+          "path": "native/dairy/none/01.png",
+          "points": {},
+          "pose": "idle"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "idle"
+      ]
+    },
+    {
+      "anim": "dairy_active",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dairy_active-none-0-night.png",
+          "path": "native/dairy_active/none/01.png",
+          "points": {},
+          "pose": "active"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "active"
+      ]
+    },
+    {
+      "anim": "dairy_hurt",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dairy_hurt-none-0-night.png",
+          "path": "native/dairy_hurt/none/01.png",
+          "points": {},
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "dairy_wreck",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dairy_wreck-none-0-night.png",
+          "path": "native/dairy_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "wreck"
+      ]
+    },
+    {
+      "anim": "keg",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/keg-none-0-night.png",
+          "path": "native/keg/none/01.png",
+          "points": {},
+          "pose": "idle"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "poses": [
+        "idle"
+      ]
+    },
+    {
+      "anim": "keg_active",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/keg_active-none-0-night.png",
+          "path": "native/keg_active/none/01.png",
+          "points": {},
+          "pose": "active"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "poses": [
+        "active"
+      ]
+    },
+    {
+      "anim": "keg_hurt",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/keg_hurt-none-0-night.png",
+          "path": "native/keg_hurt/none/01.png",
+          "points": {},
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "keg_wreck",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/keg_wreck-none-0-night.png",
+          "path": "native/keg_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "poses": [
+        "wreck"
+      ]
+    },
+    {
+      "anim": "loom",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/loom-none-0-night.png",
+          "path": "native/loom/none/01.png",
+          "points": {},
+          "pose": "idle"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "idle"
+      ]
+    },
+    {
+      "anim": "loom_active",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/loom_active-none-0-night.png",
+          "path": "native/loom_active/none/01.png",
+          "points": {},
+          "pose": "active"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "active"
+      ]
+    },
+    {
+      "anim": "loom_hurt",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/loom_hurt-none-0-night.png",
+          "path": "native/loom_hurt/none/01.png",
+          "points": {},
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "loom_wreck",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/loom_wreck-none-0-night.png",
+          "path": "native/loom_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "wreck"
+      ]
+    },
+    {
+      "anim": "mill",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/mill-none-0-night.png",
+          "path": "native/mill/none/01.png",
+          "points": {},
+          "pose": "idle"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "poses": [
+        "idle"
+      ]
+    },
+    {
+      "anim": "mill_active",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/mill_active-none-0-night.png",
+          "path": "native/mill_active/none/01.png",
+          "points": {},
+          "pose": "active"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "poses": [
+        "active"
+      ]
+    },
+    {
+      "anim": "mill_hurt",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/mill_hurt-none-0-night.png",
+          "path": "native/mill_hurt/none/01.png",
+          "points": {},
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "mill_wreck",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/mill_wreck-none-0-night.png",
+          "path": "native/mill_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "poses": [
+        "wreck"
+      ]
+    },
+    {
+      "anim": "preserves_jar",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/preserves_jar-none-0-night.png",
+          "path": "native/preserves_jar/none/01.png",
+          "points": {
+            "light_xy": [
+              21,
+              47
+            ],
+            "smoke_xy": [
+              35,
+              22
+            ]
+          },
+          "pose": "idle"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "poses": [
+        "idle"
+      ]
+    },
+    {
+      "anim": "preserves_jar_active",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/preserves_jar_active-none-0-night.png",
+          "path": "native/preserves_jar_active/none/01.png",
+          "points": {
+            "light_xy": [
+              21,
+              47
+            ],
+            "smoke_xy": [
+              35,
+              22
+            ]
+          },
+          "pose": "active"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "poses": [
+        "active"
+      ]
+    },
+    {
+      "anim": "preserves_jar_hurt",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/preserves_jar_hurt-none-0-night.png",
+          "path": "native/preserves_jar_hurt/none/01.png",
+          "points": {
+            "light_xy": [
+              21,
+              47
+            ],
+            "smoke_xy": [
+              35,
+              22
+            ]
+          },
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "preserves_jar_wreck",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/preserves_jar_wreck-none-0-night.png",
+          "path": "native/preserves_jar_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "poses": [
+        "wreck"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 2,
+      "path": "sprites/buildings/workshop.png",
+      "pivot_xy": [
+        24,
+        44
+      ]
+    }
+  ],
+  "date": "2026-10-10",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "keg",
+      "call": "raw/keg-states-r1.call.json",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/keg/none/01.png",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "points": {},
+      "pose": "idle",
+      "prompt": "raw/keg-states-r1.prompt.txt",
+      "prompt_sha256": "733ce2cdec5cc4fb382b7972d9d0e662482f280013a02a772d53f1e88e22c2be",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          38
+        ],
+        "content_scale": 0.06372368516864871,
+        "crop_xywh": [
+          35,
+          55,
+          465,
+          589
+        ]
+      },
+      "runtime_name": "sprites/buildings/keg.png",
+      "seconds": 0.55,
+      "sha256": "4186d3fb0b58d41b644be126c30f142702e43c5cf027fe81fa31eb336abef5df",
+      "source": "raw/keg-states-r1.png",
+      "source_sha256": "c0ababe98cc74717ba601394bd4f813c4458a9623b5b48a0456bdd3017e8e7cd",
+      "visible_limits_wh": [
+        [
+          28,
+          36
+        ],
+        [
+          30,
+          38
+        ]
+      ]
+    },
+    {
+      "anim": "keg_active",
+      "call": "raw/keg-states-r1.call.json",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/keg_active/none/01.png",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "points": {},
+      "pose": "active",
+      "prompt": "raw/keg-states-r1.prompt.txt",
+      "prompt_sha256": "733ce2cdec5cc4fb382b7972d9d0e662482f280013a02a772d53f1e88e22c2be",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          38
+        ],
+        "content_scale": 0.06372368516864871,
+        "crop_xywh": [
+          566,
+          55,
+          465,
+          589
+        ]
+      },
+      "runtime_name": "sprites/buildings/keg_active.png",
+      "seconds": 0.55,
+      "sha256": "b71e33a8d9e8f582696e060f4c83e6f7a454dd84f96d662a39884eb4bbf7ac31",
+      "source": "raw/keg-states-r1.png",
+      "source_sha256": "c0ababe98cc74717ba601394bd4f813c4458a9623b5b48a0456bdd3017e8e7cd",
+      "visible_limits_wh": [
+        [
+          28,
+          36
+        ],
+        [
+          30,
+          38
+        ]
+      ]
+    },
+    {
+      "anim": "keg_hurt",
+      "call": "raw/keg-states-r1.call.json",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/keg_hurt/none/01.png",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "points": {},
+      "pose": "hurt",
+      "prompt": "raw/keg-states-r1.prompt.txt",
+      "prompt_sha256": "733ce2cdec5cc4fb382b7972d9d0e662482f280013a02a772d53f1e88e22c2be",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          38
+        ],
+        "content_scale": 0.06372368516864871,
+        "crop_xywh": [
+          1110,
+          55,
+          465,
+          589
+        ]
+      },
+      "runtime_name": "sprites/buildings/keg_hurt.png",
+      "seconds": 0.55,
+      "sha256": "d9ab0a623dfcc81d0e8bdb899712c3f8b22bbae39a4b1edfdb937847276cea2c",
+      "source": "raw/keg-states-r1.png",
+      "source_sha256": "c0ababe98cc74717ba601394bd4f813c4458a9623b5b48a0456bdd3017e8e7cd",
+      "visible_limits_wh": [
+        [
+          28,
+          36
+        ],
+        [
+          30,
+          38
+        ]
+      ]
+    },
+    {
+      "anim": "keg_wreck",
+      "call": "raw/keg-states-r1.call.json",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/keg_wreck/none/01.png",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/keg-states-r1.prompt.txt",
+      "prompt_sha256": "733ce2cdec5cc4fb382b7972d9d0e662482f280013a02a772d53f1e88e22c2be",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          38
+        ],
+        "content_scale": 0.06372368516864871,
+        "crop_xywh": [
+          1657,
+          55,
+          465,
+          589
+        ]
+      },
+      "runtime_name": "sprites/buildings/keg_wreck.png",
+      "seconds": 0.55,
+      "sha256": "0f9b1237ec87a54c476739dad378fff908eb49f669c523180afc6ddcb5965cd7",
+      "source": "raw/keg-states-r1.png",
+      "source_sha256": "c0ababe98cc74717ba601394bd4f813c4458a9623b5b48a0456bdd3017e8e7cd",
+      "visible_limits_wh": [
+        [
+          1,
+          48
+        ],
+        [
+          1,
+          56
+        ]
+      ]
+    },
+    {
+      "anim": "preserves_jar",
+      "call": "raw/preserves_jar-states-r1.call.json",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/preserves_jar/none/01.png",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          47
+        ],
+        "smoke_xy": [
+          35,
+          22
+        ]
+      },
+      "pose": "idle",
+      "prompt": "raw/preserves_jar-states-r1.prompt.txt",
+      "prompt_sha256": "ffcfa26ba03bbc50b949d980f9f883dd5d102d809ed9784948b1fa11ec03d0fb",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          39
+        ],
+        "content_scale": 0.059006930161852815,
+        "crop_xywh": [
+          47,
+          28,
+          530,
+          662
+        ]
+      },
+      "runtime_name": "sprites/buildings/preserves_jar.png",
+      "seconds": 0.55,
+      "sha256": "fbe2c4dcd0d29fb6faf12ee79fdef8f7ecc8d2e096fed7963621bd38aadf22d8",
+      "source": "raw/preserves_jar-states-r1.png",
+      "source_sha256": "39c91b5a090337cdb82f2237495a8ce4d8110620208a8ff4381157551160820d",
+      "visible_limits_wh": [
+        [
+          26,
+          34
+        ],
+        [
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "anim": "preserves_jar_active",
+      "call": "raw/preserves_jar-states-r1.call.json",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/preserves_jar_active/none/01.png",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          47
+        ],
+        "smoke_xy": [
+          35,
+          22
+        ]
+      },
+      "pose": "active",
+      "prompt": "raw/preserves_jar-states-r1.prompt.txt",
+      "prompt_sha256": "ffcfa26ba03bbc50b949d980f9f883dd5d102d809ed9784948b1fa11ec03d0fb",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          39
+        ],
+        "content_scale": 0.059006930161852815,
+        "crop_xywh": [
+          584,
+          29,
+          530,
+          662
+        ]
+      },
+      "runtime_name": "sprites/buildings/preserves_jar_active.png",
+      "seconds": 0.55,
+      "sha256": "c51e2928f9de68d6845692ad5b2df779a7ac9a8ad599ca387d6dbb5fd004b79e",
+      "source": "raw/preserves_jar-states-r1.png",
+      "source_sha256": "39c91b5a090337cdb82f2237495a8ce4d8110620208a8ff4381157551160820d",
+      "visible_limits_wh": [
+        [
+          26,
+          34
+        ],
+        [
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "anim": "preserves_jar_hurt",
+      "call": "raw/preserves_jar-states-r1.call.json",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/preserves_jar_hurt/none/01.png",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          47
+        ],
+        "smoke_xy": [
+          35,
+          22
+        ]
+      },
+      "pose": "hurt",
+      "prompt": "raw/preserves_jar-states-r1.prompt.txt",
+      "prompt_sha256": "ffcfa26ba03bbc50b949d980f9f883dd5d102d809ed9784948b1fa11ec03d0fb",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          39
+        ],
+        "content_scale": 0.059006930161852815,
+        "crop_xywh": [
+          1118,
+          26,
+          530,
+          662
+        ]
+      },
+      "runtime_name": "sprites/buildings/preserves_jar_hurt.png",
+      "seconds": 0.55,
+      "sha256": "3d0863ad583e4951ba82d203cac6901b69194142892a030e62eaf813a3187b96",
+      "source": "raw/preserves_jar-states-r1.png",
+      "source_sha256": "39c91b5a090337cdb82f2237495a8ce4d8110620208a8ff4381157551160820d",
+      "visible_limits_wh": [
+        [
+          26,
+          34
+        ],
+        [
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "anim": "preserves_jar_wreck",
+      "call": "raw/preserves_jar-states-r1.call.json",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/preserves_jar_wreck/none/01.png",
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/preserves_jar-states-r1.prompt.txt",
+      "prompt_sha256": "ffcfa26ba03bbc50b949d980f9f883dd5d102d809ed9784948b1fa11ec03d0fb",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          39
+        ],
+        "content_scale": 0.059006930161852815,
+        "crop_xywh": [
+          1642,
+          27,
+          530,
+          662
+        ]
+      },
+      "runtime_name": "sprites/buildings/preserves_jar_wreck.png",
+      "seconds": 0.55,
+      "sha256": "501eae378a5b9b53d78765cad73ff575866846ca1bf6aa3130c71108afbbc410",
+      "source": "raw/preserves_jar-states-r1.png",
+      "source_sha256": "39c91b5a090337cdb82f2237495a8ce4d8110620208a8ff4381157551160820d",
+      "visible_limits_wh": [
+        [
+          1,
+          48
+        ],
+        [
+          1,
+          56
+        ]
+      ]
+    },
+    {
+      "anim": "dairy",
+      "call": "raw/dairy-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/dairy/none/01.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {},
+      "pose": "idle",
+      "prompt": "raw/dairy-states-r1.prompt.txt",
+      "prompt_sha256": "b350a508e68c7b538065a7ccedd6e73aae289f9dcb07de23447ae3641e90250e",
+      "recipe": {
+        "content_anchor_xy": [
+          26,
+          47
+        ],
+        "content_scale": 0.0994826923076923,
+        "crop_xywh": [
+          12,
+          108,
+          530,
+          475
+        ]
+      },
+      "runtime_name": "sprites/buildings/dairy.png",
+      "seconds": 0.55,
+      "sha256": "411351af43b5a40f32571922b14d1fb2dd6df6240576650152ed32bd41a4a0db",
+      "source": "raw/dairy-states-r1.png",
+      "source_sha256": "191ddf015e691d3e26adf099038f2ae0c90e7e19b5b40e4f0d735914583a51fd",
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "dairy_active",
+      "call": "raw/dairy-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/dairy_active/none/01.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {},
+      "pose": "active",
+      "prompt": "raw/dairy-states-r1.prompt.txt",
+      "prompt_sha256": "b350a508e68c7b538065a7ccedd6e73aae289f9dcb07de23447ae3641e90250e",
+      "recipe": {
+        "content_anchor_xy": [
+          26,
+          47
+        ],
+        "content_scale": 0.0994826923076923,
+        "crop_xywh": [
+          548,
+          108,
+          530,
+          475
+        ]
+      },
+      "runtime_name": "sprites/buildings/dairy_active.png",
+      "seconds": 0.55,
+      "sha256": "0f312173c855e5e25ea26eff7caa16076e1982f11c74a47edae93cd7cb29cf51",
+      "source": "raw/dairy-states-r1.png",
+      "source_sha256": "191ddf015e691d3e26adf099038f2ae0c90e7e19b5b40e4f0d735914583a51fd",
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "dairy_hurt",
+      "call": "raw/dairy-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/dairy_hurt/none/01.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {},
+      "pose": "hurt",
+      "prompt": "raw/dairy-states-r1.prompt.txt",
+      "prompt_sha256": "b350a508e68c7b538065a7ccedd6e73aae289f9dcb07de23447ae3641e90250e",
+      "recipe": {
+        "content_anchor_xy": [
+          26,
+          47
+        ],
+        "content_scale": 0.0994826923076923,
+        "crop_xywh": [
+          1083,
+          108,
+          530,
+          475
+        ]
+      },
+      "runtime_name": "sprites/buildings/dairy_hurt.png",
+      "seconds": 0.55,
+      "sha256": "9783af30148dc2256e0b6edd90890179d19adedf42bf73d4ab866b26446693b1",
+      "source": "raw/dairy-states-r1.png",
+      "source_sha256": "191ddf015e691d3e26adf099038f2ae0c90e7e19b5b40e4f0d735914583a51fd",
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "dairy_wreck",
+      "call": "raw/dairy-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/dairy_wreck/none/01.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/dairy-states-r1.prompt.txt",
+      "prompt_sha256": "b350a508e68c7b538065a7ccedd6e73aae289f9dcb07de23447ae3641e90250e",
+      "recipe": {
+        "content_anchor_xy": [
+          26,
+          47
+        ],
+        "content_scale": 0.0994826923076923,
+        "crop_xywh": [
+          1627,
+          114,
+          530,
+          475
+        ]
+      },
+      "runtime_name": "sprites/buildings/dairy_wreck.png",
+      "seconds": 0.55,
+      "sha256": "f3864418aa768ae4ea8e5a3fc2926a446e56841e78e22323ee2f637f67c34fd8",
+      "source": "raw/dairy-states-r1.png",
+      "source_sha256": "191ddf015e691d3e26adf099038f2ae0c90e7e19b5b40e4f0d735914583a51fd",
+      "visible_limits_wh": [
+        [
+          1,
+          64
+        ],
+        [
+          1,
+          64
+        ]
+      ]
+    },
+    {
+      "anim": "loom",
+      "call": "raw/loom-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/loom/none/01.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {},
+      "pose": "idle",
+      "prompt": "raw/loom-states-r1.prompt.txt",
+      "prompt_sha256": "cbb3157c204e4d0e7fe72914808c0d7bfd4b358e61edba51f8d4dcf5ddd468f9",
+      "recipe": {
+        "content_anchor_xy": [
+          26,
+          47
+        ],
+        "content_scale": 0.09993949346115155,
+        "crop_xywh": [
+          12,
+          98,
+          524,
+          471
+        ]
+      },
+      "runtime_name": "sprites/buildings/loom.png",
+      "seconds": 0.55,
+      "sha256": "4aa4f9ca13a6e94168bbcc62b247af423d358ffc6a8260ab8866b31eefdedc89",
+      "source": "raw/loom-states-r1.png",
+      "source_sha256": "922aed11c22db7302aa80b4143340f8f760d22de93ae2cb8458a3ef9bd414617",
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "loom_active",
+      "call": "raw/loom-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/loom_active/none/01.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {},
+      "pose": "active",
+      "prompt": "raw/loom-states-r1.prompt.txt",
+      "prompt_sha256": "cbb3157c204e4d0e7fe72914808c0d7bfd4b358e61edba51f8d4dcf5ddd468f9",
+      "recipe": {
+        "content_anchor_xy": [
+          26,
+          47
+        ],
+        "content_scale": 0.09993949346115155,
+        "crop_xywh": [
+          554,
+          99,
+          524,
+          471
+        ]
+      },
+      "runtime_name": "sprites/buildings/loom_active.png",
+      "seconds": 0.55,
+      "sha256": "2fef3781931d7af09ce0e97f1ac0d36fa0018d125d19d6375c42fcd6e03a9b7c",
+      "source": "raw/loom-states-r1.png",
+      "source_sha256": "922aed11c22db7302aa80b4143340f8f760d22de93ae2cb8458a3ef9bd414617",
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "loom_hurt",
+      "call": "raw/loom-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/loom_hurt/none/01.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {},
+      "pose": "hurt",
+      "prompt": "raw/loom-states-r1.prompt.txt",
+      "prompt_sha256": "cbb3157c204e4d0e7fe72914808c0d7bfd4b358e61edba51f8d4dcf5ddd468f9",
+      "recipe": {
+        "content_anchor_xy": [
+          26,
+          47
+        ],
+        "content_scale": 0.09993949346115155,
+        "crop_xywh": [
+          1092,
+          98,
+          524,
+          471
+        ]
+      },
+      "runtime_name": "sprites/buildings/loom_hurt.png",
+      "seconds": 0.55,
+      "sha256": "5860bec85292f7c9edd7b12c6dc1757d0729082310179b232dc55f2d5ca35969",
+      "source": "raw/loom-states-r1.png",
+      "source_sha256": "922aed11c22db7302aa80b4143340f8f760d22de93ae2cb8458a3ef9bd414617",
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "loom_wreck",
+      "call": "raw/loom-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/loom_wreck/none/01.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/loom-states-r1.prompt.txt",
+      "prompt_sha256": "cbb3157c204e4d0e7fe72914808c0d7bfd4b358e61edba51f8d4dcf5ddd468f9",
+      "recipe": {
+        "content_anchor_xy": [
+          26,
+          47
+        ],
+        "content_scale": 0.09993949346115155,
+        "crop_xywh": [
+          1633,
+          98,
+          524,
+          471
+        ]
+      },
+      "runtime_name": "sprites/buildings/loom_wreck.png",
+      "seconds": 0.55,
+      "sha256": "22838ad3f88b03ae0c8b7d624f558ebd902369a01a43ddd98b4416637a909afa",
+      "source": "raw/loom-states-r1.png",
+      "source_sha256": "922aed11c22db7302aa80b4143340f8f760d22de93ae2cb8458a3ef9bd414617",
+      "visible_limits_wh": [
+        [
+          1,
+          64
+        ],
+        [
+          1,
+          64
+        ]
+      ]
+    },
+    {
+      "anim": "mill",
+      "call": "raw/mill-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/mill/none/01.png",
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "points": {},
+      "pose": "idle",
+      "prompt": "raw/mill-states-r1.prompt.txt",
+      "prompt_sha256": "866fd9db18cde7c7e41cff0be1f56420c2c6dd5f7e90b74f517e95b340d8d12b",
+      "recipe": {
+        "content_anchor_xy": [
+          30,
+          84
+        ],
+        "content_scale": 0.12487718953514483,
+        "crop_xywh": [
+          56,
+          53,
+          488,
+          669
+        ]
+      },
+      "runtime_name": "sprites/buildings/mill.png",
+      "seconds": 0.55,
+      "sha256": "67a8e5ae0d46acd593cc5fb09df26b44060d13d178268bd01fd1dc116e2a832b",
+      "source": "raw/mill-states-r1.png",
+      "source_sha256": "121fb314591ef7fe84e886a798f83f5371b17033c1745af3e0a4659308d26cb1",
+      "visible_limits_wh": [
+        [
+          52,
+          64
+        ],
+        [
+          72,
+          88
+        ]
+      ]
+    },
+    {
+      "anim": "mill_active",
+      "call": "raw/mill-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/mill_active/none/01.png",
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "points": {},
+      "pose": "active",
+      "prompt": "raw/mill-states-r1.prompt.txt",
+      "prompt_sha256": "866fd9db18cde7c7e41cff0be1f56420c2c6dd5f7e90b74f517e95b340d8d12b",
+      "recipe": {
+        "content_anchor_xy": [
+          30,
+          84
+        ],
+        "content_scale": 0.12487718953514483,
+        "crop_xywh": [
+          547,
+          53,
+          488,
+          669
+        ]
+      },
+      "runtime_name": "sprites/buildings/mill_active.png",
+      "seconds": 0.55,
+      "sha256": "9f4f182d7121cc8a75b4d423ebab77284b73758820b18f4e264be983e9dcb7d7",
+      "source": "raw/mill-states-r1.png",
+      "source_sha256": "121fb314591ef7fe84e886a798f83f5371b17033c1745af3e0a4659308d26cb1",
+      "visible_limits_wh": [
+        [
+          52,
+          64
+        ],
+        [
+          72,
+          88
+        ]
+      ]
+    },
+    {
+      "anim": "mill_hurt",
+      "call": "raw/mill-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/mill_hurt/none/01.png",
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "points": {},
+      "pose": "hurt",
+      "prompt": "raw/mill-states-r1.prompt.txt",
+      "prompt_sha256": "866fd9db18cde7c7e41cff0be1f56420c2c6dd5f7e90b74f517e95b340d8d12b",
+      "recipe": {
+        "content_anchor_xy": [
+          30,
+          84
+        ],
+        "content_scale": 0.12487718953514483,
+        "crop_xywh": [
+          1045,
+          54,
+          488,
+          669
+        ]
+      },
+      "runtime_name": "sprites/buildings/mill_hurt.png",
+      "seconds": 0.55,
+      "sha256": "2fd261551feae4cda3a670f3acdbe9817dee9343f305c5dcc19f592acac5b419",
+      "source": "raw/mill-states-r1.png",
+      "source_sha256": "121fb314591ef7fe84e886a798f83f5371b17033c1745af3e0a4659308d26cb1",
+      "visible_limits_wh": [
+        [
+          52,
+          64
+        ],
+        [
+          72,
+          88
+        ]
+      ]
+    },
+    {
+      "anim": "mill_wreck",
+      "call": "raw/mill-states-r1.call.json",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/mill_wreck/none/01.png",
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/mill-states-r1.prompt.txt",
+      "prompt_sha256": "866fd9db18cde7c7e41cff0be1f56420c2c6dd5f7e90b74f517e95b340d8d12b",
+      "recipe": {
+        "content_anchor_xy": [
+          30,
+          84
+        ],
+        "content_scale": 0.12487718953514483,
+        "crop_xywh": [
+          1547,
+          54,
+          488,
+          669
+        ]
+      },
+      "runtime_name": "sprites/buildings/mill_wreck.png",
+      "seconds": 0.55,
+      "sha256": "f622de504cf618f30b301fff7937c61a34f1a145545a7d8854fe4b6afb69550d",
+      "source": "raw/mill-states-r1.png",
+      "source_sha256": "121fb314591ef7fe84e886a798f83f5371b17033c1745af3e0a4659308d26cb1",
+      "visible_limits_wh": [
+        [
+          1,
+          64
+        ],
+        [
+          1,
+          96
+        ]
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A031",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A031-machines\\raw\\keg-master-c1-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "967b823622912ef6bbce87c5b107d9e547c1b970ab201a7652e14fc5653162ef"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A031-machines\\raw\\preserves_jar-master-c3-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "fa0a8f15d80d8b0637659c18b193e7c812801be5dd104dd67f140d85aed39257"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A031-machines\\raw\\dairy-master-c1-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "28e2cedbbf77d96c4e53bb0a04c772703998c413c2cd2222d242697288e2e261"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A031-machines\\raw\\loom-master-c1-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "50088585bbb0906c7fab952740ff3196726e6002817fe2e460e1db315ce3752f"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A031-machines\\raw\\mill-master-c2-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "bf1ca43d094dca9f147b25c2a1b749a06cf3bf66cda37b20fa7974044c2a969c"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A031-machines",
+  "status": "approved for integration",
+  "supersedes": [],
+  "tool": "built-in ImageGen"
+}

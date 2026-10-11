@@ -304,8 +304,8 @@ func _lights_up(id: StringName, on: Dictionary, cell: Vector2i) -> bool:
 			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
 		&"generator":
 			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
-		# **The jar's small fire** (task 0187), while it works - A031's
-		# `light_xy` on its firebox once the art lands.
+		# **The jar's small fire** (task 0187), while it works, at A031's
+		# `light_xy` on its firebox (task 0213).
 		&"preserves_jar":
 			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
 		# **The animals' lantern** (task 0186): lit while the coop or the barn

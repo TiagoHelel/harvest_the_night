@@ -1,0 +1,292 @@
+[
+  {
+    "anim": "head_walker",
+    "asset": "walker",
+    "stem": "walker-r1",
+    "importer": {
+      "id": "A011/head_walker",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/walker-r1.png",
+      "crop_xywh": [
+        253,
+        211,
+        818,
+        875
+      ],
+      "content_scale": 0.014857142857142857,
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf_dark",
+        "night",
+        "roof",
+        "roof_dark",
+        "rot",
+        "rot_dark",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "head_runner",
+    "asset": "runner",
+    "stem": "runner-r1",
+    "importer": {
+      "id": "A011/head_runner",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/runner-r1.png",
+      "crop_xywh": [
+        297,
+        304,
+        693,
+        706
+      ],
+      "content_scale": 0.018413597733711047,
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "gold",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "roof_dark",
+        "rot",
+        "rot_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "water",
+        "water_dark",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "head_breaker",
+    "asset": "breaker",
+    "stem": "breaker-r3",
+    "importer": {
+      "id": "A011/head_breaker",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/breaker-r3.png",
+      "crop_xywh": [
+        356,
+        290,
+        576,
+        707
+      ],
+      "content_scale": 0.018387553041018388,
+      "content_anchor_xy": [
+        5,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf_dark",
+        "night",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "head_tank",
+    "asset": "tank",
+    "stem": "tank-r5",
+    "importer": {
+      "id": "A011/head_tank",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/tank-r5.png",
+      "crop_xywh": [
+        308,
+        346,
+        637,
+        609
+      ],
+      "content_scale": 0.019704433497536946,
+      "content_anchor_xy": [
+        6,
+        5
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "gold",
+        "gold_dark",
+        "grass",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf_dark",
+        "night",
+        "roof_dark",
+        "rot",
+        "rot_dark",
+        "skin_dark",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "head_giant",
+    "asset": "giant",
+    "stem": "giant-r5",
+    "importer": {
+      "id": "A011/head_giant",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/giant-r5.png",
+      "crop_xywh": [
+        258,
+        321,
+        739,
+        748
+      ],
+      "content_scale": 0.01871657754010695,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "gold",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf_dark",
+        "night",
+        "roof",
+        "roof_dark",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  }
+]

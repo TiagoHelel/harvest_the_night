@@ -1,0 +1,538 @@
+{
+  "frames_expected": 15,
+  "frames_found": 15,
+  "full_pack_complete": true,
+  "canvas_and_pivot_consistent": true,
+  "one_scale_per_animation": true,
+  "binary_alpha": true,
+  "no_empty_frame": true,
+  "colours_allowed": true,
+  "importer_recipe_matches": true,
+  "provenance_hashes_match": true,
+  "raw_has_real_alpha": true,
+  "grounded_on_pivot": true,
+  "tree_geometry_and_roots": true,
+  "season_colour_limits": true,
+  "blossom_clusters_at_least3": false,
+  "caps_fit_hosts": true,
+  "mirror_pairs_exact": true,
+  "points_on_opaque": true,
+  "measurements": [
+    {
+      "anim": "tree_spring",
+      "bounds": [
+        3,
+        2,
+        38,
+        44
+      ],
+      "connected_parts": 1,
+      "root_shape_within1px": true,
+      "trunk_centre": 20.5,
+      "tree_geometry": true,
+      "flower_fraction": 0.23150684931506849,
+      "flower_cluster_sizes": [
+        39,
+        9,
+        41,
+        4,
+        15,
+        3,
+        16,
+        15,
+        17,
+        7,
+        3
+      ],
+      "green_pixels": 353,
+      "flame_pixels": 4,
+      "flame_hot_pixels": 31
+    },
+    {
+      "anim": "tree_autumn",
+      "bounds": [
+        3,
+        2,
+        38,
+        44
+      ],
+      "connected_parts": 1,
+      "root_shape_within1px": true,
+      "trunk_centre": 20.5,
+      "tree_geometry": true,
+      "flower_fraction": 0.005597014925373134,
+      "flower_cluster_sizes": [
+        1,
+        1,
+        1
+      ],
+      "green_pixels": 0,
+      "flame_pixels": 7,
+      "flame_hot_pixels": 0
+    },
+    {
+      "anim": "tree_winter",
+      "bounds": [
+        3,
+        2,
+        38,
+        44
+      ],
+      "connected_parts": 1,
+      "root_shape_within1px": true,
+      "trunk_centre": 20.5,
+      "tree_geometry": true,
+      "flower_fraction": 0.33171912832929784,
+      "flower_cluster_sizes": [
+        3,
+        21,
+        1,
+        14,
+        2,
+        1,
+        2,
+        2,
+        1,
+        5,
+        3,
+        3,
+        5,
+        5,
+        7,
+        2,
+        2,
+        5,
+        5,
+        1,
+        1,
+        10,
+        14,
+        1,
+        1,
+        2,
+        1,
+        2,
+        3,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "green_pixels": 0,
+      "flame_pixels": 6,
+      "flame_hot_pixels": 1
+    },
+    {
+      "anim": "tree_b_spring",
+      "bounds": [
+        2,
+        1,
+        38,
+        44
+      ],
+      "connected_parts": 1,
+      "root_shape_within1px": true,
+      "trunk_centre": 20.0,
+      "tree_geometry": true,
+      "flower_fraction": 0.21052631578947367,
+      "flower_cluster_sizes": [
+        52,
+        50,
+        19,
+        21,
+        10,
+        19,
+        1
+      ],
+      "green_pixels": 400,
+      "flame_pixels": 9,
+      "flame_hot_pixels": 36
+    },
+    {
+      "anim": "tree_b_autumn",
+      "bounds": [
+        3,
+        2,
+        38,
+        44
+      ],
+      "connected_parts": 1,
+      "root_shape_within1px": true,
+      "trunk_centre": 20.5,
+      "tree_geometry": true,
+      "flower_fraction": 0.0,
+      "flower_cluster_sizes": [],
+      "green_pixels": 0,
+      "flame_pixels": 4,
+      "flame_hot_pixels": 0
+    },
+    {
+      "anim": "tree_b_winter",
+      "bounds": [
+        2,
+        1,
+        38,
+        44
+      ],
+      "connected_parts": 1,
+      "root_shape_within1px": true,
+      "trunk_centre": 20.5,
+      "tree_geometry": true,
+      "flower_fraction": 0.37028824833702884,
+      "flower_cluster_sizes": [
+        10,
+        5,
+        4,
+        2,
+        7,
+        1,
+        4,
+        3,
+        5,
+        1,
+        7,
+        5,
+        4,
+        2,
+        1,
+        3,
+        1,
+        2,
+        1,
+        2,
+        1,
+        10,
+        5,
+        5,
+        3,
+        1,
+        2,
+        4,
+        2,
+        4,
+        2,
+        1,
+        1,
+        1,
+        5,
+        1,
+        4,
+        2,
+        1,
+        2,
+        4,
+        1,
+        1,
+        1,
+        3,
+        6,
+        1,
+        1,
+        3,
+        1,
+        1,
+        1,
+        2,
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "green_pixels": 0,
+      "flame_pixels": 6,
+      "flame_hot_pixels": 1
+    },
+    {
+      "anim": "stump_snow",
+      "bounds": [
+        4,
+        8,
+        12,
+        11
+      ],
+      "connected_parts": 1,
+      "host_fit": [
+        {
+          "host": "stump",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 18,
+          "host_pixels": 63,
+          "overlap_pixels": 18,
+          "overlap_fraction": 1.0,
+          "host_covered_fraction": 0.2857142857142857,
+          "width_fraction": 0.5714285714285714,
+          "cap_bounds": [
+            4,
+            8,
+            12,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "rock_snow",
+      "bounds": [
+        3,
+        5,
+        11,
+        8
+      ],
+      "connected_parts": 1,
+      "host_fit": [
+        {
+          "host": "rock",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 16,
+          "host_pixels": 100,
+          "overlap_pixels": 16,
+          "overlap_fraction": 1.0,
+          "host_covered_fraction": 0.16,
+          "width_fraction": 0.5714285714285714,
+          "cap_bounds": [
+            3,
+            5,
+            11,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "rock_b_snow",
+      "bounds": [
+        3,
+        6,
+        11,
+        9
+      ],
+      "connected_parts": 1,
+      "host_fit": [
+        {
+          "host": "rock_b",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 17,
+          "host_pixels": 98,
+          "overlap_pixels": 17,
+          "overlap_fraction": 1.0,
+          "host_covered_fraction": 0.17346938775510204,
+          "width_fraction": 0.5714285714285714,
+          "cap_bounds": [
+            3,
+            6,
+            11,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "ore_snow",
+      "bounds": [
+        4,
+        4,
+        12,
+        7
+      ],
+      "connected_parts": 1,
+      "host_fit": [
+        {
+          "host": "ore",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 15,
+          "host_pixels": 113,
+          "overlap_pixels": 15,
+          "overlap_fraction": 1.0,
+          "host_covered_fraction": 0.13274336283185842,
+          "width_fraction": 0.5714285714285714,
+          "cap_bounds": [
+            4,
+            4,
+            12,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "ore_b_snow",
+      "bounds": [
+        5,
+        6,
+        13,
+        9
+      ],
+      "connected_parts": 1,
+      "host_fit": [
+        {
+          "host": "ore_b",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 18,
+          "host_pixels": 97,
+          "overlap_pixels": 18,
+          "overlap_fraction": 1.0,
+          "host_covered_fraction": 0.18556701030927836,
+          "width_fraction": 0.5714285714285714,
+          "cap_bounds": [
+            5,
+            6,
+            13,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "seam_snow",
+      "bounds": [
+        4,
+        8,
+        12,
+        11
+      ],
+      "connected_parts": 1,
+      "host_fit": [
+        {
+          "host": "seam",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 17,
+          "host_pixels": 65,
+          "overlap_pixels": 17,
+          "overlap_fraction": 1.0,
+          "host_covered_fraction": 0.26153846153846155,
+          "width_fraction": 0.6153846153846154,
+          "cap_bounds": [
+            4,
+            8,
+            12,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "seam_b_snow",
+      "bounds": [
+        3,
+        7,
+        11,
+        10
+      ],
+      "connected_parts": 1,
+      "host_fit": [
+        {
+          "host": "seam_b",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 17,
+          "host_pixels": 68,
+          "overlap_pixels": 17,
+          "overlap_fraction": 1.0,
+          "host_covered_fraction": 0.25,
+          "width_fraction": 0.5714285714285714,
+          "cap_bounds": [
+            3,
+            7,
+            11,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "snow_cap",
+      "bounds": [
+        3,
+        5,
+        11,
+        8
+      ],
+      "connected_parts": 1,
+      "host_fit": [
+        {
+          "host": "ore",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 16,
+          "host_pixels": 113,
+          "overlap_pixels": 16,
+          "overlap_fraction": 1.0,
+          "host_covered_fraction": 0.1415929203539823,
+          "width_fraction": 0.5714285714285714,
+          "cap_bounds": [
+            3,
+            5,
+            11,
+            8
+          ]
+        },
+        {
+          "host": "rock",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 16,
+          "host_pixels": 100,
+          "overlap_pixels": 16,
+          "overlap_fraction": 1.0,
+          "host_covered_fraction": 0.16,
+          "width_fraction": 0.5714285714285714,
+          "cap_bounds": [
+            3,
+            5,
+            11,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "snow_cap_2x2",
+      "bounds": [
+        8,
+        14,
+        24,
+        18
+      ],
+      "connected_parts": 1,
+      "host_fit": [
+        {
+          "host": "stump2x",
+          "pass": true,
+          "within_column_top_band": true,
+          "cap_pixels": 43,
+          "host_pixels": 252,
+          "overlap_pixels": 39,
+          "overlap_fraction": 0.9069767441860465,
+          "host_covered_fraction": 0.15476190476190477,
+          "width_fraction": 0.5714285714285714,
+          "cap_bounds": [
+            8,
+            14,
+            24,
+            18
+          ]
+        }
+      ]
+    }
+  ],
+  "rebuild_identical": true
+}

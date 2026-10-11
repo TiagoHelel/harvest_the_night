@@ -1,0 +1,52 @@
+[
+  {
+    "id": "packet",
+    "source": "implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+    "crop_xywh": [
+      320,
+      300,
+      615,
+      716
+    ],
+    "content_scale": 0.019553072625698324,
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "palette": "tools/palette.py:COLOURS",
+    "alpha_threshold": 128,
+    "content_anchor_xy": [
+      6,
+      7
+    ]
+  },
+  {
+    "id": "packet",
+    "source": "implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+    "crop_xywh": [
+      320,
+      300,
+      615,
+      716
+    ],
+    "content_scale": 0.0111731843575419,
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "palette": "tools/palette.py:COLOURS",
+    "alpha_threshold": 128,
+    "content_anchor_xy": [
+      3,
+      4
+    ]
+  }
+]

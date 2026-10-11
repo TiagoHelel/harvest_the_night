@@ -189,6 +189,11 @@ func _run() -> void:
 
 
 const STATIONS := [&"workshop", &"kitchen", &"press", &"generator", &"shop", &"well"]
+## A031's five (task 0213), a row on the grass, each with a job of its own.
+const MACHINES := [&"keg", &"preserves_jar", &"dairy", &"loom", &"mill"]
+const MACHINE_CORNERS := [Vector2i(8,4), Vector2i(11,4), Vector2i(14,4), Vector2i(18,4), Vector2i(22,3)]
+const MACHINE_JOBS := {&"keg": &"make_wine", &"preserves_jar": &"make_jelly", &"dairy": &"make_butter",
+	&"loom": &"make_cloth", &"mill": &"make_flour"}
 const STATION_CORNERS := [Vector2i(12,7),Vector2i(20,7),Vector2i(28,7),Vector2i(12,12),Vector2i(20,12),Vector2i(28,12)]
 
 
@@ -453,6 +458,75 @@ func _station_family() -> void:
 					drawn+=1
 					expect(node.position==Vector2(corner*16+Vector2i(size.x*8,size.y*16)), "Map boundary keeps station at its unchanged full footprint contact")
 			expect(drawn==1,"Map boundary never duplicates a station quarter")
+	# **A031's machines** (task 0213): placed through the real API, then idle,
+	# working, past the wear line and wrecked, under each light.
+	for lighting in 4:
+		for kind in 4:
+			_machine_fixture(lighting, kind)
+			await _house_settle(view)
+			_world.look_at_cell(Vector2i(17, 7))
+			await process_frame
+			_machine_check(kind)
+			await _shoot("machines_%d_light%d" % [kind, lighting],
+				"A031: idle/active/hurt/wreck %d; dawn/day/dusk/night %d" % [kind, lighting])
+
+
+## The five machines in a row, every one in the same state: 0 idle, 1 at a
+## real job, 2 past the wear line, 3 wrecked and standing.
+func _machine_fixture(lighting: int, kind: int) -> void:
+	_crops_fixture(lighting)
+	for id in GameData.RESOURCES:
+		Resources.add(_state, id, 1000)
+	var phase: int = _state["phase"]
+	_state["phase"] = Phases.DAY
+	for i in MACHINES.size():
+		var id: StringName = MACHINES[i]
+		expect(Building.place(_state, id, MACHINE_CORNERS[i]), "A machine goes down through the real placement API")
+		var hp := int(GameData.BUILDINGS[id]["hp"])
+		if kind == 1:
+			expect(Crafting.start(_state, MACHINE_CORNERS[i], MACHINE_JOBS[id]), "A machine starts its real job")
+		elif kind == 2:
+			Farm.damage(_state, MACHINE_CORNERS[i], hp * 3 / 4)
+		elif kind == 3:
+			Farm.damage(_state, MACHINE_CORNERS[i], hp)
+	_state["phase"] = phase
+	_set_contact(_state["player"], Vector2i(344, 248))
+	_state["player"]["facing"] = Player.SOUTH
+	_state["player"]["action"] = {}
+
+
+## Each machine draws its state's own art once over its whole footprint, on
+## its base at full density and untinted; a wreck still stands; the jar's
+## fire is lit only while it works.
+func _machine_check(kind: int) -> void:
+	for i in MACHINES.size():
+		var id: StringName = MACHINES[i]
+		var corner: Vector2i = MACHINE_CORNERS[i]
+		var size := Building.size_of(id)
+		var sprite: Sprite2D = null
+		for node in _world.get_node("Occupants").get_children():
+			if node is Sprite2D and Grid.index(corner) in node.get_meta("logical_cells", []):
+				sprite = node
+		expect(sprite != null, "A machine has one drawing at its anchor")
+		if sprite == null:
+			continue
+		var on := Farm.occupant(_state, corner)
+		var running := WorldView.station_running(_state, id, corner)
+		expect(running == (kind == 1), "Only a machine at a job runs")
+		var suffix: String = ["", "_active", "_hurt", "_wreck"][kind]
+		expect(sprite.texture.resource_path == WorldView.BUILDING_DIR + String(id) + suffix + ".png",
+			"A machine draws its state's accepted source")
+		var frame: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
+		expect(not frame.is_empty() and sprite.position == Vector2(corner * 16 + Vector2i(size.x * 8, size.y * 16))
+			and sprite.offset == -Vector2(frame["pivot"]) and sprite.scale == Vector2.ONE
+			and sprite.modulate == Color.WHITE,
+			"A machine stands on its footprint's bottom middle, at full density, untinted")
+		expect((sprite.get_meta("logical_cells") as Array).size() == size.x * size.y,
+			"A machine draws once over its whole footprint")
+		expect(on.get("id", &"") == id and Building.is_wrecked(_state, corner) == (kind == 3),
+			"A wrecked machine still stands where it was")
+		if id == &"preserves_jar":
+			expect(_house_lighting._lights_up(id, on, corner) == running, "The jar's fire is lit only while it works")
 
 
 ## Independent full/hurt farmhouse states through the production view and lights.
@@ -659,6 +733,17 @@ func _crops_check() -> void:
 		var texture: Texture2D = sprite.texture.atlas if sprite.texture is AtlasTexture else sprite.texture
 		expect(texture.resource_path == source and not shape.is_empty(),
 			"Every crop and soil uses its required accepted source or registered stand-in")
+		if art.begins_with("tilled_edge"):
+			# A014's turf (task 0197): the north edge or the north-west corner,
+			# turned about its tile's middle a whole quarter at a time.
+			var turns: float = sprite.rotation / (PI / 2.0)
+			expect(sprite.centered and sprite.position == Vector2(cell * 16 + Vector2i(8, 8))
+				and sprite.offset == Vector2.ZERO and not sprite.flip_h and not sprite.flip_v,
+				"Turf turns about the middle of its tile and is never mirrored")
+			expect(is_equal_approx(turns, roundf(turns)) and roundi(turns) >= 0 and roundi(turns) < 4,
+				"Turf turns by whole quarters")
+			counts[idx] = int(counts.get(idx, 0)) + 1
+			continue
 		expect(Vector2i(sprite.texture.get_size()) == shape["canvas"],
 			"Every crop uses its final native canvas, including padded tall stand-ins")
 		expect(sprite.position == Vector2(cell * 16 + Vector2i(8,16)), "Water and growth never shift a crop's logical ground contact")
@@ -671,7 +756,14 @@ func _crops_check() -> void:
 		counts[idx] = int(counts.get(idx, 0)) + 1
 	for idx in _state["plots"]:
 		var cell := Grid.cell(int(idx))
-		expect(int(counts.get(idx,0)) == (1 if Farming.crop_on(_state,cell) == &"" else 2), "Harvest removes only crop art and leaves one soil drawing")
+		var here: Dictionary = _state["plots"][idx]
+		var over := Farming.crop_on(_state,cell) != &"" or here.has("withered") or here.has("trampled")
+		var turf := 0
+		if Farm.terrain_at(_state, cell) == Farm.Terrain.GRASS:
+			for bit in 4:
+				turf += int(WorldView.tilled_edge_mask(_state, cell) & (1 << bit) != 0) \
+					+ int(WorldView.tilled_corner_mask(_state, cell) & (1 << bit) != 0)
+		expect(int(counts.get(idx,0)) == 1 + int(over) + turf, "Harvest removes only crop art and leaves one soil drawing, its overlay and its turf")
 		expect(Farm.is_empty(_state,cell), "Crop canopy adds no occupant or blocked interactive cell")
 
 
@@ -779,6 +871,51 @@ func _crops_family() -> void:
 		await _shoot("twelve_light%d" % lighting,
 			"Twelve crops / four real growth stages / final canvases and feet")
 
+	# 0197: A014's crop ground. Beds on the lawn in the shapes that give all
+	# sixteen turf masks - a lone plot, two dominoes, two lines of three and a
+	# 3x3 block - and a ring whose hole shows the four corners, dry and wet in
+	# a checker; then a withered and a trampled plot of each moisture.
+	for lighting in 4:
+		_crops_fixture(lighting)
+		var beds: Array = [
+			[Vector2i(9, 5)],
+			[Vector2i(11, 5), Vector2i(12, 5)],
+			[Vector2i(14, 5), Vector2i(14, 6)],
+			[Vector2i(16, 5), Vector2i(17, 5), Vector2i(18, 5)],
+			[Vector2i(20, 5), Vector2i(20, 6), Vector2i(20, 7)],
+		]
+		var block: Array = []
+		var ring: Array = []
+		for y in 3:
+			for x in 3:
+				block.append(Vector2i(9 + x, 9 + y))
+				if x != 1 or y != 1:
+					ring.append(Vector2i(13 + x, 9 + y))
+		beds.append_array([block, ring])
+		for bed in beds:
+			for cell in bed:
+				_state["plots"][Grid.index(cell)] = {"crop": &"", "growth": 0,
+					"watered": (cell.x + cell.y) % 2 == 0}
+		var masks := {}
+		var corners := 0
+		for bed in beds:
+			for cell in bed:
+				masks[WorldView.tilled_edge_mask(_state, cell)] = true
+				corners |= WorldView.tilled_corner_mask(_state, cell)
+		expect(masks.size() == 16 and corners == 15, "The turf fixture shows all sixteen masks and all four corners")
+		for wet in 2:
+			for mark in [[&"withered", 9], [&"trampled", 11]]:
+				var cell := Vector2i(17 + wet, int(mark[1]))
+				_state["terrain"][Grid.index(cell)] = Farm.Terrain.SOIL
+				_state["plots"][Grid.index(cell)] = {"crop": &"", "growth": 0, "watered": wet == 1,
+					StringName(mark[0]): &"corn"}
+		await _reaction_settle(view)
+		_world.look_at_cell(Vector2i(15, 8))
+		await process_frame
+		_crops_check()
+		await _shoot("ground_light%d" % lighting,
+			"A014: all sixteen turf masks and four corners, withered and trampled, dry + wet")
+
 
 ## Source-owned prop species and real harvest/occlusion fixtures.
 func _props_fixture(lighting: int) -> void:
@@ -800,8 +937,17 @@ func _props_cell(id: StringName, variant: int, near: Vector2i) -> Vector2i:
 
 func _props_put(id: StringName, cell: Vector2i) -> void:
 	expect(Farm.restore(_state, cell, {"id": id}), "Fixture uses one unchanged logical prop cell")
-	if id in [&"ore", &"seam"]:
+	if id in [&"ore", &"seam", &"copper_ore", &"coal_seam", &"gold_ore"]:
 		_state["terrain"][Grid.index(cell)] = Farm.Terrain.ROCK
+
+
+## A021's big stump (task 0204), as the map lays it: four cells naming one
+## anchor, its top-left.
+func _props_put_stump(anchor: Vector2i) -> void:
+	for y in 2:
+		for x in 2:
+			expect(Farm.restore(_state, anchor + Vector2i(x, y), {"id": &"hardwood_stump",
+				"anchor": [anchor.x, anchor.y]}), "Fixture lays the big stump's four cells")
 
 
 func _props_check() -> void:
@@ -815,11 +961,18 @@ func _props_check() -> void:
 		var cell := Grid.cell(int(cells[0]))
 		var on := Farm.occupant(_state, cell)
 		var id: StringName = on["id"]
-		if not id in [&"tree", &"stump", &"rock", &"seam", &"ore", &"cow", &"chicken"]:
+		if not id in [&"tree", &"stump", &"rock", &"seam", &"ore", &"cow", &"chicken",
+				&"copper_ore", &"coal_seam", &"gold_ore"]:
 			continue
 		var chosen := WorldView._prop_variant(id, cell)
 		var path := WorldView.PROP_DIR + str(chosen) + ".png"
-		expect(node.texture.resource_path == path and RasterArt.FRAMES.has(path), "Every prop selects its required accepted source, with no flat fallback")
+		# A tree wears A013's season of its species where there is one (task
+		# 0164): the same box and pivot, its own source.
+		var drawn := path
+		if id == &"tree":
+			drawn = SeasonView.file_of(SeasonView.frame_for("props/" + str(chosen),
+				_world.season_view().season()))
+		expect(node.texture.resource_path == drawn and RasterArt.FRAMES.has(drawn), "Every prop selects its required accepted source, with no flat fallback")
 		expect(node.position == Vector2(cell * 16 + Vector2i(8, 16)), "Props sort at the unchanged one-cell ground contact")
 		expect(node.offset == -Vector2(RasterArt.FRAMES[path]["pivot"]), "Prop view uses its species/material source pivot")
 		expect(not seen.has(cells[0]), "Visual overhang never creates another logical collision cell")
@@ -829,9 +982,24 @@ func _props_check() -> void:
 				"Each tree retains one separate compact ground shadow")
 	var wanted := 0
 	for on in _state["occupants"].values():
-		if on["id"] in [&"tree", &"stump", &"rock", &"seam", &"ore", &"cow", &"chicken"]:
+		if on["id"] in [&"tree", &"stump", &"rock", &"seam", &"ore", &"cow", &"chicken",
+				&"copper_ore", &"coal_seam", &"gold_ore"]:
 			wanted += 1
 	expect(seen.size() == wanted, "Removed props leave no stale drawing; every current prop has exactly one drawing")
+	# A021's big stump (task 0204): one drawing over its 2x2 footprint, at
+	# its bottom middle, whole or - from the first swing - chipped.
+	for node in _world.get_node("Occupants").get_children():
+		if not (node is Sprite2D and node.has_meta("logical_cells")) or (node.get_meta("logical_cells") as Array).size() != 4:
+			continue
+		var anchor := Grid.cell(int(node.get_meta("logical_cells")[0]))
+		if Farm.occupant(_state, anchor).get("id", &"") != &"hardwood_stump":
+			continue
+		var art := WorldView.struck_art(_state, &"hardwood_stump", anchor)
+		expect(node.texture.resource_path == WorldView.PROP_DIR + str(art) + ".png"
+			and StringName(node.get_meta("prop_art", &"")) == art,
+			"The big stump draws its own state's accepted source")
+		expect(node.position == Vector2(anchor * 16 + Vector2i(16, 32)) and node.offset == -Vector2(16, 30),
+			"The big stump stands on the bottom middle of its 2x2 footprint")
 
 
 func _props_overlap_pixels(view: PlayerView, tree_cell: Vector2i, behind: bool) -> void:
@@ -982,6 +1150,28 @@ func _props_family() -> void:
 		_props_check()
 		expect(var_to_bytes(_state) == farm_before, "Full farm props preserve map/occupancy, resources, RNG and every save field")
 		await _shoot("farm_light%d" % lighting, "Production farm density / resources / livestock, light %d" % lighting)
+	# **A021's nodes** (task 0204): copper, coal and gold in both variants on
+	# the quarry's rock, and the big stump - whole, then chipped by its first
+	# swing - under each light.
+	for lighting in 3:
+		_props_fixture(lighting)
+		for variant in 2:
+			for row in 3:
+				var id: StringName = [&"copper_ore", &"coal_seam", &"gold_ore"][row]
+				_props_put(id, _props_cell(id, variant, Vector2i(11 + row * 7 + variant * 3, 12)))
+		_props_put_stump(Vector2i(17, 6))
+		await _reaction_settle(view)
+		_world.look_at_cell(Vector2i(20, 9))
+		await process_frame
+		_props_check()
+		await _shoot("forge_light%d" % lighting, "A021: copper, coal and gold in both variants and the whole big stump, light %d" % lighting)
+		_state["tools"]["axe"] = 1
+		expect(Gathering.strike(_state, Vector2i(17, 6)).is_empty()
+			and WorldView.struck_art(_state, &"hardwood_stump", Vector2i(17, 6)) == &"hardwood_stump_chipped",
+			"The big stump's first swing chips it and gives nothing yet")
+		await _reaction_settle(view)
+		_props_check()
+		await _shoot("forge_chipped_light%d" % lighting, "A021: the big stump chipped by its first swing, light %d" % lighting)
 	var file := FileAccess.open(_folder + "selection.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(choice_counts, "\t") + "\n")
 

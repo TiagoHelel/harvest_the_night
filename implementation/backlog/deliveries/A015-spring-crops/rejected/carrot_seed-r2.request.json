@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Edit target: attached accepted-style carrot seed packet candidate. CORRECTION: change ONLY the paper packet silhouette to a wider, straight, upright rectangle with width-to-height exactly12:14 (six to seven). Prior silhouette was too narrow: source503x626, native11x14 andHUD6x8. Required visible nativebox12x14 andHUD7x8 after uniform nearest reduction. Preserve cream paper, the folded green spring band and the orange carrot illustration on its front. Flatten any perspective tilt, no protruding side bag or ragged corners. Dark colored outline included in rectangular12:14 bounds. Upper-left daytime light, coarse flat pixel clusters, identical imagecanvas size and centered position. Do not change produce identity, colors or packet design. TRUE transparent background, no halo, shadow, scene, text, numbers, logos, panels or extra objects. Complete packet, no cropping. The paper must read as a tiny folded seed packet, not a shopping bag.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r1.png"
+  ]
+}

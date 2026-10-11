@@ -1,0 +1,161 @@
+{
+  "pack": "A011",
+  "purpose": "Validated exact-source importer adapters; promote source paths only, preserve values and hashes.",
+  "recipes": [
+    {
+      "id": "ui/head_walker",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/current-walker-walk-0.png",
+      "source_sha256": "48a68c09e6971c05cc191dcbe1ef56027ed8b31acdc7ef935d34a839ac2af4dc",
+      "crop_xywh": [
+        24,
+        15,
+        12,
+        13
+      ],
+      "content_scale": 1,
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "output": "sprites/ui/head_walker.png",
+      "output_sha256": "e536a0a0cd7ac293f51148e7e359a7f203a23d1eb32d7d5156f48f4de55efe45",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "id": "ui/head_runner",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/current-runner-walk-0.png",
+      "source_sha256": "8937bc6993e9497c1c946038ca99fb6e0efeea5fbf4973ccaea773c1bdcea546",
+      "crop_xywh": [
+        26,
+        15,
+        13,
+        13
+      ],
+      "content_scale": 1,
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "output": "sprites/ui/head_runner.png",
+      "output_sha256": "25e990956301a9cfb831bfae7bc94767e3526000c97b18174909ca95fae0edbb",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "id": "ui/head_tank",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/current-tank-walk-0.png",
+      "source_sha256": "a6d2e2c4d275eba2dfd58617ff66a57c89694e222879b9811e9833ae8b39066e",
+      "crop_xywh": [
+        27,
+        15,
+        11,
+        13
+      ],
+      "content_scale": 1,
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "output": "sprites/ui/head_tank.png",
+      "output_sha256": "6af35497f16ae1d2980879744fede3ff47399752d6532c1cbf0c1fb5b23c843b",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "id": "ui/head_breaker",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/current-breaker-walk-0.png",
+      "source_sha256": "28c6aba3e63dd06ac1f2eb082d2a76697e09ad4ec5bcba698ce363a064dd5aa4",
+      "crop_xywh": [
+        28,
+        15,
+        11,
+        13
+      ],
+      "content_scale": 1,
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "output": "sprites/ui/head_breaker.png",
+      "output_sha256": "234cef88e941bf64eaf9ef5d3821fd4ec023812465777e841107af6f689a031c",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "id": "ui/head_giant",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/current-giant-walk-0.png",
+      "source_sha256": "df3e96e2ffce6f44e7d7d019462417444565cbc622ab6f475b73b441fb29ea64",
+      "crop_xywh": [
+        28,
+        19,
+        14,
+        14
+      ],
+      "content_scale": 1,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "output": "sprites/ui/head_giant.png",
+      "output_sha256": "d9f6e73f785e75d48b8752efb58cc43efb07f414a7066cd4eed8af82fd8785db",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    }
+  ]
+}

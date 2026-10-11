@@ -1,0 +1,55 @@
+A015 - Spring crops
+Approval date: 2026-10-10
+Owner words, verbatim: "esses estao aprovados, tem mais pra gerar?"
+Status: approved for integration; runtime_integrated remains false.
+
+Authoritative folder: implementation/backlog/deliveries/A015-spring-crops/
+All 27 native exports are approved. Read APPROVAL.json, contract.json, checks.json and this handoff.
+No older delivery folders are superseded. raw/ contains selected ImageGen source art; rejected/ and preview/ are evidence only, never production sources.
+
+Integration task: 0198.
+Replace growth stand-ins from 0168, packet stand-ins from 0170 and regrow stand-ins from 0172. Potato, garlic and strawberry stages are gameplay states, not a timed growth animation: frame 0 planted, 1 sprout, 2 growing, 3 ripe. Bind strawberry_regrow separately after picking. Preserve carrot's existing crop and produce sprites; this pack supplies its seed packet only. carrot_seed is the approved cream-paper spring-band packet master for later seasonal packs. Do not promote A017's blocked candidates. Crop visible heights and <=150 plot pixels are checked; keep wet soil visible. Preserve the shared source scale within each strip and the paired packet crop/scales. UI display_role is inventory for icon_ and compact_hud for hud_; UI is never world-relit.
+
+Palette mode A: built-in ImageGen raw sources converted with tools/import_art.py:render_source and tools/palette.py:COLOURS. Preserve each exact crop_xywh, sheet_cell_xywh, content_scale, content_anchor_xy, palette_keys, alpha_threshold 128, canvas and pivot from contract.json. Null palette_keys means the complete 42-colour palette; omit the null optional key when invoking render_source. No runtime/ 2x layer.
+
+Native to runtime mapping and aliases:
+native/potato/none/01.png -> sprites/crops/potato_0.png | alias crops/potato_0 | 16x16 pivot (8,14) draw 1 | frame 0 dir none 0.55 s loop false mirror none | points {}
+native/potato/none/02.png -> sprites/crops/potato_1.png | alias crops/potato_1 | 16x16 pivot (8,14) draw 1 | frame 1 dir none 0.55 s loop false mirror none | points {}
+native/potato/none/03.png -> sprites/crops/potato_2.png | alias crops/potato_2 | 16x16 pivot (8,14) draw 1 | frame 2 dir none 0.55 s loop false mirror none | points {}
+native/potato/none/04.png -> sprites/crops/potato_3.png | alias crops/potato_3 | 16x16 pivot (8,14) draw 1 | frame 3 dir none 0.55 s loop false mirror none | points {}
+native/garlic/none/01.png -> sprites/crops/garlic_0.png | alias crops/garlic_0 | 16x16 pivot (8,14) draw 1 | frame 0 dir none 0.55 s loop false mirror none | points {}
+native/garlic/none/02.png -> sprites/crops/garlic_1.png | alias crops/garlic_1 | 16x16 pivot (8,14) draw 1 | frame 1 dir none 0.55 s loop false mirror none | points {}
+native/garlic/none/03.png -> sprites/crops/garlic_2.png | alias crops/garlic_2 | 16x16 pivot (8,14) draw 1 | frame 2 dir none 0.55 s loop false mirror none | points {}
+native/garlic/none/04.png -> sprites/crops/garlic_3.png | alias crops/garlic_3 | 16x16 pivot (8,14) draw 1 | frame 3 dir none 0.55 s loop false mirror none | points {}
+native/strawberry/none/01.png -> sprites/crops/strawberry_0.png | alias crops/strawberry_0 | 16x16 pivot (8,14) draw 1 | frame 0 dir none 0.55 s loop false mirror none | points {}
+native/strawberry/none/02.png -> sprites/crops/strawberry_1.png | alias crops/strawberry_1 | 16x16 pivot (8,14) draw 1 | frame 1 dir none 0.55 s loop false mirror none | points {}
+native/strawberry/none/03.png -> sprites/crops/strawberry_2.png | alias crops/strawberry_2 | 16x16 pivot (8,14) draw 1 | frame 2 dir none 0.55 s loop false mirror none | points {}
+native/strawberry/none/04.png -> sprites/crops/strawberry_3.png | alias crops/strawberry_3 | 16x16 pivot (8,14) draw 1 | frame 3 dir none 0.55 s loop false mirror none | points {}
+native/strawberry_regrow/none/01.png -> sprites/crops/strawberry_regrow.png | alias crops/strawberry_regrow | 16x16 pivot (8,14) draw 1 | frame 0 dir none 0.55 s loop false mirror none | points {}
+native/icon_potato/none/01.png -> sprites/ui/icon_potato.png | alias ui/icon_potato | 16x16 pivot (8,8) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_potato/none/01.png -> sprites/ui/hud_potato.png | alias ui/hud_potato | 10x10 pivot (5,5) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_garlic/none/01.png -> sprites/ui/icon_garlic.png | alias ui/icon_garlic | 16x16 pivot (8,8) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_garlic/none/01.png -> sprites/ui/hud_garlic.png | alias ui/hud_garlic | 10x10 pivot (5,5) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_strawberry/none/01.png -> sprites/ui/icon_strawberry.png | alias ui/icon_strawberry | 16x16 pivot (8,8) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_strawberry/none/01.png -> sprites/ui/hud_strawberry.png | alias ui/hud_strawberry | 10x10 pivot (5,5) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_carrot_seed/none/01.png -> sprites/ui/icon_carrot_seed.png | alias ui/icon_carrot_seed | 16x16 pivot (8,8) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_carrot_seed/none/01.png -> sprites/ui/hud_carrot_seed.png | alias ui/hud_carrot_seed | 10x10 pivot (5,5) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_potato_seed/none/01.png -> sprites/ui/icon_potato_seed.png | alias ui/icon_potato_seed | 16x16 pivot (8,8) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_potato_seed/none/01.png -> sprites/ui/hud_potato_seed.png | alias ui/hud_potato_seed | 10x10 pivot (5,5) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_garlic_seed/none/01.png -> sprites/ui/icon_garlic_seed.png | alias ui/icon_garlic_seed | 16x16 pivot (8,8) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_garlic_seed/none/01.png -> sprites/ui/hud_garlic_seed.png | alias ui/hud_garlic_seed | 10x10 pivot (5,5) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_strawberry_seed/none/01.png -> sprites/ui/icon_strawberry_seed.png | alias ui/icon_strawberry_seed | 16x16 pivot (8,8) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_strawberry_seed/none/01.png -> sprites/ui/hud_strawberry_seed.png | alias ui/hud_strawberry_seed | 10x10 pivot (5,5) draw 1 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+
+Frame order: 01.png is frame 0. Growth stages and machine variants are individually selected states, not timed animations. Directions are none; horizontal mirrors and runtime flips are none. Metadata coordinates are native pixels. Preserve every per-file point shown above.
+Deviations: []. No additional deviation is authorized by this approval.
+
+Never regenerate, repaint, recolour, resample or retime approved art. Never cut sprites from GIFs, previews or screenshots. Never promote a file absent from contract.json. Never add a runtime flip to a baked mirror. Deferred farmer packs and the cancelled run pack are outside this handoff.
+
+Integration steps:
+1. Verify every selected native SHA256 against both contract.json and APPROVAL.json, and source/prompt/reference hashes against recorded provenance. Run this delivery build.py --check; all checks must pass. Stop on mismatch rather than modifying approved pixels.
+2. Promote selected raw files byte-for-byte under versioned assets/art_source/<family>/ paths. Preserve the recorded recipes, aliases and metadata; adapt only source paths. Add manifest entries, prompt/reference/approval provenance, and ownership.json entries. Run python tools/import_art.py and verify runtime PNG hashes equal the approved native exports.
+3. Extend hard-coded family lists in the relevant art checks and bind aliases through existing gameplay state handling as described above. Retain resource IDs, placements, display_role and points.
+4. Run python tools/verify.py and verify all promoted PNG hashes still match; inspect any pack-specific bounds, state, grounding, palette, points and family checks.
+5. Inspect FHD captures by day and night in the actual game context at native density; UI is not world-relit.
+6. After integration and validation, run python implementation/backlog/assets.py set A015 integrated. Claude owns that transition. Do not commit or push unless the owner asks.

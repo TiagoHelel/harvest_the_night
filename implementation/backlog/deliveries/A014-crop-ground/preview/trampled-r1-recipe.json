@@ -1,0 +1,25 @@
+{
+  "id": "trampled",
+  "source": "implementation\\backlog\\deliveries\\A014-crop-ground\\raw\\trampled-r1.png",
+  "crop_xywh": [
+    361,
+    523,
+    813,
+    337
+  ],
+  "content_scale": 0.011869436201780416,
+  "content_anchor_xy": [
+    5,
+    4
+  ],
+  "canvas_wh": [
+    16,
+    16
+  ],
+  "pivot_xy": [
+    8,
+    14
+  ],
+  "palette": "tools/palette.py:COLOURS",
+  "alpha_threshold": 128
+}

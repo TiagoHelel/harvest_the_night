@@ -1,7 +1,7 @@
 # 0203 - Art: material icons
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0176, 0177, 0184
 - **Likely files:** assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py
 - **Art packs:** A020

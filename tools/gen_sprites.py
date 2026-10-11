@@ -64,6 +64,10 @@ EDGE_ROWS = ["edge", "shore"]
 TERRAIN_ORDER = ATLAS_ROWS[0]
 ATLAS_PATH = "terrain/atlas.png"
 
+# The seasons with their own ground (task 0163): A012's winter, in the same
+# grid as `ATLAS_PATH`, written once the season's tiles are raster-owned.
+SEASON_ATLASES = {"_winter": "terrain/atlas_winter.png"}
+
 # Which bit of an edge mask each side is. North is 1, east 2, south 4, west 8,
 # and the view builds the same number from the same four neighbours.
 EDGE_SIDES = ["n", "e", "s", "w"]
@@ -394,7 +398,18 @@ def blank_tile():
     return [[(0, 0, 0, 0)] * TILE_PX for _ in range(TILE_PX)]
 
 
-def edge_row(prefix, raster=None):
+def seasonal(name, season=""):
+    """`name`'s tile in `season` (`"_winter"`): its own raster tile when that
+    season's pack has delivered one, today's otherwise - A012's winter ground
+    covers the grass, the path, the soil and the banks, never the water, the
+    rock or the floor (task 0163)."""
+    if season and art_ownership.registry().get(
+            "sprites/terrain/%s%s.png" % (name, season)) == "raster":
+        return name + season
+    return name
+
+
+def edge_row(prefix, raster=None, season=""):
     """Sixteen tiles, one per combination of the four sides.
 
     **This is the autotiling, and it is four maps rather than forty-seven.**
@@ -403,7 +418,8 @@ def edge_row(prefix, raster=None):
     which is a corner that nobody drew. The view computes the same four bits
     from the same four neighbours and reads the tile straight off.
     """
-    sides = [tile_of("%s_%s" % (prefix, side), raster) for side in EDGE_SIDES]
+    sides = [tile_of(seasonal("%s_%s" % (prefix, side), season), raster)
+             for side in EDGE_SIDES]
     row = []
     for mask in range(16):
         tile = blank_tile()
@@ -414,23 +430,29 @@ def edge_row(prefix, raster=None):
     return row
 
 
-def build_atlas():
+def build_atlas(season=""):
     """The terrain atlas: a grid of tiles, row by row.
 
     Row 0 is `Farm.Terrain` order and everything after it is a variant, an
     animation frame or a composited edge. Short rows are padded with empty
     tiles, because an atlas has to be a rectangle.
+
+    **A season's atlas is the same grid** (task 0163): every cell its
+    season's tile where one exists (`seasonal`), so the view swaps one
+    texture and lays no cell again - the grass variation rule and the edge
+    masks read the same cells.
     """
     rows, raster = [], {}
     for names in ATLAS_ROWS:
-        rows.append([tile_of(name, raster) for name in names])
+        rows.append([tile_of(seasonal(name, season), raster) for name in names])
     for prefix in EDGE_ROWS:
-        rows.append(edge_row(prefix, raster))
+        rows.append(edge_row(prefix, raster, season))
     for prefix, start in CORNER_START.items():
         for index, corner in enumerate(CORNER_ORDER):
             while len(rows[0]) <= start + index:
                 rows[0].append(blank_tile())
-            rows[0][start + index] = tile_of(prefix + "_corner_" + corner, raster)
+            rows[0][start + index] = tile_of(
+                seasonal(prefix + "_corner_" + corner, season), raster)
 
     across = max(len(row) for row in rows)
     width = across * TILE_PX
@@ -680,6 +702,10 @@ def everything(dispatch=True):
         out[name + ".png"] = png_bytes(w, h, pixels)
     w, h, pixels = build_atlas()
     out[ATLAS_PATH] = png_bytes(w, h, pixels)
+    for season, path in sorted(SEASON_ATLASES.items()):
+        if seasonal("grass", season) != "grass":
+            w, h, pixels = build_atlas(season)
+            out[path] = png_bytes(w, h, pixels)
     return art_ownership.owned(out, "ascii") if dispatch else out
 
 

@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 is exactcompletecanvas edit target. Keep complete square16x16logicalcanvas and same top-left corner. ExactlyTHREE opaque logicalpixels: (0,0)creamRGB232224207, (1,0)moonRGB207214255, (0,1)moonRGB207214255. Move the misplaced blue pixel from(1,1) to(1,0). (1,1) MUST be transparent. Entire remainingcanvastransparent. This is a tinyL-shapedsnowcorner, no edges elsewhere, no extra pixels, no crop, recenter, paddingremoval, scene or text. Returnfullsquarecanvas, exactpixelblocks, realalpha.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\shore_corner_nw_winter-r3-10x.png"
+  ],
+  "transparent_background": true
+}

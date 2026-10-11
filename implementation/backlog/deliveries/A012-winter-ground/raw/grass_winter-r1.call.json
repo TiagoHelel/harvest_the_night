@@ -1,0 +1,29 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: grass_winter static master.\nInput images: Roles are specified in the detailed request below; never copy style-sheet scenes or lettering.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,16; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: fully opaque edge-to-edge snow terrain. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\n\nONE seamless winter snow grass tile, master grass_winter. Entire square edge-to-edge opaque. A calm warm-ivory bone snow field, at least232of256native pixels same base colour, one soft joined pale-blue or beige drift cluster in the interior only. Every non-base cluster at least2pixels, no isolated dots. Uniform base on all four borders; row0equals15 and column0equals15. Keep borders and quiet texture density of attached summer tile. No tufts yet: variants add them later. Native16x16, pivot8,16. Soft warm snow, NO glitter, glare, footprints, ice, objects, centrepiece or ground shadow.\nCreate one fully opaque tileable material for winter snow grass, designed for 16x16 native tiles. Low contrast beneath characters, grouped\nsurface texture, no obvious centerpiece. Grass uses occasional small clusters\nwith calm open areas, not a dot in every few pixels. Rock is irregular layered\nstone, not brickwork. Wood planks align to the approved jetty/floor orientation.\nMake opposite borders seamless. Variants must share boundary colors and density.\nNo scene objects, shadows, borders, perspective block or transparency.\n\nImage1 summer grass raw is the EXACT edit target: change season to winter, keep whole square framing, border topology and quiet density. Image2 reference sheet is style only. Flat square pixels, neutral upper-left light, no gradients, blur or labels. Return a square opaque tile.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\terrain\\grass.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": false
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\terrain\\grass.png",
+      "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-04b7904a-4d42-4464-9a32-e4562943e4d0.png",
+  "copied_raw_path": "raw/grass_winter-r1.png",
+  "raw_sha256": "9945af52be245cedcfa4af8ba637b6907e944c5f0288946c62ec979df55aecd2",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "inspection pending"
+}

@@ -1,0 +1,8 @@
+{
+  "prompt": "Create ONE tiny zombie forecast bust, not a full character. SQUARE16x16logical canvas. Entire joined HEAD+tiny neck+shoulder hint occupies exactly13x13 logical pixels, centred horizontally, bottom onrow14. At least1transparent pixel on eachside. Head itself is tall and nearly square, no wide shoulder strip. Heavy bald pale grey-green round head, thick neck, tiny muted olive shoulder pads. Broad stern brow and small pale eyes; no helmet, weapon, belly or arms. Image1 is the actual16pixel footprint/outline/style guide, NEVER draw its walker identity. Image2 if present defines this enemy identity only. Flat joined chunky pixels,2-3planes, upper-left highlights, violet coloured outline. Real transparent alpha outside bust; no panel, text, background, floor, shadow, gradient or detached flecks. Generous square outer framing.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\preview\\head-footprint-guide.png",
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\tank.png"
+  ],
+  "transparent_background": true
+}

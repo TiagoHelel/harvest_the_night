@@ -1,0 +1,65 @@
+{
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "edge_geometry": true,
+  "frames_expected": 4,
+  "frames_found": 4,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "tilled_edge_corner_nw": {
+      "bounds": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "components_8": 1,
+      "opaque_pixels": 3,
+      "wet_pixels_exposed": 253
+    },
+    "tilled_edge_n": {
+      "bounds": [
+        0,
+        0,
+        16,
+        2
+      ],
+      "components_8": 1,
+      "opaque_pixels": 28,
+      "wet_pixels_exposed": 228
+    },
+    "trampled": {
+      "bounds": [
+        3,
+        10,
+        13,
+        14
+      ],
+      "components_8": 1,
+      "opaque_pixels": 20,
+      "wet_pixels_exposed": 236
+    },
+    "withered": {
+      "bounds": [
+        4,
+        6,
+        13,
+        14
+      ],
+      "components_8": 1,
+      "opaque_pixels": 34,
+      "wet_pixels_exposed": 222
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "rebuild_identical": true,
+  "silhouettes_distinct": true,
+  "trampled_bounds_and_density": true,
+  "wet_cue_exposed": true,
+  "withered_bounds_and_density": true
+}

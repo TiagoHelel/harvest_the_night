@@ -1,0 +1,36 @@
+{
+  "anim": "grass_winter",
+  "stem": "grass_winter-r1",
+  "importer": {
+    "id": "A012/grass_winter",
+    "source": "implementation/backlog/deliveries/A012-winter-ground/raw/grass_winter-r1.png",
+    "crop_xywh": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "content_scale": 0.012759170653907496,
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "palette_keys": [
+      "bone",
+      "moon",
+      "bone_dark",
+      "grass_dark",
+      "grass"
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: A014 tilled_edge_n, a thin torn-turf border overlay.
+Input images: Image 1: approved crop strip, scale and style reference. Image 2: approved farm style reference. New isolated plant only, do not copy the ground or characters.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x16 pixels with contact pivot 8,16; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent background. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+TERRAIN: Edit the attached approved north edge. Preserve its square footprint and width, but change grass over path into a torn turf lip over hoed soil. One square isolated transparent overlay, native16x16. ONLY TOP THREE nativepixel ROWS contain any pixels; rows3..15 are fullytransparent. Row0 opaque across all16columns, column0 andcolumn15 identical; one connected grassrim with a thin soil-dark cutline beneath. No tile background, no earth-filled block. Upperleft clustered shading, quiet natural torn sod. Palette only grassdark#4e7a35 grass#6a9646 grasslight#8ab659 and soildark#5c422a. No groundshadow. Output square, image itself represents full16x16 grid, exact flat coarsepixelblocks suitable for nearest16px reduction.

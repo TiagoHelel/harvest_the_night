@@ -1,0 +1,62 @@
+[
+  {
+    "anim": "head_giant",
+    "asset": "giant",
+    "stem": "giant-r4",
+    "importer": {
+      "id": "A011/head_giant",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/giant-r4.png",
+      "crop_xywh": [
+        287,
+        323,
+        682,
+        743
+      ],
+      "content_scale": 0.018842530282637954,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "gold",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf_dark",
+        "night",
+        "roof",
+        "roof_dark",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  }
+]

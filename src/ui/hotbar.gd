@@ -21,8 +21,9 @@ extends Control
 ## A slot shows the kit count when one is banked, the price otherwise - or,
 ## greyed, what is short - and for a defence with a nightly limit how many
 ## more may go down tonight. Its tooltip is `Describe.defence`, read out of
-## `GameData` when asked. The icons are A005's, through 0120's road: until the
-## pack lands each is the structure's own sprite scaled into the 16x16 box.
+## `GameData` when asked. The icons are A005's 16x16 cuts (task 0147), drawn at
+## their native size; a defence the pack never drew shows its own sprite
+## scaled into the box until its icon lands.
 
 ## One slot: the 16x16 icon over two short lines of price, packed closer
 ## than the theme's own spacing (`UiKit.SLOT_PRICE`).
@@ -190,8 +191,9 @@ func _key_of(index: int) -> String:
 	return text if text.length() <= 1 else ""
 
 
-## A005's icon, or its stand-in; a defence the pack has never heard of falls
-## back to its own building sprite, so a new one still shows something.
+## The defence's `icon_<id>` - A005's eight since task 0147 - or a later
+## pack's registered stand-in; a defence no pack has drawn yet falls back to
+## its own building sprite, so a new one still shows something.
 func _icon_of(id: StringName) -> Texture2D:
 	var name := StringName("icon_%s" % id)
 	var file := "res://sprites/buildings/%s.png" % id

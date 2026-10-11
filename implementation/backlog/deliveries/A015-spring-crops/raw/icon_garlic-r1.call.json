@@ -1,0 +1,23 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: A015 icon_garlic, ONE isolated inventory icon.\nInput images: Image1: approved carrot inventory icon, style and scale reference only.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,8; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background, no ground or scene. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nICON: one white garlic bulb with a short stalk\nComplete isolated object with generous TRUE transparent margins. Final native inventory16x16 and HUD10x10 are two downstream cuts from this same source. Inventory shape max14pixels, HUDmax8pixels, clean1pixel clear margin. Packet shape specifically12x14pixels and7x8pixels; a small simple folded band with large readable produce picture. No groundshadow, glow, scene, text, UIpanel or extra objects. Deliberate coarse flat pixel clusters, neutral upper-left light, same colored outline as reference.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\carrot.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\carrot.png",
+      "sha256": "d55aa9d51c2078c454aa834a05a19faec0f9256724758da3d976b2acaa1505f2",
+      "role": "identity/material/layout reference; generation approval is recorded separately"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-3da22cbb-a0bd-4d5a-936d-ab9c2fe7f8e6.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\icon_garlic-r1.png",
+  "sha256": "d6b28003b10fdeb8b795f01b9c2bdde501c63e95e549d36d70f7a30ef4ecbbbe",
+  "date": "2026-10-10",
+  "revision": 1,
+  "decision": "candidate / reference retained for owner review; no whole-pack approval"
+}

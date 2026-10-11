@@ -1,0 +1,55 @@
+{
+  "anim": "rock_snow",
+  "stem": "rock_snow-r1",
+  "importer": {
+    "id": "A013/rock_snow",
+    "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/rock_snow-r1.png",
+    "crop_xywh": [
+      630,
+      285,
+      716,
+      274
+    ],
+    "content_scale": 0.0111731843575419,
+    "content_anchor_xy": [
+      5,
+      9
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "palette_keys": [
+      "bone",
+      "moon",
+      "bone_dark",
+      "stone_light",
+      "night"
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ]
+  },
+  "host_fit": [
+    {
+      "host": "rock",
+      "pass": true,
+      "within_column_top_band": true,
+      "cap_pixels": 16,
+      "host_pixels": 100,
+      "overlap_pixels": 16,
+      "overlap_fraction": 1.0,
+      "host_covered_fraction": 0.16,
+      "width_fraction": 0.5714285714285714,
+      "cap_bounds": [
+        3,
+        5,
+        11,
+        8
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the exact edit target. Keep ONLY the squat RED fuel tank and short BRASS nozzle pipe with ONE SMALL flame tongue at its upper-right tip. REMOVE the timber trestle, all support legs, all stone feet and framework. The tank must dominate the silhouette and be roof-red, not wood orange. Brass pipe has ochre-gold large planes. Wide compact silhouette about14wide10high native,8wide6high compact. No full tower or tall framework. Keep the same camera, light from upper left, material identity and coloured dark outlines. Simplify all decoration into two or three readable flat planes so the object remains recognizable on a10x10 canvas. ONE isolated object, true transparent alpha, generous empty margins. No ground, shadow, halo, glow, particles, labels or background. Crisp square pixels, no gradients or blurred edges. Image2 approved wood icon is STYLE ONLY, not the subject.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\flame_tower-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\flame_tower-r1.png",
+      "sha256": "4a2050513f9edc83b8f71cb1380e4c94002b2d4a224b8f751153a599fcc52f67",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "preview/input-history/flame_tower-r1-4a2050513f.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-3bb21d80-b052-48e9-b37d-189947739044.png",
+  "copied_raw_path": "raw/flame_tower-r2.png",
+  "raw_sha256": "936aec59111ed671b5b257ee656acb409828f5bd5f572023bcda4c95d59a8605",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "rejected",
+  "inspection": "True alpha and both native cuts inspected. Owner final approval pending.",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/flame_tower-r2.png"
+}

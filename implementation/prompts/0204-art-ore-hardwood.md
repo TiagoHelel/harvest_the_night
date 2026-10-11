@@ -1,7 +1,7 @@
 # 0204 - Art: copper, coal, gold and hardwood
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0176, 0177
 - **Likely files:** assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/art_placement.gd
 - **Art packs:** A021

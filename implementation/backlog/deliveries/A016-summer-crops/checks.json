@@ -1,0 +1,362 @@
+{
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "corn_calibration20": true,
+  "corn_regrow_height": true,
+  "frames_count_matches": true,
+  "frames_expected": 28,
+  "frames_found": 28,
+  "grounded_on_pivot": true,
+  "icon_bounds_ok": true,
+  "icon_colours_at_least2": true,
+  "icon_density": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/corn_regrow/none/01.png": {
+      "bounds": [
+        3,
+        3,
+        14,
+        22
+      ],
+      "height": 19,
+      "opaque_pixels": 101,
+      "plot_opaque": 91,
+      "width": 11
+    },
+    "native/hud_corn_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "height": 8,
+      "opaque_pixels": 56,
+      "plot_opaque": 28,
+      "width": 7
+    },
+    "native/hud_melon/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "height": 7,
+      "opaque_pixels": 42,
+      "plot_opaque": 16,
+      "width": 8
+    },
+    "native/hud_melon_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "height": 8,
+      "opaque_pixels": 56,
+      "plot_opaque": 28,
+      "width": 7
+    },
+    "native/hud_pepper/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "height": 7,
+      "opaque_pixels": 25,
+      "plot_opaque": 8,
+      "width": 8
+    },
+    "native/hud_pepper_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "height": 8,
+      "opaque_pixels": 56,
+      "plot_opaque": 28,
+      "width": 7
+    },
+    "native/hud_sunflower/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        8,
+        9
+      ],
+      "height": 8,
+      "opaque_pixels": 34,
+      "plot_opaque": 18,
+      "width": 6
+    },
+    "native/hud_sunflower_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "height": 8,
+      "opaque_pixels": 56,
+      "plot_opaque": 28,
+      "width": 7
+    },
+    "native/icon_corn_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "height": 14,
+      "opaque_pixels": 168,
+      "plot_opaque": 84,
+      "width": 12
+    },
+    "native/icon_melon/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "height": 13,
+      "opaque_pixels": 130,
+      "plot_opaque": 55,
+      "width": 14
+    },
+    "native/icon_melon_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "height": 14,
+      "opaque_pixels": 168,
+      "plot_opaque": 84,
+      "width": 12
+    },
+    "native/icon_pepper/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "height": 13,
+      "opaque_pixels": 75,
+      "plot_opaque": 26,
+      "width": 14
+    },
+    "native/icon_pepper_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "height": 14,
+      "opaque_pixels": 168,
+      "plot_opaque": 84,
+      "width": 12
+    },
+    "native/icon_sunflower/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "height": 14,
+      "opaque_pixels": 116,
+      "plot_opaque": 59,
+      "width": 12
+    },
+    "native/icon_sunflower_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "height": 14,
+      "opaque_pixels": 168,
+      "plot_opaque": 84,
+      "width": 12
+    },
+    "native/melon/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        10,
+        14
+      ],
+      "height": 2,
+      "opaque_pixels": 3,
+      "plot_opaque": 3,
+      "width": 4
+    },
+    "native/melon/none/02.png": {
+      "bounds": [
+        5,
+        10,
+        12,
+        14
+      ],
+      "height": 4,
+      "opaque_pixels": 14,
+      "plot_opaque": 14,
+      "width": 7
+    },
+    "native/melon/none/03.png": {
+      "bounds": [
+        2,
+        8,
+        14,
+        14
+      ],
+      "height": 6,
+      "opaque_pixels": 46,
+      "plot_opaque": 46,
+      "width": 12
+    },
+    "native/melon/none/04.png": {
+      "bounds": [
+        2,
+        5,
+        15,
+        14
+      ],
+      "height": 9,
+      "opaque_pixels": 78,
+      "plot_opaque": 78,
+      "width": 13
+    },
+    "native/pepper/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        11,
+        14
+      ],
+      "height": 2,
+      "opaque_pixels": 6,
+      "plot_opaque": 6,
+      "width": 5
+    },
+    "native/pepper/none/02.png": {
+      "bounds": [
+        5,
+        10,
+        12,
+        14
+      ],
+      "height": 4,
+      "opaque_pixels": 12,
+      "plot_opaque": 12,
+      "width": 7
+    },
+    "native/pepper/none/03.png": {
+      "bounds": [
+        3,
+        7,
+        13,
+        14
+      ],
+      "height": 7,
+      "opaque_pixels": 43,
+      "plot_opaque": 43,
+      "width": 10
+    },
+    "native/pepper/none/04.png": {
+      "bounds": [
+        3,
+        3,
+        14,
+        14
+      ],
+      "height": 11,
+      "opaque_pixels": 78,
+      "plot_opaque": 78,
+      "width": 11
+    },
+    "native/pepper_regrow/none/01.png": {
+      "bounds": [
+        3,
+        3,
+        13,
+        14
+      ],
+      "height": 11,
+      "opaque_pixels": 76,
+      "plot_opaque": 76,
+      "width": 10
+    },
+    "native/sunflower/none/01.png": {
+      "bounds": [
+        6,
+        27,
+        11,
+        30
+      ],
+      "height": 3,
+      "opaque_pixels": 10,
+      "plot_opaque": 10,
+      "width": 5
+    },
+    "native/sunflower/none/02.png": {
+      "bounds": [
+        3,
+        25,
+        13,
+        30
+      ],
+      "height": 5,
+      "opaque_pixels": 25,
+      "plot_opaque": 25,
+      "width": 10
+    },
+    "native/sunflower/none/03.png": {
+      "bounds": [
+        2,
+        13,
+        15,
+        30
+      ],
+      "height": 17,
+      "opaque_pixels": 111,
+      "plot_opaque": 109,
+      "width": 13
+    },
+    "native/sunflower/none/04.png": {
+      "bounds": [
+        1,
+        6,
+        15,
+        30
+      ],
+      "height": 24,
+      "opaque_pixels": 219,
+      "plot_opaque": 144,
+      "width": 14
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "packets_same_box": true,
+  "points_on_opaque": true,
+  "rebuild_identical": true,
+  "stage_targets": true,
+  "stages_rise": true,
+  "wet_cue_exposed": true
+}

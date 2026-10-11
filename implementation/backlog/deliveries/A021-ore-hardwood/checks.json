@@ -1,0 +1,98 @@
+{
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 8,
+  "frames_found": 8,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/coal_seam/none/01.png": {
+      "bounds": [
+        2,
+        7,
+        14,
+        14
+      ],
+      "opaque_pixels": 59
+    },
+    "native/coal_seam_b/none/01.png": {
+      "bounds": [
+        2,
+        7,
+        15,
+        14
+      ],
+      "opaque_pixels": 64
+    },
+    "native/copper_ore/none/01.png": {
+      "bounds": [
+        2,
+        4,
+        14,
+        14
+      ],
+      "opaque_pixels": 86
+    },
+    "native/copper_ore_b/none/01.png": {
+      "bounds": [
+        2,
+        4,
+        14,
+        14
+      ],
+      "opaque_pixels": 81
+    },
+    "native/gold_ore/none/01.png": {
+      "bounds": [
+        2,
+        4,
+        14,
+        14
+      ],
+      "opaque_pixels": 83
+    },
+    "native/gold_ore_b/none/01.png": {
+      "bounds": [
+        2,
+        4,
+        14,
+        14
+      ],
+      "opaque_pixels": 81
+    },
+    "native/hardwood_stump/none/01.png": {
+      "bounds": [
+        2,
+        14,
+        31,
+        30
+      ],
+      "opaque_pixels": 251
+    },
+    "native/hardwood_stump_chipped/none/01.png": {
+      "bounds": [
+        2,
+        14,
+        31,
+        30
+      ],
+      "opaque_pixels": 243
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "resource_scales_shared": true,
+  "resource_sizes_coherent": true,
+  "resource_variants_distinct": true,
+  "source_transparency_matches_call": true,
+  "visible_targets": true
+}

@@ -1,0 +1,23 @@
+{
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: A016 one summer sunflower seedpacket.\nInput images: Image1: accepted-for-review seedpacket identity and EDIT TARGET; ownerreview deferred to batchend\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,8; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background, isolated objects only. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nICON + precise edit: Change ONLY the front picture to one YELLOW sunflowerhead with brownseeddisc on a short stem and the folded TOP BAND from springgreen to summerGOLD (#d6ba60 and#c49646). Keep cream paper, outline, rectangle, upper-left highlights, camera, imagecanvas1254x1254 and position. The exact sourcecrop is x320,y300,width615,height716, shared with all packets. Do not resize, narrow, tilt or reshape the packet. New picture occupies about half the front. Everything outside band and illustration remains the same. Targetvisible inventory12x14pixels andHUD7x8pixels. No words, numbers, logos, shadows, glow, scene or extraobjects. True transparent margins. Same coarse squarepixel scale.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A016-summer-crops\\raw\\sunflower_seed-r1.png",
+  "date": "2026-10-10",
+  "decision": "accepted for owner review; numeric checks recorded separately",
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "f2e9c39135b929b0ccb963f3486a06b86ed37900c8dd77f55d302bc2575a3b88"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8eb22cde-95cc-4b5a-91e2-08a346154ca7.png",
+  "revision": 1,
+  "sha256": "9608016115686a90701a903513fe4a9acfbf4b7abff38130bd17fbd09596b5eb",
+  "tool": "image_gen.imagegen"
+}

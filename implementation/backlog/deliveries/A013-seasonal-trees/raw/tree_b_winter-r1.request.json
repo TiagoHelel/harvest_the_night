@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: lighting-weather. Image1 is the EXACT summer tree_b.png tree edit target, Image2 accepted autumn family STYLE only. Preserve original full source canvas dimensions, all transparent margins, exact size, position, trunk and roots pixelclusters. Never crop, resize, center or fill canvas. Change only seasonal crown for winter. Remove leaves to reveal a broad bare branch crown with a few cream snow clumps resting ONLY on upperbranch surfaces. Preserve exact trunk, roots, branching style, original overall height and horizontal crownspan at least26nativepixels. At most3green nativepixels. NO solid leafy whiteball. Branches connected continuously to original trunk, strong pixel clusters. Finalnative40x48 pivot20,44 FIXEDscale0.03700440528634361. Visibleheight38-43rows, rootsole43, centretrunk20+/-1, width<=38. Flat handcraftedpixelclusters, upperleftneutral light. No ground, shadow, lettering, panel, particles or extra objects. True transparentalpha outside tree.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\tree_b.png",
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r3.png"
+  ],
+  "transparent_background": true
+}

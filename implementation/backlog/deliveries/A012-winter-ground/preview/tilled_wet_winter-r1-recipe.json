@@ -1,0 +1,38 @@
+{
+  "anim": "tilled_wet_winter",
+  "stem": "tilled_wet_winter-r1",
+  "importer": {
+    "id": "A012/tilled_wet_winter",
+    "source": "implementation/backlog/deliveries/A012-winter-ground/raw/tilled_wet_winter-r1.png",
+    "crop_xywh": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "content_scale": 0.012759170653907496,
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "palette_keys": [
+      "soil_dark",
+      "soil",
+      "soil_light",
+      "ink_soft",
+      "ink",
+      "bone",
+      "bone_dark"
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ]
+  }
+}

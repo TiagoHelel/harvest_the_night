@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-08",
+  "owner_words": "ficou bem incoerente, faz um recorte da cabeca dos sprites atuais que dai nao tem erro",
+  "method": "exact crop of current runtime sprites; transparent padding only",
+  "canvas_wh": [
+    16,
+    16
+  ],
+  "pivot_xy": [
+    8,
+    8
+  ],
+  "entries": [
+    {
+      "kind": "walker",
+      "source": "raw/current-walker-walk-0.png",
+      "original_source": "sprites/enemies/walker_walk_0.png",
+      "source_sha256": "48a68c09e6971c05cc191dcbe1ef56027ed8b31acdc7ef935d34a839ac2af4dc",
+      "crop_xywh": [
+        24,
+        15,
+        12,
+        13
+      ],
+      "trim_transparent_border": true,
+      "scale": 1,
+      "recolor": false
+    },
+    {
+      "kind": "runner",
+      "source": "raw/current-runner-walk-0.png",
+      "original_source": "sprites/enemies/runner_walk_0.png",
+      "source_sha256": "8937bc6993e9497c1c946038ca99fb6e0efeea5fbf4973ccaea773c1bdcea546",
+      "crop_xywh": [
+        26,
+        15,
+        13,
+        13
+      ],
+      "trim_transparent_border": true,
+      "scale": 1,
+      "recolor": false
+    },
+    {
+      "kind": "tank",
+      "source": "raw/current-tank-walk-0.png",
+      "original_source": "sprites/enemies/tank_walk_0.png",
+      "source_sha256": "a6d2e2c4d275eba2dfd58617ff66a57c89694e222879b9811e9833ae8b39066e",
+      "crop_xywh": [
+        27,
+        15,
+        11,
+        13
+      ],
+      "trim_transparent_border": true,
+      "scale": 1,
+      "recolor": false
+    },
+    {
+      "kind": "breaker",
+      "source": "raw/current-breaker-walk-0.png",
+      "original_source": "sprites/enemies/breaker_walk_0.png",
+      "source_sha256": "28c6aba3e63dd06ac1f2eb082d2a76697e09ad4ec5bcba698ce363a064dd5aa4",
+      "crop_xywh": [
+        28,
+        15,
+        11,
+        13
+      ],
+      "trim_transparent_border": true,
+      "scale": 1,
+      "recolor": false
+    },
+    {
+      "kind": "giant",
+      "source": "raw/current-giant-walk-0.png",
+      "original_source": "sprites/enemies/giant_walk_0.png",
+      "source_sha256": "df3e96e2ffce6f44e7d7d019462417444565cbc622ab6f475b73b441fb29ea64",
+      "crop_xywh": [
+        28,
+        19,
+        14,
+        14
+      ],
+      "trim_transparent_border": true,
+      "scale": 1,
+      "recolor": false
+    }
+  ]
+}

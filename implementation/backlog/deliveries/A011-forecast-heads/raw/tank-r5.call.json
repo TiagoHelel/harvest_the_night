@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the exact tank portrait target. Correct ONLY the too narrow face/bust silhouette. WIDEN the entire head, jaw, ears and tiny cut neck by fifteen percent horizontally; keep exact head height. Make the complete head-plus-cut-neck bounding shape SQUARE, equal visible width and height, including shoulders. Squat massive broad jaw, not an elongated face. Preserve bald rotten face, pale eyes, vest/stone plates, outline, palette, upper-left light and1254square transparent canvas. The source alpha bounding box must be square: width equals height. No body below neck, new clothing, text, scene, glow, shadow or recentering. True transparent margins. Native target is13x13 inside16x16, uniform reduction only.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\tank-r4.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\tank-r4.png",
+      "sha256": "876e0ace0d24d724ccf80e75fe1d8998a18d0c45bdcbb3d07cea975d0b8f2b69",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\preview\\input-history\\tank-r4-876e0ace0d.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-b2f15772-ca8f-41fd-a5ea-0e8e141ca5ec.png",
+  "copied_raw_path": "raw/tank-r5.png",
+  "raw_sha256": "d270d3c718987e78a1b3cf8a2f21f1aa2b1c618d51bdeab9ad7dc1b4882f5e0e",
+  "date": "2026-10-07",
+  "revision": 5,
+  "decision": "accepted",
+  "inspection": "True alpha and both native cuts inspected. Owner final approval pending."
+}

@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 is exactcompletecanvas edit target. Preserve exact1024x1536canvas, originaltreeoutline/trunk/roots/size/position and transparentmargins. ONE colourcorrection: replace ALL brightorange/flame leavesRGB24216060 with muted ochre goldRGB20315965 or goldshadowRGB15110239. No orangeRGB24216060 and no palehotyellowRGB246217122 anywhere. Rustpatchesroofbrownred permitted butmuted, no flames. Autumncrown: subduedochre/gold/brown withunchangedwoodtrunk, no green. Keepallgeometry, darkoutlines, clusters. No glow, shadow, text, ground, crop/recenter/scale.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_autumn-r2.png"
+  ],
+  "transparent_background": true
+}

@@ -1,7 +1,7 @@
 # 0161 - Art: seasons and moons
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0158
 - **Likely files:** assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/raster_art.gd (generated), src/ui/placeholder_art.gd, src/ui/forecast_panel.gd
 - **Art packs:** A010

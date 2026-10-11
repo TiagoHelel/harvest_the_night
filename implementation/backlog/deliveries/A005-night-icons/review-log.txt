@@ -1,0 +1,28 @@
+2026-10-07 | Owner requested all packs without intermediate approvals. Final review pending.
+Gun tower first for an internally inspected identity/style master. Each item gets a single raw source for both cuts.
+2026-10-07 | Moon palette subset excludes unrelated gold/wood/skin ramps: the pale moon and grey craters must not resemble a sun. Crop, scale, anchor and alpha are unchanged.
+2026-10-07 | gun_tower-r1 rejected: Whole trestle overwhelms the gun silhouette at10px; replaced by internally checked gun head r2. Exact historical image inputs retained where referenced.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-07 | auto_crossbow-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | auto_crossbow-r2 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | auto_crossbow-r3 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | barricade-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | dawn_moon-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | fence-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | flame_tower-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | flame_tower-r2 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | flare-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | gun_tower-r2 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | mine-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | mortar-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | speed-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | start-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | wall-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | Correct archive path guard to protect both pack-relative and repo-relative selected recipe paths. Restore selected raw returns byte-for-byte; exact ImageGen PNG hashes verified. Native art unchanged.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-10 | Resumed A005 only, selected by assets.py next. Runner and full art contract read. Existing 24 icons retained; build.py --check passes with identical outputs and no false checks. Four rejected ImageGen returns remain archived. Local review server restored. Awaiting explicit owner approval for integration; no APPROVAL.json created.
+
+2026-10-10 - Owner approval
+Owner words, verbatim: "aprovado"
+Approved all 24 A005 exports for integration. No art pixels changed. Recorded every native export hash in APPROVAL.json; made the local builder validate that approval and report approved for integration. Claude integrates through game task 0147. No other pack was processed.
+Approval verification: two builds were byte-identical on the second pass; build.py --check passed; all checks are true; all 24 approved hashes match. Wrote CLAUDE-A005-PROMPT.txt with the 24 runtime aliases and task 0147 integration steps.

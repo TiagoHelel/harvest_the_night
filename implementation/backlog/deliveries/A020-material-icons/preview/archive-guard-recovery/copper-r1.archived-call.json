@@ -1,0 +1,38 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: ONE isolated copper inventory icon.\nInput images: Image1 icon outline and material-plane STYLE only; Image2 game STYLE only. Image3 ingot SHAPE reference: match exactly, change only metal.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,8; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background outside the complete isolated object. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCreate ONE resource icon for copper. Match the actual world material\nand approved icon master, target 16x16 with a clear shape and internal padding.\nRepresent One copper ingot with the same trapezoid shape, three-quarter view and proportions as icon_iron (visible about 14x11 at 16). Copper ramp: roof_dark underside, skin_dark body, skin top plane, one skin_light glint as appropriate.\nReadable at the actual small HUD scale, colored outline and 2\u20133 material planes.\nNo labels, numbers, enclosing panel, ground shadow or unrelated objects.\n\nSpecific subject: One copper ingot with the same trapezoid shape, three-quarter view and proportions as icon_iron (visible about 14x11 at 16). Copper ramp: roof_dark underside, skin_dark body, skin top plane, one skin_light glint\nNative contract: one centered complete object with generous transparent outer space. The import targets are 16x16 (maximum visible dimension 14) and a separate 10x10 compact HUD canvas (maximum visible dimension 8). The same source will be reduced for both: use a bold simple silhouette, a few joined color clusters and only 2-3 material planes. Think of a real tiny inventory sprite, not a miniature detailed illustration. Compact internal features must survive at eight visible pixels. No tiny line hatching, scattered crumbs, distant decorative fragments, floor, cast shadow, glow, labels, lettering, numbers, backdrop or extra objects. Maintain approximately square source framing with the object centered; do not clip its silhouette.\n\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\iron.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\iron.png",
+      "sha256": "f1b60c1d3931ea8777448af0b68d533d2e6b8e69f1da7efb417c35403d77538d",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-775f92a4-fe91-4015-ac8b-e303bac71db0.png",
+  "copied_raw_path": "raw/copper-r1.png",
+  "raw_sha256": "063aca6b5c7e0441fb65970de69a3c4be68d645c164773ebe79d23dca18ddafc",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "rejected",
+  "inspection": "True alpha and both native cuts inspected. Owner final approval pending.",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/copper-r1.png"
+}

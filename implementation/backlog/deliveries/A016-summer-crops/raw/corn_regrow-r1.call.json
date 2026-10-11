@@ -1,0 +1,23 @@
+{
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: A016 ripe corn calibration and picked corn, two cells.\nInput images: Image1: approved corn identity master, keep ripecorn geometry\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x24 pixels with contact pivot 8,22; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background, isolated objects only. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP + STRIP: Generate exactly TWO equal cells in a horizontal strip, same scale, transparent gutters and same baseline. Cell1 is a calibration copy of the reference ripe corn plant, including its cobs; downstream native visibleheight EXACTLY20pixels. Cell2 is the same tall corn stalk AFTER picking the cobs: broad leaves and short empty husk stubs, NO yellowcobs, height17-19pixels and width at most12pixels. Only cell2 is delivered. Do not change species, silhouette scale or lighting. No soil, shadow, glow, labels, text or extraobjects. Stable stem ground contact, nativecanvas16x24 pivot8,22. Coarse pixelclusters; leave1pixel native border.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\crops\\corn.png"
+    ],
+    "transparent_background": true
+  },
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A016-summer-crops\\raw\\corn_regrow-r1.png",
+  "date": "2026-10-10",
+  "decision": "accepted for owner review; numeric checks recorded separately",
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\crops\\corn.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-db54744a-ead5-4514-a2ac-8bb1b1b985e1.png",
+  "revision": 1,
+  "sha256": "f8432a8432b807f353c1090ba6967b010ae69ee98fce0e290b5a5ffb9f6d6853",
+  "tool": "image_gen.imagegen"
+}

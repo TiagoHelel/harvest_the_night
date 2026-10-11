@@ -1,7 +1,7 @@
 # 0213 - Art: the artisan machines
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0188
 - **Likely files:** assets/art_source/buildings/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_station_art.py
 - **Art packs:** A031

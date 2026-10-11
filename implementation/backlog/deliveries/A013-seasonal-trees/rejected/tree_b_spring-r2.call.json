@@ -1,0 +1,26 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 exactSPRINGtree edit target. Improve ONLY blossom clustering: replace scattered tiny1-2pixel pale specks with FEWER LARGER clearlyjoined cream/salmonflowerclusters, each at least3nativepixels, preferably5-12pixels. Flowers occupy25-30percent of leaf crown at native40x48, groupedintoabout8-12readablepatches among unchangedgreenleaves. No isolatedpale tinyflecks. Colourplanesbone232224207/bonedark184174154/skinlight243197141/rooflight2019990, nofruit,strongred,pink,particles orglow. SAME1024x1536canvas, exact tree size,position,crownoutline,trunkandroots unchanged, exacttransparentmargins. Fixedscale0.03700440528634361. Completeunclippedtree, no crop/scale/recenter, ground,scene,shadow orlettering. True transparentalpha.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_spring-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_spring-r1.png",
+      "sha256": "8fcd33fa9727eef56325ffbc6cd5ad0c17a59ad420e3aca4fc200e5d477c9a0c",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_b_spring-r1-8fcd33fa97.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-18d6b35d-69bc-43c1-9fce-22516c78a5b2.png",
+  "copied_raw_path": "raw/tree_b_spring-r2.png",
+  "raw_sha256": "baba240aedb6d5d0c2ee67c23a2e7d98c6a1f5cdd73679e386838bf44fad0f2c",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tree_b_spring-r2.png"
+}

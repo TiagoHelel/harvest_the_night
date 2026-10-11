@@ -1,0 +1,900 @@
+{
+  "expected_files": 22,
+  "status": "review",
+  "palette_mode": "A",
+  "colour_ramp": [],
+  "files": [
+    {
+      "anim": "icon_wine",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_wine/none/01.png",
+      "runtime_name": "sprites/ui/icon_wine.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "wine icon",
+      "source": "raw/wine-r1.png",
+      "prompt": "raw/wine-r1.prompt.txt",
+      "call": "raw/wine-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          464,
+          153,
+          326,
+          966
+        ],
+        "content_scale": 0.014492753623188406,
+        "content_anchor_xy": [
+          2,
+          7
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "wine",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_wine",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_wine/none/01.png",
+      "runtime_name": "sprites/ui/hud_wine.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "wine icon",
+      "source": "raw/wine-r1.png",
+      "prompt": "raw/wine-r1.prompt.txt",
+      "call": "raw/wine-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          464,
+          153,
+          326,
+          966
+        ],
+        "content_scale": 0.008281573498964804,
+        "content_anchor_xy": [
+          1,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "wine",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_juice",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_juice/none/01.png",
+      "runtime_name": "sprites/ui/icon_juice.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "juice icon",
+      "source": "raw/juice-r1.png",
+      "prompt": "raw/juice-r1.prompt.txt",
+      "call": "raw/juice-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          388,
+          359,
+          554,
+          613
+        ],
+        "content_scale": 0.022838499184339316,
+        "content_anchor_xy": [
+          6,
+          7
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "juice",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_juice",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_juice/none/01.png",
+      "runtime_name": "sprites/ui/hud_juice.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "juice icon",
+      "source": "raw/juice-r1.png",
+      "prompt": "raw/juice-r1.prompt.txt",
+      "call": "raw/juice-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          388,
+          359,
+          554,
+          613
+        ],
+        "content_scale": 0.013050570962479609,
+        "content_anchor_xy": [
+          3,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "juice",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_jelly",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_jelly/none/01.png",
+      "runtime_name": "sprites/ui/icon_jelly.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "jelly icon",
+      "source": "raw/jelly-r1.png",
+      "prompt": "raw/jelly-r1.prompt.txt",
+      "call": "raw/jelly-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          341,
+          343,
+          572,
+          630
+        ],
+        "content_scale": 0.022222222222222223,
+        "content_anchor_xy": [
+          6,
+          7
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "jelly",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_jelly",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_jelly/none/01.png",
+      "runtime_name": "sprites/ui/hud_jelly.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "jelly icon",
+      "source": "raw/jelly-r1.png",
+      "prompt": "raw/jelly-r1.prompt.txt",
+      "call": "raw/jelly-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          341,
+          343,
+          572,
+          630
+        ],
+        "content_scale": 0.012698412698412698,
+        "content_anchor_xy": [
+          3,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "jelly",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_pickles",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_pickles/none/01.png",
+      "runtime_name": "sprites/ui/icon_pickles.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "pickles icon",
+      "source": "raw/pickles-r1.png",
+      "prompt": "raw/pickles-r1.prompt.txt",
+      "call": "raw/pickles-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          391,
+          294,
+          470,
+          730
+        ],
+        "content_scale": 0.019178082191780823,
+        "content_anchor_xy": [
+          4,
+          7
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "pickles",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_pickles",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_pickles/none/01.png",
+      "runtime_name": "sprites/ui/hud_pickles.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "pickles icon",
+      "source": "raw/pickles-r1.png",
+      "prompt": "raw/pickles-r1.prompt.txt",
+      "call": "raw/pickles-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          391,
+          294,
+          470,
+          730
+        ],
+        "content_scale": 0.010958904109589041,
+        "content_anchor_xy": [
+          2,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "pickles",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_bread",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_bread/none/01.png",
+      "runtime_name": "sprites/ui/icon_bread.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "bread icon",
+      "source": "raw/bread-r1.png",
+      "prompt": "raw/bread-r1.prompt.txt",
+      "call": "raw/bread-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          263,
+          344,
+          729,
+          616
+        ],
+        "content_scale": 0.019204389574759947,
+        "content_anchor_xy": [
+          7,
+          6
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "bread",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_bread",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_bread/none/01.png",
+      "runtime_name": "sprites/ui/hud_bread.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "bread icon",
+      "source": "raw/bread-r1.png",
+      "prompt": "raw/bread-r1.prompt.txt",
+      "call": "raw/bread-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          263,
+          344,
+          729,
+          616
+        ],
+        "content_scale": 0.010973936899862825,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "bread",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_butter",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_butter/none/01.png",
+      "runtime_name": "sprites/ui/icon_butter.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "butter icon",
+      "source": "raw/butter-r1.png",
+      "prompt": "raw/butter-r1.prompt.txt",
+      "call": "raw/butter-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          295,
+          387,
+          684,
+          558
+        ],
+        "content_scale": 0.02046783625730994,
+        "content_anchor_xy": [
+          7,
+          5
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "butter",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_butter",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_butter/none/01.png",
+      "runtime_name": "sprites/ui/hud_butter.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "butter icon",
+      "source": "raw/butter-r1.png",
+      "prompt": "raw/butter-r1.prompt.txt",
+      "call": "raw/butter-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          295,
+          387,
+          684,
+          558
+        ],
+        "content_scale": 0.011695906432748537,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "butter",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_cheese",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_cheese/none/01.png",
+      "runtime_name": "sprites/ui/icon_cheese.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "cheese icon",
+      "source": "raw/cheese-r1.png",
+      "prompt": "raw/cheese-r1.prompt.txt",
+      "call": "raw/cheese-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          341,
+          413,
+          611,
+          540
+        ],
+        "content_scale": 0.022913256955810146,
+        "content_anchor_xy": [
+          7,
+          6
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "cheese",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_cheese",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_cheese/none/01.png",
+      "runtime_name": "sprites/ui/hud_cheese.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "cheese icon",
+      "source": "raw/cheese-r1.png",
+      "prompt": "raw/cheese-r1.prompt.txt",
+      "call": "raw/cheese-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          341,
+          413,
+          611,
+          540
+        ],
+        "content_scale": 0.01309328968903437,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "cheese",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_cloth",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_cloth/none/01.png",
+      "runtime_name": "sprites/ui/icon_cloth.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "cloth icon",
+      "source": "raw/cloth-r1.png",
+      "prompt": "raw/cloth-r1.prompt.txt",
+      "call": "raw/cloth-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          257,
+          378,
+          756,
+          599
+        ],
+        "content_scale": 0.018518518518518517,
+        "content_anchor_xy": [
+          7,
+          5
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "cloth",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_cloth",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_cloth/none/01.png",
+      "runtime_name": "sprites/ui/hud_cloth.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "cloth icon",
+      "source": "raw/cloth-r1.png",
+      "prompt": "raw/cloth-r1.prompt.txt",
+      "call": "raw/cloth-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          257,
+          378,
+          756,
+          599
+        ],
+        "content_scale": 0.010582010582010581,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "cloth",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_flour",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_flour/none/01.png",
+      "runtime_name": "sprites/ui/icon_flour.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "flour icon",
+      "source": "raw/flour-r1.png",
+      "prompt": "raw/flour-r1.prompt.txt",
+      "call": "raw/flour-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          324,
+          369,
+          612,
+          700
+        ],
+        "content_scale": 0.02,
+        "content_anchor_xy": [
+          6,
+          7
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "flour",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_flour",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_flour/none/01.png",
+      "runtime_name": "sprites/ui/hud_flour.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "flour icon",
+      "source": "raw/flour-r1.png",
+      "prompt": "raw/flour-r1.prompt.txt",
+      "call": "raw/flour-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          324,
+          369,
+          612,
+          700
+        ],
+        "content_scale": 0.011428571428571429,
+        "content_anchor_xy": [
+          3,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "flour",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_sandbag",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_sandbag/none/01.png",
+      "runtime_name": "sprites/ui/icon_sandbag.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sandbag icon",
+      "source": "raw/sandbag-r1.png",
+      "prompt": "raw/sandbag-r1.prompt.txt",
+      "call": "raw/sandbag-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          261,
+          405,
+          768,
+          528
+        ],
+        "content_scale": 0.018229166666666668,
+        "content_anchor_xy": [
+          7,
+          5
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sandbag",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_sandbag",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_sandbag/none/01.png",
+      "runtime_name": "sprites/ui/hud_sandbag.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sandbag icon",
+      "source": "raw/sandbag-r1.png",
+      "prompt": "raw/sandbag-r1.prompt.txt",
+      "call": "raw/sandbag-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          261,
+          405,
+          768,
+          528
+        ],
+        "content_scale": 0.010416666666666666,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sandbag",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "icon_sugar",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_sugar/none/01.png",
+      "runtime_name": "sprites/ui/icon_sugar.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sugar icon",
+      "source": "raw/sugar-r1.png",
+      "prompt": "raw/sugar-r1.prompt.txt",
+      "call": "raw/sugar-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          343,
+          414,
+          580,
+          519
+        ],
+        "content_scale": 0.02413793103448276,
+        "content_anchor_xy": [
+          7,
+          6
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sugar",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_sugar",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_sugar/none/01.png",
+      "runtime_name": "sprites/ui/hud_sugar.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sugar icon",
+      "source": "raw/sugar-r1.png",
+      "prompt": "raw/sugar-r1.prompt.txt",
+      "call": "raw/sugar-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          343,
+          414,
+          580,
+          519
+        ],
+        "content_scale": 0.013793103448275862,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sugar",
+      "display_role": "compact_hud"
+    }
+  ],
+  "comparison": [
+    {
+      "path": "sprites/ui/icon_oil.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1
+    }
+  ],
+  "deviations": [],
+  "supersedes": []
+}

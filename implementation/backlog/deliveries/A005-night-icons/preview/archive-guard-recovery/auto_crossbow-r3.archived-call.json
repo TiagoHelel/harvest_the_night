@@ -1,0 +1,32 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Create ONE tiny automatic CROSSBOW HEAD UI glyph, viewed from above at45degrees. SQUARE16logicalpixel canvas, joined compact silhouette max14x14, with short stock pointing lower-left and clearly opposing curved bow limbs spanning diagonally at the upper-right, one pale bolt across centre. Brown wood, dark metal joint, ivory bow string. This is just the weapon head, NO turret base, legs, trestle, frame, ground or farmer. Image1 wood is outline/material STYLE ONLY; image2 existing small mortar glyph is scale/simplicity STYLE ONLY, never draw a mortar. Nativecompact10visible8must keep both bow tips and pale bolt. Simple2-3planes, real transparent alpha, no black background, halo, labels, smoke or glow.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\mortar-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\mortar-r1.png",
+      "sha256": "c1219ba9ea2444981121dabf535353194c7b23051f8b3f6732bd967526501137",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8ce29447-8e65-4bf2-b60e-a5806f07d72c.png",
+  "copied_raw_path": "raw/auto_crossbow-r3.png",
+  "raw_sha256": "7a21222b69f09e4783a3aacc4a49e90f4fc966088e3672f8f555ce6df5df2307",
+  "date": "2026-10-07",
+  "revision": 3,
+  "decision": "rejected",
+  "inspection": "True alpha and both native cuts inspected. Owner final approval pending.",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/auto_crossbow-r3.png"
+}

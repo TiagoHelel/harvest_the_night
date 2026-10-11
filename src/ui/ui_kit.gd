@@ -104,11 +104,18 @@ static func missing_icons() -> Array:
 
 ## Icons in `sprites/ui/` that no resource claims - nor a group a cost may
 ## name, whose icon stands for any of it (`GameData.ANY_OF`: the fish since
-## task 0179).
+## task 0179), nor a defence of the hotbar or a picture of the night bar
+## (A005's, task 0147), nor a calendar mark (A010's, task 0161), nor a tool at
+## one of its tiers (A019's, task 0202).
 static func orphan_icons() -> Array:
 	var wanted: Dictionary = {}
 	for id in GameData.RESOURCES + GameData.ANY_OF:
 		wanted["icon_%s" % id] = true
+	for id in GameData.DEFENCES.keys() + NightHud.ICONS + CalendarMark.MARKS:
+		wanted["icon_%s" % id] = true
+	for tool in GameData.TOOLS:
+		for tier in (GameData.TOOLS[tool] as Array).size():
+			wanted["icon_%s" % ToolTiers.item(tool, tier)] = true
 	var out: Array = []
 	var folder := DirAccess.open(DIR)
 	if folder == null:

@@ -1,0 +1,78 @@
+[
+  {
+    "anim": "icon_wool",
+    "asset": "wool",
+    "stem": "wool-r1",
+    "importer": {
+      "id": "A029/icon_wool",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/wool-r1.png",
+      "crop_xywh": [
+        359,
+        394,
+        644,
+        577
+      ],
+      "content_scale": 0.021739130434782608,
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "bone",
+        "bone_dark",
+        "gold_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_wool",
+    "asset": "wool",
+    "stem": "wool-r1",
+    "importer": {
+      "id": "A029/hud_wool",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/wool-r1.png",
+      "crop_xywh": [
+        359,
+        394,
+        644,
+        577
+      ],
+      "content_scale": 0.012422360248447204,
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "bone",
+        "bone_dark",
+        "gold_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  }
+]

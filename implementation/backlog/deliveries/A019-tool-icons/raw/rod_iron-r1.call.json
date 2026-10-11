@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 accepted fibre fishing rod is exact edit target. Change only shaft material and reel to steel shaft with dark/medium/light grey bands, a slightly larger steel reel than image1 at the same grip position. Preserve square1254canvas, rod45degree pose, shaft thickness, tip/grip location, scale and all blank margins. Entire silhouette stays inside the same14logicalpixel bounding span, small reel changes only near grip. No line, hook, bobber, fish, farmer, lettering, panel, scene, ground or shadow. Real transparent alpha, one complete rod.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\rod_fibre-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\rod_fibre-r1.png",
+      "sha256": "ec2cf23a2ee1ea214b4d51c5986888f9d94653a474619bff1d7ae6362f4348a3",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-93c2b881-799f-46f8-ba2e-a56d8e488241.png",
+  "copied_raw_path": "raw/rod_iron-r1.png",
+  "raw_sha256": "f0a17a7904018e3f9351252cfb21d93701243c6b5333e0c4ad532538813f05e4",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "accepted",
+  "inspection": "Both native cuts and common scale tier grid inspected. Owner final approval pending."
+}

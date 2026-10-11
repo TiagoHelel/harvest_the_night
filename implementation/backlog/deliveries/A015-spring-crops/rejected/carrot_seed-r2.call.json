@@ -1,0 +1,26 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Edit target: attached accepted-style carrot seed packet candidate. CORRECTION: change ONLY the paper packet silhouette to a wider, straight, upright rectangle with width-to-height exactly12:14 (six to seven). Prior silhouette was too narrow: source503x626, native11x14 andHUD6x8. Required visible nativebox12x14 andHUD7x8 after uniform nearest reduction. Preserve cream paper, the folded green spring band and the orange carrot illustration on its front. Flatten any perspective tilt, no protruding side bag or ragged corners. Dark colored outline included in rectangular12:14 bounds. Upper-left daytime light, coarse flat pixel clusters, identical imagecanvas size and centered position. Do not change produce identity, colors or packet design. TRUE transparent background, no halo, shadow, scene, text, numbers, logos, panels or extra objects. Complete packet, no cropping. The paper must read as a tiny folded seed packet, not a shopping bag.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r1.png",
+      "sha256": "dfe55f800bfcb15c65a518ef863d4e576311305037a7a15dc85338c398db40a2",
+      "role": "candidate edit target; owner approval pending",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\rejected\\carrot_seed-r1.png"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-abfc9f10-b514-4523-ac62-8dc57a751890.png",
+  "copied_path": "implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r2.png",
+  "sha256": "e06b25222860ff40fc4df26cce38120d781a64e94f6a7baa96d0b1b8b6792dff",
+  "date": "2026-10-10",
+  "revision": 2,
+  "decision": "rejected; see adjacent reason.txt",
+  "reason": "Source packet silhouette reduces to11x14 and6x8, narrower than required12x14 and7x8.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\rejected\\carrot_seed-r2.png"
+}

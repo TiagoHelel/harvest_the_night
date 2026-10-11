@@ -1,0 +1,31 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: grass_winter static master.\nInput images: Roles are specified in the detailed request below; never copy style-sheet scenes or lettering.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,16; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: fully opaque edge-to-edge snow terrain. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\n\nWinter version of the attached tile: NORTH snow EDGE OVERLAY, never a ground tile. Logical16square canvas. Row0: a COMPLETE joined cream snow line fromx0tox15. A few soft connected scallops extend down ONLYto row1or2 inside x1..14. Columns0and15 opaque ONLYonrow0 and are identical. Every other pixel, especially rows3..15, has alpha ZERO. One4connected snowpiece attachedto0,0. Entire image transparent outside the narrow TOPband; no scene/background/shadow.\nExact square1254x1254source canvas represents16x16logical pixels. Flat pixel clusters, no gradients, blur, glitter, glare, footprints, ice, centrepiece, scene objects, labels or ground shadow. Soft warm snow uses bone(#e8e0cf), coolmoon(#cfd6ff), beige bone_dark. Preserve texture density, cluster size, framing and seamless borders of the edit target. Image1 is the exact edit target, further images are style/reference ONLY.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\terrain\\edge-n.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\grass_winter-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\terrain\\edge-n.png",
+      "sha256": "44914576c7532adeeb7c5a6df66385840e461e54937416d50e92e0f6b60eca4c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\grass_winter-r1.png",
+      "sha256": "9945af52be245cedcfa4af8ba637b6907e944c5f0288946c62ec979df55aecd2",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-fae6cb5e-e0ba-4a0d-8104-4127be33186f.png",
+  "copied_raw_path": "raw/edge_n_winter-r1.png",
+  "raw_sha256": "897ade1dcb0704e1f7aa81c171b0e6e19f94b5aeea19480678668ca2f5291ac8",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/edge_n_winter-r1.png"
+}

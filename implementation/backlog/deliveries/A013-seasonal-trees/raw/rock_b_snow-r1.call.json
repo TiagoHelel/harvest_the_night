@@ -1,0 +1,29 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is rock_b FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\rock_b.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\rock_b.png",
+      "sha256": "1fa07696f592a1ef51059e2f15b14cbef0603083ff4e4e1e32b42c6a208313b9",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png",
+      "sha256": "35c13ae919605666f67cb040d05a0b58398c68577ca4facce3af7b6b105aebd3",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2ab5ac0c-3888-4e0b-a6e4-cf1c6c84d810.png",
+  "copied_raw_path": "raw/rock_b_snow-r1.png",
+  "raw_sha256": "ffdfac1a295df5441c586df56b8a16ebaa6eb7e2bb88b78a7a1197662a978404",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "inspection pending"
+}

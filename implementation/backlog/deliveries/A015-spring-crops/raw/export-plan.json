@@ -1,0 +1,1281 @@
+{
+  "files": [
+    {
+      "output": "native/potato/none/01.png",
+      "runtime_name": "sprites/crops/potato_0.png",
+      "anim": "potato",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/potato-r1.png",
+      "prompt": "raw/potato-r1.prompt.txt",
+      "call": "raw/potato-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "planted",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          211,
+          529,
+          151,
+          90
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          492,
+          724
+        ],
+        "content_scale": 0.026341804570527975,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/potato/none/02.png",
+      "runtime_name": "sprites/crops/potato_1.png",
+      "anim": "potato",
+      "dir": "none",
+      "frame": 1,
+      "source": "raw/potato-r1.png",
+      "prompt": "raw/potato-r1.prompt.txt",
+      "call": "raw/potato-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "sprout",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          623,
+          431,
+          290,
+          188
+        ],
+        "sheet_cell_xywh": [
+          492,
+          0,
+          501,
+          724
+        ],
+        "content_scale": 0.026341804570527975,
+        "content_anchor_xy": [
+          4,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/potato/none/03.png",
+      "runtime_name": "sprites/crops/potato_2.png",
+      "anim": "potato",
+      "dir": "none",
+      "frame": 2,
+      "source": "raw/potato-r1.png",
+      "prompt": "raw/potato-r1.prompt.txt",
+      "call": "raw/potato-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "growing",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          1075,
+          334,
+          415,
+          285
+        ],
+        "sheet_cell_xywh": [
+          993,
+          0,
+          547,
+          724
+        ],
+        "content_scale": 0.026341804570527975,
+        "content_anchor_xy": [
+          5,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/potato/none/04.png",
+      "runtime_name": "sprites/crops/potato_3.png",
+      "anim": "potato",
+      "dir": "none",
+      "frame": 3,
+      "source": "raw/potato-r1.png",
+      "prompt": "raw/potato-r1.prompt.txt",
+      "call": "raw/potato-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "ripe",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          1592,
+          214,
+          474,
+          405
+        ],
+        "sheet_cell_xywh": [
+          1540,
+          0,
+          632,
+          724
+        ],
+        "content_scale": 0.026341804570527975,
+        "content_anchor_xy": [
+          6,
+          11
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/garlic/none/01.png",
+      "runtime_name": "sprites/crops/garlic_0.png",
+      "anim": "garlic",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/garlic-r1.png",
+      "prompt": "raw/garlic-r1.prompt.txt",
+      "call": "raw/garlic-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "planted",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          241,
+          531,
+          111,
+          101
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          523,
+          724
+        ],
+        "content_scale": 0.023605150214592273,
+        "content_anchor_xy": [
+          1,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/garlic/none/02.png",
+      "runtime_name": "sprites/crops/garlic_1.png",
+      "anim": "garlic",
+      "dir": "none",
+      "frame": 1,
+      "source": "raw/garlic-r1.png",
+      "prompt": "raw/garlic-r1.prompt.txt",
+      "call": "raw/garlic-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "sprout",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          696,
+          405,
+          181,
+          223
+        ],
+        "sheet_cell_xywh": [
+          523,
+          0,
+          456,
+          724
+        ],
+        "content_scale": 0.023605150214592273,
+        "content_anchor_xy": [
+          2,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/garlic/none/03.png",
+      "runtime_name": "sprites/crops/garlic_2.png",
+      "anim": "garlic",
+      "dir": "none",
+      "frame": 2,
+      "source": "raw/garlic-r1.png",
+      "prompt": "raw/garlic-r1.prompt.txt",
+      "call": "raw/garlic-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "growing",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          1083,
+          280,
+          414,
+          348
+        ],
+        "sheet_cell_xywh": [
+          979,
+          0,
+          560,
+          724
+        ],
+        "content_scale": 0.023605150214592273,
+        "content_anchor_xy": [
+          5,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/garlic/none/04.png",
+      "runtime_name": "sprites/crops/garlic_3.png",
+      "anim": "garlic",
+      "dir": "none",
+      "frame": 3,
+      "source": "raw/garlic-r1.png",
+      "prompt": "raw/garlic-r1.prompt.txt",
+      "call": "raw/garlic-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "ripe",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          1583,
+          166,
+          470,
+          466
+        ],
+        "sheet_cell_xywh": [
+          1539,
+          0,
+          633,
+          724
+        ],
+        "content_scale": 0.023605150214592273,
+        "content_anchor_xy": [
+          5,
+          11
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/strawberry/none/01.png",
+      "runtime_name": "sprites/crops/strawberry_0.png",
+      "anim": "strawberry",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/strawberry-r1.png",
+      "prompt": "raw/strawberry-r1.prompt.txt",
+      "call": "raw/strawberry-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "planted",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          90,
+          498,
+          169,
+          87
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          323,
+          724
+        ],
+        "content_scale": 0.02607575248024214,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/strawberry/none/02.png",
+      "runtime_name": "sprites/crops/strawberry_1.png",
+      "anim": "strawberry",
+      "dir": "none",
+      "frame": 1,
+      "source": "raw/strawberry-r1.png",
+      "prompt": "raw/strawberry-r1.prompt.txt",
+      "call": "raw/strawberry-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "sprout",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          388,
+          404,
+          277,
+          176
+        ],
+        "sheet_cell_xywh": [
+          323,
+          0,
+          387,
+          724
+        ],
+        "content_scale": 0.02607575248024214,
+        "content_anchor_xy": [
+          3,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/strawberry/none/03.png",
+      "runtime_name": "sprites/crops/strawberry_2.png",
+      "anim": "strawberry",
+      "dir": "none",
+      "frame": 2,
+      "source": "raw/strawberry-r1.png",
+      "prompt": "raw/strawberry-r1.prompt.txt",
+      "call": "raw/strawberry-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "growing",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          756,
+          314,
+          395,
+          266
+        ],
+        "sheet_cell_xywh": [
+          710,
+          0,
+          480,
+          724
+        ],
+        "content_scale": 0.02607575248024214,
+        "content_anchor_xy": [
+          5,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/strawberry/none/04.png",
+      "runtime_name": "sprites/crops/strawberry_3.png",
+      "anim": "strawberry",
+      "dir": "none",
+      "frame": 3,
+      "source": "raw/strawberry-r1.png",
+      "prompt": "raw/strawberry-r1.prompt.txt",
+      "call": "raw/strawberry-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "ripe",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          1230,
+          267,
+          418,
+          313
+        ],
+        "sheet_cell_xywh": [
+          1190,
+          0,
+          489,
+          724
+        ],
+        "content_scale": 0.02607575248024214,
+        "content_anchor_xy": [
+          5,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/strawberry_regrow/none/01.png",
+      "runtime_name": "sprites/crops/strawberry_regrow.png",
+      "anim": "strawberry_regrow",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/strawberry-r1.png",
+      "prompt": "raw/strawberry-r1.prompt.txt",
+      "call": "raw/strawberry-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "pose": "regrow",
+      "seconds": 0.55,
+      "recipe": {
+        "crop_xywh": [
+          1711,
+          274,
+          426,
+          306
+        ],
+        "sheet_cell_xywh": [
+          1679,
+          0,
+          493,
+          724
+        ],
+        "content_scale": 0.02607575248024214,
+        "content_anchor_xy": [
+          5,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": true,
+      "points": {}
+    },
+    {
+      "output": "native/icon_potato/none/01.png",
+      "runtime_name": "sprites/ui/icon_potato.png",
+      "anim": "icon_potato",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/icon_potato-r1.png",
+      "prompt": "raw/icon_potato-r1.prompt.txt",
+      "call": "raw/icon_potato-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "pose": "potato",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          345,
+          410,
+          610,
+          549
+        ],
+        "sheet_cell_xywh": null,
+        "content_scale": 0.022950819672131147,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "potato",
+      "display_role": "inventory"
+    },
+    {
+      "output": "native/hud_potato/none/01.png",
+      "runtime_name": "sprites/ui/hud_potato.png",
+      "anim": "hud_potato",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/icon_potato-r1.png",
+      "prompt": "raw/icon_potato-r1.prompt.txt",
+      "call": "raw/icon_potato-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "pose": "potato",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          345,
+          410,
+          610,
+          549
+        ],
+        "sheet_cell_xywh": null,
+        "content_scale": 0.013114754098360656,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "potato",
+      "display_role": "compact_hud"
+    },
+    {
+      "output": "native/icon_garlic/none/01.png",
+      "runtime_name": "sprites/ui/icon_garlic.png",
+      "anim": "icon_garlic",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/icon_garlic-r1.png",
+      "prompt": "raw/icon_garlic-r1.prompt.txt",
+      "call": "raw/icon_garlic-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "pose": "garlic",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          352,
+          348,
+          590,
+          628
+        ],
+        "sheet_cell_xywh": null,
+        "content_scale": 0.022292993630573247,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "garlic",
+      "display_role": "inventory"
+    },
+    {
+      "output": "native/hud_garlic/none/01.png",
+      "runtime_name": "sprites/ui/hud_garlic.png",
+      "anim": "hud_garlic",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/icon_garlic-r1.png",
+      "prompt": "raw/icon_garlic-r1.prompt.txt",
+      "call": "raw/icon_garlic-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "pose": "garlic",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          352,
+          348,
+          590,
+          628
+        ],
+        "sheet_cell_xywh": null,
+        "content_scale": 0.012738853503184714,
+        "content_anchor_xy": [
+          4,
+          4
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "garlic",
+      "display_role": "compact_hud"
+    },
+    {
+      "output": "native/icon_strawberry/none/01.png",
+      "runtime_name": "sprites/ui/icon_strawberry.png",
+      "anim": "icon_strawberry",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/icon_strawberry-r1.png",
+      "prompt": "raw/icon_strawberry-r1.prompt.txt",
+      "call": "raw/icon_strawberry-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "pose": "strawberry",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          400,
+          379,
+          537,
+          583
+        ],
+        "sheet_cell_xywh": null,
+        "content_scale": 0.024013722126929673,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "strawberry",
+      "display_role": "inventory"
+    },
+    {
+      "output": "native/hud_strawberry/none/01.png",
+      "runtime_name": "sprites/ui/hud_strawberry.png",
+      "anim": "hud_strawberry",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/icon_strawberry-r1.png",
+      "prompt": "raw/icon_strawberry-r1.prompt.txt",
+      "call": "raw/icon_strawberry-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "pose": "strawberry",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          400,
+          379,
+          537,
+          583
+        ],
+        "sheet_cell_xywh": null,
+        "content_scale": 0.0137221269296741,
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "strawberry",
+      "display_role": "compact_hud"
+    },
+    {
+      "output": "native/icon_carrot_seed/none/01.png",
+      "runtime_name": "sprites/ui/icon_carrot_seed.png",
+      "anim": "icon_carrot_seed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/carrot_seed-r3.png",
+      "prompt": "raw/carrot_seed-r3.prompt.txt",
+      "call": "raw/carrot_seed-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "pose": "carrot seed packet",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ],
+        "content_scale": 0.019553072625698324,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "alpha_threshold": 128,
+        "sheet_cell_xywh": null,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "carrot_seed",
+      "display_role": "inventory"
+    },
+    {
+      "output": "native/hud_carrot_seed/none/01.png",
+      "runtime_name": "sprites/ui/hud_carrot_seed.png",
+      "anim": "hud_carrot_seed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/carrot_seed-r3.png",
+      "prompt": "raw/carrot_seed-r3.prompt.txt",
+      "call": "raw/carrot_seed-r3.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "pose": "carrot seed packet",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ],
+        "content_scale": 0.0111731843575419,
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "alpha_threshold": 128,
+        "sheet_cell_xywh": null,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "carrot_seed",
+      "display_role": "compact_hud"
+    },
+    {
+      "output": "native/icon_potato_seed/none/01.png",
+      "runtime_name": "sprites/ui/icon_potato_seed.png",
+      "anim": "icon_potato_seed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/potato_seed-r1.png",
+      "prompt": "raw/potato_seed-r1.prompt.txt",
+      "call": "raw/potato_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "pose": "potato seed packet",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ],
+        "content_scale": 0.019553072625698324,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "alpha_threshold": 128,
+        "sheet_cell_xywh": null,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "potato_seed",
+      "display_role": "inventory"
+    },
+    {
+      "output": "native/hud_potato_seed/none/01.png",
+      "runtime_name": "sprites/ui/hud_potato_seed.png",
+      "anim": "hud_potato_seed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/potato_seed-r1.png",
+      "prompt": "raw/potato_seed-r1.prompt.txt",
+      "call": "raw/potato_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "pose": "potato seed packet",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ],
+        "content_scale": 0.0111731843575419,
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "alpha_threshold": 128,
+        "sheet_cell_xywh": null,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "potato_seed",
+      "display_role": "compact_hud"
+    },
+    {
+      "output": "native/icon_garlic_seed/none/01.png",
+      "runtime_name": "sprites/ui/icon_garlic_seed.png",
+      "anim": "icon_garlic_seed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/garlic_seed-r1.png",
+      "prompt": "raw/garlic_seed-r1.prompt.txt",
+      "call": "raw/garlic_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "pose": "garlic seed packet",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ],
+        "content_scale": 0.019553072625698324,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "alpha_threshold": 128,
+        "sheet_cell_xywh": null,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "garlic_seed",
+      "display_role": "inventory"
+    },
+    {
+      "output": "native/hud_garlic_seed/none/01.png",
+      "runtime_name": "sprites/ui/hud_garlic_seed.png",
+      "anim": "hud_garlic_seed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/garlic_seed-r1.png",
+      "prompt": "raw/garlic_seed-r1.prompt.txt",
+      "call": "raw/garlic_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "pose": "garlic seed packet",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ],
+        "content_scale": 0.0111731843575419,
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "alpha_threshold": 128,
+        "sheet_cell_xywh": null,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "garlic_seed",
+      "display_role": "compact_hud"
+    },
+    {
+      "output": "native/icon_strawberry_seed/none/01.png",
+      "runtime_name": "sprites/ui/icon_strawberry_seed.png",
+      "anim": "icon_strawberry_seed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/strawberry_seed-r1.png",
+      "prompt": "raw/strawberry_seed-r1.prompt.txt",
+      "call": "raw/strawberry_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "pose": "strawberry seed packet",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ],
+        "content_scale": 0.019553072625698324,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "alpha_threshold": 128,
+        "sheet_cell_xywh": null,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "strawberry_seed",
+      "display_role": "inventory"
+    },
+    {
+      "output": "native/hud_strawberry_seed/none/01.png",
+      "runtime_name": "sprites/ui/hud_strawberry_seed.png",
+      "anim": "hud_strawberry_seed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/strawberry_seed-r1.png",
+      "prompt": "raw/strawberry_seed-r1.prompt.txt",
+      "call": "raw/strawberry_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "pose": "strawberry seed packet",
+      "seconds": 1.0,
+      "recipe": {
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ],
+        "content_scale": 0.0111731843575419,
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "alpha_threshold": 128,
+        "sheet_cell_xywh": null,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "loop": false,
+      "draw_scale": 1,
+      "mirror": "none",
+      "grounded": false,
+      "points": {},
+      "resource_id": "strawberry_seed",
+      "display_role": "compact_hud"
+    }
+  ],
+  "references": [
+    [
+      "assets/art_source/crops/carrot.png",
+      "approved growth strip layout and crop style"
+    ],
+    [
+      "assets/art_source/ui/carrot.png",
+      "approved inventory icon style"
+    ],
+    [
+      "docs/reference-sheet.png",
+      "approved farm style"
+    ],
+    [
+      "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "approved farmer scale reference"
+    ],
+    [
+      "implementation/backlog/deliveries/A015-spring-crops/raw/carrot_seed-r3.png",
+      "accepted packet identity master"
+    ],
+    [
+      "implementation/backlog/deliveries/A015-spring-crops/raw/icon_potato-r1.png",
+      "accepted produce identity reference for packet illustration"
+    ],
+    [
+      "implementation/backlog/deliveries/A015-spring-crops/raw/icon_garlic-r1.png",
+      "accepted produce identity reference for packet illustration"
+    ],
+    [
+      "implementation/backlog/deliveries/A015-spring-crops/raw/icon_strawberry-r1.png",
+      "accepted produce identity reference for packet illustration"
+    ]
+  ],
+  "status": "review",
+  "expected_files": 27,
+  "palette_mode": "A",
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "path": "sprites/crops/carrot_3.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1
+    }
+  ],
+  "deviations": [],
+  "supersedes": []
+}

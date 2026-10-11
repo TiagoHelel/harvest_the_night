@@ -1,0 +1,82 @@
+[
+  {
+    "anim": "icon_straw",
+    "asset": "straw",
+    "stem": "straw-r1",
+    "importer": {
+      "id": "A020/icon_straw",
+      "source": "implementation/backlog/deliveries/A020-material-icons/raw/straw-r1.png",
+      "crop_xywh": [
+        309,
+        374,
+        678,
+        574
+      ],
+      "content_scale": 0.02064896755162242,
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "bone_dark",
+        "gold_light",
+        "bone",
+        "wood_dark"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_straw",
+    "asset": "straw",
+    "stem": "straw-r1",
+    "importer": {
+      "id": "A020/hud_straw",
+      "source": "implementation/backlog/deliveries/A020-material-icons/raw/straw-r1.png",
+      "crop_xywh": [
+        309,
+        374,
+        678,
+        574
+      ],
+      "content_scale": 0.011799410029498525,
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "bone_dark",
+        "gold_light",
+        "bone",
+        "wood_dark"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  }
+]

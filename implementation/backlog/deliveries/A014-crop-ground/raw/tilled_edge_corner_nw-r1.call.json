@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Asset type: A014 tilled_edge_corner_nw, transparent ground overlay. Input: accepted north torn-turf lip, EDIT TARGET and style reference. Change only the edge arrangement: REMOVE the horizontal strip, retaining a tiny northwest turf corner cap at the top left of the SAME square image. Keep original image canvas size and scale. Final native tile is16x16 pixels, pivot8,16. ONLY the upper-left at most3x3 nativepixels have content. Keep all remaining area fullytransparent. The top-left nativepixel is green#6a9646, its neighboring pixel to the right and neighboring pixel below are dark brown#5c422a cut soil; end there with transparent pixels after the short corner. Row0 andcolumn0 have the same short green/brown profile as the input's column0. Small torn-sod corner, not a fullborder or scene. Coarse square flatpixels, true transparent background, no aura, shadows, noise, labels or otherobjects. This is TERRAIN; quiet contrast, same grassy material as northedge, neutral upper-left light. The tiny corner must stay attached to the very top-left imageboundary. Never center or enlarge the tinycorner to fill thecanvas.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A014-crop-ground\\raw\\tilled_edge_n-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A014-crop-ground\\raw\\tilled_edge_n-r1.png",
+      "sha256": "f6305ce20d72182da359b8fa6aaa8da60900858f9542e53224cb9edc07f19a0a",
+      "role": "candidate edit target; owner approval pending"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-08efbe53-d245-46cf-97d8-e9d3d3026877.png",
+  "copied_path": "implementation\\backlog\\deliveries\\A014-crop-ground\\raw\\tilled_edge_corner_nw-r1.png",
+  "sha256": "db67cf65f7cbdaa27eb043296b3ff8d86888afd53b8477d68dcfc35f8906448a",
+  "date": "2026-10-10",
+  "revision": 1,
+  "decision": "candidate / reference retained for owner review; no whole-pack approval",
+  "evidence": "Measured native bounds and topology meet the brief; corner squarecrop671px yields exact matching north-edge column and corner row profiles."
+}

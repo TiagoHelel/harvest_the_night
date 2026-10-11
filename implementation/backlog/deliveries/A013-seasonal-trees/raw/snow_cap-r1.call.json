@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is ore FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is rock FIT reference only: neverdraw the host object, its colours, outline or ground. Image3 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\rock.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore.png",
+      "sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\rock.png",
+      "sha256": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png",
+      "sha256": "35c13ae919605666f67cb040d05a0b58398c68577ca4facce3af7b6b105aebd3",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-6cbf0870-0115-4812-aec9-c000ef5dcb2b.png",
+  "copied_raw_path": "raw/snow_cap-r1.png",
+  "raw_sha256": "568d5f9a0d2c181f85e3c7d3ad5e6bf0d58d87f3a78bc3dcb1a52a0920104f70",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "inspection pending"
+}

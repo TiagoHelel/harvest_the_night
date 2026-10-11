@@ -1,0 +1,19 @@
+{
+  "pack": "A021",
+  "date": "2026-10-10",
+  "status": "approved for integration",
+  "owner_words": "esses estao aprovados, tem mais pra gerar?",
+  "approved_folder": "implementation/backlog/deliveries/A021-ore-hardwood",
+  "approved_sha256": {
+    "native/coal_seam/none/01.png": "fdd6421cd23836e26578499e81fbec64d6b63d818ca8b58464f8dbb017ec0d12",
+    "native/coal_seam_b/none/01.png": "6e6e51238791ff983cab7e9d0af0e089c918f723dabfbd298d6f8df21a7d04f3",
+    "native/copper_ore/none/01.png": "0a4d8b2a77aa949d4d199c36a93aafb6e4cf76d1e32eded846955555953d1434",
+    "native/copper_ore_b/none/01.png": "71ffc6ab1d36a3023ef79295c241bd6126597643ab1d5f48158f1a9bcc46aa28",
+    "native/gold_ore/none/01.png": "32d4bb21b607cb791e3edf4caa2ddec8568b5e786e15c88ce0b4a687e709be4c",
+    "native/gold_ore_b/none/01.png": "1817e931c35aad77c77702b9759f89bde6abc3c9386636a81077f8ea81575190",
+    "native/hardwood_stump/none/01.png": "2a19f7135e7eddafa212876cad19d9b060fb30e946641a28c2d1b540d4fc70a0",
+    "native/hardwood_stump_chipped/none/01.png": "090d0759b79af73ffe612ad8a6bc320a410d3d1be4671b4886b05c3887f311a1"
+  },
+  "frames": 8,
+  "runtime_integrated": false
+}

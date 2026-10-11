@@ -1,0 +1,26 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is exactcompletecanvas edit target. Preserve exact1024x1536canvas, originaltreeoutline/trunk/roots/size/position and transparentmargins. Only join the remainingtinyisolated creamblossomflecks intoexistinglargeflowerpatches, or replaceisolatedfleckswithsurroundinggreen. Native40x48flowerclustersmustALLhaveatleast3adjacentpixels, flowercoveragestays22-28percent. Leavesremain green. No detachedpetals, fruit, particles, glow, shadow, ground or text. Do not crop/recenter/scale.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_spring-r2.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_spring-r2.png",
+      "sha256": "baba240aedb6d5d0c2ee67c23a2e7d98c6a1f5cdd73679e386838bf44fad0f2c",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_b_spring-r2-baba240aed.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0ac0e0fa-2a19-4038-bfef-c16522f67d90.png",
+  "copied_raw_path": "raw/tree_b_spring-r3.png",
+  "raw_sha256": "4d589d61649d531e76cc7547756739eaf4bcb56ff745a665f648c1416521b587",
+  "date": "2026-10-07",
+  "revision": 3,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tree_b_spring-r3.png"
+}

@@ -1,0 +1,48 @@
+A005 - Night hotbar and HUD icons
+Approved for integration on 2026-10-10.
+Owner words, verbatim: "aprovado"
+
+Authoritative delivery: implementation/backlog/deliveries/A005-night-icons/
+Read APPROVAL.json, contract.json, checks.json and this handoff first. The approval covers all 24 listed exports. runtime_integrated is false: this delivery has not changed game assets. No older delivery folders are superseded. rejected/ and preview/ are review evidence, never source art.
+
+Integration task: 0147. Replace the night hotbar placeholders used by task 0133 with the 16x16 icon_ aliases and the night HUD placeholders used by task 0139 with the 10x10 hud_ aliases. Create exactly the aliases in the mapping table below. The existing resource icons (wood, iron, money) are references, not A005 deliverables.
+
+Palette mode A: use the selected raw sources and each file's recorded recipe in contract.json with tools/palette.py:COLOURS and its palette_keys. Preserve the exact crop_xywh, content_scale, content_anchor_xy, alpha_threshold 128, canvas and pivot. The approved native exports already come from render_source; reproduce their exact pixels through the raster pipeline, without adding another art transform. Each icon/hud pair shares its source and crop; each has its own measured scale. The dawn moon has a restricted palette recorded in its recipe. There is no runtime/ 2x layer in this pack.
+
+Mapping (01.png is frame 0):
+native/icon_gun_tower/none/01.png -> sprites/ui/icon_gun_tower.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_gun_tower/none/01.png -> sprites/ui/hud_gun_tower.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_mortar/none/01.png -> sprites/ui/icon_mortar.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_mortar/none/01.png -> sprites/ui/hud_mortar.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_mine/none/01.png -> sprites/ui/icon_mine.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_mine/none/01.png -> sprites/ui/hud_mine.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_fence/none/01.png -> sprites/ui/icon_fence.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_fence/none/01.png -> sprites/ui/hud_fence.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_wall/none/01.png -> sprites/ui/icon_wall.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_wall/none/01.png -> sprites/ui/hud_wall.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_barricade/none/01.png -> sprites/ui/icon_barricade.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_barricade/none/01.png -> sprites/ui/hud_barricade.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_flare/none/01.png -> sprites/ui/icon_flare.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_flare/none/01.png -> sprites/ui/hud_flare.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_start/none/01.png -> sprites/ui/icon_start.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_start/none/01.png -> sprites/ui/hud_start.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_speed/none/01.png -> sprites/ui/icon_speed.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_speed/none/01.png -> sprites/ui/hud_speed.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_dawn_moon/none/01.png -> sprites/ui/icon_dawn_moon.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_dawn_moon/none/01.png -> sprites/ui/hud_dawn_moon.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_flame_tower/none/01.png -> sprites/ui/icon_flame_tower.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_flame_tower/none/01.png -> sprites/ui/hud_flame_tower.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/icon_auto_crossbow/none/01.png -> sprites/ui/icon_auto_crossbow.png | 16x16 | pivot (8,8) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+native/hud_auto_crossbow/none/01.png -> sprites/ui/hud_auto_crossbow.png | 10x10 | pivot (5,5) | draw 1.0 | one static frame, 1.0 s, no loop | direction none
+
+All states use direction none and mirror none; there are no baked or runtime mirrors. Do not flip the speed arrow or any icon. Every state's points object is empty: these static UI assets need no gameplay metadata points. No deviations were authorized; deviations and supersedes are empty. Preserve the centered pivots, binary alpha and one-pixel clear margin. The visible limits are 14x14 for icon_ and 8x8 for hud_. HUD art stays unrelit at night; world-night preview images are reference only.
+
+Do not regenerate, repaint, recolour, resample or retime the approved art. Do not cut sprites from GIFs, previews or screenshots. Do not use art files absent from contract.json. Do not add a runtime flip to a baked mirror.
+
+Integration steps:
+1. Verify every exported SHA256 against both contract.json and APPROVAL.json. Verify the source and prompt hashes, call records and reference provenance before promotion. Run the delivery build.py --check; all checks must pass. If anything differs, stop the integration task with the precise problem; do not repair approved art silently.
+2. Promote the selected raw sources byte-for-byte to versioned assets/art_source/ui/ locations. Record the exact per-file importer recipes, output aliases, prompt/reference provenance and owner approval in the raster manifest and ownership.json. Adapt source paths only to their promoted locations; retain content hashes and recipe values. Run python tools/import_art.py to reproduce the approved native exports exactly. Never promote preview/ or rejected/.
+3. Extend hard-coded UI family lists used by the art checks where needed. Bind icon_ aliases in the hotbar and hud_ aliases in the night HUD, using the listed dimensions, pivots and draw scale. Preserve the static behavior and single frame.
+4. Run python tools/verify.py and confirm promoted output hashes still match the approved pixels.
+5. Inspect FHD game captures by day and by night for readable silhouettes, coherent materials, the START horn, the speed arrow and the setting dawn moon. UI icons are not world-relit.
+6. Only after successful game integration, run python implementation/backlog/assets.py set A005 integrated. Claude owns this transition; Codex has only approved the delivery.

@@ -1,0 +1,32 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the straw sheaf edit target. Change ONLY the pose and silhouette: lay this loose tied sheaf HORIZONTALLY left to right, not on the45degree wheat/log diagonal. Long pale stalks with flared ends at both LEFT and RIGHT, one narrow dark timber twine tie at the centre. Overall native14wide6-8high, compact8wide4-5high. No grain heads or leaves, not a rectangular hay bale. Keep the same pale bone/bone_dark/gold_light material, coloured dark outline, simple2-3flatplanes, neutral upper-left light. ONE complete unclipped isolated sheaf centred on true transparent alpha. Image2 wood icon is STYLE ONLY. No background, ground, shadow, halo, labels, blur, gradients or additional objects.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A020-material-icons\\raw\\straw-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A020-material-icons\\raw\\straw-r1.png",
+      "sha256": "7cdffaa9c109c174c67e3aba666405dcff16a208cfa34c5ded7cc728dd1583df",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "preview/input-history/straw-r1-7cdffaa9c1.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0d68f7f3-0f42-4dca-a839-a10406220526.png",
+  "copied_raw_path": "raw/straw-r2.png",
+  "raw_sha256": "0afde9b139bc6b80bd723b99e6e0dd316af37749cadc0cfa73487afc87aefcb8",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "accepted",
+  "inspection": "True alpha and both native cuts inspected. Owner final approval pending.",
+  "archive_guard_recovery": "Restored byte-exact selected source after root-relative-path protection fix; actual ImageGen arguments and input hashes unchanged."
+}

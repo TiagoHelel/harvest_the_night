@@ -1,0 +1,31 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: ONE isolated hardwood inventory icon.\nInput images: Image1 icon outline and material-plane STYLE only; Image2 game STYLE only.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,8; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background outside the complete isolated object. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCreate ONE resource icon for hardwood. Match the actual world material\nand approved icon master, target 16x16 with a clear shape and internal padding.\nRepresent One short, thick log lying on the diagonal, dark bark (wood_dark, soil_dark), its cut end toward the viewer showing tight rings in a dark reddish heartwood (roof_dark, wood). Darker and heavier than icon_wood's two pale-ended orange logs as appropriate.\nReadable at the actual small HUD scale, colored outline and 2\u20133 material planes.\nNo labels, numbers, enclosing panel, ground shadow or unrelated objects.\n\nSpecific subject: One short, thick log lying on the diagonal, dark bark (wood_dark, soil_dark), its cut end toward the viewer showing tight rings in a dark reddish heartwood (roof_dark, wood). Darker and heavier than icon_wood's two pale-ended orange logs\nNative contract: one centered complete object with generous transparent outer space. The import targets are 16x16 (maximum visible dimension 14) and a separate 10x10 compact HUD canvas (maximum visible dimension 8). The same source will be reduced for both: use a bold simple silhouette, a few joined color clusters and only 2-3 material planes. Think of a real tiny inventory sprite, not a miniature detailed illustration. Compact internal features must survive at eight visible pixels. No tiny line hatching, scattered crumbs, distant decorative fragments, floor, cast shadow, glow, labels, lettering, numbers, backdrop or extra objects. Maintain approximately square source framing with the object centered; do not clip its silhouette.\n\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-46954c0d-c117-4333-b3be-4d71a9fd9055.png",
+  "copied_raw_path": "raw/hardwood-r1.png",
+  "raw_sha256": "f1dd0570398d5d6dcb106d23d050675bbfb0121ad4e125a7cc6e95da0814f352",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "accepted",
+  "inspection": "True alpha and both native cuts inspected. Owner final approval pending.",
+  "archive_guard_recovery": "Restored byte-exact selected source after root-relative-path protection fix; actual ImageGen arguments and input hashes unchanged."
+}

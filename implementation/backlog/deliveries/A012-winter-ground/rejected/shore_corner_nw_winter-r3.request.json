@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 is exact COMPLETE1254square snowcorner target. ONE correction: shorten the LEFT verticalsnow arm to the SAME LENGTH as the horizontal snow arm, so the whole cap bounding box is SQUARE156x156sourcepixels at top-left. Leftcolumn colours at logical16x16: row0cream232224207; row1moon207214255; row2andbelowtransparent. No extra cream middleblock; shorten it to make the blueunderside occur alreadyatrow1. Toprowisunchanged: col0cream, col1moon, col2andbeyondtransparent. Outside TOPLEFT156x156region completelytransparent, no pixel can beoccupied atsourcey>=157 orx>=157. Keep original1254x1254squarecanvas, tinycapwidth and position; no crop,recenter,scale,scene,ground,glow,brown,sand or text. One joined2x2logicalpixel settledsnowcap.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\shore_corner_nw_winter-r2.png"
+  ],
+  "transparent_background": true
+}

@@ -1,0 +1,25 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Reference/edit target: carrot seed packet. Change ONLY the outline geometry: make the packet a WIDER exact vertical rectangle, width120 units and height140 units INCLUDING outline. It is nearly square, only a little taller than wide; do NOT make a narrow tall bag. Absolutely flat FRONT VIEW, zero perspective, zero tilt, no visible side face, all four corners at right angles. Top and bottom edges equally wide. Preserve the cream paper, green folded spring band and orange carrot picture, upper-left flat pixel shading, camera for the printed carrot picture, image size and centered location. Use only coarse square pixel blocks; no ragged edges or thin decorative details. Prior candidate was481 wide by611 tall (0.787 aspect) and MUST change to0.857 aspect. Black/brown colored singlepixel outline. COMPLETE silhouette fromtop tobottom, true transparent empty margins, no text/numbers/logo, no extraobjects, no glow orshadow. This is a tiny inventory seed packet designed to reduce to12x14 and7x8 artpixels, so prioritize the exact broad rectangle over decorative detail.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r2.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r2.png",
+      "sha256": "e06b25222860ff40fc4df26cce38120d781a64e94f6a7baa96d0b1b8b6792dff",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\rejected\\carrot_seed-r2.png"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-706061c0-762d-49b9-b8ab-8d702c4e55b6.png",
+  "copied_path": "implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+  "sha256": "f2e9c39135b929b0ccb963f3486a06b86ed37900c8dd77f55d302bc2575a3b88",
+  "date": "2026-10-10",
+  "revision": 3,
+  "decision": "candidate / reference retained for owner review; no whole-pack approval",
+  "evidence": "Inventory bounds[2,1,14,15] andHUDbounds[2,1,9,9], exact requested12x14 and7x8 silhouettes after uniform importer reduction."
+}

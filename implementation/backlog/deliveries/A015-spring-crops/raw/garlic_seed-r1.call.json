@@ -1,0 +1,29 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Asset type: HARVEST THE NIGHT A015 spring seed packet, inventory icon. Image1: accepted carrot seed packet IDENTITY MASTER and EDIT TARGET. Change ONLY the picture printed on the front: replace the carrot illustration with one white garlic bulb with a short stalk. Preserve ALL paper, folded green spring band, dark outline, highlights, image canvas1254x1254, object position and broad rectangle silhouette. Keep identical crop bounds x320,y300,width615,height716 so it reduces with the same two source scales as the master. Do not narrow, tilt, reshape, move or enlarge the packet. No visible side panel. Same front-view paper and coarse pixel clusters, upper-left neutral daylight. The new produce picture occupies the same region as the carrot: about half the front, readable at14px and8px heights. Match the species shape of the approved produce icon. No words, numbers, logos, glow, groundshadow, scene or otherobjects. TRUE transparent background. No transparencycheckerboard. Preserve unchanged pixels outside the printed produce picture.\nImage2: approved species produce icon, visual identity reference for the replacement illustration only.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\icon_garlic-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+      "sha256": "f2e9c39135b929b0ccb963f3486a06b86ed37900c8dd77f55d302bc2575a3b88",
+      "role": "candidate edit target; owner approval pending"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\icon_garlic-r1.png",
+      "sha256": "d6b28003b10fdeb8b795f01b9c2bdde501c63e95e549d36d70f7a30ef4ecbbbe",
+      "role": "identity/material/layout reference; generation approval is recorded separately"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-eaef3ed4-1994-41db-be76-424ca3dfad63.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\garlic_seed-r1.png",
+  "sha256": "f6bf2f0e479a0f3788f9199d404460e72d069a3d33e7d2e3ba9c2fc13d6108ba",
+  "date": "2026-10-10",
+  "revision": 1,
+  "decision": "candidate / reference retained for owner review; no whole-pack approval"
+}

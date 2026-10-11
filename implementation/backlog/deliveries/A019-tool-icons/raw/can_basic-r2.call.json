@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the exact basic watering-can edit target. Change ONLY its metal MATERIAL COLOURS. The entire metal pail body, arched metal handle and spout are dull dark worn metal: ink_soft, stone_dark and stone planes, with a few muted brown rust patches. No large ivory or bright silver planes. A tiny pale glint is allowed, but less than five percent of the pail. Preserve every silhouette pixel cluster, canvas, margin, part shape, handle arch, spout, rose, size, position and lighting direction. Do not crop, recenter, add parts or redraw geometry. The source is a complete1254x1254 square, reduced to16x16 and10x10, so material planes must be broad and readable. No labels, panel, scene, water, ground or shadow. Real transparent alpha outside the one can.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\can_basic-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\can_basic-r1.png",
+      "sha256": "1f8ad6c132de21df4d2e02cf66f79de2df17dd48b0c6b0efaaeaa112cdb3ab47",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\preview\\input-history\\can_basic-r1-1f8ad6c132.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5c555f53-b239-46d3-bfcc-b311f63288a5.png",
+  "copied_raw_path": "raw/can_basic-r2.png",
+  "raw_sha256": "a959dee832a6d38f430031e317463056cd8dfe544e7d59a1cf39d731c474faab",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "accepted",
+  "inspection": "Both native cuts and common scale tier grid inspected. Owner final approval pending."
+}

@@ -1,0 +1,268 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "trampled",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "poses": [
+        "trampled"
+      ]
+    },
+    {
+      "anim": "withered",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "poses": [
+        "withered"
+      ]
+    },
+    {
+      "anim": "tilled_edge_n",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "palette_keys": [
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "points": {},
+      "poses": [
+        "tilled_edge_n"
+      ]
+    },
+    {
+      "anim": "tilled_edge_corner_nw",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "palette_keys": [
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "points": {},
+      "poses": [
+        "tilled_edge_corner_nw"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "date": "2026-10-10",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "tilled_edge_corner_nw",
+      "call": "raw/tilled_edge_corner_nw-r1.call.json",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/tilled_edge_corner_nw/none/01.png",
+      "points": {},
+      "prompt": "raw/tilled_edge_corner_nw-r1.prompt.txt",
+      "prompt_sha256": "b47388580c20b61d399114bf5dbcb4d9b05116b5906844ab704d870f4c6191fa",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.02384500745156483,
+        "crop_xywh": [
+          0,
+          0,
+          671,
+          671
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "soil_dark"
+        ],
+        "sheet_cell_xywh": null
+      },
+      "runtime_name": "tilled_edge_corner_nw",
+      "sha256": "11e8160ccb04491f8a8d5707e20d29d8e2fb085d8ff82a51d0540dc515dbdf9d",
+      "source": "raw/tilled_edge_corner_nw-r1.png",
+      "source_sha256": "db67cf65f7cbdaa27eb043296b3ff8d86888afd53b8477d68dcfc35f8906448a"
+    },
+    {
+      "anim": "tilled_edge_n",
+      "call": "raw/tilled_edge_n-r1.call.json",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/tilled_edge_n/none/01.png",
+      "points": {},
+      "prompt": "raw/tilled_edge_n-r1.prompt.txt",
+      "prompt_sha256": "02df173a6f6ab96edc874620ceed6f42b38d2b11dab22571ffffdf57d047059e",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.012759170653907496,
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "soil_dark"
+        ],
+        "sheet_cell_xywh": null
+      },
+      "runtime_name": "tilled_edge_n",
+      "sha256": "caafd0f7a589a0927dcc69a00ee9176e120fe973eae319d746a8b5d45822b26b",
+      "source": "raw/tilled_edge_n-r1.png",
+      "source_sha256": "f6305ce20d72182da359b8fa6aaa8da60900858f9542e53224cb9edc07f19a0a"
+    },
+    {
+      "anim": "trampled",
+      "call": "raw/trampled-r1.call.json",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/trampled/none/01.png",
+      "points": {},
+      "prompt": "raw/trampled-r1.prompt.txt",
+      "prompt_sha256": "7072b5713417b9e8c26f75d97932a186b42b22cafb6accb5b6472b67f6862483",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          5,
+          4
+        ],
+        "content_scale": 0.011869436201780416,
+        "crop_xywh": [
+          361,
+          523,
+          813,
+          337
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": null
+      },
+      "runtime_name": "trampled",
+      "sha256": "96109142ed8c0ae904bda30237d49522309f1f3b8ac037034c747eb449e808d9",
+      "source": "raw/trampled-r1.png",
+      "source_sha256": "342ed33237867a8e99b75963cdd26e8899c3c0c43dbdaffa104e686c9f60c7de"
+    },
+    {
+      "anim": "withered",
+      "call": "raw/withered-r1.call.json",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/withered/none/01.png",
+      "points": {},
+      "prompt": "raw/withered-r1.prompt.txt",
+      "prompt_sha256": "ca01e4ac989432e6be6b60dc534e8e1a2f42ed0a05634e72b73f60a63d6f5a47",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          4,
+          8
+        ],
+        "content_scale": 0.017278617710583154,
+        "crop_xywh": [
+          397,
+          596,
+          508,
+          463
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": null
+      },
+      "runtime_name": "withered",
+      "sha256": "24513a819350f833a3c621f6904ae5b49c62899de5a6b5fcd9e726f2fe140aeb",
+      "source": "raw/withered-r1.png",
+      "source_sha256": "14b8f0c0f3322c84171394890f215756b29864eecfb82c3a4088bd4a7c5c8959"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A014",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "assets/art_source/crops/carrot.png",
+      "role": "approved style and crop/turf material reference",
+      "sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d"
+    },
+    {
+      "path": "docs/reference-sheet.png",
+      "role": "approved style and crop/turf material reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "assets/art_source/terrain/edge-n.png",
+      "role": "approved style and crop/turf material reference",
+      "sha256": "44914576c7532adeeb7c5a6df66385840e461e54937416d50e92e0f6b60eca4c"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A014-crop-ground",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "Trampled crops and tilled ground",
+  "tool": "built-in ImageGen"
+}

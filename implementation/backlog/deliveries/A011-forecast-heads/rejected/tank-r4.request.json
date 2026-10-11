@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 is the exact accepted identity of the tank zombie forecast bust. ONE footprint correction: widen the head/jaw/ears horizontally by about20percent, WITHOUT changing its height, expression, tiny neck, identity, palette, outline weight, shading or vertical position. The WHOLE head-plus-neck silhouette must now be SQUARE, not tall/slim: finalvisible13by13nativepixels. Same1254square canvas, keep all margins and top/bottom coordinates unchanged; finalbounds x308..947,y346..984, approximately639wide638tall. Keep shoulders only a tiny hint inside head width, no new body or arms. No diagonal stretch, scene, text, panels or shadow. TRUEtransparent alpha outsideonejoinedbust.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\tank-r3.png"
+  ],
+  "transparent_background": true
+}

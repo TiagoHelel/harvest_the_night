@@ -1,6 +1,6 @@
 # A029 - Animal goods
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0211
 - **Dressed by game tasks:** 0184
 - **Family:** ui

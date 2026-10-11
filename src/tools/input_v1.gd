@@ -724,6 +724,18 @@ func _case_0133_hotbar() -> void:
 	var ids := Building.catalogue(state)
 	expect(hotbar.visible and ids.size() >= 5 and locate_control("Hotbar_%s" % ids[0]) != null,
 		"in the build step the hotbar holds the catalogue", str(ids))
+	# **A005's icons** (task 0147): every one of its eight defences wears its
+	# own 16x16 cut, drawn at its native size.
+	var bare: Array = []
+	for id in [&"gun_tower", &"auto_crossbow", &"flame_tower", &"mortar", &"mine",
+			&"fence", &"wall", &"barricade"]:
+		var slot := locate_control("Hotbar_%s" % id)
+		var icon: TextureRect = slot.get_node_or_null("Icon") as TextureRect if slot != null else null
+		if icon == null or icon.texture == null \
+				or icon.texture.resource_path != "res://sprites/ui/icon_%s.png" % id \
+				or icon.texture.get_size() != Vector2(16, 16) or icon.size != Vector2(16, 16):
+			bare.append(id)
+	expect(bare.is_empty(), "every A005 defence's slot wears its own 16x16 icon", str(bare))
 
 	# **The number keys**: slot_2 is the second defence, and not a seed.
 	await tap_key(KEY_2)
@@ -1153,6 +1165,12 @@ func _case_0139_night_hud() -> void:
 		and start.size.x >= NightHud.START_SIZE.x,
 		"START is up across the bar in the build step",
 		str(start.size) if start != null else "none")
+	# **Its horn** (A005, task 0147), and every way START reads still fits
+	# beside it, in both languages.
+	expect(start != null and start.icon != null
+		and start.icon.resource_path == "res://sprites/ui/hud_start.png"
+		and _fits_beside_icon(start, [[&"NHUD_START"], [&"NHUD_START_IN", [99]]]),
+		"START wears its horn, and its words fit beside it")
 	var waiting: Array = []
 	for named in ["FlareButton", "SpeedButton", "SkipButton", "WaveCounter",
 			"DawnCountdown"]:
@@ -1184,6 +1202,18 @@ func _case_0139_night_hud() -> void:
 			[actions.text_of(&"place"), Names.of(&"wall")]),
 		"over open ground with a wall in hand, the hint says what a click does",
 		night_hud.hint_text())
+	# **And shows the wall** (A005, task 0147): its 10x10 just left of the
+	# words, right of the house's numbers.
+	var hint_icon: TextureRect = locate_control("ModeHintIcon") as TextureRect
+	var numbers: Label = locate_control("HouseNumbers") as Label
+	expect(hint_icon != null and hint_icon.is_visible_in_tree() and hint_icon.texture != null
+		and hint_icon.texture.resource_path == "res://sprites/ui/hud_wall.png"
+		and hint_icon.position.x + hint_icon.size.x < night_hud.hint_words_at()
+		and hint_icon.position.x + hint_icon.size.x >= night_hud.hint_words_at() - 3.0
+		and numbers != null and hint_icon.get_global_rect().position.x > numbers.get_global_rect().end.x,
+		"and the wall's picture stands just left of its words",
+		"%s, words at %.0f" % [hint_icon.get_global_rect() if hint_icon != null else Rect2(),
+			night_hud.hint_words_at()])
 	expect(Building.place(state, &"wall", spot), "a wall goes down")
 	await frames(3)
 	var own := world.cursor().look()
@@ -1290,6 +1320,32 @@ func _case_0139_night_hud() -> void:
 			if box.intersects(boxes[j]):
 				crossed = true
 	expect(not crossed, "side by side, on screen, right of the hotbar", str(boxes))
+	# **Their pictures** (A005, task 0147): the flare's and the speed's beside
+	# words that still fit, in both languages; SKIP has none. The setting moon
+	# stands between the count and the time to dawn.
+	expect(flare.icon != null and flare.icon.resource_path == "res://sprites/ui/hud_flare.png"
+		and speed.icon != null and speed.icon.resource_path == "res://sprites/ui/hud_speed.png"
+		and skip.icon == null
+		and _fits_beside_icon(flare, [[&"NHUD_FLARE"], [&"NHUD_FLARE_CHARGE", [100]]])
+		and _fits_beside_icon(speed, [[&"NHUD_SPEED", [4]]]),
+		"the flare and the speed wear their pictures, their words beside them")
+	var moon: TextureRect = locate_control("DawnMoon") as TextureRect
+	var countdown: Label = locate_control("DawnCountdown") as Label
+	var count: Label = locate_control("ZombiesLeft") as Label
+	var widest_count := 0.0
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		widest_count = maxf(widest_count, count.get_theme_font(&"font").get_string_size(
+			I18n.f(&"NHUD_LEFT", [999]), HORIZONTAL_ALIGNMENT_LEFT, -1,
+			count.get_theme_font_size(&"font_size")).x)
+	I18n.use("en")
+	expect(moon != null and moon.is_visible_in_tree() and moon.texture != null
+		and moon.texture.resource_path == "res://sprites/ui/hud_dawn_moon.png"
+		and moon.get_global_rect().end.x <= countdown.get_global_rect().position.x
+		and moon.get_global_rect().position.x > count.get_global_rect().position.x + widest_count,
+		"the setting moon stands before the time to dawn, clear of the count",
+		"%s, count to %.0f" % [moon.get_global_rect() if moon != null else Rect2(),
+			count.get_global_rect().position.x + widest_count])
 
 	# **On a pad**: Back lands on the flare, the D-pad moves along, A presses.
 	await _pad_tap(JOY_BUTTON_BACK)
@@ -1366,6 +1422,28 @@ func _case_0139_night_hud() -> void:
 	driver.set_speed(1)
 	await close_scene()
 	_completed += 1
+
+
+## Whether every way a button may read fits beside its picture (task 0147),
+## in both languages: its box less the stylebox's sides, the picture and the
+## theme's gap between them. `says` holds `[key]` or `[key, args]` rows.
+func _fits_beside_icon(button: Button, says: Array) -> bool:
+	if button == null or button.icon == null:
+		return false
+	var box := button.get_theme_stylebox(&"normal")
+	var room := button.size.x - box.get_margin(SIDE_LEFT) - box.get_margin(SIDE_RIGHT) \
+		- button.icon.get_width() - button.get_theme_constant(&"h_separation")
+	var font := button.get_theme_font(&"font")
+	var font_size := button.get_theme_font_size(&"font_size")
+	var fits := true
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		for row in says:
+			var text := I18n.f(row[0], row[1]) if (row as Array).size() > 1 else I18n.t(row[0])
+			fits = fits and font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1,
+				font_size).x <= room
+	I18n.use("en")
+	return fits
 
 
 ## 0140 - the day HUD tells the time and says when it is time for bed.
@@ -1924,6 +2002,11 @@ func _case_0159_seasons() -> void:
 	expect(read == [1, 2, 3], "the remap follows the date: summer, autumn, winter", str(read))
 	expect(particles.snowing() and particles.flakes() > 0, "and on Winter 3 it snows",
 		"%d flakes" % particles.flakes())
+	# **Winter's ground is A012's** (task 0163): its atlas on the tile set,
+	# and the remap off the ground, which it would only blur.
+	expect(world._ground_file == "res://sprites/terrain/atlas_winter.png"
+		and not bool(seasons.ground.get_shader_parameter("remap")),
+		"on Winter 3 the ground is A012's winter atlas, unremapped", world._ground_file)
 	expect(world.terrain_draws() == laid,
 		"and the terrain was not laid again for any of it",
 		"%d against %d" % [world.terrain_draws(), laid])
@@ -1938,8 +2021,10 @@ func _case_0159_seasons() -> void:
 	# **Spring again** in Year 2: the snow stops and the art is today's.
 	state["day"] = Calendar.year_days() + 3
 	await frames(3)
-	expect(seasons.shader_season() == 0 and not particles.snowing(),
-		"and Spring 3 of Year 2 is spring again, with no snow")
+	expect(seasons.shader_season() == 0 and not particles.snowing()
+		and world._ground_file == WorldView.TERRAIN_ATLAS,
+		"and Spring 3 of Year 2 is spring again, with no snow, on today's atlas",
+		world._ground_file)
 	state["day"] = 1
 	await close_scene()
 	_completed += 1
@@ -2051,11 +2136,25 @@ func _case_0167_till_grass() -> void:
 	await frames(3)
 	var earth := false
 	var turf := false
+	var turns: Array = []
 	for sprite in world._plot_sprites:
 		if int(sprite.get_meta("plot_cell", -1)) == Grid.index(target):
 			earth = earth or str(sprite.get_meta("plot_art", "")) == "tilled"
-			turf = turf or str(sprite.get_meta("plot_art", "")) == "tilled_edge_n"
+			if str(sprite.get_meta("plot_art", "")) == "tilled_edge_n":
+				turf = true
+				if sprite.texture.resource_path == WorldView.CROP_DIR + "tilled_edge_n.png":
+					turns.append(roundi(sprite.rotation / (PI / 2.0)))
 	expect(earth and turf, "turned earth and its turf border appear in the real view")
+	# A014's edge (task 0197): the raster piece, turned once for each side
+	# of the new plot that is still lawn.
+	var open := WorldView.tilled_edge_mask(state, target)
+	var sides: Array = []
+	for bit in 4:
+		if open & (1 << bit):
+			sides.append(bit)
+	turns.sort()
+	expect(turns == sides, "the turf is A014's edge, turned to each open side",
+		"%s against %s" % [str(turns), str(sides)])
 	# An open-ground press facing a path has no underfoot hoe fallback.
 	_stand_at(state, middle, Player.NORTH)
 	state["terrain"][Grid.index(middle + Vector2i.UP)] = Farm.Terrain.PATH

@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-08",
+  "owner_words": "agora sim",
+  "selected_version": "current-head-crops-r1",
+  "visual_approval": true,
+  "integration_approval_not_inferred": true,
+  "native_sha256": {
+    "native/head_breaker/none/01.png": "234cef88e941bf64eaf9ef5d3821fd4ec023812465777e841107af6f689a031c",
+    "native/head_giant/none/01.png": "d9f6e73f785e75d48b8752efb58cc43efb07f414a7066cd4eed8af82fd8785db",
+    "native/head_runner/none/01.png": "25e990956301a9cfb831bfae7bc94767e3526000c97b18174909ca95fae0edbb",
+    "native/head_tank/none/01.png": "6af35497f16ae1d2980879744fede3ff47399752d6532c1cbf0c1fb5b23c843b",
+    "native/head_walker/none/01.png": "e536a0a0cd7ac293f51148e7e359a7f203a23d1eb32d7d5156f48f4de55efe45"
+  }
+}

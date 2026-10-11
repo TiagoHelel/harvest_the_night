@@ -1,0 +1,33 @@
+A011 - Forecast heads cropped from current enemies
+Approved for integration on 2026-10-10.
+Owner words, verbatim: "aprovado"
+
+Authoritative folder: implementation/backlog/deliveries/A011-forecast-heads/
+Read APPROVAL.json, contract.json, head-crops.json, integration-recipes.json and checks.json. All five 16x16 exports are approved. runtime_integrated is false: Codex has not changed the game. The earlier generated A011 heads are superseded and stored under this delivery's retired/generated-heads/. Never use those retired images, rejected/ or preview/ as sources. No other delivery is superseded.
+
+Integration task: 0162. Replace the temporary cropped enemy portraits in task 0158's dusk/night forecast panel with these five stable aliases. Use the same portrait for each enemy kind and let the existing UI draw its count separately.
+
+Mapping:
+native/head_walker/none/01.png -> sprites/ui/head_walker.png | 16x16 pivot (8,8), draw 1.0 | static, 1 frame, 1.0 s, no loop, direction none
+native/head_runner/none/01.png -> sprites/ui/head_runner.png | 16x16 pivot (8,8), draw 1.0 | static, 1 frame, 1.0 s, no loop, direction none
+native/head_tank/none/01.png -> sprites/ui/head_tank.png | 16x16 pivot (8,8), draw 1.0 | static, 1 frame, 1.0 s, no loop, direction none
+native/head_breaker/none/01.png -> sprites/ui/head_breaker.png | 16x16 pivot (8,8), draw 1.0 | static, 1 frame, 1.0 s, no loop, direction none
+native/head_giant/none/01.png -> sprites/ui/head_giant.png | 16x16 pivot (8,8), draw 1.0 | static, 1 frame, 1.0 s, no loop, direction none
+
+Frame order: 01.png is frame 0. All states have mirror none: bind directly, no horizontal flips. Metadata points are {} for every state; native pivots are (8,8). No runtime 2x layer. Keep the original head colors both by day and at night: HUD art is not world-relit. The lowest opaque row is 14, leaving row 15 clear; preserve all recorded placements.
+
+Authorized deviation from the original Mode A/ImageGen bust brief:
+Owner words on 2026-10-08, verbatim: "ficou bem incoerente, faz um recorte da cabeca dos sprites atuais que dai nao tem erro"
+The selected source is an immutable snapshot of each current enemy walk frame 0. The recipe is exact crop, trim transparent border, then transparent padding into a 16x16 canvas. There is no new drawing, color mapping or scaling. This supersedes the generated-bust size and silhouette rules; do not enforce them by repainting the approved crops. contract.json records palette_mode existing-source-crop and unchanged current runtime RGBA. prompt and call are null for these owner-requested crops: do not fabricate ImageGen provenance. Preserve their original enemy source references and recorded owner request.
+
+Use exact-source in the raster pipeline, not tools/palette.py recoloring. integration-recipes.json provides adapters validated against render_source: effective crop includes the recorded alpha trim, scale is exactly 1, anchor is (8,8) minus placement_xy, alpha threshold is 128, no palette_keys. All five adapters reproduce both RGBA pixels and approved PNG hashes exactly. Their source paths currently point into this delivery for verification only; replace those paths with promoted, versioned assets/art_source/ui/ paths and retain source hashes and every transform value.
+
+Never regenerate, repaint, recolour, resample or retime the art. Never cut sprites from GIFs, preview images or screenshots. Use only sources and exports listed in contract.json; the adapters reference those same sources. Never add a runtime flip to a baked mirror. Do not switch to the old generated heads or recrop changing live game sprites automatically.
+
+Integration steps:
+1. Verify all five export SHA256 values against contract.json and APPROVAL.json, plus immutable raw snapshot/reference hashes. Run the delivery build.py --check. If a current enemy reference changed, stop with the precise discrepancy; do not silently regenerate or change approval hashes.
+2. Promote the selected source snapshots byte-for-byte to versioned assets/art_source/ui/ locations. Record original enemy reference provenance, the owner-requested crop deviation and final integration approval in the raster manifest and ownership.json. Use the validated exact-source adapters with promoted source paths. Include required provenance fields following the repository's established pipeline schema; no synthetic ImageGen calls. Run python tools/import_art.py and verify promoted outputs match the approved hashes.
+3. Extend hard-coded UI family lists in art checks where necessary and bind all five head aliases in the forecast panel. Preserve dimensions, pivots, no-flip behavior and static timing. Do not rewrite enemy body sprites.
+4. Run python tools/verify.py and check the promoted outputs again.
+5. Inspect FHD game captures by day and night, including the forecast row, body identity and small-size legibility on the dark HUD. Preserve HUD colors without world relighting.
+6. Only after integration and validation, run python implementation/backlog/assets.py set A011 integrated. Claude owns this transition. Do not touch deferred farmer packs or the cancelled run pack. Do not commit or push unless the owner asks.

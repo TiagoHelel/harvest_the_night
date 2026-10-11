@@ -1,0 +1,208 @@
+{
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 20,
+  "frames_found": 20,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "jar_firebox_warm_only_active": true,
+  "jar_points_measured": true,
+  "machine_four_states_each": true,
+  "machine_ground_origin_consistent": true,
+  "machine_states_distinct": true,
+  "measurements": {
+    "native/dairy/none/01.png": {
+      "bounds": [
+        6,
+        13,
+        59,
+        60
+      ],
+      "opaque_pixels": 1834
+    },
+    "native/dairy_active/none/01.png": {
+      "bounds": [
+        6,
+        13,
+        58,
+        60
+      ],
+      "opaque_pixels": 1839
+    },
+    "native/dairy_hurt/none/01.png": {
+      "bounds": [
+        6,
+        13,
+        59,
+        60
+      ],
+      "opaque_pixels": 1859
+    },
+    "native/dairy_wreck/none/01.png": {
+      "bounds": [
+        6,
+        16,
+        59,
+        60
+      ],
+      "opaque_pixels": 1691
+    },
+    "native/keg/none/01.png": {
+      "bounds": [
+        10,
+        14,
+        38,
+        52
+      ],
+      "opaque_pixels": 699
+    },
+    "native/keg_active/none/01.png": {
+      "bounds": [
+        9,
+        14,
+        39,
+        52
+      ],
+      "opaque_pixels": 698
+    },
+    "native/keg_hurt/none/01.png": {
+      "bounds": [
+        9,
+        14,
+        39,
+        52
+      ],
+      "opaque_pixels": 709
+    },
+    "native/keg_wreck/none/01.png": {
+      "bounds": [
+        9,
+        22,
+        39,
+        52
+      ],
+      "opaque_pixels": 694
+    },
+    "native/loom/none/01.png": {
+      "bounds": [
+        6,
+        13,
+        58,
+        60
+      ],
+      "opaque_pixels": 1939
+    },
+    "native/loom_active/none/01.png": {
+      "bounds": [
+        6,
+        13,
+        58,
+        60
+      ],
+      "opaque_pixels": 1940
+    },
+    "native/loom_hurt/none/01.png": {
+      "bounds": [
+        6,
+        13,
+        58,
+        60
+      ],
+      "opaque_pixels": 1919
+    },
+    "native/loom_wreck/none/01.png": {
+      "bounds": [
+        6,
+        18,
+        58,
+        60
+      ],
+      "opaque_pixels": 1672
+    },
+    "native/mill/none/01.png": {
+      "bounds": [
+        4,
+        9,
+        61,
+        92
+      ],
+      "opaque_pixels": 2389
+    },
+    "native/mill_active/none/01.png": {
+      "bounds": [
+        2,
+        8,
+        63,
+        92
+      ],
+      "opaque_pixels": 2677
+    },
+    "native/mill_hurt/none/01.png": {
+      "bounds": [
+        5,
+        9,
+        60,
+        92
+      ],
+      "opaque_pixels": 2347
+    },
+    "native/mill_wreck/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        58,
+        92
+      ],
+      "opaque_pixels": 2008
+    },
+    "native/preserves_jar/none/01.png": {
+      "bounds": [
+        9,
+        15,
+        40,
+        52
+      ],
+      "opaque_pixels": 915
+    },
+    "native/preserves_jar_active/none/01.png": {
+      "bounds": [
+        9,
+        13,
+        40,
+        52
+      ],
+      "opaque_pixels": 950
+    },
+    "native/preserves_jar_hurt/none/01.png": {
+      "bounds": [
+        9,
+        15,
+        40,
+        52
+      ],
+      "opaque_pixels": 914
+    },
+    "native/preserves_jar_wreck/none/01.png": {
+      "bounds": [
+        9,
+        17,
+        40,
+        52
+      ],
+      "opaque_pixels": 802
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "source_transparency_matches_call": true,
+  "visible_targets": true
+}

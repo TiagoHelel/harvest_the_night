@@ -1,6 +1,6 @@
 # A005 - Night hotbar and HUD icons
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0147
 - **Dressed by game tasks:** 0133, 0139
 - **Family:** ui

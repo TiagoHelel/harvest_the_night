@@ -7,6 +7,71 @@ import gen_sprites
 
 NAMES = ("grass", "grass_b", "grass_c", "grass_d", "soil", "path", "floor", "rock")
 WATER = ("water", "water_b", "water_c")
+# A012's winter ground (task 0163): the materials it snows on, with today's
+# names; water, rock and the floor keep their own tiles in winter.
+WINTER = ("grass", "grass_b", "grass_c", "grass_d", "path", "soil")
+WINTER_SUFFIX = "_winter"
+
+
+def brightness(image):
+    return sum(sum(p[:3]) / 3 for p in import_art.samples(image)) / 256
+
+
+def validate_winter(images, entries, files, owners):
+    """A012's winter: seamless snow sharing the grass's borders, brighter than
+    the path and the soil by 25, banks at most three rows deep with exact
+    rotations and caps, and its atlas the same grid, every cell exact."""
+    winter = {n: images["terrain/" + n + WINTER_SUFFIX] for n in WINTER}
+    for name, image in winter.items():
+        entry = entries["terrain/" + name + WINTER_SUFFIX]
+        if "source" not in entry or owners[entry["output"]] != "raster":
+            raise ValueError("Winter ground lacks an accepted raw source: " + name)
+        validate_tile(image, name + WINTER_SUFFIX)
+        if (art_ownership.ROOT / entry["output"]).read_bytes() != files[entry["output"]]:
+            raise ValueError("Runtime winter tile differs from accepted source: " + name)
+    if len({image.tobytes() for image in winter.values()}) != len(WINTER):
+        raise ValueError("Winter materials/grass variations must remain distinct")
+    if any(borders(winter[n]) != borders(winter["grass"]) for n in WINTER[1:4]):
+        raise ValueError("Winter grass variations have different boundary colors")
+    if brightness(winter["grass"]) - max(brightness(winter["path"]), brightness(winter["soil"])) < 25:
+        raise ValueError("Snow is not 25 brighter than the winter path and soil")
+    for prefix in ("edge", "shore"):
+        north = images["terrain/" + prefix + "_n" + WINTER_SUFFIX]
+        validate_side(north, prefix + WINTER_SUFFIX)
+        if north.getbbox()[3] > 3:
+            raise ValueError("Winter bank deeper than three rows: " + prefix)
+        cap = images["terrain/" + prefix + "_corner_nw" + WINTER_SUFFIX]
+        validate_corner(cap, north, prefix + WINTER_SUFFIX)
+        for turns, suffix in enumerate(("e", "s", "w"), 1):
+            expected = north.transpose({1:Image.Transpose.ROTATE_270,2:Image.Transpose.ROTATE_180,3:Image.Transpose.ROTATE_90}[turns])
+            if images["terrain/" + prefix + "_" + suffix + WINTER_SUFFIX].tobytes() != expected.tobytes():
+                raise ValueError("Winter side rotation drift: " + prefix + suffix)
+        for turns, suffix in enumerate(("ne", "se", "sw"), 1):
+            expected = cap.transpose({1:Image.Transpose.ROTATE_270,2:Image.Transpose.ROTATE_180,3:Image.Transpose.ROTATE_90}[turns])
+            if images["terrain/" + prefix + "_corner_" + suffix + WINTER_SUFFIX].tobytes() != expected.tobytes():
+                raise ValueError("Winter corner rotation drift: " + prefix + suffix)
+    width, height, pixels = gen_sprites.build_atlas(WINTER_SUFFIX)
+    path = art_ownership.ROOT / ("sprites/" + gen_sprites.SEASON_ATLASES[WINTER_SUFFIX])
+    if (width, height) != (256, 80) or path.read_bytes() != gen_sprites.png_bytes(width, height, pixels):
+        raise ValueError("Winter terrain atlas is missing/stale/tampered")
+    snowed = 0
+    with Image.open(path) as atlas:
+        atlas = atlas.convert("RGBA")
+        for row, names in enumerate(gen_sprites.ATLAS_ROWS):
+            for column, name in enumerate(names):
+                tile = atlas.crop((column*16, row*16, column*16+16, row*16+16))
+                key = "terrain/" + gen_sprites.seasonal(name, WINTER_SUFFIX)
+                if tile.tobytes() != images[key].tobytes():
+                    raise ValueError("Winter atlas cell differs from its source: " + key)
+                snowed += key.endswith(WINTER_SUFFIX)
+        for prefix, start in gen_sprites.CORNER_START.items():
+            for index, corner in enumerate(gen_sprites.CORNER_ORDER):
+                tile = atlas.crop(((start+index)*16,0,(start+index+1)*16,16))
+                if tile.tobytes() != images["terrain/"+prefix+"_corner_"+corner+WINTER_SUFFIX].tobytes():
+                    raise ValueError("Winter atlas corner differs from its cap")
+                snowed += 1
+    if snowed != 15:
+        raise ValueError("Winter atlas snow count moved: %d" % snowed)
 
 
 def validate_side(image, name):
@@ -126,7 +191,9 @@ def main():
                 contributed += 1
     if contributed != 21:
         raise ValueError("Migrated terrain atlas contribution count moved")
-    print("OK: 8 seamless materials; 3 distinct water phases; 8 static sides; 8 exact corner caps; 21 raster atlas cells; all 80 cells source-exact")
+    validate_winter(images, entries, files, owners)
+    print("OK: 8 seamless materials; 3 distinct water phases; 8 static sides; 8 exact corner caps; 21 raster atlas cells; all 80 cells source-exact"
+          "; winter: 6 seamless snowed materials, banks at most 3 rows, 8 exact caps, 15 snowed atlas cells, all 80 cells source-exact")
     return 0
 
 

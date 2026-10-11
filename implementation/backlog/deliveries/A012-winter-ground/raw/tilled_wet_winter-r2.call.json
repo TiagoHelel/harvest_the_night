@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is exact wet winter soil tile target. Correct ONLY seamless bands: remove ALL brown speckles and accent spots. Absolutely flat dark purple-soil bands RGB36,31,46 and flat muted cream-grey ridges RGB184,174,154, same exact positions and widths. Noothercolours. Whole1254squarecanvas, fullyopaque. Source logical16x16: dark rows0and15 match EXACTLY; creamgreyrow1; rows4,5,8,9,12,13creamgrey; all otherrows dark. EveryrowisONEconstantcolour fromleftedge torightedge; left/rightpixels EXACTLYequal. No slopes, gradients, texture, pebbles, erosion, grass, snowflakes, scene, outlines, labels or margin. Keep exactoriginal geometry and verydarkwetappearance.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\tilled_wet_winter-r1.png"
+    ],
+    "transparent_background": false
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\tilled_wet_winter-r1.png",
+      "sha256": "26029fa7490c52f1eab033b87fbe61ce92aa5ac4eb76ddf649fe6a947609c1eb",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\input-history\\tilled_wet_winter-r1-26029fa749.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-f4e2976f-0f69-493e-a5c1-65af70fdd421.png",
+  "copied_raw_path": "raw/tilled_wet_winter-r2.png",
+  "raw_sha256": "056b15f5810197e71f92157fe82b329b6fd7d5c94a3a2b734389848666bfcf6b",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "inspection pending"
+}

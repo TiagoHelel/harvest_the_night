@@ -1,0 +1,874 @@
+{
+  "pack": "A029",
+  "slug": "A029-animal-goods",
+  "title": "Animal goods",
+  "date": "2026-10-07",
+  "status": "approved for integration",
+  "runtime_integrated": false,
+  "palette_mode": "A",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "colour_ramp": [],
+  "alpha_threshold": 128,
+  "tool": "built-in ImageGen",
+  "references": [
+    {
+      "path": "assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/ui/panel.png",
+      "sha256": "0c7d37fe6f4c333a048959f0d5b4b6867cce201d270f260ec78f367d082a1863",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/button_normal.png",
+      "sha256": "86afdc394f1706e5d09cd56dbe3b26ee581b18992cce2832924c4b3e5ad6b160",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/terrain/grass.png",
+      "sha256": "4d1d187493ab8275082ea8aed39ab884e50384b9bb35cc750276ffbd3b54fc3e",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_meat.png",
+      "sha256": "9dca3e036de6964a7f0ab052fb995f0a787fec31316ec9a3e69e77da54d5f23b",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_meat.png",
+      "sha256": "aaff5df261ee3e16f37bc74780c3dc9a92e927861bd8c91fa24817799a0981bd",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_food.png",
+      "sha256": "d0243226b87ef637b1981a2d9e987182b81272610397e6808a05d86a78cf4afb",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_food.png",
+      "sha256": "9d7fb69365cbbe0dae4d9f1c82539c9f1fd4b0c99fab556fa13a4b6fe4073067",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_wood.png",
+      "sha256": "6d0275b93c12105ae00a148ca6f27aaf586a985cb4897bba84ef6ec2b89d9148",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_wood.png",
+      "sha256": "fc1bf6a471078c71e0b99e7a79be2e24f9a888cd541f6914304bdd6124080540",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_stone.png",
+      "sha256": "0aef918775dab9c27284725d28a507c50e0d3788dca6deadc9eea410037d254e",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_stone.png",
+      "sha256": "69678215024f2f74a275dda79fed76277da5a5d35fe77ba6e7f62d60fe239bcc",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_gunpowder.png",
+      "sha256": "2d845f087c16c5d93865d01d371406fde74b800ce2c7a588255327f6554ac63d",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_gunpowder.png",
+      "sha256": "b53006783e93480773e16853c039544b82a0b3162fcd1b6581c38ba6b5540dfb",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/props/rock.png",
+      "sha256": "2e9d0c2f94fae2594180778c6ab9c97802a2451efc713dd7d97cb1c85a0f3bf4",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/props/stump.png",
+      "sha256": "93d4e1ba9fe3de4d84be3bf6313fc724d0c9e6fe852628c603fa23c6c31f9455",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/props/cow.png",
+      "sha256": "f6a2990f7b7d9f95acbf0927eae35fcb451b50b2c92c439a339e498b4f663374",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/props/chicken.png",
+      "sha256": "54ca6dc6b42be5bfdbb195f2c47d78bf2c4ef6d6722788fbf4ae02355b4480e8",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/buildings/mine.png",
+      "sha256": "b9fa9c7cacd19ec0afb921ff40630cf4b8924e56ad28cb9bd6e758f8fdddff27",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/crops/tilled.png",
+      "sha256": "6ebcb96545a85493925d913004de5539037b3592d192d9dc609d9686127779af",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/terrain/grass_b.png",
+      "sha256": "e65b863607c80fc98446bfd54f5db7879dc2c22284c3b01f96a8343ea038d4cd",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "assets/art_source/ui/meat.png",
+      "sha256": "de5ca07076fbac90816872d658b56342f23773faaa5b5cb1e3ec3cb0d8d92e7d",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "assets/art_source/props/rock.png",
+      "sha256": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A029-animal-goods/preview/input-history/truffle-r1-ca36101553.png",
+      "sha256": "ca36101553afb1c7954676f030d72858c12fc440b3b2e37dd4a07d7d2709f60a",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "animations": [
+    {
+      "anim": "icon_egg",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static egg"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_egg",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static egg"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_milk",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static milk"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_milk",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static milk"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_wool",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static wool"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_wool",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static wool"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_truffle",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static truffle"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_truffle",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static truffle"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "truffle_spot",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static truffle_spot"
+      ],
+      "frame_seconds": 0.55,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    }
+  ],
+  "mirror_pairs": {},
+  "files": [
+    {
+      "output": "native/icon_egg/none/01.png",
+      "sha256": "1ad104433a49520da3cafd751078e9dc38176c2f3907b3b2bf7cdf72f33d82be",
+      "runtime_name": "sprites/ui/icon_egg.png",
+      "anim": "icon_egg",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/egg-r1.png",
+      "source_sha256": "176a99f438debcf991cd9b82d18e243de1f0a5992283687dc233fb0593d0e573",
+      "prompt": "raw/egg-r1.prompt.txt",
+      "prompt_sha256": "88db9c83080545c55b2e8d2d55933113c4da29681ff23509b7f0acb5cee2cf54",
+      "call": "raw/egg-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          411,
+          448,
+          446,
+          436
+        ],
+        "content_scale": 0.03139013452914798,
+        "content_anchor_xy": [
+          7,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_egg/none/01.png",
+      "sha256": "a2dd0da085d61b5f14a6fa716e0a413f89f15c716a652439b974d674f678da95",
+      "runtime_name": "sprites/ui/hud_egg.png",
+      "anim": "hud_egg",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/egg-r1.png",
+      "source_sha256": "176a99f438debcf991cd9b82d18e243de1f0a5992283687dc233fb0593d0e573",
+      "prompt": "raw/egg-r1.prompt.txt",
+      "prompt_sha256": "88db9c83080545c55b2e8d2d55933113c4da29681ff23509b7f0acb5cee2cf54",
+      "call": "raw/egg-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          411,
+          448,
+          446,
+          436
+        ],
+        "content_scale": 0.017937219730941704,
+        "content_anchor_xy": [
+          4,
+          4
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_milk/none/01.png",
+      "sha256": "856da6e6f58e3c658bb35788a1849127755fec286f2a8c3f2c43876b637273fd",
+      "runtime_name": "sprites/ui/icon_milk.png",
+      "anim": "icon_milk",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/milk-r1.png",
+      "source_sha256": "29e0a1ed9e215e4016e05591dee863644b1cb1330bdc349f36e6f625243c5c04",
+      "prompt": "raw/milk-r1.prompt.txt",
+      "prompt_sha256": "1d0f0fa302f8bd16bcf066eb74ec53776414394e4be3e2701ee0d590baaaeaf8",
+      "call": "raw/milk-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          466,
+          430,
+          323,
+          450
+        ],
+        "content_scale": 0.03111111111111111,
+        "content_anchor_xy": [
+          5,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "bone",
+          "bone_dark",
+          "stone_light",
+          "roof",
+          "roof_dark"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_milk/none/01.png",
+      "sha256": "e175bf92ad47026ceedeecd4a57ebd936a8f73e088ec8c23743f8e374a3bc22c",
+      "runtime_name": "sprites/ui/hud_milk.png",
+      "anim": "hud_milk",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/milk-r1.png",
+      "source_sha256": "29e0a1ed9e215e4016e05591dee863644b1cb1330bdc349f36e6f625243c5c04",
+      "prompt": "raw/milk-r1.prompt.txt",
+      "prompt_sha256": "1d0f0fa302f8bd16bcf066eb74ec53776414394e4be3e2701ee0d590baaaeaf8",
+      "call": "raw/milk-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          466,
+          430,
+          323,
+          450
+        ],
+        "content_scale": 0.017777777777777778,
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "bone",
+          "bone_dark",
+          "stone_light",
+          "roof",
+          "roof_dark"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_wool/none/01.png",
+      "sha256": "870cbfe3f969e27e2293412ceb322adc13412fc05f181a258bb5bb37284233bb",
+      "runtime_name": "sprites/ui/icon_wool.png",
+      "anim": "icon_wool",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/wool-r1.png",
+      "source_sha256": "ef223fcb4c347d5df61b732f869d4695daad3f931a47e629307f3253f05fa888",
+      "prompt": "raw/wool-r1.prompt.txt",
+      "prompt_sha256": "41b5bcef7f0279d8e05d8c7f7f47fa34408a3d26c180a80010f7f671ee6e3177",
+      "call": "raw/wool-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          359,
+          394,
+          644,
+          577
+        ],
+        "content_scale": 0.021739130434782608,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "bone",
+          "bone_dark",
+          "gold_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_wool/none/01.png",
+      "sha256": "c8faef7aec79d364c8466d4cb5993bd65118343a05f66d75b67e774596aaf76d",
+      "runtime_name": "sprites/ui/hud_wool.png",
+      "anim": "hud_wool",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/wool-r1.png",
+      "source_sha256": "ef223fcb4c347d5df61b732f869d4695daad3f931a47e629307f3253f05fa888",
+      "prompt": "raw/wool-r1.prompt.txt",
+      "prompt_sha256": "41b5bcef7f0279d8e05d8c7f7f47fa34408a3d26c180a80010f7f671ee6e3177",
+      "call": "raw/wool-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          359,
+          394,
+          644,
+          577
+        ],
+        "content_scale": 0.012422360248447204,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "bone",
+          "bone_dark",
+          "gold_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_truffle/none/01.png",
+      "sha256": "f80c79503713c4f845aa06fae171d984fc3fd76f115cf7b13e511cf3f8dffc10",
+      "runtime_name": "sprites/ui/icon_truffle.png",
+      "anim": "icon_truffle",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/truffle-r1.png",
+      "source_sha256": "ca36101553afb1c7954676f030d72858c12fc440b3b2e37dd4a07d7d2709f60a",
+      "prompt": "raw/truffle-r1.prompt.txt",
+      "prompt_sha256": "987f570d7d8b395db4a578a4dd57867cdcea2aab2d17b34a141898aa3809d6c7",
+      "call": "raw/truffle-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          344,
+          410,
+          611,
+          530
+        ],
+        "content_scale": 0.022913256955810146,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_truffle/none/01.png",
+      "sha256": "25515a59f69a2a998fa1546b3c4662cdc3f4fdc09969110522dc507eee0e388e",
+      "runtime_name": "sprites/ui/hud_truffle.png",
+      "anim": "hud_truffle",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/truffle-r1.png",
+      "source_sha256": "ca36101553afb1c7954676f030d72858c12fc440b3b2e37dd4a07d7d2709f60a",
+      "prompt": "raw/truffle-r1.prompt.txt",
+      "prompt_sha256": "987f570d7d8b395db4a578a4dd57867cdcea2aab2d17b34a141898aa3809d6c7",
+      "call": "raw/truffle-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          344,
+          410,
+          611,
+          530
+        ],
+        "content_scale": 0.01309328968903437,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/truffle_spot/none/01.png",
+      "sha256": "34b8badf1aedb079f84880d83406cf99a7b244e4f0e966e93a424fcec1f2e3c3",
+      "runtime_name": "sprites/props/truffle_spot.png",
+      "anim": "truffle_spot",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/truffle_spot-r1.png",
+      "source_sha256": "0c9452998a00682d39a9b16acb6624fd94d7a47fb889756b645ac1671382e8f2",
+      "prompt": "raw/truffle_spot-r1.prompt.txt",
+      "prompt_sha256": "ae6cb94706ee248be23b5790a232a7cb3ed8642b2477547ccb4f6e511f976954",
+      "call": "raw/truffle_spot-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          361,
+          573,
+          564,
+          321
+        ],
+        "content_scale": 0.02127659574468085,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "exemptions": {
+    "grounded_on_pivot": "UI icons are centred on their visual pivot; no ground contact.",
+    "points_on_opaque": "No gameplay points required for static icons."
+  },
+  "final_approval_pending": false,
+  "approval": "APPROVAL.json"
+}

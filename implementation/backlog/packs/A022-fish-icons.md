@@ -1,6 +1,6 @@
 # A022 - Fish
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0205
 - **Dressed by game tasks:** 0179, 0182
 - **Spec after game task:** 0179

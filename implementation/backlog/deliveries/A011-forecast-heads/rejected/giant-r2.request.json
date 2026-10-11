@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 is the giant bust edit target. Correct ONLY the overly wide footprint that clips the16x16import: the COMPLETE visible head, neck, shoulders and any shoulder equipment together must form a SQUARE14wide14tall silhouette, not a landscape bust. Narrow shoulder reach and reveal more upper chest to gain height. One flat-cut bottom edge. Huge bald green head, pale small eyes, blood streaks, GREY stone plates tightly hugging shoulders. Square14wide14tall visible footprint, not broad horizontal shoulders; head dominates. Preserve the exact enemy identity, camera turned to viewer LEFT, material colours and neutral upper-left light. Bold clear large flat planes and coloured dark outline. Image2 runtime enemy is IDENTITY/MATERIAL ONLY, never draw its full body. ONE complete unclipped bust, true transparent alpha and generous empty margins. No ground, shadow, halo, panels, border, labels, text, blur or gradients.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\giant-r1.png",
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\giant_walk_0.png"
+  ],
+  "transparent_background": true
+}

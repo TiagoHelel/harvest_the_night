@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 exact winter tile edit target,1254x1254canvas representing16x16logical squarepixel grid. ONE concrete correction: Correct ONLY the boundary endpoint COLOURS. Native row0 column0 androw0 column15 must BOTH be identical cream bone RGB232,224,207, with zero alpha below bothendpoint columns. Retain the complete16pixel top snowline and all existingconnected interior scallops withinrows0..2. Keepevery remaining pixel/margin transparent, whole1254squarecanvas, no outlines/ground. Keep squarecanvas and exactlogicalscale, no crop, rescale or extra texture. Flat pixels only, no gradients, blur, labels, glare, glow, shadow, objects or backdrop. REALalpha outsidetop3rowsoverlay.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\edge_n_winter-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\edge_n_winter-r1.png",
+      "sha256": "897ade1dcb0704e1f7aa81c171b0e6e19f94b5aeea19480678668ca2f5291ac8",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\input-history\\edge_n_winter-r1-897ade1dcb.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5bd1cf33-5d26-4f67-a586-9d74d90d7ba6.png",
+  "copied_raw_path": "raw/edge_n_winter-r2.png",
+  "raw_sha256": "560f0943c08042a5bae1ff49f9aa710132a9c2a7ef626532de5186674393e538",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "accepted",
+  "inspection": "Native cut, repeat pattern, connected clusters and border pixels inspected; final owner review pending."
+}

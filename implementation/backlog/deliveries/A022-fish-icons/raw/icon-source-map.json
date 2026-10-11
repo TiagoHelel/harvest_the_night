@@ -1,0 +1,18 @@
+{
+  "carp": "raw/carp-master-c2-r1.png",
+  "bream": "raw/bream-r1.png",
+  "catfish": "raw/catfish-r1.png",
+  "dorado": "raw/dorado-r1.png",
+  "eel": "raw/eel-r1.png",
+  "perch": "raw/perch-r1.png",
+  "pike": "raw/pike-r1.png",
+  "salmon": "raw/salmon-r1.png",
+  "sturgeon": "raw/sturgeon-r1.png",
+  "sunfish": "raw/sunfish-r1.png",
+  "tilapia": "raw/tilapia-r1.png",
+  "trout": "raw/trout-r1.png",
+  "old_catfish": "raw/old_catfish-r1.png",
+  "golden_queen": "raw/golden_queen-r1.png",
+  "ghost_pike": "raw/ghost_pike-r2.png",
+  "ice_sturgeon": "raw/ice_sturgeon-r1.png"
+}

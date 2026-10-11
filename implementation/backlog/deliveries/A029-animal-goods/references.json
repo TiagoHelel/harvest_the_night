@@ -1,0 +1,127 @@
+[
+  {
+    "path": "assets/art_source/ui/wood.png",
+    "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "docs/reference-sheet.png",
+    "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/panel.png",
+    "sha256": "0c7d37fe6f4c333a048959f0d5b4b6867cce201d270f260ec78f367d082a1863",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/button_normal.png",
+    "sha256": "86afdc394f1706e5d09cd56dbe3b26ee581b18992cce2832924c4b3e5ad6b160",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/terrain/grass.png",
+    "sha256": "4d1d187493ab8275082ea8aed39ab884e50384b9bb35cc750276ffbd3b54fc3e",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+    "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/icon_meat.png",
+    "sha256": "9dca3e036de6964a7f0ab052fb995f0a787fec31316ec9a3e69e77da54d5f23b",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/hud_meat.png",
+    "sha256": "aaff5df261ee3e16f37bc74780c3dc9a92e927861bd8c91fa24817799a0981bd",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/icon_food.png",
+    "sha256": "d0243226b87ef637b1981a2d9e987182b81272610397e6808a05d86a78cf4afb",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/hud_food.png",
+    "sha256": "9d7fb69365cbbe0dae4d9f1c82539c9f1fd4b0c99fab556fa13a4b6fe4073067",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/icon_wood.png",
+    "sha256": "6d0275b93c12105ae00a148ca6f27aaf586a985cb4897bba84ef6ec2b89d9148",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/hud_wood.png",
+    "sha256": "fc1bf6a471078c71e0b99e7a79be2e24f9a888cd541f6914304bdd6124080540",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/icon_stone.png",
+    "sha256": "0aef918775dab9c27284725d28a507c50e0d3788dca6deadc9eea410037d254e",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/hud_stone.png",
+    "sha256": "69678215024f2f74a275dda79fed76277da5a5d35fe77ba6e7f62d60fe239bcc",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/icon_gunpowder.png",
+    "sha256": "2d845f087c16c5d93865d01d371406fde74b800ce2c7a588255327f6554ac63d",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/ui/hud_gunpowder.png",
+    "sha256": "b53006783e93480773e16853c039544b82a0b3162fcd1b6581c38ba6b5540dfb",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/props/rock.png",
+    "sha256": "2e9d0c2f94fae2594180778c6ab9c97802a2451efc713dd7d97cb1c85a0f3bf4",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/props/stump.png",
+    "sha256": "93d4e1ba9fe3de4d84be3bf6313fc724d0c9e6fe852628c603fa23c6c31f9455",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/props/cow.png",
+    "sha256": "f6a2990f7b7d9f95acbf0927eae35fcb451b50b2c92c439a339e498b4f663374",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/props/chicken.png",
+    "sha256": "54ca6dc6b42be5bfdbb195f2c47d78bf2c4ef6d6722788fbf4ae02355b4480e8",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/buildings/mine.png",
+    "sha256": "b9fa9c7cacd19ec0afb921ff40630cf4b8924e56ad28cb9bd6e758f8fdddff27",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/crops/tilled.png",
+    "sha256": "6ebcb96545a85493925d913004de5539037b3592d192d9dc609d9686127779af",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "sprites/terrain/grass_b.png",
+    "sha256": "e65b863607c80fc98446bfd54f5db7879dc2c22284c3b01f96a8343ea038d4cd",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "assets/art_source/ui/meat.png",
+    "sha256": "de5ca07076fbac90816872d658b56342f23773faaa5b5cb1e3ec3cb0d8d92e7d",
+    "role": "Existing approved style, identity, material or scale reference"
+  },
+  {
+    "path": "assets/art_source/props/rock.png",
+    "sha256": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+    "role": "Existing approved style, identity, material or scale reference"
+  }
+]

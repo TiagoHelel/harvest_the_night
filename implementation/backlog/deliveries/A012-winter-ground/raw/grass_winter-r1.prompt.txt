@@ -1,0 +1,32 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: grass_winter static master.
+Input images: Roles are specified in the detailed request below; never copy style-sheet scenes or lettering.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x16 pixels with contact pivot 8,16; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: fully opaque edge-to-edge snow terrain. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+
+ONE seamless winter snow grass tile, master grass_winter. Entire square edge-to-edge opaque. A calm warm-ivory bone snow field, at least232of256native pixels same base colour, one soft joined pale-blue or beige drift cluster in the interior only. Every non-base cluster at least2pixels, no isolated dots. Uniform base on all four borders; row0equals15 and column0equals15. Keep borders and quiet texture density of attached summer tile. No tufts yet: variants add them later. Native16x16, pivot8,16. Soft warm snow, NO glitter, glare, footprints, ice, objects, centrepiece or ground shadow.
+Create one fully opaque tileable material for winter snow grass, designed for 16x16 native tiles. Low contrast beneath characters, grouped
+surface texture, no obvious centerpiece. Grass uses occasional small clusters
+with calm open areas, not a dot in every few pixels. Rock is irregular layered
+stone, not brickwork. Wood planks align to the approved jetty/floor orientation.
+Make opposite borders seamless. Variants must share boundary colors and density.
+No scene objects, shadows, borders, perspective block or transparency.
+
+Image1 summer grass raw is the EXACT edit target: change season to winter, keep whole square framing, border topology and quiet density. Image2 reference sheet is style only. Flat square pixels, neutral upper-left light, no gradients, blur or labels. Return a square opaque tile.

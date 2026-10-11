@@ -1,0 +1,20 @@
+{
+  "pack": "A029",
+  "date": "2026-10-10",
+  "status": "approved for integration",
+  "owner_words": "aprovado",
+  "approved_folder": "implementation/backlog/deliveries/A029-animal-goods",
+  "approved_sha256": {
+    "native/hud_egg/none/01.png": "a2dd0da085d61b5f14a6fa716e0a413f89f15c716a652439b974d674f678da95",
+    "native/hud_milk/none/01.png": "e175bf92ad47026ceedeecd4a57ebd936a8f73e088ec8c23743f8e374a3bc22c",
+    "native/hud_truffle/none/01.png": "25515a59f69a2a998fa1546b3c4662cdc3f4fdc09969110522dc507eee0e388e",
+    "native/hud_wool/none/01.png": "c8faef7aec79d364c8466d4cb5993bd65118343a05f66d75b67e774596aaf76d",
+    "native/icon_egg/none/01.png": "1ad104433a49520da3cafd751078e9dc38176c2f3907b3b2bf7cdf72f33d82be",
+    "native/icon_milk/none/01.png": "856da6e6f58e3c658bb35788a1849127755fec286f2a8c3f2c43876b637273fd",
+    "native/icon_truffle/none/01.png": "f80c79503713c4f845aa06fae171d984fc3fd76f115cf7b13e511cf3f8dffc10",
+    "native/icon_wool/none/01.png": "870cbfe3f969e27e2293412ceb322adc13412fc05f181a258bb5bb37284233bb",
+    "native/truffle_spot/none/01.png": "34b8badf1aedb079f84880d83406cf99a7b244e4f0e966e93a424fcec1f2e3c3"
+  },
+  "frames": 9,
+  "runtime_integrated": false
+}

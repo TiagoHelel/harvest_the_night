@@ -1,0 +1,23 @@
+{
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: A016 one melon produce icon.\nInput images: Image1: approved inventory icon style/density reference\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,8; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background, isolated objects only. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nICON: one whole striped GREEN WATERMELON with one wedge cut out, showing RED flesh. ONE object only. Inventory16x16 andHUD10x10 are two downstream cuts from this same source. Nativevisible at most14pixels and8pixels respectively, clear1pixel margin. Coarse readable flatpixel planes, upper-leftdaylight, coloredoutline. No groundshadow, halo, glow, UIpanel, labels, words, numbers or otherobjects. True transparent margins allround.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\corn.png"
+    ],
+    "transparent_background": true
+  },
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A016-summer-crops\\raw\\icon_melon-r1.png",
+  "date": "2026-10-10",
+  "decision": "accepted for owner review; numeric checks recorded separately",
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\corn.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "ad82d6e923e07d1d013d8f04dcb83c1428b50f71b6939033cd0fd83e5538ca84"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-3d86c51b-c280-4796-8efa-1eb3a1c13463.png",
+  "revision": 1,
+  "sha256": "38aecfe0c021f5c1e0d158cd9baa7915d595f0b3de81eb33e07edae2dd5dfb74",
+  "tool": "image_gen.imagegen"
+}

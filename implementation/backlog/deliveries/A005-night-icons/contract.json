@@ -1,0 +1,2406 @@
+{
+  "pack": "A005",
+  "slug": "A005-night-icons",
+  "title": "Night hotbar and HUD icons",
+  "date": "2026-10-07",
+  "status": "approved for integration",
+  "runtime_integrated": false,
+  "palette_mode": "A",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "colour_ramp": [],
+  "alpha_threshold": 128,
+  "tool": "built-in ImageGen",
+  "references": [
+    {
+      "path": "assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_wood.png",
+      "sha256": "6d0275b93c12105ae00a148ca6f27aaf586a985cb4897bba84ef6ec2b89d9148",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_wood.png",
+      "sha256": "fc1bf6a471078c71e0b99e7a79be2e24f9a888cd541f6914304bdd6124080540",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_iron.png",
+      "sha256": "cc8315903bb141470e6f26dc65cbd19287823fb42f945cfd8bdd0f05fc890ef6",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_iron.png",
+      "sha256": "6c505a65227e474d97624412188021eb0a8d977e1b88939ed5d8541689ec6edc",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_incendiary.png",
+      "sha256": "5c51a4aa471e471d9f524dd76b9a683fd5646f7062fb98d7a51c11038224ff52",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_incendiary.png",
+      "sha256": "101c12fa6c18c5d4bd0f2b56449b41c8f91a6b08e1296b8f80ce7562d9074067",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_money.png",
+      "sha256": "e1131306f92cc6a2de702395d1aec2d517a9eab39223f540be603198c793979e",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_money.png",
+      "sha256": "13a5ff774d41199fb21607aa4838cfc5571d8adf644749e64ac641746b2bfb97",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "assets/art_source/defences/gun_tower/master.png",
+      "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/buildings/gun_tower.png",
+      "sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "assets/art_source/defences/auto_crossbow/master.png",
+      "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow.png",
+      "sha256": "431d1b53e11b54d99dc6663cb8399fec7b5ce08863b45594a247f5e6611c6b20",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "assets/art_source/defences/flame_tower/master.png",
+      "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/buildings/flame_tower.png",
+      "sha256": "47ae4a5ac86fbd32ba922f11c930c5f73d850a40bb65e9e57e4e38d5ffc2b933",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "assets/art_source/defences/mortar/master.png",
+      "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/buildings/mortar.png",
+      "sha256": "be87c0ec7487b14ade3c06ca9be29946030c87f00040bb42b912b16860d4ea18",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "assets/art_source/defences/mine/master.png",
+      "sha256": "873a3f1d5fc3aced6dc8721ba754ec0f3aa7426fa59c56dfa6e08e5810223486",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/buildings/mine.png",
+      "sha256": "b9fa9c7cacd19ec0afb921ff40630cf4b8924e56ad28cb9bd6e758f8fdddff27",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "assets/art_source/defences/fence/whole.png",
+      "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/buildings/fence_join_10.png",
+      "sha256": "1a1832401fa01aed66fd795b5c75fccd9139f4999e42c8a23358bce6662e161e",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "assets/art_source/defences/wall/whole.png",
+      "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/buildings/wall_join_10.png",
+      "sha256": "6dac5663faf1ca9c197cb4d91b6ee8dd44d8a255feb0b9ba662bb80c8fbf3586",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "assets/art_source/defences/barricade/master.png",
+      "sha256": "9b905960bd0854d51506479011b6e85c18c89816d00a4343053882c77f92ac4f",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/buildings/barricade.png",
+      "sha256": "e99ee6cb46d0f0ac182a1eace7703c5f04e0d8fd25f44dc8901261707b0a8839",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/effects/flare_1.png",
+      "sha256": "63a75020f3b3559a45820ebe35c2de797c3d2d069032dcb8ce8048feb9d05365",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/ui/panel.png",
+      "sha256": "0c7d37fe6f4c333a048959f0d5b4b6867cce201d270f260ec78f367d082a1863",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "sprites/ui/button_normal.png",
+      "sha256": "86afdc394f1706e5d09cd56dbe3b26ee581b18992cce2832924c4b3e5ad6b160",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "Existing UI style or defence identity / scale reference"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A005-night-icons/raw/mortar-r1.png",
+      "sha256": "c1219ba9ea2444981121dabf535353194c7b23051f8b3f6732bd967526501137",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A005-night-icons/preview/input-history/flame_tower-r1-4a2050513f.png",
+      "sha256": "4a2050513f9edc83b8f71cb1380e4c94002b2d4a224b8f751153a599fcc52f67",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A005-night-icons/preview/input-history/gun_tower-r1-3575430f5e.png",
+      "sha256": "3575430f5e775f30ea056d163971aa761f2e7e889aa71528297f821514b4badb",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "animations": [
+    {
+      "anim": "icon_gun_tower",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static gun_tower icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_gun_tower",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static gun_tower icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_mortar",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static mortar icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_mortar",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static mortar icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_mine",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static mine icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_mine",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static mine icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_fence",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static fence icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_fence",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static fence icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_wall",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static wall icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_wall",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static wall icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_barricade",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static barricade icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_barricade",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static barricade icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_flare",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static flare icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_flare",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static flare icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_start",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static start icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_start",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static start icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_speed",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static speed icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_speed",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static speed icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_dawn_moon",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static dawn_moon icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_dawn_moon",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static dawn_moon icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_flame_tower",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static flame_tower icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_flame_tower",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static flame_tower icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "icon_auto_crossbow",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static auto_crossbow icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "hud_auto_crossbow",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static auto_crossbow icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    }
+  ],
+  "mirror_pairs": {},
+  "files": [
+    {
+      "output": "native/icon_gun_tower/none/01.png",
+      "sha256": "33694780a0ead9ac95c8a4f6e650df9f842b9d3cb67574b07548345599b1723a",
+      "runtime_name": "sprites/ui/icon_gun_tower.png",
+      "anim": "icon_gun_tower",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/gun_tower-r2.png",
+      "source_sha256": "23cc5f7567d1eda2969b6e08fe8c7282964f9e50e94a2060331b26e0cbe1d4e0",
+      "prompt": "raw/gun_tower-r2.prompt.txt",
+      "prompt_sha256": "68910e063e818acbf8ba3f6ce61888e5a0179fa5b807bd274cfaafceb21585f7",
+      "call": "raw/gun_tower-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          229,
+          391,
+          865,
+          573
+        ],
+        "content_scale": 0.016184971098265895,
+        "content_anchor_xy": [
+          7,
+          4
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_gun_tower/none/01.png",
+      "sha256": "221132a39af1850c185d5e00b578f6d2841309c024f652a5474176e19523e57c",
+      "runtime_name": "sprites/ui/hud_gun_tower.png",
+      "anim": "hud_gun_tower",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/gun_tower-r2.png",
+      "source_sha256": "23cc5f7567d1eda2969b6e08fe8c7282964f9e50e94a2060331b26e0cbe1d4e0",
+      "prompt": "raw/gun_tower-r2.prompt.txt",
+      "prompt_sha256": "68910e063e818acbf8ba3f6ce61888e5a0179fa5b807bd274cfaafceb21585f7",
+      "call": "raw/gun_tower-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          229,
+          391,
+          865,
+          573
+        ],
+        "content_scale": 0.009248554913294798,
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_mortar/none/01.png",
+      "sha256": "4b1f3d8d20596477e9bd1c66f8150777cdd46116acda177e7d408a4d5318623e",
+      "runtime_name": "sprites/ui/icon_mortar.png",
+      "anim": "icon_mortar",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/mortar-r1.png",
+      "source_sha256": "c1219ba9ea2444981121dabf535353194c7b23051f8b3f6732bd967526501137",
+      "prompt": "raw/mortar-r1.prompt.txt",
+      "prompt_sha256": "da36564937dba2cb347e521d4e3072672999b83e0b7f9c1613e863b9ba79e617",
+      "call": "raw/mortar-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          263,
+          316,
+          754,
+          788
+        ],
+        "content_scale": 0.017766497461928935,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_mortar/none/01.png",
+      "sha256": "b179bd587676fcfc247f49b33776679e38e2247d824016787bc58977e265479c",
+      "runtime_name": "sprites/ui/hud_mortar.png",
+      "anim": "hud_mortar",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/mortar-r1.png",
+      "source_sha256": "c1219ba9ea2444981121dabf535353194c7b23051f8b3f6732bd967526501137",
+      "prompt": "raw/mortar-r1.prompt.txt",
+      "prompt_sha256": "da36564937dba2cb347e521d4e3072672999b83e0b7f9c1613e863b9ba79e617",
+      "call": "raw/mortar-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          263,
+          316,
+          754,
+          788
+        ],
+        "content_scale": 0.01015228426395939,
+        "content_anchor_xy": [
+          4,
+          4
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_mine/none/01.png",
+      "sha256": "71b7edcec49261e5fd1261c0e17096cb222d83153c99d0e8a7b6a4a62444721e",
+      "runtime_name": "sprites/ui/icon_mine.png",
+      "anim": "icon_mine",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/mine-r1.png",
+      "source_sha256": "2a8fb3277b3fc5f82af31260a801924d8e59f6b9b5e1dad6daa812a996430a95",
+      "prompt": "raw/mine-r1.prompt.txt",
+      "prompt_sha256": "4beb7cfc63a1ce5c3bd3e2382041b99d9495effc53e171e4264c934d543b8db1",
+      "call": "raw/mine-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          322,
+          426,
+          610,
+          487
+        ],
+        "content_scale": 0.022950819672131147,
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_mine/none/01.png",
+      "sha256": "fccebc7af10e0dbf3ef302581b5a43f7f2d9a10008617cd2fe8c38e734f1508d",
+      "runtime_name": "sprites/ui/hud_mine.png",
+      "anim": "hud_mine",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/mine-r1.png",
+      "source_sha256": "2a8fb3277b3fc5f82af31260a801924d8e59f6b9b5e1dad6daa812a996430a95",
+      "prompt": "raw/mine-r1.prompt.txt",
+      "prompt_sha256": "4beb7cfc63a1ce5c3bd3e2382041b99d9495effc53e171e4264c934d543b8db1",
+      "call": "raw/mine-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          322,
+          426,
+          610,
+          487
+        ],
+        "content_scale": 0.013114754098360656,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_fence/none/01.png",
+      "sha256": "712ceb5c61561175a9d4f43085c49bc4e72be1849a231f1c366d80ae1fe517b8",
+      "runtime_name": "sprites/ui/icon_fence.png",
+      "anim": "icon_fence",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/fence-r1.png",
+      "source_sha256": "1c976866224d7657777fa93678c77b8f33cc1bc344793c0ea959186ef80aa3fe",
+      "prompt": "raw/fence-r1.prompt.txt",
+      "prompt_sha256": "61f81efd4bc32974ec59d2c983d26fe1bd8e75987b24967e6c1b70d4bd4a40d0",
+      "call": "raw/fence-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          327,
+          454,
+          604,
+          514
+        ],
+        "content_scale": 0.023178807947019868,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_fence/none/01.png",
+      "sha256": "d54d855f681dfe79310760c669ad1eca1f60b01b02177974bda480b3d3f735df",
+      "runtime_name": "sprites/ui/hud_fence.png",
+      "anim": "hud_fence",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/fence-r1.png",
+      "source_sha256": "1c976866224d7657777fa93678c77b8f33cc1bc344793c0ea959186ef80aa3fe",
+      "prompt": "raw/fence-r1.prompt.txt",
+      "prompt_sha256": "61f81efd4bc32974ec59d2c983d26fe1bd8e75987b24967e6c1b70d4bd4a40d0",
+      "call": "raw/fence-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          327,
+          454,
+          604,
+          514
+        ],
+        "content_scale": 0.013245033112582781,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_wall/none/01.png",
+      "sha256": "d5cc9eb04bdeebe91d7d08b0489f222e80125e6600214b20c8caf4695e85e5a2",
+      "runtime_name": "sprites/ui/icon_wall.png",
+      "anim": "icon_wall",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/wall-r1.png",
+      "source_sha256": "662f925b48db04f0162d1a5322abbc17facb6ed9543484511ec955c51b2e5729",
+      "prompt": "raw/wall-r1.prompt.txt",
+      "prompt_sha256": "0e96129e36fdc595413e00929f977118419608c4cce12486f90fcc09fe4a648d",
+      "call": "raw/wall-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          318,
+          391,
+          657,
+          572
+        ],
+        "content_scale": 0.0213089802130898,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_wall/none/01.png",
+      "sha256": "196c2afc36071f684f46e0cbd59a6e138facc9de3357bbabffa530048b113356",
+      "runtime_name": "sprites/ui/hud_wall.png",
+      "anim": "hud_wall",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/wall-r1.png",
+      "source_sha256": "662f925b48db04f0162d1a5322abbc17facb6ed9543484511ec955c51b2e5729",
+      "prompt": "raw/wall-r1.prompt.txt",
+      "prompt_sha256": "0e96129e36fdc595413e00929f977118419608c4cce12486f90fcc09fe4a648d",
+      "call": "raw/wall-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          318,
+          391,
+          657,
+          572
+        ],
+        "content_scale": 0.0121765601217656,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_barricade/none/01.png",
+      "sha256": "3d95abf59de6c36380b06eb745611f53642cbea70a60537b8bf9a412a1c39565",
+      "runtime_name": "sprites/ui/icon_barricade.png",
+      "anim": "icon_barricade",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/barricade-r1.png",
+      "source_sha256": "736a254b96dc1410912766ab26d64fc51667a090130f533986bf587f76f64a27",
+      "prompt": "raw/barricade-r1.prompt.txt",
+      "prompt_sha256": "1f6bce7dadd5452c1084eb6b5031dd489ead0587ccfb51b9ff69226b68f8eab8",
+      "call": "raw/barricade-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          188,
+          321,
+          986,
+          731
+        ],
+        "content_scale": 0.014198782961460446,
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_barricade/none/01.png",
+      "sha256": "4b59beddecedf7b1d16f43e7eff82116087e3008ac0dab826818cfbe7434442d",
+      "runtime_name": "sprites/ui/hud_barricade.png",
+      "anim": "hud_barricade",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/barricade-r1.png",
+      "source_sha256": "736a254b96dc1410912766ab26d64fc51667a090130f533986bf587f76f64a27",
+      "prompt": "raw/barricade-r1.prompt.txt",
+      "prompt_sha256": "1f6bce7dadd5452c1084eb6b5031dd489ead0587ccfb51b9ff69226b68f8eab8",
+      "call": "raw/barricade-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          188,
+          321,
+          986,
+          731
+        ],
+        "content_scale": 0.008113590263691683,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_flare/none/01.png",
+      "sha256": "fd292608c080425b1a00689cc58b823e6fe87c4142e134db0f5945ce1b1ed8e6",
+      "runtime_name": "sprites/ui/icon_flare.png",
+      "anim": "icon_flare",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/flare-r1.png",
+      "source_sha256": "cada43ef7a8c0695297812a9e18678171028ecaf0d08805eb79442850182b7c2",
+      "prompt": "raw/flare-r1.prompt.txt",
+      "prompt_sha256": "ab4d71578494bcc31263832e47ed9368439b613f5d82c8b944d0300ce6eeeadd",
+      "call": "raw/flare-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          330,
+          257,
+          717,
+          753
+        ],
+        "content_scale": 0.01859229747675963,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_flare/none/01.png",
+      "sha256": "077a2824a7edbf0039d9f224f8e02a89fc47ad2faefa28e141c110e7856a3ce2",
+      "runtime_name": "sprites/ui/hud_flare.png",
+      "anim": "hud_flare",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/flare-r1.png",
+      "source_sha256": "cada43ef7a8c0695297812a9e18678171028ecaf0d08805eb79442850182b7c2",
+      "prompt": "raw/flare-r1.prompt.txt",
+      "prompt_sha256": "ab4d71578494bcc31263832e47ed9368439b613f5d82c8b944d0300ce6eeeadd",
+      "call": "raw/flare-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          330,
+          257,
+          717,
+          753
+        ],
+        "content_scale": 0.010624169986719787,
+        "content_anchor_xy": [
+          4,
+          4
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_start/none/01.png",
+      "sha256": "14a3e48152d8cfd2ab6afe426d0ebb7b376cdf681c641669ebb7b2ffa8000154",
+      "runtime_name": "sprites/ui/icon_start.png",
+      "anim": "icon_start",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/start-r1.png",
+      "source_sha256": "da12492626cf2ecc2f295821c50ae28cd4451519db26957fd1080a9a5dc1a77f",
+      "prompt": "raw/start-r1.prompt.txt",
+      "prompt_sha256": "58a43625d3e3f432139c1f01834b8dcc8086e9ee94a24d084254862cba4dcecb",
+      "call": "raw/start-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          169,
+          364,
+          970,
+          603
+        ],
+        "content_scale": 0.01443298969072165,
+        "content_anchor_xy": [
+          7,
+          4
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_start/none/01.png",
+      "sha256": "80d01ac7b4a83a1320d993bec3ecc5a8409374111867e5d00b942aca7079aa7d",
+      "runtime_name": "sprites/ui/hud_start.png",
+      "anim": "hud_start",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/start-r1.png",
+      "source_sha256": "da12492626cf2ecc2f295821c50ae28cd4451519db26957fd1080a9a5dc1a77f",
+      "prompt": "raw/start-r1.prompt.txt",
+      "prompt_sha256": "58a43625d3e3f432139c1f01834b8dcc8086e9ee94a24d084254862cba4dcecb",
+      "call": "raw/start-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          169,
+          364,
+          970,
+          603
+        ],
+        "content_scale": 0.008247422680412371,
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_speed/none/01.png",
+      "sha256": "61ccae69b690a2cc3c9adb8118746398496b2df3c898fed406cdea07bcf77473",
+      "runtime_name": "sprites/ui/icon_speed.png",
+      "anim": "icon_speed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/speed-r1.png",
+      "source_sha256": "562851837af66c45f3a060244d06dacc49eccd27c39c8902ae081bcc5fd53976",
+      "prompt": "raw/speed-r1.prompt.txt",
+      "prompt_sha256": "35c5b3126266911a9b7e8e8297c77a53b75c6f5e0ac92b83c5a15e81f0265299",
+      "call": "raw/speed-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          361,
+          422,
+          526,
+          404
+        ],
+        "content_scale": 0.026615969581749048,
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_speed/none/01.png",
+      "sha256": "faae5a2ed021e8dd3237daae5025e3d983c9ba752933aee79f114eef65a0a235",
+      "runtime_name": "sprites/ui/hud_speed.png",
+      "anim": "hud_speed",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/speed-r1.png",
+      "source_sha256": "562851837af66c45f3a060244d06dacc49eccd27c39c8902ae081bcc5fd53976",
+      "prompt": "raw/speed-r1.prompt.txt",
+      "prompt_sha256": "35c5b3126266911a9b7e8e8297c77a53b75c6f5e0ac92b83c5a15e81f0265299",
+      "call": "raw/speed-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          361,
+          422,
+          526,
+          404
+        ],
+        "content_scale": 0.015209125475285171,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_dawn_moon/none/01.png",
+      "sha256": "166837d89305fd65d81766f48083aa54e2f6c88a50de33ccb15553be1187f66c",
+      "runtime_name": "sprites/ui/icon_dawn_moon.png",
+      "anim": "icon_dawn_moon",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/dawn_moon-r1.png",
+      "source_sha256": "b762bf3052ffdaf5fdbc152d4d5cd1357d9727074ec8ffe16e8c02c3cbc2b16c",
+      "prompt": "raw/dawn_moon-r1.prompt.txt",
+      "prompt_sha256": "7cbb6596120786aec09a9b00dcb3577fa77777ce23129f40c75d450be114b89d",
+      "call": "raw/dawn_moon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          344,
+          478,
+          568,
+          289
+        ],
+        "content_scale": 0.02464788732394366,
+        "content_anchor_xy": [
+          7,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "bone",
+          "bone_dark",
+          "stone_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_dawn_moon/none/01.png",
+      "sha256": "a93a7494845fc655fde63ee07c42a2ed8163f58c33617a3695b823ac148c2dc8",
+      "runtime_name": "sprites/ui/hud_dawn_moon.png",
+      "anim": "hud_dawn_moon",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/dawn_moon-r1.png",
+      "source_sha256": "b762bf3052ffdaf5fdbc152d4d5cd1357d9727074ec8ffe16e8c02c3cbc2b16c",
+      "prompt": "raw/dawn_moon-r1.prompt.txt",
+      "prompt_sha256": "7cbb6596120786aec09a9b00dcb3577fa77777ce23129f40c75d450be114b89d",
+      "call": "raw/dawn_moon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          344,
+          478,
+          568,
+          289
+        ],
+        "content_scale": 0.014084507042253521,
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "bone",
+          "bone_dark",
+          "stone_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_flame_tower/none/01.png",
+      "sha256": "944ec8968a338e73adc42330aa80ad7620480e4d357c972411c8b8ce85e71093",
+      "runtime_name": "sprites/ui/icon_flame_tower.png",
+      "anim": "icon_flame_tower",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/flame_tower-r2.png",
+      "source_sha256": "936aec59111ed671b5b257ee656acb409828f5bd5f572023bcda4c95d59a8605",
+      "prompt": "raw/flame_tower-r2.prompt.txt",
+      "prompt_sha256": "a649f9e3d324d53ca6f1847690c6181a0fa1cbdcc9e55cae7311fa44cab50132",
+      "call": "raw/flame_tower-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          406,
+          247,
+          820,
+          627
+        ],
+        "content_scale": 0.01707317073170732,
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_flame_tower/none/01.png",
+      "sha256": "6599ed6926da422f571b6ca969967db19f022ce7312e762e77a4c06e674ecb70",
+      "runtime_name": "sprites/ui/hud_flame_tower.png",
+      "anim": "hud_flame_tower",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/flame_tower-r2.png",
+      "source_sha256": "936aec59111ed671b5b257ee656acb409828f5bd5f572023bcda4c95d59a8605",
+      "prompt": "raw/flame_tower-r2.prompt.txt",
+      "prompt_sha256": "a649f9e3d324d53ca6f1847690c6181a0fa1cbdcc9e55cae7311fa44cab50132",
+      "call": "raw/flame_tower-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          406,
+          247,
+          820,
+          627
+        ],
+        "content_scale": 0.00975609756097561,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/icon_auto_crossbow/none/01.png",
+      "sha256": "357339738915129f798b729d7e46d3471b62899bebc75f20da37bba6b0cd91c8",
+      "runtime_name": "sprites/ui/icon_auto_crossbow.png",
+      "anim": "icon_auto_crossbow",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/auto_crossbow-r3.png",
+      "source_sha256": "7a21222b69f09e4783a3aacc4a49e90f4fc966088e3672f8f555ce6df5df2307",
+      "prompt": "raw/auto_crossbow-r3.prompt.txt",
+      "prompt_sha256": "8a4b0bcb735c1fff7b36979e88eaa73335474eefb5ec952c0e83724703dd3ea1",
+      "call": "raw/auto_crossbow-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          379,
+          376,
+          566,
+          504
+        ],
+        "content_scale": 0.024734982332155476,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/hud_auto_crossbow/none/01.png",
+      "sha256": "e8996e15a30876c6e179a9758ae8eb81d53d49d761686d457aecf6cebd5be72f",
+      "runtime_name": "sprites/ui/hud_auto_crossbow.png",
+      "anim": "hud_auto_crossbow",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/auto_crossbow-r3.png",
+      "source_sha256": "7a21222b69f09e4783a3aacc4a49e90f4fc966088e3672f8f555ce6df5df2307",
+      "prompt": "raw/auto_crossbow-r3.prompt.txt",
+      "prompt_sha256": "8a4b0bcb735c1fff7b36979e88eaa73335474eefb5ec952c0e83724703dd3ea1",
+      "call": "raw/auto_crossbow-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          379,
+          376,
+          566,
+          504
+        ],
+        "content_scale": 0.014134275618374558,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "cloth_light",
+          "flame",
+          "flame_hot",
+          "gold",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf",
+          "leaf_dark",
+          "leaf_light",
+          "moon",
+          "night",
+          "night_light",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "water",
+          "water_dark",
+          "water_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "exemptions": {
+    "grounded_on_pivot": "UI icons are centred on their visual pivot; no ground contact.",
+    "points_on_opaque": "No gameplay points required for static icons."
+  },
+  "final_approval_pending": false,
+  "approval": "APPROVAL.json"
+}

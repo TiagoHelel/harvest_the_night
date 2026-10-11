@@ -1,0 +1,31 @@
+{
+  "id": "corner",
+  "source": "implementation\\backlog\\deliveries\\A014-crop-ground\\raw\\tilled_edge_corner_nw-r1.png",
+  "crop_xywh": [
+    0,
+    0,
+    671,
+    671
+  ],
+  "content_scale": 0.02384500745156483,
+  "content_anchor_xy": [
+    8,
+    16
+  ],
+  "canvas_wh": [
+    16,
+    16
+  ],
+  "pivot_xy": [
+    8,
+    16
+  ],
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": [
+    "grass_dark",
+    "grass",
+    "grass_light",
+    "soil_dark"
+  ],
+  "alpha_threshold": 128
+}

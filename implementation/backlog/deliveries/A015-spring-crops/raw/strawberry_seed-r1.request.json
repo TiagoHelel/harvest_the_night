@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: precise-object-edit. Asset type: HARVEST THE NIGHT A015 spring seed packet, inventory icon. Image1: accepted carrot seed packet IDENTITY MASTER and EDIT TARGET. Change ONLY the picture printed on the front: replace the carrot illustration with one red strawberry with a green crown. Preserve ALL paper, folded green spring band, dark outline, highlights, image canvas1254x1254, object position and broad rectangle silhouette. Keep identical crop bounds x320,y300,width615,height716 so it reduces with the same two source scales as the master. Do not narrow, tilt, reshape, move or enlarge the packet. No visible side panel. Same front-view paper and coarse pixel clusters, upper-left neutral daylight. The new produce picture occupies the same region as the carrot: about half the front, readable at14px and8px heights. Match the species shape of the approved produce icon. No words, numbers, logos, glow, groundshadow, scene or otherobjects. TRUE transparent background. No transparencycheckerboard. Preserve unchanged pixels outside the printed produce picture.\nImage2: approved species produce icon, visual identity reference for the replacement illustration only.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\icon_strawberry-r1.png"
+  ]
+}

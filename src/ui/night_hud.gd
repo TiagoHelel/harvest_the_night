@@ -23,6 +23,10 @@ extends Control
 ## - **The hotbar, bottom** (task 0133, its own node).
 ## - **The bar, bottom right:** START across it in the build step; the flare
 ##   with its charge, the speed and SKIP during the waves.
+## - **A005's 10x10 pictures** (task 0147): START's horn, the flare and the
+##   speed's chevrons on their buttons, the setting moon before the time to
+##   dawn, and before the hint's words the defence it names - or the flare,
+##   when it aims one. The HUD is never relit, so they keep their colours.
 ##
 ## ## Why it is its own node
 ##
@@ -66,10 +70,23 @@ const LEFT_AT := Vector2(268, 2)
 ## The bar of controls, bottom right: right of the hotbar, which stops at 326.
 const BAR_AT := Vector2(330, 248)
 const BAR_SIZE := Vector2(146, 18)
-## A third of the bar: the flare, the speed, SKIP.
+## The bar in the waves: the flare, the speed, SKIP. Not thirds since the
+## flare and the speed wear their pictures (task 0147): a picture and the
+## theme's gap take 14 px of a button, so the flare widens for its 29 px of
+## FLARE and the speed narrows round its 17 of `%dx`.
+const FLARE_SIZE := Vector2(54, 16)
+const SPEED_SIZE := Vector2(38, 16)
 const BUTTON_SIZE := Vector2(46, 16)
 ## START has the bar to itself in the build step.
 const START_SIZE := Vector2(146, 16)
+
+## The night bar's own pictures (A005, task 0147), drawn 10x10: START's horn,
+## the flare, the speed's chevrons and the setting moon of the time to dawn.
+const ICONS: Array = [&"start", &"flare", &"speed", &"dawn_moon"]
+## The setting moon, just left of the countdown.
+const DAWN_MOON_AT := Vector2(348, 3)
+## Between a picture and the words it goes with.
+const PICTURE_GAP := 2.0
 
 ## The house bar's width. 128 since task 0139, from 160, to make room for
 ## the hint; 96 since task 0219, for the essence held beside the house's
@@ -112,6 +129,8 @@ var _house_text: Label
 var _essence_icon: TextureRect
 var _essence: Label
 var _hint: Label
+## The picture of what the hint names (task 0147).
+var _hint_icon: TextureRect
 var _announce: Label
 var _boss_back: ColorRect
 var _boss_fill: ColorRect
@@ -119,6 +138,7 @@ var _boss_name: Label
 var _bar: Control
 var _start: Button
 var _dawn: Label
+var _dawn_moon: TextureRect
 var _flare: Button
 var _speed: Button
 var _skip: Button
@@ -165,6 +185,8 @@ func _ready() -> void:
 	# **The time left to dawn** (task 0137): a countdown and never a wall clock
 	# - after a pass-out a 22:00-06:00 mapping would lie.
 	_dawn = _label("DawnCountdown", Vector2(360, 2), UiKit.WARM)
+	# **And the moon setting before it** (A005, task 0147).
+	_dawn_moon = _picture("DawnMoon", &"hud_dawn_moon", DAWN_MOON_AT)
 
 	# **The house bar, and it is the biggest thing up there.** A number is easy
 	# to miss and this is the one that ends the run.
@@ -204,6 +226,9 @@ func _ready() -> void:
 	_hint.size = HINT_SIZE
 	_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_hint.clip_text = true
+	# **And what it names, by its picture** (A005, task 0147): just left of the
+	# words, which move with the language and the device.
+	_hint_icon = _picture("ModeHintIcon", &"", HINT_AT)
 
 	# **The boss gets a bar of its own.** Nine nights of building are being
 	# tested by one thing, and a number in a corner is not how that should
@@ -249,13 +274,20 @@ func _build_controls() -> void:
 
 	# **No REPAIR here since task 0134**: the guardian's cursor mends whatever
 	# it confirms on. START has the bar in the build step (task 0136); the
-	# flare, the speed and SKIP share it during the waves.
+	# flare, the speed and SKIP share it during the waves. START, the flare
+	# and the speed wear their pictures left of their words (task 0147); the
+	# pack has none for SKIP, which keeps its word alone.
 	_start = _button("StartButton", I18n.t(&"NHUD_START"), Vector2(0, 1),
 		START_SIZE)
+	_start.icon = UiKit.picture(&"hud_start")
 	_start.pressed.connect(_do_start)
-	_flare = _button("FlareButton", I18n.t(&"NHUD_FLARE"), Vector2(0, 1))
+	_flare = _button("FlareButton", I18n.t(&"NHUD_FLARE"), Vector2(0, 1),
+		FLARE_SIZE)
+	_flare.icon = UiKit.picture(&"hud_flare")
 	_flare.pressed.connect(_do_flare)
-	_speed = _button("SpeedButton", I18n.f(&"NHUD_SPEED", [1]), Vector2(50, 1))
+	_speed = _button("SpeedButton", I18n.f(&"NHUD_SPEED", [1]),
+		Vector2(FLARE_SIZE.x + 4.0, 1), SPEED_SIZE)
+	_speed.icon = UiKit.picture(&"hud_speed")
 	_speed.pressed.connect(_do_speed)
 	# **SKIP is a button now** (task 0139), and when the rules refuse it the
 	# reason is its tooltip - on the pointer and on the pad's focus alike.
@@ -309,6 +341,22 @@ func _label(node_name: String, at: Vector2,
 	return label
 
 
+## One of A005's 10x10 pictures (task 0147), drawn at its native size - or an
+## empty box, for `_hint_icon`'s picture to come.
+func _picture(node_name: String, picture: StringName, at: Vector2) -> TextureRect:
+	var image := TextureRect.new()
+	image.name = node_name
+	image.texture = UiKit.picture(picture) if picture != &"" else null
+	image.position = at
+	image.size = Vector2(10, 10)
+	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	image.stretch_mode = TextureRect.STRETCH_KEEP
+	image.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(image)
+	return image
+
+
 # ---------------------------------------------------------------- the frame
 
 func show_state(state: Dictionary) -> void:
@@ -327,7 +375,7 @@ func _process(delta: float) -> void:
 	# **The build step has the strip too** (task 0139): the night ahead, the
 	# house it starts with and what a confirm will do. The wave, the count
 	# and the countdown wait for the waves, and so do their controls.
-	for node in [_wave, _left, _dawn]:
+	for node in [_wave, _left, _dawn, _dawn_moon]:
 		(node as CanvasItem).visible = after_dark
 	_start.visible = building
 	_flare.visible = after_dark
@@ -457,26 +505,60 @@ func _refresh_house() -> void:
 ## a refusal: the tooltip under the cursor says what and why not.
 func _refresh_hint() -> void:
 	var text := ""
+	var named := &""
 	var actions := get_node_or_null(^"/root/Actions")
 	if cursor != null and cursor.is_active() and actions != null:
 		var cell := cursor.cell()
 		match cursor.look():
 			&"place":
+				named = Building.selected(_state)
 				text = I18n.f(&"NHUD_HINT_PLACE", [_confirm_key(actions),
-					Names.of(Building.selected(_state))])
+					Names.of(named)])
 			&"upgrade":
+				named = _id_at(cell)
 				text = I18n.f(&"NHUD_HINT_UPGRADE", [actions.text_of(&"upgrade"),
 					_name_at(cell)])
 			&"sell":
+				named = _id_at(cell)
 				text = I18n.f(&"NHUD_HINT_SELL", [actions.text_of(&"remove"),
 					_name_at(cell)])
 			&"repair":
+				var mended := GuardianCursor.mend_target(_state, cell)
+				named = _id_at(mended)
 				text = I18n.f(&"NHUD_HINT_REPAIR", [_confirm_key(actions),
-					_name_at(GuardianCursor.mend_target(_state, cell))])
+					_name_at(mended)])
 			&"aim":
+				named = &"flare"
 				text = I18n.f(&"NHUD_HINT_AIM", [_confirm_key(actions)])
 	_hint.text = text
 	_hint.visible = not text.is_empty()
+	_refresh_hint_icon(named)
+
+
+## **The hint's picture** (A005, task 0147): the 10x10 cut of the defence it
+## names - or the flare's, when it aims - just left of the words, which are
+## pushed against the strip's right edge. Nothing for what has no picture.
+func _refresh_hint_icon(named: StringName) -> void:
+	var picture: Texture2D = null
+	if _hint.visible and (GameData.DEFENCES.has(named) or named == &"flare"):
+		picture = UiKit.picture(StringName("hud_%s" % named))
+	_hint_icon.texture = picture
+	_hint_icon.visible = picture != null
+	if picture == null:
+		return
+	_hint_icon.position = Vector2(floorf(hint_words_at())
+		- PICTURE_GAP - _hint_icon.size.x, HINT_AT.y + 1.0)
+
+
+## Where the hint's words begin, in the HUD's pixels: they are pushed against
+## the right edge of its box. For the picture, `input_v1` and the shots.
+func hint_words_at() -> float:
+	var font := _hint.get_theme_font(&"font")
+	var wide := 0.0 if font == null else font.get_string_size(_hint.text,
+		HORIZONTAL_ALIGNMENT_LEFT, -1, _hint.get_theme_font_size(&"font_size")).x
+	var box := _hint.get_theme_stylebox(&"normal")
+	var margin := 0.0 if box == null else box.get_margin(SIDE_RIGHT)
+	return HINT_AT.x + HINT_SIZE.x - margin - wide
 
 
 ## The confirm, for the device in hand: the click on a mouse - the cursor is
@@ -492,6 +574,14 @@ func _name_at(cell: Vector2i) -> String:
 		return ""
 	var on := Farm.occupant(_state, Building.anchor_of(_state, cell))
 	return Names.of(StringName(on.get("id", &"")))
+
+
+## And its id, for its picture: nothing off the farm.
+func _id_at(cell: Vector2i) -> StringName:
+	if not Grid.in_bounds(cell):
+		return &""
+	var on := Farm.occupant(_state, Building.anchor_of(_state, cell))
+	return StringName(on.get("id", &""))
 
 
 ## The boss bar, up only while there is one on the farm.

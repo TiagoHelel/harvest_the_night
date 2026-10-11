@@ -1,0 +1,32 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: lighting-weather. Image1 is the EXACT summer tree.png tree edit target, Image2 accepted autumn family STYLE only. Preserve original full source canvas dimensions, all transparent margins, exact size, position, trunk and roots pixelclusters. Never crop, resize, center or fill canvas. Change only seasonal crown for spring. Recolour only crown to lively leaf/grass green with cream/salmon blossom clusters. Blossoms occupy20-40percent of crown, in broad clustered petals of at least3nativepixels; preserve crownoutline within2nativepixels. No fruit or separate particles. Finalnative40x48 pivot20,44 FIXEDscale0.03700440528634361. Visibleheight38-43rows, rootsole43, centretrunk20+/-1, width<=38. Flat handcraftedpixelclusters, upperleftneutral light. No ground, shadow, lettering, panel, particles or extra objects. True transparentalpha outside tree.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\tree.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\tree.png",
+      "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r3.png",
+      "sha256": "2b065a1d0c9d853591d74cabdebcbeb8db4343272808780369ec2d655b14f1d4",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_autumn-r3-2b065a1d0c.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-bafa05de-c13e-4691-aeb0-7b869961aa8d.png",
+  "copied_raw_path": "raw/tree_spring-r1.png",
+  "raw_sha256": "d2433b51af9e733bb9489696859148064508eed2eb8f62bd05ae2149a03844cf",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tree_spring-r1.png"
+}

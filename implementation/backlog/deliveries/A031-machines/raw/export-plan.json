@@ -1,0 +1,1007 @@
+{
+  "expected_files": 20,
+  "status": "review",
+  "palette_mode": "A",
+  "colour_ramp": [],
+  "files": [
+    {
+      "anim": "keg",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/keg/none/01.png",
+      "runtime_name": "sprites/buildings/keg.png",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "idle",
+      "source": "raw/keg-states-r1.png",
+      "prompt": "raw/keg-states-r1.prompt.txt",
+      "call": "raw/keg-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          35,
+          55,
+          465,
+          589
+        ],
+        "content_scale": 0.06372368516864871,
+        "content_anchor_xy": [
+          15,
+          38
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          28,
+          36
+        ],
+        [
+          30,
+          38
+        ]
+      ]
+    },
+    {
+      "anim": "keg_active",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/keg_active/none/01.png",
+      "runtime_name": "sprites/buildings/keg_active.png",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "active",
+      "source": "raw/keg-states-r1.png",
+      "prompt": "raw/keg-states-r1.prompt.txt",
+      "call": "raw/keg-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          566,
+          55,
+          465,
+          589
+        ],
+        "content_scale": 0.06372368516864871,
+        "content_anchor_xy": [
+          15,
+          38
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          28,
+          36
+        ],
+        [
+          30,
+          38
+        ]
+      ]
+    },
+    {
+      "anim": "keg_hurt",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/keg_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/keg_hurt.png",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "hurt",
+      "source": "raw/keg-states-r1.png",
+      "prompt": "raw/keg-states-r1.prompt.txt",
+      "call": "raw/keg-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1110,
+          55,
+          465,
+          589
+        ],
+        "content_scale": 0.06372368516864871,
+        "content_anchor_xy": [
+          15,
+          38
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          28,
+          36
+        ],
+        [
+          30,
+          38
+        ]
+      ]
+    },
+    {
+      "anim": "keg_wreck",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/keg_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/keg_wreck.png",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "wreck",
+      "source": "raw/keg-states-r1.png",
+      "prompt": "raw/keg-states-r1.prompt.txt",
+      "call": "raw/keg-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1657,
+          55,
+          465,
+          589
+        ],
+        "content_scale": 0.06372368516864871,
+        "content_anchor_xy": [
+          15,
+          38
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          1,
+          48
+        ],
+        [
+          1,
+          56
+        ]
+      ]
+    },
+    {
+      "anim": "preserves_jar",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/preserves_jar/none/01.png",
+      "runtime_name": "sprites/buildings/preserves_jar.png",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "idle",
+      "source": "raw/preserves_jar-states-r1.png",
+      "prompt": "raw/preserves_jar-states-r1.prompt.txt",
+      "call": "raw/preserves_jar-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          47,
+          28,
+          530,
+          662
+        ],
+        "content_scale": 0.059006930161852815,
+        "content_anchor_xy": [
+          15,
+          39
+        ]
+      },
+      "grounded": true,
+      "points": {
+        "light_xy": [
+          21,
+          47
+        ],
+        "smoke_xy": [
+          35,
+          22
+        ]
+      },
+      "visible_limits_wh": [
+        [
+          26,
+          34
+        ],
+        [
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "anim": "preserves_jar_active",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/preserves_jar_active/none/01.png",
+      "runtime_name": "sprites/buildings/preserves_jar_active.png",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "active",
+      "source": "raw/preserves_jar-states-r1.png",
+      "prompt": "raw/preserves_jar-states-r1.prompt.txt",
+      "call": "raw/preserves_jar-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          584,
+          29,
+          530,
+          662
+        ],
+        "content_scale": 0.059006930161852815,
+        "content_anchor_xy": [
+          15,
+          39
+        ]
+      },
+      "grounded": true,
+      "points": {
+        "light_xy": [
+          21,
+          47
+        ],
+        "smoke_xy": [
+          35,
+          22
+        ]
+      },
+      "visible_limits_wh": [
+        [
+          26,
+          34
+        ],
+        [
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "anim": "preserves_jar_hurt",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/preserves_jar_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/preserves_jar_hurt.png",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "hurt",
+      "source": "raw/preserves_jar-states-r1.png",
+      "prompt": "raw/preserves_jar-states-r1.prompt.txt",
+      "call": "raw/preserves_jar-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1118,
+          26,
+          530,
+          662
+        ],
+        "content_scale": 0.059006930161852815,
+        "content_anchor_xy": [
+          15,
+          39
+        ]
+      },
+      "grounded": true,
+      "points": {
+        "light_xy": [
+          21,
+          47
+        ],
+        "smoke_xy": [
+          35,
+          22
+        ]
+      },
+      "visible_limits_wh": [
+        [
+          26,
+          34
+        ],
+        [
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "anim": "preserves_jar_wreck",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/preserves_jar_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/preserves_jar_wreck.png",
+      "canvas_wh": [
+        48,
+        56
+      ],
+      "pivot_xy": [
+        24,
+        52
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "wreck",
+      "source": "raw/preserves_jar-states-r1.png",
+      "prompt": "raw/preserves_jar-states-r1.prompt.txt",
+      "call": "raw/preserves_jar-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1642,
+          27,
+          530,
+          662
+        ],
+        "content_scale": 0.059006930161852815,
+        "content_anchor_xy": [
+          15,
+          39
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          1,
+          48
+        ],
+        [
+          1,
+          56
+        ]
+      ]
+    },
+    {
+      "anim": "dairy",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/dairy/none/01.png",
+      "runtime_name": "sprites/buildings/dairy.png",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "idle",
+      "source": "raw/dairy-states-r1.png",
+      "prompt": "raw/dairy-states-r1.prompt.txt",
+      "call": "raw/dairy-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          12,
+          108,
+          530,
+          475
+        ],
+        "content_scale": 0.0994826923076923,
+        "content_anchor_xy": [
+          26,
+          47
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "dairy_active",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/dairy_active/none/01.png",
+      "runtime_name": "sprites/buildings/dairy_active.png",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "active",
+      "source": "raw/dairy-states-r1.png",
+      "prompt": "raw/dairy-states-r1.prompt.txt",
+      "call": "raw/dairy-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          548,
+          108,
+          530,
+          475
+        ],
+        "content_scale": 0.0994826923076923,
+        "content_anchor_xy": [
+          26,
+          47
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "dairy_hurt",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/dairy_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/dairy_hurt.png",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "hurt",
+      "source": "raw/dairy-states-r1.png",
+      "prompt": "raw/dairy-states-r1.prompt.txt",
+      "call": "raw/dairy-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1083,
+          108,
+          530,
+          475
+        ],
+        "content_scale": 0.0994826923076923,
+        "content_anchor_xy": [
+          26,
+          47
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "dairy_wreck",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/dairy_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/dairy_wreck.png",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "wreck",
+      "source": "raw/dairy-states-r1.png",
+      "prompt": "raw/dairy-states-r1.prompt.txt",
+      "call": "raw/dairy-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1627,
+          114,
+          530,
+          475
+        ],
+        "content_scale": 0.0994826923076923,
+        "content_anchor_xy": [
+          26,
+          47
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          1,
+          64
+        ],
+        [
+          1,
+          64
+        ]
+      ]
+    },
+    {
+      "anim": "loom",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/loom/none/01.png",
+      "runtime_name": "sprites/buildings/loom.png",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "idle",
+      "source": "raw/loom-states-r1.png",
+      "prompt": "raw/loom-states-r1.prompt.txt",
+      "call": "raw/loom-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          12,
+          98,
+          524,
+          471
+        ],
+        "content_scale": 0.09993949346115155,
+        "content_anchor_xy": [
+          26,
+          47
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "loom_active",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/loom_active/none/01.png",
+      "runtime_name": "sprites/buildings/loom_active.png",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "active",
+      "source": "raw/loom-states-r1.png",
+      "prompt": "raw/loom-states-r1.prompt.txt",
+      "call": "raw/loom-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          554,
+          99,
+          524,
+          471
+        ],
+        "content_scale": 0.09993949346115155,
+        "content_anchor_xy": [
+          26,
+          47
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "loom_hurt",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/loom_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/loom_hurt.png",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "hurt",
+      "source": "raw/loom-states-r1.png",
+      "prompt": "raw/loom-states-r1.prompt.txt",
+      "call": "raw/loom-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1092,
+          98,
+          524,
+          471
+        ],
+        "content_scale": 0.09993949346115155,
+        "content_anchor_xy": [
+          26,
+          47
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          48,
+          56
+        ],
+        [
+          40,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "loom_wreck",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/loom_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/loom_wreck.png",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "wreck",
+      "source": "raw/loom-states-r1.png",
+      "prompt": "raw/loom-states-r1.prompt.txt",
+      "call": "raw/loom-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1633,
+          98,
+          524,
+          471
+        ],
+        "content_scale": 0.09993949346115155,
+        "content_anchor_xy": [
+          26,
+          47
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          1,
+          64
+        ],
+        [
+          1,
+          64
+        ]
+      ]
+    },
+    {
+      "anim": "mill",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/mill/none/01.png",
+      "runtime_name": "sprites/buildings/mill.png",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "idle",
+      "source": "raw/mill-states-r1.png",
+      "prompt": "raw/mill-states-r1.prompt.txt",
+      "call": "raw/mill-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          56,
+          53,
+          488,
+          669
+        ],
+        "content_scale": 0.12487718953514483,
+        "content_anchor_xy": [
+          30,
+          84
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          52,
+          64
+        ],
+        [
+          72,
+          88
+        ]
+      ]
+    },
+    {
+      "anim": "mill_active",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/mill_active/none/01.png",
+      "runtime_name": "sprites/buildings/mill_active.png",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "active",
+      "source": "raw/mill-states-r1.png",
+      "prompt": "raw/mill-states-r1.prompt.txt",
+      "call": "raw/mill-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          547,
+          53,
+          488,
+          669
+        ],
+        "content_scale": 0.12487718953514483,
+        "content_anchor_xy": [
+          30,
+          84
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          52,
+          64
+        ],
+        [
+          72,
+          88
+        ]
+      ]
+    },
+    {
+      "anim": "mill_hurt",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/mill_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/mill_hurt.png",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "hurt",
+      "source": "raw/mill-states-r1.png",
+      "prompt": "raw/mill-states-r1.prompt.txt",
+      "call": "raw/mill-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1045,
+          54,
+          488,
+          669
+        ],
+        "content_scale": 0.12487718953514483,
+        "content_anchor_xy": [
+          30,
+          84
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          52,
+          64
+        ],
+        [
+          72,
+          88
+        ]
+      ]
+    },
+    {
+      "anim": "mill_wreck",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/mill_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/mill_wreck.png",
+      "canvas_wh": [
+        64,
+        96
+      ],
+      "pivot_xy": [
+        32,
+        92
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "pose": "wreck",
+      "source": "raw/mill-states-r1.png",
+      "prompt": "raw/mill-states-r1.prompt.txt",
+      "call": "raw/mill-states-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1547,
+          54,
+          488,
+          669
+        ],
+        "content_scale": 0.12487718953514483,
+        "content_anchor_xy": [
+          30,
+          84
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "visible_limits_wh": [
+        [
+          1,
+          64
+        ],
+        [
+          1,
+          96
+        ]
+      ]
+    }
+  ],
+  "comparison": [
+    {
+      "path": "sprites/buildings/workshop.png",
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "draw_scale": 2
+    }
+  ],
+  "deviations": [],
+  "supersedes": []
+}

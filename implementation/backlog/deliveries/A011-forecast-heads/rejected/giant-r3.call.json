@@ -1,0 +1,31 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Create ONE tiny zombie forecast bust, not a full character. SQUARE16x16logical canvas. Entire joined HEAD+tiny neck+shoulder hint occupies exactly14x14 logical pixels, centred horizontally, bottom onrow14. At least1transparent pixel on eachside. Head itself is tall and nearly square, no wide shoulder strip. Huge bruised green head with a dark crown ridge, heavy brow, pale tiny eyes, square jaw and tiny broad dark neck. No arms, chest, weapons or horns. Image1 is the actual16pixel footprint/outline/style guide, NEVER draw its walker identity. Image2 if present defines this enemy identity only. Flat joined chunky pixels,2-3planes, upper-left highlights, violet coloured outline. Real transparent alpha outside bust; no panel, text, background, floor, shadow, gradient or detached flecks. Generous square outer framing.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\preview\\head-footprint-guide.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\giant.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\preview\\head-footprint-guide.png",
+      "sha256": "8606d50118b14a3086d90e396c64a6ba79d4b73edbcefceeef22f755c58dd9bf",
+      "role": "Placement guide only; annotations never drawn"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\giant.png",
+      "sha256": "bf323b154199d619ff6b7c4dede07394c7dd1eb4ccfcc57450f20f69a3abe49f",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-aea3811d-11d1-4e4f-b1a9-b2ada34474d3.png",
+  "copied_raw_path": "raw/giant-r3.png",
+  "raw_sha256": "73b952d88868d494905aef092ae076d9ac3d5c9a427d5e6111dd4f37c0e17046",
+  "date": "2026-10-07",
+  "revision": 3,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/giant-r3.png"
+}

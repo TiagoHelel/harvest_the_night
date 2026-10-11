@@ -1,0 +1,7 @@
+{
+  "status": "Final owner review; visual QA exceptions remain open",
+  "integration_approved": false,
+  "failed_checks": {
+    "blossom_clusters_at_least3": "tree_b_spring retains one isolated pale pixel after nearest reduction. Larger blossoms meet the coverage target and both crowns, roots, autumn palette and all nine snow-cap fits pass. No pixel was erased or painted with code."
+  }
+}

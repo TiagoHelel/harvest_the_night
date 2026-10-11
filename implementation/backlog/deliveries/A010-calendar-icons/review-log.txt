@@ -1,0 +1,21 @@
+2026-10-07 | Owner requested all packs with review only at the end. Intermediate approval gates waived; final integration approval pending.
+2026-10-07 | Moon palette subset excludes unrelated gold/wood/skin ramps: the pale moon and grey craters must not resemble a sun. Crop, scale, anchor and alpha are unchanged.
+2026-10-07 | Moon palette subset excludes unrelated gold/wood/skin ramps: the pale moon and grey craters must not resemble a sun. Crop, scale, anchor and alpha are unchanged.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-07 | autumn-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | boss_night-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | calm_night-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | full_moon-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | spring-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | summer-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | winter-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | Correct archive path guard to protect both pack-relative and repo-relative selected recipe paths. Restore selected raw returns byte-for-byte; exact ImageGen PNG hashes verified. Native art unchanged.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+
+2026-10-10 | Resumed A010 through assets.py next. Read the full brief, existing contract, checks and history; inspected the native candidate audit, seasons, moon comparison, forecast and reference sheets. build.py --check passes, all checks are true, 14 exported/source/prompt hashes verified. Review URL returns HTTP 200 with the exact local page bytes. No new art generated and no integration approval inferred. Waiting for the owner to judge season silhouettes, boss skull and moon distinctions at native size.
+
+2026-10-10 | Owner approval
+Owner words, verbatim: "aprovado, manda o prompt pro claude"
+Approved all 14 A010 exports for integration. No art pixels changed. Recorded every export hash and added approval validation to the local builder. Integration belongs to Claude, game task 0161.
+Approval validation: second build byte-identical, --check passed, all checks true, all 14 approved export hashes match. Wrote Claude handoff with 14 aliases and task 0161 integration steps. No other pack processed.

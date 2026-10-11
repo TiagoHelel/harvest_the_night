@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 EXACT autumn tree target. ONE leaf-colour correction ONLY. Replace EVERY pale bright yellow/cream foliage highlight with DARKER subdued mustard-gold, RGB214,186,96 (#d6ba60) or darker. No leaf pixel can use flame_hot RGB246217122, no cream or pale yellow foliage remains. Restrained gold_light21418696 highlights ONLY, shadowsunchanged. Trunkandrootcolours stayexactlyunchanged. Keep exact1024x1536source canvas, all transparentmargins, position, size, outlines, branch/root geometry and all colouredclusters unchanged. Nevercrop,recenter,scale,add/removeleaves. NO fireorange, glow, particle, scene, background, shadow or lettering. True transparentalpha.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r3.png",
+      "sha256": "2b065a1d0c9d853591d74cabdebcbeb8db4343272808780369ec2d655b14f1d4",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_autumn-r3-2b065a1d0c.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8ccacf98-7318-47ff-b7b4-0d6c5562e042.png",
+  "copied_raw_path": "raw/tree_autumn-r4.png",
+  "raw_sha256": "ad4d1d8fb2152c74c2b0f994b39ff97fb187293688affa38251f854af1b40139",
+  "date": "2026-10-07",
+  "revision": 4,
+  "decision": "inspection pending"
+}

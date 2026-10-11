@@ -1,0 +1,22 @@
+{
+  "pack": "A012",
+  "date": "2026-10-10",
+  "status": "approved for integration",
+  "owner_words": "aprovado",
+  "approved_folder": "implementation/backlog/deliveries/A012-winter-ground",
+  "approved_sha256": {
+    "native/edge_n_winter/none/01.png": "53b8fd0131800635208a1be8460f614340dcae22487224a952c38693609abf0a",
+    "native/grass_b_winter/none/01.png": "e410420998c00fbbe59ab634a1fdc21dc828065c4710e8e8da73bda209c94834",
+    "native/grass_c_winter/none/01.png": "4580a0260e1ab303e48dbf3b88e1a92271ccdc791fedaad15411724a20babac9",
+    "native/grass_d_winter/none/01.png": "3820f44798c81d49c2fb3f4cf7477a96e1f6e6b0c0a30afdbcdb56216fda6b67",
+    "native/grass_winter/none/01.png": "47d3ba0b218fa94b0cbc39a6fb99aa4535f26264d93deb73241f067c51ba31ec",
+    "native/path_winter/none/01.png": "c0456c0c5c7e047c0c14ff49b6d15ad7d873f6a498f0ebe6baa2426bdb80b12a",
+    "native/shore_corner_nw_winter/none/01.png": "11328f6d638fa24fc7900e5455f6923008e22267c2892ffdce9de5296e0e7db9",
+    "native/shore_n_winter/none/01.png": "bb433bdb82e1f1369c7371a3dd702b2b6cfb8d4bc5d5cdcb24492ea16d138ea2",
+    "native/soil_winter/none/01.png": "bd002b36c77aa7a06b227ae0cc16102217860d2369f8d3c16cedd412bf0ae325",
+    "native/tilled_wet_winter/none/01.png": "966aa8af5b13c0b9a8df6cb277b7a1db0d0435a9bdf9783af19d4cca8d1a1e92",
+    "native/tilled_winter/none/01.png": "c82d1267c68c3fe4449e3a12bf589defc91cc55402bae98ced834f271526cdb2"
+  },
+  "frames": 11,
+  "runtime_integrated": false
+}

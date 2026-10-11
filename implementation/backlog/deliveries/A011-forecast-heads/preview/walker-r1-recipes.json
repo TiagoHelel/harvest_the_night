@@ -1,0 +1,59 @@
+[
+  {
+    "anim": "head_walker",
+    "asset": "walker",
+    "stem": "walker-r1",
+    "importer": {
+      "id": "A011/head_walker",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/walker-r1.png",
+      "crop_xywh": [
+        253,
+        211,
+        818,
+        875
+      ],
+      "content_scale": 0.014857142857142857,
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf_dark",
+        "night",
+        "roof",
+        "roof_dark",
+        "rot",
+        "rot_dark",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  }
+]

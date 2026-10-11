@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 is the tank bust EDIT TARGET. Correct ONLY the over-wide silhouette: make its complete head-and-shoulders bust a SQUARE visible13wide by13tall at native scale. Current wide shoulders make the source clip the16x16import. Narrow both shoulders and increase visible head/neck height within the square silhouette; keep bald heavy green head sunk on thick neck, broad shoulders relative to the other enemies and mustard vest over dark shirt. One flat cut bottom edge. Three-quarter turn to viewer LEFT, same rotten face, pale eyes, upper-left light and simple coloured dark outline. Do not change species, vest material, camera or facing; no full body, arms reaching out or weapon. Bold recognizable planes, no decoration. ONE bust with real transparent alpha, generous margins on all sides, nothing clipped. No border, UI panel, ground, shadow, glow, blood splashes, labels, blur or gradients. Image2 existing tank runtime sprite is IDENTITY AND MATERIAL ONLY; never draw the complete body.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\tank-r1.png",
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\tank_walk_0.png"
+  ],
+  "transparent_background": true
+}

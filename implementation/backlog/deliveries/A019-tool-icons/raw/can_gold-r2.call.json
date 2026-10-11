@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the exact gold watering-can edit target. Change ONLY its metal MATERIAL COLOURS. The entire metal pail body, arched metal handle, spout and rose are muted GOLD metal: gold_dark RGB168,116,44; gold RGB196,150,70; gold_light RGB214,186,96. No large silver, grey or ivory surfaces remain. A tiny pale glint is allowed, but less than five percent of the pail. No orange fire, coins or glow. Preserve every silhouette pixel cluster, canvas, margin, part shape, handle arch, spout, rose, size, position and lighting direction. Do not crop, recenter, add parts or redraw geometry. The source is a complete1254x1254 square, reduced to16x16 and10x10, so material planes must be broad and readable. No labels, panel, scene, water, ground or shadow. Real transparent alpha outside the one can.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\can_gold-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\can_gold-r1.png",
+      "sha256": "99622bd4a0888ecdf3522b455c0fa77624605e326ccb235016ed40ea3a414a90",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\preview\\input-history\\can_gold-r1-99622bd4a0.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e645a2bc-d4f5-47ae-ad76-d04d028e320a.png",
+  "copied_raw_path": "raw/can_gold-r2.png",
+  "raw_sha256": "e96078499d1940fa863b2b47a3d4f9b2d83bf18afe32f2e71b2e052f0f8f6f7c",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "accepted",
+  "inspection": "Both native cuts and common scale tier grid inspected. Owner final approval pending."
+}

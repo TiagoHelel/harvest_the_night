@@ -72,26 +72,34 @@ const SCENARIOS: Array = [
 	["house_tiers", "the house in tier I at noon, the farmer by its west wall; then tier II with its plaque over the door, the workshop's upgrades tab offering tier III, and tier III", ""],
 	["peddler", "the stall open at noon with the peddler at its end; then shut at dusk, nobody there", ""],
 	["shipping_bin", "the shipping bin by the porch at noon; then its panel with wood and carrots in; then the morning report naming what it pays", ""],
-	["machines", "the keg, the preserves jar, the dairy, the loom and the mill in a row at noon, idle; then working", ""],
+	["machines", "the keg, the preserves jar, the dairy, the loom and the mill in a row at noon, idle; then working; then the same at 01:30", ""],
+	["machines_worn", "the same row at noon, the keg and the dairy past the wear line, the jar and the loom wrecked, the mill whole", ""],
 	["keg_jar", "a keg aging wine, five mornings to go, its panel up; a preserves jar beside it setting jelly", "WorkshopPanel"],
 	["barn_night", "a wrecked barn and a hurt one at night; then the next morning, the wreck's animals inside and the hurt one's out", ""],
 	["barnyard", "the barn's cow, sheep and pig and the coop's hens about their homes, a pig's spot, the dog behind the farmer", ""],
+	["barnyard_night", "the same barnyard at 01:30, before bed: the pigs' spots in the darkest light they meet", ""],
 	["coop_barn", "a coop and a barn on their sites at noon, the map's animals moved in and more", ""],
 	["fish_book", "the fish book on the Old Catfish's page, four of sixteen; then a silhouette", "InventoryPanel"],
 	["bait", "a worm on the iron rod's hook, the line waiting, the bait choice under it", ""],
 	["fishing_bar", "a trout on the line: one hit of two, the marker on its way", ""],
 	["sprinklers", "a copper, an iron and a gold sprinkler at 06:20, spraying", ""],
 	["hardwood", "a chipped big stump and a whole one among the trees", ""],
+	["hardwood_night", "the same two big stumps on that night, the waves held off", ""],
 	["quarry", "copper, coal and iron-gated gold on Autumn 1", ""],
 	["can_area", "three dry plots in the iron can's next stroke", ""],
 	["tool_upgrades", "upgrades ready tomorrow and an iron axe in hand", "WorkshopPanel"],
 	["regrowing", "regrowing strawberries beside ripe fruit", ""],
 	["withered", "summer crops wither on Autumn 1", ""],
+	["withered_night", "the same withered field on Autumn 1's night, the waves held off, three plots trampled", ""],
 	["winter_day", "outdoor fields rest in winter", ""],
 	["spring_field", "spring crops and held seed packets", ""],
+	["spring_field_night", "the same ripe spring field on its night, the waves held off", ""],
 	["summer_field", "summer crops and held seed packets", ""],
+	["summer_field_night", "the same ripe summer field on its night, the waves held off", ""],
+	["summer_regrowing", "summer's field after a pick: peppers and corn regrowing beside the ripe ones", ""],
 	["inventory_crops", "the crop category in the ledger", "InventoryPanel"],
 	["inventory_full", "every item held, every inventory page", "InventoryPanel"],
+	["inventory_night", "the same ledger opened on Spring 3's night: its materials, crops, seeds, fish, fish book, animal goods, artisan goods and tools pages", "InventoryPanel"],
 	["twelve_crops", "twelve crops at all four stages", ""],
 	["seed_page_one", "spring choices in the HUD", ""],
 	["seed_page_two", "last spring choice in the HUD", ""],
@@ -137,13 +145,16 @@ const SCENARIOS: Array = [
 	["new_ore", "beside the copper, the coal and the gold", ""],
 	["stump", "in the woods, by a hardwood stump", ""],
 	["winter_build", "the build step on Winter 2: a route from every side", ""],
-	["forecast_dusk", "Autumn 7 at 18:30: the forecast of a Full Moon from three sides", ""],
+	["forecast_dusk", "Spring 14 at 18:30: the boss night's forecast, every kind's head on it", ""],
 	["forecast_build", "the build step on Winter 14: a boss under a Full Moon, from every side", ""],
 	["forecast_calm", "Summer 1 at 18:30: the forecast of a calm night", ""],
 	["season_summer", "the farm at noon on Summer 3", ""],
 	["season_autumn", "the farm at noon on Autumn 3", ""],
 	["season_winter", "the farm at noon on Winter 3, snowing", ""],
 	["season_winter_night", "the same farm on Winter 3's night", ""],
+	["winter_fishing", "Winter 3 at noon: a line in the north-west pond, its snowed shore and corners round open water", ""],
+	["winter_quarry", "the quarry on Winter 3: snow caps on the rocks, the ores, the seams and the copper, coal and gold", ""],
+	["winter_stumps", "the south-west woods on Winter 3: a stump's cap and the big stumps' 2x2 caps among bare trees", ""],
 	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
 	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
@@ -706,10 +717,15 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"tool_upgrades": _set_tool_upgrades(state)
 		"inventory_crops": _set_inventory_crops(state)
 		"inventory_full": _set_inventory_full(state)
+		"inventory_night": _set_inventory_night(state)
 		"twelve_crops": _set_twelve_crops(state)
 		"spring_field": _set_spring_field(state)
+		"spring_field_night": _set_spring_field_night(state)
 		"summer_field": _set_summer_field(state)
+		"summer_field_night": _set_summer_field_night(state)
+		"summer_regrowing": _set_summer_regrowing(state)
 		"withered": _set_withered(state)
+		"withered_night": _set_withered_night(state)
 		"regrowing": _set_regrowing(state)
 		"winter_day": _set_winter_day(state)
 		"seed_page_one": _set_seed_page_one(state)
@@ -754,15 +770,21 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
 		"hardwood": _set_hardwood(state)
+		"hardwood_night": _set_hardwood_night(state)
 		"sprinklers": _set_sprinklers(state)
 		"fishing_bar": _set_fishing_bar(state)
+		"winter_fishing": _set_winter_fishing(state)
+		"winter_quarry": _set_winter_quarry(state)
+		"winter_stumps": _set_winter_stumps(state)
 		"bait": _set_bait(state)
 		"fish_book": _set_fish_book(state)
 		"coop_barn": _set_coop_barn(state)
 		"barnyard": _set_barnyard(state)
+		"barnyard_night": _set_barnyard_night(state)
 		"barn_night": _set_barn_night(state)
 		"keg_jar": _set_keg_jar(state)
 		"machines": _set_machines(state)
+		"machines_worn": _set_machines_worn(state)
 		"shipping_bin": _set_shipping_bin(state)
 		"peddler": _set_peddler(state)
 		"house_tiers": _set_house_tiers(state)
@@ -858,6 +880,15 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 			await _shoot("inventory_full_%s_%d" % [group["name"], group["part"] + 1], folder)
 			inventory.turn_page(1)
 		print("  inventory_full photographed %d pages" % inventory.page_count())
+		return
+	if name == "inventory_night":
+		var ledger := main.get_node("%InventoryPanel") as InventoryPanel
+		for group in [&"materials", &"crops", &"seeds", &"fish", InventoryPanel.BOOK, &"animal_goods",
+				&"artisan_goods", &"tools"]:
+			ledger.select_group(group)
+			await process_frame
+			await process_frame
+			await _shoot("inventory_night_%s" % group, folder)
 		return
 	if name == "fish_book":
 		# The run's book alone, whatever profile is on this machine: an empty
@@ -1521,9 +1552,9 @@ func _set_stump(state: Dictionary) -> void:
 ## **The bar mid-catch** (task 0180): on the north-west pond's shore at 08:00
 ## of Spring 3, a trout on the line - one of its two hits scored, the marker
 ## on its way across, the green ahead of it.
-func _set_fishing_bar(state: Dictionary) -> void:
-	_on_date(state, 3)
-	state["day_tick"] = Phases.tick_at_minute(8 * 60)
+func _set_fishing_bar(state: Dictionary, date: int = 3, minute: int = 8 * 60) -> void:
+	_on_date(state, date)
+	state["day_tick"] = Phases.tick_at_minute(minute)
 	var anchor: Array = GameData.PONDS[&"north_west_pond"]
 	var centre := Vector2i(int(anchor[0]), int(anchor[1]))
 	var water := Vector2i(-1, -1)
@@ -1555,6 +1586,25 @@ func _set_fishing_bar(state: Dictionary) -> void:
 	line["misses"] = 0
 	line["struck"] = 0
 	line["left"] = int(GameData.FISHING["bar_ticks"])
+
+
+## **Fishing in winter** (task 0163): the same cast on Winter 3 at noon, A012's
+## snowed shore and corners round water that never freezes.
+func _set_winter_fishing(state: Dictionary) -> void:
+	_set_fishing_bar(state, 3 * GameData.SEASON_DAYS + 3, 12 * 60)
+
+
+## **The snow caps** (task 0164): the quarry and the south-west woods on
+## Winter 3 - A013's cap on every host the farm has, the 1x1 nodes' generic
+## one and the big stumps' 2x2, each at its host's canvas origin.
+func _set_winter_quarry(state: Dictionary) -> void:
+	_set_quarry(state)
+	_on_date(state, 3 * GameData.SEASON_DAYS + 3)
+
+
+func _set_winter_stumps(state: Dictionary) -> void:
+	_on_date(state, 3 * GameData.SEASON_DAYS + 3)
+	_set_hardwood(state)
 
 
 ## **The coop and the barn** (task 0183): the barn on its site by the
@@ -1621,6 +1671,17 @@ func _set_barnyard(state: Dictionary) -> void:
 	_standing_at = barn + Vector2i(3, 6)
 	_stand(state, _standing_at)
 	state["player"]["facing"] = Player.NORTH
+
+
+## **The barnyard at night** (task 0211): the same homes at 01:30, the
+## farmer still up. The pigs' spots go with the sun only at bedtime
+## (`Phases.begin_preparation`), so the late evening, half way to the
+## night's light (`WorldView.EVENING_DEPTH`), is the darkest their mounds
+## ever see.
+func _set_barnyard_night(state: Dictionary) -> void:
+	_set_barnyard(state)
+	_camera_at = _standing_at
+	Sim.advance(state, maxi(Phases.tick_at_minute(25 * 60 + 30) - int(state["day_tick"]), 1))
 
 
 ## **Barns at night** (task 0186): the night of Spring 3. The barn on its
@@ -1766,6 +1827,17 @@ func _set_machines(state: Dictionary) -> void:
 const MACHINE_ROW := [&"keg", &"preserves_jar", &"dairy", &"loom", &"mill"]
 
 
+## **The machines worn** (task 0213): the row `machines` puts down, at noon -
+## the keg and the dairy hurt past the wear line, the jar and the loom
+## wrecked and standing, the mill whole.
+func _set_machines_worn(state: Dictionary) -> void:
+	_set_machines(state)
+	for machine in [&"keg", &"dairy"]:
+		Farm.damage(state, _machines[machine], int(GameData.BUILDINGS[machine]["hp"]) * 3 / 4)
+	for machine in [&"preserves_jar", &"loom"]:
+		Farm.damage(state, _machines[machine], int(GameData.BUILDINGS[machine]["hp"]))
+
+
 ## From one machine's left edge to the next one's: a cell apart, but the keg
 ## and the jar side by side - sixteen cells is what fits between the trees
 ## west of the barn's site and the path east of it.
@@ -1817,6 +1889,19 @@ func _take_machines_working(main: Node, state: Dictionary, folder: String) -> vo
 	for machine in MACHINE_ROW:
 		running.append("%s %s" % [machine, WorldView.station_running(state, machine, _machines[machine])])
 	print("  machines_working: %s" % ", ".join(running))
+	# **The row at night** (task 0213): the same jobs at 01:30, the farmer
+	# still up - the jar's firebox lit while it works, the rest dark.
+	Sim.advance(state, maxi(Phases.tick_at_minute(25 * 60 + 30) - int(state["day_tick"]), 1))
+	for _i in SETTLE:
+		await process_frame
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await _shoot("machines_evening", folder)
+	running.clear()
+	for machine in MACHINE_ROW:
+		running.append("%s %s" % [machine, WorldView.station_running(state, machine, _machines[machine])])
+	print("  machines_evening: %s" % ", ".join(running))
 
 
 ## **The shipping bin** (task 0189): noon on Spring 3, the bin on its site
@@ -2159,6 +2244,16 @@ func _set_hardwood(state: Dictionary) -> void:
 	state["player"]["facing"] = Player.SOUTH
 
 
+## **A021's big stumps at night** (task 0204): the chipped one and the whole
+## one on that night, the waves held off.
+func _set_hardwood_night(state: Dictionary) -> void:
+	_set_hardwood(state)
+	_camera_at = _standing_at
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Sim.advance(state, 1)
+
+
 ## **The build step in winter** (task 0157): Winter 2, every side open, a
 ## wall in hand by the house - and the preview drawing the route from each of
 ## the five.
@@ -2217,10 +2312,12 @@ func _set_season_night(state: Dictionary, season: int) -> void:
 	Sim.advance(state, 1)
 
 
-## **The forecast at dusk** (task 0158): Autumn 7 at 18:30, a Full Moon from
-## the three sides autumn has open - the line of sides long enough to wrap.
+## **The forecast at dusk** (task 0158): Spring 14 at 18:30 since task 0162,
+## the season's boss night under a Full Moon - the one date of the first
+## season whose forecast has every kind's head on it. Autumn 7's, a Full Moon
+## from three sides, had four.
 func _set_forecast_dusk(state: Dictionary) -> void:
-	_on_date(state, 2 * GameData.SEASON_DAYS + 7)
+	_on_date(state, GameData.SEASON_DAYS)
 	_a_sown_field(state)
 	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
 		- int(state["day_tick"]), 1))
@@ -2776,6 +2873,15 @@ func _set_inventory_full(state: Dictionary) -> void:
 		Resources.add(state, StringName(id), 999)
 
 
+## **The ledger at night** (task 0202): everything held, opened on Spring 3's
+## night with the waves held off - the pages whose icons are Codex art, under
+## the night's light.
+func _set_inventory_night(state: Dictionary) -> void:
+	_set_season_night(state, 0)
+	for id in GameData.RESOURCES:
+		Resources.add(state, StringName(id), 999)
+
+
 ## Four seasonal crops on the actual starter beds, with held packet counts.
 func _set_season_field(state: Dictionary, season: int) -> void:
 	_set_noon(state)
@@ -2798,6 +2904,36 @@ func _set_spring_field(state: Dictionary) -> void:
 	_set_season_field(state, 0)
 
 
+## **A season's crops at night** (task 0198): its ripe field on the beds, as
+## `_set_season_field` sows it, on that date's night with the waves held off.
+func _set_field_night(state: Dictionary, season: int) -> void:
+	_set_season_field(state, season)
+	_camera_at = _standing_at
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Sim.advance(state, 1)
+
+
+func _set_spring_field_night(state: Dictionary) -> void:
+	_set_field_night(state, 0)
+
+
+func _set_summer_field_night(state: Dictionary) -> void:
+	_set_field_night(state, 1)
+
+
+## **Summer's regrowth** (task 0199): the ripe summer field with every other
+## ripe pepper and corn plot picked, regrowing beside the ones still ripe.
+func _set_summer_regrowing(state: Dictionary) -> void:
+	_set_summer_field(state)
+	var seen := 0
+	for cell in Farming.field_cells(state):
+		if Farming.crop_on(state, cell) in [GameData.PEPPER, GameData.CORN] and Farming.is_ready(state, cell):
+			if seen % 2 == 0:
+				Farming.act(state, cell)
+			seen += 1
+
+
 func _set_summer_field(state: Dictionary) -> void:
 	_set_season_field(state, 1)
 
@@ -2807,6 +2943,25 @@ func _set_withered(state: Dictionary) -> void:
 	Farming.dry_out(state)
 	_on_date(state, 2 * GameData.SEASON_DAYS + 1)
 	Farming.morning(state)
+
+
+## **A014's overlays at night** (task 0197): Autumn 1's withered field on its
+## night, the waves held off, and three of its plots trampled as a lost night
+## leaves them - both overlays under the night's light.
+func _set_withered_night(state: Dictionary) -> void:
+	_set_withered(state)
+	var withered: Array = []
+	for cell in Farming.field_cells(state):
+		if Farming.plot(state, cell).has("withered"):
+			withered.append(cell)
+	for cell in withered.slice(0, 3):
+		var here := Farming.plot(state, cell)
+		here["trampled"] = here["withered"]
+		here.erase("withered")
+	_camera_at = _standing_at
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Sim.advance(state, 1)
 
 
 func _set_winter_day(state: Dictionary) -> void:

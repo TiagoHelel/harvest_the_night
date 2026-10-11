@@ -1,0 +1,33 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Precise-object-edit for one tiny inventory icon. Image1 is the EDIT TARGET. Remove the whole timber trestle, four support legs and stone foot blocks from the candidate. Keep ONLY the dark iron gun barrel, compact timber rotating turret HEAD directly underneath it, and a tiny central timber mounting stub no longer than one-third the head height. The native10x10 preview of this candidate showed a whole tower and lost the gun silhouette; the new icon must be a wide horizontal gun head whose barrel is its dominant readable form. Keep the same upper-right barrel orientation, same upper-left light, colours and icon style. Wide silhouette about14wide x8-10high when imported to16canvas, or8wide x5-6high in10canvas. Dark iron barrel long and bold with a pale top plane and visible muzzle. Simple wood head beneath, NO legs, no tower framework, no ground or masonry, no extra ammo/weapons. ONE complete isolated object centred on true alpha, generous margins, coloured1pixel outline, only2or3 large material planes; no fine texture, blur, gradient, shadow, panel, labels or text. Image2 wood icon is outline/colour STYLE only, not the subject.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r1.png",
+      "sha256": "3575430f5e775f30ea056d163971aa761f2e7e889aa71528297f821514b4badb",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "preview/input-history/gun_tower-r1-3575430f5e.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0d4470c1-7937-4387-8cf5-e92da67e3c29.png",
+  "copied_raw_path": "raw/gun_tower-r2.png",
+  "raw_sha256": "23cc5f7567d1eda2969b6e08fe8c7282964f9e50e94a2060331b26e0cbe1d4e0",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "rejected",
+  "inspection": "True alpha and both native cuts inspected. Owner final approval pending.",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/gun_tower-r2.png"
+}

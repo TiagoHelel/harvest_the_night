@@ -1,0 +1,82 @@
+[
+  {
+    "anim": "icon_full_moon",
+    "asset": "full_moon",
+    "stem": "full_moon-r1",
+    "importer": {
+      "id": "A010/icon_full_moon",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/full_moon-r1.png",
+      "crop_xywh": [
+        360,
+        382,
+        547,
+        534
+      ],
+      "content_scale": 0.025594149908592323,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_full_moon",
+    "asset": "full_moon",
+    "stem": "full_moon-r1",
+    "importer": {
+      "id": "A010/hud_full_moon",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/full_moon-r1.png",
+      "crop_xywh": [
+        360,
+        382,
+        547,
+        534
+      ],
+      "content_scale": 0.014625228519195612,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  }
+]

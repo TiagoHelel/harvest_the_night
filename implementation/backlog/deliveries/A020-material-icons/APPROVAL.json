@@ -1,0 +1,23 @@
+{
+  "pack": "A020",
+  "date": "2026-10-10",
+  "status": "approved for integration",
+  "owner_words": "aprovado",
+  "approved_folder": "implementation/backlog/deliveries/A020-material-icons",
+  "approved_sha256": {
+    "native/hud_coal/none/01.png": "6393df3405692c8a9ff873b554724df6f443145947269a59d7d440d5cee9f429",
+    "native/hud_copper/none/01.png": "6099f301ed2f6ef7807bf3f94ef6840b1b515a4184e105e4994b635a2ea3b7bf",
+    "native/hud_gold/none/01.png": "2f590e8f98992e46af4b8302cdbd0faa71e43545565f261d08fcf661e2d05ca2",
+    "native/hud_hardwood/none/01.png": "614c564b074aa9e116b91eb5e2a77b16648f7bb6bead9f573a56047d6216d593",
+    "native/hud_hay/none/01.png": "7ad99cf56968c7e1b25a49135cd52fb04fcd7c0de7769c5800b0f48abf23aad7",
+    "native/hud_straw/none/01.png": "2ef3de326fa4c6e5c70c02075ac21c255918f1259edb43f1e0db6a67ce921482",
+    "native/icon_coal/none/01.png": "9d429acac2084168b8c3c654b5bc5cbf1d533f635a75c62133337a02eccd73dd",
+    "native/icon_copper/none/01.png": "25ec20e3a3346a2eef8298b8c01c8362db5aeb59a929751101a805d36ab44fab",
+    "native/icon_gold/none/01.png": "02c4e110a12d69f40b0136e40c4c4515ac3dd5bc82759fbf6b065584a2e9d677",
+    "native/icon_hardwood/none/01.png": "f731bcadc26d212c696c17fd733c3893ea489f2462d651a2c1eed9990756ebdb",
+    "native/icon_hay/none/01.png": "e5319d65f0d693e663bb5977d53c6f4789c219c8c3daf9fed0474039bff3c640",
+    "native/icon_straw/none/01.png": "29aebe8eb06f9ffa0aabaddda8d852075042ae36e550ffd16102f44f602bc2c5"
+  },
+  "frames": 12,
+  "runtime_integrated": false
+}

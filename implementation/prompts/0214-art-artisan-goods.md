@@ -1,7 +1,7 @@
 # 0214 - Art: artisan goods
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0188, 0192
 - **Likely files:** assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py
 - **Art packs:** A032

@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the accepted iron HOE master. Change ONLY head material, joint and handle colour to basic tier: Weathered dark timber handle, rusty dark metal head, head ramps ink_soft/stone_dark/stone with a small rusty soil patch. Preserve exact square canvas, object footprint, position,45degree pose, thick transverse rectangular blade, outline and pixel clusters. Keep all blank margins, no crop, resizing, stretching, extra parts or ground. One complete hoe, true transparent alpha.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\hoe_iron-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\hoe_iron-r1.png",
+      "sha256": "f19474c1f3bca0fcb9f8eb64d479eda55f08fed1249ac5b8f943ac4510c50d44",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-745fafdf-078c-4b62-84b4-7889b2db3378.png",
+  "copied_raw_path": "raw/hoe_basic-r1.png",
+  "raw_sha256": "2f1a710434d37bdc637d219610e27349718671621cc244be500574d19e5868aa",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "accepted",
+  "inspection": "Both native cuts and common scale tier grid inspected. Owner final approval pending."
+}

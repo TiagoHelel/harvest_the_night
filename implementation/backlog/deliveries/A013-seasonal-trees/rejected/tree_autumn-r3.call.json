@@ -1,0 +1,26 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the EXACT summer tree target. SAME1024x1536canvas, SAMEboundsx35..997,y220..1355. Keep every transparent margin, tree size, placement, crown outline, every branch, trunk and roots unchanged; never crop/rescale or fill the canvas. Change ONLY leaf colours into MUTED ochre and rust: use leaf planes near gold_dark RGB168,116,44 (#a8742c), gold RGB196,150,70 (#c49646), gold_light RGB214,186,96 (#d6ba60); shaded lobes near roof_dark RGB138,47,42 (#8a2f2a), roof RGB176,66,58 (#b0423a), wood RGB140,98,57 (#8c6239). These are subdued mustard/brown/red, NEVER saturatedorange. Specifically avoid flame orange RGB238,132,50: at most8percent of foliage can reduce to flame, zero brightflame_hot yellow. At most10percent green remains. Neutral upper-left lighting, no glowing leaf highlights, fire, fruit, fallenleaves, particle, ground or shadow. Truealphaoutside tree, originalflatpixelclusters only. Fixedimportscale0.03700440528634361, objectmustnotgrow.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\tree.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\tree.png",
+      "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d6ad5cd8-89cd-40c7-89d2-4b571bbeba49.png",
+  "copied_raw_path": "raw/tree_autumn-r3.png",
+  "raw_sha256": "2b065a1d0c9d853591d74cabdebcbeb8db4343272808780369ec2d655b14f1d4",
+  "date": "2026-10-07",
+  "revision": 3,
+  "decision": "rejected",
+  "inspection": "Fixed scale/native42row height, grounded roots and muted autumn crown inspected. Crown flame pixels zero. Final owner review pending.",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tree_autumn-r3.png"
+}

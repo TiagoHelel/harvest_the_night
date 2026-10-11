@@ -1,0 +1,33 @@
+{
+  "restored": [
+    {
+      "stem": "autumn-r1",
+      "sha256": "d9c46f6790f543b98314835c070616ea7f827ef578d79eb0bfa26749c24d18c9"
+    },
+    {
+      "stem": "boss_night-r1",
+      "sha256": "09478429d1f2cc51973c5bb3a241e7bcd35dfbe0f325c4a20ba35314308af042"
+    },
+    {
+      "stem": "calm_night-r1",
+      "sha256": "a2223a55d188539c9f5a1d82e99b106eb87924e8b413a85dafd67236df8e3b3f"
+    },
+    {
+      "stem": "full_moon-r1",
+      "sha256": "f5915e1b066a2748f28e2874c6d6837f7019993494a0e31a74c729efbc08650f"
+    },
+    {
+      "stem": "spring-r1",
+      "sha256": "3835491a8644cbb128a7f607abdd33df63531fcb457d6679cc6cf091e94c64db"
+    },
+    {
+      "stem": "summer-r1",
+      "sha256": "41e838198e4ba8fe7946b7619caa4106dafb996e27ed1f075c8fa4c11c80620f"
+    },
+    {
+      "stem": "winter-r1",
+      "sha256": "4512ede924397f8fdbf6e9bd4afdf6271898f7d600f734930dacaf2c8486f291"
+    }
+  ],
+  "raw_image_bytes_unchanged": true
+}

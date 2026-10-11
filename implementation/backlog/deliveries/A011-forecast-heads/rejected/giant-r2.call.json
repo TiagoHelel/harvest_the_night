@@ -1,0 +1,32 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the giant bust edit target. Correct ONLY the overly wide footprint that clips the16x16import: the COMPLETE visible head, neck, shoulders and any shoulder equipment together must form a SQUARE14wide14tall silhouette, not a landscape bust. Narrow shoulder reach and reveal more upper chest to gain height. One flat-cut bottom edge. Huge bald green head, pale small eyes, blood streaks, GREY stone plates tightly hugging shoulders. Square14wide14tall visible footprint, not broad horizontal shoulders; head dominates. Preserve the exact enemy identity, camera turned to viewer LEFT, material colours and neutral upper-left light. Bold clear large flat planes and coloured dark outline. Image2 runtime enemy is IDENTITY/MATERIAL ONLY, never draw its full body. ONE complete unclipped bust, true transparent alpha and generous empty margins. No ground, shadow, halo, panels, border, labels, text, blur or gradients.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\giant-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\giant_walk_0.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\giant-r1.png",
+      "sha256": "a912905b63dc68e75fe1706403f8ceb7f66e45bec969fbbbf00b27e9ed50345c",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\preview\\input-history\\giant-r1-a912905b63.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\giant_walk_0.png",
+      "sha256": "df3e96e2ffce6f44e7d7d019462417444565cbc622ab6f475b73b441fb29ea64",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d2fec606-4f97-4c8e-92be-cd66b62f08c0.png",
+  "copied_raw_path": "raw/giant-r2.png",
+  "raw_sha256": "ce54ee3b102324a8b7d4b1c25c4ac64e0f769e5ca82c2a0a74b7220357073b83",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/giant-r2.png"
+}

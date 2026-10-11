@@ -1,0 +1,458 @@
+{
+  "copper_ore-master-c1-r1": {
+    "id": "copper_ore",
+    "source": "raw\\copper_ore-master-c1-r1.png",
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "limits_wh": [
+      [
+        10,
+        14
+      ],
+      [
+        8,
+        11
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        268,
+        374,
+        733,
+        594
+      ],
+      "content_scale": 0.0161587567351551,
+      "content_anchor_xy": [
+        6,
+        10
+      ]
+    },
+    "palette_keys": [
+      "ink",
+      "ink_soft",
+      "stone_dark",
+      "stone",
+      "stone_light",
+      "roof_dark",
+      "skin_dark",
+      "roof_light",
+      "skin",
+      "leaf_light"
+    ],
+    "bounds": [
+      2,
+      4,
+      14,
+      14
+    ],
+    "native_wh": [
+      12,
+      10
+    ],
+    "numeric_fit": true
+  },
+  "copper_ore-master-c2-r1": {
+    "id": "copper_ore",
+    "source": "raw\\copper_ore-master-c2-r1.png",
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "limits_wh": [
+      [
+        10,
+        14
+      ],
+      [
+        8,
+        11
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        265,
+        364,
+        753,
+        603
+      ],
+      "content_scale": 0.015842104219936176,
+      "content_anchor_xy": [
+        6,
+        10
+      ]
+    },
+    "palette_keys": [
+      "ink",
+      "ink_soft",
+      "stone_dark",
+      "stone",
+      "stone_light",
+      "roof_dark",
+      "skin_dark",
+      "roof_light",
+      "skin",
+      "leaf_light"
+    ],
+    "bounds": [
+      2,
+      4,
+      14,
+      14
+    ],
+    "native_wh": [
+      12,
+      10
+    ],
+    "numeric_fit": true
+  },
+  "coal_seam-master-c1-r1": {
+    "id": "coal_seam",
+    "source": "raw\\coal_seam-master-c1-r1.png",
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "limits_wh": [
+      [
+        10,
+        14
+      ],
+      [
+        6,
+        8
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        247,
+        363,
+        1078,
+        583
+      ],
+      "content_scale": 0.01144633668218574,
+      "content_anchor_xy": [
+        6,
+        7
+      ]
+    },
+    "palette_keys": [
+      "ink",
+      "ink_soft",
+      "night",
+      "stone_dark",
+      "stone",
+      "stone_light",
+      "bone_dark"
+    ],
+    "bounds": [
+      2,
+      7,
+      14,
+      14
+    ],
+    "native_wh": [
+      12,
+      7
+    ],
+    "numeric_fit": true
+  },
+  "coal_seam-master-c2-r1": {
+    "id": "coal_seam",
+    "source": "raw\\coal_seam-master-c2-r1.png",
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "limits_wh": [
+      [
+        10,
+        14
+      ],
+      [
+        6,
+        8
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        215,
+        272,
+        1146,
+        582
+      ],
+      "content_scale": 0.011055666504740828,
+      "content_anchor_xy": [
+        6,
+        6
+      ]
+    },
+    "palette_keys": [
+      "ink",
+      "ink_soft",
+      "night",
+      "stone_dark",
+      "stone",
+      "stone_light",
+      "bone_dark"
+    ],
+    "bounds": [
+      2,
+      8,
+      15,
+      14
+    ],
+    "native_wh": [
+      13,
+      6
+    ],
+    "numeric_fit": true
+  },
+  "gold_ore-master-c1-r1": {
+    "id": "gold_ore",
+    "source": "raw\\gold_ore-master-c1-r1.png",
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "limits_wh": [
+      [
+        10,
+        14
+      ],
+      [
+        8,
+        11
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        298,
+        249,
+        834,
+        689
+      ],
+      "content_scale": 0.01403961011162043,
+      "content_anchor_xy": [
+        6,
+        10
+      ]
+    },
+    "palette_keys": [
+      "ink",
+      "ink_soft",
+      "night",
+      "stone_dark",
+      "stone",
+      "gold_dark",
+      "gold",
+      "gold_light",
+      "flame_hot",
+      "bone"
+    ],
+    "bounds": [
+      2,
+      4,
+      14,
+      14
+    ],
+    "native_wh": [
+      12,
+      10
+    ],
+    "numeric_fit": true
+  },
+  "gold_ore-master-c2-r1": {
+    "id": "gold_ore",
+    "source": "raw\\gold_ore-master-c2-r1.png",
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "limits_wh": [
+      [
+        10,
+        14
+      ],
+      [
+        8,
+        11
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        384,
+        197,
+        820,
+        651
+      ],
+      "content_scale": 0.014623665280431606,
+      "content_anchor_xy": [
+        6,
+        10
+      ]
+    },
+    "palette_keys": [
+      "ink",
+      "ink_soft",
+      "night",
+      "stone_dark",
+      "stone",
+      "gold_dark",
+      "gold",
+      "gold_light",
+      "flame_hot",
+      "bone"
+    ],
+    "bounds": [
+      2,
+      4,
+      14,
+      14
+    ],
+    "native_wh": [
+      12,
+      10
+    ],
+    "numeric_fit": true
+  },
+  "hardwood_stump-master-c1-r1": {
+    "id": "hardwood_stump",
+    "source": "raw\\hardwood_stump-master-c1-r1.png",
+    "canvas_wh": [
+      32,
+      32
+    ],
+    "pivot_xy": [
+      16,
+      30
+    ],
+    "limits_wh": [
+      [
+        26,
+        30
+      ],
+      [
+        16,
+        18
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        99,
+        204,
+        1337,
+        702
+      ],
+      "content_scale": 0.02244940196510877,
+      "content_anchor_xy": [
+        15,
+        16
+      ]
+    },
+    "palette_keys": [
+      "ink",
+      "soil_dark",
+      "soil",
+      "wood_dark",
+      "wood",
+      "wood_light",
+      "gold_dark",
+      "gold",
+      "bone_dark"
+    ],
+    "bounds": [
+      1,
+      14,
+      31,
+      30
+    ],
+    "native_wh": [
+      30,
+      16
+    ],
+    "numeric_fit": true
+  },
+  "hardwood_stump-master-c2-r1": {
+    "id": "hardwood_stump",
+    "source": "raw\\hardwood_stump-master-c2-r1.png",
+    "canvas_wh": [
+      32,
+      32
+    ],
+    "pivot_xy": [
+      16,
+      30
+    ],
+    "limits_wh": [
+      [
+        26,
+        30
+      ],
+      [
+        16,
+        18
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        58,
+        156,
+        1425,
+        776
+      ],
+      "content_scale": 0.020691802315066017,
+      "content_anchor_xy": [
+        14,
+        16
+      ]
+    },
+    "palette_keys": [
+      "ink",
+      "soil_dark",
+      "soil",
+      "wood_dark",
+      "wood",
+      "wood_light",
+      "gold_dark",
+      "gold",
+      "bone_dark"
+    ],
+    "bounds": [
+      2,
+      14,
+      31,
+      30
+    ],
+    "native_wh": [
+      29,
+      16
+    ],
+    "numeric_fit": true
+  }
+}

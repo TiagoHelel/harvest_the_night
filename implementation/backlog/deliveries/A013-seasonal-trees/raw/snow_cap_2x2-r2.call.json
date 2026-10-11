@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is exactcompletecanvas edit target. Keep COMPLETE32x32logicalcanvas, snowcap horizontalwidth16pixels atx8..23. FLATTEN onlytheloweredge byONE nativepixel: final capheight atmost5pixels fromy16 through20, NO opaque pixels y21andbelow. Preserve lowbroadsnowcushion, no hostbody. No isolated pixels/holes, detachedflakes, scene, text, crop or recenter. Whitesbone232224207/moon207214255 withmutedcreamunderside. Returnfullsquarecanvas and realalpha.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\snow_cap_2x2-r1-10x.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\snow_cap_2x2-r1-10x.png",
+      "sha256": "ec93b1714f19261939f693a722c817985c8d06fa7fbe164ad5fe96f9fbe9c1b5",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-10615500-6531-49ba-8001-744b7bd54a6b.png",
+  "copied_raw_path": "raw/snow_cap_2x2-r2.png",
+  "raw_sha256": "7d3f1184d623c917669a820813f52506f38108bc125781c134f114367d251df5",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "inspection pending"
+}

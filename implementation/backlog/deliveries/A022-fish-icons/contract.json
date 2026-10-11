@@ -1,0 +1,3522 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "hud_bream",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_bream-none-0-night.png",
+          "path": "native/hud_bream/none/01.png",
+          "points": {},
+          "pose": "bream icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "bream icon"
+      ]
+    },
+    {
+      "anim": "hud_carp",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_carp-none-0-night.png",
+          "path": "native/hud_carp/none/01.png",
+          "points": {},
+          "pose": "carp icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "carp icon"
+      ]
+    },
+    {
+      "anim": "hud_catfish",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_catfish-none-0-night.png",
+          "path": "native/hud_catfish/none/01.png",
+          "points": {},
+          "pose": "catfish icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "catfish icon"
+      ]
+    },
+    {
+      "anim": "hud_dorado",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_dorado-none-0-night.png",
+          "path": "native/hud_dorado/none/01.png",
+          "points": {},
+          "pose": "dorado icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "dorado icon"
+      ]
+    },
+    {
+      "anim": "hud_eel",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_eel-none-0-night.png",
+          "path": "native/hud_eel/none/01.png",
+          "points": {},
+          "pose": "eel icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "eel icon"
+      ]
+    },
+    {
+      "anim": "hud_ghost_pike",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_ghost_pike-none-0-night.png",
+          "path": "native/hud_ghost_pike/none/01.png",
+          "points": {},
+          "pose": "ghost_pike icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "ghost_pike icon"
+      ]
+    },
+    {
+      "anim": "hud_golden_queen",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_golden_queen-none-0-night.png",
+          "path": "native/hud_golden_queen/none/01.png",
+          "points": {},
+          "pose": "golden_queen icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "golden_queen icon"
+      ]
+    },
+    {
+      "anim": "hud_ice_sturgeon",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_ice_sturgeon-none-0-night.png",
+          "path": "native/hud_ice_sturgeon/none/01.png",
+          "points": {},
+          "pose": "ice_sturgeon icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "ice_sturgeon icon"
+      ]
+    },
+    {
+      "anim": "hud_old_catfish",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_old_catfish-none-0-night.png",
+          "path": "native/hud_old_catfish/none/01.png",
+          "points": {},
+          "pose": "old_catfish icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "old_catfish icon"
+      ]
+    },
+    {
+      "anim": "hud_perch",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_perch-none-0-night.png",
+          "path": "native/hud_perch/none/01.png",
+          "points": {},
+          "pose": "perch icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "perch icon"
+      ]
+    },
+    {
+      "anim": "hud_pike",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_pike-none-0-night.png",
+          "path": "native/hud_pike/none/01.png",
+          "points": {},
+          "pose": "pike icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "pike icon"
+      ]
+    },
+    {
+      "anim": "hud_salmon",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_salmon-none-0-night.png",
+          "path": "native/hud_salmon/none/01.png",
+          "points": {},
+          "pose": "salmon icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "salmon icon"
+      ]
+    },
+    {
+      "anim": "hud_sturgeon",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_sturgeon-none-0-night.png",
+          "path": "native/hud_sturgeon/none/01.png",
+          "points": {},
+          "pose": "sturgeon icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "sturgeon icon"
+      ]
+    },
+    {
+      "anim": "hud_sunfish",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_sunfish-none-0-night.png",
+          "path": "native/hud_sunfish/none/01.png",
+          "points": {},
+          "pose": "sunfish icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "sunfish icon"
+      ]
+    },
+    {
+      "anim": "hud_tilapia",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_tilapia-none-0-night.png",
+          "path": "native/hud_tilapia/none/01.png",
+          "points": {},
+          "pose": "tilapia icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "tilapia icon"
+      ]
+    },
+    {
+      "anim": "hud_trout",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_trout-none-0-night.png",
+          "path": "native/hud_trout/none/01.png",
+          "points": {},
+          "pose": "trout icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "trout icon"
+      ]
+    },
+    {
+      "anim": "icon_bream",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_bream-none-0-night.png",
+          "path": "native/icon_bream/none/01.png",
+          "points": {},
+          "pose": "bream icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "bream icon"
+      ]
+    },
+    {
+      "anim": "icon_carp",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_carp-none-0-night.png",
+          "path": "native/icon_carp/none/01.png",
+          "points": {},
+          "pose": "carp icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "carp icon"
+      ]
+    },
+    {
+      "anim": "icon_catfish",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_catfish-none-0-night.png",
+          "path": "native/icon_catfish/none/01.png",
+          "points": {},
+          "pose": "catfish icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "catfish icon"
+      ]
+    },
+    {
+      "anim": "icon_dorado",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_dorado-none-0-night.png",
+          "path": "native/icon_dorado/none/01.png",
+          "points": {},
+          "pose": "dorado icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "dorado icon"
+      ]
+    },
+    {
+      "anim": "icon_eel",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_eel-none-0-night.png",
+          "path": "native/icon_eel/none/01.png",
+          "points": {},
+          "pose": "eel icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "eel icon"
+      ]
+    },
+    {
+      "anim": "icon_ghost_pike",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_ghost_pike-none-0-night.png",
+          "path": "native/icon_ghost_pike/none/01.png",
+          "points": {},
+          "pose": "ghost_pike icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "ghost_pike icon"
+      ]
+    },
+    {
+      "anim": "icon_golden_queen",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_golden_queen-none-0-night.png",
+          "path": "native/icon_golden_queen/none/01.png",
+          "points": {},
+          "pose": "golden_queen icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "golden_queen icon"
+      ]
+    },
+    {
+      "anim": "icon_ice_sturgeon",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_ice_sturgeon-none-0-night.png",
+          "path": "native/icon_ice_sturgeon/none/01.png",
+          "points": {},
+          "pose": "ice_sturgeon icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "ice_sturgeon icon"
+      ]
+    },
+    {
+      "anim": "icon_old_catfish",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_old_catfish-none-0-night.png",
+          "path": "native/icon_old_catfish/none/01.png",
+          "points": {},
+          "pose": "old_catfish icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "old_catfish icon"
+      ]
+    },
+    {
+      "anim": "icon_perch",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_perch-none-0-night.png",
+          "path": "native/icon_perch/none/01.png",
+          "points": {},
+          "pose": "perch icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "perch icon"
+      ]
+    },
+    {
+      "anim": "icon_pike",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_pike-none-0-night.png",
+          "path": "native/icon_pike/none/01.png",
+          "points": {},
+          "pose": "pike icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "pike icon"
+      ]
+    },
+    {
+      "anim": "icon_salmon",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_salmon-none-0-night.png",
+          "path": "native/icon_salmon/none/01.png",
+          "points": {},
+          "pose": "salmon icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "salmon icon"
+      ]
+    },
+    {
+      "anim": "icon_sturgeon",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_sturgeon-none-0-night.png",
+          "path": "native/icon_sturgeon/none/01.png",
+          "points": {},
+          "pose": "sturgeon icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "sturgeon icon"
+      ]
+    },
+    {
+      "anim": "icon_sunfish",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_sunfish-none-0-night.png",
+          "path": "native/icon_sunfish/none/01.png",
+          "points": {},
+          "pose": "sunfish icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "sunfish icon"
+      ]
+    },
+    {
+      "anim": "icon_tilapia",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_tilapia-none-0-night.png",
+          "path": "native/icon_tilapia/none/01.png",
+          "points": {},
+          "pose": "tilapia icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "tilapia icon"
+      ]
+    },
+    {
+      "anim": "icon_trout",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_trout-none-0-night.png",
+          "path": "native/icon_trout/none/01.png",
+          "points": {},
+          "pose": "trout icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "trout icon"
+      ]
+    },
+    {
+      "anim": "portrait_bream",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_bream-none-0-night.png",
+          "path": "native/portrait_bream/none/01.png",
+          "points": {},
+          "pose": "bream icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "bream icon"
+      ]
+    },
+    {
+      "anim": "portrait_carp",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_carp-none-0-night.png",
+          "path": "native/portrait_carp/none/01.png",
+          "points": {},
+          "pose": "carp icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "carp icon"
+      ]
+    },
+    {
+      "anim": "portrait_catfish",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_catfish-none-0-night.png",
+          "path": "native/portrait_catfish/none/01.png",
+          "points": {},
+          "pose": "catfish icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "catfish icon"
+      ]
+    },
+    {
+      "anim": "portrait_dorado",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_dorado-none-0-night.png",
+          "path": "native/portrait_dorado/none/01.png",
+          "points": {},
+          "pose": "dorado icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "dorado icon"
+      ]
+    },
+    {
+      "anim": "portrait_eel",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_eel-none-0-night.png",
+          "path": "native/portrait_eel/none/01.png",
+          "points": {},
+          "pose": "eel icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "eel icon"
+      ]
+    },
+    {
+      "anim": "portrait_ghost_pike",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_ghost_pike-none-0-night.png",
+          "path": "native/portrait_ghost_pike/none/01.png",
+          "points": {},
+          "pose": "ghost_pike icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "ghost_pike icon"
+      ]
+    },
+    {
+      "anim": "portrait_golden_queen",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_golden_queen-none-0-night.png",
+          "path": "native/portrait_golden_queen/none/01.png",
+          "points": {},
+          "pose": "golden_queen icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "golden_queen icon"
+      ]
+    },
+    {
+      "anim": "portrait_ice_sturgeon",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_ice_sturgeon-none-0-night.png",
+          "path": "native/portrait_ice_sturgeon/none/01.png",
+          "points": {},
+          "pose": "ice_sturgeon icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "ice_sturgeon icon"
+      ]
+    },
+    {
+      "anim": "portrait_old_catfish",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_old_catfish-none-0-night.png",
+          "path": "native/portrait_old_catfish/none/01.png",
+          "points": {},
+          "pose": "old_catfish icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "old_catfish icon"
+      ]
+    },
+    {
+      "anim": "portrait_perch",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_perch-none-0-night.png",
+          "path": "native/portrait_perch/none/01.png",
+          "points": {},
+          "pose": "perch icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "perch icon"
+      ]
+    },
+    {
+      "anim": "portrait_pike",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_pike-none-0-night.png",
+          "path": "native/portrait_pike/none/01.png",
+          "points": {},
+          "pose": "pike icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "pike icon"
+      ]
+    },
+    {
+      "anim": "portrait_salmon",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_salmon-none-0-night.png",
+          "path": "native/portrait_salmon/none/01.png",
+          "points": {},
+          "pose": "salmon icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "salmon icon"
+      ]
+    },
+    {
+      "anim": "portrait_sturgeon",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_sturgeon-none-0-night.png",
+          "path": "native/portrait_sturgeon/none/01.png",
+          "points": {},
+          "pose": "sturgeon icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "sturgeon icon"
+      ]
+    },
+    {
+      "anim": "portrait_sunfish",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_sunfish-none-0-night.png",
+          "path": "native/portrait_sunfish/none/01.png",
+          "points": {},
+          "pose": "sunfish icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "sunfish icon"
+      ]
+    },
+    {
+      "anim": "portrait_tilapia",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_tilapia-none-0-night.png",
+          "path": "native/portrait_tilapia/none/01.png",
+          "points": {},
+          "pose": "tilapia icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "tilapia icon"
+      ]
+    },
+    {
+      "anim": "portrait_trout",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/portrait_trout-none-0-night.png",
+          "path": "native/portrait_trout/none/01.png",
+          "points": {},
+          "pose": "trout icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "poses": [
+        "trout icon"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/ui/icon_fish.png",
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  ],
+  "date": "2026-10-10",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "portrait_carp",
+      "call": "raw/carp-master-c2-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_carp/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "carp icon",
+      "prompt": "raw/carp-master-c2-r1.prompt.txt",
+      "prompt_sha256": "d717c6a400fd63313c7338cad822ea952c24da7127c1831e43b4197fa0c978ca",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          8
+        ],
+        "content_scale": 0.02570694087403599,
+        "crop_xywh": [
+          230,
+          210,
+          1167,
+          642
+        ]
+      },
+      "resource_id": "carp",
+      "runtime_name": "sprites/ui/portrait_carp.png",
+      "seconds": 1.0,
+      "sha256": "cbdffe995fafebda4e91d5dfa84a229bdebf4d10e7302516db25b3dd343a201b",
+      "source": "raw/carp-master-c2-r1.png",
+      "source_sha256": "c50b7cc0914532b995ed00c53aa619dbd9144e0321fc0272f40226828f47ef63"
+    },
+    {
+      "anim": "icon_carp",
+      "call": "raw/carp-master-c2-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_carp/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "carp icon",
+      "prompt": "raw/carp-master-c2-r1.prompt.txt",
+      "prompt_sha256": "d717c6a400fd63313c7338cad822ea952c24da7127c1831e43b4197fa0c978ca",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          4
+        ],
+        "content_scale": 0.011996572407883462,
+        "crop_xywh": [
+          230,
+          210,
+          1167,
+          642
+        ]
+      },
+      "resource_id": "carp",
+      "runtime_name": "sprites/ui/icon_carp.png",
+      "seconds": 1.0,
+      "sha256": "78963f7bcea1a0f0e40fc5b6f508f8d6cf3ef159a5c24d8d6d3219454e5aa386",
+      "source": "raw/carp-master-c2-r1.png",
+      "source_sha256": "c50b7cc0914532b995ed00c53aa619dbd9144e0321fc0272f40226828f47ef63"
+    },
+    {
+      "anim": "hud_carp",
+      "call": "raw/carp-master-c2-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_carp/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "carp icon",
+      "prompt": "raw/carp-master-c2-r1.prompt.txt",
+      "prompt_sha256": "d717c6a400fd63313c7338cad822ea952c24da7127c1831e43b4197fa0c978ca",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.006855184233076264,
+        "crop_xywh": [
+          230,
+          210,
+          1167,
+          642
+        ]
+      },
+      "resource_id": "carp",
+      "runtime_name": "sprites/ui/hud_carp.png",
+      "seconds": 1.0,
+      "sha256": "b2d71697d48cf976f0763f8d62c4cb21034e5ea995f9abdf78adbacea48ce812",
+      "source": "raw/carp-master-c2-r1.png",
+      "source_sha256": "c50b7cc0914532b995ed00c53aa619dbd9144e0321fc0272f40226828f47ef63"
+    },
+    {
+      "anim": "portrait_bream",
+      "call": "raw/bream-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_bream/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "bream icon",
+      "prompt": "raw/bream-r1.prompt.txt",
+      "prompt_sha256": "a6b748ed6d781f6edf7d98af8f7f4ba4799677cb69691d53a01e1ce19b66faa0",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          9
+        ],
+        "content_scale": 0.023790642347343377,
+        "crop_xywh": [
+          168,
+          154,
+          1261,
+          750
+        ]
+      },
+      "resource_id": "bream",
+      "runtime_name": "sprites/ui/portrait_bream.png",
+      "seconds": 1.0,
+      "sha256": "e7b67b2088c91b24bf2fe01894e301ef7251a96291a9c6793fd0761f6e7e31c8",
+      "source": "raw/bream-r1.png",
+      "source_sha256": "2d76c91d5d7ec134bc0c0343fc3c4b8f0e381d85ce496808276817f2c6087bfa"
+    },
+    {
+      "anim": "icon_bream",
+      "call": "raw/bream-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_bream/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "bream icon",
+      "prompt": "raw/bream-r1.prompt.txt",
+      "prompt_sha256": "a6b748ed6d781f6edf7d98af8f7f4ba4799677cb69691d53a01e1ce19b66faa0",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          4
+        ],
+        "content_scale": 0.011102299762093577,
+        "crop_xywh": [
+          168,
+          154,
+          1261,
+          750
+        ]
+      },
+      "resource_id": "bream",
+      "runtime_name": "sprites/ui/icon_bream.png",
+      "seconds": 1.0,
+      "sha256": "6b96bf3c7bcef62bae6cbebbb9aef72a97e62401fe0e432feffe434abad443a5",
+      "source": "raw/bream-r1.png",
+      "source_sha256": "2d76c91d5d7ec134bc0c0343fc3c4b8f0e381d85ce496808276817f2c6087bfa"
+    },
+    {
+      "anim": "hud_bream",
+      "call": "raw/bream-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_bream/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "bream icon",
+      "prompt": "raw/bream-r1.prompt.txt",
+      "prompt_sha256": "a6b748ed6d781f6edf7d98af8f7f4ba4799677cb69691d53a01e1ce19b66faa0",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.006344171292624901,
+        "crop_xywh": [
+          168,
+          154,
+          1261,
+          750
+        ]
+      },
+      "resource_id": "bream",
+      "runtime_name": "sprites/ui/hud_bream.png",
+      "seconds": 1.0,
+      "sha256": "1d71fa12877aacf75dac73653bd514c48e2c701b1da4706f1f5b98080c5472a4",
+      "source": "raw/bream-r1.png",
+      "source_sha256": "2d76c91d5d7ec134bc0c0343fc3c4b8f0e381d85ce496808276817f2c6087bfa"
+    },
+    {
+      "anim": "portrait_catfish",
+      "call": "raw/catfish-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_catfish/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "catfish icon",
+      "prompt": "raw/catfish-r1.prompt.txt",
+      "prompt_sha256": "f94bc5ff6691261184a8fa5c9415a6872bc42b707e8fb643d242e82eefa00db3",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          7
+        ],
+        "content_scale": 0.023237800154918668,
+        "crop_xywh": [
+          124,
+          217,
+          1291,
+          627
+        ]
+      },
+      "resource_id": "catfish",
+      "runtime_name": "sprites/ui/portrait_catfish.png",
+      "seconds": 1.0,
+      "sha256": "95ffcd447af0d8b5b4cd7aaa5ae0af01e5766b4c46957890bbed5dd511971f94",
+      "source": "raw/catfish-r1.png",
+      "source_sha256": "45c0dc4ed20fb64a93a395adfdfc0377dcc8de6a503795379fc21733adafc6c7"
+    },
+    {
+      "anim": "icon_catfish",
+      "call": "raw/catfish-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_catfish/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "catfish icon",
+      "prompt": "raw/catfish-r1.prompt.txt",
+      "prompt_sha256": "f94bc5ff6691261184a8fa5c9415a6872bc42b707e8fb643d242e82eefa00db3",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          3
+        ],
+        "content_scale": 0.010844306738962044,
+        "crop_xywh": [
+          124,
+          217,
+          1291,
+          627
+        ]
+      },
+      "resource_id": "catfish",
+      "runtime_name": "sprites/ui/icon_catfish.png",
+      "seconds": 1.0,
+      "sha256": "3c699e6b9b5cc909580200ddb9cd55d9e5b3a765940c04dde40e94bd4f234b82",
+      "source": "raw/catfish-r1.png",
+      "source_sha256": "45c0dc4ed20fb64a93a395adfdfc0377dcc8de6a503795379fc21733adafc6c7"
+    },
+    {
+      "anim": "hud_catfish",
+      "call": "raw/catfish-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_catfish/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "catfish icon",
+      "prompt": "raw/catfish-r1.prompt.txt",
+      "prompt_sha256": "f94bc5ff6691261184a8fa5c9415a6872bc42b707e8fb643d242e82eefa00db3",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.006196746707978312,
+        "crop_xywh": [
+          124,
+          217,
+          1291,
+          627
+        ]
+      },
+      "resource_id": "catfish",
+      "runtime_name": "sprites/ui/hud_catfish.png",
+      "seconds": 1.0,
+      "sha256": "e060dd8923b5091f32c25d7b7840676a8be35fae10aa43ff73f8d3e1fd615577",
+      "source": "raw/catfish-r1.png",
+      "source_sha256": "45c0dc4ed20fb64a93a395adfdfc0377dcc8de6a503795379fc21733adafc6c7"
+    },
+    {
+      "anim": "portrait_dorado",
+      "call": "raw/dorado-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_dorado/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "dorado icon",
+      "prompt": "raw/dorado-r1.prompt.txt",
+      "prompt_sha256": "d74efbf1a4db26bb6b9057da6ca77ebe2d3c822ea2f6bab88cc7f09244055d25",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          8
+        ],
+        "content_scale": 0.02377179080824089,
+        "crop_xywh": [
+          178,
+          196,
+          1262,
+          664
+        ]
+      },
+      "resource_id": "dorado",
+      "runtime_name": "sprites/ui/portrait_dorado.png",
+      "seconds": 1.0,
+      "sha256": "be7c8b83687d506591690228df6002881a450c3dbb5a8f8176ed137b67ff6e2e",
+      "source": "raw/dorado-r1.png",
+      "source_sha256": "34395f0e8cd2976d72b5fd1849837772cccdec2302bae4a9c1044f5c795e8530"
+    },
+    {
+      "anim": "icon_dorado",
+      "call": "raw/dorado-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_dorado/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "dorado icon",
+      "prompt": "raw/dorado-r1.prompt.txt",
+      "prompt_sha256": "d74efbf1a4db26bb6b9057da6ca77ebe2d3c822ea2f6bab88cc7f09244055d25",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          3
+        ],
+        "content_scale": 0.011093502377179081,
+        "crop_xywh": [
+          178,
+          196,
+          1262,
+          664
+        ]
+      },
+      "resource_id": "dorado",
+      "runtime_name": "sprites/ui/icon_dorado.png",
+      "seconds": 1.0,
+      "sha256": "7b80ca792fcb2d081e261f3da078b61a439bcc2255cceeaab2b3dcd955cb1599",
+      "source": "raw/dorado-r1.png",
+      "source_sha256": "34395f0e8cd2976d72b5fd1849837772cccdec2302bae4a9c1044f5c795e8530"
+    },
+    {
+      "anim": "hud_dorado",
+      "call": "raw/dorado-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_dorado/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "dorado icon",
+      "prompt": "raw/dorado-r1.prompt.txt",
+      "prompt_sha256": "d74efbf1a4db26bb6b9057da6ca77ebe2d3c822ea2f6bab88cc7f09244055d25",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.006339144215530904,
+        "crop_xywh": [
+          178,
+          196,
+          1262,
+          664
+        ]
+      },
+      "resource_id": "dorado",
+      "runtime_name": "sprites/ui/hud_dorado.png",
+      "seconds": 1.0,
+      "sha256": "496fc7773756d00ea7534e944b74555a864df8ae20fb75072004d694cebfdc41",
+      "source": "raw/dorado-r1.png",
+      "source_sha256": "34395f0e8cd2976d72b5fd1849837772cccdec2302bae4a9c1044f5c795e8530"
+    },
+    {
+      "anim": "portrait_eel",
+      "call": "raw/eel-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_eel/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "eel icon",
+      "prompt": "raw/eel-r1.prompt.txt",
+      "prompt_sha256": "2176aace4331ba8c3b25dca0e406df35cfdec0c52bfd92c090cf7a5d42681124",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          6
+        ],
+        "content_scale": 0.0234009360374415,
+        "crop_xywh": [
+          159,
+          301,
+          1282,
+          524
+        ]
+      },
+      "resource_id": "eel",
+      "runtime_name": "sprites/ui/portrait_eel.png",
+      "seconds": 1.0,
+      "sha256": "76e3891a094fc0e26de9e6adb411f5d2cff02794c689b9ee86e58c910cd9a228",
+      "source": "raw/eel-r1.png",
+      "source_sha256": "dc9bcaa432a35dc1bf32087c1b6f6cde2008d649606b88f136e41b77a7f0cf2c"
+    },
+    {
+      "anim": "icon_eel",
+      "call": "raw/eel-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_eel/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "eel icon",
+      "prompt": "raw/eel-r1.prompt.txt",
+      "prompt_sha256": "2176aace4331ba8c3b25dca0e406df35cfdec0c52bfd92c090cf7a5d42681124",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          3
+        ],
+        "content_scale": 0.0109204368174727,
+        "crop_xywh": [
+          159,
+          301,
+          1282,
+          524
+        ]
+      },
+      "resource_id": "eel",
+      "runtime_name": "sprites/ui/icon_eel.png",
+      "seconds": 1.0,
+      "sha256": "fab441a0750beeb8ac9a52859379a8eecfe60a44df877bcec71e8f3974794902",
+      "source": "raw/eel-r1.png",
+      "source_sha256": "dc9bcaa432a35dc1bf32087c1b6f6cde2008d649606b88f136e41b77a7f0cf2c"
+    },
+    {
+      "anim": "hud_eel",
+      "call": "raw/eel-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_eel/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "eel icon",
+      "prompt": "raw/eel-r1.prompt.txt",
+      "prompt_sha256": "2176aace4331ba8c3b25dca0e406df35cfdec0c52bfd92c090cf7a5d42681124",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          1
+        ],
+        "content_scale": 0.0062402496099844,
+        "crop_xywh": [
+          159,
+          301,
+          1282,
+          524
+        ]
+      },
+      "resource_id": "eel",
+      "runtime_name": "sprites/ui/hud_eel.png",
+      "seconds": 1.0,
+      "sha256": "a745d97a35c14cc37e7e06ab0e8c06962b4e4196846721e9071792e7eca35465",
+      "source": "raw/eel-r1.png",
+      "source_sha256": "dc9bcaa432a35dc1bf32087c1b6f6cde2008d649606b88f136e41b77a7f0cf2c"
+    },
+    {
+      "anim": "portrait_perch",
+      "call": "raw/perch-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_perch/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "perch icon",
+      "prompt": "raw/perch-r1.prompt.txt",
+      "prompt_sha256": "2499608bacc022579b74945e57a1f0c668c27f74892929577abc3ee3a016529f",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          8
+        ],
+        "content_scale": 0.02444987775061125,
+        "crop_xywh": [
+          189,
+          177,
+          1227,
+          711
+        ]
+      },
+      "resource_id": "perch",
+      "runtime_name": "sprites/ui/portrait_perch.png",
+      "seconds": 1.0,
+      "sha256": "a07a745366fcda62a3b1e9f79079cab71adfbbd91196953adb604867a28136b9",
+      "source": "raw/perch-r1.png",
+      "source_sha256": "46f7f923eef38427935d0cb1cf2404b664df0329a8bdf6ea16e22df6a599c31b"
+    },
+    {
+      "anim": "icon_perch",
+      "call": "raw/perch-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_perch/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "perch icon",
+      "prompt": "raw/perch-r1.prompt.txt",
+      "prompt_sha256": "2499608bacc022579b74945e57a1f0c668c27f74892929577abc3ee3a016529f",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          4
+        ],
+        "content_scale": 0.011409942950285249,
+        "crop_xywh": [
+          189,
+          177,
+          1227,
+          711
+        ]
+      },
+      "resource_id": "perch",
+      "runtime_name": "sprites/ui/icon_perch.png",
+      "seconds": 1.0,
+      "sha256": "2dcdb4d37476514dff1fdfb888779af4872e53af05f3c3c45f5ebd6d68244642",
+      "source": "raw/perch-r1.png",
+      "source_sha256": "46f7f923eef38427935d0cb1cf2404b664df0329a8bdf6ea16e22df6a599c31b"
+    },
+    {
+      "anim": "hud_perch",
+      "call": "raw/perch-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_perch/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "perch icon",
+      "prompt": "raw/perch-r1.prompt.txt",
+      "prompt_sha256": "2499608bacc022579b74945e57a1f0c668c27f74892929577abc3ee3a016529f",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.006519967400162999,
+        "crop_xywh": [
+          189,
+          177,
+          1227,
+          711
+        ]
+      },
+      "resource_id": "perch",
+      "runtime_name": "sprites/ui/hud_perch.png",
+      "seconds": 1.0,
+      "sha256": "e9adcc77e24c76f0ff8cee022afbc18d62a16f2ba59df14411cd891fab5ea39f",
+      "source": "raw/perch-r1.png",
+      "source_sha256": "46f7f923eef38427935d0cb1cf2404b664df0329a8bdf6ea16e22df6a599c31b"
+    },
+    {
+      "anim": "portrait_pike",
+      "call": "raw/pike-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_pike/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "pike icon",
+      "prompt": "raw/pike-r1.prompt.txt",
+      "prompt_sha256": "a401e9446c1613fe339a652944c6e36767489b72aa8e749825fa39c782bde619",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          5
+        ],
+        "content_scale": 0.0211118930330753,
+        "crop_xywh": [
+          75,
+          370,
+          1421,
+          521
+        ]
+      },
+      "resource_id": "pike",
+      "runtime_name": "sprites/ui/portrait_pike.png",
+      "seconds": 1.0,
+      "sha256": "7c378f4839fd966547413a619212add4f42b5a6d2d69c34e3796bd5d371497a7",
+      "source": "raw/pike-r1.png",
+      "source_sha256": "0bb7cb25258ec273fbb9db675f3cf40302fccc647109ab432c8a53c2b6d1c976"
+    },
+    {
+      "anim": "icon_pike",
+      "call": "raw/pike-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_pike/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "pike icon",
+      "prompt": "raw/pike-r1.prompt.txt",
+      "prompt_sha256": "a401e9446c1613fe339a652944c6e36767489b72aa8e749825fa39c782bde619",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          2
+        ],
+        "content_scale": 0.009852216748768473,
+        "crop_xywh": [
+          75,
+          370,
+          1421,
+          521
+        ]
+      },
+      "resource_id": "pike",
+      "runtime_name": "sprites/ui/icon_pike.png",
+      "seconds": 1.0,
+      "sha256": "8286a05f406373525b1031913eb73d95cc29d1f80b3b11a1fa035ac66d6628f8",
+      "source": "raw/pike-r1.png",
+      "source_sha256": "0bb7cb25258ec273fbb9db675f3cf40302fccc647109ab432c8a53c2b6d1c976"
+    },
+    {
+      "anim": "hud_pike",
+      "call": "raw/pike-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_pike/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "pike icon",
+      "prompt": "raw/pike-r1.prompt.txt",
+      "prompt_sha256": "a401e9446c1613fe339a652944c6e36767489b72aa8e749825fa39c782bde619",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          1
+        ],
+        "content_scale": 0.005629838142153413,
+        "crop_xywh": [
+          75,
+          370,
+          1421,
+          521
+        ]
+      },
+      "resource_id": "pike",
+      "runtime_name": "sprites/ui/hud_pike.png",
+      "seconds": 1.0,
+      "sha256": "bbf24441d4d7f6adee935e178c5e3cbba8225896b75d7fa1f4c6362c3fc5035f",
+      "source": "raw/pike-r1.png",
+      "source_sha256": "0bb7cb25258ec273fbb9db675f3cf40302fccc647109ab432c8a53c2b6d1c976"
+    },
+    {
+      "anim": "portrait_salmon",
+      "call": "raw/salmon-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_salmon/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "salmon icon",
+      "prompt": "raw/salmon-r1.prompt.txt",
+      "prompt_sha256": "7fa69aa8e82df3b1a8ea83c9afe8eb2d42f6f0d733c8114132cc67a8c02a79f2",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          6
+        ],
+        "content_scale": 0.02243829468960359,
+        "crop_xywh": [
+          133,
+          264,
+          1337,
+          601
+        ]
+      },
+      "resource_id": "salmon",
+      "runtime_name": "sprites/ui/portrait_salmon.png",
+      "seconds": 1.0,
+      "sha256": "13061065df36751d688091a0a8207eed035fc930e421a7525e15b5db6f754997",
+      "source": "raw/salmon-r1.png",
+      "source_sha256": "b27e3009dc905bd4d4cd346523a55508a9df692b1c72564141721c226ed92c3c"
+    },
+    {
+      "anim": "icon_salmon",
+      "call": "raw/salmon-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_salmon/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "salmon icon",
+      "prompt": "raw/salmon-r1.prompt.txt",
+      "prompt_sha256": "7fa69aa8e82df3b1a8ea83c9afe8eb2d42f6f0d733c8114132cc67a8c02a79f2",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          3
+        ],
+        "content_scale": 0.010471204188481676,
+        "crop_xywh": [
+          133,
+          264,
+          1337,
+          601
+        ]
+      },
+      "resource_id": "salmon",
+      "runtime_name": "sprites/ui/icon_salmon.png",
+      "seconds": 1.0,
+      "sha256": "447e7e654ef25dc2b6d36b5f2b0c54b0688ec32d85e3e6ec82f44c2b69b7b48c",
+      "source": "raw/salmon-r1.png",
+      "source_sha256": "b27e3009dc905bd4d4cd346523a55508a9df692b1c72564141721c226ed92c3c"
+    },
+    {
+      "anim": "hud_salmon",
+      "call": "raw/salmon-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_salmon/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "salmon icon",
+      "prompt": "raw/salmon-r1.prompt.txt",
+      "prompt_sha256": "7fa69aa8e82df3b1a8ea83c9afe8eb2d42f6f0d733c8114132cc67a8c02a79f2",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.005983545250560957,
+        "crop_xywh": [
+          133,
+          264,
+          1337,
+          601
+        ]
+      },
+      "resource_id": "salmon",
+      "runtime_name": "sprites/ui/hud_salmon.png",
+      "seconds": 1.0,
+      "sha256": "7a4c36b72bcbc6619cab7b4332d93168224a978d98c049f5b352ad714894436a",
+      "source": "raw/salmon-r1.png",
+      "source_sha256": "b27e3009dc905bd4d4cd346523a55508a9df692b1c72564141721c226ed92c3c"
+    },
+    {
+      "anim": "portrait_sturgeon",
+      "call": "raw/sturgeon-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_sturgeon/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "sturgeon icon",
+      "prompt": "raw/sturgeon-r1.prompt.txt",
+      "prompt_sha256": "2e8188b7a236f2c36e3f8521b9f21c2755ce20e0a4f9eba1eb46d2ce5098d182",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          4
+        ],
+        "content_scale": 0.018598884066955982,
+        "crop_xywh": [
+          127,
+          257,
+          1613,
+          486
+        ]
+      },
+      "resource_id": "sturgeon",
+      "runtime_name": "sprites/ui/portrait_sturgeon.png",
+      "seconds": 1.0,
+      "sha256": "5ca0ca8ab4c6c6b31f2548d4976ad9b2ee8a34ded5b4633644aa338ebd8e8250",
+      "source": "raw/sturgeon-r1.png",
+      "source_sha256": "6a7a3d4c9332b99d5e0a11b07b18835537a28efa0e6ab7c641ceecf3b0d2cc3a"
+    },
+    {
+      "anim": "icon_sturgeon",
+      "call": "raw/sturgeon-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_sturgeon/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "sturgeon icon",
+      "prompt": "raw/sturgeon-r1.prompt.txt",
+      "prompt_sha256": "2e8188b7a236f2c36e3f8521b9f21c2755ce20e0a4f9eba1eb46d2ce5098d182",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          2
+        ],
+        "content_scale": 0.008679479231246125,
+        "crop_xywh": [
+          127,
+          257,
+          1613,
+          486
+        ]
+      },
+      "resource_id": "sturgeon",
+      "runtime_name": "sprites/ui/icon_sturgeon.png",
+      "seconds": 1.0,
+      "sha256": "c9adb2848bb70c053c8a0e62f430a9c9414c9c3168ccb6b596a8c14454d97bb5",
+      "source": "raw/sturgeon-r1.png",
+      "source_sha256": "6a7a3d4c9332b99d5e0a11b07b18835537a28efa0e6ab7c641ceecf3b0d2cc3a"
+    },
+    {
+      "anim": "hud_sturgeon",
+      "call": "raw/sturgeon-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_sturgeon/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "sturgeon icon",
+      "prompt": "raw/sturgeon-r1.prompt.txt",
+      "prompt_sha256": "2e8188b7a236f2c36e3f8521b9f21c2755ce20e0a4f9eba1eb46d2ce5098d182",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          1
+        ],
+        "content_scale": 0.0049597024178549285,
+        "crop_xywh": [
+          127,
+          257,
+          1613,
+          486
+        ]
+      },
+      "resource_id": "sturgeon",
+      "runtime_name": "sprites/ui/hud_sturgeon.png",
+      "seconds": 1.0,
+      "sha256": "543629a3cd8c9381e58e182e8178b20e4eb8d0401d862f09f0783154c0781bdc",
+      "source": "raw/sturgeon-r1.png",
+      "source_sha256": "6a7a3d4c9332b99d5e0a11b07b18835537a28efa0e6ab7c641ceecf3b0d2cc3a"
+    },
+    {
+      "anim": "portrait_sunfish",
+      "call": "raw/sunfish-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_sunfish/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "sunfish icon",
+      "prompt": "raw/sunfish-r1.prompt.txt",
+      "prompt_sha256": "acc58ed72a3ecd2570edc0116629c5f4badd0a842d4cd5dc3388e14a2b7a8bc6",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          10
+        ],
+        "content_scale": 0.029382957884427033,
+        "crop_xywh": [
+          277,
+          166,
+          1021,
+          706
+        ]
+      },
+      "resource_id": "sunfish",
+      "runtime_name": "sprites/ui/portrait_sunfish.png",
+      "seconds": 1.0,
+      "sha256": "f9da6bef0c88b7143b24e6f130a1fb010bb0648162ca9fecd7f8df0120ba736b",
+      "source": "raw/sunfish-r1.png",
+      "source_sha256": "8d345c7460e962bdc31e589b084d4333bd0037e033162edbd416b2e0d73c5504"
+    },
+    {
+      "anim": "icon_sunfish",
+      "call": "raw/sunfish-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_sunfish/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "sunfish icon",
+      "prompt": "raw/sunfish-r1.prompt.txt",
+      "prompt_sha256": "acc58ed72a3ecd2570edc0116629c5f4badd0a842d4cd5dc3388e14a2b7a8bc6",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "content_scale": 0.013712047012732615,
+        "crop_xywh": [
+          277,
+          166,
+          1021,
+          706
+        ]
+      },
+      "resource_id": "sunfish",
+      "runtime_name": "sprites/ui/icon_sunfish.png",
+      "seconds": 1.0,
+      "sha256": "0ceb6aef055f294c898f701c7991dde788392c6bc06f97196d61b087a4704bf8",
+      "source": "raw/sunfish-r1.png",
+      "source_sha256": "8d345c7460e962bdc31e589b084d4333bd0037e033162edbd416b2e0d73c5504"
+    },
+    {
+      "anim": "hud_sunfish",
+      "call": "raw/sunfish-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_sunfish/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "sunfish icon",
+      "prompt": "raw/sunfish-r1.prompt.txt",
+      "prompt_sha256": "acc58ed72a3ecd2570edc0116629c5f4badd0a842d4cd5dc3388e14a2b7a8bc6",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.007835455435847209,
+        "crop_xywh": [
+          277,
+          166,
+          1021,
+          706
+        ]
+      },
+      "resource_id": "sunfish",
+      "runtime_name": "sprites/ui/hud_sunfish.png",
+      "seconds": 1.0,
+      "sha256": "e7eda9c5d7f8ee65197ed6d22e115b352c86bf60d1cb083f1a738daee1a83e3b",
+      "source": "raw/sunfish-r1.png",
+      "source_sha256": "8d345c7460e962bdc31e589b084d4333bd0037e033162edbd416b2e0d73c5504"
+    },
+    {
+      "anim": "portrait_tilapia",
+      "call": "raw/tilapia-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_tilapia/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "tilapia icon",
+      "prompt": "raw/tilapia-r1.prompt.txt",
+      "prompt_sha256": "b1cf218744bc18238676b352e33f14b3cc5b8376ac7a87d53a15f0c9371935c1",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          8
+        ],
+        "content_scale": 0.025974025974025976,
+        "crop_xywh": [
+          230,
+          199,
+          1155,
+          652
+        ]
+      },
+      "resource_id": "tilapia",
+      "runtime_name": "sprites/ui/portrait_tilapia.png",
+      "seconds": 1.0,
+      "sha256": "68e0c3ea268094fb1b3be918957b8e0554187a31fb5641f8efcb868abae05a3c",
+      "source": "raw/tilapia-r1.png",
+      "source_sha256": "4238f85eb32596c17ab00259905af97cb27ec39143a37331a9764cd5c5224a6c"
+    },
+    {
+      "anim": "icon_tilapia",
+      "call": "raw/tilapia-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_tilapia/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "tilapia icon",
+      "prompt": "raw/tilapia-r1.prompt.txt",
+      "prompt_sha256": "b1cf218744bc18238676b352e33f14b3cc5b8376ac7a87d53a15f0c9371935c1",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          4
+        ],
+        "content_scale": 0.012121212121212121,
+        "crop_xywh": [
+          230,
+          199,
+          1155,
+          652
+        ]
+      },
+      "resource_id": "tilapia",
+      "runtime_name": "sprites/ui/icon_tilapia.png",
+      "seconds": 1.0,
+      "sha256": "dad4970350e3588b40f54972b7d2f5df95ac443202f605499388346b105ec4a5",
+      "source": "raw/tilapia-r1.png",
+      "source_sha256": "4238f85eb32596c17ab00259905af97cb27ec39143a37331a9764cd5c5224a6c"
+    },
+    {
+      "anim": "hud_tilapia",
+      "call": "raw/tilapia-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_tilapia/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "tilapia icon",
+      "prompt": "raw/tilapia-r1.prompt.txt",
+      "prompt_sha256": "b1cf218744bc18238676b352e33f14b3cc5b8376ac7a87d53a15f0c9371935c1",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.006926406926406926,
+        "crop_xywh": [
+          230,
+          199,
+          1155,
+          652
+        ]
+      },
+      "resource_id": "tilapia",
+      "runtime_name": "sprites/ui/hud_tilapia.png",
+      "seconds": 1.0,
+      "sha256": "6807f1a424b5d079f620e5b63614172f880066d33167d4fd81536de2766a23a7",
+      "source": "raw/tilapia-r1.png",
+      "source_sha256": "4238f85eb32596c17ab00259905af97cb27ec39143a37331a9764cd5c5224a6c"
+    },
+    {
+      "anim": "portrait_trout",
+      "call": "raw/trout-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_trout/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "trout icon",
+      "prompt": "raw/trout-r1.prompt.txt",
+      "prompt_sha256": "320ca0d40a7149b76e27d70358251535a9836826578ebdbdaaaab7f2b10119f2",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          7
+        ],
+        "content_scale": 0.025996533795493933,
+        "crop_xywh": [
+          225,
+          259,
+          1154,
+          576
+        ]
+      },
+      "resource_id": "trout",
+      "runtime_name": "sprites/ui/portrait_trout.png",
+      "seconds": 1.0,
+      "sha256": "647b557b08e7552721ab268ac58eb4f1ef314f520b7be8972a2bb92a1d5fe04b",
+      "source": "raw/trout-r1.png",
+      "source_sha256": "ef67061246063228dc2f00110c5ad88746fd8661505a1c6084a39afe1a329baa"
+    },
+    {
+      "anim": "icon_trout",
+      "call": "raw/trout-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_trout/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "trout icon",
+      "prompt": "raw/trout-r1.prompt.txt",
+      "prompt_sha256": "320ca0d40a7149b76e27d70358251535a9836826578ebdbdaaaab7f2b10119f2",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          3
+        ],
+        "content_scale": 0.012131715771230503,
+        "crop_xywh": [
+          225,
+          259,
+          1154,
+          576
+        ]
+      },
+      "resource_id": "trout",
+      "runtime_name": "sprites/ui/icon_trout.png",
+      "seconds": 1.0,
+      "sha256": "529cb1f4fce0cad83ad1a55eb5c347d50cfb8b7c4e53c313f0a4ef1adb1ff0d6",
+      "source": "raw/trout-r1.png",
+      "source_sha256": "ef67061246063228dc2f00110c5ad88746fd8661505a1c6084a39afe1a329baa"
+    },
+    {
+      "anim": "hud_trout",
+      "call": "raw/trout-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_trout/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "trout icon",
+      "prompt": "raw/trout-r1.prompt.txt",
+      "prompt_sha256": "320ca0d40a7149b76e27d70358251535a9836826578ebdbdaaaab7f2b10119f2",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.006932409012131715,
+        "crop_xywh": [
+          225,
+          259,
+          1154,
+          576
+        ]
+      },
+      "resource_id": "trout",
+      "runtime_name": "sprites/ui/hud_trout.png",
+      "seconds": 1.0,
+      "sha256": "59e55727909c0e1b4febbac825d05a7e889c686c45c7d2512434fb3835345365",
+      "source": "raw/trout-r1.png",
+      "source_sha256": "ef67061246063228dc2f00110c5ad88746fd8661505a1c6084a39afe1a329baa"
+    },
+    {
+      "anim": "portrait_old_catfish",
+      "call": "raw/old_catfish-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_old_catfish/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "old_catfish icon",
+      "prompt": "raw/old_catfish-r1.prompt.txt",
+      "prompt_sha256": "df0560f92c0a3d42ad12dfa6d9fc8576a30e14ee1213efa1b3cfb8196e19aefc",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          6
+        ],
+        "content_scale": 0.016129032258064516,
+        "crop_xywh": [
+          21,
+          15,
+          1860,
+          816
+        ]
+      },
+      "resource_id": "old_catfish",
+      "runtime_name": "sprites/ui/portrait_old_catfish.png",
+      "seconds": 1.0,
+      "sha256": "6587129fa571eafb611bc00255a665ff1743017be57fcbe3e22bc995042b158e",
+      "source": "raw/old_catfish-r1.png",
+      "source_sha256": "81fa0f7b29d12ae078553e07e0c97c0cb677a8d42ebb0f1f64325756e2176323"
+    },
+    {
+      "anim": "icon_old_catfish",
+      "call": "raw/old_catfish-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_old_catfish/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "old_catfish icon",
+      "prompt": "raw/old_catfish-r1.prompt.txt",
+      "prompt_sha256": "df0560f92c0a3d42ad12dfa6d9fc8576a30e14ee1213efa1b3cfb8196e19aefc",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          3
+        ],
+        "content_scale": 0.007526881720430108,
+        "crop_xywh": [
+          21,
+          15,
+          1860,
+          816
+        ]
+      },
+      "resource_id": "old_catfish",
+      "runtime_name": "sprites/ui/icon_old_catfish.png",
+      "seconds": 1.0,
+      "sha256": "d461559a911fd7f9ca1e92f332412add51d79406eab6c01dd8d226e853a9d209",
+      "source": "raw/old_catfish-r1.png",
+      "source_sha256": "81fa0f7b29d12ae078553e07e0c97c0cb677a8d42ebb0f1f64325756e2176323"
+    },
+    {
+      "anim": "hud_old_catfish",
+      "call": "raw/old_catfish-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_old_catfish/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "old_catfish icon",
+      "prompt": "raw/old_catfish-r1.prompt.txt",
+      "prompt_sha256": "df0560f92c0a3d42ad12dfa6d9fc8576a30e14ee1213efa1b3cfb8196e19aefc",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.004301075268817204,
+        "crop_xywh": [
+          21,
+          15,
+          1860,
+          816
+        ]
+      },
+      "resource_id": "old_catfish",
+      "runtime_name": "sprites/ui/hud_old_catfish.png",
+      "seconds": 1.0,
+      "sha256": "d3b92090f906358b3e791d8ab816017b79edba0307ca6859c181dc56a41e8cc2",
+      "source": "raw/old_catfish-r1.png",
+      "source_sha256": "81fa0f7b29d12ae078553e07e0c97c0cb677a8d42ebb0f1f64325756e2176323"
+    },
+    {
+      "anim": "portrait_golden_queen",
+      "call": "raw/golden_queen-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_golden_queen/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "golden_queen icon",
+      "prompt": "raw/golden_queen-r1.prompt.txt",
+      "prompt_sha256": "4c07c1077d6a5002d8a0d0adeb8671971517eaae3b38815629ac27f7e8bec26a",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          7
+        ],
+        "content_scale": 0.017899761336515514,
+        "crop_xywh": [
+          84,
+          15,
+          1676,
+          858
+        ]
+      },
+      "resource_id": "golden_queen",
+      "runtime_name": "sprites/ui/portrait_golden_queen.png",
+      "seconds": 1.0,
+      "sha256": "1320d4121532f8782eee691f3887502e66ecb15bc5df2da405a9cf14beae4915",
+      "source": "raw/golden_queen-r1.png",
+      "source_sha256": "ec4f2b66385118bbd88d91eb547cb3777ad9d327f0fd612ada4afa4f8153c510"
+    },
+    {
+      "anim": "icon_golden_queen",
+      "call": "raw/golden_queen-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_golden_queen/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "golden_queen icon",
+      "prompt": "raw/golden_queen-r1.prompt.txt",
+      "prompt_sha256": "4c07c1077d6a5002d8a0d0adeb8671971517eaae3b38815629ac27f7e8bec26a",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          3
+        ],
+        "content_scale": 0.008353221957040573,
+        "crop_xywh": [
+          84,
+          15,
+          1676,
+          858
+        ]
+      },
+      "resource_id": "golden_queen",
+      "runtime_name": "sprites/ui/icon_golden_queen.png",
+      "seconds": 1.0,
+      "sha256": "cb26557bcc4ffa056b0b7c738c2220aeb230c3081dda6884119f0db07c17f5b5",
+      "source": "raw/golden_queen-r1.png",
+      "source_sha256": "ec4f2b66385118bbd88d91eb547cb3777ad9d327f0fd612ada4afa4f8153c510"
+    },
+    {
+      "anim": "hud_golden_queen",
+      "call": "raw/golden_queen-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_golden_queen/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "golden_queen icon",
+      "prompt": "raw/golden_queen-r1.prompt.txt",
+      "prompt_sha256": "4c07c1077d6a5002d8a0d0adeb8671971517eaae3b38815629ac27f7e8bec26a",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.00477326968973747,
+        "crop_xywh": [
+          84,
+          15,
+          1676,
+          858
+        ]
+      },
+      "resource_id": "golden_queen",
+      "runtime_name": "sprites/ui/hud_golden_queen.png",
+      "seconds": 1.0,
+      "sha256": "2fd6cde31246288c0e6d5cb96dba73426f128c7c3e13907da0b980b3732cb252",
+      "source": "raw/golden_queen-r1.png",
+      "source_sha256": "ec4f2b66385118bbd88d91eb547cb3777ad9d327f0fd612ada4afa4f8153c510"
+    },
+    {
+      "anim": "portrait_ghost_pike",
+      "call": "raw/ghost_pike-r2.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_ghost_pike/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "ghost_pike icon",
+      "prompt": "raw/ghost_pike-r2.prompt.txt",
+      "prompt_sha256": "c491b2c61778bfa2378766c4e8d5b419cc85e16471fb738e9eb52411355f7fab",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          5
+        ],
+        "content_scale": 0.017615971814445096,
+        "crop_xywh": [
+          58,
+          180,
+          1703,
+          612
+        ]
+      },
+      "resource_id": "ghost_pike",
+      "runtime_name": "sprites/ui/portrait_ghost_pike.png",
+      "seconds": 1.0,
+      "sha256": "432d124db48b367e4c73e6dae3c9293ec1519d7a1feae34da91f79404973d963",
+      "source": "raw/ghost_pike-r2.png",
+      "source_sha256": "83311c4969a891f2dcef68e71440efba3bd1a27b1108d6f11804ca8b147eb652"
+    },
+    {
+      "anim": "icon_ghost_pike",
+      "call": "raw/ghost_pike-r2.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_ghost_pike/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "ghost_pike icon",
+      "prompt": "raw/ghost_pike-r2.prompt.txt",
+      "prompt_sha256": "c491b2c61778bfa2378766c4e8d5b419cc85e16471fb738e9eb52411355f7fab",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          2
+        ],
+        "content_scale": 0.008220786846741044,
+        "crop_xywh": [
+          58,
+          180,
+          1703,
+          612
+        ]
+      },
+      "resource_id": "ghost_pike",
+      "runtime_name": "sprites/ui/icon_ghost_pike.png",
+      "seconds": 1.0,
+      "sha256": "4eb67a33d9b49bf33a42ab3eadc9cca35813a95375c8650ae3de2976246f3035",
+      "source": "raw/ghost_pike-r2.png",
+      "source_sha256": "83311c4969a891f2dcef68e71440efba3bd1a27b1108d6f11804ca8b147eb652"
+    },
+    {
+      "anim": "hud_ghost_pike",
+      "call": "raw/ghost_pike-r2.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_ghost_pike/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "ghost_pike icon",
+      "prompt": "raw/ghost_pike-r2.prompt.txt",
+      "prompt_sha256": "c491b2c61778bfa2378766c4e8d5b419cc85e16471fb738e9eb52411355f7fab",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          1
+        ],
+        "content_scale": 0.004697592483852026,
+        "crop_xywh": [
+          58,
+          180,
+          1703,
+          612
+        ]
+      },
+      "resource_id": "ghost_pike",
+      "runtime_name": "sprites/ui/hud_ghost_pike.png",
+      "seconds": 1.0,
+      "sha256": "f72cac4dc13ff2f41b613625b7e93f11d9e4a098db998eeef2acd208e790ae53",
+      "source": "raw/ghost_pike-r2.png",
+      "source_sha256": "83311c4969a891f2dcef68e71440efba3bd1a27b1108d6f11804ca8b147eb652"
+    },
+    {
+      "anim": "portrait_ice_sturgeon",
+      "call": "raw/ice_sturgeon-r1.call.json",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "dir": "none",
+      "display_role": "book_portrait",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/portrait_ice_sturgeon/none/01.png",
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "points": {},
+      "pose": "ice_sturgeon icon",
+      "prompt": "raw/ice_sturgeon-r1.prompt.txt",
+      "prompt_sha256": "b2cae2b43747eb74bdb2489aadb7c69d9ebb6f25211918880b80c2af35af2eac",
+      "recipe": {
+        "content_anchor_xy": [
+          15,
+          5
+        ],
+        "content_scale": 0.018633540372670808,
+        "crop_xywh": [
+          136,
+          248,
+          1610,
+          525
+        ]
+      },
+      "resource_id": "ice_sturgeon",
+      "runtime_name": "sprites/ui/portrait_ice_sturgeon.png",
+      "seconds": 1.0,
+      "sha256": "9a1833f21af141279bfc65dd0ab24c31efa4126c77657de721fd02cb03765e96",
+      "source": "raw/ice_sturgeon-r1.png",
+      "source_sha256": "4a500051406a2a6ecbaafec541c419c15a85a946c5e06a217474772ab0143463"
+    },
+    {
+      "anim": "icon_ice_sturgeon",
+      "call": "raw/ice_sturgeon-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_ice_sturgeon/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "ice_sturgeon icon",
+      "prompt": "raw/ice_sturgeon-r1.prompt.txt",
+      "prompt_sha256": "b2cae2b43747eb74bdb2489aadb7c69d9ebb6f25211918880b80c2af35af2eac",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          2
+        ],
+        "content_scale": 0.008695652173913044,
+        "crop_xywh": [
+          136,
+          248,
+          1610,
+          525
+        ]
+      },
+      "resource_id": "ice_sturgeon",
+      "runtime_name": "sprites/ui/icon_ice_sturgeon.png",
+      "seconds": 1.0,
+      "sha256": "a9ecadea6930a81787980f2d56624704a09e29d81a829d792055c704741c906d",
+      "source": "raw/ice_sturgeon-r1.png",
+      "source_sha256": "4a500051406a2a6ecbaafec541c419c15a85a946c5e06a217474772ab0143463"
+    },
+    {
+      "anim": "hud_ice_sturgeon",
+      "call": "raw/ice_sturgeon-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_ice_sturgeon/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "ice_sturgeon icon",
+      "prompt": "raw/ice_sturgeon-r1.prompt.txt",
+      "prompt_sha256": "b2cae2b43747eb74bdb2489aadb7c69d9ebb6f25211918880b80c2af35af2eac",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          1
+        ],
+        "content_scale": 0.004968944099378882,
+        "crop_xywh": [
+          136,
+          248,
+          1610,
+          525
+        ]
+      },
+      "resource_id": "ice_sturgeon",
+      "runtime_name": "sprites/ui/hud_ice_sturgeon.png",
+      "seconds": 1.0,
+      "sha256": "e018ec242660e63d959ede679ab77876ebde1f72f97a83f271b7562f35c51c91",
+      "source": "raw/ice_sturgeon-r1.png",
+      "source_sha256": "4a500051406a2a6ecbaafec541c419c15a85a946c5e06a217474772ab0143463"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A022",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\fish.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "82d82f6e401cd20e0fd676c090071abf228290b1e53ab432f73cb1ca7cfb0442"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A022-fish-icons\\raw\\carp-master-c2-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "c50b7cc0914532b995ed00c53aa619dbd9144e0321fc0272f40226828f47ef63"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A022-fish-icons\\raw\\catfish-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "45c0dc4ed20fb64a93a395adfdfc0377dcc8de6a503795379fc21733adafc6c7"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A022-fish-icons\\raw\\pike-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "0bb7cb25258ec273fbb9db675f3cf40302fccc647109ab432c8a53c2b6d1c976"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A022-fish-icons\\raw\\sturgeon-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "6a7a3d4c9332b99d5e0a11b07b18835537a28efa0e6ab7c641ceecf3b0d2cc3a"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A022-fish-icons",
+  "status": "approved for integration",
+  "supersedes": [],
+  "tool": "built-in ImageGen"
+}

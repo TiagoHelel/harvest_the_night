@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-191 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
+206 tasks over 8 days,  to 2026-10-10. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -235,6 +235,21 @@ is the sort of thing this list exists to say out loud.
 | 0221 | What the night leaves behind | 2026-10-10 |
 | 0222 | Bone meal | 2026-10-10 |
 | 0223 | Defences sleep under tarps | 2026-10-10 |
+| 0147 | Art: the night hotbar and HUD icons | 2026-10-10 |
+| 0161 | Art: seasons and moons | 2026-10-10 |
+| 0162 | Art: forecast heads | 2026-10-10 |
+| 0163 | Art: winter ground | 2026-10-10 |
+| 0164 | Art: trees through the seasons | 2026-10-10 |
+| 0202 | Art: tool icons | 2026-10-10 |
+| 0203 | Art: material icons | 2026-10-10 |
+| 0211 | Art: animal goods | 2026-10-10 |
+| 0197 | Art: trampled crops and tilled ground | 2026-10-10 |
+| 0198 | Art: spring crops | 2026-10-10 |
+| 0199 | Art: summer crops | 2026-10-10 |
+| 0204 | Art: copper, coal, gold and hardwood | 2026-10-10 |
+| 0205 | Art: fish | 2026-10-10 |
+| 0213 | Art: the artisan machines | 2026-10-10 |
+| 0214 | Art: artisan goods | 2026-10-10 |
 
 ## Every time the game changed underneath itself
 

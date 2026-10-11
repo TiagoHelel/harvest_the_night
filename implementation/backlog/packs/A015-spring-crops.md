@@ -1,6 +1,6 @@
 # A015 - Spring crops
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0198
 - **Dressed by game tasks:** 0168
 - **Spec after game task:** 0168

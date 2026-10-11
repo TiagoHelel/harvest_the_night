@@ -1,0 +1,82 @@
+[
+  {
+    "anim": "icon_calm_night",
+    "asset": "calm_night",
+    "stem": "calm_night-r1",
+    "importer": {
+      "id": "A010/icon_calm_night",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/calm_night-r1.png",
+      "crop_xywh": [
+        426,
+        401,
+        403,
+        456
+      ],
+      "content_scale": 0.03070175438596491,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_calm_night",
+    "asset": "calm_night",
+    "stem": "calm_night-r1",
+    "importer": {
+      "id": "A010/hud_calm_night",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/calm_night-r1.png",
+      "crop_xywh": [
+        426,
+        401,
+        403,
+        456
+      ],
+      "content_scale": 0.017543859649122806,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  }
+]

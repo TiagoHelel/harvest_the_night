@@ -1,0 +1,29 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is ore_b FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore_b.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore_b.png",
+      "sha256": "06ee39306995017ec320a8f89dadd61ce64295e5d9ec8967051bd1e277ce8edf",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png",
+      "sha256": "35c13ae919605666f67cb040d05a0b58398c68577ca4facce3af7b6b105aebd3",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-18682772-b5fb-42c7-8e4b-a6844c86ec35.png",
+  "copied_raw_path": "raw/ore_b_snow-r1.png",
+  "raw_sha256": "1597811136d14981a845660dc49291327dd3349b5df0d0f76f767fe6cd528825",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "inspection pending"
+}

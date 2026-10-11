@@ -1,0 +1,32 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the breaker bust edit target. Correct ONLY the overly wide footprint that clips the16x16import: the COMPLETE visible head, neck, shoulders and any shoulder equipment together must form a SQUARE13wide13tall silhouette, not a landscape bust. Narrow shoulder reach and reveal more upper chest to gain height. One flat-cut bottom edge. Messy dark hair, rotten green face, torn RED shirt and a small iron sledgehammer head resting snugly on the shoulder. Hammer head must stay within the SAME13wide13tall visible square, never project sideways on a long shaft. Keep it as a recognizable thick grey hammer block partly over shoulder. Preserve the exact enemy identity, camera turned to viewer LEFT, material colours and neutral upper-left light. Bold clear large flat planes and coloured dark outline. Image2 runtime enemy is IDENTITY/MATERIAL ONLY, never draw its full body. ONE complete unclipped bust, true transparent alpha and generous empty margins. No ground, shadow, halo, panels, border, labels, text, blur or gradients.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\breaker-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\breaker_walk_0.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\breaker-r1.png",
+      "sha256": "49bcc22c99769d81ed1862f86b92cbb71e746e82358abaf8d6dd179fda67787a",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\preview\\input-history\\breaker-r1-49bcc22c99.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\breaker_walk_0.png",
+      "sha256": "28c6aba3e63dd06ac1f2eb082d2a76697e09ad4ec5bcba698ce363a064dd5aa4",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-696fc54f-e187-4130-9d04-e2bd46781f72.png",
+  "copied_raw_path": "raw/breaker-r2.png",
+  "raw_sha256": "00327ce3b73be6915534b79c25fc294daf89bc3927d7eac45b244dce7820d749",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/breaker-r2.png"
+}

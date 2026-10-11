@@ -1,0 +1,79 @@
+{
+  "anim": "tree_autumn",
+  "stem": "tree_autumn-r2",
+  "importer": {
+    "id": "A013/tree_autumn",
+    "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_autumn-r2.png",
+    "crop_xywh": [
+      36,
+      220,
+      962,
+      1134
+    ],
+    "content_scale": 0.03700440528634361,
+    "content_anchor_xy": [
+      18,
+      42
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "palette_keys": [
+      "blood",
+      "bone",
+      "bone_dark",
+      "cloth",
+      "cloth_dark",
+      "cloth_light",
+      "flame",
+      "flame_hot",
+      "gold",
+      "gold_dark",
+      "gold_light",
+      "grass",
+      "grass_dark",
+      "grass_light",
+      "ink",
+      "ink_soft",
+      "leaf",
+      "leaf_dark",
+      "leaf_light",
+      "moon",
+      "night",
+      "night_light",
+      "roof",
+      "roof_dark",
+      "roof_light",
+      "rot",
+      "rot_dark",
+      "skin",
+      "skin_dark",
+      "skin_light",
+      "soil",
+      "soil_dark",
+      "soil_light",
+      "stone",
+      "stone_dark",
+      "stone_light",
+      "water",
+      "water_dark",
+      "water_light",
+      "wood",
+      "wood_dark",
+      "wood_light"
+    ],
+    "canvas_wh": [
+      40,
+      48
+    ],
+    "pivot_xy": [
+      20,
+      44
+    ]
+  },
+  "unclipped_bounds": [
+    2,
+    2,
+    38,
+    44
+  ]
+}

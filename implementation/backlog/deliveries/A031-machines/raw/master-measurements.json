@@ -1,0 +1,519 @@
+{
+  "keg-master-c1-r1": {
+    "id": "keg",
+    "source": "raw\\keg-master-c1-r1.png",
+    "canvas_wh": [
+      48,
+      56
+    ],
+    "pivot_xy": [
+      24,
+      52
+    ],
+    "limits_wh": [
+      [
+        28,
+        36
+      ],
+      [
+        30,
+        38
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        234,
+        195,
+        760,
+        1013
+      ],
+      "content_scale": 0.03709670987686393,
+      "content_anchor_xy": [
+        14,
+        38
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      10,
+      14,
+      38,
+      52
+    ],
+    "native_wh": [
+      28,
+      38
+    ],
+    "numeric_fit": true
+  },
+  "keg-master-c2-r1": {
+    "id": "keg",
+    "source": "raw\\keg-master-c2-r1.png",
+    "canvas_wh": [
+      48,
+      56
+    ],
+    "pivot_xy": [
+      24,
+      52
+    ],
+    "limits_wh": [
+      [
+        28,
+        36
+      ],
+      [
+        30,
+        38
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        216,
+        143,
+        832,
+        1070
+      ],
+      "content_scale": 0.034518433231488135,
+      "content_anchor_xy": [
+        14,
+        37
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      10,
+      15,
+      39,
+      52
+    ],
+    "native_wh": [
+      29,
+      37
+    ],
+    "numeric_fit": true
+  },
+  "preserves_jar-master-c1-r1": {
+    "id": "preserves_jar",
+    "source": "raw\\preserves_jar-master-c1-r1.png",
+    "canvas_wh": [
+      48,
+      56
+    ],
+    "pivot_xy": [
+      24,
+      52
+    ],
+    "limits_wh": [
+      [
+        26,
+        34
+      ],
+      [
+        34,
+        44
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        154,
+        279,
+        835,
+        1030
+      ],
+      "content_scale": 0.036919684902040575,
+      "content_anchor_xy": [
+        15,
+        38
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      9,
+      14,
+      40,
+      52
+    ],
+    "native_wh": [
+      31,
+      38
+    ],
+    "numeric_fit": true
+  },
+  "preserves_jar-master-c2-r1": {
+    "id": "preserves_jar",
+    "source": "raw\\preserves_jar-master-c2-r1.png",
+    "canvas_wh": [
+      48,
+      56
+    ],
+    "pivot_xy": [
+      24,
+      52
+    ],
+    "limits_wh": [
+      [
+        26,
+        34
+      ],
+      [
+        34,
+        44
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        136,
+        197,
+        864,
+        1078
+      ],
+      "content_scale": 0.035502162354840924,
+      "content_anchor_xy": [
+        15,
+        38
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      9,
+      14,
+      40,
+      52
+    ],
+    "native_wh": [
+      31,
+      38
+    ],
+    "numeric_fit": true
+  },
+  "preserves_jar-master-c3-r1": {
+    "id": "preserves_jar",
+    "source": "raw\\preserves_jar-master-c3-r1.png",
+    "canvas_wh": [
+      48,
+      56
+    ],
+    "pivot_xy": [
+      24,
+      52
+    ],
+    "limits_wh": [
+      [
+        26,
+        34
+      ],
+      [
+        34,
+        44
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        124,
+        189,
+        887,
+        1089
+      ],
+      "content_scale": 0.03482761405176082,
+      "content_anchor_xy": [
+        15,
+        38
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      9,
+      14,
+      40,
+      52
+    ],
+    "native_wh": [
+      31,
+      38
+    ],
+    "numeric_fit": true
+  },
+  "dairy-master-c1-r1": {
+    "id": "dairy",
+    "source": "raw\\dairy-master-c1-r1.png",
+    "canvas_wh": [
+      64,
+      64
+    ],
+    "pivot_xy": [
+      32,
+      60
+    ],
+    "limits_wh": [
+      [
+        48,
+        56
+      ],
+      [
+        40,
+        52
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        92,
+        138,
+        1174,
+        947
+      ],
+      "content_scale": 0.04491938588459207,
+      "content_anchor_xy": [
+        26,
+        43
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      6,
+      17,
+      59,
+      60
+    ],
+    "native_wh": [
+      53,
+      43
+    ],
+    "numeric_fit": true
+  },
+  "dairy-master-c2-r1": {
+    "id": "dairy",
+    "source": "raw\\dairy-master-c2-r1.png",
+    "canvas_wh": [
+      64,
+      64
+    ],
+    "pivot_xy": [
+      32,
+      60
+    ],
+    "limits_wh": [
+      [
+        48,
+        56
+      ],
+      [
+        40,
+        52
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        99,
+        126,
+        1147,
+        933
+      ],
+      "content_scale": 0.04579874242046216,
+      "content_anchor_xy": [
+        26,
+        43
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      6,
+      17,
+      59,
+      60
+    ],
+    "native_wh": [
+      53,
+      43
+    ],
+    "numeric_fit": true
+  },
+  "loom-master-c1-r1": {
+    "id": "loom",
+    "source": "raw\\loom-master-c1-r1.png",
+    "canvas_wh": [
+      64,
+      64
+    ],
+    "pivot_xy": [
+      32,
+      60
+    ],
+    "limits_wh": [
+      [
+        48,
+        56
+      ],
+      [
+        40,
+        52
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        71,
+        122,
+        1198,
+        939
+      ],
+      "content_scale": 0.044615133315909904,
+      "content_anchor_xy": [
+        26,
+        42
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      6,
+      18,
+      59,
+      60
+    ],
+    "native_wh": [
+      53,
+      42
+    ],
+    "numeric_fit": true
+  },
+  "loom-master-c2-r1": {
+    "id": "loom",
+    "source": "raw\\loom-master-c2-r1.png",
+    "canvas_wh": [
+      64,
+      64
+    ],
+    "pivot_xy": [
+      32,
+      60
+    ],
+    "limits_wh": [
+      [
+        48,
+        56
+      ],
+      [
+        40,
+        52
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        80,
+        125,
+        1212,
+        958
+      ],
+      "content_scale": 0.043925541040534116,
+      "content_anchor_xy": [
+        26,
+        42
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      6,
+      18,
+      59,
+      60
+    ],
+    "native_wh": [
+      53,
+      42
+    ],
+    "numeric_fit": true
+  },
+  "mill-master-c1-r1": {
+    "id": "mill",
+    "source": "raw\\mill-master-c1-r1.png",
+    "canvas_wh": [
+      64,
+      96
+    ],
+    "pivot_xy": [
+      32,
+      92
+    ],
+    "limits_wh": [
+      [
+        52,
+        64
+      ],
+      [
+        72,
+        88
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        79,
+        115,
+        935,
+        1233
+      ],
+      "content_scale": 0.06348500895602656,
+      "content_anchor_xy": [
+        29,
+        78
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      3,
+      14,
+      62,
+      92
+    ],
+    "native_wh": [
+      59,
+      78
+    ],
+    "numeric_fit": true
+  },
+  "mill-master-c2-r1": {
+    "id": "mill",
+    "source": "raw\\mill-master-c2-r1.png",
+    "canvas_wh": [
+      64,
+      96
+    ],
+    "pivot_xy": [
+      32,
+      92
+    ],
+    "limits_wh": [
+      [
+        52,
+        64
+      ],
+      [
+        72,
+        88
+      ]
+    ],
+    "recipe": {
+      "crop_xywh": [
+        54,
+        61,
+        985,
+        1347
+      ],
+      "content_scale": 0.05928021284373246,
+      "content_anchor_xy": [
+        29,
+        80
+      ]
+    },
+    "palette_keys": null,
+    "bounds": [
+      3,
+      12,
+      61,
+      92
+    ],
+    "native_wh": [
+      58,
+      80
+    ],
+    "numeric_fit": true
+  }
+}

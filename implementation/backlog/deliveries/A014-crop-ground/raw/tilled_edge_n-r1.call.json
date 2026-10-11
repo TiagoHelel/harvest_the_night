@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: A014 tilled_edge_n, a thin torn-turf border overlay.\nInput images: Image 1: approved crop strip, scale and style reference. Image 2: approved farm style reference. New isolated plant only, do not copy the ground or characters.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,16; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nTERRAIN: Edit the attached approved north edge. Preserve its square footprint and width, but change grass over path into a torn turf lip over hoed soil. One square isolated transparent overlay, native16x16. ONLY TOP THREE nativepixel ROWS contain any pixels; rows3..15 are fullytransparent. Row0 opaque across all16columns, column0 andcolumn15 identical; one connected grassrim with a thin soil-dark cutline beneath. No tile background, no earth-filled block. Upperleft clustered shading, quiet natural torn sod. Palette only grassdark#4e7a35 grass#6a9646 grasslight#8ab659 and soildark#5c422a. No groundshadow. Output square, image itself represents full16x16 grid, exact flat coarsepixelblocks suitable for nearest16px reduction.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\terrain\\edge-n.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\terrain\\edge-n.png",
+      "sha256": "44914576c7532adeeb7c5a6df66385840e461e54937416d50e92e0f6b60eca4c",
+      "role": "identity/material/layout reference; generation approval is recorded separately"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2024e6f0-9795-4513-b5d1-2c330ae8b9b2.png",
+  "copied_path": "implementation\\backlog\\deliveries\\A014-crop-ground\\raw\\tilled_edge_n-r1.png",
+  "sha256": "f6305ce20d72182da359b8fa6aaa8da60900858f9542e53224cb9edc07f19a0a",
+  "date": "2026-10-10",
+  "revision": 1,
+  "decision": "candidate / reference retained for owner review; no whole-pack approval",
+  "evidence": "Measured native bounds and topology meet the brief; corner squarecrop671px yields exact matching north-edge column and corner row profiles."
+}

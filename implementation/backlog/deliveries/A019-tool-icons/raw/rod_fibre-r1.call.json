@@ -1,0 +1,42 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: hoe_iron static master.\nInput images: Roles are specified in the detailed request below; never copy style-sheet scenes or lettering.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,8; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent alpha outside the complete object. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\n\nONE fishing ROD at FIBRE tier,45degree grip lower left and narrow tip upper right. Red-brown segmented shaft, compact visible round reel near grip. No fishing line, hooks, float, fish or character. Only one rod.\nThis icon belongs to a five-tool set. Handled tools share45degree lower-left grip/upper-right working end, handle thickness and outline weight; watering can spout points upper right. One centred unclipped object in square framing, real alpha, no labels, panel, shadow or glow. Native16maxvisible14, compact10maxvisible8. Simple2-3material planes.\nImage1 wood icon is outline STYLE ONLY, image2 iron icon is STEEL MATERIAL ONLY, image3 legacy tool pose is OBJECT KIND ONLY never draw its farmer, image4 approved hoe fixes angle/outline weight only never draw a hoe.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\iron.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\actors\\fish_1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\hoe_iron-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\iron.png",
+      "sha256": "f1b60c1d3931ea8777448af0b68d533d2e6b8e69f1da7efb417c35403d77538d",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\actors\\fish_1.png",
+      "sha256": "873ae571befaf243cc63636b9067dc9aab55925a5767e160f672d7344f759071",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\hoe_iron-r1.png",
+      "sha256": "f19474c1f3bca0fcb9f8eb64d479eda55f08fed1249ac5b8f943ac4510c50d44",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-78fbe060-31ae-4f05-aa2b-94ba7338890d.png",
+  "copied_raw_path": "raw/rod_fibre-r1.png",
+  "raw_sha256": "ec2cf23a2ee1ea214b4d51c5986888f9d94653a474619bff1d7ae6362f4348a3",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "accepted",
+  "inspection": "Both native cuts and common scale tier grid inspected. Owner final approval pending."
+}

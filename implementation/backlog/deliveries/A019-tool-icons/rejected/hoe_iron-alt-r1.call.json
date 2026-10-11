@@ -1,0 +1,43 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: hoe_iron-alt static master.\nInput images: Roles are specified in the detailed request below; never copy style-sheet scenes or lettering.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,8; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent alpha outside the complete object. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\n\nONE hoe at clean IRON tier: one warm timber handle on45degree diagonal, grip lower left, flat broad steel HOE blade at upper-right end set at RIGHT ANGLE to shaft, its edge facing down. Hoe blade is rectangular and transverse, NOT an axe wedge or pickaxe. Three steel planes stone_dark,stone,stone_light and ONEbone glint. Riveted dark steel collar, wood handle with wood_light top line. Visible14max for16canvas,8max for10canvas, pivots8,8and5,5. Same simple bold outline weight as wood icon. No farmer or hand, target, soil, extra tools or decoration. Head material is neutral clean grey, not gold.\nCreate ONE resource icon for hoe_iron. Match the actual world material\nand approved icon master, target 16x16 with a clear shape and internal padding.\nRepresent one clean steel hoe as appropriate.\nReadable at the actual small HUD scale, colored outline and 2\u20133 material planes.\nNo labels, numbers, enclosing panel, ground shadow or unrelated objects.\n\nNative contract: one centered complete object with generous transparent outer space. The import targets are 16x16 (maximum visible dimension 14) and a separate 10x10 compact HUD canvas (maximum visible dimension 8). The same source will be reduced for both: use a bold simple silhouette, a few joined color clusters and only 2-3 material planes. Think of a real tiny inventory sprite, not a miniature detailed illustration. Compact internal features must survive at eight visible pixels. No tiny line hatching, scattered crumbs, distant decorative fragments, floor, cast shadow, glow, labels, lettering, numbers, backdrop or extra objects. Maintain approximately square source framing with the object centered; do not clip its silhouette.\n\nImage1 wood icon is STYLE ONLY, not subject. Image2 iron ingot is steel MATERIAL ONLY, not subject. Image3 legacy till pose is HOE KIND ONLY, never draw the farmer. Image4 is world style ONLY. True transparent background, one object, complete unclipped silhouette.\n\nIndependent candidate: prioritize the transverse rectangular hoe blade and the tiny8pixel read.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\iron.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\actors\\till_1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\iron.png",
+      "sha256": "f1b60c1d3931ea8777448af0b68d533d2e6b8e69f1da7efb417c35403d77538d",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\actors\\till_1.png",
+      "sha256": "f7ade8652858e3bc6dafaeb8ca27cf6ccb7fb2fa152ef29449d5eb679a24a5d1",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-35844b44-ac15-4372-b9b2-7349e18abc63.png",
+  "copied_raw_path": "raw/hoe_iron-alt-r1.png",
+  "raw_sha256": "b6af630c101dc5716833355c3dd903ea1bfe9d210546d03fbaa813491a880685",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/hoe_iron-alt-r1.png"
+}

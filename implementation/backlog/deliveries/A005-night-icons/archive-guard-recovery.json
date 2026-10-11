@@ -1,0 +1,53 @@
+{
+  "restored": [
+    {
+      "stem": "auto_crossbow-r3",
+      "sha256": "7a21222b69f09e4783a3aacc4a49e90f4fc966088e3672f8f555ce6df5df2307"
+    },
+    {
+      "stem": "barricade-r1",
+      "sha256": "736a254b96dc1410912766ab26d64fc51667a090130f533986bf587f76f64a27"
+    },
+    {
+      "stem": "dawn_moon-r1",
+      "sha256": "b762bf3052ffdaf5fdbc152d4d5cd1357d9727074ec8ffe16e8c02c3cbc2b16c"
+    },
+    {
+      "stem": "fence-r1",
+      "sha256": "1c976866224d7657777fa93678c77b8f33cc1bc344793c0ea959186ef80aa3fe"
+    },
+    {
+      "stem": "flame_tower-r2",
+      "sha256": "936aec59111ed671b5b257ee656acb409828f5bd5f572023bcda4c95d59a8605"
+    },
+    {
+      "stem": "flare-r1",
+      "sha256": "cada43ef7a8c0695297812a9e18678171028ecaf0d08805eb79442850182b7c2"
+    },
+    {
+      "stem": "gun_tower-r2",
+      "sha256": "23cc5f7567d1eda2969b6e08fe8c7282964f9e50e94a2060331b26e0cbe1d4e0"
+    },
+    {
+      "stem": "mine-r1",
+      "sha256": "2a8fb3277b3fc5f82af31260a801924d8e59f6b9b5e1dad6daa812a996430a95"
+    },
+    {
+      "stem": "mortar-r1",
+      "sha256": "c1219ba9ea2444981121dabf535353194c7b23051f8b3f6732bd967526501137"
+    },
+    {
+      "stem": "speed-r1",
+      "sha256": "562851837af66c45f3a060244d06dacc49eccd27c39c8902ae081bcc5fd53976"
+    },
+    {
+      "stem": "start-r1",
+      "sha256": "da12492626cf2ecc2f295821c50ae28cd4451519db26957fd1080a9a5dc1a77f"
+    },
+    {
+      "stem": "wall-r1",
+      "sha256": "662f925b48db04f0162d1a5322abbc17facb6ed9543484511ec955c51b2e5729"
+    }
+  ],
+  "raw_image_bytes_unchanged": true
+}

@@ -1,6 +1,6 @@
 # A010 - Seasons and moons
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0161
 - **Dressed by game tasks:** 0158
 - **Family:** ui

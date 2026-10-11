@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 exact winter tile edit target,1254x1254canvas representing16x16logical squarepixel grid. ONE concrete correction: Flatten the busy ground into a dominant EXACT soil RGB122,88,56(#7a5838) covering at least210of256nativepixels. ALLfour border rows andcolumns exactly this flat soil colour. Retain onlyTWOsmall joined interior cream dusting clusters of6-10nativepixels each, with at mostONEdarkbrown cluster4-6nativepixels. No isolated1pix dots, no other scattered texture. Opposite borders identical, whole tileopaque. Keep squarecanvas and exactlogicalscale, no crop, rescale or extra texture. Flat pixels only, no gradients, blur, labels, glare, glow, shadow, objects or backdrop. FullyOPAQUEedge-to-edge terrain tile.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\soil_winter-r1.png"
+  ],
+  "transparent_background": false
+}

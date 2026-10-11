@@ -1,0 +1,9 @@
+2026-10-10 Batch generation requested; owner review is deferred until all eligible packs have been processed. Safety/spec task verified done. Runtime not modified, no approval inferred.
+
+2026-10-10: Two captures failed after source byte-copy because an older capture helper lacked the revision variable. Provenance recovered using a unique exact SHA256 match to the saved ImageGen output. No images redrawn or pixels changed.
+
+2026-10-10 Final batch disposition: review. All candidate checks pass; owner review deferred to unified batch page. No approval inferred. All false checks concern rejected diagnostic candidates or missing production export. Owner words authorising batch/final review: "gere todos e no final faca um arquivo html pra eu revisar". No approval, integration, commit or push.
+
+2026-10-10 / Explicit batch approval
+Owner words, verbatim: "esses estao aprovados, tem mais pra gerar?"
+All 48 complete production exports approved for integration. Original raster hashes preserved; APPROVAL.json and Claude handoff recorded. Runtime not integrated.

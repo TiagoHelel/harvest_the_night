@@ -1,0 +1,150 @@
+[
+  {
+    "anim": "icon_autumn",
+    "asset": "autumn",
+    "stem": "autumn-r1",
+    "importer": {
+      "id": "A010/icon_autumn",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/autumn-r1.png",
+      "crop_xywh": [
+        362,
+        366,
+        581,
+        551
+      ],
+      "content_scale": 0.024096385542168676,
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_autumn",
+    "asset": "autumn",
+    "stem": "autumn-r1",
+    "importer": {
+      "id": "A010/hud_autumn",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/autumn-r1.png",
+      "crop_xywh": [
+        362,
+        366,
+        581,
+        551
+      ],
+      "content_scale": 0.013769363166953529,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  }
+]

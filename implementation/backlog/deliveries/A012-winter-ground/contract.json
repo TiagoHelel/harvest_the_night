@@ -1,0 +1,955 @@
+{
+  "pack": "A012",
+  "slug": "A012-winter-ground",
+  "date": "2026-10-07",
+  "status": "approved for integration",
+  "runtime_integrated": false,
+  "final_approval_pending": false,
+  "palette_mode": "A",
+  "palette": "tools/palette.py:COLOURS",
+  "alpha_threshold": 128,
+  "tool": "built-in ImageGen",
+  "references": [
+    {
+      "path": "docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/masters/style-day.png",
+      "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/masters/style-night.png",
+      "sha256": "850d7ee8738f0f1faa3e827e6c5ba71d48c203df16b5d4fa0db736471ca0b6c4",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/grass.png",
+      "sha256": "4d1d187493ab8275082ea8aed39ab884e50384b9bb35cc750276ffbd3b54fc3e",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/grass_b.png",
+      "sha256": "e65b863607c80fc98446bfd54f5db7879dc2c22284c3b01f96a8343ea038d4cd",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/grass_c.png",
+      "sha256": "6bebf9ccc1902f7352b47dd8f8f06ebcfd4f44f23d6c76dbc84516ff214f66b8",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/grass_d.png",
+      "sha256": "9219456f2ef872c74713287178a95d6eacaf864019a7e3c3c9b48ba2d6ed61f2",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/path.png",
+      "sha256": "bd3031d7f35f0b3b89a7dd0d9c55676aa80c4c6b0b43a9e1ab6ee58dbb83001d",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/soil.png",
+      "sha256": "7f2a394dee9d4801c32da75bc1ddec0522c035936d450a48bff2f3894cc79d4e",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/terrain/grass.png",
+      "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/terrain/grass_b.png",
+      "sha256": "cfd24bb952e47581974d3c4a26f583e361c05826c0d971da7a62db3ad27669a6",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/terrain/grass_c.png",
+      "sha256": "d854a3fba84668d19c56fa50b691c8f06d68d23af1fca70ac232f25233f03a8a",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/terrain/grass_d.png",
+      "sha256": "597b415b6712308fa1ab8455d5c3d898c0cba01fd2d75eaf08a8d03108ac4658",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/terrain/path.png",
+      "sha256": "aa46572715df423dd98f736340cd7e0e3ea72c16b5377afaab887f1068824ca0",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/terrain/soil.png",
+      "sha256": "66b14e30ca51158206c29c56c34908b0ee696d9c088f640f9d54897d9d1df754",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/crops/tilled.png",
+      "sha256": "6ebcb96545a85493925d913004de5539037b3592d192d9dc609d9686127779af",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/crops/tilled_wet.png",
+      "sha256": "f3be498c9b31064979a3ce8295221572ad75464256e4f6bb932456a28f49e73c",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/crops/tilled.png",
+      "sha256": "059b4694178aa87883540b3b648831918f8f650caeaf2fb953bc2338c6e5b4e3",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/crops/tilled_wet.png",
+      "sha256": "9eefdaa50a729463d491094e771e3232e37698dd4e1cf67cc78ba7b896b141d7",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/edge_n.png",
+      "sha256": "e305eb77e123cec529ec7788500e0618ed4d7acf27c297a2131aae4081496f71",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/shore_n.png",
+      "sha256": "4d786185077013771aad1aaa9df172d29aaae7b5752d8bab09bfa6dbf0d6689a",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/shore_corner_nw.png",
+      "sha256": "180f1ba9802a9f2e42630c20e598cda80ad122f0629a781cfeb48941f231dd50",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "sprites/terrain/atlas.png",
+      "sha256": "b3bdb273aa78b057651dbb2b2b55a36f132e015762ce48b427d26cad93597365",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/terrain/edge-n.png",
+      "sha256": "44914576c7532adeeb7c5a6df66385840e461e54937416d50e92e0f6b60eca4c",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/terrain/shore-n.png",
+      "sha256": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "assets/art_source/terrain/shore-corner-nw.png",
+      "sha256": "ba3bf79e8c14620c4fb065d763999230d9b70aff00f85d514ec6b84ab0855da6",
+      "role": "Current approved identity, material, scale or edit target; see exact call for role"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\terrain\\grass.png",
+      "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\grass_winter-r1.png",
+      "sha256": "9945af52be245cedcfa4af8ba637b6907e944c5f0288946c62ec979df55aecd2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\input-history\\path_winter-r1-7d8d1ba17d.png",
+      "sha256": "7d8d1ba17ddec6d344e3039b8a0141bb5fd06bbd23fff71afdbc76335bba8593",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\input-history\\soil_winter-r1-66d2257b3c.png",
+      "sha256": "66d2257b3ca3f51999dd0f6e3b012fa4502f6fdb9d8253877091c981baf80042",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\input-history\\tilled_winter-r1-243dfe07eb.png",
+      "sha256": "243dfe07eb854ed4eabd7705f3f83d2b3d0efd3775cddb73e1e0523ef7f12fc7",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\input-history\\edge_n_winter-r1-897ade1dcb.png",
+      "sha256": "897ade1dcb0704e1f7aa81c171b0e6e19f94b5aeea19480678668ca2f5291ac8",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\terrain\\shore-n.png",
+      "sha256": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\input-history\\tilled_wet_winter-r1-26029fa749.png",
+      "sha256": "26029fa7490c52f1eab033b87fbe61ce92aa5ac4eb76ddf649fe6a947609c1eb",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\shore_corner_nw_winter-r3-10x.png",
+      "sha256": "7d64ccad2cc5d9cad9e1db89f04bba6a9b47bb2762c239f9e5f280a2e4033832",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "animations": [
+    {
+      "anim": "grass_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter grass_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "grass_b_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter grass_b_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "grass_c_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter grass_c_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "grass_d_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter grass_d_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "path_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter path_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "soil_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter soil_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "tilled_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter tilled_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "edge_n_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter edge_n_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "shore_n_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter shore_n_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "tilled_wet_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter tilled_wet_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "shore_corner_nw_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static winter shore_corner_nw_winter"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    }
+  ],
+  "files": [
+    {
+      "output": "native/grass_winter/none/01.png",
+      "sha256": "47d3ba0b218fa94b0cbc39a6fb99aa4535f26264d93deb73241f067c51ba31ec",
+      "anim": "grass_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/grass_winter-r1.png",
+      "source_sha256": "9945af52be245cedcfa4af8ba637b6907e944c5f0288946c62ec979df55aecd2",
+      "prompt": "raw/grass_winter-r1.prompt.txt",
+      "prompt_sha256": "06967ca87190de55970bbf93bd1f1e0fa69003d76766795973ddbb41cdeb48fc",
+      "call": "raw/grass_winter-r1.call.json",
+      "runtime_name": "sprites/terrain/grass_winter.png",
+      "recipe": {
+        "id": "A012/grass_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/grass_winter-r1.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "grass_dark",
+          "grass"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/grass_b_winter/none/01.png",
+      "sha256": "e410420998c00fbbe59ab634a1fdc21dc828065c4710e8e8da73bda209c94834",
+      "anim": "grass_b_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/grass_b_winter-r1.png",
+      "source_sha256": "8753909880ab3b9192c4af5cfca7e2af5875e848da7d7fc8398ae06261f60e91",
+      "prompt": "raw/grass_b_winter-r1.prompt.txt",
+      "prompt_sha256": "71f72db780e0d099b182e9d197e73e2f769802e385e52bd1206080359eadcc31",
+      "call": "raw/grass_b_winter-r1.call.json",
+      "runtime_name": "sprites/terrain/grass_b_winter.png",
+      "recipe": {
+        "id": "A012/grass_b_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/grass_b_winter-r1.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "grass_dark",
+          "grass"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/grass_c_winter/none/01.png",
+      "sha256": "4580a0260e1ab303e48dbf3b88e1a92271ccdc791fedaad15411724a20babac9",
+      "anim": "grass_c_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/grass_c_winter-r1.png",
+      "source_sha256": "dbdd72c5cc5188bf1e4740bcafc1c0e1de575a0f5ed05926f17635e92ec1dd1f",
+      "prompt": "raw/grass_c_winter-r1.prompt.txt",
+      "prompt_sha256": "9bac7b668211ef046018f9fa4a4bcc416734fbe7d7a3f616e1b82ff213428cf5",
+      "call": "raw/grass_c_winter-r1.call.json",
+      "runtime_name": "sprites/terrain/grass_c_winter.png",
+      "recipe": {
+        "id": "A012/grass_c_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/grass_c_winter-r1.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "grass_dark",
+          "grass"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/grass_d_winter/none/01.png",
+      "sha256": "3820f44798c81d49c2fb3f4cf7477a96e1f6e6b0c0a30afdbcdb56216fda6b67",
+      "anim": "grass_d_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/grass_d_winter-r1.png",
+      "source_sha256": "09ab1082edd8bb019544496a9b7775dd06ac7d4c0fe846987a2ba7acc8926a2c",
+      "prompt": "raw/grass_d_winter-r1.prompt.txt",
+      "prompt_sha256": "6b8375ced7313bea52d64c05768a803f9247c569395ea5c9f9c61f4886d91c86",
+      "call": "raw/grass_d_winter-r1.call.json",
+      "runtime_name": "sprites/terrain/grass_d_winter.png",
+      "recipe": {
+        "id": "A012/grass_d_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/grass_d_winter-r1.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "grass_dark",
+          "grass"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/path_winter/none/01.png",
+      "sha256": "c0456c0c5c7e047c0c14ff49b6d15ad7d873f6a498f0ebe6baa2426bdb80b12a",
+      "anim": "path_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/path_winter-r2.png",
+      "source_sha256": "50527c5f49eaef4b39a5e097144814cc0668b79e1409d3515be11cb7bd7cc4d4",
+      "prompt": "raw/path_winter-r2.prompt.txt",
+      "prompt_sha256": "1e4b644cdecc8613e254ad7e4b8280644bb10e8cfe11d46edc76715f882af777",
+      "call": "raw/path_winter-r2.call.json",
+      "runtime_name": "sprites/terrain/path_winter.png",
+      "recipe": {
+        "id": "A012/path_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/path_winter-r2.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "bone_dark",
+          "soil_light",
+          "soil",
+          "stone_light"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/soil_winter/none/01.png",
+      "sha256": "bd002b36c77aa7a06b227ae0cc16102217860d2369f8d3c16cedd412bf0ae325",
+      "anim": "soil_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/soil_winter-r2.png",
+      "source_sha256": "338d7912ebea41a99484dfed8053b3871ee20ad78029841b3167e3c1cc01493a",
+      "prompt": "raw/soil_winter-r2.prompt.txt",
+      "prompt_sha256": "1c72c1423c495cda2e84622ee527befec9bc38d7bf873572be7c903cb4eb68f8",
+      "call": "raw/soil_winter-r2.call.json",
+      "runtime_name": "sprites/terrain/soil_winter.png",
+      "recipe": {
+        "id": "A012/soil_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/soil_winter-r2.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "bone",
+          "bone_dark"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/tilled_winter/none/01.png",
+      "sha256": "c82d1267c68c3fe4449e3a12bf589defc91cc55402bae98ced834f271526cdb2",
+      "anim": "tilled_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/tilled_winter-r2.png",
+      "source_sha256": "7f1ed88325f48818b295fcad92abdd7d5ba644eb83ed53825e5d81c660996ee9",
+      "prompt": "raw/tilled_winter-r2.prompt.txt",
+      "prompt_sha256": "5c4ac6f3f6288fe8fc95c60426d69783d8ed105ab287383df5e8c2f6b0533d1d",
+      "call": "raw/tilled_winter-r2.call.json",
+      "runtime_name": "sprites/crops/tilled_winter.png",
+      "recipe": {
+        "id": "A012/tilled_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/tilled_winter-r2.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "ink_soft",
+          "ink",
+          "bone",
+          "bone_dark"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/edge_n_winter/none/01.png",
+      "sha256": "53b8fd0131800635208a1be8460f614340dcae22487224a952c38693609abf0a",
+      "anim": "edge_n_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/edge_n_winter-r2.png",
+      "source_sha256": "560f0943c08042a5bae1ff49f9aa710132a9c2a7ef626532de5186674393e538",
+      "prompt": "raw/edge_n_winter-r2.prompt.txt",
+      "prompt_sha256": "528fc8e3bd50d7aba64f18e00144ccb64b9c518da658d9315cb6ffa3ee20d396",
+      "call": "raw/edge_n_winter-r2.call.json",
+      "runtime_name": "sprites/terrain/edge_n_winter.png",
+      "recipe": {
+        "id": "A012/edge_n_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/edge_n_winter-r2.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/shore_n_winter/none/01.png",
+      "sha256": "bb433bdb82e1f1369c7371a3dd702b2b6cfb8d4bc5d5cdcb24492ea16d138ea2",
+      "anim": "shore_n_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/shore_n_winter-r1.png",
+      "source_sha256": "1eb8a3079d873041b2701cac96ff7f12bdd8ce148184d593ffb63022052ffd6f",
+      "prompt": "raw/shore_n_winter-r1.prompt.txt",
+      "prompt_sha256": "95fdf1d00f28bc790b5f66142c5ef1fb8587cbeea364546d2c0efce62083cb4f",
+      "call": "raw/shore_n_winter-r1.call.json",
+      "runtime_name": "sprites/terrain/shore_n_winter.png",
+      "recipe": {
+        "id": "A012/shore_n_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/shore_n_winter-r1.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "wood_light",
+          "wood",
+          "soil_light",
+          "water_dark"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/tilled_wet_winter/none/01.png",
+      "sha256": "966aa8af5b13c0b9a8df6cb277b7a1db0d0435a9bdf9783af19d4cca8d1a1e92",
+      "anim": "tilled_wet_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/tilled_wet_winter-r2.png",
+      "source_sha256": "056b15f5810197e71f92157fe82b329b6fd7d5c94a3a2b734389848666bfcf6b",
+      "prompt": "raw/tilled_wet_winter-r2.prompt.txt",
+      "prompt_sha256": "4843303679a29d696a0bd9c36c3ae6d344f7cef8bc0472b33fc3d18fcaaec5ad",
+      "call": "raw/tilled_wet_winter-r2.call.json",
+      "runtime_name": "sprites/crops/tilled_wet_winter.png",
+      "recipe": {
+        "id": "A012/tilled_wet_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/tilled_wet_winter-r2.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "ink_soft",
+          "ink",
+          "bone",
+          "bone_dark"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/shore_corner_nw_winter/none/01.png",
+      "sha256": "11328f6d638fa24fc7900e5455f6923008e22267c2892ffdce9de5296e0e7db9",
+      "anim": "shore_corner_nw_winter",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/shore_corner_nw_winter-r4.png",
+      "source_sha256": "29bfaaf877cf9ac3aff5f1e465618b354edf176cec3036290c4c1013f85b75d1",
+      "prompt": "raw/shore_corner_nw_winter-r4.prompt.txt",
+      "prompt_sha256": "0a11b48cc89bef33bcf181de4fa3660a984df32a99c7064853944173a853d6c2",
+      "call": "raw/shore_corner_nw_winter-r4.call.json",
+      "runtime_name": "sprites/terrain/shore_corner_nw_winter.png",
+      "recipe": {
+        "id": "A012/shore_corner_nw_winter",
+        "source": "implementation/backlog/deliveries/A012-winter-ground/raw/shore_corner_nw_winter-r4.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.012759170653907496,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "wood_light",
+          "wood",
+          "soil_light",
+          "water_dark"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ]
+      },
+      "points": {}
+    }
+  ],
+  "mirror_pairs": {},
+  "deviations": [],
+  "supersedes": [],
+  "exemptions": {
+    "grounded_on_pivot": "Ground tiles cover cells; alpha overlays attach to the north edge, not to actor feet.",
+    "points_on_opaque": "Static terrain has no gameplay attachment points.",
+    "mirror_pairs_exact": "No mirrored deliverables; rotated edge/shore pieces shown only in review compositions."
+  },
+  "approval": "APPROVAL.json"
+}

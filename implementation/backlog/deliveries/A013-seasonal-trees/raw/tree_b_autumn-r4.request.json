@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 exact1024x1536tree_bedit targetgeometry. Image2 approvedAUTUMNCOLOUR referenceONLY. Apply image2 subduedochre/gold/brown leafshading toimage1 crown, allhighlightplanes mutedochreRGB21418696, middlesRGB19615070, shadowsRGB16811644, rustRGB1384742/1766658. Replace bright yelloworangehighlights with these mutedochres. ALLleafcolourredchannel<=215, bluechannel>=70 forochre/goldplanes; no orangeRGB24216060, no palehotyellow246217122. Nogreen leaves. Preserve originaltree_bsilhouette,trunk,roots,size,position,exact1024x1536canvas andtransparentmargins, neutralupperleftlight. No glow, ground, shadow, scene,text,crop,recenter orscale.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_autumn-r3.png",
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r4.png"
+  ],
+  "transparent_background": true
+}

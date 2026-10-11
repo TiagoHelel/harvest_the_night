@@ -1,7 +1,7 @@
 # 0211 - Art: animal goods
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0185
 - **Likely files:** assets/art_source/ui/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_ui_art.py, tools/check_prop_art.py
 - **Art packs:** A029

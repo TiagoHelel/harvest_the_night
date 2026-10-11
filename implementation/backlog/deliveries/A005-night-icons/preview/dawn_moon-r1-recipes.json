@@ -1,0 +1,82 @@
+[
+  {
+    "anim": "icon_dawn_moon",
+    "asset": "dawn_moon",
+    "stem": "dawn_moon-r1",
+    "importer": {
+      "id": "A005/icon_dawn_moon",
+      "source": "implementation/backlog/deliveries/A005-night-icons/raw/dawn_moon-r1.png",
+      "crop_xywh": [
+        344,
+        478,
+        568,
+        289
+      ],
+      "content_scale": 0.02464788732394366,
+      "content_anchor_xy": [
+        7,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_dawn_moon",
+    "asset": "dawn_moon",
+    "stem": "dawn_moon-r1",
+    "importer": {
+      "id": "A005/hud_dawn_moon",
+      "source": "implementation/backlog/deliveries/A005-night-icons/raw/dawn_moon-r1.png",
+      "crop_xywh": [
+        344,
+        478,
+        568,
+        289
+      ],
+      "content_scale": 0.014084507042253521,
+      "content_anchor_xy": [
+        4,
+        2
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  }
+]

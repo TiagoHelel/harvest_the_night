@@ -1,0 +1,51 @@
+A013 - Seasonal trees and settled snow caps
+Approved for integration on 2026-10-10.
+Owner words, verbatim: "aprovado"
+
+Authoritative folder: implementation/backlog/deliveries/A013-seasonal-trees/
+Read APPROVAL.json, contract.json, checks.json, review-log.txt and this handoff. All 15 exports are approved. runtime_integrated is false; Codex did not integrate game assets. No older delivery folders are superseded. rejected/ and preview/ are review evidence, never source art.
+
+Integration task: 0164. Replace task 0159's seasonal tree palette-remap stand-in with these six seasonal tree sprites and draw the nine winter snow caps over the unchanged resource hosts. Spring is days 1-14; summer retains today's tree/tree_b; autumn uses its accepted seasonal files; winter uses bare branches and the caps. Use the game's established season calendar.
+
+Mode A: promote selected ImageGen raw sources and the exact importer recipes from contract.json. Use tools/palette.py:COLOURS. All six trees have content_scale exactly 0.03700440528634361 and no palette_keys; retain their exact measured crop and content_anchor_xy, rather than choosing a new crop or default placement. Every seasonal tree must be variant_of props/tree, including tree_b seasons: variants cannot chain. The nine caps use their recorded scale, crop, anchor and palette_keys [bone, moon, bone_dark, stone_light, night]. Preserve alpha threshold 128, canvas, pivot and all source hashes. Approved native pixels already come from render_source. No runtime/ 2x layer.
+
+Mapping and aliases:
+native/tree_spring/none/01.png -> sprites/props/tree_spring.png | 40x48 pivot (20,44) draw 1.0 | one static frame, 0.55 s, no loop, direction none | variant_of props/tree
+native/tree_autumn/none/01.png -> sprites/props/tree_autumn.png | 40x48 pivot (20,44) draw 1.0 | one static frame, 0.55 s, no loop, direction none | variant_of props/tree
+native/tree_winter/none/01.png -> sprites/props/tree_winter.png | 40x48 pivot (20,44) draw 1.0 | one static frame, 0.55 s, no loop, direction none | variant_of props/tree
+native/tree_b_spring/none/01.png -> sprites/props/tree_b_spring.png | 40x48 pivot (20,44) draw 1.0 | one static frame, 0.55 s, no loop, direction none | variant_of props/tree
+native/tree_b_autumn/none/01.png -> sprites/props/tree_b_autumn.png | 40x48 pivot (20,44) draw 1.0 | one static frame, 0.55 s, no loop, direction none | variant_of props/tree
+native/tree_b_winter/none/01.png -> sprites/props/tree_b_winter.png | 40x48 pivot (20,44) draw 1.0 | one static frame, 0.55 s, no loop, direction none | variant_of props/tree
+native/stump_snow/none/01.png -> sprites/props/stump_snow.png | 16x16 pivot (8,14) draw 1.0 | one static frame, 0.55 s, no loop, direction none | winter overlay; same canvas origin as host
+native/rock_snow/none/01.png -> sprites/props/rock_snow.png | 16x16 pivot (8,14) draw 1.0 | one static frame, 0.55 s, no loop, direction none | winter overlay; same canvas origin as host
+native/rock_b_snow/none/01.png -> sprites/props/rock_b_snow.png | 16x16 pivot (8,14) draw 1.0 | one static frame, 0.55 s, no loop, direction none | winter overlay; same canvas origin as host
+native/ore_snow/none/01.png -> sprites/props/ore_snow.png | 16x16 pivot (8,14) draw 1.0 | one static frame, 0.55 s, no loop, direction none | winter overlay; same canvas origin as host
+native/ore_b_snow/none/01.png -> sprites/props/ore_b_snow.png | 16x16 pivot (8,14) draw 1.0 | one static frame, 0.55 s, no loop, direction none | winter overlay; same canvas origin as host
+native/seam_snow/none/01.png -> sprites/props/seam_snow.png | 16x16 pivot (8,14) draw 1.0 | one static frame, 0.55 s, no loop, direction none | winter overlay; same canvas origin as host
+native/seam_b_snow/none/01.png -> sprites/props/seam_b_snow.png | 16x16 pivot (8,14) draw 1.0 | one static frame, 0.55 s, no loop, direction none | winter overlay; same canvas origin as host
+native/snow_cap/none/01.png -> sprites/props/snow_cap.png | 16x16 pivot (8,14) draw 1.0 | one static frame, 0.55 s, no loop, direction none | winter overlay; same canvas origin as host
+native/snow_cap_2x2/none/01.png -> sprites/props/snow_cap_2x2.png | 32x32 pivot (16,30) draw 1.0 | one static frame, 0.55 s, no loop, direction none | winter overlay; same canvas origin as host
+
+Frame order: 01.png is frame 0. All states use mirror none: no baked or runtime flips. Metadata points are {} per state. Native pivots are (20,44) for the six 40x48 trees, (8,14) for the eight 16x16 caps, and (16,30) for snow_cap_2x2's 32x32 canvas. Bind as single static frames, not animation sequences. Keep game wind applied only to the crown, with stationary lower trunk and roots, according to the existing shader split.
+
+Host mapping, with cap and host composited at the same canvas origin:
+- stump -> stump_snow
+- rock -> rock_snow; rock_b -> rock_b_snow
+- ore -> ore_snow; ore_b -> ore_b_snow
+- seam -> seam_snow; seam_b -> seam_b_snow
+- task 0156 one-cell copper/coal/gold nodes -> snow_cap (fit references are ore and rock)
+- hardwood_stump -> snow_cap_2x2 (fit reference is stump enlarged exactly 2x NEAREST on its 32x32 host canvas)
+Caps attach to host upper surfaces, not the ground baseline. Do not offset or stretch them to their transparent bounds. Preserve host material and ore clusters. The snow-cap pixels marked red in diagnostic fit images are preview annotations, not delivered colors.
+
+Owner-approved exception, disclosed before approval on 2026-10-10:
+The second spring tree, tree_b_spring, contains exactly one isolated pale blossom pixel. The owner explicitly answered "aprovado" to approval with that detail. APPROVAL.json accepted_qa_exceptions and contract.json deviations record this. checks.json deliberately retains blossom_clusters_at_least3=false; it is not a passed strict check. The builder accepts only this exact hash-bound singleton exception and validates that all other spring blossom clusters have at least three pixels and all other boolean checks pass. Preserve the approved art. Do not erase the singleton, falsify the check, or use this exception to waive any other failure.
+
+Never regenerate, repaint, recolour, resample or retime approved art. Never cut sprites from GIFs, previews or screenshots. Never use files absent from contract.json. Never add a runtime flip to a baked mirror. No new tree sway frames, snow-fall particles, shadows or night variants are delivered; the game's world lighting produces night appearance.
+
+Integration steps:
+1. Verify all 15 export hashes against contract.json and APPROVAL.json, plus selected raw/source, prompt hashes, call records and reference provenance. Run the delivery build.py --check. It must exit successfully with byte-identical outputs, the single documented blossom exception and no other failing check. If anything else differs, stop with its precise cause instead of silently repairing approved art.
+2. Promote selected raw files byte-for-byte to versioned assets/art_source/props/ locations. Record exact recipes, runtime aliases, variant_of props/tree, prompt/reference/approval provenance, the accepted singleton exception and ownership.json entries. Adapt promoted source paths only; preserve all hashes and transform values. Run python tools/import_art.py and confirm exported PNG hashes equal the approved files.
+3. Extend hard-coded prop family art-check lists as needed. Bind the seasonal tree aliases in task 0159's view hook, preserve summer trees, and draw each winter cap over its mapped host at the same origin. Keep the existing crown-only wind behavior; do not animate the trunk. Carry the approved exception as a narrowly scoped, documented check exemption if integration checks enforce the blossom cluster rule; keep the underlying measured failure visible.
+4. Run python tools/verify.py. Confirm all non-exempt checks pass: grounded tree roots, fixed tree scale, connected silhouettes, autumn without flame_hot, winter bare branches, and all nine cap fits. Verify every promoted output against the approved hashes again.
+5. Inspect FHD game captures by day/night, all seasons, both tree species, and every snow-cap host. Confirm stable roots, recognizable seasonal silhouettes, autumn foliage without a fire appearance, readable ore and natural snow placement.
+6. Only after integration and validation, run python implementation/backlog/assets.py set A013 integrated. Claude owns this transition. Do not touch deferred farmer packs or the cancelled run pack. Do not commit or push unless the owner asks.

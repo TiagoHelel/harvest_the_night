@@ -18,8 +18,8 @@ extends Node2D
 ## (dog) animations, through 0120's road until 0209, 0210 and 0245 integrate
 ## them: the cow's and the chicken's props tinted and scaled, every frame the
 ## same picture, with a bob for a step, a dip for a bite and a squash for
-## sleep so the states still read. A029's dig spot is drawn in code until
-## 0211.
+## sleep so the states still read. A029's dig spot is its approved mound
+## (task 0211).
 
 ## How fast they go, in pixels a second.
 const WALK_SPEED := 12.0
@@ -359,21 +359,20 @@ func _spot_signature() -> String:
 	return ",".join(parts)
 
 
-## A029's truffle spot, drawn in code until 0211: a heap of turned soil with
-## a truffle's knobbly top showing - 16x16 at (8,14), visible 12 wide.
+## A029's truffle spot (task 0211): the approved mound, 16x16 at (8,14),
+## stood on its cell the way `ArtPlacement.place` stands every prop - its
+## pivot on the cell's bottom middle. It is in the world, so the night
+## darkens it with the grass; nothing here tints it.
 func _draw_spots() -> void:
 	if _state.is_empty():
 		return
+	var texture := _texture(&"truffle_spot", 0, &"truffle_spot")
+	if texture == null:
+		return
 	var tile := float(GameData.TILE_SIZE)
+	var foot := Vector2(tile * 0.5, tile) - _pivot(texture)
 	for cell in Livestock.spots(_state):
-		var at := Vector2(cell) * tile
-		_spots.draw_rect(Rect2(at + Vector2(2, 9), Vector2(12, 4)), _colour(&"soil_dark"))
-		_spots.draw_rect(Rect2(at + Vector2(3, 8), Vector2(10, 4)), _colour(&"soil"))
-		_spots.draw_rect(Rect2(at + Vector2(4, 7), Vector2(3, 1)), _colour(&"soil_light"))
-		_spots.draw_rect(Rect2(at + Vector2(9, 7), Vector2(3, 1)), _colour(&"soil_light"))
-		_spots.draw_rect(Rect2(at + Vector2(6, 5), Vector2(4, 3)), _colour(&"ink"))
-		_spots.draw_rect(Rect2(at + Vector2(7, 4), Vector2(2, 2)), _colour(&"wood_dark"))
-		_spots.draw_rect(Rect2(at + Vector2(7, 5), Vector2(1, 1)), _colour(&"soil_light"))
+		_spots.draw_texture(texture, Vector2(cell) * tile + foot)
 
 
 func _colour(id: StringName) -> Color:

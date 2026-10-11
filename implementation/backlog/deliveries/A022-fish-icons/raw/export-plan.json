@@ -1,0 +1,1940 @@
+{
+  "expected_files": 48,
+  "status": "review",
+  "palette_mode": "A",
+  "colour_ramp": [],
+  "files": [
+    {
+      "anim": "portrait_carp",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_carp/none/01.png",
+      "runtime_name": "sprites/ui/portrait_carp.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "carp icon",
+      "source": "raw/carp-master-c2-r1.png",
+      "prompt": "raw/carp-master-c2-r1.prompt.txt",
+      "call": "raw/carp-master-c2-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          230,
+          210,
+          1167,
+          642
+        ],
+        "content_scale": 0.02570694087403599,
+        "content_anchor_xy": [
+          15,
+          8
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "carp",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_carp",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_carp/none/01.png",
+      "runtime_name": "sprites/ui/icon_carp.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "carp icon",
+      "source": "raw/carp-master-c2-r1.png",
+      "prompt": "raw/carp-master-c2-r1.prompt.txt",
+      "call": "raw/carp-master-c2-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          230,
+          210,
+          1167,
+          642
+        ],
+        "content_scale": 0.011996572407883462,
+        "content_anchor_xy": [
+          7,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "carp",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_carp",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_carp/none/01.png",
+      "runtime_name": "sprites/ui/hud_carp.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "carp icon",
+      "source": "raw/carp-master-c2-r1.png",
+      "prompt": "raw/carp-master-c2-r1.prompt.txt",
+      "call": "raw/carp-master-c2-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          230,
+          210,
+          1167,
+          642
+        ],
+        "content_scale": 0.006855184233076264,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "carp",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_bream",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_bream/none/01.png",
+      "runtime_name": "sprites/ui/portrait_bream.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "bream icon",
+      "source": "raw/bream-r1.png",
+      "prompt": "raw/bream-r1.prompt.txt",
+      "call": "raw/bream-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          168,
+          154,
+          1261,
+          750
+        ],
+        "content_scale": 0.023790642347343377,
+        "content_anchor_xy": [
+          15,
+          9
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "bream",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_bream",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_bream/none/01.png",
+      "runtime_name": "sprites/ui/icon_bream.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "bream icon",
+      "source": "raw/bream-r1.png",
+      "prompt": "raw/bream-r1.prompt.txt",
+      "call": "raw/bream-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          168,
+          154,
+          1261,
+          750
+        ],
+        "content_scale": 0.011102299762093577,
+        "content_anchor_xy": [
+          7,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "bream",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_bream",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_bream/none/01.png",
+      "runtime_name": "sprites/ui/hud_bream.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "bream icon",
+      "source": "raw/bream-r1.png",
+      "prompt": "raw/bream-r1.prompt.txt",
+      "call": "raw/bream-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          168,
+          154,
+          1261,
+          750
+        ],
+        "content_scale": 0.006344171292624901,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "bream",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_catfish",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_catfish/none/01.png",
+      "runtime_name": "sprites/ui/portrait_catfish.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "catfish icon",
+      "source": "raw/catfish-r1.png",
+      "prompt": "raw/catfish-r1.prompt.txt",
+      "call": "raw/catfish-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          124,
+          217,
+          1291,
+          627
+        ],
+        "content_scale": 0.023237800154918668,
+        "content_anchor_xy": [
+          15,
+          7
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "catfish",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_catfish",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_catfish/none/01.png",
+      "runtime_name": "sprites/ui/icon_catfish.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "catfish icon",
+      "source": "raw/catfish-r1.png",
+      "prompt": "raw/catfish-r1.prompt.txt",
+      "call": "raw/catfish-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          124,
+          217,
+          1291,
+          627
+        ],
+        "content_scale": 0.010844306738962044,
+        "content_anchor_xy": [
+          7,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "catfish",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_catfish",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_catfish/none/01.png",
+      "runtime_name": "sprites/ui/hud_catfish.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "catfish icon",
+      "source": "raw/catfish-r1.png",
+      "prompt": "raw/catfish-r1.prompt.txt",
+      "call": "raw/catfish-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          124,
+          217,
+          1291,
+          627
+        ],
+        "content_scale": 0.006196746707978312,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "catfish",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_dorado",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_dorado/none/01.png",
+      "runtime_name": "sprites/ui/portrait_dorado.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "dorado icon",
+      "source": "raw/dorado-r1.png",
+      "prompt": "raw/dorado-r1.prompt.txt",
+      "call": "raw/dorado-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          178,
+          196,
+          1262,
+          664
+        ],
+        "content_scale": 0.02377179080824089,
+        "content_anchor_xy": [
+          15,
+          8
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "dorado",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_dorado",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_dorado/none/01.png",
+      "runtime_name": "sprites/ui/icon_dorado.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "dorado icon",
+      "source": "raw/dorado-r1.png",
+      "prompt": "raw/dorado-r1.prompt.txt",
+      "call": "raw/dorado-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          178,
+          196,
+          1262,
+          664
+        ],
+        "content_scale": 0.011093502377179081,
+        "content_anchor_xy": [
+          7,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "dorado",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_dorado",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_dorado/none/01.png",
+      "runtime_name": "sprites/ui/hud_dorado.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "dorado icon",
+      "source": "raw/dorado-r1.png",
+      "prompt": "raw/dorado-r1.prompt.txt",
+      "call": "raw/dorado-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          178,
+          196,
+          1262,
+          664
+        ],
+        "content_scale": 0.006339144215530904,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "dorado",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_eel",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_eel/none/01.png",
+      "runtime_name": "sprites/ui/portrait_eel.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "eel icon",
+      "source": "raw/eel-r1.png",
+      "prompt": "raw/eel-r1.prompt.txt",
+      "call": "raw/eel-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          159,
+          301,
+          1282,
+          524
+        ],
+        "content_scale": 0.0234009360374415,
+        "content_anchor_xy": [
+          15,
+          6
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "eel",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_eel",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_eel/none/01.png",
+      "runtime_name": "sprites/ui/icon_eel.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "eel icon",
+      "source": "raw/eel-r1.png",
+      "prompt": "raw/eel-r1.prompt.txt",
+      "call": "raw/eel-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          159,
+          301,
+          1282,
+          524
+        ],
+        "content_scale": 0.0109204368174727,
+        "content_anchor_xy": [
+          7,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "eel",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_eel",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_eel/none/01.png",
+      "runtime_name": "sprites/ui/hud_eel.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "eel icon",
+      "source": "raw/eel-r1.png",
+      "prompt": "raw/eel-r1.prompt.txt",
+      "call": "raw/eel-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          159,
+          301,
+          1282,
+          524
+        ],
+        "content_scale": 0.0062402496099844,
+        "content_anchor_xy": [
+          4,
+          1
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "eel",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_perch",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_perch/none/01.png",
+      "runtime_name": "sprites/ui/portrait_perch.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "perch icon",
+      "source": "raw/perch-r1.png",
+      "prompt": "raw/perch-r1.prompt.txt",
+      "call": "raw/perch-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          189,
+          177,
+          1227,
+          711
+        ],
+        "content_scale": 0.02444987775061125,
+        "content_anchor_xy": [
+          15,
+          8
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "perch",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_perch",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_perch/none/01.png",
+      "runtime_name": "sprites/ui/icon_perch.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "perch icon",
+      "source": "raw/perch-r1.png",
+      "prompt": "raw/perch-r1.prompt.txt",
+      "call": "raw/perch-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          189,
+          177,
+          1227,
+          711
+        ],
+        "content_scale": 0.011409942950285249,
+        "content_anchor_xy": [
+          7,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "perch",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_perch",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_perch/none/01.png",
+      "runtime_name": "sprites/ui/hud_perch.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "perch icon",
+      "source": "raw/perch-r1.png",
+      "prompt": "raw/perch-r1.prompt.txt",
+      "call": "raw/perch-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          189,
+          177,
+          1227,
+          711
+        ],
+        "content_scale": 0.006519967400162999,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "perch",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_pike",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_pike/none/01.png",
+      "runtime_name": "sprites/ui/portrait_pike.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "pike icon",
+      "source": "raw/pike-r1.png",
+      "prompt": "raw/pike-r1.prompt.txt",
+      "call": "raw/pike-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          75,
+          370,
+          1421,
+          521
+        ],
+        "content_scale": 0.0211118930330753,
+        "content_anchor_xy": [
+          15,
+          5
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "pike",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_pike",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_pike/none/01.png",
+      "runtime_name": "sprites/ui/icon_pike.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "pike icon",
+      "source": "raw/pike-r1.png",
+      "prompt": "raw/pike-r1.prompt.txt",
+      "call": "raw/pike-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          75,
+          370,
+          1421,
+          521
+        ],
+        "content_scale": 0.009852216748768473,
+        "content_anchor_xy": [
+          7,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "pike",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_pike",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_pike/none/01.png",
+      "runtime_name": "sprites/ui/hud_pike.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "pike icon",
+      "source": "raw/pike-r1.png",
+      "prompt": "raw/pike-r1.prompt.txt",
+      "call": "raw/pike-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          75,
+          370,
+          1421,
+          521
+        ],
+        "content_scale": 0.005629838142153413,
+        "content_anchor_xy": [
+          4,
+          1
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "pike",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_salmon",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_salmon/none/01.png",
+      "runtime_name": "sprites/ui/portrait_salmon.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "salmon icon",
+      "source": "raw/salmon-r1.png",
+      "prompt": "raw/salmon-r1.prompt.txt",
+      "call": "raw/salmon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          133,
+          264,
+          1337,
+          601
+        ],
+        "content_scale": 0.02243829468960359,
+        "content_anchor_xy": [
+          15,
+          6
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "salmon",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_salmon",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_salmon/none/01.png",
+      "runtime_name": "sprites/ui/icon_salmon.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "salmon icon",
+      "source": "raw/salmon-r1.png",
+      "prompt": "raw/salmon-r1.prompt.txt",
+      "call": "raw/salmon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          133,
+          264,
+          1337,
+          601
+        ],
+        "content_scale": 0.010471204188481676,
+        "content_anchor_xy": [
+          7,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "salmon",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_salmon",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_salmon/none/01.png",
+      "runtime_name": "sprites/ui/hud_salmon.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "salmon icon",
+      "source": "raw/salmon-r1.png",
+      "prompt": "raw/salmon-r1.prompt.txt",
+      "call": "raw/salmon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          133,
+          264,
+          1337,
+          601
+        ],
+        "content_scale": 0.005983545250560957,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "salmon",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_sturgeon",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_sturgeon/none/01.png",
+      "runtime_name": "sprites/ui/portrait_sturgeon.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sturgeon icon",
+      "source": "raw/sturgeon-r1.png",
+      "prompt": "raw/sturgeon-r1.prompt.txt",
+      "call": "raw/sturgeon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          127,
+          257,
+          1613,
+          486
+        ],
+        "content_scale": 0.018598884066955982,
+        "content_anchor_xy": [
+          15,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sturgeon",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_sturgeon",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_sturgeon/none/01.png",
+      "runtime_name": "sprites/ui/icon_sturgeon.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sturgeon icon",
+      "source": "raw/sturgeon-r1.png",
+      "prompt": "raw/sturgeon-r1.prompt.txt",
+      "call": "raw/sturgeon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          127,
+          257,
+          1613,
+          486
+        ],
+        "content_scale": 0.008679479231246125,
+        "content_anchor_xy": [
+          7,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sturgeon",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_sturgeon",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_sturgeon/none/01.png",
+      "runtime_name": "sprites/ui/hud_sturgeon.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sturgeon icon",
+      "source": "raw/sturgeon-r1.png",
+      "prompt": "raw/sturgeon-r1.prompt.txt",
+      "call": "raw/sturgeon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          127,
+          257,
+          1613,
+          486
+        ],
+        "content_scale": 0.0049597024178549285,
+        "content_anchor_xy": [
+          4,
+          1
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sturgeon",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_sunfish",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_sunfish/none/01.png",
+      "runtime_name": "sprites/ui/portrait_sunfish.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sunfish icon",
+      "source": "raw/sunfish-r1.png",
+      "prompt": "raw/sunfish-r1.prompt.txt",
+      "call": "raw/sunfish-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          277,
+          166,
+          1021,
+          706
+        ],
+        "content_scale": 0.029382957884427033,
+        "content_anchor_xy": [
+          15,
+          10
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sunfish",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_sunfish",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_sunfish/none/01.png",
+      "runtime_name": "sprites/ui/icon_sunfish.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sunfish icon",
+      "source": "raw/sunfish-r1.png",
+      "prompt": "raw/sunfish-r1.prompt.txt",
+      "call": "raw/sunfish-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          277,
+          166,
+          1021,
+          706
+        ],
+        "content_scale": 0.013712047012732615,
+        "content_anchor_xy": [
+          7,
+          5
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sunfish",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_sunfish",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_sunfish/none/01.png",
+      "runtime_name": "sprites/ui/hud_sunfish.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "sunfish icon",
+      "source": "raw/sunfish-r1.png",
+      "prompt": "raw/sunfish-r1.prompt.txt",
+      "call": "raw/sunfish-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          277,
+          166,
+          1021,
+          706
+        ],
+        "content_scale": 0.007835455435847209,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "sunfish",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_tilapia",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_tilapia/none/01.png",
+      "runtime_name": "sprites/ui/portrait_tilapia.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "tilapia icon",
+      "source": "raw/tilapia-r1.png",
+      "prompt": "raw/tilapia-r1.prompt.txt",
+      "call": "raw/tilapia-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          230,
+          199,
+          1155,
+          652
+        ],
+        "content_scale": 0.025974025974025976,
+        "content_anchor_xy": [
+          15,
+          8
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "tilapia",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_tilapia",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_tilapia/none/01.png",
+      "runtime_name": "sprites/ui/icon_tilapia.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "tilapia icon",
+      "source": "raw/tilapia-r1.png",
+      "prompt": "raw/tilapia-r1.prompt.txt",
+      "call": "raw/tilapia-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          230,
+          199,
+          1155,
+          652
+        ],
+        "content_scale": 0.012121212121212121,
+        "content_anchor_xy": [
+          7,
+          4
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "tilapia",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_tilapia",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_tilapia/none/01.png",
+      "runtime_name": "sprites/ui/hud_tilapia.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "tilapia icon",
+      "source": "raw/tilapia-r1.png",
+      "prompt": "raw/tilapia-r1.prompt.txt",
+      "call": "raw/tilapia-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          230,
+          199,
+          1155,
+          652
+        ],
+        "content_scale": 0.006926406926406926,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "tilapia",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_trout",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_trout/none/01.png",
+      "runtime_name": "sprites/ui/portrait_trout.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "trout icon",
+      "source": "raw/trout-r1.png",
+      "prompt": "raw/trout-r1.prompt.txt",
+      "call": "raw/trout-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          225,
+          259,
+          1154,
+          576
+        ],
+        "content_scale": 0.025996533795493933,
+        "content_anchor_xy": [
+          15,
+          7
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "trout",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_trout",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_trout/none/01.png",
+      "runtime_name": "sprites/ui/icon_trout.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "trout icon",
+      "source": "raw/trout-r1.png",
+      "prompt": "raw/trout-r1.prompt.txt",
+      "call": "raw/trout-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          225,
+          259,
+          1154,
+          576
+        ],
+        "content_scale": 0.012131715771230503,
+        "content_anchor_xy": [
+          7,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "trout",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_trout",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_trout/none/01.png",
+      "runtime_name": "sprites/ui/hud_trout.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "trout icon",
+      "source": "raw/trout-r1.png",
+      "prompt": "raw/trout-r1.prompt.txt",
+      "call": "raw/trout-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          225,
+          259,
+          1154,
+          576
+        ],
+        "content_scale": 0.006932409012131715,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "trout",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_old_catfish",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_old_catfish/none/01.png",
+      "runtime_name": "sprites/ui/portrait_old_catfish.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "old_catfish icon",
+      "source": "raw/old_catfish-r1.png",
+      "prompt": "raw/old_catfish-r1.prompt.txt",
+      "call": "raw/old_catfish-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          21,
+          15,
+          1860,
+          816
+        ],
+        "content_scale": 0.016129032258064516,
+        "content_anchor_xy": [
+          15,
+          6
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "old_catfish",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_old_catfish",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_old_catfish/none/01.png",
+      "runtime_name": "sprites/ui/icon_old_catfish.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "old_catfish icon",
+      "source": "raw/old_catfish-r1.png",
+      "prompt": "raw/old_catfish-r1.prompt.txt",
+      "call": "raw/old_catfish-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          21,
+          15,
+          1860,
+          816
+        ],
+        "content_scale": 0.007526881720430108,
+        "content_anchor_xy": [
+          7,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "old_catfish",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_old_catfish",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_old_catfish/none/01.png",
+      "runtime_name": "sprites/ui/hud_old_catfish.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "old_catfish icon",
+      "source": "raw/old_catfish-r1.png",
+      "prompt": "raw/old_catfish-r1.prompt.txt",
+      "call": "raw/old_catfish-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          21,
+          15,
+          1860,
+          816
+        ],
+        "content_scale": 0.004301075268817204,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "old_catfish",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_golden_queen",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_golden_queen/none/01.png",
+      "runtime_name": "sprites/ui/portrait_golden_queen.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "golden_queen icon",
+      "source": "raw/golden_queen-r1.png",
+      "prompt": "raw/golden_queen-r1.prompt.txt",
+      "call": "raw/golden_queen-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          84,
+          15,
+          1676,
+          858
+        ],
+        "content_scale": 0.017899761336515514,
+        "content_anchor_xy": [
+          15,
+          7
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "golden_queen",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_golden_queen",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_golden_queen/none/01.png",
+      "runtime_name": "sprites/ui/icon_golden_queen.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "golden_queen icon",
+      "source": "raw/golden_queen-r1.png",
+      "prompt": "raw/golden_queen-r1.prompt.txt",
+      "call": "raw/golden_queen-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          84,
+          15,
+          1676,
+          858
+        ],
+        "content_scale": 0.008353221957040573,
+        "content_anchor_xy": [
+          7,
+          3
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "golden_queen",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_golden_queen",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_golden_queen/none/01.png",
+      "runtime_name": "sprites/ui/hud_golden_queen.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "golden_queen icon",
+      "source": "raw/golden_queen-r1.png",
+      "prompt": "raw/golden_queen-r1.prompt.txt",
+      "call": "raw/golden_queen-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          84,
+          15,
+          1676,
+          858
+        ],
+        "content_scale": 0.00477326968973747,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "golden_queen",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_ghost_pike",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_ghost_pike/none/01.png",
+      "runtime_name": "sprites/ui/portrait_ghost_pike.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "ghost_pike icon",
+      "source": "raw/ghost_pike-r2.png",
+      "prompt": "raw/ghost_pike-r2.prompt.txt",
+      "call": "raw/ghost_pike-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          58,
+          180,
+          1703,
+          612
+        ],
+        "content_scale": 0.017615971814445096,
+        "content_anchor_xy": [
+          15,
+          5
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "ghost_pike",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_ghost_pike",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_ghost_pike/none/01.png",
+      "runtime_name": "sprites/ui/icon_ghost_pike.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "ghost_pike icon",
+      "source": "raw/ghost_pike-r2.png",
+      "prompt": "raw/ghost_pike-r2.prompt.txt",
+      "call": "raw/ghost_pike-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          58,
+          180,
+          1703,
+          612
+        ],
+        "content_scale": 0.008220786846741044,
+        "content_anchor_xy": [
+          7,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "ghost_pike",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_ghost_pike",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_ghost_pike/none/01.png",
+      "runtime_name": "sprites/ui/hud_ghost_pike.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "ghost_pike icon",
+      "source": "raw/ghost_pike-r2.png",
+      "prompt": "raw/ghost_pike-r2.prompt.txt",
+      "call": "raw/ghost_pike-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          58,
+          180,
+          1703,
+          612
+        ],
+        "content_scale": 0.004697592483852026,
+        "content_anchor_xy": [
+          4,
+          1
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "ghost_pike",
+      "display_role": "compact_hud"
+    },
+    {
+      "anim": "portrait_ice_sturgeon",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/portrait_ice_sturgeon/none/01.png",
+      "runtime_name": "sprites/ui/portrait_ice_sturgeon.png",
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "ice_sturgeon icon",
+      "source": "raw/ice_sturgeon-r1.png",
+      "prompt": "raw/ice_sturgeon-r1.prompt.txt",
+      "call": "raw/ice_sturgeon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          136,
+          248,
+          1610,
+          525
+        ],
+        "content_scale": 0.018633540372670808,
+        "content_anchor_xy": [
+          15,
+          5
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "ice_sturgeon",
+      "display_role": "book_portrait"
+    },
+    {
+      "anim": "icon_ice_sturgeon",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/icon_ice_sturgeon/none/01.png",
+      "runtime_name": "sprites/ui/icon_ice_sturgeon.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "ice_sturgeon icon",
+      "source": "raw/ice_sturgeon-r1.png",
+      "prompt": "raw/ice_sturgeon-r1.prompt.txt",
+      "call": "raw/ice_sturgeon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          136,
+          248,
+          1610,
+          525
+        ],
+        "content_scale": 0.008695652173913044,
+        "content_anchor_xy": [
+          7,
+          2
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "ice_sturgeon",
+      "display_role": "inventory"
+    },
+    {
+      "anim": "hud_ice_sturgeon",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/hud_ice_sturgeon/none/01.png",
+      "runtime_name": "sprites/ui/hud_ice_sturgeon.png",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1.0,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "pose": "ice_sturgeon icon",
+      "source": "raw/ice_sturgeon-r1.png",
+      "prompt": "raw/ice_sturgeon-r1.prompt.txt",
+      "call": "raw/ice_sturgeon-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          136,
+          248,
+          1610,
+          525
+        ],
+        "content_scale": 0.004968944099378882,
+        "content_anchor_xy": [
+          4,
+          1
+        ]
+      },
+      "grounded": false,
+      "points": {},
+      "resource_id": "ice_sturgeon",
+      "display_role": "compact_hud"
+    }
+  ],
+  "comparison": [
+    {
+      "path": "sprites/ui/icon_fish.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1
+    }
+  ],
+  "deviations": [],
+  "supersedes": []
+}

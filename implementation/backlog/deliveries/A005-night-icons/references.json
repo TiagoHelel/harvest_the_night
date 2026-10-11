@@ -1,0 +1,152 @@
+[
+  {
+    "path": "assets/art_source/ui/wood.png",
+    "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "docs/reference-sheet.png",
+    "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/icon_wood.png",
+    "sha256": "6d0275b93c12105ae00a148ca6f27aaf586a985cb4897bba84ef6ec2b89d9148",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/hud_wood.png",
+    "sha256": "fc1bf6a471078c71e0b99e7a79be2e24f9a888cd541f6914304bdd6124080540",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/icon_iron.png",
+    "sha256": "cc8315903bb141470e6f26dc65cbd19287823fb42f945cfd8bdd0f05fc890ef6",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/hud_iron.png",
+    "sha256": "6c505a65227e474d97624412188021eb0a8d977e1b88939ed5d8541689ec6edc",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/icon_incendiary.png",
+    "sha256": "5c51a4aa471e471d9f524dd76b9a683fd5646f7062fb98d7a51c11038224ff52",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/hud_incendiary.png",
+    "sha256": "101c12fa6c18c5d4bd0f2b56449b41c8f91a6b08e1296b8f80ce7562d9074067",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/icon_money.png",
+    "sha256": "e1131306f92cc6a2de702395d1aec2d517a9eab39223f540be603198c793979e",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/hud_money.png",
+    "sha256": "13a5ff774d41199fb21607aa4838cfc5571d8adf644749e64ac641746b2bfb97",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "assets/art_source/defences/gun_tower/master.png",
+    "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/buildings/gun_tower.png",
+    "sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "assets/art_source/defences/auto_crossbow/master.png",
+    "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/buildings/auto_crossbow.png",
+    "sha256": "431d1b53e11b54d99dc6663cb8399fec7b5ce08863b45594a247f5e6611c6b20",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "assets/art_source/defences/flame_tower/master.png",
+    "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/buildings/flame_tower.png",
+    "sha256": "47ae4a5ac86fbd32ba922f11c930c5f73d850a40bb65e9e57e4e38d5ffc2b933",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "assets/art_source/defences/mortar/master.png",
+    "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/buildings/mortar.png",
+    "sha256": "be87c0ec7487b14ade3c06ca9be29946030c87f00040bb42b912b16860d4ea18",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "assets/art_source/defences/mine/master.png",
+    "sha256": "873a3f1d5fc3aced6dc8721ba754ec0f3aa7426fa59c56dfa6e08e5810223486",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/buildings/mine.png",
+    "sha256": "b9fa9c7cacd19ec0afb921ff40630cf4b8924e56ad28cb9bd6e758f8fdddff27",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "assets/art_source/defences/fence/whole.png",
+    "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/buildings/fence_join_10.png",
+    "sha256": "1a1832401fa01aed66fd795b5c75fccd9139f4999e42c8a23358bce6662e161e",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "assets/art_source/defences/wall/whole.png",
+    "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/buildings/wall_join_10.png",
+    "sha256": "6dac5663faf1ca9c197cb4d91b6ee8dd44d8a255feb0b9ba662bb80c8fbf3586",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "assets/art_source/defences/barricade/master.png",
+    "sha256": "9b905960bd0854d51506479011b6e85c18c89816d00a4343053882c77f92ac4f",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/buildings/barricade.png",
+    "sha256": "e99ee6cb46d0f0ac182a1eace7703c5f04e0d8fd25f44dc8901261707b0a8839",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/effects/flare_1.png",
+    "sha256": "63a75020f3b3559a45820ebe35c2de797c3d2d069032dcb8ce8048feb9d05365",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/panel.png",
+    "sha256": "0c7d37fe6f4c333a048959f0d5b4b6867cce201d270f260ec78f367d082a1863",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "sprites/ui/button_normal.png",
+    "sha256": "86afdc394f1706e5d09cd56dbe3b26ee581b18992cce2832924c4b3e5ad6b160",
+    "role": "Existing UI style or defence identity / scale reference"
+  },
+  {
+    "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+    "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+    "role": "Existing UI style or defence identity / scale reference"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 EXACT autumn tree target. ONE leaf-colour correction ONLY. Replace EVERY pale bright yellow/cream foliage highlight with DARKER subdued mustard-gold, RGB214,186,96 (#d6ba60) or darker. No leaf pixel can use flame_hot RGB246217122, no cream or pale yellow foliage remains. Restrained gold_light21418696 highlights ONLY, shadowsunchanged. Trunkandrootcolours stayexactlyunchanged. Keep exact1024x1536source canvas, all transparentmargins, position, size, outlines, branch/root geometry and all colouredclusters unchanged. Nevercrop,recenter,scale,add/removeleaves. NO fireorange, glow, particle, scene, background, shadow or lettering. True transparentalpha.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_autumn-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_b_autumn-r1.png",
+      "sha256": "bae79af4cadd181375e7a3dcec12a00f0e9cf8462be95c915973361a1134ec85",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_b_autumn-r1-bae79af4ca.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8be70a9a-cdfe-4438-98b4-256244a288f4.png",
+  "copied_raw_path": "raw/tree_b_autumn-r2.png",
+  "raw_sha256": "00795407d270dc5da2522a553205557ba88b07bd83c70d1e81339f20219bb5d0",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tree_b_autumn-r2.png"
+}

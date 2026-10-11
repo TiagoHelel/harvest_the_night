@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is exactcompletecanvas edit target. Keep complete square16x16logicalcanvas and same top-left corner. ExactlyTHREE opaque logicalpixels: (0,0)creamRGB232224207, (1,0)moonRGB207214255, (0,1)moonRGB207214255. Move the misplaced blue pixel from(1,1) to(1,0). (1,1) MUST be transparent. Entire remainingcanvastransparent. This is a tinyL-shapedsnowcorner, no edges elsewhere, no extra pixels, no crop, recenter, paddingremoval, scene or text. Returnfullsquarecanvas, exactpixelblocks, realalpha.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\shore_corner_nw_winter-r3-10x.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\shore_corner_nw_winter-r3-10x.png",
+      "sha256": "7d64ccad2cc5d9cad9e1db89f04bba6a9b47bb2762c239f9e5f280a2e4033832",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7c0ccb25-4c7b-468b-b16c-feb5f5623b7f.png",
+  "copied_raw_path": "raw/shore_corner_nw_winter-r4.png",
+  "raw_sha256": "29bfaaf877cf9ac3aff5f1e465618b354edf176cec3036290c4c1013f85b75d1",
+  "date": "2026-10-07",
+  "revision": 4,
+  "decision": "inspection pending"
+}

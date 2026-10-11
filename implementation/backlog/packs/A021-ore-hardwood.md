@@ -1,6 +1,6 @@
 # A021 - Copper, coal, gold and hardwood in the world
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0204
 - **Dressed by game tasks:** 0176, 0177
 - **Spec after game task:** 0177

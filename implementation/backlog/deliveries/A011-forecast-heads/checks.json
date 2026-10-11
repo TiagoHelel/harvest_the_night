@@ -1,0 +1,14 @@
+{
+  "frames_expected": 5,
+  "frames_found": 5,
+  "full_pack_complete": true,
+  "canvas_and_pivot_consistent": true,
+  "binary_alpha": true,
+  "no_empty_frame": true,
+  "exact_crop_pixels": true,
+  "source_hashes_match": true,
+  "source_colours_preserved": true,
+  "transparent_margin_and_baseline": true,
+  "all_same_size_outputs_distinct": true,
+  "rebuild_identical": true
+}

@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the accepted dry winter furrow target. Change ONLY its colours to WET darker cold damp soil/snow. SAME1254square canvas, exact whole-tile geometry and eight seamless borders, no new clusters. Final native16x16 fully opaque: rows0,15dark soil/ink-soft; row1creamgrey; rows4,5,8,9,12,13muted creamgrey ridges. All other rows very dark damp soil. Whole tile mean brightness at least20lower than dry target, but snow ridge rows still brighter than soil grooves. Limited planes near soil_dark92,66,42; ink_soft36,31,46; bone_dark184,174,154. Do NOT use broadbrightbone232224207 snow, puddles, grass, pebbles or isolated dots. Flat horizontalbands traverse full tile and left/rightmatch; topandbottomsame darksoil. No margins, scene, alpha or text.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\tilled_winter-r2.png"
+    ],
+    "transparent_background": false
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\tilled_winter-r2.png",
+      "sha256": "7f1ed88325f48818b295fcad92abdd7d5ba644eb83ed53825e5d81c660996ee9",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-ec8b1740-ccf1-4829-80cb-6566bf1d865d.png",
+  "copied_raw_path": "raw/tilled_wet_winter-r1.png",
+  "raw_sha256": "26029fa7490c52f1eab033b87fbe61ce92aa5ac4eb76ddf649fe6a947609c1eb",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tilled_wet_winter-r1.png"
+}

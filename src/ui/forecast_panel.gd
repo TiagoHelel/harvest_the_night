@@ -9,11 +9,11 @@ extends Control
 ## so it can only be as wrong as the night is. From the top:
 ##
 ## - the season's mark, TONIGHT and the date, with the night's marks at the
-##   right: a Full Moon, a boss, a calm night (A010, drawn by code until 0161);
+##   right: a Full Moon, a boss, a calm night (A010's art since task 0161);
 ## - the sides in words - from the EAST, or from every side;
 ## - the waves, the Full Moon and the boss in words;
-## - one head and count per kind, in the order they arrive (A011's heads, the
-##   walk frames cut down until 0162).
+## - one head and count per kind, in the order they arrive (A011's heads
+##   since task 0162: exact crops of each enemy's own walk frame).
 ##
 ## A calm night says so and nothing else. 0256's events have a slot in the
 ## forecast and nothing here until then.
@@ -264,8 +264,10 @@ func _lay_heads(kinds: Array, y: float) -> float:
 	return y + (HEAD if not kinds.is_empty() else 0.0)
 
 
-## A kind's head: A011's, its stand-in - a box of the walk frame - or, for a
-## kind no pack has drawn yet, the whole walk frame shrunk into the box.
+## A kind's head: its `ui/head_<kind>` - A011's five since task 0162, drawn at
+## their native 16x16 with no flip - a later pack's registered stand-in, a box
+## of the walk frame, or, for a kind no pack has drawn yet, the whole walk
+## frame shrunk into the box.
 func _head_of(kind: StringName) -> Texture2D:
 	var art := StringName("head_%s" % kind)
 	if _textures.has(art):

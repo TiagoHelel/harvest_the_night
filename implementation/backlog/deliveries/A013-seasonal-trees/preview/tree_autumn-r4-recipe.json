@@ -1,0 +1,35 @@
+{
+  "anim": "tree_autumn",
+  "stem": "tree_autumn-r4",
+  "importer": {
+    "id": "A013/tree_autumn",
+    "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_autumn-r4.png",
+    "crop_xywh": [
+      38,
+      220,
+      958,
+      1134
+    ],
+    "content_scale": 0.03700440528634361,
+    "content_anchor_xy": [
+      17,
+      42
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "canvas_wh": [
+      40,
+      48
+    ],
+    "pivot_xy": [
+      20,
+      44
+    ]
+  },
+  "unclipped_bounds": [
+    3,
+    2,
+    38,
+    44
+  ]
+}

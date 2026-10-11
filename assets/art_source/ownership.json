@@ -646,6 +646,22 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/dairy.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/dairy_active.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/dairy_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/dairy_wreck.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/fence.png",
       "owner": "raster"
     },
@@ -954,6 +970,22 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/keg.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/keg_active.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/keg_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/keg_wreck.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/kitchen.png",
       "owner": "raster"
     },
@@ -979,6 +1011,38 @@
     },
     {
       "output": "sprites/buildings/kitchen_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/loom.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/loom_active.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/loom_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/loom_wreck.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/mill.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/mill_active.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/mill_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/mill_wreck.png",
       "owner": "raster"
     },
     {
@@ -1087,6 +1151,22 @@
     },
     {
       "output": "sprites/buildings/mortar_wreck.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/preserves_jar.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/preserves_jar_active.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/preserves_jar_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/preserves_jar_wreck.png",
       "owner": "raster"
     },
     {
@@ -1282,11 +1362,139 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/crops/corn_regrow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/garlic_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/garlic_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/garlic_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/garlic_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/melon_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/melon_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/melon_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/melon_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/pepper_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/pepper_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/pepper_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/pepper_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/pepper_regrow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/potato_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/potato_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/potato_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/potato_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/strawberry_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/strawberry_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/strawberry_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/strawberry_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/strawberry_regrow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/sunflower_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/sunflower_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/sunflower_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/sunflower_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/tilled.png",
       "owner": "raster"
     },
     {
+      "output": "sprites/crops/tilled_edge_corner_nw.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/tilled_edge_n.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/tilled_wet.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/tilled_wet_winter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/tilled_winter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/trampled.png",
       "owner": "raster"
     },
     {
@@ -1303,6 +1511,10 @@
     },
     {
       "output": "sprites/crops/wheat_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/withered.png",
       "owner": "raster"
     },
     {
@@ -1770,6 +1982,22 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/coal_seam.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/coal_seam_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/copper_ore.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/copper_ore_b.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/cow.png",
       "owner": "raster"
     },
@@ -1802,11 +2030,35 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/gold_ore.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/gold_ore_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/hardwood_stump.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/hardwood_stump_chipped.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/ore.png",
       "owner": "raster"
     },
     {
       "output": "sprites/props/ore_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/ore_b_snow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/ore_snow.png",
       "owner": "raster"
     },
     {
@@ -1846,6 +2098,14 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/rock_b_snow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/rock_snow.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/seam.png",
       "owner": "raster"
     },
@@ -1854,7 +2114,23 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/seam_b_snow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/seam_snow.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/shop.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/snow_cap.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/snow_cap_2x2.png",
       "owner": "raster"
     },
     {
@@ -1862,11 +2138,43 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/stump_snow.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/tree.png",
       "owner": "raster"
     },
     {
+      "output": "sprites/props/tree_autumn.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/tree_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/tree_b_autumn.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/tree_b_spring.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/tree_b_winter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/tree_spring.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/tree_winter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/truffle_spot.png",
       "owner": "raster"
     },
     {
@@ -1878,7 +2186,15 @@
       "owner": "ascii"
     },
     {
+      "output": "sprites/terrain/atlas_winter.png",
+      "owner": "ascii"
+    },
+    {
       "output": "sprites/terrain/edge_corner_ne.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/edge_corner_ne_winter.png",
       "owner": "raster"
     },
     {
@@ -1886,7 +2202,15 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/edge_corner_nw_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/edge_corner_se.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/edge_corner_se_winter.png",
       "owner": "raster"
     },
     {
@@ -1894,7 +2218,15 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/edge_corner_sw_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/edge_e.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/edge_e_winter.png",
       "owner": "raster"
     },
     {
@@ -1902,11 +2234,23 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/edge_n_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/edge_s.png",
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/edge_s_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/edge_w.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/edge_w_winter.png",
       "owner": "raster"
     },
     {
@@ -1922,7 +2266,15 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/grass_b_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/grass_c.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/grass_c_winter.png",
       "owner": "raster"
     },
     {
@@ -1930,7 +2282,19 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/grass_d_winter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/grass_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/path.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/path_winter.png",
       "owner": "raster"
     },
     {
@@ -1942,7 +2306,15 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/shore_corner_ne_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/shore_corner_nw.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/shore_corner_nw_winter.png",
       "owner": "raster"
     },
     {
@@ -1950,7 +2322,15 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/shore_corner_se_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/shore_corner_sw.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/shore_corner_sw_winter.png",
       "owner": "raster"
     },
     {
@@ -1958,7 +2338,15 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/shore_e_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/shore_n.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/shore_n_winter.png",
       "owner": "raster"
     },
     {
@@ -1966,11 +2354,23 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/shore_s_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/shore_w.png",
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/shore_w_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/soil.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/soil_winter.png",
       "owner": "raster"
     },
     {
@@ -2022,7 +2422,111 @@
       "owner": "ascii"
     },
     {
+      "output": "sprites/ui/head_breaker.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_giant.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_runner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_tank.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_walker.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_auto_crossbow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_autumn.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_axe_basic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_axe_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_axe_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_barricade.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_boss_night.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_bread.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_bream.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_butter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_calm_night.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_can_basic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_can_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_can_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_carp.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_carrot.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_carrot_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_catfish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_cheese.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_cloth.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_coal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_copper.png",
       "owner": "raster"
     },
     {
@@ -2030,7 +2534,31 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_corn_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_dawn_moon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_dorado.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_eel.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_egg.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_energy.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_fence.png",
       "owner": "raster"
     },
     {
@@ -2038,11 +2566,75 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_flame_tower.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_flare.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_flour.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_food.png",
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_full_moon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_garlic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_garlic_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_ghost_pike.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_golden_queen.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_gun_tower.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_gunpowder.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_hardwood.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_hay.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_hoe_basic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_hoe_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_hoe_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_ice_sturgeon.png",
       "owner": "raster"
     },
     {
@@ -2054,7 +2646,31 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_jelly.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_juice.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_meat.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_melon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_melon_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_milk.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_mine.png",
       "owner": "raster"
     },
     {
@@ -2062,7 +2678,87 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_mortar.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_oil.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_old_catfish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_pepper.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_pepper_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_perch.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_pickaxe_basic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_pickaxe_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_pickaxe_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_pickles.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_pike.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_potato.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_potato_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_rod_bamboo.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_rod_fibre.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_rod_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_salmon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_sandbag.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_speed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_spring.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_start.png",
       "owner": "raster"
     },
     {
@@ -2070,7 +2766,59 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_straw.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_strawberry.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_strawberry_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_sturgeon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_sugar.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_summer.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_sunfish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_sunflower.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_sunflower_seed.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_tech.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_tilapia.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_trout.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_truffle.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_wall.png",
       "owner": "raster"
     },
     {
@@ -2078,7 +2826,79 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_wine.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_wood.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_wool.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_auto_crossbow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_autumn.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_axe_basic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_axe_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_axe_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_barricade.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_boss_night.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_bread.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_bream.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_butter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_calm_night.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_can_basic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_can_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_can_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_carp.png",
       "owner": "raster"
     },
     {
@@ -2086,7 +2906,51 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_carrot_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_catfish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_cheese.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_cloth.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_coal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_copper.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_corn.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_corn_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_dawn_moon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_dorado.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_eel.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_egg.png",
       "owner": "raster"
     },
     {
@@ -2094,7 +2958,23 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_fence.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_fish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_flame_tower.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_flare.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_flour.png",
       "owner": "raster"
     },
     {
@@ -2102,7 +2982,59 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_full_moon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_garlic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_garlic_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_ghost_pike.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_golden_queen.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_gun_tower.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_gunpowder.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_hardwood.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_hay.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_hoe_basic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_hoe_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_hoe_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_ice_sturgeon.png",
       "owner": "raster"
     },
     {
@@ -2114,7 +3046,31 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_jelly.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_juice.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_meat.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_melon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_melon_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_milk.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_mine.png",
       "owner": "raster"
     },
     {
@@ -2122,7 +3078,87 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_mortar.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_oil.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_old_catfish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_pepper.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_pepper_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_perch.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_pickaxe_basic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_pickaxe_gold.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_pickaxe_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_pickles.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_pike.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_potato.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_potato_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_rod_bamboo.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_rod_fibre.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_rod_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_salmon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_sandbag.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_speed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_spring.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_start.png",
       "owner": "raster"
     },
     {
@@ -2130,7 +3166,59 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_straw.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_strawberry.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_strawberry_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_sturgeon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_sugar.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_summer.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_sunfish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_sunflower.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_sunflower_seed.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_tech.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_tilapia.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_trout.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_truffle.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_wall.png",
       "owner": "raster"
     },
     {
@@ -2138,12 +3226,88 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_wine.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_winter.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_wood.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_wool.png",
       "owner": "raster"
     },
     {
       "output": "sprites/ui/panel.png",
       "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/portrait_bream.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_carp.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_catfish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_dorado.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_eel.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_ghost_pike.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_golden_queen.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_ice_sturgeon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_old_catfish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_perch.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_pike.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_salmon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_sturgeon.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_sunfish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_tilapia.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/portrait_trout.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/slider_grab.png",

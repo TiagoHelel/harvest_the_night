@@ -1,0 +1,150 @@
+[
+  {
+    "anim": "icon_flame_tower",
+    "asset": "flame_tower",
+    "stem": "flame_tower-r1",
+    "importer": {
+      "id": "A005/icon_flame_tower",
+      "source": "implementation/backlog/deliveries/A005-night-icons/raw/flame_tower-r1.png",
+      "crop_xywh": [
+        330,
+        273,
+        769,
+        842
+      ],
+      "content_scale": 0.0166270783847981,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_flame_tower",
+    "asset": "flame_tower",
+    "stem": "flame_tower-r1",
+    "importer": {
+      "id": "A005/hud_flame_tower",
+      "source": "implementation/backlog/deliveries/A005-night-icons/raw/flame_tower-r1.png",
+      "crop_xywh": [
+        330,
+        273,
+        769,
+        842
+      ],
+      "content_scale": 0.009501187648456057,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  }
+]

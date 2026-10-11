@@ -1,0 +1,32 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the tank bust EDIT TARGET. Correct ONLY the over-wide silhouette: make its complete head-and-shoulders bust a SQUARE visible13wide by13tall at native scale. Current wide shoulders make the source clip the16x16import. Narrow both shoulders and increase visible head/neck height within the square silhouette; keep bald heavy green head sunk on thick neck, broad shoulders relative to the other enemies and mustard vest over dark shirt. One flat cut bottom edge. Three-quarter turn to viewer LEFT, same rotten face, pale eyes, upper-left light and simple coloured dark outline. Do not change species, vest material, camera or facing; no full body, arms reaching out or weapon. Bold recognizable planes, no decoration. ONE bust with real transparent alpha, generous margins on all sides, nothing clipped. No border, UI panel, ground, shadow, glow, blood splashes, labels, blur or gradients. Image2 existing tank runtime sprite is IDENTITY AND MATERIAL ONLY; never draw the complete body.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\tank-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\tank_walk_0.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\tank-r1.png",
+      "sha256": "e944b1af7586cdc97b3311fb391760874d901248d673bd7bf5d56b09b242697b",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\preview\\input-history\\tank-r1-e944b1af75.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\tank_walk_0.png",
+      "sha256": "a6d2e2c4d275eba2dfd58617ff66a57c89694e222879b9811e9833ae8b39066e",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-56ba96cc-e469-4284-a7b5-a5cc49905787.png",
+  "copied_raw_path": "raw/tank-r2.png",
+  "raw_sha256": "354b162dd40ba9cfe4529d392ac50966a2ff9f7aad25068412be76f471f498a9",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tank-r2.png"
+}

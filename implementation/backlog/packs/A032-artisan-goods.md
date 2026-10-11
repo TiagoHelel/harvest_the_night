@@ -1,6 +1,6 @@
 # A032 - Artisan goods
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0214
 - **Dressed by game tasks:** 0187, 0188, 0192
 - **Spec after game task:** 0188

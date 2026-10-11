@@ -118,7 +118,8 @@ const POSES := {
 const SCARECROW := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
 
 ## A004's cell cursor: one 16x16 cell at its centre, drawn at 1.0 (task 0131).
-## A005's hotbar icon is the same box (task 0133).
+## A hotbar icon is the same box (task 0133). A005's eight are raster art since
+## task 0147; a later defence's stands in at it until its pack lands.
 const CELL_CURSOR := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 const HOTBAR_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 
@@ -131,11 +132,9 @@ const FISHBAR_MARKER := {"canvas": Vector2i(5, 12), "pivot": Vector2i(2, 6), "dr
 const FISHBAR_FLASH := {"canvas": Vector2i(12, 12), "pivot": Vector2i(6, 6), "draw_scale": 1.0}
 const NODE_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
 
-## A021's hardwood stump: one thing over 2x2 cells, 32x32 at (16,30). Its
-## stand-in is the chopped tree's `stump`, drawn twice the size.
-const STUMP_2X2 := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 30), "draw_scale": 1.0}
 
-## A014's crop states: one 16x16 tile, pivot at its foot (task 0155).
+## A crop's stages: the tall crops 16x32 at (8,30), the corn 16x24 at (8,22),
+## and every other one tile, 16x16 at its foot (8,14).
 const CROP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 30), "draw_scale": 1.0}
 
 const CROP_CORN := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 22), "draw_scale": 1.0}
@@ -145,8 +144,9 @@ const CROP_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_
 ## rows, pivot at its bottom centre, drawn at 1.0 (task 0138).
 const REPORT_HEADER := {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40), "draw_scale": 1.0}
 
-## A010's calendar marks (task 0158): `icon_<id>` 16x16 at (8,8) and `hud_<id>`
-## 10x10 at (5,5), drawn at 1.0. Drawn by code (`CalendarMark`) until 0161.
+## A010's calendar marks' boxes (task 0158): `icon_<id>` 16x16 at (8,8) and
+## `hud_<id>` 10x10 at (5,5), drawn at 1.0 - raster art since task 0161. The
+## other packs' icon pairs stand in at the same boxes until they land.
 const MARK_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_scale": 1.0}
 
@@ -155,14 +155,6 @@ const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_sc
 ## barn 96x100 at (48,96) over 5x4.
 const COOP := {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "draw_scale": 1.0}
 const BARN := {"canvas": Vector2i(96, 100), "pivot": Vector2i(48, 96), "draw_scale": 1.0}
-
-## A031's five machines, at the canvases task 0188 settled, all drawn at
-## 1.0: the keg and the preserves jar 48x56 at (24,52) over 2x2 cells, the
-## dairy and the loom 64x64 at (32,60) over 3x2, the mill 64x96 at (32,92)
-## over 3x3.
-const MACHINE_SMALL := {"canvas": Vector2i(48, 56), "pivot": Vector2i(24, 52), "draw_scale": 1.0}
-const MACHINE_WIDE := {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "draw_scale": 1.0}
-const MACHINE_TALL := {"canvas": Vector2i(64, 96), "pivot": Vector2i(32, 92), "draw_scale": 1.0}
 
 ## A033's shipping bin (task 0189): 24x24 at (12,22) over one cell by the
 ## porch, drawn at 1.0.
@@ -183,24 +175,21 @@ const HOUSE_TIER := {"canvas": Vector2i(128, 128), "pivot": Vector2i(64, 120), "
 const ANIMAL_LARGE := {"canvas": Vector2i(40, 32), "pivot": Vector2i(20, 30), "draw_scale": 1.0}
 const ANIMAL_SMALL := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 22), "draw_scale": 1.0}
 
-## A022's book portraits (task 0182): 32x32 at (16,16), drawn at 1.0.
-const PORTRAIT := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "draw_scale": 1.0}
 
-## A011's forecast heads (task 0158): 16x16 at (8,8), drawn at 1.0. Until 0162
-## the stand-in is the enemy's first walk frame, the 16x16 box over its head
-## (`stand_in_region`, measured off each frame's opaque rows) - and for the
-## Giant, twice the man's size, a 32x32 box shrunk into the 16: its own 16x16
-## was a yellow blob beside the tank's, and this one has the stone plates.
+## A forecast head's box (task 0158): 16x16 at (8,8), drawn at 1.0. A011's
+## five are raster art since task 0162 - exact crops of each enemy's walk frame
+## 0, which the owner asked for. A later enemy's head stands in here until its
+## pack lands: the 16x16 box over the head of its first walk frame
+## (`stand_in_region`), the way 0158 drew A011's.
 const HEAD_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 
-## A012's winter ground (task 0159): a 16x16 tile at (8,16), and the
-## composed atlas its integration builds, 256x80 from the corner. Stand in as
-## today's tiles, which the season remap turns to snow.
+## A seasonal ground's boxes (task 0159): a 16x16 tile at (8,16), and the
+## composed atlas, 256x80 from the corner. A012's winter is raster art since
+## task 0163 and its atlas `gen_sprites`'; another season's ground would stand
+## in here as today's tiles, which the season remap turns.
 const GROUND_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "draw_scale": 1.0}
 const GROUND_ATLAS := {"canvas": Vector2i(256, 80), "pivot": Vector2i(0, 0), "draw_scale": 1.0}
 
-## A013's seasonal trees (task 0159): 40x48 at (20,44), today's tree's box.
-const TREE_FRAME := {"canvas": Vector2i(40, 48), "pivot": Vector2i(20, 44), "draw_scale": 1.0}
 ## A044's three tarp footprints (task 0223): a tower's canvas, and the tall
 ## and the short one-cell defences'.
 const TARP_TOWER := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
@@ -217,100 +206,11 @@ const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
 ## view keeps a drawn branch and a texture branch, and the leaf that
 ## integrates the pack deletes these lines and then the drawn branch. `lights`
 ## are emission points on every frame from `lit_from` on. A non-empty
-## `stand_in` here is a path under `res://sprites/` - the hotbar's icons
-## (task 0133) stand in as the structure's own sprite, scaled into the box -
-## and `bare` is a static file with no frame number (`icon_wall.png`). One
-## line each, like `POSES`.
+## `stand_in` here is a path under `res://sprites/` - a hotbar icon (task
+## 0133) stands in as the structure's own sprite, scaled into the box - and
+## `bare` is a static file with no frame number (`hud_bait.png`). One line
+## each, like `POSES`.
 const ART := {
-	&"icon_hoe_basic": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_hoe_basic": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_hoe_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color.WHITE, "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_hoe_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color.WHITE, "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_hoe_gold": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(1, 0.8, 0.35), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_hoe_gold": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(1, 0.8, 0.35), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_can_basic": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_oil", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_can_basic": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_oil", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_can_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_oil", "tint": Color.WHITE, "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_can_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_oil", "tint": Color.WHITE, "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_can_gold": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_oil", "tint": Color(1, 0.8, 0.35), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_can_gold": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_oil", "tint": Color(1, 0.8, 0.35), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_axe_basic": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wood", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_axe_basic": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wood", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_axe_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wood", "tint": Color.WHITE, "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_axe_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wood", "tint": Color.WHITE, "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_axe_gold": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wood", "tint": Color(1, 0.8, 0.35), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_axe_gold": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wood", "tint": Color(1, 0.8, 0.35), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_pickaxe_basic": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_iron", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_pickaxe_basic": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_iron", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_pickaxe_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_iron", "tint": Color.WHITE, "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_pickaxe_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_iron", "tint": Color.WHITE, "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_pickaxe_gold": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_iron", "tint": Color(1, 0.8, 0.35), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_pickaxe_gold": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_iron", "tint": Color(1, 0.8, 0.35), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A022's fish (task 0179): today's fish icon, tinted toward each species'
-	# colour, until 0205 integrates the real ones.
-	&"icon_carp": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.25, 1.0, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_carp": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1.25, 1.0, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_perch": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.9, 1.25, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_perch": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.9, 1.25, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.75, 0.68, 0.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.75, 0.68, 0.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_tilapia": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.75, 0.95, 1.25), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_tilapia": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.75, 0.95, 1.25), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_sunfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.65, 1.25, 0.95), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_sunfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.65, 1.25, 0.95), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_bream": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.1, 1.05, 0.85), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_bream": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1.1, 1.05, 0.85), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_trout": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.85, 1.05, 0.7), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_trout": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.85, 1.05, 0.7), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 1.2, 0.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.6, 1.2, 0.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_eel": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 0.55, 0.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_eel": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.6, 0.55, 0.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_dorado": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.45, 1.2, 0.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_dorado": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1.45, 1.2, 0.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_salmon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.35, 0.85, 0.85), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_salmon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1.35, 0.85, 0.85), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 0.8, 0.9), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.8, 0.8, 0.9), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# 0182's legendaries (A022), tinted like the twelve until 0205.
-	&"icon_old_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 0.75, 0.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_old_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.6, 0.75, 0.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_golden_queen": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.6, 1.3, 0.4), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_golden_queen": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1.6, 1.3, 0.4), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_ghost_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.4, 1.4, 1.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_ghost_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1.4, 1.4, 1.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_ice_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 1.15, 1.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_ice_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.8, 1.15, 1.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A022's book portraits (task 0182): 32x32 at (16,16), each species' icon
-	# stand-in drawn at twice the size until 0205.
-	&"portrait_carp": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.25, 1.0, 0.55), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_perch": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.9, 1.25, 0.55), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.75, 0.68, 0.6), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_tilapia": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.75, 0.95, 1.25), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_sunfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.65, 1.25, 0.95), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_bream": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.1, 1.05, 0.85), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_trout": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.85, 1.05, 0.7), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 1.2, 0.6), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_eel": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 0.55, 0.45), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_dorado": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.45, 1.2, 0.45), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_salmon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.35, 0.85, 0.85), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 0.8, 0.9), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_old_catfish": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.6, 0.75, 0.45), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_golden_queen": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.6, 1.3, 0.4), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_ghost_pike": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1.4, 1.4, 1.5), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	&"portrait_ice_sturgeon": {"pack": "A022", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.8, 1.15, 1.5), "stand_in_scale": 2.0, "geometry": PORTRAIT, "final": PORTRAIT, "bare": true},
-	# 0184's animal goods (A029) and feed (A020), tinted stand-ins until 0211
-	# and 0203: the egg a pale stone, the milk the iron bar paled - a tint
-	# cannot whiten the orange oil jar - the hay
-	# and the straw the wheat in two shades.
-	&"icon_egg": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(1.45, 1.35, 1.15), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_egg": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(1.45, 1.35, 1.15), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_milk": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_iron", "tint": Color(1.35, 1.4, 1.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_milk": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_iron", "tint": Color(1.35, 1.4, 1.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_hay": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.95, 1.1, 0.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_hay": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.95, 1.1, 0.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_straw": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(1.3, 1.25, 1.05), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_straw": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(1.3, 1.25, 1.05), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# 0185's animals at home and the dog: A026's sheep and pig, A027's cow
 	# and chicken and A028's dog, as the cow's and the chicken's props -
 	# tinted and scaled, every frame the same picture - until 0209, 0210
@@ -338,14 +238,6 @@ const ART := {
 	&"dog_wag": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.12, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	&"dog_walk": {"pack": "A028", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	&"dog_sleep": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	# A029's wool and truffle (task 0185): the gear paled to a skein, the
-	# stone darkened to a truffle's brown, until 0211; its dig spot drawn in
-	# code.
-	&"icon_wool": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_tech", "tint": Color(1.25, 1.2, 1.05), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_wool": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_tech", "tint": Color(1.25, 1.2, 1.05), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_truffle": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(0.62, 0.45, 0.3), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_truffle": {"pack": "A029", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.62, 0.45, 0.3), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"truffle_spot": {"pack": "A029", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
 	# A036's night loot (task 0221): the bones' icon the stone paled to bone
 	# and the moon stone's the stone cooled to moonlight, until 0235; the
 	# pile and the stone on the ground drawn in code (`LootView`).
@@ -384,65 +276,6 @@ const ART := {
 	&"coop_wreck": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.6, "tint": Color(0.55, 0.5, 0.48), "geometry": COOP, "final": COOP, "bare": true},
 	&"barn_hurt": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.9, "tint": Color(1.1, 0.72, 0.62), "geometry": BARN, "final": BARN, "bare": true},
 	&"barn_wreck": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.9, "tint": Color(0.55, 0.45, 0.42), "geometry": BARN, "final": BARN, "bare": true},
-	# A031's keg and preserves jar (task 0187), idle, working, hurt and wrecked:
-	# the press, a cask in its frame, oak-dark for the keg; the generator,
-	# a firebox under a pipe, brick-red for the jar - until 0213.
-	&"keg": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press", "stand_in_scale": 0.5, "tint": Color(0.85, 0.68, 0.55), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
-	&"keg_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_active", "stand_in_scale": 0.5, "tint": Color(0.85, 0.68, 0.55), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
-	&"keg_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_hurt", "stand_in_scale": 0.5, "tint": Color(0.85, 0.68, 0.55), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
-	&"keg_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_hurt", "stand_in_scale": 0.5, "tint": Color(0.5, 0.42, 0.38), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
-	&"preserves_jar": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/generator", "stand_in_scale": 0.42, "tint": Color(1.2, 0.85, 0.72), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
-	&"preserves_jar_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/generator_active", "stand_in_scale": 0.42, "tint": Color(1.2, 0.85, 0.72), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
-	&"preserves_jar_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/generator_hurt", "stand_in_scale": 0.42, "tint": Color(1.2, 0.85, 0.72), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
-	&"preserves_jar_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/generator_hurt", "stand_in_scale": 0.42, "tint": Color(0.55, 0.45, 0.42), "geometry": MACHINE_SMALL, "final": MACHINE_SMALL, "bare": true},
-	# A032's wine, juice, jelly and pickles (task 0187): the oil's barrel in
-	# wine-red, the incendiary's can as a jug of juice, the food's bowl as a
-	# jar of red jelly or green pickles - until 0214.
-	&"icon_wine": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_oil", "tint": Color(0.8, 0.35, 0.65), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_wine": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_oil", "tint": Color(0.8, 0.35, 0.65), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_juice": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_incendiary", "tint": Color(1.25, 1.05, 0.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_juice": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_incendiary", "tint": Color(1.25, 1.05, 0.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_jelly": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_food", "tint": Color(1.0, 0.45, 0.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_jelly": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_food", "tint": Color(1.0, 0.45, 0.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_pickles": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_food", "tint": Color(0.6, 1.1, 0.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_pickles": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_food", "tint": Color(0.6, 1.1, 0.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A031's dairy, loom and mill (task 0188), idle, working, hurt and
-	# wrecked: the kitchen in cream for the dairy, the workshop in cloth
-	# blue for the loom, and the press grown tall and weathered grey for
-	# the mill - until 0213.
-	&"dairy": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen", "stand_in_scale": 0.65, "tint": Color(1.05, 1.1, 1.25), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
-	&"dairy_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_active", "stand_in_scale": 0.65, "tint": Color(1.05, 1.1, 1.25), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
-	&"dairy_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.65, "tint": Color(1.05, 1.1, 1.25), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
-	&"dairy_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.65, "tint": Color(0.5, 0.5, 0.55), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
-	&"loom": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop", "stand_in_scale": 0.65, "tint": Color(0.85, 0.95, 1.3), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
-	&"loom_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_active", "stand_in_scale": 0.65, "tint": Color(0.85, 0.95, 1.3), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
-	&"loom_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.65, "tint": Color(0.85, 0.95, 1.3), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
-	&"loom_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.65, "tint": Color(0.48, 0.5, 0.58), "geometry": MACHINE_WIDE, "final": MACHINE_WIDE, "bare": true},
-	&"mill": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press", "stand_in_scale": 0.85, "tint": Color(0.88, 0.86, 0.92), "geometry": MACHINE_TALL, "final": MACHINE_TALL, "bare": true},
-	&"mill_active": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_active", "stand_in_scale": 0.85, "tint": Color(0.88, 0.86, 0.92), "geometry": MACHINE_TALL, "final": MACHINE_TALL, "bare": true},
-	&"mill_hurt": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_hurt", "stand_in_scale": 0.85, "tint": Color(0.88, 0.86, 0.92), "geometry": MACHINE_TALL, "final": MACHINE_TALL, "bare": true},
-	&"mill_wreck": {"pack": "A031", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/press_hurt", "stand_in_scale": 0.85, "tint": Color(0.55, 0.52, 0.5), "geometry": MACHINE_TALL, "final": MACHINE_TALL, "bare": true},
-	# A032's cheese, butter, cloth, sandbag, flour and sugar (task 0188):
-	# the meat's slab in cheese yellow, the food's bowl as butter, the
-	# logs as bolts of blue cloth, the stone as a burlap sack, the
-	# gunpowder's heap as white flour and the coins as sugar cubes -
-	# until 0214.
-	&"icon_cheese": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_meat", "tint": Color(1.3, 1.2, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_cheese": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_meat", "tint": Color(1.3, 1.2, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_butter": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_food", "tint": Color(1.35, 1.3, 0.75), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_butter": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_food", "tint": Color(1.35, 1.3, 0.75), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_cloth": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wood", "tint": Color(0.8, 0.9, 1.35), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_cloth": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wood", "tint": Color(0.8, 0.9, 1.35), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_sandbag": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(1.3, 1.1, 0.75), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_sandbag": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(1.3, 1.1, 0.75), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_flour": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_gunpowder", "tint": Color(1.6, 1.6, 1.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_flour": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.6, 1.6, 1.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_sugar": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_money", "tint": Color(1.5, 1.5, 1.6), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_sugar": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_money", "tint": Color(1.5, 1.5, 1.6), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A032's bread (task 0192): the stone's two lumps baked crust-brown, a
-	# pair of rolls, until 0214.
-	&"icon_bread": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(1.3, 0.85, 0.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_bread": {"pack": "A032", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(1.3, 0.85, 0.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# A033's shipping bin (task 0189): the barricade's planks, warmed and
 	# grown to a bin by the porch, until 0215.
 	&"shipping_bin": {"pack": "A033", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/barricade", "stand_in_scale": 1.35, "tint": Color(1.15, 1.0, 0.8), "geometry": PROP_BIN, "final": PROP_BIN, "bare": true},
@@ -462,14 +295,6 @@ const ART := {
 	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
 	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_rod_bamboo": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_rod_bamboo": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.65, 0.65, 0.7), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_rod_fibre": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(1, 0.55, 0.5), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_rod_fibre": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(1, 0.55, 0.5), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_rod_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color.WHITE, "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_rod_iron": {"pack": "A019", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color.WHITE, "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"tilled_edge_n": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/edge_n", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"tilled_edge_corner_nw": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/edge_corner_nw", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
 	# A023's bar (task 0180), drawn by code until 0206 integrates the pack.
 	&"fishbar_frame": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": FISHBAR_FRAME, "final": FISHBAR_FRAME, "bare": true},
 	&"fishbar_zone": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": FISHBAR_ZONE, "final": FISHBAR_ZONE, "bare": true},
@@ -493,51 +318,12 @@ const ART := {
 	&"cursor_sell": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
 	&"cursor_repair": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
 	&"cursor_aim": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
-	&"icon_auto_crossbow": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/auto_crossbow", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
-	&"icon_barricade": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/barricade", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
-	&"icon_fence": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/fence", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
-	&"icon_flame_tower": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/flame_tower", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
-	&"icon_gun_tower": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/gun_tower", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
-	&"icon_mine": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mine", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
-	&"icon_mortar": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mortar", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
-	&"icon_wall": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/wall", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
-	&"icon_copper": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_iron", "tint": Color(1.25, 0.78, 0.62), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_copper": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_iron", "tint": Color(1.25, 0.78, 0.62), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_coal": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(0.45, 0.45, 0.52), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_coal": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.45, 0.45, 0.52), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_hardwood": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wood", "tint": Color(0.78, 0.52, 0.42), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_hardwood": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wood", "tint": Color(0.78, 0.52, 0.42), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_gold": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_iron", "tint": Color(1.35, 1.2, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_gold": {"pack": "A020", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_iron", "tint": Color(1.35, 1.2, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"copper_ore": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "tint": Color(1.25, 0.78, 0.62)},
-	&"coal_seam": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/seam", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "tint": Color(0.45, 0.45, 0.52)},
-	&"gold_ore": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "tint": Color(1.35, 1.2, 0.55)},
-	&"hardwood_stump": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": STUMP_2X2, "final": STUMP_2X2, "bare": true, "stand_in_scale": 2.0, "tint": Color(0.85, 0.72, 0.62)},
-	&"hardwood_stump_chipped": {"pack": "A021", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": STUMP_2X2, "final": STUMP_2X2, "bare": true, "stand_in_scale": 2.0, "tint": Color(1.08, 0.86, 0.66)},
 	# A018's sprinklers (task 0178): the spent mine's low metal disc, in each
 	# tier's metal and at the width A018 gives it (8, 10 and 12 pixels), so the
 	# three read apart by size as well as colour until 0201.
 	&"copper_sprinkler": {"pack": "A018", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mine_spent", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "stand_in_scale": 0.67, "tint": Color(1.6, 0.95, 0.7)},
 	&"iron_sprinkler": {"pack": "A018", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mine_spent", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "stand_in_scale": 0.84, "tint": Color(1.45, 1.5, 1.6)},
 	&"gold_sprinkler": {"pack": "A018", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mine_spent", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "stand_in_scale": 1.0, "tint": Color(1.9, 1.6, 0.7)},
-	&"potato": {"pack": "A015", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/wheat", "stand_in_frames": 4, "tint": Color(0.73, 0.89, 0.54), "geometry": CROP_TILE, "final": CROP_TILE},
-	&"icon_potato": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.73, 0.89, 0.54), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_potato": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.73, 0.89, 0.54), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"garlic": {"pack": "A015", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/wheat", "stand_in_frames": 4, "tint": Color(0.84, 0.96, 1.0), "geometry": CROP_TILE, "final": CROP_TILE},
-	&"icon_garlic": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.84, 0.96, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_garlic": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.84, 0.96, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"strawberry": {"pack": "A015", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(1.0, 0.6, 0.7), "geometry": CROP_TILE, "final": CROP_TILE},
-	&"icon_strawberry": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(1.0, 0.6, 0.7), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_strawberry": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.0, 0.6, 0.7), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"pepper": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(1.0, 0.51, 0.28), "geometry": CROP_TILE, "final": CROP_TILE},
-	&"icon_pepper": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(1.0, 0.51, 0.28), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_pepper": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.0, 0.51, 0.28), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"sunflower": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/corn", "stand_in_frames": 4, "tint": Color(1.0, 0.87, 0.35), "geometry": CROP_TALL, "final": CROP_TALL},
-	&"icon_sunflower": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_corn", "tint": Color(1.0, 0.87, 0.35), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_sunflower": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_corn", "tint": Color(1.0, 0.87, 0.35), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"melon": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(0.43, 0.93, 0.73), "geometry": CROP_TILE, "final": CROP_TILE},
-	&"icon_melon": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.43, 0.93, 0.73), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_melon": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.43, 0.93, 0.73), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"pumpkin": {"pack": "A017", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(1.0, 0.68, 0.32), "geometry": CROP_TILE, "final": CROP_TILE},
 	&"icon_pumpkin": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(1.0, 0.68, 0.32), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_pumpkin": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.0, 0.68, 0.32), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
@@ -547,31 +333,8 @@ const ART := {
 	&"beet": {"pack": "A017", "dir": "res://sprites/crops/", "frames": 4, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot", "stand_in_frames": 4, "tint": Color(0.84, 0.45, 0.78), "geometry": CROP_TILE, "final": CROP_TILE},
 	&"icon_beet": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.84, 0.45, 0.78), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_beet": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.84, 0.45, 0.78), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"strawberry_regrow": {"pack": "A015", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot_2", "tint": Color(0.65, 0.78, 0.85), "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
-	&"corn_regrow": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/corn_2", "tint": Color(0.62, 0.76, 0.86), "geometry": CROP_CORN, "final": CROP_CORN, "bare": true},
-	&"pepper_regrow": {"pack": "A016", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/carrot_2", "tint": Color(0.8, 0.65, 0.55), "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"grape_regrow": {"pack": "A017", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/corn_2", "tint": Color(0.58, 0.62, 0.9), "geometry": CROP_TALL, "final": CROP_TALL, "bare": true},
-	&"withered": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
-	&"trampled": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
-	# **Task 0158: the forecast.** A010's marks drawn by code; A011's heads cut
-	# from each enemy's first walk frame.
-	&"icon_carrot_seed": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_carrot_seed": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_potato_seed": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_potato_seed": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_garlic_seed": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_garlic_seed": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_strawberry_seed": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_strawberry_seed": {"pack": "A015", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_corn_seed": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_corn", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_corn_seed": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_corn", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_pepper_seed": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_pepper_seed": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_sunflower_seed": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_corn", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_sunflower_seed": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_corn", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_melon_seed": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_melon_seed": {"pack": "A016", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_wheat_seed": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_wheat_seed": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_pumpkin_seed": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
@@ -580,55 +343,6 @@ const ART := {
 	&"hud_grape_seed": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_corn", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_beet_seed": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_beet_seed": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_spring": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_spring": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_summer": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_summer": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_autumn": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_autumn": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_winter": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_winter": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_full_moon": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_full_moon": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_boss_night": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_boss_night": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_calm_night": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_calm_night": {"pack": "A010", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"head_walker": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(21, 15, 16, 16)},
-	&"head_runner": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/runner_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(24, 15, 16, 16)},
-	&"head_tank": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/tank_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(25, 15, 16, 16)},
-	&"head_breaker": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/breaker_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(24, 15, 16, 16)},
-	&"head_giant": {"pack": "A011", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/giant_walk_0", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 19, 32, 32)},
-	# **Task 0159: the seasons.** A012's winter ground and A013's seasonal trees
-	# and snow caps, each standing in as the base frame it replaces - the remap
-	# turns it to its season - and a cap as its host, through the snow mask.
-	&"atlas_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/atlas", "geometry": GROUND_ATLAS, "final": GROUND_ATLAS, "bare": true},
-	&"grass_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/grass", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"grass_b_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/grass_b", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"grass_c_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/grass_c", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"grass_d_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/grass_d", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"path_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/path", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"soil_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/soil", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"edge_n_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/edge_n", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"shore_n_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/shore_n", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"shore_corner_nw_winter": {"pack": "A012", "dir": "res://sprites/terrain/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"terrain/shore_corner_nw", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"tilled_winter": {"pack": "A012", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"tilled_wet_winter": {"pack": "A012", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled_wet", "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"tree_spring": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
-	&"tree_autumn": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
-	&"tree_winter": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
-	&"tree_b_spring": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree_b", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
-	&"tree_b_autumn": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree_b", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
-	&"tree_b_winter": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/tree_b", "geometry": TREE_FRAME, "final": TREE_FRAME, "bare": true},
-	&"stump_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
-	&"rock_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/rock", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
-	&"rock_b_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/rock_b", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
-	&"ore_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
-	&"ore_b_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore_b", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
-	&"seam_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/seam", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
-	&"seam_b_snow": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/seam_b", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
-	&"snow_cap": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/ore", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
-	&"snow_cap_2x2": {"pack": "A013", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/stump", "geometry": STUMP_2X2, "final": STUMP_2X2, "bare": true, "stand_in_scale": 2.0},
 }
 
 
@@ -722,9 +436,10 @@ static func art_scale(name: StringName) -> float:
 	return float((ART.get(name, {}) as Dictionary).get("stand_in_scale", 1.0))
 
 
-## The part of an `ART` stand-in's file that stands in (task 0158): A011's heads
-## are a 16x16 box of a walk frame. An empty rect - the whole file - for
-## anything else, real art included.
+## The part of an `ART` stand-in's file that stands in (task 0158): a
+## forecast head is a 16x16 box of a walk frame until its pack lands (A011's
+## did until task 0162). An empty rect - the whole file - for anything else,
+## real art included.
 static func art_region(name: StringName) -> Rect2i:
 	return (ART.get(name, {}) as Dictionary).get("stand_in_region", Rect2i())
 

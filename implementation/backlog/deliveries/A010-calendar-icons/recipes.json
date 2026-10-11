@@ -1,0 +1,902 @@
+[
+  {
+    "anim": "icon_full_moon",
+    "asset": "full_moon",
+    "stem": "full_moon-r1",
+    "importer": {
+      "id": "A010/icon_full_moon",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/full_moon-r1.png",
+      "crop_xywh": [
+        360,
+        382,
+        547,
+        534
+      ],
+      "content_scale": 0.025594149908592323,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_full_moon",
+    "asset": "full_moon",
+    "stem": "full_moon-r1",
+    "importer": {
+      "id": "A010/hud_full_moon",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/full_moon-r1.png",
+      "crop_xywh": [
+        360,
+        382,
+        547,
+        534
+      ],
+      "content_scale": 0.014625228519195612,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "icon_calm_night",
+    "asset": "calm_night",
+    "stem": "calm_night-r1",
+    "importer": {
+      "id": "A010/icon_calm_night",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/calm_night-r1.png",
+      "crop_xywh": [
+        426,
+        401,
+        403,
+        456
+      ],
+      "content_scale": 0.03070175438596491,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_calm_night",
+    "asset": "calm_night",
+    "stem": "calm_night-r1",
+    "importer": {
+      "id": "A010/hud_calm_night",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/calm_night-r1.png",
+      "crop_xywh": [
+        426,
+        401,
+        403,
+        456
+      ],
+      "content_scale": 0.017543859649122806,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "bone",
+        "bone_dark",
+        "stone_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "icon_boss_night",
+    "asset": "boss_night",
+    "stem": "boss_night-r1",
+    "importer": {
+      "id": "A010/icon_boss_night",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/boss_night-r1.png",
+      "crop_xywh": [
+        375,
+        372,
+        559,
+        557
+      ],
+      "content_scale": 0.025044722719141325,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_boss_night",
+    "asset": "boss_night",
+    "stem": "boss_night-r1",
+    "importer": {
+      "id": "A010/hud_boss_night",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/boss_night-r1.png",
+      "crop_xywh": [
+        375,
+        372,
+        559,
+        557
+      ],
+      "content_scale": 0.014311270125223614,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "icon_spring",
+    "asset": "spring",
+    "stem": "spring-r1",
+    "importer": {
+      "id": "A010/icon_spring",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/spring-r1.png",
+      "crop_xywh": [
+        326,
+        440,
+        602,
+        466
+      ],
+      "content_scale": 0.023255813953488372,
+      "content_anchor_xy": [
+        7,
+        5
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_spring",
+    "asset": "spring",
+    "stem": "spring-r1",
+    "importer": {
+      "id": "A010/hud_spring",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/spring-r1.png",
+      "crop_xywh": [
+        326,
+        440,
+        602,
+        466
+      ],
+      "content_scale": 0.013289036544850499,
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "icon_summer",
+    "asset": "summer",
+    "stem": "summer-r1",
+    "importer": {
+      "id": "A010/icon_summer",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/summer-r1.png",
+      "crop_xywh": [
+        305,
+        300,
+        644,
+        657
+      ],
+      "content_scale": 0.0213089802130898,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_summer",
+    "asset": "summer",
+    "stem": "summer-r1",
+    "importer": {
+      "id": "A010/hud_summer",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/summer-r1.png",
+      "crop_xywh": [
+        305,
+        300,
+        644,
+        657
+      ],
+      "content_scale": 0.0121765601217656,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "icon_autumn",
+    "asset": "autumn",
+    "stem": "autumn-r1",
+    "importer": {
+      "id": "A010/icon_autumn",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/autumn-r1.png",
+      "crop_xywh": [
+        362,
+        366,
+        581,
+        551
+      ],
+      "content_scale": 0.024096385542168676,
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_autumn",
+    "asset": "autumn",
+    "stem": "autumn-r1",
+    "importer": {
+      "id": "A010/hud_autumn",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/autumn-r1.png",
+      "crop_xywh": [
+        362,
+        366,
+        581,
+        551
+      ],
+      "content_scale": 0.013769363166953529,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "icon_winter",
+    "asset": "winter",
+    "stem": "winter-r1",
+    "importer": {
+      "id": "A010/icon_winter",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/winter-r1.png",
+      "crop_xywh": [
+        333,
+        323,
+        589,
+        624
+      ],
+      "content_scale": 0.022435897435897436,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_winter",
+    "asset": "winter",
+    "stem": "winter-r1",
+    "importer": {
+      "id": "A010/hud_winter",
+      "source": "implementation/backlog/deliveries/A010-calendar-icons/raw/winter-r1.png",
+      "crop_xywh": [
+        333,
+        323,
+        589,
+        624
+      ],
+      "content_scale": 0.01282051282051282,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  }
+]

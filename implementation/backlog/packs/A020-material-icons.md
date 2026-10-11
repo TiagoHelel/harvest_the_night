@@ -1,6 +1,6 @@
 # A020 - Material icons
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0203
 - **Dressed by game tasks:** 0176, 0177
 - **Family:** ui

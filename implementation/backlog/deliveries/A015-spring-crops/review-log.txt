@@ -1,0 +1,8 @@
+2026-10-10 | Batch generation. Task0168 confirmed done. Planned27 nativeframes:13growthframes and14icons from7sources. Existing cropfamily masters used as identity/style references; seedpacket identity checked before packetvariants. Ownerreview deferred; no approval inferred.
+2026-10-10 | 27nativeframes exported:13cropstages and14icons. Cropheight ranges pass with one source scale per species. Seedpacket r3 replaces rejected r1/r2 and measures exact12x14/7x8; three packetvariants use identicalcrop615x716 and source scales. Ownerapproval deferred to finalbatchreview; no handoff created.
+
+2026-10-10 Final batch disposition: review. All candidate checks pass; owner review deferred to unified batch page. No approval inferred. All false checks concern rejected diagnostic candidates or missing production export. Owner words authorising batch/final review: "gere todos e no final faca um arquivo html pra eu revisar". No approval, integration, commit or push.
+
+2026-10-10 / Explicit batch approval
+Owner words, verbatim: "esses estao aprovados, tem mais pra gerar?"
+All 27 complete production exports approved for integration. Original raster hashes preserved; APPROVAL.json and Claude handoff recorded. Runtime not integrated.

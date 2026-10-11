@@ -1,0 +1,31 @@
+{
+  "pack": "A031",
+  "date": "2026-10-10",
+  "status": "approved for integration",
+  "owner_words": "esses estao aprovados, tem mais pra gerar?",
+  "approved_folder": "implementation/backlog/deliveries/A031-machines",
+  "approved_sha256": {
+    "native/dairy/none/01.png": "411351af43b5a40f32571922b14d1fb2dd6df6240576650152ed32bd41a4a0db",
+    "native/dairy_active/none/01.png": "0f312173c855e5e25ea26eff7caa16076e1982f11c74a47edae93cd7cb29cf51",
+    "native/dairy_hurt/none/01.png": "9783af30148dc2256e0b6edd90890179d19adedf42bf73d4ab866b26446693b1",
+    "native/dairy_wreck/none/01.png": "f3864418aa768ae4ea8e5a3fc2926a446e56841e78e22323ee2f637f67c34fd8",
+    "native/keg/none/01.png": "4186d3fb0b58d41b644be126c30f142702e43c5cf027fe81fa31eb336abef5df",
+    "native/keg_active/none/01.png": "b71e33a8d9e8f582696e060f4c83e6f7a454dd84f96d662a39884eb4bbf7ac31",
+    "native/keg_hurt/none/01.png": "d9ab0a623dfcc81d0e8bdb899712c3f8b22bbae39a4b1edfdb937847276cea2c",
+    "native/keg_wreck/none/01.png": "0f9b1237ec87a54c476739dad378fff908eb49f669c523180afc6ddcb5965cd7",
+    "native/loom/none/01.png": "4aa4f9ca13a6e94168bbcc62b247af423d358ffc6a8260ab8866b31eefdedc89",
+    "native/loom_active/none/01.png": "2fef3781931d7af09ce0e97f1ac0d36fa0018d125d19d6375c42fcd6e03a9b7c",
+    "native/loom_hurt/none/01.png": "5860bec85292f7c9edd7b12c6dc1757d0729082310179b232dc55f2d5ca35969",
+    "native/loom_wreck/none/01.png": "22838ad3f88b03ae0c8b7d624f558ebd902369a01a43ddd98b4416637a909afa",
+    "native/mill/none/01.png": "67a8e5ae0d46acd593cc5fb09df26b44060d13d178268bd01fd1dc116e2a832b",
+    "native/mill_active/none/01.png": "9f4f182d7121cc8a75b4d423ebab77284b73758820b18f4e264be983e9dcb7d7",
+    "native/mill_hurt/none/01.png": "2fd261551feae4cda3a670f3acdbe9817dee9343f305c5dcc19f592acac5b419",
+    "native/mill_wreck/none/01.png": "f622de504cf618f30b301fff7937c61a34f1a145545a7d8854fe4b6afb69550d",
+    "native/preserves_jar/none/01.png": "fbe2c4dcd0d29fb6faf12ee79fdef8f7ecc8d2e096fed7963621bd38aadf22d8",
+    "native/preserves_jar_active/none/01.png": "c51e2928f9de68d6845692ad5b2df779a7ac9a8ad599ca387d6dbb5fd004b79e",
+    "native/preserves_jar_hurt/none/01.png": "3d0863ad583e4951ba82d203cac6901b69194142892a030e62eaf813a3187b96",
+    "native/preserves_jar_wreck/none/01.png": "501eae378a5b9b53d78765cad73ff575866846ca1bf6aa3130c71108afbbc410"
+  },
+  "frames": 20,
+  "runtime_integrated": false
+}

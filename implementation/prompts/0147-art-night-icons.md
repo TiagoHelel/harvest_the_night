@@ -1,7 +1,7 @@
 # 0147 - Art: the night hotbar and HUD icons
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0133, 0139
 - **Likely files:** assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/hotbar.gd, src/ui/night_hud.gd, tools/check_ui_art.py, tools/show_art.py
 - **Art packs:** A005

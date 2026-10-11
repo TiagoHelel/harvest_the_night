@@ -1,0 +1,1340 @@
+{
+  "pack": "A013",
+  "slug": "A013-seasonal-trees",
+  "title": "Seasonal trees and settled snow caps",
+  "date": "2026-10-07",
+  "status": "approved for integration",
+  "runtime_integrated": false,
+  "final_approval_pending": false,
+  "palette_mode": "A",
+  "files": [
+    {
+      "output": "native/tree_spring/none/01.png",
+      "sha256": "d1e5d7e6ecc8079434292e3d415e2127a6517c119e91f10cdf4fda8687ea3328",
+      "anim": "tree_spring",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/tree_spring.png",
+      "source": "raw/tree_spring-r2.png",
+      "source_sha256": "e2c3dfb35f11762756bee3c3f373454581d4cafa8ea36c18d3d3dc24d566e9b0",
+      "prompt": "raw/tree_spring-r2.prompt.txt",
+      "prompt_sha256": "16d47cc5bb2d3247e1eed68ef7014cfa9becc2158c01d3e985ba986a42b1bf03",
+      "call": "raw/tree_spring-r2.call.json",
+      "recipe": {
+        "id": "A013/tree_spring",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_spring-r2.png",
+        "crop_xywh": [
+          38,
+          219,
+          957,
+          1135
+        ],
+        "content_scale": 0.03700440528634361,
+        "content_anchor_xy": [
+          17,
+          42
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "canvas_wh": [
+          40,
+          48
+        ],
+        "pivot_xy": [
+          20,
+          44
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/tree_autumn/none/01.png",
+      "sha256": "aa51d13a2252e34fa66da7efa8ba6fe134d4478a3f863fc298878e83c48f2395",
+      "anim": "tree_autumn",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/tree_autumn.png",
+      "source": "raw/tree_autumn-r4.png",
+      "source_sha256": "ad4d1d8fb2152c74c2b0f994b39ff97fb187293688affa38251f854af1b40139",
+      "prompt": "raw/tree_autumn-r4.prompt.txt",
+      "prompt_sha256": "7639ca67bce7db9398a833c795019e86a1b0dc8ce208e539297c8644aaa540fb",
+      "call": "raw/tree_autumn-r4.call.json",
+      "recipe": {
+        "id": "A013/tree_autumn",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_autumn-r4.png",
+        "crop_xywh": [
+          38,
+          220,
+          958,
+          1134
+        ],
+        "content_scale": 0.03700440528634361,
+        "content_anchor_xy": [
+          17,
+          42
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "canvas_wh": [
+          40,
+          48
+        ],
+        "pivot_xy": [
+          20,
+          44
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/tree_winter/none/01.png",
+      "sha256": "c0cb06eb8f3fe0d90c4bba0dc5e8420927394a7266496a98ee75eab3f09f1724",
+      "anim": "tree_winter",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/tree_winter.png",
+      "source": "raw/tree_winter-r1.png",
+      "source_sha256": "85a63f1010ad0771df8893bc9ae4cc18cf46a2b6edcb9f0933958c1cf145ae52",
+      "prompt": "raw/tree_winter-r1.prompt.txt",
+      "prompt_sha256": "cde3ad55e221d415cc95345e8b34b8bbf4986b9af5457c830c1808b3e3ef8592",
+      "call": "raw/tree_winter-r1.call.json",
+      "recipe": {
+        "id": "A013/tree_winter",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_winter-r1.png",
+        "crop_xywh": [
+          51,
+          212,
+          941,
+          1141
+        ],
+        "content_scale": 0.03700440528634361,
+        "content_anchor_xy": [
+          17,
+          42
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "canvas_wh": [
+          40,
+          48
+        ],
+        "pivot_xy": [
+          20,
+          44
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/tree_b_spring/none/01.png",
+      "sha256": "be1c5e5410b2b598d13f680f89c553dfb7ea10e4b22515e2e8cbb033d5d8520b",
+      "anim": "tree_b_spring",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/tree_b_spring.png",
+      "source": "raw/tree_b_spring-r4.png",
+      "source_sha256": "48e5ade5b7e8886f310dc8db5925b1569eea379daa54bcb9d1ba8971a59f844b",
+      "prompt": "raw/tree_b_spring-r4.prompt.txt",
+      "prompt_sha256": "9f14f201361bf287a4d695b92637f6a6de688f7b75789fd11dcb44dacf054c5d",
+      "call": "raw/tree_b_spring-r4.call.json",
+      "recipe": {
+        "id": "A013/tree_b_spring",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_b_spring-r4.png",
+        "crop_xywh": [
+          30,
+          205,
+          971,
+          1149
+        ],
+        "content_scale": 0.03700440528634361,
+        "content_anchor_xy": [
+          18,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "canvas_wh": [
+          40,
+          48
+        ],
+        "pivot_xy": [
+          20,
+          44
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/tree_b_autumn/none/01.png",
+      "sha256": "244ab93741ac6b3b15d49ab5bc87e2cefd6cbe9e24aaf5dc2a7db08abdb98470",
+      "anim": "tree_b_autumn",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/tree_b_autumn.png",
+      "source": "raw/tree_b_autumn-r4.png",
+      "source_sha256": "4726e00cb0b3efdc8020d85ade80b342c0f7647c16b6d4fba396e4319c89462c",
+      "prompt": "raw/tree_b_autumn-r4.prompt.txt",
+      "prompt_sha256": "4134f66bb1b2971c54d3e3fa84e69aebe9bc09c8917a676795112f5923a727a9",
+      "call": "raw/tree_b_autumn-r4.call.json",
+      "recipe": {
+        "id": "A013/tree_b_autumn",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_b_autumn-r4.png",
+        "crop_xywh": [
+          40,
+          206,
+          952,
+          1138
+        ],
+        "content_scale": 0.03700440528634361,
+        "content_anchor_xy": [
+          17,
+          42
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "canvas_wh": [
+          40,
+          48
+        ],
+        "pivot_xy": [
+          20,
+          44
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/tree_b_winter/none/01.png",
+      "sha256": "29c48364f06c027bc04848dedb74b960a0f5a7b8cb9db48a01dfa75a2c2cff0d",
+      "anim": "tree_b_winter",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/tree_b_winter.png",
+      "source": "raw/tree_b_winter-r1.png",
+      "source_sha256": "538bf2e0d16c053edc17c908838ef8637336ba7789ff9d7092b580e45d666bce",
+      "prompt": "raw/tree_b_winter-r1.prompt.txt",
+      "prompt_sha256": "aae3b572164427c72b2778c82f049aa98e0d6a0df7b92a472dd293cdabe66aa6",
+      "call": "raw/tree_b_winter-r1.call.json",
+      "recipe": {
+        "id": "A013/tree_b_winter",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_b_winter-r1.png",
+        "crop_xywh": [
+          34,
+          197,
+          961,
+          1156
+        ],
+        "content_scale": 0.03700440528634361,
+        "content_anchor_xy": [
+          18,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "canvas_wh": [
+          40,
+          48
+        ],
+        "pivot_xy": [
+          20,
+          44
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/stump_snow/none/01.png",
+      "sha256": "fb38928614e00309744674b752e9d6a425144ca335b91f4a6d6b34e01a2106f2",
+      "anim": "stump_snow",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/stump_snow.png",
+      "source": "raw/stump_snow-r1.png",
+      "source_sha256": "3e15c289fc7325931556ba33ab84ab903634712e64bde100009e8ef7adccd859",
+      "prompt": "raw/stump_snow-r1.prompt.txt",
+      "prompt_sha256": "eab834a259086d37c0b766d0a4ee975747abe2fa2bb0e374fef52db8de694354",
+      "call": "raw/stump_snow-r1.call.json",
+      "recipe": {
+        "id": "A013/stump_snow",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/stump_snow-r1.png",
+        "crop_xywh": [
+          272,
+          571,
+          746,
+          276
+        ],
+        "content_scale": 0.010723860589812333,
+        "content_anchor_xy": [
+          4,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "stone_light",
+          "night"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/rock_snow/none/01.png",
+      "sha256": "604aa47b492e26377ca5639c0a24c426e659097320ff31dd91732a33a25e6130",
+      "anim": "rock_snow",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/rock_snow.png",
+      "source": "raw/rock_snow-r1.png",
+      "source_sha256": "35c13ae919605666f67cb040d05a0b58398c68577ca4facce3af7b6b105aebd3",
+      "prompt": "raw/rock_snow-r1.prompt.txt",
+      "prompt_sha256": "7cc15ae41ebd946fb17a334cc9ad7c78140c83526dc3eca34c3978e12e3b4117",
+      "call": "raw/rock_snow-r1.call.json",
+      "recipe": {
+        "id": "A013/rock_snow",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/rock_snow-r1.png",
+        "crop_xywh": [
+          630,
+          285,
+          716,
+          274
+        ],
+        "content_scale": 0.0111731843575419,
+        "content_anchor_xy": [
+          5,
+          9
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "stone_light",
+          "night"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/rock_b_snow/none/01.png",
+      "sha256": "cc79add1f983768cb1d0c5fb53e2ca168d3d91118ac5e873e2454f4f772bef5d",
+      "anim": "rock_b_snow",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/rock_b_snow.png",
+      "source": "raw/rock_b_snow-r1.png",
+      "source_sha256": "ffdfac1a295df5441c586df56b8a16ebaa6eb7e2bb88b78a7a1197662a978404",
+      "prompt": "raw/rock_b_snow-r1.prompt.txt",
+      "prompt_sha256": "2b754d325726703e4d75a4da9030393c3b1e6265ff83cd39c93f183cf3ccefff",
+      "call": "raw/rock_b_snow-r1.call.json",
+      "recipe": {
+        "id": "A013/rock_b_snow",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/rock_b_snow-r1.png",
+        "crop_xywh": [
+          324,
+          478,
+          724,
+          293
+        ],
+        "content_scale": 0.011049723756906077,
+        "content_anchor_xy": [
+          5,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "stone_light",
+          "night"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/ore_snow/none/01.png",
+      "sha256": "cee181b4c49ab0802951cba5820d54a269ebb390248f5333feb141943c835b66",
+      "anim": "ore_snow",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/ore_snow.png",
+      "source": "raw/ore_snow-r1.png",
+      "source_sha256": "2f3095cfc90773ec176e07244740fb24a9c2834cbaf3106a6daeef9ca5c102a0",
+      "prompt": "raw/ore_snow-r1.prompt.txt",
+      "prompt_sha256": "0bf2b65fd84bdaae7efbd84ed93a1730b5b673d2cf82fd8bbe23d52704f3ff88",
+      "call": "raw/ore_snow-r1.call.json",
+      "recipe": {
+        "id": "A013/ore_snow",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/ore_snow-r1.png",
+        "crop_xywh": [
+          293,
+          524,
+          718,
+          300
+        ],
+        "content_scale": 0.011142061281337047,
+        "content_anchor_xy": [
+          4,
+          10
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "stone_light",
+          "night"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/ore_b_snow/none/01.png",
+      "sha256": "d5e2b3485a5d9d8700df71867ac4e10427cc0a4dc56e4837a1bde3421fd101c5",
+      "anim": "ore_b_snow",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/ore_b_snow.png",
+      "source": "raw/ore_b_snow-r1.png",
+      "source_sha256": "1597811136d14981a845660dc49291327dd3349b5df0d0f76f767fe6cd528825",
+      "prompt": "raw/ore_b_snow-r1.prompt.txt",
+      "prompt_sha256": "ed5b513e8629acaa7518f09193a8e126fe4456756072291f9149b7e0759dce4b",
+      "call": "raw/ore_b_snow-r1.call.json",
+      "recipe": {
+        "id": "A013/ore_b_snow",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/ore_b_snow-r1.png",
+        "crop_xywh": [
+          310,
+          533,
+          643,
+          271
+        ],
+        "content_scale": 0.012441679626749611,
+        "content_anchor_xy": [
+          3,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "stone_light",
+          "night"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/seam_snow/none/01.png",
+      "sha256": "c113e27fdf029b47e28dd80f1b4e623e276926885fdc0e99dcb05f0bba574695",
+      "anim": "seam_snow",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/seam_snow.png",
+      "source": "raw/seam_snow-r1.png",
+      "source_sha256": "c7e706d6b38bd89a9e3f1b170bf8045755871a97f6fa0c34ff96144457d409a4",
+      "prompt": "raw/seam_snow-r1.prompt.txt",
+      "prompt_sha256": "3c94e61dbba320bd13ed5d7516dfb78aa0a2d554164a15b807648f08d00fa5aa",
+      "call": "raw/seam_snow-r1.call.json",
+      "recipe": {
+        "id": "A013/seam_snow",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/seam_snow-r1.png",
+        "crop_xywh": [
+          217,
+          568,
+          845,
+          315
+        ],
+        "content_scale": 0.009467455621301775,
+        "content_anchor_xy": [
+          4,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "stone_light",
+          "night"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/seam_b_snow/none/01.png",
+      "sha256": "3aa87df3d4a29ea29ce942f90ed33c8188133f9b7c901f4e8fe6216b74245483",
+      "anim": "seam_b_snow",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/seam_b_snow.png",
+      "source": "raw/seam_b_snow-r1.png",
+      "source_sha256": "51af03ec3dca4531d9d96c75de27da29038eefb2aa62ff9b01b62543c2425983",
+      "prompt": "raw/seam_b_snow-r1.prompt.txt",
+      "prompt_sha256": "4e0d3d4c29e8d2005d42593f41ebf05ec578641ac8402abf7a0d4d42dffb2c28",
+      "call": "raw/seam_b_snow-r1.call.json",
+      "recipe": {
+        "id": "A013/seam_b_snow",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/seam_b_snow-r1.png",
+        "crop_xywh": [
+          214,
+          530,
+          831,
+          316
+        ],
+        "content_scale": 0.009626955475330927,
+        "content_anchor_xy": [
+          5,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "stone_light",
+          "night"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/snow_cap/none/01.png",
+      "sha256": "dcad4e56fd8c077a551428f139089fb21d1e8c85ea358e4c4ffdb5c73c505046",
+      "anim": "snow_cap",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/snow_cap.png",
+      "source": "raw/snow_cap-r1.png",
+      "source_sha256": "568d5f9a0d2c181f85e3c7d3ad5e6bf0d58d87f3a78bc3dcb1a52a0920104f70",
+      "prompt": "raw/snow_cap-r1.prompt.txt",
+      "prompt_sha256": "ddc2e3b03370b9877fc04e245eda70f459c6f7288b5b023929477c89fad2251c",
+      "call": "raw/snow_cap-r1.call.json",
+      "recipe": {
+        "id": "A013/snow_cap",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/snow_cap-r1.png",
+        "crop_xywh": [
+          279,
+          534,
+          712,
+          301
+        ],
+        "content_scale": 0.011235955056179775,
+        "content_anchor_xy": [
+          5,
+          9
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "stone_light",
+          "night"
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ]
+      },
+      "points": {}
+    },
+    {
+      "output": "native/snow_cap_2x2/none/01.png",
+      "sha256": "b542629f0f3b5bd1702fc6aba5d025c5194d1f61bcce7b5568205a34e5eb5757",
+      "anim": "snow_cap_2x2",
+      "dir": "none",
+      "frame": 0,
+      "runtime_name": "sprites/props/snow_cap_2x2.png",
+      "source": "raw/snow_cap_2x2-r2.png",
+      "source_sha256": "7d3f1184d623c917669a820813f52506f38108bc125781c134f114367d251df5",
+      "prompt": "raw/snow_cap_2x2-r2.prompt.txt",
+      "prompt_sha256": "e74c4f08ab74e45fad037d997c5e20c3f3deedb4fc0eeb8076f3c30f381b0325",
+      "call": "raw/snow_cap_2x2-r2.call.json",
+      "recipe": {
+        "id": "A013/snow_cap_2x2",
+        "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/snow_cap_2x2-r2.png",
+        "crop_xywh": [
+          314,
+          624,
+          627,
+          146
+        ],
+        "content_scale": 0.025518341307814992,
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "moon",
+          "bone_dark",
+          "stone_light",
+          "night"
+        ],
+        "canvas_wh": [
+          32,
+          32
+        ],
+        "pivot_xy": [
+          16,
+          30
+        ]
+      },
+      "points": {}
+    }
+  ],
+  "animations": [
+    {
+      "anim": "tree_spring",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static tree_spring"
+      ],
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "tree_autumn",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static tree_autumn"
+      ],
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "tree_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static tree_winter"
+      ],
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "tree_b_spring",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static tree_b_spring"
+      ],
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "tree_b_autumn",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static tree_b_autumn"
+      ],
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "tree_b_winter",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static tree_b_winter"
+      ],
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "stump_snow",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static stump_snow"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "rock_snow",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static rock_snow"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "rock_b_snow",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static rock_b_snow"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "ore_snow",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static ore_snow"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "ore_b_snow",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static ore_b_snow"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "seam_snow",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static seam_snow"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "seam_b_snow",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static seam_b_snow"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "snow_cap",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static snow_cap"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "snow_cap_2x2",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static snow_cap_2x2"
+      ],
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        30
+      ],
+      "draw_scale": 1,
+      "frame_seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {}
+    }
+  ],
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_spring-r1-d2433b51af.png",
+      "sha256": "d2433b51af9e733bb9489696859148064508eed2eb8f62bd05ae2149a03844cf",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_autumn-r3-2b065a1d0c.png",
+      "sha256": "2b065a1d0c9d853591d74cabdebcbeb8db4343272808780369ec2d655b14f1d4",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\tree.png",
+      "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_b_spring-r3-4d589d6164.png",
+      "sha256": "4d589d61649d531e76cc7547756739eaf4bcb56ff745a665f648c1416521b587",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\tree_b_spring-one-fleck-diagnostic.png",
+      "sha256": "d0b10b0ea73a8c1f1b2cd3e6b29e1eb257901aee3698bbc80ce4a46151b95394",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\input-history\\tree_b_autumn-r3-5ea6b21817.png",
+      "sha256": "5ea6b218171d532c09e16facd0d2df12bca9a44fd5f1b673f80b8541cf28eeda",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r4.png",
+      "sha256": "ad4d1d8fb2152c74c2b0f994b39ff97fb187293688affa38251f854af1b40139",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\tree_b.png",
+      "sha256": "e7b4138f147769e67cbf4ab86b2dcfc04393b2f16a2062147ceb38eaa8986215",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\stump.png",
+      "sha256": "04b155a793e485b04dfa3ee1102d9244589c0c9e5ef12183be8f8091d498a10e",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png",
+      "sha256": "35c13ae919605666f67cb040d05a0b58398c68577ca4facce3af7b6b105aebd3",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\rock.png",
+      "sha256": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\rock_b.png",
+      "sha256": "1fa07696f592a1ef51059e2f15b14cbef0603083ff4e4e1e32b42c6a208313b9",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore.png",
+      "sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore_b.png",
+      "sha256": "06ee39306995017ec320a8f89dadd61ce64295e5d9ec8967051bd1e277ce8edf",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\seam.png",
+      "sha256": "7e92de1560eb2f23a5fd3c4ebdac3d9574324d66a95d205f6273fb385fcde940",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\seam_b.png",
+      "sha256": "5a83f0de1842a9bed331987bb7c6e7d37898bd98fa22fde7ad899dd5dd966bb9",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\preview\\snow_cap_2x2-r1-10x.png",
+      "sha256": "ec93b1714f19261939f693a722c817985c8d06fa7fbe164ad5fe96f9fbe9c1b5",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "mirror_pairs": {},
+  "exemptions": {
+    "grounded_on_pivot": "Trees grounded row43; cap sprites sit on host surfaces instead of ground, verified by caps_fit_hosts."
+  },
+  "colour_ramp": [
+    {
+      "rgb": [
+        26,
+        24,
+        48
+      ]
+    },
+    {
+      "rgb": [
+        29,
+        64,
+        36
+      ]
+    },
+    {
+      "rgb": [
+        36,
+        31,
+        46
+      ]
+    },
+    {
+      "rgb": [
+        46,
+        94,
+        52
+      ]
+    },
+    {
+      "rgb": [
+        53,
+        80,
+        56
+      ]
+    },
+    {
+      "rgb": [
+        58,
+        51,
+        69
+      ]
+    },
+    {
+      "rgb": [
+        70,
+        128,
+        74
+      ]
+    },
+    {
+      "rgb": [
+        78,
+        122,
+        53
+      ]
+    },
+    {
+      "rgb": [
+        82,
+        80,
+        92
+      ]
+    },
+    {
+      "rgb": [
+        85,
+        118,
+        82
+      ]
+    },
+    {
+      "rgb": [
+        92,
+        66,
+        42
+      ]
+    },
+    {
+      "rgb": [
+        106,
+        150,
+        70
+      ]
+    },
+    {
+      "rgb": [
+        107,
+        74,
+        44
+      ]
+    },
+    {
+      "rgb": [
+        110,
+        108,
+        120
+      ]
+    },
+    {
+      "rgb": [
+        122,
+        88,
+        56
+      ]
+    },
+    {
+      "rgb": [
+        138,
+        47,
+        42
+      ]
+    },
+    {
+      "rgb": [
+        138,
+        182,
+        89
+      ]
+    },
+    {
+      "rgb": [
+        140,
+        98,
+        57
+      ]
+    },
+    {
+      "rgb": [
+        140,
+        138,
+        150
+      ]
+    },
+    {
+      "rgb": [
+        142,
+        43,
+        51
+      ]
+    },
+    {
+      "rgb": [
+        150,
+        112,
+        74
+      ]
+    },
+    {
+      "rgb": [
+        168,
+        116,
+        44
+      ]
+    },
+    {
+      "rgb": [
+        168,
+        124,
+        78
+      ]
+    },
+    {
+      "rgb": [
+        176,
+        66,
+        58
+      ]
+    },
+    {
+      "rgb": [
+        181,
+        107,
+        75
+      ]
+    },
+    {
+      "rgb": [
+        184,
+        174,
+        154
+      ]
+    },
+    {
+      "rgb": [
+        196,
+        150,
+        70
+      ]
+    },
+    {
+      "rgb": [
+        201,
+        99,
+        90
+      ]
+    },
+    {
+      "rgb": [
+        207,
+        214,
+        255
+      ]
+    },
+    {
+      "rgb": [
+        214,
+        186,
+        96
+      ]
+    },
+    {
+      "rgb": [
+        228,
+        155,
+        104
+      ]
+    },
+    {
+      "rgb": [
+        232,
+        224,
+        207
+      ]
+    },
+    {
+      "rgb": [
+        242,
+        160,
+        60
+      ]
+    },
+    {
+      "rgb": [
+        243,
+        197,
+        141
+      ]
+    },
+    {
+      "rgb": [
+        246,
+        217,
+        122
+      ]
+    }
+  ],
+  "approval": "APPROVAL.json",
+  "palette": "tools/palette.py:COLOURS",
+  "alpha_threshold": 128,
+  "tool": "built-in ImageGen",
+  "supersedes": [],
+  "accepted_qa_exceptions": [
+    {
+      "check": "blossom_clusters_at_least3",
+      "anim": "tree_b_spring",
+      "single_pixel_clusters": 1,
+      "reason": "Owner explicitly approved after disclosure of one isolated pale blossom pixel. Preserve the approved pixels."
+    }
+  ],
+  "deviations": [
+    {
+      "date": "2026-10-10",
+      "owner_words": "aprovado",
+      "change": "Accept exactly one isolated pale blossom pixel in tree_b_spring; all other flower clusters remain at least three pixels. The measured QA result remains false."
+    }
+  ]
+}

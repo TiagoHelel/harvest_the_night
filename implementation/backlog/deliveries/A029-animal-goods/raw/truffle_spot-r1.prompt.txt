@@ -1,0 +1,24 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: ONE props/truffle_spot static resource prop.
+Input images: Image1 world reference is STYLE ONLY. Image2 rock raw is prop CAMERA, LIGHT and OUTLINE only, never draw a rock. Image3 accepted truffle raw is TRUFFLE MATERIAL ONLY, never its cut half.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x16 pixels with contact pivot 8,14; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent alpha around the isolated heap. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+
+Create a truffle dig spot: a SMALL RAISED heap of freshly turned soil clods with ONLY the knobby dark TOP of one truffle poking out. About12native pixels wide and8tall, centredx8,lowestopaque row13, native16x16canvas,pivot8,14. Natural3quarterfarmprop litupperleft, same prop contrast and coloured outline as the rock reference but clearly smaller and softer. Soil_dark/soil/soil_light tops; dark brown truffle wood_dark/soil_dark. Two or three simple joined angular earth masses, tiny but recognizable raised heap. No cut half, leaves, grass, flat dirt disc, hole painted into ground, ground tile, ground shadow, halo, extra objects, numbers or labels. One joined unclipped silhouette, generous transparent margins. Flat deliberate square pixels, no gradients or fine speckle.

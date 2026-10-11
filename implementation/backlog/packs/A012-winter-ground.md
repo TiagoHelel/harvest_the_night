@@ -1,6 +1,6 @@
 # A012 - Winter ground
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0163
 - **Dressed by game tasks:** 0159
 - **Family:** terrain

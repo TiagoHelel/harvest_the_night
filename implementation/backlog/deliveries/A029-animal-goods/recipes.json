@@ -1,0 +1,528 @@
+[
+  {
+    "anim": "icon_egg",
+    "asset": "egg",
+    "stem": "egg-r1",
+    "importer": {
+      "id": "A029/icon_egg",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/egg-r1.png",
+      "crop_xywh": [
+        411,
+        448,
+        446,
+        436
+      ],
+      "content_scale": 0.03139013452914798,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_egg",
+    "asset": "egg",
+    "stem": "egg-r1",
+    "importer": {
+      "id": "A029/hud_egg",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/egg-r1.png",
+      "crop_xywh": [
+        411,
+        448,
+        446,
+        436
+      ],
+      "content_scale": 0.017937219730941704,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "icon_milk",
+    "asset": "milk",
+    "stem": "milk-r1",
+    "importer": {
+      "id": "A029/icon_milk",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/milk-r1.png",
+      "crop_xywh": [
+        466,
+        430,
+        323,
+        450
+      ],
+      "content_scale": 0.03111111111111111,
+      "content_anchor_xy": [
+        5,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "bone",
+        "bone_dark",
+        "stone_light",
+        "roof",
+        "roof_dark"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_milk",
+    "asset": "milk",
+    "stem": "milk-r1",
+    "importer": {
+      "id": "A029/hud_milk",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/milk-r1.png",
+      "crop_xywh": [
+        466,
+        430,
+        323,
+        450
+      ],
+      "content_scale": 0.017777777777777778,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "bone",
+        "bone_dark",
+        "stone_light",
+        "roof",
+        "roof_dark"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "icon_wool",
+    "asset": "wool",
+    "stem": "wool-r1",
+    "importer": {
+      "id": "A029/icon_wool",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/wool-r1.png",
+      "crop_xywh": [
+        359,
+        394,
+        644,
+        577
+      ],
+      "content_scale": 0.021739130434782608,
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "bone",
+        "bone_dark",
+        "gold_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_wool",
+    "asset": "wool",
+    "stem": "wool-r1",
+    "importer": {
+      "id": "A029/hud_wool",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/wool-r1.png",
+      "crop_xywh": [
+        359,
+        394,
+        644,
+        577
+      ],
+      "content_scale": 0.012422360248447204,
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "bone",
+        "bone_dark",
+        "gold_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "icon_truffle",
+    "asset": "truffle",
+    "stem": "truffle-r1",
+    "importer": {
+      "id": "A029/icon_truffle",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/truffle-r1.png",
+      "crop_xywh": [
+        344,
+        410,
+        611,
+        530
+      ],
+      "content_scale": 0.022913256955810146,
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_truffle",
+    "asset": "truffle",
+    "stem": "truffle-r1",
+    "importer": {
+      "id": "A029/hud_truffle",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/truffle-r1.png",
+      "crop_xywh": [
+        344,
+        410,
+        611,
+        530
+      ],
+      "content_scale": 0.01309328968903437,
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "anim": "truffle_spot",
+    "asset": "truffle_spot",
+    "stem": "truffle_spot-r1",
+    "importer": {
+      "id": "A029/truffle_spot",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/truffle_spot-r1.png",
+      "crop_xywh": [
+        361,
+        573,
+        564,
+        321
+      ],
+      "content_scale": 0.02127659574468085,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    }
+  }
+]

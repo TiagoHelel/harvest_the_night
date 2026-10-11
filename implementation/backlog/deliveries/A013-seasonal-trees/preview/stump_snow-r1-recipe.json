@@ -1,0 +1,55 @@
+{
+  "anim": "stump_snow",
+  "stem": "stump_snow-r1",
+  "importer": {
+    "id": "A013/stump_snow",
+    "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/stump_snow-r1.png",
+    "crop_xywh": [
+      272,
+      571,
+      746,
+      276
+    ],
+    "content_scale": 0.010723860589812333,
+    "content_anchor_xy": [
+      4,
+      6
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "palette_keys": [
+      "bone",
+      "moon",
+      "bone_dark",
+      "stone_light",
+      "night"
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ]
+  },
+  "host_fit": [
+    {
+      "host": "stump",
+      "pass": true,
+      "within_column_top_band": true,
+      "cap_pixels": 18,
+      "host_pixels": 63,
+      "overlap_pixels": 18,
+      "overlap_fraction": 1.0,
+      "host_covered_fraction": 0.2857142857142857,
+      "width_fraction": 0.5714285714285714,
+      "cap_bounds": [
+        4,
+        8,
+        12,
+        11
+      ]
+    }
+  ]
+}

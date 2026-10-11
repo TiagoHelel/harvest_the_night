@@ -1,0 +1,65 @@
+A019 - Tool icons
+Approval date: 2026-10-10
+Owner words, verbatim: "aprovado"
+Status: approved for integration; runtime_integrated remains false.
+
+Authoritative folder: implementation/backlog/deliveries/A019-tool-icons/
+Read APPROVAL.json, contract.json, checks.json and this handoff. All 30 exports are approved. No older delivery folders are superseded. rejected/ and preview/ are review evidence, never source art.
+
+Integration task: 0202. Replace task 0173's tool icon placeholders in workshop upgrades, inventory, stall and compact HUD. Tools are hoe, can, axe, pickaxe and rod. The first four use basic/iron/gold for tiers 0/1/2; rod uses bamboo/fibre/iron. Preserve these IDs and tier order.
+
+Palette mode A: selected ImageGen raw sources plus every per-file importer recipe in contract.json, using tools/palette.py:COLOURS and recorded palette_keys. Preserve crop_xywh, content_scale, content_anchor_xy, alpha_threshold 128, canvas and pivot. Each icon_/hud_ pair shares one source and crop. The three tiers of each tool share the recorded scale per output size; do not independently enlarge a tier. Approved native files already match render_source. No runtime/ 2x layer.
+
+Mapping and aliases (display_role is required in manifest entries):
+native/icon_hoe_basic/none/01.png -> sprites/ui/icon_hoe_basic.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_hoe_basic/none/01.png -> sprites/ui/hud_hoe_basic.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_hoe_iron/none/01.png -> sprites/ui/icon_hoe_iron.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_hoe_iron/none/01.png -> sprites/ui/hud_hoe_iron.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_hoe_gold/none/01.png -> sprites/ui/icon_hoe_gold.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_hoe_gold/none/01.png -> sprites/ui/hud_hoe_gold.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_can_basic/none/01.png -> sprites/ui/icon_can_basic.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_can_basic/none/01.png -> sprites/ui/hud_can_basic.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_can_iron/none/01.png -> sprites/ui/icon_can_iron.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_can_iron/none/01.png -> sprites/ui/hud_can_iron.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_can_gold/none/01.png -> sprites/ui/icon_can_gold.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_can_gold/none/01.png -> sprites/ui/hud_can_gold.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_axe_basic/none/01.png -> sprites/ui/icon_axe_basic.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_axe_basic/none/01.png -> sprites/ui/hud_axe_basic.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_axe_iron/none/01.png -> sprites/ui/icon_axe_iron.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_axe_iron/none/01.png -> sprites/ui/hud_axe_iron.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_axe_gold/none/01.png -> sprites/ui/icon_axe_gold.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_axe_gold/none/01.png -> sprites/ui/hud_axe_gold.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_pickaxe_basic/none/01.png -> sprites/ui/icon_pickaxe_basic.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_pickaxe_basic/none/01.png -> sprites/ui/hud_pickaxe_basic.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_pickaxe_iron/none/01.png -> sprites/ui/icon_pickaxe_iron.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_pickaxe_iron/none/01.png -> sprites/ui/hud_pickaxe_iron.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_pickaxe_gold/none/01.png -> sprites/ui/icon_pickaxe_gold.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_pickaxe_gold/none/01.png -> sprites/ui/hud_pickaxe_gold.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_rod_bamboo/none/01.png -> sprites/ui/icon_rod_bamboo.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_rod_bamboo/none/01.png -> sprites/ui/hud_rod_bamboo.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_rod_fibre/none/01.png -> sprites/ui/icon_rod_fibre.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_rod_fibre/none/01.png -> sprites/ui/hud_rod_fibre.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_rod_iron/none/01.png -> sprites/ui/icon_rod_iron.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_rod_iron/none/01.png -> sprites/ui/hud_rod_iron.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+
+Frame order: 01.png is frame 0. All states use direction none, mirror none: no baked or runtime flips. Metadata points are {} for all static states. icon_ is 16x16 with pivot (8,8), hud_ is 10x10 with pivot (5,5); both draw 1.0. Preserve at least one clear border pixel and visible bounds at most 14x14 / 8x8. HUD keeps its original colors by day and night; world relight previews are reference only.
+
+Recorded tier_ramps, dark to light:
+basic: ink_soft, stone_dark, stone
+iron: stone_dark, stone, stone_light
+gold: gold_dark, gold, gold_light
+bamboo: gold_dark, bone_dark, gold_light
+fibre: roof_dark, roof, roof_light
+The iron rod uses the iron ramp. These are the established head-tint targets for task 0173's in-hand tool support, mapping stone_dark/stone/stone_light to the chosen tier's ramp. Read contract.json as the authority. Bind the ramps through existing game support; do not regenerate farmer action sprites, reopen deferred farmer packs or create new per-tier animations. The icon art itself stays unchanged.
+
+No deviations were authorized; deviations and supersedes are empty. Approved references use the legacy in-hand tool frames because A007/A008 are deferred. Their inclusion as references is not approval to integrate or alter those farmer packs.
+
+Never regenerate, repaint, recolour, resample or retime approved art. Never cut sprites from GIFs, previews or screenshots. Never use art absent from contract.json. Never add a runtime flip to a baked mirror. Preserve the tool silhouette, diagonal orientation, material distinction and fixed scale across tiers.
+
+Integration steps:
+1. Verify all 30 export hashes against contract.json and APPROVAL.json, selected source/prompt hashes, call records and reference provenance. Run the delivery build.py --check. All checks must pass. If anything differs, stop the integration task with the precise cause instead of silently repairing approved art.
+2. Promote selected raw sources byte-for-byte to versioned assets/art_source/ui/ locations. Add exact per-file raster recipes, aliases, display_role inventory/compact_hud, prompt/reference/approval provenance and ownership.json entries. Adapt promoted source paths only; retain source hashes and all conversion parameters. Run python tools/import_art.py and verify output PNG hashes equal the approved exports.
+3. Extend hard-coded UI family art-check lists as necessary, bind the aliases in task 0173's workshop/inventory/stall/HUD and retain tool IDs, tier order and tier_ramps. Do not modify deferred farmer art.
+4. Run python tools/verify.py and confirm all promoted hashes still match. Verify both cuts' bounds and padding, shared per-tool scales and pair crops, and distinct compact tiers.
+5. Inspect FHD game captures by day and night, including the workshop tier grid and compact HUD. Confirm all five tools are recognizable at 10x10 and materials distinguish their tiers. Do not world-relight UI icons.
+6. Only after integration and validation, run python implementation/backlog/assets.py set A019 integrated. Claude owns this transition. Do not touch deferred farmer packs or the cancelled run pack. Do not commit or push unless the owner asks.

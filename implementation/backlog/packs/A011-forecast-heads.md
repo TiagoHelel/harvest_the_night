@@ -1,6 +1,6 @@
 # A011 - Forecast heads of the first enemies
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0162
 - **Dressed by game tasks:** 0158
 - **Family:** ui

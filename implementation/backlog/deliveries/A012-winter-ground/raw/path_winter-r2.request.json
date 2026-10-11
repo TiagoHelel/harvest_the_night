@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 exact winter tile edit target,1254x1254canvas representing16x16logical squarepixel grid. ONE concrete correction: Replace the dominant cream snow BASE with packed dirty-snow colour EXACT RGB184,174,154(#b8ae9a), on at least230of256nativepixels. Keep all borders uniform this SAME beige. Retain onlyTWOsoft joined interior dirtysoil clusters,4-6nativepixels each, all nonbase clusters at least2pixels. NO dots, stray pixels or large cream patches. This is the darker trodden path, not the grass snow field. Keep squarecanvas and exactlogicalscale, no crop, rescale or extra texture. Flat pixels only, no gradients, blur, labels, glare, glow, shadow, objects or backdrop. FullyOPAQUEedge-to-edge terrain tile.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\path_winter-r1.png"
+  ],
+  "transparent_background": false
+}

@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 EXACT autumn tree target. ONE leaf-colour correction ONLY. Replace EVERY pale bright yellow/cream foliage highlight with DARKER subdued mustard-gold, RGB214,186,96 (#d6ba60) or darker. No leaf pixel can use flame_hot RGB246217122, no cream or pale yellow foliage remains. Restrained gold_light21418696 highlights ONLY, shadowsunchanged. Trunkandrootcolours stayexactlyunchanged. Keep exact1024x1536source canvas, all transparentmargins, position, size, outlines, branch/root geometry and all colouredclusters unchanged. Nevercrop,recenter,scale,add/removeleaves. NO fireorange, glow, particle, scene, background, shadow or lettering. True transparentalpha.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\tree_autumn-r3.png"
+  ],
+  "transparent_background": true
+}

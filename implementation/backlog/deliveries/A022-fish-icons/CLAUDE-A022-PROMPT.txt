@@ -1,0 +1,76 @@
+A022 - Fish
+Approval date: 2026-10-10
+Owner words, verbatim: "esses estao aprovados, tem mais pra gerar?"
+Status: approved for integration; runtime_integrated remains false.
+
+Authoritative folder: implementation/backlog/deliveries/A022-fish-icons/
+All 48 native exports are approved. Read APPROVAL.json, contract.json, checks.json and this handoff.
+No older delivery folders are superseded. raw/ contains selected ImageGen source art; rejected/ and preview/ are evidence only, never production sources.
+
+Integration task: 0205.
+Replace tinted fish stand-ins from 0179/0182 in catches, inventory, stall, compact HUD and the fish book. Bind exactly the 16 resource IDs listed in contract.json, including old_catfish/golden_queen/ghost_pike/ice_sturgeon as the four legendaries. Keep generic icon_fish/hud_fish unchanged for recipes naming any fish. Each species uses one raw/crop and three scales: 32x32 book_portrait, 16x16 inventory, 10x10 compact_hud. Unknown fish uses the portrait's runtime black silhouette; do not replace the approved portrait with a generated silhouette. All fish face west and bind directly, with no flips. Extend the portrait family in tools/check_ui_art.py and check >=24 differing alpha pixels between portrait silhouettes. HUD and book are not world-relit.
+
+Palette mode A: built-in ImageGen raw sources converted with tools/import_art.py:render_source and tools/palette.py:COLOURS. Preserve each exact crop_xywh, sheet_cell_xywh, content_scale, content_anchor_xy, palette_keys, alpha_threshold 128, canvas and pivot from contract.json. Null palette_keys means the complete 42-colour palette; omit the null optional key when invoking render_source. No runtime/ 2x layer.
+
+Native to runtime mapping and aliases:
+native/portrait_carp/none/01.png -> sprites/ui/portrait_carp.png | alias ui/portrait_carp | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_carp/none/01.png -> sprites/ui/icon_carp.png | alias ui/icon_carp | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_carp/none/01.png -> sprites/ui/hud_carp.png | alias ui/hud_carp | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_bream/none/01.png -> sprites/ui/portrait_bream.png | alias ui/portrait_bream | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_bream/none/01.png -> sprites/ui/icon_bream.png | alias ui/icon_bream | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_bream/none/01.png -> sprites/ui/hud_bream.png | alias ui/hud_bream | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_catfish/none/01.png -> sprites/ui/portrait_catfish.png | alias ui/portrait_catfish | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_catfish/none/01.png -> sprites/ui/icon_catfish.png | alias ui/icon_catfish | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_catfish/none/01.png -> sprites/ui/hud_catfish.png | alias ui/hud_catfish | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_dorado/none/01.png -> sprites/ui/portrait_dorado.png | alias ui/portrait_dorado | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_dorado/none/01.png -> sprites/ui/icon_dorado.png | alias ui/icon_dorado | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_dorado/none/01.png -> sprites/ui/hud_dorado.png | alias ui/hud_dorado | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_eel/none/01.png -> sprites/ui/portrait_eel.png | alias ui/portrait_eel | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_eel/none/01.png -> sprites/ui/icon_eel.png | alias ui/icon_eel | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_eel/none/01.png -> sprites/ui/hud_eel.png | alias ui/hud_eel | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_perch/none/01.png -> sprites/ui/portrait_perch.png | alias ui/portrait_perch | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_perch/none/01.png -> sprites/ui/icon_perch.png | alias ui/icon_perch | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_perch/none/01.png -> sprites/ui/hud_perch.png | alias ui/hud_perch | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_pike/none/01.png -> sprites/ui/portrait_pike.png | alias ui/portrait_pike | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_pike/none/01.png -> sprites/ui/icon_pike.png | alias ui/icon_pike | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_pike/none/01.png -> sprites/ui/hud_pike.png | alias ui/hud_pike | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_salmon/none/01.png -> sprites/ui/portrait_salmon.png | alias ui/portrait_salmon | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_salmon/none/01.png -> sprites/ui/icon_salmon.png | alias ui/icon_salmon | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_salmon/none/01.png -> sprites/ui/hud_salmon.png | alias ui/hud_salmon | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_sturgeon/none/01.png -> sprites/ui/portrait_sturgeon.png | alias ui/portrait_sturgeon | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_sturgeon/none/01.png -> sprites/ui/icon_sturgeon.png | alias ui/icon_sturgeon | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_sturgeon/none/01.png -> sprites/ui/hud_sturgeon.png | alias ui/hud_sturgeon | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_sunfish/none/01.png -> sprites/ui/portrait_sunfish.png | alias ui/portrait_sunfish | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_sunfish/none/01.png -> sprites/ui/icon_sunfish.png | alias ui/icon_sunfish | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_sunfish/none/01.png -> sprites/ui/hud_sunfish.png | alias ui/hud_sunfish | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_tilapia/none/01.png -> sprites/ui/portrait_tilapia.png | alias ui/portrait_tilapia | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_tilapia/none/01.png -> sprites/ui/icon_tilapia.png | alias ui/icon_tilapia | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_tilapia/none/01.png -> sprites/ui/hud_tilapia.png | alias ui/hud_tilapia | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_trout/none/01.png -> sprites/ui/portrait_trout.png | alias ui/portrait_trout | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_trout/none/01.png -> sprites/ui/icon_trout.png | alias ui/icon_trout | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_trout/none/01.png -> sprites/ui/hud_trout.png | alias ui/hud_trout | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_old_catfish/none/01.png -> sprites/ui/portrait_old_catfish.png | alias ui/portrait_old_catfish | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_old_catfish/none/01.png -> sprites/ui/icon_old_catfish.png | alias ui/icon_old_catfish | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_old_catfish/none/01.png -> sprites/ui/hud_old_catfish.png | alias ui/hud_old_catfish | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_golden_queen/none/01.png -> sprites/ui/portrait_golden_queen.png | alias ui/portrait_golden_queen | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_golden_queen/none/01.png -> sprites/ui/icon_golden_queen.png | alias ui/icon_golden_queen | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_golden_queen/none/01.png -> sprites/ui/hud_golden_queen.png | alias ui/hud_golden_queen | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_ghost_pike/none/01.png -> sprites/ui/portrait_ghost_pike.png | alias ui/portrait_ghost_pike | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_ghost_pike/none/01.png -> sprites/ui/icon_ghost_pike.png | alias ui/icon_ghost_pike | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_ghost_pike/none/01.png -> sprites/ui/hud_ghost_pike.png | alias ui/hud_ghost_pike | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/portrait_ice_sturgeon/none/01.png -> sprites/ui/portrait_ice_sturgeon.png | alias ui/portrait_ice_sturgeon | 32x32 pivot (16,16) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role book_portrait | points {}
+native/icon_ice_sturgeon/none/01.png -> sprites/ui/icon_ice_sturgeon.png | alias ui/icon_ice_sturgeon | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_ice_sturgeon/none/01.png -> sprites/ui/hud_ice_sturgeon.png | alias ui/hud_ice_sturgeon | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+
+Frame order: 01.png is frame 0. Growth stages and machine variants are individually selected states, not timed animations. Directions are none; horizontal mirrors and runtime flips are none. Metadata coordinates are native pixels. Preserve every per-file point shown above.
+Deviations: []. No additional deviation is authorized by this approval.
+
+Never regenerate, repaint, recolour, resample or retime approved art. Never cut sprites from GIFs, previews or screenshots. Never promote a file absent from contract.json. Never add a runtime flip to a baked mirror. Deferred farmer packs and the cancelled run pack are outside this handoff.
+
+Integration steps:
+1. Verify every selected native SHA256 against both contract.json and APPROVAL.json, and source/prompt/reference hashes against recorded provenance. Run this delivery build.py --check; all checks must pass. Stop on mismatch rather than modifying approved pixels.
+2. Promote selected raw files byte-for-byte under versioned assets/art_source/<family>/ paths. Preserve the recorded recipes, aliases and metadata; adapt only source paths. Add manifest entries, prompt/reference/approval provenance, and ownership.json entries. Run python tools/import_art.py and verify runtime PNG hashes equal the approved native exports.
+3. Extend hard-coded family lists in the relevant art checks and bind aliases through existing gameplay state handling as described above. Retain resource IDs, placements, display_role and points.
+4. Run python tools/verify.py and verify all promoted PNG hashes still match; inspect any pack-specific bounds, state, grounding, palette, points and family checks.
+5. Inspect FHD captures by day and night in the actual game context at native density; UI is not world-relit.
+6. After integration and validation, run python implementation/backlog/assets.py set A022 integrated. Claude owns that transition. Do not commit or push unless the owner asks.

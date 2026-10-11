@@ -1,0 +1,18 @@
+2026-10-07 | Owner requested all eligible packs and a final consolidated HTML review. No intermediate owner approval gates. No final integration approval inferred.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-07 | edge_n_winter-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | path_winter-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | shore_corner_nw_winter-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | shore_corner_nw_winter-r2 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | shore_corner_nw_winter-r3 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | soil_winter-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | tilled_wet_winter-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | tilled_winter-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+
+2026-10-10 | Resumed A012 via assets.py next. Read the full brief, existing contract, review history and checks. Inspected winter day/night fields at 1x and integer 4x, spring comparison and all five reference sheets. build.py --check passes; all checks true; 11 output/source/prompt hashes verified. Review URL returns HTTP 200 with exact local page bytes. Added nearest-only 4x diagnostic field copies under preview/; no delivered art changed or generated. Eight rejected candidates retained. Awaiting explicit integration approval. Owner should judge warm snow color, path and plot readability by day/night, and edge/shore continuity.
+
+2026-10-10 | Owner integration approval
+Owner words, verbatim: "aprovado"
+Approved all 11 winter tiles and overlays. No art pixels changed. Recorded every export hash in APPROVAL.json and added approval validation to the local builder. Claude integrates through task 0163.
+Approval verification: second build byte-identical; --check passed; all checks true; 11 approved hashes match. Wrote handoff with all aliases, exact rotated/sliced derivatives, winter atlas guidance and task 0163 steps. Rejected candidates retained: 8. No other pack processed.

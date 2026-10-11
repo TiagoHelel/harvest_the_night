@@ -1,6 +1,6 @@
 # A019 - Tool icons
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0202
 - **Dressed by game tasks:** 0173
 - **Family:** ui

@@ -1,0 +1,13 @@
+2026-10-07 | Owner requested all eligible packs and a final consolidated HTML review. No intermediate owner approval gates. No final integration approval inferred.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-07 | can_basic-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | can_gold-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | hoe_iron-alt-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+
+2026-10-10 | Resumed A019 via assets.py next. Read the full brief, existing contract, review history and checks. Inspected the tier grid at native sizes and 4x, reference world relight and all four reference sheets, including legacy in-hand tools because farmer work packs remain deferred. build.py --check passes; all checks true; 30 export/source/prompt hashes verified. Review HTTP 200 matches local bytes. Added a nearest-only diagnostic grid copy under preview/; no native art changed or generated. Three rejected candidates retained. Awaiting explicit approval. Owner should judge all five tool silhouettes, tier material distinctions and compact 10x10 readability; HUD is not world-relit.
+
+2026-10-10 | Owner integration approval
+Owner words, verbatim: "aprovado"
+Approved all 30 tool icons. No art pixels changed. Recorded all export hashes in APPROVAL.json and added approval validation to the local builder. Claude integrates through game task 0202.
+Approval verification: second build byte-identical, --check passed, all checks true, all 30 approved export hashes match. Wrote Claude handoff with 30 mappings, display roles, tier_ramps and task 0202 integration steps. Three rejected candidates retained. No other pack processed.

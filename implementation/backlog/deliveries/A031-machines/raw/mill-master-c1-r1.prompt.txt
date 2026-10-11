@@ -1,0 +1,24 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: A031-machines mill-master-c1.
+Input images: Image1: approved crop layout/scale/style reference; Image2: approved farmstyle reference
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+64x96 pixels with contact pivot 32,92; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent background, isolated objects only. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+
+PRODUCTION_BUILDING: Generate IDLE machine ONLY, not multiple states: Footprint 3x3. A small timber post windmill on a stone base with four lattice sails. Visible 52-64 wide (the sails may use the full 8 px overhang) x 72-88 tall; its top stays below the house's. Idle: sails bare lattice, cloth furled along the spars. Active: sails spread with cloth (`bone`, `bone_dark`). Hurt: one sail broken, a loose board. Wreck: two sails broken off, the cap tilted, boards torn from the post body, the stone base whole. No points. Target idle visiblewidth58px height80px, exact aspect58:80, bottomcentre grounded. Full density deliberate1nativepixel clusters, not2xblocks. Do not draw products, smoke, steam, dust, ground, shadow, text or signs.

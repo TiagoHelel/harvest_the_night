@@ -1,0 +1,18 @@
+2026-10-07 | Owner requested all packs with review only at the end. Intermediate approval gates waived; final integration approval pending.
+2026-10-07 | milk: palette subset avoids unrelated orange skin/flame borrowing in cream material; keep geometry and alpha unchanged. Keys: ink,ink_soft,night,bone,bone_dark,stone_light,roof,roof_dark
+2026-10-07 | wool: palette subset avoids unrelated orange skin/flame borrowing in cream material; keep geometry and alpha unchanged. Keys: ink,ink_soft,night,bone,bone_dark,gold_light
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-07 | egg-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | milk-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | truffle-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | truffle_spot-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | wool-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | Correct archive path guard to protect both pack-relative and repo-relative selected recipe paths. Restore selected raw returns byte-for-byte; exact ImageGen PNG hashes verified. Native art unchanged.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+
+2026-10-10 | Resumed A029 via assets.py next. Read the full brief, contract, history and checks. Inspected native icon audit, all five reference sheets and truffle-ground compositions at 1x and 4x by day/night. --check passes and all checks true. All nine output/source/prompt hashes verified; review HTTP 200 matches local bytes. Added a nearest-only diagnostic day/night sheet under preview/; no native pixels changed or generated. No rejected candidates remain; historical selected-source archive mistakes were corrected as logged. Awaiting explicit integration approval. Owner should judge egg/milk/wool/truffle readability at 10x10 and the truffle spot on grass versus rock, stump and tilled soil. HUD remains unrelit; the world prop uses world lighting.
+
+2026-10-10 | Owner integration approval
+Owner words, verbatim: "aprovado"
+Approved all nine animal goods exports, including the world truffle spot. No art pixels changed. Recorded every export hash in APPROVAL.json. Claude integrates through game task 0211.
+Approval verification: second build byte-identical; --check passed; all checks true; nine approved export hashes match. Wrote Claude handoff with nine aliases, UI display roles, world spot metadata and task 0211 steps. Rejected candidates retained: 0. No other pack processed.

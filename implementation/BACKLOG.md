@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **189 / 296 done**
+`#################.......`  **204 / 296 done**
 
-0 doing / 107 todo / 0 blocked across 18 phases.
+0 doing / 92 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-107 task(s) left, the ready ones first, then what they
+92 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -156,146 +156,6 @@ The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131'
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the cursor in each state over dark ground - opened and looked at, in `implementation/shots/0146/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0147 - Art: the night hotbar and HUD icons
-
-Waits for Codex art A005.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/hotbar.gd, src/ui/night_hud.gd, tools/check_ui_art.py, tools/show_art.py`.
-
-The icons of the night - the eight defences, the flare, START, speed and the moon of the dawn countdown - from Codex pack A005, replacing the hotbar's and the night HUD's placeholders.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A005` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A005-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded lists of `tools/check_ui_art.py` and the `--ui` showcase
-- Runtime: one raw source each, cut into a 16x16 `icon_<id>` and a 10x10 `hud_<id>` (visible at most 14 and 8 px) for `gun_tower`, `auto_crossbow`, `flame_tower`, `mortar`, `mine`, `fence`, `wall`, `barricade`, the flare, START, speed and the dawn moon
-- The hotbar (0133) takes the 16x16 cuts and the night HUD (0139) the 10x10 ones, replacing their placeholders by deleting A005's entries from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A005 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A005
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0161 - Art: seasons and moons
-
-Waits for Codex art A010.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/raster_art.gd (generated), src/ui/placeholder_art.gd, src/ui/forecast_panel.gd`.
-
-The approved season, moon, boss-night and calm-night icons take the place of the forecast's code-drawn marks.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A010` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A010-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, `ArtPlacement` if needed).
-- Runtime names: `ui/icon_<id>` 16x16 pivot (8,8) and `ui/hud_<id>` 10x10 pivot (5,5) for `spring`, `summer`, `autumn`, `winter`, `full_moon`, `boss_night` and `calm_night`, both cut from one source crop like the resource icons, binary alpha, no text. `tools/check_ui_art.py` is hard-coded to the fifteen resource icons of task 0018: give it a calendar family with the same clipping and size rules
-- Replace 0158's code-drawn marks in the forecast panel by deleting their entries from `src/ui/placeholder_art.gd`; `python tools/placeholders.py` no longer lists A010
-- Set the pack to integrated: `python implementation/backlog/assets.py set A010 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the icons in the real game - `python tools/shot.py 0161 forecast_dusk forecast_build --fhd` - in `implementation/shots/0161/`, opened and looked at
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0162 - Art: forecast heads
-
-Waits for Codex art A011.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/raster_art.gd (generated), src/ui/placeholder_art.gd, src/ui/forecast_panel.gd`.
-
-The forecast names what is coming with the enemies' own faces: the approved heads of the walker, runner, tank, breaker and Giant replace the cropped walk frames.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A011` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A011-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, `ArtPlacement` if needed).
-- Runtime names: `ui/head_<kind>` 16x16, pivot (8,8), for `walker`, `runner`, `tank`, `breaker` and `giant`, binary alpha, matching each enemy's sprite. `tools/check_ui_art.py` gains a heads family that requires a head for each of these five; later enemies bring theirs in their own packs and add themselves to the list
-- Replace 0158's cropped walk-frame heads by deleting their entries from `src/ui/placeholder_art.gd`; the panel asks for `ui/head_<kind>` and nothing else changes; `python tools/placeholders.py` no longer lists A011
-- Set the pack to integrated: `python implementation/backlog/assets.py set A011 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the heads in the real game - `python tools/shot.py 0162 forecast_dusk forecast_build --fhd`, with the scenarios moved to a date whose forecast lists all five kinds (Spring 14 does while it is Endless-generated with the Giant's row; check it on the day) - in `implementation/shots/0162/`, opened and looked at
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0163 - Art: winter ground
-
-Waits for Codex art A012.  Likely files: `assets/art_source/terrain/, assets/art_source/crops/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_terrain_art.py, tools/check_crop_art.py, tools/gen_sprites.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
-
-Winter gets real snow on the ground: the approved snowy grass, path, soil, tilled ground, edges and shores replace the remapped stand-in of 0159.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A012` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A012-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/terrain/` (and `crops/` for the tilled tiles), manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_terrain_art.py`, `tools/check_crop_art.py`, `ArtPlacement` if needed).
-- Runtime names: `terrain/<name>_winter` for `grass`, `grass_b`-`grass_d`, `path` and `soil`, the winter `edge_*`/`shore_*` sides and corners, and `crops/tilled_winter` / `tilled_wet_winter` - 16x16, opaque, seamless, the same set as today's (the wet tile still at least 20 RGB darker, `check_crop_art.py`). The 256x80 atlas is ASCII-owned and built by `tools/gen_sprites.py` from the raster recipes (and asserted against it): build the winter atlas there the way the handoff says (new rows or a second atlas) and let 0159's hook swap it in
-- Winter's ground stops going through 0159's remap (the remap stays for anything this pack does not cover); delete the stand-in entries from `src/ui/placeholder_art.gd`, so `python tools/placeholders.py` no longer lists A012
-- Set the pack to integrated: `python implementation/backlog/assets.py set A012 integrated`.
-
-  - done when: `python tools/check_terrain_art.py`, `python tools/check_crop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0163 season_winter season_winter_night --fhd` - in `implementation/shots/0163/`, opened and looked at: no seam, edge or shore breaks the snow
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0164 - Art: trees through the seasons
-
-Waits for Codex art A013.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
-
-Blossom in spring, colour in autumn, bare branches under snow in winter: the approved seasonal trees and snow caps replace the remapped stand-ins of 0159.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A013` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A013-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_prop_art.py`, `ArtPlacement` if needed).
-- Runtime names: `props/tree_spring`, `tree_autumn` and `tree_winter`, and the same for `tree_b` - 40x48, pivot (20,44), sharing canvas, pivot, scale and palette with the base tree (`variant_of` rules); summer is today's tree. The tree wind motion (`tree_wind_showcase.gd`) still applies
-- Generic 16x16 snow caps drawn over each stump, rock, seam and ore node in winter, and over 0156's new nodes and stumps (one per 2x2 cell); the caps are an overlay in the view, never a change to the occupant. 0159's lookup finds the seasonal frames, and the remap leaves them alone
-- Delete the stand-in entries from `src/ui/placeholder_art.gd`; `python tools/placeholders.py` no longer lists A013
-- Set the pack to integrated: `python implementation/backlog/assets.py set A013 integrated`.
-
-  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0164 noon season_autumn season_winter season_winter_night --fhd` - in `implementation/shots/0164/`, opened and looked at: the trees change with the season and every cap sits on its node
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0197 - Art: trampled crops and tilled ground
-
-Waits for Codex art A014.  Likely files: `assets/art_source/crops/, assets/art_source/manifest.json, tools/check_crop_art.py, src/ui/world_view.gd`.
-
-The trampled crop of 0155, the withered crop of 0171 and the tilled-grass edges of 0167 get their approved art in place of their stand-ins.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A014` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A014-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/crops/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_crop_art.py`, which checks `tilled`/`tilled_wet` today).
-- Runtime names: the trampled and withered crops (16x16, pivot (8,14)) and the edge pieces under the mask names 0167 wrote into the pack's table; ground pieces keep the soil conventions (pivot (8,16), wet at least 20 RGB darker)
-- Replace the stand-ins in `world_view.gd`'s plot drawing left by 0155, 0167 and 0171, and flip A014's placeholder-registry entries to raster so 0120's check stops listing it
-- Set the pack to integrated: `python implementation/backlog/assets.py set A014 integrated`.
-
-  - done when: `python tools/check_crop_art.py` and `python tools/show_art.py --crops --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0197/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0198 - Art: spring crops
-
-Waits for Codex art A015.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
-
-Potato, garlic and strawberry, and the spring seed packets, get their approved art in place of 0168's tinted stand-ins.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A015` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A015-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/crops` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_crop_art.KINDS`; `tools/check_ui_art.py`, which counts only task 0018's icons today - give it the new family rather than breaking that count).
-- Runtime names: `<crop>_0..3` for potato, garlic and strawberry (16x16, pivot (8,14)), strawberry's regrowing stage under the name 0172 draws, and `ui/icon_<id>` (16x16) with `ui/hud_<id>` (10x10) cut from one source for the produce and the carrot, potato, garlic and strawberry seed packets (ids from 0170)
-- Replace the stand-ins of 0168, 0170 and 0172 and flip A015's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A015 integrated`.
-
-  - done when: `python tools/check_crop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --crops --check` and `--ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0198/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0199 - Art: summer crops
-
-Waits for Codex art A016.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
-
-Pepper, sunflower and melon, corn's regrowing stage and the summer seed packets get their approved art.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A016` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A016-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/crops` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_crop_art.KINDS`, `tools/check_ui_art.py`).
-- Runtime names: `<crop>_0..3` for pepper and melon (16x16, pivot (8,14)) and the tall sunflower at the canvas and pivot 0168 settled, pepper's and corn's regrowing stages, icons (16x16 + 10x10 from one source) for the produce and the corn, pepper, sunflower and melon seed packets
-- Replace the stand-ins of 0168, 0170 and 0172 and flip A016's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A016 integrated`.
-
-  - done when: `python tools/check_crop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --crops --check` and `--ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0199/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
 ### 0200 - Art: autumn crops
 
 Waits for Codex art A017.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
@@ -330,78 +190,6 @@ The copper, iron and gold sprinklers of 0178 get their approved bodies and icons
   - done when: `python tools/check_prop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --props --check` and `--ui --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0201/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0202 - Art: tool icons
-
-Waits for Codex art A019.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/workshop_panel.gd`.
-
-Fifteen tool icons - four tools in three tiers and the three rods - replace 0173's stand-ins wherever a tool is shown.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A019` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A019-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, which counts only task 0018's icons today - give it the new family).
-- Runtime names `ui/icon_<tool>_<tier>` (16x16, pivot (8,8)) and `ui/hud_<tool>_<tier>` (10x10, pivot (5,5)) cut from one source, for hoe, can, axe and pickaxe at basic/iron/gold and the rod at bamboo/fibre/iron, as 0173 named the tiers
-- Replace the stand-ins in the workshop panel, the inventory and the stall (0190) and flip A019's placeholder-registry entries to raster. The tool in the farmer's hand stays code-tinted
-- Set the pack to integrated: `python implementation/backlog/assets.py set A019 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0202/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0203 - Art: material icons
-
-Waits for Codex art A020.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
-
-Copper, coal, gold, hardwood, hay and straw get their approved icons in the inventory, the HUD and the panels.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A020` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A020-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`).
-- Runtime names `ui/icon_<id>` (16x16) and `ui/hud_<id>` (10x10) cut from one source, for the ids 0176, 0177 and 0184 gave copper, coal, gold, hardwood, hay and straw
-- Replace their stand-ins and flip A020's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A020 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0203/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0204 - Art: copper, coal, gold and hardwood
-
-Waits for Codex art A021.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/art_placement.gd`.
-
-The new quarry nodes and the big hardwood stumps get their approved art in the world.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A021` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A021-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`; `ArtPlacement` if the 2x2 stump needs it).
-- Runtime names: copper, coal and gold nodes at 16x16, pivot (8,14), each with a `_b` variant through `WorldView.PROP_VARIANTS`/`_prop_variant` like `ore`/`ore_b`; the 2x2 stump whole and chipped at the 32x32 canvas and pivot 0177 settled, placed at the bottom centre of its footprint
-- Replace the stand-ins of 0176 and 0177 and flip A021's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A021 integrated`.
-
-  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --props --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0204/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0205 - Art: fish
-
-Waits for Codex art A022.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/fish_book.gd`.
-
-Every species and the four legendaries get their icons and fish-book portraits.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A022` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A022-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, plus the 32x32 portraits as a family of their own).
-- Runtime names: `ui/icon_<species>` (16x16) and `ui/hud_<species>` (10x10) from one source per species, for the list 0179 and 0182 settled, and a 32x32 book portrait each
-- Replace the stand-ins in the inventory, the catch line and the fish book, and flip A022's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A022 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0205/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0206 - Art: fishing gear and the minigame
@@ -494,24 +282,6 @@ Today's 24x24 cow and chicken are redrawn at the farmer's scale with idle, walk,
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0210/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0211 - Art: animal goods
-
-Waits for Codex art A029.  Likely files: `assets/art_source/ui/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_ui_art.py, tools/check_prop_art.py`.
-
-Egg, milk, wool and truffle get their icons, and the pig's dig spot its look in the world.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A029` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A029-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui` and `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`, `check_prop_art.NAMES`).
-- Runtime names: `ui/icon_<id>` (16x16) and `ui/hud_<id>` (10x10) from one source for the ids 0184 and 0185 gave egg, milk, wool and truffle, and the 16x16 dig spot drawn where 0185 marks one
-- Replace their stand-ins and flip A029's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A029 integrated`.
-
-  - done when: `python tools/check_ui_art.py`, `python tools/check_prop_art.py` and `python tools/show_art.py --ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0211/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
 ### 0212 - Art: the coop and the barn
 
 Waits for Codex art A030.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_station_art.py, src/ui/art_placement.gd`.
@@ -528,42 +298,6 @@ The coop and the barn get their approved art - whole, hurt and wrecked-but-stand
   - done when: `python tools/check_station_art.py` and `python tools/show_art.py --stations --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0212/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0213 - Art: the artisan machines
-
-Waits for Codex art A031.  Likely files: `assets/art_source/buildings/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_station_art.py`.
-
-The keg, the preserves jar, the dairy, the loom and the mill get their approved art, idle and working.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A031` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A031-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_station_art.FAMILY`).
-- Runtime names: `<id>`, `<id>_active` and `<id>_hurt` (and the wreck if 0187 chose it) for the five, at the sizes 0188 settled, with `light_xy`/`smoke_xy` on opaque active pixels; full density, not in `ArtPlacement.visual_scale`'s 2.0 list
-- Replace the stand-ins of 0187 and 0188 and flip A031's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A031 integrated`.
-
-  - done when: `python tools/check_station_art.py` and `python tools/show_art.py --stations --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0213/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0214 - Art: artisan goods
-
-Waits for Codex art A032.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
-
-Wine, juice, jelly, pickles, cheese, butter, cloth, sandbags, flour, bread and sugar get their approved icons.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A032` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A032-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_ui_art.py`).
-- Runtime names: `ui/icon_<id>` (16x16) and `ui/hud_<id>` (10x10) from one source for the eleven ids 0187, 0188 and 0192 gave them
-- Replace their stand-ins and flip A032's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A032 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0214/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0215 - Art: the shipping bin
@@ -1756,7 +1490,7 @@ Autumn opens the north and brings the two enemies that ignore the shape of a maz
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -2165,7 +1899,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (18/23)
+## 10 - Sleep is the night  (19/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -2188,10 +1922,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
-- [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
+- [x] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md)
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
-## 11 - Calendar and seasons  (12/16)
+## 11 - Calendar and seasons  (16/16)
 
 - [x] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
 - [x] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
@@ -2205,12 +1939,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0158** [The forecast](prompts/0158-forecast.md)
 - [x] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md)
 - [x] **0160** [The end of the year](prompts/0160-year-end.md)
-- [ ] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md) - waits for art A010
-- [ ] **0162** [Art: forecast heads](prompts/0162-art-forecast-heads.md) - waits for art A011
-- [ ] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md) - waits for art A012
-- [ ] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md) - waits for art A013
+- [x] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md)
+- [x] **0162** [Art: forecast heads](prompts/0162-art-forecast-heads.md)
+- [x] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md)
+- [x] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md)
 
-## 12 - The day that pays  (32/53)
+## 12 - The day that pays  (42/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -2244,24 +1978,24 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0194** [The day's economy](prompts/0194-day-economy.md)
 - [x] **0195** [Teaching the new day](prompts/0195-day-tutorial.md)
 - [x] **0196** [Checkpoint: is the day good on its own?](prompts/0196-checkpoint-day.md)
-- [ ] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md) - waits for art A014
-- [ ] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md) - waits for art A015
-- [ ] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md) - waits for art A016
+- [x] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md)
+- [x] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md)
+- [x] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md)
 - [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md) - waits for art A017
 - [ ] **0201** [Art: sprinklers](prompts/0201-art-sprinklers.md) - waits for art A018
-- [ ] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md) - waits for art A019
-- [ ] **0203** [Art: material icons](prompts/0203-art-material-icons.md) - waits for art A020
-- [ ] **0204** [Art: copper, coal, gold and hardwood](prompts/0204-art-ore-hardwood.md) - waits for art A021
-- [ ] **0205** [Art: fish](prompts/0205-art-fish-icons.md) - waits for art A022
+- [x] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md)
+- [x] **0203** [Art: material icons](prompts/0203-art-material-icons.md)
+- [x] **0204** [Art: copper, coal, gold and hardwood](prompts/0204-art-ore-hardwood.md)
+- [x] **0205** [Art: fish](prompts/0205-art-fish-icons.md)
 - [ ] **0206** [Art: fishing gear and the minigame](prompts/0206-art-fishing-gear.md) - waits for art A023
 - [ ] **0207** [Art: the farmer fishing](prompts/0207-art-farmer-fishing.md) - waits for art A024
 - [ ] **0208** [Art: the farmer tending animals](prompts/0208-art-farmer-care.md) - waits for art A025
 - [ ] **0209** [Art: sheep and pigs](prompts/0209-art-farm-animals.md) - waits for art A026
 - [ ] **0210** [Art: the cow and the chicken redrawn](prompts/0210-art-cow-chicken.md) - waits for art A027
-- [ ] **0211** [Art: animal goods](prompts/0211-art-animal-goods.md) - waits for art A029
+- [x] **0211** [Art: animal goods](prompts/0211-art-animal-goods.md)
 - [ ] **0212** [Art: the coop and the barn](prompts/0212-art-coop-barn.md) - waits for art A030
-- [ ] **0213** [Art: the artisan machines](prompts/0213-art-machines.md) - waits for art A031
-- [ ] **0214** [Art: artisan goods](prompts/0214-art-artisan-goods.md) - waits for art A032
+- [x] **0213** [Art: the artisan machines](prompts/0213-art-machines.md)
+- [x] **0214** [Art: artisan goods](prompts/0214-art-artisan-goods.md)
 - [ ] **0215** [Art: the shipping bin](prompts/0215-art-shipping-bin.md) - waits for art A033
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
@@ -2349,7 +2083,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0287** [Collections and achievements](prompts/0287-collections.md) - needs 0253, 0254, 0255
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0147, 0161, 0162, 0163, 0164, 0197, 0198, 0199, 0200, 0201, 0202, 0203, 0204, 0205, 0206, 0207, 0208, 0209, 0210, 0211, 0212, 0213, 0214, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0258, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (0/7)
 

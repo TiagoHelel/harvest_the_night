@@ -303,8 +303,8 @@ LOG_TITLE,0,WHAT HAPPENED,O QUE ACONTECEU
 LOG_WAVE_BEGAN,0,wave %d of %d: %s,onda %d de %d: %s
 NHUD_BOSS,0,%s  %d/%d,%s  %d/%d
 NHUD_DAWN,110,DAWN %d:%02d,AMANHECER %d:%02d
-NHUD_FLARE,46,FLARE,SINAL
-NHUD_FLARE_CHARGE,46,%d%%,%d%%
+NHUD_FLARE,34,FLARE,SINAL
+NHUD_FLARE_CHARGE,34,%d%%,%d%%
 NHUD_HINT_AIM,0,%s: fire the flare,%s: soltar o sinal
 NHUD_HINT_PLACE,0,%s: place %s,%s: colocar %s
 NHUD_HINT_REPAIR,0,%s: mend %s,%s: consertar %s
@@ -316,9 +316,9 @@ NHUD_LEFT,110,%d LEFT,FALTAM %d
 NHUD_NIGHT,110,NIGHT %d,NOITE %d
 NHUD_SKIP,46,SKIP,PULAR
 NHUD_SKIP_TIP,0,run the rest of the night now,rodar o resto da noite agora
-NHUD_SPEED,40,%dx,%dx
-NHUD_START,146,START,COMEÇAR
-NHUD_START_IN,146,START %d,AGORA %d
+NHUD_SPEED,18,%dx,%dx
+NHUD_START,126,START,COMEÇAR
+NHUD_START_IN,126,START %d,AGORA %d
 NHUD_WAVE,110,WAVE %d/%d,ONDA %d/%d
 OPT_BACK,0,BACK,VOLTAR
 OPT_EMPTY,0,nothing to set yet,nada para ajustar ainda

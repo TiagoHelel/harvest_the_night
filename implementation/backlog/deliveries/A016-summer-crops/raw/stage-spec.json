@@ -1,0 +1,110 @@
+{
+  "pepper": {
+    "canvas": [
+      16,
+      16
+    ],
+    "pivot": [
+      8,
+      14
+    ],
+    "limits": [
+      [
+        2,
+        3
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        10,
+        12
+      ],
+      [
+        7,
+        12
+      ]
+    ],
+    "poses": [
+      "seed mound, height2-3pixels",
+      "two green leaves, height4-5pixels",
+      "small bushy plant, height7-8pixels",
+      "bush with2-3 hanging RED chilies, height10-12pixels",
+      "regrow: same bush with WHITE flowers and small GREEN pods, NO red chilies, height7-12pixels"
+    ]
+  },
+  "sunflower": {
+    "canvas": [
+      16,
+      32
+    ],
+    "pivot": [
+      8,
+      30
+    ],
+    "limits": [
+      [
+        2,
+        3
+      ],
+      [
+        5,
+        7
+      ],
+      [
+        14,
+        18
+      ],
+      [
+        24,
+        28
+      ]
+    ],
+    "poses": [
+      "seed mound, height2-3pixels",
+      "two leaves, height5-7pixels",
+      "stalk with broad leaves and closed GREEN bud, height14-18pixels",
+      "stalk2pixelswide, broad leaves and big YELLOW flowerhead9-12pixelswide with a brown seeddisc, tilted a little to viewer, height24-28pixels"
+    ]
+  },
+  "melon": {
+    "canvas": [
+      16,
+      16
+    ],
+    "pivot": [
+      8,
+      14
+    ],
+    "limits": [
+      [
+        2,
+        3
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        8,
+        11
+      ]
+    ],
+    "poses": [
+      "seed mound, height2-3pixels",
+      "two broad leaves, height4-5pixels",
+      "spreading vine with leaves and one YELLOW flower, height6-7pixels",
+      "one striped GREEN WATERMELON10-13pixelswide lying on the vine, height8-11pixels"
+    ],
+    "revision": 2
+  }
+}

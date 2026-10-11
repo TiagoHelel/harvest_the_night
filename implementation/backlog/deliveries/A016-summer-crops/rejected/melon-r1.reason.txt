@@ -1,0 +1,1 @@
+Rejected: ripe stage reduced to14wide by7tall instead of8-11tall; raw vine too wide. Replaced by ImageGen r2; no native pixels repaired.

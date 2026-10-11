@@ -1,0 +1,33 @@
+{
+  "pack": "A032",
+  "date": "2026-10-10",
+  "status": "approved for integration",
+  "owner_words": "esses estao aprovados, tem mais pra gerar?",
+  "approved_folder": "implementation/backlog/deliveries/A032-artisan-goods",
+  "approved_sha256": {
+    "native/hud_bread/none/01.png": "5b46666672ecd7ca7e2c7f63f904de3827cad73ed5041e5c5d1eae53979812ff",
+    "native/hud_butter/none/01.png": "698ad83ea7efbb30d333befd44e7fb251b3552706d9222bf1b9a82e8cb2d9fc0",
+    "native/hud_cheese/none/01.png": "d1e74124dd8395ce9e3bf1f6e42806fe101dd5a6eb77c16d57e2c83d8e3d1c08",
+    "native/hud_cloth/none/01.png": "c1c45bcd852db859e436b5355fe0e130ad6c752878ba05c6df3bdc6e7c0ceec3",
+    "native/hud_flour/none/01.png": "dbb7be13446b91d207f8f018fa4e7511392bb2dd0bdcc5c218eddc66b600b3df",
+    "native/hud_jelly/none/01.png": "17795ca0626eb8cc60123066e8a3e62a9891012d905102073180a2f8fecd06b3",
+    "native/hud_juice/none/01.png": "6c0fa156b5ab556e5cf58b428d117825ea9b22b43a1f84b8987b16a0af41a32f",
+    "native/hud_pickles/none/01.png": "b8a8f28aa0dc591dd9e6f50f128c83ada0c50cee36f6bc06a8e095244efe759d",
+    "native/hud_sandbag/none/01.png": "1c2b83eb0fefb80e9272893deea8ee1e8fa63c38e7d9fd3ff3fdbaa5f8ed8c76",
+    "native/hud_sugar/none/01.png": "f18ada6f725df87dc77342940860ce6a4829b4f49424ca70151131b4147c7a84",
+    "native/hud_wine/none/01.png": "516cd3c38cbe704634179d6dfd33e520324b6e54c5704ac727cc109e02adf842",
+    "native/icon_bread/none/01.png": "34e65fc0b6aca5937828b2799de494514cb40ebd7a0b1ab418d7dd3286428dfa",
+    "native/icon_butter/none/01.png": "3301135823a4117c5cc5eb192aecc5c004a093cf3501f9f682d2c3fc7886e2e1",
+    "native/icon_cheese/none/01.png": "ea36273b6a5a6ca54f4ed93bcb3221f5642fc707e585dc399270822128c6dbbd",
+    "native/icon_cloth/none/01.png": "cce5a66e036a598e90b5936c049c42aeccea0fb40af83def5cb1f91d4def4b47",
+    "native/icon_flour/none/01.png": "e15a68aaf2fbf543c51d1a83ea93b88a7aad93fa2828ea4c862531a4f367f993",
+    "native/icon_jelly/none/01.png": "a5c3caa2c48f6c91fe9b5ca3165e8d83ed5b3baff70c1752c03f4eb0751b799e",
+    "native/icon_juice/none/01.png": "c0276134d3ac99c5fe39996f5b3d9c4d521b69ad80cc406e966a53f7acd4a173",
+    "native/icon_pickles/none/01.png": "9c7d13bf3949a5bb403244f221976c8786286f2a485c9d0d22dbd32d44152114",
+    "native/icon_sandbag/none/01.png": "0139f15aa76fd8862787a18f730fef4aaf85fbba44c26ffdfb8e8ff2d161d3da",
+    "native/icon_sugar/none/01.png": "2889a04160425292ffe59ec48ff4cb7dc7fd17f8cd9ad4866c5b03a53c64e050",
+    "native/icon_wine/none/01.png": "514101c6f6f803c822b9630dd2459df9e00fe075ad09bf1e5e050cec514953dd"
+  },
+  "frames": 22,
+  "runtime_integrated": false
+}

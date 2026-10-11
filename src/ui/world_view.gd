@@ -1323,7 +1323,10 @@ func _refresh() -> void:
 		if _stand_in_prop(id, int(idx), cell, anchor):
 			continue
 		var footprint := Building.bounds_at(_state, cell).size if Building.size_of(id) != Vector2i.ONE else Vector2i.ONE
-		var whole := _texture_for(_station_art(id, on, anchor))
+		# A gathering node in its struck state (task 0177): A021's chipped big
+		# stump from the first swing (task 0204).
+		var drawn := struck_art(_state, id, anchor) if Gathering.is_node(id) else _station_art(id, on, anchor)
+		var whole := _texture_for(drawn)
 		var grouped := footprint != Vector2i.ONE and (PlaceholderArt.has_frame(whole.resource_path)
 			or (whole.get_width() >= footprint.x * GameData.TILE_SIZE
 			and whole.get_height() >= footprint.y * GameData.TILE_SIZE))
@@ -1343,6 +1346,8 @@ func _refresh() -> void:
 		else:
 			logical_cells.append(idx)
 		sprite.set_meta("logical_cells", logical_cells)
+		if grouped and Gathering.is_node(id):
+			sprite.set_meta("prop_art", drawn)
 		# **Under a tarp by day** (task 0223), dressed as it is made, so a
 		# rebuild never shows a sleeping tower bare for a frame.
 		if tarps and Transition.TARPS.has(id):
@@ -1441,7 +1446,9 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 	sprite.set_meta("prop_art", art)
 	ArtPlacement.place(sprite, anchor, Building.size_of(id))
 	sprite.scale *= PlaceholderArt.art_scale(art)
-	sprite.modulate = PlaceholderArt.art_tint(art)
+	# The stand-in's own tint only: A013's snow cap (task 0164) is a child of
+	# the node and stays snow on a copper, coal or gold stand-in.
+	sprite.self_modulate = PlaceholderArt.art_tint(art)
 	if _season != null and _season.season() == SeasonView.WINTER and id in SeasonView.CAPPED:
 		_cap(sprite, id, Building.size_of(id) != Vector2i.ONE)
 	var logical_cells: Array = []
@@ -1490,19 +1497,20 @@ func _worn_stand_in(id: StringName, on: Dictionary) -> StringName:
 
 
 ## The art a gathering node is drawn as: `<id>_chipped` from its first swing
-## to its last when the registry names that state (A021's big stump, task
-## 0177), and its own otherwise.
+## to its last when that state is drawn - A021's big stump (task 0177), raster
+## art since task 0204 - and its own otherwise.
 static func struck_art(state: Dictionary, id: StringName, anchor: Vector2i) -> StringName:
 	var chipped := StringName("%s_chipped" % id)
-	if not Gathering.is_node(id) or PlaceholderArt.art(chipped).is_empty():
+	if not Gathering.is_node(id) or not PlaceholderArt.has_frame(PROP_DIR + str(chipped) + ".png"):
 		return id
 	var full := int((GameData.GATHERING[id] as Dictionary)["hits"])
 	return chipped if Gathering.swings_left(state, anchor) < full else id
 
 
 ## **A snow cap** (task 0159) over a node in winter: A013's own, or its
-## generic one - and until 0164 the stand-in, which is the host's own frame
-## through the snow mask, the snow alone, so it sits exactly on the host.
+## generic one - raster art since task 0164, drawn at the host's canvas
+## origin, never stretched. A registered stand-in, if a later host brings
+## one, is the host's own frame through the snow mask, the snow alone.
 func _cap(host: Sprite2D, art: StringName, two_by_two: bool) -> void:
 	var cap := SeasonView.cap_for(art, two_by_two)
 	var sprite := Sprite2D.new()
@@ -1525,8 +1533,9 @@ func _cap(host: Sprite2D, art: StringName, two_by_two: bool) -> void:
 
 
 ## **The ground in its season** (task 0159): the remap on the terrain's
-## material - or, once A012 brings a winter atlas, that atlas on the tile set
-## and the remap off it. The cells are never laid again for it.
+## material - or, where a season has its own atlas (A012's winter, since task
+## 0163), that atlas on the tile set and the remap off it. The cells are never
+## laid again for it.
 func _apply_ground_art() -> void:
 	if _season == null or _terrain.tile_set == null:
 		return
@@ -2024,9 +2033,13 @@ func _refresh_plots() -> void:
 			var stage := Farming.stage(_state, cell)
 			_plot_sprite("%s_regrow" % crop if stage == int(GameData.CROPS[crop]["stages"]) else "%s_%d" % [crop, stage], cell)
 		elif here.has("withered"):
-			_withered_sprite(StringName(here["withered"]), cell)
+			# A crop left behind by the season (0171): A014's withered stalks
+			# (task 0197), whatever it was.
+			_plot_sprite("withered", cell)
 		elif here.has("trampled"):
-			_trampled_sprite(StringName(here["trampled"]), cell)
+			# A crop the horde walked through (0155): A014's, pressed into the
+			# mud (task 0197).
+			_plot_sprite("trampled", cell)
 
 
 ## The lawn cells the hoe has turned: plots on grass, by cell index.
@@ -2125,55 +2138,6 @@ func _plot_edge_sprite(art: String, cell: Vector2i, quarter_turns: int) -> void:
 		sprite.material = _season.ground
 	sprite.set_meta("plot_cell", Grid.index(cell))
 	sprite.set_meta("plot_art", art)
-	_plots.add_child(sprite)
-	_plot_sprites.append(sprite)
-
-
-## **A crop left behind by the season** (0171): stage 2 greyed through A014.
-func _withered_sprite(crop: StringName, cell: Vector2i) -> void:
-	if not PlaceholderArt.is_drawn(CROP_DIR + "withered.png"):
-		_plot_sprite("withered", cell)
-		return
-	# A014's stand-in: the crop's stage 2, desaturated without editing art.
-	var frame := "%s_2" % crop
-	_plot_sprite(frame, cell)
-	var sprite: Sprite2D = _plot_sprites.back()
-	var material := ShaderMaterial.new()
-	material.shader = WITHERED_SHADER
-	sprite.material = material
-	sprite.modulate = Color.WHITE
-	sprite.set_meta("plot_art", "withered")
-
-
-## **A crop the horde walked through** (task 0155). A014 draws it; until the
-## pack lands it is drawn here (0120's road, `PlaceholderArt.is_drawn`): the
-## crop's ripe frame, pressed flat against the soil and darkened, so it reads
-## as damage beside the rows that were spared. The ripe frame rather than the
-## first stage: a sprout three pixels tall pressed to half is a dash that
-## reads as bare earth, not as a plant somebody walked on.
-func _trampled_sprite(crop: StringName, cell: Vector2i) -> void:
-	var path := CROP_DIR + "trampled.png"
-	if not PlaceholderArt.is_drawn(path):
-		_plot_sprite("trampled", cell)
-		return
-	var ripe := int((GameData.CROPS.get(crop, {}) as Dictionary).get("stages", 1)) - 1
-	var texture := _crop_texture("%s_%d" % [crop, maxi(ripe, 0)])
-	if texture == null:
-		return
-	var sprite := Sprite2D.new()
-	sprite.texture = texture
-	sprite.centered = false
-	ArtPlacement.place(sprite, cell)
-	var runtime := CROP_DIR + "%s_%d.png" % [crop, maxi(ripe, 0)]
-	var shape := PlaceholderArt.frame(runtime)
-	if shape.has("stand_in"):
-		sprite.offset = -Vector2(shape["pivot"])
-	# Flattened onto the ground: half as tall. `place` puts the origin at the
-	# sprite's foot, so its foot stays where it stood.
-	sprite.scale = Vector2(sprite.scale.x, sprite.scale.y * 0.5)
-	sprite.modulate = TRAMPLED_TINT * PlaceholderArt.art_tint(crop)
-	sprite.set_meta("plot_cell", Grid.index(cell))
-	sprite.set_meta("plot_art", "trampled")
 	_plots.add_child(sprite)
 	_plot_sprites.append(sprite)
 
@@ -2286,10 +2250,6 @@ const BUILDING_DIR := "res://sprites/buildings/"
 ## balance-neutral tweak failed the guard.
 const ENEMY_WALK_TICKS := 6
 const CROP_DIR := "res://sprites/crops/"
-## The trampled stand-in's darkening (task 0155): brown and dim, the colour of
-## leaves pressed into mud.
-const TRAMPLED_TINT := Color(0.55, 0.42, 0.32)
-const WITHERED_SHADER: Shader = preload("res://src/ui/withered.gdshader")
 
 
 func _build_terrain_tileset() -> TileSet:
@@ -2388,6 +2348,9 @@ func _barrier_name(on: Dictionary, cell: Vector2i) -> StringName:
 const PROP_VARIANTS := {
 	&"tree": [&"tree", &"tree_b"], &"rock": [&"rock", &"rock_b"],
 	&"seam": [&"seam", &"seam_b"], &"ore": [&"ore", &"ore_b"],
+	# A021's (task 0204): each forge node's alternate at its master's scale.
+	&"copper_ore": [&"copper_ore", &"copper_ore_b"], &"coal_seam": [&"coal_seam", &"coal_seam_b"],
+	&"gold_ore": [&"gold_ore", &"gold_ore_b"],
 }
 
 
@@ -2409,7 +2372,13 @@ static func station_running(state: Dictionary, id: StringName, anchor: Vector2i)
 		and int(Crafting.progress_at(state, anchor)[0]) > 0
 
 
+## The art a station is drawn as now: its wreck where it stands at 0 HP and
+## the wreck is drawn (A031's machines, task 0213), its wear, or its work.
 func _station_art(id: StringName, on: Dictionary, anchor: Vector2i) -> StringName:
+	if Building.wrecks(id) and int(on.get("hp", 1)) <= 0:
+		var wreck := StringName("%s_wreck" % id)
+		if _exists(wreck):
+			return wreck
 	var worn := _worn(id, on)
 	# Structural wear stays legible while a damaged station is still working.
 	# Real furnace/exhaust effects can still report activity independently.

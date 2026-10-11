@@ -1,0 +1,82 @@
+[
+  {
+    "anim": "icon_milk",
+    "asset": "milk",
+    "stem": "milk-r1",
+    "importer": {
+      "id": "A029/icon_milk",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/milk-r1.png",
+      "crop_xywh": [
+        466,
+        430,
+        323,
+        450
+      ],
+      "content_scale": 0.03111111111111111,
+      "content_anchor_xy": [
+        5,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "bone",
+        "bone_dark",
+        "stone_light",
+        "roof",
+        "roof_dark"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "anim": "hud_milk",
+    "asset": "milk",
+    "stem": "milk-r1",
+    "importer": {
+      "id": "A029/hud_milk",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/milk-r1.png",
+      "crop_xywh": [
+        466,
+        430,
+        323,
+        450
+      ],
+      "content_scale": 0.017777777777777778,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "bone",
+        "bone_dark",
+        "stone_light",
+        "roof",
+        "roof_dark"
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ]
+    }
+  }
+]

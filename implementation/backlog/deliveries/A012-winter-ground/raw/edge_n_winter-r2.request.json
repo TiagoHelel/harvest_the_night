@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 exact winter tile edit target,1254x1254canvas representing16x16logical squarepixel grid. ONE concrete correction: Correct ONLY the boundary endpoint COLOURS. Native row0 column0 androw0 column15 must BOTH be identical cream bone RGB232,224,207, with zero alpha below bothendpoint columns. Retain the complete16pixel top snowline and all existingconnected interior scallops withinrows0..2. Keepevery remaining pixel/margin transparent, whole1254squarecanvas, no outlines/ground. Keep squarecanvas and exactlogicalscale, no crop, rescale or extra texture. Flat pixels only, no gradients, blur, labels, glare, glow, shadow, objects or backdrop. REALalpha outsidetop3rowsoverlay.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\edge_n_winter-r1.png"
+  ],
+  "transparent_background": true
+}

@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 is the exact summer tree edit target. Return the SAME1024x1536portrait canvas and SAME tree bounds approximately x35..997,y220..1355. Preserve every transparent margin and pixel grid. Do NOT enlarge to fill the image, recrop, recenter or rescale. Change ONLY leaf colours to muted autumn ochre, rust and gold. Preserve trunk, roots, each branch, outline silhouette, all individual foliage clusters, camera, lighting and positions exactly. The fixed downstream scale is0.03700440528634361: changing size breaks the asset. No flame/fire/glow, no flame_hot yellow; at most10percent green left. No added fallen leaves, ground or shadow. Real transparent alpha including all margins, one complete tree.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\tree.png"
+  ],
+  "transparent_background": true
+}

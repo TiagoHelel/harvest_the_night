@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 exact winter tile edit target,1254x1254canvas representing16x16logical squarepixel grid. ONE concrete correction: Replace the dominant cream snow BASE with packed dirty-snow colour EXACT RGB184,174,154(#b8ae9a), on at least230of256nativepixels. Keep all borders uniform this SAME beige. Retain onlyTWOsoft joined interior dirtysoil clusters,4-6nativepixels each, all nonbase clusters at least2pixels. NO dots, stray pixels or large cream patches. This is the darker trodden path, not the grass snow field. Keep squarecanvas and exactlogicalscale, no crop, rescale or extra texture. Flat pixels only, no gradients, blur, labels, glare, glow, shadow, objects or backdrop. FullyOPAQUEedge-to-edge terrain tile.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\path_winter-r1.png"
+    ],
+    "transparent_background": false
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\path_winter-r1.png",
+      "sha256": "7d8d1ba17ddec6d344e3039b8a0141bb5fd06bbd23fff71afdbc76335bba8593",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\preview\\input-history\\path_winter-r1-7d8d1ba17d.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-b5895e68-0602-4c58-ae9f-0232f8e2a545.png",
+  "copied_raw_path": "raw/path_winter-r2.png",
+  "raw_sha256": "50527c5f49eaef4b39a5e097144814cc0668b79e1409d3515be11cb7bd7cc4d4",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "accepted",
+  "inspection": "Native cut, repeat pattern, connected clusters and border pixels inspected; final owner review pending."
+}

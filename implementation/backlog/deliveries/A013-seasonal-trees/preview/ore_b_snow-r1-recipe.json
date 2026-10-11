@@ -1,0 +1,55 @@
+{
+  "anim": "ore_b_snow",
+  "stem": "ore_b_snow-r1",
+  "importer": {
+    "id": "A013/ore_b_snow",
+    "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/ore_b_snow-r1.png",
+    "crop_xywh": [
+      310,
+      533,
+      643,
+      271
+    ],
+    "content_scale": 0.012441679626749611,
+    "content_anchor_xy": [
+      3,
+      8
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "palette_keys": [
+      "bone",
+      "moon",
+      "bone_dark",
+      "stone_light",
+      "night"
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ]
+  },
+  "host_fit": [
+    {
+      "host": "ore_b",
+      "pass": true,
+      "within_column_top_band": true,
+      "cap_pixels": 18,
+      "host_pixels": 97,
+      "overlap_pixels": 18,
+      "overlap_fraction": 1.0,
+      "host_covered_fraction": 0.18556701030927836,
+      "width_fraction": 0.5714285714285714,
+      "cap_bounds": [
+        5,
+        6,
+        13,
+        9
+      ]
+    }
+  ]
+}

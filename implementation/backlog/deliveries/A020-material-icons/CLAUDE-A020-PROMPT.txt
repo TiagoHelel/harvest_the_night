@@ -1,0 +1,36 @@
+A020 - Material icons
+Approved for integration on 2026-10-10.
+Owner words, verbatim: "aprovado"
+
+Authoritative folder: implementation/backlog/deliveries/A020-material-icons/
+Read APPROVAL.json, contract.json, checks.json and this handoff. All 12 exports are approved. runtime_integrated remains false; Codex has not integrated game assets. No older delivery folders are superseded. rejected/ and preview/ are review evidence, never source art.
+
+Integration task: 0203. Replace the material icon placeholders of tasks 0176 (copper, coal, gold), 0177 (hardwood) and 0184 (hay, straw). Bind them in inventory, stall, workshop costs and compact HUD, preserving resource IDs copper, coal, gold, hardwood, hay and straw. A021's later world nodes are outside this pack.
+
+Mode A: selected ImageGen raw sources plus the exact per-file importer recipes in contract.json, using tools/palette.py:COLOURS with each recorded palette_keys subset. Preserve source hashes, crop_xywh, content_scale, content_anchor_xy, alpha_threshold 128, canvas and pivot. Each icon_/hud_ pair shares one source and crop, with its recorded 16px and 10px scale. Copper and gold match the existing iron ingot size. Respect the restricted material ramps: gold excludes flame orange; coal keeps visible stone facets; hardwood stays dark; hay is a bale; straw is the selected horizontal straw-r2 sheaf. The historical archive correction restored selected raw returns; do not use old rejection-log entries to discard a current contract source. Approved native exports already match render_source. No runtime/ 2x layer.
+
+Mapping and aliases:
+native/icon_copper/none/01.png -> sprites/ui/icon_copper.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_copper/none/01.png -> sprites/ui/hud_copper.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_gold/none/01.png -> sprites/ui/icon_gold.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_gold/none/01.png -> sprites/ui/hud_gold.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_coal/none/01.png -> sprites/ui/icon_coal.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_coal/none/01.png -> sprites/ui/hud_coal.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_hardwood/none/01.png -> sprites/ui/icon_hardwood.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_hardwood/none/01.png -> sprites/ui/hud_hardwood.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_hay/none/01.png -> sprites/ui/icon_hay.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_hay/none/01.png -> sprites/ui/hud_hay.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+native/icon_straw/none/01.png -> sprites/ui/icon_straw.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role inventory
+native/hud_straw/none/01.png -> sprites/ui/hud_straw.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1.0 s, no loop, direction none | display_role compact_hud
+
+Frame order: 01.png is frame 0. Every state has mirror none: no baked or runtime flips. Metadata points are {} for all static states; native pivots are (8,8) for 16x16 and (5,5) for 10x10. Keep draw scale 1.0, one-pixel clear border and visible bounds at most 14x14 / 8x8. HUD art retains its original colors by day and night; world relight previews are reference only. No deviations were authorized; deviations and supersedes are empty.
+
+Never regenerate, repaint, recolour, resample or retime the approved art. Never cut sprites from GIFs, preview images or screenshots. Never use art files absent from contract.json. Never add a runtime flip to a baked mirror. Preserve distinctions between gold and money, coal and gunpowder/stone, hardwood and wood, hay and straw/wheat. Existing comparison icons are references, not new A020 deliverables.
+
+Integration steps:
+1. Verify all 12 export SHA256 values against contract.json and APPROVAL.json, selected source/prompt hashes, call records and reference provenance. Run the delivery build.py --check. All checks must pass. On a discrepancy, stop the integration task with the precise cause instead of silently repairing approved art.
+2. Promote selected raw sources byte-for-byte into versioned assets/art_source/ui/ locations. Record exact raster recipes, aliases, display_role inventory/compact_hud, prompt/reference/approval provenance and ownership.json entries. Adapt source paths to their promoted locations only; retain hashes and all transform values. Run python tools/import_art.py and verify output hashes match the approved PNGs.
+3. Extend hard-coded UI family art-check lists as needed. Bind the six resource icon pairs to task 0203's inventory, stall, workshop costs and compact HUD. Preserve existing resource IDs and game behavior; do not generate or integrate A021 nodes in this task.
+4. Run python tools/verify.py and recheck promoted hashes. Confirm crop/pair consistency, bounds, padding, iron-matching ingot dimensions, gold without flame orange and coal facets readable on the dark panel.
+5. Inspect FHD game captures by day and night, both 16x16 and 10x10 displays. Confirm each confusion pair remains recognizable and compact coal is visible. Do not world-relight UI art.
+6. Only after integration and validation, run python implementation/backlog/assets.py set A020 integrated. Claude owns this transition. Do not touch deferred farmer packs or the cancelled run pack. Do not commit or push unless the owner asks.

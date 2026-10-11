@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the accepted iron can master edit target. Change ONLY head, joint and handle MATERIAL COLOURS to gold: warm timber and GOLD metal head with gold_dark/gold/gold_light planes and restrained pale glint, no orange flame, coins or glow. Preserve entire1254square canvas, blank margins, object position and scale, every outline pixel cluster, diagonal pose and part shapes. No crop, recentering, stretched parts, new body or extra objects. No background, shadow, panel, label or lettering. True transparent alpha outside one complete tool. Native16x16visiblemax14,compact10x10visiblemax8.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\can_iron-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\can_iron-r1.png",
+      "sha256": "b7d0b90762c4595e508c833e486c9113769d9b1904f0fbecf9d531be15cd9371",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d5c4de0f-b95c-4a50-aece-e562e966b498.png",
+  "copied_raw_path": "raw/can_gold-r1.png",
+  "raw_sha256": "99622bd4a0888ecdf3522b455c0fa77624605e326ccb235016ed40ea3a414a90",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/can_gold-r1.png"
+}

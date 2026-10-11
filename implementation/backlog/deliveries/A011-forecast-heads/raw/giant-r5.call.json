@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the exact giant portrait target. Correct ONLY the too narrow face/bust silhouette. WIDEN the entire head, jaw, ears and tiny cut neck by fifteen percent horizontally; keep exact head height. Make the complete head-plus-cut-neck bounding shape SQUARE, equal visible width and height, including shoulders. Squat massive broad jaw, not an elongated face. Preserve bald rotten face, pale eyes, vest/stone plates, outline, palette, upper-left light and1254square transparent canvas. The source alpha bounding box must be square: width equals height. No body below neck, new clothing, text, scene, glow, shadow or recentering. True transparent margins. Native target is14x14 inside16x16, uniform reduction only.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\giant-r4.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\giant-r4.png",
+      "sha256": "e6b20410f6a86c616aeef4563c6f693e619eb3bc62da9a95e8573ab617a0763e",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\preview\\input-history\\giant-r4-e6b20410f6.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-c3f4a3d4-9b95-4752-a9bb-073d40e2e4fd.png",
+  "copied_raw_path": "raw/giant-r5.png",
+  "raw_sha256": "d148f5d81203b7f0239316387861eb388fdc965ee3c9214120460c14f51bb416",
+  "date": "2026-10-07",
+  "revision": 5,
+  "decision": "accepted",
+  "inspection": "True alpha and both native cuts inspected. Owner final approval pending."
+}

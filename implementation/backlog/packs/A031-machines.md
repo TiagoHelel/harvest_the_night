@@ -1,6 +1,6 @@
 # A031 - Artisan machines
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0213
 - **Dressed by game tasks:** 0187, 0188
 - **Spec after game task:** 0188

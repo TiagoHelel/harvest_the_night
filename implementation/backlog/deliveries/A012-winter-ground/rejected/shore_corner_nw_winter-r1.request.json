@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: stylized-concept. Generate ONE winter shore convex north-west corner overlay, matching Image1 accepted northshore. Complete1254x1254 transparent square represents native16x16, NOT a cropped icon. ONLY top-left3x3 native area can be occupied; every other pixel fully transparent. Rounded snow/sand corner. The top-left pixel, entire top row edge and left column edge must match the northshore left endpoint exactly: at native(0,0)boneRGB232224207, native(0,1)moonRGB207214255, native(0,2)transparent; same values at(1,0),(2,0). Connect the tiny cap in a single joined cluster. Keep width/height<=3nativepixels, no scene, border, labels, frame or tile fill. Native16x16 pivot8,16, uniform whole-square reduction.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\shore_n_winter-r1.png"
+  ],
+  "transparent_background": true
+}

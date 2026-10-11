@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the accepted iron axe master edit target. Change ONLY head, joint and handle MATERIAL COLOURS to gold: warm timber and GOLD metal head with gold_dark/gold/gold_light planes and restrained pale glint, no orange flame, coins or glow. Preserve entire1254square canvas, blank margins, object position and scale, every outline pixel cluster, diagonal pose and part shapes. No crop, recentering, stretched parts, new body or extra objects. No background, shadow, panel, label or lettering. True transparent alpha outside one complete tool. Native16x16visiblemax14,compact10x10visiblemax8.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\axe_iron-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\axe_iron-r1.png",
+      "sha256": "0ecac13fdb677e3d98c1f5cba76283fab49416ea91b3292e92b22bacc21deb42",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5519eceb-bbeb-4147-8b48-addafda05c02.png",
+  "copied_raw_path": "raw/axe_gold-r1.png",
+  "raw_sha256": "6de0254445be03f01a77094e0d4c99e94d266179a56b196ca13547193b724291",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "accepted",
+  "inspection": "Both native cuts and common scale tier grid inspected. Owner final approval pending."
+}

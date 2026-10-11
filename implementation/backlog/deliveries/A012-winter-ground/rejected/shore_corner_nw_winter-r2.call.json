@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept. One TINY SNOW north-west shore CORNER overlay. Output1254x1254true-transparent square. The only object occupies the TOPLEFT156x156sourcepixels (2x2logicalcells of a16x16tile); all pixelsx>=157ory>=157fullytransparent. Four joined chunky pixelblocks: top-left78x78block warmcreamRGB232224207; top-right78x78block coolpalemoonRGB207214255; bottom-left78x78block coolpalemoonRGB207214255; bottom-right78x78block mutedcreamRGB184174154. This is a simple soft rounded settled-snow corner, limited3colourplanes, no blackoutline, no sand,brown,water,hostobject or scenery. Do not enlarge/crop/recenter the tinycorner. No lettering,numbers,UI,margins. Finalnative16square uniformwhole-squareNEARESTreduction. Image1 is northshore style andendpointcolour reference ONLY; nevercopy its longband.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\shore_n_winter-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A012-winter-ground\\raw\\shore_n_winter-r1.png",
+      "sha256": "1eb8a3079d873041b2701cac96ff7f12bdd8ce148184d593ffb63022052ffd6f",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-26c6b51f-4e12-450b-9f78-8826cbb6ea8c.png",
+  "copied_raw_path": "raw/shore_corner_nw_winter-r2.png",
+  "raw_sha256": "eb3b91bd084fd6e9c5672d99bdf61cfcdedd26acfe97e58a218e02f9fc0aad9d",
+  "date": "2026-10-07",
+  "revision": 2,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/shore_corner_nw_winter-r2.png"
+}

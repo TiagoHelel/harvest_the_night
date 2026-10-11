@@ -1,0 +1,29 @@
+2026-10-07 | Owner requested all packs with review only at the end. Intermediate approval gates waived; final integration approval pending.
+2026-10-07 | breaker-r1 source over-wide: unchanged importer rejected canvas clipping. Regenerate square footprint, no output painting or non-uniform scaling.
+2026-10-07 | giant-r1 source over-wide: unchanged importer rejected canvas clipping. Regenerate square footprint, no output painting or non-uniform scaling.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-07 | breaker-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | breaker-r2 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | giant-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | giant-r2 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | giant-r3 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | giant-r4 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | tank-r1 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | tank-r2 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | tank-r3 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | tank-r4 rejected: Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory. Exact historical image inputs retained where referenced.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-08 | Owner showed empty review panels. Root cause: generic icon_/hud_ mockups looked up nonexistent keys in head_-only pack, plus QA header captured a preliminary rebuild result. Replaced with the actual five-head row and final check summary, preserved native sprite bytes.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-08 | Owner words verbatim: ficou bem incoerente, faz um recorte da cabeca dos sprites atuais que dai nao tem erro
+2026-10-08 | Replaced generated heads with exact crops of the current five enemy walk frame 0 sprites. No ImageGen, resizing, recoloring, pixel painting or game edits. Original heads retained under retired/generated-heads.
+2026-10-07 | Complete native pack inspected. Preliminary and final two builds have identical bytes; --check passes. Ready for final owner review; no integration approval inferred.
+2026-10-08 | Owner words verbatim: agora sim
+2026-10-08 | Exact current-sprite head crops selected by the owner (current-head-crops-r1). Preserve these five native hashes. No game integration performed.
+
+2026-10-10 | Resumed A011 via assets.py next. Read the full brief, review history, contract, checks and exact-crop recipe. Preserved the owner-requested current-sprite head crops and documented deviation; no new art generated. Inspected head row and body comparison. build.py --check passes and five output/source hashes match. Review page HTTP 200 matches local bytes. Current source changes: []. Awaiting explicit integration approval; historical "agora sim" remains visual selection only.
+
+2026-10-10 | Owner integration approval
+Owner words, verbatim: "aprovado"
+Approved all five exact current-enemy head crops. Recorded all native hashes in APPROVAL.json; added approval validation to the local crop builder. Preserved all approved pixels and the documented owner-requested deviation. Claude integrates through task 0162.
+Approval validation: second build byte-identical, --check passed, all checks true, five export hashes match. Wrote Claude handoff and five exact-source importer adapters; render_source reproduces each approved RGBA array and PNG hash exactly. No art pixels changed.

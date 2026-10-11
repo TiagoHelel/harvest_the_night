@@ -1,0 +1,35 @@
+{
+  "anim": "tree_b_spring",
+  "stem": "tree_b_spring-r1",
+  "importer": {
+    "id": "A013/tree_b_spring",
+    "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_b_spring-r1.png",
+    "crop_xywh": [
+      27,
+      203,
+      977,
+      1151
+    ],
+    "content_scale": 0.03700440528634361,
+    "content_anchor_xy": [
+      18,
+      43
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "canvas_wh": [
+      40,
+      48
+    ],
+    "pivot_xy": [
+      20,
+      44
+    ]
+  },
+  "unclipped_bounds": [
+    2,
+    1,
+    38,
+    44
+  ]
+}

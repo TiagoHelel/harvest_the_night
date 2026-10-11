@@ -1,7 +1,7 @@
 # 0202 - Art: tool icons
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0173, 0176, 0190
 - **Likely files:** assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/workshop_panel.gd
 - **Art packs:** A019

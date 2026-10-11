@@ -1,0 +1,55 @@
+{
+  "anim": "snow_cap_2x2",
+  "stem": "snow_cap_2x2-r2",
+  "importer": {
+    "id": "A013/snow_cap_2x2",
+    "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/snow_cap_2x2-r2.png",
+    "crop_xywh": [
+      314,
+      624,
+      627,
+      146
+    ],
+    "content_scale": 0.025518341307814992,
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "palette_keys": [
+      "bone",
+      "moon",
+      "bone_dark",
+      "stone_light",
+      "night"
+    ],
+    "canvas_wh": [
+      32,
+      32
+    ],
+    "pivot_xy": [
+      16,
+      30
+    ]
+  },
+  "host_fit": [
+    {
+      "host": "stump2x",
+      "pass": true,
+      "within_column_top_band": true,
+      "cap_pixels": 43,
+      "host_pixels": 252,
+      "overlap_pixels": 39,
+      "overlap_fraction": 0.9069767441860465,
+      "host_covered_fraction": 0.15476190476190477,
+      "width_fraction": 0.5714285714285714,
+      "cap_bounds": [
+        8,
+        14,
+        24,
+        18
+      ]
+    }
+  ]
+}

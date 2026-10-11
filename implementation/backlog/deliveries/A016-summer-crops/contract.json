@@ -1,0 +1,1707 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "corn_regrow",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        22
+      ],
+      "points": {},
+      "poses": [
+        "cobs picked, empty husk stubs, same stalk"
+      ]
+    },
+    {
+      "anim": "hud_corn_seed",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "hud_melon",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "hud_melon_seed",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "hud_pepper",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "hud_pepper_seed",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "hud_sunflower",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "hud_sunflower_seed",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "icon_corn_seed",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "icon_melon",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "icon_melon_seed",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "icon_pepper",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "icon_pepper_seed",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "icon_sunflower",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "icon_sunflower_seed",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "melon",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 0.55,
+      "frames": 4,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "poses": [
+        "seed mound, height2-3pixels",
+        "two broad leaves, height4-5pixels",
+        "spreading vine with leaves and one YELLOW flower, height6-7pixels",
+        "one striped GREEN WATERMELON10-13pixelswide lying on the vine, height8-11pixels"
+      ]
+    },
+    {
+      "anim": "pepper",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 0.55,
+      "frames": 4,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "poses": [
+        "seed mound, height2-3pixels",
+        "two green leaves, height4-5pixels",
+        "small bushy plant, height7-8pixels",
+        "bush with2-3 hanging RED chilies, height10-12pixels"
+      ]
+    },
+    {
+      "anim": "pepper_regrow",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "poses": [
+        "regrow: same bush with WHITE flowers and small GREEN pods, NO red chilies, height7-12pixels"
+      ]
+    },
+    {
+      "anim": "sunflower",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame_seconds": 0.55,
+      "frames": 4,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "poses": [
+        "seed mound, height2-3pixels",
+        "two leaves, height5-7pixels",
+        "stalk with broad leaves and closed GREEN bud, height14-18pixels",
+        "stalk2pixelswide, broad leaves and big YELLOW flowerhead9-12pixelswide with a brown seeddisc, tilted a little to viewer, height24-28pixels"
+      ]
+    }
+  ],
+  "date": "2026-10-10",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "pepper",
+      "call": "raw/pepper-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/pepper/none/01.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "seed mound, height2-3pixels",
+      "prompt": "raw/pepper-r1.prompt.txt",
+      "prompt_sha256": "d2826d4622fc939cee81c05d5417c3339e360018b73a6c2b1070bdd19d16f6a3",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.02516849403418252,
+        "crop_xywh": [
+          87,
+          529,
+          190,
+          86
+        ]
+      },
+      "runtime_name": "crops/pepper_0.png",
+      "seconds": 0.55,
+      "sha256": "07c5ea3ae6c0e1cc3eda9bec20b56de267755d581b7b47b3fc0844a6d0200e3a",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        326,
+        724
+      ],
+      "source": "raw/pepper-r1.png",
+      "source_sha256": "6becc1061902f0b9e0eec3ad8586044e2e11326dc41d734a1fa375a880fd5cb0"
+    },
+    {
+      "anim": "pepper",
+      "call": "raw/pepper-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 1,
+      "loop": false,
+      "output": "native/pepper/none/02.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "two green leaves, height4-5pixels",
+      "prompt": "raw/pepper-r1.prompt.txt",
+      "prompt_sha256": "d2826d4622fc939cee81c05d5417c3339e360018b73a6c2b1070bdd19d16f6a3",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.02516849403418252,
+        "crop_xywh": [
+          376,
+          431,
+          291,
+          176
+        ]
+      },
+      "runtime_name": "crops/pepper_1.png",
+      "seconds": 0.55,
+      "sha256": "49f7c5ebd518029e1e23a564cc4ba7d3e522d86c5e5e817afdcace5b732bd909",
+      "sheet_cell_xywh": [
+        326,
+        0,
+        393,
+        724
+      ],
+      "source": "raw/pepper-r1.png",
+      "source_sha256": "6becc1061902f0b9e0eec3ad8586044e2e11326dc41d734a1fa375a880fd5cb0"
+    },
+    {
+      "anim": "pepper",
+      "call": "raw/pepper-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 2,
+      "loop": false,
+      "output": "native/pepper/none/03.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "small bushy plant, height7-8pixels",
+      "prompt": "raw/pepper-r1.prompt.txt",
+      "prompt_sha256": "d2826d4622fc939cee81c05d5417c3339e360018b73a6c2b1070bdd19d16f6a3",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          7
+        ],
+        "content_scale": 0.02516849403418252,
+        "crop_xywh": [
+          773,
+          321,
+          385,
+          294
+        ]
+      },
+      "runtime_name": "crops/pepper_2.png",
+      "seconds": 0.55,
+      "sha256": "bf637669eabbae8a80f59f2d31ea0c88a313b753d42a8c7a8a6451bae08ea995",
+      "sheet_cell_xywh": [
+        719,
+        0,
+        480,
+        724
+      ],
+      "source": "raw/pepper-r1.png",
+      "source_sha256": "6becc1061902f0b9e0eec3ad8586044e2e11326dc41d734a1fa375a880fd5cb0"
+    },
+    {
+      "anim": "pepper",
+      "call": "raw/pepper-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 3,
+      "loop": false,
+      "output": "native/pepper/none/04.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "bush with2-3 hanging RED chilies, height10-12pixels",
+      "prompt": "raw/pepper-r1.prompt.txt",
+      "prompt_sha256": "d2826d4622fc939cee81c05d5417c3339e360018b73a6c2b1070bdd19d16f6a3",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          11
+        ],
+        "content_scale": 0.02516849403418252,
+        "crop_xywh": [
+          1242,
+          172,
+          431,
+          443
+        ]
+      },
+      "runtime_name": "crops/pepper_3.png",
+      "seconds": 0.55,
+      "sha256": "27d9727fb962b67bff396ec671aa674f4f3e53bdcca20708bc33ad9fe6e83e72",
+      "sheet_cell_xywh": [
+        1199,
+        0,
+        504,
+        724
+      ],
+      "source": "raw/pepper-r1.png",
+      "source_sha256": "6becc1061902f0b9e0eec3ad8586044e2e11326dc41d734a1fa375a880fd5cb0"
+    },
+    {
+      "anim": "pepper_regrow",
+      "call": "raw/pepper-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/pepper_regrow/none/01.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "regrow: same bush with WHITE flowers and small GREEN pods, NO red chilies, height7-12pixels",
+      "prompt": "raw/pepper-r1.prompt.txt",
+      "prompt_sha256": "d2826d4622fc939cee81c05d5417c3339e360018b73a6c2b1070bdd19d16f6a3",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          11
+        ],
+        "content_scale": 0.02516849403418252,
+        "crop_xywh": [
+          1735,
+          195,
+          393,
+          420
+        ]
+      },
+      "runtime_name": "crops/pepper_regrow.png",
+      "seconds": 0.55,
+      "sha256": "0effc98a9fe6faf425383ce1029c6222d713207bd67b957e555a195d690381e1",
+      "sheet_cell_xywh": [
+        1703,
+        0,
+        469,
+        724
+      ],
+      "source": "raw/pepper-r1.png",
+      "source_sha256": "6becc1061902f0b9e0eec3ad8586044e2e11326dc41d734a1fa375a880fd5cb0"
+    },
+    {
+      "anim": "sunflower",
+      "call": "raw/sunflower-r1.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/sunflower/none/01.png",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "pose": "seed mound, height2-3pixels",
+      "prompt": "raw/sunflower-r1.prompt.txt",
+      "prompt_sha256": "99b933cf0969ec43c409e1fccae7cdff73885d44d21a6279007bcb73a92e53e7",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          3
+        ],
+        "content_scale": 0.03173910781397285,
+        "crop_xywh": [
+          124,
+          694,
+          167,
+          82
+        ]
+      },
+      "runtime_name": "crops/sunflower_0.png",
+      "seconds": 0.55,
+      "sha256": "98655821a3ee774aa6f569d85a33b9daa9875ba5e16cecbf7f8c683c5685e1c0",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        401,
+        793
+      ],
+      "source": "raw/sunflower-r1.png",
+      "source_sha256": "c574d09a6c886f91e1c4d9ac52415ae4f482bfd653ac2a83a53d90ad5720b750"
+    },
+    {
+      "anim": "sunflower",
+      "call": "raw/sunflower-r1.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 1,
+      "loop": false,
+      "output": "native/sunflower/none/02.png",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "pose": "two leaves, height5-7pixels",
+      "prompt": "raw/sunflower-r1.prompt.txt",
+      "prompt_sha256": "99b933cf0969ec43c409e1fccae7cdff73885d44d21a6279007bcb73a92e53e7",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          5
+        ],
+        "content_scale": 0.03173910781397285,
+        "crop_xywh": [
+          513,
+          614,
+          305,
+          160
+        ]
+      },
+      "runtime_name": "crops/sunflower_1.png",
+      "seconds": 0.55,
+      "sha256": "e3d17d3ebd4a20e3d261a6bc08a35f081e3f8ac2d671f4eb5cfe0d865b073314",
+      "sheet_cell_xywh": [
+        401,
+        0,
+        462,
+        793
+      ],
+      "source": "raw/sunflower-r1.png",
+      "source_sha256": "c574d09a6c886f91e1c4d9ac52415ae4f482bfd653ac2a83a53d90ad5720b750"
+    },
+    {
+      "anim": "sunflower",
+      "call": "raw/sunflower-r1.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 2,
+      "loop": false,
+      "output": "native/sunflower/none/03.png",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "pose": "stalk with broad leaves and closed GREEN bud, height14-18pixels",
+      "prompt": "raw/sunflower-r1.prompt.txt",
+      "prompt_sha256": "99b933cf0969ec43c409e1fccae7cdff73885d44d21a6279007bcb73a92e53e7",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          17
+        ],
+        "content_scale": 0.03173910781397285,
+        "crop_xywh": [
+          910,
+          251,
+          403,
+          523
+        ]
+      },
+      "runtime_name": "crops/sunflower_2.png",
+      "seconds": 0.55,
+      "sha256": "491a8ddefe0424fc4002c2601e7eddba915483956e8bfed5e287e0c6f5e1c1b1",
+      "sheet_cell_xywh": [
+        863,
+        0,
+        526,
+        793
+      ],
+      "source": "raw/sunflower-r1.png",
+      "source_sha256": "c574d09a6c886f91e1c4d9ac52415ae4f482bfd653ac2a83a53d90ad5720b750"
+    },
+    {
+      "anim": "sunflower",
+      "call": "raw/sunflower-r1.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 3,
+      "loop": false,
+      "output": "native/sunflower/none/04.png",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "pose": "stalk2pixelswide, broad leaves and big YELLOW flowerhead9-12pixelswide with a brown seeddisc, tilted a little to viewer, height24-28pixels",
+      "prompt": "raw/sunflower-r1.prompt.txt",
+      "prompt_sha256": "99b933cf0969ec43c409e1fccae7cdff73885d44d21a6279007bcb73a92e53e7",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          24
+        ],
+        "content_scale": 0.03173910781397285,
+        "crop_xywh": [
+          1466,
+          28,
+          438,
+          746
+        ]
+      },
+      "runtime_name": "crops/sunflower_3.png",
+      "seconds": 0.55,
+      "sha256": "7039d98f0cb64bb235ed489317d5550eae7d14883e8851b7d141db4c3f94507f",
+      "sheet_cell_xywh": [
+        1389,
+        0,
+        594,
+        793
+      ],
+      "source": "raw/sunflower-r1.png",
+      "source_sha256": "c574d09a6c886f91e1c4d9ac52415ae4f482bfd653ac2a83a53d90ad5720b750"
+    },
+    {
+      "anim": "melon",
+      "call": "raw/melon-r2.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/melon/none/01.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "seed mound, height2-3pixels",
+      "prompt": "raw/melon-r2.prompt.txt",
+      "prompt_sha256": "73e7d994335349fe720d9e708c1439d27f041542ab5d743e72418f93f152aa24",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.02251317333056796,
+        "crop_xywh": [
+          133,
+          520,
+          191,
+          86
+        ]
+      },
+      "runtime_name": "crops/melon_0.png",
+      "seconds": 0.55,
+      "sha256": "a03f0c0dd499baf0224f3683e024c680ad7ba786def27e2e60cc113b1d3a3b35",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        390,
+        724
+      ],
+      "source": "raw/melon-r2.png",
+      "source_sha256": "30715cd4446e52c670a8686099545d89d774af62da27a702a290d24464195800"
+    },
+    {
+      "anim": "melon",
+      "call": "raw/melon-r2.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 1,
+      "loop": false,
+      "output": "native/melon/none/02.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "two broad leaves, height4-5pixels",
+      "prompt": "raw/melon-r2.prompt.txt",
+      "prompt_sha256": "73e7d994335349fe720d9e708c1439d27f041542ab5d743e72418f93f152aa24",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.02251317333056796,
+        "crop_xywh": [
+          457,
+          411,
+          330,
+          195
+        ]
+      },
+      "runtime_name": "crops/melon_1.png",
+      "seconds": 0.55,
+      "sha256": "228a39e4127602604d27a77f42081cc99ee27fb627e4e438df101380c5b27175",
+      "sheet_cell_xywh": [
+        390,
+        0,
+        450,
+        724
+      ],
+      "source": "raw/melon-r2.png",
+      "source_sha256": "30715cd4446e52c670a8686099545d89d774af62da27a702a290d24464195800"
+    },
+    {
+      "anim": "melon",
+      "call": "raw/melon-r2.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 2,
+      "loop": false,
+      "output": "native/melon/none/03.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "spreading vine with leaves and one YELLOW flower, height6-7pixels",
+      "prompt": "raw/melon-r2.prompt.txt",
+      "prompt_sha256": "73e7d994335349fe720d9e708c1439d27f041542ab5d743e72418f93f152aa24",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          6
+        ],
+        "content_scale": 0.02251317333056796,
+        "crop_xywh": [
+          895,
+          329,
+          526,
+          277
+        ]
+      },
+      "runtime_name": "crops/melon_2.png",
+      "seconds": 0.55,
+      "sha256": "723bd5f29ce15a42b35b784c4213c40c26597a9c215387d56a18b238a43e250a",
+      "sheet_cell_xywh": [
+        840,
+        0,
+        631,
+        724
+      ],
+      "source": "raw/melon-r2.png",
+      "source_sha256": "30715cd4446e52c670a8686099545d89d774af62da27a702a290d24464195800"
+    },
+    {
+      "anim": "melon",
+      "call": "raw/melon-r2.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 3,
+      "loop": false,
+      "output": "native/melon/none/04.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "one striped GREEN WATERMELON10-13pixelswide lying on the vine, height8-11pixels",
+      "prompt": "raw/melon-r2.prompt.txt",
+      "prompt_sha256": "73e7d994335349fe720d9e708c1439d27f041542ab5d743e72418f93f152aa24",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          9
+        ],
+        "content_scale": 0.02251317333056796,
+        "crop_xywh": [
+          1523,
+          220,
+          557,
+          387
+        ]
+      },
+      "runtime_name": "crops/melon_3.png",
+      "seconds": 0.55,
+      "sha256": "8bcb5e49a3390925183bb5e6ae2d59cd2b709bbf15c84e2550a5fba48deecb1b",
+      "sheet_cell_xywh": [
+        1471,
+        0,
+        701,
+        724
+      ],
+      "source": "raw/melon-r2.png",
+      "source_sha256": "30715cd4446e52c670a8686099545d89d774af62da27a702a290d24464195800"
+    },
+    {
+      "anim": "corn_regrow",
+      "call": "raw/corn_regrow-r1.call.json",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/corn_regrow/none/01.png",
+      "pivot_xy": [
+        8,
+        22
+      ],
+      "points": {},
+      "pose": "cobs picked, empty husk stubs, same stalk",
+      "prompt": "raw/corn_regrow-r1.prompt.txt",
+      "prompt_sha256": "b3e1f70b420e4d65f5eb0f4c8f64956bc3b2e135f4b3c1bd1bfa768459258702",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          19
+        ],
+        "content_scale": 0.020618556701030927,
+        "crop_xywh": [
+          810,
+          95,
+          531,
+          940
+        ]
+      },
+      "runtime_name": "crops/corn_regrow.png",
+      "seconds": 0.55,
+      "sha256": "51ea99b3dfd78a04642a07f8eacbf5279d98e191840071264090a76b98e47563",
+      "sheet_cell_xywh": null,
+      "source": "raw/corn_regrow-r1.png",
+      "source_sha256": "f8432a8432b807f353c1090ba6967b010ae69ee98fce0e290b5a5ffb9f6d6853"
+    },
+    {
+      "anim": "icon_melon",
+      "call": "raw\\icon_melon-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_melon/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_melon-r1.prompt.txt",
+      "prompt_sha256": "a15bcf20d21c18cd26bca008eb1e52f5fb75f7eca822a3e79347492dfeeb8ef5",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "content_scale": 0.01580135440180587,
+        "crop_xywh": [
+          194,
+          244,
+          886,
+          823
+        ]
+      },
+      "runtime_name": "ui/icon_melon.png",
+      "seconds": 1.0,
+      "sha256": "c7031f777e3c96280132c141331d21f0890cb2e3d096c8a876a86f27015e4da8",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_melon-r1.png",
+      "source_sha256": "38aecfe0c021f5c1e0d158cd9baa7915d595f0b3de81eb33e07edae2dd5dfb74"
+    },
+    {
+      "anim": "hud_melon",
+      "call": "raw\\icon_melon-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_melon/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_melon-r1.prompt.txt",
+      "prompt_sha256": "a15bcf20d21c18cd26bca008eb1e52f5fb75f7eca822a3e79347492dfeeb8ef5",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.009029345372460496,
+        "crop_xywh": [
+          194,
+          244,
+          886,
+          823
+        ]
+      },
+      "runtime_name": "ui/hud_melon.png",
+      "seconds": 1.0,
+      "sha256": "c1aecdfcd8d9221e42d43e7de251e316e4f7635f6e606b0d95f44ee692fe6fc9",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_melon-r1.png",
+      "source_sha256": "38aecfe0c021f5c1e0d158cd9baa7915d595f0b3de81eb33e07edae2dd5dfb74"
+    },
+    {
+      "anim": "icon_pepper",
+      "call": "raw\\icon_pepper-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_pepper/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_pepper-r1.prompt.txt",
+      "prompt_sha256": "3dc46d1076433fb2a44226ee625b9cd88a87a68e40f2e43fef5c52f0aaa53d35",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "content_scale": 0.015367727771679473,
+        "crop_xywh": [
+          202,
+          233,
+          911,
+          854
+        ]
+      },
+      "runtime_name": "ui/icon_pepper.png",
+      "seconds": 1.0,
+      "sha256": "a71a58e50280f0f7f24cba22f5ea2c9da4e254e6dffa263698ecd73f2338379f",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_pepper-r1.png",
+      "source_sha256": "c31f47899844a13ed5e50cfd8485225a867880a4ec35292204b8e14d05a51d6e"
+    },
+    {
+      "anim": "hud_pepper",
+      "call": "raw\\icon_pepper-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_pepper/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_pepper-r1.prompt.txt",
+      "prompt_sha256": "3dc46d1076433fb2a44226ee625b9cd88a87a68e40f2e43fef5c52f0aaa53d35",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.008781558726673985,
+        "crop_xywh": [
+          202,
+          233,
+          911,
+          854
+        ]
+      },
+      "runtime_name": "ui/hud_pepper.png",
+      "seconds": 1.0,
+      "sha256": "7cc429443680bc81bcc4302e4f404edc4d52a5ec20b3f9585907141d42fc736a",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_pepper-r1.png",
+      "source_sha256": "c31f47899844a13ed5e50cfd8485225a867880a4ec35292204b8e14d05a51d6e"
+    },
+    {
+      "anim": "icon_sunflower",
+      "call": "raw\\icon_sunflower-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_sunflower/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_sunflower-r1.prompt.txt",
+      "prompt_sha256": "28cbc377c7015aa9f863c2601d93c18c5890bbb8aed5ce64ee577b7c71c78732",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.01715686274509804,
+        "crop_xywh": [
+          311,
+          250,
+          710,
+          816
+        ]
+      },
+      "runtime_name": "ui/icon_sunflower.png",
+      "seconds": 1.0,
+      "sha256": "d11b785b2eeae392e79b5c38bcbd1f44c1849bbf1be2973282f36bf3c5044eee",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_sunflower-r1.png",
+      "source_sha256": "ffdaafbbc9249c9b06392c95fff62f1114c488e520e1f05dbb7b96b188aa7010"
+    },
+    {
+      "anim": "hud_sunflower",
+      "call": "raw\\icon_sunflower-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_sunflower/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_sunflower-r1.prompt.txt",
+      "prompt_sha256": "28cbc377c7015aa9f863c2601d93c18c5890bbb8aed5ce64ee577b7c71c78732",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.00980392156862745,
+        "crop_xywh": [
+          311,
+          250,
+          710,
+          816
+        ]
+      },
+      "runtime_name": "ui/hud_sunflower.png",
+      "seconds": 1.0,
+      "sha256": "b3b42616d17b2b58baad031f0728673a0d726c15b7974615208fa5c011055491",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_sunflower-r1.png",
+      "source_sha256": "ffdaafbbc9249c9b06392c95fff62f1114c488e520e1f05dbb7b96b188aa7010"
+    },
+    {
+      "anim": "icon_corn_seed",
+      "call": "raw\\corn_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_corn_seed/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\corn_seed-r1.prompt.txt",
+      "prompt_sha256": "dfb900c82524fe0bd64bc3fb2374d1216a9633ca96454898666db5c01e9fb1e0",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.019553072625698324,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "ui/icon_corn_seed.png",
+      "seconds": 1.0,
+      "sha256": "8ef804fbb81a654d771420c2fcae22f3aab67a96e85ac682c13eb2e177272a23",
+      "sheet_cell_xywh": null,
+      "source": "raw\\corn_seed-r1.png",
+      "source_sha256": "f1d50fb8ce749da85857d4475c1f654cadf8575f0392c2af2bee987e958bc253"
+    },
+    {
+      "anim": "hud_corn_seed",
+      "call": "raw\\corn_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_corn_seed/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\corn_seed-r1.prompt.txt",
+      "prompt_sha256": "dfb900c82524fe0bd64bc3fb2374d1216a9633ca96454898666db5c01e9fb1e0",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.0111731843575419,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "ui/hud_corn_seed.png",
+      "seconds": 1.0,
+      "sha256": "13c7b457aec77d1d04d5f836881b709f585fa745e732453f0d277157207d13b9",
+      "sheet_cell_xywh": null,
+      "source": "raw\\corn_seed-r1.png",
+      "source_sha256": "f1d50fb8ce749da85857d4475c1f654cadf8575f0392c2af2bee987e958bc253"
+    },
+    {
+      "anim": "icon_melon_seed",
+      "call": "raw\\melon_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_melon_seed/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\melon_seed-r1.prompt.txt",
+      "prompt_sha256": "14120272ff50b6e4e35de76c2452c3bcffb7823e44668377fc260f71642e0be0",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.019553072625698324,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "ui/icon_melon_seed.png",
+      "seconds": 1.0,
+      "sha256": "2ee28604976fb4e703f945a17720ccb2e556eb2b2fd17ccf5d67b6e7dc9c12e4",
+      "sheet_cell_xywh": null,
+      "source": "raw\\melon_seed-r1.png",
+      "source_sha256": "51049ea485a3f94fd4ffa9b8fccaf7ffbfdd41b539092e5c7a5e87b1bf6c6f7b"
+    },
+    {
+      "anim": "hud_melon_seed",
+      "call": "raw\\melon_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_melon_seed/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\melon_seed-r1.prompt.txt",
+      "prompt_sha256": "14120272ff50b6e4e35de76c2452c3bcffb7823e44668377fc260f71642e0be0",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.0111731843575419,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "ui/hud_melon_seed.png",
+      "seconds": 1.0,
+      "sha256": "6c6377eb641eb3978bc7c540bd320f3630058a7c3bd023c0a66d9179b4723b22",
+      "sheet_cell_xywh": null,
+      "source": "raw\\melon_seed-r1.png",
+      "source_sha256": "51049ea485a3f94fd4ffa9b8fccaf7ffbfdd41b539092e5c7a5e87b1bf6c6f7b"
+    },
+    {
+      "anim": "icon_pepper_seed",
+      "call": "raw\\pepper_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_pepper_seed/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\pepper_seed-r1.prompt.txt",
+      "prompt_sha256": "0f8dd904340e850640271fe47046a45a4c24039896c52e4556fbf660c9dc5374",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.019553072625698324,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "ui/icon_pepper_seed.png",
+      "seconds": 1.0,
+      "sha256": "43712d31f8cc8d9215303dbfa72a0ce6834b5a621435307bb7b72f3178234907",
+      "sheet_cell_xywh": null,
+      "source": "raw\\pepper_seed-r1.png",
+      "source_sha256": "d9ebfae62860f77cb8d127f9022b71096ee561c054fb64d4c70189d9489f7b5d"
+    },
+    {
+      "anim": "hud_pepper_seed",
+      "call": "raw\\pepper_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_pepper_seed/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\pepper_seed-r1.prompt.txt",
+      "prompt_sha256": "0f8dd904340e850640271fe47046a45a4c24039896c52e4556fbf660c9dc5374",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.0111731843575419,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "ui/hud_pepper_seed.png",
+      "seconds": 1.0,
+      "sha256": "226e4ecd325fd42bf71dfff5c74b7be14d13c361fc8e167587e7b5d96351b208",
+      "sheet_cell_xywh": null,
+      "source": "raw\\pepper_seed-r1.png",
+      "source_sha256": "d9ebfae62860f77cb8d127f9022b71096ee561c054fb64d4c70189d9489f7b5d"
+    },
+    {
+      "anim": "icon_sunflower_seed",
+      "call": "raw\\sunflower_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_sunflower_seed/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\sunflower_seed-r1.prompt.txt",
+      "prompt_sha256": "d18aa657097bc5932e9bac815a0222845b9a84d6a713a30ae025890fd1246f3b",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.019553072625698324,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "ui/icon_sunflower_seed.png",
+      "seconds": 1.0,
+      "sha256": "c65bbb2bdca8fe2e0e5fee61181cd88f31bdabdb8a9d4c1b62c320eebccf1e80",
+      "sheet_cell_xywh": null,
+      "source": "raw\\sunflower_seed-r1.png",
+      "source_sha256": "9608016115686a90701a903513fe4a9acfbf4b7abff38130bd17fbd09596b5eb"
+    },
+    {
+      "anim": "hud_sunflower_seed",
+      "call": "raw\\sunflower_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_sunflower_seed/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\sunflower_seed-r1.prompt.txt",
+      "prompt_sha256": "d18aa657097bc5932e9bac815a0222845b9a84d6a713a30ae025890fd1246f3b",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.0111731843575419,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "ui/hud_sunflower_seed.png",
+      "seconds": 1.0,
+      "sha256": "619fbcda89fe491e8db924ab239387920d4ba4a65fd7930db578941998c1f317",
+      "sheet_cell_xywh": null,
+      "source": "raw\\sunflower_seed-r1.png",
+      "source_sha256": "9608016115686a90701a903513fe4a9acfbf4b7abff38130bd17fbd09596b5eb"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A016",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "original_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\crops\\corn.png",
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\crops\\corn.png",
+      "role": "style/layout/scale reference or packet master edit target",
+      "sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00"
+    },
+    {
+      "original_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+      "role": "style/layout/scale reference or packet master edit target",
+      "sha256": "f2e9c39135b929b0ccb963f3486a06b86ed37900c8dd77f55d302bc2575a3b88"
+    },
+    {
+      "original_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\corn.png",
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\corn.png",
+      "role": "style/layout/scale reference or packet master edit target",
+      "sha256": "ad82d6e923e07d1d013d8f04dcb83c1428b50f71b6939033cd0fd83e5538ca84"
+    },
+    {
+      "original_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A016-summer-crops\\raw\\melon-r1.png",
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A016-summer-crops\\rejected\\melon-r1.png",
+      "role": "style/layout/scale reference or packet master edit target",
+      "sha256": "3978e6991c6ead7d947bc1a56e0736ceb13364ff8b1540ea9712745ccb661f49"
+    },
+    {
+      "original_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\crops\\carrot.png",
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\crops\\carrot.png",
+      "role": "style/layout/scale reference or packet master edit target",
+      "sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d"
+    },
+    {
+      "original_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "style/layout/scale reference or packet master edit target",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A016-summer-crops",
+  "sources": [
+    {
+      "call": "raw\\corn_regrow-r1.call.json",
+      "revision": 1,
+      "source_sha256": "f8432a8432b807f353c1090ba6967b010ae69ee98fce0e290b5a5ffb9f6d6853"
+    },
+    {
+      "call": "raw\\corn_seed-r1.call.json",
+      "revision": 1,
+      "source_sha256": "f1d50fb8ce749da85857d4475c1f654cadf8575f0392c2af2bee987e958bc253"
+    },
+    {
+      "call": "raw\\icon_melon-r1.call.json",
+      "revision": 1,
+      "source_sha256": "38aecfe0c021f5c1e0d158cd9baa7915d595f0b3de81eb33e07edae2dd5dfb74"
+    },
+    {
+      "call": "raw\\icon_pepper-r1.call.json",
+      "revision": 1,
+      "source_sha256": "c31f47899844a13ed5e50cfd8485225a867880a4ec35292204b8e14d05a51d6e"
+    },
+    {
+      "call": "raw\\icon_sunflower-r1.call.json",
+      "revision": 1,
+      "source_sha256": "ffdaafbbc9249c9b06392c95fff62f1114c488e520e1f05dbb7b96b188aa7010"
+    },
+    {
+      "call": "raw\\melon-r2.call.json",
+      "revision": 2,
+      "source_sha256": "30715cd4446e52c670a8686099545d89d774af62da27a702a290d24464195800"
+    },
+    {
+      "call": "raw\\melon_seed-r1.call.json",
+      "revision": 1,
+      "source_sha256": "51049ea485a3f94fd4ffa9b8fccaf7ffbfdd41b539092e5c7a5e87b1bf6c6f7b"
+    },
+    {
+      "call": "raw\\pepper-r1.call.json",
+      "revision": 1,
+      "source_sha256": "6becc1061902f0b9e0eec3ad8586044e2e11326dc41d734a1fa375a880fd5cb0"
+    },
+    {
+      "call": "raw\\pepper_seed-r1.call.json",
+      "revision": 1,
+      "source_sha256": "d9ebfae62860f77cb8d127f9022b71096ee561c054fb64d4c70189d9489f7b5d"
+    },
+    {
+      "call": "raw\\sunflower-r1.call.json",
+      "revision": 1,
+      "source_sha256": "c574d09a6c886f91e1c4d9ac52415ae4f482bfd653ac2a83a53d90ad5720b750"
+    },
+    {
+      "call": "raw\\sunflower_seed-r1.call.json",
+      "revision": 1,
+      "source_sha256": "9608016115686a90701a903513fe4a9acfbf4b7abff38130bd17fbd09596b5eb"
+    }
+  ],
+  "status": "approved for integration",
+  "supersedes": [],
+  "tool": "built-in ImageGen"
+}

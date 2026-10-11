@@ -1,0 +1,724 @@
+[
+  {
+    "anim": "tree_spring",
+    "stem": "tree_spring-r2",
+    "importer": {
+      "id": "A013/tree_spring",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_spring-r2.png",
+      "crop_xywh": [
+        38,
+        219,
+        957,
+        1135
+      ],
+      "content_scale": 0.03700440528634361,
+      "content_anchor_xy": [
+        17,
+        42
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ]
+    },
+    "unclipped_bounds": [
+      3,
+      2,
+      38,
+      44
+    ]
+  },
+  {
+    "anim": "tree_autumn",
+    "stem": "tree_autumn-r4",
+    "importer": {
+      "id": "A013/tree_autumn",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_autumn-r4.png",
+      "crop_xywh": [
+        38,
+        220,
+        958,
+        1134
+      ],
+      "content_scale": 0.03700440528634361,
+      "content_anchor_xy": [
+        17,
+        42
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ]
+    },
+    "unclipped_bounds": [
+      3,
+      2,
+      38,
+      44
+    ]
+  },
+  {
+    "anim": "tree_winter",
+    "stem": "tree_winter-r1",
+    "importer": {
+      "id": "A013/tree_winter",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_winter-r1.png",
+      "crop_xywh": [
+        51,
+        212,
+        941,
+        1141
+      ],
+      "content_scale": 0.03700440528634361,
+      "content_anchor_xy": [
+        17,
+        42
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ]
+    },
+    "unclipped_bounds": [
+      3,
+      2,
+      38,
+      44
+    ]
+  },
+  {
+    "anim": "tree_b_spring",
+    "stem": "tree_b_spring-r4",
+    "importer": {
+      "id": "A013/tree_b_spring",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_b_spring-r4.png",
+      "crop_xywh": [
+        30,
+        205,
+        971,
+        1149
+      ],
+      "content_scale": 0.03700440528634361,
+      "content_anchor_xy": [
+        18,
+        43
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ]
+    },
+    "unclipped_bounds": [
+      2,
+      1,
+      38,
+      44
+    ]
+  },
+  {
+    "anim": "tree_b_autumn",
+    "stem": "tree_b_autumn-r4",
+    "importer": {
+      "id": "A013/tree_b_autumn",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_b_autumn-r4.png",
+      "crop_xywh": [
+        40,
+        206,
+        952,
+        1138
+      ],
+      "content_scale": 0.03700440528634361,
+      "content_anchor_xy": [
+        17,
+        42
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ]
+    },
+    "unclipped_bounds": [
+      3,
+      2,
+      38,
+      44
+    ]
+  },
+  {
+    "anim": "tree_b_winter",
+    "stem": "tree_b_winter-r1",
+    "importer": {
+      "id": "A013/tree_b_winter",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/tree_b_winter-r1.png",
+      "crop_xywh": [
+        34,
+        197,
+        961,
+        1156
+      ],
+      "content_scale": 0.03700440528634361,
+      "content_anchor_xy": [
+        18,
+        43
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ]
+    },
+    "unclipped_bounds": [
+      2,
+      1,
+      38,
+      44
+    ]
+  },
+  {
+    "anim": "stump_snow",
+    "stem": "stump_snow-r1",
+    "importer": {
+      "id": "A013/stump_snow",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/stump_snow-r1.png",
+      "crop_xywh": [
+        272,
+        571,
+        746,
+        276
+      ],
+      "content_scale": 0.010723860589812333,
+      "content_anchor_xy": [
+        4,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "moon",
+        "bone_dark",
+        "stone_light",
+        "night"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    },
+    "host_fit": [
+      {
+        "host": "stump",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 18,
+        "host_pixels": 63,
+        "overlap_pixels": 18,
+        "overlap_fraction": 1.0,
+        "host_covered_fraction": 0.2857142857142857,
+        "width_fraction": 0.5714285714285714,
+        "cap_bounds": [
+          4,
+          8,
+          12,
+          11
+        ]
+      }
+    ]
+  },
+  {
+    "anim": "rock_snow",
+    "stem": "rock_snow-r1",
+    "importer": {
+      "id": "A013/rock_snow",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/rock_snow-r1.png",
+      "crop_xywh": [
+        630,
+        285,
+        716,
+        274
+      ],
+      "content_scale": 0.0111731843575419,
+      "content_anchor_xy": [
+        5,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "moon",
+        "bone_dark",
+        "stone_light",
+        "night"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    },
+    "host_fit": [
+      {
+        "host": "rock",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 16,
+        "host_pixels": 100,
+        "overlap_pixels": 16,
+        "overlap_fraction": 1.0,
+        "host_covered_fraction": 0.16,
+        "width_fraction": 0.5714285714285714,
+        "cap_bounds": [
+          3,
+          5,
+          11,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "anim": "rock_b_snow",
+    "stem": "rock_b_snow-r1",
+    "importer": {
+      "id": "A013/rock_b_snow",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/rock_b_snow-r1.png",
+      "crop_xywh": [
+        324,
+        478,
+        724,
+        293
+      ],
+      "content_scale": 0.011049723756906077,
+      "content_anchor_xy": [
+        5,
+        8
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "moon",
+        "bone_dark",
+        "stone_light",
+        "night"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    },
+    "host_fit": [
+      {
+        "host": "rock_b",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 17,
+        "host_pixels": 98,
+        "overlap_pixels": 17,
+        "overlap_fraction": 1.0,
+        "host_covered_fraction": 0.17346938775510204,
+        "width_fraction": 0.5714285714285714,
+        "cap_bounds": [
+          3,
+          6,
+          11,
+          9
+        ]
+      }
+    ]
+  },
+  {
+    "anim": "ore_snow",
+    "stem": "ore_snow-r1",
+    "importer": {
+      "id": "A013/ore_snow",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/ore_snow-r1.png",
+      "crop_xywh": [
+        293,
+        524,
+        718,
+        300
+      ],
+      "content_scale": 0.011142061281337047,
+      "content_anchor_xy": [
+        4,
+        10
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "moon",
+        "bone_dark",
+        "stone_light",
+        "night"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    },
+    "host_fit": [
+      {
+        "host": "ore",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 15,
+        "host_pixels": 113,
+        "overlap_pixels": 15,
+        "overlap_fraction": 1.0,
+        "host_covered_fraction": 0.13274336283185842,
+        "width_fraction": 0.5714285714285714,
+        "cap_bounds": [
+          4,
+          4,
+          12,
+          7
+        ]
+      }
+    ]
+  },
+  {
+    "anim": "ore_b_snow",
+    "stem": "ore_b_snow-r1",
+    "importer": {
+      "id": "A013/ore_b_snow",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/ore_b_snow-r1.png",
+      "crop_xywh": [
+        310,
+        533,
+        643,
+        271
+      ],
+      "content_scale": 0.012441679626749611,
+      "content_anchor_xy": [
+        3,
+        8
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "moon",
+        "bone_dark",
+        "stone_light",
+        "night"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    },
+    "host_fit": [
+      {
+        "host": "ore_b",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 18,
+        "host_pixels": 97,
+        "overlap_pixels": 18,
+        "overlap_fraction": 1.0,
+        "host_covered_fraction": 0.18556701030927836,
+        "width_fraction": 0.5714285714285714,
+        "cap_bounds": [
+          5,
+          6,
+          13,
+          9
+        ]
+      }
+    ]
+  },
+  {
+    "anim": "seam_snow",
+    "stem": "seam_snow-r1",
+    "importer": {
+      "id": "A013/seam_snow",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/seam_snow-r1.png",
+      "crop_xywh": [
+        217,
+        568,
+        845,
+        315
+      ],
+      "content_scale": 0.009467455621301775,
+      "content_anchor_xy": [
+        4,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "moon",
+        "bone_dark",
+        "stone_light",
+        "night"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    },
+    "host_fit": [
+      {
+        "host": "seam",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 17,
+        "host_pixels": 65,
+        "overlap_pixels": 17,
+        "overlap_fraction": 1.0,
+        "host_covered_fraction": 0.26153846153846155,
+        "width_fraction": 0.6153846153846154,
+        "cap_bounds": [
+          4,
+          8,
+          12,
+          11
+        ]
+      }
+    ]
+  },
+  {
+    "anim": "seam_b_snow",
+    "stem": "seam_b_snow-r1",
+    "importer": {
+      "id": "A013/seam_b_snow",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/seam_b_snow-r1.png",
+      "crop_xywh": [
+        214,
+        530,
+        831,
+        316
+      ],
+      "content_scale": 0.009626955475330927,
+      "content_anchor_xy": [
+        5,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "moon",
+        "bone_dark",
+        "stone_light",
+        "night"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    },
+    "host_fit": [
+      {
+        "host": "seam_b",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 17,
+        "host_pixels": 68,
+        "overlap_pixels": 17,
+        "overlap_fraction": 1.0,
+        "host_covered_fraction": 0.25,
+        "width_fraction": 0.5714285714285714,
+        "cap_bounds": [
+          3,
+          7,
+          11,
+          10
+        ]
+      }
+    ]
+  },
+  {
+    "anim": "snow_cap",
+    "stem": "snow_cap-r1",
+    "importer": {
+      "id": "A013/snow_cap",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/snow_cap-r1.png",
+      "crop_xywh": [
+        279,
+        534,
+        712,
+        301
+      ],
+      "content_scale": 0.011235955056179775,
+      "content_anchor_xy": [
+        5,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "moon",
+        "bone_dark",
+        "stone_light",
+        "night"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    },
+    "host_fit": [
+      {
+        "host": "ore",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 16,
+        "host_pixels": 113,
+        "overlap_pixels": 16,
+        "overlap_fraction": 1.0,
+        "host_covered_fraction": 0.1415929203539823,
+        "width_fraction": 0.5714285714285714,
+        "cap_bounds": [
+          3,
+          5,
+          11,
+          8
+        ]
+      },
+      {
+        "host": "rock",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 16,
+        "host_pixels": 100,
+        "overlap_pixels": 16,
+        "overlap_fraction": 1.0,
+        "host_covered_fraction": 0.16,
+        "width_fraction": 0.5714285714285714,
+        "cap_bounds": [
+          3,
+          5,
+          11,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "anim": "snow_cap_2x2",
+    "stem": "snow_cap_2x2-r2",
+    "importer": {
+      "id": "A013/snow_cap_2x2",
+      "source": "implementation/backlog/deliveries/A013-seasonal-trees/raw/snow_cap_2x2-r2.png",
+      "crop_xywh": [
+        314,
+        624,
+        627,
+        146
+      ],
+      "content_scale": 0.025518341307814992,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "bone",
+        "moon",
+        "bone_dark",
+        "stone_light",
+        "night"
+      ],
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        30
+      ]
+    },
+    "host_fit": [
+      {
+        "host": "stump2x",
+        "pass": true,
+        "within_column_top_band": true,
+        "cap_pixels": 43,
+        "host_pixels": 252,
+        "overlap_pixels": 39,
+        "overlap_fraction": 0.9069767441860465,
+        "host_covered_fraction": 0.15476190476190477,
+        "width_fraction": 0.5714285714285714,
+        "cap_bounds": [
+          8,
+          14,
+          24,
+          18
+        ]
+      }
+    ]
+  }
+]

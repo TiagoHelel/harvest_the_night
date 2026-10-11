@@ -1,0 +1,25 @@
+{
+  "restored": [
+    {
+      "stem": "egg-r1",
+      "sha256": "176a99f438debcf991cd9b82d18e243de1f0a5992283687dc233fb0593d0e573"
+    },
+    {
+      "stem": "milk-r1",
+      "sha256": "29e0a1ed9e215e4016e05591dee863644b1cb1330bdc349f36e6f625243c5c04"
+    },
+    {
+      "stem": "truffle-r1",
+      "sha256": "ca36101553afb1c7954676f030d72858c12fc440b3b2e37dd4a07d7d2709f60a"
+    },
+    {
+      "stem": "truffle_spot-r1",
+      "sha256": "0c9452998a00682d39a9b16acb6624fd94d7a47fb889756b645ac1671382e8f2"
+    },
+    {
+      "stem": "wool-r1",
+      "sha256": "ef223fcb4c347d5df61b732f869d4695daad3f931a47e629307f3253f05fa888"
+    }
+  ],
+  "raw_image_bytes_unchanged": true
+}

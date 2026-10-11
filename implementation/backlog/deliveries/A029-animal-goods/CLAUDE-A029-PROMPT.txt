@@ -1,0 +1,35 @@
+A029 - Animal goods
+Approved for integration on 2026-10-10.
+Owner words, verbatim: "aprovado"
+
+Authoritative folder: implementation/backlog/deliveries/A029-animal-goods/
+Read APPROVAL.json, contract.json, checks.json and this handoff. All nine exports are approved. runtime_integrated remains false; Codex has not integrated game assets. No older delivery folders are superseded. rejected/ and preview/ are review evidence, never source art.
+
+Integration task: 0211. Replace tasks 0184 and 0185's stand-ins for egg, milk, wool and truffle icons, and the pig-dug world truffle spot. Bind the icons in inventory, stall, panels and compact HUD; use truffle_spot in the world where a dug truffle awaits collection. Preserve resource IDs and existing game behavior.
+
+Mode A: selected ImageGen raw sources plus exact per-file recipes in contract.json, reduced through tools/palette.py:COLOURS with the recorded palette_keys. Preserve source hashes, crop_xywh, content_scale, content_anchor_xy, alpha_threshold 128, canvas and pivot. Each icon_/hud_ pair shares one source and measured crop. Milk and wool use restricted cream-material palette subsets; do not reintroduce orange skin/flame colors. The world spot has its own raw source, scale and grounded anchor; do not derive it from the inventory truffle icon. Approved native exports already match render_source. No runtime/ 2x layer.
+
+Mapping and aliases:
+native/icon_egg/none/01.png -> sprites/ui/icon_egg.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1 s, no loop, direction none | inventory
+native/hud_egg/none/01.png -> sprites/ui/hud_egg.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1 s, no loop, direction none | compact_hud
+native/icon_milk/none/01.png -> sprites/ui/icon_milk.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1 s, no loop, direction none | inventory
+native/hud_milk/none/01.png -> sprites/ui/hud_milk.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1 s, no loop, direction none | compact_hud
+native/icon_wool/none/01.png -> sprites/ui/icon_wool.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1 s, no loop, direction none | inventory
+native/hud_wool/none/01.png -> sprites/ui/hud_wool.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1 s, no loop, direction none | compact_hud
+native/icon_truffle/none/01.png -> sprites/ui/icon_truffle.png | 16x16 pivot (8,8) draw 1.0 | static, one frame, 1 s, no loop, direction none | inventory
+native/hud_truffle/none/01.png -> sprites/ui/hud_truffle.png | 10x10 pivot (5,5) draw 1.0 | static, one frame, 1 s, no loop, direction none | compact_hud
+native/truffle_spot/none/01.png -> sprites/props/truffle_spot.png | 16x16 pivot (8,14) draw 1.0 | static, one frame, 0.55 s, no loop, direction none | world prop
+
+Use manifest display_role inventory for icon_ and compact_hud for hud_. truffle_spot is a world prop and must be added to check_prop_art.NAMES, not a compact UI icon. Frame order: 01.png is frame 0. All states use mirror none: no baked or runtime flips. Metadata points are {} throughout. Native pivots are (8,8) for the four 16x16 inventory icons, (5,5) for the four 10x10 HUD icons and (8,14) for the 16x16 world spot. Icon timing is 1.0 s, spot timing 0.55 s; all are static with no loop.
+
+Keep at least one clear padding pixel around icons, visible bounds at most 14x14 / 8x8, and original colors by day/night because UI is not world-relit. The world truffle spot is relit by the game at night, with lowest opaque row 13, visible 11-13px wide and 7-9px tall, centered on x=8. Keep its recorded placement and no baked grass, ground patch, shadow or glow. No deviations were authorized; deviations and supersedes are empty.
+
+Never regenerate, repaint, recolour, resample or retime the approved art. Never cut sprites from GIFs, previews or screenshots. Never use art files absent from contract.json. Never add a runtime flip to a baked mirror. Preserve the two egg shapes, short milk bottle, yarn bands and loose strand, truffle cut-face identity and grounded mound. Existing comparison meat/food/stone/gunpowder icons and rock/stump/tilled tiles are not new A029 deliverables. Historical selected-source archive mistakes were corrected; the current contract's selected raws are authoritative.
+
+Integration steps:
+1. Verify all nine export SHA256 values against contract.json and APPROVAL.json, selected source/prompt hashes, call records and reference provenance. Run the delivery build.py --check. All checks must pass. On a discrepancy, stop the integration task with its precise cause rather than silently repairing approved art.
+2. Promote selected raw files byte-for-byte to versioned assets/art_source/ui/ locations for icons and assets/art_source/props/ for truffle_spot. Add exact raster recipes, aliases, UI display roles, prompt/reference/approval provenance and ownership.json records. Adapt source paths only; retain source hashes and every conversion parameter. Run python tools/import_art.py and verify output hashes match the approved exports.
+3. Extend hard-coded UI family lists as needed and add truffle_spot to the prop check family. Bind icons and the world prop in tasks 0184/0185 through task 0211, preserving pickup logic, resource IDs, pivots and static timing.
+4. Run python tools/verify.py and recheck output hashes. Confirm icon pair/crop consistency, bounds, padding, distinct silhouettes and the world spot's grounded row13 and dimensions.
+5. Inspect FHD game captures by day/night. Confirm readable 10x10 egg/milk/wool/truffle icons on the dark HUD, and a visible truffle mound on grass that does not resemble rock, stump or tilled soil. HUD remains unrelit while the world spot follows world lighting.
+6. Only after integration and validation, run python implementation/backlog/assets.py set A029 integrated. Claude owns this transition. Do not touch deferred farmer packs or the cancelled run pack. Do not commit or push unless the owner asks.

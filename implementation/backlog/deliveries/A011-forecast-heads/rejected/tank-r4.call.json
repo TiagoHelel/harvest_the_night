@@ -1,0 +1,26 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the exact accepted identity of the tank zombie forecast bust. ONE footprint correction: widen the head/jaw/ears horizontally by about20percent, WITHOUT changing its height, expression, tiny neck, identity, palette, outline weight, shading or vertical position. The WHOLE head-plus-neck silhouette must now be SQUARE, not tall/slim: finalvisible13by13nativepixels. Same1254square canvas, keep all margins and top/bottom coordinates unchanged; finalbounds x308..947,y346..984, approximately639wide638tall. Keep shoulders only a tiny hint inside head width, no new body or arms. No diagonal stretch, scene, text, panels or shadow. TRUEtransparent alpha outsideonejoinedbust.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\tank-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\raw\\tank-r3.png",
+      "sha256": "4126d3861fab84fc8df63a0602ae19e1c074d6c512eee79a46cdc30c564ccd7a",
+      "role": "Accepted pose style and scale reference",
+      "retained_copy_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A011-forecast-heads\\preview\\input-history\\tank-r3-4126d3861f.png"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e86e300f-727f-4368-b7eb-f362bc1fba9a.png",
+  "copied_raw_path": "raw/tank-r4.png",
+  "raw_sha256": "876e0ace0d24d724ccf80e75fe1d8998a18d0c45bdcbb3d07cea975d0b8f2b69",
+  "date": "2026-10-07",
+  "revision": 4,
+  "decision": "rejected",
+  "reason": "Non-selected diagnostic return; superseded by the internally inspected native recipes. Excluded from the final delivered inventory.",
+  "archived_source": "rejected/tank-r4.png"
+}

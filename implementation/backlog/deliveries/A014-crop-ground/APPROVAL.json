@@ -1,0 +1,15 @@
+{
+  "pack": "A014",
+  "date": "2026-10-10",
+  "status": "approved for integration",
+  "owner_words": "esses estao aprovados, tem mais pra gerar?",
+  "approved_folder": "implementation/backlog/deliveries/A014-crop-ground",
+  "approved_sha256": {
+    "native/tilled_edge_corner_nw/none/01.png": "11e8160ccb04491f8a8d5707e20d29d8e2fb085d8ff82a51d0540dc515dbdf9d",
+    "native/tilled_edge_n/none/01.png": "caafd0f7a589a0927dcc69a00ee9176e120fe973eae319d746a8b5d45822b26b",
+    "native/trampled/none/01.png": "96109142ed8c0ae904bda30237d49522309f1f3b8ac037034c747eb449e808d9",
+    "native/withered/none/01.png": "24513a819350f833a3c621f6904ae5b49c62899de5a6b5fcd9e726f2fe140aeb"
+  },
+  "frames": 4,
+  "runtime_integrated": false
+}

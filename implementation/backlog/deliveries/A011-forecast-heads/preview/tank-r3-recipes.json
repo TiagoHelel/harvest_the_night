@@ -1,0 +1,57 @@
+[
+  {
+    "anim": "head_tank",
+    "asset": "tank",
+    "stem": "tank-r3",
+    "importer": {
+      "id": "A011/head_tank",
+      "source": "implementation/backlog/deliveries/A011-forecast-heads/raw/tank-r3.png",
+      "crop_xywh": [
+        362,
+        346,
+        531,
+        638
+      ],
+      "content_scale": 0.02037617554858934,
+      "content_anchor_xy": [
+        5,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "gold",
+        "gold_dark",
+        "grass",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf_dark",
+        "night",
+        "roof_dark",
+        "rot",
+        "rot_dark",
+        "skin_dark",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ]
+    }
+  }
+]

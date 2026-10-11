@@ -1,0 +1,25 @@
+{
+  "pack": "A010",
+  "date": "2026-10-10",
+  "status": "approved for integration",
+  "owner_words": "aprovado, manda o prompt pro claude",
+  "approved_folder": "implementation/backlog/deliveries/A010-calendar-icons",
+  "approved_sha256": {
+    "native/hud_autumn/none/01.png": "37a83a6d091c9f3695bacc9737da6f92b1c35a684a89c6c57b57843cb269673e",
+    "native/hud_boss_night/none/01.png": "61453a30077d3b0432284342d6472b9fe4097eab36368b8113e3f9d201067fd4",
+    "native/hud_calm_night/none/01.png": "be969c3da1c8c00b8c2185f2720937a24d6d387949a4e26fb824934f459e2490",
+    "native/hud_full_moon/none/01.png": "1679e798104e094fd55f3992fbef7d390de1c65e97bda683f5a9a671a4e166b0",
+    "native/hud_spring/none/01.png": "e55c6b847ad925b9be595a4017f5b37cd8a2cf81ba18d739c5497c62e7dc2989",
+    "native/hud_summer/none/01.png": "d3ae587882ce35c3b644668abe4ca8f0205193e2bf36bb3f68c470816636ee6e",
+    "native/hud_winter/none/01.png": "7dd23008b644e42883cba1e0b7b29bad174ae4ff9056f8b0d1f6aa2f4875fa00",
+    "native/icon_autumn/none/01.png": "853f18583b8c8c949eee78074ec16ce1520e940cb6dfe03cb6b8e5190933c5fd",
+    "native/icon_boss_night/none/01.png": "b86f866ded17d7ea1cada5df76ec3cc88033d5dec3f265480b8bbf6c94f94b55",
+    "native/icon_calm_night/none/01.png": "aa9913dd66c5a91d3f0996d8570bf0a59baec70ae2a42e2e7a2a3c9cd760d105",
+    "native/icon_full_moon/none/01.png": "177f55a6de28ba8f44a341824fa785414de603f85bd387fb6fc70831dc1b23b3",
+    "native/icon_spring/none/01.png": "20e0dd1cc911e8eada5f3196f7d8b6b71c46ad19b2b32f32a0b7ac4d0ee90373",
+    "native/icon_summer/none/01.png": "c0de214a46d267597f9ae289f5fcf1fb783f4d5b3eeed044c2914b10d4b4c5d3",
+    "native/icon_winter/none/01.png": "dd7c5746c41fe2ffd2e74f3adf387469ed7c643a58ffb14e90d064ff2d58488a"
+  },
+  "frames": 14,
+  "runtime_integrated": false
+}

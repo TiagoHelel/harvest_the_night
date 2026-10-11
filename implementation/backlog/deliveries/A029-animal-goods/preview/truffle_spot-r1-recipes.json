@@ -1,0 +1,76 @@
+[
+  {
+    "anim": "truffle_spot",
+    "asset": "truffle_spot",
+    "stem": "truffle_spot-r1",
+    "importer": {
+      "id": "A029/truffle_spot",
+      "source": "implementation/backlog/deliveries/A029-animal-goods/raw/truffle_spot-r1.png",
+      "crop_xywh": [
+        361,
+        573,
+        564,
+        321
+      ],
+      "content_scale": 0.02127659574468085,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "blood",
+        "bone",
+        "bone_dark",
+        "cloth",
+        "cloth_dark",
+        "cloth_light",
+        "flame",
+        "flame_hot",
+        "gold",
+        "gold_dark",
+        "gold_light",
+        "grass",
+        "grass_dark",
+        "grass_light",
+        "ink",
+        "ink_soft",
+        "leaf",
+        "leaf_dark",
+        "leaf_light",
+        "moon",
+        "night",
+        "night_light",
+        "roof",
+        "roof_dark",
+        "roof_light",
+        "rot",
+        "rot_dark",
+        "skin",
+        "skin_dark",
+        "skin_light",
+        "soil",
+        "soil_dark",
+        "soil_light",
+        "stone",
+        "stone_dark",
+        "stone_light",
+        "water",
+        "water_dark",
+        "water_light",
+        "wood",
+        "wood_dark",
+        "wood_light"
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ]
+    }
+  }
+]

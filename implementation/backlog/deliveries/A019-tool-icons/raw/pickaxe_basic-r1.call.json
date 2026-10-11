@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the accepted iron pickaxe master edit target. Change ONLY head, joint and handle MATERIAL COLOURS to basic: weathered dark timber, dull worn rusty head, neutral metal ink_soft/stone_dark/stone and a small rusty soil patch. Preserve entire1254square canvas, blank margins, object position and scale, every outline pixel cluster, diagonal pose and part shapes. No crop, recentering, stretched parts, new body or extra objects. No background, shadow, panel, label or lettering. True transparent alpha outside one complete tool. Native16x16visiblemax14,compact10x10visiblemax8.\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\pickaxe_iron-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A019-tool-icons\\raw\\pickaxe_iron-r1.png",
+      "sha256": "8e681d1eefb4234f4155298150a8be712483aef82e84a90baf5bc27d05edb7b8",
+      "role": "Accepted pose style and scale reference"
+    }
+  ],
+  "returned_file_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-67bbf92f-0876-48f9-b88f-d9536523ccfc.png",
+  "copied_raw_path": "raw/pickaxe_basic-r1.png",
+  "raw_sha256": "d6d768fdb9da721fe3d73fde8adef8d3d900e527362dc3251ccf623a6a57c814",
+  "date": "2026-10-07",
+  "revision": 1,
+  "decision": "accepted",
+  "inspection": "Both native cuts and common scale tier grid inspected. Owner final approval pending."
+}

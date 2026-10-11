@@ -1,0 +1,50 @@
+A032 - Artisan goods
+Approval date: 2026-10-10
+Owner words, verbatim: "esses estao aprovados, tem mais pra gerar?"
+Status: approved for integration; runtime_integrated remains false.
+
+Authoritative folder: implementation/backlog/deliveries/A032-artisan-goods/
+All 22 native exports are approved. Read APPROVAL.json, contract.json, checks.json and this handoff.
+No older delivery folders are superseded. raw/ contains selected ImageGen source art; rejected/ and preview/ are evidence only, never production sources.
+
+Integration task: 0214.
+Replace artisan product stand-ins from 0187/0188 and bread from 0192. Preserve resource IDs wine, juice, jelly, pickles, cheese, butter, cloth, sandbag, flour, bread, sugar and recipes. Each has icon_16x16 for inventory/stall/machine panels and hud_10x10 for compact HUD, display_role inventory/compact_hud. Both cuts share one raw/crop with visible limits 14/8 and one clear border pixel. Do not replace today's oil/food icons. Sandbag here is a single item icon, not the later defence wall asset. UI stays unchanged at night. Extend UI family checks and inspect bottle/jar/sack confusion groups at native size.
+
+Palette mode A: built-in ImageGen raw sources converted with tools/import_art.py:render_source and tools/palette.py:COLOURS. Preserve each exact crop_xywh, sheet_cell_xywh, content_scale, content_anchor_xy, palette_keys, alpha_threshold 128, canvas and pivot from contract.json. Null palette_keys means the complete 42-colour palette; omit the null optional key when invoking render_source. No runtime/ 2x layer.
+
+Native to runtime mapping and aliases:
+native/icon_wine/none/01.png -> sprites/ui/icon_wine.png | alias ui/icon_wine | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_wine/none/01.png -> sprites/ui/hud_wine.png | alias ui/hud_wine | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_juice/none/01.png -> sprites/ui/icon_juice.png | alias ui/icon_juice | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_juice/none/01.png -> sprites/ui/hud_juice.png | alias ui/hud_juice | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_jelly/none/01.png -> sprites/ui/icon_jelly.png | alias ui/icon_jelly | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_jelly/none/01.png -> sprites/ui/hud_jelly.png | alias ui/hud_jelly | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_pickles/none/01.png -> sprites/ui/icon_pickles.png | alias ui/icon_pickles | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_pickles/none/01.png -> sprites/ui/hud_pickles.png | alias ui/hud_pickles | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_bread/none/01.png -> sprites/ui/icon_bread.png | alias ui/icon_bread | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_bread/none/01.png -> sprites/ui/hud_bread.png | alias ui/hud_bread | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_butter/none/01.png -> sprites/ui/icon_butter.png | alias ui/icon_butter | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_butter/none/01.png -> sprites/ui/hud_butter.png | alias ui/hud_butter | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_cheese/none/01.png -> sprites/ui/icon_cheese.png | alias ui/icon_cheese | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_cheese/none/01.png -> sprites/ui/hud_cheese.png | alias ui/hud_cheese | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_cloth/none/01.png -> sprites/ui/icon_cloth.png | alias ui/icon_cloth | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_cloth/none/01.png -> sprites/ui/hud_cloth.png | alias ui/hud_cloth | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_flour/none/01.png -> sprites/ui/icon_flour.png | alias ui/icon_flour | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_flour/none/01.png -> sprites/ui/hud_flour.png | alias ui/hud_flour | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_sandbag/none/01.png -> sprites/ui/icon_sandbag.png | alias ui/icon_sandbag | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_sandbag/none/01.png -> sprites/ui/hud_sandbag.png | alias ui/hud_sandbag | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+native/icon_sugar/none/01.png -> sprites/ui/icon_sugar.png | alias ui/icon_sugar | 16x16 pivot (8,8) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role inventory | points {}
+native/hud_sugar/none/01.png -> sprites/ui/hud_sugar.png | alias ui/hud_sugar | 10x10 pivot (5,5) draw 1.0 | frame 0 dir none 1.0 s loop false mirror none | display_role compact_hud | points {}
+
+Frame order: 01.png is frame 0. Growth stages and machine variants are individually selected states, not timed animations. Directions are none; horizontal mirrors and runtime flips are none. Metadata coordinates are native pixels. Preserve every per-file point shown above.
+Deviations: []. No additional deviation is authorized by this approval.
+
+Never regenerate, repaint, recolour, resample or retime approved art. Never cut sprites from GIFs, previews or screenshots. Never promote a file absent from contract.json. Never add a runtime flip to a baked mirror. Deferred farmer packs and the cancelled run pack are outside this handoff.
+
+Integration steps:
+1. Verify every selected native SHA256 against both contract.json and APPROVAL.json, and source/prompt/reference hashes against recorded provenance. Run this delivery build.py --check; all checks must pass. Stop on mismatch rather than modifying approved pixels.
+2. Promote selected raw files byte-for-byte under versioned assets/art_source/<family>/ paths. Preserve the recorded recipes, aliases and metadata; adapt only source paths. Add manifest entries, prompt/reference/approval provenance, and ownership.json entries. Run python tools/import_art.py and verify runtime PNG hashes equal the approved native exports.
+3. Extend hard-coded family lists in the relevant art checks and bind aliases through existing gameplay state handling as described above. Retain resource IDs, placements, display_role and points.
+4. Run python tools/verify.py and verify all promoted PNG hashes still match; inspect any pack-specific bounds, state, grounding, palette, points and family checks.
+5. Inspect FHD captures by day and night in the actual game context at native density; UI is not world-relit.
+6. After integration and validation, run python implementation/backlog/assets.py set A032 integrated. Claude owns that transition. Do not commit or push unless the owner asks.

@@ -41,6 +41,7 @@ func _run() -> void:
 			UiKit.set_high_contrast(high)
 			_new_room()
 			await _inventory(speaking,high)
+			await _families(speaking,high)
 			_new_room()
 			await _surfaces(speaking,high)
 			await _hud(speaking,high)
@@ -113,14 +114,92 @@ func _inventory_page(speaking: String, high: bool, ids: Array, page: int) -> voi
 		_icon(id,false,at+Vector2(2,11))
 		_icon(id,true,at+Vector2(25,14))
 		_label("999",at+Vector2(42,14))
+	await _check_icons("icons_%d_" % page+speaking+("_contrast" if high else ""))
+
+
+## **The packs' icon families** (task 0147 on): each icon at 16 and at 10,
+## the pack's own file and never a stand-in, pixel for pixel on the night.
+## A005: the hotbar's defences, then the night bar's pictures. A010: the
+## seasons, then the night marks. A019: every tool at every tier (task 0202).
+## A020: the six materials of the forge, the woods and the barn (task 0203).
+## A029: the animals' goods (task 0211). A015 and A016: spring's and
+## summer's produce and seed packets (tasks 0198 and 0199). A022: the sixteen
+## fish, then their book portraits at 32 (task 0205). A032: the artisan goods
+## and the bread (task 0214).
+## A011: the forecast's heads, which are 16x16 only (task 0162).
+func _families(speaking: String, high: bool) -> void:
+	var tools: Array = []
+	for tool in GameData.sorted_names(GameData.TOOLS.keys()):
+		for tier in (GameData.TOOLS[tool] as Array).size():
+			tools.append(ToolTiers.item(tool, tier))
+	var families := {"A005": GameData.sorted_names(GameData.DEFENCES.keys()) + NightHud.ICONS,
+		"A010": CalendarMark.MARKS, "A019": tools,
+		"A020": [GameData.COPPER, GameData.GOLD, GameData.COAL, GameData.HARDWOOD,
+			GameData.HAY, GameData.STRAW],
+		"A029": [GameData.EGG, GameData.MILK, GameData.WOOL, GameData.TRUFFLE],
+		"A015": [GameData.POTATO, GameData.GARLIC, GameData.STRAWBERRY, GameData.CARROT_SEED,
+			GameData.POTATO_SEED, GameData.GARLIC_SEED, GameData.STRAWBERRY_SEED],
+		"A016": [GameData.PEPPER, GameData.SUNFLOWER, GameData.MELON, GameData.CORN_SEED,
+			GameData.PEPPER_SEED, GameData.SUNFLOWER_SEED, GameData.MELON_SEED],
+		"A022": GameData.sorted_names(GameData.FISH_SPECIES.keys()),
+		"A032": [GameData.WINE, GameData.JUICE, GameData.JELLY, GameData.PICKLES, GameData.CHEESE,
+			GameData.BUTTER, GameData.CLOTH, GameData.SANDBAG, GameData.FLOUR, GameData.SUGAR,
+			GameData.BREAD]}
+	for pack in families:
+		_new_room()
+		var ids: Array = families[pack]
+		_label("%s / %d icons / native 16px + HUD 10px / %s" % [pack, ids.size(), speaking],
+			Vector2(12,5), UiKit.WARM)
+		for i in ids.size():
+			var at := Vector2(12+(i%12)*38,30+(i/12)*44)
+			_picture(StringName("icon_%s" % ids[i]),at)
+			_picture(StringName("hud_%s" % ids[i]),at+Vector2(3,24))
+		await _check_icons("family_%s_" % pack+speaking+("_contrast" if high else ""))
+	_new_room()
+	var fish: Array = GameData.sorted_names(GameData.FISH_SPECIES.keys())
+	_label("A022 / %d book portraits / native 32px / %s" % [fish.size(), speaking],
+		Vector2(12,5), UiKit.WARM)
+	for i in fish.size():
+		_picture(StringName("portrait_%s" % fish[i]), Vector2(12+(i%8)*56,30+(i/8)*44))
+	await _check_icons("family_A022_portraits_"+speaking+("_contrast" if high else ""))
+	_new_room()
+	var kinds: Array = [&"walker", &"runner", &"tank", &"breaker", &"giant"]
+	_label("A011 / %d forecast heads / native 16px / %s" % [kinds.size(), speaking],
+		Vector2(12,5), UiKit.WARM)
+	for i in kinds.size():
+		_picture(StringName("head_%s" % kinds[i]),Vector2(12+i*38,30))
+	await _check_icons("family_A011_"+speaking+("_contrast" if high else ""))
+
+
+## A pack's picture by its runtime name, at its native size: a `hud_` cut is
+## 10x10, a book `portrait_` 32x32, anything else 16x16.
+func _picture(name: StringName, at: Vector2) -> TextureRect:
+	var image := TextureRect.new()
+	image.texture = UiKit.picture(name)
+	image.position = at
+	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	image.stretch_mode = TextureRect.STRETCH_KEEP
+	image.size = Vector2(10,10) if String(name).begins_with("hud_") \
+		else (Vector2(32,32) if String(name).begins_with("portrait_") else Vector2(16,16))
+	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_room.add_child(image)
+	_icons.append(image)
+	expect(image.texture!=null and image.texture.resource_path=="res://sprites/ui/%s.png" % name
+		and PlaceholderArt.art(name).is_empty(),"The pack's own file draws, not a stand-in: "+String(name))
+	return image
+
+
+## Every icon of the room: it loads, at its native size, with the imported
+## file's exact pixels - and, captured, those pixels on the screen.
+func _check_icons(shot: String) -> void:
 	for image in _icons:
-		expect(image.texture!=null,"Every full and compact resource loads")
+		expect(image.texture!=null,"Every full and compact icon loads")
 		if image.texture==null:
 			continue
 		expect(image.texture.get_size()==image.size,"Native UI never resizes an inventory icon")
 		var source := Image.load_from_file(ProjectSettings.globalize_path(image.texture.resource_path))
 		expect(image.texture.get_image().get_data()==source.get_data(),"Imported source pixels are exact")
-	await _shoot("icons_%d_" % page+speaking+("_contrast" if high else ""))
+	await _shoot(shot)
 	if _capture:
 		var actual := root.get_texture().get_image()
 		for image in _icons:

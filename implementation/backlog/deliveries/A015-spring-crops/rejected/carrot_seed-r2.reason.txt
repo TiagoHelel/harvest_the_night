@@ -1,0 +1,1 @@
+Source packet silhouette reduces to11x14 and6x8, narrower than required12x14 and7x8.

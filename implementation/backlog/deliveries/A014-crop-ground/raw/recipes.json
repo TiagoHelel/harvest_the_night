@@ -1,0 +1,114 @@
+{
+  "trampled": {
+    "id": "trampled",
+    "source": "implementation/backlog/deliveries/A014-crop-ground/raw/trampled-r1.png",
+    "crop_xywh": [
+      361,
+      523,
+      813,
+      337
+    ],
+    "content_scale": 0.011869436201780416,
+    "content_anchor_xy": [
+      5,
+      4
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "palette": "tools/palette.py:COLOURS",
+    "alpha_threshold": 128
+  },
+  "withered": {
+    "id": "withered",
+    "source": "implementation/backlog/deliveries/A014-crop-ground/raw/withered-r1.png",
+    "crop_xywh": [
+      397,
+      596,
+      508,
+      463
+    ],
+    "content_scale": 0.017278617710583154,
+    "content_anchor_xy": [
+      4,
+      8
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "palette": "tools/palette.py:COLOURS",
+    "alpha_threshold": 128
+  },
+  "tilled_edge_n": {
+    "id": "tilled_edge_n",
+    "source": "implementation/backlog/deliveries/A014-crop-ground/raw/tilled_edge_n-r1.png",
+    "crop_xywh": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "content_scale": 0.012759170653907496,
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "palette": "tools/palette.py:COLOURS",
+    "alpha_threshold": 128,
+    "palette_keys": [
+      "grass_dark",
+      "grass",
+      "grass_light",
+      "soil_dark"
+    ]
+  },
+  "tilled_edge_corner_nw": {
+    "id": "corner",
+    "source": "implementation/backlog/deliveries/A014-crop-ground/raw/tilled_edge_corner_nw-r1.png",
+    "crop_xywh": [
+      0,
+      0,
+      671,
+      671
+    ],
+    "content_scale": 0.02384500745156483,
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "palette": "tools/palette.py:COLOURS",
+    "palette_keys": [
+      "grass_dark",
+      "grass",
+      "grass_light",
+      "soil_dark"
+    ],
+    "alpha_threshold": 128
+  }
+}

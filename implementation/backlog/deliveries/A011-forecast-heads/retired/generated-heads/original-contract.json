@@ -1,0 +1,553 @@
+{
+  "pack": "A011",
+  "slug": "A011-forecast-heads",
+  "title": "Forecast heads",
+  "date": "2026-10-07",
+  "status": "review",
+  "runtime_integrated": false,
+  "palette_mode": "A",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "colour_ramp": [],
+  "alpha_threshold": 128,
+  "tool": "built-in ImageGen",
+  "references": [
+    {
+      "path": "assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/panel.png",
+      "sha256": "0c7d37fe6f4c333a048959f0d5b4b6867cce201d270f260ec78f367d082a1863",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/button_normal.png",
+      "sha256": "86afdc394f1706e5d09cd56dbe3b26ee581b18992cce2832924c4b3e5ad6b160",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/terrain/grass.png",
+      "sha256": "4d1d187493ab8275082ea8aed39ab884e50384b9bb35cc750276ffbd3b54fc3e",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_meat.png",
+      "sha256": "9dca3e036de6964a7f0ab052fb995f0a787fec31316ec9a3e69e77da54d5f23b",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_meat.png",
+      "sha256": "aaff5df261ee3e16f37bc74780c3dc9a92e927861bd8c91fa24817799a0981bd",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/icon_tech.png",
+      "sha256": "884ccf99ed8701ece103cc9c3639066ad55556af6b38b48d910720996faf08e8",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/ui/hud_tech.png",
+      "sha256": "1af9d660469b11234de5bf38fa64a94ae089e57b0f518c5171e6adb6c9388974",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "assets/art_source/enemies/walker/master.png",
+      "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/enemies/walker_walk_0.png",
+      "sha256": "48a68c09e6971c05cc191dcbe1ef56027ed8b31acdc7ef935d34a839ac2af4dc",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "assets/art_source/enemies/runner/master.png",
+      "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "sprites/enemies/runner_walk_0.png",
+      "sha256": "8937bc6993e9497c1c946038ca99fb6e0efeea5fbf4973ccaea773c1bdcea546",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "assets/art_source/enemies/tank/master.png",
+      "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/enemies/tank_walk_0.png",
+      "sha256": "a6d2e2c4d275eba2dfd58617ff66a57c89694e222879b9811e9833ae8b39066e",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "assets/art_source/enemies/breaker/master.png",
+      "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/enemies/breaker_walk_0.png",
+      "sha256": "28c6aba3e63dd06ac1f2eb082d2a76697e09ad4ec5bcba698ce363a064dd5aa4",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "assets/art_source/enemies/giant/master.png",
+      "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "sprites/enemies/giant_walk_0.png",
+      "sha256": "df3e96e2ffce6f44e7d7d019462417444565cbc622ab6f475b73b441fb29ea64",
+      "role": "Existing approved style, identity, material or scale reference"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A011-forecast-heads/preview/head-footprint-guide.png",
+      "sha256": "8606d50118b14a3086d90e396c64a6ba79d4b73edbcefceeef22f755c58dd9bf",
+      "role": "Placement guide only; annotations never drawn"
+    },
+    {
+      "path": "sprites/enemies/breaker.png",
+      "sha256": "00ae35d13b104019b4a2b7bc58259409d26d4cbe59613df76233ba263cb9bcb6",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A011-forecast-heads/preview/input-history/giant-r4-e6b20410f6.png",
+      "sha256": "e6b20410f6a86c616aeef4563c6f693e619eb3bc62da9a95e8573ab617a0763e",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A011-forecast-heads/preview/runner-identity-6x.png",
+      "sha256": "2721f7eae895f2d36a131cfd6313d0a15b0db74bfce0d9b92fc797df183b06d8",
+      "role": "Approved farmer identity and scale"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A011-forecast-heads/preview/input-history/tank-r4-876e0ace0d.png",
+      "sha256": "876e0ace0d24d724ccf80e75fe1d8998a18d0c45bdcbb3d07cea975d0b8f2b69",
+      "role": "Accepted pose style and scale reference"
+    },
+    {
+      "path": "implementation/backlog/deliveries/A011-forecast-heads/preview/walker-identity-6x.png",
+      "sha256": "8ac7c5c1c0d77d78bed01f06e3b7e3ff6159e2b8b3e173b6300bb1c34ff04486",
+      "role": "Approved farmer identity and scale"
+    }
+  ],
+  "animations": [
+    {
+      "anim": "head_walker",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static walker icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "head_runner",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static runner icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "head_breaker",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static breaker icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "head_tank",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static tank icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    },
+    {
+      "anim": "head_giant",
+      "dir": "none",
+      "frames": 1,
+      "poses": [
+        "Static giant icon"
+      ],
+      "frame_seconds": 1,
+      "loop": false,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "mirror": "none",
+      "points": {}
+    }
+  ],
+  "mirror_pairs": {},
+  "files": [
+    {
+      "output": "native/head_walker/none/01.png",
+      "sha256": "4fb67be200712235cef2bb8760a77999a7bb0f82f17e04e63c7a8e135a18ded7",
+      "runtime_name": "sprites/ui/head_walker.png",
+      "anim": "head_walker",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/walker-r1.png",
+      "source_sha256": "d21e0e3d59821f4525680dc64831fd69c1d45c727c7da12e65da3abccc7991d7",
+      "prompt": "raw/walker-r1.prompt.txt",
+      "prompt_sha256": "166f22dbcfd96ab80605b7c1eb300b17aab5f2fed3844c9b2ee560ad541ba4dc",
+      "call": "raw/walker-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          253,
+          211,
+          818,
+          875
+        ],
+        "content_scale": 0.014857142857142857,
+        "content_anchor_xy": [
+          6,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf_dark",
+          "night",
+          "roof",
+          "roof_dark",
+          "rot",
+          "rot_dark",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/head_runner/none/01.png",
+      "sha256": "f035db8bf3f7911d009bc9b3bcf1d785094221fc6f6cc7e91252e34387053716",
+      "runtime_name": "sprites/ui/head_runner.png",
+      "anim": "head_runner",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/runner-r1.png",
+      "source_sha256": "0acb8699ee33224e9c8ab926f68bd8cabae1761e0f3a4a84098e022f0986653e",
+      "prompt": "raw/runner-r1.prompt.txt",
+      "prompt_sha256": "9cad46b25bece0853d2c36a930360ff9c5cea6f84b5a9afc0069ff3450191bf2",
+      "call": "raw/runner-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          297,
+          304,
+          693,
+          706
+        ],
+        "content_scale": 0.018413597733711047,
+        "content_anchor_xy": [
+          6,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "bone",
+          "bone_dark",
+          "cloth",
+          "cloth_dark",
+          "gold",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "roof_dark",
+          "rot",
+          "rot_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "water",
+          "water_dark",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/head_breaker/none/01.png",
+      "sha256": "1ff4e866613d08817c8c97474ac3cfde5c5667200add7e697298e2b9783c7cc0",
+      "runtime_name": "sprites/ui/head_breaker.png",
+      "anim": "head_breaker",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/breaker-r3.png",
+      "source_sha256": "96f4e45bcd6489dd3150a65554c3d54b8c1ab59a69c447d8e07a22f0a01f17f1",
+      "prompt": "raw/breaker-r3.prompt.txt",
+      "prompt_sha256": "4615e61650a855ad6b05447a066269be3fe1a2995f151152df5792d13a545026",
+      "call": "raw/breaker-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          356,
+          290,
+          576,
+          707
+        ],
+        "content_scale": 0.018387553041018388,
+        "content_anchor_xy": [
+          5,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "gold_dark",
+          "gold_light",
+          "grass",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf_dark",
+          "night",
+          "roof",
+          "roof_dark",
+          "roof_light",
+          "rot",
+          "rot_dark",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/head_tank/none/01.png",
+      "sha256": "419581270927d168235ed389bd7d10c162b5fe0dd21bc314aa94b9848f7221a1",
+      "runtime_name": "sprites/ui/head_tank.png",
+      "anim": "head_tank",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/tank-r5.png",
+      "source_sha256": "d270d3c718987e78a1b3cf8a2f21f1aa2b1c618d51bdeab9ad7dc1b4882f5e0e",
+      "prompt": "raw/tank-r5.prompt.txt",
+      "prompt_sha256": "a84710b26116bd33835c7fb82e0b02cfa0d095a546cf79af258fc7648199de3b",
+      "call": "raw/tank-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          308,
+          346,
+          637,
+          609
+        ],
+        "content_scale": 0.019704433497536946,
+        "content_anchor_xy": [
+          6,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "gold",
+          "gold_dark",
+          "grass",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf_dark",
+          "night",
+          "roof_dark",
+          "rot",
+          "rot_dark",
+          "skin_dark",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    },
+    {
+      "output": "native/head_giant/none/01.png",
+      "sha256": "59f56ffe7d22d6c23886cdaea8d7a6694a931fca871cd6f7d7d4edc9b0e54284",
+      "runtime_name": "sprites/ui/head_giant.png",
+      "anim": "head_giant",
+      "dir": "none",
+      "frame": 0,
+      "source": "raw/giant-r5.png",
+      "source_sha256": "d148f5d81203b7f0239316387861eb388fdc965ee3c9214120460c14f51bb416",
+      "prompt": "raw/giant-r5.prompt.txt",
+      "prompt_sha256": "f3619c812deb1deefa81c4b75044cc3b687c4ae4a3f7df94437587ad421900cd",
+      "call": "raw/giant-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          258,
+          321,
+          739,
+          748
+        ],
+        "content_scale": 0.01871657754010695,
+        "content_anchor_xy": [
+          7,
+          7
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "blood",
+          "bone",
+          "bone_dark",
+          "gold",
+          "gold_light",
+          "grass",
+          "grass_dark",
+          "grass_light",
+          "ink",
+          "ink_soft",
+          "leaf_dark",
+          "night",
+          "roof",
+          "roof_dark",
+          "rot",
+          "rot_dark",
+          "skin",
+          "skin_dark",
+          "skin_light",
+          "soil",
+          "soil_dark",
+          "soil_light",
+          "stone",
+          "stone_dark",
+          "stone_light",
+          "wood",
+          "wood_dark",
+          "wood_light"
+        ],
+        "mirrored_from": null
+      },
+      "points": {}
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "exemptions": {
+    "grounded_on_pivot": "UI busts do not have feet; their cut shoulders must end on row14, checked separately.",
+    "points_on_opaque": "No gameplay points required for static icons."
+  },
+  "final_approval_pending": true
+}

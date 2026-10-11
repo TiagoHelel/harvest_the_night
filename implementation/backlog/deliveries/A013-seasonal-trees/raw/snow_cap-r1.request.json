@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: stylized-concept. ONE isolated settled-snow cap only. Image1 is ore FIT reference only: neverdraw the host object, its colours, outline or ground. Image2 is rock FIT reference only: neverdraw the host object, its colours, outline or ground. Image3 is accepted snowcap STYLE reference. Just a LOW BROAD lumpy cushion of snow shaped to rest on the host summit. Finalnative16square, cap about9x3pixels, no tall mound. Aboutfourtimeswiderthantall, singlejoined8connectedform, lowthickpixelclusters, creamRGB232224207 top, palemoonRGB207214255 highlights, mutedcreamRGB184174154 underside, tiny stone_light140138150/night261848 edging. Noothercolours, holes, detachedflake/droplet, particles, hostbody, lettering, UI, scenery, groundshadow or glow. Sameorthographicthreequartertopdowncamera, neutralupperleftlight. No antialiasing, smoothgradient orsoftbrushtexture. Completeunclippedcapwithgeneroustrue-transparentmargins. Capmustcoveronlytopsurface, neverhangdownobjectside.\n",
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore.png",
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\rock.png",
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A013-seasonal-trees\\raw\\rock_snow-r1.png"
+  ],
+  "transparent_background": true
+}

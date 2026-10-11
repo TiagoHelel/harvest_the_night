@@ -1,0 +1,34 @@
+{
+  "pack": "A013",
+  "date": "2026-10-10",
+  "status": "approved for integration",
+  "owner_words": "aprovado",
+  "approved_folder": "implementation/backlog/deliveries/A013-seasonal-trees",
+  "approved_sha256": {
+    "native/ore_b_snow/none/01.png": "d5e2b3485a5d9d8700df71867ac4e10427cc0a4dc56e4837a1bde3421fd101c5",
+    "native/ore_snow/none/01.png": "cee181b4c49ab0802951cba5820d54a269ebb390248f5333feb141943c835b66",
+    "native/rock_b_snow/none/01.png": "cc79add1f983768cb1d0c5fb53e2ca168d3d91118ac5e873e2454f4f772bef5d",
+    "native/rock_snow/none/01.png": "604aa47b492e26377ca5639c0a24c426e659097320ff31dd91732a33a25e6130",
+    "native/seam_b_snow/none/01.png": "3aa87df3d4a29ea29ce942f90ed33c8188133f9b7c901f4e8fe6216b74245483",
+    "native/seam_snow/none/01.png": "c113e27fdf029b47e28dd80f1b4e623e276926885fdc0e99dcb05f0bba574695",
+    "native/snow_cap/none/01.png": "dcad4e56fd8c077a551428f139089fb21d1e8c85ea358e4c4ffdb5c73c505046",
+    "native/snow_cap_2x2/none/01.png": "b542629f0f3b5bd1702fc6aba5d025c5194d1f61bcce7b5568205a34e5eb5757",
+    "native/stump_snow/none/01.png": "fb38928614e00309744674b752e9d6a425144ca335b91f4a6d6b34e01a2106f2",
+    "native/tree_autumn/none/01.png": "aa51d13a2252e34fa66da7efa8ba6fe134d4478a3f863fc298878e83c48f2395",
+    "native/tree_b_autumn/none/01.png": "244ab93741ac6b3b15d49ab5bc87e2cefd6cbe9e24aaf5dc2a7db08abdb98470",
+    "native/tree_b_spring/none/01.png": "be1c5e5410b2b598d13f680f89c553dfb7ea10e4b22515e2e8cbb033d5d8520b",
+    "native/tree_b_winter/none/01.png": "29c48364f06c027bc04848dedb74b960a0f5a7b8cb9db48a01dfa75a2c2cff0d",
+    "native/tree_spring/none/01.png": "d1e5d7e6ecc8079434292e3d415e2127a6517c119e91f10cdf4fda8687ea3328",
+    "native/tree_winter/none/01.png": "c0cb06eb8f3fe0d90c4bba0dc5e8420927394a7266496a98ee75eab3f09f1724"
+  },
+  "frames": 15,
+  "runtime_integrated": false,
+  "accepted_qa_exceptions": [
+    {
+      "check": "blossom_clusters_at_least3",
+      "anim": "tree_b_spring",
+      "single_pixel_clusters": 1,
+      "reason": "Owner explicitly approved after disclosure of one isolated pale blossom pixel. Preserve the approved pixels."
+    }
+  ]
+}
