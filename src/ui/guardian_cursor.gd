@@ -94,18 +94,23 @@ func look() -> StringName:
 	return _look
 
 
-## **The flare's aim** (task 0135). The night HUD's FLARE button arms it; the
-## next confirm fires at the cursor and `cancel` disarms. While it is armed,
-## or the ability key is held, with the flare ready, the cursor draws the
-## flare's reach: `ABILITY.radius_tiles` round the cell, a Chebyshev square,
-## measured the way `Ability.use` measures it.
+## **A power's aim** (task 0135's flare; every power since 0233). A night
+## HUD button arms it with its power; the next confirm fires that power at the
+## cursor and `cancel` disarms. While it is armed, or a power's key is held,
+## with that power ready, the cursor draws the power's reach
+## (`reach_tiles`): the flare's and the dog's squares round the cell, a
+## Chebyshev square measured the way `Ability` measures it, the repair's own
+## cell, and nothing for the bell, which reaches the whole farm.
 var _armed := false
+var _armed_power: StringName = Ability.FLARE
 var _aiming := false
+var _aiming_power: StringName = Ability.FLARE
 
 
-func arm() -> void:
+func arm(power: StringName = Ability.FLARE) -> void:
 	if _active:
 		_armed = true
+		_armed_power = power
 
 
 func disarm() -> void:
@@ -116,10 +121,17 @@ func is_armed() -> bool:
 	return _armed
 
 
-## Whether the reach is drawn - `Main` says, from the button and the key.
-func set_aiming(on: bool) -> void:
-	if on != _aiming:
+## The power a button armed, or `&""`.
+func armed_power() -> StringName:
+	return _armed_power if _armed else &""
+
+
+## Whether a reach is drawn, and whose - `Main` says, from the buttons and
+## the keys.
+func set_aiming(on: bool, power: StringName = Ability.FLARE) -> void:
+	if on != _aiming or power != _aiming_power:
 		_aiming = on
+		_aiming_power = power
 		queue_redraw()
 
 
@@ -127,21 +139,50 @@ func is_aiming() -> bool:
 	return _aiming
 
 
-## An armed flare's confirm: aim it at the cursor and let it go. The cell as
+## The power whose reach is drawn, while one is.
+func aiming_power() -> StringName:
+	return _aiming_power if _aiming else &""
+
+
+## An armed power's confirm: aim it at the cursor and let it go. The cell as
 ## it is at the press, like `confirm_repair`.
-func confirm_flare(state: Dictionary, event: InputEvent) -> bool:
+func confirm_power(state: Dictionary, event: InputEvent) -> bool:
 	if not _active or not _armed or state.is_empty():
 		return false
 	if not (event.is_action_pressed(&"place") or event.is_action_pressed(&"interact")):
 		return false
-	var intent: Dictionary = state["intent"]
-	intent["ability_cell"] = [_cell.x, _cell.y]
-	intent["ability"] = true
+	press(state, _armed_power, _cell)
 	_armed = false
 	return true
 
 
-## `cancel` while armed puts the flare away rather than doing anything else.
+## **A power's press at `cell`** (task 0233): the aim and the intent the rules
+## read - the flare's `ability`, which it has had since task 0054, or another
+## power's id in `power`. The one road the confirm and the keys take.
+static func press(state: Dictionary, power: StringName, cell: Vector2i) -> void:
+	var intent: Dictionary = state["intent"]
+	intent["ability_cell"] = [cell.x, cell.y]
+	if power == Ability.FLARE:
+		intent["ability"] = true
+	else:
+		intent["power"] = power
+
+
+## **A power's reach round the cursor**, in tiles: the flare's and the dog's
+## squares, the repair's one cell (0), and -1 for the bell, whose reach is the
+## whole farm - nothing to draw.
+static func reach_tiles(power: StringName) -> int:
+	match power:
+		Ability.FLARE:
+			return int(GameData.ABILITY["radius_tiles"])
+		Ability.CALL_DOG:
+			return int((GameData.POWERS[Ability.CALL_DOG] as Dictionary)["radius_tiles"])
+		Ability.EMERGENCY_REPAIR:
+			return 0
+	return -1
+
+
+## `cancel` while armed puts the power away rather than doing anything else.
 func cancel_aim(event: InputEvent) -> bool:
 	if _armed and event.is_action_pressed(&"cancel"):
 		_armed = false
@@ -276,12 +317,13 @@ func _draw() -> void:
 	_draw_stand_in(-pivot, frame())
 
 
-## **The flare's reach** (task 0135): every cell within `radius_tiles` of the
-## cursor's, Chebyshev, so the square is exactly what `Ability.use` hits.
-## Code, like the range ring and the route preview - A004 draws the cursor,
-## not this. Cells off the farm are left out, as the flare leaves them.
-func reach_cells() -> Array:
-	var radius := int(GameData.ABILITY["radius_tiles"])
+## **A power's reach** (task 0135's flare; 0233's powers): every cell within
+## `reach_tiles` of the cursor's, Chebyshev, so the square is exactly what
+## `Ability` reaches - none for the bell. Code, like the range ring and the
+## route preview - A004 draws the cursor, not this. Cells off the farm are
+## left out, as the powers leave them.
+func reach_cells(power: StringName = Ability.FLARE) -> Array:
+	var radius := reach_tiles(power)
 	var out: Array = []
 	for dy in range(-radius, radius + 1):
 		for dx in range(-radius, radius + 1):
@@ -293,7 +335,9 @@ func reach_cells() -> Array:
 
 func _draw_reach() -> void:
 	var tile := float(GameData.TILE_SIZE)
-	var radius := float(int(GameData.ABILITY["radius_tiles"]))
+	if reach_tiles(_aiming_power) < 0:
+		return
+	var radius := float(reach_tiles(_aiming_power))
 	var moon: Color = PaletteData.COLOURS[&"moon"]
 	var box := Rect2(Vector2.ONE * -(radius + 0.5) * tile, Vector2.ONE * (radius * 2.0 + 1.0) * tile)
 	draw_rect(box, Color(moon, 0.10), true)

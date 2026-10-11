@@ -236,15 +236,28 @@ static func apply(state: Dictionary, cell: Vector2i, hp: int) -> int:
 		return 0
 	if not _charge(state, cell, doing):
 		return 0
+	restore(state, cell, doing)
+	return doing
 
+
+## **Put up to `hp` hit points back into this cell, paying nothing** (task
+## 0233): never past what it has whole today - the house up to
+## `Phases.house_full()`, a structure its levelled hit points - and a wrecked
+## coop or barn back on its first one. The one road a hit point comes back by:
+## mending puts back what it has paid for through it, and the emergency
+## repair puts its share back free. Returns how many went in.
+static func restore(state: Dictionary, cell: Vector2i, hp: int) -> int:
 	var on := Farm.occupant(state, cell)
+	if hp <= 0 or on.is_empty():
+		return 0
 	if StringName(on["id"]) == HOUSE:
-		state["house_hp"] = int(state["house_hp"]) + doing
-		return doing
+		var room := maxi(Phases.house_full(state) - int(state["house_hp"]), 0)
+		state["house_hp"] = int(state["house_hp"]) + mini(hp, room)
+		return mini(hp, room)
 
 	var full := full_hp_at(state, cell)
 	var was := int(on.get("hp", full))
-	on["hp"] = mini(was + doing, full)
+	on["hp"] = mini(was + hp, full)
 	# **A wrecked coop or barn comes back with its first hit point** (task
 	# 0186): every cell of it at once, and the breakers' hunt field told, so
 	# it is something to come for again.
@@ -252,7 +265,7 @@ static func apply(state: Dictionary, cell: Vector2i, hp: int) -> int:
 		Building.set_shared_hp(state, cell, int(on["hp"]))
 		if was <= 0:
 			Farm.touch(state)
-	return doing
+	return maxi(int(on["hp"]) - was, 0)
 
 
 ## Put `hp` hit points on the slate and take whatever whole resources fall

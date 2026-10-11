@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 77
+const GROUPS := 78
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -156,6 +156,7 @@ func _run() -> void:
 	_task_0230_electric_fence()
 	_task_0231_strong_walls()
 	_task_0232_powers_list()
+	_task_0233_powers()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -878,6 +879,9 @@ func _task_0121_pad() -> void:
 		&"stats": "a read-only screen no play depends on, and no button left over",
 		&"log": "a read-only screen, like stats",
 		&"tech": "L3 went to START (task 0136); a screen reached by its key - the night bar has no TECH, the tree only changes by day",
+		&"farm_bell": "a night bar button: the powers are the bar's upper row on a pad (task 0233), every pad input having an action already",
+		&"call_dog": "a night bar button, like farm_bell",
+		&"emergency_repair": "a night bar button, like farm_bell",
 	}
 	var project := FileAccess.get_file_as_string("res://project.godot")
 	var section := project.substr(project.find("\n[input]\n"))
@@ -5376,14 +5380,28 @@ func _task_0185_animals() -> void:
 	expect(_pig_spots(1852) == _pig_spots(1852) and not _pig_spots(1852).is_empty(),
 		"the same seed and mornings mark the same spots")
 
-	# **No dog in the rules.** The pet is the view's alone.
+	# **No pet in the rules.** Where the dog is is the view's alone; since task
+	# 0233 the rules know the power that calls it out - its numbers and its
+	# node, its press and its bite - and nothing else, and no key of the
+	# state but the power's says dog.
 	var found: Array = []
 	for file_name in DirAccess.get_files_at("res://src/core/"):
 		if String(file_name).ends_with(".gd") \
 				and FileAccess.get_file_as_string("res://src/core/" + String(file_name)).to_lower().contains("dog"):
 			found.append(file_name)
-	expect(found.is_empty() and FileAccess.get_file_as_string("res://src/ui/animal_view.gd").contains("dog"),
-		"a text scan finds no dog in src/core/ - it lives in the view", str(found))
+	found.sort()
+	var keyed_dog: Array = []
+	var fresh_run := State.create(1853)
+	for key in fresh_run.keys():
+		if String(key).contains("dog"):
+			keyed_dog.append(key)
+	for key in (fresh_run["ability"] as Dictionary).keys():
+		if String(key).contains("dog") and not String(key).begins_with("dog"):
+			keyed_dog.append(key)
+	expect(found == ["ability.gd", "game_data.gd", "player.gd"] and keyed_dog.is_empty()
+		and not GameData.LIVESTOCK.has(&"dog")
+		and FileAccess.get_file_as_string("res://src/ui/animal_view.gd").contains("dog"),
+		"a text scan finds the dog in src/core/ only as the power that calls it out - it lives in the view", str(found))
 	_completed += 1
 
 
@@ -8872,10 +8890,10 @@ func _task_0231_strong_walls() -> void:
 func _task_0232_powers_list() -> void:
 	var table: Dictionary = GameData.ABILITY
 	var fresh := State.create(23200)
-	expect(Ability.ORDER == [Ability.FLARE] and Ability.POWERS.keys() == [Ability.FLARE]
+	expect(Ability.ORDER[0] == Ability.FLARE and Ability.POWERS.keys()[0] == Ability.FLARE
 		and Ability.numbers(Ability.FLARE) == table and Ability.is_power(Ability.FLARE)
-		and (fresh["ability"] as Dictionary).keys() == ["cooldown", "flare", "flare_ticks", "flares"],
-		"the flare is the one power, its numbers GameData.ABILITY's and its keys in the state the four it has had since 0054",
+		and (fresh["ability"] as Dictionary).keys().slice(0, 4) == ["cooldown", "flare", "flare_ticks", "flares"],
+		"the flare is the first power, its numbers GameData.ABILITY's and its keys in the state the four it has had since 0054, first",
 		str((fresh["ability"] as Dictionary).keys()))
 
 	# **Its wait, through the new calls**: the lever's whole, and the tree's
@@ -8955,6 +8973,211 @@ func _task_0232_powers_list() -> void:
 	expect(asked == [false, false, 0, 0, 0, [], 0, {}, false] and var_to_bytes(pressed) == before,
 		"an id that is not a power is refused at every call, and the state is byte for byte as it was",
 		str(asked))
+	_completed += 1
+
+
+## 0233 - three new powers. The farm bell stops every zombie on the farm for
+## its ticks, a boss for its share; the dog runs from the porch and bites the
+## zombie nearest the aimed cell after a delay worked out from its run; the
+## emergency repair puts a share of a structure's levelled hit points back,
+## free, through `Repair.restore`. Each waits its own while, comes back with
+## the night, and is refused until its node of the tree is bought.
+func _task_0233_powers() -> void:
+	# **The table, its check, the digest and the nodes.**
+	var powers: Dictionary = GameData.POWERS
+	var broken := {}
+	var waits: Dictionary = powers.duplicate(true)
+	(waits[Ability.FARM_BELL] as Dictionary)["cooldown_ticks"] = 0
+	broken["a power that waits for nothing"] = [waits, GameData.TECH_TREE]
+	var twice: Array = GameData.TECH_TREE.duplicate(true)
+	for row in twice:
+		if StringName((row as Dictionary)["id"]) == &"a good dog":
+			(row as Dictionary)["gives"] = {"farm_bell_bonus": 1}
+	broken["two nodes giving the bell and none the dog"] = [powers, twice]
+	var mute: Dictionary = powers.duplicate(true)
+	(mute[Ability.FARM_BELL] as Dictionary)["stun_ticks"] = 0
+	broken["a bell that stops nobody"] = [mute, GameData.TECH_TREE]
+	var bossy: Dictionary = powers.duplicate(true)
+	(bossy[Ability.FARM_BELL] as Dictionary)["boss_stun_percent"] = 150
+	broken["a boss stopped for more than all of it"] = [bossy, GameData.TECH_TREE]
+	var toothless: Dictionary = powers.duplicate(true)
+	(toothless[Ability.CALL_DOG] as Dictionary)["damage"] = 0
+	broken["a dog that bites for nothing"] = [toothless, GameData.TECH_TREE]
+	var odd: Dictionary = powers.duplicate(true)
+	(odd[Ability.CALL_DOG] as Dictionary)["damage_type"] = &"tickle"
+	broken["a dog biting with no damage type"] = [odd, GameData.TECH_TREE]
+	var idle: Dictionary = powers.duplicate(true)
+	(idle[Ability.EMERGENCY_REPAIR] as Dictionary)["restore_percent"] = 0
+	broken["a repair that puts back nothing"] = [idle, GameData.TECH_TREE]
+	var let_through: Array = []
+	for why in GameData.sorted_names(broken.keys()):
+		if GameData.check_powers(broken[why][0], broken[why][1]).is_empty():
+			let_through.append(why)
+	var source := FileAccess.get_file_as_string("res://src/core/game_data.gd")
+	var nodes := [Tech.node(&"a farm bell"), Tech.node(&"a good dog"), Tech.node(&"an emergency kit")]
+	var shaped := true
+	for i in nodes.size():
+		var node: Dictionary = nodes[i]
+		shaped = shaped and StringName(node.get("branch", &"")) == &"survival" and int(node.get("season", -1)) == i + 1
+	expect(GameData.validate().is_empty() and let_through.is_empty() and source.contains("\"powers\": POWERS,")
+		and shaped and Ability.node_of(Ability.FARM_BELL) == &"a farm bell"
+		and Ability.node_of(Ability.CALL_DOG) == &"a good dog" and Ability.node_of(Ability.EMERGENCY_REPAIR) == &"an emergency kit"
+		and (nodes[0] as Dictionary)["needs"] == [&"a second flare"] and (nodes[1] as Dictionary)["needs"] == [&"a farm bell"]
+		and (nodes[2] as Dictionary)["needs"] == [&"a good dog"]
+		and int((nodes[0] as Dictionary)["cost"]) == 16 and int((nodes[1] as Dictionary)["cost"]) == 27
+		and int((nodes[2] as Dictionary)["cost"]) == 40,
+		"the powers' table passes and is in the digest; a survival node gives each - summer the bell, autumn the dog, winter the repair, a chain off spring's last at a floor's price - and the check refuses a power that waits for nothing, given twice, a mute bell, a boss stopped for more than all, a toothless or untyped dog and a repair of nothing",
+		"let through: %s" % str(let_through))
+
+	# **Refused before its node**, and nothing touched; then given.
+	var locked := _powers_night(23300)
+	var cell := _open_square(locked, 5)
+	var before := var_to_bytes(locked)
+	var refused: Array = []
+	for id in [Ability.FARM_BELL, Ability.CALL_DOG, Ability.EMERGENCY_REPAIR]:
+		if Ability.unlocked(locked, id) or Ability.ready(locked, id) or Ability.use(locked, id, cell):
+			refused.append(id)
+	var said := Describe.power(locked, Ability.FARM_BELL)
+	var same := var_to_bytes(locked) == before
+	(locked["tech_owned"] as Array).append_array([&"a farm bell", &"a good dog", &"an emergency kit"])
+	expect(refused.is_empty() and same
+		and said.contains(Names.refusal([&"WHY_NEEDS_TECH", &"a farm bell"]))
+		and Ability.ready(locked, Ability.FARM_BELL) and Ability.ready(locked, Ability.CALL_DOG)
+		and Ability.ready(locked, Ability.EMERGENCY_REPAIR) and Ability.unlocked(locked, Ability.FLARE),
+		"each power is refused before its node is bought - the state untouched, its tooltip naming the node - and ready once it is; the flare needs none",
+		"%s / %s" % [str(refused), said])
+
+	# **The bell holds every walker for exactly its ticks**, a boss for its
+	# share, and the wait starts.
+	var bell: Dictionary = powers[Ability.FARM_BELL]
+	var rung := _powers_night(23301)
+	(rung["tech_owned"] as Array).append(&"a farm bell")
+	var middle := _open_square(rung, 5)
+	var walkers: Array = []
+	for dx in [-2, 0, 2]:
+		walkers.append(Entities.spawn(rung, &"walker", middle + Vector2i(dx, 0)))
+	var giant := Entities.spawn(rung, &"giant", middle + Vector2i(0, 3))
+	var at: Array = []
+	for id in walkers:
+		at.append((Entities.get_one(rung, int(id))["pos"] as Array).duplicate())
+	var went := Ability.use(rung, Ability.FARM_BELL, middle)
+	var stopped := [int(Entities.get_one(rung, int(walkers[0])).get("stun", 0)),
+		int(Entities.get_one(rung, giant).get("stun", 0))]
+	var held := 0
+	for _i in int(bell["stun_ticks"]):
+		Enemies.tick(rung)
+		var still := true
+		for i in walkers.size():
+			still = still and Entities.get_one(rung, int(walkers[i]))["pos"] == at[i]
+		if still:
+			held += 1
+	for _i in 3:
+		Enemies.tick(rung)
+	var moved := 0
+	for i in walkers.size():
+		if Entities.get_one(rung, int(walkers[i]))["pos"] != at[i]:
+			moved += 1
+	expect(went and stopped == [int(bell["stun_ticks"]), int(bell["stun_ticks"]) * int(bell["boss_stun_percent"]) / 100]
+		and held == int(bell["stun_ticks"]) and moved == walkers.size()
+		and Ability.cooldown_left(rung, Ability.FARM_BELL) == int(bell["cooldown_ticks"])
+		and Ability.aimed_at(rung, Ability.FARM_BELL) == [middle.x, middle.y],
+		"the bell holds every walker for exactly its %d ticks and the giant for %d, they walk on after, and it waits its %d"
+			% [int(bell["stun_ticks"]), int(stopped[1]), int(bell["cooldown_ticks"])],
+		"%s held %d moved %d" % [str(stopped), held, moved])
+
+	# **The dog bites the zombie nearest the aimed cell, after its run.**
+	var dog: Dictionary = powers[Ability.CALL_DOG]
+	var sent := _powers_night(23302)
+	(sent["tech_owned"] as Array).append_array([&"a farm bell", &"a good dog"])
+	var aim := _open_square(sent, 5)
+	var near := Entities.spawn(sent, &"walker", aim + Vector2i(1, 0))
+	var tied := Entities.spawn(sent, &"walker", aim + Vector2i(-1, 0))
+	var far := Entities.spawn(sent, &"walker", aim + Vector2i(int(dog["radius_tiles"]) + 1, 0))
+	for id in [near, tied, far]:
+		Entities.set_hp(sent, id, 500)
+	var delay := Grid.manhattan(House.porch(sent), aim) * int(dog["ticks_per_tile"])
+	var calls := Ability.use(sent, Ability.CALL_DOG, aim)
+	for _i in delay - 1:
+		Ability.tick(sent)
+	var early := [500 - int(Entities.get_one(sent, near)["hp"]), 500 - int(Entities.get_one(sent, tied)["hp"])]
+	Ability.tick(sent)
+	var bitten := [500 - int(Entities.get_one(sent, near)["hp"]), 500 - int(Entities.get_one(sent, tied)["hp"]),
+		500 - int(Entities.get_one(sent, far)["hp"])]
+	var hit := maxi(int(dog["damage"]) - int((GameData.ENEMIES[&"walker"] as Dictionary).get("armour", 0)), Combat.MINIMUM_HIT)
+	expect(calls and delay > 0 and Ability.dog_delay(sent, aim) == delay and early == [0, 0]
+		and bitten == [hit, 0, 0] and Ability.dog_target(sent, aim) == mini(near, tied)
+		and Ability.showing(sent, Ability.CALL_DOG) == delay + int(dog["bite_ticks"]),
+		"the dog runs %d tiles at %d ticks a tile and bites on the %dth tick - the zombie nearest the cell, the lower id of two as near, nobody past %d tiles - for %d"
+			% [Grid.manhattan(House.porch(sent), aim), int(dog["ticks_per_tile"]), delay, int(dog["radius_tiles"]), hit],
+		"early %s, bitten %s" % [str(early), str(bitten)])
+
+	# **The repair puts back its share of a levelled tower, free**, and is
+	# refused on the house, on nothing and on a whole thing.
+	var kit: Dictionary = powers[Ability.EMERGENCY_REPAIR]
+	var yard := _powers_night(23303)
+	(yard["tech_owned"] as Array).append_array([&"a farm bell", &"a good dog", &"an emergency kit", &"true sights"])
+	Resources.gain(yard, {GameData.WOOD: 200, GameData.IRON: 200})
+	var post := _open_square(yard, 3, &"gun_tower")
+	Farm.place(yard, post, {"id": &"gun_tower", "hp": 60, "level": 2})
+	var full := Repair.full_hp_at(yard, post)
+	(Farm.occupant(yard, post) as Dictionary)["hp"] = 20
+	var purse := var_to_bytes(yard["held"])
+	var wall := post + Vector2i(2, 0)
+	Farm.place(yard, wall, {"id": &"wall", "hp": 120})
+	var house_refused := not Ability.use(yard, Ability.EMERGENCY_REPAIR, Farm.house_centre(yard))
+	var empty_refused := not Ability.use(yard, Ability.EMERGENCY_REPAIR, post + Vector2i(0, 2))
+	var whole_refused := not Ability.use(yard, Ability.EMERGENCY_REPAIR, wall)
+	var untouched := Ability.cooldown_left(yard, Ability.EMERGENCY_REPAIR) == 0
+	var mended := Ability.use(yard, Ability.EMERGENCY_REPAIR, post)
+	var share := full * int(kit["restore_percent"]) / 100
+	expect(full == int(((GameData.TOWER_LEVELS[&"gun_tower"] as Array)[0] as Dictionary)["gives"]["hp"])
+		and house_refused and empty_refused and whole_refused and untouched and mended
+		and int(Farm.occupant(yard, post)["hp"]) == 20 + share and var_to_bytes(yard["held"]) == purse
+		and Ability.aimed_at(yard, Ability.EMERGENCY_REPAIR) == [post.x, post.y]
+		and Ability.cooldown_left(yard, Ability.EMERGENCY_REPAIR) == int(kit["cooldown_ticks"]),
+		"the repair gives a level-two gun tower its %d%% of %d back - %d - free, after refusing the house, an empty cell and a whole wall without waiting"
+			% [int(kit["restore_percent"]), full, share], str(Farm.occupant(yard, post)))
+	(Farm.occupant(yard, post) as Dictionary)["hp"] = full - 3
+	var capped := Repair.restore(yard, post, 50)
+	expect(capped == 3 and int(Farm.occupant(yard, post)["hp"]) == full,
+		"and the road both mending and the repair take stops at the levelled whole", str(capped))
+
+	# **Every night gives them back**, the dog home.
+	Ability.recharge(sent)
+	expect(Ability.ready(sent, Ability.CALL_DOG) and Ability.ready(sent, Ability.FARM_BELL)
+		and Ability.dog_due(sent) == 0 and Ability.aimed_at(sent, Ability.CALL_DOG).is_empty(),
+		"the next night begins with every power charged and the dog home")
+
+	# **Their press**: `intent.power` by id, with the cursor's cell.
+	var pressed := _powers_night(23304)
+	(pressed["tech_owned"] as Array).append(&"a farm bell")
+	var spot := _open_square(pressed, 5)
+	GuardianCursor.press(pressed, Ability.FARM_BELL, spot)
+	Ability.tick(pressed)
+	expect(Ability.used(pressed, Ability.FARM_BELL) == 1 and StringName((pressed["intent"] as Dictionary)["power"]) == &""
+		and Ability.aimed_at(pressed, Ability.FARM_BELL) == [spot.x, spot.y],
+		"a power's press is spent on the tick, at the cursor's cell")
+
+	# **The words, the keys and the pictures.**
+	var words := {}
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		words[locale] = [Names.of(Ability.FARM_BELL), Names.of(Ability.CALL_DOG), Names.of(Ability.EMERGENCY_REPAIR),
+			Names.of(&"a good dog"), Names.note_of(&"an emergency kit")]
+	I18n.use("en")
+	var keyed := true
+	for id in [Ability.FARM_BELL, Ability.CALL_DOG, Ability.EMERGENCY_REPAIR]:
+		keyed = keyed and InputMap.has_action(id) and ActionsScript.names().has(id)
+		keyed = keyed and PlaceholderArt.art(StringName("hud_%s" % id)).get("pack", "") == "A045"
+		keyed = keyed and UiKit.picture(StringName("hud_%s" % id)) != null
+	expect((words["en"] as Array) == ["farm bell", "call the dog", "emergency repair", "a good dog",
+		"an emergency repair: a structure gets back three tenths at once"]
+		and (words["pt_BR"] as Array)[0] == "sino da fazenda" and keyed
+		and PlaceholderArt.art(&"dog_run").get("pack", "") == "A028" and PlaceholderArt.art(&"dog_bite").get("pack", "") == "A028"
+		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A028-dog.md").contains("Final geometry settled by game task 0233")
+		and FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"powers\", "),
+		"the powers and their nodes named in both languages, an action and a picture each, the dog's run and bite through 0120's road, A028's table final and a shot of the three at work",
+		str(words))
 	_completed += 1
 
 

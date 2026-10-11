@@ -31,6 +31,8 @@ const DOG_NEAR := 10.0
 const PEN_DEPTH := 2.5
 ## How long a heart floats over the dog, in seconds.
 const HEART_SECONDS := 1.0
+## How far beside a zombie's feet the called dog bites, in pixels.
+const DOG_BITE_GAP := 10.0
 
 var _state: Dictionary = {}
 var _layer: Node2D
@@ -252,7 +254,8 @@ func _draw_animal(animal: Dictionary) -> void:
 
 ## **The dog**: a pet from the first morning. By day it trots after the
 ## farmer and sits a little behind him; at night - and while he is indoors -
-## it sleeps by the porch. Never in the state.
+## it sleeps by the porch, unless it is called out (task 0233). Never in the
+## state.
 func _step_dog(delta: float) -> void:
 	if _dog == null:
 		return
@@ -265,17 +268,23 @@ func _step_dog(delta: float) -> void:
 		var feet := ArtPlacement.contact((_state["player"] as Dictionary)["pos"])
 		var facing: Vector2i = Player.FACING_STEPS[Player.facing(_state)]
 		target = feet - Vector2(facing) * DOG_BEHIND + Vector2(8.0, 0.0)
-	if _dog_pos.x < 0.0:
-		_dog_pos = target
-	var gap := target - _dog_pos
-	var speed := DOG_SPEED if day else DOG_SPEED * 0.6
-	if gap.length() > DOG_NEAR:
-		_dog_pos += gap.normalized() * minf(speed * delta, gap.length())
-		_dog_mode = &"walk"
-		if absf(gap.x) > 0.5:
-			_dog_east = gap.x > 0.0
+	var called := called_dog(_state, home)
+	if not called.is_empty():
+		_dog_pos = called["pos"]
+		_dog_mode = called["mode"]
+		_dog_east = bool(called["east"])
 	else:
-		_dog_mode = &"sit" if day else &"sleep"
+		if _dog_pos.x < 0.0:
+			_dog_pos = target
+		var gap := target - _dog_pos
+		var speed := DOG_SPEED if day else DOG_SPEED * 0.6
+		if gap.length() > DOG_NEAR:
+			_dog_pos += gap.normalized() * minf(speed * delta, gap.length())
+			_dog_mode = &"walk"
+			if absf(gap.x) > 0.5:
+				_dog_east = gap.x > 0.0
+		else:
+			_dog_mode = &"sit" if day else &"sleep"
 	if _heart_left > 0.0 and day:
 		_dog_mode = &"wag"
 	_dog_clock += delta
@@ -283,14 +292,49 @@ func _step_dog(delta: float) -> void:
 	var entry := PlaceholderArt.art(name)
 	var frames := maxi(int(entry.get("frames", 1)), 1)
 	var frame := int(_dog_clock / maxf(float(entry.get("seconds", 0.5)), 0.05)) % frames
+	# The bite's frames follow its own ticks (task 0233).
+	if called.has("frame"):
+		frame = clampi(int(called["frame"]), 0, frames - 1)
 	_dog.texture = _texture(name, frame, &"dog")
 	_dog.offset = -_pivot(_dog.texture)
 	_dog.flip_h = _dog_east
 	_dog.modulate = PlaceholderArt.art_tint(name)
 	var scale := PlaceholderArt.art_scale(name)
 	_dog.scale = Vector2(scale, scale * (0.75 if _dog_mode == &"sleep" else 1.0))
-	var lift := -absf(sin(_dog_clock * 12.0)) if _dog_mode == &"walk" else 0.0
+	var lift := (-absf(sin(_dog_clock * (20.0 if _dog_mode == &"run" else 12.0)))
+		if _dog_mode in [&"walk", &"run"] else 0.0)
 	_dog.position = _dog_pos.round() + Vector2(0, lift)
+
+
+## **The dog called out** (task 0233), placed by the rules' own clock - the
+## ticks left of its mark - so it is where the rules have it at any tick: off
+## the porch at a run (`dog_run`) to the zombie nearest the cell it was sent
+## to, or to the cell when there is none; there for its bite (`dog_bite`),
+## its side to the zombie; and back. `{}` when it is not out. View only.
+static func called_dog(state: Dictionary, home: Vector2) -> Dictionary:
+	var left := Ability.showing(state, Ability.CALL_DOG)
+	var sent := Ability.aimed_at(state, Ability.CALL_DOG)
+	if left <= 0 or sent.size() < 2:
+		return {}
+	var tile := float(GameData.TILE_SIZE)
+	var cell := Vector2i(int(sent[0]), int(sent[1]))
+	var run := Ability.dog_delay(state, cell)
+	var bite := int((GameData.POWERS[Ability.CALL_DOG] as Dictionary)["bite_ticks"])
+	var gone := run * 2 + bite - left
+	var there := (Vector2(cell) + Vector2(0.5, 1.0)) * tile
+	var target := Ability.dog_target(state, cell)
+	if target != 0:
+		# Beside its feet, on the side the dog comes from.
+		var feet := ArtPlacement.contact((Entities.get_one(state, target) as Dictionary)["pos"])
+		there = feet + Vector2(-DOG_BITE_GAP if home.x < feet.x else DOG_BITE_GAP, 0.0)
+	if gone < run:
+		return {"pos": home.lerp(there, float(gone) / float(run)).round(), "mode": &"run",
+			"east": there.x > home.x}
+	if gone < run + bite:
+		return {"pos": there.round(), "mode": &"bite", "east": there.x > home.x,
+			"frame": (gone - run) * 3 / maxi(bite, 1)}
+	return {"pos": there.lerp(home, float(gone - run - bite) / float(run)).round(), "mode": &"run",
+		"east": home.x > there.x}
 
 
 ## A small heart rising over the dog and fading, for a pat.

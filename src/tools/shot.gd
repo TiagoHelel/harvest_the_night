@@ -143,6 +143,7 @@ const SCENARIOS: Array = [
 	["searchlight", "a lit and an unlit tower line at night: Winter 2, a generator running, the east road with a line of gun towers north of it under a searchlight and a line south of it in the dark, tanks coming down the road - the lit line firing a tile further than the dark one can", ""],
 	["electric_fence", "a joined run of electric fence at night: Winter 2, a generator running, a line of electric fence across the east road with a corner, a wooden stub making a tee, two arms at its foot and a wooden fence carrying the east one on, the road's cell hurt and a west arm at the top a wreck; walkers coming down the road, the first stunned where it bit - cold blue, its zap still playing - and the fence picked on the hotbar, its ghost joining the north arm", ""],
 	["strong_walls", "a mixed line at night: Summer 2, a long line across the east road - stone, hardwood walls (the stone wall's level two) either side of the road and sandbags on it - an arm off it in one row of stone, hardwood, stone, sandbags and a fence, and a foot of sandbags, the last of them down; walkers come down the road and bite the sandbags, the cheapest way through; the sandbags picked on the hotbar, their ghost joining the arm's end", ""],
+	["powers", "the three new powers at work at night: Winter 2, a tank leading two walkers down the east road toward the house; the dog sent at the tank and caught at its bite beside its feet, the farm bell rung a moment after - its rings going out from the house and every zombie stood still in cold blue, with no spark - and the hurt middle of three walls by the road mended, its square closing in; the night bar's upper row showing all three charging", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
 	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
 	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
@@ -782,6 +783,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"searchlight": _set_searchlight(state)
 		"electric_fence": _set_electric_fence(state)
 		"strong_walls": _set_strong_walls(state)
+		"powers": _set_powers(state)
 		"north_band": _set_north_band(state)
 		"new_ore": _set_new_ore(state)
 		"stump": _set_stump(state)
@@ -1126,6 +1128,28 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 				mode.set("_pointer", view.cell_to_screen(hand))
 				view.cursor().place_at(hand)
 				mode.call("_follow_cursor")
+		"powers":
+			# The dog sent at the tank and - timed so the shutter finds it at
+			# its bite - the bell rung and the wall mended (task 0233).
+			var tank := 0
+			for id in Entities.ids(state):
+				if StringName(Entities.get_one(state, int(id))["kind"]) == &"tank":
+					tank = int(id)
+			var aim := Entities.cell_of(state, tank) if tank != 0 else _powers_wall
+			var sent := Ability.use(state, Ability.CALL_DOG, aim)
+			var run := Ability.dog_delay(state, aim)
+			Sim.advance(state, maxi(run + POWERS_INTO_BITE - POWERS_RUNG_FOR, 0))
+			var rung := Ability.use(state, Ability.FARM_BELL, Farm.house_centre(state))
+			var mended := Ability.use(state, Ability.EMERGENCY_REPAIR, _powers_wall)
+			Sim.advance(state, POWERS_RUNG_FOR)
+			var still: Array = []
+			for id in Entities.ids(state):
+				var one := Entities.get_one(state, int(id))
+				still.append("%s at %s hp %d stun %d" % [one["kind"], str(Entities.cell_of(state, int(id))),
+					int(one.get("hp", 0)), int(one.get("stun", 0))])
+			print("  powers: dog %s at %s (%d ticks out), bell %s, repair %s - the wall at %d hp; %s"
+				% [sent, str(aim), run, rung, mended, int(Farm.occupant(state, _powers_wall).get("hp", 0)),
+					", ".join(still)])
 		"strong_walls":
 			# Where each walker stands and what it is biting at the shutter,
 			# and the line's pieces as they are (task 0231).
@@ -2903,6 +2927,55 @@ func _set_strong_walls(state: Dictionary) -> void:
 ## it holds the sandbags in hand (task 0231).
 var _strong_line: Array = []
 var _strong_hand := Vector2i(-1, -1)
+
+
+## **The three powers at work** (task 0233): Winter 2's night, the tree's
+## three powers bought. Three walls in a row by the east road, a few cells
+## out from the house, the middle one bitten down to a quarter; a tank
+## leading two walkers down the road. Just before the shutter
+## (`_just_before_the_shutter`) the dog is sent at the tank and, timed so the
+## shutter finds it at its bite, the bell is rung and the wall mended: the dog
+## beside the tank's feet, the bell's rings going out from the house over
+## every zombie stood still, the mended wall's square closing in, and the
+## night bar's upper row showing all three charging.
+func _set_powers(state: Dictionary) -> void:
+	_on_date(state, 3 * GameData.SEASON_DAYS + 2)
+	(state["tech_owned"] as Array).append_array([&"a farm bell", &"a good dog", &"an emergency kit"])
+	Resources.gain(state, {GameData.STONE: 100})
+	Pathing.refresh(state)
+	var road := _east_road(state)
+	var house := Farm.house_centre(state)
+	NightRoad.into_build(state)
+	_powers_wall = Vector2i(-1, -1)
+	for radius in 6:
+		for cell in Grid.within(house + Vector2i(7, -4), radius):
+			var open := _powers_wall.x < 0
+			for dx in [-1, 0, 1]:
+				var at := (cell as Vector2i) + Vector2i(int(dx), 0)
+				open = open and Building.why_not(state, &"wall", at).is_empty() and not road.has(at)
+			if open:
+				_powers_wall = cell
+	for dx in [-1, 0, 1]:
+		Building.place(state, &"wall", _powers_wall + Vector2i(int(dx), 0))
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	(Farm.occupant(state, _powers_wall) as Dictionary)["hp"] = 30
+	# The tank leads, the walkers well back so they close up behind it.
+	var last := road.size() - 1
+	Entities.spawn(state, &"tank", road[maxi(last - 12, 0)])
+	Entities.spawn(state, &"walker", road[maxi(last - 17, 0)])
+	Entities.spawn(state, &"walker", road[maxi(last - 19, 0)])
+	print("  powers: walls round %s, the road %s to %s, the house %s" % [str(_powers_wall), str(road[0]),
+		str(road[last]), str(house)])
+	_look_at(house + Vector2i(6, 0))
+
+
+## The wall `_set_powers` hurt, and how far into the bell's ring and the
+## dog's bite the shutter falls, in ticks (task 0233).
+var _powers_wall := Vector2i(-1, -1)
+const POWERS_RUNG_FOR := 12
+const POWERS_INTO_BITE := 4
 
 
 ## **The route bending round a braid** (task 0228): Autumn 2's build step, a

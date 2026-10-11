@@ -186,6 +186,9 @@ var _swarm_sprites: Array[Sprite2D] = []
 var _zaps: Node2D
 var _zap_cues: Array = []
 var _stunned: Dictionary = {}
+## The powers' marks, out of the ramp as well (task 0233): the bell's rings
+## and a mended structure's square (`_draw_powers`).
+var _marks: Node2D
 var _actor_sprites: Array[Node] = []
 var _shots: Node2D
 ## Only presentation remembers launch points and the level of destroyed towers.
@@ -351,6 +354,12 @@ func _ready() -> void:
 	_route_dots.name = "RoutePreview"
 	_route_dots.draw.connect(_draw_route)
 	cue_layer.add_child(_route_dots)
+	# **The powers' marks** (task 0233) over it: cues, which the night must
+	# not grey out, and the bell's sound goes over the roofs.
+	_marks = Node2D.new()
+	_marks.name = "PowerMarks"
+	_marks.draw.connect(_draw_powers)
+	cue_layer.add_child(_marks)
 	# **The bees on the stung** (task 0226), over the route and under the
 	# Zzz and the cursor (`_place_swarms`).
 	_swarms = Node2D.new()
@@ -566,6 +575,7 @@ func _process(delta: float) -> void:
 	_process_mine_cues(delta)
 	_refresh_splats(delta)
 	_refresh_zaps(delta)
+	_redraw_marks()
 	if _shots != null:
 		# Skipping a night does not emit per-tick observer signals.
 		var alive: Dictionary = {}
@@ -1062,6 +1072,55 @@ func _draw_highlight() -> void:
 		var rect := Rect2(Vector2(at) * size, Vector2(size, size))
 		_highlight.draw_rect(rect, Color(1.0, 0.98, 0.85, 0.85), false, 1.0)
 		_highlight.draw_rect(rect.grow(-1.0), Color(0.0, 0.0, 0.0, 0.25), false, 1.0)
+
+
+## **The powers' marks fade by the tick** (task 0233), and the layer they
+## are drawn on otherwise waits for the cursor to move: drawn again every
+## frame one shows - the flare's ring too, which until then stood still under
+## a still pointer - and once after, to clear the last.
+func _redraw_marks() -> void:
+	var marked := false
+	for id in Ability.ORDER:
+		marked = marked or Ability.showing(_state, id) > 0
+	if marked or _marked:
+		if _highlight != null:
+			_highlight.queue_redraw()
+		if _marks != null:
+			_marks.queue_redraw()
+	_marked = marked
+
+
+## Whether a power's mark showed last frame (`_redraw_marks`).
+var _marked := false
+
+
+## **The other powers' marks** (task 0233), drawn from what the rules
+## recorded, as the flare's ring is, on the night cues' layer: the bell's
+## brass rings going out from the house over the farm while it sounds, each
+## fading as it goes, and a mended structure's warm square closing in on it.
+func _draw_powers() -> void:
+	if _state.is_empty():
+		return
+	var size := float(GameData.TILE_SIZE)
+	var bell := float(Ability.showing(_state, Ability.FARM_BELL))
+	if not Ability.aimed_at(_state, Ability.FARM_BELL).is_empty():
+		var full := maxf(float(int((GameData.POWERS[Ability.FARM_BELL] as Dictionary)["show_ticks"])), 1.0)
+		var grown := 1.0 - bell / full
+		var house := (Vector2(Farm.house_centre(_state)) + Vector2(0.5, 0.5)) * size
+		for ring in BELL_RINGS:
+			var out := fmod(grown + float(ring) / float(BELL_RINGS), 1.0)
+			_marks.draw_arc(house, BELL_REACH * size * out, 0.0, TAU, 64,
+				Color(PaletteData.COLOURS[&"gold_light"], 0.8 * (1.0 - out) * minf(bell / full * 2.0, 1.0)),
+				2.0, true)
+	var mended := Ability.aimed_at(_state, Ability.EMERGENCY_REPAIR)
+	if not mended.is_empty():
+		var left := float(Ability.showing(_state, Ability.EMERGENCY_REPAIR))
+		var full := maxf(float(int((GameData.POWERS[Ability.EMERGENCY_REPAIR] as Dictionary)["show_ticks"])), 1.0)
+		var anchor := Vector2i(int(mended[0]), int(mended[1]))
+		var box := Rect2(Vector2(anchor) * size, Vector2(Building.bounds_at(_state, anchor).size) * size)
+		var closing := box.grow(size * 0.75 * left / full)
+		_marks.draw_rect(closing, Color(PaletteData.COLOURS[&"grass_light"], 0.9 * left / full), false, 2.0)
+		_marks.draw_rect(box, Color(PaletteData.COLOURS[&"flame_hot"], 0.25 * left / full), true)
 
 
 ## Keep the camera on a cell, clamped to the farm and locked vertically.
@@ -1982,7 +2041,10 @@ func _refresh_zaps(delta: float) -> void:
 	var now: Dictionary = {}
 	if night:
 		for id in fresh_stuns(_state, _stunned):
-			_zap_at(zap_point(_state, Entities.get_one(_state, int(id))))
+			# **The wire's shock, not the bell's** (task 0233): a stun with no
+			# electric fence at the cell it bit plays no spark.
+			if shocked_by_wire(_state, Entities.get_one(_state, int(id))):
+				_zap_at(zap_point(_state, Entities.get_one(_state, int(id))))
 		for id in Entities.ids(_state):
 			var left := int(Entities.get_one(_state, int(id)).get("stun", 0))
 			if left > 0:
@@ -2010,6 +2072,20 @@ static func fresh_stuns(state: Dictionary, before: Dictionary) -> Array:
 		if left > int(before.get(int(id), 0)):
 			out.append(int(id))
 	return out
+
+
+## **Whether a stun came off the wire** (task 0233): the cell it last bit,
+## next to it, holds an electric fence - or its rubble, when the bite that
+## shocked it brought the fence down. 0233's bell stops everything with no
+## wire anywhere near.
+static func shocked_by_wire(state: Dictionary, one: Dictionary) -> bool:
+	var bit := int(one.get("chewing", -1))
+	var here := Entities.cell_of(state, int(one.get("id", 0)))
+	if bit < 0 or Grid.manhattan(Grid.cell(bit), here) != 1:
+		return false
+	var cell := Grid.cell(bit)
+	return StringName(Farm.occupant(state, cell).get("id", &"")) == &"electric_fence" \
+		or Farm.rubble_at(state, cell) == &"electric_fence"
 
 
 ## **Where a stun's zap goes**: half way from the enemy's feet to the cell it
@@ -2989,6 +3065,11 @@ const SPLAT_CAP := 8
 const STUNNED_TINT := Color(0.7, 0.88, 1.5)
 const ZAP_LIFT := 13.0
 const ZAP_CAP := 8
+
+## **The farm bell's sound, drawn** (task 0233): this many brass rings at once,
+## going out from the house to this many tiles while the bell's mark shows.
+const BELL_RINGS := 3
+const BELL_REACH := 14.0
 
 
 ## The fallback. Task 0075 makes this unreachable.

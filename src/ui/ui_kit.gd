@@ -92,6 +92,35 @@ static func picture(name: StringName) -> Texture2D:
 	return _texture(String(name))
 
 
+## **A picture in its stand-in's tint** (task 0233), for where only a texture
+## goes - a button's icon, whose colours are the theme's - as a `TextureRect`
+## takes the tint for its `modulate`. The picture itself for real art, which
+## is white, and wherever the image cannot be read back.
+static func tinted_picture(name: StringName) -> Texture2D:
+	var plain := picture(name)
+	var tint := PlaceholderArt.art_tint(name)
+	if plain == null or tint == Color.WHITE:
+		return plain
+	var key := "%s@tinted" % name
+	if _cache.has(key):
+		return _cache[key]
+	var image: Image = plain.get_image()
+	var made: Texture2D = plain
+	if image != null and not image.is_empty():
+		image = image.duplicate() as Image
+		if image.is_compressed():
+			image.decompress()
+		image.convert(Image.FORMAT_RGBA8)
+		for y in image.get_height():
+			for x in image.get_width():
+				var was := image.get_pixel(x, y)
+				image.set_pixel(x, y, Color(minf(was.r * tint.r, 1.0), minf(was.g * tint.g, 1.0),
+					minf(was.b * tint.b, 1.0), was.a * tint.a))
+		made = ImageTexture.create_from_image(image)
+	_cache[key] = made
+	return made
+
+
 ## Whether every resource has one and no icon is orphaned. The done-when of
 ## task 0079, asked as a question rather than left to a person to check.
 static func missing_icons() -> Array:

@@ -277,6 +277,19 @@ const ART := {
 	&"dog_wag": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.12, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	&"dog_walk": {"pack": "A028", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	&"dog_sleep": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	# The dog called out at night (task 0233): its run and its bite, the same
+	# brown cow small, until 0245.
+	&"dog_run": {"pack": "A028", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.08, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	&"dog_bite": {"pack": "A028", "dir": "res://sprites/props/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
+	# A045's powers' pictures (task 0233), until 0244: the bell START's horn
+	# in brass, the dog the meat it is called with, the repair the iron
+	# pickaxe warmed - each tinted, in both boxes.
+	&"icon_farm_bell": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_start", "tint": Color(1.3, 1.08, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_farm_bell": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_start", "tint": Color(1.3, 1.08, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_call_dog": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_meat", "tint": Color(1.15, 0.9, 0.62), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_call_dog": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_meat", "tint": Color(1.15, 0.9, 0.62), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_emergency_repair": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_pickaxe_iron", "tint": Color(1.3, 1.12, 0.8), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_emergency_repair": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_pickaxe_iron", "tint": Color(1.3, 1.12, 0.8), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# A036's night loot (task 0221): the bones' icon the stone paled to bone
 	# and the moon stone's the stone cooled to moonlight, until 0235; the
 	# pile and the stone on the ground drawn in code (`LootView`).

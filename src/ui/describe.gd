@@ -246,6 +246,28 @@ static func tech(id: StringName) -> String:
 	return "\n".join(lines)
 
 
+## **A power, for its button's tooltip** (task 0233): its name, what it does
+## by its numbers, how long it waits on this farm - and, until the tree gives
+## it, the node that would. Empty for what is not one of 0233's powers.
+static func power(state: Dictionary, id: StringName) -> String:
+	if not Ability.is_power(id) or id == Ability.FLARE:
+		return ""
+	var numbers := Ability.numbers(id)
+	var lines: Array = [Names.of(id).to_upper()]
+	match id:
+		Ability.FARM_BELL:
+			lines.append(I18n.f(&"POWERNOTE_FARM_BELL", [_seconds(int(numbers["stun_ticks"])),
+				int(numbers["boss_stun_percent"])]))
+		Ability.CALL_DOG:
+			lines.append(I18n.f(&"POWERNOTE_CALL_DOG", [int(numbers["damage"]), int(numbers["radius_tiles"])]))
+		Ability.EMERGENCY_REPAIR:
+			lines.append(I18n.f(&"POWERNOTE_EMERGENCY_REPAIR", [int(numbers["restore_percent"])]))
+	lines.append(I18n.f(&"POWER_WAITS", [_seconds(Ability.full_cooldown(state, id))]))
+	if not Ability.unlocked(state, id):
+		lines.append(Names.refusal([&"WHY_NEEDS_TECH", Ability.node_of(id)]))
+	return "\n".join(lines)
+
+
 static func enemy(id: StringName) -> String:
 	var entry: Variant = GameData.ENEMIES.get(id, null)
 	if entry == null:

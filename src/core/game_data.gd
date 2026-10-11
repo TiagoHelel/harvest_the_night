@@ -2241,6 +2241,48 @@ const ABILITY: Dictionary = {
 	"flare_ticks": 1 * SECONDS,         # LEVER: ticks, 10-45
 }
 
+## **The guardian's other powers** (task 0233; the plan's 4.4), beside the
+## flare's `ABILITY`: each with its own wait, each unlocked by a node of the
+## survival branch a season from summer (`<id>_bonus` in its `gives`), each
+## aimed with the guardian's cursor and asked for by id (`Ability`). Every
+## night starts with them charged, as it does the flare.
+const POWERS: Dictionary = {
+	&"farm_bell": {
+		# **The farm bell**: every zombie on the farm stops where it is - not
+		# walking, not biting - for `stun_ticks`, on the count the electric
+		# fence's shock writes (`Enemies.stun()`). It rings at the house,
+		# wherever it is aimed.
+		"stun_ticks": 2 * SECONDS,       # LEVER: ticks, 1-4 seconds worth
+		# **A boss stops for half**: long enough to see, too short for two
+		# bells to hold the season's boss through a wave.
+		"boss_stun_percent": 50,         # LEVER: percent of the stop, 0-100
+		"cooldown_ticks": 100 * SECONDS, # LEVER: ticks, 60-150 seconds worth
+		"show_ticks": 1 * SECONDS,       # LEVER: ticks the ring shows, 10-60
+	},
+	&"call_dog": {
+		# **The dog**: it runs from the porch to the aimed cell and bites the
+		# zombie nearest it within `radius_tiles` - after a delay worked out
+		# from how far it ran, `ticks_per_tile` a tile by Manhattan, no
+		# chance in it - then runs back. Its run and its bite are the view's;
+		# the rules know the delay and the bite.
+		"damage": 40,                    # LEVER: per bite, 20-80
+		"damage_type": DAMAGE_IMPACT,
+		"radius_tiles": 3,               # LEVER: tiles round the aimed cell, 2-5
+		"ticks_per_tile": 3,             # LEVER: ticks a tile it runs, 2-6
+		"bite_ticks": 9,                 # LEVER: ticks it stays to bite, 3-20
+		"cooldown_ticks": 40 * SECONDS,  # LEVER: ticks, 20-60 seconds worth
+	},
+	&"emergency_repair": {
+		# **The emergency repair**: the aimed structure gets back this share of
+		# its levelled hit points at once, free (`Repair.restore()`, the cap
+		# mending goes through too). Not the house - mending the house is the
+		# slow, dear thing on purpose - and never rubble.
+		"restore_percent": 30,           # LEVER: percent of its levelled hit points, 15-50
+		"cooldown_ticks": 60 * SECONDS,  # LEVER: ticks, 30-120 seconds worth
+		"show_ticks": 1 * SECONDS,       # LEVER: ticks the mark shows, 10-60
+	},
+}
+
 ## How long something stays lit after it is hit.
 ##
 ## Long enough to read at 30 ticks a second, short enough that a crowd being
@@ -2944,15 +2986,19 @@ const LIGHT_SHORT_SHRINK := 1           # LEVER: tiles lost short of power, 1-2
 ## ## Priced against the year
 ##
 ## A year pays 64 essence at worst and 256 at best (`Tech.total_available()`,
-## a Full Moon's share included). The tree costs 294:
+## a Full Moon's share included). The tree costs 377:
 ## - spring's floor 45, as before: each branch 2 + 3 + 4 + 6;
-## - summer's 3 x 16, autumn's 3 x 27 and winter's 3 x 40.
+## - summer's 4 x 16, autumn's 4 x 27 and winter's 4 x 40 - a floor's three
+##   and, since task 0233, the survival branch's power on it.
 ##
-## That is **more than the best year earns** by about a seventh, and the
-## dearest node with everything under it - a winter one - is 15 + 16 + 27 +
-## 40 = 98, well inside it. Every node is reachable in a year and not all of
-## them are. Spring alone is still the old sum: a branch, 15, fits ten nights'
-## 44 and three of them do not.
+## That is **half again what the best year earns**, where it was a seventh
+## over: the powers are a second road through the survival branch, and a
+## year buys one of the two roads and some of the other, not both. The
+## dearest node with everything under it - a winter one, the emergency kit
+## through the bell and the dog as much as a stake pile through its own - is
+## still 15 + 16 + 27 + 40 = 98, well inside the best year and over the
+## worst's 64. Spring alone is still the old sum: a branch, 15, fits ten
+## nights' 44 and three of them do not.
 ##
 ## ## The effect is a number the rules already read
 ##
@@ -3034,6 +3080,18 @@ const TECH_TREE: Array = [
 	{"id": &"a stake pile", "branch": &"survival", "season": 3, "cost": 40,   # LEVER: essence, 25-60
 		"needs": [&"cheap timber"], "gives": {"barricade_bonus": 6},
 		"note": "six more barricades a night"},
+	# **The powers** (task 0233; the plan's 4.4): a node a season from
+	# summer, a chain of their own off spring's last, each giving its power
+	# (`Ability.unlocked()`) at a floor's price.
+	{"id": &"a farm bell", "branch": &"survival", "season": 1, "cost": 16,   # LEVER: essence, 10-30
+		"needs": [&"a second flare"], "gives": {"farm_bell_bonus": 1},
+		"note": "the farm bell: every zombie on the farm stops for two seconds"},
+	{"id": &"a good dog", "branch": &"survival", "season": 2, "cost": 27,   # LEVER: essence, 15-45
+		"needs": [&"a farm bell"], "gives": {"call_dog_bonus": 1},
+		"note": "the dog runs out at night and bites the zombie nearest the cursor"},
+	{"id": &"an emergency kit", "branch": &"survival", "season": 3, "cost": 40,   # LEVER: essence, 25-60
+		"needs": [&"a good dog"], "gives": {"emergency_repair_bonus": 1},
+		"note": "an emergency repair: a structure gets back three tenths at once"},
 ]
 
 ## What refunding a node costs, as a percentage of what it cost to buy. **Not
@@ -3312,6 +3370,7 @@ static func validate() -> Array:
 	errors.append_array(check_loot(LOOT_PILE_CAP, MOON_STONES,
 		MOON_STONE_ESSENCE, LOOT_FADE_DAYS, LOOT_REACH, ENEMIES, BONES_EVERY))
 	errors.append_array(check_tech_tree(TECH_TREE))
+	errors.append_array(check_powers(POWERS, TECH_TREE))
 	errors.append_array(check_crops(CROPS))
 	errors.append_array(check_gathering(GATHERING))
 	errors.append_array(check_recipes(RECIPES))
@@ -5006,6 +5065,40 @@ static func check_tech_tree(tree: Array) -> Array:
 	return errors
 
 
+## **The powers hold together** (task 0233): each waits for something and is
+## given by exactly one node of the tree; the bell stops for something, a
+## boss's share a share; the dog bites for something, round some cells, at
+## some speed, with a damage type there is; the repair puts back a share.
+static func check_powers(powers: Dictionary, tree: Array) -> Array:
+	var errors: Array = []
+	for id in sorted_names(powers.keys()):
+		var power: Dictionary = powers[id]
+		if int(power.get("cooldown_ticks", 0)) <= 0:
+			errors.append("power '%s' waits for nothing" % id)
+		var givers: Array = []
+		for row in tree:
+			if ((row as Dictionary)["gives"] as Dictionary).has("%s_bonus" % id):
+				givers.append((row as Dictionary)["id"])
+		if givers.size() != 1:
+			errors.append("power '%s' is given by %d nodes of the tree, not one" % [id, givers.size()])
+	var bell: Dictionary = powers.get(&"farm_bell", {})
+	if int(bell.get("stun_ticks", 0)) <= 0:
+		errors.append("the farm bell stops nobody")
+	var share := int(bell.get("boss_stun_percent", -1))
+	if share < 0 or share > 100:
+		errors.append("the farm bell stops a boss for %d%% of it" % share)
+	var dog: Dictionary = powers.get(&"call_dog", {})
+	if int(dog.get("damage", 0)) <= 0 or int(dog.get("radius_tiles", 0)) <= 0 \
+			or int(dog.get("ticks_per_tile", 0)) <= 0 or int(dog.get("bite_ticks", 0)) <= 0:
+		errors.append("the dog bites for nothing, round no cells, or runs at no speed")
+	if not DAMAGE_TYPES.has(StringName(dog.get("damage_type", &""))):
+		errors.append("the dog bites with '%s', which is not a damage type" % dog.get("damage_type", &""))
+	var mend := int((powers.get(&"emergency_repair", {}) as Dictionary).get("restore_percent", 0))
+	if mend <= 0 or mend > 100:
+		errors.append("the emergency repair puts back %d%%" % mend)
+	return errors
+
+
 ## **The night's purse and its essence** (task 0219): a Full Moon never pays
 ## less essence than an ordinary night, and the bounty is a share of the
 ## kills' worth between none of it and all of it.
@@ -5312,6 +5405,7 @@ static func digest() -> int:
 		"repair": [REPAIR_COST_PER_HP, REPAIR_TICKS_PER_HP,
 			HOUSE_REPAIR_PERCENT, REPAIR_PERCENT],
 		"ability": ABILITY,
+		"powers": POWERS,
 		"hurt": [HURT_TICKS],
 		"speeds": [SPEEDS, SKIP_MIN_HOUSE_PERCENT],
 		"night_hud": [HOUSE_DANGER_PERCENT, WAVE_WARNING_TICKS],

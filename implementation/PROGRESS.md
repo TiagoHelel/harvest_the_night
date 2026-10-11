@@ -25180,3 +25180,229 @@ src/ui/{main,night_hud,pixel_effects,world_view}.gd,
 src/tools/{effect_showcase,night_session,headless_check,headless_v1,input_check,input_v1}.gd,
 implementation/prompts/0232-powers-refactor.md,
 implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
+
+## 0233 - Three new powers - done 2026-10-11
+
+What changed: three more buttons for a night going wrong (the plan's 4.4),
+each aimed with the cursor and each with its own wait:
+- **The farm bell** stops every zombie on the farm for two seconds.
+- **The dog** runs out from the porch and bites the zombie nearest the
+  cursor.
+- **The emergency repair** puts a structure back on its feet: three tenths
+  of its levelled hit points at once, free.
+
+Each comes from a node of the survival branch, one a season from summer, and
+shows greyed with its node until then.
+
+### The numbers (`src/core/game_data.gd`)
+
+**`GameData.POWERS`**, beside the flare's `ABILITY`: every number a LEVER, in
+the digest, and checked by `check_powers` in `validate()`.
+- **`farm_bell`:** `stun_ticks` 60 (2 s, LEVER 1-4 s), `boss_stun_percent`
+  50, `cooldown_ticks` 3000 (100 s), `show_ticks` 30.
+- **`call_dog`:** `damage` 40, impact, `radius_tiles` 3, `ticks_per_tile` 3,
+  `bite_ticks` 9, `cooldown_ticks` 1200 (40 s).
+- **`emergency_repair`:** `restore_percent` 30 (LEVER 15-50),
+  `cooldown_ticks` 1800 (60 s), `show_ticks` 30.
+- **`check_powers` asks that:**
+  - each power waits for something and is given by exactly one node;
+  - the bell stops for something, and a boss's share is a share;
+  - the dog bites for something, round some cells, at some speed, with a
+    damage type there is;
+  - the repair puts back a share.
+
+**Three survival rows in `TECH_TREE`**, a chain of their own off spring's
+last node, 'a second flare', each at its floor's price:
+- 'a farm bell': summer, 16, gives `farm_bell_bonus`;
+- 'a good dog': autumn, 27, needs the bell, gives `call_dog_bonus`;
+- 'an emergency kit': winter, 40, needs the dog, gives
+  `emergency_repair_bonus`.
+- **Why `_bonus` keys:** 0220's tree check wants every effect to be a
+  `_percent` or a `_bonus`. `Ability.POWERS` names each one as its `unlock`,
+  so the release checklist's "read by something" finds them by name.
+
+### 0220's arithmetic, redone
+
+- A year pays 64 essence at worst and 256 at best
+  (`Tech.total_available()`).
+- **The tree cost 294; with the three it costs 377:** spring's 45, then
+  summer's 4 x 16, autumn's 4 x 27 and winter's 4 x 40.
+- **That is about half again the best year,** where it was a seventh over.
+  The powers are a second road through the survival branch, and a year buys
+  one road and some of the other, not both.
+- **The dearest node with everything under it is still 98:** the emergency
+  kit through the bell and the dog (15 + 16 + 27 + 40), as much as a stake
+  pile through its own. That is inside the best year and over the worst's 64.
+- Spring's sum is untouched.
+
+### Decided
+
+- **A boss stops for half the bell** (`boss_stun_percent` 50): long enough to
+  see, too short for two bells to hold the season's boss through a wave.
+- **The house does not count for the repair:** mending the house is the
+  slow, dear thing on purpose. Rubble, a structure with no hit points left
+  and a whole one are refused, and a refused press spends nothing.
+- **The dog's delay** is its run from the porch by Manhattan, 3 ticks a tile,
+  never less than 1. When it gets there it bites whoever is nearest the aimed
+  cell within 3 tiles (by Chebyshev, then Manhattan, then the lower id), or
+  nobody. No RNG.
+- **The bell rings at the house** wherever it is aimed, so its cursor draws no
+  reach.
+- **Keys Z, X and C**, rebindable, beside F's flare.
+- **No pad buttons:** every pad input already has an action. On a pad the
+  powers are the night bar's upper row: Back to the bar, up to the row, A arms
+  one, and the next A at the cursor lets it go. 0121's `no_pad` list names the
+  three with that reason.
+- **The bell's stop looks like the wire's:** cold blue on the same count, but
+  no spark. The zap is the wire's alone (`shocked_by_wire`).
+
+### The rules (`src/core/`)
+
+- **`Ability.POWERS` gains the three rows**, each with its own keys in
+  `state["ability"]`:
+  - the bell: `bell_cooldown`, `bells`, `bell`, `bell_ticks`;
+  - the dog: `dog_cooldown`, `dogs`, `dog`, `dog_ticks`, and `dog_due`;
+  - the repair: `repair_cooldown`, `repairs`, `repair`, `repair_ticks`;
+  - and an `unlock` each. `State.TABLES` fills them on an old save through
+    `Ability.initial()`.
+- **Unlocked and ready:** `unlocked(state, id)` and `node_of(id)`; `ready`
+  asks for both, and `full_cooldown` takes a bonus only where there is one.
+- **`use` checks `can_target` before it spends:** the repair asks
+  `repair_target`, and the others go off anywhere on the farm.
+- **The effects:**
+  - `_ring` stuns every enemy through `Enemies.stun` (0230's counter), a boss
+    for its share;
+  - `_send_dog` sets the bite due, and the mark for the run there, the bite
+    and the run back;
+  - `_dog_bite` lands on `dog_target` when the count runs out, through
+    `Combat`;
+  - `_mend` puts back the share through `Repair.restore` and marks the anchor.
+- **`tick`** takes `intent.power` (the press, by id) at
+  `intent.ability_cell`, runs every power's counts down, and counts the dog
+  down to its bite.
+- **`Repair.restore(state, cell, hp)`** is the one road that puts hit points
+  back, capped at the house's full or the levelled full (0113). `apply` goes
+  through it too.
+- `recharge` at `begin_night` and `put_out` at dawn take every power, and send
+  the dog home.
+
+### The view (`src/ui/`)
+
+- **The night HUD:** a row of three buttons over the bar. Each shows its
+  picture, its word while ready and its charge while it waits; until the tree
+  gives it, it is greyed with its node in the tooltip (`Describe.power`), and
+  never hidden. Up and down move between the bar and the row.
+- **The cursor:**
+  - `arm(power)`, `armed_power()`, `set_aiming(on, power)`;
+  - `reach_tiles(power)`: the dog's square round the cell, the repair's own
+    cell, nothing for the bell;
+  - `confirm_power` fires whichever is armed;
+  - `Main` writes a key's press when the power is ready, and shows its reach
+    while the key is held.
+- **The hint** names the power aimed: "LMB: ring the farm bell", "send the
+  dog here", "mend it at once".
+- **The marks**, on the night cues' layer out of the ramp: the bell's three
+  brass rings going out from the house, each fading as it goes, and a mended
+  structure's square closing in on it.
+- **The flare's ring now moves under a still pointer:** the layer it is drawn
+  on waited for the cursor to move. Every frame a power shows, it is drawn
+  again (`_redraw_marks`).
+- **The dog:** `AnimalView.called_dog` places it by the rules' own count: off
+  the porch at a run, beside the zombie's feet for its bite, then back. It is
+  0185's stand-in, the cow small and brown, through 0120's road (`dog_run` and
+  `dog_bite` in `PlaceholderArt`, A028's).
+- **The icons:** A045's `hud_` and `icon_` for the three, as tinted stand-ins -
+  START's horn for the bell, the meat for the dog, the iron pickaxe for the
+  repair.
+  - A button's icon takes no `modulate`, and its colours are the theme's
+    (0081), so `UiKit.tinted_picture` bakes the stand-in's tint into the
+    picture.
+  - Real art is white and goes through untouched.
+- **The words, in both languages:** `ACT_*`, `NHUD_*`, `NHUD_HINT_*`, the
+  `POWER_*` names and notes, `POWER_WAITS`, and the nodes' names and notes.
+- **A028's Deliverables table is final:** one 40x32 canvas on (20,30) at 1.0,
+  and how the night run and bite play.
+
+### Hashes
+
+- **SIM 2958532891 -> 3940398993:** the state gained keys - the three
+  powers' in `state["ability"]` and `intent.power` - and the hash folds them
+  in. **Play is unchanged:** the scenario hashed with those keys taken out
+  comes to 2958532891, the old number. Nobody in it owns the nodes, so no
+  power goes off.
+- **DATA 1845073021 -> 1109408054:** `GameData.POWERS` in the digest and the
+  three survival rows of `TECH_TREE`.
+
+Verify: **PASS**, 60 of 60 in 963 s, after the run that recorded both hashes.
+- **Suites:** `headless_check` 17878 asserts, `headless_v1` 2586, `input_check` 1258 cases, `input_v1` 722 (108 s).
+- **perf:** a night tick 1628 us, the swarm's 8165, a path rebuild 11122, 15552 with the decoys and 11249 with the garlic.
+
+**Tests:**
+- **`_task_0233_powers` (headless_v1):**
+  - **the table:** it passes and is in the digest; the check refuses a power
+    that waits for nothing, one given twice, a mute bell, a boss held for more
+    than all, a toothless or untyped dog and a repair of nothing; the nodes'
+    floors, chain and prices;
+  - **before its node** each power is refused, the state byte for byte and the
+    tooltip naming the node, and it is ready once bought; the flare needs
+    none;
+  - **the bell** holds every walker for exactly its 60 ticks and a giant for
+    30; they walk on after, and it waits its 3000;
+  - **the dog** bites on the computed tick: the nearest of two as near (the
+    lower id), nobody 4 tiles off, for 40 less armour;
+  - **the repair** gives a level-two gun tower its 30% back, free, after
+    refusing the house, an empty cell and a whole wall without waiting, and
+    stops at the levelled whole;
+  - every night begins with every power charged and the dog home;
+  - the words, the actions, the pictures, A028's table and the shot.
+- **`_case_0233_powers` (input_v1):**
+  - **by the mouse**, each power's button is armed by a click and let go at a
+    clicked cell;
+  - **on a pad:** Back, up to the row and along it; A arms one, the D-pad
+    steps the cursor a cell on, and A lets it go;
+  - the repair mends the wall both times;
+  - its first run found the pad's first press leaves the cursor where the
+    mouse had it, so the cursor is now placed after that press;
+  - "every hint fits its line" measures the four aims too.
+- **`tools/i18n_check.py` found** "REPARO" 35 px against the repair button's
+  26. In Portuguese the button says KIT, and the node is a "kit de
+  emergência", as the English is an emergency kit.
+- **Old groups touched:**
+  - `headless_v1`'s 0232 list assert (the flare first, its keys the first
+    four), and 0121's `no_pad` naming the three;
+  - 0185's dog scan finds "dog" in `ability.gd`, `game_data.gd` and
+    `player.gd` only, and never as a top-level state key;
+  - `headless_check`'s 0063 counts a power's node on each later floor;
+  - 0081 found the icon tint's theme override, which is now baked into the
+    picture;
+  - 0106 found the `<id>_bonus` keys unread by name, which are now `unlock`;
+  - 100 scenarios.
+
+**Looked at** (`python tools/shot.py 0233 powers --fhd`, and again with
+`--pt_BR`), Winter 2's night:
+- **The tank and the dog:** a tank leads two walkers down the east road. The
+  dog was sent at it and caught four ticks into its bite, beside the tank's
+  feet; the bite landed - 36 off its 120, 40 less its armour.
+- **The bell,** rung twelve ticks before the shutter: its rings go out from
+  the house over the roof, and every zombie stands still in cold blue with no
+  spark.
+- **The repair:** the middle of three walls by the road mended from 30 to 66,
+  its square closing in.
+- **The powers' row** reads 0%, 4% and 0%, greyed while they wait, over the
+  flare's word.
+- **What the takes found:** the rings and the square were invisible. They were
+  drawn on a layer redrawn only when the cursor moved, then greyed by the
+  night. They moved to the night cues' layer and are drawn every frame they
+  show.
+- **The dog at 1.0** against the tank reads as a small brown animal - the
+  stand-in's job until A028.
+
+Files: src/core/{ability,game_data,player,repair}.gd, src/app/input_actions.gd,
+project.godot (the three actions; the owner's local `run` change stays out),
+src/ui/{main,night_hud,guardian_cursor,build_mode,world_view,animal_view,placeholder_art,ui_kit,names,describe}.gd,
+assets/locale/strings.csv, src/tools/{headless_check,headless_v1,input_v1,shot}.gd,
+tools/{determinism_sim_hash,determinism_data_hash}.txt,
+implementation/backlog/packs/A028-dog.md,
+implementation/prompts/0233-new-powers.md,
+implementation/{BACKLOG,PROGRESS}.md, implementation/shots/0233/,
+docs/devlog/{index,index.pt_BR}.md

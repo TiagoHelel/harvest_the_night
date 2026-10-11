@@ -370,13 +370,19 @@ func _process(_delta: float) -> void:
 	var holding := Input.is_action_pressed(&"interact")
 	if _quiet:
 		_quiet = holding or Input.is_action_pressed(&"ability") \
-			or Input.is_action_pressed(&"cancel")
+			or Input.is_action_pressed(&"cancel") or _holds_a_power()
 	var live := not _was_paused and not _quiet
 	# **Only a press that can fire is written** (task 0135): `Ability.tick` runs
 	# at night alone, so a press by day stayed in the intent and went off on
 	# the night's first tick, wherever the cursor happened to be.
 	if live and ability and Ability.ready(_driver.state, Ability.FLARE):
 		intent["ability"] = true
+	# **The other powers' keys** (task 0233), the same rule: a press that can
+	# fire is written, at the cursor's cell, which the cursor writes below.
+	for power in Ability.ORDER:
+		if power != Ability.FLARE and _just_pressed(power) and live \
+				and Ability.ready(_driver.state, power):
+			intent["power"] = power
 	# **START** (task 0136): an edge the build step spends and every other
 	# phase drops.
 	if live and _just_pressed(&"start_waves"):
@@ -440,13 +446,19 @@ func _drive_cursor(delta: float) -> void:
 	intent["build_cell"] = [cell.x, cell.y]
 	# **The flare goes where the cursor is** (task 0135): a level, every frame.
 	intent["ability_cell"] = [cell.x, cell.y]
-	# Its reach is shown while the flare is ready and the FLARE button is armed
-	# or the ability key held - and then the cursor reads aim.
-	var ready := Ability.ready(_driver.state, Ability.FLARE)
-	if not ready:
+	# A power's reach is shown while it is ready and its button armed or its
+	# key held - and then the cursor reads aim (tasks 0135, 0233).
+	var power := cursor.armed_power()
+	if power != &"" and not Ability.ready(_driver.state, power):
 		cursor.disarm()
-	var aiming := ready and (cursor.is_armed() or Input.is_action_pressed(&"ability"))
-	cursor.set_aiming(aiming)
+		power = &""
+	if power == &"":
+		for id in Ability.ORDER:
+			if Ability.ready(_driver.state, id) and Input.is_action_pressed(power_action(id)):
+				power = id
+				break
+	var aiming := power != &""
+	cursor.set_aiming(aiming, power if aiming else Ability.FLARE)
 	cursor.set_look(&"aim" if aiming else _cursor_look(cell))
 	var mending := cursor.look() == &"repair"
 	var said := Describe.under_cursor(_driver.state, cell)
@@ -646,7 +658,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# flare goes off there (task 0135), or what it reads as repair is mended
 	# (task 0134). `cancel` puts an armed flare away before it opens a menu.
 	var cursor := _world.cursor()
-	if cursor.cancel_aim(event) or cursor.confirm_flare(_driver.state, event) \
+	if cursor.cancel_aim(event) or cursor.confirm_power(_driver.state, event) \
 			or cursor.confirm_repair(_driver.state, event):
 		get_viewport().set_input_as_handled()
 		return
@@ -702,6 +714,21 @@ func profile() -> Dictionary:
 func remember_tip(id: StringName) -> void:
 	_profile = Tips.remember(_profile, id)
 	Save.write_profile(_profile)
+
+
+## **A power's key** (task 0233): the flare's is `ability`, as it has been
+## since task 0054; every other power's action is its own id.
+static func power_action(power: StringName) -> StringName:
+	return &"ability" if power == Ability.FLARE else power
+
+
+## Whether one of 0233's powers' keys is held - the pause's quiet waits for
+## it to be let go, as it waits for the flare's.
+func _holds_a_power() -> bool:
+	for power in Ability.ORDER:
+		if power != Ability.FLARE and Input.is_action_pressed(power):
+			return true
+	return false
 
 
 ## True on the frame an action goes from up to down, whenever that frame is.

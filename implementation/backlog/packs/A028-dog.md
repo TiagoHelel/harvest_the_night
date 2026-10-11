@@ -20,7 +20,7 @@ At 1080p it must read as a friendly medium-sized farm dog next to the 32px farme
 
 ## Deliverables
 
-The table is provisional: game task 0233 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0233. The rows stand as written: one 40x32 canvas on (20,30) for every animation, drawn at 1.0 - a large animal beside the 32 px farmer, smaller than a sheep and bigger than a hen. **How the game plays the night ones:** "call the dog" (unlocked in autumn) sends it off the porch at a run - `dog_run`, 3 ticks a tile (ten tiles a second), straight at the zombie nearest the cell the cursor aimed, or at the cell when there is none - to bite it there: `dog_bite` plays once over the bite's 9 ticks (0.3 s, its three frames at 0.1), standing beside the zombie's feet on the side it came from, facing it; then it runs back to the porch and sleeps. The run and the bite are the view's: the rules only know when the bite lands (the run's length by Manhattan, three ticks a tile) and on whom. `bite_xy` places the existing `impact` effect once the art lands; until then the bite is lined up 10 px from the zombie's feet. Until 0245 every dog animation, these two included, is the farm's cow small and brown through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

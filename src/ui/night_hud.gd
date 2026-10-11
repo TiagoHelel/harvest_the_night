@@ -23,6 +23,9 @@ extends Control
 ## - **The hotbar, bottom** (task 0133, its own node).
 ## - **The bar, bottom right:** START across it in the build step; the flare
 ##   with its charge, the speed and SKIP during the waves.
+## - **The powers, over the bar** (task 0233): the farm bell, the dog and the
+##   emergency repair, each with its picture and its charge - or greyed, its
+##   tree node in its tooltip, until the tree gives it. Never hidden.
 ## - **A005's 10x10 pictures** (task 0147): START's horn, the flare and the
 ##   speed's chevrons on their buttons, the setting moon before the time to
 ##   dawn, and before the hint's words the defence it names - or the flare,
@@ -49,7 +52,10 @@ extends Control
 ## on the keyboard, idle after dark - puts the focus on its first live button,
 ## the D-pad or the stick moves along it, A presses, and B or the night key
 ## again hands the pad back to the cursor. While the bar has the focus the
-## cursor holds still and a held A places nothing (`holds_focus`).
+## cursor holds still and a held A places nothing (`holds_focus`). **The
+## powers are the bar's upper row** (task 0233) - up and down move between
+## the rows - because every pad input has an action already: A on a power
+## arms it, and the next A at the cursor lets it go.
 ##
 ## ## What it does not own
 ##
@@ -79,6 +85,17 @@ const SPEED_SIZE := Vector2(38, 16)
 const BUTTON_SIZE := Vector2(46, 16)
 ## START has the bar to itself in the build step.
 const START_SIZE := Vector2(146, 16)
+
+## **The powers' row** (task 0233), just over the bar: three buttons the
+## width of SKIP, each its picture and its charge.
+const POWERS_AT := Vector2(330, 230)
+const POWER_SIZE := Vector2(46, 16)
+## Each power's word on its button, while it is ready.
+const POWER_WORDS := {&"farm_bell": &"NHUD_FARM_BELL", &"call_dog": &"NHUD_CALL_DOG",
+	&"emergency_repair": &"NHUD_EMERGENCY_REPAIR"}
+## Each power's aim, in the mode hint.
+const POWER_HINTS := {&"flare": &"NHUD_HINT_AIM", &"farm_bell": &"NHUD_HINT_FARM_BELL",
+	&"call_dog": &"NHUD_HINT_CALL_DOG", &"emergency_repair": &"NHUD_HINT_EMERGENCY_REPAIR"}
 
 ## The night bar's own pictures (A005, task 0147), drawn 10x10: START's horn,
 ## the flare, the speed's chevrons and the setting moon of the time to dawn.
@@ -142,6 +159,9 @@ var _dawn_moon: TextureRect
 var _flare: Button
 var _speed: Button
 var _skip: Button
+## The powers' row and its buttons, by power (task 0233).
+var _powers_bar: Control
+var _powers: Dictionary = {}
 
 ## How far through a pulse the danger bar is. View-only: it is driven by
 ## `delta` and never read by anything that matters.
@@ -294,15 +314,45 @@ func _build_controls() -> void:
 	_skip = _button("SkipButton", I18n.t(&"NHUD_SKIP"), Vector2(100, 1))
 	_skip.pressed.connect(_do_skip)
 
-	# **Along the bar and round again, never off it**: up and down stay put,
-	# so a pad on the bar cannot wander into the hotbar.
+	# **The powers' row** (task 0233), over the bar: each arms its power on
+	# the cursor, as the flare does.
+	_powers_bar = Control.new()
+	_powers_bar.name = "PowersBar"
+	_powers_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+	_powers_bar.position = POWERS_AT
+	_powers_bar.size = Vector2(BAR_SIZE.x, POWER_SIZE.y + 2.0)
+	add_child(_powers_bar)
+	var x := 0.0
+	for id in Ability.ORDER:
+		if id == Ability.FLARE:
+			continue
+		var button := _button("Power_%s" % id, I18n.t(POWER_WORDS[id]), Vector2(x, 1), POWER_SIZE,
+			_powers_bar)
+		# A stand-in in its own tint (A045's, through 0120's road), baked into
+		# the picture: a button's icon has no modulate of its own and its
+		# colours are the theme's.
+		button.icon = UiKit.tinted_picture(StringName("hud_%s" % id))
+		button.pressed.connect(_do_power.bind(id))
+		_powers[id] = button
+		x += POWER_SIZE.x + 4.0
+
+	# **Along a row and round again, never off the bar**; up and down move
+	# between the bar and the powers over it, so a pad on the bar cannot
+	# wander into the hotbar.
 	var row: Array[Button] = [_flare, _speed, _skip]
+	var above: Array = [_powers[Ability.FARM_BELL], _powers[Ability.CALL_DOG],
+		_powers[Ability.EMERGENCY_REPAIR]]
 	for i in row.size():
 		var here: Button = row[i]
 		here.focus_neighbor_left = NodePath("../" + String(row[(i + row.size() - 1) % row.size()].name))
 		here.focus_neighbor_right = NodePath("../" + String(row[(i + 1) % row.size()].name))
-		here.focus_neighbor_top = NodePath(".")
+		here.focus_neighbor_top = here.get_path_to(above[i] as Button)
 		here.focus_neighbor_bottom = NodePath(".")
+		var up: Button = above[i]
+		up.focus_neighbor_left = NodePath("../" + String((above[(i + above.size() - 1) % above.size()] as Button).name))
+		up.focus_neighbor_right = NodePath("../" + String((above[(i + 1) % above.size()] as Button).name))
+		up.focus_neighbor_top = NodePath(".")
+		up.focus_neighbor_bottom = up.get_path_to(here)
 	for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
 		_start.set_focus_neighbor(side, NodePath("."))
 
@@ -316,14 +366,14 @@ func _build_controls() -> void:
 ## build palette at 0032, the shop rows at 0040 and the speed control at 0055.
 ## Styleboxes with the vertical margins taken out are the fix.
 func _button(node_name: String, text: String, at: Vector2,
-		box: Vector2 = BUTTON_SIZE) -> Button:
+		box: Vector2 = BUTTON_SIZE, parent: Control = null) -> Button:
 	var button := Button.new()
 	button.name = node_name
 	button.text = text
 	button.focus_mode = Control.FOCUS_ALL
 	button.clip_text = true
 	button.add_to_group(BAR_GROUP)
-	_bar.add_child(button)
+	(parent if parent != null else _bar).add_child(button)
 	button.position = at
 	button.size = box
 	button.custom_minimum_size = box
@@ -381,6 +431,7 @@ func _process(delta: float) -> void:
 	_flare.visible = after_dark
 	_speed.visible = after_dark
 	_skip.visible = after_dark
+	_powers_bar.visible = after_dark
 	_pulse += delta
 	_refresh_house()
 	_refresh_hint()
@@ -528,8 +579,9 @@ func _refresh_hint() -> void:
 				text = I18n.f(&"NHUD_HINT_REPAIR", [_confirm_key(actions),
 					_name_at(mended)])
 			&"aim":
-				named = &"flare"
-				text = I18n.f(&"NHUD_HINT_AIM", [_confirm_key(actions)])
+				# The power aiming, in its own words (task 0233).
+				named = cursor.aiming_power() if cursor.aiming_power() != &"" else Ability.FLARE
+				text = I18n.f(POWER_HINTS.get(named, &"NHUD_HINT_AIM"), [_confirm_key(actions)])
 	_hint.text = text
 	_hint.visible = not text.is_empty()
 	_refresh_hint_icon(named)
@@ -540,7 +592,7 @@ func _refresh_hint() -> void:
 ## pushed against the strip's right edge. Nothing for what has no picture.
 func _refresh_hint_icon(named: StringName) -> void:
 	var picture: Texture2D = null
-	if _hint.visible and (GameData.DEFENCES.has(named) or named == &"flare"):
+	if _hint.visible and (GameData.DEFENCES.has(named) or Ability.is_power(named)):
 		picture = UiKit.picture(StringName("hud_%s" % named))
 	_hint_icon.texture = picture
 	_hint_icon.visible = picture != null
@@ -625,6 +677,16 @@ func _refresh_controls() -> void:
 	_speed.text = I18n.f(&"NHUD_SPEED",
 		[driver.speed if driver != null else 1])
 
+	# **The powers** (task 0233): its word while ready, its charge while it
+	# waits, and greyed with its node until the tree gives it - never hidden.
+	for id in _powers:
+		var button: Button = _powers[id]
+		var open := Ability.unlocked(_state, id)
+		button.disabled = not Ability.ready(_state, id)
+		button.text = I18n.f(&"NHUD_FLARE_CHARGE", [Ability.charge_percent(_state, id)]) \
+			if open and button.disabled else I18n.t(POWER_WORDS[id])
+		Tooltip.describes(button, StringName("text:" + Describe.power(_state, id)))
+
 	# **SKIP, and why not** (task 0139): dead while the rules refuse it, with
 	# the refusal as its tooltip; what it does while they do not.
 	var refused := Sim.why_not_skip(_state)
@@ -667,6 +729,19 @@ func _do_flare() -> void:
 	# Let go of the focus, so a pad's next A confirms at the cursor rather
 	# than pressing the button again.
 	_flare.release_focus()
+
+
+## **A power's button** (task 0233), the flare's way: armed, not fired - the
+## next confirm at the cursor lets it go.
+func _do_power(power: StringName) -> void:
+	if not _state.is_empty() and cursor != null and Ability.ready(_state, power):
+		cursor.arm(power)
+	(_powers[power] as Button).release_focus()
+
+
+## A power's button, for the checks and the shots.
+func power_button(power: StringName) -> Button:
+	return _powers.get(power, null)
 
 
 func _do_speed() -> void:

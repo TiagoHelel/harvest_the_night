@@ -63,6 +63,11 @@ const ACTIONS: Array = [
 	# so a double press cannot skip the build step.
 	[&"start_waves", &"ACT_START", &"ACT_GROUP_NIGHT"],
 	[&"ability", &"ACT_ABILITY", &"ACT_GROUP_NIGHT"],
+	# **The other powers** (task 0233), a key each: on a pad they are the
+	# night bar's upper row, every pad input having an action already.
+	[&"farm_bell", &"ACT_FARM_BELL", &"ACT_GROUP_NIGHT"],
+	[&"call_dog", &"ACT_CALL_DOG", &"ACT_GROUP_NIGHT"],
+	[&"emergency_repair", &"ACT_EMERGENCY_REPAIR", &"ACT_GROUP_NIGHT"],
 	[&"speed", &"ACT_SPEED", &"ACT_GROUP_NIGHT"],
 	[&"skip_night", &"ACT_SKIP_NIGHT", &"ACT_GROUP_NIGHT"],
 	# The night camera (task 0130): the right stick's own, beside the move

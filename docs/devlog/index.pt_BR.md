@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-215 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+216 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -258,10 +258,11 @@ voz alta.
 | 0230 | The electric fence | 2026-10-11 |
 | 0231 | Hardwood walls and sandbags | 2026-10-11 |
 | 0232 | Powers as a list | 2026-10-11 |
+| 0233 | Three new powers | 2026-10-11 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 101 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 103 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -364,6 +365,8 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **The searchlight** (0229) - `data` 1970672788 -> 2479540053
 - **The electric fence** (0230) - `data` 2479540053 -> 2576543805
 - **Hardwood walls and sandbags** (0231) - `data` 2576543805 -> 1845073021
+- **Three new powers** (0233) - `sim` 2958532891 -> 3940398993
+- **Three new powers** (0233) - `data` 1845073021 -> 1109408054
 
 ## O que deu errado
 

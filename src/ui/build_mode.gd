@@ -231,7 +231,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 
-	# **An armed flare is put away before anything else** (task 0135).
+	# **An armed power is put away before anything else** (tasks 0135, 0233).
 	if _by_cursor() and _view.cursor().cancel_aim(event):
 		get_viewport().set_input_as_handled()
 		return
@@ -254,7 +254,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	var intent: Dictionary = _state["intent"]
 	# **An armed flare, then something to mend, take the confirm first**
 	# (tasks 0135, 0134), whatever is in hand: the cursor's look says which.
-	if _by_cursor() and (_view.cursor().confirm_flare(_state, event)
+	if _by_cursor() and (_view.cursor().confirm_power(_state, event)
 			or _view.cursor().confirm_repair(_state, event)):
 		get_viewport().set_input_as_handled()
 		return

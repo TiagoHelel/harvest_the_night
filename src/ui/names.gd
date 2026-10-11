@@ -241,6 +241,15 @@ const KEYS: Dictionary = {
 	&"brick footings": &"TECH_BRICK_FOOTINGS",
 	&"cheap timber": &"TECH_CHEAP_TIMBER",
 	&"a stake pile": &"TECH_A_STAKE_PILE",
+	# The powers' nodes (task 0233).
+	&"a farm bell": &"TECH_A_FARM_BELL",
+	&"a good dog": &"TECH_A_GOOD_DOG",
+	&"an emergency kit": &"TECH_AN_EMERGENCY_KIT",
+
+	# ---- the guardian's powers (task 0233; the flare is the bar's own word)
+	&"farm_bell": &"POWER_FARM_BELL",
+	&"call_dog": &"POWER_CALL_DOG",
+	&"emergency_repair": &"POWER_EMERGENCY_REPAIR",
 
 	# ---- the branches of it
 	&"production": &"TECH_BRANCH_PRODUCTION",
@@ -317,6 +326,9 @@ const NOTES: Dictionary = {
 	&"brick footings": &"TECHNOTE_BRICK_FOOTINGS",
 	&"cheap timber": &"TECHNOTE_CHEAP_TIMBER",
 	&"a stake pile": &"TECHNOTE_A_STAKE_PILE",
+	&"a farm bell": &"TECHNOTE_A_FARM_BELL",
+	&"a good dog": &"TECHNOTE_A_GOOD_DOG",
+	&"an emergency kit": &"TECHNOTE_AN_EMERGENCY_KIT",
 }
 
 

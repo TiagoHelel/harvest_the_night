@@ -11741,8 +11741,9 @@ func _task_0063_tech_tree() -> void:
 		if int((row as Dictionary).get("season", 0)) == 0:
 			spring += 1
 	expect(spring == 12, "twelve nodes on spring's floor, no more", str(spring))
-	expect(Tech.tree().size() == 12 + Tech.branches().size() * (GameData.SEASONS.size() - 1),
-		"and one a branch on every floor after it", str(Tech.tree().size()))
+	# Since task 0233 a power's node beside them on each, survival's.
+	expect(Tech.tree().size() == 12 + (Tech.branches().size() + 1) * (GameData.SEASONS.size() - 1),
+		"and one a branch on every floor after it, and a power's", str(Tech.tree().size()))
 	expect(Tech.branches().size() == 3,
 		"in three branches", str(Tech.branches()))
 	for branch in Tech.branches():
@@ -14603,8 +14604,9 @@ func _task_0082_shots() -> void:
 	# Ninety-four since 0226: a hive at work. Ninety-five since 0227: a volley.
 	# Ninety-six since 0228: a route round a braid. Ninety-seven since 0229:
 	# a lit and an unlit tower line. Ninety-eight since 0230: a joined run of
-	# electric fence. Ninety-nine since 0231: a mixed line.
-	expect(names.size() == 99,
+	# electric fence. Ninety-nine since 0231: a mixed line. A hundred since
+	# 0233: the three powers at work.
+	expect(names.size() == 100,
 		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

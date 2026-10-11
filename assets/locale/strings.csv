@@ -75,6 +75,9 @@ ACT_PAUSE,112,PAUSE,PAUSA
 ACT_PLACE,112,PLACE,COLOCAR
 ACT_REMOVE,112,SELL,VENDER
 ACT_SKIP_NIGHT,112,SKIP THE NIGHT,PULAR A NOITE
+ACT_FARM_BELL,112,FARM BELL,SINO DA FAZENDA
+ACT_CALL_DOG,112,CALL THE DOG,CHAMAR O CÃO
+ACT_EMERGENCY_REPAIR,112,EMERGENCY REPAIR,CONSERTO URGENTE
 ACT_SLOT_1,112,SLOT 1,ATALHO 1
 ACT_SLOT_2,112,SLOT 2,ATALHO 2
 ACT_SLOT_3,112,SLOT 3,ATALHO 3
@@ -341,6 +344,19 @@ NHUD_INCOMING,0,WAVE %d INCOMING  %ds,ONDA %d CHEGANDO  %ds
 NHUD_LEFT,110,%d LEFT,FALTAM %d
 NHUD_NIGHT,110,NIGHT %d,NOITE %d
 NHUD_SKIP,46,SKIP,PULAR
+NHUD_FARM_BELL,26,BELL,SINO
+NHUD_CALL_DOG,26,DOG,CÃO
+NHUD_EMERGENCY_REPAIR,26,MEND,KIT
+NHUD_HINT_FARM_BELL,0,%s: ring the farm bell,%s: tocar o sino
+NHUD_HINT_CALL_DOG,0,%s: send the dog here,%s: mandar o cão aqui
+NHUD_HINT_EMERGENCY_REPAIR,0,%s: mend it at once,%s: consertar já
+POWER_FARM_BELL,0,farm bell,sino da fazenda
+POWER_CALL_DOG,0,call the dog,chamar o cão
+POWER_EMERGENCY_REPAIR,0,emergency repair,conserto de emergência
+POWERNOTE_FARM_BELL,0,"every zombie on the farm stops for %s, a boss for %d%% of that","todo zumbi da fazenda para por %s, um chefe por %d%% disso"
+POWERNOTE_CALL_DOG,0,"the dog bites the zombie nearest the cursor for %d, within %d tiles","o cão morde o zumbi mais perto do cursor, %d de dano, a até %d ladrilhos"
+POWERNOTE_EMERGENCY_REPAIR,0,"a structure gets %d%% of its hit points back at once, free","uma estrutura recupera %d%% da vida na hora, de graça"
+POWER_WAITS,0,comes back in %s,volta em %s
 NHUD_SKIP_TIP,0,run the rest of the night now,rodar o resto da noite agora
 NHUD_SPEED,18,%dx,%dx
 NHUD_START,126,START,COMEÇAR
@@ -531,6 +547,9 @@ TECHNOTE_GREASED_WORKS,0,every tower reloads a third sooner,toda torre recarrega
 TECHNOTE_BRICK_FOOTINGS,0,the house takes eighty more before it falls,a casa aguenta oitenta a mais antes de cair
 TECHNOTE_CHEAP_TIMBER,0,mending costs three fifths less,consertar custa três quintos a menos
 TECHNOTE_A_STAKE_PILE,0,six more barricades a night,mais seis barricadas por noite
+TECHNOTE_A_FARM_BELL,0,the farm bell: every zombie on the farm stops for two seconds,o sino da fazenda: todo zumbi da fazenda para por dois segundos
+TECHNOTE_A_GOOD_DOG,0,the dog runs out at night and bites the zombie nearest the cursor,o cão sai correndo à noite e morde o zumbi mais perto do cursor
+TECHNOTE_AN_EMERGENCY_KIT,0,an emergency repair: a structure gets back three tenths at once,um conserto de emergência: uma estrutura recupera três décimos na hora
 TECHNOTE_A_STANDING_ORDER,0,towers cost a quarter less to build,as torres custam um quarto a menos
 TECHNOTE_FULL_CANS,0,the watering can holds two more,o regador leva dois a mais
 TECHNOTE_LONG_BARRELS,0,every tower reaches one tile further,toda torre alcança um ladrilho a mais
@@ -552,6 +571,9 @@ TECH_GREASED_WORKS,0,greased works,engrenagem engraxada
 TECH_BRICK_FOOTINGS,0,brick footings,base de tijolo
 TECH_CHEAP_TIMBER,0,cheap timber,madeira barata
 TECH_A_STAKE_PILE,0,a stake pile,pilha de estacas
+TECH_A_FARM_BELL,0,a farm bell,sino na fazenda
+TECH_A_GOOD_DOG,0,a good dog,um bom cão
+TECH_AN_EMERGENCY_KIT,0,an emergency kit,kit de emergência
 TECH_A_STANDING_ORDER,0,a standing order,encomenda fixa
 TECH_BRANCH_DEFENCE,0,DEFENCE,DEFESA
 TECH_BRANCH_PRODUCTION,0,PRODUCTION,PRODUÇÃO

@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 50
+const V1_CASES := 51
 
 
 func _process(delta: float) -> bool:
@@ -100,6 +100,7 @@ func _run() -> void:
 	await _case_0222_fertilise()
 	await _case_0224_decoy()
 	await _case_0225_bait()
+	await _case_0233_powers()
 	_finish()
 
 
@@ -940,6 +941,101 @@ func _case_0135_flare_aim() -> void:
 	_completed += 1
 
 
+## 0233 - the three powers, each aimed and fired with the mouse and with the
+## pad: its button on the night bar's upper row arms it - a click, or the pad
+## put on the bar by Back, up to the row and along it, and A - and the next
+## confirm lets it go at the cursor: a click on the cell, or the D-pad a cell
+## on and A.
+func _case_0233_powers() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	var hud: NightHud = require_control("NightHud")
+	if driver == null or world == null or hud == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	(state["tech_owned"] as Array).append_array([&"a farm bell", &"a good dog", &"an emergency kit"])
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	world.skip_transition()
+	await until(func() -> bool: return (int(state["phase"]) == Phases.NIGHT
+		and hud.power_button(Ability.CALL_DOG).is_visible_in_tree()
+		and not hud.power_button(Ability.CALL_DOG).disabled), "the night's powers")
+	var cursor := world.cursor()
+	# An open cell for each across the middle of the view, with the cell west
+	# of it on the farm for the pad's step; a hurt wall on the repair's.
+	var row: Array = [Ability.FARM_BELL, Ability.CALL_DOG, Ability.EMERGENCY_REPAIR]
+	var targets := {}
+	for i in row.size():
+		var spot := Vector2i(-1, -1)
+		var middle := world.screen_to_cell(Vector2(150.0 + 70.0 * i, 130.0))
+		for radius in 6:
+			for candidate in Grid.within(middle, radius):
+				if (spot.x < 0 and Farm.buildable(state, candidate)
+						and Grid.in_bounds(candidate - Vector2i(1, 0))):
+					spot = candidate
+		targets[row[i]] = spot
+	var wall: Vector2i = targets[Ability.EMERGENCY_REPAIR]
+	Farm.place(state, wall, {"id": &"wall", "hp": 40})
+	await frames(4)
+
+	# **With the mouse**: a click on its button arms it and the cursor reads
+	# aim; a click on the cell lets it go there.
+	var by_mouse: Array = []
+	for id in row:
+		await click_control("Power_%s" % id)
+		await frames(2)
+		var armed: bool = cursor.armed_power() == id and cursor.look() == &"aim"
+		var cell: Vector2i = targets[id]
+		await click_cell(cell)
+		await until(func() -> bool: return Ability.used(state, id) == 1, "the %s by the mouse" % id)
+		if not armed or Ability.aimed_at(state, id) != [cell.x, cell.y]:
+			by_mouse.append("%s armed %s at %s" % [id, armed, str(Ability.aimed_at(state, id))])
+	expect(by_mouse.is_empty() and int(Farm.occupant(state, wall)["hp"]) > 40,
+		"each power's button arms it and a click on a cell lets it go there - the repair mending the wall",
+		str(by_mouse))
+
+	# **With the pad**: Back puts it on the bar - the flare first - up reaches
+	# the powers over it and right moves along them; A arms the one it is on
+	# and hands the pad back to the cursor, the D-pad steps it a cell on and A
+	# there lets it go. Every power charged before each go, as a new night
+	# would have them.
+	(Farm.occupant(state, wall) as Dictionary)["hp"] = 40
+	var by_pad: Array = []
+	for i in row.size():
+		var id: StringName = row[i]
+		var cell: Vector2i = targets[id]
+		Ability.recharge(state)
+		await frames(2)
+		# The pad's first press takes the cursor off the pointer, so it is put
+		# on its cell after.
+		await _pad_tap(JOY_BUTTON_BACK)
+		cursor.place_at(cell - Vector2i(1, 0))
+		await frames(1)
+		await _pad_tap(JOY_BUTTON_DPAD_UP)
+		for _step in i:
+			await _pad_tap(JOY_BUTTON_DPAD_RIGHT)
+		await frames(1)
+		var on: bool = hud.power_button(id).has_focus()
+		await _pad_tap(JOY_BUTTON_A)
+		await frames(1)
+		var armed: bool = cursor.armed_power() == id and not hud.holds_focus()
+		await _pad_tap(JOY_BUTTON_DPAD_RIGHT)
+		await frames(2)
+		await _pad_tap(JOY_BUTTON_A)
+		await until(func() -> bool: return Ability.used(state, id) == 2, "the %s by the pad" % id)
+		if not on or not armed or Ability.aimed_at(state, id) != [cell.x, cell.y]:
+			by_pad.append("%s on %s armed %s at %s" % [id, on, armed, str(Ability.aimed_at(state, id))])
+	expect(by_pad.is_empty() and int(Farm.occupant(state, wall)["hp"]) > 40,
+		"and on a pad: Back, up to the powers and along, A arms one, the D-pad aims and A lets it go",
+		str(by_pad))
+	await close_scene()
+	_completed += 1
+
+
 ## 0136 - START: the button and the key each begin the waves.
 func _case_0136_start() -> void:
 	for way in ["button", "key"]:
@@ -1260,6 +1356,14 @@ func _case_0139_night_hud() -> void:
 					if wide > widest:
 						widest = wide
 						widest_text = text
+		# **The powers' aims** (task 0233), the flare's among them: the key only.
+		for aim in NightHud.POWER_HINTS.values():
+			for key in [&"ACT_MOUSE_LEFT", &"ACT_PAD_A"]:
+				var text := I18n.f(aim, [I18n.t(key)])
+				var wide := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
+				if wide > widest:
+					widest = wide
+					widest_text = text
 	I18n.use("en")
 	expect(widest <= hint.size.x, "every hint fits its line",
 		"%s: %.0f of %.0f" % [widest_text, widest, hint.size.x])

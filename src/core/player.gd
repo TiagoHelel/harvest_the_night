@@ -111,6 +111,10 @@ static func initial() -> Dictionary:
 			# one the instant the cooldown ended would be the game deciding
 			# for the player. `Ability.tick()` consumes it.
 			"ability": false,
+			# **The press of one of task 0233's powers**, by its id - the
+			# bell, the dog, the repair - or `&""`: an edge like `ability`,
+			# which stays the flare's. `Ability.tick()` consumes it.
+			"power": &"",
 			# **The fishing assist** (task 0180): a level, the setting as the UI
 			# reads it every frame; `Fishing.tick` copies it into the run's
 			# `fishing_assist`, the only place the rule reads.
