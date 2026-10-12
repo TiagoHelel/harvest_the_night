@@ -213,11 +213,12 @@ func _the_worst_case() -> Dictionary:
 			if Building.place(state, &"gun_tower", Vector2i(x, y)):
 				guns += 1
 	# **Guns that stay up** (task 0157). Spring opens the east alone now, so
-	# Spring 14's forty-two breakers and thirty-one tanks walk into this band
-	# instead of coming from the south east, and by the busiest moment every
-	# tower was rubble: a night tick of 433 us against 2265, `night_towers` at
-	# 2. This measures what a night costs, not whether the farm holds it, so
-	# the guns here take no lasting harm.
+	# Spring 14's breakers and tanks - forty-two and thirty-one then, twenty-one
+	# and twelve since 0270 made it the tenth night's crowd again - walk into
+	# this band instead of coming from the south east, and by the busiest
+	# moment every tower was rubble: a night tick of 433 us against 2265,
+	# `night_towers` at 2. This measures what a night costs, not whether the
+	# farm holds it, so the guns here take no lasting harm.
 	for cell in Farm.cells_with(state, &"gun_tower"):
 		Farm.occupant(state, cell)["hp"] = TOWER_HP
 	for y in range(1, Grid.HEIGHT - 1):

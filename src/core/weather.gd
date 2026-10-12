@@ -59,14 +59,28 @@ const STREAM_SALT := 0x2545F491
 
 
 ## The event of the night of `date` in a run started on `seed_value`: `FOG`,
-## `RAIN` or `NONE`.
+## `RAIN`, `BLOOD_MOON` or `NONE`.
 ##
 ## One draw from 0 to 99 against the season's shares, taken in `EVENTS`
 ## order: a spring roll of 7 with fog at 10 is fog, one of 25 with rain at 20
-## after it is rain, and one of 30 or more is a plain night.
+## after it is rain, and one of 30 or more is a plain night. **A key night of
+## the year may pin it or forbid it** (task 0270): its `event`, read instead
+## of the roll.
 static func event(seed_value: int, date: int) -> StringName:
+	return event_in(GameData.KEY_NIGHTS, seed_value, date)
+
+
+## `event`, asked against the key nights handed in (task 0270) - the year's,
+## or a copy a test pins, the way `GameData.check_nights` takes its tables.
+static func event_in(key_nights: Dictionary, seed_value: int, date: int) -> StringName:
 	if date <= 1 or Calendar.is_calm(date):
 		return NONE
+	# **The pin**, Year 1's alone: `check_nights` holds it to this
+	# function's rules - nothing before its event's first season, no Blood
+	# Moon on the moon's own nights - so it is read as it is written.
+	var key: Dictionary = key_nights.get(date, {}) if date <= Calendar.year_days() else {}
+	if key.has("event"):
+		return StringName(key["event"])
 	var season := Calendar.season_id(date)
 	var rng := Rng.create(Endless._stream_for(seed_value, date) ^ STREAM_SALT)
 	var roll := Rng.int_between(rng, 0, 99)

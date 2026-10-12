@@ -1,33 +1,42 @@
 extends SceneTree
 
-## Print the nights, without running one of them.
+## Print the year's nights, without running one of them.
 ##
-##     python tools/nights.py [how many nights] [seed]
+##     python tools/nights.py [from] [to] [seed]
 ##     python tools/nights.py --check
 ##
-## **`--check` is a gate** (task 0151), run by `tools/verify.py`: every date of
-## the year, 1 to `Calendar.year_days()`, for seeds 0 and 424242, resolves to
-## a record and passes `GameData.check_nights` - the night length of 0137
-## included - or it exits 1. It prints the year for seed 0 as it goes.
+## **By default the year** (task 0270): days 1 to `Calendar.year_days()` for
+## seed 0, a block per season. Each day gives its kinds, sides, count, hit
+## points, reward and weather, and is marked `key` (written in
+## `GameData.KEY_NIGHTS`), `made` (made by `Almanac` from its season's
+## template), `curve` (past the year, `Endless`'s) or `calm`, and `FULL` and
+## `BOSS` on a Full Moon and a boss's night. Then it prints the day each kind
+## is first sent and the days as bars of hit points.
+## `python tools/nights.py 15 28 3` prints Summer for seed 3, and a range past
+## the year prints the curve.
 ##
-## Past the tenth it prints what `Endless` generates, which is how task 0070's
-## curve was looked at while it was being written - `python tools/nights.py 40`
-## shows where the Giants land and whether the mix is still varied at night
-## forty. The seed only changes the order the waves arrive in, so a summary
-## line looks the same for every seed; it is there so the tool can be pointed
-## at a particular run.
+## **`--check` is a gate** (task 0151), run by `tools/verify.py`: the year's
+## tables pass `GameData.check_nights`, and every date of the year, 1 to
+## `Calendar.year_days()`, for seeds 0 and 424242, resolves to a record that
+## passes `GameData.check_record` - the night length of 0137 included - or it
+## exits 1. It prints the year for seed 0 as it goes.
 ##
-## Everything here is read off `GameData.NIGHTS` through `Waves`, so the table
-## is the only source: a designer who edits a wave sees it here on the next
-## run without touching a line of code, which is the whole of task 0059.
+## Everything here is read off the tables through `Waves`, so they are the
+## only source: a designer who edits a key night or a template sees it here on
+## the next run without touching a line of code, which is the whole of tasks
+## 0059 and 0270. The seed orders a made night's waves and picks the side it
+## opens on, so a day's count, hit points and kinds are the same for every
+## seed. Its weather is the seed's.
 ##
 ## Without `--check` it is a **reader, not a check**. `GameData.validate()` is
-## what fails loudly on a bad table and `headless_check` is what asserts the
-## shape; this is for looking at the curve while you tune it, and task 0060
-## will be looking at it a great deal.
+## what fails loudly on a bad table and the suites are what assert the shape;
+## this is for looking at the year while you tune it.
 
 ## The seeds the year is checked for.
 const CHECK_SEEDS: Array = [0, 424242]
+
+## How wide the widest bar is, in characters.
+const BAR := 40
 
 
 func _init() -> void:
@@ -44,47 +53,65 @@ func _init() -> void:
 		quit(_check_the_year())
 		return
 
-	var authored := Waves.authored_count()
-	var last := authored
-	var seed_value := 0
-	if args.size() > 0 and str(args[0]).is_valid_int():
-		last = maxi(int(str(args[0])), 1)
-	if args.size() > 1 and str(args[1]).is_valid_int():
-		seed_value = int(str(args[1]))
+	var numbers: Array = []
+	for arg in args:
+		if str(arg).is_valid_int():
+			numbers.append(int(str(arg)))
+	var first := maxi(int(numbers[0]) if numbers.size() > 0 else 1, 1)
+	var last := maxi(int(numbers[1]) if numbers.size() > 1 else Calendar.year_days(), first)
+	var seed_value := int(numbers[2]) if numbers.size() > 2 else 0
+	_print_the_days(first, last, seed_value)
+	quit()
 
-	print("HARVEST THE NIGHT - the %d nights%s" % [last,
-		"" if last <= authored
-		else " (%d authored, the rest generated from seed %d)"
-			% [authored, seed_value]])
-	print("")
 
-	var enemies := 0
-	var money := 0
-	var seen: Dictionary = {}
+## The days `first` to `last` of a run started on `seed_value`: a block per
+## season, the totals, the first day each kind is sent, and the bars.
+func _print_the_days(first: int, last: int, seed_value: int) -> void:
+	print("HARVEST THE NIGHT - days %d to %d, seed %d" % [first, last, seed_value])
+	print("  key: written in KEY_NIGHTS   made: from its season's template   "
+		+ "curve: Endless, past the year")
+	print(("  FULL: a Full Moon, the horde at %d%%   BOSS: the season's boss comes   "
+		+ "calm: nothing comes") % GameData.FULL_MOON_HORDE_PERCENT)
 	# **Each night against the night** (task 0137): when its last member is
-	# sent, and how long that leaves before dawn - which `check_nights` holds
-	# at `DAWN_MARGIN_TICKS` or more.
-	print("  dawn at %ds; every night must be sent %ds before it"
+	# sent, which `check_record` holds `DAWN_MARGIN_TICKS` before dawn.
+	print("  dawn at %ds; every night is sent %ds before it"
 		% [GameData.NIGHT_TICKS / GameData.SECONDS,
 			GameData.DAWN_MARGIN_TICKS / GameData.SECONDS])
-	print("")
-	for night in range(1, last + 1):
-		var sent := Waves.schedule_ticks(Waves.night_of(night, seed_value))
-		print("  %s   sent by %ds, %ds before dawn" % [Waves.summary_of(night, seed_value),
-			sent / GameData.SECONDS, (GameData.NIGHT_TICKS - sent) / GameData.SECONDS])
-		enemies += Waves.size_of(night, seed_value)
-		money += Waves.reward_of(night, seed_value)
-		for id in GameData.sorted_names(Waves.kinds_of(night,
-				seed_value).keys()):
+
+	var enemies := 0
+	var points := 0
+	var money := 0
+	var nights := 0
+	var seen := {}
+	var season := -1
+	for day in range(first, last + 1):
+		var now := (day - 1) / GameData.SEASON_DAYS
+		if now != season:
+			season = now
+			print("")
+			print("  %s%s" % [String(Calendar.season_id(day)).to_upper(),
+				"" if Calendar.year_of(day) == 1 else ", year %d" % Calendar.year_of(day)])
+			print("   day  date         marks           sent      hp  reward  sides          "
+				+ "weather     sent by  kinds")
+		print(_line_of(day, seed_value))
+		var one := Waves.night_of(day, seed_value)
+		if (one.get("waves", []) as Array).is_empty():
+			continue
+		nights += 1
+		enemies += Waves.size_in(one)
+		points += Waves.hit_points_in(one)
+		money += Waves.reward_in(one)
+		for id in GameData.sorted_names(Waves.kinds_in(one).keys()):
 			if not seen.has(id):
-				seen[id] = night
+				seen[id] = day
 
 	print("")
 	# **Worth, and what a night pays for it** (task 0219): the bounty is
 	# `bounty_percent` of the kills' worth.
-	print("  %d enemies over %d nights, worth $%d - a bounty of $%d at %d%%" % [enemies, last,
-		money, money * int(GameData.REWARDS["bounty_percent"]) / 100,
-		int(GameData.REWARDS["bounty_percent"])])
+	print("  %d enemies over %d nights, %d hit points, worth $%d - a bounty of $%d at %d%%"
+		% [enemies, nights, points, money,
+			money * int(GameData.REWARDS["bounty_percent"]) / 100,
+			int(GameData.REWARDS["bounty_percent"])])
 
 	# **What the run pays in technology**, which is the budget task 0063 has
 	# to price the tech tree against: the floor is one a night for finishing,
@@ -93,51 +120,109 @@ func _init() -> void:
 	for row in GameData.TECH_BONUSES:
 		bonuses.append("%s +%d" % [(row as Dictionary)["id"],
 			int((row as Dictionary)["points"])])
-	print("  technology: %d at worst, %d at best (%d a night, then %s)"
+	print("  technology over the year: %d at worst, %d at best (%d a night, then %s)"
 		% [Tech.least_available(), Tech.total_available(),
 			int(GameData.REWARDS["tech_points"]), ", ".join(bonuses)])
 
-	# **When each kind first turns up.** `design.md` section 10 wants one new
-	# thing a night, and this is the line that shows whether it got one.
+	# **When each kind is first sent.** `design.md` section 10 wants one new
+	# thing a night, and the key nights are where they are met.
 	var arrivals: Array = []
-	for id in GameData.sorted_names(seen.keys()):
-		arrivals.append("%s on %d" % [id, int(seen[id])])
-	print("  first seen: " + ", ".join(arrivals))
+	for day in range(first, last + 1):
+		for id in GameData.sorted_names(seen.keys()):
+			if int(seen[id]) == day:
+				arrivals.append("%s on %d" % [id, day])
+	print("  first sent: " + ", ".join(arrivals))
 
-	# The curve, as a shape rather than as numbers.
+	# The year, as a shape rather than as numbers: hit points, the template's
+	# own measure.
 	print("")
 	var widest := 1
-	for night in range(1, last + 1):
-		widest = maxi(widest, Waves.size_of(night, seed_value))
-	for night in range(1, last + 1):
-		var count := Waves.size_of(night, seed_value)
-		var bar := "#".repeat(maxi(count * 40 / widest, 1))
-		print("  %2d %-41s %3d%s" % [night, bar, count,
-			"  <- %d Giant(s)" % Endless.giants_on(night)
-			if Endless.giants_on(night) > 0 else ""])
-
-	quit()
+	for day in range(first, last + 1):
+		widest = maxi(widest, Waves.hit_points_in(Waves.night_of(day, seed_value)))
+	for day in range(first, last + 1):
+		var one := Waves.night_of(day, seed_value)
+		var hp := Waves.hit_points_in(one)
+		var bar := "#".repeat(hp * BAR / widest) if hp > 0 else ""
+		print("  %3d %-12s %s %6d  %s" % [day, _date_of(day), bar.rpad(BAR), hp,
+			" ".join(_marks_of(day))])
 
 
-## **The year, as a gate.** Every date resolves to a record and the year's
-## records pass `check_nights`, for each of `CHECK_SEEDS`. Returns the exit
-## code: 0 clean, 1 with a line for every fault.
+## One day in one line: its date, marks, count, hit points, reward, sides,
+## weather, when it is all sent, and what comes.
+func _line_of(day: int, seed_value: int) -> String:
+	var one := Waves.night_of(day, seed_value)
+	var sides: Array = []
+	for side in Waves.spawns_in(one):
+		sides.append(_side_code(int(side)))
+	var weather := String(Weather.event(seed_value, day))
+	var parts: Array = []
+	var counts := Waves.kinds_in(one)
+	for id in GameData.sorted_names(counts.keys()):
+		parts.append("%d %s" % [int(counts[id]), id])
+	if bool(one.get("calm", false)):
+		parts.append("nothing: %s" % str(one.get("note", "")))
+	var sent := Waves.schedule_ticks(one)
+	return "  %4d  %-12s %-15s %4d  %6d  $%-5d %-14s %-10s %4ds  %s" % [day, _date_of(day),
+		" ".join(_marks_of(day)), Waves.size_in(one), Waves.hit_points_in(one),
+		Waves.reward_in(one), "-" if sides.is_empty() else ",".join(sides),
+		"-" if weather.is_empty() else weather, sent / GameData.SECONDS, ", ".join(parts)]
+
+
+## What a day is: `key`, `made`, `curve` or `calm`, then `FULL` and `BOSS`.
+func _marks_of(day: int) -> Array:
+	var marks: Array = []
+	if Calendar.is_calm(day):
+		marks.append("calm")
+	elif Almanac.is_key(day):
+		marks.append("key")
+	elif Almanac.is_made(day):
+		marks.append("made")
+	else:
+		marks.append("curve")
+	if Calendar.is_full_moon(day):
+		marks.append("FULL")
+	if Calendar.is_boss_night(day):
+		marks.append("BOSS")
+	return marks
+
+
+## `spring 7`, and the year past the first.
+func _date_of(day: int) -> String:
+	var text := "%s %d" % [Calendar.season_id(day), Calendar.day_of_season(day)]
+	if Calendar.year_of(day) > 1:
+		text += " y%d" % Calendar.year_of(day)
+	return text
+
+
+## A side by the initials of its name: `E`, `SE`, `N`, `W`, `S`.
+func _side_code(side: int) -> String:
+	if side < 0 or side >= GameData.SPAWN_SIDES.size():
+		return "?%d" % side
+	var code := ""
+	for word in String(GameData.SPAWN_SIDES[side]).split("_"):
+		code += word.left(1).to_upper()
+	return code
+
+
+## **The year, as a gate.** The tables pass `check_nights`, and every date
+## resolves to a record that passes `check_record`, for each of
+## `CHECK_SEEDS`. Returns the exit code: 0 clean, 1 with a line for every
+## fault.
 func _check_the_year() -> int:
 	var days := Calendar.year_days()
 	var faults: Array = []
+	for line in GameData.check_nights(GameData.SEASON_NIGHTS, GameData.KEY_NIGHTS):
+		faults.append("the tables: %s" % line)
 	for seed_value in CHECK_SEEDS:
-		var year: Array = []
 		for date in range(1, days + 1):
 			var one := Waves.night_of(date, int(seed_value))
 			if one.is_empty():
 				faults.append("seed %d: date %d has no night" % [seed_value, date])
-			year.append(one)
+				continue
 			if int(seed_value) == 0:
-				var sent := Waves.schedule_ticks(one)
-				print("  %s   sent by %ds" % [Waves.summary_of(date, 0),
-					sent / GameData.SECONDS])
-		for line in GameData.check_nights(year):
-			faults.append("seed %d: %s" % [seed_value, line])
+				print(_line_of(date, 0))
+			for line in GameData.check_record(one, date):
+				faults.append("seed %d: %s" % [seed_value, line])
 	print("")
 	for line in faults:
 		print("  FAIL %s" % line)

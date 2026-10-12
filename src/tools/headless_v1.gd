@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 91
+const GROUPS := 92
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -170,6 +170,7 @@ func _run() -> void:
 	_task_0255_winter_lord()
 	_task_0256_fog_rain()
 	_task_0257_blood_moon()
+	_task_0270_year_records()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -236,7 +237,7 @@ func _task_0112_digest() -> void:
 		return
 
 	# The body of `digest()`: everything indented under it, comments cut,
-	# because "they are not in `NIGHTS`" is not `NIGHTS` being hashed.
+	# because "they are not in `ENDLESS`" is not `ENDLESS` being hashed.
 	var body := ""
 	for line in source.substr(at + 1).split("\n").slice(1):
 		if not line.is_empty() and not line.begins_with("\t") \
@@ -254,7 +255,7 @@ func _task_0112_digest() -> void:
 			tables.append(m.get_string(1))
 	# The reader itself, checked on tables it must find: an untyped
 	# Dictionary, an untyped Array and a typed one.
-	for known in ["CROPS", "NIGHTS", "NEIGHBOUR_STEPS"]:
+	for known in ["CROPS", "SEASON_NIGHTS", "NEIGHBOUR_STEPS"]:
 		expect(tables.has(known), "the reader finds %s" % known, str(tables))
 
 	var missing: Array = []
@@ -1807,22 +1808,30 @@ func _task_0137_dawn() -> void:
 		"Sim.skip_night takes at most the ticks left to dawn and lands in RESULT",
 		"%d of %d left" % [took, left])
 
-	# **The schedule check**: a night that is still sending at dawn is refused.
-	var long: Dictionary = (GameData.NIGHTS[0] as Dictionary).duplicate(true)
+	# **The schedule check**: a night that is still sending at dawn is refused
+	# - as a record, and as a key night of the year (task 0270).
+	var long: Dictionary = (GameData.KEY_NIGHTS[1] as Dictionary).duplicate(true)
 	long["waves"] = [[&"walker", GameData.NIGHT_TICKS / GameData.SPAWN_INTERVAL_TICKS + 5, 0]]
-	expect(not GameData.check_nights([long]).is_empty(),
+	var long_year := GameData.KEY_NIGHTS.duplicate()
+	long_year[1] = long
+	expect(not GameData.check_record(long, 1).is_empty()
+		and not GameData.check_nights(GameData.SEASON_NIGHTS, long_year).is_empty(),
 		"check_nights refuses a schedule longer than the night",
-		str(GameData.check_nights([long])))
-	expect(GameData.check_nights(GameData.NIGHTS).is_empty(),
-		"and the ten shipped nights are all inside it", str(GameData.check_nights(GameData.NIGHTS)))
-	# The endless curve against the same rule, from the schedule alone.
+		str(GameData.check_record(long, 1)))
+	expect(GameData.check_nights(GameData.SEASON_NIGHTS, GameData.KEY_NIGHTS).is_empty(),
+		"and the year's key nights are all inside it",
+		str(GameData.check_nights(GameData.SEASON_NIGHTS, GameData.KEY_NIGHTS)))
+	# The made nights and the curve past the year against the same rule, from
+	# the schedule alone - days 11-40 are `Almanac`'s since task 0270, and
+	# the curve begins on day 57.
 	var outside: Array = []
-	for night in range(11, 41):
+	var past := Calendar.year_days()
+	for night in range(11, 41) + range(past + 1, past + 31):
 		for seed_value in [0, 1, 7]:
 			var sent := Waves.schedule_ticks(Waves.night_of(night, seed_value))
 			if sent + GameData.DAWN_MARGIN_TICKS > GameData.NIGHT_TICKS:
 				outside.append("%d/%d:%d" % [night, seed_value, sent])
-	expect(outside.is_empty(), "endless nights 11-40 are all sent a margin before dawn",
+	expect(outside.is_empty(), "days 11-40 and the curve's first thirty nights past the year are all sent a margin before dawn",
 		str(outside.slice(0, 4)))
 	_completed += 1
 
@@ -2142,15 +2151,15 @@ func _task_0150_lookup() -> void:
 	expect(differ.is_empty(), "and where no calendar rule applies it is the night as written",
 		str(differ))
 
-	# **The authored row itself, not a copy**: 0152-0154 add their rules on
+	# **The key night itself, not a copy**: 0152-0154 add their rules on
 	# top, and until they do nothing is built per question.
-	expect(is_same(Waves.night_of(1), GameData.NIGHTS[0])
-		and is_same(Waves.plain_night(1), GameData.NIGHTS[0]),
-		"night_of(1) is GameData.NIGHTS[0], the same object")
-	expect(Waves.authored_count() == GameData.NIGHTS.size()
-		and Endless.is_generated(Waves.authored_count() + 1)
-		and not Endless.is_generated(Waves.authored_count()),
-		"the curve takes over the night after the last authored one")
+	expect(is_same(Waves.night_of(1), GameData.KEY_NIGHTS[1])
+		and is_same(Waves.plain_night(1), GameData.KEY_NIGHTS[1]),
+		"night_of(1) is GameData.KEY_NIGHTS[1], the same object")
+	var year_end := Calendar.year_days()
+	expect(is_same(Waves.plain_night(year_end), GameData.KEY_NIGHTS[year_end])
+		and str(Waves.plain_night(year_end + 2, 7)) == str(Endless.night(7, year_end + 2)),
+		"the year is its tables to its last day, and the curve takes over past it")
 
 	# **The run's last night, asked in one place**: the year's last day since
 	# task 0151.
@@ -2366,20 +2375,18 @@ func _task_0152_full_moon() -> void:
 		"a Full Moon sends %d%% of every ordinary wave and its bosses as written"
 			% GameData.FULL_MOON_HORDE_PERCENT,
 		"%s; %d boss rows met" % [str(wrong.slice(0, 4)), bosses])
-	expect(is_same(Waves.night_of(6), GameData.NIGHTS[5])
-		and not is_same(Waves.night_of(7), GameData.NIGHTS[6])
-		and not (GameData.NIGHTS[6] as Dictionary).has("full_moon"),
-		"an ordinary night is still the authored row, and a Full Moon leaves it untouched")
+	expect(is_same(Waves.night_of(6), GameData.KEY_NIGHTS[6])
+		and not is_same(Waves.night_of(7), GameData.KEY_NIGHTS[7])
+		and not (GameData.KEY_NIGHTS[7] as Dictionary).has("full_moon"),
+		"an ordinary night is still the key night as written, and a Full Moon leaves it untouched")
 
 	# **Every Full Moon of the year fits the night** (0137), for both seeds
-	# `tools/nights.py --check` reads - asked of the whole year, since 0157's
-	# side rule reads each record's date off its place in the table.
+	# `tools/nights.py --check` reads - every date's record held to the rules
+	# of its date (`check_record`, task 0270).
 	var faults: Array = []
 	for seed_value in [0, 424242]:
-		var year: Array = []
 		for day in range(1, Calendar.year_days() + 1):
-			year.append(Waves.night_of(day, seed_value))
-		faults.append_array(GameData.check_nights(year))
+			faults.append_array(GameData.check_record(Waves.night_of(day, seed_value), day))
 	expect(faults.is_empty(), "and every Full Moon of the year still checks", str(faults))
 
 	# **Paid the lever's percent**: the same state and kills, under the moon
@@ -2429,9 +2436,9 @@ func _task_0152_full_moon() -> void:
 		"Waves.tonight hands back the same Full Moon record over 100 ticks")
 	var one := State.create(1522)
 	NightRoad.to_night(one)
-	expect(is_same(Waves.tonight(one), GameData.NIGHTS[0])
+	expect(is_same(Waves.tonight(one), GameData.KEY_NIGHTS[1])
 		and not (one["wave"] as Dictionary).has("tonight"),
-		"while night 1 is still the authored row, with nothing kept for it")
+		"while night 1 is still the key night as written, with nothing kept for it")
 
 	# **The calendar's check.**
 	expect(not GameData.check_calendar(GameData.SEASONS, 14, [7, 15]).is_empty()
@@ -2480,11 +2487,11 @@ func _task_0153_boss_nights() -> void:
 	expect(not Waves.kinds_of(10).has(&"giant") and Waves.kinds_of(14).has(&"giant")
 		and StringName(Waves.night_of(14).get("boss", &"")) == &"giant",
 		"night 10 has lost its Giant to Spring 14, which carries the boss flag")
-	var year: Array = []
+	var year_faults: Array = []
 	for day in range(1, Calendar.year_days() + 1):
-		year.append(Waves.night_of(day, 0))
-	expect(GameData.check_nights(year).is_empty(),
-		"and the year still checks with the boss rows in", str(GameData.check_nights(year)))
+		year_faults.append_array(GameData.check_record(Waves.night_of(day, 0), day))
+	expect(year_faults.is_empty(),
+		"and the year still checks with the boss rows in", str(year_faults))
 	expect(GameData.check_calendar(GameData.SEASONS, 14, [7, 14], 150, 200,
 		[&"giant", &"walker", &"giant", &"giant"]).size() == 1,
 		"a season boss that is not a boss is refused")
@@ -2598,8 +2605,8 @@ func _task_0154_calm() -> void:
 		str(calm))
 	var record := Waves.night_of(29, 3)
 	expect(bool(record.get("calm", false)) and (record["waves"] as Array).is_empty()
-		and int(record["opening_ticks"]) == 0 and GameData.check_nights([record]).is_empty()
-		and not GameData.check_nights([{"note": "x", "opening_ticks": 0, "waves": []}]).is_empty(),
+		and int(record["opening_ticks"]) == 0 and GameData.check_record(record, 29).is_empty()
+		and not GameData.check_record({"note": "x", "opening_ticks": 0, "waves": []}, 29).is_empty(),
 		"a calm record sends nothing, says so, and is the only empty record the check allows")
 	expect(Waves.summary_of(15).contains("calm"), "and the summary prints it as calm",
 		Waves.summary_of(15))
@@ -2945,21 +2952,20 @@ func _task_0157_sides() -> void:
 			[[0], [0, 1], [0, 9], [0, 1, 2, 3, 4]]).size() > 0,
 		"a season that closes a side, or opens one that is not there, is refused")
 
-	# **Every generated wave from an open side**, dates 11-56, two seeds.
+	# **Every wave of the year from an open side**, written or made (task
+	# 0270), two seeds.
 	var stray: Array = []
 	for seed_value in [5, 424242]:
-		for day in range(11, Calendar.year_days() + 1):
-			if not Endless.is_generated(day):
-				continue
+		for day in range(1, Calendar.year_days() + 1):
 			var open := Calendar.open_sides(day)
 			for row in (Waves.plain_night(day, seed_value).get("waves", []) as Array):
 				if not open.has(int((row as Array)[2])):
 					stray.append([seed_value, day, row])
-	expect(stray.is_empty(), "every generated wave of dates 11-56 comes from a side open that day",
+	expect(stray.is_empty(), "every wave of dates 1-56 comes from a side open that day",
 		str(stray.slice(0, 3)))
-	var a_side_rule := [{"note": "x", "opening_ticks": 0, "waves": [[&"walker", 3, 4]]}]
-	expect(not GameData.check_nights(a_side_rule).is_empty(),
-		"and check_nights refuses a spring night from the south")
+	var a_side_rule := {"note": "x", "opening_ticks": 0, "waves": [[&"walker", 3, 4]]}
+	expect(not GameData.check_record(a_side_rule, 1).is_empty(),
+		"and check_record refuses a spring night from the south")
 
 	# **Every region has somewhere to stand** on a fresh farm.
 	var farm := State.create(1570)
@@ -3028,11 +3034,11 @@ func _task_0157_sides() -> void:
 ## 0158 - the forecast: what it says is what the night sends, a boss date
 ## names the season's boss, and asking it a thousand times moves nothing.
 func _task_0158_forecast() -> void:
-	# **What it says is what comes.** A plain authored night from the south
-	# east, a generated Full Moon from two sides and a calm night, each sent
-	# through the real road - `Waves.tick` and `Enemies.spawn` - with the gaps
-	# skipped and every arrival counted and taken off where it lands, until
-	# the last wave is out.
+	# **What it says is what comes.** A plain key night, summer's Full Moon
+	# from two sides and a calm night, each sent through the real road -
+	# `Waves.tick` and `Enemies.spawn` - with the gaps skipped and every
+	# arrival counted and taken off where it lands, until the last wave is
+	# out.
 	var where := {}
 	for region in GameData.SPAWNS.size():
 		for pair in (GameData.SPAWNS[region] as Array):
@@ -11457,6 +11463,268 @@ func _task_0257_blood_moon() -> void:
 	mark.free()
 	small.free()
 	_completed += 1
+
+
+## 0270 - fifty-six nights as data. Every day of the year is a key night, a
+## night made from its season's template or a calm date, for every seed; a
+## made night keeps the rules a written one does, has its template's numbers
+## for the day, sends the same crowd on every seed and never touches the run's
+## stream; no kind comes before the day that introduces it; day 1 is the old
+## night 1 to the byte; `check_nights` refuses what the tables must not hold;
+## a key night's weather pin is read instead of the roll; a Full Moon is
+## scaled in one place; and the forecast's counts are what is sent.
+func _task_0270_year_records() -> void:
+	var days := Calendar.year_days()
+	# **Every day is one of three things**, for seeds 0-4, and a made night
+	# is held to exactly the rules a written one is - as made and as fought.
+	var unplaced: Array = []
+	var faults: Array = []
+	var made_days := 0
+	for seed_value in range(5):
+		for day in range(1, days + 1):
+			var key := Almanac.is_key(day)
+			var made := Almanac.is_made(day)
+			var calm := Calendar.is_calm(day)
+			var plain := Waves.plain_night(day, seed_value)
+			if int(key) + int(made) + int(calm) != 1:
+				unplaced.append([seed_value, day, key, made, calm])
+			elif key and not is_same(plain, GameData.KEY_NIGHTS[day]):
+				unplaced.append([seed_value, day, "not its key night"])
+			elif calm and not (plain.is_empty() and bool(Waves.night_of(day, seed_value).get("calm", false))):
+				unplaced.append([seed_value, day, "a calm date with a record of its own"])
+			elif made:
+				made_days += 1
+				faults.append_array(GameData.check_record(plain, day))
+				faults.append_array(GameData.check_record(Waves.night_of(day, seed_value), day))
+	print("  the year: %d key nights, %d made a seed, %d calm"
+		% [GameData.KEY_NIGHTS.size(), made_days / 5, days - GameData.KEY_NIGHTS.size() - made_days / 5])
+	expect(unplaced.is_empty() and faults.is_empty() and made_days > 0,
+		"for seeds 0-4 every day 1-56 is a key night, a made one or a calm date, and every made night passes check_record as made and as fought",
+		"%s %s" % [str(unplaced.slice(0, 3)), str(faults.slice(0, 3))])
+
+	# **The template's numbers, on the day**: its hit points within a body of
+	# each kind, its gap, and only the sides that have joined.
+	var off: Array = []
+	for day in range(1, days + 1):
+		if not Almanac.is_made(day):
+			continue
+		var of_season := Calendar.day_of_season(day)
+		var template: Dictionary = GameData.SEASON_NIGHTS[Calendar.season_of(day)]
+		var plain := Waves.plain_night(day, 3)
+		var want := Almanac.on_day(template["size"], of_season)
+		var slack := 0
+		var mix := Almanac.mix_on(template, of_season)
+		for kind in GameData.sorted_names(mix.keys()):
+			slack += int((GameData.ENEMIES[kind] as Dictionary)["hp"])
+		if absi(Waves.hit_points_in(plain) - want) >= slack \
+				or int(plain["gap_ticks"]) != Almanac.on_day(template["gap_ticks"], of_season):
+			off.append([day, Waves.hit_points_in(plain), want, plain["gap_ticks"]])
+		var joined := Almanac.sides_on(template, of_season)
+		for side in Waves.spawns_in(plain):
+			if not joined.has(side):
+				off.append([day, "side", side])
+	expect(off.is_empty(),
+		"a made night has its template's hit points for the day, give or take a body of each kind, its gap, and only the sides joined by then",
+		str(off.slice(0, 3)))
+
+	# **The seed orders, it never weighs** (the `Endless` contract): every
+	# seed's day sends the same count of every kind.
+	var unequal: Array = []
+	for day in range(1, days + 1):
+		var first := Waves.kinds_of(day, 0)
+		for seed_value in range(1, 5):
+			var other := Waves.kinds_of(day, seed_value)
+			if GameData.sorted_names(first.keys()) != GameData.sorted_names(other.keys()):
+				unequal.append([seed_value, day])
+				continue
+			for kind in GameData.sorted_names(first.keys()):
+				if int(first[kind]) != int(other[kind]):
+					unequal.append([seed_value, day, kind])
+	var orders := {}
+	for seed_value in range(5):
+		orders[str(Waves.table(30, seed_value))] = true
+	expect(unequal.is_empty() and orders.size() > 1,
+		"two seeds send the same totals per kind on every day, while the seed orders day 30's waves",
+		"%s, %d orders" % [str(unequal.slice(0, 3)), orders.size()])
+
+	# **Never the run's stream**: making day 30 and keeping it as tonight's
+	# leaves `state["rng"]` as it was - and a key night no rule touches is
+	# fought as written, with nothing kept.
+	var run := State.create(2700)
+	run["day"] = 30
+	run["night"] = 30
+	var rng_before := str(run["rng"])
+	var made_30 := Waves.tonight(run)
+	var key_run := State.create(2701)
+	key_run["day"] = 2
+	key_run["night"] = 2
+	expect(str(run["rng"]) == rng_before and Almanac.is_made(30) and is_same(made_30, Waves.tonight(run))
+		and int(made_30.get("for_night", 0)) == 30
+		and str(Almanac.night(2700, 30)) == str(Waves.night_of(30, 2700))
+		and is_same(Waves.tonight(key_run), GameData.KEY_NIGHTS[2])
+		and not (key_run["wave"] as Dictionary).has("tonight"),
+		"making day 30 leaves state['rng'] untouched and is kept as tonight's, while key night 2 is fought as written",
+		"%s against %s" % [str(run["rng"]), rng_before])
+
+	# **Nothing before its introduction**: a kind's first day is the first key
+	# night that writes it or the day its template lets it join, and no day
+	# of any seed sends it sooner.
+	var introduced := {}
+	for day in range(1, days + 1):
+		if Almanac.is_key(day):
+			var writes := Waves.kinds_in(GameData.KEY_NIGHTS[day])
+			for kind in GameData.sorted_names(writes.keys()):
+				if not introduced.has(kind):
+					introduced[kind] = day
+	for season in GameData.SEASON_NIGHTS.size():
+		var season_mix: Dictionary = (GameData.SEASON_NIGHTS[season] as Dictionary)["mix"]
+		for kind in GameData.sorted_names(season_mix.keys()):
+			var joins := season * GameData.SEASON_DAYS + int((season_mix[kind] as Array)[1])
+			introduced[kind] = mini(int(introduced.get(kind, joins)), joins)
+	var early: Array = []
+	for seed_value in range(5):
+		for day in range(1, days + 1):
+			var sent := Waves.kinds_in(Waves.plain_night(day, seed_value))
+			for kind in GameData.sorted_names(sent.keys()):
+				if day < int(introduced.get(kind, days + 1)):
+					early.append([seed_value, day, kind])
+	expect(early.is_empty() and int(introduced.get(&"walker", 0)) == 1
+		and int(introduced.get(&"runner", 0)) == 3 and int(introduced.get(&"tank", 0)) == 5
+		and int(introduced.get(&"breaker", 0)) == 7,
+		"no kind is sent before the day its key night or template introduces it - the walker on 1, the runner on 3, the tank on 5, the breaker on 7",
+		"%s %s" % [str(early.slice(0, 3)), str(introduced)])
+
+	# **Day 1 is the old night 1**, to the byte.
+	var old_one := {
+		"note": "the tutorial night: one tower, one side, and time to watch",
+		"opening_ticks": 0,
+		"waves": [
+			[&"walker", 3, 0],
+			[&"walker", 4, 0],
+			[&"walker", 5, 0],
+		],
+	}
+	expect(var_to_str(Waves.night_of(1)) == var_to_str(old_one)
+		and is_same(Waves.night_of(1), GameData.KEY_NIGHTS[1]),
+		"day 1's record is the old night 1, byte for byte", var_to_str(Waves.night_of(1)))
+
+	# **The tables' check refuses what they must not hold.**
+	var boss_key := GameData.KEY_NIGHTS.duplicate(true)
+	(boss_key[5]["waves"] as Array).append([&"giant", 1, 0])
+	var stranger := GameData.SEASON_NIGHTS.duplicate(true)
+	(stranger[1]["mix"] as Dictionary)[&"vampire"] = [10, 1]
+	var south_east_template := GameData.SEASON_NIGHTS.duplicate(true)
+	(south_east_template[0]["sides"] as Array).append([1, 4])
+	var south_east_key := GameData.KEY_NIGHTS.duplicate(true)
+	(south_east_key[5]["waves"][0] as Array)[2] = 1
+	var on_fifteen := GameData.KEY_NIGHTS.duplicate()
+	on_fifteen[15] = GameData.KEY_NIGHTS[2]
+	var past_year := GameData.KEY_NIGHTS.duplicate()
+	past_year[days + 1] = GameData.KEY_NIGHTS[2]
+	var moonless := GameData.KEY_NIGHTS.duplicate()
+	moonless.erase(21)
+	var falling := GameData.SEASON_NIGHTS.duplicate(true)
+	falling[0]["size"] = [2600, 400]
+	var loosening := GameData.SEASON_NIGHTS.duplicate(true)
+	loosening[0]["gap_ticks"] = [6 * GameData.SECONDS, 15 * GameData.SECONDS]
+	var unrefused: Array = []
+	for broken in [
+			[GameData.SEASON_NIGHTS, boss_key, "the key night of day 5 names a boss, 'giant'"],
+			[stranger, GameData.KEY_NIGHTS, "the summer template mixes 'vampire', which is not an enemy"],
+			[south_east_template, GameData.KEY_NIGHTS, "the spring template comes from side 1, which its season has not opened"],
+			[GameData.SEASON_NIGHTS, south_east_key, "night 5 comes from side 1, which its season has not opened"],
+			[GameData.SEASON_NIGHTS, on_fifteen, "a key night on day 15, a calm date"],
+			[GameData.SEASON_NIGHTS, past_year, "a key night on day %d, outside 1-%d" % [days + 1, days]],
+			[GameData.SEASON_NIGHTS, moonless, "day 21 is a Full Moon with no key night"],
+			[falling, GameData.KEY_NIGHTS, "the spring template's size falls"],
+			[loosening, GameData.KEY_NIGHTS, "the spring template's gap grows"],
+			[GameData.SEASON_NIGHTS, _key_event(3, &"hail"), "pins 'hail', which is no event"],
+			[GameData.SEASON_NIGHTS, _key_event(3, Weather.BLOOD_MOON), "pins 'blood_moon' before autumn"],
+			[GameData.SEASON_NIGHTS, _key_event(35, Weather.BLOOD_MOON), "pins a Blood Moon on the moon's own night"],
+			[GameData.SEASON_NIGHTS, _key_event(1, Weather.FOG), "on the game's first night"]]:
+		if not _says(GameData.check_nights(broken[0], broken[1]), broken[2]):
+			unrefused.append(broken[2])
+	expect(unrefused.is_empty() and GameData.check_nights(GameData.SEASON_NIGHTS, GameData.KEY_NIGHTS).is_empty()
+		and GameData.check_nights(GameData.SEASON_NIGHTS, _key_event(3, &"")).is_empty()
+		and GameData.check_nights(GameData.SEASON_NIGHTS, _key_event(31, Weather.BLOOD_MOON)).is_empty(),
+		"check_nights refuses a boss in a key night, an unknown kind in a template, a spring night from the south east, a key night on day 15 - and one past the year, a Full Moon unwritten, a falling size, a growing gap and a pin the weather would not allow - while the shipped year, a forbidding pin and an autumn Blood Moon pass",
+		str(unrefused))
+
+	# **The weather pin is read instead of the roll** (0256's chooser): fog
+	# pinned on day 9 is fog for every seed, and a forbidding pin clears a
+	# night that rolled fog. Day 1 and the days past the year read none.
+	var foggy := _weather_date(Weather.FOG)
+	var pinned := _key_event(9, Weather.FOG)
+	var always := true
+	for seed_value in range(5):
+		always = always and Weather.event_in(pinned, seed_value, 9) == Weather.FOG \
+			and Weather.event_in(GameData.KEY_NIGHTS, seed_value, 9) == Weather.event(seed_value, 9)
+	expect(always and int(foggy[0]) >= 0
+		and Weather.event_in(_key_event(int(foggy[1]), &""), int(foggy[0]), int(foggy[1])) == Weather.NONE
+		and Weather.event_in(_key_event(1, Weather.FOG), 0, 1) == Weather.NONE
+		and Weather.event_in(_key_event(days + 2, Weather.FOG), 0, days + 2) == Weather.event(0, days + 2),
+		"a key night's event pins its weather on every seed and an empty one forbids it; day 1 and the days past the year read no pin",
+		str(foggy))
+
+	# **A Full Moon is scaled once** (0152), in `night_of`: its key night is
+	# written at an ordinary night's size with no flag, and what the forecast
+	# counts is what that scaling sends.
+	var moon_wrong: Array = []
+	for day in range(1, days + 1):
+		if not Calendar.is_full_moon(day):
+			continue
+		var written: Dictionary = GameData.KEY_NIGHTS[day]
+		var want := 0
+		for row in (written["waves"] as Array):
+			want += maxi(int((row as Array)[1]) * GameData.FULL_MOON_HORDE_PERCENT / 100, int((row as Array)[1]))
+		if Calendar.is_boss_night(day):
+			want += 1
+		if written.has("full_moon") or Waves.size_of(day) != want or int(Forecast.of(0, day)["count"]) != want:
+			moon_wrong.append([day, Waves.size_of(day), want])
+	expect(moon_wrong.is_empty(),
+		"a key Full Moon is written at an ordinary night's size and scaled once, in night_of - the forecast's count is what is sent",
+		str(moon_wrong))
+
+	# **The forecast is what is sent** (0158), every day of the year for two
+	# seeds: its count is `size_of`, its kinds `kinds_of`.
+	var told_wrong: Array = []
+	for seed_value in [0, 424242]:
+		for day in range(1, days + 1):
+			var told := Forecast.of(seed_value, day)
+			var kinds := Waves.kinds_of(day, seed_value)
+			var listed := {}
+			for pair in (told["kinds"] as Array):
+				listed[StringName((pair as Array)[0])] = int((pair as Array)[1])
+			if int(told["count"]) != Waves.size_of(day, seed_value) \
+					or GameData.sorted_names(listed.keys()) != GameData.sorted_names(kinds.keys()):
+				told_wrong.append([seed_value, day])
+				continue
+			for kind in GameData.sorted_names(kinds.keys()):
+				if int(listed[kind]) != int(kinds[kind]):
+					told_wrong.append([seed_value, day, kind])
+	expect(told_wrong.is_empty(),
+		"for days 1-56 and two seeds the forecast's counts are size_of and kinds_of for the day",
+		str(told_wrong.slice(0, 3)))
+
+	# **Past the year the curve goes on** (0070, until 0279), from Spring
+	# 14's key night as written - the tenth without its Giant - and day 57
+	# is calm.
+	expect(Endless.size_of(Endless.DRAWN_PAST) == Waves.size_in(GameData.KEY_NIGHTS[GameData.SEASON_DAYS])
+		and bool(Waves.night_of(days + 1).get("calm", false))
+		and str(Waves.plain_night(days + 2, 3)) == str(Endless.night(3, days + 2)),
+		"past the year the curve goes on from Spring 14's key night as written, and day 57 is calm",
+		str(Endless.size_of(Endless.DRAWN_PAST)))
+	_completed += 1
+
+
+## The year's key nights with day `day`'s pinning `event` - its own record,
+## or a copy of day 2's where it has none (task 0270).
+func _key_event(day: int, event: StringName) -> Dictionary:
+	var keys := GameData.KEY_NIGHTS.duplicate()
+	var one: Dictionary = (GameData.KEY_NIGHTS.get(day, GameData.KEY_NIGHTS[2]) as Dictionary).duplicate(true)
+	one["event"] = event
+	keys[day] = one
+	return keys
 
 
 ## `GameData.NIGHT_EVENTS` with one value set at `path` - an event, then the

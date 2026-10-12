@@ -1,7 +1,7 @@
 # 0270 - Fifty-six nights as data
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0151, 0152, 0153, 0154, 0256, 0257, 0234
 - **Likely files:** src/core/game_data.gd, src/core/waves.gd, src/core/endless.gd, src/core/almanac.gd (new), src/core/weather.gd, src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd, src/tools/headless_v1.gd
 

@@ -8,17 +8,23 @@ extends RefCounted
 ## authored nights - so the shape here follows task 0070 and says so in the
 ## journal.
 ##
+## **Asked only past the year since task 0270**: the year's 56 days are
+## tables (`GameData.SEASON_NIGHTS`, `KEY_NIGHTS`, `Almanac`), and
+## `Waves.plain_night` comes here from day 57 until 0279 writes Year 2. The
+## curve itself is unchanged - it still counts from the tenth night, which
+## is now Spring 14's key night.
+##
 ## ## It produces the same record a person would have written
 ##
-## `night()` returns exactly what a row of `GameData.NIGHTS` is: a note, an
+## `night()` returns exactly what a key night of the year is: a note, an
 ## opening delay, a gap, and a list of `[kind, count, spawn]` waves. That is
 ## the whole of the integration. `Waves.night_of()` hands back a generated
-## record past the tenth night and every function downstream of it -
+## record past the year and every function downstream of it -
 ## `table`, `size_of`, `reward_of`, `kinds_of`, `spawns_of`, `summary_of`,
 ## `delay_before`, and the tick that sends them - carries on without knowing.
 ## Nothing in `Enemies`, `Rewards`, `Towers` or the HUD needed a line about
-## endless, and `tools/nights.py` can print night 25 because it already knew
-## how to print a night.
+## endless, and `tools/nights.py 57 80` prints the curve because it already
+## knew how to print a night.
 ##
 ## ## Seeded, and not from the run's stream
 ##
@@ -40,7 +46,7 @@ extends RefCounted
 ##
 ## ## The curve decides what comes; the seed decides how it arrives
 ##
-## Two runs meeting night 25 meet the same crowd - 240 bodies, two Giants, the
+## Two runs meeting night 25 meet the same crowd - 237 bodies, two Giants, the
 ## same count of each kind - because that is the difficulty contract, and a
 ## night that was harder on an unlucky seed would make "how far did you get"
 ## mean nothing. What the seed changes is the **order**: which kind opens, how
@@ -62,19 +68,25 @@ extends RefCounted
 ## out of a weighted bag would turn up on night eleven.
 
 
+## **The ten nights the curve was drawn past** (task 0070), its own count
+## since 0270 made the year data: the night after them is its first step,
+## as it always was. `Waves.plain_night` asks the curve only past the year.
+const DRAWN_PAST := 10
+
+
 ## Whether this night is written by the curve rather than by a person.
 static func is_generated(night: int) -> bool:
-	return night > Waves.authored_count()
+	return night > DRAWN_PAST
 
 
-## How far past the authored nights this night is. The first night after
-## them is the first step.
+## How far past the ten this night is. The first night after them is the
+## first step.
 static func step_of(night: int) -> int:
-	return maxi(night - Waves.authored_count(), 0)
+	return maxi(night - DRAWN_PAST, 0)
 
 
-## The whole record for a generated night: the same shape `GameData.NIGHTS`
-## holds, so nothing downstream can tell it was not typed by hand.
+## The whole record for a generated night: the same shape a key night has,
+## so nothing downstream can tell it was not typed by hand.
 static func night(seed_value: int, night_number: int) -> Dictionary:
 	if not is_generated(night_number):
 		return {}
@@ -139,10 +151,11 @@ static func giants_on(night_number: int) -> int:
 # ------------------------------------------------------------------ the curve
 
 static func _size(curve: Dictionary, night_number: int) -> int:
-	# **The last authored night as written** (task 0150), never as a calendar
-	# rule changes it on its date: a Full Moon on that day must not move the
-	# whole curve after it.
-	var base := Waves.size_in(Waves.plain_night(Waves.authored_count()))
+	# **The tenth night as written** (tasks 0150 and 0270), never as a
+	# calendar rule changes it on its date: since the year became data it is
+	# Spring 14's key night, the tenth without its Giant - which 0153's rule
+	# brings back on the night.
+	var base := Waves.size_in(GameData.KEY_NIGHTS[GameData.SEASON_DAYS])
 	var grown := 100 + int(curve["growth_percent"]) * step_of(night_number)
 	return maxi(base * grown / 100, 1)
 

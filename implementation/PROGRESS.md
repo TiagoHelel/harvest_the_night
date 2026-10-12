@@ -27951,3 +27951,206 @@ Verify: **PASS**, 61 of 61 in 1028 s, both hashes unchanged; the new script pars
 Files: src/tools/matchups.gd (new, with its .uid), tools/matchups.py (new),
 implementation/MATCHUPS.md (new), implementation/prompts/0259-matchups.md,
 implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
+
+## 0270 - Fifty-six nights as data - done 2026-10-11
+
+What changed: the year is no longer ten written nights and a curve. It is
+tables a designer can read:
+- a template per season, `GameData.SEASON_NIGHTS`;
+- the nights a person writes, `KEY_NIGHTS`: every introduction and every
+  Full Moon;
+- a seeded generator, `Almanac` (new), that makes every other day from its
+  season's template.
+
+Nothing downstream of `Waves.night_of` can tell which is which, so the
+season tasks after this one edit data. Day 1 is byte for byte the old night
+1. SIM did not move; DATA did, on purpose.
+
+### The tables
+
+**`SEASON_NIGHTS`**, a record per season, every number a `# LEVER`:
+- `sides`: `[side, the day it joins]`, only sides `SIDES_BY_SEASON` opens
+  that season;
+- `mix`: kind -> `[weight in hit points, the day it joins]`, never a boss;
+- `size`: hit points on the season's second and thirteenth day;
+- `waves` and `gap_ticks`, on the same two days.
+
+The days between take the line between them. The drafts:
+
+| Season | Sides (joins) | Size, hp | Waves | Gap |
+|---|---|---|---|---|
+| spring | E | 400-2600 | 3-6 | 15-6 s |
+| summer | E, SE (3) | 1800-4200 | 5-7 | 10-5 s |
+| autumn | E, SE, N (3) | 3000-6000 | 6-8 | 8-4 s |
+| winter | E, SE, N, W (3), S (5) | 4500-8500 | 7-9 | 6-3 s |
+
+Spring mixes the walker from day 1, the runner from 3, the tank from 5 and
+the breaker from 7, as its key nights introduce them. Summer to winter mix
+the same four from day 1 until 0272-0274 write their own.
+
+**`KEY_NIGHTS`**, day -> record, sixteen of them:
+- **Spring** is today's ten. Nights 1-9 are days 1-9, and night 10 without
+  its Giant row is day 14, where 0153's rule brings the Giant back. Their
+  south-east rows moved to the east, the only side spring opens; day 2's
+  note lost its "from two sides" with them.
+- **Summer to winter** have only their Full Moons (days 7 and 14), drafts of
+  spring's 7 and 10 scaled to the season's size. They send spring's kinds
+  round every side their season opens, the boss's company on 14.
+- 0157's `SPRING_DRAFT_SIDES` allowance is deleted; 0271 has nothing left to
+  remove.
+
+### Where a night comes from
+
+- **`Waves.plain_night(day, seed)`**:
+  - the key night, or else `Almanac`'s, for days 1-56;
+  - `Endless.night` past them until 0279;
+  - empty for a calm date.
+- **`night_of`** keeps 0152-0154's rules on top. It asks the calm night
+  first now, since a calm date has no record to start from.
+- **`tonight()`** caches a made night on `state.wave.tonight`, as it
+  did a generated one. A key night no rule touches is still the record itself
+  (day 1 keeps nothing).
+- **`GameData.NIGHTS` and `Waves.authored_count()` are gone**, every reader
+  moved.
+
+**`Almanac.night(seed, day)`**:
+- shares the template's hit points for the day by weight between the
+  kinds that have joined, each share in whole bodies, at least one;
+- deals them into the day's waves round the joined sides with `Endless`'s
+  own deal (`_lay_out`), from a fresh `(seed, day)` stream, never
+  `state["rng"]`;
+- fits them before dawn (`_fit_before_dawn`).
+
+The seed orders the waves and picks the side the night opens on, and that
+is all it does. The count of every kind is the day's on every seed.
+
+**The Full Moon is scaled in one place**, `night_of`. A key Full Moon is
+written at an ordinary night's size, so the forecast's count is what is sent.
+
+**The weather pin.** A key night's optional `event` pins the night's weather
+(`&"fog"`) or forbids it (`&""`). `Weather.event` reads it instead of the
+roll; `Weather.event_in` takes the table, so a test can pin a copy.
+`check_nights` holds a pin to the weather's own rules:
+- a real event, and never on the game's first night;
+- never before the season `NIGHT_EVENT_FIRST_SEASON` says it rises;
+- no Blood Moon on a boss night or a Full Moon.
+
+No shipped key night pins anything yet; 0273 is the first that will.
+
+**`check_nights(templates, key_nights)` and `check_record(one, day)`.**
+`check_nights` takes the tables as arguments. It refuses:
+- in a template: a boss or an unknown kind, a side its season has not
+  opened, a size that falls or a gap that grows, a join day outside the
+  season;
+- a key night outside 1-56, on a calm date or naming a boss;
+- a bad pin;
+- a Full Moon with no key night;
+- what it always refused of the curve past the year.
+
+`check_record` is the per-record rules in one function, for a written night
+and a made one alike: the fields, real kinds from open sides, an empty list
+only when calm, and everything sent `DAWN_MARGIN_TICKS` before dawn.
+`validate()` runs it on seed 0's year; `python tools/nights.py --check` runs
+it on every date for seeds 0 and 424242.
+
+**`Endless`** keeps counting from the tenth night (`DRAWN_PAST`, 10). Its
+base is Spring 14's key night as written, 84 - the tenth without the Giant,
+which was 85.
+- **Day 57** is Spring 1 of Year 2, a calm night, before and after.
+- **Day 58**, the curve's first night past the year, sends 574 bodies
+  before and 567 after.
+
+### `python tools/nights.py`
+
+Its arguments are now `[from] [to] [seed]`: the year for seed 0 by default,
+`15 28 3` for Summer on seed 3, and past 56 the curve. A block per season
+gives each day's marks (key, made, curve, calm, FULL, BOSS), count, hit
+points, reward, sides, weather, when it is all sent and its kinds. Then come
+the totals, the day each kind is first sent, and the days as bars of hit
+points.
+
+### The year, seed 0
+
+Each cell is bodies / hit points / what killing all of it is worth
+(`Waves.reward_of`); *k* a key night, *m* made from its season's template,
+FULL a Full Moon, BOSS the season's boss.
+
+| Day | Spring | Summer | Autumn | Winter |
+|---|---|---|---|---|
+| 1 | 12 / 240 / $36 *k* | calm | calm | calm |
+| 2 | 20 / 400 / $60 *k* | 56 / 1715 / $286 *m* | 94 / 2930 / $483 *m* | 142 / 4390 / $728 *m* |
+| 3 | 24 / 420 / $78 *k* | 63 / 1960 / $323 *m* | 102 / 3220 / $528 *m* | 153 / 4830 / $792 *m* |
+| 4 | 40 / 620 / $138 *k* | 68 / 2065 / $345 *m* | 111 / 3420 / $568 *m* | 165 / 5180 / $851 *m* |
+| 5 | 41 / 980 / $164 *k* | 76 / 2355 / $390 *m* | 119 / 3675 / $609 *m* | 175 / 5500 / $903 *m* |
+| 6 | 48 / 1400 / $214 *k* | 83 / 2600 / $427 *m* | 128 / 3985 / $657 *m* | 188 / 5895 / $970 *m* |
+| 7 | 81 / 2280 / $381 *k* FULL | 147 / 3990 / $676 *k* FULL | 226 / 6250 / $1049 *k* FULL | 331 / 9230 / $1548 *k* FULL |
+| 8 | 69 / 2030 / $342 *k* | 97 / 3005 / $498 *m* | 145 / 4540 / $747 *m* | 210 / 6565 / $1081 *m* |
+| 9 | 80 / 2560 / $416 *k* | 104 / 3250 / $535 *m* | 155 / 4860 / $799 *m* | 222 / 6915 / $1140 *m* |
+| 10 | 63 / 1960 / $323 *m* | 111 / 3420 / $568 *m* | 162 / 5030 / $832 *m* | 234 / 7290 / $1204 *m* |
+| 11 | 68 / 2065 / $345 *m* | 118 / 3665 / $605 *m* | 171 / 5305 / $876 *m* | 245 / 7630 / $1259 *m* |
+| 12 | 75 / 2310 / $382 *m* | 124 / 3890 / $639 *m* | 180 / 5605 / $925 *m* | 257 / 8080 / $1327 *m* |
+| 13 | 82 / 2580 / $424 *m* | 132 / 4070 / $676 *m* | 190 / 5925 / $977 *m* | 269 / 8430 / $1386 *m* |
+| 14 | 127 / 4755 / $750 *k* FULL BOSS | 202 / 7190 / $1147 *k* FULL BOSS | 290 / 9980 / $1580 *k* FULL BOSS | 411 / 14305 / $2293 *k* FULL BOSS |
+
+The year: 7286 enemies over 53 nights, 226740 hit points, worth $37280 - a bounty of $1864. First sent: walker on 1, runner on 3, tank on 5, breaker on 7, giant on 14, harvester on 28, scarecrow_king on 42, winter_lord on 56.
+
+### Decided
+
+- **The late drafts come from every side their season opens.** The first
+  drafts kept spring's east/south-east rows, and 0158's forecast assert
+  "Winter 14 comes from every side" caught it. The curve had dealt days
+  11-56 round every open side, and a winter Full Moon from two sides would
+  be a softer exam than the one it replaces.
+- **The suites read the year through `Waves`.**
+  - 0059's, 0060's and 0061's asserts on "the ten" ask spring's key nights,
+    days 1-9 and 14, which climb as the ten did.
+  - 0070's ask the curve by name (`Endless.night`), and past the year
+    through `Waves.plain_night`. Night 25, played start to finish, is now
+    summer 11 made from its template.
+  - 0059's tick-budget farm fights Spring 14 rather than day 10, which is
+    now a made night.
+  - 0059's "Giant on the last authored night" is "in no record, and on
+    Spring 14 by the calendar".
+  - 0137's schedule assert was "endless nights 11-40". It now covers days
+    11-40, which are made, and the curve's first thirty nights past the
+    year.
+- **`perf_check`'s worst case stays on Spring 14 (0153) until 0275**, as
+  the task says. That night is the tenth's crowd under the Full Moon again,
+  127 bodies with the Giant, lighter than the curve's Spring 14. The baseline
+  was not re-accepted. It printed a night tick of 1183 us against the baseline's 1726, the swarm's 4374 against 5729 and a path rebuild 10286 against 10800 - all down, none past the tolerance.
+
+### Found
+
+- **The year is much lighter late than the curve was.** The curve added 12%
+  of night ten a night. Day 55 was 544 bodies and 29,470 hit points;
+  it is 269 and 8,430 now. The day's band grows half again over the year,
+  and BALANCE.md (0219) found the night's purse growing ten times on the
+  curve. Its per-season night purses were measured on the curve, so they are
+  stale until 0278.
+- **Spring 10-13 sit under key night 9.** They are made on the template's
+  line (1960-2580 hp), while night 9 is 2560 hp. 0271's own starting map
+  spreads today's 8-9 over days 9-13, so it removes this.
+- **`verify.py --hashes` is not quick.** It still runs every art and
+  showcase check and perf; it was stopped at 600 s, and
+  `src/tools/determinism.gd` was run alone for the two numbers.
+- **A `\\` in a Bash heredoc reached the file as one backslash**, and Python
+  read it as a line continuation. The edit script was written with the Write
+  tool.
+
+### Hashes
+
+- **SIM unchanged:** 1167439413. The scenario fights day 1, byte for byte
+  the old night 1, then a day.
+- **DATA 663742656 -> 630511402**, on purpose: `digest()` lists
+  `SEASON_NIGHTS` and `KEY_NIGHTS` instead of `NIGHTS`.
+
+Verify: **PASS**, 61 of 61 in 1032 s, DATA recorded 630511402 (was 663742656), SIM unchanged. After it, three test-only touch-ups (0137's schedule loop and two comments) re-ran their suites clean: `headless_v1` 2723 asserts in 31 s, `headless_check` 18987 in 88 s.
+- **Suites:** `headless_check` 18987 asserts, `headless_v1` 2723 (11 of them the new group's), `input_check` 1269 cases, `input_v1` 735 (113.9 s), `input_v2` 3; `nights --check` passes every date of the year for both seeds.
+
+Files: src/core/almanac.gd (new, with its .uid), src/core/game_data.gd,
+src/core/waves.gd, src/core/endless.gd, src/core/weather.gd,
+src/tools/nights.gd, tools/nights.py, src/tools/headless_check.gd,
+src/tools/headless_v1.gd, src/tools/autoplay.gd (a comment),
+src/tools/perf_check.gd (a comment), tools/determinism_data_hash.txt,
+implementation/prompts/0270-night-records-v2.md,
+implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md

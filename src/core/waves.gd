@@ -3,10 +3,11 @@ extends RefCounted
 
 ## What comes, in what order, and when the night is over.
 ##
-## A night is a row of `GameData.NIGHTS`; a wave is
-## `[enemy, count, spawn point, ticks to wait first]`. Nothing about which
-## night is which lives here - task 0060 writes ten of them and this file does
-## not change.
+## A night is a record - a key night of `GameData.KEY_NIGHTS`, one `Almanac`
+## makes from its season's template, or `Endless`'s past the year - and a wave
+## is `[enemy, count, spawn point, ticks to wait first]`. Nothing about which
+## night is which lives here: the year is data (task 0270) and this file does
+## not change for it.
 ##
 ## ## They arrive one at a time
 ##
@@ -39,27 +40,22 @@ static func initial() -> Dictionary:
 	}
 
 
-## How many nights are written by a person (task 0150): the rows of
-## `GameData.NIGHTS`. Past them, `Endless` writes the night.
-static func authored_count() -> int:
-	return (GameData.NIGHTS as Array).size()
-
-
-## **The record as written**: a person's row for nights 1 to
-## `authored_count()`, the `Endless` curve past them, for every night of
-## every year. The curve's own tests read this, so the calendar's rules
-## (0152-0154) never fight them.
+## **The record as written** - where the year comes from (task 0270): a
+## day's key night, else the one `Almanac` makes from its season's template,
+## for the year's days; the `Endless` curve past them until 0279. Empty for a
+## calm date of the year, which has no record of its own (`night_of` answers
+## it). The calendar's rules (0152-0154) go on top in `night_of`, never here.
 ##
-## **The seed is optional and that is deliberate.** An authored night does not
-## have one, and a tool asking "what does night 25 look like" without naming a
-## run is asking a reasonable question - seed 0 is as real a curve as any. The
+## **The seed is optional and that is deliberate.** A key night does not have
+## one, and a tool asking "what does day 25 look like" without naming a run
+## is asking a reasonable question - seed 0 is as real a year as any. The
 ## functions that have a state to hand pass its seed, so the night a run
-## actually fights is the night that run's seed generates.
+## actually fights is the night that run's seed makes.
 static func plain_night(night: int, seed_value: int = 0) -> Dictionary:
 	if night < 1:
 		return {}
-	if night <= authored_count():
-		return GameData.NIGHTS[night - 1]
+	if night <= Calendar.year_days():
+		return Almanac.night(seed_value, night)
 	return Endless.night(seed_value, night)
 
 
@@ -75,14 +71,15 @@ static func plain_night(night: int, seed_value: int = 0) -> Dictionary:
 ## - **the calm night** (task 0154): the first night of every season but the
 ##   game's first sends nothing at all, whatever was written for it.
 ##
-## A night no rule touches comes back as written - the authored row itself,
-## not a copy.
+## A night no rule touches comes back as written - the key night itself,
+## not a copy. **The calm night is asked first** (task 0270): its date has
+## no record to start from.
 static func night_of(night: int, seed_value: int = 0) -> Dictionary:
+	if night >= 1 and Calendar.is_calm(night):
+		return _calm()
 	var plain := plain_night(night, seed_value)
 	if plain.is_empty():
 		return plain
-	if Calendar.is_calm(night):
-		return _calm()
 	var one := plain
 	if Calendar.is_boss_night(night):
 		one = _with_the_season_boss(plain, Calendar.boss_of(night))
@@ -210,19 +207,20 @@ static func _fit_inside_the_night(one: Dictionary) -> void:
 
 ## The record for the night being fought, generated once and kept.
 ##
-## `Endless.night()` is a pure function and cheap, but not free, and
-## `remaining()` is asked for it every tick by the night HUD. Generating a
-## fresh one sixty times a second would be sixty wave tables a second for one
-## answer - the mistake task 0067 found in `Tutorial` and task 0025 in the
-## flow field. So tonight's is built when the night it belongs to arrives and
-## put on the state, where it saves, loads and hashes with everything else.
+## A made night (`Almanac`, `Endless`) is a pure function and cheap, but not
+## free, and `remaining()` is asked for it every tick by the night HUD.
+## Making a fresh one sixty times a second would be sixty wave tables a
+## second for one answer - the mistake task 0067 found in `Tutorial` and task
+## 0025 in the flow field. So tonight's is built when the night it belongs to
+## arrives and put on the state, where it saves, loads and hashes with
+## everything else.
 ##
 ## **A record a calendar rule changed is kept the same way** (task 0152), and
-## only that one: an authored night no rule touches is still the row itself,
-## so night 1 puts nothing new in its state.
+## only that one: a key night no rule touches is still the record itself,
+## so day 1 puts nothing new in its state.
 static func tonight(state: Dictionary) -> Dictionary:
 	var night := int(state["night"])
-	if night <= authored_count() and not _ruled(night, int(state["seed"])):
+	if Almanac.is_key(night) and not _ruled(night, int(state["seed"])):
 		return night_of(night, int(state["seed"]))
 	var wave: Dictionary = state["wave"]
 	var kept: Dictionary = wave.get("tonight", {})
@@ -434,11 +432,23 @@ static func size_of(night: int, seed_value: int = 0) -> int:
 
 
 ## The same count off a record already in hand: `Endless` sizes its curve
-## from the last authored night as written, never as the calendar changes it.
+## from Spring 14's key night as written, never as the calendar changes it.
 static func size_in(one: Dictionary) -> int:
 	var total := 0
 	for row in _rows_in(one):
 		total += int((row as Array)[1])
+	return total
+
+
+## **What a record has to kill**, in hit points as written (task 0270): the
+## honest measure of a night's size, since three tanks are not three walkers -
+## what 0060 authored by and `SEASON_NIGHTS` sizes its templates in.
+static func hit_points_in(one: Dictionary) -> int:
+	var total := 0
+	for row in _rows_in(one):
+		var kind: Variant = GameData.ENEMIES.get((row as Array)[0], null)
+		if kind != null:
+			total += int((kind as Dictionary)["hp"]) * int((row as Array)[1])
 	return total
 
 

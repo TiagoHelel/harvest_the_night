@@ -2799,17 +2799,11 @@ const ENEMIES: Dictionary = {
 
 # ====================================================================== nights
 
-## The ten nights of `design.md`, section 10.
-##
-## A night is a list of waves; a wave is `[enemy, count, spawn, delay_ticks]`,
-## where `delay_ticks` is the gap after the previous wave. Task 0059 formalises
-## this into a validated table and task 0060 tunes the curve - what is here is
-## the shape, so that the first playable build of task 0027 has three waves to
-## fight and the rest has somewhere to grow.
+## The year's nights (task 0270, after `design.md` section 10's ten).
 ## **The pace of an ordinary night**, and what a night is measured against
-## when it does not set its own. Nights one and two take it; the other eight
+## when it does not set its own. Spring's first two nights take it; the rest
 ## tighten it deliberately, and that tightening is the second difficulty curve
-## described under `NIGHTS`.
+## described under `SEASON_NIGHTS`.
 const WAVE_GAP_TICKS := 15 * SECONDS    # LEVER: ticks, 8-30 seconds worth
 
 ## How long between two members of the same wave.
@@ -2819,61 +2813,105 @@ const WAVE_GAP_TICKS := 15 * SECONDS    # LEVER: ticks, 8-30 seconds worth
 ## while the player watches.
 const SPAWN_INTERVAL_TICKS := 20        # LEVER: ticks, 8-45
 
-## The ten nights of `design.md`, section 10.
-##
-## **A night is a record, not a bare list of rows.** Task 0059 turned it into
-## one so that the two numbers a designer most wants to turn - how long before
-## the first wave, and how long between them - live on the night they belong
-## to rather than being repeated on every row of it. A night is:
+## **A night is a record, not a bare list of rows** (task 0059), so the two
+## numbers a designer most wants to turn - how long before the first wave, and
+## how long between them - live on the night they belong to:
 ##
 ##     {"note": ..., "opening_ticks": ..., "gap_ticks": ..., "waves": [...]}
 ##
 ## and a wave is `[enemy, count, spawn]`, with an optional fourth entry that
-## overrides the night's gap for that one wave. The old shape repeated
-## `WAVE_GAP_TICKS` on thirty-four rows; changing the pace of a night meant
-## editing every row of it and hoping none were missed.
+## overrides the night's gap for that one wave. A night may set its own
+## `interval_ticks` too, to be all out before dawn (0137), and a key night an
+## `event` (below).
 ##
-## `note` is for the summary `tools/nights.py` prints, which is the whole of
-## "a summary of all ten nights can be printed headlessly".
-## The ten nights of `design.md`, section 10.
+## ## The year is tables (task 0270)
 ##
-## **A night is a record, not a bare list of rows.** Task 0059 turned it into
-## one so that the two numbers a designer most wants to turn - how long before
-## the first wave, and how long between them - live on the night they belong
-## to rather than being repeated on every row of it. A night is:
+## Not ten written nights and a curve: **a template per season** that every
+## ordinary day is made from (`Almanac`), and **the key nights** a person
+## writes - every kind's introduction and the Full Moons on the seventh and
+## fourteenth day of every season. Nothing downstream of `Waves.night_of`
+## can tell which is which. The calm first day of summer, autumn and winter
+## (0154) carries neither: `night_of` answers it.
 ##
-##     {"note": ..., "opening_ticks": ..., "gap_ticks": ..., "waves": [...]}
+## **A template** says, for its season:
+## - `sides`: `[side, the day it joins]`, each a side `SIDES_BY_SEASON` opens
+##   that season, so a season brings a new one in gently;
+## - `mix`: kind -> `[weight, the day it joins]`, the weight a share of the
+##   night's hit points - never a boss, which is 0153's row;
+## - `size`: the night's **hit points** on the season's second and thirteenth
+##   day - the honest measure 0060 authored by, because three tanks are not
+##   three walkers - and the line between them on the days between;
+## - `waves` and `gap_ticks`, on the same two days.
 ##
-## and a wave is `[enemy, count, spawn]`, with an optional fourth entry that
-## overrides the night's gap for that one wave.
+## A season's size never falls and its gap never grows (0060's curve rules);
+## `check_nights` holds both.
 ##
-## ## The curve, and what it is measured in
+## ## The key nights, and the drafts they are today
 ##
-## Task 0060 authored these against three numbers that all have to climb:
-## **how many arrive**, **what they are worth**, and **how many hit points
-## there are to get through**. The last is the honest measure of a night's
-## size, because three tanks are not three walkers - and the old table dipped
-## on four of the ten by it.
+## **One new thing a night, and the night after is where it bites** (0060):
+## spring's are today's ten nights, written for `design.md` - the walker on 1,
+## the runner on 3, the tank on 5, the breaker on 7 - with their south-east
+## rows moved to the east, which is all spring opens (0157); the tenth,
+## without its Giant, is Spring 14, the season's boss night, where 0153's
+## rule brings the Giant back. Summer to winter have only their Full Moons,
+## drafts of spring's seventh and tenth to their season's size, sending
+## spring's kinds round every side their season opens: 0271-0274 write the
+## seasons for real.
 ##
-## `python tools/nights.py` prints all three, and
-## `python tools/play_nights.py` plays them with a scripted build and says
-## which fell. Both were written for this task and are the instrument it was
-## authored with.
+## **A Full Moon's record is written at an ordinary night's size**, and
+## `FULL_MOON_HORDE_PERCENT` scales it in `Waves.night_of` - in that one
+## place, never written in as well - so the forecast's count is what is sent.
 ##
-## ## One new thing a night, and the night after is where it bites
+## **`event`**, optional on a key night, pins the night's weather (`&"fog"`)
+## or forbids it (`&""`), read by `Weather.event` - and still held to
+## `Weather`'s own rules: nothing on Spring 1 or a calm date, no Blood Moon
+## before autumn, on a boss night or on a Full Moon.
 ##
-## The walker on 1, the runner on 3, the tank on 5, the breaker on 7 and the
-## Giant on 10 - which is section 10 exactly. Each of those is a gentle
-## introduction and the night after it is the hard one, so a player meets a
-## new problem while they can still afford to get it wrong, and is examined on
-## it when they cannot.
-##
-## The gap between waves tightens as the run goes on, from fifteen seconds to
-## ten. That is a second curve under the first one: the same crowd arriving
-## with less room to breathe between waves is a harder crowd, and it is the
-## cheapest difficulty there is because it costs no extra enemies.
-const NIGHTS: Array = [
+## `python tools/nights.py` prints the year, and `python tools/play_nights.py`
+## plays it with a scripted build - the instruments 0060 authored the ten
+## with.
+const SEASON_NIGHTS: Array = [
+	# Spring: the east alone, and its four kinds as they are met - the
+	# runner on its third day, the tank on its fifth, the breaker on its
+	# seventh, as its key nights introduce them.
 	{
+		"sides": [[0, 1]],                      # LEVER: [side, the day of the season it joins]
+		"mix": {&"walker": [25, 1], &"runner": [10, 3], &"tank": [37, 5], &"breaker": [28, 7]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"size": [400, 2600],             # LEVER: hit points on its second and thirteenth day, 200-12000
+		"waves": [3, 6],                    # LEVER: waves on its second and thirteenth day, 2-12
+		"gap_ticks": [15 * SECONDS, 6 * SECONDS],  # LEVER: the gap on its second and thirteenth day, 2-30 seconds
+	},
+	# Summer: the south east joins on its third day. Spring's kinds until
+	# 0272 writes the season's own.
+	{
+		"sides": [[0, 1], [1, 3]],              # LEVER: [side, the day of the season it joins]
+		"mix": {&"walker": [25, 1], &"runner": [10, 1], &"tank": [37, 1], &"breaker": [28, 1]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"size": [1800, 4200],            # LEVER: hit points on its second and thirteenth day, 200-12000
+		"waves": [5, 7],                    # LEVER: waves on its second and thirteenth day, 2-12
+		"gap_ticks": [10 * SECONDS, 5 * SECONDS],  # LEVER: the gap on its second and thirteenth day, 2-30 seconds
+	},
+	# Autumn: the north joins on its third day. Spring's kinds until 0273.
+	{
+		"sides": [[0, 1], [1, 1], [2, 3]],      # LEVER: [side, the day of the season it joins]
+		"mix": {&"walker": [25, 1], &"runner": [10, 1], &"tank": [37, 1], &"breaker": [28, 1]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"size": [3000, 6000],            # LEVER: hit points on its second and thirteenth day, 200-12000
+		"waves": [6, 8],                    # LEVER: waves on its second and thirteenth day, 2-12
+		"gap_ticks": [8 * SECONDS, 4 * SECONDS],  # LEVER: the gap on its second and thirteenth day, 2-30 seconds
+	},
+	# Winter: the west joins on its third day and the south on its fifth.
+	# Spring's kinds until 0274.
+	{
+		"sides": [[0, 1], [1, 1], [2, 1], [3, 3], [4, 5]], # LEVER: [side, the day of the season it joins]
+		"mix": {&"walker": [25, 1], &"runner": [10, 1], &"tank": [37, 1], &"breaker": [28, 1]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"size": [4500, 8500],            # LEVER: hit points on its second and thirteenth day, 200-12000
+		"waves": [7, 9],                    # LEVER: waves on its second and thirteenth day, 2-12
+		"gap_ticks": [6 * SECONDS, 3 * SECONDS],  # LEVER: the gap on its second and thirteenth day, 2-30 seconds
+	},
+]
+
+const KEY_NIGHTS: Dictionary = {
+	# ---------------------------------------------------------------- spring
+	1: {
 		"note": "the tutorial night: one tower, one side, and time to watch",
 		"opening_ticks": 0,
 		"waves": [
@@ -2882,16 +2920,16 @@ const NIGHTS: Array = [
 			[&"walker", 5, 0],
 		],
 	},
-	{
-		"note": "the same again from two sides, so one tower is not enough",
+	2: {
+		"note": "the same again and more of it, so one tower is not enough",
 		"opening_ticks": 0,
 		"waves": [
 			[&"walker", 6, 0],
-			[&"walker", 6, 1],
+			[&"walker", 6, 0],
 			[&"walker", 8, 0],
 		],
 	},
-	{
+	3: {
 		"note": "the first runners: fast, fragile, and they ignore your walls",
 		"opening_ticks": 0,
 		"gap_ticks": 14 * SECONDS,
@@ -2902,103 +2940,184 @@ const NIGHTS: Array = [
 		# introduction. Measured with `tools/play_nights.py` at $150 a day.
 		"waves": [
 			[&"walker", 6, 0],
-			[&"runner", 2, 1],
+			[&"runner", 2, 0],
 			[&"walker", 12, 0],
-			[&"runner", 4, 1],
+			[&"runner", 4, 0],
 		],
 	},
-	{
+	4: {
 		"note": "runners in numbers - the night that asks for rate of fire",
 		"opening_ticks": 0,
 		"gap_ticks": 14 * SECONDS,
 		"waves": [
 			[&"walker", 10, 0],
-			[&"runner", 8, 1],
+			[&"runner", 8, 0],
 			[&"walker", 12, 0],
-			[&"runner", 10, 1],
+			[&"runner", 10, 0],
 		],
 	},
-	{
+	5: {
 		"note": "the first tank: one thing a crossbow line cannot chew through",
 		"opening_ticks": 0,
 		"gap_ticks": 13 * SECONDS,
 		"waves": [
 			[&"walker", 10, 0],
 			[&"tank", 1, 0],
-			[&"runner", 14, 1],
+			[&"runner", 14, 0],
 			[&"walker", 14, 0],
 			[&"tank", 2, 0],
 		],
 	},
-	{
+	6: {
 		"note": "tanks in threes, with the crowd still coming",
 		"opening_ticks": 0,
 		"gap_ticks": 13 * SECONDS,
 		"waves": [
 			[&"walker", 12, 0],
 			[&"tank", 2, 0],
-			[&"runner", 16, 1],
-			[&"walker", 14, 1],
+			[&"runner", 16, 0],
+			[&"walker", 14, 0],
 			[&"tank", 4, 0],
 		],
 	},
-	{
+	7: {
 		"note": "the breakers arrive, and an uncovered tower line is a debt",
 		"opening_ticks": 0,
 		"gap_ticks": 9 * SECONDS,
 		"waves": [
 			[&"walker", 12, 0],
-			[&"breaker", 4, 1],
-			[&"runner", 16, 1],
+			[&"breaker", 4, 0],
+			[&"runner", 16, 0],
 			[&"tank", 4, 0],
 			[&"walker", 14, 0],
-			[&"breaker", 4, 1],
+			[&"breaker", 4, 0],
 		],
 	},
-	{
+	8: {
 		"note": "a large night: everything at once and more of it",
 		"opening_ticks": 0,
 		"gap_ticks": 8 * SECONDS,
 		"waves": [
 			[&"walker", 14, 0],
-			[&"breaker", 6, 1],
-			[&"runner", 20, 1],
+			[&"breaker", 6, 0],
+			[&"runner", 20, 0],
 			[&"tank", 5, 0],
 			[&"walker", 16, 0],
-			[&"breaker", 8, 1],
+			[&"breaker", 8, 0],
 		],
 	},
-	{
+	9: {
 		"note": "the heavy mix, and the dress rehearsal for the Giant",
 		"opening_ticks": 0,
 		"gap_ticks": 6 * SECONDS,
 		"waves": [
 			[&"walker", 16, 0],
-			[&"breaker", 8, 1],
-			[&"runner", 24, 1],
+			[&"breaker", 8, 0],
+			[&"runner", 24, 0],
 			[&"tank", 8, 0],
 			[&"walker", 16, 0],
-			[&"breaker", 8, 1],
+			[&"breaker", 8, 0],
 		],
 	},
-	{
-		"note": "the Giant, with company so it cannot be focused down alone",
+	14: {
+		"note": "the Giant's company, so it cannot be focused down alone",
 		"opening_ticks": 0,
 		"gap_ticks": 4 * SECONDS,
 		"waves": [
 			[&"walker", 16, 0],
-			[&"breaker", 6, 1],
-			# **It walks in while the farm is already busy.** A Giant that
-			# arrived alone would be a duel; arriving third, with runners
-			# behind it, is a test of the whole build.
-			[&"giant", 1, 0],
-			[&"runner", 26, 1],
+			[&"breaker", 6, 0],
+			[&"runner", 26, 0],
 			[&"tank", 8, 0],
 			[&"walker", 20, 0],
-			[&"breaker", 8, 1],
+			[&"breaker", 8, 0],
 		],
 	},
-]
+	# ---------------------------------------------------------------- summer
+	21: {
+		"note": "summer 7, the Full Moon: a draft of spring's night 7 to this season's size, until 0272",
+		"opening_ticks": 0,
+		"gap_ticks": 9 * SECONDS,
+		"waves": [
+			[&"walker", 22, 0],
+			[&"breaker", 7, 1],
+			[&"runner", 30, 1],
+			[&"tank", 7, 0],
+			[&"walker", 26, 0],
+			[&"breaker", 7, 1],
+		],
+	},
+	28: {
+		"note": "summer 14, the boss's company: a draft of spring's night 10 to this season's size, until 0272",
+		"opening_ticks": 0,
+		"gap_ticks": 4 * SECONDS,
+		"waves": [
+			[&"walker", 26, 0],
+			[&"breaker", 9, 1],
+			[&"runner", 42, 1],
+			[&"tank", 13, 0],
+			[&"walker", 32, 0],
+			[&"breaker", 13, 1],
+		],
+	},
+	# ---------------------------------------------------------------- autumn
+	35: {
+		"note": "autumn 7, the Full Moon: a draft of spring's night 7 to this season's size, until 0273",
+		"opening_ticks": 0,
+		"gap_ticks": 9 * SECONDS,
+		"waves": [
+			[&"walker", 34, 0],
+			[&"breaker", 11, 1],
+			[&"runner", 45, 2],
+			[&"tank", 11, 0],
+			[&"walker", 40, 1],
+			[&"breaker", 11, 2],
+		],
+	},
+	42: {
+		"note": "autumn 14, the boss's company: a draft of spring's night 10 to this season's size, until 0273",
+		"opening_ticks": 0,
+		"gap_ticks": 4 * SECONDS,
+		"waves": [
+			[&"walker", 37, 0],
+			[&"breaker", 14, 1],
+			[&"runner", 60, 2],
+			[&"tank", 18, 0],
+			[&"walker", 46, 1],
+			[&"breaker", 18, 2],
+		],
+	},
+	# ---------------------------------------------------------------- winter
+	49: {
+		"note": "winter 7, the Full Moon: a draft of spring's night 7 to this season's size, until 0274",
+		"opening_ticks": 0,
+		"gap_ticks": 9 * SECONDS,
+		# Sent closer together so it is all out before dawn (0137).
+		"interval_ticks": 17,
+		"waves": [
+			[&"walker", 49, 0],
+			[&"breaker", 16, 1],
+			[&"runner", 66, 2],
+			[&"tank", 16, 3],
+			[&"walker", 58, 4],
+			[&"breaker", 16, 0],
+		],
+	},
+	56: {
+		"note": "winter 14, the boss's company: a draft of spring's night 10 to this season's size, until 0274",
+		"opening_ticks": 0,
+		"gap_ticks": 4 * SECONDS,
+		# Sent closer together so it is all out before dawn (0137).
+		"interval_ticks": 16,
+		"waves": [
+			[&"walker", 52, 0],
+			[&"breaker", 19, 1],
+			[&"runner", 85, 2],
+			[&"tank", 26, 3],
+			[&"walker", 66, 4],
+			[&"breaker", 26, 0],
+		],
+	},
+}
 
 ## How long the world takes to change, in seconds.
 ##
@@ -3042,9 +3161,11 @@ const REACTION_TICKS := 45              # LEVER: ticks, 20-120
 ## standing at the pond can see.
 const REACTION_NEAR := 6                # LEVER: tiles, 3-12
 
-## The curve that writes night eleven and everything after it.
+## The curve that writes every night past the year (Year 2 on, until 0279
+## retires it - task 0270 moved it past day 56).
 ##
-## **The authored ten are the shape; this is the extrapolation.** A generated
+## **The ten nights `design.md` wrote were the shape; this is the
+## extrapolation**, counted past the tenth as it always was. A generated
 ## night is the same record as a written one - note, opening, gap, waves - so
 ## everything downstream of `Waves.night_of()` cannot tell the difference, and
 ## nothing in `Enemies`, `Rewards` or the HUD needed a line about endless.
@@ -3054,8 +3175,9 @@ const REACTION_NEAR := 6                # LEVER: tiles, 3-12
 ## `growth_percent` is added per night past the tenth, **not compounded**:
 ## compounding turns night forty into a number with no relationship to a farm
 ## anyone could build, and the point of endless is "how far does my build go",
-## not "watch an exponent win". Night ten sends 85, so at 12 a night past it
-## sends 85 + ten more each night: night 25 sends around 238.
+## not "watch an exponent win". Its base is the tenth night as written - since
+## task 0270 Spring 14's key night, the Giant's company, 84 - so at 12 a night
+## past the tenth it sends 84 + ten more each night: night 25 sends 235.
 ##
 ## `mix` is a weight per kind and how much that weight shifts per night. The
 ## walker's share falls and the tank's and breaker's rise, so a late night is
@@ -3144,12 +3266,6 @@ const SPAWN_SIDES: Array = [&"east", &"south_east", &"north", &"west", &"south"]
 ## indices, in `SEASONS` order. Each season keeps the sides of the one before
 ## and opens a new one; `Calendar.open_sides` reads it.
 const SIDES_BY_SEASON: Array = [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3, 4]]  # LEVER: sides per season
-
-## **Today's ten nights, allowed the south east in spring** (task 0157). They
-## were balanced on two sides and a ten-night run, and nights 2 to 10 come
-## from the south east, which spring does not open. `check_nights` lets
-## these dates use region 1 until 0271 rewrites spring and deletes this.
-const SPRING_DRAFT_SIDES: Dictionary = {1: [2, 3, 4, 5, 6, 7, 8, 9, 10]}
 
 
 # ===================================================================== rewards
@@ -3720,7 +3836,12 @@ static func validate() -> Array:
 	errors.append_array(check_buildings(BUILDINGS))
 	errors.append_array(check_defences(DEFENCES))
 	errors.append_array(check_enemies(ENEMIES))
-	errors.append_array(check_nights(NIGHTS))
+	errors.append_array(check_nights(SEASON_NIGHTS, KEY_NIGHTS))
+	# **The per-record rules on seed 0's year** (task 0270), so loading stays
+	# cheap: `python tools/nights.py --check` runs them on every date for two
+	# seeds.
+	for day in range(1, Calendar.year_days() + 1):
+		errors.append_array(check_record(Waves.night_of(day, 0), day))
 	errors.append_array(check_map(FARM_MAP))
 	errors.append_array(check_fishing(FISHING))
 	errors.append_array(check_bait(BAIT_EFFECTS))
@@ -5746,119 +5867,201 @@ static func _check_spit(id: StringName, one: Dictionary) -> Array:
 	return errors
 
 
-## Every night, checked at load. **An unknown enemy id fails loudly**, which
-## is the requirement, and so does every other way a hand-written table can be
-## wrong: no waves, a wave of nobody, a spawn point that is not on the map, a
-## night with no pace.
-static func check_nights(nights: Array) -> Array:
+## **The year's tables hold together** (task 0270). Takes them as arguments,
+## so a test can hand it a broken copy. It refuses:
+## - in a template: a side its season has not opened (0157), a boss or an
+##   unknown kind in its mix (the boss row is 0153's), a size that falls or a
+##   gap that grows across the season (0060's curve rules), a join day outside
+##   the season;
+## - a key night outside the year or on a calm date, a key night naming a
+##   boss, an `event` that is unknown or that `Weather`'s own rules forbid,
+##   and every per-record rule (`check_record`);
+## - a Full Moon with no key night;
+## - and, for the curve past the year, what it always refused.
+static func check_nights(templates: Array, key_nights: Dictionary) -> Array:
 	var errors: Array = []
-	for n in nights.size():
-		var night: Variant = nights[n]
-		if typeof(night) != TYPE_DICTIONARY:
-			errors.append("night %d is not a record" % [n + 1])
+	if templates.size() != SEASONS.size():
+		errors.append("%d season templates for %d seasons" % [templates.size(), SEASONS.size()])
+	for t in templates.size():
+		if typeof(templates[t]) != TYPE_DICTIONARY:
+			errors.append("season template %d is not a record" % t)
 			continue
-		var one: Dictionary = night
-
-		# `gap_ticks` is not in this list: a night that does not name one
-		# takes `WAVE_GAP_TICKS`, which is what that lever is for.
-		for field in ["waves", "note", "opening_ticks"]:
-			if not one.has(field):
-				errors.append("night %d has no '%s'" % [n + 1, field])
-		if not one.has("waves"):
-			continue
-		if int(one.get("opening_ticks", -1)) < 0 \
-				or int(one.get("gap_ticks", WAVE_GAP_TICKS)) < 0:
-			errors.append("night %d waits less than no time" % [n + 1])
-
-		var waves: Array = one["waves"]
-		# **Nothing at all, only when it says so** (task 0154): the calm
-		# night after a boss is the one record allowed an empty list.
-		if waves.is_empty() and not bool(one.get("calm", false)):
-			errors.append("night %d sends nothing at all" % [n + 1])
-		for w in waves.size():
-			var wave: Array = waves[w]
-			if wave.size() < 3 or wave.size() > 4:
-				errors.append(("night %d wave %d is not (enemy, count, "
-					+ "spawn) with an optional delay") % [n + 1, w + 1])
+		var template: Dictionary = templates[t]
+		var season := String(SEASONS[t % SEASONS.size()])
+		var open: Array = SIDES_BY_SEASON[t % SIDES_BY_SEASON.size()] if not SIDES_BY_SEASON.is_empty() else [0]
+		var sides: Array = template.get("sides", [])
+		if sides.is_empty():
+			errors.append("the %s template deals from no side" % season)
+		for pair in sides:
+			if not (pair is Array) or (pair as Array).size() != 2:
+				errors.append("the %s template's side %s is not [side, the day it joins]" % [season, str(pair)])
 				continue
-			if not ENEMIES.has(wave[0]):
-				errors.append("night %d sends unknown enemy '%s'"
-					% [n + 1, wave[0]])
-			if int(wave[1]) <= 0:
-				errors.append("night %d has a wave of %d" % [n + 1, wave[1]])
-			if int(wave[2]) < 0 or int(wave[2]) >= SPAWNS.size():
-				errors.append("night %d wave %d comes from spawn %d, and "
-					% [n + 1, w + 1, int(wave[2])]
-					+ "there are %d" % SPAWNS.size())
-			if wave.size() > 3 and int(wave[3]) < 0:
-				errors.append("night %d wave %d waits less than no time"
-					% [n + 1, w + 1])
-
-	# **Every night comes only from the sides its season has open** (task
-	# 0157), read off the record's index: the table is a year's, date n + 1.
-	# Today's ten are allowed the south east in spring (`SPRING_DRAFT_SIDES`).
-	for n in nights.size():
-		if typeof(nights[n]) != TYPE_DICTIONARY or not (nights[n] as Dictionary).has("waves"):
-			continue
-		var date := n + 1
-		var open := Calendar.open_sides(date)
-		for wave in ((nights[n] as Dictionary)["waves"] as Array):
-			if (wave as Array).size() < 3:
+			if not open.has(int(pair[0])):
+				errors.append("the %s template comes from side %d, which its season has not opened"
+					% [season, int(pair[0])])
+			if int(pair[1]) < 1 or int(pair[1]) > SEASON_DAYS:
+				errors.append("the %s template's side %d joins on day %d, outside 1-%d"
+					% [season, int(pair[0]), int(pair[1]), SEASON_DAYS])
+		var mix: Dictionary = template.get("mix", {})
+		if mix.is_empty():
+			errors.append("the %s template mixes nothing" % season)
+		for kind in sorted_names(mix.keys()):
+			if not ENEMIES.has(kind):
+				errors.append("the %s template mixes '%s', which is not an enemy" % [season, kind])
 				continue
-			var side := int((wave as Array)[2])
-			var allowed: Array = SPRING_DRAFT_SIDES.get(side, [])
-			if not open.has(side) and not allowed.has(date):
-				errors.append("night %d comes from side %d, which its season has not opened"
-					% [date, side])
+			if bool((ENEMIES[kind] as Dictionary).get("is_boss", false)):
+				errors.append("the %s template mixes '%s', a boss - the boss row is 0153's" % [season, kind])
+			var pair: Variant = mix[kind]
+			if not (pair is Array) or (pair as Array).size() != 2 or int(pair[0]) < 1 \
+					or int(pair[1]) < 1 or int(pair[1]) > SEASON_DAYS:
+				errors.append("the %s template's '%s' is not [a weight of one or more, a day of the season]"
+					% [season, kind])
+		var pairs := {}
+		for field in ["size", "waves", "gap_ticks"]:
+			var pair: Variant = template.get(field, [])
+			if not (pair is Array) or (pair as Array).size() != 2:
+				errors.append("the %s template has no %s for its second and thirteenth day" % [season, field])
+			else:
+				pairs[field] = [int(pair[0]), int(pair[1])]
+		if pairs.has("size") and (int(pairs["size"][0]) < 1 or int(pairs["size"][1]) < int(pairs["size"][0])):
+			errors.append("the %s template's size falls across its season: %d to %d"
+				% [season, int(pairs["size"][0]), int(pairs["size"][1])])
+		if pairs.has("waves") and (int(pairs["waves"][0]) < 1 or int(pairs["waves"][1]) < int(pairs["waves"][0])):
+			errors.append("the %s template's waves fall across its season: %d to %d"
+				% [season, int(pairs["waves"][0]), int(pairs["waves"][1])])
+		if pairs.has("gap_ticks") and (int(pairs["gap_ticks"][1]) < 0
+				or int(pairs["gap_ticks"][1]) > int(pairs["gap_ticks"][0])):
+			errors.append("the %s template's gap grows across its season: %d to %d"
+				% [season, int(pairs["gap_ticks"][0]), int(pairs["gap_ticks"][1])])
 
-	# **Every night is sent inside the night** (task 0137): its schedule ends
-	# `DAWN_MARGIN_TICKS` before dawn, so the last wave has time to arrive.
-	for n in nights.size():
-		if typeof(nights[n]) != TYPE_DICTIONARY or not (nights[n] as Dictionary).has("waves"):
+	var year := SEASONS.size() * SEASON_DAYS
+	for key in key_nights.keys():
+		if typeof(key) != TYPE_INT:
+			errors.append("a key night is filed under '%s', not a day" % str(key))
+	var days: Array = []
+	for key in key_nights.keys():
+		if typeof(key) == TYPE_INT:
+			days.append(int(key))
+	days.sort()
+	for day in days:
+		if day < 1 or day > year:
+			errors.append("a key night on day %d, outside 1-%d" % [day, year])
 			continue
-		var sent := Waves.schedule_ticks(nights[n])
-		if sent + DAWN_MARGIN_TICKS > NIGHT_TICKS:
-			errors.append(("night %d takes %d ticks to send, which leaves less "
-				+ "than DAWN_MARGIN_TICKS before dawn at %d") % [n + 1, sent, NIGHT_TICKS])
+		if Calendar.is_calm(day):
+			errors.append("a key night on day %d, a calm date" % day)
+		if typeof(key_nights[day]) != TYPE_DICTIONARY:
+			errors.append("the key night of day %d is not a record" % day)
+			continue
+		var one: Dictionary = key_nights[day]
+		for row in (one.get("waves", []) as Array):
+			if (row is Array) and (row as Array).size() >= 1 and ENEMIES.has((row as Array)[0]) \
+					and bool((ENEMIES[(row as Array)[0]] as Dictionary).get("is_boss", false)):
+				errors.append("the key night of day %d names a boss, '%s' - the boss row is 0153's"
+					% [day, (row as Array)[0]])
+		# **A pin keeps the weather's own rules** (0256, 0257): a real event,
+		# never on the game's first night, never before the season
+		# `NIGHT_EVENT_FIRST_SEASON` says it rises, and no Blood Moon on the
+		# moon's own nights. `&""` forbids, and is always allowed.
+		if one.has("event"):
+			var event := StringName(one["event"])
+			var rises := SEASONS.find(StringName(NIGHT_EVENT_FIRST_SEASON.get(event, SEASONS[0])))
+			if event != &"" and not Weather.EVENTS.has(event):
+				errors.append("the key night of day %d pins '%s', which is no event" % [day, event])
+			elif event != &"" and day <= 1:
+				errors.append("the key night of day %d pins '%s' on the game's first night" % [day, event])
+			elif event != &"" and Calendar.season_of(day) < rises:
+				errors.append("the key night of day %d pins '%s' before %s, when it rises"
+					% [day, event, NIGHT_EVENT_FIRST_SEASON[event]])
+			elif event == Weather.BLOOD_MOON and (Calendar.is_boss_night(day) or Calendar.is_full_moon(day)):
+				errors.append("the key night of day %d pins a Blood Moon on the moon's own night" % day)
+		errors.append_array(check_record(one, day))
+	for day in range(1, year + 1):
+		if Calendar.is_full_moon(day) and not key_nights.has(day):
+			errors.append("day %d is a Full Moon with no key night" % day)
 
-	# **The endless curve may not invent an enemy**, which is task 0070's own
-	# requirement, and may not name a boss: the Giant arrives on the schedule
-	# in `ENDLESS.giant_every`, and one rolled out of the weighted mix would
-	# turn up on night eleven.
+	# **The curve past the year may not invent an enemy**, which is task
+	# 0070's own requirement, and may not name a boss: one rolled out of the
+	# weighted mix would turn up on an ordinary night.
 	var mix: Dictionary = ENDLESS["mix"]
 	if mix.is_empty():
-		errors.append("the endless mix is empty, so night eleven sends "
-			+ "nothing")
+		errors.append("the endless mix is empty, so the night past the year sends nothing")
 	for kind in sorted_names(mix.keys()):
 		if not ENEMIES.has(kind):
-			errors.append("the endless mix names '%s', which is not an enemy"
-				% kind)
+			errors.append("the endless mix names '%s', which is not an enemy" % kind)
 			continue
 		if bool((ENEMIES[kind] as Dictionary).get("is_boss", false)):
-			errors.append("the endless mix names '%s', which is a boss - "
-				% kind + "bosses come from giant_every, not from the bag")
+			errors.append("the endless mix names '%s', which is a boss - " % kind
+				+ "bosses come from giant_every, not from the bag")
 		var pair: Variant = mix[kind]
 		if not (pair is Array) or (pair as Array).size() != 2:
-			errors.append("the endless mix entry for '%s' is not "
-				% kind + "[weight, drift]")
+			errors.append("the endless mix entry for '%s' is not [weight, drift]" % kind)
 	for field in ["growth_percent", "waves", "extra_wave_every", "gap_ticks",
 			"giant_every", "giant_extra_every", "mix_settles_after"]:
 		if not ENDLESS.has(field):
 			errors.append("the endless curve has no '%s'" % field)
 		elif int(ENDLESS.get(field, 0)) < 0:
 			errors.append("the endless curve's '%s' is negative" % field)
-	for field in ["waves", "extra_wave_every", "giant_every",
-			"giant_extra_every"]:
+	for field in ["waves", "extra_wave_every", "giant_every", "giant_extra_every"]:
 		if int(ENDLESS.get(field, 0)) < 1:
-			errors.append("the endless curve's '%s' must be at least one, "
-				% field + "or it divides by zero or sends nothing")
+			errors.append("the endless curve's '%s' must be at least one, " % field
+				+ "or it divides by zero or sends nothing")
+	return errors
 
-	# **At least one written night and no more than a year of them** (task
-	# 0150): past the written ones the curve takes over, and a year has
-	# `Calendar.year_days()`.
-	if nights.is_empty() or nights.size() > Calendar.year_days():
-		errors.append("%d nights are written, outside 1..%d"
-			% [nights.size(), Calendar.year_days()])
+
+## **The rules every night's record keeps** (tasks 0059, 0137, 0157 and
+## 0270): a key night as written, a made one, and the record a date fights.
+## One function, so a made night is held to exactly what a written one is:
+## its fields, waves of a known kind from a real side its date has open, an
+## empty list only on a calm night, and everything sent `DAWN_MARGIN_TICKS`
+## before dawn.
+static func check_record(one: Dictionary, day: int) -> Array:
+	var errors: Array = []
+	if one.is_empty():
+		errors.append("night %d has no record" % day)
+		return errors
+	# `gap_ticks` is not in this list: a night that does not name one takes
+	# `WAVE_GAP_TICKS`, which is what that lever is for.
+	for field in ["waves", "note", "opening_ticks"]:
+		if not one.has(field):
+			errors.append("night %d has no '%s'" % [day, field])
+	if not one.has("waves"):
+		return errors
+	if int(one.get("opening_ticks", -1)) < 0 or int(one.get("gap_ticks", WAVE_GAP_TICKS)) < 0:
+		errors.append("night %d waits less than no time" % day)
+	var waves: Array = one["waves"]
+	# **Nothing at all, only when it says so** (task 0154): the calm night
+	# after a boss is the one record allowed an empty list.
+	if waves.is_empty() and not bool(one.get("calm", false)):
+		errors.append("night %d sends nothing at all" % day)
+	var open := Calendar.open_sides(day)
+	for w in waves.size():
+		if not (waves[w] is Array):
+			errors.append("night %d wave %d is not a row" % [day, w + 1])
+			continue
+		var wave: Array = waves[w]
+		if wave.size() < 3 or wave.size() > 4:
+			errors.append(("night %d wave %d is not (enemy, count, spawn) with an "
+				+ "optional delay") % [day, w + 1])
+			continue
+		if not ENEMIES.has(wave[0]):
+			errors.append("night %d sends unknown enemy '%s'" % [day, wave[0]])
+		if int(wave[1]) <= 0:
+			errors.append("night %d has a wave of %d" % [day, wave[1]])
+		if int(wave[2]) < 0 or int(wave[2]) >= SPAWNS.size():
+			errors.append("night %d wave %d comes from spawn %d, and there are %d"
+				% [day, w + 1, int(wave[2]), SPAWNS.size()])
+		# **Only from the sides its season has open** (task 0157).
+		elif not open.has(int(wave[2])):
+			errors.append("night %d comes from side %d, which its season has not opened"
+				% [day, int(wave[2])])
+		if wave.size() > 3 and int(wave[3]) < 0:
+			errors.append("night %d wave %d waits less than no time" % [day, w + 1])
+	# **Sent inside the night** (task 0137): its schedule ends
+	# `DAWN_MARGIN_TICKS` before dawn, so the last wave has time to arrive.
+	var sent := Waves.schedule_ticks(one)
+	if sent + DAWN_MARGIN_TICKS > NIGHT_TICKS:
+		errors.append(("night %d takes %d ticks to send, which leaves less than "
+			+ "DAWN_MARGIN_TICKS before dawn at %d") % [day, sent, NIGHT_TICKS])
 	return errors
 
 
@@ -5950,16 +6153,17 @@ static func digest() -> int:
 		"enemies": ENEMIES,
 		# Where a summoner's flock rises (task 0254).
 		"summon_offsets": SUMMON_OFFSETS,
-		"nights": NIGHTS,
+		# **The year's nights** (task 0270): the templates and the key nights.
+		"nights": [SEASON_NIGHTS, KEY_NIGHTS],
 		"wave_gap": [WAVE_GAP_TICKS, SPAWN_INTERVAL_TICKS],
-		# **The generated nights are balance too.** They are not in `NIGHTS`,
-		# so without this line every lever of the endless curve could be
+		# **The nights past the year are balance too.** They are not in the
+		# year's tables, so without this line every lever of the endless curve could be
 		# turned without the data guard noticing - which is the one thing the
 		# guard exists to stop.
 		"endless": ENDLESS,
 		"spawns": SPAWNS,
 		# **The sides, by season** (task 0157).
-		"sides": [SPAWN_SIDES, SIDES_BY_SEASON, SPRING_DRAFT_SIDES],
+		"sides": [SPAWN_SIDES, SIDES_BY_SEASON],
 		"rewards": REWARDS,
 		"defeat": [DEFEAT_LOSS_PERCENT, DEFEAT_KEEPS_MONEY,
 			DEFEAT_KEEPS_TECH, TRAMPLE_REACH],
