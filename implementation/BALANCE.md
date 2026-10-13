@@ -1,4 +1,10 @@
-# The year - task 0277 (2026-10-13), blocked three times
+# The year - task 0277 (2026-10-13), blocked four times
+
+**Fourth block, after the owner's fourth call** - see "The owner's fourth
+call, played" below: the robot saves for autumn's mortar and puts it up,
+and autumn still falls from Autumn 7. Neither more iron, a lighter horde
+nor a third side opened later changes the shape: a lost night takes the
+line, and no run ever wins one back.
 
 **Third block, after the owner's third call** - see "The owner's third
 call, played" below: the Giant (400/4) and the Harvester (350/4) now fall
@@ -42,6 +48,95 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's fourth call, played: the robot saves for the mortar (2026-10-13)
+
+The owner chose the first road for autumn: "vai na 1, faz o robô guardar
+ferro pro morteiro". **The robot now saves for autumn's mortar and puts it
+up, and autumn still falls from Autumn 7.** Neither of the other two roads
+moves it either; what does is below.
+
+**What moved in the instrument** (`src/tools/autoplay.gd`):
+- **A season plan names its weapon**: `"weapon": &"mortar"` in `balanced`'s
+  and `towers`' autumn.
+- **`_season_weapon`**: that weapon, while none stands and every part of
+  its bill can be come by (no press, no gunpowder, nothing saved).
+- **The plan saves for it first** (`_the_plan_ahead`), after what the
+  nights took and before the boss prep and the cursor's next thing.
+- **The day waits for its gunpowder** rather than walking round it, and
+  gets the rest of its bill meanwhile.
+- **Its bill is kept** (`_kept_for_weapon`) from every mine, level and new
+  defence, by day and by night. What the nights took is still put back
+  first.
+- **The build step puts it up first** once it is paid for.
+
+No game value moved.
+
+### What it did
+
+Traced on seed 9000, Summer 14 to Autumn 10:
+- **`towers`**: the cursor stays on the mortar from Autumn 2. Iron goes 8,
+  7, 26, 43 while the line holds at seven guns and seven crossbows, and the
+  mortar stands on Autumn 5. On Autumn 6 the line drops from eight guns to
+  four, on Autumn 7 to two, and the house falls.
+- **`balanced`**: iron never passes 17 before the same collapse on Autumn
+  6-7, so its mortar never stands.
+
+The year, `--year 8`, against the one before it:
+
+| Policy | Autumn lost, before | After |
+| --- | --- | --- |
+| balanced | 6.9 | 7.0 |
+| towers | 10.9 | 12.2 |
+
+Saving for the mortar costs the guns it would have bought, and one mortar
+does not hold Autumn 7.
+
+### The other two roads, tried
+
+The eight runs that reach autumn (`towers` 9000, 9014, 9021, 9035;
+`balanced` 9000, 9007, 9028, 9035), the mortar rule on, to night 43:
+
+| Trial | Autumn nights lost |
+| --- | --- |
+| As it is | 107 |
+| The stall's iron at 16 all year | 107 |
+| Autumn's horde at [5200, 6400] | 102 |
+| Autumn's third side opened on its last day | 98 |
+
+- **More iron at the stall moves nothing**: the line falls on the same
+  nights with 16 a day as with 8.
+- **A lighter horde, or two sides in place of three, buys one to three
+  nights.** The first loss comes on Autumn 9-11 instead of 7-9, and then
+  every night after it is lost too.
+
+### What every trial shows: a lost night is never won back
+
+In every run of every trial, autumn's losses are an unbroken run from the
+night that starts them to the cap: `lost=35,36,37,38,39,40,41,42,42,...`.
+One `towers` run lost a single Autumn 4 before its run began. The same
+is true of `balanced`'s spring on its four bad seeds.
+
+A lost night takes the line: four to eight towers in one night, the house
+at 0. A gun is 12 iron to put back and a crossbow 20, and the farm brings
+in 10-20 iron a day. The next night is a bigger horde against a thinner
+line, and the line never comes back.
+
+The trials only move the night the first loss comes on. What would change
+the shape is what a lost night costs.
+
+### The next call is the owner's
+
+1. **What a lost night costs the line.** For example, a defence brought to
+   0 stands wrecked, to be mended with food and wood, as a coop or a barn
+   has since task 0186, rather than being lost and paid for again in iron.
+2. **The robot rebuilds out of what it has**: walls, kits and mending
+   before new iron.
+3. **Autumn's Full Moon and its third side**, which bring the first loss
+   two to four nights earlier.
+
+The mortar rule stays, as the owner asked: whatever comes next, autumn's
+line should have its mortar.
 
 ## The owner's third call, played: the bosses sized to the season's line (2026-10-13)
 

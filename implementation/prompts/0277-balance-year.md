@@ -1,7 +1,7 @@
 # 0277 - Balancing the year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** blocked - the Giant (400/4) and the Harvester (350/4) fall now, and the year stops at Autumn 7 with no mortar or catapult fielded and iron at 0-14 - owner to choose: the robot saving for its season's weapon, iron through the year, or autumn's horde
+- **Status:** blocked - the robot saves for autumn's mortar and puts it up, and autumn still falls from Autumn 7: a lost night takes the line and no run wins one back - owner to choose what a lost night costs the line, the robot rebuilding out of what it has, or autumn's Full Moon and third side
 - **Depends on:** 0271, 0272, 0273, 0274, 0276, 0259
 - **Likely files:** tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd
 

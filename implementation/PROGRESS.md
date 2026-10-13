@@ -31105,3 +31105,70 @@ unmeasured: the breakers or the companies.
   - `DATA 1214651628 -> 941677928`: the Giant's and the Harvester's hit
     points and armour, and `spring_iron` in `digest()`.
 - **Checks**: `python tools/verify.py --accept` - PASS.
+
+## 0277 - Balancing the year, the robot saves for the mortar - blocked 2026-10-13
+
+**The owner's fourth call** (2026-10-13, "vai na 1, faz o robô guardar
+ferro pro morteiro"): the first road for autumn. **The robot now saves for
+autumn's mortar and puts it up, and autumn still falls from Autumn 7.**
+Three trials of the other roads, a little more iron or a lighter horde,
+move the first loss by one to three nights at most. In every run, from
+the first lost night on, every night is lost: the line goes, and it never
+comes back. Blocked a fourth time, on what a lost night costs. No game
+value moved; neither hash did.
+
+What changed, all in the instrument (`src/tools/autoplay.gd`):
+- **A season plan names its weapon**: `"weapon": &"mortar"` in `balanced`'s
+  and `towers`' autumn.
+- **`_season_weapon`**: that weapon, while none stands and every part of
+  its bill can be come by. `_kept_for_weapon` is its bill, or nothing.
+- **Saved for first**: `_the_plan_ahead` wants it after what the nights
+  took and before the boss prep and the cursor's next thing. The day
+  waits for its gunpowder instead of planning round it, and gets the rest
+  of its bill meanwhile.
+- **Its bill is kept** from every mine, level and new defence, in the
+  build step and by the night cursor; what the nights took is still put
+  back first.
+- **The build step puts it up** first, once it is paid for.
+
+What it did:
+- **Traced, seed 9000.** In `towers` the cursor stays on the mortar from
+  Autumn 2, iron climbs 8, 7, 26, 43, and the mortar stands on Autumn 5.
+  The line then drops from eight guns to four on Autumn 6 and to two on
+  Autumn 7, and the house falls. In `balanced` iron never passes 17 before
+  the same collapse.
+- **`--year 8`**: autumn lost goes 6.9 -> 7.0 for `balanced` and 10.9 ->
+  12.2 for `towers`. The iron saved for the mortar is guns not bought, and
+  one mortar does not hold Autumn 7.
+
+The other roads, tried on the eight runs that reach autumn, to night 43:
+
+| Trial | Autumn nights lost |
+| --- | --- |
+| As it is (the mortar rule on) | 107 |
+| The stall's iron at 16 all year | 107 |
+| Autumn's horde at [5200, 6400] | 102 |
+| Autumn's third side opened on its last day | 98 |
+
+What every trial shows:
+- **Autumn 7 is autumn's Full Moon, from three sides.** The north opens
+  on Autumn 3, and Summer 14's Full Moon came from two.
+- **A lost night is never won back.** Every run's autumn losses run
+  unbroken to the cap, as `balanced`'s spring does on its four bad seeds.
+  A lost night takes four to eight towers. A gun is 12 iron to put back
+  and a crossbow 20, and the farm brings in 10-20 a day.
+
+The next call is the owner's, in BALANCE.md's "The owner's fourth call,
+played":
+1. **What a lost night costs the line**: for example, a defence at 0
+   stands wrecked and is mended, as a coop or a barn has since 0186.
+2. **The robot rebuilds out of what it has.**
+3. **Autumn's Full Moon and its third side.**
+The mortar rule stays.
+
+- **Checks**:
+  - `_task_0277_year_balance` (headless_v1) gains one assert: on an
+    autumn day with a press, the plan wants the mortar first and keeps its
+    iron from a gun. Once paid for, it is put up, and then nothing is kept.
+    With no press, nothing is.
+  - `python tools/verify.py` - PASS.

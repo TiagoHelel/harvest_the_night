@@ -98,7 +98,7 @@ const POLICIES: Dictionary = {
 				"tech": [&"heavy shot"]},
 			&"autumn": {"build": [&"mortar", &"catapult", &"mortar", &"gun_tower", &"mine",
 				&"mine"],
-				"tech": [&"tall mounts"]},
+				"tech": [&"tall mounts"], "weapon": &"mortar"},
 			&"winter": {"build": [&"searchlight", &"mortar", &"electric_fence", &"gun_tower",
 				&"mine", &"mine"],
 				"tech": [&"greased works"]},
@@ -171,7 +171,7 @@ const POLICIES: Dictionary = {
 				"tech": [&"a standing order", &"heavy shot"]},
 			&"autumn": {"build": [&"mortar", &"catapult", &"wall", &"mortar", &"mine",
 				&"mine", &"auto_crossbow"],
-				"tech": [&"tall mounts"]},
+				"tech": [&"tall mounts"], "weapon": &"mortar"},
 			&"winter": {"build": [&"searchlight", &"mortar", &"electric_fence", &"mine",
 				&"mine", &"gun_tower"],
 				"tech": [&"greased works"]},
@@ -619,8 +619,11 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 				return made
 			# **Nothing more to do towards it today** - no fish left to cast
 			# for, no seam, nothing on order: planned around for now, as an
-			# ingredient nobody can dig was. Its turn comes round again.
-			if int(ahead["ahead"]) == 0 and not _on_order(state, StringName(res)):
+			# ingredient nobody can dig was. Its turn comes round again. **Not
+			# the season's weapon** (task 0277), which is waited for while the
+			# day gets the rest of its bill.
+			if int(ahead["ahead"]) == 0 and not _on_order(state, StringName(res)) \
+					and not bool(ahead.get("weapon", false)):
 				_next_step(state)
 				return GameData.SECONDS
 			continue
@@ -807,6 +810,19 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 				return true
 		break
 
+	# **The season's weapon up first** (task 0277), and until it is, its bill
+	# kept from the mines, the levels and the plan's next thing.
+	var weapon := _season_weapon(state, policy)
+	var kept := {}
+	if weapon != &"":
+		if Resources.missing(state, Building.cost_of(weapon)).is_empty():
+			var spot := _room_for(state, weapon)
+			if spot.x >= 0 and _place_by_cursor(state, weapon, spot):
+				_did(state, &"placed")
+				return true
+		else:
+			kept = Building.cost_of(weapon)
+
 	# **Ready for the boss** (task 0277): the line deepened, nothing new put
 	# down while an upgrade is still to be paid for.
 	if _boss_prep(state, policy):
@@ -815,7 +831,7 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 		# shot - armed up to the limit by the house, which only what the
 		# guns let through reaches.
 		if _mines_short(state, policy) > 0:
-			if Resources.missing(state, Building.cost_of(MINE)).is_empty() \
+			if Resources.missing(state, _plus(kept, Building.cost_of(MINE))).is_empty() \
 					or Crafting.kits(state, MINE) > 0:
 				var trap := _mine_spot(state)
 				if trap.x >= 0 and _place_by_cursor(state, MINE, trap):
@@ -824,7 +840,7 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 			return false
 		var deeper := _prep_target(state)
 		if deeper.x >= 0:
-			if Resources.missing(state, Building.upgrade_cost(state, deeper)).is_empty():
+			if Resources.missing(state, _plus(kept, Building.upgrade_cost(state, deeper))).is_empty():
 				var was := Building.level_at(state, deeper)
 				_press(state, &"build_upgrade", deeper)
 				if Building.level_at(state, deeper) > was:
@@ -834,7 +850,7 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 
 	var want := _wants(state, policy)
 	if GameData.DEFENCES.has(want) and Building.unlocked(state, want) \
-			and Resources.missing(state, Building.cost_of(want)).is_empty():
+			and Resources.missing(state, _plus(kept, Building.cost_of(want))).is_empty():
 		var where := _room_for(state, want)
 		if where.x >= 0 and _place_by_cursor(state, want, where):
 			_did(state, &"placed")
@@ -1023,14 +1039,16 @@ static func _the_cursor_at_night(state: Dictionary, policy: Dictionary) -> void:
 			_mend_one(state)
 		var want := _wants(state, policy)
 		var deeper := _prep_target(state) if _boss_prep(state, policy) else Vector2i(-1, -1)
+		# The season's weapon's bill is kept by night too (task 0277).
+		var kept := _kept_for_weapon(state, policy)
 		if deeper.x >= 0:
-			if Resources.missing(state, Building.upgrade_cost(state, deeper)).is_empty():
+			if Resources.missing(state, _plus(kept, Building.upgrade_cost(state, deeper))).is_empty():
 				var was := Building.level_at(state, deeper)
 				_press(state, &"build_upgrade", deeper)
 				if Building.level_at(state, deeper) > was:
 					_did(state, &"upgraded")
 		elif GameData.DEFENCES.has(want) and Building.unlocked(state, want) \
-				and Resources.missing(state, Building.cost_of(want)).is_empty():
+				and Resources.missing(state, _plus(kept, Building.cost_of(want))).is_empty():
 			var where := _room_for(state, want)
 			if where.x >= 0 and _place_by_cursor(state, want, where):
 				_did(state, &"placed")
@@ -1150,6 +1168,14 @@ static func _the_plan_ahead(state: Dictionary, policy: Dictionary) -> Dictionary
 		if not Resources.missing(state, with_lost).is_empty():
 			return {"want": StringName(lost), "ahead": 0, "saving_for": with_lost, "rebuild": true}
 		bill = with_lost
+	# **The season's weapon next** (task 0277): before the boss prep and the
+	# cursor's next thing.
+	var weapon := _season_weapon(state, policy)
+	if weapon != &"":
+		var with_weapon := _plus(bill, Building.cost_of(weapon))
+		if not Resources.missing(state, with_weapon).is_empty():
+			return {"want": weapon, "ahead": 0, "saving_for": with_weapon, "weapon": true}
+		bill = with_weapon
 	# Before a boss night, the day saves for its mines, then the line's next
 	# level.
 	if _boss_prep(state, policy):
@@ -1198,6 +1224,33 @@ static func _plan_of(state: Dictionary, policy: Dictionary) -> Array:
 	if plans.has(season) and (plans[season] as Dictionary).has("build"):
 		return (plans[season] as Dictionary)["build"]
 	return policy["build"]
+
+
+## **The season's weapon, saved for** (task 0277, the owner's call: "faz o
+## robô guardar ferro pro morteiro"): a season plan's `weapon`, while none
+## stands on the farm and every part of its bill can be come by; `&""`
+## otherwise. Until it stands, the plan saves for it before anything else
+## new, and no gun, mine or level is paid out of its bill - what the nights
+## took is still put back first. The season robot met Autumn 7 with no
+## mortar on any seed: the cursor walked round it whenever its gunpowder was
+## not in by evening, and every bit of iron went into guns.
+static func _season_weapon(state: Dictionary, policy: Dictionary) -> StringName:
+	var season := Calendar.season_id(Calendar.date(state))
+	var plans: Dictionary = policy.get("seasons", {})
+	var weapon := StringName((plans.get(season, {}) as Dictionary).get("weapon", &""))
+	if weapon == &"" or not Building.unlocked(state, weapon) \
+			or not Farm.cells_with(state, weapon).is_empty():
+		return &""
+	for res in GameData.sorted_names(Building.cost_of(weapon).keys()):
+		if not _can_be_had(state, StringName(res)):
+			return &""
+	return weapon
+
+
+## The bill the season's weapon keeps back from everything new, or nothing.
+static func _kept_for_weapon(state: Dictionary, policy: Dictionary) -> Dictionary:
+	var weapon := _season_weapon(state, policy)
+	return Building.cost_of(weapon) if weapon != &"" else {}
 
 
 ## **The tree's nodes it walks** (task 0277): the year-round list, then this

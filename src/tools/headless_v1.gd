@@ -12123,9 +12123,10 @@ func _task_0276_year_autoplay() -> void:
 ## losing runs showed, fixed in the autoplayer rather than tuned around: it
 ## walled its own porch in with a kitchen and a generator, and woke on Spring
 ## 13 in six cells with nothing to do; and it kept nine of every fish for the
-## kitchen, $3 in the purse and a tower to put back. And the owner's call:
+## kitchen, $3 in the purse and a tower to put back. And the owner's calls:
 ## spring's stall carries `SPRING_IRON`, the robot buys it when the purse can
-## spare it, and the RUN line says what each boss had left.
+## spare it, the RUN line says what each boss had left, and the robot saves
+## for its season's weapon - autumn's mortar - before anything else new.
 func _task_0277_year_balance() -> void:
 	var state := State.create(27700)
 	var bounds := Farm.house_bounds(state)
@@ -12321,6 +12322,33 @@ func _task_0277_year_balance() -> void:
 			{"date": 14, "held": true, "boss_left": 0}]}, 0))
 	expect(run_line.contains(" lost=14 boss_left=120,0 "),
 		"the RUN line carries each boss fight's hit points left, 0 for one it fell in", run_line)
+
+	# **The season's weapon saved for** (the owner's call): on an autumn day
+	# with a press, the plan wants the mortar first and keeps its bill from a
+	# gun; with no press, or once a mortar stands, nothing is kept.
+	var autumn := State.create(27710)
+	autumn["day"] = 2 * GameData.SEASON_DAYS + 1
+	autumn["nights_won"] = 2 * GameData.SEASON_DAYS
+	var gunner: Dictionary = Autoplay.POLICIES[&"towers"]
+	var unpressed := Autoplay._season_weapon(autumn, gunner)
+	Resources.gain(autumn, {GameData.WOOD: 200, GameData.STONE: 200, GameData.IRON: 200,
+		GameData.MONEY: 500})
+	var autumn_press := Building.place(autumn, &"press", Autoplay._room_for(autumn, &"press"))
+	Resources.spend(autumn, GameData.IRON, Resources.amount(autumn, GameData.IRON))
+	Resources.gain(autumn, {GameData.IRON: 20})
+	var saved := Autoplay._the_plan_ahead(autumn, gunner)
+	NightRoad.into_build(autumn)
+	autumn["autoplay_step"] = ((gunner["seasons"] as Dictionary)[&"autumn"]["build"] as Array).find(&"gun_tower")
+	Autoplay._one_defence_thing(autumn, gunner)
+	var guns_kept_back := Farm.cells_with(autumn, &"gun_tower").is_empty()
+	Resources.gain(autumn, {GameData.IRON: 40, GameData.GUNPOWDER: 20})
+	Autoplay._one_defence_thing(autumn, gunner)
+	expect(autumn_press and unpressed == &"" and StringName(saved["want"]) == &"mortar" and bool(saved.get("weapon", false))
+			and guns_kept_back and not Farm.cells_with(autumn, &"mortar").is_empty()
+			and Autoplay._season_weapon(autumn, gunner) == &""
+			and Autoplay._kept_for_weapon(autumn, gunner).is_empty(),
+		"autumn's plan saves for the mortar first, keeps its iron from a gun, puts it up once paid for, and then keeps nothing",
+		"%s %s %s" % [str(saved), str(guns_kept_back), str(Farm.cells_with(autumn, &"mortar"))])
 	_completed += 1
 
 ## **Task 0281: the new day's sounds.** Every new id is a file. What a verb is

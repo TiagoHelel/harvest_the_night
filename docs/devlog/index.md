@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-250 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
+251 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -294,6 +294,7 @@ is the sort of thing this list exists to say out loud.
 | 0293 | The first week, taught | 2026-10-13 |
 | 0277 | Balancing the year, the season robot | 2026-10-13 |
 | 0277 | Balancing the year, the bosses sized to the season | 2026-10-13 |
+| 0277 | Balancing the year, the robot saves for the mortar | 2026-10-13 |
 
 ## Every time the game changed underneath itself
 
