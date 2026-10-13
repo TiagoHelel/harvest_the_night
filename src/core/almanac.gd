@@ -95,7 +95,7 @@ static func mix_on(template: Dictionary, of_season: int) -> Dictionary:
 ## **A made night.** The day's hit points shared out by weight between the
 ## kinds that have joined, each share in bodies of its kind - at least one -
 ## dealt into the day's waves round the open sides by `Endless`'s own deal,
-## and sent inside the night (0137).
+## spaced to fill the night (0271) and sent inside it (0137).
 static func _made(seed_value: int, day: int) -> Dictionary:
 	var of_season := Calendar.day_of_season(day)
 	var template: Dictionary = GameData.SEASON_NIGHTS[Calendar.season_of(day)]
@@ -112,5 +112,22 @@ static func _made(seed_value: int, day: int) -> Dictionary:
 		"waves": Endless._lay_out(rng, bodies, on_day(template["waves"], of_season),
 			sides_on(template, of_season)),
 	}
+	_fill_the_night(one)
 	Endless._fit_before_dawn(one)
 	return one
+
+
+## **Still coming at the fill line** (task 0271): a made night that would be
+## all sent before `Waves.fill_line()` spaces its waves further - the
+## shortfall shared between its gaps, rounded up - so a day whose deal came
+## out in few waves still sends its last one late. A night of one wave waits
+## for it instead. Never past the dawn margin: the fill line comes before it.
+static func _fill_the_night(one: Dictionary) -> void:
+	var short := Waves.fill_line() - Waves.schedule_ticks(one)
+	if short <= 0:
+		return
+	var rows := (one["waves"] as Array).size()
+	if rows > 1:
+		one["gap_ticks"] = int(one["gap_ticks"]) + (short + rows - 2) / (rows - 1)
+	else:
+		one["opening_ticks"] = int(one["opening_ticks"]) + short

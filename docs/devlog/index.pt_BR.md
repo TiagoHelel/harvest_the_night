@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-232 tarefas em 9 dias, de  a 2026-10-11. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+233 tarefas em 10 dias, de  a 2026-10-12. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -275,10 +275,11 @@ voz alta.
 | 0258 | Fog, rain and a red moon on screen | 2026-10-11 |
 | 0259 | Every weapon has its night | 2026-10-11 |
 | 0270 | Fifty-six nights as data | 2026-10-11 |
+| 0271 | Spring's fourteen nights | 2026-10-12 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 118 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 120 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -398,10 +399,12 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Fog and rain** (0256) - `data` 612138885 -> 417880566
 - **The Blood Moon** (0257) - `data` 417880566 -> 663742656
 - **Fifty-six nights as data** (0270) - `data` 663742656 -> 630511402
+- **Spring's fourteen nights** (0271) - `sim` 1167439413 -> 3524359536
+- **Spring's fourteen nights** (0271) - `data` 630511402 -> 1405228034
 
 ## O que deu errado
 
-68 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
+69 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -471,6 +474,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **0258** - Found *(Fog, rain and a red moon on screen)*
 - **0259** - Found *(Every weapon has its night)*
 - **0270** - Found *(Fifty-six nights as data)*
+- **0271** - Found *(Spring's fourteen nights)*
 
 ## O que nao tem
 

@@ -149,7 +149,13 @@ func _set_the_farm_going(state: Dictionary) -> void:
 
 	# **A field with three different crops in it**, so growth, stages and the
 	# watering of task 0029 all have something to work on.
-	var seeds := Farming.seeds()
+	#
+	# **Spring's, the season it is** (task 0271). `SuiteKit.crop_supplies`
+	# moves the date to an out-of-season crop's season, and since 0170 the
+	# last crop sown was an autumn one: the scenario spent its night on
+	# Autumn 1, a calm night that sends nothing, and the sim hash watched no
+	# wave, no walk and no shot for a hundred tasks.
+	var seeds := Farming.in_season(state)
 	var sown := 0
 	for found in Farming.field_cells(state):
 		var cell: Vector2i = found
@@ -191,7 +197,10 @@ func _set_the_farm_going(state: Dictionary) -> void:
 
 
 ## The towers and the wall, **in the build step** (task 0119): 0132 forbids
-## defences by day, so the scenario puts them up where a player will.
+## defences by day, so the scenario puts them up where a player will - on the
+## farmstead's east side, **moved with it** (`SuiteKit.moved`, task 0271): the
+## old yard's cells are the far north west of the farm since 2026-10-06, and
+## the towers stood there out of every fight.
 func _arm_the_farm(state: Dictionary) -> void:
 	# **Two towers**, so that the night is fought rather than merely survived,
 	# and one of them draws ammunition from the pool.
@@ -200,7 +209,7 @@ func _arm_the_farm(state: Dictionary) -> void:
 		for x in range(22, 30):
 			if guns >= 2:
 				break
-			if Building.place(state, &"gun_tower", Vector2i(x, y)):
+			if Building.place(state, &"gun_tower", SuiteKit.moved(Vector2i(x, y))):
 				guns += 1
 		if guns >= 2:
 			break
@@ -214,7 +223,7 @@ func _arm_the_farm(state: Dictionary) -> void:
 	for y in [6, 7, 8]:
 		if walled >= 3:
 			break
-		if Building.place(state, &"wall", Vector2i(28, y)):
+		if Building.place(state, &"wall", SuiteKit.moved(Vector2i(28, y))):
 			walled += 1
 
 

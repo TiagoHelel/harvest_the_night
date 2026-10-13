@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Play all ten nights with a scripted build and report which fell.
+"""Play a range of nights with a scripted build and report which fell.
 
-    python tools/play_nights.py
+    python tools/play_nights.py [from] [to]
+
+`python tools/play_nights.py 15 28` plays summer (task 0271); one argument
+plays from day 1 to it, and none plays spring. Each date is bought from a
+purse that starts where a run would be, with only what its season has
+unlocked.
 
 A reader, not a check: `verify.py` is what fails. This is for looking at the
-curve while tuning it, which task 0060 does a great deal of.
+curve while tuning it - the instrument 0060 authored the ten with and
+0271-0274 the seasons.
 """
 import os
 import subprocess
@@ -24,7 +30,8 @@ def main():
         return 1
     done = subprocess.run(
         [GODOT, "--headless", "--path", ROOT,
-         "--script", "res://src/tools/play_nights.gd"],
+         "--script", "res://src/tools/play_nights.gd",
+         "++"] + sys.argv[1:],
         capture_output=True, text=True)
     out = done.stdout or ""
     for line in out.splitlines():

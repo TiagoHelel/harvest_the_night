@@ -10,8 +10,10 @@ extends SceneTree
 ## points, reward and weather, and is marked `key` (written in
 ## `GameData.KEY_NIGHTS`), `made` (made by `Almanac` from its season's
 ## template), `curve` (past the year, `Endless`'s) or `calm`, and `FULL` and
-## `BOSS` on a Full Moon and a boss's night. Then it prints the day each kind
-## is first sent and the days as bars of hit points.
+## `BOSS` on a Full Moon and a boss's night. **When it is all sent** stands
+## against the fill line (task 0271, `Waves.fill_line`): a `!` marks a night
+## over before it. Then it prints the day each kind is first sent and the
+## days as bars of hit points.
 ## `python tools/nights.py 15 28 3` prints Summer for seed 3, and a range past
 ## the year prints the curve.
 ##
@@ -73,15 +75,18 @@ func _print_the_days(first: int, last: int, seed_value: int) -> void:
 	print(("  FULL: a Full Moon, the horde at %d%%   BOSS: the season's boss comes   "
 		+ "calm: nothing comes") % GameData.FULL_MOON_HORDE_PERCENT)
 	# **Each night against the night** (task 0137): when its last member is
-	# sent, which `check_record` holds `DAWN_MARGIN_TICKS` before dawn.
-	print("  dawn at %ds; every night is sent %ds before it"
+	# sent, which `check_record` holds `DAWN_MARGIN_TICKS` before dawn - and,
+	# since task 0271, after the fill line.
+	print("  dawn at %ds; every night is all sent by %ds, and still sending at %ds (the fill line) - ! sent before it"
 		% [GameData.NIGHT_TICKS / GameData.SECONDS,
-			GameData.DAWN_MARGIN_TICKS / GameData.SECONDS])
+			(GameData.NIGHT_TICKS - GameData.DAWN_MARGIN_TICKS) / GameData.SECONDS,
+			Waves.fill_line() / GameData.SECONDS])
 
 	var enemies := 0
 	var points := 0
 	var money := 0
 	var nights := 0
+	var filling := 0
 	var seen := {}
 	var season := -1
 	for day in range(first, last + 1):
@@ -98,6 +103,8 @@ func _print_the_days(first: int, last: int, seed_value: int) -> void:
 		if (one.get("waves", []) as Array).is_empty():
 			continue
 		nights += 1
+		if Waves.schedule_ticks(one) >= Waves.fill_line():
+			filling += 1
 		enemies += Waves.size_in(one)
 		points += Waves.hit_points_in(one)
 		money += Waves.reward_in(one)
@@ -112,6 +119,8 @@ func _print_the_days(first: int, last: int, seed_value: int) -> void:
 		% [enemies, nights, points, money,
 			money * int(GameData.REWARDS["bounty_percent"]) / 100,
 			int(GameData.REWARDS["bounty_percent"])])
+	print("  %d of the %d are still sending at the fill line, %ds" % [filling, nights,
+		Waves.fill_line() / GameData.SECONDS])
 
 	# **What the run pays in technology**, which is the budget task 0063 has
 	# to price the tech tree against: the floor is one a night for finishing,
@@ -162,10 +171,11 @@ func _line_of(day: int, seed_value: int) -> String:
 	if bool(one.get("calm", false)):
 		parts.append("nothing: %s" % str(one.get("note", "")))
 	var sent := Waves.schedule_ticks(one)
-	return "  %4d  %-12s %-15s %4d  %6d  $%-5d %-14s %-10s %4ds  %s" % [day, _date_of(day),
+	var short := "!" if sent < Waves.fill_line() and not bool(one.get("calm", false)) else " "
+	return "  %4d  %-12s %-15s %4d  %6d  $%-5d %-14s %-10s %4ds%s %s" % [day, _date_of(day),
 		" ".join(_marks_of(day)), Waves.size_in(one), Waves.hit_points_in(one),
 		Waves.reward_in(one), "-" if sides.is_empty() else ",".join(sides),
-		"-" if weather.is_empty() else weather, sent / GameData.SECONDS, ", ".join(parts)]
+		"-" if weather.is_empty() else weather, sent / GameData.SECONDS, short, ", ".join(parts)]
 
 
 ## What a day is: `key`, `made`, `curve` or `calm`, then `FULL` and `BOSS`.

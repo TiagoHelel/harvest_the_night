@@ -1360,8 +1360,9 @@ func _case_0027_the_loop() -> void:
 		Phases.name_of(int(state["phase"])))
 
 	# Let the night play out. Faster than real time, because a night is a
-	# minute and a test is not.
-	driver.speed = 8
+	# minute and a test is not - and since task 0271 the first night's three
+	# waves come a minute apart, so it plays at 32.
+	driver.speed = 32
 	await until(func() -> bool: return int(state["phase"]) == Phases.RESULT,
 		"the night to finish", 4000)
 	driver.speed = 1
@@ -5479,7 +5480,9 @@ func _case_0090_log() -> void:
 		Phases.name_of(int(state["phase"])))
 
 	var saw: Dictionary = {}
-	for i in 240:
+	# **To its end, dawn at the latest**: since task 0271 the first night's
+	# waves come a minute apart, and 240 steps of 12 ticks stopped short of it.
+	for i in GameData.NIGHT_TICKS / 12 + 10:
 		Sim.advance(state, 12)          # four times speed, near enough
 		await frames(1)
 		for one in (state["events"] as Array):

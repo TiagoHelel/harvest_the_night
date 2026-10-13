@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-232 tasks over 9 days,  to 2026-10-11. One at a time, each one finished and checked before the next was started.
+233 tasks over 10 days,  to 2026-10-12. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -276,10 +276,11 @@ is the sort of thing this list exists to say out loud.
 | 0258 | Fog, rain and a red moon on screen | 2026-10-11 |
 | 0259 | Every weapon has its night | 2026-10-11 |
 | 0270 | Fifty-six nights as data | 2026-10-11 |
+| 0271 | Spring's fourteen nights | 2026-10-12 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 118 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 120 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -399,10 +400,12 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Fog and rain** (0256) - `data` 612138885 -> 417880566
 - **The Blood Moon** (0257) - `data` 417880566 -> 663742656
 - **Fifty-six nights as data** (0270) - `data` 663742656 -> 630511402
+- **Spring's fourteen nights** (0271) - `sim` 1167439413 -> 3524359536
+- **Spring's fourteen nights** (0271) - `data` 630511402 -> 1405228034
 
 ## What went wrong
 
-68 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+69 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -472,6 +475,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0258** - Found *(Fog, rain and a red moon on screen)*
 - **0259** - Found *(Every weapon has its night)*
 - **0270** - Found *(Fifty-six nights as data)*
+- **0271** - Found *(Spring's fourteen nights)*
 
 ## What is not in it
 

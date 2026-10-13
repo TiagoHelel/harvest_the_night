@@ -1921,9 +1921,12 @@ func _task_0003_game_data() -> void:
 		expect(GameData.RESOURCES.has(res), "a priced thing is a resource",
 			str(res))
 
-	# Ten nights, per design.md - spring's key nights since task 0270 - and
-	# every night of the year has at least one wave but a calm one (0154).
-	expect(_spring_keys().size() == 10, "ten written nights in spring",
+	# design.md's ten nights became spring's key nights at task 0270, and at
+	# 0271 spring wrote its introductions and its two Full Moons, its template
+	# making the rest; every night of the year has at least one wave but a
+	# calm one (0154).
+	expect(_spring_keys() == [1, 3, 5, 7, 8, 14],
+		"spring writes the walker, the runner, the tank and the breaker in, and its two Full Moons",
 		str(_spring_keys()))
 	# **Through `Waves`, not into the table.** A night became a record at task
 	# 0059 and the shape of one is that module's business.
@@ -11198,7 +11201,8 @@ func _task_0059_wave_data() -> void:
 
 
 ## **Spring's key nights** (task 0270): the days `KEY_NIGHTS` writes in the
-## first season - today's ten, `design.md`'s, the tenth on Spring 14.
+## first season - since task 0271 its four introductions and its two Full
+## Moons, 1, 3, 5, 7, 8 and 14.
 func _spring_keys() -> Array:
 	var out: Array = []
 	for day in range(1, GameData.SEASON_DAYS + 1):
@@ -11332,16 +11336,18 @@ func _task_0060_ten_nights() -> void:
 			if not arrives.has(id):
 				arrives[id] = night
 	print("  first seen: %s" % str(arrives))
+	# design.md section 10's order; the breaker a night later since task
+	# 0271, after spring's first Full Moon - the plan's 'Primavera (fim)'.
 	for pair in [[&"walker", 1], [&"runner", 3], [&"tank", 5],
-			[&"breaker", 7]]:
+			[&"breaker", 8]]:
 		var id: StringName = (pair as Array)[0]
 		expect(int(arrives.get(id, 0)) == int((pair as Array)[1]),
-			"the %s arrives on night %d, as design.md section 10 says"
+			"the %s arrives on night %d, in design.md section 10's order"
 				% [id, int((pair as Array)[1])],
 			str(arrives.get(id, 0)))
-	# The tenth's Giant: the calendar's since 0153, on Spring 14.
+	# The Giant: the calendar's since 0153, on Spring 14.
 	expect(not arrives.has(&"giant") and Waves.kinds_of(GameData.SEASON_DAYS).has(&"giant"),
-		"the Giant arrives on Spring 14, the tenth key night, by the calendar", str(arrives))
+		"the Giant arrives on Spring 14, spring's last key night, by the calendar", str(arrives))
 
 	# **And the night after a new thing is the hard one.** A player meets a
 	# new problem while they can still afford to get it wrong.
@@ -11852,8 +11858,9 @@ func _task_0063_tech_tree() -> void:
 			"%s and everything it needs comes to %d, which a year pays "
 				% [one["id"], deep] + "for", str(deep))
 	# **Spring's floor against the ten nights**, as task 0063 priced it: a
-	# whole branch is affordable and two are not quite everything.
-	var best := Tech.total_available(_spring_keys().size())
+	# whole branch is affordable and two are not quite everything. Ten nights
+	# of pay, whoever writes them.
+	var best := Tech.total_available(10)
 	print("  spring's floor against ten nights paying %d at best" % best)
 	var branch_cost := 0
 	for row in Tech.floor_of(StringName(Tech.branches()[0]), 0):

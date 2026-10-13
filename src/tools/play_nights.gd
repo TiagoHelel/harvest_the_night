@@ -1,17 +1,22 @@
 extends SceneTree
 
-## Play the first nights of the calendar with a scripted build and report
+## Play a range of the calendar's nights with a scripted build and report
 ## which ones fell.
 ##
-##     python tools/play_nights.py
-##     godot --headless --path . --script res://src/tools/play_nights.gd -- 14
+##     python tools/play_nights.py [from] [to]
+##     godot --headless --path . --script res://src/tools/play_nights.gd -- 1 14
 ##
-## How many is an explicit argument (task 0151), `DEFAULT_NIGHTS` - the first
-## ten - when none is given.
+## **A range of dates** (task 0271): `python tools/play_nights.py 15 28`
+## plays summer; one argument plays from day 1 to it, and none plays spring,
+## `DEFAULT_DAYS`. Every date is played on its own farm, built out of a purse
+## that **starts where a run would be**: what each earlier date paid, held
+## with everything killed, and a day's income for each - so summer's first
+## night is bought with spring's money whether spring was played or not.
 ##
-## This is the **instrument task 0060 authors against**. `tools/nights.py`
-## reads the table; this one runs it, so a curve that looks smooth on paper
-## can be checked against a curve that is actually survivable.
+## This is the **instrument the nights are authored against** - task 0060's
+## ten, and from 0271 the seasons. `tools/nights.py` reads the tables; this
+## one runs them, so a curve that looks smooth on paper can be checked against
+## a curve that is actually survivable.
 ##
 ## ## What the scripted player does
 ##
@@ -22,6 +27,12 @@ extends SceneTree
 ## night that is too hard, and a night this wins comfortably may still be a
 ## fair fight for somebody playing badly.
 ##
+## **It buys only what the date's season has opened** (task 0234's
+## `unlock_season`, `Building.unlocked`), and a price is its money and its
+## materials (0234) at what the materials sell for. What it put down is
+## checked against the date again, and a night that has anything its season
+## has not opened says so in the `locked` column - which should always be 0.
+##
 ## The build is deliberately **not** in `GameData`: it is a test fixture, not
 ## a lever, and putting it in the tables would be inviting somebody to tune
 ## the game to suit the robot.
@@ -29,25 +40,27 @@ extends SceneTree
 ## What a day of farming might be worth, in goods, to the scripted player.
 ##
 ## **A guess, and the most important number in this file.** At $300 a day it
-## is roughly two thirds of the purse by night ten, so the curve this tool
-## reports is mostly a report about this constant. Rather than pick one and
-## pretend, the run sweeps three: a player who never farms, one who farms a
-## little, one who farms hard. A night that falls at every income is too hard
-## and one that holds at every income is too easy.
+## is most of the purse by the end of spring, so the curve this tool reports
+## is mostly a report about this constant. Rather than pick one and pretend,
+## the run sweeps three: a player who never farms, one who farms a little, one
+## who farms hard. A night that falls at every income is too hard and one that
+## holds at every income is too easy.
 ##
 ## The real number is measured by the autoplayer at task 0067 and the curve
 ## is settled against it at 0068. This is the instrument, not the verdict.
 const INCOMES: Array = [0, 150, 300]
 
-## The calendar nights played when no count is given: the first ten, the
-## curve task 0060 authored against.
-const DEFAULT_NIGHTS := 10
+## The dates played when none is given: spring, the season task 0271
+## authored against it.
+const DEFAULT_DAYS := 14
 
-var _nights := DEFAULT_NIGHTS
+var _first := 1
+var _last := DEFAULT_DAYS
 
 ## What the scripted player buys, in the order it buys it, going round again
-## until the money runs out. A generator goes in whenever the next tower would
-## draw more than the farm supplies, so power is bought rather than given.
+## until the money runs out - what the date's season has opened of it. A
+## generator goes in whenever the next tower would draw more than the farm
+## supplies, so power is bought rather than given.
 const SHOPPING: Array = [
 	&"gun_tower", &"auto_crossbow", &"wall", &"mortar",
 	&"auto_crossbow", &"gun_tower", &"wall",
@@ -63,32 +76,43 @@ func _init() -> void:
 		quit(1)
 		return
 
-	var args := OS.get_cmdline_user_args()
-	if args.size() > 0 and str(args[0]).is_valid_int():
-		_nights = maxi(int(str(args[0])), 1)
-	print("HARVEST THE NIGHT - the first %d nights, scripted build, no player"
-		% _nights)
+	var numbers: Array = []
+	for arg in OS.get_cmdline_user_args():
+		if str(arg).is_valid_int():
+			numbers.append(int(str(arg)))
+	if numbers.size() == 1:
+		_last = maxi(int(numbers[0]), 1)
+	elif numbers.size() > 1:
+		_first = maxi(int(numbers[0]), 1)
+		_last = maxi(int(numbers[1]), _first)
+	print("HARVEST THE NIGHT - days %d to %d, scripted build, no player"
+		% [_first, _last])
 
 	for income in INCOMES:
 		print("")
 		print("  a day of farming worth $%d" % int(income))
-		print("  night  sent  $reward  $purse  towers  power  bones  piles  result")
-		var fell: Array = []
+		# **Where a run would be** by the first date: every earlier date's
+		# pay and a day's income for each.
 		var purse := 0
-		for night in range(1, _nights + 1):
+		for night in range(1, _first):
+			purse += _paid(night) + int(income)
+		if _first > 1:
+			print("  the purse at day %d: $%d from days 1-%d" % [_first, purse, _first - 1])
+		print("   day  sent  $reward  $purse  towers  locked  power  bones  piles  result")
+		var fell: Array = []
+		for night in range(_first, _last + 1):
 			var played := _play(night, purse)
 			# What the night paid, for the next one's budget. A night that
 			# fell still pays for what was killed before it fell. Since task
 			# 0219 that is the fee and `bounty_percent` of the kills' worth.
-			var table: Dictionary = GameData.REWARDS
-			purse += int(table["base_money"]) + int(table["money_per_night"]) * night 				+ Waves.reward_of(night) * int(table["bounty_percent"]) / 100 + int(income)
+			purse += _paid(night) + int(income)
 			if not bool(played["held"]):
 				fell.append(night)
-			print("  %5d %5d  %7d %7d %7d %5d%%  %5d  %5d  %s"
+			print("  %4d %5d  %7d %7d %7d %7d %5d%%  %5d  %5d  %s"
 				% [night, Waves.size_of(night), Waves.reward_of(night),
 					int(played["budget"]), int(played["towers"]),
-					int(played["power"]), int(played["bones"]),
-					int(played["piles"]),
+					int(played["locked"]), int(played["power"]),
+					int(played["bones"]), int(played["piles"]),
 					"held, house %d/%d after %ds"
 						% [int(played["house"]), int(played["house_full"]),
 							int(played["ticks"]) / GameData.TICK_HZ]
@@ -97,7 +121,7 @@ func _init() -> void:
 							% [int(played["ticks"]) / GameData.TICK_HZ,
 								int(played["left"])]])
 		if fell.is_empty():
-			print("  all %d held" % _nights)
+			print("  all %d held" % (_last - _first + 1))
 		else:
 			print("  fell: %s" % str(fell))
 
@@ -105,24 +129,37 @@ func _init() -> void:
 	quit()
 
 
-## Print the two curves the done-when asks for as numbers.
+## **What a date's night pays the scripted player**, held with everything
+## killed: the fee and `bounty_percent` of the kills' worth (task 0219), and
+## on a Full Moon the moon's own line on top (0152) - what
+## `Rewards._money_from` adds up, less the structure bonuses a build earns.
+func _paid(night: int) -> int:
+	var table: Dictionary = GameData.REWARDS
+	var ordinary := int(table["base_money"]) + int(table["money_per_night"]) * night \
+		+ Waves.reward_of(night) * int(table["bounty_percent"]) / 100
+	if Calendar.is_full_moon(night):
+		ordinary += ordinary * (GameData.FULL_MOON_REWARD_PERCENT - 100) / 100
+	return ordinary
+
+
+## Print the curves the authoring reads, as numbers.
 func _curves() -> void:
 	print("")
-	print("  night   sent   $reward   hit points sent")
+	print("   day   sent   $reward   hit points sent")
 	var last_sent := 0
 	var last_money := 0
 	var last_meat := 0
 	var bumps: Array = []
-	for night in range(1, _nights + 1):
+	for night in range(_first, _last + 1):
 		var sent := Waves.size_of(night)
 		var money := Waves.reward_of(night)
-		var meat := _hit_points_of(night)
+		var meat := Waves.hit_points_in(Waves.night_of(night))
 		var mark := ""
-		if night > 1 and (sent < last_sent or money < last_money
+		if night > _first and (sent < last_sent or money < last_money
 				or meat < last_meat):
 			mark = "  <- dips"
 			bumps.append(night)
-		print("  %5d %6d %9d %17d%s" % [night, sent, money, meat, mark])
+		print("  %4d %6d %9d %17d%s" % [night, sent, money, meat, mark])
 		last_sent = sent
 		last_money = money
 		last_meat = meat
@@ -132,21 +169,22 @@ func _curves() -> void:
 		print("  dips on %s" % str(bumps))
 
 
-## Everything a night sends, weighed by hit points: the honest measure of how
-## much there is to kill, since a tank is not a walker.
-func _hit_points_of(night: int) -> int:
-	var total := 0
-	for row in Waves.table(night):
-		var kind: Dictionary = GameData.ENEMIES[(row as Array)[0]]
-		total += int(kind["hp"]) * int((row as Array)[1])
-	return total
+## The shopping list as the date's season has opened it.
+func _shopping(state: Dictionary) -> Array:
+	var out: Array = []
+	for id in SHOPPING:
+		if Building.unlocked(state, StringName(id)):
+			out.append(id)
+	return out
 
 
 ## How many generators the shopping list will want out of this purse: the
 ## buying loop below run on numbers alone, buying a plant whenever the next
 ## thing's draw would outrun the supply - which is what the loop itself did
 ## in the build step before task 0132 put production buildings on the day.
-func _plants_needed(budget: int) -> int:
+func _plants_needed(budget: int, shopping: Array) -> int:
+	if shopping.is_empty():
+		return 0
 	var left := budget
 	var supply := GameData.BASE_ENERGY
 	var draw := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)
@@ -154,8 +192,8 @@ func _plants_needed(budget: int) -> int:
 	var plants := 0
 	var plant_price := _price(&"generator")
 	var at := 0
-	while at < SHOPPING.size() * 12:
-		var id: StringName = SHOPPING[at % SHOPPING.size()]
+	while at < shopping.size() * 12:
+		var id: StringName = shopping[at % shopping.size()]
 		at += 1
 		var price := _price(id)
 		var wants := int((Building.entry_of(id) as Dictionary)
@@ -189,23 +227,30 @@ func _play(night: int, budget: int) -> Dictionary:
 	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
 		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000,
 		GameData.FOOD: 9000, GameData.MONEY: 9000})
+	var shopping := _shopping(state)
 
 	# **Power by day, towers by night** (task 0132): a generator goes up by day
 	# only, so the ones the shopping list will need are counted first, off the
 	# same purse and in the same order, and put up before the build step.
-	var plants := _plants_needed(budget)
+	var plants := _plants_needed(budget, shopping)
 	var plant_price := _price(&"generator")
+	# **Out of the way** (task 0271): a plant needs no sight of the lane, and
+	# one put on the approach can be refused for blocking it - which left the
+	# purse's towers on a farm short of the power counted for them.
 	for _i in plants:
-		var plant := _room(state, Building.size_of(&"generator"))
+		var plant := _anywhere(state, Building.size_of(&"generator"))
 		if plant.x < 0 or not Building.place(state, &"generator", plant):
 			break
 	Phases.begin_preparation(state)
 
 	# **The tutorial's tower.** Night one is meant to be beatable with the one
 	# thing the first day buys you, so the scripted player has it before it
-	# has a penny - which is what the requirement actually says.
+	# has a penny - which is what the requirement actually says - and puts it
+	# **where the tutorial's line points** (0141, task 0271), the ground a
+	# third of the way from the house to the horde.
 	var towers := 0
-	var spot := _room(state, Building.size_of(&"gun_tower"))
+	var nearest := _by_distance(Tutorial._between_house_and_spawn(state))
+	var spot := _first_free(state, nearest, &"gun_tower")
 	if spot.x >= 0 and Building.place(state, &"gun_tower", spot):
 		towers += 1
 
@@ -220,15 +265,17 @@ func _play(night: int, budget: int) -> Dictionary:
 	var draw := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)
 		.get("energy_draw", 0))
 	var at := 0
-	while at < SHOPPING.size() * 12:
-		var id: StringName = SHOPPING[at % SHOPPING.size()]
+	while not shopping.is_empty() and at < shopping.size() * 12:
+		var id: StringName = shopping[at % shopping.size()]
 		at += 1
 		var price := _price(id)
 		var wants := int((Building.entry_of(id) as Dictionary)
 			.get("energy_draw", 0))
 		if draw + wants > supply or left < price:
 			continue
-		var where := _room(state, Building.size_of(id))
+		# **Round the same ground, nearest first** (task 0271): the purse's
+		# defences stand where the tutorial's tower does, on the way in.
+		var where := _first_free(state, nearest, id)
 		if where.x < 0:
 			break
 		if Building.place(state, id, where):
@@ -236,6 +283,14 @@ func _play(night: int, budget: int) -> Dictionary:
 			draw += wants
 			if id != &"wall":
 				towers += 1
+	# **Nothing its season has not opened**, asked again of what stands.
+	var locked := 0
+	var cells: Array = (state["occupants"] as Dictionary).keys()
+	cells.sort()
+	for idx in cells:
+		var on: Dictionary = (state["occupants"] as Dictionary)[idx]
+		if GameData.DEFENCES.has(on["id"]) and not Building.unlocked(state, StringName(on["id"])):
+			locked += 1
 	NightRoad.through_build(state)
 
 	var ticks := 0
@@ -252,6 +307,7 @@ func _play(night: int, budget: int) -> Dictionary:
 		"house_full": Phases.house_full(state),
 		"ticks": ticks,
 		"towers": towers,
+		"locked": locked,
 		"left": Waves.remaining(state),
 		"budget": budget,
 		"unspent": left,
@@ -277,9 +333,15 @@ func _price(id: StringName) -> int:
 ## the top-left corner of the farm, nowhere near the lane: night one fell with
 ## a tower that never fired. A player puts towers on the approach, so this
 ## starts at the house and works east, which is where they come from.
+##
+## **Moved with the farmstead** (`SuiteKit.moved`, found in task 0271): the
+## old yard's column 18 is the far west of the farm since 2026-10-06, and for
+## five days this tool built every defence there and lost every night it
+## played with nothing killed.
 func _room(state: Dictionary, size: Vector2i) -> Vector2i:
-	for x in range(18, Grid.WIDTH - size.x):
-		for y in range(2, Grid.HEIGHT - size.y - 1):
+	var start := SuiteKit.moved(Vector2i(18, 2))
+	for x in range(start.x, Grid.WIDTH - size.x):
+		for y in range(start.y, Grid.HEIGHT - size.y - 1):
 			var clear := true
 			for dy in size.y:
 				for dx in size.x:
@@ -289,6 +351,31 @@ func _room(state: Dictionary, size: Vector2i) -> Vector2i:
 				return Vector2i(x, y)
 	# Nothing left on the approach: take whatever is going.
 	return _anywhere(state, size)
+
+
+## Every cell of the farm by how far it is from `want`, nearest first - ties
+## in reading order - so a build can take the first that will have it.
+func _by_distance(want: Vector2i) -> Array:
+	var rings: Array = []
+	for _i in Grid.WIDTH + Grid.HEIGHT:
+		rings.append([])
+	for y in Grid.HEIGHT:
+		for x in Grid.WIDTH:
+			var apart := absi(x - want.x) + absi(y - want.y)
+			(rings[mini(apart, rings.size() - 1)] as Array).append(Vector2i(x, y))
+	var out: Array = []
+	for ring in rings:
+		out.append_array(ring)
+	return out
+
+
+## The first of `order` that `id` can go on, `(-1, -1)` when none can: how a
+## player answers a pointer to a patch of ground.
+func _first_free(state: Dictionary, order: Array, id: StringName) -> Vector2i:
+	for cell in order:
+		if Building.can_place(state, id, cell):
+			return cell
+	return Vector2i(-1, -1)
 
 
 func _anywhere(state: Dictionary, size: Vector2i) -> Vector2i:

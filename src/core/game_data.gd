@@ -180,6 +180,11 @@ const NIGHT_TICKS := 240 * SECONDS     # LEVER: ticks, 180-300 seconds worth
 ## Every night sends its last member at least this long before dawn, so the
 ## last wave has time to arrive and be fought (`check_nights`).
 const DAWN_MARGIN_TICKS := 60 * SECONDS  # LEVER: ticks, 30-120 seconds worth
+## **And no sooner than this before the margin** (task 0271, after 0148): a
+## night's last send comes after `Waves.fill_line()`, so the night is still
+## coming when the fill line passes. 0148 found every night sent by 36-84 s of
+## its 240 and over, everything dead, a minute in - dawn had nothing to do.
+const NIGHT_FILL_TICKS := 60 * SECONDS  # LEVER: ticks, 30-120 seconds worth
 
 
 # ===================================================================== the farm
@@ -2800,11 +2805,13 @@ const ENEMIES: Dictionary = {
 # ====================================================================== nights
 
 ## The year's nights (task 0270, after `design.md` section 10's ten).
-## **The pace of an ordinary night**, and what a night is measured against
-## when it does not set its own. Spring's first two nights take it; the rest
-## tighten it deliberately, and that tightening is the second difficulty curve
-## described under `SEASON_NIGHTS`.
-const WAVE_GAP_TICKS := 15 * SECONDS    # LEVER: ticks, 8-30 seconds worth
+## **The house pace**: the gap of a night that does not set its own. Since
+## task 0271 that is the tutorial night, Spring 1 - a minute between its
+## three waves, so one tower meets them one at a time and the night is still
+## coming at the fill line (`NIGHT_FILL_TICKS`). Every later night names a
+## shorter one, and that tightening is the second difficulty curve described
+## under `SEASON_NIGHTS`.
+const WAVE_GAP_TICKS := 60 * SECONDS    # LEVER: ticks, 30-90 seconds worth
 
 ## How long between two members of the same wave.
 ##
@@ -2841,22 +2848,31 @@ const SPAWN_INTERVAL_TICKS := 20        # LEVER: ticks, 8-45
 ## - `size`: the night's **hit points** on the season's second and thirteenth
 ##   day - the honest measure 0060 authored by, because three tanks are not
 ##   three walkers - and the line between them on the days between;
-## - `waves` and `gap_ticks`, on the same two days.
+## - `waves` and `gap_ticks`, on the same two days. The gap is the least: a
+##   made night whose waves would all be sent before the fill line spaces
+##   them further (`Almanac`, task 0271), so it fills the night.
 ##
 ## A season's size never falls and its gap never grows (0060's curve rules);
 ## `check_nights` holds both.
 ##
-## ## The key nights, and the drafts they are today
+## ## The key nights
 ##
-## **One new thing a night, and the night after is where it bites** (0060):
-## spring's are today's ten nights, written for `design.md` - the walker on 1,
-## the runner on 3, the tank on 5, the breaker on 7 - with their south-east
-## rows moved to the east, which is all spring opens (0157); the tenth,
-## without its Giant, is Spring 14, the season's boss night, where 0153's
-## rule brings the Giant back. Summer to winter have only their Full Moons,
-## drafts of spring's seventh and tenth to their season's size, sending
-## spring's kinds round every side their season opens: 0271-0274 write the
-## seasons for real.
+## **One new thing a night, and the night after is where it bites** (0060).
+## A season writes its introductions and its two Full Moons, and its template
+## makes every other day. **Spring** (task 0271) keeps the plan's rhythm:
+## days 1-6 grow gently - the walker on 1, the runner on 3, the tank on 5 -
+## day 7 is a Full Moon of the three, days 8-13 grow again with the season's
+## novelty, the breaker, met on 8, and day 14 is the Full Moon in the Giant's
+## company, where 0153's rule brings him. All of it from the east, which is
+## all spring opens (0157). Summer to winter have only their Full Moons,
+## drafts of the old seventh and tenth nights to their season's size, sending
+## spring's kinds round every side their season opens: 0272-0274 write them
+## for real.
+##
+## **Every night fills the night** (task 0271, after 0148): its last send
+## comes between the fill line (`Waves.fill_line`) and the dawn margin, so the
+## night is not over a minute in. A key night is written to it - long gaps,
+## quiet stretches between its waves - and a made one is spaced to it.
 ##
 ## **A Full Moon's record is written at an ordinary night's size**, and
 ## `FULL_MOON_HORDE_PERCENT` scales it in `Waves.night_of` - in that one
@@ -2871,15 +2887,16 @@ const SPAWN_INTERVAL_TICKS := 20        # LEVER: ticks, 8-45
 ## plays it with a scripted build - the instruments 0060 authored the ten
 ## with.
 const SEASON_NIGHTS: Array = [
-	# Spring: the east alone, and its four kinds as they are met - the
-	# runner on its third day, the tank on its fifth, the breaker on its
-	# seventh, as its key nights introduce them.
+	# Spring (task 0271): the east alone, and its four kinds as they are
+	# met - the runner on its third day, the tank on its fifth, the breaker on
+	# its eighth, as its key nights introduce them. Long gaps, so its nights
+	# fill; its line climbs past each key night but the Full Moons.
 	{
 		"sides": [[0, 1]],                      # LEVER: [side, the day of the season it joins]
-		"mix": {&"walker": [25, 1], &"runner": [10, 3], &"tank": [37, 5], &"breaker": [28, 7]},  # LEVER: kind -> [weight in hit points, the day it joins]
-		"size": [400, 2600],             # LEVER: hit points on its second and thirteenth day, 200-12000
-		"waves": [3, 6],                    # LEVER: waves on its second and thirteenth day, 2-12
-		"gap_ticks": [15 * SECONDS, 6 * SECONDS],  # LEVER: the gap on its second and thirteenth day, 2-30 seconds
+		"mix": {&"walker": [30, 1], &"runner": [10, 3], &"tank": [25, 5], &"breaker": [35, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"size": [380, 2800],             # LEVER: hit points on its second and thirteenth day, 200-12000
+		"waves": [4, 7],                    # LEVER: waves on its second and thirteenth day, 2-12
+		"gap_ticks": [40 * SECONDS, 18 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
 	# Summer: the south east joins on its third day. Spring's kinds until
 	# 0272 writes the season's own.
@@ -2911,118 +2928,79 @@ const SEASON_NIGHTS: Array = [
 
 const KEY_NIGHTS: Dictionary = {
 	# ---------------------------------------------------------------- spring
+	# **The plan's rhythm** (task 0271): the walker on 1, the runner on 3, the
+	# tank on 5, a Full Moon of the three on 7, the breaker on 8 and the
+	# Giant's company on 14. Every other day of spring is its template's.
 	1: {
 		"note": "the tutorial night: one tower, one side, and time to watch",
 		"opening_ticks": 0,
+		# **No gap of its own**: the house pace, `WAVE_GAP_TICKS`, a minute
+		# between its three waves - one tower meets them one at a time.
 		"waves": [
 			[&"walker", 3, 0],
 			[&"walker", 4, 0],
 			[&"walker", 5, 0],
 		],
 	},
-	2: {
-		"note": "the same again and more of it, so one tower is not enough",
-		"opening_ticks": 0,
-		"waves": [
-			[&"walker", 6, 0],
-			[&"walker", 6, 0],
-			[&"walker", 8, 0],
-		],
-	},
 	3: {
 		"note": "the first runners: fast, fragile, and they ignore your walls",
 		"opening_ticks": 0,
-		"gap_ticks": 14 * SECONDS,
-		# **Six, not ten.** At ten this was the hardest night of the first
-		# five - a player meeting the runner for the first time lost to it,
-		# with night four, the one that is meant to examine them on it,
-		# holding comfortably. An introduction that kills you is not an
-		# introduction. Measured with `tools/play_nights.py` at $150 a day.
+		"gap_ticks": 30 * SECONDS,
+		# **Eight, and the night after is where they bite.** An introduction
+		# that kills you is not an introduction: at ten runners the old third
+		# night was the hardest of the first five (0060), and with a wave of
+		# sixteen walkers this one fell at $150 a day in `tools/play_nights.py`
+		# (0271). Spring 4 is made with a quarter of its hit points in runners.
 		"waves": [
 			[&"walker", 6, 0],
-			[&"runner", 2, 0],
-			[&"walker", 12, 0],
-			[&"runner", 4, 0],
-		],
-	},
-	4: {
-		"note": "runners in numbers - the night that asks for rate of fire",
-		"opening_ticks": 0,
-		"gap_ticks": 14 * SECONDS,
-		"waves": [
-			[&"walker", 10, 0],
-			[&"runner", 8, 0],
-			[&"walker", 12, 0],
-			[&"runner", 10, 0],
+			[&"runner", 3, 0],
+			[&"walker", 8, 0],
+			[&"runner", 5, 0],
+			[&"walker", 6, 0],
 		],
 	},
 	5: {
 		"note": "the first tank: one thing a crossbow line cannot chew through",
 		"opening_ticks": 0,
-		"gap_ticks": 13 * SECONDS,
+		"gap_ticks": 30 * SECONDS,
 		"waves": [
-			[&"walker", 10, 0],
+			[&"walker", 14, 0],
 			[&"tank", 1, 0],
-			[&"runner", 14, 0],
-			[&"walker", 14, 0],
-			[&"tank", 2, 0],
-		],
-	},
-	6: {
-		"note": "tanks in threes, with the crowd still coming",
-		"opening_ticks": 0,
-		"gap_ticks": 13 * SECONDS,
-		"waves": [
-			[&"walker", 12, 0],
-			[&"tank", 2, 0],
 			[&"runner", 16, 0],
-			[&"walker", 14, 0],
-			[&"tank", 4, 0],
+			[&"walker", 18, 0],
+			[&"tank", 2, 0],
 		],
 	},
 	7: {
-		"note": "the breakers arrive, and an uncovered tower line is a debt",
+		"note": "the first Full Moon: all three of them at once, and more of each",
 		"opening_ticks": 0,
-		"gap_ticks": 9 * SECONDS,
+		"gap_ticks": 22 * SECONDS,
 		"waves": [
-			[&"walker", 12, 0],
-			[&"breaker", 4, 0],
-			[&"runner", 16, 0],
-			[&"tank", 4, 0],
 			[&"walker", 14, 0],
-			[&"breaker", 4, 0],
+			[&"runner", 10, 0],
+			[&"tank", 2, 0],
+			[&"walker", 16, 0],
+			[&"runner", 12, 0],
+			[&"tank", 3, 0],
 		],
 	},
 	8: {
-		"note": "a large night: everything at once and more of it",
+		"note": "the breakers arrive, and an uncovered tower line is a debt",
 		"opening_ticks": 0,
-		"gap_ticks": 8 * SECONDS,
-		"waves": [
-			[&"walker", 14, 0],
-			[&"breaker", 6, 0],
-			[&"runner", 20, 0],
-			[&"tank", 5, 0],
-			[&"walker", 16, 0],
-			[&"breaker", 8, 0],
-		],
-	},
-	9: {
-		"note": "the heavy mix, and the dress rehearsal for the Giant",
-		"opening_ticks": 0,
-		"gap_ticks": 6 * SECONDS,
+		"gap_ticks": 22 * SECONDS,
 		"waves": [
 			[&"walker", 16, 0],
-			[&"breaker", 8, 0],
-			[&"runner", 24, 0],
-			[&"tank", 8, 0],
-			[&"walker", 16, 0],
-			[&"breaker", 8, 0],
+			[&"breaker", 3, 0],
+			[&"runner", 18, 0],
+			[&"tank", 4, 0],
+			[&"walker", 18, 0],
+			[&"breaker", 3, 0],
 		],
 	},
 	14: {
 		"note": "the Giant's company, so it cannot be focused down alone",
 		"opening_ticks": 0,
-		"gap_ticks": 4 * SECONDS,
+		"gap_ticks": 12 * SECONDS,
 		"waves": [
 			[&"walker", 16, 0],
 			[&"breaker", 6, 0],
@@ -3902,6 +3880,10 @@ static func validate() -> Array:
 	if DAWN_MARGIN_TICKS < 0 or DAWN_MARGIN_TICKS >= NIGHT_TICKS:
 		errors.append("the margin before dawn is %d ticks of a %d-tick night"
 			% [DAWN_MARGIN_TICKS, NIGHT_TICKS])
+	# **The fill line falls inside the night** (task 0271), before the margin.
+	if NIGHT_FILL_TICKS < 0 or NIGHT_FILL_TICKS + DAWN_MARGIN_TICKS >= NIGHT_TICKS:
+		errors.append("the fill line is %d ticks before a %d-tick margin of a %d-tick night"
+			% [NIGHT_FILL_TICKS, DAWN_MARGIN_TICKS, NIGHT_TICKS])
 
 	return errors
 
@@ -6080,7 +6062,7 @@ static func check_record(one: Dictionary, day: int) -> Array:
 static func digest() -> int:
 	return State.hash_of({
 		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK, NIGHT_TICKS, DAWN_MARGIN_TICKS,
-			DAY_START_MINUTE, DAY_END_MINUTE, DUSK_MINUTE,
+			NIGHT_FILL_TICKS, DAY_START_MINUTE, DAY_END_MINUTE, DUSK_MINUTE,
 			PASS_OUT_PREPARATION_TICKS,
 			MAX_CATCH_UP_TICKS],
 		"calendar": [SEASONS, SEASON_DAYS, FULL_MOON_DAYS,

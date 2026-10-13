@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###################.....`  **230 / 296 done**
+`###################.....`  **231 / 296 done**
 
-0 doing / 66 todo / 0 blocked across 18 phases.
+0 doing / 65 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-66 task(s) left, the ready ones first, then what they
+65 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -742,25 +742,22 @@ The three night events as Codex drew them, in the forecast slot where 0256 and 0
   - done when: FHD (1920x1080) captures in the real game by day (each event in the dusk forecast) and by night (the build step's forecast), opened and looked at, in `implementation/shots/0269/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0271 - Spring's fourteen nights
+### 0272 - Summer's fourteen nights
 
-Ready to pick up.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, spring's `SEASON_NIGHTS`), src/tools/play_nights.gd, tools/play_nights.py, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
 
-Spring is the season that teaches: the walker, the runner, the tank and the breaker one at a time, all from the east, a Full Moon on day 7 and the Giant on day 14. Today's ten nights are the raw material, but they were balanced for two sides and a ten-night run, so they are rewritten rather than pasted.
+Summer opens the second side and brings the first enemies that change what a spring defence is worth: the spitter shoots towers from range, the rats come in numbers that mines and fire love, and on day 28 the Harvester charges straight through the walls.
 
-- First the instrument, moved here from 0270: `tools/play_nights.py` forwards its arguments (today it passes none) and `python tools/play_nights.py <from> <to>` plays that range of dates with the scripted build, buying only what each date's season has unlocked (0234's `unlock_season`, money and materials) from a purse that starts where a run would be (what the earlier dates paid plus the income). 0272-0274 author with it
-- Every spring night comes from the east only (0157's east region; 0270 already deleted the allowance today's ten had). Today's night 2, 'the same again from two sides', becomes a lesson one side can teach
-- The plan's rhythm: days 1-6 grow gently, day 7 is a Full Moon of the kinds already met, days 8-13 grow again with the season's novelty - the breaker, 'Primavera (fim)' - and day 14 is the Full Moon with the Giant (0153's row) in company. A starting map: today's 1-6 to days 1-6, today's 7 (breakers) to day 8, today's 8-9 spread over 9-13, today's 10 to day 14 - change it if the numbers say so
-- One new thing a night at most, and the night after an introduction is where it bites (0060's rule): the walker on 1, the runner and the tank in days 2-6, the breaker in 8-13. The introductions, day 7 and day 14 are `KEY_NIGHTS`; the other days come from spring's template
-- Day 1 stays the tutorial night: a normal night 1 (the calm night only follows a fallen boss), winnable with what the tutorial (0141) gives; the tutorial asserts of 0041/0141 stay green
-- Every night fits the night length (0137) with room for the last wave to be fought before dawn, **and fills it** (moved here by 0148): its last wave is sent no earlier than `NIGHT_TICKS - DAWN_MARGIN_TICKS - NIGHT_FILL_TICKS`, a new `# LEVER` in `src/core/game_data.gd` (60 s, 30-120) in `digest()`'s `time` row, and `tools/nights.py` prints each night's last send against that line. 0148 measured today's ten sending everything by 36-84 s of a 240 s night: every night it played was over, everything dead, about a minute in, and none of a thousand autoplayed nights reached dawn, so the plan's 'holding on until sunrise is worth as much as killing everything' (4.5) and its three to five minutes of waves never happen. Spread the waves - a later last wave, gaps that leave quiet stretches between them - rather than shortening `NIGHT_TICKS` below the plan's three minutes; day 1 too, still winnable with the tutorial's tower
-- Notes in the voice of the authored ten, English, one line each - they are what `tools/nights.py` prints
-- Author against `python tools/nights.py 1 14` (count, hit points and reward climb, peaking on 7 and 14) and `python tools/play_nights.py 1 14` at its three incomes
-- DATA moves on purpose; SIM moves if day 1 changed, because the determinism scenario fights it - both numbers in `implementation/PROGRESS.md`
+- Days 16-28 fight; day 15 is 0154's calm night after the Giant. The east and the south-east are open (0157), and the first south-east night is a small one, so the new side is learned before it is tested
+- Summer's first fight starts below spring's Full Moons and above spring's day 6, so the year still climbs; spring's four kinds stay in the mix at summer's share
+- The spitter and the rat swarm are introduced on different nights - one in days 16-20, the other in days 22-27 - never together; the Full Moon on day 21 sends what is already known; the night after each introduction bites
+- Day 28 is the Full Moon with the Harvester in company, so it cannot be focused alone: the Harvester is the row 0153's rule adds from `SEASON_BOSSES` (0253 put it there), and this task writes its company
+- Read 0259's `implementation/MATCHUPS.md` first: every night's mix has an answer in what summer's arsenal (0234) has unlocked by that day - the flamethrower, the decoy, the beehive and the bait arrive this season - and the journal says which weapon each new enemy is meant to teach
+- Rats are many bodies: print the peak entity count of the largest rat night and compare it with what the swarm scenario of 0218/0248 in `perf_check.gd` measured; the year's worst case is 0275's
+- Author against `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` (0271's range), starting from spring's final numbers; notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
 
-  - done when: `_task_0271_spring_nights` in `src/tools/headless_v1.gd`: days 1-14 send only the walker, runner, tank, breaker and the Giant, only from the east; each kind is first sent on its authored introduction day; day 7 is the largest of days 1-7 and day 14 the largest of spring in hit points; the Giant is on day 14 and nowhere else; every day 1-14 sends its last wave after the fill line (`NIGHT_FILL_TICKS`) and before the dawn margin
-  - done when: `python tools/play_nights.py 1 14` output is in the journal: night 1 holds at the lowest income, and every night that falls is named with what the curve does there; `python tools/play_nights.py 15 20` runs on 0270's summer draft and buys nothing summer has not unlocked
-  - done when: Spring's table from `python tools/nights.py 1 14` is in the journal beside the old ten nights' numbers
+  - done when: `_task_0272_summer_nights` in `src/tools/headless_v1.gd`: days 16-28 send only kinds introduced by that day, only from the east and the south-east; the spitter and the rats are first sent on their introduction days, on different nights; the Harvester is on day 28 and nowhere else; days 21 and 28 are the largest of their halves in hit points
+  - done when: `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` output in the journal, with the matchup line for each new enemy and the peak rat count
 
 ### 0281 - The new day's sounds
 
@@ -914,22 +911,22 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
   - done when: the same group: the 0.1 `settings.cfg` fixture loads with its language, volumes and rebind kept, every key it lacks at its `Settings.DEFAULTS` value, and its `tutorial_seen` of `true` migrated to the 0.1 step ids, so only the new steps are offered
   - done when: 1920x1080 captures of the bed line, the cursor line at night and the forecast line at dusk, in both languages (new scenarios such as `tut_bed`, `tut_cursor`, `tut_forecast`: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast --fhd` and again with `--pt_BR`), opened: each line is on its thing and nothing on screen covers it
 
-### 0272 - Summer's fourteen nights
+### 0273 - Autumn's fourteen nights
 
-Waits on 0271.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
+Waits on 0272.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, autumn's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
 
-Summer opens the second side and brings the first enemies that change what a spring defence is worth: the spitter shoots towers from range, the rats come in numbers that mines and fire love, and on day 28 the Harvester charges straight through the walls.
+Autumn opens the north and brings the two enemies that ignore the shape of a maze: the crow flies over it to eat the crops, the digger goes under the fences and barricades. The Scarecrow King calls his flocks on day 42, and the Blood Moon can rise from now on.
 
-- Days 16-28 fight; day 15 is 0154's calm night after the Giant. The east and the south-east are open (0157), and the first south-east night is a small one, so the new side is learned before it is tested
-- Summer's first fight starts below spring's Full Moons and above spring's day 6, so the year still climbs; spring's four kinds stay in the mix at summer's share
-- The spitter and the rat swarm are introduced on different nights - one in days 16-20, the other in days 22-27 - never together; the Full Moon on day 21 sends what is already known; the night after each introduction bites
-- Day 28 is the Full Moon with the Harvester in company, so it cannot be focused alone: the Harvester is the row 0153's rule adds from `SEASON_BOSSES` (0253 put it there), and this task writes its company
-- Read 0259's `implementation/MATCHUPS.md` first: every night's mix has an answer in what summer's arsenal (0234) has unlocked by that day - the flamethrower, the decoy, the beehive and the bait arrive this season - and the journal says which weapon each new enemy is meant to teach
-- Rats are many bodies: print the peak entity count of the largest rat night and compare it with what the swarm scenario of 0218/0248 in `perf_check.gd` measured; the year's worst case is 0275's
-- Author against `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` (0271's range), starting from spring's final numbers; notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- Days 30-42 fight; day 29 is 0154's calm night after the Harvester. The east, the south-east and the north are open (0157); the first north night is a small one
+- The crow and the digger are introduced on different nights - one in days 30-34, the other in days 36-41 - never together; the Full Moon on day 35 sends what is already known; the night after each introduction bites
+- Crows eat what is in the ground, and autumn's fields are full (wheat, pumpkin, grape, beet): crow nights are the ones where the farm's layout matters, so their first one is gentle
+- Day 42 is the Full Moon with the Scarecrow King in company - 0153's row from `SEASON_BOSSES`, which 0254 set; this task writes the company. The crows he summons come from his rule, not from rows, so the forecast's count leaves them out by design (0254): day 42's note says he calls crows, and the journal gives the peak count of crows alive on day 42 in `play_nights`
+- The Blood Moon (0257) may roll from autumn: list which autumn days roll it for seeds 0-4 in `tools/nights.py`, and pin `event` off on an introduction night it would drown (0270's field)
+- Read 0259's `implementation/MATCHUPS.md`: every night has an answer in what autumn's arsenal (0234) has unlocked by that day - the mortar, the pumpkin catapult and the garlic braid - and the journal says which weapon each new enemy is meant to teach
+- The template keeps climbing from summer's final numbers (`python tools/play_nights.py 29 42`); notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
 
-  - done when: `_task_0272_summer_nights` in `src/tools/headless_v1.gd`: days 16-28 send only kinds introduced by that day, only from the east and the south-east; the spitter and the rats are first sent on their introduction days, on different nights; the Harvester is on day 28 and nowhere else; days 21 and 28 are the largest of their halves in hit points
-  - done when: `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` output in the journal, with the matchup line for each new enemy and the peak rat count
+  - done when: `_task_0273_autumn_nights` in `src/tools/headless_v1.gd`: days 30-42 send only kinds introduced by that day, only from the east, south-east and north; the crow and the digger are first sent on their introduction days, on different nights; the Scarecrow King is on day 42 and nowhere else; days 35 and 42 are the largest of their halves in hit points
+  - done when: `python tools/nights.py 29 42` and `python tools/play_nights.py 29 42` output in the journal, with the Blood Moon days for seeds 0-4 and the matchup line for each new enemy
 
 ### 0285 - Music for four seasons
 
@@ -966,22 +963,24 @@ The book cover, the four boss trophies and the achievement badges Codex drew rep
   - done when: FHD (1920x1080) captures of the collections screen, every tab with a full profile, opened in a run by day and by night, opened and looked at, in `implementation/shots/0288/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0273 - Autumn's fourteen nights
+### 0274 - Winter's fourteen nights
 
-Waits on 0272.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, autumn's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
+Waits on 0273.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, winter's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
 
-Autumn opens the north and brings the two enemies that ignore the shape of a maze: the crow flies over it to eat the crops, the digger goes under the fences and barricades. The Scarecrow King calls his flocks on day 42, and the Blood Moon can rise from now on.
+Winter is the exam: every side open, the frost zombie that slows the towers it dies beside, the wraith that cannot be shot outside the light, and the Winter Lord on day 56. Nothing grows, so these nights are fought with what autumn put away.
 
-- Days 30-42 fight; day 29 is 0154's calm night after the Harvester. The east, the south-east and the north are open (0157); the first north night is a small one
-- The crow and the digger are introduced on different nights - one in days 30-34, the other in days 36-41 - never together; the Full Moon on day 35 sends what is already known; the night after each introduction bites
-- Crows eat what is in the ground, and autumn's fields are full (wheat, pumpkin, grape, beet): crow nights are the ones where the farm's layout matters, so their first one is gentle
-- Day 42 is the Full Moon with the Scarecrow King in company - 0153's row from `SEASON_BOSSES`, which 0254 set; this task writes the company. The crows he summons come from his rule, not from rows, so the forecast's count leaves them out by design (0254): day 42's note says he calls crows, and the journal gives the peak count of crows alive on day 42 in `play_nights`
-- The Blood Moon (0257) may roll from autumn: list which autumn days roll it for seeds 0-4 in `tools/nights.py`, and pin `event` off on an introduction night it would drown (0270's field)
-- Read 0259's `implementation/MATCHUPS.md`: every night has an answer in what autumn's arsenal (0234) has unlocked by that day - the mortar, the pumpkin catapult and the garlic braid - and the journal says which weapon each new enemy is meant to teach
-- The template keeps climbing from summer's final numbers (`python tools/play_nights.py 29 42`); notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- Days 44-56 fight; day 43 is 0154's calm night after the Scarecrow King. Every side is open (0157), but the sides new to winter join over several nights through the side join days of winter's template (0270) and key nights - never on an introduction night
+- The frost zombie and the wraith are introduced on different nights, never together; the Full Moon on day 49 sends what is already known; the night after each introduction bites
+- The first wraith night is small and answerable with the light a farm has without a searchlight - the porch, the flare, burning cells (0229's light rule) - because it is the night that teaches the searchlight
+- Day 56 is the Full Moon with the Winter Lord in company - 0153's row from `SEASON_BOSSES`, which 0255 set; this task writes the company - and the largest night of Year 1; 0160's ending hook fires when he falls
+- Nothing grows outdoors in winter (the plan; the rule is 0171), so the money for these nights was made in autumn: prefer a climb in variety - sides, kinds, events - over a climb in bodies
+- Read 0259's `implementation/MATCHUPS.md`: every night has an answer in what winter's arsenal (0234) has unlocked by that day (`python tools/play_nights.py 43 56`) - the searchlight and the electric fence - and the journal says which weapon each new enemy is meant to teach
+- Notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- With all four seasons authored, `GameData.check_nights` refuses a night whose last wave is sent before 0271's fill line (`NIGHT_FILL_TICKS`), for every date `python tools/nights.py --check` resolves: 0148 found a night that is over in a minute leaves dawn nothing to do
 
-  - done when: `_task_0273_autumn_nights` in `src/tools/headless_v1.gd`: days 30-42 send only kinds introduced by that day, only from the east, south-east and north; the crow and the digger are first sent on their introduction days, on different nights; the Scarecrow King is on day 42 and nowhere else; days 35 and 42 are the largest of their halves in hit points
-  - done when: `python tools/nights.py 29 42` and `python tools/play_nights.py 29 42` output in the journal, with the Blood Moon days for seeds 0-4 and the matchup line for each new enemy
+  - done when: `_task_0274_winter_nights` in `src/tools/headless_v1.gd`: days 44-56 send only kinds introduced by that day; the frost zombie and the wraith are first sent on their introduction days, on different nights; the Winter Lord is on day 56 and nowhere else; day 56 is the largest night of days 1-56 in hit points; a copy of a night with its last wave moved before 0271's fill line is refused by `check_nights`
+  - done when: `python tools/nights.py 43 56` and `python tools/play_nights.py 43 56` output in the journal, with the matchup line for each new enemy and the night each side first opens
+  - done when: `python tools/nights.py` for the whole year, after all four seasons, is in the journal: the year's curve in one table
 
 ### 0286 - Fog, rain and winter wind
 
@@ -1019,25 +1018,6 @@ Before 1.0 ships, look at the whole game in its real frame - every screen, seaso
   - done when: 0120's placeholder check prints zero packs pending (A057 excepted only when declined and 0289 closed), quoted in the journal
   - done when: The catalogue names a capture for every family and state in the lists above
   - done when: Every follow-up is filed as a task (and a pack when it needs art) with ids, each one in 0297's deps, none left as prose
-
-### 0274 - Winter's fourteen nights
-
-Waits on 0273.  Likely files: `src/core/game_data.gd (`KEY_NIGHTS`, winter's `SEASON_NIGHTS`), src/tools/headless_v1.gd`.
-
-Winter is the exam: every side open, the frost zombie that slows the towers it dies beside, the wraith that cannot be shot outside the light, and the Winter Lord on day 56. Nothing grows, so these nights are fought with what autumn put away.
-
-- Days 44-56 fight; day 43 is 0154's calm night after the Scarecrow King. Every side is open (0157), but the sides new to winter join over several nights through the side join days of winter's template (0270) and key nights - never on an introduction night
-- The frost zombie and the wraith are introduced on different nights, never together; the Full Moon on day 49 sends what is already known; the night after each introduction bites
-- The first wraith night is small and answerable with the light a farm has without a searchlight - the porch, the flare, burning cells (0229's light rule) - because it is the night that teaches the searchlight
-- Day 56 is the Full Moon with the Winter Lord in company - 0153's row from `SEASON_BOSSES`, which 0255 set; this task writes the company - and the largest night of Year 1; 0160's ending hook fires when he falls
-- Nothing grows outdoors in winter (the plan; the rule is 0171), so the money for these nights was made in autumn: prefer a climb in variety - sides, kinds, events - over a climb in bodies
-- Read 0259's `implementation/MATCHUPS.md`: every night has an answer in what winter's arsenal (0234) has unlocked by that day (`python tools/play_nights.py 43 56`) - the searchlight and the electric fence - and the journal says which weapon each new enemy is meant to teach
-- Notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
-- With all four seasons authored, `GameData.check_nights` refuses a night whose last wave is sent before 0271's fill line (`NIGHT_FILL_TICKS`), for every date `python tools/nights.py --check` resolves: 0148 found a night that is over in a minute leaves dawn nothing to do
-
-  - done when: `_task_0274_winter_nights` in `src/tools/headless_v1.gd`: days 44-56 send only kinds introduced by that day; the frost zombie and the wraith are first sent on their introduction days, on different nights; the Winter Lord is on day 56 and nowhere else; day 56 is the largest night of days 1-56 in hit points; a copy of a night with its last wave moved before 0271's fill line is refused by `check_nights`
-  - done when: `python tools/nights.py 43 56` and `python tools/play_nights.py 43 56` output in the journal, with the matchup line for each new enemy and the night each side first opens
-  - done when: `python tools/nights.py` for the whole year, after all four seasons, is in the journal: the year's curve in one table
 
 ### 0275 - The worst night of the year, within budget
 
@@ -1079,7 +1059,7 @@ Waits on 0275.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd,
 
 ### 0277 - Balancing the year
 
-Waits on 0271, 0272, 0273, 0274, 0276.  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
+Waits on 0272, 0273, 0274, 0276.  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
 
 The phase's own target: an average player reaches winter having lost two to four nights, and every boss falls. Measured with the year autoplayer, moved with levers, written down - the way 0068 did it for ten nights.
 
@@ -1571,16 +1551,16 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md) - waits for art A054
 - [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md) - waits for art A055
 
-## 15 - Fifty-six nights and balance  (1/11)
+## 15 - Fifty-six nights and balance  (2/11)
 
 - [x] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md)
-- [ ] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md)
-- [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md) - needs 0271
+- [x] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md)
+- [ ] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md)
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0272
 - [ ] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md) - needs 0273
 - [ ] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md) - needs 0274
 - [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0275
-- [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0271, 0272, 0273, 0274, 0276
+- [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0272, 0273, 0274, 0276
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
 - [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0277, 0278, 0279

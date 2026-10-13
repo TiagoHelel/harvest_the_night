@@ -28154,3 +28154,333 @@ src/tools/headless_v1.gd, src/tools/autoplay.gd (a comment),
 src/tools/perf_check.gd (a comment), tools/determinism_data_hash.txt,
 implementation/prompts/0270-night-records-v2.md,
 implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
+
+## 0271 - Spring's fourteen nights - done 2026-10-12
+
+What changed: spring is written for the 1.0 plan's rhythm instead of being
+the old ten nights pasted onto fourteen days, and every night fills the
+night:
+- **The rhythm**: days 1-6 grow gently, day 7 is a Full Moon of the three
+  kinds met so far, days 8-13 grow again with the breaker, and day 14 is the
+  Full Moon in the Giant's company.
+- **Six key nights**: the walker on 1, the runner on 3, the tank on 5, the
+  Full Moon on 7, the breaker on 8 and the Giant's company on 14. The
+  template makes the other eight days.
+- **The fill line**: a new lever, `NIGHT_FILL_TICKS` (60 s). Every spring
+  night is still sending at 120 s and is all sent by 180 s. The old ten
+  were all sent by 36-84 s.
+- **`tools/play_nights.py <from> <to>`** plays a range of dates from a purse
+  where a run would be, buying only what the date's season has opened.
+- **The determinism scenario fights a night again.** Since 0170 it had
+  spent its night on Autumn 1, a calm night that sends nothing.
+
+DATA and SIM both moved, on purpose.
+
+### Spring
+
+**The template** (`SEASON_NIGHTS[0]`):
+
+| Lever | Was (0270's draft) | Now |
+|---|---|---|
+| mix | walker 25/1, runner 10/3, tank 37/5, breaker 28/7 | walker 30/1, runner 10/3, tank 25/5, breaker 35/8 |
+| size | 400-2600 hp | 380-2800 hp |
+| waves | 3-6 | 4-7 |
+| gap | 15-6 s | 40-18 s, the least gap |
+
+**The key nights** (`KEY_NIGHTS`):
+
+| Day | Bodies as written | Gap | What it is |
+|---|---|---|---|
+| 1 | 12 walkers in 3, 4, 5 | the house pace, 60 s | the tutorial night, byte for byte the old night 1 |
+| 3 | 28: 20 walkers, 8 runners in five waves | 30 s | the runners met |
+| 5 | 51: 32 walkers, 16 runners, 3 tanks | 30 s | the tank met |
+| 7 | 57: 30 walkers, 22 runners, 5 tanks | 22 s | the Full Moon, so 85 as fought |
+| 8 | 62: 34 walkers, 18 runners, 4 tanks, 6 breakers | 22 s | the breaker met, the old seventh |
+| 14 | 84, the old tenth without its Giant | 12 s | the Full Moon with the Giant, 127 as fought |
+
+Days 2, 4, 6 and 9-13 are made from the template. Its weights put a
+quarter of day 4's hit points in runners (twenty of them), four tanks on
+day 6 and fourteen breakers on day 9, so the night after each
+introduction sends more of what it brought.
+
+### The fill line
+
+- **`NIGHT_FILL_TICKS`** (60 s, `# LEVER`, 30-120) is in `digest()`'s
+  `time` row and checked to fall inside the night.
+- **`Waves.fill_line()`** is `NIGHT_TICKS - DAWN_MARGIN_TICKS -
+  NIGHT_FILL_TICKS`: 120 s of a 240 s night.
+- **`WAVE_GAP_TICKS`**, the house pace, is 60 s, up from 15 s. Only the
+  tutorial night takes it, so its three waves meet one tower one at a time.
+- **A made night is spaced to the line by construction.** `Almanac` spreads
+  the shortfall over its gaps, or delays a lone wave
+  (`Almanac._fill_the_night`). `_lay_out`'s rounding can deal a day fewer
+  waves than its template says - day 4 came out in two, all sent by 79 s -
+  and the rule should not hang on rounding.
+- **Summer to winter's made nights now fill as well.** The ones that were
+  over early are spaced out to the line exactly, 120 s. Late autumn and
+  winter already sent past it, 125-179 s. `nights.py 15 56`: 39 of the 39
+  that send anything are still sending at the line. That is one more
+  reason 0274's refusal will hold.
+- **`tools/nights.py`** prints the line in its header and marks a night all
+  sent before it with `!`. None is.
+
+### Spring's table, beside the old ten
+
+`python tools/nights.py 1 14`:
+
+| Day | Marks | Bodies | Hit points | Worth | All sent by | Kinds |
+|---|---|---|---|---|---|---|
+| 1 | key | 12 | 240 | $36 | 126 s | 12 walker |
+| 2 | made | 19 | 380 | $57 | 130 s | 19 walker |
+| 3 | key | 28 | 480 | $92 | 136 s | 8 runner, 20 walker |
+| 4 | made | 50 | 800 | $170 | 120 s | 20 runner, 30 walker |
+| 5 | key | 51 | 1160 | $196 | 152 s | 16 runner, 3 tank, 32 walker |
+| 6 | made | 52 | 1250 | $211 | 129 s | 19 runner, 4 tank, 29 walker |
+| 7 | key FULL | 85 | 2070 | $351 | 165 s | 33 runner, 7 tank, 45 walker |
+| 8 | key | 62 | 1610 | $270 | 149 s | 6 breaker, 18 runner, 4 tank, 34 walker |
+| 9 | made | 65 | 1860 | $320 | 146 s | 14 breaker, 19 runner, 4 tank, 28 walker |
+| 10 | made | 73 | 2050 | $356 | 143 s | 16 breaker, 21 runner, 4 tank, 32 walker |
+| 11 | made | 80 | 2220 | $389 | 140 s | 18 breaker, 23 runner, 4 tank, 35 walker |
+| 12 | made | 88 | 2510 | $434 | 138 s | 20 breaker, 25 runner, 5 tank, 38 walker |
+| 13 | made | 96 | 2665 | $466 | 170 s | 21 breaker, 28 runner, 5 tank, 42 walker |
+| 14 | key FULL BOSS | 127 | 4755 | $750 | 156 s | 21 breaker, 1 giant, 39 runner, 12 tank, 54 walker |
+
+The old ten as written, at the old pace (from the 0270 drafts):
+
+| Night | Bodies | Hit points | Worth | All sent by |
+|---|---|---|---|---|
+| 1 | 12 | 240 | $36 | 36 s |
+| 2 | 20 | 400 | $60 | 42 s |
+| 3 | 24 | 420 | $78 | 56 s |
+| 4 | 40 | 620 | $138 | 67 s |
+| 5 | 41 | 980 | $164 | 77 s |
+| 6 | 48 | 1400 | $214 | 82 s |
+| 7 | 54 | 1520 | $254 | 78 s |
+| 8 | 69 | 2030 | $342 | 84 s |
+| 9 | 80 | 2560 | $416 | 82 s |
+| 10 | 85 | 3470 | $540 | 78 s |
+
+### `python tools/play_nights.py 1 14`
+
+```text
+HARVEST THE NIGHT - days 1 to 14, scripted build, no player
+  a day of farming worth $0
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  result
+     1    12       36       0       1       0   100%      1      1  held, house 10/100 after 145s
+     2    19       57      12       1       0   100%      1      1  FELL after 105s with 1 still coming
+     3    28       92      26       1       0   100%      2      2  FELL after 86s with 8 still coming
+     4    50      170      43       1       0   100%      0      0  FELL after 25s with 20 still coming
+     5    51      196      65       1       0   100%      1      1  FELL after 25s with 39 still coming
+     6    52      211      89       1       0   100%      1      1  FELL after 25s with 37 still coming
+     7    85      351     115       2       0   100%      1      1  FELL after 27s with 55 still coming
+     8    62      270     183       2       0   100%      1      1  FELL after 28s with 45 still coming
+     9    65      320     214       2       0   100%      1      1  FELL after 26s with 48 still coming
+    10    73      356     249       2       0   100%      1      1  FELL after 49s with 40 still coming
+    11    80      389     286       3       0   100%      3      3  FELL after 84s with 30 still coming
+    12    88      434     326       3       0   100%      1      1  FELL after 52s with 41 still coming
+    13    96      466     369       3       0   100%      4      4  FELL after 82s with 49 still coming
+    14   127      750     415       4       0   100%      2      2  FELL after 33s with 106 still coming
+  fell: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+  a day of farming worth $150
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  result
+     1    12       36       0       1       0   100%      1      1  held, house 10/100 after 145s
+     2    19       57     162       2       0   100%      2      2  held, house 60/100 after 150s
+     3    28       92     326       3       0   100%      4      2  held, house 90/100 after 154s
+     4    50      170     493       3       0   100%      7      5  held, house 100/100 after 136s
+     5    51      196     665       4       0   100%      6      3  held, house 55/100 after 190s
+     6    52      211     839       5       0   100%      7      2  held, house 40/100 after 143s
+     7    85      351    1015       6       0   100%     13      4  held, house 10/100 after 203s
+     8    62      270    1233       7       0   100%     11      7  held, house 55/100 after 168s
+     9    65      320    1414       8       0   100%     10      7  held, house 20/100 after 164s
+    10    73      356    1599       8       0   100%     11      6  held, house 70/100 after 159s
+    11    80      389    1786      10       0   100%     13      9  held, house 55/100 after 155s
+    12    88      434    1976      11       0   100%     14      6  held, house 85/100 after 153s
+    13    96      466    2169      12       0   100%     15      7  held, house 100/100 after 182s
+    14   127      750    2365      12       0   100%     16      9  FELL after 157s with 12 still coming
+  fell: [14]
+  a day of farming worth $300
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  result
+     1    12       36       0       1       0   100%      1      1  held, house 10/100 after 145s
+     2    19       57     312       3       0   100%      3      2  held, house 90/100 after 148s
+     3    28       92     626       4       0   100%      4      3  held, house 100/100 after 150s
+     4    50      170     943       6       0   100%      7      2  held, house 100/100 after 135s
+     5    51      196    1265       8       0   100%      8      3  held, house 85/100 after 191s
+     6    52      211    1589       8       0   100%      9      4  held, house 70/100 after 143s
+     7    85      351    1915      11       0   100%     13      5  held, house 85/100 after 204s
+     8    62      270    2283      12       0   100%     11      5  held, house 100/100 after 164s
+     9    65      320    2614      14       0   100%     11      5  held, house 100/100 after 160s
+    10    73      356    2949      16       0   100%     11      5  held, house 100/100 after 158s
+    11    80      389    3286      18       0   100%     13      6  held, house 100/100 after 156s
+    12    88      434    3626      19       0   100%     14      8  held, house 100/100 after 151s
+    13    96      466    3969      21       0   100%     15      9  held, house 100/100 after 181s
+    14   127      750    4315      23       0   100%     19     13  held, house 60/100 after 170s
+  all 14 held
+   day   sent   $reward   hit points sent
+     1     12        36               240
+     2     19        57               380
+     3     28        92               480
+     4     50       170               800
+     5     51       196              1160
+     6     52       211              1250
+     7     85       351              2070
+     8     62       270              1610  <- dips
+     9     65       320              1860
+    10     73       356              2050
+    11     80       389              2220
+    12     88       434              2510
+    13     96       466              2665
+    14    127       750              4755
+  dips on [8]
+```
+
+**What falls, and why:**
+- **$0 a day**, a farm that never farms: every night after the first. The
+  nights' own pay buys one to four towers by day 14.
+- **Night 1 holds at every income**, house 10/100 with the tutorial's one
+  tower, a minute between its waves.
+- **$150 a day**: everything holds but day 14, which falls at 157 s with 12
+  still coming. That is the Full Moon's 126 bodies and the Giant against
+  twelve towers, the season's exam. Days 7 and 9 hold with 10/100 and
+  20/100.
+- **$300 a day**: everything holds, day 14 at 60/100.
+
+The tool's own rule is that a night falling at every income is too hard and
+one holding at every income is too easy. Every night 2-14 holds at one
+income and falls at another.
+
+### `python tools/play_nights.py 15 20`
+
+```text
+HARVEST THE NIGHT - days 15 to 20, scripted build, no player
+  a day of farming worth $0
+  the purse at day 15: $537 from days 1-14
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  result
+    15     0        0     537       3       0   100%      0      0  held, house 100/100 after 0s
+    16    56      286     562       3       0   100%      7      7  FELL after 154s with 1 still coming
+    17    63      323     602       3       0   100%      7      4  FELL after 124s with 10 still coming
+    18    68      345     645       4       0   100%      8      4  FELL after 139s with 2 still coming
+    19    76      390     690       4       0   100%      4      3  FELL after 78s with 39 still coming
+    20    83      427     738       4       0   100%      6      2  FELL after 108s with 34 still coming
+  fell: [16, 17, 18, 19, 20]
+  a day of farming worth $150
+  the purse at day 15: $2637 from days 1-14
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  result
+    15     0        0    2637      14       0   100%      0      0  held, house 100/100 after 0s
+    16    56      286    2812      15       0   100%     10      6  held, house 100/100 after 161s
+    17    63      323    3002      16       0   100%     11      8  held, house 100/100 after 129s
+    18    68      345    3195      17       0   100%     11      6  held, house 100/100 after 150s
+    19    76      390    3390      18       0   100%     11      6  held, house 100/100 after 127s
+    20    83      427    3588      19       0   100%     13     11  held, house 100/100 after 123s
+  all 6 held
+  a day of farming worth $300
+  the purse at day 15: $4737 from days 1-14
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  result
+    15     0        0    4737      24       0   100%      0      0  held, house 100/100 after 0s
+    16    56      286    5062      27       0   100%     10      7  held, house 100/100 after 161s
+    17    63      323    5402      28       0   100%     11      6  held, house 100/100 after 128s
+    18    68      345    5745      30       0   100%     11      8  held, house 100/100 after 143s
+    19    76      390    6090      32       0   100%     11      7  held, house 100/100 after 126s
+    20    83      427    6438      33       0   100%     13      8  held, house 100/100 after 121s
+  all 6 held
+   day   sent   $reward   hit points sent
+    15      0         0                 0
+    16     56       286              1715
+    17     63       323              1960
+    18     68       345              2065
+    19     76       390              2355
+    20     83       427              2600
+  every curve climbs
+```
+
+It runs on 0270's summer draft from a purse spring paid, and buys nothing
+summer has not opened (`locked` 0 throughout, the mortar skipped). The
+draft is easy: at $150 and $300 everything holds at 100/100. That is
+0272's.
+
+### Decided
+
+- **Day 3 in five smaller waves.** The first version kept the old night 3's
+  wave of sixteen walkers and fell at $150. The old night 3's own comment
+  says that is the one thing an introduction must not do. Five waves of 6,
+  3, 8, 5 and 6 hold at $150 with 90/100.
+- **The breaker on day 8**, the task's starting map. Day 7's Full Moon
+  sends only what spring has met, and the breaker is the plan's
+  "Primavera (fim)". headless_check's 0060 group now reads 8.
+- **The other days' curves climb too.** Count, hit points and worth all
+  grow over days 1-6 and 8-13, with day 8 under day 7's Full Moon. Getting
+  the count to climb across the tank's introduction took a steeper line
+  (2800 on day 13), because a tank is 120 hit points in one body.
+- **`play_nights` was fixed as an instrument**, which the task's first
+  requirement is:
+  - it plays `[from] [to]`, from a purse of every earlier date's pay (the
+    Full Moon's line included) and a day's income each;
+  - it filters its list by `Building.unlocked` and reports `locked`;
+  - the tutorial's tower goes where the tutorial points
+    (`Tutorial._between_house_and_spawn`), and the purse's defences on the
+    nearest free ground to it;
+  - generators go anywhere out of the way.
+- **Two input_check cases play the first night to its end**, and its waves
+  come a minute apart now:
+  - the payout case plays at 32, not 8, or it would outrun its 4000 frames;
+  - the log case (0090's "a night at four times speed is followable")
+    steps until dawn at the latest rather than 240 times. At 96 s it
+    stopped before the night ended and saw two kinds of event, not three -
+    the first verify's one failure.
+- **`input_v1` took 117.9 s of its 120** in the first full verify and 118.5 s
+  in the last, against 113.9 s at 0270. It ran 115-119 s at 0257 and 115 s at 0259, so this is
+  the same narrow margin, not a new one. Nothing was moved to `input_v2`,
+  whose rule is that the old cases stay put; raising the limit is the
+  owner's call.
+
+### Found
+
+- **The sim hash had watched no night since task 0170.** The task says SIM
+  moves "because the determinism scenario fights day 1". It did not move,
+  so I probed it:
+  - `SuiteKit.crop_supplies` moves the date to an out-of-season crop's
+    season, and the scenario sows from every seed. Its last was an autumn
+    crop, which put it on day 29: Autumn 1, a calm night with an empty
+    table, won on its first tick.
+  - Its two towers and its wall stood on the old yard's cells, the far
+    north west since the farmstead moved on 2026-10-06.
+
+  Every wave, walk and shot of the last hundred tasks went unhashed. The
+  suites' own same-seed asserts were the only guard. The fix is the
+  scenario's own intent: it sows spring's crops on spring's date
+  (`Farming.in_season`) and puts its defences up with `SuiteKit.moved`. It
+  now fights night 1: twelve walkers killed, house 100/100, over at 143 s,
+  and two runs give the same number. 0272-0274's "SIM only if a day the
+  determinism scenario fights changed" is now true again: it fights day 1.
+- **`play_nights` had built in the wrong place for five days.** Its `_room`
+  started at the old yard's column 18. Since the farmstead moved to the
+  middle of the farm on 2026-10-06, that is the far west: every defence it
+  bought stood away from the lane, and every night it played was lost with
+  nothing killed. Moved with the farmstead (`SuiteKit.moved`), and then onto
+  the tutorial's ground.
+- **The rest of its build was on a column going south**, so $150 and $300
+  gave the same nights. On the approach they differ, as an income should.
+- **Generators on the approach were refused**, which left the purse short
+  of power: 50-77% on days 11-13.
+- **`tools/balance.py`'s `WAVE_GAP_TICKS` row now matches nothing** (it
+  looks for 15). It already missed `money_per_night`. 0277 re-chooses that
+  table for 1.0.
+
+### Hashes
+
+- **SIM 1167439413 -> 3524359536**, on purpose. The determinism scenario fights
+  day 1's night again (above), with its towers on the farmstead, and that
+  night's waves now come a minute apart.
+- **DATA 630511402 -> 1405228034**, on purpose: spring's template and key
+  nights, `WAVE_GAP_TICKS` and `NIGHT_FILL_TICKS`.
+
+Verify: **PASS**, 61 of 61 in 1210 s, both hashes as the first run recorded them with `--accept` (60 of 61 then; its one failure, input_check's 0090 log case, is fixed above). Perf: a night tick 1237 us of 8333, a swarm's 4862, a path rebuild 11002 of 33333.
+- **Suites:** `headless_check` 18969 asserts (18987 at 0270), `headless_v1` 2730 in 93 groups, `_task_0271_spring_nights` the new one, `input_check` 1269 cases, `input_v1` 735 (118.5 s), `input_v2` 3; `nights --check` passes every date of the year for both seeds.
+
+Files: src/core/game_data.gd, src/core/almanac.gd, src/core/waves.gd,
+src/tools/play_nights.gd, tools/play_nights.py, src/tools/nights.gd,
+src/tools/headless_v1.gd, src/tools/headless_check.gd,
+src/tools/input_check.gd, src/tools/determinism.gd,
+src/tools/autoplay.gd (a comment),
+tools/determinism_sim_hash.txt, tools/determinism_data_hash.txt,
+implementation/prompts/0271-spring-nights.md,
+implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md

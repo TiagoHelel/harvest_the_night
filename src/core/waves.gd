@@ -297,6 +297,14 @@ static func schedule_ticks(one: Dictionary) -> int:
 	return ticks
 
 
+## **The fill line** (task 0271, after 0148): the night's tick a night's last
+## send comes no sooner than - `NIGHT_FILL_TICKS` before the dawn margin - so
+## a night is still coming when it passes, not over a minute in.
+## `schedule_ticks` is held between it and the margin.
+static func fill_line() -> int:
+	return GameData.NIGHT_TICKS - GameData.DAWN_MARGIN_TICKS - GameData.NIGHT_FILL_TICKS
+
+
 ## **How many come out at once** of a kind (task 0248): its `cluster`, one
 ## for every kind that does not say.
 static func cluster_of(kind: StringName) -> int:

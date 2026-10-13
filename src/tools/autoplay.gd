@@ -62,10 +62,10 @@ const POLICIES: Dictionary = {
 		"note": "the farm first, the guns later",
 		"bed_minute": DEFAULT_BED_MINUTE,
 		"gather": [&"wood", &"stone", &"iron"],
-		# **Two towers before anything else**, in every plan. Night two's own
-		# note (`GameData.KEY_NIGHTS[2]`) says "one tower is not enough", and
-		# this plan used to spend its second and third slots on a press and a
-		# kitchen and meet that night with one.
+		# **Two towers before anything else**, in every plan. The old night
+		# two's note said "one tower is not enough" (spring 2 is made from its
+		# template since task 0271), and this plan used to spend its second
+		# and third slots on a press and a kitchen and meet that night with one.
 		# It died on night two on every seed. The design was doing exactly
 		# what it says it does; the plan was not reading it.
 		"build": [&"gun_tower", &"gun_tower", &"press", &"kitchen",

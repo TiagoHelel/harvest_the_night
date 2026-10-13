@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 92
+const GROUPS := 93
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -171,6 +171,7 @@ func _run() -> void:
 	_task_0256_fog_rain()
 	_task_0257_blood_moon()
 	_task_0270_year_records()
+	_task_0271_spring_nights()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -2375,7 +2376,7 @@ func _task_0152_full_moon() -> void:
 		"a Full Moon sends %d%% of every ordinary wave and its bosses as written"
 			% GameData.FULL_MOON_HORDE_PERCENT,
 		"%s; %d boss rows met" % [str(wrong.slice(0, 4)), bosses])
-	expect(is_same(Waves.night_of(6), GameData.KEY_NIGHTS[6])
+	expect(is_same(Waves.night_of(5), GameData.KEY_NIGHTS[5])
 		and not is_same(Waves.night_of(7), GameData.KEY_NIGHTS[7])
 		and not (GameData.KEY_NIGHTS[7] as Dictionary).has("full_moon"),
 		"an ordinary night is still the key night as written, and a Full Moon leaves it untouched")
@@ -11503,7 +11504,9 @@ func _task_0270_year_records() -> void:
 		"%s %s" % [str(unplaced.slice(0, 3)), str(faults.slice(0, 3))])
 
 	# **The template's numbers, on the day**: its hit points within a body of
-	# each kind, its gap, and only the sides that have joined.
+	# each kind, its gap - the least since 0271, a deal short of the fill line
+	# spaced further and then all sent on it - and only the sides that have
+	# joined.
 	var off: Array = []
 	for day in range(1, days + 1):
 		if not Almanac.is_made(day):
@@ -11516,15 +11519,17 @@ func _task_0270_year_records() -> void:
 		var mix := Almanac.mix_on(template, of_season)
 		for kind in GameData.sorted_names(mix.keys()):
 			slack += int((GameData.ENEMIES[kind] as Dictionary)["hp"])
-		if absi(Waves.hit_points_in(plain) - want) >= slack \
-				or int(plain["gap_ticks"]) != Almanac.on_day(template["gap_ticks"], of_season):
+		var least := Almanac.on_day(template["gap_ticks"], of_season)
+		var spaced := int(plain["gap_ticks"]) > least
+		if absi(Waves.hit_points_in(plain) - want) >= slack or int(plain["gap_ticks"]) < least \
+				or spaced and Waves.schedule_ticks(plain) >= Waves.fill_line() + (plain["waves"] as Array).size():
 			off.append([day, Waves.hit_points_in(plain), want, plain["gap_ticks"]])
 		var joined := Almanac.sides_on(template, of_season)
 		for side in Waves.spawns_in(plain):
 			if not joined.has(side):
 				off.append([day, "side", side])
 	expect(off.is_empty(),
-		"a made night has its template's hit points for the day, give or take a body of each kind, its gap, and only the sides joined by then",
+		"a made night has its template's hit points for the day, give or take a body of each kind, its gap or one spaced to the fill line, and only the sides joined by then",
 		str(off.slice(0, 3)))
 
 	# **The seed orders, it never weighs** (the `Endless` contract): every
@@ -11556,14 +11561,14 @@ func _task_0270_year_records() -> void:
 	var rng_before := str(run["rng"])
 	var made_30 := Waves.tonight(run)
 	var key_run := State.create(2701)
-	key_run["day"] = 2
-	key_run["night"] = 2
+	key_run["day"] = 3
+	key_run["night"] = 3
 	expect(str(run["rng"]) == rng_before and Almanac.is_made(30) and is_same(made_30, Waves.tonight(run))
 		and int(made_30.get("for_night", 0)) == 30
 		and str(Almanac.night(2700, 30)) == str(Waves.night_of(30, 2700))
-		and is_same(Waves.tonight(key_run), GameData.KEY_NIGHTS[2])
+		and is_same(Waves.tonight(key_run), GameData.KEY_NIGHTS[3])
 		and not (key_run["wave"] as Dictionary).has("tonight"),
-		"making day 30 leaves state['rng'] untouched and is kept as tonight's, while key night 2 is fought as written",
+		"making day 30 leaves state['rng'] untouched and is kept as tonight's, while key night 3 is fought as written",
 		"%s against %s" % [str(run["rng"]), rng_before])
 
 	# **Nothing before its introduction**: a kind's first day is the first key
@@ -11590,8 +11595,8 @@ func _task_0270_year_records() -> void:
 					early.append([seed_value, day, kind])
 	expect(early.is_empty() and int(introduced.get(&"walker", 0)) == 1
 		and int(introduced.get(&"runner", 0)) == 3 and int(introduced.get(&"tank", 0)) == 5
-		and int(introduced.get(&"breaker", 0)) == 7,
-		"no kind is sent before the day its key night or template introduces it - the walker on 1, the runner on 3, the tank on 5, the breaker on 7",
+		and int(introduced.get(&"breaker", 0)) == 8,
+		"no kind is sent before the day its key night or template introduces it - the walker on 1, the runner on 3, the tank on 5, the breaker on 8",
 		"%s %s" % [str(early.slice(0, 3)), str(introduced)])
 
 	# **Day 1 is the old night 1**, to the byte.
@@ -11618,9 +11623,9 @@ func _task_0270_year_records() -> void:
 	var south_east_key := GameData.KEY_NIGHTS.duplicate(true)
 	(south_east_key[5]["waves"][0] as Array)[2] = 1
 	var on_fifteen := GameData.KEY_NIGHTS.duplicate()
-	on_fifteen[15] = GameData.KEY_NIGHTS[2]
+	on_fifteen[15] = GameData.KEY_NIGHTS[3]
 	var past_year := GameData.KEY_NIGHTS.duplicate()
-	past_year[days + 1] = GameData.KEY_NIGHTS[2]
+	past_year[days + 1] = GameData.KEY_NIGHTS[3]
 	var moonless := GameData.KEY_NIGHTS.duplicate()
 	moonless.erase(21)
 	var falling := GameData.SEASON_NIGHTS.duplicate(true)
@@ -11718,13 +11723,116 @@ func _task_0270_year_records() -> void:
 
 
 ## The year's key nights with day `day`'s pinning `event` - its own record,
-## or a copy of day 2's where it has none (task 0270).
+## or a copy of day 3's where it has none (task 0270; day 2 is made since
+## 0271).
 func _key_event(day: int, event: StringName) -> Dictionary:
 	var keys := GameData.KEY_NIGHTS.duplicate()
-	var one: Dictionary = (GameData.KEY_NIGHTS.get(day, GameData.KEY_NIGHTS[2]) as Dictionary).duplicate(true)
+	var one: Dictionary = (GameData.KEY_NIGHTS.get(day, GameData.KEY_NIGHTS[3]) as Dictionary).duplicate(true)
 	one["event"] = event
 	keys[day] = one
 	return keys
+
+
+## 0271 - spring's fourteen nights. Days 1-14 send only the walker, the
+## runner, the tank, the breaker and the Giant, only from the east; each kind
+## is first sent on the day spring introduces it, and the night after sends
+## more of it; day 7 is the largest of days 1-7 and day 14 of spring, in hit
+## points, the days between growing; the Giant comes on day 14 and on no
+## other; every spring night is still sending at the fill line and all sent
+## before the dawn margin, a made one spaced to it when its deal comes out
+## short; and the tutorial night keeps the house pace.
+func _task_0271_spring_nights() -> void:
+	var days := GameData.SEASON_DAYS
+	var allowed := [&"walker", &"runner", &"tank", &"breaker", &"giant"]
+	var intro := {&"walker": 1, &"runner": 3, &"tank": 5, &"breaker": 8, &"giant": days}
+	var strays: Array = []
+	var firsts: Array = []
+	var bland: Array = []
+	var unfilled: Array = []
+	for seed_value in range(5):
+		var first := {}
+		for day in range(1, days + 1):
+			var one := Waves.night_of(day, seed_value)
+			for row in (one["waves"] as Array):
+				var kind := StringName((row as Array)[0])
+				if not allowed.has(kind) or int((row as Array)[2]) != 0:
+					strays.append([seed_value, day, row])
+				if not first.has(kind):
+					first[kind] = day
+			var sent := Waves.schedule_ticks(one)
+			if sent < Waves.fill_line() or sent + GameData.DAWN_MARGIN_TICKS > GameData.NIGHT_TICKS:
+				unfilled.append([seed_value, day, sent])
+		for kind in GameData.sorted_names(intro.keys()):
+			var day := int(intro[kind])
+			if int(first.get(kind, -1)) != day:
+				firsts.append([seed_value, kind, first.get(kind, -1)])
+			# **The night after is where it bites** (0060's rule): more of it.
+			if day < days and int(Waves.kinds_of(day + 1, seed_value).get(kind, 0)) \
+					<= int(Waves.kinds_of(day, seed_value).get(kind, 0)):
+				bland.append([seed_value, kind])
+	expect(strays.is_empty(),
+		"spring sends only the walker, the runner, the tank, the breaker and the Giant, and only from the east",
+		str(strays.slice(0, 3)))
+	expect(firsts.is_empty() and bland.is_empty(),
+		"each kind is first sent on the day spring introduces it - 1, 3, 5, 8 and the Giant on 14 - and the night after sends more of it",
+		"%s %s" % [str(firsts.slice(0, 3)), str(bland.slice(0, 3))])
+	expect(unfilled.is_empty(),
+		"every spring night is still sending at the fill line, %d s, and all sent %d s before dawn"
+			% [Waves.fill_line() / GameData.SECONDS, GameData.DAWN_MARGIN_TICKS / GameData.SECONDS],
+		str(unfilled.slice(0, 3)))
+
+	# **The plan's rhythm, in hit points as fought**: days 1-6 grow, day 7
+	# is the largest of them, days 8-13 grow again, day 14 is the season's.
+	var hp: Array = [0]
+	for day in range(1, days + 1):
+		hp.append(Waves.hit_points_in(Waves.night_of(day, 0)))
+	var peaks := true
+	for day in range(1, 7):
+		peaks = peaks and int(hp[day]) < int(hp[7])
+	for day in range(1, days):
+		peaks = peaks and int(hp[day]) < int(hp[days])
+	var climbs := true
+	for day in range(2, 7) + range(9, days):
+		climbs = climbs and int(hp[day]) > int(hp[day - 1])
+	expect(peaks and climbs,
+		"day 7 is the largest of days 1-7 and day 14 the largest of spring in hit points, and days 1-6 and 8-13 grow",
+		str(hp))
+
+	# **The Giant on day 14 and nowhere else**, the year round.
+	var giants: Array = []
+	for seed_value in [0, 424242]:
+		for day in range(1, Calendar.year_days() + 1):
+			if Waves.kinds_of(day, seed_value).has(&"giant"):
+				giants.append([seed_value, day])
+	expect(giants == [[0, days], [424242, days]], "the Giant comes on day 14 and on no other day of the year",
+		str(giants))
+
+	# **A made night is spaced to the fill line** (`Almanac`): a deal that
+	# came out in two waves waits longer between them, one wave waits to
+	# begin, and a night already past the line is left as it was.
+	var short := {"note": "x", "opening_ticks": 0, "gap_ticks": 30, "waves": [[&"walker", 3, 0], [&"walker", 3, 0]]}
+	Almanac._fill_the_night(short)
+	var lone := {"note": "x", "opening_ticks": 0, "gap_ticks": 30, "waves": [[&"walker", 3, 0]]}
+	Almanac._fill_the_night(lone)
+	var long := {"note": "x", "opening_ticks": 0, "gap_ticks": Waves.fill_line(), "waves": [[&"walker", 3, 0], [&"walker", 3, 0]]}
+	var before := var_to_str(long)
+	Almanac._fill_the_night(long)
+	expect(Waves.schedule_ticks(short) == Waves.fill_line() and int(short["gap_ticks"]) > 30
+		and Waves.schedule_ticks(lone) == Waves.fill_line() and int(lone["opening_ticks"]) > 0
+		and var_to_str(long) == before
+		and Waves.fill_line() == GameData.NIGHT_TICKS - GameData.DAWN_MARGIN_TICKS - GameData.NIGHT_FILL_TICKS
+		and Waves.fill_line() > 0,
+		"a made night short of the fill line waits longer between its waves, or before its one, and one past it is left alone",
+		"%d %d" % [Waves.schedule_ticks(short), Waves.schedule_ticks(lone)])
+
+	# **The tutorial night keeps the house pace**: no gap of its own, a
+	# minute between its three waves of walkers, and still a handful.
+	var tutorial: Dictionary = GameData.KEY_NIGHTS[1]
+	expect(not tutorial.has("gap_ticks") and Waves.delay_before(1, 1) == GameData.WAVE_GAP_TICKS
+		and Waves.kinds_of(1).keys() == [&"walker"] and Waves.size_of(1) <= 16,
+		"the tutorial night takes WAVE_GAP_TICKS between three waves of walkers, a handful of them",
+		"%d, %s" % [Waves.delay_before(1, 1), str(Waves.kinds_of(1))])
+	_completed += 1
 
 
 ## `GameData.NIGHT_EVENTS` with one value set at `path` - an event, then the
