@@ -14947,6 +14947,11 @@ func _task_0084_day_sounds() -> void:
 	for target in GameData.sorted_names(SfxScript.TARGET_SOUNDS.keys()):
 		wanted.append(SfxScript.TARGET_SOUNDS[target])
 	wanted.append(SfxScript.ANVIL_SOUND)
+	# And 0180's bar, by ear (task 0282): it follows the bite and never
+	# outsounds it.
+	for id in [SfxScript.TICK_SOUND, SfxScript.HIT_SOUND, SfxScript.MISS_SOUND,
+			SfxScript.CATCH_SOUND]:
+		wanted.append(id)
 	for id in wanted:
 		var path := "res://assets/%s.wav" % id
 		expect(ResourceLoader.exists(path),

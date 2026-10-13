@@ -21,7 +21,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 2
+const V2_CASES := 3
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -40,6 +40,7 @@ func _process(delta: float) -> bool:
 func _run() -> void:
 	await _case_0258_event_visuals()
 	await _case_0281_day_moments()
+	await _case_0282_fishing_sounds()
 	_finish()
 
 
@@ -252,6 +253,123 @@ func _case_0281_day_moments() -> void:
 	audio.stop_all()
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0282 - the fishing bar by ear, through the real scene's `Sfx` and `Audio`,
+## the presses through the `interact` intent the bar spends: a press in the
+## green plays the hit, one outside it the miss, the landing the catch - and
+## a legendary landed plays its fanfare and not the catch.
+func _case_0282_fishing_sounds() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	if driver == null or audio == null:
+		expect(audio != null, "the Audio autoload is up for the bar")
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.running = false
+	await frames(2)
+
+	var water := Vector2i(-1, -1)
+	var beside := Vector2i(-1, -1)
+	for cell in Farm.cells_of(state, Farm.Terrain.WATER):
+		var spot := _walkable_neighbour(state, cell as Vector2i)
+		if spot.x >= 0:
+			water = cell
+			beside = spot
+			break
+	expect(water.x >= 0, "there is water to stand beside")
+	if water.x < 0:
+		driver.running = true
+		await close_scene()
+		_completed += 1
+		return
+	var who: Dictionary = state["player"]
+	who["pos"] = [beside.x * Player.SUBTILE + Player.SUBTILE / 2,
+		beside.y * Player.SUBTILE + Player.SUBTILE / 2]
+	who["facing"] = _facing_from(beside, water)
+	await frames(2)
+
+	# **An ordinary fish**: a hit, a miss, then hits until it is landed.
+	audio.stop_all()
+	audio.forget_counts()
+	await _bitten(state, water, &"", 2)
+	await _strike_at(state, true)
+	expect(audio.plays_of(Sfx.HIT_SOUND) == 1 and audio.plays_of(Sfx.MISS_SOUND) == 0,
+		"a press in the green plays the hit",
+		"%d hits, %d misses" % [audio.plays_of(Sfx.HIT_SOUND), audio.plays_of(Sfx.MISS_SOUND)])
+	await _strike_at(state, false)
+	expect(audio.plays_of(Sfx.MISS_SOUND) == 1 and Fishing.is_biting(state),
+		"and one outside it the miss, the fish still on",
+		"%d misses" % audio.plays_of(Sfx.MISS_SOUND))
+	for _guard in 4:
+		if not Fishing.is_biting(state):
+			break
+		await _strike_at(state, true)
+	expect(not Fishing.is_biting(state) and audio.plays_of(Sfx.CATCH_SOUND) == 1
+			and audio.last_played() == Sfx.CATCH_SOUND,
+		"landing it plays the catch, last",
+		"catch %d, last '%s'" % [audio.plays_of(Sfx.CATCH_SOUND), audio.last_played()])
+	expect(audio.plays_of(Sfx.TICK_SOUND) >= 1,
+		"and the marker entering the green ticked on the way",
+		"%d ticks" % audio.plays_of(Sfx.TICK_SOUND))
+
+	# **A legendary**, on a bite crafted for it: the fanfare, and no catch.
+	var legend := &""
+	for id in GameData.sorted_names(GameData.FISH_SPECIES.keys()):
+		if legend == &"" and Fishing.is_legendary(StringName(id)):
+			legend = StringName(id)
+	audio.stop_all()
+	audio.forget_counts()
+	await _bitten(state, water, legend, 1)
+	await _strike_at(state, true)
+	expect(legend != &"" and audio.last_played() == Sfx.LEGEND_SOUND
+			and audio.plays_of(Sfx.CATCH_SOUND) == 0,
+		"a legendary landed plays its fanfare and not the catch",
+		"%s: last '%s', %d catches" % [legend, audio.last_played(), audio.plays_of(Sfx.CATCH_SOUND)])
+
+	driver.running = true
+	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## A cast at `water` whose float goes under on the next tick, `needs` hits
+## to land `species` (`&""` for what the draw gave) and the bar given all the
+## time the checks take.
+func _bitten(state: Dictionary, water: Vector2i, species: StringName, needs: int) -> void:
+	Fishing.give_up(state)
+	Fishing.begin(state, water)
+	var line := Fishing.cast_of(state)
+	if species != &"":
+		line["species"] = species
+	line["needs"] = needs
+	line["left"] = 1
+	Sim.advance(state, 1)
+	(Fishing.cast_of(state) as Dictionary)["left"] = 100000
+	await frames(2)
+
+
+## Play the bar on until the marker is over the green on a sweep not yet
+## scored (`inside`), or off the green, then press once through the intent.
+func _strike_at(state: Dictionary, inside: bool) -> void:
+	for i in 4000:
+		var line := Fishing.cast_of(state)
+		if line.is_empty():
+			return
+		var ready := not Fishing.in_zone(line)
+		if inside:
+			ready = Fishing.in_zone(line) and int(line.get("struck", -1)) != Fishing.pass_of(line)
+		if ready:
+			break
+		Sim.advance(state, 1)
+		if i % 3 == 0:
+			await frames(1)
+	(state["intent"] as Dictionary)["interact"] = true
+	Sim.advance(state, 1)
+	await frames(2)
 
 
 ## A frame for the view to see the phase it is in now, the light's change

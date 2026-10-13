@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-240 tarefas em 11 dias, de  a 2026-10-13. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+241 tarefas em 11 dias, de  a 2026-10-13. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -283,6 +283,7 @@ voz alta.
 | 0276 | The autoplayer plays a whole year | 2026-10-13 |
 | 0277 | Balancing the year | 2026-10-13 |
 | 0281 | The new day's sounds | 2026-10-13 |
+| 0282 | The sounds of the fishing minigame | 2026-10-13 |
 
 ## Toda vez que o jogo mudou por baixo
 

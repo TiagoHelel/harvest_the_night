@@ -29924,3 +29924,89 @@ Notes:
   them.
 - The animal calls are 0286's and the dog's bark 0283's, as the prompt
   says.
+
+## 0282 - The sounds of the fishing minigame - done 2026-10-13
+
+What changed: 0180's bar can be played by ear. View only: neither hash
+moved, and no state key was added to be heard.
+
+- **`tools/gen_sfx.py`** gains four recipes. All are furniture in
+  `DAY_SOUNDS`, every one quieter and shorter than the bite, which opens the
+  window and stays the loudest and longest day sound:
+  - `fish_tick`: a small dry tick, at its own `TICK_PEAK` (0.35), under the
+    rest, since it comes round once a sweep;
+  - `fish_hit`: a plucked tug that rises;
+  - `fish_miss`: a slack plunk that falls;
+  - `fish_catch`: a wet slap, a flop and two rising notes.
+- **`tools/gen_music.py`** gains `fanfare`, a `PIECES` entry at `STING_PEAK`
+  beside `sting`, on the Music bus. It plays the whole `MOTIF` in the day's
+  voice, an octave up and four times the farm's pace, then holds the tonic
+  under its last note in the night's bell. It runs three seconds, does not
+  loop, and is the year's tune answering the one catch a run gets of each
+  legendary.
+- **`src/ui/sfx.gd`** reads the bar off the state, as it reads the bite:
+  - **The tick marks the marker entering the green**, not its turn at an end
+    of the bar. The green is the one thing a press is judged against, so the
+    tick is the cue to press; a tick at each turn would be a metronome that
+    says nothing about the fish. One per crossing, on the edge.
+  - **Hit or miss** comes from the press the line keeps (`last`, written by
+    `Fishing.strike`). An assisted press writes the same edge, so it sounds
+    like any other hit.
+  - **The catch** is the cast ending with the run's `fish_book` one fish
+    up. `reel` and `give_up` replace the line's dictionary rather than
+    emptying it, so `Sfx` keeps the one it was watching and still reads the
+    last press of a cast that has just ended. The press that lands the fish
+    is heard as the catch, not as a hit too.
+  - **A legendary** (0182, `Fishing.is_legendary` on the landed species)
+    plays `music/fanfare` through `Audio.play` instead of the catch.
+- **`sfx/reel` is kept, as the line coming in.** `reel` is still in
+  `Interact.DAY_ONLY` (0180 left it there), so `_task_0084_day_sounds` wants
+  its sound. The bar spends the press before `Player` sees it, so the verb's
+  own cycle never finishes, and the file would have been played by nothing.
+  It now plays at every landing, under the catch or the fanfare.
+- **Tests**:
+  - `_task_0084_day_sounds` measures the four as furniture;
+  - `headless_v1` gains `_task_0282_fishing_sounds` (101 groups):
+    - the four keep the rule against the bite;
+    - the fanfare is in `assets/music/`, under five seconds, at most
+      `STING_PEAK`, its recipe reads `MOTIF` and it is in `PIECES`;
+    - the reel verb and its file stay;
+  - `input_v2` gains `_case_0282_fishing_sounds` (3 cases). Through the
+    `interact` intent the bar spends:
+    - a press in the green plays the hit, one outside it the miss, and
+      landing plays the catch last, with the green's tick heard on the way;
+    - a crafted legendary bite landed plays the fanfare
+      (`Audio.last_played()`) and no catch;
+  - `audio.gd`'s note that every other music file is long now names the
+    fanfare.
+
+`python tools/gen_sfx.py --report`, the new sounds (the bite for scale):
+
+```text
+  sound          seconds   peak    rms  bright
+  bite             0.460   0.85  0.165    0.49
+  fish_tick        0.040   0.35  0.061    0.77
+  fish_hit         0.140   0.55  0.125    0.19
+  fish_miss        0.180   0.55  0.137    0.07
+  fish_catch       0.410   0.55  0.129    0.51
+```
+
+`python tools/gen_music.py --report`:
+
+```text
+  piece            seconds   peak    rms    seam
+  sting               1.15   0.50  0.132    0.00
+  fanfare             3.00   0.50  0.086    0.00
+```
+
+Files: tools/gen_sfx.py, tools/gen_music.py, assets/sfx/fish_*.wav (+ .import),
+assets/music/fanfare.wav (+ .import), src/ui/sfx.gd, src/app/audio.gd
+(comment), src/tools/headless_check.gd, src/tools/headless_v1.gd,
+src/tools/input_v2.gd
+Verify: PASS, 61 checks in 1,021 s; 19,432 headless / 2,777 headless_v1 (101 groups) / 1,269 + 735 + 17 input cases; sfx 52 sounds (29 day, 6 moments, 14 night, 3 menu), music 5 pieces; sim 3524359536 and data 1211606022 unchanged
+Notes:
+- **The case holds a cast's bar open** (`left` set high) and sets its
+  `needs`, so it plays the same on every draw: a test fixture, not a rule.
+- **The tick marks every crossing of the green**, a sweep that already
+  scored included. A second press on such a sweep counts for nothing and
+  makes no sound, because `strike` returns before writing `last`.

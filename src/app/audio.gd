@@ -56,8 +56,10 @@ const VOLUME_KEYS := {
 ##
 ## **On the bus being adjusted**, which is the requirement: a sound's bus is
 ## the folder it lives in, so a music level can only be auditioned by
-## something in `assets/music/` - and everything else in there is at least
-## nineteen seconds long, which is why `music/sting` exists.
+## something in `assets/music/` - and the pieces in there are at least
+## nineteen seconds long, which is why `music/sting` exists. (Task 0282's
+## `music/fanfare` is short too, but it is a cue for a legendary catch, not a
+## level's test.)
 ##
 ## Master is the exception and cannot be otherwise: nothing plays on Master
 ## directly, everything sends to it. Its test is a sound passing through it,

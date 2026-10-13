@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 100
+const GROUPS := 101
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -179,6 +179,7 @@ func _run() -> void:
 	_task_0276_year_autoplay()
 	_task_0277_year_balance()
 	_task_0281_day_sounds()
+	_task_0282_fishing_sounds()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -12254,6 +12255,42 @@ func _task_0281_day_sounds() -> void:
 			shared.append("%s and %s: %s" % [seen[id], verb, id])
 		seen[id] = verb
 	expect(shared.is_empty(), "no two day verbs share a sound", str(shared))
+	_completed += 1
+
+
+## **Task 0282: the fishing bar, by ear.** The tick, the hit, the miss and the
+## catch are files and furniture against the bite, which opens the window and
+## stays the loudest and longest day sound. The legendary's fanfare is music:
+## in `assets/music/`, under five seconds, at most `STING_PEAK`, and built on
+## `MOTIF`. The reel is kept, as the line coming in.
+func _task_0282_fishing_sounds() -> void:
+	var bite := _wav_measure("res://assets/%s.wav" % Sfx.BITE_SOUND)
+	var wrong: Array = []
+	for id in [Sfx.TICK_SOUND, Sfx.HIT_SOUND, Sfx.MISS_SOUND, Sfx.CATCH_SOUND]:
+		var one := _wav_measure("res://assets/%s.wav" % id)
+		if one.is_empty() or float(one["peak"]) > 0.56 \
+				or float(one["peak"]) >= float(bite.get("peak", 0.0)) \
+				or float(one["seconds"]) >= float(bite.get("seconds", 0.0)):
+			wrong.append("%s %s" % [id, str(one)])
+	expect(wrong.is_empty() and not bite.is_empty(),
+		"the bar's tick, hit, miss and catch are files, at most SOFT_PEAK, quieter and shorter than the bite",
+		str(wrong))
+
+	var music := FileAccess.get_file_as_string("res://tools/gen_music.py")
+	var cue := _wav_measure("res://assets/%s.wav" % Sfx.LEGEND_SOUND)
+	var sting_peak := _py_number(music, "STING_PEAK")
+	expect(String(Sfx.LEGEND_SOUND).begins_with("music/") and not cue.is_empty()
+			and float(cue["seconds"]) < 5.0 and float(cue["peak"]) <= sting_peak + 0.001,
+		"the legendary's fanfare is a cue in assets/music, under five seconds and at most STING_PEAK",
+		"%s at %.2f" % [str(cue), sting_peak])
+	var recipe := ""
+	if music.contains("def fanfare():"):
+		recipe = music.get_slice("def fanfare():", 1).get_slice("\ndef ", 0).get_slice("\n## ", 0)
+	expect(recipe.contains("MOTIF") and music.contains("(\"fanfare\", fanfare, STING_PEAK)"),
+		"built on the year's MOTIF, and a PIECES entry so --check knows it")
+	expect(Interact.DAY_ONLY.has(&"reel") and Sfx.VERB_SOUNDS.get(&"reel", &"") == &"sfx/reel"
+			and FileAccess.file_exists("res://assets/sfx/reel.wav"),
+		"the reel verb is still a day verb, so its sound stays - played as the line comes in")
 	_completed += 1
 
 

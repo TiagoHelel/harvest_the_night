@@ -328,12 +328,43 @@ def sting():
     return track
 
 
-## The four files, and what each may peak at.
+def fanfare():
+    """**A legendary out of the water** (task 0282): the year's tune answering
+    the catch.
+
+    The whole `MOTIF` in the day's voice, an octave up and four times the
+    farm's pace, then the tonic held under its last note in the night's bell
+    - the two pieces' voices meeting on the one catch a run gets of each.
+    Three seconds; it does not loop, and is music rather than furniture
+    because it is a tune: it plays on the Music bus beside `sting`.
+    """
+    step = beat_samples() // 4
+    hold = int(RATE * 1.4)
+    length = step * len(MOTIF) + hold
+    track = [0.0] * length
+    for i, degree in enumerate(MOTIF):
+        note = pluck(hz_of(MAJOR, degree, 1), 600, 220.0, 3200.0)
+        at = i * step
+        for k, v in enumerate(note):
+            if at + k < length:
+                track[at + k] += v * 0.8
+    end = step * (len(MOTIF) - 1)
+    for degree in (0, 2, 4):
+        chord = bell(hz_of(MAJOR, degree, 0), 1400, 600.0)
+        for k, v in enumerate(chord):
+            if end + k < length:
+                track[end + k] += v * 0.35
+    return sfx.fade_out(track, 60.0)
+
+
+## The files, and what each may peak at.
 PIECES = [
     ("farm", farm, MUSIC_PEAK),
     ("night", night, MUSIC_PEAK),
     ("night_intensity", intensity, INTENSITY_PEAK),
     ("sting", sting, STING_PEAK),
+    # Task 0282: the legendary catch's cue, short like the sting.
+    ("fanfare", fanfare, STING_PEAK),
 ]
 
 

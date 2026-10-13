@@ -94,6 +94,22 @@ const SELL_SOUND := &"sfx/sell"
 ## short and soft, under the bite.
 const ANVIL_SOUND := &"sfx/anvil"
 
+## **0180's bar, by ear** (task 0282), all furniture under the bite:
+## - the tick as the marker **enters the green** - the moment to press. The
+##   turn at an end of the bar would be a metronome that says nothing about
+##   the fish; the green is the one thing a press is judged against;
+## - a hit or a miss off the press the line keeps (`last`, which
+##   `Fishing.strike` writes for an assisted press as for any other);
+## - the catch when the cast ends with a species landed - under the reel,
+##   `VERB_SOUNDS`' `sfx/reel`, kept as the line coming in. A legendary
+##   (0182) plays `LEGEND_SOUND` instead of the catch: a cue on the Music bus,
+##   the year's motif answering the one catch a run gets of each.
+const TICK_SOUND := &"sfx/fish_tick"
+const HIT_SOUND := &"sfx/fish_hit"
+const MISS_SOUND := &"sfx/fish_miss"
+const CATCH_SOUND := &"sfx/fish_catch"
+const LEGEND_SOUND := &"music/fanfare"
+
 ## **The day's moments** (task 0281), heard from the state: the bed and the
 ## floor at 02:00 as the day ends, the stretch at 06:00, ONE coins sound when
 ## the bin is paid at dawn, the peddler's bell as his hours begin and end, and
@@ -198,6 +214,15 @@ var _was_biting := false
 var _watered := -1
 var _money := -1
 
+## The bar's memory (task 0282): the cast being watched - the state's own
+## dictionary, which `Fishing.reel` and `give_up` replace rather than empty,
+## so a cast that just ended still holds its last press - that press, whether
+## the marker was over the green, and how many fish the run's book holds.
+var _line: Dictionary = {}
+var _pressed: Array = []
+var _in_green := false
+var _landed := -1
+
 ## The moments' memory (task 0281): the phase last frame, what the bin held,
 ## whether the stall kept hours, and the tools pending and their tiers.
 var _phase := -1
@@ -229,6 +254,7 @@ func show_state(state: Dictionary) -> void:
 	_was_biting = false
 	_watered = -1
 	_money = -1
+	_forget_the_bar()
 	# Nor a bed, a payout or a bell for the frame a saved farm arrives on.
 	_phase = -1
 	_in_bin = -1
@@ -267,6 +293,7 @@ func _process(delta: float) -> void:
 		_watered = -1
 		_money = -1
 		_stall = -1
+		_forget_the_bar()
 		_watch_night(delta)
 		return
 	# And the night's memory goes the other way, so that a tower which fired
@@ -350,6 +377,55 @@ func _watch_fishing() -> void:
 	if biting and not _was_biting:
 		_ask(BITE_SOUND)
 	_was_biting = biting
+	_watch_the_bar()
+
+
+func _forget_the_bar() -> void:
+	_line = {}
+	_pressed = []
+	_in_green = false
+	_landed = -1
+
+
+## **The bar** (task 0282): the tick, the hit or the miss, and the catch -
+## read off the state the way the bite is, no key added to be heard.
+func _watch_the_bar() -> void:
+	var line := Fishing.cast_of(_state)
+	var landed := fish_landed(_state)
+	if not _line.is_empty():
+		var press: Array = _line.get("last", [])
+		var ended := not is_same(line, _line)
+		if ended and _landed >= 0 and landed > _landed:
+			# The press that landed it is a hit, and the catch says so.
+			_land()
+		elif not press.is_empty() and press != _pressed:
+			_ask(HIT_SOUND if bool(press[1]) else MISS_SOUND)
+	var green := Fishing.is_biting(_state) and Fishing.in_zone(line)
+	if green and not _in_green:
+		_ask(TICK_SOUND)
+	_in_green = green
+	_line = line
+	_pressed = (line.get("last", []) as Array).duplicate()
+	_landed = landed
+
+
+## The line coming in, and the catch - or, for a legendary, its fanfare.
+func _land() -> void:
+	_ask(VERB_SOUNDS[&"reel"])
+	if Fishing.is_legendary(StringName(Fishing.last_catch(_state).get("species", &""))):
+		_ask_at(LEGEND_SOUND, AudioScript.NOWHERE, 1)
+	else:
+		_ask(CATCH_SOUND)
+
+
+## How many fish the run's book holds: it goes up by one on every landing,
+## whatever was landed before.
+static func fish_landed(state: Dictionary) -> int:
+	var total := 0
+	var book := Fishing.book_of(state)
+	for species in book:        # a sum, so the order cannot matter
+		total += int((book[species] as Dictionary).get("caught", 0))
+	return total
 
 
 ## A sale: money arriving while the stall is open. Buying spends rather than

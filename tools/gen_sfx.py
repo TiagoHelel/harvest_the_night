@@ -89,6 +89,11 @@ GIANT_PEAK = 0.88
 ## well under the alarm, which `headless_v1` asserts.
 MOMENT_PEAK = 0.60
 
+## **What the fishing bar's tick may peak at** (task 0282). It comes round
+## once a sweep while the bar runs, so it sits under the rest of the
+## furniture: a cue, not an event.
+TICK_PEAK = 0.35
+
 ## What a menu sound may peak at: the quietest tier in the game. These are heard
 ## every time a selection moves, and a menu that clicks louder than an axe on a
 ## tree is a menu somebody turns the sound off for.
@@ -493,6 +498,46 @@ def anvil():
                gain(low, 0.2))
 
 
+# ------------------------------------------------- the bar (task 0282)
+#
+# 0180's minigame, by ear. All furniture: the bite opens the window and these
+# only follow it, so it stays the loudest and longest day sound.
+
+def fish_tick():
+    """The marker entering the green: a small dry tick - the moment to press.
+    The cue is the green, not the turn at an end of the bar, which would be a
+    metronome that says nothing about the fish."""
+    click = decay(highpass(noise(8701, 40), 2400), 4.0, 0.5)
+    pip = decay(tone(1760.0, 40), 8.0, 0.5)
+    return mix(gain(click, 0.6), gain(pip, 0.5))
+
+
+def fish_hit():
+    """A press in the green: the line goes taut - a plucked tug that rises."""
+    twang = decay(sweep(330.0, 560.0, 140, 0.5), 50.0, 1.5)
+    over = decay(sweep(660.0, 1120.0, 140, 0.5), 30.0, 1.5)
+    wet = decay(highpass(noise(8702, 90), 1800), 18.0, 1.0)
+    return mix(gain(twang, 0.6), gain(over, 0.25), gain(wet, 0.3))
+
+
+def fish_miss():
+    """A press outside it: slack line, a dull plunk that falls."""
+    plunk = decay(sweep(300.0, 150.0, 180, 0.6), 50.0, 2.0)
+    slack = decay(lowpass(noise(8703, 140), 900), 30.0, 3.0)
+    return mix(gain(plunk, 0.55), gain(slack, 0.45))
+
+
+def fish_catch():
+    """The fish out of the water and in the hand: a wet slap, a flop, and two
+    rising notes - the reward, as the harvest's one note is."""
+    slap = decay(lowpass(noise(8704, 120), 2400), 16.0, 1.0)
+    flop = at(110, decay(lowpass(noise(8705, 100), 1600), 20.0, 1.0))
+    low = at(60, decay(tone(784.0, 200), 70.0, 4.0))
+    high = at(170, decay(tone(1175.0, 240), 80.0, 4.0))
+    return mix(gain(slap, 0.6), gain(flop, 0.45), gain(low, 0.3),
+               gain(high, 0.32))
+
+
 # ------------------------------------------------- the moments (task 0281)
 #
 # Once or twice a day each, so they are allowed to be longer than the
@@ -741,6 +786,11 @@ DAY_SOUNDS = [
     ("loom", loom, SOFT_PEAK),
     ("mill", mill, SOFT_PEAK),
     ("anvil", anvil, SOFT_PEAK),
+    # Task 0282: the fishing bar, by ear.
+    ("fish_tick", fish_tick, TICK_PEAK),
+    ("fish_hit", fish_hit, SOFT_PEAK),
+    ("fish_miss", fish_miss, SOFT_PEAK),
+    ("fish_catch", fish_catch, SOFT_PEAK),
 ]
 
 ## **The day's moments** (task 0281): once or twice a day each, so not
