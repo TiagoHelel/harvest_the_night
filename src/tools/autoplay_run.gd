@@ -3,6 +3,7 @@ extends SceneTree
 ## Run the autoplayer over many seeds and report.
 ##
 ##     python tools/autoplay.py [runs] [--nights=1]
+##     python tools/autoplay.py --year [seeds]
 ##
 ## Four policies, `runs / 4` seeds each, ten nights a run. It prints which
 ## night kills each one first, how far they get, and **whether one of them
@@ -13,12 +14,37 @@ extends SceneTree
 ## `nights:` list is still the first night each run lost (or ten), which is
 ## what `tools/balance.py` reads its win rate from, and `won all` counts the
 ## nights won over the whole run. Under each policy, how its nights ended.
+##
+## ## A year, and the `RUN` line (task 0276)
+##
+## **Every run prints one machine-readable `RUN` line** beside today's table:
+##
+##     RUN policy=<p> seed=<s> days=<n> nights=<played> losses=<a,b,c,d>
+##         repeats=<a,b,c,d> money=<a,b,c,d> essence=<a,b,c,d> capped=<0|1>
+##         over=<0|1> walked=<tiles> ms=<wall time>
+##
+## one line, the four numbers a season each: the nights lost, the boss nights
+## the boss lived through (each fought again, unless it was the one the cap
+## stopped on), and the money and essence at the season's first morning.
+## `tools/balance.py` keeps reading today's table until task 0277 moves its
+## parser onto `RUN`. **`--year`** plays every date of the year instead of
+## the first ten, and **`--policy=<name>`** and **`--seeds=a,b,...`** narrow
+## a process to its share - `tools/autoplay.py --year` runs the shares in
+## parallel processes, since the data does not change inside a run set, and
+## prints the year's table from their `RUN` lines.
 
 ## How many runs in total when nobody says otherwise. Four policies, so
 ## twenty-five seeds each.
 const RUNS := 100
 
+## **A year's seeds a policy** when nobody says (task 0276): 0277's "at least
+## eight seeds".
+const YEAR_SEEDS := 8
+
 var _nights_wanted := Autoplay.DEFAULT_NIGHTS
+var _year := false
+var _only := &""
+var _seeds: Array = []
 
 
 func _init() -> void:
@@ -34,8 +60,33 @@ func _init() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if str(arg).begins_with("--nights="):
 			_nights_wanted = maxi(int(str(arg).get_slice("=", 1)), 1)
+		if str(arg) == "--year":
+			_year = true
+			_nights_wanted = Calendar.year_days()
+		if str(arg).begins_with("--policy="):
+			_only = StringName(str(arg).get_slice("=", 1))
+		if str(arg).begins_with("--seeds="):
+			for one in str(arg).get_slice("=", 1).split(",", false):
+				_seeds.append(int(one))
 		if str(arg).is_valid_int():
 			wanted = maxi(int(str(arg)), 4)
+
+	# **A year's share** (task 0276): the named policy, or every one, on the
+	# named seeds, or the first ones a year run takes - `RUN` lines and each
+	# run's wall time, and nothing else to parse.
+	if _year:
+		var policies_now: Array = [_only] if _only != &"" else Autoplay.names()
+		# A count given to a year is its seeds a policy: eight unless said.
+		var seeds_now: Array = _seeds
+		if seeds_now.is_empty():
+			seeds_now = _first_seeds(wanted if wanted != RUNS else YEAR_SEEDS)
+		for name in policies_now:
+			for seed_value in seeds_now:
+				var started_run := Time.get_ticks_msec()
+				var out := Autoplay.play(int(seed_value), StringName(name), _nights_wanted)
+				print(_run_line(out, Time.get_ticks_msec() - started_run))
+		quit()
+		return
 
 	var policies := Autoplay.names()
 	var each := maxi(wanted / policies.size(), 1)
@@ -89,7 +140,9 @@ func _sweep(name: StringName, runs: int) -> Dictionary:
 	var walked := 0
 	var played := 0
 	for i in runs:
+		var started_run := Time.get_ticks_msec()
 		var out := Autoplay.play(9000 + i * 7, name, _nights_wanted)
+		print(_run_line(out, Time.get_ticks_msec() - started_run))
 		if _nights_wanted == 1:
 			var day: Dictionary = (out["nights"] as Array)[0]
 			print("  %s seed %d: day %d ticks, earned %d, net money %+d, night %s"
@@ -133,6 +186,35 @@ func _sweep(name: StringName, runs: int) -> Dictionary:
 		"ends": ends,
 		"mean_walked": float(walked) / float(maxi(played, 1)),
 	}
+
+
+## The seeds a run set takes when none are named: 9000 and every seventh
+## after it, as the sweep always has.
+static func _first_seeds(n: int) -> Array:
+	var out: Array = []
+	for i in n:
+		out.append(9000 + i * 7)
+	return out
+
+
+## **One run as a `RUN` line** (task 0276), every number a season each in
+## `SEASONS` order. A season the run never reached reads -1 for its money and
+## essence.
+static func _run_line(out: Dictionary, ms: int) -> String:
+	var losses: Array = []
+	var repeats: Array = []
+	var money: Array = []
+	var essence: Array = []
+	for season in (out["seasons"] as Array):
+		var one: Dictionary = season
+		losses.append(str(int(one["losses"])))
+		repeats.append(str(int(one["repeats"])))
+		money.append(str(int(one["money"])))
+		essence.append(str(int(one["essence"])))
+	return "RUN policy=%s seed=%d days=%d nights=%d losses=%s repeats=%s money=%s essence=%s capped=%d over=%d walked=%d ms=%d" % [
+		out["policy"], int(out["seed"]), (out["nights"] as Array).back()["date"] if not (out["nights"] as Array).is_empty() else 0,
+		(out["nights"] as Array).size(), ",".join(losses), ",".join(repeats), ",".join(money), ",".join(essence),
+		1 if bool(out["capped"]) else 0, 1 if bool(out["year_over"]) else 0, int(out["walked"]), ms]
 
 
 ## **The dominant-strategy alarm.** One policy winning everything while the

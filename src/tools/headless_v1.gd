@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 97
+const GROUPS := 98
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -176,6 +176,7 @@ func _run() -> void:
 	_task_0273_autumn_nights()
 	_task_0274_winter_nights()
 	_task_0275_perf_year()
+	_task_0276_year_autoplay()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -12050,6 +12051,78 @@ func _task_0275_perf_year() -> void:
 		and tool_text.contains("TICK_BUDGET_US = 8333") and tool_text.contains("PATH_BUDGET_US = 33333"),
 		"the rebuild asks every field in Pathing.FIELDS, the case counts its defences and its boss, a winter night is timed end to end, and the budgets are 8333 and 33333 us")
 	_completed += 1
+
+
+## **The autoplayer plays a whole year** (task 0276), checked on a slice: from
+## a prepared mid-summer farm the `balanced` policy plays one day and one night
+## twice on one seed, and gets the same night both times. That day it landed
+## a fish through the bar's presses, filled the shipping bin and collected
+## from the coop's door; that night it put a defence down by the cursor in the
+## build step and fired a power. Timed, printed, and under `SLICE_BUDGET_MS`:
+## over it, the slice's day shrinks - bed as soon as it is done - and the cap
+## does not move.
+const SLICE_BUDGET_MS := 15000
+func _task_0276_year_autoplay() -> void:
+	var started := Time.get_ticks_msec()
+	var policy: Dictionary = (Autoplay.POLICIES[&"balanced"] as Dictionary).duplicate(true)
+	policy["bed_minute"] = 10 * 60
+	var rows: Array = []
+	for _twice in 2:
+		var state := _mid_summer_farm()
+		rows.append(Autoplay._one_night(state, policy))
+	var once: Dictionary = rows[0]
+	var did: Dictionary = once["did"]
+	var spent := Time.get_ticks_msec() - started
+	print("  0276: a mid-summer day and night, twice, in %d ms: %s" % [spent, str(did)])
+	expect(var_to_str(rows[0]) == var_to_str(rows[1]),
+		"the balanced policy plays the same mid-summer day and night twice on one seed",
+		"%s against %s" % [str(rows[0]), str(rows[1])])
+	expect(int(did.get(&"fish", 0)) >= 1 and int(did.get(&"shipped", 0)) >= 1
+		and int(did.get(&"collected", 0)) >= 1,
+		"its day landed a fish through the bar, filled the shipping bin and collected from the coop",
+		str(did))
+	var fired := 0
+	for key in did:
+		if String(key).begins_with("power_"):
+			fired += int(did[key])
+	expect(int(did.get(&"placed", 0)) >= 1 and fired >= 1,
+		"its night put a defence down by the cursor in the build step and fired a power",
+		str(did))
+	expect(int(once["steps"]) > 0 and spent < SLICE_BUDGET_MS,
+		"it walked, and the slice took under %d ms" % SLICE_BUDGET_MS,
+		"%d steps, %d ms" % [int(once["steps"]), spent])
+	var plays := FileAccess.get_file_as_string("res://src/tools/play_nights.gd")
+	expect(plays.contains("const DEFAULT_DAYS := %d" % Calendar.year_days())
+		and plays.contains("const BOSS_REPEATS := "),
+		"play_nights plays the whole year by default and fights a boss night again")
+	_completed += 1
+
+
+## **A mid-summer farm** (task 0276): Summer 6 of a run, every night before it
+## won and the lessons behind it, a coop on its site with four hens whose eggs
+## wait at the door, and a purse - money, wood, iron and stone - for the
+## build step's first tower.
+func _mid_summer_farm() -> Dictionary:
+	var state := State.create(27600)
+	state["day"] = GameData.SEASON_DAYS + 6
+	state["nights_won"] = GameData.SEASON_DAYS + 5
+	var lessons: Array = []
+	for step in Tutorial.steps():
+		lessons.append(StringName((step as Dictionary)["id"]))
+	((state["tutorial"] as Dictionary)["done"] as Array).assign(lessons)
+	Resources.gain(state, {GameData.MONEY: 400, GameData.WOOD: 200, GameData.IRON: 100,
+		GameData.STONE: 200})
+	var room: Array = GameData.MAP_SITES[&"barn"]
+	var site := Vector2i(int(room[0]), int(room[1]))
+	var coop := Vector2i(-1, -1)
+	for y in range(site.y, site.y + 6):
+		for x in range(site.x, site.x + 14):
+			if coop.x < 0 and Building.can_place(state, &"coop", Vector2i(x, y)):
+				coop = Vector2i(x, y)
+	if coop.x >= 0 and Building.place(state, &"coop", coop):
+		for _i in 4:
+			Livestock.house(state, coop, &"chicken", 1)
+	return state
 
 
 ## How many bodies `one` sends from `side`.

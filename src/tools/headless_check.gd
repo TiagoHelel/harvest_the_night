@@ -12698,6 +12698,27 @@ func _task_0067_autoplay() -> void:
 		for res in (policy["gather"] as Array):
 			expect(GameData.RESOURCES.has(StringName(res)),
 				"%s gathers a real resource: %s" % [name, res])
+		# **Task 0276: a day plan, a night plan and what it buys.** Its
+		# earners are ones the robot knows; its powers are powers; its animals
+		# and tools are on the farm's tables.
+		var plan: Array = policy.get("day", [])
+		var known := not plan.is_empty()
+		for earner in plan:
+			known = known and Autoplay.EARNERS.has(StringName(earner))
+		expect(known, "%s has a day plan of earners the robot knows" % name, str(plan))
+		var night: Dictionary = policy.get("night", {})
+		var powers: Dictionary = night.get("powers", {})
+		var real := night.has("repair") and night.has("upgrade") and night.has("during_waves")
+		for id in powers:
+			real = real and Ability.is_power(StringName(id))
+		expect(real, "%s has a night plan, and fires powers that exist" % name, str(night))
+		var buys: Dictionary = policy.get("buys", {})
+		var stocked := buys.has("house")
+		for kind in (buys.get("animals", []) as Array):
+			stocked = stocked and GameData.LIVESTOCK.has(StringName(kind))
+		for tool in (buys.get("tools", []) as Array):
+			stocked = stocked and GameData.TOOLS.has(StringName(tool))
+		expect(stocked, "%s buys animals and tools the farm has" % name, str(buys))
 
 	# **The same seed is the same run.** An instrument that cannot be
 	# repeated measures nothing. One day and one night per policy since task

@@ -4,7 +4,8 @@
     python tools/play_nights.py [from] [to]
 
 `python tools/play_nights.py 15 28` plays summer (task 0271); one argument
-plays from day 1 to it, and none plays spring. Each date is bought from a
+plays from day 1 to it, and none plays the whole year (task 0276), a boss
+night fought again while its boss is not down. Each date is bought from a
 purse that starts where a run would be, with only what its season has
 unlocked.
 

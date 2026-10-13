@@ -29512,3 +29512,177 @@ Files: src/tools/perf_check.gd, tools/perf.py, tools/perf_baseline.txt,
 tools/verify.py (a docstring), src/tools/headless_v1.gd,
 implementation/prompts/0275-perf-year.md,
 implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
+
+## 0276 - The autoplayer plays a whole year - done 2026-10-13
+
+What changed: the robot plays 1.0, through a player's doors, over the
+calendar:
+- **On foot.** Every step is the `move` intent, a tick at a time, along the
+  shortest road over walkable ground, so `PLAYER_SPEED` decides what a trip
+  costs. The tiles are counted, 600-1,200 a day.
+- **The verbs through `interact`**, facing what he works: till, plant,
+  water, harvest, chop, mine, collect at a coop's door, dig a pig's spot.
+  The can fills standing by the well. **The fish are landed through the
+  bar**: the cast, then a press on each tick the marker is over the green
+  and its sweep has not scored, as a player watching it does.
+- **The panels through their buttons**, once the verb has opened them:
+  - packets, animals and tool upgrades from the peddler in his hours;
+  - the day's goods into the shipping bin at evening (crops, fish, eggs,
+    the machines' work, a machine's next batch kept back);
+  - recipes into a station's queue;
+  - the tree, and the house's next tier at the workshop.
+- **The night's loot** is picked up underfoot each morning.
+- **The cursor at night**: the build step mends, puts back what the nights
+  took, places and upgrades. During the waves it mends and places too, and
+  fires the powers through `ability_cell` with `ability` (the flare) or
+  `power` (the rest).
+- **The calendar**: `play(seed, policy, days)` plays dates. A boss night
+  the boss did not die on is played again on the same date. The rules hold
+  it, and the robot stops after `BOSS_REPEAT_CAP` (6) repeats and says so.
+- **Each policy** keeps its plan and its character and gains:
+  - a day plan (its earners in order, a turn each);
+  - what it buys;
+  - a night plan (mend, upgrade, build during the waves, and each power's
+    trigger);
+  - its bedtime.
+
+  `balanced` is declared the average player 0277 balances against.
+
+Tools only: neither hash moved.
+
+### The policies
+
+| policy | day plan, in order | buys | night plan |
+|---|---|---|---|
+| towers | mining, chopping, crops, fishing | pickaxe and axe tiers | mend, upgrade, build during the waves; flare at a crowd, bell at the door, dog at the nearest, emergency repair at the most hurt |
+| walls | mining, chopping, crops, fishing | pickaxe and axe tiers, the house | the same; buys `a farm bell` on its branch |
+| economy | crops, animals, machines, fishing, mining, chopping | chickens, cows and sheep; can, hoe and rod tiers; the house | mend; the flare at a crowd |
+| balanced | crops, fishing, animals, machines, mining, chopping | chickens; can, pickaxe and rod tiers; the house | mend, upgrade, build during the waves; flare, bell and emergency repair |
+
+`economy`'s plan adds a coop, a keg, a barn and a preserves jar to its
+press and kitchen. `balanced`'s adds a coop and a keg. The defences are as
+they were.
+
+### `python tools/autoplay.py --year 8`
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped   money at winter  essence  walked/run
+  balanced          12.4    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8           -        -       14918
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8           -        -       13978
+  towers             8.4    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8           -        -       14351
+  walls             10.4    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8           -        -       11567
+  spring  ALARM: no policy got through it without a loss
+  summer  not reached: every run stopped before it
+  autumn  not reached: every run stopped before it
+  winter  not reached: every run stopped before it
+  32 runs in 524 s wall, 8 processes; a run took 91-161 s (119 s on average)
+```
+
+`lost`: nights lost a season, a run's average. `repeats`: the boss nights the boss lived through. `over`: runs that ended the year with the Winter Lord down. Each run's `RUN` line is in the tool's output above its table.
+
+### What it says
+
+- **Every run of every policy stops on Spring 14.** The Giant's night was
+  played seven times without him dying, and the cap ended the run. Summer to
+  winter are never reached, and the table says so.
+- **Spring's losses**, of 20 nights a run (13 dates, and the Giant's night
+  seven times):
+  - `towers` 8.4;
+  - `walls` 10.4;
+  - `balanced` 12.4;
+  - `economy` 17.0, which loses from night 2 or 3 on. Its plan buys the
+    coop, the press and the keg before its third tower, which is its
+    character, and here its cost.
+- **What kills it**, read off seed 9000's nights:
+  - the breakers from Spring 8 take the towers (four of six on night 9),
+    and the house falls on 10;
+  - each loss takes a quarter of the stock;
+  - iron comes at about thirteen a day from the seams and $18 at the stall.
+
+  The robot puts back one tower a day at best and loses it the next night.
+- **The spring alarm** reads "no policy got through it without a loss".
+- **This is 0277's starting line.** `balanced` is meant to lose 2-4 nights
+  before winter and see every boss fall. Today it loses twelve of spring's
+  and never sees the Giant fall. Whether the cure is the instrument or the
+  game is 0277's question, and its prompt puts the instrument first:
+  - the instrument's side: walls between the breakers and the towers, the
+    cursor's repairs;
+  - the game's side: the breakers, the iron, a loss's quarter.
+
+### Decided
+
+- **Walking is real, not added up.** The robot steers the farmer through
+  `move` toward each cell's middle, so collisions, the house and the pond
+  are the game's. A trip costs what it costs a player.
+- **The day goes round its earners**, a turn each in the policy's order,
+  after the old priorities: the tree, mending, the plan's buildings, the
+  bench working for the plan, what the plan is short of, the shopping. A
+  day that only farmed or only fished is not what any of the four plays.
+- **Six casts a day** (`CASTS_A_DAY`): a working day's attention on the
+  pond. Without a cap the pond, worth more per action than anything else,
+  took every turn.
+- **The bin, not the stall**, is where the goods go: what a player does,
+  and it pays at dawn.
+- **What the nights took is put back first** (`_lost_defences`), in the day's
+  savings and in the build step, before the plan's next thing. **And the
+  shopping never raids the plan**: an upgrade's iron or the house's wood
+  waits while a tower needs it. Both were found by the first year run, below.
+- **The year in processes**: `autoplay.py --year` runs one process a
+  policy and seed, `--jobs` of them at a time (8 here), and reads their
+  `RUN` lines back. The data does not change inside a run set.
+- **`autoplay_run.gd` prints a `RUN` line per run** in every mode, beside
+  the table `tools/balance.py` reads. Moving `balance.py` onto `RUN` is
+  0277's.
+- **`play_nights` plays the year by default** (`DEFAULT_DAYS` 56), and a boss
+  night whose boss is not down is fought again from a grown purse, up to
+  `BOSS_REPEATS` (3), the line marked `(again)`.
+
+### Found
+
+- **The old robot cannot play today's spring.** Run on 0271's spring (seed
+  9000, `balanced`), it holds night 1 and loses every night after. It never
+  earned a penny by day, and the night's purse alone does not buy a second
+  tower. The new one holds nights 1-9 on the same seed and is faster: 21
+  nights in 60 s against 14 in 96.
+- **The first year run was a death spiral, half of it the robot's.** On
+  seed 9000 `balanced` lost night 10 and every night after, then the Giant's
+  night seven times until the cap:
+  - the breakers took three of its six towers on night 9 and the rest on
+    10;
+  - its day was buying a can, a pickaxe and a rod upgrade with the iron the
+    towers needed;
+  - its plan never went back for what the nights took.
+
+  Both are fixed (Decided). What is left is the game's: **iron is the
+  binding constraint**, about thirteen a day from the seams against twelve a
+  gun tower. A lost night takes a quarter of the stock and the towers stay
+  down, so one bad night in late spring can be every night after. That is
+  0277's to weigh.
+- **`tools/balance.py` read `balanced` as `policy`**, the first time its
+  short sweep ran (`python tools/balance.py 4 "brownout floor"`). It takes a
+  policy's name off the line its note is printed on, a line of words, spaces
+  and commas. `balanced`'s new note had a dash, so its `nights:` went to the
+  table's header. The note has a comma now, and the sweep reads all four:
+  - brownout floor 25: furthest night balanced 7, economy 4, towers 7,
+    walls 7;
+  - brownout floor 50: balanced 7, economy 4, towers 10, walls 10.
+
+  It finishes in 4 minutes with `game_data.gd` restored, no
+  `.balance-lock` left and the tree as it was.
+- **A house that falls to two bites in one tick logs `enter_result from
+  RESULT`** for the second bite. `Enemies._bite` calls it for every bite
+  that leaves the house at nothing, and the second is refused. It is old:
+  the suites' logs have the line too. It is harmless, but it is noise
+  worth a task.
+- **A boss that breaches is not a boss that fell.** At $300 `play_nights`
+  holds Spring 14 at 60/100 in 170 s and the Giant is not down: he reached
+  the house, bit it and was gone, which 0153 counts as not killed. The
+  calendar holds the date, as it should.
+
+Verify: **PASS**, 61 of 61 in 1012 s, both hashes unchanged (SIM 3524359536, DATA 1211606022).
+- **Suites:** `headless_check` 19333 asserts (19313 at 0275; the 0067 group's new policy fields), `headless_v1` 2760 in 98 groups, `_task_0276_year_autoplay` the new one at about 2 s, `input_check` 1269 cases, `input_v1` 735 (114.0 s), `input_v2` 3; `nights --check` passes every date of the year for both seeds.
+
+Files: src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py,
+src/tools/play_nights.gd, tools/play_nights.py, src/tools/headless_check.gd,
+src/tools/headless_v1.gd, implementation/prompts/0276-autoplay-year.md,
+implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md

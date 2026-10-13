@@ -1,7 +1,7 @@
 # 0276 - The autoplayer plays a whole year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0142, 0194, 0233, 0234, 0275, 0166, 0171, 0180, 0186, 0191, 0221
 - **Likely files:** src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd
 

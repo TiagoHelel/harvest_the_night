@@ -7,8 +7,9 @@ extends SceneTree
 ##     godot --headless --path . --script res://src/tools/play_nights.gd -- 1 14
 ##
 ## **A range of dates** (task 0271): `python tools/play_nights.py 15 28`
-## plays summer; one argument plays from day 1 to it, and none plays spring,
-## `DEFAULT_DAYS`. Every date is played on its own farm, built out of a purse
+## plays summer; one argument plays from day 1 to it, and **none plays the
+## whole year** (task 0276), `DEFAULT_DAYS`. Every date is played on its own
+## farm, built out of a purse
 ## that **starts where a run would be**: what each earlier date paid, held
 ## with everything killed, and a day's income for each - so summer's first
 ## night is bought with spring's money whether spring was played or not.
@@ -50,9 +51,16 @@ extends SceneTree
 ## is settled against it at 0068. This is the instrument, not the verdict.
 const INCOMES: Array = [0, 150, 300]
 
-## The dates played when none is given: spring, the season task 0271
-## authored against it.
-const DEFAULT_DAYS := 14
+## The dates played when none is given: the year (task 0276), Spring 1 to
+## Winter 14 - `Calendar.year_days()`, which a constant cannot ask.
+const DEFAULT_DAYS := 56
+
+## **A boss night again** (task 0276), as the calendar holds it: a boss that
+## is not down - the house fell, or he walked off at dawn - is fought on the
+## same date the next night, out of a purse that night's pay and a day's
+## income have grown, up to this many times more before the instrument moves
+## on and says so.
+const BOSS_REPEATS := 3
 
 var _first := 1
 var _last := DEFAULT_DAYS
@@ -107,7 +115,12 @@ func _init() -> void:
 			print("  the purse at day %d: $%d from days 1-%d" % [_first, purse, _first - 1])
 		print("   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  crows  result")
 		var fell: Array = []
-		for night in range(_first, _last + 1):
+		var again: Array = []
+		var night := _first - 1
+		var tries := 0
+		while night < _last:
+			if tries == 0:
+				night += 1
 			var played := _play(night, purse)
 			# What the night paid, for the next one's budget. A night that
 			# fell still pays for what was killed before it fell. Since task
@@ -115,6 +128,17 @@ func _init() -> void:
 			purse += _paid(night) + int(income)
 			if not bool(played["held"]):
 				fell.append(night)
+			# **The boss comes back** until he is down, as the calendar has it.
+			var up := str(played["boss"]) == ", the boss not down"
+			var mark := " (again)" if tries > 0 else ""
+			if up and tries < BOSS_REPEATS:
+				tries += 1
+				again.append(night)
+			elif up:
+				mark += ", the instrument moves on after %d" % BOSS_REPEATS
+				tries = 0
+			else:
+				tries = 0
 			print("  %4d %5d  %7d %7d %7d %7d %5d%%  %5d  %5d  %4d  %5d  %s"
 				% [night, Waves.size_of(night), Waves.reward_of(night),
 					int(played["budget"]), int(played["towers"]),
@@ -127,11 +151,13 @@ func _init() -> void:
 						if bool(played["held"])
 						else "FELL after %ds with %d still coming"
 							% [int(played["ticks"]) / GameData.TICK_HZ,
-								int(played["left"])]) + str(played["boss"])])
+								int(played["left"])]) + str(played["boss"]) + mark])
 		if fell.is_empty():
 			print("  all %d held" % (_last - _first + 1))
 		else:
 			print("  fell: %s" % str(fell))
+		if not again.is_empty():
+			print("  boss nights fought again: %s" % str(again))
 
 	_curves()
 	quit()
