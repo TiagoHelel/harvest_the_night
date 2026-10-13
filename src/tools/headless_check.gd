@@ -15277,7 +15277,9 @@ func _night_sound_ids() -> Array:
 	return out
 ## 0086 - the two pieces of music.
 func _task_0086_music() -> void:
-	for id in [MusicScript.FARM, MusicScript.NIGHT, MusicScript.INTENSITY]:
+	# **Every piece that loops** - since task 0285 a day piece a season, two
+	# nights, the boss track and the urgent layer - is a file that is there.
+	for id in MusicScript.LOOPS:
 		expect(ResourceLoader.exists("res://assets/%s.wav" % id),
 			"there is a piece called '%s'" % id)
 
@@ -15286,10 +15288,10 @@ func _task_0086_music() -> void:
 	# A click is a discontinuity, and a discontinuity is a step much larger
 	# than the steps either side of it. So the join is compared against the
 	# track's *own* ninety-ninth percentile step: "no more abrupt than things
-	# this track already does". The three pieces come in at 0.4 to 0.7 of
+	# this track already does". The MVP's three came in at 0.4 to 0.7 of
 	# that. Truncating one loop's tail - the classic way to make a seam -
 	# scores 5.9, so the threshold has daylight on both sides of it.
-	for id in [MusicScript.FARM, MusicScript.NIGHT, MusicScript.INTENSITY]:
+	for id in MusicScript.LOOPS:
 		var seam := _loop_seam("res://assets/%s.wav" % id)
 		if seam.is_empty():
 			expect(false, "'%s' could be measured" % id)
@@ -15301,21 +15303,25 @@ func _task_0086_music() -> void:
 			"and '%s' is long enough not to feel like a loop" % id,
 			"%.1fs" % seam["seconds"])
 
-	# **The two pieces share a motif**, which is what makes the night
-	# recognisably the same farm. Read out of the generator, because a shared
-	# motif that has been copied into two lists is shared right up until
-	# somebody edits one of them.
+	# **Every arrangement shares the motif**, which is what makes the night
+	# - and since 0285 every season - recognisably the same farm. Read out of
+	# the generator, each looping piece's own recipe: a shared motif that has
+	# been copied into a list of its own is shared right up until somebody
+	# edits one of them.
 	var source := FileAccess.get_file_as_string("res://tools/gen_music.py")
 	expect(source.contains("MOTIF = ["), "the motif is one list")
-	var plays := source.count("MOTIF")
-	expect(plays >= 3,
-		"and both arrangements read it rather than keeping copies",
-		"%d mentions" % plays)
+	var copies: Array = []
+	for id in MusicScript.LOOPS:
+		var recipe := _recipe_of(source, String(id).get_file())
+		if not recipe.contains("MOTIF"):
+			copies.append(id)
+	expect(copies.is_empty(), "and every looping piece's recipe reads it",
+		str(copies))
 
-	# **The crossfade is the transition's own length.** The done-when says it
-	# lands with the switch of reality, not before or after, and the only way
-	# to be sure of that is for there to be one number.
-	expect(source.contains("BPM = 75"), "the generator has one tempo")
+	# **One tempo**, because a crossfade between two tempos is a stumble; and
+	# the crossfade is the transition's own length.
+	expect(source.contains("BPM = 75") and source.count("BPM = ") == 1,
+		"the generator has one tempo")
 	var deck := AudioScript.new()
 	expect(deck != null, "the deck exists")
 	expect(is_equal_approx(AudioScript.FADE_SECONDS,
@@ -15325,7 +15331,8 @@ func _task_0086_music() -> void:
 			GameData.TRANSITION_SECONDS])
 	deck.free()
 
-	# **What plays when**, asked of the rule rather than of a speaker.
+	# **What plays when**, asked of the rule rather than of a speaker - with
+	# 0285's defaults, which are the MVP's spring.
 	expect(MusicScript.piece_for(Phases.DAY, false, false)
 		== MusicScript.FARM, "the day is the farm's music")
 	for phase in [Phases.PREPARATION, Phases.NIGHT, Phases.RESULT]:
@@ -15350,10 +15357,24 @@ func _task_0086_music() -> void:
 		"and the farm never is, whatever the wave counter says")
 	expect(MusicScript.layer_for(Phases.NIGHT, [0, 0]) == &"",
 		"a night with no waves in its table gets nothing")
+	expect(MusicScript.layer_for(Phases.NIGHT, [3, 3], true) == &"",
+		"nor a boss night, whose track already pulses (task 0285)")
 
-	print("  3 pieces, seam under the 99th percentile, layer on the last wave")
+	print("  %d looping pieces, seam under the 99th percentile, layer on the last wave"
+		% MusicScript.LOOPS.size())
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## The body of the recipe `gen_music.py`'s `PIECES` names for a file, or "".
+func _recipe_of(source: String, file: String) -> String:
+	var row := source.get_slice("(\"%s\", " % file, 1)
+	if row == "" or not source.contains("(\"%s\", " % file):
+		return ""
+	var recipe := row.get_slice(",", 0).strip_edges()
+	if not source.contains("def %s():" % recipe):
+		return ""
+	return source.get_slice("def %s():" % recipe, 1).get_slice("\ndef ", 0)
 
 
 ## The step at a WAV's loop point, against the steps it already contains.

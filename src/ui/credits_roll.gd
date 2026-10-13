@@ -5,6 +5,11 @@ extends Control
 signal finished
 
 const SCROLL_SPEED := 18.0
+## Where the roll starts below the window's top, and how tall a line is: with
+## the speed, how long the roll runs - which the credits' music is cut to
+## (task 0285, `tools/gen_music.py` reads these three).
+const ROLL_START := 50.0
+const LINE_HEIGHT := 30.0
 const LINES: Array[StringName] = [&"CRED_GAME", &"CRED_DESIGN", &"CRED_ENGINE",
 	&"CRED_ART", &"CRED_THANKS"]
 
@@ -40,7 +45,7 @@ func _ready() -> void:
 		var line := Label.new()
 		line.text = I18n.t(key)
 		line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		line.custom_minimum_size = Vector2(300, 30)
+		line.custom_minimum_size = Vector2(300, LINE_HEIGHT)
 		line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		_roll.add_child(line)
 	var skip := Button.new()
@@ -58,8 +63,14 @@ func start() -> void:
 	_skip.text = I18n.t(&"CRED_SKIP")
 	for i in LINES.size():
 		(_roll.get_child(i) as Label).text = I18n.t(LINES[i])
-	_roll.position.y = 50.0
+	_roll.position.y = ROLL_START
 	visible = true
+
+
+## **How long the roll runs** (task 0285), each line at its least height:
+## the length the credits' music is written to.
+static func roll_seconds() -> float:
+	return (ROLL_START + LINES.size() * LINE_HEIGHT) / SCROLL_SPEED
 
 
 ## Both the end of the roll and a skip open the same two choices.

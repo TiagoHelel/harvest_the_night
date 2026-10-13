@@ -67,6 +67,14 @@ BEATS_PER_BAR = 4
 ## megabytes of WAV in a repository whose source is two megabytes.
 BARS = 30
 
+## **The year's other pieces are shorter loops** (task 0285): twelve bars,
+## thirty-eight seconds. A 96 s piece is four megabytes of WAV in the
+## repository and most of a megabyte in the Web pack; nobody can hear where a
+## seamless loop of thirty-eight seconds begins either, and five of them in
+## ninety-six would have doubled the music's weight. Twelve divides by the
+## four-bar chord cycle and by the motif's phrase lengths below.
+SEASON_BARS = 12
+
 ## The urgent layer that arrives on the last wave. Six bars, which divides
 ## thirty exactly, so it can loop five times inside the night without ever
 ## drifting off the beat.
@@ -88,9 +96,19 @@ STING_PEAK = 0.50
 ## module docstring. Zero is the root, seven is the octave.
 MOTIF = [0, 2, 4, 2, 7, 4, 2, 0]
 
-## Semitones above the root, for the two modes the pieces are in.
+## Semitones above the root, for the modes the pieces are in. Spring and
+## summer are major, the nights minor; since task 0285 each season has its
+## own: autumn mixolydian (a major with its seventh flattened - warm, a little
+## wistful), winter lydian (a major with its fourth raised - bright and cold),
+## the winter night phrygian (a minor with its second flattened - the
+## darkest), and the boss harmonic minor (the night with a leading note that
+## will not settle).
 MAJOR = [0, 2, 4, 5, 7, 9, 11]
 MINOR = [0, 2, 3, 5, 7, 8, 10]
+MIXOLYDIAN = [0, 2, 4, 5, 7, 9, 10]
+LYDIAN = [0, 2, 4, 6, 7, 9, 11]
+PHRYGIAN = [0, 1, 3, 5, 7, 8, 10]
+HARMONIC_MINOR = [0, 2, 3, 5, 7, 8, 11]
 
 ## D, low enough to sit under a game and high enough to have a tune in it.
 ROOT_HZ = 146.83
@@ -302,6 +320,157 @@ def intensity():
     return track
 
 
+def _season_bed(scale, length, degrees, level, octave, wobble_hz, wobble):
+    """A held chord of `degrees`, snapped to the loop - the pad every season
+    breathes on."""
+    track = [0.0] * length
+    for degree, share in degrees:
+        layer = sustained(length, hz_of(scale, degree, octave), level * share,
+                          wobble_hz=wobble_hz, wobble=wobble)
+        for i in range(length):
+            track[i] += layer[i]
+    return track
+
+
+def summer():
+    """**Summer's day.** The farm's tune in full sun: the same major, an
+    octave up and twice as often, a shaker on the off-beats and the bass
+    walking every half bar. The busiest day piece, because summer's days are
+    the busiest."""
+    bar = bar_samples()
+    beat = beat_samples()
+    length = bar * SEASON_BARS
+    track = _season_bed(MAJOR, length, [(0, 0.5), (4, 0.35), (2, 0.25)],
+                        0.8, -1, 0.12, 0.35)
+    for b in range(SEASON_BARS):
+        degree = DAY_CHORDS[b % len(DAY_CHORDS)]
+        wrapped(track, b * bar, thump(hz_of(MAJOR, degree, -2), 700, 220.0), 0.5)
+        wrapped(track, b * bar + beat * 2,
+                thump(hz_of(MAJOR, degree + 4, -2), 600, 180.0), 0.3)
+        for k in range(BEATS_PER_BAR):
+            tick = sfx.decay(sfx.highpass(sfx.noise(9100 + b * 4 + k, 60), 5000),
+                             10.0, 1.0)
+            wrapped(track, b * bar + k * beat + beat // 2, tick, 0.12)
+    # **The motif every second bar**, up an octave, a note a half-beat.
+    for b in range(0, SEASON_BARS, 2):
+        for i, degree in enumerate(MOTIF):
+            wrapped(track, b * bar + i * (beat // 2),
+                    pluck(hz_of(MAJOR, degree, 1), 600, 180.0, 3600.0), 0.42)
+    return track
+
+
+def autumn():
+    """**Autumn's day.** The motif in mixolydian, mid-register and slower -
+    a note a beat, every fourth bar - with a falling counter-line answering
+    it two bars later: the year turning."""
+    bar = bar_samples()
+    beat = beat_samples()
+    length = bar * SEASON_BARS
+    track = _season_bed(MIXOLYDIAN, length, [(0, 0.5), (4, 0.3), (6, 0.22)],
+                        0.85, -1, 0.05, 0.5)
+    for b in range(SEASON_BARS):
+        degree = DAY_CHORDS[b % len(DAY_CHORDS)]
+        wrapped(track, b * bar, thump(hz_of(MIXOLYDIAN, degree, -2), 1000, 340.0), 0.5)
+    for b in range(0, SEASON_BARS, 4):
+        for i, degree in enumerate(MOTIF):
+            wrapped(track, b * bar + i * beat,
+                    pluck(hz_of(MIXOLYDIAN, degree), 900, 300.0, 2200.0), 0.45)
+        # The answer: the motif's notes falling, in the bar after it ends.
+        for i, degree in enumerate(reversed(MOTIF[:4])):
+            wrapped(track, (b + 2) * bar + i * beat + beat // 2,
+                    pluck(hz_of(MIXOLYDIAN, degree + 2), 900, 280.0, 1800.0), 0.28)
+    return track
+
+
+def winter():
+    """**Winter's day.** Lydian, high and spare: a thin bed, the motif once
+    in the loop on bells two octaves up, and long silences - snow, and a
+    farm that has less to do."""
+    bar = bar_samples()
+    beat = beat_samples()
+    length = bar * SEASON_BARS
+    track = _season_bed(LYDIAN, length, [(0, 0.45), (4, 0.3), (3, 0.18)],
+                        0.6, 0, 0.03, 0.6)
+    for b in range(0, SEASON_BARS, 2):
+        degree = DAY_CHORDS[(b // 2) % len(DAY_CHORDS)]
+        wrapped(track, b * bar, thump(hz_of(LYDIAN, degree, -1), 1400, 520.0), 0.32)
+    for i, degree in enumerate(MOTIF):
+        wrapped(track, bar + i * beat, bell(hz_of(LYDIAN, degree, 1), 1600, 700.0), 0.36)
+    for b in (6, 9):
+        wrapped(track, b * bar + beat, bell(hz_of(LYDIAN, 4, 2), 1800, 800.0), 0.2)
+    return track
+
+
+def winter_night():
+    """**Winter's night.** Phrygian and lower than the night: a drone a
+    flattened second rubs against, the pulse once a bar, and the motif on a
+    bell once in the loop, a beat a note - the same farm, as cold as it gets."""
+    bar = bar_samples()
+    beat = beat_samples()
+    length = bar * SEASON_BARS
+    track = _season_bed(PHRYGIAN, length, [(0, 0.6), (1, 0.14), (4, 0.25)],
+                        0.85, -2, 0.03, 0.6)
+    for b in range(SEASON_BARS):
+        degree = NIGHT_CHORDS[b % len(NIGHT_CHORDS)]
+        wrapped(track, b * bar, thump(hz_of(PHRYGIAN, degree, -2), 1400, 520.0), 0.45)
+    for i, degree in enumerate(MOTIF):
+        wrapped(track, 3 * bar + i * beat, bell(hz_of(PHRYGIAN, degree, -1), 1600, 600.0), 0.32)
+    return track
+
+
+def boss():
+    """**A boss night.** Harmonic minor, a pulse on every beat like the last
+    wave's, and the motif every bar on the night's bell, low - from the build
+    step to dawn, the night that holds the season."""
+    bar = bar_samples()
+    beat = beat_samples()
+    length = bar * SEASON_BARS
+    track = _season_bed(HARMONIC_MINOR, length, [(0, 0.55), (4, 0.3), (6, 0.18)],
+                        0.8, -2, 0.25, 0.4)
+    for b in range(SEASON_BARS):
+        degree = NIGHT_CHORDS[b % len(NIGHT_CHORDS)]
+        for k in range(BEATS_PER_BAR):
+            wrapped(track, b * bar + k * beat,
+                    thump(hz_of(HARMONIC_MINOR, degree, -2), 520, 160.0),
+                    0.55 if k == 0 else 0.32)
+        for i, degree in enumerate(MOTIF):
+            wrapped(track, b * bar + i * (beat // 2),
+                    bell(hz_of(HARMONIC_MINOR, degree, -1), 700, 220.0), 0.22)
+    return track
+
+
+def credits():
+    """**The credits** (task 0285): the year's tune, once and slowly, in the
+    day's major and voice - the motif a beat a note over the tonic, then held
+    as the roll ends. As long as 0160's roll and it does not loop."""
+    beat = beat_samples()
+    length = int(RATE * credits_seconds())
+    track = [0.0] * length
+    bed = _season_bed(MAJOR, length, [(0, 0.5), (4, 0.3), (2, 0.2)], 0.7, -1, 0.0, 0.0)
+    for i in range(length):
+        track[i] += bed[i] * min(1.0, i / (RATE * 1.5))
+    for i, degree in enumerate(MOTIF):
+        note = pluck(hz_of(MAJOR, degree), 1400, 520.0)
+        at = beat // 2 + i * beat
+        for k, v in enumerate(note):
+            if at + k < length:
+                track[at + k] += v * 0.6
+    return sfx.fade_out(track, 1500.0)
+
+
+def credits_seconds():
+    """**How long 0160's roll runs**, read from `credits_roll.gd`: it starts
+    `ROLL_START` below the window and scrolls its lines, `LINE_HEIGHT` each,
+    up and out at `SCROLL_SPEED` pixels a second."""
+    path = os.path.join(ROOT, "src", "ui", "credits_roll.gd")
+    text = io.open(path, encoding="utf-8").read()
+    lines = text.split("const LINES", 1)[1].split("= [", 1)[1].split("]", 1)[0].count("&\"")
+    start = sfx.gd_number("src/ui/credits_roll.gd", "ROLL_START")
+    height = sfx.gd_number("src/ui/credits_roll.gd", "LINE_HEIGHT")
+    speed = sfx.gd_number("src/ui/credits_roll.gd", "SCROLL_SPEED")
+    return (start + lines * height) / speed
+
+
 def sting():
     """**The sound the music slider makes**, added by task 0094.
 
@@ -357,15 +526,28 @@ def fanfare():
     return sfx.fade_out(track, 60.0)
 
 
-## The files, and what each may peak at.
+## The files, and what each may peak at. **`farm` is spring's day** (task
+## 0285), its id kept so every reader of it is.
 PIECES = [
     ("farm", farm, MUSIC_PEAK),
+    ("summer", summer, MUSIC_PEAK),
+    ("autumn", autumn, MUSIC_PEAK),
+    ("winter", winter, MUSIC_PEAK),
     ("night", night, MUSIC_PEAK),
+    ("winter_night", winter_night, MUSIC_PEAK),
+    ("boss", boss, INTENSITY_PEAK),
     ("night_intensity", intensity, INTENSITY_PEAK),
+    ("credits", credits, MUSIC_PEAK),
     ("sting", sting, STING_PEAK),
     # Task 0282: the legendary catch's cue, short like the sting.
     ("fanfare", fanfare, STING_PEAK),
 ]
+
+## **What does not loop**, named rather than excused in bulk (task 0285): the
+## credits play once, and the cues - the sting, the fanfare and, from 0286,
+## the event stingers - are heard and done. Everything else loops and is held
+## to the seam.
+NOT_LOOPS = ["credits", "sting", "fanfare"]
 
 
 def render(recipe, peak):
@@ -406,8 +588,9 @@ def report():
     for name, recipe, peak in PIECES:
         track = render(recipe, peak)
         seconds, hit, rms, _bright = sfx.measure(track)
-        print("  %-16s %7.2f %6.2f %6.3f %7.2f"
-              % (name, seconds, hit, rms, seam(track)))
+        print("  %-16s %7.2f %6.2f %6.3f %7s"
+              % (name, seconds, hit, rms,
+                 "once" if name in NOT_LOOPS else "%.2f" % seam(track)))
     print("  %d bars at %d bpm, bar %d samples, loop %d samples"
           % (BARS, BPM, bar_samples(), bar_samples() * BARS))
 

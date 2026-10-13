@@ -361,10 +361,13 @@ func layer_playing() -> StringName:
 ## **Asking for what is already playing does nothing**, which is what lets the
 ## controller say what it wants every frame without restarting the loop sixty
 ## times a second.
-func play_music(id: StringName, seconds: float = FADE_SECONDS) -> bool:
+##
+## **`loop` false plays it once** (task 0285): the credits run as long as the
+## roll and stop, where everything else here loops.
+func play_music(id: StringName, seconds: float = FADE_SECONDS, loop: bool = true) -> bool:
 	if id == _playing:
 		return false
-	if not _crossfade(MUSIC_A, MUSIC_B, id, seconds):
+	if not _crossfade(MUSIC_A, MUSIC_B, id, seconds, loop):
 		return false
 	_playing = id
 	return true
@@ -388,7 +391,7 @@ func bed_playing() -> StringName:
 ##
 ## One function for the music and the bed, because they are the same problem:
 ## two players and one of them is winning.
-func _crossfade(a: int, b: int, id: StringName, seconds: float) -> bool:
+func _crossfade(a: int, b: int, id: StringName, seconds: float, loop: bool = true) -> bool:
 	if id != &"" and _stream_for(id) == null:
 		if not _warned.has(id):
 			_warned[id] = true
@@ -402,7 +405,7 @@ func _crossfade(a: int, b: int, id: StringName, seconds: float) -> bool:
 		return true
 
 	var slot := _slots[free_slot] as AudioStreamPlayer
-	slot.stream = _looping(_stream_for(id))
+	slot.stream = _looping(_stream_for(id)) if loop else _once(_stream_for(id))
 	slot.volume_db = linear_to_db(0.0)
 	if slot.is_inside_tree():
 		slot.play()
@@ -447,6 +450,15 @@ func _looping(stream: AudioStream) -> AudioStream:
 	if wav != null and wav.loop_mode != AudioStreamWAV.LOOP_FORWARD:
 		wav.loop_mode = AudioStreamWAV.LOOP_FORWARD
 		wav.loop_begin = 0
+	return stream
+
+
+## **Once, to its end** (task 0285): the same line of code `_looping` is, the
+## other way, for the credits.
+func _once(stream: AudioStream) -> AudioStream:
+	var wav := stream as AudioStreamWAV
+	if wav != null and wav.loop_mode != AudioStreamWAV.LOOP_DISABLED:
+		wav.loop_mode = AudioStreamWAV.LOOP_DISABLED
 	return stream
 
 

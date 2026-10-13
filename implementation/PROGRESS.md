@@ -30245,3 +30245,122 @@ Notes:
 - **The digger's voice is its rumble**, heard per kind like any groan,
   whether or not the nearest digger is under ground right now. The burst
   is the one edge it has.
+
+## 0285 - Music for four seasons - done 2026-10-13
+
+What changed: the MVP's two pieces became a year, crossfading on the moment
+each belongs to. View only: neither hash moved.
+
+- **`tools/gen_music.py`**: six new pieces, all on `MOTIF` at the one
+  `BPM = 75`, each season with its own scale, register and density:
+  - **spring** is the MVP's `farm`, its id kept so every reader of it is;
+  - **summer**: major, the motif an octave up every second bar, a shaker on
+    the off-beats, the bass walking every half bar - the busiest;
+  - **autumn**: mixolydian (major with a flat seventh), mid-register, the
+    motif a beat a note every fourth bar with a falling counter-line two
+    bars later;
+  - **winter**: lydian (major with a raised fourth), high and spare - the
+    motif once in the loop on bells two octaves up;
+  - **winter's night**: phrygian (minor with a flat second), lower than the
+    night, the pulse once a bar, the motif once on a low bell;
+  - **the boss track**: harmonic minor, a pulse on every beat, the motif
+    every bar on the night's bell;
+  - **the credits**: the motif once and slowly in the day's voice over the
+    tonic, `11.11 s` - exactly 0160's roll, read from `credits_roll.gd`'s
+    `ROLL_START`, `LINE_HEIGHT`, `SCROLL_SPEED` and `LINES` - faded out.
+- **Shorter loops for the new pieces** (`SEASON_BARS = 12`, 38.4 s, not the
+  MVP's 96): each gets the seam the module builds (`snap()`d pads,
+  `wrapped()` tails) and runs past 15 s. Nobody can hear where a seamless
+  38-second loop begins, and five at 96 s would have more than doubled the
+  music's weight.
+- **`NOT_LOOPS = ["credits", "sting", "fanfare"]`**: named, not excused from
+  the seam in bulk. `--report` prints "once" for them where the others
+  print their seam.
+- **`src/ui/music.gd`**:
+  - **`piece_for(phase, menu, menus_play, season, boss_night, ending)`**,
+    still static. Each new argument defaults to what the MVP assumed.
+    - Day plays the season's piece (`DAY_PIECES`).
+    - The build step, the night and the morning report play the night (the
+      winter one in winter).
+    - A boss night plays `BOSS` in the build step and the night, and the
+      report is the night's again, so it leaves at dawn.
+    - The ending screen (RESULT with `Run.is_over`) plays `CREDITS`.
+    - A menu keeps spring's piece behind `audio/music_in_menus`.
+  - The season is 0149's `Calendar.season_id` of the date, so it turns on
+    the new season's first morning. The boss night is 0153's
+    `Calendar.is_boss_night` of the night ahead, so a held boss night stays
+    one.
+  - Every crossfade is `fade_seconds()`, the transition's.
+  - **`layer_for` gives no urgent layer on a boss night.** The layer was
+    written to give the night piece a pulse and a climb; the boss track has
+    both every bar, and stacked, the last wave would be two pulses in one
+    key fighting.
+  - `LOOPS` and `PLAYS_ONCE` name the two kinds.
+- **`src/app/audio.gd`**: `play_music(id, seconds, loop)`. `loop = false` is
+  the credits' road, `_once()` setting the stream's loop mode off as
+  `_looping` sets it on. `Music` passes it for `PLAYS_ONCE`.
+- **`src/ui/credits_roll.gd`**: `ROLL_START` and `LINE_HEIGHT` are constants
+  now, used where 50 and 30 were. `roll_seconds()` is what the credits are
+  cut to.
+- **Tests**:
+  - `_task_0086_music` is rewritten. Its seam, motif and one-tempo checks
+    cover every piece in `Music.LOOPS`, the motif check through each
+    piece's own recipe in `PIECES` rather than a count of mentions, and a
+    boss night has no layer.
+  - `headless_v1` gains `_task_0285_season_music` (104 groups):
+    - `piece_for` for each season by day, build step, night and report;
+    - a boss night's build step, night and report;
+    - the ending, and a menu with the setting off and on;
+    - every loop's seam at most 1.0 and over 15 s;
+    - every arrangement reading `MOTIF`;
+    - the credits as long as the roll and named as playing once.
+  - `input_v2` gains `_case_0285_season_music` (6 cases): a real run moved
+    to Summer 1's morning has `music/summer` playing once the fade is over,
+    and Summer 14's build step has `music/boss`.
+
+`python tools/gen_music.py --report`:
+
+```text
+  piece            seconds   peak    rms    seam
+  farm               96.00   0.34  0.070    2.47
+  summer             38.40   0.34  0.078    1.66
+  autumn             38.40   0.34  0.072    2.20
+  winter             38.40   0.34  0.057    2.16
+  night              96.00   0.34  0.077    2.66
+  winter_night       38.40   0.34  0.087    2.20
+  boss               38.40   0.44  0.109    2.34
+  night_intensity    19.20   0.44  0.098    1.42
+  credits            11.11   0.34  0.083    once
+  sting               1.15   0.50  0.132    once
+  fanfare             3.00   0.50  0.086    once
+```
+
+(The report's seam is the join against the track's *average* step, as
+before; the checks hold every loop to its 99th-percentile step, and every
+one is under 1.0 of it.)
+
+**Size and time:**
+- **The Web pack**, `index.pck` from verify's export:
+  - before: 230,350,640 bytes on disk, 220,740,999 gzipped;
+  - after: 232,168,872 bytes on disk, 222,143,050 gzipped.
+  - The music adds about 1.82 MB to the pack on disk and 1.40 MB gzipped - QOA, a fifth of the WAV.
+  - `PACK_BUDGET` is 3.5 MB gzipped and was blown long before this task:
+    the pack has been some 210 MB gzipped since the FHD art came in.
+    `release.py` would fail on it today with or without this task.
+  - So the budget was not moved here. It wants its own decision: what the
+    Web build ships, and at what resolution.
+- **`gen_music.py --check`**: 9.4 s for the five pieces before, 19.8
+  s for eleven after, inside verify's music row.
+- **WAV in the repository**: 9.5 MB before (two 96 s pieces, the layer and
+  two cues), 18.5 MB after (five 38.4 s loops at 1.69 MB, the credits at
+  0.49 MB).
+
+Files: tools/gen_music.py, assets/music/ (6 WAVs and their .import),
+src/ui/music.gd, src/app/audio.gd, src/ui/credits_roll.gd,
+src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v2.gd
+Verify: PASS, 61 checks in 1,040 s; 19,539 headless / 2,790 headless_v1 (104 groups) / 1,269 + 735 + 25 input cases; music 11 pieces (20.0 s); sim 3524359536 and data 1211606022 unchanged
+Notes:
+- **0286's event stingers join `NOT_LOOPS`** when it writes them.
+- **The Web pack budget** is the follow-up worth a decision. A pack of
+  about 210 MB gzipped is not a page anyone waits for. Music is a sliver of
+  it; the FHD art is the rest.

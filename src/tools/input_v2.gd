@@ -21,7 +21,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 5
+const V2_CASES := 6
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -43,6 +43,7 @@ func _run() -> void:
 	await _case_0282_fishing_sounds()
 	await _case_0283_guardian_sounds()
 	await _case_0284_boss_voices()
+	await _case_0285_season_music()
 	_finish()
 
 
@@ -475,6 +476,47 @@ func _case_0284_boss_voices() -> void:
 		str(heard))
 
 	Enemies.withdraw(state)
+	driver.running = true
+	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0285 - the year's music in a real run: moved to a summer morning, the
+## summer piece is the one playing once the fade is over; and a boss night's
+## build step plays the boss track.
+func _case_0285_season_music() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	if driver == null or audio == null:
+		expect(audio != null, "the Audio autoload is up for the music")
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.running = false
+	await frames(2)
+
+	state["day"] = GameData.SEASON_DAYS + 1
+	state["nights_won"] = GameData.SEASON_DAYS
+	state["day_tick"] = Phases.tick_at_minute(9 * 60)
+	await frames(2)
+	await create_timer(GameData.TRANSITION_SECONDS + 0.3).timeout
+	expect(Calendar.season_id(Calendar.date(state)) == &"summer"
+			and audio.music_playing() == Music.SUMMER,
+		"a summer morning plays the summer piece once the fade is over",
+		"%s, '%s'" % [Calendar.season_id(Calendar.date(state)), audio.music_playing()])
+
+	state["day"] = 2 * GameData.SEASON_DAYS
+	state["nights_won"] = 2 * GameData.SEASON_DAYS - 1
+	NightRoad.to_build(state)
+	await frames(3)
+	expect(Calendar.is_boss_night(Phases.night_ahead(state))
+			and audio.music_playing() == Music.BOSS,
+		"and the Harvester's build step the boss track",
+		"'%s'" % audio.music_playing())
+
 	driver.running = true
 	audio.stop_all()
 	await close_scene()

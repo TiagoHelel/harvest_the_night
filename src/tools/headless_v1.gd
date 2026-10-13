@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 103
+const GROUPS := 104
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -182,6 +182,7 @@ func _run() -> void:
 	_task_0282_fishing_sounds()
 	_task_0283_guardian_sounds()
 	_task_0284_enemy_sounds()
+	_task_0285_season_music()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -12408,6 +12409,89 @@ func _task_0284_enemy_sounds() -> void:
 	expect(voices.size() == 2 and voices.has(&"rat") and voices.has(&"walker"),
 		"fifty rats and a walker are two voices, not fifty-one", str(voices.keys()))
 	_completed += 1
+
+
+## **Task 0285: music for four seasons.** `piece_for` answers each season by
+## day and the night (the winter one in winter), a boss night from its build
+## step to dawn, the ending screen and a menu with the setting off and on.
+## Every looping piece's seam is at most 1.0 of its 99th-percentile step and
+## it runs over 15 s; every arrangement reads `MOTIF`; the credits run as
+## long as 0160's roll and play once.
+func _task_0285_season_music() -> void:
+	var wrong: Array = []
+	var day := {&"spring": Music.FARM, &"summer": Music.SUMMER,
+		&"autumn": Music.AUTUMN, &"winter": Music.WINTER}
+	for season in GameData.SEASONS:
+		var night := Music.WINTER_NIGHT if season == &"winter" else Music.NIGHT
+		var asked := [Music.piece_for(Phases.DAY, false, false, season),
+			Music.piece_for(Phases.PREPARATION, false, false, season),
+			Music.piece_for(Phases.NIGHT, false, false, season),
+			Music.piece_for(Phases.RESULT, false, false, season),
+			Music.piece_for(Phases.PREPARATION, false, false, season, true),
+			Music.piece_for(Phases.NIGHT, false, false, season, true),
+			Music.piece_for(Phases.RESULT, false, false, season, true)]
+		var wanted := [day[season], night, night, night, Music.BOSS, Music.BOSS, night]
+		if asked != wanted:
+			wrong.append("%s: %s" % [season, str(asked)])
+	expect(wrong.is_empty(),
+		"each season's day plays its piece, the night (winter's in winter) the build step, waves and report, and a boss night the boss track until dawn",
+		str(wrong))
+	expect(Music.piece_for(Phases.RESULT, false, false, &"winter", false, true) == Music.CREDITS
+			and Music.piece_for(Phases.DAY, true, false, &"autumn") == &""
+			and Music.piece_for(Phases.DAY, true, true, &"autumn") == Music.FARM,
+		"the ending screen plays the credits, and a menu is silent or spring's as the setting says")
+
+	var seams: Array = []
+	for id in Music.LOOPS:
+		var seam := _seam_of("res://assets/%s.wav" % id)
+		if seam.is_empty() or float(seam["ratio"]) > 1.0 or float(seam["seconds"]) <= 15.0:
+			seams.append("%s %s" % [id, str(seam)])
+	expect(seams.is_empty(), "every looping piece joins under its own 99th-percentile step and runs over 15 s",
+		str(seams))
+
+	var source := FileAccess.get_file_as_string("res://tools/gen_music.py")
+	var deaf: Array = []
+	for id in Music.LOOPS:
+		var file := String(id).get_file()
+		var recipe := source.get_slice("(\"%s\", " % file, 1).get_slice(",", 0).strip_edges()
+		if recipe == "" or not source.get_slice("def %s():" % recipe, 1).get_slice("\ndef ", 0).contains("MOTIF"):
+			deaf.append(id)
+	expect(deaf.is_empty(), "every arrangement reads MOTIF", str(deaf))
+
+	var roll := _wav_measure("res://assets/%s.wav" % Music.CREDITS)
+	expect(not roll.is_empty() and absf(float(roll["seconds"]) - CreditsRoll.roll_seconds()) < 0.1
+			and Music.PLAYS_ONCE.has(Music.CREDITS) and not Music.LOOPS.has(Music.CREDITS)
+			and source.contains("NOT_LOOPS = [\"credits\", \"sting\", \"fanfare\"]"),
+		"the credits run as long as the roll (%.1f s) and are named as playing once" % CreditsRoll.roll_seconds(),
+		str(roll))
+	_completed += 1
+
+
+## A WAV's join against its own 99th-percentile step, the way
+## `_task_0086_music` measures a seam: `{ratio, seconds}`.
+func _seam_of(path: String) -> Dictionary:
+	var raw := FileAccess.get_file_as_bytes(path)
+	var at := 12
+	while at + 8 <= raw.size():
+		var tag := raw.slice(at, at + 4).get_string_from_ascii()
+		var size := raw.decode_u32(at + 4)
+		if tag == "data":
+			var start := at + 8
+			var count := mini(size, raw.size() - start) / 2
+			if count < 3:
+				return {}
+			var steps: Array = []
+			var previous := raw.decode_s16(start)
+			for i in range(1, count, 97):
+				var v := raw.decode_s16(start + i * 2)
+				steps.append(absi(v - previous))
+				previous = v
+			steps.sort()
+			var p99 := float(steps[mini(int(steps.size() * 0.99), steps.size() - 1)])
+			var join := absf(float(raw.decode_s16(start)) - float(raw.decode_s16(start + (count - 1) * 2)))
+			return {"ratio": join / maxf(p99, 1.0), "seconds": float(count) / 22050.0}
+		at += 8 + size + (size & 1)
+	return {}
 
 
 ## Length and peak of a 16-bit mono WAV at 22,050 Hz, read off its bytes -
