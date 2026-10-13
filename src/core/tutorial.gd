@@ -1,13 +1,21 @@
 class_name Tutorial
 extends RefCounted
 
-## Day one teaches itself.
+## The first week teaches itself.
 ##
 ## `design.md` does not have a tutorial level and is not getting one. What it
-## has is a first day on the same farm as every other day, with **nine short
-## lines** that appear on the thing they are about and go away the moment you
-## do it - five for the day, and since task 0141 four for the first night: to
-## bed, the build step, START, dawn.
+## has is a first day on the same farm as every other day, with short lines
+## that appear on the thing they are about and go away the moment you do it -
+## five for the day, and since task 0141 four for the first night: to bed,
+## the build step, START, dawn.
+##
+## **Since task 0293 they are a week** (`GameData.TUTORIAL`): each step names
+## the Spring date it may first show (`from_day`) and the part of the day it
+## is taught in (`when`), so the first morning is four lines and the stall,
+## the forecast, the rod, the seasons and the Full Moon arrive when they
+## first matter. `current()`, `current_here()` and `points_at()` offer only a
+## step whose day has come; `tick()` still watches every step from the first
+## tick, so a lesson found early is done early.
 ##
 ## ## It watches; it never gates
 ##
@@ -34,17 +42,17 @@ extends RefCounted
 ##
 ## "Never shows twice" is `gameplay/tutorial_seen`, in `Settings`, which is a
 ## node and an autoload and therefore not something `src/core/` may touch.
-## This file answers `is_finished()`; the screen decides whether to have asked
-## in the first place.
+## Since task 0293 it is the list of step ids a player has done, in any run,
+## and the screen hands it in as `skip`: this file never knows whose it is.
 
 ## Nothing to show.
 const NOWHERE := Vector2i(-1, -1)
 
-## **When each night step is taught** (task 0141), by phase: the build
-## step's two in the build step, dawn in the night. Every other step - the
-## day's five, and going to bed - is taught by day.
-const TAUGHT_IN := {&"build": Phases.PREPARATION, &"start": Phases.PREPARATION,
-	&"dawn": Phases.NIGHT}
+## **The phase each part of the day is** (tasks 0141 and 0293): a step's
+## `when` - `day` and `dusk` by day, `build` in the build step, `night` in
+## the night.
+const PHASE_OF := {&"day": Phases.DAY, &"dusk": Phases.DAY,
+	&"build": Phases.PREPARATION, &"night": Phases.NIGHT}
 
 
 static func initial() -> Dictionary:
@@ -69,31 +77,73 @@ static func is_done(state: Dictionary, id: StringName) -> bool:
 	return ((state["tutorial"] as Dictionary)["done"] as Array).has(id)
 
 
-## The step the player is on, or an empty Dictionary when there are none left.
+## A step by its id, or empty.
+static func step_of(id: StringName) -> Dictionary:
+	for entry in steps():
+		if StringName((entry as Dictionary)["id"]) == id:
+			return entry
+	return {}
+
+
+## The part of the day a step is taught in (task 0293), `day` unless it says.
+static func when_of(step: Dictionary) -> StringName:
+	return StringName(step.get("when", &"day"))
+
+
+## The phase a step is taught in (task 0141, from its `when` since 0293).
+static func phase_of(step: Dictionary) -> int:
+	return int(PHASE_OF.get(when_of(step), Phases.DAY))
+
+
+## **Whether a step's day has come** (task 0293): its Spring date reached.
+static func is_due(state: Dictionary, step: Dictionary) -> bool:
+	return Calendar.date(state) >= int(step.get("from_day", 1))
+
+
+## The step the player is on - the first unfinished one whose day has come -
+## or an empty Dictionary.
 static func current(state: Dictionary) -> Dictionary:
 	for entry in steps():
 		var step: Dictionary = entry
-		if not is_done(state, StringName(step["id"])):
+		if not is_done(state, StringName(step["id"])) and is_due(state, step):
 			return step
 	return {}
 
 
-## **The step taught now** (task 0141): the first unfinished one that belongs
-## to this part of the day (`TAUGHT_IN`), or an empty Dictionary. The order is
-## a suggestion, so a stall never visited by day does not keep the build
-## step's line off the build step.
-static func current_here(state: Dictionary) -> Dictionary:
+## **The step taught now** (task 0141): the first unfinished one whose day
+## has come (0293) and that belongs to this part of the day - a `dusk` one
+## from 18:00 - or an empty Dictionary. The order is a suggestion, so a stall
+## never visited by day does not keep the build step's line off the build
+## step; and a `dated` step goes before an older one still waiting, because
+## its night is tonight.
+##
+## `skip` is the ids the screen says have been seen before (0293's
+## `gameplay/tutorial_seen`): passed over as if done.
+static func current_here(state: Dictionary, skip: Array = []) -> Dictionary:
 	var phase := int(state["phase"])
+	var first := {}
 	for entry in steps():
 		var step: Dictionary = entry
 		var id := StringName(step["id"])
-		if not is_done(state, id) and int(TAUGHT_IN.get(id, Phases.DAY)) == phase:
+		if is_done(state, id) or skip.has(id) or skip.has(String(id)):
+			continue
+		if not is_due(state, step) or phase_of(step) != phase:
+			continue
+		if when_of(step) == &"dusk" and not Phases.is_dusk(state):
+			continue
+		if bool(step.get("dated", false)):
 			return step
-	return {}
+		if first.is_empty():
+			first = step
+	return first
 
 
+## Whether every step of the week has been done.
 static func is_finished(state: Dictionary) -> bool:
-	return current(state).is_empty()
+	for entry in steps():
+		if not is_done(state, StringName((entry as Dictionary)["id"])):
+			return false
+	return true
 
 
 ## How many are behind the player, for a "3 of 5" if anybody wants one.
@@ -104,10 +154,12 @@ static func progress(state: Dictionary) -> int:
 ## Where the current line sits (task 0141): `&"cell"` over the farm cell
 ## `points_at` names; `&"room"` over a cell of the farmhouse's room - the bed,
 ## while he is inside; `&"start"`, the START button of the build step; and
-## `&"dawn"`, the night's countdown. `&""` when there is nothing to show. The
-## view finds the two controls by name; the rules only name them.
-static func anchor_of(state: Dictionary) -> StringName:
-	var step := current_here(state)
+## `&"dawn"`, the night's countdown. Since task 0293 `&"forecast"`, the
+## forecast's panel, and `&"date"`, the date on the day HUD. `&""` when there
+## is nothing to show. The view finds the controls by name; the rules only
+## name them.
+static func anchor_of(state: Dictionary, skip: Array = []) -> StringName:
+	var step := current_here(state, skip)
 	if step.is_empty():
 		return &""
 	match StringName(step["id"]):
@@ -117,6 +169,10 @@ static func anchor_of(state: Dictionary) -> StringName:
 			return &"start"
 		&"dawn":
 			return &"dawn"
+		&"forecast":
+			return &"forecast"
+		&"season", &"full_moon":
+			return &"date"
 	return &"cell"
 
 
@@ -126,8 +182,8 @@ static func anchor_of(state: Dictionary) -> StringName:
 ## Worked out from the farm rather than written in the table, because the
 ## nearest tree is not a fact about the tutorial, it is a fact about where the
 ## player is standing.
-static func points_at(state: Dictionary) -> Vector2i:
-	var step := current_here(state)
+static func points_at(state: Dictionary, skip: Array = []) -> Vector2i:
+	var step := current_here(state, skip)
 	if step.is_empty():
 		return NOWHERE
 	return _target_for(state, StringName(step["id"]))
@@ -165,9 +221,20 @@ static func _target_for(state: Dictionary, id: StringName) -> Vector2i:
 				var bed := House.bed()
 				return Vector2i(bed.position.x + bed.size.x / 2, bed.position.y)
 			return House.porch(state)
-		&"build":
-			# The ground between the house and where they come from.
+		&"cursor":
+			# **The cursor's own cell** (task 0293), which the view writes
+			# into the intent every frame of the night (`build_cell`) - so
+			# the line goes where the player is looking, not where the
+			# sleeping farmer is. Before the first frame has written it, the
+			# ground between the house and where they come from.
+			var at: Array = (state["intent"] as Dictionary).get("build_cell", [-1, -1])
+			var cell := Vector2i(int(at[0]), int(at[1])) if at.size() == 2 else NOWHERE
+			if Grid.in_bounds(cell):
+				return cell
 			return _between_house_and_spawn(state)
+		&"fish":
+			# **The pond** (task 0293): its nearest water.
+			return _nearest(state, Farm.cells_of(state, Farm.Terrain.WATER))
 	return NOWHERE
 
 
@@ -248,7 +315,7 @@ static func tick(state: Dictionary) -> void:
 		var id := StringName((entry as Dictionary)["id"])
 		if done.has(id):
 			continue
-		if _happened(state, id):
+		if _happened(state, entry):
 			done.append(id)
 
 
@@ -257,7 +324,14 @@ static func tick(state: Dictionary) -> void:
 ## One arm per step, the same shape as `Interact.complete()`. Each asks the
 ## state a question that is true however the player got there - which is what
 ## makes ignoring the prompts identical to following them.
-static func _happened(state: Dictionary, id: StringName) -> bool:
+static func _happened(state: Dictionary, step: Dictionary) -> bool:
+	# **A dated step ends with its night** (task 0293): the forecast's, the
+	# seasons' and the Full Moon's are about tonight, and the night they are
+	# about beginning is the state's answer - whether or not a panel was
+	# looked at, which the rules cannot see.
+	if bool(step.get("dated", false)):
+		return int(state.get("night", 0)) >= int(step.get("from_day", 1))
+	var id := StringName(step["id"])
 	match id:
 		&"chop":
 			return Resources.amount(state, GameData.WOOD) \
@@ -279,18 +353,20 @@ static func _happened(state: Dictionary, id: StringName) -> bool:
 					return true
 			return false
 		&"sell":
-			# **More money than you started with**, which on day one can
-			# only have come out of the stall.
+			# **Standing at the stall** (task 0293): the farmer facing it,
+			# which he does on the way to any trade there.
 			#
-			# Two nearly-right versions came before this. "The stall is
+			# Three nearly-right versions came before this. "The stall is
 			# open" cannot be seen at all: the shop stops the clock (task
 			# 0039), so no tick happens while it is up. "The money
 			# changed" is true the moment the player sows their first
 			# seed, because a seed costs money - measured, by watching an
 			# hour of ordinary play clear this line with nobody going
-			# anywhere near the stall.
-			return Resources.amount(state, GameData.MONEY) \
-				> int(GameData.STARTING_RESOURCES.get(GameData.MONEY, 0))
+			# anywhere near the stall. And "more money than you started
+			# with" was day one's, when only the stall paid; the week's line
+			# comes on Spring 2, after the first night has paid.
+			return StringName(Farm.occupant(state, Player.target(state)).get("id", &"")) \
+				== &"shop"
 		&"craft":
 			if not (state["kits"] as Dictionary).is_empty():
 				return true
@@ -300,7 +376,7 @@ static func _happened(state: Dictionary, id: StringName) -> bool:
 			# **Asleep seen** (task 0141), however he got there: the bed, the
 			# button, or 02:00.
 			return House.asleep(state)
-		&"build":
+		&"cursor":
 			# A defence standing - and since task 0132 one only goes down in a
 			# build step, so one standing is one placed there.
 			for found in (state["occupants"] as Dictionary).keys():
@@ -315,4 +391,7 @@ static func _happened(state: Dictionary, id: StringName) -> bool:
 			# **A night held**, at dawn or with nothing left alive: both are a
 			# night won since task 0137.
 			return Phases.nights_won(state) > 0
+		&"fish":
+			# **A line in the water** (task 0293), or anything ever landed.
+			return Fishing.is_casting(state) or not Fishing.book_of(state).is_empty()
 	return false

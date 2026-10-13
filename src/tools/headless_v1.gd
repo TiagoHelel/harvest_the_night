@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 107
+const GROUPS := 108
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -186,6 +186,7 @@ func _run() -> void:
 	_task_0286_weather_ambience()
 	_task_0287_collections()
 	_task_0292_options()
+	_task_0293_first_week()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -1988,30 +1989,33 @@ func _task_0141_tutorial() -> void:
 		every.append(StringName((entry as Dictionary)["id"]))
 	expect(every.size() == GameData.MAX_TUTORIAL_LINES
 		and GameData.check_tutorial(Tutorial.steps()).is_empty(),
-		"nine steps, which the lever now allows, passing their own check",
+		"thirteen steps since task 0293, which the lever allows, passing their own check",
 		str(every))
 
-	# **A scripted first day and night completes every step, in order.** The
+	# **A scripted first day and night completes day one's steps, in order** -
+	# and the bench, which the script queues on day one, early (task 0293
+	# puts its line on Spring 3; a lesson found early is done early). The
 	# same script runs a second farm whose player read nothing: every line
 	# already out of the way before the day starts.
+	var day_one: Array = [&"chop", &"plant", &"water", &"craft", &"bed", &"cursor", &"start"]
 	var taught := State.create(1410)
 	var ignored := State.create(1410)
 	((ignored["tutorial"] as Dictionary)["done"] as Array).assign(every.duplicate())
 	for farm in [taught, ignored]:
 		_first_day_and_night(farm as Dictionary, 0)
-	expect(((taught["tutorial"] as Dictionary)["done"] as Array)
-		== every.slice(0, every.size() - 1),
-		"every step up to START completes, in the order the lines come",
+	expect(((taught["tutorial"] as Dictionary)["done"] as Array) == day_one,
+		"every day-one step up to START completes, in the order the lines come",
 		str((taught["tutorial"] as Dictionary)["done"]))
 	expect(int(taught["phase"]) == Phases.NIGHT and _same_but_the_lesson(taught, ignored),
 		"and the night it reaches is the same night, but for the tutorial",
 		Phases.name_of(int(taught["phase"])))
 	for farm in [taught, ignored]:
 		_first_day_and_night(farm as Dictionary, 1)
-	expect(((taught["tutorial"] as Dictionary)["done"] as Array) == every
-		and Tutorial.is_finished(taught) and int(taught["day"]) == 2
+	expect(((taught["tutorial"] as Dictionary)["done"] as Array) == day_one + [&"dawn"]
+		and not Tutorial.is_finished(taught) and int(taught["day"]) == 2
+		and Tutorial.current(taught).get("id", &"") == &"sell"
 		and _same_but_the_lesson(taught, ignored),
-		"held till dawn, the last line goes, and the morning is the same morning",
+		"held till dawn, dawn's line goes, the morning is the same morning - and Spring 2's line is the stall's",
 		str((taught["tutorial"] as Dictionary)["done"]))
 
 	# **Each night line is taught in its own part of the day.**
@@ -2034,11 +2038,15 @@ func _task_0141_tutorial() -> void:
 	((here["tutorial"] as Dictionary)["done"] as Array).append(&"bed")
 	var aim := Tutorial.points_at(here)
 	var house := Farm.house_centre(here)
-	expect(Tutorial.current_here(here).get("id", &"") == &"build"
+	expect(Tutorial.current_here(here).get("id", &"") == &"cursor"
 		and Farm.buildable(here, aim) and aim != house,
-		"in the build step the build line sits on open ground off the house",
+		"in the build step the cursor's line sits on open ground off the house, before the cursor has a cell",
 		str(aim))
-	((here["tutorial"] as Dictionary)["done"] as Array).append(&"build")
+	(here["intent"] as Dictionary)["build_cell"] = [aim.x + 2, aim.y + 1]
+	expect(Tutorial.points_at(here) == aim + Vector2i(2, 1),
+		"and on the cursor's own cell once the view writes it (task 0293)",
+		str(Tutorial.points_at(here)))
+	((here["tutorial"] as Dictionary)["done"] as Array).append(&"cursor")
 	expect(Tutorial.anchor_of(here) == &"start", "then START's line sits on START")
 	NightRoad.through_build(here)
 	((here["tutorial"] as Dictionary)["done"] as Array).append(&"start")
@@ -12731,6 +12739,162 @@ func _task_0287_collections() -> void:
 ## held it.
 func _past_the_year(state: Dictionary) -> void:
 	state["day"] = Run.final_night() + 1 + int(state.get("days_held", 0))
+
+
+## 0293 - the first week, taught. No step is offered before its day; a
+## scripted player who does only what `Tutorial.current_here()` and
+## `points_at()` ask gets from Spring 1 at 06:00 to Spring 2's morning with
+## the house standing and every day-one step done (to bed early and the night
+## held to a near dawn, as 0141's script does, so the group stays quick); and
+## a 0.1 `settings.cfg` loads with its own values kept, the rest at their
+## defaults, and its `tutorial_seen` of `true` turned into the 0.1 steps - so
+## only the new ones are offered.
+func _task_0293_first_week() -> void:
+	var errors := GameData.check_tutorial(Tutorial.steps())
+	expect(errors.is_empty(), "the week passes its own check, per day and in all", str(errors))
+	var crowded: Array = []
+	for i in GameData.MAX_TUTORIAL_LINES_PER_DAY + 1:
+		crowded.append({"id": StringName("x%d" % i), "line": &"TUT_CHOP", "from_day": 2})
+	var unscheduled: Array = [{"id": &"x", "line": &"TUT_CHOP", "from_day": 0}]
+	var nowhen: Array = [{"id": &"x", "line": &"TUT_CHOP", "from_day": 1, "when": &"noon"}]
+	expect(not GameData.check_tutorial(crowded).is_empty()
+			and not GameData.check_tutorial(unscheduled).is_empty()
+			and not GameData.check_tutorial(nowhen).is_empty(),
+		"and refuses a crowded day, a step with no Spring date and one taught at no part of a day")
+
+	# **Nothing before its day**: each step, with every other one done, is
+	# offered on its own date and in its own part of it, and not the day
+	# before.
+	var early: Array = []
+	var on_time: Array = []
+	for entry in Tutorial.steps():
+		var one: Dictionary = entry
+		for day in [int(one["from_day"]) - 1, int(one["from_day"])]:
+			if day < 1:
+				continue
+			var probe := _week_probe(one, day, [])
+			var offered: bool = Tutorial.current_here(probe).get("id", &"") == StringName(one["id"])
+			if day < int(one["from_day"]) and (offered
+					or Tutorial.current(probe).get("id", &"") == StringName(one["id"])):
+				early.append(one["id"])
+			if day == int(one["from_day"]) and offered:
+				on_time.append(one["id"])
+	expect(early.is_empty() and on_time.size() == Tutorial.steps().size(),
+		"every step is offered on its own day and part of the day, and none the day before",
+		"early %s, on time %d" % [str(early), on_time.size()])
+
+	# **A player who does only what the lines ask.**
+	var state := State.create(2931)
+	var asked: Array = []
+	var too_soon: Array = []
+	for _turn in 80:
+		if int(state["day"]) >= 2 and int(state["phase"]) == Phases.DAY:
+			break
+		var step := Tutorial.current_here(state)
+		var id := StringName(step.get("id", &""))
+		if id != &"":
+			if int(step["from_day"]) > Calendar.date(state):
+				too_soon.append(id)
+			if not asked.has(id):
+				asked.append(id)
+		var at := Tutorial.points_at(state)
+		match id:
+			&"chop":
+				Interact.complete(state, at, &"chop")
+			&"plant":
+				Farming.act(state, at)
+				Farming.act(state, at)
+			&"water":
+				state["water_can"] = 2
+			&"bed":
+				(state["intent"] as Dictionary)["sleep"] = true
+			&"cursor":
+				var placed := false
+				for radius in 4:
+					for cell in Grid.within(at, radius):
+						if not placed and Building.place(state, &"barricade", cell):
+							placed = true
+			&"start":
+				NightRoad.press_start(state)
+			&"dawn":
+				NightRoad.park(state)
+				(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 3
+		if int(state["phase"]) == Phases.RESULT:
+			(state["intent"] as Dictionary)["confirm_result"] = true
+		Sim.advance(state, GameData.TUTORIAL_CHECK_TICKS + 1)
+	# He wakes in his bed, and the rules watch nothing in the house: out of
+	# the door, as 0141's script goes.
+	House.leave(state)
+	Sim.advance(state, GameData.TUTORIAL_CHECK_TICKS + 1)
+	var day_one: Array = [&"chop", &"plant", &"water", &"bed", &"cursor", &"start", &"dawn"]
+	var all_done := true
+	for id in day_one:
+		all_done = all_done and Tutorial.is_done(state, id)
+	expect(asked == day_one and too_soon.is_empty(),
+		"the lines asked for day one's seven, in order, and nothing before its day",
+		"%s, too soon %s" % [str(asked), str(too_soon)])
+	expect(Calendar.date(state) == 2 and int(state["phase"]) == Phases.DAY
+			and int(state["house_hp"]) > 0 and all_done,
+		"and doing only that reaches Spring 2's morning, the house standing and day one taught",
+		"day %d %s, house %d, done %s" % [Calendar.date(state), Phases.name_of(int(state["phase"])),
+			int(state["house_hp"]), str((state["tutorial"] as Dictionary)["done"])])
+	expect(Tutorial.current(state).get("id", &"") == &"sell",
+		"where the next line is Spring 2's, the stall's", str(Tutorial.current(state)))
+
+	# **The 0.1 settings, read today** (`tools/goldens/settings-v1.cfg`).
+	var fresh: Node = (load("res://src/app/settings.gd") as GDScript).new()
+	fresh.load_from_disk("res://tools/goldens/settings-v1.cfg")
+	var mine: Dictionary = {&"gameplay/language": "pt_BR", &"audio/master": 0.6,
+		&"audio/music": 0.35, &"audio/sfx": 0.9}
+	var kept := true
+	for key in mine:
+		kept = kept and str(fresh.get_value(key)) == str(mine[key])
+	kept = kept and str((fresh.get_value(&"controls/bindings") as Dictionary).get("interact", "")) == "key:74"
+	expect(kept, "a 0.1 settings.cfg keeps its language, its volumes and its rebind",
+		"%s %s" % [fresh.get_value(&"gameplay/language"), str(fresh.get_value(&"controls/bindings"))])
+	var defaults: Dictionary = (load("res://src/app/settings.gd") as GDScript).get_script_constant_map()["DEFAULTS"]
+	var off: Array = []
+	for key in GameData.sorted_names(defaults.keys()):
+		if mine.has(StringName(key)) or [&"controls/bindings", &"gameplay/tutorial_seen"].has(StringName(key)):
+			continue
+		if str(fresh.get_value(StringName(key))) != str(defaults[key]):
+			off.append(key)
+	expect(off.is_empty(), "and every key it lacks is at its default", str(off))
+	var seen: Array = fresh.get_value(&"gameplay/tutorial_seen")
+	var v1: Array = []
+	for id in GameData.TUTORIAL_V1:
+		v1.append(String(id))
+	expect(seen == v1, "and its tutorial_seen of true is the 0.1 day one's steps", str(seen))
+	fresh.free()
+	var offered: Array = []
+	for entry in Tutorial.steps():
+		var one: Dictionary = entry
+		var probe := _week_probe(one, int(one["from_day"]), [])
+		if Tutorial.current_here(probe, seen).get("id", &"") == StringName(one["id"]):
+			offered.append(one["id"])
+	expect(offered == [&"bed", &"cursor", &"start", &"dawn", &"forecast", &"fish",
+			&"season", &"full_moon"],
+		"so only the steps 0.1 never had are offered - the bed, the cursor and the rest of the week",
+		str(offered))
+	_completed += 1
+
+
+## A farm on `day`, in `one`'s part of the day, with every other step done
+## (and `done` besides).
+func _week_probe(one: Dictionary, day: int, done: Array) -> Dictionary:
+	var probe := State.create(2930)
+	probe["day"] = day
+	probe["nights_won"] = day - 1
+	probe["phase"] = Tutorial.phase_of(one)
+	if Tutorial.when_of(one) == &"dusk":
+		probe["day_tick"] = Phases.tick_at_minute(GameData.DUSK_MINUTE)
+	for entry in Tutorial.steps():
+		var id := StringName((entry as Dictionary)["id"])
+		if id != StringName(one["id"]):
+			((probe["tutorial"] as Dictionary)["done"] as Array).append(id)
+	for id in done:
+		((probe["tutorial"] as Dictionary)["done"] as Array).append(id)
+	return probe
 
 ## 0292 - the options for the new controls. Five keys with their defaults
 ## (0131's rate, 0130's band on, 0121's 0.2, both game switches off), each on

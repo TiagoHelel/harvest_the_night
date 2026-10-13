@@ -30730,3 +30730,170 @@ Notes:
   d-pad), but it cannot press RESET, a key binding or an action row. This
   predates the task. The case resets by Enter and Space, and the gap is
   left for the owner.
+
+## 0293 - The first week, taught - done 2026-10-13
+
+What changed: the first day's nine lines are now a week of thirteen, spread
+over Spring 1 to 7, so the first morning is four lines and each later one
+arrives when it first matters. "Seen" is remembered per step, so a player who
+finished the 0.1 day one still meets the lessons that day never had. Both
+hashes moved on purpose (below).
+
+**The week** (`GameData.TUTORIAL`, `from_day` and `when` per step):
+
+| Spring | Steps | Lines |
+|---|---|---|
+| 1, by day | chop, plant, water, bed | 4 |
+| 1, the night | cursor (the build step), START (the build step), dawn (the night) | 3 |
+| 2 | sell (the stall) | 1 |
+| 3 | craft (the workshop); forecast (at 18:00, by its panel) | 2 |
+| 4 | fish (the rod, at the pond) | 1 |
+| 5 | season (under the date) | 1 |
+| 6 | - | 0 |
+| 7 | full_moon (under the date, from the morning) | 1 |
+| | **the week** | **13** |
+
+Why this schedule:
+- **Spring 1** is what the first night needs and nothing else: the task's
+  seven, four by day and three after the bed.
+- **The stall** moves to Spring 2, once there is a day's wood to sell.
+- **The workshop** moves to Spring 3.
+- **The forecast** is shown at 18:00 on Spring 3. Night 3 is the first with
+  something new in it: the runners, on every seed's Spring (I read seeds 0,
+  1, 424242 and 20260927, Spring 1-7). Nights 1 and 2 are walkers only.
+- **The rod** comes mid-week, on Spring 4.
+- **The seasons** come on Spring 5, as the calendar: where the date is, and
+  that each season has its own crops.
+- **The Full Moon** is taught on the morning of Spring 7, the first one
+  (`FULL_MOON_DAYS`).
+
+The 0195 tips keep the lessons that were already theirs, one line per lesson:
+- **the bin**: TIP_BIN, when he faces it;
+- **the bar**: TIP_BITE, on the first bite - the week's rod line only says
+  to cast;
+- **what a new season does**: TIP_SEASON on Summer 1 (crops wither, new
+  seeds). The week's Spring 5 line is the calendar, not the change.
+
+- **`GameData`**:
+  - **`MAX_TUTORIAL_LINES` 9 -> 13** (range 3-13): raised exactly as far as
+    the week's four new lessons need - the forecast, the rod, the seasons,
+    the Full Moon.
+  - **`MAX_TUTORIAL_LINES_PER_DAY` = 5** (`# LEVER`, 3-7).
+    `check_tutorial` counts each date's day lines and its night's (`build`
+    and `night` steps) apart. Taken literally, the task's "per day" and
+    "start at 5" contradict its own day one of seven. A date's daylight and
+    its night are read hours apart, with the bed and the fade between, so I
+    counted them apart and say so here. Spring 1 is 4 + 3 and the busiest;
+    every other day is at most 2.
+  - `check_tutorial` also refuses a step with no Spring date, or one taught
+    at no part of a day (`TUTORIAL_WHEN`: day, dusk, build, night).
+  - `MAX_TUTORIAL_LINE_LENGTH` is unchanged.
+  - `from_day` carries `# LEVER` on the steps after Spring 1.
+  - `TUTORIAL_V1` lists the 0.1 steps for the migration.
+- **`Tutorial`**:
+  - **It still watches and never gates.** `tick()` checks every step from
+    the first tick, so a lesson found early is done early. `current()`,
+    `current_here()`, `anchor_of()` and `points_at()` offer only a step
+    whose day has come (`is_due`), in its own part of the day (`phase_of`
+    from `when`; a `dusk` one from 18:00).
+  - **A `dated` step goes before an older lesson still waiting.** These are
+    the forecast, the seasons and the Full Moon. Each is about tonight and
+    finishes when its night begins (`state.night >= from_day`) - something
+    the state shows, never a panel looked at.
+  - `skip` takes the ids the screen has seen before. `is_finished()` means
+    all thirteen.
+  - **The new steps finish on**:
+    - **sell**: the farmer facing the stall. "More money than at the start"
+      was day one's rule, and on Spring 2 the first night's pay already
+      meets it.
+    - **fish**: a line in the water, or anything ever landed.
+    - **cursor**: a defence standing, the old `build` rule.
+  - **Where the lines point**:
+    - **`cursor` was `build`** and points at the cursor's own cell: the
+      `build_cell` the view writes every frame, so the line goes where the
+      player is looking, not where the farmer sleeps.
+    - **fish** points at the nearest water.
+    - **New anchors**: `forecast` (the panel) and `date` (the day HUD's
+      date).
+- **`Settings` 1 -> 2**:
+  - `gameplay/tutorial_seen` is the list of step ids done in any run.
+  - **`_migrate` turns a 0.1 `true` into `TUTORIAL_V1`'s ids**, and `false`
+    into none. The 0.1 `build` is not today's `cursor`, so a 0.1 player
+    still gets the bed, the cursor, START, dawn and the week.
+  - `load_from_disk(path)` can read another file, for the golden.
+  - **`tools/goldens/settings-v1.cfg`**: a 0.1 file written by `ConfigFile`
+    the way 0.1's `save()` wrote one, with pt_BR, three volumes, interact
+    rebound to J and `tutorial_seen=true`.
+- **`TutorialPrompt`**:
+  - It reads the list once, passes over it, and writes each step into it as
+    it is done (`_remember_done`).
+  - New placements: the forecast's line under its panel, right-aligned, its
+    pointer up at the panel; the seasons' and the Full Moon's under the
+    date.
+  - **A cell line is placed by `WorldView.cell_to_screen`**, as the tips
+    are. The viewport transform it used was the window's, which put the
+    cursor's line on the hotbar in a 1920x1080 capture - seen in the shot.
+  - `remembers` and `reads_seen` are switched off by `shot.gd`
+    (`_quiet_tutorial`), which replaces the old `_asked`/`_muted` hack.
+- **The input suites**:
+  - `input_check.open_scene` empties the list, after `Settings` has read
+    its file. Otherwise the file's list comes back on the first frame -
+    measured, the first case opened on the bed.
+  - `_put_tips_back` restores the player's own list, so a test run teaches
+    this machine nothing.
+- **Rewritten in place**:
+  - `_task_0041_tutorial` (headless_check): thirteen lines; every step sits
+    on its own day; the week's ids.
+  - `_task_0141_tutorial` (headless_v1): the scripted day one - with the
+    bench found early - and the same-night-but-the-lesson assert kept; the
+    cursor's line on the cursor's cell.
+  - `_case_0041_tutorial` (input_check) and `_case_0141_tutorial`
+    (input_v1): `cursor` for `build`, and the line on the cursor's cell.
+  - 0195's tip groups did not need it: they mark every step done.
+- **`_task_0293_first_week`** (headless_v1, 108 groups):
+  - the week passes its own check, and refuses a crowded day, an undated
+    step and an unknown `when`;
+  - every step is offered on its own day and part of it, and not the day
+    before;
+  - **a scripted player**: doing only what `current_here`/`points_at` ask
+    (chop the pointed tree, sow the pointed plot, fill the can, to bed, a
+    barricade at the pointed cell, START, the night held to a near dawn as
+    0141's script does, out of the door), it is asked for day one's seven
+    in order, none too soon, and reaches Spring 2's morning with the house
+    at 100 and day one taught - where the next line is the stall's;
+  - **the 0.1 file**: it keeps its language, volumes and rebind; every key
+    it lacks is at its default; `tutorial_seen` is `TUTORIAL_V1`; and with
+    that list only bed, cursor, start, dawn, forecast, fish, season and
+    full_moon are offered.
+- **Captures**: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast
+  --fhd` (and `--pt_BR`), three new scenarios, in `implementation/shots/0293/`.
+  I opened all six:
+  - the bed's line over the bed in the house;
+  - the cursor's on the cursor's cell in the build step;
+  - the forecast's under its panel at 18:16 on Spring 3.
+  Each sits on its thing and nothing covers it.
+- **SIM 19045517 -> 744605805**, on purpose. The determinism scenario's
+  tutorial list changed three ways:
+  - `build` is `cursor`;
+  - `fish` joins (the scenario casts on day one);
+  - `sell` drops out - it ended the scenario with $317 against a $25 start,
+    which the old rule took for a sale, and the farmer never faced the
+    stall.
+- **DATA 1862823492 -> 1214651628**, on purpose: `TUTORIAL` is in `digest()`, and since this task `TUTORIAL_WHEN` and `TUTORIAL_V1` beside it (verify's every-table-hashed check asked for both).
+- **What the loop cannot know** - whether a stranger reads these lines - is
+  already a question in 0295's prompt for PLAYTEST.md's "what to report".
+
+Files: src/core/game_data.gd, src/core/tutorial.gd, src/app/settings.gd,
+src/ui/tutorial_prompt.gd, src/ui/main.gd, assets/locale/strings.csv,
+tools/goldens/settings-v1.cfg, tools/determinism_sim_hash.txt,
+tools/determinism_data_hash.txt, src/tools/shot.gd, src/tools/headless_check.gd,
+src/tools/headless_v1.gd, src/tools/input_check.gd, src/tools/input_v1.gd,
+implementation/shots/0293/
+Verify: PASS, 61 checks in 1,084 s (`--accept` for the two guards); 19,593 headless / 2,834 headless_v1 (108 groups) / 1,271 + 736 + 54 input cases; 915 strings; sim 19045517 -> 744605805 and data 1862823492 -> 1214651628 recorded
+Notes:
+- **`TUT_BUILD` is gone**, and `TUT_CURSOR` has taken its place in both
+  languages.
+- **A dated line is gone at its night whether it was read or not.** A
+  player who sleeps through Spring 5's daylight never sees the seasons'
+  line. That is the rule the task asks for (finish on the state), and
+  0295's tester is the one to say whether it matters.

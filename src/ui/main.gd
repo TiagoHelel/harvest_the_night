@@ -322,6 +322,8 @@ func _hand_out() -> void:
 	_workshop.show_state(_driver.state)
 	_tutorial.house = _house_view
 	_tutorial.night_hud = _night_hud
+	_tutorial.forecast = _forecast
+	_tutorial.hud = _hud
 	_tutorial.show_state(_driver.state, _world)
 	_tips.keeper = self
 	_tips.tutorial = _tutorial

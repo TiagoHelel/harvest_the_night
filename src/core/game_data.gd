@@ -2098,13 +2098,19 @@ static func pay_order(group: StringName, prices: Dictionary = SELL_PRICE) -> Arr
 const EMPTY_RELOAD_PERCENT := 300       # LEVER: percent of normal, 150-500
 const EMPTY_DAMAGE_PERCENT := 30        # LEVER: percent of normal, 10-60
 
-## How much day one is allowed to say.
+## How much the first week is allowed to say.
 ##
 ## Nine since task 0141: the five day lines and the four of the new night -
-## to bed, the build step, START, dawn - the top of the range rather than
-## two day lines merged into one that says two things. The length is here
-## too because a line that wraps is two lines wearing a hat.
-const MAX_TUTORIAL_LINES := 9           # LEVER: lines, 3-9
+## to bed, the build step, START, dawn. **Thirteen since task 0293**, which
+## spread them over Spring 1 to 7 and added the four a week brings - the
+## forecast, the rod, the seasons, the Full Moon - so the range was raised
+## exactly that far and no further. The length is here too because a line
+## that wraps is two lines wearing a hat.
+const MAX_TUTORIAL_LINES := 13          # LEVER: lines, 3-13
+## **And how much one day may** (task 0293): a date's lines by day, and its
+## night's after the bed, each counted against this. Day one's four by day
+## and three in the night are the most any day carries.
+const MAX_TUTORIAL_LINES_PER_DAY := 5   # LEVER: lines, 3-7
 const MAX_TUTORIAL_LINE_LENGTH := 76    # LEVER: characters, 40-90
 
 
@@ -2261,19 +2267,65 @@ const STALL_CLOSES := 17 * 60           # LEVER: minutes, 13:00-dusk
 ## are practical lines too - what to press and where - and the first night
 ## is taught as it is played, in the build step and the waves, where the
 ## prompt now follows.
+##
+## **The first week since task 0293.** Each step names the Spring date it may
+## first show (`from_day`, against `Calendar.date`), so the first morning is
+## four lines and the rest arrive when they first matter:
+## - **Spring 1**: the trees, a seed, the water and the bed by day; in the
+##   first night the cursor, START and dawn. What the first night needs and
+##   nothing else.
+## - **Spring 2**: the stall, once a day's wood is there to sell.
+## - **Spring 3**: the workshop; and at 18:00 (`when` dusk) the forecast, because
+##   night 3 is the first with something new in it - the runners, on every
+##   seed's Spring.
+## - **Spring 4**: the rod. The bar itself is left to 0195's bite tip, which
+##   shows on the first bite.
+## - **Spring 5**: the seasons on the date. What a new season does to the
+##   crops is 0195's season tip, on Summer 1.
+## - **Spring 7**: the Full Moon, on the morning of the first one.
+## The bin is left to 0195's bin tip too: one line per lesson, never both.
+##
+## `when` is the part of the day a step is taught in - `day` when it is not
+## said, `dusk` (by day, from 18:00), `build` (the build step) or `night`.
+## A `dated` step is about its own date's night: it finishes when that night
+## begins, whether or not anybody read it (`Tutorial`), and while its day
+## lasts it goes before an older lesson still waiting.
+##
+## **`cursor` was `build`**, renamed with the lesson: the guardian's cursor
+## (0131) is new since the 0.1 that a returning player finished, so it is a
+## step they have not seen (`Settings._migrate`).
 const TUTORIAL: Array = [
-	{"id": &"chop", "line": &"TUT_CHOP"},
-	{"id": &"plant", "line": &"TUT_PLANT"},
-	{"id": &"water", "line": &"TUT_WATER"},
-	{"id": &"sell", "line": &"TUT_SELL"},
-	{"id": &"craft", "line": &"TUT_CRAFT"},
+	{"id": &"chop", "line": &"TUT_CHOP", "from_day": 1},
+	{"id": &"plant", "line": &"TUT_PLANT", "from_day": 1},
+	{"id": &"water", "line": &"TUT_WATER", "from_day": 1},
 	# **The new night** (task 0141): to bed, which is the switch; the build
-	# step, where defences go down since 0132; START; and holding till dawn.
-	{"id": &"bed", "line": &"TUT_BED"},
-	{"id": &"build", "line": &"TUT_BUILD"},
-	{"id": &"start", "line": &"TUT_START"},
-	{"id": &"dawn", "line": &"TUT_DAWN"},
+	# step, where defences go down at the cursor since 0131; START; and
+	# holding till dawn.
+	{"id": &"bed", "line": &"TUT_BED", "from_day": 1},
+	{"id": &"cursor", "line": &"TUT_CURSOR", "from_day": 1, "when": &"build"},
+	{"id": &"start", "line": &"TUT_START", "from_day": 1, "when": &"build"},
+	{"id": &"dawn", "line": &"TUT_DAWN", "from_day": 1, "when": &"night"},
+	{"id": &"sell", "line": &"TUT_SELL", "from_day": 2},             # LEVER: Spring date, 1-7
+	{"id": &"craft", "line": &"TUT_CRAFT", "from_day": 3},           # LEVER: Spring date, 1-7
+	{"id": &"forecast", "line": &"TUT_FORECAST", "from_day": 3,      # LEVER: Spring date, 2-7
+		"when": &"dusk", "dated": true},
+	{"id": &"fish", "line": &"TUT_FISH", "from_day": 4},             # LEVER: Spring date, 1-7
+	{"id": &"season", "line": &"TUT_SEASON", "from_day": 5,          # LEVER: Spring date, 1-7
+		"dated": true},
+	{"id": &"full_moon", "line": &"TUT_FULL_MOON", "from_day": 7,    # LEVER: a Full Moon date
+		"dated": true},
 ]
+
+## **The 0.1 day one's steps** (task 0293), for `Settings._migrate`: what a
+## player who finished it with `gameplay/tutorial_seen` `true` had been
+## taught. `build` and `night` are gone - the build step is the cursor's
+## now, and the night's lessons are 0141's - so only the five that are
+## still steps keep their lines down.
+const TUTORIAL_V1: Array = [&"chop", &"plant", &"water", &"sell", &"craft",
+	&"build", &"night"]
+
+## The parts of a day a step may be taught in (task 0293).
+const TUTORIAL_WHEN: Array = [&"day", &"dusk", &"build", &"night"]
 
 ## **The new day's tips** (task 0195). There is one each for what the first
 ## day does not teach: tilling grass, the seasons, the shipping bin, the
@@ -5884,12 +5936,19 @@ static func check_stall_hours(opens: int, closes: int) -> Array:
 	return errors
 
 
-## Day one's lines. Short, few, and each about something the game has.
+## The week's lines. Short, few, and each about something the game has.
+##
+## **Counted per day too** (task 0293): each date's lines by day, and its
+## night's (the `build` and `night` steps), against
+## `MAX_TUTORIAL_LINES_PER_DAY` - the bed and the fade come between the two,
+## so a day's four and its night's three are read hours apart. A step's day
+## is a Spring date, 1 to `SEASON_DAYS`, and its `when` one of the four.
 static func check_tutorial(steps: Array) -> Array:
 	var errors: Array = []
 	var seen: Dictionary = {}
+	var per_day: Dictionary = {}
 	if steps.size() > MAX_TUTORIAL_LINES:
-		errors.append("day one has %d lines and may have %d"
+		errors.append("the week has %d lines and may have %d"
 			% [steps.size(), MAX_TUTORIAL_LINES])
 	for entry in steps:
 		var step: Dictionary = entry
@@ -5897,6 +5956,18 @@ static func check_tutorial(steps: Array) -> Array:
 		if seen.has(id):
 			errors.append("tutorial step '%s' appears twice" % id)
 		seen[id] = true
+		var day := int(step.get("from_day", 0))
+		if day < 1 or day > SEASON_DAYS:
+			errors.append("tutorial step '%s' is for day %d, not a Spring date" % [id, day])
+		var when := StringName(step.get("when", &"day"))
+		if not TUTORIAL_WHEN.has(when):
+			errors.append("tutorial step '%s' is taught at '%s', which is no part of a day" % [id, when])
+		var by_night := when == &"build" or when == &"night"
+		var part := "%d %s" % [day, "night" if by_night else "day"]
+		per_day[part] = int(per_day.get(part, 0)) + 1
+		if int(per_day[part]) == MAX_TUTORIAL_LINES_PER_DAY + 1:
+			errors.append("Spring %d's %s has more than %d lines"
+				% [day, "night" if by_night else "day", MAX_TUTORIAL_LINES_PER_DAY])
 		# The key, not the words: how long the words are is
 		# `tools/i18n_check.py`'s question now, in every language rather than
 		# in one, and it measures them in the font rather than counting them.
@@ -6518,7 +6589,9 @@ static func digest() -> int:
 		"season_stock": SEASON_STOCK,
 		"animal_stall": [ANIMAL_PRICE, ANIMAL_STOCK, UPGRADE_STOCK],
 		"stall_hours": [STALL_OPENS, STALL_CLOSES],
-		"tutorial": TUTORIAL,
+		# The week's steps, the parts of a day they may name and the 0.1
+		# steps a returning player had (task 0293).
+		"tutorial": [TUTORIAL, TUTORIAL_WHEN, TUTORIAL_V1],
 		"tips": [TIPS, TIP_MIN_SECONDS, TIP_SECONDS],
 		# The achievements (task 0287).
 		"achievements": [ACHIEVEMENTS, ACHIEVEMENT_KINDS],

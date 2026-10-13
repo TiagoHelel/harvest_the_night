@@ -59,6 +59,10 @@ var _scene: Node = null
 
 func _initialize() -> void:
 	_tips_before = (Save.read_profile().get("tips_seen", []) as Array).duplicate()
+	var settings: Node = (load("res://src/app/settings.gd") as GDScript).new()
+	settings.load_from_disk()
+	_lessons_before = (settings.get_value(TUTORIAL_SEEN) as Array).duplicate()
+	settings.free()
 	# Not awaited: `_run()` needs frames to pass, which only happens once
 	# `_initialize()` has returned and the main loop is turning. `_finish()` is
 	# called at the end of `_run()`, and the watchdog covers the case where it
@@ -72,11 +76,22 @@ func _initialize() -> void:
 ## nothing. Put back when the run ends.
 var _tips_before: Array = []
 
+## **And the tutorial's steps seen, likewise** (task 0293): the prompt writes
+## each step it sees done into `gameplay/tutorial_seen`, so every scene opens
+## on an empty list (`open_scene`) - a case finds day one's lines up whatever
+## an earlier case or run taught - and the player's own list is put back
+## when the run ends.
+const TUTORIAL_SEEN := &"gameplay/tutorial_seen"
+var _lessons_before: Array = []
+
 
 func _put_tips_back() -> void:
 	var profile := Save.read_profile()
 	profile["tips_seen"] = _tips_before.duplicate()
 	Save.write_profile(profile)
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if settings != null:
+		settings.set_value(TUTORIAL_SEEN, _lessons_before.duplicate())
 
 
 func _process(delta: float) -> bool:
@@ -1429,6 +1444,14 @@ func _case_0027_the_loop() -> void:
 ## inherit the mess left by the one before it.
 func open_scene(path: String) -> void:
 	await close_scene()
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if settings != null:
+		# Not before it has read the file, or the file would come back over
+		# the empty list on the first frame.
+		if not settings.is_node_ready():
+			await process_frame
+		if not (settings.get_value(TUTORIAL_SEEN) as Array).is_empty():
+			settings.set_value(TUTORIAL_SEEN, [])
 	var packed: PackedScene = load(path)
 	if packed == null:
 		_fail("could not load %s" % path)
@@ -2972,13 +2995,14 @@ func _case_0041_tutorial() -> void:
 		"and the line about the bench is simply gone, unread")
 
 	# **It follows him into the build step** (task 0141): the day's lines go
-	# with the day, and the build step's own line takes over.
+	# with the day, and the build step's own line takes over - the cursor's,
+	# since task 0293.
 	await hold_key(KEY_N, 4)
 	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
 		"the night")
-	await until(func() -> bool: return prompt.showing() == &"build",
+	await until(func() -> bool: return prompt.showing() == &"cursor",
 		"the build step's line", 100000)
-	expect(prompt.visible and prompt.showing() == &"build",
+	expect(prompt.visible and prompt.showing() == &"cursor",
 		"and the build step has its own line", str(prompt.showing()))
 
 	await close_scene()

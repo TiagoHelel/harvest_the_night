@@ -135,6 +135,9 @@ const SCENARIOS: Array = [
 	["tutorial_bed", "day one, after the day's lines: the bed's, over the bed", ""],
 	["tutorial_start", "day one's build step: START's line", ""],
 	["tutorial_dawn", "day one's night: dawn's line", ""],
+	["tut_bed", "the first week: Spring 1's day lines done, the bed's line over the bed", ""],
+	["tut_cursor", "the first week: the first build step, the cursor's line on its cell", ""],
+	["tut_forecast", "the first week: Spring 3 at dusk, the forecast's line by its panel", ""],
 	["morning", "the morning report, every line it has", "ResultScreen"],
 	["boss_escaped", "the morning after Spring 14's boss got away", "ResultScreen"],
 	["year_end", "the year survived, after the credits", "ResultScreen"],
@@ -325,6 +328,7 @@ func _initialize() -> void:
 	seed(SPARK_SEED)
 	var main: Node = load("res://scenes/Main.tscn").instantiate()
 	root.add_child(main)
+	_quiet_tutorial(main)
 	await process_frame
 	await process_frame
 	# **The profile's tips, put back at the end** (task 0195): every picture
@@ -411,6 +415,7 @@ func _take_the_trailer(folder: String) -> void:
 	seed(SPARK_SEED)
 	var main: Node = load("res://scenes/Main.tscn").instantiate()
 	root.add_child(main)
+	_quiet_tutorial(main)
 	await process_frame
 	await process_frame
 
@@ -545,6 +550,7 @@ func _take_the_switch(folder: String) -> void:
 	seed(SPARK_SEED)
 	var main: Node = load("res://scenes/Main.tscn").instantiate()
 	root.add_child(main)
+	_quiet_tutorial(main)
 	await process_frame
 	await process_frame
 
@@ -710,6 +716,18 @@ func _find(node: Node, named: String) -> Node:
 
 
 ## Build one scenario, let it settle, and write the PNG.
+## **A picture never touches the player's lessons** (task 0293). The
+## prompt writes every step it sees done into `gameplay/tutorial_seen` in the
+## real `user://settings.cfg`, and passes over the ones there: told neither,
+## a picture shows its line whatever this machine's player has seen, and
+## teaches the next run on this machine nothing.
+func _quiet_tutorial(main: Node) -> void:
+	var prompt := main.get_node_or_null("%TutorialPrompt") as TutorialPrompt
+	if prompt != null:
+		prompt.remembers = false
+		prompt.reads_seen = false
+
+
 func _take(main: Node, entry: Array, folder: String) -> void:
 	var name := str(entry[0])
 
@@ -787,6 +805,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"tutorial_bed": _set_tutorial_bed(state)
 		"tutorial_start": _set_tutorial_start(state)
 		"tutorial_dawn": _set_tutorial_dawn(state)
+		"tut_bed": _set_tut_bed(state)
+		"tut_cursor": _set_tut_cursor(state)
+		"tut_forecast": _set_tut_forecast(state)
 		"morning": _set_morning(state)
 		"boss_escaped": _set_boss_escaped(state)
 		"calm_morning": _set_calm_morning(state)
@@ -857,18 +878,6 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"repair": _set_repair(state)
 		"aim": _set_aim(state)
 		"options_controls_pad": _set_options_controls_pad(state)
-
-	# **A picture never writes the player's settings.** A run set late in
-	# the year has the lessons behind it (`_on_date`), and the prompt that
-	# sees a finished tutorial records `gameplay/tutorial_seen` in the real
-	# `user://settings.cfg` - which mutes day one's lines on this machine, and
-	# `input_v1`'s tutorial case with them. Told it has been seen, it stays
-	# down and writes nothing.
-	if Tutorial.is_finished(state):
-		var prompt: Node = main.get_node_or_null("%TutorialPrompt")
-		if prompt != null:
-			prompt.set("_asked", true)
-			prompt.set("_muted", true)
 
 	if int(state["phase"]) == Phases.DAY:
 		_walk_to(state, _standing_at)
@@ -2752,6 +2761,34 @@ func _set_bedtime(state: Dictionary) -> void:
 
 func _set_tutorial_bed(state: Dictionary) -> void:
 	_set_tutorial_night(state, 0)
+
+
+## **The first week** (task 0293): Spring 1's three day lines done and the
+## bed's over the bed, in the house.
+func _set_tut_bed(state: Dictionary) -> void:
+	((state["tutorial"] as Dictionary)["done"] as Array).assign([&"chop", &"plant", &"water"])
+	_set_house_interior(state)
+
+
+## The first build step, the bed behind it: the cursor's line on the cursor's
+## own cell, which the night's framing puts on open ground east of the house.
+func _set_tut_cursor(state: Dictionary) -> void:
+	((state["tutorial"] as Dictionary)["done"] as Array).assign(
+		[&"chop", &"plant", &"water", &"bed"])
+	NightRoad.into_build(state)
+	_camera_at = Farm.house_centre(state) + Vector2i(7, 3)
+
+
+## Spring 3 at 18:10, the first night with something new in it (the
+## runners): the forecast is up and its line beside it. The days before are
+## behind the player, the workshop's line too.
+func _set_tut_forecast(state: Dictionary) -> void:
+	state["day"] = 3
+	state["nights_won"] = 2
+	((state["tutorial"] as Dictionary)["done"] as Array).assign(
+		[&"chop", &"plant", &"water", &"bed", &"cursor", &"start", &"dawn", &"sell", &"craft"])
+	_a_sown_field(state)
+	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 10) - int(state["day_tick"]), 1))
 
 
 func _set_tutorial_start(state: Dictionary) -> void:

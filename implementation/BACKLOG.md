@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####################....`  **244 / 296 done**
+`####################....`  **245 / 296 done**
 
-0 doing / 51 todo / 1 blocked across 18 phases.
+0 doing / 50 todo / 1 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-52 task(s) left, the ready ones first, then what they
+51 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -800,27 +800,6 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
 
-### 0293 - The first week, taught
-
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/ui/tutorial_prompt.gd, src/app/settings.gd, tools/goldens/, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-A stranger learns 1.0 the way they learned the MVP's first day - one short line, on the thing it is about, gone when it is done - but spread over Spring 1 to 7, so the first morning is not a lecture and the forecast, the bin and the rod arrive when they first matter.
-
-- Start from what 0141 and 0195 left in `GameData.TUTORIAL` and write the week down as data: each step gains the Spring date it may first show (e.g. `from_day`, read against `Calendar.date`), in the order a week happens - day 1 chop, plant, water, the bed, the cursor, START and dawn; the bin and the stall once there is something to sell; the forecast at 18:00 of the first night with something new in it; the rod and the minigame mid-week; the season and the Full Moon by day 7. Where a 0195 tip already teaches a lesson (the bin, the first bite, a new season), the week takes it over or leaves it to the tip - one line per lesson, never both. The schedule is the task's to justify in the journal
-- It still watches and never gates (the `Tutorial` header): `Tutorial.tick` keeps checking every step, a step done early by a player who found it alone is done, and `current()` and `points_at()` only offer steps whose day has come. Keep 0141's assert that ignoring the prompts reaches the same night with the same state apart from `tutorial` - one day and night in the suite, never Spring 1-7
-- Every step finishes on something the state shows: the forecast step is done when the night it forecast begins, not when a panel was looked at - the rules cannot see the screen
-- Short, per day: `check_tutorial` counts the week's lines per day against a new `# LEVER` `MAX_TUTORIAL_LINES_PER_DAY` (3-7, start at 5) and the week against `MAX_TUTORIAL_LINES`, whose comment and range are raised only as far as the week needs, with the reason in the journal (0195's tips keep their own check and do not count per day). `MAX_TUTORIAL_LINE_LENGTH` is unchanged, and no line describes the switch of reality - the bed and the fade show it
-- Never twice, but the new lessons still reach a returning player: `gameplay/tutorial_seen` is one bool, so whoever finished the 0.1 day one would never see the bed or the cursor. Unless 0141 or 0195 already changed it, make it the list of step ids seen, with a `Settings.VERSION` bump whose `Settings._migrate` turns `true` into the 0.1 steps. The bump gets its golden: a 0.1 `settings.cfg` fixture in `tools/goldens/` (e.g. `settings-v1.cfg`, in the format `git show bea89a88:src/app/settings.gd` saves, with a non-default language, volumes, a rebind and `tutorial_seen` true) - the fixture goes in even if 0141 or 0195 already changed the key
-- Each line sits on its thing through `tutorial_prompt.gd`: the bed, the cursor's cell, the START button, the forecast panel, the bin, the pond. At night the line follows the camera, not the sleeping farmer
-- Rewrite in place what assumed every step shows on day one: `_task_0041_tutorial` in `headless_check.gd`, 0141's `_task_0141_tutorial`/`_case_0141_tutorial` and 0195's tip groups in `headless_v1.gd`/`input_v1.gd`
-- Every line is a `TUT_*` row in both languages with a real width. `TUTORIAL` is in `GameData.digest()`, so DATA moves on purpose; SIM moves only if the done list in the determinism scenario changes - say which, both numbers in the journal
-- What the loop cannot know - whether a stranger reads them - becomes a question in 0295's tester note, not a guess here
-
-  - done when: `check_tutorial` passes, and the journal has the week as a table: day, steps, lines
-  - done when: `_task_0293_first_week` in `src/tools/headless_v1.gd`: a scripted player that only does what `Tutorial.current()` and `points_at()` ask gets from Spring 1 at 06:00 to Spring 2's morning with the house standing and every day-1 step done (going to bed early, so the group stays a few seconds); no step is offered before its day
-  - done when: the same group: the 0.1 `settings.cfg` fixture loads with its language, volumes and rebind kept, every key it lacks at its `Settings.DEFAULTS` value, and its `tutorial_seen` of `true` migrated to the 0.1 step ids, so only the new steps are offered
-  - done when: 1920x1080 captures of the bed line, the cursor line at night and the forecast line at dusk, in both languages (new scenarios such as `tut_bed`, `tut_cursor`, `tut_forecast`: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast --fhd` and again with `--pt_BR`), opened: each line is on its thing and nothing on screen covers it
-
 ### 0278 - The economy across a year
 
 Waits on 0277.  Likely files: `src/core/game_data.gd, src/core/shop.gd, src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, implementation/BALANCE.md, src/tools/headless_v1.gd`.
@@ -923,7 +902,7 @@ Somebody who played the 0.1 prototype opens 1.0 and finds their farm in the cale
 
 ### 0294 - Every new word in Portuguese
 
-Waits on 0293, 0291.  Likely files: `assets/locale/strings.csv, tools/i18n_check.py, src/ui/names.gd, src/tools/headless_v1.gd`.
+Waits on 0291.  Likely files: `assets/locale/strings.csv, tools/i18n_check.py, src/ui/names.gd, src/tools/headless_v1.gd`.
 
 Portuguese is the owner's language and most of the audience's. Every line 1.0 added gets read again as a whole: one name for each thing, sentences that agree in gender and number, and nothing running off its button.
 
@@ -941,7 +920,7 @@ Portuguese is the owner's language and most of the audience's. Every line 1.0 ad
 
 ### 0295 - A playtest build of the year
 
-Waits on 0280, 0291, 0293, 0294.  Likely files: `src/app/playtest.gd, src/ui/main.gd, tools/playtest.py, docs/PLAYTEST.md, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
+Waits on 0280, 0291, 0294.  Likely files: `src/app/playtest.gd, src/ui/main.gd, tools/playtest.py, docs/PLAYTEST.md, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
 
 Put the year in front of somebody and learn from it: a build that says it is a playtest, a log of what 1.0 is about - bedtimes, the build step, dawn, seasons, lost nights - and a reader that answers 1.0's questions instead of the MVP's. It goes out with the art that has arrived, placeholders and all.
 
@@ -981,7 +960,7 @@ The store page still sells the prototype: ten nights, about an hour, sixteen cro
 
 ### 0297 - Releasing 1.0
 
-Waits on 0290, 0291, 0293, 0294, 0295, 0296.  Likely files: `src/core/build_info.gd, CHANGELOG.md, implementation/RELEASE.md, export_presets.cfg, tools/release.py, tools/devlog.py, docs/devlog/, tools/goldens/, src/tools/headless_v1.gd`.
+Waits on 0290, 0291, 0294, 0295, 0296.  Likely files: `src/core/build_info.gd, CHANGELOG.md, implementation/RELEASE.md, export_presets.cfg, tools/release.py, tools/devlog.py, docs/devlog/, tools/goldens/, src/tools/headless_v1.gd`.
 
 Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a player would recognise, both builds made and proven, the known issues told honestly - and then stop, because publishing is the owner's.
 
@@ -1340,12 +1319,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
 - [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
-## 17 - Ship 1.0  (1/7)
+## 17 - Ship 1.0  (2/7)
 
 - [ ] **0291** [Saves into 1.0](prompts/0291-saves-v1.md) - needs 0279
 - [x] **0292** [Options for the new controls](prompts/0292-options-v1.md)
-- [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md)
-- [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0293, 0291
-- [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0280, 0291, 0293, 0294
+- [x] **0293** [The first week, taught](prompts/0293-onboarding-v1.md)
+- [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0291
+- [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0280, 0291, 0294
 - [ ] **0296** [The store page and trailer for 1.0](prompts/0296-store-v1.md) - needs 0290, 0294
-- [ ] **0297** [Releasing 1.0](prompts/0297-release-v1.md) - needs 0290, 0291, 0293, 0294, 0295, 0296
+- [ ] **0297** [Releasing 1.0](prompts/0297-release-v1.md) - needs 0290, 0291, 0294, 0295, 0296

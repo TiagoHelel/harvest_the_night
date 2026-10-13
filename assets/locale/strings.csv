@@ -644,7 +644,6 @@ TITLE_PRESS_ANY,0,PRESS ANY KEY,APERTE QUALQUER TECLA
 TITLE_QUIT,140,QUIT,SAIR
 TITLE_STATS,140,STATISTICS,ESTATÍSTICAS
 TUT_BED,462,"Done for the day? Sleep in the bed in the house, or press GO TO BED.","Acabou o dia? Durma na cama da casa, ou aperte IR DORMIR."
-TUT_BUILD,462,Pick from the bar below and set it between the house and the dark.,Escolha na barra de baixo e ponha entre a casa e o escuro.
 TUT_CHOP,462,Wood is in the trees. Stand at one and hold SPACE.,A madeira está nas árvores. Fique numa e segure ESPAÇO.
 TUT_CRAFT,462,The workshop turns what you gathered into walls.,A oficina vira o que você colheu em muros.
 TUT_DAWN,462,Keep the house standing until dawn - the countdown is up top.,Mantenha a casa de pé até o amanhecer - a contagem está lá em cima.
@@ -652,6 +651,11 @@ TUT_PLANT,462,SPACE tills and sows. Each seed packet plants one crop.,ESPAÇO re
 TUT_SELL,462,"The stall buys what you gathered, and sells wood, stone and iron.","A banca compra o que você colheu, e vende madeira, pedra e ferro."
 TUT_START,462,"When it is all set, press START. Nothing comes until you do.","Quando estiver tudo pronto, aperte COMEÇAR. Nada vem antes disso."
 TUT_WATER,462,Water crops to grow each morning. Dry crops wait. Fill the can at water.,Regue para crescer a cada manhã. Sem água a planta espera. Encha o regador na água.
+TUT_CURSOR,462,Pick from the bar below and set it down at the cursor.,Escolha na barra de baixo e ponha onde está o cursor.
+TUT_FORECAST,462,"Tonight's forecast: what comes, how many, and from where.","A previsão da noite: o que vem, quantos e de onde."
+TUT_FISH,462,The pond has fish. Face the water and press SPACE to cast.,O lago tem peixes. Fique de frente para a água e aperte ESPAÇO.
+TUT_SEASON,462,The season and its day are up here. Each season has its own crops.,A estação e o dia estão aqui em cima. Cada estação tem suas culturas.
+TUT_FULL_MOON,462,"Full Moon tonight: a bigger night, and a bigger reward if the house holds.","Lua Cheia hoje: uma noite maior, e uma recompensa maior se a casa aguentar."
 TIP_ANIMAL,462,Housed animals eat a bale of hay each morning. Collect at the door.,Animais abrigados comem um fardo de feno por manhã. Colete na porta.
 TIP_BIN,462,Drop goods in the bin any time - they are paid for next morning.,Deixe produtos na caixa a qualquer hora - o pagamento chega de manhã.
 TIP_BITE,462,Press SPACE when the marker crosses the green - a big fish takes more.,Aperte ESPAÇO quando o marcador cruzar o verde - peixe grande pede mais.

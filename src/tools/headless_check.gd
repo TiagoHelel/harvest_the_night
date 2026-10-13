@@ -6813,38 +6813,42 @@ func _task_0040_shop() -> void:
 ## 0041 - day one teaches itself, and teaches nothing by force.
 func _task_0041_tutorial() -> void:
 	# **Nine lines since task 0141**: the day's five, going to bed, and the
-	# first night's three. Short enough to read walking.
+	# first night's three. **A week of thirteen since task 0293**, spread over
+	# Spring 1 to 7. Short enough to read walking.
 	var steps := Tutorial.steps()
-	expect(steps.size() == 9,
-		"day one is nine lines, the day's and the first night's",
+	expect(steps.size() == 13,
+		"the first week is thirteen lines, day one's and the week's",
 		"%d lines" % steps.size())
 	expect(steps.size() <= GameData.MAX_TUTORIAL_LINES,
 		"and no more than the table allows either",
 		"%d of %d" % [steps.size(), GameData.MAX_TUTORIAL_LINES])
 
 	# **Each appears on the thing it describes**, in the part of the day it
-	# is taught in (task 0141). A line with nowhere to point is a line in a
-	# corner, which is a manual; the night's sit on START and on the dawn
-	# countdown, which the view finds by name.
+	# is taught in (task 0141), on its own day (0293). A line with nowhere to
+	# point is a line in a corner, which is a manual; the night's sit on START
+	# and on the dawn countdown, the week's on the forecast's panel and the
+	# date, which the view finds by name.
 	var homeless: Array = []
 	for entry in steps:
 		var one: Dictionary = entry
 		var pointing := State.create(4101)
-		pointing["phase"] = int(Tutorial.TAUGHT_IN.get(StringName(one["id"]),
-			Phases.DAY))
+		pointing["day"] = int(one["from_day"])
+		pointing["nights_won"] = int(one["from_day"]) - 1
+		pointing["phase"] = Tutorial.phase_of(one)
+		if Tutorial.when_of(one) == &"dusk":
+			pointing["day_tick"] = Phases.tick_at_minute(GameData.DUSK_MINUTE)
 		for other in steps:
 			var id := StringName((other as Dictionary)["id"])
-			if id == StringName(one["id"]):
-				break
-			((pointing["tutorial"] as Dictionary)["done"] as Array).append(id)
+			if id != StringName(one["id"]):
+				((pointing["tutorial"] as Dictionary)["done"] as Array).append(id)
 		var anchor := Tutorial.anchor_of(pointing)
-		var sits := anchor == &"start" or anchor == &"dawn" \
+		var sits := [&"start", &"dawn", &"forecast", &"date"].has(anchor) \
 			or Tutorial.points_at(pointing) != Tutorial.NOWHERE
 		if not sits or Tutorial.current_here(pointing).get("id", &"") \
 				!= StringName(one["id"]):
 			homeless.append(String(one["id"]))
 	expect(homeless.is_empty(),
-		"every line has something to sit on - a cell, the bed, START or the countdown",
+		"every line has something to sit on - a cell, the bed, START, the countdown, the forecast or the date",
 		", ".join(homeless))
 
 	# **The switch is shown, not described.** The transition is two seconds
@@ -6917,13 +6921,15 @@ func _task_0041_tutorial() -> void:
 	expect(not GameData.check_tutorial(crowded).is_empty(),
 		"and one line too many")
 
-	# **It teaches the five things the task names.**
+	# **It teaches the five things the task names**, the first night's
+	# (0141) and the week's (0293).
 	var ids: Array = []
 	for entry in steps:
 		ids.append(StringName((entry as Dictionary)["id"]))
 	for wanted in [&"chop", &"plant", &"water", &"sell", &"craft",
-			&"bed", &"build", &"start", &"dawn"]:
-		expect(ids.has(wanted), "day one covers %s" % wanted, str(ids))
+			&"bed", &"cursor", &"start", &"dawn", &"forecast", &"fish",
+			&"season", &"full_moon"]:
+		expect(ids.has(wanted), "the week covers %s" % wanted, str(ids))
 
 	# **It starts at the beginning and points at something.**
 	var state := State.create(2300)
@@ -6996,7 +7002,7 @@ func _task_0041_tutorial() -> void:
 		"and a tower goes down in the first build step, every line unread")
 	Sim.advance(rebel, GameData.TUTORIAL_CHECK_TICKS + 1)
 	expect(Tutorial.progress(rebel) >= 4,
-		"four of the nine lines are simply gone, unread",
+		"four of the week's lines are simply gone, unread",
 		str(Tutorial.progress(rebel)))
 
 	# **And night one is still winnable for the player who read nothing.** The
@@ -7055,7 +7061,7 @@ func _task_0041_tutorial() -> void:
 	expect(Tutorial.is_done(sender, &"dawn"),
 		"a night held finishes that line")
 	expect(Tutorial.is_finished(sender),
-		"and it was the last one, so day one is taught")
+		"and it was the last one, so the week is taught")
 
 	_completed += 1     # last line: an abandoned group never gets here
 
@@ -14713,15 +14719,17 @@ func _task_0082_shots() -> void:
 	# Lord's aura during a cast. A hundred and fourteen since 0256: a foggy
 	# night's forecast. A hundred and fifteen since 0257: a Blood Moon's. A
 	# hundred and eighteen since 0258: the wave in the fog, in the rain and
-	# under a Blood Moon.
-	expect(names.size() == 118,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
+	# under a Blood Moon. A hundred and twenty-one since 0293: the first
+	# week's bed, cursor and forecast lines.
+	expect(names.size() == 121,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
 			"passed_out", "build_day", "repair", "aim", "morning", "woken", "bedtime",
-			"tutorial_bed", "tutorial_start", "tutorial_dawn", "full_moon",
+			"tutorial_bed", "tutorial_start", "tutorial_dawn", "tut_bed",
+			"tut_cursor", "tut_forecast", "full_moon",
 			"boss_escaped", "calm_morning", "trampled", "north_band", "new_ore", "stump",
 			"winter_build", "forecast_dusk", "forecast_build", "forecast_calm",
 			"season_summer", "season_autumn", "season_winter", "season_winter_night",

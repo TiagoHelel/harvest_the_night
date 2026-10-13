@@ -1947,10 +1947,16 @@ func _case_0141_tutorial() -> void:
 	await tap_key(KEY_SPACE)
 	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
 		"the bed to start the night")
-	await until(func() -> bool: return prompt.showing() == &"build",
+	# The cursor's since task 0293, sitting on the cursor's own cell.
+	await until(func() -> bool: return prompt.showing() == &"cursor",
 		"the build step's line", 100000)
-	expect(prompt.visible and line.text == I18n.t(&"TUT_BUILD"),
-		"in the build step the build line is up", line.text)
+	expect(prompt.visible and line.text == I18n.t(&"TUT_CURSOR"),
+		"in the build step the cursor's line is up", line.text)
+	var world: WorldView = require_control("WorldView")
+	await frames(2)
+	var aim := world.cursor().cell() if world != null else Vector2i(-1, -1)
+	expect(Tutorial.points_at(state) == aim,
+		"its line on the cursor's own cell", "%s against %s" % [Tutorial.points_at(state), aim])
 
 	# **A wall down, and START's line, pointing at START.**
 	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})

@@ -33,7 +33,11 @@ const TEMP_PATH := "user://settings.cfg.tmp"
 
 ## Bumped when a key is renamed, removed or changes meaning. `_migrate()` is
 ## where the corresponding fix-up goes.
-const VERSION := 1
+##
+## **2 since task 0293**: `gameplay/tutorial_seen` was one bool and is the list
+## of tutorial steps seen, so a player who finished the 0.1 day one still
+## meets the lessons it never had.
+const VERSION := 2
 
 ## **The one list.** A key that is not here does not exist: it cannot be read,
 ## cannot be written, and is dropped from a file that has it. That is what stops
@@ -78,7 +82,10 @@ const DEFAULTS := {
 	# Task 0078: 0 means "use the lever in game_data". Anything else
 	# overrides it, for a player who has seen the moment enough times.
 	&"video/transition_seconds": 0.0,
-	&"gameplay/tutorial_seen": false,
+	# Task 0293: the tutorial's step ids a player has done, in any run - the
+	# prompt skips them, and writes each as it is done. Never twice, step by
+	# step: a lesson added later still reaches somebody who finished the rest.
+	&"gameplay/tutorial_seen": [],
 	# Task 0180: the fishing assist - a wider green, a slower marker. A rule,
 	# so the run reads it through an intent, never from here. Its Options row
 	# is 0292's.
@@ -219,11 +226,13 @@ func reset(key: StringName = &"") -> void:
 ## (first run), the file will not parse (a crash mid-write, a bad edit, a disk
 ## that lied), or the file is from an older version. The first two land on
 ## defaults with a line in the log; the third goes through `_migrate()`.
-func load_from_disk() -> void:
+func load_from_disk(from: String = "") -> void:
 	_values.clear()
 	_loaded_from_defaults = false
 
-	var path := _recover_path()
+	# **Or another file** (task 0293): a golden fixture, read the way the
+	# real one is - for the checks, which must not touch the player's own.
+	var path := from if from != "" else _recover_path()
 	if path.is_empty():
 		_loaded_from_defaults = true
 		print("Settings: no file at %s, starting on defaults" % PATH)
@@ -334,9 +343,8 @@ func _recover_path() -> String:
 
 ## Bring an older file forward. One `if` per version bump, applied in order.
 ##
-## Nothing to do yet - VERSION is 1 and there has never been a 0 in the wild -
-## but the shape is here so the first rename has somewhere obvious to go, and
-## `headless_check` covers the unknown-version path today.
+## `headless_check` covers the unknown-version path; `tools/goldens/
+## settings-v1.cfg` is a 0.1 file, and `headless_v1` reads it through here.
 func _migrate(raw: Dictionary, from_version: int) -> Dictionary:
 	if from_version < 1:
 		# A file with no version field at all: pre-release, keep what matches.
@@ -344,4 +352,16 @@ func _migrate(raw: Dictionary, from_version: int) -> Dictionary:
 	if from_version > VERSION:
 		push_warning("Settings: file is from a newer build (version %d) - "
 			% from_version + "keeping only the keys this build knows")
+		return raw
+	if from_version < 2:
+		# **1 -> 2** (task 0293): `tutorial_seen` was `true` once the 0.1 day
+		# one was finished. Its steps, as ids, are what that player was
+		# taught; `false` taught nothing.
+		var seen: Variant = raw.get(&"gameplay/tutorial_seen", false)
+		if typeof(seen) == TYPE_BOOL:
+			var ids: Array = []
+			if bool(seen):
+				for id in GameData.TUTORIAL_V1:
+					ids.append(String(id))
+			raw[&"gameplay/tutorial_seen"] = ids
 	return raw
