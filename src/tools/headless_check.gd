@@ -11017,8 +11017,8 @@ func _giant_walk_in(seed_value: int) -> int:
 ## 0059 - a night is a table a designer edits, not code.
 ## **The kinds no night sends yet** (task 0247): in the table and on the farm
 ## for the checks, out of the year's nights until 0271-0274 put them in it and
-## take them off this list. 0248-0252 add theirs.
-const NO_NIGHT_YET: Array = [&"spitter", &"rat", &"crow", &"digger", &"frost_zombie", &"wraith"]
+## take them off this list. 0248-0252 add theirs; summer's two came off at 0272.
+const NO_NIGHT_YET: Array = [&"crow", &"digger", &"frost_zombie", &"wraith"]
 
 
 func _task_0059_wave_data() -> void:

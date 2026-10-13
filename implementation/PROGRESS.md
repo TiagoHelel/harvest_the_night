@@ -28484,3 +28484,272 @@ src/tools/autoplay.gd (a comment),
 tools/determinism_sim_hash.txt, tools/determinism_data_hash.txt,
 implementation/prompts/0271-spring-nights.md,
 implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
+
+## 0272 - Summer's fourteen nights - done 2026-10-12
+
+What changed: summer is written in spring's rhythm, a side wider, and sends
+its own enemies instead of 0270's draft of spring's four:
+- **The rhythm**: the calm night on 15, and summer's first fight on 16 from
+  the east alone. The south east opens on 17 with a handful, the spitter
+  comes on 19 and the Full Moon on 21 sends what is known. The rats come on
+  22 and the Harvester's company on 28.
+- **Five key nights**: 17, 19, 21, 22 and 28. The template makes the other
+  eight days, with the spitter joining on its fifth day and the rats on its
+  eighth.
+- **No weather on an introduction**: 17, 19 and 22 pin `event` off (0270's
+  field), as 0273 asks of a night weather would drown. Seed 0 had fog on the
+  rats' first night.
+- **`tools/play_nights.py`** buys summer's flamethrower and prints a `peak`
+  column, the most bodies alive at once.
+
+DATA moved, on purpose. SIM did not: the determinism scenario fights day 1.
+
+### Summer
+
+**The template** (`SEASON_NIGHTS[1]`):
+
+| Lever | Was (0270's draft) | Now |
+|---|---|---|
+| mix | walker 25, runner 10, tank 37, breaker 28, all from its first day | walker 26, runner 10, tank 22, breaker 22; spitter 12 from its 5th day, rat 8 from its 8th |
+| size | 1800-4200 hp | 1800-5000 hp |
+| waves | 5-7 | 5-7 |
+| gap | 10-5 s | 24-6 s, the least gap (0271) |
+| sides | the south east from its 3rd day | the same; its 3rd day is now a key night |
+
+**The key nights** (`KEY_NIGHTS`; side 1 is the south east):
+
+| Day | Bodies as written | Gap | What it is |
+|---|---|---|---|
+| 17 | 74, six of them walkers from the south east | 12 s | the south east opens, learned before it is tested |
+| 19 | 91, seven spitters in two waves from the east | 10 s | the spitter met |
+| 21 | 112, spitters on both sides | 12 s, waves out at 10 ticks | the Full Moon of what is known, 167 as fought |
+| 22 | 134, 36 rats in two waves from the east | 8 s | the rats met |
+| 28 | 206, 72 rats and 18 spitters | 7 s, waves out at 10 ticks | the Full Moon with the Harvester, 307 as fought |
+
+The night after each introduction sends more of it: 18 sends more from the
+south east than 17's six, 20 sends twelve spitters to 19's seven, and 23
+sends 76 rats to 22's 36.
+
+### Summer's table, beside the draft
+
+`python tools/nights.py 15 28`:
+
+| Day | Marks | Bodies | Hit points | Worth | Sides | Weather (seed 0) | All sent by | Kinds |
+|---|---|---|---|---|---|---|---|---|
+| 15 | calm | 0 | 0 | $0 | - | - | 0 s | nothing: a calm night: the horde regroups after its boss |
+| 16 | made | 66 | 1775 | $311 | E | - | 138 s | 11 breaker, 22 runner, 4 tank, 29 walker |
+| 17 | key | 74 | 1960 | $340 | E,SE | - | 130 s | 12 breaker, 22 runner, 4 tank, 36 walker |
+| 18 | made | 86 | 2280 | $402 | E,SE | rain | 139 s | 14 breaker, 29 runner, 5 tank, 38 walker |
+| 19 | key | 91 | 2630 | $454 | E,SE | - | 147 s | 16 breaker, 26 runner, 7 spitter, 6 tank, 36 walker |
+| 20 | made | 105 | 2775 | $503 | E,SE | - | 140 s | 15 breaker, 32 runner, 12 spitter, 5 tank, 41 walker |
+| 21 | key FULL | 167 | 4815 | $837 | E,SE | - | 165 s | 27 breaker, 48 runner, 18 spitter, 11 tank, 63 walker |
+| 22 | key | 134 | 3274 | $532 | E,SE | - | 138 s | 18 breaker, 36 rat, 16 runner, 8 spitter, 8 tank, 48 walker |
+| 23 | made | 204 | 3784 | $696 | E,SE | - | 170 s | 18 breaker, 76 rat, 38 runner, 15 spitter, 7 tank, 50 walker |
+| 24 | made | 219 | 4018 | $745 | E,SE | - | 166 s | 20 breaker, 82 rat, 41 runner, 16 spitter, 7 tank, 53 walker |
+| 25 | made | 235 | 4347 | $801 | E,SE | - | 165 s | 21 breaker, 88 rat, 44 runner, 17 spitter, 8 tank, 57 walker |
+| 26 | made | 251 | 4601 | $853 | E,SE | - | 162 s | 23 breaker, 94 rat, 47 runner, 18 spitter, 8 tank, 61 walker |
+| 27 | made | 268 | 4960 | $915 | E,SE | - | 161 s | 24 breaker, 100 rat, 50 runner, 20 spitter, 9 tank, 65 walker |
+| 28 | key FULL BOSS | 307 | 8372 | $1333 | E,SE | - | 152 s | 38 breaker, 1 harvester, 108 rat, 33 runner, 26 spitter, 20 tank, 81 walker |
+
+0270's draft, as 0271 printed it (spring's four kinds, both sides from 17):
+
+| Day | Bodies | Hit points | Worth | All sent by |
+|---|---|---|---|---|
+| 16 | 56 | 1715 | $286 | 120 s |
+| 17 | 63 | 1960 | $323 | 120 s |
+| 18 | 68 | 2065 | $345 | 120 s |
+| 19 | 76 | 2355 | $390 | 120 s |
+| 20 | 83 | 2600 | $427 | 120 s |
+| 21 | 147 | 3990 | $676 | 143 s |
+| 22 | 97 | 3005 | $498 | 120 s |
+| 23 | 104 | 3250 | $535 | 120 s |
+| 24 | 111 | 3420 | $568 | 120 s |
+| 25 | 118 | 3665 | $605 | 120 s |
+| 26 | 124 | 3890 | $639 | 120 s |
+| 27 | 132 | 4070 | $676 | 120 s |
+| 28 | 202 | 7190 | $1147 | 160 s |
+
+**Where it starts**: day 16 sends 1775 hit points, between spring's sixth
+night (1250) and its first Full Moon (2070), as the task asks. It is below
+spring's day 13 (2665): the calm night is the season's breath, and summer
+climbs from there.
+
+### `python tools/play_nights.py 15 28`
+
+```text
+HARVEST THE NIGHT - days 15 to 28, scripted build, no player
+  a day of farming worth $0
+  the purse at day 15: $537 from days 1-14
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  result
+    15     0        0     537       3       0   100%      0      0     0  held, house 100/100 after 0s
+    16    66      311     562       3       0   100%      6      4    18  FELL after 143s with 15 still coming
+    17    74      340     603       3       0   100%      6      5    20  FELL after 108s with 28 still coming
+    18    86      402     647       4       0   100%      8      5    19  FELL after 134s with 20 still coming
+    19    91      454     695       4       0   100%     11      9    18  FELL after 154s with 8 still coming
+    20   105      503     746       4       0   100%      9      5    15  FELL after 116s with 5 still coming
+    21   167      837     801       5       0   100%     12      7    33  FELL after 98s with 79 still coming
+    22   134      532     945       6       0   100%      9      8    24  FELL after 104s with 48 still coming
+    23   204      696    1003       6       0   100%      1      1    27  FELL after 38s with 188 still coming
+    24   219      745    1070       4       0   100%     16      9    49  FELL after 168s with 34 still coming
+    25   235      801    1141       4       0   100%      0      0    28  FELL after 32s with 228 still coming
+    26   251      853    1216       5       0   100%     18     10    52  FELL after 162s with 56 still coming
+    27   268      915    1294       5       0   100%      7      5    18  FELL after 59s with 208 still coming
+    28   307     1333    1376       6       0   100%      7      6    66  FELL after 63s with 182 still coming
+  fell: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
+  a day of farming worth $150
+  the purse at day 15: $2637 from days 1-14
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  result
+    15     0        0    2637      10       0   100%      0      0     0  held, house 100/100 after 0s
+    16    66      311    2812      11       0   100%     11      6    19  held, house 55/100 after 153s
+    17    74      340    3003      13       0   100%     12      6    20  held, house 100/100 after 146s
+    18    86      402    3197      14       0   100%     13      9    20  held, house 85/100 after 155s
+    19    91      454    3395      14       0   100%     14      6    18  held, house 100/100 after 162s
+    20   105      503    3596      15       0   100%     16     10    16  held, house 100/100 after 141s
+    21   167      837    3801      14       0   100%     25     13    33  held, house 100/100 after 182s
+    22   134      532    4095      16       0   100%     14     11    24  held, house 100/100 after 155s
+    23   204      696    4303      17       0   100%     19     15    38  held, house 100/100 after 179s
+    24   219      745    4520      19       0   100%     20      9    41  held, house 100/100 after 192s
+    25   235      801    4741      19       0   100%     22     14    33  held, house 100/100 after 167s
+    26   251      853    4966      20       0   100%     22     10    54  held, house 100/100 after 181s
+    27   268      915    5194      19       0   100%     26     17    50  held, house 100/100 after 165s
+    28   307     1333    5426      20       0   100%     26     15    61  FELL after 158s with 21 still coming
+  fell: [28]
+  a day of farming worth $300
+  the purse at day 15: $4737 from days 1-14
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  result
+    15     0        0    4737      19       0   100%      0      0     0  held, house 100/100 after 0s
+    16    66      311    5062      21       0   100%     11      6    17  held, house 100/100 after 152s
+    17    74      340    5403      20       0   100%     12     10    20  held, house 100/100 after 146s
+    18    86      402    5747      23       0   100%     13     10    18  held, house 100/100 after 152s
+    19    91      454    6095      24       0   100%     14     10    17  held, house 100/100 after 161s
+    20   105      503    6446      26       0   100%     16      8    15  held, house 100/100 after 141s
+    21   167      837    6801      25       0   100%     25     14    33  held, house 100/100 after 181s
+    22   134      532    7245      28       0   100%     14      7    23  held, house 100/100 after 152s
+    23   204      696    7603      29       0   100%     19     12    38  held, house 100/100 after 177s
+    24   219      745    7970      29       0   100%     20      9    41  held, house 100/100 after 192s
+    25   235      801    8341      32       0   100%     22     12    31  held, house 100/100 after 166s
+    26   251      853    8716      33       0   100%     22     14    51  held, house 100/100 after 173s
+    27   268      915    9094      35       0   100%     26     13    50  held, house 100/100 after 163s
+    28   307     1333    9476      35       0   100%     31     15    54  held, house 55/100 after 185s
+  all 14 held
+   day   sent   $reward   hit points sent
+    15      0         0                 0
+    16     66       311              1775
+    17     74       340              1960
+    18     86       402              2280
+    19     91       454              2630
+    20    105       503              2775
+    21    167       837              4815
+    22    134       532              3274  <- dips
+    23    204       696              3784
+    24    219       745              4018
+    25    235       801              4347
+    26    251       853              4601
+    27    268       915              4960
+    28    307      1333              8372
+  dips on [22]
+```
+
+**What falls, and why:**
+- **$0 a day**: every night but the calm one. Summer's first fight, 1775
+  hit points, falls at 143 s with 15 still coming. The first draft held it
+  at 15/100, which made it a night that holds at every income.
+- **$150 a day**: everything holds but day 28, which falls at 158 s with 21
+  still coming. That is the Full Moon's 306 bodies and the Harvester
+  against twenty towers, the season's exam, as Spring 14 is. Before it the
+  house is hurt only on 16 (55/100) and 18 (85/100).
+- **$300 a day**: everything holds, day 28 at 55/100.
+
+Every night 16-28 holds at one income and falls at another, the tool's own
+rule.
+
+### The new enemies and what they teach
+
+From 0259's `implementation/MATCHUPS.md` (ordinary night: house damage
+prevented per thousand of the budget). Summer's arsenal is spring's, plus
+the flamethrower, the decoy, the beehive, the bait and the sandbags. The
+catapult and the mortar are autumn's.
+- **The spitter** - the matchup tool's answers are the catapult, the mortar
+  and the auto crossbow, all 192. In summer's arsenal: the auto crossbow
+  192, the mine 146 and the gun tower 67. The flamethrower, the beehive, the
+  decoy and the bait score 0: its spit (4 tiles) out-reaches the
+  flamethrower's cone (3), and it is not lured. **It teaches a line that
+  covers itself**: the crossbow behind the guns, and mines on the road where
+  it stops.
+- **The rats** - the catapult and the flamethrower 183, the mortar 180. In
+  summer's arsenal: the flamethrower 183, the auto crossbow 145, the beehive
+  101 and the gun tower 13. **They teach the flamethrower**, summer's own
+  tower, which 0234 opened for them.
+- **The Harvester** - the catapult and the mortar 94, the auto crossbow 90.
+  In summer's arsenal: the auto crossbow 90, the flamethrower 44, the mine
+  42 and the beehive 41. **It teaches the crossbow and layered walls**: a
+  charge takes down every stone wall in its row and stops at the first
+  hardwood one (0253).
+
+### Rats are many bodies
+
+The most bodies alive at once in `play_nights`, its new `peak` column:
+- **Day 28, the largest rat night** (108 rats as fought, 307 bodies): 66 at
+  $0, falling at 63 s; 61 at $150; 54 at $300.
+- **The made rat nights**: 54 at most, day 26 at $150.
+
+`perf_check.gd`'s swarm (0218, 0248) times 316: the worst case's 16 and 300
+rats. Its tick is 4491 us of 8333, so summer's peak is a fifth of what it
+measured. The year's worst case is 0275's.
+
+### Decided
+
+- **The south east opens on a key night of its own.** The template deals
+  its waves round the open sides in turn, so the first made night with the
+  south east would have sent half the night from it. Day 17 sends it six
+  walkers and nothing else. It is a new thing, so it gets its own night, and
+  the spitter waits two days. On 18, its bite, the template deals both sides
+  alike.
+- **The spitter on 19 and the rats on 22**, spring's tank and breaker days:
+  the spitter before the Full Moon, the rats after it. The rats' answer, the
+  flamethrower, is in the arsenal from day 15, and their numbers are the
+  peak count's question.
+- **The Full Moons come in crowds**: `interval_ticks` 10 on 21 and 28, with
+  a longer quiet between waves, so each wave arrives at once and the night
+  still fills. It moved day 28 at $150 from holding at 40/100 to the
+  season's one fall; it did nothing to 21.
+- **`play_nights` buys the flamethrower** (and is given incendiary rounds,
+  as it is given every material). It is the rats' answer in summer's
+  arsenal, and a summer night played without it is played with spring's
+  list. The season filter takes it out of spring, whose output is the
+  same as 0271's to the byte, bar the new column.
+- **headless_check's `NO_NIGHT_YET`** loses the spitter and the rat: a night
+  sends them now, which is what its "which none does" assert holds.
+
+### Found
+
+- **The $150 player holds summer's first Full Moon untouched**: 167 bodies
+  and 4815 hit points against fourteen towers, at 100/100. Spring's first
+  Full Moon left that income at 10/100 with six. The purse grows by every
+  night's pay and a day's income, $175-295 a night here and about a tower
+  a night. The template adds about 290 hit points a day, and the
+  flamethrower takes a crowd by the cone. A Full Moon twice the size would
+  be an exam for this robot and a wall for a player who spends on the farm.
+  That curve is 0277's, with the year autoplayer: summer's shape is what is
+  written here.
+
+### Hashes
+
+- **DATA 1405228034 -> 117056142**, on purpose: summer's template and its five
+  key nights.
+- **SIM unchanged:** 3524359536. The scenario fights day 1.
+
+Verify: **PASS**, 61 of 61 in 1024 s, DATA recorded 117056142 (was 1405228034), SIM unchanged. Perf: a night tick 1160 us of 8333, a swarm's 4491, a path rebuild 10251 of 33333.
+- **Suites:** `headless_check` 19041 asserts (18969 at 0271), `headless_v1` 2736 in 94 groups, `_task_0272_summer_nights` the new one, `input_check` 1269 cases, `input_v1` 735 (115.7 s), `input_v2` 3; `nights --check` passes every date of the year for both seeds.
+
+Shot: `implementation/shots/0272/summer_field_night.png`, Night 16 (Summer
+2): wave 1 of 5, 44 left, the HUD reading the made night. The others taken
+(summer_field, days, strong_walls) showed the right counts and Full Moon
+countdowns and were not kept.
+
+Files: src/core/game_data.gd, src/tools/play_nights.gd,
+src/tools/headless_v1.gd, src/tools/headless_check.gd,
+tools/determinism_data_hash.txt,
+implementation/shots/0272/summer_field_night.png (with its .import),
+implementation/prompts/0272-summer-nights.md,
+implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md

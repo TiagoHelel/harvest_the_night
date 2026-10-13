@@ -61,8 +61,13 @@ var _last := DEFAULT_DAYS
 ## until the money runs out - what the date's season has opened of it. A
 ## generator goes in whenever the next tower would draw more than the farm
 ## supplies, so power is bought rather than given.
+##
+## **Summer's flamethrower** (task 0272): the rats' answer in summer's
+## arsenal (0259's `implementation/MATCHUPS.md`), so a summer night is played
+## with what summer opened. Spring's list is what it was: the season filter
+## takes it out until then.
 const SHOPPING: Array = [
-	&"gun_tower", &"auto_crossbow", &"wall", &"mortar",
+	&"gun_tower", &"auto_crossbow", &"flame_tower", &"wall", &"mortar",
 	&"auto_crossbow", &"gun_tower", &"wall",
 ]
 
@@ -98,7 +103,7 @@ func _init() -> void:
 			purse += _paid(night) + int(income)
 		if _first > 1:
 			print("  the purse at day %d: $%d from days 1-%d" % [_first, purse, _first - 1])
-		print("   day  sent  $reward  $purse  towers  locked  power  bones  piles  result")
+		print("   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  result")
 		var fell: Array = []
 		for night in range(_first, _last + 1):
 			var played := _play(night, purse)
@@ -108,11 +113,12 @@ func _init() -> void:
 			purse += _paid(night) + int(income)
 			if not bool(played["held"]):
 				fell.append(night)
-			print("  %4d %5d  %7d %7d %7d %7d %5d%%  %5d  %5d  %s"
+			print("  %4d %5d  %7d %7d %7d %7d %5d%%  %5d  %5d  %4d  %s"
 				% [night, Waves.size_of(night), Waves.reward_of(night),
 					int(played["budget"]), int(played["towers"]),
 					int(played["locked"]), int(played["power"]),
 					int(played["bones"]), int(played["piles"]),
+					int(played["peak"]),
 					"held, house %d/%d after %ds"
 						% [int(played["house"]), int(played["house_full"]),
 							int(played["ticks"]) / GameData.TICK_HZ]
@@ -226,7 +232,7 @@ func _play(night: int, budget: int) -> Dictionary:
 	# money shares come off the ledger (task 0234); the purse below decides.
 	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
 		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000,
-		GameData.FOOD: 9000, GameData.MONEY: 9000})
+		GameData.INCENDIARY: 9000, GameData.FOOD: 9000, GameData.MONEY: 9000})
 	var shopping := _shopping(state)
 
 	# **Power by day, towers by night** (task 0132): a generator goes up by day
@@ -293,12 +299,16 @@ func _play(night: int, budget: int) -> Dictionary:
 			locked += 1
 	NightRoad.through_build(state)
 
+	# **The most bodies at once** (task 0272): what a rat night asks of the
+	# tick, beside the swarm `perf_check.gd` times (0218, 0248).
 	var ticks := 0
+	var peak := 0
 	for tick in 40000:
 		if int(state["phase"]) != Phases.NIGHT:
 			ticks = tick
 			break
 		Sim.advance(state, 1)
+		peak = maxi(peak, Entities.count(state))
 		ticks = tick
 	return {
 		"held": int(state["house_hp"]) > 0,
@@ -315,6 +325,7 @@ func _play(night: int, budget: int) -> Dictionary:
 		# pile's cap, and on how many cells.
 		"bones": int(Loot.lying(state).get(GameData.BONES, 0)),
 		"piles": Loot.cells_with(state, GameData.BONES).size(),
+		"peak": peak,
 	}
 
 

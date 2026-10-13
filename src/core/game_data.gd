@@ -2864,10 +2864,15 @@ const SPAWN_INTERVAL_TICKS := 20        # LEVER: ticks, 8-45
 ## day 7 is a Full Moon of the three, days 8-13 grow again with the season's
 ## novelty, the breaker, met on 8, and day 14 is the Full Moon in the Giant's
 ## company, where 0153's rule brings him. All of it from the east, which is
-## all spring opens (0157). Summer to winter have only their Full Moons,
-## drafts of the old seventh and tenth nights to their season's size, sending
-## spring's kinds round every side their season opens: 0272-0274 write them
-## for real.
+## all spring opens (0157). **Summer** (task 0272) keeps the rhythm a side
+## wider: its first fight on its second day from the east alone, the south
+## east opened on its third by a handful, the spitter on its fifth, a Full
+## Moon of what is known on its seventh, the rats on its eighth and the
+## Harvester's company on its fourteenth. An introduction pins its weather
+## off, so a first look is a clear one. Autumn and winter have only their
+## Full Moons, drafts of the old seventh and tenth nights to their season's
+## size, sending spring's kinds round every side their season opens:
+## 0273-0274 write them for real.
 ##
 ## **Every night fills the night** (task 0271, after 0148): its last send
 ## comes between the fill line (`Waves.fill_line`) and the dawn margin, so the
@@ -2898,14 +2903,18 @@ const SEASON_NIGHTS: Array = [
 		"waves": [4, 7],                    # LEVER: waves on its second and thirteenth day, 2-12
 		"gap_ticks": [40 * SECONDS, 18 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
-	# Summer: the south east joins on its third day. Spring's kinds until
-	# 0272 writes the season's own.
+	# Summer (task 0272): spring's four kinds at summer's share, the south
+	# east from its third day - a key night that sends it a handful - the
+	# spitter from its fifth and the rats from its eighth, as its key nights
+	# introduce them. Its second day starts between spring's sixth and its
+	# Full Moon, so the year still climbs.
 	{
 		"sides": [[0, 1], [1, 3]],              # LEVER: [side, the day of the season it joins]
-		"mix": {&"walker": [25, 1], &"runner": [10, 1], &"tank": [37, 1], &"breaker": [28, 1]},  # LEVER: kind -> [weight in hit points, the day it joins]
-		"size": [1800, 4200],            # LEVER: hit points on its second and thirteenth day, 200-12000
+		"mix": {&"walker": [26, 1], &"runner": [10, 1], &"tank": [22, 1], &"breaker": [22, 1],
+			&"spitter": [12, 5], &"rat": [8, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"size": [1800, 5000],            # LEVER: hit points on its second and thirteenth day, 200-12000
 		"waves": [5, 7],                    # LEVER: waves on its second and thirteenth day, 2-12
-		"gap_ticks": [10 * SECONDS, 5 * SECONDS],  # LEVER: the gap on its second and thirteenth day, 2-30 seconds
+		"gap_ticks": [24 * SECONDS, 6 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
 	# Autumn: the north joins on its third day. Spring's kinds until 0273.
 	{
@@ -3011,29 +3020,109 @@ const KEY_NIGHTS: Dictionary = {
 		],
 	},
 	# ---------------------------------------------------------------- summer
-	21: {
-		"note": "summer 7, the Full Moon: a draft of spring's night 7 to this season's size, until 0272",
+	# **Spring's rhythm, a side wider** (task 0272): the calm night on 15,
+	# summer's first fight on 16 from the east alone, the south east opened
+	# by a handful on 17, the spitter on 19, a Full Moon of what is known on
+	# 21, the rats on 22 and the Harvester's company on 28. Every other day
+	# is the template's, and side 1 is the south east.
+	17: {
+		"note": "the south-east opens: a handful from a new side, the rest the way they always came",
 		"opening_ticks": 0,
-		"gap_ticks": 9 * SECONDS,
+		"gap_ticks": 12 * SECONDS,
+		# **A first look is a clear one**: no fog or rain on an introduction
+		# (0270's `event`, as 0273 says of a night weather would drown).
+		"event": &"",
+		# **Learned before it is tested**: six walkers, the plainest thing
+		# summer has, are all the new side sends. Summer 4 is made from
+		# both sides alike.
+		"waves": [
+			[&"walker", 14, 0],
+			[&"runner", 12, 0],
+			[&"breaker", 6, 0],
+			[&"walker", 6, 1],
+			[&"tank", 4, 0],
+			[&"walker", 16, 0],
+			[&"runner", 10, 0],
+			[&"breaker", 6, 0],
+		],
+	},
+	19: {
+		"note": "the first spitters: they stop short of your towers and spit at them, not at your roof",
+		"opening_ticks": 0,
+		"gap_ticks": 10 * SECONDS,
+		"event": &"",
+		# Seven, from the side the towers already face. A tile short of the
+		# gun tower's reach (0247), so a line that covers itself answers
+		# them; summer's flamethrower cannot, which is the lesson.
+		"waves": [
+			[&"walker", 18, 0],
+			[&"runner", 12, 1],
+			[&"spitter", 3, 0],
+			[&"tank", 4, 0],
+			[&"breaker", 8, 1],
+			[&"walker", 18, 1],
+			[&"spitter", 4, 0],
+			[&"runner", 14, 0],
+			[&"tank", 2, 1],
+			[&"breaker", 8, 0],
+		],
+	},
+	21: {
+		"note": "summer's Full Moon: both sides, and everything summer has shown you so far",
+		"opening_ticks": 0,
+		"gap_ticks": 12 * SECONDS,
+		# **In crowds**: each wave out twice as close as an ordinary night's
+		# and a longer quiet after it, so a Full Moon arrives as one.
+		"interval_ticks": 10,
 		"waves": [
 			[&"walker", 22, 0],
-			[&"breaker", 7, 1],
-			[&"runner", 30, 1],
-			[&"tank", 7, 0],
-			[&"walker", 26, 0],
-			[&"breaker", 7, 1],
+			[&"spitter", 6, 1],
+			[&"runner", 16, 1],
+			[&"tank", 5, 0],
+			[&"breaker", 10, 1],
+			[&"walker", 20, 1],
+			[&"spitter", 6, 0],
+			[&"runner", 16, 0],
+			[&"tank", 3, 1],
+			[&"breaker", 8, 0],
+		],
+	},
+	22: {
+		"note": "the rats: too small to aim at and too many to count, and fire loves a crowd",
+		"opening_ticks": 0,
+		"gap_ticks": 8 * SECONDS,
+		"event": &"",
+		# Six clusters of six from the east. Summer 9 is made with a share
+		# of its hit points in rats, so the night after brings more of them.
+		"waves": [
+			[&"walker", 24, 0],
+			[&"rat", 18, 0],
+			[&"breaker", 10, 1],
+			[&"runner", 16, 1],
+			[&"tank", 5, 0],
+			[&"spitter", 8, 1],
+			[&"walker", 24, 1],
+			[&"rat", 18, 0],
+			[&"tank", 3, 1],
+			[&"breaker", 8, 0],
 		],
 	},
 	28: {
-		"note": "summer 14, the boss's company: a draft of spring's night 10 to this season's size, until 0272",
+		"note": "the Harvester's company: everything summer brought, so the machine is never the only target",
 		"opening_ticks": 0,
-		"gap_ticks": 4 * SECONDS,
+		"gap_ticks": 7 * SECONDS,
+		"interval_ticks": 10,
 		"waves": [
-			[&"walker", 26, 0],
-			[&"breaker", 9, 1],
-			[&"runner", 42, 1],
-			[&"tank", 13, 0],
-			[&"walker", 32, 0],
+			[&"walker", 28, 0],
+			[&"rat", 36, 1],
+			[&"breaker", 13, 0],
+			[&"spitter", 9, 1],
+			[&"runner", 22, 0],
+			[&"tank", 7, 1],
+			[&"walker", 26, 1],
+			[&"rat", 36, 0],
+			[&"spitter", 9, 0],
+			[&"tank", 7, 0],
 			[&"breaker", 13, 1],
 		],
 	},

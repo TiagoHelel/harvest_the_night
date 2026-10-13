@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 93
+const GROUPS := 94
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -172,6 +172,7 @@ func _run() -> void:
 	_task_0257_blood_moon()
 	_task_0270_year_records()
 	_task_0271_spring_nights()
+	_task_0272_summer_nights()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -11833,6 +11834,114 @@ func _task_0271_spring_nights() -> void:
 		"the tutorial night takes WAVE_GAP_TICKS between three waves of walkers, a handful of them",
 		"%d, %s" % [Waves.delay_before(1, 1), str(Waves.kinds_of(1))])
 	_completed += 1
+
+
+## **Summer's fourteen nights** (task 0272): spring's rhythm a side wider -
+## the calm night on 15, summer's first fight on 16, the south east opened by
+## a handful on 17, the spitter on 19, a Full Moon of what is known on 21,
+## the rats on 22 and the Harvester's company on 28.
+func _task_0272_summer_nights() -> void:
+	var days := GameData.SEASON_DAYS
+	var first_day := days + 1
+	var last_day := 2 * days
+	var spring_kinds := [&"walker", &"runner", &"tank", &"breaker"]
+	var intro := {&"spitter": first_day + 4, &"rat": first_day + 7, &"harvester": last_day}
+	var strays: Array = []
+	var firsts: Array = []
+	var bland: Array = []
+	var unfilled: Array = []
+	var crowded: Array = []
+	var cloudy: Array = []
+	for seed_value in range(5):
+		var first := {}
+		for day in range(1, last_day + 1):
+			var one := Waves.night_of(day, seed_value)
+			for row in (one["waves"] as Array):
+				var kind := StringName((row as Array)[0])
+				if not first.has(kind):
+					first[kind] = day
+				if day < first_day:
+					continue
+				var known := spring_kinds.has(kind) or day >= int(intro.get(kind, last_day + 1))
+				if not known or not [0, 1].has(int((row as Array)[2])):
+					strays.append([seed_value, day, row])
+			var sent := Waves.schedule_ticks(one)
+			if day > first_day and (sent < Waves.fill_line()
+					or sent + GameData.DAWN_MARGIN_TICKS > GameData.NIGHT_TICKS):
+				unfilled.append([seed_value, day, sent])
+		for kind in GameData.sorted_names(intro.keys()):
+			var day := int(intro[kind])
+			if int(first.get(kind, -1)) != day:
+				firsts.append([seed_value, kind, first.get(kind, -1)])
+			# **The night after is where it bites** (0060's rule): more of it.
+			if day < last_day and int(Waves.kinds_of(day + 1, seed_value).get(kind, 0)) \
+					<= int(Waves.kinds_of(day, seed_value).get(kind, 0)):
+				bland.append([seed_value, kind])
+		# **The south east is learned before it is tested**: nothing from it
+		# on 16, a handful on 17 - under a tenth of the night - and more on 18.
+		var south_east: Array = []
+		for day in range(first_day + 1, first_day + 4):
+			south_east.append(_bodies_from(Waves.night_of(day, seed_value), 1))
+		if int(south_east[0]) != 0 or int(south_east[1]) <= 0 \
+				or int(south_east[1]) * 10 > Waves.size_of(first_day + 2, seed_value) \
+				or int(south_east[2]) <= int(south_east[1]):
+			crowded.append([seed_value, south_east])
+		# **A first look is a clear one**: no weather on an introduction.
+		for day in [first_day + 2, first_day + 4, first_day + 7]:
+			if Weather.event(seed_value, day) != Weather.NONE:
+				cloudy.append([seed_value, day, Weather.event(seed_value, day)])
+	expect(strays.is_empty(),
+		"days 16-28 send only kinds met by that day - spring's four, the spitter from 19, the rats from 22, the Harvester on 28 - and only from the east and the south east",
+		str(strays.slice(0, 3)))
+	expect(firsts.is_empty() and bland.is_empty(),
+		"the spitter is first sent on 19 and the rats on 22, different nights, the Harvester on 28, and the night after each sends more of it",
+		"%s %s" % [str(firsts.slice(0, 3)), str(bland.slice(0, 3))])
+	expect(unfilled.is_empty(),
+		"every summer night is still sending at the fill line and all sent before the dawn margin",
+		str(unfilled.slice(0, 3)))
+	expect(crowded.is_empty() and cloudy.is_empty(),
+		"the south east sends nothing on 16, a handful on 17 and more on 18, and no introduction has weather",
+		"%s %s" % [str(crowded.slice(0, 3)), str(cloudy.slice(0, 3))])
+
+	# **The rhythm in hit points as fought**: summer's first fight between
+	# spring's sixth night and its Full Moon, days 16-20 growing, day 21 the
+	# largest of its half, day 22 over day 20 and under it, days 22-27
+	# growing, and day 28 the season's largest.
+	var hp := {}
+	for day in range(1, last_day + 1):
+		hp[day] = Waves.hit_points_in(Waves.night_of(day, 0))
+	var moon := first_day + 6
+	var opens := int(hp[6]) < int(hp[first_day + 1]) and int(hp[first_day + 1]) < int(hp[7])
+	var peaks := int(hp[moon]) < int(hp[last_day])
+	for day in range(first_day, moon):
+		peaks = peaks and int(hp[day]) < int(hp[moon])
+	for day in range(moon + 1, last_day):
+		peaks = peaks and int(hp[day]) < int(hp[last_day])
+	var climbs := int(hp[moon + 1]) > int(hp[moon - 1])
+	for day in range(first_day + 2, moon) + range(moon + 2, last_day):
+		climbs = climbs and int(hp[day]) > int(hp[day - 1])
+	expect(opens and peaks and climbs,
+		"day 16 starts between spring's sixth night and its Full Moon, days 21 and 28 are the largest of their halves, and the days between grow",
+		str(hp))
+
+	# **The Harvester on day 28 and nowhere else**, the year round.
+	var harvesters: Array = []
+	for seed_value in [0, 424242]:
+		for day in range(1, Calendar.year_days() + 1):
+			if Waves.kinds_of(day, seed_value).has(&"harvester"):
+				harvesters.append([seed_value, day])
+	expect(harvesters == [[0, last_day], [424242, last_day]],
+		"the Harvester comes on day 28 and on no other day of the year", str(harvesters))
+	_completed += 1
+
+
+## How many bodies `one` sends from `side`.
+func _bodies_from(one: Dictionary, side: int) -> int:
+	var out := 0
+	for row in (one.get("waves", []) as Array):
+		if int((row as Array)[2]) == side:
+			out += int((row as Array)[1])
+	return out
 
 
 ## `GameData.NIGHT_EVENTS` with one value set at `path` - an event, then the

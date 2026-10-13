@@ -1,7 +1,7 @@
 # 0272 - Summer's fourteen nights
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0270, 0247, 0248, 0253, 0259, 0271
 - **Likely files:** src/core/game_data.gd (`KEY_NIGHTS`, summer's `SEASON_NIGHTS`), src/tools/headless_v1.gd
 
