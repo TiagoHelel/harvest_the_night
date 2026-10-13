@@ -21,7 +21,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 8
+const V2_CASES := 9
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -46,6 +46,7 @@ func _run() -> void:
 	await _case_0285_season_music()
 	await _case_0286_weather_ambience()
 	await _case_0287_collections()
+	await _case_0292_options()
 	_finish()
 
 
@@ -674,6 +675,243 @@ func _case_0287_collections() -> void:
 		"and cancel closes it back to the run", router.name_of(router.here()))
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0292 - the options for the new controls. Each new row stepped by the keys
+## and by a pad, found in `Settings` and in `settings.cfg` read again, and
+## RESET puts it back. By day the forecast is up at 08:00 when it is wanted
+## all day, and the assist reaches the run. At night the edge band pans only
+## with edge pan on, a tilt under the deadzone moves no cursor, and a held
+## d-pad at 200 crosses about twice the cells it does at 100.
+func _case_0292_options() -> void:
+	await open_scene("res://scenes/Title.tscn")
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if settings == null:
+		expect(false, "the settings autoload is up")
+		await close_scene()
+		_completed += 1
+		return
+	for key in OPTIONS_0292:
+		settings.reset(key)
+	await frames(3)
+	await tap_key(KEY_X)
+	await frames(3)
+	await click_control("Menu_options")
+	await frames(4)
+
+	# **The game page**: the assist by the keyboard, the forecast by a pad.
+	(locate_control("GameFishingAssist") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_RIGHT)
+	await frames(2)
+	(locate_control("GameForecastAllDay") as Control).grab_focus()
+	await frames(2)
+	await _pad_tap(JOY_BUTTON_DPAD_RIGHT)
+	await frames(3)
+	expect(bool(settings.get_bool(&"gameplay/fishing_assist"))
+			and bool(settings.get_bool(&"gameplay/forecast_all_day"))
+			and _reloaded(&"gameplay/fishing_assist") == true
+			and _reloaded(&"gameplay/forecast_all_day") == true,
+		"the assist and the all-day forecast switch on by the keys and by a pad, and are in settings.cfg")
+
+	# **The controls page**: speed and deadzone by both, edge pan by a pad.
+	await click_control("OptionsTab_controls")
+	await frames(4)
+	var controls := locate_control("OptionsControls") as OptionsControls
+	(locate_control("ControlsCursorSpeed") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_RIGHT)
+	await frames(2)
+	await _pad_tap(JOY_BUTTON_DPAD_RIGHT)
+	await frames(2)
+	(locate_control("ControlsEdgePan") as Control).grab_focus()
+	await frames(2)
+	await _pad_tap(JOY_BUTTON_DPAD_LEFT)
+	await frames(2)
+	(locate_control("ControlsDeadzone") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_RIGHT)
+	await frames(2)
+	await _pad_tap(JOY_BUTTON_DPAD_RIGHT)
+	await frames(3)
+	expect(int(settings.get_int(&"controls/cursor_speed")) == 200
+			and not bool(settings.get_bool(&"controls/edge_pan"))
+			and is_equal_approx(float(settings.get_float(&"controls/pad_deadzone")), 0.3)
+			and _reloaded(&"controls/cursor_speed") == 200
+			and _reloaded(&"controls/edge_pan") == false
+			and is_equal_approx(float(_reloaded(&"controls/pad_deadzone")), 0.3),
+		"cursor speed to 200, edge pan off and the deadzone to 0.30, by the keys and a pad, kept in settings.cfg",
+		"%d %s %.2f" % [settings.get_int(&"controls/cursor_speed"),
+			settings.get_bool(&"controls/edge_pan"), settings.get_float(&"controls/pad_deadzone")])
+	expect(is_equal_approx(InputMap.action_get_deadzone(&"move_left"), 0.3)
+			and is_equal_approx(InputMap.action_get_deadzone(&"pan_up"), 0.3),
+		"and the deadzone is on the move and pan actions at once",
+		"%.2f" % InputMap.action_get_deadzone(&"move_left"))
+	expect(controls != null and (locate_control("ControlsCursorSpeed") as OptionRow).value_text() == "200%",
+		"the row says 200%")
+
+	# **RESET puts them back**, each page's asking twice: Enter on one,
+	# Space on the other. (A pad's A confirms no options row - `ui_accept` is
+	# the keyboard's alone - so a pad steps these rows and the keys reset.)
+	var reset := controls.find_child("ResetPage", true, false) as Control if controls != null else null
+	if reset != null:
+		reset.grab_focus()
+		await frames(2)
+		await tap_key(KEY_ENTER)
+		await frames(2)
+		await tap_key(KEY_ENTER)
+		await frames(3)
+	expect(int(settings.get_int(&"controls/cursor_speed")) == 100
+			and bool(settings.get_bool(&"controls/edge_pan"))
+			and is_equal_approx(float(settings.get_float(&"controls/pad_deadzone")), 0.2)
+			and _reloaded(&"controls/cursor_speed") == 100
+			and is_equal_approx(InputMap.action_get_deadzone(&"move_left"), 0.2),
+		"RESET on the controls page puts the three back, in settings.cfg and on the actions")
+	await click_control("OptionsTab_game")
+	await frames(4)
+	var game := locate_control("OptionsGame") as OptionsGame
+	var game_reset := game.find_child("ResetPage", true, false) as Control if game != null else null
+	if game_reset != null:
+		game_reset.grab_focus()
+		await frames(2)
+		await tap_key(KEY_SPACE)
+		await frames(2)
+		await tap_key(KEY_SPACE)
+		await frames(3)
+	expect(not bool(settings.get_bool(&"gameplay/fishing_assist"))
+			and not bool(settings.get_bool(&"gameplay/forecast_all_day"))
+			and _reloaded(&"gameplay/forecast_all_day") == false,
+		"and RESET on the game page the two switches")
+	await close_scene()
+
+	# **By day**: the forecast's hours and the assist's flag.
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel := require_control("ForecastPanel") as ForecastPanel
+	var world: WorldView = require_control("WorldView")
+	if driver == null or panel == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var main := _scene
+	var state := driver.state
+	await frames(4)
+	settings.set_value(&"gameplay/forecast_all_day", true)
+	state["day_tick"] = Phases.tick_at_minute(8 * 60)
+	await frames(3)
+	expect(panel.visible and int(panel.shown().get("date", 0)) == Calendar.date(state),
+		"with the forecast all day it is up at 08:00, for tonight")
+	settings.set_value(&"gameplay/forecast_all_day", false)
+	state["day_tick"] = Phases.tick_at_minute(12 * 60)
+	await frames(3)
+	expect(not panel.visible, "and with it off it is hidden at noon, as 0158 has it")
+	settings.set_value(&"gameplay/fishing_assist", true)
+	await until(func() -> bool: return bool(state.get("fishing_assist", false)),
+		"the assist to reach the run", 120)
+	var water := _nearest_water(state)
+	Fishing.begin(state, water)
+	var line := Fishing.cast_of(state)
+	expect(bool(state.get("fishing_assist", false)) and not line.is_empty()
+			and int(line["zone"]) == Fishing.zone_for(state, StringName(line["species"])),
+		"with the assist on the next cast carries it", str(line))
+	Fishing.give_up(state)
+	settings.set_value(&"gameplay/fishing_assist", false)
+	await until(func() -> bool: return not bool(state.get("fishing_assist", true)),
+		"the assist to leave the run", 120)
+	expect(not bool(state.get("fishing_assist", true)), "and with it off it does not")
+
+	# **At night**: the edge band, the deadzone and the cursor's speed.
+	NightRoad.to_build(state)
+	await frames(3)
+	var middle := Vector2(WorldView.WORLD_SIZE) * 0.5
+	var size := main.get_viewport().get_visible_rect().size
+	var motion := InputEventMouseMotion.new()
+	motion.position = Vector2(size.x - 1.0, size.y * 0.5)
+	motion.global_position = motion.position
+	root.push_input(motion)
+	main.get_window().focus_entered.emit()
+	main.get_window().mouse_entered.emit()
+	main.aim_night_camera(middle)
+	await frames(15)
+	expect(world.camera_centre().x > world._camera_bounds(middle).x + 4.0,
+		"with edge pan on the pointer in the band pans the camera", str(world.camera_centre()))
+	settings.set_value(&"controls/edge_pan", false)
+	main.aim_night_camera(middle)
+	await frames(15)
+	expect(world.camera_centre() == world._camera_bounds(middle),
+		"and with it off, at once, it does not", str(world.camera_centre()))
+	settings.set_value(&"controls/edge_pan", true)
+	main.get_window().mouse_exited.emit()
+
+	var cursor := world.cursor()
+	settings.set_value(&"controls/pad_deadzone", 0.5)
+	await frames(2)
+	await _pad_axis(JOY_AXIS_LEFT_X, -0.8)
+	await frames(3)
+	await _pad_axis(JOY_AXIS_LEFT_X, 0.0)
+	await frames(3)
+	var at := cursor.cell()
+	await _pad_axis(JOY_AXIS_LEFT_X, -0.3)
+	await frames(12)
+	var under := cursor.cell()
+	await _pad_axis(JOY_AXIS_LEFT_X, -0.8)
+	await frames(3)
+	var over := cursor.cell()
+	await _pad_axis(JOY_AXIS_LEFT_X, 0.0)
+	await frames(3)
+	expect(cursor.by_pad() and under == at and over.x < at.x,
+		"at a 0.50 deadzone a 0.3 tilt moves no cursor and a 0.8 one does",
+		"%s %s %s" % [at, under, over])
+	settings.set_value(&"controls/pad_deadzone", 0.2)
+	await frames(2)
+	at = cursor.cell()
+	await _pad_axis(JOY_AXIS_LEFT_X, -0.3)
+	await frames(3)
+	var shallow := cursor.cell()
+	await _pad_axis(JOY_AXIS_LEFT_X, 0.0)
+	await frames(3)
+	expect(shallow.x < at.x, "and at 0.20 the same 0.3 tilt does", "%s from %s" % [shallow, at])
+
+	settings.set_value(&"controls/cursor_speed", 100)
+	var slow := await _held_dpad_cells(cursor, 1.0)
+	settings.set_value(&"controls/cursor_speed", 200)
+	var fast := await _held_dpad_cells(cursor, 1.0)
+	settings.set_value(&"controls/cursor_speed", 100)
+	expect(slow > 3 and float(fast) >= float(slow) * 1.6 and float(fast) <= float(slow) * 2.5,
+		"a d-pad held a second at 200 crosses about twice the cells it does at 100",
+		"%d against %d" % [fast, slow])
+	for key in OPTIONS_0292:
+		settings.reset(key)
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## The five settings of task 0292, put back before and after its case.
+const OPTIONS_0292: Array = [&"controls/cursor_speed", &"controls/edge_pan",
+	&"controls/pad_deadzone", &"gameplay/fishing_assist", &"gameplay/forecast_all_day"]
+
+
+## A key's value in `settings.cfg` read again from the disk by a fresh
+## `Settings`, the way the next launch reads it.
+func _reloaded(key: StringName) -> Variant:
+	var fresh: Node = (load("res://src/app/settings.gd") as GDScript).new()
+	fresh.load_from_disk()
+	var value: Variant = fresh.get_value(key)
+	fresh.free()
+	return value
+
+
+## Hold the d-pad's left for `seconds` of real time from the cursor's cell
+## now, and hand back how many cells it crossed.
+func _held_dpad_cells(cursor: GuardianCursor, seconds: float) -> int:
+	var from := cursor.cell()
+	await _pad_button(JOY_BUTTON_DPAD_LEFT, true)
+	var started := Time.get_ticks_msec()
+	while Time.get_ticks_msec() - started < int(seconds * 1000.0):
+		await frames(1)
+	await _pad_button(JOY_BUTTON_DPAD_LEFT, false)
+	await frames(2)
+	return from.x - cursor.cell().x
 
 
 ## A cast at `water` whose float goes under on the next tick, `needs` hits

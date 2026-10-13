@@ -70,6 +70,9 @@ var _window_focused := true
 var _pointer_in_window := false
 ## Off for the shots: their real pointer is wherever the desk left it.
 var edge_pan := true
+## **And the player's switch for it** (task 0292's `controls/edge_pan`):
+## the band pans only with both on.
+var _edge_pan_wanted := true
 ## The pointer's last place, in the viewport's own pixels, from `_input`: every
 ## motion passes there before any control can take it.
 var _pointer_at := Vector2(-1, -1)
@@ -149,6 +152,10 @@ func _ready() -> void:
 	_tips.name = "Tips"
 	_tutorial.get_parent().add_child(_tips)
 	_tutorial.get_parent().move_child(_tips, _tutorial.get_index() + 1)
+	_take_preferences()
+	var service := get_node_or_null(^"/root/Settings")
+	if service != null and not service.changed.is_connected(_take_preferences):
+		service.changed.connect(_take_preferences)
 	var window := get_window()
 	_window_focused = window.has_focus()
 	window.focus_entered.connect(func() -> void: _window_focused = true)
@@ -558,7 +565,7 @@ func pan_direction() -> Vector2:
 			Input.get_axis(&"move_up", &"move_down"))
 	direction += Vector2(Input.get_axis(&"pan_left", &"pan_right"),
 		Input.get_axis(&"pan_up", &"pan_down"))
-	if edge_pan and _window_focused and _pointer_in_window:
+	if edge_pan and _edge_pan_wanted and _window_focused and _pointer_in_window:
 		var size := get_viewport().get_visible_rect().size
 		var at := _pointer_at
 		var band := float(GameData.CAMERA_EDGE_PIXELS)
@@ -640,6 +647,21 @@ func _input(event: InputEvent) -> void:
 	var motion := event as InputEventMouseMotion
 	if motion != null:
 		_pointer_at = motion.position
+
+
+## **Task 0292's input preferences and the forecast's hours**, off `Settings`
+## at boot and again on every change - so a value moved with a night up
+## behind the options moves the cursor, the camera and the forecast at once,
+## the way `SimDriver` hears `gameplay/night_speed`. None of them reaches the
+## run: the cursor's repeat and the camera are the view's, and the forecast
+## is the seed's and the date's.
+func _take_preferences(_key: StringName = &"") -> void:
+	var service := get_node_or_null(^"/root/Settings")
+	if service == null:
+		return
+	_world.cursor().speed_percent = int(service.get_int(&"controls/cursor_speed"))
+	_edge_pan_wanted = bool(service.get_bool(&"controls/edge_pan"))
+	_forecast.all_day = bool(service.get_bool(&"gameplay/forecast_all_day"))
 
 
 ## The `gameplay/fishing_assist` setting, false with no settings service.

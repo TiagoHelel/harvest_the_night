@@ -20,16 +20,31 @@ extends OptionsPage
 ## to reset.
 ##
 ## What a binding is and which keys clash is `Actions`'; this only asks it.
+##
+## **The cursor and the camera** (task 0292), under their own heading after
+## the bindings: how fast a held step moves the guardian's cursor, whether the
+## window's edge pans the night camera, and how far a stick must tilt. Their
+## steps sit here, with their rows, the way `OptionsA11y.ROWS` keeps its own:
+## preferences, not balance, so not in `game_data.gd`. The page's reset row
+## puts these three back; RESET ALL is the bindings'.
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
 ## How long a row listens before it gives up.
 const LISTEN_SECONDS := 5.0
 
+## `controls/cursor_speed`'s steps: percents of 0131's repeat rate.
+const CURSOR_SPEEDS: Array = [50, 75, 100, 150, 200]
+## `controls/pad_deadzone`'s steps, 0121's 0.2 among them.
+const DEADZONES: Array = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5]
+
 var _actions: Node
 ## action -> its row
 var _binds: Dictionary = {}
 var _reset_all: OptionRow
+var _cursor_speed: OptionRow
+var _edge_pan: OptionRow
+var _deadzone: OptionRow
 
 ## The action listening for a key, and how long it has left.
 var _waiting := &""
@@ -39,6 +54,8 @@ var _said := ""
 
 
 func _init() -> void:
+	resets = [&"controls/cursor_speed", &"controls/edge_pan",
+		&"controls/pad_deadzone"]
 	title_key = &"OPT_TAB_CONTROLS"
 
 
@@ -62,6 +79,12 @@ func _build() -> void:
 			heading.set_meta(&"group", group)
 		var row := _bind_row(action)
 		_binds[action] = row
+	var heading := heading_row("ControlsGroup_CURSOR")
+	heading.set_meta(&"group", &"CTL_GROUP_CURSOR")
+	_cursor_speed = choice_row("ControlsCursorSpeed", _step_cursor_speed,
+		_cursor_speed_text)
+	_edge_pan = toggle_row("ControlsEdgePan", &"controls/edge_pan")
+	_deadzone = choice_row("ControlsDeadzone", _step_deadzone, _deadzone_text)
 	_reset_all = action_row("ControlsResetAll", _reset_everything)
 
 
@@ -88,6 +111,9 @@ func relabel() -> void:
 	for action in _binds:
 		(_binds[action] as OptionRow).text = String(_actions.label_for(action))
 	_reset_all.text = I18n.t(&"CTL_RESET_ALL")
+	_cursor_speed.text = I18n.t(&"CTL_CURSOR_SPEED")
+	_edge_pan.text = I18n.t(&"CTL_EDGE_PAN")
+	_deadzone.text = I18n.t(&"CTL_DEADZONE")
 	super()
 
 
@@ -125,6 +151,32 @@ func _explain(action: StringName) -> void:
 		say(I18n.t(&"CTL_RESET_HINT"))
 	else:
 		say("")
+
+
+# ---------------------------------------------------- the cursor and camera
+
+func _step_cursor_speed(delta: int) -> void:
+	if _settings == null:
+		return
+	_settings.set_value(&"controls/cursor_speed", int(stepped(CURSOR_SPEEDS,
+		int(_settings.get_int(&"controls/cursor_speed")), delta)))
+
+
+func _cursor_speed_text() -> String:
+	var now := int(_settings.get_int(&"controls/cursor_speed")) 		if _settings != null else 100
+	return "%d%%" % now
+
+
+func _step_deadzone(delta: int) -> void:
+	if _settings == null:
+		return
+	_settings.set_value(&"controls/pad_deadzone", float(stepped(DEADZONES,
+		float(_settings.get_float(&"controls/pad_deadzone")), delta)))
+
+
+func _deadzone_text() -> String:
+	var now := float(_settings.get_float(&"controls/pad_deadzone")) 		if _settings != null else 0.2
+	return "%d%%" % roundi(now * 100.0)
 
 
 # ------------------------------------------------------------ the listening

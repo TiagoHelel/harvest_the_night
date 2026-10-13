@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-245 tarefas em 11 dias, de  a 2026-10-13. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+247 tarefas em 11 dias, de  a 2026-10-13. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -288,10 +288,12 @@ voz alta.
 | 0284 | The new enemies and bosses, heard | 2026-10-13 |
 | 0285 | Music for four seasons | 2026-10-13 |
 | 0286 | Fog, rain and winter wind | 2026-10-13 |
+| 0287 | Collections and achievements | 2026-10-13 |
+| 0292 | Options for the new controls | 2026-10-13 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 123 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 127 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -416,6 +418,10 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Summer's fourteen nights** (0272) - `data` 1405228034 -> 117056142
 - **Autumn's fourteen nights** (0273) - `data` 117056142 -> 2630956943
 - **Winter's fourteen nights** (0274) - `data` 2630956943 -> 1211606022
+- **Collections and achievements** (0287) - `sim` 3524359536 -> 19045517
+- **Collections and achievements** (0287) - `data` 1211606022 -> 1862823492
+- **Collections and achievements** (0287) - `sim` 3524359536 -> 19045517
+- **Collections and achievements** (0287) - `data` 1211606022 -> 1862823492
 
 ## O que deu errado
 

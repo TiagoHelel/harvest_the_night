@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-245 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
+247 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -289,10 +289,12 @@ is the sort of thing this list exists to say out loud.
 | 0284 | The new enemies and bosses, heard | 2026-10-13 |
 | 0285 | Music for four seasons | 2026-10-13 |
 | 0286 | Fog, rain and winter wind | 2026-10-13 |
+| 0287 | Collections and achievements | 2026-10-13 |
+| 0292 | Options for the new controls | 2026-10-13 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 123 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 127 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -417,6 +419,10 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Summer's fourteen nights** (0272) - `data` 1405228034 -> 117056142
 - **Autumn's fourteen nights** (0273) - `data` 117056142 -> 2630956943
 - **Winter's fourteen nights** (0274) - `data` 2630956943 -> 1211606022
+- **Collections and achievements** (0287) - `sim` 3524359536 -> 19045517
+- **Collections and achievements** (0287) - `data` 1211606022 -> 1862823492
+- **Collections and achievements** (0287) - `sim` 3524359536 -> 19045517
+- **Collections and achievements** (0287) - `data` 1211606022 -> 1862823492
 
 ## What went wrong
 

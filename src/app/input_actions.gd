@@ -143,6 +143,16 @@ const PAD_TAKE := 0.5
 ## `bind()`.
 const PAD_SUFFIX := "@pad"
 
+## **The sticks' deadzone** (task 0292): `controls/pad_deadzone` on every
+## action a stick drives - the move actions, which walk the farmer and step
+## the guardian's cursor (0121, 0131), and the night camera's pan (0130). A
+## preference, not a rule: what a tilt is worth before it counts.
+const DEADZONE_KEY := &"controls/pad_deadzone"
+const STICK_ACTIONS: Array = [&"move_up", &"move_down", &"move_left",
+	&"move_right", &"pan_up", &"pan_down", &"pan_left", &"pan_right"]
+## What the actions shipped with when there is no settings service.
+const SHIPPED_DEADZONE := 0.2
+
 ## What a binding with no event at all shows as. It cannot happen through the
 ## screen - a rebind always takes an event - but a hand-edited config can.
 const NOTHING := &"CTL_NOTHING"
@@ -487,6 +497,16 @@ func apply() -> void:
 			for shipped in _shipped.get(action, []):
 				if is_pad(shipped) == pad:
 					InputMap.action_add_event(action, shipped)
+	apply_deadzone()
+
+
+## Set the sticks' deadzone from the setting on every action a stick drives.
+func apply_deadzone() -> void:
+	var settings := _settings()
+	var zone := float(settings.get_float(DEADZONE_KEY)) if settings != null 		else SHIPPED_DEADZONE
+	for action in STICK_ACTIONS:
+		if InputMap.has_action(action):
+			InputMap.action_set_deadzone(action, clampf(zone, 0.05, 0.95))
 
 
 ## Take the photograph once, before anything has been rewritten.
@@ -516,6 +536,8 @@ func _saved() -> Dictionary:
 func _on_changed(key: StringName) -> void:
 	if key == KEY:
 		apply()
+	elif key == DEADZONE_KEY:
+		apply_deadzone()
 
 
 func _settings() -> Node:

@@ -48,6 +48,11 @@ var _by_pad := false
 ## the display server does not follow a synthesised one (see `BuildMode`).
 var _pointer := Vector2(-1, -1)
 var _held := Vector2i.ZERO
+## **How fast a held step repeats** (task 0292): `controls/cursor_speed`, a
+## percent of `CURSOR_REPEAT_RATE` - 200 repeats twice as often. `Main` sets
+## it from the setting; the first step and the delay before the repeat are
+## the same at every speed.
+var speed_percent := 100
 var _repeat_left := 0.0
 var _pulse := 0.0
 ## Whether the pointer moves it. Always, but for `shot.gd` (task 0139): its
@@ -260,7 +265,8 @@ func advance(seconds: float, step: Vector2i) -> void:
 	_repeat_left -= maxf(seconds, 0.0)
 	while _repeat_left <= 0.0:
 		_put(_cell + step)
-		_repeat_left += maxf(GameData.CURSOR_REPEAT_RATE, 0.01)
+		_repeat_left += maxf(GameData.CURSOR_REPEAT_RATE * 100.0
+			/ float(maxi(speed_percent, 1)), 0.01)
 
 
 func _put(cell_at: Vector2i) -> void:

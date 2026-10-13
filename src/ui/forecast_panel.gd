@@ -38,6 +38,11 @@ const EVENT_WORDS := {&"fog": &"FCAST_FOG", &"rain": &"FCAST_RAIN",
 	&"blood_moon": &"FCAST_BLOOD_MOON"}
 const EVENT_ROLES := {&"blood_moon": UiKit.BAD}
 
+## **Up all day** (task 0292's `gameplay/forecast_all_day`, which `Main`
+## sets): from the morning rather than from dusk. The record is the same at
+## 08:00 as at 18:00 - `Forecast.tonight` reads the seed and the date.
+var all_day := false
+
 var _state: Dictionary = {}
 var _built_for := ""
 var _forecast: Dictionary = {}
@@ -94,7 +99,8 @@ func _process(_delta: float) -> void:
 		_build()
 
 
-## Whether the forecast is up: from dusk by day, and in the build step. Not
+## Whether the forecast is up: from dusk by day - from the morning with
+## `all_day` - and in the build step. Not
 ## inside the house, where the day HUD is down too, and not over an open
 ## panel - the market at 19:00 is the market.
 func wanted() -> bool:
@@ -105,7 +111,7 @@ func wanted() -> bool:
 	var phase := int(_state["phase"])
 	if phase == Phases.PREPARATION:
 		return true
-	return phase == Phases.DAY and Phases.is_dusk(_state)
+	return phase == Phases.DAY and (all_day or Phases.is_dusk(_state))
 
 
 ## The forecast it is showing - for `input_v1` and the shots.

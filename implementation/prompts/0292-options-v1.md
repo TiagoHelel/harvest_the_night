@@ -1,7 +1,7 @@
 # 0292 - Options for the new controls
 
 - **Phase:** 17 - Ship 1.0
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0131, 0180, 0158
 - **Likely files:** src/app/settings.gd, src/app/input_actions.gd, src/ui/options_controls.gd, src/ui/options_game.gd, src/ui/guardian_cursor.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/forecast_panel.gd, src/ui/day_hud.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd
 

@@ -30636,3 +30636,97 @@ Notes:
   left that out on purpose.
 - **Fish, crop and boss names come from `Names.of`**, lowercase as on
   every other screen.
+
+## 0292 - Options for the new controls - done 2026-10-13
+
+What changed: the guardian's cursor, the night camera and the fishing bar
+each get a setting a player can change, and the forecast can stay up all
+day. All five are view-side or reuse 0180's rule as it was: neither hash
+moved.
+
+- **Five keys in `Settings.DEFAULTS`**. The two new `gameplay/` keys are on
+  the game page's reset list and the three `controls/` keys on the controls
+  page's.
+  - `controls/cursor_speed` (100) is a percent of 0131's repeat rate, in
+    steps of 50, 75, 100, 150 and 200.
+  - `controls/edge_pan` (on).
+  - `controls/pad_deadzone` (0.2, what `project.godot` ships on the move
+    and pan actions), from 0.10 to 0.50 in steps of 0.05.
+  - `gameplay/forecast_all_day` (off) is new.
+  - `gameplay/fishing_assist` is 0180's key, reused under its own name.
+  - New keys alone need no `Settings.VERSION` bump.
+- **The step lists sit with their rows**, as `OptionsControls.CURSOR_SPEEDS`
+  and `DEADZONES`. They are preferences, not balance, so they are not in
+  `game_data.gd`.
+- **How each setting acts**:
+  - **The cursor's speed**: `GuardianCursor.speed_percent` divides the
+    held repeat interval. The first step and the delay before the repeat
+    are the same at every speed.
+  - **Edge pan**: `Main.pan_direction` pans from the band only when both
+    the shots' `edge_pan` and the player's setting are on.
+  - **The deadzone**: `InputActions.apply_deadzone()` calls
+    `InputMap.action_set_deadzone` on the four move actions (which also
+    step the cursor) and the four pan actions. It runs at every `apply()`
+    and whenever the key changes.
+  - **The forecast**: `ForecastPanel.all_day` makes the day side
+    `all_day or is_dusk`. The build step shows it as before, and START
+    still hides it.
+- **Applied live**: `Main._take_preferences()` reads the cursor speed,
+  edge pan and the forecast's hours at boot and again on every
+  `Settings.changed`. So a change made with a night up behind the options
+  moves the cursor and the camera at once, the way `SimDriver` hears the
+  night speed. The deadzone goes live through `InputActions`' own listener.
+- **The fishing assist had no gap to fix.** Core never reads `Settings`,
+  both strengths are `# LEVER`s in `GameData.FISHING`, and the bar's
+  widening is the rule's (`Fishing.zone_for`). This task adds only the
+  row.
+- **The rows**:
+  - Under a new CURSOR AND CAMERA heading after the bindings on the
+    controls page: CURSOR SPEED (shown as a percent), EDGE PAN and STICK
+    DEADZONE (also as a percent). The page's reset row (RESET CONTROLS TO
+    DEFAULTS) puts these three back; RESET ALL is still the bindings'.
+  - On the game page: FISHING ASSIST and FORECAST ALL DAY, toggles
+    reusing `OPT_ON` and `OPT_OFF`.
+  - Six strings in both languages, at width 200.
+- **`src/tools/capture_menus.gd`** also shoots the controls page with the
+  selection on the last new row (`options_controls_cursor`), which scrolls
+  the heading and its three rows into view.
+- **Captures** of the game and controls pages, both languages, are in
+  `implementation/shots/0292/` (and `pt_BR/`). I opened them: no label runs
+  off its row and no two rows overlap.
+- **Checks**:
+  - **`_task_0292_options`** (headless_v1, 107 groups):
+    - the five defaults;
+    - each key on its page's reset list;
+    - the step lists, with the shipped values among them;
+    - the four move and four pan actions shipped at 0.2;
+    - no file in `src/core/` names `Settings` (code lines only);
+    - `Forecast.tonight` gives the same record at 08:00 as at 18:00.
+  - **`_case_0292_options`** (input_v2, 9 cases; input cases from 0258 on
+    go there, as CLAUDE.md says):
+    - **Setting each row**: each new row is stepped by the keys and by
+      the d-pad; the value is found in `Settings`, in `settings.cfg` read
+      again by a fresh `Settings`, and (for the deadzone) on the actions;
+      RESET on each page puts the keys back.
+    - **By day**: the forecast is up at 08:00 with all-day on and hidden
+      at noon with it off; with the assist on, the next cast carries it,
+      and with it off the run's flag clears.
+    - **In the build step**: the edge band pans with edge pan on and
+      stops at once when it is switched off. At a 0.50 deadzone a 0.3
+      tilt moves no cursor and a 0.8 one does, and at 0.20 the same 0.3
+      tilt does. A d-pad held for one real second at 200 crosses about
+      twice the cells it crosses at 100.
+
+Files: src/app/settings.gd, src/app/input_actions.gd, src/ui/guardian_cursor.gd,
+src/ui/forecast_panel.gd, src/ui/main.gd, src/ui/options_controls.gd,
+src/ui/options_game.gd, assets/locale/strings.csv, src/tools/headless_v1.gd,
+src/tools/input_v2.gd, src/tools/capture_menus.gd, implementation/shots/0292/
+Verify: PASS, 61 checks in 1,087 s; 19,583 headless / 2,823 headless_v1 (107 groups) / 1,271 + 735 + 54 input cases (input_v2: 9 cases); 911 strings; sim 19045517 and data 1862823492 unchanged
+Notes:
+- **A pad's A confirms no options row.** `ui_accept` in this project is
+  Enter, keypad Enter and Space. The night HUD and the tech tree read
+  `interact` for their own A, but `OptionRow` never has. So a pad steps
+  every row (left and right are `ui_left`/`ui_right`, which have the
+  d-pad), but it cannot press RESET, a key binding or an action row. This
+  predates the task. The case resets by Enter and Space, and the gap is
+  left for the owner.

@@ -90,6 +90,14 @@ func _run() -> void:
 				(rows[0] as Control).grab_focus()
 			await _settle(3)
 			await _shoot(folder, "options_%s" % tab)
+			# **The cursor and the camera** (task 0292), after the bindings:
+			# scrolled into view by the selection on the last of them, as a
+			# player reaches them.
+			var cursor_row := options.find_child("ControlsDeadzone", true, false) as Control
+			if tab == "controls" and cursor_row != null:
+				cursor_row.grab_focus()
+				await _settle(4)
+				await _shoot(folder, "options_controls_cursor")
 	root.remove_child(main)
 	main.free()
 	print("MENU CAPTURE: %d pictures into %s" % [_written, folder])

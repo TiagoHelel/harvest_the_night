@@ -1,7 +1,8 @@
 class_name OptionsGame
 extends OptionsPage
 
-## The game page: which language the game speaks, and how fast a night runs.
+## The game page: which language the game speaks, how fast a night runs,
+## the fishing assist and whether the forecast is up all day.
 ##
 ## **The language applies the moment it changes**, like everything else on
 ## this screen - `Locale` relabels every screen that is up, this one included,
@@ -12,19 +13,28 @@ extends OptionsPage
 ## game's lives on the night HUD as well, and both are the same setting, so a
 ## speed chosen here is the one the button starts from - and a run that is up
 ## behind the options picks it up at once (`SimDriver` listens).
+##
+## **The fishing assist and the all-day forecast** (task 0292) are switches.
+## The assist is 0180's rule, reaching the run through an intent `Main`
+## writes every frame; the forecast's hours are the view's.
 
 var _language: OptionRow
 var _speed: OptionRow
+var _assist: OptionRow
+var _forecast: OptionRow
 
 
 func _init() -> void:
-	resets = [&"gameplay/language", &"gameplay/night_speed"]
+	resets = [&"gameplay/language", &"gameplay/night_speed",
+		&"gameplay/fishing_assist", &"gameplay/forecast_all_day"]
 	title_key = &"OPT_TAB_GAME"
 
 
 func _build() -> void:
 	_language = choice_row("GameLanguage", _step_language, _language_text)
 	_speed = choice_row("GameNightSpeed", _step_speed, _speed_text)
+	_assist = toggle_row("GameFishingAssist", &"gameplay/fishing_assist")
+	_forecast = toggle_row("GameForecastAllDay", &"gameplay/forecast_all_day")
 
 
 func relabel() -> void:
@@ -32,6 +42,8 @@ func relabel() -> void:
 		return
 	_language.text = I18n.t(&"GAME_LANGUAGE")
 	_speed.text = I18n.t(&"GAME_NIGHT_SPEED")
+	_assist.text = I18n.t(&"GAME_FISHING_ASSIST")
+	_forecast.text = I18n.t(&"GAME_FORECAST_ALL_DAY")
 	say("")
 	super()
 

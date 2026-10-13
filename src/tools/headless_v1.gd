@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 106
+const GROUPS := 107
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -185,6 +185,7 @@ func _run() -> void:
 	_task_0285_season_music()
 	_task_0286_weather_ambience()
 	_task_0287_collections()
+	_task_0292_options()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -12730,6 +12731,66 @@ func _task_0287_collections() -> void:
 ## held it.
 func _past_the_year(state: Dictionary) -> void:
 	state["day"] = Run.final_night() + 1 + int(state.get("days_held", 0))
+
+## 0292 - the options for the new controls. Five keys with their defaults
+## (0131's rate, 0130's band on, 0121's 0.2, both game switches off), each on
+## its page's reset list with its default among its steps; nothing in
+## src/core/ names `Settings`; and the forecast read at 08:00 is the one read
+## at 18:00, so seeing it at breakfast changes nothing.
+func _task_0292_options() -> void:
+	var defaults: Dictionary = (load("res://src/app/settings.gd") as GDScript).get_script_constant_map()["DEFAULTS"]
+	expect(defaults.get(&"controls/cursor_speed") == 100
+			and defaults.get(&"controls/edge_pan") == true
+			and is_equal_approx(float(defaults.get(&"controls/pad_deadzone", -1.0)), 0.2)
+			and defaults.get(&"gameplay/fishing_assist") == false
+			and defaults.get(&"gameplay/forecast_all_day") == false,
+		"five keys: cursor speed 100, edge pan on, deadzone 0.2, the assist and the all-day forecast off")
+	var controls := OptionsControls.new()
+	var game := OptionsGame.new()
+	expect(controls.resets.has(&"controls/cursor_speed") and controls.resets.has(&"controls/edge_pan")
+			and controls.resets.has(&"controls/pad_deadzone")
+			and game.resets.has(&"gameplay/fishing_assist")
+			and game.resets.has(&"gameplay/forecast_all_day"),
+		"each on its page's reset list", "%s / %s" % [str(controls.resets), str(game.resets)])
+	controls.free()
+	game.free()
+	expect(OptionsControls.CURSOR_SPEEDS == [50, 75, 100, 150, 200]
+			and OptionsControls.DEADZONES.size() == 9
+			and is_equal_approx(float(OptionsControls.DEADZONES[0]), 0.1)
+			and is_equal_approx(float(OptionsControls.DEADZONES[8]), 0.5)
+			and OptionsControls.DEADZONES.has(0.2),
+		"the steps sit with their rows: 50-200 percent, and 0.10-0.50 in 0.05s with the shipped 0.2")
+	var shipped := true
+	for action in ActionsScript.STICK_ACTIONS:
+		var entry: Variant = ProjectSettings.get_setting("input/%s" % action)
+		if not InputMap.has_action(action) or not (entry is Dictionary) \
+				or not is_equal_approx(float((entry as Dictionary).get("deadzone", -1.0)),
+					ActionsScript.SHIPPED_DEADZONE):
+			shipped = false
+	expect(shipped and ActionsScript.STICK_ACTIONS.size() == 8,
+		"the deadzone is set on the four move and four pan actions, all shipped at 0.2")
+
+	# **No rule reads a preference.**
+	var naming: Array = []
+	var named := RegEx.create_from_string("\\bSettings\\b")
+	for file in DirAccess.get_files_at("res://src/core"):
+		if not String(file).ends_with(".gd"):
+			continue
+		if named.search(SuiteKit.code_lines_of("res://src/core".path_join(file))) != null:
+			naming.append(file)
+	expect(naming.is_empty(), "no file in src/core/ names Settings", str(naming))
+
+	# **The forecast is the seed's and the date's**, at any hour.
+	var state := State.create(2920)
+	state["day"] = 9
+	state["nights_won"] = 8
+	state["day_tick"] = Phases.tick_at_minute(8 * 60)
+	var breakfast := Forecast.tonight(state)
+	state["day_tick"] = Phases.tick_at_minute(18 * 60)
+	var dusk := Forecast.tonight(state)
+	expect(not breakfast.is_empty() and str(breakfast) == str(dusk),
+		"Forecast.tonight gives the same record at 08:00 as at 18:00", str(breakfast))
+	_completed += 1
 
 
 ## A WAV's join against its own 99th-percentile step, the way

@@ -83,6 +83,10 @@ const DEFAULTS := {
 	# so the run reads it through an intent, never from here. Its Options row
 	# is 0292's.
 	&"gameplay/fishing_assist": false,
+	# Task 0292: 0158's forecast from the morning rather than from 18:00.
+	# View only - the forecast is the seed's and the date's, whenever it is
+	# read.
+	&"gameplay/forecast_all_day": false,
 
 	&"a11y/screen_shake": 1.0,
 	# Task 0088. A few frames of stopped world on a big hit. Its own key
@@ -104,6 +108,13 @@ const DEFAULTS := {
 	&"a11y/slow": 1.0,
 
 	&"controls/bindings": {},           # task 0095 fills this
+	# Task 0292: input preferences, not rules - neither hash hears them, and
+	# their steps sit with their rows (`OptionsControls`). The guardian's
+	# cursor's held step, as a percent of 0131's repeat rate; 0130's edge
+	# band; and the sticks' deadzone on the move and pan actions, 0121's 0.2.
+	&"controls/cursor_speed": 100,
+	&"controls/edge_pan": true,
+	&"controls/pad_deadzone": 0.2,
 }
 
 var _values: Dictionary = {}
