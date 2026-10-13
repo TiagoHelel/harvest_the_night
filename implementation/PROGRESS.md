@@ -29806,3 +29806,121 @@ Notes:
   end of summer. Unmeasured, since no run reaches it.
 - The `enter_result from RESULT` error (two bites after the house falls)
   shows in long runs. It is already its own task.
+
+## 0281 - The new day's sounds - done 2026-10-13
+
+What changed: the longer day of 1.0 makes its own noises. View only: neither
+hash moved.
+
+- **`tools/gen_sfx.py`** gains eighteen recipes, built from the same `Noise`
+  and primitives (no `random`). They fall in two groups.
+  - **Furniture**, in `DAY_SOUNDS` at `SOFT_PEAK`, every one shorter than the
+    bite:
+    - the three verbs that borrowed a file each get their own: `dig` (a
+      pig's two scoops and the truffle's pop, 0185), `ship` (the bin's lid,
+      the drop and the lid down, 0189 - not the stall's coins, since nothing
+      is paid until dawn) and `fertilise` (a dry sprinkle and a pat, 0222);
+    - 0176's metals: `mine_copper` (a warmer, lower ring), `mine_coal` (a
+      crunch with almost no note) and `mine_gold` (the brightest ring);
+    - one working sound per artisan machine, when a job goes in: `keg`
+      (knock and glug), `preserves_jar` (clink and lid), `dairy` (a churn's
+      slosh), `loom` (three clacks) and `mill` (stone grinding);
+    - `anvil`, the smith's ring when a tool upgrade is ordered.
+  - **`MOMENT_SOUNDS`**, a list of their own at `MOMENT_PEAK` (0.60, under
+    `ALARM_PEAK` 0.95) and joined into `SOUNDS`. These happen once or twice a
+    day, so they may run longer and a touch louder than the furniture:
+    - `bed`: cloth drawn up and a breath out;
+    - `wake`: a rising stretch and a note at 06:00;
+    - `pass_out`: a thud at 02:00;
+    - `payout`: one purse of coins;
+    - `stall_bell`: a handbell rung twice;
+    - `tool_ready`: a bright ting.
+  - The module docstring names the exception, and `--check` counts the
+    moments apart.
+- **`src/ui/sfx.gd`**:
+  - **`TARGET_SOUNDS`** (occupant id -> sound) is asked before
+    `VERB_SOUNDS`, with the occupant that stood on the action's cell when it
+    began, since a seam struck to its end is gone by its last swing. Copper,
+    coal and gold ring as their ore, each machine sounds as itself, and a
+    target absent from it falls back to its verb (`Sfx.sound_for`).
+  - `dig`, `fertilise` and `ship` play their own files, so no two day verbs
+    share one any more.
+  - **The moments, heard from the state** (`src/core/` untouched, no new
+    key):
+    - **bed and pass-out**: the phase leaving DAY with `House.asleep`, the
+      floor when `passed_out`;
+    - **wake**: the phase coming back to DAY, which is 0138's morning;
+    - **the payout**: ONE coins sound when a bin that held something is
+      emptied by day. That is `Shipping.pay` at `begin_day`. It is read off
+      the bin, because `_watch_money` forgets outside the day;
+    - **the bell**: at the stall's cell, as `Shop.open_hours` turns on at
+      `STALL_OPENS` and off at `STALL_CLOSES`;
+    - **the anvil**: when a tool appears in `tools.pending`, which happens on
+      an order at the stall or when the workshop finishes one;
+    - **the ting**: when a tool's tier goes up at dawn.
+
+    The first frame of a farm only records where it is, so loading a save
+    plays nothing.
+- **Tests**:
+  - `_task_0084_day_sounds` measures the target table and the anvil as
+    furniture. The moments join only its "nothing in the folder is
+    unreached" set.
+  - `headless_v1` gains `_task_0281_day_sounds` (100 groups):
+    - every new id is a file;
+    - the new per-action sounds keep the furniture rule;
+    - the six moments are `gen_sfx.py`'s `MOMENT_SOUNDS` at a `MOMENT_PEAK`
+      under `ALARM_PEAK`, and all are quieter than the house being hit;
+    - copper, coal, gold and each machine resolve to their own sound, a
+      rock, the workshop and an empty cell to the verb's, and a silent verb
+      stays silent;
+    - no two day verbs share a sound.
+  - 0222's assert pinned `fertilise` to the sowing's sound; it now holds the
+    verb's own.
+  - `input_v2` gains `_case_0281_day_moments` (2 cases), per CLAUDE.md's
+    "from 0258 on":
+    - mining a copper seam plays `sfx/mine_copper` and never `sfx/mine`;
+    - the `sleep` intent plays the bed exactly once, and not the floor;
+    - a morning with carrots in the bin plays the coins exactly once, and
+      the stretch once.
+
+`python tools/gen_sfx.py --report`, the new sounds:
+
+```text
+  sound          seconds   peak    rms  bright
+  dig              0.320   0.55  0.086    0.35
+  ship             0.400   0.55  0.101    0.08
+  fertilise        0.310   0.55  0.105    0.89
+  mine_copper      0.260   0.55  0.095    0.21
+  mine_coal        0.220   0.55  0.070    0.60
+  mine_gold        0.320   0.55  0.075    0.47
+  keg              0.310   0.55  0.137    0.04
+  preserves_jar    0.350   0.55  0.092    0.77
+  dairy            0.390   0.55  0.141    0.26
+  loom             0.390   0.55  0.081    0.38
+  mill             0.420   0.55  0.192    0.06
+  anvil            0.420   0.55  0.083    0.52
+  bed              0.900   0.60  0.160    0.52
+  wake             0.800   0.60  0.130    0.21
+  pass_out         0.640   0.60  0.088    0.03
+  payout           0.550   0.60  0.155    0.68
+  stall_bell       0.880   0.60  0.129    0.66
+  tool_ready       0.640   0.60  0.144    0.77
+```
+
+Against them, the bite is 0.460 s at 0.85 and the house 0.95: the longest
+furniture (the mill and the anvil, 0.42 s) stays under the bite's length.
+
+Files: tools/gen_sfx.py, assets/sfx/ (18 WAVs and their .import),
+src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd,
+src/tools/input_v2.gd
+Verify: PASS, 61 checks in 1,018 s; 19,408 headless / 2,773 headless_v1 (100 groups) / 1,269 + 735 + 11 input cases; sfx 48 sounds (25 day, 6 moments, 14 night, 3 menu); sim 3524359536 and data 1211606022 unchanged
+Notes:
+- **The anvil plays when the upgrade becomes pending**, as the prompt's
+  third requirement says. That is the order itself at the stall. At the
+  workshop it is the moment the smith finishes, which is later than the
+  order and is when the tool is first owed.
+- **A morning can stack three moments in one frame**: the stretch, the
+  coins and a ting. They are short and differently pitched; `Audio` mixes
+  them.
+- The animal calls are 0286's and the dog's bark 0283's, as the prompt
+  says.

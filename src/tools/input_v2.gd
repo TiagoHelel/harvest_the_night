@@ -21,7 +21,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 1
+const V2_CASES := 2
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -39,6 +39,7 @@ func _process(delta: float) -> bool:
 
 func _run() -> void:
 	await _case_0258_event_visuals()
+	await _case_0281_day_moments()
 	_finish()
 
 
@@ -147,6 +148,108 @@ func _case_0258_event_visuals() -> void:
 		str(hashes))
 
 	driver.set_process(processing)
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0281 - the new day's sounds, heard through the real scene's `Sfx` and
+## `Audio`: mining a copper seam rings copper and not stone; going to bed
+## plays the bed once; and a morning with goods in the bin plays the coins
+## exactly once - the bin's payout, not one a coin.
+func _case_0281_day_moments() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	if driver == null or audio == null:
+		expect(audio != null, "the Audio autoload is up for the day's moments")
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.running = false
+	await frames(2)
+
+	# **A copper seam rings as copper.** One on the map with ground beside
+	# it, or a rock made into one - the table entry is what is being heard.
+	var seam := Vector2i(-1, -1)
+	var beside := Vector2i(-1, -1)
+	for id in [&"copper_ore", &"rock"]:
+		for candidate in Farm.cells_with(state, id):
+			var spot := _walkable_neighbour(state, candidate as Vector2i)
+			if spot != Vector2i(-1, -1):
+				seam = candidate
+				beside = spot
+				break
+		if seam.x >= 0:
+			break
+	expect(seam.x >= 0, "there is a seam to stand beside")
+	if seam.x < 0:
+		driver.running = true
+		await close_scene()
+		_completed += 1
+		return
+	(state["occupants"] as Dictionary)[Grid.index(seam)] = {"id": &"copper_ore"}
+	Farm.touch(state)
+	var who: Dictionary = state["player"]
+	who["pos"] = [beside.x * Player.SUBTILE + Player.SUBTILE / 2,
+		beside.y * Player.SUBTILE + Player.SUBTILE / 2]
+	who["facing"] = _facing_from(beside, seam)
+	await frames(2)
+	expect(Interact.verb_at(state, seam) == &"mine", "and it offers mining")
+	audio.stop_all()
+	audio.forget_counts()
+	await press_key(KEY_SPACE, true)
+	await frames(2)
+	for i in 120:
+		Sim.advance(state, 2)
+		await frames(1)
+		if audio.plays_of(Sfx.TARGET_SOUNDS[&"copper_ore"]) > 0:
+			break
+	await press_key(KEY_SPACE, false)
+	await frames(2)
+	expect(audio.plays_of(Sfx.TARGET_SOUNDS[&"copper_ore"]) >= 1
+			and audio.plays_of(&"sfx/mine") == 0,
+		"mining a copper seam plays the copper strike and not the stone one",
+		"%d copper, %d stone, last '%s'" % [audio.plays_of(Sfx.TARGET_SOUNDS[&"copper_ore"]),
+			audio.plays_of(&"sfx/mine"), audio.last_played()])
+
+	# **To bed, with goods in the bin.** The `sleep` intent is the road the
+	# bed and GO TO BED take.
+	Resources.gain(state, {GameData.CARROT: 6})
+	Shipping.put(state, GameData.CARROT, 6)
+	await frames(2)
+	audio.stop_all()
+	audio.forget_counts()
+	(state["intent"] as Dictionary)["sleep"] = true
+	Sim.advance(state, 1)
+	await frames(4)
+	expect(int(state["phase"]) != Phases.DAY and House.asleep(state),
+		"the sleep intent puts him to bed", Phases.name_of(int(state["phase"])))
+	expect(audio.plays_of(Sfx.BED_SOUND) == 1 and audio.plays_of(Sfx.PASS_OUT_SOUND) == 0,
+		"going to bed plays the bed sound once, and not the floor's",
+		"%d bed, %d pass-out" % [audio.plays_of(Sfx.BED_SOUND), audio.plays_of(Sfx.PASS_OUT_SOUND)])
+
+	# **The morning pays the bin, and that is one sound.** Through the night
+	# and its result by hand, as 0258's case does, then frames for `Sfx` to
+	# hear the morning - and more, to be sure it is heard once.
+	audio.forget_counts()
+	NightRoad.to_night(state)
+	await frames(2)
+	Enemies.withdraw(state)
+	Phases.enter_result(state, true)
+	await frames(2)
+	Phases.begin_day(state)
+	await frames(8)
+	expect(Shipping.waiting(state).is_empty(), "the morning emptied the bin",
+		str(Shipping.waiting(state)))
+	expect(audio.plays_of(Sfx.PAYOUT_SOUND) == 1,
+		"a morning with goods in the bin plays the coins exactly once",
+		"%d payouts, %d sales" % [audio.plays_of(Sfx.PAYOUT_SOUND), audio.plays_of(Sfx.SELL_SOUND)])
+	expect(audio.plays_of(Sfx.WAKE_SOUND) == 1,
+		"and the stretch at 06:00 once", "%d" % audio.plays_of(Sfx.WAKE_SOUND))
+
+	driver.running = true
+	audio.stop_all()
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
 

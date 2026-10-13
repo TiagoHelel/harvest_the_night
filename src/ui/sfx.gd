@@ -57,21 +57,56 @@ const VERB_SOUNDS := {
 	&"plant": &"sfx/plant",
 	&"harvest": &"sfx/harvest",
 	&"collect": &"sfx/collect",
-	# A pig's truffle dug up (task 0185): the collect sound until 0281.
-	&"dig": &"sfx/collect",
-	# Bone meal into the furrow (task 0222): the planting sound until 0281.
-	&"fertilise": &"sfx/plant",
+	# **Their own since task 0281**, where they had borrowed: a pig's truffle
+	# dug up (0185), bone meal into the furrow (0222), and the shipping bin's
+	# lid and drop (0189) - not the stall's coins, since nothing is paid until
+	# dawn.
+	&"dig": &"sfx/dig",
+	&"fertilise": &"sfx/fertilise",
 	&"craft": &"sfx/craft",
 	&"trade": &"sfx/trade",
-	# The shipping bin's lid (task 0189): the stall's sale until 0281.
-	&"ship": &"sfx/sell",
+	&"ship": &"sfx/ship",
 	&"fish": &"sfx/cast",
 	&"reel": &"sfx/reel",
+}
+
+## **What the thing under the verb sounds like** (task 0281), asked before
+## `VERB_SOUNDS` with the cell the action carries: the cliff's metals (0176)
+## each ring as their ore, and each artisan machine (0187, 0188) sounds like
+## itself when a job goes in. A target absent from here falls back to its
+## verb's sound - a plain rock is `mine`, the workshop is `craft`.
+const TARGET_SOUNDS := {
+	&"copper_ore": &"sfx/mine_copper",
+	&"coal_seam": &"sfx/mine_coal",
+	&"gold_ore": &"sfx/mine_gold",
+	&"keg": &"sfx/keg",
+	&"preserves_jar": &"sfx/preserves_jar",
+	&"dairy": &"sfx/dairy",
+	&"loom": &"sfx/loom",
+	&"mill": &"sfx/mill",
 }
 
 const WATER_SOUND := &"sfx/water"
 const BITE_SOUND := &"sfx/bite"
 const SELL_SOUND := &"sfx/sell"
+
+## The smith's anvil, when a tool upgrade is ordered (task 0281). Furniture:
+## short and soft, under the bite.
+const ANVIL_SOUND := &"sfx/anvil"
+
+## **The day's moments** (task 0281), heard from the state: the bed and the
+## floor at 02:00 as the day ends, the stretch at 06:00, ONE coins sound when
+## the bin is paid at dawn, the peddler's bell as his hours begin and end, and
+## the ting of a tool handed over. Once or twice a day each, so they are
+## `gen_sfx.py`'s `MOMENT_SOUNDS`: longer than furniture, under the alarm.
+const BED_SOUND := &"sfx/bed"
+const WAKE_SOUND := &"sfx/wake"
+const PASS_OUT_SOUND := &"sfx/pass_out"
+const PAYOUT_SOUND := &"sfx/payout"
+const BELL_SOUND := &"sfx/stall_bell"
+const TOOL_READY_SOUND := &"sfx/tool_ready"
+const MOMENT_SOUNDS: Array = [BED_SOUND, WAKE_SOUND, PASS_OUT_SOUND,
+	PAYOUT_SOUND, BELL_SOUND, TOOL_READY_SOUND]
 
 ## What each defence sounds like when it goes off. A defence absent from here
 ## does not fire - a wall, a fence and a barricade are furniture.
@@ -151,14 +186,26 @@ const DEATH_GAP := 8
 
 var _state: Dictionary = {}
 
-## The cycle being watched: what it is, where, and the tick it finishes on.
+## The cycle being watched: what it is, where, the tick it finishes on, and
+## what was standing on the cell when it began - a seam struck to its end is
+## gone by the time its last swing sounds.
 var _verb := &""
 var _cell := Vector2i(-1, -1)
 var _due := -1
+var _target := &""
 
 var _was_biting := false
 var _watered := -1
 var _money := -1
+
+## The moments' memory (task 0281): the phase last frame, what the bin held,
+## whether the stall kept hours, and the tools pending and their tiers.
+var _phase := -1
+var _in_bin := -1
+var _stall := -1
+var _pending: Dictionary = {}
+var _tiers: Dictionary = {}
+var _tools_known := false
 
 ## The night's memory: reload counters by cell, what was alive and how hurt,
 ## which occupants were standing, and the house.
@@ -178,9 +225,17 @@ func show_state(state: Dictionary) -> void:
 	_verb = &""
 	_cell = Vector2i(-1, -1)
 	_due = -1
+	_target = &""
 	_was_biting = false
 	_watered = -1
 	_money = -1
+	# Nor a bed, a payout or a bell for the frame a saved farm arrives on.
+	_phase = -1
+	_in_bin = -1
+	_stall = -1
+	_pending.clear()
+	_tiers.clear()
+	_tools_known = false
 	_forget_the_night()
 
 
@@ -198,6 +253,11 @@ func _process(delta: float) -> void:
 	if _audio != null:
 		_audio.listen_at(_where_the_player_is())
 
+	# The moments that sit on the day's edges are watched in every phase.
+	_watch_the_day_turning()
+	_watch_the_bin()
+	_watch_tools()
+
 	if int(_state["phase"]) != Phases.DAY:
 		# The farm is asleep after dark and these verbs do not tick then. The
 		# counters are reset so that coming back to the farm does not fire a
@@ -206,6 +266,7 @@ func _process(delta: float) -> void:
 		_due = -1
 		_watered = -1
 		_money = -1
+		_stall = -1
 		_watch_night(delta)
 		return
 	# And the night's memory goes the other way, so that a tower which fired
@@ -215,6 +276,7 @@ func _process(delta: float) -> void:
 	_watch_water()
 	_watch_fishing()
 	_watch_money()
+	_watch_the_stall()
 
 
 # ------------------------------------------------------------------ the verbs
@@ -226,10 +288,11 @@ func _watch_action() -> void:
 
 	if action.is_empty():
 		if _due >= 0 and tick >= _due:
-			_play_verb(_verb)
+			_play_verb(_verb, _target)
 		_verb = &""
 		_cell = Vector2i(-1, -1)
 		_due = -1
+		_target = &""
 		return
 
 	var verb := StringName(action["verb"])
@@ -238,16 +301,27 @@ func _watch_action() -> void:
 	# The same verb on the same cell with its due tick pushed forward is the
 	# one that repeated - a held key on a tree that is not down yet.
 	if _due >= 0 and verb == _verb and at == _cell and due > _due:
-		_play_verb(verb)
+		_play_verb(verb, _target)
+	if verb != _verb or at != _cell:
+		_target = StringName(Farm.occupant(_state, at).get("id", &""))
 	_verb = verb
 	_cell = at
 	_due = due
 
 
-func _play_verb(verb: StringName) -> void:
+func _play_verb(verb: StringName, target: StringName) -> void:
+	var id := sound_for(verb, target)
+	if id != &"":
+		_ask(id)
+
+
+## **What a finished verb sounds like** (task 0281): what it was done to
+## first (`TARGET_SOUNDS`), then the verb (`VERB_SOUNDS`), and `&""` for a
+## verb that is deliberately silent.
+static func sound_for(verb: StringName, target: StringName) -> StringName:
 	if verb == &"" or not VERB_SOUNDS.has(verb):
-		return
-	_ask(VERB_SOUNDS[verb])
+		return &""
+	return TARGET_SOUNDS.get(target, VERB_SOUNDS[verb])
 
 
 # ------------------------------------------------------------- the other three
@@ -285,6 +359,75 @@ func _watch_money() -> void:
 	if _money >= 0 and now > _money and Shop.is_open(_state):
 		_ask(SELL_SOUND)
 	_money = now
+
+
+# ---------------------------------------------------------------- the moments
+
+## **The bed, the floor and the morning** (task 0281), off the phase's edges.
+## Leaving the day asleep is the bed (0127's `House.asleep`) or, at 02:00,
+## the floor (0128's `passed_out`); coming back to the day is 0138's morning.
+## The first frame of a farm only records where it is.
+func _watch_the_day_turning() -> void:
+	var phase := int(_state["phase"])
+	if _phase >= 0 and phase != _phase:
+		if _phase == Phases.DAY and House.asleep(_state):
+			_ask(PASS_OUT_SOUND if House.passed_out(_state) else BED_SOUND)
+		elif phase == Phases.DAY:
+			_ask(WAKE_SOUND)
+	_phase = phase
+
+
+## **The morning's payout** (task 0281): ONE coins sound when a bin that held
+## something is emptied by day - `Shipping.pay` at `begin_day` - never one a
+## coin and never the night's reward. Read off the bin, because
+## `_watch_money` forgets outside the day and swallows that rise.
+func _watch_the_bin() -> void:
+	var held := 0
+	var bin: Dictionary = Shipping.waiting(_state)
+	for id in bin:      # a sum, so the order cannot matter
+		held += int(bin[id])
+	if _in_bin > 0 and held == 0 and int(_state["phase"]) == Phases.DAY:
+		_ask(PAYOUT_SOUND)
+	_in_bin = held
+
+
+## **The peddler's bell** (task 0281), at his stall, as `STALL_OPENS` and
+## `STALL_CLOSES` pass - read off `Shop.open_hours`, so a lever moving his
+## hours moves the bell with them.
+func _watch_the_stall() -> void:
+	var open := 1 if Shop.open_hours(_state) else 0
+	if _stall >= 0 and open != _stall:
+		var stalls := Farm.cells_with(_state, &"shop")
+		_ask_at(BELL_SOUND, _cell_middle(stalls[0]) if not stalls.is_empty()
+			else _where_the_player_is(), 1)
+	_stall = open
+
+
+## **The anvil and the ting** (task 0281): an upgrade 0173 has paid for
+## appears among `tools.pending` - ordered at the stall, or finished at the
+## workshop - and is handed over at dawn as its tool's tier going up.
+func _watch_tools() -> void:
+	var tools: Dictionary = _state.get("tools", {})
+	var waiting: Dictionary = tools.get("pending", {})
+	var pending := {}
+	var tiers := {}
+	var ordered := false
+	var handed := false
+	for tool in GameData.sorted_names(GameData.TOOLS.keys()):
+		var key := String(tool)
+		tiers[key] = int(tools.get(key, 0))
+		if waiting.has(key):
+			pending[key] = true
+			ordered = ordered or not _pending.has(key)
+		handed = handed or int(tiers[key]) > int(_tiers.get(key, tiers[key]))
+	if _tools_known:
+		if ordered:
+			_ask(ANVIL_SOUND)
+		if handed:
+			_ask(TOOL_READY_SOUND)
+	_pending = pending
+	_tiers = tiers
+	_tools_known = true
 
 
 func _ready() -> void:

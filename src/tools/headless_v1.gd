@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 99
+const GROUPS := 100
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -178,6 +178,7 @@ func _run() -> void:
 	_task_0275_perf_year()
 	_task_0276_year_autoplay()
 	_task_0277_year_balance()
+	_task_0281_day_sounds()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -12173,6 +12174,115 @@ func _task_0277_year_balance() -> void:
 		"%s, then %s" % [str(untaught), str(Autoplay._prep_target(ready))])
 	_completed += 1
 
+## **Task 0281: the new day's sounds.** Every new id is a file. What a verb is
+## done to, the verbs that used to borrow, and the smith's anvil keep the
+## furniture rule `_task_0084_day_sounds` holds - quieter and shorter than the
+## bite. The moments are a named list under the alarm, the same six in
+## `gen_sfx.py` and in `Sfx`. Ore and machine targets resolve to their own
+## sound, and an unknown target to its verb's.
+func _task_0281_day_sounds() -> void:
+	var furniture: Array = [Sfx.ANVIL_SOUND, Sfx.VERB_SOUNDS[&"dig"],
+		Sfx.VERB_SOUNDS[&"ship"], Sfx.VERB_SOUNDS[&"fertilise"]]
+	for target in GameData.sorted_names(Sfx.TARGET_SOUNDS.keys()):
+		furniture.append(Sfx.TARGET_SOUNDS[target])
+	var missing: Array = []
+	for id in furniture + Sfx.MOMENT_SOUNDS:
+		if not FileAccess.file_exists("res://assets/%s.wav" % id):
+			missing.append(id)
+	expect(missing.is_empty(), "every new day sound is a file in assets/sfx", str(missing))
+
+	var bite := _wav_measure("res://assets/%s.wav" % Sfx.BITE_SOUND)
+	var alarm := _wav_measure("res://assets/%s.wav" % Sfx.HOUSE_SOUND)
+	var loud: Array = []
+	for id in furniture:
+		var one := _wav_measure("res://assets/%s.wav" % id)
+		if one.is_empty() or float(one["peak"]) > 0.6 or float(one["seconds"]) >= 0.6 \
+				or float(one["peak"]) >= float(bite["peak"]) \
+				or float(one["seconds"]) >= float(bite["seconds"]):
+			loud.append("%s %s" % [id, str(one)])
+	expect(loud.is_empty() and not bite.is_empty(),
+		"the new per-action sounds are furniture: under 0.6 and 0.6 s, quieter and shorter than the bite",
+		str(loud))
+
+	# The moments: once or twice a day, their own list and peak, under the
+	# alarm - named in the generator as in `Sfx`.
+	var over: Array = []
+	for id in Sfx.MOMENT_SOUNDS:
+		var one := _wav_measure("res://assets/%s.wav" % id)
+		if one.is_empty() or float(one["peak"]) >= float(alarm["peak"]):
+			over.append("%s %s" % [id, str(one)])
+	var gen := FileAccess.get_file_as_string("res://tools/gen_sfx.py")
+	var named: Array = []
+	for id in Sfx.MOMENT_SOUNDS:
+		if gen.contains("(\"%s\", %s, MOMENT_PEAK)" % [String(id).get_file(), String(id).get_file()]):
+			named.append(id)
+	var moment_peak := _py_number(gen, "MOMENT_PEAK")
+	var alarm_peak := _py_number(gen, "ALARM_PEAK")
+	expect(over.is_empty() and not alarm.is_empty(),
+		"the day's moments are quieter than the house being hit", str(over))
+	expect(named.size() == Sfx.MOMENT_SOUNDS.size() and Sfx.MOMENT_SOUNDS.size() == 6
+			and moment_peak > 0.0 and moment_peak < alarm_peak,
+		"they are the six of gen_sfx.py's MOMENT_SOUNDS, at a MOMENT_PEAK under ALARM_PEAK",
+		"%d named, %.2f against %.2f" % [named.size(), moment_peak, alarm_peak])
+
+	# What a verb is done to, before the verb.
+	var wrong: Array = []
+	for pair in [[&"mine", &"copper_ore", &"sfx/mine_copper"], [&"mine", &"coal_seam", &"sfx/mine_coal"],
+			[&"mine", &"gold_ore", &"sfx/mine_gold"], [&"mine", &"rock", &"sfx/mine"],
+			[&"craft", &"workshop", &"sfx/craft"], [&"chop", &"", &"sfx/chop"]]:
+		if Sfx.sound_for(StringName(pair[0]), StringName(pair[1])) != StringName(pair[2]):
+			wrong.append(pair)
+	for machine in Autoplay.MACHINES:
+		var own := Sfx.sound_for(&"craft", StringName(machine))
+		if own != StringName("sfx/%s" % machine):
+			wrong.append([&"craft", machine, own])
+	expect(wrong.is_empty(),
+		"copper, coal and gold strike as their ore and each machine sounds as itself; a rock, the workshop and nothing at all fall back to the verb",
+		str(wrong))
+	expect(Sfx.sound_for(&"repair", &"keg") == &"",
+		"and a deliberately silent verb stays silent whatever it is done to")
+
+	# **Every day verb its own file** - the three that borrowed in 0185,
+	# 0189 and 0222 included.
+	var seen := {}
+	var shared: Array = []
+	for verb in Interact.DAY_ONLY:
+		if Interact.is_instant(verb) or not Sfx.VERB_SOUNDS.has(verb):
+			continue
+		var id: StringName = Sfx.VERB_SOUNDS[verb]
+		if seen.has(id):
+			shared.append("%s and %s: %s" % [seen[id], verb, id])
+		seen[id] = verb
+	expect(shared.is_empty(), "no two day verbs share a sound", str(shared))
+	_completed += 1
+
+
+## Length and peak of a 16-bit mono WAV at 22,050 Hz, read off its bytes -
+## the importer's QOA is lossy, and the question is what `gen_sfx.py` wrote.
+func _wav_measure(path: String) -> Dictionary:
+	var raw := FileAccess.get_file_as_bytes(path)
+	var at := 12
+	while at + 8 <= raw.size():
+		var tag := raw.slice(at, at + 4).get_string_from_ascii()
+		var size := raw.decode_u32(at + 4)
+		if tag == "data":
+			var count := mini(size, raw.size() - at - 8) / 2
+			var peak := 0.0
+			for i in count:
+				peak = maxf(peak, absf(float(raw.decode_s16(at + 8 + i * 2)) / 32768.0))
+			return {"seconds": float(count) / 22050.0, "peak": peak}
+		at += 8 + size + (size & 1)
+	return {}
+
+
+## A top-level `NAME = number` out of a Python file.
+func _py_number(text: String, name: String) -> float:
+	for line in text.split("\n"):
+		if line.begins_with(name + " = "):
+			return float(line.get_slice("=", 1).strip_edges())
+	return -1.0
+
+
 ## **A mid-summer farm** (task 0276): Summer 6 of a run, every night before it
 ## won and the lessons behind it, a coop on its site with four hens whose eggs
 ## wait at the door, and a purse - money, wood, iron and stone - for the
@@ -13411,9 +13521,9 @@ func _task_0222_bone_meal() -> void:
 		"and takes one sack, once")
 	Farming.select_seed(state, GameData.CARROT)
 	expect(Interact.DAY_ONLY.has(&"fertilise") and Interact.DEFAULT_TICKS.has(&"fertilise")
-		and Interact.all_verbs().has(&"fertilise") and Sfx.VERB_SOUNDS.get(&"fertilise", &"") == &"sfx/plant"
+		and Interact.all_verbs().has(&"fertilise") and Sfx.VERB_SOUNDS.get(&"fertilise", &"") == &"sfx/fertilise"
 		and PlayerArt.VERBS.get(&"fertilise", &"") == &"plant",
-		"a day verb, as long as a sowing, with the sowing's sound and stoop")
+		"a day verb, as long as a sowing, with the sowing's stoop - and since 0281 a sound of its own")
 
 	# **The rule**: the fertilised plot finishes exactly a morning before
 	# the other, and its second morning grants nothing extra.

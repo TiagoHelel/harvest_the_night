@@ -34,6 +34,13 @@ louder than the rest, and there is a check that it actually is. A sound that
 is supposed to grab attention and does not is worse than no sound, because the
 player learns to ignore the one that matters.
 
+**And the moments are not furniture** (task 0281). Going to bed, waking at
+06:00, passing out at 02:00, the morning's payout, the stall's bell and a
+tool handed over happen once or twice a day rather than hundreds of times an
+hour, so `MOMENT_SOUNDS` may run longer and a touch louder than the
+furniture - and stays under the alarm. The bite is still the one day sound
+built to grab you.
+
 ## The night is the other half, and it is louder
 
 Task 0085 adds the defences, the enemies and the four things that happen to
@@ -74,6 +81,13 @@ NIGHT_PEAK = 0.70
 
 ## The Giant, which is allowed to be bigger than everything except the alarm.
 GIANT_PEAK = 0.88
+
+## **What a moment may peak at** (task 0281): going to bed, waking, passing
+## out, the morning's payout, the stall's bell and a tool handed over. These
+## happen once or twice a day, not hundreds of times an hour, so they are
+## allowed to be longer than the furniture and a touch above it - and stay
+## well under the alarm, which `headless_v1` asserts.
+MOMENT_PEAK = 0.60
 
 ## What a menu sound may peak at: the quietest tier in the game. These are heard
 ## every time a selection moves, and a menu that clicks louder than an axe on a
@@ -352,6 +366,192 @@ def reel():
     return mix(pull, gain(splash, 0.55))
 
 
+# ----------------------------------------------------- the new day (task 0281)
+#
+# Every verb 0165-0195 added borrowed a file to keep `_task_0084_day_sounds`
+# green; these are their own. All of them are furniture - short, soft, under
+# the bite - except the moments further down.
+
+def dig():
+    """A pig's truffle dug up: two scoops of soil and a little pop as it comes
+    free. The collect sound's two pats were a hand on an animal; this is a
+    snout in the ground."""
+    scoop_a = decay(lowpass(noise(8601, 140), 1300), 30.0, 4.0)
+    scoop_b = at(110, decay(lowpass(noise(8602, 150), 1200), 34.0, 4.0))
+    pop = at(230, decay(sweep(260.0, 520.0, 90, 0.6), 22.0, 2.0))
+    return mix(gain(scoop_a, 0.7), gain(scoop_b, 0.65), gain(pop, 0.35))
+
+
+def ship():
+    """The shipping bin: the lid lifted on its hinge, the goods dropped in, the
+    lid down. Not the stall's coins - nothing is paid until dawn."""
+    creak = decay(sweep(240.0, 180.0, 120, 0.8), 50.0, 10.0)
+    drop = at(110, decay(lowpass(noise(8603, 120), 1600), 26.0, 2.0))
+    thunk = at(250, decay(tone(118.0, 150), 40.0, 3.0))
+    knock = at(250, decay(lowpass(noise(8604, 100), 900), 18.0, 1.0))
+    return mix(gain(creak, 0.3), gain(drop, 0.6), gain(thunk, 0.55),
+               gain(knock, 0.5))
+
+
+def fertilise():
+    """Bone meal over a furrow: a dry sprinkle of grains, then the soft pat
+    of the hand pressing it in."""
+    sprinkle = swell(highpass(lowpass(noise(8605, 260), 5200), 2000),
+                     20.0, 180.0)
+    grains = mix(*[at(30 + 45 * k,
+                      decay(highpass(noise(8606 + k, 40), 2600), 6.0, 1.0))
+                   for k in range(4)])
+    pat = at(200, decay(lowpass(noise(8611, 110), 900), 18.0))
+    return mix(gain(sprinkle, 0.35), gain(grains, 0.4), gain(pat, 0.6))
+
+
+def _ore(seed, ring_hz, ring_tau, over_gain, strike_hz, ms):
+    """`mine`'s strike and ring, retuned: the cliff's metals ring, stone
+    barely does."""
+    strike = decay(lowpass(noise(seed, ms), strike_hz), 14.0)
+    ring = decay(tone(ring_hz, ms), ring_tau, 4.0)
+    over = decay(tone(ring_hz * 1.5, ms), ring_tau * 0.6, 4.0)
+    return mix(gain(strike, 0.8), gain(ring, 0.36), gain(over, over_gain))
+
+
+def mine_copper():
+    """Copper: a warmer ring than stone, lower and longer."""
+    return _ore(8612, 392.0, 120.0, 0.2, 2800, 260)
+
+
+def mine_coal():
+    """Coal: it crumbles rather than rings - a soft crunch with almost no
+    note in it."""
+    crunch = decay(lowpass(noise(8613, 220), 1800), 22.0)
+    grit = at(60, decay(lowpass(noise(8614, 160), 2400), 30.0))
+    note = decay(tone(262.0, 200), 40.0, 4.0)
+    return mix(gain(crunch, 0.8), gain(grit, 0.5), gain(note, 0.12))
+
+
+def mine_gold():
+    """Gold: the brightest strike on the cliff, a high clear ring - a reward
+    as much as a rock."""
+    return _ore(8615, 784.0, 140.0, 0.28, 4200, 320)
+
+
+def keg():
+    """A keg taking its fruit: a knock on the staves and a glug inside."""
+    knock = decay(lowpass(noise(8616, 120), 900), 20.0, 1.0)
+    staves = decay(tone(132.0, 200), 60.0, 3.0)
+    glug = mix(at(130, decay(sweep(220.0, 340.0, 80, 0.8), 26.0, 4.0)),
+               at(220, decay(sweep(180.0, 300.0, 90, 0.8), 28.0, 4.0)))
+    return mix(gain(knock, 0.6), gain(staves, 0.45), gain(glug, 0.45))
+
+
+def preserves_jar():
+    """A jar: glass touching glass, then the lid turned down."""
+    clink = decay(tone(1568.0, 160), 40.0, 1.0)
+    clink_over = decay(tone(2350.0, 160), 28.0, 1.0)
+    twist = at(150, swell(highpass(lowpass(noise(8617, 200), 3000), 800),
+                          30.0, 120.0))
+    return mix(gain(clink, 0.4), gain(clink_over, 0.22), gain(twist, 0.4))
+
+
+def dairy():
+    """A churn: milk sloshing against the wood, there and back."""
+    there = swell(sweep_lowpass(noise(8618, 180), 500.0, 1400.0), 40.0, 110.0)
+    back = at(190, swell(sweep_lowpass(noise(8619, 200), 1400.0, 500.0),
+                         40.0, 130.0))
+    body = decay(tone(98.0, 380), 140.0, 20.0)
+    return mix(gain(there, 0.6), gain(back, 0.6), gain(body, 0.3))
+
+
+def loom():
+    """A loom: the shuttle across and the beater home - clack, clack, clack."""
+    clacks = mix(decay(lowpass(noise(8620, 70), 2200), 10.0, 1.0),
+                 at(150, decay(lowpass(noise(8621, 70), 2000), 10.0, 1.0)),
+                 at(300, decay(lowpass(noise(8622, 90), 1800), 12.0, 1.0)))
+    shuttle = at(30, swell(highpass(lowpass(noise(8623, 110), 2600), 700),
+                           20.0, 70.0))
+    frame = decay(tone(196.0, 380), 120.0, 6.0)
+    return mix(gain(clacks, 0.75), gain(shuttle, 0.35), gain(frame, 0.2))
+
+
+def mill():
+    """A millstone: stone on stone, a low grinding turn."""
+    grind = swell(lowpass(noise(8624, 420), 700), 60.0, 160.0)
+    rumble = swell(sweep(70.0, 82.0, 420, 1.0), 60.0, 160.0)
+    grit = mix(*[at(60 + 90 * k,
+                    decay(highpass(noise(8625 + k, 40), 1500), 8.0, 1.0))
+                 for k in range(4)])
+    return mix(gain(grind, 0.7), gain(rumble, 0.45), gain(grit, 0.2))
+
+
+def anvil():
+    """A tool upgrade at the smith's: one ring off an anvil - metal on metal,
+    an inharmonic partial over it, which is what stops it being a bell."""
+    strike = decay(highpass(noise(8629, 60), 2500), 6.0, 0.5)
+    ring = decay(tone(1046.0, 420), 160.0, 1.0)
+    partial = decay(tone(2793.0, 420), 70.0, 1.0)
+    low = decay(tone(523.0, 420), 120.0, 1.0)
+    return mix(gain(strike, 0.6), gain(ring, 0.4), gain(partial, 0.22),
+               gain(low, 0.2))
+
+
+# ------------------------------------------------- the moments (task 0281)
+#
+# Once or twice a day each, so they are allowed to be longer than the
+# furniture, and `MOMENT_PEAK` - under the alarm, which stays the loudest.
+
+def bed():
+    """Under the blanket: cloth drawn up, and a long breath out."""
+    cloth = swell(highpass(lowpass(noise(8630, 520), 2600), 300), 120.0, 300.0)
+    sigh = at(300, swell(lowpass(noise(8631, 600), 600), 120.0, 420.0))
+    hum = at(320, swell(sweep(196.0, 147.0, 560, 0.8), 160.0, 380.0))
+    return mix(gain(cloth, 0.55), gain(sigh, 0.45), gain(hum, 0.18))
+
+
+def wake():
+    """06:00: a stretch - a breath in that rises, and a small bright note for
+    the day starting."""
+    breath = swell(sweep_lowpass(noise(8632, 560), 400.0, 1500.0), 220.0, 220.0)
+    rise = swell(sweep(220.0, 330.0, 520, 1.2), 200.0, 200.0)
+    note = at(500, decay(tone(659.0, 300), 110.0, 10.0))
+    return mix(gain(breath, 0.5), gain(rise, 0.22), gain(note, 0.25))
+
+
+def pass_out():
+    """02:00 and he drops where he stands: a body on the ground, a last
+    breath out. Falling, where the bed's sigh is lying down."""
+    thud = decay(sweep(140.0, 50.0, 300, 0.5), 80.0, 2.0)
+    ground = decay(lowpass(noise(8633, 220), 700), 40.0, 1.0)
+    breath = at(220, swell(lowpass(noise(8634, 420), 500), 60.0, 300.0))
+    return mix(gain(thud, 0.8), gain(ground, 0.6), gain(breath, 0.25))
+
+
+def payout():
+    """The bin paid at dawn: a purse's worth of coins at once - **one sound
+    for the whole sale**, never one a coin, and not the stall's two-note sale."""
+    coins = mix(*[at(ms, decay(tone(hz, 260), 70.0, 2.0))
+                  for ms, hz in [(0, 1326.0), (70, 1580.0), (130, 1180.0),
+                                 (200, 1770.0), (290, 1490.0)]])
+    jingle = at(20, decay(highpass(noise(8635, 420), 3200), 90.0, 4.0))
+    return mix(gain(coins, 0.3), gain(jingle, 0.2))
+
+
+def stall_bell():
+    """The peddler's handbell, rung twice: his hours begin, or they end."""
+    def ring(ms):
+        return at(ms, mix(decay(tone(1318.0, 620), 220.0, 1.0),
+                          gain(decay(tone(3302.0, 620), 90.0, 1.0), 0.4),
+                          gain(decay(tone(2093.0, 620), 150.0, 1.0), 0.3)))
+    return mix(ring(0), ring(260))
+
+
+def tool_ready():
+    """The upgraded tool handed over in the morning: a bright, clean ting -
+    the anvil's work, finished."""
+    ting = decay(tone(1760.0, 640), 200.0, 1.0)
+    over = decay(tone(3520.0, 640), 110.0, 1.0)
+    shimmer = at(30, decay(highpass(noise(8636, 300), 4000), 60.0, 2.0))
+    return mix(gain(ting, 0.6), gain(over, 0.25), gain(shimmer, 0.12))
+
+
 # ------------------------------------------------------------- the defences
 
 def shot_gun():
@@ -527,6 +727,31 @@ DAY_SOUNDS = [
     ("cast", cast, SOFT_PEAK),
     ("reel", reel, SOFT_PEAK),
     ("bite", bite, LOUD_PEAK),
+    # Task 0281: the verbs that borrowed, the cliff's metals, the machines
+    # and the smith - each its own, all furniture.
+    ("dig", dig, SOFT_PEAK),
+    ("ship", ship, SOFT_PEAK),
+    ("fertilise", fertilise, SOFT_PEAK),
+    ("mine_copper", mine_copper, SOFT_PEAK),
+    ("mine_coal", mine_coal, SOFT_PEAK),
+    ("mine_gold", mine_gold, SOFT_PEAK),
+    ("keg", keg, SOFT_PEAK),
+    ("preserves_jar", preserves_jar, SOFT_PEAK),
+    ("dairy", dairy, SOFT_PEAK),
+    ("loom", loom, SOFT_PEAK),
+    ("mill", mill, SOFT_PEAK),
+    ("anvil", anvil, SOFT_PEAK),
+]
+
+## **The day's moments** (task 0281): once or twice a day each, so not
+## furniture - their own list and peak, joined into `SOUNDS`.
+MOMENT_SOUNDS = [
+    ("bed", bed, MOMENT_PEAK),
+    ("wake", wake, MOMENT_PEAK),
+    ("pass_out", pass_out, MOMENT_PEAK),
+    ("payout", payout, MOMENT_PEAK),
+    ("stall_bell", stall_bell, MOMENT_PEAK),
+    ("tool_ready", tool_ready, MOMENT_PEAK),
 ]
 
 ## And the night's, which is the loud half.
@@ -556,7 +781,7 @@ UI_SOUNDS = [
     ("ui_back", ui_back, UI_PEAK),
 ]
 
-SOUNDS = DAY_SOUNDS + NIGHT_SOUNDS + UI_SOUNDS
+SOUNDS = DAY_SOUNDS + MOMENT_SOUNDS + NIGHT_SOUNDS + UI_SOUNDS
 
 
 # -------------------------------------------------------------------- the file
@@ -610,11 +835,11 @@ def measure(samples):
 
 
 def report():
-    print("  %-9s %7s %6s %6s %7s" % ("sound", "seconds", "peak", "rms",
-                                      "bright"))
+    print("  %-14s %7s %6s %6s %7s" % ("sound", "seconds", "peak", "rms",
+                                       "bright"))
     for name, recipe, peak in SOUNDS:
         seconds, hit, rms, bright = measure(render(recipe, peak))
-        print("  %-9s %7.3f %6.2f %6.3f %7.2f"
+        print("  %-14s %7.3f %6.2f %6.3f %7.2f"
               % (name, seconds, hit, rms, bright))
 
 
@@ -796,8 +1021,10 @@ def main():
                 print("  " + line)
             print("FAIL  run: python tools/gen_sfx.py")
             return 1
-        print("OK    %d sounds match their recipes (%d day, %d night, %d menu)"
-          % (len(files), len(DAY_SOUNDS), len(NIGHT_SOUNDS), len(UI_SOUNDS)))
+        print("OK    %d sounds match their recipes (%d day, %d moments, "
+              "%d night, %d menu)"
+              % (len(files), len(DAY_SOUNDS), len(MOMENT_SOUNDS),
+                 len(NIGHT_SOUNDS), len(UI_SOUNDS)))
         return 0
 
     os.makedirs(OUT, exist_ok=True)

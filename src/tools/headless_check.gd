@@ -14942,6 +14942,11 @@ func _task_0084_day_sounds() -> void:
 	wanted.append(SfxScript.WATER_SOUND)
 	wanted.append(SfxScript.BITE_SOUND)
 	wanted.append(SfxScript.SELL_SOUND)
+	# **What a verb is done to** (task 0281) - the cliff's metals and the
+	# machines - and the smith's anvil are furniture too, and measured as such.
+	for target in GameData.sorted_names(SfxScript.TARGET_SOUNDS.keys()):
+		wanted.append(SfxScript.TARGET_SOUNDS[target])
+	wanted.append(SfxScript.ANVIL_SOUND)
 	for id in wanted:
 		var path := "res://assets/%s.wav" % id
 		expect(ResourceLoader.exists(path),
@@ -14971,8 +14976,12 @@ func _task_0084_day_sounds() -> void:
 	# check was written when the day was all there was and went red the
 	# moment task 0085 put fourteen more files in, which is the check working
 	# rather than the check being wrong.
+	# **The day's moments** (task 0281) are asked for and are not furniture:
+	# heard here, so a moment's WAV is not an orphan, and kept out of the
+	# furniture loop below, which they would fail by design - `headless_v1`'s
+	# 0281 group holds them to their own rule.
 	var heard: Dictionary = {}
-	for id in wanted + _night_sound_ids() + _menu_sound_ids():
+	for id in wanted + _night_sound_ids() + _menu_sound_ids() + SfxScript.MOMENT_SOUNDS:
 		heard[String(id).get_file()] = true
 
 	# **The menus' three are the quietest and the shortest thing there is**
