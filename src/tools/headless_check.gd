@@ -10726,9 +10726,11 @@ func _a_ruined_night(seed_value: int) -> Dictionary:
 func _task_0058_giant() -> void:
 	var giant: Dictionary = GameData.ENEMIES[&"giant"]
 
-	# **Every boss is the biggest, the slowest and the best armoured** (task
-	# 0246: every boss against every non-boss, since 0247-0255 add both kinds).
-	# Slower than every one that walks: a flier is not on the same road.
+	# **Every boss is the biggest, the slowest and at least as well armoured**
+	# (task 0246: every boss against every non-boss, since 0247-0255 add both
+	# kinds). Slower than every one that walks: a flier is not on the same
+	# road. At least, not better (task 0277, the owner's call): the Giant is
+	# spring's boss at the tank's armour 4, a spring line's guns landing 2.
 	var bosses: Array = []
 	var others: Array = []
 	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
@@ -10743,8 +10745,8 @@ func _task_0058_giant() -> void:
 			if not bool(one.get("flies", false)):
 				expect(int(one["ticks_per_tile"]) < int(big["ticks_per_tile"]),
 					"and is slower than one - you watch it come", str(one))
-			expect(int(one.get("armour", 0)) < int(big["armour"]),
-				"and better armoured", str(one.get("armour", 0)))
+			expect(int(one.get("armour", 0)) <= int(big["armour"]),
+				"and at least as well armoured", str(one.get("armour", 0)))
 	expect(int(giant["structure_damage_percent"]) > 100,
 		"it smashes what it walks into", str(giant["structure_damage_percent"]))
 	expect(not bool(giant["targets_structures"]),
@@ -10827,10 +10829,12 @@ func _task_0058_giant() -> void:
 		expect(boxed["broke"] > 0,
 			"taking the %s apart to do it" % sealed_with, str(boxed))
 
-	# **A defence of only cheap towers cannot kill it in time**, and one that
-	# concentrates damage can - for less money. Eighteen crossbows since task
-	# 0194 halved wood's price: sixteen came to less than the four mortars,
-	# and eighteen, which cost more, still let it in.
+	# **Spring's towers kill it, and concentrated damage does it for less**
+	# (task 0277, the owner's call, in place of "a defence of only cheap
+	# towers cannot kill it in time"). Since 0234 the mortar opens in autumn,
+	# so a spring boss that eighteen crossbows could not stop was one no
+	# spring player could kill: the year's robot never brought it down.
+	# Eighteen crossbows since task 0194 halved wood's price.
 	var bolts := _giant_against(4304, [[&"auto_crossbow", 18]])
 	var shells := _giant_against(4304, [[&"mortar", 4]])
 	print("  a giant against %d crossbows ($%d): %s. Against %d mortars "
@@ -10843,10 +10847,11 @@ func _task_0058_giant() -> void:
 	expect(bolts["powered"] and shells["powered"],
 		"both farms had the power on, so this is about the towers",
 		"%s and %s" % [str(bolts["powered"]), str(shells["powered"])])
-	expect(bolts["got_in"],
-		"a line of nothing but crossbows does not stop it", str(bolts))
+	expect(not bolts["got_in"],
+		"a line of spring's crossbows stops it - it is spring's boss",
+		str(bolts))
 	expect(not shells["got_in"],
-		"and concentrated damage does", str(shells))
+		"and so does concentrated damage", str(shells))
 	expect(shells["spend"] <= bolts["spend"],
 		"for no more money - it is what the damage is shaped like, not how "
 		+ "much of it there is",

@@ -2137,6 +2137,15 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 	SUGAR: 10,
 }
 
+## **Spring's iron at the stall** (task 0277, the owner's third road): what
+## the peddler brings on a spring day in place of `DAILY_STOCK`'s. Spring is
+## the season of the first boss and of nothing heavy to fight it with - the
+## mines and the levels are paid in iron, and the year's sweep found every
+## spring line at 3-20 iron with hundreds of wood and money to spare. The
+## seams are the year's; this is spring's alone.
+const SPRING_IRON := 16                 # LEVER: iron a spring day at the stall, 8-40
+
+
 ## **This season's packets** (task 0190, moved here from 0170): the peddler
 ## carries the seeds that can be sown now, beside the materials above, and
 ## none in winter, when nothing grows outside. `check_season_stock` holds
@@ -2656,7 +2665,13 @@ const ENEMIES: Dictionary = {
 		"lurable": false,
 	},
 	&"giant": {
-		"hp": 900,                      # LEVER: hit points, 500-1600
+		# **Spring's boss, sized to spring's line** (task 0277, the owner's
+		# call): 900 and armour 6 lost 150-350 a fight to every line the
+		# robot fields by Spring 14 - guns and crossbows, the mortar being
+		# autumn's - and 700/4 fell in one run of eight. At 400/4 it falls on
+		# the first fight wherever the house stands. Armour 4 is the tank's:
+		# a gun lands 2 of its 6 and a bolt the minimum.
+		"hp": 400,                      # LEVER: hit points, 300-1600
 		"ticks_per_tile": 50,           # LEVER: ticks, 40-70
 		"damage": 40,                   # LEVER: to the house, 25-60
 		"structure_damage_percent": 400,   # LEVER: percent, 200-600
@@ -2667,7 +2682,7 @@ const ENEMIES: Dictionary = {
 		"reward": 120,                  # LEVER: money, 60-200
 		# A heap of its own, the most one cell holds.
 		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
-		"armour": 6,                    # LEVER: damage off each hit, 3-10
+		"armour": 4,                    # LEVER: damage off each hit, 3-10
 		"is_boss": true,
 	},
 	&"spitter": {
@@ -2825,7 +2840,13 @@ const ENEMIES: Dictionary = {
 		# before a charge, a gnaw and the house, so a player learns one
 		# rhythm for it.
 		"is_boss": true,
-		"hp": 1100,                     # LEVER: hit points, 700-1600
+		# **Sized to summer's line** (task 0277, the owner's call: "faz o
+		# Harvester igual ao Gigante"): at 1,100 and armour 6 it lost 60-300 a
+		# fight to every line that reached it, and the year stopped on Summer
+		# 14 on every seed. At 350/4 it falls on the first fight on seven of
+		# eight - less than the Giant's 400, because its charge takes the
+		# line's towers down as it comes.
+		"hp": 350,                      # LEVER: hit points, 300-1600
 		# Slower than every one that walks (0246) - it rolls.
 		"ticks_per_tile": 44,           # LEVER: ticks, 39-60
 		"damage": 45,                   # LEVER: to the house, 30-60
@@ -2840,8 +2861,9 @@ const ENEMIES: Dictionary = {
 		"crush_damage": 180,            # LEVER: to a structure, 121-239 (a stone wall 120, hardwood 240)
 		"reward": 150,                  # LEVER: money, 80-250
 		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
-		# Armoured as a machine, more than anything that is not a boss.
-		"armour": 6,                    # LEVER: damage off each hit, 5-10
+		# Armoured as a machine, as well as anything that is not a boss: the
+		# tank's 4, as the Giant's (task 0277).
+		"armour": 4,                    # LEVER: damage off each hit, 3-10
 		"lurable": false,
 	},
 	&"scarecrow_king": {
@@ -5711,6 +5733,8 @@ static func check_stall(stock: Dictionary, prices: Dictionary,
 ## `Shop` puts out each morning, and what `validate()` checks for each season.
 static func stall_stock(season: StringName) -> Dictionary:
 	var out: Dictionary = DAILY_STOCK.duplicate()
+	if season == SEASONS[0]:
+		out[IRON] = SPRING_IRON
 	out.merge(SEASON_STOCK.get(season, {}) as Dictionary)
 	out.merge(ANIMAL_STOCK)
 	for id in tool_upgrades():
@@ -6587,6 +6611,7 @@ static func digest() -> int:
 		"stock": DAILY_STOCK,
 		# The peddler (task 0190).
 		"season_stock": SEASON_STOCK,
+		"spring_iron": SPRING_IRON,
 		"animal_stall": [ANIMAL_PRICE, ANIMAL_STOCK, UPGRADE_STOCK],
 		"stall_hours": [STALL_OPENS, STALL_CLOSES],
 		# The week's steps, the parts of a day they may name and the 0.1

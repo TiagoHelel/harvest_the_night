@@ -1,4 +1,9 @@
-# The year - task 0277 (2026-10-13), blocked twice
+# The year - task 0277 (2026-10-13), blocked three times
+
+**Third block, after the owner's third call** - see "The owner's third
+call, played" below: the Giant (400/4) and the Harvester (350/4) now fall
+for every line that reaches them, spring's stall carries 16 iron, and the
+year stops at Autumn 7, where no line fields autumn's weapons.
 
 **Second block, after the owner's call** - see "The owner's call, played"
 below: the robot now fields each season's weapons, and the Giant still ends
@@ -37,6 +42,157 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's third call, played: the bosses sized to the season's line (2026-10-13)
+
+The owner chose to combine two roads: a little more iron at spring's stall
+and a weaker Giant, with 0058's rule rewritten only as far as needed. Then,
+once the Giant fell and summer was reached: "faz o Harvester igual ao
+Gigante".
+
+**What moved in the game** (`src/core/game_data.gd`):
+- **The Giant**: 900 hit points and armour 6 become **400 and armour 4**.
+- **The Harvester**: 1,100 and armour 6 become **350 and armour 4**.
+- **`SPRING_IRON` 16**: a spring morning's stall carries 16 iron, against
+  the year's `DAILY_STOCK` of 8.
+
+Armour 4 is the tank's. A spring gun (6 a shot) lands 2 of it, and a bolt
+(5) lands the minimum.
+
+**What moved in 0058's test**, and nothing else in it:
+- "Every boss is better armoured than every other enemy" becomes "at least
+  as well armoured": the Giant's 4 is the tank's.
+- "A line of nothing but crossbows does not stop it" becomes "a line of
+  spring's crossbows stops it". Since 0234 the mortar opens in autumn, so a
+  spring boss eighteen crossbows could not stop was one no spring player
+  could kill. Four mortars still do it for less money: 18 crossbows ($3,330)
+  kill it in 480 ticks, 4 mortars ($3,040) in 522. A mixed defence still
+  has 28 seconds to spare.
+
+**What moved in the instrument**:
+- **Bought before dug** (`BUY_BEFORE_DIGGING` 60): with money over the
+  plan's, the field's packets and 60, the robot buys the stall's iron
+  rather than dig it.
+- **`boss_left` on the `RUN` line**: each boss fight's fewest hit points,
+  0 when it fell. `tools/balance.py` reads it as a list.
+- `tools/balance.py`'s Giant levers match the Giant's own lines, since the
+  Harvester's range comments are the same now.
+
+### The Giant's grid
+
+`balanced` and `towers` on seeds 9000, 9001, 9007 and 9014, to night 15,
+the buy rule on. "First fight" is a run where it fell on Spring 14's first
+night; "fell" is a run where it fell at all, within the six repeats.
+
+| Giant | Spring iron | First fight | Fell | Spring nights lost |
+| --- | --- | --- | --- | --- |
+| 900/6 (before) | 8 | 0 of 8 | 0 of 8 | 26 |
+| 700/4 | 20 | 0 of 8 | 1 of 8 | 29 |
+| 600/4 | 20 | 0 of 8 | 3 of 8 | 28 |
+| 600/4 | 8 | 0 of 8 | 3 of 8 | 25 |
+| 500/4 | 20 | 1 of 8 | 3 of 8 | 27 |
+| 500/3 | 20 | 6 of 8 | 6 of 8 | 17 |
+| 550/3 | 16 | 6 of 8 | 6 of 8 | 17 |
+| **400/4** | **16** | **6 of 8** | **6 of 8** | **17** |
+| 350/4 | 16 | 6 of 8 | 6 of 8 | 17 |
+
+What it says:
+- **A spring line takes 350-590 off it a fight at armour 4**, whatever the
+  stall holds: at 600/4 `balanced` left it at 144-254 and `towers` at
+  12-211.
+- **400 is the most hit points tried at armour 4 that falls on the first
+  fight** everywhere the house stands. Armour 3 falls at 550 too, but would put the
+  Giant under the tank, which 0058's relation would then have to drop.
+- **The two runs it never falls in** (`balanced` 9001 and 9014) lose the
+  house before it takes a shot. Their line goes from nine defences to two
+  in one night, on Spring 11 or 13, with the house untouched. With 0-20
+  iron and under $450, the robot rebuilds a gun a night, and Spring 14,
+  repeated, takes that too.
+- **Spring's stall iron moves nothing the robot does**: 600/4 at 8 and at
+  20 measured the same, as 20 and 40 did before. The robot buys it now,
+  one to three times a day, but by Spring 11 its purse is $100-450, not the
+  $1,500-2,700 of the first block's robot. It stays at 16 as the owner
+  asked: a player who buys it has it.
+
+### The Harvester's grid
+
+The four seeds that reached summer (9000, 9007, 9028 and 9035), to night
+29:
+
+| Harvester | First fight | Fell | Summer nights lost |
+| --- | --- | --- | --- |
+| 1,100/6 (before) | 0 of 8 | 0 of 8 | (the year: every run stopped on Summer 14) |
+| 500/4 | 3 of 8 | 5 of 8 | 13 |
+| 400/4 | 6 of 8 | 7 of 8 | 2 |
+| **350/4** | **7 of 8** | **8 of 8** | **0** |
+
+- At 1,100/6 every line took 60-300 off it a fight.
+- At 400/4 `balanced` 9007 left it at 16-88 every fight. 350 is under the
+  Giant's 400: its charge takes the line's towers down as it comes.
+
+### The year after both
+
+`python tools/autoplay.py --year 8` (32 runs in 1,066 s, 8 processes, a run
+111-507 s):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           4.8    0.0    6.9    0.0         3.6  0.1  3.5  0.0   0/8    8/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0   10.9    0.0         0.0  0.0  7.0  0.0   0/8    8/8
+  walls              9.5    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+
+  summer  ALARM: 'towers' gets through it clean 8 times where the next gets 4 - a dominant strategy
+  autumn  ALARM: no policy got through it without a loss
+
+    balanced  spring  100 100 100 100 100 100 100 100  88  88  88  75  50  38
+              summer  100 100 100 100 100 100 100 100 100 100 100 100 100 100
+              autumn  100 100 100 100 100 100  25   0   0   0   0   0   0   0
+    towers    spring  100 100  62 100 100 100 100 100 100 100 100 100 100 100
+              summer  100 100 100 100 100 100 100 100 100 100 100 100 100 100
+              autumn  100 100 100  88 100 100  75  75  50  50  50  12  12   0
+```
+
+What it says:
+- **Both bosses fall.** The Giant falls in every run that holds Spring 13:
+  8 of 8 `towers`, 4 of 8 `balanced` (one after a repeat). Every run that
+  reaches summer
+  holds all of it, and the Harvester falls on the first fight in all of
+  them but one (`balanced` 9035, 30 hit points short, then down).
+- **Summer's alarm is spring's**: only the four `balanced` runs that got
+  through spring reached summer, and all four held it.
+- **Autumn is the new wall, from Autumn 7.** The runs that reach it hold
+  Autumn 1-6 (one night lost in all), then lose most of what follows. The Scarecrow King
+  was fought once: `towers` 9049 left it at 960 of 1,200.
+- `walls` and `economy` are where they were: they do not get out of
+  spring.
+
+### Why autumn falls: the robot never fields autumn's weapons
+
+Traced (`towers` and `balanced` on seed 9000, Summer 14 to Autumn 9):
+- **The line that meets Autumn 7 is guns and crossbows**: 4-10 guns, 3-7
+  crossbows, 2-5 mines. Not one mortar or catapult stood on either run.
+- **The plan walks round them.** The mortar costs 35 iron and 15
+  gunpowder, and the catapult 4 pumpkins. The cursor passes over both and
+  the plan buys guns and mines in their place.
+- **Iron again**: 0-14 every autumn morning, while wood sits at 800-1,000
+  and money at $300-1,100. A gun wants 12 iron and a level 15-18, and
+  what comes goes there.
+- Autumn's horde comes at 5,200 hit points on its second day and 8,400 on
+  its thirteenth, where summer's ended at 5,000. Around 6,700 on Autumn 7
+  is where a guns-and-crossbows line stops holding.
+
+### The next call is the owner's
+
+- **Autumn** - which of:
+  1. **The robot saves for its season's weapon** before it adds guns. This
+     is the instrument: a player shown the mortar puts iron aside for it.
+  2. **Iron through the year**, as spring's: the stall's `DAILY_STOCK`
+     iron, or the mortar's 35.
+  3. **Autumn's horde**: `autumn size` [5200, 8400].
+- **`balanced`'s spring.** Four of eight runs lose a nine-defence line in
+  one night on Spring 9-13 and never rebuild it. That is the boss nights'
+  companies, or the breakers, and it is unmeasured which.
 
 ## The owner's call, played: a robot that fields each season's weapons (2026-10-13)
 

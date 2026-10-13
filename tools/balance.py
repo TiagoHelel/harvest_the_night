@@ -98,11 +98,13 @@ LEVERS = [
     ("full moon",
      r'(const FULL_MOON_HORDE_PERCENT := )\d+(\s+# LEVER)',
      [130]),
+    # The Giant's own lines, not its range comments (task 0277): the
+    # Harvester's hit points and armour carry the same ranges since then.
     ("giant hp",
-     r'(\t\t"hp": )\d+(,\s+# LEVER: hit points, 500-1600)',
+     r'(&"giant": \{\n(?:\t\t#[^\n]*\n)*\t\t"hp": )\d+(,)',
      [700]),
     ("giant armour",
-     r'(\t\t"armour": )\d+(,\s+# LEVER: damage off each hit, 3-10)',
+     r'(# A heap of its own, the most one cell holds\.\n\t\t"bones": \d+,[^\n]*\n\t\t"armour": )\d+(,)',
      [6]),
     ("breaker bite",
      r'(# house\.\n\t\t"structure_damage_percent": )\d+(,)',
@@ -161,7 +163,7 @@ def parse_run(line):
     out = {}
     for pair in hit.group(1).split():
         key, _, value = pair.partition("=")
-        if key in ("losses", "repeats", "money", "essence", "lost"):
+        if key in ("losses", "repeats", "money", "essence", "lost", "boss_left"):
             out[key] = [int(v) for v in value.split(",") if re.match(r"^-?\d+$", v)]
         elif re.match(r"^-?\d+$", value):
             out[key] = int(value)

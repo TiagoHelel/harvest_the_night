@@ -209,6 +209,11 @@ const KEEP_BATCHES := 2
 ## it buys an animal or a tool.
 const SPARE_MONEY := 20
 
+## **What the purse keeps over the plan's money before the stall replaces the
+## seams** (task 0277): a player with this much to spare buys the material
+## rather than dig it.
+const BUY_BEFORE_DIGGING := 60
+
 ## How many times a boss night may be played again before a run stops: a
 ## tool run always ends, and the report says when this was why.
 const BOSS_REPEAT_CAP := 6
@@ -338,7 +343,10 @@ static func _one_night(state: Dictionary, policy: Dictionary) -> Dictionary:
 	var day_earned := int(state["gained"][GameData.MONEY]) - earned_before
 	_a_build_step(state, policy)
 	state["autoplay_boss_low"] = -1
+	var bosses_before := Combat.bosses_down(state)
 	_a_night(state, policy)
+	if Combat.bosses_down(state) > bosses_before:
+		state["autoplay_boss_low"] = 0
 	var ended := _how_it_ended(state)
 	var row := {
 		"night": int(state["night"]),
@@ -356,8 +364,8 @@ static func _one_night(state: Dictionary, policy: Dictionary) -> Dictionary:
 		"did": (state["autoplay_did"] as Dictionary).duplicate(),
 		"repeat": false,
 		# **How low the boss got** (task 0277): its fewest hit points seen in
-		# the night, or -1 on a night with none - what a fight that did not
-		# end it still says about how close it came.
+		# the night, 0 when it fell, or -1 on a night with none - what a
+		# fight that did not end it still says about how close it came.
 		"boss_left": int(state.get("autoplay_boss_low", -1)),
 	}
 	if int(state["phase"]) == Phases.RESULT:
@@ -624,6 +632,21 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 			return GameData.SECONDS
 		short = {}
 		break
+	# **Bought before dug, when the purse can spare it** (task 0277): a
+	# player with money over the plan's, the field's packets and
+	# `BUY_BEFORE_DIGGING` buys the stall's iron rather than spend the morning
+	# at the seams. The season robot ended spring at 3-20 iron with $200-2,000
+	# in its purse, and dug - and spring's stall iron moved nothing at 20 or
+	# at 40.
+	var seed_money := _seed_bill(state)
+	for res in GameData.sorted_names(short.keys()):
+		if not _can_be_gathered(StringName(res)) or StringName(res) == GameData.MONEY \
+				or not Shop.can_buy(state, StringName(res), 1):
+			continue
+		var paid := _buy_at_the_stall(state, StringName(res), int(short[res]),
+			int(saving_for.get(GameData.MONEY, 0)) + seed_money + BUY_BEFORE_DIGGING)
+		if paid > 0:
+			return paid
 	for res in GameData.sorted_names(short.keys()):
 		if not _can_be_gathered(StringName(res)):
 			continue
@@ -637,7 +660,6 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# want stays in the purse - a strawberry pays its packet back five times
 	# a season, and a robot that bought iron with its seed money farmed
 	# nothing.
-	var seed_money := _seed_bill(state)
 	for res in GameData.sorted_names(short.keys()):
 		if StringName(res) == GameData.MONEY or not Shop.can_buy(state, StringName(res), 1):
 			continue

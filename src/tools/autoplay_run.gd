@@ -218,14 +218,21 @@ static func _run_line(out: Dictionary, ms: int) -> String:
 	# boss night lost twice is there twice - for the survival per day
 	# `tools/balance.py` reads; `-` for none.
 	var lost: Array = []
+	# **What each boss had left**, fight by fight (task 0277): the night row's
+	# `boss_left`, 0 when it fell - how near a losing line came, which a
+	# count of repeats does not say.
+	var boss_left: Array = []
 	for row in (out["nights"] as Array):
 		if not bool((row as Dictionary)["held"]):
 			lost.append(str(int((row as Dictionary)["date"])))
-	return "RUN policy=%s seed=%d days=%d nights=%d losses=%s repeats=%s money=%s essence=%s capped=%d over=%d walked=%d lost=%s ms=%d" % [
+		if int((row as Dictionary).get("boss_left", -1)) >= 0:
+			boss_left.append(str(int((row as Dictionary)["boss_left"])))
+	return "RUN policy=%s seed=%d days=%d nights=%d losses=%s repeats=%s money=%s essence=%s capped=%d over=%d walked=%d lost=%s boss_left=%s ms=%d" % [
 		out["policy"], int(out["seed"]), (out["nights"] as Array).back()["date"] if not (out["nights"] as Array).is_empty() else 0,
 		(out["nights"] as Array).size(), ",".join(losses), ",".join(repeats), ",".join(money), ",".join(essence),
 		1 if bool(out["capped"]) else 0, 1 if bool(out["year_over"]) else 0, int(out["walked"]),
-		",".join(lost) if not lost.is_empty() else "-", ms]
+		",".join(lost) if not lost.is_empty() else "-",
+		",".join(boss_left) if not boss_left.is_empty() else "-", ms]
 
 
 ## **The dominant-strategy alarm.** One policy winning everything while the

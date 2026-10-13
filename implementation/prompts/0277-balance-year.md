@@ -1,7 +1,7 @@
 # 0277 - Balancing the year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** blocked - the robot now fields each season's weapons and the Giant still ends every fight at 550-750 of 900 - owner to choose the bosses' numbers, their companies, or spring's iron
+- **Status:** blocked - the Giant (400/4) and the Harvester (350/4) fall now, and the year stops at Autumn 7 with no mortar or catapult fielded and iron at 0-14 - owner to choose: the robot saving for its season's weapon, iron through the year, or autumn's horde
 - **Depends on:** 0271, 0272, 0273, 0274, 0276, 0259
 - **Likely files:** tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd
 

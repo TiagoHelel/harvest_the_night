@@ -30994,3 +30994,114 @@ Notes:
   3. more iron in spring.
 - **Summer, autumn and winter's plans are written and unplayed**: no run
   reaches Summer 1.
+
+## 0277 - Balancing the year, the bosses sized to the season - blocked 2026-10-13
+
+**The owner's third call** (2026-10-13). First "vai na 3, mais ferro na
+primavera", then "Combinar": a little more iron at spring's stall and a
+weaker Giant, rewriting 0058's rule only as far as needed. Once the Giant
+fell and the year reached summer: "pode seguir, faz o Harvester igual ao
+Gigante". **Both bosses now fall for every line that reaches them, and the
+year stops at Autumn 7.** No line fields the mortar or the catapult, and
+iron is 0-14 every autumn morning. Blocked a third time, on autumn.
+
+What moved in the game (`src/core/game_data.gd`):
+- **The Giant**: 900 hit points and armour 6 become 400 and armour 4.
+- **The Harvester**: 1,100 and armour 6 become 350 and armour 4. That is
+  less than the Giant, because its charge takes the line's towers down as
+  it comes.
+- **`SPRING_IRON` 16**: a spring morning's stall carries 16 iron, in place
+  of `DAILY_STOCK`'s 8 (`GameData.stall_stock`). It is in `digest()`.
+- Armour 4 is the tank's: a spring gun lands 2 of its 6, a bolt the
+  minimum. The lever ranges say so (hit points 300-1600, armour 3-10).
+
+What moved in the tests:
+- **0058, two relations and nothing else**:
+  - "every boss is better armoured than every other enemy" becomes "at
+    least as well armoured";
+  - "a line of nothing but crossbows does not stop it" becomes "a line of
+    spring's crossbows stops it". Since 0234 the mortar opens in autumn,
+    so a spring boss eighteen crossbows could not stop was one no spring
+    player could kill. Four mortars still do it for less money: $3,040
+    and 522 ticks, against $3,330 and 480. The mixed defence keeps 28
+    seconds of room.
+- **`_task_0277_year_balance`** (headless_v1) gains:
+  - a spring morning's stall holds `SPRING_IRON`, more than the year's,
+    and summer's is the year's;
+  - with money to spare the gun's iron is bought at the stall, and with
+    the gun's money alone it is not;
+  - the `RUN` line carries each boss fight's hit points left, 0 for one it
+    fell in.
+
+What moved in the instrument:
+- **Bought before dug** (`Autoplay.BUY_BEFORE_DIGGING` 60): with money
+  over the plan's, the field's packets and 60, the robot buys the stall's
+  iron rather than dig it.
+- **`boss_left`** is 0 on a night the boss fell, and the `RUN` line
+  carries it, fight by fight (`autoplay_run.gd`, read by
+  `tools/balance.py` as a list).
+- `tools/balance.py`'s `giant hp` and `giant armour` match the Giant's own
+  lines: the Harvester's range comments are the same now, and the old
+  patterns matched none and two.
+
+The grids - `balanced` and `towers`, four seeds, the robot as it is:
+
+| Giant | Spring iron | First fight | Fell | Spring nights lost |
+| --- | --- | --- | --- | --- |
+| 900/6 (before) | 8 | 0 of 8 | 0 of 8 | 26 |
+| 700/4 | 20 | 0 of 8 | 1 of 8 | 29 |
+| 600/4 | 20 / 8 | 0 of 8 | 3 of 8 | 28 / 25 |
+| 500/4 | 20 | 1 of 8 | 3 of 8 | 27 |
+| 500/3, 550/3, 350/4 | 16-20 | 6 of 8 | 6 of 8 | 17 |
+| **400/4** | **16** | **6 of 8** | **6 of 8** | **17** |
+
+| Harvester (seeds that reach summer) | First fight | Fell | Summer nights lost |
+| --- | --- | --- | --- |
+| 500/4 | 3 of 8 | 5 of 8 | 13 |
+| 400/4 | 6 of 8 | 7 of 8 | 2 |
+| **350/4** | **7 of 8** | **8 of 8** | **0** |
+
+What the grids say:
+- **Spring's stall iron moves nothing the robot does.** 600/4 at 8 and at
+  20 played the same, as 20 and 40 did before. The robot buys it now, but
+  by Spring 11 its purse is $100-450. It stays at 16, as the owner asked.
+- **The two Giant runs that never see it fall** (`balanced` 9001 and 9014)
+  lose a nine-defence line in one night on Spring 11 or 13, with the house
+  untouched. They never rebuild, and Spring 14 takes the house before the
+  Giant takes a shot.
+
+The year after both, `python tools/autoplay.py --year 8` (32 runs, 1,066 s):
+
+| Policy | Lost: spring | summer | autumn | Boss repeats sp/su/au |
+| --- | --- | --- | --- | --- |
+| balanced | 4.8 | 0.0 | 6.9 | 3.6 / 0.1 / 3.5 |
+| towers | 0.4 | 0.0 | 10.9 | 0.0 / 0.0 / 7.0 |
+| walls | 9.5 | - | - | 7.0 |
+| economy | 17.0 | - | - | 7.0 |
+
+- Summer is clean for every run that reached it.
+- Autumn holds Autumn 1-6 and falls from Autumn 7. The Scarecrow King was
+  fought once, and left at 960 of 1,200.
+- **Traced (seed 9000, `towers` and `balanced`)**: the line that meets
+  Autumn 7 is 4-10 guns, 3-7 crossbows and 2-5 mines. Not one mortar
+  (35 iron, 15 gunpowder) or catapult (4 pumpkins) stood: the plan's
+  cursor walks round both. Iron is 0-14 every morning, with 800-1,000 wood
+  and $300-1,100 in hand.
+
+The next call is the owner's, in BALANCE.md's "The owner's third call,
+played":
+1. **The robot saves for its season's weapon** before it adds guns (the
+   instrument).
+2. **Iron through the year**, as spring's (the stall's `DAILY_STOCK`
+   iron, or the mortar's 35).
+3. **Autumn's horde** (`autumn size` [5200, 8400]).
+And, apart, `balanced`'s spring collapse on four seeds of eight, which is
+unmeasured: the breakers or the companies.
+
+- **Hashes**: both moved, both on purpose.
+  - `SIM 744605805 -> 323243396`: spring's stall stock is in the state. With
+    `SPRING_IRON` put back at 8 for one run, the SIM hash was 744605805
+    again, so the bosses' numbers do not reach the determinism run.
+  - `DATA 1214651628 -> 941677928`: the Giant's and the Harvester's hit
+    points and armour, and `spring_iron` in `digest()`.
+- **Checks**: `python tools/verify.py --accept` - PASS.

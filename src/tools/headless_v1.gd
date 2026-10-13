@@ -12123,7 +12123,9 @@ func _task_0276_year_autoplay() -> void:
 ## losing runs showed, fixed in the autoplayer rather than tuned around: it
 ## walled its own porch in with a kitchen and a generator, and woke on Spring
 ## 13 in six cells with nothing to do; and it kept nine of every fish for the
-## kitchen, $3 in the purse and a tower to put back.
+## kitchen, $3 in the purse and a tower to put back. And the owner's call:
+## spring's stall carries `SPRING_IRON`, the robot buys it when the purse can
+## spare it, and the RUN line says what each boss had left.
 func _task_0277_year_balance() -> void:
 	var state := State.create(27700)
 	var bounds := Farm.house_bounds(state)
@@ -12270,6 +12272,55 @@ func _task_0277_year_balance() -> void:
 	var at := Autoplay._mine_spot(mined)
 	expect(at.x >= 0 and road.has(at) and Building.why_not(mined, &"mine", at).is_empty(),
 		"the boss prep's mine goes on the road the horde walks to the house", str(at))
+
+	# **Spring's iron at the stall** (the owner's call): a spring morning's
+	# shelf holds `SPRING_IRON`, more than the year's `DAILY_STOCK`; summer's
+	# is the year's again.
+	var spring_stall := State.create(27708)
+	var year_iron := int(GameData.DAILY_STOCK[GameData.IRON])
+	expect(Shop.season(spring_stall) == GameData.SEASONS[0]
+		and Shop.stock_of(spring_stall, GameData.IRON) == GameData.SPRING_IRON
+		and GameData.SPRING_IRON > year_iron
+		and int(GameData.stall_stock(GameData.SEASONS[1]).get(GameData.IRON, 0)) == year_iron,
+		"a spring morning's stall holds SPRING_IRON iron, more than the year's; summer's is the year's",
+		"%d, %d" % [Shop.stock_of(spring_stall, GameData.IRON), year_iron])
+
+	# **Bought before dug, when the purse can spare it**: the plan's gun short
+	# of iron and the stall open. Over the plan's money, the packets and
+	# `BUY_BEFORE_DIGGING`, the iron is bought; with the gun's money alone it
+	# is dug.
+	var buyer := SuiteKit.early_policy(&"towers")
+	buyer.erase("seasons")
+	var flush := State.create(27709)
+	flush["autoplay_step"] = (buyer["build"] as Array).find(&"gun_tower")
+	flush["day_tick"] = Phases.tick_at_minute(GameData.STALL_OPENS)
+	Resources.spend(flush, GameData.IRON, Resources.amount(flush, GameData.IRON))
+	Resources.spend(flush, GameData.MONEY, Resources.amount(flush, GameData.MONEY))
+	Resources.gain(flush, {GameData.WOOD: 100})
+	var poor := flush.duplicate(true)
+	var gun_money := int((GameData.DEFENCES[&"gun_tower"]["cost"] as Dictionary)[GameData.MONEY])
+	Resources.gain(flush, {GameData.MONEY: 1000})
+	Resources.gain(poor, {GameData.MONEY: gun_money + Autoplay.BUY_BEFORE_DIGGING / 2})
+	Autoplay._one_thing(flush, buyer)
+	Autoplay._one_thing(poor, buyer)
+	var flush_did: Dictionary = flush.get("autoplay_did", {})
+	var poor_did: Dictionary = poor.get("autoplay_did", {})
+	expect(int(flush_did.get(&"bought_iron", 0)) == 1 and Resources.amount(flush, GameData.IRON) > 0
+		and int(poor_did.get(&"bought_iron", 0)) == 0,
+		"with money to spare the gun's iron is bought at the stall; with the gun's money alone it is not",
+		"%s / %s" % [str(flush_did), str(poor_did)])
+
+	# **What each boss had left, on the RUN line**: a fight it survived at
+	# 120, one it fell in at 0, nights with no boss left out.
+	var runner: GDScript = load("res://src/tools/autoplay_run.gd")
+	var season_row := {"losses": 0, "repeats": 1, "money": 0, "essence": 0}
+	var run_line := String(runner._run_line({"policy": &"balanced", "seed": 1, "capped": false,
+		"year_over": false, "walked": 0, "seasons": [season_row],
+		"nights": [{"date": 13, "held": true, "boss_left": -1},
+			{"date": 14, "held": false, "boss_left": 120},
+			{"date": 14, "held": true, "boss_left": 0}]}, 0))
+	expect(run_line.contains(" lost=14 boss_left=120,0 "),
+		"the RUN line carries each boss fight's hit points left, 0 for one it fell in", run_line)
 	_completed += 1
 
 ## **Task 0281: the new day's sounds.** Every new id is a file. What a verb is
