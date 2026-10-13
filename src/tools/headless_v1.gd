@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 96
+const GROUPS := 97
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -175,6 +175,7 @@ func _run() -> void:
 	_task_0272_summer_nights()
 	_task_0273_autumn_nights()
 	_task_0274_winter_nights()
+	_task_0275_perf_year()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -12006,6 +12007,48 @@ func _task_0274_winter_nights() -> void:
 		and Waves.as_fought(Waves.night_of(last_day), last_day) == Waves.night_of(last_day),
 		"check_nights refuses a night all sent before the fill line, a Full Moon asked as it is fought, and passes the year",
 		"%s %s" % [str(refusal), str(moon_refusal)])
+	_completed += 1
+
+
+## **The worst night of the year, within budget** (task 0275), checked without
+## being run, as `_task_0102_budget` checks the benchmark against `sim.gd`:
+## every system `PerfNames` lists has its own branch in `perf_check._tick_one`
+## - an unmapped one only logs an error and still prints a row - the worst
+## case is the calendar's Winter 14 on a seed whose weather gives it fog, and
+## the budgets have not moved.
+func _task_0275_perf_year() -> void:
+	var bench := FileAccess.get_file_as_string("res://src/tools/perf_check.gd")
+	var tool_text := FileAccess.get_file_as_string("res://tools/perf.py")
+	var from := bench.find("func _tick_one(")
+	var to := bench.find("\nfunc ", from + 1)
+	var body := bench.substr(from, to - from) if from >= 0 and to > from else ""
+	var missing: Array = []
+	for named in PerfNames.NIGHT + PerfNames.DAY:
+		if not body.contains("&\"%s\": %s.tick(state)" % [named, named]):
+			missing.append(named)
+	expect(not body.is_empty() and missing.is_empty(),
+		"every system PerfNames names for a night or a day has its own branch in perf_check's _tick_one",
+		"missing: %s" % str(missing))
+
+	# **Winter 14, by the calendar, in fog**: the date is `day`, which
+	# `Calendar.date` reads, and the seed is found, never forced.
+	var night := Calendar.year_days()
+	var foggy := -1
+	for seed_value in range(102102, 102102 + 4000):
+		if Weather.event(seed_value, night) == Weather.FOG:
+			foggy = seed_value
+			break
+	expect(foggy >= 0 and Calendar.boss_of(night) == &"winter_lord"
+		and bench.contains("state[\"day\"] = Calendar.year_days()")
+		and bench.contains("Weather.event(seed_value, night) == Weather.FOG")
+		and bench.contains("const FIRST_SEED := 102102"),
+		"the worst case is Winter 14 by the calendar, the Winter Lord's night, on the first seed from 102102 that gives it fog",
+		str(foggy))
+	expect(bench.contains("for name in GameData.sorted_names(Pathing.FIELDS.keys()):")
+		and bench.contains("COUNT winter_night_ms") and bench.contains("COUNT boss ")
+		and bench.contains("COUNT defence_%s %d")
+		and tool_text.contains("TICK_BUDGET_US = 8333") and tool_text.contains("PATH_BUDGET_US = 33333"),
+		"the rebuild asks every field in Pathing.FIELDS, the case counts its defences and its boss, a winter night is timed end to end, and the budgets are 8333 and 33333 us")
 	_completed += 1
 
 

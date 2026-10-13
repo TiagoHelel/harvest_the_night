@@ -29383,3 +29383,132 @@ tools/determinism_data_hash.txt,
 implementation/shots/0274/searchlight.png (with its .import),
 implementation/prompts/0274-winter-nights.md,
 implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
+
+## 0275 - The worst night of the year, within budget - done 2026-10-12
+
+What changed: the benchmark's worst case is now the heaviest night 1.0 makes,
+and the budgets did not move:
+- **Winter 14 with the Winter Lord, in fog.** The date is `day`, which
+  `Calendar.date` reads. The seed is the first from 102102 that `Weather`
+  gives a foggy Winter 14, which is 102102 itself. Winter has no rain and
+  0257 keeps the Blood Moon off a boss's night, so fog is the heaviest event
+  day 56 can roll.
+- **Everything built, the way a player builds it.** By day the tree's level
+  nodes are bought off the run's essence and enough generators go up for
+  everything that draws. In the build step go the forty guns and the wall
+  line as before, plus one of every other defence on the free ground nearest
+  the guns. The bait comes from a banked kit and is thrown on the night's
+  first tick. Every one of them is taken to its family's top level through
+  `Building.upgrade`: 114 defences, all 114 at the top.
+- **Stopped at the busiest moment with the boss up**: 44 bodies, the Winter
+  Lord among them, at 153 s.
+- **Every path field**: `path_refresh` rebuilds all of `Pathing.FIELDS`,
+  the three `refresh()` keeps and the lure and the burrow a night asks for.
+  Day 56 has the diggers and the lurable kinds to ask, and the decoy and the
+  bait to lure, so all five are built tonight. No kind had to be added.
+- **The 1.0 day**: Summer 3 with 40 tilled grass cells and the fields sown
+  with summer's crops (86 plots), a copper, an iron and a gold sprinkler,
+  the barn and the coop holding 8 animals, and all eight stations a recipe
+  names with full queues (40 items).
+- **`COUNT` lines** for the date, the fog, every defence family and how many
+  stand at the top level, every kind day 56 sends and how many are up, the
+  boss, the power, every field built, the swarm's rats, and
+  `winter_night_ms`.
+
+Neither hash moved: a benchmark and its tools only.
+
+### The case, as `COUNT` says it
+
+`date 56`, `fog 1`, `power_percent 100`, `defences 114` (`at_top_level 114`):
+40 gun towers, 60 walls, and one each of the auto crossbow, the barricade,
+the beehive, the catapult, the decoy, the electric fence, the fence, the
+flamethrower, the garlic braid, the mine, the mortar, the sandbag wall, the
+searchlight and the zombie bait. At the busiest moment: 31 breakers, 12 crows
+and the Winter Lord (`boss 1`). Fields `house`, `around`, `hunt`, `lure` and
+`burrow` all 1. The swarm: 344 bodies, 300 of them rats.
+
+### The baseline, old -> new
+
+`python tools/perf.py --accept`:
+
+| Row | Old | New | Why |
+|---|---|---|---|
+| night_tick | 1726 | 1958 | 114 defences at their top level against Spring 14's 40 level-one guns; under a quarter of the budget (8333) |
+| night_towers | 812 | 1438 | level three guns and crossbows aim at two things, plus the flamethrower's cone, the mortar's and catapult's splash, the hive and the searchlight's reach |
+| night_enemies | 628 | 431 | fewer walkers at the moment measured: breakers on their hunt, crows in the air, and the Lord |
+| night_traps | 159 | 127 | fewer bodies on the mines and the fence at that moment |
+| night_combat | 35 | 29 | the same |
+| night_waves | 3 | 7 | day 56's record: fifteen rows and the boss's |
+| night_power | 4 | 9 | the plants that 114 defences draw on |
+| night_reactions | 4 | 12 | more on the farm to react to |
+| night_tutorial | 17 | 2 | a run on day 56 has its lessons behind it |
+| path_refresh | 10800 | 22717 | five fields, not three, and 114 defences to price; under two thirds of the budget (33333) |
+| lure_refresh | 15514 | 16949 | the same farm, more occupants |
+| burrow_refresh | 16077 | 17020 | the same |
+| garlic_refresh | 11182 | 23076 | it is `path_refresh` with ten braids more, so all five fields |
+| swarm_tick | 5729 | 3643 | the same 300 rats, but level three guns thin them faster over the ten seconds averaged |
+| swarm_towers | 1577 | 6391 | every shooting defence at its top level choosing among 344 bodies, two targets each where it can |
+| swarm_enemies | 3524 | 3377 | about the same |
+| day_tick | 77 | 146 | the 1.0 day against the MVP's: animals, eight stations with queues, sprinklers, tilled grass |
+| day_crafting | 5 | 28 | eight queues, not the workshop's one |
+| day_livestock | 9 | 16 | a barn and a coop full |
+| day_tutorial | 32 | 69 | a summer farm with all of that on it |
+| view_particles | 370 | 547 | winter: the snow over the night, and now inside the tree (Found) |
+| view_rain | 480 | 491 | 190 drops now, not 8 (Found) |
+
+Unchanged: day_building 3, day_gathering 1, day_player 4, day_power 2,
+day_reactions 3, night_ability 3, night_building 4, night_player 2,
+view_lighting 0.
+
+**One winter night end to end** (`winter_night_ms`): 14887 ms, almost 15 s
+for 240 s of night. The night runs to dawn: the breakers chew plants that
+cannot fall. That is the number 0277's sweep multiplies by thousands of
+nights.
+
+### Decided
+
+- **0218's swarm is kept as its own rows**, on the winter case: the night's
+  rows are the night the calendar sends, and the swarm's 300 rats are what a
+  player's farm could be asked beside it. `swarm_tick` is held to the
+  night's budget, as before.
+- **The busiest moment is the busiest with the boss up**: 44 bodies at
+  153 s. The busiest of the whole night was 69 at 50 s (breakers, frost
+  zombies, rats), with no Lord in it, so no `COUNT` could show him.
+- **A house that cannot fall**, at the guns' `TOWER_HP`. The forty guns
+  stand on the east road, every side is open in winter, and the house went
+  down a minute in, before the Winter Lord came. The case measures what a
+  night costs, not whether the farm holds it, as its guns always have.
+- **The defences are counted as armed, at the night's first tick**: the
+  bait is eaten ten seconds into the waves and a mine goes off once.
+- **The kit-only bait is banked on the pile**, as its station's morning
+  would leave it, and thrown on the night's first tick, the only time it
+  goes down.
+- **Every `PerfNames` name has its branch**: they all had one already.
+  `_task_0275_perf_year` now reads `_tick_one` for each and fails on the
+  first that has none. It also asserts the case is the calendar's Winter 14
+  on the first foggy seed, that the rebuild asks every field in
+  `Pathing.FIELDS`, and that the budgets are 8333 and 33333 us.
+
+### Found
+
+- **The view rows were timed outside the scene tree since they were
+  written.** `perf_check` added its `Lighting` and `Particles` to `root` in
+  `_initialize()`, before the tree is up. It called `_ready` by hand, and
+  every frame the emitter asked for a viewport it did not have: 600 errors a
+  run (`Condition "!is_inside_tree()"`), and a rain of 8 drops where the
+  game has 190. The view rows now run on the first frame, inside the tree,
+  with the nodes' own `_ready`. A run prints no error at all.
+- **The busy day was the MVP's**: one workshop queue and spring's seeds
+  sown by moving the date, as 0271 found in the determinism scenario. The
+  1.0 day sows the date's own crops.
+- **perf_check takes 50 s now, from 11 s.** Most of it is the winter night
+  played twice (once to find the busiest moment, once end to end) and the
+  armed farm. `perf.py` allows 600 s; verify's total grows by that much.
+
+Verify: **PASS**, 61 of 61 in 1029 s, both hashes unchanged (SIM 3524359536, DATA 1211606022). Perf on the new baseline: a night tick 1988 us of 8333 (24%), a swarm's 3693, a path rebuild 22847 of 33333 (16854 with decoys, 23018 with garlic), perf itself 51.5 s.
+- **Suites:** `headless_check` 19313 asserts, `headless_v1` 2755 in 97 groups, `_task_0275_perf_year` the new one, `input_check` 1269 cases, `input_v1` 735 (114.0 s), `input_v2` 3; `nights --check` passes every date of the year for both seeds.
+
+Files: src/tools/perf_check.gd, tools/perf.py, tools/perf_baseline.txt,
+tools/verify.py (a docstring), src/tools/headless_v1.gd,
+implementation/prompts/0275-perf-year.md,
+implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md

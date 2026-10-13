@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-236 tarefas em 10 dias, de  a 2026-10-12. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+237 tarefas em 10 dias, de  a 2026-10-12. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -279,6 +279,7 @@ voz alta.
 | 0272 | Summer's fourteen nights | 2026-10-12 |
 | 0273 | Autumn's fourteen nights | 2026-10-12 |
 | 0274 | Winter's fourteen nights | 2026-10-12 |
+| 0275 | The worst night of the year, within budget | 2026-10-12 |
 
 ## Toda vez que o jogo mudou por baixo
 
@@ -410,7 +411,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 
 ## O que deu errado
 
-72 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
+73 coisas, tiradas do diario pelas palavras que ele usa quando algo nao funcionou. E para isso que serve um devlog.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -484,6 +485,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **0272** - Found *(Summer's fourteen nights)*
 - **0273** - Found *(Autumn's fourteen nights)*
 - **0274** - Found *(Winter's fourteen nights)*
+- **0275** - Found *(The worst night of the year, within budget)*
 
 ## O que nao tem
 

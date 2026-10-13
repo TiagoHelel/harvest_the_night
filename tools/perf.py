@@ -5,9 +5,11 @@
     python tools/perf.py --accept    move the baseline, printing both numbers
     python tools/perf.py --report    the table, and nothing compared
 
-Runs `src/tools/perf_check.gd` on the worst case the game has - night ten,
-forty towers, every plot sown, the field as full of zombies as it gets - and
-compares what comes back against `tools/perf_baseline.txt`.
+Runs `src/tools/perf_check.gd` on the worst case the game has - Winter 14
+with the Winter Lord in fog since task 0275, forty guns and one of every
+defence at its top level, a rat swarm beside it, the field as full as it
+gets with the boss up - and compares what comes back against
+`tools/perf_baseline.txt`.
 
 ## A budget and a baseline are two different questions
 
@@ -232,14 +234,17 @@ def main():
         return 1
 
     print("")
+    # **And a winter night end to end** (task 0275): not a budget - a night
+    # is not a tick - but the number 0277's sweep multiplies.
     print("OK    a night tick is %dus of the %d it may have (%.0f%%), "
           "a swarm's %dus, a path rebuild %dus of %d (%dus with decoys, "
-          "%dus with garlic)"
+          "%dus with garlic), a winter night %.1fs end to end"
           % (timings.get("night_tick", 0), TICK_BUDGET_US,
              timings.get("night_tick", 0) * 100.0 / TICK_BUDGET_US,
              timings.get("swarm_tick", 0),
              timings.get("path_refresh", 0), PATH_BUDGET_US,
-             timings.get("lure_refresh", 0), timings.get("garlic_refresh", 0)))
+             timings.get("lure_refresh", 0), timings.get("garlic_refresh", 0),
+             counts.get("winter_night_ms", 0) / 1000.0))
     return 0
 
 

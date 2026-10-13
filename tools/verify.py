@@ -385,9 +385,10 @@ def check_perf():
     """The worst case, timed, against a budget and against yesterday.
 
     Slower than most rows because it is a measurement rather than a
-    comparison - it plays night ten and times every system on it. Worth the
-    seconds: a performance regression found by a player is a performance
-    regression nobody can bisect."""
+    comparison - it plays Winter 14 (task 0275) and times every system on
+    it, and one winter night end to end. Worth the seconds: a performance
+    regression found by a player is a performance regression nobody can
+    bisect."""
     if not os.path.exists(rel("tools", "perf.py")):
         return skip("perf", "no benchmark yet - task 0102")
     code, out = run([sys.executable, "tools/perf.py"])

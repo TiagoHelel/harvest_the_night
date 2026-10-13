@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###################.....`  **234 / 296 done**
+`###################.....`  **235 / 296 done**
 
-0 doing / 62 todo / 0 blocked across 18 phases.
+0 doing / 61 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-62 task(s) left, the ready ones first, then what they
+61 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -742,24 +742,24 @@ The three night events as Codex drew them, in the forecast slot where 0256 and 0
   - done when: FHD (1920x1080) captures in the real game by day (each event in the dusk forecast) and by night (the build step's forecast), opened and looked at, in `implementation/shots/0269/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0275 - The worst night of the year, within budget
+### 0276 - The autoplayer plays a whole year
 
-Ready to pick up.  Likely files: `src/tools/perf_check.gd, src/tools/perf_names.gd, tools/perf.py, tools/perf_baseline.txt, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
-The benchmark's worst case is still Spring 14, where 0153 moved the MVP's night ten. Move it to the heaviest night 1.0 can produce - Winter 14 with the Winter Lord, a rat swarm and every defence on the farm - and settle the cost profile before 0277 simulates thousands of nights on it.
+0142 taught the robot to sleep; this teaches it the rest of 1.0, so balance can be measured over a whole year: crops by days and season, the fishing minigame, animals and machines, the bin and the peddler, cursor building and repairs, the powers, and carrying on through losses and boss repeats.
 
-- `_the_worst_case()` in `src/tools/perf_check.gd` sets the run to Winter 14 (day 56) the way the calendar reads it (0151), not through `nights_won`, and still stops at the busiest moment
-- At least one of every `GameData.DEFENCES` entry - the plan's fourteen and whatever 0231 added - at the top `TOWER_LEVELS` level, powered and with ammunition, placed where the fight is through the build-step road of 0119; 0218's swarm scenario is folded in or kept as its own rows - say which
-- Every lazily built path field in 0218's registry is built tonight, adding the kinds that force one if day 56 lacks them, so `path_refresh` is timed with all of them; the heaviest event day 56 can roll is on - fog or rain, since 0257 keeps the Blood Moon off boss nights - by picking a seed `Weather` gives it, never an override in core
-- `COUNT` lines for each defence family, each enemy kind, the boss and the fields built, so a reader can see the case is the case
-- `PerfNames.NIGHT`/`DAY` already have to match `Sim.tick` (`_task_0102_budget`); every one of those names gets its branch in `perf_check._tick_one` (today an unmapped name only `push_error`s and still prints a row), and `_a_busy_day` becomes the 1.0 day: tilled grass, season crops, sprinklers, animals, every machine queued
-- The budgets do not move: `TICK_BUDGET_US` 8333 and `PATH_BUDGET_US` 33333 in `tools/perf.py`. If the winter case breaks one, optimise here, hash-neutral, or block with the measured numbers - never raise a budget
-- Print the wall time of one winter night simulated end to end as a `COUNT` (not budgeted), because 0277 multiplies it by thousands
-- `python tools/perf.py --accept` moves the baseline; every row's old and new number goes in the journal, with why it grew. A benchmark and hash-neutral optimisations only: neither hash moves
+- Each policy in `Autoplay.POLICIES` gains a day plan (its earners in order: season crops, fishing, animals, machines, mining, chopping), a night plan (what to place, upgrade and repair by cursor in the build step and during the waves, when each power fires) and a bedtime. `towers`, `walls`, `economy` and `balanced` keep their character; `balanced` is declared the average player 0277 balances against
+- Everything goes through the intent road a player uses: tilling and watering through the verbs, fish landed through the minigame's press intents (0180), products collected, goods into the shipping bin, seeds and animals from the peddler in his hours, tool and house tiers bought (0173, 0191), night loot picked up (0221); `build_cell`, `build_place`, `build_upgrade` and `ability_cell` (0135) with 0232's power API at night. Nothing is granted by writing `state`
+- Walking is counted from here on (path length at `PLAYER_SPEED`), or the journal measures why not: on an 80x65 farm with an 8-10 minute day (0166), 'walking is free' is no longer close to a player
+- `Autoplay.play(seed, policy, days)` follows the calendar, not a night count: calm nights, Full Moons, winter with nothing growing (0171), boss nights repeated until the boss falls - with a cap so a tool run always ends, reported when hit - and losses that move the calendar on. Per night: held or lost, house left, essence and money; per season: losses and boss repeats
+- `autoplay_run.gd` prints one machine-readable `RUN` line per run (policy, seed, losses per season, boss repeats, money and essence at each season's start) beside today's lines, so `tools/balance.py` keeps working until 0277 moves its parser onto `RUN` (moved there from here); `python tools/autoplay.py --year [runs]` prints the per-policy table and the dominant-strategy alarm per season
+- `play_nights.gd` plays the whole year by default with its scripted floor, following the boss repeat rule
+- A year is long: print the wall time per run; if 8 seeds of 4 policies are impractical in one process, split the runs across processes (the data does not change inside a run set) and say how long it took
+- `_task_0067_autoplay` and `_task_0068_balance` in `src/tools/headless_check.gd` follow the new policy fields and stay one day and one night; nothing in the suites plays a season. Tools only: neither hash moves
 
-  - done when: `python tools/perf.py` passes on the new baseline, with `night_tick` and `path_refresh` under their budgets on the winter case - both numbers, and the old ones, in the journal
-  - done when: The `COUNT` lines show one of every `DEFENCES` entry, the Winter Lord, a rat swarm and every named path field built
-  - done when: `_task_0275_perf_year` in `src/tools/headless_v1.gd` reads `perf_check.gd` and asserts every name in `PerfNames.NIGHT` and `DAY` has a branch in `_tick_one`, the way `_task_0102_budget` reads `sim.gd`
+  - done when: `_task_0276_year_autoplay` in `src/tools/headless_v1.gd`, its time measured, printed and under 15 s (over it, the slice's day plan shrinks - bed as soon as it is done - and the cap does not move): from a prepared mid-summer state the `balanced` policy plays one day and one night twice on one seed with the same result; that day landed a fish through the minigame, shipped goods through the bin and collected an animal product; that night placed a defence by cursor in the build step and fired a power
+  - done when: `python tools/autoplay.py --year 8` completes for all four policies; its table and wall time are in the journal
+  - done when: `python tools/balance.py` with a short sweep still finishes on today's lines and leaves the git tree clean (its move onto `RUN` is 0277's)
 
 ### 0281 - The new day's sounds
 
@@ -913,24 +913,26 @@ A stranger learns 1.0 the way they learned the MVP's first day - one short line,
   - done when: the same group: the 0.1 `settings.cfg` fixture loads with its language, volumes and rebind kept, every key it lacks at its `Settings.DEFAULTS` value, and its `tutorial_seen` of `true` migrated to the 0.1 step ids, so only the new steps are offered
   - done when: 1920x1080 captures of the bed line, the cursor line at night and the forecast line at dusk, in both languages (new scenarios such as `tut_bed`, `tut_cursor`, `tut_forecast`: `python tools/shot.py 0293 tut_bed tut_cursor tut_forecast --fhd` and again with `--pt_BR`), opened: each line is on its thing and nothing on screen covers it
 
-### 0276 - The autoplayer plays a whole year
+### 0277 - Balancing the year
 
-Waits on 0275.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0276.  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
 
-0142 taught the robot to sleep; this teaches it the rest of 1.0, so balance can be measured over a whole year: crops by days and season, the fishing minigame, animals and machines, the bin and the peddler, cursor building and repairs, the powers, and carrying on through losses and boss repeats.
+The phase's own target: an average player reaches winter having lost two to four nights, and every boss falls. Measured with the year autoplayer, moved with levers, written down - the way 0068 did it for ten nights.
 
-- Each policy in `Autoplay.POLICIES` gains a day plan (its earners in order: season crops, fishing, animals, machines, mining, chopping), a night plan (what to place, upgrade and repair by cursor in the build step and during the waves, when each power fires) and a bedtime. `towers`, `walls`, `economy` and `balanced` keep their character; `balanced` is declared the average player 0277 balances against
-- Everything goes through the intent road a player uses: tilling and watering through the verbs, fish landed through the minigame's press intents (0180), products collected, goods into the shipping bin, seeds and animals from the peddler in his hours, tool and house tiers bought (0173, 0191), night loot picked up (0221); `build_cell`, `build_place`, `build_upgrade` and `ability_cell` (0135) with 0232's power API at night. Nothing is granted by writing `state`
-- Walking is counted from here on (path length at `PLAYER_SPEED`), or the journal measures why not: on an 80x65 farm with an 8-10 minute day (0166), 'walking is free' is no longer close to a player
-- `Autoplay.play(seed, policy, days)` follows the calendar, not a night count: calm nights, Full Moons, winter with nothing growing (0171), boss nights repeated until the boss falls - with a cap so a tool run always ends, reported when hit - and losses that move the calendar on. Per night: held or lost, house left, essence and money; per season: losses and boss repeats
-- `autoplay_run.gd` prints one machine-readable `RUN` line per run (policy, seed, losses per season, boss repeats, money and essence at each season's start) beside today's lines, so `tools/balance.py` keeps working until 0277 moves its parser onto `RUN` (moved there from here); `python tools/autoplay.py --year [runs]` prints the per-policy table and the dominant-strategy alarm per season
-- `play_nights.gd` plays the whole year by default with its scripted floor, following the boss repeat rule
-- A year is long: print the wall time per run; if 8 seeds of 4 policies are impractical in one process, split the runs across processes (the data does not change inside a run set) and say how long it took
-- `_task_0067_autoplay` and `_task_0068_balance` in `src/tools/headless_check.gd` follow the new policy fields and stay one day and one night; nothing in the suites plays a season. Tools only: neither hash moves
+- The target as numbers: the `balanced` policy loses 2-4 nights before Winter 1 (day 43), averaged over at least 8 seeds, and every boss falls for it on every seed. A boss that walks off at dawn is a repeat, not a loss (0153), and is counted apart
+- `tools/balance.py` moves onto 0276's `RUN` lines (its parser, moved here from 0276) and sweeps the year: `NIGHTS = 10` and the win-rate-per-night arithmetic become survival per day and losses per season; `LEVERS` is re-chosen for 1.0 (season sizes, the Full Moon percent, boss hit points, house tiers, the night length, essence and night money), each regex matching exactly one line
+- Size the sweep before running it: a year run takes minutes (0276 printed it, 0275 the winter night), so levers x values x 8 seeds x 4 policies is days of wall time. Sweep with the `balanced` policy on 4 seeds, run seeds as parallel processes, and keep the full `--year 8` for all four policies for the before and after tables; each sweep's wall time goes in BALANCE.md
+- It keeps its safety: it refuses a dirty `game_data.gd`, holds the lock file and restores the file in a `finally`
+- Start with the instrument, as 0068 found: before moving a lever, ask a losing run what it was doing; a fault in the autoplayer is fixed there and named in BALANCE.md, not tuned around
+- No policy wins every night of the year by a wide margin (the dominant alarm, per season); no day sits at 0% survival across every policy; a lever that moves nothing across its range is reported as dead weight
+- Re-run 0259's matchup tool after the levers move: every weapon is still the best buy somewhere and every enemy still needs a different answer
+- Levers move in `src/core/game_data.gd` with their `# LEVER` ranges kept true and `GameData.validate()` passing. DATA moves on purpose; SIM moves too where the determinism scenario reads a moved lever - old and new numbers of both in PROGRESS.md
+- A new top section of `implementation/BALANCE.md`, 'The year': losses by season and policy, boss repeats, the sweep tables, every applied change with its old and new value, and what is still off
 
-  - done when: `_task_0276_year_autoplay` in `src/tools/headless_v1.gd`, its time measured, printed and under 15 s (over it, the slice's day plan shrinks - bed as soon as it is done - and the cap does not move): from a prepared mid-summer state the `balanced` policy plays one day and one night twice on one seed with the same result; that day landed a fish through the minigame, shipped goods through the bin and collected an animal product; that night placed a defence by cursor in the build step and fired a power
-  - done when: `python tools/autoplay.py --year 8` completes for all four policies; its table and wall time are in the journal
-  - done when: `python tools/balance.py` with a short sweep still finishes on today's lines and leaves the git tree clean (its move onto `RUN` is 0277's)
+  - done when: `python tools/autoplay.py --year 8` after the changes: `balanced` loses between 2 and 4 nights before day 43 on average and every boss falls on every seed - the table is in BALANCE.md
+  - done when: The sweep's own output in BALANCE.md shows no day at 0% survival across every policy and the dominant alarm silent in every season
+  - done when: The season groups of 0271-0274 still pass with the moved levers, or the journal says which asserted relation the data proved wrong and how it was rewritten
+  - done when: `python tools/balance.py` reads only `RUN` lines, and a short sweep leaves `game_data.gd` restored, the git tree clean and no `.balance-lock` behind
 
 ### 0285 - Music for four seasons
 
@@ -966,64 +968,6 @@ The book cover, the four boss trophies and the achievement badges Codex drew rep
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures of the collections screen, every tab with a full profile, opened in a run by day and by night, opened and looked at, in `implementation/shots/0288/`
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0277 - Balancing the year
-
-Waits on 0276.  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
-
-The phase's own target: an average player reaches winter having lost two to four nights, and every boss falls. Measured with the year autoplayer, moved with levers, written down - the way 0068 did it for ten nights.
-
-- The target as numbers: the `balanced` policy loses 2-4 nights before Winter 1 (day 43), averaged over at least 8 seeds, and every boss falls for it on every seed. A boss that walks off at dawn is a repeat, not a loss (0153), and is counted apart
-- `tools/balance.py` moves onto 0276's `RUN` lines (its parser, moved here from 0276) and sweeps the year: `NIGHTS = 10` and the win-rate-per-night arithmetic become survival per day and losses per season; `LEVERS` is re-chosen for 1.0 (season sizes, the Full Moon percent, boss hit points, house tiers, the night length, essence and night money), each regex matching exactly one line
-- Size the sweep before running it: a year run takes minutes (0276 printed it, 0275 the winter night), so levers x values x 8 seeds x 4 policies is days of wall time. Sweep with the `balanced` policy on 4 seeds, run seeds as parallel processes, and keep the full `--year 8` for all four policies for the before and after tables; each sweep's wall time goes in BALANCE.md
-- It keeps its safety: it refuses a dirty `game_data.gd`, holds the lock file and restores the file in a `finally`
-- Start with the instrument, as 0068 found: before moving a lever, ask a losing run what it was doing; a fault in the autoplayer is fixed there and named in BALANCE.md, not tuned around
-- No policy wins every night of the year by a wide margin (the dominant alarm, per season); no day sits at 0% survival across every policy; a lever that moves nothing across its range is reported as dead weight
-- Re-run 0259's matchup tool after the levers move: every weapon is still the best buy somewhere and every enemy still needs a different answer
-- Levers move in `src/core/game_data.gd` with their `# LEVER` ranges kept true and `GameData.validate()` passing. DATA moves on purpose; SIM moves too where the determinism scenario reads a moved lever - old and new numbers of both in PROGRESS.md
-- A new top section of `implementation/BALANCE.md`, 'The year': losses by season and policy, boss repeats, the sweep tables, every applied change with its old and new value, and what is still off
-
-  - done when: `python tools/autoplay.py --year 8` after the changes: `balanced` loses between 2 and 4 nights before day 43 on average and every boss falls on every seed - the table is in BALANCE.md
-  - done when: The sweep's own output in BALANCE.md shows no day at 0% survival across every policy and the dominant alarm silent in every season
-  - done when: The season groups of 0271-0274 still pass with the moved levers, or the journal says which asserted relation the data proved wrong and how it was rewritten
-  - done when: `python tools/balance.py` reads only `RUN` lines, and a short sweep leaves `game_data.gd` restored, the git tree clean and no `.balance-lock` behind
-
-### 0286 - Fog, rain and winter wind
-
-Waits on 0285.  Likely files: `tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The bed under everything follows the weather and the season: fog and rain on the nights that have them, wind through the winter, the animals heard near their coop and barn, and a short stinger when an event night reaches its build step. View only: neither hash moves. (The animal calls came from 0281 and the stingers from 0284, so those fit one invocation.)
-
-- `tools/gen_ambience.py` writes a fog bed and a rain bed for the night, and a winter bed (wind, no birds, no crickets) for winter's day and night, looped with its `seamless()` and under `BED_PEAK` - the bed stays the quietest thing in the game
-- `Ambience.bed_for` stays static and gains the season and tonight's event: an event night's bed beats the season's, and winter's beats the ordinary day and night beds. The event is 0256's `Weather` answer for `(seed, day)` (0257 added the Blood Moon to it) - the function the forecast panel calls, never a second draw and never the view's own `RandomNumberGenerator`
-- Touches by season: winter gets its own short lists (no crickets, no songbirds), and no touch is in both a day list and a night list
-- Animals near barns, written here (moved from 0281): cluck, moo, baa and oink in `gen_ambience.py` from `gen_sfx`'s primitives (it already imports `gen_sfx`), at most `TOUCH_PEAK`, played at the coop's and the barn's cells through the existing falloff - by day while the building stands with animals of that kind in it (0183's residents), and as a sleepy murmur at night, when they sleep inside (0186). The dog is not here: its bark is 0283's power sound. Decide whether a wrecked-but-standing barn still murmurs
-- The beds change on the cue they use today (`Audio.play_bed` with the transition's length); nothing changes the bed in the middle of a night
-- Event stingers (moved from 0284): fog, rain, the Blood Moon (0257) and the Full Moon (0152) as short cues in `tools/gen_music.py` beside `sting` - `PIECES` entries, at most `STING_PEAK`, named in 0285's not-loop list - played once through `Audio.play` (the Music bus, because the file is in `assets/music/`) when a night with that event reaches its build step. The event is the same `Weather` answer the bed reads (the Full Moon is 0152's `Calendar.is_full_moon`), never decided in the view
-- Rewrite `_task_0087_ambience` in `headless_check.gd` for the new `bed_for`: every file is still asked for, every bed loops (`_loop_seam` at most 1.0) and peaks under 0.3, and the house being hit still stands far above the ducked bed
-
-  - done when: `_task_0286_weather_ambience` in `src/tools/headless_v1.gd`: `bed_for` answers for every season, phase and event; each new bed loops and stays under the old peak; no touch is in both a day and a night list, and winter's hold no cricket and no songbird; animal calls are offered only where a coop or barn with animals stands; each stinger is in `assets/music/`, at most `STING_PEAK` and on 0285's not-loop list
-  - done when: `_case_0286_weather_ambience` in `src/tools/input_v1.gd`: a foggy night's build step plays the fog bed (`Audio.bed_playing()`) and the fog stinger once (`Audio.plays_of()`), and a winter morning the winter bed
-  - done when: `python tools/gen_ambience.py --report` for the new beds (length, peak, seam) and `gen_music.py --report` for the stingers are in the journal
-
-### 0290 - The 1.0 visual gate
-
-Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
-
-Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
-
-- Capture at 1920x1080 by day and by night with `python tools/shot.py 0290 <scenarios> --fhd`, the showcases behind `python tools/show_art.py` and `src/tools/capture_menus.gd`; add the `shot.gd` scenarios that are missing (a night scenario uses 0130's camera hook)
-- The world, at least: the four seasons' ground and trees, snow included; the farmer walking, running, every work verb and facing, in bed, passed out, fishing and reacting; the guardian and the cursor; every crop stage, tilled and trampled ground; the animals and their buildings, wrecked-but-standing included; machines, the bin, the peddler, the house tiers; every defence at every level with hurt, fire, wreck and its tarp; every enemy walking, attacking and dying; the four bosses and their telegraphs; effects; fog, rain, the Full and the Blood Moon
-- Every screen: title, pause, options, the day HUD with clock and calendar, the forecast, the night HUD with hotbar and powers, the morning report, inventory, stall, workshop and machines, the tech tree by season, the fishing minigame, the fish book and collections, statistics, the year's end and the credits - in English and Portuguese where there are words
-- Open every file. Judge scale against Stardew Valley at 1080p and the look against `docs/reference-sheet.png`: one art pixel is 4x4 physical pixels, the farmer about 128 px tall, and no new family drawn at the six legacy fixtures' 2x unless the journal says why
-- 0120's placeholder check (`python tools/placeholders.py` and `_task_0120_placeholders` in `headless_v1.gd`) reports nothing on a stand-in, and `python implementation/backlog/assets.py list` shows every pack `integrated`, A057 excepted only if declined. 0289 is not a dependency because A057 is optional: if it is still todo, read the pack's status - declined (`blocked` with the owner's words) means run 0289's decline path here and close it; approved means block this gate until 0289 is done; anything else (todo, generating, review) means block it `waiting for asset A057 (Codex)` - a later decline then needs `python tools/task.py todo 0290` by hand
-- Fix here what needs no new art and is small (placement, pivots, scale, sorting, the wrong state shown); a view fix bigger than that, and anything that needs new art (a correction pack in `implementation/backlog/packs/`), becomes a follow-up task in `tools/backlog/` with the next free id. Add each follow-up id to 0297's deps (in `tools/backlog/part13.py` and on the `Depends on:` line of its prompt, which `gen_backlog.py` does not overwrite) so 1.0 cannot ship ahead of it. This task never draws or generates art, and its fixes are view only: neither hash moves
-- A 1.0 delivery catalogue, `implementation/backlog/CATALOGUE.md`, modelled on `implementation/sprites/DELIVERY.md`: per family the pack id, canvases, pivots, animation and state coverage, the capture that shows it, and its known limits
-
-  - done when: Every capture in `implementation/shots/0290/` was opened; the journal lists what was looked at per family and per screen, what was wrong and what was done about it
-  - done when: 0120's placeholder check prints zero packs pending (A057 excepted only when declined and 0289 closed), quoted in the journal
-  - done when: The catalogue names a capture for every family and state in the lists above
-  - done when: Every follow-up is filed as a task (and a pack when it needs art) with ids, each one in 0297's deps, none left as prose
 
 ### 0278 - The economy across a year
 
@@ -1066,6 +1010,43 @@ After the Winter Lord the farm carries on, and today that means the MVP's endles
   - done when: Year 3's heaviest night is inside `TICK_BUDGET_US` and `PATH_BUDGET_US` (`python tools/perf.py --date=<it>`) - the numbers in the journal
   - done when: The `python tools/nights.py --years 3` summary and where the `balanced` policy fell in Year 2 are in the journal
   - done when: `python tools/shot.py 0279 year_two --fhd` opened: the year label fits, in English and in Portuguese
+
+### 0286 - Fog, rain and winter wind
+
+Waits on 0285.  Likely files: `tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+The bed under everything follows the weather and the season: fog and rain on the nights that have them, wind through the winter, the animals heard near their coop and barn, and a short stinger when an event night reaches its build step. View only: neither hash moves. (The animal calls came from 0281 and the stingers from 0284, so those fit one invocation.)
+
+- `tools/gen_ambience.py` writes a fog bed and a rain bed for the night, and a winter bed (wind, no birds, no crickets) for winter's day and night, looped with its `seamless()` and under `BED_PEAK` - the bed stays the quietest thing in the game
+- `Ambience.bed_for` stays static and gains the season and tonight's event: an event night's bed beats the season's, and winter's beats the ordinary day and night beds. The event is 0256's `Weather` answer for `(seed, day)` (0257 added the Blood Moon to it) - the function the forecast panel calls, never a second draw and never the view's own `RandomNumberGenerator`
+- Touches by season: winter gets its own short lists (no crickets, no songbirds), and no touch is in both a day list and a night list
+- Animals near barns, written here (moved from 0281): cluck, moo, baa and oink in `gen_ambience.py` from `gen_sfx`'s primitives (it already imports `gen_sfx`), at most `TOUCH_PEAK`, played at the coop's and the barn's cells through the existing falloff - by day while the building stands with animals of that kind in it (0183's residents), and as a sleepy murmur at night, when they sleep inside (0186). The dog is not here: its bark is 0283's power sound. Decide whether a wrecked-but-standing barn still murmurs
+- The beds change on the cue they use today (`Audio.play_bed` with the transition's length); nothing changes the bed in the middle of a night
+- Event stingers (moved from 0284): fog, rain, the Blood Moon (0257) and the Full Moon (0152) as short cues in `tools/gen_music.py` beside `sting` - `PIECES` entries, at most `STING_PEAK`, named in 0285's not-loop list - played once through `Audio.play` (the Music bus, because the file is in `assets/music/`) when a night with that event reaches its build step. The event is the same `Weather` answer the bed reads (the Full Moon is 0152's `Calendar.is_full_moon`), never decided in the view
+- Rewrite `_task_0087_ambience` in `headless_check.gd` for the new `bed_for`: every file is still asked for, every bed loops (`_loop_seam` at most 1.0) and peaks under 0.3, and the house being hit still stands far above the ducked bed
+
+  - done when: `_task_0286_weather_ambience` in `src/tools/headless_v1.gd`: `bed_for` answers for every season, phase and event; each new bed loops and stays under the old peak; no touch is in both a day and a night list, and winter's hold no cricket and no songbird; animal calls are offered only where a coop or barn with animals stands; each stinger is in `assets/music/`, at most `STING_PEAK` and on 0285's not-loop list
+  - done when: `_case_0286_weather_ambience` in `src/tools/input_v1.gd`: a foggy night's build step plays the fog bed (`Audio.bed_playing()`) and the fog stinger once (`Audio.plays_of()`), and a winter morning the winter bed
+  - done when: `python tools/gen_ambience.py --report` for the new beds (length, peak, seam) and `gen_music.py --report` for the stingers are in the journal
+
+### 0290 - The 1.0 visual gate
+
+Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+
+Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
+
+- Capture at 1920x1080 by day and by night with `python tools/shot.py 0290 <scenarios> --fhd`, the showcases behind `python tools/show_art.py` and `src/tools/capture_menus.gd`; add the `shot.gd` scenarios that are missing (a night scenario uses 0130's camera hook)
+- The world, at least: the four seasons' ground and trees, snow included; the farmer walking, running, every work verb and facing, in bed, passed out, fishing and reacting; the guardian and the cursor; every crop stage, tilled and trampled ground; the animals and their buildings, wrecked-but-standing included; machines, the bin, the peddler, the house tiers; every defence at every level with hurt, fire, wreck and its tarp; every enemy walking, attacking and dying; the four bosses and their telegraphs; effects; fog, rain, the Full and the Blood Moon
+- Every screen: title, pause, options, the day HUD with clock and calendar, the forecast, the night HUD with hotbar and powers, the morning report, inventory, stall, workshop and machines, the tech tree by season, the fishing minigame, the fish book and collections, statistics, the year's end and the credits - in English and Portuguese where there are words
+- Open every file. Judge scale against Stardew Valley at 1080p and the look against `docs/reference-sheet.png`: one art pixel is 4x4 physical pixels, the farmer about 128 px tall, and no new family drawn at the six legacy fixtures' 2x unless the journal says why
+- 0120's placeholder check (`python tools/placeholders.py` and `_task_0120_placeholders` in `headless_v1.gd`) reports nothing on a stand-in, and `python implementation/backlog/assets.py list` shows every pack `integrated`, A057 excepted only if declined. 0289 is not a dependency because A057 is optional: if it is still todo, read the pack's status - declined (`blocked` with the owner's words) means run 0289's decline path here and close it; approved means block this gate until 0289 is done; anything else (todo, generating, review) means block it `waiting for asset A057 (Codex)` - a later decline then needs `python tools/task.py todo 0290` by hand
+- Fix here what needs no new art and is small (placement, pivots, scale, sorting, the wrong state shown); a view fix bigger than that, and anything that needs new art (a correction pack in `implementation/backlog/packs/`), becomes a follow-up task in `tools/backlog/` with the next free id. Add each follow-up id to 0297's deps (in `tools/backlog/part13.py` and on the `Depends on:` line of its prompt, which `gen_backlog.py` does not overwrite) so 1.0 cannot ship ahead of it. This task never draws or generates art, and its fixes are view only: neither hash moves
+- A 1.0 delivery catalogue, `implementation/backlog/CATALOGUE.md`, modelled on `implementation/sprites/DELIVERY.md`: per family the pack id, canvases, pivots, animation and state coverage, the capture that shows it, and its known limits
+
+  - done when: Every capture in `implementation/shots/0290/` was opened; the journal lists what was looked at per family and per screen, what was wrong and what was done about it
+  - done when: 0120's placeholder check prints zero packs pending (A057 excepted only when declined and 0289 closed), quoted in the journal
+  - done when: The catalogue names a capture for every family and state in the lists above
+  - done when: Every follow-up is filed as a task (and a pack when it needs art) with ids, each one in 0297's deps, none left as prose
 
 ### 0280 - Checkpoint: do fifty-six nights tire?
 
@@ -1498,15 +1479,15 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md) - waits for art A054
 - [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md) - waits for art A055
 
-## 15 - Fifty-six nights and balance  (5/11)
+## 15 - Fifty-six nights and balance  (6/11)
 
 - [x] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md)
 - [x] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md)
 - [x] **0272** [Summer's fourteen nights](prompts/0272-summer-nights.md)
 - [x] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md)
 - [x] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md)
-- [ ] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md)
-- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0275
+- [x] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md)
+- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md)
 - [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0276
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
