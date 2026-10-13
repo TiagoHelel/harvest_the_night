@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Sweep the levers that matter and report the win rate per night.
+"""Sweep the levers that matter over the year, and report survival.
 
-    python tools/balance.py [runs-per-configuration] [lever name]
-    python tools/balance.py days
+    python tools/balance.py [seeds] [lever name] [--with=lever=value ...] [--days=N]
+                                                   sweep the levers, `balanced`
+    python tools/balance.py year [seeds]           the year now, every policy
+    python tools/balance.py days                   the day's money
 
 **It edits `game_data.gd`, runs the autoplayer, and puts the file back.** There
 is no other way to sweep a `const` in GDScript, and making every lever
@@ -11,10 +13,35 @@ instrument. The file is restored in a `finally`, and the sweep refuses to start
 if git says it is already dirty, so an interrupted run cannot leave a lever
 moved without anyone noticing.
 
-What it reports, per configuration: how far each policy got, and from that the
-**win rate per night** - the share of runs still alive at the end of night N.
-Task 0068's done-when is that no night sits at 100% or 0% across every policy,
-which is the difference between a difficulty curve and a wall.
+## The year (task 0277)
+
+**It reads only the autoplayer's `RUN` lines** (0276): a run each, its losses,
+boss repeats, money and essence a season, and the dates of the nights it lost.
+A year is minutes a run, so a configuration plays **`balanced` on `seeds`
+seeds** (four unless said), **one process a seed** in parallel - the data does
+not change inside a configuration. The baseline is played once and stands for
+every lever's current value; each other value is a configuration of its own.
+
+What it reports, per configuration:
+- the nights lost before Winter 1 (day 43), a run's average - 0277's target
+  is 2-4 - and a season's;
+- the boss nights the boss lived through, a season's, counted apart from
+  losses (0153), and the runs that hit the cap or ended the year;
+- **survival per day**: of the runs that reached a date, the share that never
+  lost its night;
+- the wall time.
+
+A lever whose values all give the same runs is **dead weight**, and said so.
+
+**`--with=giant hp=500`** (any number of them) moves a lever for every
+configuration, the baseline too: a sweep around a candidate point, with the
+committed `game_data.gd` still the thing restored. **`--days=42`** stops each
+run at that date - the sweep's question is the nights before Winter 1, and a
+winter night is the dearest to play.
+
+**`year`** plays the four policies on the game as it stands - the done-when's
+table - and adds the days no run of any policy survived and the
+dominant-strategy alarm a season.
 
 The written report is `implementation/BALANCE.md`.
 
@@ -32,6 +59,8 @@ import os
 import re
 import subprocess
 import sys
+import threading
+import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -41,55 +70,64 @@ GODOT = os.environ.get(
     "C:/Users/PC GAMER DA FAMILIA/Documents/Godot/"
     "Godot_v4.7.2-stable_win64_console.exe")
 
-# The levers this sweep turns. Each is (name, a regex matching exactly one
-# line, the values to try). The first three were chosen from what the
-# autoplayer measured rather than from taste: the back half of the run fails
-# on throughput, so the guns' damage and the house's hit points are the two
-# dials pointed straight at it, and the purse decides whether a player can
-# answer a bad night with another tower.
+# **The levers this sweep turns, re-chosen for 1.0** (task 0277). Each is
+# (name, a regex matching exactly one line, the values to try besides the
+# current one); the first group keeps what is before the number and the
+# second what is after it, and **the number is `\d+`, never today's value**,
+# so a lever still matches after it has moved. A regex that matches none or
+# more than one line is reported and skipped, never guessed at.
 #
-# `wave gap` is in the list for the opposite reason. Task 0059 moved the gap
-# between waves onto each night's own record, and nothing has read the global
-# since. It is here to have that said in measurements rather than only in a
-# grep - a lever that cannot move the game is the clearest kind of dead
-# weight, and this sweep exists partly to name it.
+# What they are for: the season's sizes and the Full Moon's percent are the
+# night's weight; the Giant's hit points and armour the first boss; the house
+# tier what a player leans on; the defeat's share what one bad night costs
+# the next; essence and the night's money what a night pays; the breaker's
+# bite what spring's towers lose between nights. **Not the night's length**:
+# 0277's sweep found the nights' records written to 240 seconds, and
+# `validate()` refuses anything outside 230-240 - it moves with them or not
+# at all. Nor the Full Moon under 130, for the same reason (Winter 7).
 LEVERS = [
-    ("gun damage",
-     r'(\t\t"damage": )6(,\s+# LEVER: per shot)',
-     [4, 6, 9]),
-    ("house hp",
-     r'(const HOUSE_HP := )100(\s+# LEVER)',
-     [80, 100, 140]),
-    ("money a night",
-     r'(\t"money_per_night": )15(,\s+# LEVER)',
-     [10, 15, 25]),
-    # Added once the first pass named power as the binding constraint: the
-    # farm makes four energy a tick, a gun tower draws one and a crossbow
-    # three, and every defence after those two puts the **whole farm** below
-    # full speed - including the towers already standing. The fifth tower
-    # makes the first four worse, which is a trap rather than a decision.
-    ("base energy",
-     r'(const BASE_ENERGY := )4(\s+# LEVER)',
-     [4, 6, 8]),
-    ("brownout floor",
-     r'(const UNPOWERED_PERCENT := )\d+(\s+# LEVER)',
-     [25, 50]),
-    # Night one is the other outlier, and it is arithmetic rather than taste:
-    # a walker crosses the gun tower's five tiles in 5 * 20 = 100 ticks, the
-    # tower deals 6 a second, and 100 ticks is 3.3 seconds of 6 - which is
-    # 20, exactly one walker's hit points. So one tower kills one walker per
-    # wave however many are in it, nine of twelve reach the house, and the
-    # "tutorial night" ends with the house on ten of a hundred. Slowing the
-    # walker lengthens the only window the tower has.
-    ("walker speed",
-     r'(		"ticks_per_tile": )20(,\s+# LEVER: ticks, 12-30)',
-     [20, 26, 30]),
-    ("wave gap",
-     r'(const WAVE_GAP_TICKS := )15( \* SECONDS\s+# LEVER)',
-     [8, 30]),
+    ("spring size",
+     r'(\t\t"size": \[380, )\d+(\],\s+# LEVER)',
+     [2000, 3600]),
+    ("summer size",
+     r'(\t\t"size": \[1800, )\d+(\],\s+# LEVER)',
+     [4000, 6000]),
+    ("autumn size",
+     r'(\t\t"size": \[5200, )\d+(\],\s+# LEVER)',
+     [7000]),
+    ("full moon",
+     r'(const FULL_MOON_HORDE_PERCENT := )\d+(\s+# LEVER)',
+     [130]),
+    ("giant hp",
+     r'(\t\t"hp": )\d+(,\s+# LEVER: hit points, 500-1600)',
+     [700]),
+    ("giant armour",
+     r'(\t\t"armour": )\d+(,\s+# LEVER: damage off each hit, 3-10)',
+     [6]),
+    ("breaker bite",
+     r'(# house\.\n\t\t"structure_damage_percent": )\d+(,)',
+     [200]),
+    ("defeat loss",
+     r'(const DEFEAT_LOSS_PERCENT := )\d+(\s+# LEVER)',
+     [10]),
+    ("house tier",
+     r'("hp_bonus": )\d+(,\s+# LEVER: hit points, 20-80)',
+     [80]),
+    ("essence",
+     r'(\t"tech_points": )\d+(,\s+# LEVER)',
+     [2]),
+    ("night money",
+     r'(\t"base_money": )\d+(,\s+# LEVER)',
+     [30]),
 ]
 
-NIGHTS = 10
+## How many seeds a configuration plays unless told: 0277's "on 4 seeds".
+SWEEP_SEEDS = 4
+## And the year check's: "at least 8 seeds".
+YEAR_SEEDS = 8
+POLICIES = ["balanced", "economy", "towers", "walls"]
+WINTER_1 = 43
+YEAR = 56
 
 BALANCE_MD = os.path.join(ROOT, "implementation", "BALANCE.md")
 DAYS_BEGIN = "<!-- tools/balance.py days writes from here to its end mark -->"
@@ -98,6 +136,7 @@ SEASONS = ["spring", "summer", "autumn", "winter"]
 STRATEGIES = [("crops", "Crops"), ("fishing", "Fishing"),
               ("mining", "The cliff and the woods"), ("animals", "Animals"),
               ("artisan", "Artisan goods")]
+RUN = re.compile(r"^RUN (.*)$")
 
 
 def read():
@@ -114,48 +153,309 @@ def clean_tree():
     return not out.stdout.strip()
 
 
-def play(runs):
-    """Run the autoplayer once. -> {policy: (won, [nights reached, ...])}."""
-    done = subprocess.run(
-        [GODOT, "--headless", "--path", ROOT,
-         "--script", "res://src/tools/autoplay_run.gd", "++", str(runs)],
-        capture_output=True, text=True)
-    won = {}
-    reached = {}
-    name = None
-    for line in (done.stdout or "").splitlines():
-        # The summary table: "  towers       0  night 9 (3x)   9.0  ..."
-        row = re.match(r"\s{2}(\w+)\s+(\d+)\s+(?:night \d|nothing)", line)
-        if row:
-            won[row.group(1)] = int(row.group(2))
-            continue
-        # The per-policy block: a name line, then its nights.
-        got = re.match(r"\s{2}(\w+)\s{2,}\w[\w ,']*$", line)
-        hit = re.search(r"nights: \[([0-9, ]+)\]", line)
-        if hit and name:
-            reached[name] = [int(n) for n in hit.group(1).split(",")]
-            name = None
-        elif got:
-            name = got.group(1)
-    return dict((k, (won.get(k, 0), v)) for k, v in reached.items())
-
-
-def win_rates(result):
-    """Share of all runs still alive at the end of each night, 1..10.
-
-    A run that reached night N and stopped there died on N, so it is alive at
-    the end of nights 1..N-1. The exception is the tenth: a run that reached
-    ten may have beaten it, and the autoplayer's own `won` column is the only
-    thing that knows which.
-    """
-    reached = [n for _won, runs in result.values() for n in runs]
-    if not reached:
-        return []
-    total = float(len(reached))
-    out = [sum(1 for n in reached if n > night) / total
-           for night in range(1, NIGHTS)]
-    out.append(sum(w for w, _runs in result.values()) / total)
+def parse_run(line):
+    """A `RUN` line as a dict - the season lists and `lost` as lists of ints."""
+    hit = RUN.match(line.strip())
+    if not hit:
+        return None
+    out = {}
+    for pair in hit.group(1).split():
+        key, _, value = pair.partition("=")
+        if key in ("losses", "repeats", "money", "essence", "lost"):
+            out[key] = [int(v) for v in value.split(",") if re.match(r"^-?\d+$", v)]
+        elif re.match(r"^-?\d+$", value):
+            out[key] = int(value)
+        else:
+            out[key] = value
     return out
+
+
+class Run(object):
+    """**One year in its own process**, read as it goes: `ready` is set once
+    it prints `PLAYING` - every table loaded, so `game_data.gd` may be
+    written again - and `row()` waits for its `RUN` line."""
+
+    def __init__(self, policy, seed, days=0):
+        self.policy, self.seed = policy, seed
+        self.out = []
+        self.ready = threading.Event()
+        self.proc = subprocess.Popen(
+            [GODOT, "--headless", "--path", ROOT,
+             "--script", "res://src/tools/autoplay_run.gd", "++",
+             "--year", "--policy=%s" % policy, "--seeds=%d" % seed]
+            + (["--nights=%d" % days] if days > 0 else []),
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+            encoding="utf-8", errors="replace")
+        self.reader = threading.Thread(target=self._read)
+        self.reader.daemon = True
+        self.reader.start()
+
+    def _read(self):
+        for line in self.proc.stdout:
+            self.out.append(line)
+            if line.startswith("PLAYING"):
+                self.ready.set()
+        self.proc.wait()
+        self.ready.set()
+
+    def done(self):
+        return not self.reader.is_alive()
+
+    def row(self):
+        self.reader.join()
+        for line in self.out:
+            row = parse_run(line)
+            if row:
+                return row
+        if self.invalid():
+            return None
+        sys.stderr.write("no RUN line from %s seed %d:\n%s\n"
+                         % (self.policy, self.seed, "".join(self.out)[-600:]))
+        return None
+
+    def invalid(self):
+        """The first reason the tables did not validate, or "": a lever moved
+        outside what the rest of the data allows, which is a finding, not a
+        crash (0277: the Full Moon at 120% leaves night 49 short of the fill
+        line)."""
+        text = "".join(self.out)
+        if "the tables do not validate" not in text:
+            return ""
+        after = text.split("the tables do not validate:", 1)[1].strip().splitlines()
+        return after[0].strip() if after else "?"
+
+
+def seeds_of(n):
+    return [9000 + i * 7 for i in range(n)]
+
+
+def play(policies, seeds, jobs):
+    """Every policy on every seed, `jobs` processes at a time, on the data as
+    it is. -> [RUN dicts]."""
+    work = [(p, s) for p in policies for s in seeds_of(seeds)]
+    running, rows = [], []
+    for policy, seed in work:
+        while len([r for r in running if not r.done()]) >= jobs:
+            time.sleep(0.5)
+        running.append(Run(policy, seed))
+    for run in running:
+        row = run.row()
+        if row:
+            rows.append(row)
+    return rows
+
+
+def survival(rows):
+    """Of the runs that reached each date, the share that never lost it."""
+    out = []
+    for day in range(1, YEAR + 1):
+        reached = [r for r in rows if r.get("days", 0) >= day]
+        if not reached:
+            out.append(None)
+            continue
+        kept = sum(1 for r in reached if day not in r.get("lost", []))
+        out.append(kept / float(len(reached)))
+    return out
+
+
+def before_winter(row):
+    return sum(1 for d in row.get("lost", []) if d < WINTER_1)
+
+
+def summary(rows):
+    n = float(max(len(rows), 1))
+    return {
+        "before": sum(before_winter(r) for r in rows) / n,
+        "lost": [sum(r["losses"][i] for r in rows) / n for i in range(4)],
+        "repeats": [sum(r["repeats"][i] for r in rows) / n for i in range(4)],
+        "capped": sum(r["capped"] for r in rows),
+        "over": sum(r["over"] for r in rows),
+        "runs": len(rows),
+        "survival": survival(rows),
+        "shape": tuple(sorted(tuple(r.get("lost", [])) + (r["days"],) for r in rows)),
+    }
+
+
+def survival_lines(rates, indent="      "):
+    out = []
+    for i, season in enumerate(SEASONS):
+        cells = rates[i * 14:(i + 1) * 14]
+        out.append("%s%-7s %s" % (indent, season, " ".join(
+            "  -" if c is None else "%3.0f" % (c * 100) for c in cells)))
+    return out
+
+
+def describe(name, value, s, wall):
+    return ("  %-13s %-5s  lost before day 43: %4.1f   a season: %s   boss nights "
+            "lived through: %s   capped %d/%d  year ended %d/%d  %4.0f s"
+            % (name, value, s["before"],
+               " ".join("%4.1f" % x for x in s["lost"]),
+               " ".join("%3.1f" % x for x in s["repeats"]),
+               s["capped"], s["runs"], s["over"], s["runs"], wall))
+
+
+def lock_or_refuse():
+    if not clean_tree():
+        print("game_data.gd has uncommitted changes: commit or stash first,")
+        print("or an interrupted sweep will leave a lever moved.")
+        return None
+    # **One sweep at a time.** Two of these running together both rewrite
+    # `game_data.gd` and neither notices, so the second one measures whatever
+    # the first happened to have written that second. It happened, the numbers
+    # looked plausible, and the only reason it was caught was a process list.
+    lock = os.path.join(ROOT, ".balance-lock")
+    try:
+        os.close(os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY))
+    except OSError:
+        print("another sweep holds %s - wait for it, or delete the file if"
+              % lock)
+        print("you are sure nothing is running.")
+        return None
+    return lock
+
+
+def moved(text, name, value):
+    """`text` with the lever called `name` at `value`, or None when its regex
+    does not match exactly one line."""
+    for lever, pattern, _values in LEVERS:
+        if lever == name:
+            if len(re.findall(pattern, text)) != 1:
+                return None
+            return re.sub(pattern, r"\g<1>%d\g<2>" % value, text)
+    return None
+
+
+def sweep(seeds, only, jobs, base_moves=(), days=0):
+    """**The configurations overlap** (task 0277): each one's processes are
+    started on its own text of `game_data.gd`, and the next is written only
+    once all of them have printed `PLAYING` - so `jobs // seeds`
+    configurations play at once, each on the data it was given."""
+    lock = lock_or_refuse()
+    if not lock:
+        return 1
+    original = read()
+    base_text = original
+    for name, value in base_moves:
+        base_text = moved(base_text, name, value)
+        if base_text is None:
+            print("  --with lever '%s' does not match exactly one line" % name)
+            os.remove(lock)
+            return 1
+    configs = [("baseline", None, None, base_text)]
+    for name, pattern, values in LEVERS:
+        if only and name != only:
+            continue
+        found = len(re.findall(pattern, base_text))
+        if found != 1:
+            print("  lever '%s' matched %d lines, not one - skipped" % (name, found))
+            continue
+        hit = re.search(pattern, base_text)
+        current = int(hit.group(0)[len(hit.group(1)):len(hit.group(0)) - len(hit.group(2))])
+        for value in values:
+            if value != current:
+                configs.append((name, value, current, moved(base_text, name, value)))
+    print("")
+    print("  balanced, %d seeds a configuration, %d configurations, %d processes%s%s"
+          % (seeds, len(configs), jobs,
+             ", with %s" % ", ".join("%s %d" % m for m in base_moves) if base_moves else "",
+             ", to day %d" % days if days else ""))
+    print("")
+    started_all = time.time()
+    playing = []
+    told = set()
+
+    def as_they_finish():
+        # Each configuration's line as soon as its runs are in, so a sweep of
+        # hours can be read while it plays.
+        for name, value, current, started, runs in playing:
+            if (name, value) not in told and all(r.done() for r in runs):
+                told.add((name, value))
+                rows = [r for r in (run.row() for run in runs) if r]
+                wall = max(r["ms"] for r in rows) / 1000.0 if rows else 0.0
+                if not rows and runs[0].invalid():
+                    print("  done  %-13s %-5s  DOES NOT VALIDATE: %s"
+                          % (name, value, runs[0].invalid()))
+                else:
+                    print("  done" + describe(name, "" if value is None else value,
+                                              summary(rows), wall)[1:])
+                sys.stdout.flush()
+
+    try:
+        for name, value, current, text in configs:
+            while len([r for c in playing for r in c[4] if not r.done()]) + seeds > jobs:
+                as_they_finish()
+                time.sleep(0.5)
+            write(text)
+            runs = [Run("balanced", s, days) for s in seeds_of(seeds)]
+            for run in runs:
+                run.ready.wait()
+            playing.append((name, value, current, time.time(), runs))
+    finally:
+        write(original)
+        os.remove(lock)
+    while len(told) < len(playing):
+        as_they_finish()
+        time.sleep(0.5)
+    print("")
+    results = {}
+    for name, value, current, started, runs in playing:
+        rows = [r for r in (run.row() for run in runs) if r]
+        wall = max(r["ms"] for r in rows) / 1000.0 if rows else 0.0
+        bad = runs[0].invalid() if not rows else ""
+        results[(name, value)] = (summary(rows), wall, current, bad)
+    base, base_wall, _, _ = results[("baseline", None)]
+    print(describe("baseline", "", base, base_wall))
+    for line in survival_lines(base["survival"]):
+        print(line)
+    for name, pattern, values in LEVERS:
+        if only and name != only:
+            continue
+        shapes = {}
+        for value in values:
+            if (name, value) not in results:
+                continue
+            s, wall, current, bad = results[(name, value)]
+            if bad:
+                print("  %-13s %-5s  DOES NOT VALIDATE: %s" % (name, value, bad))
+                continue
+            shapes[value] = s["shape"]
+            shapes[current] = base["shape"]
+            print(describe(name, value, s, wall))
+            for line in survival_lines(s["survival"]):
+                print(line)
+        if shapes and len(set(shapes.values())) == 1:
+            print("  DEAD WEIGHT: '%s' changed nothing across %s" % (name, sorted(shapes)))
+    print("")
+    print("  the sweep took %.0f s" % (time.time() - started_all))
+    return 0
+
+
+def survival_report(rows):
+    """Under the year's table: each policy's nights lost before Winter 1 and
+    its survival per day, and the days no run of any policy held."""
+    print("")
+    print("  survival per day, %: of the runs that reached the date, the share that held it")
+    every = []
+    for p in POLICIES:
+        mine = [r for r in rows if r["policy"] == p]
+        if not mine:
+            continue
+        rates = survival(mine)
+        every.append(rates)
+        print("    %-9s lost before day 43: %.1f a run" % (p, summary(mine)["before"]))
+        for line in survival_lines(rates):
+            print(line)
+    dead = [d + 1 for d in range(YEAR)
+            if every and all(col[d] is not None and col[d] == 0 for col in every)]
+    print("")
+    print("  days no run of any policy held: %s" % (dead if dead else "none"))
+
+
+def year(seeds, jobs):
+    """The year as it stands, every policy: `tools/autoplay.py --year`, which
+    prints the table, the alarms and `survival_report`."""
+    import autoplay
+    return autoplay.year(seeds, jobs)
 
 
 def play_days():
@@ -222,20 +522,8 @@ def write_days(block):
 
 
 def days():
-    if not os.path.exists(GODOT):
-        print("no godot at %s - set GODOT" % GODOT)
-        return 1
-    if not clean_tree():
-        print("game_data.gd has uncommitted changes: commit or stash first,")
-        print("or an interrupted sweep will leave a lever moved.")
-        return 1
-    lock = os.path.join(ROOT, ".balance-lock")
-    try:
-        os.close(os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY))
-    except OSError:
-        print("another sweep holds %s - wait for it, or delete the file if"
-              % lock)
-        print("you are sure nothing is running.")
+    lock = lock_or_refuse()
+    if not lock:
         return 1
     original = read()
     try:
@@ -254,67 +542,30 @@ def days():
 
 
 def main():
-    if len(sys.argv) > 1 and sys.argv[1] == "days":
-        return days()
-    runs = int(sys.argv[1]) if len(sys.argv) > 1 else 8
-    only = sys.argv[2] if len(sys.argv) > 2 else ""
     if not os.path.exists(GODOT):
         print("no godot at %s - set GODOT" % GODOT)
         return 1
-    if not clean_tree():
-        print("game_data.gd has uncommitted changes: commit or stash first,")
-        print("or an interrupted sweep will leave a lever moved.")
-        return 1
-
-    # **One sweep at a time.** Two of these running together both rewrite
-    # `game_data.gd` and neither notices, so the second one measures whatever
-    # the first happened to have written that second. It happened, the numbers
-    # looked plausible, and the only reason it was caught was a process list.
-    lock = os.path.join(ROOT, ".balance-lock")
-    try:
-        os.close(os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY))
-    except OSError:
-        print("another sweep holds %s - wait for it, or delete the file if"
-              % lock)
-        print("you are sure nothing is running.")
-        return 1
-
-    original = read()
-    rows = []
-    try:
-        for name, pattern, values in LEVERS:
-            if only and name != only:
-                continue
-            if not re.search(pattern, original):
-                print("  lever '%s' did not match its line - skipped" % name)
-                continue
-            for value in values:
-                write(re.sub(pattern, r"\g<1>%d\g<2>" % value, original))
-                result = play(runs)
-                rows.append((name, value, result, win_rates(result)))
-                far = ", ".join("%s %d" % (k, max(v))
-                                for k, (_w, v) in sorted(result.items()))
-                print("  %-14s = %-4s  furthest night: %s" % (name, value, far))
-    finally:
-        write(original)
-        os.remove(lock)
-
-    print("")
-    print("  lever          value   win rate %% per night, 1..%d" % NIGHTS)
-    shapes = {}
-    for name, value, _result, rates in rows:
-        print("  %-14s %-6s %s"
-              % (name, value, " ".join("%3.0f" % (r * 100) for r in rates)))
-        shapes.setdefault(name, []).append(tuple(rates))
-
-    print("")
-    dead = [n for n, seen in shapes.items() if len(set(seen)) == 1]
-    for name in sorted(dead):
-        print("  DEAD WEIGHT: '%s' changed nothing across its whole range"
-              % name)
-    if not dead:
-        print("  every lever moved the curve")
-    return 0
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    jobs = max(min((os.cpu_count() or 4) - 4, 8), 1)
+    for arg in sys.argv[1:]:
+        if arg.startswith("--jobs="):
+            jobs = max(int(arg.split("=", 1)[1]), 1)
+    if args and args[0] == "days":
+        return days()
+    if args and args[0] == "year":
+        seeds = int(args[1]) if len(args) > 1 else YEAR_SEEDS
+        return year(seeds, jobs)
+    base_moves = []
+    days_to = 0
+    for arg in sys.argv[1:]:
+        if arg.startswith("--with="):
+            name, _, value = arg.split("=", 1)[1].rpartition("=")
+            base_moves.append((name, int(value)))
+        if arg.startswith("--days="):
+            days_to = int(arg.split("=", 1)[1])
+    seeds = int(args[0]) if args else SWEEP_SEEDS
+    only = args[1] if len(args) > 1 else ""
+    return sweep(seeds, only, jobs, base_moves, days_to)
 
 
 if __name__ == "__main__":

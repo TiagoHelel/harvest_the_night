@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 98
+const GROUPS := 99
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -177,6 +177,7 @@ func _run() -> void:
 	_task_0274_winter_nights()
 	_task_0275_perf_year()
 	_task_0276_year_autoplay()
+	_task_0277_year_balance()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -12097,6 +12098,80 @@ func _task_0276_year_autoplay() -> void:
 		"play_nights plays the whole year by default and fights a boss night again")
 	_completed += 1
 
+
+
+## **Task 0277: the instrument the year is balanced with.** Two faults 0277's
+## losing runs showed, fixed in the autoplayer rather than tuned around: it
+## walled its own porch in with a kitchen and a generator, and woke on Spring
+## 13 in six cells with nothing to do; and it kept nine of every fish for the
+## kitchen, $3 in the purse and a tower to put back.
+func _task_0277_year_balance() -> void:
+	var state := State.create(27700)
+	var bounds := Farm.house_bounds(state)
+	var porch := House.porch(state)
+	# A pocket under the house, the porch in it, closed but for one cell.
+	var ring: Array = [Vector2i(bounds.position.x - 1, porch.y), Vector2i(bounds.end.x, porch.y)]
+	for x in range(bounds.position.x, bounds.end.x - 1):
+		ring.append(Vector2i(x, porch.y + 1))
+	var gap := Vector2i(bounds.end.x - 1, porch.y + 1)
+	# A cell the map already fills (the bin, a fixture) closes it as well.
+	var walled := 0
+	for cell in ring:
+		Farm.place(state, cell, {"id": &"fence", "hp": 10})
+		if not Farm.walkable(state, cell):
+			walled += 1
+	var reach := Autoplay._reach_from_porch(state, {})
+	expect(walled == ring.size() and reach > 100,
+		"a pocket under the porch is walled in but for one cell, and the farm is still reached through it",
+		"%d of %d walled, %d cells reached" % [walled, ring.size(), reach])
+	expect(not Autoplay._keeps_the_road(state, gap, Vector2i.ONE, reach),
+		"the robot will not put anything on the last cell between the porch and the farm")
+	var kitchen := Autoplay._room_for(state, &"kitchen")
+	expect(kitchen.x >= 0 and Autoplay._keeps_the_road(state, kitchen,
+			Building.size_of(&"kitchen"), reach),
+		"and the kitchen it does find room for leaves the porch its road", str(kitchen))
+
+	# The bin leaves the kitchen two batches: the fish as one group.
+	var larder := State.create(27701)
+	var site := Vector2i(-1, -1)
+	for cell in Autoplay._near_the_house(larder):
+		if site.x < 0 and Farm.buildable(larder, cell):
+			site = cell
+	Farm.place(larder, site, {"id": &"kitchen", "hp": 50})
+	var cheapest := StringName(GameData.pay_order(GameData.FISH)[0])
+	Resources.gain(larder, {cheapest: 30, GameData.CARROT: 30})
+	var keep := Autoplay._inputs_on_the_farm(larder)
+	var fish_kept := 0
+	for species in GameData.group_members(GameData.FISH):
+		fish_kept += int(keep.get(StringName(species), 0))
+	expect(fish_kept == Autoplay.KEEP_BATCHES and int(keep.get(GameData.CARROT, 0)) == 2 * Autoplay.KEEP_BATCHES,
+		"a kitchen keeps two meals back from the bin - %d fish of any kind, %d carrots - not nine of each"
+			% [Autoplay.KEEP_BATCHES, 2 * Autoplay.KEEP_BATCHES],
+		str(keep))
+
+	# Ready for the boss: five nights out the line is deepened, the lowest
+	# tower first, and only once the tree allows its next level.
+	var policy: Dictionary = Autoplay.POLICIES[&"balanced"]
+	var early := State.create(27702)
+	early["day"] = GameData.SEASON_DAYS - 5
+	var ready := State.create(27702)
+	ready["day"] = GameData.SEASON_DAYS - 4
+	expect(not Autoplay._boss_prep(early, policy) and Autoplay._boss_prep(ready, policy),
+		"the balanced robot readies for the Giant from Spring %d, five nights out, and not before"
+			% (GameData.SEASON_DAYS - 4),
+		"%d, %d" % [Calendar.date(early), Calendar.date(ready)])
+	var line: Array = []
+	for cell in Autoplay._near_the_house(ready):
+		if line.size() < 2 and Farm.buildable(ready, cell) and Autoplay._house_distance(ready, cell) >= 3:
+			line.append(cell)
+	Farm.place(ready, line[0], {"id": &"gun_tower", "hp": 90, "level": 2})
+	Farm.place(ready, line[1], {"id": &"auto_crossbow", "hp": 40})
+	var untaught := Autoplay._prep_target(ready)
+	(ready["tech_owned"] as Array).append(&"true sights")
+	expect(untaught.x < 0 and Autoplay._prep_target(ready) == line[1],
+		"it takes up the level one crossbow before the level two gun, once 'true sights' is bought",
+		"%s, then %s" % [str(untaught), str(Autoplay._prep_target(ready))])
+	_completed += 1
 
 ## **A mid-summer farm** (task 0276): Summer 6 of a run, every night before it
 ## won and the lessons behind it, a coop on its site with four hens whose eggs

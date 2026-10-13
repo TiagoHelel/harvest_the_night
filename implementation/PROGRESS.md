@@ -29686,3 +29686,123 @@ Files: src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py,
 src/tools/play_nights.gd, tools/play_nights.py, src/tools/headless_check.gd,
 src/tools/headless_v1.gd, implementation/prompts/0276-autoplay-year.md,
 implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
+
+## 0277 - Balancing the year - blocked 2026-10-13
+
+**Blocked on a design decision: the bosses' armour against an average
+player's arsenal.** With the instrument fixed, `balanced` holds every
+spring night on every seed, and then no boss falls. Armour comes off every
+hit and a hit never lands under one, so against armour 5-7 a gun or a bolt
+below level three lands one to four. What beats a boss is the season's
+heavy weapon or level three, and the average robot fields neither:
+- **The Giant** (900, armour 6) takes about 250 and walks into the house. It
+  falls at 500 and armour 4, but that breaks 0058's relations: every boss
+  out-armours every enemy, and eighteen crossbows must not stop it while
+  four mortars do. Since 0234 the mortar opens in autumn, so in spring
+  nothing concentrates damage. The two tasks already disagree.
+- **The Harvester** takes 100-230 at the easy end of every one of its
+  ranges, and its company (1.53 times Summer 13) knocks the house down
+  first.
+
+The owner's choice, set out in BALANCE.md's new top section 'The year':
+1. the bosses' armour and hit points, with 0058 rewritten;
+2. a robot that plays each season's weapons: oil and gunpowder chains,
+   summer's flamethrower, autumn's mortar and catapult, level three. An
+   instrument task of its own;
+3. the boss nights' companies.
+
+**No game value moved.**
+
+What changed:
+- **The instrument first.** Asked what a losing run was doing, the robot
+  showed eight faults, each fixed in `src/tools/autoplay.gd` and named in
+  BALANCE.md:
+  - **generators** built and never fed: coal from the seams while the store
+    holds under four tanks a plant (`_feed_the_generators`);
+  - **seed money** spent on the plan's iron: packets first, and the field's
+    packet bill kept back at the stall (`_seed_bill`);
+  - **food**: there was no kitchen and every carrot and fish was shipped.
+    `towers`, `walls` and `balanced` now build a kitchen third or fourth.
+    The bin leaves two batches of what the farm's stations eat
+    (`KEEP_BATCHES`, a group such as the fish counted as one). It used to
+    keep nine of every fish, which left $3 in the purse for six days;
+  - **upgrades** bought with the next tower's iron: an upgrade only out of
+    what the plan's next thing leaves;
+  - **its own porch walled in** by a kitchen and a second generator, so it
+    woke in six cells and went back to bed: `_room_for` refuses a cell that
+    cuts ground off from the porch (`_keeps_the_road`, `ROAD_SLACK` 3);
+  - **never an upgrade all spring: ready for the boss.** From five nights
+    before a boss night (`boss_prep_days`) the line is deepened, lowest
+    tower first, and nothing new goes down while an upgrade is unpaid. The
+    house now holds on Spring 14;
+  - **`balanced`'s generator** before its third gun: after the crossbow.
+
+  Tried and taken back:
+  - deepening all spring, which left too few towers (seed 9014 fell on
+    Spring 11 and never recovered);
+  - summer's flamethrower with a press in `balanced`'s plan, which saved
+    all summer for oil it never had.
+- **`tools/balance.py` reads only `RUN` lines.** The parser moved here from
+  0276, and `tools/autoplay.py` imports it. It sweeps the year: survival per
+  day and losses per season replace `NIGHTS = 10` and the win rate a night.
+  - `LEVERS` is re-chosen for 1.0: the season sizes, the Full Moon, the
+    Giant's hit points and armour, the breaker's bite, the defeat's share,
+    the house tier, essence and the night's money. Each regex is value-free
+    (`\d+`) and matches one line.
+  - **Configurations overlap.** A run prints `PLAYING` once the tables are
+    loaded, and only then is the next text written, so two configurations
+    of four seeds play at once.
+  - `--with=lever=value` moves a lever for every configuration, a sweep
+    around a candidate point with the committed file still the one
+    restored. `--days=N` stops runs at a date.
+  - A configuration that fails `validate()` is reported as such.
+  - It keeps its safety: a dirty `game_data.gd` is refused, `.balance-lock`
+    is held, and the file is restored in a `finally`. The 2,348 s sweep left
+    the tree clean and no lock behind.
+- **`tools/autoplay.py --year`**:
+  - adds each policy's survival per day and the days no run of any policy
+    held;
+  - refuses to run while a sweep holds the lock;
+  - `balance.py year` is now this.
+- The `RUN` line carries `lost=<dates>`.
+- **`game_data.gd`, comments only.** `FULL_MOON_HORDE_PERCENT`'s range was
+  120-200 and is now 130-200: under 130, Winter 7 fails the fill line.
+  `NIGHT_TICKS`'s range was 180-300 s and is now 230-240 s: the nights'
+  records pin it. Both values are unmoved.
+- **`headless_v1` gains `_task_0277_year_balance`** (99 groups). It covers
+  the porch's road, the kitchen's two batches, and the boss prep's start
+  and its choice of tower.
+
+The measurements:
+- **`--year 8`**: 32 runs in 776 s.
+  - `balanced` loses nothing in spring and fights the Giant seven times on
+    every seed.
+  - `towers` gets it down on some and stops at the Harvester.
+  - `walls` breaks on Spring 10-13.
+  - `economy` loses every night from Spring 4.
+  - No day is at 0% for every policy.
+- **The sweep**: 15 configurations in 2,348 s.
+  - Every run with the Giant down stops on Summer 14, at 0% everywhere.
+  - Summer's size at 6,000 is the only other mover.
+  - The Full Moon at 120% and the night at 280 s do not validate.
+- The night-by-night boss trials are in BALANCE.md.
+
+Files: src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/balance.py,
+tools/autoplay.py, src/core/game_data.gd (comments), src/tools/headless_v1.gd,
+implementation/BALANCE.md, implementation/PROGRESS.md
+Verify: PASS, 61 checks in 1,020 s; 19,336 headless / 2,766 headless_v1 (99 groups) / 1,269 + 735 + 3 input cases; sim 3524359536 and data 1211606022 unchanged
+Notes:
+- **Waiting on the owner's choice above.** If it is (2), the robot needs a
+  task before 0277 can finish: "the autoplayer fields each season's
+  weapons". If it is (1), the Giant's candidate is 500 and armour 4, and the
+  Harvester, the Scarecrow King and the Winter Lord still need their trials
+  (`lever_try`-style: a boss night's levers set for one run, its hit points
+  followed to the house).
+- **`economy`'s plan** dies from Spring 4 (its third gun comes after four
+  stations), its character, left alone.
+- **A player can wall in their own porch**: `Farm.buildable` refuses only
+  the porch cell. Raised as its own task.
+- **Autumn opens at 5,200 hit points**, above what the robot holds by the
+  end of summer. Unmeasured, since no run reaches it.
+- The `enter_result from RESULT` error (two bites after the house falls)
+  shows in long runs. It is already its own task.

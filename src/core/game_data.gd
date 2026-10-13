@@ -82,8 +82,10 @@ const NO_GROWTH_SEASONS: Array = [&"winter"]  # LEVER: season ids
 ## `Rewards` the night's pay; `Calendar.is_full_moon` says which dates.
 const FULL_MOON_DAYS: Array = [7, 14]   # LEVER: days of the season
 ## How big a Full Moon's horde is: this percent of every ordinary wave's
-## count. Boss rows are left as written.
-const FULL_MOON_HORDE_PERCENT := 150    # LEVER: percent of the night's count, 120-200
+## count. Boss rows are left as written. **Not under 130** (task 0277): below
+## it Winter 7's record is all sent before the fill line, and `validate()`
+## refuses the year.
+const FULL_MOON_HORDE_PERCENT := 150    # LEVER: percent of the night's count, 130-200
 ## What a won Full Moon pays: this percent of the night's money and
 ## materials. Technology is a point a night whatever the moon.
 const FULL_MOON_REWARD_PERCENT := 200   # LEVER: percent of the night's pay, 150-300
@@ -176,7 +178,12 @@ const PASS_OUT_WARNING_MINUTE := 25 * 60 + 30  # LEVER: minutes, 00:30-01:50
 ## step's end to dawn - the plan's three to five real minutes - the same
 ## after a 21:00 bedtime and after a pass-out. A house still standing at
 ## dawn wins the night; killing everything sooner still does.
-const NIGHT_TICKS := 240 * SECONDS     # LEVER: ticks, 180-300 seconds worth
+##
+## **Held by the nights' records** (task 0277): they are written to this
+## length, so under 230 seconds the longest leave less than the dawn margin
+## and over 240 the shortest are all sent before the fill line, and
+## `validate()` refuses either. Moving it means rewriting them with it.
+const NIGHT_TICKS := 240 * SECONDS     # LEVER: ticks, 230-240 seconds worth
 ## Every night sends its last member at least this long before dawn, so the
 ## last wave has time to arrive and be fought (`check_nights`).
 const DAWN_MARGIN_TICKS := 60 * SECONDS  # LEVER: ticks, 30-120 seconds worth

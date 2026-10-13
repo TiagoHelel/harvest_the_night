@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-238 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
+239 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -282,6 +282,7 @@ is the sort of thing this list exists to say out loud.
 | 0274 | Winter's fourteen nights | 2026-10-12 |
 | 0275 | The worst night of the year, within budget | 2026-10-12 |
 | 0276 | The autoplayer plays a whole year | 2026-10-13 |
+| 0277 | Balancing the year | 2026-10-13 |
 
 ## Every time the game changed underneath itself
 

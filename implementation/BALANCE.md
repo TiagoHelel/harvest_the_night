@@ -1,3 +1,246 @@
+# The year - task 0277 (2026-10-13), blocked
+
+**Why it is blocked, first.** The target is the phase's: `balanced`, the
+average player, loses two to four nights before Winter 1 (day 43) over
+eight seeds, and every boss falls for it on every seed. With the
+instrument fixed, **`balanced` holds every spring night on every seed, and
+then no boss falls**:
+
+- **The Giant** (900 hit points, armour 6) takes about 250 from an average
+  spring line and walks into the house. It falls at 500 and armour 4 - but
+  0058's own asserts say every boss is better armoured than every other
+  enemy (one has armour 4) and that **eighteen crossbows must not stop it
+  while four mortars do**. Since 0234 the mortar opens in autumn: in spring
+  nothing concentrates damage, so the two tasks already disagree, and the
+  Giant cannot be made to fall for a spring player without breaking one of
+  them.
+- **The Harvester** takes 100-230 of its 700-1,100 even at the easy end of
+  every one of its ranges, and its company knocks the house down first.
+- **The Scarecrow King and the Winter Lord** (armour 5 and 7) are the same
+  arithmetic and were never reached.
+
+Armour is taken off every hit, and a hit never lands under one
+(`Combat.MINIMUM_HIT`). Against armour 5-7, a gun or a bolt below level
+three lands one to four, so what beats a boss is a season's heavy weapon or
+level three - and the average robot fields neither: it has no supply chain
+for oil or gunpowder. **The owner's call**, set out under "What is still
+off": the bosses' armour against an average arsenal, a robot that plays
+each season's weapons, or the boss nights' companies. No game value moved.
+
+Measured with `python tools/balance.py`, which since this task reads only
+the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
+56 dates, a boss night played again until its boss falls or the cap (6
+repeats) ends the run. A boss that walks into the house is a repeat, not a
+loss (0153), and is counted apart.
+
+## The instrument first, as 0068 found
+
+0276's year had every run of every policy stop on Spring 14, the Giant
+fought seven times. Asked what it was doing, a losing run showed eight
+faults in the robot before it showed one in the game. Each was fixed in
+`src/tools/autoplay.gd`, not tuned around:
+
+| What the robot did | What it cost | Fixed |
+| --- | --- | --- |
+| Built generators and never fed them | Spring 7 on seed 9000 fought with six guns at the 50% power floor, three plants standing and nothing to burn | `_feed_the_generators`: coal from the seams while the oil and coal in the store are under four tanks a plant |
+| Bought the plan's iron with its seed money | Tilled plots stood empty for days | Packets before the plan's materials, and the field's packet bill (`_seed_bill`) kept back when the stall sells the plan its iron |
+| Had no kitchen, and shipped every carrot and fish it had | No food, so no mending: towers chewed down by breakers and never repaired | `towers`, `walls` and `balanced` build a kitchen third or fourth (only `economy` had one), and the bin leaves what the farm's stations eat |
+| ...then kept nine of every fish for that kitchen | Thirty fish in the bag for six days, $3 in the purse and a tower to put back | Two batches of a station's input (`KEEP_BATCHES`), a group such as the fish counted as one |
+| Upgraded with the iron its next tower was saving | Met Spring 6's rain with two guns | An upgrade only out of what the plan's next thing leaves |
+| Walled its own porch in with a kitchen and a second generator | Woke on Spring 13 in a strip of six cells, went back to bed at 06:00, lost the night, and the spiral to the Giant began there | `_room_for` refuses a cell that cuts any ground off from the porch (`_keeps_the_road`, `ROAD_SLACK` 3) |
+| Never upgraded once all spring | Met the Giant with ten level-one towers - a gun's six and a bolt's five landing one each through armour six - and its company knocked the house down before it arrived | **Ready for the boss**: from five nights before a boss night (`boss_prep_days`, 0234's "days of focused saving") the line is deepened, the lowest tower first, and nothing new goes down while an upgrade is unpaid. The house now holds on Spring 14 at every value tried |
+| Built `balanced`'s generator before its third gun | Twenty iron not in a tower when spring's first tank came | After the crossbow |
+
+**Tried and taken back:**
+- **deepening all spring** (the plan's next gun an upgrade once three
+  stood): too few towers for the hordes, and seed 9014 fell on Spring 11
+  and never recovered;
+- **summer's flamethrower in `balanced`'s plan, with a press for its oil**:
+  the plan saved for it all summer and never had the oil, and met
+  Summer 14 with fewer towers than before.
+
+Not a fix, a tool: the `RUN` line carries the dates of the nights lost
+(`lost=`), which survival per day is read from.
+
+## The year: `python tools/autoplay.py --year 8`
+
+0276's table, before the instrument fixes - every run stopped on Spring 14:
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced          12.4    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             8.4    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  walls             10.4    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+```
+
+After them, every game value as it was - the table this task ends on, since
+no value moved (32 runs in 776 s, 8 processes):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped   money at winter  essence  walked/run
+  balanced           0.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8           -        -       17431
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8           -        -       16223
+  towers             0.4    0.2    0.0    0.0         6.2  2.6  0.0  0.0   0/8    8/8           -        -       23702
+  walls              9.4    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8           -        -       15330
+
+  spring  no dominant strategy: clean runs balanced 8, towers 5, economy 0, walls 0
+  summer  ALARM: 'towers' is the only policy that gets through it clean (2 of 8)
+  autumn  not reached: every run stopped before it
+  winter  not reached: every run stopped before it
+```
+
+Survival per day, of the runs that reached the date (`balanced` 100% on
+every spring date; the others below):
+
+```text
+economy   spring  100 100 100   0   0   0   0   0   0   0   0   0   0   0
+economy   summer    -   -   -   -   -   -   -   -   -   -   -   -   -   -
+towers    spring  100 100  62 100 100 100 100 100 100 100 100 100 100 100
+towers    summer  100 100 100 100 100 100 100 100 100 100 100 100 100  67
+walls     spring  100 100 100 100 100 100 100 100 100  88  62  12   0   0
+walls     summer    -   -   -   -   -   -   -   -   -   -   -   -   -   -
+```
+
+What it says:
+- **`balanced` holds every spring night on every seed and the Giant never
+  falls**: seven fights a run, and the cap ends it. Its 0.0 losses is the
+  Giant being unbeatable, not spring being easy.
+- **`towers`**, with 'oiled works' on its branch, gets the Giant down on
+  some seeds and reaches summer, where the Harvester stops it.
+- **`walls` breaks on Spring 10-13**: a maze and one gun, its character.
+- **`economy` loses every night from Spring 4**: its plan puts the third
+  gun after four stations and the kitchen last, so nothing is mended and the
+  25% a lost night takes keeps it down. Its character, and its cost.
+- **No day sits at 0% across every policy**; summer's alarm is `towers`
+  being the only one that reached it.
+
+## The sweep: `python tools/balance.py 4 --with="giant hp=500" --with="giant armour=4" --days=42`
+
+`balanced`, four seeds a configuration, around the Giant's candidate point
+(so that the sweep could see past Spring 14 at all), each run stopped at day
+42. **Fifteen configurations in 2,348 s** - two at a time on eight
+processes, a run 3-7 minutes. Losses and boss fights are a run's average;
+"Giant fights lived through" counts the Spring 14 nights it walked away
+from. `game_data.gd` came back clean and the lock went with it.
+
+| Configuration | Lost before day 43 | Spring | Summer | Giant fights lived through | Harvester's | Summer's survival, days 1-13 | Wall |
+|---|---|---|---|---|---|---|---|
+| baseline | 6.5 | 0.0 | 6.5 | 1.5 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 399 s |
+| spring size 2000 | 6.5 | 0.0 | 6.5 | 0.0 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 351 s |
+| spring size 3600 | 6.8 | 0.0 | 6.8 | 1.2 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 335 s |
+| summer size 4000 | 6.5 | 0.0 | 6.5 | 1.5 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 400 s |
+| summer size 6000 | 8.2 | 0.0 | 8.2 | 1.5 | 7.0 | 100 100 100 100 100 100 100 100 75 75 75 50 50 | 348 s |
+| autumn size 7000 | 6.5 | 0.0 | 6.5 | 1.5 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 399 s |
+| full moon 120 | **does not validate**: Winter 7 is all sent before the fill line | | | | | | |
+| giant hp 700 | 0.0 | 0.0 | - | **7.0**, capped | - | not reached | 172 s |
+| giant armour 6 | 0.0 | 0.0 | - | **7.0**, capped | - | not reached | 176 s |
+| breaker bite 200 | 6.5 | 0.0 | 6.5 | 1.2 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 399 s |
+| defeat loss 10 | 6.2 | 0.0 | 6.2 | 1.5 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 393 s |
+| house tier 80 | 7.0 | 0.0 | 7.0 | 1.5 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 397 s |
+| night length 280 | **does not validate**: six nights are all sent before the fill line | | | | | | |
+| essence 2 | 6.0 | 0.2 | 5.8 | 1.0 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 363 s |
+| night money 30 | 6.8 | 0.0 | 6.8 | 0.0 | 7.0 | 100 100 100 100 100 100 100 100 100 100 100 100 100 | 315 s |
+
+What it says:
+- **Spring holds at 100% on every date in every configuration** but one
+  (essence 2, one seed on Spring 14), and the Giant falls in one or two
+  fights - **at 500 hit points and armour 4 only**. At 700, or at armour 6,
+  it is fought seven times and never falls.
+- **Summer holds every date to Summer 13, and Summer 14 - the Harvester's
+  night - is 0% in every configuration.** Every run stops there.
+- **Summer's size is the one other lever that moves anything**: at 6,000 hit
+  points on its thirteenth day, Summer 9-13 are lost on a quarter to a half
+  of the seeds; 4,000 changes nothing.
+- **Dead weight, honestly read**: the autumn size never matters because no
+  run reaches autumn; the breaker's bite, the defeat's share, the house
+  tier, essence and the night's money move a fraction of a night either
+  way, the Harvester's wall hiding the rest.
+- **Two levers cannot move at all.** The Full Moon at 120% and the night at
+  280 seconds both fail `GameData.validate()`: the nights' records are
+  written to 240 seconds and to Winter 7's Full Moon, and the fill line
+  (0274) refuses them. Their `# LEVER` ranges said otherwise and now say
+  130-200 and 230-240 seconds (values unmoved). The night's length is off
+  the sweep's list.
+
+## The bosses, a night at a time
+
+A sweep is a year a configuration; a boss is one night. Each trial played
+`balanced` to the boss night on seeds 9000 and 9007, its levers set for
+that run only, and followed the boss's hit points to the house, up to
+three fights.
+
+**The Giant (Spring 14):**
+
+| Giant | Full Moon | Did it fall | The house |
+| --- | --- | --- | --- |
+| 900, armour 6 (as it is) | 150% | never; reaches the house with ~650 | holds (80-125) |
+| 600, armour 4 | 120% | once in six fights; reaches it with 70-100 | holds |
+| 600, armour 3 | 150% | first fight, both seeds | holds (120-165) |
+| 700, armour 3 | 150% | first fight, both seeds (3 and 17 left a second before) | holds |
+| 500, armour 4 | 150% | first fight, both seeds | holds |
+| 600, armour 4, 70 ticks a tile | 150% | first fight, both seeds | holds |
+
+Without the boss prep the house fell to the Giant's company first, at any of
+these.
+
+**The Harvester (Summer 14)** - its company is 1.53 times Summer 13 in hit
+points (7,662 with the Full Moon, from two sides, 108 rats among them) where
+the Giant's is 1.38 times Spring 13, and the house falls to it before the
+machine arrives:
+
+| Harvester | Its company | Did it fall | The house |
+| --- | --- | --- | --- |
+| 1,100, armour 6 (as it is) | as written | never; ~1,000 left | falls 5 of 6 |
+| 800 or 700, armour 5 | as written | never; 550-730 left | falls 5 of 6 |
+| 1,100 | Full Moon 130% | never | falls 5 of 6 |
+| 700, armour 5 | 70% | never; ~550 left | falls 3 of 6 |
+| 700, armour 5 | 60% | never; ~540 left | holds 5 of 6 |
+| 700, armour 5, a charge every 12 s for 4 tiles, 60 ticks a tile | 60% | never; ~470 left | holds 5 of 6 |
+
+**At the easy end of every one of its ranges it still takes about 230.** By
+the Giant's arithmetic it would fall at armour 2-3 and 600-700 hit points:
+frailer than a tank to a bolt.
+
+## What moved
+
+| Lever | Old | New | Why |
+| --- | --- | --- | --- |
+| `FULL_MOON_HORDE_PERCENT`'s range | 120-200 | 130-200 | Value unmoved; under 130 Winter 7 fails the fill line |
+| `NIGHT_TICKS`'s range | 180-300 s | 230-240 s | Value unmoved; the nights' records pin it |
+
+Neither hash moved. **Proposed, not applied**: the Giant at 500 hit points
+and armour 4 - the sweep's and the trials' answer for spring - waits on the
+decision below, since it breaks 0058's two relations.
+
+## What is still off
+
+- **The bosses against an average arsenal.** Nothing the average robot
+  fields beats armour 5-7 in time. The owner's choice, any of:
+  1. **the bosses' armour and hit points**: the Giant at 500 and armour 4
+     (and 0058's two relations rewritten: a boss outlasts every enemy but
+     need not out-armour the tank's cousins; cheap towers can kill a spring
+     boss), the Harvester near armour 3 and 700, the Scarecrow King and the
+     Winter Lord to be measured;
+  2. **a robot that plays each season's weapons**: a press for oil from
+     spring, summer's flamethrower (a cone that lands its minimum every
+     tick - the armour answer by design), autumn's mortar and catapult, and
+     'oiled works' for level three, with the oil and gunpowder chains they
+     need. An instrument task of its own - and what 0234's "days of focused
+     saving for a heavy tower" describes;
+  3. **the boss nights' companies**: Summer 14's is 1.53 times its season's
+     last night where Spring 14's is 1.38. At 60% the house holds; a
+     balance call that waits on the other two.
+- **Autumn opens at 5,200 hit points**, above what the robot holds at the
+  end of summer (it starts losing at 6,000). No run has reached it, so no
+  number is offered.
+- **`economy` dies from Spring 4 on every seed**: its plan, not the game.
+- **The game lets a player wall in their own porch**: `Farm.buildable`
+  refuses only the porch cell. The robot did it by accident; a person can
+  too. Raised as its own task.
+
+---
+
 # The balance sweep - task 0068
 
 Measured with `python tools/balance.py`, which turns one lever at a time,

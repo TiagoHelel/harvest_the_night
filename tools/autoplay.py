@@ -18,10 +18,12 @@ change inside a run set, so a run is the same in any process. Each prints
 its `RUN` line (`src/tools/autoplay_run.gd`); this reads them back and
 prints the per-policy table - nights lost and boss nights played again, a
 season each - the dominant-strategy alarm a season, and how long it took.
+Since task 0277 it also prints each policy's survival per day (the share of
+the runs that reached a date that held it) and the days no run of any policy
+held, from `tools/balance.py`, whose `RUN` parser it uses.
 """
 import concurrent.futures
 import os
-import re
 import subprocess
 import sys
 import time
@@ -37,7 +39,6 @@ SCRIPT = "res://src/tools/autoplay_run.gd"
 POLICIES = ["balanced", "economy", "towers", "walls"]
 SEASONS = ["spring", "summer", "autumn", "winter"]
 YEAR_SEEDS = 8
-RUN = re.compile(r"^RUN (.*)$")
 
 
 def godot(args, timeout=None):
@@ -48,20 +49,10 @@ def godot(args, timeout=None):
 
 
 def parse_run(line):
-    """A `RUN` line as a dict: numbers, and the season lists as lists."""
-    hit = RUN.match(line.strip())
-    if not hit:
-        return None
-    out = {}
-    for pair in hit.group(1).split():
-        key, _, value = pair.partition("=")
-        if "," in value:
-            out[key] = [int(v) for v in value.split(",")]
-        elif re.match(r"^-?\d+$", value):
-            out[key] = int(value)
-        else:
-            out[key] = value
-    return out
+    """A `RUN` line as a dict. The parser is `tools/balance.py`'s since task
+    0277, which reads nothing else."""
+    import balance
+    return balance.parse_run(line)
 
 
 def one_year(policy, seed):
@@ -77,6 +68,11 @@ def one_year(policy, seed):
 
 
 def year(seeds, jobs):
+    import balance
+    # A sweep has a lever moved while it holds the lock (`tools/balance.py`).
+    if os.path.exists(os.path.join(ROOT, ".balance-lock")):
+        print("a sweep holds .balance-lock and has a lever moved - wait for it")
+        return 1
     first = [9000 + i * 7 for i in range(seeds)]
     work = [(p, s) for p in POLICIES for s in first]
     print("")
@@ -95,6 +91,7 @@ def year(seeds, jobs):
     wall = time.time() - started
     table(rows, seeds)
     alarms(rows, seeds)
+    balance.survival_report(rows)
     runs_ms = [r["ms"] for r in rows]
     print("")
     print("  %d runs in %.0f s wall, %d processes; a run took %.0f-%.0f s (%.0f s on average)"

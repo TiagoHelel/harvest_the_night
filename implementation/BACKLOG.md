@@ -2,7 +2,7 @@
 
 `###################.....`  **236 / 296 done**
 
-0 doing / 60 todo / 0 blocked across 18 phases.
+0 doing / 59 todo / 1 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -744,7 +744,7 @@ The three night events as Codex drew them, in the forecast slot where 0256 and 0
 
 ### 0277 - Balancing the year
 
-Ready to pick up.  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
+Blocked: no boss after spring falls: armour 5-7 vs an average arsenal - owner to choose boss armour, a robot that fields each season's weapons, or the boss nights' companies  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
 
 The phase's own target: an average player reaches winter having lost two to four nights, and every boss falls. Measured with the year autoplayer, moved with levers, written down - the way 0068 did it for ten nights.
 
@@ -1469,7 +1469,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md)
 - [x] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md)
 - [x] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md)
-- [ ] **0277** [Balancing the year](prompts/0277-balance-year.md)
+- [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - **BLOCKED**: no boss after spring falls: armour 5-7 vs an average arsenal - owner to choose boss armour, a robot that fields each season's weapons, or the boss nights' companies
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
 - [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0277, 0278, 0279

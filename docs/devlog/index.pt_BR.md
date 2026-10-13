@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-238 tarefas em 11 dias, de  a 2026-10-13. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+239 tarefas em 11 dias, de  a 2026-10-13. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -281,6 +281,7 @@ voz alta.
 | 0274 | Winter's fourteen nights | 2026-10-12 |
 | 0275 | The worst night of the year, within budget | 2026-10-12 |
 | 0276 | The autoplayer plays a whole year | 2026-10-13 |
+| 0277 | Balancing the year | 2026-10-13 |
 
 ## Toda vez que o jogo mudou por baixo
 

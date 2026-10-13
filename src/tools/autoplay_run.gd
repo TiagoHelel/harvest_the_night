@@ -21,7 +21,7 @@ extends SceneTree
 ##
 ##     RUN policy=<p> seed=<s> days=<n> nights=<played> losses=<a,b,c,d>
 ##         repeats=<a,b,c,d> money=<a,b,c,d> essence=<a,b,c,d> capped=<0|1>
-##         over=<0|1> walked=<tiles> ms=<wall time>
+##         over=<0|1> walked=<tiles> lost=<date,date,...|-> ms=<wall time>
 ##
 ## one line, the four numbers a season each: the nights lost, the boss nights
 ## the boss lived through (each fought again, unless it was the one the cap
@@ -75,6 +75,9 @@ func _init() -> void:
 	# named seeds, or the first ones a year run takes - `RUN` lines and each
 	# run's wall time, and nothing else to parse.
 	if _year:
+		# **The data is read** (task 0277): every table is loaded by now, so a
+		# sweep waiting on this line may write the next lever's value.
+		print("PLAYING")
 		var policies_now: Array = [_only] if _only != &"" else Autoplay.names()
 		# A count given to a year is its seeds a policy: eight unless said.
 		var seeds_now: Array = _seeds
@@ -211,10 +214,18 @@ static func _run_line(out: Dictionary, ms: int) -> String:
 		repeats.append(str(int(one["repeats"])))
 		money.append(str(int(one["money"])))
 		essence.append(str(int(one["essence"])))
-	return "RUN policy=%s seed=%d days=%d nights=%d losses=%s repeats=%s money=%s essence=%s capped=%d over=%d walked=%d ms=%d" % [
+	# **The dates of the nights lost** (task 0277), each time it was lost - a
+	# boss night lost twice is there twice - for the survival per day
+	# `tools/balance.py` reads; `-` for none.
+	var lost: Array = []
+	for row in (out["nights"] as Array):
+		if not bool((row as Dictionary)["held"]):
+			lost.append(str(int((row as Dictionary)["date"])))
+	return "RUN policy=%s seed=%d days=%d nights=%d losses=%s repeats=%s money=%s essence=%s capped=%d over=%d walked=%d lost=%s ms=%d" % [
 		out["policy"], int(out["seed"]), (out["nights"] as Array).back()["date"] if not (out["nights"] as Array).is_empty() else 0,
 		(out["nights"] as Array).size(), ",".join(losses), ",".join(repeats), ",".join(money), ",".join(essence),
-		1 if bool(out["capped"]) else 0, 1 if bool(out["year_over"]) else 0, int(out["walked"]), ms]
+		1 if bool(out["capped"]) else 0, 1 if bool(out["year_over"]) else 0, int(out["walked"]),
+		",".join(lost) if not lost.is_empty() else "-", ms]
 
 
 ## **The dominant-strategy alarm.** One policy winning everything while the

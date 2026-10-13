@@ -73,13 +73,16 @@ const POLICIES: Dictionary = {
 		"note": "everything into guns",
 		"bed_minute": DEFAULT_BED_MINUTE,
 		"gather": [&"wood", &"iron", &"stone"],
-		"build": [&"gun_tower", &"auto_crossbow", &"gun_tower", &"mortar",
+		# **A kitchen third** (task 0277): food is what mends a tower, and
+		# without one the robot mended nothing all spring.
+		"build": [&"gun_tower", &"auto_crossbow", &"kitchen", &"gun_tower", &"mortar",
 			&"auto_crossbow", &"generator"],
 		"tech": [&"true sights", &"long barrels", &"oiled works",
 			&"a standing order"],
 		"day": [&"mining", &"chopping", &"crops", &"fishing"],
 		"buys": {"animals": [], "tools": [&"pickaxe", &"axe"], "house": false},
-		"night": {"repair": true, "upgrade": true, "during_waves": true,
+		# Five days before a boss night the line is deepened (task 0277).
+		"night": {"repair": true, "upgrade": true, "during_waves": true, "boss_prep_days": 5,
 			"powers": {&"flare": &"crowd", &"farm_bell": &"house",
 				&"call_dog": &"near", &"emergency_repair": &"hurt"}},
 	},
@@ -87,13 +90,14 @@ const POLICIES: Dictionary = {
 		"note": "a maze, and just enough to shoot with",
 		"bed_minute": DEFAULT_BED_MINUTE,
 		"gather": [&"stone", &"wood", &"iron"],
-		"build": [&"gun_tower", &"wall", &"wall", &"fence", &"wall",
+		"build": [&"gun_tower", &"wall", &"wall", &"kitchen", &"fence", &"wall",
 			&"auto_crossbow", &"wall", &"fence"],
 		"tech": [&"stout timbers", &"a full larder", &"spare stakes",
 			&"a second flare", &"a farm bell"],
 		"day": [&"mining", &"chopping", &"crops", &"fishing"],
 		"buys": {"animals": [], "tools": [&"pickaxe", &"axe"], "house": true},
-		"night": {"repair": true, "upgrade": true, "during_waves": true,
+		# Five days before a boss night the line is deepened (task 0277).
+		"night": {"repair": true, "upgrade": true, "during_waves": true, "boss_prep_days": 5,
 			"powers": {&"flare": &"crowd", &"farm_bell": &"house",
 				&"call_dog": &"near", &"emergency_repair": &"hurt"}},
 	},
@@ -124,14 +128,18 @@ const POLICIES: Dictionary = {
 		"note": "a bit of each, which is what a player actually does, and the average player 0277 balances against",
 		"bed_minute": DEFAULT_BED_MINUTE,
 		"gather": [&"wood", &"iron", &"stone"],
-		"build": [&"gun_tower", &"gun_tower", &"generator", &"coop",
-			&"auto_crossbow", &"wall", &"keg", &"mortar", &"wall", &"auto_crossbow"],
+		# **The generator after the crossbow** (task 0277): two guns draw less
+		# than the farm makes on its own, and a plant bought then was twenty
+		# iron not in a third tower.
+		"build": [&"gun_tower", &"gun_tower", &"kitchen", &"auto_crossbow", &"generator",
+			&"coop", &"wall", &"keg", &"mortar", &"wall", &"auto_crossbow"],
 		"tech": [&"true sights", &"stout timbers", &"long barrels",
 			&"sharp tools", &"a farm bell"],
 		"day": [&"crops", &"fishing", &"animals", &"machines", &"mining", &"chopping"],
 		"buys": {"animals": [&"chicken"], "tools": [&"can", &"pickaxe", &"rod"],
 			"house": true},
-		"night": {"repair": true, "upgrade": true, "during_waves": true,
+		# Five days before a boss night the line is deepened (task 0277).
+		"night": {"repair": true, "upgrade": true, "during_waves": true, "boss_prep_days": 5,
 			"powers": {&"flare": &"crowd", &"farm_bell": &"house",
 				&"emergency_repair": &"hurt"}},
 	},
@@ -151,6 +159,10 @@ const CASTS_A_DAY := 6
 ## How much of each machine input the bin leaves in the bag at night, so the
 ## machines have something to work the next morning.
 const KEEP_FOR_MACHINES := 9
+
+## **How many batches of any other station's input it leaves** (task 0277):
+## the kitchen's next two meals, not a larder.
+const KEEP_BATCHES := 2
 
 ## The money a policy keeps back besides what its plan is saving for before
 ## it buys an animal or a tool.
@@ -418,6 +430,15 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 			_did(state, &"mended")
 			return ticks
 
+	# **The generators fed** (task 0277): a farm that built one keeps
+	# `FUEL_PER_GENERATOR` tanks for each in the store, coal from the seams
+	# (its fallback fuel) when the press has made no oil. 0277's first losing
+	# run asked: night 7 fell with six guns at the 50% floor, three
+	# generators standing and nothing to burn in any of them.
+	var fuel_ticks := _feed_the_generators(state)
+	if fuel_ticks > 0:
+		return fuel_ticks
+
 	# **The plan is a sequence, walked with a cursor.** It used to be "build
 	# the first entry you can afford", and the `walls` policy showed what is
 	# wrong with that: its plan opens with a gun tower, but a fence is always
@@ -501,11 +522,16 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# **And from the peddler when the cliff is spent** (task 0276): the
 	# materials his stall carries, with what money the plan does not need -
 	# a player's road to a tower the seams cannot finish today.
+	# **The field's packets first** (task 0277): what the tilled, empty plots
+	# want stays in the purse - a strawberry pays its packet back five times
+	# a season, and a robot that bought iron with its seed money farmed
+	# nothing.
+	var seed_money := _seed_bill(state)
 	for res in GameData.sorted_names(short.keys()):
 		if StringName(res) == GameData.MONEY or not Shop.can_buy(state, StringName(res), 1):
 			continue
 		var bought_short := _buy_at_the_stall(state, StringName(res), int(short[res]),
-			int(saving_for.get(GameData.MONEY, 0)))
+			int(saving_for.get(GameData.MONEY, 0)) + seed_money)
 		if bought_short > 0:
 			return bought_short
 
@@ -534,6 +560,29 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 		if cost > 0:
 			return cost
 	return 0
+
+
+## How many tanks a generator wants in the store before a night: one burns
+## a quarter of a day of running, and a day's machines and a night's guns
+## keep it running most of a day.
+const FUEL_PER_GENERATOR := 4
+
+
+## **What the generators burn, fetched** (task 0277): when the oil and coal
+## in the store are under `FUEL_PER_GENERATOR` a generator, a coal seam
+## worked on foot. Returns the ticks, or zero when the store is full enough or
+## no seam is standing.
+static func _feed_the_generators(state: Dictionary) -> int:
+	var plants := Power.generators(state).size()
+	if plants <= 0:
+		return 0
+	var held := Resources.amount(state, GameData.OIL) + Resources.amount(state, GameData.COAL)
+	if held >= plants * FUEL_PER_GENERATOR:
+		return 0
+	var ticks := _go_and_get(state, GameData.COAL)
+	if ticks > 0:
+		_did(state, &"fuel")
+	return ticks
 
 
 ## **One turn of an earner** (task 0276). Returns the ticks it took, or zero
@@ -618,6 +667,19 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 				return true
 		break
 
+	# **Ready for the boss** (task 0277): the line deepened, nothing new put
+	# down while an upgrade is still to be paid for.
+	if _boss_prep(state, policy):
+		var deeper := _prep_target(state)
+		if deeper.x >= 0:
+			if Resources.missing(state, Building.upgrade_cost(state, deeper)).is_empty():
+				var was := Building.level_at(state, deeper)
+				_press(state, &"build_upgrade", deeper)
+				if Building.level_at(state, deeper) > was:
+					_did(state, &"upgraded")
+					return true
+			return false
+
 	var want := _wants(state, policy)
 	if GameData.DEFENCES.has(want) and Building.unlocked(state, want) \
 			and Resources.missing(state, Building.cost_of(want)).is_empty():
@@ -634,9 +696,16 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 	# that gates an upgrade and then never upgrading anything.
 	if not bool(night.get("upgrade", true)):
 		return false
+	# **Never with what the plan is saving for** (task 0277): an upgrade is
+	# bought out of what the plan's next thing leaves. 0277's losing run took
+	# a gun to level two with the iron of the tower after it, and met the
+	# rain of Spring 6 with two guns.
+	var saving_for: Dictionary = _the_plan_ahead(state, policy)["saving_for"]
 	for idx in _sorted_occupants(state):
 		var cell := Grid.cell(int(idx))
 		if not Building.can_upgrade(state, cell):
+			continue
+		if not Resources.missing(state, _plus(saving_for, Building.upgrade_cost(state, cell))).is_empty():
 			continue
 		var level := int(Farm.occupant(state, cell).get("level", 1))
 		_press(state, &"build_upgrade", cell)
@@ -644,6 +713,49 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 			_did(state, &"upgraded")
 			return true
 	return false
+
+
+## **Ready for the boss** (task 0277): whether a boss night is within the
+## night plan's `boss_prep_days`, counting tonight - the calendar shows it, and
+## 0234's rule says beating the boss takes days of focused saving. 0277's
+## robot met the Giant (armour 6) with ten towers at level one, six damage a
+## shot from a gun and five from a bolt, and took a hundred of its nine
+## hundred: the plan always had a next thing to save for, so it never once
+## upgraded. Deepening all spring instead left too few towers for the hordes.
+static func _boss_prep(state: Dictionary, policy: Dictionary) -> bool:
+	var days := int((policy.get("night", {}) as Dictionary).get("boss_prep_days", 0))
+	var ahead := Phases.night_ahead(state)
+	for d in days:
+		if Calendar.is_boss_night(ahead + d):
+			return true
+	return false
+
+
+## The tower the boss prep takes up a level next: the lowest-level one whose
+## next level the tree allows and whose bill the farm can gather or already
+## holds, ties in cell order; `(-1, -1)` when there is none.
+static func _prep_target(state: Dictionary) -> Vector2i:
+	var best := Vector2i(-1, -1)
+	var best_level := 1 << 30
+	for idx in _sorted_occupants(state):
+		var cell := Grid.cell(int(idx))
+		var id := StringName(Farm.occupant(state, cell).get("id", &""))
+		if not GameData.TOWER_LEVELS.has(id) or Building.anchor_of(state, cell) != cell:
+			continue
+		var level := Building.level_at(state, cell)
+		var needs := Building.upgrade_needs(state, cell)
+		var cost := Building.upgrade_cost(state, cell)
+		if level >= GameData.TOP_TOWER_LEVEL or cost.is_empty() \
+				or (needs != &"" and not Tech.owns(state, needs)):
+			continue
+		var reachable := true
+		for res in cost:
+			reachable = reachable and (_can_be_gathered(StringName(res))
+				or Resources.amount(state, StringName(res)) >= int(cost[res]))
+		if reachable and level < best_level:
+			best_level = level
+			best = cell
+	return best
 
 
 ## **A defence put down by the cursor**: build mode with it picked and a
@@ -710,7 +822,14 @@ static func _the_cursor_at_night(state: Dictionary, policy: Dictionary) -> void:
 		if bool(night.get("repair", false)):
 			_mend_one(state)
 		var want := _wants(state, policy)
-		if GameData.DEFENCES.has(want) and Building.unlocked(state, want) \
+		var deeper := _prep_target(state) if _boss_prep(state, policy) else Vector2i(-1, -1)
+		if deeper.x >= 0:
+			if Resources.missing(state, Building.upgrade_cost(state, deeper)).is_empty():
+				var was := Building.level_at(state, deeper)
+				_press(state, &"build_upgrade", deeper)
+				if Building.level_at(state, deeper) > was:
+					_did(state, &"upgraded")
+		elif GameData.DEFENCES.has(want) and Building.unlocked(state, want) \
 				and Resources.missing(state, Building.cost_of(want)).is_empty():
 			var where := _room_for(state, want)
 			if where.x >= 0 and _place_by_cursor(state, want, where):
@@ -831,6 +950,12 @@ static func _the_plan_ahead(state: Dictionary, policy: Dictionary) -> Dictionary
 		if not Resources.missing(state, with_lost).is_empty():
 			return {"want": StringName(lost), "ahead": 0, "saving_for": with_lost, "rebuild": true}
 		bill = with_lost
+	# Before a boss night, the day saves for the line's next level.
+	if _boss_prep(state, policy):
+		var deeper := _prep_target(state)
+		if deeper.x >= 0:
+			return {"want": StringName(Farm.occupant(state, deeper)["id"]), "ahead": 0,
+				"saving_for": _plus(bill, Building.upgrade_cost(state, deeper))}
 	for ahead in plan.size():
 		var want := StringName(plan[(step + ahead) % plan.size()])
 		var with_it := _plus(bill, Building.cost_of(want))
@@ -944,7 +1069,12 @@ static func _work_the_field(state: Dictionary, keep: int = 0) -> int:
 				continue
 			Farming.select_seed(state, crop)
 			if Resources.amount(state, Farming.packet(crop)) == 0:
-				var bought := _buy_at_the_stall(state, Farming.packet(crop), wants_seed, keep)
+				# **The field is an investment** (task 0277): its packets come
+				# out of what is over `SPARE_MONEY`, not out of what the plan is
+				# saving - a packet pays back several times over in a season,
+				# and 0277's losing run, saving every coin for a tower, bought
+				# one a day and left its tilled field empty all spring.
+				var bought := _buy_at_the_stall(state, Farming.packet(crop), wants_seed, 0)
 				if bought > 0:
 					return bought
 				continue
@@ -953,6 +1083,21 @@ static func _work_the_field(state: Dictionary, keep: int = 0) -> int:
 			_did(state, StringName(verb))
 			return ticks
 	return 0
+
+
+## **What the field's empty plots would cost to sow** (task 0277): a packet of
+## the season's best crop for every tilled plot with nothing in it, at the
+## peddler's price; nothing in a season nothing grows.
+static func _seed_bill(state: Dictionary) -> int:
+	var crop := _best_crop(Farming.in_season(state))
+	if crop == &"":
+		return 0
+	var empty := 0
+	for plot in _the_field(state):
+		if Farming.verb_at(state, plot) == &"plant":
+			empty += 1
+	empty = maxi(empty - Resources.amount(state, Farming.packet(crop)), 0)
+	return empty * Shop.buy_price(Farming.packet(crop))
 
 
 ## The in-season crop worth most a growing day, or `&""` for none.
@@ -1247,13 +1392,19 @@ static func _next_tool(state: Dictionary, tool: StringName) -> StringName:
 
 ## **The evening's walk to the bin** (task 0189, 0276): what the farm made
 ## today - crops, fish, animal products, artisan goods - into the shipping bin
-## through its panel, paid in the morning. A machine's input keeps
-## `KEEP_FOR_MACHINES` back; the materials the plan builds with stay home.
+## through its panel, paid in the morning. **What a station on the farm is fed
+## keeps a few batches back** (task 0277, `_inputs_on_the_farm`): the
+## kitchen's carrots and fish as much as the keg's grapes - food is what mends
+## a tower, and 0277's losing run shipped every carrot and fish it had and
+## mended nothing all spring. **A few batches, not a larder**: kept at nine of
+## every fish the kitchen takes, the same run sat on thirty fish for six days
+## with $3 in the purse and a tower to put back. The materials the plan
+## builds with stay home.
 static func _ship_the_day(state: Dictionary, policy: Dictionary, bed: int) -> void:
+	var keep := _inputs_on_the_farm(state)
 	var goods: Array = []
 	for id in _goods():
-		var keep := KEEP_FOR_MACHINES if _machine_inputs().has(id) else 0
-		if Resources.amount(state, StringName(id)) > keep:
+		if Resources.amount(state, StringName(id)) > int(keep.get(StringName(id), 0)):
 			goods.append(id)
 	if goods.is_empty():
 		return
@@ -1264,8 +1415,7 @@ static func _ship_the_day(state: Dictionary, policy: Dictionary, bed: int) -> vo
 		return
 	var shipped := false
 	for id in goods:
-		var keep := KEEP_FOR_MACHINES if _machine_inputs().has(id) else 0
-		var n := Resources.amount(state, StringName(id)) - keep
+		var n := Resources.amount(state, StringName(id)) - int(keep.get(StringName(id), 0))
 		if n > 0 and Shipping.put(state, StringName(id), n):
 			shipped = true
 	_close_any_panel(state)
@@ -1299,16 +1449,37 @@ static func _goods() -> Array:
 	return sold
 
 
-## What the machines are fed.
-static func _machine_inputs() -> Array:
-	var out: Array = []
+## **What the stations standing on the farm are fed, and how much of it the
+## bin leaves** (task 0277): `{resource: kept}`. A machine's input keeps
+## `KEEP_FOR_MACHINES` as 0276 did; any other station's, `KEEP_BATCHES` of the
+## biggest batch that takes it. A group such as the fish is kept as a whole,
+## out of its members in the order a cost takes them, from what is in the bag.
+static func _inputs_on_the_farm(state: Dictionary) -> Dictionary:
+	var stations := {}
+	for idx in _sorted_occupants(state):
+		var id := StringName(Farm.occupant(state, Grid.cell(int(idx))).get("id", &""))
+		if Crafting.is_station(id):
+			stations[id] = true
+	var wanted := {}
 	for recipe in GameData.sorted_names(GameData.RECIPES.keys()):
 		var row: Dictionary = GameData.RECIPES[recipe]
-		if not MACHINES.has(StringName(row["station"])):
+		if not stations.has(StringName(row["station"])) or GameData.is_tool_upgrade(StringName(recipe)):
 			continue
-		for res in GameData.sorted_names((row["inputs"] as Dictionary).keys()):
-			if not out.has(StringName(res)):
-				out.append(StringName(res))
+		var inputs: Dictionary = row["inputs"]
+		for res in GameData.sorted_names(inputs.keys()):
+			var keep := KEEP_FOR_MACHINES if MACHINES.has(StringName(row["station"])) \
+				else KEEP_BATCHES * int(inputs[res])
+			wanted[StringName(res)] = maxi(int(wanted.get(StringName(res), 0)), keep)
+	var out := {}
+	for res in GameData.sorted_names(wanted.keys()):
+		if not GameData.is_any_of(StringName(res)):
+			out[StringName(res)] = maxi(int(out.get(StringName(res), 0)), int(wanted[res]))
+			continue
+		var left := int(wanted[res])
+		for member in GameData.pay_order(StringName(res)):
+			var kept := mini(Resources.amount(state, StringName(member)), left)
+			out[StringName(member)] = maxi(int(out.get(StringName(member), 0)), kept)
+			left -= kept
 	return out
 
 
@@ -1608,8 +1779,7 @@ static func _room_for(state: Dictionary, id: StringName) -> Vector2i:
 	var approaches := _approaches(state)
 	var side: Vector2i = approaches[int(state.get("autoplay_side", 0))
 		% approaches.size()]
-	var best := Vector2i(-1, -1)
-	var best_score := 1 << 30
+	var ranked: Array = []
 	for cell in _near_the_house(state):
 		if not _clear(state, cell, size):
 			continue
@@ -1625,9 +1795,23 @@ static func _room_for(state: Dictionary, id: StringName) -> Vector2i:
 		# Equally close cells cover the middle of the enlarged frontage first.
 		var home := Farm.house_centre(state)
 		score += absi(cell.x - home.x) + absi(cell.y - home.y)
-		if score < best_score:
-			best_score = score
+		ranked.append([score, ranked.size(), cell])
+	# Best score first; ties in the order the box is walked, as before.
+	ranked.sort_custom(func(x: Array, y: Array) -> bool:
+		return int(x[0]) < int(y[0]) or (int(x[0]) == int(y[0]) and int(x[1]) < int(y[1])))
+	# **Never across the farmer's own road** (task 0277): the best cell that
+	# leaves every bit of ground the porch reaches today still reached, but
+	# for the thing's own footprint. 0277's losing runs put the kitchen and a
+	# second generator under the porch, beside the bin, and the farmer woke
+	# on Spring 13 in a strip of six cells: he went back to bed at 06:00, the
+	# night was lost, and the Giant's spiral began from there.
+	var porch_reach := _reach_from_porch(state, {})
+	var best := Vector2i(-1, -1)
+	for entry in ranked:
+		var cell: Vector2i = entry[2]
+		if _keeps_the_road(state, cell, size, porch_reach):
 			best = cell
+			break
 	if best.x >= 0 and guns:
 		state["autoplay_side"] = int(state.get("autoplay_side", 0)) + 1
 	return best
@@ -1681,6 +1865,50 @@ static func _house_distance(state: Dictionary, cell: Vector2i) -> int:
 	return _far(cell, closest)
 
 
+## Whether a thing of `size` at `at` leaves the porch reaching everything it
+## reached (`before`, from `_reach_from_porch`) but its own cells and
+## `ROAD_SLACK` more - a corner pocket, not a field or the bin.
+static func _keeps_the_road(state: Dictionary, at: Vector2i, size: Vector2i, before: int) -> bool:
+	var footprint := {}
+	for dy in size.y:
+		for dx in size.x:
+			footprint[Grid.index(at + Vector2i(dx, dy))] = true
+	return _reach_from_porch(state, footprint) >= before - footprint.size() - ROAD_SLACK
+
+
+## How many cells the farmer can walk to from the porch, `blocked` taken as
+## built on: the walk the morning starts with.
+static func _reach_from_porch(state: Dictionary, blocked: Dictionary) -> int:
+	var start := House.porch(state)
+	if start.x < 0:
+		return 0
+	if not Farm.walkable(state, start) or blocked.has(Grid.index(start)):
+		start = Vector2i(-1, -1)
+		for candidate in Grid.within(House.porch(state), 5):
+			if Grid.in_bounds(candidate) and Farm.walkable(state, candidate) \
+					and not blocked.has(Grid.index(candidate)):
+				start = candidate
+				break
+		if start.x < 0:
+			return 0
+	var seen := {Grid.index(start): true}
+	var queue: Array = [start]
+	var head := 0
+	while head < queue.size():
+		var at: Vector2i = queue[head]
+		head += 1
+		for step in Grid.STEPS:
+			var next: Vector2i = at + step
+			if not Grid.in_bounds(next):
+				continue
+			var idx := Grid.index(next)
+			if seen.has(idx) or blocked.has(idx) or not Farm.walkable(state, next):
+				continue
+			seen[idx] = true
+			queue.append(next)
+	return seen.size()
+
+
 static func _clear(state: Dictionary, at: Vector2i, size: Vector2i) -> bool:
 	for dy in size.y:
 		for dx in size.x:
@@ -1693,3 +1921,7 @@ static func _clear(state: Dictionary, at: Vector2i, size: Vector2i) -> bool:
 ## build. Both are the instrument's own business rather than rules, so they
 ## live here and not in `GameData`.
 const REACH := 9
+
+## The ground a placement may cut off from the porch besides its own cells
+## (task 0277): a corner pocket between two sheds, nothing a day needs.
+const ROAD_SLACK := 3
