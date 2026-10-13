@@ -2873,9 +2873,12 @@ const SPAWN_INTERVAL_TICKS := 20        # LEVER: ticks, 8-45
 ## with the north, the crow on its fifth day - eight of them, because the
 ## farm is what they eat - the digger on its eighth and the Scarecrow King's
 ## company on its fourteenth, and climbs on from summer's last made night.
-## Winter has only its Full Moons, drafts of the old seventh and tenth
-## nights to its size, sending spring's kinds round every side: 0274 writes
-## it for real.
+## **Winter** (task 0274) is the exam: the west and the south open on its
+## third and fourth days, a handful each, never on an introduction's night;
+## the frost zombie on its fifth, the wraith on its eighth - four, answerable
+## without a searchlight - and the Winter Lord's company on its fourteenth,
+## the largest night of the year. Nothing grows to pay for more bodies, so
+## it climbs in sides and kinds instead.
 ##
 ## **Every night fills the night** (task 0271, after 0148): its last send
 ## comes between the fill line (`Waves.fill_line`) and the dawn margin, so the
@@ -2931,14 +2934,20 @@ const SEASON_NIGHTS: Array = [
 		"waves": [6, 8],                    # LEVER: waves on its second and thirteenth day, 2-12
 		"gap_ticks": [20 * SECONDS, 5 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
-	# Winter: the west joins on its third day and the south on its fifth.
-	# Spring's kinds until 0274.
+	# Winter (task 0274): autumn's eight kinds, the west from its third day
+	# and the south from its fourth - key nights that send each a handful -
+	# the frost zombie from its fifth and the wraith from its eighth, as its
+	# key nights introduce them. Nothing grows, so it is paid for with what
+	# autumn put away: it climbs in sides and kinds more than in bodies,
+	# heavier ones at that, from autumn's last made night.
 	{
-		"sides": [[0, 1], [1, 1], [2, 1], [3, 3], [4, 5]], # LEVER: [side, the day of the season it joins]
-		"mix": {&"walker": [25, 1], &"runner": [10, 1], &"tank": [37, 1], &"breaker": [28, 1]},  # LEVER: kind -> [weight in hit points, the day it joins]
-		"size": [4500, 8500],            # LEVER: hit points on its second and thirteenth day, 200-12000
+		"sides": [[0, 1], [1, 1], [2, 1], [3, 3], [4, 4]], # LEVER: [side, the day of the season it joins]
+		"mix": {&"walker": [18, 1], &"runner": [6, 1], &"tank": [20, 1], &"breaker": [14, 1],
+			&"spitter": [8, 1], &"rat": [2, 1], &"crow": [1, 1], &"digger": [8, 1],
+			&"frost_zombie": [10, 5], &"wraith": [3, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"size": [8400, 9800],            # LEVER: hit points on its second and thirteenth day, 200-12000
 		"waves": [7, 9],                    # LEVER: waves on its second and thirteenth day, 2-12
-		"gap_ticks": [6 * SECONDS, 3 * SECONDS],  # LEVER: the gap on its second and thirteenth day, 2-30 seconds
+		"gap_ticks": [10 * SECONDS, 3 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
 ]
 
@@ -3260,34 +3269,168 @@ const KEY_NIGHTS: Dictionary = {
 		],
 	},
 	# ---------------------------------------------------------------- winter
-	49: {
-		"note": "winter 7, the Full Moon: a draft of spring's night 7 to this season's size, until 0274",
+	# **The exam** (task 0274): the calm night on 43, winter's first fight on
+	# 44 from autumn's three sides, the west opened by a handful on 45 and
+	# the south on 46, the frost zombie on 47, a Full Moon of what is known on
+	# 49, the wraith on 50 and the Winter Lord's company on 56. Sides 3 and 4
+	# are the west and the south, never opened on an introduction.
+	45: {
+		"note": "the west opens: a handful from a new side, and three roads as busy as autumn left them",
 		"opening_ticks": 0,
-		"gap_ticks": 9 * SECONDS,
-		# Sent closer together so it is all out before dawn (0137).
-		"interval_ticks": 17,
+		"gap_ticks": 4 * SECONDS,
+		"interval_ticks": 12,
+		"event": &"",
+		# **Learned before it is tested**, as summer's south east and
+		# autumn's north were: six walkers from the west, under a tenth of the
+		# night. Side 3 is the west.
 		"waves": [
-			[&"walker", 49, 0],
-			[&"breaker", 16, 1],
-			[&"runner", 66, 2],
-			[&"tank", 16, 3],
-			[&"walker", 58, 4],
-			[&"breaker", 16, 0],
+			[&"walker", 42, 0],
+			[&"rat", 24, 1],
+			[&"breaker", 18, 2],
+			[&"tank", 14, 0],
+			[&"walker", 6, 3],
+			[&"spitter", 12, 1],
+			[&"digger", 8, 2],
+			[&"runner", 24, 0],
+			[&"crow", 6, 1],
+			[&"tank", 14, 2],
+			[&"breaker", 18, 0],
+			[&"walker", 40, 1],
+			[&"spitter", 10, 2],
+			[&"runner", 20, 1],
+			[&"rat", 24, 0],
+		],
+	},
+	46: {
+		"note": "the south opens: the last side, a handful from it, and now the farm has no back",
+		"opening_ticks": 0,
+		"gap_ticks": 4 * SECONDS,
+		"interval_ticks": 12,
+		"event": &"",
+		# Six walkers from the south (side 4), and the west's second night
+		# sends more than its first.
+		"waves": [
+			[&"walker", 40, 0],
+			[&"rat", 24, 3],
+			[&"breaker", 18, 1],
+			[&"tank", 14, 2],
+			[&"walker", 6, 4],
+			[&"spitter", 12, 3],
+			[&"digger", 8, 0],
+			[&"runner", 24, 1],
+			[&"crow", 6, 2],
+			[&"tank", 15, 0],
+			[&"breaker", 18, 3],
+			[&"walker", 40, 2],
+			[&"spitter", 10, 1],
+			[&"runner", 22, 0],
+			[&"rat", 24, 1],
+		],
+	},
+	47: {
+		"note": "the first frost zombies: kill them under your towers and the ice takes the towers too",
+		"opening_ticks": 0,
+		"gap_ticks": 4 * SECONDS,
+		"interval_ticks": 12,
+		"event": &"",
+		# Six, in two waves from the east. Killed far from the line - a shell,
+		# a decoy that pulls them off it - they cost nothing; the lesson is
+		# where, not whether. Winter 6 is made with a tenth of its hit points
+		# in them.
+		"waves": [
+			[&"walker", 40, 0],
+			[&"rat", 24, 4],
+			[&"breaker", 18, 1],
+			[&"frost_zombie", 3, 0],
+			[&"tank", 15, 3],
+			[&"spitter", 12, 2],
+			[&"digger", 8, 4],
+			[&"runner", 24, 0],
+			[&"crow", 6, 1],
+			[&"tank", 14, 2],
+			[&"frost_zombie", 3, 0],
+			[&"breaker", 18, 3],
+			[&"walker", 40, 4],
+			[&"spitter", 10, 0],
+			[&"runner", 22, 1],
+			[&"rat", 24, 2],
+		],
+	},
+	49: {
+		"note": "winter's Full Moon: every side, and everything the year has shown you but the shades",
+		"opening_ticks": 0,
+		"gap_ticks": 4 * SECONDS,
+		"interval_ticks": 10,
+		# In crowds, as every Full Moon since summer's.
+		"waves": [
+			[&"walker", 30, 0],
+			[&"frost_zombie", 6, 1],
+			[&"breaker", 14, 2],
+			[&"rat", 24, 3],
+			[&"tank", 12, 4],
+			[&"spitter", 10, 0],
+			[&"digger", 8, 1],
+			[&"runner", 18, 2],
+			[&"crow", 6, 3],
+			[&"walker", 30, 4],
+			[&"frost_zombie", 6, 0],
+			[&"tank", 10, 1],
+			[&"breaker", 14, 3],
+		],
+	},
+	50: {
+		"note": "the first wraiths: four, and nothing aims at them unless they are lit - the porch, a flare, a fire",
+		"opening_ticks": 0,
+		"gap_ticks": 4 * SECONDS,
+		"interval_ticks": 12,
+		"event": &"",
+		# **Small, and answerable without a searchlight** - the night that
+		# teaches one: four, from the east, on the road to the porch's light,
+		# where the guns by the house see them. A mine, a shell's splash or a
+		# flame finds them anywhere (0252). Winter 9 is made with a few more.
+		"waves": [
+			[&"walker", 40, 0],
+			[&"rat", 24, 1],
+			[&"breaker", 18, 2],
+			[&"frost_zombie", 6, 3],
+			[&"tank", 15, 4],
+			[&"wraith", 2, 0],
+			[&"spitter", 12, 1],
+			[&"digger", 8, 2],
+			[&"runner", 24, 3],
+			[&"crow", 6, 4],
+			[&"tank", 15, 0],
+			[&"wraith", 2, 0],
+			[&"breaker", 18, 1],
+			[&"walker", 40, 2],
+			[&"frost_zombie", 6, 4],
+			[&"spitter", 10, 3],
+			[&"runner", 22, 0],
 		],
 	},
 	56: {
-		"note": "winter 14, the boss's company: a draft of spring's night 10 to this season's size, until 0274",
+		"note": "the Winter Lord's company: the whole year at once, and he freezes every tower he passes",
 		"opening_ticks": 0,
-		"gap_ticks": 4 * SECONDS,
-		# Sent closer together so it is all out before dawn (0137).
-		"interval_ticks": 16,
+		"gap_ticks": 3 * SECONDS,
+		"interval_ticks": 10,
+		# **The largest night of the year**, every kind on every side; his
+		# fall is the year's ending (0160).
 		"waves": [
-			[&"walker", 52, 0],
-			[&"breaker", 19, 1],
-			[&"runner", 85, 2],
-			[&"tank", 26, 3],
-			[&"walker", 66, 4],
-			[&"breaker", 26, 0],
+			[&"walker", 34, 0],
+			[&"wraith", 6, 1],
+			[&"breaker", 16, 2],
+			[&"frost_zombie", 8, 3],
+			[&"rat", 30, 4],
+			[&"tank", 14, 0],
+			[&"spitter", 12, 1],
+			[&"digger", 10, 2],
+			[&"runner", 20, 3],
+			[&"walker", 34, 4],
+			[&"wraith", 6, 0],
+			[&"frost_zombie", 8, 1],
+			[&"tank", 12, 2],
+			[&"crow", 8, 3],
+			[&"breaker", 16, 4],
 		],
 	},
 }
@@ -6185,12 +6328,12 @@ static func check_nights(templates: Array, key_nights: Dictionary) -> Array:
 	return errors
 
 
-## **The rules every night's record keeps** (tasks 0059, 0137, 0157 and
-## 0270): a key night as written, a made one, and the record a date fights.
-## One function, so a made night is held to exactly what a written one is:
-## its fields, waves of a known kind from a real side its date has open, an
-## empty list only on a calm night, and everything sent `DAWN_MARGIN_TICKS`
-## before dawn.
+## **The rules every night's record keeps** (tasks 0059, 0137, 0157, 0270
+## and 0274): a key night as written, a made one, and the record a date
+## fights. One function, so a made night is held to exactly what a written
+## one is: its fields, waves of a known kind from a real side its date has
+## open, an empty list only on a calm night, and everything sent between the
+## fill line and `DAWN_MARGIN_TICKS` before dawn.
 static func check_record(one: Dictionary, day: int) -> Array:
 	var errors: Array = []
 	if one.is_empty():
@@ -6239,6 +6382,18 @@ static func check_record(one: Dictionary, day: int) -> Array:
 	if sent + DAWN_MARGIN_TICKS > NIGHT_TICKS:
 		errors.append(("night %d takes %d ticks to send, which leaves less than "
 			+ "DAWN_MARGIN_TICKS before dawn at %d") % [day, sent, NIGHT_TICKS])
+	# **And still sending at the fill line** (task 0274, after 0148 and
+	# 0271): a night that sends anything sends its last no sooner than
+	# `Waves.fill_line()`, so it is not over a minute in and dawn has
+	# something to end. Asked of the night as its date fights it
+	# (`Waves.as_fought`): a Full Moon's record is written at an ordinary
+	# night's size. The calm night sends nothing and is not held to it, and a
+	# record already refused is not asked.
+	if not waves.is_empty() and errors.is_empty():
+		var fought := Waves.schedule_ticks(Waves.as_fought(one, day))
+		if fought < Waves.fill_line():
+			errors.append("night %d is all sent at %d ticks, before the fill line at %d"
+				% [day, fought, Waves.fill_line()])
 	return errors
 
 

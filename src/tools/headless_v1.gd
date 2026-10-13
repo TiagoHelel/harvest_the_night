@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 95
+const GROUPS := 96
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -174,6 +174,7 @@ func _run() -> void:
 	_task_0271_spring_nights()
 	_task_0272_summer_nights()
 	_task_0273_autumn_nights()
+	_task_0274_winter_nights()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -11141,6 +11142,11 @@ func _task_0256_fog_rain() -> void:
 				if one != Weather.NONE:
 					on_quiet.append([seed_value, date, one])
 				continue
+			# **A pinned night is written, not rolled** (0270): the
+			# introductions 0272-0274 keep clear say nothing about the share
+			# the roll gives a season.
+			if (GameData.KEY_NIGHTS.get(date, {}) as Dictionary).has("event"):
+				continue
 			var season := Calendar.season_id(date)
 			nights[season] = int(nights.get(season, 0)) + 1
 			if one != Weather.NONE:
@@ -11922,6 +11928,84 @@ func _task_0273_autumn_nights() -> void:
 
 	expect(_boss_days(&"scarecrow_king") == [[0, last_day], [424242, last_day]],
 		"the Scarecrow King comes on day 42 and on no other day of the year", str(_boss_days(&"scarecrow_king")))
+	_completed += 1
+
+
+## **Winter's fourteen nights** (task 0274), the exam: the calm night on 43,
+## winter's first fight on 44, the west opened by a handful on 45 and the
+## south on 46, the frost zombie on 47, a Full Moon of what is known on 49,
+## the wraith on 50 and the Winter Lord's company on 56 - and with all four
+## seasons written, a night over before the fill line is refused.
+func _task_0274_winter_nights() -> void:
+	var days := GameData.SEASON_DAYS
+	var first_day := 3 * days + 1
+	var last_day := 4 * days
+	var rows := _season_rows(first_day,
+		[&"walker", &"runner", &"tank", &"breaker", &"spitter", &"rat", &"crow", &"digger"],
+		{&"frost_zombie": first_day + 4, &"wraith": first_day + 7, &"winter_lord": last_day}, [0, 1, 2, 3, 4])
+	expect((rows["strays"] as Array).is_empty(),
+		"days 44-56 send only kinds met by that day - the year's eight, the frost zombie from 47, the wraith from 50, the Winter Lord on 56",
+		str((rows["strays"] as Array).slice(0, 3)))
+	expect((rows["firsts"] as Array).is_empty() and (rows["bland"] as Array).is_empty(),
+		"the frost zombie is first sent on 47 and the wraith on 50, different nights, the Winter Lord on 56, and the night after each sends more of it",
+		"%s %s" % [str((rows["firsts"] as Array).slice(0, 3)), str((rows["bland"] as Array).slice(0, 3))])
+	expect((rows["unfilled"] as Array).is_empty(),
+		"every winter night is still sending at the fill line and all sent before the dawn margin",
+		str((rows["unfilled"] as Array).slice(0, 3)))
+	# **Two new sides over two nights, neither an introduction's**: the west
+	# a handful on 45, the south a handful on 46, each more the night after.
+	var west := _side_learned(first_day, 3)
+	var south := _side_learned(first_day + 1, 4)
+	var cloudy := _cloudy([first_day + 2, first_day + 3, first_day + 4, first_day + 7])
+	expect(west.is_empty() and south.is_empty() and cloudy.is_empty()
+		and not [first_day + 4, first_day + 7].has(first_day + 2)
+		and not [first_day + 4, first_day + 7].has(first_day + 3),
+		"the west opens on 45 and the south on 46 with a handful each and more the night after, on no introduction's night, and no night that brings something new has weather",
+		"%s %s %s" % [str(west), str(south), str(cloudy)])
+
+	# **The first wraith night is small**: answerable with the light a farm
+	# has without a searchlight, because it is the night that teaches one.
+	var first_wraiths := int(Waves.kinds_of(first_day + 7).get(&"wraith", 0))
+	expect(first_wraiths > 0 and first_wraiths <= 6,
+		"the first wraith night sends six wraiths at most", str(first_wraiths))
+
+	# **A climb in variety, not in bodies**: winter's ordinary nights send no
+	# more bodies than autumn's did, since nothing grows to pay for more.
+	var most := {}
+	for season in [2, 3]:
+		for day in range(season * days + 2, (season + 1) * days):
+			if Almanac.is_made(day):
+				most[season] = maxi(int(most.get(season, 0)), Waves.size_of(day))
+	expect(int(most.get(3, 0)) > 0 and int(most[3]) <= int(most.get(2, 0)),
+		"winter's made nights send no more bodies than autumn's", str(most))
+
+	# **The rhythm in hit points as fought**, and day 56 the year's largest.
+	var hp := _hit_points_to(last_day)
+	var largest := true
+	for day in range(1, last_day):
+		largest = largest and int(hp[day]) < int(hp[last_day])
+	expect(_season_shape(first_day, hp) and largest,
+		"days 49 and 56 are the largest of their halves, the days between grow, and day 56 is the largest night of the year",
+		str(hp))
+	expect(_boss_days(&"winter_lord") == [[0, last_day], [424242, last_day]],
+		"the Winter Lord comes on day 56 and on no other day of the year", str(_boss_days(&"winter_lord")))
+
+	# **A night over before the fill line is refused** (0148, 0271): a copy
+	# of spring 3 with its gaps gone sends everything in under a minute, and
+	# so does one of winter's Full Moon - asked as the moon fights it.
+	var hurried := GameData.KEY_NIGHTS.duplicate(true)
+	(hurried[3] as Dictionary)["gap_ticks"] = 0
+	var hurried_moon := GameData.KEY_NIGHTS.duplicate(true)
+	(hurried_moon[first_day + 6] as Dictionary)["gap_ticks"] = 0
+	(hurried_moon[first_day + 6] as Dictionary)["interval_ticks"] = 1
+	var refusal := GameData.check_nights(GameData.SEASON_NIGHTS, hurried)
+	var moon_refusal := GameData.check_nights(GameData.SEASON_NIGHTS, hurried_moon)
+	expect(str(refusal).contains("night 3 is all sent at") and str(refusal).contains("before the fill line")
+		and str(moon_refusal).contains("night %d is all sent at" % (first_day + 6))
+		and GameData.check_nights(GameData.SEASON_NIGHTS, GameData.KEY_NIGHTS).is_empty()
+		and Waves.as_fought(Waves.night_of(last_day), last_day) == Waves.night_of(last_day),
+		"check_nights refuses a night all sent before the fill line, a Full Moon asked as it is fought, and passes the year",
+		"%s %s" % [str(refusal), str(moon_refusal)])
 	_completed += 1
 
 

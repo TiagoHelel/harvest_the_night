@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-235 tasks over 10 days,  to 2026-10-12. One at a time, each one finished and checked before the next was started.
+236 tasks over 10 days,  to 2026-10-12. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -279,10 +279,11 @@ is the sort of thing this list exists to say out loud.
 | 0271 | Spring's fourteen nights | 2026-10-12 |
 | 0272 | Summer's fourteen nights | 2026-10-12 |
 | 0273 | Autumn's fourteen nights | 2026-10-12 |
+| 0274 | Winter's fourteen nights | 2026-10-12 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 122 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 123 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -406,10 +407,11 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Spring's fourteen nights** (0271) - `data` 630511402 -> 1405228034
 - **Summer's fourteen nights** (0272) - `data` 1405228034 -> 117056142
 - **Autumn's fourteen nights** (0273) - `data` 117056142 -> 2630956943
+- **Winter's fourteen nights** (0274) - `data` 2630956943 -> 1211606022
 
 ## What went wrong
 
-71 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+72 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -482,6 +484,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0271** - Found *(Spring's fourteen nights)*
 - **0272** - Found *(Summer's fourteen nights)*
 - **0273** - Found *(Autumn's fourteen nights)*
+- **0274** - Found *(Winter's fourteen nights)*
 
 ## What is not in it
 

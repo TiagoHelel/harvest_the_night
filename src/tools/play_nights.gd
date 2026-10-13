@@ -65,9 +65,11 @@ var _last := DEFAULT_DAYS
 ## **Summer's flamethrower** (task 0272): the rats' answer in summer's
 ## arsenal (0259's `implementation/MATCHUPS.md`), so a summer night is played
 ## with what summer opened. Spring's list is what it was: the season filter
-## takes it out until then.
+## takes it out until then. **Winter's searchlight** (task 0274) likewise:
+## the light a wraith needs to be aimed at, and a longer reach for the towers
+## it stands among.
 const SHOPPING: Array = [
-	&"gun_tower", &"auto_crossbow", &"flame_tower", &"wall", &"mortar",
+	&"gun_tower", &"auto_crossbow", &"flame_tower", &"searchlight", &"wall", &"mortar",
 	&"auto_crossbow", &"gun_tower", &"wall",
 ]
 
@@ -119,13 +121,13 @@ func _init() -> void:
 					int(played["locked"]), int(played["power"]),
 					int(played["bones"]), int(played["piles"]),
 					int(played["peak"]), int(played["crows"]),
-					"held, house %d/%d after %ds"
+					("held, house %d/%d after %ds"
 						% [int(played["house"]), int(played["house_full"]),
 							int(played["ticks"]) / GameData.TICK_HZ]
 						if bool(played["held"])
 						else "FELL after %ds with %d still coming"
 							% [int(played["ticks"]) / GameData.TICK_HZ,
-								int(played["left"])]])
+								int(played["left"])]) + str(played["boss"])])
 		if fell.is_empty():
 			print("  all %d held" % (_last - _first + 1))
 		else:
@@ -232,7 +234,8 @@ func _play(night: int, budget: int) -> Dictionary:
 	# money shares come off the ledger (task 0234); the purse below decides.
 	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
 		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000,
-		GameData.INCENDIARY: 9000, GameData.FOOD: 9000, GameData.MONEY: 9000})
+		GameData.INCENDIARY: 9000, GameData.COPPER: 9000, GameData.FOOD: 9000,
+		GameData.MONEY: 9000})
 	var shopping := _shopping(state)
 
 	# **Power by day, towers by night** (task 0132): a generator goes up by day
@@ -334,6 +337,10 @@ func _play(night: int, budget: int) -> Dictionary:
 		"piles": Loot.cells_with(state, GameData.BONES).size(),
 		"peak": peak,
 		"crows": crows,
+		# **A boss night held is not a boss night won** (task 0274): a boss
+		# still up at dawn comes back the next night (0153).
+		"boss": "" if not Calendar.is_boss_night(night)
+			else (", the boss down" if Waves.boss_fell(state) else ", the boss not down"),
 	}
 
 

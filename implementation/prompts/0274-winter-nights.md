@@ -1,7 +1,7 @@
 # 0274 - Winter's fourteen nights
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0270, 0251, 0252, 0255, 0259, 0273
 - **Likely files:** src/core/game_data.gd (`KEY_NIGHTS`, winter's `SEASON_NIGHTS`), src/tools/headless_v1.gd
 

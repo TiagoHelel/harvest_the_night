@@ -29037,3 +29037,349 @@ src/tools/headless_v1.gd, src/tools/headless_check.gd,
 tools/determinism_data_hash.txt,
 implementation/prompts/0273-autumn-nights.md,
 implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
+
+## 0274 - Winter's fourteen nights - done 2026-10-12
+
+What changed: winter is the exam, and the year's nights are all written:
+- **The rhythm**: the calm night on 43, and winter's first fight on 44
+  from autumn's three sides. The west opens on 45 with a handful and the
+  south on 46, the frost zombie comes on 47 and the Full Moon on 49 sends
+  what is known. The wraith comes on 50 and the Winter Lord's company on
+  56, the largest night of the year.
+- **Six key nights**: 45, 46, 47, 49, 50 and 56. The template makes the
+  other seven days, with the frost zombie joining on its fifth day and the
+  wraith on its eighth.
+- **A climb in variety, not in bodies**: nothing grows in winter, so its
+  nights grow in sides and kinds. The made nights send 334-375 bodies,
+  never more than autumn's 396, while their hit points climb 17% (autumn's
+  climbed 64%) in heavier kinds.
+- **The fill line is a rule**: `GameData.check_record` refuses a night all
+  sent before `Waves.fill_line()`, asked of the night as its date fights it
+  (`Waves.as_fought`, new). `validate()`, `check_nights` and
+  `nights.py --check` hold every date of the year to it.
+- **`tools/play_nights.py`** buys winter's searchlight and says on a boss
+  night whether the boss went down.
+
+DATA moved, on purpose. SIM did not: the determinism scenario fights day 1,
+and `night_of` resolves a date as it did.
+
+### Winter
+
+**The template** (`SEASON_NIGHTS[3]`):
+
+| Lever | Was (0270's draft) | Now |
+|---|---|---|
+| mix | walker 25, runner 10, tank 37, breaker 28, all from its first day | walker 18, runner 6, tank 20, breaker 14, spitter 8, rat 2, crow 1, digger 8 from its first day; frost zombie 10 from its 5th, wraith 3 from its 8th |
+| size | 4500-8500 hp | 8400-9800 hp |
+| waves | 7-9 | 7-9 |
+| gap | 6-3 s | 10-3 s, the least gap (0271) |
+| sides | the west from its 3rd day, the south from its 5th | the west from its 3rd, the south from its 4th, both key nights |
+
+**The key nights** (`KEY_NIGHTS`; sides 3 and 4 are the west and the
+south). Every one sends its waves out at 12 ticks, 10 on the moons:
+
+| Day | Bodies as written | Gap | What it is |
+|---|---|---|---|
+| 45 | 280, six of them walkers from the west | 4 s | the west opens |
+| 46 | 281, six of them walkers from the south, 54 from the west | 4 s | the south opens, the last side |
+| 47 | 281, six frost zombies in two waves from the east | 4 s | the frost zombie met |
+| 49 | 188, frost zombies on two sides | 4 s | the Full Moon of what is known, 282 as fought |
+| 50 | 268, four wraiths in two waves from the east | 4 s | the wraith met, small |
+| 56 | 234, twelve wraiths and sixteen frost zombies | 3 s | the Full Moon with the Winter Lord, 352 as fought |
+
+**The night each side first opens**: the east on 1, the south east on 17,
+the north on 31, the west on 45 and the south on 46. None opens on a night
+that introduces a kind. The night after each introduction sends more of
+it:
+- 46 sends 54 from the west against 45's six;
+- 47 sends 72 from the south against 46's six;
+- 48 sends 29 frost zombies against 47's six;
+- 51 sends ten wraiths against 50's four.
+
+**The first wraith night is small**: four wraiths, from the east, on the
+road to the porch's light. The guns by the house see them there, and a
+mine, a shell's splash or a flame finds them anywhere (0252). That is the
+night that teaches the searchlight.
+
+**Day 56** sends 13701 hit points, the year's largest (day 42 sends 11628).
+His fall is the year's ending, 0160's hook, which 0160's group checks with
+the Winter Lord killed on Winter 14.
+
+### Winter's table
+
+`python tools/nights.py 43 56`:
+
+| Day | Marks | Bodies | Hit points | Worth | Sides | Weather (seed 0) | All sent by | Kinds |
+|---|---|---|---|---|---|---|---|---|
+| 43 | calm | 0 | 0 | $0 | - | - | 0 s | nothing: a calm night: the horde regroups after its boss |
+| 44 | made | 334 | 8285 | $1421 | E,SE,N | - | 164 s | 33 breaker, 13 crow, 24 digger, 54 rat, 65 runner, 29 spitter, 18 tank, 98 walker |
+| 45 | key | 280 | 8360 | $1302 | E,SE,N,W | - | 154 s | 36 breaker, 6 crow, 8 digger, 48 rat, 44 runner, 22 spitter, 28 tank, 88 walker |
+| 46 | key | 281 | 8460 | $1316 | E,SE,N,W,S | - | 154 s | 36 breaker, 6 crow, 8 digger, 48 rat, 46 runner, 22 spitter, 29 tank, 86 walker |
+| 47 | key | 281 | 8550 | $1334 | E,SE,N,W,S | - | 158 s | 36 breaker, 6 crow, 8 digger, 6 frost_zombie, 48 rat, 46 runner, 22 spitter, 29 tank, 80 walker |
+| 48 | made | 343 | 8815 | $1510 | E,SE,N,W,S | - | 164 s | 31 breaker, 12 crow, 23 digger, 29 frost_zombie, 51 rat, 61 runner, 27 spitter, 17 tank, 92 walker |
+| 49 | key FULL | 282 | 9636 | $1431 | E,SE,N,W,S | fog | 136 s | 42 breaker, 9 crow, 12 digger, 18 frost_zombie, 36 rat, 27 runner, 15 spitter, 33 tank, 90 walker |
+| 50 | key | 268 | 8904 | $1386 | E,SE,N,W,S | - | 164 s | 36 breaker, 6 crow, 8 digger, 12 frost_zombie, 24 rat, 46 runner, 22 spitter, 30 tank, 80 walker, 4 wraith |
+| 51 | made | 354 | 9160 | $1588 | E,SE,N,W,S | - | 156 s | 32 breaker, 12 crow, 23 digger, 29 frost_zombie, 51 rat, 61 runner, 27 spitter, 17 tank, 92 walker, 10 wraith |
+| 52 | made | 359 | 9222 | $1602 | E,SE,N,W,S | - | 161 s | 32 breaker, 13 crow, 23 digger, 29 frost_zombie, 52 rat, 62 runner, 27 spitter, 17 tank, 94 walker, 10 wraith |
+| 53 | made | 365 | 9356 | $1627 | E,SE,N,W,S | - | 157 s | 32 breaker, 13 crow, 24 digger, 30 frost_zombie, 53 rat, 63 runner, 28 spitter, 17 tank, 95 walker, 10 wraith |
+| 54 | made | 368 | 9431 | $1642 | E,SE,N,W,S | - | 162 s | 33 breaker, 13 crow, 24 digger, 30 frost_zombie, 53 rat, 64 runner, 28 spitter, 17 tank, 96 walker, 10 wraith |
+| 55 | made | 375 | 9670 | $1677 | E,SE,N,W,S | - | 157 s | 33 breaker, 13 crow, 24 digger, 31 frost_zombie, 54 rat, 65 runner, 29 spitter, 18 tank, 98 walker, 10 wraith |
+| 56 | key FULL BOSS | 352 | 13701 | $2062 | E,SE,N,W,S | - | 155 s | 48 breaker, 12 crow, 15 digger, 24 frost_zombie, 45 rat, 30 runner, 18 spitter, 39 tank, 102 walker, 1 winter_lord, 18 wraith |
+
+The weather on winter's fighting days, seeds 0-4: fog on 49 (seed 0), on
+44 and 49 (seed 1); a Blood Moon on 48 (seed 1) and on 55 (seed 4); seeds
+2 and 3 none. Winter has no rain (its weight is 0). The four nights that
+bring something new pin `event` off.
+
+### `python tools/play_nights.py 43 56`
+
+```text
+HARVEST THE NIGHT - days 43 to 56, scripted build, no player
+  a day of farming worth $0
+  the purse at day 43: $3263 from days 1-42
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  crows  result
+    43     0        0    3263      12       0   100%      0      0     0      0  held, house 100/100 after 0s
+    44   334     1421    3316      12       0   100%     38     22    54      7  held, house 25/100 after 174s
+    45   280     1302    3441      11       0   100%     13     11    35      0  FELL after 80s with 164 still coming
+    46   281     1316    3561      12       0   100%     11      8    42      0  FELL after 71s with 182 still coming
+    47   281     1334    3682      12       0   100%     15     13    42      4  FELL after 84s with 149 still coming
+    48   343     1510    3805      13       0   100%     24     19    65     12  FELL after 133s with 104 still coming
+    49   282     1431    3938      13       0   100%     20     15    52      2  FELL after 86s with 115 still coming
+    50   268     1386    4198      15       0   100%     14     10    38      0  FELL after 85s with 138 still coming
+    51   354     1588    4327      15       0   100%     18     15    59     12  FELL after 110s with 157 still coming
+    52   359     1602    4467      14       0   100%     18     12    52      9  FELL after 90s with 169 still coming
+    53   365     1627    4609      14       0   100%     31     21    92     13  FELL after 144s with 100 still coming
+    54   368     1642    4753      14       0   100%     41     29    66     13  held, house 40/100 after 173s
+    55   375     1677    4899      15       0   100%     35     25    80      8  FELL after 161s with 41 still coming
+    56   352     2062    5047      16       0   100%     24     20    64      0  FELL after 103s with 127 still coming, the boss not down
+  fell: [45, 46, 47, 48, 49, 50, 51, 52, 53, 55, 56]
+  a day of farming worth $150
+  the purse at day 43: $9563 from days 1-42
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  crows  result
+    43     0        0    9563      29       0   100%      0      0     0      0  held, house 100/100 after 0s
+    44   334     1421    9766      30       0   100%     40     30    54      6  held, house 100/100 after 171s
+    45   280     1302   10041      31       0   100%     34     23    29      5  held, house 100/100 after 162s
+    46   281     1316   10311      32       0   100%     34     28    44      6  held, house 100/100 after 157s
+    47   281     1334   10582      32       0   100%     34     28    38      5  held, house 55/100 after 161s
+    48   343     1510   10855      33       0   100%     41     24    58     12  held, house 100/100 after 178s
+    49   282     1431   11138      34       0   100%     39     30    50      9  held, house 100/100 after 155s
+    50   268     1386   11548      34       0   100%     35     27    30      6  held, house 100/100 after 173s
+    51   354     1588   11827      36       0   100%     41     30    57     12  held, house 99/100 after 173s
+    52   359     1602   12117      36       0    66%     41     29    52      7  held, house 100/100 after 240s
+    53   365     1627   12409      38       0   100%     41     30    85     13  held, house 100/100 after 168s
+    54   368     1642   12703      40       0   100%     42     30    64     13  held, house 100/100 after 174s
+    55   375     1677   12999      40       0   100%     44     31    77      5  held, house 100/100 after 175s
+    56   352     2062   13297      40       0    72%     41     29    59     12  held, house 50/100 after 240s, the boss not down
+  all 14 held
+  a day of farming worth $300
+  the purse at day 43: $15863 from days 1-42
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  crows  result
+    43     0        0   15863      48       0   100%      0      0     0      0  held, house 100/100 after 0s
+    44   334     1421   16216      51       0   100%     40     26    54      6  held, house 100/100 after 170s
+    45   280     1302   16641      49       0   100%     34     23    29      4  held, house 100/100 after 161s
+    46   281     1316   17061      52       0   100%     34     27    36      6  held, house 100/100 after 159s
+    47   281     1334   17482      53       0   100%     34     24    35      5  held, house 100/100 after 160s
+    48   343     1510   17905      54       0   100%     41     30    52     12  held, house 100/100 after 179s
+    49   282     1431   18338      56       0   100%     39     27    46      9  held, house 100/100 after 153s
+    50   268     1386   18898      56       0   100%     35     27    24      6  held, house 100/100 after 171s
+    51   354     1588   19327      58       0   100%     41     32    52     12  held, house 100/100 after 171s
+    52   359     1602   19767      60       0    66%     40     28    52      6  held, house 100/100 after 240s
+    53   365     1627   20209      61       0   100%     41     31    78     13  held, house 100/100 after 167s
+    54   368     1642   20653      62       0   100%     42     30    62     13  held, house 100/100 after 174s
+    55   375     1677   21099      62       0   100%     44     31    75      5  held, house 100/100 after 173s
+    56   352     2062   21547      64       0    71%     49     29    58     12  held, house 100/100 after 240s, the boss down
+  all 14 held
+   day   sent   $reward   hit points sent
+    43      0         0                 0
+    44    334      1421              8285
+    45    280      1302              8360  <- dips
+    46    281      1316              8460
+    47    281      1334              8550
+    48    343      1510              8815
+    49    282      1431              9636  <- dips
+    50    268      1386              8904  <- dips
+    51    354      1588              9160
+    52    359      1602              9222
+    53    365      1627              9356
+    54    368      1642              9431
+    55    375      1677              9670
+    56    352      2062             13701  <- dips
+  dips on [45, 49, 50, 56]
+```
+
+**What falls, and why:**
+- **$0 a day**: every night but 44 (25/100) and 54 (40/100). 44 is
+  winter's first fight, against a purse every earlier night has paid
+  into. 54 held where 53 and 55, the same size, fell: the robot's farm and
+  its seed (5054) fell the other way.
+- **$150 a day**: everything holds. The house is hurt on 47 (55/100), the
+  frost zombie's first night, and on 56 (50/100), with a scratch on 51
+  (99/100). **The Winter Lord is
+  not down at dawn**: the boss night comes back, and this income does not
+  end the year on day 56.
+- **$300 a day**: everything holds at 100/100, and the Winter Lord goes
+  down.
+
+That is the exam a boss night should be. 44 and 54 hold at every income.
+Every other night 44-56 falls at $0 and holds above it.
+
+**The most bodies at once**: 92, on day 53 at $0, against the 316 of
+`perf_check.gd`'s swarm. The most crows at once are 13. The year's worst
+case is 0275's.
+
+### The new enemies and what they teach
+
+From 0259's `implementation/MATCHUPS.md` (ordinary night: house damage
+prevented per thousand of the budget). Winter's arsenal is autumn's, plus
+the searchlight and the electric fence. Every kind winter sends has its top
+answer, or one tied with it, open by its day.
+- **The frost zombie** - the mortar, the catapult and the auto crossbow,
+  204 each; the mine 115, the gun tower 89, the flamethrower 68. **It
+  teaches where to kill**: one shell puts it down far from the line, and a
+  tower that kills it close is chilled by its burst. Its top answer is the
+  walker's, the one "differs" claim the matchups mark NO.
+- **The wraith** - the mine 113, the searchlight 18; every tower in the
+  dark 0. **It teaches the searchlight**, and the mine that needs no light.
+- **The Winter Lord** - the catapult, the flamethrower and the mine, 117
+  each; the auto crossbow 110, the mortar 92. **He teaches spread**: a cast
+  freezes every tower within three tiles of him, so a build in one clump is
+  a build he stops.
+- **The searchlight and the electric fence** are still UNPROVEN in the
+  matchups' lane (34 and 49 at best, against the breaker). 0277 re-runs the
+  tool after the levers move.
+
+### The year, in one table
+
+`python tools/nights.py` after all four seasons, the curve in hit points as
+fought:
+
+```text
+    1 spring 1                                                 240  key
+    2 spring 2     #                                           380  made
+    3 spring 3     #                                           480  key
+    4 spring 4     ##                                          800  made
+    5 spring 5     ###                                        1160  key
+    6 spring 6     ###                                        1250  made
+    7 spring 7     ######                                     2070  key FULL
+    8 spring 8     ####                                       1610  key
+    9 spring 9     #####                                      1860  made
+   10 spring 10    #####                                      2050  made
+   11 spring 11    ######                                     2220  made
+   12 spring 12    #######                                    2510  made
+   13 spring 13    #######                                    2665  made
+   14 spring 14    #############                              4755  key FULL BOSS
+   15 summer 1                                                   0  calm
+   16 summer 2     #####                                      1775  made
+   17 summer 3     #####                                      1960  key
+   18 summer 4     ######                                     2280  made
+   19 summer 5     #######                                    2630  key
+   20 summer 6     ########                                   2775  made
+   21 summer 7     ##############                             4815  key FULL
+   22 summer 8     #########                                  3274  key
+   23 summer 9     ###########                                3784  made
+   24 summer 10    ###########                                4018  made
+   25 summer 11    ############                               4347  made
+   26 summer 12    #############                              4601  made
+   27 summer 13    ##############                             4960  made
+   28 summer 14    ########################                   8372  key FULL BOSS
+   29 autumn 1                                                   0  calm
+   30 autumn 2     ##############                             5061  made
+   31 autumn 3     ###############                            5452  key
+   32 autumn 4     ################                           5634  made
+   33 autumn 5     #################                          6160  key
+   34 autumn 6     ##################                         6236  made
+   35 autumn 7     #####################                      7254  key FULL
+   36 autumn 8     ####################                       6894  key
+   37 autumn 9     ####################                       7095  made
+   38 autumn 10    #####################                      7445  made
+   39 autumn 11    ######################                     7699  made
+   40 autumn 12    #######################                    8016  made
+   41 autumn 13    ########################                   8281  made
+   42 autumn 14    #################################         11628  key FULL BOSS
+   43 winter 1                                                   0  calm
+   44 winter 2     ########################                   8285  made
+   45 winter 3     ########################                   8360  key
+   46 winter 4     ########################                   8460  key
+   47 winter 5     ########################                   8550  key
+   48 winter 6     #########################                  8815  made
+   49 winter 7     ############################               9636  key FULL
+   50 winter 8     #########################                  8904  key
+   51 winter 9     ##########################                 9160  made
+   52 winter 10    ##########################                 9222  made
+   53 winter 11    ###########################                9356  made
+   54 winter 12    ###########################                9431  made
+   55 winter 13    ############################               9670  made
+   56 winter 14    ########################################  13701  key FULL BOSS
+
+  11313 enemies over 53 nights, 288046 hit points, worth $48861 - a bounty of $2443 at 5%
+  53 of the 53 are still sending at the fill line, 120s
+  first sent: walker on 1, runner on 3, tank on 5, breaker on 8, giant on 14, spitter on 19, rat on 22, harvester on 28, crow on 33, digger on 36, scarecrow_king on 42, frost_zombie on 47, wraith on 50, winter_lord on 56
+```
+
+### Decided
+
+- **The west and the south open on key nights of their own**, 45 and 46,
+  each a handful, as summer's south east and autumn's north did. The
+  template's join days (3 and 4) fall on those key nights. The frost
+  zombie waits for 47 and the wraith for 50, so no side opens on an
+  introduction's night.
+- **The frost zombie on 47, the wraith on 50.** The Full Moon on 49 sends
+  frost zombies but no wraith, and the Winter Lord's night sends both.
+- **Winter's template starts at 8400**, so its first fight (8285) is not
+  under autumn's last made night (8281). Its rats are at 2 and its crows at
+  1: nothing grows for a crow to eat, and rats are bodies the year does not
+  need more of.
+- **`Waves.as_fought(record, date)`**: the boss put in on a boss night and
+  the horde scaled on a Full Moon, which `night_of` now calls; asking it
+  again of a fought record changes nothing. `check_record` asks the fill
+  line of it, because a Full Moon's record is written at an ordinary
+  night's size: checked as written, days 14, 28, 42, 49 and 56 were "all
+  sent" at 105-120 s.
+- **`play_nights` buys the searchlight** (and is given copper, as it is
+  given every material), the wraith's answer. **And on a boss night it
+  says whether the boss went down**: a boss up at dawn comes back the next
+  night (0153), so "held" is not "won". Spring to autumn play as before;
+  the season filter takes the searchlight out until winter.
+- **headless_check's `own` test night** waits to the fill line before its
+  second walker, so the "legal night with a per-wave delay" is still legal.
+  **`NO_NIGHT_YET` is empty**: every kind in the table is sent now.
+- **The season tests** reuse 0273's helpers, and `_task_0274_winter_nights`
+  adds the refusal: copies of spring 3 and of winter's Full Moon with their
+  gaps gone are refused by `check_nights`, the moon asked as it is fought.
+
+### Found
+
+- **0256's weather-share assert counted the pinned nights.** Winter pins
+  four of its thirteen, so its fog came out 14.0% against a weight of 20.
+  A pinned night is written, not rolled. The assert now leaves them out as
+  it leaves out Spring 1 and the calm nights: winter fog 20.2%.
+- **From winter there is no ground out of every road's way.** With all five
+  sides open the breakers find `play_nights`' generators, which nothing
+  covers. Days 52 and 56 run to dawn at 66-72% power while they chew the far
+  plants. That is the breaker's own lesson, and the floor robot does not
+  learn it.
+- **The $150 player does not finish the year on day 56**, and the $300 one
+  does. Whether the year autoplayer's `balanced` policy does is 0276's and
+  0277's to measure.
+
+### Hashes
+
+- **DATA 2630956943 -> 1211606022**, on purpose: winter's template and its six
+  key nights.
+- **SIM unchanged:** 3524359536. The scenario fights day 1, and
+  `Waves.as_fought` is `night_of`'s own steps moved into a function.
+
+Verify: **PASS**, 61 of 61 in 990 s, DATA recorded 1211606022 (was 2630956943), SIM unchanged. Perf: a night tick 1179 us of 8333, a swarm's 4404, a path rebuild 10044 of 33333.
+- **Suites:** `headless_check` 19313 asserts (19151 at 0273), `headless_v1` 2752 in 96 groups, `_task_0274_winter_nights` the new one, `input_check` 1269 cases, `input_v1` 735 (113.6 s), `input_v2` 3; `nights --check` passes every date of the year for both seeds, the fill line now among its rules.
+
+Shot: `implementation/shots/0274/searchlight.png`, Night 44 (Winter 2):
+wave 1 of 9 and 304 left, the HUD reading winter's first made night as it
+is now. `electric_fence`, the same night, showed the same counts and was not
+kept.
+
+Files: src/core/game_data.gd, src/core/waves.gd, src/tools/play_nights.gd,
+src/tools/headless_v1.gd, src/tools/headless_check.gd,
+tools/determinism_data_hash.txt,
+implementation/shots/0274/searchlight.png (with its .import),
+implementation/prompts/0274-winter-nights.md,
+implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md

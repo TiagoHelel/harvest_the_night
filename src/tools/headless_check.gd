@@ -11017,9 +11017,9 @@ func _giant_walk_in(seed_value: int) -> int:
 ## 0059 - a night is a table a designer edits, not code.
 ## **The kinds no night sends yet** (task 0247): in the table and on the farm
 ## for the checks, out of the year's nights until 0271-0274 put them in it and
-## take them off this list. 0248-0252 add theirs; summer's two came off at 0272
-## and autumn's at 0273.
-const NO_NIGHT_YET: Array = [&"frost_zombie", &"wraith"]
+## take them off this list. 0248-0252 added theirs; summer's two came off at 0272,
+## autumn's at 0273 and winter's at 0274, so every kind is sent now.
+const NO_NIGHT_YET: Array = []
 
 
 func _task_0059_wave_data() -> void:
@@ -11066,7 +11066,9 @@ func _task_0059_wave_data() -> void:
 		"note": "a night with its own ideas",
 		"opening_ticks": 7,
 		"gap_ticks": 11,
-		"waves": [[&"walker", 1, 0], [&"walker", 1, 0, 99]],
+		# The second wave's own delay reaches the fill line, which every
+		# night that sends anything does since task 0274.
+		"waves": [[&"walker", 1, 0], [&"walker", 1, 0, Waves.fill_line()]],
 	}
 	expect(GameData.check_record(own, 1).is_empty(),
 		"a night with a per-wave delay is a legal night",

@@ -80,12 +80,21 @@ static func night_of(night: int, seed_value: int = 0) -> Dictionary:
 	var plain := plain_night(night, seed_value)
 	if plain.is_empty():
 		return plain
+	return as_fought(plain, night)
+
+
+## **A record as its date fights it** (task 0274): the season's boss put in
+## on a boss night, and the horde scaled on a Full Moon - what `night_of` does
+## to a date's record - so a check can hold a key night as written to what is
+## sent. A record already fought is left as it is.
+static func as_fought(plain: Dictionary, night: int) -> Dictionary:
 	var one := plain
 	if Calendar.is_boss_night(night):
-		one = _with_the_season_boss(plain, Calendar.boss_of(night))
+		if not plain.has("boss"):
+			one = _with_the_season_boss(plain, Calendar.boss_of(night))
 	elif _has_a_boss(plain):
 		one = _without_bosses(plain)
-	if Calendar.is_full_moon(night):
+	if Calendar.is_full_moon(night) and not bool(one.get("full_moon", false)):
 		one = _under_a_full_moon(one)
 	return one
 
