@@ -1,7 +1,7 @@
 # 0286 - Fog, rain and winter wind
 
 - **Phase:** 16 - Sound, collections and polish
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0186, 0256, 0257, 0285
 - **Likely files:** tools/gen_ambience.py, assets/ambience/, tools/gen_music.py, assets/music/, src/ui/ambience.gd, src/ui/music.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

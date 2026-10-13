@@ -30364,3 +30364,113 @@ Notes:
 - **The Web pack budget** is the follow-up worth a decision. A pack of
   about 210 MB gzipped is not a page anyone waits for. Music is a sliver of
   it; the FHD art is the rest.
+
+## 0286 - Fog, rain and winter wind - done 2026-10-13
+
+What changed: the bed under everything follows the weather and the season.
+The animals are heard near their homes, and an event night opens with a
+stinger. View only: neither hash moved.
+
+- **`tools/gen_ambience.py`** gains three beds and eight touches.
+  - **Beds**, each 16 s, closed with `seamless()` at `BED_PEAK`:
+    - `fog_bed`: thick, low and dull, almost no hiss;
+    - `rain_bed`: a bright hiss over the night's air, with drops scattered
+      off its own `Noise`;
+    - `winter_bed`: wind across snow and a thin whistle swelling once a
+      loop, with no birds and no crickets.
+  - **Winter's own touches**: `icicle_drip` and `snow_creak` by day,
+    `ice_crack` by night.
+  - **The animals**, at `TOUCH_PEAK` from `gen_sfx`'s primitives (moved here
+    from 0281): `cluck`, `moo`, `baa` and `oink` by day, and one sleepy
+    `murmur` for all of them at night.
+- **`tools/gen_music.py`** gains four stingers (moved here from 0284) beside
+  `sting`: `sting_fog`, `sting_rain`, `sting_blood_moon` and
+  `sting_full_moon`. Each is a few of the motif's notes in a voice and a
+  scale, at `STING_PEAK`, and each is named in 0285's `NOT_LOOPS`.
+- **`src/ui/ambience.gd`**:
+  - **`bed_for(phase, season, event)`**, still static. An event night with a
+    bed of its own (fog, rain) has it from the build step to the morning
+    report. Otherwise winter has the wind by day and night, and the rest the
+    day and night beds. The Blood Moon has no bed; it keeps the season's
+    and has a stinger.
+  - The event is `Weather.tonight(state)`, which is 0256's answer for the
+    seed and the date and the one the forecast reads. It is never drawn
+    here and never from the bed's own `RandomNumberGenerator`.
+  - Neither the date nor the season moves inside a night, so neither does
+    the bed. It changes on `Audio.play_bed`'s cue with the transition's
+    length, as before.
+  - **Touches by season**: `WINTER_DAY_TOUCHES` (no songbird, and no pond
+    lap on a frozen pond) and `WINTER_NIGHT_TOUCHES` (no cricket). No touch
+    is in both a day list and a night list.
+  - **The animals**:
+    - `animal_homes(state)` reads 0183's residents of every coop and barn
+      standing;
+    - `animal_touches(state, phase)` offers each kind's call by day where
+      its home holds it, and the murmur at night where any home holds
+      anyone;
+    - each is played at the nearest such home's door through the falloff.
+  - **A wrecked home still murmurs.** 0186 keeps it standing at 0 HP with
+    its animals in it, unfed, and hearing them is how a player remembers it
+    is waiting to be mended.
+  - **The stinger plays once as the build step opens** (the phase's edge
+    into PREPARATION), through `Audio.play` on the Music bus:
+    `stinger_for(Weather.tonight, Calendar.is_full_moon)`. The weather's
+    stinger beats the Full Moon's, and a plain night has none.
+- **Tests**:
+  - **`_task_0087_ambience` is rewritten** for the new lists:
+    - every bed, touch, call and the murmur is a file, and every file is
+      asked for;
+    - no touch is in a day list and a night list;
+    - every bed loops (`_loop_seam` at most 1.0) and peaks under 0.3;
+    - the house being hit still stands far above the ducked bed.
+  - `headless_v1` gains `_task_0286_weather_ambience` (105 groups):
+    - `bed_for` for every season, phase and event, Blood Moon included;
+    - the new beds loop and peak no higher than the old;
+    - no shared touch, and no cricket or songbird in winter;
+    - no animal call on a bare farm or from an emptied coop, and a coop
+      with hens clucks by day and murmurs at night;
+    - each stinger is in `assets/music/`, at most `STING_PEAK`, on the
+      not-loop list, and `stinger_for` chooses right.
+  - 0285's check reads `NOT_LOOPS` for the credits rather than the list's
+    exact text, which now holds the stingers.
+  - `input_v2` gains `_case_0286_weather_ambience` (7 cases): the run's
+    first foggy date's build step plays the fog bed (`Audio.bed_playing()`)
+    and the fog stinger once (`Audio.plays_of()`), and a winter morning
+    plays the winter bed.
+
+`python tools/gen_ambience.py --report`, the new files:
+
+```text
+  sound       seconds   peak    rms    seam
+  fog_bed      16.000   0.22  0.048    0.18
+  rain_bed     16.000   0.22  0.063    0.35
+  winter_bed   16.000   0.22  0.047    0.30
+  icicle_drip   0.330   0.34  0.053
+  snow_creak    0.880   0.34  0.095
+  ice_crack     0.700   0.34  0.063
+  cluck         0.520   0.34  0.060
+  moo           1.100   0.34  0.161
+  baa           0.620   0.34  0.143
+  oink          0.340   0.34  0.086
+  murmur        1.300   0.34  0.065
+```
+
+`python tools/gen_music.py --report`, the stingers:
+
+```text
+  piece            seconds   peak    rms    seam
+  sting_fog           3.20   0.50  0.137    once
+  sting_rain          1.50   0.50  0.121    once
+  sting_blood_moon    2.90   0.50  0.138    once
+  sting_full_moon     2.70   0.50  0.141    once
+```
+
+Files: tools/gen_ambience.py, tools/gen_music.py, assets/ambience/ (11 WAVs
+and their .import), assets/music/ (4 WAVs and their .import),
+src/ui/ambience.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd,
+src/tools/input_v2.gd
+Verify: PASS, 61 checks in 1,046 s; 19,578 headless / 2,795 headless_v1 (105 groups) / 1,269 + 735 + 28 input cases; ambience 22 files (5 beds, 17 touches), music 15 pieces; sim 3524359536 and data 1211606022 unchanged
+Notes:
+- **The Blood Moon has a stinger and no bed.** Its sky is the view's
+  (0257), and its air is the season's.
+- **The dog is not here**: its bark is 0283's power sound.

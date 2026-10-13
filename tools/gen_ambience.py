@@ -110,6 +110,128 @@ def night_bed():
     return bed(9102, 190.0, 700.0, 0.07, 4200.0, 0.10)
 
 
+# ------------------------------------- the weather and winter (task 0286)
+
+def fog_bed():
+    """**A foggy night**: the air thick and close - lower and duller than the
+    night, almost no hiss, a damp drip of a swell under it."""
+    return bed(9201, 140.0, 420.0, 0.05, 5200.0, 0.03)
+
+
+def rain_bed():
+    """**A rainy night**: steady rain - a bright hiss over the night's air and
+    drops scattered through it, never on a grid."""
+    loop = int(RATE * BED_SECONDS)
+    overlap = int(RATE * OVERLAP_SECONDS)
+    ms = (loop + overlap) * 1000.0 / RATE
+    hiss = sfx.highpass(sfx.lowpass(sfx.noise(9202, ms), 6000.0), 1200.0)
+    air = sfx.lowpass(sfx.noise(9203, ms), 500.0)
+    track = sfx.mix(sfx.gain(hiss, 0.55), sfx.gain(air, 0.45))
+    rng = sfx.Noise(9204)
+    drop = sfx.decay(sfx.highpass(sfx.noise(9205, 30), 2000.0), 4.0, 0.5)
+    for _ in range(int(BED_SECONDS * 30)):
+        at = int((rng.next() * 0.5 + 0.5) * (loop + overlap - len(drop)))
+        level = 0.25 + 0.25 * (rng.next() * 0.5 + 0.5)
+        for k, v in enumerate(drop):
+            track[at + k] += v * level
+    return seamless(track, loop, overlap)
+
+
+def winter_bed():
+    """**Winter**, day and night: wind across open snow, no birds and no
+    crickets in it - a slow howl through the filter and a thin whistle."""
+    wind = bed(9206, 260.0, 900.0, 0.05, 2600.0, 0.12)
+    loop = len(wind)
+    whistle = []
+    step = 2.0 * math.pi * 0.0625 / RATE      # one swell every 16 s: the loop
+    for i in range(loop):
+        swell_ = 0.5 * (1.0 - math.cos(step * i))
+        whistle.append(math.sin(2.0 * math.pi * 523.25 * i / RATE) * swell_ * 0.04)
+    return sfx.mix(wind, whistle)
+
+
+def icicle_drip():
+    """Winter's day: meltwater off an icicle, two drips."""
+    one = sfx.decay(sfx.sweep(1800.0, 1300.0, 70, 0.6), 18.0, 1.0)
+    two = sfx.at(260, sfx.decay(sfx.sweep(1650.0, 1200.0, 70, 0.6), 18.0, 1.0))
+    return sfx.mix(sfx.gain(one, 0.6), sfx.gain(two, 0.5))
+
+
+def snow_creak():
+    """Winter's day: a branch creaking under its snow, and a soft slide off."""
+    creak = sfx.decay(sfx.sweep(330.0, 290.0, 420, 1.0), 200.0, 60.0)
+    rasp = sfx.lowpass(sfx.noise(9207, 420), 1200.0)
+    slide = sfx.at(380, sfx.swell(sfx.lowpass(sfx.noise(9208, 500), 2400.0),
+                                  60.0, 320.0))
+    return sfx.mix(sfx.gain(sfx.mix(creak, sfx.gain(rasp, 0.3)), 0.5),
+                   sfx.gain(slide, 0.4))
+
+
+def ice_crack():
+    """Winter's night: the pond's ice cracking, a long way off."""
+    crack = sfx.decay(sfx.highpass(sfx.noise(9209, 120), 900.0), 20.0, 0.5)
+    boom = sfx.decay(sfx.sweep(260.0, 90.0, 700, 0.5), 260.0, 2.0)
+    zing = sfx.decay(sfx.sweep(2400.0, 800.0, 500, 0.6), 160.0, 2.0)
+    return sfx.mix(sfx.gain(crack, 0.5), sfx.gain(boom, 0.6),
+                   sfx.gain(zing, 0.15))
+
+
+# ------------------------------------------- the animals (task 0286)
+#
+# Heard at their coop's and barn's door, through the falloff, by day; and at
+# night a sleepy murmur from wherever they sleep inside.
+
+def cluck():
+    """A hen: three clucks and a rising 'bawk'."""
+    out = []
+    for n in range(3):
+        c = sfx.decay(sfx.mix(sfx.sweep(620.0, 480.0, 60, 0.8),
+                              sfx.gain(sfx.lowpass(sfx.noise(9210 + n, 60), 2200.0), 0.5)),
+                      22.0, 2.0)
+        out = sfx.mix(out, sfx.at(n * 110, c))
+    bawk = sfx.at(360, sfx.decay(sfx.sweep(520.0, 760.0, 160, 0.7), 70.0, 4.0))
+    return sfx.mix(out, sfx.gain(bawk, 0.7))
+
+
+def moo():
+    """A cow: one long low moo, falling at its end."""
+    voice = sfx.sweep(150.0, 118.0, 1100, 1.6)
+    over = sfx.gain(sfx.sweep(300.0, 236.0, 1100, 1.6), 0.35)
+    breath = sfx.gain(sfx.lowpass(sfx.noise(9214, 1100), 700.0), 0.3)
+    return sfx.swell(sfx.lowpass(sfx.mix(voice, over, breath), 1200.0), 160.0, 420.0)
+
+
+def baa():
+    """A sheep: a wavering 'baa'."""
+    n = int(RATE * 0.62)
+    out = []
+    for i in range(n):
+        t = i / RATE
+        hz = 330.0 * (1.0 + 0.05 * math.sin(2.0 * math.pi * 9.0 * t))
+        out.append(math.sin(2.0 * math.pi * hz * t) * 0.6
+                   + math.sin(4.0 * math.pi * hz * t) * 0.25)
+    breath = sfx.gain(sfx.lowpass(sfx.noise(9215, 620), 1800.0), 0.25)
+    return sfx.swell(sfx.lowpass(sfx.mix(out, breath), 2400.0), 60.0, 240.0)
+
+
+def oink():
+    """A pig: two short grunts."""
+    def grunt(seed):
+        body = sfx.mix(sfx.sweep(160.0, 120.0, 140, 0.8),
+                       sfx.gain(sfx.lowpass(sfx.noise(seed, 140), 900.0), 0.7))
+        return sfx.decay(body, 50.0, 6.0)
+    return sfx.mix(grunt(9216), sfx.at(200, grunt(9217)))
+
+
+def murmur():
+    """The animals asleep inside: a low shuffle of breathing and a settle in
+    the straw - one sound for all of them, at night."""
+    breath = sfx.swell(sfx.lowpass(sfx.noise(9218, 1300), 380.0), 400.0, 600.0)
+    straw = sfx.at(500, sfx.swell(sfx.highpass(sfx.lowpass(sfx.noise(9219, 400), 3200.0),
+                                               900.0), 80.0, 260.0))
+    return sfx.mix(sfx.gain(breath, 0.7), sfx.gain(straw, 0.25))
+
+
 # ------------------------------------------------------------- what happens
 
 def _chirp(seed, hz, ms, wobble, repeats, gap_ms):
@@ -195,6 +317,10 @@ def wind_gust():
 BEDS = [
     ("day_bed", day_bed, BED_PEAK),
     ("night_bed", night_bed, BED_PEAK),
+    # Task 0286: the weather's nights, and winter's day and night.
+    ("fog_bed", fog_bed, BED_PEAK),
+    ("rain_bed", rain_bed, BED_PEAK),
+    ("winter_bed", winter_bed, BED_PEAK),
 ]
 
 TOUCHES = [
@@ -207,6 +333,15 @@ TOUCHES = [
     ("owl", owl, TOUCH_PEAK),
     ("far_groan", far_groan, TOUCH_PEAK),
     ("wind_gust", wind_gust, TOUCH_PEAK),
+    # Task 0286: winter's own, and the animals.
+    ("icicle_drip", icicle_drip, TOUCH_PEAK),
+    ("snow_creak", snow_creak, TOUCH_PEAK),
+    ("ice_crack", ice_crack, TOUCH_PEAK),
+    ("cluck", cluck, TOUCH_PEAK),
+    ("moo", moo, TOUCH_PEAK),
+    ("baa", baa, TOUCH_PEAK),
+    ("oink", oink, TOUCH_PEAK),
+    ("murmur", murmur, TOUCH_PEAK),
 ]
 
 SOUNDS = BEDS + TOUCHES

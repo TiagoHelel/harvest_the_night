@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 104
+const GROUPS := 105
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -183,6 +183,7 @@ func _run() -> void:
 	_task_0283_guardian_sounds()
 	_task_0284_enemy_sounds()
 	_task_0285_season_music()
+	_task_0286_weather_ambience()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -12461,9 +12462,98 @@ func _task_0285_season_music() -> void:
 	var roll := _wav_measure("res://assets/%s.wav" % Music.CREDITS)
 	expect(not roll.is_empty() and absf(float(roll["seconds"]) - CreditsRoll.roll_seconds()) < 0.1
 			and Music.PLAYS_ONCE.has(Music.CREDITS) and not Music.LOOPS.has(Music.CREDITS)
-			and source.contains("NOT_LOOPS = [\"credits\", \"sting\", \"fanfare\"]"),
+			and source.get_slice("NOT_LOOPS = [", 1).get_slice("]", 0).contains("\"credits\""),
 		"the credits run as long as the roll (%.1f s) and are named as playing once" % CreditsRoll.roll_seconds(),
 		str(roll))
+	_completed += 1
+
+
+## **Task 0286: fog, rain and winter wind.** `bed_for` answers every season,
+## phase and event; the new beds loop and stay under the old beds' peak; no
+## touch is in both a day and a night list, and winter's hold no cricket and
+## no songbird; the animals are offered only where a coop or barn with them
+## stands; each stinger is a cue in `assets/music/` at most `STING_PEAK` and
+## on 0285's not-loop list.
+func _task_0286_weather_ambience() -> void:
+	var wrong: Array = []
+	for season in GameData.SEASONS:
+		for event in [&"", &"fog", &"rain", &"blood_moon"]:
+			for phase in [Phases.DAY, Phases.PREPARATION, Phases.NIGHT, Phases.RESULT]:
+				var want := Ambience.DAY_BED if phase == Phases.DAY else Ambience.NIGHT_BED
+				if season == &"winter":
+					want = Ambience.WINTER_BED
+				if phase != Phases.DAY and event == &"fog":
+					want = Ambience.FOG_BED
+				if phase != Phases.DAY and event == &"rain":
+					want = Ambience.RAIN_BED
+				var got := Ambience.bed_for(phase, season, event)
+				if got != want:
+					wrong.append("%s %s %s: %s" % [season, event, Phases.name_of(phase), got])
+	expect(wrong.is_empty(),
+		"the day and night beds, winter's wind by day and night, and fog and rain from an event night's build step to its report",
+		str(wrong))
+
+	var old_peak := float(_wav_measure("res://assets/%s.wav" % Ambience.DAY_BED).get("peak", 0.0))
+	var beds: Array = []
+	for id in [Ambience.FOG_BED, Ambience.RAIN_BED, Ambience.WINTER_BED]:
+		var seam := _seam_of("res://assets/%s.wav" % id)
+		var one := _wav_measure("res://assets/%s.wav" % id)
+		if seam.is_empty() or float(seam["ratio"]) > 1.0 or one.is_empty() \
+				or float(one["peak"]) > old_peak + 0.001:
+			beds.append("%s %s %s" % [id, str(seam), str(one)])
+	expect(beds.is_empty() and old_peak > 0.0,
+		"the fog, rain and winter beds loop and peak no higher than the old beds (%.2f)" % old_peak,
+		str(beds))
+
+	var day_lists: Array = Ambience.DAY_TOUCHES + Ambience.WINTER_DAY_TOUCHES + Ambience.ANIMAL_CALLS.values()
+	var night_lists: Array = Ambience.NIGHT_TOUCHES + Ambience.WINTER_NIGHT_TOUCHES + [Ambience.MURMUR]
+	var both: Array = []
+	for id in day_lists:
+		if night_lists.has(id):
+			both.append(id)
+	var summery: Array = []
+	for id in Ambience.WINTER_DAY_TOUCHES + Ambience.WINTER_NIGHT_TOUCHES:
+		if String(id).contains("cricket") or String(id).contains("bird"):
+			summery.append(id)
+	expect(both.is_empty() and summery.is_empty()
+			and Ambience.touches_for(Phases.DAY, &"winter") == Ambience.WINTER_DAY_TOUCHES
+			and Ambience.touches_for(Phases.NIGHT, &"winter") == Ambience.WINTER_NIGHT_TOUCHES,
+		"no touch is in a day list and a night list, and winter's hold no cricket and no songbird",
+		"%s / %s" % [str(both), str(summery)])
+
+	# The animals: none without a home with them in it; the hens' cluck by
+	# day and the murmur at night where a coop with hens stands.
+	var bare := State.create(28600)
+	var coop_farm := _mid_summer_farm()
+	var emptied := _mid_summer_farm()
+	for idx in (emptied["housed"] as Dictionary):
+		((emptied["housed"][idx] as Dictionary).get("animals", []) as Array).clear()
+	var empty_coop := Ambience.animal_touches(emptied, Phases.DAY)
+	var placed := not Farm.cells_with(coop_farm, &"coop").is_empty()
+	expect(placed and Ambience.animal_touches(bare, Phases.DAY).is_empty()
+			and empty_coop.is_empty()
+			and Ambience.animal_touches(coop_farm, Phases.DAY) == [Ambience.ANIMAL_CALLS[&"chicken"]]
+			and Ambience.animal_touches(coop_farm, Phases.NIGHT) == [Ambience.MURMUR],
+		"no call where no home has animals; a coop with a hen clucks by day and murmurs at night",
+		"%s, %s, %s" % [str(empty_coop), str(Ambience.animal_touches(coop_farm, Phases.DAY)),
+			str(Ambience.animal_touches(coop_farm, Phases.NIGHT))])
+
+	var music := FileAccess.get_file_as_string("res://tools/gen_music.py")
+	var sting_peak := _py_number(music, "STING_PEAK")
+	var cues: Array = []
+	for key in GameData.sorted_names(Ambience.STINGERS.keys()):
+		var id: StringName = Ambience.STINGERS[key]
+		var one := _wav_measure("res://assets/%s.wav" % id)
+		var file := String(id).get_file()
+		var listed := music.get_slice("NOT_LOOPS = [", 1).get_slice("]", 0).contains("\"%s\"" % file)
+		if not String(id).begins_with("music/") or one.is_empty() \
+				or float(one["peak"]) > sting_peak + 0.001 or not listed:
+			cues.append("%s %s listed %s" % [id, str(one), listed])
+	expect(cues.is_empty() and Ambience.stinger_for(&"fog", true) == Ambience.STINGERS[&"fog"]
+			and Ambience.stinger_for(&"", true) == Ambience.STINGERS[&"full_moon"]
+			and Ambience.stinger_for(&"", false) == &"",
+		"each stinger is a cue in assets/music at most STING_PEAK on the not-loop list; the weather's beats the Full Moon's, and a plain night has none",
+		str(cues))
 	_completed += 1
 
 

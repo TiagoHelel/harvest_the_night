@@ -21,7 +21,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 6
+const V2_CASES := 7
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -44,6 +44,7 @@ func _run() -> void:
 	await _case_0283_guardian_sounds()
 	await _case_0284_boss_voices()
 	await _case_0285_season_music()
+	await _case_0286_weather_ambience()
 	_finish()
 
 
@@ -516,6 +517,56 @@ func _case_0285_season_music() -> void:
 			and audio.music_playing() == Music.BOSS,
 		"and the Harvester's build step the boss track",
 		"'%s'" % audio.music_playing())
+
+	driver.running = true
+	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0286 - the bed follows the weather and the season in a real run: a foggy
+## night's build step plays the fog bed and the fog stinger once, and a
+## winter morning the winter bed.
+func _case_0286_weather_ambience() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	if driver == null or audio == null:
+		expect(audio != null, "the Audio autoload is up for the bed")
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.running = false
+	await frames(2)
+
+	var dates := _weathered_dates(int(state["seed"]))
+	expect(dates.has(Weather.FOG), "this run has a foggy night", str(dates))
+	if dates.has(Weather.FOG):
+		state["day"] = int(dates[Weather.FOG])
+		state["nights_won"] = int(dates[Weather.FOG]) - 1
+		state["day_tick"] = Phases.tick_at_minute(12 * 60)
+		await frames(3)
+		audio.forget_counts()
+		NightRoad.to_build(state)
+		await frames(4)
+		expect(audio.bed_playing() == Ambience.FOG_BED
+				and audio.plays_of(Ambience.STINGERS[Weather.FOG]) == 1,
+			"a foggy night's build step plays the fog bed and the fog stinger once",
+			"'%s', %d stingers" % [audio.bed_playing(), audio.plays_of(Ambience.STINGERS[Weather.FOG])])
+		NightRoad.to_night(state)
+		Enemies.withdraw(state)
+		Phases.enter_result(state, true)
+		Phases.begin_day(state)
+		await frames(2)
+
+	state["day"] = 3 * GameData.SEASON_DAYS + 2
+	state["nights_won"] = 3 * GameData.SEASON_DAYS + 1
+	state["day_tick"] = Phases.tick_at_minute(7 * 60)
+	await frames(4)
+	expect(int(state["phase"]) == Phases.DAY and audio.bed_playing() == Ambience.WINTER_BED,
+		"and a winter morning the winter bed",
+		"%s, '%s'" % [Calendar.season_id(Calendar.date(state)), audio.bed_playing()])
 
 	driver.running = true
 	audio.stop_all()

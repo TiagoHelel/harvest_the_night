@@ -15424,9 +15424,15 @@ func _loop_seam(path: String) -> Dictionary:
 func _task_0087_ambience() -> void:
 	# Every id the bed can ask for is a file that is there, and every file is
 	# asked for by something.
-	var wanted: Array = [AmbienceScript.DAY_BED, AmbienceScript.NIGHT_BED]
-	wanted += AmbienceScript.DAY_TOUCHES
-	wanted += AmbienceScript.NIGHT_TOUCHES
+	# Since task 0286: the weather's beds and winter's, winter's touches and
+	# the animals' calls and murmur.
+	var beds: Array = [AmbienceScript.DAY_BED, AmbienceScript.NIGHT_BED,
+		AmbienceScript.FOG_BED, AmbienceScript.RAIN_BED, AmbienceScript.WINTER_BED]
+	var day_lists: Array = AmbienceScript.DAY_TOUCHES + AmbienceScript.WINTER_DAY_TOUCHES \
+		+ AmbienceScript.ANIMAL_CALLS.values()
+	var night_lists: Array = AmbienceScript.NIGHT_TOUCHES + AmbienceScript.WINTER_NIGHT_TOUCHES \
+		+ [AmbienceScript.MURMUR]
+	var wanted: Array = beds + day_lists + night_lists
 	var heard: Dictionary = {}
 	for id in wanted:
 		expect(ResourceLoader.exists("res://assets/%s.wav" % id),
@@ -15441,22 +15447,23 @@ func _task_0087_ambience() -> void:
 			expect(heard.has(file_name.get_basename()),
 				"'%s' is a sound something asks for" % file_name)
 
-	# **A day bed and a night bed**, and nothing shared between the two lists
-	# - a cricket by daylight would be the sort of mistake nobody reports and
+	# **A day bed and a night bed** - with 0286's defaults, a plain spring -
+	# and nothing shared between a day list and a night list in any season:
+	# a cricket by daylight would be the sort of mistake nobody reports and
 	# everybody notices.
 	expect(AmbienceScript.bed_for(Phases.DAY) == AmbienceScript.DAY_BED,
 		"the day has its own bed")
 	for phase in [Phases.PREPARATION, Phases.NIGHT, Phases.RESULT]:
 		expect(AmbienceScript.bed_for(phase) == AmbienceScript.NIGHT_BED,
 			"and %s has the night's" % Phases.name_of(phase))
-	for id in AmbienceScript.DAY_TOUCHES:
-		expect(not AmbienceScript.NIGHT_TOUCHES.has(id),
+	for id in day_lists:
+		expect(not night_lists.has(id),
 			"'%s' belongs to one half of the day only" % id)
 
 	# **The beds loop.** Measured the way task 0086 measures music, because
 	# the bed runs for four minutes at a time and a seam in it would be the
 	# most repeated sound in the game.
-	for id in [AmbienceScript.DAY_BED, AmbienceScript.NIGHT_BED]:
+	for id in beds:
 		var seam := _loop_seam("res://assets/%s.wav" % id)
 		expect(not seam.is_empty(), "'%s' could be measured" % id)
 		if seam.is_empty():
@@ -15468,7 +15475,7 @@ func _task_0087_ambience() -> void:
 	# **The bed is the quietest thing in the game**, because it is the only
 	# one that never stops.
 	var loudest_bed := 0.0
-	for id in [AmbienceScript.DAY_BED, AmbienceScript.NIGHT_BED]:
+	for id in beds:
 		var one := _wav_facts("res://assets/%s.wav" % id)
 		if not one.is_empty():
 			loudest_bed = maxf(loudest_bed, float(one["peak"]))
@@ -15511,8 +15518,7 @@ func _task_0087_ambience() -> void:
 	# already asserted in task 0085; what this says is that the bed uses it -
 	# that water and birds have somewhere to come from and a breeze does not.
 	for id in AmbienceScript.AT_THE_POND + AmbienceScript.AT_THE_TREES:
-		expect(AmbienceScript.DAY_TOUCHES.has(id)
-			or AmbienceScript.NIGHT_TOUCHES.has(id),
+		expect(day_lists.has(id) or night_lists.has(id),
 			"'%s' is a touch that gets played" % id)
 	var near: float = AudioScript.loudness(Vector2.ZERO, Vector2(40.0, 0.0))
 	var away: float = AudioScript.loudness(Vector2.ZERO, Vector2(400.0, 0.0))
@@ -15528,9 +15534,8 @@ func _task_0087_ambience() -> void:
 	root.remove_child(deck)
 	deck.free()             # ducked for ever otherwise; see task 0094
 
-	print("  2 beds, %d touches, bed %.2f ducks to %.3f under an alarm of %.2f"
-		% [AmbienceScript.DAY_TOUCHES.size()
-			+ AmbienceScript.NIGHT_TOUCHES.size(),
+	print("  %d beds, %d touches, bed %.2f ducks to %.3f under an alarm of %.2f"
+		% [beds.size(), day_lists.size() + night_lists.size(),
 			loudest_bed, ducked, alarm.get("peak", 0.0)])
 
 	_completed += 1     # last line: an abandoned group never gets here

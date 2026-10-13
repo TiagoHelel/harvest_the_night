@@ -29,6 +29,30 @@ extends Node
 const DAY_BED := &"ambience/day_bed"
 const NIGHT_BED := &"ambience/night_bed"
 
+## **The weather's beds and winter's** (task 0286): fog and rain on the nights
+## that have them, and wind - no birds, no crickets - through winter's day and
+## night. An event night's bed beats the season's; winter's beats the
+## ordinary two. The event is 0256's `Weather` answer for the run's seed and
+## the date, the one the forecast reads - never drawn here.
+const FOG_BED := &"ambience/fog_bed"
+const RAIN_BED := &"ambience/rain_bed"
+const WINTER_BED := &"ambience/winter_bed"
+const EVENT_BEDS := {
+	&"fog": FOG_BED,
+	&"rain": RAIN_BED,
+}
+
+## **An event night's stinger** (task 0286), once, as its build step opens:
+## the cue in `assets/music/` (the Music bus) for the same `Weather` answer
+## the bed reads, and the Full Moon (0152's `Calendar.is_full_moon`) when the
+## night has no weather of its own.
+const STINGERS := {
+	&"fog": &"music/sting_fog",
+	&"rain": &"music/sting_rain",
+	&"blood_moon": &"music/sting_blood_moon",
+	&"full_moon": &"music/sting_full_moon",
+}
+
 ## What might happen by day, and how often one of them does.
 const DAY_TOUCHES: Array = [
 	&"ambience/bird_high",
@@ -44,6 +68,34 @@ const NIGHT_TOUCHES: Array = [
 	&"ambience/wind_gust",
 	&"ambience/far_groan",
 ]
+
+## **Winter's own** (task 0286): no songbird by day and no cricket by night.
+## The pond is ice, so its lap is out too, and cracks instead.
+const WINTER_DAY_TOUCHES: Array = [
+	&"ambience/icicle_drip",
+	&"ambience/snow_creak",
+	&"ambience/breeze",
+]
+const WINTER_NIGHT_TOUCHES: Array = [
+	&"ambience/ice_crack",
+	&"ambience/owl",
+	&"ambience/wind_gust",
+	&"ambience/far_groan",
+]
+
+## **The animals near their homes** (task 0286): by day each kind's call, at
+## the door of a coop or barn that has that kind in it (0183's residents),
+## through the falloff; at night one sleepy murmur from a home with anyone
+## inside (0186). **A wrecked home still murmurs**: 0186 keeps it standing at
+## 0 HP with its animals in it, unfed, and hearing them is how a player
+## remembers it is waiting to be mended.
+const ANIMAL_CALLS := {
+	&"chicken": &"ambience/cluck",
+	&"cow": &"ambience/moo",
+	&"sheep": &"ambience/baa",
+	&"pig": &"ambience/oink",
+}
+const MURMUR := &"ambience/murmur"
 
 ## Seconds between one touch and the next, picked afresh each time.
 ##
@@ -70,11 +122,15 @@ var _audio: Node = null
 var _next := 0.0
 var _rng := RandomNumberGenerator.new()
 
+## The phase last frame, so a build step opening is an edge (task 0286).
+var _phase := -1
+
 
 func show_state(state: Dictionary, world: WorldView) -> void:
 	_state = state
 	_world = world
 	_next = GAP_LOW
+	_phase = -1
 
 
 func _ready() -> void:
@@ -88,13 +144,23 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if _audio == null or _state.is_empty():
 		return
-	_audio.play_bed(bed_for(int(_state["phase"])), _fade_seconds())
+	var phase := int(_state["phase"])
+	var date := Calendar.date(_state)
+	var season := Calendar.season_id(date)
+	var event := Weather.tonight(_state)
+	_audio.play_bed(bed_for(phase, season, event), _fade_seconds())
+	# **The stinger, once, as the build step opens** (task 0286).
+	if _phase >= 0 and _phase != phase and phase == Phases.PREPARATION:
+		var cue := stinger_for(event, Calendar.is_full_moon(date))
+		if cue != &"":
+			_audio.play(cue, AudioScript.NOWHERE, 1)
+	_phase = phase
 
 	_next -= delta
 	if _next > 0.0:
 		return
 	_next = _rng.randf_range(GAP_LOW, GAP_HIGH)
-	var choices := touches_for(int(_state["phase"]))
+	var choices := touches_for(phase, season) + animal_touches(_state, phase)
 	if choices.is_empty():
 		return
 	var id: StringName = choices[_rng.randi_range(0, choices.size() - 1)]
@@ -112,12 +178,67 @@ func _fade_seconds() -> float:
 # -------------------------------------------------------------- the decisions
 
 ## Which bed belongs to a phase. Static so a check can ask it directly.
-static func bed_for(phase: int) -> StringName:
+##
+## Since task 0286 it takes the season (0149's id) and tonight's event (0256's
+## `Weather` answer): from the build step to the morning report an event night
+## with a bed of its own has it, and winter has the wind by day and night.
+## The event and the season do not change inside a night, so neither does
+## the bed.
+static func bed_for(phase: int, season: StringName = &"spring",
+		event: StringName = &"") -> StringName:
+	if phase != Phases.DAY and EVENT_BEDS.has(event):
+		return EVENT_BEDS[event]
+	if season == &"winter":
+		return WINTER_BED
 	return DAY_BED if phase == Phases.DAY else NIGHT_BED
 
 
-static func touches_for(phase: int) -> Array:
+static func touches_for(phase: int, season: StringName = &"spring") -> Array:
+	if season == &"winter":
+		return WINTER_DAY_TOUCHES if phase == Phases.DAY else WINTER_NIGHT_TOUCHES
 	return DAY_TOUCHES if phase == Phases.DAY else NIGHT_TOUCHES
+
+
+## **The stinger an event night opens with** (task 0286): its weather's, or the
+## Full Moon's when it has none; `&""` for a plain night.
+static func stinger_for(event: StringName, full_moon: bool) -> StringName:
+	if STINGERS.has(event):
+		return STINGERS[event]
+	return STINGERS[&"full_moon"] if full_moon else &""
+
+
+## **Which animals are home** (task 0286): kind -> the anchor cells of the
+## coops and barns standing with that kind inside, in cell order.
+static func animal_homes(state: Dictionary) -> Dictionary:
+	var out := {}
+	var housed: Dictionary = state.get("housed", {})
+	var keys: Array = housed.keys()
+	keys.sort()             # anchor cell indices, integers
+	for idx in keys:
+		var cell := Grid.cell(int(idx))
+		if not Livestock.is_home(StringName(Farm.occupant(state, cell).get("id", &""))):
+			continue
+		for one in Livestock.residents(state, cell):
+			var kind := StringName((one as Dictionary).get("id", &""))
+			if not out.has(kind):
+				out[kind] = []
+			if not (out[kind] as Array).has(cell):
+				(out[kind] as Array).append(cell)
+	return out
+
+
+## The animal touches on offer now (task 0286): each kind's call by day where
+## its home stands with it inside, the murmur at night where any home does.
+static func animal_touches(state: Dictionary, phase: int) -> Array:
+	var homes := animal_homes(state)
+	var out: Array = []
+	if phase == Phases.DAY:
+		for kind in GameData.sorted_names(homes.keys()):
+			if ANIMAL_CALLS.has(kind):
+				out.append(ANIMAL_CALLS[kind])
+	elif not homes.is_empty():
+		out.append(MURMUR)
+	return out
 
 
 # ----------------------------------------------------------------- the places
@@ -127,6 +248,17 @@ static func touches_for(phase: int) -> Array:
 ## `NOWHERE` means "around the farmer" - a breeze has no cell, and giving one
 ## a position would make the wind quieter on the far side of a field.
 func _where(id: StringName) -> Vector2:
+	# An animal at the door of the nearest home it lives in; the murmur at
+	# the nearest home with anyone inside.
+	var homes := animal_homes(_state)
+	for kind in GameData.sorted_names(homes.keys()):
+		if ANIMAL_CALLS.get(kind, &"") == id:
+			return _nearest_doors(homes[kind])
+	if id == MURMUR:
+		var all: Array = []
+		for kind in GameData.sorted_names(homes.keys()):
+			all.append_array(homes[kind])
+		return _nearest_doors(all)
 	if AT_THE_POND.has(id):
 		return _nearest(Farm.cells_of(_state, Farm.Terrain.WATER))
 	if AT_THE_TREES.has(id):
@@ -134,6 +266,14 @@ func _where(id: StringName) -> Vector2:
 	if OUT_PAST_THE_FENCE.has(id):
 		return _off_the_edge()
 	return AudioScript.NOWHERE
+
+
+## The nearest of these homes' doors, in pixels.
+func _nearest_doors(homes: Array) -> Vector2:
+	var doors: Array = []
+	for cell in homes:
+		doors.append(Livestock.door_of(_state, cell as Vector2i))
+	return _nearest(doors)
 
 
 ## The closest of a set of cells, in pixels, or nowhere when there are none.

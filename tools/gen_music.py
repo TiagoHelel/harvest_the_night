@@ -526,6 +526,44 @@ def fanfare():
     return sfx.fade_out(track, 60.0)
 
 
+def _stinger(scale, degrees, voice, octave, gap_beats, tail_ms):
+    """**An event night's stinger** (task 0286): a few of the motif's notes
+    in a voice and a scale, heard once as the build step opens."""
+    beat = beat_samples()
+    step = int(beat * gap_beats)
+    length = step * len(degrees) + int(RATE * tail_ms / 1000.0)
+    track = [0.0] * length
+    for i, degree in enumerate(degrees):
+        note = voice(hz_of(scale, degree, octave))
+        at = i * step
+        for k, v in enumerate(note):
+            if at + k < length:
+                track[at + k] += v
+    return sfx.fade_out(track, 300.0)
+
+
+def sting_fog():
+    """Fog: the motif's opening, low and slow in the night's bell, blurred."""
+    return _stinger(MINOR, MOTIF[:3], lambda hz: bell(hz, 1600, 700.0), -1, 0.75, 1400)
+
+
+def sting_rain():
+    """Rain: the motif's opening falling in quick, light plucks."""
+    return _stinger(MINOR, list(reversed(MOTIF[:4])),
+                    lambda hz: pluck(hz, 500, 140.0, 3000.0), 0, 0.25, 700)
+
+
+def sting_blood_moon():
+    """The Blood Moon: the motif's leap in harmonic minor, held and wrong."""
+    return _stinger(HARMONIC_MINOR, [0, 4, 7, 6], lambda hz: bell(hz, 1400, 600.0),
+                    -1, 0.5, 1300)
+
+
+def sting_full_moon():
+    """The Full Moon: the motif rising to the octave in the night's bell, bright."""
+    return _stinger(MINOR, [0, 2, 4, 7], lambda hz: bell(hz, 1200, 500.0), 0, 0.5, 1100)
+
+
 ## The files, and what each may peak at. **`farm` is spring's day** (task
 ## 0285), its id kept so every reader of it is.
 PIECES = [
@@ -541,13 +579,19 @@ PIECES = [
     ("sting", sting, STING_PEAK),
     # Task 0282: the legendary catch's cue, short like the sting.
     ("fanfare", fanfare, STING_PEAK),
+    # Task 0286: an event night's stinger as its build step opens.
+    ("sting_fog", sting_fog, STING_PEAK),
+    ("sting_rain", sting_rain, STING_PEAK),
+    ("sting_blood_moon", sting_blood_moon, STING_PEAK),
+    ("sting_full_moon", sting_full_moon, STING_PEAK),
 ]
 
 ## **What does not loop**, named rather than excused in bulk (task 0285): the
 ## credits play once, and the cues - the sting, the fanfare and, from 0286,
 ## the event stingers - are heard and done. Everything else loops and is held
 ## to the seam.
-NOT_LOOPS = ["credits", "sting", "fanfare"]
+NOT_LOOPS = ["credits", "sting", "fanfare", "sting_fog", "sting_rain",
+             "sting_blood_moon", "sting_full_moon"]
 
 
 def render(recipe, peak):
