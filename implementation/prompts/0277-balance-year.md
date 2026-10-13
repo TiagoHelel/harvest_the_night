@@ -1,7 +1,7 @@
 # 0277 - Balancing the year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** blocked - no boss after spring falls: armour 5-7 vs an average arsenal - owner to choose boss armour, a robot that fields each season's weapons, or the boss nights' companies
+- **Status:** blocked - the robot now fields each season's weapons and the Giant still ends every fight at 550-750 of 900 - owner to choose the bosses' numbers, their companies, or spring's iron
 - **Depends on:** 0271, 0272, 0273, 0274, 0276, 0259
 - **Likely files:** tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd
 

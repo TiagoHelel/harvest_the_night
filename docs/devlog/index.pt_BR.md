@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-248 tarefas em 11 dias, de  a 2026-10-13. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+249 tarefas em 11 dias, de  a 2026-10-13. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -291,6 +291,7 @@ voz alta.
 | 0287 | Collections and achievements | 2026-10-13 |
 | 0292 | Options for the new controls | 2026-10-13 |
 | 0293 | The first week, taught | 2026-10-13 |
+| 0277 | Balancing the year, the season robot | 2026-10-13 |
 
 ## Toda vez que o jogo mudou por baixo
 

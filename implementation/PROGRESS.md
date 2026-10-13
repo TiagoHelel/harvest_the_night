@@ -30897,3 +30897,100 @@ Notes:
   player who sleeps through Spring 5's daylight never sees the seasons'
   line. That is the rule the task asks for (finish on the state), and
   0295's tester is the one to say whether it matters.
+
+## 0277 - Balancing the year, the season robot - blocked 2026-10-13
+
+**The owner chose the second road** (2026-10-13, "vai na 2, faz o robô usar
+as armas de cada estação"): before any boss number moves, make the average
+robot play each season's weapons. **It does now, and the Giant still does
+not fall.** On every seed and policy it ends every fight with 550-750 of its
+900 hit points. Blocked again, on the next call: the bosses' numbers, the
+boss nights' companies, or - new from the data - spring's iron. No game
+value moved; neither hash did.
+
+What changed, all in the instrument (`src/tools/autoplay.gd`). Each item is a
+fault a losing run showed when asked what it was doing:
+- **It makes what it cannot dig**:
+  - gunpowder from coal and pressed oil, oil from fish, corn or
+    sunflowers, incendiary, and the catapult's pumpkins in the field;
+  - `_can_be_had`, `_make`, `_come_by`, `MAKE_DEPTH` 2, one batch on
+    order at a time, a waiting batch fed;
+  - it used to plan around every ingredient nobody could dig, so no mine,
+    no mortar round and no level three was ever reached.
+- **A plan and a tree per season** (a policy's `seasons`):
+  - `balanced` and `towers` build spring's press and mines, summer's
+    flamethrower, autumn's mortar and catapult, and winter's searchlight
+    and electric fence;
+  - they walk `oiled works`, `a standing order` and `heavy shot`,
+    `tall mounts` and `greased works`;
+  - the cursor restarts on each season's first morning.
+- **Rounds and a gunpowder reserve kept** (`_stock_up`):
+  - 12 rounds per standing defence, before the plan;
+  - 18 powder once a press stands, after the plan. Put first, the reserve
+    met Spring 9 with three guns and 300 wood.
+- **The bench makes only what the farm spends** (`BENCH_GOODS`,
+  `KITS_AHEAD`), only when the inputs are in the bag, and never out of the
+  chain the plan is making (`_chain_of`). It had made:
+  - 44 barricade kits out of the towers' wood;
+  - bait out of the pond's fish, once told to skip bone meal;
+  - corn gunpowder that no spring grows, jamming the workshop;
+  - and the kitchen cooked the fish the press was waiting on.
+- **The boss prep**:
+  - mines first, up to `armed_limit`, on the free cell of tonight's horde
+    road nearest the house (`_mine_spot`). By the house, off the road, they
+    never went off;
+  - then levels, every shooter before any wall, and only for a bill the
+    farm can come by now (`_to_be_had_now`). It had stopped for a week on a
+    wall wanting hardwood that no stump could give.
+- **A rebuild is not a new tower** (`_place_by_cursor(..., counted)`).
+  0276's counting left the lost count unchanged, so the same lost gun went
+  back up every night: 25 guns at level one by Spring 14, and never the iron
+  for a mine.
+- The night row carries **`boss_left`**, the boss's fewest hit points seen.
+
+The year after it, `python tools/autoplay.py --year 8` (32 runs, 600 s, 8
+processes):
+
+| Policy | Lost in spring | Giant repeats | Capped |
+| --- | --- | --- | --- |
+| balanced | 3.0 | 7.0 | 8/8 |
+| towers | 3.6 | 7.0 | 8/8 |
+| walls | 9.4 | 7.0 | 8/8 |
+| economy | 17.0 | 7.0 | 8/8 |
+
+- No day sits at 0% across every policy, and spring's alarm is `balanced`
+  being the best.
+- **The Giant, fight by fight:** `boss_left` on seeds 9000 and 9001 for
+  `balanced` and `towers` is 550-756 after every fight. It loses 150-350 a
+  night and starts each at 900.
+- **The binding number is iron.** Every line ran at 3-20 iron with hundreds
+  of wood and money. A mine is 5 iron and 8 powder, a level two 20 iron, a
+  level three 35 iron and 10 powder, a gun 12 iron. The robot that prepares
+  for the boss pays for it with guns: `balanced` now loses 3.0 spring
+  nights (Spring 9-14) where it lost none building guns only.
+
+All of it - the table, the Giant's hit points and the call - is in
+BALANCE.md's new section "The owner's call, played".
+
+- **Checks**: `_task_0277_year_balance` (headless_v1) gains:
+  - the boss prep takes a gun up before a wall;
+  - every season plan names real seasons, things and nodes, and
+    `balanced` fields mines, the flamethrower, the mortar, the catapult
+    and level three;
+  - gunpowder can be had once a press stands and not before, and spring's
+    corn cannot;
+  - the bench makes gunpowder and the plan's wall kits, never barricade
+    kits, bone meal or bait;
+  - a rebuilt gun leaves the lost list;
+  - the prep's mine goes on the horde's road.
+  The 0067 group's 127 asserts still pass.
+
+Files: src/tools/autoplay.gd, src/tools/headless_v1.gd, implementation/BALANCE.md
+Verify: PASS, 61 checks in 1,087 s; 19,594 headless / 2,841 headless_v1 / 1,271 + 736 + 54 input cases; sim 744605805 and data 1214651628 unchanged. A first run failed: `input_v1` hit its 120 s limit at 116-120 s on a slow machine, and the breadcrumb it left failed `input_v2`'s title cases. A standalone `input_check` swept it, as the tooling notes say
+Notes:
+- **The owner's next call**, from BALANCE.md:
+  1. the Giant at 500-600 hit points and armour 3-4, with 0058 rewritten;
+  2. smaller boss companies;
+  3. more iron in spring.
+- **Summer, autumn and winter's plans are written and unplayed**: no run
+  reaches Summer 1.

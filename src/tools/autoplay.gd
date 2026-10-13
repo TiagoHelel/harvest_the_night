@@ -68,6 +68,16 @@ const DEFAULT_BED_MINUTE := 25 * 60 + 30
 ## - `bed_minute`, its bedtime (task 0142).
 ## **`balanced` is the average player** that task 0277 balances the year
 ## against.
+##
+## **And since the owner's call on 0277** (2026-10-13: "a robot that fields
+## each season's weapons"), a policy may carry `seasons`: for a season id, the
+## `build` plan and the `tech` it walks while that season lasts, in place of
+## the year-round ones. Spring's adds the press that turns fish into the oil
+## of gunpowder, the mines and `oiled works` - level three - before the Giant;
+## summer's the flamethrower and `heavy shot`; autumn's the mortar and the
+## catapult; winter's the searchlight and the electric fence. The robot makes
+## what they fire and what they cost (`_make`), as a player at the press and
+## the workshop does.
 const POLICIES: Dictionary = {
 	&"towers": {
 		"note": "everything into guns",
@@ -79,6 +89,20 @@ const POLICIES: Dictionary = {
 			&"auto_crossbow", &"generator"],
 		"tech": [&"true sights", &"long barrels", &"oiled works",
 			&"a standing order"],
+		"seasons": {
+			&"spring": {"build": [&"gun_tower", &"auto_crossbow", &"kitchen", &"gun_tower",
+				&"press", &"auto_crossbow", &"generator", &"gun_tower", &"mine", &"mine",
+				&"mine"]},
+			&"summer": {"build": [&"flame_tower", &"gun_tower", &"flame_tower",
+				&"auto_crossbow", &"mine", &"mine"],
+				"tech": [&"heavy shot"]},
+			&"autumn": {"build": [&"mortar", &"catapult", &"mortar", &"gun_tower", &"mine",
+				&"mine"],
+				"tech": [&"tall mounts"]},
+			&"winter": {"build": [&"searchlight", &"mortar", &"electric_fence", &"gun_tower",
+				&"mine", &"mine"],
+				"tech": [&"greased works"]},
+		},
 		"day": [&"mining", &"chopping", &"crops", &"fishing"],
 		"buys": {"animals": [], "tools": [&"pickaxe", &"axe"], "house": false},
 		# Five days before a boss night the line is deepened (task 0277).
@@ -133,8 +157,25 @@ const POLICIES: Dictionary = {
 		# iron not in a third tower.
 		"build": [&"gun_tower", &"gun_tower", &"kitchen", &"auto_crossbow", &"generator",
 			&"coop", &"wall", &"keg", &"mortar", &"wall", &"auto_crossbow"],
-		"tech": [&"true sights", &"stout timbers", &"long barrels",
+		"tech": [&"true sights", &"stout timbers", &"long barrels", &"oiled works",
 			&"sharp tools", &"a farm bell"],
+		# **Each season's weapons** (task 0277, the owner's call): the press
+		# for spring's gunpowder and its mines, summer's flamethrower,
+		# autumn's mortar and catapult, winter's searchlight and fence.
+		"seasons": {
+			&"spring": {"build": [&"gun_tower", &"gun_tower", &"kitchen", &"auto_crossbow",
+				&"generator", &"press", &"coop", &"wall", &"gun_tower", &"mine", &"mine",
+				&"mine", &"auto_crossbow"]},
+			&"summer": {"build": [&"flame_tower", &"auto_crossbow", &"wall", &"flame_tower",
+				&"mine", &"mine", &"gun_tower"],
+				"tech": [&"a standing order", &"heavy shot"]},
+			&"autumn": {"build": [&"mortar", &"catapult", &"wall", &"mortar", &"mine",
+				&"mine", &"auto_crossbow"],
+				"tech": [&"tall mounts"]},
+			&"winter": {"build": [&"searchlight", &"mortar", &"electric_fence", &"mine",
+				&"mine", &"gun_tower"],
+				"tech": [&"greased works"]},
+		},
 		"day": [&"crops", &"fishing", &"animals", &"machines", &"mining", &"chopping"],
 		"buys": {"animals": [&"chicken"], "tools": [&"can", &"pickaxe", &"rod"],
 			"house": true},
@@ -171,6 +212,21 @@ const SPARE_MONEY := 20
 ## How many times a boss night may be played again before a run stops: a
 ## tool run always ends, and the report says when this was why.
 const BOSS_REPEAT_CAP := 6
+
+## **The rounds a defence that fires something keeps in the store** (task
+## 0277): a night's worth for each one standing - the mortar's gunpowder, the
+## flamethrower's incendiary, the catapult's pumpkins.
+const AMMO_PER_DEFENCE := 12
+
+## **How deep `_make` follows a recipe into the recipes of its inputs** (task
+## 0277): gunpowder from oil, and oil from fish, is two.
+const MAKE_DEPTH := 2
+
+## **The gunpowder kept in the store** (task 0277) once a press stands and
+## the season's plan or tree wants any: a mine's eight and a level three's
+## ten, made a batch at a time from the pond's oil and the seams' coal - so a
+## mine or an upgrade is not waited on for days the night it is wanted.
+const POWDER_RESERVE := 18
 
 
 static func names() -> Array:
@@ -281,6 +337,7 @@ static func _one_night(state: Dictionary, policy: Dictionary) -> Dictionary:
 	var day_ticks := int(state["day_tick"])
 	var day_earned := int(state["gained"][GameData.MONEY]) - earned_before
 	_a_build_step(state, policy)
+	state["autoplay_boss_low"] = -1
 	_a_night(state, policy)
 	var ended := _how_it_ended(state)
 	var row := {
@@ -298,6 +355,10 @@ static func _one_night(state: Dictionary, policy: Dictionary) -> Dictionary:
 		"day_ticks": day_ticks,
 		"did": (state["autoplay_did"] as Dictionary).duplicate(),
 		"repeat": false,
+		# **How low the boss got** (task 0277): its fewest hit points seen in
+		# the night, or -1 on a night with none - what a fight that did not
+		# end it still says about how close it came.
+		"boss_left": int(state.get("autoplay_boss_low", -1)),
 	}
 	if int(state["phase"]) == Phases.RESULT:
 		(state["intent"] as Dictionary)["confirm_result"] = true
@@ -326,9 +387,22 @@ static func _a_night(state: Dictionary, policy: Dictionary = {}) -> int:
 	while int(state["phase"]) == Phases.NIGHT and ticks < cap:
 		if not policy.is_empty() and ticks % NIGHT_LOOK_TICKS == 0:
 			_the_cursor_at_night(state, policy)
+			_watch_the_boss(state)
 		Sim.tick(state)
 		ticks += 1
 	return ticks
+
+
+## The boss's fewest hit points so far tonight, into `autoplay_boss_low`.
+static func _watch_the_boss(state: Dictionary) -> void:
+	for id in Entities.ids(state):
+		var one := Entities.get_one(state, int(id))
+		if one.is_empty() or not Combat.is_boss(StringName(one["kind"])):
+			continue
+		var low := int(state.get("autoplay_boss_low", -1))
+		var hp := int(one["hp"])
+		if low < 0 or hp < low:
+			state["autoplay_boss_low"] = hp
 
 
 ## How the night ended, read off the state after it.
@@ -359,6 +433,13 @@ static func _a_day(state: Dictionary, policy: Dictionary) -> void:
 	# **Out of the door first** (task 0138): every morning after the first
 	# starts with him beside his bed, and nothing is built from in there.
 	House.leave(state)
+	# **A new season, a new plan** (task 0277): its first morning starts the
+	# season's `build` list from the top.
+	var season := Calendar.season_id(Calendar.date(state))
+	if StringName(state.get("autoplay_season", &"")) != season:
+		state["autoplay_season"] = season
+		if (policy.get("seasons", {}) as Dictionary).has(season):
+			state["autoplay_step"] = 0
 	var bed := _bedtime(policy)
 	_pick_up_the_loot(state, bed)
 	# Each action advances at least one tick. Bound stalled fixtures without
@@ -401,7 +482,7 @@ const _SHIPPING_TIME := 15 * 14
 ## the stations mended, what the plan can put up by day, what the plan is
 ## short of, then the day plan's earners a turn each.
 static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
-	for id in (policy["tech"] as Array):
+	for id in _tech_of(state, policy):
 		if Tech.can_buy(state, StringName(id)):
 			Tech.buy(state, StringName(id))     # the tree's panel
 			_did(state, &"tech")
@@ -438,6 +519,13 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	var fuel_ticks := _feed_the_generators(state)
 	if fuel_ticks > 0:
 		return fuel_ticks
+
+	# **The guns fed too** (task 0277): every defence that fires something
+	# keeps `AMMO_PER_DEFENCE` rounds - made at the workshop, pressed or
+	# grown. The `POWDER_RESERVE` waits for what the plan leaves, below.
+	var ammo_ticks := _stock_up(state, _ammo_wanted(state))
+	if ammo_ticks > 0:
+		return ammo_ticks
 
 	# **The plan is a sequence, walked with a cursor.** It used to be "build
 	# the first entry you can afford", and the `walls` policy showed what is
@@ -486,6 +574,11 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# not made of what the plan is saving for - put it on. Not the machines,
 	# which are the day plan's `machines` earner.
 	var saving_for: Dictionary = ahead["saving_for"]
+	# **Nor out of what the plan is making** (task 0277): the fish, oil and
+	# coal of the gunpowder it is short of. 0277's season robot watched the
+	# kitchen cook every fish the press was waiting on.
+	var guarded := _chain_of(state, _plus(saving_for, _reserves(state, policy)))
+	var planned := _plan_of(state, policy)
 	for idx in _sorted_occupants(state):
 		var cell := Grid.cell(int(idx))
 		var on := Farm.occupant(state, cell)
@@ -493,7 +586,7 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 			continue
 		if Building.anchor_of(state, cell) != cell:
 			continue
-		var ticks := _queue_at(state, cell, saving_for, false)
+		var ticks := _queue_at(state, cell, guarded, false, planned)
 		if ticks > 0:
 			return ticks
 
@@ -505,17 +598,35 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	# the mortar's gunpowder - makes the whole entry unreachable, and a robot
 	# that mined the rest of it and stood in front of the powder threw away
 	# four days. The test is the gathering table, not the map.
+	# **Made, not planned around, when the farm can make it** (task 0277):
+	# gunpowder at the workshop from coal and oil, oil at the press from fish
+	# or corn - the mine, the level three and the mortar's rounds. Planned
+	# around only when nothing on the farm can come by it.
 	for res in GameData.sorted_names(short.keys()):
-		if not _can_be_gathered(StringName(res)):
-			# Only the entry at the cursor is planned around. One further on,
-			# behind defences already paid for, waits until the build step
-			# has put those up and it is at the front.
-			if int(ahead["ahead"]) == 0:
+		if _can_be_gathered(StringName(res)):
+			continue
+		if _can_be_had(state, StringName(res)):
+			var made := _come_by(state, StringName(res), 0)
+			if made > 0:
+				return made
+			# **Nothing more to do towards it today** - no fish left to cast
+			# for, no seam, nothing on order: planned around for now, as an
+			# ingredient nobody can dig was. Its turn comes round again.
+			if int(ahead["ahead"]) == 0 and not _on_order(state, StringName(res)):
 				_next_step(state)
 				return GameData.SECONDS
-			short = {}
-			break
+			continue
+		# Only the entry at the cursor is planned around. One further on,
+		# behind defences already paid for, waits until the build step has
+		# put those up and it is at the front.
+		if int(ahead["ahead"]) == 0:
+			_next_step(state)
+			return GameData.SECONDS
+		short = {}
+		break
 	for res in GameData.sorted_names(short.keys()):
+		if not _can_be_gathered(StringName(res)):
+			continue
 		var needed := _go_and_get(state, StringName(res))
 		if needed > 0:
 			return needed
@@ -540,6 +651,13 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	var bought := _the_shopping(state, policy, saving_for)
 	if bought > 0:
 		return bought
+
+	# **The gunpowder kept** (task 0277), out of the time the plan leaves:
+	# 0277's season robot put the reserve first and met Spring 9 with three
+	# guns and three hundred wood.
+	var stocked := _stock_up(state, _reserves(state, policy))
+	if stocked > 0:
+		return stocked
 
 	# **The day plan's earners, a turn each** (task 0276), the policy's
 	# order: the first that has something to do does it, and the next call
@@ -662,7 +780,7 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 	for lost in _lost_defences(state):
 		if Resources.missing(state, Building.cost_of(StringName(lost))).is_empty():
 			var again := _room_for(state, StringName(lost))
-			if again.x >= 0 and _place_by_cursor(state, StringName(lost), again):
+			if again.x >= 0 and _place_by_cursor(state, StringName(lost), again, false):
 				_did(state, &"rebuilt")
 				return true
 		break
@@ -670,6 +788,18 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 	# **Ready for the boss** (task 0277): the line deepened, nothing new put
 	# down while an upgrade is still to be paid for.
 	if _boss_prep(state, policy):
+		# **Its mines first** (task 0277): spring's heavy weapon, fifty-four of
+		# sixty through the Giant's six armour where a level three adds two a
+		# shot - armed up to the limit by the house, which only what the
+		# guns let through reaches.
+		if _mines_short(state, policy) > 0:
+			if Resources.missing(state, Building.cost_of(MINE)).is_empty() \
+					or Crafting.kits(state, MINE) > 0:
+				var trap := _mine_spot(state)
+				if trap.x >= 0 and _place_by_cursor(state, MINE, trap):
+					_did(state, &"mined")
+					return true
+			return false
 		var deeper := _prep_target(state)
 		if deeper.x >= 0:
 			if Resources.missing(state, Building.upgrade_cost(state, deeper)).is_empty():
@@ -715,6 +845,39 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 	return false
 
 
+## The mine, as the prep names it.
+const MINE := &"mine"
+
+
+## **Where a mine goes** (task 0277): on the horde's own road tonight, the
+## free cell of it nearest the house - the last steps, which only what the
+## guns let through reaches, the boss among it. `_room_for` put them beside
+## the house off the road, and seven Giant nights set none of them off.
+static func _mine_spot(state: Dictionary) -> Vector2i:
+	var night := Waves.night_of(Calendar.date(state), int(state["seed"]))
+	var best := Vector2i(-1, -1)
+	var best_far := 1 << 30
+	for found in Pathing.horde_routes(state, Waves.spawns_in(night)):
+		var cell: Vector2i = found
+		var far := Pathing.distance(state, cell)
+		if far < 1 or far >= best_far:
+			continue
+		if not Building.why_not(state, MINE, cell).is_empty():
+			continue
+		best_far = far
+		best = cell
+	return best
+
+
+## **How many more mines the boss prep arms** (task 0277): up to the mine's
+## `armed_limit`, when the season's plan has mines and the calendar has opened
+## them; none otherwise.
+static func _mines_short(state: Dictionary, policy: Dictionary) -> int:
+	if not _plan_of(state, policy).has(MINE) or not Building.unlocked(state, MINE):
+		return 0
+	return Traps.room_for(state, MINE)
+
+
 ## **Ready for the boss** (task 0277): whether a boss night is within the
 ## night plan's `boss_prep_days`, counting tonight - the calendar shows it, and
 ## 0234's rule says beating the boss takes days of focused saving. 0277's
@@ -732,8 +895,13 @@ static func _boss_prep(state: Dictionary, policy: Dictionary) -> bool:
 
 
 ## The tower the boss prep takes up a level next: the lowest-level one whose
-## next level the tree allows and whose bill the farm can gather or already
-## holds, ties in cell order; `(-1, -1)` when there is none.
+## next level the tree allows and whose bill the farm can come by now or
+## already holds, ties in cell order; `(-1, -1)` when there is none.
+##
+## **What shoots first** (task 0277): a wall's next level only once no gun can
+## go up. The season robot's prep stopped on a wall that wanted four hardwood
+## no stump on the farm had, put nothing else down for the rest of the Giant,
+## and met it seven times with the same line.
 static func _prep_target(state: Dictionary) -> Vector2i:
 	var best := Vector2i(-1, -1)
 	var best_level := 1 << 30
@@ -750,10 +918,12 @@ static func _prep_target(state: Dictionary) -> Vector2i:
 			continue
 		var reachable := true
 		for res in cost:
-			reachable = reachable and (_can_be_gathered(StringName(res))
+			reachable = reachable and (_to_be_had_now(state, StringName(res))
 				or Resources.amount(state, StringName(res)) >= int(cost[res]))
-		if reachable and level < best_level:
-			best_level = level
+		# Every shooter ranks ahead of anything that does not shoot.
+		var rank := level + (0 if (GameData.DEFENCES[id] as Dictionary).has("damage") else 100)
+		if reachable and rank < best_level:
+			best_level = rank
 			best = cell
 	return best
 
@@ -761,11 +931,19 @@ static func _prep_target(state: Dictionary) -> Vector2i:
 ## **A defence put down by the cursor**: build mode with it picked and a
 ## press on the cell, and what the robot has put down remembered - so what a
 ## night takes can be put back (`_lost_defences`). True when it stands.
-static func _place_by_cursor(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
+##
+## **A rebuild is not a new one** (`counted` false; task 0277): counted, it
+## left the lost count where it was, and the robot put the same lost tower
+## back every night - twenty-five guns at level one on Spring 14, and never
+## the iron for a mine.
+static func _place_by_cursor(state: Dictionary, id: StringName, cell: Vector2i,
+		counted: bool = true) -> bool:
 	Building.select(state, id)
 	_press(state, &"build_place", cell)
 	if StringName(Farm.occupant(state, cell).get("id", &"")) != id:
 		return false
+	if not counted:
+		return true
 	if not state.has("autoplay_placed"):
 		state["autoplay_placed"] = {}
 	var placed: Dictionary = state["autoplay_placed"]
@@ -942,7 +1120,7 @@ static func _is_defence(state: Dictionary, cell: Vector2i) -> bool:
 ## set aside for the build step, and the whole bill - `{want, ahead,
 ## saving_for}`, `ahead` being how many entries were set aside.
 static func _the_plan_ahead(state: Dictionary, policy: Dictionary) -> Dictionary:
-	var plan: Array = policy["build"]
+	var plan: Array = _plan_of(state, policy)
 	var step := int(state.get("autoplay_step", 0))
 	var bill := {}
 	for lost in _lost_defences(state):
@@ -950,8 +1128,11 @@ static func _the_plan_ahead(state: Dictionary, policy: Dictionary) -> Dictionary
 		if not Resources.missing(state, with_lost).is_empty():
 			return {"want": StringName(lost), "ahead": 0, "saving_for": with_lost, "rebuild": true}
 		bill = with_lost
-	# Before a boss night, the day saves for the line's next level.
+	# Before a boss night, the day saves for its mines, then the line's next
+	# level.
 	if _boss_prep(state, policy):
+		if _mines_short(state, policy) > 0:
+			return {"want": MINE, "ahead": 0, "saving_for": _plus(bill, Building.cost_of(MINE))}
 		var deeper := _prep_target(state)
 		if deeper.x >= 0:
 			return {"want": StringName(Farm.occupant(state, deeper)["id"]), "ahead": 0,
@@ -978,13 +1159,34 @@ static func _plus(a: Dictionary, b: Dictionary) -> Dictionary:
 ## The thing the plan is up to. Once the list runs out it starts again, so a
 ## policy that has finished its plan keeps growing instead of downing tools.
 static func _wants(state: Dictionary, policy: Dictionary) -> StringName:
-	var plan: Array = policy["build"]
+	var plan: Array = _plan_of(state, policy)
 	var step := int(state.get("autoplay_step", 0))
 	return StringName(plan[step % plan.size()])
 
 
 static func _next_step(state: Dictionary) -> void:
 	state["autoplay_step"] = int(state.get("autoplay_step", 0)) + 1
+
+
+## **The plan of this season** (task 0277): the policy's `seasons` entry for
+## today's season, or its year-round `build`.
+static func _plan_of(state: Dictionary, policy: Dictionary) -> Array:
+	var season := Calendar.season_id(Calendar.date(state))
+	var plans: Dictionary = policy.get("seasons", {})
+	if plans.has(season) and (plans[season] as Dictionary).has("build"):
+		return (plans[season] as Dictionary)["build"]
+	return policy["build"]
+
+
+## **The tree's nodes it walks** (task 0277): the year-round list, then this
+## season's.
+static func _tech_of(state: Dictionary, policy: Dictionary) -> Array:
+	var out: Array = (policy["tech"] as Array).duplicate()
+	var season := Calendar.season_id(Calendar.date(state))
+	var plans: Dictionary = policy.get("seasons", {})
+	if plans.has(season):
+		out.append_array((plans[season] as Dictionary).get("tech", []))
+	return out
 
 
 ## Whether this recipe eats anything the next thing on the plan needs.
@@ -1010,6 +1212,242 @@ static func _can_be_gathered(res: StringName) -> bool:
 				as Dictionary).has(res):
 			return true
 	return false
+
+
+## **Whether the farm can come by this at all** (task 0277): dug up, grown,
+## fished, or made at a station standing from inputs it can in turn come by
+## (`MAKE_DEPTH`). The first robot read "nobody can dig it" as "nobody can
+## have it", and planned around the gunpowder of every level three, mine and
+## mortar round: the season's heavy weapons were never built.
+static func _can_be_had(state: Dictionary, res: StringName, depth: int = 0) -> bool:
+	# **A crop only in its season** (task 0277): spring's robot queued corn
+	# gunpowder that no spring field grows, and the workshop sat jammed.
+	if GameData.CROPS.has(res):
+		return Farming.in_season(state).has(res)
+	if _can_be_gathered(res) or _grown_or_fished(res):
+		return true
+	if depth >= MAKE_DEPTH:
+		return false
+	for recipe in _recipes_for(state, res):
+		var inputs: Dictionary = (GameData.RECIPES[recipe] as Dictionary)["inputs"]
+		var all_had := true
+		for input in GameData.sorted_names(inputs.keys()):
+			all_had = all_had and _can_be_had(state, StringName(input), depth + 1)
+		if all_had:
+			return true
+	return false
+
+
+## **Whether the farm can come by this now** (task 0277): a node standing
+## that yields it, or a thing it can make or grow (`_can_be_had`) - not a
+## stump that is not on the farm today.
+static func _to_be_had_now(state: Dictionary, res: StringName) -> bool:
+	if res == GameData.MONEY:
+		return true
+	if _can_be_gathered(res):
+		# A node the farmer can work today: a stump the axe cannot take is
+		# not one.
+		for id in GameData.sorted_names(GameData.GATHERING.keys()):
+			if not ((GameData.GATHERING[id] as Dictionary).get("yield", {}) as Dictionary).has(res):
+				continue
+			for cell in Farm.cells_with(state, StringName(id)):
+				if Interact.verb_at(state, cell) != &"" and Interact.why_not(state, cell).is_empty():
+					return true
+		return false
+	return _can_be_had(state, res)
+
+
+## Grown in the field or landed at the pond: a fish, any fish, or a crop -
+## any crop to the table's question, a crop in season to `_can_be_had`'s.
+static func _grown_or_fished(res: StringName) -> bool:
+	return GameData.CROPS.has(res) or GameData.FISH_SPECIES.has(res) \
+		or res == GameData.FISH
+
+
+## The recipes that make `res` at a station standing on the farm, in name
+## order - never a tool upgrade.
+static func _recipes_for(state: Dictionary, res: StringName) -> Array:
+	var out: Array = []
+	for id in GameData.sorted_names(GameData.RECIPES.keys()):
+		var row: Dictionary = GameData.RECIPES[id]
+		if GameData.is_tool_upgrade(StringName(id)) \
+				or not (row["output"] as Dictionary).has(res):
+			continue
+		if Farm.cells_with(state, StringName(row["station"])).is_empty():
+			continue
+		out.append(StringName(id))
+	return out
+
+
+## **One step towards having `res`** (task 0277): a node worked, the field
+## worked, a cast, or a batch made. Returns what it cost, or zero.
+static func _come_by(state: Dictionary, res: StringName, depth: int) -> int:
+	if _can_be_gathered(res):
+		return _go_and_get(state, res)
+	if GameData.CROPS.has(res):
+		# Field work is a step towards this crop only while the field is
+		# sowing it: any other is not progress, and was counted as some.
+		return _work_the_field(state) if _field_crop(state) == res else 0
+	if GameData.FISH_SPECIES.has(res) or res == GameData.FISH:
+		return _go_fishing(state)
+	return _make(state, res, depth)
+
+
+## **A batch of `res` put on, on foot** (task 0277): at a station standing
+## that makes it, when its inputs are in the bag; otherwise one step towards
+## the first input it is short of. One batch at a time - nothing is put on
+## while one making it is already queued. Returns what it cost, or zero.
+static func _make(state: Dictionary, res: StringName, depth: int = 0) -> int:
+	# **A batch on order that waits on its inputs** is fed rather than
+	# doubled: the first input it is short of, a step closer.
+	if _on_order(state, res):
+		if depth >= MAKE_DEPTH:
+			return 0
+		for recipe in _recipes_for(state, res):
+			var waiting := Resources.missing(state, (GameData.RECIPES[recipe] as Dictionary)["inputs"])
+			for input in GameData.sorted_names(waiting.keys()):
+				var fed := _come_by(state, StringName(input), depth + 1)
+				if fed > 0:
+					return fed
+		return 0
+	for recipe in _recipes_for(state, res):
+		var row: Dictionary = GameData.RECIPES[recipe]
+		var inputs: Dictionary = row["inputs"]
+		var had := true
+		for input in GameData.sorted_names(inputs.keys()):
+			had = had and _can_be_had(state, StringName(input), depth + 1)
+		if not had:
+			continue
+		if Resources.can_afford(state, inputs):
+			for found in Farm.cells_with(state, StringName(row["station"])):
+				var cell: Vector2i = found
+				if Building.anchor_of(state, cell) != cell \
+						or not Crafting.can_queue(state, cell, recipe):
+					continue
+				var before := int(state["day_tick"])
+				if not _walk_to(state, _sides_of(state, cell)):
+					continue
+				if Crafting.enqueue(state, cell, recipe):
+					_did(state, &"made")
+					return maxi(int(state["day_tick"]) - before, GameData.SECONDS)
+			continue
+		if depth >= MAKE_DEPTH:
+			continue
+		var short := Resources.missing(state, inputs)
+		for input in GameData.sorted_names(short.keys()):
+			var ticks := _come_by(state, StringName(input), depth + 1)
+			if ticks > 0:
+				return ticks
+	return 0
+
+
+## **What the bench is worth putting on** (task 0277): what the farm spends -
+## food for the mending, bread for supper, hay for the animals, the oil the
+## generators burn, the gunpowder and incendiary the guns and levels want -
+## and a kit only for a defence the plan puts up. 0277's season robot turned
+## the wood its next towers needed into forty-four barricade kits and placed
+## none; told to skip bone meal, it went on to bait, and fished for the bench.
+const BENCH_GOODS: Array = [&"food", &"bread", &"hay", &"oil", &"gunpowder", &"incendiary"]
+
+## How many kits of a planned defence the bench keeps ahead.
+const KITS_AHEAD := 2
+
+
+static func _worth_making(state: Dictionary, recipe: StringName, planned: Array) -> bool:
+	var out: Dictionary = (GameData.RECIPES[recipe] as Dictionary)["output"]
+	for res in GameData.sorted_names(out.keys()):
+		if GameData.DEFENCES.has(StringName(res)):
+			# And a couple ahead, not a stack: twenty-five wall kits ate the
+			# stone of every level two.
+			if not planned.has(StringName(res)) \
+					or Crafting.kits(state, StringName(res)) >= KITS_AHEAD:
+				return false
+		elif not BENCH_GOODS.has(StringName(res)):
+			return false
+	return true
+
+
+## **The plan's bill and what makes it** (task 0277): `saving_for`, plus the
+## inputs of every recipe that makes something in it the farm cannot dig -
+## and theirs, `MAKE_DEPTH` deep - so the bench leaves them for the chain.
+static func _chain_of(state: Dictionary, saving_for: Dictionary) -> Dictionary:
+	var out := saving_for.duplicate()
+	var frontier: Array = GameData.sorted_names(saving_for.keys())
+	for _depth in MAKE_DEPTH:
+		var next: Array = []
+		for res in frontier:
+			if _can_be_gathered(StringName(res)) or _grown_or_fished(StringName(res)):
+				continue
+			for recipe in _recipes_for(state, StringName(res)):
+				var inputs: Dictionary = (GameData.RECIPES[recipe] as Dictionary)["inputs"]
+				for input in GameData.sorted_names(inputs.keys()):
+					if not out.has(StringName(input)):
+						out[StringName(input)] = int(inputs[input])
+						next.append(StringName(input))
+		frontier = next
+	return out
+
+
+## Whether a batch that makes `res` is already queued at a station.
+static func _on_order(state: Dictionary, res: StringName) -> bool:
+	# Cell indices, so integers: a plain sort is cell order.
+	var stations: Array = (state["crafting"] as Dictionary).keys()
+	stations.sort()
+	for idx in stations:
+		for queued in Crafting.queue_at(state, Grid.cell(int(idx))):
+			var row: Dictionary = GameData.RECIPES.get(StringName(queued), {})
+			if not row.is_empty() and (row["output"] as Dictionary).has(res):
+				return true
+	return false
+
+
+## **The rounds the farm's defences fire** (task 0277): `{round: wanted}`,
+## `AMMO_PER_DEFENCE` for each one standing that fires it.
+static func _ammo_wanted(state: Dictionary) -> Dictionary:
+	var out := {}
+	for idx in _sorted_occupants(state):
+		var cell := Grid.cell(int(idx))
+		var id := StringName(Farm.occupant(state, cell).get("id", &""))
+		if Building.anchor_of(state, cell) != cell:
+			continue
+		var ammo: Dictionary = (GameData.DEFENCES.get(id, {}) as Dictionary).get("ammo", {})
+		for res in GameData.sorted_names(ammo.keys()):
+			out[StringName(res)] = int(out.get(StringName(res), 0)) + AMMO_PER_DEFENCE
+	return out
+
+
+## **What the store keeps** (task 0277): the rounds (`_ammo_wanted`) and,
+## once a press stands and the season's plan or tree wants any, the
+## `POWDER_RESERVE`.
+static func _reserves(state: Dictionary, policy: Dictionary) -> Dictionary:
+	var out := _ammo_wanted(state)
+	if _wants_powder(state, policy):
+		out[GameData.GUNPOWDER] = maxi(int(out.get(GameData.GUNPOWDER, 0)), POWDER_RESERVE)
+	return out
+
+
+## Whether the farm keeps gunpowder: a press to make its oil, and a plan
+## with a thing that costs it or a tree with `oiled works` - level three.
+static func _wants_powder(state: Dictionary, policy: Dictionary) -> bool:
+	if Farm.cells_with(state, &"press").is_empty():
+		return false
+	for id in _plan_of(state, policy):
+		if Building.cost_of(StringName(id)).has(GameData.GUNPOWDER):
+			return true
+	return _tech_of(state, policy).has(&"oiled works")
+
+
+## **The store stocked** (task 0277): the first thing of `wanted` it is
+## short of, a step towards it. Returns what it cost, or zero.
+static func _stock_up(state: Dictionary, wanted: Dictionary) -> int:
+	for res in GameData.sorted_names(wanted.keys()):
+		if Resources.amount(state, StringName(res)) >= int(wanted[res]):
+			continue
+		var ticks := _come_by(state, StringName(res), 0)
+		if ticks > 0:
+			_did(state, &"ammo")
+			return ticks
+	return 0
 
 
 ## **Work one node of the kind that yields this resource, on foot** (task
@@ -1048,8 +1486,7 @@ static func _go_and_get(state: Dictionary, res: StringName) -> int:
 ## never does. **Never with the money the plan is saving for** (task 0234): a
 ## packet is bought only out of what is left over `keep`.
 static func _work_the_field(state: Dictionary, keep: int = 0) -> int:
-	var choices := Farming.in_season(state)
-	var crop := _best_crop(choices)
+	var crop := _field_crop(state)
 	var field := _the_field(state)
 	var wants_seed := 0
 	for plot in field:
@@ -1089,7 +1526,7 @@ static func _work_the_field(state: Dictionary, keep: int = 0) -> int:
 ## the season's best crop for every tilled plot with nothing in it, at the
 ## peddler's price; nothing in a season nothing grows.
 static func _seed_bill(state: Dictionary) -> int:
-	var crop := _best_crop(Farming.in_season(state))
+	var crop := _field_crop(state)
 	if crop == &"":
 		return 0
 	var empty := 0
@@ -1098,6 +1535,19 @@ static func _seed_bill(state: Dictionary) -> int:
 			empty += 1
 	empty = maxi(empty - Resources.amount(state, Farming.packet(crop)), 0)
 	return empty * Shop.buy_price(Farming.packet(crop))
+
+
+## **What the field sows** (task 0277): a crop the defences fire - the
+## catapult's pumpkins - while the store is short of it and it is in season;
+## otherwise the in-season crop worth most a growing day.
+static func _field_crop(state: Dictionary) -> StringName:
+	var choices := Farming.in_season(state)
+	var wanted := _ammo_wanted(state)
+	for res in GameData.sorted_names(wanted.keys()):
+		if choices.has(StringName(res)) \
+				and Resources.amount(state, StringName(res)) < int(wanted[res]):
+			return StringName(res)
+	return _best_crop(choices)
 
 
 ## The in-season crop worth most a growing day, or `&""` for none.
@@ -1278,13 +1728,16 @@ static func _work_the_machines(state: Dictionary) -> int:
 ## and recipes through the queue's panel while it has room - never made of
 ## what `saving_for` names. Returns the ticks, or zero when nothing could go
 ## on. `machine` says whether this is the day plan's machines or the bench.
-static func _queue_at(state: Dictionary, cell: Vector2i, saving_for: Dictionary, machine: bool) -> int:
+static func _queue_at(state: Dictionary, cell: Vector2i, saving_for: Dictionary, machine: bool,
+		planned: Array = []) -> int:
 	var id := StringName(Farm.occupant(state, cell).get("id", &""))
 	var can := false
 	for recipe in Crafting.recipes_at(id):
 		if Crafting.can_queue(state, cell, StringName(recipe)) \
 				and not _would_raid(saving_for, StringName(recipe)) \
-				and not GameData.is_tool_upgrade(StringName(recipe)):
+				and not GameData.is_tool_upgrade(StringName(recipe)) \
+				and (machine or (_worth_making(state, StringName(recipe), planned)
+					and Resources.can_afford(state, (GameData.RECIPES[recipe] as Dictionary)["inputs"]))):
 			can = true
 			break
 	if not can:
@@ -1297,6 +1750,12 @@ static func _queue_at(state: Dictionary, cell: Vector2i, saving_for: Dictionary,
 		var queued := false
 		for recipe in Crafting.recipes_at(id):
 			if GameData.is_tool_upgrade(StringName(recipe)) or _would_raid(saving_for, StringName(recipe)):
+				continue
+			# **Only what can be made now** (task 0277), as the rule says: a
+			# queue of batches waiting on an input the season does not grow
+			# is a station nobody can use.
+			if not machine and (not _worth_making(state, StringName(recipe), planned)
+					or not Resources.can_afford(state, (GameData.RECIPES[recipe] as Dictionary)["inputs"])):
 				continue
 			if Crafting.enqueue(state, cell, StringName(recipe)):
 				queued = true
@@ -1470,6 +1929,11 @@ static func _inputs_on_the_farm(state: Dictionary) -> Dictionary:
 			var keep := KEEP_FOR_MACHINES if MACHINES.has(StringName(row["station"])) \
 				else KEEP_BATCHES * int(inputs[res])
 			wanted[StringName(res)] = maxi(int(wanted.get(StringName(res), 0)), keep)
+	# **And the rounds** (task 0277): the catapult's pumpkins are a crop the
+	# bin would otherwise take.
+	var rounds := _ammo_wanted(state)
+	for res in GameData.sorted_names(rounds.keys()):
+		wanted[StringName(res)] = maxi(int(wanted.get(StringName(res), 0)), int(rounds[res]))
 	var out := {}
 	for res in GameData.sorted_names(wanted.keys()):
 		if not GameData.is_any_of(StringName(res)):

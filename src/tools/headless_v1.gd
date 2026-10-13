@@ -9494,9 +9494,12 @@ func _task_0234_arsenal() -> void:
 		"the hive, the catapult and the searchlight sleep under the tower's tarp and wake, the decoy under the tall one, the braid under the short one - never the sandbags, the wire or the bait; each wears A045's icon through 0120's road, the bait A037's",
 		str(unregistered))
 
-	# **The robot plans round a shut season**, as round any refusal.
+	# **The robot plans round a shut season**, as round any refusal - in the
+	# year-round plan, which carries the mortar; since task 0277 a season's
+	# own plan only names what that season opens.
 	var robot := State.create(23414)
 	var policy := SuiteKit.early_policy(&"towers")
+	policy.erase("seasons")
 	var at_mortar := (policy["build"] as Array).find(&"mortar")
 	robot["autoplay_step"] = at_mortar
 	Autoplay._one_thing(robot, policy)
@@ -12187,6 +12190,86 @@ func _task_0277_year_balance() -> void:
 	expect(untaught.x < 0 and Autoplay._prep_target(ready) == line[1],
 		"it takes up the level one crossbow before the level two gun, once 'true sights' is bought",
 		"%s, then %s" % [str(untaught), str(Autoplay._prep_target(ready))])
+	# **Guns before walls** (the owner's call, 2026-10-13): a wall at level
+	# one waits while a gun can still go up.
+	var guarded := State.create(27703)
+	(guarded["tech_owned"] as Array).append_array([&"true sights", &"stout timbers"])
+	guarded["day"] = GameData.SEASON_DAYS - 4
+	var spots: Array = []
+	for cell in Autoplay._near_the_house(guarded):
+		if spots.size() < 2 and Farm.buildable(guarded, cell) and Autoplay._house_distance(guarded, cell) >= 3:
+			spots.append(cell)
+	Farm.place(guarded, spots[0], {"id": &"wall", "hp": 120})
+	Farm.place(guarded, spots[1], {"id": &"gun_tower", "hp": 60})
+	expect(Autoplay._prep_target(guarded) == spots[1],
+		"the boss prep takes a gun up before a wall", str(Autoplay._prep_target(guarded)))
+
+	# **Each season's weapons** (the owner's call on 0277): every season a
+	# policy names is a season, and what it builds and walks exists.
+	var seasonal: Array = []
+	for name in Autoplay.names():
+		var plans: Dictionary = (Autoplay.POLICIES[name] as Dictionary).get("seasons", {})
+		for season in GameData.sorted_names(plans.keys()):
+			var plan: Dictionary = plans[season]
+			var ok := GameData.SEASONS.has(StringName(season))
+			for id in (plan.get("build", []) as Array):
+				ok = ok and Building.entry_of(StringName(id)) != null
+			for id in (plan.get("tech", []) as Array):
+				ok = ok and not Tech.node(StringName(id)).is_empty()
+			if not ok:
+				seasonal.append("%s %s" % [name, season])
+	var balanced_plans: Dictionary = (Autoplay.POLICIES[&"balanced"] as Dictionary)["seasons"]
+	expect(seasonal.is_empty() and (balanced_plans[&"spring"]["build"] as Array).has(&"mine")
+			and (balanced_plans[&"summer"]["build"] as Array).has(&"flame_tower")
+			and (balanced_plans[&"autumn"]["build"] as Array).has(&"mortar")
+			and (balanced_plans[&"autumn"]["build"] as Array).has(&"catapult")
+			and (Autoplay.POLICIES[&"balanced"]["tech"] as Array).has(&"oiled works"),
+		"every season plan names real seasons, things and nodes; balanced fields mines, the flamethrower, the mortar, the catapult and level three",
+		str(seasonal))
+
+	# **Made, not planned around**: gunpowder from coal and the pond's oil
+	# once a press stands; corn only in its season; and the bench makes
+	# neither a kit the plan never puts up nor bone meal.
+	var bench := State.create(27704)
+	expect(not Autoplay._can_be_had(bench, GameData.GUNPOWDER),
+		"with no press, gunpowder is planned around as before")
+	Resources.gain(bench, {GameData.WOOD: 200, GameData.STONE: 200, GameData.IRON: 200,
+		GameData.MONEY: 500})
+	var pressed := Building.place(bench, &"press", Autoplay._room_for(bench, &"press"))
+	expect(pressed and Autoplay._can_be_had(bench, GameData.GUNPOWDER)
+			and not Autoplay._can_be_had(bench, GameData.CORN),
+		"with one, gunpowder can be had - the seams' coal, the pond's oil - and spring's corn cannot")
+	var spring_plan: Array = balanced_plans[&"spring"]["build"]
+	expect(not Autoplay._worth_making(bench, &"barricade_kit", spring_plan)
+			and not Autoplay._worth_making(bench, &"grind_bone_meal", spring_plan)
+			and not Autoplay._worth_making(bench, &"make_bait", spring_plan)
+			and Autoplay._worth_making(bench, &"make_gunpowder_coal", spring_plan)
+			and Autoplay._worth_making(bench, &"wall_kit", spring_plan),
+		"the bench makes gunpowder and the plan's wall kits, never barricade kits, bone meal or bait")
+
+	# **A rebuild is not a new one**: the lost count falls when a lost tower
+	# goes back up.
+	var rebuilt := State.create(27705)
+	Resources.gain(rebuilt, {GameData.WOOD: 100, GameData.IRON: 100, GameData.MONEY: 200})
+	NightRoad.into_build(rebuilt)
+	var first := Autoplay._room_for(rebuilt, &"gun_tower")
+	Autoplay._place_by_cursor(rebuilt, &"gun_tower", first)
+	Farm.remove(rebuilt, first)
+	var lost_before := Autoplay._lost_defences(rebuilt).size()
+	Autoplay._place_by_cursor(rebuilt, &"gun_tower", Autoplay._room_for(rebuilt, &"gun_tower"), false)
+	expect(lost_before == 1 and Autoplay._lost_defences(rebuilt).is_empty(),
+		"a lost gun put back is off the lost list", "%d, then %d" % [lost_before, Autoplay._lost_defences(rebuilt).size()])
+
+	# **A mine on the horde's road**, the free cell of it nearest the house.
+	var mined := State.create(27706)
+	mined["day"] = GameData.SEASON_DAYS
+	mined["nights_won"] = GameData.SEASON_DAYS - 1
+	Resources.gain(mined, {GameData.IRON: 50, GameData.GUNPOWDER: 50, GameData.MONEY: 200})
+	NightRoad.into_build(mined)
+	var road := Pathing.horde_routes(mined, Waves.spawns_in(Waves.night_of(GameData.SEASON_DAYS, int(mined["seed"]))))
+	var at := Autoplay._mine_spot(mined)
+	expect(at.x >= 0 and road.has(at) and Building.why_not(mined, &"mine", at).is_empty(),
+		"the boss prep's mine goes on the road the horde walks to the house", str(at))
 	_completed += 1
 
 ## **Task 0281: the new day's sounds.** Every new id is a file. What a verb is

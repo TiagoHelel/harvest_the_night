@@ -1,4 +1,9 @@
-# The year - task 0277 (2026-10-13), blocked
+# The year - task 0277 (2026-10-13), blocked twice
+
+**Second block, after the owner's call** - see "The owner's call, played"
+below: the robot now fields each season's weapons, and the Giant still ends
+every fight with 550-750 of its 900. What follows first is the original
+block.
 
 **Why it is blocked, first.** The target is the phase's: `balanced`, the
 average player, loses two to four nights before Winter 1 (day 43) over
@@ -32,6 +37,120 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's call, played: a robot that fields each season's weapons (2026-10-13)
+
+The owner chose the second road: before any boss number moves, make the
+average robot play what each season offers. **It does now, and the Giant
+still does not fall: it ends every fight with 550-750 of its 900 hit
+points.** The robot is no longer the reason; the next call is the bosses'
+numbers (the first road) or their companies (the third).
+
+**What the robot learned** (`src/tools/autoplay.gd`). Each item is a fault a
+losing run showed, fixed in the instrument, not tuned around:
+- **It makes what it cannot dig** (`_can_be_had`, `_make`, `_come_by`):
+  - Gunpowder at the workshop from the seams' coal and oil, and oil at the
+    press from fish, corn or sunflowers. Incendiary from oil, and the
+    catapult's pumpkins in the field (`_field_crop`).
+  - It follows a recipe two deep (`MAKE_DEPTH`) and puts one batch on at a
+    time (`_on_order`). A batch waiting on its inputs is fed, not doubled.
+  - It used to plan around every ingredient nobody could dig, so no mine,
+    no mortar round and no level three was ever reached.
+- **Each season has its plan and its tree** (a policy's `seasons`):
+  - **Spring**: the press, three mines and `oiled works` - level three -
+    in `balanced`'s tree.
+  - **Summer**: the flamethrower, `a standing order` and `heavy shot`.
+  - **Autumn**: the mortar, the catapult and `tall mounts`.
+  - **Winter**: the searchlight, the electric fence and `greased works`.
+  - `towers` gets the same in its own order. `walls` and `economy` keep
+    their year-round plans.
+  - The cursor starts from the top on each season's first morning.
+- **Rounds and a reserve kept** (`_stock_up`):
+  - `AMMO_PER_DEFENCE` (12) of whatever a standing defence fires, before
+    the plan.
+  - Once a press stands and the plan or the tree wants gunpowder, a
+    `POWDER_RESERVE` (18), out of the time the plan leaves. Put first, the
+    reserve left Spring 9 with three guns and 300 wood.
+- **The bench makes only what the farm spends** (`_worth_making`,
+  `BENCH_GOODS`):
+  - Food, bread, hay, oil, gunpowder and incendiary, and at most two kits
+    (`KITS_AHEAD`) of a defence the plan puts up.
+  - Only when the inputs are in the bag now, and never out of the chain the
+    plan is making (`_chain_of`).
+  - Before this it turned the towers' wood into 44 barricade kits, and
+    when told to skip bone meal it moved on to bait. It filled the
+    workshop with corn gunpowder no spring grows, and let the kitchen cook
+    every fish the press was waiting on.
+- **The boss prep**:
+  - It arms the mines first, up to the mine's `armed_limit`. A mine goes
+    on the free cell of tonight's horde road nearest the house
+    (`_mine_spot`). By the house, off the road, seven Giant nights set
+    none off.
+  - Then it deepens the line: every shooter before any wall, and only for
+    a bill the farm can come by now (`_to_be_had_now`). It had stopped
+    for a week on a wall wanting hardwood that no stump on the farm could
+    give.
+- **A rebuild is not a new tower** (`_place_by_cursor`'s `counted`).
+  - This was 0276's: counted, a rebuilt tower left the lost count where it
+    was, so the same lost gun went back up every night. By Spring 14 there
+    were twenty-five guns at level one, and never the iron for a mine.
+- **The night row** carries `boss_left`, the fewest hit points the boss was
+  seen at.
+
+**The year, after** - `python tools/autoplay.py --year 8` (32 runs in 600 s,
+8 processes, a run 92-177 s):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           3.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             3.6    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  walls              9.4    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+
+  spring  ALARM: 'balanced' gets through it clean 4 times where the next gets 1 - a dominant strategy
+
+    balanced  spring  100 100 100 100 100 100 100 100  88  88  88  88  75  50
+    towers    spring  100 100  62 100 100 100 100 100 100 100 100 100 100  12
+    walls     spring  100 100 100 100 100 100  75 100 100  88  88  12   0   0
+    economy   spring  100 100 100   0   0   0   0   0   0   0   0   0   0   0
+
+  days no run of any policy held: none
+```
+
+**The Giant, fight by fight** (`boss_left`, Spring 14, eight fights each):
+
+| Run | Its line on Spring 14 | Hit points left after each fight |
+| --- | --- | --- |
+| `balanced` 9000 | 5-7 guns, 2 crossbows | 741 724 740 729 737 733 753 716 |
+| `balanced` 9001 | 6 guns (one at level 2), 3 crossbows | 741 756 749 713 720 719 687 708 |
+| `towers` 9000 | 5 guns (one at level 2), 3 crossbows, a mine | 706 718 719 721 701 703 695 713 |
+| `towers` 9001 | 4 guns (two at level 2), 3 crossbows, a mine | 650 668 630 579 570 900 559 550 |
+
+What it says:
+- **The Giant loses 150-350 a fight to every line the robot fields**, and
+  each fight it starts again at 900. Between 0277's first block and this
+  one, the season's weapons moved it from about 250 to the same 150-350:
+  mines and level two on a spring income do not add up to 900.
+- **The binding number is spring's iron.** Every line ran at 3-20 iron
+  with hundreds of wood and money. A mine is 5 iron and 8 powder, a level
+  two gun 20 iron, a level three 35 iron and 10 powder, and a new gun 12
+  iron. Mines and levels compete with the towers that hold spring.
+- **Spring got harder for the robot that prepares**: `balanced` now loses
+  3.0 nights in spring (Spring 9-14 on some seeds), where it lost none
+  when it built guns only. The press, the reserve and the mines are bought
+  out of the guns.
+- **Nothing reaches summer**, so the Harvester, the Scarecrow King and the
+  Winter Lord stay unmeasured. The new summer, autumn and winter plans
+  have not had a night to play yet.
+
+**The next call is the owner's**, from the same list, now that the robot
+fields what a season gives:
+1. **The bosses' numbers**, with 0058's relation rewritten. From the trials
+   below, the Giant falls in one fight at 500-600 hit points and armour
+   3-4.
+2. **The boss nights' companies**, so the guns' time goes to the boss.
+3. **Spring's iron** (the seams and the stall), so mines and levels are
+   not paid for with towers. This one is new: the data puts it there.
 
 ## The instrument first, as 0068 found
 
