@@ -28753,3 +28753,287 @@ tools/determinism_data_hash.txt,
 implementation/shots/0272/summer_field_night.png (with its .import),
 implementation/prompts/0272-summer-nights.md,
 implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md
+
+## 0273 - Autumn's fourteen nights - done 2026-10-12
+
+What changed: autumn is written in the same rhythm with the north added. It
+sends its own enemies instead of 0270's draft of spring's four:
+- **The rhythm**: the calm night on 29, and autumn's first fight on 30 from
+  summer's two sides. The north opens on 31 with a handful, the crow comes
+  on 33 and the Full Moon on 35 sends what is known. The digger comes on 36
+  and the Scarecrow King's company on 42.
+- **Five key nights**: 31, 33, 35, 36 and 42. The template makes the other
+  eight days, with the crow joining on its fifth day and the digger on its
+  eighth.
+- **Climbing on from summer**: the template starts at 5200 hit points,
+  over summer's last made day (5000). Day 30 sends 5061, over summer's day
+  27 (4960).
+- **`tools/play_nights.py`** prints a `crows` column, the most crows alive
+  at once. It now puts its generators on the ground farthest from the
+  date's open sides: from autumn the north road ran through them (Found).
+
+DATA moved, on purpose. SIM did not: the determinism scenario fights day 1.
+
+### Autumn
+
+**The template** (`SEASON_NIGHTS[2]`):
+
+| Lever | Was (0270's draft) | Now |
+|---|---|---|
+| mix | walker 25, runner 10, tank 37, breaker 28, all from its first day | walker 22, runner 9, tank 18, breaker 18, spitter 10, rat 4 from its first day; crow 2 from its 5th, digger 10 from its 8th |
+| size | 3000-6000 hp | 5200-8400 hp |
+| waves | 6-8 | 6-8 |
+| gap | 8-4 s | 20-5 s, the least gap (0271) |
+| sides | the north from its 3rd day | the same; its 3rd day is now a key night |
+
+**The key nights** (`KEY_NIGHTS`; side 2 is the north):
+
+| Day | Bodies as written | Gap | What it is |
+|---|---|---|---|
+| 31 | 207, six of them walkers from the north | 6 s, out at 15 ticks | the north opens, learned before it is tested |
+| 33 | 237, eight crows in two flights of four from the east | 5 s, out at 15 ticks | the crow met, gently |
+| 35 | 172, crows on two sides | 8 s, out at 10 ticks | the Full Moon of what is known, 257 as fought |
+| 36 | 255, eight diggers in two waves from the east | 4 s, out at 15 ticks | the digger met |
+| 42 | 230, sixteen crows and sixteen diggers | 4 s, out at 10 ticks | the Full Moon with the Scarecrow King, 346 as fought |
+
+The night after each introduction sends more of it: 32 sends more from the
+north than 31's six, 34 sends nineteen crows to 33's eight, and 37 sends 22
+diggers to 36's eight. Day 42's note says the King calls crows: his flock
+is his rule's (0254), so the forecast's 346 leaves it out by design.
+
+### Autumn's table, beside the draft
+
+`python tools/nights.py 29 42`:
+
+| Day | Marks | Bodies | Hit points | Worth | Sides | Weather (seed 0) | All sent by | Kinds |
+|---|---|---|---|---|---|---|---|---|
+| 29 | calm | 0 | 0 | $0 | - | - | 0 s | nothing: a calm night: the horde regroups after its boss |
+| 30 | made | 246 | 5061 | $936 | E,SE | - | 156 s | 25 breaker, 64 rat, 57 runner, 21 spitter, 9 tank, 70 walker |
+| 31 | key | 207 | 5452 | $884 | E,SE,N | - | 154 s | 24 breaker, 48 rat, 38 runner, 16 spitter, 17 tank, 64 walker |
+| 32 | made | 274 | 5634 | $1043 | E,SE,N | fog | 156 s | 28 breaker, 71 rat, 64 runner, 23 spitter, 10 tank, 78 walker |
+| 33 | key | 237 | 6160 | $1008 | E,SE,N | - | 160 s | 28 breaker, 8 crow, 54 rat, 40 runner, 18 spitter, 19 tank, 70 walker |
+| 34 | made | 313 | 6236 | $1179 | E,SE,N | - | 160 s | 30 breaker, 19 crow, 76 rat, 68 runner, 25 spitter, 11 tank, 84 walker |
+| 35 | key FULL | 257 | 7254 | $1143 | E,SE,N | - | 157 s | 36 breaker, 18 crow, 45 rat, 30 runner, 15 spitter, 23 tank, 90 walker |
+| 36 | key | 255 | 6894 | $1116 | E,SE,N | - | 160 s | 30 breaker, 6 crow, 8 digger, 54 rat, 44 runner, 20 spitter, 21 tank, 72 walker |
+| 37 | made | 340 | 7095 | $1309 | E,SE,N | blood_moon | 155 s | 31 breaker, 19 crow, 22 digger, 77 rat, 70 runner, 25 spitter, 11 tank, 85 walker |
+| 38 | made | 354 | 7445 | $1366 | E,SE,N | - | 156 s | 32 breaker, 20 crow, 23 digger, 80 rat, 72 runner, 26 spitter, 12 tank, 89 walker |
+| 39 | made | 369 | 7699 | $1419 | E,SE,N | - | 151 s | 33 breaker, 21 crow, 24 digger, 84 rat, 75 runner, 28 spitter, 12 tank, 92 walker |
+| 40 | made | 382 | 8016 | $1472 | E,SE,N | - | 151 s | 34 breaker, 21 crow, 24 digger, 87 rat, 78 runner, 29 spitter, 13 tank, 96 walker |
+| 41 | made | 396 | 8281 | $1526 | E,SE,N | fog | 144 s | 36 breaker, 22 crow, 25 digger, 90 rat, 81 runner, 30 spitter, 13 tank, 99 walker |
+| 42 | key FULL BOSS | 346 | 11628 | $1742 | E,SE,N | rain | 157 s | 48 breaker, 24 crow, 24 digger, 54 rat, 36 runner, 1 scarecrow_king, 18 spitter, 33 tank, 108 walker |
+
+0270's draft (spring's four kinds, the north from 31):
+
+| Day | Bodies | Hit points | Worth | All sent by |
+|---|---|---|---|---|
+| 30 | 94 | 2930 | $483 | 120 s |
+| 31 | 102 | 3220 | $528 | 120 s |
+| 32 | 111 | 3420 | $568 | 120 s |
+| 33 | 119 | 3675 | $609 | 120 s |
+| 34 | 128 | 3985 | $657 | 120 s |
+| 35 | 226 | 6250 | $1049 | 179 s |
+| 36 | 145 | 4540 | $747 | 126 s |
+| 37 | 155 | 4860 | $799 | 131 s |
+| 38 | 162 | 5030 | $832 | 134 s |
+| 39 | 171 | 5305 | $876 | 139 s |
+| 40 | 180 | 5605 | $925 | 143 s |
+| 41 | 190 | 5925 | $977 | 152 s |
+| 42 | 290 | 9980 | $1580 | 179 s |
+
+### The weather, seeds 0-4
+
+`python tools/nights.py 29 42 <seed>`, autumn's fighting days:
+
+| Seed | Blood Moon | Fog | Rain |
+|---|---|---|---|
+| 0 | 37 | 32, 41 | 42 |
+| 1 | - | 30, 38 | 32, 34, 35, 37 |
+| 2 | - | 30, 32 | 41 |
+| 3 | - | 35 | 34 |
+| 4 | - | 42 | 30, 32, 34 |
+
+One Blood Moon in sixty-five nights: seed 0's day 37, a made night. No
+introduction rolls one for these seeds. **The three introductions pin
+`event` off anyway** (0270's field), so no seed's Blood Moon can drown a
+first look. On these five the pins take away only fog: 33 and 36 on seed 1,
+31 on seed 4.
+
+### `python tools/play_nights.py 29 42`
+
+```text
+HARVEST THE NIGHT - days 29 to 42, scripted build, no player
+  a day of farming worth $0
+  the purse at day 29: $1584 from days 1-28
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  crows  result
+    29     0        0    1584       7       0   100%      0      0     0      0  held, house 100/100 after 0s
+    30   246      936    1623       8       0   100%      2      1    32      0  FELL after 31s with 238 still coming
+    31   207      884    1709       8       0   100%     11      8    31      0  FELL after 97s with 101 still coming
+    32   274     1043    1794       9       0   100%      3      3    28      0  FELL after 38s with 233 still coming
+    33   237     1008    1888       5       0   100%      7      7    42      4  FELL after 75s with 149 still coming
+    34   313     1179    1981       6       0   100%     23     15    76     12  FELL after 152s with 37 still coming
+    35   257     1143    2083       6       0   100%     12      9    49      9  FELL after 92s with 123 still coming
+    36   255     1116    2287       8       0   100%     12     11    34      4  FELL after 87s with 135 still coming
+    37   340     1309    2388       9       0   100%      9      8    38      9  FELL after 68s with 221 still coming
+    38   354     1366    2500       9       0   100%      9      9    44      0  FELL after 69s with 280 still coming
+    39   369     1419    2616       9       0   100%     22     12    96     21  FELL after 118s with 104 still coming
+    40   382     1472    2735       9       0   100%     17     13    87      0  FELL after 94s with 141 still coming
+    41   396     1526    2858      10       0   100%     10      8    47      0  FELL after 49s with 310 still coming
+    42   346     1742    2985      11       0   100%     26     17    58     12  FELL after 115s with 109 still coming
+  fell: [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42]
+  a day of farming worth $150
+  the purse at day 29: $5784 from days 1-28
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  crows  result
+    29     0        0    5784      19       0   100%      0      0     0      0  held, house 100/100 after 0s
+    30   246      936    5973      19       0   100%     28     18    47      0  held, house 100/100 after 170s
+    31   207      884    6209      18       0   100%     24     19    24      0  held, house 100/100 after 160s
+    32   274     1043    6444      19       0   100%     29     20    77      0  held, house 100/100 after 161s
+    33   237     1008    6688      20       0   100%     27     21    38      4  held, house 100/100 after 165s
+    34   313     1179    6931      21       0   100%     32     26    76     10  held, house 100/100 after 172s
+    35   257     1143    7183      22       0   100%     29     20    46      9  held, house 100/100 after 183s
+    36   255     1116    7537      22       0   100%     29     22    32      4  held, house 100/100 after 169s
+    37   340     1309    7788      24       0   100%     35     25    54      9  held, house 100/100 after 169s
+    38   354     1366    8050      25       0   100%     36     24    80     11  held, house 100/100 after 165s
+    39   369     1419    8316      24       0   100%     38     29    96     20  held, house 100/100 after 156s
+    40   382     1472    8585      24       0   100%     38     23    72     21  held, house 100/100 after 153s
+    41   396     1526    8858      26       0   100%     41     30    98      9  held, house 100/100 after 160s
+    42   346     1742    9135      28       0   100%     41     31    57     12  held, house 60/100 after 212s
+  all 14 held
+  a day of farming worth $300
+  the purse at day 29: $9984 from days 1-28
+   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  crows  result
+    29     0        0    9984      29       0   100%      0      0     0      0  held, house 100/100 after 0s
+    30   246      936   10323      32       0   100%     28     19    47      0  held, house 100/100 after 169s
+    31   207      884   10709      30       0   100%     24     17    24      0  held, house 97/100 after 165s
+    32   274     1043   11094      33       0   100%     29     19    72      0  held, house 100/100 after 160s
+    33   237     1008   11488      35       0   100%     27     20    35      4  held, house 100/100 after 167s
+    34   313     1179   11881      35       0   100%     32     24    76      7  held, house 100/100 after 171s
+    35   257     1143   12283      36       0   100%     29     16    45      9  held, house 100/100 after 181s
+    36   255     1116   12787      36       0   100%     29     20    32      2  held, house 100/100 after 167s
+    37   340     1309   13188      38       0   100%     35     22    48      4  held, house 100/100 after 170s
+    38   354     1366   13600      40       0   100%     36     23    78      9  held, house 100/100 after 163s
+    39   369     1419   14016      41       0   100%     38     28    95     18  held, house 100/100 after 156s
+    40   382     1472   14435      42       0   100%     38     24    72     20  held, house 97/100 after 154s
+    41   396     1526   14858      41       0   100%     41     24    90      7  held, house 100/100 after 156s
+    42   346     1742   15285      44       0   100%     50     24    54     12  held, house 100/100 after 202s
+  all 14 held
+   day   sent   $reward   hit points sent
+    29      0         0                 0
+    30    246       936              5061
+    31    207       884              5452  <- dips
+    32    274      1043              5634
+    33    237      1008              6160  <- dips
+    34    313      1179              6236
+    35    257      1143              7254  <- dips
+    36    255      1116              6894  <- dips
+    37    340      1309              7095
+    38    354      1366              7445
+    39    369      1419              7699
+    40    382      1472              8016
+    41    396      1526              8281
+    42    346      1742             11628  <- dips
+  dips on [31, 33, 35, 36, 42]
+```
+
+**What falls, and why:**
+- **$0 a day**: every night but the calm one.
+- **$150 a day**: everything holds. Only day 42 hurts the house, 60/100
+  against the Full Moon's 345 and the King.
+- **$300 a day**: everything holds, at 97/100 at worst.
+
+Every night 30-42 holds at one income and falls at another, the tool's own
+rule. That autumn barely touches a farmed purse is under Found.
+
+**The crows on day 42**: at most 12 up at once, at every income. The
+night sends 24 as fought (sixteen written, at the moon's 150%) and the King
+calls up to 18 more (`summon_cap`), but they are shot down as they come. The most bodies at once is 98, on day 41 at $150; summer's
+most was 66.
+
+### The new enemies and what they teach
+
+From 0259's `implementation/MATCHUPS.md` (ordinary night: house damage
+prevented per thousand of the budget). Autumn's arsenal is summer's, plus
+the mortar, the pumpkin catapult and the garlic braid. Every kind autumn
+sends has its top answer, or one tied with it, open by its day.
+- **The crow** - the auto crossbow, the gun tower and the beehive, 270
+  each. The mortar, the catapult, the flamethrower and the mine score 0:
+  only what shoots up reaches it. **It teaches cover in the air**, spring's
+  guns that autumn's new weapons do not replace, **and the field's
+  layout**: it flies to whatever is growing.
+- **The digger** - the catapult, the mortar and the auto crossbow, 125
+  each; the mine 53. A fence or a barricade scores 0 against it, which is
+  the point, and a wall only 3. **It teaches autumn's mortar and catapult**,
+  and that a fence is not a wall.
+- **The Scarecrow King** - the auto crossbow and the gun tower 119, the
+  beehive 87; the catapult and the mortar only 43. **He teaches cover in the
+  air under pressure**: his crows out-fly every lobbed shell.
+- **The garlic braid** is still UNPROVEN in the matchups (15 at best,
+  against the King). No night here was written to need it: 0277 re-runs the
+  tool after the levers move.
+
+### Decided
+
+- **The north opens on a key night of its own**, as summer's south east did:
+  six walkers on 31, under a tenth of the night. The template then deals all
+  three sides alike from 32.
+- **The crow on 33 and the digger on 36.** The crow comes before the Full
+  Moon, so the air is learned before the King fills it. **Its first night is
+  eight crows**, and the template's crow weight is 2 (19-22 crows a made
+  night): each one is a crop, and autumn's fields are full.
+- **Fewer rats in autumn's template**: at 7, its made nights sent 108-151
+  rats and out-counted every key night; at 4 they send 64-90, summer's
+  numbers.
+- **Autumn starts where summer ends**, as its prompt says: the template
+  keeps climbing from summer's final numbers. Summer's first fight was put
+  between spring's sixth night and its Full Moon by 0272's own requirement.
+  The calm night after a boss is the season's breath either way.
+- **Crowded nights come out closer**: `interval_ticks` 15 on 31, 33 and 36
+  and 10 on the moons, so 207-346 bodies are all sent by 180 s.
+- **The season tests share helpers**: `_season_rows`, `_side_learned`,
+  `_cloudy`, `_hit_points_to`, `_season_shape` and `_boss_days` in
+  `headless_v1.gd`. 0272's group uses them with the same asserts, and 0274's
+  will.
+- **headless_check's `NO_NIGHT_YET`** loses the crow and the digger: a
+  night sends them now.
+
+### Found
+
+- **`play_nights` put its generators where the north road starts.** 0271's
+  `_anywhere` takes the first free ground from the top of the farm, and the
+  north spawn is at the top edge (35-44, 1). From autumn the night took
+  every plant:
+  - at $300, 6-7 plants placed and none left at dawn on days 32-35;
+  - power at the 50% brownout floor on 32-35 and 41;
+  - at $150, day 41 held at 22/100.
+
+  Plants now go on the free ground farthest from the date's open spawns,
+  and power is 100% on every autumn night (41 at $150: 100/100). **Spring
+  and summer replay row for row as 0271 and 0272 recorded them.** "The free
+  ground nearest the house" was tried first. It moved summer: the $150 run
+  fell on 21 and the $300 run on 28, so the instrument would have rewritten
+  two seasons' results.
+- **Autumn barely touches a farmed purse.** At $150 the robot comes into
+  autumn with $5784 (19 towers) and buys the mortar from day 29. Every
+  night but 42 holds at 100/100.
+- **The crows' real cost is invisible to `play_nights`**: its farm grows
+  nothing, so they fly at the house and die to the guns. What crows cost a
+  full autumn field is for the year autoplayer (0276) and 0277's balance to
+  measure.
+
+### Hashes
+
+- **DATA 117056142 -> 2630956943**, on purpose: autumn's template and its five
+  key nights.
+- **SIM unchanged:** 3524359536. The scenario fights day 1.
+
+Verify: **PASS**, 61 of 61 in 999 s, DATA recorded 2630956943 (was 117056142), SIM unchanged. Perf: a night tick 1143 us of 8333, a swarm's 4405, a path rebuild 10263 of 33333.
+- **Suites:** `headless_check` 19151 asserts (19041 at 0272), `headless_v1` 2743 in 95 groups, `_task_0273_autumn_nights` the new one, `input_check` 1269 cases, `input_v1` 735 (114.2 s), `input_v2` 3; `nights --check` passes every date of the year for both seeds.
+
+No shots: none of `tools/shot.py`'s states frames an autumn night that
+fights. `quarry` and `withered` are Autumn 1, the calm date, and
+`tech_autumn` is the tech tree.
+
+Files: src/core/game_data.gd, src/tools/play_nights.gd,
+src/tools/headless_v1.gd, src/tools/headless_check.gd,
+tools/determinism_data_hash.txt,
+implementation/prompts/0273-autumn-nights.md,
+implementation/{BACKLOG,PROGRESS}.md, docs/devlog/{index,index.pt_BR}.md

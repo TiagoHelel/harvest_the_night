@@ -103,7 +103,7 @@ func _init() -> void:
 			purse += _paid(night) + int(income)
 		if _first > 1:
 			print("  the purse at day %d: $%d from days 1-%d" % [_first, purse, _first - 1])
-		print("   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  result")
+		print("   day  sent  $reward  $purse  towers  locked  power  bones  piles  peak  crows  result")
 		var fell: Array = []
 		for night in range(_first, _last + 1):
 			var played := _play(night, purse)
@@ -113,12 +113,12 @@ func _init() -> void:
 			purse += _paid(night) + int(income)
 			if not bool(played["held"]):
 				fell.append(night)
-			print("  %4d %5d  %7d %7d %7d %7d %5d%%  %5d  %5d  %4d  %s"
+			print("  %4d %5d  %7d %7d %7d %7d %5d%%  %5d  %5d  %4d  %5d  %s"
 				% [night, Waves.size_of(night), Waves.reward_of(night),
 					int(played["budget"]), int(played["towers"]),
 					int(played["locked"]), int(played["power"]),
 					int(played["bones"]), int(played["piles"]),
-					int(played["peak"]),
+					int(played["peak"]), int(played["crows"]),
 					"held, house %d/%d after %ds"
 						% [int(played["house"]), int(played["house_full"]),
 							int(played["ticks"]) / GameData.TICK_HZ]
@@ -240,11 +240,14 @@ func _play(night: int, budget: int) -> Dictionary:
 	# same purse and in the same order, and put up before the build step.
 	var plants := _plants_needed(budget, shopping)
 	var plant_price := _price(&"generator")
-	# **Out of the way** (task 0271): a plant needs no sight of the lane, and
-	# one put on the approach can be refused for blocking it - which left the
-	# purse's towers on a farm short of the power counted for them.
+	# **Out of every road's way** (task 0273): a plant needs no sight of the
+	# lane, so it goes on the free ground farthest from the date's open
+	# sides. 0271 put them on the first free ground from the top of the
+	# farm, which is where the north road starts: from autumn the night took
+	# every plant and left the towers at the brownout floor.
+	var away := _away_from_the_sides(state)
 	for _i in plants:
-		var plant := _anywhere(state, Building.size_of(&"generator"))
+		var plant := _first_free(state, away, &"generator")
 		if plant.x < 0 or not Building.place(state, &"generator", plant):
 			break
 	Phases.begin_preparation(state)
@@ -300,15 +303,19 @@ func _play(night: int, budget: int) -> Dictionary:
 	NightRoad.through_build(state)
 
 	# **The most bodies at once** (task 0272): what a rat night asks of the
-	# tick, beside the swarm `perf_check.gd` times (0218, 0248).
+	# tick, beside the swarm `perf_check.gd` times (0218, 0248). **And the
+	# most crows** (task 0273): the Scarecrow King's flock is his rule's, not
+	# the night's rows, so only a night played counts it.
 	var ticks := 0
 	var peak := 0
+	var crows := 0
 	for tick in 40000:
 		if int(state["phase"]) != Phases.NIGHT:
 			ticks = tick
 			break
 		Sim.advance(state, 1)
 		peak = maxi(peak, Entities.count(state))
+		crows = maxi(crows, _crows_up(state))
 		ticks = tick
 	return {
 		"held": int(state["house_hp"]) > 0,
@@ -326,7 +333,17 @@ func _play(night: int, budget: int) -> Dictionary:
 		"bones": int(Loot.lying(state).get(GameData.BONES, 0)),
 		"piles": Loot.cells_with(state, GameData.BONES).size(),
 		"peak": peak,
+		"crows": crows,
 	}
+
+
+## How many crows are up: the night's and any the Scarecrow King called.
+func _crows_up(state: Dictionary) -> int:
+	var out := 0
+	for one in (state["entities"] as Dictionary).values():
+		if StringName((one as Dictionary).get("kind", &"")) == &"crow":
+			out += 1
+	return out
 
 
 ## What a thing is worth in goods, which is what the scripted purse counts in.
@@ -377,6 +394,32 @@ func _by_distance(want: Vector2i) -> Array:
 	var out: Array = []
 	for ring in rings:
 		out.append_array(ring)
+	return out
+
+
+## Every cell of the farm, farthest from the date's open spawns first - by
+## the nearest of them, ties in reading order: ground no road crosses
+## (task 0273).
+func _away_from_the_sides(state: Dictionary) -> Array:
+	var starts: Array = []
+	for side in Calendar.open_sides(Calendar.date(state)):
+		starts.append_array(Enemies.spawn_cells(state, int(side)))
+	var cells: Array = []
+	for y in Grid.HEIGHT:
+		for x in Grid.WIDTH:
+			var nearest := Grid.WIDTH + Grid.HEIGHT
+			for start in starts:
+				nearest = mini(nearest, absi(x - (start as Vector2i).x) + absi(y - (start as Vector2i).y))
+			cells.append([nearest, y, x])
+	cells.sort_custom(func(a: Array, b: Array) -> bool:
+		if int(a[0]) != int(b[0]):
+			return int(a[0]) > int(b[0])
+		if int(a[1]) != int(b[1]):
+			return int(a[1]) < int(b[1])
+		return int(a[2]) < int(b[2]))
+	var out: Array = []
+	for one in cells:
+		out.append(Vector2i(int(one[2]), int(one[1])))
 	return out
 
 

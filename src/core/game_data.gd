@@ -2869,10 +2869,13 @@ const SPAWN_INTERVAL_TICKS := 20        # LEVER: ticks, 8-45
 ## east opened on its third by a handful, the spitter on its fifth, a Full
 ## Moon of what is known on its seventh, the rats on its eighth and the
 ## Harvester's company on its fourteenth. An introduction pins its weather
-## off, so a first look is a clear one. Autumn and winter have only their
-## Full Moons, drafts of the old seventh and tenth nights to their season's
-## size, sending spring's kinds round every side their season opens:
-## 0273-0274 write them for real.
+## off, so a first look is a clear one. **Autumn** (task 0273) does the same
+## with the north, the crow on its fifth day - eight of them, because the
+## farm is what they eat - the digger on its eighth and the Scarecrow King's
+## company on its fourteenth, and climbs on from summer's last made night.
+## Winter has only its Full Moons, drafts of the old seventh and tenth
+## nights to its size, sending spring's kinds round every side: 0274 writes
+## it for real.
 ##
 ## **Every night fills the night** (task 0271, after 0148): its last send
 ## comes between the fill line (`Waves.fill_line`) and the dawn margin, so the
@@ -2916,13 +2919,17 @@ const SEASON_NIGHTS: Array = [
 		"waves": [5, 7],                    # LEVER: waves on its second and thirteenth day, 2-12
 		"gap_ticks": [24 * SECONDS, 6 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
-	# Autumn: the north joins on its third day. Spring's kinds until 0273.
+	# Autumn (task 0273): summer's six kinds, the north from its third day -
+	# a key night that sends it a handful - the crow from its fifth and the
+	# digger from its eighth, as its key nights introduce them. It climbs on
+	# from summer's last made night, and few crows: each one is a crop.
 	{
 		"sides": [[0, 1], [1, 1], [2, 3]],      # LEVER: [side, the day of the season it joins]
-		"mix": {&"walker": [25, 1], &"runner": [10, 1], &"tank": [37, 1], &"breaker": [28, 1]},  # LEVER: kind -> [weight in hit points, the day it joins]
-		"size": [3000, 6000],            # LEVER: hit points on its second and thirteenth day, 200-12000
+		"mix": {&"walker": [22, 1], &"runner": [9, 1], &"tank": [18, 1], &"breaker": [18, 1],
+			&"spitter": [10, 1], &"rat": [4, 1], &"crow": [2, 5], &"digger": [10, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"size": [5200, 8400],            # LEVER: hit points on its second and thirteenth day, 200-12000
 		"waves": [6, 8],                    # LEVER: waves on its second and thirteenth day, 2-12
-		"gap_ticks": [8 * SECONDS, 4 * SECONDS],  # LEVER: the gap on its second and thirteenth day, 2-30 seconds
+		"gap_ticks": [20 * SECONDS, 5 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
 	# Winter: the west joins on its third day and the south on its fifth.
 	# Spring's kinds until 0274.
@@ -3127,30 +3134,129 @@ const KEY_NIGHTS: Dictionary = {
 		],
 	},
 	# ---------------------------------------------------------------- autumn
-	35: {
-		"note": "autumn 7, the Full Moon: a draft of spring's night 7 to this season's size, until 0273",
+	# **The same rhythm, the north added** (task 0273): the calm night on
+	# 29, autumn's first fight on 30 from summer's two sides, the north
+	# opened by a handful on 31, the crow on 33, a Full Moon of what is
+	# known on 35, the digger on 36 and the Scarecrow King's company on 42.
+	# Side 2 is the north. Crowded nights, so their waves come out closer
+	# (`interval_ticks`) to be all sent before dawn (0137).
+	31: {
+		"note": "the north opens: a handful from a new side, and the old roads as busy as summer left them",
 		"opening_ticks": 0,
-		"gap_ticks": 9 * SECONDS,
+		"gap_ticks": 6 * SECONDS,
+		"interval_ticks": 15,
+		"event": &"",
+		# Six walkers from the north, under a tenth of the night. Autumn 4 is
+		# made from all three sides alike.
 		"waves": [
-			[&"walker", 34, 0],
-			[&"breaker", 11, 1],
-			[&"runner", 45, 2],
+			[&"walker", 28, 0],
+			[&"rat", 24, 1],
+			[&"breaker", 12, 0],
+			[&"spitter", 8, 1],
+			[&"walker", 6, 2],
+			[&"tank", 9, 0],
+			[&"runner", 20, 1],
+			[&"walker", 30, 1],
+			[&"rat", 24, 0],
+			[&"tank", 8, 1],
+			[&"breaker", 12, 0],
+			[&"spitter", 8, 0],
+			[&"runner", 18, 0],
+		],
+	},
+	33: {
+		"note": "the first crows: they fly over every wall to whatever is growing, and only a gun that shoots up reaches them",
+		"opening_ticks": 0,
+		"gap_ticks": 5 * SECONDS,
+		"interval_ticks": 15,
+		"event": &"",
+		# **Gentle, because the farm is the target**: eight, in two flights
+		# of four from the east, while autumn's fields are full. Autumn 6 is
+		# made with a share of its hit points in crows.
+		"waves": [
+			[&"walker", 35, 0],
+			[&"rat", 24, 1],
+			[&"breaker", 14, 2],
+			[&"crow", 4, 0],
+			[&"tank", 10, 0],
+			[&"spitter", 10, 1],
+			[&"runner", 20, 2],
+			[&"walker", 35, 1],
+			[&"crow", 4, 0],
+			[&"tank", 9, 1],
+			[&"rat", 30, 0],
+			[&"breaker", 14, 0],
+			[&"spitter", 8, 2],
+			[&"runner", 20, 0],
+		],
+	},
+	35: {
+		"note": "autumn's Full Moon: three sides, crows among them, and everything autumn has shown you so far",
+		"opening_ticks": 0,
+		"gap_ticks": 8 * SECONDS,
+		# In crowds, as summer's are.
+		"interval_ticks": 10,
+		"waves": [
+			[&"walker", 30, 0],
+			[&"crow", 6, 2],
+			[&"breaker", 14, 1],
+			[&"rat", 30, 0],
+			[&"tank", 9, 2],
+			[&"spitter", 10, 1],
+			[&"runner", 20, 0],
+			[&"walker", 30, 1],
+			[&"crow", 6, 0],
+			[&"tank", 7, 0],
+			[&"breaker", 10, 2],
+		],
+	},
+	36: {
+		"note": "the first diggers: they go under your fences and barricades, and only a wall makes them chew",
+		"opening_ticks": 0,
+		"gap_ticks": 4 * SECONDS,
+		"interval_ticks": 15,
+		"event": &"",
+		# Eight, from the east. Autumn 9 is made with a tenth of its hit
+		# points in diggers.
+		"waves": [
+			[&"walker", 38, 0],
+			[&"digger", 4, 0],
+			[&"breaker", 14, 1],
+			[&"rat", 30, 2],
 			[&"tank", 11, 0],
-			[&"walker", 40, 1],
-			[&"breaker", 11, 2],
+			[&"crow", 6, 1],
+			[&"spitter", 10, 2],
+			[&"runner", 22, 0],
+			[&"walker", 34, 1],
+			[&"digger", 4, 0],
+			[&"tank", 10, 2],
+			[&"breaker", 16, 0],
+			[&"spitter", 10, 1],
+			[&"runner", 22, 2],
+			[&"rat", 24, 0],
 		],
 	},
 	42: {
-		"note": "autumn 14, the boss's company: a draft of spring's night 10 to this season's size, until 0273",
+		"note": "the Scarecrow King's company: he calls crows down on your fields while all of autumn comes at the walls",
 		"opening_ticks": 0,
 		"gap_ticks": 4 * SECONDS,
+		"interval_ticks": 10,
+		# **His flock is his own** (0254): the crows he calls are not rows,
+		# so the forecast counts these sixteen and not his.
 		"waves": [
-			[&"walker", 37, 0],
-			[&"breaker", 14, 1],
-			[&"runner", 60, 2],
-			[&"tank", 18, 0],
-			[&"walker", 46, 1],
-			[&"breaker", 18, 2],
+			[&"walker", 36, 0],
+			[&"digger", 8, 2],
+			[&"breaker", 16, 1],
+			[&"crow", 8, 0],
+			[&"rat", 36, 2],
+			[&"tank", 12, 0],
+			[&"spitter", 12, 1],
+			[&"runner", 24, 2],
+			[&"walker", 36, 1],
+			[&"digger", 8, 0],
+			[&"tank", 10, 2],
+			[&"crow", 8, 1],
+			[&"breaker", 16, 0],
 		],
 	},
 	# ---------------------------------------------------------------- winter
