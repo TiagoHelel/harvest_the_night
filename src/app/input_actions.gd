@@ -84,6 +84,8 @@ const ACTIONS: Array = [
 	[&"cancel", &"ACT_CANCEL", &"ACT_GROUP_SCREENS"],
 	[&"tech", &"ACT_TECH", &"ACT_GROUP_SCREENS"],
 	[&"stats", &"ACT_STATS", &"ACT_GROUP_SCREENS"],
+	# Task 0287: the collections and achievements, a screen like the stats.
+	[&"collections", &"ACT_COLLECTIONS", &"ACT_GROUP_SCREENS"],
 	[&"log", &"ACT_LOG", &"ACT_GROUP_SCREENS"],
 ]
 
@@ -115,6 +117,8 @@ const PAD_NAMES: Dictionary = {
 	JOY_BUTTON_DPAD_DOWN: &"ACT_PAD_DPAD_DOWN",
 	JOY_BUTTON_DPAD_LEFT: &"ACT_PAD_DPAD_LEFT",
 	JOY_BUTTON_DPAD_RIGHT: &"ACT_PAD_DPAD_RIGHT",
+	# The share button (task 0287), the one no action used: the collections.
+	JOY_BUTTON_MISC1: &"ACT_PAD_SHARE",
 }
 
 ## A stick or trigger direction, `"<axis>:<sign>"` -> its name.

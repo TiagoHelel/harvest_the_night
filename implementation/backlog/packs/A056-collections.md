@@ -21,7 +21,9 @@ No text anywhere: names and counts are code strings in both languages.
 
 ## Deliverables
 
-The table is provisional: game task 0287 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+**Final: game task 0287 settled this table (2026-10-13)** and draws every row with a stand-in on 0120's road until 0288 integrates the pack - the cover, the ornament and the badges drawn by code (`src/ui/collection_art.gd`), the tab books as existing icons, each trophy as its boss's first walk frame on a code-drawn plaque. Start only when `python implementation/backlog/assets.py next` offers this pack.
+
+**Where each piece sits** (`src/ui/collections_screen.gd`, a 480x270 screen scaled to 1920x1080): the cover at 1x top-left of the book's panel, over a column of five tabs; the `hud_book_*` cut is each tab's icon, left of its name and count; the ornament at 1x under the page title; the trophies at 1x in a row of four, 83 px apart; the badges at 1x in two columns of six, 166 px apart and 32 px down; the 16x16 `icon_book_year` drawn at 2x (32x32) on the year page. Nothing is relit. **Locked** (a boss not yet down, a badge not yet earned, a year not yet won) is the same picture with `modulate` (0.30, 0.30, 0.36), so no locked file.
 
 Every file: 1 frame, 1.0 s, static (`loop` false), direction `none`, `mirror:
 "none"`, draw 1.0, runtime file `sprites/ui/<name>.png`. Every piece is centred on
@@ -38,7 +40,7 @@ its pivot (±1) with at least 1 transparent row and column on every side.
 | `ui/trophy_harvester` | 32x32 | (16,16) | 1 / 1.0 / static | The plaque with a bent cutting-reel blade with a broken tine from the Harvester's header (A052's rusted steel and red paint) |
 | `ui/trophy_scarecrow_king` | 32x32 | (16,16) | 1 / 1.0 / static | The plaque with the Scarecrow King's twig crown (A053), slightly crooked |
 | `ui/trophy_winter_lord` | 32x32 | (16,16) | 1 / 1.0 / static | The plaque with the Winter Lord's icicle crown (A054), cracked |
-| `ui/badge_<achievement>` (12) | 24x24 | (12,12) | 1 / 1.0 / static | The medal (below) with the achievement's emblem on its face. Visible at most 22x22 |
+| `ui/badge_<achievement>` (12, ids below) | 24x24 | (12,12) | 1 / 1.0 / static | The medal (below) with the achievement's emblem on its face. Visible at most 22x22 |
 | `ui/collection_ornament` | 64x12 | (32,6) | 1 / 1.0 / static | A page divider: a thin `gold_dark` vine line from end to end with small curling wheat ears and leaves (`gold`, `gold_light`, `grass_light`), a small crescent moon over a wheat ear in the middle; symmetric. Visible at most 62x10 |
 
 - **The fish tab is not made here:** it is A023's `ui/icon_book_fish`/`hud_book_fish`
@@ -53,12 +55,23 @@ its pivot (±1) with at least 1 transparent row and column on every side.
   `gold_light` highlight upper left) about 16 px across, hanging from a short
   `roof`/`roof_dark` ribbon at the top. Every badge shares it; only the emblem
   changes.
-- **Badges, one per achievement id of 0287** (12 by default; 0287 writes the final
-  ids, each with one emblem line). Examples of the form: `badge_first_dawn` (the
-  farmhouse roof with a half sun rising behind it), `badge_full_moon_held` (a full
-  moon over a short stone wall), `badge_legendary_landed` (a leaping golden fish),
-  `badge_full_arsenal` (a tiny gun tower head), `badge_untouched_night` (an unbroken
-  wooden shield), `badge_year_two` (a sprout with two leaves).
+- **Badges, one per achievement id of 0287** (`GameData.ACHIEVEMENTS`, final), in
+  the screen's order, each with its emblem - the shape 0287's stand-in draws, so
+  the two read alike:
+  - `badge_first_night` - FIRST DAWN, survive a night: a crescent moon (`moon`);
+  - `badge_hundred_nights` - HUNDRED NIGHTS, 100 nights in all: a five-point star (`bone`);
+  - `badge_slayer` - SLAYER, 1000 kills in all: two crossed blades (`stone_light`, `wood_dark` hilts);
+  - `badge_builder` - BUILDER, 100 structures put up: three courses of bricks (`stone_light`);
+  - `badge_gatherer` - GATHERER, 5000 resources gathered: a tied sheaf of three ears (`gold_light`, `wood_dark`);
+  - `badge_angler` - ANGLER, 100 fish landed: a small fish in profile (`water_light`, `water`);
+  - `badge_regular` - OLD HAND, 3 runs started: the farmhouse, roof and door (`roof`, `bone`);
+  - `badge_long_haul` - LONG HAUL, 30 nights in one run: an hourglass (`bone`, `soil_light`, `wood_dark`);
+  - `badge_full_moon` - FULL MOON, a Full Moon night held: a full moon over a short stone wall (`moon`, `stone_dark`);
+  - `badge_legend` - LEGEND, a legendary fish landed: a three-point crown (`flame_hot`, `roof_dark` band);
+  - `badge_arsenal` - ARSENAL, every defence built once: a crenellated tower head (`stone_light`);
+  - `badge_year_two` - YEAR TWO, Year 2 reached: a sprout with two leaves (`grass_light`, `leaf`).
+- **The tabs, final:** fish (A023's `hud_book_fish`), crops, bosses (named TROPHIES on
+  screen), year, achievements (BADGES / CONQUISTAS), in that order down the column.
 - **Recipe** (mode A, `content_anchor_xy` `(scaled_w // 2, scaled_h // 2)` for every
   piece, `alpha_threshold` 128, `palette` `tools/palette.py:COLOURS`, `palette_keys`
   null unless a cut takes a colour from a ramp the piece does not have - then record

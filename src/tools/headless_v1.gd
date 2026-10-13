@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 105
+const GROUPS := 106
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -184,6 +184,7 @@ func _run() -> void:
 	_task_0284_enemy_sounds()
 	_task_0285_season_music()
 	_task_0286_weather_ambience()
+	_task_0287_collections()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -12555,6 +12556,180 @@ func _task_0286_weather_ambience() -> void:
 		"each stinger is a cue in assets/music at most STING_PEAK on the not-loop list; the weather's beats the Full Moon's, and a plain night has none",
 		str(cues))
 	_completed += 1
+
+## 0287 - the collections and the achievements. A harvest ticks its crop's
+## page and the same crop bought does not; a boss killed hangs its trophy; a
+## run that lost a night never earns the year, one whose boss only walked
+## off still can, and one that lost none and beat Winter 14 does; folding
+## twice adds nothing; a profile from before reads with the new keys; the
+## achievements' table is checked; and A056 is registered on 0120's road.
+## On crafted states: a 56-night run would not fit the 120 s.
+func _task_0287_collections() -> void:
+	var blank := Save.default_profile()
+	var none := Collections.counts(blank, {})
+	expect(str(none) == str({"fish": [0, Collections.fish_ids().size()],
+			"crops": [0, Collections.crop_ids().size()],
+			"trophies": [0, Collections.boss_ids().size()], "year": 0,
+			"achievements": [0, GameData.ACHIEVEMENTS.size()]})
+		and Collections.fish_ids().size() == 16 and Collections.crop_ids().size() == 12
+		and Collections.boss_ids() == [&"giant", &"harvester", &"scarecrow_king", &"winter_lord"],
+		"a new profile has every page and nothing on them: 16 fish, 12 crops, 4 bosses, 12 badges",
+		str(none))
+
+	# **A harvest, not the haul.**
+	var field := State.create(2870)
+	var plot: Vector2i = Farming.field_cells(field)[0]
+	(field["plots"] as Dictionary)[Grid.index(plot)] = Farming.EMPTY_PLOT.duplicate()
+	var here: Dictionary = Farming.plot(field, plot)
+	here["crop"] = GameData.WHEAT
+	here["growth"] = Farming.days_to_grow(GameData.WHEAT)
+	expect(Farming.verb_at(field, plot) == &"harvest", "fixture: a ripe wheat plot")
+	Farming.act(field, plot)
+	expect(int(Collections.crops(blank, field).get(GameData.WHEAT, 0)) == 1
+			and Collections.counts(blank, field)["crops"][0] == 1,
+		"a harvested crop ticks its page", str(Collections.crops(blank, field)))
+	Resources.add(field, GameData.WHEAT, 5)
+	Resources.add(field, GameData.CARROT, 5)
+	expect(int(Collections.crops(blank, field).get(GameData.WHEAT, 0)) == 1
+			and not Collections.crops(blank, field).has(GameData.CARROT),
+		"and the same crop or another brought in by Resources.add does not",
+		str(Collections.crops(blank, field)))
+	var once := Stats.fold(blank, field)
+	var twice := Stats.fold(once, field)
+	expect(int((once["collections"]["crops"] as Dictionary).get(GameData.WHEAT, 0)) == 1
+			and str(twice["collections"]) == str(once["collections"])
+			and str(twice["achievements"]) == str(once["achievements"])
+			and int(Collections.crops(twice, field).get(GameData.WHEAT, 0)) == 1,
+		"folding twice adds nothing: one wheat banked, and read back as one",
+		"%s / %s" % [str(once["collections"]), str(twice["collections"])])
+
+	# **A boss killed hangs its trophy**; an ordinary kill does not.
+	var hunt := State.create(2871)
+	var giant := Enemies.spawn(hunt, &"giant", 0)
+	var walker := Enemies.spawn(hunt, &"walker", 0)
+	expect(giant != 0 and walker != 0, "fixture: a giant and a walker on the farm")
+	Combat._kill(hunt, walker)
+	expect(Collections.trophies(blank, hunt).is_empty(), "a walker killed is no trophy")
+	Combat._kill(hunt, giant)
+	expect(int(Collections.trophies(blank, hunt).get(&"giant", 0)) == 1
+			and Collections.counts(blank, hunt)["trophies"][0] == 1,
+		"a giant killed adds its trophy", str(Collections.trophies(blank, hunt)))
+	var hung := Stats.fold(blank, hunt)
+	expect(int(Collections.trophies(hung, hunt).get(&"giant", 0)) == 1
+			and int(Collections.trophies(hung, {}).get(&"giant", 0)) == 1,
+		"and it is in the profile once folded, run or no run")
+
+	# **The year**: Winter 14's boss down and no night the house fell.
+	var lost := State.create(2872)
+	NightRoad.to_night(lost)
+	Phases.enter_result(lost, false)
+	_past_the_year(lost)
+	expect(int(lost["stats"]["nights_lost"]) == 1 and Run.beat_the_year(lost)
+			and not Collections.year_earned(lost)
+			and int(Stats.fold(blank, lost)["collections"]["years"]) == 0,
+		"a run that lost a night never earns the year, Winter 14 beaten or not",
+		str(lost["stats"]))
+	var fled := State.create(2873)
+	NightRoad.to_night(fled)
+	Phases.enter_result(fled, false, true)
+	_past_the_year(fled)
+	expect(int(fled["stats"]["nights_lost"]) == 0 and Collections.year_earned(fled),
+		"a boss that only walked off at dawn is not a lost house: that run can still earn it",
+		str(fled["stats"]))
+	var clean := State.create(2874)
+	expect(not Collections.year_earned(clean), "a run short of Winter 14 has not earned it")
+	clean["nights_won"] = 1
+	_past_the_year(clean)
+	var won := Stats.fold(blank, clean)
+	var won_again := Stats.fold(won, clean)
+	expect(Collections.year_earned(clean) and int(won["collections"]["years"]) == 1
+			and int(won_again["collections"]["years"]) == 1
+			and Collections.years(won_again, clean) == 1 and Collections.years(won_again, {}) == 1,
+		"one that lost none and beat Winter 14 earns it, once however often it folds",
+		str(won_again["collections"]))
+
+	# **The achievements**: banked at the fold, never taken away.
+	var badges: Dictionary = won["achievements"]
+	expect(badges.has(&"first_night") and badges.has(&"year_two")
+			and not badges.has(&"hundred_nights") and not badges.has(&"legend"),
+		"a night survived and Year 2 reached earn their badges, and nothing else",
+		str(badges.keys()))
+	var later := Stats.fold(won, State.create(2875))
+	expect((later["achievements"] as Dictionary).has(&"year_two"),
+		"and a badge stays when the next run has not earned it")
+	var moonlit := State.create(2876)
+	var moon_day := 0
+	for day in range(1, GameData.SEASON_DAYS + 1):
+		if Calendar.is_full_moon(day):
+			moon_day = day
+			break
+	moonlit["last_result"] = {"night": moon_day, "survived": true, "escaped": false, "ticks": 1}
+	var moon: Dictionary = GameData.ACHIEVEMENTS[&"full_moon"]
+	expect(moon_day > 0 and Collections.passes(blank, moonlit, moon),
+		"a Full Moon held passes its test", str(moon_day))
+	moonlit["last_result"]["survived"] = false
+	expect(not Collections.passes(blank, moonlit, moon), "and a Full Moon lost does not")
+	expect(GameData.check_achievements(GameData.ACHIEVEMENTS).is_empty()
+			and GameData.ACHIEVEMENTS.size() == 12,
+		"the table names a dozen, each a test and a number that exist",
+		str(GameData.check_achievements(GameData.ACHIEVEMENTS)))
+	var unknown := {&"x": {"name": &"ACH_X", "desc": &"ACH_X_DESC", "kind": &"teleported"}}
+	var unread := {&"x": {"name": &"ACH_X", "desc": &"ACH_X_DESC", "kind": &"lifetime",
+		"field": "dances", "n": 3}}
+	var unset := {&"x": {"name": &"ACH_X", "desc": &"ACH_X_DESC", "kind": &"run",
+		"field": "nights", "n": 0}}
+	expect(GameData.check_achievements(unknown).size() == 1
+			and GameData.check_achievements(unread).size() == 1
+			and GameData.check_achievements(unset).size() == 1,
+		"and validate refuses one naming an unknown test, an unknown number or no threshold")
+
+	# **A profile from before reads with the new keys**, no format bump.
+	var old := Save.default_profile()
+	old.erase("collections")
+	old.erase("achievements")
+	old["runs_started"] = 4
+	var path := "user://task_0287_profile.sav"
+	expect(Save.write_profile_at(path, old), "fixture: an old profile written")
+	var read := Save.read_profile_at(path)
+	expect(str(read.get("collections")) == str({"crops": {}, "years": 0})
+			and (read.get("achievements", null) as Dictionary).is_empty()
+			and int(read["runs_started"]) == 4,
+		"a profile without the new keys reads with their defaults and keeps its own",
+		str(read.get("collections")))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+
+	# **A056 on 0120's road**: every piece registered in its box until 0288.
+	var unregistered: Array = []
+	for boss in Collections.boss_ids():
+		var name := StringName("trophy_%s" % boss)
+		if PlaceholderArt.art(name).get("geometry") != PlaceholderArt.TROPHY \
+				or UiKit.picture(name) == null:
+			unregistered.append(name)
+	for id in GameData.ACHIEVEMENTS:
+		if not PlaceholderArt.is_drawn("res://sprites/ui/badge_%s.png" % id) \
+				or not CollectionArt.EMBLEMS.has(id):
+			unregistered.append(id)
+	for tab in [&"crops", &"bosses", &"year", &"achievements"]:
+		for cut in ["icon_book_%s", "hud_book_%s"]:
+			if UiKit.picture(StringName(cut % tab)) == null:
+				unregistered.append(cut % tab)
+	for piece in [&"collection_cover", &"collection_ornament"]:
+		if not PlaceholderArt.is_drawn("res://sprites/ui/%s.png" % piece):
+			unregistered.append(piece)
+	var emblems: Dictionary = {}
+	for id in CollectionArt.EMBLEMS:
+		emblems[CollectionArt.EMBLEMS[id]] = true
+	expect(unregistered.is_empty() and emblems.size() == GameData.ACHIEVEMENTS.size()
+			and PlaceholderArt.frame("res://sprites/ui/collection_cover.png").get("canvas") == Vector2i(48, 64),
+		"A056's cover, ornament, eight tab cuts, four trophies and twelve badges stand in, each badge its own emblem",
+		str(unregistered))
+	_completed += 1
+
+
+## Move a state's calendar past Winter 14, however many days its boss nights
+## held it.
+func _past_the_year(state: Dictionary) -> void:
+	state["day"] = Run.final_night() + 1 + int(state.get("days_held", 0))
 
 
 ## A WAV's join against its own 99th-percentile step, the way

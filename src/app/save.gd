@@ -80,6 +80,13 @@ static func default_profile() -> Dictionary:
 		# **The tips shown** (task 0195), by id: once ever, so a tip a
 		# player has seen in one run does not teach them again in the next.
 		"tips_seen": [],
+		# **The collections and achievements** (task 0287): the crops
+		# harvested and the years won without losing the house, banked by
+		# `Collections.fold`; and every achievement earned, by id. The fish
+		# and the trophies are `stats.lifetime`'s already. An older profile
+		# gets these from the merge in `read_profile` - no format bump.
+		"collections": {"crops": {}, "years": 0},
+		"achievements": {},
 	}
 
 
@@ -186,6 +193,12 @@ static func delete_run() -> void:
 
 # ------------------------------------------------------------------ profile
 
+## The profile, somewhere else (task 0287): for the checks, as
+## `write_run_at` is.
+static func write_profile_at(path: String, profile: Dictionary) -> bool:
+	return _write(path, {"profile": profile})
+
+
 static func write_profile(profile: Dictionary) -> bool:
 	return _write(PROFILE_PATH, {"profile": profile})
 
@@ -194,7 +207,12 @@ static func write_profile(profile: Dictionary) -> bool:
 ## error; a damaged one costs the player their statistics and nothing else, so
 ## it falls back rather than refusing to start the game.
 static func read_profile() -> Dictionary:
-	var payload := _read(PROFILE_PATH)
+	return read_profile_at(PROFILE_PATH)
+
+
+## The profile at `path`, merged over the defaults (task 0287 split it out).
+static func read_profile_at(path: String) -> Dictionary:
+	var payload := _read(path)
 	if payload.is_empty():
 		return default_profile()
 	var profile: Dictionary = payload.get("profile", {})

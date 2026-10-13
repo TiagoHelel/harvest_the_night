@@ -2297,6 +2297,51 @@ const TIPS: Array = [
 const TIP_MIN_SECONDS := 2              # LEVER: seconds, 1-4
 const TIP_SECONDS := 6                  # LEVER: seconds, 3-12
 
+## **The achievements** (task 0287): a dozen, none repeating a collection -
+## the fish, the crops, the bosses' trophies and the year are the four
+## collections - each a pure test of the lifetime stats, the collections and
+## this run's record (`Collections.earned`). `kind` names the test and, where
+## it reads one, `field` the number and `n` the threshold. `name` and `desc`
+## are literal `ACH_*` keys: a key built at runtime is invisible to
+## `tools/i18n_check.py`. `check_achievements` holds every one to a kind and a
+## field that exist.
+const ACHIEVEMENTS: Dictionary = {
+	&"first_night": {"name": &"ACH_FIRST_NIGHT", "desc": &"ACH_FIRST_NIGHT_DESC",
+		"kind": &"lifetime", "field": "nights", "n": 1},
+	&"hundred_nights": {"name": &"ACH_HUNDRED_NIGHTS", "desc": &"ACH_HUNDRED_NIGHTS_DESC",
+		"kind": &"lifetime", "field": "nights", "n": 100},     # LEVER: nights survived, 50-200
+	&"slayer": {"name": &"ACH_SLAYER", "desc": &"ACH_SLAYER_DESC",
+		"kind": &"lifetime", "field": "killed", "n": 1000},     # LEVER: kills, 500-3000
+	&"builder": {"name": &"ACH_BUILDER", "desc": &"ACH_BUILDER_DESC",
+		"kind": &"lifetime", "field": "built", "n": 100},       # LEVER: things put up, 50-300
+	&"gatherer": {"name": &"ACH_GATHERER", "desc": &"ACH_GATHERER_DESC",
+		"kind": &"lifetime", "field": "gathered", "n": 5000},   # LEVER: units gathered, 2000-20000
+	&"angler": {"name": &"ACH_ANGLER", "desc": &"ACH_ANGLER_DESC",
+		"kind": &"lifetime", "field": "fish", "n": 100},        # LEVER: fish landed, 50-300
+	&"regular": {"name": &"ACH_REGULAR", "desc": &"ACH_REGULAR_DESC",
+		"kind": &"lifetime", "field": "runs_started", "n": 3},  # LEVER: runs started, 2-10
+	&"long_haul": {"name": &"ACH_LONG_HAUL", "desc": &"ACH_LONG_HAUL_DESC",
+		"kind": &"run", "field": "nights", "n": 30},            # LEVER: nights in one run, 20-50
+	&"full_moon": {"name": &"ACH_FULL_MOON", "desc": &"ACH_FULL_MOON_DESC",
+		"kind": &"full_moon_held"},
+	&"legend": {"name": &"ACH_LEGEND", "desc": &"ACH_LEGEND_DESC",
+		"kind": &"legendary_landed"},
+	&"arsenal": {"name": &"ACH_ARSENAL", "desc": &"ACH_ARSENAL_DESC",
+		"kind": &"built_every_defence"},
+	&"year_two": {"name": &"ACH_YEAR_TWO", "desc": &"ACH_YEAR_TWO_DESC",
+		"kind": &"year_reached", "n": 2},                       # LEVER: year, 2-3
+}
+
+## The tests an achievement may name, and the fields each reads (task 0287).
+const ACHIEVEMENT_KINDS: Dictionary = {
+	&"lifetime": ["nights", "killed", "built", "gathered", "fish", "runs_started"],
+	&"run": ["nights", "killed", "built"],
+	&"full_moon_held": [],
+	&"legendary_landed": [],
+	&"built_every_defence": [],
+	&"year_reached": [],
+}
+
 
 ## What repairing costs, per hit point put back.
 ## What a hit point of **the house** costs. The house has no build cost to
@@ -4189,6 +4234,7 @@ static func validate() -> Array:
 	errors.append_array(check_stall_hours(STALL_OPENS, STALL_CLOSES))
 	errors.append_array(check_tutorial(TUTORIAL))
 	errors.append_array(check_tips(TIPS))
+	errors.append_array(check_achievements(ACHIEVEMENTS))
 	errors.append_array(check_pathing(TERRAIN_COST, DEFENCES, BUILDINGS))
 
 	for res in sorted_names(REPAIR_COST_PER_HP.keys()):
@@ -6006,6 +6052,29 @@ static func check_loot(cap: int, stones: int, rate: int, fade: int,
 	return errors
 
 
+## **Every achievement names a test and a number that exist** (task 0287): a
+## kind in `kinds`, a field that kind reads where it reads one, a threshold of
+## at least one where it takes one, and literal `ACH_*` keys for its name and
+## line.
+static func check_achievements(table: Dictionary, kinds: Dictionary = ACHIEVEMENT_KINDS) -> Array:
+	var errors: Array = []
+	for id in sorted_names(table.keys()):
+		var one: Dictionary = table[id]
+		for key in ["name", "desc"]:
+			if not String(one.get(key, "")).begins_with("ACH_"):
+				errors.append("achievement '%s' has no ACH_ %s key" % [id, key])
+		var kind := StringName(one.get("kind", &""))
+		if not kinds.has(kind):
+			errors.append("achievement '%s' names an unknown test '%s'" % [id, kind])
+			continue
+		var fields: Array = kinds[kind]
+		if not fields.is_empty() and not fields.has(String(one.get("field", ""))):
+			errors.append("achievement '%s' reads an unknown number '%s'" % [id, one.get("field", "")])
+		if (not fields.is_empty() or kind == &"year_reached") and int(one.get("n", 0)) < 1:
+			errors.append("achievement '%s' has no threshold" % id)
+	return errors
+
+
 static func check_tips(tips: Array) -> Array:
 	var errors: Array = []
 	var seen: Dictionary = {}
@@ -6451,6 +6520,8 @@ static func digest() -> int:
 		"stall_hours": [STALL_OPENS, STALL_CLOSES],
 		"tutorial": TUTORIAL,
 		"tips": [TIPS, TIP_MIN_SECONDS, TIP_SECONDS],
+		# The achievements (task 0287).
+		"achievements": [ACHIEVEMENTS, ACHIEVEMENT_KINDS],
 		"crops": CROPS,
 		"no_growth_seasons": NO_GROWTH_SEASONS,
 		"water": [WATER_CAN_CAPACITY],

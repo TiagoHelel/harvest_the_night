@@ -261,6 +261,11 @@ static func enter_result(state: Dictionary, survived: bool, escaped: bool = fals
 		state["days_held"] = int(state.get("days_held", 0)) + 1
 	if survived:
 		state["nights_won"] = int(state["nights_won"]) + 1
+	elif not escaped:
+		# **A night the house fell** (task 0287). A boss that walked off at
+		# dawn comes here not survived and `escaped`, with the house up: not
+		# one.
+		Stats.lost_a_night(state)
 	# The boss falling ends the year even if the house fell afterwards.
 	if Run.is_over(state):
 		state["last_result"]["run_over"] = true

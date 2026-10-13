@@ -854,3 +854,53 @@ DESC_HOUSES,224,Houses %d animals,Abriga %d animais
 DESC_EATS,224,Each eats %d %s a day,Cada um come %d de %s por dia
 WHY_GATHER_SEASON,224,Available from %s,Disponível a partir de %s
 DESC_FUEL_FALLBACK,224,Oil first; coal when empty,Óleo primeiro; carvão se acabar
+ACT_COLLECTIONS,112,COLLECTIONS,COLEÇÕES
+ACT_PAD_SHARE,104,SHARE,COMPARTILHAR
+TITLE_COLLECTIONS,140,COLLECTIONS,COLEÇÕES
+COLL_TITLE,0,COLLECTIONS,COLEÇÕES
+COLL_HINT_TITLE,0,%s / %s or up / down: tabs. ESC to go back.,%s / %s ou cima / baixo: abas. ESC para voltar.
+COLL_HINT_RUN,0,%s / %s or up / down: tabs. %s or ESC to close.,%s / %s ou cima / baixo: abas. %s ou ESC para fechar.
+COLL_TAB_FISH,96,FISH %d/%d,PEIXES %d/%d
+COLL_TAB_CROPS,96,CROPS %d/%d,COLHEITAS %d/%d
+COLL_TAB_BOSSES,96,TROPHIES %d/%d,TROFÉUS %d/%d
+COLL_TAB_YEAR,96,YEARS %d,ANOS %d
+COLL_TAB_ACHIEVEMENTS,96,BADGES %d/%d,CONQUISTAS %d/%d
+COLL_FISH_TURN,332,LEFT / RIGHT: TURN THE PAGE,ESQUERDA / DIREITA: VIRAR A PÁGINA
+COLL_CROPS_COUNT,332,%d OF %d CROPS HARVESTED,%d DE %d CULTURAS COLHIDAS
+COLL_CROP_HARVESTED,90,HARVESTED %d,COLHIDAS %d
+COLL_NOT_YET,83,NOT YET,AINDA NÃO
+COLL_BOSSES_COUNT,332,%d OF %d TROPHIES,%d DE %d TROFÉUS
+COLL_BOSS_FELL,83,DEFEATED: %d,DERROTADO: %d
+COLL_BOSSES_RULE,332,A trophy for every boss that falls,Um troféu para cada chefe que cai
+COLL_YEAR_COUNT,332,YEARS WON WITHOUT LOSING THE HOUSE: %d,ANOS VENCIDOS SEM PERDER A CASA: %d
+COLL_YEAR_RULE,0,Beat Winter 14's boss without the house falling on a single night.,Derrote o chefe do Inverno 14 sem que a casa caia em nenhuma noite.
+COLL_YEAR_RUN,292,THIS RUN: %d NIGHTS LOST,NESTA PARTIDA: %d NOITES PERDIDAS
+COLL_YEAR_ON_TRACK,292,Still on track for it,Ainda dá para conseguir
+COLL_YEAR_BROKEN,292,The house fell: not this run,A casa caiu: nesta partida não
+COLL_YEAR_DONE,292,Won in this run,Conquistado nesta partida
+COLL_YEAR_NO_RUN,292,Start a run to try for it,Comece uma partida para tentar
+COLL_ACH_COUNT,332,%d OF %d EARNED,%d DE %d CONQUISTADAS
+ACH_FIRST_NIGHT,138,FIRST DAWN,PRIMEIRA AURORA
+ACH_FIRST_NIGHT_DESC,138,Survive a night,Sobreviva a uma noite
+ACH_HUNDRED_NIGHTS,138,HUNDRED NIGHTS,CEM NOITES
+ACH_HUNDRED_NIGHTS_DESC,138,Survive %d nights in all,Sobreviva a %d noites
+ACH_SLAYER,138,SLAYER,EXTERMINADOR
+ACH_SLAYER_DESC,138,Kill %d monsters in all,Mate %d monstros
+ACH_BUILDER,138,BUILDER,CONSTRUTOR
+ACH_BUILDER_DESC,138,Put up %d structures,Erga %d estruturas
+ACH_GATHERER,138,GATHERER,COLETOR
+ACH_GATHERER_DESC,138,Gather %d resources,Colete %d recursos
+ACH_ANGLER,138,ANGLER,PESCADOR
+ACH_ANGLER_DESC,138,Land %d fish in all,Pesque %d peixes
+ACH_REGULAR,138,OLD HAND,VETERANO
+ACH_REGULAR_DESC,138,Start %d runs,Comece %d partidas
+ACH_LONG_HAUL,138,LONG HAUL,LONGA JORNADA
+ACH_LONG_HAUL_DESC,138,Survive %d nights in a run,%d noites numa partida
+ACH_FULL_MOON,138,FULL MOON,LUA CHEIA
+ACH_FULL_MOON_DESC,138,Hold a Full Moon night,Sobreviva a uma Lua Cheia
+ACH_LEGEND,138,LEGEND,LENDA
+ACH_LEGEND_DESC,138,Land a legendary fish,Pesque um peixe lendário
+ACH_ARSENAL,138,ARSENAL,ARSENAL
+ACH_ARSENAL_DESC,138,Build every defence once,Erga cada defesa uma vez
+ACH_YEAR_TWO,138,YEAR TWO,ANO DOIS
+ACH_YEAR_TWO_DESC,138,Reach Year %d,Chegue ao Ano %d

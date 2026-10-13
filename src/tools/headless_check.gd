@@ -15981,11 +15981,11 @@ func _task_0092_router() -> void:
 			if String(AppScript.NAMES[state]) == wanted:
 				found = true
 		expect(found, "the router has a %s state" % wanted)
-	# **Nine since task 0096 added PAUSE.** A counted constant, deliberately:
-	# a state arriving without anybody deciding to add one is a state nothing
-	# routes to.
-	expect(AppScript.STATES.size() == 9,
-		"and nine of them - task 0092's eight, and the pause menu",
+	# **Ten since task 0287 added COLLECTIONS** (nine since 0096 added PAUSE).
+	# A counted constant, deliberately: a state arriving without anybody
+	# deciding to add one is a state nothing routes to.
+	expect(AppScript.STATES.size() == 10,
+		"and ten of them - task 0092's eight, the pause menu and the collections",
 		str(AppScript.STATES.size()))
 
 	# **The whole machine, with no tree.** Changing a scene is the one thing

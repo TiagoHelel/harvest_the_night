@@ -41,6 +41,16 @@ static func initial() -> Dictionary:
 			# How many things the player has put up this run, and of what.
 			"built": 0,
 			"built_by_kind": {},
+			# **What came out of the field, by crop** (task 0287): harvests,
+			# counted in `Farming._harvest` - not `gained`, which a purchase,
+			# a gift and the loot all land in too. The crop collection reads
+			# it.
+			"harvested_by_crop": {},
+			# **The nights the house fell** (task 0287), counted in
+			# `Phases.enter_result`. A boss that walks off at dawn is not one:
+			# that night ends `escaped`, the house up. The year collection
+			# reads it.
+			"nights_lost": 0,
 			# What of the above has already been added to the profile's
 			# lifetime totals. See the note on banking at the top.
 			"banked": {},
@@ -58,6 +68,21 @@ static func built(state: Dictionary, id: StringName) -> void:
 	mine["built"] = int(mine.get("built", 0)) + 1
 	var by_kind: Dictionary = mine["built_by_kind"]
 	by_kind[id] = int(by_kind.get(id, 0)) + 1
+
+
+## One crop harvested (task 0287), from `Farming._harvest`.
+static func harvested(state: Dictionary, crop: StringName) -> void:
+	var mine: Dictionary = state["stats"]
+	if not mine.has("harvested_by_crop"):
+		mine["harvested_by_crop"] = {}
+	var by_crop: Dictionary = mine["harvested_by_crop"]
+	by_crop[crop] = int(by_crop.get(crop, 0)) + 1
+
+
+## The house fell tonight (task 0287), from `Phases.enter_result`.
+static func lost_a_night(state: Dictionary) -> void:
+	var mine: Dictionary = state["stats"]
+	mine["nights_lost"] = int(mine.get("nights_lost", 0)) + 1
 
 
 # -------------------------------------------------------------------- reading
@@ -147,7 +172,9 @@ static func fold(profile: Dictionary, state: Dictionary) -> Dictionary:
 
 	stats["lifetime"] = life
 	out["stats"] = stats
-	return out
+	# **And the collections and achievements** (task 0287), banked the same
+	# way, from here so that every fold site gets them.
+	return Collections.fold(out, state)
 
 
 ## **The book across every run** (task 0182): each species ever landed and

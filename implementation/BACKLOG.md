@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####################....`  **242 / 296 done**
+`####################....`  **243 / 296 done**
 
-0 doing / 53 todo / 1 blocked across 18 phases.
+0 doing / 52 todo / 1 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-54 task(s) left, the ready ones first, then what they
+53 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -763,25 +763,23 @@ The phase's own target: an average player reaches winter having lost two to four
   - done when: The season groups of 0271-0274 still pass with the moved levers, or the journal says which asserted relation the data proved wrong and how it was rewritten
   - done when: `python tools/balance.py` reads only `RUN` lines, and a short sweep leaves `game_data.gd` restored, the git tree clean and no `.balance-lock` behind
 
-### 0287 - Collections and achievements
+### 0288 - Art: the collection book, trophies and badges
 
-Ready to pick up.  Likely files: `src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md`.
+Waits for Codex art A056.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/collections_screen.gd`.
 
-The plan's reason to start Year 2: four collections - fish, crops, the bosses' trophies and a year without losing the house - and a short list of achievements, kept in the profile across runs and shown on one screen.
+The book cover, the four boss trophies and the achievement badges Codex drew replace 0287's stand-ins, so the screen a player opens before Year 2 looks like the rest of the game.
 
-- A node-free `src/core/collections.gd` in the shape of `Stats`: it reads facts other modules already count and keeps no second ledger - fish from 0182's book, trophies from 0246's `Combat.bosses_down_of` (`killed_by_kind_all_run`) for every `is_boss` kind, crops from a harvest tally - and folds them into the profile with the banking of `Stats.fold` (`stats.banked`), so folding twice adds nothing. Call it from inside `Stats.fold`, so every fold site (`main.gd`'s autosaves, `Run.record`) gets it without a second call
-- Crops count harvests, not `gained`: everything `Resources.add` brings in (a purchase through `Shop.buy`, a gift, loot) lands in `gained` too. Add `stats.harvested_by_crop` to `Stats.initial()` (inside the `stats` TABLE, so reconcile fills old saves and no version bump is needed), counted in `Farming._harvest` the way `Stats.built` is counted in `Building.place`. SIM moves on purpose (the state gains keys): both numbers in the journal
-- 'A year without losing the house' is a run that saw Winter 14's boss fall (0160's `Run.is_over`) with no night on which the house fell; a boss that walks off at dawn (0153's escaped outcome) is not a lost house. Nothing counts lost nights today: add `stats.nights_lost` beside the crop tally, counted in `Phases.enter_result` when the house fell (read how 0153 marks an escape in `last_result` and leave that out)
-- About a dozen achievements, decided here, repeating none of the collections - e.g. first night survived, a Full Moon held (0152's `Calendar.is_full_moon`), a legendary landed, every defence in `DEFENCES` built once, a night with nothing destroyed, Year 2 reached - each a pure test of the lifetime stats, the collections and this run's record. A table in `game_data.gd` (thresholds `# LEVER`, a `check_achievements` in `GameData.validate()` that every id it names exists, listed in `GameData.digest()` so DATA moves on purpose) whose entries carry literal `&"ACH_*"` keys for a name and a one-line description: a key built at runtime is invisible to `tools/i18n_check.py`
-- The profile: `Save.default_profile()` gains `collections` and `achievements`; `read_profile` already merges the defaults, so an older profile loads with no format bump. No toast for a newly earned badge in this task: the skeleton asks for the screen, and the task has to fit one invocation
-- `src/ui/collections_screen.gd`, a sibling of `StatsScreen` (a node in `scenes/Title.tscn` and `scenes/Main.tscn`, as it is): tabs for fish (0182's book view embedded - reuse its pages, do not rebuild them; 0182's own way in keeps working), crops, bosses, the year and achievements, each with a count. Locked trophies and badges are the earned art dimmed by code, so A056 needs no locked state
-- Ways in: the title menu (`ENTRIES` gains `collections`, `TITLE_COLLECTIONS`), a `COLLECTIONS` router state in `App.STATES` and `App.NAMES` (update the state count `_task_0092_router` asserts in `headless_check.gd`) and, in a run, a new `collections` action in `InputActions.ACTIONS` (`ACT_COLLECTIONS`, `ACT_GROUP_SCREENS`) with key and pad bindings in `project.godot` (0121's sync and clash checks), opened and closed the way the `stats` key opens `StatsScreen`. Strings in both languages, e.g. `TITLE_COLLECTIONS` (COLLECTIONS / COLEÇÕES), the tabs, every `ACH_*`
-- Placeholders until 0288 integrates A056, through 0120's road: the existing crop and fish icons on the tabs, each boss's first frame as its trophy, code-drawn shapes for the badges, the cover and the ornament - never a hand-drawn PNG
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A056` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A056-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/<family>/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_<family>_art.py`, `ArtPlacement` if needed).
+- Family `ui`, no text in any of it: names, canvases and pivots exactly as A056's Deliverables table (settled by 0287) - the cover, the tab icons, a trophy per `is_boss` enemy, a badge per achievement id, the ornament. `tools/check_ui_art.py` hard-codes the 0018 resource icons (`len(plans)==15`): give the A056 set its own section and counts rather than loosening that one, and show it in `ui_art_showcase.gd`
+- Delete A056's entries from 0120's placeholder registry (`src/ui/placeholder_art.gd`) once the raster outputs land at the same paths, so `collections_screen.gd` draws the real art through the lookup it already uses and `python tools/placeholders.py` no longer lists A056; locked trophies and badges stay the same art dimmed by code
+- Set the pack to integrated: `python implementation/backlog/assets.py set A056 integrated`.
 
-  - done when: `_task_0287_collections` in `src/tools/headless_v1.gd`, on crafted states rather than a 56-night run (the 120 s limit): a harvested crop ticks its page and the same crop added through `Resources.add` does not; a boss killed adds its trophy; a run that lost a night never earns the year, one whose boss only escaped still can, and one that lost none and beat Winter 14 does; folding twice adds nothing; a profile without the new keys reads with defaults; `GameData.validate()` refuses an achievement naming an unknown id
-  - done when: `_case_0287_collections` in `src/tools/input_v1.gd`: the title menu opens the screen, the tabs move by keyboard and by pad, cancel goes back to the title; in a run the `collections` key opens and closes it
-  - done when: FHD captures of every tab with an empty and a full profile in English, and with the full profile in Portuguese (`src/tools/capture_menus.gd` or a new `shot.gd` scenario), opened and looked at, in `implementation/shots/0287/`
-  - done when: The Deliverables table of `implementation/backlog/packs/A056-collections.md` states the final geometry this task settled: canvases, pivots and runtime names for the cover, the tab icons, a trophy per boss, one badge per achievement id and the ornament
+  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass with the A056 set counted
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures of the collections screen, every tab with a full profile, opened in a run by day and by night, opened and looked at, in `implementation/shots/0288/`
+  - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0289 - Art: the morning report
 
@@ -885,42 +883,6 @@ After the Winter Lord the farm carries on, and today that means the MVP's endles
   - done when: The `python tools/nights.py --years 3` summary and where the `balanced` policy fell in Year 2 are in the journal
   - done when: `python tools/shot.py 0279 year_two --fhd` opened: the year label fits, in English and in Portuguese
 
-### 0288 - Art: the collection book, trophies and badges
-
-Waits on 0287.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/collections_screen.gd`.
-
-The book cover, the four boss trophies and the achievement badges Codex drew replace 0287's stand-ins, so the screen a player opens before Year 2 looks like the rest of the game.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A056` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A056-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/<family>/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_<family>_art.py`, `ArtPlacement` if needed).
-- Family `ui`, no text in any of it: names, canvases and pivots exactly as A056's Deliverables table (settled by 0287) - the cover, the tab icons, a trophy per `is_boss` enemy, a badge per achievement id, the ornament. `tools/check_ui_art.py` hard-codes the 0018 resource icons (`len(plans)==15`): give the A056 set its own section and counts rather than loosening that one, and show it in `ui_art_showcase.gd`
-- Delete A056's entries from 0120's placeholder registry (`src/ui/placeholder_art.gd`) once the raster outputs land at the same paths, so `collections_screen.gd` draws the real art through the lookup it already uses and `python tools/placeholders.py` no longer lists A056; locked trophies and badges stay the same art dimmed by code
-- Set the pack to integrated: `python implementation/backlog/assets.py set A056 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass with the A056 set counted
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures of the collections screen, every tab with a full profile, opened in a run by day and by night, opened and looked at, in `implementation/shots/0288/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0280 - Checkpoint: do fifty-six nights tire?
-
-Waits on 0277, 0278, 0279.  Likely files: `implementation/PROGRESS.md, implementation/shots/0280/, src/tools/shot.gd, src/tools/nights.gd, implementation/prompts/ (later prompts, if the answer needs it), tools/backlog/ (new tasks, if any)`.
-
-The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpoint like 0027, 0066 and 0148, not a feature - a 'yes' found here is worth more than every polish task after it.
-
-- Play, not only measure: the year autoplayer for all four policies, `python tools/nights.py` for the year, and at least one night of each season and each boss night driven through the real game with the cursor, by mouse and by pad (a real pad if one is attached; say honestly if it was synthetic), and looked at
-- Captures at 1920x1080 (`python tools/shot.py 0280 <scenarios> --fhd`): each season by day and at night mid-wave, a Full Moon, a fog or rain night, a Blood Moon, and the four bosses mid-fight. Reuse what exists - 0159's `season_*`, 0258's `fog`, `rain`, `blood_moon` and `full_moon`, 0246's `boss` and the boss scenarios of 0253-0255 - and add to `src/tools/shot.gd` only what is missing (a tool change, hashes untouched)
-- Look for sameness with numbers, computed by a tool rather than by eye (a `--sameness` report in `src/tools/nights.gd`): per season, how many nights share a mix of kinds and sides; the longest run of nights that bring nothing new (no new enemy, side, weapon, event or boss); how often the forecast says the same thing two nights running
-- Answer in the journal: do the fifty-six nights tire, where and why, with the stretches named by day - then what would fix it (more events, fewer generated nights, new key nights, shorter seasons) and what each fix costs
-- Fixes that fit go into the later prompts (P16-P17), or into new tasks in `tools/backlog/part*.py` run through `python tools/gen_backlog.py` - each with a free id and added to 0295's deps, so the playtest waits for it; anything that changes an owner decision (14 days a season, Normal only) is a recommendation to the owner in the journal, not an edit made here
-- If the honest answer is that the year tires and the cure is bigger than prompt edits, mark this task blocked with the reason (`python tools/task.py blocked 0280 "<why>"`), so 0295 (the playtest of the year) waits for the owner
-- No rule changes here: nothing in `src/core/` moves, and neither hash moves
-
-  - done when: `implementation/shots/0280/` holds the FHD captures listed above, every one opened and looked at; the journal names what is wrong in any of them
-  - done when: The journal has the year's autoplayer table, the sameness numbers and the longest stretch with nothing new, by day
-  - done when: The journal answers 'do the fifty-six nights tire?' in plain words and lists every prompt edited and every task added because of it
-
 ### 0290 - The 1.0 visual gate
 
 Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
@@ -940,9 +902,27 @@ Before 1.0 ships, look at the whole game in its real frame - every screen, seaso
   - done when: The catalogue names a capture for every family and state in the lists above
   - done when: Every follow-up is filed as a task (and a pack when it needs art) with ids, each one in 0297's deps, none left as prose
 
+### 0280 - Checkpoint: do fifty-six nights tire?
+
+Waits on 0277, 0278, 0279.  Likely files: `implementation/PROGRESS.md, implementation/shots/0280/, src/tools/shot.gd, src/tools/nights.gd, implementation/prompts/ (later prompts, if the answer needs it), tools/backlog/ (new tasks, if any)`.
+
+The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpoint like 0027, 0066 and 0148, not a feature - a 'yes' found here is worth more than every polish task after it.
+
+- Play, not only measure: the year autoplayer for all four policies, `python tools/nights.py` for the year, and at least one night of each season and each boss night driven through the real game with the cursor, by mouse and by pad (a real pad if one is attached; say honestly if it was synthetic), and looked at
+- Captures at 1920x1080 (`python tools/shot.py 0280 <scenarios> --fhd`): each season by day and at night mid-wave, a Full Moon, a fog or rain night, a Blood Moon, and the four bosses mid-fight. Reuse what exists - 0159's `season_*`, 0258's `fog`, `rain`, `blood_moon` and `full_moon`, 0246's `boss` and the boss scenarios of 0253-0255 - and add to `src/tools/shot.gd` only what is missing (a tool change, hashes untouched)
+- Look for sameness with numbers, computed by a tool rather than by eye (a `--sameness` report in `src/tools/nights.gd`): per season, how many nights share a mix of kinds and sides; the longest run of nights that bring nothing new (no new enemy, side, weapon, event or boss); how often the forecast says the same thing two nights running
+- Answer in the journal: do the fifty-six nights tire, where and why, with the stretches named by day - then what would fix it (more events, fewer generated nights, new key nights, shorter seasons) and what each fix costs
+- Fixes that fit go into the later prompts (P16-P17), or into new tasks in `tools/backlog/part*.py` run through `python tools/gen_backlog.py` - each with a free id and added to 0295's deps, so the playtest waits for it; anything that changes an owner decision (14 days a season, Normal only) is a recommendation to the owner in the journal, not an edit made here
+- If the honest answer is that the year tires and the cure is bigger than prompt edits, mark this task blocked with the reason (`python tools/task.py blocked 0280 "<why>"`), so 0295 (the playtest of the year) waits for the owner
+- No rule changes here: nothing in `src/core/` moves, and neither hash moves
+
+  - done when: `implementation/shots/0280/` holds the FHD captures listed above, every one opened and looked at; the journal names what is wrong in any of them
+  - done when: The journal has the year's autoplayer table, the sameness numbers and the longest stretch with nothing new, by day
+  - done when: The journal answers 'do the fifty-six nights tire?' in plain words and lists every prompt edited and every task added because of it
+
 ### 0291 - Saves into 1.0
 
-Waits on 0279, 0287.  Likely files: `src/app/save.gd, src/tools/make_goldens.gd, src/tools/play_goldens.gd (new), tools/verify.py, tools/goldens/, src/ui/title_screen.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd, assets/locale/strings.csv`.
+Waits on 0279.  Likely files: `src/app/save.gd, src/tools/make_goldens.gd, src/tools/play_goldens.gd (new), tools/verify.py, tools/goldens/, src/ui/title_screen.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd, assets/locale/strings.csv`.
 
 Somebody who played the 0.1 prototype opens 1.0 and finds their farm in the calendar, or is told plainly where it went - never a crash and never an empty title. This is the last look at every save shape before a stranger's save depends on it.
 
@@ -963,7 +943,7 @@ Somebody who played the 0.1 prototype opens 1.0 and finds their farm in the cale
 
 ### 0294 - Every new word in Portuguese
 
-Waits on 0287, 0293, 0291, 0292.  Likely files: `assets/locale/strings.csv, tools/i18n_check.py, src/ui/names.gd, src/tools/headless_v1.gd`.
+Waits on 0293, 0291, 0292.  Likely files: `assets/locale/strings.csv, tools/i18n_check.py, src/ui/names.gd, src/tools/headless_v1.gd`.
 
 Portuguese is the owner's language and most of the audience's. Every line 1.0 added gets read again as a whole: one name for each thing, sentences that agree in gender and number, and nothing running off its button.
 
@@ -1367,7 +1347,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
 - [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0277, 0278, 0279
 
-## 16 - Sound, collections and polish  (6/10)
+## 16 - Sound, collections and polish  (7/10)
 
 - [x] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md)
 - [x] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md)
@@ -1375,17 +1355,17 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md)
 - [x] **0285** [Music for four seasons](prompts/0285-music-seasons.md)
 - [x] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md)
-- [ ] **0287** [Collections and achievements](prompts/0287-collections.md)
-- [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - needs 0287 - waits for art A056
+- [x] **0287** [Collections and achievements](prompts/0287-collections.md)
+- [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - waits for art A056
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
 - [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (0/7)
 
-- [ ] **0291** [Saves into 1.0](prompts/0291-saves-v1.md) - needs 0279, 0287
+- [ ] **0291** [Saves into 1.0](prompts/0291-saves-v1.md) - needs 0279
 - [ ] **0292** [Options for the new controls](prompts/0292-options-v1.md)
 - [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md)
-- [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0287, 0293, 0291, 0292
+- [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0293, 0291, 0292
 - [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0280, 0291, 0292, 0293, 0294
 - [ ] **0296** [The store page and trailer for 1.0](prompts/0296-store-v1.md) - needs 0290, 0294
 - [ ] **0297** [Releasing 1.0](prompts/0297-release-v1.md) - needs 0290, 0291, 0292, 0293, 0294, 0295, 0296

@@ -46,11 +46,14 @@ enum {
 	STATS,
 	OPTIONS,
 	SUMMARY,
+	# **The collections and achievements** (task 0287), from the title menu
+	# or the `collections` key in a run - an overlay, like STATS.
+	COLLECTIONS,
 }
 
 ## Every state, in order, for the checks and for printing.
 const STATES: Array = [BOOT, TITLE, MENU, RUN, PAUSE, TECH, STATS,
-	OPTIONS, SUMMARY]
+	OPTIONS, SUMMARY, COLLECTIONS]
 
 const NAMES: Dictionary = {
 	BOOT: "BOOT",
@@ -62,6 +65,7 @@ const NAMES: Dictionary = {
 	STATS: "STATS",
 	OPTIONS: "OPTIONS",
 	SUMMARY: "SUMMARY",
+	COLLECTIONS: "COLLECTIONS",
 }
 
 ## The states that are a scene of their own.

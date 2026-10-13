@@ -286,6 +286,16 @@ const SCARECROW_KING_TINT := Color(1.2, 1.0, 0.45)
 const WINTER_LORD := {"canvas": Vector2i(80, 64), "pivot": Vector2i(40, 60), "draw_scale": 1.0}
 const WINTER_LORD_TINT := Color(0.95, 1.15, 1.65)
 
+## A056's collection book (task 0287), HUD art drawn at 1.0: the closed book
+## on the screen's corner 48x64 round (24,32), a boss's trophy on its plaque
+## 32x32 round (16,16), an achievement's medal 24x24 round (12,12) and the
+## page ornament 64x12 round (32,6). Its tab books are the item icons' boxes,
+## `MARK_ICON` and `MARK_HUD`.
+const COLLECTION_COVER := {"canvas": Vector2i(48, 64), "pivot": Vector2i(24, 32), "draw_scale": 1.0}
+const TROPHY := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "draw_scale": 1.0}
+const BADGE := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 12), "draw_scale": 1.0}
+const ORNAMENT := {"canvas": Vector2i(64, 12), "pivot": Vector2i(32, 6), "draw_scale": 1.0}
+
 ## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
 ## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
 const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
@@ -718,6 +728,37 @@ const ART := {
 	&"hud_grape_seed": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_corn", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_beet_seed": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_beet_seed": {"pack": "A017", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(0.72, 0.84, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	# A056's collection book (task 0287), until 0288 integrates it: the
+	# cover, the ornament and every badge drawn by code (`CollectionArt`);
+	# the tab books the crops' wheat, the boss night's mark, winter and the
+	# gold coin; a trophy each boss's first walk frame in its tint, on a
+	# plaque drawn by code.
+	&"collection_cover": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": COLLECTION_COVER, "final": COLLECTION_COVER, "bare": true},
+	&"collection_ornament": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": ORNAMENT, "final": ORNAMENT, "bare": true},
+	&"icon_book_crops": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_wheat", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_book_crops": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_wheat", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_book_bosses": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_boss_night", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_book_bosses": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_boss_night", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_book_year": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_winter", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_book_year": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_winter", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"icon_book_achievements": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_gold", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
+	&"hud_book_achievements": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gold", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
+	&"trophy_giant": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/giant_walk_0", "geometry": TROPHY, "final": TROPHY, "bare": true},
+	&"trophy_harvester": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/giant_walk_0", "tint": HARVESTER_TINT, "geometry": TROPHY, "final": TROPHY, "bare": true},
+	&"trophy_scarecrow_king": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/giant_walk_0", "tint": SCARECROW_KING_TINT, "geometry": TROPHY, "final": TROPHY, "bare": true},
+	&"trophy_winter_lord": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/giant_walk_0", "tint": WINTER_LORD_TINT, "geometry": TROPHY, "final": TROPHY, "bare": true},
+	&"badge_first_night": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_hundred_nights": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_slayer": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_builder": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_gatherer": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_angler": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_regular": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_long_haul": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_full_moon": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_legend": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_arsenal": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
+	&"badge_year_two": {"pack": "A056", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": BADGE, "final": BADGE, "bare": true},
 }
 
 

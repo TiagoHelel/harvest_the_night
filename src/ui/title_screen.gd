@@ -63,6 +63,8 @@ const ENTRIES: Array = [
 	[&"continue", &"TITLE_CONTINUE"],
 	[&"new", &"TITLE_NEW"],
 	[&"stats", &"TITLE_STATS"],
+	# Task 0287: the collections and achievements, kept across runs.
+	[&"collections", &"TITLE_COLLECTIONS"],
 	[&"options", &"TITLE_OPTIONS"],
 	[&"quit", &"TITLE_QUIT"],
 ]
@@ -78,6 +80,7 @@ var _ident: Label
 var _version: Label
 var _menu: VBoxContainer
 var _stats: StatsScreen
+var _collections: CollectionsScreen
 var _options: OptionsScreen
 var _router: Node
 
@@ -89,6 +92,7 @@ func _ready() -> void:
 	_ident = get_node_or_null(^"UI/Screen/Ident") as Label
 	_menu = get_node_or_null(^"UI/Screen/Menu") as VBoxContainer
 	_stats = get_node_or_null(^"UI/Screen/StatsScreen") as StatsScreen
+	_collections = get_node_or_null(^"UI/Screen/CollectionsScreen") as CollectionsScreen
 
 	_options = get_node_or_null(^"UI/Screen/OptionsScreen") as OptionsScreen
 	_crash = get_node_or_null(^"UI/Screen/CrashDialog") as CrashDialog
@@ -259,6 +263,7 @@ func _wear(state: int) -> void:
 	var menu_up: bool = state == _router.MENU
 	var options_up: bool = state == _router.OPTIONS
 	var stats_up: bool = state == _router.STATS
+	var collections_up: bool = state == _router.COLLECTIONS
 	if _ident != null:
 		# **Not while the crash dialogue is up**, because then it is a lie:
 		# the dialogue has the keyboard, and a screen that says PRESS ANY
@@ -281,6 +286,13 @@ func _wear(state: int) -> void:
 		if stats_up:
 			_stats.show_state(_state)
 			_stats.show_profile(Save.read_profile())
+	if _collections != null:
+		# **No run under the title**: the backdrop's farm is not the
+		# player's, so the book is the profile's alone.
+		if collections_up and not _collections.is_open():
+			_collections.show_state({})
+			_collections.show_profile(Save.read_profile())
+		_collections.visible = collections_up
 
 
 ## The first entry takes the selection - and with it the caret - whenever
@@ -375,6 +387,8 @@ func _pick(which: StringName) -> void:
 			_router.goto(_router.RUN)
 		&"stats":
 			_router.goto(_router.STATS)
+		&"collections":
+			_router.goto(_router.COLLECTIONS)
 		&"options":
 			_router.goto(_router.OPTIONS)
 		&"quit":
@@ -389,7 +403,7 @@ func _input(event: InputEvent) -> void:
 	# **The options screen answers its own escape** (2026-10-07): it may have
 	# something to end first - a key being listened for, a new window size
 	# waiting to be kept - and this runs before it would hear the key.
-	if _router.here() == _router.STATS:
+	if _router.here() == _router.STATS or _router.here() == _router.COLLECTIONS:
 		_router.back()
 		MenuFocus.backed_out(self)
 		get_viewport().set_input_as_handled()

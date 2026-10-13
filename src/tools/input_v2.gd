@@ -21,7 +21,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 7
+const V2_CASES := 8
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -45,6 +45,7 @@ func _run() -> void:
 	await _case_0284_boss_voices()
 	await _case_0285_season_music()
 	await _case_0286_weather_ambience()
+	await _case_0287_collections()
 	_finish()
 
 
@@ -570,6 +571,107 @@ func _case_0286_weather_ambience() -> void:
 
 	driver.running = true
 	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0287 - the collections. The title menu opens the book on its router state;
+## the tabs move by the keyboard (E, down) and by a pad's shoulders, the fish
+## pages by the arrows and the d-pad; cancel goes back to the menu. In a run
+## the `collections` key opens and closes it, a pad's share button too, and
+## the farmer does not walk on the arrows while it is up.
+func _case_0287_collections() -> void:
+	await open_scene("res://scenes/Title.tscn")
+	var router: Node = root.get_node_or_null(^"App")
+	if router == null or not (_scene is TitleScreen):
+		expect(router != null, "the router autoload is up for the book")
+		await close_scene()
+		_completed += 1
+		return
+	await frames(4)
+	await tap_key(KEY_X)
+	await frames(3)
+	expect(router.here() == router.MENU, "the title is on its menu",
+		router.name_of(router.here()))
+	await click_control("Menu_collections")
+	await frames(4)
+	var book: CollectionsScreen = require_control("CollectionsScreen")
+	expect(router.here() == router.COLLECTIONS and book != null and book.visible,
+		"COLLECTIONS on the title menu opens the book", router.name_of(router.here()))
+	if book == null:
+		await close_scene()
+		_completed += 1
+		return
+	var tabs: Array = []
+	tabs.append(book.tab())
+	await tap_key(KEY_E)
+	await frames(2)
+	tabs.append(book.tab())
+	await tap_key(KEY_DOWN)
+	await frames(2)
+	tabs.append(book.tab())
+	await _pad_tap(JOY_BUTTON_RIGHT_SHOULDER)
+	await frames(2)
+	tabs.append(book.tab())
+	await _pad_tap(JOY_BUTTON_LEFT_SHOULDER)
+	await frames(2)
+	tabs.append(book.tab())
+	expect(tabs == [&"fish", &"crops", &"bosses", &"year", &"bosses"],
+		"the tabs move by E, by down and by a pad's shoulders, both ways", str(tabs))
+	var tab_button: Button = require_control("CollectionsTab_bosses")
+	expect(tab_button != null and tab_button.button_pressed
+			and tab_button.text == I18n.f(&"COLL_TAB_BOSSES",
+				Collections.counts(Save.read_profile(), {})["trophies"]),
+		"and the tab up is the one pressed, with its count",
+		tab_button.text if tab_button != null else "none")
+	await click_control("CollectionsTab_fish")
+	await frames(2)
+	var pages: Array = [book.fish_page()]
+	await tap_key(KEY_RIGHT)
+	await frames(2)
+	pages.append(book.fish_page())
+	await _pad_tap(JOY_BUTTON_DPAD_RIGHT)
+	await frames(2)
+	pages.append(book.fish_page())
+	await tap_key(KEY_LEFT)
+	await frames(2)
+	pages.append(book.fish_page())
+	var species := Collections.fish_ids()
+	expect(book.tab() == &"fish" and pages == [species[0], species[1], species[2], species[1]],
+		"a click on its tab opens the fish book, and the arrows and the d-pad turn its pages",
+		str(pages))
+	await tap_key(KEY_ESCAPE)
+	await frames(4)
+	expect(router.here() == router.MENU and not book.visible,
+		"cancel goes back to the title menu", router.name_of(router.here()))
+	await close_scene()
+
+	await open_scene(MAIN_SCENE)
+	router = root.get_node_or_null(^"App")
+	var driver: SimDriver = require_control("SimDriver")
+	await frames(6)
+	var in_run: CollectionsScreen = require_control("CollectionsScreen")
+	await tap_key(KEY_O)
+	await frames(4)
+	expect(router.here() == router.COLLECTIONS and in_run != null and in_run.visible,
+		"in a run O opens the book", router.name_of(router.here()))
+	await press_key(KEY_D, true)
+	await frames(3)
+	var move: Array = driver.state["intent"]["move"] if driver != null else [1, 1]
+	expect(move == [0, 0], "and the farmer does not walk while it is up", str(move))
+	await press_key(KEY_D, false)
+	await tap_key(KEY_O)
+	await frames(4)
+	expect(router.here() == router.RUN and in_run != null and not in_run.visible,
+		"and O again puts it away", router.name_of(router.here()))
+	await _pad_tap(JOY_BUTTON_MISC1)
+	await frames(4)
+	expect(router.here() == router.COLLECTIONS, "a pad's share button opens it too",
+		router.name_of(router.here()))
+	await tap_key(KEY_ESCAPE)
+	await frames(4)
+	expect(router.here() == router.RUN and not in_run.visible,
+		"and cancel closes it back to the run", router.name_of(router.here()))
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
 

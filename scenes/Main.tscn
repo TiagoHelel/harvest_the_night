@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://src/ui/playtest_badge.gd" id="19_playtest"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" path="res://src/ui/log_panel.gd" id="24_log"]
 [ext_resource type="Script" path="res://src/ui/options_screen.gd" id="25_options"]
 [ext_resource type="Script" path="res://src/ui/pause_menu.gd" id="26_pause"]
+[ext_resource type="Script" path="res://src/ui/collections_screen.gd" id="27_collections"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -178,6 +179,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("14_stats")
+
+[node name="CollectionsScreen" type="Control" parent="UI/Screen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("27_collections")
 
 [node name="Sfx" type="Node" parent="."]
 unique_name_in_owner = true

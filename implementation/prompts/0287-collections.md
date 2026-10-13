@@ -1,7 +1,7 @@
 # 0287 - Collections and achievements
 
 - **Phase:** 16 - Sound, collections and polish
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0152, 0155, 0160, 0170, 0182, 0253, 0254, 0255
 - **Likely files:** src/core/collections.gd, src/core/stats.gd, src/core/farming.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd, src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd, src/ui/title_screen.gd, src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, implementation/backlog/packs/A056-collections.md
 

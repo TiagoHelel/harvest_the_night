@@ -30474,3 +30474,165 @@ Notes:
 - **The Blood Moon has a stinger and no bed.** Its sky is the view's
   (0257), and its air is the season's.
 - **The dog is not here**: its bark is 0283's power sound.
+
+## 0287 - Collections and achievements - done 2026-10-13
+
+What changed: one book of four collections and twelve achievements, kept in
+the profile across runs. The four collections are the fish, the crops, the
+bosses' trophies and the years won without losing the house. The book opens
+from the title menu, or with O (a pad's share button) in a run. Both hashes
+moved on purpose (below).
+
+- **`src/core/collections.gd`** (new, `Collections`), in `Stats`' shape: it
+  reads facts other modules already count and keeps no second ledger.
+  - **The fish** are 0182's book (`Stats.fish_known`).
+  - **The trophies** are `killed_by_kind_all_run` for every `is_boss` kind
+    (giant, harvester, scarecrow_king, winter_lord), banked as
+    `lifetime.killed_by_kind`.
+  - **The crops** are a new harvest tally.
+  - **The year** is `Run.beat_the_year` with no night on which the house
+    fell.
+  - The crops and the years are banked into a new `profile.collections`.
+    `fold` uses `stats.banked` as `Stats.fold` does, so folding twice adds
+    nothing. It is called from the end of `Stats.fold`, so every fold site
+    (autosaves, `Run.record`, save-and-quit) gets it.
+  - `counts()` gives the five numbers the tabs carry.
+- **Crops count harvests, not `gained`.**
+  - `Stats.initial()` gains `stats.harvested_by_crop`, counted by
+    `Stats.harvested` in `Farming._harvest`. A purchase, a gift or loot
+    goes through `Resources.add` and does not tick a page.
+  - It also gains `stats.nights_lost`, counted in `Phases.enter_result`
+    when the house fell. A boss that walked off at dawn reaches
+    `enter_result` as `survived=false, escaped=true` (`Sim._test_for_dawn`),
+    so it is left out explicitly.
+  - Both keys live inside the `stats` table, so reconcile fills an old save
+    (the input suite's run on disk logged "filled in 'nights_lost'") and no
+    format bump is needed.
+- **`GameData.ACHIEVEMENTS`**: twelve achievements, none repeating a
+  collection. Each entry has literal `ACH_*` name and description keys, a
+  `kind` and, where it reads a number, a `field` and an `n` (`# LEVER`).
+  - **The twelve**:
+    - first night survived;
+    - 100 nights in all;
+    - 1000 kills in all;
+    - 100 structures put up;
+    - 5000 resources gathered;
+    - 100 fish landed;
+    - 3 runs started;
+    - 30 nights in one run;
+    - a Full Moon night held (0152's `Calendar.is_full_moon` on
+      `last_result`);
+    - a legendary landed;
+    - every defence in `DEFENCES` built once;
+    - Year 2 reached.
+  - **`ACHIEVEMENT_KINDS`** lists the tests and the numbers each reads.
+  - **`check_achievements()`** runs in `validate()` and refuses:
+    - an unknown test;
+    - an unknown number;
+    - a missing threshold;
+    - a name that is not an `ACH_` key.
+  - The table is in `digest()`.
+  - **Earned badges are added at each fold and never taken away.**
+    `Collections.earned` is a pure test of the lifetime stats, the
+    collections and this run's record.
+- **`Save`**:
+  - `default_profile()` gains `collections` (`crops`, `years`) and
+    `achievements`. The existing merge reads an older profile with them.
+  - `read_profile_at` and `write_profile_at` are split out for the check.
+- **Ways in**:
+  - `App.COLLECTIONS` is an overlay state, like STATS.
+    `_task_0092_router`'s state count is now ten.
+  - The title's `ENTRIES` gains `collections` (TITLE_COLLECTIONS).
+  - A new `collections` action (`ACT_COLLECTIONS`, `ACT_GROUP_SCREENS`) is
+    bound to **O** and the pad's **Share** (button 15, the one no action
+    used; `ACT_PAD_SHARE`). It is O and not J because J is the suites'
+    spare key: 0121's rebinding checks bind `interact` and `stats` to it.
+- **`src/ui/collections_screen.gd`** (new), a sibling of `StatsScreen` in
+  both scenes. Its left column holds the cover over five tabs (FISH,
+  CROPS, TROPHIES, YEARS, BADGES), each with its count, and the keys'
+  hint. The page sits on the right.
+  - **The fish tab embeds a `FishBook`**: 0182's page, not a rebuilt one.
+    A strip of the sixteen species sits under it, black until landed, and
+    the arrows, the d-pad or a click turn the page. The inventory's way in
+    is untouched.
+  - **Crops**: a 3x4 grid of icon, name and harvest count.
+  - **Bosses**: four trophies.
+  - **The year**: the count, the rule, and this run's lost nights and
+    standing.
+  - **Achievements**: two columns of badge, name and description. A
+    description fills its threshold from the table, so turning the lever
+    turns the words.
+  - **Locked is the earned art dimmed by code**: `modulate` (0.30, 0.30,
+    0.36).
+  - **The keys**: tabs move with up and down or Q/E and the shoulders
+    (`hotbar_prev`/`hotbar_next`, taken in `_input` the way the
+    inventory takes them). In a run, O or cancel go back through the
+    router, as R does for the records. On the title, the title answers
+    cancel, as it does for the records.
+  - In a run the book is read-only and the night goes on. **`Main` stops
+    the farmer walking while it is up**, because its arrows are the
+    walking keys.
+- **A056 on 0120's road**:
+  - Twenty-six `PlaceholderArt` entries.
+  - The cover, the ornament and the twelve badges are drawn by code in
+    `src/ui/collection_art.gd`: a medal with a distinct emblem per id.
+  - The tab books are existing icons: the wheat, the boss-night mark,
+    winter and the gold coin.
+  - Each trophy is its boss's first walk frame in its tint, on a
+    code-drawn plaque.
+  - `implementation/backlog/packs/A056-collections.md`'s table is now
+    final: the canvases, pivots and runtime names, the twelve badge ids
+    with their emblems, where each piece sits, and the locked dimming.
+- **Captures** (`src/tools/capture_collections.gd`, new; it builds the
+  profiles itself and never writes the player's) are in
+  `implementation/shots/0287/`: every tab with an empty and a full
+  profile in English, the full one in Portuguese, the title menu with the
+  new entry, and the book over a run. I opened them and fixed one thing:
+  the achievement descriptions wrapped to a second line and crowded the
+  next row's name. They now fit one line, and the table's width (138)
+  holds them to it.
+- **Checks**:
+  - **`_task_0287_collections`** (headless_v1, now 106 groups), on
+    crafted states:
+    - a harvest ticks its page, and `Resources.add` of that crop or
+      another does not;
+    - folding twice adds nothing;
+    - a walker is no trophy and a giant is one, kept after the fold;
+    - a run that lost a night never earns the year, a boss that only
+      escaped does not stop it, and a clean run past Winter 14 earns it
+      once;
+    - badges are earned and kept;
+    - a Full Moon held passes and a Full Moon lost does not;
+    - `check_achievements` refuses an unknown test, an unknown number or
+      no threshold;
+    - an old profile reads with the new keys;
+    - A056 is registered.
+  - **`_case_0287_collections`** (input_v2, now 8 cases):
+    - the title menu opens the book;
+    - E, down and the pad's shoulders move the tabs both ways;
+    - a click on a tab works;
+    - the arrows and the d-pad turn the fish pages;
+    - cancel goes back to the menu;
+    - in a run, O opens and closes it, Share opens it, cancel closes it,
+      and the farmer does not walk while it is up.
+- **SIM 3524359536 -> 19045517**, on purpose: the state gains
+  `stats.harvested_by_crop` and `stats.nights_lost`.
+- **DATA 1211606022 -> 1862823492**, on purpose: `digest()` gains the
+  achievements table and its kinds.
+
+Files: src/core/collections.gd, src/core/stats.gd, src/core/farming.gd,
+src/core/phases.gd, src/core/game_data.gd, src/app/save.gd, src/app/app.gd,
+src/app/input_actions.gd, project.godot, src/ui/collections_screen.gd,
+src/ui/collection_art.gd, src/ui/placeholder_art.gd, src/ui/title_screen.gd,
+src/ui/main.gd, scenes/Title.tscn, scenes/Main.tscn, assets/locale/strings.csv,
+src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v2.gd,
+src/tools/capture_collections.gd, implementation/backlog/packs/A056-collections.md,
+implementation/shots/0287/ (21 captures)
+Verify: PASS, 61 checks in 1,068 s (`--accept` for the two guards); 19,583 headless / 2,817 headless_v1 (106 groups) / 1,271 + 735 + 39 input cases (input_v2: 8 cases); 905 strings; sim 3524359536 -> 19045517 and data 1211606022 -> 1862823492 recorded
+Notes:
+- **Achievements earned mid-run show at the next fold** (the night's
+  autosave), not the moment they are passed. Folding is what banks them,
+  and the screen holds no rules of its own. No toast either: the task
+  left that out on purpose.
+- **Fish, crop and boss names come from `Names.of`**, lowercase as on
+  every other screen.

@@ -85,6 +85,7 @@ var _pointer_at := Vector2(-1, -1)
 @onready var _workshop: WorkshopPanel = %WorkshopPanel
 @onready var _tutorial: TutorialPrompt = %TutorialPrompt
 @onready var _stats: StatsScreen = %StatsScreen
+@onready var _collections: CollectionsScreen = %CollectionsScreen
 @onready var _pause: PauseMenu = %PauseMenu
 @onready var _lighting: Lighting = %Lighting
 @onready var _particles: Particles = %Particles
@@ -205,6 +206,7 @@ func _went(_to: int, _from: int) -> void:
 	var at: int = _router.here()
 	var tech_up: bool = at == _router.TECH
 	var stats_up: bool = at == _router.STATS
+	var collections_up: bool = at == _router.COLLECTIONS
 	var options_up: bool = at == _router.OPTIONS
 	var pause_up: bool = at == _router.PAUSE
 	if _pause != null and pause_up != _pause.is_open():
@@ -226,6 +228,12 @@ func _went(_to: int, _from: int) -> void:
 			_stats.open()
 		else:
 			_stats.close()
+	if _collections != null and collections_up != _collections.is_open():
+		if collections_up:
+			_collections.show_profile(_profile)
+			_collections.open()
+		else:
+			_collections.close()
 	if _options != null:
 		_options.visible = options_up
 
@@ -237,10 +245,11 @@ func _year_recorded(profile: Dictionary) -> void:
 	_show_profile()
 
 
-## The profile, to the two screens that read it: the statistics and the
-## inventory's fish book (task 0182).
+## The profile, to the screens that read it: the statistics, the collections
+## (task 0287) and the inventory's fish book (task 0182).
 func _show_profile() -> void:
 	_stats.show_profile(_profile)
+	_collections.show_profile(_profile)
 	_inventory.show_profile(_profile)
 
 
@@ -320,6 +329,7 @@ func _hand_out() -> void:
 	_juice.show_state(_driver.state, _world, _driver)
 	_log.show_state(_driver.state)
 	_stats.show_state(_driver.state)
+	_collections.show_state(_driver.state)
 	_pause.show_state(_driver.state)
 
 	_world.look_at_cell(Player.cell(_driver.state))
@@ -352,7 +362,10 @@ func _process(_delta: float) -> void:
 	move[1] = int(signf(Input.get_axis(&"move_up", &"move_down")))
 	# **Nobody walks at night** (task 0129): outside the day the move axes
 	# write nothing - they pan the night camera instead (`_steer_camera`).
-	if int(_driver.state["phase"]) != Phases.DAY:
+	# **Nor while the collections' pages turn** (task 0287): their tabs and
+	# the fish book move on the arrows, which walk too.
+	if int(_driver.state["phase"]) != Phases.DAY or (_router != null
+			and _router.here() == _router.COLLECTIONS):
 		move[0] = 0
 		move[1] = 0
 	var running_art := _driver.running and not _driver.holding() \
