@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###################.....`  **239 / 296 done**
+`###################.....`  **240 / 296 done**
 
-0 doing / 56 todo / 1 blocked across 18 phases.
+0 doing / 55 todo / 1 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-57 task(s) left, the ready ones first, then what they
+56 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -763,24 +763,6 @@ The phase's own target: an average player reaches winter having lost two to four
   - done when: The season groups of 0271-0274 still pass with the moved levers, or the journal says which asserted relation the data proved wrong and how it was rewritten
   - done when: `python tools/balance.py` reads only `RUN` lines, and a short sweep leaves `game_data.gd` restored, the git tree clean and no `.balance-lock` behind
 
-### 0284 - The new enemies and bosses, heard
-
-Ready to pick up.  Likely files: `tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Six new enemies and three new bosses each get a voice of their own, so a night heard with your eyes shut still says what is coming. View only: neither hash moves, and no state key is added to be heard. (The night events' stingers moved to 0286, beside the event beds, so this fits one invocation.)
-
-- Recipes for the spitter (the spit, and a splat on the tower 0247's projectile hits), the rat swarm (a squeak), the crow (a caw over wingbeats), the digger (a burrowing rumble and a burst when it surfaces), the frost zombie (a shatter as it dies and a crackle on the towers it chills) and the wraith (a whisper)
-- Voices stay per kind and not per body: `nearest_by_kind` keeps a swarm of fifty rats to one voice (0085's promise). Deaths that differ by kind go through a small per-kind table that falls back to `DEATH_SOUND` and keeps `DEATH_GAP`
-- The wraith cannot be shot outside light (0252): decide whether its whisper plays with no position (you know they are out, not where) or only from wraiths in light, and write why in the journal
-- Three boss voices - the Harvester's engine, the Scarecrow King's call, the Winter Lord's ice - and their specials: the Harvester's charge telegraph and the crunch of the walls it crushes, the King summoning crows, the Winter Lord's freezing aura; each special heard on the edge its telegraph or effect already sets in the state (`is_winding`, 0253's `charge_line`, 0251's `Towers.chill_left`, 0255's `frozen` countdown), read like `reload`
-- Every boss is announced like the Giant: on arrival, with no position, ducking the ambience. Wherever `sfx.gd` still tests `kind == &"giant"` (`_watch_bodies`, `nearest_by_kind`, `_ducks`), read `is_boss` instead, unless 0246 already did
-- Rewrite `_task_0085_night_sounds`: 'the Giant's roar is the longest sound at night' becomes 'every boss voice is longer than every ordinary night sound'; the house being hit stays the loudest file (bosses at `GIANT_PEAK` or below); replace each borrowed `ENEMY_SOUNDS` entry 0247-0255 left
-- Extend `_night_sound_ids()` so every new file in `assets/sfx/` is reached. The event stingers (fog, rain, the Blood Moon, the Full Moon) are not this task's: 0286 writes and plays them
-
-  - done when: `_task_0284_enemy_sounds` in `src/tools/headless_v1.gd`: every enemy in `GameData.ENEMIES` has a voice file of its own, every boss voice is longer than any ordinary night sound and quieter than the alarm, and fifty rats are one entry in `nearest_by_kind`
-  - done when: `_case_0284_boss_voices` in `src/tools/input_v1.gd`: a boss spawned in a real scene plays its voice once with no position and ducks the bed (`Audio.duck_gain()`)
-  - done when: `_task_0085_night_sounds` (rewritten) passes; `python tools/gen_sfx.py --report` for every new sound is in the journal
-
 ### 0285 - Music for four seasons
 
 Ready to pick up.  Likely files: `tools/gen_music.py, assets/music/, src/ui/music.gd, src/app/audio.gd, src/ui/main.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -1420,12 +1402,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
 - [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0277, 0278, 0279
 
-## 16 - Sound, collections and polish  (3/10)
+## 16 - Sound, collections and polish  (4/10)
 
 - [x] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md)
 - [x] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md)
 - [x] **0283** [The guardian's sounds](prompts/0283-sfx-night-v2.md)
-- [ ] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md)
+- [x] **0284** [The new enemies and bosses, heard](prompts/0284-sfx-enemies-v2.md)
 - [ ] **0285** [Music for four seasons](prompts/0285-music-seasons.md)
 - [ ] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md) - needs 0285
 - [ ] **0287** [Collections and achievements](prompts/0287-collections.md)

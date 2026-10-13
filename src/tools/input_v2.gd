@@ -21,7 +21,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 4
+const V2_CASES := 5
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -42,6 +42,7 @@ func _run() -> void:
 	await _case_0281_day_moments()
 	await _case_0282_fishing_sounds()
 	await _case_0283_guardian_sounds()
+	await _case_0284_boss_voices()
 	_finish()
 
 
@@ -432,6 +433,48 @@ func _case_0283_guardian_sounds() -> void:
 		"the night's ears follow the camera, and panning away from a gun makes it quieter",
 		"ears %s, camera %s, %.2f then %.2f" % [str(audio.ears()), str(view.camera_centre()), near, far])
 
+	driver.running = true
+	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0284 - each boss announced in the real scene: spawned at the far edge of
+## the farm at night, it plays its own voice once - with no position, so the
+## distance takes nothing off it - and the bed ducks under it.
+func _case_0284_boss_voices() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	if driver == null or audio == null:
+		expect(audio != null, "the Audio autoload is up for the bosses")
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.running = false
+	NightRoad.to_night(state)
+	await frames(3)
+	var heard: Array = []
+	for kind in [&"harvester", &"scarecrow_king", &"winter_lord"]:
+		Enemies.withdraw(state)
+		await frames(2)
+		audio.stop_all()
+		audio.forget_counts()
+		await until(func() -> bool: return audio.duck_gain() >= 1.0,
+			"the bed to come back up before the next boss", 20000)
+		var far := Vector2i(Grid.WIDTH - 2, 2)
+		Entities.spawn(state, kind, far)
+		await frames(3)
+		var voice := Sfx.voice_of(kind)
+		if audio.plays_of(voice) != 1 or audio.duck_gain() >= 1.0 \
+				or voice == Sfx.BOSS_VOICE:
+			heard.append("%s: %d of %s, duck %.2f" % [kind, audio.plays_of(voice), voice, audio.duck_gain()])
+	expect(heard.is_empty(),
+		"the Harvester, the Scarecrow King and the Winter Lord each play their own voice once from the far edge, and the bed ducks",
+		str(heard))
+
+	Enemies.withdraw(state)
 	driver.running = true
 	audio.stop_all()
 	await close_scene()

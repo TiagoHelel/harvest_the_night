@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-242 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
+243 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -286,6 +286,7 @@ is the sort of thing this list exists to say out loud.
 | 0281 | The new day's sounds | 2026-10-13 |
 | 0282 | The sounds of the fishing minigame | 2026-10-13 |
 | 0283 | The guardian's sounds | 2026-10-13 |
+| 0284 | The new enemies and bosses, heard | 2026-10-13 |
 
 ## Every time the game changed underneath itself
 

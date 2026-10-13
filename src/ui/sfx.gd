@@ -194,37 +194,59 @@ const BUZZ_GAP := 20
 const ZAP_GAP := 6
 const STRAW_GAP := 10
 
-## One voice each, so a crowd is a chord rather than a wall.
+## One voice each, so a crowd is a chord rather than a wall - **every one its
+## own since task 0284**, where 0247-0255 borrowed the first five's.
 const ENEMY_SOUNDS := {
 	&"walker": &"sfx/groan_walker",
 	&"runner": &"sfx/groan_runner",
 	&"tank": &"sfx/groan_tank",
 	&"breaker": &"sfx/groan_breaker",
 	&"giant": &"sfx/roar_giant",
-	# **The walker's groan, borrowed** (task 0247) until 0284 gives the
-	# spitter a voice of its own.
-	&"spitter": &"sfx/groan_walker",
-	# The runner's, a quick small voice, until 0284 gives the rat its own.
-	&"rat": &"sfx/groan_runner",
-	# The runner's too, until 0284 gives the crow its own.
-	&"crow": &"sfx/groan_runner",
-	# The breaker's, a dig at things, until 0284 gives the digger its own.
-	&"digger": &"sfx/groan_breaker",
-	# The tank's, a heavy cold voice, until 0284 gives the frost zombie its own.
-	&"frost_zombie": &"sfx/groan_tank",
-	# The walker's, until 0284 gives the wraith its own.
-	&"wraith": &"sfx/groan_walker",
-	# The Giant's roar, until 0284 gives the Harvester its engine.
-	&"harvester": &"sfx/roar_giant",
-	# The Giant's too, until 0284 gives the Scarecrow King its own.
-	&"scarecrow_king": &"sfx/roar_giant",
-	# The Giant's too, until 0284 gives the Winter Lord its own.
-	&"winter_lord": &"sfx/roar_giant",
+	&"spitter": &"sfx/voice_spitter",
+	&"rat": &"sfx/squeak",
+	&"crow": &"sfx/caw",
+	&"digger": &"sfx/rumble",
+	&"frost_zombie": &"sfx/voice_frost",
+	# **From nowhere** (`UNPLACED_VOICES`): a wraith outside light cannot be
+	# shot (0252), and a whisper with a position would say where the eyes
+	# cannot - so it says they are out, and not where.
+	&"wraith": &"sfx/whisper",
+	&"harvester": &"sfx/engine",
+	&"scarecrow_king": &"sfx/king_call",
+	&"winter_lord": &"sfx/lord_ice",
 }
 
+## The voices heard with no position (task 0284): the wraith's whisper.
+const UNPLACED_VOICES: Array = [&"wraith"]
+
 ## **What a boss with no voice of its own roars with** (task 0246): the
-## Giant's, until 0284 voices 0253-0255's bosses.
+## Giant's. Every boss has its own since task 0284; this is the fallback a
+## fifth would get.
 const BOSS_VOICE := &"sfx/roar_giant"
+
+## **Deaths that sound like their kind** (task 0284), falling back to
+## `DEATH_SOUND` with `DEATH_GAP`: the frost zombie shatters.
+const DEATH_SOUNDS := {
+	&"frost_zombie": &"sfx/shatter",
+}
+
+## **What the new enemies do, heard** (task 0284), each on the edge the state
+## already sets: a spitter's glob leaving (`enemy_shots` gaining one) and
+## landing (losing it), a digger breaking the surface (`Enemies.underground`
+## going false), frost on a tower a frost zombie chills (`Towers.chill_left`
+## rising), the Harvester's charge winding up (`charge_dir` set) and the walls
+## it crushes (rubble on its last line), the Scarecrow King's cast (`casting`
+## set) and the Winter Lord's aura taking a tower (`Towers.frozen_left`
+## rising).
+const SPIT_SOUND := &"sfx/spit"
+const SPIT_LAND_SOUND := &"sfx/spit_splat"
+const SURFACE_SOUND := &"sfx/burst"
+const CHILL_SOUND := &"sfx/crackle"
+const CHARGE_SOUND := &"sfx/charge"
+const CRUSH_SOUND := &"sfx/crunch"
+const SUMMON_SOUND := &"sfx/summon"
+const FREEZE_SOUND := &"sfx/freeze"
+const FROST_GAP := 8
 
 ## The `Audio` script, **preloaded rather than named**. `verify.py` parses
 ## each file on its own with no autoloads registered, so `Audio.NOWHERE`
@@ -303,6 +325,14 @@ var _dog_due := 0
 var _shells: Dictionary = {}
 var _turned := false
 
+## And the new enemies' (task 0284): the globs in the air, the frost and the
+## freeze on each tower, and the cells the chargers' lines covered last frame.
+var _spits: Dictionary = {}
+var _chills: Dictionary = {}
+var _frozen: Dictionary = {}
+var _charge_cells: Dictionary = {}
+var _charging_now: Dictionary = {}
+
 ## The view whose camera the guardian looks through at night (task 0283),
 ## handed over the way `Music.show_state` gets it. Null by day's checks.
 var _world: WorldView = null
@@ -343,6 +373,11 @@ func _forget_the_night() -> void:
 	_powers.clear()
 	_dog_due = 0
 	_shells.clear()
+	_spits.clear()
+	_chills.clear()
+	_frozen.clear()
+	_charge_cells.clear()
+	_charging_now.clear()
 
 
 func _process(delta: float) -> void:
@@ -601,8 +636,13 @@ func _watch_night(delta: float) -> void:
 	_watch_structures(powers_fired.has(Ability.EMERGENCY_REPAIR))
 	_watch_house()
 	_watch_shells()
+	_watch_spits()
+	_watch_frost()
 	_watch_groans(delta)
 	_watch_lamps(delta)
+	# A wall crushed this frame lay on a line last frame or this one.
+	_charge_cells = _charging_now
+	_charging_now = {}
 
 
 ## **A shot is a reload counter going up.** It counts down every tick, so the
@@ -653,7 +693,13 @@ func _watch_bodies(bell_rang: bool) -> void:
 		var hurt := int(one.get("hurt", 0))
 		var stun := int(one.get("stun", 0))
 		var at := _body_middle(one)
-		now[int(entity_id)] = [kind, hurt, at, stun]
+		var under := Enemies.underground(_state, int(entity_id))
+		var charging := one.has("charge_dir")
+		var casting := one.has("casting")
+		now[int(entity_id)] = [kind, hurt, at, stun, under, charging, casting]
+		if charging:
+			for cell in Enemies.charge_line(_state, int(entity_id)):
+				_charging_now[Grid.index(cell as Vector2i)] = true
 
 		var was: Variant = _bodies.get(int(entity_id), null)
 		if was == null:
@@ -670,12 +716,20 @@ func _watch_bodies(bell_rang: bool) -> void:
 			_ask_at(IMPACT_SOUND, at, IMPACT_GAP)
 		if stun > int((was as Array)[3]) and not bell_rang:
 			_ask_at(DEFENCE_SOUNDS[&"electric_fence"], at, ZAP_GAP)
+		# Task 0284's edges: up out of the ground, a charge fixed, a cast begun.
+		if bool((was as Array)[4]) and not under:
+			_ask_at(SURFACE_SOUND, at, 1)
+		if charging and not bool((was as Array)[5]):
+			_ask_at(CHARGE_SOUND, at, 1)
+		if casting and not bool((was as Array)[6]):
+			_ask_at(SUMMON_SOUND, at, 1)
 
 	for gone in _bodies:
 		if now.has(gone):
 			continue
 		var was_at: Vector2 = (_bodies[gone] as Array)[2]
-		_ask_at(DEATH_SOUND, was_at, DEATH_GAP)
+		_ask_at(DEATH_SOUNDS.get(StringName((_bodies[gone] as Array)[0]), DEATH_SOUND),
+			was_at, DEATH_GAP)
 	_bodies = now
 
 
@@ -721,7 +775,9 @@ func _watch_structures(mended_by_power: bool) -> void:
 				&"spent":
 					_ask_at(TOWER_SOUNDS[&"mine"], _cell_middle(cell), 1)
 				&"broke":
-					_ask_at(BREAK_SOUND, _cell_middle(cell), 1)
+					# Under a charge it was crushed (task 0284), not broken.
+					var crushed := _charge_cells.has(int(gone)) or _charging_now.has(int(gone))
+					_ask_at(CRUSH_SOUND if crushed else BREAK_SOUND, _cell_middle(cell), 1)
 				&"sold":
 					_ask_at(SELL_BACK_SOUND, _cell_middle(cell), 1)
 	_standing = now
@@ -808,7 +864,55 @@ func _watch_groans(delta: float) -> void:
 		# A chance a frame rather than a timer, so two kinds that arrived
 		# together do not groan in lockstep for the rest of the night.
 		if randf() < delta / GROAN_EVERY_SECONDS:
-			_ask_at(ENEMY_SOUNDS[kind], nearest[kind], GROAN_GAP)
+			_ask_at(ENEMY_SOUNDS[kind], AudioScript.NOWHERE if UNPLACED_VOICES.has(kind)
+				else nearest[kind], GROAN_GAP)
+
+
+## **A spitter's globs** (task 0284): one leaving is the spit, from where the
+## spitter stood; one gone from the air landed on the tower it was aimed at.
+func _watch_spits() -> void:
+	var now: Dictionary = {}
+	for shot in (_state.get("enemy_shots", []) as Array):
+		var one: Dictionary = shot
+		var key := "%d:%d" % [int(one.get("by", 0)), int(one.get("fired", 0))]
+		now[key] = one.get("to", [])
+		if not _spits.has(key):
+			var per := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
+			var from: Array = one.get("pos", [0, 0])
+			_ask_at(SPIT_SOUND, Vector2(float(from[0]), float(from[1])) * per, 1)
+	for gone in _spits:
+		if now.has(gone):
+			continue
+		var to: Array = _spits[gone]
+		if to.size() >= 2:
+			_ask_at(SPIT_LAND_SOUND, _cell_middle(Vector2i(int(to[0]), int(to[1]))), 1)
+	_spits = now
+
+
+## **Frost and freeze on the towers** (task 0284), read like `reload`: a
+## tower's `chill` rising is a frost zombie's breath on it, its `frozen`
+## rising the Winter Lord's aura taking it.
+func _watch_frost() -> void:
+	var occupants: Dictionary = _state["occupants"]
+	var chills: Dictionary = {}
+	var frozen: Dictionary = {}
+	var keys: Array = occupants.keys()
+	keys.sort()             # cell indices, integers
+	for idx in keys:
+		var on: Dictionary = occupants[idx]
+		if not on.has("chill") and not on.has("frozen"):
+			continue
+		var at := _cell_middle(Grid.cell(int(idx)))
+		var chill := int(on.get("chill", 0))
+		var cold := int(on.get("frozen", 0))
+		if chill > int(_chills.get(idx, 0)):
+			_ask_at(CHILL_SOUND, at, FROST_GAP)
+		if cold > int(_frozen.get(idx, 0)):
+			_ask_at(FREEZE_SOUND, at, FROST_GAP)
+		chills[idx] = chill
+		frozen[idx] = cold
+	_chills = chills
+	_frozen = frozen
 
 
 ## **The searchlights' hum** (task 0283), per kind as the groans are: now and

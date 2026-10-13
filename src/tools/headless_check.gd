@@ -15181,21 +15181,33 @@ func _task_0085_night_sounds() -> void:
 		"%.2f against %s at %.2f"
 		% [alarm.get("peak", 0.0), loudest_name, loudest])
 
-	# **The Giant is heard before it is seen**, which means two things and
-	# both are asserted: its roar is the longest sound in the game, and `Sfx`
-	# plays it with no position, so the falloff leaves it alone.
-	var roar := _wav_facts("res://assets/%s.wav"
-		% SfxScript.ENEMY_SOUNDS[&"giant"])
+	# **A boss is heard before it is seen**, which means two things and both
+	# are asserted: every boss's voice is longer than every ordinary night
+	# sound, and `Sfx` plays it with no position, so the falloff leaves it
+	# alone. Written of the Giant's roar alone until task 0284 gave the
+	# Harvester, the Scarecrow King and the Winter Lord voices of their own.
+	var voices: Array = []
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if Combat.is_boss(StringName(kind)):
+			voices.append(SfxScript.voice_of(StringName(kind)))
 	var longest := 0.0
+	var longest_name := ""
 	for id in night:
-		if id == SfxScript.ENEMY_SOUNDS[&"giant"]:
+		if voices.has(id):
 			continue
 		var one := _wav_facts("res://assets/%s.wav" % id)
-		if not one.is_empty():
-			longest = maxf(longest, float(one["seconds"]))
-	expect(not roar.is_empty() and float(roar["seconds"]) > longest,
-		"the Giant's roar is longer than anything else at night",
-		"%.2fs against %.2fs" % [roar.get("seconds", 0.0), longest])
+		if not one.is_empty() and float(one["seconds"]) > longest:
+			longest = float(one["seconds"])
+			longest_name = String(id)
+	var shortest_voice := 99.0
+	for id in voices:
+		var one := _wav_facts("res://assets/%s.wav" % id)
+		shortest_voice = minf(shortest_voice, float(one.get("seconds", 0.0)))
+	var roar := _wav_facts("res://assets/%s.wav"
+		% SfxScript.ENEMY_SOUNDS[&"giant"])
+	expect(voices.size() >= 4 and shortest_voice > longest,
+		"every boss's voice is longer than every ordinary night sound",
+		"%.2fs against %s at %.2fs" % [shortest_voice, longest_name, longest])
 
 	# **The distance falloff.** Asked of the rule rather than inferred from a
 	# voice's volume, the same way `is_silent` is.
@@ -15256,6 +15268,12 @@ func _night_sound_ids() -> Array:
 	out.append_array([SfxScript.DOG_BITE_SOUND, SfxScript.SPLAT_SOUND,
 		SfxScript.HORN_SOUND, SfxScript.PLACE_SOUND, SfxScript.UPGRADE_SOUND,
 		SfxScript.MEND_SOUND, SfxScript.SELL_BACK_SOUND])
+	# **What the new enemies do** (task 0284), and the deaths of their own.
+	for id in GameData.sorted_names(SfxScript.DEATH_SOUNDS.keys()):
+		out.append(SfxScript.DEATH_SOUNDS[id])
+	out.append_array([SfxScript.SPIT_SOUND, SfxScript.SPIT_LAND_SOUND,
+		SfxScript.SURFACE_SOUND, SfxScript.CHILL_SOUND, SfxScript.CHARGE_SOUND,
+		SfxScript.CRUSH_SOUND, SfxScript.SUMMON_SOUND, SfxScript.FREEZE_SOUND])
 	return out
 ## 0086 - the two pieces of music.
 func _task_0086_music() -> void:

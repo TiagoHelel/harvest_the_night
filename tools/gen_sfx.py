@@ -86,6 +86,11 @@ NIGHT_PEAK = 0.70
 ## place, upgrade, repair, sell - is quieter still, at `SOFT_PEAK`.
 GUARDIAN_PEAK = 0.62
 
+## **The wraith's whisper** (task 0284): heard with no position, so it says
+## they are out and not where - and quiet, because it is the one voice that
+## gives nothing away.
+WHISPER_PEAK = 0.45
+
 ## The Giant, which is allowed to be bigger than everything except the alarm.
 GIANT_PEAK = 0.88
 
@@ -849,6 +854,185 @@ def roar_giant():
     return swell(both, 260.0, 520.0)
 
 
+# ------------------------------------------- the new enemies (task 0284)
+#
+# A voice each, so a night heard with your eyes shut still says what is
+# coming, and the things they do that a player has to know about.
+
+def voice_spitter():
+    """The spitter: a wet gurgle in the throat, saving it up."""
+    gurgle = sweep_lowpass(noise(8901, 520), 500.0, 1400.0)
+    bubbles = mix(*[at(60 + 70 * k, decay(sweep(260.0 + 30 * k, 180.0, 60, 0.6),
+                                          18.0, 2.0)) for k in range(6)])
+    voice = sweep(170.0, 140.0, 520, 1.0)
+    return swell(mix(gain(gurgle, 0.5), gain(bubbles, 0.35), gain(voice, 0.4)),
+                 80.0, 220.0)
+
+
+def spit():
+    """A glob leaving: a hawk in the throat and the air it goes through."""
+    hawk = decay(lowpass(noise(8902, 120), 1600), 30.0, 3.0)
+    flight = at(80, swell(highpass(lowpass(noise(8903, 160), 3200), 900),
+                          20.0, 100.0))
+    return mix(gain(hawk, 0.7), gain(flight, 0.4))
+
+
+def spit_splat():
+    """A glob landing on a tower: a wet slap, and it sizzles."""
+    slap = decay(lowpass(noise(8904, 120), 2200), 16.0, 0.5)
+    sizzle = at(40, swell(highpass(noise(8905, 260), 3500), 20.0, 200.0))
+    return mix(gain(slap, 0.7), gain(sizzle, 0.35))
+
+
+def squeak():
+    """A rat: two quick squeaks - one voice for the whole swarm."""
+    a = decay(sweep(2400.0, 3100.0, 70, 0.5), 22.0, 2.0)
+    b = at(110, decay(sweep(2600.0, 3400.0, 80, 0.5), 24.0, 2.0))
+    scuffle = decay(highpass(lowpass(noise(8906, 240), 4000), 1500), 60.0, 4.0)
+    return mix(gain(a, 0.5), gain(b, 0.5), gain(scuffle, 0.25))
+
+
+def caw():
+    """A crow: a caw over the beat of its wings."""
+    call = swell(mix(sweep(820.0, 600.0, 260, 0.8),
+                     gain(sweep(1640.0, 1200.0, 260, 0.8), 0.5),
+                     gain(lowpass(noise(8907, 260), 2600), 0.6)), 20.0, 120.0)
+    wings = mix(*[at(300 + 70 * k, decay(lowpass(noise(8908 + k, 50), 700),
+                                         10.0, 2.0)) for k in range(3)])
+    return mix(gain(call, 0.6), gain(wings, 0.5))
+
+
+def rumble():
+    """A digger under the ground: earth moving, low and slow."""
+    earth = swell(lowpass(noise(8911, 720), 260), 160.0, 260.0)
+    grind = swell(sweep(48.0, 62.0, 720, 1.0), 160.0, 260.0)
+    return mix(gain(earth, 0.8), gain(grind, 0.5))
+
+
+def burst():
+    """A digger surfacing: the ground breaking open and the clods falling."""
+    crack = decay(lowpass(noise(8912, 160), 1400), 26.0, 1.0)
+    thump = decay(sweep(140.0, 60.0, 180, 0.5), 50.0, 1.0)
+    clods = mix(*[at(90 + 60 * k, decay(lowpass(noise(8913 + k, 60), 1600),
+                                        10.0, 0.5)) for k in range(4)])
+    return mix(gain(crack, 0.6), gain(thump, 0.6), gain(clods, 0.4))
+
+
+def voice_frost():
+    """The frost zombie: a moan with frost in it, thin and cold."""
+    moan = sweep(260.0, 200.0, 680, 1.0)
+    breath = highpass(lowpass(noise(8917, 680), 4200), 1800)
+    glint = mix(*[at(150 + 160 * k, decay(tone(2093.0 + 210 * k, 120), 40.0, 2.0))
+                  for k in range(3)])
+    return swell(mix(gain(moan, 0.5), gain(breath, 0.3), gain(glint, 0.15)),
+                 120.0, 360.0)
+
+
+def shatter():
+    """A frost zombie dying: ice breaking into pieces."""
+    crack = decay(highpass(noise(8920, 100), 2400), 10.0, 0.5)
+    shards = mix(*[at(30 + 45 * k, decay(tone(2600.0 + 380 * (k % 4), 140), 30.0, 0.5))
+                   for k in range(7)])
+    return mix(gain(crack, 0.6), gain(shards, 0.3))
+
+
+def crackle():
+    """Frost on a tower: a dry crackle spreading over it."""
+    return mix(*[at(30 * k, decay(highpass(noise(8921 + k, 40), 3200), 5.0, 0.5))
+                 for k in range(8)])
+
+
+def whisper():
+    """The wraith: a breath of a voice, no pitch, from nowhere."""
+    air = sweep_lowpass(noise(8930, 820), 2400.0, 5200.0)
+    air = highpass(air, 1500)
+    wobble = sweep_lowpass(noise(8931, 820), 5200.0, 2400.0)
+    return swell(mix(gain(air, 0.6), gain(highpass(wobble, 1500), 0.4)),
+                 240.0, 360.0)
+
+
+def charge():
+    """The Harvester winding up its charge: the engine revving, rising."""
+    rev = sweep(70.0, 190.0, 620, 1.4)
+    teeth = sweep(140.0, 380.0, 620, 1.4)
+    clatter = lowpass(noise(8932, 620), 1400)
+    return swell(mix(gain(rev, 0.6), gain(teeth, 0.25), gain(clatter, 0.35)),
+                 80.0, 120.0)
+
+
+def crunch():
+    """A wall going under the Harvester: crushed, not broken."""
+    crush = decay(lowpass(noise(8933, 320), 1100), 70.0, 1.0)
+    bend = decay(sweep(200.0, 70.0, 300, 0.6), 80.0, 1.0)
+    bits = mix(*[at(60 + 50 * k, decay(lowpass(noise(8934 + k, 60), 2400), 10.0, 0.5))
+                 for k in range(5)])
+    return mix(gain(crush, 0.7), gain(bend, 0.5), gain(bits, 0.35))
+
+
+def summon():
+    """The Scarecrow King calling crows down: a rising call and wings
+    gathering in."""
+    call = swell(sweep(300.0, 620.0, 700, 1.2), 120.0, 200.0)
+    rasp = swell(lowpass(noise(8940, 700), 1800), 120.0, 200.0)
+    wings = mix(*[at(300 + 55 * k, decay(lowpass(noise(8941 + k, 50), 700), 10.0, 2.0))
+                  for k in range(8)])
+    return mix(gain(call, 0.45), gain(rasp, 0.35), gain(wings, 0.4))
+
+
+def freeze():
+    """The Winter Lord's aura taking the towers: a cold sweep falling and
+    ice settling over it."""
+    sweep_down = sweep_lowpass(noise(8950, 720), 6000.0, 900.0)
+    tone_down = sweep(1600.0, 800.0, 720, 0.8)
+    ice = mix(*[at(220 + 70 * k, decay(tone(3136.0 - 200 * k, 160), 50.0, 1.0))
+                for k in range(5)])
+    return swell(mix(gain(sweep_down, 0.45), gain(tone_down, 0.2), gain(ice, 0.2)),
+                 60.0, 240.0)
+
+
+# --------------------------------------------- the new bosses (task 0284)
+#
+# Each longer than every ordinary night sound, at `GIANT_PEAK`, and heard
+# with no position on arrival, as the Giant is.
+
+def engine():
+    """**The Harvester**: an old engine possessed - a sputtering low drone
+    with the teeth of the thresher ticking over it."""
+    n = int(RATE * 1.5)
+    out = []
+    for i in range(n):
+        t = i / RATE
+        chug = 0.6 + 0.4 * math.sin(2.0 * math.pi * 7.0 * t) ** 2
+        v = (math.sin(2.0 * math.pi * 55.0 * t) * 0.6
+             + math.sin(2.0 * math.pi * 110.0 * t + 0.4) * 0.35
+             + math.sin(2.0 * math.pi * 165.0 * t + 1.1) * 0.2)
+        out.append(v * chug)
+    teeth = mix(*[at(90 * k, decay(highpass(noise(8960 + k, 30), 1800), 4.0, 0.5))
+                  for k in range(16)])
+    return swell(mix(lowpass(out, 900.0), gain(teeth, 0.25)), 260.0, 420.0)
+
+
+def king_call():
+    """**The Scarecrow King**: a dry, rasping call, a crow's voice made huge,
+    and the flock answering under it."""
+    call = sweep(180.0, 260.0, 1500, 1.3)
+    rasp = lowpass(noise(8980, 1500), 1400)
+    flock = mix(*[at(500 + 140 * k, decay(sweep(900.0, 650.0, 200, 0.8), 70.0, 4.0))
+                  for k in range(6)])
+    return swell(mix(gain(call, 0.55), gain(rasp, 0.4), gain(flock, 0.18)),
+                 280.0, 500.0)
+
+
+def lord_ice():
+    """**The Winter Lord**: a deep cold howl, and ice ringing over it."""
+    howl = sweep(70.0, 52.0, 1600, 1.2)
+    wind = sweep_lowpass(noise(8990, 1600), 500.0, 2200.0)
+    chimes = mix(*[at(300 + 180 * k, decay(tone(2349.0 + 263 * (k % 3), 400), 160.0, 2.0))
+                   for k in range(6)])
+    return swell(mix(gain(howl, 0.6), gain(wind, 0.35), gain(chimes, 0.12)),
+                 300.0, 520.0)
+
+
 # --------------------------------------------------------- what happens next
 
 def impact():
@@ -978,6 +1162,26 @@ NIGHT_SOUNDS = [
     ("groan_tank", groan_tank, NIGHT_PEAK),
     ("groan_breaker", groan_breaker, NIGHT_PEAK),
     ("roar_giant", roar_giant, GIANT_PEAK),
+    # Task 0284: the new enemies' voices and what they do...
+    ("voice_spitter", voice_spitter, NIGHT_PEAK),
+    ("spit", spit, NIGHT_PEAK),
+    ("spit_splat", spit_splat, NIGHT_PEAK),
+    ("squeak", squeak, NIGHT_PEAK),
+    ("caw", caw, NIGHT_PEAK),
+    ("rumble", rumble, NIGHT_PEAK),
+    ("burst", burst, NIGHT_PEAK),
+    ("voice_frost", voice_frost, NIGHT_PEAK),
+    ("shatter", shatter, NIGHT_PEAK),
+    ("crackle", crackle, NIGHT_PEAK),
+    ("whisper", whisper, WHISPER_PEAK),
+    ("charge", charge, NIGHT_PEAK),
+    ("crunch", crunch, NIGHT_PEAK),
+    ("summon", summon, NIGHT_PEAK),
+    ("freeze", freeze, NIGHT_PEAK),
+    # ...and the three new bosses, as big as the Giant.
+    ("engine", engine, GIANT_PEAK),
+    ("king_call", king_call, GIANT_PEAK),
+    ("lord_ice", lord_ice, GIANT_PEAK),
     ("impact", impact, NIGHT_PEAK),
     ("death", death, NIGHT_PEAK),
     ("wall_break", wall_break, NIGHT_PEAK),

@@ -1,7 +1,7 @@
 # 0284 - The new enemies and bosses, heard
 
 - **Phase:** 16 - Sound, collections and polish
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0247, 0248, 0250, 0252, 0253, 0254, 0255, 0257
 - **Likely files:** tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

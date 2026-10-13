@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 102
+const GROUPS := 103
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -181,6 +181,7 @@ func _run() -> void:
 	_task_0281_day_sounds()
 	_task_0282_fishing_sounds()
 	_task_0283_guardian_sounds()
+	_task_0284_enemy_sounds()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -9682,8 +9683,8 @@ func _task_0247_spitter() -> void:
 	# walker's groan borrowed.
 	expect(Names.of(&"spitter") == I18n.t(&"ENEMY_SPITTER")
 		and Describe.enemy(&"spitter").contains(I18n.f(&"DESC_SPITS", [reach]))
-		and Sfx.ENEMY_SOUNDS.get(&"spitter", &"") == &"sfx/groan_walker",
-		"it has its name, a tooltip line for its reach, and the walker's groan until it has its own")
+		and Sfx.ENEMY_SOUNDS.get(&"spitter", &"") == &"sfx/voice_spitter",
+		"it has its name, a tooltip line for its reach, and since 0284 a voice of its own")
 
 	# **The view plays it off the rules**: the release and the recovery after
 	# each spit, the rear before the next, standing between and walking off
@@ -9840,8 +9841,8 @@ func _task_0248_rats() -> void:
 	# **The words and the voice**: its name, its tooltip's cluster, the
 	# runner's voice borrowed.
 	expect(Names.of(&"rat") == I18n.t(&"ENEMY_RAT") and Describe.enemy(&"rat").contains(I18n.f(&"DESC_SWARMS", [cluster]))
-		and Sfx.ENEMY_SOUNDS.get(&"rat", &"") == &"sfx/groan_runner",
-		"it has its name, a tooltip line for its cluster, and the runner's voice until it has its own")
+		and Sfx.ENEMY_SOUNDS.get(&"rat", &"") == &"sfx/squeak",
+		"it has its name, a tooltip line for its cluster, and since 0284 a voice of its own")
 
 	# **Drawn in code until A047**: every frame 24x16 with its feet on row
 	# 13 and a pixel clear all round, none the same as another, 7-9 tall
@@ -10054,8 +10055,8 @@ func _task_0249_crow() -> void:
 
 	# **The words and the voice.**
 	expect(Names.of(&"crow") == I18n.t(&"ENEMY_CROW") and Describe.enemy(&"crow").contains(I18n.t(&"DESC_FLIES"))
-		and Sfx.ENEMY_SOUNDS.get(&"crow", &"") == &"sfx/groan_runner" and LogPanel.SEVERITY.has(&"crop_eaten"),
-		"it has its name, a tooltip line that it flies, the runner's voice until its own, and a log line")
+		and Sfx.ENEMY_SOUNDS.get(&"crow", &"") == &"sfx/caw" and LogPanel.SEVERITY.has(&"crop_eaten"),
+		"it has its name, a tooltip line that it flies, a voice of its own (0284), and a log line")
 
 	# **The view lifts it in the air and sets it down to eat**: `FLIGHT_LIFT`
 	# over its shadow flying, nothing landed; the wingbeat aloft, touchdown and
@@ -10186,8 +10187,8 @@ func _task_0250_digger() -> void:
 
 	# **The words and the voice.**
 	expect(Names.of(&"digger") == I18n.t(&"ENEMY_DIGGER") and Describe.enemy(&"digger").contains(I18n.t(&"DESC_BURROWS"))
-		and Sfx.ENEMY_SOUNDS.get(&"digger", &"") == &"sfx/groan_breaker",
-		"it has its name, a tooltip line that it digs, and the breaker's voice until its own")
+		and Sfx.ENEMY_SOUNDS.get(&"digger", &"") == &"sfx/rumble",
+		"it has its name, a tooltip line that it digs, and since 0284 a voice of its own")
 
 	# **The view**: under a fence its mound, on open ground its walk; the
 	# mound drawn in code on A049's canvas - feet on row 43, centred, 14-18
@@ -10378,8 +10379,8 @@ func _task_0251_frost() -> void:
 	# **The words and the voice.**
 	expect(Names.of(&"frost_zombie") == I18n.t(&"ENEMY_FROST_ZOMBIE")
 		and Describe.enemy(&"frost_zombie").contains(I18n.t(&"DESC_CHILLS"))
-		and Sfx.ENEMY_SOUNDS.get(&"frost_zombie", &"") == &"sfx/groan_tank",
-		"it has its name, a tooltip line that its death slows towers, and the tank's voice until its own")
+		and Sfx.ENEMY_SOUNDS.get(&"frost_zombie", &"") == &"sfx/voice_frost",
+		"it has its name, a tooltip line that its death slows towers, and since 0284 a voice of its own")
 
 	# **The burst on screen**: `PixelEffects` plays the shatter where one is
 	# killed inside a tick, at its body's middle - and none for one that only
@@ -10527,8 +10528,8 @@ func _task_0252_wraith() -> void:
 
 	# **The words and the voice.**
 	expect(Names.of(&"wraith") == I18n.t(&"ENEMY_WRAITH") and Describe.enemy(&"wraith").contains(I18n.t(&"DESC_NEEDS_LIGHT"))
-		and Sfx.ENEMY_SOUNDS.get(&"wraith", &"") == &"sfx/groan_walker",
-		"it has its name, a tooltip line that it can only be aimed at in light, and the walker's voice until its own")
+		and Sfx.ENEMY_SOUNDS.get(&"wraith", &"") == &"sfx/whisper",
+		"it has its name, a tooltip line that it can only be aimed at in light, and since 0284 a voice of its own")
 	_completed += 1
 
 
@@ -10783,8 +10784,8 @@ func _task_0253_harvester() -> void:
 		and Calendar.boss_of(GameData.SEASON_DAYS) == &"giant"
 		and StringName(Waves.night_of(summer).get("boss", &"")) == &"harvester" and Waves.kinds_of(summer).has(&"harvester")
 		and Names.of(&"harvester") == I18n.t(&"ENEMY_HARVESTER") and Names.boss_intro(&"harvester") == I18n.t(&"BOSS_INTRO_HARVESTER")
-		and Describe.enemy(&"harvester").contains(I18n.t(&"DESC_CHARGES")) and Sfx.voice_of(&"harvester") == &"sfx/roar_giant",
-		"Summer 14 is the Harvester's night and Spring 14 still the Giant's; it has its name, its intro, a tooltip line that it charges, and the Giant's roar until its own")
+		and Describe.enemy(&"harvester").contains(I18n.t(&"DESC_CHARGES")) and Sfx.voice_of(&"harvester") == &"sfx/engine",
+		"Summer 14 is the Harvester's night and Spring 14 still the Giant's; it has its name, its intro, a tooltip line that it charges, and since 0284 a voice of its own")
 	_completed += 1
 
 
@@ -10877,8 +10878,8 @@ func _task_0254_scarecrow_king() -> void:
 		and Names.of(&"scarecrow_king") == I18n.t(&"ENEMY_SCARECROW_KING")
 		and Names.boss_intro(&"scarecrow_king") == I18n.t(&"BOSS_INTRO_SCARECROW_KING")
 		and Describe.enemy(&"scarecrow_king").contains(I18n.t(&"DESC_SUMMONS"))
-		and Sfx.voice_of(&"scarecrow_king") == &"sfx/roar_giant",
-		"Autumn 14 is the Scarecrow King's night; it has its name, its intro, a tooltip line that it calls down crows, and the Giant's roar until its own")
+		and Sfx.voice_of(&"scarecrow_king") == &"sfx/king_call",
+		"Autumn 14 is the Scarecrow King's night; it has its name, its intro, a tooltip line that it calls down crows, and since 0284 a voice of its own")
 	_completed += 1
 
 
@@ -11091,8 +11092,8 @@ func _task_0255_winter_lord() -> void:
 		and Names.of(&"winter_lord") == I18n.t(&"ENEMY_WINTER_LORD")
 		and Names.boss_intro(&"winter_lord") == I18n.t(&"BOSS_INTRO_WINTER_LORD")
 		and Describe.enemy(&"winter_lord").contains(I18n.t(&"DESC_FREEZES"))
-		and Sfx.voice_of(&"winter_lord") == &"sfx/roar_giant",
-		"Winter 14, the year's last night, is the Winter Lord's; it has its name, its intro, a tooltip line that it freezes the towers, and the Giant's roar until its own")
+		and Sfx.voice_of(&"winter_lord") == &"sfx/lord_ice",
+		"Winter 14, the year's last night, is the Winter Lord's; it has its name, its intro, a tooltip line that it freezes the towers, and since 0284 a voice of its own")
 	_completed += 1
 
 
@@ -12352,6 +12353,60 @@ func _task_0283_guardian_sounds() -> void:
 	expect(answers == [&"sold", &"broke", &"spent", &"expired"],
 		"a gun tower gone with nothing left was sold, a wall gone with rubble broke, a mine was spent, a barricade expired",
 		str(answers))
+	_completed += 1
+
+
+## **Task 0284: the new enemies and bosses, heard.** Every enemy has a voice
+## file of its own; every boss's voice is longer than every ordinary night
+## sound and quieter than the house being hit; the new things they do are
+## files; and fifty rats are one entry in `nearest_by_kind`.
+func _task_0284_enemy_sounds() -> void:
+	var owners := {}
+	var wrong: Array = []
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		var voice := Sfx.voice_of(StringName(kind))
+		if voice == &"" or not FileAccess.file_exists("res://assets/%s.wav" % voice):
+			wrong.append("%s has no file" % kind)
+		elif owners.has(voice):
+			wrong.append("%s and %s share %s" % [owners[voice], kind, voice])
+		owners[voice] = kind
+	expect(wrong.is_empty(), "every enemy has a voice file of its own", str(wrong))
+
+	var alarm := _wav_measure("res://assets/%s.wav" % Sfx.HOUSE_SOUND)
+	var ordinary := 0.0
+	for id in [Sfx.SPIT_SOUND, Sfx.SPIT_LAND_SOUND, Sfx.SURFACE_SOUND, Sfx.CHILL_SOUND,
+			Sfx.CHARGE_SOUND, Sfx.CRUSH_SOUND, Sfx.SUMMON_SOUND, Sfx.FREEZE_SOUND,
+			Sfx.DEATH_SOUNDS[&"frost_zombie"], Sfx.HORN_SOUND, Sfx.POWER_SOUNDS[&"farm_bell"]]:
+		var one := _wav_measure("res://assets/%s.wav" % id)
+		ordinary = maxf(ordinary, float(one.get("seconds", 99.0)))
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if not Combat.is_boss(StringName(kind)):
+			var one := _wav_measure("res://assets/%s.wav" % Sfx.voice_of(StringName(kind)))
+			ordinary = maxf(ordinary, float(one.get("seconds", 99.0)))
+	var bosses: Array = []
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if not Combat.is_boss(StringName(kind)):
+			continue
+		var one := _wav_measure("res://assets/%s.wav" % Sfx.voice_of(StringName(kind)))
+		if one.is_empty() or float(one["seconds"]) <= ordinary \
+				or float(one["peak"]) >= float(alarm.get("peak", 0.0)):
+			bosses.append("%s %s" % [kind, str(one)])
+	expect(bosses.is_empty() and not alarm.is_empty(),
+		"every boss's voice is longer than any ordinary night sound (%.2fs) and quieter than the alarm" % ordinary,
+		str(bosses))
+
+	# **Fifty rats are one voice** (0085's promise, for the swarm of 0248).
+	var state := State.create(28400)
+	var home := Farm.house_centre(state)
+	for i in 50:
+		Entities.spawn(state, &"rat", home + Vector2i(6 + i % 5, -3 + i / 10))
+	Entities.spawn(state, &"walker", home + Vector2i(-6, 0))
+	var ears := Sfx.new()
+	ears.show_state(state)
+	var voices := ears.nearest_by_kind()
+	ears.free()
+	expect(voices.size() == 2 and voices.has(&"rat") and voices.has(&"walker"),
+		"fifty rats and a walker are two voices, not fifty-one", str(voices.keys()))
 	_completed += 1
 
 

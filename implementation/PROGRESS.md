@@ -30127,3 +30127,121 @@ Notes:
 - **The zap is a stun rising on a tick the bell did not ring.** The fence
   and the bell are the only two things that stun today. A third would need
   its own reading here.
+
+## 0284 - The new enemies and bosses, heard - done 2026-10-13
+
+What changed: six new enemies and three new bosses each have a voice of
+their own, so a night heard with your eyes shut says what is coming. View
+only: neither hash moved, and no state key was added to be heard.
+
+- **`tools/gen_sfx.py`** gains eighteen recipes:
+  - **the voices**:
+    - the spitter's wet gurgle (`voice_spitter`);
+    - the rat's two squeaks (`squeak`);
+    - the crow's caw over its wingbeats (`caw`);
+    - the digger's rumble under the ground (`rumble`);
+    - the frost zombie's cold moan (`voice_frost`);
+    - the wraith's breath of a voice (`whisper`, at its own `WHISPER_PEAK`,
+      0.45);
+  - **what they do**:
+    - the spitter's glob leaving (`spit`) and landing on a tower
+      (`spit_splat`);
+    - the digger breaking the surface (`burst`);
+    - the frost zombie shattering as it dies (`shatter`), and frost on a
+      tower it chills (`crackle`);
+  - **the bosses' specials**:
+    - the Harvester's charge revving (`charge`) and the walls it crushes
+      (`crunch`);
+    - the Scarecrow King calling crows down (`summon`);
+    - the Winter Lord's aura taking a tower (`freeze`);
+  - **the three boss voices**, at `GIANT_PEAK`, each longer than every
+    ordinary night sound:
+    - the Harvester's possessed engine (`engine`, 1.5 s);
+    - the Scarecrow King's rasping call with the flock under it
+      (`king_call`, 1.5 s);
+    - the Winter Lord's deep cold howl with ice ringing over it (`lord_ice`,
+      1.6 s).
+- **`src/ui/sfx.gd`**:
+  - **`ENEMY_SOUNDS`** replaces every borrowed entry 0247-0255 left. Voices
+    stay per kind (`nearest_by_kind`), so fifty rats are one squeak.
+  - **`DEATH_SOUNDS`** is a per-kind table that falls back to `DEATH_SOUND`
+    and keeps `DEATH_GAP`: the frost zombie shatters.
+  - **Each special is heard on the edge the state already sets**:
+    - a glob gaining a place in `enemy_shots` is the spit, from the
+      spitter; one leaving it is the splat on its tower;
+    - a digger's `Enemies.underground` going false is the burst;
+    - a tower's `chill` rising is the crackle (0251's `Towers.chill_left`),
+      and its `frozen` rising the freeze (0255's countdown), both read like
+      `reload`;
+    - `charge_dir` appearing on a body is the Harvester's charge (0253's
+      `charge_line`);
+    - a defence broken with rubble on a cell that a charge line covered last
+      frame or this one is crushed, not broken;
+    - `casting` appearing is the King's summons.
+  - **Every boss is announced like the Giant**, on arrival, with no
+    position, ducking the ambience. 0246 had already read `is_boss` in
+    `_watch_bodies`, `nearest_by_kind` and `_ducks`, so no `kind ==
+    &"giant"` test was left; `BOSS_VOICE` stays as the fallback a fifth
+    boss would get.
+  - **The wraith's whisper plays with no position** (`UNPLACED_VOICES`).
+    0252 makes a wraith outside light unshootable, and the night is about
+    what the eyes can see. A whisper with a position would hand the ears
+    what the eyes cannot have: where it is. So it says they are out and not
+    where, and it is quiet (0.45), the one voice that gives nothing away.
+    Playing it only from wraiths in light was the other choice. It would go
+    silent exactly when a wraith is most dangerous, which is out of the
+    light.
+- **Tests**:
+  - **`_task_0085_night_sounds` rewritten**: "the Giant's roar is the
+    longest sound at night" becomes "every boss's voice is longer than
+    every ordinary night sound" (1.5 s against the farm bell's 1.2 s). The
+    house being hit stays the loudest file.
+  - `_night_sound_ids()` takes the new lists.
+  - The 0247-0255 asserts that pinned a borrowed voice now hold each
+    enemy's own.
+  - `headless_v1` gains `_task_0284_enemy_sounds` (103 groups):
+    - every enemy has a voice file of its own and no two share one;
+    - every boss's voice is longer than any ordinary night sound and
+      quieter than the alarm;
+    - fifty rats and a walker are two entries in `nearest_by_kind`.
+  - `input_v2` gains `_case_0284_boss_voices` (5 cases): the Harvester, the
+    Scarecrow King and the Winter Lord, each spawned at the far edge of the
+    farm at night in the real scene, play their own voice once and duck the
+    bed (`Audio.duck_gain()`). The bed comes back up between them, so each
+    duck is its own.
+
+`python tools/gen_sfx.py --report`, the new sounds (the roar for scale):
+
+```text
+  sound          seconds   peak    rms  bright
+  roar_giant       1.400   0.88  0.338    0.01
+  voice_spitter    0.520   0.70  0.213    0.07
+  spit             0.240   0.70  0.144    0.78
+  spit_splat       0.300   0.70  0.111    0.88
+  squeak           0.240   0.70  0.150    0.88
+  caw              0.490   0.70  0.188    0.43
+  rumble           0.720   0.70  0.263    0.01
+  burst            0.330   0.70  0.105    0.07
+  voice_frost      0.680   0.70  0.236    0.10
+  shatter          0.440   0.70  0.198    0.90
+  crackle          0.250   0.70  0.100    0.95
+  whisper          0.820   0.45  0.107    0.89
+  charge           0.620   0.70  0.299    0.04
+  crunch           0.320   0.70  0.119    0.13
+  summon           0.735   0.70  0.270    0.20
+  freeze           0.720   0.70  0.183    0.71
+  engine           1.500   0.88  0.285    0.01
+  king_call        1.500   0.88  0.335    0.08
+  lord_ice         1.600   0.88  0.331    0.04
+```
+
+Files: tools/gen_sfx.py, assets/sfx/ (18 WAVs and their .import),
+src/ui/sfx.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd,
+src/tools/input_v2.gd
+Verify: PASS, 61 checks in 1,029 s; 19,523 headless / 2,785 headless_v1 (103 groups) / 1,269 + 735 + 23 input cases; sfx 86 sounds (29 day, 6 moments, 48 night, 3 menu); perf night tick 2,027 us; sim 3524359536 and data 1211606022 unchanged
+Notes:
+- **The event stingers** (fog, rain, the Blood Moon, the Full Moon) are
+  0286's, as the prompt says.
+- **The digger's voice is its rumble**, heard per kind like any groan,
+  whether or not the nearest digger is under ground right now. The burst
+  is the one edge it has.
