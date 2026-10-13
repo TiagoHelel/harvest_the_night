@@ -79,6 +79,13 @@ LOUD_PEAK = 0.85
 ## different before you have looked at the screen.
 NIGHT_PEAK = 0.70
 
+## **The guardian's night** (task 0283): the START horn, the four powers, the
+## dog and the defences that are not guns. Under the weapons' `NIGHT_PEAK`:
+## they mark what the cursor did or what a defence is doing, and the shots
+## and the house stay the things that cut through. The cursor's own hand -
+## place, upgrade, repair, sell - is quieter still, at `SOFT_PEAK`.
+GUARDIAN_PEAK = 0.62
+
 ## The Giant, which is allowed to be bigger than everything except the alarm.
 GIANT_PEAK = 0.88
 
@@ -637,6 +644,161 @@ def mine_blast():
     return mix(gain(boom, 0.85), gain(grit, 0.55))
 
 
+# ------------------------------------------------- the guardian (task 0283)
+#
+# The night is played through the cursor. Its hand is furniture-quiet; the
+# horn, the powers and the defences that do not shoot sit under the guns.
+
+def place():
+    """A defence set down by the cursor: wood on the ground and a peg in."""
+    knock = decay(lowpass(noise(8801, 140), 1200), 22.0, 1.0)
+    body = decay(tone(147.0, 200), 60.0, 3.0)
+    peg = at(90, decay(highpass(noise(8802, 50), 1800), 8.0, 0.5))
+    return mix(gain(knock, 0.7), gain(body, 0.4), gain(peg, 0.45))
+
+
+def upgrade():
+    """A level up: a ratchet's three clicks and two notes rising a fifth."""
+    clicks = mix(*[at(40 * k, decay(highpass(noise(8803 + k, 40), 2200),
+                                    5.0, 0.5)) for k in range(3)])
+    low = at(110, decay(tone(523.0, 200), 70.0, 3.0))
+    high = at(190, decay(tone(784.0, 220), 80.0, 3.0))
+    return mix(gain(clicks, 0.5), gain(low, 0.35), gain(high, 0.38))
+
+
+def mend():
+    """A repair: three taps of a hammer on a nail, the last one home."""
+    taps = mix(*[at(110 * k, decay(mix(gain(tone(880.0 - 60 * k, 60), 0.5),
+                                       lowpass(noise(8806 + k, 60), 2600)),
+                                   12.0, 0.5)) for k in range(3)])
+    return gain(taps, 0.8)
+
+
+def sell_back():
+    """A defence taken back: a pull and the money coming home, falling -
+    the build undone, not the stall's bright sale."""
+    pull = decay(lowpass(noise(8809, 120), 900), 26.0, 2.0)
+    a = at(40, decay(tone(1175.0, 160), 50.0, 2.0))
+    b = at(120, decay(tone(880.0, 200), 60.0, 2.0))
+    return mix(gain(pull, 0.5), gain(a, 0.35), gain(b, 0.35))
+
+
+def horn():
+    """**START**: a low horn call, a fifth and back - once a night, heard
+    everywhere, the waves on their way."""
+    a = swell(mix(tone(147.0, 520), gain(tone(294.0, 520), 0.3),
+                  gain(tone(441.0, 520), 0.12)), 60.0, 160.0)
+    b = at(420, swell(mix(tone(220.0, 640), gain(tone(440.0, 640), 0.3),
+                          gain(tone(660.0, 640), 0.12)), 60.0, 300.0))
+    breath = swell(lowpass(noise(8810, 1060), 500), 80.0, 300.0)
+    return mix(lowpass(mix(a, b), 1600.0), gain(breath, 0.12))
+
+
+def power_flare():
+    """The flare: a whoosh going up, the pop, and the crackle of it burning."""
+    whoosh = sweep_lowpass(noise(8811, 260), 600.0, 3600.0)
+    whoosh = swell(highpass(whoosh, 300), 60.0, 80.0)
+    pop = at(240, decay(lowpass(noise(8812, 120), 2400), 16.0, 0.5))
+    crackle = at(260, mix(*[at(45 * k, decay(highpass(noise(8813 + k, 30),
+                                                      2600), 4.0, 0.5))
+                            for k in range(7)]))
+    return mix(gain(whoosh, 0.5), gain(pop, 0.8), gain(crackle, 0.4))
+
+
+def farm_bell():
+    """The farm bell: one big clang that stops every zombie on the farm -
+    low, wide and long, heard everywhere."""
+    def partial(hz, tau, g):
+        return gain(decay(tone(hz, 1200), tau, 1.0), g)
+    clang = decay(highpass(noise(8820, 60), 1500), 8.0, 0.5)
+    return mix(gain(clang, 0.4), partial(392.0, 420.0, 0.6),
+               partial(787.0, 300.0, 0.3), partial(1068.0, 200.0, 0.2),
+               partial(1560.0, 140.0, 0.12))
+
+
+def dog_bark():
+    """The dog called: two barks, the second higher."""
+    def bark(seed, hz):
+        voice = decay(sweep(hz, hz * 0.7, 130, 0.6), 40.0, 2.0)
+        rasp = decay(lowpass(noise(seed, 130), 2000), 30.0, 2.0)
+        return mix(gain(voice, 0.6), gain(rasp, 0.5))
+    return mix(bark(8821, 420.0), at(200, bark(8822, 520.0)))
+
+
+def dog_bite():
+    """The bite landing: a snarl and the snap of the jaws."""
+    snarl = swell(mix(lowpass(noise(8823, 220), 900),
+                      gain(sweep(160.0, 210.0, 220, 1.0), 0.4)), 30.0, 80.0)
+    snap = at(200, decay(highpass(noise(8824, 60), 1600), 6.0, 0.5))
+    return mix(gain(snarl, 0.6), gain(snap, 0.8))
+
+
+def power_mend():
+    """The emergency repair: a warm rising shimmer, and the work done at once."""
+    shimmer = mix(*[at(60 * k, decay(tone(523.0 * (1.0 + 0.25 * k), 300),
+                                     120.0, 4.0)) for k in range(4)])
+    knock = at(260, decay(lowpass(noise(8825, 120), 1400), 20.0, 1.0))
+    return mix(gain(shimmer, 0.3), gain(knock, 0.5))
+
+
+def straw():
+    """The decoy bitten: a straw rustle and a dull thump of stuffing."""
+    rustle = swell(highpass(lowpass(noise(8826, 220), 4200), 1200), 15.0, 150.0)
+    thump = decay(lowpass(noise(8827, 120), 500), 26.0, 2.0)
+    return mix(gain(rustle, 0.6), gain(thump, 0.5))
+
+
+def buzz():
+    """A beehive's swarm: a buzzing chord with a wobble in it - per kind, from
+    the nearest stinging hive, so ten hives are one swarm."""
+    n = int(RATE * 0.6)
+    out = []
+    for i in range(n):
+        t = i / RATE
+        wobble = 1.0 + 0.35 * math.sin(2.0 * math.pi * 11.0 * t)
+        v = (math.sin(2.0 * math.pi * 220.0 * t) * 0.5
+             + math.sin(2.0 * math.pi * 227.0 * t) * 0.4
+             + math.sin(2.0 * math.pi * 441.0 * t) * 0.25)
+        out.append(v * wobble)
+    return swell(lowpass(mix(out, gain(noise(8828, 600), 0.2)), 2200.0),
+                 80.0, 200.0)
+
+
+def catapult():
+    """The catapult: the arm's creak and the thunk of it hitting its stop."""
+    creak = decay(sweep(260.0, 200.0, 140, 0.8), 60.0, 8.0)
+    thunk = at(110, decay(lowpass(noise(8829, 160), 700), 30.0, 1.0))
+    wood = at(110, decay(tone(110.0, 220), 70.0, 3.0))
+    return mix(gain(creak, 0.3), gain(thunk, 0.7), gain(wood, 0.5))
+
+
+def splat():
+    """A pumpkin landing: a wet burst and the pieces."""
+    burst = decay(lowpass(noise(8830, 200), 1800), 30.0, 1.0)
+    low = decay(sweep(180.0, 70.0, 160, 0.5), 40.0, 1.0)
+    bits = mix(*[at(60 + 50 * k, decay(lowpass(noise(8831 + k, 50), 2200),
+                                       8.0, 0.5)) for k in range(3)])
+    return mix(gain(burst, 0.7), gain(low, 0.5), gain(bits, 0.3))
+
+
+def hum():
+    """The searchlight's hum: mains and its harmonics, swelling in and out -
+    per kind, from the nearest lit lamp."""
+    body = mix(tone(60.0, 900), gain(tone(120.0, 900), 0.6),
+               gain(tone(180.0, 900), 0.3), gain(tone(240.0, 900), 0.15))
+    fizz = gain(highpass(noise(8834, 900), 3000), 0.04)
+    return swell(mix(body, fizz), 250.0, 350.0)
+
+
+def zap():
+    """The electric fence biting back: a crackle and a sharp buzz."""
+    crackle = mix(*[at(25 * k, decay(highpass(noise(8835 + k, 30), 3000),
+                                     3.0, 0.3)) for k in range(6)])
+    buzz_ = decay(mix(tone(240.0, 260), gain(tone(480.0, 260), 0.5),
+                      gain(tone(720.0, 260), 0.3)), 80.0, 1.0)
+    return mix(gain(crackle, 0.6), gain(buzz_, 0.4))
+
+
 # -------------------------------------------------------------- the enemies
 
 def _groan(seed, low_hz, high_hz, ms, rasp_hz, curve=1.0):
@@ -820,6 +982,24 @@ NIGHT_SOUNDS = [
     ("death", death, NIGHT_PEAK),
     ("wall_break", wall_break, NIGHT_PEAK),
     ("house_hit", house_hit, ALARM_PEAK),
+    # Task 0283: the cursor's hand, quiet as furniture...
+    ("place", place, SOFT_PEAK),
+    ("upgrade", upgrade, SOFT_PEAK),
+    ("mend", mend, SOFT_PEAK),
+    ("sell_back", sell_back, SOFT_PEAK),
+    # ...and the guardian's night under the guns.
+    ("horn", horn, GUARDIAN_PEAK),
+    ("power_flare", power_flare, GUARDIAN_PEAK),
+    ("farm_bell", farm_bell, GUARDIAN_PEAK),
+    ("dog_bark", dog_bark, GUARDIAN_PEAK),
+    ("dog_bite", dog_bite, GUARDIAN_PEAK),
+    ("power_mend", power_mend, GUARDIAN_PEAK),
+    ("straw", straw, GUARDIAN_PEAK),
+    ("buzz", buzz, GUARDIAN_PEAK),
+    ("catapult", catapult, GUARDIAN_PEAK),
+    ("splat", splat, GUARDIAN_PEAK),
+    ("hum", hum, GUARDIAN_PEAK),
+    ("zap", zap, GUARDIAN_PEAK),
 ]
 
 ## And the menus' three (2026-10-07): moving the selection, taking an entry,

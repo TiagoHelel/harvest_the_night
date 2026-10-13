@@ -265,11 +265,17 @@ func _process(delta: float) -> void:
 		apply_volumes()
 
 
-## Put the ears somewhere. The camera follows the farmer, so this is the
-## farmer - which is also the answer a player would give if asked where they
-## are standing.
+## Put the ears somewhere. By day the camera follows the farmer, so this is
+## the farmer - which is also the answer a player would give if asked where
+## they are standing. At night it is the guardian's camera (task 0283).
 func listen_at(where: Vector2) -> void:
 	_ears = where
+
+
+## Where the ears are now (task 0283): the farmer by day, the guardian's
+## camera at night - `Sfx` decides, and the checks ask.
+func ears() -> Vector2:
+	return _ears
 
 
 ## Move the dedupe on by one frame.

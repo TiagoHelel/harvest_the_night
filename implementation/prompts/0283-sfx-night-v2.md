@@ -1,7 +1,7 @@
 # 0283 - The guardian's sounds
 
 - **Phase:** 16 - Sound, collections and polish
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0233, 0234
 - **Likely files:** tools/gen_sfx.py, assets/sfx/, src/ui/sfx.gd, src/ui/main.gd, src/app/audio.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 

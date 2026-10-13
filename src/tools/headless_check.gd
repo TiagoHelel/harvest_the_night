@@ -15246,6 +15246,16 @@ func _night_sound_ids() -> Array:
 	out.append(SfxScript.DEATH_SOUND)
 	out.append(SfxScript.BREAK_SOUND)
 	out.append(SfxScript.HOUSE_SOUND)
+	# **The guardian's night** (task 0283): what the defences without a shot
+	# do, the powers and the dog's bite, the pumpkin landing, START's horn and
+	# the cursor's hand.
+	for id in GameData.sorted_names(SfxScript.DEFENCE_SOUNDS.keys()):
+		out.append(SfxScript.DEFENCE_SOUNDS[id])
+	for id in GameData.sorted_names(SfxScript.POWER_SOUNDS.keys()):
+		out.append(SfxScript.POWER_SOUNDS[id])
+	out.append_array([SfxScript.DOG_BITE_SOUND, SfxScript.SPLAT_SOUND,
+		SfxScript.HORN_SOUND, SfxScript.PLACE_SOUND, SfxScript.UPGRADE_SOUND,
+		SfxScript.MEND_SOUND, SfxScript.SELL_BACK_SOUND])
 	return out
 ## 0086 - the two pieces of music.
 func _task_0086_music() -> void:

@@ -314,7 +314,7 @@ func _hand_out() -> void:
 	_lighting.show_state(_driver.state)
 	_particles.show_state(_driver.state)
 	_transition.show_state(_driver.state, _world)
-	_sfx.show_state(_driver.state)
+	_sfx.show_state(_driver.state, _world)
 	_music.show_state(_driver.state, _world)
 	_ambience.show_state(_driver.state, _world)
 	_juice.show_state(_driver.state, _world, _driver)

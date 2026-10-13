@@ -30010,3 +30010,120 @@ Notes:
 - **The tick marks every crossing of the green**, a sweep that already
   scored included. A second press on such a sweep counts for nothing and
   makes no sound, because `strike` returns before writing `last`.
+
+## 0283 - The guardian's sounds - done 2026-10-13
+
+What changed: the night is played through the cursor, and now it sounds like
+it, heard from where the guardian is looking. View only: neither hash
+moved, and no state key was added to be heard.
+
+- **The ears.** 0130 had not done this. At night `Sfx` listens at the
+  centre of the night camera, not at the farmer asleep in bed. `main.gd`
+  hands it the `WorldView` the way `Music.show_state` gets it, and
+  `Sfx.ears()` is the camera's centre outside the day and the farmer by
+  day. `nearest_by_kind` measures from the same point, and `Audio.ears()`
+  is the getter the checks ask.
+- **`tools/gen_sfx.py`** gains sixteen recipes in `NIGHT_SOUNDS`, every one
+  under `NIGHT_PEAK` and shorter than the Giant's roar:
+  - the cursor's hand at `SOFT_PEAK`: `place` (wood down and a peg),
+    `upgrade` (a ratchet and a rising fifth), `mend` (three hammer taps) and
+    `sell_back` (a pull and the money coming home, falling);
+  - the rest at a new `GUARDIAN_PEAK` (0.62):
+    - the START `horn`, a low fifth and back;
+    - `power_flare`, `farm_bell`, `dog_bark`, `dog_bite` and `power_mend`;
+    - `straw` for a bitten decoy, `buzz` for a hive's swarm, `catapult` for
+      its arm's thunk, `splat` for its pumpkin landing, `hum` for a
+      searchlight and `zap` for the electric fence.
+- **`src/ui/sfx.gd`**:
+  - **The cursor's hand, at its cell**, read off every defence's anchor in
+    the build step and the night:
+    - a defence appearing is placed;
+    - its `level` rising is an upgrade;
+    - its hit points rising, or `house_hp`'s, is a repair. Not on the frame
+      the phase turns, so `begin_night`'s fill of the house is silent, and
+      not when the emergency repair did it, which is heard as itself.
+  - **One gone is sorted by `Sfx.vanished_as(state, cell, id)`**:
+    - `spent`: a one-shot, the mine;
+    - `broke`: rubble on its cell (`Farm.rubble_at`);
+    - `expired`: a barricade or bait whose life ran out (silent);
+    - `sold`: nothing left behind.
+
+    0085 had sounded every vanished non-mine as `wall_break`, a sale
+    included.
+  - **START's horn** on the PREPARATION -> NIGHT edge, once a night, with no
+    position, on `DUCKS`.
+  - **The powers** (`POWER_SOUNDS`), each when its cooldown rises, at the
+    cell it was aimed at. The bell, which stops every zombie, has no
+    position. The dog's bite is heard where it was sent, when `dog_due`
+    runs out.
+  - **The defences of 0224-0231**:
+    - `TOWER_SOUNDS` gives the beehive `sfx/buzz` and the catapult
+      `sfx/catapult`, where 0226 and 0227 had borrowed the flame's and the
+      mortar's;
+    - the buzz is the hive's shot but heard per kind (`PER_KIND_SHOTS`):
+      one swarm a frame, from the nearest hive that stung;
+    - the defences without `damage` go in a table of their own,
+      `DEFENCE_SOUNDS`: the decoy's straw when its hit points fall, the
+      searchlight's hum (per kind, now and then in the waves, from the
+      nearest lit lamp, as the groans are), and the electric fence's zap
+      when a body's `stun` rises on a tick the bell did not ring;
+    - the catapult's shell is a ballistic projectile in the state, so its
+      landing is heard as `splat` at the cell it was thrown to.
+- **Tests**:
+  - `_night_sound_ids()` takes every new list, so
+    `_task_0084_day_sounds`' "nothing unreached" set sees them;
+  - `headless_v1` gains `_task_0283_guardian_sounds` (102 groups):
+    - every new id is a file under `NIGHT_PEAK` and shorter than the roar,
+      and the hand is at `SOFT_PEAK`;
+    - no two damaging defences share a shot;
+    - every defence without `damage` is out of `TOWER_SOUNDS`;
+    - `vanished_as` answers sold, broke, spent and expired for a crafted
+      sale, a wall with rubble, a mine and a barricade;
+  - 0227's assert pinned the catapult to the mortar's sound; it now holds
+    its own;
+  - `input_v2` gains `_case_0283_guardian_sounds` (4 cases), through the
+    cursor's intents:
+    - placing, upgrading and selling a gun are heard as exactly that
+      (`Audio.last_played()`), with no `wall_break`;
+    - START plays the horn once;
+    - an aimed flare plays the flare;
+    - the night's ears are the camera, and panning away from a gun makes it
+      quieter (`Audio.loudness`).
+
+`python tools/gen_sfx.py --report`, the new sounds (the roar and the house
+for scale):
+
+```text
+  sound          seconds   peak    rms  bright
+  roar_giant       1.400   0.88  0.338    0.01
+  house_hit        0.520   0.95  0.194    0.11
+  place            0.200   0.55  0.101    0.11
+  upgrade          0.410   0.55  0.132    0.34
+  mend             0.280   0.55  0.055    0.56
+  sell_back        0.320   0.55  0.143    0.50
+  horn             1.060   0.62  0.294    0.04
+  power_flare      0.560   0.62  0.104    0.73
+  farm_bell        1.200   0.62  0.115    0.19
+  dog_bark         0.330   0.62  0.125    0.20
+  dog_bite         0.260   0.62  0.160    0.22
+  power_mend       0.480   0.62  0.186    0.34
+  straw            0.220   0.62  0.164    0.87
+  buzz             0.600   0.62  0.161    0.07
+  catapult         0.330   0.62  0.125    0.04
+  splat            0.210   0.62  0.092    0.14
+  hum              0.900   0.62  0.252    0.01
+  zap              0.260   0.62  0.119    0.15
+```
+
+Files: tools/gen_sfx.py, assets/sfx/ (16 WAVs and their .import),
+src/ui/sfx.gd, src/ui/main.gd, src/app/audio.gd, src/tools/headless_check.gd,
+src/tools/headless_v1.gd, src/tools/input_v2.gd
+Verify: PASS, 61 checks in 1,022 s; 19,478 headless / 2,782 headless_v1 (102 groups) / 1,269 + 735 + 22 input cases; sfx 68 sounds (29 day, 6 moments, 30 night, 3 menu); perf night tick 2,110 us; sim 3524359536 and data 1211606022 unchanged
+Notes:
+- **A sold barricade or bait is heard as expired (silent).** Without the
+  remaining life in the state at the moment it goes, a sale and an expiry
+  look alike, and the rare sale loses its sound rather than a hundred
+  expiries gaining one.
+- **The zap is a stun rising on a tick the bell did not ring.** The fence
+  and the bell are the only two things that stun today. A third would need
+  its own reading here.

@@ -21,7 +21,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 3
+const V2_CASES := 4
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -41,6 +41,7 @@ func _run() -> void:
 	await _case_0258_event_visuals()
 	await _case_0281_day_moments()
 	await _case_0282_fishing_sounds()
+	await _case_0283_guardian_sounds()
 	_finish()
 
 
@@ -329,6 +330,107 @@ func _case_0282_fishing_sounds() -> void:
 			and audio.plays_of(Sfx.CATCH_SOUND) == 0,
 		"a legendary landed plays its fanfare and not the catch",
 		"%s: last '%s', %d catches" % [legend, audio.last_played(), audio.plays_of(Sfx.CATCH_SOUND)])
+
+	driver.running = true
+	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0283 - the guardian's sounds, through the cursor's intents in the real
+## scene: in the build step a defence placed, upgraded and sold is heard as
+## exactly that - never as a wall breaking; START blows the horn; an aimed
+## flare is the flare; and the night's ears are the camera, so panning away
+## from a tower makes it quieter.
+func _case_0283_guardian_sounds() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	var view: WorldView = require_control("WorldView") as WorldView
+	if driver == null or audio == null or view == null:
+		expect(audio != null, "the Audio autoload is up for the guardian")
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.running = false
+	await frames(2)
+	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
+		GameData.STONE: 900, GameData.MONEY: 900})
+	(state["tech_owned"] as Array).append(&"true sights")
+	NightRoad.to_build(state)
+	await frames(3)
+
+	# Two cells for guns, a few tiles out from the farmer's bed.
+	var here := Player.cell(state)
+	var spots: Array = []
+	for y in range(here.y - 3, here.y + 6):
+		for x in range(here.x + 3, here.x + 12):
+			if spots.size() < 2 and Building.can_place(state, &"gun_tower", Vector2i(x, y)):
+				spots.append(Vector2i(x, y))
+	expect(spots.size() == 2, "there is room for two guns", str(spots))
+	if spots.size() < 2:
+		driver.running = true
+		await close_scene()
+		_completed += 1
+		return
+	var gun: Vector2i = spots[0]
+	var intent: Dictionary = state["intent"]
+	Building.set_active(state, true)
+	Building.select(state, &"gun_tower")
+
+	var heard: Array = []
+	audio.stop_all()
+	audio.forget_counts()
+	for press in [&"build_place", &"build_upgrade", &"build_sell"]:
+		intent["build_cell"] = [gun.x, gun.y]
+		intent[press] = true
+		Sim.advance(state, 1)
+		await frames(2)
+		heard.append(audio.last_played())
+	expect(heard == [Sfx.PLACE_SOUND, Sfx.UPGRADE_SOUND, Sfx.SELL_BACK_SOUND]
+			and audio.plays_of(Sfx.BREAK_SOUND) == 0,
+		"the cursor's place, upgrade and sell are heard as themselves, never as a wall breaking",
+		"%s, %d breaks" % [str(heard), audio.plays_of(Sfx.BREAK_SOUND)])
+
+	# A gun that stays, for the ears.
+	var stays: Vector2i = spots[1]
+	intent["build_cell"] = [stays.x, stays.y]
+	intent["build_place"] = true
+	Sim.advance(state, 1)
+	Building.set_active(state, false)
+	await frames(2)
+
+	audio.forget_counts()
+	intent["start_waves"] = true
+	Sim.advance(state, 1)
+	await frames(3)
+	expect(int(state["phase"]) == Phases.NIGHT and audio.plays_of(Sfx.HORN_SOUND) == 1,
+		"START blows the horn, once",
+		"%s, %d horns" % [Phases.name_of(int(state["phase"])), audio.plays_of(Sfx.HORN_SOUND)])
+
+	audio.forget_counts()
+	intent["ability_cell"] = [stays.x + 2, stays.y]
+	intent["ability"] = true
+	Sim.advance(state, 1)
+	await frames(2)
+	expect(audio.plays_of(Sfx.POWER_SOUNDS[&"flare"]) == 1,
+		"an aimed flare is heard as the flare",
+		"%d, last '%s'" % [audio.plays_of(Sfx.POWER_SOUNDS[&"flare"]), audio.last_played()])
+
+	# **The ears are the camera at night**: panned away from the gun, it
+	# is quieter.
+	var tower := Vector2((stays.x + 0.5) * GameData.TILE_SIZE, (stays.y + 0.5) * GameData.TILE_SIZE)
+	view.look_at_cell(stays)
+	await frames(2)
+	var near: float = audio.loudness(audio.ears(), tower)
+	var away := Vector2(1.0, 0.0) if view.camera_centre().x >= tower.x else Vector2(-1.0, 0.0)
+	view.pan_camera(away, 3.0)
+	await frames(2)
+	var far: float = audio.loudness(audio.ears(), tower)
+	expect(audio.ears().distance_to(view.camera_centre()) < 1.0 and far < near,
+		"the night's ears follow the camera, and panning away from a gun makes it quieter",
+		"ears %s, camera %s, %.2f then %.2f" % [str(audio.ears()), str(view.camera_centre()), near, far])
 
 	driver.running = true
 	audio.stop_all()

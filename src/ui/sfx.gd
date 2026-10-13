@@ -132,13 +132,67 @@ const TOWER_SOUNDS := {
 	&"flame_tower": &"sfx/flame",
 	&"mortar": &"sfx/mortar",
 	&"mine": &"sfx/mine_blast",
-	# The flame's hiss for a swarm leaving the hive (task 0226), until 0283
-	# gives it a buzz.
-	&"beehive": &"sfx/flame",
-	# The mortar's thump for a pumpkin thrown (task 0227), until 0283 gives
-	# the catapult its own.
-	&"catapult": &"sfx/mortar",
+	# **Their own since task 0283**, where 0226 and 0227 borrowed the flame's
+	# hiss and the mortar's thump: a swarm leaving the hive - heard per kind,
+	# from the nearest hive that stung (`PER_KIND_SHOTS`) - and the
+	# catapult's arm.
+	&"beehive": &"sfx/buzz",
+	&"catapult": &"sfx/catapult",
 }
+
+## **A shot heard per kind, not per structure** (task 0283): ten hives that
+## sting on one tick are one swarm, from the nearest of them, as the groans
+## are one voice a kind.
+const PER_KIND_SHOTS: Array = [&"beehive"]
+
+## **What a defence without `damage` sounds like** (task 0283) - kept out of
+## `TOWER_SOUNDS`, which is exactly the defences that shoot: the decoy's straw
+## when it is bitten, the searchlight's hum (per kind, from the nearest lit
+## lamp) and the electric fence's zap when it stuns.
+const DEFENCE_SOUNDS := {
+	&"decoy": &"sfx/straw",
+	&"searchlight": &"sfx/hum",
+	&"electric_fence": &"sfx/zap",
+}
+
+## A pumpkin landing where it was thrown (task 0283): the catapult's shell is
+## in the state as a ballistic projectile, so its landing can be heard there.
+const SPLAT_SOUND := &"sfx/splat"
+
+## **The cursor's hand** (task 0283), quieter than the weapons and played at
+## its cell: a defence put down, a level gained, hit points put back - on a
+## defence or the house, in the build step and the night, never the fill
+## `begin_night` gives the house - and a defence sold back. A defence gone
+## with rubble on its cell broke, one gone without was sold
+## (`vanished_as`).
+const PLACE_SOUND := &"sfx/place"
+const UPGRADE_SOUND := &"sfx/upgrade"
+const MEND_SOUND := &"sfx/mend"
+const SELL_BACK_SOUND := &"sfx/sell_back"
+
+## **START** (task 0283): the build step giving way to the waves, once a
+## night, heard everywhere and ducking the rest.
+const HORN_SOUND := &"sfx/horn"
+
+## **The powers** (tasks 0232, 0233), each when its cooldown rises - the
+## reading `_watch_towers` uses for `reload` - at the cell it was aimed at.
+## The bell stops every zombie on the farm and is heard with no position.
+## The dog's bite lands when its run does.
+const POWER_SOUNDS := {
+	&"flare": &"sfx/power_flare",
+	&"farm_bell": &"sfx/farm_bell",
+	&"call_dog": &"sfx/dog_bark",
+	&"emergency_repair": &"sfx/power_mend",
+}
+const DOG_BITE_SOUND := &"sfx/dog_bite"
+
+## How often the nearest lit searchlight hums, on average, and the shortest
+## gaps for the night's per-kind and per-cell noises, in frames.
+const HUM_EVERY_SECONDS := 3.5
+const HUM_GAP := 60
+const BUZZ_GAP := 20
+const ZAP_GAP := 6
+const STRAW_GAP := 10
 
 ## One voice each, so a crowd is a chord rather than a wall.
 const ENEMY_SOUNDS := {
@@ -239,11 +293,26 @@ var _bodies: Dictionary = {}
 var _standing: Dictionary = {}
 var _house := -1
 
+## And the guardian's (task 0283): whether the defences have been seen once
+## (a farm with none still hears its first), each power's cooldown, whether
+## the dog was running, the catapult's shells in the air, and whether the
+## phase turned this frame.
+var _seen_structures := false
+var _powers: Dictionary = {}
+var _dog_due := 0
+var _shells: Dictionary = {}
+var _turned := false
+
+## The view whose camera the guardian looks through at night (task 0283),
+## handed over the way `Music.show_state` gets it. Null by day's checks.
+var _world: WorldView = null
+
 var _audio: Node = null
 
 
-func show_state(state: Dictionary) -> void:
+func show_state(state: Dictionary, world: WorldView = null) -> void:
 	_state = state
+	_world = world
 	# **Nothing is remembered across runs.** A new farm starting with the last
 	# one's money on record would play a sale the first time the player sold
 	# nothing at all.
@@ -270,14 +339,19 @@ func _forget_the_night() -> void:
 	_bodies.clear()
 	_standing.clear()
 	_house = -1
+	_seen_structures = false
+	_powers.clear()
+	_dog_due = 0
+	_shells.clear()
 
 
 func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
-	# The ears go where the farmer is, because that is where the camera is.
+	# The ears go where the camera is: on the farmer by day, and at night on
+	# the guardian's view rather than the farmer asleep in bed (task 0283).
 	if _audio != null:
-		_audio.listen_at(_where_the_player_is())
+		_audio.listen_at(ears())
 
 	# The moments that sit on the day's edges are watched in every phase.
 	_watch_the_day_turning()
@@ -445,11 +519,15 @@ func _watch_money() -> void:
 ## The first frame of a farm only records where it is.
 func _watch_the_day_turning() -> void:
 	var phase := int(_state["phase"])
-	if _phase >= 0 and phase != _phase:
+	_turned = _phase >= 0 and phase != _phase
+	if _turned:
 		if _phase == Phases.DAY and House.asleep(_state):
 			_ask(PASS_OUT_SOUND if House.passed_out(_state) else BED_SOUND)
 		elif phase == Phases.DAY:
 			_ask(WAKE_SOUND)
+		elif _phase == Phases.PREPARATION and phase == Phases.NIGHT:
+			# **START** (task 0283), 0136's edge: once a night, everywhere.
+			_ask_at(HORN_SOUND, AudioScript.NOWHERE, 1)
 	_phase = phase
 
 
@@ -517,19 +595,27 @@ func _ready() -> void:
 # ------------------------------------------------------------------ the night
 
 func _watch_night(delta: float) -> void:
+	var powers_fired := _watch_powers()
 	_watch_towers()
-	_watch_bodies()
-	_watch_structures()
+	_watch_bodies(powers_fired.has(Ability.FARM_BELL))
+	_watch_structures(powers_fired.has(Ability.EMERGENCY_REPAIR))
 	_watch_house()
+	_watch_shells()
 	_watch_groans(delta)
+	_watch_lamps(delta)
 
 
 ## **A shot is a reload counter going up.** It counts down every tick, so the
 ## one tick it rises on is the tick the thing went off - the same reading
 ## `world_view.gd` uses to put a muzzle flash in the right frame.
+##
+## A kind in `PER_KIND_SHOTS` (task 0283) is heard once, from the nearest of
+## its kind that fired, however many did.
 func _watch_towers() -> void:
 	var occupants: Dictionary = _state["occupants"]
 	var now: Dictionary = {}
+	var swarms: Dictionary = {}
+	var ears_now := ears()
 	# Cell indices, so these are integers and sort as integers.
 	var keys: Array = occupants.keys()
 	keys.sort()
@@ -540,14 +626,24 @@ func _watch_towers() -> void:
 			continue
 		var reload := int(on.get("reload", 0))
 		now[idx] = reload
-		if reload > int(_reloads.get(idx, reload)):
-			_ask_at(TOWER_SOUNDS[id], _cell_middle(Grid.cell(int(idx))),
-				SHOT_GAP)
+		if reload <= int(_reloads.get(idx, reload)):
+			continue
+		var at := _cell_middle(Grid.cell(int(idx)))
+		if PER_KIND_SHOTS.has(id):
+			var best: Variant = swarms.get(id, null)
+			if best == null or ears_now.distance_to(at) < ears_now.distance_to(best):
+				swarms[id] = at
+			continue
+		_ask_at(TOWER_SOUNDS[id], at, SHOT_GAP)
+	for id in GameData.sorted_names(swarms.keys()):
+		_ask_at(TOWER_SOUNDS[id], swarms[id], BUZZ_GAP)
 	_reloads = now
 
 
-## Impacts, deaths, and a boss announcing itself (any `is_boss`, task 0246).
-func _watch_bodies() -> void:
+## Impacts, deaths, a boss announcing itself (any `is_boss`, task 0246) and
+## **the electric fence's zap** (task 0283): a body's `stun` rising on a tick
+## the bell did not ring is a bite on a live wire, heard where it stands.
+func _watch_bodies(bell_rang: bool) -> void:
 	var now: Dictionary = {}
 	for entity_id in Entities.ids(_state):
 		var one := Entities.get_one(_state, int(entity_id))
@@ -555,8 +651,9 @@ func _watch_bodies() -> void:
 			continue
 		var kind := StringName(one["kind"])
 		var hurt := int(one.get("hurt", 0))
+		var stun := int(one.get("stun", 0))
 		var at := _body_middle(one)
-		now[int(entity_id)] = [kind, hurt, at]
+		now[int(entity_id)] = [kind, hurt, at, stun]
 
 		var was: Variant = _bodies.get(int(entity_id), null)
 		if was == null:
@@ -571,6 +668,8 @@ func _watch_bodies() -> void:
 		# reading it as a level emitted on every frame of it.
 		if hurt > int((was as Array)[1]):
 			_ask_at(IMPACT_SOUND, at, IMPACT_GAP)
+		if stun > int((was as Array)[3]) and not bell_rang:
+			_ask_at(DEFENCE_SOUNDS[&"electric_fence"], at, ZAP_GAP)
 
 	for gone in _bodies:
 		if now.has(gone):
@@ -580,39 +679,124 @@ func _watch_bodies() -> void:
 	_bodies = now
 
 
-## Something the player built is no longer there.
-func _watch_structures() -> void:
+## **What the cursor did, and what the night took** (task 0283), off every
+## defence's anchor: one appearing is placed, its `level` rising is an
+## upgrade, its hit points rising a repair - not on the frame the phase
+## turned, and not when the emergency repair did it, which is heard as
+## itself - and a decoy's falling is the straw. One gone is heard as
+## `vanished_as` says: a mine going off, a wall breaking, or a sale.
+func _watch_structures(mended_by_power: bool) -> void:
 	var occupants: Dictionary = _state["occupants"]
 	var now: Dictionary = {}
 	var keys: Array = occupants.keys()
 	keys.sort()             # cell indices, integers
 	for idx in keys:
-		var id := StringName((occupants[idx] as Dictionary)["id"])
-		if GameData.DEFENCES.has(id):
-			now[idx] = bool((GameData.DEFENCES[id] as Dictionary)
-				.get("one_shot", false))
-	if not _standing.is_empty():
+		var on: Dictionary = occupants[idx]
+		var id := StringName(on["id"])
+		if not GameData.DEFENCES.has(id):
+			continue
+		var cell := Grid.cell(int(idx))
+		if Building.anchor_of(_state, cell) != cell:
+			continue
+		now[idx] = [id, int(on.get("level", 1)), int(on.get("hp", 0))]
+	if _seen_structures:
+		for idx in now:
+			var at := _cell_middle(Grid.cell(int(idx)))
+			var one: Array = now[idx]
+			var was: Variant = _standing.get(idx, null)
+			if was == null or StringName((was as Array)[0]) != StringName(one[0]):
+				_ask_at(PLACE_SOUND, at, 1)
+				continue
+			if int(one[1]) > int((was as Array)[1]):
+				_ask_at(UPGRADE_SOUND, at, 1)
+			elif int(one[2]) > int((was as Array)[2]) and not _turned and not mended_by_power:
+				_ask_at(MEND_SOUND, at, 1)
+			elif int(one[2]) < int((was as Array)[2]) and StringName(one[0]) == &"decoy":
+				_ask_at(DEFENCE_SOUNDS[&"decoy"], at, STRAW_GAP)
 		for gone in _standing:
 			if now.has(gone):
 				continue
-			# **A mine that went off is not a wall that broke.** Task 0085
-			# watched every defence vanish and sounded all of them as timber
-			# - so the mine's own blast, which it drew a sound for, never
-			# played once. A `one_shot` defence leaving the board is the one
-			# going off; anything else leaving it has been knocked down.
-			var was_a_trap := bool(_standing[gone])
-			_ask_at(TOWER_SOUNDS[&"mine"] if was_a_trap else BREAK_SOUND,
-				_cell_middle(Grid.cell(int(gone))), 1)
+			var cell := Grid.cell(int(gone))
+			match vanished_as(_state, cell, StringName((_standing[gone] as Array)[0])):
+				&"spent":
+					_ask_at(TOWER_SOUNDS[&"mine"], _cell_middle(cell), 1)
+				&"broke":
+					_ask_at(BREAK_SOUND, _cell_middle(cell), 1)
+				&"sold":
+					_ask_at(SELL_BACK_SOUND, _cell_middle(cell), 1)
 	_standing = now
+	_seen_structures = true
+
+
+## **What became of a defence no longer standing** (task 0283), for `Sfx`
+## and for the checks: `&"spent"` for a one-shot that went off (the mine),
+## `&"broke"` for one that left rubble on its cell (`Farm.rubble_at`),
+## `&"expired"` for one whose life ran out (a barricade, the bait), and
+## `&"sold"` for one that left nothing - the guardian took it back. Task
+## 0085 sounded every one of these but the mine as a wall breaking, a sale
+## included.
+static func vanished_as(state: Dictionary, cell: Vector2i, id: StringName) -> StringName:
+	var entry: Dictionary = GameData.DEFENCES.get(id, {})
+	if bool(entry.get("one_shot", false)):
+		return &"spent"
+	if Farm.rubble_at(state, cell) != &"":
+		return &"broke"
+	if entry.has("lifetime_ticks"):
+		return &"expired"
+	return &"sold"
 
 
 ## **The one that means you are losing.** No gap on it: every hit is one the
-## player is meant to count.
+## player is meant to count. Since task 0283 a rise is the cursor mending
+## it - except the fill `begin_night` gives it, on the frame the phase turns.
 func _watch_house() -> void:
 	var hp := int(_state["house_hp"])
 	if _house >= 0 and hp < _house:
 		_ask_at(HOUSE_SOUND, _house_middle(), 1)
+	elif _house >= 0 and hp > _house and not _turned:
+		_ask_at(MEND_SOUND, _house_middle(), 1)
 	_house = hp
+
+
+## **The powers** (task 0283): each heard when its cooldown rises, at the cell
+## it was aimed at - the bell with no position - and the dog's bite when its
+## run ends. Returns the powers that went off this frame.
+func _watch_powers() -> Array:
+	var fired: Array = []
+	var one: Dictionary = _state["ability"]
+	for id in Ability.ORDER:
+		var wait := Ability.cooldown_left(_state, id)
+		if _powers.has(id) and wait > int(_powers[id]):
+			fired.append(id)
+			var aimed: Array = one.get((Ability.POWERS[id] as Dictionary)["at"], [])
+			var at := AudioScript.NOWHERE if id == Ability.FARM_BELL or aimed.size() < 2 \
+				else _cell_middle(Vector2i(int(aimed[0]), int(aimed[1])))
+			_ask_at(POWER_SOUNDS[id], at, 1)
+		_powers[id] = wait
+	var due := int(one.get("dog_due", 0))
+	if _dog_due > 0 and due == 0:
+		var sent: Array = one.get("dog", [])
+		_ask_at(DOG_BITE_SOUND, _cell_middle(Vector2i(int(sent[0]), int(sent[1])))
+			if sent.size() >= 2 else ears(), 1)
+	_dog_due = due
+	return fired
+
+
+## **A pumpkin landing** (task 0283): a catapult's ballistic shell leaving the
+## air is heard where it was thrown to.
+func _watch_shells() -> void:
+	var now: Dictionary = {}
+	for shot in (_state.get("projectiles", []) as Array):
+		var one: Dictionary = shot
+		if StringName(one.get("from", &"")) == &"catapult":
+			now[int(one["id"])] = one.get("to", [])
+	for gone in _shells:
+		if now.has(gone):
+			continue
+		var to: Array = _shells[gone]
+		if to.size() >= 2:
+			_ask_at(SPLAT_SOUND, _cell_middle(Vector2i(int(to[0]), int(to[1]))), 1)
+	_shells = now
 
 
 ## **Per kind, not per body.** However many are out there, the walkers are one
@@ -627,8 +811,26 @@ func _watch_groans(delta: float) -> void:
 			_ask_at(ENEMY_SOUNDS[kind], nearest[kind], GROAN_GAP)
 
 
+## **The searchlights' hum** (task 0283), per kind as the groans are: now and
+## then in the waves, from the nearest lit lamp - ten lamps are one hum.
+func _watch_lamps(delta: float) -> void:
+	if int(_state["phase"]) != Phases.NIGHT:
+		return
+	var ears_now := ears()
+	var best: Variant = null
+	for cell in Farm.cells_with(_state, &"searchlight"):
+		var lamp: Vector2i = cell
+		if Building.anchor_of(_state, lamp) != lamp or Light.lamp_tiles(_state, lamp) <= 0:
+			continue
+		var at := _cell_middle(lamp)
+		if best == null or ears_now.distance_to(at) < ears_now.distance_to(best):
+			best = at
+	if best != null and randf() < delta / HUM_EVERY_SECONDS:
+		_ask_at(DEFENCE_SOUNDS[&"searchlight"], best, HUM_GAP)
+
+
 ## The closest of each sort of enemy, which is how many voices a crowd
-## amounts to.
+## amounts to - measured from the ears, the night camera's centre at night.
 ##
 ## **This is the whole of "fifty zombies do not turn into noise".** Fifty
 ## walkers are one entry, not fifty: the size of what this returns is capped
@@ -637,7 +839,7 @@ func _watch_groans(delta: float) -> void:
 ## a stretch of frames and hoping the random draw cooperated.
 func nearest_by_kind() -> Dictionary:
 	var nearest: Dictionary = {}
-	var ears := _where_the_player_is()
+	var ears_now := ears()
 	for entity_id in Entities.ids(_state):
 		var one := Entities.get_one(_state, int(entity_id))
 		if one.is_empty():
@@ -647,12 +849,21 @@ func nearest_by_kind() -> Dictionary:
 			continue        # a boss announces itself and does not mutter
 		var at := _body_middle(one)
 		var best: Variant = nearest.get(kind, null)
-		if best == null or ears.distance_to(at) < ears.distance_to(best):
+		if best == null or ears_now.distance_to(at) < ears_now.distance_to(best):
 			nearest[kind] = at
 	return nearest
 
 
 # ----------------------------------------------------------------- the places
+
+## **Where the ears are** (task 0283): the farmer by day, and at night the
+## centre of the guardian's camera (0130) - not the farmer asleep in bed. A
+## check with no view hears from the farmer.
+func ears() -> Vector2:
+	if _world != null and not _state.is_empty() and int(_state["phase"]) != Phases.DAY:
+		return _world.camera_centre()
+	return _where_the_player_is()
+
 
 func _where_the_player_is() -> Vector2:
 	return _cell_middle(Player.cell(_state))
@@ -678,7 +889,7 @@ func _house_middle() -> Vector2:
 # ------------------------------------------------------------------- the asks
 
 func _ask(id: StringName) -> void:
-	_ask_at(id, _where_the_player_is(), 1)
+	_ask_at(id, ears(), 1)
 
 
 ## The sounds that get the ambience out of their way.
@@ -687,7 +898,8 @@ func _ask(id: StringName) -> void:
 ## bed may never mask it. The Giant's roar is here too because it is meant to
 ## arrive over everything, and a wall going because it is the moment a player
 ## has to look up.
-const DUCKS: Array = [HOUSE_SOUND, BREAK_SOUND]
+## START's horn too (task 0283): the waves are on their way.
+const DUCKS: Array = [HOUSE_SOUND, BREAK_SOUND, HORN_SOUND]
 
 
 func _ask_at(id: StringName, at: Vector2, gap: int) -> void:

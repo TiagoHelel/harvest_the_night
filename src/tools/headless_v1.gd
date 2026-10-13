@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 101
+const GROUPS := 102
 
 ## A005's eight defences, the ones it drew icons for (task 0147). A later
 ## defence wears its own pack's, or its drawing until then (0224's decoy).
@@ -180,6 +180,7 @@ func _run() -> void:
 	_task_0277_year_balance()
 	_task_0281_day_sounds()
 	_task_0282_fishing_sounds()
+	_task_0283_guardian_sounds()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -7879,9 +7880,9 @@ func _task_0227_catapult() -> void:
 	expect(cost.size() == 2 and cost.has(GameData.WOOD) and cost.has(GameData.PUMPKIN) and Building.money_of(&"catapult") > 0
 		and StringName(row["shape"]) == GameData.SHAPE_SPLASH and StringName(row["aim"]) == GameData.AIM_BALLISTIC
 		and int(row["flight_ticks"]) > 0 and row["ammo"] == {GameData.PUMPKIN: 1}
-		and GameData.defence_season(row) == &"autumn" and Sfx.TOWER_SOUNDS.get(&"catapult") == &"sfx/mortar"
+		and GameData.defence_season(row) == &"autumn" and Sfx.TOWER_SOUNDS.get(&"catapult") == &"sfx/catapult"
 		and not GameData.DEFENCES.has(GameData.PUMPKIN),
-		"a catapult costs wood, pumpkins and money, lobs a splash at a place a pumpkin a shot, is autumn's and thumps like a mortar - and its id is not the crop's",
+		"a catapult costs wood, pumpkins and money, lobs a splash at a place a pumpkin a shot, is autumn's and, since 0283, thunks as itself - and its id is not the crop's",
 		str(row))
 	expect(int(row["range"]) < int(mortar["range"]) and int(row["damage"]) < int(mortar["damage"])
 		and int(row.get("min_range", 0)) == 0 and int(mortar["min_range"]) > 0
@@ -12291,6 +12292,66 @@ func _task_0282_fishing_sounds() -> void:
 	expect(Interact.DAY_ONLY.has(&"reel") and Sfx.VERB_SOUNDS.get(&"reel", &"") == &"sfx/reel"
 			and FileAccess.file_exists("res://assets/sfx/reel.wav"),
 		"the reel verb is still a day verb, so its sound stays - played as the line comes in")
+	_completed += 1
+
+
+## **Task 0283: the guardian's sounds.** Every new id is a file under the
+## weapons' `NIGHT_PEAK` and shorter than the Giant's roar; no two damaging
+## defences share a shot; every defence without `damage` is out of
+## `TOWER_SOUNDS`; and `Sfx.vanished_as` tells a sale from a wreck with
+## rubble, a spent mine and a barricade whose life ran out.
+func _task_0283_guardian_sounds() -> void:
+	var new_ids: Array = [Sfx.PLACE_SOUND, Sfx.UPGRADE_SOUND, Sfx.MEND_SOUND,
+		Sfx.SELL_BACK_SOUND, Sfx.HORN_SOUND, Sfx.DOG_BITE_SOUND, Sfx.SPLAT_SOUND,
+		Sfx.TOWER_SOUNDS[&"beehive"], Sfx.TOWER_SOUNDS[&"catapult"]]
+	for id in GameData.sorted_names(Sfx.DEFENCE_SOUNDS.keys()):
+		new_ids.append(Sfx.DEFENCE_SOUNDS[id])
+	for id in Ability.ORDER:
+		new_ids.append(Sfx.POWER_SOUNDS[id])
+	var gen := FileAccess.get_file_as_string("res://tools/gen_sfx.py")
+	var night_peak := _py_number(gen, "NIGHT_PEAK")
+	var roar := _wav_measure("res://assets/%s.wav" % Sfx.ENEMY_SOUNDS[&"giant"])
+	var wrong: Array = []
+	for id in new_ids:
+		var one := _wav_measure("res://assets/%s.wav" % id)
+		if one.is_empty() or float(one["peak"]) >= night_peak \
+				or float(one["seconds"]) >= float(roar.get("seconds", 0.0)):
+			wrong.append("%s %s" % [id, str(one)])
+	expect(wrong.is_empty() and night_peak > 0.0,
+		"every new night sound is a file under NIGHT_PEAK and shorter than the Giant's roar",
+		str(wrong))
+	var hand := _wav_measure("res://assets/%s.wav" % Sfx.PLACE_SOUND)
+	expect(not hand.is_empty() and float(hand["peak"]) <= _py_number(gen, "SOFT_PEAK") + 0.001,
+		"the cursor's hand is quieter than the weapons, at SOFT_PEAK", str(hand))
+
+	var shots := {}
+	var shared: Array = []
+	var stray: Array = []
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var hurts := (GameData.DEFENCES[id] as Dictionary).has("damage")
+		if not hurts and Sfx.TOWER_SOUNDS.has(id):
+			stray.append(id)
+		if hurts and Sfx.TOWER_SOUNDS.has(id):
+			var file: StringName = Sfx.TOWER_SOUNDS[id]
+			if shots.has(file):
+				shared.append("%s and %s" % [shots[file], id])
+			shots[file] = id
+	expect(shared.is_empty(), "no two damaging defences share a shot", str(shared))
+	expect(stray.is_empty() and not Sfx.DEFENCE_SOUNDS.is_empty(),
+		"every defence without damage is out of TOWER_SOUNDS, its noise in DEFENCE_SOUNDS",
+		str(stray))
+
+	# Sold, broken, spent, expired.
+	var state := State.create(28300)
+	var cell := Vector2i(5, 5)
+	var broke := State.create(28301)
+	(broke["rubble"] as Dictionary)[Grid.index(cell)] = &"wall"
+	var answers := [Sfx.vanished_as(state, cell, &"gun_tower"),
+		Sfx.vanished_as(broke, cell, &"wall"), Sfx.vanished_as(state, cell, &"mine"),
+		Sfx.vanished_as(state, cell, &"barricade")]
+	expect(answers == [&"sold", &"broke", &"spent", &"expired"],
+		"a gun tower gone with nothing left was sold, a wall gone with rubble broke, a mine was spent, a barricade expired",
+		str(answers))
 	_completed += 1
 
 
