@@ -1,4 +1,9 @@
-# The year - task 0277 (2026-10-13), blocked five times
+# The year - task 0277 (2026-10-13), blocked six times
+
+**Sixth block, after the owner's sixth call** - see "The owner's sixth
+call, played" below: the Scarecrow King (600/4) falls wherever the house
+stands, and two runs reach winter. Autumn's last week stops the other
+fourteen, and from Winter 4-5 no line holds.
 
 **Fifth block, after the owner's fifth call** - see "The owner's fifth
 call, played" below: a defence brought down is a ruin, mended back at half
@@ -54,6 +59,72 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's sixth call, played: the Scarecrow King sized to autumn's line (2026-10-13)
+
+The owner chose the first road again: "vai na 1, faz o King igual ao
+Gigante". **The King is 600 hit points and armour 4 now, and falls on the
+first fight wherever the house stands.** Two runs reach winter for the
+first time. The fourteen that do not are stopped by autumn's last week,
+not by the King.
+
+**What moved** (`src/core/game_data.gd`):
+- The Scarecrow King: 1,200 and armour 5 become **600 and armour 4**.
+- Armour 4 is the tank's, as the Giant's and the Harvester's are. Every
+  boss is still at least as well armoured as anything that is not one, as
+  0058's relation reads since the third call.
+- The Winter Lord's 1,800 is still the most.
+
+### The King's grid
+
+The eight runs nearest its night: `balanced` 9007, 9028, 9042, 9049;
+`towers` 9028, 9035, 9042, 9049. To night 43.
+
+| King | It fell | Where it did not |
+| --- | --- | --- |
+| 1,200/5 (before) | 0 of 8 | The house went before it was touched, or it was left at 712-906 |
+| 600/4 | 2 of 8 | The house went first: it was at 600 every fight, or never came |
+| 450/4 | 2 of 8 | The same |
+| 350/4 | 2 of 8 | The same |
+
+- **`towers` 9049** now takes it down on the first fight, where it left
+  747-906 of 1,200. **`balanced` 9049** takes it down once its line
+  holds.
+- **Below 600 its hit points change nothing**: in the other six runs no
+  line ever hurt it.
+
+### The year after it
+
+`--year 8` (32 runs in 1,628 s, 8 processes, a run 114-748 s):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.6    0.0   10.2    2.1         1.9  0.0  6.8  0.9   0/8    8/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0   10.2    1.6         0.0  0.0  6.1  0.9   0/8    8/8
+  walls              8.1    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+
+    balanced  autumn  100 100 100  75  88  88  75  75  75  75  62  25  12   0
+              winter  100 100 100   0   0   0   0   0   0   0   0   0   0   0
+    towers    autumn  100 100 100  88 100 100  62  62  50  38  38  25  25  12
+              winter  100 100 100 100   0   0   0   0   0   0   0   0   0   0
+```
+
+What it says:
+- **Two runs reach winter**, both on seed 9049. They hold Winter 1-3 or
+  1-4, then lose every night to the cap. The Winter Lord (1,800/7) was
+  left at 1,159-1,298.
+- **Autumn's last week stops the other fourteen.** Their house falls on
+  Autumn 12-14, and on the King's night before the King is touched, every
+  fight.
+- Spring and summer are as the fifth call left them.
+
+### The next call is the owner's
+
+1. **Autumn's last week** (Autumn 12-14 and the King's company): only 0-25%
+   of lines hold it.
+2. **Winter**: from Winter 4-5 no line holds. The Winter Lord at 1,800 and
+   armour 7 is the last boss still at its first numbers.
 
 ## The owner's fifth call, played: a defence brought down is a ruin, mended back (2026-10-13)
 

@@ -31275,3 +31275,39 @@ Harvester were, and autumn's last week.
     save's tower ruins keep the level they fell at, where they used to fall
     back to level one.
   - `python tools/verify.py` - PASS (the SIM move accepted on the run before, which the showcases failed).
+
+## 0277 - Balancing the year, the Scarecrow King sized to autumn - blocked 2026-10-13
+
+**The owner's sixth call** (2026-10-13, "vai na 1, faz o King igual ao
+Gigante"). **The Scarecrow King is 600 hit points and armour 4, and falls
+on the first fight wherever the house stands.** Two runs reach winter for
+the first time. The other fourteen are stopped by autumn's last week,
+whose horde takes the house before the King is touched. Blocked a sixth
+time, on autumn's last week and on winter.
+
+- **The King's grid** (eight runs nearest its night, to night 43):
+  - At 1,200/5 it fell in none.
+  - At 600/4, 450/4 and 350/4 it fell in the same two runs, `towers` and
+    `balanced` on seed 9049. `towers` 9049 takes it on the first fight
+    where it used to leave 747-906.
+  - In the other six it stood at full every fight, or never came: the
+    house was gone first. So 600, the most tried, is the number.
+- **Armour 4** is the tank's, as the Giant's and the Harvester's. The
+  Winter Lord's 1,800 is still the most. No test read the King's hit
+  points or armour but that one.
+- **The year after it**, `--year 8`:
+  - spring and summer are as the fifth call left them;
+  - autumn lost is 10.2 for `balanced` and 10.2 for `towers`;
+  - both seed 9049 runs reach winter, hold Winter 1-3 or 1-4, then lose
+    every night to the cap;
+  - the Winter Lord (1,800/7) was left at 1,159-1,298.
+- **The next call is the owner's**, in BALANCE.md's "The owner's sixth
+  call, played":
+  1. autumn's last week (Autumn 12-14 and the King's company), which
+     0-25% of lines hold;
+  2. winter, from Winter 4-5, and the Winter Lord, the last boss still at
+     its first numbers.
+- **Hashes**: `DATA 941677928 -> 3440354384`, the King's hit points and
+  armour. SIM unchanged (2260114289): the determinism run never reaches
+  autumn.
+- **Checks**: `python tools/verify.py --accept` - PASS.

@@ -2881,7 +2881,12 @@ const ENEMIES: Dictionary = {
 		# leaves no bones (`Combat._kill`) - a King left casting would be a
 		# farm of them.
 		"is_boss": true,
-		"hp": 1200,                     # LEVER: hit points, 800-1600
+		# **Sized to autumn's line** (task 0277, the owner's call: "faz o King
+		# igual ao Gigante"): at 1,200 and armour 5 the one line that reached
+		# it with the house standing took 300-450 a fight. At 600/4 it falls on
+		# the first fight there, and 450 or 350 change nothing: where it does
+		# not fall, autumn's last week took the house before it was touched.
+		"hp": 600,                      # LEVER: hit points, 300-1600
 		# Slower than every one that walks (0246): a lurch on stilts.
 		"ticks_per_tile": 42,           # LEVER: ticks, 39-60
 		"damage": 40,                   # LEVER: to the house, 25-60
@@ -2892,8 +2897,9 @@ const ENEMIES: Dictionary = {
 		"summon_cap": 18,               # LEVER: crows a night, at least a flock
 		"reward": 140,                  # LEVER: money, 80-220
 		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
-		# More than anything that is not a boss.
-		"armour": 5,                    # LEVER: damage off each hit, 5-10
+		# As well as anything that is not a boss: the tank's 4, as the
+		# Giant's and the Harvester's (task 0277).
+		"armour": 4,                    # LEVER: damage off each hit, 3-10
 		"lurable": false,
 	},
 	&"winter_lord": {

@@ -1,7 +1,7 @@
 # 0277 - Balancing the year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** blocked - a defence brought down is a ruin mended back: every balanced run reaches autumn, spring costs 2.6 nights, every boss to Summer 14 falls - and from Autumn 12 three lines in four fall and the Scarecrow King is left at 712-906 of 1,200 - owner to choose the King sized to autumn's line, or autumn's last week
+- **Status:** blocked - the Scarecrow King (600/4) falls wherever the house stands and two runs reach winter; autumn's last week takes the other fourteen houses, and from Winter 4-5 no line holds - owner to choose autumn's last week, or winter and the Winter Lord
 - **Depends on:** 0271, 0272, 0273, 0274, 0276, 0259
 - **Likely files:** tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd
 

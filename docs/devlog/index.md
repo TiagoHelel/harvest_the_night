@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-252 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
+253 tasks over 11 days,  to 2026-10-13. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -296,10 +296,11 @@ is the sort of thing this list exists to say out loud.
 | 0277 | Balancing the year, the bosses sized to the season | 2026-10-13 |
 | 0277 | Balancing the year, the robot saves for the mortar | 2026-10-13 |
 | 0277 | Balancing the year, ruins mended back | 2026-10-13 |
+| 0277 | Balancing the year, the Scarecrow King sized to autumn | 2026-10-13 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 134 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 135 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -435,6 +436,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Balancing the year, the bosses sized to the season** (0277) - `sim` 744605805 -> 323243396
 - **Balancing the year, the bosses sized to the season** (0277) - `data` 1214651628 -> 941677928
 - **Balancing the year, ruins mended back** (0277) - `sim` 323243396 -> 2260114289
+- **Balancing the year, the Scarecrow King sized to autumn** (0277) - `data` 941677928 -> 3440354384
 
 ## What went wrong
 
