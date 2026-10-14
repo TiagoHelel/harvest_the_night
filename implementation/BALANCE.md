@@ -1,4 +1,9 @@
-# The year - task 0277 (2026-10-13), blocked ten times
+# The year - task 0277 (2026-10-13), blocked eleven times
+
+**Eleventh block, after the owner's eleventh call** - see "The owner's
+eleventh call, played" below: the Winter Lord's company at three quarters,
+and fourteen runs of sixteen win the year. `balanced` still loses 6.0
+nights before Winter 1, two over the target.
 
 **Tenth block, after the owner's tenth call** - see "The owner's tenth
 call, played" below: autumn's Full Moon at 80%, and twelve runs of sixteen
@@ -80,6 +85,61 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's eleventh call, played: the Winter Lord's company (2026-10-14)
+
+The owner chose the Lord's company, as the King's was: "A horda do Winter
+Lord a 75%". **Fourteen runs of sixteen win the year now**, seven of each
+shooting policy. The Winter Lord falls on the first fight in every run
+that meets him.
+
+**What moved** (`src/core/game_data.gd`, key night 56):
+- Every row of the Winter Lord's company at three quarters, rounded, with
+  its releases stretched alike to the fill line.
+- At 9,664 hit points it is still the year's largest night, over the
+  King's 8,414, as 0274's rhythm asks.
+
+### The year after it
+
+`--year 8` (32 runs in 1,962 s, 8 processes, a run 122-976 s):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.6    0.0    3.4    1.8         1.9  0.0  2.2  0.0   7/8    1/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0    3.0    3.0         0.0  0.0  2.0  0.0   7/8    1/8
+  walls              8.1    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+```
+
+What it says:
+- **Fourteen runs of sixteen win the year**, where twelve did. Winter's
+  boss repeats are 0.0: every run that reached the Lord took him down on
+  the first fight.
+- **Before Winter 1, nothing moved**: `towers` loses 3.4, inside the
+  target, and `balanced` 6.0.
+- **The two unwon runs both stop in autumn**: `balanced` 9035 loses its
+  line from Autumn 8, and `towers` 9000 from Autumn 10. Neither gets past
+  the King.
+
+### Where the phase's target stands
+
+The target is that `balanced` loses two to four nights before Winter 1 on
+eight seeds, and every boss falls for it on every seed.
+- **Every boss falls on seven seeds of eight.** On the eighth (9035) the
+  King's night is never won.
+- **`balanced` loses 6.0 nights before Winter 1**, two over the target:
+  2.6 in spring and 3.4 in autumn.
+
+### The next call is the owner's
+
+1. **Spring's 2.6**: four of eight `balanced` seeds lose a line on Spring
+   9-13 and win it back only over the Giant's repeats.
+2. **Autumn's 3.4**, chiefly seed 9035, which loses its line from Autumn 8
+   whatever the trials moved.
+3. **Or the target itself**: `towers` meets it, `balanced` is two nights
+   over, and fourteen runs of sixteen win the year. Calling 0277 done here
+   would hand the rest to 0278 (the economy across a year) and 0280 (do
+   fifty-six nights tire).
 
 ## The owner's tenth call, played: autumn's Full Moon (2026-10-14)
 

@@ -1,7 +1,7 @@
 # 0277 - Balancing the year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** blocked - autumn's Full Moon at 80%: twelve runs of sixteen win the year and towers loses 3.4 before Winter 1, but balanced loses 6.0 and two of its seeds lose the house on the Winter Lord's night - owner to choose the Lord's company, spring's 2.6, or the target
+- **Status:** blocked - the Winter Lord's company at three quarters: fourteen runs of sixteen win the year and every boss falls on seven seeds of eight, but balanced loses 6.0 nights before Winter 1 - owner to choose spring's 2.6, autumn's 3.4, or the target itself
 - **Depends on:** 0271, 0272, 0273, 0274, 0276, 0259
 - **Likely files:** tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd
 

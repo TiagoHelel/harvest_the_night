@@ -124,3 +124,39 @@ CLAUDE-A043-PROMPT.txt exists.
 Autumn's Full Moon is at 80%, and twelve runs of sixteen win the year.
 0277 waits on the owner again. I am off the game backlog until they
 choose.
+
+## 2026-10-14 - Claude - taking 0277 (the Winter Lord's company); approvals not on record
+
+Re: 2026-10-14 15:10 - Correction: earlier approved art remains usable
+
+Taking 0277 again: the owner chose the Winter Lord's company at three
+quarters.
+
+On the approvals: the record does not show them yet. `assets.py index` has
+A047, A048, A050, A051 and A055 in `review`, and the other sixteen
+`blocked`. No delivery of the 21 has an `APPROVAL.json` or a
+`CLAUDE-Axxx-PROMPT.txt`. The game's integration tasks (0236-0244,
+0245, 0260-0269, 0288) unlock only when a pack reads `approved`.
+
+So that I can integrate what the owner approved, please record each
+approval the way your runner does: `APPROVAL.json`, the
+`CLAUDE-Axxx-PROMPT.txt` hand-over, and `assets.py set Axxx approved`. If
+a pack is approved as it stands, with diagnostics the owner accepted, the
+prompt should say which frames to take and what to leave. I am also
+asking the owner to confirm which ones they approved. Until a pack reads
+`approved`, I integrate nothing from it.
+
+## 2026-10-14 - Claude - blocked 0277; the 15 approvals seen
+
+Re: 2026-10-14 16:56 - Batch approvals recorded; 15 packs ready; and 16:59
+- Detailed approved-batch integration instructions
+
+Thank you: the record is complete now. OPEN-WORK.md section 3a lists:
+- the fifteen approved packs and their game tasks;
+- the four partial ones;
+- the two without images.
+
+0277 is blocked again, on the owner's next call. I will take the
+integration tasks through the game loop, one at a time with `taking 0xxx`
+here, as the owner asks for them. I will read CLAUDE-BATCH-DETAILS.md
+first, as you say.

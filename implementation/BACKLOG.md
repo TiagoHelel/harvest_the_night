@@ -375,7 +375,7 @@ The approved bones, moon stones, fertilised soil and night-loot icons go into th
 
 ### 0236 - Art: the scarecrow decoy and zombie bait
 
-Waits for Codex art A037.  Likely files: `assets/art_source/defences/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_ui_art.py, tools/verify.py`.
+Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_ui_art.py, tools/verify.py`.
 
 The approved straw decoy and rotten-fish bait replace the stand-ins 0224 and 0225 left.
 
@@ -394,7 +394,7 @@ The approved straw decoy and rotten-fish bait replace the stand-ins 0224 and 022
 
 ### 0237 - Art: the beehive
 
-Waits for Codex art A038.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/check_effect_art.py, tools/import_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/check_effect_art.py, tools/import_art.py`.
 
 The approved beehive and its bees replace the stand-ins 0226 left.
 
@@ -413,7 +413,7 @@ The approved beehive and its bees replace the stand-ins 0226 left.
 
 ### 0238 - Art: the pumpkin catapult
 
-Waits for Codex art A039.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/check_effect_art.py, tools/import_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/check_effect_art.py, tools/import_art.py`.
 
 The approved catapult, its pumpkin and its splat replace the stand-ins 0227 left.
 
@@ -451,7 +451,7 @@ The approved garlic braid, fresh, wilted and spent, replaces the stand-in 0228 l
 
 ### 0240 - Art: the searchlight
 
-Waits for Codex art A041.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/import_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/import_art.py`.
 
 The approved searchlight replaces the stand-in 0229 left, and its beam starts from the lamp the art draws.
 
@@ -508,7 +508,7 @@ The approved hardwood wall and sandbags replace the stand-ins 0231 left.
 
 ### 0243 - Art: the day tarps
 
-Waits for Codex art A044.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py`.
+Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py`.
 
 The approved tarps cover the defences by day and unveil at nightfall, in place of the code-drawn covers 0223 left.
 
@@ -564,7 +564,7 @@ The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-t
 
 ### 0260 - Art: the spitter
 
-Waits for Codex art A046.  Likely files: `assets/art_source/enemies/spitter/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd`.
+Ready to pick up.  Likely files: `assets/art_source/enemies/spitter/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd`.
 
 The spitter as Codex drew it, in place of 0247's stand-in: its walk, the spit, the splat and its forecast head.
 
@@ -582,7 +582,7 @@ The spitter as Codex drew it, in place of 0247's stand-in: its walk, the spit, t
 
 ### 0261 - Art: the rat swarm
 
-Waits for Codex art A047.  Likely files: `assets/art_source/enemies/rat/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd, src/ui/enemy_deaths.gd`.
+Ready to pick up.  Likely files: `assets/art_source/enemies/rat/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd, src/ui/enemy_deaths.gd`.
 
 The rats as Codex drew them, in place of 0248's stand-in: small enough to read as a swarm and still read as rats.
 
@@ -600,7 +600,7 @@ The rats as Codex drew them, in place of 0248's stand-in: small enough to read a
 
 ### 0262 - Art: the crow
 
-Waits for Codex art A048.  Likely files: `assets/art_source/enemies/crow/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd, src/ui/world_view.gd`.
+Ready to pick up.  Likely files: `assets/art_source/enemies/crow/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd, src/ui/world_view.gd`.
 
 The crow as Codex drew it, in place of 0249's stand-in: in the air, landing, pecking and falling.
 
@@ -618,7 +618,7 @@ The crow as Codex drew it, in place of 0249's stand-in: in the air, landing, pec
 
 ### 0263 - Art: the digger
 
-Waits for Codex art A049.  Likely files: `assets/art_source/enemies/digger/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd`.
+Ready to pick up.  Likely files: `assets/art_source/enemies/digger/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd`.
 
 The digger as Codex drew it, in place of 0250's stand-in: going down, the mound moving under the fence, coming up.
 
@@ -636,7 +636,7 @@ The digger as Codex drew it, in place of 0250's stand-in: going down, the mound 
 
 ### 0264 - Art: the frost zombie
 
-Waits for Codex art A050.  Likely files: `assets/art_source/enemies/frost_zombie/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd`.
+Ready to pick up.  Likely files: `assets/art_source/enemies/frost_zombie/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd`.
 
 The frost zombie as Codex drew it, in place of 0251's stand-in, with the ice shattering when it dies.
 
@@ -654,7 +654,7 @@ The frost zombie as Codex drew it, in place of 0251's stand-in, with the ice sha
 
 ### 0265 - Art: the wraith
 
-Waits for Codex art A051.  Likely files: `assets/art_source/enemies/wraith/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd, src/ui/wraith_fade.gdshader`.
+Ready to pick up.  Likely files: `assets/art_source/enemies/wraith/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd, src/ui/wraith_fade.gdshader`.
 
 The wraith as Codex drew it, in place of 0252's stand-in, fading in and out of the light through 0252's shader.
 
@@ -672,7 +672,7 @@ The wraith as Codex drew it, in place of 0252's stand-in, fading in and out of t
 
 ### 0266 - Art: the Harvester
 
-Waits for Codex art A052.  Likely files: `assets/art_source/enemies/harvester/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_giant_art.py, tools/gen_sprites.py, src/tools/headless_check.gd, src/tools/giant_showcase.gd, src/ui/enemy_motion.gd`.
+Ready to pick up.  Likely files: `assets/art_source/enemies/harvester/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_giant_art.py, tools/gen_sprites.py, src/tools/headless_check.gd, src/tools/giant_showcase.gd, src/ui/enemy_motion.gd`.
 
 The Harvester as Codex drew it, in place of 0253's stand-in: the wind-up you learn to fear and the charge that follows it.
 
@@ -690,7 +690,7 @@ The Harvester as Codex drew it, in place of 0253's stand-in: the wind-up you lea
 
 ### 0267 - Art: the Scarecrow King
 
-Waits for Codex art A053.  Likely files: `assets/art_source/enemies/scarecrow_king/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_giant_art.py, tools/gen_sprites.py, src/tools/headless_check.gd, src/tools/giant_showcase.gd, src/ui/enemy_motion.gd`.
+Ready to pick up.  Likely files: `assets/art_source/enemies/scarecrow_king/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_giant_art.py, tools/gen_sprites.py, src/tools/headless_check.gd, src/tools/giant_showcase.gd, src/ui/enemy_motion.gd`.
 
 The Scarecrow King as Codex drew it, in place of 0254's stand-in, raising its arms as the flock comes up.
 
@@ -726,7 +726,7 @@ The Winter Lord as Codex drew it, in place of 0255's stand-in: the last thing th
 
 ### 0269 - Art: fog, rain and the Blood Moon icons
 
-Waits for Codex art A055.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/forecast_panel.gd`.
+Ready to pick up.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/forecast_panel.gd`.
 
 The three night events as Codex drew them, in the forecast slot where 0256 and 0257 left placeholders.
 
@@ -744,7 +744,7 @@ The three night events as Codex drew them, in the forecast slot where 0256 and 0
 
 ### 0277 - Balancing the year
 
-Blocked: autumn's Full Moon at 80%: twelve runs of sixteen win the year and towers loses 3.4 before Winter 1, but balanced loses 6.0 and two of its seeds lose the house on the Winter Lord's night - owner to choose the Lord's company, spring's 2.6, or the target  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
+Blocked: the Winter Lord's company at three quarters: fourteen runs of sixteen win the year and every boss falls on seven seeds of eight, but balanced loses 6.0 nights before Winter 1 - owner to choose spring's 2.6, autumn's 3.4, or the target itself  Likely files: `tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd`.
 
 The phase's own target: an average player reaches winter having lost two to four nights, and every boss falls. Measured with the year autoplayer, moved with levers, written down - the way 0068 did it for ten nights.
 
@@ -765,7 +765,7 @@ The phase's own target: an average player reaches winter having lost two to four
 
 ### 0288 - Art: the collection book, trophies and badges
 
-Waits for Codex art A056.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/collections_screen.gd`.
+Ready to pick up.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/collections_screen.gd`.
 
 The book cover, the four boss trophies and the achievement badges Codex drew replace 0287's stand-ins, so the screen a player opens before Year 2 looks like the rest of the game.
 
@@ -1254,14 +1254,14 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0233** [Three new powers](prompts/0233-new-powers.md)
 - [x] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md)
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
-- [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - waits for art A037
-- [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - waits for art A038
-- [ ] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md) - waits for art A039
+- [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md)
+- [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md)
+- [ ] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md)
 - [ ] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md) - waits for art A040
-- [ ] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md) - waits for art A041
+- [ ] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md)
 - [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md) - waits for art A042
 - [ ] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md) - waits for art A043
-- [ ] **0243** [Art: the day tarps](prompts/0243-art-tarps.md) - waits for art A044
+- [ ] **0243** [Art: the day tarps](prompts/0243-art-tarps.md)
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - waits for art A045
 - [ ] **0245** [Art: the dog](prompts/0245-art-dog.md) - waits for art A028
 
@@ -1281,16 +1281,16 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0257** [The Blood Moon](prompts/0257-blood-moon.md)
 - [x] **0258** [Fog, rain and a red moon on screen](prompts/0258-event-visuals.md)
 - [x] **0259** [Every weapon has its night](prompts/0259-matchups.md)
-- [ ] **0260** [Art: the spitter](prompts/0260-art-spitter.md) - waits for art A046
-- [ ] **0261** [Art: the rat swarm](prompts/0261-art-rats.md) - waits for art A047
-- [ ] **0262** [Art: the crow](prompts/0262-art-crow.md) - waits for art A048
-- [ ] **0263** [Art: the digger](prompts/0263-art-digger.md) - waits for art A049
-- [ ] **0264** [Art: the frost zombie](prompts/0264-art-frost-zombie.md) - waits for art A050
-- [ ] **0265** [Art: the wraith](prompts/0265-art-wraith.md) - waits for art A051
-- [ ] **0266** [Art: the Harvester](prompts/0266-art-harvester.md) - waits for art A052
-- [ ] **0267** [Art: the Scarecrow King](prompts/0267-art-scarecrow-king.md) - waits for art A053
+- [ ] **0260** [Art: the spitter](prompts/0260-art-spitter.md)
+- [ ] **0261** [Art: the rat swarm](prompts/0261-art-rats.md)
+- [ ] **0262** [Art: the crow](prompts/0262-art-crow.md)
+- [ ] **0263** [Art: the digger](prompts/0263-art-digger.md)
+- [ ] **0264** [Art: the frost zombie](prompts/0264-art-frost-zombie.md)
+- [ ] **0265** [Art: the wraith](prompts/0265-art-wraith.md)
+- [ ] **0266** [Art: the Harvester](prompts/0266-art-harvester.md)
+- [ ] **0267** [Art: the Scarecrow King](prompts/0267-art-scarecrow-king.md)
 - [ ] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md) - waits for art A054
-- [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md) - waits for art A055
+- [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md)
 
 ## 15 - Fifty-six nights and balance  (7/11)
 
@@ -1301,7 +1301,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md)
 - [x] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md)
 - [x] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md)
-- [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - **BLOCKED**: autumn's Full Moon at 80%: twelve runs of sixteen win the year and towers loses 3.4 before Winter 1, but balanced loses 6.0 and two of its seeds lose the house on the Winter Lord's night - owner to choose the Lord's company, spring's 2.6, or the target
+- [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - **BLOCKED**: the Winter Lord's company at three quarters: fourteen runs of sixteen win the year and every boss falls on seven seeds of eight, but balanced loses 6.0 nights before Winter 1 - owner to choose spring's 2.6, autumn's 3.4, or the target itself
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0277
 - [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0277, 0278, 0279
@@ -1315,7 +1315,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0285** [Music for four seasons](prompts/0285-music-seasons.md)
 - [x] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md)
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
-- [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md) - waits for art A056
+- [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
 - [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0236, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 

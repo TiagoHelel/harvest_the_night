@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-257 tarefas em 12 dias, de  a 2026-10-14. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+258 tarefas em 12 dias, de  a 2026-10-14. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -300,10 +300,11 @@ voz alta.
 | 0277 | Balancing the year, autumn's curve | 2026-10-14 |
 | 0277 | Balancing the year, the Winter Lord sized to winter | 2026-10-14 |
 | 0277 | Balancing the year, autumn's Full Moon | 2026-10-14 |
+| 0277 | Balancing the year, the Winter Lord's company | 2026-10-14 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 139 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 140 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -444,6 +445,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Balancing the year, autumn's curve** (0277) - `data` 1444073881 -> 488203718
 - **Balancing the year, the Winter Lord sized to winter** (0277) - `data` 488203718 -> 3280859363
 - **Balancing the year, autumn's Full Moon** (0277) - `data` 3280859363 -> 2774795767
+- **Balancing the year, the Winter Lord's company** (0277) - `data` 2774795767 -> 363647928
 
 ## O que deu errado
 

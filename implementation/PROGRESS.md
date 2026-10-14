@@ -31503,3 +31503,34 @@ tenth time.
   (2260114289).
 - **Checks**: 0273's rhythm and fill asserts pass unchanged.
   `python tools/verify.py --accept` - PASS.
+
+## 0277 - Balancing the year, the Winter Lord's company - blocked 2026-10-14
+
+**The owner's eleventh call** (2026-10-14, "A horda do Winter Lord a 75%,
+como fizemos com a do King"). **Fourteen runs of sixteen win the year,
+seven of each shooting policy**, and the Winter Lord falls on the first
+fight in every run that meets him. `balanced` still loses 6.0 nights
+before Winter 1, two over the target, and 9035 never wins the King's
+night. Blocked an eleventh time.
+
+- **What moved** (key night 56):
+  - every row of the Lord's company at three quarters, with its releases
+    stretched alike to the fill line (tick 4,432);
+  - at 9,664 hit points it is still the year's largest night, over the
+    King's 8,414, as 0274's rhythm asks.
+- **The year**, `--year 8`:
+  - fourteen of sixteen won, where twelve were;
+  - winter's boss repeats are 0.0;
+  - before Winter 1, `towers` loses 3.4 and `balanced` 6.0, both as
+    before;
+  - the two unwon runs stop in autumn: `balanced` 9035 from Autumn 8, and
+    `towers` 9000 from Autumn 10.
+- **The next call is the owner's**, in BALANCE.md's "The owner's eleventh
+  call, played":
+  1. spring's 2.6;
+  2. autumn's 3.4, chiefly 9035;
+  3. or the target itself, handing the rest to 0278 and 0280.
+- **Hashes**: `DATA 2774795767 -> 363647928`, the Lord's night. SIM unchanged
+  (2260114289).
+- **Checks**: 0274's rhythm and fill asserts pass unchanged.
+  `python tools/verify.py --accept` - PASS.

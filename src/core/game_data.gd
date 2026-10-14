@@ -3586,25 +3586,29 @@ const KEY_NIGHTS: Dictionary = {
 		"note": "the Winter Lord's company: the whole year at once, and he freezes every tower he passes",
 		"opening_ticks": 0,
 		"gap_ticks": 3 * SECONDS,
-		"interval_ticks": 10,
+		"interval_ticks": 13,
 		# **The largest night of the year**, every kind on every side; his
 		# fall is the year's ending (0160).
+		# **Three quarters of the company 0274 wrote, its releases stretched
+		# to the same fill** (task 0277, the owner's call, as the King's was):
+		# at the full company two seeds of eight lost the house on this night
+		# every fight before the Lord was touched. It is still the year's largest.
 		"waves": [
-			[&"walker", 34, 0],
-			[&"wraith", 6, 1],
-			[&"breaker", 16, 2],
-			[&"frost_zombie", 8, 3],
-			[&"rat", 30, 4],
-			[&"tank", 14, 0],
-			[&"spitter", 12, 1],
-			[&"digger", 10, 2],
-			[&"runner", 20, 3],
-			[&"walker", 34, 4],
-			[&"wraith", 6, 0],
-			[&"frost_zombie", 8, 1],
-			[&"tank", 12, 2],
-			[&"crow", 8, 3],
-			[&"breaker", 16, 4],
+			[&"walker", 26, 0],
+			[&"wraith", 4, 1],
+			[&"breaker", 12, 2],
+			[&"frost_zombie", 6, 3],
+			[&"rat", 22, 4],
+			[&"tank", 10, 0],
+			[&"spitter", 9, 1],
+			[&"digger", 8, 2],
+			[&"runner", 15, 3],
+			[&"walker", 26, 4],
+			[&"wraith", 4, 0],
+			[&"frost_zombie", 6, 1],
+			[&"tank", 9, 2],
+			[&"crow", 6, 3],
+			[&"breaker", 12, 4],
 		],
 	},
 }

@@ -30,20 +30,18 @@ What the owner has decided so far, in order:
 | 8 | Autumn's curve at 6,400, its nights and winter's kept in rhythm |
 | 9 | The Winter Lord sized to winter's line: 1,800/7 to 900/4 |
 | 10 | Autumn's Full Moon (night 35) at 80% |
+| 11 | The Winter Lord's company at three quarters |
 
 Where it stands:
-- Every boss is sized, and each falls wherever the house stands on its
-  night.
-- **Twelve runs of sixteen win the year**: five `balanced` and seven
-  `towers`.
+- **Fourteen runs of sixteen win the year**, seven of each shooting
+  policy.
+- Every boss falls on seven `balanced` seeds of eight.
 - Before Winter 1, `towers` loses 3.4 nights, inside the target, and
-  `balanced` loses 6.0.
-- Two `balanced` seeds lose the house on the Winter Lord's night every
-  fight, his company untouched.
+  `balanced` loses 6.0, two over it.
 
 **The owner's next call is one of:**
-1. the Winter Lord's company at three quarters, as the King's was;
-2. spring's 2.6;
+1. spring's 2.6;
+2. autumn's 3.4 (chiefly seed 9035);
 3. the target itself.
 
 The target is the phase's: the average player loses two to four nights
@@ -69,34 +67,22 @@ Each game task integrates one Codex pack. The game already plays every
 one of these with a placeholder (task 0120's road). The pack's state is
 `implementation/backlog/INDEX.md`'s.
 
-### 3a. The 21 new packs, which Codex is generating (state `todo`)
+### 3a. The 21 new packs: 15 approved for integration (2026-10-14)
 
-**The owner authorised all 21 on 2026-10-13** ("Gerar os 21 novos pacotes e
-montar o HTML de revisão ao final"), with one review page at the end.
-Codex is on them from A028.
+Codex recorded the owner's approval at 16:56. The details are in:
+- `implementation/backlog/deliveries/A028-dog/CLAUDE-BATCH-DETAILS.md`,
+  `CLAUDE-BATCH-PROMPT.txt` and `batch-approval.json`;
+- each pack's own `APPROVAL.json` and `CLAUDE-Axxx-PROMPT.txt`.
 
-No game task holds any of them back: every "Starts after" is a dash. A
-pack can still depend on another pack's art, though:
-- **A028**, the dog, matches its style to the approved animal deliveries
-  A026 and A027, which are quality-blocked. The owner ruled that the
-  game's current cow and chicken sprites stand in as its references
-  (`implementation/backlog/deliveries/A028-dog/authorization.json`).
-- **Any other pack's "Match these"** section can name a reference the
-  same way. That is Codex's to raise with the owner, not something the
-  game settles.
+**Approved and complete; Claude integrates each through its game task**:
 
 | Pack | What | Game task |
 | --- | --- | --- |
-| A028 | The dog | 0245 |
 | A037 | The scarecrow decoy and zombie bait | 0236 |
 | A038 | The beehive | 0237 |
 | A039 | The pumpkin catapult | 0238 |
-| A040 | The garlic braid | 0239 |
 | A041 | The searchlight | 0240 |
-| A042 | The electric fence | 0241 |
-| A043 | Hardwood walls and sandbags (**blocked** since 2026-10-14 15:04: proportions not held at a common scale, after the owner's two exceptions) | 0242 |
 | A044 | Day tarps over the defences | 0243 |
-| A045 | Power icons and the new weapons' icons | 0244 |
 | A046 | The spitter | 0260 |
 | A047 | The rat swarm | 0261 |
 | A048 | The crow | 0262 |
@@ -105,9 +91,17 @@ pack can still depend on another pack's art, though:
 | A051 | The wraith | 0265 |
 | A052 | The Harvester | 0266 |
 | A053 | The Scarecrow King | 0267 |
-| A054 | The Winter Lord | 0268 |
 | A055 | Fog, rain and the Blood Moon icons | 0269 |
 | A056 | The collection book, trophies and badges | 0288 |
+
+**Approved in part, still blocked for their missing outputs**:
+- A028, the dog (2 of 20);
+- A040, the garlic braid (1 of 3);
+- A042, the electric fence (3 of 42);
+- A054, the Winter Lord (14 of 22).
+
+**No images yet**: A043, hardwood walls and sandbags (0 of 78), and A045,
+the power and weapon icons (0 of 22).
 
 ### 3b. Packs blocked after three attempts (13): the owner's call
 
