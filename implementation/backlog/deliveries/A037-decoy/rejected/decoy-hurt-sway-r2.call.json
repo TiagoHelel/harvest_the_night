@@ -1,0 +1,31 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-hurt-sway-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r3.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nAsset type: decoy_hurt_sway motion correction.\nImage1 is the EDIT TARGET, three nearly stationary damaged decoy frames. Image2 is the correct left/right/left whole sway motion reference. Preserve Image1's damaged character (slumped sack, hanging arm, ripped shirt, spilling straw), same height23nativepx and fixed planted stake.\nCorrect ONLY the missing motion: the ENTIRE upper body and head MUST move relative to the fixed stake base. Preserve the head's damaged/slumped angle, but move its actual position.\nFrame1: shift the upper torso and head LEFT by2nativepx (about44sourcepx), bending the post above its planted base.\nFrame2: shift upper torso and head RIGHT by1nativepx (about22sourcepx).\nFrame3: shift upper torso and head LEFT by1nativepx (about22sourcepx).\nDo NOT just rotate the head in place. Do NOT move the entire sprite including the bottom post. The lower FOUR native post rows (about90sourcepx) must keep the same x and baseline across frames. Top must stay the same y\u00b11nativepx. Native head centres should be about7.5,10.5,8.5, rather than9.4,9.6,9.6 as inImage1. Visible small but distinct left-right-left displacement.\nSame source2172x724 three cells with transparent gutters, same silhouette/body proportions/colors/light across all poses, native16x32 pivot8,28, contact row27. No extra limbs/posts, no hat/glowing eyes, no ground/shadows/haze/effects/scenery/text/checkerboard or extra poses. True transparent alpha, clean coarse pixel clusters and colored outlines."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-hurt-sway-r1.png",
+      "sha256": "514d87a0dc1560e5158e4df2cafcbbab4b6ee53501ed58d92bb1908a08e82640",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\rejected\\decoy-hurt-sway-r1.png"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r3.png",
+      "sha256": "9be44996dd5fc2a65e1c729e9f4bbd8298d99864dcb0dc30c27bda81aa3590d2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d9f57daa-3683-4f0f-940f-2bc98cc09bf7.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-hurt-sway-r2.png",
+  "sha256": "390bc7b5941351a1af04091e5d37362ac1192c3b87c3f9a663702cce1ae2028d",
+  "revision": 2,
+  "decision": "rejected: Moves base instead of correct upper-body sway; motion direction/magnitude incorrect.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\rejected\\decoy-hurt-sway-r2.png"
+}

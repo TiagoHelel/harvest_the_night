@@ -662,6 +662,42 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/decoy.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/decoy_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/decoy_hurt_sway_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/decoy_hurt_sway_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/decoy_hurt_sway_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/decoy_sway_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/decoy_sway_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/decoy_sway_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/decoy_wreck.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/fence.png",
       "owner": "raster"
     },
@@ -1327,6 +1363,10 @@
     },
     {
       "output": "sprites/buildings/workshop_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/zombie_bait.png",
       "owner": "raster"
     },
     {
@@ -2842,6 +2882,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_zombie_bait.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_auto_crossbow.png",
       "owner": "raster"
     },
@@ -3239,6 +3283,10 @@
     },
     {
       "output": "sprites/ui/icon_wool.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_zombie_bait.png",
       "owner": "raster"
     },
     {

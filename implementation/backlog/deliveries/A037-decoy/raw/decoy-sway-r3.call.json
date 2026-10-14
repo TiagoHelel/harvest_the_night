@@ -1,0 +1,30 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r3.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nImage1 is the three-frame decoy_sway EDIT TARGET. Image2's first character is the correct REST dummy geometry: skinny torso and VERY SHORT arms. Match it, do not widen the shirt or extend its sleeves.\nCorrect the excessive sway. The planted stake is straight, centred and stationary. Make the upright head in frame1 shift only a LITTLE LEFT (two native pixels from rest); frame2 should be almost upright with just ONE pixel RIGHT; frame3 almost exactly upright with just ONE pixel LEFT. Nearly vertical mild bending, not a deep diagonal. This is much gentler than Image1.\nNative16x32 pivot8,28. Relative to stationary rest head centre aboutx8.5, the three head-centre targets are about6.5,9.5,7.5. Previous centres4.95,10.55,6.16 overshoot. Bring heads inward toward their unchanged post: approximately1.5nativepxRIGHT inframe1,1pxLEFT inframe2,1.3pxRIGHT inframe3. Keep all lower post pixels and baseline fixed. Maintain standing height27 and master head/body dimensions; no resizing each pose.\nOnly pose deformation corrects this motion. ExactlyTHREE cells in a horizontal strip2172x724 with generous transparent gutters, no labels. Same burlap face, straw, terracotta shirt, colored pixel outline. No hat, lit eyes, duplicate post, ground/shadow/glow/haze/effects/text/background/checkerboard or extra frames. True alpha, neutral upper-left daytime light, clean deliberate coarse clusters, no blur or gradients."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r2.png",
+      "sha256": "2a12d2da87047e4f6492f250232d1135167b045d38ea21fbf381cb0372386aa4",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\rejected\\decoy-sway-r2.png"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r3.png",
+      "sha256": "6916d1ab3c419166a505c55e21d0b8f0ce2c25ea0eb537a784e4c517e17f138b",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2b712814-fc5c-475b-8605-6a6459c9e0c2.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-sway-r3.png",
+  "sha256": "9be44996dd5fc2a65e1c729e9f4bbd8298d99864dcb0dc30c27bda81aa3590d2",
+  "revision": 3,
+  "decision": "accepted identity/cells for native review; pack incomplete, not approved"
+}

@@ -60320,6 +60320,792 @@
       "resource_id": "sugar",
       "approval": "A032 approved for integration 2026-10-10, owner's words \"esses estao aprovados, tem mais pra gerar?\"; integrated by task 0214",
       "output_sha256": "f0f42909d8680b1e7dd5812b68eff010fd9b54584004a0c453b29e3c219de417"
+    },
+    {
+      "id": "buildings/decoy",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/decoy-states-r3.png",
+      "source_sha256": "6916d1ab3c419166a505c55e21d0b8f0ce2c25ea0eb537a784e4c517e17f138b",
+      "crop_xywh": [
+        411,
+        78,
+        232,
+        602
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.0453,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/decoy",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/decoy.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r3.prompt.txt",
+      "prompt_sha256": "0845ad616eb591b777daaacce94364b5da57349dd47447e985a129d14ec277db",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r3.call.json",
+          "sha256": "04c7072f9064af9fa67dc48985052b61982366c2059f370636ea76c3cd327f4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/decoy/none/01.png",
+          "sha256": "4a42542fdd1779f816d9f6dd6da0537ab7efcb0f6450724d8a656abf4a3289f7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        5,
+        27
+      ],
+      "output_sha256": "2a5bbef342b6570b2ce9edf0fc5f08c3dcd9ec41c79562b223b98dccea5b6058"
+    },
+    {
+      "id": "buildings/decoy_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/decoy-states-r3.png",
+      "source_sha256": "6916d1ab3c419166a505c55e21d0b8f0ce2c25ea0eb537a784e4c517e17f138b",
+      "crop_xywh": [
+        937,
+        168,
+        271,
+        512
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.0453,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/decoy_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/decoy_hurt.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r3.prompt.txt",
+      "prompt_sha256": "0845ad616eb591b777daaacce94364b5da57349dd47447e985a129d14ec277db",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r3.call.json",
+          "sha256": "04c7072f9064af9fa67dc48985052b61982366c2059f370636ea76c3cd327f4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/decoy_hurt/none/01.png",
+          "sha256": "6414e86322b07e1234055322b436765d8123adb778f4060d8cec1c1c6db35868",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        6,
+        23
+      ],
+      "output_sha256": "bb88bd47de5bcd2fbe189191d783612f8aa526ed2bc62af33ec5e41f50d9e70a"
+    },
+    {
+      "id": "buildings/decoy_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/decoy-states-r3.png",
+      "source_sha256": "6916d1ab3c419166a505c55e21d0b8f0ce2c25ea0eb537a784e4c517e17f138b",
+      "crop_xywh": [
+        1452,
+        493,
+        342,
+        187
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.0453,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/decoy_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/decoy_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r3.prompt.txt",
+      "prompt_sha256": "0845ad616eb591b777daaacce94364b5da57349dd47447e985a129d14ec277db",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r3.call.json",
+          "sha256": "04c7072f9064af9fa67dc48985052b61982366c2059f370636ea76c3cd327f4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/decoy_wreck/none/01.png",
+          "sha256": "15c79d4c0bfe7b2b70adbdf10a4a8856b988917ffa28452db5986abae39ece78",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        7,
+        8
+      ],
+      "output_sha256": "af72b5e81983089774baa9950b08ce364f057c36853d71618c20bb478ccb2533"
+    },
+    {
+      "id": "buildings/decoy_sway_0",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/decoy-sway-r3.png",
+      "source_sha256": "9be44996dd5fc2a65e1c729e9f4bbd8298d99864dcb0dc30c27bda81aa3590d2",
+      "crop_xywh": [
+        296,
+        87,
+        271,
+        582
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.046365197481396676,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/decoy_sway",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/buildings/decoy_sway_0.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r3.prompt.txt",
+      "prompt_sha256": "107fe121e4d669cc2966a74eb518b385bea6b4b5eeb8032c8620da797b8fe384",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r3.call.json",
+          "sha256": "c1fb9bf384e78aa23625287f039df1f0ea57d9e3f55dd538e35c722c5c460b28",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/decoy_sway/none/01.png",
+          "sha256": "9af32afb132f60ea030d1ef50feebd0ba5c73a492bdc56bc708c1fcffadf6d65",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        6,
+        27
+      ],
+      "output_sha256": "2c7cf14f1892a850aec1e506afde541a5b61fbcc9b0a7b170396c0bac7fc9b94"
+    },
+    {
+      "id": "buildings/decoy_sway_1",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/decoy-sway-r3.png",
+      "source_sha256": "9be44996dd5fc2a65e1c729e9f4bbd8298d99864dcb0dc30c27bda81aa3590d2",
+      "crop_xywh": [
+        963,
+        85,
+        275,
+        584
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.046365197481396676,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/decoy_sway",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/buildings/decoy_sway_1.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r3.prompt.txt",
+      "prompt_sha256": "107fe121e4d669cc2966a74eb518b385bea6b4b5eeb8032c8620da797b8fe384",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r3.call.json",
+          "sha256": "c1fb9bf384e78aa23625287f039df1f0ea57d9e3f55dd538e35c722c5c460b28",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/decoy_sway/none/02.png",
+          "sha256": "02c766e91e3758b3aab7dce7b7eaa29b5e7a43b2b135f921e5cbaab10ac6aad6",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        6,
+        27
+      ],
+      "output_sha256": "dc7173b9019ef650a719f228d4a8ccdf0263dccae4f910223fb4daf5781f3616"
+    },
+    {
+      "id": "buildings/decoy_sway_2",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/decoy-sway-r3.png",
+      "source_sha256": "9be44996dd5fc2a65e1c729e9f4bbd8298d99864dcb0dc30c27bda81aa3590d2",
+      "crop_xywh": [
+        1622,
+        88,
+        280,
+        581
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.046365197481396676,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/decoy_sway",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/buildings/decoy_sway_2.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r3.prompt.txt",
+      "prompt_sha256": "107fe121e4d669cc2966a74eb518b385bea6b4b5eeb8032c8620da797b8fe384",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/raw/decoy-sway-r3.call.json",
+          "sha256": "c1fb9bf384e78aa23625287f039df1f0ea57d9e3f55dd538e35c722c5c460b28",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/decoy_sway/none/03.png",
+          "sha256": "2cb29777d70b09718c036a762e7d2626f284403bff5fbff1e5e510d45f44a36f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        6,
+        27
+      ],
+      "output_sha256": "53fa4f1c532136a8cc378b27eab6afd212ca91c264ad3dd363d4a0ff93541e83"
+    },
+    {
+      "id": "buildings/decoy_hurt_sway_0",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/decoy-hurt-sway-r1.png",
+      "source_sha256": "514d87a0dc1560e5158e4df2cafcbbab4b6ee53501ed58d92bb1908a08e82640",
+      "crop_xywh": [
+        339,
+        160,
+        316,
+        518
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.044089456869009586,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/decoy_hurt_sway",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/buildings/decoy_hurt_sway_0.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/rejected/decoy-hurt-sway-r1.prompt.txt",
+      "prompt_sha256": "9255e43a8cc13abd9137e6431b7090d4fe7d67e9a8e900334ee1576865e93a4c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/rejected/decoy-hurt-sway-r1.call.json",
+          "sha256": "d3b35d8680a3375609a6c852873ab652d0d4e475abf591627a15a47f81f4734a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/decoy_hurt_sway/none/01.png",
+          "sha256": "d2a691a0d33ed3666dea8d36a3ded105c567b176b1b88f97223a693064a2deae",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        7,
+        23
+      ],
+      "output_sha256": "0623860aeb319e290d6d04c566d9b670e51a06f1261a91faa4ea5faa8d77b66f"
+    },
+    {
+      "id": "buildings/decoy_hurt_sway_1",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/decoy-hurt-sway-r1.png",
+      "source_sha256": "514d87a0dc1560e5158e4df2cafcbbab4b6ee53501ed58d92bb1908a08e82640",
+      "crop_xywh": [
+        942,
+        155,
+        287,
+        523
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.044089456869009586,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/decoy_hurt_sway",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/buildings/decoy_hurt_sway_1.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/rejected/decoy-hurt-sway-r1.prompt.txt",
+      "prompt_sha256": "9255e43a8cc13abd9137e6431b7090d4fe7d67e9a8e900334ee1576865e93a4c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/rejected/decoy-hurt-sway-r1.call.json",
+          "sha256": "d3b35d8680a3375609a6c852873ab652d0d4e475abf591627a15a47f81f4734a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/decoy_hurt_sway/none/02.png",
+          "sha256": "6695ab89db1e783444ec5bf070a3205778f89a0b1375525be5fdf8ce09c891d3",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        6,
+        23
+      ],
+      "output_sha256": "431a7cc87a10d5746bbd407202cc7bdb4b102a4a5f580adbca418edfb16bdcb6"
+    },
+    {
+      "id": "buildings/decoy_hurt_sway_2",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/decoy-hurt-sway-r1.png",
+      "source_sha256": "514d87a0dc1560e5158e4df2cafcbbab4b6ee53501ed58d92bb1908a08e82640",
+      "crop_xywh": [
+        1499,
+        154,
+        285,
+        524
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.044089456869009586,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/decoy_hurt_sway",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/buildings/decoy_hurt_sway_2.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/rejected/decoy-hurt-sway-r1.prompt.txt",
+      "prompt_sha256": "9255e43a8cc13abd9137e6431b7090d4fe7d67e9a8e900334ee1576865e93a4c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/rejected/decoy-hurt-sway-r1.call.json",
+          "sha256": "d3b35d8680a3375609a6c852873ab652d0d4e475abf591627a15a47f81f4734a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/decoy_hurt_sway/none/03.png",
+          "sha256": "5e64c6e6a4e3d71b2557bfcbc11897b03ba50ce4970c545542100d296db44e4c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        6,
+        23
+      ],
+      "output_sha256": "21c2acf97d6df12b01a9d8c480692d35a9ac2b57a98dffa2e8fa78f246bd97ae"
+    },
+    {
+      "id": "buildings/zombie_bait",
+      "owner": "raster",
+      "source": "assets/art_source/defences/decoy/zombie-bait-r1.png",
+      "source_sha256": "1b4551bbf8ec839289e8e6c3e1eb272965b48361c82cfcc2c3721cbdfd678dfe",
+      "crop_xywh": [
+        506,
+        419,
+        777,
+        308
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "cell_offset_xy": [
+        0,
+        2
+      ],
+      "content_scale": 0.015444015444015444,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/zombie_bait",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/zombie_bait.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/raw/zombie-bait-r1.prompt.txt",
+      "prompt_sha256": "7804c8644d89309a4eec2b02e4b222f0fd61c5dd3d1a4c073be5a56681aecc11",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/raw/zombie-bait-r1.call.json",
+          "sha256": "58c74111ad91a9964498cc05d9ad2518ee4a856eb8a00e2a8b4d34270f90c22c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/zombie_bait/none/01.png",
+          "sha256": "69b7419ff1e0c4780337415faf921f3efadd0a6902b567871c05f816cf2e46c6",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        6,
+        5
+      ],
+      "output_sha256": "a86b975498acd186ba6b4b07599702d06ad24f7a090801d6345d31b145459ac0"
+    },
+    {
+      "id": "ui/icon_zombie_bait",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night/icon-zombie-bait-r1.png",
+      "source_sha256": "44a0b7a32abacf54c89c43e735c649a8af993e51b003973cab3d82120c764828",
+      "crop_xywh": [
+        247,
+        327,
+        779,
+        667
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.01797175866495507,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_zombie_bait",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_zombie_bait.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/raw/icon-zombie-bait-r1.prompt.txt",
+      "prompt_sha256": "4b05a983692ee25830e572376abcd4d8cde17a67fd7b036404e42212703291b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/raw/icon-zombie-bait-r1.call.json",
+          "sha256": "16e84d2f9a19fce93e08f08b162caa7ee4d269e2ae0d8877832293878b01a80f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/icon_zombie_bait/none/01.png",
+          "sha256": "bf479fc467953fdbf6481d5426725c05c01c164944665966a3bfa646c4eb1eda",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "9a97bd72fe0ea5d5bd3c60036f762d2ea47178f59ff2abb82209d69ed6e3614b",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_zombie_bait",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night/icon-zombie-bait-r1.png",
+      "source_sha256": "44a0b7a32abacf54c89c43e735c649a8af993e51b003973cab3d82120c764828",
+      "crop_xywh": [
+        247,
+        327,
+        779,
+        667
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.010269576379974325,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_zombie_bait",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_zombie_bait.png",
+      "prompt": "implementation/backlog/deliveries/A037-decoy/raw/icon-zombie-bait-r1.prompt.txt",
+      "prompt_sha256": "4b05a983692ee25830e572376abcd4d8cde17a67fd7b036404e42212703291b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/raw/icon-zombie-bait-r1.call.json",
+          "sha256": "16e84d2f9a19fce93e08f08b162caa7ee4d269e2ae0d8877832293878b01a80f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/native/hud_zombie_bait/none/01.png",
+          "sha256": "01c353fb4d4fa1672413dd15300d265a857c289b92e0e15384ae150aad194b1b",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/contract.json",
+          "sha256": "8d11682734af7c26dfbaa252cf97a3446740c639b77553a538ccf581558e087a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A037-decoy/APPROVAL.json",
+          "sha256": "e6f516dd7cd7b2dbccf40d248adcfc40f1c696740be6269288b7f4de0854ca47",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A037",
+      "integration_task": "0236",
+      "revision": 1,
+      "approval": "A037 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0236",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "b6efda5650b2b748f2d25726aae6e1ec8e75885080c1bf0b200354c64c1543fd",
+      "display_role": "compact_hud"
     }
   ]
 }

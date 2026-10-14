@@ -3899,7 +3899,7 @@ func _case_0224_decoy() -> void:
 	var icon: TextureRect = slot.get_node_or_null("Icon") as TextureRect if slot != null else null
 	expect(Building.selected(state) == &"decoy" and icon != null and icon.texture == DecoyArt.texture(&"decoy")
 		and locate_control("Hotbar_wall") == null,
-		"the arrow turns the hotbar to summer's page, and a click there picks the decoy, wearing its drawing",
+		"the arrow turns the hotbar to summer's page, and a click there picks the decoy, wearing A037's art",
 		String(Building.selected(state)))
 
 	var spot := Vector2i(-1, -1)
@@ -3926,15 +3926,16 @@ func _case_0224_decoy() -> void:
 		"Escape puts it away and the hotbar is on its first page, where 1 is the first defence",
 		String(Building.selected(state)))
 
-	# **Struck, it leans west first**, from the frame the bite is seen.
+	# **Struck, it sways** (A037's frames since task 0236), from the frame the
+	# bite is seen.
 	await frames(3)
 	Farm.damage(state, spot, 10)
-	await until(func() -> bool: return world.decoy_sway_age(spot) < DecoyArt.SWAY_SECONDS, "the sway to start")
+	await until(func() -> bool: return world.decoy_sway_age(spot) < DecoyArt.sway_seconds(), "the sway to start")
 	var drawn: Sprite2D = world._decoys.get(Grid.index(spot)) as Sprite2D
-	expect(drawn != null and drawn.texture == DecoyArt.texture(&"decoy") and drawn.offset == -Vector2(8, 28)
-		and drawn.skew < 0.0,
-		"the decoy is drawn on its pivot and leans west when it is bitten",
-		str(drawn.skew) if drawn != null else "none")
+	expect(drawn != null and drawn.texture != null and drawn.texture.resource_path == DecoyArt.sway_path(&"decoy", 0)
+		and drawn.offset == -Vector2(8, 28),
+		"the decoy stands on its pivot and plays its first sway frame when it is bitten",
+		drawn.texture.resource_path if drawn != null and drawn.texture != null else "none")
 	await close_scene()
 	_completed += 1
 

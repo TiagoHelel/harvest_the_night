@@ -1,0 +1,134 @@
+[
+  {
+    "recipe": {
+      "id": "decoy-states-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-states-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        814,
+        724
+      ],
+      "crop_xywh": [
+        368,
+        81,
+        328,
+        600
+      ],
+      "content_scale": 0.043333333333333335,
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "diagnostic_bounds": [
+      3,
+      2,
+      17,
+      28
+    ],
+    "diagnostic_canvas_wh": [
+      20,
+      32
+    ],
+    "unclipped_scaled_wh": [
+      14,
+      26
+    ],
+    "fits_target_canvas": true
+  },
+  {
+    "recipe": {
+      "id": "decoy-states-r2-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-states-r2.png",
+      "sheet_cell_xywh": [
+        814,
+        0,
+        519,
+        724
+      ],
+      "crop_xywh": [
+        933,
+        170,
+        306,
+        511
+      ],
+      "content_scale": 0.043333333333333335,
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "diagnostic_bounds": [
+      4,
+      6,
+      17,
+      28
+    ],
+    "diagnostic_canvas_wh": [
+      20,
+      32
+    ],
+    "unclipped_scaled_wh": [
+      13,
+      22
+    ],
+    "fits_target_canvas": true
+  },
+  {
+    "recipe": {
+      "id": "decoy-states-r2-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-states-r2.png",
+      "sheet_cell_xywh": [
+        1333,
+        0,
+        839,
+        724
+      ],
+      "crop_xywh": [
+        1429,
+        482,
+        388,
+        209
+      ],
+      "content_scale": 0.043333333333333335,
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "diagnostic_bounds": [
+      2,
+      19,
+      19,
+      28
+    ],
+    "diagnostic_canvas_wh": [
+      20,
+      32
+    ],
+    "unclipped_scaled_wh": [
+      17,
+      9
+    ],
+    "fits_target_canvas": false
+  }
+]

@@ -1591,8 +1591,10 @@ func _refresh() -> void:
 			sprite.set_meta("station_id", id)
 			sprite.set_meta("station_anchor", anchor)
 			_stations.append(sprite)
-		# A decoy, which sways when it is struck (task 0224).
+		# A decoy, which sways when it is struck (task 0224), and the picture
+		# it stands as when the sway is over (task 0236).
 		if id == &"decoy":
+			sprite.set_meta("rest", sprite.texture)
 			_decoys[int(idx)] = sprite
 		if id == &"tree":
 			var shadow := Sprite2D.new()
@@ -1874,11 +1876,10 @@ func _refresh_zzz(delta: float) -> void:
 ## way `sfx.gd` and `particles.gd` spot things: this frame's occupants against
 ## the last. No `Events` kind, so the hash never hears of it. The first look at
 ## a state only learns what is there.
-## **A decoy sways when it is struck** (task 0224): A037's lean - the top of
-## the straw two pixels west, one back east, one west, upright - a tenth of a
-## second each, whoever bit it, the stake's foot staying put. Until A037's
-## strips land it is the whole drawing leaning (`DecoyArt.lean`). View only:
-## it watches the hit points the rules keep and nothing reads it back.
+## **A decoy sways when it is struck** (task 0224): A037's three sway frames
+## since task 0236, the whole decoy's or the hurt one's, a tenth of a second
+## each, whoever bit it - then the picture it stood as. View only: it watches
+## the hit points the rules keep and nothing reads it back.
 func _sway_decoys(delta: float) -> void:
 	var occupants: Dictionary = _state["occupants"]
 	for idx in _decoy_hits.keys():
@@ -1893,7 +1894,9 @@ func _sway_decoys(delta: float) -> void:
 		seen["age"] = 0.0 if hp < int(seen["hp"]) else float(seen["age"]) + delta
 		seen["hp"] = hp
 		_decoy_hits[idx] = seen
-		sprite.skew = DecoyArt.skew_for(DecoyArt.lean(float(seen["age"])))
+		var state := &"decoy_hurt" if _is_hurt(occupants.get(idx, {"id": &"decoy"})) else &"decoy"
+		var swaying := DecoyArt.sway_texture(state, float(seen["age"]))
+		sprite.texture = swaying if swaying != null else sprite.get_meta("rest", sprite.texture)
 
 
 ## How far into its sway the decoy on a cell is, in seconds - `INF` for one

@@ -7327,57 +7327,45 @@ func _task_0224_decoy() -> void:
 		and int(Entities.get_one(two, nearer).get("chewing", -1)) == Grid.index(middle + Vector2i(0, 2)),
 		"and the walkers bite the ones the field sent them to")
 
-	# **The view's road and the words.** Drawn in code at A037's canvas
-	# until 0236, standing on its pivot; the hotbar puts it after spring's
-	# eight; its tooltip says how far it pulls, in both languages.
-	var shapes := {}
+	# **The view's road and the words.** A037's art since task 0236, standing
+	# on its pivot; the hotbar puts it after spring's eight; its tooltip says
+	# how far it pulls, in both languages.
+	var road := true
 	for name in DecoyArt.STATES:
 		var path := DecoyArt.path_of(name)
-		var image := DecoyArt.drawing(name)
 		var frame := PlaceholderArt.frame(path)
 		var texture := DecoyArt.texture(name)
-		var blue := false
-		for y in image.get_height():
-			for x in image.get_width():
-				var c := image.get_pixel(x, y)
-				for cloth in [&"cloth", &"cloth_dark", &"cloth_light"]:
-					blue = blue or (c.a > 0.0 and c.is_equal_approx(PaletteData.COLOURS[cloth]))
-		shapes[name] = [image.get_used_rect(), blue, PlaceholderArt.is_drawn(path)
-			and str(PlaceholderArt.art(name).get("pack", "")) == "A037" and frame.get("canvas") == Vector2i(16, 32)
-			and frame.get("pivot") == Vector2i(8, 28) and image.get_size() == Vector2i(16, 32)
-			and texture != null and texture.resource_name == path]
-	var whole: Rect2i = shapes[&"decoy"][0]
-	var wreck: Rect2i = shapes[&"decoy_wreck"][0]
-	var stake := DecoyArt.drawing(&"decoy")
-	var wood: Color = PaletteData.COLOURS[&"wood_dark"]
-	expect(whole.end.y == 28 and whole.position.x == 2 and whole.end.x == 14
-		and whole.size.y >= 25 and whole.size.y <= 27
-		and stake.get_pixel(7, 27) == wood and stake.get_pixel(8, 27) == wood
-		and stake.get_pixel(6, 27) == stake.get_pixel(9, 27)
-		and stake.get_pixel(5, 27).a == 0.0 and stake.get_pixel(10, 27).a == 0.0,
-		"standing, it fills A037's box: 12 wide on x 2..13, 25-27 tall to row 27, its stake's foot on x 8", str(whole))
-	expect(DecoyArt.drawing(&"decoy_hurt").get_data() != stake.get_data()
-		and wreck.end.y == 28 and wreck.size.y <= 8 and wreck.size.x <= 14,
-		"hurt it is another shape, and wrecked a heap at most 8 tall and 14 wide on the same row", str(wreck))
-	var road := true
-	for name in shapes:
-		road = road and not bool(shapes[name][1]) and bool(shapes[name][2])
-	expect(road, "each drawn in code on 0120's road, none of the farmer's blue, named for where A037 delivers it")
+		road = (road and RasterArt.FRAMES.has(path) and not PlaceholderArt.is_drawn(path)
+			and PlaceholderArt.art(name).is_empty() and frame.get("canvas") == Vector2i(16, 32)
+			and frame.get("pivot") == Vector2i(8, 28) and texture != null and texture.resource_path == path)
+	expect(road, "whole, hurt and wrecked it wears A037's art, 16x32 on (8,28), with nothing of 0120's road left")
 	var sprite := Sprite2D.new()
 	sprite.texture = DecoyArt.texture(&"decoy")
 	ArtPlacement.place(sprite, spot)
 	expect(sprite.offset == -Vector2(8, 28) and sprite.scale == Vector2.ONE,
 		"and a sprite wearing it stands on its pivot", str(sprite.offset))
 	sprite.free()
-	expect([DecoyArt.lean(0.05), DecoyArt.lean(0.15), DecoyArt.lean(0.25), DecoyArt.lean(0.35)] == [-2.0, 1.0, -1.0, 0.0]
-		and is_equal_approx(sin(DecoyArt.skew_for(-2.0)) * DecoyArt.HEIGHT, -2.0),
-		"struck, it leans two west, one east, one west and stands, a tenth of a second each")
+	var swayed: Array = []
+	for state_name in [&"decoy", &"decoy_hurt"]:
+		for age in [0.05, 0.15, 0.25, 0.35]:
+			var swaying := DecoyArt.sway_texture(state_name, age)
+			swayed.append(swaying.resource_path if swaying != null else "")
+	var sway_frames := true
+	for state_name in [&"decoy", &"decoy_hurt"]:
+		for i in DecoyArt.SWAY_FRAMES:
+			var frame := PlaceholderArt.frame(DecoyArt.sway_path(state_name, i))
+			sway_frames = (sway_frames and RasterArt.FRAMES.has(DecoyArt.sway_path(state_name, i))
+				and frame.get("canvas") == Vector2i(16, 32) and frame.get("pivot") == Vector2i(8, 28))
+	expect(sway_frames and is_equal_approx(DecoyArt.sway_seconds(), 0.1)
+		and swayed == [DecoyArt.sway_path(&"decoy", 0), DecoyArt.sway_path(&"decoy", 1), DecoyArt.sway_path(&"decoy", 2), "",
+			DecoyArt.sway_path(&"decoy_hurt", 0), DecoyArt.sway_path(&"decoy_hurt", 1), DecoyArt.sway_path(&"decoy_hurt", 2), ""],
+		"struck, it plays A037's three sway frames a tenth of a second each - the hurt decoy its own - and stands", str(swayed))
 	var bar := Hotbar.new()
 	var icon := bar._icon_of(&"decoy")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
 	expect(icon == DecoyArt.texture(&"decoy") and order.find(&"decoy") >= _first_of_season(order, 1),
-		"the hotbar shows the drawing, among summer's after spring's, which keep their places", str(order))
+		"the hotbar shows A037's decoy, among summer's after spring's, which keep their places", str(order))
 	var said := {}
 	for locale in ["en", "pt_BR"]:
 		I18n.use(locale)
@@ -7581,22 +7569,21 @@ func _task_0225_bait() -> void:
 	expect(down == limit and Building.why_not(staked, &"zombie_bait", _decoy_ground + Vector2i(2, -3))[0] == &"WHY_NIGHT_LIMIT",
 		"and the next is refused with the night's reason", str(down))
 
-	# **On the ground and in the hotbar**, through 0120's road until 0236.
-	var image := DecoyArt.drawing(&"zombie_bait")
-	var used := image.get_used_rect()
+	# **On the ground and in the hotbar**: A037's art since task 0236.
 	var frame := PlaceholderArt.frame(DecoyArt.path_of(&"zombie_bait"))
-	expect(used.end.y == 14 and used.size.y >= 5 and used.size.y <= 7 and used.position.x >= 2 and used.end.x <= 14
-		and PlaceholderArt.is_drawn(DecoyArt.path_of(&"zombie_bait")) and frame.get("canvas") == Vector2i(16, 16)
-		and frame.get("pivot") == Vector2i(8, 14) and str(PlaceholderArt.art(&"zombie_bait").get("pack", "")) == "A037",
-		"on the ground a fish lying on its pivot's row, about twelve wide and six tall, drawn in code for A037", str(used))
+	var lying := DecoyArt.texture(&"zombie_bait")
+	expect(lying != null and RasterArt.FRAMES.has(DecoyArt.path_of(&"zombie_bait"))
+		and not PlaceholderArt.is_drawn(DecoyArt.path_of(&"zombie_bait")) and frame.get("canvas") == Vector2i(16, 16)
+		and frame.get("pivot") == Vector2i(8, 14) and PlaceholderArt.art(&"zombie_bait").is_empty(),
+		"on the ground A037's fish, 16x16 lying on (8,14), with nothing of 0120's road left", str(frame))
 	var bar := Hotbar.new()
 	bar.show_state(state)
 	var icon := bar._icon_of(&"zombie_bait")
 	var price := bar._price_line(&"zombie_bait")
 	bar.free()
-	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_fish.png"
-		and PlaceholderArt.art_tint(&"icon_zombie_bait") != Color.WHITE and price.begins_with(I18n.f(&"HOTBAR_KITS", [0])),
-		"its slot wears the fish rotted green, and counts its kits, none and all", price)
+	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_zombie_bait.png"
+		and PlaceholderArt.art_tint(&"icon_zombie_bait") == Color.WHITE and price.begins_with(I18n.f(&"HOTBAR_KITS", [0])),
+		"its slot wears A037's bait icon untinted, and counts its kits, none and all", price)
 	var said := {}
 	for locale in ["en", "pt_BR"]:
 		I18n.use(locale)
@@ -9490,8 +9477,8 @@ func _task_0234_arsenal() -> void:
 		if PlaceholderArt.art(StringName("icon_%s" % id)).get("pack", "") != "A045":
 			unregistered.append(id)
 	expect(covered and woken and unregistered.is_empty()
-		and PlaceholderArt.art(&"icon_zombie_bait").get("pack", "") == "A037",
-		"the hive, the catapult and the searchlight sleep under the tower's tarp and wake, the decoy under the tall one, the braid under the short one - never the sandbags, the wire or the bait; each wears A045's icon through 0120's road, the bait A037's",
+		and PlaceholderArt.art(&"icon_zombie_bait").is_empty() and RasterArt.FRAMES.has("res://sprites/ui/icon_zombie_bait.png"),
+		"the hive, the catapult and the searchlight sleep under the tower's tarp and wake, the decoy under the tall one, the braid under the short one - never the sandbags, the wire or the bait; each wears A045's icon through 0120's road, the bait A037's art since 0236",
 		str(unregistered))
 
 	# **The robot plans round a shut season**, as round any refusal - in the

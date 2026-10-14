@@ -1,0 +1,7 @@
+Use case: stylized-concept
+Asset type: ONE inventory/hotbar resource icon source, zombie_bait kit, HARVEST THE NIGHT.
+Input1 is the rotten fish identity/material reference. Input2 is the approved UI icon style/outline reference only. Preserve the rotten fish's grey-green body, exposed pale ribs, ragged bitten tail, hollow dark eye. Do not draw a healthy blue fish.
+Create ONE clear compact icon of that rotten fish TIED WITH TWINE to one SHORT WOODEN STICK. The fish and short stick form one readable connected silhouette. A small twine binding crosses the fish and stick, simple and bold. Not a long fishing rod or big bundle; one rotten fish and one short stick, no hook/reel or extra kit.
+Orthographic three-quarter farm camera, upper-left neutral daytime light, hand-crafted deliberate pixel clusters with colored outlines and2-3 material planes. Rot/grey/bone fish and brown timber/tan twine. No gore, puddle, flies or stink lines.
+Native16x16 inventory cut at pivot8,8 visible max14x14; second cut10x10 pivot5,5 visible max8x8. Both will reduce from THIS SAME raw crop. Large simple features must survive8px: fish shape, pale ribs, short brown stick and one twine band; no tiny texture. Complete object centred with ample genuine transparent padding.
+No panels/frame/ground/shadow/glow/text/labels/numbers/watermark/checkerboard/background or other objects. No smooth gradients/blur/antialias halos/painting/vector/3D, no repeated icons or collage. Exactly ONE icon source.

@@ -1,0 +1,33 @@
+[
+  {
+    "pad": 12,
+    "left": 0,
+    "recipe": {
+      "id": "wreck-phase",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-states-r3.png",
+      "crop_xywh": [
+        1452,
+        493,
+        342,
+        187
+      ],
+      "content_scale": 0.0453,
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "bounds": [
+      1,
+      20,
+      15,
+      28
+    ]
+  }
+]

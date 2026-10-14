@@ -1,0 +1,1 @@
+Whole14x26 too wide; wreck17x9 clips target canvas.

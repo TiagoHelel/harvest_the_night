@@ -1,0 +1,11 @@
+2026-10-13 / New batch generation started
+Owner words, verbatim: "Gerar os 21 novos pacotes e montar o HTML de revisão ao final"
+A037 is the next eligible pack; game specification task0225 is done. Owner review is deferred until the unified HTML is complete. No integration approval inferred.
+
+2026-10-13 / All12 diagnostic frames prepared; damaged sway failed after3tries
+Whole/hurt/wreck use one source and content_scale0.0453. The wreck crop includes12 measured transparent columns on the right for native grid registration; no source pixels altered. Whole11x27, hurt12x23, wreck14x8. Whole sway is internally acceptable with half-pixel quantization of the top shift. The damaged sway remains wrong; r1 is shown only as a diagnostic and r3 clips when anchored. All independent bait/icon assets were also generated. Pack blocked, zero production exports, no owner approval.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+12/12 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: decoy_hurt_sway_top_shift_ok. Complete delivery released for Claude integration.

@@ -1,7 +1,7 @@
 # 0236 - Art: the scarecrow decoy and zombie bait
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0224, 0225
 - **Likely files:** assets/art_source/defences/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_ui_art.py, tools/verify.py
 - **Art packs:** A037

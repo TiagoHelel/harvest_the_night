@@ -196,13 +196,6 @@ const TARP_TOWER := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "dra
 const TARP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
 const TARP_SHORT := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
 
-## A037's decoy (task 0224): 16x32 standing on (8,28), drawn at 1.0.
-const DECOY := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
-
-## A037's bait on the ground (task 0225): one 16x16 tile lying on (8,14), as
-## a mine does, drawn at 1.0.
-const BAIT := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
-
 ## A038's hive (task 0226): the tower family's 32x48 standing on (16,44), and
 ## the bee swarm's 8x8 round its middle (4,4), both drawn at 1.0.
 const HIVE := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
@@ -386,17 +379,6 @@ const ART := {
 	&"tarp_short": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT, "bare": true},
 	&"tarp_short_hurt": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT, "bare": true},
 	&"tarp_short_unveil": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 2, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT},
-	# A037's decoy (task 0224), drawn in code by `DecoyArt` until 0236:
-	# standing, hurt and wrecked. Its sway is the view leaning the drawing
-	# until the pack's strips land.
-	&"decoy": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": DECOY, "final": DECOY, "bare": true},
-	&"decoy_hurt": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": DECOY, "final": DECOY, "bare": true},
-	&"decoy_wreck": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": DECOY, "final": DECOY, "bare": true},
-	# A037's bait (task 0225): the fish on the ground drawn in code by
-	# `DecoyArt`, and its icons the fish's own rotted green, until 0236.
-	&"zombie_bait": {"pack": "A037", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": BAIT, "final": BAIT, "bare": true},
-	&"icon_zombie_bait": {"pack": "A037", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "tint": Color(0.95, 1.2, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_zombie_bait": {"pack": "A037", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "tint": Color(0.95, 1.2, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	# A038's hive (task 0226): the mortar - the low tower on the family's
 	# canvas - in honey, at each level and state, until 0237; the bee swarm
 	# drawn in code by `HiveArt`.

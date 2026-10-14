@@ -1,0 +1,1 @@
+Sway exaggerated: head offsets about-4,+2.6,-1.9, rather than-2,+1,-1.

@@ -1,0 +1,20 @@
+{
+  "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-master-r2.png",
+  "crop_xywh": [
+    255,
+    227,
+    521,
+    1108
+  ],
+  "content_scale": 0.023465703971119134,
+  "canvas_wh": [
+    16,
+    32
+  ],
+  "pivot_xy": [
+    8,
+    28
+  ],
+  "palette": "tools/palette.py:COLOURS",
+  "alpha_threshold": 128
+}

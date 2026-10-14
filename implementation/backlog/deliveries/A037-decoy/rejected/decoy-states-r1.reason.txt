@@ -1,0 +1,1 @@
+Whole too wide15x26; wreck19x10 clips16px canvas at common scale.

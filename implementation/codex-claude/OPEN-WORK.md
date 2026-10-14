@@ -51,7 +51,7 @@ Codex recorded the owner's approval at 16:56. The details are in:
 
 | Pack | What | Game task |
 | --- | --- | --- |
-| A037 | The scarecrow decoy and zombie bait | 0236 |
+| A037 | The scarecrow decoy and zombie bait (**integrated** by 0236, 2026-10-14) | 0236 |
 | A038 | The beehive | 0237 |
 | A039 | The pumpkin catapult | 0238 |
 | A041 | The searchlight | 0240 |

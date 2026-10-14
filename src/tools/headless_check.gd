@@ -14071,8 +14071,6 @@ func _building_art(name: StringName) -> Image:
 			return Image.load_from_file(ProjectSettings.globalize_path(path))
 		# **Or drawn in code** until its pack lands (task 0224's decoy, 0228's
 		# garlic braid): the drawing the view puts there.
-		if path.is_empty() and DecoyArt.texture(name) != null:
-			return DecoyArt.drawing(name)
 		if path.is_empty() and GarlicArt.texture(name) != null:
 			return GarlicArt.drawing(name)
 		# And task 0230's electric fence, every mask and its wreck.
@@ -14739,9 +14737,10 @@ func _task_0082_shots() -> void:
 	# hundred and eighteen since 0258: the wave in the fog, in the rain and
 	# under a Blood Moon. A hundred and twenty-one since 0293: the first
 	# week's bed, cursor and forecast lines. A hundred and twenty-two since
-	# 0277: a line's ruins the morning after.
-	expect(names.size() == 122,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins and the 1.0 farm",
+	# 0277: a line's ruins the morning after. A hundred and twenty-three since
+	# 0236: A037's decoy and bait, by night and by day.
+	expect(names.size() == 123,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",

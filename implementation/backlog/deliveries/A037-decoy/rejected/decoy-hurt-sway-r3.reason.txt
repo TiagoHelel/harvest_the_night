@@ -1,0 +1,1 @@
+Excessive first-frame lean clips native16x32 when the stake base is grounded; third attempt limit reached.

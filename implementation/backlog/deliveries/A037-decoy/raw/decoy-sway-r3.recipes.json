@@ -1,0 +1,137 @@
+[
+  {
+    "recipe": {
+      "id": "decoy-sway-r3-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-sway-r3.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        764,
+        724
+      ],
+      "crop_xywh": [
+        296,
+        87,
+        271,
+        582
+      ],
+      "content_scale": 0.046365197481396676,
+      "content_anchor_xy": [
+        6,
+        27
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      2,
+      1,
+      15,
+      28
+    ],
+    "head_centre_x": 6.714285714285714,
+    "base_x_range": [
+      7,
+      9
+    ],
+    "raw_ground_x": 429.0
+  },
+  {
+    "recipe": {
+      "id": "decoy-sway-r3-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-sway-r3.png",
+      "sheet_cell_xywh": [
+        764,
+        0,
+        665,
+        724
+      ],
+      "crop_xywh": [
+        963,
+        85,
+        275,
+        584
+      ],
+      "content_scale": 0.046365197481396676,
+      "content_anchor_xy": [
+        6,
+        27
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      2,
+      1,
+      15,
+      28
+    ],
+    "head_centre_x": 8.75609756097561,
+    "base_x_range": [
+      7,
+      9
+    ],
+    "raw_ground_x": 1097.5
+  },
+  {
+    "recipe": {
+      "id": "decoy-sway-r3-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-sway-r3.png",
+      "sheet_cell_xywh": [
+        1429,
+        0,
+        743,
+        724
+      ],
+      "crop_xywh": [
+        1622,
+        88,
+        280,
+        581
+      ],
+      "content_scale": 0.046365197481396676,
+      "content_anchor_xy": [
+        6,
+        27
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      2,
+      1,
+      15,
+      28
+    ],
+    "head_centre_x": 7.72093023255814,
+    "base_x_range": [
+      7,
+      9
+    ],
+    "raw_ground_x": 1758.0
+  }
+]

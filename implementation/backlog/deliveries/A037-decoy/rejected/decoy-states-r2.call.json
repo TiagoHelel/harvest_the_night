@@ -1,0 +1,31 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-master-r2.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nAsset type: decoy WHOLE/HURT/WRECK three-state production strip, correction of scale/framing.\nImage1 is the three-state strip EDIT TARGET. Image2 is the accepted NARROW identity master. Keep three equal cells in one horizontal strip, source2172x724, no labels. Ground baseline source y695 in EVERY cell.\nCorrect the same-physical-scale geometry: the whole's arms got too wide, and the collapsed wreck was enlarged. The native requirement is one COMMON source scale for all states, set by26px height in WHOLE; no independent per-state resizing in export.\nMeasured Image1: WHOLE visible363x645 =>15x26, HURT346x577=>14x23, WRECK466x241=>19x10 and clips the16px canvas.\nNeeded source bounds at that same scale: WHOLE approx285-300 wide x645 tall (native11-12x26), HURT<=300 wide and same construction, WRECK<=340 wide x175 tall (native<=14x7). Recreate WHOLE's SHORT arm/crossbar span from Image2, not the long arms ofImage1. Keep sack face and shirt, one narrow central post. Reduce the wreck's actual depicted debris arrangement to a COMPACT small heap: folded torn shirt, same-sized sack head, short broken pieces of stake, straw. Do NOT enlarge the heap to fill its cell, no long unbroken pole lying across the cell.\nKeep all three states centred on their shared stake/base x in each cell, source baseline695, neutral upper-left daytime, same pixel scale/materials/colors. Native canvas16x32 pivot(8,28), each state's lowest row27, no native clipping. Whole should remain25-27 art pixels high and11-12wide, wreck<=8high<=14wide. Draw complete objects with ample transparent margins/gutters. No glow/haze/shadow/grass/ground/extra states/labels/text/checkerboard/blur. Binary-looking crisp pixel clusters, true transparent alpha."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-states-r1.png",
+      "sha256": "50d9adbe7969819b837b60dd660e0061e0ba013728e3df14bd423e66bc99ba7c",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\rejected\\decoy-states-r1.png"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-master-r2.png",
+      "sha256": "3474a0aa616f20f5d376633cc752ae4b4ed57a3b81192d56885e1768c2f9d9e7",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9e50d1e5-5ea4-475c-bfed-e605fbe0a9ab.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-states-r2.png",
+  "sha256": "366e7c7b6151f628e3b46077b8e9dc41a6a24dd061500aaf263bd1a26e31fb95",
+  "revision": 2,
+  "decision": "rejected: Whole14x26 too wide; wreck17x9 clips target canvas.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\rejected\\decoy-states-r2.png"
+}

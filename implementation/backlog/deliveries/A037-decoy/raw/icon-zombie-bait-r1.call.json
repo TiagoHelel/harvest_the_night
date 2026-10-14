@@ -1,0 +1,29 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/zombie-bait-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/fish.png"
+    ],
+    "prompt": "Use case: stylized-concept\nAsset type: ONE inventory/hotbar resource icon source, zombie_bait kit, HARVEST THE NIGHT.\nInput1 is the rotten fish identity/material reference. Input2 is the approved UI icon style/outline reference only. Preserve the rotten fish's grey-green body, exposed pale ribs, ragged bitten tail, hollow dark eye. Do not draw a healthy blue fish.\nCreate ONE clear compact icon of that rotten fish TIED WITH TWINE to one SHORT WOODEN STICK. The fish and short stick form one readable connected silhouette. A small twine binding crosses the fish and stick, simple and bold. Not a long fishing rod or big bundle; one rotten fish and one short stick, no hook/reel or extra kit.\nOrthographic three-quarter farm camera, upper-left neutral daytime light, hand-crafted deliberate pixel clusters with colored outlines and2-3 material planes. Rot/grey/bone fish and brown timber/tan twine. No gore, puddle, flies or stink lines.\nNative16x16 inventory cut at pivot8,8 visible max14x14; second cut10x10 pivot5,5 visible max8x8. Both will reduce from THIS SAME raw crop. Large simple features must survive8px: fish shape, pale ribs, short brown stick and one twine band; no tiny texture. Complete object centred with ample genuine transparent padding.\nNo panels/frame/ground/shadow/glow/text/labels/numbers/watermark/checkerboard/background or other objects. No smooth gradients/blur/antialias halos/painting/vector/3D, no repeated icons or collage. Exactly ONE icon source."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/zombie-bait-r1.png",
+      "sha256": "1b4551bbf8ec839289e8e6c3e1eb272965b48361c82cfcc2c3721cbdfd678dfe",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/fish.png",
+      "sha256": "82d82f6e401cd20e0fd676c090071abf228290b1e53ab432f73cb1ca7cfb0442",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-94dc68c7-5285-424d-ab6e-7a1f7c1931e2.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A037-decoy\\raw\\icon-zombie-bait-r1.png",
+  "sha256": "44a0b7a32abacf54c89c43e735c649a8af993e51b003973cab3d82120c764828",
+  "revision": 1,
+  "decision": "accepted identity/cells for native review; pack incomplete, not approved"
+}

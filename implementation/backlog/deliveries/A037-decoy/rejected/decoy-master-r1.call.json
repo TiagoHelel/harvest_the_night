@@ -1,0 +1,36 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/defences/barricade/states.png"
+    ],
+    "prompt": "Use case: stylized-concept\nAsset type: production raster pixel sprite source for HARVEST THE NIGHT.\nPrimary request: ONE identity master of the cheap straw dummy decoy, NOT the magical porch guardian.\nInput images: Image1 approved world art direction, style/material reference only; Image2 approved farmer, native scale reference only; Image3 barricade state source, small defence wood/outline/camera reference only. Draw none of the reference scenes, actors or barricades in the result.\nStyle: deliberate coarse pixel clusters, colored dark underside outlines, restrained texture, orthographic three-quarter top-down camera on rectangular grid, neutral upper-left daytime lighting, no diamond isometric base.\nSubject: a crude old straw dummy on a slender wooden T-stake, planted as ONE object. Burlap sack head with dark stitched X-eyes and simple stitched mouth. NO HAT, no lit eyes, no glow, no blue farmer clothes. Ragged faded red-brown shirt stuffed with straw, straw tufts at collar/cuffs/waist. Arms spread on the crossbar. Cheap farm junk, slightly comic, not frightening. Readable very simple face.\nNative target16x32, pivot(8,28), draw1.0, visible body WIDTH11-12 art pixels and HEIGHT25-27, inside x2..13, lowest opaque row27, stake centre x8. This is a downstream reduction target: silhouette must be very TALL and NARROW, width/height about12/26, NOT a wide scarecrow. Head about4-5 art pixels wide, arms11-12, shirt7, a single narrow straight post extends well below the shirt to the ground contact. Keep the same thin stake centre line.\nSource: one full centred unclipped decoy, generous true transparent padding, no soil patch, stand platform or ground shadow. Make an intentionally simple gridlike26-art-pixel design rendered with crisp enlarged square pixels. Brown timber, beige straw/burlap, faded terracotta cloth with2-3 planes, dark colored outlines. No gradients, blur, anti-aliased halos, 3D/vector look, dense texture, random speckle, labels/text/watermark, UI, duplicate parts or scenery."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/defences/barricade/states.png",
+      "sha256": "81c2e301689be20f4c56308c775ca2cc00869226143d1d396fd7f666a4d3a80f",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-29421e7c-ac22-4711-9931-30c97bdb635b.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-master-r1.png",
+  "sha256": "b719aa2a5eea487658aff789f6adab16da57492143b6290a06e8e316adf74883",
+  "revision": 1,
+  "decision": "rejected: Native standing width18 exceeds11-12 required.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\rejected\\decoy-master-r1.png"
+}

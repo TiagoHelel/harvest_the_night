@@ -132,7 +132,8 @@ func _families(speaking: String, high: bool) -> void:
 	for tool in GameData.sorted_names(GameData.TOOLS.keys()):
 		for tier in (GameData.TOOLS[tool] as Array).size():
 			tools.append(ToolTiers.item(tool, tier))
-	# A005's eight defences, not every one since 0224: the decoy is A037's.
+	# A005's eight defences, not every one since 0224: the decoy is A037's,
+	# which since 0236 brings the bait's kit.
 	var families := {"A005": [&"auto_crossbow", &"barricade", &"fence", &"flame_tower",
 			&"gun_tower", &"mine", &"mortar", &"wall"] + NightHud.ICONS,
 		"A010": CalendarMark.MARKS, "A019": tools,
@@ -144,6 +145,7 @@ func _families(speaking: String, high: bool) -> void:
 		"A016": [GameData.PEPPER, GameData.SUNFLOWER, GameData.MELON, GameData.CORN_SEED,
 			GameData.PEPPER_SEED, GameData.SUNFLOWER_SEED, GameData.MELON_SEED],
 		"A022": GameData.sorted_names(GameData.FISH_SPECIES.keys()),
+		"A037": [&"zombie_bait"],
 		"A032": [GameData.WINE, GameData.JUICE, GameData.JELLY, GameData.PICKLES, GameData.CHEESE,
 			GameData.BUTTER, GameData.CLOTH, GameData.SANDBAG, GameData.FLOUR, GameData.SUGAR,
 			GameData.BREAD]}

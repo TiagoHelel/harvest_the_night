@@ -144,6 +144,7 @@ const SCENARIOS: Array = [
 	["year_credits", "the credits before the year ending", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
+	["decoy_art", "A037's decoy and bait (task 0236) at night: a decoy whole, one hurt, one struck in its first sway frame and one's ruin, and a bait on the ground; then the same by day, the tarps off to show the art under them", ""],
 	["ruins", "the morning after a line came down: a level two gun's ruin, a crossbow's and a wall's lying where they fell beside a gun still standing, past the dawn's sweep - each mended back at the build step", ""],
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
@@ -816,6 +817,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"year_credits": _set_year_credits(state)
 		"trampled": _set_trampled(state)
 		"ruins": _set_ruins(state)
+		"decoy_art": _set_decoy_art(state)
 		"night_loot": _set_night_loot(state)
 		"bone_meal": _set_bone_meal(state)
 		"tarps": _set_tarps(state)
@@ -974,6 +976,11 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		await process_frame
 		await _shoot("fish_book_unknown", folder)
 		print("  fish_book on %s, then %s" % [ledger.book().shown(), FishBook.species()[FishBook.species().find(GameData.OLD_CATFISH) + 1]])
+		return
+	if name == "decoy_art":
+		await _strike_decoy(state)
+		await _shoot("decoy_art", folder)
+		await _take_decoy_day(main, state, folder)
 		return
 	if name == "barn_night":
 		await _shoot("barn_night", folder)
@@ -1860,6 +1867,80 @@ func _set_calm_morning(state: Dictionary) -> void:
 ## across the horde's east route by the house, the middle row on it; the
 ## house falls, the report is confirmed, and he is outside looking at them.
 ## The middle row is trampled and the two either side are not.
+## **A037's decoy and bait** (task 0236): on Summer 2, east of the house, a
+## decoy whole, one hurt, one to be struck and one brought down to its ruin,
+## and a bait on the ground beyond them; the night parked so nothing eats it.
+func _set_decoy_art(state: Dictionary) -> void:
+	_on_date(state, GameData.SEASON_DAYS + 2)
+	var near := Farm.house_centre(state)
+	var full := int((GameData.DEFENCES[&"decoy"] as Dictionary)["hp"])
+	_decoy_cells = []
+	for hp in [full, full / 2, full, full]:
+		var cell := Vector2i(-1, -1)
+		for dx in range(10, 22):
+			var here := near + Vector2i(dx, 2)
+			if cell.x < 0 and Farm.buildable(state, here):
+				cell = here
+		if cell.x < 0:
+			continue
+		Farm.place(state, cell, {"id": &"decoy", "hp": hp})
+		_decoy_cells.append(cell)
+	if _decoy_cells.size() == 4:
+		Farm.damage(state, _decoy_cells[3], 9999)
+	for dx in range(14, 26):
+		var here := near + Vector2i(dx, 2)
+		if Farm.buildable(state, here) and not _decoy_cells.has(here) and Farm.ruin_at(state, here).is_empty():
+			Farm.place(state, here, {"id": &"zombie_bait", "hp": 1})
+			break
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	_look_at(near + Vector2i(13, 1))
+
+
+## The decoys of the scene: whole, hurt, struck and the ruin.
+var _decoy_cells: Array = []
+
+
+## **The bite just before the shutter**: the third decoy struck, and two
+## frames for the view to see it and show the sway's first frame.
+func _strike_decoy(state: Dictionary) -> void:
+	if _decoy_cells.size() < 3:
+		return
+	Farm.damage(state, _decoy_cells[2], 5)
+	await process_frame
+	await process_frame
+	await RenderingServer.frame_post_draw
+
+
+## **The same by day** (task 0236): the night ended, him out by the house, and
+## the tarps off so the art under them shows - as the tower showcase does.
+func _take_decoy_day(main: Node, state: Dictionary, folder: String) -> void:
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	House.leave(state)
+	# Below the decoys, facing them: the day's camera follows him.
+	if _decoy_cells.size() > 1:
+		_stand(state, (_decoy_cells[1] as Vector2i) + Vector2i(1, 3))
+		state["player"]["facing"] = Player.NORTH
+	var view := main.get_node("%WorldView") as WorldView
+	view.tarps = false
+	_only_showing(main, "")
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await _strike_decoy(state)
+	await _shoot("decoy_art_day", folder)
+	print("  decoy_art: decoys at %s, %s by day" % [str(_decoy_cells), Phases.name_of(int(state["phase"]))])
+	view.tarps = true
+
+
 ## **Ruins** (task 0277, the owner's call): three defences brought to 0 on
 ## the east side of the house - a level two gun, a crossbow and a wall - and
 ## a gun still standing beside them, then the morning's sweep, which leaves a

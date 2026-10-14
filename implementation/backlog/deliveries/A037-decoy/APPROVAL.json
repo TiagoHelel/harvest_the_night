@@ -1,0 +1,31 @@
+{
+  "pack": "A037",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A037-decoy",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/decoy/none/01.png": "4a42542fdd1779f816d9f6dd6da0537ab7efcb0f6450724d8a656abf4a3289f7",
+    "native/decoy_hurt/none/01.png": "6414e86322b07e1234055322b436765d8123adb778f4060d8cec1c1c6db35868",
+    "native/decoy_wreck/none/01.png": "15c79d4c0bfe7b2b70adbdf10a4a8856b988917ffa28452db5986abae39ece78",
+    "native/decoy_sway/none/01.png": "9af32afb132f60ea030d1ef50feebd0ba5c73a492bdc56bc708c1fcffadf6d65",
+    "native/decoy_sway/none/02.png": "02c766e91e3758b3aab7dce7b7eaa29b5e7a43b2b135f921e5cbaab10ac6aad6",
+    "native/decoy_sway/none/03.png": "2cb29777d70b09718c036a762e7d2626f284403bff5fbff1e5e510d45f44a36f",
+    "native/decoy_hurt_sway/none/01.png": "d2a691a0d33ed3666dea8d36a3ded105c567b176b1b88f97223a693064a2deae",
+    "native/decoy_hurt_sway/none/02.png": "6695ab89db1e783444ec5bf070a3205778f89a0b1375525be5fdf8ce09c891d3",
+    "native/decoy_hurt_sway/none/03.png": "5e64c6e6a4e3d71b2557bfcbc11897b03ba50ce4970c545542100d296db44e4c",
+    "native/zombie_bait/none/01.png": "69b7419ff1e0c4780337415faf921f3efadd0a6902b567871c05f816cf2e46c6",
+    "native/icon_zombie_bait/none/01.png": "bf479fc467953fdbf6481d5426725c05c01c164944665966a3bfa646c4eb1eda",
+    "native/hud_zombie_bait/none/01.png": "01c353fb4d4fa1672413dd15300d265a857c289b92e0e15384ae150aad194b1b"
+  },
+  "frames": 12,
+  "frames_expected": 12,
+  "accepted_visual_checks": [
+    "decoy_hurt_sway_top_shift_ok"
+  ],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

@@ -160,3 +160,22 @@ Thank you: the record is complete now. OPEN-WORK.md section 3a lists:
 integration tasks through the game loop, one at a time with `taking 0xxx`
 here, as the owner asks for them. I will read CLAUDE-BATCH-DETAILS.md
 first, as you say.
+
+## 2026-10-14 - Claude - 0277 done; taking 0236 (A037)
+
+The owner took 0277's target as it stands, so it is done. They asked me to
+start the integrations: taking 0236, A037 the scarecrow decoy and zombie
+bait, through its CLAUDE-A037-PROMPT.txt.
+
+## 2026-10-14 - Claude - done 0236 (A037 integrated)
+
+A037 is in the game and set `integrated`.
+- All 12 native PNGs were sha-checked against the contract and APPROVAL.json,
+  and import_art renders each to the approved pixels exactly.
+- The hurt sway comes from `rejected/decoy-hurt-sway-r1.png`, as the
+  contract says, under the owner-accepted `decoy_hurt_sway_top_shift_ok`.
+- The contract's `sheet_cell_xywh` was not carried into the manifest:
+  import_art wants a `gutter_xy` with it that the contract does not give.
+  If later deliveries can include the gutter, the check could come back.
+The delivery folder is committed, since the manifest's provenance points
+into it. Next in the loop: 0237 (A038), when the owner asks.

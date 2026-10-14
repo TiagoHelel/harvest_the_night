@@ -31569,3 +31569,68 @@ trial.
 - **Checks**: no code or data moved in this entry. The last
   `python tools/verify.py`, on the same tree at b1698dc0, printed PASS.
   `python tools/devlog.py --check` passes.
+
+## 0236 - Art: the scarecrow decoy and zombie bait - done 2026-10-14
+
+A037 is integrated: the decoy whole, hurt and wrecked, its two sways, the
+bait on the ground and the bait kit's icons are the owner-approved art now
+(approved 2026-10-14 in the batch review, recorded by Codex in the
+delivery's `APPROVAL.json`). The code drawing of 0224 and 0225 is gone.
+
+- **Promotion**: the 12 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their five raw sources were copied byte for byte into
+    `assets/art_source/defences/decoy/` and `assets/art_source/ui/night/`.
+  - Each output has a manifest entry with its prompt, call, native,
+    contract and approval provenance, and an `ownership.json` row. Then
+    `tools/import_art.py` ran.
+  - A scratch promoter solved each entry's `content_anchor_xy` so the
+    render decodes to the approved pixels exactly. All 12 do.
+  - The cell offsets are the existing one-cell pieces': [0,-12] for the
+    16x32 decoy, [0,2] for the bait as the mine's.
+  - The icons carry `display_role` (inventory / compact_hud), as A005's do.
+  - Not carried over: the contract's `sheet_cell_xywh`. `import_art`
+    would then want a `gutter_xy` the contract does not give, and the crop
+    is checked against the source either way.
+- **One source from `rejected/`**: the hurt sway's three frames come from
+  `rejected/decoy-hurt-sway-r1.png`, because the contract names that file.
+  The owner accepted those frames as they are
+  (`decoy_hurt_sway_top_shift_ok` in `APPROVAL.json`), and their hashes are
+  approved.
+- **The stand-ins retired**:
+  - A037's six `PlaceholderArt` entries and the `DECOY`/`BAIT` geometry are
+    gone. `placeholders.py --check` passes, with 373 stand-ins left over
+    38 packs.
+  - `DecoyArt` loses its drawing and loads the art. The bait's icon is no
+    longer the fish tinted green.
+- **The sway is A037's frames**: struck, the decoy shows `decoy_sway_0..2`,
+  or `decoy_hurt_sway_0..2` when it is hurt, 0.1 s each. Then it stands as
+  the picture it had (`world_view._sway_decoys`, the sprite's `rest`
+  meta). The skewed lean of 0224 is gone.
+- **Checks**:
+  - `check_barrier_art.py` checks A037's ten ground pieces: the decoy's
+    three states on one scale, each sway's three frames, and the bait on
+    the mine's canvas.
+  - `check_ui_art.py` and `ui_art_showcase` hold the bait's icon pair.
+  - The barrier showcase passes 3,275 checks, the UI showcase 16,656.
+- **Tests rewritten where they named the stand-ins**:
+  - `_task_0224_decoy`: the art on its pivot, the sway frames and their
+    timing, the hotbar icon;
+  - `_task_0225_bait`: the art on the ground, the untinted icon;
+  - `_task_0234_arsenal`: the bait's icon is A037's art;
+  - `input_v1`'s `_case_0224_decoy`: the first sway frame when it is bitten;
+  - `headless_check`: one dead branch to the old drawing removed.
+- **Shots** (`implementation/shots/0236/`, FHD 1920x1080, looked at):
+  - a new scene, `decoy_art`, with its day twin: a decoy whole, one hurt,
+    one struck in its first sway frame, one's ruin and a bait on the
+    ground, by night and by day (the day's tarps off, as the tower
+    showcase does);
+  - `decoy` and `zombie_bait`, the lured crowds at night, with the
+    hotbar's new bait icon and its HUD mark.
+  - The scene count is 123.
+- **The delivery folder** `implementation/backlog/deliveries/A037-decoy/` is
+  committed, as 4cf09d96 committed its packs': the manifest's provenance
+  hashes point into it.
+- `python implementation/backlog/assets.py set A037 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS.

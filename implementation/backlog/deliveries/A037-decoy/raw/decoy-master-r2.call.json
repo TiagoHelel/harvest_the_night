@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-master-r1.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nImage1 is the straw decoy identity master EDIT TARGET. Keep its burlap sack face, straw, faded terracotta shirt, thin stake, upper-left light and same camera. Correct only the horizontal arm/crossbar silhouette: shorten BOTH shirt sleeves and crossbar so the entire decoy is much NARROWER, rather than arms spread widely.\nMeasured source opaque bbox126,225,906,1327 =780 wide1102 tall. At26px high it becomes18px wide, exceeding required11-12px. Change the visible full width to approximately490-510 source pixels while preserving its1102-pixel visible height. Both arms become SHORT STUBBY horizontal sleeves, ending only a little outside the torso. Shoulder/clothing proportions should be7 art pixels wide, head4-5 wide, and total arm spread12, long slim exposed post beneath.\nKeep source canvas1024x1536, head/post centre x516, visible top225, bottom1326, stake planted straight on same baseline. The ends should fit roughlyx260..770. Do not shorten the post or rescale the head independently. Native target16x32 pivot(8,28), width11-12 and height25-27, all foreground inside that aspect ratio. Exactly one complete cheap straw dummy, NO HAT, no blue clothes, no glowing eyes. True alpha background, no ground/shadow/glow/text/checkerboard. Crisp limited-ramp pixel clusters, no gradients, blur or painterly detailing."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A037-decoy/raw/decoy-master-r1.png",
+      "sha256": "b719aa2a5eea487658aff789f6adab16da57492143b6290a06e8e316adf74883",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\rejected\\decoy-master-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-985c6193-2187-4a5f-b3ba-d8078af5abef.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-master-r2.png",
+  "sha256": "3474a0aa616f20f5d376633cc752ae4b4ed57a3b81192d56885e1768c2f9d9e7",
+  "revision": 2,
+  "decision": "accepted identity/cells for native review; pack incomplete, not approved"
+}

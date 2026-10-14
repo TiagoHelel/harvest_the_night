@@ -1,0 +1,903 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "decoy",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/decoy-none-0-night.png",
+          "path": "preview/candidates/decoy/none/01.png",
+          "points": {},
+          "pose": "decoy"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "poses": [
+        "decoy"
+      ]
+    },
+    {
+      "anim": "decoy_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/decoy_hurt-none-0-night.png",
+          "path": "preview/candidates/decoy_hurt/none/01.png",
+          "points": {},
+          "pose": "decoy_hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "poses": [
+        "decoy_hurt"
+      ]
+    },
+    {
+      "anim": "decoy_hurt_sway",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "All three attempts failed the required sway; r1 is diagnostic only, r3 clips the target canvas.",
+          "night": "preview/decoy_hurt_sway-none-0-night.png",
+          "path": "preview/candidates/decoy_hurt_sway/none/01.png",
+          "points": {},
+          "pose": "lean_west_2"
+        },
+        {
+          "issue": "All three attempts failed the required sway; r1 is diagnostic only, r3 clips the target canvas.",
+          "night": "preview/decoy_hurt_sway-none-1-night.png",
+          "path": "preview/candidates/decoy_hurt_sway/none/02.png",
+          "points": {},
+          "pose": "rebound_east_1"
+        },
+        {
+          "issue": "All three attempts failed the required sway; r1 is diagnostic only, r3 clips the target canvas.",
+          "night": "preview/decoy_hurt_sway-none-2-night.png",
+          "path": "preview/candidates/decoy_hurt_sway/none/03.png",
+          "points": {},
+          "pose": "settle_west_1"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "poses": [
+        "lean_west_2",
+        "rebound_east_1",
+        "settle_west_1"
+      ]
+    },
+    {
+      "anim": "decoy_sway",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/decoy_sway-none-0-night.png",
+          "path": "preview/candidates/decoy_sway/none/01.png",
+          "points": {},
+          "pose": "lean_west_2"
+        },
+        {
+          "issue": "",
+          "night": "preview/decoy_sway-none-1-night.png",
+          "path": "preview/candidates/decoy_sway/none/02.png",
+          "points": {},
+          "pose": "rebound_east_1"
+        },
+        {
+          "issue": "",
+          "night": "preview/decoy_sway-none-2-night.png",
+          "path": "preview/candidates/decoy_sway/none/03.png",
+          "points": {},
+          "pose": "settle_west_1"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "poses": [
+        "lean_west_2",
+        "rebound_east_1",
+        "settle_west_1"
+      ]
+    },
+    {
+      "anim": "decoy_wreck",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/decoy_wreck-none-0-night.png",
+          "path": "preview/candidates/decoy_wreck/none/01.png",
+          "points": {},
+          "pose": "decoy_wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "poses": [
+        "decoy_wreck"
+      ]
+    },
+    {
+      "anim": "hud_zombie_bait",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_zombie_bait-none-0-night.png",
+          "path": "preview/candidates/hud_zombie_bait/none/01.png",
+          "points": {},
+          "pose": "rotten fish tied to short stick, inventory kit"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "rotten fish tied to short stick, inventory kit"
+      ]
+    },
+    {
+      "anim": "icon_zombie_bait",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_zombie_bait-none-0-night.png",
+          "path": "preview/candidates/icon_zombie_bait/none/01.png",
+          "points": {},
+          "pose": "rotten fish tied to short stick, inventory kit"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "rotten fish tied to short stick, inventory kit"
+      ]
+    },
+    {
+      "anim": "zombie_bait",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/zombie_bait-none-0-night.png",
+          "path": "preview/candidates/zombie_bait/none/01.png",
+          "points": {},
+          "pose": "one rotten fish, ground bait"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "one rotten fish, ground bait"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/barricade.png",
+      "pivot_xy": [
+        8,
+        20
+      ]
+    }
+  ],
+  "date": "2026-10-13",
+  "delivery_type": "rejected / incomplete diagnostic candidates, never runtime art",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "decoy",
+      "call": "raw/decoy-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/decoy/none/01.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "decoy",
+      "prompt": "raw/decoy-states-r3.prompt.txt",
+      "prompt_sha256": "0845ad616eb591b777daaacce94364b5da57349dd47447e985a129d14ec277db",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0453,
+        "crop_xywh": [
+          411,
+          78,
+          232,
+          602
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          789,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/decoy.png",
+      "seconds": 0.55,
+      "sha256": "4a42542fdd1779f816d9f6dd6da0537ab7efcb0f6450724d8a656abf4a3289f7",
+      "source": "raw/decoy-states-r3.png",
+      "source_sha256": "6916d1ab3c419166a505c55e21d0b8f0ce2c25ea0eb537a784e4c517e17f138b"
+    },
+    {
+      "anim": "decoy_hurt",
+      "call": "raw/decoy-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/decoy_hurt/none/01.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "decoy_hurt",
+      "prompt": "raw/decoy-states-r3.prompt.txt",
+      "prompt_sha256": "0845ad616eb591b777daaacce94364b5da57349dd47447e985a129d14ec277db",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0453,
+        "crop_xywh": [
+          937,
+          168,
+          271,
+          512
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          789,
+          0,
+          540,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/decoy_hurt.png",
+      "seconds": 0.55,
+      "sha256": "6414e86322b07e1234055322b436765d8123adb778f4060d8cec1c1c6db35868",
+      "source": "raw/decoy-states-r3.png",
+      "source_sha256": "6916d1ab3c419166a505c55e21d0b8f0ce2c25ea0eb537a784e4c517e17f138b"
+    },
+    {
+      "anim": "decoy_wreck",
+      "call": "raw/decoy-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/decoy_wreck/none/01.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "decoy_wreck",
+      "prompt": "raw/decoy-states-r3.prompt.txt",
+      "prompt_sha256": "0845ad616eb591b777daaacce94364b5da57349dd47447e985a129d14ec277db",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0453,
+        "crop_xywh": [
+          1452,
+          493,
+          342,
+          187
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1329,
+          0,
+          843,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/decoy_wreck.png",
+      "seconds": 0.55,
+      "sha256": "15c79d4c0bfe7b2b70adbdf10a4a8856b988917ffa28452db5986abae39ece78",
+      "source": "raw/decoy-states-r3.png",
+      "source_sha256": "6916d1ab3c419166a505c55e21d0b8f0ce2c25ea0eb537a784e4c517e17f138b"
+    },
+    {
+      "anim": "decoy_sway",
+      "call": "raw/decoy-sway-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/decoy_sway/none/01.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "lean_west_2",
+      "prompt": "raw/decoy-sway-r3.prompt.txt",
+      "prompt_sha256": "107fe121e4d669cc2966a74eb518b385bea6b4b5eeb8032c8620da797b8fe384",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          27
+        ],
+        "content_scale": 0.046365197481396676,
+        "crop_xywh": [
+          296,
+          87,
+          271,
+          582
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          764,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/decoy_sway_0.png",
+      "seconds": 0.1,
+      "sha256": "9af32afb132f60ea030d1ef50feebd0ba5c73a492bdc56bc708c1fcffadf6d65",
+      "source": "raw/decoy-sway-r3.png",
+      "source_sha256": "9be44996dd5fc2a65e1c729e9f4bbd8298d99864dcb0dc30c27bda81aa3590d2"
+    },
+    {
+      "anim": "decoy_sway",
+      "call": "raw/decoy-sway-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/decoy_sway/none/02.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "rebound_east_1",
+      "prompt": "raw/decoy-sway-r3.prompt.txt",
+      "prompt_sha256": "107fe121e4d669cc2966a74eb518b385bea6b4b5eeb8032c8620da797b8fe384",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          27
+        ],
+        "content_scale": 0.046365197481396676,
+        "crop_xywh": [
+          963,
+          85,
+          275,
+          584
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          764,
+          0,
+          665,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/decoy_sway_1.png",
+      "seconds": 0.1,
+      "sha256": "02c766e91e3758b3aab7dce7b7eaa29b5e7a43b2b135f921e5cbaab10ac6aad6",
+      "source": "raw/decoy-sway-r3.png",
+      "source_sha256": "9be44996dd5fc2a65e1c729e9f4bbd8298d99864dcb0dc30c27bda81aa3590d2"
+    },
+    {
+      "anim": "decoy_sway",
+      "call": "raw/decoy-sway-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/decoy_sway/none/03.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "settle_west_1",
+      "prompt": "raw/decoy-sway-r3.prompt.txt",
+      "prompt_sha256": "107fe121e4d669cc2966a74eb518b385bea6b4b5eeb8032c8620da797b8fe384",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          27
+        ],
+        "content_scale": 0.046365197481396676,
+        "crop_xywh": [
+          1622,
+          88,
+          280,
+          581
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1429,
+          0,
+          743,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/decoy_sway_2.png",
+      "seconds": 0.1,
+      "sha256": "2cb29777d70b09718c036a762e7d2626f284403bff5fbff1e5e510d45f44a36f",
+      "source": "raw/decoy-sway-r3.png",
+      "source_sha256": "9be44996dd5fc2a65e1c729e9f4bbd8298d99864dcb0dc30c27bda81aa3590d2"
+    },
+    {
+      "anim": "decoy_hurt_sway",
+      "call": "rejected/decoy-hurt-sway-r1.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/decoy_hurt_sway/none/01.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "lean_west_2",
+      "prompt": "rejected/decoy-hurt-sway-r1.prompt.txt",
+      "prompt_sha256": "9255e43a8cc13abd9137e6431b7090d4fe7d67e9a8e900334ee1576865e93a4c",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          23
+        ],
+        "content_scale": 0.044089456869009586,
+        "crop_xywh": [
+          339,
+          160,
+          316,
+          518
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          798,
+          724
+        ]
+      },
+      "review_issue": "All three attempts failed the required sway; r1 is diagnostic only, r3 clips the target canvas.",
+      "runtime_name": "sprites/buildings/decoy_hurt_sway_0.png",
+      "seconds": 0.1,
+      "sha256": "d2a691a0d33ed3666dea8d36a3ded105c567b176b1b88f97223a693064a2deae",
+      "source": "rejected/decoy-hurt-sway-r1.png",
+      "source_sha256": "514d87a0dc1560e5158e4df2cafcbbab4b6ee53501ed58d92bb1908a08e82640"
+    },
+    {
+      "anim": "decoy_hurt_sway",
+      "call": "rejected/decoy-hurt-sway-r1.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/decoy_hurt_sway/none/02.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "rebound_east_1",
+      "prompt": "rejected/decoy-hurt-sway-r1.prompt.txt",
+      "prompt_sha256": "9255e43a8cc13abd9137e6431b7090d4fe7d67e9a8e900334ee1576865e93a4c",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          23
+        ],
+        "content_scale": 0.044089456869009586,
+        "crop_xywh": [
+          942,
+          155,
+          287,
+          523
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          798,
+          0,
+          565,
+          724
+        ]
+      },
+      "review_issue": "All three attempts failed the required sway; r1 is diagnostic only, r3 clips the target canvas.",
+      "runtime_name": "sprites/buildings/decoy_hurt_sway_1.png",
+      "seconds": 0.1,
+      "sha256": "6695ab89db1e783444ec5bf070a3205778f89a0b1375525be5fdf8ce09c891d3",
+      "source": "rejected/decoy-hurt-sway-r1.png",
+      "source_sha256": "514d87a0dc1560e5158e4df2cafcbbab4b6ee53501ed58d92bb1908a08e82640"
+    },
+    {
+      "anim": "decoy_hurt_sway",
+      "call": "rejected/decoy-hurt-sway-r1.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/decoy_hurt_sway/none/03.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "settle_west_1",
+      "prompt": "rejected/decoy-hurt-sway-r1.prompt.txt",
+      "prompt_sha256": "9255e43a8cc13abd9137e6431b7090d4fe7d67e9a8e900334ee1576865e93a4c",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          23
+        ],
+        "content_scale": 0.044089456869009586,
+        "crop_xywh": [
+          1499,
+          154,
+          285,
+          524
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1363,
+          0,
+          809,
+          724
+        ]
+      },
+      "review_issue": "All three attempts failed the required sway; r1 is diagnostic only, r3 clips the target canvas.",
+      "runtime_name": "sprites/buildings/decoy_hurt_sway_2.png",
+      "seconds": 0.1,
+      "sha256": "5e64c6e6a4e3d71b2557bfcbc11897b03ba50ce4970c545542100d296db44e4c",
+      "source": "rejected/decoy-hurt-sway-r1.png",
+      "source_sha256": "514d87a0dc1560e5158e4df2cafcbbab4b6ee53501ed58d92bb1908a08e82640"
+    },
+    {
+      "anim": "zombie_bait",
+      "call": "raw/zombie-bait-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/zombie_bait/none/01.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "one rotten fish, ground bait",
+      "prompt": "raw/zombie-bait-r1.prompt.txt",
+      "prompt_sha256": "7804c8644d89309a4eec2b02e4b222f0fd61c5dd3d1a4c073be5a56681aecc11",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.015444015444015444,
+        "crop_xywh": [
+          506,
+          419,
+          777,
+          308
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": null
+      },
+      "runtime_name": "sprites/buildings/zombie_bait.png",
+      "seconds": 0.55,
+      "sha256": "69b7419ff1e0c4780337415faf921f3efadd0a6902b567871c05f816cf2e46c6",
+      "source": "raw/zombie-bait-r1.png",
+      "source_sha256": "1b4551bbf8ec839289e8e6c3e1eb272965b48361c82cfcc2c3721cbdfd678dfe"
+    },
+    {
+      "anim": "icon_zombie_bait",
+      "call": "raw/icon-zombie-bait-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/icon_zombie_bait/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "rotten fish tied to short stick, inventory kit",
+      "prompt": "raw/icon-zombie-bait-r1.prompt.txt",
+      "prompt_sha256": "4b05a983692ee25830e572376abcd4d8cde17a67fd7b036404e42212703291b3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "content_scale": 0.01797175866495507,
+        "crop_xywh": [
+          247,
+          327,
+          779,
+          667
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": null
+      },
+      "resource_id": "zombie_bait",
+      "runtime_name": "sprites/ui/icon_zombie_bait.png",
+      "seconds": 1,
+      "sha256": "bf479fc467953fdbf6481d5426725c05c01c164944665966a3bfa646c4eb1eda",
+      "source": "raw/icon-zombie-bait-r1.png",
+      "source_sha256": "44a0b7a32abacf54c89c43e735c649a8af993e51b003973cab3d82120c764828"
+    },
+    {
+      "anim": "hud_zombie_bait",
+      "call": "raw/icon-zombie-bait-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/hud_zombie_bait/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "rotten fish tied to short stick, inventory kit",
+      "prompt": "raw/icon-zombie-bait-r1.prompt.txt",
+      "prompt_sha256": "4b05a983692ee25830e572376abcd4d8cde17a67fd7b036404e42212703291b3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.010269576379974325,
+        "crop_xywh": [
+          247,
+          327,
+          779,
+          667
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": null
+      },
+      "resource_id": "zombie_bait",
+      "runtime_name": "sprites/ui/hud_zombie_bait.png",
+      "seconds": 1,
+      "sha256": "01c353fb4d4fa1672413dd15300d265a857c289b92e0e15384ae150aad194b1b",
+      "source": "raw/icon-zombie-bait-r1.png",
+      "source_sha256": "44a0b7a32abacf54c89c43e735c649a8af993e51b003973cab3d82120c764828"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A037",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-states-r3.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "6916d1ab3c419166a505c55e21d0b8f0ce2c25ea0eb537a784e4c517e17f138b"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\decoy-sway-r3.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "9be44996dd5fc2a65e1c729e9f4bbd8298d99864dcb0dc30c27bda81aa3590d2"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\fish.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "82d82f6e401cd20e0fd676c090071abf228290b1e53ab432f73cb1ca7cfb0442"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\mine.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "b9fa9c7cacd19ec0afb921ff40630cf4b8924e56ad28cb9bd6e758f8fdddff27"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\walker.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\raw\\zombie-bait-r1.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "1b4551bbf8ec839289e8e6c3e1eb272965b48361c82cfcc2c3721cbdfd678dfe"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A037-decoy",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "The scarecrow decoy and zombie bait",
+  "tool": "built-in ImageGen"
+}

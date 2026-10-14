@@ -11,8 +11,11 @@ def main():
     files,images=import_art.build(data)
     entries=[e for e in data['assets'] if e.get('generation_task')=='0014']
     assert len(entries)==84,('Barrier contract incomplete',len(entries))
-    by_id={e['id']:e for e in entries}
-    for e in entries:
+    # Task 0236: A037's decoy and bait, on the ground beside the barriers.
+    decoy=[e for e in data['assets'] if e.get('generation_task')=='A037' and e['id'].startswith('buildings/')]
+    assert len(decoy)==10,('Decoy contract incomplete',len(decoy))
+    by_id={e['id']:e for e in entries+decoy}
+    for e in entries+decoy:
         assert (ROOT/e['output']).read_bytes()==files[e['output']],e['id']
         assert all(p[3] in (0,255) for p in import_art.samples(images[e['id']])),e['id']
     for family in ('wall','fence'):
@@ -56,12 +59,21 @@ def main():
         assert len(scales)==1,('Physical scale drift',family)
         wreck=images[f'buildings/{family}_wreck']
         assert wreck.getchannel('A').getbbox()[3]-wreck.getchannel('A').getbbox()[1]<=8,('Standing wreck',family)
-    for family,suffixes,canvas,pivot in [('barricade',('','_hurt','_wreck'),[16,24],[8,20]),('mine',('','_triggered','_spent'),[16,16],[8,14])]:
+    # Task 0236: A037's decoy stands on the walls' one-cell canvas.
+    for family,suffixes,canvas,pivot in [('barricade',('','_hurt','_wreck'),[16,24],[8,20]),('mine',('','_triggered','_spent'),[16,16],[8,14]),('decoy',('','_hurt','_wreck'),[16,32],[8,28])]:
         frames=[by_id['buildings/'+family+s] for s in suffixes]
         assert len({e['content_scale'] for e in frames})==1,family
         assert len({files[e['output']] for e in frames})==3,('Duplicate states',family)
         for e in frames:assert e['canvas_wh']==canvas and e['pivot_xy']==pivot,e['id']
+    # Task 0236: the decoy's two sways, three frames each on its canvas and
+    # pivot, one scale a strip, and the bait lying on the mine's.
+    for sway in ('decoy_sway','decoy_hurt_sway'):
+        frames=[by_id['buildings/%s_%d'%(sway,i)] for i in range(3)]
+        assert len({e['content_scale'] for e in frames})==1,sway
+        assert len({files[e['output']] for e in frames})==3,('Duplicate frames',sway)
+        for i,e in enumerate(frames):assert e['canvas_wh']==[16,32] and e['pivot_xy']==[8,28] and e['frame']==i and not e['loop'],e['id']
+    bait=by_id['buildings/zombie_bait'];assert bait['canvas_wh']==[16,16] and bait['pivot_xy']==[8,14],'Bait off the ground'
     assert gen_sprites.migrated_barriers()=={'buildings/'+f for f in ('wall','fence','barricade','mine')},'Incomplete legacy migration'
-    print('OK: 84 exact source-owned outputs, all 64 occupancy masks/wear states, physical scale and mixed material seams')
+    print('OK: 84 exact source-owned outputs and A037 decoy/bait 10, all 64 occupancy masks/wear states, physical scale and mixed material seams')
 
 if __name__=='__main__':main()

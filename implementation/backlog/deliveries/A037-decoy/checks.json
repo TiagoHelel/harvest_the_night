@@ -1,0 +1,163 @@
+{
+  "approved_art_hashes_match": true,
+  "bait_targets": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "decoy_hurt_sway_base_fixed": true,
+  "decoy_hurt_sway_distinct": true,
+  "decoy_hurt_sway_height_matches_rest": true,
+  "decoy_hurt_sway_top_shift_ok": false,
+  "decoy_sway_base_fixed": true,
+  "decoy_sway_distinct": true,
+  "decoy_sway_height_matches_rest": true,
+  "decoy_sway_top_shift_ok": true,
+  "decoy_whole_targets": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 12,
+  "frames_found": 12,
+  "grounded_on_pivot": true,
+  "icon_bounds_ok": true,
+  "icon_colours_at_least2": true,
+  "icon_density": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/decoy/none/01.png": {
+      "bounds": [
+        3,
+        1,
+        14,
+        28
+      ],
+      "opaque_pixels": 163
+    },
+    "native/decoy_hurt/none/01.png": {
+      "bounds": [
+        2,
+        5,
+        14,
+        28
+      ],
+      "opaque_pixels": 147
+    },
+    "native/decoy_hurt_sway/none/01.png": {
+      "bounds": [
+        1,
+        5,
+        15,
+        28
+      ],
+      "opaque_pixels": 157
+    },
+    "native/decoy_hurt_sway/none/02.png": {
+      "bounds": [
+        2,
+        5,
+        15,
+        28
+      ],
+      "opaque_pixels": 157
+    },
+    "native/decoy_hurt_sway/none/03.png": {
+      "bounds": [
+        2,
+        5,
+        15,
+        28
+      ],
+      "opaque_pixels": 160
+    },
+    "native/decoy_sway/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        15,
+        28
+      ],
+      "opaque_pixels": 167
+    },
+    "native/decoy_sway/none/02.png": {
+      "bounds": [
+        2,
+        1,
+        15,
+        28
+      ],
+      "opaque_pixels": 166
+    },
+    "native/decoy_sway/none/03.png": {
+      "bounds": [
+        2,
+        1,
+        15,
+        28
+      ],
+      "opaque_pixels": 167
+    },
+    "native/decoy_wreck/none/01.png": {
+      "bounds": [
+        1,
+        20,
+        15,
+        28
+      ],
+      "opaque_pixels": 66
+    },
+    "native/hud_zombie_bait/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "opaque_pixels": 23
+    },
+    "native/icon_zombie_bait/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        14
+      ],
+      "opaque_pixels": 76
+    },
+    "native/zombie_bait/none/01.png": {
+      "bounds": [
+        2,
+        9,
+        14,
+        14
+      ],
+      "opaque_pixels": 38
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "decoy_hurt_sway_top_shift_ok"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "same_icon_crop": true,
+  "state_alpha_distinct": true,
+  "state_scale_shared": true,
+  "sway_top_offsets": {
+    "decoy_hurt_sway": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decoy_sway": [
+      -2.5,
+      0.5,
+      -1.5
+    ]
+  },
+  "wreck_targets": true
+}

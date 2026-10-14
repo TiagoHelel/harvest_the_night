@@ -1,6 +1,6 @@
 # A037 - The scarecrow decoy and zombie bait
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0236
 - **Dressed by game tasks:** 0224, 0225
 - **Spec after game task:** 0225

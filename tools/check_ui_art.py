@@ -42,6 +42,8 @@ PAIRS = {
     # Task 0205: the twelve fish (0179) and the four legendaries (0182).
     'A022': ['carp', 'bream', 'catfish', 'dorado', 'eel', 'perch', 'pike', 'salmon', 'sturgeon',
              'sunfish', 'tilapia', 'trout', 'old_catfish', 'golden_queen', 'ghost_pike', 'ice_sturgeon'],
+    # Task 0236: the zombie bait's kit (0225).
+    'A037': ['zombie_bait'],
 }
 
 ## A022's book portraits (task 0205): each species' third cut, 32x32 at
