@@ -28,19 +28,20 @@ What the owner has decided so far, in order:
 | 6 | The Scarecrow King sized to autumn's line: 1,200/5 to 600/4 |
 | 7 | Autumn's last week: the King's company at three quarters |
 | 8 | Autumn's curve at 6,400, its nights and winter's kept in rhythm |
+| 9 | The Winter Lord sized to winter's line: 1,800/7 to 900/4 |
 
 Where it stands:
-- Eleven runs of sixteen reach winter.
+- Every boss is sized, and each falls wherever the house stands on its
+  night.
+- **Eight runs of sixteen win the year**: five `balanced` and three
+  `towers`.
 - `balanced` loses 7.5 nights before Winter 1: 2.6 in spring and 4.9 in
-  autumn.
-- Every boss but the last falls: the Giant, the Harvester and the King.
-- Winter is held, most nights by most lines, but the Winter Lord
-  (1,800/7) never falls. He is left at 908-1,800 every fight.
+  autumn. Three of its eight seeds do not win the year.
 
 **The owner's next call is one of:**
-1. the Winter Lord sized to winter's line, as the other three were;
-2. what is left before Winter 1: autumn's Full Moon on some seeds, and
-   spring's 2.6.
+1. autumn's Full Moon (35), where one seed's line breaks for good;
+2. spring's 2.6;
+3. the target itself (two to four nights before Winter 1).
 
 The target is the phase's: the average player loses two to four nights
 before Winter 1, and every boss falls.

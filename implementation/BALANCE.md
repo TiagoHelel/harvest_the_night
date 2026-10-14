@@ -1,4 +1,9 @@
-# The year - task 0277 (2026-10-13), blocked eight times
+# The year - task 0277 (2026-10-13), blocked nine times
+
+**Ninth block, after the owner's ninth call** - see "The owner's ninth
+call, played" below: the Winter Lord at 900/4, and eight runs of sixteen
+win the year. Every boss falls wherever the house stands. `balanced` still
+loses 7.5 nights before Winter 1 against a target of two to four.
 
 **Eighth block, after the owner's eighth call** - see "The owner's eighth
 call, played" below: autumn's curve at 6,400 with its nights kept in
@@ -70,6 +75,76 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's ninth call, played: the Winter Lord sized to winter's line (2026-10-14)
+
+The owner chose the last boss: "vai na 1, faz o Winter Lord igual ao
+Gigante". **The Winter Lord is 900 hit points and armour 4 now, and for
+the first time runs win the year: eight of sixteen end it with him
+down.** Every boss falls wherever the house stands on its night.
+
+**What moved** (`src/core/game_data.gd`):
+- The Winter Lord: 1,800 hit points and armour 7 become **900 and armour
+  4**.
+- He is still the strongest boss in the table, over the King's 600, as
+  0255's test asks.
+- His night (56) is untouched, still the year's largest.
+
+### The Lord's grid
+
+The eight runs that reached his night with the house standing in the
+eighth call: `balanced` 9014, 9021, 9028, 9049; `towers` 9021, 9028,
+9042, 9049. To night 57.
+
+| Winter Lord | The year won | Where it was not |
+| --- | --- | --- |
+| 1,800/7 (before) | 0 of 8 | Left at 908-1,800 every fight |
+| 1,200/4 | 7 of 8 | One fight left him at 84 with the house up |
+| **900/4** | **7 of 8** | `towers` 9028 lost the house before he came |
+| 700/4 | 7 of 8 | The same |
+
+900 is the most tried that falls wherever the house stands, as the
+Giant's 400 was.
+
+### The year after it
+
+`--year 8` (32 runs in 1,811 s, 8 processes, a run 119-824 s):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.6    0.0    4.9    3.8         1.9  0.0  2.9  2.4   5/8    3/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0    4.8    4.1         0.0  0.0  3.0  1.8   3/8    5/8
+  walls              8.1    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+
+    balanced  winter  100 100 100 100  83  50 100 100  83  67  67  83  83  33
+    towers    winter  100 100 100 100   0  60 100 100  40  60  40  60  60  60
+```
+
+What it says:
+- **Eight runs of sixteen win the year**: five `balanced` and three
+  `towers`. Each fell to the Winter Lord on the first fight it met him
+  with the house up.
+- **The phase's target is not met yet.** `balanced` loses 7.5 nights before
+  Winter 1 against a target of two to four, and three of its eight seeds
+  do not see every boss fall:
+  - **9007** loses the house on the King's night, every fight;
+  - **9035** loses its line on autumn's Full Moon (35) and every night
+    after;
+  - **9042** loses Spring 9-14 and autumn's last week, then the house
+    before the Lord is touched.
+- `walls` and `economy` still do not get out of spring.
+
+### The next call is the owner's
+
+Every boss is sized now, so what is left is the nights before Winter 1:
+1. **Autumn's Full Moon** (35, 7,254 hit points from three sides), where
+   9035's line breaks and never comes back;
+2. **Spring's 2.6**: four of eight `balanced` seeds lose a nine-defence
+   line on Spring 9-13 and win it back only over the Giant's repeats;
+3. **Or the target itself**: two to four nights before Winter 1, when
+   `towers` already loses 5.1 and the year is won by eight runs of
+   sixteen.
 
 ## The owner's eighth call, played: autumn's curve, with the nights kept in rhythm (2026-10-14)
 

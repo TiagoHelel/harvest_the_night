@@ -2915,7 +2915,12 @@ const ENEMIES: Dictionary = {
 		"is_boss": true,
 		# **The strongest boss in the table**: more than the Harvester's and
 		# the King's.
-		"hp": 1800,                     # LEVER: hit points, 1300-2400
+		# **Sized to winter's line** (task 0277, the owner's call: "faz o
+		# Winter Lord igual ao Gigante"): at 1,800 and armour 7 every line that
+		# reached him left him at 908-1,800. At 900/4 he falls wherever the
+		# house stands, and the year ends. At 1,200 one fight left him at 84
+		# with the house up.
+		"hp": 900,                      # LEVER: hit points, 700-2400
 		# Slower than every one that walks (0246).
 		"ticks_per_tile": 48,           # LEVER: ticks, 39-60
 		"damage": 50,                   # LEVER: to the house, 30-70
@@ -2928,7 +2933,8 @@ const ENEMIES: Dictionary = {
 		"freeze_ticks": 4 * SECONDS,    # LEVER: ticks, 2-8 seconds worth
 		"reward": 250,                  # LEVER: money, 120-400
 		"bones": 9,                     # LEVER: bones, 6-9 (LOOT_PILE_CAP)
-		"armour": 7,                    # LEVER: damage off each hit, 5-10
+		# The tank's 4, as every boss's since task 0277.
+		"armour": 4,                    # LEVER: damage off each hit, 3-10
 		"lurable": false,
 	},
 }

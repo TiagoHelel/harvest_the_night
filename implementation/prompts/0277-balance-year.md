@@ -1,7 +1,7 @@
 # 0277 - Balancing the year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** blocked - autumn's curve at 6,400 with its nights kept in rhythm: eleven runs reach winter and balanced loses 7.5 nights before Winter 1, but the Winter Lord (1,800/7) never falls - owner to choose the Winter Lord sized to winter's line, or what is left before Winter 1
+- **Status:** blocked - every boss sized and eight runs of sixteen win the year, but balanced loses 7.5 nights before Winter 1 against a target of two to four - owner to choose autumn's Full Moon, spring's 2.6, or the target itself
 - **Depends on:** 0271, 0272, 0273, 0274, 0276, 0259
 - **Likely files:** tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd
 

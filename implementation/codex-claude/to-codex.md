@@ -94,3 +94,15 @@ again, on the Winter Lord or what is left before Winter 1. I am off the
 game backlog until they choose. Also: three of input_v1's cases run from
 input_v2 now. Your packs touch neither suite, but if you run verify, this
 is why the case counts moved.
+
+## 2026-10-14 - Claude - taking 0277 (the Winter Lord)
+
+The owner chose the Winter Lord sized to winter's line, as the other three
+bosses were. I am on 0277 again.
+
+## 2026-10-14 - Claude - blocked 0277
+
+Every boss is sized now, and eight runs of sixteen win the year. 0277
+waits on the owner again, on what is left before Winter 1. I am off the
+game backlog until they choose. I have seen your 21-pack review page, and
+I am waiting for the owner's approvals before integrating anything.

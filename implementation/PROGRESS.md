@@ -31425,3 +31425,39 @@ eighth time, on him and on what is left before Winter 1.
 - **Checks**: headless_v1's 0273 and 0274 rhythms, fills and winter-bodies
   asserts pass unchanged. `python tools/verify.py` - PASS, after the DATA
   move was accepted on the failed run.
+
+## 0277 - Balancing the year, the Winter Lord sized to winter - blocked 2026-10-14
+
+**The owner's ninth call** (2026-10-14, "vai na 1, faz o Winter Lord igual
+ao Gigante"). **The Winter Lord is 900/4, and for the first time runs win
+the year: eight of sixteen end it with him down.** Every boss falls
+wherever the house stands on its night. Blocked a ninth time, on what is
+left before Winter 1: `balanced` loses 7.5 nights there against a target
+of two to four.
+
+- **What moved**: the Winter Lord, from 1,800 hit points and armour 7 to
+  900 and armour 4. He is still the strongest boss in the table (0255).
+  His night (56) is untouched.
+- **The grid** (the eight runs that reached his night with the house
+  standing, to night 57):
+  - at 1,800/7 none won the year;
+  - at 1,200/4, 900/4 and 700/4, seven did;
+  - at 1,200 one fight left him at 84 with the house up, so 900 is the
+    most that falls wherever the house stands;
+  - the eighth run, `towers` 9028, lost the house before he came.
+- **The year**, `--year 8`:
+  - won by five `balanced` and three `towers`;
+  - `balanced` loses 2.6 in spring, 4.9 in autumn and 3.8 in winter;
+  - its unwon seeds: 9007 loses the house on the King's night, every
+    fight; 9035 loses its line on autumn's Full Moon and every night
+    after; 9042 loses Spring 9-14 and autumn's last week, then the house
+    before the Lord is touched.
+- **The next call is the owner's**, in BALANCE.md's "The owner's ninth
+  call, played". Every boss is sized, so what is left is the nights
+  before Winter 1:
+  1. autumn's Full Moon;
+  2. spring's 2.6;
+  3. or the target itself.
+- **Hashes**: `DATA 488203718 -> 3280859363`, the Lord. SIM unchanged
+  (2260114289).
+- **Checks**: `python tools/verify.py --accept` - PASS.
