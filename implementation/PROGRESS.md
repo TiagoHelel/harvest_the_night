@@ -31311,3 +31311,58 @@ time, on autumn's last week and on winter.
   armour. SIM unchanged (2260114289): the determinism run never reaches
   autumn.
 - **Checks**: `python tools/verify.py --accept` - PASS.
+
+## 0277 - Balancing the year, the King's company at three quarters - blocked 2026-10-14
+
+**The owner's seventh call** (2026-10-14, "vai no outono"): autumn's last
+week. **The Scarecrow King's company is three quarters of what 0273 wrote
+now, and five runs reach winter where two did.** The bigger win, autumn's
+curve, breaks two of the plan's rules, so it is the owner's next call
+along with winter. Blocked a seventh time.
+
+- **What moved** (key night 42):
+  - every row of the company at three quarters, rounded; its crows sixteen
+    to twelve;
+  - its releases stretched from 10 ticks to 13, so it still sends to the
+    fill line (tick 4,528, in a 3,600-5,400 window);
+  - three quarters is the floor: at 8,414 hit points it is still the
+    season's largest night, over Autumn 13's 8,281.
+- **The trials** (`balanced`, eight seeds, to night 43):
+
+  | Autumn's curve | The company | Autumn lost | Past the King |
+  | --- | --- | --- | --- |
+  | 5,200 -> 8,400 | all of it | 82 | 1 of 8 |
+  | 5,200 -> 7,600 / 7,000 / 6,400 | all of it | 83 / 86 / 71 | 1 of 8 |
+  | 5,200 -> 8,400 | 75% | 67 | 2 of 8 |
+  | 5,200 -> 7,600 | 75% | 52 | 4 of 8 |
+  | 5,200 -> 6,400 | 75% | 37 | 7 of 8 |
+  | 5,200 -> 6,400 | 60% | 37 | 6 of 8 |
+
+  - At full strength the company took the house before the King was
+    touched, every fight, on six seeds of eight. At three quarters he is
+    fought: left at 97-528, or down.
+  - The first trial of the company wrote fewer bodies at the old release
+    rate. That ends the night before the fill line, which 0273's rows
+    refuse, so it was stopped and run again with the releases stretched.
+- **Not in this change: autumn's curve** (5,200 -> 6,400 with the company
+  at three quarters halves autumn's losses). Applied and run, it failed
+  two of headless_v1's asserts, both the plan's own shape:
+  - 0273's rhythm: Autumn 4, 6 and 9 fell under the night before them
+    (the north's, the crows' and the diggers' nights are written by hand);
+  - 0274's rule that winter sends no more bodies than autumn.
+  So it was taken back out. To move it is to move those nights and
+  winter's.
+- **The year**, `--year 8`:
+  - five runs reach winter (`balanced` 9042 and 9049, `towers` 9035, 9042
+    and 9049);
+  - autumn lost: `balanced` 10.2 to 8.4, `towers` 10.2 to 9.2;
+  - winter holds Winter 1-3, and from Winter 4 few lines hold;
+  - the Winter Lord (1,800/7) was left at 1,039-1,800.
+- **The next call is the owner's**, in BALANCE.md's "The owner's seventh
+  call, played":
+  1. autumn's curve, with 0273's hand-written nights and winter's made
+     nights moved to match;
+  2. winter from Winter 4, and the Winter Lord.
+- **Hashes**: `DATA 3440354384 -> 1444073881`, the King's night. SIM
+  unchanged (2260114289).
+- **Checks**: `python tools/verify.py --accept` - PASS.

@@ -1,7 +1,7 @@
 # 0277 - Balancing the year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** blocked - the Scarecrow King (600/4) falls wherever the house stands and two runs reach winter; autumn's last week takes the other fourteen houses, and from Winter 4-5 no line holds - owner to choose autumn's last week, or winter and the Winter Lord
+- **Status:** blocked - the King's company at three quarters: five runs reach winter; autumn's curve 5,200-6,400 would halve autumn's losses but moves 0273's rhythm and winter's bodies, and winter falls from Winter 4 - owner to choose autumn's curve, or winter and the Winter Lord
 - **Depends on:** 0271, 0272, 0273, 0274, 0276, 0259
 - **Likely files:** tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd
 

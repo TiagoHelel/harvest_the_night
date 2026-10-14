@@ -1,6 +1,6 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-13**, after commit `0fb4d2e6`; section 3a after Codex's messages of 21:49 and 21:53.
+Kept by Claude. Last updated **2026-10-14**, after commit `0fb4d2e6`; section 3a after Codex's messages of 21:49 and 21:53.
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
@@ -26,20 +26,22 @@ What the owner has decided so far, in order:
 | 4 | The robot saves for autumn's mortar |
 | 5 | A defence brought to 0 is a **ruin**, mended back at half its price |
 | 6 | The Scarecrow King sized to autumn's line: 1,200/5 to 600/4 |
+| 7 | Autumn's last week: the King's company at three quarters |
 
 Where it stands:
 - Every `balanced` run reaches autumn, spring costs it 2.6 nights, and
   summer is clean.
 - Every boss to Summer 14 falls on every seed. The King falls wherever the
-  house stands on its night.
-- Two runs reach winter. They hold Winter 1-3 or 1-4, then lose every
-  night. The Winter Lord (1,800/7) is left at 1,159-1,298.
-- From Autumn 12, three lines in four fall. Autumn's last week takes the
-  other fourteen runs' houses before the King is touched.
+  house stands on his night.
+- Five runs reach winter. Autumn costs `balanced` 8.4 nights, and winter
+  holds Winter 1-3, then few lines hold. The Winter Lord (1,800/7) is left
+  at 1,039-1,800.
 
 **The owner's next call is one of:**
-1. autumn's last week (Autumn 12-14 and the King's company);
-2. winter, from Winter 4-5, and the Winter Lord.
+1. autumn's curve, 5,200 -> 6,400, which halves autumn's losses. It
+   moves 0273's rhythm (the north's, the crows' and the diggers' nights)
+   and winter's made nights with it;
+2. winter, from Winter 4, and the Winter Lord.
 
 The target is the phase's: the average player loses two to four nights
 before Winter 1, and every boss falls.

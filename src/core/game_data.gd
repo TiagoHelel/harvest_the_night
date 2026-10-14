@@ -3381,23 +3381,28 @@ const KEY_NIGHTS: Dictionary = {
 		"note": "the Scarecrow King's company: he calls crows down on your fields while all of autumn comes at the walls",
 		"opening_ticks": 0,
 		"gap_ticks": 4 * SECONDS,
-		"interval_ticks": 10,
+		"interval_ticks": 13,
 		# **His flock is his own** (0254): the crows he calls are not rows,
-		# so the forecast counts these sixteen and not his.
+		# so the forecast counts these twelve and not his.
+		# **Three quarters of the company 0273 wrote, its releases stretched
+		# to the same fill** (task 0277, the owner's call on autumn's last
+		# week): at the full company the house fell before the King was
+		# touched on six seeds of eight, every fight. Three quarters is as
+		# low as it goes and stays the season's largest night, as 0273 asks.
 		"waves": [
-			[&"walker", 36, 0],
-			[&"digger", 8, 2],
-			[&"breaker", 16, 1],
-			[&"crow", 8, 0],
-			[&"rat", 36, 2],
-			[&"tank", 12, 0],
-			[&"spitter", 12, 1],
-			[&"runner", 24, 2],
-			[&"walker", 36, 1],
-			[&"digger", 8, 0],
-			[&"tank", 10, 2],
-			[&"crow", 8, 1],
-			[&"breaker", 16, 0],
+			[&"walker", 27, 0],
+			[&"digger", 6, 2],
+			[&"breaker", 12, 1],
+			[&"crow", 6, 0],
+			[&"rat", 27, 2],
+			[&"tank", 9, 0],
+			[&"spitter", 9, 1],
+			[&"runner", 18, 2],
+			[&"walker", 27, 1],
+			[&"digger", 6, 0],
+			[&"tank", 8, 2],
+			[&"crow", 6, 1],
+			[&"breaker", 12, 0],
 		],
 	},
 	# ---------------------------------------------------------------- winter

@@ -1,4 +1,9 @@
-# The year - task 0277 (2026-10-13), blocked six times
+# The year - task 0277 (2026-10-13), blocked seven times
+
+**Seventh block, after the owner's seventh call** - see "The owner's
+seventh call, played" below: the King's company at three quarters, five
+runs reach winter. The rest of autumn's weight is its curve, which moves
+0273's rhythm and winter's, and winter falls from Winter 4.
 
 **Sixth block, after the owner's sixth call** - see "The owner's sixth
 call, played" below: the Scarecrow King (600/4) falls wherever the house
@@ -59,6 +64,89 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's seventh call, played: autumn's last week (2026-10-14)
+
+The owner chose autumn's last week next: "vai no outono". **The King's
+company is three quarters of what 0273 wrote now, and five runs reach
+winter where two did.** The rest of autumn's weight is in its curve, and
+lowering that rewrites 0273's rhythm and winter's.
+
+**What moved** (`src/core/game_data.gd`, key night 42):
+- **Every row of the Scarecrow King's company at three quarters**,
+  rounded: walkers 36 to 27, breakers 16 to 12, tanks 12 and 10 to 9 and
+  8, and so on. Its crows go from sixteen to twelve.
+- **Its releases stretched** from 10 ticks to 13, so the night still sends
+  to the fill line: to tick 4,528 of a 3,600-5,400 window.
+- **Three quarters is as low as it goes.** At 8,414 hit points the night is
+  still the season's largest, over Autumn 13's 8,281, as 0273's rhythm
+  asks.
+
+### The trials
+
+`balanced` on all eight seeds, to night 43 (the King at 600/4 in every
+row):
+
+| Autumn's curve (2nd -> 13th day) | The King's company | Autumn nights lost | Past the King |
+| --- | --- | --- | --- |
+| 5,200 -> 8,400 (as it is) | all of it | 82 | 1 of 8 |
+| 5,200 -> 7,600 | all of it | 83 | 1 of 8 |
+| 5,200 -> 7,000 | all of it | 86 | 1 of 8 |
+| 5,200 -> 6,400 | all of it | 71 | 1 of 8 |
+| **5,200 -> 8,400** | **75%** | **67** | **2 of 8** |
+| 5,200 -> 7,600 | 75% | 52 | 4 of 8 |
+| 5,200 -> 6,400 | 75% | 37 | 7 of 8 |
+| 5,200 -> 6,400 | 60% | 37 | 6 of 8 |
+
+What it says:
+- **The King's company was the wall on its own night.** At full strength
+  it took the house before the King was touched, every fight, on six
+  seeds of eight. At three quarters the King is fought: left at 97-528,
+  or down.
+- **The bigger win is autumn's curve**: 5,200 -> 6,400 with the company at
+  three quarters halves the losses, 82 to 37. **It is not in this
+  change**, because it breaks two of the plan's rules, which 0271-0274
+  wrote and 0273's and 0274's tests hold:
+  - **The rhythm.** Autumn's made nights must grow from day to day around
+    its hand-written ones: the north on 31, the crows on 33, the diggers
+    on 36. A lower curve puts Autumn 4, 6 and 9 under the night before
+    them.
+  - **Winter sends no more bodies than autumn.** A lighter autumn puts
+    winter's made nights over it.
+  Both are the plan's shape, so the owner's to move.
+
+### The year after it
+
+`--year 8` (32 runs in 1,914 s, 8 processes, a run 120-902 s):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.6    0.0    8.4    3.0         1.9  0.0  5.8  1.8   0/8    8/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0    9.2    5.1         0.0  0.0  5.4  2.6   0/8    8/8
+  walls              8.1    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+
+    balanced  autumn  100 100 100  75  88  88  75  75  75  75  62  25  12   0
+              winter  100 100 100   0   0   0   0   0  50 100   0 100   0   0
+    towers    autumn  100 100 100  88 100 100  62  62  50  38  38  25  25  12
+              winter  100 100 100  33   0   0   0   0  33  33  33  33   0   0
+```
+
+- **Five runs reach winter**: `balanced` 9042 and 9049, `towers` 9035, 9042
+  and 9049. Two did before.
+- **Autumn lost**: `balanced` 10.2 to 8.4, `towers` 10.2 to 9.2.
+- **Winter holds Winter 1-3.** From Winter 4 few lines hold: the south
+  opens on it and the frost zombie comes on Winter 5. The
+  Winter Lord (1,800/7) was left at 1,039-1,800.
+
+### The next call is the owner's
+
+1. **Autumn's curve**: 5,200 -> 6,400 halves autumn's losses (82 to 37
+   with the company at three quarters). It means rewriting 0273's rhythm,
+   lowering the north's, the crows' and the diggers' nights to match, and
+   winter's made nights under autumn's.
+2. **Winter**, from Winter 4, and **the Winter Lord**, the last boss still
+   at his first numbers.
 
 ## The owner's sixth call, played: the Scarecrow King sized to autumn's line (2026-10-13)
 

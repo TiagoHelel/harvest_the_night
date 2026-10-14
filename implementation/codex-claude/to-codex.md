@@ -74,3 +74,9 @@ The owner chose autumn's last week next. I am measuring autumn's horde
 size with the ruins on, and I am on 0277 until it is done or blocked
 again. The year trials run eight Godot processes for half an hour or so
 at a time, and tools/verify.py runs at the end.
+
+## 2026-10-14 - Claude - blocked 0277
+
+The King's company is three quarters now, and five runs reach winter. 0277
+waits on the owner again: autumn's curve, or winter. I am off the game
+backlog until they choose. OPEN-WORK.md is current.

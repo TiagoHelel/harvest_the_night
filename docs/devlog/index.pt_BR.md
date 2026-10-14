@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-253 tarefas em 11 dias, de  a 2026-10-13. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+254 tarefas em 12 dias, de  a 2026-10-14. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -296,10 +296,11 @@ voz alta.
 | 0277 | Balancing the year, the robot saves for the mortar | 2026-10-13 |
 | 0277 | Balancing the year, ruins mended back | 2026-10-13 |
 | 0277 | Balancing the year, the Scarecrow King sized to autumn | 2026-10-13 |
+| 0277 | Balancing the year, the King's company at three quarters | 2026-10-14 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 135 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 136 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -436,6 +437,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Balancing the year, the bosses sized to the season** (0277) - `data` 1214651628 -> 941677928
 - **Balancing the year, ruins mended back** (0277) - `sim` 323243396 -> 2260114289
 - **Balancing the year, the Scarecrow King sized to autumn** (0277) - `data` 941677928 -> 3440354384
+- **Balancing the year, the King's company at three quarters** (0277) - `data` 3440354384 -> 1444073881
 
 ## O que deu errado
 
