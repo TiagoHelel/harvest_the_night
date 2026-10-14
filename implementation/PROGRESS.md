@@ -31172,3 +31172,106 @@ The mortar rule stays.
     iron from a gun. Once paid for, it is put up, and then nothing is kept.
     With no press, nothing is.
   - `python tools/verify.py` - PASS.
+
+## 0277 - Balancing the year, ruins mended back - blocked 2026-10-13
+
+**The owner's fifth call** (2026-10-13, "vai na 1, defesa zerada fica
+destruída e conserta"): what a lost night costs the line. **A defence
+brought to 0 is now a ruin, mended back at half its price.** Every
+`balanced` run reaches autumn, spring costs it 2.6 nights, summer is clean
+for both shooting policies, and every boss to Summer 14 falls on every
+seed. Blocked a fifth time: autumn's last week and the Scarecrow King.
+
+The rule:
+- **`Building.ruins(id)`**: every defence but:
+  - a trap, which is spent;
+  - one walked over (the bait and the garlic), which is eaten;
+  - one with a lifetime (the barricade), which would come back a wall
+    that never rots.
+- **`Farm.damage`** at 0 removes it as before, leaves the night's rubble
+  as before, and keeps `{"id", "level"}` in the state's new `ruins` (in
+  `RUN_DATA`; a save that predates it is filled in by `reconcile`).
+  `structure_lost` carries `ruin`.
+- **`Farm.clear_rubble`** still sweeps only the night's rubble, so
+  `Rewards._lost_tonight` and the tree's "nothing lost" still count only
+  tonight's. `ruin_at` and `ruin_cells` read the ruins.
+- **`Farm.place`** over a ruin takes its place.
+- **`Repair`** reads a ruin as the thing it was (`_mended`,
+  `Building.entry_for`, `made_of_one`):
+  - all of it is missing while its ground can take it;
+  - `_raise` puts it back on the first hit point, at its level, and the
+    field is told;
+  - a whole mend costs `REPAIR_PERCENT` of what it is made of. A gun is 5
+    iron in place of 12, and a level two keeps its level.
+- **`GuardianCursor.mend_target`** aims at a ruin, so the cursor mends it
+  in the build step and at night, as any defence.
+- **The view** draws a ruin with the wreck art the night's rubble used,
+  at its level from the state, past the morning.
+- **Not a standing wreck** like 0186's coop. An audit of every reader of a
+  defence found some thirty places a 0-hit-point occupant would be read
+  as live:
+  - the field's costs and burrows;
+  - the guns' list, the spitters' targets and the Harvester's charge;
+  - the power draw, the searchlight's light;
+  - the rewards' tallies.
+  A ruin is not an occupant, so none of them changed.
+
+The robot (`src/tools/autoplay.gd`):
+- **Its plan saves for each ruin's whole mend first.**
+- **The build step raises a ruin only whole.** On the first try it raised
+  them on the three hit points the purse ran to, and they were down again
+  on the first bite.
+- **A ruin is not counted lost**, so it is never bought again.
+- **Neither a ruin nor a lost one is planned round** (`_kept_to`): stepping
+  the cursor past them left them wanted and the day idle.
+
+The year, `--year 8` (32 runs, 1,726 s), against the one before it:
+
+| | Before | After |
+| --- | --- | --- |
+| `balanced` runs that reach autumn | 4 of 8 | 8 of 8 |
+| `balanced` lost: spring, summer, autumn | 4.8, 0.0, 7.0 | 2.6, 0.0, 10.4 |
+| `towers` lost: spring, summer, autumn | 0.4, 0.0, 12.2 | 0.4, 0.0, 11.1 |
+| `balanced` Autumn 7-10 held | 0% | 75% |
+| `towers` Autumn 9-11 held | 12% | 38-50% |
+
+- **A lost night is won back now.** `balanced` 9000 lost Spring 12-13 and
+  its line, mended its seven ruins over the Giant's repeats, and took the
+  Giant down. 9021 and 9049 did the same.
+- **Every boss to Summer 14 falls.** `balanced`'s autumn average went up
+  only because all eight runs reach it now.
+- **From Autumn 12 three lines in four fall.** The Scarecrow King
+  (1,200/5) was fought in four runs: untouched, or left at 712-906.
+
+The next call is the owner's, in BALANCE.md's "The owner's fifth call,
+played": the Scarecrow King sized to autumn's line, as the Giant and the
+Harvester were, and autumn's last week.
+
+- **Shots**: `implementation/shots/0277/ruins.png`, a new scene. The
+  morning after a line came down: a level two gun's, a crossbow's and a
+  wall's ruins lying past the sweep beside a gun still standing under its
+  tarp. Looked at.
+- **Hashes**:
+  - `SIM 323243396 -> 2260114289`: the state's new `ruins`, and the
+    defences the determinism run loses now leave theirs. Without the key
+    in a new game the run still moves, to 1737234130.
+  - DATA unchanged (941677928): no number moved.
+- **Checks**:
+  - `_task_0277_year_balance` (headless_v1) gains three asserts:
+    - a gun knocked down is an open cell and a level two ruin the morning
+      keeps, while a mine's rubble is swept; mending raises it at level two
+      for at most half its iron, the cursor aims at it, and a fence built
+      over a ruin takes its place;
+    - every defence ruins but a trap, a thing walked over and a thing
+      with a lifetime, and no building does;
+    - the robot's plan saves for a ruin's mend first and raises it only
+      whole.
+  - `_task_0053_repair` (headless_check) rewritten where the requirement
+    changed: a destroyed wall's ruin is all of it to mend, and an empty
+    cell still has nothing.
+  - The scenario count is 122.
+  - The tower and barrier showcases: the morning keeps a defence's ruin,
+    and sweeps only the night's rubble (a mine's, a barricade's). A loaded
+    save's tower ruins keep the level they fell at, where they used to fall
+    back to level one.
+  - `python tools/verify.py` - PASS (the SIM move accepted on the run before, which the showcases failed).

@@ -72,6 +72,11 @@ static func initial() -> Dictionary:
 		# What was destroyed and where, until the morning sweeps it up. Keyed
 		# by cell index, value is what used to stand there.
 		"rubble": {},
+		# **What stood where a defence was brought down** (task 0277), by
+		# cell: `{"id", "level"}`, kept past the morning until it is mended
+		# back up or built over. The rubble beside it is still only the
+		# night's.
+		"ruins": {},
 		# **Bumped by every placement and removal.** `Pathing` rebuilds its
 		# flow field when the one it holds was built for an older number - a
 		# counter rather than a hash of the occupants, because hashing them
@@ -299,6 +304,9 @@ static func walkable(state: Dictionary, cell: Vector2i) -> bool:
 static func place(state: Dictionary, cell: Vector2i, occupant_data: Dictionary) -> bool:
 	if not buildable(state, cell):
 		return false
+	# **Built over, a ruin is gone** (task 0277), whether it was mended back
+	# up or something else went there.
+	_ruins(state).erase(Grid.index(cell))
 	var occupants: Dictionary = state["occupants"]
 	occupants[Grid.index(cell)] = occupant_data.duplicate(true)
 	_changed(state)
@@ -351,10 +359,15 @@ static func damage(state: Dictionary, cell: Vector2i, amount: int) -> int:
 	on["hp"] = left - taken
 	if int(on["hp"]) <= 0:
 		var id := StringName(on["id"])
+		var level := maxi(int(on.get("level", 1)), 1)
 		remove(state, cell)
 		_leave_rubble(state, cell, id)
+		# **And a defence's ruin** (task 0277), at the level it stood at, to
+		# be mended back up.
+		if Building.ruins(id):
+			_ruins(state)[Grid.index(cell)] = {"id": id, "level": level}
 		Events.add(state, &"structure_lost", {
-			"id": id, "cell": [cell.x, cell.y],
+			"id": id, "cell": [cell.x, cell.y], "ruin": Building.ruins(id),
 		})
 	return taken
 
@@ -399,8 +412,38 @@ static func rubble_cells(state: Dictionary) -> Array:
 
 ## Sweep the yard. Called when a day begins: the night's wreckage is part of
 ## the night, and a farm that never cleared would silt up over ten of them.
+## The ruins are not swept (task 0277): they wait to be mended.
 static func clear_rubble(state: Dictionary) -> void:
 	state["rubble"] = {}
+
+
+## **The ruin on this cell** (task 0277): `{"id", "level"}` of the defence
+## brought down here, with nothing standing on it now; or empty.
+static func ruin_at(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var idx := Grid.index(cell)
+	if idx < 0 or not occupant(state, cell).is_empty():
+		return {}
+	var ruin: Dictionary = _ruins(state).get(idx, {})
+	return ruin.duplicate()
+
+
+## Every cell with a ruin on it, in cell order.
+static func ruin_cells(state: Dictionary) -> Array:
+	var out: Array = []
+	var keys: Array = _ruins(state).keys()
+	keys.sort()
+	for idx in keys:
+		var cell := Grid.cell(int(idx))
+		if occupant(state, cell).is_empty():
+			out.append(cell)
+	return out
+
+
+## The ruins, made for a save that predates them.
+static func _ruins(state: Dictionary) -> Dictionary:
+	if not state.has("ruins"):
+		state["ruins"] = {}
+	return state["ruins"]
 
 
 static func _leave_rubble(state: Dictionary, cell: Vector2i,

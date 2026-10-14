@@ -60,7 +60,7 @@ const RUN_DATA: Array = [
 	"burning", "crafting", "dig_spots", "entities", "fish_book", "fishing", "housed", "killed_by_kind",
 	"killed_by_kind_all_run", "kits", "last_catch", "last_result", "light_cells", "livestock",
 	"loot", "loot_laid",
-	"occupants", "payout", "plots", "produced", "repair_debt", "rubble", "shipping",
+	"occupants", "payout", "plots", "produced", "repair_debt", "rubble", "ruins", "shipping",
 	"stung",
 ]
 

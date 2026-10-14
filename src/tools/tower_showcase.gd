@@ -92,7 +92,10 @@ func _run() -> void:
 		Farm.clear_rubble(_state)
 		await _settle()
 		expect(int(_state["grid_version"]) == version, "Morning rubble cleanup does not change the core occupancy version")
-		expect(_world._wreck_sprites.is_empty() and _world._tower_history.is_empty(), "Morning frees every destroyed tower sprite and remembered level")
+		# **A tower's ruin outlives the morning** (task 0277), at its level -
+		# the state's, not the view's memory.
+		expect(_world._wreck_sprites.size() == _cells.size() and _world._tower_history.is_empty(), "Morning keeps each destroyed tower's ruin, its level the state's")
+		_check_wrecks(true)
 	await _outlets()
 	await _ghosts()
 	await _launches()
@@ -194,12 +197,16 @@ func _check_wrecks(remembered: bool) -> void:
 	for cell in _cells:
 		var idx := Grid.index(cell)
 		var sprite: Sprite2D = _world._wreck_sprites.get(idx)
-		expect(Farm.occupant(_state, cell).is_empty() and Farm.rubble_at(_state, cell) != &"", "Rubble remains outside logical occupancy")
+		# The night's rubble, or past the morning its ruin (task 0277).
+		var fallen := Farm.rubble_at(_state, cell)
+		if fallen == &"":
+			fallen = StringName(Farm.ruin_at(_state, cell).get("id", &""))
+		expect(Farm.occupant(_state, cell).is_empty() and fallen != &"", "Rubble remains outside logical occupancy")
 		if sprite == null:
 			expect(false, "Missing wreck at " + str(cell))
 			continue
 		var level := (cell.y - 5) / 4 + 1 if remembered else 1
-		var on := {"id": Farm.rubble_at(_state, cell), "level": level}
+		var on := {"id": fallen, "level": level}
 		expect(sprite.texture.resource_path == WorldView.BUILDING_DIR + str(WorldView.tower_name(on, "_wreck")) + ".png", "Destruction selects the actual remembered level")
 		expect(sprite.position == Vector2(cell) * 16 + Vector2(8, 16) and sprite.offset == Vector2(-16, -44), "Collapsed art keeps its source canvas/contact")
 
@@ -405,12 +412,13 @@ func _loaded_rubble() -> void:
 	await _settle()
 	for cell in _cells:
 		Farm.damage(_state, cell, 9999)
-	# Saves retain the family, but do not contain destroyed tower levels.
+	# **A save keeps a ruin's level** (task 0277): the state's `ruins`, so a
+	# loaded farm's wrecks stand at the level they fell at.
 	_state = State.copy(_state)
 	await _settle()
-	_check_wrecks(false)
-	expect(_world._tower_history.is_empty(), "Loaded rubble cannot invent unsaved destroyed levels")
-	await _shoot("loaded_rubble", "Loaded save rubble uses honest family L1 fallback; save format unchanged")
+	_check_wrecks(true)
+	expect(_world._tower_history.is_empty(), "Loaded rubble's levels are the save's, not the view's memory")
+	await _shoot("loaded_rubble", "Loaded save ruins keep the level they fell at")
 	var at := _cells[0]
 	_place(&"gun_tower", 1, at)
 	await _settle()

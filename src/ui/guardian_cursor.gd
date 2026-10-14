@@ -200,9 +200,12 @@ func cancel_aim(event: InputEvent) -> bool:
 ## `Repair` says it can be mended now, or (-1, -1). The one rule both the
 ## repair look and the confirm read.
 static func mend_target(state: Dictionary, cell_at: Vector2i) -> Vector2i:
-	if state.is_empty() or not Grid.in_bounds(cell_at) \
-			or Farm.occupant(state, cell_at).is_empty():
+	if state.is_empty() or not Grid.in_bounds(cell_at):
 		return Vector2i(-1, -1)
+	# **A ruin is mended where it lies** (task 0277): one cell, nothing on it.
+	if Farm.occupant(state, cell_at).is_empty():
+		return cell_at if not Farm.ruin_at(state, cell_at).is_empty() \
+			and Repair.can_mend(state, cell_at) else Vector2i(-1, -1)
 	var anchor := Building.anchor_of(state, cell_at)
 	return anchor if Repair.can_mend(state, anchor) else Vector2i(-1, -1)
 

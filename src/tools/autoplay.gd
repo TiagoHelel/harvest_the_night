@@ -623,14 +623,14 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 			# the season's weapon** (task 0277), which is waited for while the
 			# day gets the rest of its bill.
 			if int(ahead["ahead"]) == 0 and not _on_order(state, StringName(res)) \
-					and not bool(ahead.get("weapon", false)):
+					and not _kept_to(ahead):
 				_next_step(state)
 				return GameData.SECONDS
 			continue
 		# Only the entry at the cursor is planned around. One further on,
 		# behind defences already paid for, waits until the build step has
 		# put those up and it is at the front.
-		if int(ahead["ahead"]) == 0:
+		if int(ahead["ahead"]) == 0 and not _kept_to(ahead):
 			_next_step(state)
 			return GameData.SECONDS
 		short = {}
@@ -1003,7 +1003,12 @@ static func _lost_defences(state: Dictionary) -> Array:
 		if Traps.is_trap(StringName(id)) or Building.kit_only(StringName(id)) \
 				or entry.has("lifetime_ticks"):
 			continue
+		# **A ruin is not lost** (task 0277): it is mended back up, not
+		# bought again.
 		var standing := Farm.cells_with(state, StringName(id)).size()
+		for cell in Farm.ruin_cells(state):
+			if StringName(Farm.ruin_at(state, cell)["id"]) == StringName(id):
+				standing += 1
 		for _i in maxi(int(placed[id]) - standing, 0):
 			out.append(StringName(id))
 	out.sort_custom(func(a: StringName, b: StringName) -> bool:
@@ -1014,8 +1019,18 @@ static func _lost_defences(state: Dictionary) -> Array:
 
 
 ## The most hurt defence the ledger can mend, mended a press's worth through
-## `repair_cell`. False when nothing is.
+## `repair_cell`. False when nothing is. **A ruin first** (task 0277): a gun
+## raised is a gun back in the line.
 static func _mend_one(state: Dictionary) -> bool:
+	for cell in Farm.ruin_cells(state):
+		# **Whole, or not yet** (task 0277): a gun raised on the three hit
+		# points the purse ran to is down again on the first bite.
+		if Repair.max_affordable(state, cell) < Repair.full_hp_at(state, cell):
+			continue
+		_press(state, &"repair_cell", cell)
+		if not Farm.occupant(state, cell).is_empty():
+			_did(state, &"raised")
+			return true
 	for idx in _sorted_occupants(state):
 		var cell := Grid.cell(int(idx))
 		if not _is_defence(state, cell) or Repair.max_affordable(state, cell) <= 0:
@@ -1163,6 +1178,15 @@ static func _the_plan_ahead(state: Dictionary, policy: Dictionary) -> Dictionary
 	var plan: Array = _plan_of(state, policy)
 	var step := int(state.get("autoplay_step", 0))
 	var bill := {}
+	# **The ruins mended back first** (task 0277): what the nights brought
+	# down, whole, at the share of its price a mend costs - before anything
+	# is bought again or new.
+	for cell in Farm.ruin_cells(state):
+		var with_ruin := _plus(bill, Repair.cost_at(state, cell, Repair.full_hp_at(state, cell)))
+		if not Resources.missing(state, with_ruin).is_empty():
+			return {"want": StringName(Farm.ruin_at(state, cell)["id"]), "ahead": 0,
+				"saving_for": with_ruin, "rebuild": true}
+		bill = with_ruin
 	for lost in _lost_defences(state):
 		var with_lost := _plus(bill, Building.cost_of(StringName(lost)))
 		if not Resources.missing(state, with_lost).is_empty():
@@ -1251,6 +1275,14 @@ static func _season_weapon(state: Dictionary, policy: Dictionary) -> StringName:
 static func _kept_for_weapon(state: Dictionary, policy: Dictionary) -> Dictionary:
 	var weapon := _season_weapon(state, policy)
 	return Building.cost_of(weapon) if weapon != &"" else {}
+
+
+## **What the plan holds to rather than walking round** (task 0277): the
+## season's weapon, and what the nights took - a ruin or a lost one. The
+## cursor is the plan's; these are not on it, and stepping it past them
+## would leave them wanted and the day doing nothing.
+static func _kept_to(ahead: Dictionary) -> bool:
+	return bool(ahead.get("weapon", false)) or bool(ahead.get("rebuild", false))
 
 
 ## **The tree's nodes it walks** (task 0277): the year-round list, then this

@@ -119,12 +119,14 @@ static func per_hp_hundredths(state: Dictionary,
 				* GameData.HOUSE_REPAIR_PERCENT * discount / 100 * kept / 100, 1)
 		return out
 
-	var entry := Building.entry_at(state, cell)
+	# **A ruin is priced as the thing it was** (task 0277): its id and level.
+	var mended := _mended(state, cell)
+	var entry := Building.entry_for(mended)
 	if entry.is_empty():
 		return out
 	var full := maxi(int(entry.get("hp", 0)), 1)
 	# What it is made of (task 0231): its price, and a rebuilding level's.
-	var cost := Building.made_of(state, cell)
+	var cost := Building.made_of_one(mended)
 	for res in GameData.sorted_names(cost.keys()):
 		# `cost * 100 * percent / 100 / full`, with the hundreds cancelled.
 		# **At least one hundredth**, so nothing on the farm is free to keep
@@ -166,7 +168,12 @@ static func can_mend(state: Dictionary, cell: Vector2i) -> bool:
 static func damage_at(state: Dictionary, cell: Vector2i) -> int:
 	var on := Farm.occupant(state, cell)
 	if on.is_empty():
-		return 0
+		# **A ruin is all of it missing** (task 0277), while the ground it
+		# stood on is still there to raise it on.
+		if Farm.ruin_at(state, cell).is_empty() \
+				or not Farm.why_not_buildable(state, cell).is_empty():
+			return 0
+		return full_hp_at(state, cell)
 	if StringName(on["id"]) == HOUSE:
 		return maxi(Phases.house_full(state) - int(state["house_hp"]), 0)
 	var full := full_hp_at(state, cell)
@@ -177,7 +184,15 @@ static func damage_at(state: Dictionary, cell: Vector2i) -> int:
 ## or 0 for nothing mendable. Not the house, whose answer is
 ## `Phases.house_full()`.
 static func full_hp_at(state: Dictionary, cell: Vector2i) -> int:
-	return int(Building.entry_at(state, cell).get("hp", 0))
+	return int(Building.entry_for(_mended(state, cell)).get("hp", 0))
+
+
+## **What is mended on this cell** (task 0277): what stands there, or the
+## ruin of a defence that stood there - its id and its level - when nothing
+## does.
+static func _mended(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var on := Farm.occupant(state, cell)
+	return on if not on.is_empty() else Farm.ruin_at(state, cell)
 
 
 ## Whether there is anything here worth spending food on.
@@ -248,6 +263,8 @@ static func apply(state: Dictionary, cell: Vector2i, hp: int) -> int:
 ## repair puts its share back free. Returns how many went in.
 static func restore(state: Dictionary, cell: Vector2i, hp: int) -> int:
 	var on := Farm.occupant(state, cell)
+	if hp > 0 and on.is_empty():
+		return _raise(state, cell, hp)
 	if hp <= 0 or on.is_empty():
 		return 0
 	if StringName(on["id"]) == HOUSE:
@@ -266,6 +283,24 @@ static func restore(state: Dictionary, cell: Vector2i, hp: int) -> int:
 		if was <= 0:
 			Farm.touch(state)
 	return maxi(int(on["hp"]) - was, 0)
+
+
+## **A ruin raised** (task 0277): the defence back on its cell at its level,
+## with the hit points mended into it - from the first one, as a wrecked coop
+## comes back - and the field told, so it is a thing in the way again. Its
+## lights, its power and its gun are the ones it had: nothing about it is new.
+## Returns how many went in.
+static func _raise(state: Dictionary, cell: Vector2i, hp: int) -> int:
+	var ruin := Farm.ruin_at(state, cell)
+	if ruin.is_empty():
+		return 0
+	var full := maxi(int(Building.entry_for(ruin).get("hp", 1)), 1)
+	var standing := {"id": ruin["id"], "hp": mini(hp, full)}
+	if int(ruin["level"]) > 1:
+		standing["level"] = int(ruin["level"])
+	if not Farm.place(state, cell, standing):
+		return 0
+	return int(standing["hp"])
 
 
 ## Put `hp` hit points on the slate and take whatever whole resources fall

@@ -1,4 +1,10 @@
-# The year - task 0277 (2026-10-13), blocked four times
+# The year - task 0277 (2026-10-13), blocked five times
+
+**Fifth block, after the owner's fifth call** - see "The owner's fifth
+call, played" below: a defence brought down is a ruin, mended back at half
+its price. Every `balanced` run reaches autumn, spring costs it 2.6 nights,
+summer is clean, and every boss to Summer 14 falls. Autumn's last week and
+the Scarecrow King are where the year stops.
 
 **Fourth block, after the owner's fourth call** - see "The owner's fourth
 call, played" below: the robot saves for autumn's mortar and puts it up,
@@ -48,6 +54,97 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's fifth call, played: a defence brought down is a ruin, mended back (2026-10-13)
+
+The owner chose the first road for what a lost night costs: "vai na 1,
+defesa zerada fica destruída e conserta". **Every `balanced` run now
+reaches autumn, spring costs it 2.6 nights, and summer is clean for both
+shooting policies.** Autumn's last week and the Scarecrow King are where
+the year stops now.
+
+**The rule** (`Building.ruins`, `Farm`, `Repair`):
+- **A defence brought to 0 leaves a ruin.** Its cell is open as before:
+  nothing to shoot with or at, a hole the field routes through. Its id and
+  level stay in the state's `ruins` past the morning's sweep.
+- **The rubble is still only the night's**, so the night's payout and
+  "nothing lost" count only tonight's.
+- **Not a trap** (spent), **not one walked over** (the bait and the
+  garlic, eaten), and **not one with a lifetime** (the barricade, which
+  would come back a wall that never rots).
+- **A ruin is mended back** by the same road a hurt defence is: the cursor
+  in the build step or at night, `Repair`. The first hit point raises it
+  on its cell at its level, and mending goes on to whole. A whole mend
+  costs `REPAIR_PERCENT` (50%) of what it is made of: a gun about 5 iron in
+  place of 12, a level two keeping its level.
+- **Something built over a ruin takes its place.**
+- **Not a wreck that stands**, as a coop or barn does since 0186. A
+  standing wreck would be a wall the zombies cannot bite and the guns
+  cannot see, and every system that reads a defence would have had to
+  learn to skip it. A ruin is not an occupant, so none of them had to.
+
+**The view** draws a ruin with the wreck art the night's rubble already
+used, at its level, until it is mended. A new scene, `ruins`, shows a line
+the morning after.
+
+**The robot** (`src/tools/autoplay.gd`):
+- **Mends its ruins first.** The plan saves for each ruin's whole mend
+  before anything new.
+- **Raises a ruin only whole.** On the first try it raised them on the
+  three hit points the purse ran to, and the next bite took them down.
+- **Does not count a ruin as lost**, so it does not buy one again at full
+  price.
+
+### The year after it
+
+`--year 8` (32 runs in 1,726 s, 8 processes, a run 117-659 s):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.6    0.0   10.4    0.0         1.9  0.0  7.0  0.0   0/8    8/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0   11.1    0.0         0.0  0.0  7.0  0.0   0/8    8/8
+  walls              8.1    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+
+  spring  no dominant strategy: clean runs towers 5, balanced 4, economy 0, walls 0
+  summer  no dominant strategy: clean runs balanced 8, towers 8, economy 0, walls 0
+
+    balanced  spring  100 100 100 100 100 100 100 100  88  88  88  75  50  50
+              summer  100 100 100 100 100 100 100 100 100 100 100 100 100 100
+              autumn  100 100 100  75  88  88  75  75  75  75  62  25  12   0
+    towers    spring  100 100  62 100 100 100 100 100 100 100 100 100 100 100
+              summer  100 100 100 100 100 100 100 100 100 100 100 100 100 100
+              autumn  100 100 100  88 100 100  62  62  50  38  38  25  25   0
+```
+
+Against the year before it (the mortar rule on, no ruins):
+
+| | Before | After |
+| --- | --- | --- |
+| `balanced` runs that reach autumn | 4 of 8 | **8 of 8** |
+| `balanced` spring nights lost | 4.8 | **2.6** |
+| `balanced` autumn, Autumn 7-10 held | 0% | **75%** |
+| `towers` autumn, Autumn 9-11 held | 12% | **38-50%** |
+
+What it says:
+- **A lost night is won back now.** `balanced` 9000 lost Spring 12-13 and
+  its line, mended seven ruins over the Giant's repeats, and took the
+  Giant down. 9021 and 9049 did the same.
+- **Every boss to Summer 14 falls on every seed.** The Giant fell for all
+  eight `balanced` runs, some after repeats, and the Harvester fell on
+  the first fight for all sixteen runs that met it.
+- **Autumn's last week is the wall.** From Autumn 12 three lines in four
+  fall, and the Scarecrow King was fought in four runs: untouched (the house
+  went first) or left at 712-906 of its 1,200.
+- `walls` and `economy` still do not get out of spring.
+
+### The next call is the owner's
+
+1. **The Scarecrow King sized to autumn's line**, as the Giant and the
+   Harvester were. At 1,200 and armour 5 every line that reached it took
+   300-500 a fight.
+2. **Autumn's last week** (Autumn 12-14, the diggers and the King's
+   company): 0-25% of lines hold it.
 
 ## The owner's fourth call, played: the robot saves for the mortar (2026-10-13)
 

@@ -9696,7 +9696,10 @@ func _task_0053_repair() -> void:
 		"a chewed one offers the farmer nothing and waits for the cursor",
 		str(Interact.verb_at(night, spot)))
 
-	# **A destroyed one cannot be repaired, only rebuilt.** The requirement.
+	# **A destroyed one is a ruin, mended back** (task 0277, the owner's
+	# call, in place of this requirement's "cannot be repaired, only
+	# rebuilt"): the wall is gone from its cell and its ruin is all of it to
+	# mend. A cell that never held anything still has nothing to mend.
 	var rubble := _armed_prep(3501)
 	Resources.gain(rubble, {GameData.FOOD: 400, GameData.WOOD: 400})
 	var gone := _room_for(rubble, Vector2i(1, 1))
@@ -9704,11 +9707,21 @@ func _task_0053_repair() -> void:
 	_night_falls(rubble)
 	Farm.damage(rubble, gone, wall_hp * 2)
 	expect(Farm.is_empty(rubble, gone), "the wall is gone")
-	expect(Repair.damage_at(rubble, gone) == 0,
-		"and an empty cell has nothing to mend",
+	expect(Repair.damage_at(rubble, gone) == wall_hp,
+		"and its ruin is all of it to mend",
 		str(Repair.damage_at(rubble, gone)))
-	expect(not Repair.can_mend(rubble, gone), "so it offers nothing")
-	expect(Repair.apply(rubble, gone, 10) == 0,
+	var never := Vector2i(-1, -1)
+	for step in range(1, Grid.WIDTH):
+		var here := gone + Vector2i(step, 0)
+		if Grid.in_bounds(here) and Farm.is_empty(rubble, here) \
+				and Farm.ruin_at(rubble, here).is_empty():
+			never = here
+			break
+	expect(never.x >= 0 and Repair.damage_at(rubble, never) == 0,
+		"while an empty cell has nothing to mend",
+		str(Repair.damage_at(rubble, never)))
+	expect(not Repair.can_mend(rubble, never), "so it offers nothing")
+	expect(Repair.apply(rubble, never, 10) == 0,
 		"and putting hit points into a hole does nothing at all")
 
 	# **An empty larder offers nothing either.**
@@ -14725,9 +14738,10 @@ func _task_0082_shots() -> void:
 	# night's forecast. A hundred and fifteen since 0257: a Blood Moon's. A
 	# hundred and eighteen since 0258: the wave in the fog, in the rain and
 	# under a Blood Moon. A hundred and twenty-one since 0293: the first
-	# week's bed, cursor and forecast lines.
-	expect(names.size() == 121,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field and the 1.0 farm",
+	# week's bed, cursor and forecast lines. A hundred and twenty-two since
+	# 0277: a line's ruins the morning after.
+	expect(names.size() == 122,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",

@@ -1,7 +1,7 @@
 # 0277 - Balancing the year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** blocked - the robot saves for autumn's mortar and puts it up, and autumn still falls from Autumn 7: a lost night takes the line and no run wins one back - owner to choose what a lost night costs the line, the robot rebuilding out of what it has, or autumn's Full Moon and third side
+- **Status:** blocked - a defence brought down is a ruin mended back: every balanced run reaches autumn, spring costs 2.6 nights, every boss to Summer 14 falls - and from Autumn 12 three lines in four fall and the Scarecrow King is left at 712-906 of 1,200 - owner to choose the King sized to autumn's line, or autumn's last week
 - **Depends on:** 0271, 0272, 0273, 0274, 0276, 0259
 - **Likely files:** tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd
 

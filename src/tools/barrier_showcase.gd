@@ -92,7 +92,10 @@ func _run() -> void:
 			var version := int(_state["grid_version"])
 			Farm.clear_rubble(_state)
 			await _settle()
-			expect(_world._wreck_sprites.is_empty() and int(_state["grid_version"]) == version, "Morning clears ground ruins without changing occupancy")
+			# **A defence's ruin outlives the morning** (task 0277): what is
+			# swept is the night's rubble - a mine's, a barricade's.
+			var kept := lost.size() if Building.ruins(StringName(family)) else 0
+			expect(_world._wreck_sprites.size() == kept and int(_state["grid_version"]) == version, "Morning sweeps the night's rubble without changing occupancy; a defence's ruin stays to be mended")
 	await _masks_and_borders()
 	await _ghosts_and_route()
 	await _barricades()

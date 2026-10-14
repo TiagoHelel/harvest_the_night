@@ -174,6 +174,22 @@ static func wrecks(id: StringName) -> bool:
 	return entry != null and bool((entry as Dictionary).get("wrecks", false))
 
 
+## **A defence brought to 0 is a ruin, mended back** (task 0277, the owner's
+## call: "defesa zerada fica destruída e conserta"). It leaves the cell as
+## anything destroyed does - a hole in the line the field routes through,
+## nothing to shoot with or at - and its rubble stays, with its level, until
+## it is mended back up (`Repair`) or something else is built there. Not a
+## trap, which is spent; not one walked over (the bait, the garlic), which is
+## eaten; not one with a lifetime (the barricade), which would come back a
+## wall that never rots. The year's robot lost four to eight towers on a lost
+## night, each twelve iron or more to put back on ten to twenty a day, and
+## never won another night.
+static func ruins(id: StringName) -> bool:
+	var entry: Variant = GameData.DEFENCES.get(id, null)
+	return entry != null and not Traps.is_trap(id) and not walked_over(id) \
+		and not (entry as Dictionary).has("lifetime_ticks")
+
+
 ## Whether the thing on this cell is standing wrecked.
 static func is_wrecked(state: Dictionary, cell: Vector2i) -> bool:
 	var on := Farm.occupant(state, cell)
@@ -221,7 +237,12 @@ static func level_at(state: Dictionary, cell: Vector2i) -> int:
 ## tower - what it hits for, how far it sees, how long it reloads - gets the
 ## upgraded answer without knowing levels exist.
 static func entry_at(state: Dictionary, cell: Vector2i) -> Dictionary:
-	var on := Farm.occupant(state, cell)
+	return entry_for(Farm.occupant(state, cell))
+
+
+## The same for an occupant's record off the cell - a ruin's (task 0277),
+## which is an id and a level with nothing standing.
+static func entry_for(on: Dictionary) -> Dictionary:
 	if on.is_empty():
 		return {}
 	var base: Variant = entry_of(StringName(on["id"]))
@@ -263,7 +284,11 @@ static func levelled_stat(on: Dictionary, key: String, missing: int = 0) -> int:
 ## wall was rebuilt in is in its walls, where the gunpowder that bought a
 ## tower's level three is not (0113). What mending it takes a share of.
 static func made_of(state: Dictionary, cell: Vector2i) -> Dictionary:
-	var on := Farm.occupant(state, cell)
+	return made_of_one(Farm.occupant(state, cell))
+
+
+## The same for an occupant's record off the cell - a ruin's (task 0277).
+static func made_of_one(on: Dictionary) -> Dictionary:
 	if on.is_empty():
 		return {}
 	var entry: Variant = entry_of(StringName(on["id"]))

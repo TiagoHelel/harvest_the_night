@@ -144,6 +144,7 @@ const SCENARIOS: Array = [
 	["year_credits", "the credits before the year ending", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
+	["ruins", "the morning after a line came down: a level two gun's ruin, a crossbow's and a wall's lying where they fell beside a gun still standing, past the dawn's sweep - each mended back at the build step", ""],
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
 	["searchlight", "a lit and an unlit tower line at night: Winter 2, a generator running, the east road with a line of gun towers north of it under a searchlight and a line south of it in the dark, tanks coming down the road - the lit line firing a tile further than the dark one can", ""],
@@ -814,6 +815,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"year_end": _set_year_end(state)
 		"year_credits": _set_year_credits(state)
 		"trampled": _set_trampled(state)
+		"ruins": _set_ruins(state)
 		"night_loot": _set_night_loot(state)
 		"bone_meal": _set_bone_meal(state)
 		"tarps": _set_tarps(state)
@@ -1858,6 +1860,35 @@ func _set_calm_morning(state: Dictionary) -> void:
 ## across the horde's east route by the house, the middle row on it; the
 ## house falls, the report is confirmed, and he is outside looking at them.
 ## The middle row is trampled and the two either side are not.
+## **Ruins** (task 0277, the owner's call): three defences brought to 0 on
+## the east side of the house - a level two gun, a crossbow and a wall - and
+## a gun still standing beside them, then the morning's sweep, which leaves a
+## defence's ruin where it fell.
+func _set_ruins(state: Dictionary) -> void:
+	state["day"] = 6
+	state["nights_won"] = 5
+	var near := Farm.house_centre(state)
+	var placed: Array = []
+	for want in [[&"gun_tower", 2], [&"auto_crossbow", 1], [&"wall", 1], [&"gun_tower", 1]]:
+		var cell := Vector2i(-1, -1)
+		for dx in range(10, 18):
+			var here := near + Vector2i(dx, 2)
+			if Farm.buildable(state, here):
+				cell = here
+				break
+		if cell.x < 0:
+			continue
+		var standing := {"id": want[0], "hp": 1}
+		if int(want[1]) > 1:
+			standing["level"] = int(want[1])
+		Farm.place(state, cell, standing)
+		placed.append(cell)
+	for cell in placed.slice(0, 3):
+		Farm.damage(state, cell, 9999)
+	Farm.clear_rubble(state)
+	_look_at(near + Vector2i(11, 1))
+
+
 func _set_trampled(state: Dictionary) -> void:
 	state["day"] = 3
 	state["nights_won"] = 2

@@ -2629,20 +2629,33 @@ func _refresh_wrecks() -> void:
 	if _wrecks == null or _state.is_empty():
 		return
 	var signature: int = [(_state.get("rubble", {}) as Dictionary).hash(),
+		(_state.get("ruins", {}) as Dictionary).hash(),
 		int(_state.get("grid_version", 0)), _tower_history.hash()].hash()
 	if signature == _wreck_signature:
 		return
 	_wreck_signature = signature
 	var visible: Dictionary = {}
-	for cell in Farm.rubble_cells(_state):
+	# **The night's rubble and the ruins past it** (task 0277): a defence
+	# brought down lies where it fell until it is mended back up.
+	var wrecked: Array = Farm.rubble_cells(_state)
+	for cell in Farm.ruin_cells(_state):
+		if not wrecked.has(cell):
+			wrecked.append(cell)
+	for cell in wrecked:
 		var id := Farm.rubble_at(_state, cell)
+		if id == &"":
+			id = StringName(Farm.ruin_at(_state, cell).get("id", &""))
 		var stand_in := stand_in_tower(id)
 		if (not authored_tower(id) and not stand_in and id not in [&"wall", &"fence", &"barricade", &"mine", &"decoy", &"electric_fence", &"sandbag_wall"]) or not Farm.occupant(_state, cell).is_empty():
 			continue
 		var idx := Grid.index(cell)
 		visible[idx] = true
 		# The save format stores only the family. A fresh view honestly uses L1.
+		# **A ruin's level is the state's** (task 0277), which outlives the view.
 		var remembered: Dictionary = _tower_history.get(idx, {"id": id, "level": 1})
+		var ruin := Farm.ruin_at(_state, cell)
+		if not ruin.is_empty():
+			remembered = {"id": id, "level": int(ruin["level"])}
 		var sprite: Sprite2D = _wreck_sprites.get(idx)
 		if sprite == null:
 			sprite = Sprite2D.new()

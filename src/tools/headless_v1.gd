@@ -12125,8 +12125,9 @@ func _task_0276_year_autoplay() -> void:
 ## 13 in six cells with nothing to do; and it kept nine of every fish for the
 ## kitchen, $3 in the purse and a tower to put back. And the owner's calls:
 ## spring's stall carries `SPRING_IRON`, the robot buys it when the purse can
-## spare it, the RUN line says what each boss had left, and the robot saves
-## for its season's weapon - autumn's mortar - before anything else new.
+## spare it, the RUN line says what each boss had left, the robot saves for
+## its season's weapon - autumn's mortar - before anything else new, and a
+## defence brought to 0 is a ruin, mended back up.
 func _task_0277_year_balance() -> void:
 	var state := State.create(27700)
 	var bounds := Farm.house_bounds(state)
@@ -12349,6 +12350,69 @@ func _task_0277_year_balance() -> void:
 			and Autoplay._kept_for_weapon(autumn, gunner).is_empty(),
 		"autumn's plan saves for the mortar first, keeps its iron from a gun, puts it up once paid for, and then keeps nothing",
 		"%s %s %s" % [str(saved), str(guns_kept_back), str(Farm.cells_with(autumn, &"mortar"))])
+
+	# **A defence brought to 0 is a ruin, mended back** (the owner's call): a
+	# level two gun knocked down leaves its cell open and a ruin at level two
+	# that the morning does not sweep, where a mine's rubble goes; mending it
+	# raises the level two gun for half its price in its own materials, and
+	# something built over a ruin takes its place.
+	var ruined := State.create(27711)
+	var gun_cell := Autoplay._room_for(ruined, &"gun_tower")
+	Farm.place(ruined, gun_cell, {"id": &"gun_tower", "hp": 1, "level": 2})
+	var wall_cell := Autoplay._room_for(ruined, &"wall")
+	Farm.place(ruined, wall_cell, {"id": &"wall", "hp": 1})
+	var mine_cell := Autoplay._room_for(ruined, &"mine")
+	Farm.place(ruined, mine_cell, {"id": &"mine", "hp": 1})
+	for cell in [gun_cell, wall_cell, mine_cell]:
+		Farm.damage(ruined, cell, 9999)
+	Farm.clear_rubble(ruined)
+	var gun_ruin := Farm.ruin_at(ruined, gun_cell)
+	var level_two_hp := Building.levelled_stat({"id": &"gun_tower", "level": 2}, "hp")
+	var whole_mend := Repair.cost_at(ruined, gun_cell, level_two_hp)
+	var gun_iron := int((GameData.DEFENCES[&"gun_tower"]["cost"] as Dictionary)[GameData.IRON])
+	var ruin_open := Farm.walkable(ruined, gun_cell) and Farm.occupant(ruined, gun_cell).is_empty()
+	Resources.gain(ruined, {GameData.WOOD: 100, GameData.IRON: 100, GameData.MONEY: 200})
+	var aimed := GuardianCursor.mend_target(ruined, gun_cell)
+	var raised := Repair.apply(ruined, gun_cell, level_two_hp)
+	var back := Farm.occupant(ruined, gun_cell)
+	Farm.place(ruined, wall_cell, {"id": &"fence", "hp": 1})
+	expect(gun_ruin == {"id": &"gun_tower", "level": 2} and ruin_open and aimed == gun_cell
+			and Repair.damage_at(ruined, mine_cell) == 0 and Farm.rubble_at(ruined, mine_cell) == &""
+			and int(whole_mend.get(GameData.IRON, 0)) > 0
+			and int(whole_mend.get(GameData.IRON, 0)) <= gun_iron * GameData.REPAIR_PERCENT / 100
+			and raised == level_two_hp and StringName(back.get("id", &"")) == &"gun_tower"
+			and int(back.get("level", 1)) == 2 and int(back.get("hp", 0)) == level_two_hp
+			and Farm.ruin_at(ruined, gun_cell).is_empty() and Farm.rubble_at(ruined, gun_cell) == &""
+			and Farm.ruin_at(ruined, wall_cell).is_empty() and Farm.rubble_at(ruined, wall_cell) == &"",
+		"a gun knocked down is an open cell and a level two ruin the morning keeps, a mine's rubble is swept; mending raises it at level two for half its iron, and a fence built over a ruin takes its place",
+		"%s %s %s %d %s" % [str(gun_ruin), str(whole_mend), str(back), raised, str(aimed)])
+	expect(Building.ruins(&"gun_tower") and Building.ruins(&"wall") and Building.ruins(&"mortar")
+			and not Building.ruins(&"mine") and not Building.ruins(&"barricade")
+			and not Building.ruins(&"zombie_bait") and not Building.ruins(&"garlic_braid")
+			and not Building.ruins(&"kitchen"),
+		"every defence ruins but a trap, a thing walked over and a thing with a lifetime; no building does")
+
+	# **The robot mends its ruins back, whole**: its plan saves for a ruin's
+	# mend before anything else, and the build step raises it only once the
+	# purse runs to all of it.
+	var mender := State.create(27712)
+	var mend_policy := SuiteKit.early_policy(&"towers")
+	mend_policy.erase("seasons")
+	var mend_cell := Autoplay._room_for(mender, &"gun_tower")
+	Farm.place(mender, mend_cell, {"id": &"gun_tower", "hp": 1})
+	Farm.damage(mender, mend_cell, 9999)
+	Resources.spend(mender, GameData.IRON, Resources.amount(mender, GameData.IRON))
+	var mend_ahead := Autoplay._the_plan_ahead(mender, mend_policy)
+	NightRoad.into_build(mender)
+	var raised_poor := Autoplay._mend_one(mender)
+	Resources.gain(mender, {GameData.IRON: 20, GameData.WOOD: 20, GameData.MONEY: 50})
+	var raised_rich := Autoplay._mend_one(mender)
+	var gun_full := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["hp"])
+	expect(StringName(mend_ahead["want"]) == &"gun_tower" and bool(mend_ahead.get("rebuild", false))
+			and not raised_poor and raised_rich
+			and int(Farm.occupant(mender, mend_cell).get("hp", 0)) == gun_full,
+		"the robot's plan saves for a ruin's mend first, and it raises the ruin only whole",
+		"%s %s %s %s" % [str(mend_ahead), str(raised_poor), str(raised_rich), str(Farm.occupant(mender, mend_cell))])
 	_completed += 1
 
 ## **Task 0281: the new day's sounds.** Every new id is a file. What a verb is
