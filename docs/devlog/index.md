@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-256 tasks over 12 days,  to 2026-10-14. One at a time, each one finished and checked before the next was started.
+257 tasks over 12 days,  to 2026-10-14. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -300,10 +300,11 @@ is the sort of thing this list exists to say out loud.
 | 0277 | Balancing the year, the King's company at three quarters | 2026-10-14 |
 | 0277 | Balancing the year, autumn's curve | 2026-10-14 |
 | 0277 | Balancing the year, the Winter Lord sized to winter | 2026-10-14 |
+| 0277 | Balancing the year, autumn's Full Moon | 2026-10-14 |
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 138 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 139 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -443,6 +444,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Balancing the year, the King's company at three quarters** (0277) - `data` 3440354384 -> 1444073881
 - **Balancing the year, autumn's curve** (0277) - `data` 1444073881 -> 488203718
 - **Balancing the year, the Winter Lord sized to winter** (0277) - `data` 488203718 -> 3280859363
+- **Balancing the year, autumn's Full Moon** (0277) - `data` 3280859363 -> 2774795767
 
 ## What went wrong
 

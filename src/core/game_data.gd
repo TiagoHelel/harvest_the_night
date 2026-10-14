@@ -3357,19 +3357,23 @@ const KEY_NIGHTS: Dictionary = {
 		"opening_ticks": 0,
 		"gap_ticks": 8 * SECONDS,
 		# In crowds, as summer's are.
-		"interval_ticks": 10,
+		"interval_ticks": 12,
+		# **At 80% of what 0273 wrote, releases stretched alike** (task 0277,
+		# the owner's call on autumn's Full Moon): the night lines broke on and
+		# never won back. At 5,836 it is still the largest of autumn's first
+		# half, over Autumn 6's 5,561, and under the King's night.
 		"waves": [
-			[&"walker", 30, 0],
-			[&"crow", 6, 2],
-			[&"breaker", 14, 1],
-			[&"rat", 30, 0],
-			[&"tank", 9, 2],
-			[&"spitter", 10, 1],
-			[&"runner", 20, 0],
-			[&"walker", 30, 1],
-			[&"crow", 6, 0],
-			[&"tank", 7, 0],
-			[&"breaker", 10, 2],
+			[&"walker", 24, 0],
+			[&"crow", 5, 2],
+			[&"breaker", 11, 1],
+			[&"rat", 24, 0],
+			[&"tank", 7, 2],
+			[&"spitter", 8, 1],
+			[&"runner", 16, 0],
+			[&"walker", 24, 1],
+			[&"crow", 5, 0],
+			[&"tank", 6, 0],
+			[&"breaker", 8, 2],
 		],
 	},
 	36: {

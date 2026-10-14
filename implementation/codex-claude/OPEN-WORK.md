@@ -29,19 +29,22 @@ What the owner has decided so far, in order:
 | 7 | Autumn's last week: the King's company at three quarters |
 | 8 | Autumn's curve at 6,400, its nights and winter's kept in rhythm |
 | 9 | The Winter Lord sized to winter's line: 1,800/7 to 900/4 |
+| 10 | Autumn's Full Moon (night 35) at 80% |
 
 Where it stands:
 - Every boss is sized, and each falls wherever the house stands on its
   night.
-- **Eight runs of sixteen win the year**: five `balanced` and three
+- **Twelve runs of sixteen win the year**: five `balanced` and seven
   `towers`.
-- `balanced` loses 7.5 nights before Winter 1: 2.6 in spring and 4.9 in
-  autumn. Three of its eight seeds do not win the year.
+- Before Winter 1, `towers` loses 3.4 nights, inside the target, and
+  `balanced` loses 6.0.
+- Two `balanced` seeds lose the house on the Winter Lord's night every
+  fight, his company untouched.
 
 **The owner's next call is one of:**
-1. autumn's Full Moon (35), where one seed's line breaks for good;
+1. the Winter Lord's company at three quarters, as the King's was;
 2. spring's 2.6;
-3. the target itself (two to four nights before Winter 1).
+3. the target itself.
 
 The target is the phase's: the average player loses two to four nights
 before Winter 1, and every boss falls.
@@ -91,7 +94,7 @@ pack can still depend on another pack's art, though:
 | A040 | The garlic braid | 0239 |
 | A041 | The searchlight | 0240 |
 | A042 | The electric fence | 0241 |
-| A043 | Hardwood walls and sandbags | 0242 |
+| A043 | Hardwood walls and sandbags (**blocked** since 2026-10-14 15:04: proportions not held at a common scale, after the owner's two exceptions) | 0242 |
 | A044 | Day tarps over the defences | 0243 |
 | A045 | Power icons and the new weapons' icons | 0244 |
 | A046 | The spitter | 0260 |

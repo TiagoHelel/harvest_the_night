@@ -31461,3 +31461,45 @@ of two to four.
 - **Hashes**: `DATA 488203718 -> 3280859363`, the Lord. SIM unchanged
   (2260114289).
 - **Checks**: `python tools/verify.py --accept` - PASS.
+
+## 0277 - Balancing the year, autumn's Full Moon - blocked 2026-10-14
+
+**The owner's tenth call** (2026-10-14, "vai na 1, ajusta a lua cheia do
+outono"). **Autumn's Full Moon (night 35) is 80% of what 0273 wrote, and
+twelve runs of sixteen win the year.** `towers` loses 3.4 nights before
+Winter 1, inside the target; `balanced` loses 6.0, two over it. Blocked a
+tenth time.
+
+- **What moved** (key night 35):
+  - its rows at 80%, and its releases stretched alike to the fill line;
+  - at 5,836 hit points it is still the largest of autumn's first half
+    (Autumn 6 is 5,561) and under the King's night, as 0273's rhythm asks.
+- **The trials** (`balanced`, eight seeds, to night 43):
+
+  | Share | Hit points | Autumn lost | Past the King |
+  | --- | --- | --- | --- |
+  | as it was | 7,254 | 39 | 6 of 8 |
+  | 90% | 6,492 | 24 | 5 of 8 |
+  | 85% | 6,308 | 44 | 5 of 8 |
+  | 80% | 5,836 | 27 | 7 of 8 |
+
+  - They are noisy: a night moved changes every night after it, and eight
+    seeds are few.
+  - 80% took the most runs past the King, so the year is the measure.
+- **The year**, `--year 8`:
+  - twelve runs of sixteen win it (five `balanced`, seven `towers`),
+    where eight did;
+  - `towers` loses 3.4 before Winter 1, and `balanced` loses 6.0 (2.6 in
+    spring and 3.4 in autumn, where it lost 4.9);
+  - of `balanced`'s three unwon seeds, 9028 and 9042 lose the house on the
+    Winter Lord's night every fight, his company untouched, and 9035
+    loses its line from Autumn 8.
+- **The next call is the owner's**, in BALANCE.md's "The owner's tenth
+  call, played":
+  1. the Winter Lord's company at three quarters, as the King's was;
+  2. spring's 2.6;
+  3. or the target.
+- **Hashes**: `DATA 3280859363 -> 2774795767`, the Full Moon. SIM unchanged
+  (2260114289).
+- **Checks**: 0273's rhythm and fill asserts pass unchanged.
+  `python tools/verify.py --accept` - PASS.

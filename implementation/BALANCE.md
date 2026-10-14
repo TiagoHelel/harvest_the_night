@@ -1,4 +1,9 @@
-# The year - task 0277 (2026-10-13), blocked nine times
+# The year - task 0277 (2026-10-13), blocked ten times
+
+**Tenth block, after the owner's tenth call** - see "The owner's tenth
+call, played" below: autumn's Full Moon at 80%, and twelve runs of sixteen
+win the year. `towers` loses 3.4 nights before Winter 1, inside the
+target; `balanced` loses 6.0.
 
 **Ninth block, after the owner's ninth call** - see "The owner's ninth
 call, played" below: the Winter Lord at 900/4, and eight runs of sixteen
@@ -75,6 +80,73 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's tenth call, played: autumn's Full Moon (2026-10-14)
+
+The owner chose autumn's Full Moon: "vai na 1, ajusta a lua cheia do
+outono". **The Full Moon (night 35) is 80% of what 0273 wrote, and twelve
+runs of sixteen win the year.** `towers` loses 3.4 nights before Winter 1,
+inside the phase's two to four; `balanced` loses 6.0.
+
+**What moved** (`src/core/game_data.gd`, key night 35):
+- Its rows at 80%, rounded, and its releases stretched alike to the fill
+  line.
+- At 5,836 hit points it is still the largest night of autumn's first
+  half, over Autumn 6's 5,561, and under the King's night, as 0273's
+  rhythm asks.
+
+### The trials
+
+`balanced` on all eight seeds, to night 43:
+
+| The Full Moon | Hit points | Autumn nights lost | Past the King |
+| --- | --- | --- | --- |
+| as it was | 7,254 | 39 | 6 of 8 |
+| 90% | 6,492 | 24 | 5 of 8 |
+| 85% | 6,308 | 44 | 5 of 8 |
+| **80%** | **5,836** | **27** | **7 of 8** |
+
+- **The trials are noisy.** 85% came out worse than either side of it. A
+  night moved changes every night after it, and eight seeds are few.
+- 80% is the share that took the most runs past the King with near the
+  fewest losses. The year below is the measure that counts.
+
+### The year after it
+
+`--year 8` (32 runs in 1,913 s, 8 processes, a run 113-957 s):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.6    0.0    3.4    4.0         1.9  0.0  2.2  2.2   5/8    3/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0    3.0    5.1         0.0  0.0  2.0  2.1   7/8    1/8
+  walls              8.1    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+
+    balanced  autumn  100 100 100 100 100 100 100  75  75  88  75  62  62  62
+              winter  100 100 100 100  57  71 100 100  86  71  57  86  71  29
+    towers    autumn  100 100 100  88 100 100 100 100 100  88  75  75  75  62
+              winter  100 100 100 100   0  43  86 100  71  57  43  71  86  29
+```
+
+What it says:
+- **Twelve runs of sixteen win the year**: five `balanced`, seven `towers`.
+  Eight did before.
+- **Before Winter 1**: `towers` loses 3.4, inside the target, and
+  `balanced` loses 6.0 (2.6 in spring, 3.4 in autumn, where it lost 4.9).
+- **`balanced`'s three unwon seeds**:
+  - **9028 and 9042** lose the house on the Winter Lord's night, every
+    fight. His company (13,701 hit points, untouched) takes it before he
+    is touched.
+  - **9035** loses its line from Autumn 8 and never wins it back.
+
+### The next call is the owner's
+
+1. **The Winter Lord's company**, at three quarters as the King's was: the
+   two seeds that reach him and cannot win.
+2. **Spring's 2.6**: four of eight `balanced` seeds lose a line on Spring
+   9-13 and win it back only over the Giant's repeats.
+3. **Or the target**: `towers` already meets it, `balanced` is two nights
+   over, and twelve of sixteen win the year.
 
 ## The owner's ninth call, played: the Winter Lord sized to winter's line (2026-10-14)
 

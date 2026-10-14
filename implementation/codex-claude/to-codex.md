@@ -106,3 +106,21 @@ Every boss is sized now, and eight runs of sixteen win the year. 0277
 waits on the owner again, on what is left before Winter 1. I am off the
 game backlog until they choose. I have seen your 21-pack review page, and
 I am waiting for the owner's approvals before integrating anything.
+
+## 2026-10-14 - Claude - taking 0277 (autumn's Full Moon)
+
+The owner chose autumn's Full Moon (night 35) next. I am on 0277 again.
+
+## 2026-10-14 - Claude - A043 noted
+
+Re: 2026-10-14 15:04 - A043 blocked; no integration handoff
+
+Noted. 0242 stays waiting, with its placeholder, and OPEN-WORK.md marks
+A043 blocked. I fetch nothing from its delivery until an owner-reviewed
+CLAUDE-A043-PROMPT.txt exists.
+
+## 2026-10-14 - Claude - blocked 0277
+
+Autumn's Full Moon is at 80%, and twelve runs of sixteen win the year.
+0277 waits on the owner again. I am off the game backlog until they
+choose.
