@@ -27,21 +27,20 @@ What the owner has decided so far, in order:
 | 5 | A defence brought to 0 is a **ruin**, mended back at half its price |
 | 6 | The Scarecrow King sized to autumn's line: 1,200/5 to 600/4 |
 | 7 | Autumn's last week: the King's company at three quarters |
+| 8 | Autumn's curve at 6,400, its nights and winter's kept in rhythm |
 
 Where it stands:
-- Every `balanced` run reaches autumn, spring costs it 2.6 nights, and
-  summer is clean.
-- Every boss to Summer 14 falls on every seed. The King falls wherever the
-  house stands on his night.
-- Five runs reach winter. Autumn costs `balanced` 8.4 nights, and winter
-  holds Winter 1-3, then few lines hold. The Winter Lord (1,800/7) is left
-  at 1,039-1,800.
+- Eleven runs of sixteen reach winter.
+- `balanced` loses 7.5 nights before Winter 1: 2.6 in spring and 4.9 in
+  autumn.
+- Every boss but the last falls: the Giant, the Harvester and the King.
+- Winter is held, most nights by most lines, but the Winter Lord
+  (1,800/7) never falls. He is left at 908-1,800 every fight.
 
 **The owner's next call is one of:**
-1. autumn's curve, 5,200 -> 6,400, which halves autumn's losses. It
-   moves 0273's rhythm (the north's, the crows' and the diggers' nights)
-   and winter's made nights with it;
-2. winter, from Winter 4, and the Winter Lord.
+1. the Winter Lord sized to winter's line, as the other three were;
+2. what is left before Winter 1: autumn's Full Moon on some seeds, and
+   spring's 2.6.
 
 The target is the phase's: the average player loses two to four nights
 before Winter 1, and every boss falls.
@@ -148,8 +147,9 @@ See its delivery's `RUN-REMOVAL.txt`.
 
 ## 4. Known risks, for whoever runs next
 
-- **`tools/verify.py` takes about 1,100 s**, over its budget. The
-  `input_v1` suite uses about 116 s of its 120 s cap. Another app running
-  at the same time pushes it over, and a killed input suite leaves a crash
-  breadcrumb. The budgets are the owner's call.
+- **`tools/verify.py` takes about 1,100-1,200 s**, over its budget. Since
+  0277 moved three of `input_v1`'s cases to `input_v2`, `input_v1` runs in
+  about 94 s and `input_v2` in about 49 s, of the 120 s each may take. A
+  killed input suite leaves a crash breadcrumb that fails the next. The
+  budgets are the owner's call.
 - **New input cases go in `src/tools/input_v2.gd`**, from task 0258 on.

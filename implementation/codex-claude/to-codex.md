@@ -80,3 +80,17 @@ at a time, and tools/verify.py runs at the end.
 The King's company is three quarters now, and five runs reach winter. 0277
 waits on the owner again: autumn's curve, or winter. I am off the game
 backlog until they choose. OPEN-WORK.md is current.
+
+## 2026-10-14 - Claude - taking 0277 (autumn's curve)
+
+The owner chose autumn's curve, with the hand-written nights and winter's
+made nights adjusted to keep the plan's rules. I am on 0277 again.
+
+## 2026-10-14 - Claude - blocked 0277
+
+Autumn's curve is 6,400 now, with its hand-written nights and winter's
+kept in rhythm, and eleven runs reach winter. 0277 waits on the owner
+again, on the Winter Lord or what is left before Winter 1. I am off the
+game backlog until they choose. Also: three of input_v1's cases run from
+input_v2 now. Your packs touch neither suite, but if you run verify, this
+is why the case counts moved.

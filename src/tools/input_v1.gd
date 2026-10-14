@@ -11,6 +11,13 @@ extends "res://src/tools/input_check.gd"
 ## seconds verify gives a script when the 1.0 backlog was queued. Nothing moved
 ## across: the old cases stay where they are and this file starts with one.
 ##
+## **Three of them are run by `input_v2` since task 0277**: 0176's gold and
+## its review and 0177's hardwood, some 24 of this file's seconds. It had
+## reached 128-130 of its 120 with another app open on the same machine. Their
+## functions stay here - `input_v2` extends this file - and only the call
+## moved, so no case changed. The owner chose moving them over raising the
+## limit.
+##
 ## ## How it shares the old harness
 ##
 ## **It extends `input_check.gd`** rather than copying it. Every tree helper -
@@ -36,7 +43,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 54
+const V1_CASES := 51
 
 
 func _process(delta: float) -> bool:
@@ -81,9 +88,7 @@ func _run() -> void:
 	await _case_0173_upgrade()
 	await _case_0174_area()
 	await _case_0175_swings()
-	await _case_0176_gold()
-	await _case_followup_0176_review()
-	await _case_0177_hardwood()
+	# 0176, its review and 0177 are run by `input_v2` (task 0277).
 	await _case_0178_sprinkler()
 	await _case_0180_minigame()
 	await _case_0181_bait()

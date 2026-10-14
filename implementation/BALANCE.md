@@ -1,4 +1,10 @@
-# The year - task 0277 (2026-10-13), blocked seven times
+# The year - task 0277 (2026-10-13), blocked eight times
+
+**Eighth block, after the owner's eighth call** - see "The owner's eighth
+call, played" below: autumn's curve at 6,400 with its nights kept in
+rhythm, and winter's made nights under autumn's. Eleven runs reach winter,
+`balanced` loses 7.5 nights before Winter 1, and the Winter Lord never
+falls.
 
 **Seventh block, after the owner's seventh call** - see "The owner's
 seventh call, played" below: the King's company at three quarters, five
@@ -64,6 +70,85 @@ the autoplayer's `RUN` lines (0276) and plays the calendar: a run is up to
 56 dates, a boss night played again until its boss falls or the cap (6
 repeats) ends the run. A boss that walks into the house is a repeat, not a
 loss (0153), and is counted apart.
+
+## The owner's eighth call, played: autumn's curve, with the nights kept in rhythm (2026-10-14)
+
+The owner chose the curve: "vai na 1, baixa o outono e ajusta as noites".
+**Autumn's thirteenth day is 6,400 now, its hand-written nights and
+winter's made nights came down to keep the plan's rules, and eleven runs
+of sixteen reach winter.** `balanced` loses 7.5 nights before Winter 1
+where it lost 11.0. The Winter Lord is the one boss that never falls.
+
+**What moved** (`src/core/game_data.gd`):
+- **Autumn's template**: `size` [5200, 8400] becomes [5200, 6400].
+- **Autumn's hand-written nights**, rows scaled and releases stretched
+  alike so each still sends to the fill line:
+
+  | Night | What it is | Share | Hit points |
+  | --- | --- | --- | --- |
+  | 31 | The north opens | 95% | 5,452 -> 5,274 |
+  | 33 | The first crows | 88% | 6,160 -> 5,452 |
+  | 36 | The first diggers | 83.5% | 6,894 -> 5,635 |
+
+  Each one lands between its made neighbours, so autumn still grows night
+  by night to its Full Moon (35, unchanged) and on to the King's night (42,
+  at three quarters since the seventh call).
+- **Winter at 78%**: the template's [8400, 9800] becomes [6550, 7640], and
+  the hand-written 45-50 come down alike: the west, the south, the frost
+  zombie, the Full Moon and the wraith. This is 0274's rule: winter's made
+  nights send no more bodies than autumn's (291 against 299).
+- **The Winter Lord's night (56) is untouched**, at 13,701 hit points.
+  Nothing asked it to move, and it is the owner's call.
+
+How the numbers were found: `tune.py` (in the scratchpad) writes a set of
+shares, measures every night from Summer 14 to Winter 14 (hit points,
+bodies, fill), and checks the rules 0273 and 0274's tests hold:
+- each season's rhythm;
+- winter's bodies under autumn's;
+- 56 the year's largest night;
+- every night sent to the fill line.
+
+The first set passed. Night 36 was then moved off a nine-hit-point margin
+over 34.
+
+### The year after it
+
+`--year 8` (32 runs in 2,010 s, 8 processes, a run 122-993 s):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.6    0.0    4.9    4.6         1.9  0.0  2.9  5.2   0/8    8/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0    4.8    5.2         0.0  0.0  3.0  4.4   0/8    8/8
+  walls              8.1    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+
+  autumn  no dominant strategy: clean runs balanced 4, towers 3, economy 0, walls 0
+
+    balanced  autumn  100 100 100 100 100 100  75  62  62  62  62  50  50  50
+              winter  100 100 100 100  83  50 100 100  83  67  67  83  83  33
+    towers    autumn  100 100 100  88 100 100  88 100  88  88  62  50  62  50
+              winter  100 100 100 100   0  60 100 100  40  60  40  60  60   0
+```
+
+What it says:
+- **Eleven runs reach winter** (six `balanced`), where five did. **`balanced`
+  loses 7.5 nights before Winter 1**, where it lost 11.0: 2.6 in spring
+  and 4.9 in autumn. The phase's target is two to four.
+- **The King falls in most runs now**: autumn's boss repeats are 2.9 a run
+  where they were 5.8.
+- **Winter is held**, most nights by most lines.
+- **The Winter Lord never falls.** Every fight in every run leaves him at
+  908-1,800 of 1,800, and each run ends on his night at the cap.
+- **What still loses autumn**: `balanced` 9035 from its Full Moon (35)
+  to the end, and 9042 from 36. `balanced` 9007 loses 40-42.
+
+### The next call is the owner's
+
+1. **The Winter Lord** (1,800/7), sized to winter's line as the other three
+   bosses were: the year's last wall.
+2. **What is left before Winter 1**: 7.5 nights against a target of two to
+   four. The rest is autumn's Full Moon (35) on some seeds and spring's
+   2.6.
 
 ## The owner's seventh call, played: autumn's last week (2026-10-14)
 

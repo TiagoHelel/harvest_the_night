@@ -31366,3 +31366,62 @@ along with winter. Blocked a seventh time.
 - **Hashes**: `DATA 3440354384 -> 1444073881`, the King's night. SIM
   unchanged (2260114289).
 - **Checks**: `python tools/verify.py --accept` - PASS.
+
+## 0277 - Balancing the year, autumn's curve - blocked 2026-10-14
+
+**The owner's eighth call** (2026-10-14, "vai na 1, baixa o outono e
+ajusta as noites"). **Autumn's thirteenth day is 6,400, its hand-written
+nights and winter's made nights came down to keep the plan's rules, and
+eleven runs of sixteen reach winter.** `balanced` loses 7.5 nights before
+Winter 1, where it lost 11.0. The Winter Lord never falls. Blocked an
+eighth time, on him and on what is left before Winter 1.
+
+- **What moved** (`src/core/game_data.gd`):
+  - autumn's template `size` [5200, 8400] becomes [5200, 6400];
+  - autumn's hand-written nights, rows scaled and releases stretched
+    alike: 31 (the north) at 95%, 33 (the crows) at 88%, 36 (the diggers)
+    at 83.5%. Each lands between its made neighbours, so the season still
+    grows to its Full Moon (35, unchanged) and on to the King's night;
+  - winter at 78%: its template [8400, 9800] becomes [6550, 7640], and the
+    hand-written 45-50 come down alike. That keeps 0274's rule that
+    winter's made nights send no more bodies than autumn's (291 against
+    299);
+  - the Winter Lord's night (56) is untouched, still the year's largest at
+    13,701.
+- **How the shares were found**: a scratch tuner wrote a set, measured
+  every night from Summer 14 to Winter 14 (hit points, bodies, fill), and
+  checked the rules 0273 and 0274 hold. The first set passed; 36 was moved
+  off a nine-hit-point margin over 34.
+- **The year**, `--year 8`:
+  - eleven runs reach winter, six of them `balanced`, where five did;
+  - `balanced` loses 2.6 in spring and 4.9 in autumn, 7.5 before Winter 1;
+  - the King's repeats are 2.9 a run, where they were 5.8;
+  - winter is held, most nights by most lines;
+  - the Winter Lord (1,800/7) is left at 908-1,800 every fight, and every
+    run that reaches him ends on his night at the cap.
+- **The next call is the owner's**, in BALANCE.md's "The owner's eighth
+  call, played":
+  1. the Winter Lord sized to winter's line, as the others were;
+  2. what is left before Winter 1 (7.5 against two to four): autumn's
+     Full Moon on some seeds, and spring's 2.6.
+- **Hashes**: `DATA 1444073881 -> 488203718`, the nights. SIM unchanged
+  (2260114289): the determinism run never reaches autumn.
+- **Three input cases moved from `input_v1` to `input_v2`** (the owner's
+  choice, over raising the limit). The first `verify` of this change
+  failed in two places:
+  - `input_v1` hit its 120 s with another app open. Run alone it took 128
+    and 130 s, and 129 s on the previous commit's data, so the machine had
+    slowed and the change had not.
+  - The killed suite's crash breadcrumb then failed six of `input_v2`'s
+    cases.
+  The fix:
+  - 0176's gold and its review and 0177's hardwood (24 s) are called from
+    `input_v2`'s `_run()` now. Their functions stay in `input_v1`, which
+    `input_v2` extends, so no case changed.
+  - `V1_CASES` 54 -> 51 and `V2_CASES` 9 -> 12.
+  - They run last: run first, the run they leave saved turned 0287's title
+    menu.
+  - `input_v1` takes 97 s now, and `input_v2` 51 s.
+- **Checks**: headless_v1's 0273 and 0274 rhythms, fills and winter-bodies
+  asserts pass unchanged. `python tools/verify.py` - PASS, after the DATA
+  move was accepted on the failed run.

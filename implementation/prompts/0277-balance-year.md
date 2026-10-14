@@ -1,7 +1,7 @@
 # 0277 - Balancing the year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** blocked - the King's company at three quarters: five runs reach winter; autumn's curve 5,200-6,400 would halve autumn's losses but moves 0273's rhythm and winter's bodies, and winter falls from Winter 4 - owner to choose autumn's curve, or winter and the Winter Lord
+- **Status:** blocked - autumn's curve at 6,400 with its nights kept in rhythm: eleven runs reach winter and balanced loses 7.5 nights before Winter 1, but the Winter Lord (1,800/7) never falls - owner to choose the Winter Lord sized to winter's line, or what is left before Winter 1
 - **Depends on:** 0271, 0272, 0273, 0274, 0276, 0259
 - **Likely files:** tools/balance.py, tools/autoplay.py, src/core/game_data.gd, implementation/BALANCE.md, implementation/PROGRESS.md, src/tools/headless_v1.gd
 

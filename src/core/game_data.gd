@@ -3062,7 +3062,13 @@ const SEASON_NIGHTS: Array = [
 		"sides": [[0, 1], [1, 1], [2, 3]],      # LEVER: [side, the day of the season it joins]
 		"mix": {&"walker": [22, 1], &"runner": [9, 1], &"tank": [18, 1], &"breaker": [18, 1],
 			&"spitter": [10, 1], &"rat": [4, 1], &"crow": [2, 5], &"digger": [10, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
-		"size": [5200, 8400],            # LEVER: hit points on its second and thirteenth day, 200-12000
+		# **Autumn's thirteenth day at 6,400, not 8,400** (task 0277, the
+		# owner's call: "baixa o outono e ajusta as noites"): the year's robot
+		# held to Autumn 11 and fell from 12 on six seeds of eight. With the
+		# King's company at three quarters, this halved autumn's lost nights,
+		# 82 to 37. The hand-written nights between were brought down with it
+		# so the rhythm 0273 asks still holds (31, 33, 36).
+		"size": [5200, 6400],            # LEVER: hit points on its second and thirteenth day, 200-12000
 		"waves": [6, 8],                    # LEVER: waves on its second and thirteenth day, 2-12
 		"gap_ticks": [20 * SECONDS, 5 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
@@ -3077,7 +3083,12 @@ const SEASON_NIGHTS: Array = [
 		"mix": {&"walker": [18, 1], &"runner": [6, 1], &"tank": [20, 1], &"breaker": [14, 1],
 			&"spitter": [8, 1], &"rat": [2, 1], &"crow": [1, 1], &"digger": [8, 1],
 			&"frost_zombie": [10, 5], &"wraith": [3, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
-		"size": [8400, 9800],            # LEVER: hit points on its second and thirteenth day, 200-12000
+		# **Winter at 78% of 8,400-9,800** (task 0277): 0274's rule is that
+		# winter's made nights send no more bodies than autumn's, and autumn's
+		# came down. Its hand-written nights 45-50 came down alike so its
+		# rhythm holds. The Winter Lord's company on 56 did not: it is still
+		# the year's largest night, and the owner's next call.
+		"size": [6550, 7640],            # LEVER: hit points on its second and thirteenth day, 200-12000
 		"waves": [7, 9],                    # LEVER: waves on its second and thirteenth day, 2-12
 		"gap_ticks": [10 * SECONDS, 3 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
@@ -3285,50 +3296,54 @@ const KEY_NIGHTS: Dictionary = {
 		"note": "the north opens: a handful from a new side, and the old roads as busy as summer left them",
 		"opening_ticks": 0,
 		"gap_ticks": 6 * SECONDS,
-		"interval_ticks": 15,
+		"interval_ticks": 16,
 		"event": &"",
 		# Six walkers from the north, under a tenth of the night. Autumn 4 is
 		# made from all three sides alike.
+		# **At 95% of what 0273/0274 wrote, releases stretched alike** (task
+		# 0277): brought down with autumn's curve so the rhythm still holds.
 		"waves": [
-			[&"walker", 28, 0],
-			[&"rat", 24, 1],
-			[&"breaker", 12, 0],
+			[&"walker", 27, 0],
+			[&"rat", 23, 1],
+			[&"breaker", 11, 0],
 			[&"spitter", 8, 1],
 			[&"walker", 6, 2],
 			[&"tank", 9, 0],
-			[&"runner", 20, 1],
-			[&"walker", 30, 1],
-			[&"rat", 24, 0],
+			[&"runner", 19, 1],
+			[&"walker", 28, 1],
+			[&"rat", 23, 0],
 			[&"tank", 8, 1],
-			[&"breaker", 12, 0],
+			[&"breaker", 11, 0],
 			[&"spitter", 8, 0],
-			[&"runner", 18, 0],
+			[&"runner", 17, 0],
 		],
 	},
 	33: {
 		"note": "the first crows: they fly over every wall to whatever is growing, and only a gun that shoots up reaches them",
 		"opening_ticks": 0,
 		"gap_ticks": 5 * SECONDS,
-		"interval_ticks": 15,
+		"interval_ticks": 17,
 		"event": &"",
 		# **Gentle, because the farm is the target**: eight, in two flights
 		# of four from the east, while autumn's fields are full. Autumn 6 is
 		# made with a share of its hit points in crows.
+		# **At 88% of what 0273/0274 wrote, releases stretched alike** (task
+		# 0277): brought down with autumn's curve so the rhythm still holds.
 		"waves": [
-			[&"walker", 35, 0],
-			[&"rat", 24, 1],
-			[&"breaker", 14, 2],
+			[&"walker", 31, 0],
+			[&"rat", 21, 1],
+			[&"breaker", 12, 2],
 			[&"crow", 4, 0],
-			[&"tank", 10, 0],
-			[&"spitter", 10, 1],
-			[&"runner", 20, 2],
-			[&"walker", 35, 1],
+			[&"tank", 9, 0],
+			[&"spitter", 9, 1],
+			[&"runner", 18, 2],
+			[&"walker", 31, 1],
 			[&"crow", 4, 0],
-			[&"tank", 9, 1],
-			[&"rat", 30, 0],
-			[&"breaker", 14, 0],
-			[&"spitter", 8, 2],
-			[&"runner", 20, 0],
+			[&"tank", 8, 1],
+			[&"rat", 26, 0],
+			[&"breaker", 12, 0],
+			[&"spitter", 7, 2],
+			[&"runner", 18, 0],
 		],
 	},
 	35: {
@@ -3355,26 +3370,28 @@ const KEY_NIGHTS: Dictionary = {
 		"note": "the first diggers: they go under your fences and barricades, and only a wall makes them chew",
 		"opening_ticks": 0,
 		"gap_ticks": 4 * SECONDS,
-		"interval_ticks": 15,
+		"interval_ticks": 18,
 		"event": &"",
 		# Eight, from the east. Autumn 9 is made with a tenth of its hit
 		# points in diggers.
+		# **At 83.5% of what 0273/0274 wrote, releases stretched alike** (task
+		# 0277): brought down with autumn's curve so the rhythm still holds.
 		"waves": [
-			[&"walker", 38, 0],
-			[&"digger", 4, 0],
-			[&"breaker", 14, 1],
-			[&"rat", 30, 2],
-			[&"tank", 11, 0],
-			[&"crow", 6, 1],
-			[&"spitter", 10, 2],
-			[&"runner", 22, 0],
-			[&"walker", 34, 1],
-			[&"digger", 4, 0],
-			[&"tank", 10, 2],
-			[&"breaker", 16, 0],
-			[&"spitter", 10, 1],
-			[&"runner", 22, 2],
-			[&"rat", 24, 0],
+			[&"walker", 32, 0],
+			[&"digger", 3, 0],
+			[&"breaker", 12, 1],
+			[&"rat", 25, 2],
+			[&"tank", 9, 0],
+			[&"crow", 5, 1],
+			[&"spitter", 8, 2],
+			[&"runner", 18, 0],
+			[&"walker", 28, 1],
+			[&"digger", 3, 0],
+			[&"tank", 8, 2],
+			[&"breaker", 13, 0],
+			[&"spitter", 8, 1],
+			[&"runner", 18, 2],
+			[&"rat", 20, 0],
 		],
 	},
 	42: {
@@ -3415,134 +3432,144 @@ const KEY_NIGHTS: Dictionary = {
 		"note": "the west opens: a handful from a new side, and three roads as busy as autumn left them",
 		"opening_ticks": 0,
 		"gap_ticks": 4 * SECONDS,
-		"interval_ticks": 12,
+		"interval_ticks": 15,
 		"event": &"",
 		# **Learned before it is tested**, as summer's south east and
 		# autumn's north were: six walkers from the west, under a tenth of the
 		# night. Side 3 is the west.
+		# **At 78% of what 0273/0274 wrote, releases stretched alike** (task
+		# 0277): brought down with winter's so the rhythm still holds.
 		"waves": [
-			[&"walker", 42, 0],
-			[&"rat", 24, 1],
-			[&"breaker", 18, 2],
-			[&"tank", 14, 0],
-			[&"walker", 6, 3],
-			[&"spitter", 12, 1],
-			[&"digger", 8, 2],
-			[&"runner", 24, 0],
-			[&"crow", 6, 1],
-			[&"tank", 14, 2],
-			[&"breaker", 18, 0],
-			[&"walker", 40, 1],
-			[&"spitter", 10, 2],
-			[&"runner", 20, 1],
-			[&"rat", 24, 0],
+			[&"walker", 33, 0],
+			[&"rat", 19, 1],
+			[&"breaker", 14, 2],
+			[&"tank", 11, 0],
+			[&"walker", 5, 3],
+			[&"spitter", 9, 1],
+			[&"digger", 6, 2],
+			[&"runner", 19, 0],
+			[&"crow", 5, 1],
+			[&"tank", 11, 2],
+			[&"breaker", 14, 0],
+			[&"walker", 31, 1],
+			[&"spitter", 8, 2],
+			[&"runner", 16, 1],
+			[&"rat", 19, 0],
 		],
 	},
 	46: {
 		"note": "the south opens: the last side, a handful from it, and now the farm has no back",
 		"opening_ticks": 0,
 		"gap_ticks": 4 * SECONDS,
-		"interval_ticks": 12,
+		"interval_ticks": 15,
 		"event": &"",
 		# Six walkers from the south (side 4), and the west's second night
 		# sends more than its first.
+		# **At 78% of what 0273/0274 wrote, releases stretched alike** (task
+		# 0277): brought down with winter's so the rhythm still holds.
 		"waves": [
-			[&"walker", 40, 0],
-			[&"rat", 24, 3],
-			[&"breaker", 18, 1],
-			[&"tank", 14, 2],
-			[&"walker", 6, 4],
-			[&"spitter", 12, 3],
-			[&"digger", 8, 0],
-			[&"runner", 24, 1],
-			[&"crow", 6, 2],
-			[&"tank", 15, 0],
-			[&"breaker", 18, 3],
-			[&"walker", 40, 2],
-			[&"spitter", 10, 1],
-			[&"runner", 22, 0],
-			[&"rat", 24, 1],
+			[&"walker", 31, 0],
+			[&"rat", 19, 3],
+			[&"breaker", 14, 1],
+			[&"tank", 11, 2],
+			[&"walker", 5, 4],
+			[&"spitter", 9, 3],
+			[&"digger", 6, 0],
+			[&"runner", 19, 1],
+			[&"crow", 5, 2],
+			[&"tank", 12, 0],
+			[&"breaker", 14, 3],
+			[&"walker", 31, 2],
+			[&"spitter", 8, 1],
+			[&"runner", 17, 0],
+			[&"rat", 19, 1],
 		],
 	},
 	47: {
 		"note": "the first frost zombies: kill them under your towers and the ice takes the towers too",
 		"opening_ticks": 0,
 		"gap_ticks": 4 * SECONDS,
-		"interval_ticks": 12,
+		"interval_ticks": 15,
 		"event": &"",
 		# Six, in two waves from the east. Killed far from the line - a shell,
 		# a decoy that pulls them off it - they cost nothing; the lesson is
 		# where, not whether. Winter 6 is made with a tenth of its hit points
 		# in them.
+		# **At 78% of what 0273/0274 wrote, releases stretched alike** (task
+		# 0277): brought down with winter's so the rhythm still holds.
 		"waves": [
-			[&"walker", 40, 0],
-			[&"rat", 24, 4],
-			[&"breaker", 18, 1],
-			[&"frost_zombie", 3, 0],
-			[&"tank", 15, 3],
-			[&"spitter", 12, 2],
-			[&"digger", 8, 4],
-			[&"runner", 24, 0],
-			[&"crow", 6, 1],
-			[&"tank", 14, 2],
-			[&"frost_zombie", 3, 0],
-			[&"breaker", 18, 3],
-			[&"walker", 40, 4],
-			[&"spitter", 10, 0],
-			[&"runner", 22, 1],
-			[&"rat", 24, 2],
+			[&"walker", 31, 0],
+			[&"rat", 19, 4],
+			[&"breaker", 14, 1],
+			[&"frost_zombie", 2, 0],
+			[&"tank", 12, 3],
+			[&"spitter", 9, 2],
+			[&"digger", 6, 4],
+			[&"runner", 19, 0],
+			[&"crow", 5, 1],
+			[&"tank", 11, 2],
+			[&"frost_zombie", 2, 0],
+			[&"breaker", 14, 3],
+			[&"walker", 31, 4],
+			[&"spitter", 8, 0],
+			[&"runner", 17, 1],
+			[&"rat", 19, 2],
 		],
 	},
 	49: {
 		"note": "winter's Full Moon: every side, and everything the year has shown you but the shades",
 		"opening_ticks": 0,
 		"gap_ticks": 4 * SECONDS,
-		"interval_ticks": 10,
+		"interval_ticks": 13,
 		# In crowds, as every Full Moon since summer's.
+		# **At 78% of what 0273/0274 wrote, releases stretched alike** (task
+		# 0277): brought down with winter's so the rhythm still holds.
 		"waves": [
-			[&"walker", 30, 0],
-			[&"frost_zombie", 6, 1],
-			[&"breaker", 14, 2],
-			[&"rat", 24, 3],
-			[&"tank", 12, 4],
-			[&"spitter", 10, 0],
-			[&"digger", 8, 1],
-			[&"runner", 18, 2],
-			[&"crow", 6, 3],
-			[&"walker", 30, 4],
-			[&"frost_zombie", 6, 0],
-			[&"tank", 10, 1],
-			[&"breaker", 14, 3],
+			[&"walker", 23, 0],
+			[&"frost_zombie", 5, 1],
+			[&"breaker", 11, 2],
+			[&"rat", 19, 3],
+			[&"tank", 9, 4],
+			[&"spitter", 8, 0],
+			[&"digger", 6, 1],
+			[&"runner", 14, 2],
+			[&"crow", 5, 3],
+			[&"walker", 23, 4],
+			[&"frost_zombie", 5, 0],
+			[&"tank", 8, 1],
+			[&"breaker", 11, 3],
 		],
 	},
 	50: {
 		"note": "the first wraiths: four, and nothing aims at them unless they are lit - the porch, a flare, a fire",
 		"opening_ticks": 0,
 		"gap_ticks": 4 * SECONDS,
-		"interval_ticks": 12,
+		"interval_ticks": 15,
 		"event": &"",
 		# **Small, and answerable without a searchlight** - the night that
 		# teaches one: four, from the east, on the road to the porch's light,
 		# where the guns by the house see them. A mine, a shell's splash or a
 		# flame finds them anywhere (0252). Winter 9 is made with a few more.
+		# **At 78% of what 0273/0274 wrote, releases stretched alike** (task
+		# 0277): brought down with winter's so the rhythm still holds.
 		"waves": [
-			[&"walker", 40, 0],
-			[&"rat", 24, 1],
-			[&"breaker", 18, 2],
-			[&"frost_zombie", 6, 3],
-			[&"tank", 15, 4],
+			[&"walker", 31, 0],
+			[&"rat", 19, 1],
+			[&"breaker", 14, 2],
+			[&"frost_zombie", 5, 3],
+			[&"tank", 12, 4],
 			[&"wraith", 2, 0],
-			[&"spitter", 12, 1],
-			[&"digger", 8, 2],
-			[&"runner", 24, 3],
-			[&"crow", 6, 4],
-			[&"tank", 15, 0],
+			[&"spitter", 9, 1],
+			[&"digger", 6, 2],
+			[&"runner", 19, 3],
+			[&"crow", 5, 4],
+			[&"tank", 12, 0],
 			[&"wraith", 2, 0],
-			[&"breaker", 18, 1],
-			[&"walker", 40, 2],
-			[&"frost_zombie", 6, 4],
-			[&"spitter", 10, 3],
-			[&"runner", 22, 0],
+			[&"breaker", 14, 1],
+			[&"walker", 31, 2],
+			[&"frost_zombie", 5, 4],
+			[&"spitter", 8, 3],
+			[&"runner", 17, 0],
 		],
 	},
 	56: {

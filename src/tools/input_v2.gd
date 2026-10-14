@@ -12,6 +12,12 @@ extends "res://src/tools/input_v1.gd"
 ## suites had filled theirs when 0112 started `input_v1`. Nothing moved
 ## across: the old cases stay where they are and this file starts with one.
 ##
+## **Except three, since task 0277**: `input_v1` reached 128-130 seconds with
+## another app open, so its three slowest - 0176's gold and its review and
+## 0177's hardwood - are called from here. Their functions are still
+## `input_v1`'s, inherited, and run last: they leave a run saved, which
+## 0287's title menu would see.
+##
 ## It **extends `input_v1.gd`**, which extends `input_check.gd`, so every tree
 ## helper of both is here without being copied - `open_scene`, `until`,
 ## `expect`, `_weathered_dates` and the rest. What is overridden is everything
@@ -21,7 +27,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 9
+const V2_CASES := 12
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -47,6 +53,11 @@ func _run() -> void:
 	await _case_0286_weather_ambience()
 	await _case_0287_collections()
 	await _case_0292_options()
+	# `input_v1`'s three slowest (task 0277), its functions inherited - last,
+	# because they leave a run saved that 0287's title menu would see.
+	await _case_0176_gold()
+	await _case_followup_0176_review()
+	await _case_0177_hardwood()
 	_finish()
 
 
