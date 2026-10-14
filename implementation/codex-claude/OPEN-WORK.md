@@ -10,44 +10,17 @@ Sources:
 Nothing can be started today. One task waits on the owner, 41 wait on art,
 and the other 9 wait on those.
 
-## 1. Waiting on the owner: task 0277, balancing the year
+## 1. Task 0277, balancing the year: done 2026-10-14
 
-[`prompts/0277-balance-year.md`](../prompts/0277-balance-year.md). The whole
-story, the tables and the trials are in
-[`BALANCE.md`](../BALANCE.md)'s sections "The owner's ... call, played".
+The owner's twelfth call took the target as it stands:
+- fourteen runs of sixteen win the year;
+- every boss falls wherever the house stands;
+- `towers` loses 3.4 nights before Winter 1, and `balanced` 6.0.
 
-What the owner has decided so far, in order:
+What is left goes to 0278 and 0280. Every call and trial is in
+[`BALANCE.md`](../BALANCE.md).
 
-| Call | What was done |
-| --- | --- |
-| 1 | The year robot fields each season's weapons |
-| 2 | More iron at spring's stall (`SPRING_IRON` 16) and a weaker Giant: 900/6 to 400/4 |
-| 3 | The Harvester the same way: 1,100/6 to 350/4 |
-| 4 | The robot saves for autumn's mortar |
-| 5 | A defence brought to 0 is a **ruin**, mended back at half its price |
-| 6 | The Scarecrow King sized to autumn's line: 1,200/5 to 600/4 |
-| 7 | Autumn's last week: the King's company at three quarters |
-| 8 | Autumn's curve at 6,400, its nights and winter's kept in rhythm |
-| 9 | The Winter Lord sized to winter's line: 1,800/7 to 900/4 |
-| 10 | Autumn's Full Moon (night 35) at 80% |
-| 11 | The Winter Lord's company at three quarters |
-
-Where it stands:
-- **Fourteen runs of sixteen win the year**, seven of each shooting
-  policy.
-- Every boss falls on seven `balanced` seeds of eight.
-- Before Winter 1, `towers` loses 3.4 nights, inside the target, and
-  `balanced` loses 6.0, two over it.
-
-**The owner's next call is one of:**
-1. spring's 2.6;
-2. autumn's 3.4 (chiefly seed 9035);
-3. the target itself.
-
-The target is the phase's: the average player loses two to four nights
-before Winter 1, and every boss falls.
-
-## 2. Waiting on 0277, and on each other
+## 2. The rest of the game backlog, in order
 
 | Task | What | Needs |
 | --- | --- | --- |

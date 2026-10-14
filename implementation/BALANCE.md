@@ -1,4 +1,11 @@
-# The year - task 0277 (2026-10-13), blocked eleven times
+# The year - task 0277 (2026-10-13 to 2026-10-14), done on the owner's twelfth call
+
+**Done, on the target itself** (2026-10-14, "vai na 3"): fourteen runs of
+sixteen win the year, every boss falls wherever the house stands, and
+`towers` loses 3.4 nights before Winter 1, inside the phase's two to four.
+`balanced` loses 6.0, two over. The rest - spring's 2.6 and autumn's 3.4 -
+is left to 0278 and 0280, which look at the whole year. The calls below
+are newest first.
 
 **Eleventh block, after the owner's eleventh call** - see "The owner's
 eleventh call, played" below: the Winter Lord's company at three quarters,

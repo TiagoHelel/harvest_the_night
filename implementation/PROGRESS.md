@@ -31534,3 +31534,38 @@ night. Blocked an eleventh time.
   (2260114289).
 - **Checks**: 0274's rhythm and fill asserts pass unchanged.
   `python tools/verify.py --accept` - PASS.
+
+## 0277 - Balancing the year - done 2026-10-14
+
+**The owner's twelfth call** (2026-10-14, "vai na 3"): the target itself.
+**0277 is done, on the year the eleventh call left**:
+- fourteen runs of sixteen win it, seven of each shooting policy;
+- every boss falls wherever the house stands on its night;
+- `towers` loses 3.4 nights before Winter 1, inside the phase's two to
+  four;
+- `balanced` loses 6.0, two over.
+
+The rest - spring's 2.6, and autumn's 3.4 (chiefly seed 9035, which never
+wins the King's night) - goes to 0278 (the economy across a year) and
+0280 (do fifty-six nights tire), which look at the whole year.
+
+Over its twelve calls, 0277 moved:
+- **The bosses**: the Giant 400/4, the Harvester 350/4, the King 600/4 and
+  the Winter Lord 900/4, each sized to its season's line; the King's and
+  the Lord's companies at three quarters.
+- **Spring's iron at the stall**: 16.
+- **Autumn's curve**: 5,200 -> 6,400, with its hand-written nights and
+  winter's at 78% to keep 0273's and 0274's rhythm. Autumn's Full Moon is
+  at 80%.
+- **A defence brought to 0 is a ruin, mended back** at half its price.
+- **The robot**: it fields each season's weapons, saves for autumn's
+  mortar, buys before it digs, and mends its ruins first.
+- **Two of 0058's relations rewritten**: "at least as well armoured", and
+  "spring's crossbows stop the Giant".
+
+BALANCE.md's sections "The owner's ... call, played" hold every table and
+trial.
+
+- **Checks**: no code or data moved in this entry. The last
+  `python tools/verify.py`, on the same tree at b1698dc0, printed PASS.
+  `python tools/devlog.py --check` passes.
