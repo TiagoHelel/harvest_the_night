@@ -1,7 +1,7 @@
 # 0209 - Art: sheep and pigs
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0185
 - **Likely files:** assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/animal_view.gd
 - **Art packs:** A026

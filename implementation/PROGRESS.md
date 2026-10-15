@@ -32801,3 +32801,57 @@ They replace the stand-ins of 0180, 0181 and 0182.
 - `python implementation/backlog/assets.py set A023 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (64 of 64).
+
+## 0209 - Art: sheep and pigs - done 2026-10-15
+
+A026 is integrated. The sheep and the pig are the owner-approved art now:
+each with its two-frame idle, four-frame walk, two-frame eat and two-frame
+sleep, and the pig's three-frame dig, on 40x32 standing on (20,30), facing
+west and mirrored east at runtime. The owner approved the corrected pack on
+2026-10-15 with the retried batch ("tudo aprovado"), as recorded in the
+delivery's `APPROVAL.json`. 0185's stand-ins are gone: the chicken and the
+cow tinted and scaled.
+
+- **Promotion**:
+  - 21 of the 23 frames are compositions over 32 assembly components (21
+    `render`, 11 `compose`), under `sprites/components/A026-farm-animals/`.
+  - The two first idle frames are direct cuts.
+  - The 13 raw sources are byte for byte in
+    `assets/art_source/props/farm_animals/`.
+  - Every node and file was sha-checked, and decodes to its approved RGBA.
+- **The view plays the art** (`AnimalView`):
+  - A species whose pose is drawn (`drawn`, asked of `PlaceholderArt`, as
+    the architecture rule wants) shows its own frames on their own seconds,
+    facing west as drawn and mirrored east.
+  - None of the stand-in's tint, scale, bob, dip or squash applies to it.
+  - `animal_frame` loops a pose on the wall clock, and plays a one-shot -
+    the dig - once from the moment it began, held on its last.
+  - The cow and the chicken keep 0185's road until 0210.
+  - The first run read `RasterArt.FRAMES` directly, and
+    `only the lookup reads RasterArt.FRAMES` failed. It asks
+    `PlaceholderArt.frame` now.
+- **The pig roots about**: every other stop to eat a pig digs instead -
+  A026's dig, once - where its art has one. View only, like the rest of the
+  barnyard's wandering.
+- **The stand-ins retired**: A026's nine `PlaceholderArt` entries.
+  `placeholders.py --check` passes, with 138 stand-ins left over 20 packs.
+- **Checks**: `check_prop_art.py` takes the barnyard's animals (`ANIMALS`,
+  which 0210 extends). For A026's 23 frames it checks:
+  - each pose's frames, seconds and loop;
+  - the canvas and pivot;
+  - the feet on the pivot row in every frame, clear of the canvas edges;
+  - binary alpha, one scale per pose, every frame its own;
+  - each composition's parts from A026's own assembly.
+- **Tests**: `_task_0209_sheep_pig` (headless_v1) checks:
+  - every pose is raster art at its box, none a stand-in;
+  - the sheep's walk goes 0, 1, 0 at 0, 0.16 and 0.61 s;
+  - the pig's dig goes 0, 1, 2 at 0, 0.15 and 3 s, held.
+- **Shots** (`implementation/shots/0209/`, FHD 1920x1080, looked at):
+  - `barnyard`: noon, the barn's sheep and pigs about it - a fleece with a
+    black face, pink pigs - the coop's hens and the cow still the props.
+  - `barnyard_night`: 01:35, the same under the late light.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A026 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (64 of 64).

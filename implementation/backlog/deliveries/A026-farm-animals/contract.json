@@ -1,0 +1,4066 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "pig_dig",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/pig_dig-west-0-night.png",
+          "path": "native/pig_dig/west/01.png",
+          "points": {},
+          "pose": "pig_dig 0"
+        },
+        {
+          "issue": "",
+          "night": "preview/pig_dig-west-1-night.png",
+          "path": "native/pig_dig/west/02.png",
+          "points": {},
+          "pose": "pig_dig 1"
+        },
+        {
+          "issue": "",
+          "night": "preview/pig_dig-west-2-night.png",
+          "path": "native/pig_dig/west/03.png",
+          "points": {},
+          "pose": "pig_dig 2"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "pig_dig 0",
+        "pig_dig 1",
+        "pig_dig 2"
+      ]
+    },
+    {
+      "anim": "pig_eat",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/pig_eat-west-0-night.png",
+          "path": "native/pig_eat/west/01.png",
+          "points": {},
+          "pose": "pig_eat_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/pig_eat-west-1-night.png",
+          "path": "native/pig_eat/west/02.png",
+          "points": {},
+          "pose": "pig_eat_1"
+        }
+      ],
+      "frame_seconds": 0.2,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "pig_eat_0",
+        "pig_eat_1"
+      ]
+    },
+    {
+      "anim": "pig_idle",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/pig_idle-west-0-night.png",
+          "path": "native/pig_idle/west/01.png",
+          "points": {},
+          "pose": "standing identity master"
+        },
+        {
+          "issue": "",
+          "night": "preview/pig_idle-west-1-night.png",
+          "path": "native/pig_idle/west/02.png",
+          "points": {},
+          "pose": "pig_idle_1"
+        }
+      ],
+      "frame_seconds": 0.5,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "standing identity master",
+        "pig_idle_1"
+      ]
+    },
+    {
+      "anim": "pig_sleep",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/pig_sleep-west-0-night.png",
+          "path": "native/pig_sleep/west/01.png",
+          "points": {},
+          "pose": "pig_sleep_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/pig_sleep-west-1-night.png",
+          "path": "native/pig_sleep/west/02.png",
+          "points": {},
+          "pose": "pig_sleep_1"
+        }
+      ],
+      "frame_seconds": 0.6,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "pig_sleep_0",
+        "pig_sleep_1"
+      ]
+    },
+    {
+      "anim": "pig_walk",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/pig_walk-west-0-night.png",
+          "path": "native/pig_walk/west/01.png",
+          "points": {},
+          "pose": "contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/pig_walk-west-1-night.png",
+          "path": "native/pig_walk/west/02.png",
+          "points": {},
+          "pose": "passing"
+        },
+        {
+          "issue": "",
+          "night": "preview/pig_walk-west-2-night.png",
+          "path": "native/pig_walk/west/03.png",
+          "points": {},
+          "pose": "opposite contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/pig_walk-west-3-night.png",
+          "path": "native/pig_walk/west/04.png",
+          "points": {},
+          "pose": "opposite passing"
+        }
+      ],
+      "frame_seconds": 0.15,
+      "frames": 4,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "contact",
+        "passing",
+        "opposite contact",
+        "opposite passing"
+      ]
+    },
+    {
+      "anim": "sheep_eat",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/sheep_eat-west-0-night.png",
+          "path": "native/sheep_eat/west/01.png",
+          "points": {},
+          "pose": "sheep_eat_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/sheep_eat-west-1-night.png",
+          "path": "native/sheep_eat/west/02.png",
+          "points": {},
+          "pose": "sheep_eat_1"
+        }
+      ],
+      "frame_seconds": 0.2,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "sheep_eat_0",
+        "sheep_eat_1"
+      ]
+    },
+    {
+      "anim": "sheep_idle",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/sheep_idle-west-0-night.png",
+          "path": "native/sheep_idle/west/01.png",
+          "points": {},
+          "pose": "standing identity master"
+        },
+        {
+          "issue": "",
+          "night": "preview/sheep_idle-west-1-night.png",
+          "path": "native/sheep_idle/west/02.png",
+          "points": {},
+          "pose": "sheep_idle_1"
+        }
+      ],
+      "frame_seconds": 0.5,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "standing identity master",
+        "sheep_idle_1"
+      ]
+    },
+    {
+      "anim": "sheep_sleep",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/sheep_sleep-west-0-night.png",
+          "path": "native/sheep_sleep/west/01.png",
+          "points": {},
+          "pose": "sheep_sleep_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/sheep_sleep-west-1-night.png",
+          "path": "native/sheep_sleep/west/02.png",
+          "points": {},
+          "pose": "sheep_sleep_1"
+        }
+      ],
+      "frame_seconds": 0.6,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "sheep_sleep_0",
+        "sheep_sleep_1"
+      ]
+    },
+    {
+      "anim": "sheep_walk",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/sheep_walk-west-0-night.png",
+          "path": "native/sheep_walk/west/01.png",
+          "points": {},
+          "pose": "contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/sheep_walk-west-1-night.png",
+          "path": "native/sheep_walk/west/02.png",
+          "points": {},
+          "pose": "passing"
+        },
+        {
+          "issue": "",
+          "night": "preview/sheep_walk-west-2-night.png",
+          "path": "native/sheep_walk/west/03.png",
+          "points": {},
+          "pose": "opposite contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/sheep_walk-west-3-night.png",
+          "path": "native/sheep_walk/west/04.png",
+          "points": {},
+          "pose": "opposite passing"
+        }
+      ],
+      "frame_seconds": 0.15,
+      "frames": 4,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "contact",
+        "passing",
+        "opposite contact",
+        "opposite passing"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/props/cow.png",
+      "pivot_xy": [
+        12,
+        22
+      ]
+    }
+  ],
+  "components": {
+    "pig-head-action-pig_dig-0": {
+      "call": "raw/pig_dig-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-head-action-pig_dig-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.04440497335701599,
+        "crop_xywh": [
+          93,
+          227,
+          563,
+          360
+        ]
+      },
+      "sha256": "4974af57a7acf35d963d7051134729b1a9d448859c616b206989682ada54a15f",
+      "source": "raw/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46"
+    },
+    "pig-head-action-pig_dig-1": {
+      "call": "raw/pig_dig-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-head-action-pig_dig-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.04440497335701599,
+        "crop_xywh": [
+          721,
+          225,
+          563,
+          360
+        ]
+      },
+      "sha256": "cdaac19c99663200ca80a30a1d6ea888e9e00069baab5634350a72b36d71b2a7",
+      "source": "raw/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46"
+    },
+    "pig-head-action-pig_dig-2": {
+      "call": "raw/pig_dig-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-head-action-pig_dig-2.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.04440497335701599,
+        "crop_xywh": [
+          1355,
+          225,
+          563,
+          360
+        ]
+      },
+      "sha256": "e675a110c8e47fc4371de227835fb284fab6bcadfabfddf057032e53bec9398a",
+      "source": "raw/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46"
+    },
+    "pig-head-action-pig_eat-0": {
+      "call": "raw/recovered-pig_eat_0-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-head-action-pig_eat-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-pig_eat_0-r2.prompt.txt",
+      "prompt_sha256": "02ac9afd0d2d0ba9b81afcfa4ab929895a33cd7bdeaf5a576ea02c3348fb179c",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.034482758620689655,
+        "crop_xywh": [
+          353,
+          356,
+          725,
+          477
+        ]
+      },
+      "sha256": "6bdd2eda05076b28bb185c1e774f9ab86aa221578621f77e1ae83b1151af1e32",
+      "source": "raw/recovered-pig_eat_0-r2.png",
+      "source_sha256": "108278b19549656472652aa3d5c9ef7c313379a024f1fc90a129c49b644855df"
+    },
+    "pig-head-action-pig_eat-1": {
+      "call": "raw/recovered-pig_eat_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-head-action-pig_eat-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-pig_eat_1-r1.prompt.txt",
+      "prompt_sha256": "266655df6685974e2ce5fe2e60471a27d9db5ab517dcd5a65aabc84132f4072e",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.034482758620689655,
+        "crop_xywh": [
+          353,
+          356,
+          725,
+          477
+        ]
+      },
+      "sha256": "8ef89d35d7c4f025ebcb72943aaf9e249f7c6feba1321069103b29552a9dab33",
+      "source": "raw/recovered-pig_eat_1-r1.png",
+      "source_sha256": "877534bdeebbc8af459e888ebd42e6d1f6af4a2a5bc06d55c1e42ca0ca81a488"
+    },
+    "pig-head-body-pig_dig-0": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/pig-head-body-pig_dig-0.png",
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            30
+          ],
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            0
+          ],
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ]
+        },
+        {
+          "input": "pig-head-action-pig_dig-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ]
+        }
+      ],
+      "sha256": "b96514237c87f87e0a627c348e27c685c0ce424def888f29977d8e368f63212c"
+    },
+    "pig-head-body-pig_dig-1": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/pig-head-body-pig_dig-1.png",
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            30
+          ],
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            0
+          ],
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ]
+        },
+        {
+          "input": "pig-head-action-pig_dig-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ]
+        }
+      ],
+      "sha256": "96c1680abe1b6c6094baf161d5299ca3110a8c91d378632117f51af81b6c7c62"
+    },
+    "pig-head-body-pig_dig-2": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/pig-head-body-pig_dig-2.png",
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            30
+          ],
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            0
+          ],
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ]
+        },
+        {
+          "input": "pig-head-action-pig_dig-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ]
+        }
+      ],
+      "sha256": "a6a59a9a05705b3880ca7b234f60cf2cabee69f7b0a99f66d34ab185821d984b"
+    },
+    "pig-head-body-pig_eat-0": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/pig-head-body-pig_eat-0.png",
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            30
+          ],
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            0
+          ],
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ]
+        },
+        {
+          "input": "pig-head-action-pig_eat-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ]
+        }
+      ],
+      "sha256": "7de3a2e99eb50581bd97203c92a3ce15fdf7fc8833447ffbc311ea83e5bce0f4"
+    },
+    "pig-head-body-pig_eat-1": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/pig-head-body-pig_eat-1.png",
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            30
+          ],
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            0
+          ],
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ]
+        },
+        {
+          "input": "pig-head-action-pig_eat-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ]
+        }
+      ],
+      "sha256": "fe22d8976afdac08e7dfbc1531ab73d7b763dd01eb0d1b45b81f53a1d2bb5465"
+    },
+    "pig-idle-head": {
+      "call": "raw/recovered-pig_idle_1-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-idle-head.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-pig_idle_1-r2.prompt.txt",
+      "prompt_sha256": "2e02fd4530c6207eb5e77c7dd83ab03e0a9099d0ab06d5db1c1f7313d23df783",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.034482758620689655,
+        "crop_xywh": [
+          353,
+          356,
+          725,
+          477
+        ]
+      },
+      "sha256": "a3e377f948441c513a97a36e2a5c6756dbc5944a7c7d5292fd81853a6cb9817c",
+      "source": "raw/recovered-pig_idle_1-r2.png",
+      "source_sha256": "2aafe4535eb649c7062af36ea0d238eb4b18449d357f09bcff5a86e72e54bce0"
+    },
+    "pig-idle-stable": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/pig-idle-stable.png",
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            10
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            25
+          ],
+          "slice_xywh": [
+            0,
+            25,
+            40,
+            7
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            10,
+            5,
+            15
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            19,
+            10
+          ],
+          "slice_xywh": [
+            19,
+            10,
+            21,
+            15
+          ]
+        },
+        {
+          "input": "pig-idle-head",
+          "paste_xy": [
+            5,
+            10
+          ],
+          "slice_xywh": [
+            5,
+            10,
+            14,
+            15
+          ]
+        }
+      ],
+      "sha256": "8a47c33b8f17c244c5d243f73c2d864b4cdca02428ae070a392b20dffe5405ad"
+    },
+    "pig-lying-master": {
+      "call": "raw/recovered-pig_sleep_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-lying-master.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-pig_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          12
+        ],
+        "content_scale": 0.03424657534246575,
+        "crop_xywh": [
+          350,
+          415,
+          730,
+          353
+        ]
+      },
+      "sha256": "d35110bd885e207db452f87b180e4c20efa261f93f1d48444df119207423c9b9",
+      "source": "raw/recovered-pig_sleep_1-r1.png",
+      "source_sha256": "99a309e7531f2b8895f958435b70d30668ee73dee541db5aa7ad30e7bed4e979"
+    },
+    "pig-sleep-breath": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/pig-sleep-breath.png",
+      "parts": [
+        {
+          "input": "pig-lying-master",
+          "paste_xy": [
+            0,
+            24
+          ],
+          "slice_xywh": [
+            0,
+            24,
+            40,
+            8
+          ]
+        },
+        {
+          "input": "pig-lying-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            24
+          ]
+        },
+        {
+          "input": "pig-lying-master",
+          "paste_xy": [
+            16,
+            0
+          ],
+          "slice_xywh": [
+            16,
+            1,
+            24,
+            25
+          ]
+        }
+      ],
+      "sha256": "5cf158de03aa0102f6151a3976e17b1203b52ea4eedb3fafbf3b578b7dbfd5bd"
+    },
+    "pig-standing-master": {
+      "call": "raw/pig-master-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-standing-master.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.034482758620689655,
+        "crop_xywh": [
+          353,
+          356,
+          725,
+          477
+        ]
+      },
+      "sha256": "a48e5d3dbb8132def3c243499f28cf83294561b057d1e42fbc7c83ef4b639bc2",
+      "source": "raw/pig-master-r1.png",
+      "source_sha256": "5577d2e8ada6791bc4c6f9a0eb6b9473a104bd46fa69234441a01128a84469ab"
+    },
+    "pig-walk-legs-0": {
+      "call": "raw/recovered-pig_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-walk-legs-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "content_scale": 0.05555555555555555,
+        "crop_xywh": [
+          35,
+          269,
+          450,
+          277
+        ]
+      },
+      "sha256": "79cde632f2952daeafca3824e39534a2678960fedc29f7f8039381b97e7526b6",
+      "source": "raw/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98"
+    },
+    "pig-walk-legs-1": {
+      "call": "raw/recovered-pig_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-walk-legs-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "content_scale": 0.05555555555555555,
+        "crop_xywh": [
+          528,
+          271,
+          450,
+          277
+        ]
+      },
+      "sha256": "a20a013721b034f727e314e64fd48603d0c573a4f23023074d4976e1b98a8070",
+      "source": "raw/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98"
+    },
+    "pig-walk-legs-2": {
+      "call": "raw/recovered-pig_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-walk-legs-2.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "content_scale": 0.05555555555555555,
+        "crop_xywh": [
+          1024,
+          270,
+          450,
+          277
+        ]
+      },
+      "sha256": "af5898581e25da98a1e24e32c352237869ceef2e3b7413571b306249e1f765c3",
+      "source": "raw/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98"
+    },
+    "pig-walk-legs-3": {
+      "call": "raw/recovered-pig_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/pig-walk-legs-3.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "content_scale": 0.05555555555555555,
+        "crop_xywh": [
+          1512,
+          271,
+          450,
+          277
+        ]
+      },
+      "sha256": "2d45f204f751cc7a1c9d26db77fd434149a562d6509532f998150e2ec82a4757",
+      "source": "raw/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98"
+    },
+    "sheep-head-action-sheep_eat-0": {
+      "call": "raw/sheep_eat_0-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/sheep-head-action-sheep_eat-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/sheep_eat_0-r1.prompt.txt",
+      "prompt_sha256": "bdb1d74c2e3cb487acf90c5f12accf73bb9339dde594cbcc3538e747a9557ad7",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.02965599051008304,
+        "crop_xywh": [
+          272,
+          294,
+          843,
+          641
+        ]
+      },
+      "sha256": "66ad107fed790f531f1bf88fcec0caede2cb3801ed0bd57720956677da559aef",
+      "source": "raw/sheep_eat_0-r1.png",
+      "source_sha256": "eab27f0a6ab4f543de09920df8b391adbbcc122edebc05595342f397885ca3fd"
+    },
+    "sheep-head-action-sheep_eat-1": {
+      "call": "raw/sheep_eat_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/sheep-head-action-sheep_eat-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/sheep_eat_1-r1.prompt.txt",
+      "prompt_sha256": "266655df6685974e2ce5fe2e60471a27d9db5ab517dcd5a65aabc84132f4072e",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.02965599051008304,
+        "crop_xywh": [
+          272,
+          294,
+          843,
+          641
+        ]
+      },
+      "sha256": "9c8fa913b84a56c46f56751f36eafb2909eff1aa07d180ba68d2ff2c93b57d93",
+      "source": "raw/sheep_eat_1-r1.png",
+      "source_sha256": "0118adb720bce77a5565384717d698d8ef57c633f687a982fc697ed5b382cf23"
+    },
+    "sheep-head-body-sheep_eat-0": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/sheep-head-body-sheep_eat-0.png",
+      "parts": [
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            0,
+            30
+          ],
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ]
+        },
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            17,
+            0
+          ],
+          "slice_xywh": [
+            17,
+            0,
+            23,
+            30
+          ]
+        },
+        {
+          "input": "sheep-head-action-sheep_eat-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            17,
+            30
+          ]
+        }
+      ],
+      "sha256": "5770ec9996204c3b4cdc05a1286d643e7920c944ba7051d76d6eaede299f03fe"
+    },
+    "sheep-head-body-sheep_eat-1": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/sheep-head-body-sheep_eat-1.png",
+      "parts": [
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            0,
+            30
+          ],
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ]
+        },
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            17,
+            0
+          ],
+          "slice_xywh": [
+            17,
+            0,
+            23,
+            30
+          ]
+        },
+        {
+          "input": "sheep-head-action-sheep_eat-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            17,
+            30
+          ]
+        }
+      ],
+      "sha256": "0865b28582be0ce4d71d6c7118c280926dc0882a209e1f2bb5ff785409f58425"
+    },
+    "sheep-idle-head": {
+      "call": "raw/recovered-sheep_idle_1-r3.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/sheep-idle-head.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-sheep_idle_1-r3.prompt.txt",
+      "prompt_sha256": "cbc374e52cbd19b2862226651ac1baeca1918d533e9ac99fcd5e71679f089888",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.02965599051008304,
+        "crop_xywh": [
+          272,
+          294,
+          843,
+          641
+        ]
+      },
+      "sha256": "b46b358df303e565fd53280be1bfba1a5fe1d69cfb4828697ed4593d878928bf",
+      "source": "raw/recovered-sheep_idle_1-r3.png",
+      "source_sha256": "9a8c88077463af756341c4ed6eadede8141e712f54b4024c32ea1a01a9ca7352"
+    },
+    "sheep-idle-stable": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/sheep-idle-stable.png",
+      "parts": [
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            8
+          ]
+        },
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            0,
+            25
+          ],
+          "slice_xywh": [
+            0,
+            25,
+            40,
+            7
+          ]
+        },
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            5,
+            17
+          ]
+        },
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            19,
+            8
+          ],
+          "slice_xywh": [
+            19,
+            8,
+            21,
+            17
+          ]
+        },
+        {
+          "input": "sheep-idle-head",
+          "paste_xy": [
+            5,
+            8
+          ],
+          "slice_xywh": [
+            5,
+            8,
+            14,
+            17
+          ]
+        }
+      ],
+      "sha256": "e838157a072bc552aeb126e44f12572a3fbabbc4f3a6b09dc3fc30abaaeaa0e2"
+    },
+    "sheep-lying-master": {
+      "call": "raw/recovered-sheep_sleep_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/sheep-lying-master.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-sheep_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          12
+        ],
+        "content_scale": 0.02997601918465228,
+        "crop_xywh": [
+          273,
+          431,
+          834,
+          414
+        ]
+      },
+      "sha256": "1c7c329a159367f534b0a8a521179e8682fda56997b48dcfc0d54d2b00007375",
+      "source": "raw/recovered-sheep_sleep_1-r1.png",
+      "source_sha256": "4e211e520667573b34dedc270009bb2aaebe50e10822ea564f104169ab9e2edb"
+    },
+    "sheep-sleep-breath": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/sheep-sleep-breath.png",
+      "parts": [
+        {
+          "input": "sheep-lying-master",
+          "paste_xy": [
+            0,
+            24
+          ],
+          "slice_xywh": [
+            0,
+            24,
+            40,
+            8
+          ]
+        },
+        {
+          "input": "sheep-lying-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            24
+          ]
+        },
+        {
+          "input": "sheep-lying-master",
+          "paste_xy": [
+            16,
+            0
+          ],
+          "slice_xywh": [
+            16,
+            1,
+            24,
+            25
+          ]
+        }
+      ],
+      "sha256": "7deb4092f8711976260d4819b9baf9aff1d308065696223f426ee9f3aa9e5d4e"
+    },
+    "sheep-standing-master": {
+      "call": "raw/sheep-master-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/sheep-standing-master.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/sheep-master-r1.prompt.txt",
+      "prompt_sha256": "153c45a79863b251996488bc146206cdc9cae4c08c9cbe5cbdcc0c586c93ab36",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.02965599051008304,
+        "crop_xywh": [
+          272,
+          294,
+          843,
+          641
+        ]
+      },
+      "sha256": "44e90b0bac144f6c2e183046f7dda667adf23f126ef3cfffdaece5459521c921",
+      "source": "raw/sheep-master-r1.png",
+      "source_sha256": "9c06f6aa160f20d8deb2921a081180f5891641108365364b7aeb9858dc7e5500"
+    },
+    "sheep-walk-legs-0": {
+      "call": "raw/recovered-sheep_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/sheep-walk-legs-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.05434782608695652,
+        "crop_xywh": [
+          30,
+          228,
+          460,
+          347
+        ]
+      },
+      "sha256": "2882ec516eea8de4d9387b8fb9644df695edc7748f84996b7a4d6e272ca838a0",
+      "source": "raw/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38"
+    },
+    "sheep-walk-legs-1": {
+      "call": "raw/recovered-sheep_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/sheep-walk-legs-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.05434782608695652,
+        "crop_xywh": [
+          516,
+          228,
+          460,
+          347
+        ]
+      },
+      "sha256": "8df3240951c727486532506ee6b2072f7e1233461bf64cd8d10d5ddff847580f",
+      "source": "raw/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38"
+    },
+    "sheep-walk-legs-2": {
+      "call": "raw/recovered-sheep_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/sheep-walk-legs-2.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.05434782608695652,
+        "crop_xywh": [
+          1014,
+          228,
+          460,
+          347
+        ]
+      },
+      "sha256": "0f36ce0cf5db755489eeb288fac5f2a92b63e3830e1d8a62774444dcaf1f1e8e",
+      "source": "raw/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38"
+    },
+    "sheep-walk-legs-3": {
+      "call": "raw/recovered-sheep_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/sheep-walk-legs-3.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.05434782608695652,
+        "crop_xywh": [
+          1498,
+          228,
+          460,
+          347
+        ]
+      },
+      "sha256": "f063067e2b0d5899f5db5eeb4d753891749c5734fb72e362dcc6c5c11c384c84",
+      "source": "raw/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "sheep_idle",
+      "call": "raw/sheep-master-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/sheep_idle/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "standing identity master",
+      "prompt": "raw/sheep-master-r1.prompt.txt",
+      "prompt_sha256": "153c45a79863b251996488bc146206cdc9cae4c08c9cbe5cbdcc0c586c93ab36",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.02965599051008304,
+        "crop_xywh": [
+          272,
+          294,
+          843,
+          641
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_idle_0.png",
+      "seconds": 0.5,
+      "sha256": "44e90b0bac144f6c2e183046f7dda667adf23f126ef3cfffdaece5459521c921",
+      "source": "raw/sheep-master-r1.png",
+      "source_sha256": "9c06f6aa160f20d8deb2921a081180f5891641108365364b7aeb9858dc7e5500",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          18,
+          20
+        ]
+      ]
+    },
+    {
+      "anim": "sheep_idle",
+      "call": "raw/recovered-sheep_idle_1-r3.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/sheep_idle/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "sheep-idle-stable",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "sheep_idle_1",
+      "prompt": "raw/recovered-sheep_idle_1-r3.prompt.txt",
+      "prompt_sha256": "cbc374e52cbd19b2862226651ac1baeca1918d533e9ac99fcd5e71679f089888",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.02965599051008304,
+        "crop_xywh": [
+          272,
+          294,
+          843,
+          641
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_idle_1.png",
+      "seconds": 0.5,
+      "sha256": "e838157a072bc552aeb126e44f12572a3fbabbc4f3a6b09dc3fc30abaaeaa0e2",
+      "source": "raw/recovered-sheep_idle_1-r3.png",
+      "source_sha256": "9a8c88077463af756341c4ed6eadede8141e712f54b4024c32ea1a01a9ca7352",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          18,
+          20
+        ]
+      ]
+    },
+    {
+      "anim": "sheep_eat",
+      "call": "raw/sheep_eat_0-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/sheep_eat/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "sheep-head-body-sheep_eat-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        },
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            17,
+            26
+          ],
+          "slice_xywh": [
+            17,
+            26,
+            5,
+            4
+          ]
+        },
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            27,
+            26
+          ],
+          "slice_xywh": [
+            27,
+            26,
+            6,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "sheep_eat_0",
+      "prompt": "raw/sheep_eat_0-r1.prompt.txt",
+      "prompt_sha256": "bdb1d74c2e3cb487acf90c5f12accf73bb9339dde594cbcc3538e747a9557ad7",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.02965599051008304,
+        "crop_xywh": [
+          272,
+          294,
+          843,
+          641
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_eat_0.png",
+      "seconds": 0.2,
+      "sha256": "5770ec9996204c3b4cdc05a1286d643e7920c944ba7051d76d6eaede299f03fe",
+      "source": "raw/sheep_eat_0-r1.png",
+      "source_sha256": "eab27f0a6ab4f543de09920df8b391adbbcc122edebc05595342f397885ca3fd",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          1,
+          30
+        ]
+      ]
+    },
+    {
+      "anim": "sheep_eat",
+      "call": "raw/sheep_eat_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/sheep_eat/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "sheep-head-body-sheep_eat-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        },
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            17,
+            26
+          ],
+          "slice_xywh": [
+            17,
+            26,
+            5,
+            4
+          ]
+        },
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            27,
+            26
+          ],
+          "slice_xywh": [
+            27,
+            26,
+            6,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "sheep_eat_1",
+      "prompt": "raw/sheep_eat_1-r1.prompt.txt",
+      "prompt_sha256": "266655df6685974e2ce5fe2e60471a27d9db5ab517dcd5a65aabc84132f4072e",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.02965599051008304,
+        "crop_xywh": [
+          272,
+          294,
+          843,
+          641
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_eat_1.png",
+      "seconds": 0.2,
+      "sha256": "0865b28582be0ce4d71d6c7118c280926dc0882a209e1f2bb5ff785409f58425",
+      "source": "raw/sheep_eat_1-r1.png",
+      "source_sha256": "0118adb720bce77a5565384717d698d8ef57c633f687a982fc697ed5b382cf23",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          1,
+          30
+        ]
+      ]
+    },
+    {
+      "anim": "sheep_sleep",
+      "call": "raw/recovered-sheep_sleep_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/sheep_sleep/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "sheep-lying-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "sheep_sleep_0",
+      "prompt": "raw/recovered-sheep_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          12
+        ],
+        "content_scale": 0.02997601918465228,
+        "crop_xywh": [
+          273,
+          431,
+          834,
+          414
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_sleep_0.png",
+      "seconds": 0.6,
+      "sha256": "1c7c329a159367f534b0a8a521179e8682fda56997b48dcfc0d54d2b00007375",
+      "source": "raw/recovered-sheep_sleep_1-r1.png",
+      "source_sha256": "4e211e520667573b34dedc270009bb2aaebe50e10822ea564f104169ab9e2edb",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    },
+    {
+      "anim": "sheep_sleep",
+      "call": "raw/recovered-sheep_sleep_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/sheep_sleep/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "sheep-sleep-breath",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "sheep_sleep_1",
+      "prompt": "raw/recovered-sheep_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          12
+        ],
+        "content_scale": 0.02997601918465228,
+        "crop_xywh": [
+          273,
+          431,
+          834,
+          414
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_sleep_1.png",
+      "seconds": 0.6,
+      "sha256": "7deb4092f8711976260d4819b9baf9aff1d308065696223f426ee9f3aa9e5d4e",
+      "source": "raw/recovered-sheep_sleep_1-r1.png",
+      "source_sha256": "4e211e520667573b34dedc270009bb2aaebe50e10822ea564f104169ab9e2edb",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    },
+    {
+      "anim": "sheep_walk",
+      "call": "raw/recovered-sheep_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/sheep_walk/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "sheep-walk-legs-0",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ]
+        },
+        {
+          "input": "sheep-walk-legs-0",
+          "paste_xy": [
+            36,
+            23
+          ],
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ]
+        },
+        {
+          "input": "sheep-walk-legs-0",
+          "paste_xy": [
+            25,
+            24
+          ],
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "contact",
+      "prompt": "raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.05434782608695652,
+        "crop_xywh": [
+          30,
+          228,
+          460,
+          347
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_walk_0.png",
+      "seconds": 0.15,
+      "sha256": "1d62848963d6715795d3a29fb3e42508ed5836dde830a62dd756ce0579c23ecb",
+      "source": "raw/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          18,
+          20
+        ]
+      ]
+    },
+    {
+      "anim": "sheep_walk",
+      "call": "raw/recovered-sheep_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/sheep_walk/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "sheep-walk-legs-1",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "passing",
+      "prompt": "raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.05434782608695652,
+        "crop_xywh": [
+          516,
+          228,
+          460,
+          347
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_walk_1.png",
+      "seconds": 0.15,
+      "sha256": "5275922e7e51a4017425207311b781730b6edb9820de6b94dc730416770aac89",
+      "source": "raw/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          18,
+          20
+        ]
+      ]
+    },
+    {
+      "anim": "sheep_walk",
+      "call": "raw/recovered-sheep_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/sheep_walk/west/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "sheep-walk-legs-2",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ]
+        },
+        {
+          "input": "sheep-walk-legs-2",
+          "paste_xy": [
+            36,
+            23
+          ],
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ]
+        },
+        {
+          "input": "sheep-walk-legs-2",
+          "paste_xy": [
+            25,
+            24
+          ],
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "opposite contact",
+      "prompt": "raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.05434782608695652,
+        "crop_xywh": [
+          1014,
+          228,
+          460,
+          347
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_walk_2.png",
+      "seconds": 0.15,
+      "sha256": "af7f609102b9ec9e96a868ed4b894daddb8f147cf5e9f455b91b075f02cab485",
+      "source": "raw/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          18,
+          20
+        ]
+      ]
+    },
+    {
+      "anim": "sheep_walk",
+      "call": "raw/recovered-sheep_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/sheep_walk/west/04.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "sheep-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "sheep-walk-legs-3",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "opposite passing",
+      "prompt": "raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "content_scale": 0.05434782608695652,
+        "crop_xywh": [
+          1498,
+          228,
+          460,
+          347
+        ]
+      },
+      "runtime_name": "sprites/props/sheep_walk_3.png",
+      "seconds": 0.15,
+      "sha256": "ad39a405398d8cb8b162ed72c45ad3e3c01625b1a4aa60633b511ca6466ff05f",
+      "source": "raw/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          18,
+          20
+        ]
+      ]
+    },
+    {
+      "anim": "pig_idle",
+      "call": "raw/pig-master-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/pig_idle/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "standing identity master",
+      "prompt": "raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.034482758620689655,
+        "crop_xywh": [
+          353,
+          356,
+          725,
+          477
+        ]
+      },
+      "runtime_name": "sprites/props/pig_idle_0.png",
+      "seconds": 0.5,
+      "sha256": "a48e5d3dbb8132def3c243499f28cf83294561b057d1e42fbc7c83ef4b639bc2",
+      "source": "raw/pig-master-r1.png",
+      "source_sha256": "5577d2e8ada6791bc4c6f9a0eb6b9473a104bd46fa69234441a01128a84469ab",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          15,
+          17
+        ]
+      ]
+    },
+    {
+      "anim": "pig_idle",
+      "call": "raw/recovered-pig_idle_1-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_idle/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-idle-stable",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "pig_idle_1",
+      "prompt": "raw/recovered-pig_idle_1-r2.prompt.txt",
+      "prompt_sha256": "2e02fd4530c6207eb5e77c7dd83ab03e0a9099d0ab06d5db1c1f7313d23df783",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.034482758620689655,
+        "crop_xywh": [
+          353,
+          356,
+          725,
+          477
+        ]
+      },
+      "runtime_name": "sprites/props/pig_idle_1.png",
+      "seconds": 0.5,
+      "sha256": "8a47c33b8f17c244c5d243f73c2d864b4cdca02428ae070a392b20dffe5405ad",
+      "source": "raw/recovered-pig_idle_1-r2.png",
+      "source_sha256": "2aafe4535eb649c7062af36ea0d238eb4b18449d357f09bcff5a86e72e54bce0",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          15,
+          17
+        ]
+      ]
+    },
+    {
+      "anim": "pig_eat",
+      "call": "raw/recovered-pig_eat_0-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_eat/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-head-body-pig_eat-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            26
+          ],
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            27,
+            26
+          ],
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "pig_eat_0",
+      "prompt": "raw/recovered-pig_eat_0-r2.prompt.txt",
+      "prompt_sha256": "02ac9afd0d2d0ba9b81afcfa4ab929895a33cd7bdeaf5a576ea02c3348fb179c",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.034482758620689655,
+        "crop_xywh": [
+          353,
+          356,
+          725,
+          477
+        ]
+      },
+      "runtime_name": "sprites/props/pig_eat_0.png",
+      "seconds": 0.2,
+      "sha256": "7de3a2e99eb50581bd97203c92a3ce15fdf7fc8833447ffbc311ea83e5bce0f4",
+      "source": "raw/recovered-pig_eat_0-r2.png",
+      "source_sha256": "108278b19549656472652aa3d5c9ef7c313379a024f1fc90a129c49b644855df",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          1,
+          30
+        ]
+      ]
+    },
+    {
+      "anim": "pig_eat",
+      "call": "raw/recovered-pig_eat_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_eat/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-head-body-pig_eat-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            26
+          ],
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            27,
+            26
+          ],
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "pig_eat_1",
+      "prompt": "raw/recovered-pig_eat_1-r1.prompt.txt",
+      "prompt_sha256": "266655df6685974e2ce5fe2e60471a27d9db5ab517dcd5a65aabc84132f4072e",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.034482758620689655,
+        "crop_xywh": [
+          353,
+          356,
+          725,
+          477
+        ]
+      },
+      "runtime_name": "sprites/props/pig_eat_1.png",
+      "seconds": 0.2,
+      "sha256": "fe22d8976afdac08e7dfbc1531ab73d7b763dd01eb0d1b45b81f53a1d2bb5465",
+      "source": "raw/recovered-pig_eat_1-r1.png",
+      "source_sha256": "877534bdeebbc8af459e888ebd42e6d1f6af4a2a5bc06d55c1e42ca0ca81a488",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          1,
+          30
+        ]
+      ]
+    },
+    {
+      "anim": "pig_sleep",
+      "call": "raw/recovered-pig_sleep_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_sleep/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-lying-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "pig_sleep_0",
+      "prompt": "raw/recovered-pig_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          12
+        ],
+        "content_scale": 0.03424657534246575,
+        "crop_xywh": [
+          350,
+          415,
+          730,
+          353
+        ]
+      },
+      "runtime_name": "sprites/props/pig_sleep_0.png",
+      "seconds": 0.6,
+      "sha256": "d35110bd885e207db452f87b180e4c20efa261f93f1d48444df119207423c9b9",
+      "source": "raw/recovered-pig_sleep_1-r1.png",
+      "source_sha256": "99a309e7531f2b8895f958435b70d30668ee73dee541db5aa7ad30e7bed4e979",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    },
+    {
+      "anim": "pig_sleep",
+      "call": "raw/recovered-pig_sleep_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_sleep/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-sleep-breath",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "pig_sleep_1",
+      "prompt": "raw/recovered-pig_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          12
+        ],
+        "content_scale": 0.03424657534246575,
+        "crop_xywh": [
+          350,
+          415,
+          730,
+          353
+        ]
+      },
+      "runtime_name": "sprites/props/pig_sleep_1.png",
+      "seconds": 0.6,
+      "sha256": "5cf158de03aa0102f6151a3976e17b1203b52ea4eedb3fafbf3b578b7dbfd5bd",
+      "source": "raw/recovered-pig_sleep_1-r1.png",
+      "source_sha256": "99a309e7531f2b8895f958435b70d30668ee73dee541db5aa7ad30e7bed4e979",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    },
+    {
+      "anim": "pig_walk",
+      "call": "raw/recovered-pig_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_walk/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "pig-walk-legs-0",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "contact",
+      "prompt": "raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "content_scale": 0.05555555555555555,
+        "crop_xywh": [
+          35,
+          269,
+          450,
+          277
+        ]
+      },
+      "runtime_name": "sprites/props/pig_walk_0.png",
+      "seconds": 0.15,
+      "sha256": "0da13798de46d85f0bf841c0caaaa282c054408901b58595fd76a7e1abb665ef",
+      "source": "raw/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          15,
+          17
+        ]
+      ]
+    },
+    {
+      "anim": "pig_walk",
+      "call": "raw/recovered-pig_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_walk/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "pig-walk-legs-1",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ]
+        },
+        {
+          "input": "pig-walk-legs-1",
+          "paste_xy": [
+            36,
+            23
+          ],
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ]
+        },
+        {
+          "input": "pig-walk-legs-1",
+          "paste_xy": [
+            25,
+            24
+          ],
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "passing",
+      "prompt": "raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "content_scale": 0.05555555555555555,
+        "crop_xywh": [
+          528,
+          271,
+          450,
+          277
+        ]
+      },
+      "runtime_name": "sprites/props/pig_walk_1.png",
+      "seconds": 0.15,
+      "sha256": "16670ddd099b049b0067a5097fc5958e67b297d87b40ce7ca258b1faaa57ce05",
+      "source": "raw/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          15,
+          17
+        ]
+      ]
+    },
+    {
+      "anim": "pig_walk",
+      "call": "raw/recovered-pig_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_walk/west/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "pig-walk-legs-2",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ]
+        },
+        {
+          "input": "pig-walk-legs-2",
+          "paste_xy": [
+            36,
+            23
+          ],
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ]
+        },
+        {
+          "input": "pig-walk-legs-2",
+          "paste_xy": [
+            25,
+            24
+          ],
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "opposite contact",
+      "prompt": "raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "content_scale": 0.05555555555555555,
+        "crop_xywh": [
+          1024,
+          270,
+          450,
+          277
+        ]
+      },
+      "runtime_name": "sprites/props/pig_walk_2.png",
+      "seconds": 0.15,
+      "sha256": "7bd2e2bb38a642e680b7e9c2933c6d6374844f69d8547ac50ba8c2ae8ce8caab",
+      "source": "raw/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          15,
+          17
+        ]
+      ]
+    },
+    {
+      "anim": "pig_walk",
+      "call": "raw/recovered-pig_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_walk/west/04.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "pig-walk-legs-3",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ]
+        },
+        {
+          "input": "pig-walk-legs-3",
+          "paste_xy": [
+            36,
+            23
+          ],
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ]
+        },
+        {
+          "input": "pig-walk-legs-3",
+          "paste_xy": [
+            25,
+            24
+          ],
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "opposite passing",
+      "prompt": "raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "content_scale": 0.05555555555555555,
+        "crop_xywh": [
+          1512,
+          271,
+          450,
+          277
+        ]
+      },
+      "runtime_name": "sprites/props/pig_walk_3.png",
+      "seconds": 0.15,
+      "sha256": "d348dc8eef4f01ac4326d1c7488a896b4944a0a2b17ee0ccfda2d1b6cf415876",
+      "source": "raw/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98",
+      "visible_limits_wh": [
+        [
+          24,
+          26
+        ],
+        [
+          15,
+          17
+        ]
+      ]
+    },
+    {
+      "anim": "pig_dig",
+      "call": "raw/pig_dig-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_dig/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-head-body-pig_dig-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            26
+          ],
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            27,
+            26
+          ],
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "pig_dig 0",
+      "prompt": "raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.04440497335701599,
+        "crop_xywh": [
+          93,
+          227,
+          563,
+          360
+        ]
+      },
+      "runtime_name": "sprites/props/pig_dig_0.png",
+      "seconds": 0.1,
+      "sha256": "b96514237c87f87e0a627c348e27c685c0ce424def888f29977d8e368f63212c",
+      "source": "raw/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          1,
+          30
+        ]
+      ]
+    },
+    {
+      "anim": "pig_dig",
+      "call": "raw/pig_dig-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_dig/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-head-body-pig_dig-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            26
+          ],
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            27,
+            26
+          ],
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "pig_dig 1",
+      "prompt": "raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.04440497335701599,
+        "crop_xywh": [
+          721,
+          225,
+          563,
+          360
+        ]
+      },
+      "runtime_name": "sprites/props/pig_dig_1.png",
+      "seconds": 0.1,
+      "sha256": "96c1680abe1b6c6094baf161d5299ca3110a8c91d378632117f51af81b6c7c62",
+      "source": "raw/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          1,
+          30
+        ]
+      ]
+    },
+    {
+      "anim": "pig_dig",
+      "call": "raw/pig_dig-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/pig_dig/west/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "pig-head-body-pig_dig-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            16,
+            26
+          ],
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ]
+        },
+        {
+          "input": "pig-standing-master",
+          "paste_xy": [
+            27,
+            26
+          ],
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "pig_dig 2",
+      "prompt": "raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.04440497335701599,
+        "crop_xywh": [
+          1355,
+          225,
+          563,
+          360
+        ]
+      },
+      "runtime_name": "sprites/props/pig_dig_2.png",
+      "seconds": 0.1,
+      "sha256": "a6a59a9a05705b3880ca7b234f60cf2cabee69f7b0a99f66d34ab185821d984b",
+      "source": "raw/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          1,
+          30
+        ]
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A026",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\left\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "b24d95053eafcc2a11e4184932ff41badc3bf248c1e2d9af0785b7637660574a"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\props\\cow.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "f6a2990f7b7d9f95acbf0927eae35fcb451b50b2c92c439a339e498b4f663374"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\sheep-master-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "9c06f6aa160f20d8deb2921a081180f5891641108365364b7aeb9858dc7e5500"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\sheep_eat_0-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "eab27f0a6ab4f543de09920df8b391adbbcc122edebc05595342f397885ca3fd"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\pig-master-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "5577d2e8ada6791bc4c6f9a0eb6b9473a104bd46fa69234441a01128a84469ab"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A026-farm-animals",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "Sheep and pigs",
+  "tool": "built-in ImageGen"
+}

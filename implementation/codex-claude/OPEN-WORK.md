@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-15**, with task 0206's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-15**, with task 0209's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 264 done, 32 todo, 0 blocked (89%).**
+**The game backlog: 296 tasks, 265 done, 31 todo, 0 blocked (90%).**
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
-says 0209). Only the farmer packs the owner deferred (3c) still wait on
+says 0210). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -109,7 +109,7 @@ source:
 | A017 | Autumn crops (**integrated** by 0200, 2026-10-15) | 0200 |
 | A018 | Sprinklers (**integrated** by 0201, 2026-10-15) | 0201 |
 | A023 | Fishing gear and the minigame (**integrated** by 0206, 2026-10-15) | 0206 |
-| A026 | Sheep and pigs | 0209 |
+| A026 | Sheep and pigs (**integrated** by 0209, 2026-10-15) | 0209 |
 | A027 | The cow and the chicken redrawn | 0210 |
 | A030 | The coop and the barn | 0212 |
 | A033 | The shipping bin | 0215 |

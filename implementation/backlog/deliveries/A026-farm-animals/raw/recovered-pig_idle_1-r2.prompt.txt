@@ -1,0 +1,127 @@
+Production pixel-art ImageGen source for HARVEST THE NIGHT. Orthographic three-quarter top-down camera, upper-left neutral daylight, deliberate broad pixel clusters and project materials. True transparent background, isolated object, no ground, cast shadow, halo, text or labels. First input is identity/edit target; other inputs are references. Keep objects unclipped.
+CORRECTION revision2. Edit first image. Only ear/tailchanges, hooves and lowerbody mustmatchmaster EXACTLY.
+Asset brief, apply only requested item:
+# A026 - Sheep and pigs
+
+- **Status:** generating
+- **For game task:** 0209
+- **Dressed by game tasks:** 0185
+- **Spec after game task:** 0185
+- **Family:** animals
+- **Mode:** A - raw ImageGen sources, Claude reduces them to the 42-colour palette
+- **Size of the job:** 2 species, 9 animations, 23 frames (side view, west only)
+
+## What it is for
+
+Task 0185 fills the barn. Sheep give wool, pigs dig truffles, and every animal wanders, eats and sleeps near its building as a view-only state. The player sees them by day on the grass round the barn, a few cells from the 32px farmer. They also sleep beside the barn in the dark evening before the farmer goes to bed; at night `DAY_ONLY` hides them. At 1080p a sheep must read as a cream wool body with a dark face, and a pig as a round peach-pink body with a snout. Both must be clearly smaller than the farmer and bigger than a chicken, by day and after the night relight. This pack sets the look of the animal family: A027 (cow and chicken) and A028 (dog) match it.
+
+## Deliverables
+
+Final geometry settled by game task 0185. The rows stand as written: 40x32 at (20,30), draw 1.0, west only with the runtime mirror, and the visible targets against the 16x32 farmer below. **How the game plays them** (`src/ui/animal_view.gd`): an animal that lives in the barn wanders the two rows in front of it by day - `walk` while it crosses them at about 12 px a second, then `eat` for 2-4 s, `idle`, or now and then `sleep` for a few seconds - and is inside at night, not drawn. `pig_dig` is registered but not yet played: 0185's pigs mark their spots at dawn, before anyone is watching, and the spots lie beside or in front of the barn, never behind it. Until 0209 the sheep is `props/chicken` paled and grown 1.35x and the pig `props/cow` in pink at 0.8x. Start only when `python implementation/backlog/assets.py next` offers this pack.
+
+| Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
+|---|---|---|---|---|
+| `sheep_idle_0..1` | 40x32 | (20,30) | 2 / 0.5 / loop | 0 = the master: standing, head up. 1 = same body and hooves, with an ear flick or the head 1 px lower. |
+| `sheep_walk_0..3` | 40x32 | (20,30) | 4 / 0.15 / loop | Contact, passing, opposite contact, opposite passing. At least two hooves on row 29 in every frame. |
+| `sheep_eat_0..1` | 40x32 | (20,30) | 2 / 0.2 / loop | Head down with the muzzle at the hoof line. 1 = jaw chewing, muzzle 1 px up. Body and hooves as in idle. |
+| `sheep_sleep_0..1` | 40x32 | (20,30) | 2 / 0.6 / loop | Lying, legs folded under, eyes closed, head resting. 1 = back 1 px higher (a breath). |
+| `pig_idle_0..1` | 40x32 | (20,30) | 2 / 0.5 / loop | As the sheep: 0 = the master, 1 = an ear flick or a snout twitch. |
+| `pig_walk_0..3` | 40x32 | (20,30) | 4 / 0.15 / loop | As the sheep. |
+| `pig_eat_0..1` | 40x32 | (20,30) | 2 / 0.2 / loop | As the sheep, with the snout at the ground. |
+| `pig_sleep_0..1` | 40x32 | (20,30) | 2 / 0.6 / loop | As the sheep: lying on its side or belly, eyes closed. |
+| `pig_dig_0..2` | 40x32 | (20,30) | 3 / 0.1 / one-shot | Snout lowered (anticipation), snout pushed into the ground (contact), head up with the snout lifted (recovery). Draw no soil, hole or truffle: the dig spot is A029's prop. |
+
+Rules for every row:
+
+- **Direction and files.**
+  - Every animation faces `west` only (head on the left). East is the runtime mirror, so never deliver it: `mirror: "runtime"` and `mirror_pairs: {}`.
+  - Files are `native/<anim>/west/01..NN.png`, where `<anim>` is the runtime name without its index (e.g. `pig_dig`) and `01.png` is frame 0.
+  - Claude writes them to `sprites/props/<runtime name>.png`.
+- **Draw scale and points.** Draw scale is 1.0. No metadata points.
+- **Grounding.**
+  - The lowest opaque row is 29 in every frame, lying poses included.
+  - The visible bounds of `<species>_idle_0` are centred on x=20 (Â±1).
+  - Every other frame keeps the master's torso position, so only the head, legs and tail move.
+- **One body size per species** across all its animations: torso length and height match the master within 1 px.
+- **Visible targets** in native px. The farmer is 16x32.
+
+  | Pose | Width | Height | Reads as |
+  |---|---|---|---|
+  | Sheep, standing | 24-26 | 18-20 | Back at the farmer's waist, head top at his chest |
+  | Pig, standing | 24-26 | 15-17 | |
+  | Sheep or pig, lying | - | 12-14 | |
+- **Colours.**
+  - Sheep: cream wool, mostly `bone_dark`, with `bone` only in small top-left highlight clusters so it never looks lit at night. A `stone_light` underside, a dark face, ears and legs (`stone_dark`, `ink_soft`) and `soil_dark` hooves.
+  - Pig: the palette has no pure pink. Use a `skin_light` body, `skin` planes, a `skin_dark` outline and underside, and `roof_light` only inside the ears and on the snout.
+- **`palette_keys`.**
+  - Sheep: `ink, ink_soft, stone_dark, stone, stone_light, bone_dark, bone, skin, soil_dark`.
+  - Pig: `ink, ink_soft, skin_dark, skin, skin_light, roof_light, soil_dark`.
+  - Every frame of a species uses the same keys. A change is a recipe change for all of its frames, recorded in `review-log.txt`.
+
+## Match these
+
+- `implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/01.png` is the 32px farmer in side view (40x40, pivot (20,36), visible 17x31). Match the scale, the outline weight, and the way a side view still shows the lit top planes. The contract's `.../walk/down/01.png` (visible 16x32) goes on the review page.
+- `sprites/props/cow.png` and `sprites/props/chicken.png` are today's animals (24x24, pivot (12,22), visible 22x13 and 11x12). Match their palette use, coloured outline and west-facing side view. The new animals are deliberately bigger than today's cow, which A027 redraws.
+- `sprites/enemies/walker_walk_0.png` (64x48, visible 18x29) shows how a side-view walk faces west and keeps its feet on the pivot row.
+- `docs/reference-sheet.png` has a cow and hens on the grass. `assets/art_source/masters/style-day.png` and `style-night.png` show the materials, and that animals sit high on the contrast ladder, above props and ground.
+- `sprites/actors/shadow.png` (20x8) is the shared shadow the game draws under every actor. Never bake one.
+- No sheep or pig candidates exist in the repo. Start from new masters.
+
+## How to make it
+
+1. **Prompt.** Build it as contract section 8 says: BASE + ANIMAL + STRIP for strips, + CORRECTION for revisions.
+   - In ANIMAL, set the species, replace "24x24 target canvas" with "40x32 target canvas, contact pivot (20,30)", and replace its cow/chicken sentence with the species line below.
+   - Add: "Side view facing WEST (head on the left), seen from the game's three-quarter top-down camera: the top of the back is a lit plane and the far legs are partly visible. Normal farm proportions, small eyes, not a mascot."
+   - Sheep: "a farm sheep with a compact rounded body of cream wool in broad grouped curls, a dark grey face, ears and legs, small dark hooves; no horns, bell, collar or ribbon."
+   - Pig: "a farm pig with a round barrel body of peach-pink skin, a flat snout disc, small folded ears, a short curled tail, short legs, dark hooves; no mud, spots, collar or clothes."
+2. **Tool.** Built-in ImageGen with `transparent_background=true` on every call, one subject per call. Attach:
+   - the farmer side-view frame (role: scale and outline reference);
+   - `docs/reference-sheet.png` (role: style reference);
+   - `sprites/props/cow.png` (role: palette and camera reference, not an edit target);
+   - after the master is accepted, the master (role: identity master, or edit target for edits).
+3. **Order per species.**
+   1. Generate the standing master and reduce it.
+   2. Check the reduced master beside the farmer before you make anything else.
+   3. Make the stationary frames as ImageGen edits, each one changing only the pose: `idle_1` and `eat_0` from the master, `eat_1` from `eat_0`, `sleep_0` from the master, and `sleep_1` from `sleep_0`.
+   4. Make `walk` (and the pig's `dig`) as one STRIP call each, with the master attached.
+   
+   Run at most 3 CORRECTION revisions per asset.
+4. **Reduce** with the mode A recipe (`render_source` in `tools/import_art.py`, imported read-only).
+   - **Master.**
+     - `crop_xywh` is the measured visible box.
+     - Pick `content_scale` so the standing body lands inside the height target.
+     - The default anchor puts the hooves on row 29.
+   - **Edits.** Reuse the master's `crop_xywh` and `content_scale` when the edit kept the framing: the hoof baseline and the rump line stay within 1% of the crop. Otherwise revise the edit.
+   - **Strips.**
+     - Cut the cells with measured boxes.
+     - Every frame uses a box of the same size at the same offset in its cell, with its bottom edge on the strip's measured hoof baseline.
+     - Use one `content_scale` per strip, picked so the reduced torso matches the master (Â±1 px).
+     - A per-frame vertical crop offset is allowed only to land the contact row on 29, and it is recorded in the recipe.
+   - If reduction erases the sheep's face or the pig's snout, regenerate the source. Never patch native pixels.
+
+## Acceptance
+
+- [ ] There are 23 frames, the exact count per row, every one 40x32 with pivot (20,30), all facing west, and no east files.
+- [ ] The lowest opaque row is 29 in every frame, and `idle_0` is centred on x=20 (Â±1). The hooves do not slide in idle, eat, sleep or dig.
+- [ ] The body size matches across each species' animations in the onion skin, and each strip has one `content_scale`. Walk frame 3 leads back to 0, and dig ends.
+- [ ] Alpha is binary on a true transparent background. There is no shadow, grass, mud, hole, truffle, "Zzz" or text.
+- [ ] Only the 42 colours are used, within each species' `palette_keys`, and `render_source` reproduces `native/` (`importer_recipe_matches`).
+- [ ] Visible sizes are inside the targets. The sheep's face and the pig's snout read at 1x, and the wool does not look lit in the night preview.
+- [ ] `build.py` twice gives identical bytes, `build.py --check` passes, and checks.json is all `true`.
+
+## Delivery
+
+Deliver to `implementation/backlog/deliveries/A026-farm-animals/` with `raw/`, `native/`, `preview/`, `rejected/`, contract.json, checks.json, build.py, index.html and review-log.txt (contract 9.1-9.6). This pack has no `runtime/`.
+
+contract.json has:
+
+- `palette_mode: "A"`;
+- `palette_keys` per species;
+- for every animation, `dir: "west"`, `mirror: "runtime"` and `draw_scale: 1.0`.
+
+After the owner approves, write APPROVAL.json (9.7) and CLAUDE-A026-PROMPT.txt (9.8).
+
+- The prompt maps every animation, for example `native/sheep_walk/west/01..04.png -> sprites/props/sheep_walk_0..3.png  40x32 pivot (20,30) draw 1.0  0.15 s loop`.
+- It says these replace 0185's tinted cow and chicken stand-ins for the sheep and the pig.
+
+The last step is `python implementation/backlog/assets.py set A026 approved`, and only after the owner approves in words recorded in APPROVAL.json.

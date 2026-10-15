@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-277 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+278 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -320,6 +320,7 @@ voz alta.
 | 0200 | Art: autumn crops | 2026-10-15 |
 | 0201 | Art: sprinklers | 2026-10-15 |
 | 0206 | Art: fishing gear and the minigame | 2026-10-15 |
+| 0209 | Art: sheep and pigs | 2026-10-15 |
 
 ## Toda vez que o jogo mudou por baixo
 

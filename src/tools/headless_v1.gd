@@ -201,6 +201,7 @@ func _run() -> void:
 	_task_0200_autumn_crops()
 	_task_0201_sprinklers()
 	_task_0206_fishing_gear()
+	_task_0209_sheep_pig()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14422,6 +14423,29 @@ func _task_0206_fishing_gear() -> void:
 		and sinking == ["bobber_bite_0", "bobber_bite_1", "bobber_bite_2"] and line == Vector2i(4, 5),
 		"A023's fishing gear is raster art: the bar's frame and green fit its track, the flash is three frames of 0.065 s, and the float bobs on two frames and sinks through three, held under",
 		"%s; %s / %s; line %s" % [str(wrong), str(bobbing), str(sinking), line])
+	_completed += 1
+
+
+## **A026's sheep and pig** (task 0209): every pose A026 drew - idle, walk,
+## eat, sleep and the pig's dig - is raster art on 40x32 at (20,30), none a
+## stand-in. A drawn pose loops on its own seconds, and the dig plays once
+## and holds its last frame. The cow and the chicken are still on 0120's road
+## until 0210.
+func _task_0209_sheep_pig() -> void:
+	var wrong: Array = []
+	for pose in [&"sheep_idle", &"sheep_walk", &"sheep_eat", &"sheep_sleep", &"pig_idle", &"pig_walk",
+			&"pig_eat", &"pig_sleep", &"pig_dig"]:
+		var frame := PlaceholderArt.frame(AnimalView.pose_path(pose, 0))
+		if not AnimalView.drawn(pose) or not PlaceholderArt.art(pose).is_empty() \
+				or frame.get("canvas") != Vector2i(40, 32) or frame.get("pivot") != Vector2i(20, 30):
+			wrong.append(pose)
+	var walking := [AnimalView.animal_frame(&"sheep_walk", 0.0, 0.0), AnimalView.animal_frame(&"sheep_walk", 0.16, 0.0),
+		AnimalView.animal_frame(&"sheep_walk", 0.61, 0.0)]
+	var digging := [AnimalView.animal_frame(&"pig_dig", 9.0, 0.0), AnimalView.animal_frame(&"pig_dig", 9.0, 0.15),
+		AnimalView.animal_frame(&"pig_dig", 9.0, 3.0)]
+	expect(wrong.is_empty() and walking == [0, 1, 0] and digging == [0, 1, 2],
+		"A026's sheep and pig are raster art at their box; a walk loops on its seconds and the dig plays once, held",
+		"%s; walk %s, dig %s" % [str(wrong), str(walking), str(digging)])
 	_completed += 1
 
 

@@ -1,6 +1,6 @@
 # A026 - Sheep and pigs
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0209
 - **Dressed by game tasks:** 0185
 - **Spec after game task:** 0185

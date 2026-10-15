@@ -1,0 +1,241 @@
+{
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "body_size_coherent": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 23,
+  "frames_found": 23,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/pig_dig/west/01.png": {
+      "bounds": [
+        8,
+        15,
+        33,
+        30
+      ],
+      "opaque_pixels": 255
+    },
+    "native/pig_dig/west/02.png": {
+      "bounds": [
+        8,
+        15,
+        33,
+        30
+      ],
+      "opaque_pixels": 250
+    },
+    "native/pig_dig/west/03.png": {
+      "bounds": [
+        8,
+        14,
+        33,
+        30
+      ],
+      "opaque_pixels": 257
+    },
+    "native/pig_eat/west/01.png": {
+      "bounds": [
+        10,
+        15,
+        33,
+        30
+      ],
+      "opaque_pixels": 228
+    },
+    "native/pig_eat/west/02.png": {
+      "bounds": [
+        10,
+        15,
+        33,
+        30
+      ],
+      "opaque_pixels": 231
+    },
+    "native/pig_idle/west/01.png": {
+      "bounds": [
+        8,
+        14,
+        33,
+        30
+      ],
+      "opaque_pixels": 258
+    },
+    "native/pig_idle/west/02.png": {
+      "bounds": [
+        8,
+        14,
+        33,
+        30
+      ],
+      "opaque_pixels": 252
+    },
+    "native/pig_sleep/west/01.png": {
+      "bounds": [
+        8,
+        18,
+        33,
+        30
+      ],
+      "opaque_pixels": 234
+    },
+    "native/pig_sleep/west/02.png": {
+      "bounds": [
+        8,
+        17,
+        33,
+        30
+      ],
+      "opaque_pixels": 249
+    },
+    "native/pig_walk/west/01.png": {
+      "bounds": [
+        8,
+        14,
+        33,
+        30
+      ],
+      "opaque_pixels": 280
+    },
+    "native/pig_walk/west/02.png": {
+      "bounds": [
+        8,
+        14,
+        33,
+        30
+      ],
+      "opaque_pixels": 275
+    },
+    "native/pig_walk/west/03.png": {
+      "bounds": [
+        8,
+        14,
+        33,
+        30
+      ],
+      "opaque_pixels": 280
+    },
+    "native/pig_walk/west/04.png": {
+      "bounds": [
+        8,
+        14,
+        33,
+        30
+      ],
+      "opaque_pixels": 275
+    },
+    "native/sheep_eat/west/01.png": {
+      "bounds": [
+        9,
+        12,
+        33,
+        30
+      ],
+      "opaque_pixels": 284
+    },
+    "native/sheep_eat/west/02.png": {
+      "bounds": [
+        9,
+        12,
+        33,
+        30
+      ],
+      "opaque_pixels": 287
+    },
+    "native/sheep_idle/west/01.png": {
+      "bounds": [
+        8,
+        11,
+        33,
+        30
+      ],
+      "opaque_pixels": 305
+    },
+    "native/sheep_idle/west/02.png": {
+      "bounds": [
+        8,
+        11,
+        33,
+        30
+      ],
+      "opaque_pixels": 308
+    },
+    "native/sheep_sleep/west/01.png": {
+      "bounds": [
+        8,
+        18,
+        33,
+        30
+      ],
+      "opaque_pixels": 247
+    },
+    "native/sheep_sleep/west/02.png": {
+      "bounds": [
+        8,
+        17,
+        33,
+        30
+      ],
+      "opaque_pixels": 263
+    },
+    "native/sheep_walk/west/01.png": {
+      "bounds": [
+        8,
+        11,
+        33,
+        30
+      ],
+      "opaque_pixels": 309
+    },
+    "native/sheep_walk/west/02.png": {
+      "bounds": [
+        8,
+        11,
+        33,
+        30
+      ],
+      "opaque_pixels": 307
+    },
+    "native/sheep_walk/west/03.png": {
+      "bounds": [
+        8,
+        11,
+        33,
+        30
+      ],
+      "opaque_pixels": 306
+    },
+    "native/sheep_walk/west/04.png": {
+      "bounds": [
+        8,
+        11,
+        33,
+        30
+      ],
+      "opaque_pixels": 304
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "sleep_body_width_coherent": true,
+  "source_transparency_matches_call": true,
+  "standing_height_coherent": true,
+  "stationary_feet_stable": true,
+  "visible_targets": true,
+  "walk_support_feet": true,
+  "west_only": true
+}

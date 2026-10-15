@@ -14,9 +14,11 @@ extends Node2D
 ## wanders a little pen in front of it, from a sequence of its own - the same
 ## animal makes the same walk every time, so a picture is repeatable.
 ##
-## The drawings are A026's (sheep, pig), A027's (cow, chicken) and A028's
-## (dog) animations, through 0120's road until 0209, 0210 and 0245 integrate
-## them: the cow's and the chicken's props tinted and scaled, every frame the
+## The drawings are A026's (sheep, pig: task 0209), A027's (cow, chicken) and
+## A028's (dog: task 0245) animations. A species with its art plays its own
+## frames on their own seconds, facing west as drawn and mirrored east - no
+## tint, scale, bob, dip or squash. One still on 0120's road until its pack
+## lands is the cow's or the chicken's prop tinted and scaled, every frame the
 ## same picture, with a bob for a step, a dip for a bite and a squash for
 ## sleep so the states still read. A029's dig spot is its approved mound
 ## (task 0211).
@@ -217,7 +219,12 @@ func _next_mode(animal: Dictionary) -> void:
 		animal["target"] = _pen_point(animal["anchor"], int(animal["index"]), step)
 		return
 	animal["mode"] = &"eat" if roll < 8 else (&"sleep" if roll == 9 else &"idle")
+	# **A pig roots about** (task 0209): every other stop to eat, a dig -
+	# A026's three frames, once - where its art has one.
+	if animal["mode"] == &"eat" and step % 2 == 0 and drawn(StringName("%s_dig" % animal["kind"])):
+		animal["mode"] = &"dig"
 	animal["left"] = 2.0 + float(roll % 3)
+	animal["since"] = _time
 
 
 func _draw_animal(animal: Dictionary) -> void:
@@ -225,6 +232,16 @@ func _draw_animal(animal: Dictionary) -> void:
 	var kind := StringName(animal["kind"])
 	var mode := StringName(animal["mode"])
 	var name := StringName("%s_%s" % [kind, mode])
+	# **Its own art** (task 0209): its frames, on their seconds, as drawn.
+	if drawn(name):
+		sprite.texture = _texture_at(pose_path(name, animal_frame(name, _time + float(animal["phase"]),
+			_time - float(animal.get("since", 0.0)))))
+		sprite.offset = -_pivot(sprite.texture)
+		sprite.flip_h = bool(animal["facing_east"])
+		sprite.modulate = Color(1, 1, 1, sprite.modulate.a)
+		sprite.position = (animal["pos"] as Vector2).round()
+		sprite.scale = Vector2.ONE
+		return
 	var entry := PlaceholderArt.art(name)
 	var frames := maxi(int(entry.get("frames", 1)), 1)
 	var seconds := maxf(float(entry.get("seconds", 0.5)), 0.05)
@@ -442,6 +459,38 @@ func _colour(id: StringName) -> Color:
 
 
 # ------------------------------------------------------------------ pictures
+
+## **Whether a species' pose is drawn** (task 0209): its first frame is the
+## pack's art, not a stand-in.
+static func drawn(name: StringName) -> bool:
+	var first := PlaceholderArt.frame(pose_path(name, 0))
+	return not first.is_empty() and not first.has("stand_in")
+
+
+## A pose's frame `index`, by its runtime path.
+static func pose_path(name: StringName, index: int) -> String:
+	return "res://sprites/props/%s_%d.png" % [name, index]
+
+
+## **Which frame of a drawn pose is up** (task 0209): a loop by the wall
+## clock `seconds`, round and round; a one-shot - the pig's dig - by
+## `since`, the seconds since it began, held on its last.
+static func animal_frame(name: StringName, seconds: float, since: float) -> int:
+	var count := 0
+	while PlaceholderArt.has_frame(pose_path(name, count)):
+		count += 1
+	var first := PlaceholderArt.frame(pose_path(name, 0))
+	var each := maxf(float(first.get("seconds", 0.5)), 0.05)
+	if not bool(first.get("loop", true)):
+		return mini(int(maxf(since, 0.0) / each), maxi(count - 1, 0))
+	return int(maxf(seconds, 0.0) / each) % maxi(count, 1)
+
+
+func _texture_at(path: String) -> Texture2D:
+	if not _textures.has(path):
+		_textures[path] = load(path) if ResourceLoader.exists(path) else null
+	return _textures[path]
+
 
 func _texture(name: StringName, frame: int, kind: StringName) -> Texture2D:
 	var path := PlaceholderArt.texture_path(PlaceholderArt.art_path(name, frame)) \

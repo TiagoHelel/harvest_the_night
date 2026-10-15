@@ -95715,6 +95715,4470 @@
       "revision": 1,
       "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
       "output_sha256": "4033f99c674bcc810dec5a1cf02e2a5c44ad405680fbcfe6fc9444f6b24e9ce8"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-action-pig_dig-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46",
+      "crop_xywh": [
+        93,
+        227,
+        563,
+        360
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.04440497335701599,
+      "content_anchor_xy": [
+        12,
+        16
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-action-pig_dig-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_dig-0.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.call.json",
+          "sha256": "d8e2ee673a606913b5e4503bfb653942c8f2d671c593def4846547ad10e8b101",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-action-pig_dig-0.png",
+          "sha256": "4974af57a7acf35d963d7051134729b1a9d448859c616b206989682ada54a15f",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "8eb6eb1a0ffd57dc0d8da394e913a806bdd9b714875f5a93b42745494fb3d710"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-action-pig_dig-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46",
+      "crop_xywh": [
+        721,
+        225,
+        563,
+        360
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.04440497335701599,
+      "content_anchor_xy": [
+        12,
+        16
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-action-pig_dig-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_dig-1.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.call.json",
+          "sha256": "d8e2ee673a606913b5e4503bfb653942c8f2d671c593def4846547ad10e8b101",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-action-pig_dig-1.png",
+          "sha256": "cdaac19c99663200ca80a30a1d6ea888e9e00069baab5634350a72b36d71b2a7",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "e48c1ad82e11882963dfd01430ed8cc179f88b8e2d364579dba2f35997f5043e"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-action-pig_dig-2",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46",
+      "crop_xywh": [
+        1355,
+        225,
+        563,
+        360
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.04440497335701599,
+      "content_anchor_xy": [
+        12,
+        16
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-action-pig_dig-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_dig-2.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.call.json",
+          "sha256": "d8e2ee673a606913b5e4503bfb653942c8f2d671c593def4846547ad10e8b101",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-action-pig_dig-2.png",
+          "sha256": "e675a110c8e47fc4371de227835fb284fab6bcadfabfddf057032e53bec9398a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "65e7acf09651cd5ebbaff58793ee0dde60e969ddb8fc5dc02797107317232032"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-action-pig_eat-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-pig_eat_0-r2.png",
+      "source_sha256": "108278b19549656472652aa3d5c9ef7c313379a024f1fc90a129c49b644855df",
+      "crop_xywh": [
+        353,
+        356,
+        725,
+        477
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.034482758620689655,
+      "content_anchor_xy": [
+        12,
+        16
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-action-pig_eat-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_eat-0.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_eat_0-r2.prompt.txt",
+      "prompt_sha256": "02ac9afd0d2d0ba9b81afcfa4ab929895a33cd7bdeaf5a576ea02c3348fb179c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_eat_0-r2.call.json",
+          "sha256": "3388a7bf3a726d1da670ff9b800f634524c6b78ce3dcc47ec980ca5457377398",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-action-pig_eat-0.png",
+          "sha256": "6bdd2eda05076b28bb185c1e774f9ab86aa221578621f77e1ae83b1151af1e32",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "d7fcd235675020520b1351d762680764f018668a28e8ff54473a932a6c958ed1"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-action-pig_eat-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-pig_eat_1-r1.png",
+      "source_sha256": "877534bdeebbc8af459e888ebd42e6d1f6af4a2a5bc06d55c1e42ca0ca81a488",
+      "crop_xywh": [
+        353,
+        356,
+        725,
+        477
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.034482758620689655,
+      "content_anchor_xy": [
+        12,
+        16
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-action-pig_eat-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_eat-1.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_eat_1-r1.prompt.txt",
+      "prompt_sha256": "266655df6685974e2ce5fe2e60471a27d9db5ab517dcd5a65aabc84132f4072e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_eat_1-r1.call.json",
+          "sha256": "7094dce1ffd9c0f31ae6eb943b2de4de9e296a21373e66de64dcf5e14901d97d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-action-pig_eat-1.png",
+          "sha256": "8ef89d35d7c4f025ebcb72943aaf9e249f7c6feba1321069103b29552a9dab33",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "e006cc248ae8af0fb57f843f2830caccc85f66d4d3107741b0735e29b775aafc"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-body-pig_dig-0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-body-pig_dig-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_dig-0.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ],
+          "paste_xy": [
+            0,
+            30
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ],
+          "paste_xy": [
+            16,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-head-action-pig_dig-0",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-body-pig_dig-0.png",
+          "sha256": "b96514237c87f87e0a627c348e27c685c0ce424def888f29977d8e368f63212c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "bed3a6c071c36e67be5722aa598ab2aff028a5bc597cc4ba030e2bbedfe58411"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-body-pig_dig-1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-body-pig_dig-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_dig-1.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ],
+          "paste_xy": [
+            0,
+            30
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ],
+          "paste_xy": [
+            16,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-head-action-pig_dig-1",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-body-pig_dig-1.png",
+          "sha256": "96c1680abe1b6c6094baf161d5299ca3110a8c91d378632117f51af81b6c7c62",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "397cab7ddbe2d5c3a4016e53c743f1b93aaecb551cc0819aed62940d8675e43a"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-body-pig_dig-2",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-body-pig_dig-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_dig-2.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ],
+          "paste_xy": [
+            0,
+            30
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ],
+          "paste_xy": [
+            16,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-head-action-pig_dig-2",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-body-pig_dig-2.png",
+          "sha256": "a6a59a9a05705b3880ca7b234f60cf2cabee69f7b0a99f66d34ab185821d984b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "d5e12acf6843f0974de90df601158e316d185182b3b66b892edcf50e0a792494"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-body-pig_eat-0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-body-pig_eat-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_eat-0.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ],
+          "paste_xy": [
+            0,
+            30
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ],
+          "paste_xy": [
+            16,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-head-action-pig_eat-0",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-body-pig_eat-0.png",
+          "sha256": "7de3a2e99eb50581bd97203c92a3ce15fdf7fc8833447ffbc311ea83e5bce0f4",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "96d1d42e32c6e1a71fe718fe8bfd4a9f59693d330d10e156da2ac7b6e9ed69dc"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-head-body-pig_eat-1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-head-body-pig_eat-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_eat-1.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ],
+          "paste_xy": [
+            0,
+            30
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            0,
+            24,
+            30
+          ],
+          "paste_xy": [
+            16,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-head-action-pig_eat-1",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            30
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-head-body-pig_eat-1.png",
+          "sha256": "fe22d8976afdac08e7dfbc1531ab73d7b763dd01eb0d1b45b81f53a1d2bb5465",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "3595c39f2e6e3b004cc648fb5f326f2559466e582f7fc81b1ee2b8a160f8ab38"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-idle-head",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-pig_idle_1-r2.png",
+      "source_sha256": "2aafe4535eb649c7062af36ea0d238eb4b18449d357f09bcff5a86e72e54bce0",
+      "crop_xywh": [
+        353,
+        356,
+        725,
+        477
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.034482758620689655,
+      "content_anchor_xy": [
+        12,
+        16
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-idle-head",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-idle-head.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_idle_1-r2.prompt.txt",
+      "prompt_sha256": "2e02fd4530c6207eb5e77c7dd83ab03e0a9099d0ab06d5db1c1f7313d23df783",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_idle_1-r2.call.json",
+          "sha256": "dd515376ab0242bfeac94933f337a15ae9e6a181260a370ecce184c7b269f9a3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-idle-head.png",
+          "sha256": "a3e377f948441c513a97a36e2a5c6756dbc5944a7c7d5292fd81853a6cb9817c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "276d6ffe507e5d0173f87229ce52bb027a6ab7b4dc07fa52784048c20084da70"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-idle-stable",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-idle-stable",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-idle-stable.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            10
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            25,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            25
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            10,
+            5,
+            15
+          ],
+          "paste_xy": [
+            0,
+            10
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            19,
+            10,
+            21,
+            15
+          ],
+          "paste_xy": [
+            19,
+            10
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-idle-head",
+          "slice_xywh": [
+            5,
+            10,
+            14,
+            15
+          ],
+          "paste_xy": [
+            5,
+            10
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-idle-stable.png",
+          "sha256": "8a47c33b8f17c244c5d243f73c2d864b4cdca02428ae070a392b20dffe5405ad",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "9ee058dc4391377931079d5b3e7cc928dade01f18f0c5041cfef5a9fe8a1642c"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-lying-master",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-pig_sleep_1-r1.png",
+      "source_sha256": "99a309e7531f2b8895f958435b70d30668ee73dee541db5aa7ad30e7bed4e979",
+      "crop_xywh": [
+        350,
+        415,
+        730,
+        353
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.03424657534246575,
+      "content_anchor_xy": [
+        12,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-lying-master",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-lying-master.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_sleep_1-r1.call.json",
+          "sha256": "0b63ebfe02622f71fd2eb3438998d045f6bfa224fd075ae001ac16835010ac3f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-lying-master.png",
+          "sha256": "d35110bd885e207db452f87b180e4c20efa261f93f1d48444df119207423c9b9",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "e0b18d5eb02f8e70d4ba53ce59b905af5bd702a80f573790d6af66833dadc200"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-sleep-breath",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-sleep-breath",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-sleep-breath.png",
+      "input": "components/A026-farm-animals/pig-lying-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-lying-master",
+          "slice_xywh": [
+            0,
+            24,
+            40,
+            8
+          ],
+          "paste_xy": [
+            0,
+            24
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-lying-master",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-lying-master",
+          "slice_xywh": [
+            16,
+            1,
+            24,
+            25
+          ],
+          "paste_xy": [
+            16,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-sleep-breath.png",
+          "sha256": "5cf158de03aa0102f6151a3976e17b1203b52ea4eedb3fafbf3b578b7dbfd5bd",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "2fa3d8ed6b3914256c0232947b88dc82fa10dfc034eb32e4526e2de12a798855"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-standing-master",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/pig-master-r1.png",
+      "source_sha256": "5577d2e8ada6791bc4c6f9a0eb6b9473a104bd46fa69234441a01128a84469ab",
+      "crop_xywh": [
+        353,
+        356,
+        725,
+        477
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.034482758620689655,
+      "content_anchor_xy": [
+        12,
+        16
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-standing-master",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-standing-master.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.call.json",
+          "sha256": "d9f87cd5e9237ce1371d43a7e56775998bc6ea966513ac64347a4486c3a70f32",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-standing-master.png",
+          "sha256": "a48e5d3dbb8132def3c243499f28cf83294561b057d1e42fbc7c83ef4b639bc2",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "f0970f1648b2991afb816218b2f5e0cdf8dcdcd6c262492cc79ba15dbd8cda0c"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-walk-legs-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98",
+      "crop_xywh": [
+        35,
+        269,
+        450,
+        277
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.05555555555555555,
+      "content_anchor_xy": [
+        12,
+        15
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-walk-legs-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-walk-legs-0.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.call.json",
+          "sha256": "83e1c320f8f803e4957ddafdb5da77a5b70e15e0d16cb6d06abd9cbe28d1819e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-walk-legs-0.png",
+          "sha256": "79cde632f2952daeafca3824e39534a2678960fedc29f7f8039381b97e7526b6",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "321eaf12697a823e3c11e0a7838740227a9b59da5998d1341b66897285e1fa63"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-walk-legs-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98",
+      "crop_xywh": [
+        528,
+        271,
+        450,
+        277
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.05555555555555555,
+      "content_anchor_xy": [
+        12,
+        15
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-walk-legs-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-walk-legs-1.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.call.json",
+          "sha256": "83e1c320f8f803e4957ddafdb5da77a5b70e15e0d16cb6d06abd9cbe28d1819e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-walk-legs-1.png",
+          "sha256": "a20a013721b034f727e314e64fd48603d0c573a4f23023074d4976e1b98a8070",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "4ab36f7bd16ab4bda38853c2d26f9201935045a2ce97183ee7b56b7be44f9b05"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-walk-legs-2",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98",
+      "crop_xywh": [
+        1024,
+        270,
+        450,
+        277
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.05555555555555555,
+      "content_anchor_xy": [
+        12,
+        15
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-walk-legs-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-walk-legs-2.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.call.json",
+          "sha256": "83e1c320f8f803e4957ddafdb5da77a5b70e15e0d16cb6d06abd9cbe28d1819e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-walk-legs-2.png",
+          "sha256": "af5898581e25da98a1e24e32c352237869ceef2e3b7413571b306249e1f765c3",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "7eab9d9b95372b167fe7364f85fa56616fa318f1f52f647e99d0fc6b88dd6e37"
+    },
+    {
+      "id": "components/A026-farm-animals/pig-walk-legs-3",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98",
+      "crop_xywh": [
+        1512,
+        271,
+        450,
+        277
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.05555555555555555,
+      "content_anchor_xy": [
+        12,
+        15
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/pig-walk-legs-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/pig-walk-legs-3.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.call.json",
+          "sha256": "83e1c320f8f803e4957ddafdb5da77a5b70e15e0d16cb6d06abd9cbe28d1819e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/pig-walk-legs-3.png",
+          "sha256": "2d45f204f751cc7a1c9d26db77fd434149a562d6509532f998150e2ec82a4757",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "987ba023ab58f713608bdf9684c4b4a44c02253ddb3ef086f2a54160b9924b15"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-head-action-sheep_eat-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/sheep_eat_0-r1.png",
+      "source_sha256": "eab27f0a6ab4f543de09920df8b391adbbcc122edebc05595342f397885ca3fd",
+      "crop_xywh": [
+        272,
+        294,
+        843,
+        641
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.02965599051008304,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-head-action-sheep_eat-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-head-action-sheep_eat-0.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep_eat_0-r1.prompt.txt",
+      "prompt_sha256": "bdb1d74c2e3cb487acf90c5f12accf73bb9339dde594cbcc3538e747a9557ad7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep_eat_0-r1.call.json",
+          "sha256": "55eb20fa2b107bf600d12bc35ab50a0c4462dd76e8abd6d0f483c506b0db241f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-head-action-sheep_eat-0.png",
+          "sha256": "66ad107fed790f531f1bf88fcec0caede2cb3801ed0bd57720956677da559aef",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "159b388af583b2a82dcc8d4b3ad85829bdc92c994ca3b7bf859a3de255c61e8b"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-head-action-sheep_eat-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/sheep_eat_1-r1.png",
+      "source_sha256": "0118adb720bce77a5565384717d698d8ef57c633f687a982fc697ed5b382cf23",
+      "crop_xywh": [
+        272,
+        294,
+        843,
+        641
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.02965599051008304,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-head-action-sheep_eat-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-head-action-sheep_eat-1.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep_eat_1-r1.prompt.txt",
+      "prompt_sha256": "266655df6685974e2ce5fe2e60471a27d9db5ab517dcd5a65aabc84132f4072e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep_eat_1-r1.call.json",
+          "sha256": "2c1fd50f09680231564ec4242c389a914e303343ff2f5580cb37a82efa6e30a5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-head-action-sheep_eat-1.png",
+          "sha256": "9c8fa913b84a56c46f56751f36eafb2909eff1aa07d180ba68d2ff2c93b57d93",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "02c7c73e0fca7408afa6025a251e6612b90a3cc8be0089f1fd7609da42d877ed"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-head-body-sheep_eat-0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-head-body-sheep_eat-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-head-body-sheep_eat-0.png",
+      "input": "components/A026-farm-animals/sheep-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ],
+          "paste_xy": [
+            0,
+            30
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            17,
+            0,
+            23,
+            30
+          ],
+          "paste_xy": [
+            17,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-head-action-sheep_eat-0",
+          "slice_xywh": [
+            0,
+            0,
+            17,
+            30
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep-master-r1.prompt.txt",
+      "prompt_sha256": "153c45a79863b251996488bc146206cdc9cae4c08c9cbe5cbdcc0c586c93ab36",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-head-body-sheep_eat-0.png",
+          "sha256": "5770ec9996204c3b4cdc05a1286d643e7920c944ba7051d76d6eaede299f03fe",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "3c41b0080af4e2e8d95ba11a6f37683a08c67f475bf0e6b59303c1c7b5d4ce2e"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-head-body-sheep_eat-1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-head-body-sheep_eat-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-head-body-sheep_eat-1.png",
+      "input": "components/A026-farm-animals/sheep-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ],
+          "paste_xy": [
+            0,
+            30
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            17,
+            0,
+            23,
+            30
+          ],
+          "paste_xy": [
+            17,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-head-action-sheep_eat-1",
+          "slice_xywh": [
+            0,
+            0,
+            17,
+            30
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep-master-r1.prompt.txt",
+      "prompt_sha256": "153c45a79863b251996488bc146206cdc9cae4c08c9cbe5cbdcc0c586c93ab36",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-head-body-sheep_eat-1.png",
+          "sha256": "0865b28582be0ce4d71d6c7118c280926dc0882a209e1f2bb5ff785409f58425",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "34707dfe621060fa13f5122ba787af4bb63f1e96ff90a3b4bb64d1619607e35a"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-idle-head",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-sheep_idle_1-r3.png",
+      "source_sha256": "9a8c88077463af756341c4ed6eadede8141e712f54b4024c32ea1a01a9ca7352",
+      "crop_xywh": [
+        272,
+        294,
+        843,
+        641
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.02965599051008304,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-idle-head",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-idle-head.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_idle_1-r3.prompt.txt",
+      "prompt_sha256": "cbc374e52cbd19b2862226651ac1baeca1918d533e9ac99fcd5e71679f089888",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_idle_1-r3.call.json",
+          "sha256": "7c3c519c134e867967f9995efa27e80149ba254beb5d43eee7c5f973a24bd643",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-idle-head.png",
+          "sha256": "b46b358df303e565fd53280be1bfba1a5fe1d69cfb4828697ed4593d878928bf",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "57720bbebdd8cb3a2f890e72b897d3f1ddb6e69db14c35af351d7445ef2db96b"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-idle-stable",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-idle-stable",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-idle-stable.png",
+      "input": "components/A026-farm-animals/sheep-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            8
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            0,
+            25,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            25
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            0,
+            8,
+            5,
+            17
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            19,
+            8,
+            21,
+            17
+          ],
+          "paste_xy": [
+            19,
+            8
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-idle-head",
+          "slice_xywh": [
+            5,
+            8,
+            14,
+            17
+          ],
+          "paste_xy": [
+            5,
+            8
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep-master-r1.prompt.txt",
+      "prompt_sha256": "153c45a79863b251996488bc146206cdc9cae4c08c9cbe5cbdcc0c586c93ab36",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-idle-stable.png",
+          "sha256": "e838157a072bc552aeb126e44f12572a3fbabbc4f3a6b09dc3fc30abaaeaa0e2",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "169fd242f902aeaf6f29161fd72c0a2134931519c57707e0a3430d7ec6ce0d5b"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-lying-master",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-sheep_sleep_1-r1.png",
+      "source_sha256": "4e211e520667573b34dedc270009bb2aaebe50e10822ea564f104169ab9e2edb",
+      "crop_xywh": [
+        273,
+        431,
+        834,
+        414
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.02997601918465228,
+      "content_anchor_xy": [
+        12,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-lying-master",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-lying-master.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_sleep_1-r1.call.json",
+          "sha256": "72afd67e799fb9d607b08642bf33106c9bc6265c2bc452f2640cc92fc1423de6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-lying-master.png",
+          "sha256": "1c7c329a159367f534b0a8a521179e8682fda56997b48dcfc0d54d2b00007375",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "4a91fbe920c6f9aac175bd337901996a252a13bccea4e379093d6f67b086dcf7"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-sleep-breath",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-sleep-breath",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-sleep-breath.png",
+      "input": "components/A026-farm-animals/sheep-lying-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-lying-master",
+          "slice_xywh": [
+            0,
+            24,
+            40,
+            8
+          ],
+          "paste_xy": [
+            0,
+            24
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-lying-master",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-lying-master",
+          "slice_xywh": [
+            16,
+            1,
+            24,
+            25
+          ],
+          "paste_xy": [
+            16,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-sleep-breath.png",
+          "sha256": "7deb4092f8711976260d4819b9baf9aff1d308065696223f426ee9f3aa9e5d4e",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "c3aeccd041cc1291d72d2ae6d3642b5ce990066bb4611a52c2d452ef75f824df"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-standing-master",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/sheep-master-r1.png",
+      "source_sha256": "9c06f6aa160f20d8deb2921a081180f5891641108365364b7aeb9858dc7e5500",
+      "crop_xywh": [
+        272,
+        294,
+        843,
+        641
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.02965599051008304,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-standing-master",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-standing-master.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep-master-r1.prompt.txt",
+      "prompt_sha256": "153c45a79863b251996488bc146206cdc9cae4c08c9cbe5cbdcc0c586c93ab36",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep-master-r1.call.json",
+          "sha256": "afb28923410dfc91ad62e8a60cfbc5de10d8d1a2eb1d72abd191e1251058914a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-standing-master.png",
+          "sha256": "44e90b0bac144f6c2e183046f7dda667adf23f126ef3cfffdaece5459521c921",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "944c61c474aaead1b731fe71b7dafff6291ec41ce21be4682086daf05095ce40"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-walk-legs-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38",
+      "crop_xywh": [
+        30,
+        228,
+        460,
+        347
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.05434782608695652,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-walk-legs-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-walk-legs-0.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.call.json",
+          "sha256": "85ffd616ea8605dc03d1fc15bdc1e84f1f1c1bfe21d5286e576daeed6b9d8032",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-walk-legs-0.png",
+          "sha256": "2882ec516eea8de4d9387b8fb9644df695edc7748f84996b7a4d6e272ca838a0",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "b6fc8da31a8fc3c27175b0d808fb98eac695b5d2069f73bee9d3fa7833dab2f8"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-walk-legs-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38",
+      "crop_xywh": [
+        516,
+        228,
+        460,
+        347
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.05434782608695652,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-walk-legs-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-walk-legs-1.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.call.json",
+          "sha256": "85ffd616ea8605dc03d1fc15bdc1e84f1f1c1bfe21d5286e576daeed6b9d8032",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-walk-legs-1.png",
+          "sha256": "8df3240951c727486532506ee6b2072f7e1233461bf64cd8d10d5ddff847580f",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "7efa4103acba60995e5ce15c4557a92202ffea933cedb1b9de8e8810ee521a9c"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-walk-legs-2",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38",
+      "crop_xywh": [
+        1014,
+        228,
+        460,
+        347
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.05434782608695652,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-walk-legs-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-walk-legs-2.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.call.json",
+          "sha256": "85ffd616ea8605dc03d1fc15bdc1e84f1f1c1bfe21d5286e576daeed6b9d8032",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-walk-legs-2.png",
+          "sha256": "0f36ce0cf5db755489eeb288fac5f2a92b63e3830e1d8a62774444dcaf1f1e8e",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "ffc891139b725eec703bc07a3703900c97ae8bb4f3857794c53b56450b45024e"
+    },
+    {
+      "id": "components/A026-farm-animals/sheep-walk-legs-3",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38",
+      "crop_xywh": [
+        1498,
+        228,
+        460,
+        347
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.05434782608695652,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A026-farm-animals/sheep-walk-legs-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A026-farm-animals/sheep-walk-legs-3.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.call.json",
+          "sha256": "85ffd616ea8605dc03d1fc15bdc1e84f1f1c1bfe21d5286e576daeed6b9d8032",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/components/sheep-walk-legs-3.png",
+          "sha256": "f063067e2b0d5899f5db5eeb4d753891749c5734fb72e362dcc6c5c11c384c84",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "assembly_component_of": "A026",
+      "output_sha256": "94bed60c613428e75c3ff6516702c896feb76c08bb8f287d33bc15b40091ee9c"
+    },
+    {
+      "id": "props/sheep_idle_0",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/sheep-master-r1.png",
+      "source_sha256": "9c06f6aa160f20d8deb2921a081180f5891641108365364b7aeb9858dc7e5500",
+      "crop_xywh": [
+        272,
+        294,
+        843,
+        641
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.02965599051008304,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone",
+        "skin",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_idle",
+      "frame": 0,
+      "seconds": 0.5,
+      "loop": true,
+      "output": "sprites/props/sheep_idle_0.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep-master-r1.prompt.txt",
+      "prompt_sha256": "153c45a79863b251996488bc146206cdc9cae4c08c9cbe5cbdcc0c586c93ab36",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep-master-r1.call.json",
+          "sha256": "afb28923410dfc91ad62e8a60cfbc5de10d8d1a2eb1d72abd191e1251058914a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_idle/west/01.png",
+          "sha256": "44e90b0bac144f6c2e183046f7dda667adf23f126ef3cfffdaece5459521c921",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "944c61c474aaead1b731fe71b7dafff6291ec41ce21be4682086daf05095ce40"
+    },
+    {
+      "id": "props/sheep_idle_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_idle",
+      "frame": 1,
+      "seconds": 0.5,
+      "loop": true,
+      "output": "sprites/props/sheep_idle_1.png",
+      "input": "components/A026-farm-animals/sheep-idle-stable",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-idle-stable",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_idle_1-r3.prompt.txt",
+      "prompt_sha256": "cbc374e52cbd19b2862226651ac1baeca1918d533e9ac99fcd5e71679f089888",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_idle_1-r3.call.json",
+          "sha256": "7c3c519c134e867967f9995efa27e80149ba254beb5d43eee7c5f973a24bd643",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_idle/west/02.png",
+          "sha256": "e838157a072bc552aeb126e44f12572a3fbabbc4f3a6b09dc3fc30abaaeaa0e2",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "169fd242f902aeaf6f29161fd72c0a2134931519c57707e0a3430d7ec6ce0d5b"
+    },
+    {
+      "id": "props/sheep_eat_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_eat",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": true,
+      "output": "sprites/props/sheep_eat_0.png",
+      "input": "components/A026-farm-animals/sheep-head-body-sheep_eat-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-head-body-sheep_eat-0",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            17,
+            26,
+            5,
+            4
+          ],
+          "paste_xy": [
+            17,
+            26
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            27,
+            26,
+            6,
+            4
+          ],
+          "paste_xy": [
+            27,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep_eat_0-r1.prompt.txt",
+      "prompt_sha256": "bdb1d74c2e3cb487acf90c5f12accf73bb9339dde594cbcc3538e747a9557ad7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep_eat_0-r1.call.json",
+          "sha256": "55eb20fa2b107bf600d12bc35ab50a0c4462dd76e8abd6d0f483c506b0db241f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_eat/west/01.png",
+          "sha256": "5770ec9996204c3b4cdc05a1286d643e7920c944ba7051d76d6eaede299f03fe",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "3c41b0080af4e2e8d95ba11a6f37683a08c67f475bf0e6b59303c1c7b5d4ce2e"
+    },
+    {
+      "id": "props/sheep_eat_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_eat",
+      "frame": 1,
+      "seconds": 0.2,
+      "loop": true,
+      "output": "sprites/props/sheep_eat_1.png",
+      "input": "components/A026-farm-animals/sheep-head-body-sheep_eat-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-head-body-sheep_eat-1",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            17,
+            26,
+            5,
+            4
+          ],
+          "paste_xy": [
+            17,
+            26
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            27,
+            26,
+            6,
+            4
+          ],
+          "paste_xy": [
+            27,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep_eat_1-r1.prompt.txt",
+      "prompt_sha256": "266655df6685974e2ce5fe2e60471a27d9db5ab517dcd5a65aabc84132f4072e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/sheep_eat_1-r1.call.json",
+          "sha256": "2c1fd50f09680231564ec4242c389a914e303343ff2f5580cb37a82efa6e30a5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_eat/west/02.png",
+          "sha256": "0865b28582be0ce4d71d6c7118c280926dc0882a209e1f2bb5ff785409f58425",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "34707dfe621060fa13f5122ba787af4bb63f1e96ff90a3b4bb64d1619607e35a"
+    },
+    {
+      "id": "props/sheep_sleep_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_sleep",
+      "frame": 0,
+      "seconds": 0.6,
+      "loop": true,
+      "output": "sprites/props/sheep_sleep_0.png",
+      "input": "components/A026-farm-animals/sheep-lying-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-lying-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_sleep_1-r1.call.json",
+          "sha256": "72afd67e799fb9d607b08642bf33106c9bc6265c2bc452f2640cc92fc1423de6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_sleep/west/01.png",
+          "sha256": "1c7c329a159367f534b0a8a521179e8682fda56997b48dcfc0d54d2b00007375",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "4a91fbe920c6f9aac175bd337901996a252a13bccea4e379093d6f67b086dcf7"
+    },
+    {
+      "id": "props/sheep_sleep_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_sleep",
+      "frame": 1,
+      "seconds": 0.6,
+      "loop": true,
+      "output": "sprites/props/sheep_sleep_1.png",
+      "input": "components/A026-farm-animals/sheep-sleep-breath",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-sleep-breath",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_sleep_1-r1.call.json",
+          "sha256": "72afd67e799fb9d607b08642bf33106c9bc6265c2bc452f2640cc92fc1423de6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_sleep/west/02.png",
+          "sha256": "7deb4092f8711976260d4819b9baf9aff1d308065696223f426ee9f3aa9e5d4e",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "c3aeccd041cc1291d72d2ae6d3642b5ce990066bb4611a52c2d452ef75f824df"
+    },
+    {
+      "id": "props/sheep_walk_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_walk",
+      "frame": 0,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/sheep_walk_0.png",
+      "input": "components/A026-farm-animals/sheep-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-walk-legs-0",
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-walk-legs-0",
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ],
+          "paste_xy": [
+            36,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-walk-legs-0",
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ],
+          "paste_xy": [
+            25,
+            24
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.call.json",
+          "sha256": "85ffd616ea8605dc03d1fc15bdc1e84f1f1c1bfe21d5286e576daeed6b9d8032",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_walk/west/01.png",
+          "sha256": "1d62848963d6715795d3a29fb3e42508ed5836dde830a62dd756ce0579c23ecb",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "3d6352fbeadf38f1aa145336d0a708977b400535e13394869066d8156f1b28c8"
+    },
+    {
+      "id": "props/sheep_walk_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_walk",
+      "frame": 1,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/sheep_walk_1.png",
+      "input": "components/A026-farm-animals/sheep-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-walk-legs-1",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.call.json",
+          "sha256": "85ffd616ea8605dc03d1fc15bdc1e84f1f1c1bfe21d5286e576daeed6b9d8032",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_walk/west/02.png",
+          "sha256": "5275922e7e51a4017425207311b781730b6edb9820de6b94dc730416770aac89",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "956a1d4971cf037c18efc2e6171c5155c63b06d04cdff96d1dcc31125919b793"
+    },
+    {
+      "id": "props/sheep_walk_2",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_walk",
+      "frame": 2,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/sheep_walk_2.png",
+      "input": "components/A026-farm-animals/sheep-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-walk-legs-2",
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-walk-legs-2",
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ],
+          "paste_xy": [
+            36,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-walk-legs-2",
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ],
+          "paste_xy": [
+            25,
+            24
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.call.json",
+          "sha256": "85ffd616ea8605dc03d1fc15bdc1e84f1f1c1bfe21d5286e576daeed6b9d8032",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_walk/west/03.png",
+          "sha256": "af7f609102b9ec9e96a868ed4b894daddb8f147cf5e9f455b91b075f02cab485",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "94cc2ff0320720fd3308a82f4e2a2e5c7592beacba5f755413e39a0902545c80"
+    },
+    {
+      "id": "props/sheep_walk_3",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/sheep_walk",
+      "frame": 3,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/sheep_walk_3.png",
+      "input": "components/A026-farm-animals/sheep-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/sheep-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/sheep-walk-legs-3",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-sheep_walk-r2.call.json",
+          "sha256": "85ffd616ea8605dc03d1fc15bdc1e84f1f1c1bfe21d5286e576daeed6b9d8032",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/sheep_walk/west/04.png",
+          "sha256": "ad39a405398d8cb8b162ed72c45ad3e3c01625b1a4aa60633b511ca6466ff05f",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "96da8f90d331294b6e4c2d7a593aeb4a6ca0004fc24205bbcd74caa84c2d6b1c"
+    },
+    {
+      "id": "props/pig_idle_0",
+      "owner": "raster",
+      "source": "assets/art_source/props/farm_animals/pig-master-r1.png",
+      "source_sha256": "5577d2e8ada6791bc4c6f9a0eb6b9473a104bd46fa69234441a01128a84469ab",
+      "crop_xywh": [
+        353,
+        356,
+        725,
+        477
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.034482758620689655,
+      "content_anchor_xy": [
+        12,
+        16
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "roof_light",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_idle",
+      "frame": 0,
+      "seconds": 0.5,
+      "loop": true,
+      "output": "sprites/props/pig_idle_0.png",
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.prompt.txt",
+      "prompt_sha256": "a590c603d52c795d72e51192ac8b7b80c8e547e5150313cbb71a39410feeda2a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/pig-master-r1.call.json",
+          "sha256": "d9f87cd5e9237ce1371d43a7e56775998bc6ea966513ac64347a4486c3a70f32",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_idle/west/01.png",
+          "sha256": "a48e5d3dbb8132def3c243499f28cf83294561b057d1e42fbc7c83ef4b639bc2",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "f0970f1648b2991afb816218b2f5e0cdf8dcdcd6c262492cc79ba15dbd8cda0c"
+    },
+    {
+      "id": "props/pig_idle_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_idle",
+      "frame": 1,
+      "seconds": 0.5,
+      "loop": true,
+      "output": "sprites/props/pig_idle_1.png",
+      "input": "components/A026-farm-animals/pig-idle-stable",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-idle-stable",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_idle_1-r2.prompt.txt",
+      "prompt_sha256": "2e02fd4530c6207eb5e77c7dd83ab03e0a9099d0ab06d5db1c1f7313d23df783",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_idle_1-r2.call.json",
+          "sha256": "dd515376ab0242bfeac94933f337a15ae9e6a181260a370ecce184c7b269f9a3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_idle/west/02.png",
+          "sha256": "8a47c33b8f17c244c5d243f73c2d864b4cdca02428ae070a392b20dffe5405ad",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "9ee058dc4391377931079d5b3e7cc928dade01f18f0c5041cfef5a9fe8a1642c"
+    },
+    {
+      "id": "props/pig_eat_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_eat",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": true,
+      "output": "sprites/props/pig_eat_0.png",
+      "input": "components/A026-farm-animals/pig-head-body-pig_eat-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-head-body-pig_eat-0",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ],
+          "paste_xy": [
+            16,
+            26
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ],
+          "paste_xy": [
+            27,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_eat_0-r2.prompt.txt",
+      "prompt_sha256": "02ac9afd0d2d0ba9b81afcfa4ab929895a33cd7bdeaf5a576ea02c3348fb179c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_eat_0-r2.call.json",
+          "sha256": "3388a7bf3a726d1da670ff9b800f634524c6b78ce3dcc47ec980ca5457377398",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_eat/west/01.png",
+          "sha256": "7de3a2e99eb50581bd97203c92a3ce15fdf7fc8833447ffbc311ea83e5bce0f4",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "96d1d42e32c6e1a71fe718fe8bfd4a9f59693d330d10e156da2ac7b6e9ed69dc"
+    },
+    {
+      "id": "props/pig_eat_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_eat",
+      "frame": 1,
+      "seconds": 0.2,
+      "loop": true,
+      "output": "sprites/props/pig_eat_1.png",
+      "input": "components/A026-farm-animals/pig-head-body-pig_eat-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-head-body-pig_eat-1",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ],
+          "paste_xy": [
+            16,
+            26
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ],
+          "paste_xy": [
+            27,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_eat_1-r1.prompt.txt",
+      "prompt_sha256": "266655df6685974e2ce5fe2e60471a27d9db5ab517dcd5a65aabc84132f4072e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_eat_1-r1.call.json",
+          "sha256": "7094dce1ffd9c0f31ae6eb943b2de4de9e296a21373e66de64dcf5e14901d97d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_eat/west/02.png",
+          "sha256": "fe22d8976afdac08e7dfbc1531ab73d7b763dd01eb0d1b45b81f53a1d2bb5465",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "3595c39f2e6e3b004cc648fb5f326f2559466e582f7fc81b1ee2b8a160f8ab38"
+    },
+    {
+      "id": "props/pig_sleep_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_sleep",
+      "frame": 0,
+      "seconds": 0.6,
+      "loop": true,
+      "output": "sprites/props/pig_sleep_0.png",
+      "input": "components/A026-farm-animals/pig-lying-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-lying-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_sleep_1-r1.call.json",
+          "sha256": "0b63ebfe02622f71fd2eb3438998d045f6bfa224fd075ae001ac16835010ac3f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_sleep/west/01.png",
+          "sha256": "d35110bd885e207db452f87b180e4c20efa261f93f1d48444df119207423c9b9",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "e0b18d5eb02f8e70d4ba53ce59b905af5bd702a80f573790d6af66833dadc200"
+    },
+    {
+      "id": "props/pig_sleep_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_sleep",
+      "frame": 1,
+      "seconds": 0.6,
+      "loop": true,
+      "output": "sprites/props/pig_sleep_1.png",
+      "input": "components/A026-farm-animals/pig-sleep-breath",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-sleep-breath",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_sleep_1-r1.prompt.txt",
+      "prompt_sha256": "34a784090542040649cf7de2fb255be433c8cd9113195bd5588190b7b0c9239b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_sleep_1-r1.call.json",
+          "sha256": "0b63ebfe02622f71fd2eb3438998d045f6bfa224fd075ae001ac16835010ac3f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_sleep/west/02.png",
+          "sha256": "5cf158de03aa0102f6151a3976e17b1203b52ea4eedb3fafbf3b578b7dbfd5bd",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "2fa3d8ed6b3914256c0232947b88dc82fa10dfc034eb32e4526e2de12a798855"
+    },
+    {
+      "id": "props/pig_walk_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_walk",
+      "frame": 0,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/pig_walk_0.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-0",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.call.json",
+          "sha256": "83e1c320f8f803e4957ddafdb5da77a5b70e15e0d16cb6d06abd9cbe28d1819e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_walk/west/01.png",
+          "sha256": "0da13798de46d85f0bf841c0caaaa282c054408901b58595fd76a7e1abb665ef",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "20f7bb1aa465724cb0b90d173a4d9fc8b7b1f56736588da9c44884dc8aecebea"
+    },
+    {
+      "id": "props/pig_walk_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_walk",
+      "frame": 1,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/pig_walk_1.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-1",
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-1",
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ],
+          "paste_xy": [
+            36,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-1",
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ],
+          "paste_xy": [
+            25,
+            24
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.call.json",
+          "sha256": "83e1c320f8f803e4957ddafdb5da77a5b70e15e0d16cb6d06abd9cbe28d1819e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_walk/west/02.png",
+          "sha256": "16670ddd099b049b0067a5097fc5958e67b297d87b40ce7ca258b1faaa57ce05",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "16e7b92e9ccfeea2b99af775e44b317cc9a9e057fa9baf42446c66e7bd4c2e73"
+    },
+    {
+      "id": "props/pig_walk_2",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_walk",
+      "frame": 2,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/pig_walk_2.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-2",
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-2",
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ],
+          "paste_xy": [
+            36,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-2",
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ],
+          "paste_xy": [
+            25,
+            24
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.call.json",
+          "sha256": "83e1c320f8f803e4957ddafdb5da77a5b70e15e0d16cb6d06abd9cbe28d1819e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_walk/west/03.png",
+          "sha256": "7bd2e2bb38a642e680b7e9c2933c6d6374844f69d8547ac50ba8c2ae8ce8caab",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "f55ee8b47fb5a7b47a3532393906cea0f7858201062bbea29daa6923bf3a40ad"
+    },
+    {
+      "id": "props/pig_walk_3",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_walk",
+      "frame": 3,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/pig_walk_3.png",
+      "input": "components/A026-farm-animals/pig-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-3",
+          "slice_xywh": [
+            0,
+            23,
+            25,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-3",
+          "slice_xywh": [
+            36,
+            23,
+            4,
+            7
+          ],
+          "paste_xy": [
+            36,
+            23
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-walk-legs-3",
+          "slice_xywh": [
+            25,
+            23,
+            11,
+            7
+          ],
+          "paste_xy": [
+            25,
+            24
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.prompt.txt",
+      "prompt_sha256": "fc7833a07c3b72a181b5fe3e9f42c138efef70196c929f8ea2711f93e3f22201",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/recovered-pig_walk-r2.call.json",
+          "sha256": "83e1c320f8f803e4957ddafdb5da77a5b70e15e0d16cb6d06abd9cbe28d1819e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_walk/west/04.png",
+          "sha256": "d348dc8eef4f01ac4326d1c7488a896b4944a0a2b17ee0ccfda2d1b6cf415876",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "b87dcf3f56dcabb9b889e9d6505f07a8c99db92919328bf8da40d8d0ec5196f5"
+    },
+    {
+      "id": "props/pig_dig_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_dig",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/props/pig_dig_0.png",
+      "input": "components/A026-farm-animals/pig-head-body-pig_dig-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-head-body-pig_dig-0",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ],
+          "paste_xy": [
+            16,
+            26
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ],
+          "paste_xy": [
+            27,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.call.json",
+          "sha256": "d8e2ee673a606913b5e4503bfb653942c8f2d671c593def4846547ad10e8b101",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_dig/west/01.png",
+          "sha256": "b96514237c87f87e0a627c348e27c685c0ce424def888f29977d8e368f63212c",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "bed3a6c071c36e67be5722aa598ab2aff028a5bc597cc4ba030e2bbedfe58411"
+    },
+    {
+      "id": "props/pig_dig_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_dig",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/props/pig_dig_1.png",
+      "input": "components/A026-farm-animals/pig-head-body-pig_dig-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-head-body-pig_dig-1",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ],
+          "paste_xy": [
+            16,
+            26
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ],
+          "paste_xy": [
+            27,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.call.json",
+          "sha256": "d8e2ee673a606913b5e4503bfb653942c8f2d671c593def4846547ad10e8b101",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_dig/west/02.png",
+          "sha256": "96c1680abe1b6c6094baf161d5299ca3110a8c91d378632117f51af81b6c7c62",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "397cab7ddbe2d5c3a4016e53c743f1b93aaecb551cc0819aed62940d8675e43a"
+    },
+    {
+      "id": "props/pig_dig_2",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/pig_dig",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/props/pig_dig_2.png",
+      "input": "components/A026-farm-animals/pig-head-body-pig_dig-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A026-farm-animals/pig-head-body-pig_dig-2",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            16,
+            26,
+            6,
+            4
+          ],
+          "paste_xy": [
+            16,
+            26
+          ]
+        },
+        {
+          "input": "components/A026-farm-animals/pig-standing-master",
+          "slice_xywh": [
+            27,
+            26,
+            7,
+            4
+          ],
+          "paste_xy": [
+            27,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.prompt.txt",
+      "prompt_sha256": "0e2381a8032db9e36801af35a6d06b91601a9e597d170994796bd94dac2f2ea3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/raw/pig_dig-r1.call.json",
+          "sha256": "d8e2ee673a606913b5e4503bfb653942c8f2d671c593def4846547ad10e8b101",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/native/pig_dig/west/03.png",
+          "sha256": "a6a59a9a05705b3880ca7b234f60cf2cabee69f7b0a99f66d34ab185821d984b",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/contract.json",
+          "sha256": "ab8e266bd25df6f7fc2badaed21a0c0beceae69d12f99a24083e6de8697b6f2d",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+          "sha256": "f00b93859d97bf02071a3ee9d2df7222b647fc6fdaed8b75b212f327984dc375",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A026",
+      "integration_task": "0209",
+      "revision": 1,
+      "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
+      "output_sha256": "d5e12acf6843f0974de90df601158e316d185182b3b66b892edcf50e0a792494"
     }
   ]
 }

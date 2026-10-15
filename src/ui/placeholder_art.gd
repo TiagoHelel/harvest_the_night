@@ -237,14 +237,6 @@ const ART := {
 	# and 0245: the sheep the hen paled and grown (a tinted cow stayed a
 	# cow), the pig the cow in pink, the dog the cow small and brown.
 	# `AnimalView` plays them.
-	&"sheep_idle": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/chicken", "tint": Color(1.2, 1.2, 1.28), "stand_in_scale": 1.35, "geometry": ANIMAL_SMALL, "final": ANIMAL_LARGE},
-	&"sheep_walk": {"pack": "A026", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/chicken", "tint": Color(1.2, 1.2, 1.28), "stand_in_scale": 1.35, "geometry": ANIMAL_SMALL, "final": ANIMAL_LARGE},
-	&"sheep_eat": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/chicken", "tint": Color(1.2, 1.2, 1.28), "stand_in_scale": 1.35, "geometry": ANIMAL_SMALL, "final": ANIMAL_LARGE},
-	&"sheep_sleep": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/chicken", "tint": Color(1.2, 1.2, 1.28), "stand_in_scale": 1.35, "geometry": ANIMAL_SMALL, "final": ANIMAL_LARGE},
-	&"pig_idle": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"pig_walk": {"pack": "A026", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"pig_eat": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"pig_sleep": {"pack": "A026", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	&"cow_idle": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	&"cow_walk": {"pack": "A027", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	&"cow_eat": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
@@ -253,7 +245,6 @@ const ART := {
 	&"chicken_walk": {"pack": "A027", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
 	&"chicken_eat": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
 	&"chicken_sleep": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
-	&"pig_dig": {"pack": "A026", "dir": "res://sprites/props/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	# A036's night loot (task 0221): the bones' icon the stone paled to bone
 	# and the moon stone's the stone cooled to moonlight, until 0235; the
 	# pile and the stone on the ground drawn in code (`LootView`).

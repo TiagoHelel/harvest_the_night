@@ -1,0 +1,29 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: A026-farm-animals pig-master.\nInput images: Image1: approved crop layout/scale/style reference; Image2: approved farmstyle reference\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n40x32 pixels with contact pivot 20,30; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background, isolated objects only. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\n\nANIMAL: Standing farm pig, side view facing WEST head LEFT, three-quarter top-down with lit back. Normal farm proportions, small eyes, no mascot. Round barrel peach-pink body, flat snout disc, folded ears, short curled tail, short legs dark hooves. Skin_light body skin planes skin_dark underside roof_light ears. No mud spots clothes. Native silhouette width25 height16; canvas40x32 pivot20,30, lowest row29. Same camera as cowref. No shadow, grass, ground, accessories or text.\nANIMAL + STRIP: Exactly3equalcells ONEhorizontaltransparent strip, snoutloweredanticipation, snoutpushedintogroundcontact, headupwithsnoutliftedrecovery. Bodyandhoovesfixed, samebarrel size. No soilholetruffleparticlesground. Samebaseline/scale, widegutters, no text.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\pig-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\pig-master-r1.png",
+      "sha256": "5577d2e8ada6791bc4c6f9a0eb6b9473a104bd46fa69234441a01128a84469ab",
+      "role": "identity/material/layout reference; generation approval is recorded separately"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "global scene/style reference"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-f828eb37-1e13-4f6b-ac43-13ed35ceaf68.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\pig_dig-r1.png",
+  "sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46",
+  "date": "2026-10-10",
+  "revision": 1,
+  "decision": "candidate / reference retained for owner review; no whole-pack approval"
+}

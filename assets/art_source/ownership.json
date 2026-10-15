@@ -2366,6 +2366,134 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_dig-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_dig-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_dig-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_eat-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-head-action-pig_eat-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_dig-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_dig-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_dig-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_eat-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-head-body-pig_eat-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-idle-head.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-idle-stable.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-lying-master.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-sleep-breath.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-standing-master.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-walk-legs-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-walk-legs-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-walk-legs-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/pig-walk-legs-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-head-action-sheep_eat-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-head-action-sheep_eat-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-head-body-sheep_eat-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-head-body-sheep_eat-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-idle-head.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-idle-stable.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-lying-master.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-sleep-breath.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-standing-master.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-walk-legs-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-walk-legs-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-walk-legs-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A026-farm-animals/sheep-walk-legs-3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/beet_0.png",
       "owner": "raster"
     },
@@ -3610,6 +3738,58 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/pig_dig_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_dig_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_dig_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_eat_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_eat_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_idle_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_idle_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_sleep_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_sleep_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/pig_walk_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/press.png",
       "owner": "raster"
     },
@@ -3667,6 +3847,46 @@
     },
     {
       "output": "sprites/props/seam_snow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_eat_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_eat_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_idle_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_idle_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_sleep_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_sleep_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/sheep_walk_3.png",
       "owner": "raster"
     },
     {

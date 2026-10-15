@@ -1,0 +1,1537 @@
+{
+  "pack": "A026",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/sheep-master-r1.png",
+      "source_sha256": "9c06f6aa160f20d8deb2921a081180f5891641108365364b7aeb9858dc7e5500",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/sheep_idle/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.02965599051008304,
+            "crop_xywh": [
+              272,
+              294,
+              843,
+              641
+            ]
+          },
+          "parts": []
+        },
+        {
+          "component": "sheep-standing-master",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.02965599051008304,
+            "crop_xywh": [
+              272,
+              294,
+              843,
+              641
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-sheep_idle_1-r3.png",
+      "source_sha256": "9a8c88077463af756341c4ed6eadede8141e712f54b4024c32ea1a01a9ca7352",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/sheep_idle/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.02965599051008304,
+            "crop_xywh": [
+              272,
+              294,
+              843,
+              641
+            ]
+          },
+          "parts": [
+            {
+              "input": "sheep-idle-stable",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "component": "sheep-idle-head",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.02965599051008304,
+            "crop_xywh": [
+              272,
+              294,
+              843,
+              641
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/sheep_eat_0-r1.png",
+      "source_sha256": "eab27f0a6ab4f543de09920df8b391adbbcc122edebc05595342f397885ca3fd",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/sheep_eat/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.02965599051008304,
+            "crop_xywh": [
+              272,
+              294,
+              843,
+              641
+            ]
+          },
+          "parts": [
+            {
+              "input": "sheep-head-body-sheep_eat-0",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            },
+            {
+              "input": "sheep-standing-master",
+              "paste_xy": [
+                17,
+                26
+              ],
+              "slice_xywh": [
+                17,
+                26,
+                5,
+                4
+              ]
+            },
+            {
+              "input": "sheep-standing-master",
+              "paste_xy": [
+                27,
+                26
+              ],
+              "slice_xywh": [
+                27,
+                26,
+                6,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "component": "sheep-head-action-sheep_eat-0",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.02965599051008304,
+            "crop_xywh": [
+              272,
+              294,
+              843,
+              641
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/sheep_eat_1-r1.png",
+      "source_sha256": "0118adb720bce77a5565384717d698d8ef57c633f687a982fc697ed5b382cf23",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/sheep_eat/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.02965599051008304,
+            "crop_xywh": [
+              272,
+              294,
+              843,
+              641
+            ]
+          },
+          "parts": [
+            {
+              "input": "sheep-head-body-sheep_eat-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            },
+            {
+              "input": "sheep-standing-master",
+              "paste_xy": [
+                17,
+                26
+              ],
+              "slice_xywh": [
+                17,
+                26,
+                5,
+                4
+              ]
+            },
+            {
+              "input": "sheep-standing-master",
+              "paste_xy": [
+                27,
+                26
+              ],
+              "slice_xywh": [
+                27,
+                26,
+                6,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "component": "sheep-head-action-sheep_eat-1",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.02965599051008304,
+            "crop_xywh": [
+              272,
+              294,
+              843,
+              641
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-sheep_sleep_1-r1.png",
+      "source_sha256": "4e211e520667573b34dedc270009bb2aaebe50e10822ea564f104169ab9e2edb",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/sheep_sleep/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              12
+            ],
+            "content_scale": 0.02997601918465228,
+            "crop_xywh": [
+              273,
+              431,
+              834,
+              414
+            ]
+          },
+          "parts": [
+            {
+              "input": "sheep-lying-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/sheep_sleep/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              12
+            ],
+            "content_scale": 0.02997601918465228,
+            "crop_xywh": [
+              273,
+              431,
+              834,
+              414
+            ]
+          },
+          "parts": [
+            {
+              "input": "sheep-sleep-breath",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "component": "sheep-lying-master",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              12
+            ],
+            "content_scale": 0.02997601918465228,
+            "crop_xywh": [
+              273,
+              431,
+              834,
+              414
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-sheep_walk-r2.png",
+      "source_sha256": "ee25c7c45bd07f197c31e9e557d115f33833afb7de078c10f61a55c16dd68a38",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/sheep_walk/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.05434782608695652,
+            "crop_xywh": [
+              30,
+              228,
+              460,
+              347
+            ]
+          },
+          "parts": [
+            {
+              "input": "sheep-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "sheep-walk-legs-0",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                25,
+                7
+              ]
+            },
+            {
+              "input": "sheep-walk-legs-0",
+              "paste_xy": [
+                36,
+                23
+              ],
+              "slice_xywh": [
+                36,
+                23,
+                4,
+                7
+              ]
+            },
+            {
+              "input": "sheep-walk-legs-0",
+              "paste_xy": [
+                25,
+                24
+              ],
+              "slice_xywh": [
+                25,
+                23,
+                11,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/sheep_walk/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.05434782608695652,
+            "crop_xywh": [
+              516,
+              228,
+              460,
+              347
+            ]
+          },
+          "parts": [
+            {
+              "input": "sheep-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "sheep-walk-legs-1",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                40,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/sheep_walk/west/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.05434782608695652,
+            "crop_xywh": [
+              1014,
+              228,
+              460,
+              347
+            ]
+          },
+          "parts": [
+            {
+              "input": "sheep-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "sheep-walk-legs-2",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                25,
+                7
+              ]
+            },
+            {
+              "input": "sheep-walk-legs-2",
+              "paste_xy": [
+                36,
+                23
+              ],
+              "slice_xywh": [
+                36,
+                23,
+                4,
+                7
+              ]
+            },
+            {
+              "input": "sheep-walk-legs-2",
+              "paste_xy": [
+                25,
+                24
+              ],
+              "slice_xywh": [
+                25,
+                23,
+                11,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/sheep_walk/west/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.05434782608695652,
+            "crop_xywh": [
+              1498,
+              228,
+              460,
+              347
+            ]
+          },
+          "parts": [
+            {
+              "input": "sheep-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "sheep-walk-legs-3",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                40,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "component": "sheep-walk-legs-0",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.05434782608695652,
+            "crop_xywh": [
+              30,
+              228,
+              460,
+              347
+            ]
+          }
+        },
+        {
+          "component": "sheep-walk-legs-1",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.05434782608695652,
+            "crop_xywh": [
+              516,
+              228,
+              460,
+              347
+            ]
+          }
+        },
+        {
+          "component": "sheep-walk-legs-2",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.05434782608695652,
+            "crop_xywh": [
+              1014,
+              228,
+              460,
+              347
+            ]
+          }
+        },
+        {
+          "component": "sheep-walk-legs-3",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              19
+            ],
+            "content_scale": 0.05434782608695652,
+            "crop_xywh": [
+              1498,
+              228,
+              460,
+              347
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/pig-master-r1.png",
+      "source_sha256": "5577d2e8ada6791bc4c6f9a0eb6b9473a104bd46fa69234441a01128a84469ab",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/pig_idle/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.034482758620689655,
+            "crop_xywh": [
+              353,
+              356,
+              725,
+              477
+            ]
+          },
+          "parts": []
+        },
+        {
+          "component": "pig-standing-master",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.034482758620689655,
+            "crop_xywh": [
+              353,
+              356,
+              725,
+              477
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-pig_idle_1-r2.png",
+      "source_sha256": "2aafe4535eb649c7062af36ea0d238eb4b18449d357f09bcff5a86e72e54bce0",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/pig_idle/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.034482758620689655,
+            "crop_xywh": [
+              353,
+              356,
+              725,
+              477
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-idle-stable",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "component": "pig-idle-head",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.034482758620689655,
+            "crop_xywh": [
+              353,
+              356,
+              725,
+              477
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-pig_eat_0-r2.png",
+      "source_sha256": "108278b19549656472652aa3d5c9ef7c313379a024f1fc90a129c49b644855df",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/pig_eat/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.034482758620689655,
+            "crop_xywh": [
+              353,
+              356,
+              725,
+              477
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-head-body-pig_eat-0",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                16,
+                26
+              ],
+              "slice_xywh": [
+                16,
+                26,
+                6,
+                4
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                27,
+                26
+              ],
+              "slice_xywh": [
+                27,
+                26,
+                7,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "component": "pig-head-action-pig_eat-0",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.034482758620689655,
+            "crop_xywh": [
+              353,
+              356,
+              725,
+              477
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-pig_eat_1-r1.png",
+      "source_sha256": "877534bdeebbc8af459e888ebd42e6d1f6af4a2a5bc06d55c1e42ca0ca81a488",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/pig_eat/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.034482758620689655,
+            "crop_xywh": [
+              353,
+              356,
+              725,
+              477
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-head-body-pig_eat-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                16,
+                26
+              ],
+              "slice_xywh": [
+                16,
+                26,
+                6,
+                4
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                27,
+                26
+              ],
+              "slice_xywh": [
+                27,
+                26,
+                7,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "component": "pig-head-action-pig_eat-1",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.034482758620689655,
+            "crop_xywh": [
+              353,
+              356,
+              725,
+              477
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-pig_sleep_1-r1.png",
+      "source_sha256": "99a309e7531f2b8895f958435b70d30668ee73dee541db5aa7ad30e7bed4e979",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/pig_sleep/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              12
+            ],
+            "content_scale": 0.03424657534246575,
+            "crop_xywh": [
+              350,
+              415,
+              730,
+              353
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-lying-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/pig_sleep/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              12
+            ],
+            "content_scale": 0.03424657534246575,
+            "crop_xywh": [
+              350,
+              415,
+              730,
+              353
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-sleep-breath",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "component": "pig-lying-master",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              12
+            ],
+            "content_scale": 0.03424657534246575,
+            "crop_xywh": [
+              350,
+              415,
+              730,
+              353
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-pig_walk-r2.png",
+      "source_sha256": "93ba6989b2526a69a69035eea1fec39c88dcada2c2c0f55ffd1d5cebf5d3af98",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/pig_walk/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              15
+            ],
+            "content_scale": 0.05555555555555555,
+            "crop_xywh": [
+              35,
+              269,
+              450,
+              277
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "pig-walk-legs-0",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                40,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/pig_walk/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              15
+            ],
+            "content_scale": 0.05555555555555555,
+            "crop_xywh": [
+              528,
+              271,
+              450,
+              277
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "pig-walk-legs-1",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                25,
+                7
+              ]
+            },
+            {
+              "input": "pig-walk-legs-1",
+              "paste_xy": [
+                36,
+                23
+              ],
+              "slice_xywh": [
+                36,
+                23,
+                4,
+                7
+              ]
+            },
+            {
+              "input": "pig-walk-legs-1",
+              "paste_xy": [
+                25,
+                24
+              ],
+              "slice_xywh": [
+                25,
+                23,
+                11,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/pig_walk/west/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              15
+            ],
+            "content_scale": 0.05555555555555555,
+            "crop_xywh": [
+              1024,
+              270,
+              450,
+              277
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "pig-walk-legs-2",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                25,
+                7
+              ]
+            },
+            {
+              "input": "pig-walk-legs-2",
+              "paste_xy": [
+                36,
+                23
+              ],
+              "slice_xywh": [
+                36,
+                23,
+                4,
+                7
+              ]
+            },
+            {
+              "input": "pig-walk-legs-2",
+              "paste_xy": [
+                25,
+                24
+              ],
+              "slice_xywh": [
+                25,
+                23,
+                11,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/pig_walk/west/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              15
+            ],
+            "content_scale": 0.05555555555555555,
+            "crop_xywh": [
+              1512,
+              271,
+              450,
+              277
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "pig-walk-legs-3",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                25,
+                7
+              ]
+            },
+            {
+              "input": "pig-walk-legs-3",
+              "paste_xy": [
+                36,
+                23
+              ],
+              "slice_xywh": [
+                36,
+                23,
+                4,
+                7
+              ]
+            },
+            {
+              "input": "pig-walk-legs-3",
+              "paste_xy": [
+                25,
+                24
+              ],
+              "slice_xywh": [
+                25,
+                23,
+                11,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "component": "pig-walk-legs-0",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              15
+            ],
+            "content_scale": 0.05555555555555555,
+            "crop_xywh": [
+              35,
+              269,
+              450,
+              277
+            ]
+          }
+        },
+        {
+          "component": "pig-walk-legs-1",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              15
+            ],
+            "content_scale": 0.05555555555555555,
+            "crop_xywh": [
+              528,
+              271,
+              450,
+              277
+            ]
+          }
+        },
+        {
+          "component": "pig-walk-legs-2",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              15
+            ],
+            "content_scale": 0.05555555555555555,
+            "crop_xywh": [
+              1024,
+              270,
+              450,
+              277
+            ]
+          }
+        },
+        {
+          "component": "pig-walk-legs-3",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              15
+            ],
+            "content_scale": 0.05555555555555555,
+            "crop_xywh": [
+              1512,
+              271,
+              450,
+              277
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/pig_dig-r1.png",
+      "source_sha256": "94fd4ce6f3547306d1c6925156ad29e88200d8691efbb421b5c091240e277b46",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/pig_dig/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.04440497335701599,
+            "crop_xywh": [
+              93,
+              227,
+              563,
+              360
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-head-body-pig_dig-0",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                16,
+                26
+              ],
+              "slice_xywh": [
+                16,
+                26,
+                6,
+                4
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                27,
+                26
+              ],
+              "slice_xywh": [
+                27,
+                26,
+                7,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/pig_dig/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.04440497335701599,
+            "crop_xywh": [
+              721,
+              225,
+              563,
+              360
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-head-body-pig_dig-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                16,
+                26
+              ],
+              "slice_xywh": [
+                16,
+                26,
+                6,
+                4
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                27,
+                26
+              ],
+              "slice_xywh": [
+                27,
+                26,
+                7,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/pig_dig/west/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.04440497335701599,
+            "crop_xywh": [
+              1355,
+              225,
+              563,
+              360
+            ]
+          },
+          "parts": [
+            {
+              "input": "pig-head-body-pig_dig-2",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                16,
+                26
+              ],
+              "slice_xywh": [
+                16,
+                26,
+                6,
+                4
+              ]
+            },
+            {
+              "input": "pig-standing-master",
+              "paste_xy": [
+                27,
+                26
+              ],
+              "slice_xywh": [
+                27,
+                26,
+                7,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "component": "pig-head-action-pig_dig-0",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.04440497335701599,
+            "crop_xywh": [
+              93,
+              227,
+              563,
+              360
+            ]
+          }
+        },
+        {
+          "component": "pig-head-action-pig_dig-1",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.04440497335701599,
+            "crop_xywh": [
+              721,
+              225,
+              563,
+              360
+            ]
+          }
+        },
+        {
+          "component": "pig-head-action-pig_dig-2",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              16
+            ],
+            "content_scale": 0.04440497335701599,
+            "crop_xywh": [
+              1355,
+              225,
+              563,
+              360
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}
