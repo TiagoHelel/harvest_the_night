@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#####################...`  **262 / 296 done**
+`#####################...`  **263 / 296 done**
 
-0 doing / 34 todo / 0 blocked across 18 phases.
+0 doing / 33 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-34 task(s) left, the ready ones first, then what they
+33 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -121,24 +121,6 @@ The farmer's reactions at the 32px detail of his new body, and the Zzz that rise
   - done when: `python tools/show_art.py --reactions --check` passes and shows the Zzz; `python tools/import_art.py --check` passes; `python tools/placeholders.py` no longer lists A002
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - a reaction by day, the Zzz at night - opened and looked at, in `implementation/shots/0144/`
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0201 - Art: sprinklers
-
-Ready to pick up.  Likely files: `assets/art_source/props/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_ui_art.py`.
-
-The copper, iron and gold sprinklers of 0178 get their approved bodies and icons; the spray stays code particles.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A018` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A018-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props` and `assets/art_source/ui/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`, `tools/check_ui_art.py`).
-- Runtime names for each tier's idle and spray-body frames at the 16x16 canvas and pivot 0178 settled, and an icon (16x16 + 10x10) per tier for the build list
-- Replace 0178's stand-ins and flip A018's placeholder-registry entries to raster; the particle spray is unchanged
-- Set the pack to integrated: `python implementation/backlog/assets.py set A018 integrated`.
-
-  - done when: `python tools/check_prop_art.py`, `python tools/check_ui_art.py`, `python tools/show_art.py --props --check` and `--ui --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0201/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0206 - Art: fishing gear and the minigame
 
@@ -546,7 +528,7 @@ The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpo
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0123, 0124, 0125, 0143, 0144, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -862,7 +844,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md)
 - [x] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md)
 
-## 12 - The day that pays  (43/53)
+## 12 - The day that pays  (44/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -900,7 +882,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md)
 - [x] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md)
 - [x] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md)
-- [ ] **0201** [Art: sprinklers](prompts/0201-art-sprinklers.md)
+- [x] **0201** [Art: sprinklers](prompts/0201-art-sprinklers.md)
 - [x] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md)
 - [x] **0203** [Art: material icons](prompts/0203-art-material-icons.md)
 - [x] **0204** [Art: copper, coal, gold and hardwood](prompts/0204-art-ore-hardwood.md)
@@ -1001,7 +983,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md)
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (2/7)
 

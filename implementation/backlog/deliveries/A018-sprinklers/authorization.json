@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-14",
+  "owner_words": "Sim, autorizar composição com recortes do ImageGen",
+  "question": "Para manter patas, bases e corpos realmente fixos, posso montar os frames com recortes e camadas das próprias imagens geradas pelo ImageGen, reutilizando as partes que não se movem? Isso amplia a regra do ART-CONTRACT.md, que hoje permite composição apenas para barreiras. Nenhuma arte seria desenhada ou repintada por código.",
+  "scope": "Compose frames from crops/layers of actual ImageGen art; reuse unchanged parts. No drawing, repainting or invented source pixels.",
+  "allowed_operations": [
+    "recorded source crop",
+    "nearest scale",
+    "palette reduction",
+    "alpha threshold",
+    "exact rotation or mirror",
+    "crop/layer composition"
+  ],
+  "art_approval": false
+}

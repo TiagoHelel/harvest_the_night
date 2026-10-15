@@ -681,9 +681,14 @@ func _raindrop(corner: Vector2, view: Vector2, down: float) -> void:
 ## Whether the sprinklers are running on screen (task 0178): the first hour
 ## of the day, with particles allowed and moving.
 func spraying() -> bool:
-	return not _state.is_empty() and _density > 0.0 and _motion and _cap > 0 \
-		and int(_state["phase"]) == Phases.DAY \
-		and int(_state["day_tick"]) < Phases.tick_at_minute(SPRAY_UNTIL_MINUTE)
+	return not _state.is_empty() and _density > 0.0 and _motion and _cap > 0 and spray_hour(_state)
+
+
+## **The sprinklers' hour** (task 0201): the first hour of the day, whatever
+## the particles may do - when `WorldView` turns their heads.
+static func spray_hour(state: Dictionary) -> bool:
+	return not state.is_empty() and int(state["phase"]) == Phases.DAY \
+		and int(state["day_tick"]) < Phases.tick_at_minute(SPRAY_UNTIL_MINUTE)
 
 
 ## How many drops are in the air - for `input_v1`.
@@ -713,7 +718,8 @@ func _spray(delta: float) -> void:
 		var id := StringName((occupants[idx] as Dictionary)["id"])
 		if not Building.sprays(id):
 			continue
-		var head := (Vector2(Grid.cell(int(idx))) + Vector2(0.5, 0.5)) * tile
+		# From its nozzle since task 0201 (A018's `spray_xy`).
+		var head := WorldView.spray_head(id, Grid.cell(int(idx)))
 		if not view.has_point(head):
 			continue
 		var entry: Dictionary = GameData.BUILDINGS[id]
@@ -743,7 +749,7 @@ func _drop(head: Vector2, out: float, cross: bool, progress: float = 0.0) -> voi
 	_vx[i] = cos(angle) * landing / SPRAY_LIFE
 	_vy[i] = sin(angle) * landing / SPRAY_LIFE
 	_x[i] = head.x + _vx[i] * flight * progress
-	_y[i] = head.y - 3.0 + _vy[i] * flight * progress
+	_y[i] = head.y + _vy[i] * flight * progress
 	_left[i] = flight * (1.0 - progress)
 	_span[i] = flight
 	_size[i] = 1

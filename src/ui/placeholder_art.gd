@@ -384,12 +384,6 @@ const ART := {
 	&"hud_worm": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.15, 0.7, 0.8), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A018's sprinklers (task 0178): the spent mine's low metal disc, in each
-	# tier's metal and at the width A018 gives it (8, 10 and 12 pixels), so the
-	# three read apart by size as well as colour until 0201.
-	&"copper_sprinkler": {"pack": "A018", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mine_spent", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "stand_in_scale": 0.67, "tint": Color(1.6, 0.95, 0.7)},
-	&"iron_sprinkler": {"pack": "A018", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mine_spent", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "stand_in_scale": 0.84, "tint": Color(1.45, 1.5, 1.6)},
-	&"gold_sprinkler": {"pack": "A018", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mine_spent", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true, "stand_in_scale": 1.0, "tint": Color(1.9, 1.6, 0.7)},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 	# A056's collection book (task 0287), until 0288 integrates it: the
 	# cover, the ornament and every badge drawn by code (`CollectionArt`);

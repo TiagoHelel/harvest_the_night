@@ -14735,9 +14735,10 @@ func _task_0082_shots() -> void:
 	# hundred and twenty-seven since 0262: an autumn night's. A hundred and
 	# twenty-eight since 0145: the porch guardian awake. A hundred and
 	# twenty-nine since 0146: the cursor's looks. A hundred and thirty-two
-	# since 0200: autumn's field by day, by night and growing.
-	expect(names.size() == 132,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art, the garlic's art, the searchlight's art, a summer and an autumn forecast, the guardian awake, the cursor's looks, autumn's field and the 1.0 farm",
+	# since 0200: autumn's field by day, by night and growing. A hundred and
+	# thirty-four since 0201: the sprinklers at rest and by night.
+	expect(names.size() == 134,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art, the garlic's art, the searchlight's art, a summer and an autumn forecast, the guardian awake, the cursor's looks, autumn's field, the sprinklers at rest and by night and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",

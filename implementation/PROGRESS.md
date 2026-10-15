@@ -32648,3 +32648,72 @@ stages.
 - `python implementation/backlog/assets.py set A017 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (64 of 64), on the second run.
+
+## 0201 - Art: sprinklers - done 2026-10-15
+
+A018 is integrated. The copper, iron and gold sprinklers are the
+owner-approved art now: each tier's idle cut, its four-frame spray and its
+build-list icon at 16 and 10. The owner approved the corrected pack on
+2026-10-15 with the retried batch ("tudo aprovado"), as recorded in the
+delivery's `APPROVAL.json`. 0178's spent-mine stand-ins are gone. The
+particle spray is unchanged except for where it starts.
+
+- **Promoted as a DAG**:
+  - The 12 spray frames are compositions over 15 `render` components, under
+    `sprites/components/A018-sprinklers/`.
+  - The 3 idle cuts and 6 icon cuts are direct.
+  - The six raw sources are byte for byte in
+    `assets/art_source/props/sprinklers/` and `assets/art_source/ui/sprinklers/`.
+  - Every node and file was sha-checked, and decodes to its approved RGBA
+    through the canonical importer.
+  - The icon cuts carry their `display_role`.
+- **The head turns through the morning's hour**:
+  - `WorldView.sprinkler_art` gives a sprinkler A018's spray frames through
+    the first hour of the day, a tenth of a second each, round and round, and
+    its idle cut after.
+  - `_turn_sprinklers` puts it on each sprinkler's sprite on the wall clock;
+    view only.
+  - `Particles.spray_hour` is the hour, which `Particles.spraying()` (the
+    drops) now shares.
+- **The water leaves the nozzle**:
+  - `import_art.py` writes a frame's `spray_xy` into `RasterArt` as
+    `spray`, as it does light, smoke and muzzle.
+  - `WorldView.spray_head` puts that point in the world: the copper's
+    nozzle is 2 pixels lower than the old point three over the cell's
+    middle, the gold's at it.
+  - `Particles._spray` throws from there; a kind with no spray drawn keeps
+    the old point.
+- **The build list shows the pictures**: a day build-list row shows its
+  item's compact icon where its pack drew one - the sprinklers today. It fits
+  the 11-pixel row.
+  - `UiKit.orphan_icons` claims a building's icons. Before that it found
+    the three sprinkler icons unused and failed two asserts.
+- **The stand-ins retired**: A018's three `PlaceholderArt` entries.
+  `placeholders.py --check` passes, with 158 stand-ins left over 22 packs.
+- **Checks**:
+  - `check_prop_art.py` takes the sprinklers: each tier's idle cut and four
+    spray frames on 16x16 at (8,14). The spray frames are A018's
+    compositions, 0.1 s looping and every one its own, with:
+    - the head two pixels above the idle one;
+    - the base (rows 11-15) unmoved;
+    - the nozzle on the head's top row.
+  - `check_ui_art.py`'s `PAIRS` and the `--ui` showcase take the three
+    icon pairs.
+- **Tests**: `_task_0201_sprinklers` (headless_v1) checks:
+  - the frames and icons are raster art, none a stand-in;
+  - through the morning's hour the copper sprinkler shows spray frames 0, 1
+    and back to 0 at 0, 0.15 and 0.45 seconds, and its idle cut once the
+    hour is over;
+  - its drops leave the nozzle A018 marked.
+- **Shots** (`implementation/shots/0201/`, FHD 1920x1080, looked at):
+  - `sprinklers`: 06:20, heads up and spraying, the drops from the
+    nozzles.
+  - `sprinklers_idle` (new): 09:00, the idle cuts.
+  - `sprinklers_night` (new): the same three by night, dim and still.
+  - `build_day`: the day's build list with the three sprinkler icons.
+  - `headless_check` counts 134 scenes.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A018 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (64 of 64).

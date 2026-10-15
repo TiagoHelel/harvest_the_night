@@ -2262,6 +2262,66 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/components/A018-sprinklers/copper-base.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/copper-head-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/copper-head-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/copper-head-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/copper-head-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/gold-base.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/gold-head-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/gold-head-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/gold-head-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/gold-head-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/iron-base.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/iron-head-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/iron-head-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/iron-head-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A018-sprinklers/iron-head-3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/beet_0.png",
       "owner": "raster"
     },
@@ -3234,6 +3294,26 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/copper_sprinkler.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/copper_sprinkler_spray_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/copper_sprinkler_spray_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/copper_sprinkler_spray_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/copper_sprinkler_spray_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/cow.png",
       "owner": "raster"
     },
@@ -3354,6 +3434,26 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/gold_sprinkler.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/gold_sprinkler_spray_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/gold_sprinkler_spray_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/gold_sprinkler_spray_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/gold_sprinkler_spray_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/guardian_day_0.png",
       "owner": "raster"
     },
@@ -3407,6 +3507,26 @@
     },
     {
       "output": "sprites/props/hardwood_stump_chipped.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/iron_sprinkler.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/iron_sprinkler_spray_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/iron_sprinkler_spray_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/iron_sprinkler_spray_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/iron_sprinkler_spray_3.png",
       "owner": "raster"
     },
     {
@@ -3982,6 +4102,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_copper_sprinkler.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_corn.png",
       "owner": "raster"
     },
@@ -4074,6 +4198,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_gold_sprinkler.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_golden_queen.png",
       "owner": "raster"
     },
@@ -4123,6 +4251,10 @@
     },
     {
       "output": "sprites/ui/hud_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_iron_sprinkler.png",
       "owner": "raster"
     },
     {
@@ -4458,6 +4590,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_copper_sprinkler.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_corn.png",
       "owner": "raster"
     },
@@ -4550,6 +4686,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_gold_sprinkler.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_golden_queen.png",
       "owner": "raster"
     },
@@ -4599,6 +4739,10 @@
     },
     {
       "output": "sprites/ui/icon_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_iron_sprinkler.png",
       "owner": "raster"
     },
     {

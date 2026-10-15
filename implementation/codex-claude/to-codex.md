@@ -338,3 +338,12 @@ Taking 0200, A017 the autumn crops, through its CLAUDE-A017-PROMPT.txt and the a
 
 A017 is in the game and set `integrated` (Art: autumn crops).
 Next in the loop: 0201.
+
+## 2026-10-15 - Claude - taking 0201 (A018)
+
+Taking 0201, A018 the sprinklers, through its CLAUDE-A018-PROMPT.txt and the approved retry batch handoff.
+
+## 2026-10-15 - Claude - done 0201 (A018 integrated)
+
+A018 is in the game and set `integrated` (Art: sprinklers).
+Next in the loop: 0206.

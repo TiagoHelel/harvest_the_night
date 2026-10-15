@@ -1,0 +1,972 @@
+{
+  "pack": "A018",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/copper_sprinkler/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              50,
+              192,
+              353,
+              396
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/copper_sprinkler_spray/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              480,
+              192,
+              353,
+              396
+            ]
+          },
+          "parts": [
+            {
+              "input": "copper-head-0",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "copper-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/copper_sprinkler_spray/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              910,
+              192,
+              353,
+              396
+            ]
+          },
+          "parts": [
+            {
+              "input": "copper-head-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "copper-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/copper_sprinkler_spray/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              1340,
+              192,
+              353,
+              396
+            ]
+          },
+          "parts": [
+            {
+              "input": "copper-head-2",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "copper-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/copper_sprinkler_spray/none/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              1750,
+              192,
+              353,
+              396
+            ]
+          },
+          "parts": [
+            {
+              "input": "copper-head-3",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "copper-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "component": "copper-base",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              50,
+              192,
+              353,
+              396
+            ]
+          }
+        },
+        {
+          "component": "copper-head-0",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              480,
+              192,
+              353,
+              396
+            ]
+          }
+        },
+        {
+          "component": "copper-head-1",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              910,
+              192,
+              353,
+              396
+            ]
+          }
+        },
+        {
+          "component": "copper-head-2",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              1340,
+              192,
+              353,
+              396
+            ]
+          }
+        },
+        {
+          "component": "copper-head-3",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              9
+            ],
+            "content_scale": 0.0226628895184136,
+            "crop_xywh": [
+              1750,
+              192,
+              353,
+              396
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/copper-master-c2-r1.png",
+      "source_sha256": "e1e4c4477c2fe314875aecfad9ee694e0e654d52fa6b0a59a51d9b84eeae8108",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_copper_sprinkler/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.030501089324618737,
+            "crop_xywh": [
+              430,
+              530,
+              399,
+              459
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_copper_sprinkler/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.017429193899782137,
+            "crop_xywh": [
+              430,
+              530,
+              399,
+              459
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/iron_sprinkler/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              71,
+              161,
+              337,
+              408
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/iron_sprinkler_spray/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              500,
+              161,
+              337,
+              408
+            ]
+          },
+          "parts": [
+            {
+              "input": "iron-head-0",
+              "paste_xy": [
+                0,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "iron-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/iron_sprinkler_spray/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              918,
+              161,
+              337,
+              408
+            ]
+          },
+          "parts": [
+            {
+              "input": "iron-head-1",
+              "paste_xy": [
+                0,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "iron-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/iron_sprinkler_spray/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              1332,
+              161,
+              337,
+              408
+            ]
+          },
+          "parts": [
+            {
+              "input": "iron-head-2",
+              "paste_xy": [
+                0,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "iron-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/iron_sprinkler_spray/none/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              1768,
+              161,
+              337,
+              408
+            ]
+          },
+          "parts": [
+            {
+              "input": "iron-head-3",
+              "paste_xy": [
+                0,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "iron-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "component": "iron-base",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              71,
+              161,
+              337,
+              408
+            ]
+          }
+        },
+        {
+          "component": "iron-head-0",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              500,
+              161,
+              337,
+              408
+            ]
+          }
+        },
+        {
+          "component": "iron-head-1",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              918,
+              161,
+              337,
+              408
+            ]
+          }
+        },
+        {
+          "component": "iron-head-2",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              1332,
+              161,
+              337,
+              408
+            ]
+          }
+        },
+        {
+          "component": "iron-head-3",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              11
+            ],
+            "content_scale": 0.02696078431372549,
+            "crop_xywh": [
+              1768,
+              161,
+              337,
+              408
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/iron-master-r1.png",
+      "source_sha256": "0c0dbf319e7b2bc6c48c85e47d68e9fb36e7c35c787600c62710f7191b9196a4",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_iron_sprinkler/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.030973451327433628,
+            "crop_xywh": [
+              441,
+              535,
+              373,
+              452
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_iron_sprinkler/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.017699115044247787,
+            "crop_xywh": [
+              441,
+              535,
+              373,
+              452
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/gold_sprinkler/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              58,
+              161,
+              349,
+              420
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/gold_sprinkler_spray/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              484,
+              161,
+              349,
+              420
+            ]
+          },
+          "parts": [
+            {
+              "input": "gold-head-0",
+              "paste_xy": [
+                0,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "gold-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/gold_sprinkler_spray/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              911,
+              161,
+              349,
+              420
+            ]
+          },
+          "parts": [
+            {
+              "input": "gold-head-1",
+              "paste_xy": [
+                0,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "gold-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/gold_sprinkler_spray/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              1338,
+              161,
+              349,
+              420
+            ]
+          },
+          "parts": [
+            {
+              "input": "gold-head-2",
+              "paste_xy": [
+                0,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "gold-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/gold_sprinkler_spray/none/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              1766,
+              161,
+              349,
+              420
+            ]
+          },
+          "parts": [
+            {
+              "input": "gold-head-3",
+              "paste_xy": [
+                0,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                11
+              ]
+            },
+            {
+              "input": "gold-base",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                11,
+                16,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "component": "gold-base",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              58,
+              161,
+              349,
+              420
+            ]
+          }
+        },
+        {
+          "component": "gold-head-0",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              484,
+              161,
+              349,
+              420
+            ]
+          }
+        },
+        {
+          "component": "gold-head-1",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              911,
+              161,
+              349,
+              420
+            ]
+          }
+        },
+        {
+          "component": "gold-head-2",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              1338,
+              161,
+              349,
+              420
+            ]
+          }
+        },
+        {
+          "component": "gold-head-3",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              12
+            ],
+            "content_scale": 0.02857142857142857,
+            "crop_xywh": [
+              1766,
+              161,
+              349,
+              420
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/gold-master-r1.png",
+      "source_sha256": "c87fa0c4ee52d72af4ac7469ca2bffea52b494a5fe1d078fefb7d2b6fff7b762",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_gold_sprinkler/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.028513238289205704,
+            "crop_xywh": [
+              418,
+              522,
+              418,
+              491
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_gold_sprinkler/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.016293279022403257,
+            "crop_xywh": [
+              418,
+              522,
+              418,
+              491
+            ]
+          },
+          "parts": []
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

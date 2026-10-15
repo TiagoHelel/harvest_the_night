@@ -1,6 +1,6 @@
 # A018 - Sprinklers
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0201
 - **Dressed by game tasks:** 0178
 - **Spec after game task:** 0178

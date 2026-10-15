@@ -1,0 +1,54 @@
+A018 - Sprinklers
+Approval date: 2026-10-15
+Owner words, verbatim: "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+Status: approved for integration; runtime not yet integrated.
+
+Authoritative folder: implementation/backlog/deliveries/A018-sprinklers/
+All 21 native output PNGs and the recorded source/component assembly are owner-approved.
+Integration game task: 0201.
+Sprinkler idle/spray attachment points are native spray_xy coordinates; water droplets are runtime effects. Spray frames turn west,south,east,north, loop at 0.1s. Preserve exact two-pixel head rise and stable base. Icons and compact HUD are unlit.
+
+Read APPROVAL.json, contract.json, checks.json, source-selection.json and the shared detailed correction notes:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-REVIEW.md
+That file is the historical correction/assembly explanation. The approved batch handoff below supersedes its old pending-review instructions:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-APPROVED.md
+No older delivery folder is superseded unless listed in contract.supersedes; prior candidate sources in rejected/, preview/ and retry-before-20261014/ are never integration inputs.
+
+Palette mode A: preserve every per-file override, palette_keys, alpha_threshold128, colour_ramp and draw scale.
+Mode A: promote raw sources with the recorded importer crop/nearest scale/anchor/palette recipe. Mode B: final native pixels are exact-source; do not re-quantize.
+Layered outputs: parts/components are authoritative. The primary source/recipe also records provenance; do NOT treat it as a direct crop for a composed file.
+Promote the DAG recursively, maximum5parts per compose node. Derived compose entries must omit source (otherwise the importer bypasses composition), use input=first part input and preserve part order.
+Exact reference, mode-B and baked mirror component PNGs are hashed exact-source leaves. Quarter-turns use the existing rotate operation. Preserve source recipes and approval provenance.
+Canonical importer replay already reproduces all outputs pixel-exact; see pipeline-replay-check.json and the shared check_pipeline_replay.py.
+
+Native -> runtime mapping (01.png is frame0):
+native/copper_sprinkler/none/01.png -> sprites/props/copper_sprinkler.png | 16x16 pivot (8, 14) draw 1 | copper_sprinkler none frame0 0.55s loop=false mirror=none | points={}
+native/copper_sprinkler_spray/none/01.png -> sprites/props/copper_sprinkler_spray_0.png | 16x16 pivot (8, 14) draw 1 | copper_sprinkler_spray none frame0 0.1s loop=true mirror=none | points={"spray_xy": [8, 5]}
+native/copper_sprinkler_spray/none/02.png -> sprites/props/copper_sprinkler_spray_1.png | 16x16 pivot (8, 14) draw 1 | copper_sprinkler_spray none frame1 0.1s loop=true mirror=none | points={"spray_xy": [8, 5]}
+native/copper_sprinkler_spray/none/03.png -> sprites/props/copper_sprinkler_spray_2.png | 16x16 pivot (8, 14) draw 1 | copper_sprinkler_spray none frame2 0.1s loop=true mirror=none | points={"spray_xy": [8, 5]}
+native/copper_sprinkler_spray/none/04.png -> sprites/props/copper_sprinkler_spray_3.png | 16x16 pivot (8, 14) draw 1 | copper_sprinkler_spray none frame3 0.1s loop=true mirror=none | points={"spray_xy": [8, 5]}
+native/icon_copper_sprinkler/none/01.png -> sprites/ui/icon_copper_sprinkler.png | 16x16 pivot (8, 8) draw 1 | icon_copper_sprinkler none frame0 1s loop=false mirror=none | points={}
+native/hud_copper_sprinkler/none/01.png -> sprites/ui/hud_copper_sprinkler.png | 10x10 pivot (5, 5) draw 1 | hud_copper_sprinkler none frame0 1s loop=false mirror=none | points={}
+native/iron_sprinkler/none/01.png -> sprites/props/iron_sprinkler.png | 16x16 pivot (8, 14) draw 1 | iron_sprinkler none frame0 0.55s loop=false mirror=none | points={}
+native/iron_sprinkler_spray/none/01.png -> sprites/props/iron_sprinkler_spray_0.png | 16x16 pivot (8, 14) draw 1 | iron_sprinkler_spray none frame0 0.1s loop=true mirror=none | points={"spray_xy": [8, 4]}
+native/iron_sprinkler_spray/none/02.png -> sprites/props/iron_sprinkler_spray_1.png | 16x16 pivot (8, 14) draw 1 | iron_sprinkler_spray none frame1 0.1s loop=true mirror=none | points={"spray_xy": [8, 4]}
+native/iron_sprinkler_spray/none/03.png -> sprites/props/iron_sprinkler_spray_2.png | 16x16 pivot (8, 14) draw 1 | iron_sprinkler_spray none frame2 0.1s loop=true mirror=none | points={"spray_xy": [8, 4]}
+native/iron_sprinkler_spray/none/04.png -> sprites/props/iron_sprinkler_spray_3.png | 16x16 pivot (8, 14) draw 1 | iron_sprinkler_spray none frame3 0.1s loop=true mirror=none | points={"spray_xy": [8, 4]}
+native/icon_iron_sprinkler/none/01.png -> sprites/ui/icon_iron_sprinkler.png | 16x16 pivot (8, 8) draw 1 | icon_iron_sprinkler none frame0 1s loop=false mirror=none | points={}
+native/hud_iron_sprinkler/none/01.png -> sprites/ui/hud_iron_sprinkler.png | 10x10 pivot (5, 5) draw 1 | hud_iron_sprinkler none frame0 1s loop=false mirror=none | points={}
+native/gold_sprinkler/none/01.png -> sprites/props/gold_sprinkler.png | 16x16 pivot (8, 14) draw 1 | gold_sprinkler none frame0 0.55s loop=false mirror=none | points={}
+native/gold_sprinkler_spray/none/01.png -> sprites/props/gold_sprinkler_spray_0.png | 16x16 pivot (8, 14) draw 1 | gold_sprinkler_spray none frame0 0.1s loop=true mirror=none | points={"spray_xy": [8, 3]}
+native/gold_sprinkler_spray/none/02.png -> sprites/props/gold_sprinkler_spray_1.png | 16x16 pivot (8, 14) draw 1 | gold_sprinkler_spray none frame1 0.1s loop=true mirror=none | points={"spray_xy": [8, 3]}
+native/gold_sprinkler_spray/none/03.png -> sprites/props/gold_sprinkler_spray_2.png | 16x16 pivot (8, 14) draw 1 | gold_sprinkler_spray none frame2 0.1s loop=true mirror=none | points={"spray_xy": [8, 3]}
+native/gold_sprinkler_spray/none/04.png -> sprites/props/gold_sprinkler_spray_3.png | 16x16 pivot (8, 14) draw 1 | gold_sprinkler_spray none frame3 0.1s loop=true mirror=none | points={"spray_xy": [8, 3]}
+native/icon_gold_sprinkler/none/01.png -> sprites/ui/icon_gold_sprinkler.png | 16x16 pivot (8, 8) draw 1 | icon_gold_sprinkler none frame0 1s loop=false mirror=none | points={}
+native/hud_gold_sprinkler/none/01.png -> sprites/ui/hud_gold_sprinkler.png | 10x10 pivot (5, 5) draw 1 | hud_gold_sprinkler none frame0 1s loop=false mirror=none | points={}
+
+Aliases: bind listed runtime names directly, replace the named game task's placeholders and retain any existing required aliases to the appropriate approved first frames. Do not invent additional raster frames.
+Mirrors: runtime east mirroring applies only to the authored west-facing animal/NPC cycles identified above. All UI, crop, guardian and static building files bind with no flip. Preserve any per-file mirror field.
+Metadata coordinates are native pixels. Component files are supporting assembly nodes, not extra runtime animations.
+Deviations and owner authorization: [{"change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.", "owner_words": "Sim, autorizar composição com recortes do ImageGen", "rule": "ART-CONTRACT 9.4 barrier-only composition"}]
+
+Never regenerate, repaint, recolour, resample or retime approved art; never cut sprites out of previews, GIFs or screenshots; never add a second flip. Do not use unlisted candidates.
+Next: verify approved output and component hashes; promote versioned sources/assembly via the raster manifest and ownership records; extend hard-coded family checks; run tools/verify.py; inspect actual FHD day/night behavior; set this pack integrated only after successful integration. Claude owns game-task state and assets.py unblock.
+No new commit/push is authorized by this art approval.

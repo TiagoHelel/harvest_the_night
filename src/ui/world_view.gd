@@ -128,6 +128,10 @@ var _tarp_stage := -1
 ## and what each was last seen at: its hit points, and how long since a bite.
 var _decoys: Dictionary = {}
 var _decoy_hits: Dictionary = {}
+## The sprinklers' sprites by cell index (task 0201), and the wall clock
+## their heads turn on through the sprinklers' hour.
+var _sprinklers: Dictionary = {}
+var _spray_time := 0.0
 ## **Whether the day's tarps are drawn** (task 0223): yes in the game. The
 ## tower showcase turns them off, to look at the towers by daylight.
 var tarps := true
@@ -601,6 +605,7 @@ func _process(delta: float) -> void:
 	_enemy_warning.queue_redraw()
 	_refresh_stations(delta)
 	_sway_decoys(delta)
+	_turn_sprinklers(delta)
 	_dress_tarps()
 	_place_house_mark()
 	_remember_towers(_state)
@@ -1496,6 +1501,7 @@ func _refresh() -> void:
 	_stations.clear()
 	_tarped.clear()
 	_decoys.clear()
+	_sprinklers.clear()
 	_ambient_materials.clear()
 	if _season != null:
 		_season.forget_sprites()
@@ -1596,6 +1602,9 @@ func _refresh() -> void:
 		if id == &"decoy":
 			sprite.set_meta("rest", sprite.texture)
 			_decoys[int(idx)] = sprite
+		# A sprinkler, whose head turns through the morning's hour (task 0201).
+		if Building.sprays(id):
+			_sprinklers[int(idx)] = sprite
 		if id == &"tree":
 			var shadow := Sprite2D.new()
 			shadow.texture = load(PlayerView.SHADOW)
@@ -1901,6 +1910,27 @@ func _sway_decoys(delta: float) -> void:
 		sprite.texture = swaying if swaying != null else sprite.get_meta("rest", sprite.texture)
 
 
+## **The sprinklers at work** (task 0201): through the sprinklers' hour each
+## one shows A018's spray, its head turning on the wall clock; its idle cut
+## otherwise. View only: what it waters is `Farming`'s.
+func _turn_sprinklers(delta: float) -> void:
+	_spray_time = _spray_time + delta if Particles.spray_hour(_state) else 0.0
+	var occupants: Dictionary = _state["occupants"]
+	for idx in _sprinklers:
+		var sprite: Sprite2D = _sprinklers[idx]
+		if not is_instance_valid(sprite):
+			continue
+		var id := StringName((occupants.get(idx, {}) as Dictionary).get("id", &""))
+		if id != &"":
+			sprite.texture = _texture_for(sprinkler_art(_state, id, _spray_time))
+
+
+## The picture a sprinkler on `cell` shows now - for the tests.
+func sprinkler_shown(cell: Vector2i) -> String:
+	var sprite: Sprite2D = _sprinklers.get(Grid.index(cell))
+	return sprite.texture.resource_path if sprite != null and is_instance_valid(sprite) else ""
+
+
 ## How far into its sway the decoy on a cell is, in seconds - `INF` for one
 ## standing still - for the asserts.
 func decoy_sway_age(cell: Vector2i) -> float:
@@ -1923,6 +1953,29 @@ func _watch_defences() -> void:
 	_defences_known = true
 	if fresh and _guardian != null:
 		_guardian.point()
+
+
+## **A sprinkler's nozzle in the world** (task 0201): where A018's spray
+## frames put it (`spray_xy`) on the sprinkler standing on `cell` - the drops
+## leave from there. The old head, three pixels over the cell's middle, for
+## a kind with no spray drawn.
+static func spray_head(id: StringName, cell: Vector2i) -> Vector2:
+	var tile := float(GameData.TILE_SIZE)
+	var frame := PlaceholderArt.frame(PROP_DIR + "%s_spray_0.png" % id)
+	if not frame.has("spray"):
+		return (Vector2(cell) + Vector2(0.5, 0.5)) * tile - Vector2(0.0, 3.0)
+	return Vector2(cell) * tile + Vector2(tile * 0.5, tile) - Vector2(frame["pivot"]) + Vector2(frame["spray"])
+
+
+## **What a sprinkler shows** (task 0201): through the sprinklers' hour its
+## spray, A018's four frames turning west, south, east and north on their own
+## seconds, `seconds` into it; the idle cut otherwise.
+static func sprinkler_art(state: Dictionary, id: StringName, seconds: float) -> StringName:
+	var first := PlaceholderArt.frame(PROP_DIR + "%s_spray_0.png" % id)
+	if first.is_empty() or not Particles.spray_hour(state):
+		return id
+	var each := maxf(float(first.get("seconds", 0.1)), 0.01)
+	return StringName("%s_spray_%d" % [id, int(seconds / each) % 4])
 
 
 ## Whether the Zzz is up over the house - for `input_v1` and the shots.

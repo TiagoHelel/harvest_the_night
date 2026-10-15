@@ -83,6 +83,8 @@ const SCENARIOS: Array = [
 	["bait", "a worm on the iron rod's hook, the line waiting, the bait choice under it", ""],
 	["fishing_bar", "a trout on the line: one hit of two, the marker on its way", ""],
 	["sprinklers", "a copper, an iron and a gold sprinkler at 06:20, spraying", ""],
+	["sprinklers_idle", "the same three sprinklers at 09:00, the morning's hour over - A018's idle cuts (task 0201)", ""],
+	["sprinklers_night", "the same three sprinklers on the night after, the waves held off (task 0201)", ""],
 	["hardwood", "a chipped big stump and a whole one among the trees", ""],
 	["hardwood_night", "the same two big stumps on that night, the waves held off", ""],
 	["quarry", "copper, coal and iron-gated gold on Autumn 1", ""],
@@ -863,6 +865,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"hardwood": _set_hardwood(state)
 		"hardwood_night": _set_hardwood_night(state)
 		"sprinklers": _set_sprinklers(state)
+		"sprinklers_idle": _set_sprinklers_idle(state)
+		"sprinklers_night": _set_sprinklers_night(state)
 		"fishing_bar": _set_fishing_bar(state)
 		"winter_fishing": _set_winter_fishing(state)
 		"winter_quarry": _set_winter_quarry(state)
@@ -2767,6 +2771,23 @@ func _set_sprinklers(state: Dictionary) -> void:
 	state["day_tick"] = Phases.tick_at_minute(6 * 60 + 20)
 	_standing_at = Vector2i(39, 28)
 	_stand(state, _standing_at)
+
+
+## **The sprinklers at rest** (task 0201): `_set_sprinklers`' three at 09:00,
+## their hour over and their heads down.
+func _set_sprinklers_idle(state: Dictionary) -> void:
+	_set_sprinklers(state)
+	state["day_tick"] = Phases.tick_at_minute(9 * 60)
+
+
+## **The sprinklers by night** (task 0201): the same three on that night,
+## parked, the waves held off.
+func _set_sprinklers_night(state: Dictionary) -> void:
+	_set_sprinklers(state)
+	_camera_at = _standing_at
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	Sim.advance(state, 1)
 
 
 func _set_hardwood(state: Dictionary) -> void:

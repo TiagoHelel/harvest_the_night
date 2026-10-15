@@ -1,7 +1,7 @@
 # 0201 - Art: sprinklers
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0178
 - **Likely files:** assets/art_source/props/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_ui_art.py
 - **Art packs:** A018

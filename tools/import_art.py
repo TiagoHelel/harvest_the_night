@@ -373,7 +373,8 @@ def metadata(data):
         offset = entry.get("cell_offset_xy", [0, 0])
         lines.append('\t"res://%s": {"canvas": Vector2i(%d, %d), "pivot": Vector2i(%d, %d), "cell_offset": Vector2i(%d, %d), "seconds": %s, "loop": %s},' %
                      (entry["output"], w, h, x, y, *offset, entry["seconds"], str(entry["loop"]).lower()))
-        for field in ("light", "smoke", "muzzle"):
+        # `spray`: a sprinkler's nozzle (task 0201, A018).
+        for field in ("light", "smoke", "muzzle", "spray"):
             if field + "_xy" in entry:
                 point = integers(entry[field + "_xy"], 2, field + " point")
                 if any(point[i] > entry["canvas_wh"][i] for i in range(2)):

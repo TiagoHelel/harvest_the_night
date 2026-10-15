@@ -150,6 +150,10 @@ static func orphan_icons() -> Array:
 	for id in GameData.TOWER_LEVELS:
 		for step in (GameData.TOWER_LEVELS[id] as Array).size():
 			wanted["icon_%s_%d" % [id, step + 2]] = true
+	# **The day's build list** (task 0201): a building's pictures, A018's
+	# sprinklers the first.
+	for id in GameData.BUILDINGS:
+		wanted["icon_%s" % id] = true
 	for tool in GameData.TOOLS:
 		for tier in (GameData.TOOLS[tool] as Array).size():
 			wanted["icon_%s" % ToolTiers.item(tool, tier)] = true

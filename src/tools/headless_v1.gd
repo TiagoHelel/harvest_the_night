@@ -199,6 +199,7 @@ func _run() -> void:
 	_task_0198_spring_crops()
 	_task_0199_summer_crops()
 	_task_0200_autumn_crops()
+	_task_0201_sprinklers()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14350,6 +14351,44 @@ func _task_0200_autumn_crops() -> void:
 			wrong.append(crop)
 	expect(frames.size() == 13 and wrong.is_empty(),
 		"A017's 13 crop frames and 14 icon cuts are raster art, untinted, none a stand-in", str(wrong))
+	_completed += 1
+
+
+## **A018's sprinklers** (task 0201): each tier's idle cut and its four
+## spray frames on 16x16 at (8,14), and its icon pair - raster art, untinted,
+## none a stand-in. Through the first hour of the day a sprinkler shows its
+## spray, a tenth of a second a frame round and round, and its idle cut after;
+## the drops leave from the nozzle A018 marked, not the old point over the
+## cell's middle.
+func _task_0201_sprinklers() -> void:
+	var wrong: Array = []
+	for tier in [&"copper_sprinkler", &"iron_sprinkler", &"gold_sprinkler"]:
+		for name in [String(tier)] + Array(range(4)).map(func(i: int) -> String: return "%s_spray_%d" % [tier, i]):
+			var path: String = WorldView.PROP_DIR + str(name) + ".png"
+			var frame := PlaceholderArt.frame(path)
+			if not RasterArt.FRAMES.has(path) or frame.get("canvas") != Vector2i(16, 16) 					or frame.get("pivot") != Vector2i(8, 14) or (str(name) != String(tier)) != frame.has("spray"):
+				wrong.append(name)
+		if not PlaceholderArt.art(tier).is_empty():
+			wrong.append(tier)
+		for cut in [["icon", false], ["hud", true]]:
+			var texture := UiKit.icon(tier, bool(cut[1]))
+			if texture == null or texture.resource_path != "res://sprites/ui/%s_%s.png" % [cut[0], tier]:
+				wrong.append("%s_%s" % [cut[0], tier])
+	var morning := State.create(20101)
+	var cell := Vector2i(10, 10)
+	morning["day_tick"] = 0
+	var spraying := [WorldView.sprinkler_art(morning, &"copper_sprinkler", 0.0),
+		WorldView.sprinkler_art(morning, &"copper_sprinkler", 0.15),
+		WorldView.sprinkler_art(morning, &"copper_sprinkler", 0.45)]
+	morning["day_tick"] = Phases.tick_at_minute(Particles.SPRAY_UNTIL_MINUTE)
+	var after := WorldView.sprinkler_art(morning, &"copper_sprinkler", 0.15)
+	var nozzle: Vector2i = PlaceholderArt.frame(WorldView.PROP_DIR + "copper_sprinkler_spray_0.png")["spray"]
+	var head := WorldView.spray_head(&"copper_sprinkler", cell)
+	expect(wrong.is_empty() and spraying == [&"copper_sprinkler_spray_0", &"copper_sprinkler_spray_1", &"copper_sprinkler_spray_0"]
+		and after == &"copper_sprinkler" and nozzle == Vector2i(8, 5)
+		and head == Vector2(cell) * float(GameData.TILE_SIZE) + Vector2(8, 16) - Vector2(8, 14) + Vector2(nozzle),
+		"A018's sprinklers are raster art; through the morning's hour a sprinkler turns its head a tenth of a second a frame, idle after, and its drops leave the nozzle",
+		"%s; %s / %s; head %s" % [str(wrong), str(spraying), after, head])
 	_completed += 1
 
 

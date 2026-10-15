@@ -181,6 +181,47 @@ def check_dog(data, files, images):
     return len(entries)
 
 
+## A018's sprinklers (task 0201): each tier's idle cut and its four-frame
+## spray, 16x16 standing on (8,14) at 1.0. The spray frames are A018's
+## compositions from its own components, a tenth of a second each, round and
+## round, every one its own: the head two pixels above the idle one, the base
+## - rows 11 to 15 - unmoved, and the nozzle (`spray_xy`) on the head's top
+## row.
+SPRINKLERS = ('copper', 'iron', 'gold')
+
+
+def check_sprinklers(data, files, images):
+    by_id = {e['id']: e for e in data['assets']}
+    for tier in SPRINKLERS:
+        idle = by_id['props/%s_sprinkler' % tier]
+        if idle.get('generation_task') != 'A018' or 'source' not in idle \
+                or idle['canvas_wh'] != [16, 16] or idle['pivot_xy'] != [8, 14]:
+            raise ValueError('Idle sprinkler drift: ' + tier)
+        still = images[idle['id']]
+        base = still.crop((0, 11, 16, 16)).tobytes()
+        seen = set()
+        for frame in range(4):
+            e = by_id['props/%s_sprinkler_spray_%d' % (tier, frame)]
+            if e.get('generation_task') != 'A018' or e['canvas_wh'] != [16, 16] or e['pivot_xy'] != [8, 14] \
+                    or e['seconds'] != 0.1 or e['loop'] is not True or e['frame'] != frame:
+                raise ValueError('Spray frame drift: ' + e['id'])
+            if e.get('operation') != 'compose' or 'source' in e \
+                    or any(by_id[p['input']].get('assembly_component_of') != 'A018' for p in e['parts']):
+                raise ValueError('A layered spray frame not promoted as its composition: ' + e['id'])
+            image = images[e['id']]
+            box = image.getbbox()
+            if box[1] != still.getbbox()[1] - 2 or box[3] != 14 or image.crop((0, 11, 16, 16)).tobytes() != base:
+                raise ValueError('The head does not rise two pixels on a still base: ' + e['id'])
+            if e.get('spray_xy') != [8, box[1]] or image.getpixel(tuple(e['spray_xy']))[3] != 255:
+                raise ValueError('The nozzle is not on the head: ' + e['id'])
+            if (import_art.ROOT / e['output']).read_bytes() != files[e['output']]:
+                raise ValueError('Runtime spray frame diverges: ' + e['id'])
+            seen.add(image.tobytes())
+        if len(seen) != 4:
+            raise ValueError('A spray frame repeats: ' + tier)
+    return 4 * len(SPRINKLERS)
+
+
 def main():
     data = import_art.load_manifest()
     files, images = import_art.build(data)
@@ -294,6 +335,9 @@ def main():
     if not (11 <= x1 - x0 <= 13 and 7 <= y1 - y0 <= 9 and y1 == 14 and abs((x0 + x1) / 2 - 8) <= 1):
         raise ValueError("Truffle spot off its recorded box: %s" % str((x0, y0, x1, y1)))
     dogs = check_dog(data, files, images)
+    sprays = check_sprinklers(data, files, images)
+    print("OK: A018's sprinklers: 3 idle cuts and %d spray frames, the head risen two pixels on a still base, "
+          "the nozzle on it" % sprays)
     print(("OK: %d source-owned props; 4 distinct same-scale variants; clean silhouettes and exact ground pivots"
           "; 6 seasonal trees, grounded variants of props/tree, autumn without flame_hot and winter bare"
           "; 9 snow caps fitted to their hosts; spring blossom: %d single-pixel cluster, the owner's accepted exception"

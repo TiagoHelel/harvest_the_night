@@ -304,6 +304,11 @@ func _build_palette() -> void:
 		# an assert in input_check that the whole palette is on screen.
 		row.theme_type_variation = UiKit.ROW
 		row.text = "%s  %s" % [id, _price_of(id)]
+		# **Its compact picture** where its pack drew one (task 0201: A018's
+		# three sprinklers), 10x10 inside the 11-pixel row.
+		var picture := UiKit.picture(StringName("hud_%s" % id))
+		if picture != null:
+			row.icon = picture
 		row.toggle_mode = true
 		row.button_pressed = id == Building.selected(_state)
 		# **Shown rather than hidden** when it cannot be paid for. The ghost

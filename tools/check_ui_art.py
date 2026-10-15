@@ -36,6 +36,8 @@ PAIRS = {
     # Task 0199: summer's produce (0168) and its four seed packets (0170).
     'A016': ['pepper', 'sunflower', 'melon', 'corn_seed', 'pepper_seed', 'sunflower_seed',
              'melon_seed'],
+    # Task 0201: the three sprinklers' build-list icons (0178).
+    'A018': ['copper_sprinkler', 'iron_sprinkler', 'gold_sprinkler'],
     # Task 0200: autumn's produce (0168) and its four seed packets (0170).
     'A017': ['pumpkin', 'grape', 'beet', 'wheat_seed', 'pumpkin_seed', 'grape_seed',
              'beet_seed'],

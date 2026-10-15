@@ -1,0 +1,2805 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "copper_sprinkler",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/copper_sprinkler-none-0-night.png",
+          "path": "native/copper_sprinkler/none/01.png",
+          "points": {},
+          "pose": "idle head lowered"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "idle head lowered"
+      ]
+    },
+    {
+      "anim": "copper_sprinkler_spray",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/copper_sprinkler_spray-none-0-night.png",
+          "path": "native/copper_sprinkler_spray/none/01.png",
+          "points": {
+            "spray_xy": [
+              8,
+              5
+            ]
+          },
+          "pose": "raised west"
+        },
+        {
+          "issue": "",
+          "night": "preview/copper_sprinkler_spray-none-1-night.png",
+          "path": "native/copper_sprinkler_spray/none/02.png",
+          "points": {
+            "spray_xy": [
+              8,
+              5
+            ]
+          },
+          "pose": "raised south"
+        },
+        {
+          "issue": "",
+          "night": "preview/copper_sprinkler_spray-none-2-night.png",
+          "path": "native/copper_sprinkler_spray/none/03.png",
+          "points": {
+            "spray_xy": [
+              8,
+              5
+            ]
+          },
+          "pose": "raised east"
+        },
+        {
+          "issue": "",
+          "night": "preview/copper_sprinkler_spray-none-3-night.png",
+          "path": "native/copper_sprinkler_spray/none/04.png",
+          "points": {
+            "spray_xy": [
+              8,
+              5
+            ]
+          },
+          "pose": "raised north"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "raised west",
+        "raised south",
+        "raised east",
+        "raised north"
+      ]
+    },
+    {
+      "anim": "gold_sprinkler",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/gold_sprinkler-none-0-night.png",
+          "path": "native/gold_sprinkler/none/01.png",
+          "points": {},
+          "pose": "idle head lowered"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "idle head lowered"
+      ]
+    },
+    {
+      "anim": "gold_sprinkler_spray",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/gold_sprinkler_spray-none-0-night.png",
+          "path": "native/gold_sprinkler_spray/none/01.png",
+          "points": {
+            "spray_xy": [
+              8,
+              3
+            ]
+          },
+          "pose": "raised west"
+        },
+        {
+          "issue": "",
+          "night": "preview/gold_sprinkler_spray-none-1-night.png",
+          "path": "native/gold_sprinkler_spray/none/02.png",
+          "points": {
+            "spray_xy": [
+              8,
+              3
+            ]
+          },
+          "pose": "raised south"
+        },
+        {
+          "issue": "",
+          "night": "preview/gold_sprinkler_spray-none-2-night.png",
+          "path": "native/gold_sprinkler_spray/none/03.png",
+          "points": {
+            "spray_xy": [
+              8,
+              3
+            ]
+          },
+          "pose": "raised east"
+        },
+        {
+          "issue": "",
+          "night": "preview/gold_sprinkler_spray-none-3-night.png",
+          "path": "native/gold_sprinkler_spray/none/04.png",
+          "points": {
+            "spray_xy": [
+              8,
+              3
+            ]
+          },
+          "pose": "raised north"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "raised west",
+        "raised south",
+        "raised east",
+        "raised north"
+      ]
+    },
+    {
+      "anim": "hud_copper_sprinkler",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_copper_sprinkler-none-0-night.png",
+          "path": "native/hud_copper_sprinkler/none/01.png",
+          "points": {},
+          "pose": "hud_copper_sprinkler 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_copper_sprinkler 0"
+      ]
+    },
+    {
+      "anim": "hud_gold_sprinkler",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_gold_sprinkler-none-0-night.png",
+          "path": "native/hud_gold_sprinkler/none/01.png",
+          "points": {},
+          "pose": "hud_gold_sprinkler 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_gold_sprinkler 0"
+      ]
+    },
+    {
+      "anim": "hud_iron_sprinkler",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_iron_sprinkler-none-0-night.png",
+          "path": "native/hud_iron_sprinkler/none/01.png",
+          "points": {},
+          "pose": "hud_iron_sprinkler 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_iron_sprinkler 0"
+      ]
+    },
+    {
+      "anim": "icon_copper_sprinkler",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_copper_sprinkler-none-0-night.png",
+          "path": "native/icon_copper_sprinkler/none/01.png",
+          "points": {},
+          "pose": "icon_copper_sprinkler 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_copper_sprinkler 0"
+      ]
+    },
+    {
+      "anim": "icon_gold_sprinkler",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_gold_sprinkler-none-0-night.png",
+          "path": "native/icon_gold_sprinkler/none/01.png",
+          "points": {},
+          "pose": "icon_gold_sprinkler 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_gold_sprinkler 0"
+      ]
+    },
+    {
+      "anim": "icon_iron_sprinkler",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_iron_sprinkler-none-0-night.png",
+          "path": "native/icon_iron_sprinkler/none/01.png",
+          "points": {},
+          "pose": "icon_iron_sprinkler 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_iron_sprinkler 0"
+      ]
+    },
+    {
+      "anim": "iron_sprinkler",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/iron_sprinkler-none-0-night.png",
+          "path": "native/iron_sprinkler/none/01.png",
+          "points": {},
+          "pose": "idle head lowered"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "idle head lowered"
+      ]
+    },
+    {
+      "anim": "iron_sprinkler_spray",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/iron_sprinkler_spray-none-0-night.png",
+          "path": "native/iron_sprinkler_spray/none/01.png",
+          "points": {
+            "spray_xy": [
+              8,
+              4
+            ]
+          },
+          "pose": "raised west"
+        },
+        {
+          "issue": "",
+          "night": "preview/iron_sprinkler_spray-none-1-night.png",
+          "path": "native/iron_sprinkler_spray/none/02.png",
+          "points": {
+            "spray_xy": [
+              8,
+              4
+            ]
+          },
+          "pose": "raised south"
+        },
+        {
+          "issue": "",
+          "night": "preview/iron_sprinkler_spray-none-2-night.png",
+          "path": "native/iron_sprinkler_spray/none/03.png",
+          "points": {
+            "spray_xy": [
+              8,
+              4
+            ]
+          },
+          "pose": "raised east"
+        },
+        {
+          "issue": "",
+          "night": "preview/iron_sprinkler_spray-none-3-night.png",
+          "path": "native/iron_sprinkler_spray/none/04.png",
+          "points": {
+            "spray_xy": [
+              8,
+              4
+            ]
+          },
+          "pose": "raised north"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "raised west",
+        "raised south",
+        "raised east",
+        "raised north"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [],
+  "comparison": [],
+  "components": {
+    "copper-base": {
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/copper-base.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          50,
+          192,
+          353,
+          396
+        ]
+      },
+      "sha256": "eb538602e6cd522eb291a024311bd23084ca2a7ad34ea131bc9eaf9ec2ecc0e8",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35"
+    },
+    "copper-head-0": {
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/copper-head-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          480,
+          192,
+          353,
+          396
+        ]
+      },
+      "sha256": "843f34a01696dca5df45e4490d299e422b4f9ea068591006ee85319cb9406f58",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35"
+    },
+    "copper-head-1": {
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/copper-head-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          910,
+          192,
+          353,
+          396
+        ]
+      },
+      "sha256": "2cd36f9a36fca2bb9e11d72cd9811fb45910872bfe6ad1b557633761e5b20cd2",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35"
+    },
+    "copper-head-2": {
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/copper-head-2.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          1340,
+          192,
+          353,
+          396
+        ]
+      },
+      "sha256": "fd16bda35d6bd63ff7b9a3d0483461132ff0f534537a8b99d7b1268b7d50e182",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35"
+    },
+    "copper-head-3": {
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/copper-head-3.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          1750,
+          192,
+          353,
+          396
+        ]
+      },
+      "sha256": "ab2a55956c4a770388caa1e88b9217f441b9d2b9213b4df985fc86542c40bf94",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35"
+    },
+    "gold-base": {
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/gold-base.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          58,
+          161,
+          349,
+          420
+        ]
+      },
+      "sha256": "ea414dd323371f0da1a3888e3c79edbbacdf02581a8cc17370b62ff44f18d22f",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700"
+    },
+    "gold-head-0": {
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/gold-head-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          484,
+          161,
+          349,
+          420
+        ]
+      },
+      "sha256": "4ecf7627d1285354a3d3a278b5d9dd99d09df984fd16a33c012bc800a8d92fb3",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700"
+    },
+    "gold-head-1": {
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/gold-head-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          911,
+          161,
+          349,
+          420
+        ]
+      },
+      "sha256": "6f4a504e41a6222ac568627945ef4d6a0514ec94f4535a16a3f8102e4b41c0d0",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700"
+    },
+    "gold-head-2": {
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/gold-head-2.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          1338,
+          161,
+          349,
+          420
+        ]
+      },
+      "sha256": "1e41b85a56a4b2383219c96d96f427bb931a7a8e675444dd7fc9c1d49d4ec1be",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700"
+    },
+    "gold-head-3": {
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/gold-head-3.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          1766,
+          161,
+          349,
+          420
+        ]
+      },
+      "sha256": "c7b0c60a60ef58b96e8cc5662965a0082f7dfa5ff8f11dd43ef91ac3f96fdc46",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700"
+    },
+    "iron-base": {
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/iron-base.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          71,
+          161,
+          337,
+          408
+        ]
+      },
+      "sha256": "d0a822a8f830993827aaf70a978c28dedbba9881f5132532b45233ba7997212b",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281"
+    },
+    "iron-head-0": {
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/iron-head-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          500,
+          161,
+          337,
+          408
+        ]
+      },
+      "sha256": "e387adf89ee2e53a42e397e0a22c8f81e11b9467a7f1de5b7ff2c04891d0f3fa",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281"
+    },
+    "iron-head-1": {
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/iron-head-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          918,
+          161,
+          337,
+          408
+        ]
+      },
+      "sha256": "d43696c37ae72417a3b56a469c6aea8b7b81c79d50327a31798bc548c929c44d",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281"
+    },
+    "iron-head-2": {
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/iron-head-2.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          1332,
+          161,
+          337,
+          408
+        ]
+      },
+      "sha256": "832e4910ac1fd505db13e9deba2800681b9f849dea749624258460a797813a1b",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281"
+    },
+    "iron-head-3": {
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "render",
+      "output": "components/iron-head-3.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          1768,
+          161,
+          337,
+          408
+        ]
+      },
+      "sha256": "b76c4aa3b4966f28361d7416d8ddd95edc17bd8fa1d63a77bffb7b805f7912c4",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "copper_sprinkler",
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/copper_sprinkler/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "idle head lowered",
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          50,
+          192,
+          353,
+          396
+        ]
+      },
+      "runtime_name": "sprites/props/copper_sprinkler.png",
+      "seconds": 0.55,
+      "sha256": "eb538602e6cd522eb291a024311bd23084ca2a7ad34ea131bc9eaf9ec2ecc0e8",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "visible_limits_wh": [
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          8
+        ]
+      ]
+    },
+    {
+      "anim": "copper_sprinkler_spray",
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/copper_sprinkler_spray/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "parts": [
+        {
+          "input": "copper-head-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "copper-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          5
+        ]
+      },
+      "pose": "raised west",
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          480,
+          192,
+          353,
+          396
+        ]
+      },
+      "runtime_name": "sprites/props/copper_sprinkler_spray_0.png",
+      "seconds": 0.1,
+      "sha256": "580a918c7d6bf0e09e091625298a0e99f1715ef1b4b92acceaf225078f0b19d5",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "visible_limits_wh": [
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          10
+        ]
+      ]
+    },
+    {
+      "anim": "copper_sprinkler_spray",
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/copper_sprinkler_spray/none/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "parts": [
+        {
+          "input": "copper-head-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "copper-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          5
+        ]
+      },
+      "pose": "raised south",
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          910,
+          192,
+          353,
+          396
+        ]
+      },
+      "runtime_name": "sprites/props/copper_sprinkler_spray_1.png",
+      "seconds": 0.1,
+      "sha256": "40ae65ada6b539b37b989daff30973d4010cb763ba4a1b6ca34f66834750f9ee",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "visible_limits_wh": [
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          10
+        ]
+      ]
+    },
+    {
+      "anim": "copper_sprinkler_spray",
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/copper_sprinkler_spray/none/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "parts": [
+        {
+          "input": "copper-head-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "copper-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          5
+        ]
+      },
+      "pose": "raised east",
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          1340,
+          192,
+          353,
+          396
+        ]
+      },
+      "runtime_name": "sprites/props/copper_sprinkler_spray_2.png",
+      "seconds": 0.1,
+      "sha256": "6e16e6f3d43d70cb40a942a09814f144bd53782fb899de31cfeab0b112e1a7be",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "visible_limits_wh": [
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          10
+        ]
+      ]
+    },
+    {
+      "anim": "copper_sprinkler_spray",
+      "call": "raw/recovered-copper-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/copper_sprinkler_spray/none/04.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "parts": [
+        {
+          "input": "copper-head-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "copper-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          5
+        ]
+      },
+      "pose": "raised north",
+      "prompt": "raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          9
+        ],
+        "content_scale": 0.0226628895184136,
+        "crop_xywh": [
+          1750,
+          192,
+          353,
+          396
+        ]
+      },
+      "runtime_name": "sprites/props/copper_sprinkler_spray_3.png",
+      "seconds": 0.1,
+      "sha256": "ab2a55956c4a770388caa1e88b9217f441b9d2b9213b4df985fc86542c40bf94",
+      "source": "raw/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "visible_limits_wh": [
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          10
+        ]
+      ]
+    },
+    {
+      "anim": "icon_copper_sprinkler",
+      "call": "raw/copper-master-c2-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_copper_sprinkler/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_copper_sprinkler 0",
+      "prompt": "raw/copper-master-c2-r1.prompt.txt",
+      "prompt_sha256": "8dffea3ed8a33420483905dcda5749fcfa814ebe3736ade345932a0836ba93b5",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.030501089324618737,
+        "crop_xywh": [
+          430,
+          530,
+          399,
+          459
+        ]
+      },
+      "resource_id": "copper_sprinkler",
+      "runtime_name": "sprites/ui/icon_copper_sprinkler.png",
+      "seconds": 1,
+      "sha256": "75f755ac9c5d0120a440a5155867cd04f0bea9fba201c601071f4a0bd5f17f95",
+      "source": "raw/copper-master-c2-r1.png",
+      "source_sha256": "e1e4c4477c2fe314875aecfad9ee694e0e654d52fa6b0a59a51d9b84eeae8108"
+    },
+    {
+      "anim": "hud_copper_sprinkler",
+      "call": "raw/copper-master-c2-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_copper_sprinkler/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_copper_sprinkler 0",
+      "prompt": "raw/copper-master-c2-r1.prompt.txt",
+      "prompt_sha256": "8dffea3ed8a33420483905dcda5749fcfa814ebe3736ade345932a0836ba93b5",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.017429193899782137,
+        "crop_xywh": [
+          430,
+          530,
+          399,
+          459
+        ]
+      },
+      "resource_id": "copper_sprinkler",
+      "runtime_name": "sprites/ui/hud_copper_sprinkler.png",
+      "seconds": 1,
+      "sha256": "a71a971e2a7647011db450b21d2f5d4723cab932936909ff846c21eb5781a144",
+      "source": "raw/copper-master-c2-r1.png",
+      "source_sha256": "e1e4c4477c2fe314875aecfad9ee694e0e654d52fa6b0a59a51d9b84eeae8108"
+    },
+    {
+      "anim": "iron_sprinkler",
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/iron_sprinkler/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "idle head lowered",
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          71,
+          161,
+          337,
+          408
+        ]
+      },
+      "runtime_name": "sprites/props/iron_sprinkler.png",
+      "seconds": 0.55,
+      "sha256": "d0a822a8f830993827aaf70a978c28dedbba9881f5132532b45233ba7997212b",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "visible_limits_wh": [
+        [
+          1,
+          10
+        ],
+        [
+          1,
+          9
+        ]
+      ]
+    },
+    {
+      "anim": "iron_sprinkler_spray",
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/iron_sprinkler_spray/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "parts": [
+        {
+          "input": "iron-head-0",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "iron-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          4
+        ]
+      },
+      "pose": "raised west",
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          500,
+          161,
+          337,
+          408
+        ]
+      },
+      "runtime_name": "sprites/props/iron_sprinkler_spray_0.png",
+      "seconds": 0.1,
+      "sha256": "250d7a644192d20356c9c3d8bc6dd24560aa09a32dddedd27ef5a78cc22c236c",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "visible_limits_wh": [
+        [
+          1,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ]
+    },
+    {
+      "anim": "iron_sprinkler_spray",
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/iron_sprinkler_spray/none/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "parts": [
+        {
+          "input": "iron-head-1",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "iron-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          4
+        ]
+      },
+      "pose": "raised south",
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          918,
+          161,
+          337,
+          408
+        ]
+      },
+      "runtime_name": "sprites/props/iron_sprinkler_spray_1.png",
+      "seconds": 0.1,
+      "sha256": "d56b8bbfaf9974f0b1e0b06ad4c4b65edf800bd6664cb4c41030b9829fa1e4f8",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "visible_limits_wh": [
+        [
+          1,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ]
+    },
+    {
+      "anim": "iron_sprinkler_spray",
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/iron_sprinkler_spray/none/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "parts": [
+        {
+          "input": "iron-head-2",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "iron-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          4
+        ]
+      },
+      "pose": "raised east",
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          1332,
+          161,
+          337,
+          408
+        ]
+      },
+      "runtime_name": "sprites/props/iron_sprinkler_spray_2.png",
+      "seconds": 0.1,
+      "sha256": "1ca15ed0e1ac207261627f9763cfda9b95667319f651811594901f08c6445c90",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "visible_limits_wh": [
+        [
+          1,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ]
+    },
+    {
+      "anim": "iron_sprinkler_spray",
+      "call": "raw/recovered-iron-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/iron_sprinkler_spray/none/04.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "parts": [
+        {
+          "input": "iron-head-3",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "iron-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          4
+        ]
+      },
+      "pose": "raised north",
+      "prompt": "raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          11
+        ],
+        "content_scale": 0.02696078431372549,
+        "crop_xywh": [
+          1768,
+          161,
+          337,
+          408
+        ]
+      },
+      "runtime_name": "sprites/props/iron_sprinkler_spray_3.png",
+      "seconds": 0.1,
+      "sha256": "7054cf5b4e83dac1d9749567ae996270c34284c21d9cb0319a52f62d3d2719bb",
+      "source": "raw/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "visible_limits_wh": [
+        [
+          1,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ]
+    },
+    {
+      "anim": "icon_iron_sprinkler",
+      "call": "raw/iron-master-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_iron_sprinkler/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_iron_sprinkler 0",
+      "prompt": "raw/iron-master-r1.prompt.txt",
+      "prompt_sha256": "61529eb0a4b2dace3af6206f7ee60eae9ca46d9ca391a86dc71b9c2f991229a5",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.030973451327433628,
+        "crop_xywh": [
+          441,
+          535,
+          373,
+          452
+        ]
+      },
+      "resource_id": "iron_sprinkler",
+      "runtime_name": "sprites/ui/icon_iron_sprinkler.png",
+      "seconds": 1,
+      "sha256": "98b4a1dd110941a3a7d3f19c7f3df50fca3228e7d08a5131eeabeb5e9f932112",
+      "source": "raw/iron-master-r1.png",
+      "source_sha256": "0c0dbf319e7b2bc6c48c85e47d68e9fb36e7c35c787600c62710f7191b9196a4"
+    },
+    {
+      "anim": "hud_iron_sprinkler",
+      "call": "raw/iron-master-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_iron_sprinkler/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_iron_sprinkler 0",
+      "prompt": "raw/iron-master-r1.prompt.txt",
+      "prompt_sha256": "61529eb0a4b2dace3af6206f7ee60eae9ca46d9ca391a86dc71b9c2f991229a5",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.017699115044247787,
+        "crop_xywh": [
+          441,
+          535,
+          373,
+          452
+        ]
+      },
+      "resource_id": "iron_sprinkler",
+      "runtime_name": "sprites/ui/hud_iron_sprinkler.png",
+      "seconds": 1,
+      "sha256": "37e51c7ad3234f8df7849b346849715dc4b8542ee1c4a329724afdf5d82f8bd4",
+      "source": "raw/iron-master-r1.png",
+      "source_sha256": "0c0dbf319e7b2bc6c48c85e47d68e9fb36e7c35c787600c62710f7191b9196a4"
+    },
+    {
+      "anim": "gold_sprinkler",
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/gold_sprinkler/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "idle head lowered",
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          58,
+          161,
+          349,
+          420
+        ]
+      },
+      "runtime_name": "sprites/props/gold_sprinkler.png",
+      "seconds": 0.55,
+      "sha256": "ea414dd323371f0da1a3888e3c79edbbacdf02581a8cc17370b62ff44f18d22f",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "visible_limits_wh": [
+        [
+          1,
+          12
+        ],
+        [
+          1,
+          10
+        ]
+      ]
+    },
+    {
+      "anim": "gold_sprinkler_spray",
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/gold_sprinkler_spray/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "parts": [
+        {
+          "input": "gold-head-0",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "gold-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          3
+        ]
+      },
+      "pose": "raised west",
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          484,
+          161,
+          349,
+          420
+        ]
+      },
+      "runtime_name": "sprites/props/gold_sprinkler_spray_0.png",
+      "seconds": 0.1,
+      "sha256": "4dba1ca242029e96423e246ac44df88b15aa43b5e3edd50cdbf07c879cef00cf",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "visible_limits_wh": [
+        [
+          1,
+          12
+        ],
+        [
+          1,
+          12
+        ]
+      ]
+    },
+    {
+      "anim": "gold_sprinkler_spray",
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/gold_sprinkler_spray/none/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "parts": [
+        {
+          "input": "gold-head-1",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "gold-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          3
+        ]
+      },
+      "pose": "raised south",
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          911,
+          161,
+          349,
+          420
+        ]
+      },
+      "runtime_name": "sprites/props/gold_sprinkler_spray_1.png",
+      "seconds": 0.1,
+      "sha256": "e29b0d381e9509b0524cc92d2698807a4bffe059b60cbc7e4f99dabbd4441783",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "visible_limits_wh": [
+        [
+          1,
+          12
+        ],
+        [
+          1,
+          12
+        ]
+      ]
+    },
+    {
+      "anim": "gold_sprinkler_spray",
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/gold_sprinkler_spray/none/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "parts": [
+        {
+          "input": "gold-head-2",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "gold-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          3
+        ]
+      },
+      "pose": "raised east",
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          1338,
+          161,
+          349,
+          420
+        ]
+      },
+      "runtime_name": "sprites/props/gold_sprinkler_spray_2.png",
+      "seconds": 0.1,
+      "sha256": "cd449a37bf8d6114cb0534ee838df59a14a4df9266f6c35f1397f717cea07eec",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "visible_limits_wh": [
+        [
+          1,
+          12
+        ],
+        [
+          1,
+          12
+        ]
+      ]
+    },
+    {
+      "anim": "gold_sprinkler_spray",
+      "call": "raw/recovered-gold-states-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/gold_sprinkler_spray/none/04.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "parts": [
+        {
+          "input": "gold-head-3",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ]
+        },
+        {
+          "input": "gold-base",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "spray_xy": [
+          8,
+          3
+        ]
+      },
+      "pose": "raised north",
+      "prompt": "raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          12
+        ],
+        "content_scale": 0.02857142857142857,
+        "crop_xywh": [
+          1766,
+          161,
+          349,
+          420
+        ]
+      },
+      "runtime_name": "sprites/props/gold_sprinkler_spray_3.png",
+      "seconds": 0.1,
+      "sha256": "cb78351a8d45a859ae9adb8ed2a68ff989be2d89b0d41e5caae5cf5b123f3ca9",
+      "source": "raw/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "visible_limits_wh": [
+        [
+          1,
+          12
+        ],
+        [
+          1,
+          12
+        ]
+      ]
+    },
+    {
+      "anim": "icon_gold_sprinkler",
+      "call": "raw/gold-master-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_gold_sprinkler/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_gold_sprinkler 0",
+      "prompt": "raw/gold-master-r1.prompt.txt",
+      "prompt_sha256": "6a5269d292c98b18a25a38c6c22f65e5acbe788ac7497cc1dde876385e6c2bd0",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.028513238289205704,
+        "crop_xywh": [
+          418,
+          522,
+          418,
+          491
+        ]
+      },
+      "resource_id": "gold_sprinkler",
+      "runtime_name": "sprites/ui/icon_gold_sprinkler.png",
+      "seconds": 1,
+      "sha256": "50d5b64e540fe539caba09ca14e810297dd2532850efefbefc6b66ffbd246b16",
+      "source": "raw/gold-master-r1.png",
+      "source_sha256": "c87fa0c4ee52d72af4ac7469ca2bffea52b494a5fe1d078fefb7d2b6fff7b762"
+    },
+    {
+      "anim": "hud_gold_sprinkler",
+      "call": "raw/gold-master-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_gold_sprinkler/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_gold_sprinkler 0",
+      "prompt": "raw/gold-master-r1.prompt.txt",
+      "prompt_sha256": "6a5269d292c98b18a25a38c6c22f65e5acbe788ac7497cc1dde876385e6c2bd0",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.016293279022403257,
+        "crop_xywh": [
+          418,
+          522,
+          418,
+          491
+        ]
+      },
+      "resource_id": "gold_sprinkler",
+      "runtime_name": "sprites/ui/hud_gold_sprinkler.png",
+      "seconds": 1,
+      "sha256": "a4c2ef4f516966ae664a357106cdbd438e2ac99088b48b9cd8c51229983d922c",
+      "source": "raw/gold-master-r1.png",
+      "source_sha256": "c87fa0c4ee52d72af4ac7469ca2bffea52b494a5fe1d078fefb7d2b6fff7b762"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A018",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\ore.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A018-sprinklers\\raw\\copper-master-c2-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "e1e4c4477c2fe314875aecfad9ee694e0e654d52fa6b0a59a51d9b84eeae8108"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A018-sprinklers",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "Sprinklers",
+  "tool": "built-in ImageGen"
+}

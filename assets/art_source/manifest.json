@@ -90836,6 +90836,2747 @@
         4
       ],
       "output_sha256": "4411429510e3e12e585063196f0df23880bbc20a80ad6877b0bfacd34a79e473"
+    },
+    {
+      "id": "components/A018-sprinklers/copper-base",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "crop_xywh": [
+        50,
+        192,
+        353,
+        396
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0226628895184136,
+      "content_anchor_xy": [
+        4,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/copper-base",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/copper-base.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/copper-base.png",
+          "sha256": "eb538602e6cd522eb291a024311bd23084ca2a7ad34ea131bc9eaf9ec2ecc0e8",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "8ae9b3a6ecde3bfae5a96b68d931193e3f2083c5ab02e67b0d81da060d83dbe8"
+    },
+    {
+      "id": "components/A018-sprinklers/copper-head-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "crop_xywh": [
+        480,
+        192,
+        353,
+        396
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0226628895184136,
+      "content_anchor_xy": [
+        4,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/copper-head-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/copper-head-0.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/copper-head-0.png",
+          "sha256": "843f34a01696dca5df45e4490d299e422b4f9ea068591006ee85319cb9406f58",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "f14c1d90658266513edc4a5563b9f770f7e4fccf5e6fec2814897b3f8151a24e"
+    },
+    {
+      "id": "components/A018-sprinklers/copper-head-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "crop_xywh": [
+        910,
+        192,
+        353,
+        396
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0226628895184136,
+      "content_anchor_xy": [
+        4,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/copper-head-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/copper-head-1.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/copper-head-1.png",
+          "sha256": "2cd36f9a36fca2bb9e11d72cd9811fb45910872bfe6ad1b557633761e5b20cd2",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "fa0aeaed8110fec1b971220460feaa869641ad5c2007bacf832866a4dc693c08"
+    },
+    {
+      "id": "components/A018-sprinklers/copper-head-2",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "crop_xywh": [
+        1340,
+        192,
+        353,
+        396
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0226628895184136,
+      "content_anchor_xy": [
+        4,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/copper-head-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/copper-head-2.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/copper-head-2.png",
+          "sha256": "fd16bda35d6bd63ff7b9a3d0483461132ff0f534537a8b99d7b1268b7d50e182",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "1c11356ec13df547b58218b7af9221ce4c158ca86b698c073be2c675839e671a"
+    },
+    {
+      "id": "components/A018-sprinklers/copper-head-3",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "crop_xywh": [
+        1750,
+        192,
+        353,
+        396
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0226628895184136,
+      "content_anchor_xy": [
+        4,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/copper-head-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/copper-head-3.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/copper-head-3.png",
+          "sha256": "ab2a55956c4a770388caa1e88b9217f441b9d2b9213b4df985fc86542c40bf94",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "6fd3d4fac9946eba6f22661b7eedcc8a097606a0f5191258b9bd9e4c900d34e8"
+    },
+    {
+      "id": "components/A018-sprinklers/gold-base",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "crop_xywh": [
+        58,
+        161,
+        349,
+        420
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02857142857142857,
+      "content_anchor_xy": [
+        5,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/gold-base",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/gold-base.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/gold-base.png",
+          "sha256": "ea414dd323371f0da1a3888e3c79edbbacdf02581a8cc17370b62ff44f18d22f",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "8b321b47d8105625f15e1315c582513083077badbb918737c487758f381b6b6d"
+    },
+    {
+      "id": "components/A018-sprinklers/gold-head-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "crop_xywh": [
+        484,
+        161,
+        349,
+        420
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02857142857142857,
+      "content_anchor_xy": [
+        5,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/gold-head-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/gold-head-0.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/gold-head-0.png",
+          "sha256": "4ecf7627d1285354a3d3a278b5d9dd99d09df984fd16a33c012bc800a8d92fb3",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "53de08bb4081bd878fab02826f34b7fbaaea3accb3144909034edc8dc46cba26"
+    },
+    {
+      "id": "components/A018-sprinklers/gold-head-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "crop_xywh": [
+        911,
+        161,
+        349,
+        420
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02857142857142857,
+      "content_anchor_xy": [
+        5,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/gold-head-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/gold-head-1.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/gold-head-1.png",
+          "sha256": "6f4a504e41a6222ac568627945ef4d6a0514ec94f4535a16a3f8102e4b41c0d0",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "8dfee66c272fcfa6e5b9a1ecccd134c8b567a9f09dec2438f345cb0ea49ee399"
+    },
+    {
+      "id": "components/A018-sprinklers/gold-head-2",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "crop_xywh": [
+        1338,
+        161,
+        349,
+        420
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02857142857142857,
+      "content_anchor_xy": [
+        5,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/gold-head-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/gold-head-2.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/gold-head-2.png",
+          "sha256": "1e41b85a56a4b2383219c96d96f427bb931a7a8e675444dd7fc9c1d49d4ec1be",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "ab951c157526acd4193434b0190ef577a50b39de243800554f149638145b0c20"
+    },
+    {
+      "id": "components/A018-sprinklers/gold-head-3",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "crop_xywh": [
+        1766,
+        161,
+        349,
+        420
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02857142857142857,
+      "content_anchor_xy": [
+        5,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/gold-head-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/gold-head-3.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/gold-head-3.png",
+          "sha256": "c7b0c60a60ef58b96e8cc5662965a0082f7dfa5ff8f11dd43ef91ac3f96fdc46",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "19a1238095efc8b750ccd77cc653bd19844c69283e0031d7498894f84592414a"
+    },
+    {
+      "id": "components/A018-sprinklers/iron-base",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "crop_xywh": [
+        71,
+        161,
+        337,
+        408
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02696078431372549,
+      "content_anchor_xy": [
+        4,
+        11
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/iron-base",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/iron-base.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/iron-base.png",
+          "sha256": "d0a822a8f830993827aaf70a978c28dedbba9881f5132532b45233ba7997212b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "a88ccca3d36c662c318ad48cb3a1d854099992c533cdcd9058358a4d2d679aea"
+    },
+    {
+      "id": "components/A018-sprinklers/iron-head-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "crop_xywh": [
+        500,
+        161,
+        337,
+        408
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02696078431372549,
+      "content_anchor_xy": [
+        4,
+        11
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/iron-head-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/iron-head-0.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/iron-head-0.png",
+          "sha256": "e387adf89ee2e53a42e397e0a22c8f81e11b9467a7f1de5b7ff2c04891d0f3fa",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "a5f8e0091492e2539c479128c6832b756eff3faab39dca1fff178b2ad665b7e4"
+    },
+    {
+      "id": "components/A018-sprinklers/iron-head-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "crop_xywh": [
+        918,
+        161,
+        337,
+        408
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02696078431372549,
+      "content_anchor_xy": [
+        4,
+        11
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/iron-head-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/iron-head-1.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/iron-head-1.png",
+          "sha256": "d43696c37ae72417a3b56a469c6aea8b7b81c79d50327a31798bc548c929c44d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "01a78a11035b6aee5698d54cea0445663393002c88bc69faa38e72b03470f2dd"
+    },
+    {
+      "id": "components/A018-sprinklers/iron-head-2",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "crop_xywh": [
+        1332,
+        161,
+        337,
+        408
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02696078431372549,
+      "content_anchor_xy": [
+        4,
+        11
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/iron-head-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/iron-head-2.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/iron-head-2.png",
+          "sha256": "832e4910ac1fd505db13e9deba2800681b9f849dea749624258460a797813a1b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "838003f653128c56d232ab8e000a2b4ae081623d46f0a10d065fcc29e888cd12"
+    },
+    {
+      "id": "components/A018-sprinklers/iron-head-3",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "crop_xywh": [
+        1768,
+        161,
+        337,
+        408
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02696078431372549,
+      "content_anchor_xy": [
+        4,
+        11
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A018-sprinklers/iron-head-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A018-sprinklers/iron-head-3.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/components/iron-head-3.png",
+          "sha256": "b76c4aa3b4966f28361d7416d8ddd95edc17bd8fa1d63a77bffb7b805f7912c4",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "assembly_component_of": "A018",
+      "output_sha256": "10acff6336c6974eedc1755fb54c227e310bbfd45d6324150fb6d8360a6f427e"
+    },
+    {
+      "id": "props/copper_sprinkler",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-copper-states-r3.png",
+      "source_sha256": "321144c1c6d8bfac3128ca5bfec4f77db9a0e3db5d058552338d7902d57c1c35",
+      "crop_xywh": [
+        50,
+        192,
+        353,
+        396
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0226628895184136,
+      "content_anchor_xy": [
+        4,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/copper_sprinkler",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/props/copper_sprinkler.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/copper_sprinkler/none/01.png",
+          "sha256": "eb538602e6cd522eb291a024311bd23084ca2a7ad34ea131bc9eaf9ec2ecc0e8",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "8ae9b3a6ecde3bfae5a96b68d931193e3f2083c5ab02e67b0d81da060d83dbe8"
+    },
+    {
+      "id": "props/copper_sprinkler_spray_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/copper_sprinkler_spray",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/copper_sprinkler_spray_0.png",
+      "spray_xy": [
+        8,
+        5
+      ],
+      "input": "components/A018-sprinklers/copper-head-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/copper-head-0",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/copper-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/copper_sprinkler_spray/none/01.png",
+          "sha256": "580a918c7d6bf0e09e091625298a0e99f1715ef1b4b92acceaf225078f0b19d5",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "91f849a38bac7c55190fc63eb7851213ede939bd7f35f44b58d7b646620ab531"
+    },
+    {
+      "id": "props/copper_sprinkler_spray_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/copper_sprinkler_spray",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/copper_sprinkler_spray_1.png",
+      "spray_xy": [
+        8,
+        5
+      ],
+      "input": "components/A018-sprinklers/copper-head-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/copper-head-1",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/copper-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/copper_sprinkler_spray/none/02.png",
+          "sha256": "40ae65ada6b539b37b989daff30973d4010cb763ba4a1b6ca34f66834750f9ee",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "cd65fcb261c58aaaac4fb5ba50434e4f519acc03fe00675a01ca8506a72c20ee"
+    },
+    {
+      "id": "props/copper_sprinkler_spray_2",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/copper_sprinkler_spray",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/copper_sprinkler_spray_2.png",
+      "spray_xy": [
+        8,
+        5
+      ],
+      "input": "components/A018-sprinklers/copper-head-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/copper-head-2",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/copper-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/copper_sprinkler_spray/none/03.png",
+          "sha256": "6e16e6f3d43d70cb40a942a09814f144bd53782fb899de31cfeab0b112e1a7be",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "db3567425562b63157b03bd500967826cf40ddff627a0b490b588a8d9b018bcc"
+    },
+    {
+      "id": "props/copper_sprinkler_spray_3",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/copper_sprinkler_spray",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/copper_sprinkler_spray_3.png",
+      "spray_xy": [
+        8,
+        5
+      ],
+      "input": "components/A018-sprinklers/copper-head-3",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/copper-head-3",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/copper-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-copper-states-r3.call.json",
+          "sha256": "2a243a202f6eb1e0741bbe78f4a657067572b1fd40684f05408393722afeabaf",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/copper_sprinkler_spray/none/04.png",
+          "sha256": "ab2a55956c4a770388caa1e88b9217f441b9d2b9213b4df985fc86542c40bf94",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "6fd3d4fac9946eba6f22661b7eedcc8a097606a0f5191258b9bd9e4c900d34e8"
+    },
+    {
+      "id": "ui/icon_copper_sprinkler",
+      "owner": "raster",
+      "source": "assets/art_source/ui/sprinklers/copper-master-c2-r1.png",
+      "source_sha256": "e1e4c4477c2fe314875aecfad9ee694e0e654d52fa6b0a59a51d9b84eeae8108",
+      "crop_xywh": [
+        430,
+        530,
+        399,
+        459
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.030501089324618737,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_copper_sprinkler",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_copper_sprinkler.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/copper-master-c2-r1.prompt.txt",
+      "prompt_sha256": "8dffea3ed8a33420483905dcda5749fcfa814ebe3736ade345932a0836ba93b5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/copper-master-c2-r1.call.json",
+          "sha256": "cd9be49794b2783a93835577dc51f45917497157eee89a2cefd90d063eba0e3a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/icon_copper_sprinkler/none/01.png",
+          "sha256": "75f755ac9c5d0120a440a5155867cd04f0bea9fba201c601071f4a0bd5f17f95",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "56adc24738903bdfe13a2a133243f90dc2c46175319f7cd4c76f05a713fb2db7"
+    },
+    {
+      "id": "ui/hud_copper_sprinkler",
+      "owner": "raster",
+      "source": "assets/art_source/ui/sprinklers/copper-master-c2-r1.png",
+      "source_sha256": "e1e4c4477c2fe314875aecfad9ee694e0e654d52fa6b0a59a51d9b84eeae8108",
+      "crop_xywh": [
+        430,
+        530,
+        399,
+        459
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.017429193899782137,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "roof_dark",
+        "skin_dark",
+        "roof_light",
+        "skin",
+        "gold_dark",
+        "leaf_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_copper_sprinkler",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_copper_sprinkler.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/copper-master-c2-r1.prompt.txt",
+      "prompt_sha256": "8dffea3ed8a33420483905dcda5749fcfa814ebe3736ade345932a0836ba93b5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/copper-master-c2-r1.call.json",
+          "sha256": "cd9be49794b2783a93835577dc51f45917497157eee89a2cefd90d063eba0e3a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/hud_copper_sprinkler/none/01.png",
+          "sha256": "a71a971e2a7647011db450b21d2f5d4723cab932936909ff846c21eb5781a144",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "3e3f7727ccd72557af840565f96a8d83f1ee27cdca955f94618f2c3d4b36aa96"
+    },
+    {
+      "id": "props/iron_sprinkler",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-iron-states-r3.png",
+      "source_sha256": "2410b64c52b02164ac4bd9bd67f5480845235feeb1bb0a1e2ba863db67f3e281",
+      "crop_xywh": [
+        71,
+        161,
+        337,
+        408
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02696078431372549,
+      "content_anchor_xy": [
+        4,
+        11
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/iron_sprinkler",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/props/iron_sprinkler.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/iron_sprinkler/none/01.png",
+          "sha256": "d0a822a8f830993827aaf70a978c28dedbba9881f5132532b45233ba7997212b",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "a88ccca3d36c662c318ad48cb3a1d854099992c533cdcd9058358a4d2d679aea"
+    },
+    {
+      "id": "props/iron_sprinkler_spray_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/iron_sprinkler_spray",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/iron_sprinkler_spray_0.png",
+      "spray_xy": [
+        8,
+        4
+      ],
+      "input": "components/A018-sprinklers/iron-head-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/iron-head-0",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/iron-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/iron_sprinkler_spray/none/01.png",
+          "sha256": "250d7a644192d20356c9c3d8bc6dd24560aa09a32dddedd27ef5a78cc22c236c",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "83d1feb161c21faec9518aa0f99e72bf31ac30161da5d4fabd1309af80864818"
+    },
+    {
+      "id": "props/iron_sprinkler_spray_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/iron_sprinkler_spray",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/iron_sprinkler_spray_1.png",
+      "spray_xy": [
+        8,
+        4
+      ],
+      "input": "components/A018-sprinklers/iron-head-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/iron-head-1",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/iron-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/iron_sprinkler_spray/none/02.png",
+          "sha256": "d56b8bbfaf9974f0b1e0b06ad4c4b65edf800bd6664cb4c41030b9829fa1e4f8",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "80440a59a048ce1a70700ae553f2390f502ceebee7016c888c23715a285d5ab2"
+    },
+    {
+      "id": "props/iron_sprinkler_spray_2",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/iron_sprinkler_spray",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/iron_sprinkler_spray_2.png",
+      "spray_xy": [
+        8,
+        4
+      ],
+      "input": "components/A018-sprinklers/iron-head-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/iron-head-2",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/iron-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/iron_sprinkler_spray/none/03.png",
+          "sha256": "1ca15ed0e1ac207261627f9763cfda9b95667319f651811594901f08c6445c90",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "62c130655705b10e7ee9e23b259a855573872b67d368a75fdef638f74af85245"
+    },
+    {
+      "id": "props/iron_sprinkler_spray_3",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/iron_sprinkler_spray",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/iron_sprinkler_spray_3.png",
+      "spray_xy": [
+        8,
+        4
+      ],
+      "input": "components/A018-sprinklers/iron-head-3",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/iron-head-3",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/iron-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-iron-states-r3.call.json",
+          "sha256": "817bb2009cf373907cab8cab88c2de2fce00ada124c0cfc5b5eb771160b9aa01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/iron_sprinkler_spray/none/04.png",
+          "sha256": "7054cf5b4e83dac1d9749567ae996270c34284c21d9cb0319a52f62d3d2719bb",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "df51f30d6b152161fa215ad67e1fdf9a05fc10fbe534a07a3e971dc201119615"
+    },
+    {
+      "id": "ui/icon_iron_sprinkler",
+      "owner": "raster",
+      "source": "assets/art_source/ui/sprinklers/iron-master-r1.png",
+      "source_sha256": "0c0dbf319e7b2bc6c48c85e47d68e9fb36e7c35c787600c62710f7191b9196a4",
+      "crop_xywh": [
+        441,
+        535,
+        373,
+        452
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.030973451327433628,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_iron_sprinkler",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_iron_sprinkler.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/iron-master-r1.prompt.txt",
+      "prompt_sha256": "61529eb0a4b2dace3af6206f7ee60eae9ca46d9ca391a86dc71b9c2f991229a5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/iron-master-r1.call.json",
+          "sha256": "a57a848e3e9628cf0050b44fdeb8a6dff55e72f4a6a1956985d3754c8f592db8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/icon_iron_sprinkler/none/01.png",
+          "sha256": "98b4a1dd110941a3a7d3f19c7f3df50fca3228e7d08a5131eeabeb5e9f932112",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "3a1d2ed8f99889a9d0f0c1c111e907c03fae9f55768b604f0ddaf199238d1e1a"
+    },
+    {
+      "id": "ui/hud_iron_sprinkler",
+      "owner": "raster",
+      "source": "assets/art_source/ui/sprinklers/iron-master-r1.png",
+      "source_sha256": "0c0dbf319e7b2bc6c48c85e47d68e9fb36e7c35c787600c62710f7191b9196a4",
+      "crop_xywh": [
+        441,
+        535,
+        373,
+        452
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.017699115044247787,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "water_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_iron_sprinkler",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_iron_sprinkler.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/iron-master-r1.prompt.txt",
+      "prompt_sha256": "61529eb0a4b2dace3af6206f7ee60eae9ca46d9ca391a86dc71b9c2f991229a5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/iron-master-r1.call.json",
+          "sha256": "a57a848e3e9628cf0050b44fdeb8a6dff55e72f4a6a1956985d3754c8f592db8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/hud_iron_sprinkler/none/01.png",
+          "sha256": "37e51c7ad3234f8df7849b346849715dc4b8542ee1c4a329724afdf5d82f8bd4",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "7285905f9eec229a8ce3b7a912de825393c94cfda304463782e97b76feed5698"
+    },
+    {
+      "id": "props/gold_sprinkler",
+      "owner": "raster",
+      "source": "assets/art_source/props/sprinklers/recovered-gold-states-r3.png",
+      "source_sha256": "023070f60d910c51e51c7a9761438d5b43f5d0252c5271816d3babe0bffef700",
+      "crop_xywh": [
+        58,
+        161,
+        349,
+        420
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.02857142857142857,
+      "content_anchor_xy": [
+        5,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/gold_sprinkler",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/props/gold_sprinkler.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/gold_sprinkler/none/01.png",
+          "sha256": "ea414dd323371f0da1a3888e3c79edbbacdf02581a8cc17370b62ff44f18d22f",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "8b321b47d8105625f15e1315c582513083077badbb918737c487758f381b6b6d"
+    },
+    {
+      "id": "props/gold_sprinkler_spray_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/gold_sprinkler_spray",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/gold_sprinkler_spray_0.png",
+      "spray_xy": [
+        8,
+        3
+      ],
+      "input": "components/A018-sprinklers/gold-head-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/gold-head-0",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/gold-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/gold_sprinkler_spray/none/01.png",
+          "sha256": "4dba1ca242029e96423e246ac44df88b15aa43b5e3edd50cdbf07c879cef00cf",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "e518a24bca56574a57cb9dea0280340a7cf5c97f66dae8c5ca21c147c4341261"
+    },
+    {
+      "id": "props/gold_sprinkler_spray_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/gold_sprinkler_spray",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/gold_sprinkler_spray_1.png",
+      "spray_xy": [
+        8,
+        3
+      ],
+      "input": "components/A018-sprinklers/gold-head-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/gold-head-1",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/gold-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/gold_sprinkler_spray/none/02.png",
+          "sha256": "e29b0d381e9509b0524cc92d2698807a4bffe059b60cbc7e4f99dabbd4441783",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "d1757cd424f86de88454d45a180a656948ed7a474f45a033651c522dc77fcb27"
+    },
+    {
+      "id": "props/gold_sprinkler_spray_2",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/gold_sprinkler_spray",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/gold_sprinkler_spray_2.png",
+      "spray_xy": [
+        8,
+        3
+      ],
+      "input": "components/A018-sprinklers/gold-head-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/gold-head-2",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/gold-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/gold_sprinkler_spray/none/03.png",
+          "sha256": "cd449a37bf8d6114cb0534ee838df59a14a4df9266f6c35f1397f717cea07eec",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "c6bfc1b9c9c193bb8c1de159d33f63814f31d0cdca710453e0e24dde4b023e39"
+    },
+    {
+      "id": "props/gold_sprinkler_spray_3",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/gold_sprinkler_spray",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/props/gold_sprinkler_spray_3.png",
+      "spray_xy": [
+        8,
+        3
+      ],
+      "input": "components/A018-sprinklers/gold-head-3",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A018-sprinklers/gold-head-3",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            11
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A018-sprinklers/gold-base",
+          "slice_xywh": [
+            0,
+            11,
+            16,
+            3
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.prompt.txt",
+      "prompt_sha256": "970373bd2c7f76cca62b3d97b52f73de592949888c766ee589f1a2d1a181c457",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/recovered-gold-states-r3.call.json",
+          "sha256": "56cf22c26275b25ce3f3945e610ef422a0d9a413272f84f3a9c4b3cbbbbccda0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/gold_sprinkler_spray/none/04.png",
+          "sha256": "cb78351a8d45a859ae9adb8ed2a68ff989be2d89b0d41e5caae5cf5b123f3ca9",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "760756c9a704b29d483547930ff872f554e00dd2566fc5557938e41c236b8686"
+    },
+    {
+      "id": "ui/icon_gold_sprinkler",
+      "owner": "raster",
+      "source": "assets/art_source/ui/sprinklers/gold-master-r1.png",
+      "source_sha256": "c87fa0c4ee52d72af4ac7469ca2bffea52b494a5fe1d078fefb7d2b6fff7b762",
+      "crop_xywh": [
+        418,
+        522,
+        418,
+        491
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.028513238289205704,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_gold_sprinkler",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_gold_sprinkler.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/gold-master-r1.prompt.txt",
+      "prompt_sha256": "6a5269d292c98b18a25a38c6c22f65e5acbe788ac7497cc1dde876385e6c2bd0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/gold-master-r1.call.json",
+          "sha256": "c7398252af64622ed20e9d7649bdc91405410fa347674fd994ef59fe5c0faead",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/icon_gold_sprinkler/none/01.png",
+          "sha256": "50d5b64e540fe539caba09ca14e810297dd2532850efefbefc6b66ffbd246b16",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "51aacb7ce82ec2212defb69f3beb37862643423df463ae1bd3a32c4000cf55c9"
+    },
+    {
+      "id": "ui/hud_gold_sprinkler",
+      "owner": "raster",
+      "source": "assets/art_source/ui/sprinklers/gold-master-r1.png",
+      "source_sha256": "c87fa0c4ee52d72af4ac7469ca2bffea52b494a5fe1d078fefb7d2b6fff7b762",
+      "crop_xywh": [
+        418,
+        522,
+        418,
+        491
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.016293279022403257,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_gold_sprinkler",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_gold_sprinkler.png",
+      "prompt": "implementation/backlog/deliveries/A018-sprinklers/raw/gold-master-r1.prompt.txt",
+      "prompt_sha256": "6a5269d292c98b18a25a38c6c22f65e5acbe788ac7497cc1dde876385e6c2bd0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/raw/gold-master-r1.call.json",
+          "sha256": "c7398252af64622ed20e9d7649bdc91405410fa347674fd994ef59fe5c0faead",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/native/hud_gold_sprinkler/none/01.png",
+          "sha256": "a4c2ef4f516966ae664a357106cdbd438e2ac99088b48b9cd8c51229983d922c",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/contract.json",
+          "sha256": "cf3ed10ad9df56006918559fbd41ac036d8f25c5b4afb7859ca021cf0553f567",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+          "sha256": "81bd627f1d4b4cb008df116c44445e842dbfb3a47f3ec6a7ee57dd9e855d21ba",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A018",
+      "integration_task": "0201",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
+      "output_sha256": "90540f78f5dac36acd659b3d967d44057549f8e594da0fad7fa64430e8c0092f"
     }
   ]
 }

@@ -1,0 +1,227 @@
+{
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 21,
+  "frames_found": 21,
+  "grounded_on_pivot": true,
+  "icon_bounds_ok": true,
+  "icon_colours_at_least2": true,
+  "icon_density": true,
+  "icons_unique": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/copper_sprinkler/none/01.png": {
+      "bounds": [
+        4,
+        7,
+        12,
+        14
+      ],
+      "opaque_pixels": 38
+    },
+    "native/copper_sprinkler_spray/none/01.png": {
+      "bounds": [
+        4,
+        5,
+        12,
+        14
+      ],
+      "opaque_pixels": 47
+    },
+    "native/copper_sprinkler_spray/none/02.png": {
+      "bounds": [
+        4,
+        5,
+        12,
+        14
+      ],
+      "opaque_pixels": 48
+    },
+    "native/copper_sprinkler_spray/none/03.png": {
+      "bounds": [
+        4,
+        5,
+        12,
+        14
+      ],
+      "opaque_pixels": 48
+    },
+    "native/copper_sprinkler_spray/none/04.png": {
+      "bounds": [
+        4,
+        5,
+        12,
+        14
+      ],
+      "opaque_pixels": 47
+    },
+    "native/gold_sprinkler/none/01.png": {
+      "bounds": [
+        3,
+        5,
+        13,
+        14
+      ],
+      "opaque_pixels": 63
+    },
+    "native/gold_sprinkler_spray/none/01.png": {
+      "bounds": [
+        3,
+        3,
+        13,
+        14
+      ],
+      "opaque_pixels": 66
+    },
+    "native/gold_sprinkler_spray/none/02.png": {
+      "bounds": [
+        3,
+        3,
+        13,
+        14
+      ],
+      "opaque_pixels": 67
+    },
+    "native/gold_sprinkler_spray/none/03.png": {
+      "bounds": [
+        3,
+        3,
+        13,
+        14
+      ],
+      "opaque_pixels": 66
+    },
+    "native/gold_sprinkler_spray/none/04.png": {
+      "bounds": [
+        3,
+        3,
+        13,
+        14
+      ],
+      "opaque_pixels": 66
+    },
+    "native/hud_copper_sprinkler/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 38
+    },
+    "native/hud_gold_sprinkler/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 38
+    },
+    "native/hud_iron_sprinkler/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 36
+    },
+    "native/icon_copper_sprinkler/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 100
+    },
+    "native/icon_gold_sprinkler/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 102
+    },
+    "native/icon_iron_sprinkler/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 104
+    },
+    "native/iron_sprinkler/none/01.png": {
+      "bounds": [
+        4,
+        6,
+        13,
+        14
+      ],
+      "opaque_pixels": 50
+    },
+    "native/iron_sprinkler_spray/none/01.png": {
+      "bounds": [
+        4,
+        4,
+        13,
+        14
+      ],
+      "opaque_pixels": 51
+    },
+    "native/iron_sprinkler_spray/none/02.png": {
+      "bounds": [
+        4,
+        4,
+        13,
+        14
+      ],
+      "opaque_pixels": 50
+    },
+    "native/iron_sprinkler_spray/none/03.png": {
+      "bounds": [
+        4,
+        4,
+        13,
+        14
+      ],
+      "opaque_pixels": 52
+    },
+    "native/iron_sprinkler_spray/none/04.png": {
+      "bounds": [
+        4,
+        4,
+        13,
+        14
+      ],
+      "opaque_pixels": 50
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "nozzle_raised": true,
+  "one_scale_per_animation": true,
+  "one_scale_per_tier_sheet": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "same_crop_per_pair": true,
+  "source_transparency_matches_call": true,
+  "spray_points_fixed": true,
+  "sprinkler_base_identical": true,
+  "sprinkler_five_states_each": true,
+  "visible_targets": true
+}
