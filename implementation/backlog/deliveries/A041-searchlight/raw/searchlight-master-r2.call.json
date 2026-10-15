@@ -1,0 +1,42 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT.\nPrimary request: ONE level1 SEARCHLIGHT identity master, whole/unlit. A powered farm lamp, NOT a gun.\nInput images: Image1 farm reference sheet is style/materials only. Image2 gun tower is scale/camera/family reference, not weapon shape. Image3 generator is machinery material reference.\nStyle/medium: coherent hand-crafted pixel art, deliberate simple pixel clusters, coloured outlines, restrained texture, readable material planes. Design for native pixels, broad shapes, no microscopic details.\nComposition/framing: orthographic three-quarter top-down camera on rectangular grid. Final native32x48, groundpivot(16,44). Visible body17wide x27high (width:height0.63), lowest row43, base centred. NOT a diamond ground tile.\nLighting: neutral daytime upper-left, runtime supplies night and all beams/glow.\nColor: warm timber, dark iron, beige ceramic touches, UNLIT lens dark blue/violet glass with ONE small top-left pale highlight.\nTOWER family adapted: round lamp drum with reflector hood on a yoke, mounted on a braced timber post with crank handle; cable runs down post into compact base. Round lens faces viewer, turned slightly toward east/right; diameter6\u20137nativepixels with1px opaque rim. Lens is dark flat glass, opaque. No muzzle/weapon. Lamp drum, yoke, post, cable read as a small practical farm searchlight.\nBackground: true transparency immediately outside all sharp object pixels. No beam, rays, halo, bloom, gradient haze, ground shadow, grass or soil base. No text/labels/watermark/UI. One complete unclipped object.\nAvoid smooth painting, vector/3D, anti-aliased halos, blur, gradients, random speckle, thick black boxes, duplicate parts and detail that disappears at17x27.\nCORRECTION: Image4 edit target. Measured581x1058 gives15x27pixels, target16\u201318x26\u201328. Widen base and lamp hood by15percent while keeping total height unchanged. Lens glass diameter6\u20137nativepixels: broad dark opaque circular lens with1px rim, not tiny. Preserve mast height, camera, materials, grounding, darkunlitglass, no beams/glow.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/gun_tower.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/props/generator.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A041-searchlight/raw/searchlight-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/gun_tower.png",
+      "sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/props/generator.png",
+      "sha256": "26eafa19dc75728704a6c72b3a9a5bbe6ca8e579b29dd905dd85afe541d8768a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A041-searchlight/raw/searchlight-master-r1.png",
+      "sha256": "efba9b9afdbbcb9d2d1455a87ae2c37b85fe5cbb513714d67e1f3661c8215806",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\rejected\\searchlight-master-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-c45aa2ec-b747-411d-a012-bfed799f2cdd.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A041-searchlight\\raw\\searchlight-master-r2.png",
+  "sha256": "00441c0a9aff3ffea53179bbd21f56959f5f21e7e964aae1cc4a707a4d253aa8",
+  "revision": 2,
+  "decision": "pending native-size inspection"
+}

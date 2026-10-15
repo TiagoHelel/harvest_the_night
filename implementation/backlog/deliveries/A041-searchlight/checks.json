@@ -1,0 +1,113 @@
+{
+  "approved_art_hashes_match": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "eight_distinct_states": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 8,
+  "frames_found": 8,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "level1_level2_differs80": true,
+  "measurements": {
+    "native/searchlight/none/01.png": {
+      "bounds": [
+        8,
+        17,
+        25,
+        44
+      ],
+      "opaque_pixels": 239
+    },
+    "native/searchlight_2/none/01.png": {
+      "bounds": [
+        6,
+        10,
+        26,
+        44
+      ],
+      "opaque_pixels": 380
+    },
+    "native/searchlight_2_fire/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        26,
+        44
+      ],
+      "opaque_pixels": 361
+    },
+    "native/searchlight_2_hurt/none/01.png": {
+      "bounds": [
+        6,
+        10,
+        26,
+        44
+      ],
+      "opaque_pixels": 375
+    },
+    "native/searchlight_2_wreck/none/01.png": {
+      "bounds": [
+        5,
+        26,
+        28,
+        44
+      ],
+      "opaque_pixels": 245
+    },
+    "native/searchlight_fire/none/01.png": {
+      "bounds": [
+        8,
+        17,
+        25,
+        44
+      ],
+      "opaque_pixels": 240
+    },
+    "native/searchlight_hurt/none/01.png": {
+      "bounds": [
+        8,
+        17,
+        24,
+        44
+      ],
+      "opaque_pixels": 248
+    },
+    "native/searchlight_wreck/none/01.png": {
+      "bounds": [
+        8,
+        31,
+        24,
+        44
+      ],
+      "opaque_pixels": 142
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "no_muzzles": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "searchlight_2_only_lens_changes",
+    "searchlight_2_wreck_inside_whole",
+    "searchlight_only_lens_changes"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "searchlight_2_changed_pixels_outside_lens": 267,
+  "searchlight_2_one_source_scale": true,
+  "searchlight_2_only_lens_changes": false,
+  "searchlight_2_whole_dimensions": true,
+  "searchlight_2_wreck_inside_whole": false,
+  "searchlight_changed_pixels_outside_lens": 61,
+  "searchlight_one_source_scale": true,
+  "searchlight_only_lens_changes": false,
+  "searchlight_whole_dimensions": true,
+  "searchlight_wreck_inside_whole": true
+}

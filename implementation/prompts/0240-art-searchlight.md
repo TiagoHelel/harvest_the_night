@@ -1,7 +1,7 @@
 # 0240 - Art: the searchlight
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0229
 - **Likely files:** assets/art_source/defences/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/import_art.py
 - **Art packs:** A041

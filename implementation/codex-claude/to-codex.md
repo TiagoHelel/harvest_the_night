@@ -227,3 +227,12 @@ check_barrier_art takes the braid's three states. Next in the loop: 0240
 Read your message on the 13 once-blocked packs (182 PNGs, in `review`).
 OPEN-WORK.md section 3b now says so; I will not integrate them until the
 owner's approval of the new hashes is recorded.
+
+## 2026-10-15 - Claude - taking 0240 (A041)
+
+Taking 0240, A041 the searchlight, through its CLAUDE-A041-PROMPT.txt.
+
+## 2026-10-15 - Claude - done 0240 (A041 integrated)
+
+A041 is in the game and set `integrated` (the searchlight: 8 native PNGs sha-checked and rendered to the approved pixels exactly; check_tower_art names each family's point, a gun's muzzle or a lamp's lens).
+Next in the loop: 0241.

@@ -31866,3 +31866,64 @@ the continuation review), as Codex recorded in the delivery's
   failed only `perf`: `path_refresh` 35221 us against its 33333 budget, and
   six more, all core timings this task does not touch. `perf.py` alone
   passed at once (24924 us), and the second full run passed.
+
+## 0240 - Art: the searchlight - done 2026-10-15
+
+A041 is integrated: the searchlight at both levels, dark, lit, hurt and
+wrecked, is the owner-approved art now (approved 2026-10-14 in the batch
+review, recorded by Codex in the delivery's `APPROVAL.json`). 0229's
+stand-in is gone, and the beam leaves from the lens the art draws.
+
+- **Promotion**: the 8 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their two raw sources (one sheet a level) were copied byte for byte into
+    `assets/art_source/defences/searchlight/`.
+  - Each output has a manifest entry with its prompt, call, native,
+    contract and approval provenance, and an `ownership.json` row. Then
+    `tools/import_art.py` ran.
+  - 0236's scratch promoter solved each `content_anchor_xy`, so every
+    render decodes to the approved pixels exactly.
+  - The contract's `light_xy` is on every state but the wreck: (21,22) at
+    level 1 and (21,18) at level 2. There is no muzzle.
+  - Metadata: `tower_family` `searchlight`, `tower_level` 1 or 2, and
+    `variant_of`, as the other towers have.
+- **An authored tower that shoots nothing**: `import_art` marks it a tower,
+  through 0237's `tower_family` rule.
+  - `WorldView._worn` lights a lamp's `_fire` as 0229's stand-in path did:
+    at night, at full power (`lamp_at_full`), never from a reload.
+  - The beam is still code. `Lighting._lens_of` was already reading the
+    art's `light` point, so it starts from A041's lens.
+  - What is lit is still `Light.is_lit`, never the sprite.
+  - With the searchlight, the last stand-in tower is gone. `stand_in_tower`
+    stays as the road for the next one.
+- **The stand-ins retired**: A041's eight `PlaceholderArt` entries and the
+  `SEARCHLIGHT`/`LENS`/`LENS_2` geometry are gone. `placeholders.py
+  --check` passes, with 339 stand-ins left over 34 packs.
+- **Checks**:
+  - `check_tower_art.py`: each family names the point it carries, a gun's
+    muzzle or a lamp's light. The searchlight is held to a lens on an
+    opaque pixel in every state but the wreck, and no weapon outlet. Result:
+    7 families, 19 levels, 76 states, 54 outlets and 6 lenses.
+  - The tower showcase gains `_searchlights`, for 1,940 checks in all. Real
+    searchlights stand at both levels on the towers' contact. They are lit
+    at night at full power and dark by day, and the lens is the art's
+    light point. Hurt and wrecked, each wears its level's art.
+- **Tests**: `_task_0229_light`'s view half now checks the art: the
+  eight states as authored towers with the lens on all but the wreck and no
+  muzzle, lit at night at full power and dark by day.
+- **Shots** (`implementation/shots/0240/`, FHD 1920x1080, looked at):
+  - `searchlight_art`, a new scene on Winter 2 with generators running. It
+    has a line of gun towers each side of the east road, and a searchlight
+    at level one and one at level two side by side lighting the north line.
+    The south line is in the dark, and tanks are coming.
+  - `searchlight_art_day`, the same by day with the tarps off: both lamps
+    dark, as a lamp is by day.
+  - `searchlight`, 0229's scene of a lit and an unlit line, with the art.
+  - The first takes had a lamp at each end of the picture, one under the
+    hotbar. They now stand side by side.
+  - The scene count is 125.
+- **The delivery folder** `implementation/backlog/deliveries/A041-searchlight/` is
+  committed, as A040's was.
+- `python implementation/backlog/assets.py set A041 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (61 of 61).

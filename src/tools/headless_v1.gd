@@ -8466,31 +8466,34 @@ func _task_0229_light() -> void:
 		and (said["en"] as String).contains("lights %d tiles round it, and towers in light reach %d further" % [tiles, GameData.LIGHT_REACH_BONUS])
 		and (said["pt_BR"] as String).contains("HOLOFOTE") and (said["pt_BR"] as String).contains("ilumina %d ladrilhos" % tiles),
 		"its name, its light and what light gives a tower, in both languages", str(said))
+	# **A041's art since task 0240**: an authored tower at each level and
+	# state, its lens - where the beam leaves - on all but the wreck, and no
+	# weapon outlet.
 	var road: Array = []
 	for level in ["", "_2"]:
 		for state_name in ["", "_hurt", "_fire", "_wreck"]:
 			var name := StringName("searchlight%s%s" % [level, state_name])
-			var path := PlaceholderArt.art_path(name, 0)
-			var frame := PlaceholderArt.frame(path)
-			var file := PlaceholderArt.texture_path(path)
+			var path := WorldView.BUILDING_DIR + str(name) + ".png"
+			var frame: Dictionary = RasterArt.FRAMES.get(path, {})
 			if frame.get("canvas") != Vector2i(32, 48) or frame.get("pivot") != Vector2i(16, 44) \
-					or not file.begins_with("res://sprites/buildings/gun_tower") or not ResourceLoader.exists(file) \
-					or frame.has("light") != (state_name != "_wreck") \
-					or str(PlaceholderArt.art(name).get("pack", "")) != "A041":
+					or not bool(frame.get("tower", false)) or frame.has("light") != (state_name != "_wreck") \
+					or frame.has("muzzle") or not ResourceLoader.exists(path) or PlaceholderArt.is_drawn(path) \
+					or not PlaceholderArt.art(name).is_empty():
 				road.append(name)
 	var view := WorldView.new()
 	view._state = farm
-	var shown := [view._stand_in_tower_art(Farm.occupant(farm, lamp))]
+	var shown := [view._worn(&"searchlight", Farm.occupant(farm, lamp))]
 	farm["phase"] = Phases.DAY
-	shown.append(view._stand_in_tower_art(Farm.occupant(farm, lamp)))
+	shown.append(view._worn(&"searchlight", Farm.occupant(farm, lamp)))
 	farm["phase"] = Phases.NIGHT
 	view.free()
 	var bar := Hotbar.new()
 	var icon := bar._icon_of(&"searchlight")
 	bar.free()
-	expect(road.is_empty() and WorldView.stand_in_tower(&"searchlight") and shown == [&"searchlight_2_fire", &"searchlight_2"]
+	expect(road.is_empty() and WorldView.authored_tower(&"searchlight") and not WorldView.stand_in_tower(&"searchlight")
+		and shown == [&"searchlight_2_fire", &"searchlight_2"]
 		and icon != null and icon.resource_path == "res://sprites/ui/icon_gun_tower.png",
-		"drawn through 0120's road: the gun tower in lamp white at A041's 32x48 on (16,44), its lens a light point but on the wreck; lit at night at full power, dark by day; the hotbar's icon",
+		"A041's art: an authored tower at 32x48 on (16,44), its lens a light point on all but the wreck and no muzzle; lit at night at full power, dark by day; the hotbar's icon",
 		"%s %s" % [str(road), str(shown)])
 	expect(FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"searchlight\", ")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A041-searchlight.md").contains("Final geometry settled by game task 0229"),

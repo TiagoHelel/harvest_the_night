@@ -196,13 +196,6 @@ const TARP_TOWER := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "dra
 const TARP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
 const TARP_SHORT := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
 
-## A041's searchlight (task 0229): the tower family's 32x48 on (16,44), drawn
-## at 1.0; its lens - `light_xy`, where the beam leaves - on the stand-in's
-## turret, level by level.
-const SEARCHLIGHT := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
-const LENS := [Vector2i(16, 23)]
-const LENS_2 := [Vector2i(15, 22)]
-
 ## A042's electric fence (task 0230): the wooden fence's 16x32 standing on
 ## (8,28), drawn at 1.0; and its zap, 12x12 round (6,6), an impact's box.
 const ELECTRIC_FENCE := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
@@ -455,17 +448,6 @@ const ART := {
 	# The Blood Moon's (task 0257): a red disc with a drip, drawn in code.
 	&"icon_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A041's searchlight (task 0229): the gun tower - a post with a head on it -
-	# in a cold lamp white, at each level and state, its lens on the turret,
-	# until 0240; the beam and the pool of light are code (`Lighting`).
-	&"searchlight": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS, "lit_from": 0},
-	&"searchlight_hurt": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_hurt", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS, "lit_from": 0},
-	&"searchlight_fire": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_fire", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS, "lit_from": 0},
-	&"searchlight_wreck": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_wreck", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true},
-	&"searchlight_2": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_2", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS_2, "lit_from": 0},
-	&"searchlight_2_hurt": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_2_hurt", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS_2, "lit_from": 0},
-	&"searchlight_2_fire": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_2_fire", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true, "lights": LENS_2, "lit_from": 0},
-	&"searchlight_2_wreck": {"pack": "A041", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/gun_tower_2_wreck", "tint": Color(0.85, 1.0, 1.35), "geometry": SEARCHLIGHT, "final": SEARCHLIGHT, "bare": true},
 	# A042's electric fence (task 0230), drawn in code by `ElectricFenceArt`
 	# until 0241: the sixteen masks whole and hurt, composed from its
 	# modules with the contract's recipe and joined (`connected`) as the

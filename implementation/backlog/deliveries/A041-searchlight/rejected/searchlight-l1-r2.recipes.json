@@ -1,0 +1,158 @@
+[
+  {
+    "recipe": {
+      "id": "searchlight-l1-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\raw\\searchlight-l1-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        513,
+        792
+      ],
+      "crop_xywh": [
+        64,
+        91,
+        421,
+        681
+      ],
+      "content_scale": 0.039647577092511016,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      8,
+      17,
+      25,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      17,
+      27
+    ]
+  },
+  {
+    "recipe": {
+      "id": "searchlight-l1-r2-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\raw\\searchlight-l1-r2.png",
+      "sheet_cell_xywh": [
+        513,
+        0,
+        511,
+        792
+      ],
+      "crop_xywh": [
+        559,
+        105,
+        395,
+        669
+      ],
+      "content_scale": 0.039647577092511016,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      8,
+      17,
+      24,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      16,
+      27
+    ]
+  },
+  {
+    "recipe": {
+      "id": "searchlight-l1-r2-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\raw\\searchlight-l1-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        792,
+        513,
+        744
+      ],
+      "crop_xywh": [
+        65,
+        811,
+        420,
+        678
+      ],
+      "content_scale": 0.039647577092511016,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      8,
+      17,
+      25,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      17,
+      27
+    ]
+  },
+  {
+    "recipe": {
+      "id": "searchlight-l1-r2-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\raw\\searchlight-l1-r2.png",
+      "sheet_cell_xywh": [
+        513,
+        792,
+        511,
+        744
+      ],
+      "crop_xywh": [
+        542,
+        1119,
+        409,
+        352
+      ],
+      "content_scale": 0.039647577092511016,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      8,
+      30,
+      24,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      16,
+      14
+    ]
+  }
+]

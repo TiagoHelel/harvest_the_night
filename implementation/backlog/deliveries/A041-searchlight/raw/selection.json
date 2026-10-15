@@ -1,0 +1,130 @@
+{
+  "status": "blocked",
+  "issues": [
+    "Both state sheets reached r3 correction limit. L1 whole/fire still alter mast, cable or housing pixels outside lens; L2 latest layout has no alpha128 column gutter, so retained earlier measurable source.",
+    "L2 safe common scale gives whole20x34, but wreck23px exceeds whole20px. L1 geometry is valid. All8stateframes remain diagnostics, zero production exports."
+  ],
+  "files": {
+    "searchlight/none/0": {
+      "stem": "searchlight-l1-r3",
+      "index": 0,
+      "fields": {
+        "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+        "points": {
+          "light_xy": [
+            21,
+            22
+          ]
+        }
+      }
+    },
+    "searchlight_hurt/none/0": {
+      "stem": "searchlight-l1-r3",
+      "index": 1,
+      "fields": {
+        "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+        "points": {
+          "light_xy": [
+            21,
+            22
+          ]
+        }
+      }
+    },
+    "searchlight_fire/none/0": {
+      "stem": "searchlight-l1-r3",
+      "index": 2,
+      "fields": {
+        "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+        "points": {
+          "light_xy": [
+            21,
+            22
+          ]
+        }
+      }
+    },
+    "searchlight_wreck/none/0": {
+      "stem": "searchlight-l1-r3",
+      "index": 3,
+      "fields": {
+        "review_issue": "Changed stationary body and/or wreck footprint; see checks."
+      }
+    },
+    "searchlight_2/none/0": {
+      "stem": "searchlight-l2-r2",
+      "index": 0,
+      "fields": {
+        "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+        "points": {
+          "light_xy": [
+            21,
+            18
+          ]
+        }
+      }
+    },
+    "searchlight_2_hurt/none/0": {
+      "stem": "searchlight-l2-r2",
+      "index": 1,
+      "fields": {
+        "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+        "points": {
+          "light_xy": [
+            21,
+            18
+          ]
+        }
+      }
+    },
+    "searchlight_2_fire/none/0": {
+      "stem": "searchlight-l2-r2",
+      "index": 2,
+      "fields": {
+        "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+        "points": {
+          "light_xy": [
+            21,
+            18
+          ]
+        }
+      }
+    },
+    "searchlight_2_wreck/none/0": {
+      "stem": "searchlight-l2-r2",
+      "index": 3,
+      "fields": {
+        "review_issue": "Changed stationary body and/or wreck footprint; see checks."
+      }
+    }
+  },
+  "rejected": {
+    "searchlight-master-r1": "Visible15x27 below required16\u201318px width.",
+    "searchlight-l1-r1": "Wreck19wide exceeds whole17; fire changes stationary body.",
+    "searchlight-l1-r2": "Fire changes stationary body outside lens; superseded by last attempt.",
+    "searchlight-l2-r1": "Whole18x32 below20\u201322px width, wreck21wide exceedswhole.",
+    "searchlight-l2-r3": "No complete transparent column gutter atalpha128; cap reached."
+  },
+  "decisions": {
+    "searchlight-l1-r3": {
+      "decision": "diagnostic only; whole/fire body identity and/or wreck geometry fail",
+      "accepted_cells": [],
+      "rejected_cells": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "searchlight-l2-r2": {
+      "decision": "diagnostic only; whole/fire body identity and/or wreck geometry fail",
+      "accepted_cells": [],
+      "rejected_cells": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  }
+}

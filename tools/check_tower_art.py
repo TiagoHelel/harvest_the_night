@@ -4,11 +4,14 @@ from PIL import Image
 import import_art
 import gen_sprites
 
-# Each family's levels and the task whose art it is. The four legacy towers
-# are 0013's, three levels each; A038's hive (task 0237) has one step and
-# A039's catapult (task 0238) two.
-FAMILIES = {'gun_tower': (3, '0013'), 'flame_tower': (3, '0013'), 'mortar': (3, '0013'),
-            'auto_crossbow': (3, '0013'), 'beehive': (2, 'A038'), 'catapult': (3, 'A039')}
+# Each family's levels, the task whose art it is and the point it carries.
+# The four legacy towers are 0013's, three levels each; A038's hive (task
+# 0237) has one step and A039's catapult (task 0238) two. A041's searchlight
+# (task 0240) shoots nothing: it carries the lens its beam leaves from.
+FAMILIES = {'gun_tower': (3, '0013', 'muzzle'), 'flame_tower': (3, '0013', 'muzzle'),
+            'mortar': (3, '0013', 'muzzle'), 'auto_crossbow': (3, '0013', 'muzzle'),
+            'beehive': (2, 'A038', 'muzzle'), 'catapult': (3, 'A039', 'muzzle'),
+            'searchlight': (2, 'A041', 'light')}
 LEGACY = ('gun_tower', 'flame_tower', 'mortar', 'auto_crossbow')
 STATES = ('', '_hurt', '_fire', '_wreck')
 
@@ -21,7 +24,8 @@ def main():
     if set(migrated) != {'buildings/' + name for name in LEGACY}:
         raise ValueError('Legacy tower recipes still own a complete migrated family')
     levels = states = outlets = 0
-    for family, (count, task) in FAMILIES.items():
+    lenses = 0
+    for family, (count, task, point) in FAMILIES.items():
         whole_levels = []
         for level in range(1, count + 1):
             name = family + ('_%d' % level if level > 1 else '')
@@ -50,7 +54,17 @@ def main():
                 seen.append(image.tobytes())
                 if (import_art.ROOT / e['output']).read_bytes() != files[e['output']]:
                     raise ValueError('Runtime tower diverges from source: ' + ident)
-                if suffix != '_wreck':
+                if point == 'light':
+                    # A lamp's lens on every state but the wreck, on the art.
+                    if 'muzzle_xy' in e or 'muzzles_xy' in e:
+                        raise ValueError('A lamp carries a weapon outlet: ' + ident)
+                    if (suffix != '_wreck') != ('light_xy' in e):
+                        raise ValueError('A lamp state without its lens, or a wreck with one: ' + ident)
+                    if 'light_xy' in e:
+                        if image.getpixel(tuple(e['light_xy']))[3] != 255:
+                            raise ValueError('Lens floats outside source: ' + ident)
+                        lenses += 1
+                elif suffix != '_wreck':
                     points = e.get('muzzles_xy', [])
                     expected = 2 if family == 'gun_tower' and level == 3 else 1
                     if len(points) != expected or e.get('muzzle_xy') != points[0]:
@@ -83,7 +97,7 @@ def main():
         changed = sum(a != b for a, b in zip(import_art.samples(first), import_art.samples(last)))
         if changed < 80:
             raise ValueError('First/last level reinforcement is too small at native scale: ' + family)
-    print('OK: %d tower families / %d authored levels / %d distinct states, exact cuts, common canvas/contact, %d opaque weapon outlets and complete legacy migration' % (len(FAMILIES), levels, states, outlets))
+    print('OK: %d tower families / %d authored levels / %d distinct states, exact cuts, common canvas/contact, %d opaque weapon outlets, %d opaque lenses and complete legacy migration' % (len(FAMILIES), levels, states, outlets, lenses))
     return 0
 
 

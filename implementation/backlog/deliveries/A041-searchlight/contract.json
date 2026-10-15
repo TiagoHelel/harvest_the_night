@@ -1,0 +1,770 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "searchlight",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Changed stationary body and/or wreck footprint; see checks.",
+          "night": "preview/searchlight-none-0-night.png",
+          "path": "native/searchlight/none/01.png",
+          "points": {
+            "light_xy": [
+              21,
+              22
+            ]
+          },
+          "pose": "whole"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          22
+        ]
+      },
+      "poses": [
+        "whole"
+      ]
+    },
+    {
+      "anim": "searchlight_2",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Changed stationary body and/or wreck footprint; see checks.",
+          "night": "preview/searchlight_2-none-0-night.png",
+          "path": "native/searchlight_2/none/01.png",
+          "points": {
+            "light_xy": [
+              21,
+              18
+            ]
+          },
+          "pose": "whole"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          18
+        ]
+      },
+      "poses": [
+        "whole"
+      ]
+    },
+    {
+      "anim": "searchlight_2_fire",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Changed stationary body and/or wreck footprint; see checks.",
+          "night": "preview/searchlight_2_fire-none-0-night.png",
+          "path": "native/searchlight_2_fire/none/01.png",
+          "points": {
+            "light_xy": [
+              21,
+              18
+            ]
+          },
+          "pose": "fire"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          18
+        ]
+      },
+      "poses": [
+        "fire"
+      ]
+    },
+    {
+      "anim": "searchlight_2_hurt",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Changed stationary body and/or wreck footprint; see checks.",
+          "night": "preview/searchlight_2_hurt-none-0-night.png",
+          "path": "native/searchlight_2_hurt/none/01.png",
+          "points": {
+            "light_xy": [
+              21,
+              18
+            ]
+          },
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          18
+        ]
+      },
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "searchlight_2_wreck",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Changed stationary body and/or wreck footprint; see checks.",
+          "night": "preview/searchlight_2_wreck-none-0-night.png",
+          "path": "native/searchlight_2_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "wreck"
+      ]
+    },
+    {
+      "anim": "searchlight_fire",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Changed stationary body and/or wreck footprint; see checks.",
+          "night": "preview/searchlight_fire-none-0-night.png",
+          "path": "native/searchlight_fire/none/01.png",
+          "points": {
+            "light_xy": [
+              21,
+              22
+            ]
+          },
+          "pose": "fire"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          22
+        ]
+      },
+      "poses": [
+        "fire"
+      ]
+    },
+    {
+      "anim": "searchlight_hurt",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Changed stationary body and/or wreck footprint; see checks.",
+          "night": "preview/searchlight_hurt-none-0-night.png",
+          "path": "native/searchlight_hurt/none/01.png",
+          "points": {
+            "light_xy": [
+              21,
+              22
+            ]
+          },
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          22
+        ]
+      },
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "searchlight_wreck",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Changed stationary body and/or wreck footprint; see checks.",
+          "night": "preview/searchlight_wreck-none-0-night.png",
+          "path": "native/searchlight_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "wreck"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/gun_tower.png",
+      "pivot_xy": [
+        16,
+        44
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "accepted_checks": [
+        "searchlight_2_only_lens_changes",
+        "searchlight_2_wreck_inside_whole",
+        "searchlight_only_lens_changes"
+      ],
+      "change": "The owner accepted the exact displayed artwork, including the documented visual QA differences. Missing outputs are not approved or invented.",
+      "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+      "rule": "Reviewed visual constraints"
+    }
+  ],
+  "files": [
+    {
+      "anim": "searchlight",
+      "call": "raw/searchlight-l1-r3.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/searchlight/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          22
+        ]
+      },
+      "pose": "whole",
+      "prompt": "raw/searchlight-l1-r3.prompt.txt",
+      "prompt_sha256": "31fa752cfc4e09e82592fb1089a9d404813ee580d4caac25d6db695e28393ec3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03953147877013177,
+        "crop_xywh": [
+          62,
+          90,
+          423,
+          683
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          520,
+          792
+        ]
+      },
+      "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+      "runtime_name": "sprites/buildings/searchlight.png",
+      "seconds": 0.55,
+      "sha256": "1fe201a4caa32a2dc7812918acd35220ff20a6e1ea3868e263c14a0c79b7bb79",
+      "source": "raw/searchlight-l1-r3.png",
+      "source_sha256": "b0d52c603572790c60b53b64041b1c7de976f87f7058a8c68a8f4624afe49d92"
+    },
+    {
+      "anim": "searchlight_hurt",
+      "call": "raw/searchlight-l1-r3.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/searchlight_hurt/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          22
+        ]
+      },
+      "pose": "hurt",
+      "prompt": "raw/searchlight-l1-r3.prompt.txt",
+      "prompt_sha256": "31fa752cfc4e09e82592fb1089a9d404813ee580d4caac25d6db695e28393ec3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03953147877013177,
+        "crop_xywh": [
+          557,
+          98,
+          397,
+          677
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          520,
+          0,
+          504,
+          792
+        ]
+      },
+      "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+      "runtime_name": "sprites/buildings/searchlight_hurt.png",
+      "seconds": 0.55,
+      "sha256": "993916515cc2b5d0c334dd1e69f0b8b1eeec01c5073c293d033908851a87a8eb",
+      "source": "raw/searchlight-l1-r3.png",
+      "source_sha256": "b0d52c603572790c60b53b64041b1c7de976f87f7058a8c68a8f4624afe49d92"
+    },
+    {
+      "anim": "searchlight_fire",
+      "call": "raw/searchlight-l1-r3.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/searchlight_fire/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          22
+        ]
+      },
+      "pose": "fire",
+      "prompt": "raw/searchlight-l1-r3.prompt.txt",
+      "prompt_sha256": "31fa752cfc4e09e82592fb1089a9d404813ee580d4caac25d6db695e28393ec3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03953147877013177,
+        "crop_xywh": [
+          62,
+          811,
+          424,
+          679
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          792,
+          520,
+          744
+        ]
+      },
+      "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+      "runtime_name": "sprites/buildings/searchlight_fire.png",
+      "seconds": 0.55,
+      "sha256": "a18fe0706e26b8c3ae1ed1ee7fe990b4934114bde766e3aa5c805a95800259a5",
+      "source": "raw/searchlight-l1-r3.png",
+      "source_sha256": "b0d52c603572790c60b53b64041b1c7de976f87f7058a8c68a8f4624afe49d92"
+    },
+    {
+      "anim": "searchlight_wreck",
+      "call": "raw/searchlight-l1-r3.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/searchlight_wreck/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/searchlight-l1-r3.prompt.txt",
+      "prompt_sha256": "31fa752cfc4e09e82592fb1089a9d404813ee580d4caac25d6db695e28393ec3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03953147877013177,
+        "crop_xywh": [
+          556,
+          1158,
+          411,
+          332
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          520,
+          792,
+          504,
+          744
+        ]
+      },
+      "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+      "runtime_name": "sprites/buildings/searchlight_wreck.png",
+      "seconds": 0.55,
+      "sha256": "cbb01b49d3487a667d7849b5b45a86a6680c94de0168e6dfe4a9a8afd915d37d",
+      "source": "raw/searchlight-l1-r3.png",
+      "source_sha256": "b0d52c603572790c60b53b64041b1c7de976f87f7058a8c68a8f4624afe49d92"
+    },
+    {
+      "anim": "searchlight_2",
+      "call": "raw/searchlight-l2-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/searchlight_2/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          18
+        ]
+      },
+      "pose": "whole",
+      "prompt": "raw/searchlight-l2-r2.prompt.txt",
+      "prompt_sha256": "d36489607be164b2cd619a99428581f354b0ce29191fb887e354cec98f7a9aed",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04722222222222222,
+        "crop_xywh": [
+          67,
+          80,
+          418,
+          720
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          499,
+          813
+        ]
+      },
+      "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+      "runtime_name": "sprites/buildings/searchlight_2.png",
+      "seconds": 0.55,
+      "sha256": "0c6d6d03acb53fe66582fcae7bb8a2c5b27d6c66d243ae5e8619012815a98801",
+      "source": "raw/searchlight-l2-r2.png",
+      "source_sha256": "80b9748a55aa7e73be34bab4b4871f2238972f0bb55dfc333ee9b439e0d90d66"
+    },
+    {
+      "anim": "searchlight_2_hurt",
+      "call": "raw/searchlight-l2-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/searchlight_2_hurt/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          18
+        ]
+      },
+      "pose": "hurt",
+      "prompt": "raw/searchlight-l2-r2.prompt.txt",
+      "prompt_sha256": "d36489607be164b2cd619a99428581f354b0ce29191fb887e354cec98f7a9aed",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04722222222222222,
+        "crop_xywh": [
+          544,
+          80,
+          432,
+          720
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          499,
+          0,
+          525,
+          813
+        ]
+      },
+      "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+      "runtime_name": "sprites/buildings/searchlight_2_hurt.png",
+      "seconds": 0.55,
+      "sha256": "f5fd406a7b82a10075dbea3774241dd0ed087bb56ad0ffe6e4c9215ee784169c",
+      "source": "raw/searchlight-l2-r2.png",
+      "source_sha256": "80b9748a55aa7e73be34bab4b4871f2238972f0bb55dfc333ee9b439e0d90d66"
+    },
+    {
+      "anim": "searchlight_2_fire",
+      "call": "raw/searchlight-l2-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/searchlight_2_fire/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "light_xy": [
+          21,
+          18
+        ]
+      },
+      "pose": "fire",
+      "prompt": "raw/searchlight-l2-r2.prompt.txt",
+      "prompt_sha256": "d36489607be164b2cd619a99428581f354b0ce29191fb887e354cec98f7a9aed",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04722222222222222,
+        "crop_xywh": [
+          63,
+          827,
+          422,
+          680
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          813,
+          499,
+          723
+        ]
+      },
+      "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+      "runtime_name": "sprites/buildings/searchlight_2_fire.png",
+      "seconds": 0.55,
+      "sha256": "13d48ad7e0e903ab8e463f6057d5df797c34e673fbad400de9779b73529d692a",
+      "source": "raw/searchlight-l2-r2.png",
+      "source_sha256": "80b9748a55aa7e73be34bab4b4871f2238972f0bb55dfc333ee9b439e0d90d66"
+    },
+    {
+      "anim": "searchlight_2_wreck",
+      "call": "raw/searchlight-l2-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/searchlight_2_wreck/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/searchlight-l2-r2.prompt.txt",
+      "prompt_sha256": "d36489607be164b2cd619a99428581f354b0ce29191fb887e354cec98f7a9aed",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04722222222222222,
+        "crop_xywh": [
+          514,
+          1112,
+          495,
+          378
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          499,
+          813,
+          525,
+          723
+        ]
+      },
+      "review_issue": "Changed stationary body and/or wreck footprint; see checks.",
+      "runtime_name": "sprites/buildings/searchlight_2_wreck.png",
+      "seconds": 0.55,
+      "sha256": "f05e5e3625659c0fc34c19e0458d78e18ae6c7a811caeb61f11b76cdde45b208",
+      "source": "raw/searchlight-l2-r2.png",
+      "source_sha256": "80b9748a55aa7e73be34bab4b4871f2238972f0bb55dfc333ee9b439e0d90d66"
+    }
+  ],
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+    "scope": "complete_reviewed_delivery"
+  },
+  "pack": "A041",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\raw\\searchlight-master-r2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "00441c0a9aff3ffea53179bbd21f56959f5f21e7e964aae1cc4a707a4d253aa8"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\gun_tower.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\gun_tower_2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "f133d98f50bffc6f31e26598a9e91b7444d037d2d9cd0940fc2c7cc7ae5c830c"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A041-searchlight",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The searchlight",
+  "tool": "built-in ImageGen"
+}

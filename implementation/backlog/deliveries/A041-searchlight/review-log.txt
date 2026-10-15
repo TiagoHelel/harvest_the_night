@@ -1,0 +1,11 @@
+2026-10-14 / A041 task0229 done verified. Owner-authorized21newpackbatch. No intermediate art approval inferred.
+
+2026-10-14 / Measured native export
+Both state sheets reached r3 correction limit. L1 whole/fire still alter mast, cable or housing pixels outside lens; L2 latest layout has no alpha128 column gutter, so retained earlier measurable source.
+L2 safe common scale gives whole20x34, but wreck23px exceeds whole20px. L1 geometry is valid. All8stateframes remain diagnostics, zero production exports.
+No art approval inferred. 8 of 8 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+8/8 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: searchlight_2_only_lens_changes, searchlight_2_wreck_inside_whole, searchlight_only_lens_changes. Complete delivery released for Claude integration.

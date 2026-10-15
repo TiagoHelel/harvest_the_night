@@ -1,0 +1,198 @@
+{
+  "title": "The searchlight",
+  "date": "2026-10-14",
+  "status": "generating",
+  "palette_mode": "A",
+  "expected_files": 8,
+  "files": [
+    {
+      "anim": "searchlight",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole",
+      "output": "native/searchlight/none/01.png",
+      "runtime_name": "sprites/buildings/searchlight.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "searchlight_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "hurt",
+      "output": "native/searchlight_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/searchlight_hurt.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "searchlight_fire",
+      "dir": "none",
+      "frame": 0,
+      "pose": "fire",
+      "output": "native/searchlight_fire/none/01.png",
+      "runtime_name": "sprites/buildings/searchlight_fire.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "searchlight_wreck",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wreck",
+      "output": "native/searchlight_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/searchlight_wreck.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "searchlight_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole",
+      "output": "native/searchlight_2/none/01.png",
+      "runtime_name": "sprites/buildings/searchlight_2.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "searchlight_2_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "hurt",
+      "output": "native/searchlight_2_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/searchlight_2_hurt.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "searchlight_2_fire",
+      "dir": "none",
+      "frame": 0,
+      "pose": "fire",
+      "output": "native/searchlight_2_fire/none/01.png",
+      "runtime_name": "sprites/buildings/searchlight_2_fire.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "searchlight_2_wreck",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wreck",
+      "output": "native/searchlight_2_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/searchlight_2_wreck.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "mirror_pairs": {},
+  "comparison": [
+    {
+      "path": "sprites/buildings/gun_tower.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1
+    }
+  ]
+}

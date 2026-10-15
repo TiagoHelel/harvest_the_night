@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####################....`  **250 / 296 done**
+`####################....`  **251 / 296 done**
 
-0 doing / 46 todo / 0 blocked across 18 phases.
+0 doing / 45 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-46 task(s) left, the ready ones first, then what they
+45 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -124,7 +124,7 @@ The farmer's reactions at the 32px detail of his new body, and the Zzz that rise
 
 ### 0145 - Art: the porch guardian
 
-Waits for Codex art A003.  Likely files: `assets/art_source/guardian/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_view.gd, src/ui/lighting.gd, tools/check_prop_art.py, tools/show_art.py, tools/verify.py`.
+Ready to pick up.  Likely files: `assets/art_source/guardian/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_view.gd, src/ui/lighting.gd, tools/check_prop_art.py, tools/show_art.py, tools/verify.py`.
 
 The porch scarecrow that becomes the guardian at night, from Codex pack A003, replacing 0131's placeholder.
 
@@ -141,7 +141,7 @@ The porch scarecrow that becomes the guardian at night, from Codex pack A003, re
 
 ### 0146 - Art: the guardian's cursor
 
-Waits for Codex art A004.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_cursor.gd, tools/check_ui_art.py, tools/show_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_cursor.gd, tools/check_ui_art.py, tools/show_art.py`.
 
 The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131's code-drawn outline.
 
@@ -158,7 +158,7 @@ The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131'
 
 ### 0200 - Art: autumn crops
 
-Waits for Codex art A017.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py`.
 
 Pumpkin, the grape on its trellis and beet, and the autumn seed packets, get their approved art.
 
@@ -176,7 +176,7 @@ Pumpkin, the grape on its trellis and beet, and the autumn seed packets, get the
 
 ### 0201 - Art: sprinklers
 
-Waits for Codex art A018.  Likely files: `assets/art_source/props/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_ui_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/props/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_ui_art.py`.
 
 The copper, iron and gold sprinklers of 0178 get their approved bodies and icons; the spray stays code particles.
 
@@ -194,7 +194,7 @@ The copper, iron and gold sprinklers of 0178 get their approved bodies and icons
 
 ### 0206 - Art: fishing gear and the minigame
 
-Waits for Codex art A023.  Likely files: `assets/art_source/ui/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/fishing_bar.gd`.
+Ready to pick up.  Likely files: `assets/art_source/ui/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_ui_art.py, src/ui/fishing_bar.gd`.
 
 The bobber, the bait icons, the pieces of the fishing bar and the fish-book tab get their approved art.
 
@@ -248,7 +248,7 @@ The farmer milks, shears and feeds with a proper pose, and pets the dog, at the 
 
 ### 0209 - Art: sheep and pigs
 
-Waits for Codex art A026.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/animal_view.gd`.
+Ready to pick up.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/animal_view.gd`.
 
 Sheep and pigs get their approved art and the view states 0185 gave them.
 
@@ -266,7 +266,7 @@ Sheep and pigs get their approved art and the view states 0185 gave them.
 
 ### 0210 - Art: the cow and the chicken redrawn
 
-Waits for Codex art A027.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/animal_view.gd`.
+Ready to pick up.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/animal_view.gd`.
 
 Today's 24x24 cow and chicken are redrawn at the farmer's scale with idle, walk, eat and sleep.
 
@@ -284,7 +284,7 @@ Today's 24x24 cow and chicken are redrawn at the farmer's scale with idle, walk,
 
 ### 0212 - Art: the coop and the barn
 
-Waits for Codex art A030.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_station_art.py, src/ui/art_placement.gd`.
+Ready to pick up.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_station_art.py, src/ui/art_placement.gd`.
 
 The coop and the barn get their approved art - whole, hurt and wrecked-but-standing - in place of 0183's stand-ins.
 
@@ -302,7 +302,7 @@ The coop and the barn get their approved art - whole, hurt and wrecked-but-stand
 
 ### 0215 - Art: the shipping bin
 
-Waits for Codex art A033.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py`.
 
 The shipping bin of 0189 gets its approved art, lid and all.
 
@@ -320,7 +320,7 @@ The shipping bin of 0189 gets its approved art, lid and all.
 
 ### 0216 - Art: the peddler
 
-Waits for Codex art A034.  Likely files: `assets/art_source/npc/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_station_art.py, tools/check_npc_art.py (new), tools/verify.py`.
+Ready to pick up.  Likely files: `assets/art_source/npc/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_station_art.py, tools/check_npc_art.py (new), tools/verify.py`.
 
 The peddler at the stall and the stall's closed state get their approved art.
 
@@ -338,7 +338,7 @@ The peddler at the stall and the stall's closed state get their approved art.
 
 ### 0217 - Art: the house in three tiers
 
-Waits for Codex art A035.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd`.
+Ready to pick up.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd`.
 
 House tiers I, II and III get their approved exteriors, whole and hurt; tier III reads as a small fortified farmhouse.
 
@@ -356,7 +356,7 @@ House tiers I, II and III get their approved exteriors, whole and hurt; tier III
 
 ### 0235 - Art: bones, moon stones and essence
 
-Waits for Codex art A036.  Likely files: `assets/art_source/props/, assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_crop_art.py, tools/check_ui_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/props/, assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_crop_art.py, tools/check_ui_art.py`.
 
 The approved bones, moon stones, fertilised soil and night-loot icons go into the game in place of the stand-ins 0219, 0221 and 0222 left - essence's icon included.
 
@@ -371,25 +371,6 @@ The approved bones, moon stones, fertilised soil and night-loot icons go into th
   - done when: The family checks (`check_prop_art.py`, `check_crop_art.py`, `check_ui_art.py`) and the showcase (`python tools/show_art.py --props --check`, `python tools/show_art.py --crops --check` and `python tools/show_art.py --ui --check`) pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of bone piles, a moon stone, a fertilised plot and the essence counter in the real game, opened and looked at, in `implementation/shots/0235/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0240 - Art: the searchlight
-
-Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/import_art.py`.
-
-The approved searchlight replaces the stand-in 0229 left, and its beam starts from the lamp the art draws.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A041` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A041-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_tower_art.py` `FAMILIES`, `ArtPlacement` if needed).
-- `buildings/searchlight` and `searchlight_2` x the four states at 32x48 with a `light_xy` point on an opaque pixel in place of the muzzle `check_tower_art.py` demands of a gun; the per-family level count, metadata point and `tower` metadata as 0237 left them (make them here if it has not landed), `gen_sprites.migrated_towers()` still the four legacy families
-- The beam stays code and starts from `light_xy`; what is lit is still `Light.is_lit` (0229), never the sprite
-- Retire 0229's stand-in from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A041 integrated`.
-
-  - done when: The family checks (`check_tower_art.py`) and the showcase (`python tools/show_art.py --towers --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of searchlights at both levels lighting a tower line in the real game, opened and looked at, in `implementation/shots/0240/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
 ### 0241 - Art: the electric fence
@@ -728,7 +709,7 @@ The book cover, the four boss trophies and the achievement badges Codex drew rep
 
 ### 0289 - Art: the morning report
 
-Waits for Codex art A057.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
+Ready to pick up.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
 
 A small sunrise over the farmhouse heads 0138's morning report. Optional: if the owner declines the pack, the header 0138 drew becomes the shipped look and this task closes with a note.
 
@@ -765,7 +746,7 @@ The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpo
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -1057,8 +1038,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md)
 - [ ] **0143** [Art: going to bed and sleeping](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
-- [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
-- [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
+- [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md)
+- [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md)
 - [x] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md)
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
@@ -1118,26 +1099,26 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0197** [Art: trampled crops and tilled ground](prompts/0197-art-crop-ground.md)
 - [x] **0198** [Art: spring crops](prompts/0198-art-spring-crops.md)
 - [x] **0199** [Art: summer crops](prompts/0199-art-summer-crops.md)
-- [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md) - waits for art A017
-- [ ] **0201** [Art: sprinklers](prompts/0201-art-sprinklers.md) - waits for art A018
+- [ ] **0200** [Art: autumn crops](prompts/0200-art-autumn-crops.md)
+- [ ] **0201** [Art: sprinklers](prompts/0201-art-sprinklers.md)
 - [x] **0202** [Art: tool icons](prompts/0202-art-tool-icons.md)
 - [x] **0203** [Art: material icons](prompts/0203-art-material-icons.md)
 - [x] **0204** [Art: copper, coal, gold and hardwood](prompts/0204-art-ore-hardwood.md)
 - [x] **0205** [Art: fish](prompts/0205-art-fish-icons.md)
-- [ ] **0206** [Art: fishing gear and the minigame](prompts/0206-art-fishing-gear.md) - waits for art A023
+- [ ] **0206** [Art: fishing gear and the minigame](prompts/0206-art-fishing-gear.md)
 - [ ] **0207** [Art: the farmer fishing](prompts/0207-art-farmer-fishing.md) - waits for art A024
 - [ ] **0208** [Art: the farmer tending animals](prompts/0208-art-farmer-care.md) - waits for art A025
-- [ ] **0209** [Art: sheep and pigs](prompts/0209-art-farm-animals.md) - waits for art A026
-- [ ] **0210** [Art: the cow and the chicken redrawn](prompts/0210-art-cow-chicken.md) - waits for art A027
+- [ ] **0209** [Art: sheep and pigs](prompts/0209-art-farm-animals.md)
+- [ ] **0210** [Art: the cow and the chicken redrawn](prompts/0210-art-cow-chicken.md)
 - [x] **0211** [Art: animal goods](prompts/0211-art-animal-goods.md)
-- [ ] **0212** [Art: the coop and the barn](prompts/0212-art-coop-barn.md) - waits for art A030
+- [ ] **0212** [Art: the coop and the barn](prompts/0212-art-coop-barn.md)
 - [x] **0213** [Art: the artisan machines](prompts/0213-art-machines.md)
 - [x] **0214** [Art: artisan goods](prompts/0214-art-artisan-goods.md)
-- [ ] **0215** [Art: the shipping bin](prompts/0215-art-shipping-bin.md) - waits for art A033
-- [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
-- [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
+- [ ] **0215** [Art: the shipping bin](prompts/0215-art-shipping-bin.md)
+- [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md)
+- [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md)
 
-## 13 - Weapons of the night  (21/28)
+## 13 - Weapons of the night  (22/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
@@ -1156,12 +1137,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0232** [Powers as a list](prompts/0232-powers-refactor.md)
 - [x] **0233** [Three new powers](prompts/0233-new-powers.md)
 - [x] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md)
-- [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
+- [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md)
 - [x] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md)
 - [x] **0237** [Art: the beehive](prompts/0237-art-beehive.md)
 - [x] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md)
 - [x] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md)
-- [ ] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md)
+- [x] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md)
 - [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md)
 - [ ] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md)
 - [ ] **0243** [Art: the day tarps](prompts/0243-art-tarps.md)
@@ -1219,8 +1200,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md)
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
-- [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
+- [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md)
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (2/7)
 

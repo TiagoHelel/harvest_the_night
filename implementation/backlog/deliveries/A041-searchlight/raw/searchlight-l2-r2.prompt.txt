@@ -1,0 +1,13 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT.
+Primary request: ONE level1 SEARCHLIGHT identity master, whole/unlit. A powered farm lamp, NOT a gun.
+Input images: Image1 is the accepted searchlight identity master. Image2 is the gun tower native size and camera reference only, not weapon shape.
+Style/medium: coherent hand-crafted pixel art, deliberate simple pixel clusters, coloured outlines, restrained texture, readable material planes. Design for native pixels, broad shapes, no microscopic details.
+Composition/framing: orthographic three-quarter top-down camera on rectangular grid. Final native32x48, groundpivot(16,44). Visible body17wide x27high (width:height0.63), lowest row43, base centred. NOT a diamond ground tile.
+Lighting: neutral daytime upper-left, runtime supplies night and all beams/glow.
+Color: warm timber, dark iron, beige ceramic touches, UNLIT lens dark blue/violet glass with ONE small top-left pale highlight.
+
+TOWER family: Searchlight level2. Larger lamp drum with brass rim and cooling fins, braced iron/timber lattice mast with short ladder, on stone footing. Whole silhouette target 21 wide x32high on32x48 canvas, base centre16,44. Lens faces viewer slightly towardright, darkglass circle8–9nativepixels across, opaque1pixelrim.
+FOUR-STATE SHEET: two rows, two columns, top-left WHOLE unlit dark lens with one highlight; top-right HURT dentedhood, inkcrack inlens, bentbrace, loosecable, lens remains. Bottom-left FIRE lampatfull, identical WHOLE pixels outside lens face, ONLY glass filled flat pale bone/roof_light, rim remains; no beam/rays/glow. Bottom-right WRECK mast collapsed, drum onside, shatteredlens, low inside wholewidth. Copy WHOLE mast/base/cable/rim to FIRE pixel-for-pixel; do not repaint/reposition. Lamp never shoots.
+LAYOUT CLEARANCE: four complete smallobjects within SQUARE sheet, atmost45percentcellwidth/height, FULL transparentcrossgutters at least30percentcell. Raisedparts/wreckinside eachcell. Same magnification/camera/base centre/baseline; do not enlarge collapsedpose. Truealpha0outside edges, no glows/haze/shadows/text/checker/grid. Input Image1 approved identity master; Image2gun_tower_2 levelgrowthonly. Same materials and upper-left light.
+CORRECTION: Image3 edit target. Correct the level2 footprint proportions: WHOLE18x32, required20–22x30–34; WRECK21px wider thanWHOLE18. Widen standing lattice mast footing and roundlamp by18percent without lengthening height, giving21x32, and gather collapsedwreck to19pxwidth withinstandingfootprint. Keep shared whole/firebody exact, litglassonly. Preserve level2 brassrim/coolingfins/ladder/stonefooting, same camera/light/scale. True transparency.

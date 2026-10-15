@@ -1,6 +1,6 @@
 # A041 - The searchlight
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0240
 - **Dressed by game tasks:** 0229
 - **Spec after game task:** 0229

@@ -104,6 +104,7 @@ func _run() -> void:
 	await _depth()
 	await _loaded_rubble()
 	await _mixed_night()
+	await _searchlights()
 	print("TOWER SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
 
@@ -468,6 +469,51 @@ func _mixed_night() -> void:
 				if Rect2i(Vector2i.ZERO, lit.get_size()).has_point(p) and lit.get_pixelv(p).r > off.get_pixelv(p).r + 0.02:
 					changed += 1
 		expect(changed >= 4, "Rendered night lamps brighten actual measured weapon outlets: " + str(changed))
+
+
+## **A041's searchlight** (task 0240): an authored tower that shoots nothing.
+## Both levels, at night with all the power they want and then by day: lit
+## (`_fire`) only at night at full power, hurt and wrecked as the guns are,
+## and the beam's lens - `Lighting._lens_of` - on the art's `light` point,
+## never a muzzle.
+func _searchlights() -> void:
+	for light in [2, 0]:
+		_state = _blank(light)
+		var lamps: Array[Vector2i] = [Vector2i(12, 9), Vector2i(18, 9)]
+		for i in lamps.size():
+			_place(&"searchlight", i + 1, lamps[i])
+		var full := WorldView.lamp_at_full(_state)
+		await _settle()
+		for i in lamps.size():
+			var on := Farm.occupant(_state, lamps[i])
+			var sprite := _sprite(lamps[i])
+			var suffix := "_fire" if full else ""
+			var path := WorldView.BUILDING_DIR + str(WorldView.tower_name(on, suffix)) + ".png"
+			expect(sprite != null and sprite.texture.resource_path == path, "A searchlight wears %s %s" % [path, "at night at full power" if full else "by day"])
+			if sprite != null:
+				expect(sprite.offset == Vector2(-16, -44) and sprite.position == Vector2(lamps[i]) * 16 + Vector2(8, 16), "A searchlight stands on the towers' one-cell contact")
+			var frame: Dictionary = RasterArt.FRAMES[WorldView.BUILDING_DIR + str(WorldView.tower_name(on)) + ".png"]
+			var lens := _lighting._lens_of(on, lamps[i])
+			expect(lens == Vector2(lamps[i]) * 16 + Vector2(8, 16) - Vector2(frame["pivot"]) + Vector2(frame["light"]) and not frame.has("muzzle"),
+				"The beam leaves from the art's lens, not a muzzle: " + str(lens))
+		expect(not full or light == 2, "Only the night lights a lamp")
+		await _shoot("searchlight_%d" % light, "Searchlight L1 / L2 - lens lit at night at full power, dark by day")
+	for cell in [Vector2i(12, 9), Vector2i(18, 9)]:
+		var on := Farm.occupant(_state, cell)
+		Farm.damage(_state, cell, int(on["hp"]) / 2 + 1)
+	await _settle()
+	for cell in [Vector2i(12, 9), Vector2i(18, 9)]:
+		var on := Farm.occupant(_state, cell)
+		expect(_sprite(cell).texture.resource_path == WorldView.BUILDING_DIR + str(WorldView.tower_name(on, "_hurt")) + ".png", "A hurt searchlight by day")
+	for cell in [Vector2i(12, 9), Vector2i(18, 9)]:
+		Farm.damage(_state, cell, 9999)
+	await _settle()
+	for i in 2:
+		var cell: Vector2i = [Vector2i(12, 9), Vector2i(18, 9)][i]
+		var sprite: Sprite2D = _world._wreck_sprites.get(Grid.index(cell))
+		expect(sprite != null and sprite.texture.resource_path == WorldView.BUILDING_DIR + ("searchlight_2_wreck" if i == 1 else "searchlight_wreck") + ".png",
+			"A searchlight brought down lies as its level's wreck")
+	await _shoot("searchlight_wrecks", "Searchlight wrecks at both levels")
 
 
 func _shoot(name: String, caption: String) -> void:

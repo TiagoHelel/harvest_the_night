@@ -1,0 +1,41 @@
+[
+  {
+    "recipe": {
+      "id": "searchlight-master-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\raw\\searchlight-master-r1.png",
+      "crop_xywh": [
+        243,
+        309,
+        581,
+        1058
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1051,
+        1496
+      ],
+      "content_scale": 0.02551984877126654,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      9,
+      17,
+      24,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      15,
+      27
+    ]
+  }
+]

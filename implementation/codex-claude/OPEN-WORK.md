@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-15**, with task 0239's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-15**, with task 0240's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 250 done, 46 todo, 0 blocked (84%).**
+**The game backlog: 296 tasks, 251 done, 45 todo, 0 blocked (85%).**
 17 art integrations are ready, one a run as the owner asks (`task.py next`
-says 0240). 20 more wait on art that is blocked or deferred (3b, 3c), and
+says 0241). 20 more wait on art that is blocked or deferred (3b, 3c), and
 the rest of the backlog on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -58,7 +58,7 @@ The owner approved 15 at 16:56 and the other six's additions at 21:11
 | A038 | The beehive (**integrated** by 0237, 2026-10-14) | 0237 |
 | A039 | The pumpkin catapult (**integrated** by 0238, 2026-10-14) | 0238 |
 | A040 | The garlic braid (**integrated** by 0239, 2026-10-15) | 0239 |
-| A041 | The searchlight | 0240 |
+| A041 | The searchlight (**integrated** by 0240, 2026-10-15) | 0240 |
 | A042 | The electric fence | 0241 |
 | A043 | Hardwood walls and sandbags | 0242 |
 | A044 | Day tarps over the defences | 0243 |
@@ -86,39 +86,37 @@ Notes for the six released at 21:11:
   - A042: the post span and the sparks;
   - A054: the death's height.
 
-### 3b. The 13 packs once blocked: redone, waiting on the owner's review
+### 3b. The 13 packs once blocked: approved 2026-10-15, ready
 
 The owner reopened them and authorised composing sources from ImageGen
-crops. Codex redid all 13 (182 native PNGs, every measured check passing)
-and set them to `review` on 2026-10-14. **Nothing is integrated until the
-owner approves the new hashes.**
-- The review page is
-  `implementation/backlog/deliveries/A003-guardian/retry-final-review.html`.
-- The details are `CLAUDE-RETRY-REVIEW.md` and `retry-final-inventory.json`
-  in the same folder.
+crops. Codex redid all 13 (182 native PNGs, every measured check passing),
+and the owner approved them all on 2026-10-15 ("tudo aprovado, avisa o
+claude, que mais temos pra fazer?"). The handoff is
+`implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-APPROVED.md`,
+and each pack has its own `APPROVAL.json` and `CLAUDE-Axxx-PROMPT.txt`.
 
-Promoting them will mean composing parts and components, not cropping one
+Promoting them means composing parts and components, not cropping one
 source:
 - A034 mixes draw scales.
 - A035's house tiers are 128x128 at draw 1.
 
-The table below is why each stopped the first time.
+**Claude integrates each through its game task, one a run**:
 
-| Pack | What | Game task | Why it stopped |
-| --- | --- | --- | --- |
-| A003 | The porch guardian | 0145 | Eyes and crossbar unreadable at native size |
-| A004 | The guardian's cursor | 0146 | Bracket and pulse geometry not exact |
-| A017 | Autumn crops | 0200 | Grape r3 too small; plot pixels over the cap |
-| A018 | Sprinklers | 0201 | Strips change base pixels; nozzle rise not 2px |
-| A023 | Fishing gear and the minigame | 0206 | Zone 8x5 not 8x6; track geometry |
-| A026 | Sheep and pigs | 0209 | Feet move on idle; grounding |
-| A027 | The cow and the chicken redrawn | 0210 | Feet and grounding; a cow frame came back a hen |
-| A030 | The coop and the barn | 0212 | Window glints lost at native size |
-| A033 | The shipping bin | 0215 | Base changes; closed width 17 not 18-20 |
-| A034 | The peddler at the stall | 0216 | Extra animations; pixels outside the opening |
-| A035 | The house in three tiers | 0217 | Tier 1 ends on row 117 not 119 |
-| A036 | Bones, moon stones and essence | 0235 | Fertilised soil too sparse; wet tile not opaque |
-| A057 | The morning report header (optional) | 0289 | Wrong sky ramp; noisy clusters |
+| Pack | What | Game task |
+| --- | --- | --- |
+| A003 | The porch guardian | 0145 |
+| A004 | The guardian's cursor | 0146 |
+| A017 | Autumn crops | 0200 |
+| A018 | Sprinklers | 0201 |
+| A023 | Fishing gear and the minigame | 0206 |
+| A026 | Sheep and pigs | 0209 |
+| A027 | The cow and the chicken redrawn | 0210 |
+| A030 | The coop and the barn | 0212 |
+| A033 | The shipping bin | 0215 |
+| A034 | The peddler at the stall | 0216 |
+| A035 | The house in three tiers | 0217 |
+| A036 | Bones, moon stones and essence | 0235 |
+| A057 | The morning report header (optional) | 0289 |
 
 ### 3c. Farmer sprites the owner deferred (7)
 

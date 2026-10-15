@@ -63578,6 +63578,580 @@
         18
       ],
       "output_sha256": "707f14928903e0beaad2679142fbc16ce169764ff9a0ddd252362fac28c6de64"
+    },
+    {
+      "id": "buildings/searchlight",
+      "owner": "raster",
+      "source": "assets/art_source/defences/searchlight/searchlight-l1-r3.png",
+      "source_sha256": "b0d52c603572790c60b53b64041b1c7de976f87f7058a8c68a8f4624afe49d92",
+      "crop_xywh": [
+        62,
+        90,
+        423,
+        683
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "searchlight",
+      "tower_level": 1,
+      "content_scale": 0.03953147877013177,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/searchlight",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/searchlight.png",
+      "light_xy": [
+        21,
+        22
+      ],
+      "prompt": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r3.prompt.txt",
+      "prompt_sha256": "31fa752cfc4e09e82592fb1089a9d404813ee580d4caac25d6db695e28393ec3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r3.call.json",
+          "sha256": "37c55efae4fcae7fd5dc5076a9b174f20ef21a30717f0ff40b422a0be55d46a3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/native/searchlight/none/01.png",
+          "sha256": "1fe201a4caa32a2dc7812918acd35220ff20a6e1ea3868e263c14a0c79b7bb79",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/contract.json",
+          "sha256": "822599ab1d011099c820cd2d17f59906be546aaa47d314c1cd452bf6e5474f9a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/APPROVAL.json",
+          "sha256": "a2e35d15559f566abb582ff310a22790630fdb51f12ae7d2e0da2b96726fd476",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A041",
+      "integration_task": "0240",
+      "revision": 1,
+      "approval": "A041 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0240",
+      "content_anchor_xy": [
+        8,
+        27
+      ],
+      "output_sha256": "1fe201a4caa32a2dc7812918acd35220ff20a6e1ea3868e263c14a0c79b7bb79"
+    },
+    {
+      "id": "buildings/searchlight_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/searchlight/searchlight-l1-r3.png",
+      "source_sha256": "b0d52c603572790c60b53b64041b1c7de976f87f7058a8c68a8f4624afe49d92",
+      "crop_xywh": [
+        557,
+        98,
+        397,
+        677
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "searchlight",
+      "tower_level": 1,
+      "variant_of": "buildings/searchlight",
+      "content_scale": 0.03953147877013177,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/searchlight_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/searchlight_hurt.png",
+      "light_xy": [
+        21,
+        22
+      ],
+      "prompt": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r3.prompt.txt",
+      "prompt_sha256": "31fa752cfc4e09e82592fb1089a9d404813ee580d4caac25d6db695e28393ec3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r3.call.json",
+          "sha256": "37c55efae4fcae7fd5dc5076a9b174f20ef21a30717f0ff40b422a0be55d46a3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/native/searchlight_hurt/none/01.png",
+          "sha256": "993916515cc2b5d0c334dd1e69f0b8b1eeec01c5073c293d033908851a87a8eb",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/contract.json",
+          "sha256": "822599ab1d011099c820cd2d17f59906be546aaa47d314c1cd452bf6e5474f9a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/APPROVAL.json",
+          "sha256": "a2e35d15559f566abb582ff310a22790630fdb51f12ae7d2e0da2b96726fd476",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A041",
+      "integration_task": "0240",
+      "revision": 1,
+      "approval": "A041 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0240",
+      "content_anchor_xy": [
+        8,
+        27
+      ],
+      "output_sha256": "993916515cc2b5d0c334dd1e69f0b8b1eeec01c5073c293d033908851a87a8eb"
+    },
+    {
+      "id": "buildings/searchlight_fire",
+      "owner": "raster",
+      "source": "assets/art_source/defences/searchlight/searchlight-l1-r3.png",
+      "source_sha256": "b0d52c603572790c60b53b64041b1c7de976f87f7058a8c68a8f4624afe49d92",
+      "crop_xywh": [
+        62,
+        811,
+        424,
+        679
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "searchlight",
+      "tower_level": 1,
+      "variant_of": "buildings/searchlight",
+      "content_scale": 0.03953147877013177,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/searchlight_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/searchlight_fire.png",
+      "light_xy": [
+        21,
+        22
+      ],
+      "prompt": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r3.prompt.txt",
+      "prompt_sha256": "31fa752cfc4e09e82592fb1089a9d404813ee580d4caac25d6db695e28393ec3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r3.call.json",
+          "sha256": "37c55efae4fcae7fd5dc5076a9b174f20ef21a30717f0ff40b422a0be55d46a3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/native/searchlight_fire/none/01.png",
+          "sha256": "a18fe0706e26b8c3ae1ed1ee7fe990b4934114bde766e3aa5c805a95800259a5",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/contract.json",
+          "sha256": "822599ab1d011099c820cd2d17f59906be546aaa47d314c1cd452bf6e5474f9a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/APPROVAL.json",
+          "sha256": "a2e35d15559f566abb582ff310a22790630fdb51f12ae7d2e0da2b96726fd476",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A041",
+      "integration_task": "0240",
+      "revision": 1,
+      "approval": "A041 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0240",
+      "content_anchor_xy": [
+        8,
+        27
+      ],
+      "output_sha256": "a18fe0706e26b8c3ae1ed1ee7fe990b4934114bde766e3aa5c805a95800259a5"
+    },
+    {
+      "id": "buildings/searchlight_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/defences/searchlight/searchlight-l1-r3.png",
+      "source_sha256": "b0d52c603572790c60b53b64041b1c7de976f87f7058a8c68a8f4624afe49d92",
+      "crop_xywh": [
+        556,
+        1158,
+        411,
+        332
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "searchlight",
+      "tower_level": 1,
+      "variant_of": "buildings/searchlight",
+      "content_scale": 0.03953147877013177,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/searchlight_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/searchlight_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r3.prompt.txt",
+      "prompt_sha256": "31fa752cfc4e09e82592fb1089a9d404813ee580d4caac25d6db695e28393ec3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r3.call.json",
+          "sha256": "37c55efae4fcae7fd5dc5076a9b174f20ef21a30717f0ff40b422a0be55d46a3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/native/searchlight_wreck/none/01.png",
+          "sha256": "cbb01b49d3487a667d7849b5b45a86a6680c94de0168e6dfe4a9a8afd915d37d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/contract.json",
+          "sha256": "822599ab1d011099c820cd2d17f59906be546aaa47d314c1cd452bf6e5474f9a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/APPROVAL.json",
+          "sha256": "a2e35d15559f566abb582ff310a22790630fdb51f12ae7d2e0da2b96726fd476",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A041",
+      "integration_task": "0240",
+      "revision": 1,
+      "approval": "A041 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0240",
+      "content_anchor_xy": [
+        8,
+        13
+      ],
+      "output_sha256": "cbb01b49d3487a667d7849b5b45a86a6680c94de0168e6dfe4a9a8afd915d37d"
+    },
+    {
+      "id": "buildings/searchlight_2",
+      "owner": "raster",
+      "source": "assets/art_source/defences/searchlight/searchlight-l2-r2.png",
+      "source_sha256": "80b9748a55aa7e73be34bab4b4871f2238972f0bb55dfc333ee9b439e0d90d66",
+      "crop_xywh": [
+        67,
+        80,
+        418,
+        720
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "searchlight",
+      "tower_level": 2,
+      "content_scale": 0.04722222222222222,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/searchlight_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/searchlight_2.png",
+      "light_xy": [
+        21,
+        18
+      ],
+      "prompt": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l2-r2.prompt.txt",
+      "prompt_sha256": "d36489607be164b2cd619a99428581f354b0ce29191fb887e354cec98f7a9aed",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l2-r2.call.json",
+          "sha256": "ea75b280b6555468aab31c21a36043d28830f78f9e36c5f5c41d30f8f4d0f4ee",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/native/searchlight_2/none/01.png",
+          "sha256": "0c6d6d03acb53fe66582fcae7bb8a2c5b27d6c66d243ae5e8619012815a98801",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/contract.json",
+          "sha256": "822599ab1d011099c820cd2d17f59906be546aaa47d314c1cd452bf6e5474f9a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/APPROVAL.json",
+          "sha256": "a2e35d15559f566abb582ff310a22790630fdb51f12ae7d2e0da2b96726fd476",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A041",
+      "integration_task": "0240",
+      "revision": 1,
+      "approval": "A041 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0240",
+      "content_anchor_xy": [
+        10,
+        34
+      ],
+      "output_sha256": "0c6d6d03acb53fe66582fcae7bb8a2c5b27d6c66d243ae5e8619012815a98801"
+    },
+    {
+      "id": "buildings/searchlight_2_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/searchlight/searchlight-l2-r2.png",
+      "source_sha256": "80b9748a55aa7e73be34bab4b4871f2238972f0bb55dfc333ee9b439e0d90d66",
+      "crop_xywh": [
+        544,
+        80,
+        432,
+        720
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "searchlight",
+      "tower_level": 2,
+      "variant_of": "buildings/searchlight_2",
+      "content_scale": 0.04722222222222222,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/searchlight_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/searchlight_2_hurt.png",
+      "light_xy": [
+        21,
+        18
+      ],
+      "prompt": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l2-r2.prompt.txt",
+      "prompt_sha256": "d36489607be164b2cd619a99428581f354b0ce29191fb887e354cec98f7a9aed",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l2-r2.call.json",
+          "sha256": "ea75b280b6555468aab31c21a36043d28830f78f9e36c5f5c41d30f8f4d0f4ee",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/native/searchlight_2_hurt/none/01.png",
+          "sha256": "f5fd406a7b82a10075dbea3774241dd0ed087bb56ad0ffe6e4c9215ee784169c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/contract.json",
+          "sha256": "822599ab1d011099c820cd2d17f59906be546aaa47d314c1cd452bf6e5474f9a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/APPROVAL.json",
+          "sha256": "a2e35d15559f566abb582ff310a22790630fdb51f12ae7d2e0da2b96726fd476",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A041",
+      "integration_task": "0240",
+      "revision": 1,
+      "approval": "A041 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0240",
+      "content_anchor_xy": [
+        10,
+        34
+      ],
+      "output_sha256": "f5fd406a7b82a10075dbea3774241dd0ed087bb56ad0ffe6e4c9215ee784169c"
+    },
+    {
+      "id": "buildings/searchlight_2_fire",
+      "owner": "raster",
+      "source": "assets/art_source/defences/searchlight/searchlight-l2-r2.png",
+      "source_sha256": "80b9748a55aa7e73be34bab4b4871f2238972f0bb55dfc333ee9b439e0d90d66",
+      "crop_xywh": [
+        63,
+        827,
+        422,
+        680
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "searchlight",
+      "tower_level": 2,
+      "variant_of": "buildings/searchlight_2",
+      "content_scale": 0.04722222222222222,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/searchlight_2_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/searchlight_2_fire.png",
+      "light_xy": [
+        21,
+        18
+      ],
+      "prompt": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l2-r2.prompt.txt",
+      "prompt_sha256": "d36489607be164b2cd619a99428581f354b0ce29191fb887e354cec98f7a9aed",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l2-r2.call.json",
+          "sha256": "ea75b280b6555468aab31c21a36043d28830f78f9e36c5f5c41d30f8f4d0f4ee",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/native/searchlight_2_fire/none/01.png",
+          "sha256": "13d48ad7e0e903ab8e463f6057d5df797c34e673fbad400de9779b73529d692a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/contract.json",
+          "sha256": "822599ab1d011099c820cd2d17f59906be546aaa47d314c1cd452bf6e5474f9a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/APPROVAL.json",
+          "sha256": "a2e35d15559f566abb582ff310a22790630fdb51f12ae7d2e0da2b96726fd476",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A041",
+      "integration_task": "0240",
+      "revision": 1,
+      "approval": "A041 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0240",
+      "content_anchor_xy": [
+        10,
+        32
+      ],
+      "output_sha256": "13d48ad7e0e903ab8e463f6057d5df797c34e673fbad400de9779b73529d692a"
+    },
+    {
+      "id": "buildings/searchlight_2_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/defences/searchlight/searchlight-l2-r2.png",
+      "source_sha256": "80b9748a55aa7e73be34bab4b4871f2238972f0bb55dfc333ee9b439e0d90d66",
+      "crop_xywh": [
+        514,
+        1112,
+        495,
+        378
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "searchlight",
+      "tower_level": 2,
+      "variant_of": "buildings/searchlight_2",
+      "content_scale": 0.04722222222222222,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/searchlight_2_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/searchlight_2_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l2-r2.prompt.txt",
+      "prompt_sha256": "d36489607be164b2cd619a99428581f354b0ce29191fb887e354cec98f7a9aed",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l2-r2.call.json",
+          "sha256": "ea75b280b6555468aab31c21a36043d28830f78f9e36c5f5c41d30f8f4d0f4ee",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/native/searchlight_2_wreck/none/01.png",
+          "sha256": "f05e5e3625659c0fc34c19e0458d78e18ae6c7a811caeb61f11b76cdde45b208",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/contract.json",
+          "sha256": "822599ab1d011099c820cd2d17f59906be546aaa47d314c1cd452bf6e5474f9a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A041-searchlight/APPROVAL.json",
+          "sha256": "a2e35d15559f566abb582ff310a22790630fdb51f12ae7d2e0da2b96726fd476",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A041",
+      "integration_task": "0240",
+      "revision": 1,
+      "approval": "A041 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0240",
+      "content_anchor_xy": [
+        11,
+        18
+      ],
+      "output_sha256": "f05e5e3625659c0fc34c19e0458d78e18ae6c7a811caeb61f11b76cdde45b208"
     }
   ]
 }

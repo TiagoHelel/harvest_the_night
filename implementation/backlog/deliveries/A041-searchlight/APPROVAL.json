@@ -1,0 +1,29 @@
+{
+  "pack": "A041",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A041-searchlight",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/searchlight/none/01.png": "1fe201a4caa32a2dc7812918acd35220ff20a6e1ea3868e263c14a0c79b7bb79",
+    "native/searchlight_hurt/none/01.png": "993916515cc2b5d0c334dd1e69f0b8b1eeec01c5073c293d033908851a87a8eb",
+    "native/searchlight_fire/none/01.png": "a18fe0706e26b8c3ae1ed1ee7fe990b4934114bde766e3aa5c805a95800259a5",
+    "native/searchlight_wreck/none/01.png": "cbb01b49d3487a667d7849b5b45a86a6680c94de0168e6dfe4a9a8afd915d37d",
+    "native/searchlight_2/none/01.png": "0c6d6d03acb53fe66582fcae7bb8a2c5b27d6c66d243ae5e8619012815a98801",
+    "native/searchlight_2_hurt/none/01.png": "f5fd406a7b82a10075dbea3774241dd0ed087bb56ad0ffe6e4c9215ee784169c",
+    "native/searchlight_2_fire/none/01.png": "13d48ad7e0e903ab8e463f6057d5df797c34e673fbad400de9779b73529d692a",
+    "native/searchlight_2_wreck/none/01.png": "f05e5e3625659c0fc34c19e0458d78e18ae6c7a811caeb61f11b76cdde45b208"
+  },
+  "frames": 8,
+  "frames_expected": 8,
+  "accepted_visual_checks": [
+    "searchlight_2_only_lens_changes",
+    "searchlight_2_wreck_inside_whole",
+    "searchlight_only_lens_changes"
+  ],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

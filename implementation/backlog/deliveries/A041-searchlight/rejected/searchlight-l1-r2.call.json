@@ -1,0 +1,37 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT.\nPrimary request: ONE level1 SEARCHLIGHT identity master, whole/unlit. A powered farm lamp, NOT a gun.\nInput images: Image1 is the accepted searchlight identity master. Image2 is the gun tower native size and camera reference only, not weapon shape.\nStyle/medium: coherent hand-crafted pixel art, deliberate simple pixel clusters, coloured outlines, restrained texture, readable material planes. Design for native pixels, broad shapes, no microscopic details.\nComposition/framing: orthographic three-quarter top-down camera on rectangular grid. Final native32x48, groundpivot(16,44). Visible body17wide x27high (width:height0.63), lowest row43, base centred. NOT a diamond ground tile.\nLighting: neutral daytime upper-left, runtime supplies night and all beams/glow.\nColor: warm timber, dark iron, beige ceramic touches, UNLIT lens dark blue/violet glass with ONE small top-left pale highlight.\n\nTOWER family: Searchlight level1. Round lamp drum with reflector hood on yoke, braced timber post, crank handle and cable into compact base. Whole silhouette target 17 wide x27high on32x48 canvas, base centre16,44. Lens faces viewer slightly towardright, darkglass circle6\u20137nativepixels across, opaque1pixelrim.\nFOUR-STATE SHEET: two rows, two columns, top-left WHOLE unlit dark lens with one highlight; top-right HURT dentedhood, inkcrack inlens, bentbrace, loosecable, lens remains. Bottom-left FIRE lampatfull, identical WHOLE pixels outside lens face, ONLY glass filled flat pale bone/roof_light, rim remains; no beam/rays/glow. Bottom-right WRECK mast collapsed, drum onside, shatteredlens, low inside wholewidth. Copy WHOLE mast/base/cable/rim to FIRE pixel-for-pixel; do not repaint/reposition. Lamp never shoots.\nLAYOUT CLEARANCE: four complete smallobjects within SQUARE sheet, atmost45percentcellwidth/height, FULL transparentcrossgutters at least30percentcell. Raisedparts/wreckinside eachcell. Same magnification/camera/base centre/baseline; do not enlarge collapsedpose. Truealpha0outside edges, no glows/haze/shadows/text/checker/grid. Input Image1 approved identity master; Image2gun_tower family sizeonly. Same materials and upper-left light.\nCORRECTION: Image3 is edit target. Fix ONLY bottom-right wreck footprint. WHOLE source420pxwide; WRECK482pxwide. Gather wreck inward to atmost380pxwidth at same source scale, centred on same ground point. Keep all other three cells pixel-identical including shared whole/fire mast/cable/base. No haze/glow/shadows; true transparency.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A041-searchlight/raw/searchlight-master-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/gun_tower.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A041-searchlight/raw/searchlight-master-r2.png",
+      "sha256": "00441c0a9aff3ffea53179bbd21f56959f5f21e7e964aae1cc4a707a4d253aa8",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/gun_tower.png",
+      "sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A041-searchlight/raw/searchlight-l1-r1.png",
+      "sha256": "0b7f1b34cbb07ed92fc44027a9768874f6644a27fc438daa7997f43f390a79f2",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\rejected\\searchlight-l1-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-ffdf404a-1d9e-426c-bcb4-c3ba7287dc33.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A041-searchlight\\raw\\searchlight-l1-r2.png",
+  "sha256": "659b055ee59f17e8315b7f567d60bf819311bab21f18d53c7c2bb86a13811f19",
+  "revision": 2,
+  "decision": "rejected: Fire changes stationary body outside lens; superseded by last attempt.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\rejected\\searchlight-l1-r2.png"
+}

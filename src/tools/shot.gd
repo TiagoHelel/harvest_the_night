@@ -144,6 +144,7 @@ const SCENARIOS: Array = [
 	["year_credits", "the credits before the year ending", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
+	["searchlight_art", "A041's searchlight (task 0240) at night: Winter 2, generators running, a line of gun towers on each side of the east road, a searchlight at level one and one at level two side by side lighting the north line, the south line dark, tanks coming down the road; then the same by day, the tarps off to show the art under them", ""],
 	["garlic_art", "A040's garlic braid (task 0239) at night: three braids beside the east road, a night old, two and three - fresh, wilted and spent - and walkers coming down the road past them; then the same by day, the tarps off to show the art under them", ""],
 	["decoy_art", "A037's decoy and bait (task 0236) at night: a decoy whole, one hurt, one struck in its first sway frame and one's ruin, and a bait on the ground; then the same by day, the tarps off to show the art under them", ""],
 	["ruins", "the morning after a line came down: a level two gun's ruin, a crossbow's and a wall's lying where they fell beside a gun still standing, past the dawn's sweep - each mended back at the build step", ""],
@@ -820,6 +821,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"ruins": _set_ruins(state)
 		"decoy_art": _set_decoy_art(state)
 		"garlic_art": _set_garlic_art(state)
+		"searchlight_art": _set_searchlight_art(state)
 		"night_loot": _set_night_loot(state)
 		"bone_meal": _set_bone_meal(state)
 		"tarps": _set_tarps(state)
@@ -986,6 +988,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "beehive":
 		await _shoot("beehive", folder)
 		await _take_beehive_day(main, state, folder)
+		return
+	if name == "searchlight_art":
+		await _shoot("searchlight_art", folder)
+		await _take_searchlight_day(main, state, folder)
 		return
 	if name == "garlic_art":
 		await _shoot("garlic_art", folder)
@@ -3290,6 +3296,89 @@ func _set_searchlight(state: Dictionary) -> void:
 	_look_at(bend + Vector2i(3, -1))
 
 
+
+
+## **A041's searchlight at both levels** (task 0240): Winter 2, as 0229's
+## scene, a searchlight at level one and one at level two side by side
+## north of the north line, lighting it, and the south line in the dark -
+## with generators enough for both at full power, and tanks coming down the
+## road.
+func _set_searchlight_art(state: Dictionary) -> void:
+	_on_date(state, 3 * GameData.SEASON_DAYS + 2)
+	Resources.gain(state, {GameData.WOOD: 300, GameData.IRON: 300, GameData.STONE: 200,
+		GameData.COPPER: 80, GameData.OIL: 80, GameData.MONEY: 800})
+	(state["tech_owned"] as Array).append(&"true sights")
+	# Two generators west of the stretch, by day as 0229's one: power enough
+	# for two lamps and six guns.
+	var plants := 0
+	for radius in 14:
+		for cell in Grid.within(Player.cell(state) + Vector2i(-6, 3), radius):
+			if plants < 2 and Building.why_not(state, &"generator", cell).is_empty() \
+					and Building.place(state, &"generator", cell):
+				plants += 1
+	Pathing.refresh(state)
+	var road := _east_road(state)
+	var bend: Vector2i = road[mini(9, road.size() - 1)]
+	for dy in range(-8, 9):
+		for dx in range(-4, 13):
+			var at := bend + Vector2i(dx, dy)
+			var on := Farm.occupant(state, at)
+			if not on.is_empty() and Building.entry_of(StringName(on["id"])) == null \
+					and StringName(on["id"]) != &"house" and not Farm.FIXTURES.has(StringName(on["id"])):
+				Farm.remove(state, at)
+	NightRoad.into_build(state)
+	_searchlight_lamps = [bend + Vector2i(-3, -5), bend + Vector2i(3, -5)]
+	for offset in [Vector2i(-2, -3), Vector2i(0, -3), Vector2i(2, -3), Vector2i(-2, 3), Vector2i(0, 3), Vector2i(2, 3)]:
+		Building.place(state, &"gun_tower", bend + (offset as Vector2i))
+	for i in _searchlight_lamps.size():
+		if Building.place(state, &"searchlight", _searchlight_lamps[i]) and i == 1:
+			Building.upgrade(state, _searchlight_lamps[i])
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	for k in 3:
+		Entities.spawn(state, &"tank", bend + Vector2i(10 + k, 0))
+	print("  searchlight_art: lamps at %s, levels %s, power %d%%" % [str(_searchlight_lamps),
+		str(_searchlight_lamps.map(func(c: Vector2i) -> int: return Building.level_at(state, c))), Power.percent(state)])
+	_look_at(bend + Vector2i(1, -1))
+
+
+## The searchlights `_set_searchlight_art` put up, level one first.
+var _searchlight_lamps: Array = []
+
+
+## **The same by day** (task 0240): the night over, him out by the lamps, and
+## the tarps off so the art under them shows - as the tower showcase does.
+## A lamp is lit only at night, so by day both stand dark.
+func _take_searchlight_day(main: Node, state: Dictionary, folder: String) -> void:
+	if _searchlight_lamps.size() < 2:
+		return
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	House.leave(state)
+	Building.set_active(state, false)
+	# Between the two lines, below the lamps: the day's camera follows him.
+	_stand(state, ((_searchlight_lamps[0] as Vector2i) + (_searchlight_lamps[1] as Vector2i)) / 2 + Vector2i(0, 4))
+	state["player"]["facing"] = Player.NORTH
+	var view := main.get_node("%WorldView") as WorldView
+	view.tarps = false
+	_only_showing(main, "")
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await RenderingServer.frame_post_draw
+	await _shoot("searchlight_art_day", folder)
+	print("  searchlight_art by day, %s: levels %s" % [Phases.name_of(int(state["phase"])),
+		str(_searchlight_lamps.map(func(c: Vector2i) -> int: return Building.level_at(state, c)))])
+	view.tarps = true
 
 
 ## The gun towers `_set_searchlight` put up, the lit line first (task 0229).

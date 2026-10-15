@@ -1298,6 +1298,38 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/searchlight.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/searchlight_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/searchlight_2_fire.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/searchlight_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/searchlight_2_wreck.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/searchlight_fire.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/searchlight_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/searchlight_wreck.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/wall.png",
       "owner": "raster"
     },
