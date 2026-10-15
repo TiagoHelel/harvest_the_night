@@ -1,0 +1,220 @@
+{
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "bobber_one_source": true,
+  "bobber_waterline": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "family_checks_complete": true,
+  "flash_expands_then_fades": true,
+  "frame_count_matches": true,
+  "frames_expected": 20,
+  "frames_found": 20,
+  "grounded_on_pivot": true,
+  "icon_bounds_ok": true,
+  "icon_colours_at_least2": true,
+  "icon_density": true,
+  "icons_unique": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/bobber_bite/none/01.png": {
+      "bounds": [
+        2,
+        3,
+        7,
+        6
+      ],
+      "opaque_pixels": 11
+    },
+    "native/bobber_bite/none/02.png": {
+      "bounds": [
+        2,
+        4,
+        6,
+        6
+      ],
+      "opaque_pixels": 6
+    },
+    "native/bobber_bite/none/03.png": {
+      "bounds": [
+        3,
+        5,
+        5,
+        6
+      ],
+      "opaque_pixels": 2
+    },
+    "native/bobber_float/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        7,
+        6
+      ],
+      "opaque_pixels": 20
+    },
+    "native/bobber_float/none/02.png": {
+      "bounds": [
+        2,
+        2,
+        7,
+        6
+      ],
+      "opaque_pixels": 16
+    },
+    "native/fishbar_frame/none/01.png": {
+      "bounds": [
+        0,
+        1,
+        100,
+        15
+      ],
+      "opaque_pixels": 1216
+    },
+    "native/fishbar_hit/none/01.png": {
+      "bounds": [
+        3,
+        4,
+        9,
+        10
+      ],
+      "opaque_pixels": 15
+    },
+    "native/fishbar_hit/none/02.png": {
+      "bounds": [
+        2,
+        3,
+        11,
+        10
+      ],
+      "opaque_pixels": 34
+    },
+    "native/fishbar_hit/none/03.png": {
+      "bounds": [
+        2,
+        4,
+        10,
+        10
+      ],
+      "opaque_pixels": 17
+    },
+    "native/fishbar_marker/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        5,
+        12
+      ],
+      "opaque_pixels": 36
+    },
+    "native/fishbar_miss/none/01.png": {
+      "bounds": [
+        4,
+        5,
+        9,
+        9
+      ],
+      "opaque_pixels": 10
+    },
+    "native/fishbar_miss/none/02.png": {
+      "bounds": [
+        1,
+        3,
+        11,
+        9
+      ],
+      "opaque_pixels": 25
+    },
+    "native/fishbar_miss/none/03.png": {
+      "bounds": [
+        4,
+        4,
+        8,
+        9
+      ],
+      "opaque_pixels": 7
+    },
+    "native/fishbar_zone/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        8,
+        6
+      ],
+      "opaque_pixels": 48
+    },
+    "native/hud_bait/none/01.png": {
+      "bounds": [
+        1,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 52
+    },
+    "native/hud_book_fish/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "opaque_pixels": 37
+    },
+    "native/hud_worm/none/01.png": {
+      "bounds": [
+        1,
+        3,
+        9,
+        8
+      ],
+      "opaque_pixels": 19
+    },
+    "native/icon_bait/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "opaque_pixels": 151
+    },
+    "native/icon_book_fish/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "opaque_pixels": 115
+    },
+    "native/icon_worm/none/01.png": {
+      "bounds": [
+        1,
+        4,
+        15,
+        12
+      ],
+      "opaque_pixels": 55
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "patch_margins_match": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "same_crop_per_pair": true,
+  "source_transparency_matches_call": true,
+  "track_ok": true,
+  "visible_targets": true,
+  "zone_centre_uniform": true,
+  "zone_fills_canvas": true
+}

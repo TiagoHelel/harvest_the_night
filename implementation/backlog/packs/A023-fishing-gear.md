@@ -1,6 +1,6 @@
 # A023 - Fishing gear and the minigame
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0206
 - **Dressed by game tasks:** 0180, 0181, 0182
 - **Spec after game task:** 0180

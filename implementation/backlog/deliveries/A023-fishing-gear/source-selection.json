@@ -1,0 +1,662 @@
+{
+  "pack": "A023",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/worm-r1.png",
+      "source_sha256": "e9f0c795c5699e26e1be42915cd2a100b9c1e903bfea84ced0c9c738d70053d3",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_worm/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              7,
+              4
+            ],
+            "content_scale": 0.020289855072463767,
+            "crop_xywh": [
+              282,
+              455,
+              690,
+              392
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_worm/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              2
+            ],
+            "content_scale": 0.011594202898550725,
+            "crop_xywh": [
+              282,
+              455,
+              690,
+              392
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/bait-r1.png",
+      "source_sha256": "ec5395e9cb6e4cd3bbf41def4c8b947ad2e69412772f0678eac057bc7a107422",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_bait/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              7,
+              6
+            ],
+            "content_scale": 0.024390243902439025,
+            "crop_xywh": [
+              369,
+              384,
+              574,
+              552
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_bait/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              4
+            ],
+            "content_scale": 0.013937282229965157,
+            "crop_xywh": [
+              369,
+              384,
+              574,
+              552
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/book_fish-r1.png",
+      "source_sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_book_fish/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              7,
+              6
+            ],
+            "content_scale": 0.020289855072463767,
+            "crop_xywh": [
+              297,
+              364,
+              690,
+              618
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_book_fish/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              3
+            ],
+            "content_scale": 0.011594202898550725,
+            "crop_xywh": [
+              297,
+              364,
+              690,
+              618
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/bobber_float/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              2,
+              5
+            ],
+            "content_scale": 0.022727272727272728,
+            "crop_xywh": [
+              680,
+              410,
+              220,
+              220
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/bobber_float/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              2,
+              4
+            ],
+            "content_scale": 0.022727272727272728,
+            "crop_xywh": [
+              680,
+              410,
+              220,
+              176
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/bobber_bite/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              2,
+              3
+            ],
+            "content_scale": 0.022727272727272728,
+            "crop_xywh": [
+              680,
+              410,
+              220,
+              132
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/bobber_bite/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              2,
+              2
+            ],
+            "content_scale": 0.022727272727272728,
+            "crop_xywh": [
+              680,
+              410,
+              220,
+              88
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/bobber_bite/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              2,
+              1
+            ],
+            "content_scale": 0.022727272727272728,
+            "crop_xywh": [
+              680,
+              410,
+              220,
+              44
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/fishbar_frame/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              49,
+              7
+            ],
+            "content_scale": 0.06286080821039128,
+            "crop_xywh": [
+              56,
+              389,
+              1559,
+              216
+            ]
+          },
+          "parts": [
+            {
+              "input": "bar-timber-and-brass",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                100,
+                16
+              ]
+            },
+            {
+              "input": "bar-blue-track",
+              "paste_xy": [
+                5,
+                5
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                90,
+                6
+              ]
+            },
+            {
+              "input": "bar-blue-top-line",
+              "paste_xy": [
+                5,
+                5
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                90,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "component": "bar-blue-top-line",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.1,
+            "crop_xywh": [
+              300,
+              333,
+              900,
+              10
+            ]
+          }
+        },
+        {
+          "component": "bar-blue-track",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.1,
+            "crop_xywh": [
+              300,
+              350,
+              900,
+              60
+            ]
+          }
+        },
+        {
+          "component": "bar-brass-cap",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.05907172995780591,
+            "crop_xywh": [
+              64,
+              257,
+              83,
+              237
+            ]
+          }
+        },
+        {
+          "component": "bar-dark-recess",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.1,
+            "crop_xywh": [
+              300,
+              345,
+              900,
+              100
+            ]
+          }
+        },
+        {
+          "component": "bar-original-frame",
+          "recipe": {
+            "content_anchor_xy": [
+              49,
+              5
+            ],
+            "content_scale": 0.0472744814278823,
+            "crop_xywh": [
+              59,
+              257,
+              2073,
+              237
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/fishbar_zone/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              2
+            ],
+            "content_scale": 0.011869436201780416,
+            "crop_xywh": [
+              388,
+              343,
+              674,
+              402
+            ]
+          },
+          "parts": [
+            {
+              "input": "zone-ink-cap",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                2,
+                6
+              ]
+            },
+            {
+              "input": "zone-ink-cap",
+              "paste_xy": [
+                6,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                2,
+                6
+              ]
+            },
+            {
+              "input": "zone-light-row",
+              "paste_xy": [
+                2,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                4,
+                1
+              ]
+            },
+            {
+              "input": "zone-body-rows",
+              "paste_xy": [
+                2,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                4,
+                4
+              ]
+            },
+            {
+              "input": "zone-dark-row",
+              "paste_xy": [
+                2,
+                5
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                4,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "component": "zone-body-rows",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.05,
+            "crop_xywh": [
+              600,
+              470,
+              80,
+              80
+            ]
+          }
+        },
+        {
+          "component": "zone-dark-row",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.05,
+            "crop_xywh": [
+              600,
+              710,
+              80,
+              20
+            ]
+          }
+        },
+        {
+          "component": "zone-ink-cap",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.05,
+            "crop_xywh": [
+              380,
+              350,
+              40,
+              120
+            ]
+          }
+        },
+        {
+          "component": "zone-light-row",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.05,
+            "crop_xywh": [
+              600,
+              340,
+              80,
+              20
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/fishbar_marker-r1.png",
+      "source_sha256": "822e5b79af2b4b2fb920581c75d2d1b4da9f35a3bfeb575c8d4b51593199240f",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/fishbar_marker/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              2,
+              6
+            ],
+            "content_scale": 0.017543859649122806,
+            "crop_xywh": [
+              370,
+              415,
+              285,
+              682
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/fishbar_hit-r1.png",
+      "source_sha256": "68567462a55b999b49264fb81e72b85f07a6c0d64801d2fcb4786068137c1b62",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/fishbar_hit/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              4
+            ],
+            "content_scale": 0.02178649237472767,
+            "crop_xywh": [
+              186,
+              135,
+              459,
+              387
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/fishbar_hit/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              4
+            ],
+            "content_scale": 0.02178649237472767,
+            "crop_xywh": [
+              861,
+              163,
+              459,
+              387
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/fishbar_hit/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              4
+            ],
+            "content_scale": 0.02178649237472767,
+            "crop_xywh": [
+              1553,
+              135,
+              459,
+              387
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/fishbar_miss-r1.png",
+      "source_sha256": "6569c1702c7d1252b139cc3efa8405ed01187c4f11b53d52291e4cfa8fc75117",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/fishbar_miss/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              3
+            ],
+            "content_scale": 0.017361111111111112,
+            "crop_xywh": [
+              135,
+              177,
+              576,
+              355
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/fishbar_miss/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              3
+            ],
+            "content_scale": 0.017361111111111112,
+            "crop_xywh": [
+              799,
+              204,
+              576,
+              355
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/fishbar_miss/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              3
+            ],
+            "content_scale": 0.017361111111111112,
+            "crop_xywh": [
+              1458,
+              204,
+              576,
+              355
+            ]
+          },
+          "parts": []
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

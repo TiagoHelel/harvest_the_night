@@ -1,0 +1,23 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit\nAsset type: A023 fishing timing-bar frame, pixel-art UI source for HARVEST THE NIGHT.\nImage1 is edit target. Keep this ONE long horizontal timber frame and brass end caps, full width, camera, materials, centered framing and true transparent background.\nONE geometry correction: enlarge the interior DARK BLUE TRACK VERTICALLY by about45percent while keeping the outside frame width and total height the same. Make the top and bottom wood rails thinner to give that space to the track. The previous source's inner track becomes only4-5nativepixelrows; it must become a flat, completely uninterrupted rectangular track of90wide by6tall at final size. Outer visible frame98wide x14tall, so the channel occupies about92percent of the outer width and43percent of its height.\nChannel is a perfectly flat dark blue #2b5480 rectangle, with only a SINGLE1nativepixel top edge #3a6ea5. No gradient, diagonal shadows, bevel shading or bright cyan line inside the channel. The full6rows must be blue. Wood/brass stays outside. Four clear corners, short brass caps no decorations.\nFinal native100x16,pivot50,8. Use crisp hand-crafted coarse pixel clusters; no realistic texture, blur or smooth painting. No text, marker, green zone, progress fill, numbers, glow, ground shadow or UI screenshot. ONE complete isolated bar with ample transparent margin.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/rejected/fishbar_frame-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/rejected/fishbar_frame-r3.png",
+      "sha256": "0c122613b7a052382caedcf1e8c17cc05cf6670c3acdd268cd8b51010033646e",
+      "role": "Image reference / edit target, role specified in exact prompt"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-cb7d2777-cdfa-42c8-a48f-e86cf82a4dc6.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A023-fishing-gear\\raw\\fishbar-frame-r4.png",
+  "sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132",
+  "date": "2026-10-14",
+  "revision": 4,
+  "decision": "pending native-scale inspection"
+}

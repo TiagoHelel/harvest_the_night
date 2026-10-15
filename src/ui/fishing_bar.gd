@@ -7,24 +7,31 @@ extends Control
 ##
 ## Nothing here is a rule. Where the marker is, how wide the green is and
 ## what a press does are `Fishing`'s, read off the line every frame; this
-## draws them and flashes the last press, hit or miss. The pieces are A023's,
-## drawn by code through 0120's road until 0206 integrates the pack: the
-## frame round the track, the green, the needle and the two flashes, at the
-## canvases A023 states.
+## draws them and flashes the last press, hit or miss. The pieces are A023's
+## art since task 0206: the frame round the track, the green - a three-patch,
+## its two-pixel caps kept and its middle drawn to the zone's width - the
+## needle and the two flashes. The pips under the bar stay code.
 
 ## Where the bar sits on the 480x270 screen: centred, under the farmer.
 const CENTRE := Vector2(240, 184)
 ## A023's `fishbar_frame` canvas, and the track inside it (`track_xywh`).
 const FRAME := Vector2i(100, 16)
 const TRACK := Rect2i(5, 5, 90, 6)
-## How long a hit or a miss flashes, in seconds (A023: three frames of 0.065).
-const FLASH_SECONDS := 0.2
+## How long a hit or a miss flashes, in seconds: A023's three frames of
+## 0.065.
+const FLASH_FRAME := 0.065
+const FLASH_SECONDS := 3 * FLASH_FRAME
+## Where A023 delivers the pieces, and the green's caps (`patch_margins_lrtb`).
+const DIR := "res://sprites/ui/"
+const ZONE_CAP := 2
 
 var _state: Dictionary = {}
 var _flash_left := 0.0
 var _flash_hit := false
 var _flash_at := 0.0
 var _seen_press := []
+## The pieces' textures, held for `_draw`.
+var _held: Dictionary = {}
 
 
 func _ready() -> void:
@@ -92,35 +99,40 @@ func _colour(id: StringName) -> Color:
 	return PaletteData.COLOURS.get(id, Color.MAGENTA)
 
 
+## One of A023's pieces by its runtime name, held.
+func _piece(name: String) -> Texture2D:
+	if not _held.has(name):
+		var path := DIR + name + ".png"
+		_held[name] = load(path) if ResourceLoader.exists(path) else null
+	return _held[name]
+
+
+## The flash's frame up now: A023's three, once, over `FLASH_SECONDS`.
+func flash_frame() -> int:
+	return mini(int((FLASH_SECONDS - _flash_left) / FLASH_FRAME), 2)
+
+
 func _draw() -> void:
 	if _state.is_empty() or not Fishing.is_biting(_state):
 		return
 	var line := Fishing.cast_of(_state)
 	var at := _origin()
-	# The frame: timber with brass caps round a dark channel.
-	draw_rect(Rect2(at, Vector2(FRAME)), _colour(&"ink"))
-	draw_rect(Rect2(at + Vector2(1, 1), Vector2(FRAME) - Vector2(2, 2)), _colour(&"wood_dark"))
-	draw_rect(Rect2(at + Vector2(2, 2), Vector2(FRAME) - Vector2(4, 4)), _colour(&"wood"))
-	draw_rect(Rect2(at + Vector2(1, 1), Vector2(3, FRAME.y - 2)), _colour(&"gold_dark"))
-	draw_rect(Rect2(at + Vector2(FRAME.x - 4, 1), Vector2(3, FRAME.y - 2)), _colour(&"gold_dark"))
-	var track := Rect2(at + Vector2(TRACK.position), Vector2(TRACK.size))
-	draw_rect(track, _colour(&"water_dark"))
-	draw_rect(Rect2(track.position, Vector2(track.size.x, 1)), _colour(&"water"))
-	# The green: body, light top row, dark bottom row, ink ends.
+	var middle := at.y + float(FRAME.y) / 2.0
+	draw_texture(_piece("fishbar_frame"), at)
+	# The green: its caps as drawn, its middle to the zone's width.
 	var green := zone_rect()
-	draw_rect(green, _colour(&"grass"))
-	draw_rect(Rect2(green.position, Vector2(green.size.x, 1)), _colour(&"grass_light"))
-	draw_rect(Rect2(green.position + Vector2(0, green.size.y - 1), Vector2(green.size.x, 1)), _colour(&"grass_dark"))
-	draw_rect(Rect2(green.position, Vector2(1, green.size.y)), _colour(&"ink"))
-	draw_rect(Rect2(green.end - Vector2(1, green.size.y), Vector2(1, green.size.y)), _colour(&"ink"))
-	# The needle: a triangle head over a stem, centred on the marker.
-	var x := floorf(marker_x())
-	var top := at.y + 2.0
-	draw_rect(Rect2(x - 2, top, 5, 1), _colour(&"ink"))
-	draw_rect(Rect2(x - 1, top + 1, 3, 1), _colour(&"bone"))
-	draw_rect(Rect2(x, top + 2, 1, 1), _colour(&"bone"))
-	draw_rect(Rect2(x - 1, top + 3, 3, FRAME.y - 6), _colour(&"ink"))
-	draw_rect(Rect2(x, top + 3, 1, FRAME.y - 6), _colour(&"bone"))
+	var zone := _piece("fishbar_zone")
+	var inner := zone.get_width() - 2 * ZONE_CAP
+	draw_texture_rect_region(zone, Rect2(green.position, Vector2(ZONE_CAP, green.size.y)),
+		Rect2(0, 0, ZONE_CAP, zone.get_height()))
+	draw_texture_rect_region(zone, Rect2(green.position + Vector2(ZONE_CAP, 0),
+		Vector2(maxf(green.size.x - 2 * ZONE_CAP, 0.0), green.size.y)),
+		Rect2(ZONE_CAP, 0, inner, zone.get_height()))
+	draw_texture_rect_region(zone, Rect2(Vector2(green.end.x - ZONE_CAP, green.position.y),
+		Vector2(ZONE_CAP, green.size.y)), Rect2(zone.get_width() - ZONE_CAP, 0, ZONE_CAP, zone.get_height()))
+	# The needle, standing on the marker in the frame's middle.
+	var needle := _piece("fishbar_marker")
+	draw_texture(needle, Vector2(floorf(marker_x()) - 2.0, middle - 6.0))
 	# The hits it needs, as pips under the bar: filled for each one landed.
 	var needs := int(line.get("needs", 1))
 	var hits := int(line.get("hits", 0))
@@ -129,14 +141,7 @@ func _draw() -> void:
 		var pip := Rect2(pips_from + i * 6, at.y + FRAME.y + 2, 4, 4)
 		draw_rect(pip, _colour(&"ink"))
 		draw_rect(pip.grow(-1), _colour(&"gold_light") if i < hits else _colour(&"stone_dark"))
-	# The flash of the last press: a star for a hit, droplets for a miss.
+	# The flash of the last press, where the needle was: A023's three frames.
 	if _flash_left > 0.0:
-		var y := at.y + FRAME.y / 2.0
-		var grow := 1.0 + (FLASH_SECONDS - _flash_left) / FLASH_SECONDS * 4.0
-		if _flash_hit:
-			draw_rect(Rect2(_flash_at - 1, y - grow - 1, 2, grow * 2 + 2), _colour(&"gold_light"))
-			draw_rect(Rect2(_flash_at - grow - 1, y - 1, grow * 2 + 2, 2), _colour(&"gold_light"))
-			draw_rect(Rect2(_flash_at - 1, y - 1, 2, 2), _colour(&"flame_hot"))
-		else:
-			for side in [Vector2(-1, -1), Vector2(1, -1), Vector2(-1, 1), Vector2(1, 1)]:
-				draw_rect(Rect2(Vector2(_flash_at, y) + side * grow * 1.5, Vector2(2, 2)), _colour(&"water_light"))
+		var flash := _piece("fishbar_%s_%d" % ["hit" if _flash_hit else "miss", flash_frame()])
+		draw_texture(flash, Vector2(floorf(_flash_at) - 6.0, middle - 6.0))

@@ -200,6 +200,7 @@ func _run() -> void:
 	_task_0199_summer_crops()
 	_task_0200_autumn_crops()
 	_task_0201_sprinklers()
+	_task_0206_fishing_gear()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14389,6 +14390,38 @@ func _task_0201_sprinklers() -> void:
 		and head == Vector2(cell) * float(GameData.TILE_SIZE) + Vector2(8, 16) - Vector2(8, 14) + Vector2(nozzle),
 		"A018's sprinklers are raster art; through the morning's hour a sprinkler turns its head a tenth of a second a frame, idle after, and its drops leave the nozzle",
 		"%s; %s / %s; head %s" % [str(wrong), str(spraying), after, head])
+	_completed += 1
+
+
+## **A023's fishing gear** (task 0206): the worm's, the bait's and the fish
+## book tab's icons, the bar's pieces and the bobber - raster art, none a
+## stand-in. The bar's track and caps are the art's own; the float bobs on
+## its two frames while the line waits and sinks through its three bite
+## frames, held under, when a fish takes it.
+func _task_0206_fishing_gear() -> void:
+	var wrong: Array = []
+	for id in [GameData.WORM, GameData.BAIT]:
+		for cut in [["icon", false], ["hud", true]]:
+			var texture := UiKit.icon(id, bool(cut[1]))
+			if texture == null or texture.resource_path != "res://sprites/ui/%s_%s.png" % [cut[0], id] \
+					or not PlaceholderArt.art(StringName("%s_%s" % [cut[0], id])).is_empty():
+				wrong.append("%s_%s" % [cut[0], id])
+	for name in ["icon_book_fish", "hud_book_fish", "fishbar_frame", "fishbar_zone", "fishbar_marker",
+			"fishbar_hit_0", "fishbar_hit_2", "fishbar_miss_0", "fishbar_miss_2"]:
+		var path := "res://sprites/ui/%s.png" % name
+		if not RasterArt.FRAMES.has(path) or PlaceholderArt.is_drawn(path) or not ResourceLoader.exists(path):
+			wrong.append(name)
+	var frame := Image.load_from_file(ProjectSettings.globalize_path("res://sprites/ui/fishbar_frame.png"))
+	var zone := Image.load_from_file(ProjectSettings.globalize_path("res://sprites/ui/fishbar_zone.png"))
+	var bobbing := [BobberView.frame_name(false, 0.0), BobberView.frame_name(false, 0.45), BobberView.frame_name(false, 0.85)]
+	var sinking := [BobberView.frame_name(true, 0.0), BobberView.frame_name(true, 0.15), BobberView.frame_name(true, 2.0)]
+	var line: Vector2i = PlaceholderArt.frame(BobberView.DIR + "bobber_bite_2.png").get("line", Vector2i(-1, -1))
+	expect(wrong.is_empty() and frame.get_size() == FishingBar.FRAME and zone.get_height() == FishingBar.TRACK.size.y
+		and zone.get_width() > 2 * FishingBar.ZONE_CAP and is_equal_approx(FishingBar.FLASH_SECONDS, 0.195)
+		and bobbing == ["bobber_float_0", "bobber_float_1", "bobber_float_0"]
+		and sinking == ["bobber_bite_0", "bobber_bite_1", "bobber_bite_2"] and line == Vector2i(4, 5),
+		"A023's fishing gear is raster art: the bar's frame and green fit its track, the flash is three frames of 0.065 s, and the float bobs on two frames and sinks through three, held under",
+		"%s; %s / %s; line %s" % [str(wrong), str(bobbing), str(sinking), line])
 	_completed += 1
 
 

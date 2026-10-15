@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: A023 fishing timing-bar frame, pixel-art UI source for HARVEST THE NIGHT.
+Image1 is edit target. Keep this ONE long horizontal timber frame and brass end caps, full width, camera, materials, centered framing and true transparent background.
+ONE geometry correction: enlarge the interior DARK BLUE TRACK VERTICALLY by about45percent while keeping the outside frame width and total height the same. Make the top and bottom wood rails thinner to give that space to the track. The previous source's inner track becomes only4-5nativepixelrows; it must become a flat, completely uninterrupted rectangular track of90wide by6tall at final size. Outer visible frame98wide x14tall, so the channel occupies about92percent of the outer width and43percent of its height.
+Channel is a perfectly flat dark blue #2b5480 rectangle, with only a SINGLE1nativepixel top edge #3a6ea5. No gradient, diagonal shadows, bevel shading or bright cyan line inside the channel. The full6rows must be blue. Wood/brass stays outside. Four clear corners, short brass caps no decorations.
+Final native100x16,pivot50,8. Use crisp hand-crafted coarse pixel clusters; no realistic texture, blur or smooth painting. No text, marker, green zone, progress fill, numbers, glow, ground shadow or UI screenshot. ONE complete isolated bar with ample transparent margin.

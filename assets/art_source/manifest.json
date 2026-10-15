@@ -93577,6 +93577,2144 @@
       "display_role": "compact_hud",
       "approval": "A018 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0201",
       "output_sha256": "90540f78f5dac36acd659b3d967d44057549f8e594da0fad7fa64430e8c0092f"
+    },
+    {
+      "id": "components/A023-fishing-gear/bar-blue-top-line",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132",
+      "crop_xywh": [
+        300,
+        333,
+        900,
+        10
+      ],
+      "canvas_wh": [
+        90,
+        1
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.1,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "water"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/bar-blue-top-line",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/bar-blue-top-line.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.call.json",
+          "sha256": "19b441011f6bafdc3120a5230a3aff48f9565bc89e4f399502bc6570ca071ea5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/bar-blue-top-line.png",
+          "sha256": "baa23e65720ed282bde7b25ed1bbea000e5a15d428000e17f0ebad29c35d57de",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "97e405e4d2e0beeb6a5fc4e429c064ba3a423cb9ea92dec802724289717203c0"
+    },
+    {
+      "id": "components/A023-fishing-gear/bar-blue-track",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132",
+      "crop_xywh": [
+        300,
+        350,
+        900,
+        60
+      ],
+      "canvas_wh": [
+        90,
+        6
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.1,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "water_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/bar-blue-track",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/bar-blue-track.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.call.json",
+          "sha256": "19b441011f6bafdc3120a5230a3aff48f9565bc89e4f399502bc6570ca071ea5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/bar-blue-track.png",
+          "sha256": "510aa97126a74c7e02cb2543484ca1a852f5f221f9c122af89257c754b01adb1",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "a4ce46e0433d1377564dd6e0a006dd138a3333997971f7b6cd4eed6bc3b167e9"
+    },
+    {
+      "id": "components/A023-fishing-gear/bar-brass-cap",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132",
+      "crop_xywh": [
+        64,
+        257,
+        83,
+        237
+      ],
+      "canvas_wh": [
+        5,
+        14
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.05907172995780591,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/bar-brass-cap",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/bar-brass-cap.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.call.json",
+          "sha256": "19b441011f6bafdc3120a5230a3aff48f9565bc89e4f399502bc6570ca071ea5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/bar-brass-cap.png",
+          "sha256": "64b4aa464be039c283196bcae10aed04a9ca2654142db005bf5f4a698197215c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "434d1e9716360aea5c457e531a4a89205888ac5962e5a1c979d6f388393a9d4c"
+    },
+    {
+      "id": "components/A023-fishing-gear/bar-brass-cap-right",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/bar-brass-cap-right.png",
+      "source_sha256": "ba8ed6601cc949323733ea9ae73b412b8f28fe33c8acda287ddcc30c3fe0e662",
+      "crop_xywh": [
+        0,
+        0,
+        5,
+        14
+      ],
+      "canvas_wh": [
+        5,
+        14
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A023-fishing-gear/bar-brass-cap-right",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/bar-brass-cap-right.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/bar-brass-cap-right.png",
+          "sha256": "ba8ed6601cc949323733ea9ae73b412b8f28fe33c8acda287ddcc30c3fe0e662",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "673013bf7a5e968dad05b54a1f4b5b8fe1b63d8e25186a596f8a7d6091794ea5"
+    },
+    {
+      "id": "components/A023-fishing-gear/bar-dark-recess",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132",
+      "crop_xywh": [
+        300,
+        345,
+        900,
+        100
+      ],
+      "canvas_wh": [
+        90,
+        10
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.1,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink_soft"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/bar-dark-recess",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/bar-dark-recess.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.call.json",
+          "sha256": "19b441011f6bafdc3120a5230a3aff48f9565bc89e4f399502bc6570ca071ea5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/bar-dark-recess.png",
+          "sha256": "8e853b133d8469613fee1ef0aa9017f60c1be2876afd2b6d679c619b7f216b70",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "f9dc57d2c629da39206fa02e18383d9f0a270175b11054044ae72b0dc5d9ba11"
+    },
+    {
+      "id": "components/A023-fishing-gear/bar-original-frame",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132",
+      "crop_xywh": [
+        59,
+        257,
+        2073,
+        237
+      ],
+      "canvas_wh": [
+        100,
+        16
+      ],
+      "pivot_xy": [
+        50,
+        8
+      ],
+      "content_scale": 0.0472744814278823,
+      "content_anchor_xy": [
+        49,
+        5
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "water_dark",
+        "water"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/bar-original-frame",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/bar-original-frame.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.call.json",
+          "sha256": "19b441011f6bafdc3120a5230a3aff48f9565bc89e4f399502bc6570ca071ea5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/bar-original-frame.png",
+          "sha256": "e1cb9b53817a49731a6cb8d537209f5f5c76356b406f6542fd5f59a75bdb779e",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "56c9d952d76eb2cad605ae17f1dea31f56e92b54714e179c82108b141a7dbe0f"
+    },
+    {
+      "id": "components/A023-fishing-gear/bar-timber-and-brass",
+      "owner": "raster",
+      "canvas_wh": [
+        100,
+        16
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/bar-timber-and-brass",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/bar-timber-and-brass.png",
+      "input": "components/A023-fishing-gear/bar-dark-recess",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A023-fishing-gear/bar-dark-recess",
+          "slice_xywh": [
+            0,
+            0,
+            90,
+            10
+          ],
+          "paste_xy": [
+            5,
+            3
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/bar-original-frame",
+          "slice_xywh": [
+            5,
+            3,
+            90,
+            2
+          ],
+          "paste_xy": [
+            5,
+            1
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/bar-original-frame",
+          "slice_xywh": [
+            5,
+            12,
+            90,
+            2
+          ],
+          "paste_xy": [
+            5,
+            13
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/bar-brass-cap",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            14
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/bar-brass-cap-right",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            14
+          ],
+          "paste_xy": [
+            95,
+            1
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/bar-timber-and-brass.png",
+          "sha256": "cedc8ec364c507eeb421059b3feaa4db381245f9843008eaf508a11b1991af48",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "37e48d4ac9cbfb00a3bb3c1fff85145ca3838e644e6feacd0561e09319df55cb"
+    },
+    {
+      "id": "components/A023-fishing-gear/zone-body-rows",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb",
+      "crop_xywh": [
+        600,
+        470,
+        80,
+        80
+      ],
+      "canvas_wh": [
+        4,
+        4
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.05,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "grass"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/zone-body-rows",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/zone-body-rows.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.call.json",
+          "sha256": "2d40cd72d47c75211cdf7977506835428a1c1c0f94e4601d35836045ebf76a2d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/zone-body-rows.png",
+          "sha256": "f5a30527c3e35c64750d9905237449b53702a49e83f95b5ab9babf4fd7104dcb",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "ed1daf92b274a8501814096d785c2581017403a82ec53d261dbbf1a0ad7b775d"
+    },
+    {
+      "id": "components/A023-fishing-gear/zone-dark-row",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb",
+      "crop_xywh": [
+        600,
+        710,
+        80,
+        20
+      ],
+      "canvas_wh": [
+        4,
+        1
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.05,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "grass_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/zone-dark-row",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/zone-dark-row.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.call.json",
+          "sha256": "2d40cd72d47c75211cdf7977506835428a1c1c0f94e4601d35836045ebf76a2d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/zone-dark-row.png",
+          "sha256": "020b72968fa550fbf988bcf5d620958b5eb777b9f71614d0d5eef736371d1b9b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "10c2403ffeaef48916bc23e928520b96b8c4442dabe575479e0b6aa5b3d2af79"
+    },
+    {
+      "id": "components/A023-fishing-gear/zone-ink-cap",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb",
+      "crop_xywh": [
+        380,
+        350,
+        40,
+        120
+      ],
+      "canvas_wh": [
+        2,
+        6
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.05,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/zone-ink-cap",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/zone-ink-cap.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.call.json",
+          "sha256": "2d40cd72d47c75211cdf7977506835428a1c1c0f94e4601d35836045ebf76a2d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/zone-ink-cap.png",
+          "sha256": "0d034c2fd05ef90b791516bd1f54437dc504812e083e6a89e1bca236542624e3",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "95d570601443f63c397dfd7f52cbab2725d87a8bd8d739bf267b5bc415184352"
+    },
+    {
+      "id": "components/A023-fishing-gear/zone-light-row",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb",
+      "crop_xywh": [
+        600,
+        340,
+        80,
+        20
+      ],
+      "canvas_wh": [
+        4,
+        1
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.05,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "grass_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A023-fishing-gear/zone-light-row",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A023-fishing-gear/zone-light-row.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.call.json",
+          "sha256": "2d40cd72d47c75211cdf7977506835428a1c1c0f94e4601d35836045ebf76a2d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/components/zone-light-row.png",
+          "sha256": "a706504a5cc8044addcd0b359d45e34bf488690d5c785823af5d990e0618563e",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "assembly_component_of": "A023",
+      "output_sha256": "51bbb4cae4858a4230e3c0084907d5859d7b98aec5eb792a50abb1b8721fb877"
+    },
+    {
+      "id": "ui/icon_worm",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/worm-r1.png",
+      "source_sha256": "e9f0c795c5699e26e1be42915cd2a100b9c1e903bfea84ced0c9c738d70053d3",
+      "crop_xywh": [
+        282,
+        455,
+        690,
+        392
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.020289855072463767,
+      "content_anchor_xy": [
+        7,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_worm",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_worm.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/worm-r1.prompt.txt",
+      "prompt_sha256": "f63da1bc05fa4784b7f3263550949fee54d481e3fc6c4e1c3990a2a6ac77321a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/worm-r1.call.json",
+          "sha256": "dc96ad59b81eb4a08dd67fb51792337e3e8a228c0c5fe58c3968ad5ab2207bb6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/icon_worm/none/01.png",
+          "sha256": "035bdfb23b0027d0604e2c94908746e64232056ff110c374424ea3f9c1cdfb24",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "bbd50ff63688d040b769dc6b69368206ddeb3036921a59930a75407036f2ee85"
+    },
+    {
+      "id": "ui/hud_worm",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/worm-r1.png",
+      "source_sha256": "e9f0c795c5699e26e1be42915cd2a100b9c1e903bfea84ced0c9c738d70053d3",
+      "crop_xywh": [
+        282,
+        455,
+        690,
+        392
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.011594202898550725,
+      "content_anchor_xy": [
+        4,
+        2
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_worm",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_worm.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/worm-r1.prompt.txt",
+      "prompt_sha256": "f63da1bc05fa4784b7f3263550949fee54d481e3fc6c4e1c3990a2a6ac77321a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/worm-r1.call.json",
+          "sha256": "dc96ad59b81eb4a08dd67fb51792337e3e8a228c0c5fe58c3968ad5ab2207bb6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/hud_worm/none/01.png",
+          "sha256": "2eabf4514d717c61857288af8b496a52f17f156be92822488cb5ffec5766ad3d",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "4a8da64d1ee3d14bb4459f8cf12dabb9dd522aab1e2d233744e57f4bf84352de"
+    },
+    {
+      "id": "ui/icon_bait",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/bait-r1.png",
+      "source_sha256": "ec5395e9cb6e4cd3bbf41def4c8b947ad2e69412772f0678eac057bc7a107422",
+      "crop_xywh": [
+        369,
+        384,
+        574,
+        552
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.024390243902439025,
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_bait",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_bait.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/bait-r1.prompt.txt",
+      "prompt_sha256": "6a1c144b516b6050e5fbbfa2b0ef5f83fdc004dd37cc2f46d9b0356c41f7578d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/bait-r1.call.json",
+          "sha256": "431a3fe77fca30ed9a33a3a50fc4688e38e56af926678433c8139c5eef0203c3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/icon_bait/none/01.png",
+          "sha256": "3c4114f1fe44f34f839f89dc297d50682000ce86b1e954b030d19740300cf55d",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "bcfc89288c105791236fd3108f791aa98a44e95770b755ec237af2f9f2344f6a"
+    },
+    {
+      "id": "ui/hud_bait",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/bait-r1.png",
+      "source_sha256": "ec5395e9cb6e4cd3bbf41def4c8b947ad2e69412772f0678eac057bc7a107422",
+      "crop_xywh": [
+        369,
+        384,
+        574,
+        552
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.013937282229965157,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_bait",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_bait.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/bait-r1.prompt.txt",
+      "prompt_sha256": "6a1c144b516b6050e5fbbfa2b0ef5f83fdc004dd37cc2f46d9b0356c41f7578d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/bait-r1.call.json",
+          "sha256": "431a3fe77fca30ed9a33a3a50fc4688e38e56af926678433c8139c5eef0203c3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/hud_bait/none/01.png",
+          "sha256": "c4317164ce0b0b36060b11eed6cfbf26ea07cd0b610e707b203c1e1c5ca6e678",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "7b31796ac594f7650d710a17a0e9c06f91aa5e5548b06f608cb053fddcefbbcc"
+    },
+    {
+      "id": "ui/icon_book_fish",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/book_fish-r1.png",
+      "source_sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+      "crop_xywh": [
+        297,
+        364,
+        690,
+        618
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.020289855072463767,
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_book_fish",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_book_fish.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.prompt.txt",
+      "prompt_sha256": "eee27894d50c070f50ae04d05060ee2720ff343ed06989aa30135f87c8302ade",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.call.json",
+          "sha256": "f22305404818c2f214fde413e1edd28b63638ff53bff6613cf81e937100572e1",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/icon_book_fish/none/01.png",
+          "sha256": "72c37fc097a3f21278d16abb8948d10d3f4a93985249d582e8a6903f38a2ba50",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "f1a41512feb5efa3368db1f020da68f18ac59d7967d77c8119149fd1247cf3cd"
+    },
+    {
+      "id": "ui/hud_book_fish",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/book_fish-r1.png",
+      "source_sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+      "crop_xywh": [
+        297,
+        364,
+        690,
+        618
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.011594202898550725,
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_book_fish",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_book_fish.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.prompt.txt",
+      "prompt_sha256": "eee27894d50c070f50ae04d05060ee2720ff343ed06989aa30135f87c8302ade",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.call.json",
+          "sha256": "f22305404818c2f214fde413e1edd28b63638ff53bff6613cf81e937100572e1",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/hud_book_fish/none/01.png",
+          "sha256": "c4643f110db96b77fbe4f66c587af1508509fcc615e4a47be092a53d1e52dcff",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "f07f2875f95dd431d3992b2091f7b8d15ad34a49e957162a7e48f82ca77bfa81"
+    },
+    {
+      "id": "effects/bobber_float_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/bobber/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1",
+      "crop_xywh": [
+        680,
+        410,
+        220,
+        220
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "content_scale": 0.022727272727272728,
+      "content_anchor_xy": [
+        2,
+        5
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/bobber_float",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/effects/bobber_float_0.png",
+      "line_xy": [
+        4,
+        1
+      ],
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.call.json",
+          "sha256": "27ae4ba096c19965d84de7d5152c60715813cf5ad1b7b3b601017117da1bba1e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/bobber_float/none/01.png",
+          "sha256": "834c2431d71eff711c626d788b7d8453671e91de2992e8b06467611b1aae7cf2",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "efbc8509c18f338661fc758fc3ddd4998daaccdb3155c1b4d0d68cc258e7edf1"
+    },
+    {
+      "id": "effects/bobber_float_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/bobber/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1",
+      "crop_xywh": [
+        680,
+        410,
+        220,
+        176
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "content_scale": 0.022727272727272728,
+      "content_anchor_xy": [
+        2,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/bobber_float",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/effects/bobber_float_1.png",
+      "line_xy": [
+        4,
+        2
+      ],
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.call.json",
+          "sha256": "27ae4ba096c19965d84de7d5152c60715813cf5ad1b7b3b601017117da1bba1e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/bobber_float/none/02.png",
+          "sha256": "ea3e4eb0f8537ab9775234a05d1084c2e72ceadd61625060c9238aeebe9229c7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "85597a6ad5dd79f1ab8c4c3fe1ea2d2b1f9c8d6a06b9298e5a650fb5268367ca"
+    },
+    {
+      "id": "effects/bobber_bite_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/bobber/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1",
+      "crop_xywh": [
+        680,
+        410,
+        220,
+        132
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "content_scale": 0.022727272727272728,
+      "content_anchor_xy": [
+        2,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/bobber_bite",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/bobber_bite_0.png",
+      "line_xy": [
+        4,
+        3
+      ],
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.call.json",
+          "sha256": "27ae4ba096c19965d84de7d5152c60715813cf5ad1b7b3b601017117da1bba1e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/bobber_bite/none/01.png",
+          "sha256": "639c24a2009104a23065fb5236d3937d86f7a0ebb6856cbf23798f395aa7b341",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "1cab022a4a6276852ed6edef74c5ad56c8db477e1af85ca3a1aed9ec2eb0504b"
+    },
+    {
+      "id": "effects/bobber_bite_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/bobber/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1",
+      "crop_xywh": [
+        680,
+        410,
+        220,
+        88
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "content_scale": 0.022727272727272728,
+      "content_anchor_xy": [
+        2,
+        2
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/bobber_bite",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/bobber_bite_1.png",
+      "line_xy": [
+        4,
+        4
+      ],
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.call.json",
+          "sha256": "27ae4ba096c19965d84de7d5152c60715813cf5ad1b7b3b601017117da1bba1e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/bobber_bite/none/02.png",
+          "sha256": "87619a5d4b44a2cc6c4b4705be81b39927bbb32578b3205f0ee106d1aed0e0fa",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "6b9b421641cf48c863b3b087dac72ad726fcb1950ccba4e12194c19525302213"
+    },
+    {
+      "id": "effects/bobber_bite_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/bobber/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1",
+      "crop_xywh": [
+        680,
+        410,
+        220,
+        44
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "content_scale": 0.022727272727272728,
+      "content_anchor_xy": [
+        2,
+        1
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/bobber_bite",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/bobber_bite_2.png",
+      "line_xy": [
+        4,
+        5
+      ],
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/bobber-r2.call.json",
+          "sha256": "27ae4ba096c19965d84de7d5152c60715813cf5ad1b7b3b601017117da1bba1e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/bobber_bite/none/03.png",
+          "sha256": "fe92cce8819cf1f460b7172a1861265b1560f852d796dcbab076248d89554e16",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "93a8960a202c9a8048e1794ac19d0c8e1b3fe5183aec7f150fef3d78406ab31b"
+    },
+    {
+      "id": "ui/fishbar_frame",
+      "owner": "raster",
+      "canvas_wh": [
+        100,
+        16
+      ],
+      "pivot_xy": [
+        50,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/fishbar_frame",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/fishbar_frame.png",
+      "track_xywh": [
+        5,
+        5,
+        90,
+        6
+      ],
+      "input": "components/A023-fishing-gear/bar-timber-and-brass",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A023-fishing-gear/bar-timber-and-brass",
+          "slice_xywh": [
+            0,
+            0,
+            100,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/bar-blue-track",
+          "slice_xywh": [
+            0,
+            0,
+            90,
+            6
+          ],
+          "paste_xy": [
+            5,
+            5
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/bar-blue-top-line",
+          "slice_xywh": [
+            0,
+            0,
+            90,
+            1
+          ],
+          "paste_xy": [
+            5,
+            5
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-frame-r4.call.json",
+          "sha256": "19b441011f6bafdc3120a5230a3aff48f9565bc89e4f399502bc6570ca071ea5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/fishbar_frame/none/01.png",
+          "sha256": "e5b92dcce700fbefd3e8a096ce7312397a7a9fed43323623d6154359fb7efc1f",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "8a58b3a036884435553cbe5d1644ad99b48fbeba7dd15e155f269177c2d9072e"
+    },
+    {
+      "id": "ui/fishbar_zone",
+      "owner": "raster",
+      "canvas_wh": [
+        8,
+        6
+      ],
+      "pivot_xy": [
+        4,
+        3
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/fishbar_zone",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/fishbar_zone.png",
+      "patch_margins_lrtb": [
+        2,
+        2,
+        0,
+        0
+      ],
+      "input": "components/A023-fishing-gear/zone-ink-cap",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A023-fishing-gear/zone-ink-cap",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            6
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/zone-ink-cap",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            6
+          ],
+          "paste_xy": [
+            6,
+            0
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/zone-light-row",
+          "slice_xywh": [
+            0,
+            0,
+            4,
+            1
+          ],
+          "paste_xy": [
+            2,
+            0
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/zone-body-rows",
+          "slice_xywh": [
+            0,
+            0,
+            4,
+            4
+          ],
+          "paste_xy": [
+            2,
+            1
+          ]
+        },
+        {
+          "input": "components/A023-fishing-gear/zone-dark-row",
+          "slice_xywh": [
+            0,
+            0,
+            4,
+            1
+          ],
+          "paste_xy": [
+            2,
+            5
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar-zone-r4.call.json",
+          "sha256": "2d40cd72d47c75211cdf7977506835428a1c1c0f94e4601d35836045ebf76a2d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/fishbar_zone/none/01.png",
+          "sha256": "8b8386b0a3586a13075bec427ea62d34a08ef0cd00e757e18d1b995ba93a62c7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "20e5e4e9fd3cff9c51f97cb767056c72338fd60d2545d6d3421fe6dfdd63c868"
+    },
+    {
+      "id": "ui/fishbar_marker",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar_marker-r1.png",
+      "source_sha256": "822e5b79af2b4b2fb920581c75d2d1b4da9f35a3bfeb575c8d4b51593199240f",
+      "crop_xywh": [
+        370,
+        415,
+        285,
+        682
+      ],
+      "canvas_wh": [
+        5,
+        12
+      ],
+      "pivot_xy": [
+        2,
+        6
+      ],
+      "content_scale": 0.017543859649122806,
+      "content_anchor_xy": [
+        2,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/fishbar_marker",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/fishbar_marker.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_marker-r1.prompt.txt",
+      "prompt_sha256": "1f4cd1d79453ce5740a6bedee5491aed6ac726892091e6cc25eb00ffca5a6bd2",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_marker-r1.call.json",
+          "sha256": "a6f4d9329812f70d2396770486d7ca0af1cb01e07dade7ba6e0a878db2085318",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/fishbar_marker/none/01.png",
+          "sha256": "9840da3a0f262c830d82b6cc9cdda672491e8fbe3ed3648a90c7aacb3e594ad2",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "bbdef35234e70eedc66b605387e0c5e942f8e6ef1958d399855007f3c5196ab6"
+    },
+    {
+      "id": "ui/fishbar_hit_0",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar_hit-r1.png",
+      "source_sha256": "68567462a55b999b49264fb81e72b85f07a6c0d64801d2fcb4786068137c1b62",
+      "crop_xywh": [
+        186,
+        135,
+        459,
+        387
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.02178649237472767,
+      "content_anchor_xy": [
+        5,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/fishbar_hit",
+      "frame": 0,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/ui/fishbar_hit_0.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_hit-r1.prompt.txt",
+      "prompt_sha256": "0cd071d384edeaaf19fffb28bdfa35053e5157ad95d4dce507b79abef0ceb07e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_hit-r1.call.json",
+          "sha256": "a4217b588ee19589f114de462f956530c173ba8ac20a9618e6aaa7d6db4fcc88",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/fishbar_hit/none/01.png",
+          "sha256": "872d5a326a74e2e7ca040abbe2ebbf96f4d7d75afc8109e174b082631b222c3e",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "21df73d21db87dae723532588e2e7c43883893577b9c9e31d14dfbda284f413d"
+    },
+    {
+      "id": "ui/fishbar_hit_1",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar_hit-r1.png",
+      "source_sha256": "68567462a55b999b49264fb81e72b85f07a6c0d64801d2fcb4786068137c1b62",
+      "crop_xywh": [
+        861,
+        163,
+        459,
+        387
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.02178649237472767,
+      "content_anchor_xy": [
+        5,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/fishbar_hit",
+      "frame": 1,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/ui/fishbar_hit_1.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_hit-r1.prompt.txt",
+      "prompt_sha256": "0cd071d384edeaaf19fffb28bdfa35053e5157ad95d4dce507b79abef0ceb07e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_hit-r1.call.json",
+          "sha256": "a4217b588ee19589f114de462f956530c173ba8ac20a9618e6aaa7d6db4fcc88",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/fishbar_hit/none/02.png",
+          "sha256": "0e5efd9728214406f2f4ad40ee84f2a5b6f24bc13dd79ba49f1f08de1acce1a5",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "51929b97d60697a74ffadf7042775f1affc18299f6936f3f720a7ed4f15c3c87"
+    },
+    {
+      "id": "ui/fishbar_hit_2",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar_hit-r1.png",
+      "source_sha256": "68567462a55b999b49264fb81e72b85f07a6c0d64801d2fcb4786068137c1b62",
+      "crop_xywh": [
+        1553,
+        135,
+        459,
+        387
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.02178649237472767,
+      "content_anchor_xy": [
+        5,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/fishbar_hit",
+      "frame": 2,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/ui/fishbar_hit_2.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_hit-r1.prompt.txt",
+      "prompt_sha256": "0cd071d384edeaaf19fffb28bdfa35053e5157ad95d4dce507b79abef0ceb07e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_hit-r1.call.json",
+          "sha256": "a4217b588ee19589f114de462f956530c173ba8ac20a9618e6aaa7d6db4fcc88",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/fishbar_hit/none/03.png",
+          "sha256": "ac199f4108ddfa849baecf4b45e8066ca6983a7a4e207f5b93ab0cbcb2c351a5",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "9932a8f6aaf29afc5864df97b2337f4d6b2a2d31da04e741397145d9c99dbbc4"
+    },
+    {
+      "id": "ui/fishbar_miss_0",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar_miss-r1.png",
+      "source_sha256": "6569c1702c7d1252b139cc3efa8405ed01187c4f11b53d52291e4cfa8fc75117",
+      "crop_xywh": [
+        135,
+        177,
+        576,
+        355
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.017361111111111112,
+      "content_anchor_xy": [
+        5,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/fishbar_miss",
+      "frame": 0,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/ui/fishbar_miss_0.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_miss-r1.prompt.txt",
+      "prompt_sha256": "72c31499eef9cbc2303405c6d6e283681916c04e2022e51db0604abf7ba55698",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_miss-r1.call.json",
+          "sha256": "7a9e3b6394ee3c5e571fcd4e5b663288397e2731b70781060bdc5db693dc126c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/fishbar_miss/none/01.png",
+          "sha256": "b3dbb147d3829c027ef136f51431bc64c92b25c4bc9f1a93e783405e8ff0dd12",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "e7b1ebf291cb46560f9078511b4c10aeb59e78408af3918599b68c53169ce44a"
+    },
+    {
+      "id": "ui/fishbar_miss_1",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar_miss-r1.png",
+      "source_sha256": "6569c1702c7d1252b139cc3efa8405ed01187c4f11b53d52291e4cfa8fc75117",
+      "crop_xywh": [
+        799,
+        204,
+        576,
+        355
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.017361111111111112,
+      "content_anchor_xy": [
+        5,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/fishbar_miss",
+      "frame": 1,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/ui/fishbar_miss_1.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_miss-r1.prompt.txt",
+      "prompt_sha256": "72c31499eef9cbc2303405c6d6e283681916c04e2022e51db0604abf7ba55698",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_miss-r1.call.json",
+          "sha256": "7a9e3b6394ee3c5e571fcd4e5b663288397e2731b70781060bdc5db693dc126c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/fishbar_miss/none/02.png",
+          "sha256": "c7784c29812b7807154163e147a309a98053e1d798885eff5e0aac043953c952",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "31e068b945c43529e30b902bb30b84c1ae77a5aa3d7a0d789a79f095089beeea"
+    },
+    {
+      "id": "ui/fishbar_miss_2",
+      "owner": "raster",
+      "source": "assets/art_source/ui/fishing/fishbar_miss-r1.png",
+      "source_sha256": "6569c1702c7d1252b139cc3efa8405ed01187c4f11b53d52291e4cfa8fc75117",
+      "crop_xywh": [
+        1458,
+        204,
+        576,
+        355
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.017361111111111112,
+      "content_anchor_xy": [
+        5,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/fishbar_miss",
+      "frame": 2,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/ui/fishbar_miss_2.png",
+      "prompt": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_miss-r1.prompt.txt",
+      "prompt_sha256": "72c31499eef9cbc2303405c6d6e283681916c04e2022e51db0604abf7ba55698",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/raw/fishbar_miss-r1.call.json",
+          "sha256": "7a9e3b6394ee3c5e571fcd4e5b663288397e2731b70781060bdc5db693dc126c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/native/fishbar_miss/none/03.png",
+          "sha256": "66145f19ddbea650624e13af5ed75156063eaabe473236abdbc9aef9d82b1f72",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/contract.json",
+          "sha256": "16ba73a4102544c0bef78d3a9e88c0cad03a0b4aaf1d7f3cb42f91be1cb79893",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+          "sha256": "fb32bbf9301d013f54da36dbd3d01b144900591947a343c8dad1033d6ba805a2",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A023",
+      "integration_task": "0206",
+      "revision": 1,
+      "approval": "A023 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0206",
+      "output_sha256": "4033f99c674bcc810dec5a1cf02e2a5c44ad405680fbcfe6fc9444f6b24e9ce8"
     }
   ]
 }

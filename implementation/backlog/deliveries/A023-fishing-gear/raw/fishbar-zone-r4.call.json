@@ -1,0 +1,23 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit\nAsset type: A023 fixed8x6 pixel-art sweet-zone UI patch.\nImage1 is edit target. It currently has EIGHT square columns and onlyFIVE square rows. Correct ONLY this geometry: add ONE entire green body row so it is EXACTLY EIGHT columns by SIX rows, each cell the SAME size square. Final rectangle aspect8:6, not8:5. All48cells opaque, no rounded corners, no holes. Flat colors, not varied per-square shading.\nExact6-row design: top row four center columns are light muted grass green #8ab659; rows2,3,4,5 four center columns are flat grass green #6a9646; bottomrow four center columns are dark grass green #4e7a35. First two and last two columns are solid dark purple ink #241f2e caps, identical throughout all6rows.\nRemove the visible darker/lighter checker shading; each center row must be ONE uniform color across its4columns. No outline outside this8x6rectangle. Keep the source pixel squares huge and sharp so reduction preserves them.\nOne clean centered rectangular sprite only; true transparent background OUTSIDE the solid rectangle, no transparency inside. No text, labels, grids, arrows, numbers, bloom, gradient or extra shapes. Orthographic flat UI pixel art.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/rejected/fishbar_zone-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/rejected/fishbar_zone-r3.png",
+      "sha256": "829d378adf77cc8f5f0aa0f3e7d5c9b0783f2322c62250e9670b05a564401829",
+      "role": "Image reference / edit target, role specified in exact prompt"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0d8ca115-a6be-4453-8116-51f2d10ccad8.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A023-fishing-gear\\raw\\fishbar-zone-r4.png",
+  "sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb",
+  "date": "2026-10-14",
+  "revision": 4,
+  "decision": "pending native-scale inspection"
+}

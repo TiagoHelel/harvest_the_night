@@ -150,6 +150,9 @@ static func orphan_icons() -> Array:
 	for id in GameData.TOWER_LEVELS:
 		for step in (GameData.TOWER_LEVELS[id] as Array).size():
 			wanted["icon_%s_%d" % [id, step + 2]] = true
+	# **The fish book's tab** (task 0182), its picture at 16 as well as the
+	# tab's 10 - A023's since task 0206.
+	wanted["icon_book_fish"] = true
 	# **The day's build list** (task 0201): a building's pictures, A018's
 	# sprinklers the first.
 	for id in GameData.BUILDINGS:

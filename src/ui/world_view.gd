@@ -271,6 +271,8 @@ var _zzz_textures: Dictionary = {}
 ## The guardian's cursor and the porch guardian (task 0131).
 var _cursor: GuardianCursor
 var _guardian: GuardianView
+## The float on the water while a line is out (task 0206).
+var _bobber: BobberView
 ## The barnyard: animals at home, the dog, dig spots (task 0185).
 var _animal_view: AnimalView
 ## What the night left lying about (task 0221).
@@ -415,6 +417,9 @@ func _ready() -> void:
 	_guardian = GuardianView.new()
 	_guardian.name = "Guardian"
 	_occupants.add_child(_guardian)
+	_bobber = BobberView.new()
+	_bobber.name = "Bobber"
+	_occupants.add_child(_bobber)
 
 	_ghost = Sprite2D.new()
 	_ghost.name = "Ghost"
@@ -539,6 +544,8 @@ func show_state(state: Dictionary) -> void:
 	_state = state
 	if _guardian != null:
 		_guardian.show_state(state)
+	if _bobber != null:
+		_bobber.show_state(state)
 	if _animal_view != null:
 		_animal_view.show_state(state)
 	if _loot_view != null:
@@ -1332,6 +1339,11 @@ func cursor() -> GuardianCursor:
 ## The porch guardian (task 0131).
 func guardian() -> GuardianView:
 	return _guardian
+
+
+## The float (task 0206).
+func bobber() -> BobberView:
+	return _bobber
 
 
 ## Put the camera's centre on a world point, clamped - the shots' hook.

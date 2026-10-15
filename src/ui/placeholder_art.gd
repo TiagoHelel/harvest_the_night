@@ -116,12 +116,6 @@ const POSES := {
 }
 
 ## A021's nodes: one 16x16 tile, pivot at its foot (task 0156).
-## A023's fishing bar (task 0180): the frame around its track, the green's
-## 3-patch, the marker and the two flashes, at the canvases A023 states.
-const FISHBAR_FRAME := {"canvas": Vector2i(100, 16), "pivot": Vector2i(50, 8), "draw_scale": 1.0}
-const FISHBAR_ZONE := {"canvas": Vector2i(8, 6), "pivot": Vector2i(4, 3), "draw_scale": 1.0}
-const FISHBAR_MARKER := {"canvas": Vector2i(5, 12), "pivot": Vector2i(2, 6), "draw_scale": 1.0}
-const FISHBAR_FLASH := {"canvas": Vector2i(12, 12), "pivot": Vector2i(6, 6), "draw_scale": 1.0}
 const NODE_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
 
 
@@ -369,21 +363,6 @@ const ART := {
 	&"house_2_hurt": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house_hurt", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
 	&"house_3": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
 	&"house_3_hurt": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house_hurt", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
-	# A023's fish book tab icon (task 0182): the fish icon itself until 0206.
-	&"icon_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_fish", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_book_fish": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_fish", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A023's bar (task 0180), drawn by code until 0206 integrates the pack.
-	&"fishbar_frame": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": FISHBAR_FRAME, "final": FISHBAR_FRAME, "bare": true},
-	&"fishbar_zone": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": FISHBAR_ZONE, "final": FISHBAR_ZONE, "bare": true},
-	&"fishbar_marker": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": FISHBAR_MARKER, "final": FISHBAR_MARKER, "bare": true},
-	&"fishbar_hit": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 3, "seconds": 0.065, "loop": false, "stand_in": &"", "geometry": FISHBAR_FLASH, "final": FISHBAR_FLASH},
-	&"fishbar_miss": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 3, "seconds": 0.065, "loop": false, "stand_in": &"", "geometry": FISHBAR_FLASH, "final": FISHBAR_FLASH},
-	# A023's bait (task 0181): the worm as a carrot gone pink, the fish bait
-	# as the meat's chunk paled, until 0206 integrates the pack.
-	&"icon_worm": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_carrot", "tint": Color(1.15, 0.7, 0.8), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_worm": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.15, 0.7, 0.8), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 	# A056's collection book (task 0287), until 0288 integrates it: the
 	# cover, the ornament and every badge drawn by code (`CollectionArt`);

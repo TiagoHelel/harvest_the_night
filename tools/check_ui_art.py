@@ -36,6 +36,8 @@ PAIRS = {
     # Task 0199: summer's produce (0168) and its four seed packets (0170).
     'A016': ['pepper', 'sunflower', 'melon', 'corn_seed', 'pepper_seed', 'sunflower_seed',
              'melon_seed'],
+    # Task 0206: the worm and the fish bait (0181), and the fish book's tab (0182).
+    'A023': ['worm', 'bait', 'book_fish'],
     # Task 0201: the three sprinklers' build-list icons (0178).
     'A018': ['copper_sprinkler', 'iron_sprinkler', 'gold_sprinkler'],
     # Task 0200: autumn's produce (0168) and its four seed packets (0170).
@@ -89,6 +91,22 @@ PACK_HEADS = {
     'A047': ['rat'],
     'A048': ['crow'],
 }
+
+
+## A023's fishing pieces (task 0206): the bar's frame round its 90x6 track
+## at (5,5), the green's 8x6 three-patch - two pixels of cap each side, fully
+## opaque - the 5x12 needle and the hit and miss flashes, three one-shot
+## frames of 0.065 s on 12x12; and the 8x8 bobber standing on (4,6): its
+## float, two frames round and round at 0.4 s, and its bite, three of 0.1 s
+## sinking, each with the point its line ties to. The frame and the green are
+## A023's compositions from its own components; nothing here emits.
+FISHING = {'ui/fishbar_frame': ([100, 16], [50, 8], 1, 1, False),
+           'ui/fishbar_zone': ([8, 6], [4, 3], 1, 1, False),
+           'ui/fishbar_marker': ([5, 12], [2, 6], 1, 1, False),
+           'ui/fishbar_hit': ([12, 12], [6, 6], 3, 0.065, False),
+           'ui/fishbar_miss': ([12, 12], [6, 6], 3, 0.065, False),
+           'effects/bobber_float': ([8, 8], [4, 6], 2, 0.4, True),
+           'effects/bobber_bite': ([8, 8], [4, 6], 3, 0.1, False)}
 
 
 ## A004's cursor (task 0146): seven looks of a two-frame 0.4 s pulse, 16x16 at
@@ -224,7 +242,32 @@ def main():
             fingerprint=art.tobytes();assert fingerprint not in seen[16],'Duplicate head: '+kind;seen[16].add(fingerprint)
             assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']]
             heads+=1
-    by_id={e['id']:e for e in manifest['assets']};cursors=set()
+    by_id={e['id']:e for e in manifest['assets']};fishing=0
+    for name,(canvas,pivot,count,seconds,loop) in FISHING.items():
+        frames=[by_id[name]] if count==1 else [by_id['%s_%d'%(name,i)] for i in range(count)]
+        shapes=set();lines=[]
+        for i,e in enumerate(frames):
+            assert e.get('generation_task')=='A023' and e['canvas_wh']==canvas and e['pivot_xy']==pivot,'Fishing piece drift: '+e['id']
+            assert e['seconds']==seconds and e['loop'] is loop and e['frame']==i,'Fishing piece timing: '+e['id']
+            assert not any(k in e for k in ('light_xy','lights_xy')),'A fishing piece emits: '+e['id']
+            art=images[e['id']];pixels=list(import_art.samples(art))
+            assert all(p[3] in (0,255) for p in pixels) and art.getbbox(),'Fishing piece alpha: '+e['id']
+            assert art.tobytes() not in shapes,'Two frames alike: '+e['id'];shapes.add(art.tobytes())
+            assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']]
+            check_approved(e,art)
+            if name.startswith('effects/'):
+                assert e.get('line_xy') and art.getpixel(tuple(e['line_xy']))[3]==255,'The line ties to nothing: '+e['id']
+                lines.append(e['line_xy'][1])
+            fishing+=1
+        if name=='effects/bobber_bite':
+            assert lines==sorted(lines) and lines[0]<lines[-1],'The bite does not sink: '+str(lines)
+    frame=by_id['ui/fishbar_frame'];zone=by_id['ui/fishbar_zone']
+    assert frame.get('track_xywh')==[5,5,90,6] and zone.get('patch_margins_lrtb')==[2,2,0,0],'Track or green margins drift'
+    assert images[zone['id']].getchannel('A').getextrema()==(255,255),'The green is not fully opaque'
+    for e in (frame,zone):
+        assert e.get('operation')=='compose' and 'source' not in e and all(by_id[p['input']].get('assembly_component_of')=='A023' for p in e['parts']),'A layered bar piece not promoted as its composition: '+e['id']
+    print('OK: %d fishing frames - the bar, its green, needle and flashes, the bobber floating and sinking' % fishing)
+    cursors=set()
     for look in CURSOR_LOOKS:
         for frame in (0,1):
             e=by_id['ui/cursor_%s_%d'%(look,frame)]

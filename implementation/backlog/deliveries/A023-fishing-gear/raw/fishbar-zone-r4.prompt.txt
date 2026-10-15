@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: A023 fixed8x6 pixel-art sweet-zone UI patch.
+Image1 is edit target. It currently has EIGHT square columns and onlyFIVE square rows. Correct ONLY this geometry: add ONE entire green body row so it is EXACTLY EIGHT columns by SIX rows, each cell the SAME size square. Final rectangle aspect8:6, not8:5. All48cells opaque, no rounded corners, no holes. Flat colors, not varied per-square shading.
+Exact6-row design: top row four center columns are light muted grass green #8ab659; rows2,3,4,5 four center columns are flat grass green #6a9646; bottomrow four center columns are dark grass green #4e7a35. First two and last two columns are solid dark purple ink #241f2e caps, identical throughout all6rows.
+Remove the visible darker/lighter checker shading; each center row must be ONE uniform color across its4columns. No outline outside this8x6rectangle. Keep the source pixel squares huge and sharp so reduction preserves them.
+One clean centered rectangular sprite only; true transparent background OUTSIDE the solid rectangle, no transparency inside. No text, labels, grids, arrows, numbers, bloom, gradient or extra shapes. Orthographic flat UI pixel art.

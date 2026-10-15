@@ -2322,6 +2322,50 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/components/A023-fishing-gear/bar-blue-top-line.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/bar-blue-track.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/bar-brass-cap-right.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/bar-brass-cap.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/bar-dark-recess.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/bar-original-frame.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/bar-timber-and-brass.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/zone-body-rows.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/zone-dark-row.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/zone-ink-cap.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A023-fishing-gear/zone-light-row.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/beet_0.png",
       "owner": "raster"
     },
@@ -2571,6 +2615,26 @@
     },
     {
       "output": "sprites/effects/bee_swarm_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/bobber_bite_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/bobber_bite_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/bobber_bite_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/bobber_float_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/bobber_float_1.png",
       "owner": "raster"
     },
     {
@@ -3962,6 +4026,42 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/fishbar_frame.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/fishbar_hit_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/fishbar_hit_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/fishbar_hit_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/fishbar_marker.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/fishbar_miss_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/fishbar_miss_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/fishbar_miss_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/fishbar_zone.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/head_breaker.png",
       "owner": "raster"
     },
@@ -4014,6 +4114,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_bait.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_barricade.png",
       "owner": "raster"
     },
@@ -4027,6 +4131,10 @@
     },
     {
       "output": "sprites/ui/hud_beet_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_book_fish.png",
       "owner": "raster"
     },
     {
@@ -4478,6 +4586,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_worm.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_zombie_bait.png",
       "owner": "raster"
     },
@@ -4502,6 +4614,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_bait.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_barricade.png",
       "owner": "raster"
     },
@@ -4515,6 +4631,10 @@
     },
     {
       "output": "sprites/ui/icon_beet_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_book_fish.png",
       "owner": "raster"
     },
     {
@@ -4963,6 +5083,10 @@
     },
     {
       "output": "sprites/ui/icon_wool.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_worm.png",
       "owner": "raster"
     },
     {

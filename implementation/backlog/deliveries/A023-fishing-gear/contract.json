@@ -1,0 +1,1952 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "bobber_bite",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/bobber_bite-none-0-night.png",
+          "path": "native/bobber_bite/none/01.png",
+          "points": {
+            "line_xy": [
+              4,
+              3
+            ]
+          },
+          "pose": "3 visible float rows"
+        },
+        {
+          "issue": "",
+          "night": "preview/bobber_bite-none-1-night.png",
+          "path": "native/bobber_bite/none/02.png",
+          "points": {
+            "line_xy": [
+              4,
+              4
+            ]
+          },
+          "pose": "2 visible float rows"
+        },
+        {
+          "issue": "",
+          "night": "preview/bobber_bite-none-2-night.png",
+          "path": "native/bobber_bite/none/03.png",
+          "points": {
+            "line_xy": [
+              4,
+              5
+            ]
+          },
+          "pose": "1 visible float rows"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "poses": [
+        "3 visible float rows",
+        "2 visible float rows",
+        "1 visible float rows"
+      ]
+    },
+    {
+      "anim": "bobber_float",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/bobber_float-none-0-night.png",
+          "path": "native/bobber_float/none/01.png",
+          "points": {
+            "line_xy": [
+              4,
+              1
+            ]
+          },
+          "pose": "5 visible float rows"
+        },
+        {
+          "issue": "",
+          "night": "preview/bobber_float-none-1-night.png",
+          "path": "native/bobber_float/none/02.png",
+          "points": {
+            "line_xy": [
+              4,
+              2
+            ]
+          },
+          "pose": "4 visible float rows"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "poses": [
+        "5 visible float rows",
+        "4 visible float rows"
+      ]
+    },
+    {
+      "anim": "fishbar_frame",
+      "canvas_wh": [
+        100,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/fishbar_frame-none-0-night.png",
+          "path": "native/fishbar_frame/none/01.png",
+          "points": {
+            "track_xywh": [
+              5,
+              5,
+              90,
+              6
+            ]
+          },
+          "pose": "fishbar_frame 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        50,
+        8
+      ],
+      "poses": [
+        "fishbar_frame 0"
+      ]
+    },
+    {
+      "anim": "fishbar_hit",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/fishbar_hit-none-0-night.png",
+          "path": "native/fishbar_hit/none/01.png",
+          "points": {},
+          "pose": "initial"
+        },
+        {
+          "issue": "",
+          "night": "preview/fishbar_hit-none-1-night.png",
+          "path": "native/fishbar_hit/none/02.png",
+          "points": {},
+          "pose": "expanded"
+        },
+        {
+          "issue": "",
+          "night": "preview/fishbar_hit-none-2-night.png",
+          "path": "native/fishbar_hit/none/03.png",
+          "points": {},
+          "pose": "fading"
+        }
+      ],
+      "frame_seconds": 0.065,
+      "frames": 3,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "poses": [
+        "initial",
+        "expanded",
+        "fading"
+      ]
+    },
+    {
+      "anim": "fishbar_marker",
+      "canvas_wh": [
+        5,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/fishbar_marker-none-0-night.png",
+          "path": "native/fishbar_marker/none/01.png",
+          "points": {},
+          "pose": "fishbar_marker 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        2,
+        6
+      ],
+      "poses": [
+        "fishbar_marker 0"
+      ]
+    },
+    {
+      "anim": "fishbar_miss",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/fishbar_miss-none-0-night.png",
+          "path": "native/fishbar_miss/none/01.png",
+          "points": {},
+          "pose": "initial"
+        },
+        {
+          "issue": "",
+          "night": "preview/fishbar_miss-none-1-night.png",
+          "path": "native/fishbar_miss/none/02.png",
+          "points": {},
+          "pose": "expanded"
+        },
+        {
+          "issue": "",
+          "night": "preview/fishbar_miss-none-2-night.png",
+          "path": "native/fishbar_miss/none/03.png",
+          "points": {},
+          "pose": "fading"
+        }
+      ],
+      "frame_seconds": 0.065,
+      "frames": 3,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "poses": [
+        "initial",
+        "expanded",
+        "fading"
+      ]
+    },
+    {
+      "anim": "fishbar_zone",
+      "canvas_wh": [
+        8,
+        6
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/fishbar_zone-none-0-night.png",
+          "path": "native/fishbar_zone/none/01.png",
+          "points": {
+            "patch_margins_lrtb": [
+              2,
+              2,
+              0,
+              0
+            ]
+          },
+          "pose": "fishbar_zone 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        4,
+        3
+      ],
+      "poses": [
+        "fishbar_zone 0"
+      ]
+    },
+    {
+      "anim": "hud_bait",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_bait-none-0-night.png",
+          "path": "native/hud_bait/none/01.png",
+          "points": {},
+          "pose": "hud_bait 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_bait 0"
+      ]
+    },
+    {
+      "anim": "hud_book_fish",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_book_fish-none-0-night.png",
+          "path": "native/hud_book_fish/none/01.png",
+          "points": {},
+          "pose": "hud_book_fish 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_book_fish 0"
+      ]
+    },
+    {
+      "anim": "hud_worm",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_worm-none-0-night.png",
+          "path": "native/hud_worm/none/01.png",
+          "points": {},
+          "pose": "hud_worm 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_worm 0"
+      ]
+    },
+    {
+      "anim": "icon_bait",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_bait-none-0-night.png",
+          "path": "native/icon_bait/none/01.png",
+          "points": {},
+          "pose": "icon_bait 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_bait 0"
+      ]
+    },
+    {
+      "anim": "icon_book_fish",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_book_fish-none-0-night.png",
+          "path": "native/icon_book_fish/none/01.png",
+          "points": {},
+          "pose": "icon_book_fish 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_book_fish 0"
+      ]
+    },
+    {
+      "anim": "icon_worm",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_worm-none-0-night.png",
+          "path": "native/icon_worm/none/01.png",
+          "points": {},
+          "pose": "icon_worm 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_worm 0"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [],
+  "comparison": [],
+  "components": {
+    "bar-blue-top-line": {
+      "call": "raw/fishbar-frame-r4.call.json",
+      "canvas_wh": [
+        90,
+        1
+      ],
+      "operation": "render",
+      "output": "components/bar-blue-top-line.png",
+      "palette_keys": [
+        "water"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.1,
+        "crop_xywh": [
+          300,
+          333,
+          900,
+          10
+        ]
+      },
+      "sha256": "baa23e65720ed282bde7b25ed1bbea000e5a15d428000e17f0ebad29c35d57de",
+      "source": "raw/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132"
+    },
+    "bar-blue-track": {
+      "call": "raw/fishbar-frame-r4.call.json",
+      "canvas_wh": [
+        90,
+        6
+      ],
+      "operation": "render",
+      "output": "components/bar-blue-track.png",
+      "palette_keys": [
+        "water_dark"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.1,
+        "crop_xywh": [
+          300,
+          350,
+          900,
+          60
+        ]
+      },
+      "sha256": "510aa97126a74c7e02cb2543484ca1a852f5f221f9c122af89257c754b01adb1",
+      "source": "raw/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132"
+    },
+    "bar-brass-cap": {
+      "call": "raw/fishbar-frame-r4.call.json",
+      "canvas_wh": [
+        5,
+        14
+      ],
+      "operation": "render",
+      "output": "components/bar-brass-cap.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.05907172995780591,
+        "crop_xywh": [
+          64,
+          257,
+          83,
+          237
+        ]
+      },
+      "sha256": "64b4aa464be039c283196bcae10aed04a9ca2654142db005bf5f4a698197215c",
+      "source": "raw/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132"
+    },
+    "bar-brass-cap-right": {
+      "canvas_wh": [
+        5,
+        14
+      ],
+      "input": "bar-brass-cap",
+      "operation": "mirror_x",
+      "output": "components/bar-brass-cap-right.png",
+      "sha256": "ba8ed6601cc949323733ea9ae73b412b8f28fe33c8acda287ddcc30c3fe0e662"
+    },
+    "bar-dark-recess": {
+      "call": "raw/fishbar-frame-r4.call.json",
+      "canvas_wh": [
+        90,
+        10
+      ],
+      "operation": "render",
+      "output": "components/bar-dark-recess.png",
+      "palette_keys": [
+        "ink_soft"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.1,
+        "crop_xywh": [
+          300,
+          345,
+          900,
+          100
+        ]
+      },
+      "sha256": "8e853b133d8469613fee1ef0aa9017f60c1be2876afd2b6d679c619b7f216b70",
+      "source": "raw/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132"
+    },
+    "bar-original-frame": {
+      "call": "raw/fishbar-frame-r4.call.json",
+      "canvas_wh": [
+        100,
+        16
+      ],
+      "operation": "render",
+      "output": "components/bar-original-frame.png",
+      "palette_keys": [
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "water_dark",
+        "water"
+      ],
+      "pivot_xy": [
+        50,
+        8
+      ],
+      "prompt": "raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "recipe": {
+        "content_anchor_xy": [
+          49,
+          5
+        ],
+        "content_scale": 0.0472744814278823,
+        "crop_xywh": [
+          59,
+          257,
+          2073,
+          237
+        ]
+      },
+      "sha256": "e1cb9b53817a49731a6cb8d537209f5f5c76356b406f6542fd5f59a75bdb779e",
+      "source": "raw/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132"
+    },
+    "bar-timber-and-brass": {
+      "canvas_wh": [
+        100,
+        16
+      ],
+      "operation": "compose",
+      "output": "components/bar-timber-and-brass.png",
+      "parts": [
+        {
+          "input": "bar-dark-recess",
+          "paste_xy": [
+            5,
+            3
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            90,
+            10
+          ]
+        },
+        {
+          "input": "bar-original-frame",
+          "paste_xy": [
+            5,
+            1
+          ],
+          "slice_xywh": [
+            5,
+            3,
+            90,
+            2
+          ]
+        },
+        {
+          "input": "bar-original-frame",
+          "paste_xy": [
+            5,
+            13
+          ],
+          "slice_xywh": [
+            5,
+            12,
+            90,
+            2
+          ]
+        },
+        {
+          "input": "bar-brass-cap",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            14
+          ]
+        },
+        {
+          "input": "bar-brass-cap-right",
+          "paste_xy": [
+            95,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            14
+          ]
+        }
+      ],
+      "sha256": "cedc8ec364c507eeb421059b3feaa4db381245f9843008eaf508a11b1991af48"
+    },
+    "zone-body-rows": {
+      "call": "raw/fishbar-zone-r4.call.json",
+      "canvas_wh": [
+        4,
+        4
+      ],
+      "operation": "render",
+      "output": "components/zone-body-rows.png",
+      "palette_keys": [
+        "grass"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.05,
+        "crop_xywh": [
+          600,
+          470,
+          80,
+          80
+        ]
+      },
+      "sha256": "f5a30527c3e35c64750d9905237449b53702a49e83f95b5ab9babf4fd7104dcb",
+      "source": "raw/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb"
+    },
+    "zone-dark-row": {
+      "call": "raw/fishbar-zone-r4.call.json",
+      "canvas_wh": [
+        4,
+        1
+      ],
+      "operation": "render",
+      "output": "components/zone-dark-row.png",
+      "palette_keys": [
+        "grass_dark"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.05,
+        "crop_xywh": [
+          600,
+          710,
+          80,
+          20
+        ]
+      },
+      "sha256": "020b72968fa550fbf988bcf5d620958b5eb777b9f71614d0d5eef736371d1b9b",
+      "source": "raw/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb"
+    },
+    "zone-ink-cap": {
+      "call": "raw/fishbar-zone-r4.call.json",
+      "canvas_wh": [
+        2,
+        6
+      ],
+      "operation": "render",
+      "output": "components/zone-ink-cap.png",
+      "palette_keys": [
+        "ink"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.05,
+        "crop_xywh": [
+          380,
+          350,
+          40,
+          120
+        ]
+      },
+      "sha256": "0d034c2fd05ef90b791516bd1f54437dc504812e083e6a89e1bca236542624e3",
+      "source": "raw/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb"
+    },
+    "zone-light-row": {
+      "call": "raw/fishbar-zone-r4.call.json",
+      "canvas_wh": [
+        4,
+        1
+      ],
+      "operation": "render",
+      "output": "components/zone-light-row.png",
+      "palette_keys": [
+        "grass_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.05,
+        "crop_xywh": [
+          600,
+          340,
+          80,
+          20
+        ]
+      },
+      "sha256": "a706504a5cc8044addcd0b359d45e34bf488690d5c785823af5d990e0618563e",
+      "source": "raw/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "icon_worm",
+      "call": "raw/worm-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_worm/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_worm 0",
+      "prompt": "raw/worm-r1.prompt.txt",
+      "prompt_sha256": "f63da1bc05fa4784b7f3263550949fee54d481e3fc6c4e1c3990a2a6ac77321a",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          4
+        ],
+        "content_scale": 0.020289855072463767,
+        "crop_xywh": [
+          282,
+          455,
+          690,
+          392
+        ]
+      },
+      "resource_id": "worm",
+      "runtime_name": "sprites/ui/icon_worm.png",
+      "seconds": 1,
+      "sha256": "035bdfb23b0027d0604e2c94908746e64232056ff110c374424ea3f9c1cdfb24",
+      "source": "raw/worm-r1.png",
+      "source_sha256": "e9f0c795c5699e26e1be42915cd2a100b9c1e903bfea84ced0c9c738d70053d3"
+    },
+    {
+      "anim": "hud_worm",
+      "call": "raw/worm-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_worm/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_worm 0",
+      "prompt": "raw/worm-r1.prompt.txt",
+      "prompt_sha256": "f63da1bc05fa4784b7f3263550949fee54d481e3fc6c4e1c3990a2a6ac77321a",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.011594202898550725,
+        "crop_xywh": [
+          282,
+          455,
+          690,
+          392
+        ]
+      },
+      "resource_id": "worm",
+      "runtime_name": "sprites/ui/hud_worm.png",
+      "seconds": 1,
+      "sha256": "2eabf4514d717c61857288af8b496a52f17f156be92822488cb5ffec5766ad3d",
+      "source": "raw/worm-r1.png",
+      "source_sha256": "e9f0c795c5699e26e1be42915cd2a100b9c1e903bfea84ced0c9c738d70053d3"
+    },
+    {
+      "anim": "icon_bait",
+      "call": "raw/bait-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_bait/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_bait 0",
+      "prompt": "raw/bait-r1.prompt.txt",
+      "prompt_sha256": "6a1c144b516b6050e5fbbfa2b0ef5f83fdc004dd37cc2f46d9b0356c41f7578d",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "content_scale": 0.024390243902439025,
+        "crop_xywh": [
+          369,
+          384,
+          574,
+          552
+        ]
+      },
+      "resource_id": "bait",
+      "runtime_name": "sprites/ui/icon_bait.png",
+      "seconds": 1,
+      "sha256": "3c4114f1fe44f34f839f89dc297d50682000ce86b1e954b030d19740300cf55d",
+      "source": "raw/bait-r1.png",
+      "source_sha256": "ec5395e9cb6e4cd3bbf41def4c8b947ad2e69412772f0678eac057bc7a107422"
+    },
+    {
+      "anim": "hud_bait",
+      "call": "raw/bait-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_bait/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_bait 0",
+      "prompt": "raw/bait-r1.prompt.txt",
+      "prompt_sha256": "6a1c144b516b6050e5fbbfa2b0ef5f83fdc004dd37cc2f46d9b0356c41f7578d",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          4
+        ],
+        "content_scale": 0.013937282229965157,
+        "crop_xywh": [
+          369,
+          384,
+          574,
+          552
+        ]
+      },
+      "resource_id": "bait",
+      "runtime_name": "sprites/ui/hud_bait.png",
+      "seconds": 1,
+      "sha256": "c4317164ce0b0b36060b11eed6cfbf26ea07cd0b610e707b203c1e1c5ca6e678",
+      "source": "raw/bait-r1.png",
+      "source_sha256": "ec5395e9cb6e4cd3bbf41def4c8b947ad2e69412772f0678eac057bc7a107422"
+    },
+    {
+      "anim": "icon_book_fish",
+      "call": "raw/book_fish-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_book_fish/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_book_fish 0",
+      "prompt": "raw/book_fish-r1.prompt.txt",
+      "prompt_sha256": "eee27894d50c070f50ae04d05060ee2720ff343ed06989aa30135f87c8302ade",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "content_scale": 0.020289855072463767,
+        "crop_xywh": [
+          297,
+          364,
+          690,
+          618
+        ]
+      },
+      "resource_id": "book_fish",
+      "runtime_name": "sprites/ui/icon_book_fish.png",
+      "seconds": 1,
+      "sha256": "72c37fc097a3f21278d16abb8948d10d3f4a93985249d582e8a6903f38a2ba50",
+      "source": "raw/book_fish-r1.png",
+      "source_sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d"
+    },
+    {
+      "anim": "hud_book_fish",
+      "call": "raw/book_fish-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_book_fish/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_book_fish 0",
+      "prompt": "raw/book_fish-r1.prompt.txt",
+      "prompt_sha256": "eee27894d50c070f50ae04d05060ee2720ff343ed06989aa30135f87c8302ade",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.011594202898550725,
+        "crop_xywh": [
+          297,
+          364,
+          690,
+          618
+        ]
+      },
+      "resource_id": "book_fish",
+      "runtime_name": "sprites/ui/hud_book_fish.png",
+      "seconds": 1,
+      "sha256": "c4643f110db96b77fbe4f66c587af1508509fcc615e4a47be092a53d1e52dcff",
+      "source": "raw/book_fish-r1.png",
+      "source_sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d"
+    },
+    {
+      "anim": "bobber_float",
+      "call": "raw/bobber-r2.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "output": "native/bobber_float/none/01.png",
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "points": {
+        "line_xy": [
+          4,
+          1
+        ]
+      },
+      "pose": "5 visible float rows",
+      "prompt": "raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          5
+        ],
+        "content_scale": 0.022727272727272728,
+        "crop_xywh": [
+          680,
+          410,
+          220,
+          220
+        ]
+      },
+      "runtime_name": "sprites/effects/bobber_float_0.png",
+      "seconds": 0.4,
+      "sha256": "834c2431d71eff711c626d788b7d8453671e91de2992e8b06467611b1aae7cf2",
+      "source": "raw/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1"
+    },
+    {
+      "anim": "bobber_float",
+      "call": "raw/bobber-r2.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "output": "native/bobber_float/none/02.png",
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "points": {
+        "line_xy": [
+          4,
+          2
+        ]
+      },
+      "pose": "4 visible float rows",
+      "prompt": "raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          4
+        ],
+        "content_scale": 0.022727272727272728,
+        "crop_xywh": [
+          680,
+          410,
+          220,
+          176
+        ]
+      },
+      "runtime_name": "sprites/effects/bobber_float_1.png",
+      "seconds": 0.4,
+      "sha256": "ea3e4eb0f8537ab9775234a05d1084c2e72ceadd61625060c9238aeebe9229c7",
+      "source": "raw/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1"
+    },
+    {
+      "anim": "bobber_bite",
+      "call": "raw/bobber-r2.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/bobber_bite/none/01.png",
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "points": {
+        "line_xy": [
+          4,
+          3
+        ]
+      },
+      "pose": "3 visible float rows",
+      "prompt": "raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          3
+        ],
+        "content_scale": 0.022727272727272728,
+        "crop_xywh": [
+          680,
+          410,
+          220,
+          132
+        ]
+      },
+      "runtime_name": "sprites/effects/bobber_bite_0.png",
+      "seconds": 0.1,
+      "sha256": "639c24a2009104a23065fb5236d3937d86f7a0ebb6856cbf23798f395aa7b341",
+      "source": "raw/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1"
+    },
+    {
+      "anim": "bobber_bite",
+      "call": "raw/bobber-r2.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/bobber_bite/none/02.png",
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "points": {
+        "line_xy": [
+          4,
+          4
+        ]
+      },
+      "pose": "2 visible float rows",
+      "prompt": "raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.022727272727272728,
+        "crop_xywh": [
+          680,
+          410,
+          220,
+          88
+        ]
+      },
+      "runtime_name": "sprites/effects/bobber_bite_1.png",
+      "seconds": 0.1,
+      "sha256": "87619a5d4b44a2cc6c4b4705be81b39927bbb32578b3205f0ee106d1aed0e0fa",
+      "source": "raw/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1"
+    },
+    {
+      "anim": "bobber_bite",
+      "call": "raw/bobber-r2.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/bobber_bite/none/03.png",
+      "pivot_xy": [
+        4,
+        6
+      ],
+      "points": {
+        "line_xy": [
+          4,
+          5
+        ]
+      },
+      "pose": "1 visible float rows",
+      "prompt": "raw/bobber-r2.prompt.txt",
+      "prompt_sha256": "fc778d6b9ebdd400a1d96e0cf4fbb011e0da5118f740b92d9118f2c50462c2a0",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          1
+        ],
+        "content_scale": 0.022727272727272728,
+        "crop_xywh": [
+          680,
+          410,
+          220,
+          44
+        ]
+      },
+      "runtime_name": "sprites/effects/bobber_bite_2.png",
+      "seconds": 0.1,
+      "sha256": "fe92cce8819cf1f460b7172a1861265b1560f852d796dcbab076248d89554e16",
+      "source": "raw/bobber-r2.png",
+      "source_sha256": "7e3f9f0282999faf0a24a557ac62e12d7e9755f26a4cfd4b9e22cbabb893b1c1"
+    },
+    {
+      "anim": "fishbar_frame",
+      "call": "raw/fishbar-frame-r4.call.json",
+      "canvas_wh": [
+        100,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/fishbar_frame/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "water_dark",
+        "water",
+        "water_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame",
+        "flame_hot",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "night",
+        "night_light",
+        "moon",
+        "rot_dark",
+        "rot",
+        "blood"
+      ],
+      "parts": [
+        {
+          "input": "bar-timber-and-brass",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            100,
+            16
+          ]
+        },
+        {
+          "input": "bar-blue-track",
+          "paste_xy": [
+            5,
+            5
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            90,
+            6
+          ]
+        },
+        {
+          "input": "bar-blue-top-line",
+          "paste_xy": [
+            5,
+            5
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            90,
+            1
+          ]
+        }
+      ],
+      "pivot_xy": [
+        50,
+        8
+      ],
+      "points": {
+        "track_xywh": [
+          5,
+          5,
+          90,
+          6
+        ]
+      },
+      "pose": "fishbar_frame 0",
+      "prompt": "raw/fishbar-frame-r4.prompt.txt",
+      "prompt_sha256": "c03d7919eccb144620f55296c3745211c0498742c01e58c398e6b7df67f1e8cc",
+      "recipe": {
+        "content_anchor_xy": [
+          49,
+          7
+        ],
+        "content_scale": 0.06286080821039128,
+        "crop_xywh": [
+          56,
+          389,
+          1559,
+          216
+        ]
+      },
+      "runtime_name": "sprites/ui/fishbar_frame.png",
+      "seconds": 1,
+      "sha256": "e5b92dcce700fbefd3e8a096ce7312397a7a9fed43323623d6154359fb7efc1f",
+      "source": "raw/fishbar-frame-r4.png",
+      "source_sha256": "e2d1d07f2ed38c1c1a557f52c0b489d701cee567bb3aac23f1b782fbfff2c132"
+    },
+    {
+      "anim": "fishbar_zone",
+      "call": "raw/fishbar-zone-r4.call.json",
+      "canvas_wh": [
+        8,
+        6
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/fishbar_zone/none/01.png",
+      "parts": [
+        {
+          "input": "zone-ink-cap",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            6
+          ]
+        },
+        {
+          "input": "zone-ink-cap",
+          "paste_xy": [
+            6,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            6
+          ]
+        },
+        {
+          "input": "zone-light-row",
+          "paste_xy": [
+            2,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            4,
+            1
+          ]
+        },
+        {
+          "input": "zone-body-rows",
+          "paste_xy": [
+            2,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            4,
+            4
+          ]
+        },
+        {
+          "input": "zone-dark-row",
+          "paste_xy": [
+            2,
+            5
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            4,
+            1
+          ]
+        }
+      ],
+      "pivot_xy": [
+        4,
+        3
+      ],
+      "points": {
+        "patch_margins_lrtb": [
+          2,
+          2,
+          0,
+          0
+        ]
+      },
+      "pose": "fishbar_zone 0",
+      "prompt": "raw/fishbar-zone-r4.prompt.txt",
+      "prompt_sha256": "564125d08823b86550240123bb42c6af403191a21f2ffe67083cd2eec54f98ac",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.011869436201780416,
+        "crop_xywh": [
+          388,
+          343,
+          674,
+          402
+        ]
+      },
+      "runtime_name": "sprites/ui/fishbar_zone.png",
+      "seconds": 1,
+      "sha256": "8b8386b0a3586a13075bec427ea62d34a08ef0cd00e757e18d1b995ba93a62c7",
+      "source": "raw/fishbar-zone-r4.png",
+      "source_sha256": "9c51cbbf9551e8c6722f87b97b15687f9ab242a5e4f050d4624a82ad68298cbb"
+    },
+    {
+      "anim": "fishbar_marker",
+      "call": "raw/fishbar_marker-r1.call.json",
+      "canvas_wh": [
+        5,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/fishbar_marker/none/01.png",
+      "pivot_xy": [
+        2,
+        6
+      ],
+      "points": {},
+      "pose": "fishbar_marker 0",
+      "prompt": "raw/fishbar_marker-r1.prompt.txt",
+      "prompt_sha256": "1f4cd1d79453ce5740a6bedee5491aed6ac726892091e6cc25eb00ffca5a6bd2",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          6
+        ],
+        "content_scale": 0.017543859649122806,
+        "crop_xywh": [
+          370,
+          415,
+          285,
+          682
+        ]
+      },
+      "runtime_name": "sprites/ui/fishbar_marker.png",
+      "seconds": 1,
+      "sha256": "9840da3a0f262c830d82b6cc9cdda672491e8fbe3ed3648a90c7aacb3e594ad2",
+      "source": "raw/fishbar_marker-r1.png",
+      "source_sha256": "822e5b79af2b4b2fb920581c75d2d1b4da9f35a3bfeb575c8d4b51593199240f"
+    },
+    {
+      "anim": "fishbar_hit",
+      "call": "raw/fishbar_hit-r1.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/fishbar_hit/none/01.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "initial",
+      "prompt": "raw/fishbar_hit-r1.prompt.txt",
+      "prompt_sha256": "0cd071d384edeaaf19fffb28bdfa35053e5157ad95d4dce507b79abef0ceb07e",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          4
+        ],
+        "content_scale": 0.02178649237472767,
+        "crop_xywh": [
+          186,
+          135,
+          459,
+          387
+        ]
+      },
+      "runtime_name": "sprites/ui/fishbar_hit_0.png",
+      "seconds": 0.065,
+      "sha256": "872d5a326a74e2e7ca040abbe2ebbf96f4d7d75afc8109e174b082631b222c3e",
+      "source": "raw/fishbar_hit-r1.png",
+      "source_sha256": "68567462a55b999b49264fb81e72b85f07a6c0d64801d2fcb4786068137c1b62"
+    },
+    {
+      "anim": "fishbar_hit",
+      "call": "raw/fishbar_hit-r1.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/fishbar_hit/none/02.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "expanded",
+      "prompt": "raw/fishbar_hit-r1.prompt.txt",
+      "prompt_sha256": "0cd071d384edeaaf19fffb28bdfa35053e5157ad95d4dce507b79abef0ceb07e",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          4
+        ],
+        "content_scale": 0.02178649237472767,
+        "crop_xywh": [
+          861,
+          163,
+          459,
+          387
+        ]
+      },
+      "runtime_name": "sprites/ui/fishbar_hit_1.png",
+      "seconds": 0.065,
+      "sha256": "0e5efd9728214406f2f4ad40ee84f2a5b6f24bc13dd79ba49f1f08de1acce1a5",
+      "source": "raw/fishbar_hit-r1.png",
+      "source_sha256": "68567462a55b999b49264fb81e72b85f07a6c0d64801d2fcb4786068137c1b62"
+    },
+    {
+      "anim": "fishbar_hit",
+      "call": "raw/fishbar_hit-r1.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/fishbar_hit/none/03.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "fading",
+      "prompt": "raw/fishbar_hit-r1.prompt.txt",
+      "prompt_sha256": "0cd071d384edeaaf19fffb28bdfa35053e5157ad95d4dce507b79abef0ceb07e",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          4
+        ],
+        "content_scale": 0.02178649237472767,
+        "crop_xywh": [
+          1553,
+          135,
+          459,
+          387
+        ]
+      },
+      "runtime_name": "sprites/ui/fishbar_hit_2.png",
+      "seconds": 0.065,
+      "sha256": "ac199f4108ddfa849baecf4b45e8066ca6983a7a4e207f5b93ab0cbcb2c351a5",
+      "source": "raw/fishbar_hit-r1.png",
+      "source_sha256": "68567462a55b999b49264fb81e72b85f07a6c0d64801d2fcb4786068137c1b62"
+    },
+    {
+      "anim": "fishbar_miss",
+      "call": "raw/fishbar_miss-r1.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/fishbar_miss/none/01.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "initial",
+      "prompt": "raw/fishbar_miss-r1.prompt.txt",
+      "prompt_sha256": "72c31499eef9cbc2303405c6d6e283681916c04e2022e51db0604abf7ba55698",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          3
+        ],
+        "content_scale": 0.017361111111111112,
+        "crop_xywh": [
+          135,
+          177,
+          576,
+          355
+        ]
+      },
+      "runtime_name": "sprites/ui/fishbar_miss_0.png",
+      "seconds": 0.065,
+      "sha256": "b3dbb147d3829c027ef136f51431bc64c92b25c4bc9f1a93e783405e8ff0dd12",
+      "source": "raw/fishbar_miss-r1.png",
+      "source_sha256": "6569c1702c7d1252b139cc3efa8405ed01187c4f11b53d52291e4cfa8fc75117"
+    },
+    {
+      "anim": "fishbar_miss",
+      "call": "raw/fishbar_miss-r1.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/fishbar_miss/none/02.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "expanded",
+      "prompt": "raw/fishbar_miss-r1.prompt.txt",
+      "prompt_sha256": "72c31499eef9cbc2303405c6d6e283681916c04e2022e51db0604abf7ba55698",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          3
+        ],
+        "content_scale": 0.017361111111111112,
+        "crop_xywh": [
+          799,
+          204,
+          576,
+          355
+        ]
+      },
+      "runtime_name": "sprites/ui/fishbar_miss_1.png",
+      "seconds": 0.065,
+      "sha256": "c7784c29812b7807154163e147a309a98053e1d798885eff5e0aac043953c952",
+      "source": "raw/fishbar_miss-r1.png",
+      "source_sha256": "6569c1702c7d1252b139cc3efa8405ed01187c4f11b53d52291e4cfa8fc75117"
+    },
+    {
+      "anim": "fishbar_miss",
+      "call": "raw/fishbar_miss-r1.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/fishbar_miss/none/03.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "fading",
+      "prompt": "raw/fishbar_miss-r1.prompt.txt",
+      "prompt_sha256": "72c31499eef9cbc2303405c6d6e283681916c04e2022e51db0604abf7ba55698",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          3
+        ],
+        "content_scale": 0.017361111111111112,
+        "crop_xywh": [
+          1458,
+          204,
+          576,
+          355
+        ]
+      },
+      "runtime_name": "sprites/ui/fishbar_miss_2.png",
+      "seconds": 0.065,
+      "sha256": "66145f19ddbea650624e13af5ed75156063eaabe473236abdbc9aef9d82b1f72",
+      "source": "raw/fishbar_miss-r1.png",
+      "source_sha256": "6569c1702c7d1252b139cc3efa8405ed01187c4f11b53d52291e4cfa8fc75117"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A023",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\effects\\impact.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "3b780e9840de8225540938eea089af1b240550de187a713616e702770d5b0af0"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A023-fishing-gear",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "Fishing gear and the minigame",
+  "tool": "built-in ImageGen"
+}

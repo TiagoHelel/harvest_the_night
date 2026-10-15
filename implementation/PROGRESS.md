@@ -32717,3 +32717,87 @@ particle spray is unchanged except for where it starts.
 - `python implementation/backlog/assets.py set A018 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (64 of 64).
+
+## 0206 - Art: fishing gear and the minigame - done 2026-10-15
+
+A023 is integrated. The owner approved the corrected pack on 2026-10-15 with
+the retried batch ("tudo aprovado"), as recorded in the delivery's
+`APPROVAL.json`. Now in the game:
+
+- the worm's and the fish bait's icons, and the fish book tab's;
+- the fishing bar's pieces - its frame round the track, the green, the
+  needle and the hit and miss flashes;
+- the bobber on the water.
+
+They replace the stand-ins of 0180, 0181 and 0182.
+
+- **Promotion**:
+  - The bar's frame and the green are compositions over 11 components: 9
+    `render` leaves, the frame's right brass cap a baked `mirror_x` kept as
+    an exact-source leaf, and one `compose` node. The components are under
+    `sprites/components/A023-fishing-gear/`.
+  - The other 18 files are direct cuts. The ten raw sources are byte for
+    byte in `assets/art_source/ui/fishing/` and
+    `assets/art_source/effects/bobber/`.
+  - Every node and file was sha-checked and decodes to its approved RGBA.
+  - The icon cuts carry their `display_role`, and `import_art.py` writes a
+    bobber frame's `line_xy` into `RasterArt` as `line`.
+- **The bar draws A023's pieces** (`FishingBar`):
+  - the frame round the track;
+  - the green as a three-patch, its two-pixel caps kept and its middle
+    drawn to the zone's width;
+  - the needle standing on the marker;
+  - the last press's flash, three one-shot frames of 0.065 s
+    (`FLASH_SECONDS` is now 0.195, from 0.2).
+
+  The textures are held between draws. The pips under the bar stay code.
+  `TRACK`, `FRAME` and the caps match the art's `track_xywh` and
+  `patch_margins_lrtb`, which the check holds them to.
+- **The float is new**: no float was drawn before. `BobberView` (in
+  `WorldView`'s y-sorted occupants) puts A023's bobber on the middle of the
+  line's water cell, from the cast to the reel.
+  - While the line waits it bobs on its two frames at 0.4 s, round and
+    round.
+  - When a fish takes it, it sinks through its three bite frames of 0.1 s
+    and stays under while the fish is on.
+  - View only: where the line is and whether a fish has it are `Fishing`'s.
+  - The line itself is not drawn; `line` waits in `RasterArt` for whoever
+    draws it.
+- **The stand-ins retired**: A023's 11 `PlaceholderArt` entries and the four
+  `FISHBAR_*` geometries. `placeholders.py --check` passes, with 147
+  stand-ins left over 21 packs.
+- **Checks**:
+  - `check_ui_art.py` takes A023's icon pairs (worm, bait, the book's tab)
+    and a `FISHING` table. The table holds every piece's canvas, pivot,
+    frames, seconds and loop to the contract, and checks each piece against
+    its approved export, with:
+    - the frame's track and the green's caps;
+    - the green fully opaque;
+    - the frame and green promoted as A023's compositions;
+    - each bobber frame's line point on its body;
+    - the bite sinking.
+  - The `--ui` showcase shows the three icon pairs.
+  - `UiKit.orphan_icons` claims the book tab's 16-pixel picture, which the
+    tab itself shows at 10.
+- **Tests**: `_task_0206_fishing_gear` (headless_v1) checks:
+  - the icons and pieces are raster art, none a stand-in;
+  - the bar's frame and green fit its track;
+  - the flash is three frames of 0.065 s;
+  - the float bobs 0, 1, 0 and sinks 0, 1, 2, held under, with the last
+    frame's line point at (4,5).
+- **Shots** (`implementation/shots/0206/`, FHD 1920x1080, looked at):
+  - `bait`: the line waiting, the red and white float on the water by the
+    jetty.
+  - `fishing_bar`: a trout on, the bar in A023's brass and timber with the
+    green and the needle, the float sunk.
+  - `fish_book`, `fish_book_unknown`: the book's tab icon.
+  - `inventory_full_bait_1`: the worm's and the bait's icons.
+  - `inventory_night_fish_book`: the tab at night.
+
+  Fishing is by day only, so there is no night picture of the bar or the
+  float.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A023 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (64 of 64).
