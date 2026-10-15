@@ -156,11 +156,6 @@ const SHOP_CLOSED := {"canvas": Vector2i(32, 40), "pivot": Vector2i(16, 36), "dr
 ## drawn at 1.0 - today's 64x64 house at (32,60) drawn at 2.0, at full density.
 const HOUSE_TIER := {"canvas": Vector2i(128, 128), "pivot": Vector2i(64, 120), "draw_scale": 1.0}
 
-## A026-A028's animals (task 0185): a large one - cow, sheep, pig, dog - is
-## 40x32 at (20,30), the chicken 24x24 at (12,22), all drawn at 1.0.
-const ANIMAL_LARGE := {"canvas": Vector2i(40, 32), "pivot": Vector2i(20, 30), "draw_scale": 1.0}
-const ANIMAL_SMALL := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 22), "draw_scale": 1.0}
-
 
 ## A forecast head's box (task 0158): 16x16 at (8,8), drawn at 1.0. A011's
 ## five are raster art since task 0162 - exact crops of each enemy's walk frame
@@ -237,14 +232,6 @@ const ART := {
 	# and 0245: the sheep the hen paled and grown (a tinted cow stayed a
 	# cow), the pig the cow in pink, the dog the cow small and brown.
 	# `AnimalView` plays them.
-	&"cow_idle": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"cow_walk": {"pack": "A027", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"cow_eat": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"cow_sleep": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/cow", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"chicken_idle": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
-	&"chicken_walk": {"pack": "A027", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
-	&"chicken_eat": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
-	&"chicken_sleep": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
 	# A036's night loot (task 0221): the bones' icon the stone paled to bone
 	# and the moon stone's the stone cooled to moonlight, until 0235; the
 	# pile and the stone on the ground drawn in code (`LootView`).

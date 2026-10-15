@@ -1,0 +1,41 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "ANIMAL MASTER: Cream farmHEN RED combandwattle goldbeaklegs. SAMEidentityandsize ascurrenthen. No egg accessories. Standing sideview WEST headLEFT, 3/4topdown litback, SAME familycameraandoutline asImage1 sheep, notidentity. Nativevisible12wide13tall, targetcanvas24x24pivot12,22, grounded. Full-densitypixelart, normalsmall eyes, notmascot. Image2 currentchicken identity reference. No grass shadow ground mud clothes letters.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\sheep-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\chicken.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\left\\01.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\sheep-master-r1.png",
+      "sha256": "9c06f6aa160f20d8deb2921a081180f5891641108365364b7aeb9858dc7e5500",
+      "role": "identity/material/layout reference; generation approval is recorded separately"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\chicken.png",
+      "sha256": "fdf30e750796f0d12a16f6b7b09584e5b6b72f4079a3861e4c54b34076ec09bc",
+      "role": "identity/material/layout reference; generation approval is recorded separately"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\left\\01.png",
+      "sha256": "b24d95053eafcc2a11e4184932ff41badc3bf248c1e2d9af0785b7637660574a",
+      "role": "approved farmer scale/camera reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "global scene/style reference"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e5e84255-9886-4cb1-bfeb-42eb7bb84628.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A027-cow-chicken\\raw\\chicken-master-r1.png",
+  "sha256": "5b92fe4e23db0f959050117c181b41cb6c560e56823bbcfc8fea8780e75b3f02",
+  "date": "2026-10-10",
+  "revision": 1,
+  "decision": "candidate / reference retained for owner review; no whole-pack approval"
+}

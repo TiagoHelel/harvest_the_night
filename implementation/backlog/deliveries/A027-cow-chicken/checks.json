@@ -1,0 +1,214 @@
+{
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "body_size_coherent": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 20,
+  "frames_found": 20,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/chicken_eat/west/01.png": {
+      "bounds": [
+        6,
+        11,
+        18,
+        22
+      ],
+      "opaque_pixels": 72
+    },
+    "native/chicken_eat/west/02.png": {
+      "bounds": [
+        6,
+        11,
+        18,
+        22
+      ],
+      "opaque_pixels": 72
+    },
+    "native/chicken_idle/west/01.png": {
+      "bounds": [
+        6,
+        9,
+        18,
+        22
+      ],
+      "opaque_pixels": 83
+    },
+    "native/chicken_idle/west/02.png": {
+      "bounds": [
+        7,
+        9,
+        18,
+        22
+      ],
+      "opaque_pixels": 82
+    },
+    "native/chicken_sleep/west/01.png": {
+      "bounds": [
+        6,
+        12,
+        18,
+        22
+      ],
+      "opaque_pixels": 87
+    },
+    "native/chicken_sleep/west/02.png": {
+      "bounds": [
+        6,
+        12,
+        18,
+        22
+      ],
+      "opaque_pixels": 94
+    },
+    "native/chicken_walk/west/01.png": {
+      "bounds": [
+        6,
+        9,
+        18,
+        22
+      ],
+      "opaque_pixels": 87
+    },
+    "native/chicken_walk/west/02.png": {
+      "bounds": [
+        6,
+        9,
+        18,
+        22
+      ],
+      "opaque_pixels": 83
+    },
+    "native/chicken_walk/west/03.png": {
+      "bounds": [
+        6,
+        9,
+        18,
+        22
+      ],
+      "opaque_pixels": 86
+    },
+    "native/chicken_walk/west/04.png": {
+      "bounds": [
+        6,
+        9,
+        18,
+        22
+      ],
+      "opaque_pixels": 83
+    },
+    "native/cow_eat/west/01.png": {
+      "bounds": [
+        4,
+        11,
+        36,
+        30
+      ],
+      "opaque_pixels": 398
+    },
+    "native/cow_eat/west/02.png": {
+      "bounds": [
+        4,
+        11,
+        36,
+        30
+      ],
+      "opaque_pixels": 384
+    },
+    "native/cow_idle/west/01.png": {
+      "bounds": [
+        4,
+        8,
+        36,
+        30
+      ],
+      "opaque_pixels": 414
+    },
+    "native/cow_idle/west/02.png": {
+      "bounds": [
+        4,
+        8,
+        36,
+        30
+      ],
+      "opaque_pixels": 416
+    },
+    "native/cow_sleep/west/01.png": {
+      "bounds": [
+        3,
+        16,
+        37,
+        30
+      ],
+      "opaque_pixels": 324
+    },
+    "native/cow_sleep/west/02.png": {
+      "bounds": [
+        3,
+        16,
+        37,
+        30
+      ],
+      "opaque_pixels": 343
+    },
+    "native/cow_walk/west/01.png": {
+      "bounds": [
+        4,
+        8,
+        36,
+        30
+      ],
+      "opaque_pixels": 424
+    },
+    "native/cow_walk/west/02.png": {
+      "bounds": [
+        4,
+        8,
+        36,
+        30
+      ],
+      "opaque_pixels": 418
+    },
+    "native/cow_walk/west/03.png": {
+      "bounds": [
+        4,
+        8,
+        36,
+        30
+      ],
+      "opaque_pixels": 403
+    },
+    "native/cow_walk/west/04.png": {
+      "bounds": [
+        4,
+        8,
+        36,
+        30
+      ],
+      "opaque_pixels": 418
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "sleep_body_width_coherent": true,
+  "source_transparency_matches_call": true,
+  "standing_height_coherent": true,
+  "stationary_feet_stable": true,
+  "visible_targets": true,
+  "walk_support_feet": true,
+  "west_only": true
+}

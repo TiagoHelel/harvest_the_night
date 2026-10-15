@@ -1,0 +1,128 @@
+Production pixel-art ImageGen source for HARVEST THE NIGHT. Orthographic three-quarter top-down camera, upper-left neutral daylight, deliberate broad pixel clusters and project materials. True transparent background, isolated object, no ground, cast shadow, halo, text or labels. First input is identity/edit target; other inputs are references. Keep objects unclipped.
+EDIT first peck pose: head HALF raised after peck, retain exact body, feet, camera, framing and baseline. Only neck/head change, not anatomy or scale.
+Asset brief, apply only requested item:
+# A027 - The cow and the chicken redrawn
+
+- **Status:** generating
+- **For game task:** 0210
+- **Dressed by game tasks:** 0185
+- **Spec after game task:** 0185
+- **Family:** animals
+- **Mode:** A - raw ImageGen sources, Claude reduces them to the 42-colour palette
+- **Size of the job:** 2 species, 8 animations, 20 frames (side view, west only)
+
+## What it is for
+
+Today the cow and the chickens are one still 24x24 frame each, swayed by `ambient_motion.gdshader`. The cow is too small: 22x13 visible next to a farmer 32 tall. Task 0185 gives every animal view-only wander, eat and sleep states near the coop and the barn, and 0210 swaps in this art.
+
+- The cow is redrawn at the farmer's scale.
+- The chicken keeps today's size, which already reads right.
+- Both get the same set of animations as A026's sheep and pig.
+
+The player sees them by day round their buildings and asleep there in the dark evening; at night `DAY_ONLY` hides them. Both must still be today's cow and hen: a cream cow with near-black patches, and a cream hen with a red comb.
+
+## Deliverables
+
+Final geometry settled by game task 0185. The rows stand as written: the cow 40x32 at (20,30), the chicken 24x24 at (12,22), draw 1.0, west only with the runtime mirror. **How the game plays them** (`src/ui/animal_view.gd`): a cow in the barn and a hen in the coop wander the two rows in front of their home by day - `walk` at about 12 px a second, `eat` for 2-4 s at a stop, `idle`, now and then `sleep` - and are inside at night. The map's loose cow and chickens, before any home is built, stay the old `props/cow` and `props/chicken` until 0210. Until then every frame here is that prop. Start only when `python implementation/backlog/assets.py next` offers this pack.
+
+| Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
+|---|---|---|---|---|
+| `cow_idle_0..1` | 40x32 | (20,30) | 2 / 0.5 / loop | 0 = the master: standing, head up. 1 = the same body and hooves, with a tail swish or an ear flick. |
+| `cow_walk_0..3` | 40x32 | (20,30) | 4 / 0.15 / loop | Contact, passing, opposite contact, opposite passing. At least two hooves on row 29 in every frame. |
+| `cow_eat_0..1` | 40x32 | (20,30) | 2 / 0.2 / loop | Head down with the muzzle at the hoof line. 1 = jaw chewing, muzzle 1 px up. |
+| `cow_sleep_0..1` | 40x32 | (20,30) | 2 / 0.6 / loop | Lying, legs folded under, eyes closed. 1 = back 1 px higher (a breath). |
+| `chicken_idle_0..1` | 24x24 | (12,22) | 2 / 0.5 / loop | 0 = the master: standing, head up. 1 = a head tilt or a comb flick. |
+| `chicken_walk_0..3` | 24x24 | (12,22) | 4 / 0.15 / loop | The legs alternate and the head bobs. One foot on row 21 in every frame. |
+| `chicken_eat_0..1` | 24x24 | (12,22) | 2 / 0.2 / loop | A peck: 0 = beak at the ground, 1 = head half raised. |
+| `chicken_sleep_0..1` | 24x24 | (12,22) | 2 / 0.6 / loop | Sitting on the ground, legs hidden, head tucked, eyes closed. 1 = body 1 px higher (a breath). |
+
+Rules for every row:
+
+- **Direction and files.**
+  - Every animation faces `west` only (head on the left). East is the runtime mirror, so never deliver it: `mirror: "runtime"` and `mirror_pairs: {}`.
+  - Files are `native/<anim>/west/01..NN.png`, and `01.png` is frame 0.
+  - Claude writes them to `sprites/props/<runtime name>.png`.
+  - The old `props/cow` and `props/chicken` stay until 0210 retires them. Never overwrite or redeliver them.
+- **Draw scale and points.** Draw scale is 1.0. No metadata points.
+- **Grounding.**
+  - The lowest opaque row is `pivot_y - 1` in every frame, lying poses included: row 29 for the cow and row 21 for the chicken.
+  - The visible bounds of `idle_0` are centred on `pivot_x` (Â±1).
+  - Every other frame keeps the master's torso position.
+- **One body size per species** across all its animations, within 1 px.
+- **Visible targets** in native px. The farmer is 16x32. A026's sheep is 24-26 x 18-20.
+
+  | Pose | Width | Height | Reads as |
+  |---|---|---|---|
+  | Cow, standing | 30-32 | 22-24 | Back at the farmer's chest |
+  | Cow, lying | - | 14-16 | |
+  | Chicken, standing | 11-13 | 12-14 | Today's size |
+  | Chicken, sitting | - | 9-10 | |
+- **Identity.** Keep today's markings.
+  - Cow: cream-white body (`bone`, `bone_dark`) with two broad near-black patches (`night`, `ink`). The muzzle and udder are `skin_light`. Two short pale horns, ears, a tail with a dark tip, and `soil_dark` hooves.
+  - Hen: cream feathers (`bone`, `bone_dark`, `skin_light`), a red comb and wattle (`roof`, `roof_light`, `roof_dark`), and a gold or `flame` beak and legs.
+- **`palette_keys`.**
+  - Cow: `ink, ink_soft, night, stone_dark, bone_dark, bone, skin_light, skin, skin_dark, soil_dark`.
+  - Chicken: `ink, ink_soft, bone_dark, bone, skin_light, skin, wood_dark, roof_dark, roof, roof_light, flame, gold, soil_dark`.
+  - Every frame of a species uses the same keys. A change is a recipe change for all of its frames, recorded in `review-log.txt`.
+
+## Match these
+
+- **A026's approved delivery** sets the family style, camera, outline and scale. Use `implementation/backlog/deliveries/A026-farm-animals/native/sheep_idle/west/01.png` and `.../pig_idle/west/01.png`. If A026 is not `approved`, ask the owner before you start (CODEX-RUNNER, "needs art from another pack").
+- **Identity.** `sprites/props/cow.png` and `sprites/props/chicken.png` (24x24, pivot (12,22), visible 22x13 and 11x12) are the identity to keep. Their raw sources are `assets/art_source/props/cow.png` (1402x1122) and `assets/art_source/props/chicken.png` (1254x1254), with their prompts in `implementation/sprites/generation/0009-cow.prompt.txt` and `0009-chicken.prompt.txt`.
+- **Scale.** The farmer side view is `implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/01.png` (visible 17x31). The review page also uses the contract's `.../walk/down/01.png`.
+- **Look.** `docs/reference-sheet.png` has the cow and hens by the pond.
+- **Shadow.** `sprites/actors/shadow.png` is drawn by the game. Never bake one.
+
+## How to make it
+
+1. **Prompt.** Build it as contract section 8 says: BASE + ANIMAL + STRIP, + CORRECTION for revisions.
+   - In ANIMAL, use the species' canvas and pivot instead of "24x24 target canvas": cow "40x32, contact pivot (20,30)", chicken "24x24, contact pivot (12,22)".
+   - Add: "Side view facing WEST (head on the left), three-quarter top-down camera with the top of the back lit; same species, markings and colours as the attached current sprite, redrawn cleanly at the new size, not a mascot; no bell, collar or accessories."
+2. **Tool.** Built-in ImageGen with `transparent_background=true` on every call, one subject per call. Attach:
+   - A026's approved sheep master (role: family style and scale reference);
+   - the species' current raw source (role: identity reference, not an edit target);
+   - the farmer side-view frame (role: scale reference);
+   - after the master is accepted, the master (role: identity master, or edit target).
+3. **Order per species.**
+   1. Generate the standing master and reduce it.
+   2. Check it beside the farmer and A026's animals before anything else.
+   3. Make the stationary frames as ImageGen edits that change only the pose: `idle_1` and `eat_0` from the master, `eat_1` from `eat_0`, `sleep_0` from the master, and `sleep_1` from `sleep_0`.
+   4. Make `walk` as one STRIP call with the master attached.
+   
+   Run at most 3 CORRECTION revisions per asset.
+4. **Reduce** with the same recipe rules as A026.
+   - **Master.** `crop_xywh` is the measured visible box, and `content_scale` is picked for the height target. The default anchor grounds the feet on `pivot_y - 1`.
+   - **Edits.** Reuse the master's crop and scale when the framing held (hoof baseline and rump within 1% of the crop). Otherwise revise the edit.
+   - **Strips.**
+     - Use same-size measured cell boxes, with the bottom edge on the measured baseline.
+     - Use one `content_scale` per strip, matched to the master's torso (Â±1 px).
+     - A per-frame vertical crop offset is allowed only to land the contact row, and it is recorded.
+   - If reduction erases the cow's patches, muzzle or horns, or the hen's comb or beak, regenerate. Never patch native pixels.
+
+## Acceptance
+
+- [ ] There are 20 frames, the exact count per row. The cow is 40x32 with pivot (20,30) and the chicken 24x24 with pivot (12,22). Everything faces west, and there are no east files.
+- [ ] The lowest opaque row is 29 for the cow and 21 for the chicken in every frame, and `idle_0` is centred on `pivot_x` (Â±1). The feet do not slide in idle, eat or sleep.
+- [ ] The body size matches across each species' animations in the onion skin, and each strip has one `content_scale`. Walk frame 3 leads back to 0.
+- [ ] Alpha is binary on a true transparent background. There is no shadow, grass, straw, egg, milk pail, "Zzz" or text.
+- [ ] Only the 42 colours are used, within `palette_keys`, and `importer_recipe_matches` holds.
+- [ ] Sizes are inside the targets. The cow's patches and the hen's red comb read at 1x and in the night preview, and the cream does not look lit.
+- [ ] `build.py` twice gives identical bytes, `--check` passes, and checks.json is all `true`.
+
+## Delivery
+
+Deliver to `implementation/backlog/deliveries/A027-cow-chicken/` with `raw/`, `native/`, `preview/`, `rejected/`, contract.json, checks.json, build.py, index.html and review-log.txt (contract 9.1-9.6). This pack has no `runtime/`.
+
+contract.json has:
+
+- `palette_mode: "A"`;
+- `palette_keys` per species;
+- for every animation, `dir: "west"`, `mirror: "runtime"` and `draw_scale: 1.0`.
+
+After the owner approves, write APPROVAL.json (9.7) and CLAUDE-A027-PROMPT.txt (9.8).
+
+- The prompt maps every animation, for example `native/cow_walk/west/01..04.png -> sprites/props/cow_walk_0..3.png  40x32 pivot (20,30) draw 1.0  0.15 s loop`.
+- It says these replace today's 24x24 `props/cow` and `props/chicken` and their `ambient_motion` sway.
+- It says the cow's canvas changes from 24x24 to 40x32, so `check_prop_art.py`'s animal canvas rule must follow.
+
+The last step is `python implementation/backlog/assets.py set A027 approved`, and only after the owner approves in words recorded in APPROVAL.json.

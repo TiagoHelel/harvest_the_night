@@ -1,0 +1,3437 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "chicken_eat",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/chicken_eat-west-0-night.png",
+          "path": "native/chicken_eat/west/01.png",
+          "points": {},
+          "pose": "chicken_eat_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/chicken_eat-west-1-night.png",
+          "path": "native/chicken_eat/west/02.png",
+          "points": {},
+          "pose": "chicken_eat_1"
+        }
+      ],
+      "frame_seconds": 0.2,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "poses": [
+        "chicken_eat_0",
+        "chicken_eat_1"
+      ]
+    },
+    {
+      "anim": "chicken_idle",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/chicken_idle-west-0-night.png",
+          "path": "native/chicken_idle/west/01.png",
+          "points": {},
+          "pose": "standing identity master"
+        },
+        {
+          "issue": "",
+          "night": "preview/chicken_idle-west-1-night.png",
+          "path": "native/chicken_idle/west/02.png",
+          "points": {},
+          "pose": "chicken_idle_1"
+        }
+      ],
+      "frame_seconds": 0.5,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "poses": [
+        "standing identity master",
+        "chicken_idle_1"
+      ]
+    },
+    {
+      "anim": "chicken_sleep",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/chicken_sleep-west-0-night.png",
+          "path": "native/chicken_sleep/west/01.png",
+          "points": {},
+          "pose": "chicken_sleep_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/chicken_sleep-west-1-night.png",
+          "path": "native/chicken_sleep/west/02.png",
+          "points": {},
+          "pose": "chicken_sleep_1"
+        }
+      ],
+      "frame_seconds": 0.6,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "poses": [
+        "chicken_sleep_0",
+        "chicken_sleep_1"
+      ]
+    },
+    {
+      "anim": "chicken_walk",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/chicken_walk-west-0-night.png",
+          "path": "native/chicken_walk/west/01.png",
+          "points": {},
+          "pose": "contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/chicken_walk-west-1-night.png",
+          "path": "native/chicken_walk/west/02.png",
+          "points": {},
+          "pose": "passing"
+        },
+        {
+          "issue": "",
+          "night": "preview/chicken_walk-west-2-night.png",
+          "path": "native/chicken_walk/west/03.png",
+          "points": {},
+          "pose": "opposite contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/chicken_walk-west-3-night.png",
+          "path": "native/chicken_walk/west/04.png",
+          "points": {},
+          "pose": "opposite passing"
+        }
+      ],
+      "frame_seconds": 0.15,
+      "frames": 4,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "poses": [
+        "contact",
+        "passing",
+        "opposite contact",
+        "opposite passing"
+      ]
+    },
+    {
+      "anim": "cow_eat",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cow_eat-west-0-night.png",
+          "path": "native/cow_eat/west/01.png",
+          "points": {},
+          "pose": "cow_eat_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/cow_eat-west-1-night.png",
+          "path": "native/cow_eat/west/02.png",
+          "points": {},
+          "pose": "cow_eat_1"
+        }
+      ],
+      "frame_seconds": 0.2,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "cow_eat_0",
+        "cow_eat_1"
+      ]
+    },
+    {
+      "anim": "cow_idle",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cow_idle-west-0-night.png",
+          "path": "native/cow_idle/west/01.png",
+          "points": {},
+          "pose": "standing identity master"
+        },
+        {
+          "issue": "",
+          "night": "preview/cow_idle-west-1-night.png",
+          "path": "native/cow_idle/west/02.png",
+          "points": {},
+          "pose": "cow_idle_1"
+        }
+      ],
+      "frame_seconds": 0.5,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "standing identity master",
+        "cow_idle_1"
+      ]
+    },
+    {
+      "anim": "cow_sleep",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cow_sleep-west-0-night.png",
+          "path": "native/cow_sleep/west/01.png",
+          "points": {},
+          "pose": "cow_sleep_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/cow_sleep-west-1-night.png",
+          "path": "native/cow_sleep/west/02.png",
+          "points": {},
+          "pose": "cow_sleep_1"
+        }
+      ],
+      "frame_seconds": 0.6,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "cow_sleep_0",
+        "cow_sleep_1"
+      ]
+    },
+    {
+      "anim": "cow_walk",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cow_walk-west-0-night.png",
+          "path": "native/cow_walk/west/01.png",
+          "points": {},
+          "pose": "contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/cow_walk-west-1-night.png",
+          "path": "native/cow_walk/west/02.png",
+          "points": {},
+          "pose": "passing"
+        },
+        {
+          "issue": "",
+          "night": "preview/cow_walk-west-2-night.png",
+          "path": "native/cow_walk/west/03.png",
+          "points": {},
+          "pose": "opposite contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/cow_walk-west-3-night.png",
+          "path": "native/cow_walk/west/04.png",
+          "points": {},
+          "pose": "opposite passing"
+        }
+      ],
+      "frame_seconds": 0.15,
+      "frames": 4,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "contact",
+        "passing",
+        "opposite contact",
+        "opposite passing"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/props/cow.png",
+      "pivot_xy": [
+        12,
+        22
+      ]
+    }
+  ],
+  "components": {
+    "chicken-head-action-chicken_eat-0": {
+      "call": "raw/chicken_eat_0-r1.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/chicken-head-action-chicken_eat-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/chicken_eat_0-r1.prompt.txt",
+      "prompt_sha256": "dcd443de09e3f548e22bd7e88f5c3e906aa865e1afae0fef29c3771dc0c5c74f",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          13
+        ],
+        "content_scale": 0.018234625571977962,
+        "crop_xywh": [
+          304,
+          329,
+          676,
+          697
+        ]
+      },
+      "sha256": "4267c47a77357adcbb320743c90f200a9404d611eb4152887ac5c816fa674691",
+      "source": "raw/chicken_eat_0-r1.png",
+      "source_sha256": "09e7c73b09042f21981473a530cb2036b9a42530b990fa0b21942f5d8e3a2e88"
+    },
+    "chicken-head-action-chicken_eat-1": {
+      "call": "raw/chicken_eat_1-r1.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/chicken-head-action-chicken_eat-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/chicken_eat_1-r1.prompt.txt",
+      "prompt_sha256": "c02e1983f4147c1026273692e4b7f96de5c452921c1945b3d68b067abc589793",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          13
+        ],
+        "content_scale": 0.018234625571977962,
+        "crop_xywh": [
+          304,
+          329,
+          676,
+          697
+        ]
+      },
+      "sha256": "720a0a40fbac7ed06a71aab3846daffe8c096db0b4068c923dda9531ba1aeccd",
+      "source": "raw/chicken_eat_1-r1.png",
+      "source_sha256": "8f12c0abc255e0454cef88b543cb817165654df68c070f604fb245c6286a13f5"
+    },
+    "chicken-head-body-chicken_eat-0": {
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "compose",
+      "output": "components/chicken-head-body-chicken_eat-0.png",
+      "parts": [
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            0,
+            22
+          ],
+          "slice_xywh": [
+            0,
+            22,
+            24,
+            2
+          ]
+        },
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            11,
+            0,
+            13,
+            22
+          ]
+        },
+        {
+          "input": "chicken-head-action-chicken_eat-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            11,
+            22
+          ]
+        }
+      ],
+      "sha256": "20f66024adc1b6074d99e7dfd54e1344f524520c7988d3a7c93dc613fde36d00"
+    },
+    "chicken-head-body-chicken_eat-1": {
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "compose",
+      "output": "components/chicken-head-body-chicken_eat-1.png",
+      "parts": [
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            0,
+            22
+          ],
+          "slice_xywh": [
+            0,
+            22,
+            24,
+            2
+          ]
+        },
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            11,
+            0,
+            13,
+            22
+          ]
+        },
+        {
+          "input": "chicken-head-action-chicken_eat-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            11,
+            22
+          ]
+        }
+      ],
+      "sha256": "9980b0f788041fabde092c72379b158b26fe8229bf47b83b34c7a61fa52e67d1"
+    },
+    "chicken-idle-head": {
+      "call": "raw/chicken_idle_1-r1.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/chicken-idle-head.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/chicken_idle_1-r1.prompt.txt",
+      "prompt_sha256": "4b53f717c5002811b641efdf3fc31b17376ae59c7443ae748d50b559a745351f",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          13
+        ],
+        "content_scale": 0.018234625571977962,
+        "crop_xywh": [
+          304,
+          329,
+          676,
+          697
+        ]
+      },
+      "sha256": "264bfd3a5d7e15b69a558de73637e8f4fda6a9a2cf463e303fdb52a0dbbcd44a",
+      "source": "raw/chicken_idle_1-r1.png",
+      "source_sha256": "fc5b56fd9e48b7f7d5e6b7175c2439a7bc09176853d1a0c149d7b412e3b775ec"
+    },
+    "chicken-idle-stable": {
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "compose",
+      "output": "components/chicken-idle-stable.png",
+      "parts": [
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            6
+          ]
+        },
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            0,
+            19
+          ],
+          "slice_xywh": [
+            0,
+            19,
+            24,
+            5
+          ]
+        },
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            0,
+            6
+          ],
+          "slice_xywh": [
+            0,
+            6,
+            3,
+            13
+          ]
+        },
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            15,
+            6
+          ],
+          "slice_xywh": [
+            15,
+            6,
+            9,
+            13
+          ]
+        },
+        {
+          "input": "chicken-idle-head",
+          "paste_xy": [
+            3,
+            6
+          ],
+          "slice_xywh": [
+            3,
+            6,
+            12,
+            13
+          ]
+        }
+      ],
+      "sha256": "dab45faa1d0f21188989cc2ca453c34b874ec3e3a0746010845e2718d0e4389d"
+    },
+    "chicken-lying-master": {
+      "call": "raw/chicken_sleep_0-r2.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/chicken-lying-master.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/chicken_sleep_0-r2.prompt.txt",
+      "prompt_sha256": "80850521e6c0a4c21a4535114a2a87f41e86647dfe5ee0fe95953562ffbed8dc",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          10
+        ],
+        "content_scale": 0.0173992673992674,
+        "crop_xywh": [
+          302,
+          467,
+          712,
+          546
+        ]
+      },
+      "sha256": "3dac2d311ba6206b4ddae95fab2dfb50fdd65d7456c58d8dbe85bda0b6594df1",
+      "source": "raw/chicken_sleep_0-r2.png",
+      "source_sha256": "d9a0650f326a9991d5c9a682565f69c41aa120b21d21cc42e26becfd596c7701"
+    },
+    "chicken-sleep-breath": {
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "compose",
+      "output": "components/chicken-sleep-breath.png",
+      "parts": [
+        {
+          "input": "chicken-lying-master",
+          "paste_xy": [
+            0,
+            16
+          ],
+          "slice_xywh": [
+            0,
+            16,
+            24,
+            8
+          ]
+        },
+        {
+          "input": "chicken-lying-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            11,
+            16
+          ]
+        },
+        {
+          "input": "chicken-lying-master",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            11,
+            1,
+            13,
+            17
+          ]
+        }
+      ],
+      "sha256": "a3ef47b06edd3b0cf691933708c53263049df69f78bd75e7150953fce9c90244"
+    },
+    "chicken-standing-master": {
+      "call": "raw/chicken-master-r1.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/chicken-standing-master.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/chicken-master-r1.prompt.txt",
+      "prompt_sha256": "58dae32053626ef158f9a2d28535b8f97d3aac37b82f08cd114a83500f37adb4",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          13
+        ],
+        "content_scale": 0.018234625571977962,
+        "crop_xywh": [
+          304,
+          329,
+          676,
+          697
+        ]
+      },
+      "sha256": "39ef1911fa9c7d7231f7941de9c1c07bfc4b0c2c26926e2aad083d69626a04cc",
+      "source": "raw/chicken-master-r1.png",
+      "source_sha256": "5b92fe4e23db0f959050117c181b41cb6c560e56823bbcfc8fea8780e75b3f02"
+    },
+    "chicken-walk-legs-0": {
+      "call": "raw/chicken_walk-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/chicken-walk-legs-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          12
+        ],
+        "content_scale": 0.024691358024691357,
+        "crop_xywh": [
+          64,
+          114,
+          486,
+          504
+        ]
+      },
+      "sha256": "a545f7e6262549a1f92274a8ab5845452e402dcf0c8b3189764fe40e3ca4de68",
+      "source": "raw/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14"
+    },
+    "chicken-walk-legs-1": {
+      "call": "raw/chicken_walk-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/chicken-walk-legs-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          12
+        ],
+        "content_scale": 0.024691358024691357,
+        "crop_xywh": [
+          581,
+          128,
+          486,
+          504
+        ]
+      },
+      "sha256": "aea80f7b6235a6b6cd6fb386db7d5a17c4dceebe0bcb7f12ec817ee034038471",
+      "source": "raw/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14"
+    },
+    "chicken-walk-legs-2": {
+      "call": "raw/chicken_walk-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/chicken-walk-legs-2.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          12
+        ],
+        "content_scale": 0.024691358024691357,
+        "crop_xywh": [
+          1117,
+          113,
+          486,
+          504
+        ]
+      },
+      "sha256": "e9cbe16fb7fc051940740a3ab52eb9333d639e2f51d0fcc88eb9f7d45b3063b4",
+      "source": "raw/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14"
+    },
+    "chicken-walk-legs-3": {
+      "call": "raw/chicken_walk-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/chicken-walk-legs-3.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          12
+        ],
+        "content_scale": 0.024691358024691357,
+        "crop_xywh": [
+          1636,
+          129,
+          486,
+          504
+        ]
+      },
+      "sha256": "a3dc781fdce2058aed45db45db0fa8f2d657d59ec0304a54f2306eb11f479103",
+      "source": "raw/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14"
+    },
+    "cow-head-action-cow_eat-0": {
+      "call": "raw/cow_eat_0-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/cow-head-action-cow_eat-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/cow_eat_0-r1.prompt.txt",
+      "prompt_sha256": "90c17f9fa54423f539523588de851f78e22478da5ed73db72b9c104666065981",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.027057240520111395,
+        "crop_xywh": [
+          154,
+          187,
+          1172,
+          815
+        ]
+      },
+      "sha256": "947ba3a6cb36447c506948a893767cca2fef0ab07d3904d6eb9debd26032be0d",
+      "source": "raw/cow_eat_0-r1.png",
+      "source_sha256": "063cd400777d3ee7c97964cb470899f7945b47e9171b116a79a4a1e6bf6a1218"
+    },
+    "cow-head-action-cow_eat-1": {
+      "call": "raw/cow_eat_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/cow-head-action-cow_eat-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/cow_eat_1-r1.prompt.txt",
+      "prompt_sha256": "96a64ff00c367dcefe2203f171399a85616711d3e34f14b41c9da1fceb90ad2b",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.027057240520111395,
+        "crop_xywh": [
+          154,
+          187,
+          1172,
+          815
+        ]
+      },
+      "sha256": "859a177f492a0fc4ca3e487cc4b8defaeedf21db72d196e92de1d8d34f6f7841",
+      "source": "raw/cow_eat_1-r1.png",
+      "source_sha256": "2db4e38be105f796602ff98999ec9880a9cc393e550cc52b3c2de328b4bfc0a6"
+    },
+    "cow-head-body-cow_eat-0": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/cow-head-body-cow_eat-0.png",
+      "parts": [
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            0,
+            30
+          ],
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ]
+        },
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            15,
+            0
+          ],
+          "slice_xywh": [
+            15,
+            0,
+            25,
+            30
+          ]
+        },
+        {
+          "input": "cow-head-action-cow_eat-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            15,
+            30
+          ]
+        }
+      ],
+      "sha256": "dc162c31f07a3f9bd43182d62064cf4c212468a8d4e4456418880f5b50c03ca0"
+    },
+    "cow-head-body-cow_eat-1": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/cow-head-body-cow_eat-1.png",
+      "parts": [
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            0,
+            30
+          ],
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ]
+        },
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            15,
+            0
+          ],
+          "slice_xywh": [
+            15,
+            0,
+            25,
+            30
+          ]
+        },
+        {
+          "input": "cow-head-action-cow_eat-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            15,
+            30
+          ]
+        }
+      ],
+      "sha256": "d958be7a6ff9350ffbb57d925c57e8d8bb56d14be243b11ccf02782994eda9fa"
+    },
+    "cow-idle-head": {
+      "call": "raw/recovered-cow_idle_1-r3.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/cow-idle-head.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-cow_idle_1-r3.prompt.txt",
+      "prompt_sha256": "6a9b71b345d2a9698f5e5993f6870f15cdb94bc15c79ed274f3de9a5e3f75f34",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.027057240520111395,
+        "crop_xywh": [
+          154,
+          187,
+          1172,
+          815
+        ]
+      },
+      "sha256": "a58ffc26760d2feb54310055d20731b6c779c0a49b8ee38aaa4696b8310dd5be",
+      "source": "raw/recovered-cow_idle_1-r3.png",
+      "source_sha256": "acdd7ca05c0ea2b37da12be8a1f2c9569155931815074e90f17380b99854d7ea"
+    },
+    "cow-idle-stable": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/cow-idle-stable.png",
+      "parts": [
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            4
+          ]
+        },
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            0,
+            25
+          ],
+          "slice_xywh": [
+            0,
+            25,
+            40,
+            7
+          ]
+        },
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            0,
+            4
+          ],
+          "slice_xywh": [
+            0,
+            4,
+            2,
+            21
+          ]
+        },
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            19,
+            4
+          ],
+          "slice_xywh": [
+            19,
+            4,
+            21,
+            21
+          ]
+        },
+        {
+          "input": "cow-idle-head",
+          "paste_xy": [
+            2,
+            4
+          ],
+          "slice_xywh": [
+            2,
+            4,
+            17,
+            21
+          ]
+        }
+      ],
+      "sha256": "7e8662eaefc82c509bf7ee59662a57908cc77f59dcc5379fff36d86e62e112ef"
+    },
+    "cow-lying-master": {
+      "call": "raw/recovered-cow_sleep_0-r3.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/cow-lying-master.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/recovered-cow_sleep_0-r3.prompt.txt",
+      "prompt_sha256": "c65f60c597947d64c3858adf940d1c904e96349d43ad31770a4771f8500ee858",
+      "recipe": {
+        "content_anchor_xy": [
+          17,
+          14
+        ],
+        "content_scale": 0.02845691382765531,
+        "crop_xywh": [
+          131,
+          421,
+          1186,
+          499
+        ]
+      },
+      "sha256": "741cf32e8e7050428c8d16cfa6797c2de4be286d7a35361d9ea9b6c6fa95d54d",
+      "source": "raw/recovered-cow_sleep_0-r3.png",
+      "source_sha256": "7c4a179958528ef7896bcd5f4c83c57e650ab8ceab9e9bf406146a2ae323ba2b"
+    },
+    "cow-sleep-breath": {
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "compose",
+      "output": "components/cow-sleep-breath.png",
+      "parts": [
+        {
+          "input": "cow-lying-master",
+          "paste_xy": [
+            0,
+            24
+          ],
+          "slice_xywh": [
+            0,
+            24,
+            40,
+            8
+          ]
+        },
+        {
+          "input": "cow-lying-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            24
+          ]
+        },
+        {
+          "input": "cow-lying-master",
+          "paste_xy": [
+            16,
+            0
+          ],
+          "slice_xywh": [
+            16,
+            1,
+            24,
+            25
+          ]
+        }
+      ],
+      "sha256": "06ee05a431be973ade5ef69353ea4c65eba2b8d8592f9bfc4f8b1fc2ee3d6c8d"
+    },
+    "cow-standing-master": {
+      "call": "raw/cow-master-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/cow-standing-master.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/cow-master-r2.prompt.txt",
+      "prompt_sha256": "e7f0570fd46693f4cf0c5d28fba4c9ed6bc3bb2638af853c4e5db0eb4fc83f08",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.027057240520111395,
+        "crop_xywh": [
+          154,
+          187,
+          1172,
+          815
+        ]
+      },
+      "sha256": "80090c1f4aa41b4ff4f8e9d7b934720d2d175f8278a0b1681f00effb4a6e07d6",
+      "source": "raw/cow-master-r2.png",
+      "source_sha256": "7b7a6c1b0a8083187d6c067ee74e95dfe447a9b94ea320de94140abf0d3fe03f"
+    },
+    "cow-walk-legs-0": {
+      "call": "raw/cow_walk-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/cow-walk-legs-0.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.0658682634730539,
+        "crop_xywh": [
+          24,
+          253,
+          479,
+          334
+        ]
+      },
+      "sha256": "f92fac54671a541ca405f9b525067e7df7db1898d9653aadce09f3d794f6251c",
+      "source": "raw/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e"
+    },
+    "cow-walk-legs-1": {
+      "call": "raw/cow_walk-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/cow-walk-legs-1.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.0658682634730539,
+        "crop_xywh": [
+          509,
+          258,
+          479,
+          334
+        ]
+      },
+      "sha256": "4fc16fd28503f92dfdc2dfab51e831e831a6d89396a3fb4f9d36ab381481919a",
+      "source": "raw/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e"
+    },
+    "cow-walk-legs-2": {
+      "call": "raw/cow_walk-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/cow-walk-legs-2.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.0658682634730539,
+        "crop_xywh": [
+          1002,
+          255,
+          479,
+          334
+        ]
+      },
+      "sha256": "f7aae17096a704d99d7992e1d01d7ac69ba3fa17f7482d813e72cade28f54465",
+      "source": "raw/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e"
+    },
+    "cow-walk-legs-3": {
+      "call": "raw/cow_walk-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "operation": "render",
+      "output": "components/cow-walk-legs-3.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "prompt": "raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.0658682634730539,
+        "crop_xywh": [
+          1488,
+          256,
+          479,
+          334
+        ]
+      },
+      "sha256": "826759c95dd8c777b3189b53ca046b91e915744551e1cc000ba6badb0a8373ed",
+      "source": "raw/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "cow_idle",
+      "call": "raw/cow-master-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/cow_idle/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "standing identity master",
+      "prompt": "raw/cow-master-r2.prompt.txt",
+      "prompt_sha256": "e7f0570fd46693f4cf0c5d28fba4c9ed6bc3bb2638af853c4e5db0eb4fc83f08",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.027057240520111395,
+        "crop_xywh": [
+          154,
+          187,
+          1172,
+          815
+        ]
+      },
+      "runtime_name": "sprites/props/cow_idle_0.png",
+      "seconds": 0.5,
+      "sha256": "80090c1f4aa41b4ff4f8e9d7b934720d2d175f8278a0b1681f00effb4a6e07d6",
+      "source": "raw/cow-master-r2.png",
+      "source_sha256": "7b7a6c1b0a8083187d6c067ee74e95dfe447a9b94ea320de94140abf0d3fe03f",
+      "visible_limits_wh": [
+        [
+          30,
+          32
+        ],
+        [
+          22,
+          24
+        ]
+      ]
+    },
+    {
+      "anim": "cow_idle",
+      "call": "raw/recovered-cow_idle_1-r3.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/cow_idle/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "cow-idle-stable",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "cow_idle_1",
+      "prompt": "raw/recovered-cow_idle_1-r3.prompt.txt",
+      "prompt_sha256": "6a9b71b345d2a9698f5e5993f6870f15cdb94bc15c79ed274f3de9a5e3f75f34",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.027057240520111395,
+        "crop_xywh": [
+          154,
+          187,
+          1172,
+          815
+        ]
+      },
+      "runtime_name": "sprites/props/cow_idle_1.png",
+      "seconds": 0.5,
+      "sha256": "7e8662eaefc82c509bf7ee59662a57908cc77f59dcc5379fff36d86e62e112ef",
+      "source": "raw/recovered-cow_idle_1-r3.png",
+      "source_sha256": "acdd7ca05c0ea2b37da12be8a1f2c9569155931815074e90f17380b99854d7ea",
+      "visible_limits_wh": [
+        [
+          30,
+          32
+        ],
+        [
+          22,
+          24
+        ]
+      ]
+    },
+    {
+      "anim": "cow_eat",
+      "call": "raw/cow_eat_0-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/cow_eat/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "cow-head-body-cow_eat-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        },
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            15,
+            26
+          ],
+          "slice_xywh": [
+            15,
+            26,
+            7,
+            4
+          ]
+        },
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            28,
+            26
+          ],
+          "slice_xywh": [
+            28,
+            26,
+            7,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "cow_eat_0",
+      "prompt": "raw/cow_eat_0-r1.prompt.txt",
+      "prompt_sha256": "90c17f9fa54423f539523588de851f78e22478da5ed73db72b9c104666065981",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.027057240520111395,
+        "crop_xywh": [
+          154,
+          187,
+          1172,
+          815
+        ]
+      },
+      "runtime_name": "sprites/props/cow_eat_0.png",
+      "seconds": 0.2,
+      "sha256": "dc162c31f07a3f9bd43182d62064cf4c212468a8d4e4456418880f5b50c03ca0",
+      "source": "raw/cow_eat_0-r1.png",
+      "source_sha256": "063cd400777d3ee7c97964cb470899f7945b47e9171b116a79a4a1e6bf6a1218",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          1,
+          30
+        ]
+      ]
+    },
+    {
+      "anim": "cow_eat",
+      "call": "raw/cow_eat_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/cow_eat/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "cow-head-body-cow_eat-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        },
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            15,
+            26
+          ],
+          "slice_xywh": [
+            15,
+            26,
+            7,
+            4
+          ]
+        },
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            28,
+            26
+          ],
+          "slice_xywh": [
+            28,
+            26,
+            7,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "cow_eat_1",
+      "prompt": "raw/cow_eat_1-r1.prompt.txt",
+      "prompt_sha256": "96a64ff00c367dcefe2203f171399a85616711d3e34f14b41c9da1fceb90ad2b",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.027057240520111395,
+        "crop_xywh": [
+          154,
+          187,
+          1172,
+          815
+        ]
+      },
+      "runtime_name": "sprites/props/cow_eat_1.png",
+      "seconds": 0.2,
+      "sha256": "d958be7a6ff9350ffbb57d925c57e8d8bb56d14be243b11ccf02782994eda9fa",
+      "source": "raw/cow_eat_1-r1.png",
+      "source_sha256": "2db4e38be105f796602ff98999ec9880a9cc393e550cc52b3c2de328b4bfc0a6",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          1,
+          30
+        ]
+      ]
+    },
+    {
+      "anim": "cow_sleep",
+      "call": "raw/recovered-cow_sleep_0-r3.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/cow_sleep/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "cow-lying-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "cow_sleep_0",
+      "prompt": "raw/recovered-cow_sleep_0-r3.prompt.txt",
+      "prompt_sha256": "c65f60c597947d64c3858adf940d1c904e96349d43ad31770a4771f8500ee858",
+      "recipe": {
+        "content_anchor_xy": [
+          17,
+          14
+        ],
+        "content_scale": 0.02845691382765531,
+        "crop_xywh": [
+          131,
+          421,
+          1186,
+          499
+        ]
+      },
+      "runtime_name": "sprites/props/cow_sleep_0.png",
+      "seconds": 0.6,
+      "sha256": "741cf32e8e7050428c8d16cfa6797c2de4be286d7a35361d9ea9b6c6fa95d54d",
+      "source": "raw/recovered-cow_sleep_0-r3.png",
+      "source_sha256": "7c4a179958528ef7896bcd5f4c83c57e650ab8ceab9e9bf406146a2ae323ba2b",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          14,
+          16
+        ]
+      ]
+    },
+    {
+      "anim": "cow_sleep",
+      "call": "raw/recovered-cow_sleep_0-r3.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/cow_sleep/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "cow-sleep-breath",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "cow_sleep_1",
+      "prompt": "raw/recovered-cow_sleep_0-r3.prompt.txt",
+      "prompt_sha256": "c65f60c597947d64c3858adf940d1c904e96349d43ad31770a4771f8500ee858",
+      "recipe": {
+        "content_anchor_xy": [
+          17,
+          14
+        ],
+        "content_scale": 0.02845691382765531,
+        "crop_xywh": [
+          131,
+          421,
+          1186,
+          499
+        ]
+      },
+      "runtime_name": "sprites/props/cow_sleep_1.png",
+      "seconds": 0.6,
+      "sha256": "06ee05a431be973ade5ef69353ea4c65eba2b8d8592f9bfc4f8b1fc2ee3d6c8d",
+      "source": "raw/recovered-cow_sleep_0-r3.png",
+      "source_sha256": "7c4a179958528ef7896bcd5f4c83c57e650ab8ceab9e9bf406146a2ae323ba2b",
+      "visible_limits_wh": [
+        [
+          1,
+          40
+        ],
+        [
+          14,
+          16
+        ]
+      ]
+    },
+    {
+      "anim": "cow_walk",
+      "call": "raw/cow_walk-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/cow_walk/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "cow-walk-legs-0",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "contact",
+      "prompt": "raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.0658682634730539,
+        "crop_xywh": [
+          24,
+          253,
+          479,
+          334
+        ]
+      },
+      "runtime_name": "sprites/props/cow_walk_0.png",
+      "seconds": 0.15,
+      "sha256": "1b888c96aa8ffa2abcd5368b90cea9e20e786107fe3fadd712c07b0b959d41ee",
+      "source": "raw/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e",
+      "visible_limits_wh": [
+        [
+          31,
+          33
+        ],
+        [
+          21,
+          23
+        ]
+      ]
+    },
+    {
+      "anim": "cow_walk",
+      "call": "raw/cow_walk-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/cow_walk/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "cow-walk-legs-1",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "passing",
+      "prompt": "raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.0658682634730539,
+        "crop_xywh": [
+          509,
+          258,
+          479,
+          334
+        ]
+      },
+      "runtime_name": "sprites/props/cow_walk_1.png",
+      "seconds": 0.15,
+      "sha256": "30791af4b243a240aa2f9549a625a9205b3729f850744aa8cddb5404b3fe2a56",
+      "source": "raw/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e",
+      "visible_limits_wh": [
+        [
+          31,
+          33
+        ],
+        [
+          21,
+          23
+        ]
+      ]
+    },
+    {
+      "anim": "cow_walk",
+      "call": "raw/cow_walk-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/cow_walk/west/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "cow-walk-legs-2",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "opposite contact",
+      "prompt": "raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.0658682634730539,
+        "crop_xywh": [
+          1002,
+          255,
+          479,
+          334
+        ]
+      },
+      "runtime_name": "sprites/props/cow_walk_2.png",
+      "seconds": 0.15,
+      "sha256": "2e724325784e57bf0fed9d1c63e879cf1b51bf34d704ffdd44db523cb9ae724a",
+      "source": "raw/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e",
+      "visible_limits_wh": [
+        [
+          31,
+          33
+        ],
+        [
+          21,
+          23
+        ]
+      ]
+    },
+    {
+      "anim": "cow_walk",
+      "call": "raw/cow_walk-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/cow_walk/west/04.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "cow-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ]
+        },
+        {
+          "input": "cow-walk-legs-3",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "opposite passing",
+      "prompt": "raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "recipe": {
+        "content_anchor_xy": [
+          16,
+          22
+        ],
+        "content_scale": 0.0658682634730539,
+        "crop_xywh": [
+          1488,
+          256,
+          479,
+          334
+        ]
+      },
+      "runtime_name": "sprites/props/cow_walk_3.png",
+      "seconds": 0.15,
+      "sha256": "a37bb80ffc20c17f3d43c0a757937b1d625a602ab01afe21d7f0d378eedfce46",
+      "source": "raw/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e",
+      "visible_limits_wh": [
+        [
+          31,
+          33
+        ],
+        [
+          21,
+          23
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_idle",
+      "call": "raw/chicken-master-r1.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/chicken_idle/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "standing identity master",
+      "prompt": "raw/chicken-master-r1.prompt.txt",
+      "prompt_sha256": "58dae32053626ef158f9a2d28535b8f97d3aac37b82f08cd114a83500f37adb4",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          13
+        ],
+        "content_scale": 0.018234625571977962,
+        "crop_xywh": [
+          304,
+          329,
+          676,
+          697
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_idle_0.png",
+      "seconds": 0.5,
+      "sha256": "39ef1911fa9c7d7231f7941de9c1c07bfc4b0c2c26926e2aad083d69626a04cc",
+      "source": "raw/chicken-master-r1.png",
+      "source_sha256": "5b92fe4e23db0f959050117c181b41cb6c560e56823bbcfc8fea8780e75b3f02",
+      "visible_limits_wh": [
+        [
+          11,
+          13
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_idle",
+      "call": "raw/chicken_idle_1-r1.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/chicken_idle/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "chicken-idle-stable",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "chicken_idle_1",
+      "prompt": "raw/chicken_idle_1-r1.prompt.txt",
+      "prompt_sha256": "4b53f717c5002811b641efdf3fc31b17376ae59c7443ae748d50b559a745351f",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          13
+        ],
+        "content_scale": 0.018234625571977962,
+        "crop_xywh": [
+          304,
+          329,
+          676,
+          697
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_idle_1.png",
+      "seconds": 0.5,
+      "sha256": "dab45faa1d0f21188989cc2ca453c34b874ec3e3a0746010845e2718d0e4389d",
+      "source": "raw/chicken_idle_1-r1.png",
+      "source_sha256": "fc5b56fd9e48b7f7d5e6b7175c2439a7bc09176853d1a0c149d7b412e3b775ec",
+      "visible_limits_wh": [
+        [
+          11,
+          13
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_eat",
+      "call": "raw/chicken_eat_0-r1.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/chicken_eat/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "chicken-head-body-chicken_eat-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ]
+        },
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            11,
+            20
+          ],
+          "slice_xywh": [
+            11,
+            20,
+            5,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "chicken_eat_0",
+      "prompt": "raw/chicken_eat_0-r1.prompt.txt",
+      "prompt_sha256": "dcd443de09e3f548e22bd7e88f5c3e906aa865e1afae0fef29c3771dc0c5c74f",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          13
+        ],
+        "content_scale": 0.018234625571977962,
+        "crop_xywh": [
+          304,
+          329,
+          676,
+          697
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_eat_0.png",
+      "seconds": 0.2,
+      "sha256": "20f66024adc1b6074d99e7dfd54e1344f524520c7988d3a7c93dc613fde36d00",
+      "source": "raw/chicken_eat_0-r1.png",
+      "source_sha256": "09e7c73b09042f21981473a530cb2036b9a42530b990fa0b21942f5d8e3a2e88",
+      "visible_limits_wh": [
+        [
+          1,
+          24
+        ],
+        [
+          1,
+          22
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_eat",
+      "call": "raw/chicken_eat_1-r1.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/chicken_eat/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "chicken-head-body-chicken_eat-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ]
+        },
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            11,
+            20
+          ],
+          "slice_xywh": [
+            11,
+            20,
+            5,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "chicken_eat_1",
+      "prompt": "raw/chicken_eat_1-r1.prompt.txt",
+      "prompt_sha256": "c02e1983f4147c1026273692e4b7f96de5c452921c1945b3d68b067abc589793",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          13
+        ],
+        "content_scale": 0.018234625571977962,
+        "crop_xywh": [
+          304,
+          329,
+          676,
+          697
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_eat_1.png",
+      "seconds": 0.2,
+      "sha256": "9980b0f788041fabde092c72379b158b26fe8229bf47b83b34c7a61fa52e67d1",
+      "source": "raw/chicken_eat_1-r1.png",
+      "source_sha256": "8f12c0abc255e0454cef88b543cb817165654df68c070f604fb245c6286a13f5",
+      "visible_limits_wh": [
+        [
+          1,
+          24
+        ],
+        [
+          1,
+          22
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_sleep",
+      "call": "raw/chicken_sleep_0-r2.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/chicken_sleep/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "chicken-lying-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "chicken_sleep_0",
+      "prompt": "raw/chicken_sleep_0-r2.prompt.txt",
+      "prompt_sha256": "80850521e6c0a4c21a4535114a2a87f41e86647dfe5ee0fe95953562ffbed8dc",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          10
+        ],
+        "content_scale": 0.0173992673992674,
+        "crop_xywh": [
+          302,
+          467,
+          712,
+          546
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_sleep_0.png",
+      "seconds": 0.6,
+      "sha256": "3dac2d311ba6206b4ddae95fab2dfb50fdd65d7456c58d8dbe85bda0b6594df1",
+      "source": "raw/chicken_sleep_0-r2.png",
+      "source_sha256": "d9a0650f326a9991d5c9a682565f69c41aa120b21d21cc42e26becfd596c7701",
+      "visible_limits_wh": [
+        [
+          1,
+          24
+        ],
+        [
+          9,
+          10
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_sleep",
+      "call": "raw/chicken_sleep_0-r2.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/chicken_sleep/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "chicken-sleep-breath",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "chicken_sleep_1",
+      "prompt": "raw/chicken_sleep_0-r2.prompt.txt",
+      "prompt_sha256": "80850521e6c0a4c21a4535114a2a87f41e86647dfe5ee0fe95953562ffbed8dc",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          10
+        ],
+        "content_scale": 0.0173992673992674,
+        "crop_xywh": [
+          302,
+          467,
+          712,
+          546
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_sleep_1.png",
+      "seconds": 0.6,
+      "sha256": "a3ef47b06edd3b0cf691933708c53263049df69f78bd75e7150953fce9c90244",
+      "source": "raw/chicken_sleep_0-r2.png",
+      "source_sha256": "d9a0650f326a9991d5c9a682565f69c41aa120b21d21cc42e26becfd596c7701",
+      "visible_limits_wh": [
+        [
+          1,
+          24
+        ],
+        [
+          9,
+          10
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_walk",
+      "call": "raw/chicken_walk-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/chicken_walk/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            18
+          ]
+        },
+        {
+          "input": "chicken-walk-legs-0",
+          "paste_xy": [
+            0,
+            18
+          ],
+          "slice_xywh": [
+            0,
+            18,
+            24,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "contact",
+      "prompt": "raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          12
+        ],
+        "content_scale": 0.024691358024691357,
+        "crop_xywh": [
+          64,
+          114,
+          486,
+          504
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_walk_0.png",
+      "seconds": 0.15,
+      "sha256": "ab47c9bb0368341701654b8ba5bf4af7d9ecf01df58daf464972204f90a8bbeb",
+      "source": "raw/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14",
+      "visible_limits_wh": [
+        [
+          11,
+          13
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_walk",
+      "call": "raw/chicken_walk-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/chicken_walk/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            18
+          ]
+        },
+        {
+          "input": "chicken-walk-legs-1",
+          "paste_xy": [
+            0,
+            18
+          ],
+          "slice_xywh": [
+            0,
+            18,
+            24,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "passing",
+      "prompt": "raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          12
+        ],
+        "content_scale": 0.024691358024691357,
+        "crop_xywh": [
+          581,
+          128,
+          486,
+          504
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_walk_1.png",
+      "seconds": 0.15,
+      "sha256": "b11df41fcd6f6e35c2b8cd48c47cf6344b5069f5400fc1d53291b58353c275b4",
+      "source": "raw/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14",
+      "visible_limits_wh": [
+        [
+          11,
+          13
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_walk",
+      "call": "raw/chicken_walk-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/chicken_walk/west/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            18
+          ]
+        },
+        {
+          "input": "chicken-walk-legs-2",
+          "paste_xy": [
+            0,
+            18
+          ],
+          "slice_xywh": [
+            0,
+            18,
+            24,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "opposite contact",
+      "prompt": "raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          12
+        ],
+        "content_scale": 0.024691358024691357,
+        "crop_xywh": [
+          1117,
+          113,
+          486,
+          504
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_walk_2.png",
+      "seconds": 0.15,
+      "sha256": "6b8a94c26248d36230a1f5bd9364b47416d3e0737e2f812d4cff0ebeac833f67",
+      "source": "raw/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14",
+      "visible_limits_wh": [
+        [
+          11,
+          13
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    },
+    {
+      "anim": "chicken_walk",
+      "call": "raw/chicken_walk-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "operation": "compose",
+      "output": "native/chicken_walk/west/04.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "parts": [
+        {
+          "input": "chicken-standing-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            18
+          ]
+        },
+        {
+          "input": "chicken-walk-legs-3",
+          "paste_xy": [
+            0,
+            18
+          ],
+          "slice_xywh": [
+            0,
+            18,
+            24,
+            4
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "opposite passing",
+      "prompt": "raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          12
+        ],
+        "content_scale": 0.024691358024691357,
+        "crop_xywh": [
+          1636,
+          129,
+          486,
+          504
+        ]
+      },
+      "runtime_name": "sprites/props/chicken_walk_3.png",
+      "seconds": 0.15,
+      "sha256": "95a525d6c23a74205033ed12089dcd620af523620a86833f3e7b49c3f8d033fc",
+      "source": "raw/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14",
+      "visible_limits_wh": [
+        [
+          11,
+          13
+        ],
+        [
+          12,
+          14
+        ]
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A027",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A027-cow-chicken\\raw\\cow-master-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "dd51605cab877281d5d91f5267ed52523b27cf71f0a171cd3491c1bb25f958e3"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\sheep-master-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "9c06f6aa160f20d8deb2921a081180f5891641108365364b7aeb9858dc7e5500"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A027-cow-chicken\\raw\\cow-master-r2.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "7b7a6c1b0a8083187d6c067ee74e95dfe447a9b94ea320de94140abf0d3fe03f"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A027-cow-chicken\\raw\\cow_eat_0-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "063cd400777d3ee7c97964cb470899f7945b47e9171b116a79a4a1e6bf6a1218"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\chicken.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "fdf30e750796f0d12a16f6b7b09584e5b6b72f4079a3861e4c54b34076ec09bc"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\left\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "b24d95053eafcc2a11e4184932ff41badc3bf248c1e2d9af0785b7637660574a"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A027-cow-chicken\\raw\\chicken-master-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "5b92fe4e23db0f959050117c181b41cb6c560e56823bbcfc8fea8780e75b3f02"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A027-cow-chicken\\raw\\chicken_eat_0-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "09e7c73b09042f21981473a530cb2036b9a42530b990fa0b21942f5d8e3a2e88"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A027-cow-chicken",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The cow and the chicken redrawn",
+  "tool": "built-in ImageGen"
+}

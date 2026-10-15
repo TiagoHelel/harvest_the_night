@@ -184,20 +184,22 @@ def check_dog(data, files, images):
 ## The barnyard's animals (tasks 0209, 0210): each species' poses, facing
 ## west - east is the runtime mirror - on its canvas, its feet on the pivot
 ## row in every frame, every frame its own. A026's sheep and pig on 40x32 at
-## (20,30), the pig's dig too.
+## (20,30), the pig's dig too; A027's cow on the same, and its hen on 24x24
+## at (12,22).
+GRAZER = {'idle': (2, 0.5, True), 'walk': (4, 0.15, True), 'eat': (2, 0.2, True), 'sleep': (2, 0.6, True)}
 ANIMALS = {
     'A026': {'canvas': [40, 32], 'pivot': [20, 30],
-             'species': {'sheep': {'idle': (2, 0.5, True), 'walk': (4, 0.15, True), 'eat': (2, 0.2, True),
-                                   'sleep': (2, 0.6, True)},
-                         'pig': {'idle': (2, 0.5, True), 'walk': (4, 0.15, True), 'eat': (2, 0.2, True),
-                                 'sleep': (2, 0.6, True), 'dig': (3, 0.1, False)}}},
+             'species': {'sheep': GRAZER, 'pig': dict(GRAZER, dig=(3, 0.1, False))}},
+    'A027 cow': {'pack': 'A027', 'canvas': [40, 32], 'pivot': [20, 30], 'species': {'cow': GRAZER}},
+    'A027 hen': {'pack': 'A027', 'canvas': [24, 24], 'pivot': [12, 22], 'species': {'chicken': GRAZER}},
 }
 
 
 def check_animals(data, files, images):
     by_id = {e['id']: e for e in data['assets']}
     count = 0
-    for pack, spec in ANIMALS.items():
+    for label, spec in ANIMALS.items():
+        pack = spec.get('pack', label)
         for kind, poses in spec['species'].items():
             seen = set()
             for pose, (frames, seconds, loop) in poses.items():
@@ -387,7 +389,7 @@ def main():
     sprays = check_sprinklers(data, files, images)
     animals = check_animals(data, files, images)
     print("OK: the barnyard's animals: %d frames over %s, west-facing, on their feet, every frame its own"
-          % (animals, ', '.join(sorted(ANIMALS))))
+          % (animals, ', '.join(sorted({spec.get('pack', label) for label, spec in ANIMALS.items()}))))
     print("OK: A018's sprinklers: 3 idle cuts and %d spray frames, the head risen two pixels on a still base, "
           "the nozzle on it" % sprays)
     print(("OK: %d source-owned props; 4 distinct same-scale variants; clean silhouettes and exact ground pivots"

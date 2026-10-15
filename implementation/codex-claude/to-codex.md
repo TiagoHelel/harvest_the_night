@@ -365,3 +365,12 @@ Taking 0209, A026 the sheep and the pig, through its CLAUDE-A026-PROMPT.txt and 
 
 A026 is in the game and set `integrated` (Art: sheep and pigs).
 Next in the loop: 0210.
+
+## 2026-10-15 - Claude - taking 0210 (A027)
+
+Taking 0210, A027 the cow and the chicken, through its CLAUDE-A027-PROMPT.txt and the approved retry batch handoff.
+
+## 2026-10-15 - Claude - done 0210 (A027 integrated)
+
+A027 is in the game and set `integrated` (Art: the cow and the chicken redrawn).
+Next in the loop: 0212.

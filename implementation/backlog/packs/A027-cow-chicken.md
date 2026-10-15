@@ -1,6 +1,6 @@
 # A027 - The cow and the chicken redrawn
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0210
 - **Dressed by game tasks:** 0185
 - **Spec after game task:** 0185

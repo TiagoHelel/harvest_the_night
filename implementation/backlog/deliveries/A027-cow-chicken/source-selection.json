@@ -1,0 +1,1155 @@
+{
+  "pack": "A027",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/cow-master-r2.png",
+      "source_sha256": "7b7a6c1b0a8083187d6c067ee74e95dfe447a9b94ea320de94140abf0d3fe03f",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/cow_idle/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.027057240520111395,
+            "crop_xywh": [
+              154,
+              187,
+              1172,
+              815
+            ]
+          },
+          "parts": []
+        },
+        {
+          "component": "cow-standing-master",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.027057240520111395,
+            "crop_xywh": [
+              154,
+              187,
+              1172,
+              815
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-cow_idle_1-r3.png",
+      "source_sha256": "acdd7ca05c0ea2b37da12be8a1f2c9569155931815074e90f17380b99854d7ea",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/cow_idle/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.027057240520111395,
+            "crop_xywh": [
+              154,
+              187,
+              1172,
+              815
+            ]
+          },
+          "parts": [
+            {
+              "input": "cow-idle-stable",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "component": "cow-idle-head",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.027057240520111395,
+            "crop_xywh": [
+              154,
+              187,
+              1172,
+              815
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/cow_eat_0-r1.png",
+      "source_sha256": "063cd400777d3ee7c97964cb470899f7945b47e9171b116a79a4a1e6bf6a1218",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/cow_eat/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.027057240520111395,
+            "crop_xywh": [
+              154,
+              187,
+              1172,
+              815
+            ]
+          },
+          "parts": [
+            {
+              "input": "cow-head-body-cow_eat-0",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            },
+            {
+              "input": "cow-standing-master",
+              "paste_xy": [
+                15,
+                26
+              ],
+              "slice_xywh": [
+                15,
+                26,
+                7,
+                4
+              ]
+            },
+            {
+              "input": "cow-standing-master",
+              "paste_xy": [
+                28,
+                26
+              ],
+              "slice_xywh": [
+                28,
+                26,
+                7,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "component": "cow-head-action-cow_eat-0",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.027057240520111395,
+            "crop_xywh": [
+              154,
+              187,
+              1172,
+              815
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/cow_eat_1-r1.png",
+      "source_sha256": "2db4e38be105f796602ff98999ec9880a9cc393e550cc52b3c2de328b4bfc0a6",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/cow_eat/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.027057240520111395,
+            "crop_xywh": [
+              154,
+              187,
+              1172,
+              815
+            ]
+          },
+          "parts": [
+            {
+              "input": "cow-head-body-cow_eat-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            },
+            {
+              "input": "cow-standing-master",
+              "paste_xy": [
+                15,
+                26
+              ],
+              "slice_xywh": [
+                15,
+                26,
+                7,
+                4
+              ]
+            },
+            {
+              "input": "cow-standing-master",
+              "paste_xy": [
+                28,
+                26
+              ],
+              "slice_xywh": [
+                28,
+                26,
+                7,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "component": "cow-head-action-cow_eat-1",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.027057240520111395,
+            "crop_xywh": [
+              154,
+              187,
+              1172,
+              815
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-cow_sleep_0-r3.png",
+      "source_sha256": "7c4a179958528ef7896bcd5f4c83c57e650ab8ceab9e9bf406146a2ae323ba2b",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/cow_sleep/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              17,
+              14
+            ],
+            "content_scale": 0.02845691382765531,
+            "crop_xywh": [
+              131,
+              421,
+              1186,
+              499
+            ]
+          },
+          "parts": [
+            {
+              "input": "cow-lying-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cow_sleep/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              17,
+              14
+            ],
+            "content_scale": 0.02845691382765531,
+            "crop_xywh": [
+              131,
+              421,
+              1186,
+              499
+            ]
+          },
+          "parts": [
+            {
+              "input": "cow-sleep-breath",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "component": "cow-lying-master",
+          "recipe": {
+            "content_anchor_xy": [
+              17,
+              14
+            ],
+            "content_scale": 0.02845691382765531,
+            "crop_xywh": [
+              131,
+              421,
+              1186,
+              499
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/cow_walk/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.0658682634730539,
+            "crop_xywh": [
+              24,
+              253,
+              479,
+              334
+            ]
+          },
+          "parts": [
+            {
+              "input": "cow-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "cow-walk-legs-0",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                40,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cow_walk/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.0658682634730539,
+            "crop_xywh": [
+              509,
+              258,
+              479,
+              334
+            ]
+          },
+          "parts": [
+            {
+              "input": "cow-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "cow-walk-legs-1",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                40,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cow_walk/west/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.0658682634730539,
+            "crop_xywh": [
+              1002,
+              255,
+              479,
+              334
+            ]
+          },
+          "parts": [
+            {
+              "input": "cow-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "cow-walk-legs-2",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                40,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cow_walk/west/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.0658682634730539,
+            "crop_xywh": [
+              1488,
+              256,
+              479,
+              334
+            ]
+          },
+          "parts": [
+            {
+              "input": "cow-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                23
+              ]
+            },
+            {
+              "input": "cow-walk-legs-3",
+              "paste_xy": [
+                0,
+                23
+              ],
+              "slice_xywh": [
+                0,
+                23,
+                40,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "component": "cow-walk-legs-0",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.0658682634730539,
+            "crop_xywh": [
+              24,
+              253,
+              479,
+              334
+            ]
+          }
+        },
+        {
+          "component": "cow-walk-legs-1",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.0658682634730539,
+            "crop_xywh": [
+              509,
+              258,
+              479,
+              334
+            ]
+          }
+        },
+        {
+          "component": "cow-walk-legs-2",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.0658682634730539,
+            "crop_xywh": [
+              1002,
+              255,
+              479,
+              334
+            ]
+          }
+        },
+        {
+          "component": "cow-walk-legs-3",
+          "recipe": {
+            "content_anchor_xy": [
+              16,
+              22
+            ],
+            "content_scale": 0.0658682634730539,
+            "crop_xywh": [
+              1488,
+              256,
+              479,
+              334
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/chicken-master-r1.png",
+      "source_sha256": "5b92fe4e23db0f959050117c181b41cb6c560e56823bbcfc8fea8780e75b3f02",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/chicken_idle/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              13
+            ],
+            "content_scale": 0.018234625571977962,
+            "crop_xywh": [
+              304,
+              329,
+              676,
+              697
+            ]
+          },
+          "parts": []
+        },
+        {
+          "component": "chicken-standing-master",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              13
+            ],
+            "content_scale": 0.018234625571977962,
+            "crop_xywh": [
+              304,
+              329,
+              676,
+              697
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/chicken_idle_1-r1.png",
+      "source_sha256": "fc5b56fd9e48b7f7d5e6b7175c2439a7bc09176853d1a0c149d7b412e3b775ec",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/chicken_idle/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              13
+            ],
+            "content_scale": 0.018234625571977962,
+            "crop_xywh": [
+              304,
+              329,
+              676,
+              697
+            ]
+          },
+          "parts": [
+            {
+              "input": "chicken-idle-stable",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                24
+              ]
+            }
+          ]
+        },
+        {
+          "component": "chicken-idle-head",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              13
+            ],
+            "content_scale": 0.018234625571977962,
+            "crop_xywh": [
+              304,
+              329,
+              676,
+              697
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/chicken_eat_0-r1.png",
+      "source_sha256": "09e7c73b09042f21981473a530cb2036b9a42530b990fa0b21942f5d8e3a2e88",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/chicken_eat/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              13
+            ],
+            "content_scale": 0.018234625571977962,
+            "crop_xywh": [
+              304,
+              329,
+              676,
+              697
+            ]
+          },
+          "parts": [
+            {
+              "input": "chicken-head-body-chicken_eat-0",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                24
+              ]
+            },
+            {
+              "input": "chicken-standing-master",
+              "paste_xy": [
+                11,
+                20
+              ],
+              "slice_xywh": [
+                11,
+                20,
+                5,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "component": "chicken-head-action-chicken_eat-0",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              13
+            ],
+            "content_scale": 0.018234625571977962,
+            "crop_xywh": [
+              304,
+              329,
+              676,
+              697
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/chicken_eat_1-r1.png",
+      "source_sha256": "8f12c0abc255e0454cef88b543cb817165654df68c070f604fb245c6286a13f5",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/chicken_eat/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              13
+            ],
+            "content_scale": 0.018234625571977962,
+            "crop_xywh": [
+              304,
+              329,
+              676,
+              697
+            ]
+          },
+          "parts": [
+            {
+              "input": "chicken-head-body-chicken_eat-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                24
+              ]
+            },
+            {
+              "input": "chicken-standing-master",
+              "paste_xy": [
+                11,
+                20
+              ],
+              "slice_xywh": [
+                11,
+                20,
+                5,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "component": "chicken-head-action-chicken_eat-1",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              13
+            ],
+            "content_scale": 0.018234625571977962,
+            "crop_xywh": [
+              304,
+              329,
+              676,
+              697
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/chicken_sleep_0-r2.png",
+      "source_sha256": "d9a0650f326a9991d5c9a682565f69c41aa120b21d21cc42e26becfd596c7701",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/chicken_sleep/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              10
+            ],
+            "content_scale": 0.0173992673992674,
+            "crop_xywh": [
+              302,
+              467,
+              712,
+              546
+            ]
+          },
+          "parts": [
+            {
+              "input": "chicken-lying-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                24
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/chicken_sleep/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              10
+            ],
+            "content_scale": 0.0173992673992674,
+            "crop_xywh": [
+              302,
+              467,
+              712,
+              546
+            ]
+          },
+          "parts": [
+            {
+              "input": "chicken-sleep-breath",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                24
+              ]
+            }
+          ]
+        },
+        {
+          "component": "chicken-lying-master",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              10
+            ],
+            "content_scale": 0.0173992673992674,
+            "crop_xywh": [
+              302,
+              467,
+              712,
+              546
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/chicken_walk/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              12
+            ],
+            "content_scale": 0.024691358024691357,
+            "crop_xywh": [
+              64,
+              114,
+              486,
+              504
+            ]
+          },
+          "parts": [
+            {
+              "input": "chicken-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                18
+              ]
+            },
+            {
+              "input": "chicken-walk-legs-0",
+              "paste_xy": [
+                0,
+                18
+              ],
+              "slice_xywh": [
+                0,
+                18,
+                24,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/chicken_walk/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              12
+            ],
+            "content_scale": 0.024691358024691357,
+            "crop_xywh": [
+              581,
+              128,
+              486,
+              504
+            ]
+          },
+          "parts": [
+            {
+              "input": "chicken-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                18
+              ]
+            },
+            {
+              "input": "chicken-walk-legs-1",
+              "paste_xy": [
+                0,
+                18
+              ],
+              "slice_xywh": [
+                0,
+                18,
+                24,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/chicken_walk/west/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              12
+            ],
+            "content_scale": 0.024691358024691357,
+            "crop_xywh": [
+              1117,
+              113,
+              486,
+              504
+            ]
+          },
+          "parts": [
+            {
+              "input": "chicken-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                18
+              ]
+            },
+            {
+              "input": "chicken-walk-legs-2",
+              "paste_xy": [
+                0,
+                18
+              ],
+              "slice_xywh": [
+                0,
+                18,
+                24,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/chicken_walk/west/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              12
+            ],
+            "content_scale": 0.024691358024691357,
+            "crop_xywh": [
+              1636,
+              129,
+              486,
+              504
+            ]
+          },
+          "parts": [
+            {
+              "input": "chicken-standing-master",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                18
+              ]
+            },
+            {
+              "input": "chicken-walk-legs-3",
+              "paste_xy": [
+                0,
+                18
+              ],
+              "slice_xywh": [
+                0,
+                18,
+                24,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "component": "chicken-walk-legs-0",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              12
+            ],
+            "content_scale": 0.024691358024691357,
+            "crop_xywh": [
+              64,
+              114,
+              486,
+              504
+            ]
+          }
+        },
+        {
+          "component": "chicken-walk-legs-1",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              12
+            ],
+            "content_scale": 0.024691358024691357,
+            "crop_xywh": [
+              581,
+              128,
+              486,
+              504
+            ]
+          }
+        },
+        {
+          "component": "chicken-walk-legs-2",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              12
+            ],
+            "content_scale": 0.024691358024691357,
+            "crop_xywh": [
+              1117,
+              113,
+              486,
+              504
+            ]
+          }
+        },
+        {
+          "component": "chicken-walk-legs-3",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              12
+            ],
+            "content_scale": 0.024691358024691357,
+            "crop_xywh": [
+              1636,
+              129,
+              486,
+              504
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

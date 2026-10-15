@@ -100179,6 +100179,3634 @@
       "revision": 1,
       "approval": "A026 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0209",
       "output_sha256": "d5e12acf6843f0974de90df601158e316d185182b3b66b892edcf50e0a792494"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-head-action-chicken_eat-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken_eat_0-r1.png",
+      "source_sha256": "09e7c73b09042f21981473a530cb2036b9a42530b990fa0b21942f5d8e3a2e88",
+      "crop_xywh": [
+        304,
+        329,
+        676,
+        697
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.018234625571977962,
+      "content_anchor_xy": [
+        6,
+        13
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-head-action-chicken_eat-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-head-action-chicken_eat-0.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_eat_0-r1.prompt.txt",
+      "prompt_sha256": "dcd443de09e3f548e22bd7e88f5c3e906aa865e1afae0fef29c3771dc0c5c74f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_eat_0-r1.call.json",
+          "sha256": "364456fa7813ce417244a119d14fea677056412948cfb6f2674e9dc639f86463",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-head-action-chicken_eat-0.png",
+          "sha256": "4267c47a77357adcbb320743c90f200a9404d611eb4152887ac5c816fa674691",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "3e8c5b3e11f6595843ccefed55b38f68fc3aa3e19353c5c453ca3df50d96632e"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-head-action-chicken_eat-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken_eat_1-r1.png",
+      "source_sha256": "8f12c0abc255e0454cef88b543cb817165654df68c070f604fb245c6286a13f5",
+      "crop_xywh": [
+        304,
+        329,
+        676,
+        697
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.018234625571977962,
+      "content_anchor_xy": [
+        6,
+        13
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-head-action-chicken_eat-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-head-action-chicken_eat-1.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_eat_1-r1.prompt.txt",
+      "prompt_sha256": "c02e1983f4147c1026273692e4b7f96de5c452921c1945b3d68b067abc589793",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_eat_1-r1.call.json",
+          "sha256": "4a1d7bb2620ad1a36eb88ebe96bffc6ffe9c0f949bfe336ca206e424ba41be2c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-head-action-chicken_eat-1.png",
+          "sha256": "720a0a40fbac7ed06a71aab3846daffe8c096db0b4068c923dda9531ba1aeccd",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "31a5437a9984b12009b47fb7c50ee921574ff87ae5e485fe47a597422a099db8"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-head-body-chicken_eat-0",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-head-body-chicken_eat-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-head-body-chicken_eat-0.png",
+      "input": "components/A027-cow-chicken/chicken-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            0,
+            22,
+            24,
+            2
+          ],
+          "paste_xy": [
+            0,
+            22
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            11,
+            0,
+            13,
+            22
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-head-action-chicken_eat-0",
+          "slice_xywh": [
+            0,
+            0,
+            11,
+            22
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken-master-r1.prompt.txt",
+      "prompt_sha256": "58dae32053626ef158f9a2d28535b8f97d3aac37b82f08cd114a83500f37adb4",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-head-body-chicken_eat-0.png",
+          "sha256": "20f66024adc1b6074d99e7dfd54e1344f524520c7988d3a7c93dc613fde36d00",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "08912294eed45724394bfc3eb169eb9bdc416ce52b770326ee39b93d64c54802"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-head-body-chicken_eat-1",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-head-body-chicken_eat-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-head-body-chicken_eat-1.png",
+      "input": "components/A027-cow-chicken/chicken-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            0,
+            22,
+            24,
+            2
+          ],
+          "paste_xy": [
+            0,
+            22
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            11,
+            0,
+            13,
+            22
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-head-action-chicken_eat-1",
+          "slice_xywh": [
+            0,
+            0,
+            11,
+            22
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken-master-r1.prompt.txt",
+      "prompt_sha256": "58dae32053626ef158f9a2d28535b8f97d3aac37b82f08cd114a83500f37adb4",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-head-body-chicken_eat-1.png",
+          "sha256": "9980b0f788041fabde092c72379b158b26fe8229bf47b83b34c7a61fa52e67d1",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "99341fb6346987d24d8a55bff421075090020ba25edfc6a81bf8e75dff895502"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-idle-head",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken_idle_1-r1.png",
+      "source_sha256": "fc5b56fd9e48b7f7d5e6b7175c2439a7bc09176853d1a0c149d7b412e3b775ec",
+      "crop_xywh": [
+        304,
+        329,
+        676,
+        697
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.018234625571977962,
+      "content_anchor_xy": [
+        6,
+        13
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-idle-head",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-idle-head.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_idle_1-r1.prompt.txt",
+      "prompt_sha256": "4b53f717c5002811b641efdf3fc31b17376ae59c7443ae748d50b559a745351f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_idle_1-r1.call.json",
+          "sha256": "1b48d23fdb3a1779f4862833dff9c6a447f5e36445411c385118c069b0d519b7",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-idle-head.png",
+          "sha256": "264bfd3a5d7e15b69a558de73637e8f4fda6a9a2cf463e303fdb52a0dbbcd44a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "1aa6dfe54917a8df5b528f4dd01d87b8f4233ea4061e542a00a5199c77fef8ce"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-idle-stable",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-idle-stable",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-idle-stable.png",
+      "input": "components/A027-cow-chicken/chicken-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            6
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            0,
+            19,
+            24,
+            5
+          ],
+          "paste_xy": [
+            0,
+            19
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            0,
+            6,
+            3,
+            13
+          ],
+          "paste_xy": [
+            0,
+            6
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            15,
+            6,
+            9,
+            13
+          ],
+          "paste_xy": [
+            15,
+            6
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-idle-head",
+          "slice_xywh": [
+            3,
+            6,
+            12,
+            13
+          ],
+          "paste_xy": [
+            3,
+            6
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken-master-r1.prompt.txt",
+      "prompt_sha256": "58dae32053626ef158f9a2d28535b8f97d3aac37b82f08cd114a83500f37adb4",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-idle-stable.png",
+          "sha256": "dab45faa1d0f21188989cc2ca453c34b874ec3e3a0746010845e2718d0e4389d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "678bff2a46e8690849f8488aca4db3cc650201e5b73a434ca465a858d04eb5c9"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-lying-master",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken_sleep_0-r2.png",
+      "source_sha256": "d9a0650f326a9991d5c9a682565f69c41aa120b21d21cc42e26becfd596c7701",
+      "crop_xywh": [
+        302,
+        467,
+        712,
+        546
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.0173992673992674,
+      "content_anchor_xy": [
+        6,
+        10
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-lying-master",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-lying-master.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_sleep_0-r2.prompt.txt",
+      "prompt_sha256": "80850521e6c0a4c21a4535114a2a87f41e86647dfe5ee0fe95953562ffbed8dc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_sleep_0-r2.call.json",
+          "sha256": "4f04b256d9ccd44bbcaf131983cb8686a5269f2612d1599336bb169b65192df2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-lying-master.png",
+          "sha256": "3dac2d311ba6206b4ddae95fab2dfb50fdd65d7456c58d8dbe85bda0b6594df1",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "4c016edfb967179a1a0ce777b2619f76c6deb411b55de446aafc28fe7ebed2a6"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-sleep-breath",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-sleep-breath",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-sleep-breath.png",
+      "input": "components/A027-cow-chicken/chicken-lying-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-lying-master",
+          "slice_xywh": [
+            0,
+            16,
+            24,
+            8
+          ],
+          "paste_xy": [
+            0,
+            16
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-lying-master",
+          "slice_xywh": [
+            0,
+            0,
+            11,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-lying-master",
+          "slice_xywh": [
+            11,
+            1,
+            13,
+            17
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_sleep_0-r2.prompt.txt",
+      "prompt_sha256": "80850521e6c0a4c21a4535114a2a87f41e86647dfe5ee0fe95953562ffbed8dc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-sleep-breath.png",
+          "sha256": "a3ef47b06edd3b0cf691933708c53263049df69f78bd75e7150953fce9c90244",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "3b4da97e00b4ece7d529dbd6d9963c0f2d1b9949cd2781ed9a345b61d39cc809"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-standing-master",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken-master-r1.png",
+      "source_sha256": "5b92fe4e23db0f959050117c181b41cb6c560e56823bbcfc8fea8780e75b3f02",
+      "crop_xywh": [
+        304,
+        329,
+        676,
+        697
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.018234625571977962,
+      "content_anchor_xy": [
+        6,
+        13
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-standing-master",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-standing-master.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken-master-r1.prompt.txt",
+      "prompt_sha256": "58dae32053626ef158f9a2d28535b8f97d3aac37b82f08cd114a83500f37adb4",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken-master-r1.call.json",
+          "sha256": "27e941ad27497240aa705e58f4779455feb5a3dc07c84bd874a43e2c558e024f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-standing-master.png",
+          "sha256": "39ef1911fa9c7d7231f7941de9c1c07bfc4b0c2c26926e2aad083d69626a04cc",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "9da8643f19d0b4a8ccd35cbceb389584c7429638ef16fb0bb826fbb796fe7e73"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-walk-legs-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14",
+      "crop_xywh": [
+        64,
+        114,
+        486,
+        504
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.024691358024691357,
+      "content_anchor_xy": [
+        6,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-walk-legs-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-walk-legs-0.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.call.json",
+          "sha256": "6a65d8461007bf389dd6904bf50b4b80181e975855379f79eb75175b91ddddbb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-walk-legs-0.png",
+          "sha256": "a545f7e6262549a1f92274a8ab5845452e402dcf0c8b3189764fe40e3ca4de68",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "d20e32d7364df32c1ff65320a8b138d0a1bcbd1fd3b75d0de6655a927d750a26"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-walk-legs-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14",
+      "crop_xywh": [
+        581,
+        128,
+        486,
+        504
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.024691358024691357,
+      "content_anchor_xy": [
+        6,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-walk-legs-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-walk-legs-1.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.call.json",
+          "sha256": "6a65d8461007bf389dd6904bf50b4b80181e975855379f79eb75175b91ddddbb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-walk-legs-1.png",
+          "sha256": "aea80f7b6235a6b6cd6fb386db7d5a17c4dceebe0bcb7f12ec817ee034038471",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "7d6230d9a042fc60598532a25c8aa292d58130dcb135f10de018bd19fad45d6a"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-walk-legs-2",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14",
+      "crop_xywh": [
+        1117,
+        113,
+        486,
+        504
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.024691358024691357,
+      "content_anchor_xy": [
+        6,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-walk-legs-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-walk-legs-2.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.call.json",
+          "sha256": "6a65d8461007bf389dd6904bf50b4b80181e975855379f79eb75175b91ddddbb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-walk-legs-2.png",
+          "sha256": "e9cbe16fb7fc051940740a3ab52eb9333d639e2f51d0fcc88eb9f7d45b3063b4",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "4157229273b38a188b65d8c64cb57fc442e5204590e70f047fdd34b81c4d8595"
+    },
+    {
+      "id": "components/A027-cow-chicken/chicken-walk-legs-3",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken_walk-r3.png",
+      "source_sha256": "69a1b2296d58a861c44e4e76021d7fec3a8b584305a3107dba8d9e502d6d0d14",
+      "crop_xywh": [
+        1636,
+        129,
+        486,
+        504
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.024691358024691357,
+      "content_anchor_xy": [
+        6,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/chicken-walk-legs-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/chicken-walk-legs-3.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.call.json",
+          "sha256": "6a65d8461007bf389dd6904bf50b4b80181e975855379f79eb75175b91ddddbb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/chicken-walk-legs-3.png",
+          "sha256": "a3dc781fdce2058aed45db45db0fa8f2d657d59ec0304a54f2306eb11f479103",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "1a03815841b1847760fa6c2323271cf21845e638a2010cd5086b0e3011b34fbe"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-head-action-cow_eat-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/cow_eat_0-r1.png",
+      "source_sha256": "063cd400777d3ee7c97964cb470899f7945b47e9171b116a79a4a1e6bf6a1218",
+      "crop_xywh": [
+        154,
+        187,
+        1172,
+        815
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.027057240520111395,
+      "content_anchor_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-head-action-cow_eat-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-head-action-cow_eat-0.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_eat_0-r1.prompt.txt",
+      "prompt_sha256": "90c17f9fa54423f539523588de851f78e22478da5ed73db72b9c104666065981",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_eat_0-r1.call.json",
+          "sha256": "ef582993711d2176f08d35d0a83269687dd26e65a0f04881b377f60d69ddfb03",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-head-action-cow_eat-0.png",
+          "sha256": "947ba3a6cb36447c506948a893767cca2fef0ab07d3904d6eb9debd26032be0d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "5575d989dfd602e921005e02087a269efc11821a7b017dc0a490ebfa3495ddd3"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-head-action-cow_eat-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/cow_eat_1-r1.png",
+      "source_sha256": "2db4e38be105f796602ff98999ec9880a9cc393e550cc52b3c2de328b4bfc0a6",
+      "crop_xywh": [
+        154,
+        187,
+        1172,
+        815
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.027057240520111395,
+      "content_anchor_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-head-action-cow_eat-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-head-action-cow_eat-1.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_eat_1-r1.prompt.txt",
+      "prompt_sha256": "96a64ff00c367dcefe2203f171399a85616711d3e34f14b41c9da1fceb90ad2b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_eat_1-r1.call.json",
+          "sha256": "567d392ddfff740e4e2a11edcd0ef8dacecaeb14cd3fca46ef22dc3353c40817",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-head-action-cow_eat-1.png",
+          "sha256": "859a177f492a0fc4ca3e487cc4b8defaeedf21db72d196e92de1d8d34f6f7841",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "e5d14354a73dde6b410de61be5cdf970016b585a7041c4ec9ed5422122da6fe5"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-head-body-cow_eat-0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-head-body-cow_eat-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-head-body-cow_eat-0.png",
+      "input": "components/A027-cow-chicken/cow-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ],
+          "paste_xy": [
+            0,
+            30
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            15,
+            0,
+            25,
+            30
+          ],
+          "paste_xy": [
+            15,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-head-action-cow_eat-0",
+          "slice_xywh": [
+            0,
+            0,
+            15,
+            30
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow-master-r2.prompt.txt",
+      "prompt_sha256": "e7f0570fd46693f4cf0c5d28fba4c9ed6bc3bb2638af853c4e5db0eb4fc83f08",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-head-body-cow_eat-0.png",
+          "sha256": "dc162c31f07a3f9bd43182d62064cf4c212468a8d4e4456418880f5b50c03ca0",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "ca4375a71202e170a9a7d20d6e7ca44de52778d84a5be44ddce65fa6751ae22e"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-head-body-cow_eat-1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-head-body-cow_eat-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-head-body-cow_eat-1.png",
+      "input": "components/A027-cow-chicken/cow-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            0,
+            30,
+            40,
+            2
+          ],
+          "paste_xy": [
+            0,
+            30
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            15,
+            0,
+            25,
+            30
+          ],
+          "paste_xy": [
+            15,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-head-action-cow_eat-1",
+          "slice_xywh": [
+            0,
+            0,
+            15,
+            30
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow-master-r2.prompt.txt",
+      "prompt_sha256": "e7f0570fd46693f4cf0c5d28fba4c9ed6bc3bb2638af853c4e5db0eb4fc83f08",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-head-body-cow_eat-1.png",
+          "sha256": "d958be7a6ff9350ffbb57d925c57e8d8bb56d14be243b11ccf02782994eda9fa",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "f371cb848c8b79849c7332e0d3c010fc6e5411ee8c198efe07e49be7e1f77697"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-idle-head",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/recovered-cow_idle_1-r3.png",
+      "source_sha256": "acdd7ca05c0ea2b37da12be8a1f2c9569155931815074e90f17380b99854d7ea",
+      "crop_xywh": [
+        154,
+        187,
+        1172,
+        815
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.027057240520111395,
+      "content_anchor_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-idle-head",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-idle-head.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_idle_1-r3.prompt.txt",
+      "prompt_sha256": "6a9b71b345d2a9698f5e5993f6870f15cdb94bc15c79ed274f3de9a5e3f75f34",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_idle_1-r3.call.json",
+          "sha256": "4c9340fbe01c97614e1d970309544b5b4f98c5b8f9337651ea2f8d63d6ff7848",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-idle-head.png",
+          "sha256": "a58ffc26760d2feb54310055d20731b6c779c0a49b8ee38aaa4696b8310dd5be",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "afe0feef9f32c9a104a87661c542e4faad49058056423612892f49b588025380"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-idle-stable",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-idle-stable",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-idle-stable.png",
+      "input": "components/A027-cow-chicken/cow-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            4
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            0,
+            25,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            25
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            0,
+            4,
+            2,
+            21
+          ],
+          "paste_xy": [
+            0,
+            4
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            19,
+            4,
+            21,
+            21
+          ],
+          "paste_xy": [
+            19,
+            4
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-idle-head",
+          "slice_xywh": [
+            2,
+            4,
+            17,
+            21
+          ],
+          "paste_xy": [
+            2,
+            4
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow-master-r2.prompt.txt",
+      "prompt_sha256": "e7f0570fd46693f4cf0c5d28fba4c9ed6bc3bb2638af853c4e5db0eb4fc83f08",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-idle-stable.png",
+          "sha256": "7e8662eaefc82c509bf7ee59662a57908cc77f59dcc5379fff36d86e62e112ef",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "31c95595a3bf98d58efcc85bd04cfce5d8d103a40b9ef3e2d00b500228fc43e1"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-lying-master",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/recovered-cow_sleep_0-r3.png",
+      "source_sha256": "7c4a179958528ef7896bcd5f4c83c57e650ab8ceab9e9bf406146a2ae323ba2b",
+      "crop_xywh": [
+        131,
+        421,
+        1186,
+        499
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.02845691382765531,
+      "content_anchor_xy": [
+        17,
+        14
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-lying-master",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-lying-master.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_sleep_0-r3.prompt.txt",
+      "prompt_sha256": "c65f60c597947d64c3858adf940d1c904e96349d43ad31770a4771f8500ee858",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_sleep_0-r3.call.json",
+          "sha256": "786e0ef68cfa34b0d96ecc56ff4e2b61dc731d14db0448ddfc3179c606ac69f2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-lying-master.png",
+          "sha256": "741cf32e8e7050428c8d16cfa6797c2de4be286d7a35361d9ea9b6c6fa95d54d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "d12dca47ab31495055f5c62c4423bb0628d8bd6764457110114ed38b2e28111a"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-sleep-breath",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-sleep-breath",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-sleep-breath.png",
+      "input": "components/A027-cow-chicken/cow-lying-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-lying-master",
+          "slice_xywh": [
+            0,
+            24,
+            40,
+            8
+          ],
+          "paste_xy": [
+            0,
+            24
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-lying-master",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-lying-master",
+          "slice_xywh": [
+            16,
+            1,
+            24,
+            25
+          ],
+          "paste_xy": [
+            16,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_sleep_0-r3.prompt.txt",
+      "prompt_sha256": "c65f60c597947d64c3858adf940d1c904e96349d43ad31770a4771f8500ee858",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-sleep-breath.png",
+          "sha256": "06ee05a431be973ade5ef69353ea4c65eba2b8d8592f9bfc4f8b1fc2ee3d6c8d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "b8e35e6088bd6ca9d193ca084d04a12aa69d318da8ddf7e52b124cc5f7cc42bc"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-standing-master",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/cow-master-r2.png",
+      "source_sha256": "7b7a6c1b0a8083187d6c067ee74e95dfe447a9b94ea320de94140abf0d3fe03f",
+      "crop_xywh": [
+        154,
+        187,
+        1172,
+        815
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.027057240520111395,
+      "content_anchor_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-standing-master",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-standing-master.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow-master-r2.prompt.txt",
+      "prompt_sha256": "e7f0570fd46693f4cf0c5d28fba4c9ed6bc3bb2638af853c4e5db0eb4fc83f08",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow-master-r2.call.json",
+          "sha256": "9e4a203198055b09bbf1df84e3b0422bbd7282eb2a736cc2fa4f70f5179fa997",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-standing-master.png",
+          "sha256": "80090c1f4aa41b4ff4f8e9d7b934720d2d175f8278a0b1681f00effb4a6e07d6",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "14d9feda2de70c375d4c8c9a193b24badf0418c8c8b21f91028e8dd7924ef8f1"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-walk-legs-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e",
+      "crop_xywh": [
+        24,
+        253,
+        479,
+        334
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.0658682634730539,
+      "content_anchor_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-walk-legs-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-walk-legs-0.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.call.json",
+          "sha256": "367535c9ab7cbe3e88204c357e145c4d1d20099c551bc3ab9d9a2c3faf3f64e4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-walk-legs-0.png",
+          "sha256": "f92fac54671a541ca405f9b525067e7df7db1898d9653aadce09f3d794f6251c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "8a3487d0580e4c751643f9ac7b2af95e1988e3a0ee35ed4b3f411fb1fbeb3d78"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-walk-legs-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e",
+      "crop_xywh": [
+        509,
+        258,
+        479,
+        334
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.0658682634730539,
+      "content_anchor_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-walk-legs-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-walk-legs-1.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.call.json",
+          "sha256": "367535c9ab7cbe3e88204c357e145c4d1d20099c551bc3ab9d9a2c3faf3f64e4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-walk-legs-1.png",
+          "sha256": "4fc16fd28503f92dfdc2dfab51e831e831a6d89396a3fb4f9d36ab381481919a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "509fe93ba02745a813dba874afa6af01b3ca0350149d73c30aec853ee96d7e64"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-walk-legs-2",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e",
+      "crop_xywh": [
+        1002,
+        255,
+        479,
+        334
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.0658682634730539,
+      "content_anchor_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-walk-legs-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-walk-legs-2.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.call.json",
+          "sha256": "367535c9ab7cbe3e88204c357e145c4d1d20099c551bc3ab9d9a2c3faf3f64e4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-walk-legs-2.png",
+          "sha256": "f7aae17096a704d99d7992e1d01d7ac69ba3fa17f7482d813e72cade28f54465",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "5a82a38b849a4fa54bf7625a6e8b97c5ad7fc78a0f6c773b30eb04e350b5fe9f"
+    },
+    {
+      "id": "components/A027-cow-chicken/cow-walk-legs-3",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/cow_walk-r1.png",
+      "source_sha256": "834f923c0ae776fbb7b0797fd9b5a798237576a37ef7e9b18b4476ebd7f86f7e",
+      "crop_xywh": [
+        1488,
+        256,
+        479,
+        334
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.0658682634730539,
+      "content_anchor_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A027-cow-chicken/cow-walk-legs-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A027-cow-chicken/cow-walk-legs-3.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.call.json",
+          "sha256": "367535c9ab7cbe3e88204c357e145c4d1d20099c551bc3ab9d9a2c3faf3f64e4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/components/cow-walk-legs-3.png",
+          "sha256": "826759c95dd8c777b3189b53ca046b91e915744551e1cc000ba6badb0a8373ed",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "assembly_component_of": "A027",
+      "output_sha256": "8757a444cb6cf21112dd318afb506e37dcb876dfcb49765669ce8de1bfbd887d"
+    },
+    {
+      "id": "props/cow_idle_0",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/cow-master-r2.png",
+      "source_sha256": "7b7a6c1b0a8083187d6c067ee74e95dfe447a9b94ea320de94140abf0d3fe03f",
+      "crop_xywh": [
+        154,
+        187,
+        1172,
+        815
+      ],
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "content_scale": 0.027057240520111395,
+      "content_anchor_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "stone_dark",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "skin_dark",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_idle",
+      "frame": 0,
+      "seconds": 0.5,
+      "loop": true,
+      "output": "sprites/props/cow_idle_0.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow-master-r2.prompt.txt",
+      "prompt_sha256": "e7f0570fd46693f4cf0c5d28fba4c9ed6bc3bb2638af853c4e5db0eb4fc83f08",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow-master-r2.call.json",
+          "sha256": "9e4a203198055b09bbf1df84e3b0422bbd7282eb2a736cc2fa4f70f5179fa997",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_idle/west/01.png",
+          "sha256": "80090c1f4aa41b4ff4f8e9d7b934720d2d175f8278a0b1681f00effb4a6e07d6",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "14d9feda2de70c375d4c8c9a193b24badf0418c8c8b21f91028e8dd7924ef8f1"
+    },
+    {
+      "id": "props/cow_idle_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_idle",
+      "frame": 1,
+      "seconds": 0.5,
+      "loop": true,
+      "output": "sprites/props/cow_idle_1.png",
+      "input": "components/A027-cow-chicken/cow-idle-stable",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-idle-stable",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_idle_1-r3.prompt.txt",
+      "prompt_sha256": "6a9b71b345d2a9698f5e5993f6870f15cdb94bc15c79ed274f3de9a5e3f75f34",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_idle_1-r3.call.json",
+          "sha256": "4c9340fbe01c97614e1d970309544b5b4f98c5b8f9337651ea2f8d63d6ff7848",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_idle/west/02.png",
+          "sha256": "7e8662eaefc82c509bf7ee59662a57908cc77f59dcc5379fff36d86e62e112ef",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "31c95595a3bf98d58efcc85bd04cfce5d8d103a40b9ef3e2d00b500228fc43e1"
+    },
+    {
+      "id": "props/cow_eat_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_eat",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": true,
+      "output": "sprites/props/cow_eat_0.png",
+      "input": "components/A027-cow-chicken/cow-head-body-cow_eat-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-head-body-cow_eat-0",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            15,
+            26,
+            7,
+            4
+          ],
+          "paste_xy": [
+            15,
+            26
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            28,
+            26,
+            7,
+            4
+          ],
+          "paste_xy": [
+            28,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_eat_0-r1.prompt.txt",
+      "prompt_sha256": "90c17f9fa54423f539523588de851f78e22478da5ed73db72b9c104666065981",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_eat_0-r1.call.json",
+          "sha256": "ef582993711d2176f08d35d0a83269687dd26e65a0f04881b377f60d69ddfb03",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_eat/west/01.png",
+          "sha256": "dc162c31f07a3f9bd43182d62064cf4c212468a8d4e4456418880f5b50c03ca0",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "ca4375a71202e170a9a7d20d6e7ca44de52778d84a5be44ddce65fa6751ae22e"
+    },
+    {
+      "id": "props/cow_eat_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_eat",
+      "frame": 1,
+      "seconds": 0.2,
+      "loop": true,
+      "output": "sprites/props/cow_eat_1.png",
+      "input": "components/A027-cow-chicken/cow-head-body-cow_eat-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-head-body-cow_eat-1",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            15,
+            26,
+            7,
+            4
+          ],
+          "paste_xy": [
+            15,
+            26
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            28,
+            26,
+            7,
+            4
+          ],
+          "paste_xy": [
+            28,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_eat_1-r1.prompt.txt",
+      "prompt_sha256": "96a64ff00c367dcefe2203f171399a85616711d3e34f14b41c9da1fceb90ad2b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_eat_1-r1.call.json",
+          "sha256": "567d392ddfff740e4e2a11edcd0ef8dacecaeb14cd3fca46ef22dc3353c40817",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_eat/west/02.png",
+          "sha256": "d958be7a6ff9350ffbb57d925c57e8d8bb56d14be243b11ccf02782994eda9fa",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "f371cb848c8b79849c7332e0d3c010fc6e5411ee8c198efe07e49be7e1f77697"
+    },
+    {
+      "id": "props/cow_sleep_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_sleep",
+      "frame": 0,
+      "seconds": 0.6,
+      "loop": true,
+      "output": "sprites/props/cow_sleep_0.png",
+      "input": "components/A027-cow-chicken/cow-lying-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-lying-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_sleep_0-r3.prompt.txt",
+      "prompt_sha256": "c65f60c597947d64c3858adf940d1c904e96349d43ad31770a4771f8500ee858",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_sleep_0-r3.call.json",
+          "sha256": "786e0ef68cfa34b0d96ecc56ff4e2b61dc731d14db0448ddfc3179c606ac69f2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_sleep/west/01.png",
+          "sha256": "741cf32e8e7050428c8d16cfa6797c2de4be286d7a35361d9ea9b6c6fa95d54d",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "d12dca47ab31495055f5c62c4423bb0628d8bd6764457110114ed38b2e28111a"
+    },
+    {
+      "id": "props/cow_sleep_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_sleep",
+      "frame": 1,
+      "seconds": 0.6,
+      "loop": true,
+      "output": "sprites/props/cow_sleep_1.png",
+      "input": "components/A027-cow-chicken/cow-sleep-breath",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-sleep-breath",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_sleep_0-r3.prompt.txt",
+      "prompt_sha256": "c65f60c597947d64c3858adf940d1c904e96349d43ad31770a4771f8500ee858",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/recovered-cow_sleep_0-r3.call.json",
+          "sha256": "786e0ef68cfa34b0d96ecc56ff4e2b61dc731d14db0448ddfc3179c606ac69f2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_sleep/west/02.png",
+          "sha256": "06ee05a431be973ade5ef69353ea4c65eba2b8d8592f9bfc4f8b1fc2ee3d6c8d",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "b8e35e6088bd6ca9d193ca084d04a12aa69d318da8ddf7e52b124cc5f7cc42bc"
+    },
+    {
+      "id": "props/cow_walk_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_walk",
+      "frame": 0,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/cow_walk_0.png",
+      "input": "components/A027-cow-chicken/cow-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-walk-legs-0",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.call.json",
+          "sha256": "367535c9ab7cbe3e88204c357e145c4d1d20099c551bc3ab9d9a2c3faf3f64e4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_walk/west/01.png",
+          "sha256": "1b888c96aa8ffa2abcd5368b90cea9e20e786107fe3fadd712c07b0b959d41ee",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "c84ae3c46feb79db09bacb1ec794d77383c1a81f15db3c3dfb39ffb7170a78ec"
+    },
+    {
+      "id": "props/cow_walk_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_walk",
+      "frame": 1,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/cow_walk_1.png",
+      "input": "components/A027-cow-chicken/cow-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-walk-legs-1",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.call.json",
+          "sha256": "367535c9ab7cbe3e88204c357e145c4d1d20099c551bc3ab9d9a2c3faf3f64e4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_walk/west/02.png",
+          "sha256": "30791af4b243a240aa2f9549a625a9205b3729f850744aa8cddb5404b3fe2a56",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "4f33997becc2fcb7a1e585af24c2ffbaf2b054174a01ffdf34c97556c108e166"
+    },
+    {
+      "id": "props/cow_walk_2",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_walk",
+      "frame": 2,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/cow_walk_2.png",
+      "input": "components/A027-cow-chicken/cow-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-walk-legs-2",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.call.json",
+          "sha256": "367535c9ab7cbe3e88204c357e145c4d1d20099c551bc3ab9d9a2c3faf3f64e4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_walk/west/03.png",
+          "sha256": "2e724325784e57bf0fed9d1c63e879cf1b51bf34d704ffdd44db523cb9ae724a",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "c9bf94f02e043d1eba6d1cc0225c501925db33f4d81470d37200a4a88f65bf2e"
+    },
+    {
+      "id": "props/cow_walk_3",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow_walk",
+      "frame": 3,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/cow_walk_3.png",
+      "input": "components/A027-cow-chicken/cow-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/cow-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            23
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/cow-walk-legs-3",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            7
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.prompt.txt",
+      "prompt_sha256": "d3e8b96dc3f902a24492fc137e4db7cc90543ec1523d1dc14e9ba3ef891873ba",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/cow_walk-r1.call.json",
+          "sha256": "367535c9ab7cbe3e88204c357e145c4d1d20099c551bc3ab9d9a2c3faf3f64e4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/cow_walk/west/04.png",
+          "sha256": "a37bb80ffc20c17f3d43c0a757937b1d625a602ab01afe21d7f0d378eedfce46",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "44cfee51b2fb7e93437fb9593e502cb954d81fde622280a410ed30551246e020"
+    },
+    {
+      "id": "props/chicken_idle_0",
+      "owner": "raster",
+      "source": "assets/art_source/props/cow_chicken/chicken-master-r1.png",
+      "source_sha256": "5b92fe4e23db0f959050117c181b41cb6c560e56823bbcfc8fea8780e75b3f02",
+      "crop_xywh": [
+        304,
+        329,
+        676,
+        697
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.018234625571977962,
+      "content_anchor_xy": [
+        6,
+        13
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "bone_dark",
+        "bone",
+        "skin_light",
+        "skin",
+        "wood_dark",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "flame",
+        "gold",
+        "soil_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_idle",
+      "frame": 0,
+      "seconds": 0.5,
+      "loop": true,
+      "output": "sprites/props/chicken_idle_0.png",
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken-master-r1.prompt.txt",
+      "prompt_sha256": "58dae32053626ef158f9a2d28535b8f97d3aac37b82f08cd114a83500f37adb4",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken-master-r1.call.json",
+          "sha256": "27e941ad27497240aa705e58f4779455feb5a3dc07c84bd874a43e2c558e024f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_idle/west/01.png",
+          "sha256": "39ef1911fa9c7d7231f7941de9c1c07bfc4b0c2c26926e2aad083d69626a04cc",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "9da8643f19d0b4a8ccd35cbceb389584c7429638ef16fb0bb826fbb796fe7e73"
+    },
+    {
+      "id": "props/chicken_idle_1",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_idle",
+      "frame": 1,
+      "seconds": 0.5,
+      "loop": true,
+      "output": "sprites/props/chicken_idle_1.png",
+      "input": "components/A027-cow-chicken/chicken-idle-stable",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-idle-stable",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_idle_1-r1.prompt.txt",
+      "prompt_sha256": "4b53f717c5002811b641efdf3fc31b17376ae59c7443ae748d50b559a745351f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_idle_1-r1.call.json",
+          "sha256": "1b48d23fdb3a1779f4862833dff9c6a447f5e36445411c385118c069b0d519b7",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_idle/west/02.png",
+          "sha256": "dab45faa1d0f21188989cc2ca453c34b874ec3e3a0746010845e2718d0e4389d",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "678bff2a46e8690849f8488aca4db3cc650201e5b73a434ca465a858d04eb5c9"
+    },
+    {
+      "id": "props/chicken_eat_0",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_eat",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": true,
+      "output": "sprites/props/chicken_eat_0.png",
+      "input": "components/A027-cow-chicken/chicken-head-body-chicken_eat-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-head-body-chicken_eat-0",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            11,
+            20,
+            5,
+            3
+          ],
+          "paste_xy": [
+            11,
+            20
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_eat_0-r1.prompt.txt",
+      "prompt_sha256": "dcd443de09e3f548e22bd7e88f5c3e906aa865e1afae0fef29c3771dc0c5c74f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_eat_0-r1.call.json",
+          "sha256": "364456fa7813ce417244a119d14fea677056412948cfb6f2674e9dc639f86463",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_eat/west/01.png",
+          "sha256": "20f66024adc1b6074d99e7dfd54e1344f524520c7988d3a7c93dc613fde36d00",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "08912294eed45724394bfc3eb169eb9bdc416ce52b770326ee39b93d64c54802"
+    },
+    {
+      "id": "props/chicken_eat_1",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_eat",
+      "frame": 1,
+      "seconds": 0.2,
+      "loop": true,
+      "output": "sprites/props/chicken_eat_1.png",
+      "input": "components/A027-cow-chicken/chicken-head-body-chicken_eat-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-head-body-chicken_eat-1",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            11,
+            20,
+            5,
+            3
+          ],
+          "paste_xy": [
+            11,
+            20
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_eat_1-r1.prompt.txt",
+      "prompt_sha256": "c02e1983f4147c1026273692e4b7f96de5c452921c1945b3d68b067abc589793",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_eat_1-r1.call.json",
+          "sha256": "4a1d7bb2620ad1a36eb88ebe96bffc6ffe9c0f949bfe336ca206e424ba41be2c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_eat/west/02.png",
+          "sha256": "9980b0f788041fabde092c72379b158b26fe8229bf47b83b34c7a61fa52e67d1",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "99341fb6346987d24d8a55bff421075090020ba25edfc6a81bf8e75dff895502"
+    },
+    {
+      "id": "props/chicken_sleep_0",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_sleep",
+      "frame": 0,
+      "seconds": 0.6,
+      "loop": true,
+      "output": "sprites/props/chicken_sleep_0.png",
+      "input": "components/A027-cow-chicken/chicken-lying-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-lying-master",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_sleep_0-r2.prompt.txt",
+      "prompt_sha256": "80850521e6c0a4c21a4535114a2a87f41e86647dfe5ee0fe95953562ffbed8dc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_sleep_0-r2.call.json",
+          "sha256": "4f04b256d9ccd44bbcaf131983cb8686a5269f2612d1599336bb169b65192df2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_sleep/west/01.png",
+          "sha256": "3dac2d311ba6206b4ddae95fab2dfb50fdd65d7456c58d8dbe85bda0b6594df1",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "4c016edfb967179a1a0ce777b2619f76c6deb411b55de446aafc28fe7ebed2a6"
+    },
+    {
+      "id": "props/chicken_sleep_1",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_sleep",
+      "frame": 1,
+      "seconds": 0.6,
+      "loop": true,
+      "output": "sprites/props/chicken_sleep_1.png",
+      "input": "components/A027-cow-chicken/chicken-sleep-breath",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-sleep-breath",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_sleep_0-r2.prompt.txt",
+      "prompt_sha256": "80850521e6c0a4c21a4535114a2a87f41e86647dfe5ee0fe95953562ffbed8dc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_sleep_0-r2.call.json",
+          "sha256": "4f04b256d9ccd44bbcaf131983cb8686a5269f2612d1599336bb169b65192df2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_sleep/west/02.png",
+          "sha256": "a3ef47b06edd3b0cf691933708c53263049df69f78bd75e7150953fce9c90244",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "3b4da97e00b4ece7d529dbd6d9963c0f2d1b9949cd2781ed9a345b61d39cc809"
+    },
+    {
+      "id": "props/chicken_walk_0",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_walk",
+      "frame": 0,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/chicken_walk_0.png",
+      "input": "components/A027-cow-chicken/chicken-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            18
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-walk-legs-0",
+          "slice_xywh": [
+            0,
+            18,
+            24,
+            4
+          ],
+          "paste_xy": [
+            0,
+            18
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.call.json",
+          "sha256": "6a65d8461007bf389dd6904bf50b4b80181e975855379f79eb75175b91ddddbb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_walk/west/01.png",
+          "sha256": "ab47c9bb0368341701654b8ba5bf4af7d9ecf01df58daf464972204f90a8bbeb",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "17ec265cc7c0fc076bdcfff45480c3da2940f01e51c7d865bec3faa5841afe6f"
+    },
+    {
+      "id": "props/chicken_walk_1",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_walk",
+      "frame": 1,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/chicken_walk_1.png",
+      "input": "components/A027-cow-chicken/chicken-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            18
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-walk-legs-1",
+          "slice_xywh": [
+            0,
+            18,
+            24,
+            4
+          ],
+          "paste_xy": [
+            0,
+            18
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.call.json",
+          "sha256": "6a65d8461007bf389dd6904bf50b4b80181e975855379f79eb75175b91ddddbb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_walk/west/02.png",
+          "sha256": "b11df41fcd6f6e35c2b8cd48c47cf6344b5069f5400fc1d53291b58353c275b4",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "efb018253b6d2bd81e8a468b4548858850bb2828bb41f4b1e282e25587f65527"
+    },
+    {
+      "id": "props/chicken_walk_2",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_walk",
+      "frame": 2,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/chicken_walk_2.png",
+      "input": "components/A027-cow-chicken/chicken-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            18
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-walk-legs-2",
+          "slice_xywh": [
+            0,
+            18,
+            24,
+            4
+          ],
+          "paste_xy": [
+            0,
+            18
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.call.json",
+          "sha256": "6a65d8461007bf389dd6904bf50b4b80181e975855379f79eb75175b91ddddbb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_walk/west/03.png",
+          "sha256": "6b8a94c26248d36230a1f5bd9364b47416d3e0737e2f812d4cff0ebeac833f67",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "9b55e01fd1fc11f4ee29f2d1e5933e2397210c205b608b1517cc26640bef77a9"
+    },
+    {
+      "id": "props/chicken_walk_3",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken_walk",
+      "frame": 3,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/props/chicken_walk_3.png",
+      "input": "components/A027-cow-chicken/chicken-standing-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A027-cow-chicken/chicken-standing-master",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            18
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A027-cow-chicken/chicken-walk-legs-3",
+          "slice_xywh": [
+            0,
+            18,
+            24,
+            4
+          ],
+          "paste_xy": [
+            0,
+            18
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.prompt.txt",
+      "prompt_sha256": "cd3c4ecd05bca6e358ffa13837ee27b330af2bc789ef73c328289d4133ce63ad",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/raw/chicken_walk-r3.call.json",
+          "sha256": "6a65d8461007bf389dd6904bf50b4b80181e975855379f79eb75175b91ddddbb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/native/chicken_walk/west/04.png",
+          "sha256": "95a525d6c23a74205033ed12089dcd620af523620a86833f3e7b49c3f8d033fc",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/contract.json",
+          "sha256": "9083506818408d063186e08d180515102bdc43c6468f3393aba1a8d7293009af",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+          "sha256": "a86ac271de3b49aa2f7a6d74e8f9c5da2b79ea36397d16ddbb8210b123c873ab",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A027",
+      "integration_task": "0210",
+      "revision": 1,
+      "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
+      "output_sha256": "b45d9afc1a7782f06ed91dc5f52029be8ce764ca30b8c198b894b66acb07c449"
     }
   ]
 }

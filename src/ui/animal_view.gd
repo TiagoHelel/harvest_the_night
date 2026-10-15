@@ -14,14 +14,14 @@ extends Node2D
 ## wanders a little pen in front of it, from a sequence of its own - the same
 ## animal makes the same walk every time, so a picture is repeatable.
 ##
-## The drawings are A026's (sheep, pig: task 0209), A027's (cow, chicken) and
-## A028's (dog: task 0245) animations. A species with its art plays its own
-## frames on their own seconds, facing west as drawn and mirrored east - no
-## tint, scale, bob, dip or squash. One still on 0120's road until its pack
-## lands is the cow's or the chicken's prop tinted and scaled, every frame the
-## same picture, with a bob for a step, a dip for a bite and a squash for
-## sleep so the states still read. A029's dig spot is its approved mound
-## (task 0211).
+## The drawings are A026's (sheep, pig: task 0209), A027's (cow, chicken:
+## task 0210) and A028's (dog: task 0245) animations. A species with its art
+## plays its own frames on their own seconds, facing west as drawn and
+## mirrored east - no tint, scale, bob, dip or squash. One on 0120's road
+## until its pack lands is the cow's or the chicken's prop tinted and scaled,
+## every frame the same picture, with a bob for a step, a dip for a bite and a
+## squash for sleep so the states still read - none left since task 0210.
+## A029's dig spot is its approved mound (task 0211).
 
 ## How fast they go, in pixels a second.
 const WALK_SPEED := 12.0

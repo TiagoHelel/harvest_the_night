@@ -1,0 +1,29 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "ANIMAL MASTER: Creamwhite farmcow TWO broadnearBLACK patches, peachmuzzleudder, TWOshortpalehorns ears taildarktip darkhooves. No bells collar. Standing sideview WEST headLEFT, 3/4topdown litback, SAME familycameraandoutline asImage1 sheep, notidentity. Nativevisible31wide23tall, targetcanvas40x32pivot20,30, grounded. Full-densitypixelart, normalsmall eyes, notmascot. Image2 currentcow identity reference. No grass shadow ground mud clothes letters.\nCORRECTION revision2: the first cow reduces to32x21 but must be31x23. Increase relative body+leg height by about10percent while retaining width; standing adult farmcow, normal nonmascot proportions, groundedfourhooves. Invariant cream body, dark patches, pink muzzle/udder, shortpalehorns. Actual silhouette ratio WIDTH:HEIGHT about31:23, NOT32:21. Transparent background no shadow.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A027-cow-chicken\\raw\\cow-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\sheep-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A027-cow-chicken\\raw\\cow-master-r1.png",
+      "sha256": "dd51605cab877281d5d91f5267ed52523b27cf71f0a171cd3491c1bb25f958e3",
+      "role": "candidate edit target; owner approval pending"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A026-farm-animals\\raw\\sheep-master-r1.png",
+      "sha256": "9c06f6aa160f20d8deb2921a081180f5891641108365364b7aeb9858dc7e5500",
+      "role": "identity/material/layout reference; generation approval is recorded separately"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-82b32529-09e9-4d99-9e47-3602ae81edf0.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A027-cow-chicken\\raw\\cow-master-r2.png",
+  "sha256": "7b7a6c1b0a8083187d6c067ee74e95dfe447a9b94ea320de94140abf0d3fe03f",
+  "date": "2026-10-10",
+  "revision": 2,
+  "decision": "candidate / reference retained for owner review; no whole-pack approval"
+}

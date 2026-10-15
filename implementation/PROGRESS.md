@@ -32855,3 +32855,48 @@ cow tinted and scaled.
 - `python implementation/backlog/assets.py set A026 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (64 of 64).
+
+## 0210 - Art: the cow and the chicken redrawn - done 2026-10-15
+
+A027 is integrated. The barnyard's cow and hen are the owner-approved art
+now: each with a two-frame idle, four-frame walk, two-frame eat and
+two-frame sleep. The cow is on 40x32 standing on (20,30) and the hen on
+24x24 standing on (12,22), both facing west and mirrored east at runtime.
+The owner approved the corrected pack on 2026-10-15 with the retried batch
+("tudo aprovado"), as recorded in the delivery's `APPROVAL.json`. 0185's
+stand-ins are gone: the map's cow and chicken props, tinted, every frame
+the same picture.
+
+- **Promotion**:
+  - 18 of the 20 frames are compositions over 26 assembly components (18
+    `render`, 8 `compose`), under `sprites/components/A027-cow-chicken/`.
+  - The two first idle frames are direct cuts.
+  - The 12 raw sources are byte for byte in
+    `assets/art_source/props/cow_chicken/`.
+  - Every node and file was sha-checked, and decodes to its approved RGBA.
+- **The view**: nothing new. `AnimalView`'s path for a drawn species
+  (0209) plays them. No animal is left on 0120's road, so its tint, scale,
+  bob, dip and squash now serve nothing that is drawn; they stay for a
+  species a later pack adds.
+- **The map props stay**: `props/cow` and `props/chicken` are the map's own
+  props (`check_prop_art.NAMES`), not A027's frames, and are unchanged.
+- **The stand-ins retired**: A027's eight `PlaceholderArt` entries, and the
+  `ANIMAL_LARGE` and `ANIMAL_SMALL` geometries they were the last to use.
+  `placeholders.py --check` passes, with 130 stand-ins left over 19 packs.
+- **Checks**: `check_prop_art.py`'s `ANIMALS` takes the cow and the hen,
+  each at its own box, with the poses as 0209 set them. 43 frames over A026
+  and A027: west-facing, on their feet, every frame its own.
+- **Tests**: `_task_0210_cow_chicken` (headless_v1) checks:
+  - every pose is raster art at its box, none a stand-in;
+  - no A026 or A027 entry is left in the registry;
+  - the cow's eat and the hen's sleep run on their own seconds.
+- **Shots** (`implementation/shots/0210/`, FHD 1920x1080, looked at):
+  - `barnyard`: noon, the spotted cow, the sheep and the pigs by the barn,
+    the hens - white with red combs - by the coop.
+  - `barnyard_night`: 01:35, the same under the late light.
+  - `coop_barn`: both homes on their sites, the animals moved in.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A027 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (64 of 64).

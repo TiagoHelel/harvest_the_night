@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#####################...`  **265 / 296 done**
+`######################..`  **266 / 296 done**
 
-0 doing / 31 todo / 0 blocked across 18 phases.
+0 doing / 30 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-31 task(s) left, the ready ones first, then what they
+30 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -156,24 +156,6 @@ The farmer milks, shears and feeds with a proper pose, and pets the dog, at the 
   - done when: `python tools/show_art.py --work --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0208/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0210 - Art: the cow and the chicken redrawn
-
-Ready to pick up.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/world_view.gd, src/ui/animal_view.gd`.
-
-Today's 24x24 cow and chicken are redrawn at the farmer's scale with idle, walk, eat and sleep.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A027` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A027-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/props/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`check_prop_art.NAMES`, which names `cow` and `chicken` today).
-- Runtime names: idle, walk (side-on, mirrored at runtime), eat and sleep for the cow and the chicken at the canvas and pivot 0185 settled; drop the cow and chicken from the `AMBIENT_MOTION` shader's `species` parameter in `world_view.gd` if the frames replace that sway, and keep `transition.gd`'s `DAY_ONLY` finding them
-- Retire the old 24x24 `props/cow` and `props/chicken` once nothing reads them, and flip A027's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A027 integrated`.
-
-  - done when: `python tools/check_prop_art.py` and `python tools/show_art.py --props --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0210/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0212 - Art: the coop and the barn
@@ -492,7 +474,7 @@ The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpo
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0210, 0212, 0215, 0216, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0212, 0215, 0216, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -808,7 +790,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md)
 - [x] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md)
 
-## 12 - The day that pays  (46/53)
+## 12 - The day that pays  (47/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -855,7 +837,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0207** [Art: the farmer fishing](prompts/0207-art-farmer-fishing.md) - waits for art A024
 - [ ] **0208** [Art: the farmer tending animals](prompts/0208-art-farmer-care.md) - waits for art A025
 - [x] **0209** [Art: sheep and pigs](prompts/0209-art-farm-animals.md)
-- [ ] **0210** [Art: the cow and the chicken redrawn](prompts/0210-art-cow-chicken.md)
+- [x] **0210** [Art: the cow and the chicken redrawn](prompts/0210-art-cow-chicken.md)
 - [x] **0211** [Art: animal goods](prompts/0211-art-animal-goods.md)
 - [ ] **0212** [Art: the coop and the barn](prompts/0212-art-coop-barn.md)
 - [x] **0213** [Art: the artisan machines](prompts/0213-art-machines.md)
@@ -947,7 +929,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md)
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0210, 0212, 0215, 0216, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0212, 0215, 0216, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (2/7)
 

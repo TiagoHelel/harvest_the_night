@@ -1,0 +1,53 @@
+A027 - The cow and the chicken redrawn
+Approval date: 2026-10-15
+Owner words, verbatim: "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+Status: approved for integration; runtime not yet integrated.
+
+Authoritative folder: implementation/backlog/deliveries/A027-cow-chicken/
+All 20 native output PNGs and the recorded source/component assembly are owner-approved.
+Integration game task: 0210.
+Cow/hen face west with runtime east mirrors. Preserve species canvas/pivot and scale next to the 32px farmer, fixed feet in quiet poses and correct cow sleep identity. Do not use the historical wrong-species rejected cow return.
+
+Read APPROVAL.json, contract.json, checks.json, source-selection.json and the shared detailed correction notes:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-REVIEW.md
+That file is the historical correction/assembly explanation. The approved batch handoff below supersedes its old pending-review instructions:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-APPROVED.md
+No older delivery folder is superseded unless listed in contract.supersedes; prior candidate sources in rejected/, preview/ and retry-before-20261014/ are never integration inputs.
+
+Palette mode A: preserve every per-file override, palette_keys, alpha_threshold128, colour_ramp and draw scale.
+Mode A: promote raw sources with the recorded importer crop/nearest scale/anchor/palette recipe. Mode B: final native pixels are exact-source; do not re-quantize.
+Layered outputs: parts/components are authoritative. The primary source/recipe also records provenance; do NOT treat it as a direct crop for a composed file.
+Promote the DAG recursively, maximum5parts per compose node. Derived compose entries must omit source (otherwise the importer bypasses composition), use input=first part input and preserve part order.
+Exact reference, mode-B and baked mirror component PNGs are hashed exact-source leaves. Quarter-turns use the existing rotate operation. Preserve source recipes and approval provenance.
+Canonical importer replay already reproduces all outputs pixel-exact; see pipeline-replay-check.json and the shared check_pipeline_replay.py.
+
+Native -> runtime mapping (01.png is frame0):
+native/cow_idle/west/01.png -> sprites/props/cow_idle_0.png | 40x32 pivot (20, 30) draw 1 | cow_idle west frame0 0.5s loop=true mirror=runtime | points={}
+native/cow_idle/west/02.png -> sprites/props/cow_idle_1.png | 40x32 pivot (20, 30) draw 1 | cow_idle west frame1 0.5s loop=true mirror=runtime | points={}
+native/cow_eat/west/01.png -> sprites/props/cow_eat_0.png | 40x32 pivot (20, 30) draw 1 | cow_eat west frame0 0.2s loop=true mirror=runtime | points={}
+native/cow_eat/west/02.png -> sprites/props/cow_eat_1.png | 40x32 pivot (20, 30) draw 1 | cow_eat west frame1 0.2s loop=true mirror=runtime | points={}
+native/cow_sleep/west/01.png -> sprites/props/cow_sleep_0.png | 40x32 pivot (20, 30) draw 1 | cow_sleep west frame0 0.6s loop=true mirror=runtime | points={}
+native/cow_sleep/west/02.png -> sprites/props/cow_sleep_1.png | 40x32 pivot (20, 30) draw 1 | cow_sleep west frame1 0.6s loop=true mirror=runtime | points={}
+native/cow_walk/west/01.png -> sprites/props/cow_walk_0.png | 40x32 pivot (20, 30) draw 1 | cow_walk west frame0 0.15s loop=true mirror=runtime | points={}
+native/cow_walk/west/02.png -> sprites/props/cow_walk_1.png | 40x32 pivot (20, 30) draw 1 | cow_walk west frame1 0.15s loop=true mirror=runtime | points={}
+native/cow_walk/west/03.png -> sprites/props/cow_walk_2.png | 40x32 pivot (20, 30) draw 1 | cow_walk west frame2 0.15s loop=true mirror=runtime | points={}
+native/cow_walk/west/04.png -> sprites/props/cow_walk_3.png | 40x32 pivot (20, 30) draw 1 | cow_walk west frame3 0.15s loop=true mirror=runtime | points={}
+native/chicken_idle/west/01.png -> sprites/props/chicken_idle_0.png | 24x24 pivot (12, 22) draw 1 | chicken_idle west frame0 0.5s loop=true mirror=runtime | points={}
+native/chicken_idle/west/02.png -> sprites/props/chicken_idle_1.png | 24x24 pivot (12, 22) draw 1 | chicken_idle west frame1 0.5s loop=true mirror=runtime | points={}
+native/chicken_eat/west/01.png -> sprites/props/chicken_eat_0.png | 24x24 pivot (12, 22) draw 1 | chicken_eat west frame0 0.2s loop=true mirror=runtime | points={}
+native/chicken_eat/west/02.png -> sprites/props/chicken_eat_1.png | 24x24 pivot (12, 22) draw 1 | chicken_eat west frame1 0.2s loop=true mirror=runtime | points={}
+native/chicken_sleep/west/01.png -> sprites/props/chicken_sleep_0.png | 24x24 pivot (12, 22) draw 1 | chicken_sleep west frame0 0.6s loop=true mirror=runtime | points={}
+native/chicken_sleep/west/02.png -> sprites/props/chicken_sleep_1.png | 24x24 pivot (12, 22) draw 1 | chicken_sleep west frame1 0.6s loop=true mirror=runtime | points={}
+native/chicken_walk/west/01.png -> sprites/props/chicken_walk_0.png | 24x24 pivot (12, 22) draw 1 | chicken_walk west frame0 0.15s loop=true mirror=runtime | points={}
+native/chicken_walk/west/02.png -> sprites/props/chicken_walk_1.png | 24x24 pivot (12, 22) draw 1 | chicken_walk west frame1 0.15s loop=true mirror=runtime | points={}
+native/chicken_walk/west/03.png -> sprites/props/chicken_walk_2.png | 24x24 pivot (12, 22) draw 1 | chicken_walk west frame2 0.15s loop=true mirror=runtime | points={}
+native/chicken_walk/west/04.png -> sprites/props/chicken_walk_3.png | 24x24 pivot (12, 22) draw 1 | chicken_walk west frame3 0.15s loop=true mirror=runtime | points={}
+
+Aliases: bind listed runtime names directly, replace the named game task's placeholders and retain any existing required aliases to the appropriate approved first frames. Do not invent additional raster frames.
+Mirrors: runtime east mirroring applies only to the authored west-facing animal/NPC cycles identified above. All UI, crop, guardian and static building files bind with no flip. Preserve any per-file mirror field.
+Metadata coordinates are native pixels. Component files are supporting assembly nodes, not extra runtime animations.
+Deviations and owner authorization: [{"change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.", "owner_words": "Sim, autorizar composição com recortes do ImageGen", "rule": "ART-CONTRACT 9.4 barrier-only composition"}]
+
+Never regenerate, repaint, recolour, resample or retime approved art; never cut sprites out of previews, GIFs or screenshots; never add a second flip. Do not use unlisted candidates.
+Next: verify approved output and component hashes; promote versioned sources/assembly via the raster manifest and ownership records; extend hard-coded family checks; run tools/verify.py; inspect actual FHD day/night behavior; set this pack integrated only after successful integration. Claude owns game-task state and assets.py unblock.
+No new commit/push is authorized by this art approval.

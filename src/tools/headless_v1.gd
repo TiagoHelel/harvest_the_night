@@ -202,6 +202,7 @@ func _run() -> void:
 	_task_0201_sprinklers()
 	_task_0206_fishing_gear()
 	_task_0209_sheep_pig()
+	_task_0210_cow_chicken()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14446,6 +14447,30 @@ func _task_0209_sheep_pig() -> void:
 	expect(wrong.is_empty() and walking == [0, 1, 0] and digging == [0, 1, 2],
 		"A026's sheep and pig are raster art at their box; a walk loops on its seconds and the dig plays once, held",
 		"%s; walk %s, dig %s" % [str(wrong), str(walking), str(digging)])
+	_completed += 1
+
+
+## **A027's cow and hen** (task 0210): every pose A027 drew - idle, walk,
+## eat and sleep - is raster art, the cow on 40x32 at (20,30) and the hen on
+## 24x24 at (12,22), none a stand-in. No animal is left on 0120's road.
+func _task_0210_cow_chicken() -> void:
+	var wrong: Array = []
+	for kind in [[&"cow", Vector2i(40, 32), Vector2i(20, 30)], [&"chicken", Vector2i(24, 24), Vector2i(12, 22)]]:
+		for mode in [&"idle", &"walk", &"eat", &"sleep"]:
+			var pose := StringName("%s_%s" % [kind[0], mode])
+			var frame := PlaceholderArt.frame(AnimalView.pose_path(pose, 0))
+			if not AnimalView.drawn(pose) or not PlaceholderArt.art(pose).is_empty() \
+					or frame.get("canvas") != kind[1] or frame.get("pivot") != kind[2]:
+				wrong.append(pose)
+	var road: Array = []
+	for name in GameData.sorted_names(PlaceholderArt.ART.keys()):
+		if ["A026", "A027"].has(str((PlaceholderArt.ART[name] as Dictionary)["pack"])):
+			road.append(name)
+	var grazing := [AnimalView.animal_frame(&"cow_eat", 0.0, 0.0), AnimalView.animal_frame(&"cow_eat", 0.21, 0.0),
+		AnimalView.animal_frame(&"chicken_sleep", 0.61, 0.0)]
+	expect(wrong.is_empty() and road.is_empty() and grazing == [0, 1, 1],
+		"A027's cow and hen are raster art at their boxes and no animal is left on 0120's road",
+		"%s; road %s; %s" % [str(wrong), str(road), str(grazing)])
 	_completed += 1
 
 

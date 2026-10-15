@@ -2494,6 +2494,110 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/components/A027-cow-chicken/chicken-head-action-chicken_eat-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-head-action-chicken_eat-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-head-body-chicken_eat-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-head-body-chicken_eat-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-idle-head.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-idle-stable.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-lying-master.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-sleep-breath.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-standing-master.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-walk-legs-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-walk-legs-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-walk-legs-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/chicken-walk-legs-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-head-action-cow_eat-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-head-action-cow_eat-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-head-body-cow_eat-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-head-body-cow_eat-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-idle-head.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-idle-stable.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-lying-master.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-sleep-breath.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-standing-master.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-walk-legs-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-walk-legs-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-walk-legs-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A027-cow-chicken/cow-walk-legs-3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/beet_0.png",
       "owner": "raster"
     },
@@ -3470,6 +3574,46 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/chicken_eat_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken_eat_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken_idle_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken_idle_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken_sleep_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken_sleep_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken_walk_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/coal_seam.png",
       "owner": "raster"
     },
@@ -3507,6 +3651,46 @@
     },
     {
       "output": "sprites/props/cow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_eat_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_eat_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_idle_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_idle_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_sleep_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_sleep_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/cow_walk_3.png",
       "owner": "raster"
     },
     {
