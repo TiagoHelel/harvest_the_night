@@ -108754,6 +108754,2747 @@
       "revision": 1,
       "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
       "output_sha256": "9c12a65c569c5aa66515501b0bf90edab9010b06242e0d2db58fd44636d16bc5"
+    },
+    {
+      "id": "components/A034-peddler/merchant-arm-only-0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-arm-only-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-arm-only-0.png",
+      "input": "components/A034-peddler/merchant-talk-fixed-body",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            26,
+            40,
+            14
+          ],
+          "paste_xy": [
+            0,
+            26
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            15,
+            5,
+            11
+          ],
+          "paste_xy": [
+            0,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            16,
+            15,
+            24,
+            11
+          ],
+          "paste_xy": [
+            16,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-moving-0",
+          "slice_xywh": [
+            5,
+            15,
+            11,
+            11
+          ],
+          "paste_xy": [
+            5,
+            15
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-arm-only-0.png",
+          "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "88cc27cb7dea9e69776d93421bb0ad87b14ddf448852731df20beba7aded395e"
+    },
+    {
+      "id": "components/A034-peddler/merchant-arm-only-1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-arm-only-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-arm-only-1.png",
+      "input": "components/A034-peddler/merchant-talk-fixed-body",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            26,
+            40,
+            14
+          ],
+          "paste_xy": [
+            0,
+            26
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            15,
+            5,
+            11
+          ],
+          "paste_xy": [
+            0,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            16,
+            15,
+            24,
+            11
+          ],
+          "paste_xy": [
+            16,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-moving-1",
+          "slice_xywh": [
+            5,
+            15,
+            11,
+            11
+          ],
+          "paste_xy": [
+            5,
+            15
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-arm-only-1.png",
+          "sha256": "7b675e9168d319155ebe05b800fbe521255e374ccfe9d3b2fb68becf5c248b2c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "381ac0f5c3ba8e7bfc71b1242bb9d64b4e85412a7c409237bf71cc21abcbb695"
+    },
+    {
+      "id": "components/A034-peddler/merchant-arm-only-2",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-arm-only-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-arm-only-2.png",
+      "input": "components/A034-peddler/merchant-talk-fixed-body",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            26,
+            40,
+            14
+          ],
+          "paste_xy": [
+            0,
+            26
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            15,
+            5,
+            11
+          ],
+          "paste_xy": [
+            0,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            16,
+            15,
+            24,
+            11
+          ],
+          "paste_xy": [
+            16,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-moving-2",
+          "slice_xywh": [
+            5,
+            15,
+            11,
+            11
+          ],
+          "paste_xy": [
+            5,
+            15
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-arm-only-2.png",
+          "sha256": "f5b4c0a4bee3ded1fd2b688517d2fc75b8afa782ddcaf6a69ab0722e35fb5d84",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "82b24ad192fc60e3223a1e46a0a089a38bf24c33c0a066adbc2e2959d5ac0299"
+    },
+    {
+      "id": "components/A034-peddler/merchant-arm-only-3",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-arm-only-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-arm-only-3.png",
+      "input": "components/A034-peddler/merchant-talk-fixed-body",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            26,
+            40,
+            14
+          ],
+          "paste_xy": [
+            0,
+            26
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            0,
+            15,
+            5,
+            11
+          ],
+          "paste_xy": [
+            0,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-fixed-body",
+          "slice_xywh": [
+            16,
+            15,
+            24,
+            11
+          ],
+          "paste_xy": [
+            16,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-moving-3",
+          "slice_xywh": [
+            5,
+            15,
+            11,
+            11
+          ],
+          "paste_xy": [
+            5,
+            15
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-arm-only-3.png",
+          "sha256": "58d060b139f5fd70cc1cef48579f6e910f4504a4ad41f7a3edae6f6aa57dd10a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "8066add94928f58e18671d2af0dfe81b2383efb75ed1c2d29276849607844878"
+    },
+    {
+      "id": "components/A034-peddler/merchant-blink-face-only",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-blink-face-only",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-blink-face-only.png",
+      "input": "components/A034-peddler/merchant-neutral-hat-fit",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-neutral-hat-fit",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-neutral-hat-fit",
+          "slice_xywh": [
+            0,
+            19,
+            40,
+            21
+          ],
+          "paste_xy": [
+            0,
+            19
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-neutral-hat-fit",
+          "slice_xywh": [
+            0,
+            15,
+            14,
+            4
+          ],
+          "paste_xy": [
+            0,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-neutral-hat-fit",
+          "slice_xywh": [
+            26,
+            15,
+            14,
+            4
+          ],
+          "paste_xy": [
+            26,
+            15
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-blink-original",
+          "slice_xywh": [
+            14,
+            15,
+            12,
+            4
+          ],
+          "paste_xy": [
+            14,
+            15
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-blink-face-only.png",
+          "sha256": "0cb8d791994f9cc53baa863168d2136ba5763aa86d85fb0b9b67362c5b0aab45",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "9fc2a8abc9637411e4b2a0d50ab4a9e554c81a2937736681efce08417e051bb2"
+    },
+    {
+      "id": "components/A034-peddler/merchant-blink-original",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/merchant-blink-original.png",
+      "source_sha256": "9cd12d6c323a3e010242aec183bb2585761f7fd55aa64b8857f370b3e47b34ca",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-blink-original",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-blink-original.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.call.json",
+          "sha256": "73778f47419b0c8ccece570a12a463a0c3ecb1a56d5c0f712dbe46b359ecae68",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-blink-original.png",
+          "sha256": "9cd12d6c323a3e010242aec183bb2585761f7fd55aa64b8857f370b3e47b34ca",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "ac0e24b555480b1ac34148c6f583ce3ba36bf66eca86e5dc46061ce7cfb45fef"
+    },
+    {
+      "id": "components/A034-peddler/merchant-mouth-and-arm-0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-mouth-and-arm-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-mouth-and-arm-0.png",
+      "input": "components/A034-peddler/merchant-arm-only-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-arm-only-0",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            19
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-0",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            17
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-0",
+          "slice_xywh": [
+            0,
+            19,
+            17,
+            4
+          ],
+          "paste_xy": [
+            0,
+            19
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-0",
+          "slice_xywh": [
+            24,
+            19,
+            16,
+            4
+          ],
+          "paste_xy": [
+            24,
+            19
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-moving-0",
+          "slice_xywh": [
+            17,
+            19,
+            7,
+            4
+          ],
+          "paste_xy": [
+            17,
+            19
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-mouth-and-arm-0.png",
+          "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "88cc27cb7dea9e69776d93421bb0ad87b14ddf448852731df20beba7aded395e"
+    },
+    {
+      "id": "components/A034-peddler/merchant-mouth-and-arm-1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-mouth-and-arm-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-mouth-and-arm-1.png",
+      "input": "components/A034-peddler/merchant-arm-only-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-arm-only-1",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            19
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-1",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            17
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-1",
+          "slice_xywh": [
+            0,
+            19,
+            17,
+            4
+          ],
+          "paste_xy": [
+            0,
+            19
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-1",
+          "slice_xywh": [
+            24,
+            19,
+            16,
+            4
+          ],
+          "paste_xy": [
+            24,
+            19
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-moving-1",
+          "slice_xywh": [
+            17,
+            19,
+            7,
+            4
+          ],
+          "paste_xy": [
+            17,
+            19
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-mouth-and-arm-1.png",
+          "sha256": "3b44307aed71002da62edae2077206aca25a02472d97d26bf14adcfe0ab90e37",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "115d8f3ade6406ce4772f13f6a3e17bbce68b823cc74fe3df373060d53bad4dc"
+    },
+    {
+      "id": "components/A034-peddler/merchant-mouth-and-arm-2",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-mouth-and-arm-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-mouth-and-arm-2.png",
+      "input": "components/A034-peddler/merchant-arm-only-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-arm-only-2",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            19
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-2",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            17
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-2",
+          "slice_xywh": [
+            0,
+            19,
+            17,
+            4
+          ],
+          "paste_xy": [
+            0,
+            19
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-2",
+          "slice_xywh": [
+            24,
+            19,
+            16,
+            4
+          ],
+          "paste_xy": [
+            24,
+            19
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-moving-2",
+          "slice_xywh": [
+            17,
+            19,
+            7,
+            4
+          ],
+          "paste_xy": [
+            17,
+            19
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-mouth-and-arm-2.png",
+          "sha256": "1cfa30f165cc07409af379ede968702b3aab43e82ce457d8ba9fccfb0c46c41b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "feb3593b49cf40746b040ba80d25c87b6e6f4180edf51f690cb9be84d452f4c0"
+    },
+    {
+      "id": "components/A034-peddler/merchant-mouth-and-arm-3",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-mouth-and-arm-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-mouth-and-arm-3.png",
+      "input": "components/A034-peddler/merchant-arm-only-3",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-arm-only-3",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            19
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-3",
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            17
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-3",
+          "slice_xywh": [
+            0,
+            19,
+            17,
+            4
+          ],
+          "paste_xy": [
+            0,
+            19
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-arm-only-3",
+          "slice_xywh": [
+            24,
+            19,
+            16,
+            4
+          ],
+          "paste_xy": [
+            24,
+            19
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-talk-moving-3",
+          "slice_xywh": [
+            17,
+            19,
+            7,
+            4
+          ],
+          "paste_xy": [
+            17,
+            19
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-mouth-and-arm-3.png",
+          "sha256": "2e7c7bd68bca59b0025fe50e0062cc0dbbd3bfb7c3b9d9d3b93b1cb0757b8e7a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "d1612bbe1d68bca88209d5fab08ad874f7750fe30571bbd1901baa367d9fd197"
+    },
+    {
+      "id": "components/A034-peddler/merchant-neutral-hat-fit",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-neutral-hat-fit",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-neutral-hat-fit.png",
+      "input": "components/A034-peddler/merchant-neutral-original",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-neutral-original",
+          "slice_xywh": [
+            0,
+            16,
+            40,
+            24
+          ],
+          "paste_xy": [
+            0,
+            16
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-neutral-original",
+          "slice_xywh": [
+            0,
+            0,
+            20,
+            16
+          ],
+          "paste_xy": [
+            1,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/merchant-neutral-original",
+          "slice_xywh": [
+            21,
+            0,
+            19,
+            16
+          ],
+          "paste_xy": [
+            21,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-neutral-hat-fit.png",
+          "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "99b5a14029147b62b9448819314b21a4e8d39bf587003753f053d13a21540b70"
+    },
+    {
+      "id": "components/A034-peddler/merchant-neutral-original",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/merchant-neutral-original.png",
+      "source_sha256": "e93d1f8d04d2964ca4824e2dfc3ee09824d3c385666d76fe06e9506682c266ab",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-neutral-original",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-neutral-original.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.call.json",
+          "sha256": "73778f47419b0c8ccece570a12a463a0c3ecb1a56d5c0f712dbe46b359ecae68",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-neutral-original.png",
+          "sha256": "e93d1f8d04d2964ca4824e2dfc3ee09824d3c385666d76fe06e9506682c266ab",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "5ab31c5b4f5ec2f2e1c9169be8f16d5e7291ec329c972a5b7fbc33bfe0cca28e"
+    },
+    {
+      "id": "components/A034-peddler/merchant-talk-fixed-body",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/merchant-talk-fixed-body.png",
+      "source_sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-talk-fixed-body",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-talk-fixed-body.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.call.json",
+          "sha256": "b7ea0ff086f93f2a2a1f8df7a8dc4c78e39336ad15ee751727027a2245291de3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-talk-fixed-body.png",
+          "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "88cc27cb7dea9e69776d93421bb0ad87b14ddf448852731df20beba7aded395e"
+    },
+    {
+      "id": "components/A034-peddler/merchant-talk-moving-0",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/merchant-talk-moving-0.png",
+      "source_sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-talk-moving-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-talk-moving-0.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.call.json",
+          "sha256": "b7ea0ff086f93f2a2a1f8df7a8dc4c78e39336ad15ee751727027a2245291de3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-talk-moving-0.png",
+          "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "88cc27cb7dea9e69776d93421bb0ad87b14ddf448852731df20beba7aded395e"
+    },
+    {
+      "id": "components/A034-peddler/merchant-talk-moving-1",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/merchant-talk-moving-1.png",
+      "source_sha256": "6e1407dfd2236a7fb87f7315d64e775fd72a8935595d59f9eeb37ae194aed257",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-talk-moving-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-talk-moving-1.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.call.json",
+          "sha256": "b7ea0ff086f93f2a2a1f8df7a8dc4c78e39336ad15ee751727027a2245291de3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-talk-moving-1.png",
+          "sha256": "6e1407dfd2236a7fb87f7315d64e775fd72a8935595d59f9eeb37ae194aed257",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "11c558642163bb738eef185daf809c38ae2ceff4bc239080da1e06aa141293f2"
+    },
+    {
+      "id": "components/A034-peddler/merchant-talk-moving-2",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/merchant-talk-moving-2.png",
+      "source_sha256": "7250ab1fa33bb78e8bce28729fbf42c794c4930a394780bfed522bbf6244e94b",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-talk-moving-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-talk-moving-2.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.call.json",
+          "sha256": "b7ea0ff086f93f2a2a1f8df7a8dc4c78e39336ad15ee751727027a2245291de3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-talk-moving-2.png",
+          "sha256": "7250ab1fa33bb78e8bce28729fbf42c794c4930a394780bfed522bbf6244e94b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "2e694eb3f72e083b220bddbd2fedfb011c9b182c253fc81067434c26eeb868f3"
+    },
+    {
+      "id": "components/A034-peddler/merchant-talk-moving-3",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/merchant-talk-moving-3.png",
+      "source_sha256": "3e2cd872e74de7a92a2655165dec73971becfdabf242ba23834ee768f4602a3c",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/merchant-talk-moving-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/merchant-talk-moving-3.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.call.json",
+          "sha256": "b7ea0ff086f93f2a2a1f8df7a8dc4c78e39336ad15ee751727027a2245291de3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/merchant-talk-moving-3.png",
+          "sha256": "3e2cd872e74de7a92a2655165dec73971becfdabf242ba23834ee768f4602a3c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "cceecfcd5ac96bd69ddc30231b080bd49051a285bd0c1d5e107d1c116494efbd"
+    },
+    {
+      "id": "components/A034-peddler/stall-generated-shutter",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/recovered-shop_closed-r3.png",
+      "source_sha256": "72d844033b181e3d1fba3639c91295e1b77aec8c4a7b414c3f4e5a551644addf",
+      "crop_xywh": [
+        114,
+        267,
+        893,
+        917
+      ],
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "content_scale": 0.03135498320268757,
+      "content_anchor_xy": [
+        14,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A034-peddler/stall-generated-shutter",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/stall-generated-shutter.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-shop_closed-r3.prompt.txt",
+      "prompt_sha256": "c4721ba31816b0bf8493b77c471381e8e19ca700adedff6fc25b44aeca65bbe5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-shop_closed-r3.call.json",
+          "sha256": "0adb501eaf478e396d6daa6780bf1a3bf6394f66831e9b90d7abaa2b6bc3b912",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/stall-generated-shutter.png",
+          "sha256": "f026e1f0205d35fe8b83ef8d1df79b88881af613804308eaea4047c469ff33e3",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "5378267f68ebfd540ef8d07c4c59327c6c183c246dad95cca88473aea1059189"
+    },
+    {
+      "id": "components/A034-peddler/stall-opening-only",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/stall-opening-only",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/stall-opening-only.png",
+      "input": "components/A034-peddler/stall-original",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/stall-original",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            18
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A034-peddler/stall-original",
+          "slice_xywh": [
+            0,
+            28,
+            32,
+            12
+          ],
+          "paste_xy": [
+            0,
+            28
+          ]
+        },
+        {
+          "input": "components/A034-peddler/stall-original",
+          "slice_xywh": [
+            0,
+            18,
+            6,
+            10
+          ],
+          "paste_xy": [
+            0,
+            18
+          ]
+        },
+        {
+          "input": "components/A034-peddler/stall-original",
+          "slice_xywh": [
+            26,
+            18,
+            6,
+            10
+          ],
+          "paste_xy": [
+            26,
+            18
+          ]
+        },
+        {
+          "input": "components/A034-peddler/stall-generated-shutter",
+          "slice_xywh": [
+            6,
+            18,
+            20,
+            10
+          ],
+          "paste_xy": [
+            6,
+            18
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-shop_closed-r3.prompt.txt",
+      "prompt_sha256": "c4721ba31816b0bf8493b77c471381e8e19ca700adedff6fc25b44aeca65bbe5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/stall-opening-only.png",
+          "sha256": "3f9236e529d8d7751fa267db8f13e6e0b977dea8c51cb71d5e46b9ef6a80f1b9",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "4684dede737cb6e62068b8a40e8cb85c5b9ba1ceeac5a3ad4c85d32abd4b817a"
+    },
+    {
+      "id": "components/A034-peddler/stall-original",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/stall-original.png",
+      "source_sha256": "b4b111523cd2776a7e44f6545a07e4f08f435111a56ed2cd7b0a69c316080c9e",
+      "crop_xywh": [
+        0,
+        0,
+        32,
+        40
+      ],
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A034-peddler/stall-original",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A034-peddler/stall-original.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/components/stall-original.png",
+          "sha256": "b4b111523cd2776a7e44f6545a07e4f08f435111a56ed2cd7b0a69c316080c9e",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "assembly_component_of": "A034",
+      "output_sha256": "f1e2d58430171a9e2168df5cafc3f954e3954c9618bcf72c7b2cc485cdd4e1cb"
+    },
+    {
+      "id": "actors/peddler_idle_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "palette": "exact-source",
+      "animation": "peddler_idle",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/actors/peddler_idle_0.png",
+      "input": "components/A034-peddler/merchant-neutral-hat-fit",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-neutral-hat-fit",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.call.json",
+          "sha256": "73778f47419b0c8ccece570a12a463a0c3ecb1a56d5c0f712dbe46b359ecae68",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_idle/south/01.png",
+          "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "99b5a14029147b62b9448819314b21a4e8d39bf587003753f053d13a21540b70"
+    },
+    {
+      "id": "actors/peddler_idle_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "palette": "exact-source",
+      "animation": "peddler_idle",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/actors/peddler_idle_1.png",
+      "input": "components/A034-peddler/merchant-neutral-hat-fit",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-neutral-hat-fit",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.call.json",
+          "sha256": "73778f47419b0c8ccece570a12a463a0c3ecb1a56d5c0f712dbe46b359ecae68",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_idle/south/02.png",
+          "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "99b5a14029147b62b9448819314b21a4e8d39bf587003753f053d13a21540b70"
+    },
+    {
+      "id": "actors/peddler_idle_2",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "palette": "exact-source",
+      "animation": "peddler_idle",
+      "frame": 2,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/actors/peddler_idle_2.png",
+      "input": "components/A034-peddler/merchant-neutral-hat-fit",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-neutral-hat-fit",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.call.json",
+          "sha256": "73778f47419b0c8ccece570a12a463a0c3ecb1a56d5c0f712dbe46b359ecae68",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_idle/south/03.png",
+          "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "99b5a14029147b62b9448819314b21a4e8d39bf587003753f053d13a21540b70"
+    },
+    {
+      "id": "actors/peddler_idle_3",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "palette": "exact-source",
+      "animation": "peddler_idle",
+      "frame": 3,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/actors/peddler_idle_3.png",
+      "input": "components/A034-peddler/merchant-blink-face-only",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-blink-face-only",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_idle-r2.call.json",
+          "sha256": "73778f47419b0c8ccece570a12a463a0c3ecb1a56d5c0f712dbe46b359ecae68",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_idle/south/04.png",
+          "sha256": "0cb8d791994f9cc53baa863168d2136ba5763aa86d85fb0b9b67362c5b0aab45",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "9fc2a8abc9637411e4b2a0d50ab4a9e554c81a2937736681efce08417e051bb2"
+    },
+    {
+      "id": "actors/peddler_talk_0",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "palette": "exact-source",
+      "animation": "peddler_talk",
+      "frame": 0,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/actors/peddler_talk_0.png",
+      "input": "components/A034-peddler/merchant-mouth-and-arm-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-mouth-and-arm-0",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.call.json",
+          "sha256": "b7ea0ff086f93f2a2a1f8df7a8dc4c78e39336ad15ee751727027a2245291de3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_talk/south/01.png",
+          "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "88cc27cb7dea9e69776d93421bb0ad87b14ddf448852731df20beba7aded395e"
+    },
+    {
+      "id": "actors/peddler_talk_1",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "palette": "exact-source",
+      "animation": "peddler_talk",
+      "frame": 1,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/actors/peddler_talk_1.png",
+      "input": "components/A034-peddler/merchant-mouth-and-arm-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-mouth-and-arm-1",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.call.json",
+          "sha256": "b7ea0ff086f93f2a2a1f8df7a8dc4c78e39336ad15ee751727027a2245291de3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_talk/south/02.png",
+          "sha256": "3b44307aed71002da62edae2077206aca25a02472d97d26bf14adcfe0ab90e37",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "115d8f3ade6406ce4772f13f6a3e17bbce68b823cc74fe3df373060d53bad4dc"
+    },
+    {
+      "id": "actors/peddler_talk_2",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "palette": "exact-source",
+      "animation": "peddler_talk",
+      "frame": 2,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/actors/peddler_talk_2.png",
+      "input": "components/A034-peddler/merchant-mouth-and-arm-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-mouth-and-arm-2",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.call.json",
+          "sha256": "b7ea0ff086f93f2a2a1f8df7a8dc4c78e39336ad15ee751727027a2245291de3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_talk/south/03.png",
+          "sha256": "1cfa30f165cc07409af379ede968702b3aab43e82ce457d8ba9fccfb0c46c41b",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "feb3593b49cf40746b040ba80d25c87b6e6f4180edf51f690cb9be84d452f4c0"
+    },
+    {
+      "id": "actors/peddler_talk_3",
+      "owner": "raster",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "palette": "exact-source",
+      "animation": "peddler_talk",
+      "frame": 3,
+      "seconds": 0.15,
+      "loop": true,
+      "output": "sprites/actors/peddler_talk_3.png",
+      "input": "components/A034-peddler/merchant-mouth-and-arm-3",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/merchant-mouth-and-arm-3",
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-peddler_talk-r2.call.json",
+          "sha256": "b7ea0ff086f93f2a2a1f8df7a8dc4c78e39336ad15ee751727027a2245291de3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_talk/south/04.png",
+          "sha256": "2e7c7bd68bca59b0025fe50e0062cc0dbbd3bfb7c3b9d9d3b93b1cb0757b8e7a",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "d1612bbe1d68bca88209d5fab08ad874f7750fe30571bbd1901baa367d9fd197"
+    },
+    {
+      "id": "actors/peddler_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/peddler_walk_0.png",
+      "source_sha256": "9fbb3a094acedf3840577f921110399d35149c5698eee3aea4ed6e1eadc7c47d",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        20,
+        36
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "peddler_walk",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/actors/peddler_walk_0.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.call.json",
+          "sha256": "4d5d83b77565feb063ea7d18a48c3225dcdeb7ea1012b697b196cb3885d4c410",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_walk/west/01.png",
+          "sha256": "9fbb3a094acedf3840577f921110399d35149c5698eee3aea4ed6e1eadc7c47d",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "75d45cd5ec4d52bdd028fb8b8cc69703cfef1f027edc105bc5d14bbcecc8bbf3"
+    },
+    {
+      "id": "actors/peddler_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/peddler_walk_1.png",
+      "source_sha256": "b40671adc4b908db60f4d018e6950fff7d91ab4725c33e60b1683cb221baccaa",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        20,
+        36
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "peddler_walk",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/actors/peddler_walk_1.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.call.json",
+          "sha256": "4d5d83b77565feb063ea7d18a48c3225dcdeb7ea1012b697b196cb3885d4c410",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_walk/west/02.png",
+          "sha256": "b40671adc4b908db60f4d018e6950fff7d91ab4725c33e60b1683cb221baccaa",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "155602e55a2a672f55711dc1588820428f221e16b29ed7e6df1c750d416fede3"
+    },
+    {
+      "id": "actors/peddler_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/peddler_walk_2.png",
+      "source_sha256": "9a7b2e3675295628dbaa410a8a04253025aa3659e0f96763876ec2a58c866fea",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        20,
+        36
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "peddler_walk",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/actors/peddler_walk_2.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.call.json",
+          "sha256": "4d5d83b77565feb063ea7d18a48c3225dcdeb7ea1012b697b196cb3885d4c410",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_walk/west/03.png",
+          "sha256": "9a7b2e3675295628dbaa410a8a04253025aa3659e0f96763876ec2a58c866fea",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "66ff113ce5961d09aae20eca4f4f1bb37279f6ceea58779e322bebb86a555a96"
+    },
+    {
+      "id": "actors/peddler_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/peddler_walk_3.png",
+      "source_sha256": "48256eeab38a5b287de177214fb2557996eadcd75006053552de9ccc51d6b6a4",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        20,
+        36
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "peddler_walk",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/actors/peddler_walk_3.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.call.json",
+          "sha256": "4d5d83b77565feb063ea7d18a48c3225dcdeb7ea1012b697b196cb3885d4c410",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_walk/west/04.png",
+          "sha256": "48256eeab38a5b287de177214fb2557996eadcd75006053552de9ccc51d6b6a4",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "4d184e038d638b65c6883aa8817bf64ff76ef77c2d436b2d2f763e8feffd472f"
+    },
+    {
+      "id": "actors/peddler_walk_4",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/peddler_walk_4.png",
+      "source_sha256": "4c9023eb88bbe7d325537bfd81e41d7641480584bb91155d125f283d0c5de425",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        20,
+        36
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "peddler_walk",
+      "frame": 4,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/actors/peddler_walk_4.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.call.json",
+          "sha256": "4d5d83b77565feb063ea7d18a48c3225dcdeb7ea1012b697b196cb3885d4c410",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_walk/west/05.png",
+          "sha256": "4c9023eb88bbe7d325537bfd81e41d7641480584bb91155d125f283d0c5de425",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "0f6905151e0adc6de30da3285a3fff147bca5cd269e8596a2853b63787d4e5b3"
+    },
+    {
+      "id": "actors/peddler_walk_5",
+      "owner": "raster",
+      "source": "assets/art_source/npc/peddler/peddler_walk_5.png",
+      "source_sha256": "074832b4418f9448ab562c245f2e3402597f95ed38f19422c4d954a2ff9b61e6",
+      "crop_xywh": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        20,
+        36
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "peddler_walk",
+      "frame": 5,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/actors/peddler_walk_5.png",
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/peddler_walk-r2.call.json",
+          "sha256": "4d5d83b77565feb063ea7d18a48c3225dcdeb7ea1012b697b196cb3885d4c410",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/peddler_walk/west/06.png",
+          "sha256": "074832b4418f9448ab562c245f2e3402597f95ed38f19422c4d954a2ff9b61e6",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "0858c862a084f4836338ee2262ddcc26b1298661fbe4eac7840fe95fdc7ad593"
+    },
+    {
+      "id": "props/shop_closed",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "cell_offset_xy": [
+        -8,
+        -20
+      ],
+      "palette": "exact-source",
+      "animation": "props/shop_closed",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/props/shop_closed.png",
+      "draw_scale": 2,
+      "input": "components/A034-peddler/stall-opening-only",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A034-peddler/stall-opening-only",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            40
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A034-peddler/raw/recovered-shop_closed-r3.prompt.txt",
+      "prompt_sha256": "c4721ba31816b0bf8493b77c471381e8e19ca700adedff6fc25b44aeca65bbe5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/raw/recovered-shop_closed-r3.call.json",
+          "sha256": "0adb501eaf478e396d6daa6780bf1a3bf6394f66831e9b90d7abaa2b6bc3b912",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/native/shop_closed/none/01.png",
+          "sha256": "3f9236e529d8d7751fa267db8f13e6e0b977dea8c51cb71d5e46b9ef6a80f1b9",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/contract.json",
+          "sha256": "a1ef7909d154ffaa80008176b45c4424cd82c819c865f35a2bc960de739e3c32",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+          "sha256": "f8a2673440d1c47739a702aef4e59354619249a62f01da6548ee68a29e10c686",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A034",
+      "integration_task": "0216",
+      "revision": 1,
+      "approval": "A034 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0216",
+      "output_sha256": "4684dede737cb6e62068b8a40e8cb85c5b9ba1ceeac5a3ad4c85d32abd4b817a"
     }
   ]
 }

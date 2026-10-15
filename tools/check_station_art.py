@@ -22,6 +22,11 @@ JAR_POINTS={'light_xy':[21,47],'smoke_xy':[35,22]}
 # each inside its pane); a wreck carries no light at all.
 HOMES={'coop':([64,64],[32,60],(3,2)),'barn':([96,100],[48,96],(5,4))}
 
+# A034's shut stall (task 0216): the legacy `shop`'s 32x40 at (16,36) drawn
+# at 2.0 like it, A034's composition of the shop and its shutters - every
+# pixel outside the shutter opening (x 6-25, y 18-27) the shop's own.
+STALL_OPENING=(6,18,26,28)
+
 FAMILY={'workshop':('buildings',[48,48],[24,44]),'kitchen':('buildings',[48,48],[24,44]),'press':('props',[48,48],[24,44]),'generator':('props',[48,48],[24,44]),'shop':('props',[32,40],[16,36]),'well':('props',[24,32],[12,30])}
 
 def check_homes(entries,files,images):
@@ -55,6 +60,18 @@ def main():
     data=import_art.load_manifest();files,images=import_art.build(data)
     entries={e['id']:e for e in data['assets']}
     homes=check_homes(entries,files,images)
+    shut=entries['props/shop_closed'];im=images['props/shop_closed'];shop=images['props/shop']
+    if shut.get('generation_task')!='A034' or shut['canvas_wh']!=[32,40] or shut['pivot_xy']!=[16,36] or shut.get('draw_scale')!=2:
+        raise ValueError('The shut stall leaves the shop\'s box or scale')
+    if shut.get('operation')!='compose' or any(entries[p['input']].get('assembly_component_of')!='A034' for p in shut['parts']):
+        raise ValueError('The shut stall is not A034\'s composition')
+    x0,y0,x1,y1=STALL_OPENING
+    moved=[(x,y) for y in range(40) for x in range(32) if not (x0<=x<x1 and y0<=y<y1) and im.getpixel((x,y))!=shop.getpixel((x,y))]
+    if moved or im.tobytes()==shop.tobytes():
+        raise ValueError('The shut stall is not the shop with shutters: %d pixels moved'%len(moved))
+    if (import_art.ROOT/shut['output']).read_bytes()!=files[shut['output']]:
+        raise ValueError('Shut stall runtime diverges')
+    print('OK: the shut stall: the shop at 2.0 with its shutters, nothing moved outside the opening')
     print('OK: %d coop and barn states, full density over their footprints, grounded, lit whole and hurt, dark wrecked'%homes)
     for name,(folder,canvas,pivot) in FAMILY.items():
         master=entries[folder+'/'+name]

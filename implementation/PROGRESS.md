@@ -33002,3 +33002,77 @@ is gone: the barricade's planks, warmed and grown.
 - `python implementation/backlog/assets.py set A033 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (64 of 64).
+
+## 0216 - Art: the peddler - done 2026-10-15
+
+A034 is integrated. The peddler is the owner-approved art now, on 40x40
+standing on (20,36) at 1.0, the farmer's density:
+
+- his four-frame idle and four-frame talk, facing south;
+- his six-frame walk, facing west and mirrored east at runtime.
+
+The stall shut outside his hours is A034's `shop_closed`: the legacy shop's
+32x40 at (16,36) drawn at 2.0 like it, its shutters down. The owner approved
+the corrected pack on 2026-10-15 with the retried batch ("tudo aprovado"),
+as recorded in the delivery's `APPROVAL.json`. 0190's stand-ins are gone:
+the farmer's frames in a waistcoat's tint, and the stall dimmed.
+
+- **A mixed pack, promoted as one**:
+  - The peddler is mode B: exact-source colours, never reduced to the
+    palette.
+    - His eight idle and talk frames are compositions over A034's
+      components.
+    - His six walk frames, and the mode-B component leaves, are exact
+      copies of their approved PNGs, as the importer takes exact art: full
+      canvas, scale 1.
+  - The shut stall is mode A at draw 2.0: a composition of the shop's own
+    pixels (an exact reference leaf) and a shutter cut from its raw source
+    by its recipe.
+  - 20 components under `sprites/components/A034-peddler/`. The sources are
+    in `assets/art_source/npc/peddler/`, a new folder under `art_source` for
+    characters that are not the farmer.
+  - Every node and file was sha-checked, and decodes to its approved RGBA.
+- **Named as the farmer's sheet wants**:
+  - His runtime files live in `sprites/actors/`, where `cut_sheet.py` holds
+    every frame's animation to its file name.
+  - The first import named them `actors/peddler_idle` and stopped. They are
+    `peddler_idle`, `peddler_talk` and `peddler_walk` now.
+  - `PlayerFrames` lists his three animations, their counts and seconds,
+    beside the farmer's.
+- **The view** (`PeddlerView`): his frames are counted and timed off the art
+  (`frames_of`). The walk in faces west as drawn and the walk out is
+  mirrored. The stall's shutters come down outside his hours, untinted.
+- **The stand-ins retired**: A034's four `PlaceholderArt` entries and the
+  `PEDDLER` and `SHOP_CLOSED` geometries. `placeholders.py --check` passes,
+  with 119 stand-ins left over 16 packs.
+- **Checks**:
+  - **`tools/check_npc_art.py`, new, wired into verify**: his 14 frames are
+    exact-source, at their box, scale and timing, on his feet, the approved
+    pixels, each composition from A034's own assembly.
+    - **Why a new checker**: he is neither a prop nor a station, and his
+      mode-B colours are outside what the prop and station checks hold
+      their families to.
+    - The idle is drawn neutral, neutral, neutral, blink - the first three
+      one picture - so the check asks that of it. Its first run called
+      that a repeat.
+  - `check_station_art.py` takes the shut stall: its box and 2.0 scale,
+    A034's composition, and every pixel outside the shutter opening (x 6-25,
+    y 18-27) the shop's own.
+- **Found on the way**: the station showcase failed 11 checks on the
+  first verify. Out of the peddler's hours its stall is A034's
+  `shop_closed` now; the stand-in had drawn the shop itself, so the
+  showcase expected `shop`. It expects the shut stall when the stall is
+  shut.
+- **Tests**: `_task_0216_peddler` (headless_v1) checks his poses' frame
+  counts, his box, none a stand-in, and the shut stall's box, scale and
+  untinted art.
+- **Shots** (`implementation/shots/0216/`, FHD 1920x1080, looked at):
+  - `peddler`: noon, the old man in his brown hat and beard at the stall's
+    east end, standing beside the farmer at his size.
+  - `peddler_dusk`: the stall shut, shutters down, nobody there.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A034 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65), on the second
+  run.

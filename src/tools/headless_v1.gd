@@ -205,6 +205,7 @@ func _run() -> void:
 	_task_0210_cow_chicken()
 	_task_0212_coop_barn()
 	_task_0215_shipping_bin()
+	_task_0216_peddler()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14523,6 +14524,27 @@ func _task_0215_shipping_bin() -> void:
 			&"shipping_bin_open_2", &"shipping_bin_open_2"],
 		"A033's shipping bin is raster art; its lid lifts through three frames and holds the last",
 		"%s; %s" % [str(wrong), str(lifting)])
+	_completed += 1
+
+
+## **A034's peddler and the shut stall** (task 0216): his idle, talk and
+## walk are raster art on 40x40 at (20,36) at 1.0 - four, four and six frames
+## - and the shut stall the shop's 32x40 at (16,36) at 2.0; none a stand-in.
+func _task_0216_peddler() -> void:
+	var wrong: Array = []
+	for pose in [[&"peddler_idle", 4], [&"peddler_talk", 4], [&"peddler_walk", 6]]:
+		var frame := PlaceholderArt.frame("res://sprites/actors/%s_0.png" % pose[0])
+		if PeddlerView.frames_of(pose[0]) != pose[1] or not PlaceholderArt.art(pose[0]).is_empty() \
+				or frame.get("canvas") != Vector2i(40, 40) or frame.get("pivot") != Vector2i(20, 36) or frame.has("stand_in"):
+			wrong.append(pose[0])
+	var shut := PlaceholderArt.frame("res://sprites/props/shop_closed.png")
+	if shut.get("canvas") != Vector2i(32, 40) or shut.get("pivot") != Vector2i(16, 36) or shut.has("stand_in") \
+			or ArtPlacement.visual_scale("res://sprites/props/shop_closed.png") != 2.0 \
+			or PlaceholderArt.art_tint(&"shop_closed") != Color.WHITE:
+		wrong.append("shop_closed")
+	expect(wrong.is_empty(),
+		"A034's peddler is raster art - four idle, four talking and six walking frames - and the shut stall the shop's box at 2.0",
+		str(wrong))
 	_completed += 1
 
 

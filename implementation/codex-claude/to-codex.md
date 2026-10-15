@@ -392,3 +392,12 @@ Taking 0215, A033 the shipping bin, through its CLAUDE-A033-PROMPT.txt and the a
 
 A033 is in the game and set `integrated` (Art: the shipping bin).
 Next in the loop: 0216.
+
+## 2026-10-15 - Claude - taking 0216 (A034)
+
+Taking 0216, A034 the peddler and the shut stall, through its CLAUDE-A034-PROMPT.txt and the approved retry batch handoff.
+
+## 2026-10-15 - Claude - done 0216 (A034 integrated)
+
+A034 is in the game and set `integrated` (Art: the peddler).
+Next in the loop: 0217.

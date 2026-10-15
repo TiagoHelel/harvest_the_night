@@ -1,0 +1,546 @@
+{
+  "pack": "A034",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/recovered-peddler_idle-r2.png",
+      "source_sha256": "cdcff2e09d48ab3210dd65a2e1ab9def9458c84114c4d5baf7dfc0e251531f3d",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/peddler_idle/south/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              30
+            ],
+            "content_scale": 0.045941807044410414,
+            "crop_xywh": [
+              394,
+              162,
+              410,
+              653
+            ]
+          },
+          "parts": [
+            {
+              "input": "merchant-neutral-hat-fit",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/peddler_idle/south/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              30
+            ],
+            "content_scale": 0.045941807044410414,
+            "crop_xywh": [
+              394,
+              162,
+              410,
+              653
+            ]
+          },
+          "parts": [
+            {
+              "input": "merchant-neutral-hat-fit",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/peddler_idle/south/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              30
+            ],
+            "content_scale": 0.045941807044410414,
+            "crop_xywh": [
+              394,
+              162,
+              410,
+              653
+            ]
+          },
+          "parts": [
+            {
+              "input": "merchant-neutral-hat-fit",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/peddler_idle/south/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              30
+            ],
+            "content_scale": 0.045941807044410414,
+            "crop_xywh": [
+              970,
+              162,
+              410,
+              653
+            ]
+          },
+          "parts": [
+            {
+              "input": "merchant-blink-face-only",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "component": "merchant-blink-original",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              30
+            ],
+            "content_scale": 0.045941807044410414,
+            "crop_xywh": [
+              970,
+              162,
+              410,
+              653
+            ]
+          }
+        },
+        {
+          "component": "merchant-neutral-original",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              30
+            ],
+            "content_scale": 0.045941807044410414,
+            "crop_xywh": [
+              394,
+              162,
+              410,
+              653
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/peddler_talk/south/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              10,
+              31
+            ],
+            "content_scale": 0.04579025110782865,
+            "crop_xywh": [
+              26,
+              36,
+              436,
+              677
+            ]
+          },
+          "parts": [
+            {
+              "input": "merchant-mouth-and-arm-0",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/peddler_talk/south/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              10,
+              31
+            ],
+            "content_scale": 0.04579025110782865,
+            "crop_xywh": [
+              512,
+              36,
+              436,
+              677
+            ]
+          },
+          "parts": [
+            {
+              "input": "merchant-mouth-and-arm-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/peddler_talk/south/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              10,
+              31
+            ],
+            "content_scale": 0.04579025110782865,
+            "crop_xywh": [
+              1018,
+              36,
+              436,
+              677
+            ]
+          },
+          "parts": [
+            {
+              "input": "merchant-mouth-and-arm-2",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/peddler_talk/south/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              10,
+              31
+            ],
+            "content_scale": 0.04579025110782865,
+            "crop_xywh": [
+              1515,
+              36,
+              436,
+              677
+            ]
+          },
+          "parts": [
+            {
+              "input": "merchant-mouth-and-arm-3",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                40,
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "component": "merchant-talk-fixed-body",
+          "recipe": {
+            "content_anchor_xy": [
+              10,
+              31
+            ],
+            "content_scale": 0.04579025110782865,
+            "crop_xywh": [
+              26,
+              36,
+              436,
+              677
+            ]
+          }
+        },
+        {
+          "component": "merchant-talk-moving-0",
+          "recipe": {
+            "content_anchor_xy": [
+              10,
+              31
+            ],
+            "content_scale": 0.04579025110782865,
+            "crop_xywh": [
+              26,
+              36,
+              436,
+              677
+            ]
+          }
+        },
+        {
+          "component": "merchant-talk-moving-1",
+          "recipe": {
+            "content_anchor_xy": [
+              10,
+              31
+            ],
+            "content_scale": 0.04579025110782865,
+            "crop_xywh": [
+              512,
+              36,
+              436,
+              677
+            ]
+          }
+        },
+        {
+          "component": "merchant-talk-moving-2",
+          "recipe": {
+            "content_anchor_xy": [
+              10,
+              31
+            ],
+            "content_scale": 0.04579025110782865,
+            "crop_xywh": [
+              1018,
+              36,
+              436,
+              677
+            ]
+          }
+        },
+        {
+          "component": "merchant-talk-moving-3",
+          "recipe": {
+            "content_anchor_xy": [
+              10,
+              31
+            ],
+            "content_scale": 0.04579025110782865,
+            "crop_xywh": [
+              1515,
+              36,
+              436,
+              677
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/peddler_walk-r2.png",
+      "source_sha256": "0d35960df6ead33015d81e8577b58e3d6fdcd271d7a7aaecbb8bbb40fc4ce82d",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/peddler_walk/west/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              31
+            ],
+            "content_scale": 0.06339468302658487,
+            "crop_xywh": [
+              90,
+              118,
+              279,
+              489
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/peddler_walk/west/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              31
+            ],
+            "content_scale": 0.06339468302658487,
+            "crop_xywh": [
+              436,
+              118,
+              279,
+              489
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/peddler_walk/west/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              31
+            ],
+            "content_scale": 0.06339468302658487,
+            "crop_xywh": [
+              772,
+              118,
+              279,
+              489
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/peddler_walk/west/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              31
+            ],
+            "content_scale": 0.06339468302658487,
+            "crop_xywh": [
+              1128,
+              119,
+              279,
+              489
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/peddler_walk/west/05.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              31
+            ],
+            "content_scale": 0.06339468302658487,
+            "crop_xywh": [
+              1468,
+              118,
+              279,
+              489
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/peddler_walk/west/06.png",
+          "recipe": {
+            "content_anchor_xy": [
+              9,
+              31
+            ],
+            "content_scale": 0.06339468302658487,
+            "crop_xywh": [
+              1811,
+              118,
+              279,
+              489
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-shop_closed-r3.png",
+      "source_sha256": "72d844033b181e3d1fba3639c91295e1b77aec8c4a7b414c3f4e5a551644addf",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/shop_closed/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              14,
+              29
+            ],
+            "content_scale": 0.03135498320268757,
+            "crop_xywh": [
+              114,
+              267,
+              893,
+              917
+            ]
+          },
+          "parts": [
+            {
+              "input": "stall-opening-only",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "component": "stall-generated-shutter",
+          "recipe": {
+            "content_anchor_xy": [
+              14,
+              29
+            ],
+            "content_scale": 0.03135498320268757,
+            "crop_xywh": [
+              114,
+              267,
+              893,
+              917
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

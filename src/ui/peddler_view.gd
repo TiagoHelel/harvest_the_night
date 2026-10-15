@@ -5,8 +5,10 @@ extends Node2D
 ## an hour before `STALL_OPENS` he walks in along the farm road from the east,
 ## stands at the stall's east end through his hours - waving and talking while
 ## its panel is open - and walks off the same way after `STALL_CLOSES`.
-## Outside his hours the stall is shut: A034's `shop_closed`, through 0120's
-## road a dimmed stall until 0216.
+## Outside his hours the stall is shut: A034's `shop_closed`, the shop with
+## its shutters down. Both are A034's art since task 0216 - he stands and
+## talks facing south and walks facing west, mirrored east, on his own frames
+## and seconds.
 ##
 ## **View only.** The hours are `Shop.open_hours`, which the rules keep. Where
 ## he stands and how far along his walk he is are read off the day's clock
@@ -99,8 +101,10 @@ func _step() -> void:
 		mode = &"talk"
 	var name := StringName("peddler_%s" % mode)
 	var entry := PlaceholderArt.art(name)
-	var frames := maxi(int(entry.get("frames", 1)), 1)
-	var frame := int(_clock / maxf(float(entry.get("seconds", 0.4)), 0.05)) % frames
+	# Counted and timed off the art since task 0216.
+	var first := PlaceholderArt.frame("res://sprites/actors/%s_0.png" % name)
+	var frames := maxi(int(entry.get("frames", frames_of(name))), 1)
+	var frame := int(_clock / maxf(float(entry.get("seconds", first.get("seconds", 0.4))), 0.05)) % frames
 	var path := PlaceholderArt.texture_path(PlaceholderArt.art_path(name, frame)) if not entry.is_empty() \
 		else "res://sprites/actors/%s_%d.png" % [name, frame]
 	_sprite.texture = _picture(path)
@@ -114,6 +118,14 @@ func _step() -> void:
 		scale *= float(PlaceholderArt.frame(_sprite.texture.resource_path).get("draw_scale", 1.0))
 	_sprite.scale = Vector2(scale, scale)
 	_sprite.position = at.round()
+
+
+## **How many frames a pose of his has** (task 0216): as many as A034 drew.
+static func frames_of(name: StringName) -> int:
+	var count := 0
+	while PlaceholderArt.has_frame("res://sprites/actors/%s_%d.png" % [name, count]):
+		count += 1
+	return count
 
 
 ## Where he stands: on the ground just east of the stall's east end, his feet

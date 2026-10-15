@@ -1,0 +1,139 @@
+Production pixel-art ImageGen source for HARVEST THE NIGHT. Orthographic three-quarter top-down camera, upper-left neutral daylight, deliberate broad pixel clusters and project materials. True transparent background, isolated object, no ground, cast shadow, halo, text or labels. First input is identity/edit target; other inputs are references. Keep objects unclipped.
+CORRECTION revision2. Edit first image. EXACTTWOcells NEUTRAL andBLINK. Bothsamebody30-32nativeheight14-18wide. ONLYeyes insidefacechange. Torso, shirt, satchelstrap, headoutline, feet must be identical. Reduce giant hat/head so neutral silhouette ratio18:31, NOT18:28.
+Asset brief, apply only requested item:
+# A034 - The peddler at the stall
+
+- **Status:** generating
+- **For game task:** 0216
+- **Dressed by game tasks:** 0190
+- **Spec after game task:** 0190
+- **Family:** npc
+- **Mode:** B - finished native pixel art (exact-source) for the peddler, colour ramp below; the one `shop_closed` frame is A (explicit override in Deliverables)
+- **Size of the job:** 1 NPC: idle 4 + talk 4 + walk 6 = 14 frames, plus 1 closed-stall frame; 1 master + 3 strips + 1 edit
+
+## What it is for
+
+The stall gets a peddler who keeps hours, 08:00 to 17:00 (game task 0190): he
+walks in from the farm's edge in the morning, stands at the stall, waves and
+talks while the player trades, and walks off in the evening; outside his hours
+the stall is shut. He is the only other person the player meets, so at 1080p he
+stands beside the blue 32px farmer at **exactly the farmer's density and
+height**, with an identity of his own: never the farmer's straw hat and blue
+clothes, never a zombie's rot greens. The closed stall must read as "shut for
+the night" at a glance, by dusk and by night, and match today's stall exactly.
+
+## Deliverables
+
+Final geometry and states settled by game task 0190. The rows stand as written: 40x40 at (20,36) for every peddler frame, drawn at 1.0 at the farmer's density, and `shop_closed` at the legacy stall's 32x40 at (16,36), drawn at 2.0 like it. **The states the game plays** (`PeddlerView`, view only):
+- `idle` while he stands at his post: the ground just east of the stall's east end, his feet on its front row, facing south.
+- `talk` while the stall's panel is open.
+- `walk` for his walk in and out: half an hour of game time before 08:00 he comes in from twelve cells east along the farm road, facing `west`; from 17:00 he walks back out the same way, the frames mirrored for `east`.
+- `shop_closed` replaces `shop` whenever the stall is outside 08:00-17:00 (`STALL_OPENS`, `STALL_CLOSES`): from 06:00 to his opening, and from 17:00 through dusk.
+
+Until 0216 the game draws them through 0120's road: the farmer's own stand and walk frames, and his trade strip, in a terracotta tint for him, and the stall dimmed for `shop_closed`. Start only when `python implementation/backlog/assets.py next` offers this pack.
+
+| Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
+|---|---|---|---|---|
+| `peddler_idle_0..3` | 40x40 | (20,36) | 4 / 0.4 / loop | `south`. Poses `neutral, neutral, neutral, blink`: frames 0-2 are the same raw cell and recipe (identical bytes), frame 3 differs only inside the face (eyes shut). Visible 30-32 tall including the hat, 14-18 wide; lowest row 35, centred on x 20. |
+| `peddler_talk_0..3` | 40x40 | (20,36) | 4 / 0.15 / loop | `south`. Waving while talking: his right hand (screen left) raised beside the head, poses `hand upright mouth open, hand tilted out, hand upright mouth shut, hand tilted in`; frame 3 leads back to 0. Feet, legs, torso and head never move; only the raised forearm, hand and mouth change. The hand stays inside the canvas (visible width up to 24). |
+| `peddler_walk_0..5` | 40x40 | (20,36) | 6 / 0.1 / loop | Side view facing `west`; `east` is mirrored at runtime and not delivered. Poses `contact (left foot forward), down, passing, contact (right foot forward), down, passing`. The supporting foot is on row 35 in every frame; head bob at most 1 px; same body height as idle. |
+| `shop_closed` | 32x40 | (16,36) | 1 / 0.55 / static | **Mode A** (this row overrides the pack's mode B). A state of the legacy `shop` fixture at its density: drawn at 2.0 by `ArtPlacement.visual_scale` like `shop` (its name starts with `shop`). The opening between the posts (about x 6-25, rows 18-27 of `sprites/props/shop.png`) is closed by wooden shutter boards, the goods gone; awning, posts, counter and base unchanged. |
+
+- **Peddler identity:** an older travelling merchant with a short grey beard,
+  a wide brown felt hat with a dark band, a terracotta-red waistcoat with gold
+  buttons over a bone-white shirt with rolled sleeves, brown trousers, dark
+  boots and a leather satchel on a strap across the body. Warm skin like the
+  farmer's. Same proportions as the farmer (head-to-body ratio, 16x32 body).
+- **Colour ramp (mode B), recorded in contract.json `colour_ramp` with roles:**
+  outline and darkest `ink` #241f2e, `ink_soft` #3a3345; skin `skin_dark`
+  #b56b4b, `skin` #e49b68, `skin_light` #f3c58d; hat `soil_dark` #5c422a,
+  `soil` #7a5838, band and buttons `gold_dark` #a8742c, `gold` #c49646; beard
+  and hair `stone_dark` #52505c, `stone` #6e6c78, `stone_light` #8c8a96;
+  waistcoat `roof_dark` #8a2f2a, `roof` #b0423a, `roof_light` #c9635a; shirt
+  `bone_dark` #b8ae9a, `bone` #e8e0cf; trousers, boots and satchel `wood_dark`
+  #6b4a2c, `wood` #8c6239, `wood_light` #a87c4e. At most 4 more colours,
+  sampled exactly from `.../walk-final-mirrored/native-40/walk/down/01.png` for
+  eyes and face shading, each listed with its role. Never the farmer's
+  12-colour blue garment ramp and never `cloth_*`.
+- `shop_closed` mode A recipe: start from today's `shop` recipe (raw 1122x1402,
+  `crop_xywh` [114,267,893,917], `content_scale` 0.03135498320268757, default
+  anchor). Reuse it unchanged if the edit returns the same size and framing;
+  otherwise measure a crop and scale that put the posts, awning and counter on
+  the pixels of `sprites/props/shop.png`.
+- Directions as above; no baked mirrors. No metadata points.
+- Never baked: goods or coins in his hands, the stall or counter in the NPC
+  frames, a ground shadow, speech bubbles, text, a lamp glow on the stall.
+
+## Match these
+
+- Farmer `implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png`
+  (40x40, pivot (20,36), body 16x32) and `.../native-40/walk/left/01..08.png`
+  (side view facing west): height, density, outline, face size, walk cadence.
+- `assets/art_source/player-fhd/idle-blue-grounded/frames/down.png` (80x80, the
+  2x runtime of the grounded idle): a grounded standing pose.
+- `assets/art_source/masters/farmer.png`: the style of a person in this game
+  (style only, not identity).
+- `sprites/props/shop.png` (32x40, pivot (16,36), drawn at 2.0) and raw
+  `assets/art_source/buildings/shop/master.png`: the stall he stands at, and
+  the **edit target** for `shop_closed`.
+- `sprites/enemies/walker_walk_0.png`: what he must not resemble.
+- `docs/reference-sheet.png` ("VENDER E COMPRAR COM NPC"): a friendly trader.
+
+## How to make it
+
+1. Peddler prompt = PROMPTS.md BASE (braces: canvas 40x40, pivot 20,36) +
+   PLAYER_MASTER / PLAYER_STRIP with the farmer's identity lines replaced by
+   the peddler identity above, + STRIP for strips, + CORRECTION for revisions.
+   Add: "A different person from the farmer in Image 1, at exactly his pixel
+   scale and body height (about 30-32 native px including the hat)."
+2. Master (south, neutral, hands resting on the satchel strap),
+   `transparent_background=true`, 2 candidates, with the farmer walk frame
+   `down/01.png` attached as "scale and style reference, not identity".
+3. Strips, the accepted master attached as "identity master": idle (2 cells:
+   `neutral, blink`), talk (4 cells, poses as the table), walk west (6 cells,
+   with `walk/left/01..08.png` as "cadence reference"). Equal cells, feet on one
+   baseline, generous gutters.
+4. Mode B build: per strip one measured crop per cell and one scale (NEAREST),
+   alpha threshold 128, quantise to `colour_ramp` (nearest RGB), place the
+   feet on row 35 centred on x 20. Idle frames 0-2 are all built from the
+   neutral cell. If the blink or the talk frames move pixels outside the face
+   or the raised arm after 3 revisions, ask the owner whether `build.py` may
+   paste only that region onto the neutral frame as a deterministic step,
+   recorded in `authorization.json`; never hand-edit a PNG.
+5. `shop_closed`: one ImageGen edit call with `assets/art_source/buildings/shop/master.png`
+   as **edit target**: "close the stall: wooden shutter boards fill the
+   opening between the posts down to the counter, the goods are gone; change
+   nothing else". Reduce with the mode A recipe above.
+
+## Acceptance
+
+- [ ] 14 peddler frames at 40x40 / (20,36) and `shop_closed` at 32x40 / (16,36).
+- [ ] Lowest opaque row 35 on every peddler frame, centred on x 20 (Â±1); visible height 30-32 in all three animations (Â±1 between them).
+- [ ] Idle frames 0-2 identical; frame 3 differs only inside the face; talk differs only in the raised arm, hand and mouth.
+- [ ] Walk faces west, loops, and has no east copy; nothing is mirrored twice.
+- [ ] Peddler colours only from `colour_ramp`; no blue garment ramp; `shop_closed` only the 42 colours with `importer_recipe_matches`.
+- [ ] `shop_closed`: at most 10 opaque pixels outside the opening rect differ from `sprites/props/shop.png` (`shop_frame_matches`).
+- [ ] Binary alpha; no shadow, bubble, text, goods or glow.
+- [ ] `build.py` twice is byte-identical and `--check` passes; checks.json all `true`.
+
+## Delivery
+
+Folder `implementation/backlog/deliveries/A034-peddler/` with `raw/`,
+`native/peddler_idle/south/01..04.png`, `native/peddler_talk/south/01..04.png`,
+`native/peddler_walk/west/01..06.png`, `native/shop_closed/none/01.png`,
+`preview/`, `rejected/`, `contract.json` (`palette_mode` "B"; the
+`shop_closed` file entry carries `"palette_mode": "A"` and its recipe),
+`checks.json`, `build.py`, `index.html`, `review-log.txt`, and
+`authorization.json` only if the owner allowed a region paste. No `runtime/`
+folder (draw 1.0, not a 2x pack).
+
+`CLAUDE-A034-PROMPT.txt` maps
+`native/peddler_idle/south/01..04.png -> sprites/actors/peddler_idle_0..3.png 40x40 pivot (20,36) draw 1.0 0.4 s loop`,
+`native/peddler_talk/south/01..04.png -> sprites/actors/peddler_talk_0..3.png ... 0.15 s loop`,
+`native/peddler_walk/west/01..06.png -> sprites/actors/peddler_walk_0..5.png ... 0.1 s loop, east = runtime mirror`
+(all exact-source) and
+`native/shop_closed/none/01.png -> sprites/props/shop_closed.png 32x40 pivot (16,36), visual_scale 2.0 like shop`
+(mode A). They replace 0190's stand-ins in game task 0216.
+
+Last step, only after the owner approves in words recorded verbatim in
+`APPROVAL.json`: `python implementation/backlog/assets.py set A034 approved`.

@@ -1,6 +1,6 @@
 # A034 - The peddler at the stall
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0216
 - **Dressed by game tasks:** 0190
 - **Spec after game task:** 0190

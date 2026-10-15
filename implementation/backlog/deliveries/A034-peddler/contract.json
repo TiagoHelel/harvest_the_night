@@ -1,0 +1,2482 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "peddler_idle",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/peddler_idle-south-0-night.png",
+          "path": "native/peddler_idle/south/01.png",
+          "points": {},
+          "pose": "peddler_idle 0"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_idle-south-1-night.png",
+          "path": "native/peddler_idle/south/02.png",
+          "points": {},
+          "pose": "peddler_idle 1"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_idle-south-2-night.png",
+          "path": "native/peddler_idle/south/03.png",
+          "points": {},
+          "pose": "peddler_idle 2"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_idle-south-3-night.png",
+          "path": "native/peddler_idle/south/04.png",
+          "points": {},
+          "pose": "peddler_idle 3"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 4,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "poses": [
+        "peddler_idle 0",
+        "peddler_idle 1",
+        "peddler_idle 2",
+        "peddler_idle 3"
+      ]
+    },
+    {
+      "anim": "peddler_talk",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/peddler_talk-south-0-night.png",
+          "path": "native/peddler_talk/south/01.png",
+          "points": {},
+          "pose": "peddler_talk 0"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_talk-south-1-night.png",
+          "path": "native/peddler_talk/south/02.png",
+          "points": {},
+          "pose": "peddler_talk 1"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_talk-south-2-night.png",
+          "path": "native/peddler_talk/south/03.png",
+          "points": {},
+          "pose": "peddler_talk 2"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_talk-south-3-night.png",
+          "path": "native/peddler_talk/south/04.png",
+          "points": {},
+          "pose": "peddler_talk 3"
+        }
+      ],
+      "frame_seconds": 0.15,
+      "frames": 4,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "poses": [
+        "peddler_talk 0",
+        "peddler_talk 1",
+        "peddler_talk 2",
+        "peddler_talk 3"
+      ]
+    },
+    {
+      "anim": "peddler_walk",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/peddler_walk-west-0-night.png",
+          "path": "native/peddler_walk/west/01.png",
+          "points": {},
+          "pose": "peddler_walk 0"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_walk-west-1-night.png",
+          "path": "native/peddler_walk/west/02.png",
+          "points": {},
+          "pose": "peddler_walk 1"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_walk-west-2-night.png",
+          "path": "native/peddler_walk/west/03.png",
+          "points": {},
+          "pose": "peddler_walk 2"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_walk-west-3-night.png",
+          "path": "native/peddler_walk/west/04.png",
+          "points": {},
+          "pose": "peddler_walk 3"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_walk-west-4-night.png",
+          "path": "native/peddler_walk/west/05.png",
+          "points": {},
+          "pose": "peddler_walk 4"
+        },
+        {
+          "issue": "",
+          "night": "preview/peddler_walk-west-5-night.png",
+          "path": "native/peddler_walk/west/06.png",
+          "points": {},
+          "pose": "peddler_walk 5"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 6,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "poses": [
+        "peddler_walk 0",
+        "peddler_walk 1",
+        "peddler_walk 2",
+        "peddler_walk 3",
+        "peddler_walk 4",
+        "peddler_walk 5"
+      ]
+    },
+    {
+      "anim": "shop_closed",
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "dir": "none",
+      "draw_scale": 2,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/shop_closed-none-0-night.png",
+          "path": "native/shop_closed/none/01.png",
+          "points": {},
+          "pose": "shop_closed 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "poses": [
+        "shop_closed 0"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [
+    {
+      "rgb": [
+        36,
+        31,
+        46
+      ],
+      "role": "ink"
+    },
+    {
+      "rgb": [
+        58,
+        51,
+        69
+      ],
+      "role": "ink_soft"
+    },
+    {
+      "rgb": [
+        181,
+        107,
+        75
+      ],
+      "role": "skin_dark"
+    },
+    {
+      "rgb": [
+        228,
+        155,
+        104
+      ],
+      "role": "skin"
+    },
+    {
+      "rgb": [
+        243,
+        197,
+        141
+      ],
+      "role": "skin_light"
+    },
+    {
+      "rgb": [
+        92,
+        66,
+        42
+      ],
+      "role": "soil_dark"
+    },
+    {
+      "rgb": [
+        122,
+        88,
+        56
+      ],
+      "role": "soil"
+    },
+    {
+      "rgb": [
+        168,
+        116,
+        44
+      ],
+      "role": "gold_dark"
+    },
+    {
+      "rgb": [
+        196,
+        150,
+        70
+      ],
+      "role": "gold"
+    },
+    {
+      "rgb": [
+        82,
+        80,
+        92
+      ],
+      "role": "stone_dark"
+    },
+    {
+      "rgb": [
+        110,
+        108,
+        120
+      ],
+      "role": "stone"
+    },
+    {
+      "rgb": [
+        140,
+        138,
+        150
+      ],
+      "role": "stone_light"
+    },
+    {
+      "rgb": [
+        138,
+        47,
+        42
+      ],
+      "role": "roof_dark"
+    },
+    {
+      "rgb": [
+        176,
+        66,
+        58
+      ],
+      "role": "roof"
+    },
+    {
+      "rgb": [
+        201,
+        99,
+        90
+      ],
+      "role": "roof_light"
+    },
+    {
+      "rgb": [
+        184,
+        174,
+        154
+      ],
+      "role": "bone_dark"
+    },
+    {
+      "rgb": [
+        232,
+        224,
+        207
+      ],
+      "role": "bone"
+    },
+    {
+      "rgb": [
+        107,
+        74,
+        44
+      ],
+      "role": "wood_dark"
+    },
+    {
+      "rgb": [
+        140,
+        98,
+        57
+      ],
+      "role": "wood"
+    },
+    {
+      "rgb": [
+        168,
+        124,
+        78
+      ],
+      "role": "wood_light"
+    }
+  ],
+  "comparison": [
+    {
+      "draw_scale": 2,
+      "path": "sprites/props/shop.png",
+      "pivot_xy": [
+        16,
+        36
+      ]
+    }
+  ],
+  "components": {
+    "merchant-arm-only-0": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-arm-only-0.png",
+      "parts": [
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            26
+          ],
+          "slice_xywh": [
+            0,
+            26,
+            40,
+            14
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            15
+          ],
+          "slice_xywh": [
+            0,
+            15,
+            5,
+            11
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            16,
+            15
+          ],
+          "slice_xywh": [
+            16,
+            15,
+            24,
+            11
+          ]
+        },
+        {
+          "input": "merchant-talk-moving-0",
+          "paste_xy": [
+            5,
+            15
+          ],
+          "slice_xywh": [
+            5,
+            15,
+            11,
+            11
+          ]
+        }
+      ],
+      "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2"
+    },
+    "merchant-arm-only-1": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-arm-only-1.png",
+      "parts": [
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            26
+          ],
+          "slice_xywh": [
+            0,
+            26,
+            40,
+            14
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            15
+          ],
+          "slice_xywh": [
+            0,
+            15,
+            5,
+            11
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            16,
+            15
+          ],
+          "slice_xywh": [
+            16,
+            15,
+            24,
+            11
+          ]
+        },
+        {
+          "input": "merchant-talk-moving-1",
+          "paste_xy": [
+            5,
+            15
+          ],
+          "slice_xywh": [
+            5,
+            15,
+            11,
+            11
+          ]
+        }
+      ],
+      "sha256": "7b675e9168d319155ebe05b800fbe521255e374ccfe9d3b2fb68becf5c248b2c"
+    },
+    "merchant-arm-only-2": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-arm-only-2.png",
+      "parts": [
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            26
+          ],
+          "slice_xywh": [
+            0,
+            26,
+            40,
+            14
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            15
+          ],
+          "slice_xywh": [
+            0,
+            15,
+            5,
+            11
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            16,
+            15
+          ],
+          "slice_xywh": [
+            16,
+            15,
+            24,
+            11
+          ]
+        },
+        {
+          "input": "merchant-talk-moving-2",
+          "paste_xy": [
+            5,
+            15
+          ],
+          "slice_xywh": [
+            5,
+            15,
+            11,
+            11
+          ]
+        }
+      ],
+      "sha256": "f5b4c0a4bee3ded1fd2b688517d2fc75b8afa782ddcaf6a69ab0722e35fb5d84"
+    },
+    "merchant-arm-only-3": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-arm-only-3.png",
+      "parts": [
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            26
+          ],
+          "slice_xywh": [
+            0,
+            26,
+            40,
+            14
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            0,
+            15
+          ],
+          "slice_xywh": [
+            0,
+            15,
+            5,
+            11
+          ]
+        },
+        {
+          "input": "merchant-talk-fixed-body",
+          "paste_xy": [
+            16,
+            15
+          ],
+          "slice_xywh": [
+            16,
+            15,
+            24,
+            11
+          ]
+        },
+        {
+          "input": "merchant-talk-moving-3",
+          "paste_xy": [
+            5,
+            15
+          ],
+          "slice_xywh": [
+            5,
+            15,
+            11,
+            11
+          ]
+        }
+      ],
+      "sha256": "58d060b139f5fd70cc1cef48579f6e910f4504a4ad41f7a3edae6f6aa57dd10a"
+    },
+    "merchant-blink-face-only": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-blink-face-only.png",
+      "parts": [
+        {
+          "input": "merchant-neutral-hat-fit",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            15
+          ]
+        },
+        {
+          "input": "merchant-neutral-hat-fit",
+          "paste_xy": [
+            0,
+            19
+          ],
+          "slice_xywh": [
+            0,
+            19,
+            40,
+            21
+          ]
+        },
+        {
+          "input": "merchant-neutral-hat-fit",
+          "paste_xy": [
+            0,
+            15
+          ],
+          "slice_xywh": [
+            0,
+            15,
+            14,
+            4
+          ]
+        },
+        {
+          "input": "merchant-neutral-hat-fit",
+          "paste_xy": [
+            26,
+            15
+          ],
+          "slice_xywh": [
+            26,
+            15,
+            14,
+            4
+          ]
+        },
+        {
+          "input": "merchant-blink-original",
+          "paste_xy": [
+            14,
+            15
+          ],
+          "slice_xywh": [
+            14,
+            15,
+            12,
+            4
+          ]
+        }
+      ],
+      "sha256": "0cb8d791994f9cc53baa863168d2136ba5763aa86d85fb0b9b67362c5b0aab45"
+    },
+    "merchant-blink-original": {
+      "call": "raw/recovered-peddler_idle-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "render",
+      "output": "components/merchant-blink-original.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "prompt": "raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          30
+        ],
+        "content_scale": 0.045941807044410414,
+        "crop_xywh": [
+          970,
+          162,
+          410,
+          653
+        ]
+      },
+      "sha256": "9cd12d6c323a3e010242aec183bb2585761f7fd55aa64b8857f370b3e47b34ca",
+      "source": "raw/recovered-peddler_idle-r2.png",
+      "source_sha256": "cdcff2e09d48ab3210dd65a2e1ab9def9458c84114c4d5baf7dfc0e251531f3d"
+    },
+    "merchant-mouth-and-arm-0": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-mouth-and-arm-0.png",
+      "parts": [
+        {
+          "input": "merchant-arm-only-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            19
+          ]
+        },
+        {
+          "input": "merchant-arm-only-0",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            17
+          ]
+        },
+        {
+          "input": "merchant-arm-only-0",
+          "paste_xy": [
+            0,
+            19
+          ],
+          "slice_xywh": [
+            0,
+            19,
+            17,
+            4
+          ]
+        },
+        {
+          "input": "merchant-arm-only-0",
+          "paste_xy": [
+            24,
+            19
+          ],
+          "slice_xywh": [
+            24,
+            19,
+            16,
+            4
+          ]
+        },
+        {
+          "input": "merchant-talk-moving-0",
+          "paste_xy": [
+            17,
+            19
+          ],
+          "slice_xywh": [
+            17,
+            19,
+            7,
+            4
+          ]
+        }
+      ],
+      "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2"
+    },
+    "merchant-mouth-and-arm-1": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-mouth-and-arm-1.png",
+      "parts": [
+        {
+          "input": "merchant-arm-only-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            19
+          ]
+        },
+        {
+          "input": "merchant-arm-only-1",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            17
+          ]
+        },
+        {
+          "input": "merchant-arm-only-1",
+          "paste_xy": [
+            0,
+            19
+          ],
+          "slice_xywh": [
+            0,
+            19,
+            17,
+            4
+          ]
+        },
+        {
+          "input": "merchant-arm-only-1",
+          "paste_xy": [
+            24,
+            19
+          ],
+          "slice_xywh": [
+            24,
+            19,
+            16,
+            4
+          ]
+        },
+        {
+          "input": "merchant-talk-moving-1",
+          "paste_xy": [
+            17,
+            19
+          ],
+          "slice_xywh": [
+            17,
+            19,
+            7,
+            4
+          ]
+        }
+      ],
+      "sha256": "3b44307aed71002da62edae2077206aca25a02472d97d26bf14adcfe0ab90e37"
+    },
+    "merchant-mouth-and-arm-2": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-mouth-and-arm-2.png",
+      "parts": [
+        {
+          "input": "merchant-arm-only-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            19
+          ]
+        },
+        {
+          "input": "merchant-arm-only-2",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            17
+          ]
+        },
+        {
+          "input": "merchant-arm-only-2",
+          "paste_xy": [
+            0,
+            19
+          ],
+          "slice_xywh": [
+            0,
+            19,
+            17,
+            4
+          ]
+        },
+        {
+          "input": "merchant-arm-only-2",
+          "paste_xy": [
+            24,
+            19
+          ],
+          "slice_xywh": [
+            24,
+            19,
+            16,
+            4
+          ]
+        },
+        {
+          "input": "merchant-talk-moving-2",
+          "paste_xy": [
+            17,
+            19
+          ],
+          "slice_xywh": [
+            17,
+            19,
+            7,
+            4
+          ]
+        }
+      ],
+      "sha256": "1cfa30f165cc07409af379ede968702b3aab43e82ce457d8ba9fccfb0c46c41b"
+    },
+    "merchant-mouth-and-arm-3": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-mouth-and-arm-3.png",
+      "parts": [
+        {
+          "input": "merchant-arm-only-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            19
+          ]
+        },
+        {
+          "input": "merchant-arm-only-3",
+          "paste_xy": [
+            0,
+            23
+          ],
+          "slice_xywh": [
+            0,
+            23,
+            40,
+            17
+          ]
+        },
+        {
+          "input": "merchant-arm-only-3",
+          "paste_xy": [
+            0,
+            19
+          ],
+          "slice_xywh": [
+            0,
+            19,
+            17,
+            4
+          ]
+        },
+        {
+          "input": "merchant-arm-only-3",
+          "paste_xy": [
+            24,
+            19
+          ],
+          "slice_xywh": [
+            24,
+            19,
+            16,
+            4
+          ]
+        },
+        {
+          "input": "merchant-talk-moving-3",
+          "paste_xy": [
+            17,
+            19
+          ],
+          "slice_xywh": [
+            17,
+            19,
+            7,
+            4
+          ]
+        }
+      ],
+      "sha256": "2e7c7bd68bca59b0025fe50e0062cc0dbbd3bfb7c3b9d9d3b93b1cb0757b8e7a"
+    },
+    "merchant-neutral-hat-fit": {
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/merchant-neutral-hat-fit.png",
+      "parts": [
+        {
+          "input": "merchant-neutral-original",
+          "paste_xy": [
+            0,
+            16
+          ],
+          "slice_xywh": [
+            0,
+            16,
+            40,
+            24
+          ]
+        },
+        {
+          "input": "merchant-neutral-original",
+          "paste_xy": [
+            1,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            20,
+            16
+          ]
+        },
+        {
+          "input": "merchant-neutral-original",
+          "paste_xy": [
+            21,
+            0
+          ],
+          "slice_xywh": [
+            21,
+            0,
+            19,
+            16
+          ]
+        }
+      ],
+      "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7"
+    },
+    "merchant-neutral-original": {
+      "call": "raw/recovered-peddler_idle-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "render",
+      "output": "components/merchant-neutral-original.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "prompt": "raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          30
+        ],
+        "content_scale": 0.045941807044410414,
+        "crop_xywh": [
+          394,
+          162,
+          410,
+          653
+        ]
+      },
+      "sha256": "e93d1f8d04d2964ca4824e2dfc3ee09824d3c385666d76fe06e9506682c266ab",
+      "source": "raw/recovered-peddler_idle-r2.png",
+      "source_sha256": "cdcff2e09d48ab3210dd65a2e1ab9def9458c84114c4d5baf7dfc0e251531f3d"
+    },
+    "merchant-talk-fixed-body": {
+      "call": "raw/recovered-peddler_talk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "render",
+      "output": "components/merchant-talk-fixed-body.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "prompt": "raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "content_scale": 0.04579025110782865,
+        "crop_xywh": [
+          26,
+          36,
+          436,
+          677
+        ]
+      },
+      "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a"
+    },
+    "merchant-talk-moving-0": {
+      "call": "raw/recovered-peddler_talk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "render",
+      "output": "components/merchant-talk-moving-0.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "prompt": "raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "content_scale": 0.04579025110782865,
+        "crop_xywh": [
+          26,
+          36,
+          436,
+          677
+        ]
+      },
+      "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a"
+    },
+    "merchant-talk-moving-1": {
+      "call": "raw/recovered-peddler_talk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "render",
+      "output": "components/merchant-talk-moving-1.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "prompt": "raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "content_scale": 0.04579025110782865,
+        "crop_xywh": [
+          512,
+          36,
+          436,
+          677
+        ]
+      },
+      "sha256": "6e1407dfd2236a7fb87f7315d64e775fd72a8935595d59f9eeb37ae194aed257",
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a"
+    },
+    "merchant-talk-moving-2": {
+      "call": "raw/recovered-peddler_talk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "render",
+      "output": "components/merchant-talk-moving-2.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "prompt": "raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "content_scale": 0.04579025110782865,
+        "crop_xywh": [
+          1018,
+          36,
+          436,
+          677
+        ]
+      },
+      "sha256": "7250ab1fa33bb78e8bce28729fbf42c794c4930a394780bfed522bbf6244e94b",
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a"
+    },
+    "merchant-talk-moving-3": {
+      "call": "raw/recovered-peddler_talk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "operation": "render",
+      "output": "components/merchant-talk-moving-3.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "prompt": "raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "content_scale": 0.04579025110782865,
+        "crop_xywh": [
+          1515,
+          36,
+          436,
+          677
+        ]
+      },
+      "sha256": "3e2cd872e74de7a92a2655165dec73971becfdabf242ba23834ee768f4602a3c",
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a"
+    },
+    "stall-generated-shutter": {
+      "call": "raw/recovered-shop_closed-r3.call.json",
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "operation": "render",
+      "output": "components/stall-generated-shutter.png",
+      "palette_mode": "A",
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "prompt": "raw/recovered-shop_closed-r3.prompt.txt",
+      "prompt_sha256": "c4721ba31816b0bf8493b77c471381e8e19ca700adedff6fc25b44aeca65bbe5",
+      "recipe": {
+        "content_anchor_xy": [
+          14,
+          29
+        ],
+        "content_scale": 0.03135498320268757,
+        "crop_xywh": [
+          114,
+          267,
+          893,
+          917
+        ]
+      },
+      "sha256": "f026e1f0205d35fe8b83ef8d1df79b88881af613804308eaea4047c469ff33e3",
+      "source": "raw/recovered-shop_closed-r3.png",
+      "source_sha256": "72d844033b181e3d1fba3639c91295e1b77aec8c4a7b414c3f4e5a551644addf"
+    },
+    "stall-opening-only": {
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "operation": "compose",
+      "output": "components/stall-opening-only.png",
+      "parts": [
+        {
+          "input": "stall-original",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            18
+          ]
+        },
+        {
+          "input": "stall-original",
+          "paste_xy": [
+            0,
+            28
+          ],
+          "slice_xywh": [
+            0,
+            28,
+            32,
+            12
+          ]
+        },
+        {
+          "input": "stall-original",
+          "paste_xy": [
+            0,
+            18
+          ],
+          "slice_xywh": [
+            0,
+            18,
+            6,
+            10
+          ]
+        },
+        {
+          "input": "stall-original",
+          "paste_xy": [
+            26,
+            18
+          ],
+          "slice_xywh": [
+            26,
+            18,
+            6,
+            10
+          ]
+        },
+        {
+          "input": "stall-generated-shutter",
+          "paste_xy": [
+            6,
+            18
+          ],
+          "slice_xywh": [
+            6,
+            18,
+            20,
+            10
+          ]
+        }
+      ],
+      "sha256": "3f9236e529d8d7751fa267db8f13e6e0b977dea8c51cb71d5e46b9ef6a80f1b9"
+    },
+    "stall-original": {
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "imagegen_manifest_provenance": {
+        "alpha_threshold": 128,
+        "animation": "props/shop",
+        "canvas_wh": [
+          32,
+          40
+        ],
+        "cell_offset_xy": [
+          -8,
+          -20
+        ],
+        "content_scale": 0.03135498320268757,
+        "crop_xywh": [
+          114,
+          267,
+          893,
+          917
+        ],
+        "frame": 0,
+        "generation_task": "0012",
+        "gutter_xy": [
+          0,
+          0
+        ],
+        "id": "props/shop",
+        "loop": true,
+        "output": "sprites/props/shop.png",
+        "output_sha256": "f1e2d58430171a9e2168df5cafc3f954e3954c9618bcf72c7b2cc485cdd4e1cb",
+        "owner": "raster",
+        "palette": "tools/palette.py:COLOURS",
+        "pivot_xy": [
+          16,
+          36
+        ],
+        "prompt": "implementation/sprites/generation/0012-shop-master.prompt.txt",
+        "prompt_sha256": "faf7bd14c492a0b67c984efbf5f9001e1d821c13923a487ae2ef4d854441fd31",
+        "references": [
+          {
+            "path": "assets/art_source/buildings/house/whole.png",
+            "role": "Identity master/style reference as indexed in exact saved prompt",
+            "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+          },
+          {
+            "path": "docs/reference-sheet.png",
+            "role": "Identity master/style reference as indexed in exact saved prompt",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+          }
+        ],
+        "revision": 0,
+        "seconds": 0.55,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1122,
+          1402
+        ],
+        "source": "assets/art_source/buildings/shop/master.png",
+        "source_sha256": "baf5ffdec4456354ce0284920a4334a149cd9f03bcc4df1c8b66c8dfb5774132",
+        "tool": "built-in ImageGen"
+      },
+      "operation": "reference",
+      "output": "components/stall-original.png",
+      "path": "raw/reference-stall-original.png",
+      "reference_sha256": "f1e2d58430171a9e2168df5cafc3f954e3954c9618bcf72c7b2cc485cdd4e1cb",
+      "sha256": "b4b111523cd2776a7e44f6545a07e4f08f435111a56ed2cd7b0a69c316080c9e"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "peddler_idle",
+      "call": "raw/recovered-peddler_idle-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/peddler_idle/south/01.png",
+      "palette_mode": "B",
+      "parts": [
+        {
+          "input": "merchant-neutral-hat-fit",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_idle 0",
+      "prompt": "raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          30
+        ],
+        "content_scale": 0.045941807044410414,
+        "crop_xywh": [
+          394,
+          162,
+          410,
+          653
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_idle_0.png",
+      "seconds": 0.4,
+      "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+      "source": "raw/recovered-peddler_idle-r2.png",
+      "source_sha256": "cdcff2e09d48ab3210dd65a2e1ab9def9458c84114c4d5baf7dfc0e251531f3d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_idle",
+      "call": "raw/recovered-peddler_idle-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/peddler_idle/south/02.png",
+      "palette_mode": "B",
+      "parts": [
+        {
+          "input": "merchant-neutral-hat-fit",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_idle 1",
+      "prompt": "raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          30
+        ],
+        "content_scale": 0.045941807044410414,
+        "crop_xywh": [
+          394,
+          162,
+          410,
+          653
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_idle_1.png",
+      "seconds": 0.4,
+      "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+      "source": "raw/recovered-peddler_idle-r2.png",
+      "source_sha256": "cdcff2e09d48ab3210dd65a2e1ab9def9458c84114c4d5baf7dfc0e251531f3d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_idle",
+      "call": "raw/recovered-peddler_idle-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/peddler_idle/south/03.png",
+      "palette_mode": "B",
+      "parts": [
+        {
+          "input": "merchant-neutral-hat-fit",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_idle 2",
+      "prompt": "raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          30
+        ],
+        "content_scale": 0.045941807044410414,
+        "crop_xywh": [
+          394,
+          162,
+          410,
+          653
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_idle_2.png",
+      "seconds": 0.4,
+      "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+      "source": "raw/recovered-peddler_idle-r2.png",
+      "source_sha256": "cdcff2e09d48ab3210dd65a2e1ab9def9458c84114c4d5baf7dfc0e251531f3d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_idle",
+      "call": "raw/recovered-peddler_idle-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/peddler_idle/south/04.png",
+      "palette_mode": "B",
+      "parts": [
+        {
+          "input": "merchant-blink-face-only",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_idle 3",
+      "prompt": "raw/recovered-peddler_idle-r2.prompt.txt",
+      "prompt_sha256": "b422799fc934a193d1e2dc56ce63ad71abf32e39ab3a2e4268ca73848fb758b3",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          30
+        ],
+        "content_scale": 0.045941807044410414,
+        "crop_xywh": [
+          970,
+          162,
+          410,
+          653
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_idle_3.png",
+      "seconds": 0.4,
+      "sha256": "0cb8d791994f9cc53baa863168d2136ba5763aa86d85fb0b9b67362c5b0aab45",
+      "source": "raw/recovered-peddler_idle-r2.png",
+      "source_sha256": "cdcff2e09d48ab3210dd65a2e1ab9def9458c84114c4d5baf7dfc0e251531f3d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_talk",
+      "call": "raw/recovered-peddler_talk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/peddler_talk/south/01.png",
+      "palette_mode": "B",
+      "parts": [
+        {
+          "input": "merchant-mouth-and-arm-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_talk 0",
+      "prompt": "raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "content_scale": 0.04579025110782865,
+        "crop_xywh": [
+          26,
+          36,
+          436,
+          677
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_talk_0.png",
+      "seconds": 0.15,
+      "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a",
+      "visible_limits_wh": [
+        [
+          1,
+          24
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_talk",
+      "call": "raw/recovered-peddler_talk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/peddler_talk/south/02.png",
+      "palette_mode": "B",
+      "parts": [
+        {
+          "input": "merchant-mouth-and-arm-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_talk 1",
+      "prompt": "raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "content_scale": 0.04579025110782865,
+        "crop_xywh": [
+          512,
+          36,
+          436,
+          677
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_talk_1.png",
+      "seconds": 0.15,
+      "sha256": "3b44307aed71002da62edae2077206aca25a02472d97d26bf14adcfe0ab90e37",
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a",
+      "visible_limits_wh": [
+        [
+          1,
+          24
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_talk",
+      "call": "raw/recovered-peddler_talk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/peddler_talk/south/03.png",
+      "palette_mode": "B",
+      "parts": [
+        {
+          "input": "merchant-mouth-and-arm-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_talk 2",
+      "prompt": "raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "content_scale": 0.04579025110782865,
+        "crop_xywh": [
+          1018,
+          36,
+          436,
+          677
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_talk_2.png",
+      "seconds": 0.15,
+      "sha256": "1cfa30f165cc07409af379ede968702b3aab43e82ce457d8ba9fccfb0c46c41b",
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a",
+      "visible_limits_wh": [
+        [
+          1,
+          24
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_talk",
+      "call": "raw/recovered-peddler_talk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "south",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/peddler_talk/south/04.png",
+      "palette_mode": "B",
+      "parts": [
+        {
+          "input": "merchant-mouth-and-arm-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            40,
+            40
+          ]
+        }
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_talk 3",
+      "prompt": "raw/recovered-peddler_talk-r2.prompt.txt",
+      "prompt_sha256": "be94826ab1598b7378149edabd60d8c9f4b4efcda572afd513f26592093c654a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "content_scale": 0.04579025110782865,
+        "crop_xywh": [
+          1515,
+          36,
+          436,
+          677
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_talk_3.png",
+      "seconds": 0.15,
+      "sha256": "2e7c7bd68bca59b0025fe50e0062cc0dbbd3bfb7c3b9d9d3b93b1cb0757b8e7a",
+      "source": "raw/recovered-peddler_talk-r2.png",
+      "source_sha256": "a1f90f388bcede5fa16887a369cc1b1dae9393e929fa516700300a86bc554f5a",
+      "visible_limits_wh": [
+        [
+          1,
+          24
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_walk",
+      "call": "raw/peddler_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/peddler_walk/west/01.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_walk 0",
+      "prompt": "raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          31
+        ],
+        "content_scale": 0.06339468302658487,
+        "crop_xywh": [
+          90,
+          118,
+          279,
+          489
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_walk_0.png",
+      "seconds": 0.1,
+      "sha256": "9fbb3a094acedf3840577f921110399d35149c5698eee3aea4ed6e1eadc7c47d",
+      "source": "raw/peddler_walk-r2.png",
+      "source_sha256": "0d35960df6ead33015d81e8577b58e3d6fdcd271d7a7aaecbb8bbb40fc4ce82d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_walk",
+      "call": "raw/peddler_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/peddler_walk/west/02.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_walk 1",
+      "prompt": "raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          31
+        ],
+        "content_scale": 0.06339468302658487,
+        "crop_xywh": [
+          436,
+          118,
+          279,
+          489
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_walk_1.png",
+      "seconds": 0.1,
+      "sha256": "b40671adc4b908db60f4d018e6950fff7d91ab4725c33e60b1683cb221baccaa",
+      "source": "raw/peddler_walk-r2.png",
+      "source_sha256": "0d35960df6ead33015d81e8577b58e3d6fdcd271d7a7aaecbb8bbb40fc4ce82d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_walk",
+      "call": "raw/peddler_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/peddler_walk/west/03.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_walk 2",
+      "prompt": "raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          31
+        ],
+        "content_scale": 0.06339468302658487,
+        "crop_xywh": [
+          772,
+          118,
+          279,
+          489
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_walk_2.png",
+      "seconds": 0.1,
+      "sha256": "9a7b2e3675295628dbaa410a8a04253025aa3659e0f96763876ec2a58c866fea",
+      "source": "raw/peddler_walk-r2.png",
+      "source_sha256": "0d35960df6ead33015d81e8577b58e3d6fdcd271d7a7aaecbb8bbb40fc4ce82d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_walk",
+      "call": "raw/peddler_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/peddler_walk/west/04.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_walk 3",
+      "prompt": "raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          31
+        ],
+        "content_scale": 0.06339468302658487,
+        "crop_xywh": [
+          1128,
+          119,
+          279,
+          489
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_walk_3.png",
+      "seconds": 0.1,
+      "sha256": "48256eeab38a5b287de177214fb2557996eadcd75006053552de9ccc51d6b6a4",
+      "source": "raw/peddler_walk-r2.png",
+      "source_sha256": "0d35960df6ead33015d81e8577b58e3d6fdcd271d7a7aaecbb8bbb40fc4ce82d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_walk",
+      "call": "raw/peddler_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 4,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/peddler_walk/west/05.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_walk 4",
+      "prompt": "raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          31
+        ],
+        "content_scale": 0.06339468302658487,
+        "crop_xywh": [
+          1468,
+          118,
+          279,
+          489
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_walk_4.png",
+      "seconds": 0.1,
+      "sha256": "4c9023eb88bbe7d325537bfd81e41d7641480584bb91155d125f283d0c5de425",
+      "source": "raw/peddler_walk-r2.png",
+      "source_sha256": "0d35960df6ead33015d81e8577b58e3d6fdcd271d7a7aaecbb8bbb40fc4ce82d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "peddler_walk",
+      "call": "raw/peddler_walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 5,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/peddler_walk/west/06.png",
+      "palette_mode": "B",
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "points": {},
+      "pose": "peddler_walk 5",
+      "prompt": "raw/peddler_walk-r2.prompt.txt",
+      "prompt_sha256": "d692e1bbc2bc48309525e719a035b39d27eab49b2192e4ef29efcc3c8fcd986a",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          31
+        ],
+        "content_scale": 0.06339468302658487,
+        "crop_xywh": [
+          1811,
+          118,
+          279,
+          489
+        ]
+      },
+      "runtime_name": "sprites/actors/peddler_walk_5.png",
+      "seconds": 0.1,
+      "sha256": "074832b4418f9448ab562c245f2e3402597f95ed38f19422c4d954a2ff9b61e6",
+      "source": "raw/peddler_walk-r2.png",
+      "source_sha256": "0d35960df6ead33015d81e8577b58e3d6fdcd271d7a7aaecbb8bbb40fc4ce82d",
+      "visible_limits_wh": [
+        [
+          1,
+          18
+        ],
+        [
+          30,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "shop_closed",
+      "call": "raw/recovered-shop_closed-r3.call.json",
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "dir": "none",
+      "draw_scale": 2,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/shop_closed/none/01.png",
+      "palette_mode": "A",
+      "parts": [
+        {
+          "input": "stall-opening-only",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            40
+          ]
+        }
+      ],
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "points": {},
+      "pose": "shop_closed 0",
+      "prompt": "raw/recovered-shop_closed-r3.prompt.txt",
+      "prompt_sha256": "c4721ba31816b0bf8493b77c471381e8e19ca700adedff6fc25b44aeca65bbe5",
+      "recipe": {
+        "content_anchor_xy": [
+          14,
+          29
+        ],
+        "content_scale": 0.03135498320268757,
+        "crop_xywh": [
+          114,
+          267,
+          893,
+          917
+        ]
+      },
+      "runtime_name": "sprites/props/shop_closed.png",
+      "seconds": 0.55,
+      "sha256": "3f9236e529d8d7751fa267db8f13e6e0b977dea8c51cb71d5e46b9ef6a80f1b9",
+      "source": "raw/recovered-shop_closed-r3.png",
+      "source_sha256": "72d844033b181e3d1fba3639c91295e1b77aec8c4a7b414c3f4e5a551644addf"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A034",
+  "palette": "exact-source",
+  "palette_mode": "B",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A034-peddler\\raw\\peddler-master-c1-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "e08b228569e10d84a7c3be9ad52aec0b8f3398b21acb00a62138ab7d8180ca51"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\shop\\master.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "baf5ffdec4456354ce0284920a4334a149cd9f03bcc4df1c8b66c8dfb5774132"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A034-peddler",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The peddler at the stall",
+  "tool": "built-in ImageGen"
+}

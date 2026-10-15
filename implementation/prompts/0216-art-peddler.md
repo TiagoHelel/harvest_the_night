@@ -1,7 +1,7 @@
 # 0216 - Art: the peddler
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0190
 - **Likely files:** assets/art_source/npc/, assets/art_source/props/, assets/art_source/manifest.json, tools/check_station_art.py, tools/check_npc_art.py (new), tools/verify.py
 - **Art packs:** A034

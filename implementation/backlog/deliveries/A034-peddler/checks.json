@@ -1,0 +1,168 @@
+{
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "blink_face_only": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 15,
+  "frames_found": 15,
+  "grounded_on_pivot": true,
+  "idle_neutral_repeated": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/peddler_idle/south/01.png": {
+      "bounds": [
+        12,
+        6,
+        30,
+        36
+      ],
+      "opaque_pixels": 357
+    },
+    "native/peddler_idle/south/02.png": {
+      "bounds": [
+        12,
+        6,
+        30,
+        36
+      ],
+      "opaque_pixels": 357
+    },
+    "native/peddler_idle/south/03.png": {
+      "bounds": [
+        12,
+        6,
+        30,
+        36
+      ],
+      "opaque_pixels": 357
+    },
+    "native/peddler_idle/south/04.png": {
+      "bounds": [
+        12,
+        6,
+        30,
+        36
+      ],
+      "opaque_pixels": 357
+    },
+    "native/peddler_talk/south/01.png": {
+      "bounds": [
+        10,
+        5,
+        29,
+        36
+      ],
+      "opaque_pixels": 383
+    },
+    "native/peddler_talk/south/02.png": {
+      "bounds": [
+        10,
+        5,
+        29,
+        36
+      ],
+      "opaque_pixels": 375
+    },
+    "native/peddler_talk/south/03.png": {
+      "bounds": [
+        10,
+        5,
+        29,
+        36
+      ],
+      "opaque_pixels": 383
+    },
+    "native/peddler_talk/south/04.png": {
+      "bounds": [
+        10,
+        5,
+        29,
+        36
+      ],
+      "opaque_pixels": 374
+    },
+    "native/peddler_walk/west/01.png": {
+      "bounds": [
+        11,
+        5,
+        29,
+        36
+      ],
+      "opaque_pixels": 365
+    },
+    "native/peddler_walk/west/02.png": {
+      "bounds": [
+        12,
+        5,
+        28,
+        36
+      ],
+      "opaque_pixels": 328
+    },
+    "native/peddler_walk/west/03.png": {
+      "bounds": [
+        12,
+        5,
+        28,
+        36
+      ],
+      "opaque_pixels": 321
+    },
+    "native/peddler_walk/west/04.png": {
+      "bounds": [
+        12,
+        5,
+        28,
+        36
+      ],
+      "opaque_pixels": 357
+    },
+    "native/peddler_walk/west/05.png": {
+      "bounds": [
+        11,
+        5,
+        29,
+        36
+      ],
+      "opaque_pixels": 345
+    },
+    "native/peddler_walk/west/06.png": {
+      "bounds": [
+        11,
+        5,
+        29,
+        36
+      ],
+      "opaque_pixels": 324
+    },
+    "native/shop_closed/none/01.png": {
+      "bounds": [
+        2,
+        7,
+        30,
+        36
+      ],
+      "opaque_pixels": 726
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "shop_changed_outside_opening": 0,
+  "shop_frame_matches": true,
+  "source_transparency_matches_call": true,
+  "talk_body_fixed": true,
+  "visible_targets": true
+}

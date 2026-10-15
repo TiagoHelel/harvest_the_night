@@ -210,6 +210,62 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/actors/peddler_idle_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_idle_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_idle_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_idle_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_talk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_talk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_talk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_talk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_walk_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/peddler_walk_5.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/actors/placeholder.png",
       "owner": "ascii"
     },
@@ -2802,6 +2858,86 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/components/A034-peddler/merchant-arm-only-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-arm-only-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-arm-only-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-arm-only-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-blink-face-only.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-blink-original.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-mouth-and-arm-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-mouth-and-arm-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-mouth-and-arm-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-mouth-and-arm-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-neutral-hat-fit.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-neutral-original.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-talk-fixed-body.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-talk-moving-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-talk-moving-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-talk-moving-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/merchant-talk-moving-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/stall-generated-shutter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/stall-opening-only.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A034-peddler/stall-original.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/beet_0.png",
       "owner": "raster"
     },
@@ -4295,6 +4431,10 @@
     },
     {
       "output": "sprites/props/shop.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/shop_closed.png",
       "owner": "raster"
     },
     {

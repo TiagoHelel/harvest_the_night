@@ -1,0 +1,48 @@
+A034 - The peddler at the stall
+Approval date: 2026-10-15
+Owner words, verbatim: "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+Status: approved for integration; runtime not yet integrated.
+
+Authoritative folder: implementation/backlog/deliveries/A034-peddler/
+All 15 native output PNGs and the recorded source/component assembly are owner-approved.
+Integration game task: 0216.
+MIXED PACK: peddler uses mode B, 40x40 pivot (20,36), draw 1.0, exact colour_ramp. Closed legacy stall uses mode A, 32x40 pivot (16,36), draw 2.0; preserve original pixels outside shutter opening. Idle/talk face south; side walk faces west with runtime east mirror. Never apply one palette/draw scale blindly to the whole pack.
+
+Read APPROVAL.json, contract.json, checks.json, source-selection.json and the shared detailed correction notes:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-REVIEW.md
+That file is the historical correction/assembly explanation. The approved batch handoff below supersedes its old pending-review instructions:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-APPROVED.md
+No older delivery folder is superseded unless listed in contract.supersedes; prior candidate sources in rejected/, preview/ and retry-before-20261014/ are never integration inputs.
+
+Palette mode B: preserve every per-file override, palette_keys, alpha_threshold128, colour_ramp and draw scale.
+Mode A: promote raw sources with the recorded importer crop/nearest scale/anchor/palette recipe. Mode B: final native pixels are exact-source; do not re-quantize.
+Layered outputs: parts/components are authoritative. The primary source/recipe also records provenance; do NOT treat it as a direct crop for a composed file.
+Promote the DAG recursively, maximum5parts per compose node. Derived compose entries must omit source (otherwise the importer bypasses composition), use input=first part input and preserve part order.
+Exact reference, mode-B and baked mirror component PNGs are hashed exact-source leaves. Quarter-turns use the existing rotate operation. Preserve source recipes and approval provenance.
+Canonical importer replay already reproduces all outputs pixel-exact; see pipeline-replay-check.json and the shared check_pipeline_replay.py.
+
+Native -> runtime mapping (01.png is frame0):
+native/peddler_idle/south/01.png -> sprites/actors/peddler_idle_0.png | 40x40 pivot (20, 36) draw 1 | peddler_idle south frame0 0.4s loop=true mirror=none | points={}
+native/peddler_idle/south/02.png -> sprites/actors/peddler_idle_1.png | 40x40 pivot (20, 36) draw 1 | peddler_idle south frame1 0.4s loop=true mirror=none | points={}
+native/peddler_idle/south/03.png -> sprites/actors/peddler_idle_2.png | 40x40 pivot (20, 36) draw 1 | peddler_idle south frame2 0.4s loop=true mirror=none | points={}
+native/peddler_idle/south/04.png -> sprites/actors/peddler_idle_3.png | 40x40 pivot (20, 36) draw 1 | peddler_idle south frame3 0.4s loop=true mirror=none | points={}
+native/peddler_talk/south/01.png -> sprites/actors/peddler_talk_0.png | 40x40 pivot (20, 36) draw 1 | peddler_talk south frame0 0.15s loop=true mirror=none | points={}
+native/peddler_talk/south/02.png -> sprites/actors/peddler_talk_1.png | 40x40 pivot (20, 36) draw 1 | peddler_talk south frame1 0.15s loop=true mirror=none | points={}
+native/peddler_talk/south/03.png -> sprites/actors/peddler_talk_2.png | 40x40 pivot (20, 36) draw 1 | peddler_talk south frame2 0.15s loop=true mirror=none | points={}
+native/peddler_talk/south/04.png -> sprites/actors/peddler_talk_3.png | 40x40 pivot (20, 36) draw 1 | peddler_talk south frame3 0.15s loop=true mirror=none | points={}
+native/peddler_walk/west/01.png -> sprites/actors/peddler_walk_0.png | 40x40 pivot (20, 36) draw 1 | peddler_walk west frame0 0.1s loop=true mirror=runtime | points={}
+native/peddler_walk/west/02.png -> sprites/actors/peddler_walk_1.png | 40x40 pivot (20, 36) draw 1 | peddler_walk west frame1 0.1s loop=true mirror=runtime | points={}
+native/peddler_walk/west/03.png -> sprites/actors/peddler_walk_2.png | 40x40 pivot (20, 36) draw 1 | peddler_walk west frame2 0.1s loop=true mirror=runtime | points={}
+native/peddler_walk/west/04.png -> sprites/actors/peddler_walk_3.png | 40x40 pivot (20, 36) draw 1 | peddler_walk west frame3 0.1s loop=true mirror=runtime | points={}
+native/peddler_walk/west/05.png -> sprites/actors/peddler_walk_4.png | 40x40 pivot (20, 36) draw 1 | peddler_walk west frame4 0.1s loop=true mirror=runtime | points={}
+native/peddler_walk/west/06.png -> sprites/actors/peddler_walk_5.png | 40x40 pivot (20, 36) draw 1 | peddler_walk west frame5 0.1s loop=true mirror=runtime | points={}
+native/shop_closed/none/01.png -> sprites/props/shop_closed.png | 32x40 pivot (16, 36) draw 2 | shop_closed none frame0 0.55s loop=false mirror=none | points={}
+
+Aliases: bind listed runtime names directly, replace the named game task's placeholders and retain any existing required aliases to the appropriate approved first frames. Do not invent additional raster frames.
+Mirrors: runtime east mirroring applies only to the authored west-facing animal/NPC cycles identified above. All UI, crop, guardian and static building files bind with no flip. Preserve any per-file mirror field.
+Metadata coordinates are native pixels. Component files are supporting assembly nodes, not extra runtime animations.
+Deviations and owner authorization: [{"change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.", "owner_words": "Sim, autorizar composição com recortes do ImageGen", "rule": "ART-CONTRACT 9.4 barrier-only composition"}]
+
+Never regenerate, repaint, recolour, resample or retime approved art; never cut sprites out of previews, GIFs or screenshots; never add a second flip. Do not use unlisted candidates.
+Next: verify approved output and component hashes; promote versioned sources/assembly via the raster manifest and ownership records; extend hard-coded family checks; run tools/verify.py; inspect actual FHD day/night behavior; set this pack integrated only after successful integration. Claude owns game-task state and assets.py unblock.
+No new commit/push is authorized by this art approval.

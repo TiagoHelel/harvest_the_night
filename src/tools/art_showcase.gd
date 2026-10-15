@@ -259,7 +259,10 @@ func _station_check() -> void:
 		var hurt := i < 4 and float(on.get("hp",1))/float(GameData.BUILDINGS[id]["hp"]) < 0.75
 		var suffix := "_hurt" if hurt else ("_active" if running else "")
 		var folder := WorldView.BUILDING_DIR if i < 2 else WorldView.PROP_DIR
-		expect(sprite.texture.resource_path == folder+String(id)+suffix+".png", "Activity and wear select distinct authored states from existing core data")
+		# **The stall shut outside the peddler's hours** (task 0216): A034's
+		# `shop_closed`, which the stand-in had drawn as the shop itself.
+		var art := "shop_closed" if id == &"shop" and not Shop.open_hours(_state) else String(id) + suffix
+		expect(sprite.texture.resource_path == folder+art+".png", "Activity and wear select distinct authored states from existing core data")
 		expect(sprite.position == Vector2(corner*16+Vector2i(size.x*8,size.y*16)), "Each station sorts at its original footprint bottom center")
 		var pivot := Vector2(24,44) if i < 4 else (Vector2(16,36) if i == 4 else Vector2(12,30))
 		# The stall outside the peddler's hours (task 0190) is `shop_closed`:

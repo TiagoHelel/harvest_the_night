@@ -137,12 +137,6 @@ const MARK_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_s
 const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_scale": 1.0}
 
 
-## A034's peddler (task 0190): 40x40 at (20,36), the farmer's density, drawn
-## at 1.0; and the closed stall, the legacy `shop`'s 32x40 at (16,36) drawn at
-## 2.0 like it.
-const PEDDLER := {"canvas": Vector2i(40, 40), "pivot": Vector2i(20, 36), "draw_scale": 1.0}
-const SHOP_CLOSED := {"canvas": Vector2i(32, 40), "pivot": Vector2i(16, 36), "draw_scale": 2.0}
-
 ## A035's houses (task 0191): 128x128 at (64,120) over the 6x4 footprint,
 ## drawn at 1.0 - today's 64x64 house at (32,60) drawn at 2.0, at full density.
 const HOUSE_TIER := {"canvas": Vector2i(128, 128), "pivot": Vector2i(64, 120), "draw_scale": 1.0}
@@ -305,13 +299,6 @@ const ART := {
 	&"hud_bone_meal": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.5, 1.42, 1.18), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"tilled_fertilised": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
 	&"tilled_fertilised_wet": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled_wet", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	# A034's peddler and the shut stall (task 0190): the farmer's own
-	# frames in a terracotta waistcoat's tint - standing, trading, walking
-	# - and the stall dimmed, until 0216.
-	&"peddler_idle": {"pack": "A034", "dir": "res://sprites/actors/", "frames": 4, "seconds": 0.4, "loop": true, "stand_in": &"actors/idle_south_0", "tint": Color(1.2, 0.82, 0.72), "geometry": PEDDLER, "final": PEDDLER},
-	&"peddler_talk": {"pack": "A034", "dir": "res://sprites/actors/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"actors/trade", "stand_in_frames": 4, "tint": Color(1.2, 0.82, 0.72), "geometry": PEDDLER, "final": PEDDLER},
-	&"peddler_walk": {"pack": "A034", "dir": "res://sprites/actors/", "frames": 6, "seconds": 0.1, "loop": true, "stand_in": &"actors/walk_west", "stand_in_frames": 8, "tint": Color(1.2, 0.82, 0.72), "geometry": PEDDLER, "final": PEDDLER},
-	&"shop_closed": {"pack": "A034", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"props/shop", "tint": Color(0.58, 0.54, 0.64), "geometry": SHOP_CLOSED, "final": SHOP_CLOSED, "bare": true},
 	# A035's sturdier houses (task 0191): today's house, whole or hurt, with
 	# a code-drawn plaque of studs over the door (`WorldView`), until 0217.
 	&"house_2": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
