@@ -1,6 +1,6 @@
 # A004 - The guardian's cursor
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0146
 - **Dressed by game tasks:** 0131
 - **Spec after game task:** 0131

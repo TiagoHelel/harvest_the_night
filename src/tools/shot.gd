@@ -180,6 +180,7 @@ const SCENARIOS: Array = [
 	["forecast_dusk", "Spring 14 at 18:30: the boss night's forecast, every kind's head on it", ""],
 	["forecast_summer", "Summer 10 at 18:30: a summer night's forecast, the spitter's and the rat's heads among the kinds coming (task 0260)", ""],
 	["forecast_autumn", "Autumn 10 at 18:30: an autumn night's forecast, the crow's head among the kinds coming (task 0262)", ""],
+	["cursor_looks", "the guardian's cursor in each look (task 0146): the first night's build step, the cursor on dark grass in neutral, place, blocked, upgrade, sell, repair and aim in turn - Main's own choice of look held off for the picture - then neutral over a field's soil and sell over a wall", ""],
 	["guardian", "the porch guardian awake (task 0145): the first night's build step, the camera on the porch - A003's night idle with its eyes lit; then guardian_point, a wall put down below the porch and the guardian pointing at it", ""],
 	["forecast_build", "the build step on Winter 14: a boss under a Full Moon, from every side", ""],
 	["forecast_calm", "Summer 1 at 18:30: the forecast of a calm night", ""],
@@ -880,6 +881,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"forecast_summer": _set_forecast_summer(state)
 		"forecast_autumn": _set_forecast_autumn(state)
 		"guardian": _set_guardian(state)
+		"cursor_looks": _set_cursor_looks(state)
 		"forecast_build": _set_forecast_build(state)
 		"forecast_calm": _set_forecast_calm(state)
 		"forecast_fog": _set_forecast_fog(state)
@@ -1043,6 +1045,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "days":
 		await _shoot("days_spring_morning", folder)
 		await _take_days(main, state, folder)
+		return
+	if name == "cursor_looks":
+		await _take_cursor_looks(main, state, folder)
 		return
 	if name == "guardian":
 		# Past the wake, into the night idle.
@@ -2876,6 +2881,58 @@ func _set_guardian(state: Dictionary) -> void:
 	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
 	NightRoad.into_build(state)
 	_look_at(GuardianView.cell_of(state) + Vector2i(1, 2))
+
+
+## **The cursor's looks** (task 0146): the first night's build step on dark
+## grass south of the house, a wall put down above it and the starter field's
+## soil in reach; the pictures are `_take_cursor_looks`'.
+func _set_cursor_looks(state: Dictionary) -> void:
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	NightRoad.into_build(state)
+	_cursor_grass = _ground_of(state, Farm.house_centre(state) + Vector2i(-4, 6), Farm.Terrain.GRASS)
+	_cursor_soil = _ground_of(state, _cursor_grass, Farm.Terrain.SOIL)
+	_cursor_wall = _ground_of(state, _cursor_grass + Vector2i(0, -2), Farm.Terrain.GRASS)
+	Building.place(state, &"wall", _cursor_wall)
+	_look_at(_cursor_grass)
+
+
+## The open cell of `terrain` nearest `cell`.
+func _ground_of(state: Dictionary, cell: Vector2i, terrain: int) -> Vector2i:
+	for radius in 10:
+		for candidate in Grid.within(cell, radius):
+			if Grid.in_bounds(candidate) and Farm.terrain_at(state, candidate) == terrain 					and Describe.under_cursor(state, candidate) == I18n.t(&"CURSOR_GROUND"):
+				return candidate
+	return cell
+
+
+## Where `_set_cursor_looks` put the cursor and its wall, and the plot nearest.
+var _cursor_grass := Vector2i.ZERO
+var _cursor_wall := Vector2i.ZERO
+var _cursor_soil := Vector2i.ZERO
+
+
+## **Each look in the real view** (task 0146): `Main` picks the look from what
+## is under the cursor every frame, so it is held off while each look is put
+## on by hand - on grass, then neutral on soil and sell on the wall - and
+## given back after.
+func _take_cursor_looks(main: Node, state: Dictionary, folder: String) -> void:
+	var world := main.get_node("%WorldView") as WorldView
+	var cursor := world.cursor()
+	main.set_process(false)
+	var spots := []
+	for look in GuardianCursor.LOOKS:
+		spots.append([look, _cursor_grass, "cursor_" + String(look)])
+	spots.append([&"neutral", _cursor_soil, "cursor_soil"])
+	spots.append([&"sell", _cursor_wall, "cursor_wall"])
+	for spot in spots:
+		cursor.place_at(spot[1])
+		cursor.set_look(spot[0])
+		cursor.queue_redraw()
+		for _i in 3:
+			await process_frame
+		print("  %s: %s on %s" % [spot[2], cursor.shown().get_file(), str(spot[1])])
+		await _shoot(spot[2], folder)
+	main.set_process(true)
 
 
 ## **The point** (task 0145): a wall put down below the porch; the view spots

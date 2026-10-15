@@ -1401,28 +1401,24 @@ func _task_0131_guardian() -> void:
 	expect(mine == 12 and wrong.is_empty(),
 		"the guardian's four states are A003's twelve frames, lit where the eyes are",
 		"%d frames, wrong: %s" % [mine, str(wrong.slice(0, 4))])
+	# The cursor's seven looks left it for A004's art in task 0146: a 0.4 s
+	# pulse of two 16x16 frames each, centred on the cell, and nothing lit.
 	mine = 0
-	for name in GameData.sorted_names(PlaceholderArt.ART.keys()):
-		var entry: Dictionary = PlaceholderArt.ART[name]
-		if entry["pack"] != "A004":
-			continue       # the cursor's pack only
-		mine += 1
-		var shape: Dictionary = entry["geometry"]
-		for i in int(entry["frames"]):
-			var path := PlaceholderArt.art_path(name, i)
-			var answer := PlaceholderArt.frame(path)
-			var lit := entry.has("lights") and i >= int(entry.get("lit_from", 0))
-			if not PlaceholderArt.has_frame(path) or not PlaceholderArt.is_drawn(path) \
-					or answer.get("canvas") != shape["canvas"] \
-					or answer.get("pivot") != shape["pivot"] \
-					or answer.has("lights") != lit:
-				wrong.append(path)
-	expect(mine == 7 and wrong.is_empty(),
-		"the cursor's seven looks are registered",
-		"%d entries, wrong: %s" % [mine, str(wrong.slice(0, 4))])
+	wrong.clear()
 	for look in GuardianCursor.LOOKS:
-		expect(PlaceholderArt.ART.has(StringName("cursor_%s" % look)),
-			"the cursor's '%s' look is registered" % look)
+		for i in 2:
+			var path := GuardianCursor.path_of(look, i)
+			var answer := PlaceholderArt.frame(path)
+			mine += 1
+			if not RasterArt.FRAMES.has(path) or PlaceholderArt.is_drawn(path) \
+					or PlaceholderArt.art(StringName("cursor_%s" % look)).size() > 0 \
+					or answer.get("canvas") != Vector2i(16, 16) or answer.get("pivot") != Vector2i(8, 8) \
+					or float(answer.get("seconds", 0.0)) != 0.4 or not bool(answer.get("loop", false)) \
+					or answer.has("lights") or answer.has("light") or not ResourceLoader.exists(path):
+				wrong.append(path)
+	expect(mine == 14 and wrong.is_empty(),
+		"the cursor's seven looks are A004's fourteen frames, pulsing and unlit",
+		"%d frames, wrong: %s" % [mine, str(wrong.slice(0, 4))])
 	expect(PlaceholderArt.frame(GuardianView.path_of(&"guardian_day", 0)).get("lights", []).is_empty()
 		and not PlaceholderArt.frame(GuardianView.path_of(&"guardian_wake", 0)).has("lights")
 		and PlaceholderArt.frame(GuardianView.path_of(&"guardian_wake", 1)).has("lights"),

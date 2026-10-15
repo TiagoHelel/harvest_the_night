@@ -1,0 +1,1377 @@
+{
+  "pack": "A004",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/cursor_neutral/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "neutral-corner",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "neutral-corner-2",
+              "paste_xy": [
+                11,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "neutral-corner-3",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "neutral-corner-1",
+              "paste_xy": [
+                11,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_neutral/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "neutral-corner",
+              "paste_xy": [
+                1,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "neutral-corner-2",
+              "paste_xy": [
+                10,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "neutral-corner-3",
+              "paste_xy": [
+                1,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "neutral-corner-1",
+              "paste_xy": [
+                10,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_place/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "place-corner",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "place-corner-2",
+              "paste_xy": [
+                11,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "place-corner-3",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "place-glyph",
+              "paste_xy": [
+                11,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_place/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "place-corner",
+              "paste_xy": [
+                1,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "place-corner-2",
+              "paste_xy": [
+                10,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "place-corner-3",
+              "paste_xy": [
+                1,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "place-glyph",
+              "paste_xy": [
+                11,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_blocked/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "blocked-corner",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "blocked-corner-2",
+              "paste_xy": [
+                11,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "blocked-corner-3",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "blocked-glyph",
+              "paste_xy": [
+                10,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                6,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_blocked/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "blocked-corner",
+              "paste_xy": [
+                1,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "blocked-corner-2",
+              "paste_xy": [
+                10,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "blocked-corner-3",
+              "paste_xy": [
+                1,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "blocked-glyph",
+              "paste_xy": [
+                10,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                6,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_upgrade/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "upgrade-corner",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "upgrade-corner-2",
+              "paste_xy": [
+                11,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "upgrade-corner-3",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "upgrade-glyph",
+              "paste_xy": [
+                10,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                6,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_upgrade/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "upgrade-corner",
+              "paste_xy": [
+                1,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "upgrade-corner-2",
+              "paste_xy": [
+                10,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "upgrade-corner-3",
+              "paste_xy": [
+                1,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "upgrade-glyph",
+              "paste_xy": [
+                10,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                6,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_sell/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "sell-corner",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "sell-corner-2",
+              "paste_xy": [
+                11,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "sell-corner-3",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "sell-glyph",
+              "paste_xy": [
+                10,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                6,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_sell/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "sell-corner",
+              "paste_xy": [
+                1,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "sell-corner-2",
+              "paste_xy": [
+                10,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "sell-corner-3",
+              "paste_xy": [
+                1,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "sell-glyph",
+              "paste_xy": [
+                10,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                6,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_repair/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "repair-corner",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "repair-corner-2",
+              "paste_xy": [
+                11,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "repair-corner-3",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "repair-glyph",
+              "paste_xy": [
+                10,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                6,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_repair/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "repair-corner",
+              "paste_xy": [
+                1,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "repair-corner-2",
+              "paste_xy": [
+                10,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "repair-corner-3",
+              "paste_xy": [
+                1,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "repair-glyph",
+              "paste_xy": [
+                10,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                6,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_aim/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "aim-corner",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "aim-corner-2",
+              "paste_xy": [
+                11,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "aim-corner-3",
+              "paste_xy": [
+                0,
+                11
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "aim-corner-1",
+              "paste_xy": [
+                11,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "aim-aim-plus",
+              "paste_xy": [
+                7,
+                7
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                3,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/cursor_aim/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              8
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              416,
+              416
+            ]
+          },
+          "parts": [
+            {
+              "input": "aim-corner",
+              "paste_xy": [
+                1,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "aim-corner-2",
+              "paste_xy": [
+                10,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "aim-corner-3",
+              "paste_xy": [
+                1,
+                10
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "aim-corner-1",
+              "paste_xy": [
+                10,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                5,
+                5
+              ]
+            },
+            {
+              "input": "aim-aim-plus",
+              "paste_xy": [
+                7,
+                7
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                3,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "component": "aim-aim-line",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              132,
+              68,
+              78,
+              26
+            ]
+          }
+        },
+        {
+          "component": "aim-horizontal",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              130,
+              52
+            ]
+          }
+        },
+        {
+          "component": "aim-vertical",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              52,
+              130
+            ]
+          }
+        },
+        {
+          "component": "blocked-horizontal",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              130,
+              52
+            ]
+          }
+        },
+        {
+          "component": "blocked-vertical",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              52,
+              130
+            ]
+          }
+        },
+        {
+          "component": "neutral-horizontal",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              130,
+              52
+            ]
+          }
+        },
+        {
+          "component": "neutral-vertical",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              52,
+              130
+            ]
+          }
+        },
+        {
+          "component": "place-horizontal",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              130,
+              52
+            ]
+          }
+        },
+        {
+          "component": "place-vertical",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              52,
+              130
+            ]
+          }
+        },
+        {
+          "component": "repair-horizontal",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              130,
+              52
+            ]
+          }
+        },
+        {
+          "component": "repair-vertical",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              52,
+              130
+            ]
+          }
+        },
+        {
+          "component": "sell-horizontal",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              130,
+              52
+            ]
+          }
+        },
+        {
+          "component": "sell-vertical",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              52,
+              130
+            ]
+          }
+        },
+        {
+          "component": "upgrade-horizontal",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              130,
+              52
+            ]
+          }
+        },
+        {
+          "component": "upgrade-vertical",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.038461538461538464,
+            "crop_xywh": [
+              106,
+              68,
+              52,
+              130
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/glyph-blocked-r1.png",
+      "source_sha256": "ef666e398a02569eefb066b75234c4f29fd49fb63627755f94c993fc61f52574",
+      "usage": "Source-owned component crops only.",
+      "recipes": [
+        {
+          "component": "blocked-glyph",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.009836065573770493,
+            "crop_xywh": [
+              329,
+              337,
+              610,
+              608
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/glyph-plus-r1.png",
+      "source_sha256": "7fe9d930cf1307916485ee5f69c591df4e97f45ad67fa3838e8799c86e92a0a3",
+      "usage": "Source-owned component crops only.",
+      "recipes": [
+        {
+          "component": "place-large-plus",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.013605442176870748,
+            "crop_xywh": [
+              370,
+              303,
+              541,
+              588
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/glyph-hammer-r1.png",
+      "source_sha256": "220ff62f662b0a5e0008e4b9c4e5fc0925ef22a2ae0937f5bfed5a7fb5220501",
+      "usage": "Source-owned component crops only.",
+      "recipes": [
+        {
+          "component": "repair-glyph",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.00796812749003984,
+            "crop_xywh": [
+              273,
+              233,
+              753,
+              750
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/reference-existing-money.png",
+      "source_sha256": "e1131306f92cc6a2de702395d1aec2d517a9eab39223f540be603198c793979e",
+      "usage": "Source-owned component crops only.",
+      "recipes": [
+        {
+          "component": "sell-glyph",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.42857142857142855,
+            "crop_xywh": [
+              1,
+              3,
+              14,
+              11
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/glyph-upgrade-r1.png",
+      "source_sha256": "63b107987296426b28c464898f1f03471208b63fb9a120f3cecd89851a285263",
+      "usage": "Source-owned component crops only.",
+      "recipes": [
+        {
+          "component": "upgrade-glyph",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.012244897959183673,
+            "crop_xywh": [
+              391,
+              375,
+              488,
+              490
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

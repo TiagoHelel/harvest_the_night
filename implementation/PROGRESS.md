@@ -32529,3 +32529,62 @@ is gone.
 - `python implementation/backlog/assets.py set A003 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (64 of 64).
+
+## 0146 - Art: the guardian's cursor - done 2026-10-15
+
+A004 is integrated. The guardian's cursor is the owner-approved art now:
+neutral, place, blocked, upgrade, sell, repair and aim, each a 16x16 frame
+centred on the cell with a two-frame 0.4 s pulse. The owner approved the
+corrected pack on 2026-10-15 with the retried batch ("tudo aprovado"), as
+recorded in the delivery's `APPROVAL.json`. 0131's code-drawn brackets are
+gone.
+
+- **Promoted as a DAG**:
+  - 14 frames over 46 assembly components: 20 `render` leaves (the sell
+    glyph cut from the existing money icon's reference), 17 `rotate` nodes
+    (the brackets' quarter-turns) and 9 `compose` nodes.
+  - The components are under `sprites/components/A004-cursor/`, and the six
+    raw sources are byte for byte in `assets/art_source/ui/cursor/`.
+  - Every node was sha-checked and every one decodes to its approved RGBA
+    through the canonical importer, before anything was written.
+  - The same scratch promoter as 0145.
+- **`GuardianCursor` draws A004's frames** by runtime path (`path_of`,
+  `shown`), timed by the art's own 0.4 s.
+  - The texture is held between draws. It was loaded and dropped inside
+    `_draw`, the white-square trap that 0238 hit.
+  - The stand-in brackets, `COLOURS` and `GLYPHS` are gone. Nothing on it
+    emits, so it stays unlit over the night as A004 asks.
+- **The stand-ins retired**: A004's seven `PlaceholderArt` entries and
+  `CELL_CURSOR` are gone. So is `HOTBAR_ICON`, declared beside it and
+  unused since A005 landed in task 0147. `placeholders.py --check` passes,
+  with 179 stand-ins left over 24 packs.
+- **Checks**:
+  - `check_ui_art.py` takes the cursor:
+    - seven looks of two frames on 16x16 at (8,8), drawn at 1.0, 0.4 s
+      looping;
+    - each its approved composition from A004's own components;
+    - no light point, every frame its own;
+    - the middle of the cell clear except for aim's plus, exactly
+      (7..9,8) and (8,7..9).
+  - The `--ui` showcase shows the fourteen frames in their own room at
+    native size, in both tongues and both contrasts: 17,232 checks.
+- **Tests**: 0131's registry check now asks for A004's fourteen frames,
+  pulsing, unlit and on disk, with nothing of 0120's road.
+- **Shots** (`implementation/shots/0146/`, FHD 1920x1080, looked at):
+  - A new scene, `cursor_looks`, on Spring 1's build step. It shows the
+    cursor in each look on dark grass south of the house, then neutral on
+    the field's soil and sell on a wall.
+  - `Main` chooses the look from what is under the cursor every frame, so
+    the scene holds it off while each look is put on by hand, and gives it
+    back after.
+  - Every look reads over the night: bone, green with its plus, red with
+    its cross, blue with its arrow, gold with its coin, orange with its
+    hammer, and moon with the plus in the middle.
+  - There is no by-day picture: the cursor lives from the build step to
+    the morning.
+  - `headless_check` counts 129 scenes.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A004 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (64 of 64).

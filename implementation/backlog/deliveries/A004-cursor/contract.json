@@ -1,0 +1,3049 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "cursor_aim",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cursor_aim-none-0-night.png",
+          "path": "native/cursor_aim/none/01.png",
+          "points": {},
+          "pose": "brackets out"
+        },
+        {
+          "issue": "",
+          "night": "preview/cursor_aim-none-1-night.png",
+          "path": "native/cursor_aim/none/02.png",
+          "points": {},
+          "pose": "brackets one pixel inward"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "brackets out",
+        "brackets one pixel inward"
+      ]
+    },
+    {
+      "anim": "cursor_blocked",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cursor_blocked-none-0-night.png",
+          "path": "native/cursor_blocked/none/01.png",
+          "points": {},
+          "pose": "brackets out"
+        },
+        {
+          "issue": "",
+          "night": "preview/cursor_blocked-none-1-night.png",
+          "path": "native/cursor_blocked/none/02.png",
+          "points": {},
+          "pose": "brackets one pixel inward"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "brackets out",
+        "brackets one pixel inward"
+      ]
+    },
+    {
+      "anim": "cursor_neutral",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cursor_neutral-none-0-night.png",
+          "path": "native/cursor_neutral/none/01.png",
+          "points": {},
+          "pose": "brackets out"
+        },
+        {
+          "issue": "",
+          "night": "preview/cursor_neutral-none-1-night.png",
+          "path": "native/cursor_neutral/none/02.png",
+          "points": {},
+          "pose": "brackets one pixel inward"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "brackets out",
+        "brackets one pixel inward"
+      ]
+    },
+    {
+      "anim": "cursor_place",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cursor_place-none-0-night.png",
+          "path": "native/cursor_place/none/01.png",
+          "points": {},
+          "pose": "brackets out"
+        },
+        {
+          "issue": "",
+          "night": "preview/cursor_place-none-1-night.png",
+          "path": "native/cursor_place/none/02.png",
+          "points": {},
+          "pose": "brackets one pixel inward"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "brackets out",
+        "brackets one pixel inward"
+      ]
+    },
+    {
+      "anim": "cursor_repair",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cursor_repair-none-0-night.png",
+          "path": "native/cursor_repair/none/01.png",
+          "points": {},
+          "pose": "brackets out"
+        },
+        {
+          "issue": "",
+          "night": "preview/cursor_repair-none-1-night.png",
+          "path": "native/cursor_repair/none/02.png",
+          "points": {},
+          "pose": "brackets one pixel inward"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "brackets out",
+        "brackets one pixel inward"
+      ]
+    },
+    {
+      "anim": "cursor_sell",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cursor_sell-none-0-night.png",
+          "path": "native/cursor_sell/none/01.png",
+          "points": {},
+          "pose": "brackets out"
+        },
+        {
+          "issue": "",
+          "night": "preview/cursor_sell-none-1-night.png",
+          "path": "native/cursor_sell/none/02.png",
+          "points": {},
+          "pose": "brackets one pixel inward"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "brackets out",
+        "brackets one pixel inward"
+      ]
+    },
+    {
+      "anim": "cursor_upgrade",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/cursor_upgrade-none-0-night.png",
+          "path": "native/cursor_upgrade/none/01.png",
+          "points": {},
+          "pose": "brackets out"
+        },
+        {
+          "issue": "",
+          "night": "preview/cursor_upgrade-none-1-night.png",
+          "path": "native/cursor_upgrade/none/02.png",
+          "points": {},
+          "pose": "brackets one pixel inward"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "brackets out",
+        "brackets one pixel inward"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [],
+  "comparison": [],
+  "components": {
+    "aim-aim-line": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        3,
+        1
+      ],
+      "operation": "render",
+      "output": "components/aim-aim-line.png",
+      "palette_keys": [
+        "moon"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          132,
+          68,
+          78,
+          26
+        ]
+      },
+      "sha256": "9e8d740990297748fe40001cef11b564dd646fae85b7a85e66afbd6975721f79",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "aim-aim-line-vertical": {
+      "canvas_wh": [
+        1,
+        3
+      ],
+      "input": "aim-aim-line",
+      "operation": "rotate",
+      "output": "components/aim-aim-line-vertical.png",
+      "quarter_turns": 1,
+      "sha256": "9ca3ff694f06ecc7b985575a784474e2a8e9385b80a4c9a07213a27c6fa059cd"
+    },
+    "aim-aim-plus": {
+      "canvas_wh": [
+        3,
+        3
+      ],
+      "operation": "compose",
+      "output": "components/aim-aim-plus.png",
+      "parts": [
+        {
+          "input": "aim-aim-line",
+          "paste_xy": [
+            0,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            3,
+            1
+          ]
+        },
+        {
+          "input": "aim-aim-line-vertical",
+          "paste_xy": [
+            1,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            1,
+            3
+          ]
+        }
+      ],
+      "sha256": "2d4dee65aaf013c4bc5df5171618d819cb1e5e8bd3e05d6fe982953d66e6657d"
+    },
+    "aim-corner": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "operation": "compose",
+      "output": "components/aim-corner.png",
+      "parts": [
+        {
+          "input": "aim-horizontal",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ]
+        },
+        {
+          "input": "aim-vertical",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "9fd96c92f656c2d6761cc418dec48ff9a34600b896b4469950f7431b55e6de0b"
+    },
+    "aim-corner-1": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "aim-corner",
+      "operation": "rotate",
+      "output": "components/aim-corner-1.png",
+      "quarter_turns": 1,
+      "sha256": "2570882a8d7f97df1bcf75fa77f0cd7d0cfcddd240f372dff14b205323279e4a"
+    },
+    "aim-corner-2": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "aim-corner",
+      "operation": "rotate",
+      "output": "components/aim-corner-2.png",
+      "quarter_turns": 2,
+      "sha256": "1741b4b073f48f7d7c1879f983dc25ec81109fe9fb66a6061cd611271fb3aa23"
+    },
+    "aim-corner-3": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "aim-corner",
+      "operation": "rotate",
+      "output": "components/aim-corner-3.png",
+      "quarter_turns": 3,
+      "sha256": "cce91c0d45d2b641a35d152cc1112fac68a514cb82fd43ff5fc3e5f4afdd249a"
+    },
+    "aim-horizontal": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "operation": "render",
+      "output": "components/aim-horizontal.png",
+      "palette_keys": [
+        "ink",
+        "moon"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          130,
+          52
+        ]
+      },
+      "sha256": "e720103573c70f0d435a0dc224c7b0f4e4317fa3ab690f8919888d555089e885",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "aim-vertical": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "operation": "render",
+      "output": "components/aim-vertical.png",
+      "palette_keys": [
+        "ink",
+        "moon"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          52,
+          130
+        ]
+      },
+      "sha256": "aff572fd24440ecd874d72559b99a6bd15a4a28f072944efd1d8f1e54c81cb6b",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "blocked-corner": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "operation": "compose",
+      "output": "components/blocked-corner.png",
+      "parts": [
+        {
+          "input": "blocked-horizontal",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ]
+        },
+        {
+          "input": "blocked-vertical",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "1a2b06cc11fd9584de8a1a161e35b53717e20c15987f71643b0f213daf40817c"
+    },
+    "blocked-corner-2": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "blocked-corner",
+      "operation": "rotate",
+      "output": "components/blocked-corner-2.png",
+      "quarter_turns": 2,
+      "sha256": "cd3e4c9c6320d1f10184b5c3393730c14b18c34dd829739eb61b7267ca8590ed"
+    },
+    "blocked-corner-3": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "blocked-corner",
+      "operation": "rotate",
+      "output": "components/blocked-corner-3.png",
+      "quarter_turns": 3,
+      "sha256": "5e662331cc236039febc07a9b0186fc56b03e1b438a217a3a5aa520f423eb87b"
+    },
+    "blocked-glyph": {
+      "call": "raw/glyph-blocked-r1.call.json",
+      "canvas_wh": [
+        6,
+        6
+      ],
+      "operation": "render",
+      "output": "components/blocked-glyph.png",
+      "palette_keys": [
+        "ink",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/glyph-blocked-r1.prompt.txt",
+      "prompt_sha256": "8de3a1e94106f77fd1219f8a21231c38c0049268675317bd2f366d4f16a05f54",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.009836065573770493,
+        "crop_xywh": [
+          329,
+          337,
+          610,
+          608
+        ]
+      },
+      "sha256": "5d637177ddad29ca4aa5658f5cd3e361c7efb3c11f7930b39ea3605afb1e8e76",
+      "source": "raw/glyph-blocked-r1.png",
+      "source_sha256": "ef666e398a02569eefb066b75234c4f29fd49fb63627755f94c993fc61f52574"
+    },
+    "blocked-horizontal": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "operation": "render",
+      "output": "components/blocked-horizontal.png",
+      "palette_keys": [
+        "ink",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          130,
+          52
+        ]
+      },
+      "sha256": "2448a13e11b44b15cc58613639003b993e0d66670063c55cacad9312ed1b5c5c",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "blocked-vertical": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "operation": "render",
+      "output": "components/blocked-vertical.png",
+      "palette_keys": [
+        "ink",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          52,
+          130
+        ]
+      },
+      "sha256": "ab6128fa7acd95d7e6ae07b0f3b4b2b52963837329358b86b74d477275b96780",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "neutral-corner": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "operation": "compose",
+      "output": "components/neutral-corner.png",
+      "parts": [
+        {
+          "input": "neutral-horizontal",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ]
+        },
+        {
+          "input": "neutral-vertical",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "38af8c5ad1cdc1753bcf2e1ef52c20c4ec47d808e74771112baff1c052939a9c"
+    },
+    "neutral-corner-1": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "neutral-corner",
+      "operation": "rotate",
+      "output": "components/neutral-corner-1.png",
+      "quarter_turns": 1,
+      "sha256": "26369dd713a65809c366f0fd751195aa0204f5c15ac1461e333175bb0a67dbfe"
+    },
+    "neutral-corner-2": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "neutral-corner",
+      "operation": "rotate",
+      "output": "components/neutral-corner-2.png",
+      "quarter_turns": 2,
+      "sha256": "05aa606b49d66681a8b1b86ee376eb6de50f45a7268d69489060d0cf3b8652f0"
+    },
+    "neutral-corner-3": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "neutral-corner",
+      "operation": "rotate",
+      "output": "components/neutral-corner-3.png",
+      "quarter_turns": 3,
+      "sha256": "4bbfac50fcde0552c40e811b21f42fd849e54669625897b8948df0d46ca1c745"
+    },
+    "neutral-horizontal": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "operation": "render",
+      "output": "components/neutral-horizontal.png",
+      "palette_keys": [
+        "ink",
+        "bone"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          130,
+          52
+        ]
+      },
+      "sha256": "a659b2df5a3a041ce528959e2d75178844e8d98b54ad20247839d666bc244e5b",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "neutral-vertical": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "operation": "render",
+      "output": "components/neutral-vertical.png",
+      "palette_keys": [
+        "ink",
+        "bone"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          52,
+          130
+        ]
+      },
+      "sha256": "0325a3ac620c245c62d5413be70d4fb0b36bf0f23f1a27b3e9d914f4d36bdc81",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "place-corner": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "operation": "compose",
+      "output": "components/place-corner.png",
+      "parts": [
+        {
+          "input": "place-horizontal",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ]
+        },
+        {
+          "input": "place-vertical",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "b84b583ecd9f6c6fd259d43150754054665e3e6e9d8874a0a78c2143b1b07c0d"
+    },
+    "place-corner-2": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "place-corner",
+      "operation": "rotate",
+      "output": "components/place-corner-2.png",
+      "quarter_turns": 2,
+      "sha256": "6b8085d8d51e6f022761db5b9be35a0308d734e7899916d56c3ac7f44832e15a"
+    },
+    "place-corner-3": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "place-corner",
+      "operation": "rotate",
+      "output": "components/place-corner-3.png",
+      "quarter_turns": 3,
+      "sha256": "caec45d07f1fab911261094c9f3e5304e48a79a7f97e0da5389232ed66a0d7a3"
+    },
+    "place-glyph": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "operation": "compose",
+      "output": "components/place-glyph.png",
+      "parts": [
+        {
+          "input": "place-large-plus",
+          "paste_xy": [
+            1,
+            0
+          ],
+          "slice_xywh": [
+            2,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "input": "place-large-plus",
+          "paste_xy": [
+            1,
+            3
+          ],
+          "slice_xywh": [
+            2,
+            6,
+            3,
+            2
+          ]
+        },
+        {
+          "input": "place-large-plus",
+          "paste_xy": [
+            0,
+            2
+          ],
+          "slice_xywh": [
+            0,
+            3,
+            1,
+            1
+          ]
+        },
+        {
+          "input": "place-large-plus",
+          "paste_xy": [
+            1,
+            2
+          ],
+          "slice_xywh": [
+            2,
+            3,
+            3,
+            1
+          ]
+        },
+        {
+          "input": "place-large-plus",
+          "paste_xy": [
+            4,
+            2
+          ],
+          "slice_xywh": [
+            6,
+            3,
+            1,
+            1
+          ]
+        }
+      ],
+      "sha256": "56a89c2c9229d493700f281c83a10f004b81ef2155583b0038305d05f9d3e3c9"
+    },
+    "place-horizontal": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "operation": "render",
+      "output": "components/place-horizontal.png",
+      "palette_keys": [
+        "ink",
+        "grass_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          130,
+          52
+        ]
+      },
+      "sha256": "dcee76561d126d4199216709319f5bd862cabb212570470fac337220745a3db8",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "place-large-plus": {
+      "call": "raw/glyph-plus-r1.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "operation": "render",
+      "output": "components/place-large-plus.png",
+      "palette_keys": [
+        "ink",
+        "grass_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/glyph-plus-r1.prompt.txt",
+      "prompt_sha256": "784142b3823827da71f989e422bb4b4f26847672e3bf3897e0c624045d827cd4",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.013605442176870748,
+        "crop_xywh": [
+          370,
+          303,
+          541,
+          588
+        ]
+      },
+      "sha256": "a41cedff96627e309461cb5d90d39fb8db633b2d8f66823a99ffcf4cd15f2c73",
+      "source": "raw/glyph-plus-r1.png",
+      "source_sha256": "7fe9d930cf1307916485ee5f69c591df4e97f45ad67fa3838e8799c86e92a0a3"
+    },
+    "place-vertical": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "operation": "render",
+      "output": "components/place-vertical.png",
+      "palette_keys": [
+        "ink",
+        "grass_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          52,
+          130
+        ]
+      },
+      "sha256": "8ac38fa5d92465a141398d2b62b3bb56d2c7e003c776740840b5971dd7c1dd55",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "repair-corner": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "operation": "compose",
+      "output": "components/repair-corner.png",
+      "parts": [
+        {
+          "input": "repair-horizontal",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ]
+        },
+        {
+          "input": "repair-vertical",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "5f8c3fafbcac29527febb116192a038ea254c7eb59bbb2cee7747f9c932613b3"
+    },
+    "repair-corner-2": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "repair-corner",
+      "operation": "rotate",
+      "output": "components/repair-corner-2.png",
+      "quarter_turns": 2,
+      "sha256": "34158e36b4c08c879c67343b8733c5cf01db2f80fd1fdde41aab4521aaadc535"
+    },
+    "repair-corner-3": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "repair-corner",
+      "operation": "rotate",
+      "output": "components/repair-corner-3.png",
+      "quarter_turns": 3,
+      "sha256": "db6ad1d12752c66a65b00248484170190c6412e664e4aa5ee6977cb5937be4dc"
+    },
+    "repair-glyph": {
+      "call": "raw/glyph-hammer-r1.call.json",
+      "canvas_wh": [
+        6,
+        6
+      ],
+      "operation": "render",
+      "output": "components/repair-glyph.png",
+      "palette_keys": [
+        "ink",
+        "stone_light",
+        "wood_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/glyph-hammer-r1.prompt.txt",
+      "prompt_sha256": "5f8524a3f2ea712876faf95185c1595f2456b1f55cabbcba998fee46c43ecd17",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.00796812749003984,
+        "crop_xywh": [
+          273,
+          233,
+          753,
+          750
+        ]
+      },
+      "sha256": "340367a6bcf29633b51b4bb58c8e9c0a65d843e5c54a03aa94ba89ff688f24e7",
+      "source": "raw/glyph-hammer-r1.png",
+      "source_sha256": "220ff62f662b0a5e0008e4b9c4e5fc0925ef22a2ae0937f5bfed5a7fb5220501"
+    },
+    "repair-horizontal": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "operation": "render",
+      "output": "components/repair-horizontal.png",
+      "palette_keys": [
+        "ink",
+        "flame"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          130,
+          52
+        ]
+      },
+      "sha256": "ee75f9dd8be2ea7b1af9604f47bc60c818fd3e7abb8ee845eb59a3429a4f3333",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "repair-vertical": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "operation": "render",
+      "output": "components/repair-vertical.png",
+      "palette_keys": [
+        "ink",
+        "flame"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          52,
+          130
+        ]
+      },
+      "sha256": "376cfe35ad1697306b28b10eb334ab4a09dde8ab3cb6e0d152141c8e96ea954b",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "sell-corner": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "operation": "compose",
+      "output": "components/sell-corner.png",
+      "parts": [
+        {
+          "input": "sell-horizontal",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ]
+        },
+        {
+          "input": "sell-vertical",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "9ce76edbd4510e87ef6b8974eeb33df58de3f76055665362148fa7e7f48840c7"
+    },
+    "sell-corner-2": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "sell-corner",
+      "operation": "rotate",
+      "output": "components/sell-corner-2.png",
+      "quarter_turns": 2,
+      "sha256": "14a20720d1122c461254109e5a37e23bf7847ba9942a38acc708aaa832e4aa07"
+    },
+    "sell-corner-3": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "sell-corner",
+      "operation": "rotate",
+      "output": "components/sell-corner-3.png",
+      "quarter_turns": 3,
+      "sha256": "1b1e17dfc29450ec771ca4ccde9b9e9ef64f1ace09149aeff9e32ce23809a97a"
+    },
+    "sell-glyph": {
+      "canvas_wh": [
+        6,
+        6
+      ],
+      "imagegen_manifest_provenance": {
+        "alpha_threshold": 128,
+        "animation": "ui/icon_money",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "content_scale": 0.02287581699346405,
+        "crop_xywh": [
+          342,
+          427,
+          612,
+          489
+        ],
+        "display_role": "inventory",
+        "frame": 0,
+        "generation_task": "0018",
+        "id": "ui/icon_money",
+        "loop": false,
+        "output": "sprites/ui/icon_money.png",
+        "output_sha256": "e1131306f92cc6a2de702395d1aec2d517a9eab39223f540be603198c793979e",
+        "owner": "raster",
+        "palette": "tools/palette.py:COLOURS",
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "prompt": "implementation/sprites/generation/0018-money.prompt.txt",
+        "prompt_sha256": "81a436983b04046d2de370896b082ac5ca20bf1d215b1efbd04a1eaf2865cbef",
+        "references": [
+          {
+            "path": "docs/reference-sheet.png",
+            "role": "As indexed in exact submitted prompt",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+          },
+          {
+            "path": "assets/art_source/ui/wood.png",
+            "role": "As indexed in exact submitted prompt",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2"
+          }
+        ],
+        "resource_id": "money",
+        "revision": 0,
+        "seconds": 1.0,
+        "source": "assets/art_source/ui/money.png",
+        "source_sha256": "42086b0c085a64ff2dbac663f6cc39432ba16ec29df7f97aa9d85c5b3fdce158",
+        "tool": "built-in ImageGen"
+      },
+      "operation": "render",
+      "output": "components/sell-glyph.png",
+      "palette_keys": [
+        "ink",
+        "gold_light",
+        "gold",
+        "gold_dark"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.42857142857142855,
+        "crop_xywh": [
+          1,
+          3,
+          14,
+          11
+        ]
+      },
+      "sha256": "fe2e222e2e3d6dbf2693bd91fe738199871c8f80c2ceb2b811a80e65dcf2d987",
+      "source": "raw/reference-existing-money.png",
+      "source_sha256": "e1131306f92cc6a2de702395d1aec2d517a9eab39223f540be603198c793979e"
+    },
+    "sell-horizontal": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "operation": "render",
+      "output": "components/sell-horizontal.png",
+      "palette_keys": [
+        "ink",
+        "gold_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          130,
+          52
+        ]
+      },
+      "sha256": "d7847d380cd8cf4d79bcc2d1a8be630ecfc5e1c3265c2bdf8031e9c6de187f88",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "sell-vertical": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "operation": "render",
+      "output": "components/sell-vertical.png",
+      "palette_keys": [
+        "ink",
+        "gold_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          52,
+          130
+        ]
+      },
+      "sha256": "caaf8f312f58b0ce2e8cc6cd97f14a3309aeca7a4760d8ce12be5dbe4875d80b",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "upgrade-corner": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "operation": "compose",
+      "output": "components/upgrade-corner.png",
+      "parts": [
+        {
+          "input": "upgrade-horizontal",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ]
+        },
+        {
+          "input": "upgrade-vertical",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "b69dd819397af97965b3957f30996366ea81167ae27cad2cf1e8fc10ae2c299c"
+    },
+    "upgrade-corner-2": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "upgrade-corner",
+      "operation": "rotate",
+      "output": "components/upgrade-corner-2.png",
+      "quarter_turns": 2,
+      "sha256": "a58757bcb05636a7fd3d2c88939714bb5067e51724d5163dc839445ee7e45ede"
+    },
+    "upgrade-corner-3": {
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "input": "upgrade-corner",
+      "operation": "rotate",
+      "output": "components/upgrade-corner-3.png",
+      "quarter_turns": 3,
+      "sha256": "dadc0e9b86193d467aba629a87fa43bbf99f656d8be4ff649f91f8bd29daaf08"
+    },
+    "upgrade-glyph": {
+      "call": "raw/glyph-upgrade-r1.call.json",
+      "canvas_wh": [
+        6,
+        6
+      ],
+      "operation": "render",
+      "output": "components/upgrade-glyph.png",
+      "palette_keys": [
+        "ink",
+        "water_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/glyph-upgrade-r1.prompt.txt",
+      "prompt_sha256": "07d085e424ecfffa7be6a11e90ee62131f9952190661d03a047d7c043a08d18a",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.012244897959183673,
+        "crop_xywh": [
+          391,
+          375,
+          488,
+          490
+        ]
+      },
+      "sha256": "74d8e833942044c8a8eb87b4a10e8cb1af9d68c94d916fd07fd816f66f87f5f9",
+      "source": "raw/glyph-upgrade-r1.png",
+      "source_sha256": "63b107987296426b28c464898f1f03471208b63fb9a120f3cecd89851a285263"
+    },
+    "upgrade-horizontal": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "operation": "render",
+      "output": "components/upgrade-horizontal.png",
+      "palette_keys": [
+        "ink",
+        "water_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          130,
+          52
+        ]
+      },
+      "sha256": "bec9fc1a17050853bbe584feadfe0c8ccc89b0417c233d2e3840e762099a62d3",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    "upgrade-vertical": {
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "operation": "render",
+      "output": "components/upgrade-vertical.png",
+      "palette_keys": [
+        "ink",
+        "water_light"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          52,
+          130
+        ]
+      },
+      "sha256": "fb213104d2f3c42a7b6cf3e84fcef22ee4a2e11d4eeeb853044cc002936fe1a8",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "cursor_neutral",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_neutral/none/01.png",
+      "palette_keys": [
+        "ink",
+        "bone",
+        "bone_dark"
+      ],
+      "parts": [
+        {
+          "input": "neutral-corner",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "neutral-corner-2",
+          "paste_xy": [
+            11,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "neutral-corner-3",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "neutral-corner-1",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets out",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_neutral_0.png",
+      "seconds": 0.4,
+      "sha256": "a892d7521598982691c9e5bd773365c3c856eb51e7b4f9811ac1c854c6f6623e",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_neutral",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_neutral/none/02.png",
+      "palette_keys": [
+        "ink",
+        "bone",
+        "bone_dark"
+      ],
+      "parts": [
+        {
+          "input": "neutral-corner",
+          "paste_xy": [
+            1,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "neutral-corner-2",
+          "paste_xy": [
+            10,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "neutral-corner-3",
+          "paste_xy": [
+            1,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "neutral-corner-1",
+          "paste_xy": [
+            10,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets one pixel inward",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_neutral_1.png",
+      "seconds": 0.4,
+      "sha256": "56f7251e594422c917c966e2131e40de915d42646f474a5a7b05a0707ef67701",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_place",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_place/none/01.png",
+      "palette_keys": [
+        "ink",
+        "grass_light",
+        "grass"
+      ],
+      "parts": [
+        {
+          "input": "place-corner",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "place-corner-2",
+          "paste_xy": [
+            11,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "place-corner-3",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "place-glyph",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets out",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_place_0.png",
+      "seconds": 0.4,
+      "sha256": "5a1bc4a67cbce24842e95582c2cc8154844b7ed2a941bb4e39bb4bcc907e997d",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_place",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_place/none/02.png",
+      "palette_keys": [
+        "ink",
+        "grass_light",
+        "grass"
+      ],
+      "parts": [
+        {
+          "input": "place-corner",
+          "paste_xy": [
+            1,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "place-corner-2",
+          "paste_xy": [
+            10,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "place-corner-3",
+          "paste_xy": [
+            1,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "place-glyph",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets one pixel inward",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_place_1.png",
+      "seconds": 0.4,
+      "sha256": "01575ab544205bf4378425be8679ca422766b377e896f2b1fd94a160875b8bde",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_blocked",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_blocked/none/01.png",
+      "palette_keys": [
+        "ink",
+        "roof_light",
+        "roof"
+      ],
+      "parts": [
+        {
+          "input": "blocked-corner",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "blocked-corner-2",
+          "paste_xy": [
+            11,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "blocked-corner-3",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "blocked-glyph",
+          "paste_xy": [
+            10,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets out",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_blocked_0.png",
+      "seconds": 0.4,
+      "sha256": "26eaa89dbfd158ef78a5c726f9807b44ba21f214350fb849c2f5249481bcfcb6",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_blocked",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_blocked/none/02.png",
+      "palette_keys": [
+        "ink",
+        "roof_light",
+        "roof"
+      ],
+      "parts": [
+        {
+          "input": "blocked-corner",
+          "paste_xy": [
+            1,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "blocked-corner-2",
+          "paste_xy": [
+            10,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "blocked-corner-3",
+          "paste_xy": [
+            1,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "blocked-glyph",
+          "paste_xy": [
+            10,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets one pixel inward",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_blocked_1.png",
+      "seconds": 0.4,
+      "sha256": "7670808709e5bec6a5190821b1956aed3c3fe6c3391528fec4841f2007100636",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_upgrade",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_upgrade/none/01.png",
+      "palette_keys": [
+        "ink",
+        "water_light",
+        "water"
+      ],
+      "parts": [
+        {
+          "input": "upgrade-corner",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "upgrade-corner-2",
+          "paste_xy": [
+            11,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "upgrade-corner-3",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "upgrade-glyph",
+          "paste_xy": [
+            10,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets out",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_upgrade_0.png",
+      "seconds": 0.4,
+      "sha256": "0aa7aed9de877e0c6ed65444c173e4f19c33ac93e0f0dc97cbbce956fc4674a7",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_upgrade",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_upgrade/none/02.png",
+      "palette_keys": [
+        "ink",
+        "water_light",
+        "water"
+      ],
+      "parts": [
+        {
+          "input": "upgrade-corner",
+          "paste_xy": [
+            1,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "upgrade-corner-2",
+          "paste_xy": [
+            10,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "upgrade-corner-3",
+          "paste_xy": [
+            1,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "upgrade-glyph",
+          "paste_xy": [
+            10,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets one pixel inward",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_upgrade_1.png",
+      "seconds": 0.4,
+      "sha256": "fc591ab0e715210e7895a54130d24fb0c166fef095fbc409f328c9ca49668a8f",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_sell",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_sell/none/01.png",
+      "palette_keys": [
+        "ink",
+        "gold_light",
+        "gold",
+        "gold_dark"
+      ],
+      "parts": [
+        {
+          "input": "sell-corner",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "sell-corner-2",
+          "paste_xy": [
+            11,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "sell-corner-3",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "sell-glyph",
+          "paste_xy": [
+            10,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets out",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_sell_0.png",
+      "seconds": 0.4,
+      "sha256": "d87a7f9e952aa4d4f94904ca7f4fdb9f02e8afb726ac304455eb75802bf27020",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_sell",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_sell/none/02.png",
+      "palette_keys": [
+        "ink",
+        "gold_light",
+        "gold",
+        "gold_dark"
+      ],
+      "parts": [
+        {
+          "input": "sell-corner",
+          "paste_xy": [
+            1,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "sell-corner-2",
+          "paste_xy": [
+            10,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "sell-corner-3",
+          "paste_xy": [
+            1,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "sell-glyph",
+          "paste_xy": [
+            10,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets one pixel inward",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_sell_1.png",
+      "seconds": 0.4,
+      "sha256": "b45c12ac2415c6e78b909d7584043a4eab07ee340096c80a4c4c504e8f727c08",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_repair",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_repair/none/01.png",
+      "palette_keys": [
+        "ink",
+        "flame",
+        "stone_light",
+        "wood_light"
+      ],
+      "parts": [
+        {
+          "input": "repair-corner",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "repair-corner-2",
+          "paste_xy": [
+            11,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "repair-corner-3",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "repair-glyph",
+          "paste_xy": [
+            10,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets out",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_repair_0.png",
+      "seconds": 0.4,
+      "sha256": "003b28e1a7ec51b95ad2d90f471c94d19e6adb49495b97ec88ac477a7ba87cf2",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_repair",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_repair/none/02.png",
+      "palette_keys": [
+        "ink",
+        "flame",
+        "stone_light",
+        "wood_light"
+      ],
+      "parts": [
+        {
+          "input": "repair-corner",
+          "paste_xy": [
+            1,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "repair-corner-2",
+          "paste_xy": [
+            10,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "repair-corner-3",
+          "paste_xy": [
+            1,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "repair-glyph",
+          "paste_xy": [
+            10,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets one pixel inward",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_repair_1.png",
+      "seconds": 0.4,
+      "sha256": "989eeaafeb25d13082f710a7068c8623e9cca37df77d3c86ae5617afaf0a09c5",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_aim",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_aim/none/01.png",
+      "palette_keys": [
+        "ink",
+        "moon",
+        "stone_light"
+      ],
+      "parts": [
+        {
+          "input": "aim-corner",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "aim-corner-2",
+          "paste_xy": [
+            11,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "aim-corner-3",
+          "paste_xy": [
+            0,
+            11
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "aim-corner-1",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "aim-aim-plus",
+          "paste_xy": [
+            7,
+            7
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            3,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets out",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_aim_0.png",
+      "seconds": 0.4,
+      "sha256": "1a849d27f09cba9b71c451f789dcf5744c581ead2f6920e7a3978de69d3748be",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    },
+    {
+      "anim": "cursor_aim",
+      "call": "raw/recovered-neutral-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/cursor_aim/none/02.png",
+      "palette_keys": [
+        "ink",
+        "moon",
+        "stone_light"
+      ],
+      "parts": [
+        {
+          "input": "aim-corner",
+          "paste_xy": [
+            1,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "aim-corner-2",
+          "paste_xy": [
+            10,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "aim-corner-3",
+          "paste_xy": [
+            1,
+            10
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "aim-corner-1",
+          "paste_xy": [
+            10,
+            1
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        {
+          "input": "aim-aim-plus",
+          "paste_xy": [
+            7,
+            7
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            3,
+            3
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "brackets one pixel inward",
+      "prompt": "raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ],
+        "content_scale": 0.038461538461538464,
+        "crop_xywh": [
+          106,
+          68,
+          416,
+          416
+        ]
+      },
+      "runtime_name": "sprites/ui/cursor_aim_1.png",
+      "seconds": 0.4,
+      "sha256": "a2ad3c5aafb223e5aac1fc6fc251df4c7e01540483b924c9a688a4c005631fab",
+      "source": "raw/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A004",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [],
+  "runtime_integrated": false,
+  "slug": "A004-cursor",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The guardian's cursor",
+  "tool": "built-in ImageGen"
+}

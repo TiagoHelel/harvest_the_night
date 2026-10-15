@@ -1,0 +1,14 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: ONE tiny pixel-art cursor glyph for HARVEST THE NIGHT.\nPrimary request: a simple solid UPWARD arrow: small triangular arrowhead above a short centered stem. One symbol only, isolated centered, complete and unclipped. This is a raster source for a FINAL 5x5 or6x6pixel glyph, so use a deliberately coarse square-pixel grid: roughly FIVE solid art-pixels across, enlarged as huge equal square blocks. Ivory #e8e0cf fill, one thin dark-purple #241f2e pixel outline; flat two-color graphic. The symbol must read at five actual pixels. No shading, gradient, smooth edges, texture or 3D. True transparent background outside the symbol. No circle, badge, box, panel, text/letters/labels, shadow, glow, border or extra shapes. Orthographic flat UI, not an in-game object.",
+    "transparent_background": true
+  },
+  "input_images": [],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-b5088c9c-1648-44a5-aad2-3e2e1eb79f72.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A004-cursor\\raw\\glyph-upgrade-r1.png",
+  "sha256": "63b107987296426b28c464898f1f03471208b63fb9a120f3cecd89851a285263",
+  "date": "2026-10-14",
+  "revision": 1,
+  "decision": "pending native-scale inspection"
+}

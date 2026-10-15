@@ -38,8 +38,8 @@ extends RefCounted
 ## move when it arrives. **Keep each entry on one line**: `tools/placeholders.py`
 ## reads them line by line.
 ##
-## Art that is not the farmer's - A004's cursor (task 0131), A003's guardian
-## until task 0145 -
+## Art that is not the farmer's - A003's guardian and A004's cursor (task
+## 0131) until tasks 0145 and 0146 -
 ## goes in `ART` instead, with the folder its pack delivers to; an empty
 ## `stand_in` there means the view draws it in code (`is_drawn`).
 ##
@@ -114,12 +114,6 @@ const POSES := {
 	&"bed_sleep": {"pack": "A001", "frames": 2, "seconds": 0.8, "loop": true, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME, "tint": Color(0.72, 0.78, 1.0)},
 	&"react_zzz": {"pack": "A002", "frames": 3, "seconds": 0.4, "loop": true, "stand_in": &"react_note", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 }
-
-## A004's cell cursor: one 16x16 cell at its centre, drawn at 1.0 (task 0131).
-## A hotbar icon is the same box (task 0133). A005's eight are raster art since
-## task 0147; a later defence's stands in at it until its pack lands.
-const CELL_CURSOR := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
-const HOTBAR_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 
 ## A021's nodes: one 16x16 tile, pivot at its foot (task 0156).
 ## A023's fishing bar (task 0180): the frame around its track, the green's
@@ -390,13 +384,6 @@ const ART := {
 	&"hud_worm": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.15, 0.7, 0.8), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"cursor_neutral": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
-	&"cursor_place": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
-	&"cursor_blocked": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
-	&"cursor_upgrade": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
-	&"cursor_sell": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
-	&"cursor_repair": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
-	&"cursor_aim": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
 	# A018's sprinklers (task 0178): the spent mine's low metal disc, in each
 	# tier's metal and at the width A018 gives it (8, 10 and 12 pixels), so the
 	# three read apart by size as well as colour until 0201.

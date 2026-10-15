@@ -1,0 +1,27 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Edit target: attached cursor. CORRECTION: remove the white inner line and all fringe artifacts. Each corner has ONLY TWO LINES: one cream outer pixel line and one dark inner pixel line. No cream inner border. Every tiny square is the same size on a coarse 16 by 16 grid. Exactly two frames in a horizontal strip. Four symmetric 5-pixel L corner brackets on the boundary in frame one. Translate each corner one tiny pixel inward in frame two; do not resize the shape. Preserve the cream and dark palette and total cell size, camera and true transparent background. The entire middle must stay transparent. No smooth curves, no outlines around each L, no shadows or glow, no artifacts, no extra colors, no text. Make a pixel-perfect 16x16 icon enlarged with nearest-neighbor, not a vector logo.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A004-cursor\\raw\\neutral-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A004-cursor\\raw\\neutral-r1.png",
+      "sha256": "8496dfe862298cc4b8cfc962eb6cc2419d1894e0ea4aa085322c75fd842a8423",
+      "role": "candidate edit target; owner approval pending",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A004-cursor\\rejected\\neutral-r1.png"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0ca6dbdb-988b-4b21-8039-8f6685566bb5.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A004-cursor\\raw\\recovered-neutral-r3.png",
+  "sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+  "date": "2026-10-10",
+  "revision": 3,
+  "decision": "Requalified for a new measured conversion recipe; owner review pending.",
+  "reason": "Extra cream inneroutline and opaque fringeartifacts remain; cornergeometry and pulse stillfail exact16x16 grid.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A004-cursor\\rejected\\neutral-r3.png",
+  "recovered_from": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A004-cursor\\rejected\\neutral-r3.png"
+}

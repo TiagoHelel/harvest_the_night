@@ -1,0 +1,157 @@
+{
+  "aim_plus_exact": true,
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "centre_transparent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "exact_bracket_geometry": true,
+  "exact_pulse_translation": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 14,
+  "frames_found": 14,
+  "glyph_fixed": true,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/cursor_aim/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "opaque_pixels": 69
+    },
+    "native/cursor_aim/none/02.png": {
+      "bounds": [
+        1,
+        1,
+        15,
+        15
+      ],
+      "opaque_pixels": 69
+    },
+    "native/cursor_blocked/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "opaque_pixels": 76
+    },
+    "native/cursor_blocked/none/02.png": {
+      "bounds": [
+        1,
+        0,
+        16,
+        15
+      ],
+      "opaque_pixels": 76
+    },
+    "native/cursor_neutral/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "opaque_pixels": 64
+    },
+    "native/cursor_neutral/none/02.png": {
+      "bounds": [
+        1,
+        1,
+        15,
+        15
+      ],
+      "opaque_pixels": 64
+    },
+    "native/cursor_place/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "opaque_pixels": 65
+    },
+    "native/cursor_place/none/02.png": {
+      "bounds": [
+        1,
+        0,
+        16,
+        15
+      ],
+      "opaque_pixels": 65
+    },
+    "native/cursor_repair/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "opaque_pixels": 56
+    },
+    "native/cursor_repair/none/02.png": {
+      "bounds": [
+        1,
+        0,
+        16,
+        15
+      ],
+      "opaque_pixels": 56
+    },
+    "native/cursor_sell/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "opaque_pixels": 74
+    },
+    "native/cursor_sell/none/02.png": {
+      "bounds": [
+        1,
+        0,
+        16,
+        15
+      ],
+      "opaque_pixels": 74
+    },
+    "native/cursor_upgrade/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "opaque_pixels": 70
+    },
+    "native/cursor_upgrade/none/02.png": {
+      "bounds": [
+        1,
+        0,
+        16,
+        15
+      ],
+      "opaque_pixels": 70
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true
+}

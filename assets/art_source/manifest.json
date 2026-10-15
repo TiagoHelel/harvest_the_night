@@ -84825,6 +84825,4329 @@
       "revision": 1,
       "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
       "output_sha256": "76bfa7ee405fa3e131b7c928b601f17a38636d6ace78229ae6f9d3ec7f047d62"
+    },
+    {
+      "id": "components/A004-cursor/aim-aim-line",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        132,
+        68,
+        78,
+        26
+      ],
+      "canvas_wh": [
+        3,
+        1
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "moon"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/aim-aim-line",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/aim-aim-line.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/aim-aim-line.png",
+          "sha256": "9e8d740990297748fe40001cef11b564dd646fae85b7a85e66afbd6975721f79",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "aece6a71c4415d08ce6e026d6dd956e577adc9318a914726af0879ff75379237"
+    },
+    {
+      "id": "components/A004-cursor/aim-aim-line-vertical",
+      "owner": "raster",
+      "canvas_wh": [
+        1,
+        3
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/aim-aim-line-vertical",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/aim-aim-line-vertical.png",
+      "input": "components/A004-cursor/aim-aim-line",
+      "operation": "rotate",
+      "quarter_turns": 1,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/aim-aim-line-vertical.png",
+          "sha256": "9ca3ff694f06ecc7b985575a784474e2a8e9385b80a4c9a07213a27c6fa059cd",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "4949e24ba5434323434d32bda1d4e37e6be649d3be5ce8efb27e8f4ec71a7389"
+    },
+    {
+      "id": "components/A004-cursor/aim-aim-plus",
+      "owner": "raster",
+      "canvas_wh": [
+        3,
+        3
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/aim-aim-plus",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/aim-aim-plus.png",
+      "input": "components/A004-cursor/aim-aim-line",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/aim-aim-line",
+          "slice_xywh": [
+            0,
+            0,
+            3,
+            1
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-aim-line-vertical",
+          "slice_xywh": [
+            0,
+            0,
+            1,
+            3
+          ],
+          "paste_xy": [
+            1,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/aim-aim-plus.png",
+          "sha256": "2d4dee65aaf013c4bc5df5171618d819cb1e5e8bd3e05d6fe982953d66e6657d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "53c0434d2cebc9c5afee2179a139c8ad604a8bb46f7f4d1ae7e3f861111e6347"
+    },
+    {
+      "id": "components/A004-cursor/aim-corner",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/aim-corner",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/aim-corner.png",
+      "input": "components/A004-cursor/aim-horizontal",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/aim-horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-vertical",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/aim-corner.png",
+          "sha256": "9fd96c92f656c2d6761cc418dec48ff9a34600b896b4469950f7431b55e6de0b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "6693d0fb3d86b27bec1f00e1b6f86934013bad6eef1ac1dee272b816af7b7bca"
+    },
+    {
+      "id": "components/A004-cursor/aim-corner-1",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/aim-corner-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/aim-corner-1.png",
+      "input": "components/A004-cursor/aim-corner",
+      "operation": "rotate",
+      "quarter_turns": 1,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/aim-corner-1.png",
+          "sha256": "2570882a8d7f97df1bcf75fa77f0cd7d0cfcddd240f372dff14b205323279e4a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "7c98f131b53f5bf960130317342a3f526eb1924a329c2c55f314c8244bfe9fda"
+    },
+    {
+      "id": "components/A004-cursor/aim-corner-2",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/aim-corner-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/aim-corner-2.png",
+      "input": "components/A004-cursor/aim-corner",
+      "operation": "rotate",
+      "quarter_turns": 2,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/aim-corner-2.png",
+          "sha256": "1741b4b073f48f7d7c1879f983dc25ec81109fe9fb66a6061cd611271fb3aa23",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "e52e906d47b98eeb6a2db9e810e20196ae8631e066171dbc0ed4879462fa7a47"
+    },
+    {
+      "id": "components/A004-cursor/aim-corner-3",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/aim-corner-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/aim-corner-3.png",
+      "input": "components/A004-cursor/aim-corner",
+      "operation": "rotate",
+      "quarter_turns": 3,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/aim-corner-3.png",
+          "sha256": "cce91c0d45d2b641a35d152cc1112fac68a514cb82fd43ff5fc3e5f4afdd249a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "48f34011fb792a5b7b703275652f0c64157412e13e8f21a0fa97a1752b30aa87"
+    },
+    {
+      "id": "components/A004-cursor/aim-horizontal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        130,
+        52
+      ],
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "moon"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/aim-horizontal",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/aim-horizontal.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/aim-horizontal.png",
+          "sha256": "e720103573c70f0d435a0dc224c7b0f4e4317fa3ab690f8919888d555089e885",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "78437bdeeb4e67b934d0f3bc6f1009921348e3e6d35b1d3dd3701498edfe6cbf"
+    },
+    {
+      "id": "components/A004-cursor/aim-vertical",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        52,
+        130
+      ],
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "moon"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/aim-vertical",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/aim-vertical.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/aim-vertical.png",
+          "sha256": "aff572fd24440ecd874d72559b99a6bd15a4a28f072944efd1d8f1e54c81cb6b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "60fde36d3ef08521a7960e52d42769972adc20b84b8f342b3f8ff09f27922554"
+    },
+    {
+      "id": "components/A004-cursor/blocked-corner",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/blocked-corner",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/blocked-corner.png",
+      "input": "components/A004-cursor/blocked-horizontal",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/blocked-horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/blocked-vertical",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/blocked-corner.png",
+          "sha256": "1a2b06cc11fd9584de8a1a161e35b53717e20c15987f71643b0f213daf40817c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "07ca18e5cf7beec21582fd047718161140aac6096d80213b6c9c13b47c338e92"
+    },
+    {
+      "id": "components/A004-cursor/blocked-corner-2",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/blocked-corner-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/blocked-corner-2.png",
+      "input": "components/A004-cursor/blocked-corner",
+      "operation": "rotate",
+      "quarter_turns": 2,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/blocked-corner-2.png",
+          "sha256": "cd3e4c9c6320d1f10184b5c3393730c14b18c34dd829739eb61b7267ca8590ed",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "3b4d21ace97379a8cfb9524afda32ff9783e149e22c7522e3caa56459247e53c"
+    },
+    {
+      "id": "components/A004-cursor/blocked-corner-3",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/blocked-corner-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/blocked-corner-3.png",
+      "input": "components/A004-cursor/blocked-corner",
+      "operation": "rotate",
+      "quarter_turns": 3,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/blocked-corner-3.png",
+          "sha256": "5e662331cc236039febc07a9b0186fc56b03e1b438a217a3a5aa520f423eb87b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "6573b421764004775fa1c55a634f716d4191fcc72bdc769b401c339892252ad5"
+    },
+    {
+      "id": "components/A004-cursor/blocked-glyph",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/glyph-blocked-r1.png",
+      "source_sha256": "ef666e398a02569eefb066b75234c4f29fd49fb63627755f94c993fc61f52574",
+      "crop_xywh": [
+        329,
+        337,
+        610,
+        608
+      ],
+      "canvas_wh": [
+        6,
+        6
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.009836065573770493,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "roof_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/blocked-glyph",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/blocked-glyph.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/glyph-blocked-r1.prompt.txt",
+      "prompt_sha256": "8de3a1e94106f77fd1219f8a21231c38c0049268675317bd2f366d4f16a05f54",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/glyph-blocked-r1.call.json",
+          "sha256": "b5a8ce456d4b5ab21091b77d5533701300eee73b3c33e8715a2a4eb69d837bbc",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/blocked-glyph.png",
+          "sha256": "5d637177ddad29ca4aa5658f5cd3e361c7efb3c11f7930b39ea3605afb1e8e76",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "8bee2dac2f12700769ac44637bfcc2e858bc2a461500b84fff71a2b0c5564d9e"
+    },
+    {
+      "id": "components/A004-cursor/blocked-horizontal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        130,
+        52
+      ],
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "roof_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/blocked-horizontal",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/blocked-horizontal.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/blocked-horizontal.png",
+          "sha256": "2448a13e11b44b15cc58613639003b993e0d66670063c55cacad9312ed1b5c5c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "92073eebff1e99d2955fb2cf6ffae8c0e4d1290261ed54dd2c64a13f4ee5cf9a"
+    },
+    {
+      "id": "components/A004-cursor/blocked-vertical",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        52,
+        130
+      ],
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "roof_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/blocked-vertical",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/blocked-vertical.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/blocked-vertical.png",
+          "sha256": "ab6128fa7acd95d7e6ae07b0f3b4b2b52963837329358b86b74d477275b96780",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "0dcf8caf9a5bfbbc4c1f28807aca7a90ea6d3d9752ea6d916e63d1aafb3c0205"
+    },
+    {
+      "id": "components/A004-cursor/neutral-corner",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/neutral-corner",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/neutral-corner.png",
+      "input": "components/A004-cursor/neutral-horizontal",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/neutral-horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/neutral-vertical",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/neutral-corner.png",
+          "sha256": "38af8c5ad1cdc1753bcf2e1ef52c20c4ec47d808e74771112baff1c052939a9c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "705e3b46ce3f249a0a34ba5505f3eba925ac6f61927b655653308ab247d5915a"
+    },
+    {
+      "id": "components/A004-cursor/neutral-corner-1",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/neutral-corner-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/neutral-corner-1.png",
+      "input": "components/A004-cursor/neutral-corner",
+      "operation": "rotate",
+      "quarter_turns": 1,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/neutral-corner-1.png",
+          "sha256": "26369dd713a65809c366f0fd751195aa0204f5c15ac1461e333175bb0a67dbfe",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "e543e0220384a2935a72deceecfbbfffb9d68272ea2e476665d8cd3acfd27f86"
+    },
+    {
+      "id": "components/A004-cursor/neutral-corner-2",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/neutral-corner-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/neutral-corner-2.png",
+      "input": "components/A004-cursor/neutral-corner",
+      "operation": "rotate",
+      "quarter_turns": 2,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/neutral-corner-2.png",
+          "sha256": "05aa606b49d66681a8b1b86ee376eb6de50f45a7268d69489060d0cf3b8652f0",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "0ed57a597024e589c563ffde90fdedbdbd4081ef7ecee1c4f7409cdbb5d4b3ba"
+    },
+    {
+      "id": "components/A004-cursor/neutral-corner-3",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/neutral-corner-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/neutral-corner-3.png",
+      "input": "components/A004-cursor/neutral-corner",
+      "operation": "rotate",
+      "quarter_turns": 3,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/neutral-corner-3.png",
+          "sha256": "4bbfac50fcde0552c40e811b21f42fd849e54669625897b8948df0d46ca1c745",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "f123d4dde792eda0aaecbff98ea6813e00b802562bc4d2365839eeef184351af"
+    },
+    {
+      "id": "components/A004-cursor/neutral-horizontal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        130,
+        52
+      ],
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/neutral-horizontal",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/neutral-horizontal.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/neutral-horizontal.png",
+          "sha256": "a659b2df5a3a041ce528959e2d75178844e8d98b54ad20247839d666bc244e5b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "94c253d26882029335455d3a9901075c97146bae4ba158392de2b0918bfc83ae"
+    },
+    {
+      "id": "components/A004-cursor/neutral-vertical",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        52,
+        130
+      ],
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/neutral-vertical",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/neutral-vertical.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/neutral-vertical.png",
+          "sha256": "0325a3ac620c245c62d5413be70d4fb0b36bf0f23f1a27b3e9d914f4d36bdc81",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "bcf88133527aac5b1917aa1267313c2dc7d46a06bb7354d46e78cb6370826041"
+    },
+    {
+      "id": "components/A004-cursor/place-corner",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/place-corner",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/place-corner.png",
+      "input": "components/A004-cursor/place-horizontal",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/place-horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-vertical",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/place-corner.png",
+          "sha256": "b84b583ecd9f6c6fd259d43150754054665e3e6e9d8874a0a78c2143b1b07c0d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "dd6e3c433201e75dd094b4d9e4af1f566f25966baf65183b4435d4aa9d583273"
+    },
+    {
+      "id": "components/A004-cursor/place-corner-2",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/place-corner-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/place-corner-2.png",
+      "input": "components/A004-cursor/place-corner",
+      "operation": "rotate",
+      "quarter_turns": 2,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/place-corner-2.png",
+          "sha256": "6b8085d8d51e6f022761db5b9be35a0308d734e7899916d56c3ac7f44832e15a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "dbda4012a68eeb877eef615b52dc2fa35aeb29b235068431f9e00ff01163bf28"
+    },
+    {
+      "id": "components/A004-cursor/place-corner-3",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/place-corner-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/place-corner-3.png",
+      "input": "components/A004-cursor/place-corner",
+      "operation": "rotate",
+      "quarter_turns": 3,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/place-corner-3.png",
+          "sha256": "caec45d07f1fab911261094c9f3e5304e48a79a7f97e0da5389232ed66a0d7a3",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "769ff7e56a9f8356f1c87b0efa50c46678c4a092c8b0321ba8ef8a8326102fb5"
+    },
+    {
+      "id": "components/A004-cursor/place-glyph",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/place-glyph",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/place-glyph.png",
+      "input": "components/A004-cursor/place-large-plus",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/place-large-plus",
+          "slice_xywh": [
+            2,
+            0,
+            3,
+            2
+          ],
+          "paste_xy": [
+            1,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-large-plus",
+          "slice_xywh": [
+            2,
+            6,
+            3,
+            2
+          ],
+          "paste_xy": [
+            1,
+            3
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-large-plus",
+          "slice_xywh": [
+            0,
+            3,
+            1,
+            1
+          ],
+          "paste_xy": [
+            0,
+            2
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-large-plus",
+          "slice_xywh": [
+            2,
+            3,
+            3,
+            1
+          ],
+          "paste_xy": [
+            1,
+            2
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-large-plus",
+          "slice_xywh": [
+            6,
+            3,
+            1,
+            1
+          ],
+          "paste_xy": [
+            4,
+            2
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/glyph-plus-r1.prompt.txt",
+      "prompt_sha256": "784142b3823827da71f989e422bb4b4f26847672e3bf3897e0c624045d827cd4",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/place-glyph.png",
+          "sha256": "56a89c2c9229d493700f281c83a10f004b81ef2155583b0038305d05f9d3e3c9",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "6bcdc711c49ee574674f537a38a6de66eb4d00ace1213cd00f41b4a5ee0d9f64"
+    },
+    {
+      "id": "components/A004-cursor/place-horizontal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        130,
+        52
+      ],
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "grass_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/place-horizontal",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/place-horizontal.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/place-horizontal.png",
+          "sha256": "dcee76561d126d4199216709319f5bd862cabb212570470fac337220745a3db8",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "0be63821170eb46e9f14c596ed6fce6b4fadd304d73fb35859ff7368e797acf1"
+    },
+    {
+      "id": "components/A004-cursor/place-large-plus",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/glyph-plus-r1.png",
+      "source_sha256": "7fe9d930cf1307916485ee5f69c591df4e97f45ad67fa3838e8799c86e92a0a3",
+      "crop_xywh": [
+        370,
+        303,
+        541,
+        588
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.013605442176870748,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "grass_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/place-large-plus",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/place-large-plus.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/glyph-plus-r1.prompt.txt",
+      "prompt_sha256": "784142b3823827da71f989e422bb4b4f26847672e3bf3897e0c624045d827cd4",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/glyph-plus-r1.call.json",
+          "sha256": "bb5230de39d579527901b73231f727c21b035d734a17bb90900b9deea05fb212",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/place-large-plus.png",
+          "sha256": "a41cedff96627e309461cb5d90d39fb8db633b2d8f66823a99ffcf4cd15f2c73",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "9cfad3154bdd9c623eca2b891faa819d8862f969754ac69ba29326e8979f1c93"
+    },
+    {
+      "id": "components/A004-cursor/place-vertical",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        52,
+        130
+      ],
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "grass_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/place-vertical",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/place-vertical.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/place-vertical.png",
+          "sha256": "8ac38fa5d92465a141398d2b62b3bb56d2c7e003c776740840b5971dd7c1dd55",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "8a91d90ed37b1eb3472b901196c5e31ed8ca93bb94029751e17522ab0ae2dd2a"
+    },
+    {
+      "id": "components/A004-cursor/repair-corner",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/repair-corner",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/repair-corner.png",
+      "input": "components/A004-cursor/repair-horizontal",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/repair-horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/repair-vertical",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/repair-corner.png",
+          "sha256": "5f8c3fafbcac29527febb116192a038ea254c7eb59bbb2cee7747f9c932613b3",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "a11fae4d192a60da98171e9d51450063a7522d2404e043f2d1b481725373bf08"
+    },
+    {
+      "id": "components/A004-cursor/repair-corner-2",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/repair-corner-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/repair-corner-2.png",
+      "input": "components/A004-cursor/repair-corner",
+      "operation": "rotate",
+      "quarter_turns": 2,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/repair-corner-2.png",
+          "sha256": "34158e36b4c08c879c67343b8733c5cf01db2f80fd1fdde41aab4521aaadc535",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "49d484226c7ab38218624820e702abe0bdbef87b2051ca60817e4ca5600cd8b6"
+    },
+    {
+      "id": "components/A004-cursor/repair-corner-3",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/repair-corner-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/repair-corner-3.png",
+      "input": "components/A004-cursor/repair-corner",
+      "operation": "rotate",
+      "quarter_turns": 3,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/repair-corner-3.png",
+          "sha256": "db6ad1d12752c66a65b00248484170190c6412e664e4aa5ee6977cb5937be4dc",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "2b8a1d038138b193b69d46e867c586e9f2092946a1a8584638b03cd848614a35"
+    },
+    {
+      "id": "components/A004-cursor/repair-glyph",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/glyph-hammer-r1.png",
+      "source_sha256": "220ff62f662b0a5e0008e4b9c4e5fc0925ef22a2ae0937f5bfed5a7fb5220501",
+      "crop_xywh": [
+        273,
+        233,
+        753,
+        750
+      ],
+      "canvas_wh": [
+        6,
+        6
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.00796812749003984,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "stone_light",
+        "wood_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/repair-glyph",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/repair-glyph.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/glyph-hammer-r1.prompt.txt",
+      "prompt_sha256": "5f8524a3f2ea712876faf95185c1595f2456b1f55cabbcba998fee46c43ecd17",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/glyph-hammer-r1.call.json",
+          "sha256": "13a7135f851e17f6bca6be453f34033ac270c856b63ac20eb28013b9dd12dae9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/repair-glyph.png",
+          "sha256": "340367a6bcf29633b51b4bb58c8e9c0a65d843e5c54a03aa94ba89ff688f24e7",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "bea125d9ae7fa3daf507289fb45ea5cd225eea25924deb0c8ff57390f48e908f"
+    },
+    {
+      "id": "components/A004-cursor/repair-horizontal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        130,
+        52
+      ],
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "flame"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/repair-horizontal",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/repair-horizontal.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/repair-horizontal.png",
+          "sha256": "ee75f9dd8be2ea7b1af9604f47bc60c818fd3e7abb8ee845eb59a3429a4f3333",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "a0c5be07fde51c734b7c348ea0aaa54cb86a467c0cb3a0fd3d19989a6d3da724"
+    },
+    {
+      "id": "components/A004-cursor/repair-vertical",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        52,
+        130
+      ],
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "flame"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/repair-vertical",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/repair-vertical.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/repair-vertical.png",
+          "sha256": "376cfe35ad1697306b28b10eb334ab4a09dde8ab3cb6e0d152141c8e96ea954b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "b20520d2877a5ab4bc620b6db1f030ee1a97c565203fb961864c4a77a673b11a"
+    },
+    {
+      "id": "components/A004-cursor/sell-corner",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/sell-corner",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/sell-corner.png",
+      "input": "components/A004-cursor/sell-horizontal",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/sell-horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/sell-vertical",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/sell-corner.png",
+          "sha256": "9ce76edbd4510e87ef6b8974eeb33df58de3f76055665362148fa7e7f48840c7",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "0a1b88475c9d4c50fd9d7e8f7707abb4bb084eac60691432a8e5464c605587e5"
+    },
+    {
+      "id": "components/A004-cursor/sell-corner-2",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/sell-corner-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/sell-corner-2.png",
+      "input": "components/A004-cursor/sell-corner",
+      "operation": "rotate",
+      "quarter_turns": 2,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/sell-corner-2.png",
+          "sha256": "14a20720d1122c461254109e5a37e23bf7847ba9942a38acc708aaa832e4aa07",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "569a36c84620ded258963e7811a9d5148989468c62c20b0af1238f28bb6098c6"
+    },
+    {
+      "id": "components/A004-cursor/sell-corner-3",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/sell-corner-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/sell-corner-3.png",
+      "input": "components/A004-cursor/sell-corner",
+      "operation": "rotate",
+      "quarter_turns": 3,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/sell-corner-3.png",
+          "sha256": "1b1e17dfc29450ec771ca4ccde9b9e9ef64f1ace09149aeff9e32ce23809a97a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "a0315743503da4efff4f9c8e94e67ba93bbbf24196a8f2ff855f8642022f4816"
+    },
+    {
+      "id": "components/A004-cursor/sell-glyph",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/reference-existing-money.png",
+      "source_sha256": "e1131306f92cc6a2de702395d1aec2d517a9eab39223f540be603198c793979e",
+      "crop_xywh": [
+        1,
+        3,
+        14,
+        11
+      ],
+      "canvas_wh": [
+        6,
+        6
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.42857142857142855,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "gold_light",
+        "gold",
+        "gold_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/sell-glyph",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/sell-glyph.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/sell-glyph.png",
+          "sha256": "fe2e222e2e3d6dbf2693bd91fe738199871c8f80c2ceb2b811a80e65dcf2d987",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "73c97bec8a2d0747fd2e5bcd657474289e21fc918242ecf6deb19ca1cb24c177"
+    },
+    {
+      "id": "components/A004-cursor/sell-horizontal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        130,
+        52
+      ],
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "gold_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/sell-horizontal",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/sell-horizontal.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/sell-horizontal.png",
+          "sha256": "d7847d380cd8cf4d79bcc2d1a8be630ecfc5e1c3265c2bdf8031e9c6de187f88",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "3d0b17211583c7b24e54961e9eb39560757372dcb249ba237e1249555dbb899d"
+    },
+    {
+      "id": "components/A004-cursor/sell-vertical",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        52,
+        130
+      ],
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "gold_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/sell-vertical",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/sell-vertical.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/sell-vertical.png",
+          "sha256": "caaf8f312f58b0ce2e8cc6cd97f14a3309aeca7a4760d8ce12be5dbe4875d80b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "3774e0a5df7e333bf12dfdc5cb3d49fb6fc03238efe855dbdec6d3866295e977"
+    },
+    {
+      "id": "components/A004-cursor/upgrade-corner",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/upgrade-corner",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/upgrade-corner.png",
+      "input": "components/A004-cursor/upgrade-horizontal",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/upgrade-horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            2
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/upgrade-vertical",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/upgrade-corner.png",
+          "sha256": "b69dd819397af97965b3957f30996366ea81167ae27cad2cf1e8fc10ae2c299c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "60c16964a28a821fcfdea8a85fb03e7d39c4f310c2b1562fc2203e22e308e467"
+    },
+    {
+      "id": "components/A004-cursor/upgrade-corner-2",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/upgrade-corner-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/upgrade-corner-2.png",
+      "input": "components/A004-cursor/upgrade-corner",
+      "operation": "rotate",
+      "quarter_turns": 2,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/upgrade-corner-2.png",
+          "sha256": "a58757bcb05636a7fd3d2c88939714bb5067e51724d5163dc839445ee7e45ede",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "fa97826fcf68f458e5e6d02c63c5243c1650be4b038e4f64a14e1de3ac654c78"
+    },
+    {
+      "id": "components/A004-cursor/upgrade-corner-3",
+      "owner": "raster",
+      "canvas_wh": [
+        5,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/upgrade-corner-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/upgrade-corner-3.png",
+      "input": "components/A004-cursor/upgrade-corner",
+      "operation": "rotate",
+      "quarter_turns": 3,
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/upgrade-corner-3.png",
+          "sha256": "dadc0e9b86193d467aba629a87fa43bbf99f656d8be4ff649f91f8bd29daaf08",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "84bc361ff38140236a74b28081b83f1b971bde37d34a7346aa4b3702374651e6"
+    },
+    {
+      "id": "components/A004-cursor/upgrade-glyph",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/glyph-upgrade-r1.png",
+      "source_sha256": "63b107987296426b28c464898f1f03471208b63fb9a120f3cecd89851a285263",
+      "crop_xywh": [
+        391,
+        375,
+        488,
+        490
+      ],
+      "canvas_wh": [
+        6,
+        6
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.012244897959183673,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "water_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/upgrade-glyph",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/upgrade-glyph.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/glyph-upgrade-r1.prompt.txt",
+      "prompt_sha256": "07d085e424ecfffa7be6a11e90ee62131f9952190661d03a047d7c043a08d18a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/glyph-upgrade-r1.call.json",
+          "sha256": "a094164884cecc6979b29f228ac6f4a3f16ef15bb3c5efa402d79c266340dcf8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/upgrade-glyph.png",
+          "sha256": "74d8e833942044c8a8eb87b4a10e8cb1af9d68c94d916fd07fd816f66f87f5f9",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "f89f5c5d7767584cf41f5f4f4d9c930cd97d716198f0741c773c2fc899ca2e84"
+    },
+    {
+      "id": "components/A004-cursor/upgrade-horizontal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        130,
+        52
+      ],
+      "canvas_wh": [
+        5,
+        2
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "water_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/upgrade-horizontal",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/upgrade-horizontal.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/upgrade-horizontal.png",
+          "sha256": "bec9fc1a17050853bbe584feadfe0c8ccc89b0417c233d2e3840e762099a62d3",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "4f7990f7639e2d42fe91852e948d409a933474c3173dc3e86e3788ee08ab4ca7"
+    },
+    {
+      "id": "components/A004-cursor/upgrade-vertical",
+      "owner": "raster",
+      "source": "assets/art_source/ui/cursor/recovered-neutral-r3.png",
+      "source_sha256": "02156b8dcbe8a8d2e62c2db38df306690ba65345baa4d58c3923a3c65e0cc374",
+      "crop_xywh": [
+        106,
+        68,
+        52,
+        130
+      ],
+      "canvas_wh": [
+        2,
+        5
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.038461538461538464,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "water_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A004-cursor/upgrade-vertical",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A004-cursor/upgrade-vertical.png",
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/components/upgrade-vertical.png",
+          "sha256": "fb213104d2f3c42a7b6cf3e84fcef22ee4a2e11d4eeeb853044cc002936fe1a8",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "assembly_component_of": "A004",
+      "output_sha256": "e848608498e0e9fcd03a84f7f42cb044084dbcf22f065eaf8fbea6027c9d051f"
+    },
+    {
+      "id": "ui/cursor_neutral_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_neutral",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_neutral_0.png",
+      "input": "components/A004-cursor/neutral-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/neutral-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/neutral-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/neutral-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/neutral-corner-1",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_neutral/none/01.png",
+          "sha256": "a892d7521598982691c9e5bd773365c3c856eb51e7b4f9811ac1c854c6f6623e",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "cf71f4d7457663abf412d3b7ca481d3ac1be718da4d475f9f657a47182f3fabe"
+    },
+    {
+      "id": "ui/cursor_neutral_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_neutral",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_neutral_1.png",
+      "input": "components/A004-cursor/neutral-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/neutral-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            1
+          ]
+        },
+        {
+          "input": "components/A004-cursor/neutral-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            10,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/neutral-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/neutral-corner-1",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            10,
+            1
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_neutral/none/02.png",
+          "sha256": "56f7251e594422c917c966e2131e40de915d42646f474a5a7b05a0707ef67701",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "6cf18bc51b56ab0a350c473d7d102c81f206a092f50823f155607ad538706881"
+    },
+    {
+      "id": "ui/cursor_place_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_place",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_place_0.png",
+      "input": "components/A004-cursor/place-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/place-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_place/none/01.png",
+          "sha256": "5a1bc4a67cbce24842e95582c2cc8154844b7ed2a941bb4e39bb4bcc907e997d",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "9371682389449a3b97015a82510a827c2b06a8929458469fb69878f1c4433347"
+    },
+    {
+      "id": "ui/cursor_place_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_place",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_place_1.png",
+      "input": "components/A004-cursor/place-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/place-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            1
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            10,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/place-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_place/none/02.png",
+          "sha256": "01575ab544205bf4378425be8679ca422766b377e896f2b1fd94a160875b8bde",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "d3158b675df9c3c38f7cff5ff651475fc3feecf7e7f83d5c9be5b76727d34c3a"
+    },
+    {
+      "id": "ui/cursor_blocked_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_blocked",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_blocked_0.png",
+      "input": "components/A004-cursor/blocked-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/blocked-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/blocked-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/blocked-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/blocked-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "paste_xy": [
+            10,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_blocked/none/01.png",
+          "sha256": "26eaa89dbfd158ef78a5c726f9807b44ba21f214350fb849c2f5249481bcfcb6",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "cc41dec64ea5114707b96c41687f8d3b2f1806bf04f1c818b397ab464753df23"
+    },
+    {
+      "id": "ui/cursor_blocked_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_blocked",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_blocked_1.png",
+      "input": "components/A004-cursor/blocked-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/blocked-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            1
+          ]
+        },
+        {
+          "input": "components/A004-cursor/blocked-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            10,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/blocked-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/blocked-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "paste_xy": [
+            10,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_blocked/none/02.png",
+          "sha256": "7670808709e5bec6a5190821b1956aed3c3fe6c3391528fec4841f2007100636",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "55c169bf5c30727ddaf95f346bfe488e74b5997c28b95e6137765d213c608005"
+    },
+    {
+      "id": "ui/cursor_upgrade_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_upgrade",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_upgrade_0.png",
+      "input": "components/A004-cursor/upgrade-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/upgrade-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/upgrade-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/upgrade-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/upgrade-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "paste_xy": [
+            10,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_upgrade/none/01.png",
+          "sha256": "0aa7aed9de877e0c6ed65444c173e4f19c33ac93e0f0dc97cbbce956fc4674a7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "c14eeb4f15dd1beccb9715ae989f84d5e9f1e8454298d780a51bda5df8f5feef"
+    },
+    {
+      "id": "ui/cursor_upgrade_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_upgrade",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_upgrade_1.png",
+      "input": "components/A004-cursor/upgrade-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/upgrade-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            1
+          ]
+        },
+        {
+          "input": "components/A004-cursor/upgrade-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            10,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/upgrade-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/upgrade-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "paste_xy": [
+            10,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_upgrade/none/02.png",
+          "sha256": "fc591ab0e715210e7895a54130d24fb0c166fef095fbc409f328c9ca49668a8f",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "b4cef910d882d70fbfd9ffbab65b11471cff51ea859d593b3b7877d3fb2e6b13"
+    },
+    {
+      "id": "ui/cursor_sell_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_sell",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_sell_0.png",
+      "input": "components/A004-cursor/sell-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/sell-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/sell-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/sell-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/sell-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "paste_xy": [
+            10,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_sell/none/01.png",
+          "sha256": "d87a7f9e952aa4d4f94904ca7f4fdb9f02e8afb726ac304455eb75802bf27020",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "0cb2e50f32ef02141a19da9ac07c30233da2752b95b284a63220e6f251f43d47"
+    },
+    {
+      "id": "ui/cursor_sell_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_sell",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_sell_1.png",
+      "input": "components/A004-cursor/sell-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/sell-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            1
+          ]
+        },
+        {
+          "input": "components/A004-cursor/sell-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            10,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/sell-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/sell-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "paste_xy": [
+            10,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_sell/none/02.png",
+          "sha256": "b45c12ac2415c6e78b909d7584043a4eab07ee340096c80a4c4c504e8f727c08",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "94a5c60ed99a2951432d0568e2d9f936543d2e80e1e7927e2502738d8e4ff08b"
+    },
+    {
+      "id": "ui/cursor_repair_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_repair",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_repair_0.png",
+      "input": "components/A004-cursor/repair-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/repair-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/repair-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/repair-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/repair-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "paste_xy": [
+            10,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_repair/none/01.png",
+          "sha256": "003b28e1a7ec51b95ad2d90f471c94d19e6adb49495b97ec88ac477a7ba87cf2",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "98b3687882214f6bc9ff21fd6940425fd20973a281f4c27753074f1cfc588fa3"
+    },
+    {
+      "id": "ui/cursor_repair_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_repair",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_repair_1.png",
+      "input": "components/A004-cursor/repair-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/repair-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            1
+          ]
+        },
+        {
+          "input": "components/A004-cursor/repair-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            10,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/repair-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/repair-glyph",
+          "slice_xywh": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "paste_xy": [
+            10,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_repair/none/02.png",
+          "sha256": "989eeaafeb25d13082f710a7068c8623e9cca37df77d3c86ae5617afaf0a09c5",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "62535e9db6e972dda6331fa1cce80b64e5452b1a349a6925be7596aa14b2bacd"
+    },
+    {
+      "id": "ui/cursor_aim_0",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_aim",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_aim_0.png",
+      "input": "components/A004-cursor/aim-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/aim-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-corner-1",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-aim-plus",
+          "slice_xywh": [
+            0,
+            0,
+            3,
+            3
+          ],
+          "paste_xy": [
+            7,
+            7
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_aim/none/01.png",
+          "sha256": "1a849d27f09cba9b71c451f789dcf5744c581ead2f6920e7a3978de69d3748be",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "1509d126cca62f608d6bc14f46c7a71176063a2772294edde4ff1d8275f9a9cc"
+    },
+    {
+      "id": "ui/cursor_aim_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/cursor_aim",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/ui/cursor_aim_1.png",
+      "input": "components/A004-cursor/aim-corner",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A004-cursor/aim-corner",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            1
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-corner-2",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            10,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-corner-3",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            1,
+            10
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-corner-1",
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ],
+          "paste_xy": [
+            10,
+            1
+          ]
+        },
+        {
+          "input": "components/A004-cursor/aim-aim-plus",
+          "slice_xywh": [
+            0,
+            0,
+            3,
+            3
+          ],
+          "paste_xy": [
+            7,
+            7
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.prompt.txt",
+      "prompt_sha256": "3703453e49b368e1441950a3355f545615424f0a9ea616545e2b162001b1b20b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/raw/recovered-neutral-r3.call.json",
+          "sha256": "bfdfd35a10c3747da137181a375172f75fae98a15e948ab672ce487aaaeccf13",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/native/cursor_aim/none/02.png",
+          "sha256": "a2ad3c5aafb223e5aac1fc6fc251df4c7e01540483b924c9a688a4c005631fab",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/contract.json",
+          "sha256": "8216eb10cc95b82b81d853380c37d53b25d2513d4069cd7d137aac1123a98e84",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+          "sha256": "88e5320d61b0e9383ec7cdabfd7f06318d2353262fd171f2195ec008ac1f3cf6",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A004",
+      "integration_task": "0146",
+      "revision": 1,
+      "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
+      "output_sha256": "2b09a95ddff047ad9492f390d6e35170c545e4e2d0759110445260bef82288cb"
     }
   ]
 }

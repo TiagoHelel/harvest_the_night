@@ -15,29 +15,16 @@ extends Node2D
 ## place, blocked, and later upgrade, sell, repair, aim - is set from outside.
 ##
 ## Drawn above the night's ramp, on `WorldView`'s cue layer, so it reads over
-## dark ground. Until A004 lands it is a code-drawn outline in A004's geometry
-## (`PlaceholderArt.ART`): four L brackets on the cell edge, 5 px arms 2 px
-## thick (the state's colour outside, `ink` inside), stepping 1 px in on the
-## second frame of a 0.4 s pulse, a small glyph replacing the top-right one.
+## dark ground, and unlit: A004's art since task 0146 - each look a 16x16
+## frame centred on the cell, a two-frame 0.4 s pulse, a small glyph in the
+## top-right corner but on neutral and aim, and aim's plus in the middle.
 
 ## The seven looks, in A004's order. 0131 uses the first three.
 const LOOKS: Array[StringName] = [&"neutral", &"place", &"blocked", &"upgrade",
 	&"sell", &"repair", &"aim"]
 
-## Each look's colour, from A004's table.
-const COLOURS := {&"neutral": &"bone", &"place": &"grass_light",
-	&"blocked": &"roof_light", &"upgrade": &"water_light", &"sell": &"gold_light",
-	&"repair": &"flame", &"aim": &"moon"}
-
-## The stand-in glyphs, 5x5 in the top-right corner (x 10..14, y 1..5).
-## Neutral and aim have none and keep all four brackets.
-const GLYPHS := {
-	&"place": ["..#..", "..#..", "#####", "..#..", "..#.."],
-	&"blocked": ["#...#", ".#.#.", "..#..", ".#.#.", "#...#"],
-	&"upgrade": ["..#..", ".###.", "#.#.#", "..#..", "..#.."],
-	&"sell": [".###.", "#...#", "#.#.#", "#...#", ".###."],
-	&"repair": ["####.", "####.", ".#...", ".#...", ".#..."],
-}
+## Where A004 delivers it.
+const DIR := "res://sprites/ui/"
 
 var _world: WorldView
 var _active := false
@@ -59,6 +46,8 @@ var _pulse := 0.0
 ## window lands wherever the desk has room, under whatever the desk's own
 ## mouse is doing, so a still puts the cursor by hand and keeps it there.
 var follows_pointer := true
+## Each frame's texture, held for `_draw` (task 0146).
+var _textures: Dictionary = {}
 
 
 func setup(world: WorldView) -> void:
@@ -301,7 +290,12 @@ func _input(event: InputEvent) -> void:
 
 
 func _pulse_seconds() -> float:
-	return maxf(float(PlaceholderArt.art(&"cursor_neutral").get("seconds", 0.4)), 0.05)
+	return maxf(float(PlaceholderArt.frame(path_of(&"neutral", 0)).get("seconds", 0.4)), 0.05)
+
+
+## One look's frame `index`, by its runtime path.
+static func path_of(look_name: StringName, index: int) -> String:
+	return "%scursor_%s_%d.png" % [DIR, look_name, index]
 
 
 ## Which of its two frames is up.
@@ -309,21 +303,24 @@ func frame() -> int:
 	return int(_pulse / _pulse_seconds()) % 2
 
 
+## The frame that is up, by its runtime path - for the tests.
+func shown() -> String:
+	return path_of(_look, frame())
+
+
 func _draw() -> void:
 	if not _active or _cell.x < 0:
 		return
 	if _aiming:
 		_draw_reach()
-	var name := StringName("cursor_%s" % _look)
-	var path := PlaceholderArt.art_path(name, frame())
-	var shape := PlaceholderArt.frame(path)
-	var pivot := Vector2(shape.get("pivot", Vector2i(8, 8)))
-	if not PlaceholderArt.is_drawn(path):
-		var texture: Texture2D = load(path) if ResourceLoader.exists(path) else null
-		if texture != null:
-			draw_texture(texture, -pivot)
-		return
-	_draw_stand_in(-pivot, frame())
+	var path := shown()
+	var pivot := Vector2(PlaceholderArt.frame(path).get("pivot", Vector2i(8, 8)))
+	# Held here: a texture loaded inside `_draw` and let go is freed before
+	# the frame renders.
+	if not _textures.has(path):
+		_textures[path] = load(path) if ResourceLoader.exists(path) else null
+	if _textures[path] != null:
+		draw_texture(_textures[path], -pivot)
 
 
 ## **A power's reach** (task 0135's flare; 0233's powers): every cell within
@@ -351,39 +348,3 @@ func _draw_reach() -> void:
 	var box := Rect2(Vector2.ONE * -(radius + 0.5) * tile, Vector2.ONE * (radius * 2.0 + 1.0) * tile)
 	draw_rect(box, Color(moon, 0.10), true)
 	draw_rect(box, Color(moon, 0.75), false, 1.0)
-
-
-## A004's brackets, in code until the pack lands.
-func _draw_stand_in(origin: Vector2, pulse_frame: int) -> void:
-	var colour: Color = PaletteData.COLOURS[COLOURS.get(_look, &"bone")]
-	var ink: Color = PaletteData.COLOURS[&"ink"]
-	var inset := pulse_frame
-	var glyph: Array = GLYPHS.get(_look, [])
-	for corner in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, 1), Vector2i(1, 1)]:
-		if corner == Vector2i(1, 0) and not glyph.is_empty():
-			continue
-		for i in 5:
-			for line in 2:
-				# The outer line on the edge, the ink one inside it.
-				var along := inset + i + line
-				var across := inset + line
-				var tint := colour if line == 0 else ink
-				if line == 1 and i == 4:
-					continue
-				_pixel(origin, corner, Vector2i(along, across), tint)
-				_pixel(origin, corner, Vector2i(across, along), tint)
-	for row in glyph.size():
-		var text: String = glyph[row]
-		for column in text.length():
-			if text[column] == "#":
-				draw_rect(Rect2(origin + Vector2(10 + column, 1 + row), Vector2.ONE), colour)
-	if _look == &"aim":
-		for d in [Vector2i(7, 8), Vector2i(8, 8), Vector2i(9, 8), Vector2i(8, 7), Vector2i(8, 9)]:
-			draw_rect(Rect2(origin + Vector2(d), Vector2.ONE), colour)
-
-
-## One pixel of a bracket, mirrored into its corner of the 16x16 canvas.
-func _pixel(origin: Vector2, corner: Vector2i, at: Vector2i, tint: Color) -> void:
-	var x := at.x if corner.x == 0 else 15 - at.x
-	var y := at.y if corner.y == 0 else 15 - at.y
-	draw_rect(Rect2(origin + Vector2(x, y), Vector2.ONE), tint)

@@ -2078,6 +2078,190 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/components/A004-cursor/aim-aim-line-vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/aim-aim-line.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/aim-aim-plus.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/aim-corner-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/aim-corner-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/aim-corner-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/aim-corner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/aim-horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/aim-vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/blocked-corner-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/blocked-corner-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/blocked-corner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/blocked-glyph.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/blocked-horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/blocked-vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/neutral-corner-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/neutral-corner-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/neutral-corner-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/neutral-corner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/neutral-horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/neutral-vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/place-corner-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/place-corner-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/place-corner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/place-glyph.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/place-horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/place-large-plus.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/place-vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/repair-corner-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/repair-corner-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/repair-corner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/repair-glyph.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/repair-horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/repair-vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/sell-corner-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/sell-corner-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/sell-corner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/sell-glyph.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/sell-horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/sell-vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/upgrade-corner-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/upgrade-corner-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/upgrade-corner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/upgrade-glyph.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/upgrade-horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A004-cursor/upgrade-vertical.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/carrot_0.png",
       "owner": "raster"
     },
@@ -3548,6 +3732,62 @@
     {
       "output": "sprites/ui/checkbox_on_disabled.png",
       "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/cursor_aim_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_aim_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_blocked_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_blocked_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_neutral_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_neutral_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_place_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_place_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_repair_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_repair_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_sell_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_sell_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_upgrade_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/cursor_upgrade_1.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/head_breaker.png",

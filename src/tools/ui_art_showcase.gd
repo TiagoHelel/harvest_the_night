@@ -176,6 +176,14 @@ func _families(speaking: String, high: bool) -> void:
 	for i in kinds.size():
 		_picture(StringName("head_%s" % kinds[i]),Vector2(12+i*38,30))
 	await _check_icons("family_A011_"+speaking+("_contrast" if high else ""))
+	# A004's cursor (task 0146): its seven looks, both frames of the pulse.
+	_new_room()
+	_label("A004 / %d cursor looks x 2 / native 16px / %s" % [GuardianCursor.LOOKS.size(), speaking],
+		Vector2(12,5), UiKit.WARM)
+	for i in GuardianCursor.LOOKS.size():
+		for pulse in 2:
+			_picture(StringName("cursor_%s_%d" % [GuardianCursor.LOOKS[i], pulse]), Vector2(12+i*38,30+pulse*24))
+	await _check_icons("family_A004_"+speaking+("_contrast" if high else ""))
 
 
 ## A pack's picture by its runtime name, at its native size: a `hud_` cut is

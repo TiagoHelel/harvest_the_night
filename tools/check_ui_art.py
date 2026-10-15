@@ -86,6 +86,14 @@ PACK_HEADS = {
 }
 
 
+## A004's cursor (task 0146): seven looks of a two-frame 0.4 s pulse, 16x16 at
+## (8,8) drawn at 1.0, every frame its approved composition from A004's own
+## components. No light point - it is unlit over the night - every frame its
+## own, the middle clear but for aim's plus, exactly (7..9,8) and (8,7..9).
+CURSOR_LOOKS = ('neutral', 'place', 'blocked', 'upgrade', 'sell', 'repair', 'aim')
+AIM_PLUS = {(7, 8), (8, 8), (9, 8), (8, 7), (8, 9)}
+
+
 def check_icon(e, art, size, seen, files, registry):
     """One native cut: its box, a clear margin, binary alpha, something drawn,
     told apart from every other icon of its size, and its exact bytes on disk."""
@@ -211,6 +219,22 @@ def main():
             fingerprint=art.tobytes();assert fingerprint not in seen[16],'Duplicate head: '+kind;seen[16].add(fingerprint)
             assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']]
             heads+=1
+    by_id={e['id']:e for e in manifest['assets']};cursors=set()
+    for look in CURSOR_LOOKS:
+        for frame in (0,1):
+            e=by_id['ui/cursor_%s_%d'%(look,frame)]
+            assert e.get('generation_task')=='A004' and e['canvas_wh']==[16,16] and e['pivot_xy']==[8,8]
+            assert e['seconds']==0.4 and e['loop'] is True and e['frame']==frame and e.get('draw_scale',1)==1,'Cursor pulse drift: '+e['id']
+            assert e.get('operation')=='compose' and 'source' not in e,'A layered cursor not promoted as its composition: '+e['id']
+            assert all(by_id[p['input']].get('assembly_component_of')=='A004' for p in e['parts']),'A part from outside A004: '+e['id']
+            assert not any(k in e for k in ('light_xy','lights_xy')),'The cursor emits: '+e['id']
+            art=images[e['id']];pixels=list(import_art.samples(art))
+            assert all(p[3] in (0,255) for p in pixels)
+            middle={(x,y) for y in range(6,10) for x in range(4,12) if art.getpixel((x,y))[3]}
+            assert middle==(AIM_PLUS if look=='aim' else set()),'The middle of the cell: '+e['id']
+            assert art.tobytes() not in cursors,'Two cursor frames alike: '+e['id'];cursors.add(art.tobytes())
+            assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']]
+            check_approved(e,art)
     ascii_files=gen_sprites.everything()
     for name in ('panel','tooltip','tab','button_normal','button_hover','button_pressed','button_disabled',
                  'tab_hover','tab_selected','tab_disabled','button_focus','checkbox_on','checkbox_off',
@@ -223,6 +247,7 @@ def main():
         assert border==3,'Nine-patch margin drift: '+name
     focus=Image.open(import_art.ROOT/'sprites/ui/button_focus.png').convert('RGBA')
     assert focus.getpixel((8,8))[3]==0 and focus.getpixel((1,8))[3]==255,'Focus must be a visible open ring'
+    print('OK: %d cursor frames, seven looks pulsing, unlit, aim keeps its plus' % len(cursors))
     print('OK: 15 exact generated resources / 30 distinct native cuts / %d pack icons at their approved pixels (%s) / ingots, gold and coal / cream milk and wool / %d book portraits, no shared silhouette (%s) / %d exact forecast heads (%s) / clear margins / palette alpha / preserved three-pixel frame profiles / focus ring'
           % (pairs,', '.join(sorted(PAIRS)),portraits,', '.join(sorted(PORTRAITS)),heads,', '.join(sorted(HEADS))))
 
